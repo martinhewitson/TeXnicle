@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
+		250772FB138E5D81000F1118 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250772F9138E5D81000F1118 /* InfoPlist.strings */; };
+		250772FE138E5D81000F1118 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250772FD138E5D81000F1118 /* main.m */; };
+		25077301138E5D81000F1118 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 250772FF138E5D81000F1118 /* Credits.rtf */; };
+		25077304138E5D81000F1118 /* TeXProjectDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077303138E5D81000F1118 /* TeXProjectDocument.m */; };
+		25077307138E5D82000F1118 /* TeXProjectDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25077305138E5D82000F1118 /* TeXProjectDocument.xib */; };
+		2507730A138E5D82000F1118 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25077308138E5D82000F1118 /* MainMenu.xib */; };
+		2507730D138E5D82000F1118 /* TeXProjectDocument.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2507730B138E5D82000F1118 /* TeXProjectDocument.xcdatamodeld */; };
+		25077315138E5D82000F1118 /* TeXnicleImporter.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */; };
+		25077317138E5D82000F1118 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25077316138E5D82000F1118 /* CoreServices.framework */; };
+		25077319138E5D82000F1118 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25077318138E5D82000F1118 /* CoreFoundation.framework */; };
+		2507731B138E5D82000F1118 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2507731A138E5D82000F1118 /* CoreData.framework */; };
+		2507731D138E5D82000F1118 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2507731C138E5D82000F1118 /* Foundation.framework */; };
+		25077323138E5D82000F1118 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25077321138E5D82000F1118 /* InfoPlist.strings */; };
+		25077326138E5D82000F1118 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 25077325138E5D82000F1118 /* main.c */; };
+		25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077327138E5D82000F1118 /* GetMetadataForFile.m */; };
+		2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2507732A138E5D82000F1118 /* MySpotlightImporter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		25077313138E5D82000F1118 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25077311138E5D82000F1118;
+			remoteInfo = TeXnicleImporter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		250772EC138E5D81000F1118 /* TeXnicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeXnicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		250772F0138E5D81000F1118 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		250772F3138E5D81000F1118 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		250772F4138E5D81000F1118 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		250772F5138E5D81000F1118 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		250772F8138E5D81000F1118 /* TeXnicle-Info.plist */ = {isa = PBXFileReference; path = "TeXnicle-Info.plist"; sourceTree = "<group>"; };
+		250772FA138E5D81000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		250772FC138E5D81000F1118 /* TeXnicle-Prefix.pch */ = {isa = PBXFileReference; path = "TeXnicle-Prefix.pch"; sourceTree = "<group>"; };
+		250772FD138E5D81000F1118 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		25077300138E5D81000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		25077302138E5D81000F1118 /* TeXProjectDocument.h */ = {isa = PBXFileReference; path = TeXProjectDocument.h; sourceTree = "<group>"; };
+		25077303138E5D81000F1118 /* TeXProjectDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeXProjectDocument.m; sourceTree = "<group>"; };
+		25077306138E5D82000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TeXProjectDocument.xib; sourceTree = "<group>"; };
+		25077309138E5D82000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2507730C138E5D82000F1118 /* TeXProjectDocument.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TeXProjectDocument.xcdatamodel; sourceTree = "<group>"; };
+		25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXnicleImporter.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
+		25077316138E5D82000F1118 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		25077318138E5D82000F1118 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2507731A138E5D82000F1118 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2507731C138E5D82000F1118 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		25077320138E5D82000F1118 /* TeXnicleImporter-Info.plist */ = {isa = PBXFileReference; path = "TeXnicleImporter-Info.plist"; sourceTree = "<group>"; };
+		25077322138E5D82000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		25077324138E5D82000F1118 /* TeXnicleImporter-Prefix.pch */ = {isa = PBXFileReference; path = "TeXnicleImporter-Prefix.pch"; sourceTree = "<group>"; };
+		25077325138E5D82000F1118 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		25077327138E5D82000F1118 /* GetMetadataForFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMetadataForFile.m; sourceTree = "<group>"; };
+		25077329138E5D82000F1118 /* MySpotlightImporter.h */ = {isa = PBXFileReference; path = MySpotlightImporter.h; sourceTree = "<group>"; };
+		2507732A138E5D82000F1118 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
+		2507732C138E5D82000F1118 /* Importer Read Me.txt */ = {isa = PBXFileReference; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		250772E9138E5D81000F1118 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2507730F138E5D82000F1118 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25077317138E5D82000F1118 /* CoreServices.framework in Frameworks */,
+				25077319138E5D82000F1118 /* CoreFoundation.framework in Frameworks */,
+				2507731B138E5D82000F1118 /* CoreData.framework in Frameworks */,
+				2507731D138E5D82000F1118 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		250772E1138E5D81000F1118 = {
+			isa = PBXGroup;
+			children = (
+				250772F6138E5D81000F1118 /* TeXnicle */,
+				2507731E138E5D82000F1118 /* TeXnicleImporter */,
+				250772EF138E5D81000F1118 /* Frameworks */,
+				250772ED138E5D81000F1118 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		250772ED138E5D81000F1118 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				250772EC138E5D81000F1118 /* TeXnicle.app */,
+				25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		250772EF138E5D81000F1118 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				250772F0138E5D81000F1118 /* Cocoa.framework */,
+				25077316138E5D82000F1118 /* CoreServices.framework */,
+				25077318138E5D82000F1118 /* CoreFoundation.framework */,
+				2507731A138E5D82000F1118 /* CoreData.framework */,
+				2507731C138E5D82000F1118 /* Foundation.framework */,
+				250772F2138E5D81000F1118 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		250772F2138E5D81000F1118 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				250772F3138E5D81000F1118 /* AppKit.framework */,
+				250772F4138E5D81000F1118 /* CoreData.framework */,
+				250772F5138E5D81000F1118 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		250772F6138E5D81000F1118 /* TeXnicle */ = {
+			isa = PBXGroup;
+			children = (
+				25077302138E5D81000F1118 /* TeXProjectDocument.h */,
+				25077303138E5D81000F1118 /* TeXProjectDocument.m */,
+				25077305138E5D82000F1118 /* TeXProjectDocument.xib */,
+				25077308138E5D82000F1118 /* MainMenu.xib */,
+				2507730B138E5D82000F1118 /* TeXProjectDocument.xcdatamodeld */,
+				250772F7138E5D81000F1118 /* Supporting Files */,
+			);
+			path = TeXnicle;
+			sourceTree = "<group>";
+		};
+		250772F7138E5D81000F1118 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				250772F8138E5D81000F1118 /* TeXnicle-Info.plist */,
+				250772F9138E5D81000F1118 /* InfoPlist.strings */,
+				250772FC138E5D81000F1118 /* TeXnicle-Prefix.pch */,
+				250772FD138E5D81000F1118 /* main.m */,
+				250772FF138E5D81000F1118 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2507731E138E5D82000F1118 /* TeXnicleImporter */ = {
+			isa = PBXGroup;
+			children = (
+				25077327138E5D82000F1118 /* GetMetadataForFile.m */,
+				25077329138E5D82000F1118 /* MySpotlightImporter.h */,
+				2507732A138E5D82000F1118 /* MySpotlightImporter.m */,
+				2507732C138E5D82000F1118 /* Importer Read Me.txt */,
+				2507731F138E5D82000F1118 /* Supporting Files */,
+			);
+			path = TeXnicleImporter;
+			sourceTree = "<group>";
+		};
+		2507731F138E5D82000F1118 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				25077320138E5D82000F1118 /* TeXnicleImporter-Info.plist */,
+				25077321138E5D82000F1118 /* InfoPlist.strings */,
+				25077324138E5D82000F1118 /* TeXnicleImporter-Prefix.pch */,
+				25077325138E5D82000F1118 /* main.c */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		250772EB138E5D81000F1118 /* TeXnicle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25077332138E5D82000F1118 /* Build configuration list for PBXNativeTarget "TeXnicle" */;
+			buildPhases = (
+				250772E8138E5D81000F1118 /* Sources */,
+				250772E9138E5D81000F1118 /* Frameworks */,
+				250772EA138E5D81000F1118 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				25077314138E5D82000F1118 /* PBXTargetDependency */,
+			);
+			name = TeXnicle;
+			productName = TeXnicle;
+			productReference = 250772EC138E5D81000F1118 /* TeXnicle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		25077311138E5D82000F1118 /* TeXnicleImporter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2507732F138E5D82000F1118 /* Build configuration list for PBXNativeTarget "TeXnicleImporter" */;
+			buildPhases = (
+				2507730E138E5D82000F1118 /* Sources */,
+				2507730F138E5D82000F1118 /* Frameworks */,
+				25077310138E5D82000F1118 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeXnicleImporter;
+			productName = TeXnicleImporter;
+			productReference = 25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		250772E3138E5D81000F1118 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "AEI Hannover ";
+			};
+			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 250772E1138E5D81000F1118;
+			productRefGroup = 250772ED138E5D81000F1118 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				250772EB138E5D81000F1118 /* TeXnicle */,
+				25077311138E5D82000F1118 /* TeXnicleImporter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		250772EA138E5D81000F1118 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250772FB138E5D81000F1118 /* InfoPlist.strings in Resources */,
+				25077301138E5D81000F1118 /* Credits.rtf in Resources */,
+				25077307138E5D82000F1118 /* TeXProjectDocument.xib in Resources */,
+				2507730A138E5D82000F1118 /* MainMenu.xib in Resources */,
+				25077315138E5D82000F1118 /* TeXnicleImporter.mdimporter in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25077310138E5D82000F1118 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25077323138E5D82000F1118 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		250772E8138E5D81000F1118 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250772FE138E5D81000F1118 /* main.m in Sources */,
+				25077304138E5D81000F1118 /* TeXProjectDocument.m in Sources */,
+				2507730D138E5D82000F1118 /* TeXProjectDocument.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2507730E138E5D82000F1118 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25077326138E5D82000F1118 /* main.c in Sources */,
+				25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */,
+				2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		25077314138E5D82000F1118 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25077311138E5D82000F1118 /* TeXnicleImporter */;
+			targetProxy = 25077313138E5D82000F1118 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		250772F9138E5D81000F1118 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				250772FA138E5D81000F1118 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		250772FF138E5D81000F1118 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25077300138E5D81000F1118 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		25077305138E5D82000F1118 /* TeXProjectDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25077306138E5D82000F1118 /* en */,
+			);
+			name = TeXProjectDocument.xib;
+			sourceTree = "<group>";
+		};
+		25077308138E5D82000F1118 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25077309138E5D82000F1118 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		25077321138E5D82000F1118 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25077322138E5D82000F1118 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2507732D138E5D82000F1118 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2507732E138E5D82000F1118 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		25077330138E5D82000F1118 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXnicleImporter/TeXnicleImporter-Prefix.pch";
+				INFOPLIST_FILE = "TeXnicleImporter/TeXnicleImporter-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Debug;
+		};
+		25077331138E5D82000F1118 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXnicleImporter/TeXnicleImporter-Prefix.pch";
+				INFOPLIST_FILE = "TeXnicleImporter/TeXnicleImporter-Info.plist";
+				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
+				LIBRARY_STYLE = BUNDLE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mdimporter;
+			};
+			name = Release;
+		};
+		25077333138E5D82000F1118 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
+				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		25077334138E5D82000F1118 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
+				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2507732D138E5D82000F1118 /* Debug */,
+				2507732E138E5D82000F1118 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2507732F138E5D82000F1118 /* Build configuration list for PBXNativeTarget "TeXnicleImporter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25077330138E5D82000F1118 /* Debug */,
+				25077331138E5D82000F1118 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		25077332138E5D82000F1118 /* Build configuration list for PBXNativeTarget "TeXnicle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25077333138E5D82000F1118 /* Debug */,
+				25077334138E5D82000F1118 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2507730B138E5D82000F1118 /* TeXProjectDocument.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2507730C138E5D82000F1118 /* TeXProjectDocument.xcdatamodel */,
+			);
+			currentVersion = 2507730C138E5D82000F1118 /* TeXProjectDocument.xcdatamodel */;
+			path = TeXProjectDocument.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 250772E3138E5D81000F1118 /* Project object */;
+}
