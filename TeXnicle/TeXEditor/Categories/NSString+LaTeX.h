@@ -1,0 +1,19 @@
+//
+//  NSString+LaTeX.h
+//  TeXnicle
+//
+//  Created by Martin Hewitson on 28/2/10.
+//  Copyright 2010 AEI Hannover . All rights reserved.
+//
+
+#import <Cocoa/Cocoa.h>
+
+
+@interface NSString (LaTeX) 
+
+- (NSArray*) referenceLabels;
+- (NSArray*) citations;
++ (NSString *)stringWithControlsFilteredForString:(NSString *)str ;
+- (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
+
+@end

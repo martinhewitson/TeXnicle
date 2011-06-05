@@ -9,50 +9,10 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>binary</string>
-			</array>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/octet-stream</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>Binary</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>TeXProjectDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>Binary</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>sqlite</string>
-			</array>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/octet-stream</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>SQLite</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>TeXProjectDocument</string>
-			<key>NSPersistentStoreTypeKey</key>
-			<string>SQLite</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>xml</string>
+				<string>texnicle</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>TeXnicle_4</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>text/xml</string>
@@ -72,11 +32,29 @@
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>tex</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>TeXnicle_Doc</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/x-latex</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>TeX Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>ExternalTeXDoc</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>TeXnicle_4</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.bobsoft.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -86,11 +64,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array/>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
@@ -99,5 +79,15 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSServices</key>
+	<array/>
+	<key>UTExportedTypeDeclarations</key>
+	<array/>
+	<key>UTImportedTypeDeclarations</key>
+	<array/>
+  <key>CFBundleHelpBookFolder</key>
+  <string>TeXnicle_Help</string>
+  <key>CFBundleHelpBookName</key>  
+  <string>TeXnicle Help</string>
 </dict>
 </plist>
