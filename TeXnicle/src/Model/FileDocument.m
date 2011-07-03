@@ -132,9 +132,19 @@
 - (void) handleEdits:(NSNotification*)aNote
 {
 //	NSLog(@"Handling edits for %@...", [file valueForKey:@"name"]);
-	[file setValue:[NSNumber numberWithBool:YES] forKey:@"hasEdits"];
-	[file setValue:[NSDate date] forKey:@"lastEditDate"];
-	
+  
+  // check if the text really changed
+//  NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:textStorage];
+//  [string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];  
+//  NSString *str = [string unfoldedString];
+//  [string release];
+//  
+//  NSString *cachedString = [file valueForKey:@"contentString"];
+//  if (![cachedString isEqualToString:str]) {
+    [file setValue:[NSNumber numberWithBool:YES] forKey:@"hasEdits"];
+    [file setValue:[NSDate date] forKey:@"lastEditDate"];
+//  }  
+  	
 	// update all views
 	for (NSLayoutManager *layout in [textStorage layoutManagers]) {
 		for (NSTextContainer *tc in [layout textContainers]) {
