@@ -31,6 +31,8 @@
 @synthesize editorStatusLabel;
 @synthesize engine;
 @synthesize projectTypeSelector;
+@synthesize pdfView;
+@synthesize pdfSearchResults;
 
 - (void) dealloc
 {
@@ -40,6 +42,7 @@
   [finder release];
   self.texEditorViewController = nil;
   self.engine = nil;
+  self.pdfSearchResults = nil;
   [super dealloc];
 }
 
@@ -57,6 +60,25 @@
   // Override returning the nib file name of the document
   // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
   return @"TeXProjectDocument";
+}
+
+- (BOOL)setMetadataForStoreAtURL:(NSURL *)url 
+{
+  NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
+  NSPersistentStore *pStore = [psc persistentStoreForURL:url];
+  NSString *projectName = self.project.name;
+  
+  if ((pStore != nil) && (projectName != nil)) {
+    NSMutableDictionary *metadata = [[psc metadataForPersistentStore:pStore] mutableCopy];
+    if (metadata == nil) {
+      metadata = [NSMutableDictionary dictionary];
+    }
+    [metadata setObject:[NSArray arrayWithObject:projectName]
+                 forKey:(NSString *)kMDItemKeywords];
+    [psc setMetadata:metadata forPersistentStore:pStore];
+    return YES;
+  }
+  return NO;
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -130,15 +152,15 @@
   
   // ensure the project has the same name as on disk
   [self.project setValue:[[[self fileURL] lastPathComponent] stringByDeletingPathExtension] forKey:@"name"];
-  [self saveDocument:self];
+//  [self saveDocument:self];
 
 //  NSLog(@"Loaded project %@", self.project);
 //  for (NSManagedObject *item in [self.project valueForKey:@"items"]){
 //    NSLog(@"%@", [item valueForKey:@"parent"]);
 //  }
-  
+  [self.pdfView setDocument:nil];
+  [self showDocument];
 }
-
 
 
 - (void)windowWillClose:(NSNotification *)notification 
@@ -159,61 +181,195 @@
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
 			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
+      [[ConsoleController sharedConsoleController] close];
 		}
 	}
 	
 }
 
-- (id)initWithType:(NSString *)typeName error:(NSError **)outError
++ (id)newTeXnicleProject
 {
-  //	NSLog(@"Init with type...");
-	NSError *error=nil;
-	self = [super initWithType:typeName error:&error];
-	if (error) {
-		[NSApp presentError:error];
-		return nil;
-	}
-	
-	if (self != nil) {
+  // get a project name from the user
+  NSSavePanel *savePanel = [NSSavePanel savePanel];
+  [savePanel setTitle:@"Save New Project..."];
+  [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"texnicle"]];
+  [savePanel setPrompt:@"Create"];
+  [savePanel setMessage:@"Choose a location for the new TeXnicle project."];
+  [savePanel setNameFieldLabel:@"Create Project:"];
+  [savePanel setAllowsOtherFileTypes:NO];
+  [savePanel setCanCreateDirectories:YES];
+  
+  BOOL result = [savePanel runModal];
+  
+  if (result == NSFileHandlingPanelCancelButton) {
+    return nil;
+  }
+  
+  NSString *path = [[savePanel URL] path];
+  NSURL *url = [NSURL fileURLWithPath:path];
+  
+  // Remove file if it is there
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:path]) {
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm"];
+    NSString *movedPath = [path stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    NSError *moveError = nil;
+    [fm moveItemAtPath:path toPath:movedPath error:&moveError];
+    if (moveError) {
+      [NSApp presentError:moveError];
+      return nil;
+    }
+  }
+  
+  // make a new managed object context  
+  NSManagedObjectContext *moc = [TeXProjectDocument managedObjectContextForStoreURL:url];
+  
+  [moc processPendingChanges];
+  [[moc undoManager] disableUndoRegistration];
+  NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
+  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
     
-		NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-		[managedObjectContext processPendingChanges];
-		[[managedObjectContext undoManager] disableUndoRegistration];
-		self.project = [NSEntityDescription insertNewObjectForEntityForName:@"Project"
-																								 inManagedObjectContext:managedObjectContext];
-		
-//    self.projectOutlineViewController.project = self.project;
-//    [self.projectOutlineView reloadData];
-		[self saveDocument:self];
-		
-		if (![self fileURL]) {
-			NSString *description = NSLocalizedString(@"Cannot create a new project without specifying a project file.", @"");
-			NSString *reason = NSLocalizedString(@"You cancelled the process.", @"");
-			NSDictionary *edict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:description, reason,nil]
-																												forKeys:[NSArray arrayWithObjects:NSLocalizedDescriptionKey,NSLocalizedFailureReasonErrorKey,nil]];
-			//NSLog(@"Returning error dictionary: %@", edict);			
-			if (outError != NULL) {
-				*outError = [NSError errorWithDomain:@"MHTeXnicleError" 
-																				code:1000 
-																		userInfo:edict];
-			}
-			return nil;
-		}
-		
-		// get the name and filepath of the project
-		NSString *fullpath = [[self fileURL] path];
-		NSString *name = [[fullpath lastPathComponent] stringByDeletingPathExtension];
-		NSString *folder = [fullpath stringByDeletingLastPathComponent];
-		// set these to the project
-		[self.project setValue:name forKey:@"name"];
-		[self.project setValue:folder forKey:@"folder"];
-		
-		[managedObjectContext processPendingChanges];
-		[[managedObjectContext undoManager] enableUndoRegistration];
-		
-	}
-	return self;
+  // set name and folder of the project
+  NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
+  NSString *folder = [path stringByDeletingLastPathComponent];
+  [project setValue:name forKey:@"name"];
+  [project setValue:folder forKey:@"folder"]; 
+  
+  [moc processPendingChanges];
+  [[moc undoManager] enableUndoRegistration];
+  
+  NSError *error = nil;
+  [moc save:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return nil;
+  }
+  
+  NSError *openError = nil;
+  id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES error:&openError];
+  if (openError) {
+    [NSApp presentError:openError];
+    return nil;
+  }  
+  
+  return doc;
 }
+
++ (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL
+{
+	//	Find the document's model
+	
+	NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+	if (!model)
+		return nil;
+	
+//  NSLog(@"Got model %@", model);
+	//	Create a persistent store
+  
+	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+//  NSLog(@"Coordinator %@", psc);
+  
+	if (!psc)
+		return nil;
+	  
+	NSError *error = nil;
+  NSMutableDictionary *options = nil;
+  [options setObject:[NSNumber numberWithBool:YES] 
+							forKey:NSMigratePersistentStoresAutomaticallyOption];
+	NSPersistentStore *store = [psc addPersistentStoreWithType:NSXMLStoreType
+                                               configuration:nil 
+                                                         URL:storeURL 
+                                                     options:options 
+                                                       error:&error];
+	if (!store)
+		return nil;
+	
+	//	Create a managed object context for the store
+	
+	NSManagedObjectContext* managedContext = [[NSManagedObjectContext alloc] init];
+	if (!managedContext)
+		return nil;
+	
+	managedContext.persistentStoreCoordinator = psc;
+	managedContext.undoManager = nil;
+	
+	return managedContext;
+}
+
+//- (id)initWithType:(NSString *)typeName error:(NSError **)outError
+//{
+//  //	NSLog(@"Init with type...");
+//	NSError *error=nil;
+//	self = [super initWithType:typeName error:&error];
+//	if (error) {
+//		[NSApp presentError:error];
+//		return nil;
+//	}
+//	
+//	if (self != nil) {
+//    
+//    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+//    [managedObjectContext processPendingChanges];
+//    [[managedObjectContext undoManager] disableUndoRegistration];
+//    self.project = [NSEntityDescription insertNewObjectForEntityForName:@"Project"
+//                                                 inManagedObjectContext:managedObjectContext];
+//    [managedObjectContext processPendingChanges];
+//    [[managedObjectContext undoManager] enableUndoRegistration];
+//    
+//    // get a project name from the user
+//    NSSavePanel *savePanel = [NSSavePanel savePanel];
+//    [savePanel setTitle:@"Save New Project..."];
+//    [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"texnicle"]];
+//    [savePanel setPrompt:@"Create"];
+//    [savePanel setMessage:@"Choose a location for the new TeXnicle project."];
+//    [savePanel setAllowsOtherFileTypes:NO];
+//    [savePanel setCanCreateDirectories:YES];
+//    
+//    BOOL result = [savePanel runModal];
+//    
+//    if (result == NSFileHandlingPanelCancelButton) {
+//      return nil;
+//    }
+// 
+//    
+//////    [self saveDocument:self];
+//    NSError *saveError = nil;
+//    NSString *path = [[savePanel URL] path];
+//    NSURL *url = [NSURL fileURLWithPath:path];
+//
+//    [self setFileType:@"texnicle"];
+//    [self setFileURL:url];
+//    
+//    NSLog(@"Saving to %@", url);
+//    [self saveToURL:url ofType:@"texnicle" forSaveOperation:NSSaveOperation error:&saveError];
+//    if (saveError) {
+//      [NSApp presentError:saveError];
+//      return nil;
+//    }
+//    
+//    NSString *fullpath = [[self fileURL] path];
+//    NSString *name = [[fullpath lastPathComponent] stringByDeletingPathExtension];
+//    NSString *folder = [fullpath stringByDeletingLastPathComponent];
+//    // set these to the project
+//    [managedObjectContext processPendingChanges];
+//    [[managedObjectContext undoManager] disableUndoRegistration];
+//    [self.project setValue:name forKey:@"name"];
+//    [self.project setValue:folder forKey:@"folder"]; 
+//    [self addNewArticleMainFile];
+//    [managedObjectContext processPendingChanges];
+//    [[managedObjectContext undoManager] enableUndoRegistration];    
+//    
+//    
+////    [self saveToURL:url ofType:@"texnicle" forSaveOperation:NSSaveOperation delegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];
+//    
+////    [self saveDocument:self];
+//    
+////    [self setFileType:@"XML"];
+////    [self runModalSavePanelForSaveOperation:NSSaveOperation delegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];		
+//	}
+//	return self;
+//}
 
 
 - (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL*)url 
@@ -222,8 +378,6 @@
 																		 storeOptions:(NSDictionary*)storeOptions
 																						error:(NSError**)error
 {
-  //	NSLog(@"Configuring persistent store...");
-	
   NSMutableDictionary *options = nil;
   if (storeOptions != nil) {
     options = [storeOptions mutableCopy];
@@ -233,13 +387,23 @@
 	
   [options setObject:[NSNumber numberWithBool:YES] 
 							forKey:NSMigratePersistentStoresAutomaticallyOption];
-	
+  
   BOOL result = [super configurePersistentStoreCoordinatorForURL:url
 																													ofType:fileType
 																							modelConfiguration:configuration
 																										storeOptions:options
 																													 error:error];
   [options release], options = nil;
+  
+  if (result) {
+    NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
+    NSPersistentStore *pStore = [psc persistentStoreForURL:url];
+    id existingMetadata = [[psc metadataForPersistentStore:pStore]
+                           objectForKey:(NSString *)kMDItemKeywords];
+    if (existingMetadata == nil) {
+      result = [self setMetadataForStoreAtURL:url];
+    }  
+  }
     
   return result;
 }
@@ -512,7 +676,7 @@
 	if (returnCode == NSCancelButton) 
 		return;
 	
-	NSString *path = [savePanel filename];
+	NSString *path = [[savePanel URL] path];
 	
 	// set the path to the item
 	[selectedItem setValue:path forKey:@"filepath"];
@@ -674,7 +838,7 @@
 
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
- if (subview == leftView)
+ if (subview == leftView || subview == rightView)
    return NO;
     
   return YES;
@@ -683,12 +847,30 @@
 
 - (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
 {
-  return NO;
+  return YES;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
+{
+  if (dividerIndex == 1) {
+    NSRect b = [splitView bounds];
+    return b.size.width-250;
+  }
+ 
+  return proposedMax;
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
-  return 200;
+  if (dividerIndex == 0) {
+    return 200;
+  }
+  
+  if (dividerIndex == 1) {
+    return 400;
+  }
+  
+  return proposedMin;
 }
 
 #pragma mark -
@@ -873,42 +1055,133 @@
 {
   [self.engine reset];
   [self.engine build];
+  
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
+  [self showDocument];
+  
   if (openPDFAfterBuild) {
     [self openPDF:self];
   }
 
 }
 
-- (IBAction) openPDF:(id)sender
+- (IBAction) showNextResult:(id)sender
+{
+  if ([self.pdfSearchResults count] == 0) {
+    return;
+  }
+  currentHighlightedPDFSearchResult++;
+  if (currentHighlightedPDFSearchResult >= [self.pdfSearchResults count]) {
+    currentHighlightedPDFSearchResult = 0;
+  }
+  PDFSelection *selection = [self.pdfSearchResults objectAtIndex:currentHighlightedPDFSearchResult];
+  [self.pdfView setCurrentSelection:selection animate:YES];
+  [self.pdfView scrollSelectionToVisible:self];
+}
+
+- (IBAction) searchPDF:(id)sender
+{
+  NSString *searchText = [sender stringValue];
+  
+  self.pdfSearchResults = [NSMutableArray arrayWithArray:[[self.pdfView document] findString:searchText withOptions:NSCaseInsensitiveSearch]];
+  currentHighlightedPDFSearchResult = -1;
+  [self showNextResult:self];
+  
+}
+
+
+- (void) showDocument
+{
+  NSString *docPath = [self compiledDocumentPath];
+//  NSLog(@"Compiled path %@", docPath);
+  if (docPath) {
+    PDFDocument *pdfDoc = [[[PDFDocument alloc] initWithURL: [NSURL fileURLWithPath:docPath]] autorelease];
+    NSView *view = [self.pdfView documentView];
+    NSRect r = [view visibleRect];
+    BOOL hasDoc = ([self.pdfView document] != nil);
+//    NSLog(@"Has doc %d: setting doc %@", hasDoc, pdfDoc);
+    [self.pdfView setHidden:NO];
+    [self.pdfView setDocument: pdfDoc];
+    if (hasDoc) {
+      [view scrollRectToVisible:r];
+    }
+  } else {
+    [self.pdfView setHidden:YES];
+  }
+}
+
+- (NSString*)compiledDocumentPath
 {
 	// build path to the pdf file
 	NSString *mainFile = [[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"];
 	NSString *docFile;
 	//NSLog(@"Opening %@", pdfFile);
-  
-	
+  	
 	NSString *projectType = [[self project] valueForKey:@"type"];
 	if ([projectType isEqual:@"pdflatex"]) {
 		docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
 	} else {
 		docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
 	} 
-	
-	// check if the pdf exists
+  
+  // check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:docFile]) {
+    return docFile;
+  }
+
+  return nil;
+}
+
+- (IBAction) openPDF:(id)sender
+{
+  NSString *docFile = [self compiledDocumentPath];
+	
+	// check if the pdf exists
+	if (docFile) {
 		//NSLog(@"Opening %@", pdfFile);
 		[[NSWorkspace sharedWorkspace] openFile:docFile];
 	}
 	
 	// .. if not, ask the user if they want to typeset the project
-	
-	
 }
+
+- (BOOL) canViewPDF
+{
+	TeXFileEntity *mainfile = [project valueForKey:@"mainFile"];
+	if (!mainfile) {
+		return NO;
+	}
+	
+	NSString *mainFilePath = [mainfile valueForKey:@"pathOnDisk"];
+	NSString *pdfFilePath = [[mainFilePath stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:pdfFilePath]) {
+		return YES;
+	}
+	
+	return NO;	
+}
+
+- (BOOL) canTypeset
+{
+	if ([project valueForKey:@"mainFile"]) {
+		return YES;
+	}	
+	return NO;
+}
+
+- (BOOL) canBibTeX
+{
+	if ([project valueForKey:@"mainFile"]) {
+		return YES;
+	}	
+	return NO;	
+}
+
 
 #pragma mark -
 #pragma mark Files and Folders
@@ -1008,30 +1281,7 @@
 }
 
 
-- (BOOL) canViewPDF
-{
-	TeXFileEntity *mainfile = [project valueForKey:@"mainFile"];
-	if (!mainfile) {
-		return NO;
-	}
-	
-	NSString *mainFilePath = [mainfile valueForKey:@"pathOnDisk"];
-	NSString *pdfFilePath = [[mainFilePath stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:pdfFilePath]) {
-		return YES;
-	}
-	
-	return NO;	
-}
 
-- (BOOL) canTypeset
-{
-	if ([project valueForKey:@"mainFile"]) {
-		return YES;
-	}	
-	return NO;
-}
 
 - (NSArray*)getSelectedItems
 {
@@ -1184,12 +1434,23 @@
 
 - (void) templateSelectionChanged:(NSNotification*)aNote
 {
-  [documentCode performSelector:@selector(colorVisibleText)
-                     withObject:nil
-                     afterDelay:0.1];
-  [documentCode performSelector:@selector(colorWholeDocument)
-                     withObject:nil
-                     afterDelay:0.2];
+  NSArray *selectedObjects = [templates selectedObjects];
+  if ([selectedObjects count] == 1) {
+    
+    NSDictionary *selected = [selectedObjects objectAtIndex:0];
+    NSString *code = [selected valueForKey:@"Code"];
+    
+    [documentCode scrollRectToVisible:NSZeroRect];
+    
+    [documentCode setString:code];
+    [documentCode didChangeText];
+    [documentCode performSelector:@selector(colorVisibleText)
+                       withObject:nil
+                       afterDelay:0.1];
+    [documentCode performSelector:@selector(colorWholeDocument)
+                       withObject:nil
+                       afterDelay:0.2];
+  }
 }
 
 - (void) showTemplatesSheet
@@ -1338,12 +1599,11 @@
 	[templateSheet orderOut:self];
 }
 
-
-- (void) addNewArticleMainFile
++ (NSString*) newArticleMainFileCode
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
 	//NSLog(@"User defaults: %@", defaults);
-	templateArray = [defaults valueForKey:TEDocumentTemplates];
+	NSArray *templateArray = [defaults valueForKey:TEDocumentTemplates];
   
 	// Look for the article template
 	NSString *code = nil;
@@ -1357,7 +1617,7 @@
 	
 	if (!code) {
 		
-    //		code = [[[NSAttributedString alloc] initWithString:@"
+    
     code = [NSString stringWithString:@"\
             % Built-in Article Template\n\
             \\documentclass[11pt]{article}\n\
@@ -1387,13 +1647,21 @@
             \\maketitle\\n\
             \\section{Section}\n\
             \\subsection{Subsection}\n\
-            \\end{document}"];
-	}	
+            \\end{document}"];  
+  }
+  
+  return code;
+}
+
+- (void) addNewArticleMainFile
+{
+//  NSLog(@"********* Adding new main file to %@", project);
+  
+	NSString *code = [TeXProjectDocument newArticleMainFileCode];
 	
 	// check if main.tex exists
 	NSString *newName = [NSString stringWithFormat:@"%@_main.tex", [project name]];
 	NSString *filename = [[project folder] stringByAppendingPathComponent:newName];
-	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	int dd = 1;
 	while ([fm fileExistsAtPath:filename]) {
@@ -1401,6 +1669,7 @@
 		filename = [[project folder] stringByAppendingPathComponent:name];
 		dd++;
 	}
+//	NSLog(@"Filename %@", filename);
 	
 	id file = [projectItemTreeController addNewFile:[filename lastPathComponent]
                                        atFilepath:nil
@@ -1411,19 +1680,22 @@
                                      createOnDisk:YES];
 	
 	
-	
+	[file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
+   
 	// add include folder
-	[projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];	
+	[projectItemTreeController setSelectionIndexPath:nil];
+	FolderEntity *includeFolder = [projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];	
+  [includeFolder setValue:[NSNumber numberWithInt:1] forKey:@"sortIndex"];
   
 	// add images folder
 	[projectItemTreeController setSelectionIndexPath:nil];
-	[projectItemTreeController addFolder:@"images" withFilePath:nil createOnDisk:YES];
+	FolderEntity *imagesFolder = [projectItemTreeController addFolder:@"images" withFilePath:nil createOnDisk:YES];
+  [imagesFolder setValue:[NSNumber numberWithInt:2] forKey:@"sortIndex"];
 	
 	// select the main file
-	[projectItemTreeController setSelectionIndexPath:[projectItemTreeController indexPathToObject:file]];
-	
 	[openDocuments addDocument:(TeXFileEntity*)file];		
-	[self saveDocument:self];
+  [projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.2];
+  
 }
 
 - (IBAction) newMainTeXFile:(id)sender
@@ -1483,17 +1755,67 @@
 #pragma mark -
 #pragma mark Saving
 
+//+ (BOOL)autosavesInPlace
+//{
+//  return YES;
+//}
+
+
+- (BOOL)writeToURL:(NSURL *)absoluteURL
+            ofType:(NSString *)typeName
+  forSaveOperation:(NSSaveOperationType)saveOperation
+originalContentsURL:(NSURL *)absoluteOriginalContentsURL
+             error:(NSError **)error 
+{
+  
+  if ([self fileURL] != nil) {
+    [self setMetadataForStoreAtURL:[self fileURL]];
+  }
+  return [super writeToURL:absoluteURL
+                    ofType:typeName
+          forSaveOperation:saveOperation
+       originalContentsURL:absoluteOriginalContentsURL
+                     error:error];
+}
+
+//- (void)saveToURL:(NSURL *)url
+//           ofType:(NSString *)typeName
+// forSaveOperation:(NSSaveOperationType)saveOperation
+//completionHandler:(void (^)(NSError *errorOrNil))completionHandler
+//{
+//	// commit changes for open docs
+//	[openDocuments commitStatus];
+//	
+//	// make sure we save the files here
+//	if ([self saveAllProjectFiles]) {
+//		[super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
+//	}	
+//  
+//}
+//
+//- (BOOL)canAsynchronouslyWriteToURL:(NSURL *)url
+//                             ofType:(NSString *)typeName
+//                   forSaveOperation:(NSSaveOperationType)saveOperation
+//{
+//  return YES;
+//}
+
+
+
 - (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
  forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError
 {
-  //	NSLog(@"Save %@, %d", typeName, saveOperation);
+  
+//	NSLog(@"Save %@, %d", typeName, saveOperation);
 	
 	// commit changes for open docs
 	[openDocuments commitStatus];
 	
 	// make sure we save the files here
 	if ([self saveAllProjectFiles]) {
-		return [super saveToURL:absoluteURL ofType:typeName forSaveOperation:saveOperation error:outError];
+    NSString *path = [absoluteURL path];
+    NSURL *url = [NSURL fileURLWithPath:path];
+		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
 	}	
 	return NO;
 }
@@ -1503,6 +1825,7 @@
 	// write contents of all files to disk
 	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	NSArray *allItems = [projectItemTreeController flattenedContent];
+  
 //  NSLog(@"Saving %@", allItems);
 	BOOL success = YES;
 	BOOL watching = NO;
@@ -1527,9 +1850,6 @@
 
 - (void)saveDocument:(id)sender
 {
-  //	NSLog(@"Saving...");
-  
-	
   [super saveDocument:self];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 #import "OpenDocumentsManager.h"
 #import "TeXEditorViewController.h"
 #import "ProjectOutlineController.h"
@@ -36,6 +37,7 @@
   
   // split views
   IBOutlet NSView *leftView;
+  IBOutlet NSView *midView;
   IBOutlet NSView *rightView;
   
   NSInteger selectedControlsTab;
@@ -47,12 +49,26 @@
   IBOutlet ProjectOutlineController *projectOutlineController;
   
   IBOutlet NSTabView *tabView;
+  PDFView *pdfView;
   
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
 	// Finder
 	FindInProjectController *finder;
+  NSInteger currentHighlightedPDFSearchResult;
+  
+  NSOutlineView *projectOutlineView;
+  NSTabView *controlsTabview;
+  OpenDocumentsManager *openDocuments;
+  ProjectItemTreeController *projectItemTreeController;
+  TeXEditorViewController *texEditorViewController;
+  NSTextField *statusLabel;
+  NSTextField *editorStatusLabel;
+  TPLaTeXEngine *engine;
+  NSPopUpButton *projectTypeSelector;
+  NSMutableArray *pdfSearchResults;
+  NSView *texEditorContainer;
 }
 
 @property (assign) ProjectEntity *project;
@@ -62,10 +78,17 @@
 @property (assign) IBOutlet	ProjectItemTreeController *projectItemTreeController;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) TPLaTeXEngine *engine;
+@property (retain) NSMutableArray *pdfSearchResults;
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) IBOutlet NSTextField *statusLabel;
 @property (assign) IBOutlet NSTextField *editorStatusLabel;
 @property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
+@property (assign) IBOutlet PDFView *pdfView;
+
+
++ (id)newTeXnicleProject;
++ (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
+
 
 #pragma mark -
 #pragma mark Notification Handlers
@@ -114,6 +137,10 @@
 - (IBAction) openPDF:(id)sender;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
 
+- (BOOL) canViewPDF;
+- (BOOL) canTypeset;
+- (BOOL) canBibTeX;
+
 
 
 #pragma mark - 
@@ -128,8 +155,13 @@
 - (IBAction) addExistingFolder:(id)sender;
 - (IBAction) addExistingFileToSelectedFolder:(id)sender;
 
-- (BOOL) canViewPDF;
-- (BOOL) canTypeset;
+- (IBAction) showNextResult:(id)sender;
+- (IBAction) searchPDF:(id)sender;
+- (void) showDocument;
+
+- (NSString*)compiledDocumentPath;
+
+
 - (NSArray*)getSelectedItems;
 - (IBAction) jumpToMainFile:(id)sender;
 - (IBAction) setMainFile:(id)sender;
@@ -157,6 +189,7 @@
 - (BOOL) canRemove;
 - (NSManagedObject*) addFileAtURL:(NSURL*)aURL copy:(BOOL)copyFile;
 
++ (NSString*) newArticleMainFileCode;
 
 #pragma mark -
 #pragma mark Saving
