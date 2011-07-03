@@ -120,7 +120,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
 	
   // special chars
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blueColor]] forKey:TESyntaxSpecialCharsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor magentaColor]] forKey:TESyntaxSpecialCharsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorSpecialChars];
   
   // commands
@@ -128,7 +128,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorCommand];
   
   // arguments
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor magentaColor]] forKey:TESyntaxArgumentsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:62.0/255.0 green:109.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxArgumentsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorArguments];
 	
   //---------- Paths
@@ -226,7 +226,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 		[dict setObject:url forKey:@"url"];
 		[[controller recentFiles] addObject:dict];
 	}
-	
+  
 	if ([[[NSDocumentController sharedDocumentController] documents] count]==0) {
 		[self showStartupScreen:self];
 	}
@@ -451,7 +451,8 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 			[item setTitle:@"Typeset Project"];
 			if (doc) {
 				if ([doc respondsToSelector:@selector(canTypeset)]) {
-					[item setEnabled:[doc performSelector:@selector(canTypeset)]];
+          BOOL result = [doc canTypeset];
+					[item setEnabled:result];
 					NSString *mainFile = [[[doc project] valueForKey:@"mainFile"] valueForKey:@"shortName"];
 					if (mainFile) {
 						[item setTitle:[NSString stringWithFormat:@"Typeset \u201c%@\u201d", mainFile]];
@@ -466,7 +467,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 			[item setEnabled:NO];
 			if (doc) {
 				if ([doc respondsToSelector:@selector(canTypeset)]) {
-					[item setEnabled:[doc performSelector:@selector(canTypeset)]];
+					[item setEnabled:[doc canTypeset]];
 				}
 			}
 		}
@@ -477,7 +478,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 			[item setEnabled:NO];
 			if (doc) {
 				if ([doc respondsToSelector:@selector(canViewPDF)]) {
-					[item setEnabled:[doc performSelector:@selector(canViewPDF)]];
+					[item setEnabled:[doc canViewPDF]];
 				}
 			}
 		}
@@ -489,7 +490,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 			[item setEnabled:NO];
 			if (doc) {
 				if ([doc respondsToSelector:@selector(canBibTeX)]) {
-					[item setEnabled:[doc performSelector:@selector(canBibTeX)]];
+					[item setEnabled:[doc canBibTeX]];
 					NSString *mainFile = [[[doc project] valueForKey:@"mainFile"] valueForKey:@"shortName"];
 					if (mainFile) {
 						[item setTitle:[NSString stringWithFormat:@"BibTeX \u201c%@\u201d", mainFile]];
