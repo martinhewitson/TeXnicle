@@ -44,12 +44,13 @@ extern NSString * const OutlineViewNodeType;
 
 @class TeXProjectDocument;
 @class TeXFileEntity;
+@class TPOutlineView;
 
 @interface ProjectItemTreeController : NSTreeController {
 	
 	TeXProjectDocument *document;
 	ProjectEntity *project;
-	IBOutlet NSOutlineView *outlineView;
+	IBOutlet TPOutlineView *outlineView;
 	IBOutlet OpenDocumentsManager *openDocumentsManager;
 	ProjectItemEntity *lastInserted;
 	

@@ -44,6 +44,7 @@
 #import "NSString+Comparisons.h"
 #import "ConsoleController.h"
 #import "NSFileManager+TeXnicle.h"
+#import "TPOutlineView.h"
 
 @interface ProjectItemTreeController (Private)
 - (void)updateSortOrderOfModelObjects;
@@ -53,10 +54,12 @@
 
 - (void)updateSortOrderOfModelObjects
 {
+//  NSLog(@"Update sort order...");
 	int count = 0;
 	for (NSTreeNode *node in [self flattenedNodes]) {
 //    [[node representedObject] setPrimitiveValue:[NSNumber numberWithInt:count] forKey:@"sortIndex"];
 		[[node representedObject] setValue:[NSNumber numberWithInt:count] forKey:@"sortIndex"];
+//    NSLog(@"Set %@", [node representedObject]);
 		count++;
 	}
 }
@@ -940,25 +943,17 @@ withIntermediateDirectories:YES
 	NSString *contents = [NSString stringWithContentsOfFile:aPath
 																						 usedEncoding:&encoding
 																										error:&error];
-	
-//	NSLog(@"Loaded string with encoding %d", encoding);
-	
-//	NSString *contents = [NSString stringWithContentsOfFile:aPath encoding:NSUTF8StringEncoding error:&error];
-//	
-//	if (!contents) {
-//		contents = [NSString stringWithContentsOfURL:absoluteURL
-//																				encoding:NSASCIIStringEncoding
-//																					 error:outError];
-//		
-//	}
   
-  if (error) {
-    [NSApp presentError:error];
-    
-    // TODO: present a custom error box with option to load a specified encoding
-    
+  // check if the file was a text file, If it is a text file and we couldn't load it, throw an error.
+  CFStringRef fileExtension = (CFStringRef) [aPath pathExtension];
+  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+  
+  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
+    if (error) {
+      [NSApp presentError:error];
+    }
   }
-	
+
 	if (contents) {
 		isTextFile = YES;
 	}	
@@ -1210,8 +1205,12 @@ withIntermediateDirectories:YES
 #pragma mark Outline view delegate methods
 
 // We do editing by context menu. Here we use the double click to open documents.
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-	
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item 
+{	
+  if ([[item representedObject] isKindOfClass:[FolderEntity class]]) {
+    return YES;
+  }
+  
 	return NO;
 }
 
@@ -1350,11 +1349,17 @@ withIntermediateDirectories:YES
 	return YES;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView 
+- (BOOL)outlineView:(NSOutlineView *)anOutlineView 
 				 acceptDrop:(id < NSDraggingInfo >)info 
 							 item:(id)proposedParentItem 
 				 childIndex:(NSInteger)proposedChildIndex;
 {	
+//  if (outlineView.dragLeftView)
+//    return NO;
+  
+//  NSLog(@"acceptDrop: %@", info);
+//  NSLog(@"Proposed parent %@", proposedParentItem);
+  
 	NSPasteboard *pboard = [info draggingPasteboard];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
 		NSArray* urls = [pboard propertyListForType:NSFilenamesPboardType];
@@ -1369,7 +1374,23 @@ withIntermediateDirectories:YES
 			if ([NSFileManager directoryExists:path]) {
 				[self showFolderImportSheetForPath:path];
 			} else {
-				newfile = [self addFileAtPath:path toFolder:nil copy:NO];
+        if (([[NSApp currentEvent] modifierFlags] & NSControlKeyMask)) {
+          // link
+//          NSLog(@"Linking file %@", path);
+          newfile = [self addFileAtPath:path toFolder:nil copy:NO];
+        } else {
+          // copy
+//          NSLog(@"Copying file %@", path);
+          newfile = [self addFileAtPath:path toFolder:nil copy:YES];
+        }
+        
+//        NSDragOperation op = [info draggingSourceOperationMask];
+//        NSLog(@"Drag op %d", op);
+//        if (op == NSDragOperationLink) {
+//        } else if (op == NSDragOperationCopy) {
+//        } else {
+//          return NO;
+//        }
 			}
       if (newfile) {
         NSTreeNode *node = [self treeNodeForObject:newfile];
@@ -1390,7 +1411,7 @@ withIntermediateDirectories:YES
 	}
 	
 	NSArray *droppedIndexPaths = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:OutlineViewNodeType]];
-	
+  
 	NSMutableArray *draggedNodes = [NSMutableArray array];
 	for (NSIndexPath *indexPath in droppedIndexPaths)
 		[draggedNodes addObject:[self nodeAtIndexPath:indexPath]];
@@ -1410,12 +1431,30 @@ withIntermediateDirectories:YES
 }
 
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)proposedParentItem proposedChildIndex:(NSInteger)proposedChildIndex;
+
+
+- (NSDragOperation)outlineView:(NSOutlineView *)anOutlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)proposedParentItem proposedChildIndex:(NSInteger)proposedChildIndex;
 {	
+//  if (outlineView.dragLeftView)
+//    return NO;
+  
 	// handle file drops from outside
 	NSPasteboard *pboard = [info draggingPasteboard];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
-		return [info draggingSourceOperationMask];
+//    NSLog(@"Info mask %d", [info draggingSourceOperationMask]);
+    
+    if ([info draggingSourceOperationMask] & NSDragOperationCopy) {
+//      NSLog(@"returning copy");
+      return  NSDragOperationCopy;
+    }
+    
+    if ([info draggingSourceOperationMask] & NSDragOperationLink) {
+//      NSLog(@"returning ling");
+      return  NSDragOperationLink;
+    }
+    
+//    NSLog(@"returning copy");
+		return NSDragOperationCopy;
 	}
 
 	
