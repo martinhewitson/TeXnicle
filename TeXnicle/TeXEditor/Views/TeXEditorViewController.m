@@ -92,6 +92,11 @@
 #pragma mark -
 #pragma TeXTextView delegate
 
+-(id)project
+{
+  return [self.delegate performSelector:@selector(project)];
+}
+
 - (NSArray*)commands
 {
 //  NSLog(@"Delegate %@", self.delegate);
