@@ -19,6 +19,7 @@
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate>
 
+-(id)project;
 -(NSArray*)listOfCitations;
 -(NSArray*)listOfReferences;
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
@@ -47,6 +48,8 @@
 	// Go to line
 	IBOutlet UKTextDocGoToBox *goToLineController;
     
+  NSMutableArray *commandList;
+  NSMutableArray *beginList;
 }
 
 @property (retain) NSTimer *highlightingTimer;
@@ -96,6 +99,7 @@
 #pragma mark -
 #pragma mark Syntax highlighting
 
+- (void) resetLineNumbers;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;
 
@@ -153,6 +157,7 @@
 
 - (NSInteger)cursorPosition;
 - (NSInteger)lineNumber;
+- (NSUInteger)characterIndexOfPoint:(NSPoint)aPoint;
 
 #pragma mark -
 #pragma mark Formatting text
@@ -163,6 +168,7 @@
 - (IBAction) indentSelection:(id)sender;
 - (IBAction) unindentSelection:(id)sender;
 
-- (void) insertImageBlockForFile:(NSString*)aFile;
+- (void) insertIncludeForFile:(NSString*)aFile atLocation:(NSUInteger)location;
+- (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 
 @end
