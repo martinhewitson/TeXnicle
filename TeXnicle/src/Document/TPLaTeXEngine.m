@@ -236,6 +236,7 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 
 - (void) reset
 {
+  abortCompile = NO;
   compilationsDone = 0;
 }
 
