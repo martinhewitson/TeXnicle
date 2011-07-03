@@ -119,12 +119,24 @@
 
 - (void) templateSelectionChanged:(NSNotification*)aNote
 {
-  [templateEditor performSelector:@selector(colorVisibleText)
-                       withObject:nil
-                       afterDelay:0.1];
-  [templateEditor performSelector:@selector(colorWholeDocument)
-                       withObject:nil
-                       afterDelay:0.2];
+  
+  NSArray *selectedObjects = [templatesController selectedObjects];
+  if ([selectedObjects count] == 1) {
+    
+    NSDictionary *selected = [selectedObjects objectAtIndex:0];
+    NSString *code = [selected valueForKey:@"Code"];
+    
+    [templateEditor scrollRectToVisible:NSZeroRect];
+    
+    [templateEditor setString:code];
+    [templateEditor didChangeText];
+    [templateEditor performSelector:@selector(colorVisibleText)
+                         withObject:nil
+                         afterDelay:0.1];
+    [templateEditor performSelector:@selector(colorWholeDocument)
+                         withObject:nil
+                         afterDelay:0.2];    
+  }
 }
 
 - (void) handleCodeDidChange:(NSNotification*)aNote
