@@ -12,6 +12,7 @@
 
 @implementation TPOutlineView
 
+@synthesize dragLeftView;
 
 
 -(NSMenu*)menuForEvent:(NSEvent*)evt 
@@ -275,9 +276,45 @@
 	
 }	
 
+//- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal 
+//{
+////  NSLog(@"draggingSourceOperationMaskForLocal: %d", isLocal);
+//  if (isLocal) return NSDragOperationMove;
+//  else return NSDragOperationCopy | NSDragOperationLink;
+//}
+
+- (BOOL)prepareForDragOperation:(id < NSDraggingInfo >)sender
+{
+//  NSLog(@"prepareForDragOperation: %d", dragLeftView);
+  if (dragLeftView)
+    return NO;
+  
+  return [super prepareForDragOperation:sender];
+}
+
+- (void)draggingEnded:(id < NSDraggingInfo >)sender
+{
+//  NSLog(@"Dragging ended");
+  if (dragLeftView) {
+    [self reloadData];
+  }
+  dragLeftView = NO;
+  [self setNeedsDisplay:YES];
+}
+
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender 
+{
+//  NSLog(@"performDragOperation: %d", dragLeftView);
+  if (dragLeftView)
+    return NO;
+  
+  return [super performDragOperation:sender];
+}
 
 - (void)draggingExited:(id < NSDraggingInfo >)sender
 {
+  dragLeftView = YES;
+  
 //  NSLog(@"Dragging from %@", sender);
   NSPasteboard *pboard = [sender draggingPasteboard];
 //  NSLog(@"Dragging exited %@", [pboard types]);
@@ -286,28 +323,43 @@
   
 //  NSFileManager *fm = [NSFileManager defaultManager];
   
-  NSString *fileString = @"";
+  // collect array of file paths
+  NSMutableArray *paths = [NSMutableArray array];
+  
   for (NSIndexPath *indexPath in droppedIndexPaths) {      
     NSManagedObject *item = [[treeController nodeAtIndexPath:indexPath] representedObject];
     if ([item isKindOfClass:[FileEntity class]]) {
-      NSString *filename = [item valueForKey:@"filepath"];
       NSString *path = [item valueForKey:@"pathOnDisk"];
-      CFStringRef fileExtension = (CFStringRef) [path pathExtension];
-//      NSLog(@"Extension %@", fileExtension);
-      CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-//      NSLog(@"UTI %@, %d", fileUTI, UTTypeConformsTo(fileUTI, kUTTypeImage));
-      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
-        NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:myfigure}\n\\end{figure}\n", filename];
-        fileString = [fileString stringByAppendingString:str];
-      } else {
-        fileString = [fileString stringByAppendingFormat:@"\\input{%@}\n", filename];
-      }
-      
+      [paths addObject:path];
     }
   }
   
+  [pboard setPropertyList:paths forType:NSFilenamesPboardType];
   
-  [pboard setString:fileString forType:NSPasteboardTypeString];
+//  [pboard writeObjects:paths forType:NSFilenamesPboardType];
+  
+//  NSString *fileString = @"";
+//  for (NSIndexPath *indexPath in droppedIndexPaths) {      
+//    NSManagedObject *item = [[treeController nodeAtIndexPath:indexPath] representedObject];
+//    if ([item isKindOfClass:[FileEntity class]]) {
+//      NSString *filename = [item valueForKey:@"filepath"];
+//      NSString *path = [item valueForKey:@"pathOnDisk"];
+//      CFStringRef fileExtension = (CFStringRef) [path pathExtension];
+////      NSLog(@"Extension %@", fileExtension);
+//      CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+////      NSLog(@"UTI %@, %d", fileUTI, UTTypeConformsTo(fileUTI, kUTTypeImage));
+//      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
+//        NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:myfigure}\n\\end{figure}\n", filename];
+//        fileString = [fileString stringByAppendingString:str];
+//      } else {
+//        fileString = [fileString stringByAppendingFormat:@"\\input{%@}\n", filename];
+//      }
+//      
+//    }
+//  }
+//  
+//  
+//  [pboard setString:fileString forType:NSPasteboardTypeString];
   //  [self setFile:[[pboard propertyListForType:NSFilenamesPboardType]objectAtIndex:0]];
   
 }

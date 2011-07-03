@@ -16,7 +16,10 @@
 	IBOutlet ProjectItemTreeController *treeController;
 	ProjectItemEntity *selectedItem;
 	NSUInteger selectedRow;
+  BOOL dragLeftView;
 }
+
+@property (assign) BOOL dragLeftView;
 
 -(NSMenu*)defaultMenuForRow:(NSInteger)row;
 - (NSMenu*)defaultMenu;
