@@ -20,6 +20,7 @@
 #import "TeXColoringEngine.h"
 #import "TPPopupListWindowController.h"
 #import "TPFoldedCodeSnippet.h"
+#import "NSString+RelativePath.h"
 
 #import "MHLineNumber.h"
 
@@ -79,12 +80,24 @@
 // Do the default setup for the text view.
 - (void) defaultSetup
 {
+//  NSLog(@"TeX TextView default setup");
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
   
 	[[self layoutManager] setAllowsNonContiguousLayout:YES];
 //	[self setTextContainerInset:NSMakeSize(3, 3)];
   [self turnOffWrapping];
   [self observePreferences];
+  
+  // set font and color
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  // basic text
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
+  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  [[self textStorage] setFont:font];
+  [[self textStorage] setForegroundColor:color];
+  [self setFont:font];
+  [self setTextColor:color];
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -332,6 +345,12 @@
 #pragma mark -
 #pragma mark Syntax highlighting
 
+- (void) resetLineNumbers
+{
+  [self.editorRuler resetLineNumbers];
+  [self setNeedsDisplay:YES];
+}
+
 - (void) colorWholeDocument
 {
 //  NSLog(@"Coloring whole document %@", [self textStorage]);
@@ -380,6 +399,7 @@
 //  NSLog(@"Did change text %@", [self string]);
   [self updateEditorRuler];  
   [self colorVisibleText];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1.0];
 }
 
 - (void)viewWillDraw
@@ -1187,7 +1207,9 @@
 
 - (void)insertText:(id)aString
 {	
-	// check if the next character or preceeding character was a text attachment
+//  NSLog(@"Insert %@", aString);
+  
+  // check if the next character or preceeding character was a text attachment
 	NSRange selRange = [self selectedRange];
 	NSRange effRange;
 	NSAttributedString *string = [self attributedString];
@@ -1195,7 +1217,13 @@
 		[super insertText:aString];
 		return;
 	}
-	
+                             
+//  // get the attributes of the preceeding character
+//  if (selRange.location > 0 && selRange.location+2<[string length]) {    
+//    NSDictionary *dict = [[self layoutManager] temporaryAttributesAtCharacterIndex:selRange.location-1 effectiveRange:&effRange];
+//    [[self layoutManager] addTemporaryAttributes:dict forCharacterRange:NSMakeRange(selRange.location, 2)];
+//  }
+//	
 	if (selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
 																			atIndex:selRange.location
@@ -1269,10 +1297,8 @@
 	} else {
 		[super insertText:aString];
 	}
-	
-	
+		
 	[self wrapLine];
-	
 }
 
 - (void) insertNewline:(id)sender
@@ -1737,6 +1763,12 @@
   
   NSLog(@"pboard types: %@", [pboard types]);
   
+  NSLog(@"%@", sender);
+  
+  NSPoint draggingLocation = [sender draggingLocation];
+  draggingLocation = [self convertPoint:draggingLocation fromView:nil];
+  NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
+  
 //	NSDragOperation sourceDragMask= [sender draggingSourceOperationMask];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] )
 	{
@@ -1746,11 +1778,18 @@
       CFStringRef fileExtension = (CFStringRef) [file pathExtension];
       CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
       
-      if (UTTypeConformsTo(fileUTI, kUTTypeImage)) {
-        [self insertImageBlockForFile:file];        
+      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
+        [self insertImageBlockForFile:file atLocation:characterIndex];        
         CFRelease(fileUTI);
         return YES;
       }
+      
+      if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
+        [self insertIncludeForFile:file atLocation:characterIndex];        
+        CFRelease(fileUTI);
+        return YES;
+      }
+      
       CFRelease(fileUTI);
       
     }
@@ -1759,15 +1798,65 @@
 	return [super performDragOperation:sender];
 }
 
+- (NSUInteger)characterIndexOfPoint:(NSPoint)aPoint
+{
+  NSUInteger glyphIndex;
+  NSLayoutManager *layoutManager = [self layoutManager];
+  CGFloat fraction;
+  NSRange range;
+  
+  range = [layoutManager glyphRangeForTextContainer:[self textContainer]];
+  glyphIndex = [layoutManager glyphIndexForPoint:aPoint
+                                 inTextContainer:[self textContainer]
+                  fractionOfDistanceThroughGlyph:&fraction];
+  
+  if( fraction > 0.5 ) glyphIndex++;
+  
+  if( glyphIndex == NSMaxRange(range) ) 
+    return  [[self textStorage] length];
+  else 
+    return [layoutManager characterIndexForGlyphAtIndex:glyphIndex];
+  
+}
+
+
 - (void)concludeDragOperation:(id < NSDraggingInfo >)sender
 {
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
-- (void) insertImageBlockForFile:(NSString*)aFile
+- (void) insertIncludeForFile:(NSString*)aFile atLocation:(NSUInteger)location
 {
-  NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:myfigure}\n\\end{figure}\n", aFile];
-  NSRange sel = [self selectedRange];
+  id project = [[self delegate] performSelector:@selector(project)];
+  NSString *projectFolder = [project valueForKey:@"folder"];
+  NSString *file = [[aFile relativePathTo:projectFolder] stringByAppendingPathComponent:[aFile lastPathComponent]];
+
+  NSString *str = [NSString stringWithFormat:@"\\input{%@}", file];
+  NSRange sel = NSMakeRange(location-1, 0);
+  [self setSelectedRange:sel];
+  [self insertText:str];
+  [self colorVisibleText];
+  
+  NSRange insertRange = NSMakeRange(sel.location, [str length]);
+  [self setSelectedRange:insertRange];
+  [[self layoutManager] ensureLayoutForCharacterRange:insertRange];
+}
+
+
+- (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location
+{
+  id project = [[self delegate] performSelector:@selector(project)];
+  NSString *projectFolder = [project valueForKey:@"folder"];
+  NSString *file = [projectFolder relativePathTo:aFile];
+  
+//  NSLog(@"File %@", aFile);
+//  NSLog(@"Project %@", projectFolder);
+//  NSLog(@"computed path %@", file);
+  
+  NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
+  NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:%@}\n\\end{figure}\n", file, name];
+  NSRange sel = NSMakeRange(location-1, 0);
+  [self setSelectedRange:sel];
   [self insertText:str];
   [self colorVisibleText];
   
