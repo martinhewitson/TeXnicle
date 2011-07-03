@@ -17,7 +17,7 @@
 
 	id mainDocument;
 	FileEntity *file;
-	
+	TeXEditorViewController *texEditorViewController;
 }
 
 @property (readwrite,assign) FileEntity *file;
