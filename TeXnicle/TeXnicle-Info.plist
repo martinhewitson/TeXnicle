@@ -53,10 +53,14 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>TeXnicle_Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>TeXnicle Help</string>
 	<key>CFBundleIconFile</key>
 	<string>TeXnicle_4</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bobsoft.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.bobsoft.TeXnicle</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -75,6 +79,8 @@
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (c) 2010, Martin Hewitson</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -82,12 +88,32 @@
 	<key>NSServices</key>
 	<array/>
 	<key>UTExportedTypeDeclarations</key>
-	<array/>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>TeXnicle Project</string>
+			<key>UTTypeIconFile</key>
+			<string>TeXnicle_4</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.bobsoft.TeXnicle.texnicle</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>texnicle</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/xml</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
-  <key>CFBundleHelpBookFolder</key>
-  <string>TeXnicle_Help</string>
-  <key>CFBundleHelpBookName</key>  
-  <string>TeXnicle Help</string>
 </dict>
 </plist>
