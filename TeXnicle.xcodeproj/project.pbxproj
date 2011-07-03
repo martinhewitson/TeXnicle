@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502897A139BE63900A88E09 /* NSString+RelativePath.m */; };
 		250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
 		250772FB138E5D81000F1118 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250772F9138E5D81000F1118 /* InfoPlist.strings */; };
 		250772FE138E5D81000F1118 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250772FD138E5D81000F1118 /* main.m */; };
@@ -14,7 +15,6 @@
 		25077304138E5D81000F1118 /* TeXProjectDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077303138E5D81000F1118 /* TeXProjectDocument.m */; };
 		25077307138E5D82000F1118 /* TeXProjectDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25077305138E5D82000F1118 /* TeXProjectDocument.xib */; };
 		2507730A138E5D82000F1118 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25077308138E5D82000F1118 /* MainMenu.xib */; };
-		25077315138E5D82000F1118 /* TeXnicleImporter.mdimporter in Resources */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */; };
 		25077317138E5D82000F1118 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25077316138E5D82000F1118 /* CoreServices.framework */; };
 		25077319138E5D82000F1118 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25077318138E5D82000F1118 /* CoreFoundation.framework */; };
 		2507731B138E5D82000F1118 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2507731A138E5D82000F1118 /* CoreData.framework */; };
@@ -113,6 +113,8 @@
 		253E5E3313951DD300566E23 /* LibraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2D13951DD300566E23 /* LibraryController.m */; };
 		253E5E3413951DD300566E23 /* LibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */; };
 		253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E3113951DD300566E23 /* TPClippingsTable.m */; };
+		253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FA713A2151B00720CD0 /* zoomIn.icns */; };
+		253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FAA13A2157C00720CD0 /* zoomOut.icns */; };
 		25717DA91392D16200955620 /* palette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25717C731392D16200955620 /* palette.plist */; };
 		25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C751392D16200955620 /* SymbolTableDelegate.m */; };
 		25717DAC1392D16200955620 /* PaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C791392D16200955620 /* PaletteController.m */; };
@@ -184,6 +186,10 @@
 		25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */ = {isa = PBXBuildFile; fileRef = 25CD0E9B139959D3004EB857 /* TeXnicle_Help */; };
 		25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */; };
 		25D74AEE1397F90E0074A5A2 /* MHRoundedBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D74AED1397F90E0074A5A2 /* MHRoundedBottomView.m */; };
+		25E0812D13A11A9000898596 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E0812C13A11A9000898596 /* Quartz.framework */; };
+		25E50247139FC9F5004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
+		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
+		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */; };
 		25FD408F13913EDB0037CB54 /* FontNameToDisplayNameTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */; };
 		25FD409213913EDB0037CB54 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408813913EDB0037CB54 /* PrefsWindowController.m */; };
@@ -206,7 +212,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		25E5024A13A09F7A004A983E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = ../Library/Spotlight;
+			dstSubfolderSpec = 7;
+			files = (
+				25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		25028979139BE63900A88E09 /* NSString+RelativePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RelativePath.h"; sourceTree = "<group>"; };
+		2502897A139BE63900A88E09 /* NSString+RelativePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RelativePath.m"; sourceTree = "<group>"; };
+		25028984139BE8CA00A88E09 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		25028986139BE8CB00A88E09 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		250289B9139BEAAA00A88E09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		250772EC138E5D81000F1118 /* TeXnicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeXnicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250772F0138E5D81000F1118 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		250772F3138E5D81000F1118 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -221,7 +245,7 @@
 		25077303138E5D81000F1118 /* TeXProjectDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeXProjectDocument.m; sourceTree = "<group>"; };
 		25077306138E5D82000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TeXProjectDocument.xib; sourceTree = "<group>"; };
 		25077309138E5D82000F1118 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXnicleImporter.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
+		25077312138E5D82000F1118 /* TeXnicle.mdimporter */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXnicle.mdimporter; sourceTree = BUILT_PRODUCTS_DIR; };
 		25077316138E5D82000F1118 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		25077318138E5D82000F1118 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2507731A138E5D82000F1118 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -367,6 +391,8 @@
 		253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryImageGenerator.m; sourceTree = "<group>"; };
 		253E5E3013951DD300566E23 /* TPClippingsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPClippingsTable.h; sourceTree = "<group>"; };
 		253E5E3113951DD300566E23 /* TPClippingsTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPClippingsTable.m; sourceTree = "<group>"; };
+		253E8FA713A2151B00720CD0 /* zoomIn.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomIn.icns; sourceTree = "<group>"; };
+		253E8FAA13A2157C00720CD0 /* zoomOut.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomOut.icns; sourceTree = "<group>"; };
 		25717C731392D16200955620 /* palette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = palette.plist; sourceTree = "<group>"; };
 		25717C741392D16200955620 /* SymbolTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableDelegate.h; sourceTree = "<group>"; };
 		25717C751392D16200955620 /* SymbolTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableDelegate.m; sourceTree = "<group>"; };
@@ -491,6 +517,8 @@
 		25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedTopView.m; sourceTree = "<group>"; };
 		25D74AEC1397F90E0074A5A2 /* MHRoundedBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedBottomView.h; sourceTree = "<group>"; };
 		25D74AED1397F90E0074A5A2 /* MHRoundedBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedBottomView.m; sourceTree = "<group>"; };
+		25E0812C13A11A9000898596 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
 		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontNameToDisplayNameTransformer.h; sourceTree = "<group>"; };
@@ -513,6 +541,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E0812D13A11A9000898596 /* Quartz.framework in Frameworks */,
 				257B47A3138E5E9800ED02C4 /* libicucore.dylib in Frameworks */,
 				250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */,
 			);
@@ -535,6 +564,8 @@
 		250772E1138E5D81000F1118 = {
 			isa = PBXGroup;
 			children = (
+				25E0812C13A11A9000898596 /* Quartz.framework */,
+				250289B9139BEAAA00A88E09 /* Foundation.framework */,
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
 				2507731E138E5D82000F1118 /* TeXnicleImporter */,
@@ -547,7 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				250772EC138E5D81000F1118 /* TeXnicle.app */,
-				25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */,
+				25077312138E5D82000F1118 /* TeXnicle.mdimporter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -561,6 +592,8 @@
 				25077318138E5D82000F1118 /* CoreFoundation.framework */,
 				2507731A138E5D82000F1118 /* CoreData.framework */,
 				2507731C138E5D82000F1118 /* Foundation.framework */,
+				25028984139BE8CA00A88E09 /* QuickLook.framework */,
+				25028986139BE8CB00A88E09 /* ApplicationServices.framework */,
 				250772F2138E5D81000F1118 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -636,6 +669,7 @@
 				25077321138E5D82000F1118 /* InfoPlist.strings */,
 				25077324138E5D82000F1118 /* TeXnicleImporter-Prefix.pch */,
 				25077325138E5D82000F1118 /* main.c */,
+				25E50246139FC9F5004A983E /* schema.xml */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -751,9 +785,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */,
-				252144C51398CA9100656D3F /* findTabBarImage.icns */,
-				25179BB413961B5300F72CD2 /* startup_background.png */,
+				253E8FAA13A2157C00720CD0 /* zoomOut.icns */,
+				253E8FA713A2151B00720CD0 /* zoomIn.icns */,
 				25179BB21396174B00F72CD2 /* existingProject.icns */,
 				25179BB0139616D400F72CD2 /* articleProject.icns */,
 				25179BAE139615D000F72CD2 /* emptyProject.icns */,
@@ -761,14 +794,17 @@
 				25179BA0139613D300F72CD2 /* TeXnicle_Doc.icns */,
 				25179B9D1396134400F72CD2 /* TeXnicle_4.icns */,
 				2528E86113953BAC00834921 /* trash.icns */,
-				25717DB61392DF8100955620 /* resizeImage.png */,
 				251FC6FF1392822200DB2E3B /* newTeXDoc.icns */,
 				251FC7001392822200DB2E3B /* newDrawer_ch.icns */,
 				251FC6FB1392781F00DB2E3B /* buildAndView.icns */,
-				251FC6FC1392781F00DB2E3B /* typeset.icns */,
 				25FD40A1139164A20037CB54 /* engine.icns */,
 				25FD40A2139164A20037CB54 /* fontsAndColors.icns */,
 				25FD40A3139164A30037CB54 /* templates.icns */,
+				252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */,
+				252144C51398CA9100656D3F /* findTabBarImage.icns */,
+				25179BB413961B5300F72CD2 /* startup_background.png */,
+				25717DB61392DF8100955620 /* resizeImage.png */,
+				251FC6FC1392781F00DB2E3B /* typeset.icns */,
 				25194944138FB9F7007029E5 /* outlineTabBarImageDepressed.icns */,
 				25194945138FB9F7007029E5 /* outlineTabBarImage.icns */,
 				25194940138FB85A007029E5 /* libraryTabBarImage.icns */,
@@ -908,6 +944,8 @@
 		257B4731138E5E9000ED02C4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				25028979139BE63900A88E09 /* NSString+RelativePath.h */,
+				2502897A139BE63900A88E09 /* NSString+RelativePath.m */,
 				257B4732138E5E9000ED02C4 /* NSArray+Color.h */,
 				257B4733138E5E9000ED02C4 /* NSArray+Color.m */,
 				257B4734138E5E9000ED02C4 /* NSArray+Extensions.h */,
@@ -1129,6 +1167,7 @@
 				250772E8138E5D81000F1118 /* Sources */,
 				250772E9138E5D81000F1118 /* Frameworks */,
 				250772EA138E5D81000F1118 /* Resources */,
+				25E5024A13A09F7A004A983E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1154,7 +1193,7 @@
 			);
 			name = TeXnicleImporter;
 			productName = TeXnicleImporter;
-			productReference = 25077312138E5D82000F1118 /* TeXnicleImporter.mdimporter */;
+			productReference = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1192,7 +1231,6 @@
 				25077301138E5D81000F1118 /* Credits.rtf in Resources */,
 				25077307138E5D82000F1118 /* TeXProjectDocument.xib in Resources */,
 				2507730A138E5D82000F1118 /* MainMenu.xib in Resources */,
-				25077315138E5D82000F1118 /* TeXnicleImporter.mdimporter in Resources */,
 				257B4783138E5E9000ED02C4 /* Commands.plist in Resources */,
 				257B4786138E5E9000ED02C4 /* TPPopuplistView.xib in Resources */,
 				257B478E138E5E9000ED02C4 /* disclosure_down.graffle in Resources */,
@@ -1264,6 +1302,9 @@
 				252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */,
 				252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */,
 				25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */,
+				25E50247139FC9F5004A983E /* schema.xml in Resources */,
+				253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */,
+				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1271,6 +1312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E5024C13A0B439004A983E /* schema.xml in Resources */,
 				25077323138E5D82000F1118 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1383,6 +1425,7 @@
 				252144C31398C24600656D3F /* FindInProjectController.m in Sources */,
 				252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */,
 				25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */,
+				2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,7 +1507,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -1478,7 +1521,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
@@ -1494,7 +1537,7 @@
 				INFOPLIST_FILE = "TeXnicleImporter/TeXnicleImporter-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TeXnicle;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -1512,7 +1555,7 @@
 				INFOPLIST_FILE = "TeXnicleImporter/TeXnicleImporter-Info.plist";
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TeXnicle;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -1530,6 +1573,7 @@
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1546,6 +1590,7 @@
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -1,0 +1,205 @@
+
+\subsection{Parameter Estimation via Linear-Least-Squares Fitting}
+\label{sec:linearfit_param_est}
+
+As stated earlier, given that we will have reasonably accurate starting values for many of the
+parameters we are trying to identify, an obvious way to determine the parameter
+values is via a standard linear least-squares fitting algorithm.
+
+Since we deal with finite length time-series then the response of the system, $\mathbf{G}$,
+to a given input, $\mathbf{o_i}\left(n\right)$, can be represented in
+the frequency domain as:
+
+\begin{equation} 	
+\mathbf{o}\left(\Omega\right) = \mathbf{G}\left(\Omega\right) \mathbf{o_i}\left(\Omega\right),
+	\label{eqn:filtfreq} 
+\end{equation} 
+where $\Omega$ is the normalised angular frequency defined as $\Omega = 2 \pi f /
+f_{\rm s}$, where $f_{\rm s}$ is the sampling frequency of the data. As the time
+series is of finite duration, $\Omega$ can assume only finite values $\Omega =
+\frac{2 \pi k}{N} \, k = 0, \ldots, \frac{N}{2}$.  The interferometer output vector
+is labelled $\mathbf{o}$, and $\mathbf{o_i}$ is the guidance input vector on
+the drag-free and electrostatic suspension control loops. $\mathbf{G}\left(\Omega\right)$
+depends not only from the frequencies, $\Omega$, but also on the dynamical
+parameters, \ie, $\mathbf{G} \rightarrow \mathbf{G}\left(\Omega, p_1, \ldots,
+p_M\right)$. Equation (\ref{eqn:filtfreq}) can be Taylor-expanded to the first
+order in terms of the parameters:
+
+\begin{eqnarray}
+	o\left(\Omega\right) &\approx& \mathbf{G}\left(\Omega, p_{1_0}, \ldots, p_{M_0}\right) o_i\left(\Omega\right) + \ldots \nonumber\\
+&& \sum_{i=1}^{M} \delta p_i \left[\frac{\partial \mathbf{G}\left(\Omega, p_{1}, \ldots, p_{M}\right)}{\partial p_i}\right]_{p_i \rightarrow p_{i_0}} o_i\left(\Omega\right).
+	\label{eqn:Taylor}
+\end{eqnarray}
+The term  $\mathbf{G}\left(\Omega, p_{1_0}, \ldots, p_{M_0}\right) o_i\left(\Omega\right)$
+is the so-called `nominal response' of the system, \ie, the response of the
+system computed with the initial values of the dynamical parameters,
+$p_{1_0}, \ldots, p_{M_0}$. The second term on the right-hand of the equal sign
+is the linear term which contains the unknown parameters $\delta p_i$, $i = 1, \ldots,
+M$. We will refer to the terms $\left[\frac{\partial \mathbf{G}\left(\Omega,
+p_{1}, \ldots, p_{M}\right)}{\partial p_i}\right]_{p_i \rightarrow p_{i_0}} o_i\left(\Omega\right)$
+as the fit basis.
+
+Since the system model is represented in the frequency domain and the data series are
+in time domain, the linear fit operation corresponds to the solution of the system
+of coupled equations:
+
+\begin{eqnarray}
+	o\left(n\right) - \mathcal{F}^{-1}\left\{ \mathbf{G}\left(\Omega, p_{1_0}, \ldots, p_{M_0}\right) o_i\left(\Omega\right) \right\} = \ldots \nonumber \\
+	\hspace{1cm}\sum_{i=1}^{M} \delta p_i \, \mathcal{F}^{-1} \left\{ \left[\frac{\partial \mathbf{G}\left(\Omega, p_{1}, \ldots, p_{M}\right)}{\partial p_i}\right]_{p_i \rightarrow p_{i_0}} o_i\left(\Omega\right) \right\} \nonumber \\
+	n = 0, \ldots, N-1.
+	\label{eqn:linearfit}
+\end{eqnarray}
+
+We indicated the inverse Fourier transform with $\mathcal{F}^{-1}$ and applied its linearity
+properties. Once the system of equations is solved, the final estimation
+for the dynamical parameters will be $p_i = p_{i_0} + \delta p_i$ for $i = 1, \ldots,
+M$. The procedure is iterated over in order to arrive at a minimum least square
+solution and can be summarised by the following steps:
+
+\begin{enumerate}
+
+\item \textbf{Whiten data}. The noise on our data is non-white, and the individual
+ outputs are essentially uncorrelated since the cross-coherence between the two
+output channels, given the typical values of the cross-coupling terms, is consistent
+with zero. In order to estimate the uncertainties on the recovered parameter
+values, we employ standard text-book methods\,\footnote{To estimate the uncertainties,
+the Jacobian, $J$, of the $\chi^2$ function is computed and then used to estimate
+the Hessian as $H=J^{\rm T}J$, which is then inverted to give an estimation of the covariance
+matrix. See Chapter 15 of \cite{numrec} for more details.} applicable when doing
+a linear least-squares fit, which then forces us to whiten the data with a whitening
+filter before the fitting operation.
+
+\item \textbf{Basis change}\label{step:svd}. The fit basis is composed of linearly dependent elements
+since several parameters are correlated. The system cannot
+be solved under such conditions, therefore we perform a change of basis by using the singular
+value decomposition (SVD) algorithm\,\cite{numrec}. The SVD ensures that we deal with a
+linearly independent fit basis.
+
+\item \label{whitenstep}\textbf{Generate whitened templates}. In order to correctly
+perform the fit, both the nominal response templates and the fit basis templates need to be whitened
+using the same whitening filter described above.
+
+\item \textbf{Fit}. The system of normal equations is solved using standard techniques
+in order to get an estimate of the parameters.
+
+\item \textbf{Check convergence and goto \ref{whitenstep})}. The process is iterated
+until the convergence of the parameters is reached. At each step the nominal
+value of each of the parameters is updated with the current knowledge. This helps reduce
+any bias that our linear estimator gains due to the initial parameter values.
+If we call $p_{i_\Delta}$ the change in the parameter $p_i$ from one iteration
+to the next, and $\sigma_{p_i}$ the estimated error on $p_i$, then convergence is
+deemed to be achieved when the ratio ${\sigma_{p_i}}/{p_{i_\Delta}}$ falls
+below a user-settable threshold (here we took 1 part in $10^5$).
+
+%We stop the process
+%when the mean square error is in a minimum and $\delta p_i^2$ is one tenth its
+%squared error.
+
+% $p_{i0_{\rm new}}
+%= p_{i0_{\rm old}} + \delta p_i$
+
+\item \textbf{Change basis back to physical parameters}. At this stage, we collect
+the parameter estimates from different channels,  experiments and on-ground measurements
+and apply the conversion from the orthogonal fit parameters back to the desired physical
+parameters. (Essentially, we undo the SVD applied in step \ref{step:svd}).
+
+\end{enumerate}
+
+\subsection{Application to x-axis system identification}
+
+As an example, this procedure was applied to the two simulated experiments described
+in \ref{sec:guidance_experiments}. The simulations were run with a sampling frequency
+of 10\,Hz.  In this case, we fit the parameters listed in Table~\ref{tab:params_est}; the
+recovered parameter estimates are also given in that table. The remaining system
+parameters ($S_{11}$, $S_{12}$, and $S_{22}$) were given values as if they were
+measured on ground.
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{|c|c|c|c|} \hline
+	\rowcolor[rgb]{0.8,0.8,0.8} Parameter & \multicolumn{2}{|c|c|}{\rowcolor[rgb]{0.8,0.8,0.8} Linear Fit Results} & \rowcolor[rgb]{0.8,0.8,0.8} Expected Errors \\ \hline \hline
+ \rowcolor[rgb]{0.9,0.9,0.9}        & Value                   & $\sigma$             & $\sigma$                \\ \hline
+    $A_{\rm df}$                    & 1.08                    & 0.0005            & 0.0004               \\ 
+    $A_{\rm sus}$                   &  1.0                    & $6\times10^{-5}$  & $2.2\times10^{-5}$   \\ 
+    $S_{21}$                        & $1.1\times10^{-6}$      & $4\times10^{-7}$  & $3\times10^{-7}$     \\ 
+    $\omega_1^2$\,$[{\rm s}^{-2}]$          & $-1.32\times10^{-6}$    & $4\times10^{-9}$  & $1.4\times10^{-9}$   \\ 
+    $\omega_{\Delta}^2$\,$[{\rm s}^{-2}]$   & $-7.16\times10^{-7}$    & $6\times10^{-10}$ & $4.7\times10^{-10}$  \\ 
+    $\taudf$\,[s]                   & 0.417                   & 0.002             & 0.001                \\ 
+    $\tausus$\,[s]                  & 0.201                   & 0.003             & 0.001 \\ 
+    $D_{1}$\,[s]                    & 0.197                   & 0.0003            & 0.0002\\ 
+    $D_{12}$\,[s]                   & 0.2                     & 0.009             & 0.003\\
+\hline
+\end{tabular}
+\end{center}
+
+\caption{The parameter values obtained from linear fit analysis of the two $x$-axis
+system identification experiments described in Section~\ref{sec:xaxis_experiments}.
+The last column gives an estimate of the expected errors obtained from the
+inverse of a Fisher matrix calculation. The true, underlying parameters of the
+system are not  available for comparison since we approximate the system using our
+linear model. As such, the quality of the fit has to be judged by inspection
+of the residuals.}
+
+\label{tab:params_est}
+\end{table}
+
+Having performed the fit, we can go on to compare the residuals after subtracting
+the (fitted) template waveform from the data. Figure~\ref{fig:o12_1_res_fd} shows
+the power spectral density of the residuals of the whitened output of the $X_{12}$
+interferometer from experiment 1.1 (see Section \ref{sec:xaxis_experiments})
+before and after the fit procedure. We see that the residuals after the fit are
+consistent with white noise, as expected. It is difficult to directly compare
+the parameter values we estimated during the fitting process to the `true' values
+present in the simulator, since the model used in the data analysis, and the model
+used in the simulator are parameterised differently. However, some of the parameters
+can be compared. For example, the estimations of the stiffness of the
+two test-masses were in agreement with the those present in the simulator.
+
+%\begin{figure}[htbp] 
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{images/o12_1_res_td.pdf}
+% 	\caption{My Nice Figure.}
+%	\label{fig:o12_1_res_td}
+%\end{figure}
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.65\textwidth]{images/o12_1_res_fd.pdf}
+
+\caption{The spectrum of the whitened residuals for the differential TM position measured 
+during experiment 1.1. The upper (red) trace shows the residuals using the starting
+parameter values; the lower (blue) trace shows the residuals after performing
+the fit procedure. The spectra are computed using a single window on the data,
+\ie, no averaging is performed.}
+
+	\label{fig:o12_1_res_fd}
+\end{figure}
+
+
+
+%\begin{table}[htdp]
+%\begin{center}
+%\begin{tabular}{|c|c|c|p{6cm}|} \hline
+%	\rowcolor[rgb]{0.8,0.8,0.8} Parameter & Value & Sigma \\ \hline \hline
+%    $H_{\rm df}$ & 1.07 & 0.0005 \\ \hline
+%    $H_{\rm sus}$ & 1.0 & 0.0002 \\ \hline
+%    $S_{11}$ & 1.0 & 0.0001 \\ \hline 
+%    $S_{12}$ & $-3\times10^-{12}$ & 0.001 \\ \hline
+%    $S_{21}$ & $1.2\times10^{-6}$ & $4\times10^{-7}$ \\ \hline
+%    $S_{22}$ & 1.0 & 0.0001 \\ \hline
+%    $\omega_1^2$ & $-1.32\times10^{-6}$\,[s^{-2}] & $9.1\times10^{-9}$ \\ \hline
+%    $\omega_{12}^2$ & $-2.03\times10^{-6}$ [s^{-2}] & $9.2\times10^{-9}$ \\ \hline
+%    $\omega_{\Delta}^2$ & $-7.2\times10^{-7}$ [s^{-2}]& $6.6\times10^{-10}$ \\ \hline
+%    $\tau_1$ & 0.186 [s]& 0.0014 \\ \hline
+%    $\tau_2$ & -0.004 [s]& 0.006 \\ \hline
+%    $D_{1}$ & 0.11 [s] & 0.0002 \\ \hline
+%    $D_{1}$ & 0.10 [s] & 0.02  \\ \hline
+%
+%\end{tabular}
+%\end{center}
+%\caption{The parameter values recovered from the simulation of the $x$-axis system identification
+%operation exercise.}
+%\label{tab:params}
+%\end{table}
+
+

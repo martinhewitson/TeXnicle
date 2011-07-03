@@ -1,0 +1,347 @@
+TTeXnicleQuicklook
+v3
+r1
+cCheck dependencies
+cProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist TeXnicleQuicklook/TeXnicleQuicklook-Info.plist
+cProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook normal x86_64
+cCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleQuicklook/en.lproj/InfoPlist.strings
+cTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004DCEB59600000000000000EE
+t1305392534
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices
+c000000004DA341E6000000000001A384
+t1302544870
+s107396
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+c000000004DA341E700000000000830F8
+t1302544871
+s536824
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFPlugInCOM.h
+c000000004CC3E8CB0000000000000E87
+t1287907531
+s3719
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
+c000000004CC3E8CB0000000000000AF4
+t1287907531
+s2804
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreServices.framework/CoreServices
+c000000004DA341E7000000000001A854
+t1302544871
+s108628
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/CoreServices.framework/Headers/CoreServices.h
+c000000004B90FA5D0000000000000401
+t1267792477
+s1025
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004DA341E700000000000C7160
+t1302544871
+s815456
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuickLook.framework/Headers/QuickLook.h
+c000000004B73BFAC0000000000000165
+t1265876908
+s357
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuickLook.framework/QuickLook
+c000000004DA341E90000000000033CFC
+t1302544873
+s212220
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m
+c000000004DEBB34C0000000000000312
+t1307292492
+s786
+i<CoreFoundation/CoreFoundation.h>
+i<CoreServices/CoreServices.h>
+i<QuickLook/QuickLook.h>
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m
+c000000004DEBB19E000000000000034B
+t1307292062
+s843
+i<CoreFoundation/CoreFoundation.h>
+i<CoreServices/CoreServices.h>
+i<QuickLook/QuickLook.h>
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch
+c000000004DEBB19E0000000000000072
+t1307292062
+s114
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/en.lproj/InfoPlist.strings
+c000000004DEBB19E000000000000002D
+t1307292062
+s45
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c
+c000000004DEBB19F000000000000249C
+t1307292063
+s9372
+i<CoreFoundation/CoreFoundation.h>
+i<CoreFoundation/CFPlugInCOM.h>
+i<CoreServices/CoreServices.h>
+i<QuickLook/QuickLook.h>
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator
+t1307292461
+s102
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist
+t1307292393
+s2144
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook
+t1307292460
+s16380
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj/InfoPlist.strings
+t1307292461
+s92
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL-29F7EB27499BA36A.o
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL-D647A5F35AF17B5E.o
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o
+t1307292460
+s3540
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL-38F52CD2E6AB8368.o
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL-E544E79EF8015B5C.o
+t2
+s0
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o
+t1307292460
+s3860
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/TeXnicleQuicklook.LinkFileList
+c000000004DEBB2E900000000000001B0
+t1307292393
+s432
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o
+t1307292394
+s12112
+
+N/var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth
+t1307292393
+s63596
+
+N/var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth
+t1307292460
+s65092
+
+NTeXnicleQuicklook/TeXnicleQuicklook-Info.plist
+c000000004DEBB19E00000000000006EF
+t1307292062
+s1775
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c
+r0
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m
+r0
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c
+r0
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m
+r0
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c
+r0
+
+CCheck dependencies
+r0
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies95647d1eef9bb341^01a2ac1eef9bb341^---0#1#0#--18"Check dependencies
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL-29F7EB27499BA36A.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL-D647A5F35AF17B5E.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s328985193.617234
+e328985193.649858
+r0
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+oclang: error: no such file or directory: '/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c'
+oclang: error: no input files
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.cf31f9e69ea9bb341^7e8aa769ea9bb341^-223"clang: error: no such file or directory: '/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c'clang: error: no input filesCommand /Developer/usr/bin/clang failed with exit code 11(21%IDEActivityLogMessage2@56"Command /Developer/usr/bin/clang failed with exit code 1-328985193#18446744073709551615#0#-2#--14"Semantic Issue--0#0#0#-19%DVTDocumentLocation3@109"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c0000204d2205f041^2140"CompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o TeXnicleQuicklook/GeneratePreviewForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s328986398.682099
+e328986399.237097
+r1
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m:13:6: warning: #warning To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c [-W#warnings,5]
+o     #warning To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c
+o      ^
+o1 warning generated.
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m1dc8ae1eef9bb341^89b13c1fef9bb341^-389"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m:13:6: warning: #warning To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c [-W#warnings,5]     #warning To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c      ^1 warning generated.1(21%IDEActivityLogMessage2@114"#warning To complete your generator please implement the function GeneratePreviewForURL in GeneratePreviewForURL.c-328986399#0#240#-1#-23%DVTTextDocumentLocation3@109"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m0000000000000000^12#5#12#5#18446744073709551615#0#18"#warning Directive--0#0#0#-19%DVTDocumentLocation4@109"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m0000000000000000^2160"CompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o TeXnicleQuicklook/GeneratePreviewForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GeneratePreviewForURL.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GeneratePreviewForURL.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL-38F52CD2E6AB8368.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL-E544E79EF8015B5C.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s328985193.616517
+e328985193.649938
+r0
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+oclang: error: no such file or directory: '/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c'
+oclang: error: no input files
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c95f39d69ea9bb341^d595a769ea9bb341^-225"clang: error: no such file or directory: '/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c'clang: error: no input filesCommand /Developer/usr/bin/clang failed with exit code 11(21%IDEActivityLogMessage2@56"Command /Developer/usr/bin/clang failed with exit code 1-328985193#18446744073709551615#0#-2#--14"Semantic Issue--0#0#0#-19%DVTDocumentLocation3@111"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c0000204d2205f041^2148"CompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o TeXnicleQuicklook/GenerateThumbnailForURL.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s328985260.406072
+e328985260.796128
+r1
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m:13:6: warning: #warning To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c [-W#warnings,5]
+o     #warning To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c
+o      ^
+o1 warning generated.
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m8f1d68acea9bb341^bc77ccacea9bb341^-399"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m:13:6: warning: #warning To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c [-W#warnings,5]     #warning To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c      ^1 warning generated.1(21%IDEActivityLogMessage2@118"#warning To complete your generator please implement the function GenerateThumbnailForURL in GenerateThumbnailForURL.c-328985260#0#246#-1#-23%DVTTextDocumentLocation3@111"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m0000000000000000^12#5#12#5#18446744073709551615#0#18"#warning Directive--0#0#0#-19%DVTDocumentLocation4@111"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m0000000000000000^2168"CompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o TeXnicleQuicklook/GenerateThumbnailForURL.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/GenerateThumbnailForURL.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/GenerateThumbnailForURL.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s328985193.617808
+e328985194.059369
+r1
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c6b469e69ea9bb341^9baf1a6aea9bb341^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c0000000000000000^2072"CompileC build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o TeXnicleQuicklook/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/main.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/main.o
+
+CCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleQuicklook/en.lproj/InfoPlist.strings
+s328985260.903931
+e328985261.112528
+r1
+xCopyStringsFile
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj/InfoPlist.strings
+xTeXnicleQuicklook/en.lproj/InfoPlist.strings
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection49"Copy TeXnicleQuicklook/en.lproj/InfoPlist.strings4a7fe7acea9bb341^c2862fadea9bb341^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/en.lproj/InfoPlist.strings0000000000000000^468"CopyStringsFile build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleQuicklook/en.lproj/InfoPlist.strings    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding UTF-16 --outdir /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Resources/en.lproj -- TeXnicleQuicklook/en.lproj/InfoPlist.strings
+
+CLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook normal x86_64
+s328986399.237316
+e328986399.387552
+r1
+xLd
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook
+xnormal
+xx86_64
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection131"Link /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook66d83c1fef9bb341^f435631fef9bb341^---0#0#0#--861"Ld build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook normal x86_64    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/clang -arch x86_64 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -filelist /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/Objects-normal/x86_64/TeXnicleQuicklook.LinkFileList -mmacosx-version-min=10.6 -framework Foundation -framework QuickLook -framework ApplicationServices -framework CoreServices -framework CoreFoundation -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/MacOS/TeXnicleQuicklook
+
+CProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist TeXnicleQuicklook/TeXnicleQuicklook-Info.plist
+s328985193.532393
+e328985193.536411
+r1
+xProcessInfoPlistFile
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist
+xTeXnicleQuicklook/TeXnicleQuicklook-Info.plist
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection54"Process TeXnicleQuicklook/TeXnicleQuicklook-Info.plist03608869ea9bb341^39d29d69ea9bb341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Info.plist0000000000000000^420"ProcessInfoPlistFile build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist TeXnicleQuicklook/TeXnicleQuicklook-Info.plist    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-infoPlistUtility TeXnicleQuicklook/TeXnicleQuicklook-Info.plist -expandbuildsettings -platform macosx -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator/Contents/Info.plist
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleQuicklook-Prefix-aiabhyvtsxpoqlfswrwrwrldyicp_ast/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleQuicklook-Prefix-evbmqlxkqfuteseyskuvfkpyvhnb_ast/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s328985193.537881
+e328985193.616271
+r1
+xProcessPCH
+x/var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth
+xTeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection57"Precompile TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch95d48969ea9bb341^41d89d69ea9bb341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch0000000000000000^2093"ProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch -o /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-aratjkgqoovgpvhbodfomjzawmbk/TeXnicleQuicklook-Prefix.pch.pth
+
+CProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s328985260.373861
+e328985260.405560
+r1
+xProcessPCH
+x/var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth
+xTeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection57"Precompile TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch30d65facea9bb341^f5db67acea9bb341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch0000000000000000^2113"ProcessPCH /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/TeXnicleQuicklook-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleQuicklook.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleQuicklook/TeXnicleQuicklook-Prefix.pch -o /var/folders/DA/DApYPk1mFQStlKnCin-lxE+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleQuicklook-Prefix-hdaylidsufgperdumkxikksslvzu/TeXnicleQuicklook-Prefix.pch.pth
+
+CTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator
+s328986399.390337
+e328986399.453520
+r1
+xTouch
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection99"Touch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgeneratorb401641fef9bb341^6e19741fef9bb341^---0#0#0#--223"Touch build/Debug/TeXnicleQuicklook.qlgenerator    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /usr/bin/touch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicleQuicklook.qlgenerator
+

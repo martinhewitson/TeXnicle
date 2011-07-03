@@ -1,0 +1,94 @@
+\subsection{System identification along the $x$-axis}
+
+As already stated above, one of the key steps in building up an accurate physical
+model of LPF is the characterisation of the dynamical behaviour of the full system
+along the most sensitive axis, the $x$-axis. It is important to note that the
+dynamical time-constants involved in the system are of the same scale of the length
+of an individual experiment (around 1 day). This means that we are analysing
+a system that is never in a steady-state. As a result, we try, whenever possible,
+to use time-domain approaches to ensure the transient behaviour of the system
+is properly accounted for.
+
+\cite{}
+
+The characterisation of the dynamical system along the $x$-axis is done using a model
+which contains a number of physical parameters. Each of these parameters must be
+identified, either on ground or in flight. 
+
+When operating in the main science mode, the residual motion of the bodies is minimised
+due to the closed-loop system. As such, if we treat the system close to this
+operating point, we can produce a linear parameterisation
+of the components of the system equation shown above (Equation \ref{eq:sysmodel})
+in the following way. First, the dynamics of the system can be described
+by the following $2\times2$ Laplace-domain matrix
+\begin{eqnarray}
+\label{eqn:freedynamics} \mathbf{D^{-1}} &=& \left[ {\begin{array}{*{20}c}
+   {s^2  + \omega _1^2  + \frac{m_1}{m_{\rm SC}}\omega _1^2  + \frac{m_2}{m_{\rm SC}}\omega
+_2^2 } & {\frac{m_2}{m_{\rm SC}}\omega _2^2  + \Gamma _x }  \\    {\omega _2^2
+ - \omega _1^2 } & {s^2  + \omega _2^2  - 2\Gamma _x }  \\ \end{array}} \right],\\\nonumber
+\end{eqnarray} 
+where $m_1$, $m_2$ and $m_{\rm sc}$ are the masses
+of the TMs and SC respectively, the total stiffness coupling of each TM to the
+SC is represented by the parameters $\omega_1^2$ and $\omega_2^2$, and $\Gamma _x$
+represents the gravitational coupling of the two test-masses.  The sensing matrix,
+$\mathbf{S}$ can be represented by 
+\begin{eqnarray}   \mathbf{S} &=& \left[\begin{array}{cc}
+  S_{11} & S_{12} \\   S_{21} & S_{22} \\ \end{array}\right].
+\end{eqnarray} 
+The control chain can be modelled as known controller functions
+together with an unknown input delay due to the transmission of the signals from
+the interferometer/DMU output along the spacecraft bus to the computer running
+the control logic. In matrix form, this looks like 
+\begin{eqnarray}   
+\mathbf{C}
+&=& \left[\begin{array}{cc}   C_{\rm df}e^{-sD_{1}} & 0 \\   0 & C_{\rm sus}e^{-sD_{12}}
+ \\ \end{array}\right]. 
+\end{eqnarray} 
+Finally, the actuator is modelled
+with an unknown gain and a response time characterised by a single pole, as follows
+\begin{eqnarray}   
+\mathbf{A} &=& \left[\begin{array}{cc}   \frac{A_{\rm
+df}}{1 + s\tau_{\rm thrust}} & 0 \\   0 & \frac{A_{\rm sus}}{1 + s\tau_{\rm electro}}
+ \\ \end{array}\right]. 
+\end{eqnarray}
+
+Table \ref{tab:params} lists the parameters that our model contains together with the predicted values.
+\begin{table}[htdp]
+\begin{center}
+  \small
+\begin{tabular}{|c|c|p{8cm}|} \hline
+	\rowcolor[rgb]{0.8,0.8,0.8} Parameter & Typical Value & Description \\ \hline \hline
+    $A_{\rm df}$  & 1.0 & The unknown gain of the thrusters. \\ \hline
+    $A_{\rm sus}$ & 1.0 & The unknown gain of the electrostatic actuators. \\ \hline
+    $S_{11}$  & 1.0 & The calibration of the interferometer which
+senses the $x$-axis position of the SC relative to first TM ($X_1$). \\ \hline 
+    $S_{12}$ & 0.0 & The cross-contamination from the $X_{12}$
+interferometer to the $X_{1}$ interferometer. This represents the sensing of the motion of TM2 by the $X_1$ interferometer; it is expected to be negligible. \\ \hline
+    $S_{21}$  & $1\times10^{-4}$ & The cross-contamination from the $X_{1}$ interferometer
+to the $X_{12}$ interferometer. This represents the imperfect common-mode
+rejection of the differential interferometer. \\ \hline
+    $S_{22}$ & 1.0 & The calibration of the differential interferometer
+($X_{12}$). \\ \hline
+    $\omega_1^2$  & $-1\times10^{-6}$\,${\rm s}^{-2}$ & The total stiffness of TM 1 to the spacecraft. \\ \hline
+    $\omega_{\Delta}^2$  & $-1\times10^{-6}$\,${\rm s}^{-2}$ & The difference of stiffness 
+of the two TMs to the SC, defined as $\omega_{2}^2-\omega_1^2$. \\ \hline
+    $\taudf$ & 0.1 s& The characteristic time of the thrusters. \\ \hline
+    $\tausus$ & 0.01 s& The characteristic time of the electrostatic actuators. \\ \hline
+    $D_{1}$  & 0.1 s& The bus delay between the $X_1$ interferometer output and the corresponding DFACS controller input. \\ \hline
+    $D_{12}$  & 0.1 s& The bus delay between the $X_{12}$ interferometer output and the corresponding DFACS controller input. \\ \hline
+\end{tabular}
+\end{center}
+\caption{The main physical parameters included in our model of the dynamical system 
+of LPF along the $x$-axis.}
+\label{tab:params}
+\end{table}
+In the following section, a pair of experiments is proposed that should lead to
+the identification of the parameters given in Table \ref{tab:params}. 
+
+%%MARK Experiments
+\input{./xaxis_experiments.tex}
+
+
+
+
+
