@@ -30,6 +30,8 @@ extern NSString * const TPTypesettingCompletedNotification;
 	// dvips
 	NSTask *dvipsTask;
 	NSFileHandle *dvipsFileHandle;
+  
+  ProjectEntity *project;
 }
 
 @property (assign) ProjectEntity *project;
