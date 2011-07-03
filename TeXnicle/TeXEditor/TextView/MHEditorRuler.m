@@ -313,8 +313,6 @@
 // linenumbers and code folders are then set to the instance properties.
 - (void)calculationsForTextRange:(NSRange)aRange
 {
-  
-//  NSLog(@"*** Calculating lines");
   // compute and cache the linenumbers in view
   NSArray *newLineNumbers = [self lineNumbersForTextRange:aRange];
   
