@@ -41,11 +41,11 @@
 
     // how you process each instance will depend on the entity that the instance belongs to
 
-    if ([[[instance entity] name] isEqualToString:@"YOUR_ENTITY_NAME"]) {
+    if ([[[instance entity] name] isEqualToString:@"Project"]) {
 
         // set the display name for Spotlight search result
 
-        NSString *yourDisplayString =  [NSString stringWithFormat:@"YOUR_DISPLAY_STRING %@", [instance valueForKey:@"SOME_KEY"]]; 
+        NSString *yourDisplayString =  [NSString stringWithFormat:@"TeXnicle Project %@", [instance valueForKey:@"name"]]; 
         [spotlightData setObject: yourDisplayString forKey:(NSString *)kMDItemDisplayName];
         
          /*
