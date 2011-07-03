@@ -29,6 +29,8 @@
 	IBOutlet NSButton *copyToNewProjectCheckButton;
 	IBOutlet NSButton *makeMainFileCheckButton;
 		
+  TeXEditorViewController *texEditorViewController;
+  NSView *texEditorContainer;
 }
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
