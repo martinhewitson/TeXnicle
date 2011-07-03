@@ -166,7 +166,7 @@
     }
   }
   
-  //NSLog(@"Coloring %@", NSStringFromRange(aRange));
+//  NSLog(@"Coloring %@", NSStringFromRange(aRange));
   
   NSString *text = [[textStorage string] substringWithRange:aRange];
   NSInteger strLen = [text length];
@@ -177,6 +177,7 @@
   // make sure the glyphs are present otherwise colouring gives errors
   [layoutManager ensureGlyphsForCharacterRange:NSMakeRange(0, strLen)];
   
+  
   // apply default font and color
   [textStorage beginEditing];  
   [textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:aRange];
@@ -184,7 +185,6 @@
   [textStorage endEditing];
   
 	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
-//  [layoutManager ensureLayoutForCharacterRange:aRange];
   
   
   // scan each character in the string
