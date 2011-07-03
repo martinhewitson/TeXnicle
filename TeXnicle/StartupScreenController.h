@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface StartupScreenController : NSWindowController {
+@interface StartupScreenController : NSWindowController <NSMetadataQueryDelegate> {
 
 	NSMutableArray *recentFiles;
 	
@@ -19,7 +19,13 @@
   
   IBOutlet NSTextField *fileLabel;
   IBOutlet NSTextField *dateLabel;
-	
+  
+  IBOutlet NSButton *recentBtn;
+  IBOutlet NSButton *allBtn;
+  
+	NSMetadataQuery* query;
+  NSMutableArray *texnicleFiles;
+  
 	BOOL isOpen;
 	
 	NSRect openFrame;
@@ -38,5 +44,12 @@
 - (void) show;
 
 - (void) updateFilepathLabel;
+
+#pragma mark -
+#pragma File selection
+
+- (IBAction)startFileQuery:(id)sender;
+- (IBAction) fileSourceChanged:(id)sender;
+- (void)loadFilesFromQueryResult:(NSNotification*)notif;
 
 @end
