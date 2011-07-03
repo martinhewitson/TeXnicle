@@ -13,6 +13,12 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @interface MHControlsTabBarController : NSObject <NSTabViewDelegate> {
 @private
   NSArray *buttons;
+  NSButton *projectButton;
+  NSButton *palletButton;
+  NSButton *libraryButton;
+  NSButton *outlineButton;
+  NSButton *findButton;
+  NSTabView *tabView;
 }
 
 @property (assign) IBOutlet NSButton *projectButton;
