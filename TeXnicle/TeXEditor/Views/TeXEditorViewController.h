@@ -18,6 +18,10 @@
   TeXTextView *textView;
   id delegate;
   IBOutlet TPSectionListController *sectionListController;
+  
+  NSPopUpButton *sectionListPopup;
+  NSButton *unfoldButton;
+  NSButton *markerButton;
 }
 
 @property (assign) IBOutlet TeXTextView *textView;
