@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TPLaTeXEngine.h"
 
 @class TeXEditorViewController;
+@class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument {
+@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate> {
 
-	IBOutlet NSTextField *cursorInfo;
-	
 	NSMutableAttributedString *documentData;
 
 	IBOutlet NSWindow *addToProjectSheet;
@@ -31,11 +31,18 @@
 		
   TeXEditorViewController *texEditorViewController;
   NSView *texEditorContainer;
+  TPLaTeXEngine *engine;
+  
+  BOOL openPDFAfterBuild;
+  TPStatusView *statusView;
 }
+
+@property (assign) IBOutlet TPStatusView *statusView;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) IBOutlet NSView *texEditorContainer;
+@property (retain) TPLaTeXEngine *engine;
 
 #pragma mark -
 #pragma mark Notification Handlers
@@ -51,6 +58,17 @@
 - (IBAction) endAddToNewProjectSheet:(id)sender;
 - (void) addToNewEmptyProject;
 - (void) insertTextToCurrentDocument:(NSString*)string;
+
+#pragma mark -
+#pragma mark LaTeX Control
+
+- (IBAction) clean:(id)sender;
+- (IBAction) buildAndView:(id)sender;
+- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
+- (IBAction) buildProject:(id)sender;
+- (void) build;
+- (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
+- (IBAction) openPDF:(id)sender;
 
 @end
 

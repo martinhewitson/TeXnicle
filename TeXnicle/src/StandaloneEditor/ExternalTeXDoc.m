@@ -12,12 +12,18 @@
 #import "NSString+LaTeX.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "TeXEditorViewController.h"
+#import "TPLaTeXEngine.h"
+#import "externs.h"
+#import "ConsoleController.h"
+#import "TPStatusView.h"
 
 @implementation ExternalTeXDoc
 
 @synthesize documentData;
 @synthesize texEditorContainer;
 @synthesize texEditorViewController;
+@synthesize engine;
+@synthesize statusView;
 
 - (void)awakeFromNib
 {
@@ -31,14 +37,22 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
+  self.engine = [TPLaTeXEngine engineWithPath:[[self fileURL] path] delegate:self];
+  
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
 	[nc addObserver:self
 				 selector:@selector(handleTextSelectionChanged:)
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self.texEditorViewController.textView];
-	
-	
+	  
+  [nc addObserver:self
+         selector:@selector(handleTypesettingCompletedNotification:)
+             name:TPTypesettingCompletedNotification
+           object:self.engine];
+
+  [self.statusView setProjectStatus:[[self fileURL] path]];
+  [self.statusView setEditorStatus:@"No Selection."];
 }
 
 #pragma mark -
@@ -52,7 +66,7 @@
 - (void) updateCursorInfoText
 {
 	NSRange sel = [self.texEditorViewController.textView selectedRange];
-	[cursorInfo setStringValue:[NSString stringWithFormat:@"character: %d", sel.location]];
+  [self.statusView setEditorStatus:[NSString stringWithFormat:@"character: %d", sel.location]];
 }
 
 
@@ -75,6 +89,7 @@
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.engine = nil;
 	[super dealloc];
 }
 
@@ -99,7 +114,6 @@
 }
 
 
-
 - (IBAction) saveDocument:(id)sender
 {
 	NSRange selRange = [self.texEditorViewController.textView selectedRange];
@@ -109,6 +123,7 @@
 	[self.texEditorViewController.textView setSelectedRange:selRange];
 	[self.texEditorViewController.textView scrollRectToVisible:selRect];
 	[[self windowForSheet] makeFirstResponder:r];
+  [self.engine setFilepath:[[self fileURL] path]];
 }
 
 
@@ -310,15 +325,9 @@
 }
 
 - (void) addToNewEmptyProject
-{
-	// Create a new TeXProjectDocument then add this file to that
-	NSError *error = nil;
-	id doc = [[NSDocumentController sharedDocumentController] openUntitledDocumentAndDisplay:YES
-																																										 error:&error];
-	if (error) {
-		[NSApp presentError:error];
-	}
-	
+{  
+  id doc = [TeXProjectDocument newTeXnicleProject];
+  
 	if (doc) {
 		
 		BOOL copy = NO;
@@ -392,6 +401,99 @@
 - (BOOL) shouldRecolorDocument
 {
 	return YES;
+}
+
+
+#pragma mark -
+#pragma mark LaTeX Control
+
+- (IBAction) clean:(id)sender
+{
+	// build path to the pdf file
+	NSString *mainFile = [self.engine fileToCompile];
+  
+	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSError *error = nil;
+	for (NSString *ext in filesToClear) {
+		error = nil;
+		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
+		if ([fm removeItemAtPath:file error:&error]) {
+			[[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
+		} else {
+			[[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+		} 
+		
+	}		
+}
+
+- (IBAction) buildAndView:(id)sender
+{
+  openPDFAfterBuild = YES;
+	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
+		[self saveDocument:self];
+	}
+  [self build];
+}
+
+- (IBAction) buildProject:(id)sender
+{
+  openPDFAfterBuild = NO;
+	
+	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
+//		[self saveDocument:self];
+    [self saveDocumentWithDelegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];
+	} else {
+    [self build];	
+  }
+  
+}
+     
+- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
+{
+  NSLog(@"Did save %d", didSave);
+  if (didSave) {
+    [self.engine setFilepath:[[self fileURL] path]];
+    [self build];
+  } else {
+    
+  }
+  
+}
+
+- (void) build
+{
+  [self.engine reset];
+  [self.engine build];  
+}
+
+- (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
+{  
+  if (openPDFAfterBuild) {
+    [self openPDF:self];
+  }  
+}
+
+- (IBAction) openPDF:(id)sender
+{
+  NSString *docFile = [self.engine compiledDocumentPath];
+	
+	// check if the pdf exists
+	if (docFile) {
+		//NSLog(@"Opening %@", pdfFile);
+		[[NSWorkspace sharedWorkspace] openFile:docFile];
+	}
+	
+	// .. if not, ask the user if they want to typeset the project
+}
+
+
+#pragma mark -
+#pragma mark LaTeX Engine delegate
+
+- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
+{
+  return [[self fileURL] path];
 }
 
 @end
