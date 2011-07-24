@@ -24,6 +24,7 @@
 @synthesize texEditorViewController;
 @synthesize engine;
 @synthesize statusView;
+@synthesize compilerType;
 
 - (void)awakeFromNib
 {
@@ -37,7 +38,8 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
-  self.engine = [TPLaTeXEngine engineWithPath:[[self fileURL] path] delegate:self];
+  self.engine = [TPLaTeXEngine engineWithDelegate:self];
+  self.compilerType = TPEngineCompilerPDFLaTeX;
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
@@ -51,7 +53,11 @@
              name:TPTypesettingCompletedNotification
            object:self.engine];
 
-  [self.statusView setProjectStatus:[[self fileURL] path]];
+  if (![self fileURL]) {
+    [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
+  } else {
+    [self.statusView setProjectStatus:[[self fileURL] path]];
+  }
   [self.statusView setEditorStatus:@"No Selection."];
 }
 
@@ -119,13 +125,47 @@
 	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
-	[super saveDocument:sender];
+  [self saveDocumentWithDelegate:self didSaveSelector:@selector(documentSave:didSave:contextInfo:) contextInfo:NULL];
+//	[super saveDocument:sender];
 	[self.texEditorViewController.textView setSelectedRange:selRange];
 	[self.texEditorViewController.textView scrollRectToVisible:selRect];
 	[[self windowForSheet] makeFirstResponder:r];
-  [self.engine setFilepath:[[self fileURL] path]];
+  [self updateFileStatus];
 }
 
+- (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
+{
+//  if (didSave) {
+//    [self.engine setFilepath:[[self fileURL] path]];
+//  } else {
+//  }
+  [self updateFileStatus];  
+}
+
+- (void) updateFileStatus
+{
+  if ([self fileURL]) {
+    [self.statusView setProjectStatus:[[self fileURL] path]];    
+  } else {
+    [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
+  }
+}
+
+- (void) setFileURL:(NSURL *)absoluteURL
+{  
+  [super setFileURL:absoluteURL];
+  [self updateFileStatus];
+}
+
+- (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
+{
+  if (didSave) {
+//    [self.engine setFilepath:[[self fileURL] path]];
+    [self build];
+  } else {
+  }
+  [self updateFileStatus];  
+}
 
 - (NSString *)windowNibName {
 	// Implement this to return a nib to load OR implement -makeWindowControllers to manually create your controllers.
@@ -409,22 +449,7 @@
 
 - (IBAction) clean:(id)sender
 {
-	// build path to the pdf file
-	NSString *mainFile = [self.engine fileToCompile];
-  
-	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSError *error = nil;
-	for (NSString *ext in filesToClear) {
-		error = nil;
-		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
-		if ([fm removeItemAtPath:file error:&error]) {
-			[[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
-		} else {
-			[[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
-		} 
-		
-	}		
+  [self.engine trashAuxFiles];  
 }
 
 - (IBAction) buildAndView:(id)sender
@@ -442,24 +467,14 @@
 	
 	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
 //		[self saveDocument:self];
-    [self saveDocumentWithDelegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];
+    [self saveDocumentWithDelegate:self didSaveSelector:@selector(documentSaveAndBuild:didSave:contextInfo:) contextInfo:NULL];
 	} else {
     [self build];	
   }
   
 }
      
-- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
-{
-  NSLog(@"Did save %d", didSave);
-  if (didSave) {
-    [self.engine setFilepath:[[self fileURL] path]];
-    [self build];
-  } else {
-    
-  }
-  
-}
+
 
 - (void) build
 {
@@ -477,7 +492,7 @@
 - (IBAction) openPDF:(id)sender
 {
   NSString *docFile = [self.engine compiledDocumentPath];
-	
+  
 	// check if the pdf exists
 	if (docFile) {
 		//NSLog(@"Opening %@", pdfFile);
@@ -494,6 +509,26 @@
 - (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
 {
   return [[self fileURL] path];
+}
+
+- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
+{
+  return [[[self fileURL] path] stringByDeletingLastPathComponent]; 
+}
+
+- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
+{
+	return YES;	 
+}
+
+- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
+{
+  return self.compilerType;
+}
+
+- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
+{
+  return NO;
 }
 
 @end

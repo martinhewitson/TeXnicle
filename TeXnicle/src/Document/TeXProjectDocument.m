@@ -17,6 +17,7 @@
 #import "UKKQueue+TeXnicle.h"
 #import "FindInProjectController.h"
 #import "NSString+LaTeX.h"
+#import "TPStatusView.h"
 
 @implementation TeXProjectDocument
 
@@ -27,8 +28,7 @@
 @synthesize projectItemTreeController;
 @synthesize texEditorViewController;
 @synthesize texEditorContainer;
-@synthesize statusLabel;
-@synthesize editorStatusLabel;
+@synthesize statusView;
 @synthesize engine;
 @synthesize projectTypeSelector;
 @synthesize pdfView;
@@ -97,7 +97,7 @@
   [self.openDocuments disableTextView];
   
   // setup engine
-  self.engine = [TPLaTeXEngine engineWithProject:self.project];
+  self.engine = [TPLaTeXEngine engineWithDelegate:self];
   
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -138,8 +138,8 @@
            object:self.texEditorViewController.textView];
   
   
-  
-  [self.statusLabel setStringValue:@"Welcome."];
+  [self.statusView setProjectStatus:@"Welcome to TeXnicle."];
+  [self.statusView setEditorStatus:@"No Selection."];
   [self.projectTypeSelector selectItemWithTitle:[self.project valueForKey:@"type"]];
   
 	// spell checker language
@@ -505,6 +505,14 @@
       [treeActionMenu addItem:item];
       [item release];		
       
+      // add existing folders
+      item = [[NSMenuItem alloc] initWithTitle:@"New Folder"
+                                        action:@selector(addNewFolder:)
+                                 keyEquivalent:@""];
+      [item setTarget:self];
+      [treeActionMenu addItem:item];
+      [item release];		
+      
       // rename selected
       item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rename \u201c%@\u201d", itemName]
                                         action:@selector(renameItem:)
@@ -751,7 +759,7 @@
   // update status bar
   NSString *path = [item valueForKey:@"pathOnDisk"];
   if (path) {
-    [self.statusLabel setStringValue:path];
+    [self.statusView setProjectStatus:path];
   }
 
   
@@ -796,9 +804,9 @@
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
   if (lineNumber == NSNotFound) {
-    [self.editorStatusLabel setStringValue:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
+    [self.statusView setEditorStatus:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
   } else {
-    [self.editorStatusLabel setStringValue:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
+    [self.statusView setEditorStatus:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
   }
 }
 
@@ -814,7 +822,7 @@
 		NSManagedObject *item = [all objectAtIndex:0];
 		NSString *path = [item valueForKey:@"pathOnDisk"];
 		if (path) {
-			[self.statusLabel setStringValue:path];
+      [self.statusView setProjectStatus:path];
 		}
 		if ([item isKindOfClass:[FileEntity class]]) {
 			if ([[item valueForKey:@"isText"] boolValue]) {
@@ -1009,7 +1017,7 @@
 - (IBAction) clean:(id)sender
 {
 	// build path to the pdf file
-	NSString *mainFile = [[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"];
+	NSString *mainFile = [self.engine fileToCompile];
   
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -1095,8 +1103,12 @@
 
 - (void) showDocument
 {
-  NSString *docPath = [self compiledDocumentPath];
-//  NSLog(@"Compiled path %@", docPath);
+  NSString *docPath = [self.engine compiledDocumentPath];
+  if ([self engineProjectType:self.engine] == TPEngineCompilerLaTeX) {
+    [self.pdfView setHidden:YES];
+    return;
+  }
+  
   if (docPath) {
     PDFDocument *pdfDoc = [[[PDFDocument alloc] initWithURL: [NSURL fileURLWithPath:docPath]] autorelease];
     NSView *view = [self.pdfView documentView];
@@ -1113,32 +1125,10 @@
   }
 }
 
-- (NSString*)compiledDocumentPath
-{
-	// build path to the pdf file
-	NSString *mainFile = [[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"];
-	NSString *docFile;
-	//NSLog(@"Opening %@", pdfFile);
-  	
-	NSString *projectType = [[self project] valueForKey:@"type"];
-	if ([projectType isEqual:@"pdflatex"]) {
-		docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
-	} else {
-		docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
-	} 
-  
-  // check if the pdf exists
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:docFile]) {
-    return docFile;
-  }
-
-  return nil;
-}
 
 - (IBAction) openPDF:(id)sender
 {
-  NSString *docFile = [self compiledDocumentPath];
+  NSString *docFile = [self.engine compiledDocumentPath];
 	
 	// check if the pdf exists
 	if (docFile) {
@@ -1273,6 +1263,11 @@
 - (IBAction) addExistingFolder:(id)sender
 {
 	[self.projectItemTreeController addExistingFolder:self];
+}
+
+- (IBAction) addNewFolder:(id)sender
+{
+  [self newFolder:sender];
 }
 
 - (IBAction) addExistingFileToSelectedFolder:(id)sender
@@ -1852,5 +1847,42 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   [super saveDocument:self];
 }
+
+
+#pragma mark -
+#pragma mark LaTeX Engine Delegate
+
+- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
+{
+  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+}
+
+- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
+{
+  return [self.project folder]; 
+}
+
+- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
+{
+  if ([self.project valueForKey:@"mainFile"]) {
+    return YES;
+  }	
+	return NO;	 
+}
+
+- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
+{
+  if ([[self.project valueForKey:@"type"] isEqualToString:@"latex"]) {
+    return TPEngineCompilerLaTeX;
+  } else {
+    return TPEngineCompilerPDFLaTeX;
+  }
+}
+
+- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
+{
+  return YES;
+}
+
 
 @end

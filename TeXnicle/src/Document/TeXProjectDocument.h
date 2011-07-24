@@ -12,14 +12,16 @@
 #import "TeXEditorViewController.h"
 #import "ProjectOutlineController.h"
 #import "FindInProjectController.h"
+#import "TPLaTeXEngine.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
 @class ProjectItemTreeController;
 @class TPLaTeXEngine;
 @class FindInProjectController;
+@class TPStatusView;
 
-@interface TeXProjectDocument : NSPersistentDocument <FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -63,14 +65,14 @@
   OpenDocumentsManager *openDocuments;
   ProjectItemTreeController *projectItemTreeController;
   TeXEditorViewController *texEditorViewController;
-  NSTextField *statusLabel;
-  NSTextField *editorStatusLabel;
   TPLaTeXEngine *engine;
   NSPopUpButton *projectTypeSelector;
   NSMutableArray *pdfSearchResults;
   NSView *texEditorContainer;
+  TPStatusView *statusView;
 }
 
+@property (assign) IBOutlet TPStatusView *statusView;
 @property (assign) ProjectEntity *project;
 @property (assign) IBOutlet NSOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
@@ -80,8 +82,6 @@
 @property (retain) TPLaTeXEngine *engine;
 @property (retain) NSMutableArray *pdfSearchResults;
 @property (assign) IBOutlet NSView *texEditorContainer;
-@property (assign) IBOutlet NSTextField *statusLabel;
-@property (assign) IBOutlet NSTextField *editorStatusLabel;
 @property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
 @property (assign) IBOutlet PDFView *pdfView;
 
@@ -153,13 +153,13 @@
 
 - (IBAction) addExistingFile:(id)sender;
 - (IBAction) addExistingFolder:(id)sender;
+- (IBAction) addNewFolder:(id)sender;
 - (IBAction) addExistingFileToSelectedFolder:(id)sender;
 
 - (IBAction) showNextResult:(id)sender;
 - (IBAction) searchPDF:(id)sender;
 - (void) showDocument;
 
-- (NSString*)compiledDocumentPath;
 
 
 - (NSArray*)getSelectedItems;

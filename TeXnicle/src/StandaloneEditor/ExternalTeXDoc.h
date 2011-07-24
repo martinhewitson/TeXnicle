@@ -35,14 +35,22 @@
   
   BOOL openPDFAfterBuild;
   TPStatusView *statusView;
+  
+  TPEngineCompiler compilerType;
+  
 }
 
 @property (assign) IBOutlet TPStatusView *statusView;
+@property (assign) IBOutlet TPEngineCompiler compilerType;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) IBOutlet NSView *texEditorContainer;
 @property (retain) TPLaTeXEngine *engine;
+
+- (void) updateFileStatus;
+- (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
+- (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 
 #pragma mark -
 #pragma mark Notification Handlers
@@ -64,7 +72,6 @@
 
 - (IBAction) clean:(id)sender;
 - (IBAction) buildAndView:(id)sender;
-- (void)document:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (IBAction) buildProject:(id)sender;
 - (void) build;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;

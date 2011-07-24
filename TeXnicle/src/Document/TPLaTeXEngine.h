@@ -11,9 +11,29 @@
 
 extern NSString * const TPTypesettingCompletedNotification;
 
+// delegate protocol
+
+@class TPLaTeXEngine;
+
+typedef enum {
+  TPEngineCompilerLaTeX,
+  TPEngineCompilerPDFLaTeX
+} TPEngineCompiler;
+
+@protocol TPLaTeXEngineDelegate <NSObject>
+
+- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine;
+- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine;
+- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine;
+- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine;
+- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine;
+
+@end
+
+
 @class ProjectEntity;
 
-@interface TPLaTeXEngine : NSObject {
+@interface TPLaTeXEngine : NSObject <TPLaTeXEngineDelegate> {
 @private
     
 	// Typesetting
@@ -31,15 +51,20 @@ extern NSString * const TPTypesettingCompletedNotification;
 	NSTask *dvipsTask;
 	NSFileHandle *dvipsFileHandle;
   
-  ProjectEntity *project;
+  id delegate;
 }
 
-@property (assign) ProjectEntity *project;
+@property (assign) id delegate;
 
-- (id) initWithProject:(ProjectEntity*)aProject;
-+ (TPLaTeXEngine*) engineWithProject:(ProjectEntity*)aProject;
+- (void) setupObservers;
 
+- (id) initWithDelegate:(id)aDelegate;
++ (TPLaTeXEngine*)engineWithDelegate:(id)aDelegate;
+
+- (void) trashAuxFiles;
 - (void) reset;
 - (BOOL) build;
+//- (NSString*)fileToCompile;
+- (NSString*)compiledDocumentPath;
 
 @end

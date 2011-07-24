@@ -15,51 +15,56 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 
 @implementation TPLaTeXEngine
 
-@synthesize project;
+@synthesize delegate;
 
++ (TPLaTeXEngine*)engineWithDelegate:(id)aDelegate
+{
+  return [[[TPLaTeXEngine alloc] initWithDelegate:aDelegate] autorelease];
+}
 
-- (id) initWithProject:(ProjectEntity*)aProject
+- (id) initWithDelegate:(id)aDelegate
 {
   self = [super init];
   if (self) {
-    self.project = aProject;
-    
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        
-    [nc addObserver:self
-           selector:@selector(texOutputAvailable:)
-               name:NSFileHandleReadCompletionNotification
-             object:typesetFileHandle];
-    
-    [nc addObserver:self
-           selector:@selector(taskFinished:) 
-               name:NSTaskDidTerminateNotification
-             object:typesetTask];
-    
-    [nc addObserver:self
-           selector:@selector(bibTeXOutputAvailable:)
-               name:NSFileHandleReadCompletionNotification
-             object:bibtexFileHandle];
-    
-    [nc addObserver:self
-           selector:@selector(dvipsOutputAvailable:)
-               name:NSFileHandleReadCompletionNotification
-             object:dvipsFileHandle];
-    
-    [nc addObserver:self
-           selector:@selector(bibTeXTaskFinished:) 
-               name:NSTaskDidTerminateNotification
-             object:bibtexTask];
-    
+    self.delegate = aDelegate;
+    [self setupObservers];
   }
   return self;
 }
 
-+ (TPLaTeXEngine*) engineWithProject:(ProjectEntity*)aProject
+
+- (void) setupObservers
 {
-  return [[[TPLaTeXEngine alloc] initWithProject:aProject] autorelease];
+  
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  
+  [nc addObserver:self
+         selector:@selector(texOutputAvailable:)
+             name:NSFileHandleReadCompletionNotification
+           object:typesetFileHandle];
+  
+  [nc addObserver:self
+         selector:@selector(taskFinished:) 
+             name:NSTaskDidTerminateNotification
+           object:typesetTask];
+  
+  [nc addObserver:self
+         selector:@selector(bibTeXOutputAvailable:)
+             name:NSFileHandleReadCompletionNotification
+           object:bibtexFileHandle];
+  
+  [nc addObserver:self
+         selector:@selector(dvipsOutputAvailable:)
+             name:NSFileHandleReadCompletionNotification
+           object:dvipsFileHandle];
+  
+  [nc addObserver:self
+         selector:@selector(bibTeXTaskFinished:) 
+             name:NSTaskDidTerminateNotification
+           object:bibtexTask];
 }
+
+
 
 - (void)dealloc
 {
@@ -78,7 +83,7 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		[[console window] makeKeyAndOrderFront:self];
 	}
 	
-	NSString *mainFile = [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+	NSString *mainFile = [self engineDocumentToCompile:self];
 	if (mainFile) {
 		
 		[console message:[NSString stringWithFormat:@"Running BibTeX for %@", mainFile]];
@@ -96,7 +101,7 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		bibtexTask = [[NSTask alloc] init];
     
 		[bibtexTask setLaunchPath:bibtexpath];
-		[bibtexTask setCurrentDirectoryPath:[project valueForKey:@"folder"]];
+    [bibtexTask setCurrentDirectoryPath:[self engineWorkingDirectory:self]];
 		
 		NSArray *arguments;
 		arguments = [NSArray arrayWithObjects:mainFile, nil];
@@ -143,16 +148,6 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 	
 }
 
-
-- (BOOL) canBibTeX
-{
-	if ([project valueForKey:@"mainFile"]) {
-		return YES;
-	}	
-	return NO;	
-}
-
-
 #pragma mark -
 #pragma mark dvips Control
 
@@ -164,7 +159,8 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		[[console window] makeKeyAndOrderFront:self];
 	}
 	
-	NSString *mainFile = [[[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+	NSString *mainFile = [self engineDocumentToCompile:self];
+  mainFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"dvi"];
 	if (mainFile) {
 		
 		[console message:[NSString stringWithFormat:@"Converting dvi file of %@", mainFile]];
@@ -183,8 +179,8 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		dvipsTask = [[NSTask alloc] init];
 		
 		[dvipsTask setLaunchPath:dvipspath];
-		[dvipsTask setCurrentDirectoryPath:[project valueForKey:@"folder"]];
-		
+    [dvipsTask setCurrentDirectoryPath:[self engineWorkingDirectory:self]];
+    
 		NSArray *arguments;
 		arguments = [NSArray arrayWithObjects:@"-quiet ", mainFile, nil];
 		[dvipsTask setArguments:arguments];
@@ -233,11 +229,53 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 #pragma mark -
 #pragma mark LaTeX Control
 
+- (void) trashAuxFiles
+{
+	// build path to the pdf file
+	NSString *mainFile = [self engineDocumentToCompile:self];
+  
+	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
+	NSFileManager *fm = [NSFileManager defaultManager];
+	NSError *error = nil;
+	for (NSString *ext in filesToClear) {
+		error = nil;
+		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
+		if ([fm removeItemAtPath:file error:&error]) {
+			[[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
+		} else {
+			[[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+		} 
+		
+	}		
+}
 
 - (void) reset
 {
   abortCompile = NO;
   compilationsDone = 0;
+}
+
+- (NSString*)compiledDocumentPath
+{
+	// build path to the pdf file
+	NSString *mainFile = [self engineDocumentToCompile:self]; 
+  NSString *docFile = nil;
+  
+  TPEngineCompiler projectType = [self engineProjectType:self];
+  //    NSString *projectType = [self.project valueForKey:@"type"];
+  if (projectType == TPEngineCompilerPDFLaTeX) {
+    docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+  } else {
+    docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
+  } 
+  
+  // check if the pdf exists
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:docFile]) {
+    return docFile;
+  }
+  
+  return nil;
 }
 
 - (BOOL) build
@@ -249,19 +287,28 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		[[console window] makeKeyAndOrderFront:self];
 	}
 	
-	NSString *mainFile = [[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"];
+	NSString *mainFile = [self engineDocumentToCompile:self];
 	NSString *pdfFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
   
 	if (!mainFile) {
+    
 		//NSLog(@"Specify a main file!");
 		[console error:@"No main file specified!"];	
 		
-		NSAlert *alert = [NSAlert alertWithMessageText:@"No Main File Specified."
-																		 defaultButton:@"OK"
-																	 alternateButton:nil
-																			 otherButton:nil
-												 informativeTextWithFormat:@"Specify a main TeX file using the context menu on project tree or\nby using the Project menu."];
-		
+    NSAlert *alert = nil;
+    if ([self engineDocumentIsProject:self]) {
+      alert = [NSAlert alertWithMessageText:@"No Main File Found."
+                                       defaultButton:@"OK"
+                                     alternateButton:nil
+                                         otherButton:nil
+                           informativeTextWithFormat:@"Specify a main TeX file using the context menu on project tree or by using the Project menu."];
+    } else {
+      alert = [NSAlert alertWithMessageText:@"No Main File Found."
+                              defaultButton:@"OK"
+                            alternateButton:nil
+                                otherButton:nil
+                  informativeTextWithFormat:@"No file found for compiling. Perhaps the document wasn't saved?"];
+    }
     [alert runModal];
 		
 		return NO;
@@ -290,22 +337,24 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	NSString *projectType = [[self project] valueForKey:@"type"];
-  
 	NSString *texpath;
-	if ([projectType isEqual:@"pdflatex"]) {
-		texpath = [defaults valueForKey:TPPDFLatexPath]; 
-	} else if ([projectType isEqual:@"latex"]) {
-		texpath = [defaults valueForKey:TPLatexPath]; 
-	} else {
-		return NO;
-	}
+  
+  TPEngineCompiler projectType = [self engineProjectType:self];
+  if (projectType == TPEngineCompilerPDFLaTeX) {
+    texpath = [defaults valueForKey:TPPDFLatexPath]; 
+  } else if (projectType == TPEngineCompilerLaTeX) {
+    texpath = [defaults valueForKey:TPLatexPath]; 
+  } else {
+    return NO;
+  }
+  
   [console message:[NSString stringWithFormat:@"Compiling with %@", texpath]];
 	
 	typesetTask = [[NSTask alloc] init];
 	
 	[typesetTask setLaunchPath:texpath];
-	[typesetTask setCurrentDirectoryPath:[project valueForKey:@"folder"]];
+  [typesetTask setCurrentDirectoryPath:[self engineWorkingDirectory:self]];
+  
 	NSArray *arguments;
 	arguments = [NSArray arrayWithObjects:@"-file-line-error", @"-interaction=nonstopmode",  mainFile, nil];
 	[typesetTask setArguments:arguments];
@@ -347,17 +396,17 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 	
 	NSUInteger nCompile = [[[NSUserDefaults standardUserDefaults] valueForKey:TPNRunsPDFLatex] intValue];
 	
-	if (compilationsDone == nCompile && 
-			([[[self project] valueForKey:@"type"] isEqual:@"latex"])) {
-		// do dvips
-		[self dvips:self];
-	}
+  if (compilationsDone == nCompile && 
+      ([self engineProjectType:self] == TPEngineCompilerLaTeX)) {
+    // do dvips
+    [self dvips:self];
+  }
   
 	if (compilationsDone < nCompile) {
 		[self build];
 	} else {
 		ConsoleController *console = [ConsoleController sharedConsoleController];
-		NSString *mainFile = [[[self project] valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"];
+		NSString *mainFile = [self engineDocumentToCompile:self];
 		[console message:[NSString stringWithFormat:@"Completed build of %@", mainFile]];
 		
     // notify interested parties
@@ -397,5 +446,47 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 	
 }
 
+#pragma mark -
+#pragma mark Delegate
+
+- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineDocumentToCompile:)]) {
+    return [self.delegate engineDocumentToCompile:self];
+  }
+  return nil;
+}
+
+- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineWorkingDirectory:)]) {
+    return [self.delegate engineWorkingDirectory:self];
+  }
+  return nil;
+}
+
+- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineCanBibTeX:)]) {
+    return [self.delegate engineCanBibTeX:self];
+  }
+  return NO;
+}
+
+- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineProjectType:)]) {
+    return [self.delegate engineProjectType:self];
+  }
+  return TPEngineCompilerPDFLaTeX;
+}
+
+- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine 
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineDocumentIsProject:)]) {
+    return [self.delegate engineDocumentIsProject:self];
+  }
+  return NO;
+}
 
 @end
