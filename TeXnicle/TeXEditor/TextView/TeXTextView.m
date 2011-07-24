@@ -855,6 +855,7 @@
 	[[self textStorage] endEditing];
 	[string release];
   
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
 - (void) unfoldTextWithFolder:(MHCodeFolder*)aFolder
@@ -890,6 +891,7 @@
   // update editor ruler
 	[self.editorRuler resetLineNumbers];
   [self.editorRuler setNeedsDisplay:YES];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
 
@@ -906,6 +908,7 @@
   // update editor ruler
 	[self.editorRuler resetLineNumbers];
   [self.editorRuler setNeedsDisplay:YES];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
 #pragma mark -
@@ -1247,8 +1250,14 @@
   
 	
 	if ([aString isEqual:@"{"]) {
-		[super insertText:@"{}"];
-		[self moveLeft:self];
+    // get selected text
+    if (selRange.length > 0) {
+      NSString *selected = [[string string] substringWithRange:selRange];
+      [super replaceCharactersInRange:selRange withString:[NSString stringWithFormat:@"{%@}", selected]];
+    } else {
+      [super insertText:@"{}"];
+      [self moveLeft:self];
+    }
 	} else 	if ([aString isEqual:@"["]) {
 		NSRange r = [self selectedRange];
 		r.location-=2;
@@ -1283,6 +1292,19 @@
 			[super insertText:aString];
 			return;
 		}	
+	} else	if ([aString isEqual:@"\""]) {
+		// do smart replacements
+		NSRange r = [self selectedRange];
+    if (r.location>0) {
+      NSInteger loc = r.location-1;
+      if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
+        [self insertText:@"``"];        
+      } else {
+        [super insertText:aString];
+      }
+    } else {
+      [super insertText:aString];
+    }
 	} else	if ([aString isEqual:@"]"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
