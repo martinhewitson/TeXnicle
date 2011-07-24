@@ -40,6 +40,8 @@ extern NSString * const TEDocumentBackgroundColor;
 extern NSString * const TESyntaxTextColor;
 extern NSString * const TEDocumentFont;
 
+extern NSString * const TEConsoleFont;
+
 // comment
 extern NSString * const TESyntaxCommentsColor;
 extern NSString * const TESyntaxColorComments;

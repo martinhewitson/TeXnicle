@@ -48,6 +48,8 @@ NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentFont = @"TEDocumentFont";
 NSString * const TESyntaxTextColor = @"TESyntaxTextColor";
 
+NSString * const TEConsoleFont = @"TEConsoleFont";
+
 // comment
 NSString * const TESyntaxCommentsColor = @"TESyntaxCommentsColor";
 NSString * const TESyntaxColorComments = @"TESyntaxColorComments";
@@ -106,12 +108,13 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
   [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPSaveOnCompile];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:OpenConsoleOnTypeset];
 
-  
+  // console
+  [defaultValues setObject:[NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]] forKey:TEConsoleFont];  
 	
 	//--- colors for syntax highlighting
 	
   // default text
-  [defaultValues setObject:[NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]] forKey:TEDocumentFont];
+  [defaultValues setObject:[NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]] forKey:TEDocumentFont];  
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   
