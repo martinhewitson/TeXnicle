@@ -120,15 +120,15 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
 	
   // special chars
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor magentaColor]] forKey:TESyntaxSpecialCharsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorSpecialChars];
   
   // commands
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor redColor]] forKey:TESyntaxCommandColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:105.0/255.0 green:0.0/255.0 blue:0.0 alpha:1.0]] forKey:TESyntaxCommandColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorCommand];
   
   // arguments
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:62.0/255.0 green:109.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxArgumentsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.0/255.0 green:100.0/255.0 blue:185.0/255.0 alpha:1.0]] forKey:TESyntaxArgumentsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorArguments];
 	
   //---------- Paths
@@ -282,6 +282,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 {
 	
 	NSError *error = nil;
+  
 	id doc = [[NSDocumentController sharedDocumentController] makeUntitledDocumentOfType:@"TeX Document" error:&error];
 	if (error) {
 		[NSApp presentError:error];
