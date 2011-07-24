@@ -234,18 +234,19 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 	// build path to the pdf file
 	NSString *mainFile = [self engineDocumentToCompile:self];
   
-	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
-	NSFileManager *fm = [NSFileManager defaultManager];
+	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
+  NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
 	for (NSString *ext in filesToClear) {
 		error = nil;
 		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
-		if ([fm removeItemAtPath:file error:&error]) {
-			[[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
-		} else {
-			[[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
-		} 
-		
+    if ([fm fileExistsAtPath:file]) {
+      if ([fm removeItemAtPath:file error:&error]) {
+        [[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
+      } else {
+        [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+      } 
+    }		
 	}		
 }
 
