@@ -17,6 +17,8 @@
 }
 
 + (ConsoleController*)sharedConsoleController;
+- (void) handleUserDefaultsChanged:(NSNotification*)aNote;
+
 - (IBAction) clear:(id)sender;
 - (void) appendText:(NSString*)someText;
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor;

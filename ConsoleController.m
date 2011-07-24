@@ -20,8 +20,24 @@ static ConsoleController *sharedConsoleController = nil;
 		return nil;
 	
 	[[self window] setLevel:NSNormalWindowLevel];
-  	
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
+	[textView setFont:font];
+  
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self
+         selector:@selector(handleUserDefaultsChanged:)
+             name:NSUserDefaultsDidChangeNotification
+           object:nil];
+  
 	return self;
+}
+
+- (void) handleUserDefaultsChanged:(NSNotification*)aNote
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
+	[textView setFont:font];
 }
 
 + (ConsoleController*)sharedConsoleController
@@ -83,6 +99,8 @@ static ConsoleController *sharedConsoleController = nil;
 
 - (void) error:(NSString*)someText 
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
 	if ([someText length]>0) {
 		if ([someText characterAtIndex:[someText length]-1] != '\n') {
 			someText = [someText stringByAppendingString:@"\n"];
@@ -92,6 +110,9 @@ static ConsoleController *sharedConsoleController = nil;
 		[attstr addAttribute:NSForegroundColorAttributeName
 									 value:[NSColor redColor]
 									 range:stringRange];
+    [attstr addAttribute:NSFontAttributeName
+                   value:font
+                   range:stringRange];
 		[[textView textStorage] appendAttributedString:attstr];
 		[attstr release];
 		[textView moveToEndOfDocument:self];
@@ -116,6 +137,8 @@ static ConsoleController *sharedConsoleController = nil;
 
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
 	NSString *str = [someText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSColor *textColor = aColor;
 	if (!textColor) {
@@ -134,6 +157,9 @@ static ConsoleController *sharedConsoleController = nil;
 			[attstr addAttribute:NSForegroundColorAttributeName
 										 value:textColor
 										 range:stringRange];
+      [attstr addAttribute:NSFontAttributeName
+                     value:font
+                     range:stringRange];
 			[[textView textStorage] appendAttributedString:attstr];
 			[attstr release];
 		}
