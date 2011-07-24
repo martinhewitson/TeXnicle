@@ -353,7 +353,7 @@
   
   // First collect an array of folding tag descriptions that are in range
   NSArray *foldingTagArray = [self foldingTagsForTextRange:aRange];
-  
+//  NSLog(@"Tags found: %@", foldingTagArray);
   // Make a mutable copy of the folding tags so that we can remove them as
   // they get sorted in to pairs.
   NSMutableArray *tags = [NSMutableArray arrayWithArray:foldingTagArray];
@@ -410,6 +410,7 @@
   
   // get first tag  
   MHFoldingTag *firstTag = [foldingTagArray objectAtIndex:0];
+//  NSLog(@"* Building folder for %@ from %@", firstTag, foldingTagArray);
   // If this is an end tag, we build a code folder with a missing start index. This will get completed later.
   // The assumption is that the start of this code folder is out of view.
   if (!firstTag.isStartTag) {
@@ -422,9 +423,11 @@
   BOOL matchFound = NO;
   for (NSInteger kk=1; kk<Ntags; kk++) {
     nextTag = [foldingTagArray objectAtIndex:kk];
+//    NSLog(@"  Checking tag: %@ for %@", nextTag, firstTag);
     if (nextTag.isStartTag) {
+//      NSLog(@"      Is start tag %@", nextTag);
       // spawn a recursive call because we have nested folders here
-      NSDictionary *dict = [self matchTagPairs:[foldingTagArray subarrayWithRange:NSMakeRange(kk, Ntags-1-kk)]];
+      NSDictionary *dict = [self matchTagPairs:[foldingTagArray subarrayWithRange:NSMakeRange(kk, Ntags-kk)]];
       NSArray *matchedPairs = [dict valueForKey:@"folders"];
       NSArray *usedTagsInMatching = [dict valueForKey:@"tags"];
       if (![usedTagsInMatching isEmpty]) {
@@ -436,8 +439,11 @@
         }
       }
     } else {
+//      NSLog(@"      Is end tag %@ for %@", nextTag, firstTag);
       // we make a folder and stop
+//      NSLog(@"    Making folder for %@", firstTag);
       MHCodeFolder *folder = [MHCodeFolder codeFolderWithStartIndex:firstTag.index endIndex:nextTag.index startLine:firstTag.lineNumber endLine:nextTag.lineNumber tag:firstTag.tag];
+//      NSLog(@"    Made folder: %@", folder);
       [returnFolders addObject:folder];
       [usedTags addObject:firstTag];
       [usedTags addObject:nextTag];
@@ -665,10 +671,15 @@
 	// Round up the value. There is a bug on 10.4 where the display gets all wonky when scrolling if you don't
 	// return an integral value here.
 	CGFloat foldWidth = 0.0;
-	if (includeCodeFolders)
+  CGFloat minWidth = kDEFAULT_THICKNESS;
+	if (includeCodeFolders) {
 		foldWidth = kFOLDING_GUTTER;
-	
-	return ceilf(MAX(kDEFAULT_THICKNESS, stringSize.width + kRULER_MARGIN * 2 + foldWidth));
+    minWidth = kDEFAULT_THICKNESS + kFOLDING_GUTTER;
+	}
+  
+  CGFloat width = ceilf(MAX(minWidth, stringSize.width + kRULER_MARGIN * 2 + foldWidth));
+  
+	return width;
 }
 
 // Returns the folder for a given point. This is done
