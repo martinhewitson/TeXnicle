@@ -79,6 +79,15 @@
 	}
 	[docFont setValue:f forKey:@"font"];	
 	[docFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
+  
+  
+	f = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
+	if (!f) {
+		f = [NSFont userFixedPitchFontOfSize:12];
+	}
+	[consoleFont setValue:f forKey:@"font"];	
+	[consoleFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
+  
 	
   [self addView:generalPrefsView 
 					label:@"General" 
@@ -175,7 +184,7 @@
 	}
 }
 
-- (void)selectDocFont:(id)sender
+- (IBAction)selectDocFont:(id)sender
 {
 	
 	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
@@ -195,6 +204,29 @@
 	[defaults synchronize];
 	[docFont setValue:f forKey:@"font"];	
 	[docFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
+	[templateEditor setFont:f];
+}
+
+- (IBAction)selectConsoleFont:(id)sender
+{
+	
+	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
+	[fp setPanelFont:[consoleFont font] isMultiple:YES];
+	[fp makeKeyAndOrderFront:self];
+	
+	NSFontManager *fm = [NSFontManager sharedFontManager];
+	[fm setTarget:self];
+	[fm setAction:@selector(consoleFontChanged:)];
+}
+
+- (void)consoleFontChanged:(id)sender
+{
+	NSFont *f = [sender convertFont:[consoleFont font]];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setValue:[NSArchiver archivedDataWithRootObject:f] forKey:TEConsoleFont];
+	[defaults synchronize];
+	[consoleFont setValue:f forKey:@"font"];	
+	[consoleFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
 	[templateEditor setFont:f];
 }
 

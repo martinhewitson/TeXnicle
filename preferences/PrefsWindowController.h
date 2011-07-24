@@ -23,6 +23,7 @@
 	IBOutlet TeXTextView *templateEditor;
 	
 	IBOutlet NSTextField *docFont;
+	IBOutlet NSTextField *consoleFont;
 	
 	
 	SyntaxHighlightControlController *commentsController;
@@ -64,6 +65,9 @@
 
 - (IBAction)selectDocFont:(id)sender;
 - (IBAction)docFontChanged:(id)sender;
+
+- (IBAction)selectConsoleFont:(id)sender;
+- (void)consoleFontChanged:(id)sender;
 
 - (IBAction) wrapStyleChanged:(id)sender;
 
