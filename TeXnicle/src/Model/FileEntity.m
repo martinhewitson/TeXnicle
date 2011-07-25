@@ -179,6 +179,8 @@
 		[document release];
 		document = nil;
 	}
+  self.content = nil;
+  self.fileLoadDate = nil;
 }
 
 - (NSString*) extension

@@ -17,9 +17,9 @@
 	
 }
 
-@property (assign) NSDate *fileLoadDate;
-@property (assign) NSString *extension;
-@property (assign) NSData *content;
+@property (retain) NSDate *fileLoadDate;
+@property (copy) NSString *extension;
+@property (retain) NSData *content;
 @property (assign) BOOL isText;
 @property (readonly) FileDocument *document;
 
