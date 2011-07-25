@@ -11,8 +11,6 @@
 #import "FileEntity.h"
 #import "externs.h"
 #import "FileDocument.h"
-#import "UKKQueue.h"
-#import "UKKQueue+TeXnicle.h"
 #import "NSString+CharacterSize.h"
 #import "DocWindowController.h"
 
@@ -102,12 +100,6 @@
 		[openDocuments removeObject:aDoc];
 	}
 
-	// stop listening to this file
-	UKKQueue *queue = [UKKQueue sharedFileWatcher];
-	if ([queue watchingPath:[aDoc pathOnDisk]]) {
-		[queue removePath:[aDoc pathOnDisk]];			
-	}
-	
 	[self performSelector:@selector(updateDoc) withObject:self afterDelay:0.0];
 	
 //	NSLog(@"Current doc: %@", [currentDoc valueForKey:@"name"]);
@@ -170,13 +162,6 @@
 		// load this file from disk
 		[aDoc reloadFromDisk];
 		
-		// listen to this file
-		UKKQueue *queue = [UKKQueue sharedFileWatcher];
-		//NSLog(@"Listening to %@", [aDoc pathOnDisk]);
-		[queue setDelegate:self];		
-		[queue addPathToQueue: [aDoc pathOnDisk]
-					 notifyingAbout: UKKQueueNotifyAboutWrite];
-		
 		[openDocuments addObject:aDoc];
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc] ;
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];
@@ -195,42 +180,6 @@
 	}
 	
 	[self.texEditorViewController.textView setNeedsDisplay:YES];
-}
-
--(void) watcher: (id<UKFileWatcher>)kq receivedNotification: (NSString*)nm forPath: (NSString*)fpath;
-{
-	ProjectEntity *project = [delegate project];
-	FileEntity *file = [project fileWithPathOnDisk:fpath];
-
-//	NSLog(@"File %@ changed %@", fpath, nm);
-	
-	NSString *msg = [NSString stringWithFormat:@"File \u201c%@\u201d changed on disk", [file name]];
-	NSString *info = [NSString stringWithFormat:@"The file at %@ was changed by another application. Do you want to reload it from disk?", fpath];
-	
-	NSAlert *alert = [NSAlert alertWithMessageText:msg
-																	 defaultButton:@"Reload"
-																 alternateButton:@"Ignore"
-																		 otherButton:nil
-											 informativeTextWithFormat:info];
-	
-
-	NSInteger res = [alert runModal];
-	
-//	NSLog(@"Res: %d", res);
-	
-	if (res == NSAlertDefaultReturn) {
-		[file reloadFromDisk];
-		//NSLog(@"Reloaded file %@, %@", file, [file contentString]);
-		[self performSelector:@selector(updateDoc) withObject:nil afterDelay:0];
-//		[self updateDoc];
-	} else if (res == NSAlertAlternateReturn) {
-//		NSLog(@"Ignore");
-		
-	} else {
-//		NSLog(@"???");
-	}
-	
-	
 }
 
 - (void)updateDoc
