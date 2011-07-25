@@ -105,7 +105,6 @@
 
 - (NSArray*)listOfCitations
 {
-  NSLog(@"Asking %@ for citations", self.delegate);
   return [self.delegate performSelector:@selector(listOfCitations)];
 }
 
