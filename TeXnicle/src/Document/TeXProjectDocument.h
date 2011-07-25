@@ -13,6 +13,7 @@
 #import "ProjectOutlineController.h"
 #import "FindInProjectController.h"
 #import "TPLaTeXEngine.h"
+#import "TPFileMonitor.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -21,7 +22,7 @@
 @class FindInProjectController;
 @class TPStatusView;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPFileMonitorDelegate, TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -84,7 +85,7 @@
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
 @property (assign) IBOutlet PDFView *pdfView;
-
+@property (retain) TPFileMonitor *fileMonitor;
 
 + (id)newTeXnicleProject;
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;

@@ -33,6 +33,7 @@
 @synthesize projectTypeSelector;
 @synthesize pdfView;
 @synthesize pdfSearchResults;
+@synthesize fileMonitor;
 
 - (void) dealloc
 {
@@ -43,6 +44,7 @@
   self.texEditorViewController = nil;
   self.engine = nil;
   self.pdfSearchResults = nil;
+  self.fileMonitor = nil;
   [super dealloc];
 }
 
@@ -98,6 +100,9 @@
   
   // setup engine
   self.engine = [TPLaTeXEngine engineWithDelegate:self];
+  
+  // setup file monitor
+  self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -1021,22 +1026,8 @@
 
 - (IBAction) clean:(id)sender
 {
-	// build path to the pdf file
-	NSString *mainFile = [self.engine fileToCompile];
-  
-	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles]; // [NSArray arrayWithObjects:@"pdf", @"aux", @"log", @"dvi", @"ps", @"bbl", nil];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	NSError *error = nil;
-	for (NSString *ext in filesToClear) {
-		error = nil;
-		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
-		if ([fm removeItemAtPath:file error:&error]) {
-			[[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
-		} else {
-			[[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
-		} 
-		
-	}		
+  [self.engine trashAuxFiles];
+  [self showDocument];
 }
 
 - (IBAction) projectTypeChanged:(id)sender
@@ -1888,6 +1879,48 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   return YES;
 }
+
+#pragma mark -
+#pragma mark File Monitor Delegate
+
+- (NSArray*) fileMonitorFileList:(TPFileMonitor*)aMonitor
+{
+  NSMutableArray *files = [NSMutableArray array];
+  for (id item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      [files addObject:item];
+    }
+  }
+  return files;
+}
+
+- (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
+{
+  NSString *filename = [file valueForKey:@"shortName"];
+  NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
+                                   defaultButton:@"Reload"
+                                 alternateButton:@"Continue"
+                                     otherButton:nil 
+                       informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
+  NSInteger result = [alert runModal];
+  if (result == NSAlertDefaultReturn) {
+    
+    FileEntity *fileEntity = (FileEntity*)file;
+    [fileEntity reloadFromDisk];
+    [self.openDocuments updateDoc];
+    
+  } else {
+    [file setValue:modified forKey:@"fileLoadDate"];
+  }
+  
+  
+}
+
+- (NSString*)fileMonitor:(TPFileMonitor*)aMonitor pathOnDiskForFile:(id)file
+{
+  return [file valueForKey:@"pathOnDisk"];
+}
+
 
 
 @end
