@@ -17,6 +17,8 @@
 #import "TeXFileEntity.h"
 
 NSString * const TEDocumentTemplates = @"TEDocumentTemplates";
+NSString * const TEUserCommands = @"TEUserCommands";
+
 
 NSString * const TPGSPath = @"TPGSPath";
 NSString * const TPPDFLatexPath = @"TPPDFLatexPath";
@@ -92,9 +94,10 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	}
 	[defaultValues setObject:templates forKey:TEDocumentTemplates];
 
+  // user commands
+  [defaultValues setObject:[NSMutableArray array] forKey:TEUserCommands];
   
-	// Document settings
-	
+	// Document settings	
 	[defaultValues setValue:[NSNumber numberWithInt:TPHardWrap] forKey:TELineWrapStyle];
 	[defaultValues setValue:[NSNumber numberWithInt:80] forKey:TELineLength];
 	
