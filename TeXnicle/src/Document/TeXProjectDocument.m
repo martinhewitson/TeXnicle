@@ -924,6 +924,11 @@
 	return citations;	
 }
 
+-(NSArray*)listOfCommands
+{
+  return [NSArray array]; 
+}
+
 -(NSArray*)listOfReferences
 {
 	NSMutableArray *tags = [NSMutableArray array];
