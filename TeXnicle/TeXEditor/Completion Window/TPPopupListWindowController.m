@@ -66,7 +66,7 @@
 		NSView *view = [self view];
 		CGFloat rowHeight = [table rowHeight];
 		CGFloat width = 100.0;
-		CGFloat height = MAX(100.0, 20.0 + rowHeight*(1+[entries count]));
+		CGFloat height = MAX(150.0, 20.0 + rowHeight*(1+[entries count]));
 		
 		if (height > 500)
 			height = 500;
@@ -92,6 +92,7 @@
 		
 		
 		width = MAX(width, maxWidth);
+    
 		
 //		NSLog(@"Setting table bounds: %f x %f", width , height);
 //		NSLog(@"Attaching window at: %f x %f", point.x , point.y);
@@ -102,9 +103,9 @@
 																									 inWindow:parentWindow 
 																										 onSide:MAPositionAutomatic 
 																								 atDistance:0.0];
-		[attachedWindow setBorderColor:[NSColor whiteColor]];
-		[attachedWindow setBackgroundColor:[NSColor clearColor]];
-		[attachedWindow setViewMargin:10.0];
+		[attachedWindow setBorderColor:[NSColor clearColor]];
+		[attachedWindow setBackgroundColor:[NSColor lightGrayColor]];
+		[attachedWindow setViewMargin:0.0];
 		[attachedWindow setBorderWidth:3.0];
 		[attachedWindow setCornerRadius:10.0];
 		[attachedWindow setHasArrow:NO];

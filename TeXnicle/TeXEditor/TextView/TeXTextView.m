@@ -655,24 +655,28 @@
 		NSArray *list = self.beginList;
 		[self insertFromList:list];			
 	} else if ([word hasPrefix:@"\\"]) {
-    if ([delegate respondsToSelector:@selector(commands)]) {
-      NSArray *list = self.commandList;
-      //NSLog(@"Commands: %@", list);
-      if ([word length]>1) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
-        list = [list filteredArrayUsingPredicate:predicate];			
-      }
-      if ([list count]>0) {
-        [self completeFromList:list];			
-      } else {
-        NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
-                                                                                   inString:word
-                                                                                   language:nil
-                                                                     inSpellDocumentWithTag:0];
-        [self completeFromList:list];
-        // otherwise we just call super
-        //			[super complete:sender];
-      }
+    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
+    
+    // get list of user defaults commands
+    list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
+    
+    if ([delegate respondsToSelector:@selector(listOfCommands)]) {
+      list = [list arrayByAddingObjectsFromArray:[delegate listOfCommands]];
+    }
+    if ([word length]>1) {
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
+      list = [list filteredArrayUsingPredicate:predicate];			
+    }
+    if ([list count]>0) {
+      [self completeFromList:list];			
+    } else {
+      NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
+                                                                                 inString:word
+                                                                                 language:nil
+                                                                   inSpellDocumentWithTag:0];
+      [self completeFromList:list];
+      // otherwise we just call super
+      //			[super complete:sender];
     }
 	} else {
 		// otherwise we just call super
@@ -689,6 +693,16 @@
 	}
 }
 
+- (NSArray*)userDefaultCommands
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *commandDicts = [defaults valueForKey:TEUserCommands];
+  NSMutableArray *commands = [NSMutableArray array];
+  for (NSDictionary *dict in commandDicts) {
+    [commands addObject:[dict valueForKey:@"Name"]];
+  }
+  return commands;
+}
 
 - (void) completeFromList:(NSArray*)aList
 {

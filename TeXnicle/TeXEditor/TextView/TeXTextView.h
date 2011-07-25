@@ -23,6 +23,7 @@
 -(NSArray*)listOfCitations;
 -(NSArray*)listOfReferences;
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
+-(NSArray*)listOfCommands;
 
 @end
 
@@ -129,6 +130,7 @@
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord;
 - (void) replaceWordAtCurrentLocationWith:(NSString*)aWord;
 - (void) clearSpellingList;
+- (NSArray*)userDefaultCommands;
 
 #pragma mark -
 #pragma mark Selection
