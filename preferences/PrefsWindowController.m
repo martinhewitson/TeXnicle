@@ -10,6 +10,7 @@
 #import "externs.h"
 #import "NSArray+Color.h"
 #import "TeXTextView.h"
+#import "NSString+Comparisons.h"
 
 @implementation PrefsWindowController
 
@@ -103,12 +104,44 @@
   [self addView:templatesView 
 					label:@"Templates" image:[NSImage imageNamed:@"templates"]];	
 	
+  [self addView:userCommandsView
+					label:@"Commands" image:[NSImage imageNamed:@"commandsPrefs"]];	
+  
 	[templateEditor setFont:f];
 	
 	[templatesController setSelectsInsertedObjects:YES];
 
 	
 }
+
+#pragma mark -
+#pragma mark Commands Control
+
+- (IBAction) newCommand:(id)sender
+{
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	[dict setValue:[NSString stringWithFormat:@"\\newCommand%d", [[userCommandsController arrangedObjects] count]]
+					forKey:@"Name"];
+	
+	[userCommandsController insertObject:dict atArrangedObjectIndex:0];
+	[userCommandsController setSelectionIndex:0];
+  [userCommandsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+  [userCommandsTable editColumn:0 row:[userCommandsTable selectedRow] withEvent:nil select:YES];
+}
+
+-(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+  if (tableView == userCommandsTable) {
+    NSString *newCommand = object;
+    newCommand = [newCommand stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    if (![newCommand beginsWith:@"\\"]) {
+      newCommand = [@"\\" stringByAppendingString:newCommand];
+      [[[userCommandsController arrangedObjects] objectAtIndex:row] setValue:newCommand forKey:@"Name"];
+    }
+  }
+}
+
 
 #pragma mark -
 #pragma mark Templates Control

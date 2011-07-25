@@ -11,13 +11,18 @@
 #import "SyntaxHighlightControlController.h"
 #import "TeXTextView.h"
 
-@interface PrefsWindowController : DBPrefsWindowController {
+@interface PrefsWindowController : DBPrefsWindowController <NSTableViewDelegate, NSTableViewDataSource> {
 
 	IBOutlet NSView *generalPrefsView;
 	IBOutlet NSView *syntaxColorsView;
 	IBOutlet NSView *templatesView;
 	IBOutlet NSView *engineView;
+	IBOutlet NSView *userCommandsView;
 
+  
+  IBOutlet NSTableView *userCommandsTable;
+	IBOutlet NSArrayController *userCommandsController;
+  
 	IBOutlet NSArrayController *templatesController;
 	IBOutlet NSTableView *templatesTable;
 	IBOutlet TeXTextView *templateEditor;
@@ -54,6 +59,10 @@
 }
 
 
+#pragma mark -
+#pragma mark Commands Control
+
+- (IBAction) newCommand:(id)sender;
 
 #pragma mark -
 #pragma mark Control 
