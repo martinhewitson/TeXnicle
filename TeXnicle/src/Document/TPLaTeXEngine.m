@@ -233,8 +233,11 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 {
 	// build path to the pdf file
 	NSString *mainFile = [self engineDocumentToCompile:self];
+  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Trashing aux files for %@", [mainFile lastPathComponent]]];
+//  NSLog(@"Trashing for %@", mainFile);
   
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
+//  NSLog(@"  deleting %@", filesToClear);
   NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
 	for (NSString *ext in filesToClear) {
@@ -242,7 +245,7 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		NSString *file = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
     if ([fm fileExistsAtPath:file]) {
       if ([fm removeItemAtPath:file error:&error]) {
-        [[ConsoleController sharedConsoleController] appendText:[NSString stringWithFormat:@"Deleted: %@", file]];
+        [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Deleted: %@", file]];
       } else {
         [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
       } 
