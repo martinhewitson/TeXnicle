@@ -25,6 +25,7 @@ typedef enum {
 } TPWrapStyle;
 
 extern NSString * const TEDocumentTemplates;
+extern NSString * const TEUserCommands;
 
 extern NSString * const TECursorPositionDidChangeNotification;
 extern NSString * const TELineWrapStyle;
