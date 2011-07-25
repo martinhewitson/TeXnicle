@@ -59,12 +59,12 @@
         fileChangedOnDisk:file 
              modifiedDate:[NSDate dateWithTimeInterval:2 sinceDate:loadDate]];
       } else {
-        //      NSLog(@"Checking %@", path);
-        //      NSLog(@"  loaded: %@", loadDate);
+        //NSLog(@"Checking %@", path);
+        //NSLog(@"  loaded: %@", loadDate);
         
         NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
         NSDate *modified = [atts objectForKey:NSFileModificationDate];
-        //      NSLog(@"   modified %@", modified);
+        //NSLog(@"   modified %@", modified);
         if ([modified compare:loadDate] == NSOrderedDescending) {
           [self fileMonitor:self fileChangedOnDisk:file modifiedDate:modified];
         }
