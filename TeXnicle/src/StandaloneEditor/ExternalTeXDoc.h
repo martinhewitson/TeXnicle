@@ -8,11 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TPLaTeXEngine.h"
+#import "TPFileMonitor.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate, TPFileMonitorDelegate> {
 
 	NSMutableAttributedString *documentData;
 
@@ -47,6 +48,9 @@
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) IBOutlet NSView *texEditorContainer;
 @property (retain) TPLaTeXEngine *engine;
+@property (retain) NSDate *fileLoadDate;
+
+@property (retain) TPFileMonitor *fileMonitor;
 
 - (void) updateFileStatus;
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;

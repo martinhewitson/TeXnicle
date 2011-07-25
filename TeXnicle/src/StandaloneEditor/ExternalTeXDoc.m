@@ -25,6 +25,8 @@
 @synthesize engine;
 @synthesize statusView;
 @synthesize compilerType;
+@synthesize fileLoadDate;
+@synthesize fileMonitor;
 
 - (void)awakeFromNib
 {
@@ -40,6 +42,8 @@
 	
   self.engine = [TPLaTeXEngine engineWithDelegate:self];
   self.compilerType = TPEngineCompilerPDFLaTeX;
+  
+  self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	
@@ -96,6 +100,8 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   self.engine = nil;
+  self.fileLoadDate = nil;
+  self.fileMonitor = nil;
 	[super dealloc];
 }
 
@@ -149,6 +155,7 @@
   } else {
     [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
   }
+  self.fileLoadDate = [NSDate dateWithTimeIntervalSinceNow:2];
 }
 
 - (void) setFileURL:(NSURL *)absoluteURL
@@ -190,30 +197,21 @@
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSStringEncoding encoding;
-	
+	NSLog(@"Reading from URL %@", absoluteURL);
 	
 	NSString *str = [NSString stringWithContentsOfURL:absoluteURL
 																						 usedEncoding:&encoding
 																										error:outError];
 		
-//	NSString *str = [NSString stringWithContentsOfURL:absoluteURL
-//																					 encoding:NSUTF8StringEncoding
-//																							error:outError];
-//	
-//	
-//	if (!str) {		
-//		str = [NSString stringWithContentsOfURL:absoluteURL
-//																	 encoding:NSASCIIStringEncoding
-//																			error:outError];
-//	}
-
 	if (str) {
+    self.fileLoadDate = [NSDate date];
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
 		return YES;
 	}
 
 	return NO;
 }
+
 
 //- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 //{
@@ -431,6 +429,10 @@
 	return [str citations];	
 }
 
+- (NSArray*) listOfCommands
+{
+  return [NSArray array];
+}
 
 - (NSArray*) listOfReferences
 {
@@ -529,6 +531,36 @@
 - (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
 {
   return NO;
+}
+
+#pragma mark -
+#pragma mark File Monitor Delegate
+
+- (NSString*)fileMonitor:(TPFileMonitor*)aMonitor pathOnDiskForFile:(id)file
+{
+  return [[self fileURL] path];
+}
+
+- (NSArray*)fileMonitorFileList:(TPFileMonitor *)aMonitor
+{
+  return [NSArray arrayWithObject:self];
+}
+
+-(void) fileMonitor:(TPFileMonitor *)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
+{
+  NSString *filename = [[[self fileURL] path] lastPathComponent];
+  NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
+                                   defaultButton:@"Reload"
+                                 alternateButton:@"Continue"
+                                     otherButton:nil 
+                       informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
+  NSInteger result = [alert runModal];
+  if (result == NSAlertDefaultReturn) {
+    [self revertDocumentToSaved:self];
+		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+  } else {
+    self.fileLoadDate = modified;
+  }
 }
 
 @end
