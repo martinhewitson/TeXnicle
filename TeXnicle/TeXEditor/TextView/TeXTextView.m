@@ -581,9 +581,6 @@
 
 - (void) processEditing:(NSNotification*)aNote
 {
-  //	[self syntaxHighlight];
-  //  [self colorParagraph];
-  //	[self recalculateLineNumbers];
 	[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:NO];
 }
 
@@ -1187,6 +1184,7 @@
 
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
+  
   [self setNeedsDisplay:YES];
   [self updateEditorRuler];
   NSRange r = [self selectedRange];
