@@ -118,6 +118,11 @@
   return [self.delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:prefix];
 }
 
+-(NSArray*)listOfCommands
+{
+  return [self.delegate performSelector:@selector(listOfCommands)];
+}
+
 - (NSUndoManager *)undoManagerForTextView:(NSTextView *)aTextView
 {
 	// ask my delegate for an undo manager to use
