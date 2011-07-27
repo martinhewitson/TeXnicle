@@ -104,6 +104,7 @@
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
+  
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
   
@@ -114,7 +115,7 @@
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
 	if (![saveFolder isEqual:projectFolder]) {
-    //		NSLog(@"Set project folder from %@ to %@", saveFolder, projectFolder);
+//    NSLog(@"Set project folder from %@ to %@", saveFolder, projectFolder);
 		[self.project setValue:projectFolder forKey:@"folder"];
 	}
   
@@ -142,6 +143,11 @@
              name:NSTextViewDidChangeSelectionNotification 
            object:self.texEditorViewController.textView];
   
+  [nc addObserver:self
+         selector:@selector(handleTextEditorDidProcessEdits:)
+             name:TPFileItemTextStorageChangedNotification
+           object:nil];
+  
   
   [self.statusView setProjectStatus:@"Welcome to TeXnicle."];
   [self.statusView setEditorStatus:@"No Selection."];
@@ -156,7 +162,11 @@
 
   
   // ensure the project has the same name as on disk
-  [self.project setValue:[[[self fileURL] lastPathComponent] stringByDeletingPathExtension] forKey:@"name"];
+  NSString *newProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
+  if (![[self.project valueForKey:@"name"] isEqualToString:newProjectName]) {
+//    NSLog(@"Setting project name %@", newProjectName);
+    [self.project setValue:newProjectName forKey:@"name"];
+  }
 //  [self saveDocument:self];
 
 //  NSLog(@"Loaded project %@", self.project);
@@ -302,81 +312,6 @@
 	return managedContext;
 }
 
-//- (id)initWithType:(NSString *)typeName error:(NSError **)outError
-//{
-//  //	NSLog(@"Init with type...");
-//	NSError *error=nil;
-//	self = [super initWithType:typeName error:&error];
-//	if (error) {
-//		[NSApp presentError:error];
-//		return nil;
-//	}
-//	
-//	if (self != nil) {
-//    
-//    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-//    [managedObjectContext processPendingChanges];
-//    [[managedObjectContext undoManager] disableUndoRegistration];
-//    self.project = [NSEntityDescription insertNewObjectForEntityForName:@"Project"
-//                                                 inManagedObjectContext:managedObjectContext];
-//    [managedObjectContext processPendingChanges];
-//    [[managedObjectContext undoManager] enableUndoRegistration];
-//    
-//    // get a project name from the user
-//    NSSavePanel *savePanel = [NSSavePanel savePanel];
-//    [savePanel setTitle:@"Save New Project..."];
-//    [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"texnicle"]];
-//    [savePanel setPrompt:@"Create"];
-//    [savePanel setMessage:@"Choose a location for the new TeXnicle project."];
-//    [savePanel setAllowsOtherFileTypes:NO];
-//    [savePanel setCanCreateDirectories:YES];
-//    
-//    BOOL result = [savePanel runModal];
-//    
-//    if (result == NSFileHandlingPanelCancelButton) {
-//      return nil;
-//    }
-// 
-//    
-//////    [self saveDocument:self];
-//    NSError *saveError = nil;
-//    NSString *path = [[savePanel URL] path];
-//    NSURL *url = [NSURL fileURLWithPath:path];
-//
-//    [self setFileType:@"texnicle"];
-//    [self setFileURL:url];
-//    
-//    NSLog(@"Saving to %@", url);
-//    [self saveToURL:url ofType:@"texnicle" forSaveOperation:NSSaveOperation error:&saveError];
-//    if (saveError) {
-//      [NSApp presentError:saveError];
-//      return nil;
-//    }
-//    
-//    NSString *fullpath = [[self fileURL] path];
-//    NSString *name = [[fullpath lastPathComponent] stringByDeletingPathExtension];
-//    NSString *folder = [fullpath stringByDeletingLastPathComponent];
-//    // set these to the project
-//    [managedObjectContext processPendingChanges];
-//    [[managedObjectContext undoManager] disableUndoRegistration];
-//    [self.project setValue:name forKey:@"name"];
-//    [self.project setValue:folder forKey:@"folder"]; 
-//    [self addNewArticleMainFile];
-//    [managedObjectContext processPendingChanges];
-//    [[managedObjectContext undoManager] enableUndoRegistration];    
-//    
-//    
-////    [self saveToURL:url ofType:@"texnicle" forSaveOperation:NSSaveOperation delegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];
-//    
-////    [self saveDocument:self];
-//    
-////    [self setFileType:@"XML"];
-////    [self runModalSavePanelForSaveOperation:NSSaveOperation delegate:self didSaveSelector:@selector(document:didSave:contextInfo:) contextInfo:NULL];		
-//	}
-//	return self;
-//}
-
-
 - (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL*)url 
 																					 ofType:(NSString*)fileType
 															 modelConfiguration:(NSString*)configuration
@@ -415,6 +350,7 @@
 
 - (NSManagedObject *)project
 {
+  
 	if (project != nil) {
 		return project;
 	}
@@ -803,6 +739,11 @@
 
 #pragma mark -
 #pragma mark Notification Handlers
+
+- (void) handleTextEditorDidProcessEdits:(NSNotification*)aNote
+{
+  [self.projectOutlineView setNeedsDisplay:YES];
+}
 
 - (void) handleTextEditorSelectionChanged:(NSNotification*)aNote
 {
@@ -1768,29 +1709,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
        originalContentsURL:absoluteOriginalContentsURL
                      error:error];
 }
-
-//- (void)saveToURL:(NSURL *)url
-//           ofType:(NSString *)typeName
-// forSaveOperation:(NSSaveOperationType)saveOperation
-//completionHandler:(void (^)(NSError *errorOrNil))completionHandler
-//{
-//	// commit changes for open docs
-//	[openDocuments commitStatus];
-//	
-//	// make sure we save the files here
-//	if ([self saveAllProjectFiles]) {
-//		[super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];
-//	}	
-//  
-//}
-//
-//- (BOOL)canAsynchronouslyWriteToURL:(NSURL *)url
-//                             ofType:(NSString *)typeName
-//                   forSaveOperation:(NSSaveOperationType)saveOperation
-//{
-//  return YES;
-//}
-
 
 
 - (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
