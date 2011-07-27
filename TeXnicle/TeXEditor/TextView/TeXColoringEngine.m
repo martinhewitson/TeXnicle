@@ -78,7 +78,6 @@
   self.specialCharsColor = nil;
   self.commandColor = nil;
   self.argumentsColor = nil;
-  self.colorArguments = nil;
   
   [keys release];
   [specialChars release];
@@ -178,11 +177,19 @@
   [layoutManager ensureGlyphsForCharacterRange:NSMakeRange(0, strLen)];
   
   
-  // apply default font and color
-  [textStorage beginEditing];  
-  [textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:aRange];
-  [textStorage addAttribute:NSFontAttributeName value:self.textFont range:aRange];		  
-  [textStorage endEditing];
+  // apply default font and color, if necessary
+//  NSDictionary *currentAtts = [textStorage attributesAtIndex:aRange.location effectiveRange:NULL];
+//  NSColor *currentTextColor = [currentAtts valueForKey:NSForegroundColorAttributeName];
+//  NSFont *currentTextFont = [currentAtts valueForKey:NSFontAttributeName];
+//  if (![currentTextColor isEqualTo:self.textColor] || ![currentTextFont isEqualTo:self.textFont]) {
+    // Note to self: replace this by setting typing attributes and but setting attributes when 
+    // textstorage is created.
+//    [textStorage beginEditing];  
+//    [textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:aRange];
+//    [textStorage addAttribute:NSFontAttributeName value:self.textFont range:aRange];		  
+//    [textStorage endEditing];
+//  }
+  
   
 	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
   
