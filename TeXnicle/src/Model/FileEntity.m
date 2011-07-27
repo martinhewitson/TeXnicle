@@ -45,7 +45,7 @@
 	// we should make sure the name is in sync with the filepath
 	NSString *newName = [[self filepath] lastPathComponent];
 	if (![[self name] isEqual:newName]) {
-		[self setValue:newName forKey:@"name"];
+    [self setValue:newName forKey:@"name"];
 	}
 	
 //	if (!document) {
@@ -70,14 +70,14 @@
 		// Set the time we load. When we save back to file we can 
 		// check if the file was modified after this date and prompt
 		// the user to overwrite changes or not.
-		[self setValue:[NSDate date] forKey:@"fileLoadDate"];
+		[self setPrimitiveValue:[NSDate date] forKey:@"fileLoadDate"];
 		
 		//NSLog(@"Loaded string %@", str);
 		if (!str) {
 			str = @"";
 		}
 		NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-		[self setValue:data forKey:@"content"];
+		[self setPrimitiveValue:data forKey:@"content"];
 		
 	} else {
     [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"File doesn't exist at %@", filepath]];
