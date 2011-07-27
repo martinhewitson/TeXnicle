@@ -126,7 +126,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[tableColumn setDataCell:imageAndTextCell];
 	
 	[outlineView setSortDescriptors:[self treeNodeSortDescriptors]];
-		
+
 	// make sure we have loaded all items before we try to observe them
 	NSError *error = nil;
 	[self fetchWithRequest:nil merge:YES error:&error];
@@ -1233,18 +1233,18 @@ withIntermediateDirectories:YES
 							 item:(id)item
 {
 	
-	CGFloat imageSize = 18.0;
+	CGFloat imageSize = 20.0;
 	[anOutlineView setRowHeight:imageSize+2.0];
 	
 	ProjectItemEntity *object = [item representedObject];
 
 	[cell setImageSize:imageSize];
-	BOOL dirty = [object hasEdits];
-	if (dirty) {
-		[cell setTextColor:[NSColor lightGrayColor]];
-	} else {
-		[cell setTextColor:[NSColor blackColor]];
-	}
+  BOOL dirty = [object hasEdits];
+  if (dirty) {
+    [cell setTextColor:[NSColor lightGrayColor]];
+  } else {
+    [cell setTextColor:[NSColor blackColor]];
+  }
 		
 	if ([object isKindOfClass:[FolderEntity class]]) {
 		if ([[object valueForKey:@"isExpanded"] boolValue]) {
@@ -1273,7 +1273,7 @@ withIntermediateDirectories:YES
 				[title release];
 			}
 		}
-		
+    		
 		NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
 		[cell setImage:icon];						
 	}
@@ -1301,14 +1301,14 @@ withIntermediateDirectories:YES
 {
 	NSDictionary *dict = [notification userInfo];
 	NSTreeNode *node = [dict objectForKey:@"NSObject"];
-	[[node representedObject] setValue:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
+	[[node representedObject] setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
 }
 
 - (void)outlineViewItemDidExpand:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
 	NSTreeNode *node = [dict objectForKey:@"NSObject"];
-	[[node representedObject] setValue:[NSNumber numberWithBool:YES] forKey:@"isExpanded"];
+	[[node representedObject] setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isExpanded"];
 }
 
 //- (void)outlineViewSelectionDidChange:(NSNotification *)notification
