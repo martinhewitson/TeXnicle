@@ -159,13 +159,13 @@
 			return;
 		}
 		
+    
 		// load this file from disk
 		[aDoc reloadFromDisk];
 		
 		[openDocuments addObject:aDoc];
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc] ;
-		[newItem setLabel:[aDoc valueForKey:@"shortName"]];
-//		NSLog(@"Got short name %@", [aDoc valueForKey:@"shortName"]);
+		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
 		[tabView addTabViewItem:newItem];
 		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
 		[self setCurrentDoc:aDoc];
@@ -210,7 +210,7 @@
 				[self enableTextView];
 				[self.texEditorViewController.textView setUpRuler];
         [self.texEditorViewController.textView setNeedsDisplay:YES];
-//        [self.texEditorViewController.textView colorWholeDocument];
+        [self.texEditorViewController.textView applyFontAndColor];
         [self selectTabForFile:currentDoc];
         [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
                                                     withObject:nil 
@@ -358,10 +358,10 @@
 	NSRect vr = [self.texEditorViewController.textView visibleRect];
 //	NSLog(@"Visible rect: %@", NSStringFromRect(vr));
 	if (!NSEqualSizes(vr.size, NSZeroSize)) {
-		[currentDoc setValue:NSStringFromRect(vr) forKey:@"visibleRect"];
+		[currentDoc setPrimitiveValue:NSStringFromRect(vr) forKey:@"visibleRect"];
 		// store cursor position
 		NSRange r = [self.texEditorViewController.textView selectedRange];
-		[currentDoc setValue:NSStringFromRange(r) forKey:@"cursor"];
+		[currentDoc setPrimitiveValue:NSStringFromRange(r) forKey:@"cursor"];
 	}
 }
 
