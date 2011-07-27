@@ -68,6 +68,7 @@
 - (void) defaultSetup;
 - (void) turnOffWrapping;
 - (void) updateEditorRuler;
+- (void) applyFontAndColor;
 - (void) setWrapStyle;
 - (void) handleFrameChangeNotification:(NSNotification*)aNote;
 
@@ -100,6 +101,7 @@
 #pragma mark -
 #pragma mark Syntax highlighting
 
+- (NSDictionary*)currentTypingAttributes;
 - (void) resetLineNumbers;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;

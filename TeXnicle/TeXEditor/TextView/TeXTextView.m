@@ -98,6 +98,7 @@
   [[self textStorage] setForegroundColor:color];
   [self setFont:font];
   [self setTextColor:color];
+  [self setTypingAttributes:[self currentTypingAttributes]];
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -117,6 +118,14 @@
          selector:@selector(colorVisibleText)
              name:NSTextStorageDidProcessEditingNotification
            object:[self textStorage]];
+}
+
+- (NSDictionary*)currentTypingAttributes
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
+  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
 }
 
 - (void) setUpRuler
@@ -492,6 +501,8 @@
 - (void) stopObserving
 {
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
@@ -504,7 +515,16 @@
 {
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
 
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
+  
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]
                 options:NSKeyValueObservingOptionNew
@@ -556,7 +576,23 @@
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineLength]]) {
     [self setWrapStyle];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
+    [self applyFontAndColor];
 	}
+}
+
+- (void) applyFontAndColor
+{
+  NSDictionary *atts = [self currentTypingAttributes];
+  NSFont *newFont = [atts valueForKey:NSFontAttributeName];
+  NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
+  if (![newFont isEqualTo:[self font]]) {
+    [self setFont:[atts valueForKey:NSFontAttributeName]];
+  }
+  if (![newColor isEqualTo:[self textColor]]) {
+    [self setTextColor:[atts valueForKey:NSForegroundColorAttributeName]];
+  }
+  [self setTypingAttributes:atts];
 }
 
 - (void) setWrapStyle
@@ -1193,6 +1229,8 @@
                                                     userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:r.location] forKey:@"index"]];
   
   [self colorVisibleText];
+  [self setTypingAttributes:[self currentTypingAttributes]];
+
   
 }
 
