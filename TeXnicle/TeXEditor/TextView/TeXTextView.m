@@ -578,6 +578,8 @@
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
     [self applyFontAndColor];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
+    [self applyFontAndColor];
 	}
 }
 
