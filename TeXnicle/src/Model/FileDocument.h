@@ -8,10 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class FileEntity;
 
 @interface FileDocument : NSObject {
 
-	NSManagedObject *file;
+	FileEntity *file;
 	NSTextStorage *textStorage;
 	NSUndoManager *undoManager;
 	
@@ -21,8 +22,9 @@
 @property (readwrite, assign) NSUndoManager *undoManager;
 
 
-- (id) initWithFile:(NSManagedObject*)aFile;
+- (id) initWithFile:(FileEntity*)aFile;
 - (NSTextContainer*)textContainer;
 - (BOOL) commitEdits;
+- (NSDictionary*)currentTypingAttributes;
 
 @end

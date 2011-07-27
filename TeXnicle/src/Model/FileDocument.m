@@ -8,7 +8,9 @@
 
 #import "FileDocument.h"
 #import "externs.h"
+#import "FileEntity.h"
 #import "NSMutableAttributedString+CodeFolding.h"
+#import "NSArray+Color.h"
 
 @implementation FileDocument
 
@@ -16,7 +18,7 @@
 @synthesize textStorage;
 @synthesize undoManager;
 
-- (id) initWithFile:(NSManagedObject*)aFile
+- (id) initWithFile:(FileEntity*)aFile
 {
 	self = [super init];
 	
@@ -39,7 +41,7 @@
 		
 		// Setup a text storage to hold this string
 		NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
-		
+		[attStr addAttributes:[self currentTypingAttributes] range:NSMakeRange(0, [str length])];
 		textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
 									 		
 		// Add a main layout manager
@@ -87,6 +89,14 @@
 	[super dealloc];
 }
 
+- (NSDictionary*)currentTypingAttributes
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
+  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
+}
+
 - (NSTextContainer*)textContainer
 {
 	// An ugly quick hack to return the 'main' text container for this document
@@ -131,19 +141,19 @@
 
 - (void) handleEdits:(NSNotification*)aNote
 {
-//	NSLog(@"Handling edits for %@...", [file valueForKey:@"name"]);
+  NSDate *loaded = [file valueForKey:@"fileLoadDate"];
+  NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
   
-  // check if the text really changed
-//  NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:textStorage];
-//  [string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];  
-//  NSString *str = [string unfoldedString];
-//  [string release];
-//  
-//  NSString *cachedString = [file valueForKey:@"contentString"];
-//  if (![cachedString isEqualToString:str]) {
+  // if the last edit is prior to the load, then we didn't edit so far
+  if ([loaded compare:lastEdit] == NSOrderedAscending) {
+//    NSLog(@"Edit date later than loaded date");
     [file setValue:[NSNumber numberWithBool:YES] forKey:@"hasEdits"];
     [file setValue:[NSDate date] forKey:@"lastEditDate"];
-//  }  
+  } else {
+//    NSLog(@"Edit date earlier than loaded date");
+    [file setValue:[NSNumber numberWithBool:NO] forKey:@"hasEdits"];
+    [file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
+  }
   	
 	// update all views
 	for (NSLayoutManager *layout in [textStorage layoutManagers]) {
@@ -157,7 +167,6 @@
 	NSDictionary *dict = nil;
 	dict = [NSDictionary dictionaryWithObject:file forKey:@"File"];
 	[nc postNotificationName:TPFileItemTextStorageChangedNotification object:self userInfo:dict];
-	
 	
 }
 
