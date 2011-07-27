@@ -13,11 +13,13 @@
 #import "NSString+Comparisons.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "RegexKitLite.h"
+#import "TPDocumentSection.h"
 
 @implementation ProjectOutlineController
 
 @synthesize timer;
 @synthesize delegate;
+@synthesize section;
 
 //- (id)initWithDocument:(TeXProjectDocument*)aDocument
 - (id)init 
@@ -188,7 +190,7 @@
 //  NSLog(@"Main file %@", mainFile);
 	if (!mainFile)
 		return;
-	
+	  
 	NSString *string = [mainFile workingContentString];
 	
 	// take \begin{document} as the start
@@ -396,6 +398,110 @@
                         withRange:NSRangeFromString([link valueForKey:@"range"])
                            inFile:[link valueForKey:@"document"]];
 	return YES;
+}
+
+#pragma mark -
+#pragma mark outline view data source
+
+- (void) reloadData
+{
+  NSLog(@"Reloading data");
+//  if (generating)
+//    return;
+  if (![self.delegate respondsToSelector:@selector(shouldGenerateOutline)]) {
+    return;
+  }
+  
+  BOOL shouldGenerate = [self.delegate shouldGenerateOutline];
+  
+  if (self.delegate == nil || !shouldGenerate) {
+    return;
+  }
+  
+//	generating = YES;
+	
+	// start from the main doc
+	if (!self.delegate) 
+		return;
+	
+	ProjectEntity *project = [self.delegate project];
+	if (!project)
+		return;
+	
+	FileEntity *mainFile = [project valueForKey:@"mainFile"];
+	if (!mainFile)
+		return;
+  
+  self.section = [TPDocumentSection sectionWithRange:NSMakeRange(0, 0) 
+                                              result:@"Document" 
+                                            document:nil];
+  [self.section addSectionsFromFile:mainFile inProject:project];
+
+	
+//	NSString *string = [mainFile workingContentString];
+//	
+//	// take \begin{document} as the start
+//	if (!string)
+//		return;
+//	
+//	NSScanner *aScanner = [NSScanner scannerWithString:string];
+//	
+//	NSString *tag = @"\\begin{document}";
+//	if ([aScanner scanUpToString:tag intoString:NULL]) {
+//		
+//		NSInteger loc = [aScanner scanLocation];
+//		if (loc < 0 || loc >= [string length]) {
+//      NSLog(@"scanner location out of range");
+//			return;
+//    }
+//		
+//    self.section = [TPDocumentSection sectionWithRange:NSMakeRange(loc, [tag length]) 
+//                                                result:[mainFile valueForKey:@"name"] 
+//                                              document:mainFile];
+//    [self.section addSectionsFromFile:mainFile inProject:project];
+//	}	
+		
+  NSLog(@"Section %@", section);
+  
+  [outlineView reloadData];
+  
+//	generating = NO;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+  if (item == nil) {
+    return YES;
+  }
+  
+  if ([[item valueForKey:@"subsections"] count]>0) {
+    return YES;
+  }
+  
+  return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
+{
+  if (item == nil) {
+    return self.section;
+  }
+  
+  return [[item valueForKey:@"subsections"] objectAtIndex:index];
+}
+
+-(NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+  if (item == nil) {
+    return 1;
+  }
+  
+  return [[item valueForKey:@"subsections"] count];
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+  return [item valueForKey:@"result"];
 }
 
 @end

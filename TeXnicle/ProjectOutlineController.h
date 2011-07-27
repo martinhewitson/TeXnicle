@@ -10,6 +10,7 @@
 
 @class ProjectEntity;
 @class FileEntity;
+@class TPDocumentSection;
 
 @protocol ProjectOutlineControllerDelegate <NSObject>
 
@@ -19,7 +20,7 @@
 
 @end
 
-@interface ProjectOutlineController : NSWindowController {
+@interface ProjectOutlineController : NSWindowController <NSOutlineViewDelegate, NSOutlineViewDataSource> {
 
 	NSTimer *timer;
 	NSMutableArray *sections;
@@ -29,15 +30,20 @@
 	IBOutlet NSTextView *textView;
 	id<ProjectOutlineControllerDelegate> delegate;
 	BOOL generating;
+  
+  IBOutlet NSOutlineView *outlineView;
 }
 
 @property (nonatomic, retain) NSTimer *timer;
 @property (assign) IBOutlet id<ProjectOutlineControllerDelegate> delegate;
+@property (retain) TPDocumentSection *section;
 
 - (void) generateTOC;
 //- (void) handleDocChanges:(NSNotification*)aNote;
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(FileEntity*)aFile inProject:(ProjectEntity*)project;
 -(void) turnOffWrapping;
 - (void) deactivate;
+
+- (void) reloadData;
 
 @end
