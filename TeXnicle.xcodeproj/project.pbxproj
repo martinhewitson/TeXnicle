@@ -23,6 +23,7 @@
 		25077326138E5D82000F1118 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 25077325138E5D82000F1118 /* main.c */; };
 		25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077327138E5D82000F1118 /* GetMetadataForFile.m */; };
 		2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2507732A138E5D82000F1118 /* MySpotlightImporter.m */; };
+		250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */; };
 		25152995138F802B00307054 /* TPOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152992138F802B00307054 /* TPOutlineView.m */; };
 		25152996138F802B00307054 /* ESOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152994138F802B00307054 /* ESOutlineView.m */; };
 		25152999138F804D00307054 /* OpenDocumentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152998138F804C00307054 /* OpenDocumentsManager.m */; };
@@ -100,6 +101,7 @@
 		252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */; };
 		252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C51398CA9100656D3F /* findTabBarImage.icns */; };
 		252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */; };
+		252163FF13C09AE7007B4408 /* TPStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252163FE13C09AE7007B4408 /* TPStatusView.m */; };
 		2528E85C1395209300834921 /* NSStringUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85B1395209300834921 /* NSStringUUID.m */; };
 		2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85F139520B300834921 /* NSNotificationAdditions.m */; };
 		2528E86213953BAC00834921 /* trash.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2528E86113953BAC00834921 /* trash.icns */; };
@@ -179,6 +181,8 @@
 		257B47DD138EAB9E00ED02C4 /* ProjectItemTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */; };
 		2581830F139222D200ECCCB1 /* Templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2581830E139222D200ECCCB1 /* Templates.plist */; };
 		258ECC2A13938C0E00DC3394 /* ProjectOutlineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258ECC2813938C0E00DC3394 /* ProjectOutlineController.m */; };
+		259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 259530AA13DCA9A300CA2894 /* commandsPrefs.icns */; };
+		259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 259530AF13DD68DF00CA2894 /* TPFileMonitor.m */; };
 		25A8DEF913979C170097A62E /* UKKQueue+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEF813979C170097A62E /* UKKQueue+TeXnicle.m */; };
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
@@ -190,6 +194,7 @@
 		25E50247139FC9F5004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
 		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
+		25F6EE1713CF24A1001AC45E /* newFolder2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25F6EE1613CF24A1001AC45E /* newFolder2.icns */; };
 		25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */; };
 		25FD408F13913EDB0037CB54 /* FontNameToDisplayNameTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */; };
 		25FD409213913EDB0037CB54 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408813913EDB0037CB54 /* PrefsWindowController.m */; };
@@ -258,6 +263,8 @@
 		25077329138E5D82000F1118 /* MySpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySpotlightImporter.h; sourceTree = "<group>"; };
 		2507732A138E5D82000F1118 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
 		2507732C138E5D82000F1118 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
+		250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSection.h; sourceTree = "<group>"; };
+		250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSection.m; sourceTree = "<group>"; };
 		2514741413929DF60075CB5C /* ToDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		25152991138F802B00307054 /* TPOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineView.h; sourceTree = "<group>"; };
 		25152992138F802B00307054 /* TPOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineView.m; sourceTree = "<group>"; };
@@ -370,6 +377,8 @@
 		252144C51398CA9100656D3F /* findTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = findTabBarImage.icns; sourceTree = "<group>"; };
 		252144C81398EA3D00656D3F /* MHRoundedTopBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedTopBottomView.h; sourceTree = "<group>"; };
 		252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedTopBottomView.m; sourceTree = "<group>"; };
+		252163FD13C09AE7007B4408 /* TPStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPStatusView.h; sourceTree = "<group>"; };
+		252163FE13C09AE7007B4408 /* TPStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPStatusView.m; sourceTree = "<group>"; };
 		2528E85A1395209300834921 /* NSStringUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringUUID.h; sourceTree = "<group>"; };
 		2528E85B1395209300834921 /* NSStringUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringUUID.m; sourceTree = "<group>"; };
 		2528E85E139520B300834921 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
@@ -504,6 +513,9 @@
 		2581830E139222D200ECCCB1 /* Templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Templates.plist; sourceTree = "<group>"; };
 		258ECC2713938C0E00DC3394 /* ProjectOutlineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectOutlineController.h; sourceTree = "<group>"; };
 		258ECC2813938C0E00DC3394 /* ProjectOutlineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectOutlineController.m; sourceTree = "<group>"; };
+		259530AA13DCA9A300CA2894 /* commandsPrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsPrefs.icns; sourceTree = "<group>"; };
+		259530AE13DD68DF00CA2894 /* TPFileMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPFileMonitor.h; sourceTree = "<group>"; };
+		259530AF13DD68DF00CA2894 /* TPFileMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPFileMonitor.m; sourceTree = "<group>"; };
 		25A8DEF713979C170097A62E /* UKKQueue+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UKKQueue+TeXnicle.h"; sourceTree = "<group>"; };
 		25A8DEF813979C170097A62E /* UKKQueue+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UKKQueue+TeXnicle.m"; sourceTree = "<group>"; };
 		25A8DEFB1397A86B0097A62E /* LibraryPreviewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryPreviewBackgroundView.h; sourceTree = "<group>"; };
@@ -519,6 +531,7 @@
 		25D74AED1397F90E0074A5A2 /* MHRoundedBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedBottomView.m; sourceTree = "<group>"; };
 		25E0812C13A11A9000898596 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
+		25F6EE1613CF24A1001AC45E /* newFolder2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newFolder2.icns; sourceTree = "<group>"; };
 		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontNameToDisplayNameTransformer.h; sourceTree = "<group>"; };
@@ -564,8 +577,6 @@
 		250772E1138E5D81000F1118 = {
 			isa = PBXGroup;
 			children = (
-				25E0812C13A11A9000898596 /* Quartz.framework */,
-				250289B9139BEAAA00A88E09 /* Foundation.framework */,
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
 				2507731E138E5D82000F1118 /* TeXnicleImporter */,
@@ -586,6 +597,8 @@
 		250772EF138E5D81000F1118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25E0812C13A11A9000898596 /* Quartz.framework */,
+				250289B9139BEAAA00A88E09 /* Foundation.framework */,
 				257B47A2138E5E9800ED02C4 /* libicucore.dylib */,
 				250772F0138E5D81000F1118 /* Cocoa.framework */,
 				25077316138E5D82000F1118 /* CoreServices.framework */,
@@ -612,6 +625,7 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				259530AD13DD685C00CA2894 /* File Monitor */,
 				252144BD1398C23100656D3F /* Finder */,
 				2528E86E1395661400834921 /* Startup Window */,
 				2528E8631395400F00834921 /* Standalone Editor */,
@@ -620,7 +634,6 @@
 				25152A1D138F82F900307054 /* Console */,
 				2519491D138F97F3007029E5 /* Controls TabBar control */,
 				25194919138F9596007029E5 /* Images */,
-				257B472F138E5E6F00ED02C4 /* externs.h */,
 				25152A0B138F82AB00307054 /* UKKQueue */,
 				251529AD138F824E00307054 /* PSMTabBarControl */,
 				257B47A4138E5EB500ED02C4 /* Categories */,
@@ -630,6 +643,7 @@
 				257B47AB138E5F9D00ED02C4 /* Document */,
 				25077308138E5D82000F1118 /* MainMenu.xib */,
 				25077305138E5D82000F1118 /* TeXProjectDocument.xib */,
+				257B472F138E5E6F00ED02C4 /* externs.h */,
 				250772F7138E5D81000F1118 /* Supporting Files */,
 				257B47A8138E5EEA00ED02C4 /* TeXnicleAppController.h */,
 				257B47A9138E5EEA00ED02C4 /* TeXnicleAppController.m */,
@@ -772,8 +786,8 @@
 		25152A1D138F82F900307054 /* Console */ = {
 			isa = PBXGroup;
 			children = (
-				25152A1E138F832500307054 /* ConsoleController.h */,
 				251FC6ED1392708800DB2E3B /* Console.xib */,
+				25152A1E138F832500307054 /* ConsoleController.h */,
 				25152A1F138F832500307054 /* ConsoleController.m */,
 				25CD0E8F13995226004EB857 /* ConsoleWindow.h */,
 				25CD0E9013995226004EB857 /* ConsoleWindow.m */,
@@ -785,6 +799,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				259530AA13DCA9A300CA2894 /* commandsPrefs.icns */,
+				25F6EE1613CF24A1001AC45E /* newFolder2.icns */,
 				253E8FAA13A2157C00720CD0 /* zoomOut.icns */,
 				253E8FA713A2151B00720CD0 /* zoomIn.icns */,
 				25179BB21396174B00F72CD2 /* existingProject.icns */,
@@ -1109,6 +1125,8 @@
 				25152998138F804C00307054 /* OpenDocumentsManager.m */,
 				25A8DEFB1397A86B0097A62E /* LibraryPreviewBackgroundView.h */,
 				25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */,
+				252163FD13C09AE7007B4408 /* TPStatusView.h */,
+				252163FE13C09AE7007B4408 /* TPStatusView.m */,
 			);
 			name = Document;
 			path = src/Document;
@@ -1132,9 +1150,21 @@
 			children = (
 				258ECC2713938C0E00DC3394 /* ProjectOutlineController.h */,
 				258ECC2813938C0E00DC3394 /* ProjectOutlineController.m */,
+				250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */,
+				250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */,
 			);
 			name = "Project Outline";
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		259530AD13DD685C00CA2894 /* File Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				259530AE13DD68DF00CA2894 /* TPFileMonitor.h */,
+				259530AF13DD68DF00CA2894 /* TPFileMonitor.m */,
+			);
+			name = "File Monitor";
+			path = FileMonitor;
 			sourceTree = "<group>";
 		};
 		25FD407F13913EDA0037CB54 /* preferences */ = {
@@ -1305,6 +1335,8 @@
 				25E50247139FC9F5004A983E /* schema.xml in Resources */,
 				253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */,
 				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
+				25F6EE1713CF24A1001AC45E /* newFolder2.icns in Resources */,
+				259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,6 +1458,9 @@
 				252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */,
 				25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */,
 				2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */,
+				252163FF13C09AE7007B4408 /* TPStatusView.m in Sources */,
+				259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */,
+				250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,6 +1607,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;
@@ -1589,6 +1625,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx10.6;
 				WRAPPER_EXTENSION = app;

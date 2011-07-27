@@ -1,11 +1,77 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1128
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\rtf1\ansi\ansicpg1252\cocoartf1138
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;}
 \paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
+\
 Bugs:\
+\
+Beta 4\
+------\
+\
++ Standalone editors can now compile both LaTeX and PDF LaTeX files\
++ When trashing auxiliary files, console messages are no longer shown when failing to delete non-existent auxiliary files\
++ Added preference for changing the console font\
++ Added new preference for setting a list of user-defined commands which will appear in the command-completion list\
++ Cosmetic changes to popup completion/correction windows\
++ \
+\pard\tx320\pardeftab320\pardirnatural
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+To Do\
+-----\
+\
++ Last line highlighting bug\
+\
++ Check font and color is applied when pasting in text\
+\
++ Standalone document editor \
+	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\
+\
++ Check for files which change on disk	\
+  ** check changes by CVS work\
+  ** Check the new FileMonitor for deleting/moving files\
+\
++ Menu item "Close all Tabs"\
+\
++ Don't highlight between \\left[ and \\right] as arguments\
+\
++ Remember open files\
+\
++ Finish help\
+\
++ Context menu on TeXEditor\
+	- insert->figure->projectlist\
+					  ->from disk...\
+            ->file->project list\
+				    ->from disk...\
+			 ->citation->projectlist\
+\
+\
+Bugs\
+----\
+\
++ Paste a large amount of text in. Colouring not properly working.\
+\
+Beta 3:\
+-------\
+\
++ Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
++ Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
+\f1 Eisenberg)
+\f0 \
++ Fixed Console window title (thanks to Murray 
+\f1 Eisenberg)
+\f0 \
++ Fixed code folding bug (thanks to Murray 
+\f1 Eisenberg)
+\f0 \
++ Made default syntax highlighting colours more muted\
++ Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\
++ Fixed the status display at the bottom of standalone editor windows.\
 \
 \
 \
@@ -24,37 +90,4 @@ Beta 1: 2011-06-04\
 ------------------\
 \
 first version.\
-\
-\
-To Do\
------\
-\
-+ Font for console in preferences.\
-\
-+ Menu item "Close all Tabs"\
-\
-+ Check for files which change on disk	\
-	- how to get files changes by CVS working?\
-	- make a function which checks the file on disk \
-		- call this when a tab/editor changes or when we try to save\
-	- then we can remove the UKQueue stuff?\
-\
-+ Main split view should remember its position\
-\
-+ Remember open files\
-\
-+ Context menu on TeXEditor\
-	- insert->figure->projectlist\
-					  ->from disk...\
-            ->file->project list\
-				    ->from disk...\
-			 ->citation->projectlist\
-\
-\
-Bugs\
-----\
-\
-+ Paste a large amount of text in. Colouring not properly working.\
-\
-\
 }
