@@ -90,7 +90,7 @@
 							<nil key="NSToolbarItemView"/>
 							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">buildAndView</string>
+								<string key="NSResourceName">typesetAndView</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -112,7 +112,7 @@
 							<nil key="NSToolbarItemView"/>
 							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">trash</string>
+								<string key="NSResourceName">trashCan</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -134,7 +134,7 @@
 							<nil key="NSToolbarItemView"/>
 							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">typeset</string>
+								<string key="NSResourceName">typeset2</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -156,7 +156,7 @@
 							<nil key="NSToolbarItemView"/>
 							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">newTeXDoc</string>
+								<string key="NSResourceName">newTeXFile</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -178,7 +178,7 @@
 							<nil key="NSToolbarItemView"/>
 							<object class="NSCustomResource" key="NSToolbarItemImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">newDrawer_ch</string>
+								<string key="NSResourceName">newFolder</string>
 							</object>
 							<nil key="NSToolbarItemTarget"/>
 							<nil key="NSToolbarItemAction"/>
@@ -2056,7 +2056,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSButton" id="785694388">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{33, -4}, {30, 36}}</string>
+													<string key="NSFrame">{{28, -2}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="78832632"/>
@@ -2086,7 +2086,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSButton" id="771552014">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{148, -4}, {30, 36}}</string>
+													<string key="NSFrame">{{152, -2}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="397531503"/>
@@ -2116,7 +2116,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSButton" id="614004927">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{120, -4}, {30, 36}}</string>
+													<string key="NSFrame">{{121, -2}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="771552014"/>
@@ -2146,7 +2146,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSButton" id="856961624">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{91, -4}, {30, 36}}</string>
+													<string key="NSFrame">{{90, -2}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="614004927"/>
@@ -2176,7 +2176,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSButton" id="78832632">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{62, -4}, {30, 36}}</string>
+													<string key="NSFrame">{{59, -2}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="856961624"/>
@@ -9516,13 +9516,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<string key="NSToolbarPrint">{32, 32}</string>
 			<string key="NSToolbarShowColorsItemImage">{32, 32}</string>
 			<string key="NSToolbarShowFontsItemImage">{32, 32}</string>
-			<string key="buildAndView">{512, 512}</string>
 			<string key="findTabBarImage">{512, 512}</string>
 			<string key="findTabBarImageDepressed">{512, 512}</string>
 			<string key="libraryTabBarImage">{512, 512}</string>
 			<string key="libraryTabBarImageDepressed">{512, 512}</string>
-			<string key="newDrawer_ch">{128, 128}</string>
-			<string key="newTeXDoc">{512, 512}</string>
+			<string key="newFolder">{512, 512}</string>
+			<string key="newTeXFile">{512, 512}</string>
 			<string key="outlineTabBarImage">{512, 512}</string>
 			<string key="outlineTabBarImageDepressed">{512, 512}</string>
 			<string key="palletTabBarImage">{512, 512}</string>
@@ -9530,8 +9529,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<string key="projectTabBarImage">{512, 512}</string>
 			<string key="projectTabBarImageDepressed">{512, 512}</string>
 			<string key="resizeImage">{167, 167}</string>
-			<string key="trash">{512, 512}</string>
-			<string key="typeset">{512, 512}</string>
+			<string key="trashCan">{512, 512}</string>
+			<string key="typeset2">{512, 512}</string>
+			<string key="typesetAndView">{512, 512}</string>
 			<string key="zoomIn">{512, 512}</string>
 			<string key="zoomOut">{512, 512}</string>
 		</dictionary>

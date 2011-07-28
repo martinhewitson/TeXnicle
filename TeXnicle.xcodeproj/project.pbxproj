@@ -183,6 +183,13 @@
 		258ECC2A13938C0E00DC3394 /* ProjectOutlineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258ECC2813938C0E00DC3394 /* ProjectOutlineController.m */; };
 		259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 259530AA13DCA9A300CA2894 /* commandsPrefs.icns */; };
 		259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 259530AF13DD68DF00CA2894 /* TPFileMonitor.m */; };
+		25A47D0A13E1540500CAFEB7 /* newFolder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0913E1540500CAFEB7 /* newFolder.icns */; };
+		25A47D0D13E1565D00CAFEB7 /* newTeXFile.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0C13E1565D00CAFEB7 /* newTeXFile.icns */; };
+		25A47D0F13E1586600CAFEB7 /* typeset2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0E13E1586600CAFEB7 /* typeset2.icns */; };
+		25A47D1113E159D600CAFEB7 /* typesetAndView.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1013E159D600CAFEB7 /* typesetAndView.icns */; };
+		25A47D1313E15B3000CAFEB7 /* trashCan.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1213E15B3000CAFEB7 /* trashCan.icns */; };
+		25A47D1513E1965A00CAFEB7 /* revealArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1413E1965A00CAFEB7 /* revealArrow.png */; };
+		25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */; };
 		25A8DEF913979C170097A62E /* UKKQueue+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEF813979C170097A62E /* UKKQueue+TeXnicle.m */; };
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
@@ -516,6 +523,13 @@
 		259530AA13DCA9A300CA2894 /* commandsPrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsPrefs.icns; sourceTree = "<group>"; };
 		259530AE13DD68DF00CA2894 /* TPFileMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPFileMonitor.h; sourceTree = "<group>"; };
 		259530AF13DD68DF00CA2894 /* TPFileMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPFileMonitor.m; sourceTree = "<group>"; };
+		25A47D0913E1540500CAFEB7 /* newFolder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newFolder.icns; sourceTree = "<group>"; };
+		25A47D0C13E1565D00CAFEB7 /* newTeXFile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXFile.icns; sourceTree = "<group>"; };
+		25A47D0E13E1586600CAFEB7 /* typeset2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = typeset2.icns; sourceTree = "<group>"; };
+		25A47D1013E159D600CAFEB7 /* typesetAndView.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = typesetAndView.icns; sourceTree = "<group>"; };
+		25A47D1213E15B3000CAFEB7 /* trashCan.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = trashCan.icns; sourceTree = "<group>"; };
+		25A47D1413E1965A00CAFEB7 /* revealArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = revealArrow.png; sourceTree = "<group>"; };
+		25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = addToProject2.icns; sourceTree = "<group>"; };
 		25A8DEF713979C170097A62E /* UKKQueue+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UKKQueue+TeXnicle.h"; sourceTree = "<group>"; };
 		25A8DEF813979C170097A62E /* UKKQueue+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UKKQueue+TeXnicle.m"; sourceTree = "<group>"; };
 		25A8DEFB1397A86B0097A62E /* LibraryPreviewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryPreviewBackgroundView.h; sourceTree = "<group>"; };
@@ -799,6 +813,13 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */,
+				25A47D1413E1965A00CAFEB7 /* revealArrow.png */,
+				25A47D1213E15B3000CAFEB7 /* trashCan.icns */,
+				25A47D1013E159D600CAFEB7 /* typesetAndView.icns */,
+				25A47D0E13E1586600CAFEB7 /* typeset2.icns */,
+				25A47D0C13E1565D00CAFEB7 /* newTeXFile.icns */,
+				25A47D0913E1540500CAFEB7 /* newFolder.icns */,
 				259530AA13DCA9A300CA2894 /* commandsPrefs.icns */,
 				25F6EE1613CF24A1001AC45E /* newFolder2.icns */,
 				253E8FAA13A2157C00720CD0 /* zoomOut.icns */,
@@ -1337,6 +1358,13 @@
 				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
 				25F6EE1713CF24A1001AC45E /* newFolder2.icns in Resources */,
 				259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */,
+				25A47D0A13E1540500CAFEB7 /* newFolder.icns in Resources */,
+				25A47D0D13E1565D00CAFEB7 /* newTeXFile.icns in Resources */,
+				25A47D0F13E1586600CAFEB7 /* typeset2.icns in Resources */,
+				25A47D1113E159D600CAFEB7 /* typesetAndView.icns in Resources */,
+				25A47D1313E15B3000CAFEB7 /* trashCan.icns in Resources */,
+				25A47D1513E1965A00CAFEB7 /* revealArrow.png in Resources */,
+				25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

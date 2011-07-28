@@ -11,16 +11,16 @@
 @interface TPStatusView : NSView {
 @private
   NSTextFieldCell *editorStatusCell;
-  NSTextFieldCell *projectStatusCell;
+  NSTextFieldCell *filenameCell;
   NSButton *revealButton;
 }
 
 @property (copy) NSString *editorStatusText;
-@property (copy) NSString *projectStatusText;
+@property (copy) NSString *filenameText;
 @property (assign) BOOL showRevealButton;
 
 - (void) revealButtonClicked:(id)sender;
-- (void) setProjectStatus:(NSString*)text;
+- (void) setFilename:(NSString*)text;
 - (void) setEditorStatus:(NSString*)text;
 
 @end

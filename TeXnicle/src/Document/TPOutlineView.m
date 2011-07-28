@@ -154,11 +154,15 @@
   //--------- Reveal in Finder
 	if ([selectedItem isKindOfClass:[FileEntity class]] || 
       ([selectedItem isKindOfClass:[FolderEntity class]] && [selectedItem valueForKey:@"pathOnDisk"]) ) {
-		NSMenuItem *revealItem = [[NSMenuItem alloc] initWithTitle:@"Reveal in Finder"
-																												action:@selector(revealItem:)
-																								 keyEquivalent:@""];
-		[theMenu addItem:revealItem];
-		[revealItem release];
+    NSString *path = [selectedItem valueForKey:@"pathOnDisk"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:path]) {
+      NSMenuItem *revealItem = [[NSMenuItem alloc] initWithTitle:@"Reveal in Finder"
+                                                          action:@selector(revealItem:)
+                                                   keyEquivalent:@""];
+      [theMenu addItem:revealItem];
+      [revealItem release];
+    }
 		
   }
   

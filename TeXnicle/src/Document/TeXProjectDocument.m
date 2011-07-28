@@ -149,7 +149,7 @@
            object:nil];
   
   
-  [self.statusView setProjectStatus:@"Welcome to TeXnicle."];
+  [self.statusView setFilename:@""];
   [self.statusView setEditorStatus:@"No Selection."];
   [self.projectTypeSelector selectItemWithTitle:[self.project valueForKey:@"type"]];
   
@@ -366,10 +366,10 @@
   
   if (path) {
     self.statusView.showRevealButton = YES;
-    [self.statusView setProjectStatus:path];
+    [self.statusView setFilename:path];
   } else {
     self.statusView.showRevealButton = NO;
-    [self.statusView setProjectStatus:@"Unknown location on disk"];
+    [self.statusView setFilename:@""];
   }
 }
 
@@ -1832,10 +1832,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSArray*) fileMonitorFileList:(TPFileMonitor*)aMonitor
 {
+  NSFileManager *fm = [NSFileManager defaultManager];
   NSMutableArray *files = [NSMutableArray array];
   for (id item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
-      [files addObject:item];
+      if ([fm fileExistsAtPath:[item valueForKey:@"pathOnDisk"]]) {
+        [files addObject:item];
+      }
     }
   }
   return files;

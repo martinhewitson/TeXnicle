@@ -73,7 +73,7 @@
 	
 	[self updateEditedState];
   
-  [statusView setProjectStatus:[file pathOnDisk]];
+  [statusView setFilename:[file pathOnDisk]];
   [statusView setShowRevealButton:YES];
   [self updateCursorInfoText];
 }

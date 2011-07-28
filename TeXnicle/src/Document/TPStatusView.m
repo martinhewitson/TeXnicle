@@ -11,7 +11,7 @@
 @implementation TPStatusView
 
 @synthesize editorStatusText;
-@synthesize projectStatusText;
+@synthesize filenameText;
 @synthesize showRevealButton;
 
 - (id)initWithFrame:(NSRect)frame
@@ -19,9 +19,9 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.showRevealButton = NO;
-    self.projectStatusText = @"";
-    projectStatusCell = [[NSTextFieldCell alloc] initTextCell:self.projectStatusText];
-    [projectStatusCell setBackgroundStyle:NSBackgroundStyleRaised];
+    self.filenameText = @"";
+    filenameCell = [[NSTextFieldCell alloc] initTextCell:self.filenameText];
+    [filenameCell setBackgroundStyle:NSBackgroundStyleRaised];
     self.editorStatusText = @"";
     editorStatusCell = [[NSTextFieldCell alloc] initTextCell:self.editorStatusText];
     [editorStatusCell setBackgroundStyle:NSBackgroundStyleRaised];
@@ -34,7 +34,7 @@
 
 - (void) dealloc
 {
-  [projectStatusCell release];
+  [filenameCell release];
   [editorStatusCell release];
   [super dealloc];
 }
@@ -46,17 +46,24 @@
   CGFloat buttonWidth = 20.0;
   CGFloat buttonHeight = 18.0;
   
-  if (self.projectStatusText) {
-    [projectStatusCell setStringValue:self.projectStatusText];
+  if (self.filenameText) {
+    [filenameCell setStringValue:self.filenameText];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:self.filenameText]) {
+      [filenameCell setTextColor:[NSColor blackColor]];
+    } else {
+      [self setShowRevealButton:NO];
+      [filenameCell setTextColor:[NSColor redColor]];
+    }
   } else {
-    [projectStatusCell setStringValue:@""];    
+    [filenameCell setStringValue:@""];    
   }
-  NSSize filenameSize = [[projectStatusCell attributedStringValue] size];
+  NSSize filenameSize = [[filenameCell attributedStringValue] size];
   CGFloat filenameWidth = 1.0*MIN(filenameSize.width+10.0, bounds.size.width-buttonWidth);
-  NSRect buttonRect = NSMakeRect(filenameWidth, bounds.size.height/2.0 + (bounds.size.height/2.0-buttonHeight)/2.0, buttonWidth, buttonHeight);
-  NSRect top = NSMakeRect(0, bounds.size.height/2.0, filenameWidth, bounds.size.height/2.0);
-  NSRect bottom = NSMakeRect(0, 0.0, bounds.size.width, bounds.size.height/2.0);
-  [projectStatusCell drawWithFrame:top inView:self];
+  NSRect buttonRect = NSMakeRect(filenameWidth, (bounds.size.height/2.0-buttonHeight)/2.0, buttonWidth, buttonHeight);
+  NSRect bottom = NSMakeRect(0, bounds.size.height/2.0, bounds.size.width, bounds.size.height/2.0);
+  NSRect top = NSMakeRect(0, 0.0, filenameWidth, bounds.size.height/2.0);
+  [filenameCell drawWithFrame:top inView:self];
   if (self.editorStatusText) {
     [editorStatusCell setStringValue:self.editorStatusText];
   } else {
@@ -75,6 +82,7 @@
     [revealButton setButtonType:NSMomentaryLightButton];
     [revealButton setShowsBorderOnlyWhileMouseInside:YES];
     [revealButton setImagePosition:NSImageOnly];
+    [revealButton setToolTip:@"Reveal in Finder"];
     [self addSubview:revealButton];
   } else {
     [revealButton setFrame:buttonRect];
@@ -85,14 +93,14 @@
 - (void) revealButtonClicked:(id)sender
 {
   NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-	[ws selectFile:self.projectStatusText 
-inFileViewerRootedAtPath:[self.projectStatusText stringByDeletingLastPathComponent]];
+	[ws selectFile:self.filenameText 
+inFileViewerRootedAtPath:[self.filenameText stringByDeletingLastPathComponent]];
 
 }
 
-- (void) setProjectStatus:(NSString*)text
+- (void) setFilename:(NSString*)text
 {
-  self.projectStatusText = text;
+  self.filenameText = text;
   [self setNeedsDisplay:YES];
 }
 

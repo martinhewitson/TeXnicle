@@ -58,9 +58,9 @@
            object:self.engine];
 
   if (![self fileURL]) {
-    [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
+    [self.statusView setFilename:@"Welcome to TeXnicle!"];
   } else {
-    [self.statusView setProjectStatus:[[self fileURL] path]];
+    [self.statusView setFilename:[[self fileURL] path]];
     [self.statusView setShowRevealButton:YES];
   }
   [self.statusView setEditorStatus:@"No Selection."];
@@ -152,10 +152,10 @@
 - (void) updateFileStatus
 {
   if ([self fileURL]) {
-    [self.statusView setProjectStatus:[[self fileURL] path]];    
+    [self.statusView setFilename:[[self fileURL] path]];    
     [self.statusView setShowRevealButton:YES];
   } else {
-    [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
+    [self.statusView setFilename:@"Welcome to TeXnicle!"];
     [self.statusView setShowRevealButton:NO];
   }
   self.fileLoadDate = [NSDate dateWithTimeIntervalSinceNow:2];

@@ -57,7 +57,7 @@
       if (![fm fileExistsAtPath:path]) {
         [self fileMonitor:self 
         fileChangedOnDisk:file 
-             modifiedDate:[NSDate dateWithTimeInterval:2 sinceDate:loadDate]];
+             modifiedDate:loadDate];
       } else {
         //NSLog(@"Checking %@", path);
         //NSLog(@"  loaded: %@", loadDate);
