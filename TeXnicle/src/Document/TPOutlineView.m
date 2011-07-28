@@ -151,15 +151,20 @@
 	[theMenu addItem:removeItem];
 	[removeItem release];
 	
-	if ([selectedItem isKindOfClass:[FileEntity class]]) {
-		//--------- Reveal in Finder
+  //--------- Reveal in Finder
+	if ([selectedItem isKindOfClass:[FileEntity class]] || 
+      ([selectedItem isKindOfClass:[FolderEntity class]] && [selectedItem valueForKey:@"pathOnDisk"]) ) {
 		NSMenuItem *revealItem = [[NSMenuItem alloc] initWithTitle:@"Reveal in Finder"
 																												action:@selector(revealItem:)
 																								 keyEquivalent:@""];
 		[theMenu addItem:revealItem];
 		[revealItem release];
 		
-		//--------- locate item
+  }
+  
+  //--------- Locate on disk
+  if ([selectedItem isKindOfClass:[FileEntity class]]){
+    //--------- locate item
 		NSFileManager *fm = [NSFileManager defaultManager];
 		if (![fm fileExistsAtPath:[selectedItem valueForKey:@"pathOnDisk"]]) {
 			[theMenu addItem:[NSMenuItem separatorItem]];
