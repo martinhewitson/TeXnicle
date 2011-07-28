@@ -133,4 +133,12 @@
 	return nil;
 }
 
+-(BOOL)shouldSyntaxHighlightDocument
+{
+  if ([[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    return [[self delegate] shouldSyntaxHighlightDocument];
+  }
+  return NO;
+}
+
 @end
