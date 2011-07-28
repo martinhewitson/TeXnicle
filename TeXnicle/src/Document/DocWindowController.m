@@ -12,6 +12,7 @@
 #import "TeXEditorViewController.h"
 #import "TeXTextView.h"
 #import "TPSectionListController.h"
+#import "TPStatusView.h"
 
 @implementation DocWindowController
 
@@ -65,8 +66,16 @@
 				 selector:@selector(windowWillClose:)
 						 name:NSWindowWillCloseNotification
 					 object:[self window]];
+  [nc addObserver:self
+				 selector:@selector(handleTextSelectionChanged:)
+						 name:NSTextViewDidChangeSelectionNotification
+					 object:self.texEditorViewController.textView];
 	
 	[self updateEditedState];
+  
+  [statusView setProjectStatus:[file pathOnDisk]];
+  [statusView setShowRevealButton:YES];
+  [self updateCursorInfoText];
 }
 
 - (void)windowWillClose:(NSNotification *)notification 
@@ -82,6 +91,18 @@
 {
 	[mainDocument saveDocument:sender];
 	[self updateEditedState];
+}
+
+- (void) handleTextSelectionChanged:(NSNotification*)aNote
+{
+  
+	[self updateCursorInfoText];
+}
+
+- (void) updateCursorInfoText
+{
+	NSRange sel = [self.texEditorViewController.textView selectedRange];
+  [statusView setEditorStatus:[NSString stringWithFormat:@"character: %d", sel.location]];
 }
 
 - (void)handleTextChanged:(NSNotification*)aNote
@@ -104,6 +125,11 @@
 #pragma mark -
 #pragma mark Text Colorer delegate
 
+-(id)project
+{
+  return [file valueForKey:@"project"];
+}
+
 - (NSArray*) listOfTeXFilesPrependedWith:(NSString*)string
 {
 	return [mainDocument listOfTeXFilesPrependedWith:string];
@@ -114,13 +140,17 @@
 	return [mainDocument listOfCitations];
 }
 
+- (NSArray*)listOfCommands
+{
+  return [mainDocument listOfCommands];
+}
 
 - (NSArray*) listOfReferences
 {
 	return [mainDocument listOfReferences];
 }
 
-- (BOOL) shouldRecolorDocument
+- (BOOL) shouldSyntaxHighlightDocument
 {
 	// If this is not a TeX document being edited, then we can return just 
 	// applying the plain doc settings

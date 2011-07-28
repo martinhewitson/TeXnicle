@@ -7,14 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TeXTextView.h"
 
 @class FileEntity;
 @class TeXEditorViewController;
+@class TPStatusView;
 
-@interface DocWindowController : NSWindowController {
+@interface DocWindowController : NSWindowController <TeXTextViewDelegate> {
 
 	IBOutlet NSView *texEditorContainer;
-
+  IBOutlet TPStatusView *statusView;
 	id mainDocument;
 	FileEntity *file;
 	TeXEditorViewController *texEditorViewController;
@@ -28,8 +30,8 @@
 - (IBAction) saveDocument:(id)sender;
 - (void) updateEditedState;
 
-- (NSArray*) listOfCitations;
-- (NSArray*) listOfReferences;
-- (NSArray*) listOfTeXFilesPrependedWith:(NSString*)string;
+- (void) handleTextSelectionChanged:(NSNotification*)aNote;
+- (void) updateCursorInfoText;
+
 
 @end
