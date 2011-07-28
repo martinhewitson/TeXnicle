@@ -12,11 +12,14 @@
 @private
   NSTextFieldCell *editorStatusCell;
   NSTextFieldCell *projectStatusCell;
+  NSButton *revealButton;
 }
 
 @property (copy) NSString *editorStatusText;
 @property (copy) NSString *projectStatusText;
+@property (assign) BOOL showRevealButton;
 
+- (void) revealButtonClicked:(id)sender;
 - (void) setProjectStatus:(NSString*)text;
 - (void) setEditorStatus:(NSString*)text;
 
