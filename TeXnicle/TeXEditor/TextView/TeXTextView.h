@@ -24,6 +24,7 @@
 -(NSArray*)listOfReferences;
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
 -(NSArray*)listOfCommands;
+-(BOOL)shouldSyntaxHighlightDocument;
 
 @end
 

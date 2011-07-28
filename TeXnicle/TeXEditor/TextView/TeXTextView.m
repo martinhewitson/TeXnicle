@@ -362,6 +362,11 @@
 
 - (void) colorWholeDocument
 {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
+      return;
+    }
+  }
 //  NSLog(@"Coloring whole document %@", [self textStorage]);
   [self.coloringEngine colorText:[self textStorage]
                    layoutManager:[self layoutManager]
@@ -371,6 +376,12 @@
 
 - (void) colorVisibleText
 {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
+      return;
+    }
+  }
+  
   NSRange vr = [self getVisibleRange];
 //  NSLog(@"Visible range %ld-%ld", vr.location, vr.location+vr.length);
   
