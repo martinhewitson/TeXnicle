@@ -200,7 +200,7 @@
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSStringEncoding encoding;
-	NSLog(@"Reading from URL %@", absoluteURL);
+//	NSLog(@"Reading from URL %@", absoluteURL);
 	
 	NSString *str = [NSString stringWithContentsOfURL:absoluteURL
 																						 usedEncoding:&encoding
@@ -215,48 +215,6 @@
 	return NO;
 }
 
-
-//- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-//{
-//	// Insert code here to write your document to data of the specified type. 
-//	// If the given outError != NULL, ensure that you set *outError when returning nil.
-//	NSLog(@"returning data for saving");
-//	// You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, 
-//	//or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-//	NSString *str = [[textView attributedString] string];
-//	NSLog(@"Saving string: %@", str);
-//	NSData *data = [str dataUsingEncoding:NS];	
-//	NSLog(@"Got data %@", data);
-//	[textView breakUndoCoalescing];
-//	
-//	return data;	
-//}
-
-//- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-//{
-//	if (!data) 
-//		return NO;
-//	
-//	documentData = [[NSMutableAttributedString alloc] 
-//									initWithData:data 
-//									options:nil 
-//									documentAttributes:nil error:outError];	
-//	if (outError && *outError) {
-//		return NO;
-//	}
-//	
-//	
-//	// Insert code here to read your document from the given data of the specified type.  
-//	// If the given outError != NULL, ensure that you set *outError when returning NO.
-//	
-//	// You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead. 
-//	
-//	// For applications targeted for Panther or earlier systems, you should use 
-//	// the deprecated API -loadDataRepresentation:ofType. In this case you can also 
-//	// choose to override -readFromFile:ofType: or -loadFileWrapperRepresentation:ofType: instead.
-//	
-//	return YES;
-//}
 
 #pragma mark -
 #pragma mark control
