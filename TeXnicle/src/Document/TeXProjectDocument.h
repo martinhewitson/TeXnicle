@@ -90,6 +90,7 @@
 + (id)newTeXnicleProject;
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
 
+- (void) updateStatusView;
 
 #pragma mark -
 #pragma mark Notification Handlers

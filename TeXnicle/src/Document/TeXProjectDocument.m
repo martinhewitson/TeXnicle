@@ -348,6 +348,31 @@
   return result;
 }
 
+- (void) updateStatusView
+{
+	NSArray *all = [self.projectItemTreeController selectedObjects];	
+  //  NSLog(@"Selected %@", all);
+  NSString *path = nil;
+	if ([all count] == 1) {
+		NSManagedObject *item = [all objectAtIndex:0];
+    path = [item valueForKey:@"pathOnDisk"];
+  }  
+  
+  // if nothing is selected in the outline view, fall back to the current
+  // file in the open documents manager.
+  if (!path && [all count]==0) {
+    path = [[openDocuments currentDoc] valueForKey:@"pathOnDisk"];
+  }
+  
+  if (path) {
+    self.statusView.showRevealButton = YES;
+    [self.statusView setProjectStatus:path];
+  } else {
+    self.statusView.showRevealButton = NO;
+    [self.statusView setProjectStatus:@"Unknown location on disk"];
+  }
+}
+
 - (NSManagedObject *)project
 {
   
@@ -698,17 +723,14 @@
 	[nc postNotificationName:TPDocumentWasRenamed object:projectItemTreeController userInfo:dict];
 	
   // update status bar
-  NSString *path = [item valueForKey:@"pathOnDisk"];
-  if (path) {
-    [self.statusView setProjectStatus:path];
-  }
-
+  [self updateStatusView];
   
 }
 
 
 #pragma mark -
 #pragma mark Actions
+
 
 - (IBAction) openStandaloneWindow:(id)sender
 {
@@ -763,13 +785,8 @@
 		return;
   
 	NSArray *all = [self.projectItemTreeController selectedObjects];	
-//  NSLog(@"Selected %@", all);
 	if ([all count] == 1) {
 		NSManagedObject *item = [all objectAtIndex:0];
-		NSString *path = [item valueForKey:@"pathOnDisk"];
-		if (path) {
-      [self.statusView setProjectStatus:path];
-		}
 		if ([item isKindOfClass:[FileEntity class]]) {
 			if ([[item valueForKey:@"isText"] boolValue]) {
 				if (openDocuments) {					
@@ -779,6 +796,7 @@
 		}
 	}
   
+  [self updateStatusView];
 }
 
 - (void) handleControlTabSelectionChanged:(NSNotification*)aNote
@@ -873,6 +891,17 @@
 -(NSArray*)listOfCommands
 {
   return [NSArray array]; 
+}
+
+- (BOOL) shouldSyntaxHighlightDocument
+{
+  FileEntity *file = [self.openDocuments currentDoc];
+	NSString *ext = [file valueForKey:@"extension"] ;
+	if ([ext isEqual:@"tex"] ||
+			[ext isEqual:@"bib"]) {
+		return YES;
+	}
+  return NO;
 }
 
 -(NSArray*)listOfReferences
