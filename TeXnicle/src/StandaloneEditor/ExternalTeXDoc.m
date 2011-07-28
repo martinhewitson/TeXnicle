@@ -61,6 +61,7 @@
     [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
   } else {
     [self.statusView setProjectStatus:[[self fileURL] path]];
+    [self.statusView setShowRevealButton:YES];
   }
   [self.statusView setEditorStatus:@"No Selection."];
 }
@@ -152,8 +153,10 @@
 {
   if ([self fileURL]) {
     [self.statusView setProjectStatus:[[self fileURL] path]];    
+    [self.statusView setShowRevealButton:YES];
   } else {
     [self.statusView setProjectStatus:@"Welcome to TeXnicle!"];
+    [self.statusView setShowRevealButton:NO];
   }
   self.fileLoadDate = [NSDate dateWithTimeIntervalSinceNow:2];
 }
@@ -423,6 +426,16 @@
 #pragma mark -
 #pragma mark Text Colorer delegate
 
+-(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
+{
+  return [NSArray array];
+}
+
+-(id)project
+{
+  return nil;
+}
+
 - (NSArray*) listOfCitations
 {
 	NSString *str = [self.texEditorViewController.textView string];
@@ -440,9 +453,14 @@
 	return [str referenceLabels];	
 }
 
-- (BOOL) shouldRecolorDocument
+- (BOOL) shouldSyntaxHighlightDocument
 {
-	return YES;
+	NSString *ext = [[[self fileURL] path] pathExtension];
+	if ([ext isEqual:@"tex"] ||
+			[ext isEqual:@"bib"]) {
+		return YES;
+	} 
+  return NO;
 }
 
 

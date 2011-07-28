@@ -9,11 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "TPLaTeXEngine.h"
 #import "TPFileMonitor.h"
+#import "TeXTextView.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate, TPFileMonitorDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate, TPFileMonitorDelegate, TeXTextViewDelegate> {
 
 	NSMutableAttributedString *documentData;
 

@@ -102,7 +102,7 @@
 								<nil key="NSToolbarItemView"/>
 								<object class="NSCustomResource" key="NSToolbarItemImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">trash</string>
+									<string key="NSResourceName">trashCan</string>
 								</object>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
@@ -126,6 +126,7 @@
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{0, 14}, {100, 25}}</string>
 									<reference key="NSSuperview"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:179</string>
 									<bool key="NSEnabled">YES</bool>
@@ -211,7 +212,7 @@
 								<nil key="NSToolbarItemView"/>
 								<object class="NSCustomResource" key="NSToolbarItemImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">addToProject</string>
+									<string key="NSResourceName">addToProject2</string>
 								</object>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
@@ -233,7 +234,7 @@
 								<nil key="NSToolbarItemView"/>
 								<object class="NSCustomResource" key="NSToolbarItemImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">buildAndView</string>
+									<string key="NSResourceName">typesetAndView</string>
 								</object>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
@@ -255,7 +256,7 @@
 								<nil key="NSToolbarItemView"/>
 								<object class="NSCustomResource" key="NSToolbarItemImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">typeset</string>
+									<string key="NSResourceName">typeset2</string>
 								</object>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
@@ -430,7 +431,7 @@
 							</object>
 						</object>
 					</object>
-					<object class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<object class="NSArray" key="NSToolbarIBAllowedItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="820151834"/>
 						<reference ref="287667320"/>
@@ -441,11 +442,11 @@
 						<reference ref="780772503"/>
 						<reference ref="904209289"/>
 						<reference ref="425023018"/>
+						<reference ref="391191382"/>
 						<reference ref="746893498"/>
 						<reference ref="165986924"/>
-						<reference ref="391191382"/>
 					</object>
-					<object class="NSArray" key="NSToolbarIBDefaultItems">
+					<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="280227475"/>
 						<reference ref="308691326"/>
@@ -2353,10 +2354,10 @@
 				<string>NSToolbarPrint</string>
 				<string>NSToolbarShowColorsItemImage</string>
 				<string>NSToolbarShowFontsItemImage</string>
-				<string>addToProject</string>
-				<string>buildAndView</string>
-				<string>trash</string>
-				<string>typeset</string>
+				<string>addToProject2</string>
+				<string>trashCan</string>
+				<string>typeset2</string>
+				<string>typesetAndView</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
