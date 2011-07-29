@@ -22,6 +22,8 @@
 #import "TPFoldedCodeSnippet.h"
 #import "NSString+RelativePath.h"
 
+#import "NSDictionary+TeXnicle.h"
+
 #import "MHLineNumber.h"
 
 #import "externs.h"
@@ -98,7 +100,7 @@
   [[self textStorage] setForegroundColor:color];
   [self setFont:font];
   [self setTextColor:color];
-  [self setTypingAttributes:[self currentTypingAttributes]];
+  [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -120,13 +122,6 @@
            object:[self textStorage]];
 }
 
-- (NSDictionary*)currentTypingAttributes
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
-  return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
-}
 
 - (void) setUpRuler
 {
@@ -447,7 +442,7 @@
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEHighlightCurrentLine] boolValue]) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
-    if (sel.location < [str length]) {
+    if (sel.location <= [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
       NSRect lineRect = [self highlightRectForRange:lineRange];
       [self.lineHighlightColor set];
@@ -596,7 +591,7 @@
 
 - (void) applyFontAndColor
 {
-  NSDictionary *atts = [self currentTypingAttributes];
+  NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
   NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
   if (![newFont isEqualTo:[self font]]) {
@@ -1205,15 +1200,25 @@
 // Returns a rectangle suitable for highlighting a background rectangle for the given text range.
 - (NSRect) highlightRectForRange:(NSRange)aRange
 {
+//  NSLog(@"Getting highlight range for range %@", NSStringFromRange(aRange));
   NSRange r = aRange;
   NSRange startLineRange = [[self string] lineRangeForRange:NSMakeRange(r.location, 0)];
+//  NSLog(@"Start line range %@", NSStringFromRange(startLineRange));
   NSInteger er = NSMaxRange(r)-1;
-  if (er >= [[self string] length]) {
+  NSString *text = [self string];
+  
+  if (er >= [text length]) {
+//    NSLog(@"Out of range");
     return NSZeroRect;
   }
-  NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
+  if (er < r.location) {
+    er = r.location;
+  }
   
-  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location)
+  NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
+//  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
+  
+  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1)
                                             actualCharacterRange:NULL];
   NSRect br = [[self layoutManager] boundingRectForGlyphRange:gr inTextContainer:[self textContainer]];
   
@@ -1225,6 +1230,7 @@
   NSPoint containerOrigin = [self textContainerOrigin];
   
   NSRect aRect = NSMakeRect(0, y, w, h);
+//  NSLog(@"Highlight rect: %@", NSStringFromRect(aRect));
   // Convert from view coordinates to container coordinates
   aRect = NSOffsetRect(aRect, containerOrigin.x, containerOrigin.y);
   return aRect;
@@ -1242,7 +1248,7 @@
                                                     userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:r.location] forKey:@"index"]];
   
   [self colorVisibleText];
-  [self setTypingAttributes:[self currentTypingAttributes]];
+  [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
 
   
 }

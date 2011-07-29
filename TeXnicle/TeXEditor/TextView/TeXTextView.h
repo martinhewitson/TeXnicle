@@ -102,7 +102,6 @@
 #pragma mark -
 #pragma mark Syntax highlighting
 
-- (NSDictionary*)currentTypingAttributes;
 - (void) resetLineNumbers;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;
