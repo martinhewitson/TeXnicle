@@ -25,6 +25,5 @@
 - (id) initWithFile:(FileEntity*)aFile;
 - (NSTextContainer*)textContainer;
 - (BOOL) commitEdits;
-- (NSDictionary*)currentTypingAttributes;
 
 @end

@@ -10,6 +10,7 @@
 #import "externs.h"
 #import "FileEntity.h"
 #import "NSMutableAttributedString+CodeFolding.h"
+#import "NSDictionary+TeXnicle.h"
 #import "NSArray+Color.h"
 
 @implementation FileDocument
@@ -41,7 +42,7 @@
 		
 		// Setup a text storage to hold this string
 		NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
-		[attStr addAttributes:[self currentTypingAttributes] range:NSMakeRange(0, [str length])];
+		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
 		textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
 									 		
 		// Add a main layout manager
@@ -89,13 +90,6 @@
 	[super dealloc];
 }
 
-- (NSDictionary*)currentTypingAttributes
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
-  return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
-}
 
 - (NSTextContainer*)textContainer
 {
