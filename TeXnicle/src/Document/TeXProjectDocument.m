@@ -3,7 +3,7 @@
 //  TeXnicle
 //
 //  Created by hewitson on 26/5/11.
-//  Copyright 2011 AEI Hannover . All rights reserved.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
 #import "TeXProjectDocument.h"
@@ -14,7 +14,6 @@
 #import "TPLaTeXEngine.h"
 #import "ConsoleController.h"
 #import "MHControlsTabBarController.h"
-#import "UKKQueue+TeXnicle.h"
 #import "FindInProjectController.h"
 #import "NSString+LaTeX.h"
 #import "TPStatusView.h"
@@ -1761,25 +1760,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (BOOL) saveAllProjectFiles
 {
 	// write contents of all files to disk
-	UKKQueue *queue = [UKKQueue sharedFileWatcher];
 	NSArray *allItems = [projectItemTreeController flattenedContent];
   
 //  NSLog(@"Saving %@", allItems);
 	BOOL success = YES;
-	BOOL watching = NO;
 	for (ProjectItemEntity *item in allItems) {
 		if ([item isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)item;
-			watching = [queue watchingPath:[file pathOnDisk]];
 			//NSLog(@"Watching %@ %d", [file pathOnDisk], watching);
-			if (watching) {
-				[queue removePath:[file pathOnDisk]];
-			}
 			success = [file saveContentsToDisk];
-			if (watching) {
-				[queue addPathToQueue: [file pathOnDisk]
-							 notifyingAbout: UKKQueueNotifyAboutWrite];
-			}
 			//NSLog(@"Saved %@ %d ", [file pathOnDisk], success);
 		} // end if item is a file
 	}
