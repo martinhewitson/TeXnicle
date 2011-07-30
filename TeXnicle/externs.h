@@ -3,7 +3,7 @@
  *  Strongbox
  *
  *  Created by Martin Hewitson on 10/11/09.
- *  Copyright 2009 AEI Hannover . All rights reserved.
+ *  Copyright 2009 bobsoft. All rights reserved.
  *
  */
 

@@ -3,7 +3,7 @@
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 21/5/10.
-//  Copyright 2010 BOBsoft. All rights reserved.
+//  Copyright 2010 bobsoft. All rights reserved.
 //
 
 #import "NSFileManager+TeXnicle.h"

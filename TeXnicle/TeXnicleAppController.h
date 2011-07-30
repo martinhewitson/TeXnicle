@@ -3,7 +3,7 @@
 //  TeXnicle
 //
 //  Created by hewitson on 26/5/11.
-//  Copyright 2011 AEI Hannover . All rights reserved.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

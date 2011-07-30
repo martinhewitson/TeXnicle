@@ -3,7 +3,7 @@
 //  TeXEditor
 //
 //  Created by Martin Hewitson on 08/05/11.
-//  Copyright 2011 AEI Hannover . All rights reserved.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
 #import "NSArray+Extensions.h"

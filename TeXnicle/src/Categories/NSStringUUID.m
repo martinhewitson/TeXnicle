@@ -3,7 +3,7 @@
 //  SigProcOO
 //
 //  Created by Martin Hewitson on 02/06/2009.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 bobsoft. All rights reserved.
 //
 
 #import "NSStringUUID.h"

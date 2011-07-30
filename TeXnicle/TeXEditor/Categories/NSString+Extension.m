@@ -3,7 +3,7 @@
 //  TeXEditor
 //
 //  Created by hewitson on 27/3/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
 #import "NSString+Extension.h"

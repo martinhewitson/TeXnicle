@@ -3,7 +3,7 @@
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 23/2/10.
-//  Copyright 2010 AEI Hannover . All rights reserved.
+//  Copyright 2010 bobsoft. All rights reserved.
 //
 
 #import "NSString+RelativePath.h"
@@ -23,14 +23,14 @@
 	NSMutableArray* resultComponents = nil; 
 	int prefixCount = 0; 
 	if( ! [self isEqual: endPath] ){ 
-		int iLen = MIN([startComponents count], [endComponents count]); 
+		NSInteger iLen = MIN([startComponents count], [endComponents count]); 
 		for(prefixCount = 0; prefixCount < iLen && [[startComponents objectAtIndex: prefixCount] isEqual: [endComponents objectAtIndex: prefixCount]]; ++prefixCount){} 
 	} 
 	if(0 == prefixCount){ 
 		resultComponents = [NSMutableArray arrayWithArray: endComponents]; 
 	}else{ 
 		resultComponents = [NSMutableArray arrayWithArray: [endComponents subarrayWithRange: NSMakeRange(prefixCount, [endComponents count] - prefixCount)]]; 
-		int lifterCount = [startComponents count] - prefixCount; 
+		NSInteger lifterCount = [startComponents count] - prefixCount; 
 		if(1 == lifterCount){ 
 			[resultComponents insertObject: @"." atIndex: 0]; 
 		}else{ 

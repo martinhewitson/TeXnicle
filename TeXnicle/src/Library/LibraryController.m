@@ -3,7 +3,7 @@
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 31/1/10.
-//  Copyright 2010 AEI Hannover . All rights reserved.
+//  Copyright 2010 bobsoft. All rights reserved.
 //
 
 #import "LibraryController.h"
