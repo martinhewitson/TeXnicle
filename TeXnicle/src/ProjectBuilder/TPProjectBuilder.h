@@ -7,7 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TeXProjectDocument.h"
 
-@interface TPProjectBuilder : NSObject
+@class FolderEntity;
+@class FileEntity;
+@class ProjectEntity;
+
+@interface TPProjectBuilder : NSObject {
+  
+}
+
+@property (copy) NSString *projectName;
+@property (copy) NSString *projectDir;
+@property (copy) NSString *mainfile;
+@property (readonly) NSURL *projectFileURL;
+
++ (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath;
+- (id) initWithDirectory:(NSString*)aPath;
++ (TPProjectBuilder*)builderWithMainfile:(NSString*)aFile;
+- (id) initWithMainfile:(NSString*)aFile;
+
++ (NSString*) mainfileForDirectory:(NSString*)aPath;
+
+- (void)populateDocument:(TeXProjectDocument*)aDocument;
+- (void)document:(TeXProjectDocument*)aDocument addProjectItemsFromFile:(NSString*)aFile;
+- (FolderEntity*) makeFoldersForComponents:(NSArray*)pathComps inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc;
+- (FileEntity*) addFileAtPath:(NSString*)fullpath toFolder:(FolderEntity*)folder inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc;
 
 @end
