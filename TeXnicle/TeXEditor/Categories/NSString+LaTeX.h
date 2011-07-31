@@ -15,5 +15,6 @@
 - (NSArray*) citations;
 + (NSString *)stringWithControlsFilteredForString:(NSString *)str ;
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
+- (NSString*)argument;
 
 @end

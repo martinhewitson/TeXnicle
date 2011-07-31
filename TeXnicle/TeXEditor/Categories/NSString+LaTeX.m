@@ -160,6 +160,30 @@
 }
 
 
+- (NSString*)argument
+{
+  NSInteger start = 0;
+  
+  NSInteger argStart = -1;
+  NSInteger argEnd = -1;
+  while (start < [self length]) {
+    //						NSLog(@"Checking '%C'", [string characterAtIndex:start]);
+    if (argStart<0 && [self characterAtIndex:start] == '{') {
+      argStart = start+1;
+    }
+    if (argEnd<0 && [self characterAtIndex:start] == '}') {
+      argEnd = start;
+      break;
+    }
+    start++;
+  }
+  
+  if (argStart>=0 && argEnd>=0 && argEnd>=argStart) {
+    NSRange argRange = NSMakeRange(argStart, argEnd-argStart);
+    return [self substringWithRange:argRange];
+  }  
+  return nil;
+}
 
 @end
 
