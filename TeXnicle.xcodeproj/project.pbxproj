@@ -24,6 +24,7 @@
 		25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077327138E5D82000F1118 /* GetMetadataForFile.m */; };
 		2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2507732A138E5D82000F1118 /* MySpotlightImporter.m */; };
 		250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */; };
+		250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 250B039613E48DC800072FF2 /* newTeXDoc.icns */; };
 		25152995138F802B00307054 /* TPOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152992138F802B00307054 /* TPOutlineView.m */; };
 		25152996138F802B00307054 /* ESOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152994138F802B00307054 /* ESOutlineView.m */; };
 		25152999138F804D00307054 /* OpenDocumentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152998138F804C00307054 /* OpenDocumentsManager.m */; };
@@ -107,6 +108,8 @@
 		253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FA713A2151B00720CD0 /* zoomIn.icns */; };
 		253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FAA13A2157C00720CD0 /* zoomOut.icns */; };
 		253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 253F7A4113E3EF16005C1051 /* TPProjectBuilder.m */; };
+		255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB84813E56CB1007629C0 /* TPDescriptionView.m */; };
+		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		25717DA91392D16200955620 /* palette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25717C731392D16200955620 /* palette.plist */; };
 		25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C751392D16200955620 /* SymbolTableDelegate.m */; };
 		25717DAC1392D16200955620 /* PaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C791392D16200955620 /* PaletteController.m */; };
@@ -255,6 +258,7 @@
 		2507732C138E5D82000F1118 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
 		250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSection.h; sourceTree = "<group>"; };
 		250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSection.m; sourceTree = "<group>"; };
+		250B039613E48DC800072FF2 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
 		2514741413929DF60075CB5C /* ToDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		25152991138F802B00307054 /* TPOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineView.h; sourceTree = "<group>"; };
 		25152992138F802B00307054 /* TPOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineView.m; sourceTree = "<group>"; };
@@ -379,6 +383,9 @@
 		253E8FAA13A2157C00720CD0 /* zoomOut.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomOut.icns; sourceTree = "<group>"; };
 		253F7A4013E3EF16005C1051 /* TPProjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectBuilder.h; sourceTree = "<group>"; };
 		253F7A4113E3EF16005C1051 /* TPProjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectBuilder.m; sourceTree = "<group>"; };
+		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
+		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
+		255DB84B13E577BD007629C0 /* buildProject.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = buildProject.icns; sourceTree = "<group>"; };
 		25717C731392D16200955620 /* palette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = palette.plist; sourceTree = "<group>"; };
 		25717C741392D16200955620 /* SymbolTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableDelegate.h; sourceTree = "<group>"; };
 		25717C751392D16200955620 /* SymbolTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableDelegate.m; sourceTree = "<group>"; };
@@ -757,6 +764,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				255DB84B13E577BD007629C0 /* buildProject.icns */,
+				250B039613E48DC800072FF2 /* newTeXDoc.icns */,
 				25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */,
 				25A47D1413E1965A00CAFEB7 /* revealArrow.png */,
 				25A47D1213E15B3000CAFEB7 /* trashCan.icns */,
@@ -830,6 +839,8 @@
 				2528E86F1395662600834921 /* StartupScreenController.h */,
 				2528E8701395662600834921 /* StartupScreenController.m */,
 				2528E8721395663700834921 /* StartupScreen.xib */,
+				255DB84713E56CB1007629C0 /* TPDescriptionView.h */,
+				255DB84813E56CB1007629C0 /* TPDescriptionView.m */,
 				25D74AE81397F4F00074A5A2 /* MHRoundedTopView.h */,
 				25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */,
 				25D74AEC1397F90E0074A5A2 /* MHRoundedBottomView.h */,
@@ -1296,6 +1307,8 @@
 				25A47D1313E15B3000CAFEB7 /* trashCan.icns in Resources */,
 				25A47D1513E1965A00CAFEB7 /* revealArrow.png in Resources */,
 				25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */,
+				250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */,
+				255DB84C13E577BD007629C0 /* buildProject.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,6 +1429,7 @@
 				250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */,
 				252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */,
 				253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */,
+				255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

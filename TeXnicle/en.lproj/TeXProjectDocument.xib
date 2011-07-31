@@ -11,7 +11,6 @@
 			<string key="com.apple.pdfkit.ibplugin">518</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSToolbarSeparatorItem</string>
 			<string>NSCustomView</string>
 			<string>NSOutlineView</string>
 			<string>NSTextFieldCell</string>
@@ -31,12 +30,12 @@
 			<string>NSImageView</string>
 			<string>NSSearchFieldCell</string>
 			<string>NSMenuItem</string>
+			<string>NSSliderCell</string>
 			<string>NSImageCell</string>
-			<string>NSTabViewItem</string>
 			<string>NSSearchField</string>
 			<string>NSTextView</string>
 			<string>NSView</string>
-			<string>NSSliderCell</string>
+			<string>NSTabViewItem</string>
 			<string>NSMenu</string>
 			<string>NSCustomObject</string>
 			<string>NSButton</string>
@@ -263,33 +262,6 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
-						<object class="NSToolbarSeparatorItem" key="NSToolbarSeparatorItem" id="640095301">
-							<string key="NSToolbarItemIdentifier">NSToolbarSeparatorItem</string>
-							<string key="NSToolbarItemLabel"/>
-							<string key="NSToolbarItemPaletteLabel">Separator</string>
-							<nil key="NSToolbarItemToolTip"/>
-							<nil key="NSToolbarItemView"/>
-							<nil key="NSToolbarItemImage"/>
-							<nil key="NSToolbarItemTarget"/>
-							<nil key="NSToolbarItemAction"/>
-							<string key="NSToolbarItemMinSize">{12, 5}</string>
-							<string key="NSToolbarItemMaxSize">{12, 1000}</string>
-							<bool key="NSToolbarItemEnabled">YES</bool>
-							<bool key="NSToolbarItemAutovalidates">YES</bool>
-							<int key="NSToolbarItemTag">-1</int>
-							<bool key="NSToolbarIsUserRemovable">YES</bool>
-							<int key="NSToolbarItemVisibilityPriority">0</int>
-							<object class="NSMenuItem" key="NSToolbarItemMenuFormRepresentation">
-								<bool key="NSIsDisabled">YES</bool>
-								<bool key="NSIsSeparator">YES</bool>
-								<string key="NSTitle"/>
-								<string key="NSKeyEquiv"/>
-								<int key="NSKeyEquivModMask">1048576</int>
-								<int key="NSMnemonicLoc">2147483647</int>
-								<reference key="NSOnImage" ref="293181153"/>
-								<reference key="NSMixedImage" ref="36612006"/>
-							</object>
-						</object>
 						<object class="NSToolbarItem" key="NSToolbarShowColorsItem" id="725350519">
 							<string key="NSToolbarItemIdentifier">NSToolbarShowColorsItem</string>
 							<string key="NSToolbarItemLabel">Colors</string>
@@ -358,7 +330,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array key="NSToolbarIBAllowedItems">
+					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
 						<reference ref="725350519"/>
 						<reference ref="1016425075"/>
 						<reference ref="137200618"/>
@@ -369,7 +341,6 @@
 						<reference ref="460956546"/>
 						<reference ref="983258008"/>
 						<reference ref="16148072"/>
-						<reference ref="640095301"/>
 						<reference ref="35327036"/>
 					</array>
 					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
@@ -402,7 +373,6 @@
 											<string key="NSFrameSize">{230, 615}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="913435364"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -636,7 +606,6 @@
 																		<string key="NSFrame">{{186, 7}, {24, 25}}</string>
 																		<reference key="NSSuperview" ref="289218011"/>
 																		<reference key="NSWindow"/>
-																		<reference key="NSNextKeyView" ref="1002247264"/>
 																		<bool key="NSEnabled">YES</bool>
 																		<object class="NSButtonCell" key="NSCell" id="66653949">
 																			<int key="NSCellFlags">-2080244224</int>
@@ -2473,7 +2442,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSFrame">{{0, 39}, {296, 562}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<int key="DisplayMode">1</int>
 											<bool key="PageBreaks">YES</bool>
 											<float key="ScaleFactor">0.45322582125663757</float>
@@ -2528,7 +2496,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{9, 6}, {1130, 38}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:499</string>
 							<string key="NSClassName">TPStatusView</string>
 						</object>
@@ -5778,7 +5745,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<array class="NSMutableArray" key="children">
 							<reference ref="725350519"/>
 							<reference ref="1016425075"/>
-							<reference ref="640095301"/>
 							<reference ref="137200618"/>
 							<reference ref="915840481"/>
 							<reference ref="898080870"/>
@@ -5799,11 +5765,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">100026</int>
 						<reference key="object" ref="1016425075"/>
-						<reference key="parent" ref="732040264"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100027</int>
-						<reference key="object" ref="640095301"/>
 						<reference key="parent" ref="732040264"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -7927,7 +7888,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<string key="100024.designableToolbarIdentifier">TeXnicleToolbar</string>
 				<string key="100025.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100026.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100027.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100028.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100029.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100030.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
