@@ -85,4 +85,24 @@
 	return nil;
 }
 
+- (NSArray*)folders
+{
+  NSManagedObjectContext *moc = [self managedObjectContext];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSError *fetchError = nil;
+	NSArray *fetchResults;
+	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Folder"
+																						inManagedObjectContext:moc];
+	
+	[fetchRequest setEntity:entity];
+	fetchResults = [[moc executeFetchRequest:fetchRequest error:&fetchError] autorelease];
+	
+	if (fetchError != nil) {
+		[NSApp presentError:fetchError];
+    return nil;
+	}
+  return fetchResults;
+}
+
 @end

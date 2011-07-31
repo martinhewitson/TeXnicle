@@ -21,5 +21,6 @@
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
 
+- (NSArray*)folders;
 
 @end
