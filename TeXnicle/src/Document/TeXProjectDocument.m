@@ -201,7 +201,44 @@
 	
 }
 
-+ (id)newTeXnicleProject
++ (void) createTeXnicleProjectAtURL:(NSURL*)aURL
+{
+  // make a new managed object context  
+  NSManagedObjectContext *moc = [TeXProjectDocument managedObjectContextForStoreURL:aURL];
+  NSString *path = [aURL path];
+  
+  [moc processPendingChanges];
+  [[moc undoManager] disableUndoRegistration];
+  NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
+  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
+  
+  // set name and folder of the project
+  NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
+  NSString *folder = [path stringByDeletingLastPathComponent];
+  [project setValue:name forKey:@"name"];
+  [project setValue:folder forKey:@"folder"]; 
+  
+  [moc processPendingChanges];
+  [[moc undoManager] enableUndoRegistration];
+  
+  NSError *error = nil;
+  [moc save:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return nil;
+  }
+  
+//  NSError *openError = nil;
+//  id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:aURL display:YES error:&openError];
+//  if (openError) {
+//    [NSApp presentError:openError];
+//    return nil;
+//  }  
+//  
+//  return doc;
+}
+
++ (TeXProjectDocument*)newTeXnicleProject
 {
   // get a project name from the user
   NSSavePanel *savePanel = [NSSavePanel savePanel];
@@ -236,29 +273,8 @@
     }
   }
   
-  // make a new managed object context  
-  NSManagedObjectContext *moc = [TeXProjectDocument managedObjectContextForStoreURL:url];
-  
-  [moc processPendingChanges];
-  [[moc undoManager] disableUndoRegistration];
-  NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
-    
-  // set name and folder of the project
-  NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
-  NSString *folder = [path stringByDeletingLastPathComponent];
-  [project setValue:name forKey:@"name"];
-  [project setValue:folder forKey:@"folder"]; 
-  
-  [moc processPendingChanges];
-  [[moc undoManager] enableUndoRegistration];
-  
-  NSError *error = nil;
-  [moc save:&error];
-  if (error) {
-    [NSApp presentError:error];
-    return nil;
-  }
+  // create project
+  [TeXProjectDocument createTeXnicleProjectAtURL:url];
   
   NSError *openError = nil;
   id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES error:&openError];
@@ -374,11 +390,9 @@
 
 - (NSManagedObject *)project
 {
-  
 	if (project != nil) {
 		return project;
 	}
-	
 	NSManagedObjectContext *moc = [self managedObjectContext];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSError *fetchError = nil;
@@ -389,7 +403,6 @@
 	
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
 		self.project = [fetchResults objectAtIndex:0];
 		[fetchRequest release];

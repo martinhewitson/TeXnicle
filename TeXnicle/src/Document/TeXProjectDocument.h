@@ -74,7 +74,7 @@
 }
 
 @property (assign) IBOutlet TPStatusView *statusView;
-@property (assign) ProjectEntity *project;
+@property (retain) ProjectEntity *project;
 @property (assign) IBOutlet NSOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
 @property (assign) IBOutlet OpenDocumentsManager *openDocuments;
@@ -87,7 +87,8 @@
 @property (assign) IBOutlet PDFView *pdfView;
 @property (retain) TPFileMonitor *fileMonitor;
 
-+ (id)newTeXnicleProject;
++ (TeXProjectDocument*) newTeXnicleProject;
++ (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
 
 - (void) updateStatusView;
