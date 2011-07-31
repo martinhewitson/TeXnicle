@@ -8,6 +8,8 @@
 
 #import "StartupScreenController.h"
 #import "TeXProjectDocument.h"
+#import "TPProjectBuilder.h"
+#import "TPDescriptionView.h"
 
 @implementation StartupScreenController
 
@@ -16,7 +18,7 @@
 
 - (id) init
 {
-//	NSLog(@"Startup init");
+  //	NSLog(@"Startup init");
 	
 	if (![super initWithWindowNibName:@"StartupScreen"]) 
 		return nil;
@@ -30,13 +32,13 @@
   [nf addObserver:self selector:@selector(queryNotification:) name:nil object:query];
   
   // initialize our Spotlight query
-//  [query setSortDescriptors:
-//   [NSArray arrayWithObject:
-//    [[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
-//  
-//  [query setDelegate: self];
+  //  [query setSortDescriptors:
+  //   [NSArray arrayWithObject:
+  //    [[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
+  //  
+  //  [query setDelegate: self];
 	
-//	[[self window] setAlphaValue:1.0];
+  //	[[self window] setAlphaValue:1.0];
 	
 	return self;
 }
@@ -52,11 +54,14 @@
 
 - (void) awakeFromNib
 {
-//	[[self window] setLevel:NSNormalWindowLevel];
-//	[[[[recentFilesTable tableColumns] objectAtIndex:0] dataCell] setFont:[NSFont systemFontOfSize:14.0]];
+  
+  [[self window] center];
+  
+  //	[[self window] setLevel:NSNormalWindowLevel];
+  //	[[[[recentFilesTable tableColumns] objectAtIndex:0] dataCell] setFont:[NSFont systemFontOfSize:14.0]];
 	
 	[recentFilesTable setDoubleAction:@selector(recentFilesTableDoubleClick)];
-
+  
 	openFrame = [[self window] frame];
 	[[self window] setAlphaValue:0.0];
   
@@ -68,7 +73,25 @@
   
   [self updateFilepathLabel];
   
-//  [self startFileQuery:self];
+  NSRect frame = [containerView bounds];
+  [startView setFrame:frame];
+  [containerView addSubview:startView];
+  [buildView setFrame:frame];
+  NSPoint p = NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y);
+  [buildView setFrameOrigin:p];
+  [containerView addSubview:buildView];
+  
+  
+  [emptyProjectDescription setDescriptionText:@"Creates a new empty TeXnicle project ready to be populated with files."];
+  [emptyProjectDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  [newArticleDescription setDescriptionText:@"Creates a new TeXnicle project with a standard article main file and folders for additional TeX files and images."];
+  [newArticleDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  [buildProjectDescription setDescriptionText:@"Creates a new TeXnicle project containing the files referenced by a main file. Choose either a TeX file or a directory. If a directory is choosen, the main file used is the first file found that contains \\documentclass command."];  
+  [buildProjectDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  
+  [fileLabel setBorderColor:[NSColor clearColor]];
+  [fileLabel.descriptionCell setWraps:NO];
+  [fileLabel.descriptionCell setLineBreakMode:NSLineBreakByTruncatingMiddle];
 }
 
 - (void) handleRecentFilesSelectionChanged:(NSNotification*)aNote
@@ -81,7 +104,7 @@
   NSInteger row = [recentFilesTable selectedRow];
 	if (row>=0) {
     NSString *path = [[[recentFiles objectAtIndex:row] valueForKey:@"url"] path];
-    [fileLabel setStringValue:path];
+    [fileLabel setDescriptionText:path];
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *error = nil;
     NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];  
@@ -109,7 +132,9 @@
 
 -(IBAction)displayOrCloseWindow:(id)sender 
 {
-//	NSLog(@"Display or close");
+  // set back to start state
+  [self cancelNewProject:self];
+  
 	//Fades in & out nicely
 	if(isOpen) {
 		[[[self window] animator] setAlphaValue:0.0];
@@ -118,11 +143,9 @@
 	}
 	else {
 		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-//		id window = [self window];
-//		NSLog(@"Got window: %@", window);
 		[[self window] performSelector:@selector(makeKeyAndOrderFront:) withObject:self afterDelay:0];
-//		[[self window] makeKeyAndOrderFront:self];
-		//[window setAlphaValue:1.0];
+    
+    
 		[[[self window] animator] setAlphaValue:1.0];
 		isOpen = YES;
 	}
@@ -130,23 +153,10 @@
 
 -(IBAction)displayWindow:(id)sender 
 {
-  //	NSLog(@"Display or close");
-	//Fades in & out nicely
-//	if(isOpen) {
-//		[[[self window] animator] setAlphaValue:0.0];
-//		isOpen = NO;
-//		[self close];
-//	}
-//	else {
-		[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    //		id window = [self window];
-    //		NSLog(@"Got window: %@", window);
-		[[self window] performSelector:@selector(makeKeyAndOrderFront:) withObject:self afterDelay:0];
-    //		[[self window] makeKeyAndOrderFront:self];
-		//[window setAlphaValue:1.0];
-		[[[self window] animator] setAlphaValue:1.0];
-		isOpen = YES;
-//	}
+  [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+  [[self window] performSelector:@selector(makeKeyAndOrderFront:) withObject:self afterDelay:0];
+  [[[self window] animator] setAlphaValue:1.0];
+  isOpen = YES;
 }
 
 #pragma mark -
@@ -183,6 +193,115 @@
 
 #pragma mark -
 #pragma mark Project controls
+
+- (IBAction)newProject:(id)sender
+{
+  NSRect frame = [containerView bounds];
+  NSPoint buildViewOrigin = NSMakePoint(frame.origin.x, frame.origin.y);
+  NSPoint startViewOrigin = NSMakePoint(frame.origin.x-frame.size.width, frame.origin.y);
+  
+  [fileLabel setHidden:YES];
+  
+  [bottomBarButton setTarget:self];
+  [bottomBarButton setAction:@selector(cancelNewProject:)];
+  [bottomBarButton setTitle:@"Cancel"];
+  
+  [[startView animator] setFrameOrigin:startViewOrigin];
+  [[buildView animator] setFrameOrigin:buildViewOrigin];
+}
+
+- (IBAction)cancelNewProject:(id)sender
+{
+  [bottomBarButton setTarget:self];
+  [bottomBarButton setAction:@selector(openRecentFile:)];
+  [bottomBarButton setTitle:@"Open"];
+  
+  [fileLabel setHidden:NO];
+  
+  NSRect frame = [containerView bounds];
+  NSPoint buildViewOrigin = NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y);
+  NSPoint startViewOrigin = NSMakePoint(frame.origin.x, frame.origin.y);
+  
+  [[startView animator] setFrameOrigin:startViewOrigin];
+  [[buildView animator] setFrameOrigin:buildViewOrigin];
+  
+}
+
+- (IBAction)buildProject:(id)sender 
+{
+  // get a project director or file from the user  
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  [panel setTitle:@"Build New Project..."];
+  [panel setRequiredFileType:@"trip"];
+  [panel setNameFieldLabel:@"Source:"];
+  [panel setCanChooseFiles:YES];
+  [panel setCanChooseDirectories:YES];
+  [panel setCanCreateDirectories:NO];
+  [panel setMessage:@"Choose a main TeX file (one containing \\documentclass) or a directory of TeX files. \nIf a directory is chosen, the first TeX file containing \\documentclass is taken as the main file."];
+  [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"tex", NSFileTypeDirectory, nil]];
+  
+  BOOL result = [panel runModal];
+  
+  if (result == NSFileHandlingPanelCancelButton) {
+    return;
+  }
+  
+  
+  NSString *path = [[[panel URLs] objectAtIndex:0] path];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSError *error =nil;
+  NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }
+  TPProjectBuilder *pb = nil;
+  if ([atts fileType] == NSFileTypeDirectory) {
+    pb = [TPProjectBuilder builderWithDirectory:path];
+  } else {
+    pb = [TPProjectBuilder builderWithMainfile:path];
+  }
+  
+  // check if the project already exists and ask the user if they want to overwrite it
+  // Remove file if it is there
+  NSString *docpath = [pb.projectFileURL path];
+  if ([fm fileExistsAtPath:docpath]) {
+    
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
+    NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
+                                     defaultButton:@"Continue"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"A project file called %@ already exists in %@.\nIf you continue, the exiting project file will be moved to:\n%@.", [docpath lastPathComponent], [docpath stringByDeletingLastPathComponent], [movedPath lastPathComponent]];
+    
+    NSInteger result = [alert runModal];
+    
+    if (result == NSAlertAlternateReturn) {
+      return;
+    }
+    
+    NSError *moveError = nil;
+    [fm moveItemAtPath:docpath toPath:movedPath error:&moveError];
+    if (moveError) {
+      [NSApp presentError:moveError];
+      return;
+    }
+  }
+  
+  [TeXProjectDocument createTeXnicleProjectAtURL:pb.projectFileURL];
+  NSError *openError = nil;
+  TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:pb.projectFileURL display:YES error:&openError];
+  if (openError) {
+    [NSApp presentError:openError];
+    return;
+  }  
+  
+  [pb populateDocument:doc];  
+  [self displayOrCloseWindow:self];
+}
 
 - (IBAction) newEmptyProject:(id)sender
 {

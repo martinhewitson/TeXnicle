@@ -8,16 +8,26 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class TPDescriptionView;
 
 @interface StartupScreenController : NSWindowController <NSMetadataQueryDelegate> {
-
+  
+  IBOutlet TPDescriptionView *emptyProjectDescription;
+  IBOutlet TPDescriptionView *newArticleDescription;
+  IBOutlet TPDescriptionView *buildProjectDescription;
+  
+  IBOutlet NSView *containerView;
+  IBOutlet NSView *startView;
+  IBOutlet NSView *buildView;
+  IBOutlet NSButton *bottomBarButton;
+  
 	NSMutableArray *recentFiles;
 	
 	IBOutlet NSTableView *recentFilesTable;
 		
 	IBOutlet NSArrayController *recentFilesController;
   
-  IBOutlet NSTextField *fileLabel;
+  IBOutlet TPDescriptionView *fileLabel;
   IBOutlet NSTextField *dateLabel;
   
   IBOutlet NSButton *recentBtn;
@@ -38,6 +48,11 @@
 @property (readwrite, assign) NSMutableArray *recentFiles;
 
 - (IBAction) openRecentFile:(id)sender;
+
+- (IBAction) newProject:(id)sender;
+- (IBAction)cancelNewProject:(id)sender;
+
+- (IBAction) buildProject:(id)sender;
 - (IBAction) newEmptyProject:(id)sender;
 - (IBAction) openExistingDocument:(id)sender;
 - (IBAction) newArticleDocument:(id)sender;
