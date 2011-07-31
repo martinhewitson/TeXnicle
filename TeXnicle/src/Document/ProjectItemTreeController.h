@@ -93,6 +93,8 @@ extern NSString * const OutlineViewNodeType;
 @property (readwrite, assign) IBOutlet TeXProjectDocument *document;
 @property (readwrite, assign) ProjectEntity *project;
 
+- (void)updateSortOrder;
+
 - (void) selectDocument:(TeXFileEntity*)aDoc;
 - (void) selectItem:(ProjectItemEntity*)aDoc;
 - (NSArray *)treeNodeSortDescriptors;

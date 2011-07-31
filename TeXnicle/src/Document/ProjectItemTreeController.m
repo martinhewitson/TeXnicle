@@ -81,6 +81,11 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 @synthesize isDeleting;
 
 
+- (void)updateSortOrder
+{
+  [self updateSortOrderOfModelObjects];
+}
+
 - (NSManagedObject *)project
 {
 	if (project != nil) {
@@ -352,9 +357,6 @@ withIntermediateDirectories:YES
   
 	[moc processPendingChanges];
 	
-	// TODO: It would be nice to leave the code editor as rich text then we can have syntax highlighting.
-	// However, then we need to get the attributed string data back out of the Code value and re-save it
-	// as plain text because user-defaults chokes on the attributed string data.
 	if (codeStr && ![codeStr isEqual:@""]) {
 //		NSData *data = [codeStr RTFFromRange:NSMakeRange(0, [codeStr length]) documentAttributes:nil];	
 		NSData *data = [codeStr dataUsingEncoding:NSUTF8StringEncoding];
