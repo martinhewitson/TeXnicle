@@ -11,10 +11,21 @@ Bugs:\
 Beta 4\
 ------\
 \
++ Redesign of startup screen to provide a more logical flow of choices.\
++ Added a project builder. The user selects a directory of files or a TeX main file (one containing\
+  a \\documentclass command) and TeXnicle will build a project by recursively following all 'include' \
+  commands starting from the main file. Files are added to the project in folders as they are on disk. \
+  Currently files included in the building process are those referenced by \\input, \\include and  \
+  \\includegraphics.\
++ Added the ability to view project images directly in TeXnicle. Selecting an image in the project tree \
+  opens a new tab with an image viewer. For other file types (non-text and non-image) a tab is opened\
+  showing the file icon.\
 + Standalone editors can now compile both LaTeX and PDF LaTeX files\
-+ When trashing auxiliary files, console messages are no longer shown when failing to delete non-existent files\
++ When trashing auxiliary files, console messages are no longer shown when failing to delete \
+  non-existent files\
 + Added preference for changing the console font\
-+ Added new preference for setting a list of user-defined commands which will appear in the command-completion list\
++ Added new preference for setting a list of user-defined commands which will appear in the \
+  command-completion list\
 + Cosmetic changes to popup completion/correction windows\
 + Better handling of document dirty state when loading projects and opening files.\
 \pard\tx320\pardeftab320\pardirnatural
@@ -27,11 +38,9 @@ Beta 4\
 To Do\
 -----\
 \
-+ Make image viewer\
++ Find: from PDF to source, and from source to PDF\
 \
-+ Make project builder\
-	- parse main file and recursively all included tex and images to build a project\
-	- add to startup screen and add project menu item\
++ Apply typing attributes when entering a highlighting element.\
 \
 + Standalone document editor \
 	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\

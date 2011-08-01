@@ -110,6 +110,8 @@
 		253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 253F7A4113E3EF16005C1051 /* TPProjectBuilder.m */; };
 		255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB84813E56CB1007629C0 /* TPDescriptionView.m */; };
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
+		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
+		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
 		25717DA91392D16200955620 /* palette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25717C731392D16200955620 /* palette.plist */; };
 		25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C751392D16200955620 /* SymbolTableDelegate.m */; };
 		25717DAC1392D16200955620 /* PaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C791392D16200955620 /* PaletteController.m */; };
@@ -181,6 +183,7 @@
 		25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */; };
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
+		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
 		25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD0E9013995226004EB857 /* ConsoleWindow.m */; };
 		25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */ = {isa = PBXBuildFile; fileRef = 25CD0E9B139959D3004EB857 /* TeXnicle_Help */; };
 		25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */; };
@@ -386,6 +389,9 @@
 		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
 		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
 		255DB84B13E577BD007629C0 /* buildProject.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = buildProject.icns; sourceTree = "<group>"; };
+		255DB85113E5D5F8007629C0 /* TPImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerController.h; sourceTree = "<group>"; };
+		255DB85213E5D5F8007629C0 /* TPImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerController.m; sourceTree = "<group>"; };
+		255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPImageViewerController.xib; sourceTree = "<group>"; };
 		25717C731392D16200955620 /* palette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = palette.plist; sourceTree = "<group>"; };
 		25717C741392D16200955620 /* SymbolTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableDelegate.h; sourceTree = "<group>"; };
 		25717C751392D16200955620 /* SymbolTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableDelegate.m; sourceTree = "<group>"; };
@@ -507,6 +513,8 @@
 		25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryPreviewBackgroundView.m; sourceTree = "<group>"; };
 		25A8DEFE1397AA160097A62E /* MHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHImageView.h; sourceTree = "<group>"; };
 		25A8DEFF1397AA160097A62E /* MHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHImageView.m; sourceTree = "<group>"; };
+		25CC10B413E5DD9200A15850 /* TPImageViewerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerBackgroundView.h; sourceTree = "<group>"; };
+		25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerBackgroundView.m; sourceTree = "<group>"; };
 		25CD0E8F13995226004EB857 /* ConsoleWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindow.h; sourceTree = "<group>"; };
 		25CD0E9013995226004EB857 /* ConsoleWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindow.m; sourceTree = "<group>"; };
 		25CD0E9B139959D3004EB857 /* TeXnicle_Help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TeXnicle_Help; path = helpbook/TeXnicle_Help; sourceTree = "<group>"; };
@@ -620,6 +628,7 @@
 				25194919138F9596007029E5 /* Images */,
 				251529AD138F824E00307054 /* PSMTabBarControl */,
 				257B47A4138E5EB500ED02C4 /* Categories */,
+				255DB85013E5D5CB007629C0 /* Image Viewer */,
 				257B4730138E5E9000ED02C4 /* TeXEditor */,
 				257B4711138E5DA700ED02C4 /* Model */,
 				25717B361392D14C00955620 /* Palette */,
@@ -876,6 +885,19 @@
 			);
 			name = "Project Builder";
 			path = src/ProjectBuilder;
+			sourceTree = "<group>";
+		};
+		255DB85013E5D5CB007629C0 /* Image Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				255DB85113E5D5F8007629C0 /* TPImageViewerController.h */,
+				255DB85213E5D5F8007629C0 /* TPImageViewerController.m */,
+				255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */,
+				25CC10B413E5DD9200A15850 /* TPImageViewerBackgroundView.h */,
+				25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */,
+			);
+			name = "Image Viewer";
+			path = src/ImageViewer;
 			sourceTree = "<group>";
 		};
 		2560F10813923489005E3208 /* Misc */ = {
@@ -1309,6 +1331,7 @@
 				25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */,
 				250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */,
 				255DB84C13E577BD007629C0 /* buildProject.icns in Resources */,
+				255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,6 +1453,8 @@
 				252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */,
 				253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */,
 				255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */,
+				255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */,
+				25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
