@@ -19,7 +19,6 @@
 @dynamic extension;
 @dynamic content;
 @dynamic isText;
-
 @synthesize document;
 
 
@@ -394,5 +393,22 @@
 	return YES;
 }
 
+- (BOOL) isImage
+{
+  CFStringRef fileExtension = (CFStringRef) [[self pathOnDisk] pathExtension];
+  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+  if (UTTypeConformsTo(fileUTI, kUTTypeImage) 
+      || UTTypeConformsTo(fileUTI, kUTTypePDF)
+      || UTTypeConformsTo(fileUTI, kUTTypeBMP)
+      || UTTypeConformsTo(fileUTI, kUTTypeGIF)
+      || UTTypeConformsTo(fileUTI, kUTTypeJPEG)
+      || UTTypeConformsTo(fileUTI, kUTTypeJPEG2000)
+      || UTTypeConformsTo(fileUTI, kUTTypePNG)
+      || UTTypeConformsTo(fileUTI, kUTTypeTIFF)
+      ) {
+    return YES;
+  }
+  return NO;
+}
 
 @end

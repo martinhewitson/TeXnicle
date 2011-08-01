@@ -21,6 +21,7 @@
 @property (copy) NSString *extension;
 @property (retain) NSData *content;
 @property (assign) BOOL isText;
+@property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
 
 - (NSString*) contentString;
