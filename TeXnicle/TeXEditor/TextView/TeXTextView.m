@@ -1119,7 +1119,7 @@
 	
 }
 
-- (NSInteger) locationOfLastWhitespaceLessThan:(int)lineWrapLength
+- (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength
 {
 	NSString *str = [[self textStorage] string];
 	NSRange selRange = [self selectedRange];
@@ -1330,6 +1330,9 @@
 	}
   
   // setup typing attributes
+//  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;  
+//  NSRange wordRange = NSMakeRange(start, selRange.location-start);
+  //  NSString *word = [[self string] substringWithRange:wordRange];
   NSRange pRange = [self rangeForCurrentParagraph];  
   NSRange lineRange = [[self string] lineRangeForRange:selRange];  
   NSString *paragraph = [[self string] substringWithRange:pRange];
@@ -1340,6 +1343,8 @@
     [self setTypingColor:self.coloringEngine.commentColor];
   } else if ([paragraph isInArgumentAtIndex:selRange.location-pRange.location]) {
     [self setTypingColor:self.coloringEngine.argumentsColor];
+  } else if ([line isCommandBeforeIndex:selRange.location-pRange.location]) {
+    [self setTypingColor:self.coloringEngine.commandColor];
   } else {
     [self applyFontAndColor];
   }

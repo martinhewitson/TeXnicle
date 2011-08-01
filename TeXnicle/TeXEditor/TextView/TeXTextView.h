@@ -140,7 +140,7 @@
 
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
-- (NSInteger) locationOfLastWhitespaceLessThan:(int)lineWrapLength;
+- (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength;
 - (NSString*) currentLineToCursor;
 - (NSRange) getVisibleRange;
 - (void) selectUpToCurrentLocation;
