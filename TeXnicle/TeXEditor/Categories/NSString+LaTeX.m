@@ -185,6 +185,93 @@
   return nil;
 }
 
+- (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex
+{
+  if ([self length] == 0) {
+    return NO;
+  }
+  
+  NSRange commRange = [self rangeOfString:@"%"];
+  if (commRange.location != NSNotFound) {
+    if (commRange.location < anIndex) {
+      return YES;
+    }
+  }  
+  
+  return NO;
+}
+
+- (BOOL)isInArgumentAtIndex:(NSInteger)anIndex
+{
+  NSInteger idx = 0;
+  NSInteger bcount = 0;
+  
+  // check for {}
+  while (idx < anIndex && idx < [self length]) {
+    if ([self characterAtIndex:idx] == '{') {
+      bcount++;
+    } else if ([self characterAtIndex:idx] == '}') {
+      bcount--;
+    } else {
+      // do nothing
+    }
+    idx++;
+  }
+  if (bcount>0) {
+    return YES;
+  }
+  // but this could be a wrapped argument so check to the end of the line for a closing }
+  while (idx < [self length]) {
+    if ([self characterAtIndex:idx] == '{') {
+      bcount++;
+    } else if ([self characterAtIndex:idx] == '}') {
+      bcount--;
+    } else {
+      // do nothing
+    }
+    idx++;
+  }
+  if (bcount<0) {
+    return YES;
+  }
+  
+  
+  // check for []
+  bcount = 0;
+  idx = 0;
+  while (idx < anIndex && idx < [self length]) {
+    if ([self characterAtIndex:idx] == '[') {
+      bcount++;
+    } else if ([self characterAtIndex:idx] == ']') {
+      bcount--;
+    } else {
+      // do nothing
+    }
+    idx++;
+  }
+  if (bcount>0) {
+    return YES;
+  }
+  
+  return NO;
+}
+
+- (BOOL)isCommandBeforeIndex:(NSInteger)anIndex
+{
+  NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
+  NSInteger idx = anIndex;
+  while (idx >= 0 && idx < [self length]) {
+    if ([ws characterIsMember:[self characterAtIndex:idx]]) {
+      return NO;
+    }
+    if ([self characterAtIndex:idx] == '\\') {
+      return YES;
+    }
+    idx--;
+  }
+  return NO;
+}
+
 @end
 
 
