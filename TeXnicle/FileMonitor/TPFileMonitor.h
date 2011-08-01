@@ -25,7 +25,9 @@
 @end
 
 @interface TPFileMonitor : NSObject <TPFileMonitorDelegate> {
-  
+@private
+  NSTimer *timer;
+  id<TPFileMonitorDelegate> delegate;
 }
 
 @property (retain) NSTimer *timer;
