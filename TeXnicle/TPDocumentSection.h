@@ -12,9 +12,12 @@
 @class ProjectEntity;
 
 @interface TPDocumentSection : NSObject {
-  
+@private
 	NSMutableArray *sections;
-  
+  NSString *range;
+  NSString *result;
+  id document;
+  NSMutableArray *subsections;
 }
 
 @property (copy) NSString *range;
