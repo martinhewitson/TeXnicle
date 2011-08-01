@@ -156,7 +156,7 @@
 }
 
 
-- (void) colorText:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
+- (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
   
   if (self.lastHighlight) {
@@ -174,7 +174,8 @@
   }
   
   // make sure the glyphs are present otherwise colouring gives errors
-  [layoutManager ensureGlyphsForCharacterRange:NSMakeRange(0, strLen)];
+  NSRange fullRange = NSMakeRange(0, strLen);
+  [layoutManager ensureGlyphsForCharacterRange:fullRange];
   
   
   // apply default font and color, if necessary
@@ -182,8 +183,10 @@
 //  NSColor *currentTextColor = [currentAtts valueForKey:NSForegroundColorAttributeName];
 //  NSFont *currentTextFont = [currentAtts valueForKey:NSFontAttributeName];
 //  if (![currentTextColor isEqualTo:self.textColor] || ![currentTextFont isEqualTo:self.textFont]) {
-    // Note to self: replace this by setting typing attributes and but setting attributes when 
+  
+    // Note to self: replace this by setting typing attributes and by setting attributes when 
     // textstorage is created.
+  
 //    [textStorage beginEditing];  
 //    [textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:aRange];
 //    [textStorage addAttribute:NSFontAttributeName value:self.textFont range:aRange];		  
@@ -191,7 +194,7 @@
 //  }
   
   
-	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
+//	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:fullRange];
   
   
   // scan each character in the string

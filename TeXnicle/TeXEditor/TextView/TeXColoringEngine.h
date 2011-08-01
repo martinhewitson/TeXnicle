@@ -58,7 +58,7 @@
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView;
 
 - (void) readColorsAndFontsFromPreferences;
-- (void) colorText:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange;
+- (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange;
 
 - (void) observePreferences;
 - (void) stopObserving;
