@@ -32,6 +32,7 @@
 	BOOL generating;
   
   IBOutlet NSOutlineView *outlineView;
+  TPDocumentSection *section;
 }
 
 @property (nonatomic, retain) NSTimer *timer;
