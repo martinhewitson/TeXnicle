@@ -175,7 +175,7 @@
   
   // make sure the glyphs are present otherwise colouring gives errors
   NSRange fullRange = NSMakeRange(0, strLen);
-  [layoutManager ensureGlyphsForCharacterRange:fullRange];
+  [layoutManager ensureGlyphsForCharacterRange:aRange];
   
   
   // apply default font and color, if necessary
@@ -194,7 +194,7 @@
 //  }
   
   // remove existing temporary attributes
-	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:fullRange];
+	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
     
   // scan each character in the string
   NSUInteger idx;
