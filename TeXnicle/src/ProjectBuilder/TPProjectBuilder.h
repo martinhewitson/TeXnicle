@@ -14,7 +14,11 @@
 @class ProjectEntity;
 
 @interface TPProjectBuilder : NSObject {
-  
+@private
+  NSString *projectName;
+  NSString *projectDir;
+  NSString *mainfile;
+  NSURL *projectFileURL;
 }
 
 @property (copy) NSString *projectName;
