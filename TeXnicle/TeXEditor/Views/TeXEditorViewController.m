@@ -17,6 +17,7 @@
 @synthesize sectionListPopup;
 @synthesize unfoldButton;
 @synthesize markerButton;
+@synthesize isHidden;
 
 - (id) init
 {
@@ -59,6 +60,8 @@
 
 - (void) disableEditor
 {
+  [containerView setHidden:NO];
+  self.isHidden = NO;
 	[self.textView setHidden:YES];
 	[[self.textView enclosingScrollView] setHidden:YES];
   [self.sectionListPopup setHidden:YES];
@@ -68,6 +71,8 @@
 
 - (void) enableEditor
 {
+  [containerView setHidden:NO];
+  self.isHidden = NO;
 	[self.textView setHidden:NO];
 	[[self.textView enclosingScrollView] setHidden:NO];
   [self.sectionListPopup setHidden:NO];
@@ -75,6 +80,11 @@
   [self.unfoldButton setHidden:NO];
 }
 
+- (void) hide
+{
+  [containerView setHidden:YES];
+  self.isHidden = YES;
+}
 
 #pragma mark -
 #pragma NSTextView delegate

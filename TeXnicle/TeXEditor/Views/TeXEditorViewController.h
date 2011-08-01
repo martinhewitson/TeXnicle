@@ -18,12 +18,13 @@
   TeXTextView *textView;
   id delegate;
   IBOutlet TPSectionListController *sectionListController;
-  
+  IBOutlet NSView *containerView;
   NSPopUpButton *sectionListPopup;
   NSButton *unfoldButton;
   NSButton *markerButton;
 }
 
+@property (assign) BOOL isHidden;
 @property (assign) IBOutlet TeXTextView *textView;
 @property (assign) IBOutlet NSPopUpButton *sectionListPopup;
 @property (assign) IBOutlet NSButton *markerButton;
@@ -33,5 +34,6 @@
 - (void) setString:(NSString*)aString;
 - (void) disableEditor;
 - (void) enableEditor;
+- (void) hide;
 
 @end
