@@ -17,6 +17,7 @@
 #import "FindInProjectController.h"
 #import "NSString+LaTeX.h"
 #import "TPStatusView.h"
+#import "TPImageViewerController.h"
 
 @implementation TeXProjectDocument
 
@@ -33,6 +34,8 @@
 @synthesize pdfView;
 @synthesize pdfSearchResults;
 @synthesize fileMonitor;
+@synthesize imageViewerController;
+@synthesize imageViewerContainer;
 
 - (void) dealloc
 {
@@ -40,6 +43,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [projectOutlineController deactivate];
   [finder release];
+  self.imageViewerController = nil;
   self.texEditorViewController = nil;
   self.engine = nil;
   self.pdfSearchResults = nil;
@@ -87,8 +91,7 @@
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
     
-  // Setup text view
-  
+  // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
@@ -96,6 +99,13 @@
   [self.texEditorContainer setNeedsDisplay:YES];
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
+  
+  // setup image viewer
+  self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
+  self.openDocuments.imageViewerController = self.imageViewerController;
+  [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
+  [self.imageViewerContainer addSubview:[self.imageViewerController view]];
+  [self.openDocuments enableImageView:NO];
   
   // setup engine
   self.engine = [TPLaTeXEngine engineWithDelegate:self];
@@ -225,17 +235,8 @@
   [moc save:&error];
   if (error) {
     [NSApp presentError:error];
-    return nil;
+    return;
   }
-  
-//  NSError *openError = nil;
-//  id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:aURL display:YES error:&openError];
-//  if (openError) {
-//    [NSApp presentError:openError];
-//    return nil;
-//  }  
-//  
-//  return doc;
 }
 
 + (TeXProjectDocument*)newTeXnicleProject
@@ -800,11 +801,11 @@
 	if ([all count] == 1) {
 		NSManagedObject *item = [all objectAtIndex:0];
 		if ([item isKindOfClass:[FileEntity class]]) {
-			if ([[item valueForKey:@"isText"] boolValue]) {
+//			if ([[item valueForKey:@"isText"] boolValue]) {
 				if (openDocuments) {					
 					[openDocuments addDocument:(FileEntity*)item];          
 				}
-			}
+//			}
 		}
 	}
   

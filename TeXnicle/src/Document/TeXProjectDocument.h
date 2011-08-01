@@ -21,6 +21,7 @@
 @class TPLaTeXEngine;
 @class FindInProjectController;
 @class TPStatusView;
+@class TPImageViewerController;
 
 @interface TeXProjectDocument : NSPersistentDocument <TPFileMonitorDelegate, TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
@@ -70,6 +71,8 @@
   NSPopUpButton *projectTypeSelector;
   NSMutableArray *pdfSearchResults;
   NSView *texEditorContainer;
+  TPImageViewerController *imageViewerController;
+  NSView *imageViewerContainer;
   TPStatusView *statusView;
 }
 
@@ -83,6 +86,8 @@
 @property (retain) TPLaTeXEngine *engine;
 @property (retain) NSMutableArray *pdfSearchResults;
 @property (assign) IBOutlet NSView *texEditorContainer;
+@property (assign) IBOutlet NSView *imageViewerContainer;
+@property (retain) TPImageViewerController *imageViewerController;
 @property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
 @property (assign) IBOutlet PDFView *pdfView;
 @property (retain) TPFileMonitor *fileMonitor;
