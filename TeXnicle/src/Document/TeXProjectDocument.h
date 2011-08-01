@@ -74,6 +74,7 @@
   TPImageViewerController *imageViewerController;
   NSView *imageViewerContainer;
   TPStatusView *statusView;
+  TPFileMonitor *fileMonitor;
 }
 
 @property (assign) IBOutlet TPStatusView *statusView;
