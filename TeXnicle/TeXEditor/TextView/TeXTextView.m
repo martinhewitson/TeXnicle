@@ -23,6 +23,7 @@
 #import "NSString+RelativePath.h"
 
 #import "NSDictionary+TeXnicle.h"
+#import "NSString+LaTeX.h"
 
 #import "MHLineNumber.h"
 
@@ -363,9 +364,10 @@
     }
   }
 //  NSLog(@"Coloring whole document %@", [self textStorage]);
-  [self.coloringEngine colorText:[self textStorage]
-                   layoutManager:[self layoutManager]
-                         inRange:NSMakeRange(0, [[self string] length])];
+  [self.coloringEngine colorTextView:self
+                         textStorage:[self textStorage]
+                       layoutManager:[self layoutManager]
+                             inRange:NSMakeRange(0, [[self string] length])];
   [self setNeedsDisplay:YES];
 }
 
@@ -400,9 +402,10 @@
   NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
   
 //  NSLog(@"Coloring range %ld-%ld", r.location, r.location+r.length);
-  [self.coloringEngine colorText:[self textStorage]
-                   layoutManager:[self layoutManager]
-                         inRange:r];
+  [self.coloringEngine colorTextView:self
+                         textStorage:[self textStorage]
+                       layoutManager:[self layoutManager]
+                             inRange:r];
   
 }
 
@@ -589,6 +592,14 @@
 	}
 }
 
+- (void) setTypingColor:(NSColor*)aColor
+{
+  NSDictionary *catts = [NSDictionary currentTypingAttributes];
+  NSMutableDictionary *atts = [catts mutableCopy];
+  [atts setValue:aColor forKey:NSForegroundColorAttributeName];
+  [self setTypingAttributes:atts];
+}
+
 - (void) applyFontAndColor
 {
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
@@ -600,7 +611,14 @@
   if (![newColor isEqualTo:[self textColor]]) {
     [self setTextColor:[atts valueForKey:NSForegroundColorAttributeName]];
   }
-  [self setTypingAttributes:atts];
+  
+  NSDictionary *currentAtts = [self typingAttributes];
+  if (![currentAtts isEqualToDictionary:atts]) {
+//    NSLog(@"setting typing atts");
+    [self setTypingAttributes:atts];
+  } else {
+//    NSLog(@"Skipping setting atts");
+  }
 }
 
 - (void) setWrapStyle
@@ -1290,12 +1308,6 @@
 		return;
 	}
                              
-//  // get the attributes of the preceeding character
-//  if (selRange.location > 0 && selRange.location+2<[string length]) {    
-//    NSDictionary *dict = [[self layoutManager] temporaryAttributesAtCharacterIndex:selRange.location-1 effectiveRange:&effRange];
-//    [[self layoutManager] addTemporaryAttributes:dict forCharacterRange:NSMakeRange(selRange.location, 2)];
-//  }
-//	
 	if (selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
 																			atIndex:selRange.location
@@ -1317,8 +1329,22 @@
 		}
 	}
   
-	
-	if ([aString isEqual:@"{"]) {
+  // setup typing attributes
+  NSRange pRange = [self rangeForCurrentParagraph];  
+  NSRange lineRange = [[self string] lineRangeForRange:selRange];  
+  NSString *paragraph = [[self string] substringWithRange:pRange];
+  paragraph = [paragraph stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  NSString *line = [[self string] substringWithRange:lineRange];
+  line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  if ([line isCommentLineBeforeIndex:selRange.location-pRange.location]) {
+    [self setTypingColor:self.coloringEngine.commentColor];
+  } else if ([paragraph isInArgumentAtIndex:selRange.location-pRange.location]) {
+    [self setTypingColor:self.coloringEngine.argumentsColor];
+  } else {
+    [self applyFontAndColor];
+  }
+  
+  if ([aString isEqual:@"{"]) {
     // get selected text
     if (selRange.length > 0) {
       NSString *selected = [[string string] substringWithRange:selRange];

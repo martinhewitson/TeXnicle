@@ -69,6 +69,7 @@
 - (void) defaultSetup;
 - (void) turnOffWrapping;
 - (void) updateEditorRuler;
+- (void) setTypingColor:(NSColor*)aColor;
 - (void) applyFontAndColor;
 - (void) setWrapStyle;
 - (void) handleFrameChangeNotification:(NSNotification*)aNote;
