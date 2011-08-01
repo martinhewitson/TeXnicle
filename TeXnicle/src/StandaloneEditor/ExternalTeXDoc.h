@@ -40,6 +40,8 @@
   
   TPEngineCompiler compilerType;
   
+  NSDate *fileLoadDate;
+  TPFileMonitor *fileMonitor;
 }
 
 @property (assign) IBOutlet TPStatusView *statusView;
