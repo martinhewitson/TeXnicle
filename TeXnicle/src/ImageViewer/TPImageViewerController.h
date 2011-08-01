@@ -9,7 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface TPImageViewerController : NSViewController {
-  
+@private
+  NSView *contentView;
+  NSImageView *imageViewer;
+  NSView *backgroundView;
+  NSView *toolbarView;
+  NSString *path;
 }
 
 @property (assign) IBOutlet NSView *contentView;
