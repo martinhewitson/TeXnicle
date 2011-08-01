@@ -13,6 +13,10 @@
   NSTextFieldCell *editorStatusCell;
   NSTextFieldCell *filenameCell;
   NSButton *revealButton;
+  
+  NSString *editorStatusText;
+  NSString *filenameText;
+  BOOL showRevealButton;
 }
 
 @property (copy) NSString *editorStatusText;
