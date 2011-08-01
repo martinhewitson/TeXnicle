@@ -193,10 +193,9 @@
 //    [textStorage endEditing];
 //  }
   
-  
-//	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:fullRange];
-  
-  
+  // remove existing temporary attributes
+	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:fullRange];
+    
   // scan each character in the string
   NSUInteger idx;
   unichar cc;
@@ -212,7 +211,7 @@
     if (cc == '%' && self.colorComments) {
       // comment rest of the line
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-      colorRange = NSMakeRange(aRange.location+idx, NSMaxRange(lineRange)-idx);
+      colorRange = NSMakeRange(aRange.location+idx-1, NSMaxRange(lineRange)-idx);
       unichar c = 0;
 			if (idx>0) {
 				c = [text characterAtIndex:idx-1];
