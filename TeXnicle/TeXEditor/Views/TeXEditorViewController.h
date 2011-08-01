@@ -22,6 +22,7 @@
   NSPopUpButton *sectionListPopup;
   NSButton *unfoldButton;
   NSButton *markerButton;
+  BOOL isHidden;
 }
 
 @property (assign) BOOL isHidden;
