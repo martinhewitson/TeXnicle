@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PSMTabBarControl.h"
 #import "TeXEditorViewController.h"
+#import "TPImageViewerController.h"
 
 @class FileEntity;
 @class OpenDocument;
@@ -36,7 +37,7 @@
   IBOutlet NSBox *tabBackground;
 	NSTabView *tabView;
   TeXEditorViewController *texEditorViewController;
-	
+	TPImageViewerController *imageViewerController;
 	BOOL isOpening;
 	
 }
@@ -46,6 +47,7 @@
 @property (assign) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
 @property (assign) IBOutlet NSTabView *tabView;
 @property (assign) TeXEditorViewController *texEditorViewController;
+@property (assign) TPImageViewerController *imageViewerController;;
 
 - (NSInteger) count;
 - (void) refreshTabForDocument:(FileEntity*)aDoc;
@@ -61,6 +63,7 @@
 - (void) addDocument:(FileEntity*)aDoc;
 - (void) disableTextView;
 - (void) enableTextView;
+- (void)enableImageView:(BOOL)state;
 
 - (void) setCursorAndScrollPositionForCurrentDoc;
 - (void) saveCursorAndScrollPosition;

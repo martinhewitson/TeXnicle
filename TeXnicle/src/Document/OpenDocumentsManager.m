@@ -21,6 +21,7 @@
 @synthesize delegate;
 @synthesize tabView;
 @synthesize texEditorViewController;
+@synthesize imageViewerController;
 
 - (void) awakeFromNib
 {
@@ -36,6 +37,7 @@
 	isOpening = NO;
 	
 	[self disableTextView];
+  [self enableImageView:NO];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -152,7 +154,7 @@
 		if (![aDoc document]) {
 			return;
 		}
-		if (![[aDoc document] textStorage]) {
+    if (![[aDoc document] textStorage]) {
 			return;
 		}
 		if (![aDoc existsOnDisk]) {
@@ -170,13 +172,26 @@
 		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
 		[self setCurrentDoc:aDoc];
 		[newItem release];
-		[self enableTextView];
-    [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
+    if ([aDoc isText]) {
+      [self enableTextView];
+      [self enableImageView:NO];
+    } else if ([aDoc isImage]) {
+      [self enableImageView:YES];      
+    } else {
+      [self enableImageView:YES];
+    }
 	}	else {
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
 		[tabView selectTabViewItem:tab];
 		[self setCurrentDoc:[tab identifier]];		
-		[self enableTextView];
+    if ([aDoc isText]) {
+      [self enableTextView];
+      [self enableImageView:NO];
+    } else if ([aDoc isImage]) {
+      [self enableImageView:YES];
+    } else {
+      [self enableImageView:YES];
+    }
 	}
 	
 	[self.texEditorViewController.textView setNeedsDisplay:YES];
@@ -184,47 +199,53 @@
 
 - (void)updateDoc
 {
-	id doc = [currentDoc document];		
-	if (doc) {
-		if ([doc isKindOfClass:[FileDocument class]]) {
-			NSTextContainer *textContainer = [doc textContainer];
-			if (textContainer) {
-//				NSLog(@"TextView: %@", textView);
-				//NSLog(@"Setting up text container.. %@", textContainer);
-				// apply user preferences to textContainer size
-				int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-				int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
-				if (wrapStyle == TPSoftWrap) {
-					CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
-					[textContainer setContainerSize:NSMakeSize(scale*wrapAt, 1e7)];
-				}	else if (wrapStyle == TPNoWrap) {
-					[textContainer setContainerSize:NSMakeSize(1e7, 1e7)];
-				} else {
-					// set large size - hard wrap is handled in the textview
-					[textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
-				}
-				[self.texEditorViewController.textView stopObservingTextStorage];
-				[textContainer setTextView:self.texEditorViewController.textView];
-				[self.texEditorViewController.textView observeTextStorage];
-				[self.texEditorViewController.textView setNeedsDisplay:YES];
-				[self enableTextView];
-				[self.texEditorViewController.textView setUpRuler];
-        [self.texEditorViewController.textView setNeedsDisplay:YES];
-        [self.texEditorViewController.textView applyFontAndColor];
-        [self selectTabForFile:currentDoc];
-        [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
-                                                    withObject:nil 
-                                                    afterDelay:0];
-				[self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)
-                                                    withObject:nil
-                                                    afterDelay:0.5];
-        //				NSLog(@"Did set text container");
-			}			
-		}
-	} else {
-//		NSLog(@"Doc is nil");
-	}
+  if ([currentDoc valueForKey:@"isText"]) {
+    id doc = [currentDoc document];		
+    if (doc) {
+      if ([doc isKindOfClass:[FileDocument class]]) {
+        NSTextContainer *textContainer = [doc textContainer];
+        if (textContainer) {
+          //				NSLog(@"TextView: %@", textView);
+          //NSLog(@"Setting up text container.. %@", textContainer);
+          // apply user preferences to textContainer size
+          int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
+          int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+          if (wrapStyle == TPSoftWrap) {
+            CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
+            [textContainer setContainerSize:NSMakeSize(scale*wrapAt, 1e7)];
+          }	else if (wrapStyle == TPNoWrap) {
+            [textContainer setContainerSize:NSMakeSize(1e7, 1e7)];
+          } else {
+            // set large size - hard wrap is handled in the textview
+            [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
+          }
+          [self.texEditorViewController.textView stopObservingTextStorage];
+          [textContainer setTextView:self.texEditorViewController.textView];
+          [self.texEditorViewController.textView observeTextStorage];
+          [self.texEditorViewController.textView setNeedsDisplay:YES];
+          [self enableTextView];
+          [self.texEditorViewController.textView setUpRuler];
+          [self.texEditorViewController.textView setNeedsDisplay:YES];
+          [self.texEditorViewController.textView applyFontAndColor];
+          [self selectTabForFile:currentDoc];
+          [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
+                                                      withObject:nil 
+                                                      afterDelay:0];
+          [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)
+                                                      withObject:nil
+                                                      afterDelay:0.5];
+          //				NSLog(@"Did set text container");
+          [self enableImageView:NO];
+        }
+      } // end doc document is correct class
+    } // end doc is nil
+  } else if ([currentDoc isImage]) {
+    [self enableImageView:YES];
+  } else {
+    [self enableImageView:YES];
+  }
 }
+
 
 - (void) selectTabForFile:(FileEntity*)aFile
 {
@@ -299,16 +320,18 @@
 //	NSLog(@"Removed %@", [file valueForKey:@"name"]);
 	
 	
-	// Set another file if possible
-	FileEntity *nextFile = [openDocuments lastObject];
-//	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
-	if (nextFile && nextFile != file) {
-		[self setCurrentDoc:nextFile];
-	} else {
-		[self setCurrentDoc:nil];
-		[self disableTextView];
-	}
-	
+	// Set another file if this is the selected one and if possible
+  if (file == currentDoc) {
+    FileEntity *nextFile = [openDocuments lastObject];
+    //	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
+    if (nextFile && nextFile != file) {
+      [self setCurrentDoc:nextFile];
+    } else {
+      [self setCurrentDoc:nil];
+      [self disableTextView];
+      [self enableImageView:NO];
+    }
+  }	
 	
 	//[self removeObject:[tabViewItem identifier]];
 	//NSLog(@"Managing %d docs", [[self arrangedObjects] count]);
@@ -392,6 +415,24 @@
 	return YES;
 }
 
+- (void)enableImageView:(BOOL)state
+{
+  if (state) {
+    if ([currentDoc isImage]) {
+      NSImage *image = [[[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]] autorelease];
+      [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
+      [self.imageViewerController enable];
+    } else {
+      NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:[currentDoc extension]];
+      [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
+      [self.imageViewerController enable];
+    }
+    [self.texEditorViewController hide];
+  } else {
+    [self.imageViewerController disable];
+  }
+}
+
 - (void) disableTextView
 {
 //  NSLog(@"Disable text view %@", self.texEditorViewController.textView);
@@ -407,6 +448,7 @@
 	[tabView setHidden:NO];
 	[tabBar setHidden:NO];
   [self.texEditorViewController enableEditor];
+  [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
 }
 
 
