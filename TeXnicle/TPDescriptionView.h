@@ -11,7 +11,9 @@
 @interface TPDescriptionView : NSView {
 @private
   NSTextFieldCell *descriptionCell;
-
+  NSString *descriptionText;
+  NSColor *backgroundColor;
+  NSColor *borderColor;
 }
 
 @property (retain) NSTextFieldCell *descriptionCell;
