@@ -64,6 +64,7 @@
   NSRect bottom = NSMakeRect(0, bounds.size.height/2.0, bounds.size.width, bounds.size.height/2.0);
   NSRect top = NSMakeRect(0, 0.0, filenameWidth, bounds.size.height/2.0);
   [filenameCell drawWithFrame:top inView:self];
+  
   if (self.editorStatusText) {
     [editorStatusCell setStringValue:self.editorStatusText];
   } else {
