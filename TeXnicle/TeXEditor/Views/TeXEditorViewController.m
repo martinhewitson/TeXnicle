@@ -86,6 +86,22 @@
   self.isHidden = YES;
 }
 
+- (BOOL) textViewHasSelection
+{
+  NSRange r = [self.textView selectedRange];
+  return r.length > 0;
+}
+
+- (NSString*)selectedText
+{
+  NSString *string = [self.textView string];
+  NSRange r = [self.textView selectedRange];
+  if (r.location < [string length] && r.length > 0) {
+    return [[self.textView string] substringWithRange:r];
+  }
+  return nil;
+}
+
 #pragma mark -
 #pragma NSTextView delegate
 

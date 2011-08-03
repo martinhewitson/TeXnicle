@@ -37,4 +37,7 @@
 - (void) enableEditor;
 - (void) hide;
 
+- (BOOL) textViewHasSelection;
+- (NSString*)selectedText;
+
 @end
