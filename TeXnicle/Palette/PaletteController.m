@@ -57,6 +57,15 @@
   [symbolsTable setDoubleAction:@selector(handleTableDoubleClick)];
 }
 
+
+- (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == insertButton) {
+    return [self hasSelection];
+  }
+  return YES;
+}
+
 - (void) loadPalette
 {
 	// Load the dictionary
@@ -205,52 +214,7 @@
 	return pdfimage;
 }
 
-//+ (PaletteController*)sharedPaletteController
-//{
-//	@synchronized(self) {
-//		if (sharedPaletteController == nil) {
-//			[[self alloc] init]; // assignment not done here
-//		}
-//	}
-//	//NSLog(@"Someone got me %@", sharedPaletteController);
-//	return sharedPaletteController;
-//}
-//
-//+ (id)allocWithZone:(NSZone *)zone
-//{
-//	@synchronized(self) {
-//		if (sharedPaletteController == nil) {
-//			sharedPaletteController = [super allocWithZone:zone];
-//			return sharedPaletteController;  // assignment and return on first allocation
-//		}
-//	}
-//	return nil; //on subsequent allocation attempts return nil
-//}
-//
-//- (id)copyWithZone:(NSZone *)zone
-//{
-//	return self;
-//}
-//
-//- (id)retain
-//{
-//	return self;
-//}
-//
-//- (NSUInteger)retainCount
-//{
-//	return UINT_MAX;  //denotes an object that cannot be released
-//}
-//
-//- (void)release
-//{
-//	//do nothing
-//}
-//
-//- (id)autorelease
-//{
-//	return self;
-//}
+
 
 #pragma mark -
 #pragma mark Symbol table data source
@@ -290,6 +254,11 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 	}
 	
 	return NO;
+}
+
+- (BOOL) hasSelection
+{
+  return [[symbolsTable selectedRowIndexes] count] > 0;
 }
 
 @end

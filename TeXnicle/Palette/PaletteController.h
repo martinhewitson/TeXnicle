@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HHValidatedButton.h"
 
-@interface PaletteController : NSWindowController <NSTableViewDelegate> {
+@interface PaletteController : NSWindowController <NSTableViewDelegate, NSUserInterfaceValidations> {
 
 	NSDictionary *palette;
 	
@@ -21,6 +22,8 @@
 	IBOutlet NSTableView *symbolsTable;
 	
 	IBOutlet NSSlider *slider;
+  
+  IBOutlet HHValidatedButton *insertButton;
 }
 
 //+ (PaletteController*)sharedPaletteController;
@@ -32,5 +35,7 @@
 - (IBAction) setRowHeight:(id)sender;
 - (IBAction) insertSelectedSymbols:(id)sender;
 - (void) handleTableDoubleClick;
+
+- (BOOL) hasSelection;
 
 @end
