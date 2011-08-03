@@ -50,6 +50,11 @@
   
 	NSString *searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"\\"
 																																						 withString:@"\\\\"];
+  [self searchForTerm:searchTerm];
+}
+
+- (void)searchForTerm:(NSString*)searchTerm
+{
   if ([searchTerm length] == 0) {
     return;
   }
@@ -58,23 +63,23 @@
   if ([searchTerms count] == 0) {
     return;
   }
-
+  
 	NSMutableString *regexp = [NSMutableString stringWithString:@"(\\n)?.*"];
 	for (NSString *term in searchTerms) {
 		[regexp appendFormat:@"%@(\\s)*(\\n)?", term];
 	}
 	[regexp appendFormat:@".*(\\n)?"];
 	
-//	NSString *regexp = [NSString stringWithFormat:@".*%@.*", searchTerm];
-//	NSString *regexp = [NSString stringWithFormat:@"(\\n)?.*%@.*(\\n)?", searchTerm];
+  //	NSString *regexp = [NSString stringWithFormat:@".*%@.*", searchTerm];
+  //	NSString *regexp = [NSString stringWithFormat:@"(\\n)?.*%@.*(\\n)?", searchTerm];
 	
   ProjectEntity *project = [self.delegate project];
 	
-//	NSLog(@"Searching for '%@' in project %@", searchTerm, [project valueForKey:@"name"]);
-//	NSLog(@"Searching with regexp: %@", regexp);
+//  NSLog(@"Searching for '%@' in project %@", searchTerm, [project valueForKey:@"name"]);
+//  NSLog(@"Searching with regexp: %@", regexp);
 	
 	[searchResults removeObjects:[searchResults arrangedObjects]];
-
+  
 	// go through each doc in the project
 	for (ProjectItemEntity *item in [project valueForKey:@"items"]) {
 		if ([item isKindOfClass:[FileEntity class]]) {
@@ -82,33 +87,33 @@
 			FileEntity *file = (FileEntity*)item;
 			if ([[file valueForKey:@"isText"] boolValue]) {
 				
-//				NSLog(@"Searching %@...", [file valueForKey:@"name"]);
+        //				NSLog(@"Searching %@...", [file valueForKey:@"name"]);
 				
 				// get the text for this file
 				FileDocument *doc = [file document];
-								
+        
 				NSMutableAttributedString *aStr = [[doc textStorage] mutableCopy];
 				NSString *string = [aStr unfoldedString];
 				[aStr release];
-//				NSString *string = [[doc textStorage] string];
+        //				NSString *string = [[doc textStorage] string];
 				if (!string)
 					return;
 				
-//				NSLog(@"Searching string %@", string);
+        //				NSLog(@"Searching string %@", string);
 				
 				
 				
 				NSArray *results = [string componentsMatchedByRegex:regexp];
 				
 				NSScanner *aScanner = [NSScanner scannerWithString:string];
-//				NSLog(@"Results: %@", results);
+        //				NSLog(@"Results: %@", results);
 				if ([results count] > 0) {
 					
 					for (NSString *result in results) {
-												
+            
 						NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
 						
-//						returnResult = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            //						returnResult = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 						returnResult = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 						
 						if ([aScanner scanUpToString:returnResult intoString:NULL]) {
@@ -118,14 +123,14 @@
 							NSRange subrange    = [returnResult rangeOfRegex:[searchTerms objectAtIndex:0]];
 							resultRange.location += subrange.location;
 							resultRange.length = [searchTerm length];
-//							NSLog(@"Got results range:%@", NSStringFromRange(resultRange));
+              //							NSLog(@"Got results range:%@", NSStringFromRange(resultRange));
 							
 							NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 							[dict setObject:file forKey:@"document"];
 							[dict setObject:NSStringFromRange(resultRange) forKey:@"range"];
 							[dict setObject:[NSString stringWithControlsFilteredForString:returnResult] forKey:@"result"];
 							[searchResults addObject:dict];
-//							NSLog(@"Found %@", returnResult);
+              //							NSLog(@"Found %@", returnResult);
 							
 							[resultsView reloadData];
 						}
@@ -147,12 +152,21 @@
 	if (row >= 0) {
 		
 		// get file
-		FileEntity *file = [[searchResults arrangedObjects] objectAtIndex:row];
-		[self.delegate highlightSearchResult:[file valueForKey:@"result"] 
-                               withRange:NSRangeFromString([file valueForKey:@"range"])
-                                  inFile:[file valueForKey:@"document"]];
-		
+		[self jumpToSearchResult:row];
 	}
+}
+
+- (NSInteger)count
+{
+  return [[searchResults arrangedObjects] count];  
+}
+
+- (void) jumpToSearchResult:(NSInteger)index
+{
+  FileEntity *file = [[searchResults arrangedObjects] objectAtIndex:index];
+  [self.delegate highlightSearchResult:[file valueForKey:@"result"] 
+                             withRange:NSRangeFromString([file valueForKey:@"range"])
+                                inFile:[file valueForKey:@"document"]];
 }
 
 @end

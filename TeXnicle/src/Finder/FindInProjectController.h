@@ -33,5 +33,8 @@
 
 - (IBAction) performSearch:(id)sender;
 - (IBAction)handleTableDoubleClick:(id)sender;
+- (void)searchForTerm:(NSString*)searchTerm;
+- (void) jumpToSearchResult:(NSInteger)index;
+- (NSInteger)count;
 
 @end
