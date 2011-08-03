@@ -237,6 +237,15 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 //  NSLog(@"Trashing for %@", mainFile);
   
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
+  
+  // trash document as well?
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
+    NSString *docPath = [self compiledDocumentPath];
+    if (docPath) {
+      filesToClear = [filesToClear arrayByAddingObject:[[self compiledDocumentPath] pathExtension]];
+    }
+  }
+  
 //  NSLog(@"  deleting %@", filesToClear);
   NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
