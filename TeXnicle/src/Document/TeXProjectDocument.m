@@ -18,9 +18,12 @@
 #import "NSString+LaTeX.h"
 #import "TPStatusView.h"
 #import "TPImageViewerController.h"
+#import "PaletteController.h"
+#import "PDFViewerController.h"
 
 @implementation TeXProjectDocument
 
+@synthesize pdfViewerController;
 @synthesize project;
 @synthesize projectOutlineView;
 @synthesize controlsTabview;
@@ -31,11 +34,11 @@
 @synthesize statusView;
 @synthesize engine;
 @synthesize projectTypeSelector;
-@synthesize pdfView;
-@synthesize pdfSearchResults;
+
 @synthesize fileMonitor;
 @synthesize imageViewerController;
 @synthesize imageViewerContainer;
+@synthesize pdfHasSelection;
 
 - (void) dealloc
 {
@@ -43,10 +46,10 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [projectOutlineController deactivate];
   [finder release];
+  self.pdfViewerController = nil;
   self.imageViewerController = nil;
   self.texEditorViewController = nil;
   self.engine = nil;
-  self.pdfSearchResults = nil;
   self.fileMonitor = nil;
   [super dealloc];
 }
@@ -106,6 +109,12 @@
   [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
   [self.openDocuments enableImageView:NO];
+  
+  // setup pdf viewer
+  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
+  NSView *pdfViewer = [self.pdfViewerController view];
+  [pdfViewer setFrame:[pdfViewerContainerView bounds]];
+  [pdfViewerContainerView addSubview:pdfViewer];
   
   // setup engine
   self.engine = [TPLaTeXEngine engineWithDelegate:self];
@@ -182,8 +191,8 @@
 //  for (NSManagedObject *item in [self.project valueForKey:@"items"]){
 //    NSLog(@"%@", [item valueForKey:@"parent"]);
 //  }
-  [self.pdfView setDocument:nil];
   [self showDocument];
+  
 }
 
 
@@ -362,6 +371,15 @@
   }
     
   return result;
+}
+
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == findInSourceButton) {
+    return [self pdfHasSelection];
+  }
+  
+  return [super validateUserInterfaceItem:anItem];
 }
 
 - (void) updateStatusView
@@ -1055,54 +1073,7 @@
 
 }
 
-- (IBAction) showNextResult:(id)sender
-{
-  if ([self.pdfSearchResults count] == 0) {
-    return;
-  }
-  currentHighlightedPDFSearchResult++;
-  if (currentHighlightedPDFSearchResult >= [self.pdfSearchResults count]) {
-    currentHighlightedPDFSearchResult = 0;
-  }
-  PDFSelection *selection = [self.pdfSearchResults objectAtIndex:currentHighlightedPDFSearchResult];
-  [self.pdfView setCurrentSelection:selection animate:YES];
-  [self.pdfView scrollSelectionToVisible:self];
-}
 
-- (IBAction) searchPDF:(id)sender
-{
-  NSString *searchText = [sender stringValue];
-  
-  self.pdfSearchResults = [NSMutableArray arrayWithArray:[[self.pdfView document] findString:searchText withOptions:NSCaseInsensitiveSearch]];
-  currentHighlightedPDFSearchResult = -1;
-  [self showNextResult:self];
-  
-}
-
-
-- (void) showDocument
-{
-  NSString *docPath = [self.engine compiledDocumentPath];
-  if ([self engineProjectType:self.engine] == TPEngineCompilerLaTeX) {
-    [self.pdfView setHidden:YES];
-    return;
-  }
-  
-  if (docPath) {
-    PDFDocument *pdfDoc = [[[PDFDocument alloc] initWithURL: [NSURL fileURLWithPath:docPath]] autorelease];
-    NSView *view = [self.pdfView documentView];
-    NSRect r = [view visibleRect];
-    BOOL hasDoc = ([self.pdfView document] != nil);
-//    NSLog(@"Has doc %d: setting doc %@", hasDoc, pdfDoc);
-    [self.pdfView setHidden:NO];
-    [self.pdfView setDocument: pdfDoc];
-    if (hasDoc) {
-      [view scrollRectToVisible:r];
-    }
-  } else {
-    [self.pdfView setHidden:YES];
-  }
-}
 
 
 - (IBAction) openPDF:(id)sender
@@ -1159,6 +1130,15 @@
 {
 	NSInteger tag = [menuItem tag];
 	
+  if (tag == 116020) {
+    return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
+  }
+  
+  // Find PDF Selection in Source
+  if (tag == 116030) {
+    return [self pdfHasSelection]; 
+  }
+
 	if (tag == 1010) {		
 		if ([openDocuments count]>0) {
 			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:0] label]]];
@@ -1874,6 +1854,69 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return [file valueForKey:@"pathOnDisk"];
 }
 
+
+#pragma mark -
+#pragma mark PDF Selection
+
+- (IBAction)findCorrespondingPDFText:(id)sender
+{
+  // get selected text
+  NSString *text = [self.texEditorViewController selectedText];
+  [self.pdfViewerController setSearchText:text];
+  [self.pdfViewerController searchForStringInPDF:text];
+}
+
+- (IBAction)findSource:(id)sender
+{
+  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
+  NSString *selectedText = [selection string];
+  [controlsTabview selectTabViewItemAtIndex:4];
+  [finder searchForTerm:selectedText];
+  if ([finder count]>0) {
+    [finder jumpToSearchResult:0];
+  }
+}
+
+- (BOOL) pdfHasSelection
+{
+  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
+  if (selection) {
+    NSString *selectedText = [selection string];
+    if (selectedText && [selectedText length]>0) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
+
+- (void) showDocument
+{
+  NSView *view = [self.pdfViewerController.pdfview documentView];    
+  NSRect r = [view visibleRect];
+  BOOL hasDoc = [self.pdfViewerController hasDocument];
+  [self.pdfViewerController redisplayDocument];
+  if (hasDoc) {
+    [view scrollRectToVisible:r];
+  }
+}
+
+
+
+#pragma mark -
+#pragma mark PDFViewerController delegate
+
+- (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
+{
+  NSString *path = [self.engine compiledDocumentPath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:path]) {
+    return path;
+  } else {
+    return nil;
+  }
+  
+}
 
 
 @end

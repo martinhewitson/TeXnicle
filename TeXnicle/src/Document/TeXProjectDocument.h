@@ -14,6 +14,8 @@
 #import "FindInProjectController.h"
 #import "TPLaTeXEngine.h"
 #import "TPFileMonitor.h"
+#import "HHValidatedButton.h"
+#import "PDFViewerController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -23,7 +25,7 @@
 @class TPStatusView;
 @class TPImageViewerController;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPFileMonitorDelegate, TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -53,13 +55,14 @@
   IBOutlet ProjectOutlineController *projectOutlineController;
   
   IBOutlet NSTabView *tabView;
-  PDFView *pdfView;
+  
+  IBOutlet NSView *pdfViewerContainerView;
   
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
 	// Finder
-	FindInProjectController *finder;
+	IBOutlet FindInProjectController *finder;
   NSInteger currentHighlightedPDFSearchResult;
   
   NSOutlineView *projectOutlineView;
@@ -75,8 +78,11 @@
   NSView *imageViewerContainer;
   TPStatusView *statusView;
   TPFileMonitor *fileMonitor;
+    
+  IBOutlet HHValidatedButton *findInSourceButton;
 }
 
+@property (retain) PDFViewerController *pdfViewerController;
 @property (assign) IBOutlet TPStatusView *statusView;
 @property (retain) ProjectEntity *project;
 @property (assign) IBOutlet NSOutlineView *projectOutlineView;
@@ -85,13 +91,13 @@
 @property (assign) IBOutlet	ProjectItemTreeController *projectItemTreeController;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) TPLaTeXEngine *engine;
-@property (retain) NSMutableArray *pdfSearchResults;
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) IBOutlet NSView *imageViewerContainer;
 @property (retain) TPImageViewerController *imageViewerController;
 @property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
-@property (assign) IBOutlet PDFView *pdfView;
 @property (retain) TPFileMonitor *fileMonitor;
+
+@property (readonly) BOOL pdfHasSelection;
 
 + (TeXProjectDocument*) newTeXnicleProject;
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
@@ -156,7 +162,7 @@
 #pragma mark Files and Folders
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem;
-- (IBAction)selectTab:(id)sender;
+- (IBAction) selectTab:(id)sender;
 - (IBAction) selectNextTab:(id)sender;
 - (IBAction) selectPreviousTab:(id)sender;
 
@@ -165,13 +171,8 @@
 - (IBAction) addNewFolder:(id)sender;
 - (IBAction) addExistingFileToSelectedFolder:(id)sender;
 
-- (IBAction) showNextResult:(id)sender;
-- (IBAction) searchPDF:(id)sender;
-- (void) showDocument;
 
-
-
-- (NSArray*)getSelectedItems;
+- (NSArray*) getSelectedItems;
 - (IBAction) jumpToMainFile:(id)sender;
 - (IBAction) setMainFile:(id)sender;
 - (IBAction) openProjectFolderInFinder:(id)sender;
@@ -180,14 +181,14 @@
 - (IBAction) newFolder:(id)sender;
 - (IBAction) newFile:(id)sender;
 - (IBAction) endNewFileSheet:(id)sender;
-- (void)newFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
+- (void) newFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
 - (void) makeNewFile;
 - (IBAction) newTeXFile:(id)sender;
 - (void) showTemplatesSheet;
 - (void) templateSelectionChanged:(NSNotification*)aNote;
 - (IBAction) addNewTemplate:(id)sender;
 - (IBAction) endTemplateSheet:(id)sender;
-- (void)newTexFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
+- (void) newTexFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
 - (void) makeNewTexFileFromTemplate;
 - (void) addNewArticleMainFile;
 - (IBAction) newMainTeXFile:(id)sender;
@@ -204,5 +205,13 @@
 #pragma mark Saving
 
 - (BOOL) saveAllProjectFiles;
+
+#pragma mark -
+#pragma mark PDF Selection
+
+- (IBAction) findCorrespondingPDFText:(id)sender;
+- (IBAction) findSource:(id)sender;
+- (BOOL) pdfHasSelection;
+- (void) showDocument;
 
 @end
