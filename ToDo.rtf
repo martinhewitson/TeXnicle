@@ -20,9 +20,13 @@ Beta 4\
 + Added the ability to view project images directly in TeXnicle. Selecting an image in the project tree \
   opens a new tab with an image viewer. For other file types (non-text and non-image) a tab is opened\
   showing the file icon.\
++ Improved built-in PDF viewer. \
+  - highlight text in source, select "Edit -> Find -> Find Text Selection in PDF" (or cmd-j)\
+  - highlight text in pdf, select "Edit -> Find -> Find PDF Selection in Source (or shift-cmd-j)\
 + Standalone editors can now compile both LaTeX and PDF LaTeX files\
 + When trashing auxiliary files, console messages are no longer shown when failing to delete \
   non-existent files\
++ Added a preference option to delete the compiled document when trashing the auxiliary files.\
 + Added preference for changing the console font\
 + Added new preference for setting a list of user-defined commands which will appear in the \
   command-completion list\
@@ -38,7 +42,11 @@ Beta 4\
 To Do\
 -----\
 \
-+ Find: from PDF to source, and from source to PDF\
++ Do proper validation of all interface buttons using HHValidatedButton\
+\
++ Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
+\
++ Make outlineview for search results\
 \
 + Standalone document editor \
 	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\
