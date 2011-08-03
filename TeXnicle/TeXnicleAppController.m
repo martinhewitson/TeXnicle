@@ -29,6 +29,7 @@ NSString * const TPBibTeXPath = @"TPBibTeXPath";
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
 NSString * const BibTeXDuringTypeset = @"BibTeXDuringTypeset";
 NSString * const TPTrashFiles = @"TPTrashFiles";
+NSString * const TPTrashDocumentFileWhenTrashing = @"TPTrashDocumentFileWhenTrashing";
 NSString * const TPSpellCheckerLanguage = @"TPSpellCheckerLanguage";
 
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
@@ -162,7 +163,8 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	// --------- Trash
 	NSArray *files = [NSArray arrayWithObjects:@"aux", @"log", @"bbl", @"out", nil];
 	[defaultValues setObject:files forKey:TPTrashFiles];
-	
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPTrashDocumentFileWhenTrashing];
+  
 	//---------- Console settings
 	[defaultValues setValue:[NSNumber numberWithInt:0] forKey:TPConsoleDisplayLevel];	
 	
