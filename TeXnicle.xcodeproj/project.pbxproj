@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502897A139BE63900A88E09 /* NSString+RelativePath.m */; };
+		2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356413EA8923005BD6CF /* TPResultDocument.m */; };
+		2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */; };
 		250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
 		250772FB138E5D81000F1118 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250772F9138E5D81000F1118 /* InfoPlist.strings */; };
 		250772FE138E5D81000F1118 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250772FD138E5D81000F1118 /* main.m */; };
@@ -240,6 +242,10 @@
 		2502897A139BE63900A88E09 /* NSString+RelativePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RelativePath.m"; sourceTree = "<group>"; };
 		25028984139BE8CA00A88E09 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		25028986139BE8CB00A88E09 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		2503356313EA8923005BD6CF /* TPResultDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPResultDocument.h; sourceTree = "<group>"; };
+		2503356413EA8923005BD6CF /* TPResultDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPResultDocument.m; sourceTree = "<group>"; };
+		2503356713EA8A0E005BD6CF /* TPDocumentMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentMatch.h; sourceTree = "<group>"; };
+		2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentMatch.m; sourceTree = "<group>"; };
 		250772EC138E5D81000F1118 /* TeXnicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeXnicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250772F0138E5D81000F1118 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		250772F3138E5D81000F1118 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -850,6 +856,10 @@
 			children = (
 				252144C01398C24600656D3F /* FindInProjectController.h */,
 				252144C11398C24600656D3F /* FindInProjectController.m */,
+				2503356713EA8A0E005BD6CF /* TPDocumentMatch.h */,
+				2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */,
+				2503356313EA8923005BD6CF /* TPResultDocument.h */,
+				2503356413EA8923005BD6CF /* TPResultDocument.m */,
 			);
 			name = Finder;
 			path = src/Finder;
@@ -1500,6 +1510,8 @@
 				25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */,
 				2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */,
 				2545864C13E9268700461494 /* PDFViewerController.m in Sources */,
+				2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */,
+				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

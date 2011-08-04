@@ -6,7 +6,6 @@ cProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/
 cDataModelCompile "/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom" "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel"
 cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch.pth TeXnicle/TeXnicle-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/main.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSArray+Color.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Categories/NSArray+Color.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ProjectEntity.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/ProjectEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -14,6 +13,7 @@ cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/Projec
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FolderEntity.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FolderEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileEntity.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXFileEntity.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXFileEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSArray+Color.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Categories/NSArray+Color.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSArray+Extensions.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Categories/NSArray+Extensions.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSAttributedString+CodeFolding.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Categories/NSAttributedString+CodeFolding.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSMutableAttributedString+CodeFolding.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Categories/NSMutableAttributedString+CodeFolding.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -53,8 +53,8 @@ cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPOutl
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ESOutlineView.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/ESOutlineView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/OpenDocumentsManager.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/OpenDocumentsManager.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPMetalTabStyle.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TPMetalTabStyle.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSString_AITruncation.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/NSString_AITruncation.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSBezierPath_AMShading.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/NSBezierPath_AMShading.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/NSString_AITruncation.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/NSString_AITruncation.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/PSMOverflowPopUpButton.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/PSMOverflowPopUpButton.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/PSMProgressIndicator.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/PSMProgressIndicator.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/PSMRolloverButton.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/PSMTabBarControl/PSMRolloverButton.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -110,6 +110,8 @@ cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPImag
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPImageViewerBackgroundView.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ImageViewer/TPImageViewerBackgroundView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/HHValidatedButton.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/../../../../../../../../Downloads/HHValidatedButton/HHValidatedButton.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/PDFViewerController.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/../PDFViewerController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle normal x86_64
 cCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/en.lproj/InfoPlist.strings TeXnicle/en.lproj/InfoPlist.strings
 cCpResource TeXnicle/en.lproj/Credits.rtf build/Debug/TeXnicle.app/Contents/Resources/en.lproj/Credits.rtf
@@ -504,14 +506,14 @@ t1312362836
 s129082
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomIn.icns
-c000000004E3839860000000000020CEE
-t1312307590
-s134382
+c000000004E392790000000000001B4BF
+t1312368528
+s111807
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomOut.icns
-c000000004E38397D000000000001FB14
-t1312307581
-s129812
+c000000004E39279F000000000001A4F5
+t1312368543
+s107765
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/MHRoundedBottomView.h
 c000000004E33BAE70000000000000100
@@ -1294,9 +1296,9 @@ t1312308820
 s201700
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib
-c000000004E3915C9000000000006A70D
-t1312363977
-s435981
+c000000004E3A9BA10000000000069A13
+t1312463777
+s432659
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/externs.h
 c000000004E390DBC0000000000000997
@@ -1584,14 +1586,14 @@ t1312223906
 s3371
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.h
-c000000004E391B5D00000000000019B7
-t1312365405
-s6583
+c000000004E3A92990000000000001A7D
+t1312461465
+s6781
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m
-c000000004E391AF8000000000000DC11
-t1312365304
-s56337
+c000000004E3A9C0F000000000000E06B
+t1312463887
+s57451
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/Templates.plist
 c000000004DE1EB570000000000000B19
@@ -1599,14 +1601,34 @@ t1306651479
 s2841
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.h
-c000000004E36F8C500000000000003CB
-t1312225477
-s971
+c000000004E3A9BE200000000000006BA
+t1312463842
+s1722
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m
-c000000004E36F8E00000000000001356
-t1312225504
-s4950
+c000000004E3A9BEF0000000000002B9E
+t1312463855
+s11166
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.h
+c000000004E3A60E000000000000002A0
+t1312448736
+s672
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m
+c000000004E3A8F8F0000000000000556
+t1312460687
+s1366
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.h
+c000000004E3A58D60000000000000271
+t1312446678
+s625
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m
+c000000004E3A591800000000000004A5
+t1312446744
+s1189
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ImageViewer/TPImageViewerBackgroundView.h
 c000000004E35A61200000000000000E4
@@ -1739,8 +1761,8 @@ t1312013908
 s528
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel
-c000000004E37AECF0000000000000088
-t1312272079
+c000000004E3927DF0000000000000088
+t1312368607
 s136
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.h
@@ -1774,7 +1796,7 @@ t1307610133
 s992
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app
-t1312366368
+t1312463780
 s102
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Info.plist
@@ -1782,8 +1804,8 @@ t1311966961
 s3553
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle
-t1312366337
-s1566276
+t1312463733
+s1598976
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/PkgInfo
 t1311966961
@@ -1850,8 +1872,8 @@ t1311966978
 s717700
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/PDFViewerController.nib
-t1312366368
-s8518
+t1312366435
+s8516
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/Palette
 t1311966979
@@ -1918,7 +1940,7 @@ t1312187867
 s14032
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom
-t1312304560
+t1312445746
 s4853
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXnicle_4.icns
@@ -1998,8 +2020,8 @@ t1312308822
 s23319
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/en.lproj/TeXProjectDocument.nib
-t1312363979
-s98424
+t1312463780
+s81755
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/engine.icns
 t1311966977
@@ -2130,12 +2152,12 @@ t1312362900
 s129082
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns
-t1312307755
-s134382
+t1312445761
+s111807
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns
-t1312307755
-s129812
+t1312445761
+s107765
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
 c000000004E3306F10000000000000066
@@ -2163,8 +2185,8 @@ t1311966966
 s20096
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o
-t1312366336
-s123188
+t1312463149
+s123508
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileDocument.o
 t1312362061
@@ -2175,8 +2197,8 @@ t1312362061
 s45200
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o
-t1312366337
-s40588
+t1312463588
+s80840
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FolderEntity.o
 t1312096878
@@ -2443,8 +2465,8 @@ t1312014330
 s26240
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o
-t1312366336
-s104052
+t1312463149
+s104372
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/SymbolTableDelegate.o
 t1312014332
@@ -2469,6 +2491,10 @@ s16116
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDescriptionView.o
 t1312222219
 s25624
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o
+t1312461017
+s14692
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentSection.o
 t1312222219
@@ -2515,8 +2541,12 @@ t1312014329
 s28760
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o
-t1312366337
-s79104
+t1312463149
+s79424
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o
+t1312446758
+s18108
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPSearchField.o
 t1312014329
@@ -2543,20 +2573,20 @@ t1312137404
 s11020
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o
-t1312366336
-s248792
+t1312463732
+s257448
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXTextView.o
 t1312362063
 s211296
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicle.LinkFileList
-c000000004E38FE1000000000000038A8
-t1312357904
-s14504
+c000000004E3A553100000000000039B5
+t1312445745
+s14773
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o
-t1312366336
+t1312463148
 s73516
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/UKFNSubscribeFileWatcher.o
@@ -2895,6 +2925,12 @@ r0
 CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m
 r0
 
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m
+r0
+
+CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m
+r0
+
 CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ImageViewer/TPImageViewerBackgroundView.m
 r0
 
@@ -2939,7 +2975,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies679bcbe256e9b341^f6b7cce256e9b341^---0#1#0#--18"Check dependencies
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies09177a90d3eab341^42eb7d90d3eab341^---0#1#0#--18"Check dependencies
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ConsoleController.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/../ConsoleController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s334054864.100911
@@ -3014,8 +3050,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/ESOutlineView.ma7c9b4763ee3b341^f0a5f0763ee3b341^---0#0#0#-19%DVTDocumentLocation2@105"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/ESOutlineView.m0000000000000000^2337"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ESOutlineView.o TeXnicle/src/Document/ESOutlineView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ESOutlineView.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/ESOutlineView.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ESOutlineView.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.421247
-e334059136.683489
+s334156689.843162
+e334156690.790824
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o
@@ -3024,7 +3060,7 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m13f46b8056e9b341^7409af8056e9b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m0000000000000000^2358"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.ma9f8d791d3eab341^de71ca92d3eab341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m0000000000000000^2358"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/StandaloneEditor/ExternalTeXDoc.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/ExternalTeXDoc.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s334054860.875222
@@ -3053,8 +3089,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileEntity.mb8e874cd45e9b341^8cf6c8cd45e9b341^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileEntity.m0000000000000000^2316"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileEntity.o TeXnicle/src/Model/FileEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileEntity.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FileEntity.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FileEntity.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.690514
-e334059137.332292
+s334156690.809504
+e334156691.460149
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o
@@ -3063,7 +3099,7 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.mb8e4b08056e9b341^6938558156e9b341^---0#0#0#-19%DVTDocumentLocation2@113"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m0000000000000000^2383"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o TeXnicle/src/Finder/FindInProjectController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.md785cf92d3eab341^f0dbb493d3eab341^---0#0#0#-19%DVTDocumentLocation2@113"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m0000000000000000^2383"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o TeXnicle/src/Finder/FindInProjectController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/FindInProjectController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FindInProjectController.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/FolderEntity.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/FolderEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s333789678.821918
@@ -3938,8 +3974,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Views/SBGradientView.m2ac53a7af7e3b341^fed25a7af7e3b341^---0#0#0#-19%DVTDocumentLocation2@109"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Views/SBGradientView.m0000000000000000^2348"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/SBGradientView.o TeXnicle/TeXEditor/Views/SBGradientView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/SBGradientView.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Views/SBGradientView.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/SBGradientView.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.517084
-e334059136.736204
+s334156690.461762
+e334156691.460970
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o
@@ -3952,7 +3988,7 @@ o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenContr
 o   NSError *error = nil;
 o            ^
 o1 warning generated.
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.md47d848056e9b341^4982bc8056e9b341^-211"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m:173:12: warning: unused variable 'error' [-Wunused-variable,10]   NSError *error = nil;            ^1 warning generated.1(21%IDEActivityLogMessage2@23"Unused variable 'error'-334059136#0#151#-1#-23%DVTTextDocumentLocation3@102"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m0000000000000000^172#11#172#11#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@102"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m0000000000000000^2361"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o TeXnicle/StartupScreenController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m8a567692d3eab341^93e1b493d3eab341^-211"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m:173:12: warning: unused variable 'error' [-Wunused-variable,10]   NSError *error = nil;            ^1 warning generated.1(21%IDEActivityLogMessage2@23"Unused variable 'error'-334156690#0#151#-1#-23%DVTTextDocumentLocation3@102"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m0000000000000000^172#11#172#11#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@102"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m0000000000000000^2361"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o TeXnicle/StartupScreenController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/StartupScreenController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/StartupScreenController.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/SymbolTableDelegate.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Palette/SymbolTableDelegate.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s333707132.014212
@@ -4035,6 +4071,19 @@ xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TPDescriptionView.m8253538b23e7b341^d3dc668b23e7b341^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TPDescriptionView.m0000000000000000^2331"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDescriptionView.o TeXnicle/TPDescriptionView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDescriptionView.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TPDescriptionView.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDescriptionView.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s334153817.383270
+e334153817.442305
+r1
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m643c6259c8eab341^54397159c8eab341^---0#0#0#-19%DVTDocumentLocation2@105"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m0000000000000000^2343"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o TeXnicle/src/Finder/TPDocumentMatch.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPDocumentMatch.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentMatch.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPDocumentSection.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/../../TPDocumentSection.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s333915019.239896
@@ -4180,8 +4229,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection114"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Completion Window/TPPopuplistView.m89b63b79f7e3b341^9a415879f7e3b341^---0#0#0#-19%DVTDocumentLocation2@124"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Completion%20Window/TPPopuplistView.m0000000000000000^2381"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPPopuplistView.o "TeXnicle/TeXEditor/Completion Window/TPPopuplistView.m" normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPPopuplistView.d -c "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Completion Window/TPPopuplistView.m" -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPPopuplistView.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.746594
-e334059137.466630
+s334156691.467732
+e334156691.840861
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o
@@ -4190,7 +4239,20 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.mff3ebf8056e9b341^d87d778156e9b341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m0000000000000000^2364"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o TeXnicle/src/ProjectBuilder/TPProjectBuilder.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m66dd7793d3eab341^014ed793d3eab341^---0#0#0#-19%DVTDocumentLocation2@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m0000000000000000^2364"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o TeXnicle/src/ProjectBuilder/TPProjectBuilder.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/ProjectBuilder/TPProjectBuilder.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPProjectBuilder.o
+
+CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s334139558.335237
+e334139558.398019
+r1
+xCompileC
+xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection98"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.mf6f055a690eab341^a4e465a690eab341^---0#0#0#-19%DVTDocumentLocation2@106"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m0000000000000000^2348"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o TeXnicle/src/Finder/TPResultDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Finder/TPResultDocument.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPResultDocument.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TPSearchField.o "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/Completion Window/TPSearchField.m" normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s333707129.345852
@@ -4275,8 +4337,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXFileEntity.mee94723cd8e5b341^3412893cd8e5b341^---0#0#0#-19%DVTDocumentLocation2@102"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXFileEntity.m0000000000000000^2331"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXFileEntity.o TeXnicle/src/Model/TeXFileEntity.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXFileEntity.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXFileEntity.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXFileEntity.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.038747
-e334059136.514372
+s334156688.546063
+e334156690.410727
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o
@@ -4285,11 +4347,11 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m:1532:5: warning: unused variable 'newFile' [-Wunused-variable,10]
+o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m:1568:5: warning: unused variable 'newFile' [-Wunused-variable,10]
 o         id newFile = [projectItemTreeController addNewFile:name
 o            ^
 o1 warning generated.
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection102"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.mc30f0a8056e9b341^49b9838056e9b341^-261"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m:1532:5: warning: unused variable 'newFile' [-Wunused-variable,10]         id newFile = [projectItemTreeController addNewFile:name            ^1 warning generated.1(21%IDEActivityLogMessage2@25"Unused variable 'newFile'-334059136#0#161#-1#-23%DVTTextDocumentLocation3@110"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m0000000000000000^1531#4#1531#4#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@110"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m0000000000000000^2362"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o TeXnicle/src/Document/TeXProjectDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection102"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.mb0e78b90d3eab341^cc256992d3eab341^-261"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m:1568:5: warning: unused variable 'newFile' [-Wunused-variable,10]         id newFile = [projectItemTreeController addNewFile:name            ^1 warning generated.1(21%IDEActivityLogMessage2@25"Unused variable 'newFile'-334156689#0#161#-1#-23%DVTTextDocumentLocation3@110"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m0000000000000000^1567#4#1567#4#18446744073709551615#0#19"Unused Entity Issue--0#0#0#-19%DVTDocumentLocation4@110"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m0000000000000000^2362"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o TeXnicle/src/Document/TeXProjectDocument.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/TeXProjectDocument.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXProjectDocument.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXTextView.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/TextView/TeXTextView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s334054862.391226
@@ -4305,8 +4367,8 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/TextView/TeXTextView.m414664ce45e9b341^89ebb8cf45e9b341^---0#0#0#-19%DVTDocumentLocation2@109"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/TextView/TeXTextView.m0000000000000000^2339"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXTextView.o TeXnicle/TeXEditor/TextView/TeXTextView.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXTextView.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXEditor/TextView/TeXTextView.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXTextView.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s334059136.088423
-e334059136.354123
+s334156688.594140
+e334156689.779010
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o
@@ -4315,7 +4377,7 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m8bc2168056e9b341^1aa65a8056e9b341^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m0000000000000000^2351"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o TeXnicle/TeXnicleAppController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m6d389890d3eab341^1478c791d3eab341^---0#0#0#-19%DVTDocumentLocation2@100"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m0000000000000000^2351"CompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o TeXnicle/TeXnicleAppController.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicleAppController.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicleAppController.o
 
 CCompileC build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/UKFNSubscribeFileWatcher.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/UKKQueue/UKFNSubscribeFileWatcher.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s333659769.339519
@@ -4504,8 +4566,8 @@ x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/MainMenu.
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection92"Compiling /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/MainMenu.xib62d889d575e8b341^ecd9f7d675e8b341^---0#0#0#-19%DVTDocumentLocation2@98"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/MainMenu.xib0000000000000000^503"CompileXIB TeXnicle/en.lproj/MainMenu.xib    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/en.lproj/MainMenu.nib /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.6.sdk
 
 CCompileXIB /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib
-s334056778.107208
-e334056780.138222
+s334156579.734928
+e334156580.244173
 r1
 xCompileXIB
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib
@@ -4515,11 +4577,11 @@ o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjec
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100538: note: View is clipping its content [13]
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100620: note: View is clipping its content [13]
 o/* com.apple.ibtool.document.warnings */
-o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100078: warning: Tool tips on cells not embedded in instances of NSMatrix [9]
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Content rectangle not entirely on screen with the menu bar (May not be completely visible for all screen resolutions and configurations) [9]
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Full Screen behavior on Mac OS X prior to 10.7 [5]
+o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100078: warning: Tool tips on cells not embedded in instances of NSMatrix [9]
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100310: warning: Tool tips on cells not embedded in instances of NSMatrix [9]
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection102"Compiling /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib59871b4a4de9b341^c762234c4de9b341^-1389"/* com.apple.ibtool.document.notices *//Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100449: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100077: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100538: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100620: note: View is clipping its content [13]/* com.apple.ibtool.document.warnings *//Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100078: warning: Tool tips on cells not embedded in instances of NSMatrix [9]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Content rectangle not entirely on screen with the menu bar (May not be completely visible for all screen resolutions and configurations) [9]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Full Screen behavior on Mac OS X prior to 10.7 [5]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100310: warning: Tool tips on cells not embedded in instances of NSMatrix [9]8(21%IDEActivityLogMessage2@28"View is clipping its content-334056780#18446744073709551615#0#-0#-23%DVTTextDocumentLocation3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100448#18446744073709551615#100448#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334056780#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100076#18446744073709551615#100076#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334056780#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100537#18446744073709551615#100537#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334056780#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100619#18446744073709551615#100619#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@56"Tool tips on cells not embedded in instances of NSMatrix-334056780#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100077#18446744073709551615#100077#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--2@136"Content rectangle not entirely on screen with the menu bar (May not be completely visible for all screen resolutions and configurations)58"Content rectangle not entirely on screen with the menu bar334056780#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^4#18446744073709551615#4#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--2@46"Full Screen behavior on Mac OS X prior to 10.7-334056780#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^4#18446744073709551615#4#18446744073709551615#18446744073709551615#0#21"Attribute Unavailable--2@56"Tool tips on cells not embedded in instances of NSMatrix-334056780#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100309#18446744073709551615#100309#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--0#0#0#-19%DVTDocumentLocation4@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^533"CompileXIB TeXnicle/en.lproj/TeXProjectDocument.xib    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/en.lproj/TeXProjectDocument.nib /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib --sdk /Developer/SDKs/MacOSX10.6.sdk
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection102"Compiling /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xibb038bc23d3eab341^6ec13e24d3eab341^-1389"/* com.apple.ibtool.document.notices *//Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100449: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100077: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100538: note: View is clipping its content [13]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100620: note: View is clipping its content [13]/* com.apple.ibtool.document.warnings *//Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Content rectangle not entirely on screen with the menu bar (May not be completely visible for all screen resolutions and configurations) [9]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:5: warning: Full Screen behavior on Mac OS X prior to 10.7 [5]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100078: warning: Tool tips on cells not embedded in instances of NSMatrix [9]/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib:100310: warning: Tool tips on cells not embedded in instances of NSMatrix [9]8(21%IDEActivityLogMessage2@28"View is clipping its content-334156580#18446744073709551615#0#-0#-23%DVTTextDocumentLocation3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100448#18446744073709551615#100448#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334156580#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100076#18446744073709551615#100076#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334156580#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100537#18446744073709551615#100537#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@28"View is clipping its content-334156580#18446744073709551615#0#-0#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100619#18446744073709551615#100619#18446744073709551615#18446744073709551615#0#15"Clipped Content--2@136"Content rectangle not entirely on screen with the menu bar (May not be completely visible for all screen resolutions and configurations)58"Content rectangle not entirely on screen with the menu bar334156580#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^4#18446744073709551615#4#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--2@46"Full Screen behavior on Mac OS X prior to 10.7-334156580#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^4#18446744073709551615#4#18446744073709551615#18446744073709551615#0#21"Attribute Unavailable--2@56"Tool tips on cells not embedded in instances of NSMatrix-334156580#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100077#18446744073709551615#100077#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--2@56"Tool tips on cells not embedded in instances of NSMatrix-334156580#18446744073709551615#0#-1#-3@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^100309#18446744073709551615#100309#18446744073709551615#18446744073709551615#0#25"Unsupported Configuration--0#0#0#-19%DVTDocumentLocation4@108"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib0000000000000000^533"CompileXIB TeXnicle/en.lproj/TeXProjectDocument.xib    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv XCODE_DEVELOPER_USR_PATH /Developer/usr/bin/..    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/en.lproj/TeXProjectDocument.nib /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/en.lproj/TeXProjectDocument.xib --sdk /Developer/SDKs/MacOSX10.6.sdk
 
 CCompileXIB /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Document/DocWindow.xib
 s333659778.436115
@@ -4917,22 +4979,22 @@ xbuild/Debug/TeXnicle.app/Contents/Resources/upArrow.icns
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Copy build/Debug/TeXnicle.app/Contents/Resources/upArrow.icns60e5381449e9b341^3c6b3f1449e9b341^---0#0#0#-19%DVTDocumentLocation2@124"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/upArrow.icns0000000000000000^432"CpResource TeXnicle/Images/upArrow.icns build/Debug/TeXnicle.app/Contents/Resources/upArrow.icns    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/upArrow.icns /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
 
 CCpResource TeXnicle/Images/zoomIn.icns build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns
-s334000555.018537
-e334000555.028756
+s334138561.901410
+e334138561.909181
 r1
 xCpResource
 xTeXnicle/Images/zoomIn.icns
 xbuild/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection60"Copy build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns8d5e05ab71e8b341^956607ab71e8b341^---0#0#0#-19%DVTDocumentLocation2@123"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns0000000000000000^429"CpResource TeXnicle/Images/zoomIn.icns build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomIn.icns /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection60"Copy build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icnsb6d7e6c18ceab341^f0c0e8c18ceab341^---0#0#0#-19%DVTDocumentLocation2@123"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns0000000000000000^429"CpResource TeXnicle/Images/zoomIn.icns build/Debug/TeXnicle.app/Contents/Resources/zoomIn.icns    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomIn.icns /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
 
 CCpResource TeXnicle/Images/zoomOut.icns build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns
-s334000555.019812
-e334000555.029105
+s334138561.902569
+e334138561.909610
 r1
 xCpResource
 xTeXnicle/Images/zoomOut.icns
 xbuild/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Copy build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns0e4d05ab71e8b341^147807ab71e8b341^---0#0#0#-19%DVTDocumentLocation2@124"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns0000000000000000^432"CpResource TeXnicle/Images/zoomOut.icns build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomOut.icns /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"Copy build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icnsf41ae7c18ceab341^e0dbe8c18ceab341^---0#0#0#-19%DVTDocumentLocation2@124"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns0000000000000000^432"CpResource TeXnicle/Images/zoomOut.icns build/Debug/TeXnicle.app/Contents/Resources/zoomOut.icns    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/Images/zoomOut.icns /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
 
 CCpResource TeXnicle/PSMTabBarControl/PSMTabBarImages/AquaTabCloseDirty_Front.png build/Debug/TeXnicle.app/Contents/Resources/AquaTabCloseDirty_Front.png
 s333659776.615140
@@ -5205,24 +5267,24 @@ xbuild/Debug/TeXnicle.app/Contents/Resources/schema.xml
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection59"Copy build/Debug/TeXnicle.app/Contents/Resources/schema.xmlaa9a54833ee3b341^d92156833ee3b341^---0#0#0#-19%DVTDocumentLocation2@122"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/schema.xml00f4a462ddffdf42^428"CpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.app/Contents/Resources/schema.xml    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/schema.xml /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources
 
 CDataModelCompile "/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom" "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel"
-s333997360.531513
-e333997360.789794
+s334138545.874884
+e334138546.402567
 r1
 xDataModelCompile
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel
 o/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel:Project.selected: warning: Project.selected should have an inverse [2]
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodelc93a883065e8b341^463fca3065e8b341^-167"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel:Project.selected: warning: Project.selected should have an inverse [2]1(21%IDEActivityLogMessage2@39"Project.selected should have an inverse-333997360#18446744073709551615#0#-1#-23%DVTTextDocumentLocation3@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject%205.xcdatamodel/0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#22"Misconfigured Property--0#0#0#-19%DVTDocumentLocation4@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject%205.xcdatamodel/0000000000000000^526"DataModelCompile "build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom" "TeXnicle/src/Model/TeXProject 5.xcdatamodel"    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /Developer/usr/bin/momc -XD_MOMC_SDKROOT=/Developer/SDKs/MacOSX10.6.sdk -MOMC_PLATFORMS macosx -XD_MOMC_TARGET_VERSION=10.6 "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel" "/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom"
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection103"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel2027e0b18ceab341^de1f67b28ceab341^-167"/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel:Project.selected: warning: Project.selected should have an inverse [2]1(21%IDEActivityLogMessage2@39"Project.selected should have an inverse-334138546#18446744073709551615#0#-1#-23%DVTTextDocumentLocation3@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject%205.xcdatamodel/0000000000000000^18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#18446744073709551615#0#22"Misconfigured Property--0#0#0#-19%DVTDocumentLocation4@114"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject%205.xcdatamodel/0000000000000000^526"DataModelCompile "build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom" "TeXnicle/src/Model/TeXProject 5.xcdatamodel"    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /Developer/usr/bin/momc -XD_MOMC_SDKROOT=/Developer/SDKs/MacOSX10.6.sdk -MOMC_PLATFORMS macosx -XD_MOMC_TARGET_VERSION=10.6 "/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/src/Model/TeXProject 5.xcdatamodel" "/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/Resources/TeXProject 5.mom"
 
 CLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle normal x86_64
-s334059137.561998
-e334059137.776140
+s334156691.857687
+e334156692.160944
 r1
 xLd
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle
 xnormal
 xx86_64
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Link /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXniclec2f68f8156e9b341^64b0c68156e9b341^---0#0#0#--704"Ld build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle normal x86_64    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/clang -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -filelist /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicle.LinkFileList -mmacosx-version-min=10.6 -framework Quartz -licucore -framework Cocoa -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Link /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle3facdb93d3eab341^50362994d3eab341^---0#0#0#--704"Ld build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle normal x86_64    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/clang -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -filelist /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/Objects-normal/x86_64/TeXnicle.LinkFileList -mmacosx-version-min=10.6 -framework Quartz -licucore -framework Cocoa -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app/Contents/MacOS/TeXnicle
 
 CPBXCp build/Debug/TeXnicle.mdimporter build/Debug/TeXnicle.app/Contents/Resources/../Library/Spotlight/TeXnicle.mdimporter
 s333659779.480239
@@ -5259,10 +5321,10 @@ xcom.apple.compilers.llvm.clang.1_0.compiler
 lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection39"Precompile TeXnicle/TeXnicle-Prefix.pch1cd189713ee3b341^00e5af723ee3b341^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicle-Prefix.pch0000000000000000^2303"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch.pth TeXnicle/TeXnicle-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.6.sdk -fasm-blocks -fobjc-gc -mmacosx-version-min=10.6 -gdwarf-2 "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-generated-files.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-own-target-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-all-target-headers.hmap -iquote /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/TeXnicle-project-headers.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicle.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle/TeXnicle-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicle-Prefix-bxvkfkseehoxjteuumtrpbogjktx/TeXnicle-Prefix.pch.d
 
 CTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app
-s334059235.097160
-e334059235.110689
+s334156692.242249
+e334156692.250984
 r1
 xTouch
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app
-lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Touch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app4ef118e356e9b341^f6621ce356e9b341^---0#0#0#--189"Touch build/Debug/TeXnicle.app    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /usr/bin/touch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Touch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app16143e94d3eab341^e1404094d3eab341^---0#0#0#--189"Touch build/Debug/TeXnicle.app    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /usr/bin/touch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.app
 
