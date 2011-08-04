@@ -10,6 +10,8 @@
 		2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502897A139BE63900A88E09 /* NSString+RelativePath.m */; };
 		2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356413EA8923005BD6CF /* TPResultDocument.m */; };
 		2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */; };
+		2503357013EAD480005BD6CF /* FinderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356E13EAD47F005BD6CF /* FinderController.m */; };
+		2503357113EAD480005BD6CF /* FinderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2503356F13EAD480005BD6CF /* FinderController.xib */; };
 		250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
 		250772FB138E5D81000F1118 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250772F9138E5D81000F1118 /* InfoPlist.strings */; };
 		250772FE138E5D81000F1118 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250772FD138E5D81000F1118 /* main.m */; };
@@ -89,7 +91,6 @@
 		25194947138FB9F7007029E5 /* outlineTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194945138FB9F7007029E5 /* outlineTabBarImage.icns */; };
 		251FC6EE1392708800DB2E3B /* Console.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251FC6ED1392708800DB2E3B /* Console.xib */; };
 		251FC6FA139272A600DB2E3B /* TPLaTeXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */; };
-		252144C31398C24600656D3F /* FindInProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252144C11398C24600656D3F /* FindInProjectController.m */; };
 		252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */; };
 		252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C51398CA9100656D3F /* findTabBarImage.icns */; };
 		252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */; };
@@ -246,6 +247,9 @@
 		2503356413EA8923005BD6CF /* TPResultDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPResultDocument.m; sourceTree = "<group>"; };
 		2503356713EA8A0E005BD6CF /* TPDocumentMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentMatch.h; sourceTree = "<group>"; };
 		2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentMatch.m; sourceTree = "<group>"; };
+		2503356D13EAD47F005BD6CF /* FinderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinderController.h; sourceTree = "<group>"; };
+		2503356E13EAD47F005BD6CF /* FinderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinderController.m; sourceTree = "<group>"; };
+		2503356F13EAD480005BD6CF /* FinderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinderController.xib; sourceTree = "<group>"; };
 		250772EC138E5D81000F1118 /* TeXnicle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeXnicle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250772F0138E5D81000F1118 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		250772F3138E5D81000F1118 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -366,8 +370,6 @@
 		251FC6ED1392708800DB2E3B /* Console.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Console.xib; sourceTree = "<group>"; };
 		251FC6F8139272A600DB2E3B /* TPLaTeXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLaTeXEngine.h; sourceTree = "<group>"; };
 		251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLaTeXEngine.m; sourceTree = "<group>"; };
-		252144C01398C24600656D3F /* FindInProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindInProjectController.h; sourceTree = "<group>"; };
-		252144C11398C24600656D3F /* FindInProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindInProjectController.m; sourceTree = "<group>"; };
 		252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = findTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		252144C51398CA9100656D3F /* findTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = findTabBarImage.icns; sourceTree = "<group>"; };
 		252144C81398EA3D00656D3F /* MHRoundedTopBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedTopBottomView.h; sourceTree = "<group>"; };
@@ -854,12 +856,13 @@
 		252144BD1398C23100656D3F /* Finder */ = {
 			isa = PBXGroup;
 			children = (
-				252144C01398C24600656D3F /* FindInProjectController.h */,
-				252144C11398C24600656D3F /* FindInProjectController.m */,
 				2503356713EA8A0E005BD6CF /* TPDocumentMatch.h */,
 				2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */,
 				2503356313EA8923005BD6CF /* TPResultDocument.h */,
 				2503356413EA8923005BD6CF /* TPResultDocument.m */,
+				2503356D13EAD47F005BD6CF /* FinderController.h */,
+				2503356E13EAD47F005BD6CF /* FinderController.m */,
+				2503356F13EAD480005BD6CF /* FinderController.xib */,
 			);
 			name = Finder;
 			path = src/Finder;
@@ -1385,6 +1388,7 @@
 				2545865113E936FE00461494 /* leftArrow.icns in Resources */,
 				2545865213E936FE00461494 /* downArrow.icns in Resources */,
 				2545865313E936FE00461494 /* upArrow.icns in Resources */,
+				2503357113EAD480005BD6CF /* FinderController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,7 +1500,6 @@
 				25A8DF001397AA160097A62E /* MHImageView.m in Sources */,
 				25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */,
 				25D74AEE1397F90E0074A5A2 /* MHRoundedBottomView.m in Sources */,
-				252144C31398C24600656D3F /* FindInProjectController.m in Sources */,
 				252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */,
 				25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */,
 				2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */,
@@ -1512,6 +1515,7 @@
 				2545864C13E9268700461494 /* PDFViewerController.m in Sources */,
 				2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */,
 				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
+				2503357013EAD480005BD6CF /* FinderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

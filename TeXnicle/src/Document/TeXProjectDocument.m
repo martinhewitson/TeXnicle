@@ -14,7 +14,7 @@
 #import "TPLaTeXEngine.h"
 #import "ConsoleController.h"
 #import "MHControlsTabBarController.h"
-#import "FindInProjectController.h"
+#import "FinderController.h"
 #import "NSString+LaTeX.h"
 #import "TPStatusView.h"
 #import "TPImageViewerController.h"
@@ -40,10 +40,8 @@
 @synthesize imageViewerContainer;
 @synthesize pdfHasSelection;
 
-@synthesize projectSearchField;
-
-@synthesize finderStatusLabel;
-@synthesize finderProgressIndicator;
+@synthesize finder;
+@synthesize finderContainverView;
 
 - (void) dealloc
 {
@@ -56,6 +54,7 @@
   self.texEditorViewController = nil;
   self.engine = nil;
   self.fileMonitor = nil;
+  self.finder = nil;
   [super dealloc];
 }
 
@@ -127,6 +126,12 @@
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
+  // setup finder
+  self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
+  NSRect frame = [self.finderContainverView bounds];
+  NSView *finderView = [self.finder view];
+  [finderView setFrame:frame];
+  [self.finderContainverView addSubview:finderView];
   
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -989,29 +994,18 @@
 
 - (void) didBeginSearch:(FindInProjectController *)aFinder
 {
-  [self.finderProgressIndicator startAnimation:self];
-  [self.finderStatusLabel setStringValue:@"Searching..."];
 }
 
 - (void) didEndSearch:(FindInProjectController *)aFinder
 {
-  [self.finderProgressIndicator stopAnimation:self];
-  NSString *string = [NSString stringWithFormat:@"Found %d results.", [aFinder count]];
-  [self.finderStatusLabel setStringValue:string];
 }
 
 - (void) didCancelSearch:(FindInProjectController *)aFinder
 {
-  [self.finderProgressIndicator stopAnimation:self];
-  NSString *string = @"Cancelled.";
-  [self.finderStatusLabel setStringValue:string];
 }
 
 - (void)didMakeMatch:(FindInProjectController *)aFinder
 {
-//  NSLog(@"Did match");
-  NSString *string = [NSString stringWithFormat:@"Found %d results...", [aFinder count]];
-  [self.finderStatusLabel setStringValue:string];
 }
 
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
@@ -1907,11 +1901,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
   NSString *selectedText = [selection string];
   [controlsTabview selectTabViewItemAtIndex:4];
-  [self.projectSearchField setStringValue:selectedText];
-  [finder searchForTerm:selectedText];
-  if ([finder count]>0) {
-    NSLog(@"Found results %lu", [finder count]);
-    [finder jumpToSearchResult:0];
+  [self.finder setSearchTerm:selectedText];
+  [self.finder searchForTerm:selectedText];
+  if ([self.finder count]>0) {
+    [self.finder jumpToSearchResult:0];
   }
 }
 

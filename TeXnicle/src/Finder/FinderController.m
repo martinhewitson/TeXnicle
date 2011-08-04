@@ -1,33 +1,37 @@
 //
-//  FindInProjectController.m
+//  FinderProjectController.m
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 20/3/10.
-//  Copyright 2010 bobsoft. All rights reserved.
+//  Created by Martin Hewitson on 4/8/11.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
-#import "FindInProjectController.h"
-#import "TeXProjectDocument.h"
-#import "ProjectEntity.h"
-#import "ProjectItemEntity.h"
-#import "FileEntity.h"
-#import "FileDocument.h"
-#import "NSString+LaTeX.h"
-#import "NSMutableAttributedString+CodeFolding.h"
-#import "RegexKitLite.h"
+#import "FinderController.h"
 #import "TPResultDocument.h"
 #import "TPDocumentMatch.h"
+#import "ProjectItemEntity.h"
+#import "FileEntity.h"
+#import "RegexKitLite.h"
+#import "NSString+LaTeX.h"
+#import "NSMutableAttributedString+CodeFolding.h"
 
-@implementation FindInProjectController
+@implementation FinderController
 
 @synthesize delegate;
+@synthesize jumpToButton;
+@synthesize searchField;
+@synthesize outlineView;
+@synthesize progressIndicator;
+@synthesize statusLabel;
 @synthesize results;
 
-- (id) init
+- (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate
 {
-	self = [super initWithWindowNibName:@"FindInProject"];
+	self = [super initWithNibName:@"FinderController" bundle:nil];
   
   if (self) {
+    
+    self.delegate = aDelegate;
     
     self.results = [NSMutableArray array];
     ws = [[NSCharacterSet whitespaceCharacterSet] retain];
@@ -38,7 +42,7 @@
     dispatch_set_target_queue(queue,priority);
     
     arrayLock = dispatch_semaphore_create(1);
-
+    
   }
 	
 	return self;
@@ -56,8 +60,8 @@
 
 - (void) awakeFromNib
 {  
-  [resultsOutlineView setDoubleAction:@selector(handleOutlineViewDoubleClick:)];
-  [resultsOutlineView setTarget:self];
+  [self.outlineView setDoubleAction:@selector(handleOutlineViewDoubleClick:)];
+  [self.outlineView setTarget:self];
 }
 
 
@@ -70,10 +74,10 @@
     return;
   }
   
-//  NSLog(@"Perform search %@", sender);
+  //  NSLog(@"Perform search %@", sender);
   
 	NSString *searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"\\"
-																																						 withString:@"\\\\"];
+                                                                         withString:@"\\\\"];
   [self searchForTerm:searchTerm];
 }
 
@@ -87,23 +91,19 @@
   }
   
   if ([searchTerm length] == 0) {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didEndSearch:)]) {
-      [self.delegate didEndSearch:self];
-    }
+    [self didEndSearch:self];
     return;
   }
-	
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didBeginSearch:)]) {
-    [self.delegate didBeginSearch:self];
-  }
+  
+  [self didBeginSearch:self];
 	
   //	NSString *regexp = [NSString stringWithFormat:@".*%@.*", searchTerm];
   //	NSString *regexp = [NSString stringWithFormat:@"(\\n)?.*%@.*(\\n)?", searchTerm];
 	
-  ProjectEntity *project = [self.delegate project];
+  ProjectEntity *project = [self project];
 	
-//  NSLog(@"Searching for '%@' in project %@", searchTerm, [project valueForKey:@"name"]);
-//  NSLog(@"Searching with regexp: %@", regexp);
+  //  NSLog(@"Searching for '%@' in project %@", searchTerm, [project valueForKey:@"name"]);
+  //  NSLog(@"Searching with regexp: %@", regexp);
 	
   dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
   [self.results removeAllObjects];  
@@ -190,7 +190,7 @@
               }
               idx--;
             }
-            NSInteger len = MIN(subrange.location-idx+30, [returnResult length]-idx);
+            NSInteger len = (NSInteger)MIN(subrange.location-idx+30, [returnResult length]-idx);
             len = MAX(len, [searchTerm length]);
             NSString *matchingString = [returnResult substringWithRange:NSMakeRange(idx, len)];
             if (idx>0) {
@@ -210,10 +210,8 @@
             dispatch_sync(dispatch_get_main_queue(),
                           // block
                           ^{
-                            if (self.delegate && [self.delegate respondsToSelector:@selector(didMakeMatch:)]) {
-                              [self.delegate didMakeMatch:self];
-                            }
-                            [resultsOutlineView reloadData];
+                            [self didMakeMatch:self];
+                            [self.outlineView reloadData];
                           });
           } // end subrange found
         } // end result range founds
@@ -225,18 +223,14 @@
   
   // check if this is the last one?
   if (filesProcessed == 0) {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didEndSearch:)]) {
-      [self.delegate didEndSearch:self];
-    }
+    [self didEndSearch:self];
     if (!shouldContinueSearching) {
       // send cancelled message
-      if (self.delegate && [self.delegate respondsToSelector:@selector(didCancelSearch:)]) {
-        [self.delegate didCancelSearch:self];
-      }
+      [self didCancelSearch:self];
     }
     isSearching = NO;
     shouldContinueSearching = NO;
-    [resultsOutlineView reloadData];
+    [self.outlineView reloadData];
   }
   
 }
@@ -257,18 +251,22 @@
 
 - (IBAction)handleOutlineViewDoubleClick:(id)sender
 {
-	NSInteger row = [resultsOutlineView clickedRow];
+	NSInteger row = [self.outlineView clickedRow];
 	if (row < 0) {
 		// get selection
-		row = [resultsOutlineView selectedRow];
+		row = [self.outlineView selectedRow];
 	}
 	
 	if (row >= 0) {
-    id item = [resultsOutlineView itemAtRow:row];
+    id item = [self.outlineView itemAtRow:row];
 		if ([item isKindOfClass:[TPDocumentMatch class]]) {
       [self jumpToResultAtRow:row];
     } else if ([item isKindOfClass:[TPResultDocument class]]) {
-      [[resultsOutlineView animator] expandItem:item];
+      if ([self.outlineView isItemExpanded:item]) {
+        [[self.outlineView animator] collapseItem:item];
+      } else {
+        [[self.outlineView animator] expandItem:item];
+      }
     }
 	}
 }
@@ -287,15 +285,15 @@
 
 - (void) jumpToResultAtRow:(NSInteger)aRow
 {
-  id item = [resultsOutlineView itemAtRow:aRow];
-//  NSLog(@"Found item %@ at index %ld: %@", [item class], aRow, item);
+  id item = [self.outlineView itemAtRow:aRow];
+  //  NSLog(@"Found item %@ at index %ld: %@", [item class], aRow, item);
   if ([item isKindOfClass:[TPDocumentMatch class]]) {
     TPDocumentMatch *match = (TPDocumentMatch*)item;
-    TPResultDocument *doc = [resultsOutlineView parentForItem:item];
+    TPResultDocument *doc = [self.outlineView parentForItem:item];
     
-    [self.delegate highlightSearchResult:match.match 
-                               withRange:match.range
-                                  inFile:[doc valueForKey:@"document"]];
+    [self highlightSearchResult:match.match 
+                      withRange:match.range
+                         inFile:[doc valueForKey:@"document"]];
     
   }
 }
@@ -304,14 +302,14 @@
 - (void) jumpToSearchResult:(NSInteger)index
 {
   id item = [self resultAtIndex:index];
-//  NSLog(@"Found item %@ at index %ld: %@", [item class], index, item);
+  //  NSLog(@"Found item %@ at index %ld: %@", [item class], index, item);
   if ([item isKindOfClass:[TPDocumentMatch class]]) {
     TPDocumentMatch *match = (TPDocumentMatch*)item;
-    TPResultDocument *doc = [resultsOutlineView parentForItem:item];
+    TPResultDocument *doc = [self.outlineView parentForItem:item];
     
-    [self.delegate highlightSearchResult:match.match 
-                               withRange:match.range
-                                  inFile:[doc valueForKey:@"document"]];
+    [self highlightSearchResult:match.match 
+                      withRange:match.range
+                         inFile:[doc valueForKey:@"document"]];
     
   }
 }
@@ -329,6 +327,12 @@
   }
   return nil;
 }
+
+- (void)setSearchTerm:(NSString*)aString
+{
+  [self.searchField setStringValue:aString];
+}
+
 
 #pragma mark -
 #pragma mark SearchResults OutlineView delegate
@@ -388,6 +392,70 @@
   
   return 0;
 }
+
+#pragma mark -
+#pragma mark FinderController Delegate
+
+- (ProjectEntity*)project
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(project)]) {
+    return [self.delegate project];
+  }
+  return nil;
+}
+
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
+{
+  // do nothing just call delegate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
+    [self.delegate highlightSearchResult:result withRange:aRange inFile:aFile];
+  }
+}
+
+
+- (void) didBeginSearch:(FinderController *)aFinder
+{
+  [self.progressIndicator startAnimation:self];
+  [self.statusLabel setStringValue:@"Searching..."];
+  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didBeginSearch:)]) {
+    [self.delegate didBeginSearch:self];
+  }
+}
+
+- (void) didEndSearch:(FinderController *)aFinder
+{
+  [self.progressIndicator stopAnimation:self];
+  NSString *string = [NSString stringWithFormat:@"Found %d results.", [aFinder count]];
+  [self.statusLabel setStringValue:string];
+
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didEndSearch:)]) {
+    [self.delegate didEndSearch:self];
+  }
+}
+
+- (void) didCancelSearch:(FinderController *)aFinder
+{
+  [self.progressIndicator stopAnimation:self];
+  NSString *string = @"Cancelled.";
+  [self.statusLabel setStringValue:string];
+  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didCancelSearch:)]) {
+    [self.delegate didCancelSearch:self];
+  }
+}
+
+- (void)didMakeMatch:(FinderController *)aFinder
+{
+  //  NSLog(@"Did match");
+  NSString *string = [NSString stringWithFormat:@"Found %d results...", [aFinder count]];
+  [self.statusLabel setStringValue:string];
+  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didMakeMatch:)]) {
+    [self.delegate didMakeMatch:self];
+  }
+}
+
 
 
 @end

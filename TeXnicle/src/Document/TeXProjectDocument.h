@@ -11,11 +11,11 @@
 #import "OpenDocumentsManager.h"
 #import "TeXEditorViewController.h"
 #import "ProjectOutlineController.h"
-#import "FindInProjectController.h"
 #import "TPLaTeXEngine.h"
 #import "TPFileMonitor.h"
 #import "HHValidatedButton.h"
 #import "PDFViewerController.h"
+#import "FinderController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -25,7 +25,8 @@
 @class TPStatusView;
 @class TPImageViewerController;
 
-@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FindInProjectControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+
+@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -61,8 +62,6 @@
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
-	// Finder
-	IBOutlet FindInProjectController *finder;
   NSInteger currentHighlightedPDFSearchResult;
   
   NSOutlineView *projectOutlineView;
@@ -72,7 +71,6 @@
   TeXEditorViewController *texEditorViewController;
   TPLaTeXEngine *engine;
   NSPopUpButton *projectTypeSelector;
-  NSMutableArray *pdfSearchResults;
   NSView *texEditorContainer;
   TPImageViewerController *imageViewerController;
   NSView *imageViewerContainer;
@@ -82,13 +80,12 @@
   IBOutlet HHValidatedButton *findInSourceButton;
 }
 
-@property (assign) IBOutlet NSProgressIndicator *finderProgressIndicator;
-@property (assign) IBOutlet NSTextField *finderStatusLabel;
+@property (assign) IBOutlet NSView *finderContainverView;
+@property (retain) FinderController *finder;
 
 @property (retain) PDFViewerController *pdfViewerController;
 @property (assign) IBOutlet TPStatusView *statusView;
 @property (retain) ProjectEntity *project;
-@property (assign) IBOutlet NSSearchField *projectSearchField;
 @property (assign) IBOutlet NSOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
 @property (assign) IBOutlet OpenDocumentsManager *openDocuments;
