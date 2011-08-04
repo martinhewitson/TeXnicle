@@ -82,9 +82,13 @@
   IBOutlet HHValidatedButton *findInSourceButton;
 }
 
+@property (assign) IBOutlet NSProgressIndicator *finderProgressIndicator;
+@property (assign) IBOutlet NSTextField *finderStatusLabel;
+
 @property (retain) PDFViewerController *pdfViewerController;
 @property (assign) IBOutlet TPStatusView *statusView;
 @property (retain) ProjectEntity *project;
+@property (assign) IBOutlet NSSearchField *projectSearchField;
 @property (assign) IBOutlet NSOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
 @property (assign) IBOutlet OpenDocumentsManager *openDocuments;

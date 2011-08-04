@@ -40,6 +40,11 @@
 @synthesize imageViewerContainer;
 @synthesize pdfHasSelection;
 
+@synthesize projectSearchField;
+
+@synthesize finderStatusLabel;
+@synthesize finderProgressIndicator;
+
 - (void) dealloc
 {
 //  NSLog(@"TeXProjectDocument dealloc");
@@ -980,7 +985,34 @@
 }
 
 #pragma mark -
-#pragma mark ProjectOutlineController delegate
+#pragma mark Finder Delegate
+
+- (void) didBeginSearch:(FindInProjectController *)aFinder
+{
+  [self.finderProgressIndicator startAnimation:self];
+  [self.finderStatusLabel setStringValue:@"Searching..."];
+}
+
+- (void) didEndSearch:(FindInProjectController *)aFinder
+{
+  [self.finderProgressIndicator stopAnimation:self];
+  NSString *string = [NSString stringWithFormat:@"Found %d results.", [aFinder count]];
+  [self.finderStatusLabel setStringValue:string];
+}
+
+- (void) didCancelSearch:(FindInProjectController *)aFinder
+{
+  [self.finderProgressIndicator stopAnimation:self];
+  NSString *string = @"Cancelled.";
+  [self.finderStatusLabel setStringValue:string];
+}
+
+- (void)didMakeMatch:(FindInProjectController *)aFinder
+{
+//  NSLog(@"Did match");
+  NSString *string = [NSString stringWithFormat:@"Found %d results...", [aFinder count]];
+  [self.finderStatusLabel setStringValue:string];
+}
 
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
 {
@@ -1002,6 +1034,10 @@
 	
 	[[[[self windowControllers] objectAtIndex:0] window] makeKeyAndOrderFront:self];
 }
+
+
+#pragma mark -
+#pragma mark ProjectOutlineController delegate
 
 - (BOOL) shouldGenerateOutline
 {
@@ -1871,8 +1907,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
   NSString *selectedText = [selection string];
   [controlsTabview selectTabViewItemAtIndex:4];
+  [self.projectSearchField setStringValue:selectedText];
   [finder searchForTerm:selectedText];
   if ([finder count]>0) {
+    NSLog(@"Found results %lu", [finder count]);
     [finder jumpToSearchResult:0];
   }
 }
