@@ -272,7 +272,7 @@
 }
 
 
-- (void) browseForGSExecutable:(id)sender
+- (IBAction) browseForGSExecutable:(id)sender
 {
 	// get user to choose file
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
@@ -306,7 +306,7 @@
 	
 }	
 
-- (void) browseForPDFLatexExecutable:(id)sender
+- (IBAction) browseForPDFLatexExecutable:(id)sender
 {
 	// get user to choose file
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
@@ -339,7 +339,7 @@
 	
 }
 
-- (void) browseForLatexExecutable:(id)sender
+- (IBAction) browseForLatexExecutable:(id)sender
 {
 	// get user to choose file
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
@@ -372,7 +372,7 @@
 	
 }	
 
-- (void) browseForDvipsExecutable:(id)sender
+- (IBAction) browseForDvipsExecutable:(id)sender
 {
 	// get user to choose file
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
@@ -405,7 +405,7 @@
 	
 }	
 
-- (void) browseForBibTeXExecutable:(id)sender
+- (IBAction) browseForBibTeXExecutable:(id)sender
 {
 	// get user to choose file
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
@@ -437,4 +437,39 @@
 	[[NSUserDefaults standardUserDefaults] setObject:path forKey:TPBibTeXPath];
 	
 }	
+
+- (IBAction) browseForPS2PDFExecutable:(id)sender
+{
+	// get user to choose file
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanCreateDirectories:NO];
+	[openPanel setTitle:@"Locate ps2pdf binary"];
+	
+	SEL select = @selector(locatePS2PDFDidEnd:returnCode:contextInfo:);
+	[openPanel beginSheetForDirectory:[[NSUserDefaults standardUserDefaults] valueForKey:TPPS2PDFPath]
+															 file:nil 
+										 modalForWindow:[self window]
+											modalDelegate:self 
+										 didEndSelector:select
+												contextInfo:nil];	
+}
+
+- (void)locatePS2PDFDidEnd:(NSSavePanel*)savePanel 
+								returnCode:(NSInteger)returnCode
+							 contextInfo:(void*)context
+{
+	if (returnCode == NSCancelButton) 
+		return;
+	
+	NSString *path = [savePanel filename];
+	
+	// set the path to the item
+	[[NSUserDefaults standardUserDefaults] setObject:path forKey:TPPS2PDFPath];
+	
+}	
+
+
 @end

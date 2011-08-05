@@ -25,6 +25,10 @@ NSString * const TPPDFLatexPath = @"TPPDFLatexPath";
 NSString * const TPLatexPath = @"TPLatexPath";
 NSString * const TPDvipsPath = @"TPDvipsPath";
 NSString * const TPBibTeXPath = @"TPBibTeXPath";
+NSString * const TPPS2PDFPath = @"TPPS2PDFPath";
+
+
+NSString * const TPShouldRunPS2PDF = @"TPShouldRunPS2PDF";
 
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
 NSString * const BibTeXDuringTypeset = @"BibTeXDuringTypeset";
@@ -154,12 +158,18 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	// BibTeX path
 	[defaultValues setObject:@"/usr/texbin/bibtex" forKey:TPBibTeXPath];
 	
+	// ps2pdf path
+	[defaultValues setObject:@"" forKey:TPPS2PDFPath];
+  
 	// Number of times to run pdflatex
 	[defaultValues setValue:[NSNumber numberWithUnsignedInt:3] forKey:TPNRunsPDFLatex];
 	
 	// BibTeX during typeset
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:BibTeXDuringTypeset];
 	
+	// Run ps2pdf after typeset
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPShouldRunPS2PDF];
+  
 	// --------- Trash
 	NSArray *files = [NSArray arrayWithObjects:@"aux", @"log", @"bbl", @"out", nil];
 	[defaultValues setObject:files forKey:TPTrashFiles];

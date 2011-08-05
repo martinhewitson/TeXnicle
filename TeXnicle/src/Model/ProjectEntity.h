@@ -17,6 +17,7 @@
 @property (assign) NSString *name;
 @property (assign) NSString *folder;
 @property (assign) NSSet *items;
+@property (copy) NSString *type;
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;

@@ -42,6 +42,7 @@ typedef enum {
 	BOOL openPDFAfterBuild;
 	int compilationsDone;
 	BOOL abortCompile;
+  BOOL didPS2PDF;
 	
 	// BibTeX
 	NSTask *bibtexTask;
@@ -51,7 +52,12 @@ typedef enum {
 	NSTask *dvipsTask;
 	NSFileHandle *dvipsFileHandle;
   
+	// ps2pdf
+	NSTask *ps2pdfTask;
+	NSFileHandle *ps2pdfFileHandle;
+  
   id delegate;
+  
 }
 
 @property (assign) id delegate;
@@ -66,5 +72,15 @@ typedef enum {
 - (BOOL) build;
 //- (NSString*)fileToCompile;
 - (NSString*)compiledDocumentPath;
+- (NSString*)pdfPath;
+
+- (IBAction) dvips:(id)sender;
+- (void) dvipsTaskFinished:(NSNotification*)aNote;
+- (void) dvipsOutputAvailable:(NSNotification*)aNote;
+
+- (IBAction) ps2pdf:(id)sender;
+- (void) ps2pdfTaskFinished:(NSNotification*)aNote;
+- (void) ps2pdfOutputAvailable:(NSNotification*)aNote;
+
 
 @end

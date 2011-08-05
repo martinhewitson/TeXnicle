@@ -14,10 +14,12 @@
 @dynamic name;
 @dynamic folder;
 @dynamic items;
+@dynamic type;
 
 - (void) awakeFromInsert
 {
 	//NSLog(@"Inserted project");
+  self.type = @"PDFLaTeX";
 }
 
 - (NSSet*)items

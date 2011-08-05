@@ -64,9 +64,11 @@ extern NSString * const TPPDFLatexPath;
 extern NSString * const TPLatexPath;
 extern NSString * const TPDvipsPath;
 extern NSString * const TPBibTeXPath;
+extern NSString * const TPPS2PDFPath;
 
 extern NSString * const TPNRunsPDFLatex;
 extern NSString * const BibTeXDuringTypeset;
+extern NSString * const TPShouldRunPS2PDF;
 extern NSString * const TPTrashFiles;
 extern NSString * const TPTrashDocumentFileWhenTrashing;
 extern NSString * const TPConsoleDisplayLevel;

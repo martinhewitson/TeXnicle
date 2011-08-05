@@ -105,4 +105,9 @@
 								returnCode:(NSInteger)returnCode
 							 contextInfo:(void*)context;
 
+- (IBAction) browseForPS2PDFExecutable:(id)sender;
+- (void)locatePS2PDFDidEnd:(NSSavePanel*)savePanel 
+								returnCode:(NSInteger)returnCode
+							 contextInfo:(void*)context;
+
 @end

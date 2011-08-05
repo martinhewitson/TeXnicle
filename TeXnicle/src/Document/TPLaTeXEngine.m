@@ -59,9 +59,24 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
            object:dvipsFileHandle];
   
   [nc addObserver:self
+         selector:@selector(dvipsTaskFinished:)
+             name:NSTaskDidTerminateNotification
+           object:dvipsTask];
+  
+  [nc addObserver:self
          selector:@selector(bibTeXTaskFinished:) 
              name:NSTaskDidTerminateNotification
            object:bibtexTask];
+  
+  [nc addObserver:self
+         selector:@selector(ps2pdfOutputAvailable:) 
+             name:NSFileHandleReadCompletionNotification
+           object:ps2pdfFileHandle];
+  
+  [nc addObserver:self
+         selector:@selector(ps2pdfTaskFinished:) 
+             name:NSTaskDidTerminateNotification
+           object:ps2pdfTask];
 }
 
 
@@ -149,6 +164,96 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 }
 
 #pragma mark -
+#pragma mark ps2pdf Control
+
+- (IBAction) ps2pdf:(id)sender
+{
+	ConsoleController *console = [ConsoleController sharedConsoleController];
+	if ([[[NSUserDefaults standardUserDefaults] valueForKey:OpenConsoleOnTypeset] boolValue]) {
+		[console showWindow:self];
+		[[console window] makeKeyAndOrderFront:self];
+	}
+	
+	NSString *mainFile = [self engineDocumentToCompile:self];
+  mainFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
+	if (mainFile) {
+		
+		[console message:[NSString stringWithFormat:@"Converting ps file of %@", mainFile]];
+		
+		
+		if (ps2pdfTask) {
+      if ([ps2pdfTask isRunning]) {
+        [ps2pdfTask terminate];
+      }
+			[ps2pdfTask release];
+			// this must mean that the last run failed
+		}
+		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSString *ps2pdfpath = [defaults valueForKey:TPPS2PDFPath];
+    if (!ps2pdfpath || [ps2pdfpath length]==0) {
+      [console error:@"No ps2pdf path specified in the preferences."];
+      return;
+    }
+		[console message:[NSString stringWithFormat:@"running ps2pdf"]];
+		
+		ps2pdfTask = [[NSTask alloc] init];
+		
+		[ps2pdfTask setLaunchPath:ps2pdfpath];
+    [ps2pdfTask setCurrentDirectoryPath:[self engineWorkingDirectory:self]];
+    
+		NSArray *arguments;
+		arguments = [NSArray arrayWithObjects:mainFile, nil];
+		[ps2pdfTask setArguments:arguments];
+		
+		NSPipe *pipe;
+		pipe = [NSPipe pipe];
+		[ps2pdfTask setStandardOutput:pipe];
+		
+		ps2pdfFileHandle = [pipe fileHandleForReading];
+		[ps2pdfFileHandle readInBackgroundAndNotify];	
+		[ps2pdfTask launch];	
+		
+	}
+	
+}
+
+- (void) ps2pdfTaskFinished:(NSNotification*)aNote
+{
+	if ([aNote object] != ps2pdfTask)
+		return;
+	
+	[ps2pdfTask terminate];
+	[ps2pdfTask release];
+	ps2pdfTask = nil;
+  
+  didPS2PDF = YES;
+	
+  // notify interested parties
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPTypesettingCompletedNotification
+                                                      object:self
+                                                    userInfo:nil];    
+}
+
+- (void) ps2pdfOutputAvailable:(NSNotification*)aNote
+{	
+	if( [aNote object] != ps2pdfFileHandle )
+		return;
+	
+	NSData *data = [[aNote userInfo] 
+									objectForKey:NSFileHandleNotificationDataItem];
+	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+	
+	ConsoleController *console = [ConsoleController sharedConsoleController];
+	[console appendText:output];	
+	
+	[output release];
+	if( ps2pdfTask && [data length] > 0 )
+		[ps2pdfFileHandle readInBackgroundAndNotify];
+	
+}
+
+#pragma mark -
 #pragma mark dvips Control
 
 - (IBAction) dvips:(id)sender
@@ -191,16 +296,32 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 		
 		dvipsFileHandle = [pipe fileHandleForReading];
 		[dvipsFileHandle readInBackgroundAndNotify];	
-		[dvipsTask launch];	
-		
-	}
-	
+    [dvipsTask launch];	
+	}	
 }
 
 - (void) dvipsTaskFinished:(NSNotification*)aNote
 {
 	if ([aNote object] != dvipsTask)
 		return;
+    
+  if ([self engineProjectType:self] == TPEngineCompilerLaTeX) {
+    // do ps2pdf
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPShouldRunPS2PDF] boolValue]) {
+      [self ps2pdf:self];
+    } else {
+      // delete the pdf if it's available
+      NSString *pdf = [self pdfPath];
+      NSFileManager *fm = [NSFileManager defaultManager];
+      NSError *error = nil;
+      if ([fm fileExistsAtPath:pdf]) {
+        [fm removeItemAtPath:pdf error:&error];
+        if (error) {
+          [NSApp presentError:error];
+        }
+      }      
+    }
+  }
 	
 	[dvipsTask terminate];
 	[dvipsTask release];
@@ -266,7 +387,15 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
 {
   abortCompile = NO;
   compilationsDone = 0;
+  didPS2PDF = NO;
 }
+
+- (NSString*)pdfPath
+{
+  NSString *path = [self compiledDocumentPath];
+  return [[path stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+}
+
 
 - (NSString*)compiledDocumentPath
 {
@@ -279,7 +408,11 @@ NSString * const TPTypesettingCompletedNotification = @"TPTypesettingCompletedNo
   if (projectType == TPEngineCompilerPDFLaTeX) {
     docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
   } else {
-    docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
+    if (didPS2PDF) {
+      docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+    } else {
+      docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"ps"];
+    }
   } 
   
   // check if the pdf exists

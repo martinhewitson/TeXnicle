@@ -1789,7 +1789,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
 {
-  if ([[self.project valueForKey:@"type"] isEqualToString:@"latex"]) {
+  if ([[[self.project valueForKey:@"type"] lowercaseString] isEqualToString:@"latex"]) {
     return TPEngineCompilerLaTeX;
   } else {
     return TPEngineCompilerPDFLaTeX;
@@ -1947,7 +1947,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
-  NSString *path = [self.engine compiledDocumentPath];
+  NSString *path = [self.engine pdfPath];
   NSFileManager *fm = [NSFileManager defaultManager];
   if ([fm fileExistsAtPath:path]) {
     return path;
