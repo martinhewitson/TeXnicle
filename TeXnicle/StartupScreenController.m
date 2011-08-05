@@ -105,6 +105,7 @@
 	if (row>=0) {
     NSString *path = [[[recentFiles objectAtIndex:row] valueForKey:@"url"] path];
     [fileLabel setDescriptionText:path];
+    [fileLabel setNeedsDisplay:YES];
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *error = nil;
     NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];  
