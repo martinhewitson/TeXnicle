@@ -16,6 +16,7 @@
 #import "HHValidatedButton.h"
 #import "PDFViewerController.h"
 #import "FinderController.h"
+#import "LibraryController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -26,7 +27,7 @@
 @class TPImageViewerController;
 
 
-@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -86,6 +87,9 @@
 
 @property (assign) IBOutlet NSView *finderContainverView;
 @property (retain) FinderController *finder;
+
+@property (assign) IBOutlet NSView *libraryContainerView;
+@property (retain) LibraryController *library;
 
 @property (retain) PDFViewerController *pdfViewerController;
 @property (assign) IBOutlet TPStatusView *statusView;

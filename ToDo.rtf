@@ -25,6 +25,8 @@ Beta 4\
   - highlight text in pdf, select "Edit -> Find -> Find PDF Selection in Source (or shift-cmd-j)\
 + Improved project search results viewer \
 + Standalone editors can now compile both LaTeX and PDF LaTeX files\
++ Added preference to specify a path to ps2pdf (default empty)\
++ Added preference to run ps2pdf after compiling with latex\
 + When trashing auxiliary files, console messages are no longer shown when failing to delete \
   non-existent files\
 + Added a preference option to delete the compiled document when trashing the auxiliary files.\
@@ -43,13 +45,22 @@ Beta 4\
 To Do\
 -----\
 \
++ Do proper validation of all interface buttons using HHValidatedButton\
+\
++ Make standalone view controllers for library, palette, etc\
+\
 + Should remember console output selection between launches.\
 \
 + Some kind of bookmark scheme\
+	- BookmarkManager - view controller\
+		- list of bookmarks (outline view sorted by file, a bit like finder view)\
+		- edit and remove bookmarks\
+	- TPBookmark\
+	- click on number gutter, get line number for click point, add bookmark to manager\
+	- EditorRuler needs a delegate method: -bookmarksForFile:inTextRange:\
 \
 + Finder: make replace option\
-\
-+ Do proper validation of all interface buttons using HHValidatedButton\
+	- compare with the replace on Xcode\
 \
 + Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
 \

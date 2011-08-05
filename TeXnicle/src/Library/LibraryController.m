@@ -16,32 +16,24 @@
 @implementation LibraryController
 
 NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
-//static LibraryController *sharedLibraryController = nil;
 
+@synthesize delegate;
 @synthesize textBeforeEditing;
+@synthesize addCategoryButton;
+@synthesize deleteCategoryButton;
+@synthesize addClipButton;
+@synthesize deleteClipButton;
+@synthesize reloadClipButton;
+@synthesize editClipButton;
+@synthesize copyClipButton;
+@synthesize insertClipButton;
 
-
-//- (id)init
-//{
-//  Class LibraryController = [self class];
-//  @synchronized(LibraryController) {
-//    if (sharedLibraryController == nil) {
-//      if ((self = [super init])) {
-//        sharedLibraryController = self;
-//        // custom initialization here
-//      }
-//    }
-//  }
-//  return sharedLibraryController;
-//}
-
-
-- (id) init
+- (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate
 {
-//  NSLog(@"Library Controller init");
-  self = [super init];
+	self = [super initWithNibName:@"LibraryController" bundle:nil];
   if (self) {
     unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
+    self.delegate = aDelegate;
   }
   return self;
 }
@@ -219,17 +211,43 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   [item setTarget:self];
 	[addMenu addItem:item];
 	[item release];		
-	
-//	// Clipping from selected text
-//	item = [[NSMenuItem alloc] initWithTitle:@"Clip from selection"
-//																		action:@selector(addClipFromSelection)
-//														 keyEquivalent:@""];
-//	[addMenu addItem:item];
-//	[item release];		
-	
-	
+
 	
 }
+
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == self.deleteCategoryButton) {
+    return [categoryController canRemove];
+  }
+  
+  if (anItem == self.addClipButton) {
+    return [contentsController canAdd];
+  }
+  
+  if (anItem == self.deleteClipButton) {
+    return [contentsController canRemove];
+  }
+  
+  if (anItem == self.reloadClipButton) {
+    return [contentsController canRemove];
+  }
+  
+  if (anItem == self.insertClipButton) {
+    return [contentsController canRemove];
+  }
+  
+  if (anItem == self.editClipButton) {
+    return [contentsController canRemove];
+  }
+  
+  if (anItem == self.copyClipButton) {
+    return [contentsController canRemove];
+  }
+  
+  return YES;
+}
+
 
 
 - (void) dealloc
@@ -254,7 +272,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	NSDictionary *item = nil;
 	if ([selected count] == 1) {
 		item = [selected objectAtIndex:0];
-	}
+	} else {
+    return;
+  }
 	
 	NSString *code = [item valueForKey:@"Code"];
   [[editTextView textStorage] beginEditing];
@@ -268,7 +288,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	textBeforeEditing = [[NSString alloc] initWithString:code];
 	
 	[NSApp beginSheet:editSheet
-		 modalForWindow:[self window]
+		 modalForWindow:[[self view] window]
 			modalDelegate:self
 		 didEndSelector:@selector(editSheetDidEnd:returnCode:contextInfo:)
 				contextInfo:NULL];	
@@ -349,7 +369,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 																		 otherButton:nil 
 											 informativeTextWithFormat:@"Do you really want to restore the default Library? You will lose any changes you've made to the Library."
 										]; 
-	[alert beginSheetModalForWindow:[self window] modalDelegate:self
+	[alert beginSheetModalForWindow:[[self view ] window] modalDelegate:self
 									 didEndSelector:@selector(restoreLibraryEnded:code:context:) 
 											contextInfo:NULL];
 	
@@ -461,15 +481,20 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 - (IBAction) insertSelectedItems:(id)sender
 {
+  NSArray *items = [contentsController selectedObjects];
+  NSString *string = [[items valueForKey:@"Code"] componentsJoinedByString:@"\n"];			
+  [self libraryController:self insertText:string];
+  
+  
 	// get the selected text
-	id doc = [[NSDocumentController sharedDocumentController] currentDocument];
-	if (doc) {		
-		if ([doc respondsToSelector:@selector(insertTextToCurrentDocument:)]) {
-			NSArray *items = [contentsController selectedObjects];
-			NSString *string = [[items valueForKey:@"Code"] componentsJoinedByString:@"\n"];			
-			[doc performSelector:@selector(insertTextToCurrentDocument:) withObject:string];
-		}		
-	}
+//	id doc = [[NSDocumentController sharedDocumentController] currentDocument];
+//	if (doc) {		
+//		if ([doc respondsToSelector:@selector(insertTextToCurrentDocument:)]) {
+//			NSArray *items = [contentsController selectedObjects];
+//			NSString *string = [[items valueForKey:@"Code"] componentsJoinedByString:@"\n"];			
+//			[doc performSelector:@selector(insertTextToCurrentDocument:) withObject:string];
+//		}		
+//	}
 }
 
 - (IBAction) addCategory:(id)sender
@@ -489,7 +514,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 																		 otherButton:nil 
 											 informativeTextWithFormat:@"Do you really want to delete the selected clippings? You can't undo this!"
 										]; 
-	[alert beginSheetModalForWindow:[self window] modalDelegate:self
+	[alert beginSheetModalForWindow:[[self view] window] modalDelegate:self
 									 didEndSelector:@selector(removeItemsAlertEnded:code:context:) 
 											contextInfo:NULL];
 	
@@ -529,7 +554,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 																		 otherButton:nil 
 											 informativeTextWithFormat:@"Do you really want to delete the selected category and its content? You can't undo this!"
 										]; 
-	[alert beginSheetModalForWindow:[self window] modalDelegate:self
+	[alert beginSheetModalForWindow:[[self view] window] modalDelegate:self
 									 didEndSelector:@selector(removeCategoriesAlertEnded:code:context:) 
 											contextInfo:NULL];
 	
@@ -602,11 +627,6 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 - (void) addClipFromSelection
 {
-	//id window = [NSApp keyWindow];
-	
-//	NSLog(@"Key window: %@", window);
-	
-
 }
 
 - (void) newClippingWithCode:(NSString*)someCode
@@ -628,58 +648,11 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	[defaults didChangeValueForKey:@"Library"];
 }
 
-//+ (LibraryController*)sharedLibraryController
-//{
-//	@synchronized(self) {
-//		if (sharedLibraryController == nil) {
-//			[[self alloc] init]; // assignment not done here			
-//		}
-//	}
-//	return sharedLibraryController;
-//}
 
 - (void) setupTables
 {
 	[itemsTable registerForDraggedTypes:[NSArray arrayWithObjects:kItemsTableViewNodeType,nil]];
 }
-
-//+ (id)allocWithZone:(NSZone *)zone
-//{
-//	@synchronized(self) {
-//		if (sharedLibraryController == nil) {
-//			sharedLibraryController = [super allocWithZone:zone];
-//			[sharedLibraryController setupTables];
-//			return sharedLibraryController;  // assignment and return on first allocation
-//		}
-//	}
-//	return nil; //on subsequent allocation attempts return nil
-//}
-//
-//- (id)copyWithZone:(NSZone *)zone
-//{
-//	return self;
-//}
-//
-//- (id)retain
-//{
-//	return self;
-//}
-//
-//- (NSUInteger)retainCount
-//{
-//  return NSUIntegerMax; // This is sooo not zero
-//}
-//
-//- (void)release
-//{
-//	//do nothing
-//}
-//
-//- (id)autorelease
-//{
-//	return self;
-//}
-
 
 
 #pragma mark -
@@ -870,7 +843,15 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 	
 }
 
+#pragma mark -
+#pragma mark LibraryController Delegate
 
+-(void)libraryController:(LibraryController *)library insertText:(NSString *)text
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(libraryController:insertText:)]) {
+    [self.delegate libraryController:self insertText:text];
+  }
+}
 
 
 @end

@@ -23,6 +23,9 @@
 
 @implementation TeXProjectDocument
 
+@synthesize library;
+@synthesize libraryContainerView;
+
 @synthesize pdfViewerController;
 @synthesize project;
 @synthesize projectOutlineView;
@@ -55,6 +58,7 @@
   self.engine = nil;
   self.fileMonitor = nil;
   self.finder = nil;
+  self.library = nil;
   [super dealloc];
 }
 
@@ -122,6 +126,12 @@
   
   // setup engine
   self.engine = [TPLaTeXEngine engineWithDelegate:self];
+  
+  // setup library
+  self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
+  NSView *libraryView = [self.library view];
+  [libraryView setFrame:[self.libraryContainerView bounds]];
+  [self.libraryContainerView addSubview:libraryView];
   
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
@@ -1935,9 +1945,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   // Now highlight the search term in that 
   [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
   
-  // and make sure we are colored
-  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
-  
+  // Make text view first responder
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
 }
 
@@ -1957,5 +1965,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
 }
 
+#pragma mark -
+#pragma mark Library Controller Delegate
+
+- (void)libraryController:(LibraryController *)library insertText:(NSString *)text
+{
+	[self.texEditorViewController.textView insertText:text];
+	[self.texEditorViewController.textView colorVisibleText];
+}
 
 @end

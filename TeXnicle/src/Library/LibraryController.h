@@ -8,10 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TeXTextView.h"
+#import "HHValidatedButton.h"
 
 extern NSString * const kItemsTableViewNodeType;
 
-@interface LibraryController : NSWindowController {
+@class LibraryController;
+
+@protocol LibraryControllerDelegate <NSObject>
+
+- (void) libraryController:(LibraryController*)library insertText:(NSString*)text;
+
+@end
+
+@interface LibraryController : NSViewController <NSUserInterfaceValidations, LibraryControllerDelegate> {
 
 	NSMutableDictionary *library;
 	
@@ -36,9 +45,22 @@ extern NSString * const kItemsTableViewNodeType;
 	NSMenu *addMenu;
 	NSMenu *catActionMenu;
 	
+  id<LibraryControllerDelegate> delegate;
 }
 
+@property (assign) id<LibraryControllerDelegate> delegate;
+
 @property (readwrite, assign) NSString *textBeforeEditing;
+@property (assign) IBOutlet HHValidatedButton *addCategoryButton;
+@property (assign) IBOutlet HHValidatedButton *deleteCategoryButton;
+@property (assign) IBOutlet HHValidatedButton *addClipButton;
+@property (assign) IBOutlet HHValidatedButton *deleteClipButton;
+@property (assign) IBOutlet HHValidatedButton *reloadClipButton;
+@property (assign) IBOutlet HHValidatedButton *insertClipButton;
+@property (assign) IBOutlet HHValidatedButton *editClipButton;
+@property (assign) IBOutlet HHValidatedButton *copyClipButton;
+
+- (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate;
 
 - (void) setupLibrary;
 - (void) reloadLibrary;

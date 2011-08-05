@@ -28,6 +28,7 @@
 		25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077327138E5D82000F1118 /* GetMetadataForFile.m */; };
 		2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2507732A138E5D82000F1118 /* MySpotlightImporter.m */; };
 		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
+		2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2509B03C13EC6DFE0072961A /* LibraryController.xib */; };
 		250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */; };
 		250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 250B039613E48DC800072FF2 /* newTeXDoc.icns */; };
 		25152995138F802B00307054 /* TPOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152992138F802B00307054 /* TPOutlineView.m */; };
@@ -281,6 +282,7 @@
 		2507732C138E5D82000F1118 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
 		2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LineNumbers.h"; sourceTree = "<group>"; };
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
+		2509B03C13EC6DFE0072961A /* LibraryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryController.xib; sourceTree = "<group>"; };
 		250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSection.h; sourceTree = "<group>"; };
 		250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSection.m; sourceTree = "<group>"; };
 		250B039613E48DC800072FF2 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
@@ -909,6 +911,7 @@
 				253E5E2B13951DD300566E23 /* Library.plist */,
 				253E5E2C13951DD300566E23 /* LibraryController.h */,
 				253E5E2D13951DD300566E23 /* LibraryController.m */,
+				2509B03C13EC6DFE0072961A /* LibraryController.xib */,
 				25A8DEFE1397AA160097A62E /* MHImageView.h */,
 				25A8DEFF1397AA160097A62E /* MHImageView.m */,
 				253E5E2E13951DD300566E23 /* LibraryImageGenerator.h */,
@@ -1398,6 +1401,7 @@
 				2545865313E936FE00461494 /* upArrow.icns in Resources */,
 				2503357113EAD480005BD6CF /* FinderController.xib in Resources */,
 				25ACB35313EB15EF00289E4E /* textResult.icns in Resources */,
+				2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
