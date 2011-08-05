@@ -14,6 +14,7 @@
 #import "RegexKitLite.h"
 #import "NSString+LaTeX.h"
 #import "NSMutableAttributedString+CodeFolding.h"
+#import "ImageAndTextCell.h"
 
 @implementation FinderController
 
@@ -62,8 +63,24 @@
 {  
   [self.outlineView setDoubleAction:@selector(handleOutlineViewDoubleClick:)];
   [self.outlineView setTarget:self];
+  
+  // outline view
+	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
+	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	[imageAndTextCell setEditable:NO];
+	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
+	[tableColumn setDataCell:imageAndTextCell];	
 }
 
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == jumpToButton) {
+    if ([self.outlineView selectedRow] == -1) {
+      return NO;
+    }
+  }
+  return YES;
+}
 
 #pragma mark -
 #pragma mark Control 
@@ -91,6 +108,8 @@
   }
   
   if ([searchTerm length] == 0) {
+    [self.results removeAllObjects];
+    [self.outlineView reloadData];
     [self didEndSearch:self];
     return;
   }
@@ -180,7 +199,6 @@
             resultRange.location += subrange.location;
             resultRange.length = [searchTerm length];
             
-            TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
             
             // scan back to start of word
             NSInteger idx = subrange.location;
@@ -198,14 +216,14 @@
               idx-=3;
             }
             
-            TPDocumentMatch *match = [TPDocumentMatch documentMatchWithRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString];
+            TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
+            TPDocumentMatch *match = [TPDocumentMatch documentMatchWithRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
             dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
             [resultDoc addMatch:match];
             if (![self.results containsObject:resultDoc]) {
               [self.results addObject:resultDoc];
             }
             didMatch = YES;
-            dispatch_semaphore_signal(arrayLock);
             
             dispatch_sync(dispatch_get_main_queue(),
                           // block
@@ -213,6 +231,7 @@
                             [self didMakeMatch:self];
                             [self.outlineView reloadData];
                           });
+            dispatch_semaphore_signal(arrayLock);
           } // end subrange found
         } // end result range founds
       } // end scanner
@@ -251,12 +270,13 @@
 
 - (IBAction)handleOutlineViewDoubleClick:(id)sender
 {
+//  NSLog(@"Handle double click");
 	NSInteger row = [self.outlineView clickedRow];
 	if (row < 0) {
 		// get selection
 		row = [self.outlineView selectedRow];
 	}
-	
+//	NSLog(@"Jumping to row %d", row);
 	if (row >= 0) {
     id item = [self.outlineView itemAtRow:row];
 		if ([item isKindOfClass:[TPDocumentMatch class]]) {
@@ -289,7 +309,7 @@
   //  NSLog(@"Found item %@ at index %ld: %@", [item class], aRow, item);
   if ([item isKindOfClass:[TPDocumentMatch class]]) {
     TPDocumentMatch *match = (TPDocumentMatch*)item;
-    TPResultDocument *doc = [self.outlineView parentForItem:item];
+    TPResultDocument *doc = match.parent;
     
     [self highlightSearchResult:match.match 
                       withRange:match.range
@@ -302,15 +322,16 @@
 - (void) jumpToSearchResult:(NSInteger)index
 {
   id item = [self resultAtIndex:index];
-  //  NSLog(@"Found item %@ at index %ld: %@", [item class], index, item);
+//  NSLog(@"Found item %@ at index %ld: %@", [item class], index, item);
   if ([item isKindOfClass:[TPDocumentMatch class]]) {
     TPDocumentMatch *match = (TPDocumentMatch*)item;
-    TPResultDocument *doc = [self.outlineView parentForItem:item];
+    TPResultDocument *doc = match.parent;
+        
+    [self.outlineView performSelectorOnMainThread:@selector(expandItem:) withObject:doc waitUntilDone:YES];
+    [self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outlineView rowForItem:match]]
+                  byExtendingSelection:NO];
     
-    [self highlightSearchResult:match.match 
-                      withRange:match.range
-                         inFile:[doc valueForKey:@"document"]];
-    
+    [self performSelectorOnMainThread:@selector(handleOutlineViewDoubleClick:) withObject:self waitUntilDone:YES];
   }
 }
 
@@ -345,8 +366,23 @@
   return NO;
 }
 
+- (void) outlineView:(NSOutlineView *)anOutlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+  if (anOutlineView == self.outlineView) {
+    if ([cell isMemberOfClass:[ImageAndTextCell class]]) {
+      if ([item isKindOfClass:[TPResultDocument class]]) {
+        [cell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
+      } else if ([item isKindOfClass:[TPDocumentMatch class]]) {
+        [cell setImage:[NSImage imageNamed:@"textResult"]];
+      }
+    }
+  }
+}
+
+
 #pragma mark -
 #pragma mark SearchResults OutlineView datasource
+
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
@@ -359,7 +395,11 @@
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-  return [item valueForKey:@"displayString"];
+  if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {    
+    return [item valueForKey:@"selectedDisplayString"];
+  } else {
+    return [item valueForKey:@"displayString"];
+  }
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
@@ -426,8 +466,12 @@
 - (void) didEndSearch:(FinderController *)aFinder
 {
   [self.progressIndicator stopAnimation:self];
-  NSString *string = [NSString stringWithFormat:@"Found %d results.", [aFinder count]];
-  [self.statusLabel setStringValue:string];
+  if ([aFinder count] > 0) {
+    NSString *string = [NSString stringWithFormat:@"Found %d results in %d files.", [aFinder count], [self.results count]];
+    [self.statusLabel setStringValue:string];
+  } else {
+    [self.statusLabel setStringValue:@"No results."];
+  }
 
   if (self.delegate && [self.delegate respondsToSelector:@selector(didEndSearch:)]) {
     [self.delegate didEndSearch:self];

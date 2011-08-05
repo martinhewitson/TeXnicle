@@ -987,6 +987,17 @@
 #pragma mark -
 #pragma mark Selection
 
+- (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate
+{
+  [self setSelectedRange:aRange];
+  if (scroll) {    
+    [self scrollRangeToVisible:aRange];
+  }
+  if (animate) {
+    [self showFindIndicatorForRange:aRange];
+  }
+}
+
 
 - (NSPoint) listPointForCurrentWord
 {

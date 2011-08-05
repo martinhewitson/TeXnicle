@@ -989,45 +989,6 @@
   [self.projectItemTreeController selectItem:aFile];
 }
 
-#pragma mark -
-#pragma mark Finder Delegate
-
-- (void) didBeginSearch:(FindInProjectController *)aFinder
-{
-}
-
-- (void) didEndSearch:(FindInProjectController *)aFinder
-{
-}
-
-- (void) didCancelSearch:(FindInProjectController *)aFinder
-{
-}
-
-- (void)didMakeMatch:(FindInProjectController *)aFinder
-{
-}
-
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
-{
-	
-	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
-	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aFile];
-	[projectItemTreeController setSelectionIndexPath:idx];
-	[self.texEditorViewController.textView expandAll:self];
-	
-	// Now highlight the search term in that 
-	[self.texEditorViewController.textView setSelectedRange:aRange];
-	[self.texEditorViewController.textView scrollRangeToVisible:aRange];
-	[self.texEditorViewController.textView showFindIndicatorForRange:aRange];
-  
-  // and make sure we are colored
-  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
-	
-	[[[[self windowControllers] objectAtIndex:0] window] makeKeyAndOrderFront:self];
-}
 
 
 #pragma mark -
@@ -1903,9 +1864,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [controlsTabview selectTabViewItemAtIndex:4];
   [self.finder setSearchTerm:selectedText];
   [self.finder searchForTerm:selectedText];
-  if ([self.finder count]>0) {
-    [self.finder jumpToSearchResult:0];
-  }
+  shouldHighlightFirstMatch = YES;
 }
 
 - (BOOL) pdfHasSelection
@@ -1932,6 +1891,50 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   }
 }
 
+#pragma mark -
+#pragma mark Finder Delegate
+
+- (void) didBeginSearch:(FindInProjectController *)aFinder
+{
+}
+
+- (void) didEndSearch:(FindInProjectController *)aFinder
+{
+  if (shouldHighlightFirstMatch) {
+    if ([self.finder count]>0) {
+      [self.finder jumpToSearchResult:0];
+    }
+  }
+  shouldHighlightFirstMatch = NO;
+}
+
+- (void) didCancelSearch:(FindInProjectController *)aFinder
+{
+}
+
+- (void)didMakeMatch:(FindInProjectController *)aFinder
+{
+}
+
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
+{	
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aFile];
+	[projectItemTreeController setSelectionIndexPath:idx];
+    
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // Now highlight the search term in that 
+  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+  
+  // and make sure we are colored
+  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+  
+  [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+}
 
 
 #pragma mark -

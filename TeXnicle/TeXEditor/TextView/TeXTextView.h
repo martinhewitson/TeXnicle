@@ -138,6 +138,7 @@
 #pragma mark -
 #pragma mark Selection
 
+- (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
 - (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength;

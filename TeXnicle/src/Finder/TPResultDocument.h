@@ -20,6 +20,7 @@
 @property (retain) FileEntity *document;
 @property (retain) NSMutableArray *matches;
 @property (readonly) NSAttributedString *displayString;
+@property (readonly) NSAttributedString *selectedDisplayString;
 
 
 + (TPResultDocument*)resultWithDocuemnt:(FileEntity*)aDocument;

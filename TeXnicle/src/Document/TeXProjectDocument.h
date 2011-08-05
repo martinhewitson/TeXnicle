@@ -78,6 +78,10 @@
   TPFileMonitor *fileMonitor;
     
   IBOutlet HHValidatedButton *findInSourceButton;
+  
+  NSView *finderContainerView;
+  FinderController *finder;
+  BOOL shouldHighlightFirstMatch;
 }
 
 @property (assign) IBOutlet NSView *finderContainverView;

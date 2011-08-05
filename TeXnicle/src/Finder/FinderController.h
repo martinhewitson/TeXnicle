@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HHValidatedButton.h"
 
 @class ProjectEntity;
 @class FileEntity;
@@ -25,7 +26,7 @@
 
 @end
 
-@interface FinderController : NSViewController <NSOutlineViewDelegate, NSOutlineViewDataSource, FinderControllerDelegate> {
+@interface FinderController : NSViewController <NSOutlineViewDelegate, NSOutlineViewDataSource, FinderControllerDelegate, NSUserInterfaceValidations> {
 @private
   
   NSOutlineView *outlineView;	
@@ -45,7 +46,7 @@
 }
 
 @property (assign) id<FinderControllerDelegate> delegate;
-@property (assign) IBOutlet NSButton *jumpToButton;
+@property (assign) IBOutlet HHValidatedButton *jumpToButton;
 @property (assign) IBOutlet NSSearchField *searchField;
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;

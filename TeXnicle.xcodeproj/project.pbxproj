@@ -194,6 +194,7 @@
 		25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */; };
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
+		25ACB35313EB15EF00289E4E /* textResult.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25ACB35213EB15EF00289E4E /* textResult.icns */; };
 		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
 		25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD0E9013995226004EB857 /* ConsoleWindow.m */; };
 		25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */ = {isa = PBXBuildFile; fileRef = 25CD0E9B139959D3004EB857 /* TeXnicle_Help */; };
@@ -539,6 +540,7 @@
 		25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryPreviewBackgroundView.m; sourceTree = "<group>"; };
 		25A8DEFE1397AA160097A62E /* MHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHImageView.h; sourceTree = "<group>"; };
 		25A8DEFF1397AA160097A62E /* MHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHImageView.m; sourceTree = "<group>"; };
+		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
 		25CC10B413E5DD9200A15850 /* TPImageViewerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerBackgroundView.h; sourceTree = "<group>"; };
 		25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerBackgroundView.m; sourceTree = "<group>"; };
 		25CD0E8F13995226004EB857 /* ConsoleWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindow.h; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25ACB35213EB15EF00289E4E /* textResult.icns */,
 				2545864E13E936FE00461494 /* leftArrow.icns */,
 				2545864F13E936FE00461494 /* downArrow.icns */,
 				2545865013E936FE00461494 /* upArrow.icns */,
@@ -1389,6 +1392,7 @@
 				2545865213E936FE00461494 /* downArrow.icns in Resources */,
 				2545865313E936FE00461494 /* upArrow.icns in Resources */,
 				2503357113EAD480005BD6CF /* FinderController.xib in Resources */,
+				25ACB35313EB15EF00289E4E /* textResult.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

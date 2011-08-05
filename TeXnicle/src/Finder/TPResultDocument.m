@@ -47,6 +47,11 @@
   return [NSString stringWithFormat:@"%@: %@", [self.document valueForKey:@"name"], self.matches];
 }
 
+- (NSAttributedString*)selectedDisplayString
+{
+  return [self displayString];
+}
+
 - (NSAttributedString*)displayString
 {
   NSString *str = [NSString stringWithFormat:@"%@: %d Matches", [self.document valueForKey:@"name"], [self.matches count]];

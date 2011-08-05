@@ -336,7 +336,7 @@
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSSplitView" id="634266348">
 							<reference key="NSNextResponder" ref="568628114"/>
-							<int key="NSvFlags">274</int>
+							<int key="NSvFlags">4370</int>
 							<array class="NSMutableArray" key="NSSubviews">
 								<object class="NSCustomView" id="282066192">
 									<reference key="NSNextResponder" ref="634266348"/>
@@ -345,9 +345,10 @@
 										<object class="NSTabView" id="397531503">
 											<reference key="NSNextResponder" ref="282066192"/>
 											<int key="NSvFlags">18</int>
-											<string key="NSFrameSize">{230, 615}</string>
+											<string key="NSFrameSize">{234, 615}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="257330279"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -1701,10 +1702,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													<object class="NSView" key="NSView" id="257330279">
 														<reference key="NSNextResponder" ref="397531503"/>
 														<int key="NSvFlags">256</int>
-														<string key="NSFrameSize">{230, 615}</string>
+														<string key="NSFrameSize">{234, 615}</string>
 														<reference key="NSSuperview" ref="397531503"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView"/>
 													</object>
 													<string key="NSLabel">Item 4</string>
 													<reference key="NSColor" ref="1051993651"/>
@@ -1875,14 +1875,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 													</object>
 												</object>
 											</array>
-											<string key="NSFrame">{{0, 616}, {230, 24}}</string>
+											<string key="NSFrame">{{0, 616}, {234, 24}}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="785694388"/>
 											<string key="NSClassName">MHToolbarBackgroundView</string>
 										</object>
 									</array>
-									<string key="NSFrameSize">{230, 639}</string>
+									<string key="NSFrameSize">{234, 639}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="783282180"/>
@@ -1895,7 +1895,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="632442715">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">4370</int>
-											<string key="NSFrameSize">{598, 619}</string>
+											<string key="NSFrameSize">{607, 619}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="749074883"/>
@@ -1904,7 +1904,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="792010655">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrameSize">{598, 619}</string>
+											<string key="NSFrameSize">{607, 619}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="632442715"/>
@@ -1926,14 +1926,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="582867506">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">266</int>
-											<string key="NSFrame">{{0, 595}, {598, 45}}</string>
+											<string key="NSFrame">{{0, 595}, {607, 45}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="792010655"/>
 											<string key="NSClassName">PSMTabBarControl</string>
 										</object>
 									</array>
-									<string key="NSFrame">{{240, 0}, {598, 639}}</string>
+									<string key="NSFrame">{{235, 0}, {607, 639}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="582867506"/>
@@ -1941,12 +1941,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								</object>
 								<object class="NSCustomView" id="323224487">
 									<reference key="NSNextResponder" ref="634266348"/>
-									<int key="NSvFlags">268</int>
+									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews">
 										<object class="NSCustomView" id="913261726">
 											<reference key="NSNextResponder" ref="323224487"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrameSize">{296, 640}</string>
+											<string key="NSFrame">{{0, -1}, {301, 641}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="203704614"/>
@@ -1954,7 +1954,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
-									<string key="NSFrame">{{848, 0}, {296, 639}}</string>
+									<string key="NSFrame">{{843, 0}, {301, 639}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="913261726"/>
@@ -1966,7 +1966,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="282066192"/>
 							<bool key="NSIsVertical">YES</bool>
-							<int key="NSDividerStyle">3</int>
+							<int key="NSDividerStyle">2</int>
 							<string key="NSAutosaveName">TeXnicleMainSplitView</string>
 						</object>
 						<object class="NSCustomView" id="203704614">
@@ -1975,6 +1975,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{9, 6}, {1130, 38}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:499</string>
 							<string key="NSClassName">TPStatusView</string>
 						</object>
