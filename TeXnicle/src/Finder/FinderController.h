@@ -23,6 +23,7 @@
 - (void)didEndSearch:(FinderController*)aFinder;
 - (void)didMakeMatch:(FinderController*)aFinder;
 - (void)didCancelSearch:(FinderController*)aFinder;
+- (NSInteger)lineNumberForRange:(NSRange)aRange;
 
 @end
 

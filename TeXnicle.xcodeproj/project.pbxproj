@@ -27,6 +27,7 @@
 		25077326138E5D82000F1118 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 25077325138E5D82000F1118 /* main.c */; };
 		25077328138E5D82000F1118 /* GetMetadataForFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25077327138E5D82000F1118 /* GetMetadataForFile.m */; };
 		2507732B138E5D82000F1118 /* MySpotlightImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2507732A138E5D82000F1118 /* MySpotlightImporter.m */; };
+		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
 		250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */; };
 		250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 250B039613E48DC800072FF2 /* newTeXDoc.icns */; };
 		25152995138F802B00307054 /* TPOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152992138F802B00307054 /* TPOutlineView.m */; };
@@ -278,6 +279,8 @@
 		25077329138E5D82000F1118 /* MySpotlightImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySpotlightImporter.h; sourceTree = "<group>"; };
 		2507732A138E5D82000F1118 /* MySpotlightImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySpotlightImporter.m; sourceTree = "<group>"; };
 		2507732C138E5D82000F1118 /* Importer Read Me.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Importer Read Me.txt"; sourceTree = "<group>"; };
+		2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LineNumbers.h"; sourceTree = "<group>"; };
+		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSection.h; sourceTree = "<group>"; };
 		250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSection.m; sourceTree = "<group>"; };
 		250B039613E48DC800072FF2 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
@@ -1030,6 +1033,8 @@
 				257B473F138E5E9000ED02C4 /* NSString+Extension.m */,
 				257B4740138E5E9000ED02C4 /* NSString+LaTeX.h */,
 				257B4741138E5E9000ED02C4 /* NSString+LaTeX.m */,
+				2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */,
+				2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1520,6 +1525,7 @@
 				2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */,
 				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
 				2503357013EAD480005BD6CF /* FinderController.m in Sources */,
+				2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

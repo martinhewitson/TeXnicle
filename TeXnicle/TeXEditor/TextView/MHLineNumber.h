@@ -22,5 +22,6 @@
 
 + (MHLineNumber*) lineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange;
 - (id) initWithLineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange;
++ (MHLineNumber*)lineNumberContainingIndex:(NSInteger)anIndex inArray:(NSArray*)lineNumbers;
 
 @end

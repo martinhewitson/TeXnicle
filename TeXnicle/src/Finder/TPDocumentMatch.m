@@ -14,13 +14,14 @@
 @synthesize match;
 @synthesize range;
 @synthesize subrange;
+@synthesize lineNumber;
 
-+ (TPDocumentMatch*)documentMatchWithRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
++ (TPDocumentMatch*)documentMatchInLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
 {
-  return [[[TPDocumentMatch alloc] initWithRange:aRange subrange:(NSRange)aSubrange matchingString:aString inDocument:(TPResultDocument*)aParent] autorelease];
+  return [[[TPDocumentMatch alloc] initWithLine:aLineNumber withRange:aRange subrange:(NSRange)aSubrange matchingString:aString inDocument:(TPResultDocument*)aParent] autorelease];
 }
 
-- (id)initWithRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
+- (id)initWithLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
 {
   self = [super init];
   if (self) {
@@ -28,6 +29,7 @@
     self.range = aRange;
     self.subrange = aSubrange;
     self.match = aString;
+    self.lineNumber = aLineNumber;
   }
   
   return self;
@@ -38,25 +40,32 @@
   return [NSString stringWithFormat:@"%@, %@", NSStringFromRange(self.range), self.match];
 }
 
+- (NSString*) lineNumberString
+{
+  return [NSString stringWithFormat:@" %d ", self.lineNumber];
+}
+
 - (NSAttributedString*)selectedDisplayString
 {
-  //  NSLog(@"String: %@", self.match);
-  //  NSLog(@"String length %d", [self.match length]);
-  //  NSLog(@"Subrange %@", NSStringFromRange(self.subrange));
+  NSString *lineNumberString = [self lineNumberString];
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:self.match] autorelease]; 
-  [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:self.subrange];
+  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
+  NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
+  [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:matchRange];
+  [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
   return att;
 }
+
 - (NSAttributedString*)displayString
 {
-//  NSLog(@"String: %@", self.match);
-//  NSLog(@"String length %d", [self.match length]);
-//  NSLog(@"Subrange %@", NSStringFromRange(self.subrange));
-  
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:self.match] autorelease]; 
+  NSString *lineNumberString = [self lineNumberString];
+  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
+  [str addAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [str length])];
+  [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [str length])];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor colorWithDeviceRed:240.0/255.0 green:240.0/255.0 blue:180.0/255.0 alpha:1.0] range:self.subrange];
-  return att;
+  [str appendAttributedString:att];
+  return str;
 }
 
 @end

@@ -15,9 +15,11 @@
   NSRange range;
   NSRange subrange;
   NSString *match;
+  NSInteger lineNumber;
   TPResultDocument *parent;
 }
 
+@property (assign) NSInteger lineNumber;
 @property (assign) TPResultDocument *parent;
 @property (assign) NSRange range;
 @property (assign) NSRange subrange;
@@ -25,7 +27,8 @@
 @property (readonly) NSAttributedString *displayString;
 @property (readonly) NSAttributedString *selectedDisplayString;
 
-- (id)initWithRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;
-+ (TPDocumentMatch*)documentMatchWithRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;
+- (id)initWithLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;
++ (TPDocumentMatch*)documentMatchInLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;
+- (NSString*) lineNumberString;
 
 @end

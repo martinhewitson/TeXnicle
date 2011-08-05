@@ -1916,6 +1916,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
 }
 
+- (NSInteger)lineNumberForRange:(NSRange)aRange
+{
+  return [self.texEditorViewController.textView lineNumberForRange:aRange];
+}
+
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
 {	
 	// first select the file

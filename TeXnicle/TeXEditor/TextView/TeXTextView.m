@@ -1731,24 +1731,26 @@
   return sel.location;
 }
 
+- (NSInteger)lineNumberForRange:(NSRange)aRange
+{
+  NSArray *lines = [self.editorRuler lineNumbersForTextRange:[self getVisibleRange]];
+  //  NSLog(@"Got lines %@", lines);
+  for (MHLineNumber *line in lines) {
+    if (aRange.location >= line.range.location && aRange.location < NSMaxRange(line.range)) {
+      return [[line valueForKey:@"number"] integerValue];
+    }
+    if (line.range.length == 0 && aRange.location == line.range.location) {
+      return [[line valueForKey:@"number"] integerValue];
+    }
+  }
+  return NSNotFound;
+}
+
 - (NSInteger)lineNumber
 {
 //  NSLog(@"Getting line number for %@, from %@", self, self.editorRuler);
   NSRange sel = [self selectedRange];
-  NSArray *lines = [self.editorRuler lineNumbersForTextRange:[self getVisibleRange]];
-//  NSLog(@"Got lines %@", lines);
-  for (MHLineNumber *line in lines) {
-//    NSLog(@"Looking for %ld in %ld:%ld", sel.location, line.range.location, NSMaxRange(line.range)); 
-    if (sel.location >= line.range.location && sel.location < NSMaxRange(line.range)) {
-      return [[line valueForKey:@"number"] integerValue];
-    }
-    if (line.range.length == 0 && sel.location == line.range.location) {
-      return [[line valueForKey:@"number"] integerValue];
-    }
-  }
-//  if ([lines count]==1) {
-//  }
-  return NSNotFound;
+  return [self lineNumberForRange:sel];
 }
 
 

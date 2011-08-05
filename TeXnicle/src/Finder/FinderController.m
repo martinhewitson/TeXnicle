@@ -15,6 +15,8 @@
 #import "NSString+LaTeX.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "ImageAndTextCell.h"
+#import "NSAttributedString+LineNumbers.h"
+#import "MHLineNumber.h"
 
 @implementation FinderController
 
@@ -168,6 +170,7 @@
 	[regexp appendFormat:@".*(\\n)?"];
   
   NSMutableAttributedString *aStr = [[doc textStorage] mutableCopy];
+  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   NSString *string = [aStr unfoldedString];
   [aStr release];
   if (!string)
@@ -217,7 +220,9 @@
             }
             
             TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
-            TPDocumentMatch *match = [TPDocumentMatch documentMatchWithRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
+            MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
+            NSInteger lineNumber = ln.number;
+            TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber withRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
             dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
             [resultDoc addMatch:match];
             if (![self.results containsObject:resultDoc]) {
@@ -500,6 +505,13 @@
   }
 }
 
+- (NSInteger)lineNumberForRange:(NSRange)aRange
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(lineNumberForRange:)]) {
+    return [self.delegate lineNumberForRange:aRange];
+  }
+  return NSNotFound;
+}
 
 
 @end

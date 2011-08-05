@@ -41,4 +41,14 @@
   return [NSString stringWithFormat:@"%d (%d) : %@", self.number, self.index, NSStringFromRange(self.range)];
 }
 
++ (MHLineNumber*)lineNumberContainingIndex:(NSInteger)anIndex inArray:(NSArray*)lineNumbers
+{
+  for (MHLineNumber *line in lineNumbers) {
+    if (anIndex >= line.range.location && anIndex < NSMaxRange(line.range)) {
+      return line;
+    }
+  }
+  return nil;
+}
+
 @end

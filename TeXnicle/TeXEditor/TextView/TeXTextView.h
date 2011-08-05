@@ -163,6 +163,7 @@
 
 - (NSInteger)cursorPosition;
 - (NSInteger)lineNumber;
+- (NSInteger)lineNumberForRange:(NSRange)aRange;
 - (NSUInteger)characterIndexOfPoint:(NSPoint)aPoint;
 
 #pragma mark -
