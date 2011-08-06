@@ -12,23 +12,17 @@
 
 @implementation PaletteController
 
+@synthesize delegate;
 
-//static PaletteController *sharedPaletteController = nil;
 
-
-//- (id)init
-//{
-//  Class PaletteController = [self class];
-//  @synchronized(PaletteController) {
-//    if (sharedPaletteController == nil) {
-//      if ((self = [super init])) {
-//        sharedPaletteController = self;
-//        // custom initialization here
-//      }
-//    }
-//  }
-//  return sharedPaletteController;
-//}
+- (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate
+{
+  self = [super initWithNibName:@"PaletteController" bundle:nil];
+  if (self) {
+    self.delegate = aDelegate;
+  }
+  return self;
+}
 
 - (void) dealloc
 {

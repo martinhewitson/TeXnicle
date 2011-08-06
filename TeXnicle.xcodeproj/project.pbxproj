@@ -206,6 +206,7 @@
 		25E50247139FC9F5004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
 		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
+		25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F2728A13ED7BFA0087E021 /* PaletteController.xib */; };
 		25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */; };
 		25FD408F13913EDB0037CB54 /* FontNameToDisplayNameTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */; };
 		25FD409213913EDB0037CB54 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408813913EDB0037CB54 /* PrefsWindowController.m */; };
@@ -557,6 +558,7 @@
 		25D74AED1397F90E0074A5A2 /* MHRoundedBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedBottomView.m; sourceTree = "<group>"; };
 		25E0812C13A11A9000898596 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
+		25F2728A13ED7BFA0087E021 /* PaletteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteController.xib; sourceTree = "<group>"; };
 		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontNameToDisplayNameTransformer.h; sourceTree = "<group>"; };
@@ -975,6 +977,7 @@
 				25717C751392D16200955620 /* SymbolTableDelegate.m */,
 				25717C781392D16200955620 /* PaletteController.h */,
 				25717C791392D16200955620 /* PaletteController.m */,
+				25F2728A13ED7BFA0087E021 /* PaletteController.xib */,
 			);
 			path = Palette;
 			sourceTree = "<group>";
@@ -1402,6 +1405,7 @@
 				2503357113EAD480005BD6CF /* FinderController.xib in Resources */,
 				25ACB35313EB15EF00289E4E /* textResult.icns in Resources */,
 				2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */,
+				25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

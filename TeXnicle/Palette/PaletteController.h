@@ -9,7 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
 
-@interface PaletteController : NSWindowController <NSTableViewDelegate, NSUserInterfaceValidations> {
+@class PaletteController;
+
+@protocol PaletteControllerDelegate <NSObject>
+
+
+@end
+
+@interface PaletteController : NSViewController <NSTableViewDelegate, NSUserInterfaceValidations> {
 
 	NSDictionary *palette;
 	
@@ -17,16 +24,19 @@
 	IBOutlet NSArrayController *palettesController;
 	IBOutlet NSArrayController *symbolsController;
 	
-	IBOutlet NSSegmentedControl *tabControl;
-	IBOutlet NSTabView *tabView;
+//	IBOutlet NSSegmentedControl *tabControl;
+//	IBOutlet NSTabView *tabView;
 	IBOutlet NSTableView *symbolsTable;
 	
 	IBOutlet NSSlider *slider;
   
   IBOutlet HHValidatedButton *insertButton;
+  
+  id<PaletteControllerDelegate> delegate;
 }
 
-//+ (PaletteController*)sharedPaletteController;
+@property (assign) id<PaletteControllerDelegate> delegate;
+
 - (void) loadPalette;
 - (NSArray*) listOfCommands;
 
