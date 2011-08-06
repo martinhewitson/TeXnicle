@@ -55,7 +55,7 @@
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
   if (anItem == insertButton) {
-    return [self hasSelection];
+    return [self hasSelection] && [self paletteCanInsertText:self];
   }
   return YES;
 }
@@ -123,26 +123,39 @@
 
 - (void) handleTableDoubleClick
 {
-  [self insertSelectedSymbols:self];
+  if ([self paletteCanInsertText:self]) {
+    [self insertSelectedSymbols:self];
+  }
 }
 
 - (IBAction) insertSelectedSymbols:(id)sender
 {
-	// get the selected text
-	id doc = [[NSDocumentController sharedDocumentController] currentDocument];
-	if (doc) {
-		
-		if ([doc respondsToSelector:@selector(insertTextToCurrentDocument:)]) {
-			NSArray *items = [symbolsController selectedObjects];
-			NSMutableArray *strings = [NSMutableArray array];
-			for (id symbol in items) {
-				[strings addObject:[symbol valueForKey:@"Code"]];
-			}
-			
-			NSString *string = [strings componentsJoinedByString:@" "];
-			[doc performSelector:@selector(insertTextToCurrentDocument:) withObject:string];
-		}		
-	}
+  
+  NSArray *items = [symbolsController selectedObjects];
+  NSMutableArray *strings = [NSMutableArray array];
+  for (id symbol in items) {
+    [strings addObject:[symbol valueForKey:@"Code"]];
+  }
+  
+  NSString *string = [strings componentsJoinedByString:@" "];
+  
+  [self palette:self insertText:string];
+  
+//	// get the selected text
+//	id doc = [[NSDocumentController sharedDocumentController] currentDocument];
+//	if (doc) {
+//		
+//		if ([doc respondsToSelector:@selector(insertTextToCurrentDocument:)]) {
+//			NSArray *items = [symbolsController selectedObjects];
+//			NSMutableArray *strings = [NSMutableArray array];
+//			for (id symbol in items) {
+//				[strings addObject:[symbol valueForKey:@"Code"]];
+//			}
+//			
+//			NSString *string = [strings componentsJoinedByString:@" "];
+//			[doc performSelector:@selector(insertTextToCurrentDocument:) withObject:string];
+//		}		
+//	}
 }
 
 - (NSImage*) generateImageForCode:(NSString*)code atPath:(NSString*)aPath inMathMode:(BOOL)mathMode
@@ -254,5 +267,26 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 {
   return [[symbolsTable selectedRowIndexes] count] > 0;
 }
+
+
+#pragma mark -
+#pragma mark PaletteController Delegate
+
+- (BOOL)paletteCanInsertText:(PaletteController*)aPalette
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(paletteCanInsertText:)]) {
+    return [self.delegate paletteCanInsertText:self];
+  }
+  return NO;
+}
+
+- (void)palette:(PaletteController*)aPalette insertText:(NSString*)aString
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(palette:insertText:)]) {
+    [self.delegate palette:self insertText:aString];
+  }
+}
+
+
 
 @end

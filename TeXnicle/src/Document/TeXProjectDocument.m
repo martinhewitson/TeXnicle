@@ -46,6 +46,9 @@
 @synthesize finder;
 @synthesize finderContainverView;
 
+@synthesize palette;
+@synthesize paletteContainverView;
+
 - (void) dealloc
 {
 //  NSLog(@"TeXProjectDocument dealloc");
@@ -142,6 +145,12 @@
   NSView *finderView = [self.finder view];
   [finderView setFrame:frame];
   [self.finderContainverView addSubview:finderView];
+  
+  // setup palette
+  self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
+  NSView *paletteView = [self.palette view];
+  [paletteView setFrame:[self.paletteContainverView bounds]];
+  [self.paletteContainverView addSubview:paletteView];
   
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -1972,6 +1981,22 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
 	[self.texEditorViewController.textView insertText:text];
 	[self.texEditorViewController.textView colorVisibleText];
+}
+
+#pragma mark -
+#pragma mark Palette Controller Delegate
+
+- (BOOL)paletteCanInsertText:(PaletteController *)aPalette
+{
+  if ([self.openDocuments currentDoc]) {
+    return YES;
+  }
+  return NO;
+}
+
+- (void)palette:(PaletteController *)aPalette insertText:(NSString *)aString
+{
+  [self insertTextToCurrentDocument:aString];
 }
 
 @end

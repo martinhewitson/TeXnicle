@@ -17,6 +17,7 @@
 #import "PDFViewerController.h"
 #import "FinderController.h"
 #import "LibraryController.h"
+#import "PaletteController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -26,8 +27,7 @@
 @class TPStatusView;
 @class TPImageViewerController;
 
-
-@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -84,6 +84,9 @@
   FinderController *finder;
   BOOL shouldHighlightFirstMatch;
 }
+
+@property (assign) IBOutlet NSView *paletteContainverView;
+@property (retain) PaletteController *palette;
 
 @property (assign) IBOutlet NSView *finderContainverView;
 @property (retain) FinderController *finder;

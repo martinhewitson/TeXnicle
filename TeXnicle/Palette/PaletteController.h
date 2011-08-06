@@ -13,10 +13,12 @@
 
 @protocol PaletteControllerDelegate <NSObject>
 
+- (BOOL)paletteCanInsertText:(PaletteController*)aPalette;
+- (void)palette:(PaletteController*)aPalette insertText:(NSString*)aString;
 
 @end
 
-@interface PaletteController : NSViewController <NSTableViewDelegate, NSUserInterfaceValidations> {
+@interface PaletteController : NSViewController <NSTableViewDelegate, PaletteControllerDelegate, NSUserInterfaceValidations> {
 
 	NSDictionary *palette;
 	
@@ -36,6 +38,8 @@
 }
 
 @property (assign) id<PaletteControllerDelegate> delegate;
+
+- (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate;
 
 - (void) loadPalette;
 - (NSArray*) listOfCommands;
