@@ -10,7 +10,7 @@
 #import "UKTextDocGoToBox.h"
 
 
-
+extern NSString * const TELineNumberClickedNotification;
 
 @class MHEditorRuler;
 @class MHCodeFolder;
@@ -25,6 +25,7 @@
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
 -(NSArray*)listOfCommands;
 -(BOOL)shouldSyntaxHighlightDocument;
+-(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange;
 
 @end
 
@@ -103,6 +104,7 @@
 #pragma mark -
 #pragma mark Syntax highlighting
 
+- (NSArray*)bookmarksForLineRange:(NSRange)aRange;
 - (void) resetLineNumbers;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;

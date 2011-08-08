@@ -20,6 +20,8 @@
 #import "TPImageViewerController.h"
 #import "PaletteController.h"
 #import "PDFViewerController.h"
+#import "Bookmark.h"
+#import "MHLineNumber.h"
 
 @implementation TeXProjectDocument
 
@@ -195,6 +197,10 @@
              name:TPFileItemTextStorageChangedNotification
            object:nil];
   
+  [nc addObserver:self
+         selector:@selector(handleLineNumberClickedNotification:) 
+             name:TELineNumberClickedNotification
+           object:self.texEditorViewController.textView];
   
   [self.statusView setFilename:@""];
   [self.statusView setEditorStatus:@"No Selection."];
@@ -381,6 +387,8 @@
 	
   [options setObject:[NSNumber numberWithBool:YES] 
 							forKey:NSMigratePersistentStoresAutomaticallyOption];
+  [options setObject:[NSNumber numberWithBool:YES]
+              forKey:NSInferMappingModelAutomaticallyOption];
   
   BOOL result = [super configurePersistentStoreCoordinatorForURL:url
 																													ofType:fileType
@@ -809,18 +817,30 @@
 
 - (IBAction) findInProject:(id)sender
 {
-  [controlsTabview selectTabViewItemAtIndex:4];
-//	if (!finder) {
-//		finder = [[FindInProjectController alloc] initWithProjectDocument:self];
-//	}
-//	
-//	[finder showWindow:self];
-//	[[finder window] makeKeyAndOrderFront:self];
-	
+  [controlsTabview selectTabViewItemAtIndex:4];	
 }
 
 #pragma mark -
 #pragma mark Notification Handlers
+
+- (void) handleLineNumberClickedNotification:(NSNotification*)aNote
+{
+  MHLineNumber *linenumber = [[aNote userInfo] valueForKey:@"LineNumber"];
+  
+  // Check if there is already a bookmark for this file
+  FileEntity *file = [self.openDocuments currentDoc];
+  Bookmark *bookmark = [file bookmarkForLinenumber:linenumber.number];
+  
+  // If we don't have a bookmark, make one, else remove it
+  if (bookmark) {
+    [[file mutableSetValueForKey:@"bookmarks"] removeObject:bookmark];
+  } else {
+    bookmark = [Bookmark bookmarkWithLinenumber:linenumber.number inFile:file inManagedObjectContext:self.managedObjectContext];    
+  }
+    
+  // Tell the manager to reload the bookmarks for this file
+  
+}
 
 - (void) handleTextEditorDidProcessEdits:(NSNotification*)aNote
 {
@@ -999,6 +1019,21 @@
 	return texfiles;
 }
 
+- (NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange
+{
+  NSMutableArray *bookmarks = [NSMutableArray array];
+  FileEntity *file = [self.openDocuments currentDoc];
+  if (file) {    
+    NSArray *allBookmarks = [file.bookmarks allObjects];
+    for (Bookmark *b in allBookmarks) {
+      NSInteger bl = [b.linenumber integerValue];
+      if (bl >= aRange.location && bl < NSMaxRange(aRange)) {
+        [bookmarks addObject:b];
+      }
+    }
+  }
+  return bookmarks;
+}
 
 #pragma mark -
 #pragma mark Open Documents Manager Delegate

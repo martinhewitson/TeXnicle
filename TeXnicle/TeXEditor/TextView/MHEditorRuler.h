@@ -18,13 +18,16 @@
   NSArray *lineNumbers;
   NSArray *codeFolders;
   NSColor *textColor;
+  NSColor *alternateTextColor;
   NSColor *backgroundColor;
   NSFont  *font;
   NSMutableArray *foldingTagDescriptions;
   BOOL wasAcceptingMouseEvents;
   NSRange lastVisibleRange;
   NSDictionary *textAttributesDictionary;
+  NSDictionary *alternateTextAttributesDictionary;
 	NSCharacterSet *newLineCharacterSet;
+  NSGradient *_bookmarkGradient;
 }
 
 @property (retain) NSArray *lineNumbers;
@@ -32,15 +35,20 @@
 @property (retain) NSMutableArray *foldingTagDescriptions;
 @property (assign) TeXTextView *textView;
 @property (retain) NSColor *textColor;
+@property (retain) NSColor *alternateTextColor;
 @property (retain) NSColor *backgroundColor;
 @property (retain) NSFont *font;
 @property (retain) NSDictionary *textAttributesDictionary;
+@property (retain) NSDictionary *alternateTextAttributesDictionary;
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView;
 - (id)initWithTextView:(NSTextView*)aTextView;
 
+- (NSBezierPath*) makeBookmarkPathForWidth:(CGFloat)bwidth height:(CGFloat)rectHeight ypos:(CGFloat)ypos;
+
 - (void) calculationsForTextRange:(NSRange)aRange;
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange;
+- (MHLineNumber*)lineNumberForPoint:(NSPoint)aPoint;
 - (NSArray*) foldingTagsForTextRange:(NSRange)aRange;
 - (NSDictionary*) matchTagPairs:(NSArray*)foldingTags;
 - (NSArray*) makeFoldersForTextRange:(NSRange)aRange;
@@ -58,5 +66,5 @@
 #pragma mark Attributes
 
 - (NSDictionary *) textAttributes;
-
+- (NSDictionary *) alternateTextAttributes;
 @end

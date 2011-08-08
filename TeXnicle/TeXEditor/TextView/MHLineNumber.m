@@ -14,6 +14,7 @@
 @synthesize number;
 @synthesize index;
 @synthesize range;
+@synthesize rect;
 
 + (MHLineNumber*) lineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange
 {

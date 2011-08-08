@@ -18,6 +18,7 @@
 #import "NSString+Extension.h"
 #import "NSAttributedString+CodeFolding.h"
 #import "NSAttributedString+LineNumbers.h"
+#import "Bookmark.h"
 
 #define kDEFAULT_THICKNESS	22.0
 #define kRULER_MARGIN		5.0
@@ -26,10 +27,12 @@
 @implementation MHEditorRuler
 
 @synthesize textAttributesDictionary;
+@synthesize alternateTextAttributesDictionary;
 @synthesize textView;
 @synthesize lineNumbers;
 @synthesize codeFolders;
 @synthesize textColor;
+@synthesize alternateTextColor;
 @synthesize backgroundColor;
 @synthesize font;
 @synthesize foldingTagDescriptions;
@@ -48,6 +51,7 @@
     self.lineNumbers = [NSArray array];
     self.textView = (TeXTextView*)aTextView;
     self.textColor = [NSColor darkGrayColor];
+    self.alternateTextColor = [NSColor whiteColor];
 //    self.backgroundColor = [NSColor darkGrayColor];  
     CGFloat v = 237;
     self.backgroundColor = [NSColor colorWithDeviceRed:v/255.0 green:v/255.0 blue:v/255.0 alpha:1.0];
@@ -60,7 +64,7 @@
     [self setClientView:aTextView];
     
     newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
-    
+  
   }
 	  
 	return self;
@@ -89,6 +93,7 @@
   self.codeFolders = nil;
   self.textAttributesDictionary = nil;
 	[self setClientView:nil];	
+  [_bookmarkGradient release];
 	[super dealloc];
 }
 
@@ -125,6 +130,7 @@
   NSRange visibleRange = [self.textView getVisibleRange];
   NSRange nullRange = NSMakeRange(NSNotFound, 0);
   NSLayoutManager *layoutManager = [self.textView layoutManager];
+  NSAffineTransform *transform = [NSAffineTransform transform];
   NSTextContainer *container = [self.textView textContainer];
 	NSRect visibleRect = [self.textView visibleRect];  
   
@@ -157,6 +163,10 @@
   if ([self.lineNumbers count]<1)
     return;
   
+  // bookmarks
+  MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+  MHLineNumber *lastLine = [self.lineNumbers lastObject];
+  NSArray *bookmarks = [self.textView bookmarksForLineRange:NSMakeRange(firstLine.number, lastLine.number - firstLine.number)];
   
   float yinset = [self.textView textContainerInset].height;        
   
@@ -223,14 +233,32 @@
         // portion. Need to compensate for the clipview's coordinates.
         float ypos = yinset  + NSMinY(r)  - NSMinY(visibleRect);
         if (shouldDrawLineNumbers) {
+          // check for bookmark
+          Bookmark *b = [Bookmark bookmarkWithLinenumber:line.number inArray:bookmarks];
           // set string
           [[labelText mutableString] setString:[NSString stringWithFormat:@"%d", line.number]];
+          if (b) {
+            [labelText setAttributes:[self alternateTextAttributes] range:NSMakeRange(0, [labelText length])];
+          } else {
+            [labelText setAttributes:[self textAttributes] range:NSMakeRange(0, [labelText length])];
+          }
           // get size
           NSSize s = [labelText size];
           // Draw string flush right, centered vertically within the line
           NSRect srect = NSMakeRect(bwmrm - foldWidth - s.width,
                                     ypos + (rectHeight - strHeight) / 2.0,
                                     bwmrm2, rectHeight);
+          line.rect = srect;
+          
+          if (b) {
+            CGFloat bwidth = boundsWidth-foldWidth;
+            NSBezierPath *path = [self makeBookmarkPathForWidth:bwidth height:rectHeight ypos:ypos];
+            [_bookmarkGradient drawInBezierPath:path angle:0];
+            [[[NSColor colorWithDeviceRed:0.2 green:0.2 blue:1.0 alpha:1.0] highlightWithLevel:0.5] set];
+            [path setLineWidth:1.0];
+            [path stroke];
+          }
+          
           [labelText drawInRect:srect];
         }
         
@@ -305,6 +333,28 @@
   [self resetTrackingRects];
 }
 
+- (NSBezierPath*) makeBookmarkPathForWidth:(CGFloat)bwidth height:(CGFloat)rectHeight ypos:(CGFloat)ypos
+{
+  if (!_bookmarkGradient) {
+    _bookmarkGradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithDeviceRed:0.2 green:0.2 blue:1.0 alpha:1.0] 
+                                                      endingColor:[NSColor colorWithDeviceRed:0.5 green:0.5 blue:1.0 alpha:1.0]];
+  }
+  CGFloat arrowwidth = 0.3*bwidth;
+  CGFloat inset = 2.0;
+  CGFloat radius = 6.0;
+  NSBezierPath *path = [NSBezierPath bezierPath];
+  [path moveToPoint:NSMakePoint(inset, inset+radius)];
+  [path curveToPoint:NSMakePoint(inset+radius, inset) controlPoint1:NSMakePoint(inset, inset) controlPoint2:NSMakePoint(inset, inset)];
+  [path lineToPoint:NSMakePoint(bwidth-arrowwidth, inset)];
+  [path lineToPoint:NSMakePoint(bwidth, rectHeight/2.0)];
+  [path lineToPoint:NSMakePoint(bwidth-arrowwidth, rectHeight-inset)];
+  [path lineToPoint:NSMakePoint(inset+radius, rectHeight-inset)];
+  [path curveToPoint:NSMakePoint(inset, rectHeight-inset-radius) controlPoint1:NSMakePoint(inset, rectHeight-inset) controlPoint2:NSMakePoint(inset, rectHeight-inset)];
+  NSAffineTransform *transform = [NSAffineTransform transform];
+  [transform translateXBy:0 yBy:ypos];
+  [path transformUsingAffineTransform:transform];
+  return path;
+}
 
 #pragma mark -
 #pragma mark Lines and Folders
@@ -582,61 +632,26 @@
 {
   NSAttributedString *attStr = [textView attributedString];
   return [attStr lineNumbersForTextRange:aRange];
-  
-//  NSMutableArray *lines = [NSMutableArray array];
-//  
-//  NSUInteger start = aRange.location;
-//  NSUInteger stop = start + aRange.length;
-//  NSString *text = [self.textView string];
-//  
-//  // go forwards from the start until we reach the start of the visible range
-//  NSUInteger idx;
-//  NSUInteger lineNumber = 1;
-//  NSRange lineRange;
-//  for (idx = 0; idx < start;) {
-//    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-//    lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
-//		idx = NSMaxRange(lineRange);
-//	}
-//  
-//  // now loop over the visible range and collect line numbers
-//  MHLineNumber *line;
-//  while (idx < stop)
-//  {
-//    // get the range of the current line
-//    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-//    // make a line object with the given number and starting index
-//    line = [MHLineNumber lineNumberWithValue:lineNumber index:lineRange.location range:lineRange];    
-//    [lines addObject:line];
-//    
-//    // Get an attributed version of this line
-//    NSAttributedString *attLine = [attStr attributedSubstringFromRange:lineRange];    
-//    // Get a line count for this line of text.
-//    lineNumber+=[NSAttributedString lineCountForLine:attLine];
-//    
-//    // move on to the next line
-//		idx = NSMaxRange(lineRange);
-//  }
-//
-////  NSLog(@"idx=%ld, text length = %ld", idx, [text length]);
-//  
-////  if ([text length]>0) {
-////    NSLog(@"Last char %c", [text characterAtIndex:[text length]-1]);
-////  }
-//  
-//  // check if we have a newline right at the end
-//  if (idx>0 && idx <= [text length] && [text length]>0) {
-//    if ([newLineCharacterSet characterIsMember:[text characterAtIndex:idx-1]]) {
-////      NSLog(@"Last character is newline");
-//      line = [MHLineNumber lineNumberWithValue:lineNumber index:idx range:[text lineRangeForRange:NSMakeRange(idx, 0)]];    
-//      [lines addObject:line];
-//    }
-//  }
-//  
-////  NSLog(@"%@ Made lines %@", self, lines);
-//  return [NSArray arrayWithArray:lines];
 }
 
+- (MHLineNumber*)lineNumberForPoint:(NSPoint)aPoint
+{
+  CGFloat foldWidth = 0.0;
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEShowCodeFolders] boolValue]) {
+    foldWidth = kFOLDING_GUTTER;
+  }
+  
+  // some useful numbers for drawing the line numbers
+  CGFloat boundsWidth = NSWidth([self bounds]);
+  CGFloat rwidth = boundsWidth - foldWidth;
+  for (MHLineNumber *line in self.lineNumbers) {
+    NSRect r = NSMakeRect(0, line.rect.origin.y, rwidth, line.rect.size.height);
+    if (NSPointInRect(aPoint, r)) {
+      return line;
+    }
+  }
+  return nil;
+}
 
 
 
@@ -762,11 +777,20 @@
 {
 	NSPoint clickPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	MHCodeFolder *folder = [self folderForPoint:clickPoint];
+  
+  // can we get the line number clicked on?
+  MHLineNumber *clickedLine = [self lineNumberForPoint:clickPoint];
+  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
+                                                      object:self.textView
+                                                    userInfo:dict];
+  
 //  NSLog(@"Clicked on %@", folder);
   [self resetLineNumbers];
 	[self toggleFoldedStateForFolder:folder];
   [self setNeedsDisplay:YES];
 }
+
 
 - (void)mouseEntered:(NSEvent *)theEvent {
   wasAcceptingMouseEvents = [[self window] acceptsMouseMovedEvents];
@@ -821,5 +845,20 @@
   
   return self.textAttributesDictionary;
 }
+
+- (NSDictionary *)alternateTextAttributes
+{
+  if (!self.alternateTextAttributesDictionary) {
+    
+    self.alternateTextAttributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     self.font, NSFontAttributeName, 
+                                     self.alternateTextColor, NSForegroundColorAttributeName,
+                                     nil];
+    
+  }
+  
+  return self.alternateTextAttributesDictionary;
+}
+
 
 @end

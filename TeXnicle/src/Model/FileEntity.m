@@ -12,6 +12,7 @@
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "externs.h"
 #import "ConsoleController.h"
+#import "Bookmark.h"
 
 @implementation FileEntity
 
@@ -19,6 +20,7 @@
 @dynamic extension;
 @dynamic content;
 @dynamic isText;
+@dynamic bookmarks;
 @synthesize document;
 
 
@@ -36,16 +38,17 @@
 
 - (void) awakeFromFetch
 {
-//	NSLog(@"Awake from fetch");
 	[super awakeFromFetch];
 	
 	[self reloadFromDisk];
 	
 	// we should make sure the name is in sync with the filepath
 	NSString *newName = [[self filepath] lastPathComponent];
-	if (![[self name] isEqual:newName]) {
-    [self setValue:newName forKey:@"name"];
-	}
+  if (newName) {
+    if (![[self name] isEqual:newName]) {
+      [self setValue:newName forKey:@"name"];
+    }
+  }
 	
 //	if (!document) {
 //		NSLog(@"awakeFromFetch: Created document for %@", [self valueForKey:@"name"]);
@@ -409,6 +412,16 @@
     return YES;
   }
   return NO;
+}
+
+- (Bookmark*)bookmarkForLinenumber:(NSInteger)aLinenumber
+{
+  for (Bookmark *b in self.bookmarks) {
+    if ([b.linenumber integerValue] == aLinenumber) {
+      return b;
+    }
+  }
+  return nil;
 }
 
 @end

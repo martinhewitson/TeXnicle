@@ -14,8 +14,10 @@
   NSUInteger number;
   NSUInteger index;
   NSRange range;
+  NSRect rect;
 }
 
+@property (assign) NSRect rect;
 @property (assign) NSUInteger number;
 @property (assign) NSUInteger index;
 @property (assign) NSRange range;

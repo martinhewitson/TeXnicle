@@ -32,7 +32,7 @@
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
 
-
+NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 
 @implementation TeXTextView
 
@@ -349,6 +349,15 @@
 
 #pragma mark -
 #pragma mark Syntax highlighting
+
+- (NSArray*)bookmarksForLineRange:(NSRange)aRange
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFileInLineRange:)]) {
+    return [self.delegate bookmarksForCurrentFileInLineRange:aRange];
+  }  
+  return [NSArray array];
+}
+
 
 - (void) resetLineNumbers
 {

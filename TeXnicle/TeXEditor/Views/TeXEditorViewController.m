@@ -167,4 +167,13 @@
   return NO;
 }
 
+-(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange
+{  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFileInLineRange:)]) {
+    return [self.delegate bookmarksForCurrentFileInLineRange:aRange];
+  }
+  
+  return nil;
+}
+
 @end

@@ -91,6 +91,8 @@
 		25194943138FB85A007029E5 /* libraryTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194941138FB85A007029E5 /* libraryTabBarImageDepressed.icns */; };
 		25194946138FB9F7007029E5 /* outlineTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194944138FB9F7007029E5 /* outlineTabBarImageDepressed.icns */; };
 		25194947138FB9F7007029E5 /* outlineTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194945138FB9F7007029E5 /* outlineTabBarImage.icns */; };
+		251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D899813EEFDE200301B6D /* BookmarkManager.m */; };
+		251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251D899913EEFDE200301B6D /* BookmarkManager.xib */; };
 		251FC6EE1392708800DB2E3B /* Console.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251FC6ED1392708800DB2E3B /* Console.xib */; };
 		251FC6FA139272A600DB2E3B /* TPLaTeXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */; };
 		252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */; };
@@ -125,6 +127,8 @@
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
 		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
+		25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */; };
+		256C94D613EE591300AD8E3A /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C94D513EE591300AD8E3A /* Bookmark.m */; };
 		25717DA91392D16200955620 /* palette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25717C731392D16200955620 /* palette.plist */; };
 		25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C751392D16200955620 /* SymbolTableDelegate.m */; };
 		25717DAC1392D16200955620 /* PaletteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25717C791392D16200955620 /* PaletteController.m */; };
@@ -133,7 +137,6 @@
 		25717DB51392DA1100955620 /* Palette in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB41392DA1100955620 /* Palette */; };
 		25717DB71392DF8100955620 /* resizeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB61392DF8100955620 /* resizeImage.png */; };
 		257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471C138E5DE500ED02C4 /* FileDocument.m */; };
-		257B4729138E5DE500ED02C4 /* TeXProject 5.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 257B471D138E5DE500ED02C4 /* TeXProject 5.xcdatamodel */; };
 		257B472A138E5DE500ED02C4 /* ProjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471F138E5DE500ED02C4 /* ProjectEntity.m */; };
 		257B472B138E5DE500ED02C4 /* ProjectItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4721138E5DE500ED02C4 /* ProjectItemEntity.m */; };
 		257B472C138E5DE500ED02C4 /* FolderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4723138E5DE500ED02C4 /* FolderEntity.m */; };
@@ -374,6 +377,9 @@
 		25194941138FB85A007029E5 /* libraryTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = libraryTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25194944138FB9F7007029E5 /* outlineTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlineTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25194945138FB9F7007029E5 /* outlineTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlineTabBarImage.icns; sourceTree = "<group>"; };
+		251D899713EEFDE200301B6D /* BookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkManager.h; sourceTree = "<group>"; };
+		251D899813EEFDE200301B6D /* BookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkManager.m; sourceTree = "<group>"; };
+		251D899913EEFDE200301B6D /* BookmarkManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkManager.xib; sourceTree = "<group>"; };
 		251FC6ED1392708800DB2E3B /* Console.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Console.xib; sourceTree = "<group>"; };
 		251FC6F8139272A600DB2E3B /* TPLaTeXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLaTeXEngine.h; sourceTree = "<group>"; };
 		251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLaTeXEngine.m; sourceTree = "<group>"; };
@@ -425,6 +431,11 @@
 		255DB85113E5D5F8007629C0 /* TPImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerController.h; sourceTree = "<group>"; };
 		255DB85213E5D5F8007629C0 /* TPImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerController.m; sourceTree = "<group>"; };
 		255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPImageViewerController.xib; sourceTree = "<group>"; };
+		25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 2.xcdatamodel"; sourceTree = "<group>"; };
+		25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 3.xcdatamodel"; sourceTree = "<group>"; };
+		256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 4.xcdatamodel"; sourceTree = "<group>"; };
+		256C94D413EE591300AD8E3A /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
+		256C94D513EE591300AD8E3A /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
 		25717C731392D16200955620 /* palette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = palette.plist; sourceTree = "<group>"; };
 		25717C741392D16200955620 /* SymbolTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableDelegate.h; sourceTree = "<group>"; };
 		25717C751392D16200955620 /* SymbolTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableDelegate.m; sourceTree = "<group>"; };
@@ -437,7 +448,6 @@
 		25717DB61392DF8100955620 /* resizeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resizeImage.png; sourceTree = "<group>"; };
 		257B471B138E5DE500ED02C4 /* FileDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDocument.h; sourceTree = "<group>"; };
 		257B471C138E5DE500ED02C4 /* FileDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDocument.m; sourceTree = "<group>"; };
-		257B471D138E5DE500ED02C4 /* TeXProject 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 5.xcdatamodel"; sourceTree = "<group>"; };
 		257B471E138E5DE500ED02C4 /* ProjectEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectEntity.h; sourceTree = "<group>"; };
 		257B471F138E5DE500ED02C4 /* ProjectEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectEntity.m; sourceTree = "<group>"; };
 		257B4720138E5DE500ED02C4 /* ProjectItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItemEntity.h; sourceTree = "<group>"; };
@@ -651,6 +661,7 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				2540D65013EDBC600023FC29 /* Bookmarks */,
 				2545864713E9266E00461494 /* PDFViewerController */,
 				253F7A3E13E3EEC7005C1051 /* Project Builder */,
 				259530AD13DD685C00CA2894 /* File Monitor */,
@@ -935,6 +946,17 @@
 			path = src/ProjectBuilder;
 			sourceTree = "<group>";
 		};
+		2540D65013EDBC600023FC29 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				251D899713EEFDE200301B6D /* BookmarkManager.h */,
+				251D899813EEFDE200301B6D /* BookmarkManager.m */,
+				251D899913EEFDE200301B6D /* BookmarkManager.xib */,
+			);
+			name = Bookmarks;
+			path = src/Bookmarks;
+			sourceTree = "<group>";
+		};
 		2545864713E9266E00461494 /* PDFViewerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -987,8 +1009,10 @@
 			children = (
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
 				257B471C138E5DE500ED02C4 /* FileDocument.m */,
-				257B471D138E5DE500ED02C4 /* TeXProject 5.xcdatamodel */,
 				257B471E138E5DE500ED02C4 /* ProjectEntity.h */,
+				25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */,
+				256C94D413EE591300AD8E3A /* Bookmark.h */,
+				256C94D513EE591300AD8E3A /* Bookmark.m */,
 				257B471F138E5DE500ED02C4 /* ProjectEntity.m */,
 				257B4720138E5DE500ED02C4 /* ProjectItemEntity.h */,
 				257B4721138E5DE500ED02C4 /* ProjectItemEntity.m */,
@@ -1406,6 +1430,7 @@
 				25ACB35313EB15EF00289E4E /* textResult.icns in Resources */,
 				2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */,
 				25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */,
+				251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1428,7 +1453,6 @@
 				250772FE138E5D81000F1118 /* main.m in Sources */,
 				25077304138E5D81000F1118 /* TeXProjectDocument.m in Sources */,
 				257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */,
-				257B4729138E5DE500ED02C4 /* TeXProject 5.xcdatamodel in Sources */,
 				257B472A138E5DE500ED02C4 /* ProjectEntity.m in Sources */,
 				257B472B138E5DE500ED02C4 /* ProjectItemEntity.m in Sources */,
 				257B472C138E5DE500ED02C4 /* FolderEntity.m in Sources */,
@@ -1534,6 +1558,9 @@
 				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
 				2503357013EAD480005BD6CF /* FinderController.m in Sources */,
 				2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */,
+				25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */,
+				256C94D613EE591300AD8E3A /* Bookmark.m in Sources */,
+				251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,6 +1763,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */,
+				25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */,
+				25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */,
+			);
+			currentVersion = 256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */;
+			path = TeXProject.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 250772E3138E5D81000F1118 /* Project object */;
 }
