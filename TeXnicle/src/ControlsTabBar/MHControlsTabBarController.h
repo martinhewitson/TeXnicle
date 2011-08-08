@@ -18,6 +18,7 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
   NSButton *libraryButton;
   NSButton *outlineButton;
   NSButton *findButton;
+  NSButton *bookmarksButton;
   NSTabView *tabView;
 }
 
@@ -26,6 +27,7 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @property (assign) IBOutlet NSButton *libraryButton;
 @property (assign) IBOutlet NSButton *outlineButton;
 @property (assign) IBOutlet NSButton *findButton;
+@property (assign) IBOutlet NSButton *bookmarksButton;
 
 @property (assign) IBOutlet NSTabView *tabView;
 

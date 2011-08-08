@@ -174,7 +174,6 @@
   }
   
   // make sure the glyphs are present otherwise colouring gives errors
-  NSRange fullRange = NSMakeRange(0, strLen);
   [layoutManager ensureGlyphsForCharacterRange:aRange];
   
   

@@ -19,6 +19,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 @synthesize outlineButton;
 @synthesize findButton;
 @synthesize tabView;
+@synthesize bookmarksButton;
 
 - (id)init
 {
@@ -38,8 +39,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self.libraryButton setState:NSOffState];
   [self.outlineButton setState:NSOffState];
   [self.findButton setState:NSOffState];
+  [self.bookmarksButton setState:NSOffState];
   
-  buttons = [[NSArray arrayWithObjects:self.projectButton, self.palletButton, self.libraryButton, self.outlineButton, self.findButton, nil] retain];
+  buttons = [[NSArray arrayWithObjects:self.projectButton, self.palletButton, self.libraryButton, self.outlineButton, self.findButton, self.bookmarksButton, nil] retain];
   
 }
 
@@ -92,6 +94,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     [self toggleOn:self.outlineButton];
   } else if (idx == 4) {
     [self toggleOn:self.findButton];    
+  } else if (idx == 5) {
+    [self toggleOn:self.bookmarksButton];    
   }
 }
 

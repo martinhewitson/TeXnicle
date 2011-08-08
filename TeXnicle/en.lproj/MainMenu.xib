@@ -856,6 +856,15 @@
 									<reference key="NSMixedImage" ref="310636482"/>
 									<int key="NSTag">21</int>
 								</object>
+								<object class="NSMenuItem" id="792135726">
+									<reference key="NSMenu" ref="561089521"/>
+									<string key="NSTitle">Toggle Bookmark</string>
+									<string key="NSKeyEquiv">d</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 								<object class="NSMenuItem" id="326782830">
 									<reference key="NSMenu" ref="561089521"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1833,6 +1842,14 @@
 					</object>
 					<int key="connectionID">637</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleBookmark:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="792135726"/>
+					</object>
+					<int key="connectionID">641</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2475,6 +2492,7 @@
 							<reference ref="946679466"/>
 							<reference ref="2168131"/>
 							<reference ref="849974424"/>
+							<reference ref="792135726"/>
 						</object>
 						<reference key="parent" ref="590915221"/>
 					</object>
@@ -2693,6 +2711,14 @@
 						<reference key="object" ref="882851318"/>
 						<reference key="parent" ref="963351320"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">638</int>
+						<reference key="object" ref="792135726"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
+						<reference key="parent" ref="561089521"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2816,6 +2842,7 @@
 					<string>630.IBPluginDependency</string>
 					<string>634.IBPluginDependency</string>
 					<string>635.IBPluginDependency</string>
+					<string>638.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
@@ -2960,6 +2987,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -2974,7 +3002,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">637</int>
+			<int key="maxID">641</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3192,85 +3220,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ExternalTeXDoc.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FindInProjectController</string>
-					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>handleTableDoubleClick:</string>
-							<string>performSearch:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>handleTableDoubleClick:</string>
-							<string>performSearch:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">handleTableDoubleClick:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">performSearch:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>delegate</string>
-							<string>resultsView</string>
-							<string>searchResults</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>NSTableView</string>
-							<string>NSArrayController</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>delegate</string>
-							<string>resultsView</string>
-							<string>searchResults</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">delegate</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">resultsView</string>
-								<string key="candidateClassName">NSTableView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">searchResults</string>
-								<string key="candidateClassName">NSArrayController</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/FindInProjectController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -4043,6 +3992,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addBookmarkAtCurrentLine:</string>
 							<string>addExistingFile:</string>
 							<string>addExistingFileToSelectedFolder:</string>
 							<string>addExistingFolder:</string>
@@ -4067,20 +4017,21 @@
 							<string>openPDF:</string>
 							<string>openProjectFolderInFinder:</string>
 							<string>projectTypeChanged:</string>
+							<string>removeBookmarkAtCurrentLine:</string>
 							<string>removeItem:</string>
 							<string>renameItem:</string>
 							<string>revealItem:</string>
-							<string>searchPDF:</string>
 							<string>selectNextTab:</string>
 							<string>selectPreviousTab:</string>
 							<string>selectTab:</string>
 							<string>setMainFile:</string>
 							<string>setMainItem:</string>
 							<string>showCategoryActionMenu:</string>
-							<string>showNextResult:</string>
+							<string>toggleBookmark:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4122,6 +4073,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addBookmarkAtCurrentLine:</string>
 							<string>addExistingFile:</string>
 							<string>addExistingFileToSelectedFolder:</string>
 							<string>addExistingFolder:</string>
@@ -4146,20 +4098,24 @@
 							<string>openPDF:</string>
 							<string>openProjectFolderInFinder:</string>
 							<string>projectTypeChanged:</string>
+							<string>removeBookmarkAtCurrentLine:</string>
 							<string>removeItem:</string>
 							<string>renameItem:</string>
 							<string>revealItem:</string>
-							<string>searchPDF:</string>
 							<string>selectNextTab:</string>
 							<string>selectPreviousTab:</string>
 							<string>selectTab:</string>
 							<string>setMainFile:</string>
 							<string>setMainItem:</string>
 							<string>showCategoryActionMenu:</string>
-							<string>showNextResult:</string>
+							<string>toggleBookmark:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">addBookmarkAtCurrentLine:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">addExistingFile:</string>
 								<string key="candidateClassName">id</string>
@@ -4257,6 +4213,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">removeBookmarkAtCurrentLine:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">removeItem:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -4266,10 +4226,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">revealItem:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">searchPDF:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4297,7 +4253,7 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">showNextResult:</string>
+								<string key="name">toggleBookmark:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -4310,14 +4266,16 @@
 							<string>documentCode</string>
 							<string>documentName</string>
 							<string>findInSourceButton</string>
-							<string>finder</string>
+							<string>finderContainverView</string>
 							<string>imageViewerContainer</string>
 							<string>leftView</string>
+							<string>libraryContainerView</string>
 							<string>midView</string>
 							<string>newFileSheet</string>
 							<string>newFilenameTextField</string>
 							<string>openDocuments</string>
-							<string>pdfView</string>
+							<string>paletteContainverView</string>
+							<string>pdfViewerContainerView</string>
 							<string>projectItemTreeController</string>
 							<string>projectOutlineController</string>
 							<string>projectOutlineView</string>
@@ -4339,14 +4297,16 @@
 							<string>NSTextView</string>
 							<string>NSTextField</string>
 							<string>HHValidatedButton</string>
-							<string>FindInProjectController</string>
+							<string>NSView</string>
+							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSWindow</string>
 							<string>NSTextField</string>
 							<string>OpenDocumentsManager</string>
-							<string>PDFView</string>
+							<string>NSView</string>
+							<string>NSView</string>
 							<string>ProjectItemTreeController</string>
 							<string>ProjectOutlineController</string>
 							<string>NSOutlineView</string>
@@ -4371,14 +4331,16 @@
 							<string>documentCode</string>
 							<string>documentName</string>
 							<string>findInSourceButton</string>
-							<string>finder</string>
+							<string>finderContainverView</string>
 							<string>imageViewerContainer</string>
 							<string>leftView</string>
+							<string>libraryContainerView</string>
 							<string>midView</string>
 							<string>newFileSheet</string>
 							<string>newFilenameTextField</string>
 							<string>openDocuments</string>
-							<string>pdfView</string>
+							<string>paletteContainverView</string>
+							<string>pdfViewerContainerView</string>
 							<string>projectItemTreeController</string>
 							<string>projectOutlineController</string>
 							<string>projectOutlineView</string>
@@ -4413,8 +4375,8 @@
 								<string key="candidateClassName">HHValidatedButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">finder</string>
-								<string key="candidateClassName">FindInProjectController</string>
+								<string key="name">finderContainverView</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">imageViewerContainer</string>
@@ -4422,6 +4384,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">leftView</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">libraryContainerView</string>
 								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -4441,8 +4407,12 @@
 								<string key="candidateClassName">OpenDocumentsManager</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">pdfView</string>
-								<string key="candidateClassName">PDFView</string>
+								<string key="name">paletteContainverView</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">pdfViewerContainerView</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">projectItemTreeController</string>

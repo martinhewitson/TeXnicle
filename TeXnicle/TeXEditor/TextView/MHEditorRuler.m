@@ -130,7 +130,6 @@
   NSRange visibleRange = [self.textView getVisibleRange];
   NSRange nullRange = NSMakeRange(NSNotFound, 0);
   NSLayoutManager *layoutManager = [self.textView layoutManager];
-  NSAffineTransform *transform = [NSAffineTransform transform];
   NSTextContainer *container = [self.textView textContainer];
 	NSRect visibleRect = [self.textView visibleRect];  
   
@@ -758,6 +757,16 @@
     }
   }
 	[self setNeedsDisplay:YES];
+}
+
+- (NSRange) rangeForLinenumber:(NSInteger)aLinenumber
+{
+  for (MHLineNumber *line in self.lineNumbers) {
+    if (aLinenumber == line.number) {
+      return line.range;
+    }
+  }
+  return NSMakeRange(NSNotFound, 0);
 }
 
 - (MHLineNumber*)lineNumberContainingIndex:(NSInteger)anIndex

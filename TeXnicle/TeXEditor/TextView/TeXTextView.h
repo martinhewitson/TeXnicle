@@ -16,6 +16,7 @@ extern NSString * const TELineNumberClickedNotification;
 @class MHCodeFolder;
 @class TeXColoringEngine;
 @class TPPopupListWindowController;
+@class  FileEntity;
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate>
 
@@ -140,6 +141,7 @@ extern NSString * const TELineNumberClickedNotification;
 #pragma mark -
 #pragma mark Selection
 
+- (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine;
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;

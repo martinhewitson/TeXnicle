@@ -93,6 +93,8 @@
 		25194947138FB9F7007029E5 /* outlineTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194945138FB9F7007029E5 /* outlineTabBarImage.icns */; };
 		251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D899813EEFDE200301B6D /* BookmarkManager.m */; };
 		251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251D899913EEFDE200301B6D /* BookmarkManager.xib */; };
+		251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */; };
+		251D899F13EFAE0600301B6D /* bookmarksTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 251D899D13EFAE0600301B6D /* bookmarksTabBarImage.icns */; };
 		251FC6EE1392708800DB2E3B /* Console.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251FC6ED1392708800DB2E3B /* Console.xib */; };
 		251FC6FA139272A600DB2E3B /* TPLaTeXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */; };
 		252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */; };
@@ -380,6 +382,8 @@
 		251D899713EEFDE200301B6D /* BookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkManager.h; sourceTree = "<group>"; };
 		251D899813EEFDE200301B6D /* BookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkManager.m; sourceTree = "<group>"; };
 		251D899913EEFDE200301B6D /* BookmarkManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkManager.xib; sourceTree = "<group>"; };
+		251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmarksTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		251D899D13EFAE0600301B6D /* bookmarksTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmarksTabBarImage.icns; sourceTree = "<group>"; };
 		251FC6ED1392708800DB2E3B /* Console.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Console.xib; sourceTree = "<group>"; };
 		251FC6F8139272A600DB2E3B /* TPLaTeXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLaTeXEngine.h; sourceTree = "<group>"; };
 		251FC6F9139272A600DB2E3B /* TPLaTeXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLaTeXEngine.m; sourceTree = "<group>"; };
@@ -820,6 +824,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */,
+				251D899D13EFAE0600301B6D /* bookmarksTabBarImage.icns */,
 				25ACB35213EB15EF00289E4E /* textResult.icns */,
 				2545864E13E936FE00461494 /* leftArrow.icns */,
 				2545864F13E936FE00461494 /* downArrow.icns */,
@@ -1009,10 +1015,10 @@
 			children = (
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
 				257B471C138E5DE500ED02C4 /* FileDocument.m */,
-				257B471E138E5DE500ED02C4 /* ProjectEntity.h */,
 				25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */,
 				256C94D413EE591300AD8E3A /* Bookmark.h */,
 				256C94D513EE591300AD8E3A /* Bookmark.m */,
+				257B471E138E5DE500ED02C4 /* ProjectEntity.h */,
 				257B471F138E5DE500ED02C4 /* ProjectEntity.m */,
 				257B4720138E5DE500ED02C4 /* ProjectItemEntity.h */,
 				257B4721138E5DE500ED02C4 /* ProjectItemEntity.m */,
@@ -1431,6 +1437,8 @@
 				2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */,
 				25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */,
 				251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */,
+				251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */,
+				251D899F13EFAE0600301B6D /* bookmarksTabBarImage.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

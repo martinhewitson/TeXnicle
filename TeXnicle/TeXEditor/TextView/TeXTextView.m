@@ -996,6 +996,27 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark Selection
 
+- (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine
+{
+  NSMutableAttributedString *aStr = [[[aFile document] textStorage] mutableCopy];
+  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
+  MHLineNumber *matchingLine = nil;
+  for (MHLineNumber *line in lineNumbers) {
+    if (line.number == aLinenumber) {
+      matchingLine = line;
+      break;
+    }
+  }
+  if (matchingLine) {
+    if (selectLine) {
+      [self setSelectedRange:matchingLine.range];
+    } else {
+      [self setSelectedRange:NSMakeRange(matchingLine.range.location, 0)];
+    }
+  }
+}
+
+
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
   [self setSelectedRange:aRange];

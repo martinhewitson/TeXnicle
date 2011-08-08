@@ -18,6 +18,7 @@
 #import "FinderController.h"
 #import "LibraryController.h"
 #import "PaletteController.h"
+#import "BookmarkManager.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -26,8 +27,9 @@
 @class FindInProjectController;
 @class TPStatusView;
 @class TPImageViewerController;
+@class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -80,10 +82,16 @@
     
   IBOutlet HHValidatedButton *findInSourceButton;
   
+  NSView *bookmarkContainerView;
+  BookmarkManager *bookmarkManager;
+  
   NSView *finderContainerView;
   FinderController *finder;
   BOOL shouldHighlightFirstMatch;
 }
+
+@property (assign) IBOutlet NSView *bookmarkContainverView;
+@property (retain) BookmarkManager *bookmarkManager;
 
 @property (assign) IBOutlet NSView *paletteContainverView;
 @property (retain) PaletteController *palette;
@@ -225,5 +233,18 @@
 - (IBAction) findSource:(id)sender;
 - (BOOL) pdfHasSelection;
 - (void) showDocument;
+
+#pragma mark -
+#pragma mark Bookmarks
+
+- (Bookmark*)bookmarkForCurrentLine;
+- (Bookmark*)bookmarkForLine:(NSInteger)linenumber;
+- (BOOL) hasBookmarkAtCurrentLine:(id)sender;
+- (BOOL) hasBookmarkAtLine:(NSInteger)aLinenumber;
+- (IBAction)addBookmarkAtCurrentLine:(id)sender;
+- (void) addBookmarkAtLine:(NSInteger)aLinenumber;
+- (IBAction)removeBookmarkAtCurrentLine:(id)sender;
+- (void) removeBookmarkAtLine:(NSInteger)aLinenumber;
+- (IBAction)toggleBookmark:(id)sender;
 
 @end

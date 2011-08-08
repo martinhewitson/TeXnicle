@@ -52,6 +52,7 @@
 - (NSArray*) foldingTagsForTextRange:(NSRange)aRange;
 - (NSDictionary*) matchTagPairs:(NSArray*)foldingTags;
 - (NSArray*) makeFoldersForTextRange:(NSRange)aRange;
+- (NSRange) rangeForLinenumber:(NSInteger)aLinenumber;
 - (MHLineNumber*)lineNumberContainingIndex:(NSInteger)anIndex;
 
 - (void) collapseAll;
