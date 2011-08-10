@@ -15,6 +15,8 @@
 @dynamic linenumber;
 @dynamic parentFile;
 @dynamic text;
+@synthesize selectedDisplayString;
+@synthesize displayString;
 
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inFile:(FileEntity*)aFile inManagedObjectContext:(NSManagedObjectContext*)aMOC
 {
@@ -53,7 +55,52 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"Line %d: %@", [self.linenumber integerValue], self.text];
+  return [NSString stringWithFormat:@"%d: %@", [self.linenumber integerValue], self.text];
+}
+
+- (NSString*) lineNumberString
+{
+  return [NSString stringWithFormat:@"line %d ", [self.linenumber integerValue]];
+}
+
+- (NSAttributedString*)selectedDisplayString
+{
+  NSString *lineNumberString = [self lineNumberString];  
+  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
+  [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
+  [att addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
+  if ([self.text length]==0) {
+    [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
+  }
+  return att;
+}
+
+- (NSAttributedString*)displayString
+{
+  
+  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
+  
+  NSString *text = self.text;
+  if ([text length]==0) {
+    text = @"<blank>";
+  }
+  
+  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
+  
+  NSString *lineNumberString = [self lineNumberString];
+  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
+  [str addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [str length])];
+  [str appendAttributedString:att];
+  [str addAttribute:NSParagraphStyleAttributeName
+              value:ps
+              range:NSMakeRange(0, [str length])];
+  
+  if ([self.text length]==0) {
+    [str addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [str length]-[lineNumberString length])];
+  }
+  return str;
 }
 
 @end

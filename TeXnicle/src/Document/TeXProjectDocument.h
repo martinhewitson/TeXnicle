@@ -90,6 +90,8 @@
   BOOL shouldHighlightFirstMatch;
 }
 
+@property (assign) IBOutlet NSSplitView *splitview;
+
 @property (assign) IBOutlet NSView *bookmarkContainverView;
 @property (retain) BookmarkManager *bookmarkManager;
 
@@ -212,7 +214,7 @@
 - (void) makeNewTexFileFromTemplate;
 - (void) addNewArticleMainFile;
 - (IBAction) newMainTeXFile:(id)sender;
-- (IBAction) deleteItem:(id)sender;
+- (IBAction) delete:(id)sender;
 - (BOOL) canAddNewFile;
 - (BOOL) canAddNewTeXFile;
 - (BOOL) canAddNewFolder;
@@ -237,6 +239,7 @@
 #pragma mark -
 #pragma mark Bookmarks
 
+- (IBAction)showBookmarks:(id)sender;
 - (Bookmark*)bookmarkForCurrentLine;
 - (Bookmark*)bookmarkForLine:(NSInteger)linenumber;
 - (BOOL) hasBookmarkAtCurrentLine:(id)sender;
@@ -246,5 +249,7 @@
 - (IBAction)removeBookmarkAtCurrentLine:(id)sender;
 - (void) removeBookmarkAtLine:(NSInteger)aLinenumber;
 - (IBAction)toggleBookmark:(id)sender;
+- (IBAction)previousBookmark:(id)sender;
+- (IBAction)nextBookmark:(id)sender;
 
 @end

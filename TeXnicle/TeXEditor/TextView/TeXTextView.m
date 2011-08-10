@@ -24,6 +24,7 @@
 
 #import "NSDictionary+TeXnicle.h"
 #import "NSString+LaTeX.h"
+#import "NSAttributedString+LineNumbers.h"
 
 #import "MHLineNumber.h"
 
@@ -1010,8 +1011,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   if (matchingLine) {
     if (selectLine) {
       [self setSelectedRange:matchingLine.range];
+      [self scrollRangeToVisible:matchingLine.range];
     } else {
-      [self setSelectedRange:NSMakeRange(matchingLine.range.location, 0)];
+      NSRange r = NSMakeRange(matchingLine.range.location, 0);
+      [self setSelectedRange:r];
+      [self scrollRangeToVisible:r];
     }
   }
 }

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HHValidatedButton.h"
 
 @class BookmarkManager;
 @class Bookmark;
@@ -16,21 +17,42 @@
 
 - (NSArray*)bookmarksForProject;
 - (void) jumpToBookmark:(Bookmark*)aBookmark;
+- (void) didDeleteBookmark;
 
 @end
 
-@interface BookmarkManager : NSViewController <BookmarkManagerDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
+@interface BookmarkManager : NSViewController <NSUserInterfaceValidations, BookmarkManagerDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
 @private
   id<BookmarkManagerDelegate> delegate;
+  NSOutlineView *outlineView;
+  HHValidatedButton *jumpToButton;
+  HHValidatedButton *deleteButton;
+  NSInteger _currentSelectedBookmark;
 }
 
 @property (assign) id<BookmarkManagerDelegate> delegate;
 @property (assign) IBOutlet NSOutlineView *outlineView;
+@property (assign) IBOutlet HHValidatedButton *jumpToButton;
+@property (assign) IBOutlet HHValidatedButton *deleteButton;
+@property (assign) IBOutlet HHValidatedButton *expandAllButton;
+@property (assign) IBOutlet HHValidatedButton *collapseAllButton;
+
 
 - (id)initWithDelegate:(id<BookmarkManagerDelegate>)aDelegate;
 
+- (IBAction)expandAll:(id)sender;
+- (IBAction)collapseAll:(id)sender;
+
+- (IBAction)previousBookmark:(id)sender;
+- (IBAction)nextBookmark:(id)sender;
+- (IBAction)jumpToSelectedBookmark:(id)sender;
+- (IBAction)deleteSelectedBookmark:(id)sender;
+- (Bookmark*)selectedBookmark;
+
+- (void) reloadData;
+
 - (NSArray*)bookmarksForFile:(FileEntity*)aFile;
 - (NSArray*)files;
-- (void) reloadData;
+- (NSArray*)allBookmarks;
 
 @end

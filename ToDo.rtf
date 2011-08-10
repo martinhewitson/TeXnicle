@@ -20,6 +20,14 @@ Beta 4\
 + Added the ability to view project images directly in TeXnicle. Selecting an image in the project tree \
   opens a new tab with an image viewer. For other file types (non-text and non-image) a tab is opened\
   showing the file icon.\
++ Bookmarks\
+	- A TeXnicle project can now have bookmarks\
+	- To add a bookmark, click on a line-number to toggle on/off or use menu "Project->Bookmarks->Toggle Bookmark" (cmd-d)\
+	- View bookmarks in the bookmark manager. Click the 6th tool-bab or use menu "Project->Bookmarks->Show Bookmarks"  (shift-cmd-b)\
+	- With focus on the bookmark manager list, type line number to jump to bookmark\
+	- Double-click a bookmark in the manager to jump to the place in the file\
+	- Jump to next bookmark with "Project->Bookmarks->Jump to Next Bookmark" (ctrl-cmd-n)\
+	- Jump to previous bookmark with "Project->Bookmarks->Jump to Previous Bookmark" (ctrl-cmd-p)\
 + Improved built-in PDF viewer. \
   - highlight text in source, select "Edit -> Find -> Find Text Selection in PDF" (or cmd-j)\
   - highlight text in pdf, select "Edit -> Find -> Find PDF Selection in Source (or shift-cmd-j)\
@@ -45,24 +53,10 @@ Beta 4\
 To Do\
 -----\
 \
-+ Bookmarks\
-	- add Project->Bookmarks->Add/remove menus\
-		- need to validate menus based on current selection\
-	- make bookmark viewer\
-	- jump to bookmark\
-\
 + Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
 	- it's a mess!\
 \
 + Should remember console output selection between launches.\
-\
-+ Some kind of bookmark scheme\
-	- BookmarkManager - view controller\
-		- list of bookmarks (outline view sorted by file, a bit like finder view)\
-		- edit and remove bookmarks\
-	- TPBookmark\
-	- click on number gutter, get line number for click point, add bookmark to manager\
-	- EditorRuler needs a delegate method: -bookmarksForFile:inTextRange:\
 \
 + Finder: make replace option\
 	- compare with the replace on Xcode\

@@ -404,8 +404,7 @@
 								<object class="NSMenuItem" id="437104165">
 									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Delete</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
@@ -856,14 +855,80 @@
 									<reference key="NSMixedImage" ref="310636482"/>
 									<int key="NSTag">21</int>
 								</object>
-								<object class="NSMenuItem" id="792135726">
+								<object class="NSMenuItem" id="78507889">
 									<reference key="NSMenu" ref="561089521"/>
-									<string key="NSTitle">Toggle Bookmark</string>
-									<string key="NSKeyEquiv">d</string>
-									<int key="NSKeyEquivModMask">1048576</int>
+									<string key="NSTitle">Bookmarks</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
+									<string key="NSAction">submenuAction:</string>
+									<object class="NSMenu" key="NSSubmenu" id="549628809">
+										<string key="NSTitle">Bookmarks</string>
+										<object class="NSMutableArray" key="NSMenuItems">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<object class="NSMenuItem" id="1024567294">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Show Bookmarks</string>
+												<string key="NSKeyEquiv">B</string>
+												<int key="NSKeyEquivModMask">1048576</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406000</int>
+											</object>
+											<object class="NSMenuItem" id="777185920">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Toggle Bookmark</string>
+												<string key="NSKeyEquiv">d</string>
+												<int key="NSKeyEquivModMask">1048576</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406010</int>
+											</object>
+											<object class="NSMenuItem" id="502859627">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Delete Selected Bookmark</string>
+												<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
+												<int key="NSKeyEquivModMask">1048576</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406020</int>
+											</object>
+											<object class="NSMenuItem" id="1068703511">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Jump to Selected Bookmark</string>
+												<string key="NSKeyEquiv">b</string>
+												<int key="NSKeyEquivModMask">1310720</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406030</int>
+											</object>
+											<object class="NSMenuItem" id="655340762">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Jump to Previous Bookmark</string>
+												<string key="NSKeyEquiv">p</string>
+												<int key="NSKeyEquivModMask">1310720</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406040</int>
+											</object>
+											<object class="NSMenuItem" id="288425887">
+												<reference key="NSMenu" ref="549628809"/>
+												<string key="NSTitle">Jump to Next Bookmark</string>
+												<string key="NSKeyEquiv">n</string>
+												<int key="NSKeyEquivModMask">1310720</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">406050</int>
+											</object>
+										</object>
+									</object>
 								</object>
 								<object class="NSMenuItem" id="326782830">
 									<reference key="NSMenu" ref="561089521"/>
@@ -943,6 +1008,16 @@
 									<reference key="NSMixedImage" ref="310636482"/>
 									<int key="NSTag">70</int>
 								</object>
+								<object class="NSMenuItem" id="1013800580">
+									<reference key="NSMenu" ref="561089521"/>
+									<string key="NSTitle">Trash Aux Files</string>
+									<string key="NSKeyEquiv">K</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+									<int key="NSTag">80</int>
+								</object>
 								<object class="NSMenuItem" id="166585830">
 									<reference key="NSMenu" ref="561089521"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -986,7 +1061,7 @@
 								<object class="NSMenuItem" id="2168131">
 									<reference key="NSMenu" ref="561089521"/>
 									<string key="NSTitle">Remove</string>
-									<string key="NSKeyEquiv"/>
+									<string type="base64-UTF8" key="NSKeyEquiv">CA</string>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
@@ -1740,14 +1815,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">deleteItem:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="2168131"/>
-					</object>
-					<int key="connectionID">608</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">selectTab:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="267272399"/>
@@ -1844,11 +1911,67 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">deleteSelectedBookmark:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="502859627"/>
+					</object>
+					<int key="connectionID">651</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">jumpToSelectedBookmark:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="1068703511"/>
+					</object>
+					<int key="connectionID">652</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextBookmark:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="288425887"/>
+					</object>
+					<int key="connectionID">653</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">previousBookmark:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="655340762"/>
+					</object>
+					<int key="connectionID">654</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">toggleBookmark:</string>
 						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="792135726"/>
+						<reference key="destination" ref="777185920"/>
 					</object>
-					<int key="connectionID">641</int>
+					<int key="connectionID">656</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showBookmarks:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="1024567294"/>
+					</object>
+					<int key="connectionID">657</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">delete:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="2168131"/>
+					</object>
+					<int key="connectionID">658</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">clean:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="1013800580"/>
+					</object>
+					<int key="connectionID">661</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2051,11 +2174,6 @@
 							<reference ref="345210975"/>
 						</object>
 						<reference key="parent" ref="952259628"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">202</int>
-						<reference key="object" ref="437104165"/>
-						<reference key="parent" ref="789758025"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">198</int>
@@ -2492,7 +2610,8 @@
 							<reference ref="946679466"/>
 							<reference ref="2168131"/>
 							<reference ref="849974424"/>
-							<reference ref="792135726"/>
+							<reference ref="78507889"/>
+							<reference ref="1013800580"/>
 						</object>
 						<reference key="parent" ref="590915221"/>
 					</object>
@@ -2574,11 +2693,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">539</int>
 						<reference key="object" ref="946679466"/>
-						<reference key="parent" ref="561089521"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">538</int>
-						<reference key="object" ref="2168131"/>
 						<reference key="parent" ref="561089521"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2712,11 +2826,71 @@
 						<reference key="parent" ref="963351320"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">638</int>
-						<reference key="object" ref="792135726"/>
+						<int key="objectID">642</int>
+						<reference key="object" ref="78507889"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="549628809"/>
 						</object>
+						<reference key="parent" ref="561089521"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">643</int>
+						<reference key="object" ref="549628809"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="1024567294"/>
+							<reference ref="502859627"/>
+							<reference ref="1068703511"/>
+							<reference ref="655340762"/>
+							<reference ref="288425887"/>
+							<reference ref="777185920"/>
+						</object>
+						<reference key="parent" ref="78507889"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">645</int>
+						<reference key="object" ref="1024567294"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">647</int>
+						<reference key="object" ref="502859627"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">648</int>
+						<reference key="object" ref="1068703511"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">649</int>
+						<reference key="object" ref="655340762"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">650</int>
+						<reference key="object" ref="288425887"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">655</int>
+						<reference key="object" ref="777185920"/>
+						<reference key="parent" ref="549628809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">202</int>
+						<reference key="object" ref="437104165"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">538</int>
+						<reference key="object" ref="2168131"/>
+						<reference key="parent" ref="561089521"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">659</int>
+						<reference key="object" ref="1013800580"/>
 						<reference key="parent" ref="561089521"/>
 					</object>
 				</object>
@@ -2842,7 +3016,15 @@
 					<string>630.IBPluginDependency</string>
 					<string>634.IBPluginDependency</string>
 					<string>635.IBPluginDependency</string>
-					<string>638.IBPluginDependency</string>
+					<string>642.IBPluginDependency</string>
+					<string>643.IBPluginDependency</string>
+					<string>645.IBPluginDependency</string>
+					<string>647.IBPluginDependency</string>
+					<string>648.IBPluginDependency</string>
+					<string>649.IBPluginDependency</string>
+					<string>650.IBPluginDependency</string>
+					<string>655.IBPluginDependency</string>
+					<string>659.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
@@ -2988,6 +3170,14 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -3002,11 +3192,132 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">641</int>
+			<int key="maxID">661</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">BookmarkManager</string>
+					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>collapseAll:</string>
+							<string>deleteSelectedBookmark:</string>
+							<string>expandAll:</string>
+							<string>jumpToSelectedBookmark:</string>
+							<string>nextBookmark:</string>
+							<string>previousBookmark:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>collapseAll:</string>
+							<string>deleteSelectedBookmark:</string>
+							<string>expandAll:</string>
+							<string>jumpToSelectedBookmark:</string>
+							<string>nextBookmark:</string>
+							<string>previousBookmark:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">collapseAll:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">deleteSelectedBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">expandAll:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">jumpToSelectedBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">nextBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>collapseAllButton</string>
+							<string>deleteButton</string>
+							<string>expandAllButton</string>
+							<string>jumpToButton</string>
+							<string>outlineView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>HHValidatedButton</string>
+							<string>HHValidatedButton</string>
+							<string>HHValidatedButton</string>
+							<string>HHValidatedButton</string>
+							<string>NSOutlineView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>collapseAllButton</string>
+							<string>deleteButton</string>
+							<string>expandAllButton</string>
+							<string>jumpToButton</string>
+							<string>outlineView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">collapseAllButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">deleteButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">expandAllButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">jumpToButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">outlineView</string>
+								<string key="candidateClassName">NSOutlineView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/BookmarkManager.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">DocWindowController</string>
 					<string key="superclassName">NSWindowController</string>
@@ -4002,7 +4313,7 @@
 							<string>buildProject:</string>
 							<string>clean:</string>
 							<string>closeCurrentTab:</string>
-							<string>deleteItem:</string>
+							<string>delete:</string>
 							<string>endNewFileSheet:</string>
 							<string>endRenameSheet:</string>
 							<string>endTemplateSheet:</string>
@@ -4014,8 +4325,10 @@
 							<string>newFolder:</string>
 							<string>newMainTeXFile:</string>
 							<string>newTeXFile:</string>
+							<string>nextBookmark:</string>
 							<string>openPDF:</string>
 							<string>openProjectFolderInFinder:</string>
+							<string>previousBookmark:</string>
 							<string>projectTypeChanged:</string>
 							<string>removeBookmarkAtCurrentLine:</string>
 							<string>removeItem:</string>
@@ -4026,11 +4339,15 @@
 							<string>selectTab:</string>
 							<string>setMainFile:</string>
 							<string>setMainItem:</string>
+							<string>showBookmarks:</string>
 							<string>showCategoryActionMenu:</string>
 							<string>toggleBookmark:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4083,7 +4400,7 @@
 							<string>buildProject:</string>
 							<string>clean:</string>
 							<string>closeCurrentTab:</string>
-							<string>deleteItem:</string>
+							<string>delete:</string>
 							<string>endNewFileSheet:</string>
 							<string>endRenameSheet:</string>
 							<string>endTemplateSheet:</string>
@@ -4095,8 +4412,10 @@
 							<string>newFolder:</string>
 							<string>newMainTeXFile:</string>
 							<string>newTeXFile:</string>
+							<string>nextBookmark:</string>
 							<string>openPDF:</string>
 							<string>openProjectFolderInFinder:</string>
+							<string>previousBookmark:</string>
 							<string>projectTypeChanged:</string>
 							<string>removeBookmarkAtCurrentLine:</string>
 							<string>removeItem:</string>
@@ -4107,6 +4426,7 @@
 							<string>selectTab:</string>
 							<string>setMainFile:</string>
 							<string>setMainItem:</string>
+							<string>showBookmarks:</string>
 							<string>showCategoryActionMenu:</string>
 							<string>toggleBookmark:</string>
 						</object>
@@ -4153,7 +4473,7 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">deleteItem:</string>
+								<string key="name">delete:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4201,11 +4521,19 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">nextBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">openPDF:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">openProjectFolderInFinder:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousBookmark:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4249,6 +4577,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">showBookmarks:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">showCategoryActionMenu:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -4262,6 +4594,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bookmarkContainverView</string>
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
@@ -4284,6 +4617,7 @@
 							<string>renameSheet</string>
 							<string>rightView</string>
 							<string>setAsMainFileCheckButton</string>
+							<string>splitview</string>
 							<string>statusView</string>
 							<string>tabView</string>
 							<string>templateSheet</string>
@@ -4293,6 +4627,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>NSView</string>
 							<string>NSTabView</string>
 							<string>NSTextView</string>
 							<string>NSTextField</string>
@@ -4315,6 +4650,7 @@
 							<string>NSWindow</string>
 							<string>NSView</string>
 							<string>NSButton</string>
+							<string>NSSplitView</string>
 							<string>TPStatusView</string>
 							<string>NSTabView</string>
 							<string>NSWindow</string>
@@ -4327,6 +4663,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bookmarkContainverView</string>
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
@@ -4349,6 +4686,7 @@
 							<string>renameSheet</string>
 							<string>rightView</string>
 							<string>setAsMainFileCheckButton</string>
+							<string>splitview</string>
 							<string>statusView</string>
 							<string>tabView</string>
 							<string>templateSheet</string>
@@ -4358,6 +4696,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bookmarkContainverView</string>
+								<string key="candidateClassName">NSView</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlsTabview</string>
 								<string key="candidateClassName">NSTabView</string>
@@ -4445,6 +4787,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">setAsMainFileCheckButton</string>
 								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">splitview</string>
+								<string key="candidateClassName">NSSplitView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusView</string>

@@ -202,6 +202,8 @@
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
 		25ACB35313EB15EF00289E4E /* textResult.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25ACB35213EB15EF00289E4E /* textResult.icns */; };
+		25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25C0177913F195E8003E6FC6 /* bookmark.icns */; };
+		25C2AFD313F1064B0060227A /* BookmarkOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */; };
 		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
 		25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD0E9013995226004EB857 /* ConsoleWindow.m */; };
 		25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */ = {isa = PBXBuildFile; fileRef = 25CD0E9B139959D3004EB857 /* TeXnicle_Help */; };
@@ -561,6 +563,9 @@
 		25A8DEFE1397AA160097A62E /* MHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHImageView.h; sourceTree = "<group>"; };
 		25A8DEFF1397AA160097A62E /* MHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHImageView.m; sourceTree = "<group>"; };
 		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
+		25C0177913F195E8003E6FC6 /* bookmark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmark.icns; sourceTree = "<group>"; };
+		25C2AFD113F1064B0060227A /* BookmarkOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkOutlineView.h; sourceTree = "<group>"; };
+		25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkOutlineView.m; sourceTree = "<group>"; };
 		25CC10B413E5DD9200A15850 /* TPImageViewerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerBackgroundView.h; sourceTree = "<group>"; };
 		25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerBackgroundView.m; sourceTree = "<group>"; };
 		25CD0E8F13995226004EB857 /* ConsoleWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindow.h; sourceTree = "<group>"; };
@@ -824,6 +829,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25C0177913F195E8003E6FC6 /* bookmark.icns */,
 				251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */,
 				251D899D13EFAE0600301B6D /* bookmarksTabBarImage.icns */,
 				25ACB35213EB15EF00289E4E /* textResult.icns */,
@@ -958,6 +964,8 @@
 				251D899713EEFDE200301B6D /* BookmarkManager.h */,
 				251D899813EEFDE200301B6D /* BookmarkManager.m */,
 				251D899913EEFDE200301B6D /* BookmarkManager.xib */,
+				25C2AFD113F1064B0060227A /* BookmarkOutlineView.h */,
+				25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */,
 			);
 			name = Bookmarks;
 			path = src/Bookmarks;
@@ -1439,6 +1447,7 @@
 				251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */,
 				251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */,
 				251D899F13EFAE0600301B6D /* bookmarksTabBarImage.icns in Resources */,
+				25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1569,6 +1578,7 @@
 				25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */,
 				256C94D613EE591300AD8E3A /* Bookmark.m in Sources */,
 				251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */,
+				25C2AFD313F1064B0060227A /* BookmarkOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

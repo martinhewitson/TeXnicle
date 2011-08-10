@@ -23,7 +23,11 @@
 #import "Bookmark.h"
 #import "MHLineNumber.h"
 
+#define kSplitViewLeftMinSize 234
+
 @implementation TeXProjectDocument
+
+@synthesize splitview;
 
 @synthesize library;
 @synthesize libraryContainerView;
@@ -109,7 +113,7 @@
 {
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
-    
+  
   // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
@@ -417,6 +421,11 @@
   }
     
   return result;
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
+{    
+  return YES;
 }
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -917,7 +926,7 @@
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
   if (dividerIndex == 0) {
-    return 200;
+    return kSplitViewLeftMinSize;
   }
   
   if (dividerIndex == 1) {
@@ -1226,6 +1235,15 @@
 			return NO;
 		}
 	}
+  
+  // toggle bookmark
+  if (tag == 406010) {
+    if ([self.openDocuments count]>0) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
 	
 	return [super validateMenuItem:menuItem];
 }
@@ -1716,7 +1734,7 @@
 	
 }
 
-- (IBAction) deleteItem:(id)sender
+- (IBAction) delete:(id)sender
 {
 	[projectItemTreeController remove:self];
 }
@@ -2039,6 +2057,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Bookmarks
 
+- (IBAction)showBookmarks:(id)sender
+{
+  [self.controlsTabview selectTabViewItemAtIndex:5];
+  [self.bookmarkManager expandAll:self];
+  [[self windowForSheet] makeFirstResponder:self.bookmarkManager.outlineView];
+}
+
+- (void) didDeleteBookmark
+{
+  [self.texEditorViewController.textView setNeedsDisplay:YES];
+}
+
 - (void) jumpToBookmark:(Bookmark *)aBookmark
 {
   NSInteger linenumber = [aBookmark.linenumber integerValue];
@@ -2111,6 +2141,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   } else {
     [self addBookmarkAtCurrentLine:self];
   }  
+}
+
+- (IBAction)previousBookmark:(id)sender
+{
+  [self.bookmarkManager previousBookmark:self];
+}
+
+- (IBAction)nextBookmark:(id)sender
+{
+  [self.bookmarkManager nextBookmark:self];
 }
 
 - (IBAction)addBookmarkAtCurrentLine:(id)sender
