@@ -82,7 +82,7 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = self.text;
+  NSString *text = [self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   if ([text length]==0) {
     text = @"<blank>";
   }

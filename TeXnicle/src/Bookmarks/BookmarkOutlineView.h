@@ -27,5 +27,8 @@
 @property (retain) NSTimer *resetTimer;
 @property (assign) IBOutlet id<BookmarkOutlineViewDelegate> bookmarkDelegate;
 @property (retain) NSDate *lastKeyStroke;
+@property (assign) IBOutlet NSTextField *selectingStatus;
+
+- (void) updateStatus;
 
 @end

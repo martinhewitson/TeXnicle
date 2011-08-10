@@ -13,6 +13,7 @@
 @synthesize bookmarkDelegate;
 @synthesize resetTimer;
 @synthesize lastKeyStroke;
+@synthesize selectingStatus;
 
 - (void) awakeFromNib
 {
@@ -29,11 +30,15 @@
 
 - (void) keyDown:(NSEvent *)theEvent
 {
-  capturedString = [capturedString stringByAppendingString:[theEvent characters]];
-  self.lastKeyStroke = [NSDate date];
+  NSString *newChars = [theEvent characters];
+  char c = [newChars characterAtIndex:0];
+  if(c>='0' && c<='9')
+  {
+    capturedString = [capturedString stringByAppendingString:[theEvent characters]];
+    self.lastKeyStroke = [NSDate date];
+    [self updateStatus];
+  }
   
-  NSInteger line = [capturedString integerValue];
-  [self.bookmarkDelegate selectBookmarkForLinenumber:line];  
   
   [super keyDown:theEvent];
 }
@@ -42,8 +47,20 @@
 {
   NSDate *now = [NSDate date];
   NSTimeInterval elapsed = [now timeIntervalSinceDate:self.lastKeyStroke];
-  if (elapsed > 1.0) {
+  if (elapsed > 0.5) {
+    NSInteger line = [capturedString integerValue];
+    [self.bookmarkDelegate selectBookmarkForLinenumber:line];  
     capturedString = @"";
+    [self updateStatus];
+  }
+}
+
+- (void) updateStatus
+{
+  if ([capturedString length] == 0) {
+    [self.selectingStatus setStringValue:@""];
+  } else {
+    [self.selectingStatus setStringValue:[NSString stringWithFormat:@"Jumping to %@", capturedString]];
   }
 }
 

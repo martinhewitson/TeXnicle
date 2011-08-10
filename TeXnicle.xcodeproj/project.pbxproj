@@ -30,7 +30,6 @@
 		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
 		2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2509B03C13EC6DFE0072961A /* LibraryController.xib */; };
 		250A3EC113DDC9A400552DD3 /* TPDocumentSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */; };
-		250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 250B039613E48DC800072FF2 /* newTeXDoc.icns */; };
 		25152995138F802B00307054 /* TPOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152992138F802B00307054 /* TPOutlineView.m */; };
 		25152996138F802B00307054 /* ESOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152994138F802B00307054 /* ESOutlineView.m */; };
 		25152999138F804D00307054 /* OpenDocumentsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25152998138F804C00307054 /* OpenDocumentsManager.m */; };
@@ -122,6 +121,7 @@
 		2545865113E936FE00461494 /* leftArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864E13E936FE00461494 /* leftArrow.icns */; };
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
+		25496A8113F2FCEA00E6D303 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25496A8013F2FCE900E6D303 /* newTeXDoc.icns */; };
 		2552029113E86619007F191F /* rightArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029013E86619007F191F /* rightArrow.icns */; };
 		2552029413E866DF007F191F /* searchRight.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029313E866DF007F191F /* searchRight.icns */; };
 		2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552029613E86C1E007F191F /* HHValidatedButton.m */; };
@@ -293,7 +293,6 @@
 		2509B03C13EC6DFE0072961A /* LibraryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryController.xib; sourceTree = "<group>"; };
 		250A3EBF13DDC9A400552DD3 /* TPDocumentSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSection.h; sourceTree = "<group>"; };
 		250A3EC013DDC9A400552DD3 /* TPDocumentSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSection.m; sourceTree = "<group>"; };
-		250B039613E48DC800072FF2 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
 		2514741413929DF60075CB5C /* ToDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		25152991138F802B00307054 /* TPOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineView.h; sourceTree = "<group>"; };
 		25152992138F802B00307054 /* TPOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineView.m; sourceTree = "<group>"; };
@@ -427,6 +426,7 @@
 		2545864E13E936FE00461494 /* leftArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = leftArrow.icns; sourceTree = "<group>"; };
 		2545864F13E936FE00461494 /* downArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = downArrow.icns; sourceTree = "<group>"; };
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
+		25496A8013F2FCE900E6D303 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029313E866DF007F191F /* searchRight.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = searchRight.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../../../../../../../Downloads/HHValidatedButton/HHValidatedButton.h; sourceTree = "<group>"; };
@@ -829,6 +829,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25496A8013F2FCE900E6D303 /* newTeXDoc.icns */,
 				25C0177913F195E8003E6FC6 /* bookmark.icns */,
 				251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */,
 				251D899D13EFAE0600301B6D /* bookmarksTabBarImage.icns */,
@@ -839,7 +840,6 @@
 				2552029313E866DF007F191F /* searchRight.icns */,
 				2552029013E86619007F191F /* rightArrow.icns */,
 				255DB84B13E577BD007629C0 /* buildProject.icns */,
-				250B039613E48DC800072FF2 /* newTeXDoc.icns */,
 				25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */,
 				25A47D1413E1965A00CAFEB7 /* revealArrow.png */,
 				25A47D1213E15B3000CAFEB7 /* trashCan.icns */,
@@ -1431,7 +1431,6 @@
 				25A47D1313E15B3000CAFEB7 /* trashCan.icns in Resources */,
 				25A47D1513E1965A00CAFEB7 /* revealArrow.png in Resources */,
 				25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */,
-				250B039713E48DC800072FF2 /* newTeXDoc.icns in Resources */,
 				255DB84C13E577BD007629C0 /* buildProject.icns in Resources */,
 				255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */,
 				2552029113E86619007F191F /* rightArrow.icns in Resources */,
@@ -1448,6 +1447,7 @@
 				251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */,
 				251D899F13EFAE0600301B6D /* bookmarksTabBarImage.icns in Resources */,
 				25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */,
+				25496A8113F2FCEA00E6D303 /* newTeXDoc.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
