@@ -172,7 +172,7 @@
 		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
 		[self setCurrentDoc:aDoc];
 		[newItem release];
-    if ([aDoc isText]) {
+    if ([[aDoc valueForKey:@"isText"] boolValue]) {
       [self enableTextView];
       [self enableImageView:NO];
     } else if ([aDoc isImage]) {
@@ -184,7 +184,7 @@
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
 		[tabView selectTabViewItem:tab];
 		[self setCurrentDoc:[tab identifier]];		
-    if ([aDoc isText]) {
+    if ([[aDoc valueForKey:@"isText"] boolValue]) {
       [self enableTextView];
       [self enableImageView:NO];
     } else if ([aDoc isImage]) {

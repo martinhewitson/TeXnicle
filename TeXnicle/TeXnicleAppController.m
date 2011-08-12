@@ -131,11 +131,11 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
 	
   // special chars
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorSpecialChars];
   
   // commands
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:105.0/255.0 green:0.0/255.0 blue:0.0 alpha:1.0]] forKey:TESyntaxCommandColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:25.0/255.0 green:20.0/255.0 blue:150.0/255.0 alpha:1.0]] forKey:TESyntaxCommandColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorCommand];
   
   // arguments

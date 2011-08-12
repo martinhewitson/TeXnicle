@@ -46,7 +46,7 @@
 	NSString *newName = [[self filepath] lastPathComponent];
   if (newName) {
     if (![[self name] isEqual:newName]) {
-      [self setValue:newName forKey:@"name"];
+      [self setPrimitiveValue:newName forKey:@"name"];
     }
   }
 	
@@ -69,11 +69,6 @@
 																							encoding:NSUTF8StringEncoding
 																								 error:&error];
 		
-		// Set the time we load. When we save back to file we can 
-		// check if the file was modified after this date and prompt
-		// the user to overwrite changes or not.
-		[self setPrimitiveValue:[NSDate date] forKey:@"fileLoadDate"];
-		
 		//NSLog(@"Loaded string %@", str);
 		if (!str) {
 			str = @"";
@@ -81,11 +76,21 @@
 		NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
 		[self setPrimitiveValue:data forKey:@"content"];
 		
-	} else {
-    [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"File doesn't exist at %@", filepath]];
-	}
+	} 
+  
+  // This is not so nice because files transfered from another computer will have a different path
+  // but may have content stored in the texnicle document so the process can continue.
+  //else {
+  //  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"File doesn't exist at %@", filepath]];
+	//}
 
 	[self reconfigureDocument];
+  
+  // Set the time we load. When we save back to file we can 
+  // check if the file was modified after this date and prompt
+  // the user to overwrite changes or not.
+  [self setPrimitiveValue:[NSDate date] forKey:@"fileLoadDate"];
+  
 }
 
 - (void) setName:(NSString *)newName
@@ -162,7 +167,6 @@
 	if (document) {
 		[document release];
 	}
-	//NSLog(@"Configuring document for %@", [self valueForKey:@"name"]);
 	document = [[FileDocument alloc] initWithFile:self];
 }
 

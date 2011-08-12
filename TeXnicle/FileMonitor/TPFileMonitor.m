@@ -7,6 +7,7 @@
 //
 
 #import "TPFileMonitor.h"
+#import "NSDate+GMT.h"
 
 #define kFileCheckInterval 1.0
 
@@ -53,18 +54,18 @@
   for (id file in files) {
     NSDate *loadDate = [file valueForKey:@"fileLoadDate"];
     NSString *path = [self fileMonitor:self pathOnDiskForFile:file];
+//    NSLog(@"Checking %@", path);
+//    NSLog(@"  loaded: %@", loadDate);
     if (path) {
       if (![fm fileExistsAtPath:path]) {
         [self fileMonitor:self 
         fileChangedOnDisk:file 
              modifiedDate:loadDate];
       } else {
-        //NSLog(@"Checking %@", path);
-        //NSLog(@"  loaded: %@", loadDate);
         
         NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
         NSDate *modified = [atts objectForKey:NSFileModificationDate];
-        //NSLog(@"   modified %@", modified);
+//        NSLog(@"   modified %@", modified);
         if ([modified compare:loadDate] == NSOrderedDescending) {
           [self fileMonitor:self fileChangedOnDisk:file modifiedDate:modified];
         }

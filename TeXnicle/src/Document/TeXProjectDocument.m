@@ -1034,7 +1034,7 @@
 {
   NSMutableArray *bookmarks = [NSMutableArray array];
   FileEntity *file = [self.openDocuments currentDoc];
-  if (file && file.isText) {    
+  if (file && [[file valueForKey:@"isText"] boolValue]) {    
     NSArray *allBookmarks = [file.bookmarks allObjects];
     for (Bookmark *b in allBookmarks) {
       NSInteger bl = [b.linenumber integerValue];
@@ -2099,7 +2099,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   for (ProjectItemEntity *item in [self.project valueForKey:@"items"]) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
-      if (file.isText) {
+      if ([[file valueForKey:@"isText"] boolValue]) {
         [bookmarks addObjectsFromArray:[file.bookmarks allObjects]]; 
       }
     }
