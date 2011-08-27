@@ -1,10 +1,96 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;}
-\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
+Beta 7\
+------\
+\
++ New engine system\
+	- TeXnicle now supports engine files. These are scripts which do the typesetting. \
+		- TeXnicle passes these inputs to the script: \
+			1) The name of the file to compile\
+			2) The working directory of the project\
+			3) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
+			4) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
+			5) A number corresponding to the 'Number of runs' setting \
+			\
+\
++ Compile settings are now document based rather than global. There is a new 'settings' tab on the project window where\
+  you can set the engine to use, as well as some other details of the compiling process. \
+\
++ Bug fix: creating new documents from "File->New Project" or "Project->New Project" now results in working documents\
+\
+\
+\pard\tx320\pardeftab320\pardirnatural
+\cf0 Beta 6\
+------\
+\
++ Fixed bug in syntax highlighting so that \\% doesn't count as a comment\
++ Now properly supports eps and ps files so that they are viewed as images in the internal image viewer and dragging them in to the editor produces an \\includegraphics code block.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+To Do\
+-----\
+\
++ What happens with bookmarks on stand-alone document?\
+\
++ Move to engine script scheme\
+	- make engine scripts in ~/Library/Application Support/TeXnicle/engines\
+		- examples: latex.engine, pdflatex.engine, context.engine\
+		- default engines in texnicle bundle in resources, copy to support dir on first start\
+	- texnicle passes required inputs to the script. Script can do what it needs to\
+	- in preferences, we have an engine manager and show a list of available engines\
+		- allow editing of engines\
+		- allow adding new engines\
+		- project settings compiler needs to be more general and allow choosing from the list of engines\
+	- how to handle bibtex?\
+	- TPEngineManager: -registeredEngineNames:\
+\
+\
+\
+\
++ Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
+	- it's a mess!\
+\
++ Should remember console output selection between launches.\
+\
++ Finder: make replace option\
+	- compare with the replace on Xcode\
+\
++ Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
+\
++ Standalone document editor \
+	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\
+\
++ Check for files which change on disk	\
+  ** check changes by CVS work\
+  ** Check the new FileMonitor for deleting/moving files\
+\
++ Menu item "Close all Tabs"\
+\
++ Don't highlight between \\left[ and \\right] as arguments\
+\
++ Remember open files\
+\
++ Finish help\
+\
++ Context menu on TeXEditor\
+	- insert->figure->projectlist\
+					  ->from disk...\
+            ->file->project list\
+				    ->from disk...\
+			 ->citation->projectlist\
+\
+\
+Bugs\
+----\
+\
++ Paste a large amount of text in. Colouring not properly working.\
+\
 Beta 5\
 ------\
 \
@@ -50,50 +136,9 @@ Beta 4\
 + New toolbar icons\
 + Added file status info to editor windows\
 + Many small improvements and bug fixes\
+\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
-To Do\
------\
-\
-+ Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
-	- it's a mess!\
-\
-+ Should remember console output selection between launches.\
-\
-+ Finder: make replace option\
-	- compare with the replace on Xcode\
-\
-+ Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
-\
-+ Standalone document editor \
-	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\
-\
-+ Check for files which change on disk	\
-  ** check changes by CVS work\
-  ** Check the new FileMonitor for deleting/moving files\
-\
-+ Menu item "Close all Tabs"\
-\
-+ Don't highlight between \\left[ and \\right] as arguments\
-\
-+ Remember open files\
-\
-+ Finish help\
-\
-+ Context menu on TeXEditor\
-	- insert->figure->projectlist\
-					  ->from disk...\
-            ->file->project list\
-				    ->from disk...\
-			 ->citation->projectlist\
-\
-\
-Bugs\
-----\
-\
-+ Paste a large amount of text in. Colouring not properly working.\
-\
-Beta 3:\
+\cf0 Beta 3:\
 -------\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\

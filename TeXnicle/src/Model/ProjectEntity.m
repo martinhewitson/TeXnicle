@@ -8,6 +8,7 @@
 
 #import "ProjectEntity.h"
 #import "FileEntity.h"
+#import "Settings.h"
 
 @implementation ProjectEntity
 
@@ -15,11 +16,28 @@
 @dynamic folder;
 @dynamic items;
 @dynamic type;
+@dynamic settings;
 
 - (void) awakeFromInsert
 {
 	//NSLog(@"Inserted project");
   self.type = @"PDFLaTeX";
+  
+  // make new settings
+  NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
+  Settings *newSettings = [[NSManagedObject alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+  self.settings = newSettings;
+  
+}
+
+- (void) awakeFromFetch
+{
+  // make new settings if needed
+  if (self.settings == nil) {
+    NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
+    Settings *newSettings = [[NSManagedObject alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+    self.settings = newSettings;
+  }
 }
 
 - (NSSet*)items

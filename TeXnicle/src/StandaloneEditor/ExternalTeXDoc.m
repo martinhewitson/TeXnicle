@@ -12,7 +12,6 @@
 #import "NSString+LaTeX.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "TeXEditorViewController.h"
-#import "TPLaTeXEngine.h"
 #import "externs.h"
 #import "ConsoleController.h"
 #import "TPStatusView.h"
@@ -22,9 +21,7 @@
 @synthesize documentData;
 @synthesize texEditorContainer;
 @synthesize texEditorViewController;
-@synthesize engine;
 @synthesize statusView;
-@synthesize compilerType;
 @synthesize fileLoadDate;
 @synthesize fileMonitor;
 
@@ -40,8 +37,6 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
-  self.engine = [TPLaTeXEngine engineWithDelegate:self];
-  self.compilerType = TPEngineCompilerPDFLaTeX;
   
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
@@ -52,10 +47,10 @@
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self.texEditorViewController.textView];
 	  
-  [nc addObserver:self
-         selector:@selector(handleTypesettingCompletedNotification:)
-             name:TPTypesettingCompletedNotification
-           object:self.engine];
+//  [nc addObserver:self
+//         selector:@selector(handleTypesettingCompletedNotification:)
+//             name:TPTypesettingCompletedNotification
+//           object:self.engine];
 
   if (![self fileURL]) {
     [self.statusView setFilename:@"Welcome to TeXnicle!"];
@@ -100,7 +95,6 @@
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.engine = nil;
   self.fileLoadDate = nil;
   self.fileMonitor = nil;
 	[super dealloc];
@@ -421,13 +415,18 @@
   return NO;
 }
 
+-(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange
+{
+  return [NSArray array];
+}
+
 
 #pragma mark -
 #pragma mark LaTeX Control
 
 - (IBAction) clean:(id)sender
 {
-  [self.engine trashAuxFiles];  
+//  [self.engine trashAuxFiles];  
 }
 
 - (IBAction) buildAndView:(id)sender
@@ -456,8 +455,8 @@
 
 - (void) build
 {
-  [self.engine reset];
-  [self.engine build];  
+//  [self.engine reset];
+//  [self.engine build];  
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
@@ -469,45 +468,17 @@
 
 - (IBAction) openPDF:(id)sender
 {
-  NSString *docFile = [self.engine compiledDocumentPath];
-  
-	// check if the pdf exists
-	if (docFile) {
-		//NSLog(@"Opening %@", pdfFile);
-		[[NSWorkspace sharedWorkspace] openFile:docFile];
-	}
+//  NSString *docFile = [self.engine compiledDocumentPath];
+//  
+//	// check if the pdf exists
+//	if (docFile) {
+//		//NSLog(@"Opening %@", pdfFile);
+//		[[NSWorkspace sharedWorkspace] openFile:docFile];
+//	}
 	
 	// .. if not, ask the user if they want to typeset the project
 }
 
-
-#pragma mark -
-#pragma mark LaTeX Engine delegate
-
-- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
-{
-  return [[self fileURL] path];
-}
-
-- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
-{
-  return [[[self fileURL] path] stringByDeletingLastPathComponent]; 
-}
-
-- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
-{
-	return YES;	 
-}
-
-- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
-{
-  return self.compilerType;
-}
-
-- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
-{
-  return NO;
-}
 
 #pragma mark -
 #pragma mark File Monitor Delegate

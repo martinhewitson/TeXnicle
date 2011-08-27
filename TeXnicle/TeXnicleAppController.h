@@ -15,6 +15,8 @@
 	StartupScreenController *startupScreenController;    
 }
 
+- (void) checkVersion;
+
 - (IBAction)showPreferences:(id)sender;
 - (id)startupScreen;
 - (IBAction) showStartupScreen:(id)sender;
@@ -22,7 +24,7 @@
 #pragma mark -
 #pragma mark Document Control 
 
-
+- (IBAction) newEmptyProject:(id)sender;
 - (IBAction) newLaTeXFile:(id)sender;
 
 @end

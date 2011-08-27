@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# This is a pdflatex engine for TeXnicle. 
+#
+# It runs pdflatex the desired number of times, optionally running bibtex after the first run.
+#
+#  pdflatex.engine
+#  TeXnicle
+
+if [ $# -lt 2 ]
+then
+echo "usage: <full-path-to-file> <working-directory> (<# compile> <do bibtex>)"
+exit
+fi
+
+# Executable values
+ENGINE=/usr/texbin/pdflatex
+BIBTEX=/usr/texbin/bibtex
+
+# Process inputs.
+# TeXnicle passes the file to be processed as the first input to this 
+# script and the working directory as the second input. Other options follow.
+mainfile=$1
+outputDir=$2
+nCompile=$3
+doBibtex=$4
+doPS2PDF=$5
+
+echo "****************************"
+echo "*** Compiling $mainfile"
+echo "*** Output dir $outputDir"
+echo "*** Ncompile $nCompile"
+echo "*** Do bibtex $doBibtex"
+echo "****************************"
+
+# Go to the working directory
+cd $outputDir
+
+# Do the correct number of typesetting runs
+count=1
+while [ $count -le $nCompile ]
+do
+  echo " "
+  echo "***------------------------------------------------------------"
+  echo "*** Run $count..."
+  echo "***------------------------------------------------------------"
+  $ENGINE -file-line-error -interaction=nonstopmode $mainfile
+
+  # if this is after the first run, run bibtex if requested
+  if [ $count -eq 1 ]
+  then
+    if [ $doBibtex -eq 1 ]
+    then
+      echo "*** Running bibtex..."
+      $BIBTEX $mainfile
+    fi
+  fi
+
+  count=$(( $count + 1 ))
+done
+
+echo "*** pdflatex.engine has completed."
+
+# END

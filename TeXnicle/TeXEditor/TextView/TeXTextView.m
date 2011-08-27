@@ -28,6 +28,8 @@
 
 #import "MHLineNumber.h"
 
+#import "NSString+FileTypes.h"
+
 #import "externs.h"
 
 #define LargeTextWidth  1e7
@@ -1929,11 +1931,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
 	NSPasteboard* pboard = [sender draggingPasteboard];
-  
-  NSLog(@"pboard types: %@", [pboard types]);
-  
-  NSLog(@"%@", sender);
-  
+    
   NSPoint draggingLocation = [sender draggingLocation];
   draggingLocation = [self convertPoint:draggingLocation fromView:nil];
   NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
@@ -1944,22 +1942,32 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		NSArray* files = [pboard propertyListForType:NSFilenamesPboardType];
     for (NSString *file in files) {
       
-      CFStringRef fileExtension = (CFStringRef) [file pathExtension];
-      CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-      
-      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
+      if ([[file pathExtension] isImage]) {
         [self insertImageBlockForFile:file atLocation:characterIndex];        
-        CFRelease(fileUTI);
         return YES;
       }
       
-      if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
+      if ([[file pathExtension] isText]) {
         [self insertIncludeForFile:file atLocation:characterIndex];        
-        CFRelease(fileUTI);
         return YES;
       }
       
-      CFRelease(fileUTI);
+//      CFStringRef fileExtension = (CFStringRef) [file pathExtension];
+//      CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+      
+//      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
+//        [self insertImageBlockForFile:file atLocation:characterIndex];        
+//        CFRelease(fileUTI);
+//        return YES;
+//      }
+      
+//      if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
+//        [self insertIncludeForFile:file atLocation:characterIndex];        
+//        CFRelease(fileUTI);
+//        return YES;
+//      }
+//      
+//      CFRelease(fileUTI);
       
     }
 	}

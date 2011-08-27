@@ -7,14 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "TPLaTeXEngine.h"
 #import "TPFileMonitor.h"
 #import "TeXTextView.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <TPLaTeXEngineDelegate, TPFileMonitorDelegate, TeXTextViewDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPFileMonitorDelegate, TeXTextViewDelegate> {
 
 	NSMutableAttributedString *documentData;
 
@@ -33,24 +32,19 @@
 		
   TeXEditorViewController *texEditorViewController;
   NSView *texEditorContainer;
-  TPLaTeXEngine *engine;
   
   BOOL openPDFAfterBuild;
   TPStatusView *statusView;
-  
-  TPEngineCompiler compilerType;
   
   NSDate *fileLoadDate;
   TPFileMonitor *fileMonitor;
 }
 
 @property (assign) IBOutlet TPStatusView *statusView;
-@property (assign) IBOutlet TPEngineCompiler compilerType;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) IBOutlet NSView *texEditorContainer;
-@property (retain) TPLaTeXEngine *engine;
 @property (retain) NSDate *fileLoadDate;
 
 @property (retain) TPFileMonitor *fileMonitor;

@@ -210,14 +210,15 @@
     if (cc == '%' && self.colorComments) {
       // comment rest of the line
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-      colorRange = NSMakeRange(aRange.location+idx-1, NSMaxRange(lineRange)-idx);
+      colorRange = NSMakeRange(aRange.location+idx, NSMaxRange(lineRange)-idx);
       unichar c = 0;
 			if (idx>0) {
 				c = [text characterAtIndex:idx-1];
 			}
-			if (idx==0 || 
-          [newLineCharacterSet characterIsMember:c] ||
-          [whitespaceCharacterSet characterIsMember:c]) {
+			if (idx==0 || c != '\\') {
+
+//          [newLineCharacterSet characterIsMember:c] ||
+//          [whitespaceCharacterSet characterIsMember:c]) {
         [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commentColor forCharacterRange:colorRange];
         idx = NSMaxRange(lineRange)-1;
 			}

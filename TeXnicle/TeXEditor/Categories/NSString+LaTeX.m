@@ -194,7 +194,11 @@
   NSRange commRange = [self rangeOfString:@"%"];
   if (commRange.location != NSNotFound) {
     if (commRange.location < anIndex) {
-      return YES;
+      if (commRange.location > 0) {
+        if ([self characterAtIndex:commRange.location-1] != '\\') {
+          return YES;
+        }
+      }
     }
   }  
   

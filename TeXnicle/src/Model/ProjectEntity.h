@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class FileEntity;
+@class Settings;
 
 @interface ProjectEntity : NSManagedObject {
 
@@ -18,6 +19,8 @@
 @property (assign) NSString *folder;
 @property (assign) NSSet *items;
 @property (copy) NSString *type;
+@property (assign) Settings *settings;
+
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;

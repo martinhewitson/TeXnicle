@@ -13,6 +13,7 @@
 #import "externs.h"
 #import "ConsoleController.h"
 #import "Bookmark.h"
+#import "NSString+FileTypes.h"
 
 @implementation FileEntity
 
@@ -402,20 +403,40 @@
 
 - (BOOL) isImage
 {
-  CFStringRef fileExtension = (CFStringRef) [[self pathOnDisk] pathExtension];
-  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-  if (UTTypeConformsTo(fileUTI, kUTTypeImage) 
-      || UTTypeConformsTo(fileUTI, kUTTypePDF)
-      || UTTypeConformsTo(fileUTI, kUTTypeBMP)
-      || UTTypeConformsTo(fileUTI, kUTTypeGIF)
-      || UTTypeConformsTo(fileUTI, kUTTypeJPEG)
-      || UTTypeConformsTo(fileUTI, kUTTypeJPEG2000)
-      || UTTypeConformsTo(fileUTI, kUTTypePNG)
-      || UTTypeConformsTo(fileUTI, kUTTypeTIFF)
-      ) {
-    return YES;
-  }
-  return NO;
+  
+  return [[[self pathOnDisk] pathExtension] isImage];
+//  CFStringRef fileExtension = (CFStringRef) [[self pathOnDisk] pathExtension];
+//  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+//  
+//  NSLog(@"Checking is image: %@", fileUTI);
+//  
+//  if (UTTypeConformsTo(fileUTI, kUTTypeImage) 
+//      || UTTypeConformsTo(fileUTI, kUTTypePDF)
+//      || UTTypeConformsTo(fileUTI, kUTTypeBMP)
+//      || UTTypeConformsTo(fileUTI, kUTTypeGIF)
+//      || UTTypeConformsTo(fileUTI, kUTTypeJPEG)
+//      || UTTypeConformsTo(fileUTI, kUTTypeJPEG2000)
+//      || UTTypeConformsTo(fileUTI, kUTTypePNG)
+//      || UTTypeConformsTo(fileUTI, kUTTypeTIFF)
+//      || UTTypeConformsTo(fileUTI, (CFStringRef)@"com.adobe.postscript")
+//      || UTTypeConformsTo(fileUTI, (CFStringRef)@"com.adobe.encapsulated-postscript")
+//      ) {
+//    return YES;
+//  }
+//  
+//  CFArrayRef  supportedTypes = CGImageSourceCopyTypeIdentifiers();
+//  CFIndex		i, typeCount = CFArrayGetCount(supportedTypes);
+//  
+//  for (i = 0; i < typeCount; i++) {
+//    if (UTTypeConformsTo(fileUTI, (CFStringRef)CFArrayGetValueAtIndex(supportedTypes, i))) {
+//      return YES;
+//    }
+//  }
+//  
+//  NSLog(@"...NO");
+//  
+//  
+//  return NO;
 }
 
 - (Bookmark*)bookmarkForLinenumber:(NSInteger)aLinenumber

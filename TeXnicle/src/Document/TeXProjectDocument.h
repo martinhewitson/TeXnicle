@@ -11,7 +11,6 @@
 #import "OpenDocumentsManager.h"
 #import "TeXEditorViewController.h"
 #import "ProjectOutlineController.h"
-#import "TPLaTeXEngine.h"
 #import "TPFileMonitor.h"
 #import "HHValidatedButton.h"
 #import "PDFViewerController.h"
@@ -19,17 +18,18 @@
 #import "LibraryController.h"
 #import "PaletteController.h"
 #import "BookmarkManager.h"
+#import "TPEngineManager.h"
+#import "TPEngineSettingsController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
 @class ProjectItemTreeController;
-@class TPLaTeXEngine;
 @class FindInProjectController;
 @class TPStatusView;
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, TPLaTeXEngineDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -62,6 +62,8 @@
   
   IBOutlet NSView *pdfViewerContainerView;
   
+
+  
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
@@ -72,23 +74,31 @@
   OpenDocumentsManager *openDocuments;
   ProjectItemTreeController *projectItemTreeController;
   TeXEditorViewController *texEditorViewController;
-  TPLaTeXEngine *engine;
   NSPopUpButton *projectTypeSelector;
   NSView *texEditorContainer;
   TPImageViewerController *imageViewerController;
   NSView *imageViewerContainer;
   TPStatusView *statusView;
   TPFileMonitor *fileMonitor;
-    
-  IBOutlet HHValidatedButton *findInSourceButton;
-  
+      
   NSView *bookmarkContainerView;
   BookmarkManager *bookmarkManager;
   
   NSView *finderContainerView;
   FinderController *finder;
   BOOL shouldHighlightFirstMatch;
+  
+  TPEngineManager *engineManager;
+  
+  TPEngineSettingsController *engineSettings;
+  NSView *engineSettingsContainer;
 }
+
+
+@property (retain) TPEngineSettingsController *engineSettings;
+@property (assign) IBOutlet NSView *engineSettingsContainer;
+
+@property (retain) TPEngineManager *engineManager;
 
 @property (assign) IBOutlet NSSplitView *splitview;
 
@@ -112,7 +122,6 @@
 @property (assign) IBOutlet OpenDocumentsManager *openDocuments;
 @property (assign) IBOutlet	ProjectItemTreeController *projectItemTreeController;
 @property (retain) TeXEditorViewController *texEditorViewController;
-@property (retain) TPLaTeXEngine *engine;
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) IBOutlet NSView *imageViewerContainer;
 @property (retain) TPImageViewerController *imageViewerController;
@@ -121,8 +130,11 @@
 
 @property (readonly) BOOL pdfHasSelection;
 
+- (void) validateURL;
 + (TeXProjectDocument*) newTeXnicleProject;
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
++ (NSSavePanel*)getDocumentURLSavePanel;
++ (NSURL*)getNewDocumentURL;
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
 
 - (void) updateStatusView;
@@ -173,6 +185,11 @@
 - (void) build;
 - (IBAction) openPDF:(id)sender;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
+
+
+- (NSString*)workingDirectory;
+- (NSString*)documentToCompile;
+- (NSString*)compiledDocumentPath;
 
 - (BOOL) canViewPDF;
 - (BOOL) canTypeset;
@@ -251,5 +268,10 @@
 - (IBAction)toggleBookmark:(id)sender;
 - (IBAction)previousBookmark:(id)sender;
 - (IBAction)nextBookmark:(id)sender;
+
+#pragma mark -
+#pragma mark Settings
+
+
 
 @end

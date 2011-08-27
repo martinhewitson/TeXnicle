@@ -22,6 +22,9 @@
 #import "PDFViewerController.h"
 #import "Bookmark.h"
 #import "MHLineNumber.h"
+#import "TPEngineManager.h"
+#import "TPEngine.h"
+#import "Settings.h"
 
 #define kSplitViewLeftMinSize 234
 
@@ -44,7 +47,6 @@
 @synthesize texEditorViewController;
 @synthesize texEditorContainer;
 @synthesize statusView;
-@synthesize engine;
 @synthesize projectTypeSelector;
 
 @synthesize fileMonitor;
@@ -58,6 +60,10 @@
 @synthesize palette;
 @synthesize paletteContainverView;
 
+@synthesize engineManager;
+@synthesize engineSettings;
+@synthesize engineSettingsContainer;
+
 - (void) dealloc
 {
 //  NSLog(@"TeXProjectDocument dealloc");
@@ -67,10 +73,11 @@
   self.pdfViewerController = nil;
   self.imageViewerController = nil;
   self.texEditorViewController = nil;
-  self.engine = nil;
   self.fileMonitor = nil;
   self.finder = nil;
   self.library = nil;
+  self.engineManager = nil;
+  self.engineSettings = nil;
   [super dealloc];
 }
 
@@ -109,10 +116,12 @@
   return NO;
 }
 
-- (void)windowControllerDidLoadNib:(NSWindowController *)aController
+- (void) setupDocument
 {
-  [super windowControllerDidLoadNib:aController];
-  // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  // setup settings
+  self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
+  [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
+  [self.engineSettingsContainer addSubview:[self.engineSettings view]];
   
   // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
@@ -135,10 +144,7 @@
   NSView *pdfViewer = [self.pdfViewerController view];
   [pdfViewer setFrame:[pdfViewerContainerView bounds]];
   [pdfViewerContainerView addSubview:pdfViewer];
-  
-  // setup engine
-  self.engine = [TPLaTeXEngine engineWithDelegate:self];
-  
+    
   // setup library
   self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
   NSView *libraryView = [self.library view];
@@ -167,6 +173,9 @@
   [bookmarkView setFrame:[self.bookmarkContainverView bounds]];
   [self.bookmarkContainverView addSubview:bookmarkView];
   
+  // setup engine manager
+  self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
+  
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
   
@@ -177,7 +186,7 @@
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
 	if (![saveFolder isEqual:projectFolder]) {
-//    NSLog(@"Set project folder from %@ to %@", saveFolder, projectFolder);
+    //    NSLog(@"Set project folder from %@ to %@", saveFolder, projectFolder);
 		[self.project setValue:projectFolder forKey:@"folder"];
 	}
   
@@ -190,10 +199,11 @@
              name:NSOutlineViewSelectionDidChangeNotification
            object:self.projectOutlineView];
   
+  
   [nc addObserver:self
          selector:@selector(handleTypesettingCompletedNotification:)
-             name:TPTypesettingCompletedNotification
-           object:self.engine];
+             name:TPEngineCompilingCompletedNotification
+           object:self.engineManager];
   
   [nc addObserver:self
          selector:@selector(handleControlTabSelectionChanged:)
@@ -225,22 +235,68 @@
     //		NSLog(@"Setting language to %@", language);
 		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
 	}
-
+  
   
   // ensure the project has the same name as on disk
   NSString *newProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
   if (![[self.project valueForKey:@"name"] isEqualToString:newProjectName]) {
-//    NSLog(@"Setting project name %@", newProjectName);
+    //    NSLog(@"Setting project name %@", newProjectName);
     [self.project setValue:newProjectName forKey:@"name"];
   }
-//  [self saveDocument:self];
-
-//  NSLog(@"Loaded project %@", self.project);
-//  for (NSManagedObject *item in [self.project valueForKey:@"items"]){
-//    NSLog(@"%@", [item valueForKey:@"parent"]);
-//  }
-  [self showDocument];
+  //  [self saveDocument:self];
   
+  //  NSLog(@"Loaded project %@", self.project);
+  //  for (NSManagedObject *item in [self.project valueForKey:@"items"]){
+  //    NSLog(@"%@", [item valueForKey:@"parent"]);
+  //  }
+  [self showDocument];
+}
+
+- (void)windowControllerDidLoadNib:(NSWindowController *)aController
+{
+  [super windowControllerDidLoadNib:aController];
+  // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  [self setupDocument];
+//  [self performSelector:@selector(validateURL) withObject:nil afterDelay:0];
+}
+
+- (void) validateURL
+{
+  
+  if ([self fileURL] == nil) {
+    NSSavePanel *savePanel = [TeXProjectDocument getDocumentURLSavePanel];
+    __block NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
+    
+    [savePanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
+      
+      if (result == NSFileHandlingPanelOKButton) {
+        NSURL *url = [NSURL fileURLWithPath:[[savePanel URL] path]];
+        
+        if (!url) {
+          [window performSelector:@selector(performClose:) withObject:self afterDelay:0.1];
+          return;
+        }
+        NSLog(@"Saving to %@", url);
+        
+        [self saveToURL:url ofType:@"XML" forSaveOperation:NSSaveOperation completionHandler:^(NSError *errorOrNil){
+          if (!errorOrNil) {
+            [self setupProject];
+            [self setupDocument];
+          } else {
+            NSLog(@"error: %@", errorOrNil);
+          }
+        }];
+        
+      } else {
+        [window performSelector:@selector(performClose:) withObject:self afterDelay:0.1];
+        return;
+      }
+      
+    }];
+    
+  } else {
+    [self setupDocument]; 
+  }
 }
 
 
@@ -296,18 +352,26 @@
   }
 }
 
-+ (TeXProjectDocument*)newTeXnicleProject
++ (NSSavePanel*)getDocumentURLSavePanel
 {
   // get a project name from the user
   NSSavePanel *savePanel = [NSSavePanel savePanel];
   [savePanel setTitle:@"Save New Project..."];
   [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"texnicle"]];
   [savePanel setPrompt:@"Create"];
-  [savePanel setMessage:@"Choose a location for the new TeXnicle project."];
+  [savePanel setMessage:@"Choose a name and location for the new TeXnicle project document."];
   [savePanel setNameFieldLabel:@"Create Project:"];
   [savePanel setAllowsOtherFileTypes:NO];
   [savePanel setCanCreateDirectories:YES];
+  return savePanel;
+}
+
++ (NSURL*)getNewDocumentURL
+{
   
+  NSSavePanel *savePanel = [TeXProjectDocument getDocumentURLSavePanel];
+  
+    
   BOOL result = [savePanel runModal];
   
   if (result == NSFileHandlingPanelCancelButton) {
@@ -315,7 +379,54 @@
   }
   
   NSString *path = [[savePanel URL] path];
+  
+  if (!path) {
+    return nil;
+  }
+  
+  
   NSURL *url = [NSURL fileURLWithPath:path];
+  
+  return url;
+}
+
+- (void) setupProject
+{
+  NSURL *aURL = [self fileURL];
+  NSString *path = [aURL path];
+  NSManagedObjectContext *moc = [self managedObjectContext];
+  [moc processPendingChanges];
+  [[moc undoManager] disableUndoRegistration];
+//  NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
+//  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
+  
+  // set name and folder of the project
+  NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
+  NSString *folder = [path stringByDeletingLastPathComponent];
+  [self.project setValue:name forKey:@"name"];
+  [self.project setValue:folder forKey:@"folder"]; 
+  
+  [moc processPendingChanges];
+  [[moc undoManager] enableUndoRegistration];
+  
+  NSError *error = nil;
+  [moc save:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }  
+}
+
+
++ (TeXProjectDocument*)newTeXnicleProject
+{
+  NSURL *url = [TeXProjectDocument getNewDocumentURL];
+  
+  if (!url) {
+    return nil;
+  }
+  
+  NSString *path = [url path];
   
   // Remove file if it is there
   NSFileManager *fm = [NSFileManager defaultManager];
@@ -428,14 +539,6 @@
   return YES;
 }
 
-- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
-{
-  if (anItem == findInSourceButton) {
-    return [self pdfHasSelection];
-  }
-  
-  return [super validateUserInterfaceItem:anItem];
-}
 
 - (void) updateStatusView
 {
@@ -1083,7 +1186,7 @@
 
 - (IBAction) clean:(id)sender
 {
-  [self.engine trashAuxFiles];
+  [self.engineManager trashAuxFiles];
   [self showDocument];
 }
 
@@ -1114,27 +1217,49 @@
 
 - (void) build
 {
-  [self.engine reset];
-  [self.engine build];
-  
+  // setup the engine
+  [self.engineManager compile];
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
-  [self showDocument];
-  
-  if (openPDFAfterBuild) {
-    [self openPDF:self];
+  NSDictionary *userinfo = [aNote userInfo];
+  if ([[userinfo valueForKey:@"success"] boolValue]) {
+    [self showDocument];  
+    if (openPDFAfterBuild) {
+      [self openPDF:self];
+    }
   }
-
 }
 
+- (NSString*)workingDirectory
+{
+  return [self.project folder];
+}
 
+- (NSString*)documentToCompile
+{
+  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+}
+
+- (NSString*)compiledDocumentPath
+{
+	// build path to the pdf file
+	NSString *mainFile = [self documentToCompile]; 
+  NSString *docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+  // check if the pdf exists
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:docFile]) {
+    return docFile;
+  }
+  
+  return nil;
+}
 
 
 - (IBAction) openPDF:(id)sender
 {
-  NSString *docFile = [self.engine compiledDocumentPath];
+  NSString *docFile = [self compiledDocumentPath];
 	
 	// check if the pdf exists
 	if (docFile) {
@@ -1838,42 +1963,42 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   [super saveDocument:self];
 }
-
-
-#pragma mark -
-#pragma mark LaTeX Engine Delegate
-
-- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
-{
-  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
-}
-
-- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
-{
-  return [self.project folder]; 
-}
-
-- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
-{
-  if ([self.project valueForKey:@"mainFile"]) {
-    return YES;
-  }	
-	return NO;	 
-}
-
-- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
-{
-  if ([[[self.project valueForKey:@"type"] lowercaseString] isEqualToString:@"latex"]) {
-    return TPEngineCompilerLaTeX;
-  } else {
-    return TPEngineCompilerPDFLaTeX;
-  }
-}
-
-- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
-{
-  return YES;
-}
+//
+//
+//#pragma mark -
+//#pragma mark LaTeX Engine Delegate
+//
+//- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
+//{
+//  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+//}
+//
+//- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
+//{
+//  return [self.project folder]; 
+//}
+//
+//- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
+//{
+//  if ([self.project valueForKey:@"mainFile"]) {
+//    return YES;
+//  }	
+//	return NO;	 
+//}
+//
+//- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
+//{
+//  if ([[[self.project valueForKey:@"type"] lowercaseString] isEqualToString:@"latex"]) {
+//    return TPEngineCompilerLaTeX;
+//  } else {
+//    return TPEngineCompilerPDFLaTeX;
+//  }
+//}
+//
+//- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
+//{
+//  return YES;
+//}
 
 #pragma mark -
 #pragma mark File Monitor Delegate
@@ -2019,7 +2144,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
-  NSString *path = [self.engine pdfPath];
+  NSString *path = [self compiledDocumentPath];
   NSFileManager *fm = [NSFileManager defaultManager];
   if ([fm fileExistsAtPath:path]) {
     return path;
@@ -2186,5 +2311,64 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     [self.bookmarkManager reloadData];
   }  
 }
+
+#pragma mark -
+#pragma mark Engine Settings
+
+-(NSArray*)registeredEngineNames
+{
+  return [self.engineManager registeredEngineNames];
+}
+
+-(void)didSelectDoBibtex:(BOOL)state
+{
+  self.project.settings.doBibtex = [NSNumber numberWithBool:state];
+}
+
+-(void)didSelectDoPS2PDF:(BOOL)state
+{
+  self.project.settings.doPS2PDF = [NSNumber numberWithBool:state];
+}
+
+-(void)didSelectOpenConsole:(BOOL)state
+{
+  self.project.settings.openConsole = [NSNumber numberWithBool:state];
+}
+
+-(void)didChangeNCompile:(NSInteger)number
+{
+  self.project.settings.nCompile = [NSNumber numberWithInteger:number];
+}
+
+-(void)didSelectEngineName:(NSString*)aName
+{
+  self.project.settings.engineName = aName;
+}
+
+-(NSString*)engineName
+{
+  return self.project.settings.engineName;
+}
+
+-(NSNumber*)doBibtex
+{
+  return self.project.settings.doBibtex;
+}
+
+-(NSNumber*)doPS2PDF
+{
+  return self.project.settings.doPS2PDF;
+}
+
+-(NSNumber*)openConsole
+{
+  return self.project.settings.openConsole;
+}
+
+-(NSNumber*)nCompile
+{
+  return self.project.settings.nCompile;
+}
+
 
 @end

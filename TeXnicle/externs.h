@@ -66,13 +66,15 @@ extern NSString * const TPDvipsPath;
 extern NSString * const TPBibTeXPath;
 extern NSString * const TPPS2PDFPath;
 
+extern NSString * const TPDefaultEngineName;
 extern NSString * const TPNRunsPDFLatex;
 extern NSString * const BibTeXDuringTypeset;
 extern NSString * const TPShouldRunPS2PDF;
+extern NSString * const OpenConsoleOnTypeset;
+
 extern NSString * const TPTrashFiles;
 extern NSString * const TPTrashDocumentFileWhenTrashing;
 extern NSString * const TPConsoleDisplayLevel;
-extern NSString * const OpenConsoleOnTypeset;
 extern NSString * const TPSpellCheckerLanguage;
 
 // Notifications

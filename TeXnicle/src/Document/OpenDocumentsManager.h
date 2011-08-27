@@ -53,6 +53,7 @@
 - (void) refreshTabForDocument:(FileEntity*)aDoc;
 - (void) handleDocumentRenamed:(NSNotification*)aNote;
 - (void)updateDoc;
+- (void)setupViewerForDoc:(FileEntity*)aDoc;
 
 - (void) selectTabForFile:(FileEntity*)aFile;
 

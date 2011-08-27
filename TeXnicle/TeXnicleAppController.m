@@ -15,6 +15,8 @@
 #import "TeXProjectDocument.h"
 #import "ProjectItemEntity.h"
 #import "TeXFileEntity.h"
+#import "MABSupportFolder.h"
+#import "TPEngineManager.h"
 
 NSString * const TEDocumentTemplates = @"TEDocumentTemplates";
 NSString * const TEUserCommands = @"TEUserCommands";
@@ -29,15 +31,17 @@ NSString * const TPPS2PDFPath = @"TPPS2PDFPath";
 
 
 NSString * const TPShouldRunPS2PDF = @"TPShouldRunPS2PDF";
-
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
 NSString * const BibTeXDuringTypeset = @"BibTeXDuringTypeset";
+NSString * const TPDefaultEngineName = @"TPDefaultEngineName";
+NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
+
+
 NSString * const TPTrashFiles = @"TPTrashFiles";
 NSString * const TPTrashDocumentFileWhenTrashing = @"TPTrashDocumentFileWhenTrashing";
 NSString * const TPSpellCheckerLanguage = @"TPSpellCheckerLanguage";
 
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
-NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
 
 NSString * const TPFileItemTextStorageChangedNotification = @"TPFileItemTextStorageChangedNotification";
 
@@ -170,6 +174,9 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	// Run ps2pdf after typeset
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPShouldRunPS2PDF];
   
+  // Default engine name
+  [defaultValues setObject:@"pdflatex" forKey:TPDefaultEngineName];
+  
 	// --------- Trash
 	NSArray *files = [NSArray arrayWithObjects:@"aux", @"log", @"bbl", @"out", nil];
 	[defaultValues setObject:files forKey:TPTrashFiles];
@@ -188,9 +195,9 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	
 	[[NSUserDefaults standardUserDefaults] synchronize];
   
-  
-  
+
 }
+
 
 - (id)init
 {
@@ -248,9 +255,48 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	if ([[[NSDocumentController sharedDocumentController] documents] count]==0) {
 		[self showStartupScreen:self];
 	}
-	
+  
+  [self checkVersion];
+  [TPEngineManager installEngines];
 }
 
+- (void) checkVersion
+{
+  NSError *error = nil;
+  NSString *html = @"http://www.bobsoft-mac.de/resources/TeXnicle/latestversion.txt";
+  NSURL *url = [NSURL URLWithString:html];
+  NSString *latest = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+  
+  NSArray *parts = [latest componentsSeparatedByString:@" "];
+  CGFloat latestVersion = [[parts objectAtIndex:0] floatValue];
+  CGFloat latestBuild = [[parts objectAtIndex:1] floatValue];
+  
+//  NSLog(@"Latest ver %f, build %f", latestVersion, latestBuild);
+  
+  // get values from main bundle
+  
+	NSDictionary *dict = [[NSBundle mainBundle] infoDictionary];
+  CGFloat currentBuild = [[dict valueForKey:@"CFBundleVersion"] floatValue];
+  CGFloat currentVersion = [[dict valueForKey:@"CFBundleShortVersionString"] floatValue];
+  
+//  NSLog(@"Current %f, %f", currentVersion, currentBuild);
+  
+  if (latestVersion > currentVersion || latestBuild > currentBuild) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"New version available"
+                                     defaultButton:@"Download Now"
+                                   alternateButton:@"Download Later"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Version %0.1f build %0.1f of TeXnicle is available for download", latestVersion, latestBuild];
+    NSInteger result = [alert runModal];
+    if (result == NSAlertDefaultReturn) {
+      [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.bobsoft-mac.de"]];
+    } else if (result == NSAlertAlternateReturn) {
+      // do nothing
+    }
+  }
+}
+
+                      
 - (id)startupScreen
 {
 	if (!startupScreenController) {
@@ -294,6 +340,15 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 #pragma mark -
 #pragma mark Document Control 
+
+- (IBAction) newEmptyProject:(id)sender
+{
+  id doc = [TeXProjectDocument newTeXnicleProject];
+  
+	if (doc) {
+		[doc saveDocument:self];
+	}
+}
 
 
 - (IBAction) newLaTeXFile:(id)sender

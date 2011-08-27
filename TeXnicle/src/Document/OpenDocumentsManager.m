@@ -172,34 +172,50 @@
 		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
 		[self setCurrentDoc:aDoc];
 		[newItem release];
-    if ([[aDoc valueForKey:@"isText"] boolValue]) {
-      [self enableTextView];
-      [self enableImageView:NO];
-    } else if ([aDoc isImage]) {
-      [self enableImageView:YES];      
-    } else {
-      [self enableImageView:YES];
-    }
+    [self setupViewerForDoc:aDoc];
+//    if ([aDoc isImage]) {
+//      [self enableImageView:YES];      
+//    } else if ([[aDoc valueForKey:@"isText"] boolValue]) {
+//      [self enableTextView];
+//      [self enableImageView:NO];
+//    } else {
+//      [self enableImageView:YES];
+//    }
 	}	else {
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
 		[tabView selectTabViewItem:tab];
 		[self setCurrentDoc:[tab identifier]];		
-    if ([[aDoc valueForKey:@"isText"] boolValue]) {
-      [self enableTextView];
-      [self enableImageView:NO];
-    } else if ([aDoc isImage]) {
-      [self enableImageView:YES];
-    } else {
-      [self enableImageView:YES];
-    }
+    [self setupViewerForDoc:aDoc];
+//    if ([[aDoc valueForKey:@"isText"] boolValue]) {
+//      [self enableTextView];
+//      [self enableImageView:NO];
+//    } else if ([aDoc isImage]) {
+//      [self enableImageView:YES];
+//    } else {
+//      [self enableImageView:YES];
+//    }
 	}
 	
 	[self.texEditorViewController.textView setNeedsDisplay:YES];
 }
 
+- (void)setupViewerForDoc:(FileEntity*)aDoc
+{
+  if ([aDoc isImage]) {
+    [self enableImageView:YES];      
+  } else if ([[aDoc valueForKey:@"isText"] boolValue]) {
+    [self enableTextView];
+    [self enableImageView:NO];
+  } else {
+    [self enableImageView:YES];
+  }
+}
+
 - (void)updateDoc
 {
-  if ([currentDoc valueForKey:@"isText"]) {
+  if ([currentDoc isImage]) {
+    [self enableImageView:YES];
+  } else if ([currentDoc valueForKey:@"isText"]) {
     id doc = [currentDoc document];		
     if (doc) {
       if ([doc isKindOfClass:[FileDocument class]]) {
@@ -239,8 +255,6 @@
         }
       } // end doc document is correct class
     } // end doc is nil
-  } else if ([currentDoc isImage]) {
-    [self enableImageView:YES];
   } else {
     [self enableImageView:YES];
   }
