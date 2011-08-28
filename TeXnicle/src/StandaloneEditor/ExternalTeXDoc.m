@@ -24,6 +24,11 @@
 @synthesize statusView;
 @synthesize fileLoadDate;
 @synthesize fileMonitor;
+@synthesize engineManager;
+@synthesize engineSettingsController;
+@synthesize drawerContentView;
+@synthesize drawer;
+@synthesize settings;
 
 - (void)awakeFromNib
 {
@@ -37,7 +42,21 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
+  // set up engine manager
+  self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
   
+  // set up engine settings
+  [self setupSettings];
+  
+  // set up engine settings
+  self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
+  [self.engineSettingsController.view setFrame:[self.drawerContentView bounds]];
+  [self.drawerContentView addSubview:self.engineSettingsController.view];
+  [self.drawer setContentSize:NSMakeSize(230, 400)];
+  [self.drawer setMinContentSize:NSMakeSize(230, 400)];
+  [self.drawer setMaxContentSize:NSMakeSize(230, 400)];
+    
+  // set up file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -47,10 +66,10 @@
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self.texEditorViewController.textView];
 	  
-//  [nc addObserver:self
-//         selector:@selector(handleTypesettingCompletedNotification:)
-//             name:TPTypesettingCompletedNotification
-//           object:self.engine];
+  [nc addObserver:self
+         selector:@selector(handleTypesettingCompletedNotification:)
+             name:TPEngineCompilingCompletedNotification
+           object:self.engineManager];
 
   if (![self fileURL]) {
     [self.statusView setFilename:@"Welcome to TeXnicle!"];
@@ -59,6 +78,20 @@
     [self.statusView setShowRevealButton:YES];
   }
   [self.statusView setEditorStatus:@"No Selection."];
+}
+
+- (void) setupSettings
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  self.settings = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                   [defaults valueForKey:TPDefaultEngineName], @"engineName", 
+                   [defaults valueForKey:BibTeXDuringTypeset], @"doBibtex", 
+                   [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
+                   [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
+                   [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
+                   nil];
+  
 }
 
 #pragma mark -
@@ -97,6 +130,8 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   self.fileLoadDate = nil;
   self.fileMonitor = nil;
+  self.engineManager = nil;
+  self.settings = nil;
 	[super dealloc];
 }
 
@@ -426,7 +461,7 @@
 
 - (IBAction) clean:(id)sender
 {
-//  [self.engine trashAuxFiles];  
+  [self.engineManager trashAuxFiles];
 }
 
 - (IBAction) buildAndView:(id)sender
@@ -451,30 +486,30 @@
   
 }
      
-
-
 - (void) build
 {
-//  [self.engine reset];
-//  [self.engine build];  
+  [self.engineManager compile];
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
-{  
-  if (openPDFAfterBuild) {
-    [self openPDF:self];
-  }  
+{
+  NSDictionary *userinfo = [aNote userInfo];
+  if ([[userinfo valueForKey:@"success"] boolValue]) {
+    if (openPDFAfterBuild) {
+      [self openPDF:self];
+    }
+  }
 }
+
 
 - (IBAction) openPDF:(id)sender
 {
-//  NSString *docFile = [self.engine compiledDocumentPath];
-//  
-//	// check if the pdf exists
-//	if (docFile) {
-//		//NSLog(@"Opening %@", pdfFile);
-//		[[NSWorkspace sharedWorkspace] openFile:docFile];
-//	}
+  NSString *docFile = [self compiledDocumentPath];
+	// check if the pdf exists
+	if (docFile) {
+		//NSLog(@"Opening %@", pdfFile);
+		[[NSWorkspace sharedWorkspace] openFile:docFile];
+	}
 	
 	// .. if not, ask the user if they want to typeset the project
 }
@@ -508,6 +543,93 @@
   } else {
     self.fileLoadDate = modified;
   }
+}
+
+
+#pragma mark -
+#pragma mark Engine Settings Delegate
+
+-(void)didSelectDoBibtex:(BOOL)state
+{
+  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doBibtex"];
+}
+
+-(void)didSelectDoPS2PDF:(BOOL)state
+{
+  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doPS2PDF"];
+}
+
+-(void)didSelectOpenConsole:(BOOL)state
+{
+  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"openConsole"];
+}
+
+-(void)didChangeNCompile:(NSInteger)number
+{
+  [self.settings setValue:[NSNumber numberWithInteger:number] forKey:@"nCompile"];
+}
+
+-(void)didSelectEngineName:(NSString*)aName
+{
+  [self.settings setValue:aName forKey:@"engineName"];
+}
+
+-(NSString*)engineName
+{
+  return [self.settings valueForKey:@"engineName"];
+}
+
+-(NSNumber*)doBibtex
+{
+  return [self.settings valueForKey:@"doBibtex"];
+}
+
+-(NSNumber*)doPS2PDF
+{
+  return [self.settings valueForKey:@"doPS2PDF"];
+}
+
+-(NSNumber*)openConsole
+{
+  return [self.settings valueForKey:@"openConsole"];
+}
+
+-(NSNumber*)nCompile
+{
+  return [self.settings valueForKey:@"nCompile"];  
+}
+
+-(NSArray*)registeredEngineNames
+{
+  return [self.engineManager registeredEngineNames];
+}
+
+#pragma mark -
+#pragma mark Engine Manager Delegate
+
+
+-(NSString*)documentToCompile
+{
+  return [[[self fileURL] path] stringByDeletingPathExtension];  
+}
+
+-(NSString*)workingDirectory
+{
+  return [[[self fileURL] path] stringByDeletingLastPathComponent];
+}
+
+- (NSString*)compiledDocumentPath
+{
+	// build path to the pdf file
+	NSString *mainFile = [self documentToCompile]; 
+  NSString *docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+  // check if the pdf exists
+	NSFileManager *fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:docFile]) {
+    return docFile;
+  }
+  
+  return nil;
 }
 
 @end

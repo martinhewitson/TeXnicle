@@ -9,11 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "TPFileMonitor.h"
 #import "TeXTextView.h"
+#import "TPEngineManager.h"
+#import "TPEngineSettingsController.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <TPFileMonitorDelegate, TeXTextViewDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
 	NSMutableAttributedString *documentData;
 
@@ -38,9 +40,18 @@
   
   NSDate *fileLoadDate;
   TPFileMonitor *fileMonitor;
+  
+  TPEngineManager *engineManager;
+  
+  NSView *drawerContentView;
+  NSMutableDictionary *settings;
 }
 
+@property (retain) NSMutableDictionary *settings;
 @property (assign) IBOutlet TPStatusView *statusView;
+@property (assign) IBOutlet NSView *drawerContentView;
+@property (assign) IBOutlet NSDrawer *drawer;
+@property (retain) TPEngineSettingsController *engineSettingsController;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
@@ -49,6 +60,9 @@
 
 @property (retain) TPFileMonitor *fileMonitor;
 
+@property (retain) TPEngineManager *engineManager;
+
+- (void) setupSettings;
 - (void) updateFileStatus;
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
@@ -77,6 +91,8 @@
 - (void) build;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
 - (IBAction) openPDF:(id)sender;
+
+- (NSString*)compiledDocumentPath;
 
 @end
 
