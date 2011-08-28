@@ -46,7 +46,7 @@
   [openConsoleButton setState:[[self openConsole] intValue]];
   
   [nCompileTextField setIntegerValue:[[self nCompile] intValue]];
-  
+  [nCompileStepper setIntegerValue:[[self nCompile] intValue]];
 }
 
 
@@ -153,7 +153,7 @@
     return [self.delegate engineName];
   }
   
-  return nil;
+  return @"";
 }
 
 -(NSNumber*)doBibtex
