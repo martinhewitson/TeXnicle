@@ -9,21 +9,29 @@ Beta 7\
 ------\
 \
 + New engine system\
-	- TeXnicle now supports engine files. These are scripts which do the typesetting. \
-		- TeXnicle passes these inputs to the script: \
-			1) The name of the file to compile\
-			2) The working directory of the project\
-			3) A number corresponding to the 'Number of runs' setting \
-			4) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
-			5) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
+  - TeXnicle now supports engine files. These are scripts which do the typesetting. \
+    - TeXnicle passes these inputs to the script: \
+      1) The name of the file to compile\
+      2) The working directory of the project\
+      3) A number corresponding to the 'Number of runs' setting \
+      4) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
+      5) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
 			\
-	- In the preferences, engines can be duplicated, edited, created new, deleted.\
+  - In the preferences, engines can be duplicated, edited, created new, deleted.\
+  - TeXnicle currently has 3 built-in (non-editable) engines: latex, pdflatex, and context\
 \
-+ Compile settings are now document based rather than global. There is a new 'settings' tab on the project window where\
-  you can set the engine to use, as well as some other details of the compiling process. \
++ Compile settings are now document based rather than global. There is a new 'settings' tab on \
+  the project window where you can set the engine to use, as well as some other details of the \
+  compiling process. \
 \
-+ Bug fix: creating new documents from "File->New Project" or "Project->New Project" now results in working documents\
++ Stand-alone tex files now have a pop-out drawer containing the compiler settings. When opened \
+  the document gets the default settings from the preferences. Changing these preferences is \
+  current not persistent across restarts (because I don't know where to save the settings yet).\
 \
++ Bug fix: creating new documents from "File->New Project" or "Project->New Project" now results \
+  in working documents\
+\
++ Bug fix: starred sections (like \\section*\{...\}) now appear in the section popup list\
 \
 \pard\tx320\pardeftab320\pardirnatural
 \cf0 Beta 6\
