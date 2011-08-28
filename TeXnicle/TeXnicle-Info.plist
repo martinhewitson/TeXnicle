@@ -50,6 +50,20 @@
 			<key>NSDocumentClass</key>
 			<string>ExternalTeXDoc</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>engine</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>engineDoc</string>
+			<key>CFBundleTypeName</key>
+			<string>TeXnicle Engine</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>TPEngineEditor</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -74,7 +88,7 @@
 	<key>CFBundleURLTypes</key>
 	<array/>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>7</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>

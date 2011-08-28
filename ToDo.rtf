@@ -13,10 +13,11 @@ Beta 7\
 		- TeXnicle passes these inputs to the script: \
 			1) The name of the file to compile\
 			2) The working directory of the project\
-			3) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
-			4) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
-			5) A number corresponding to the 'Number of runs' setting \
+			3) A number corresponding to the 'Number of runs' setting \
+			4) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
+			5) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
 			\
+	- In the preferences, engines can be duplicated, edited, created new, deleted.\
 \
 + Compile settings are now document based rather than global. There is a new 'settings' tab on the project window where\
   you can set the engine to use, as well as some other details of the compiling process. \
@@ -36,22 +37,11 @@ Beta 7\
 To Do\
 -----\
 \
++ Check 'also delete document file' is working. I think the doc file is always deleted at the moment.\
+\
++ Make new engine stuff work on stand-alone documents\
+\
 + What happens with bookmarks on stand-alone document?\
-\
-+ Move to engine script scheme\
-	- make engine scripts in ~/Library/Application Support/TeXnicle/engines\
-		- examples: latex.engine, pdflatex.engine, context.engine\
-		- default engines in texnicle bundle in resources, copy to support dir on first start\
-	- texnicle passes required inputs to the script. Script can do what it needs to\
-	- in preferences, we have an engine manager and show a list of available engines\
-		- allow editing of engines\
-		- allow adding new engines\
-		- project settings compiler needs to be more general and allow choosing from the list of engines\
-	- how to handle bibtex?\
-	- TPEngineManager: -registeredEngineNames:\
-\
-\
-\
 \
 + Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
 	- it's a mess!\
