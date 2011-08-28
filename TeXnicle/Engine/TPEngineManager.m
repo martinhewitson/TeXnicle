@@ -18,13 +18,26 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 @synthesize delegate;
 @synthesize engines;
 
++(NSArray*)builtinEngineNames
+{
+  static NSArray *builtInEngineNames;
+  
+  if (builtInEngineNames == nil) {
+    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", nil] retain];  
+  }
+  return builtInEngineNames;
+}
+
 + (void) installEngines
 {
   // path to resources
   NSMutableArray *engines = [NSMutableArray array];
-  [engines addObject:[[NSBundle mainBundle] pathForResource:@"latex" ofType:@"engine"]];
-  [engines addObject:[[NSBundle mainBundle] pathForResource:@"pdflatex" ofType:@"engine"]];
-  [engines addObject:[[NSBundle mainBundle] pathForResource:@"context" ofType:@"engine"]];
+  
+  
+  for (NSString *name in [self builtinEngineNames]) {
+    [engines addObject:[[NSBundle mainBundle] pathForResource:name ofType:@"engine"]];    
+  }
+  
   
   // application support directory 
 //  NSLog(@"Support folder: %@", [sf supportFolder]);
@@ -54,7 +67,13 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
     NSString *target = [enginesDir stringByAppendingPathComponent:[engine lastPathComponent]];
 //    NSLog(@"Installing %@ to %@", engine, target);
     
-    if (![fm fileExistsAtPath:target]) {
+    if ([fm fileExistsAtPath:target]) {
+      error = nil;
+      [fm removeItemAtPath:target error:&error];
+    }
+    if (error) {
+      [NSApp presentError:error];
+    } else {
       [fm moveItemAtPath:engine toPath:target error:&error];
       if (error) {
         [NSApp presentError:error];
@@ -65,7 +84,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
                              informativeTextWithFormat:@"Installation of engine %@ failed.", [[engine lastPathComponent] stringByDeletingPathExtension]];
         [alert runModal];
       }
-    } // end if file exists...
+    } // end if file exists error...
     
     // make executable
     NSDictionary *attributes;
@@ -136,9 +155,26 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
     if ([fm fileExistsAtPath:filepath] && [[filepath pathExtension] isEqualToString:@"engine"]) {      
       TPEngine *e = [TPEngine engineWithPath:filepath];
       [self.engines addObject:e];      
+      for (NSString *bin in [TPEngineManager builtinEngineNames]) {
+        if ([bin isEqualToString:e.name]) {
+          e.builtIn = YES;
+        }
+      }
     }    
   }
   
+}
+
+- (NSInteger)indexOfEngineNamed:(NSString*)name
+{
+  NSInteger index = 0;
+  for (TPEngine *e in self.engines) {
+    if ([e.name isEqualToString:[name lowercaseString]]) {
+      return index;
+    }
+    index++;
+  }
+  return NSNotFound;
 }
 
 - (TPEngine*)engineNamed:(NSString*)name

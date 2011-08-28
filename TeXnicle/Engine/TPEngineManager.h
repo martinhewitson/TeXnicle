@@ -21,7 +21,9 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 -(NSString*)workingDirectory;
 @end
 
-@interface TPEngineManager : NSObject <TPEngineDelegate>
+@interface TPEngineManager : NSObject <TPEngineDelegate> {
+@private
+}
 
 @property (assign) id<TPEngineManagerDelegate> delegate;
 @property (retain) NSMutableArray *engines;
@@ -30,10 +32,12 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 + (TPEngineManager*)engineManagerWithDelegate:(id<TPEngineManagerDelegate>)aDelegate;
 - (void)loadEngines;
 
++(NSArray*)builtinEngineNames;
 + (NSString*)engineDir;
 + (void) installEngines;
 
 - (TPEngine*)engineNamed:(NSString*)name;
+- (NSInteger)indexOfEngineNamed:(NSString*)name;
 - (NSArray*)registeredEngineNames;
 
 - (void) compile;
