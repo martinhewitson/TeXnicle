@@ -38,7 +38,7 @@ echo "*** Do bibtex $doBibtex"
 echo "****************************"
 
 # Go to the working directory
-cd $outputDir
+cd "$outputDir"
 
 #---------------------------
 # Put engine logic here
