@@ -201,7 +201,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
       isMarker = YES;
 		} else {
 			// we have a TeX section
-			regexp = [NSString stringWithFormat:@"%@\\{.*\\}", tag];
+			regexp = [NSString stringWithFormat:@"%@[\\*]?\\{.*\\}", tag];
 		}
 		
 		NSArray *results = [string componentsMatchedByRegex:regexp];
