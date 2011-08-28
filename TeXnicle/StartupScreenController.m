@@ -171,7 +171,6 @@
 	NSDictionary *dict = [recentFiles objectAtIndex:rowIndex];
   NSString *path = [[dict valueForKey:@"url"] path];
 	NSFileManager *fm = [NSFileManager defaultManager];
-  NSError *error = nil;
 	if ([fm fileExistsAtPath:path]) {
 		[aCell setTextColor:[NSColor blackColor]];
 	} else {
