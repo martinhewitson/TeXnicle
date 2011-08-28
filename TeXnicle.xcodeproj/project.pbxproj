@@ -198,6 +198,7 @@
 		257B47D7138EA0F700ED02C4 /* NSIndexPath_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47D4138EA0F700ED02C4 /* NSIndexPath_Extensions.m */; };
 		257B47DA138EA15400ED02C4 /* NSArray_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47D9138EA15400ED02C4 /* NSArray_Extensions.m */; };
 		257B47DD138EAB9E00ED02C4 /* ProjectItemTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */; };
+		257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */; };
 		2581830F139222D200ECCCB1 /* Templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2581830E139222D200ECCCB1 /* Templates.plist */; };
 		25846DC31408D36800A708E2 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25846DC21408D36800A708E2 /* Settings.m */; };
 		258594031408BD6500C970A1 /* prefsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258594011408BD6500C970A1 /* prefsTabBarImageDepressed.icns */; };
@@ -581,6 +582,7 @@
 		257B47D9138EA15400ED02C4 /* NSArray_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_Extensions.m; sourceTree = "<group>"; };
 		257B47DB138EAB9D00ED02C4 /* ProjectItemTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItemTreeController.h; sourceTree = "<group>"; };
 		257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectItemTreeController.m; sourceTree = "<group>"; };
+		257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContextCommands.plist; sourceTree = "<group>"; };
 		2581830E139222D200ECCCB1 /* Templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Templates.plist; sourceTree = "<group>"; };
 		25846DBD1408D14100A708E2 /* TeXProject 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 5.xcdatamodel"; sourceTree = "<group>"; };
 		25846DC11408D36800A708E2 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -1136,6 +1138,7 @@
 			isa = PBXGroup;
 			children = (
 				257B4742138E5E9000ED02C4 /* Commands.plist */,
+				257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */,
 				257B4731138E5E9000ED02C4 /* Categories */,
 				257B4743138E5E9000ED02C4 /* Completion Window */,
 				257B474D138E5E9000ED02C4 /* Folding */,
@@ -1556,6 +1559,7 @@
 				250C17441409296E00BCEA3D /* EngineEditorWindow.xib in Resources */,
 				25DA73A114092C37007ACA36 /* engineDoc.icns in Resources */,
 				254B503314095AED0023AABB /* template.engine in Resources */,
+				257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
