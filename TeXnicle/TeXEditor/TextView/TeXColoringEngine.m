@@ -11,7 +11,6 @@
 #import "TeXTextView.h"
 #import "NSArray+Color.h"
 
-#define kHighlightInterval 0.1
 
 @implementation TeXColoringEngine
 

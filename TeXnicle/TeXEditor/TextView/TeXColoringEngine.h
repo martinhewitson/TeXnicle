@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#define kHighlightInterval 0.1
 
 @interface TeXColoringEngine : NSObject <NSTextStorageDelegate, NSTextViewDelegate> {
-@private
+@protected
   NSTextView *textView;
 	// Character sets
 	NSCharacterSet *newLineCharacterSet;
