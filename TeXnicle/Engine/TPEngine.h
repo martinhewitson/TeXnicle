@@ -36,6 +36,7 @@
 @property (assign) BOOL doPS2PDF;
 @property (assign) BOOL openConsole;
 @property (assign) NSInteger nCompile;
+@property (assign, getter = isBuiltIn) BOOL builtIn;
 
 - (id)initWithPath:(NSString*)aPath;
 + (TPEngine*)engineWithPath:(NSString*)aPath;

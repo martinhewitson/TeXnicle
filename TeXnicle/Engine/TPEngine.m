@@ -24,11 +24,13 @@
 @synthesize nCompile;
 @synthesize openConsole;
 
+@synthesize builtIn;
+
 @synthesize delegate;
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"%p: %@, %@, %@", self, name, path, documentPath];
+  return [NSString stringWithFormat:@"%p: %@, %@, %@, [%d]", self, self.name, self.path, self.documentPath, self.builtIn];
 }
 
 + (TPEngine*)engineWithPath:(NSString*)aPath
@@ -47,6 +49,7 @@
     self.doPS2PDF = NO;
     self.nCompile = 1;
     self.openConsole = YES;
+    self.builtIn = NO;
     [self setupObservers];    
   }
   
