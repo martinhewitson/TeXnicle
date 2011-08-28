@@ -22,6 +22,10 @@
   NSPopUpButton *sectionListPopup;
   NSButton *unfoldButton;
   NSButton *markerButton;
+  
+  IBOutlet NSView *jumpBar;
+  IBOutlet NSScrollView *scrollView;
+  
   BOOL isHidden;
 }
 
@@ -39,5 +43,8 @@
 
 - (BOOL) textViewHasSelection;
 - (NSString*)selectedText;
+
+- (void) disableJumpBar;
+- (void) enableJumpBar;
 
 @end

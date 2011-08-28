@@ -80,6 +80,22 @@
   [self.unfoldButton setHidden:NO];
 }
 
+- (void) enableJumpBar
+{
+  [jumpBar setHidden:NO];
+  NSRect fr = [scrollView frame];
+  NSRect jr = [jumpBar bounds];
+  [scrollView setFrame:NSMakeRect(fr.origin.x, fr.origin.y, fr.size.width, fr.size.height-jr.size.height)];
+}
+
+- (void) disableJumpBar
+{  
+  [jumpBar setHidden:YES];
+  NSRect fr = [scrollView frame];
+  NSRect jr = [jumpBar bounds];
+  [scrollView setFrame:NSMakeRect(fr.origin.x, fr.origin.y, fr.size.width, fr.size.height+jr.size.height)];
+}
+
 - (void) hide
 {
   [containerView setHidden:YES];
