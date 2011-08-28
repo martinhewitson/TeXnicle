@@ -116,6 +116,7 @@
 		2528E8711395662600834921 /* StartupScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E8701395662600834921 /* StartupScreenController.m */; };
 		2528E8731395663700834921 /* StartupScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2528E8721395663700834921 /* StartupScreen.xib */; };
 		252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 252C71B913E33B1C002351D2 /* NSDictionary+TeXnicle.m */; };
+		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
 		253E5E3313951DD300566E23 /* LibraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2D13951DD300566E23 /* LibraryController.m */; };
 		253E5E3413951DD300566E23 /* LibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */; };
@@ -441,6 +442,8 @@
 		2528E8721395663700834921 /* StartupScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartupScreen.xib; sourceTree = "<group>"; };
 		252C71B813E33B1C002351D2 /* NSDictionary+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TeXnicle.h"; sourceTree = "<group>"; };
 		252C71B913E33B1C002351D2 /* NSDictionary+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+TeXnicle.m"; sourceTree = "<group>"; };
+		252CF58C140AA1D100290199 /* UKXattrMetadataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKXattrMetadataStore.h; sourceTree = "<group>"; };
+		252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKXattrMetadataStore.m; sourceTree = "<group>"; };
 		253E5E2B13951DD300566E23 /* Library.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Library.plist; sourceTree = "<group>"; };
 		253E5E2C13951DD300566E23 /* LibraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryController.h; sourceTree = "<group>"; };
 		253E5E2D13951DD300566E23 /* LibraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryController.m; sourceTree = "<group>"; };
@@ -995,6 +998,8 @@
 		2528E8631395400F00834921 /* Standalone Editor */ = {
 			isa = PBXGroup;
 			children = (
+				252CF58C140AA1D100290199 /* UKXattrMetadataStore.h */,
+				252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */,
 				2528E8641395402F00834921 /* ExternalTeXDoc.h */,
 				2528E8651395402F00834921 /* ExternalTeXDoc.m */,
 				2528E8661395402F00834921 /* ExternalTeXDoc.xib */,
@@ -1717,6 +1722,7 @@
 				250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */,
 				25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */,
 				2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */,
+				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

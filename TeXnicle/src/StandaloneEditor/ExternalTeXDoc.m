@@ -15,6 +15,7 @@
 #import "externs.h"
 #import "ConsoleController.h"
 #import "TPStatusView.h"
+#import "UKXattrMetadataStore.h"
 
 @implementation ExternalTeXDoc
 
@@ -82,16 +83,19 @@
 
 - (void) setupSettings
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if (self.settings == nil) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    self.settings = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                     [defaults valueForKey:TPDefaultEngineName], @"engineName", 
+                     [defaults valueForKey:BibTeXDuringTypeset], @"doBibtex", 
+                     [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
+                     [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
+                     [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
+                     nil];
+  }
   
-  self.settings = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                   [defaults valueForKey:TPDefaultEngineName], @"engineName", 
-                   [defaults valueForKey:BibTeXDuringTypeset], @"doBibtex", 
-                   [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
-                   [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
-                   [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
-                   nil];
-  
+  [self.engineSettingsController setupEngineSettings];
 }
 
 #pragma mark -
@@ -114,11 +118,11 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification 
-{	
-//	NSLog(@"Closing window %@", [[NSDocumentController sharedDocumentController] documents]);
-	
+{		
+  // stop filemonitor from reaching us
+  self.fileMonitor.delegate = nil;
+  
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
-//    NSLog(@"Showing startup...");
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
 			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
 		}
@@ -223,6 +227,12 @@
 										encoding:NSUTF8StringEncoding
 											 error:outError];
 	[string release];
+  
+  // now write project settings as xattr  
+  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.settings];
+  
+  [UKXattrMetadataStore setData:data forKey:@"settings" atPath:[absoluteURL path] traverseLink:NO];
+  
 	return res;
 }
 
@@ -238,9 +248,19 @@
 	if (str) {
     self.fileLoadDate = [NSDate date];
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+    
+    // read settings
+    NSData *data = [UKXattrMetadataStore dataForKey:@"settings" atPath:[absoluteURL path] traverseLink:NO];
+    if (data) {
+      NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+      if (dict) {
+        self.settings = [NSMutableDictionary dictionaryWithDictionary:dict];
+      }
+    }
+    
 		return YES;
 	}
-
+  
 	return NO;
 }
 
@@ -552,16 +572,19 @@
 -(void)didSelectDoBibtex:(BOOL)state
 {
   [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doBibtex"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectDoPS2PDF:(BOOL)state
 {
   [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doPS2PDF"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectOpenConsole:(BOOL)state
 {
   [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"openConsole"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didChangeNCompile:(NSInteger)number
