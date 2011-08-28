@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MHStrokedFiledView;
+
 @protocol TPEngineSettingsDelegate <NSObject>
 
 -(void)didSelectDoBibtex:(BOOL)state;
@@ -34,6 +36,10 @@
   IBOutlet NSButton *openConsoleButton;
   IBOutlet NSTextField *nCompileTextField;
   IBOutlet NSStepper *nCompileStepper;
+  
+  IBOutlet MHStrokedFiledView *pane1;
+  IBOutlet MHStrokedFiledView *pane2;
+  IBOutlet MHStrokedFiledView *pane3;
 }
 
 @property (assign) id<TPEngineSettingsDelegate> delegate;

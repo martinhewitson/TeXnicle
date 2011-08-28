@@ -7,6 +7,7 @@
 //
 
 #import "TPEngineSettingsController.h"
+#import "MHStrokedFiledView.h"
 
 @implementation TPEngineSettingsController
 
@@ -25,6 +26,14 @@
 - (void) awakeFromNib
 {
   [self setupEngineSettings];
+  
+  NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
+  NSColor *color2 = [NSColor colorWithDeviceRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
+  
+  pane1.fillColor = color1;
+  pane2.fillColor = color2;
+  pane3.fillColor = color1;
+  
 }
 
 - (void)setupEngineSettings
