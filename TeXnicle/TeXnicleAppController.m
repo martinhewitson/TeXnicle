@@ -246,10 +246,12 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
 	for (NSURL *url in recentURLs) {
-		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[[url path] lastPathComponent]
-																																	 forKey:@"path"];
-		[dict setObject:url forKey:@"url"];
-		[[controller recentFiles] addObject:dict];
+    if (![[url pathExtension] isEqualToString:@"engine"]) {
+      NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[[url path] lastPathComponent]
+                                                                     forKey:@"path"];
+      [dict setObject:url forKey:@"url"];
+      [[controller recentFiles] addObject:dict];
+    }
 	}
   
 	if ([[[NSDocumentController sharedDocumentController] documents] count]==0) {
