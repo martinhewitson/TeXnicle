@@ -152,7 +152,24 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   // go over the contents looking for .engine files
   for (NSString *path in contents) {   
     NSString *filepath = [engineDir stringByAppendingPathComponent:path];
-    if ([fm fileExistsAtPath:filepath] && [[filepath pathExtension] isEqualToString:@"engine"]) {      
+    if ([fm fileExistsAtPath:filepath] && [[filepath pathExtension] isEqualToString:@"engine"]) {     
+      
+      // ensure the engine is executable
+      NSNumber *permissions = [NSNumber numberWithUnsignedLong: 493];
+      NSDictionary *attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
+      // This actually sets the permissions
+      error = nil;
+      [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:filepath error:&error];
+      if (error) {
+        [NSApp presentError:error];
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
+                                         defaultButton:@"OK"
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Failed to make engine %@ executable. TeXnicle will be unable to compile documents with this engine.", [[filepath lastPathComponent] stringByDeletingPathExtension]];
+        [alert runModal];
+      }
+            
       TPEngine *e = [TPEngine engineWithPath:filepath];
       [self.engines addObject:e];      
       for (NSString *bin in [TPEngineManager builtinEngineNames]) {
@@ -215,6 +232,8 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 {
   NSString *engineName = [self.delegate engineName];
   TPEngine *e = [self engineNamed:engineName];
+  // ensure the engine has a document path
+  e.documentPath = [self.delegate documentToCompile];
   [e trashAuxFiles];  
 }
 
