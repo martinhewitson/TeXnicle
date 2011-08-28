@@ -11,6 +11,8 @@
 #import "SyntaxHighlightControlController.h"
 #import "TeXTextView.h"
 
+@class TPEnginesEditor;
+
 @interface PrefsWindowController : DBPrefsWindowController <NSTableViewDelegate, NSTableViewDataSource> {
 
 	IBOutlet NSView *generalPrefsView;
@@ -56,8 +58,11 @@
 	IBOutlet NSStepper *numSpacesStepper;
   IBOutlet NSTextField *spacesLabel;
 	
+  NSView *enginesEditorContainer;
 }
 
+@property (retain) TPEnginesEditor *enginesEditor;
+@property (assign) IBOutlet NSView *enginesEditorContainer;
 
 #pragma mark -
 #pragma mark Commands Control

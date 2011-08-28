@@ -11,12 +11,16 @@
 #import "NSArray+Color.h"
 #import "TeXTextView.h"
 #import "NSString+Comparisons.h"
+#import "TPEnginesEditor.h"
 
 @implementation PrefsWindowController
 
+@synthesize enginesEditor;
+@synthesize enginesEditorContainer;
 
 - (void) awakeFromNib
 {
+  
 	
 	// Comments controller
 	commentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Comments" name:@"Comments"];
@@ -40,6 +44,10 @@
 	
 	[self wrapStyleChanged:self];
   
+  // setup engines editor
+  self.enginesEditor = [[TPEnginesEditor alloc] init];
+  [[self.enginesEditor view] setFrame:[self.enginesEditorContainer bounds]];
+  [self.enginesEditorContainer addSubview:[self.enginesEditor view]];
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
@@ -53,7 +61,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
+  self.enginesEditor = nil;
 	[commentsController release];
 	[mathController release];
 	[commandsController release];
