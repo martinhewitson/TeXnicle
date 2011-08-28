@@ -149,9 +149,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   // build the command list
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"Commands" ofType:@"plist"];
 	NSDictionary *commmandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-	
+  path = [[NSBundle mainBundle] pathForResource:@"ContextCommands" ofType:@"plist"];
+	NSDictionary *contextCommandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
 	self.commandList = [[NSMutableArray alloc] init];								
 	[self.commandList addObjectsFromArray:[commmandDict valueForKey:@"Commands"]];
+	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];
 	
 	// add all commands from the palette
   //	NSArray *pcommands = [[PaletteController sharedPaletteController] listOfCommands];	
