@@ -49,6 +49,11 @@
   [[self.enginesEditor view] setFrame:[self.enginesEditorContainer bounds]];
   [self.enginesEditorContainer addSubview:[self.enginesEditor view]];
   
+  // default engine popup
+  [enginePopup removeAllItems];
+  [enginePopup addItemWithTitle:[self engineName]];
+  
+  
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
   [nc addObserver:self
@@ -123,7 +128,36 @@
 }
 
 #pragma mark -
+#pragma mark Engine stuff
+
+- (IBAction)selectEngineName:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+  [defaults setValue:[sender title] forKey:TPDefaultEngineName];
+  [defaults synchronize];
+}
+
+- (NSString*)engineName
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  return [defaults valueForKey:TPDefaultEngineName];  
+}
+
+- (void)menuNeedsUpdate:(NSMenu *)menu
+{
+  NSArray *engines = [self.enginesEditor.engineManager registeredEngineNames];
+  [menu removeAllItems];
+  for (NSString *name in engines) {    
+    NSMenuItem *item = [menu addItemWithTitle:name action:@selector(selectEngineName:) keyEquivalent:@""];
+    [item setTarget:self];
+  }
+  [enginePopup selectItemWithTitle:[self engineName]];
+}
+
+
+#pragma mark -
 #pragma mark Commands Control
+
 
 - (IBAction) newCommand:(id)sender
 {

@@ -59,10 +59,18 @@
   IBOutlet NSTextField *spacesLabel;
 	
   NSView *enginesEditorContainer;
+  
+  IBOutlet NSPopUpButton *enginePopup;
 }
 
 @property (retain) TPEnginesEditor *enginesEditor;
 @property (assign) IBOutlet NSView *enginesEditorContainer;
+
+#pragma mark -
+#pragma mark Engine stuff
+
+- (IBAction)selectEngineName:(id)sender;
+- (NSString*)engineName;
 
 #pragma mark -
 #pragma mark Commands Control
@@ -71,6 +79,7 @@
 
 #pragma mark -
 #pragma mark Control 
+
 
 - (void) templateSelectionChanged:(NSNotification*)aNote;
 - (IBAction) newTemplate:(id)sender;
