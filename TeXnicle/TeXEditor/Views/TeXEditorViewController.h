@@ -8,12 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TeXTextView.h"
-
+#import "TPSectionListController.h"
 
 @class TeXTextView;
 @class TPSectionListController;
 
-@interface TeXEditorViewController : NSViewController <TeXTextViewDelegate, NSTextStorageDelegate, NSTextViewDelegate> {
+@interface TeXEditorViewController : NSViewController <TPSectionListControllerDelegate, TeXTextViewDelegate, NSTextStorageDelegate, NSTextViewDelegate> {
 @private
   TeXTextView *textView;
   id delegate;

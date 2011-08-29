@@ -192,4 +192,15 @@
   return nil;
 }
 
+#pragma mark -
+#pragma mark Section List Delegate
+
+- (NSArray*)bookmarksForCurrentFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {
+    return [self.delegate bookmarksForCurrentFile];
+  }
+  return [NSArray array];
+}
+
 @end
