@@ -47,7 +47,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   NSString *enginesDir = [self engineDir];
   if (![fm fileExistsAtPath:enginesDir]) {
     NSError *error = nil;
-    [fm createDirectoryAtPath:enginesDir withIntermediateDirectories:NO attributes:nil error:&error];
+    [fm createDirectoryAtPath:enginesDir withIntermediateDirectories:YES attributes:nil error:&error];
     if (error) {
       [NSApp presentError:error];
       NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
@@ -179,7 +179,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
       }
     }    
   }
-  
+//  NSLog(@"Loaded engines");
 }
 
 - (NSInteger)indexOfEngineNamed:(NSString*)name
@@ -206,6 +206,8 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 
 - (NSArray*)registeredEngineNames
 {
+  [self loadEngines];
+  
   NSMutableArray *names = [NSMutableArray array];
   for (TPEngine *e in self.engines) {
     [names addObject:e.name];
