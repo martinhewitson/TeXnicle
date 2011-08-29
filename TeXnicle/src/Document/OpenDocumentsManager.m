@@ -136,6 +136,10 @@
 	[newDoc release];
 }
 
+- (NSArray*)standaloneWindows
+{
+  return standaloneWindows;
+}
 
 - (void) addDocument:(FileEntity*)aDoc
 {	

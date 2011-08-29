@@ -70,7 +70,7 @@
 - (void) saveCursorAndScrollPosition;
 - (void) commitStatus;
 
-
+- (NSArray*)standaloneWindows;
 
 @end
 
