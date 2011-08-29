@@ -15,9 +15,11 @@
 
 @protocol BookmarkManagerDelegate <NSObject>
 
+- (NSArray*)bookmarksForCurrentFile;
 - (NSArray*)bookmarksForProject;
 - (void) jumpToBookmark:(Bookmark*)aBookmark;
 - (void) didDeleteBookmark;
+- (void) didAddBookmark;
 
 @end
 
