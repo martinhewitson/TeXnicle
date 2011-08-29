@@ -82,9 +82,12 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = [self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  NSString *text = [[self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
   if ([text length]==0) {
     text = @"<blank>";
+  }
+  if ([text length]>50) {
+    text = [[text substringToIndex:50] stringByAppendingString:@"..."];
   }
   
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
@@ -102,5 +105,7 @@
   }
   return str;
 }
+
+
 
 @end
