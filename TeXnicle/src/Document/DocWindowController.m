@@ -13,12 +13,15 @@
 #import "TeXTextView.h"
 #import "TPSectionListController.h"
 #import "TPStatusView.h"
+#import "Bookmark.h"
+#import "MHLineNumber.h"
 
 @implementation DocWindowController
 
 @synthesize file;
 @synthesize texEditorContainer;
 @synthesize texEditorViewController;
+@synthesize mainDocument;
 
 - (id) initWithFile:(FileEntity*)aFile document:(id)document
 {
@@ -27,7 +30,7 @@
 		return nil;
 	}
 	
-	mainDocument = document;
+	self.mainDocument = document;
 	[self setFile:aFile];
 	
 //	NSLog(@"New view for %@", [file valueForKey:@"name"]);
@@ -71,6 +74,11 @@
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self.texEditorViewController.textView];
 	
+  [nc addObserver:self
+         selector:@selector(handleLineNumberClickedNotification:) 
+             name:TELineNumberClickedNotification
+           object:self.texEditorViewController.textView];
+  
 	[self updateEditedState];
   
   [statusView setFilename:[file pathOnDisk]];
@@ -164,6 +172,163 @@
 	
 	return NO;
 }
+
+- (NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange
+{
+  NSMutableArray *bookmarks = [NSMutableArray array];
+  if (self.file && [[self.file valueForKey:@"isText"] boolValue]) {    
+    NSArray *allBookmarks = [self.file.bookmarks allObjects];
+    for (Bookmark *b in allBookmarks) {
+      NSInteger bl = [b.linenumber integerValue];
+      if (bl >= aRange.location && bl < NSMaxRange(aRange)) {
+        [bookmarks addObject:b];
+      }
+    }
+  }
+  return bookmarks;
+}
+
+- (void) handleLineNumberClickedNotification:(NSNotification*)aNote
+{
+  MHLineNumber *linenumber = [[aNote userInfo] valueForKey:@"LineNumber"];
+  
+  // Check if there is already a bookmark for this file
+  if ([self hasBookmarkAtLine:linenumber.number]) {
+    [self removeBookmarkAtLine:linenumber.number];
+  } else {
+    [self addBookmarkAtLine:linenumber.number];
+  }
+}
+
+- (Bookmark*)bookmarkForCurrentLine
+{
+  NSInteger linenumber = [self.texEditorViewController.textView lineNumber];
+  return [self bookmarkForLine:linenumber];
+}
+
+- (Bookmark*)bookmarkForLine:(NSInteger)linenumber
+{
+  Bookmark *bookmark = [self.file bookmarkForLinenumber:linenumber];
+  return bookmark;
+}
+
+- (BOOL) hasBookmarkAtLine:(NSInteger)aLinenumber
+{
+  Bookmark *bookmark = [self bookmarkForLine:aLinenumber];
+  return bookmark != nil;
+}
+
+- (BOOL) hasBookmarkAtCurrentLine:(id)sender
+{
+  Bookmark *bookmark = [self bookmarkForCurrentLine];
+  return bookmark != nil;
+}
+
+
+- (IBAction)toggleBookmark:(id)sender
+{
+  Bookmark *b = [self bookmarkForCurrentLine];
+  if (b) {
+    [self removeBookmarkAtCurrentLine:self];
+  } else {
+    [self addBookmarkAtCurrentLine:self];
+  }  
+}
+
+- (IBAction)previousBookmark:(id)sender
+{
+  [self.mainDocument.bookmarkManager previousBookmark:self];
+}
+
+- (IBAction)nextBookmark:(id)sender
+{
+  [self.mainDocument.bookmarkManager nextBookmark:self];
+}
+
+- (IBAction)addBookmarkAtCurrentLine:(id)sender
+{
+  NSInteger linenumber = [self.texEditorViewController.textView lineNumber];
+  [self addBookmarkAtLine:linenumber];
+}
+
+- (void) addBookmarkAtLine:(NSInteger)aLinenumber
+{
+  Bookmark *b = [self bookmarkForLine:aLinenumber];
+  if (!b) {
+    Bookmark *bookmark = [Bookmark bookmarkWithLinenumber:aLinenumber inFile:self.file inManagedObjectContext:self.mainDocument.managedObjectContext];    
+    [self.texEditorViewController.textView setNeedsDisplay:YES];
+    [self.mainDocument.bookmarkManager reloadData];
+  }
+}
+
+- (IBAction)removeBookmarkAtCurrentLine:(id)sender
+{
+  NSInteger linenumber = [self.texEditorViewController.textView lineNumber];
+  [self removeBookmarkAtLine:linenumber];
+}
+
+- (void) removeBookmarkAtLine:(NSInteger)aLinenumber
+{
+  Bookmark *b = [self bookmarkForLine:aLinenumber];
+  if (b) {
+    [[self.file mutableSetValueForKey:@"bookmarks"] removeObject:b];
+    [self.texEditorViewController.textView setNeedsDisplay:YES];
+    [self.mainDocument.bookmarkManager reloadData];
+  }  
+}
+
+#pragma mark -
+#pragma mark Bookmark Manager delegate
+
+- (void) didDeleteBookmark
+{
+  [self.texEditorViewController.textView setNeedsDisplay:YES];
+}
+
+- (void) didAddBookmark
+{
+  [self.texEditorViewController.textView setNeedsDisplay:YES];
+}
+
+- (void) jumpToBookmark:(Bookmark *)aBookmark
+{
+  NSInteger linenumber = [aBookmark.linenumber integerValue];
+  FileEntity *jumpToFile = aBookmark.parentFile;
+  
+  if (jumpToFile == self.file) {
+    // expand all folded code
+    [self.texEditorViewController.textView expandAll:self];
+    
+    // Now highlight the search term in that 
+    [self.texEditorViewController.textView jumpToLine:linenumber inFile:file select:YES];
+  }
+  
+  //  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+  
+  // Make text view first responder
+//  [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+  
+  
+}
+
+- (NSArray*)bookmarksForCurrentFile
+{
+  return [self.file.bookmarks allObjects];
+}
+
+//- (NSArray*)bookmarksForProject
+//{
+//  NSMutableArray *bookmarks = [NSMutableArray array];
+//  for (ProjectItemEntity *item in [self.project valueForKey:@"items"]) {
+//    if ([item isKindOfClass:[FileEntity class]]) {
+//      FileEntity *file = (FileEntity*)item;
+//      if ([[file valueForKey:@"isText"] boolValue]) {
+//        [bookmarks addObjectsFromArray:[file.bookmarks allObjects]]; 
+//      }
+//    }
+//  }  
+//  return bookmarks;
+//}
 
 
 @end
