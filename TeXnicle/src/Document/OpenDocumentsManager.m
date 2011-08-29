@@ -75,6 +75,22 @@
 	}	
 }
 
+
+- (void)closeAllTabs
+{
+  NSArray *openFiles = [NSArray arrayWithArray:openDocuments];
+  for (FileEntity *file in openFiles) {
+    [self removeDocument:file];
+  }
+  [self performSelector:@selector(disableEditors) withObject:nil afterDelay:0];
+}
+
+- (void) disableEditors
+{
+  [self enableImageView:NO];
+  [self disableTextView];
+}
+
 - (void) closeCurrentTab
 {
 	FileEntity *selectedDoc = [[tabView selectedTabViewItem] identifier];
@@ -102,7 +118,6 @@
 		[openDocuments removeObject:aDoc];
 	}
 
-	[self performSelector:@selector(updateDoc) withObject:self afterDelay:0.0];
 	
 //	NSLog(@"Current doc: %@", [currentDoc valueForKey:@"name"]);
 	
@@ -111,6 +126,8 @@
 	id cd = [[tabView selectedTabViewItem] identifier];
 	[self setCurrentDoc:cd];
 	
+	[self performSelector:@selector(updateDoc) withObject:self afterDelay:0.0];
+  
 	// remove from the standalone windows if it's there
 	DocWindowController *docToRemove = nil;
 	for (DocWindowController *win in standaloneWindows) {

@@ -58,6 +58,8 @@
 - (void) selectTabForFile:(FileEntity*)aFile;
 
 - (void) standaloneWindowForFile:(FileEntity*)aFile;
+- (void)closeAllTabs;
+- (void) disableEditors;
 - (void) closeCurrentTab;
 - (NSInteger) indexOfDocumentWithFile:(FileEntity*)aFile;
 - (void) removeDocument:(FileEntity*)aDoc;
