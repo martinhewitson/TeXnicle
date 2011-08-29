@@ -1114,6 +1114,15 @@
 								</object>
 								<object class="NSMenuItem" id="948928140">
 									<reference key="NSMenu" ref="835318025"/>
+									<string key="NSTitle">Close All Tabs</string>
+									<string key="NSKeyEquiv">W</string>
+									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="435862570">
+									<reference key="NSMenu" ref="835318025"/>
 									<string key="NSTitle">Select Next Tab</string>
 									<string key="NSKeyEquiv">}</string>
 									<int key="NSKeyEquivModMask">1048576</int>
@@ -1839,14 +1848,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">selectNextTab:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="948928140"/>
-					</object>
-					<int key="connectionID">622</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">selectPreviousTab:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="163423301"/>
@@ -1972,6 +1973,22 @@
 						<reference key="destination" ref="849974424"/>
 					</object>
 					<int key="connectionID">663</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectNextTab:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="435862570"/>
+					</object>
+					<int key="connectionID">665</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">closeAllTabs:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="948928140"/>
+					</object>
+					<int key="connectionID">666</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2400,6 +2417,7 @@
 							<reference ref="235486840"/>
 							<reference ref="1023615897"/>
 							<reference ref="1014711385"/>
+							<reference ref="435862570"/>
 						</object>
 						<reference key="parent" ref="713487014"/>
 					</object>
@@ -2893,6 +2911,11 @@
 						<reference key="object" ref="1013800580"/>
 						<reference key="parent" ref="561089521"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">664</int>
+						<reference key="object" ref="435862570"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -3025,6 +3048,7 @@
 					<string>650.IBPluginDependency</string>
 					<string>655.IBPluginDependency</string>
 					<string>659.IBPluginDependency</string>
+					<string>664.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
@@ -3178,6 +3202,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -3192,7 +3217,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">663</int>
+			<int key="maxID">666</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3322,14 +3347,63 @@
 					<string key="className">DocWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">saveDocument:</string>
-						<string key="NS.object.0">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addBookmarkAtCurrentLine:</string>
+							<string>nextBookmark:</string>
+							<string>previousBookmark:</string>
+							<string>removeBookmarkAtCurrentLine:</string>
+							<string>saveDocument:</string>
+							<string>toggleBookmark:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">saveDocument:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">saveDocument:</string>
-							<string key="candidateClassName">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addBookmarkAtCurrentLine:</string>
+							<string>nextBookmark:</string>
+							<string>previousBookmark:</string>
+							<string>removeBookmarkAtCurrentLine:</string>
+							<string>saveDocument:</string>
+							<string>toggleBookmark:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">addBookmarkAtCurrentLine:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">nextBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">previousBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">removeBookmarkAtCurrentLine:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">saveDocument:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">toggleBookmark:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -3456,6 +3530,8 @@
 							<string>addToProjectSheet</string>
 							<string>copyToNewProjectCheckButton</string>
 							<string>copyToProjectCheckButton</string>
+							<string>drawer</string>
+							<string>drawerContentView</string>
 							<string>makeMainFileCheckButton</string>
 							<string>projectsController</string>
 							<string>statusView</string>
@@ -3468,6 +3544,8 @@
 							<string>NSWindow</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSDrawer</string>
+							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSArrayController</string>
 							<string>TPStatusView</string>
@@ -3483,6 +3561,8 @@
 							<string>addToProjectSheet</string>
 							<string>copyToNewProjectCheckButton</string>
 							<string>copyToProjectCheckButton</string>
+							<string>drawer</string>
+							<string>drawerContentView</string>
 							<string>makeMainFileCheckButton</string>
 							<string>projectsController</string>
 							<string>statusView</string>
@@ -3509,6 +3589,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">copyToProjectCheckButton</string>
 								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">drawer</string>
+								<string key="candidateClassName">NSDrawer</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">drawerContentView</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">makeMainFileCheckButton</string>
@@ -4312,6 +4400,7 @@
 							<string>buildAndView:</string>
 							<string>buildProject:</string>
 							<string>clean:</string>
+							<string>closeAllTabs:</string>
 							<string>closeCurrentTab:</string>
 							<string>delete:</string>
 							<string>endNewFileSheet:</string>
@@ -4384,6 +4473,7 @@
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
+							<string>id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
@@ -4399,6 +4489,7 @@
 							<string>buildAndView:</string>
 							<string>buildProject:</string>
 							<string>clean:</string>
+							<string>closeAllTabs:</string>
 							<string>closeCurrentTab:</string>
 							<string>delete:</string>
 							<string>endNewFileSheet:</string>
@@ -4466,6 +4557,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">clean:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">closeAllTabs:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -4598,7 +4693,7 @@
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
-							<string>findInSourceButton</string>
+							<string>engineSettingsContainer</string>
 							<string>finderContainverView</string>
 							<string>imageViewerContainer</string>
 							<string>leftView</string>
@@ -4631,7 +4726,7 @@
 							<string>NSTabView</string>
 							<string>NSTextView</string>
 							<string>NSTextField</string>
-							<string>HHValidatedButton</string>
+							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
@@ -4667,7 +4762,7 @@
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
-							<string>findInSourceButton</string>
+							<string>engineSettingsContainer</string>
 							<string>finderContainverView</string>
 							<string>imageViewerContainer</string>
 							<string>leftView</string>
@@ -4713,8 +4808,8 @@
 								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">findInSourceButton</string>
-								<string key="candidateClassName">HHValidatedButton</string>
+								<string key="name">engineSettingsContainer</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">finderContainverView</string>
