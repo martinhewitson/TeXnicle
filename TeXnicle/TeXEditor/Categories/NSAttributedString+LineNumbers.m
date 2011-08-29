@@ -13,6 +13,29 @@
 @implementation NSAttributedString (LineNumbers)
 
 
+- (NSInteger) indexForLineNumber:(NSInteger)aLinenumber
+{
+  NSAttributedString *attStr = self;
+  
+  NSUInteger stop = [self length];
+  NSString *text = [attStr string];
+  
+  // go forwards from the start until we reach the start of the visible range
+  NSUInteger idx;
+  NSUInteger lineNumber = 1;
+  NSRange lineRange;
+  for (idx = 0; idx < stop;) {
+    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
+    lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
+		idx = NSMaxRange(lineRange);
+    if (lineNumber == aLinenumber) {
+      return idx;
+    }
+	}
+  
+  return NSNotFound;
+}
+
 // Build an array of line number objects for the given text range.
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange
 {

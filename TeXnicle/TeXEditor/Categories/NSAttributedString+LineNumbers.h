@@ -12,5 +12,6 @@
 
 
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange;
+- (NSInteger) indexForLineNumber:(NSInteger)aLinenumber;
 
 @end
