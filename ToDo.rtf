@@ -25,15 +25,20 @@ Beta 7\
   compiling process. \
 \
 + Stand-alone tex files now have a pop-out drawer containing the compiler settings. When opened \
-  the document gets the default settings from the preferences. Changing these preferences is \
-  current not persistent across restarts (because I don't know where to save the settings yet).\
+  the document gets the default settings from the preferences. Changes to these preferences are \
+  persistent across restarts/reloads.\
 \
 + List of commands for completion now includes 520 context commands (thanks to Fabrice Larribe for the list!)\
+\
++ The section jump bar now includes bookmarks for that file.\
 \
 + Bug fix: creating new documents from "File->New Project" or "Project->New Project" now results \
   in working documents\
 \
 + Bug fix: starred sections (like \\section*\{...\}) now appear in the section popup list\
+\
++ Bug fix: bookmarks now work properly on open document windows\
+\
 \
 \pard\tx320\pardeftab320\pardirnatural
 \cf0 Beta 6\
@@ -47,9 +52,12 @@ Beta 7\
 To Do\
 -----\
 \
++ Stand-alone documents could have bookmarks and save them in the xattr.\
+  - also could save the selection point in the xattr\
+\
 + Check 'also delete document file' is working. I think the doc file is always deleted at the moment.\
 \
-+ What happens with bookmarks on stand-alone document?\
++ Split pane on the viewer\
 \
 + Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
 	- it's a mess!\
