@@ -10,12 +10,15 @@
 #import "NSString+LaTeX.h"
 #import "RegexKitLite.h"
 #import "NSString+Extension.h"
+#import "Bookmark.h"
+#import "NSAttributedString+LineNumbers.h"
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 @implementation TPSectionListController
 
 @synthesize timer;
+@synthesize delegate;
 
 - (id) init
 {
@@ -348,8 +351,24 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			[[popupMenu lastItem] setTag:[[result valueForKey:@"index"] intValue]];
 		}
     
+    // add bookmarks
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
+      NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+      NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
+      for (Bookmark *b in bookmarks) {
+        NSAttributedString *str = b.displayString;
+        [popupMenu addItemWithTitle:[str string]];
+        [[popupMenu lastItem] setAttributedTitle:str];
+        NSInteger linenumber = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
+        [[popupMenu lastItem] setTag:linenumber];
+      }
+    }
+    
+    
 //    NSLog(@"Menus %@", [popupMenu itemArray]);
     [popupMenu selectItemAtIndex:0];
+    
+    
     
 		    
 //		if (![popupMenu selectItemWithTag:selectedTag]) {

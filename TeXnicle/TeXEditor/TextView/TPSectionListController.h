@@ -8,6 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol TPSectionListControllerDelegate <NSObject>
+
+- (NSArray*)bookmarksForCurrentFile;
+
+@end
 
 @interface TPSectionListController : NSObject {
 
@@ -24,6 +29,7 @@
 }
 
 @property (nonatomic, retain) NSTimer *timer;
+@property (assign) IBOutlet id<TPSectionListControllerDelegate> delegate;
 
 - (void) deactivate;
 - (IBAction)calculateSections:(id)sender;
