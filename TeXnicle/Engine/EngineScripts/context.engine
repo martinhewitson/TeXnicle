@@ -3,6 +3,8 @@
 # This is a context engine for TeXnicle. 
 #
 # It runs context the desired number of times, optionally running bibtex after the first run.
+# This engine is assuming you have the stand-alone context package installed in ~/context. If
+# that's not the case, you need to modify the TEXROOT below.
 #
 #  pdflatex.engine
 #  TeXnicle
@@ -14,7 +16,7 @@ exit
 fi
 
 # Executable values
-TEXROOT=/Users/hewitson/context
+TEXROOT=~/context
 ENGINE=/usr/texbin/context
 BIBTEX=/usr/texbin/bibtex
 
