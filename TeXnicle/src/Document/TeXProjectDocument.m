@@ -2182,6 +2182,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Bookmarks
 
+- (NSArray*)bookmarksForCurrentFile
+{
+  FileEntity *file = [self.openDocuments currentDoc];
+  return [file.bookmarks allObjects];
+}
+
 - (IBAction)showBookmarks:(id)sender
 {
   [self.controlsTabview selectTabViewItemAtIndex:5];
@@ -2192,12 +2198,33 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) didDeleteBookmark
 {
   [self.texEditorViewController.textView setNeedsDisplay:YES];
+  
+  // forward this to all open document windows
+  for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
+    [doc didDeleteBookmark];
+  }
+  
+}
+
+- (void) didAddBookmark
+{
+  [self.texEditorViewController.textView setNeedsDisplay:YES];
+  
+  // forward this to all open document windows
+  for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
+    [doc didAddBookmark];
+  }  
 }
 
 - (void) jumpToBookmark:(Bookmark *)aBookmark
 {
   NSInteger linenumber = [aBookmark.linenumber integerValue];
   FileEntity *file = aBookmark.parentFile;
+  
+  // forward this to all open document windows
+//  for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
+//    [doc jumpToBookmark:aBookmark];
+//  }
   
 	// first select the file
 	[projectItemTreeController setSelectionIndexPath:nil];
@@ -2212,9 +2239,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.texEditorViewController.textView jumpToLine:linenumber inFile:file select:YES];
 //  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
   
+  
   // Make text view first responder
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
-  
   
 }
 
@@ -2292,6 +2319,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     Bookmark *bookmark = [Bookmark bookmarkWithLinenumber:aLinenumber inFile:file inManagedObjectContext:self.managedObjectContext];    
     [self.texEditorViewController.textView setNeedsDisplay:YES];
     [self.bookmarkManager reloadData];
+    [self didAddBookmark];
   }
 }
 
@@ -2309,6 +2337,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     [[file mutableSetValueForKey:@"bookmarks"] removeObject:b];
     [self.texEditorViewController.textView setNeedsDisplay:YES];
     [self.bookmarkManager reloadData];
+    [self didDeleteBookmark];
   }  
 }
 
