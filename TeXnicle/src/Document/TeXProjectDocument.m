@@ -257,8 +257,25 @@
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
   [self setupDocument];
-//  [self performSelector:@selector(validateURL) withObject:nil afterDelay:0];
+  [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
 }
+
+- (void) restoreOpenTabs
+{
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([[file valueForKey:@"wasOpen"] boolValue]) {        
+        [self.openDocuments addDocument:file];          
+      }
+      [file setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
+    }
+  }
+  
+  FileEntity *selected = [self.project valueForKey:@"selected"];
+  [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
+}
+
 
 - (void) validateURL
 {
@@ -302,19 +319,21 @@
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
-	
+  // stop file monitor
+	self.fileMonitor.delegate = nil;
+  
 	// make sure we store the current status of open docs
 	[self.openDocuments commitStatus];
+  [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
 	
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
 		[self.openDocuments.tabView removeTabViewItem:item];
 	}
 	
-  //	NSWindow *window = [[self window];
-  //	[window setDelegate:nil];
-  //	[self release];
-	
+	NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
+	[window setDelegate:nil];
+
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
 			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
@@ -1373,6 +1392,11 @@
 	return [super validateMenuItem:menuItem];
 }
 
+- (void) selectTabForFile:(FileEntity*)aFile
+{
+ [self.openDocuments selectTabForFile:aFile];
+}
+   
 - (IBAction)selectTab:(id)sender
 {
 	NSMenuItem *item = (NSMenuItem*)sender;
@@ -1482,6 +1506,11 @@
 	}
 	
 	return @"selected";
+}
+
+- (IBAction)closeAllTabs:(id)sender
+{
+  [openDocuments closeAllTabs];
 }
 
 - (IBAction) closeCurrentTab:(id)sender

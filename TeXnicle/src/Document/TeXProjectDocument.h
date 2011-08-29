@@ -130,6 +130,7 @@
 
 @property (readonly) BOOL pdfHasSelection;
 
+- (void) restoreOpenTabs;
 - (void) validateURL;
 + (TeXProjectDocument*) newTeXnicleProject;
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
@@ -201,6 +202,7 @@
 #pragma mark Files and Folders
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem;
+- (void) selectTabForFile:(FileEntity*)aFile;
 - (IBAction) selectTab:(id)sender;
 - (IBAction) selectNextTab:(id)sender;
 - (IBAction) selectPreviousTab:(id)sender;
@@ -216,6 +218,7 @@
 - (IBAction) setMainFile:(id)sender;
 - (IBAction) openProjectFolderInFinder:(id)sender;
 - (NSString*) nameOfSelectedProjectItem;
+- (IBAction)closeAllTabs:(id)sender;
 - (IBAction) closeCurrentTab:(id)sender;
 - (IBAction) newFolder:(id)sender;
 - (IBAction) newFile:(id)sender;
