@@ -27,6 +27,7 @@ extern NSString * const TELineNumberClickedNotification;
 -(NSArray*)listOfCommands;
 -(BOOL)shouldSyntaxHighlightDocument;
 -(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange;
+-(NSString*)fileExtension;
 
 @end
 
@@ -75,6 +76,9 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) applyFontAndColor;
 - (void) setWrapStyle;
 - (void) handleFrameChangeNotification:(NSNotification*)aNote;
+
+- (NSString*)fileExtension;
+- (NSString*)commentChar;
 
 #pragma mark -
 #pragma mark GoTo Box protocol methods 

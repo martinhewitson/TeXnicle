@@ -1344,6 +1344,22 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	return str;
 }
 
+- (NSString*)fileExtension
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(fileExtension)]) {
+    return [self.delegate performSelector:@selector(fileExtension)];
+  }
+  return @"";
+}
+
+- (NSString*)commentChar
+{
+  if ([[self fileExtension] isEqualToString:@"tex"]) {
+    return @"%";
+  } 
+  return @"#";
+}
+
 - (void)insertText:(id)aString
 {	
 //  NSLog(@"Insert %@", aString);
@@ -1388,7 +1404,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   paragraph = [paragraph stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   NSString *line = [[self string] substringWithRange:lineRange];
   line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-  if ([line isCommentLineBeforeIndex:selRange.location-pRange.location]) {
+  if ([line isCommentLineBeforeIndex:selRange.location-pRange.location commentChar:[self commentChar]]) {
     [self setTypingColor:self.coloringEngine.commentColor];
   } else if ([paragraph isInArgumentAtIndex:selRange.location-pRange.location]) {
     [self setTypingColor:self.coloringEngine.argumentsColor];
@@ -1441,7 +1457,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 			[super insertText:aString];
 			return;
 		}	
-	} else	if ([aString isEqual:@"\""]) {
+	} else	if ([aString isEqual:@"\""] && [[self fileExtension] isEqualToString:@"tex"]) {
 		// do smart replacements
 		NSRange r = [self selectedRange];
     if (r.location>0) {
