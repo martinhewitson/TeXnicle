@@ -16,6 +16,7 @@
 #import "ConsoleController.h"
 #import "TPStatusView.h"
 #import "UKXattrMetadataStore.h"
+#import "MHFileReader.h"
 
 @implementation ExternalTeXDoc
 
@@ -215,6 +216,35 @@
 	return @"ExternalTeXDoc";
 }
 
+- (IBAction)reopenUsingEncoding:(id)sender
+{
+  NSString *path = [[self fileURL] path];
+  
+  // clear the xattr
+  [UKXattrMetadataStore setString:@""
+                           forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                           atPath:path
+                     traverseLink:YES];
+  
+  MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
+  NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
+	
+	if (str) {
+    self.fileLoadDate = [NSDate date];
+		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+    
+    // read settings
+    NSData *data = [UKXattrMetadataStore dataForKey:@"settings" atPath:[[self fileURL] path] traverseLink:NO];
+    if (data) {
+      NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+      if (dict) {
+        self.settings = [NSMutableDictionary dictionaryWithDictionary:dict];
+      }
+    }
+    
+	}
+}
+
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSAttributedString *attStr = [self.texEditorViewController.textView attributedString];
@@ -222,10 +252,9 @@
 	[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
 	
 	NSString *str = [string string];
-	BOOL res = [str writeToURL:absoluteURL
-									atomically:YES
-										encoding:NSUTF8StringEncoding
-											 error:outError];
+  
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  BOOL res = [fr writeString:str toURL:absoluteURL];
 	[string release];
   
   // now write project settings as xattr  
@@ -238,13 +267,9 @@
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-	NSStringEncoding encoding;
-//	NSLog(@"Reading from URL %@", absoluteURL);
-	
-	NSString *str = [NSString stringWithContentsOfURL:absoluteURL
-																						 usedEncoding:&encoding
-																										error:outError];
-		
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *str = [fr readStringFromFileAtURL:absoluteURL];
+    
 	if (str) {
     self.fileLoadDate = [NSDate date];
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
@@ -437,6 +462,12 @@
 {
   return [NSArray array];
 }
+
+-(NSString*)fileExtension
+{
+  return [[self fileURL] pathExtension];
+}
+
 
 -(id)project
 {
