@@ -11,13 +11,13 @@
 
 if [ $# -lt 2 ]
 then
-echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex>)"
+  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf>)"
 exit
 fi
 
 # Executable values
-TEXROOT=~/context
-ENGINE=/usr/texbin/context
+PATH=$PATH:/usr/local/texlive/2010/bin/x86_64-darwin/
+ENGINE=texexec
 BIBTEX=/usr/texbin/bibtex
 
 # Process inputs.
@@ -36,11 +36,9 @@ echo "*** Ncompile $nCompile"
 echo "*** Do bibtex $doBibtex"
 echo "****************************"
 
+
 # Go to the working directory
 cd "$outputDir"
-
-# initialise context
-. $TEXROOT/tex/setuptex
 
 # Do the correct number of typesetting runs
 count=1
@@ -50,7 +48,7 @@ do
   echo "***------------------------------------------------------------"
   echo "*** Run $count..."
   echo "***------------------------------------------------------------"
-  $ENGINE -file-line-error -interaction=nonstopmode $mainfile
+  $ENGINE --pdf --passon=" --interaction=nonstopmode "  $mainfile
 
   # if this is after the first run, run bibtex if requested
   if [ $count -eq 1 ]
@@ -65,7 +63,7 @@ do
   count=$(( $count + 1 ))
 done
 
-export PATH=$OLD_PATH
+export PATH=$OLDPATH
 
 echo "*** context.engine has completed."
 
