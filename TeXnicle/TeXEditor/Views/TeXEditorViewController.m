@@ -134,6 +134,11 @@
 #pragma mark -
 #pragma TeXTextView delegate
 
+-(NSString*)fileExtension
+{
+  return [self.delegate performSelector:@selector(fileExtension)];
+}
+
 -(id)project
 {
   return [self.delegate performSelector:@selector(project)];
