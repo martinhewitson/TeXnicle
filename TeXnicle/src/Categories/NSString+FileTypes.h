@@ -12,5 +12,7 @@
 
 - (BOOL)isImage;
 - (BOOL)isText;
+- (BOOL)pathIsImage;
+- (BOOL)pathIsText;
 
 @end

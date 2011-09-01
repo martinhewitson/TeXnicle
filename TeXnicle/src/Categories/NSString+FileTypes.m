@@ -10,6 +10,16 @@
 
 @implementation NSString (FileTypes)
 
+- (BOOL) pathIsText
+{
+  return [[self pathExtension] isText];
+}
+
+- (BOOL)pathIsImage
+{
+  return [[self pathExtension] isImage];
+}
+
 - (BOOL)isImage
 {
   BOOL fileIsImage = NO;
@@ -49,15 +59,20 @@
 
 - (BOOL)isText
 {
+  // work-around for engine files.
+  if ([self isEqualToString:@"engine"]) {
+    return YES;
+  }
+
   BOOL fileIsText = NO;
-  
+    
   CFStringRef fileExtension = (CFStringRef) self;
   CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
   
   if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
     fileIsText = YES;
-  }
-    
+  }  
+
   CFRelease(fileUTI);
   
   return fileIsText;  
