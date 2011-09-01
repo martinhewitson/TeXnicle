@@ -7,8 +7,28 @@
 //
 
 #import "BashColoringEngine.h"
+#import "RegexKitLite.h"
+#import "NSString+Comparisons.h"
 
 @implementation BashColoringEngine
+
+@synthesize keywords;
+
+- (id) initWithTextView:(NSTextView*)aTextView
+{
+  self = [super initWithTextView:aTextView];
+  if (self) {
+    self.keywords = [NSArray arrayWithObjects:@"if", @"then", @"fi", @"done", @"do", @"while", @"echo", @"exit", @"export", nil];
+  }
+  
+  return self;
+}
+
+- (void) dealloc
+{
+  self.keywords = nil;
+  [super dealloc];
+}
 
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
@@ -42,23 +62,21 @@
   for (idx = 0; idx < strLen; idx++) {
     
     cc  = [text characterAtIndex:idx];
+    if ([whitespaceCharacterSet characterIsMember:cc]) {
+      continue;
+    }
+    if ([newLineCharacterSet characterIsMember:cc]) {
+      continue;
+    }
+    
     //    NSLog(@"Checking %c", cc);
     // color comments
     if (cc == '#' && self.colorComments) {
       // comment rest of the line
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
       colorRange = NSMakeRange(aRange.location+idx, NSMaxRange(lineRange)-idx);
-      unichar c = 0;
-			if (idx>0) {
-				c = [text characterAtIndex:idx-1];
-			}
-			if (idx==0 || c != '\\') {
-        
-        //          [newLineCharacterSet characterIsMember:c] ||
-        //          [whitespaceCharacterSet characterIsMember:c]) {
-        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commentColor forCharacterRange:colorRange];
-        idx = NSMaxRange(lineRange)-1;
-			}
+      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commentColor forCharacterRange:colorRange];
+      idx = NSMaxRange(lineRange)-1;
     } else if ((cc == '{') && self.colorArguments) {      
       start = idx;
       // look for the closing bracket
@@ -99,29 +117,31 @@
         }
         idx++;
       }
-//    } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
-//      
-//      colorRange = NSMakeRange(aRange.location+idx, 1);
-//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
-    } else if (cc == '$' && self.colorCommand) {      
-      // if we find \ we start a command unless we have \, or whitespace
-      if (idx < strLen-1) {
-        nextChar = [text characterAtIndex:idx+1];
-        if (nextChar == ',' || [whitespaceCharacterSet characterIsMember:nextChar]) {
-          // do nothing
-        } else {
-          // highlight word
-          NSRange wordRange = [textStorage doubleClickAtIndex:aRange.location+idx+1];
-          colorRange = NSMakeRange(wordRange.location-1, wordRange.length+1);
-          [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commandColor forCharacterRange:colorRange];
-          idx += colorRange.length-1;
-        }
-      }            
-      //    } else if ((cc == '[') && self.colorArguments) {      
     } else {
+      
+      // check for keywords
+      for (NSString *keyword in self.keywords) {
+        NSString *remaining = [text substringFromIndex:idx];
+        if ([remaining beginsWith:keyword]) {
+          NSRange colorRange = NSMakeRange(idx, [keyword length]);
+          NSInteger endIndex = idx+[keyword length];
+          if ([whitespaceCharacterSet characterIsMember:[text characterAtIndex:endIndex]]
+              || [newLineCharacterSet characterIsMember:[text characterAtIndex:endIndex]]) {
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName
+                                           value:self.commandColor
+                               forCharacterRange:colorRange];
+            idx+=[keyword length];
+            break;
+          }
+        }
+      }
+      
       // do nothing
     }    
   } 
+  
+  // color key words
+  
   self.lastHighlight = [NSDate date];
 }
 
