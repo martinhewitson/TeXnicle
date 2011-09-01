@@ -11,4 +11,6 @@
 
 @interface BashColoringEngine : TeXColoringEngine
 
+@property (retain) NSArray *keywords;
+
 @end

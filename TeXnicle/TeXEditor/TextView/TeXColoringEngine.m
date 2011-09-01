@@ -204,6 +204,12 @@
   for (idx = 0; idx < strLen; idx++) {
     
     cc  = [text characterAtIndex:idx];
+    if ([whitespaceCharacterSet characterIsMember:cc]) {
+      continue;
+    }
+    if ([newLineCharacterSet characterIsMember:cc]) {
+      continue;
+    }
 //    NSLog(@"Checking %c", cc);
     // color comments
     if (cc == '%' && self.colorComments) {
