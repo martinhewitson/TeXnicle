@@ -14,6 +14,7 @@
 #import "ConsoleController.h"
 #import "Bookmark.h"
 #import "NSString+FileTypes.h"
+#import "MHFileReader.h"
 
 @implementation FileEntity
 
@@ -59,16 +60,18 @@
 
 - (void) reloadFromDisk
 {
+  [self reloadFromDiskWithEncoding:@"Unicode (UTF-8)"];
+}
+
+- (void) reloadFromDiskWithEncoding:(NSString*)encoding
+{
 	// We should load the text from the file
 	NSString *filepath = [self pathOnDisk];
-	//	NSLog(@"Loading from %@", filepath);
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:filepath]) {
-		NSError *error = nil;
-		NSString *str = [NSString stringWithContentsOfFile:filepath
-																							encoding:NSUTF8StringEncoding
-																								 error:&error];
+    MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:encoding] autorelease];
+    NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
 		
 		//NSLog(@"Loaded string %@", str);
 		if (!str) {
@@ -378,21 +381,10 @@
 	NSString *filepath = [self valueForKey:@"pathOnDisk"];
 	NSData *data = [self valueForKey:@"content"];
 	if (data && [data length]>0) {
-		
-		NSString *content = [[NSString alloc] initWithData:data
-																							encoding:NSUTF8StringEncoding];
-		NSError *error = nil;
-		//					[content writeToFile:[file valueForKey:@"pathOnDisk"] atomically:YES encoding:NSUTF8StringEncoding error:&error];
-		[content writeToURL:[NSURL fileURLWithPath:filepath]
-						 atomically:YES
-							 encoding:NSUTF8StringEncoding
-									error:&error];
-		[content release];
-		if (error) {
-			[NSApp presentError:error];
-			return NO;
-		}
-		
+    
+    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    [fr writeDataToFileAsString:data toURL:[NSURL fileURLWithPath:filepath]];
+    
 		// update the save time for this file
 		[self setValue:[NSDate date] forKey:@"fileLoadDate"];
 		

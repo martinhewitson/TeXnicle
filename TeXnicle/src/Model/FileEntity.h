@@ -35,6 +35,7 @@
 - (void)prepareForDeletion;
 
 - (void) reloadFromDisk;
+- (void) reloadFromDiskWithEncoding:(NSString*)encoding;
 - (BOOL) saveContentsToDisk;
 - (BOOL) writeContents;
 
