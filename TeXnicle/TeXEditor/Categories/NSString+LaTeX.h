@@ -17,7 +17,7 @@
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
 - (NSString*)argument;
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;
-- (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex;
+- (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
 - (BOOL)isCommandBeforeIndex:(NSInteger)anIndex;
 
 @end

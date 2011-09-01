@@ -185,19 +185,22 @@
   return nil;
 }
 
-- (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex
+- (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar
 {
   if ([self length] == 0) {
     return NO;
   }
   
-  NSRange commRange = [self rangeOfString:@"%"];
+  NSRange commRange = [self rangeOfString:commChar];
   if (commRange.location != NSNotFound) {
     if (commRange.location < anIndex) {
       if (commRange.location > 0) {
         if ([self characterAtIndex:commRange.location-1] != '\\') {
           return YES;
         }
+      }
+      if (commRange.location == 0) {
+        return YES;
       }
     }
   }  
