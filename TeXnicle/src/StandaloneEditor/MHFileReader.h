@@ -25,5 +25,6 @@
 - (NSInteger)indexForEncoding:(NSStringEncoding)encoding;
 - (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL;
 - (BOOL)writeDataToFileAsString:(NSData*)data toURL:(NSURL*)aURL;
+- (NSStringEncoding)encodingForFileAtPath:(NSString*)aPath;
 
 @end

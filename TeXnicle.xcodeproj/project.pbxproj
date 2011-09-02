@@ -220,6 +220,8 @@
 		25AAC8EA1407C45C00B61B1A /* pdflatex.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25AAC8E91407C45C00B61B1A /* pdflatex.engine */; };
 		25AAC8EE1407E65400B61B1A /* context.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25AAC8ED1407E65400B61B1A /* context.engine */; };
 		25ACB35313EB15EF00289E4E /* textResult.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25ACB35213EB15EF00289E4E /* textResult.icns */; };
+		25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AD69E9140E974100C131A6 /* MHFileReader.m */; };
+		25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AD69EA140E974100C131A6 /* MHFileReader.xib */; };
 		25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25C0177913F195E8003E6FC6 /* bookmark.icns */; };
 		25C2AFD313F1064B0060227A /* BookmarkOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */; };
 		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
@@ -613,6 +615,9 @@
 		25AAC8E91407C45C00B61B1A /* pdflatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pdflatex.engine; sourceTree = "<group>"; };
 		25AAC8ED1407E65400B61B1A /* context.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = context.engine; sourceTree = "<group>"; };
 		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
+		25AD69E8140E974100C131A6 /* MHFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFileReader.h; sourceTree = "<group>"; };
+		25AD69E9140E974100C131A6 /* MHFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFileReader.m; sourceTree = "<group>"; };
+		25AD69EA140E974100C131A6 /* MHFileReader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHFileReader.xib; sourceTree = "<group>"; };
 		25C0177913F195E8003E6FC6 /* bookmark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmark.icns; sourceTree = "<group>"; };
 		25C2AFD113F1064B0060227A /* BookmarkOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkOutlineView.h; sourceTree = "<group>"; };
 		25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkOutlineView.m; sourceTree = "<group>"; };
@@ -1003,6 +1008,9 @@
 				2528E8641395402F00834921 /* ExternalTeXDoc.h */,
 				2528E8651395402F00834921 /* ExternalTeXDoc.m */,
 				2528E8661395402F00834921 /* ExternalTeXDoc.xib */,
+				25AD69E8140E974100C131A6 /* MHFileReader.h */,
+				25AD69E9140E974100C131A6 /* MHFileReader.m */,
+				25AD69EA140E974100C131A6 /* MHFileReader.xib */,
 			);
 			name = "Standalone Editor";
 			path = src/StandaloneEditor;
@@ -1565,6 +1573,7 @@
 				25DA73A114092C37007ACA36 /* engineDoc.icns in Resources */,
 				254B503314095AED0023AABB /* template.engine in Resources */,
 				257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */,
+				25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1723,6 +1732,7 @@
 				25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */,
 				2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */,
 				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
+				25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

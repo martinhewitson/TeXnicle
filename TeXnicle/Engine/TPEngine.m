@@ -95,8 +95,8 @@
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
 {
   self.documentPath = aDocumentPath;
-  NSLog(@"Compiling %@", self.documentPath);
-  NSLog(@"Working dir %@", workingDir);
+//  NSLog(@"Compiling %@", self.documentPath);
+//  NSLog(@"Working dir %@", workingDir);
   
 	ConsoleController *console = [ConsoleController sharedConsoleController];
 	if (self.openConsole) {
@@ -152,7 +152,7 @@
 	}		
 	
   [console message:[NSString stringWithFormat:@"Compiling with %@", self.path]];
-	NSLog(@"Compiling with %@", self.path);
+//	NSLog(@"Compiling with %@", self.path);
 	typesetTask = [[NSTask alloc] init];
 	
 	[typesetTask setLaunchPath:self.path];

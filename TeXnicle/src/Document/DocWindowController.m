@@ -138,6 +138,12 @@
   return [file valueForKey:@"project"];
 }
 
+-(NSString*)fileExtension
+{
+  return [[file pathOnDisk] pathExtension];
+}
+
+
 - (NSArray*) listOfTeXFilesPrependedWith:(NSString*)string
 {
 	return [mainDocument listOfTeXFilesPrependedWith:string];

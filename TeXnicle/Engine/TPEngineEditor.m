@@ -9,6 +9,8 @@
 #import "TPEngineEditor.h"
 #import "TeXEditorViewController.h"
 #import "BashColoringEngine.h"
+#import "MHFileReader.h"
+#import "UKXattrMetadataStore.h"
 
 @implementation TPEngineEditor
 
@@ -41,6 +43,8 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
   
+  [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
+  
 }
 
 
@@ -61,28 +65,49 @@
   return YES;
 }
 
+- (IBAction)reopenUsingEncoding:(id)sender
+{
+  NSString *path = [[self fileURL] path];
+  
+  // clear the xattr
+  [UKXattrMetadataStore setString:@""
+                           forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                           atPath:path
+                     traverseLink:YES];
+  
+  MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
+  NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
+	
+	if (str) {
+		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+	}
+}
+
+-(NSString*)fileExtension
+{
+  return [[self fileURL] pathExtension];
+}
+
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
 	NSAttributedString *attStr = [self.texEditorViewController.textView attributedString];
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:attStr];
 	
-	NSString *str = [string string];
-	BOOL res = [str writeToURL:absoluteURL
-									atomically:YES
-										encoding:NSUTF8StringEncoding
-											 error:outError];
+	NSString *str = [string string];  
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  BOOL res = [fr writeString:str toURL:absoluteURL];
+  
 	[string release];
 	return res;
 }
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-	NSStringEncoding encoding;
-//  NSLog(@"Reading from URL %@", absoluteURL);
+//	NSStringEncoding encoding;
+  
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	
-	NSString *str = [NSString stringWithContentsOfURL:absoluteURL
-                                       usedEncoding:&encoding
-                                              error:outError];
 	if (str) {
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
 		return YES;

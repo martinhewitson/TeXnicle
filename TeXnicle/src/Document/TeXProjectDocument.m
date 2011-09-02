@@ -25,6 +25,7 @@
 #import "TPEngineManager.h"
 #import "TPEngine.h"
 #import "Settings.h"
+#import "UKXattrMetadataStore.h"
 
 #define kSplitViewLeftMinSize 234
 
@@ -584,6 +585,20 @@
   }
 }
 
+- (IBAction)reopenUsingEncoding:(id)sender
+{
+  FileEntity *file = [self.openDocuments currentDoc];
+  
+  // clear the xattr
+  [UKXattrMetadataStore setString:@""
+                           forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                           atPath:[file pathOnDisk]
+                     traverseLink:YES];
+  
+  [file reloadFromDiskWithEncoding:[sender title]];
+  [self.openDocuments updateDoc];
+}
+
 - (NSManagedObject *)project
 {
 	if (project != nil) {
@@ -1061,6 +1076,11 @@
 #pragma mark -
 #pragma mark TeXEditorView delegate
 
+-(NSString*)fileExtension
+{
+  return [[[self.openDocuments currentDoc] pathOnDisk] pathExtension];
+}
+
 - (NSUndoManager*)currentUndoManager
 {
 	id file = [openDocuments currentDoc];
@@ -1388,6 +1408,16 @@
       return NO;
     }
   }
+  
+  // encoding menus
+  if (tag >= 11100 && tag <= 11180) {
+    if ([self.openDocuments currentDoc]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
 	
 	return [super validateMenuItem:menuItem];
 }

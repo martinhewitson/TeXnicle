@@ -12,6 +12,7 @@
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "NSDictionary+TeXnicle.h"
 #import "NSArray+Color.h"
+#import "MHFileReader.h"
 
 @implementation FileDocument
 
@@ -30,8 +31,10 @@
 		
 		// Get the string from the File entity
 		NSError *error = nil;
+    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
 		NSString *str = [[NSString alloc] initWithData:[file valueForKey:@"content"]
-																					encoding:NSUTF8StringEncoding];
+																					encoding:encoding];
 		if (error) {
 			[NSApp presentError:error];
 			return nil;
@@ -118,7 +121,9 @@
 		[string release];
 		
 		//	NSString *str = [textStorage string];
-		NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
+		NSData *data = [str dataUsingEncoding:encoding];
 		
 		if (![[file valueForKey:@"content"] isEqual:data]) {
 			[file setValue:data forKey:@"content"];

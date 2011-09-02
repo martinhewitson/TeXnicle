@@ -130,6 +130,7 @@
 
 @property (readonly) BOOL pdfHasSelection;
 
+- (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;
 - (void) validateURL;
 + (TeXProjectDocument*) newTeXnicleProject;

@@ -237,4 +237,19 @@
   return str;
 }
 
+- (NSStringEncoding)encodingForFileAtPath:(NSString*)aPath
+{
+  
+  NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
+                                                         atPath:aPath
+                                                   traverseLink:YES];
+  NSStringEncoding encoding;
+  if (encodingString == nil || [encodingString length] == 0) {
+    encoding = [self defaultEncoding];
+  } else {
+    encoding = [self encodingWithName:encodingString];
+  }
+  return encoding;
+}
+
 @end

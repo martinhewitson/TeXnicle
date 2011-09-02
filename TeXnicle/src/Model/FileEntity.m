@@ -260,8 +260,10 @@
 {
 	if ([self document]) {
 		if ([[self document] textStorage]) {
+      MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+      NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
 			NSString *contentStr = [[[NSString alloc] initWithData:[self valueForKey:@"content"]
-																										encoding:NSUTF8StringEncoding] autorelease];
+																										encoding:encoding] autorelease];
 			
 			NSTextStorage *ts = [[self document] textStorage];
 			NSString *textStr = [ts string];
@@ -295,7 +297,9 @@
 	}
 	
 	NSData *data = [self valueForKey:@"content"];
-	NSString *str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
+	NSString *str = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
 	return str;
 }
 
@@ -395,40 +399,7 @@
 
 - (BOOL) isImage
 {
-  
   return [[[self pathOnDisk] pathExtension] isImage];
-//  CFStringRef fileExtension = (CFStringRef) [[self pathOnDisk] pathExtension];
-//  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-//  
-//  NSLog(@"Checking is image: %@", fileUTI);
-//  
-//  if (UTTypeConformsTo(fileUTI, kUTTypeImage) 
-//      || UTTypeConformsTo(fileUTI, kUTTypePDF)
-//      || UTTypeConformsTo(fileUTI, kUTTypeBMP)
-//      || UTTypeConformsTo(fileUTI, kUTTypeGIF)
-//      || UTTypeConformsTo(fileUTI, kUTTypeJPEG)
-//      || UTTypeConformsTo(fileUTI, kUTTypeJPEG2000)
-//      || UTTypeConformsTo(fileUTI, kUTTypePNG)
-//      || UTTypeConformsTo(fileUTI, kUTTypeTIFF)
-//      || UTTypeConformsTo(fileUTI, (CFStringRef)@"com.adobe.postscript")
-//      || UTTypeConformsTo(fileUTI, (CFStringRef)@"com.adobe.encapsulated-postscript")
-//      ) {
-//    return YES;
-//  }
-//  
-//  CFArrayRef  supportedTypes = CGImageSourceCopyTypeIdentifiers();
-//  CFIndex		i, typeCount = CFArrayGetCount(supportedTypes);
-//  
-//  for (i = 0; i < typeCount; i++) {
-//    if (UTTypeConformsTo(fileUTI, (CFStringRef)CFArrayGetValueAtIndex(supportedTypes, i))) {
-//      return YES;
-//    }
-//  }
-//  
-//  NSLog(@"...NO");
-//  
-//  
-//  return NO;
 }
 
 - (Bookmark*)bookmarkForLinenumber:(NSInteger)aLinenumber

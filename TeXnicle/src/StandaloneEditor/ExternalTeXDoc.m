@@ -228,13 +228,13 @@
   
   MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
-	
 	if (str) {
     self.fileLoadDate = [NSDate date];
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
     
     // read settings
-    NSData *data = [UKXattrMetadataStore dataForKey:@"settings" atPath:[[self fileURL] path] traverseLink:NO];
+    NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[[self fileURL] path] traverseLink:NO];
     if (data) {
       NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
       if (dict) {
@@ -260,7 +260,7 @@
   // now write project settings as xattr  
   NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.settings];
   
-  [UKXattrMetadataStore setData:data forKey:@"settings" atPath:[absoluteURL path] traverseLink:NO];
+  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
   
 	return res;
 }
@@ -275,7 +275,7 @@
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
     
     // read settings
-    NSData *data = [UKXattrMetadataStore dataForKey:@"settings" atPath:[absoluteURL path] traverseLink:NO];
+    NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
     if (data) {
       NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
       if (dict) {

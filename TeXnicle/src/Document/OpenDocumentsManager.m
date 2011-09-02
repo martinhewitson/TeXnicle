@@ -284,7 +284,13 @@
 
 - (void) selectTabForFile:(FileEntity*)aFile
 {
+  if (aFile == nil) {
+    return;
+  }
 	NSInteger index = [self indexOfDocumentWithFile:aFile];
+  if (index < 0) {
+    return;
+  }
 	NSTabViewItem *item = [tabView tabViewItemAtIndex:index];
 	[tabView selectTabViewItem:item];
 }
