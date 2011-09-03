@@ -43,8 +43,8 @@ Beta 7\
 \
 + Bug fix: bookmarks now work properly on open document windows\
 \
-+ Bug fix: dragging files on to the text view now results in correct \\input\{\} statements for files both under and above the project tree.\
-\
++ Bug fix: dragging files on to the text view now results in correct \\input\{\} statements for \
+  files both under and above the project tree.\
 \pard\tx320\pardeftab320\pardirnatural
 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -52,15 +52,17 @@ Beta 7\
 To Do\
 -----\
 \
++ When a file is selected in the project tree, the 'New Folder' button should not be active\
+\
++ Icons/buttons for 'New Folder' and 'New TeX File' don't look so nice.\
+\
++ Compiling progress indicator on the status bar\
+\
++ Work through all warnings\
 \
 + Selecting a word highlight all instances of that word in view\
 	- get selection in the syntax colourer and do a background attribute\
 	- make preference for this\
-\
-+ Editor for bash. We need some delegate methods from the text view to ask for\
-	- comment character\
-	- should replace " with '' \
-		- can we just do this based on the file extension?\
 \
 + Stand-alone documents could have bookmarks and save them in the xattr.\
   - also could save the selection point in the xattr\
@@ -83,10 +85,6 @@ To Do\
 + Check for files which change on disk	\
   ** check changes by CVS work\
   ** Check the new FileMonitor for deleting/moving files\
-\
-+ Menu item "Close all Tabs"\
-\
-+ Remember open files\
 \
 + Finish help\
 \

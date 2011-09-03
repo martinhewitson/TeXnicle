@@ -25,6 +25,7 @@
 #import "NSDictionary+TeXnicle.h"
 #import "NSString+LaTeX.h"
 #import "NSAttributedString+LineNumbers.h"
+#import "KSPathUtilities.h"
 
 #import "MHLineNumber.h"
 
@@ -1970,23 +1971,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         return YES;
       }
       
-//      CFStringRef fileExtension = (CFStringRef) [file pathExtension];
-//      CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-      
-//      if (UTTypeConformsTo(fileUTI, kUTTypeImage) || UTTypeConformsTo(fileUTI, kUTTypePDF)) {
-//        [self insertImageBlockForFile:file atLocation:characterIndex];        
-//        CFRelease(fileUTI);
-//        return YES;
-//      }
-      
-//      if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
-//        [self insertIncludeForFile:file atLocation:characterIndex];        
-//        CFRelease(fileUTI);
-//        return YES;
-//      }
-//      
-//      CFRelease(fileUTI);
-      
     }
 	}
 	
@@ -2024,8 +2008,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 {
   id project = [[self delegate] performSelector:@selector(project)];
   NSString *projectFolder = [project valueForKey:@"folder"];
-  NSString *file = [[aFile relativePathTo:projectFolder] stringByAppendingPathComponent:[aFile lastPathComponent]];
+//  NSLog(@"Relative path: %@", [aFile relativePathTo:projectFolder]);
 
+  NSString *file = [aFile ks_pathRelativeToDirectory:projectFolder];
+  
   NSString *str = [NSString stringWithFormat:@"\\input{%@}", file];
   NSRange sel = NSMakeRange(location-1, 0);
   [self setSelectedRange:sel];

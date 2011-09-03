@@ -223,6 +223,7 @@
 		25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AD69E9140E974100C131A6 /* MHFileReader.m */; };
 		25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AD69EA140E974100C131A6 /* MHFileReader.xib */; };
 		25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25C0177913F195E8003E6FC6 /* bookmark.icns */; };
+		25C1B5E21410B09E001B02B0 /* KSPathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C1B5E11410B09E001B02B0 /* KSPathUtilities.m */; };
 		25C2AFD313F1064B0060227A /* BookmarkOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */; };
 		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
 		25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD0E9013995226004EB857 /* ConsoleWindow.m */; };
@@ -619,6 +620,8 @@
 		25AD69E9140E974100C131A6 /* MHFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFileReader.m; sourceTree = "<group>"; };
 		25AD69EA140E974100C131A6 /* MHFileReader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHFileReader.xib; sourceTree = "<group>"; };
 		25C0177913F195E8003E6FC6 /* bookmark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmark.icns; sourceTree = "<group>"; };
+		25C1B5E01410B09E001B02B0 /* KSPathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSPathUtilities.h; sourceTree = "<group>"; };
+		25C1B5E11410B09E001B02B0 /* KSPathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSPathUtilities.m; sourceTree = "<group>"; };
 		25C2AFD113F1064B0060227A /* BookmarkOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkOutlineView.h; sourceTree = "<group>"; };
 		25C2AFD213F1064B0060227A /* BookmarkOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkOutlineView.m; sourceTree = "<group>"; };
 		25CC10B413E5DD9200A15850 /* TPImageViewerBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerBackgroundView.h; sourceTree = "<group>"; };
@@ -1283,6 +1286,8 @@
 		257B47A4138E5EB500ED02C4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				25C1B5E01410B09E001B02B0 /* KSPathUtilities.h */,
+				25C1B5E11410B09E001B02B0 /* KSPathUtilities.m */,
 				2523C7E71405511500A47297 /* MABSupportFolder.h */,
 				2523C7E81405511500A47297 /* MABSupportFolder.m */,
 				2528E85E139520B300834921 /* NSNotificationAdditions.h */,
@@ -1733,6 +1738,7 @@
 				2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */,
 				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
 				25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */,
+				25C1B5E21410B09E001B02B0 /* KSPathUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

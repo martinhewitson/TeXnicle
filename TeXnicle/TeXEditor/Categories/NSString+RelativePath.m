@@ -16,7 +16,7 @@
 // Example: [ @"/a/b/c/d" relativePathTo: @"/a/e/f/g/h"] => @"../../e/f/g/h". 
 - (NSString*) relativePathTo: (NSString*) endPath 
 { 
-	//NSLog(@"Computing %@ relative to %@", endPath, self);
+//	NSLog(@"Computing %@ relative to %@", endPath, self);
 	NSAssert( ! [self isEqual: endPath], @"illegal link to self"); 
 	NSArray* startComponents = [self pathComponents]; 
 	NSArray* endComponents = [endPath pathComponents]; 
