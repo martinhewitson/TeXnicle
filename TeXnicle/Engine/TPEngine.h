@@ -22,7 +22,7 @@
 	NSFileHandle *typesetFileHandle;
 	int compilationsDone;
 	BOOL abortCompile;
-
+  BOOL compiling;
 }
 
 @property (assign) id<TPEngineDelegate> delegate;
@@ -37,6 +37,7 @@
 @property (assign) BOOL openConsole;
 @property (assign) NSInteger nCompile;
 @property (assign, getter = isBuiltIn) BOOL builtIn;
+@property (assign, getter = isCompiling) BOOL compiling;
 
 - (id)initWithPath:(NSString*)aPath;
 + (TPEngine*)engineWithPath:(NSString*)aPath;

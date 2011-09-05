@@ -224,8 +224,14 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	
 }
 
+- (void)applicationWillFinishLaunching:(NSNotification *)aNotification
+{
+//  NSLog(@"Application will finish launching");
+}
+
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
+//  NSLog(@"Application open file %@", filename);
 	NSError *error = nil;
 	if ([[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename]
 																																						 display:YES
@@ -240,9 +246,12 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	return NO;
 }
 
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+//  NSLog(@"App finished launching...");
+  [self checkVersion];
+  [TPEngineManager installEngines];
+  
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
 	for (NSURL *url in recentURLs) {
@@ -258,8 +267,6 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 		[self showStartupScreen:self];
 	}
   
-  [self checkVersion];
-  [TPEngineManager installEngines];
 }
 
 - (void) checkVersion

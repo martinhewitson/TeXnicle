@@ -32,8 +32,10 @@
 @synthesize drawer;
 @synthesize settings;
 
+
 - (void)awakeFromNib
 {
+//  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
@@ -47,8 +49,6 @@
   // set up engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
   
-  // set up engine settings
-  [self setupSettings];
   
   // set up engine settings
   self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
@@ -58,6 +58,9 @@
   [self.drawer setMinContentSize:NSMakeSize(230, 400)];
   [self.drawer setMaxContentSize:NSMakeSize(230, 400)];
     
+  // set up engine settings
+  [self setupSettings];
+  
   // set up file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
@@ -139,6 +142,35 @@
   self.settings = nil;
 	[super dealloc];
 }
+
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
+{    
+  // build
+  if ([theItem tag] == 30) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // build and view
+  if ([theItem tag] == 40) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // trash
+  if ([theItem tag] == 50) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  return YES;
+}
+
+
 
 - (BOOL) acceptsFirstResponder
 {

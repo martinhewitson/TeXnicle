@@ -31,6 +31,10 @@
 
 @implementation TeXProjectDocument
 
+@synthesize compileProgressIndicator;
+@synthesize newFileButton;
+@synthesize newFolderButton;
+
 @synthesize splitview;
 
 @synthesize library;
@@ -48,7 +52,6 @@
 @synthesize texEditorViewController;
 @synthesize texEditorContainer;
 @synthesize statusView;
-@synthesize projectTypeSelector;
 
 @synthesize fileMonitor;
 @synthesize imageViewerController;
@@ -228,7 +231,6 @@
   
   [self.statusView setFilename:@""];
   [self.statusView setEditorStatus:@"No Selection."];
-  [self.projectTypeSelector selectItemWithTitle:[self.project valueForKey:@"type"]];
   
 	// spell checker language
 	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
@@ -556,9 +558,49 @@
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
+  // build
+  if ([theItem tag] == 30) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // build and view
+  if ([theItem tag] == 40) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // trash
+  if ([theItem tag] == 50) {
+    if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == self.newFolderButton) {
+    return [self.projectItemTreeController canAdd];
+  }
+  
+  if (anItem == self.newFileButton) {
+    if ([self.projectItemTreeController canAdd]) {
+      NSArray *selected = [self.projectItemTreeController selectedObjects];
+      if ([selected count] == 1) {
+        if ([[selected objectAtIndex:0] isKindOfClass:[FolderEntity class]]) {
+          return YES;
+        }
+      }
+    }
+  }
+  
+  return NO;
+}
 
 - (void) updateStatusView
 {
@@ -1256,12 +1298,15 @@
 
 - (void) build
 {
+  [self.compileProgressIndicator startAnimation:self];
   // setup the engine
   [self.engineManager compile];
+  
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
+  [self.compileProgressIndicator stopAnimation:self];
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];  

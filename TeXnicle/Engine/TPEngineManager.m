@@ -30,12 +30,17 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 
 + (void) installEngines
 {
+//  NSLog(@"Installing engines...");
   // path to resources
   NSMutableArray *engines = [NSMutableArray array];
   
   
-  for (NSString *name in [self builtinEngineNames]) {
-    [engines addObject:[[NSBundle mainBundle] pathForResource:name ofType:@"engine"]];    
+  for (NSString *name in [TPEngineManager builtinEngineNames]) {
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"engine"];
+//    NSLog(@"Adding path %@", path);
+    if (path) {
+      [engines addObject:path];    
+    }
   }
   
   
@@ -44,7 +49,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   
   // create engines folder
   NSFileManager *fm = [NSFileManager defaultManager];
-  NSString *enginesDir = [self engineDir];
+  NSString *enginesDir = [TPEngineManager engineDir];
   if (![fm fileExistsAtPath:enginesDir]) {
     NSError *error = nil;
     [fm createDirectoryAtPath:enginesDir withIntermediateDirectories:YES attributes:nil error:&error];
@@ -110,6 +115,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 + (NSString*)engineDir
 {
   MABSupportFolder *sf = [MABSupportFolder sharedController];
+//  NSLog(@"Support folder %@", [sf supportFolder]);
   return [[sf supportFolder] stringByAppendingPathComponent:@"engines"];
 }
 
@@ -124,7 +130,8 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   self = [super init];
   if (self) {
     self.delegate = aDelegate;
-    [self loadEngines];
+//    [TPEngineManager installEngines];
+//    [self loadEngines];
   }
   return self;  
 }
@@ -139,9 +146,16 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 {
   self.engines = [NSMutableArray array];
   NSString *engineDir = [TPEngineManager engineDir];
-  
+
   // get contents of dir
   NSFileManager *fm = [NSFileManager defaultManager];
+  
+  BOOL isDir;
+  BOOL dirExists = [fm fileExistsAtPath:engineDir isDirectory:&isDir];
+  if (!isDir || !dirExists) {
+    [TPEngineManager installEngines];
+  }
+  
   NSError *error = nil;
   NSArray *contents = [fm contentsOfDirectoryAtPath:engineDir error:&error];
   if (error) {
@@ -215,8 +229,18 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   return names;
 }
 
+- (BOOL) isCompiling
+{
+  NSString *engineName = [self.delegate engineName];
+  TPEngine *e = [self engineNamed:engineName];
+  return e.isCompiling;
+}
+
 - (void) compile
 {
+  // ensure the engines have been installed and loaded
+  [self loadEngines];
+  
   NSString *engineName = [self.delegate engineName];
   TPEngine *e = [self engineNamed:engineName];
   e.delegate = self;

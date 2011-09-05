@@ -15,7 +15,7 @@
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
 	NSMutableAttributedString *documentData;
 

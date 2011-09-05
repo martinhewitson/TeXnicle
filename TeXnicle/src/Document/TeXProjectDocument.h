@@ -29,7 +29,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -74,7 +74,6 @@
   OpenDocumentsManager *openDocuments;
   ProjectItemTreeController *projectItemTreeController;
   TeXEditorViewController *texEditorViewController;
-  NSPopUpButton *projectTypeSelector;
   NSView *texEditorContainer;
   TPImageViewerController *imageViewerController;
   NSView *imageViewerContainer;
@@ -92,8 +91,17 @@
   
   TPEngineSettingsController *engineSettings;
   NSView *engineSettingsContainer;
+  
+  HHValidatedButton *newFolderButton;
+  HHValidatedButton *newFileButton;
+  
+  NSProgressIndicator *compileProgressIndicator;
 }
 
+@property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
+
+@property (assign) IBOutlet HHValidatedButton *newFolderButton;
+@property (assign) IBOutlet HHValidatedButton *newFileButton;
 
 @property (retain) TPEngineSettingsController *engineSettings;
 @property (assign) IBOutlet NSView *engineSettingsContainer;
@@ -125,7 +133,6 @@
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) IBOutlet NSView *imageViewerContainer;
 @property (retain) TPImageViewerController *imageViewerController;
-@property (assign) IBOutlet NSPopUpButton *projectTypeSelector;
 @property (retain) TPFileMonitor *fileMonitor;
 
 @property (readonly) BOOL pdfHasSelection;

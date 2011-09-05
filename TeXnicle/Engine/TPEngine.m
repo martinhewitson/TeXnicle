@@ -25,6 +25,7 @@
 @synthesize openConsole;
 
 @synthesize builtIn;
+@synthesize compiling;
 
 @synthesize delegate;
 
@@ -50,6 +51,7 @@
     self.nCompile = 1;
     self.openConsole = YES;
     self.builtIn = NO;
+    self.compiling = NO;
     [self setupObservers];    
   }
   
@@ -174,6 +176,7 @@
 	
 	typesetFileHandle = [pipe fileHandleForReading];
 	[typesetFileHandle readInBackgroundAndNotify];	
+  self.compiling = YES;
 	[typesetTask launch];	
 	
 	return YES;  
@@ -187,6 +190,7 @@
 	[typesetTask terminate];
 	[typesetTask release];
 	typesetTask = nil;
+  self.compiling = NO;
 	compilationsDone++;
 	
 	if (abortCompile) {
@@ -235,6 +239,7 @@
 {
   abortCompile = NO;
   compilationsDone = 0;
+  self.compiling = NO;
 }
 
 - (void) trashAuxFiles

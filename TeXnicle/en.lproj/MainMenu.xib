@@ -1682,14 +1682,6 @@
 					<int key="connectionID">494</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="1050"/>
-						<reference key="destination" ref="161481692"/>
-					</object>
-					<int key="connectionID">531</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">showPreferences:</string>
 						<reference key="source" ref="1014"/>
@@ -2168,6 +2160,14 @@
 						<reference key="destination" ref="536009088"/>
 					</object>
 					<int key="connectionID">690</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="1050"/>
+						<reference key="destination" ref="161481692"/>
+					</object>
+					<int key="connectionID">691</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3498,7 +3498,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">690</int>
+			<int key="maxID">691</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4978,6 +4978,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bookmarkContainverView</string>
+							<string>compileProgressIndicator</string>
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
@@ -4987,15 +4988,16 @@
 							<string>leftView</string>
 							<string>libraryContainerView</string>
 							<string>midView</string>
+							<string>newFileButton</string>
 							<string>newFileSheet</string>
 							<string>newFilenameTextField</string>
+							<string>newFolderButton</string>
 							<string>openDocuments</string>
 							<string>paletteContainverView</string>
 							<string>pdfViewerContainerView</string>
 							<string>projectItemTreeController</string>
 							<string>projectOutlineController</string>
 							<string>projectOutlineView</string>
-							<string>projectTypeSelector</string>
 							<string>renameField</string>
 							<string>renameSheet</string>
 							<string>rightView</string>
@@ -5011,6 +5013,7 @@
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSView</string>
+							<string>NSProgressIndicator</string>
 							<string>NSTabView</string>
 							<string>NSTextView</string>
 							<string>NSTextField</string>
@@ -5020,15 +5023,16 @@
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>NSView</string>
+							<string>HHValidatedButton</string>
 							<string>NSWindow</string>
 							<string>NSTextField</string>
+							<string>HHValidatedButton</string>
 							<string>OpenDocumentsManager</string>
 							<string>NSView</string>
 							<string>NSView</string>
 							<string>ProjectItemTreeController</string>
 							<string>ProjectOutlineController</string>
 							<string>NSOutlineView</string>
-							<string>NSPopUpButton</string>
 							<string>NSTextField</string>
 							<string>NSWindow</string>
 							<string>NSView</string>
@@ -5047,6 +5051,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>bookmarkContainverView</string>
+							<string>compileProgressIndicator</string>
 							<string>controlsTabview</string>
 							<string>documentCode</string>
 							<string>documentName</string>
@@ -5056,15 +5061,16 @@
 							<string>leftView</string>
 							<string>libraryContainerView</string>
 							<string>midView</string>
+							<string>newFileButton</string>
 							<string>newFileSheet</string>
 							<string>newFilenameTextField</string>
+							<string>newFolderButton</string>
 							<string>openDocuments</string>
 							<string>paletteContainverView</string>
 							<string>pdfViewerContainerView</string>
 							<string>projectItemTreeController</string>
 							<string>projectOutlineController</string>
 							<string>projectOutlineView</string>
-							<string>projectTypeSelector</string>
 							<string>renameField</string>
 							<string>renameSheet</string>
 							<string>rightView</string>
@@ -5082,6 +5088,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">bookmarkContainverView</string>
 								<string key="candidateClassName">NSView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">compileProgressIndicator</string>
+								<string key="candidateClassName">NSProgressIndicator</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">controlsTabview</string>
@@ -5120,12 +5130,20 @@
 								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">newFileButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">newFileSheet</string>
 								<string key="candidateClassName">NSWindow</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">newFilenameTextField</string>
 								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">newFolderButton</string>
+								<string key="candidateClassName">HHValidatedButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">openDocuments</string>
@@ -5150,10 +5168,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">projectOutlineView</string>
 								<string key="candidateClassName">NSOutlineView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">projectTypeSelector</string>
-								<string key="candidateClassName">NSPopUpButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">renameField</string>

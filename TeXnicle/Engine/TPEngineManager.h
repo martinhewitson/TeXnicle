@@ -40,6 +40,7 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 - (NSInteger)indexOfEngineNamed:(NSString*)name;
 - (NSArray*)registeredEngineNames;
 
+- (BOOL) isCompiling;
 - (void) compile;
 - (void) trashAuxFiles;
 
