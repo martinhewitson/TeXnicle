@@ -142,7 +142,6 @@ extern NSString * const OutlineViewNodeType;
 #pragma mark -
 #pragma mark Add existing file
 - (void) addExistingFile:(id)sender toFolder:(FolderEntity*)aFolder;
-- (void)addItemDidEnd:(NSOpenPanel*)savePanel returnCode:(NSInteger)returnCode contextInfo:(void*)context;
 - (IBAction) endAddExistingFileSheet:(id)sender;
 - (IBAction) endAddExistingFilesSheet:(id)sender;
 - (FileEntity*) addFileAtPath:(NSString*)aPath toFolder:(FolderEntity*)aFolder copy:(BOOL)copyFile;
@@ -154,7 +153,6 @@ extern NSString * const OutlineViewNodeType;
 
 - (void) addExistingFolder:(id)sender;
 - (void) showFolderImportSheetForPath:(NSString*)path;
-- (void)addFolderDidEnd:(NSOpenPanel*)savePanel returnCode:(NSInteger)returnCode contextInfo:(void*)context;
 - (IBAction) endAddExistingFolderSheet:(id)sender;
 - (FolderEntity*) addFolderAtPath:(NSString*)srcFolder includeTeXFiles:(BOOL)texFiles includeAllFiles:(BOOL)allFiles recursive:(BOOL)recursively;
 - (IBAction) endAddingFilesSheet:(id)sender;

@@ -278,6 +278,10 @@ withIntermediateDirectories:YES
 	
 	// set parent
 	id parent = [[self selectedObjects] firstObject];
+  // if the parent is a file, get its parent
+  if ([parent isKindOfClass:[FileEntity class]]) {
+    parent = [parent valueForKey:@"parent"];
+  }
 	if (parent) {
 		[newFolder setParent:parent];
     NSTreeNode *parentNode = [self treeNodeForObject:parent];
@@ -449,30 +453,20 @@ withIntermediateDirectories:YES
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanCreateDirectories:NO];
-	
-	SEL select = @selector(addFolderDidEnd:returnCode:contextInfo:);
-	[openPanel beginSheetForDirectory:nil
-															 file:nil 
-										 modalForWindow:[document windowForSheet]
-											modalDelegate:self 
-										 didEndSelector:select
-												contextInfo:NULL];
+  
+  [openPanel beginSheetModalForWindow:[document windowForSheet]
+                    completionHandler:^(NSInteger result) {
+                      if (result == NSCancelButton) 
+                        return;
+                      
+                      [openPanel orderOut:self];
+                      
+                      // get folder name from user
+                      NSString *path = [[openPanel URL] path];	
+                      [self showFolderImportSheetForPath:path];	
+                    }];
 }
 
-
-- (void)addFolderDidEnd:(NSOpenPanel*)savePanel 
-					 returnCode:(NSInteger)returnCode
-					contextInfo:(void*)context
-{
-	if (returnCode == NSCancelButton) 
-		return;
-	
-	[savePanel orderOut:self];
-	
-	// get folder name from user
-	NSString *path = [savePanel filename];	
-	[self showFolderImportSheetForPath:path];	
-}	
 
 - (void) showFolderImportSheetForPath:(NSString*)path
 {
@@ -721,31 +715,21 @@ withIntermediateDirectories:YES
 	
 	selectedFolder = aFolder;
 	
-	SEL select = @selector(addItemDidEnd:returnCode:contextInfo:);
-	[openPanel beginSheetForDirectory:nil
-															 file:nil 
-										 modalForWindow:[document windowForSheet]
-											modalDelegate:self 
-										 didEndSelector:select
-												contextInfo:aFolder];
-	
-	
+  [openPanel beginSheetModalForWindow:[document windowForSheet]
+                    completionHandler:^(NSInteger result) {
+                      if (result == NSCancelButton) 
+                        return;
+                      
+                      [openPanel orderOut:self];
+                      
+                      NSMutableArray *filenames = [NSMutableArray array];
+                      for (NSURL *url in [openPanel URLs]) {
+                        [filenames addObject:[url path]];
+                      }
+                      [self addFiles:filenames withContext:selectedFolder];
+                    }];
 }
 
-- (void)addItemDidEnd:(NSOpenPanel*)savePanel 
-					 returnCode:(NSInteger)returnCode
-					contextInfo:(void*)context
-{
-	if (returnCode == NSCancelButton) 
-		return;
-	
-	[savePanel orderOut:self];
-	
-	
-	[self addFiles:[savePanel filenames] withContext:context];
-	
-}	
-	 
 - (void) addFiles:(NSArray*)files withContext:(void*)context
 {
 	// get file name from user
