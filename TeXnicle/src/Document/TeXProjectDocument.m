@@ -31,6 +31,8 @@
 
 @implementation TeXProjectDocument
 
+@synthesize statusTimer;
+
 @synthesize compileProgressIndicator;
 @synthesize newFileButton;
 @synthesize newFolderButton;
@@ -246,12 +248,14 @@
     //    NSLog(@"Setting project name %@", newProjectName);
     [self.project setValue:newProjectName forKey:@"name"];
   }
-  //  [self saveDocument:self];
+
+  self.statusTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(updateStatusView)
+                                                    userInfo:nil
+                                                     repeats:YES];
   
-  //  NSLog(@"Loaded project %@", self.project);
-  //  for (NSManagedObject *item in [self.project valueForKey:@"items"]){
-  //    NSLog(@"%@", [item valueForKey:@"parent"]);
-  //  }
+  
   [self showDocument];
 }
 
@@ -280,48 +284,13 @@
 }
 
 
-- (void) validateURL
-{
-  
-  if ([self fileURL] == nil) {
-    NSSavePanel *savePanel = [TeXProjectDocument getDocumentURLSavePanel];
-    __block NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
-    
-    [savePanel beginSheetModalForWindow:window completionHandler:^(NSInteger result) {
-      
-      if (result == NSFileHandlingPanelOKButton) {
-        NSURL *url = [NSURL fileURLWithPath:[[savePanel URL] path]];
-        
-        if (!url) {
-          [window performSelector:@selector(performClose:) withObject:self afterDelay:0.1];
-          return;
-        }
-        NSLog(@"Saving to %@", url);
-        
-        [self saveToURL:url ofType:@"XML" forSaveOperation:NSSaveOperation completionHandler:^(NSError *errorOrNil){
-          if (!errorOrNil) {
-            [self setupProject];
-            [self setupDocument];
-          } else {
-            NSLog(@"error: %@", errorOrNil);
-          }
-        }];
-        
-      } else {
-        [window performSelector:@selector(performClose:) withObject:self afterDelay:0.1];
-        return;
-      }
-      
-    }];
-    
-  } else {
-    [self setupDocument]; 
-  }
-}
-
-
 - (void)windowWillClose:(NSNotification *)notification 
 {
+  
+  // stop timer
+  [self.statusTimer invalidate];
+  self.statusTimer = nil;
+  
   // stop file monitor
 	self.fileMonitor.delegate = nil;
   
@@ -592,14 +561,23 @@
     if ([self.projectItemTreeController canAdd]) {
       NSArray *selected = [self.projectItemTreeController selectedObjects];
       if ([selected count] == 1) {
-        if ([[selected objectAtIndex:0] isKindOfClass:[FolderEntity class]]) {
+        id item = [selected objectAtIndex:0];
+        if ([item isKindOfClass:[FolderEntity class]]) {
           return YES;
+        }
+        
+        if ([item isKindOfClass:[FileEntity class]]) {
+          FileEntity *file = (FileEntity*)item;
+          if ([file parent]) {
+            return YES;
+          }
         }
       }
     }
+    return NO;
   }
   
-  return NO;
+  return [super validateUserInterfaceItem:anItem];
 }
 
 - (void) updateStatusView
@@ -687,7 +665,7 @@
   
 	// Make popup menu with bound actions
 	treeActionMenu = [[NSMenu alloc] initWithTitle:@"Project Tree Action Menu"];	
-	[treeActionMenu setAutoenablesItems:YES];
+	[treeActionMenu setAutoenablesItems:NO];
   
   // check selected item(s)
   NSArray *selectedItems = [self.projectItemTreeController selectedObjects];
@@ -885,42 +863,9 @@
 
 - (IBAction) locateItem:(id)sender
 {
-	// get user to choose file
-	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
-	if ([selectedItem isKindOfClass:[FolderEntity class]]) {
-		[openPanel setCanChooseFiles:NO];
-		[openPanel setCanChooseDirectories:YES];
-	} else {
-		[openPanel setCanChooseFiles:YES];
-		[openPanel setCanChooseDirectories:NO];
-	}
-	[openPanel setAllowsMultipleSelection:NO];
-	[openPanel setCanCreateDirectories:NO];
-	
-	SEL select = @selector(locateItemDidEnd:returnCode:contextInfo:);
-	[openPanel beginSheetForDirectory:nil
-															 file:nil 
-										 modalForWindow:[[[NSDocumentController sharedDocumentController] currentDocument] windowForSheet]
-											modalDelegate:self 
-										 didEndSelector:select
-												contextInfo:nil];
-	
-	
+  [self.projectOutlineView locateItem:self];
 }
 
-- (void)locateItemDidEnd:(NSSavePanel*)savePanel 
-              returnCode:(NSInteger)returnCode
-             contextInfo:(void*)context
-{
-	if (returnCode == NSCancelButton) 
-		return;
-	
-	NSString *path = [[savePanel URL] path];
-	
-	// set the path to the item
-	[selectedItem setValue:path forKey:@"filepath"];
-	
-}	
 
 #pragma mark -
 #pragma mark Rename project items
@@ -1463,7 +1408,6 @@
     }
   }
   
-	
 	return [super validateMenuItem:menuItem];
 }
 
@@ -2242,6 +2186,23 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
 }
 
+- (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement
+{
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aFile];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // now replace the text
+  [self.texEditorViewController.textView replaceRange:aRange withText:replacement scrollToVisible:NO animate:NO];
+  
+  // Make text view first responder
+  [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];  
+}
 
 #pragma mark -
 #pragma mark PDFViewerController delegate

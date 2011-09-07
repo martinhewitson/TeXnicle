@@ -20,6 +20,7 @@
 #import "BookmarkManager.h"
 #import "TPEngineManager.h"
 #import "TPEngineSettingsController.h"
+#import "TPOutlineView.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -62,14 +63,14 @@
   
   IBOutlet NSView *pdfViewerContainerView;
   
-
+  NSTimer *statusTimer;
   
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
   NSInteger currentHighlightedPDFSearchResult;
   
-  NSOutlineView *projectOutlineView;
+  TPOutlineView *projectOutlineView;
   NSTabView *controlsTabview;
   OpenDocumentsManager *openDocuments;
   ProjectItemTreeController *projectItemTreeController;
@@ -100,6 +101,8 @@
 
 @property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
 
+@property (retain)   NSTimer *statusTimer;
+
 @property (assign) IBOutlet HHValidatedButton *newFolderButton;
 @property (assign) IBOutlet HHValidatedButton *newFileButton;
 
@@ -125,7 +128,7 @@
 @property (retain) PDFViewerController *pdfViewerController;
 @property (assign) IBOutlet TPStatusView *statusView;
 @property (retain) ProjectEntity *project;
-@property (assign) IBOutlet NSOutlineView *projectOutlineView;
+@property (assign) IBOutlet TPOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
 @property (assign) IBOutlet OpenDocumentsManager *openDocuments;
 @property (assign) IBOutlet	ProjectItemTreeController *projectItemTreeController;
@@ -139,7 +142,6 @@
 
 - (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;
-- (void) validateURL;
 + (TeXProjectDocument*) newTeXnicleProject;
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
 + (NSSavePanel*)getDocumentURLSavePanel;
@@ -167,9 +169,6 @@
 - (IBAction) renameItem:(id)sender;
 - (IBAction) removeItem:(id)sender;
 - (IBAction) locateItem:(id)sender;
-- (void)locateItemDidEnd:(NSSavePanel*)savePanel 
-              returnCode:(NSInteger)returnCode
-             contextInfo:(void*)context;
 
 #pragma mark -
 #pragma mark Rename project items
