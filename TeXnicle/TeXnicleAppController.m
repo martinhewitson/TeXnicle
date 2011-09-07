@@ -53,6 +53,7 @@ NSString * const TENumSpacesForTab = @"TENumSpacesForTab";
 NSString * const TEShowLineNumbers = @"TEShowLineNumbers";
 NSString * const TEShowCodeFolders = @"TEShowCodeFolders";
 NSString * const TEHighlightCurrentLine = @"TEHighlightCurrentLine";
+NSString * const TEHighlightMatchingWords = @"TEHighlightMatchingWords"; 
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
@@ -116,6 +117,7 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEShowLineNumbers];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TEShowCodeFolders];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightCurrentLine];
+	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightMatchingWords];
   
   [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPSaveOnCompile];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:OpenConsoleOnTypeset];
