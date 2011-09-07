@@ -21,6 +21,7 @@
 #import "TPPopupListWindowController.h"
 #import "TPFoldedCodeSnippet.h"
 #import "NSString+RelativePath.h"
+#import "NSString+WordRanges.h"
 
 #import "NSDictionary+TeXnicle.h"
 #import "NSString+LaTeX.h"
@@ -359,7 +360,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 - (NSArray*)bookmarksForLineRange:(NSRange)aRange
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFileInLineRange:)]) {
-    return [self.delegate bookmarksForCurrentFileInLineRange:aRange];
+    id<TeXTextViewDelegate> d = (id<TeXTextViewDelegate>)self.delegate;
+    return [d bookmarksForCurrentFileInLineRange:aRange];
   }  
   return [NSArray array];
 }
@@ -1025,6 +1027,17 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   }
 }
 
+- (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate
+{
+  [self setSelectedRange:aRange];
+  [self replaceCharactersInRange:aRange withString:replacement];
+  if (scroll) {    
+    [self scrollRangeToVisible:aRange];
+  }
+  if (animate) {
+    [self showFindIndicatorForRange:aRange];
+  }
+}
 
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
@@ -1318,6 +1331,26 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self colorVisibleText];
   [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
 
+  NSRange vr = [self getVisibleRange];
+  [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
+    if (r.length > 0) {
+      NSString *word = [[self string] substringWithRange:r];
+      
+      NSString *textToSearch = [[self string] substringWithRange:vr];
+      NSArray *matches = [textToSearch rangesOfString:word];
+      
+      NSColor *highlightColor = [[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6];
+      for (NSValue *match in matches) {
+        NSRange r = [match rangeValue];
+        r.location += vr.location;
+        [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
+      }
+      
+    }
+  }
   
 }
 

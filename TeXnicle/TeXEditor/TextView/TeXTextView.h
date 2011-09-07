@@ -31,7 +31,7 @@ extern NSString * const TELineNumberClickedNotification;
 
 @end
 
-@interface TeXTextView : NSTextView <UKTextDocGoToBoxTarget> {
+@interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
 @private
 	TPPopupListWindowController *popupList;
   
@@ -147,6 +147,8 @@ extern NSString * const TELineNumberClickedNotification;
 
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine;
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
+- (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
+
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
 - (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength;
