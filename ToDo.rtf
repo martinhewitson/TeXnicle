@@ -1,28 +1,22 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0\fs28 \cf0 Beta 8\
+\f0\fs28 \cf0 Beta 9\
 ------\
 \
++ Highlight matching words. Select a word in the editor, and all matching words in view will be subtly highlighted. This can be deactivated in the general preferences.\
++ Added a 'replace' option in the project finder tab. You can replace selected matches, or all matches.\
++ Various bug fixes.\
 \
 To Do\
 -----\
 \
-** Validate toolbar items\
-\
-** Project tree action button is broken\
-\
-\
-+ Compiling progress indicator on the status bar\
+**** Still working through warnings....\
 \
 + Work through all warnings\
-\
-+ Selecting a word highlight all instances of that word in view\
-	- get selection in the syntax colourer and do a background attribute\
-	- make preference for this\
 \
 + Stand-alone documents could have bookmarks and save them in the xattr.\
   - also could save the selection point in the xattr\
@@ -33,9 +27,6 @@ To Do\
 	- it's a mess!\
 \
 + Should remember console output selection between launches.\
-\
-+ Finder: make replace option\
-	- compare with the replace on Xcode\
 \
 + Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
 \
@@ -60,6 +51,13 @@ Bugs\
 ----\
 \
 + Paste a large amount of text in. Colouring not properly working.\
+\
+Beta 8\
+------\
+\
++ Bug fixes to launch sequence to make sure engines are installed when launching TeXnicle by double-clicking tex or texnicle document.\
++ Proper validation of toolbar items.\
++ Various minor bug fixes\
 \
 Beta 7\
 ------\

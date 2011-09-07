@@ -208,6 +208,7 @@
 		259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 259530AA13DCA9A300CA2894 /* commandsPrefs.icns */; };
 		259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 259530AF13DD68DF00CA2894 /* TPFileMonitor.m */; };
 		259BCCD713F5345A001D700E /* NSDate+GMT.m in Sources */ = {isa = PBXBuildFile; fileRef = 259BCCD613F5345A001D700E /* NSDate+GMT.m */; };
+		25A1FDE81414D53E00A89334 /* NSString+WordRanges.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1FDE71414D53E00A89334 /* NSString+WordRanges.m */; };
 		25A47D0A13E1540500CAFEB7 /* newFolder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0913E1540500CAFEB7 /* newFolder.icns */; };
 		25A47D0D13E1565D00CAFEB7 /* newTeXFile.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0C13E1565D00CAFEB7 /* newTeXFile.icns */; };
 		25A47D0F13E1586600CAFEB7 /* typeset2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D0E13E1586600CAFEB7 /* typeset2.icns */; };
@@ -327,7 +328,7 @@
 		2514741413929DF60075CB5C /* ToDo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ToDo.rtf; sourceTree = "<group>"; };
 		25152991138F802B00307054 /* TPOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineView.h; sourceTree = "<group>"; };
 		25152992138F802B00307054 /* TPOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineView.m; sourceTree = "<group>"; };
-		25152993138F802B00307054 /* ESOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESOutlineView.h; sourceTree = "<group>"; };
+		25152993138F802B00307054 /* ESOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ESOutlineView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		25152994138F802B00307054 /* ESOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESOutlineView.m; sourceTree = "<group>"; };
 		25152997138F804C00307054 /* OpenDocumentsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenDocumentsManager.h; sourceTree = "<group>"; };
 		25152998138F804C00307054 /* OpenDocumentsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenDocumentsManager.m; sourceTree = "<group>"; };
@@ -387,7 +388,7 @@
 		251529E3138F824E00307054 /* PSMTabStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSMTabStyle.h; sourceTree = "<group>"; };
 		251529E4138F824E00307054 /* PSMUnifiedTabStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSMUnifiedTabStyle.h; sourceTree = "<group>"; };
 		251529E5138F824E00307054 /* PSMUnifiedTabStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMUnifiedTabStyle.m; sourceTree = "<group>"; };
-		25152A1E138F832500307054 /* ConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleController.h; sourceTree = "<group>"; };
+		25152A1E138F832500307054 /* ConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ConsoleController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		25152A1F138F832500307054 /* ConsoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleController.m; sourceTree = "<group>"; };
 		25152A21138F834000307054 /* NSFileManager+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+TeXnicle.h"; sourceTree = "<group>"; };
 		25152A22138F834000307054 /* NSFileManager+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+TeXnicle.m"; sourceTree = "<group>"; };
@@ -411,7 +412,7 @@
 		25194941138FB85A007029E5 /* libraryTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = libraryTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25194944138FB9F7007029E5 /* outlineTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlineTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25194945138FB9F7007029E5 /* outlineTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlineTabBarImage.icns; sourceTree = "<group>"; };
-		251D899713EEFDE200301B6D /* BookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkManager.h; sourceTree = "<group>"; };
+		251D899713EEFDE200301B6D /* BookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BookmarkManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		251D899813EEFDE200301B6D /* BookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkManager.m; sourceTree = "<group>"; };
 		251D899913EEFDE200301B6D /* BookmarkManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkManager.xib; sourceTree = "<group>"; };
 		251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmarksTabBarImageDepressed.icns; sourceTree = "<group>"; };
@@ -434,10 +435,10 @@
 		2528E85B1395209300834921 /* NSStringUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringUUID.m; sourceTree = "<group>"; };
 		2528E85E139520B300834921 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		2528E85F139520B300834921 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
-		2528E8641395402F00834921 /* ExternalTeXDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalTeXDoc.h; sourceTree = "<group>"; };
+		2528E8641395402F00834921 /* ExternalTeXDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ExternalTeXDoc.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2528E8651395402F00834921 /* ExternalTeXDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalTeXDoc.m; sourceTree = "<group>"; };
 		2528E8661395402F00834921 /* ExternalTeXDoc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExternalTeXDoc.xib; sourceTree = "<group>"; };
-		2528E8691395446400834921 /* DocWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocWindowController.h; sourceTree = "<group>"; };
+		2528E8691395446400834921 /* DocWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DocWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2528E86A1395446400834921 /* DocWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocWindowController.m; sourceTree = "<group>"; };
 		2528E86B1395446400834921 /* DocWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocWindow.xib; sourceTree = "<group>"; };
 		2528E86F1395662600834921 /* StartupScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupScreenController.h; sourceTree = "<group>"; };
@@ -602,6 +603,8 @@
 		259530AF13DD68DF00CA2894 /* TPFileMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPFileMonitor.m; sourceTree = "<group>"; };
 		259BCCD513F5345A001D700E /* NSDate+GMT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+GMT.h"; sourceTree = "<group>"; };
 		259BCCD613F5345A001D700E /* NSDate+GMT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GMT.m"; sourceTree = "<group>"; };
+		25A1FDE61414D53E00A89334 /* NSString+WordRanges.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WordRanges.h"; sourceTree = "<group>"; };
+		25A1FDE71414D53E00A89334 /* NSString+WordRanges.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WordRanges.m"; sourceTree = "<group>"; };
 		25A47D0913E1540500CAFEB7 /* newFolder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newFolder.icns; sourceTree = "<group>"; };
 		25A47D0C13E1565D00CAFEB7 /* newTeXFile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXFile.icns; sourceTree = "<group>"; };
 		25A47D0E13E1586600CAFEB7 /* typeset2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = typeset2.icns; sourceTree = "<group>"; };
@@ -642,7 +645,7 @@
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
 		25F2728A13ED7BFA0087E021 /* PaletteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteController.xib; sourceTree = "<group>"; };
-		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
+		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DBPrefsWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontNameToDisplayNameTransformer.h; sourceTree = "<group>"; };
 		25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontNameToDisplayNameTransformer.m; sourceTree = "<group>"; };
@@ -1189,6 +1192,8 @@
 				257B4741138E5E9000ED02C4 /* NSString+LaTeX.m */,
 				2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */,
 				2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */,
+				25A1FDE61414D53E00A89334 /* NSString+WordRanges.h */,
+				25A1FDE71414D53E00A89334 /* NSString+WordRanges.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1739,6 +1744,7 @@
 				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
 				25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */,
 				25C1B5E21410B09E001B02B0 /* KSPathUtilities.m in Sources */,
+				25A1FDE81414D53E00A89334 /* NSString+WordRanges.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
