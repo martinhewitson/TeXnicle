@@ -30,5 +30,6 @@
 - (IBAction) revealItem:(id)sender;
 - (IBAction) renameItem:(id)sender;
 - (IBAction) removeItem:(id)sender;
+- (IBAction) locateItem:(id)sender;
 
 @end

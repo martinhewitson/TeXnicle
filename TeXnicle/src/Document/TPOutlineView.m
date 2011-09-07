@@ -260,37 +260,30 @@
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanCreateDirectories:NO];
 	
-	SEL select = @selector(locateItemDidEnd:returnCode:contextInfo:);
-	[openPanel beginSheetForDirectory:nil
-															 file:nil 
-										 modalForWindow:[[[NSDocumentController sharedDocumentController] currentDocument] windowForSheet]
-											modalDelegate:self 
-										 didEndSelector:select
-												contextInfo:nil];
+  [openPanel beginSheetModalForWindow:[[[NSDocumentController sharedDocumentController] currentDocument] windowForSheet]
+                    completionHandler:^(NSInteger result) {
+                      
+                      if (result == NSCancelButton) 
+                        return;
+                      
+                      NSString *path = [[openPanel URL] path];
+                      
+                      // set the path to the item
+                      [selectedItem setValue:path forKey:@"filepath"];
+                      
+                      NSString *newName = [path lastPathComponent];
+                      if (newName) {
+                        if (![[selectedItem name] isEqualToString:newName]) {
+                          [selectedItem setValue:newName forKey:@"name"];
+                        }
+                      }
+                      
+                      [self reloadItem:selectedItem];
+                    }];
 	
 	
 }
 
-- (void)locateItemDidEnd:(NSSavePanel*)savePanel 
-											returnCode:(NSInteger)returnCode
-										 contextInfo:(void*)context
-{
-	if (returnCode == NSCancelButton) 
-		return;
-	
-	NSString *path = [savePanel filename];
-	
-	// set the path to the item
-	[selectedItem setValue:path forKey:@"filepath"];
-	
-}	
-
-//- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal 
-//{
-////  NSLog(@"draggingSourceOperationMaskForLocal: %d", isLocal);
-//  if (isLocal) return NSDragOperationMove;
-//  else return NSDragOperationCopy | NSDragOperationLink;
-//}
 
 - (BOOL)prepareForDragOperation:(id < NSDraggingInfo >)sender
 {
