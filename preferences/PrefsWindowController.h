@@ -94,34 +94,5 @@
 
 - (IBAction) wrapStyleChanged:(id)sender;
 
-- (IBAction) browseForGSExecutable:(id)sender;
-- (void)locateGSDidEnd:(NSSavePanel*)savePanel 
-						returnCode:(NSInteger)returnCode
-					 contextInfo:(void*)context;
-
-- (IBAction) browseForPDFLatexExecutable:(id)sender;
-- (void)locatePDFLatexDidEnd:(NSSavePanel*)savePanel 
-									returnCode:(NSInteger)returnCode
-								 contextInfo:(void*)context;
-
-- (IBAction) browseForLatexExecutable:(id)sender;
-- (void)locateLatexDidEnd:(NSSavePanel*)savePanel 
-							 returnCode:(NSInteger)returnCode
-							contextInfo:(void*)context;
-
-- (IBAction) browseForDvipsExecutable:(id)sender;
-- (void)locateDvipsDidEnd:(NSSavePanel*)savePanel 
-							 returnCode:(NSInteger)returnCode
-							contextInfo:(void*)context;
-
-- (IBAction) browseForBibTeXExecutable:(id)sender;
-- (void)locateBibTeXDidEnd:(NSSavePanel*)savePanel 
-								returnCode:(NSInteger)returnCode
-							 contextInfo:(void*)context;
-
-- (IBAction) browseForPS2PDFExecutable:(id)sender;
-- (void)locatePS2PDFDidEnd:(NSSavePanel*)savePanel 
-								returnCode:(NSInteger)returnCode
-							 contextInfo:(void*)context;
 
 @end
