@@ -18,6 +18,10 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 
+#define kFindBarSmall 58
+#define kFindBarLarge 104
+
+
 @implementation FinderController
 
 @synthesize delegate;
@@ -27,6 +31,13 @@
 @synthesize progressIndicator;
 @synthesize statusLabel;
 @synthesize results;
+@synthesize backgroundView;
+@synthesize modeSelector;
+@synthesize scrollview;
+@synthesize replaceButton;
+@synthesize replaceAllButton;
+@synthesize replaceView;
+@synthesize replaceText;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate
 {
@@ -61,6 +72,7 @@
   [super dealloc];
 }
 
+
 - (void) awakeFromNib
 {  
   [self.outlineView setDoubleAction:@selector(handleOutlineViewDoubleClick:)];
@@ -72,6 +84,9 @@
 	[imageAndTextCell setEditable:NO];
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
 	[tableColumn setDataCell:imageAndTextCell];	
+  
+  [self.modeSelector selectItemAtIndex:0];
+  [self selectMode:self];
 }
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -81,11 +96,101 @@
       return NO;
     }
   }
+  
+  if (anItem == self.replaceButton) {
+    if ([[self.outlineView selectedRowIndexes] count] == 0 || [[self.replaceText stringValue] length] == 0) {
+      return NO;
+    }
+  }
+  
+  if (anItem == self.replaceAllButton) {
+    if ([self.results count] == 0 || [[self.replaceText stringValue] length] == 0) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 
 #pragma mark -
 #pragma mark Control 
+
+- (IBAction)replaceAll:(id)sender
+{
+  NSString *replacementText = [self.replaceText stringValue];
+  for (TPResultDocument *doc in self.results) {
+    NSInteger adjustment = 0;      
+    for (TPDocumentMatch *match in doc.matches) {
+      NSRange r = match.range;
+      r.location += adjustment;
+//      NSLog(@"Replacing %@ at %@ with adjustment %ld", match.match, NSStringFromRange(match.range), adjustment);
+      [self replaceSearchResult:match.match
+                      withRange:r
+                         inFile:[doc valueForKey:@"document"]
+                       withText:replacementText];
+      
+      // update all subsequent matches in this document
+      adjustment += [replacementText length] - match.range.length;
+      
+    }
+  }
+  
+  [self.results removeAllObjects];
+  [self.outlineView reloadData];
+}
+
+- (IBAction)replaceSelected:(id)sender
+{
+  NSString *replacementText = [self.replaceText stringValue];
+  NSIndexSet *selectedIndexes = [self.outlineView selectedRowIndexes];
+  NSUInteger currentIndex = [selectedIndexes firstIndex];
+  while (currentIndex != NSNotFound)
+  {
+    id item = [self.outlineView itemAtRow:currentIndex];
+		if ([item isKindOfClass:[TPDocumentMatch class]]) {
+      TPDocumentMatch *match = (TPDocumentMatch*)item;
+      TPResultDocument *doc = match.parent;
+      
+      [self replaceSearchResult:match.match
+                      withRange:match.range
+                         inFile:[doc valueForKey:@"document"]
+                       withText:replacementText];
+      
+      // update all subsequent matches in this document
+      NSInteger adjustment = [replacementText length] - match.range.length;      
+      [doc.matches removeObject:item];
+      for (TPDocumentMatch *m in doc.matches) {
+        NSRange r = m.range;
+        r.location+=adjustment; 
+        m.range = r;
+      }
+      if ([doc.matches count] == 0) {
+        [self.results removeObject:doc];
+      }
+    }
+    currentIndex = [selectedIndexes indexGreaterThanIndex:currentIndex];
+  }
+
+  [self.outlineView reloadData];
+}
+
+- (IBAction)selectMode:(id)sender
+{
+  NSRect contentBounds = [self.view bounds];
+  if ([modeSelector indexOfSelectedItem] == 0) {
+    // find
+    NSRect fr = [self.backgroundView frame];
+    [self.backgroundView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarSmall+1, fr.size.width, kFindBarSmall)];
+    [self.scrollview setFrame:NSMakeRect(0, 0, fr.size.width, contentBounds.size.height-kFindBarSmall)];
+    [self.replaceView setHidden:YES];
+  } else {
+    // replace
+    NSRect fr = [self.backgroundView frame];
+    [self.backgroundView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarLarge+1, fr.size.width, kFindBarLarge)];
+    [self.scrollview setFrame:NSMakeRect(0, 0, fr.size.width, contentBounds.size.height-kFindBarLarge)];
+    [self.replaceView setHidden:NO];
+  }
+}
 
 - (IBAction) performSearch:(id)sender
 {
@@ -109,9 +214,10 @@
     return;
   }
   
+  [self.results removeAllObjects];
+  [self.outlineView reloadData];
+  
   if ([searchTerm length] == 0) {
-    [self.results removeAllObjects];
-    [self.outlineView reloadData];
     [self didEndSearch:self];
     return;
   }
@@ -448,6 +554,15 @@
   }
   return nil;
 }
+
+- (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement
+{
+  // do nothing just call delegate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(replaceSearchResult:withRange:inFile:withText:)]) {
+    [self.delegate replaceSearchResult:result withRange:aRange inFile:aFile withText:replacement];
+  }
+}
+
 
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
 {
