@@ -146,7 +146,7 @@
 
 - (void) standaloneWindowForFile:(FileEntity*)aFile
 {
-	DocWindowController *newDoc = [[DocWindowController alloc] initWithFile:aFile document:delegate];
+	DocWindowController *newDoc = [[DocWindowController alloc] initWithFile:aFile document:(id)delegate];
 	[newDoc showWindow:self];
 	[[newDoc window] makeKeyAndOrderFront:self];
 	[standaloneWindows addObject:newDoc];
