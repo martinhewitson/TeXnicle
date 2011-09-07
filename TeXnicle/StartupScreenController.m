@@ -232,7 +232,7 @@
   // get a project director or file from the user  
   NSOpenPanel *panel = [NSOpenPanel openPanel];
   [panel setTitle:@"Build New Project..."];
-  [panel setRequiredFileType:@"trip"];
+  [panel setAllowedFileTypes:[NSArray arrayWithObject:@"trip"]];
   [panel setNameFieldLabel:@"Source:"];
   [panel setCanChooseFiles:YES];
   [panel setCanChooseDirectories:YES];
