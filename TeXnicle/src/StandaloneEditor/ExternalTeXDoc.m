@@ -31,7 +31,7 @@
 @synthesize drawerContentView;
 @synthesize drawer;
 @synthesize settings;
-
+@synthesize compileProgressIndicator;
 
 - (void)awakeFromNib
 {
@@ -571,11 +571,13 @@
      
 - (void) build
 {
+  [self.compileProgressIndicator startAnimation:self];
   [self.engineManager compile];
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
+  [self.compileProgressIndicator stopAnimation:self];
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     if (openPDFAfterBuild) {

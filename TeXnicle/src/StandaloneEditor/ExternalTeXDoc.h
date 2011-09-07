@@ -45,12 +45,15 @@
   
   NSView *drawerContentView;
   NSMutableDictionary *settings;
+  
+  NSProgressIndicator *compileProgressIndicator;
 }
 
 @property (retain) NSMutableDictionary *settings;
 @property (assign) IBOutlet TPStatusView *statusView;
 @property (assign) IBOutlet NSView *drawerContentView;
 @property (assign) IBOutlet NSDrawer *drawer;
+@property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
 @property (retain) TPEngineSettingsController *engineSettingsController;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
