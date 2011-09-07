@@ -35,6 +35,7 @@ extern NSString * const TENumSpacesForTab;
 extern NSString * const TEShowLineNumbers;
 extern NSString * const TEShowCodeFolders;
 extern NSString * const TEHighlightCurrentLine;
+extern NSString * const TEHighlightMatchingWords;
 extern NSString * const TPSaveOnCompile;
 
 extern NSString * const TEDocumentBackgroundColor;
