@@ -26,5 +26,6 @@
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
 
 - (NSArray*)folders;
+- (void) setupSettings;
 
 @end

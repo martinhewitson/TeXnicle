@@ -32,6 +32,11 @@
 
 - (void) awakeFromFetch
 {
+  [self performSelector:@selector(setupSettings) withObject:nil afterDelay:0];
+}
+
+- (void) setupSettings
+{
   // make new settings if needed
   if (self.settings == nil) {
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
