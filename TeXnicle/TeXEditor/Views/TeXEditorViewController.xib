@@ -199,7 +199,7 @@
 											<int key="NSTCFlags">1</int>
 										</object>
 										<object class="NSTextViewSharedData" key="NSSharedData">
-											<int key="NSFlags">67121095</int>
+											<int key="NSFlags">67112903</int>
 											<int key="NSTextCheckingTypes">0</int>
 											<nil key="NSMarkedAttributes"/>
 											<object class="NSColor" key="NSBackgroundColor" id="900718242">
@@ -239,8 +239,14 @@
 												<integer value="1" key="NSUnderline"/>
 											</dictionary>
 											<nil key="NSDefaultParagraphStyle"/>
-											<nil key="NSTextFinder"/>
-											<int key="NSPreferredTextFinderStyle">1</int>
+											<object class="NSTextFinder" key="NSTextFinder">
+												<reference key="NSTextFinderClient" ref="195271064"/>
+												<reference key="NSFindBarContainer" ref="52710183"/>
+												<int key="NSTextFinderStyle">2</int>
+												<bool key="NSIncrementalSearchingEnabled">NO</bool>
+												<bool key="NSIncrementalSearchingShouldDimContentView">YES</bool>
+											</object>
+											<int key="NSPreferredTextFinderStyle">2</int>
 										</object>
 										<int key="NSTVFlags">6</int>
 										<string key="NSMaxSize">{532, 10000000}</string>
@@ -530,7 +536,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="NSFrame">{{7, 11}, {242, 141}}</string>
 					<reference key="NSNextKeyView" ref="633076632"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">UKTextDocGoToBox</string>
@@ -1191,6 +1197,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
+						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
 						<string key="toggleCommentForSelection:">id</string>
@@ -1218,6 +1225,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="indentSelection:">
 							<string key="name">indentSelection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="pasteTable:">
+							<string key="name">pasteTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reformatParagraph:">
