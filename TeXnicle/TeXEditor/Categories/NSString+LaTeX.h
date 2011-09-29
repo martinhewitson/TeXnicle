@@ -19,5 +19,6 @@
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
 - (BOOL)isCommandBeforeIndex:(NSInteger)anIndex;
+- (NSString*)texString;
 
 @end

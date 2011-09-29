@@ -279,6 +279,11 @@
   return NO;
 }
 
+- (NSString*)texString
+{
+  return [self stringByReplacingOccurrencesOfString:@"_" withString:@"\\_"];
+}
+
 @end
 
 
