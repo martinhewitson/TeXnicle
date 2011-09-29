@@ -65,6 +65,7 @@
 
 @property (retain) TPEngineManager *engineManager;
 
+- (void) initSettings;
 - (void) setupSettings;
 - (void) updateFileStatus;
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;

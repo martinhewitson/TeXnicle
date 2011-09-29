@@ -35,6 +35,9 @@
 
 - (void)awakeFromNib
 {
+  // ensure we have a settings dictionary before proceeding
+  [self initSettings];
+  
 //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
@@ -85,8 +88,8 @@
   [self.statusView setEditorStatus:@"No Selection."];
 }
 
-- (void) setupSettings
-{
+- (void) initSettings
+{  
   if (self.settings == nil) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -98,7 +101,11 @@
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
                      nil];
   }
-  
+}
+
+- (void) setupSettings
+{
+  [self initSettings]; 
   [self.engineSettingsController setupEngineSettings];
 }
 
