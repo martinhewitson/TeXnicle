@@ -193,6 +193,9 @@
   self.compiling = NO;
 	compilationsDone++;
 	
+  // notify interested parties
+  [self.delegate compileDidFinish:!abortCompile];
+  
 	if (abortCompile) {
 		ConsoleController *console = [ConsoleController sharedConsoleController];
 		[console message:[NSString stringWithFormat:@"Compile aborted."]];
@@ -202,8 +205,6 @@
   ConsoleController *console = [ConsoleController sharedConsoleController];
   [console message:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   
-  // notify interested parties
-  [self.delegate compileDidFinish:!abortCompile];
 }
 
 - (void) texOutputAvailable:(NSNotification*)aNote
