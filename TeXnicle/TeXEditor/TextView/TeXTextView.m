@@ -78,6 +78,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self setUpRuler];
   [self setupLists];
   
+  [self setSmartInsertDeleteEnabled:NO];
+  [self setAutomaticTextReplacementEnabled:NO];
+  [self setAutomaticSpellingCorrectionEnabled:NO];
+  
   self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
 //  self.highlightingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(colorVisibleText) userInfo:nil repeats:YES];
   
@@ -2078,5 +2082,77 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self setSelectedRange:insertRange];
   [[self layoutManager] ensureLayoutForCharacterRange:insertRange];
 }
+
+- (void) paste:(id)sender
+{
+  // check pboard type
+  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+  
+  NSLog(@"%@", [pboard types]);
+  
+  [self pasteAsPlainText:sender];
+}
+
+- (IBAction) pasteTable:(id)sender
+{
+  NSMutableString *stringToPaste = [NSMutableString string];;
+  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+  if ( [[pboard types] containsObject:NSStringPboardType] ) {
+    NSString *rawstring = [pboard stringForType:NSStringPboardType];
+    NSArray *rows = [rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSLog(@"Rows %@", rows);
+    
+    // check max columns
+    NSInteger columnCount = 0;
+    for (NSString *r in rows){
+      NSArray *cols = [r componentsSeparatedByString:@"\t"];
+      if ([cols count] > columnCount) {
+        columnCount = [cols count];
+      }
+    }
+    
+    // prepare table
+    [stringToPaste appendFormat:@"\\begin{table}[htdp]\n"];
+    [stringToPaste appendFormat:@"\\begin{center}\n"];
+    [stringToPaste appendFormat:@"\\begin{tabular}{|"];
+    for (int ii=0; ii<columnCount; ii++) {
+      [stringToPaste appendFormat:@"c|"];
+    }
+    [stringToPaste appendFormat:@"} \\hline\n"];
+    
+    for (NSString *r in rows) {
+      NSArray *cols = [r componentsSeparatedByString:@"\t"];
+      for (int cc=0; cc<columnCount; cc++) {
+        if (cc < [cols count]) {
+          [stringToPaste appendFormat:@" %@ ", [[cols objectAtIndex:cc] texString]];
+        }
+        if (cc+1 < columnCount) {
+          [stringToPaste appendFormat:@"&"];
+        }
+      }
+      [stringToPaste appendFormat:@"\\\\ \\hline\n"];
+    }
+    
+    [stringToPaste appendFormat:@"\\end{tabular}\n"];
+    [stringToPaste appendFormat:@"\\end{center}\n"];
+    [stringToPaste appendFormat:@"\\caption{Pasted Table}\n"];
+    [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
+    [stringToPaste appendFormat:@"\\end{table}\n"];
+    
+//    NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:stringToPaste] autorelease];
+//    [astr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [astr length])];
+//    NSRange sel = [self selectedRange];
+//
+//    [[self textStorage] beginEditing];
+//    [[self textStorage] insertAttributedString:astr atIndex:sel.location];
+//    [[self textStorage] endEditing];
+//    
+//    [self colorVisibleText];
+    
+    [self insertText:stringToPaste];
+    
+  }
+}
+
 
 @end
