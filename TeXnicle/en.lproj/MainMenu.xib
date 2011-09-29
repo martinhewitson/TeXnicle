@@ -491,6 +491,15 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="942438780">
+									<reference key="NSMenu" ref="789758025"/>
+									<string key="NSTitle">Paste as Table</string>
+									<string key="NSKeyEquiv">v</string>
+									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 								<object class="NSMenuItem" id="437104165">
 									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Delete</string>
@@ -2142,6 +2151,14 @@
 					</object>
 					<int key="connectionID">691</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">pasteTable:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="942438780"/>
+					</object>
+					<int key="connectionID">694</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2320,6 +2337,7 @@
 							<reference ref="66026405"/>
 							<reference ref="660555092"/>
 							<reference ref="345210975"/>
+							<reference ref="942438780"/>
 						</array>
 						<reference key="parent" ref="952259628"/>
 					</object>
@@ -3115,6 +3133,11 @@
 						<reference key="object" ref="536009088"/>
 						<reference key="parent" ref="873060979"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">692</int>
+						<reference key="object" ref="942438780"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3257,6 +3280,7 @@
 				<string key="679.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="680.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="689.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="692.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3274,7 +3298,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">691</int>
+			<int key="maxID">694</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3950,6 +3974,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="addExistingFile:">id</string>
 						<string key="addExistingFileToSelectedFolder:">id</string>
+						<string key="locateItem:">id</string>
 						<string key="removeItem:">id</string>
 						<string key="renameItem:">id</string>
 						<string key="revealItem:">id</string>
@@ -3961,6 +3986,10 @@
 						</object>
 						<object class="IBActionInfo" key="addExistingFileToSelectedFolder:">
 							<string key="name">addExistingFileToSelectedFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="locateItem:">
+							<string key="name">locateItem:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="removeItem:">
@@ -4236,7 +4265,7 @@
 						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
 						<string key="projectOutlineController">ProjectOutlineController</string>
-						<string key="projectOutlineView">NSOutlineView</string>
+						<string key="projectOutlineView">TPOutlineView</string>
 						<string key="renameField">NSTextField</string>
 						<string key="renameSheet">NSWindow</string>
 						<string key="rightView">NSView</string>
@@ -4332,7 +4361,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="projectOutlineView">
 							<string key="name">projectOutlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
+							<string key="candidateClassName">TPOutlineView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="renameField">
 							<string key="name">renameField</string>
@@ -4393,6 +4422,7 @@
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
+						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
 						<string key="toggleCommentForSelection:">id</string>
@@ -4420,6 +4450,10 @@
 						</object>
 						<object class="IBActionInfo" key="indentSelection:">
 							<string key="name">indentSelection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="pasteTable:">
+							<string key="name">pasteTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reformatParagraph:">
