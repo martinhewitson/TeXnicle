@@ -108,7 +108,7 @@
 					image:[NSImage imageNamed:NSImageNamePreferencesGeneral]];	
 	
   [self addView:engineView 
-					label:@"LaTeX" 
+					label:@"Engine" 
 					image:[NSImage imageNamed:@"engine"]];		
 	
   [self addView:syntaxColorsView 
