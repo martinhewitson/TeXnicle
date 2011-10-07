@@ -23,7 +23,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   static NSArray *builtInEngineNames;
   
   if (builtInEngineNames == nil) {
-    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", nil] retain];  
+    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", nil] retain];  
   }
   return builtInEngineNames;
 }
