@@ -188,5 +188,6 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) insertIncludeForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (IBAction) pasteTable:(id)sender;
+- (void)pasteAsImage;
 
 @end

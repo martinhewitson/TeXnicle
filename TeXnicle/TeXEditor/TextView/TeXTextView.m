@@ -1341,21 +1341,21 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
     if (r.length > 0) {
-      NSString *word = [[self string] substringWithRange:r];
-      
-      NSString *textToSearch = [[self string] substringWithRange:vr];
-      NSArray *matches = [textToSearch rangesOfString:word];
-      
-      NSColor *highlightColor = [[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6];
-      for (NSValue *match in matches) {
-        NSRange r = [match rangeValue];
-        r.location += vr.location;
-        [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
-      }
-      
+      NSString *word = [[[self string] substringWithRange:r] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      word = [word stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+      if (word && [word length]>0) {
+        NSString *textToSearch = [[self string] substringWithRange:vr];
+        NSArray *matches = [textToSearch rangesOfString:word];
+        
+        NSColor *highlightColor = [[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6];
+        for (NSValue *match in matches) {
+          NSRange r = [match rangeValue];
+          r.location += vr.location;
+          [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
+        }
+      }      
     }
   }
-  
 }
 
 - (void) clearHighlight
@@ -2087,10 +2087,20 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 {
   // check pboard type
   NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    
+  // check for an image type
+  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
+  if (type) {
+    [self pasteAsImage];
+  } else {
+    [self pasteAsPlainText:sender];
+  }
   
-  NSLog(@"%@", [pboard types]);
-  
-  [self pasteAsPlainText:sender];
+}
+
+- (void)pasteAsImage
+{
+  [NSApp sendAction:@selector(pasteAsImage:) to:nil from:self];  
 }
 
 - (IBAction) pasteTable:(id)sender
@@ -2100,7 +2110,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   if ( [[pboard types] containsObject:NSStringPboardType] ) {
     NSString *rawstring = [pboard stringForType:NSStringPboardType];
     NSArray *rows = [rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    NSLog(@"Rows %@", rows);
     
     // check max columns
     NSInteger columnCount = 0;
@@ -2139,20 +2148,42 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
     [stringToPaste appendFormat:@"\\end{table}\n"];
     
-//    NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:stringToPaste] autorelease];
-//    [astr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [astr length])];
-//    NSRange sel = [self selectedRange];
-//
-//    [[self textStorage] beginEditing];
-//    [[self textStorage] insertAttributedString:astr atIndex:sel.location];
-//    [[self textStorage] endEditing];
-//    
-//    [self colorVisibleText];
-    
-    [self insertText:stringToPaste];
-    
+    [self insertText:stringToPaste];    
   }
 }
 
+
+- (BOOL) validateMenuItem:(NSMenuItem *)menuItem
+{
+	NSInteger tag = [menuItem tag];
+  if (tag == 1060) {
+    // paste as table. Check we have text on the pasteboard
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSRTFDPboardType, NSRTFPboardType, NSStringPboardType,nil]];
+    if (type) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  if (tag == 1050) {
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
+    if (type) {
+      return YES;
+    } else {
+      
+      type = [pboard availableTypeFromArray:[NSArray arrayWithObjects: NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, nil]];
+      if (type) {
+        return YES;
+      }
+      
+      return NO;
+    }
+  }
+  
+  return [super validateMenuItem:menuItem];
+}
 
 @end
