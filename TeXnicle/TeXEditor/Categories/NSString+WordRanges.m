@@ -17,7 +17,7 @@
   NSRange uncheckedRange = NSMakeRange(0, myLength);
   for(;;) {
     NSRange foundAtRange = [self rangeOfString:subString
-                                       options:0
+                                       options:NSCaseInsensitiveSearch
                                          range:uncheckedRange];
     if (foundAtRange.location != NSNotFound) {
       
