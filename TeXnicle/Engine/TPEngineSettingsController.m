@@ -39,7 +39,10 @@
 - (void)setupEngineSettings
 {
   [engineSelector removeAllItems];
-  [engineSelector addItemWithTitle:[self engineName]];
+  NSString *engineName = [self engineName];
+  if (engineName && [engineName length]>0) {    
+    [engineSelector addItemWithTitle:[self engineName]];
+  }
   
   [doBibtexButton setState:[[self doBibtex] intValue]];
   [doPS2PDFButton setState:[[self doPS2PDF] intValue]];
