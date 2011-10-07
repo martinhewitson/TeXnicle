@@ -180,6 +180,7 @@
 #pragma mark -
 #pragma mark Text Handling
 
+- (IBAction)pasteAsImage:(id)sender;
 - (void) insertTextToCurrentDocument:(NSString*)string;
 
 

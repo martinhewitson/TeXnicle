@@ -26,6 +26,7 @@
 #import "TPEngine.h"
 #import "Settings.h"
 #import "UKXattrMetadataStore.h"
+#import "NSString+RelativePath.h"
 
 #define kSplitViewLeftMinSize 234
 
@@ -263,7 +264,7 @@
 {
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
-  [self setupDocument];
+  [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
   [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
 }
 
@@ -558,23 +559,23 @@
   }
   
   if (anItem == self.newFileButton) {
-    if ([self.projectItemTreeController canAdd]) {
-      NSArray *selected = [self.projectItemTreeController selectedObjects];
-      if ([selected count] == 1) {
-        id item = [selected objectAtIndex:0];
-        if ([item isKindOfClass:[FolderEntity class]]) {
-          return YES;
-        }
-        
-        if ([item isKindOfClass:[FileEntity class]]) {
-          FileEntity *file = (FileEntity*)item;
-          if ([file parent]) {
+//    if ([self.projectItemTreeController canAdd]) {
+//      NSArray *selected = [self.projectItemTreeController selectedObjects];
+//      if ([selected count] == 1) {
+//        id item = [selected objectAtIndex:0];
+//        if ([item isKindOfClass:[FolderEntity class]]) {
+//          return YES;
+//        }
+//        
+//        if ([item isKindOfClass:[FileEntity class]]) {
+//          FileEntity *file = (FileEntity*)item;
+//          if ([file parent]) {
             return YES;
-          }
-        }
-      }
-    }
-    return NO;
+//          }
+//        }
+//      }
+//    }
+//    return NO;
   }
   
   return [super validateUserInterfaceItem:anItem];
@@ -960,6 +961,7 @@
 - (IBAction) findInProject:(id)sender
 {
   [controlsTabview selectTabViewItemAtIndex:4];	
+  [self.windowForSheet makeFirstResponder:self.finder.searchField];
 }
 
 #pragma mark -
@@ -1201,6 +1203,86 @@
 #pragma mark -
 #pragma mark Text Handling
 
+- (IBAction)pasteAsImage:(id)sender
+{  
+
+  // make a filename for the image checking the selected path in the project
+  NSString *root = [self.projectItemTreeController pathForInsertion];
+  
+  NSString *fileRoot = @"pastedImage";
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSInteger count = 0;
+  
+  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
+  if (type) {
+    NSString *ext = [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:type];
+    NSString *imagePath = [[root stringByAppendingPathComponent:fileRoot] stringByAppendingPathExtension:ext];
+    while ([fm fileExistsAtPath:imagePath]) {
+      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%d", count]] stringByAppendingPathExtension:ext];
+      count++;
+    }
+        
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    [panel setTitle:@"Save pasted image"];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:type]];
+    [panel setAllowsOtherFileTypes:NO];
+    [panel setCanCreateDirectories:YES];
+    [panel setMessage:@"Save pasted image"];
+    [panel setNameFieldLabel:@"Image Path"];
+    [panel setNameFieldStringValue:[imagePath lastPathComponent]];
+    [panel setDirectoryURL:[NSURL fileURLWithPath:[imagePath stringByDeletingLastPathComponent]]];
+    
+    [panel beginSheetModalForWindow:self.windowForSheet completionHandler:^(NSInteger result) {
+      
+      if (result == NSFileHandlingPanelCancelButton) {
+        return;
+      }
+      
+      NSURL *url = [panel URL];
+      
+      // get data
+      NSData *data = [pboard dataForType:type];    
+      
+      // write the file
+      if ([data writeToURL:url atomically:YES]) {
+        // cache current open document
+        FileEntity *currentDoc = [self.openDocuments currentDoc];
+        
+        // add it to the project
+        [self addFileAtURL:url copy:NO];
+        
+        // select current doc again
+        [self.openDocuments selectTabForFile:currentDoc];
+        
+        // insert text
+        NSString *projectFolder = [self.project valueForKey:@"folder"];
+        NSString *file = [projectFolder relativePathTo:[url path]];
+        NSString *name = [[[url path] lastPathComponent] stringByDeletingPathExtension];
+        NSMutableString *insert = [NSMutableString stringWithFormat:@"\\begin{figure}[htbp]\n"];
+        [insert appendFormat:@"\\centering\n"];
+        [insert appendFormat:@"\\includegraphics[width=0.8\\textwidth]{%@}\n", file];
+        [insert appendFormat:@"\\caption{My Nice Pasted Figure.}\n"];
+        [insert appendFormat:@"\\label{fig:%@}\n", name];
+        [insert appendFormat:@"\\end{figure}\n"];
+        [self insertTextToCurrentDocument:insert];
+      } else {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Creating Image Failed"
+                                         defaultButton:@"OK"
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Failed to create image from the clipboard at %@", [url path]];
+        [alert beginSheetModalForWindow:self.windowForSheet modalDelegate:nil didEndSelector:nil contextInfo:NULL];
+      }
+      
+      
+    }];
+    
+  }
+  
+}
+
+
 - (void) insertTextToCurrentDocument:(NSString*)string
 {
 	[self.texEditorViewController.textView insertText:string];
@@ -1339,7 +1421,8 @@
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
 	NSInteger tag = [menuItem tag];
-	
+
+  
   if (tag == 116020) {
     return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
   }
