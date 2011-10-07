@@ -132,6 +132,7 @@
 		2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */; };
 		25496A8113F2FCEA00E6D303 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25496A8013F2FCE900E6D303 /* newTeXDoc.icns */; };
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
+		254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254FEEA7143ECEF4008B5B12 /* latexmk.engine */; };
 		2552029113E86619007F191F /* rightArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029013E86619007F191F /* rightArrow.icns */; };
 		2552029413E866DF007F191F /* searchRight.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029313E866DF007F191F /* searchRight.icns */; };
 		2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552029613E86C1E007F191F /* HHValidatedButton.m */; };
@@ -469,6 +470,7 @@
 		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
 		25496A8013F2FCE900E6D303 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
 		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = template.engine; sourceTree = "<group>"; };
+		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = latexmk.engine; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029313E866DF007F191F /* searchRight.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = searchRight.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../HHValidatedButton.h; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 		2523C7E41405488B00A47297 /* EngineScripts */ = {
 			isa = PBXGroup;
 			children = (
+				254FEEA7143ECEF4008B5B12 /* latexmk.engine */,
 				2523C7E5140548B400A47297 /* latex.engine */,
 				25AAC8E91407C45C00B61B1A /* pdflatex.engine */,
 				25AAC8ED1407E65400B61B1A /* context.engine */,
@@ -1584,6 +1587,7 @@
 				254B503314095AED0023AABB /* template.engine in Resources */,
 				257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */,
 				25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */,
+				254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
