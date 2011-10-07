@@ -709,9 +709,9 @@ withIntermediateDirectories:YES
 	[openPanel setAllowsMultipleSelection:YES];
 	[openPanel setCanCreateDirectories:NO];
 	
-	NSArray *fileTypes = [NSArray arrayWithObjects:@"txt", @"text",
-                        NSFileTypeForHFSTypeCode( 'TEXT' ), @"tex", nil];
-	[openPanel setAllowedFileTypes:fileTypes];
+//	NSArray *fileTypes = [NSArray arrayWithObjects:@"txt", @"text",
+//                        NSFileTypeForHFSTypeCode( 'TEXT' ), @"tex", nil];
+//	[openPanel setAllowedFileTypes:fileTypes];
 	
 	selectedFolder = aFolder;
 	
