@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11B26</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1617</string>
+			<string key="NS.object.0">1938</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSUserDefaultsController</string>
@@ -31,7 +31,10 @@
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<object class="NSCustomObject" id="1001">
 				<string key="NSClassName">TeXEditorViewController</string>
@@ -53,19 +56,19 @@
 							<object class="NSButton" id="197062682">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{407, 11}, {40, 19}}</string>
+								<string key="NSFrame">{{407, 12}, {40, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="164783810"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="801503709">
 									<int key="NSCellFlags">-2080244224</int>
-									<int key="NSCellFlags2">134217728</int>
+									<int key="NSCellFlags2">134348800</int>
 									<string key="NSContents">%%+</string>
-									<object class="NSFont" key="NSSupport" id="831363942">
+									<object class="NSFont" key="NSSupport" id="26">
 										<string key="NSName">LucidaGrande</string>
-										<double key="NSSize">12</double>
-										<int key="NSfFlags">16</int>
+										<double key="NSSize">11</double>
+										<int key="NSfFlags">3100</int>
 									</object>
 									<reference key="NSControlView" ref="197062682"/>
 									<int key="NSButtonFlags">-2038152961</int>
@@ -79,16 +82,16 @@
 							<object class="NSButton" id="164783810">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{455, 11}, {69, 19}}</string>
+								<string key="NSFrame">{{455, 12}, {69, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="52710183"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="887195784">
 									<int key="NSCellFlags">-2080244224</int>
-									<int key="NSCellFlags2">134217728</int>
+									<int key="NSCellFlags2">134348800</int>
 									<string key="NSContents">unfold all</string>
-									<reference key="NSSupport" ref="831363942"/>
+									<reference key="NSSupport" ref="26"/>
 									<reference key="NSControlView" ref="164783810"/>
 									<int key="NSButtonFlags">-2038152961</int>
 									<int key="NSButtonFlags2">164</int>
@@ -101,19 +104,15 @@
 							<object class="NSPopUpButton" id="110675771">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{5, 9}, {394, 24}}</string>
+								<string key="NSFrame">{{5, 12}, {394, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="197062682"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="513918167">
 									<int key="NSCellFlags">-2080244160</int>
-									<int key="NSCellFlags2">264192</int>
-									<object class="NSFont" key="NSSupport">
-										<string key="NSName">LucidaGrande</string>
-										<double key="NSSize">9</double>
-										<int key="NSfFlags">3614</int>
-									</object>
+									<int key="NSCellFlags2">133120</int>
+									<reference key="NSSupport" ref="26"/>
 									<reference key="NSControlView" ref="110675771"/>
 									<int key="NSButtonFlags">-2038284033</int>
 									<int key="NSButtonFlags2">402653348</int>
@@ -239,13 +238,7 @@
 												<integer value="1" key="NSUnderline"/>
 											</dictionary>
 											<nil key="NSDefaultParagraphStyle"/>
-											<object class="NSTextFinder" key="NSTextFinder">
-												<reference key="NSTextFinderClient" ref="195271064"/>
-												<reference key="NSFindBarContainer" ref="52710183"/>
-												<int key="NSTextFinderStyle">2</int>
-												<bool key="NSIncrementalSearchingEnabled">NO</bool>
-												<bool key="NSIncrementalSearchingShouldDimContentView">YES</bool>
-											</object>
+											<nil key="NSTextFinder"/>
 											<int key="NSPreferredTextFinderStyle">2</int>
 										</object>
 										<int key="NSTVFlags">6</int>
@@ -572,11 +565,83 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">markerButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="197062682"/>
+					</object>
+					<int key="connectionID">69</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sectionListPopup</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="110675771"/>
+					</object>
+					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">unfoldButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="164783810"/>
+					</object>
+					<int key="connectionID">71</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sectionListController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="517219778"/>
+					</object>
+					<int key="connectionID">72</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">containerView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1005"/>
+					</object>
+					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">jumpBar</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="766462403"/>
+					</object>
+					<int key="connectionID">74</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">scrollView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="52710183"/>
+					</object>
+					<int key="connectionID">75</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="195271064"/>
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">12</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">goToLineController</string>
+						<reference key="source" ref="195271064"/>
+						<reference key="destination" ref="735776936"/>
+					</object>
+					<int key="connectionID">35</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">expandAll:</string>
+						<reference key="source" ref="195271064"/>
+						<reference key="destination" ref="164783810"/>
+					</object>
+					<int key="connectionID">40</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -635,20 +700,20 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<int key="connectionID">34</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">goToLineController</string>
-						<reference key="source" ref="195271064"/>
-						<reference key="destination" ref="735776936"/>
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: values.TEShowCodeFolders</string>
+						<reference key="source" ref="164783810"/>
+						<reference key="destination" ref="938111325"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="164783810"/>
+							<reference key="NSDestination" ref="938111325"/>
+							<string key="NSLabel">enabled: values.TEShowCodeFolders</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">values.TEShowCodeFolders</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
 					</object>
-					<int key="connectionID">35</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">expandAll:</string>
-						<reference key="source" ref="195271064"/>
-						<reference key="destination" ref="164783810"/>
-					</object>
-					<int key="connectionID">40</int>
+					<int key="connectionID">68</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -681,78 +746,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="110675771"/>
 					</object>
 					<int key="connectionID">65</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: values.TEShowCodeFolders</string>
-						<reference key="source" ref="164783810"/>
-						<reference key="destination" ref="938111325"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="164783810"/>
-							<reference key="NSDestination" ref="938111325"/>
-							<string key="NSLabel">enabled: values.TEShowCodeFolders</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">values.TEShowCodeFolders</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">68</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">markerButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="197062682"/>
-					</object>
-					<int key="connectionID">69</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">sectionListPopup</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="110675771"/>
-					</object>
-					<int key="connectionID">70</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">unfoldButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="164783810"/>
-					</object>
-					<int key="connectionID">71</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">sectionListController</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="517219778"/>
-					</object>
-					<int key="connectionID">72</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">containerView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1005"/>
-					</object>
-					<int key="connectionID">73</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">jumpBar</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="766462403"/>
-					</object>
-					<int key="connectionID">74</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">scrollView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="52710183"/>
-					</object>
-					<int key="connectionID">75</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
