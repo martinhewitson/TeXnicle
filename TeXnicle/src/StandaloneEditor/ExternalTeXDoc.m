@@ -962,6 +962,13 @@
   if (subview == leftView)
     return NO;
   
+  if (subview == rightView) {
+    NSRect b = [rightView bounds];
+    if (b.size.width < 200) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 

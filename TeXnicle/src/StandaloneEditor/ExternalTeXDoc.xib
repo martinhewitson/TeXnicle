@@ -412,7 +412,6 @@
 							<string key="NSFrame">{{550, 9}, {32, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:3954</string>
 							<int key="NSpiFlags">28682</int>
 							<double key="NSMaxValue">100</double>
@@ -433,6 +432,17 @@
 								<object class="NSCustomView" id="354661662">
 									<reference key="NSNextResponder" ref="1023531812"/>
 									<int key="NSvFlags">256</int>
+									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSCustomView" id="411306343">
+											<reference key="NSNextResponder" ref="354661662"/>
+											<int key="NSvFlags">274</int>
+											<string key="NSFrame">{{0, -1}, {207, 575}}</string>
+											<reference key="NSSuperview" ref="354661662"/>
+											<reference key="NSWindow"/>
+											<string key="NSReuseIdentifierKey">_NS:1192</string>
+											<string key="NSClassName">NSView</string>
+										</object>
+									</array>
 									<string key="NSFrame">{{387, 0}, {207, 574}}</string>
 									<reference key="NSSuperview" ref="1023531812"/>
 									<reference key="NSWindow"/>
@@ -1240,14 +1250,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">pdfViewContainer</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="354661662"/>
-					</object>
-					<int key="connectionID">220</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">leftView</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="1001950842"/>
@@ -1261,6 +1263,14 @@
 						<reference key="destination" ref="354661662"/>
 					</object>
 					<int key="connectionID">222</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">pdfViewContainer</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="411306343"/>
+					</object>
+					<int key="connectionID">225</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1889,7 +1899,15 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">218</int>
 						<reference key="object" ref="354661662"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="411306343"/>
+						</array>
 						<reference key="parent" ref="1023531812"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">224</int>
+						<reference key="object" ref="411306343"/>
+						<reference key="parent" ref="354661662"/>
 					</object>
 				</array>
 			</object>
@@ -1941,6 +1959,7 @@
 				<string key="218.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="219.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="224.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="26.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1982,7 +2001,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">223</int>
+			<int key="maxID">225</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
