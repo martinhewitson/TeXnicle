@@ -313,5 +313,18 @@
   [panel setAction:NULL];
 }
 
+- (IBAction)setDefaultLineHighlightingColor:(id)sender
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0]] forKey:TEHighlightCurrentLineColor];
+  [defaults synchronize];
+}
+
+- (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender
+{  
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setValue:[NSArray arrayWithColor:[[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6]] forKey:TEHighlightMatchingWordsColor];
+  [defaults synchronize];
+}
 
 @end

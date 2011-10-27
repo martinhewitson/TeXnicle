@@ -94,5 +94,8 @@
 
 - (IBAction) wrapStyleChanged:(id)sender;
 
+- (IBAction)setDefaultLineHighlightingColor:(id)sender;
+- (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender;
+
 
 @end
