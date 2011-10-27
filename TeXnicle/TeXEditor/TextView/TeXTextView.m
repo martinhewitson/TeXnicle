@@ -463,13 +463,15 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   }
   
   // highlight current line
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEHighlightCurrentLine] boolValue]) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([[defaults valueForKey:TEHighlightCurrentLine] boolValue]) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
     if (sel.location <= [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
       NSRect lineRect = [self highlightRectForRange:lineRange];
-      [self.lineHighlightColor set];
+      NSColor *highlightColor = [[defaults valueForKey:TEHighlightCurrentLineColor] colorValue];
+      [highlightColor set];
       [NSBezierPath fillRect:lineRect];
     }
   }
@@ -1347,7 +1349,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         NSString *textToSearch = [[self string] substringWithRange:vr];
         NSArray *matches = [textToSearch rangesOfString:word];
         
-        NSColor *highlightColor = [[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6];
+        NSColor *highlightColor = [[defaults valueForKey:TEHighlightMatchingWordsColor] colorValue];
         for (NSValue *match in matches) {
           NSRange r = [match rangeValue];
           r.location += vr.location;
@@ -2096,6 +2098,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [self pasteAsPlainText:sender];
   }
   
+  [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
 }
 
 - (void)pasteAsImage
@@ -2150,6 +2153,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     
     [self insertText:stringToPaste];    
   }
+  
+  [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
 }
 
 
