@@ -643,7 +643,9 @@
   // some useful numbers for drawing the line numbers
   CGFloat boundsWidth = NSWidth([self bounds]);
   CGFloat rwidth = boundsWidth - foldWidth;
+//  NSLog(@"Looking for point %@", NSStringFromPoint(aPoint));
   for (MHLineNumber *line in self.lineNumbers) {
+//    NSLog(@"  in %@", line);
     NSRect r = NSMakeRect(0, line.rect.origin.y, rwidth, line.rect.size.height);
     if (NSPointInRect(aPoint, r)) {
       return line;
@@ -789,10 +791,12 @@
   
   // can we get the line number clicked on?
   MHLineNumber *clickedLine = [self lineNumberForPoint:clickPoint];
-  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
-                                                      object:self.textView
-                                                    userInfo:dict];
+  if (clickedLine) {
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
+                                                        object:self.textView
+                                                      userInfo:dict];
+  }
   
 //  NSLog(@"Clicked on %@", folder);
   [self resetLineNumbers];
