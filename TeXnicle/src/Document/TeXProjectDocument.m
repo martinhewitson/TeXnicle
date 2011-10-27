@@ -71,6 +71,8 @@
 @synthesize engineSettings;
 @synthesize engineSettingsContainer;
 
+@synthesize miniConsole;
+
 - (void) dealloc
 {
 //  NSLog(@"TeXProjectDocument dealloc");
@@ -183,6 +185,9 @@
   // setup engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
   
+  // register the mini console
+  [self.engineManager registerConsole:self.miniConsole];
+  
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
   
@@ -256,7 +261,6 @@
                                                     userInfo:nil
                                                      repeats:YES];
   
-  
   [self showDocument];
 }
 
@@ -264,6 +268,19 @@
 {
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  // setup toolbar
+  
+  
+  self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
+  NSArray *items = [[[self windowForSheet] toolbar] items];
+  for (NSToolbarItem *item in items) {
+    if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
+      NSBox *box = (NSBox*)[item view];
+      [box setContentView:self.miniConsole.view];
+    }
+  }
+  [self.miniConsole message:@"Welcome."];
+  
   [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
   [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
 }
@@ -325,7 +342,7 @@
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
   NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
+  ProjectEntity *project = [[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
   
   // set name and folder of the project
   NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
@@ -1357,7 +1374,7 @@
 {
 	// build path to the pdf file
 	NSString *mainFile = [self documentToCompile]; 
-  NSString *docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+  NSString *docFile = [mainFile stringByAppendingPathExtension:@"pdf"];
   // check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:docFile]) {
@@ -1491,6 +1508,15 @@
     }
   }
   
+  // reload from disk
+  if (tag == 10100) {
+    if ([self.openDocuments currentDoc] != nil) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
 	return [super validateMenuItem:menuItem];
 }
 
@@ -1498,7 +1524,15 @@
 {
  [self.openDocuments selectTabForFile:aFile];
 }
-   
+
+- (IBAction)reloadCurrentFileFromDisk:(id)sender
+{
+  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
+  FileEntity *fileEntity = [self.openDocuments currentDoc];
+  [fileEntity reloadFromDisk];
+  [self.openDocuments updateDoc];  
+}
+
 - (IBAction)selectTab:(id)sender
 {
 	NSMenuItem *item = (NSMenuItem*)sender;
@@ -2148,6 +2182,19 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return files;
 }
 
+- (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
+{
+//  NSLog(@"File %@ was accessed at %@", [file valueForKey:@"name"], access);
+  FileEntity *fileEntity = (FileEntity*)file;
+  if (![file hasEdits]) {
+    NSRange selected = [self.texEditorViewController.textView selectedRange];
+    [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
+    [fileEntity reloadFromDisk];
+    [self.openDocuments updateDoc];  
+    [self.texEditorViewController.textView setSelectedRange:selected];
+  }
+}
+
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
   NSString *filename = [file valueForKey:@"shortName"];
@@ -2546,6 +2593,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   return self.project.settings.nCompile;
 }
+
 
 
 @end

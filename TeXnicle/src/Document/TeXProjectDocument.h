@@ -21,6 +21,8 @@
 #import "TPEngineManager.h"
 #import "TPEngineSettingsController.h"
 #import "TPOutlineView.h"
+#import "MHMiniConsoleViewController.h"
+#import "MHConsoleManager.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -30,7 +32,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -97,7 +99,11 @@
   HHValidatedButton *newFileButton;
   
   NSProgressIndicator *compileProgressIndicator;
+  
+  MHMiniConsoleViewController *miniConsole;
 }
+
+@property (retain) MHMiniConsoleViewController *miniConsole;
 
 @property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
 
@@ -210,6 +216,7 @@
 #pragma mark Files and Folders
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem;
+- (IBAction)reloadCurrentFileFromDisk:(id)sender;
 - (void) selectTabForFile:(FileEntity*)aFile;
 - (IBAction) selectTab:(id)sender;
 - (IBAction) selectNextTab:(id)sender;
