@@ -12,12 +12,16 @@
 #import "TPEngineManager.h"
 #import "TPEngineSettingsController.h"
 #import "MHMiniConsoleViewController.h"
+#import "PDFViewerController.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
 
-@interface ExternalTeXDoc : NSDocument <NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
+  IBOutlet NSView *leftView;
+  IBOutlet NSView *rightView;
+  
 	NSMutableAttributedString *documentData;
 
 	IBOutlet NSWindow *addToProjectSheet;
@@ -52,9 +56,21 @@
   
   NSWindow *mainWindow;
   
+  NSView *pdfViewContainer;
+    
+  BOOL shouldHighlightFirstMatch;
+  
+  BOOL shouldContinueSearching;
+  
+  NSMutableArray *results;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
+
+@property (retain) NSMutableArray *results;
+
+@property (assign) IBOutlet NSView *pdfViewContainer;
+@property (retain) PDFViewerController *pdfViewerController;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
@@ -104,8 +120,10 @@
 - (void) build;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
 - (IBAction) openPDF:(id)sender;
-
+- (void) showDocument;
 - (NSString*)compiledDocumentPath;
+
+- (BOOL) pdfHasSelection;
 
 @end
 

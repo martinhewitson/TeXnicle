@@ -17,6 +17,10 @@
 #import "TPStatusView.h"
 #import "UKXattrMetadataStore.h"
 #import "MHFileReader.h"
+#import "NSAttributedString+LineNumbers.h"
+#import "RegexKitLite.h"
+#import "MHLineNumber.h"
+#import "TPDocumentMatch.h"
 
 @implementation ExternalTeXDoc
 
@@ -34,9 +38,14 @@
 @synthesize compileProgressIndicator;
 @synthesize miniConsole;
 @synthesize mainWindow;
+@synthesize pdfViewContainer;
+@synthesize pdfViewerController;
+@synthesize results;
 
 - (void)awakeFromNib
 {
+  self.results = [NSMutableArray array];
+  
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
   
@@ -51,10 +60,15 @@
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
+  // setup pdf viewer
+  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
+  NSView *pdfViewer = [self.pdfViewerController view];
+  [pdfViewer setFrame:[self.pdfViewContainer bounds]];
+  [self.pdfViewContainer addSubview:pdfViewer];
+  
   // set up engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
-  
-  
+    
   // set up engine settings
   self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
   [self.engineSettingsController.view setFrame:[self.drawerContentView bounds]];
@@ -103,6 +117,8 @@
 
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
+  
+  [self showDocument];
 }
 
 - (void) initSettings
@@ -165,9 +181,157 @@
   self.engineManager = nil;
   self.settings = nil;
   self.miniConsole = nil;
+  self.pdfViewerController = nil;
+  self.results = nil;
 	[super dealloc];
 }
 
+- (BOOL) validateMenuItem:(NSMenuItem *)menuItem
+{
+	NSInteger tag = [menuItem tag];
+  
+  // find text selection in pdf
+  if (tag == 116020) {
+    return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
+  }
+  
+  // Find PDF Selection in Source
+  if (tag == 116030) {
+    return [self pdfHasSelection]; 
+  }
+
+	return [super validateMenuItem:menuItem];
+}
+
+#pragma mark -
+#pragma mark PDF Selection
+
+- (IBAction)findCorrespondingPDFText:(id)sender
+{
+  // get selected text
+  NSString *text = [self.texEditorViewController selectedText];
+  [self.pdfViewerController setSearchText:text];
+  [self.pdfViewerController searchForStringInPDF:text];
+}
+
+- (IBAction)findSource:(id)sender
+{
+  [self.results removeAllObjects];
+  
+  NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
+  NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
+  
+  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
+  NSString *searchTerm = [selection string];
+
+  // search this string
+  NSMutableAttributedString *aStr = [[self.texEditorViewController.textView textStorage] mutableCopy];
+  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
+  NSString *string = [aStr unfoldedString];
+  [aStr release];
+  if (!string)
+    return;
+  
+	NSArray *searchTerms = [searchTerm componentsSeparatedByString:@" "];
+  if ([searchTerms count] == 0) {
+    return;
+  }
+  
+	NSMutableString *regexp = [NSMutableString stringWithString:@"(\\n)?.*"];
+	for (NSString *term in searchTerms) {
+		[regexp appendFormat:@"%@(\\s)*(\\n)?", term];
+	}
+	[regexp appendFormat:@".*(\\n)?"];
+  
+  NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
+  
+  NSScanner *aScanner = [NSScanner scannerWithString:string];
+  BOOL didMatch = NO;
+  shouldContinueSearching = YES;
+  if ([regexpresults count] > 0) {
+    
+    for (NSString *result in regexpresults) {
+      if (!shouldContinueSearching) {
+        break;
+      } // If should continue 
+      
+      NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
+      
+      returnResult = [result stringByTrimmingCharactersInSet:ws];
+      returnResult = [returnResult stringByTrimmingCharactersInSet:ns];
+      
+      if ([aScanner scanUpToString:returnResult intoString:NULL]) {
+        
+        NSRange resultRange = NSMakeRange([aScanner scanLocation], [returnResult length]);
+        if (resultRange.location != NSNotFound) {
+          
+          NSRange subrange    = [returnResult rangeOfRegex:[searchTerms objectAtIndex:0]];
+          if (subrange.location != NSNotFound) {
+            resultRange.location += subrange.location;
+            resultRange.length = [searchTerm length];
+            
+            
+            // scan back to start of word
+            NSInteger idx = subrange.location;
+            while (idx > 0) {
+              if ([ws characterIsMember:[returnResult characterAtIndex:idx]]) {
+                break;
+              }
+              idx--;
+            }
+            NSInteger len = (NSInteger)MIN(subrange.location-idx+30, [returnResult length]-idx);
+            len = MAX(len, [searchTerm length]);
+            NSString *matchingString = [returnResult substringWithRange:NSMakeRange(idx, len)];
+            if (idx>0) {
+              matchingString = [@"..." stringByAppendingString:matchingString];
+              idx-=3;
+            }
+            
+            MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
+            NSInteger lineNumber = ln.number;
+            TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber withRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:nil];
+            if (![self.results containsObject:match]) {
+              [self.results addObject:match];
+            }
+            didMatch = YES;
+            
+          } // end subrange found
+        } // end result range founds
+      } // end scanner
+    } // end loop over results
+  } // end if [results count] > 0  
+
+
+  // highlight first result
+  if ([self.results count]>0) {
+    TPDocumentMatch *first = [self.results objectAtIndex:0];
+    
+    // expand all folded code
+    [self.texEditorViewController.textView expandAll:self];
+    
+    // Now highlight the search term in that 
+    [self.texEditorViewController.textView selectRange:first.range scrollToVisible:YES animate:YES];
+    
+    // Make text view first responder
+    [self.mainWindow makeFirstResponder:self.texEditorViewController.textView]; 
+    
+  }
+  
+  
+}
+      
+
+- (BOOL) pdfHasSelection
+{
+  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
+  if (selection) {
+    NSString *selectedText = [selection string];
+    if (selectedText && [selectedText length]>0) {
+      return YES;
+    }
+  }
+  return NO;
+}
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
@@ -217,6 +381,16 @@
 	return NO;
 }
 
+- (void) showDocument
+{
+  NSView *view = [self.pdfViewerController.pdfview documentView];    
+  NSRect r = [view visibleRect];
+  BOOL hasDoc = [self.pdfViewerController hasDocument];
+  [self.pdfViewerController redisplayDocument];
+  if (hasDoc) {
+    [view scrollRectToVisible:r];
+  }
+}
 
 - (IBAction) saveDocument:(id)sender
 {
@@ -580,6 +754,7 @@
 - (IBAction) clean:(id)sender
 {
   [self.engineManager trashAuxFiles];
+  [self showDocument];
 }
 
 - (IBAction) buildAndView:(id)sender
@@ -615,6 +790,7 @@
   [self.compileProgressIndicator stopAnimation:self];
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
+    [self showDocument];
     if (openPDFAfterBuild) {
       [self openPDF:self];
     }
@@ -761,6 +937,58 @@
   }
   
   return nil;
+}
+
+#pragma mark -
+#pragma mark PDFViewerController delegate
+
+- (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
+{
+  NSString *path = [self compiledDocumentPath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:path]) {
+    return path;
+  } else {
+    return nil;
+  }
+  
+}
+
+#pragma mark -
+#pragma mark Split view delegate
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
+{
+  if (subview == leftView)
+    return NO;
+  
+  return YES;
+}
+
+
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
+{
+  return YES;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
+{
+  if (dividerIndex == 0) {
+    NSRect b = [splitView bounds];
+    return b.size.width-250;
+  }
+  
+  return proposedMax;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
+{
+  
+  if (dividerIndex == 0) {
+    return 250;
+  }
+  
+  return proposedMin;
 }
 
 @end
