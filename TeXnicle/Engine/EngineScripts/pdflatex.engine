@@ -44,7 +44,7 @@ do
   echo "***------------------------------------------------------------"
   echo "*** Run $count..."
   echo "***------------------------------------------------------------"
-  $ENGINE -file-line-error -interaction=nonstopmode $mainfile
+  $ENGINE -file-line-error -interaction=nonstopmode "$mainfile"
 
   # if this is after the first run, run bibtex if requested
   if [ $count -eq 1 ]
@@ -52,7 +52,7 @@ do
     if [ $doBibtex -eq 1 ]
     then
       echo "*** Running bibtex..."
-      $BIBTEX $mainfile
+      $BIBTEX "$mainfile"
     fi
   fi
 

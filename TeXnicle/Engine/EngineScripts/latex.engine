@@ -48,7 +48,7 @@ do
   echo "***------------------------------------------------------------"
   echo "*** Run $count..."
   echo "***------------------------------------------------------------"
-  $ENGINE -file-line-error -interaction=nonstopmode $mainfile
+  $ENGINE -file-line-error -interaction=nonstopmode "$mainfile"
 
   # if this is after the first run, run bibtex if requested
   if [ $count -eq 1 ]
@@ -56,7 +56,7 @@ do
     if [ $doBibtex -eq 1 ]
     then
       echo "*** Running bibtex..."
-      $BIBTEX $mainfile
+      $BIBTEX "$mainfile"
     fi
   fi
 
@@ -65,14 +65,14 @@ done
 
 # Run dvips
 echo "*** Doing dvips on $mainfile..."
-$DVIPS $mainfile
+$DVIPS "$mainfile"
 
 
 # Optionally do ps2pdf
 if [ $doPS2PDF -eq 1 ]
 then
   echo "*** Doing ps2pdf..."
-  $PS2PDF $mainfile.ps
+  $PS2PDF "$mainfile.ps"
 fi
 
 echo "*** latex.engine has completed."

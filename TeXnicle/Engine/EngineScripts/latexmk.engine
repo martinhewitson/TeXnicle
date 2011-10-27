@@ -1,11 +1,11 @@
 #!/bin/sh
 # 
-# This is a <ENGINE_NAME> engine for TeXnicle. 
+# This is a latexmk engine for TeXnicle. 
 #
-# It does this and that.
+# It runs latexmk on the project main file.
 #
 #
-#  <ENGINE_NAME>.engine
+#  latexmk.engine
 #  TeXnicle
 
 if [ $# -lt 2 ]
@@ -17,24 +17,17 @@ fi
 # Executable values
 PATH=$PATH:/usr/texbin/
 ENGINE=latexmk
-# BIBTEX=/usr/texbin/bibtex
-# DVIPS=/usr/texbin/dvips
-# PS2PDF=/usr/local/bin/ps2pdf
 
 # Process inputs.
 # TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
 # script and the working directory as the second input. Other options follow.
 mainfile=$1 
 outputDir=$2
-nCompile=$3
-doBibtex=$4
-doPS2PDF=$5
 
 echo "****************************"
 echo "*** Compiling $mainfile"
 echo "*** Output dir $outputDir"
-echo "*** Ncompile $nCompile"
-echo "*** Do bibtex $doBibtex"
+
 echo "****************************"
 
 # Go to the working directory
@@ -43,12 +36,12 @@ cd "$outputDir"
 #---------------------------
 # Put engine logic here
 
-$ENGINE -pdf $mainfile
+$ENGINE -pdf "$mainfile"
 
 
 # Engine logic finished
 #---------------------------
 
-echo "*** <ENGINE_NAME>.engine has completed."
+echo "*** latexmk.engine has completed."
 
 # END
