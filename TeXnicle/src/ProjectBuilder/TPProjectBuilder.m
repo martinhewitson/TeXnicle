@@ -193,8 +193,8 @@
 		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];		
 	}
 	
-	newFile = [[NSManagedObject alloc] initWithEntity:entity
-										 insertIntoManagedObjectContext:moc];
+	newFile = [[FileEntity alloc] initWithEntity:entity
+                insertIntoManagedObjectContext:moc];
   
 	// set the parent object
   [newFile setParent:folder];
@@ -273,7 +273,7 @@
     if (createFolder) {
       // make the folder
       NSEntityDescription *newFolderEntity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:moc];
-      FolderEntity *newFolder = [[NSManagedObject alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc];
+      FolderEntity *newFolder = [[FolderEntity alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc];
       
       // set name
       [newFolder setValue:comp forKey:@"name"];
