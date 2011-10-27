@@ -987,7 +987,7 @@
 - (void) handleLineNumberClickedNotification:(NSNotification*)aNote
 {
   MHLineNumber *linenumber = [[aNote userInfo] valueForKey:@"LineNumber"];
-  
+//  NSLog(@"Clicked on %@", linenumber);
   // Check if there is already a bookmark for this file
   if ([self hasBookmarkAtLine:linenumber.number]) {
     [self removeBookmarkAtLine:linenumber.number];
