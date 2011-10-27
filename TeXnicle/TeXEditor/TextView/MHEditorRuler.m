@@ -835,6 +835,7 @@
 {
   [[self window] setAcceptsMouseMovedEvents:wasAcceptingMouseEvents];
   [[self textView] clearHighlight];
+  [[self window] makeFirstResponder:[self textView]];
   [self setNeedsDisplay:YES];
 }
 
