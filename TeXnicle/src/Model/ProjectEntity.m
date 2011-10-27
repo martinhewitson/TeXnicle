@@ -25,7 +25,7 @@
   
   // make new settings
   NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
-  Settings *newSettings = [[NSManagedObject alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+  Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
   self.settings = newSettings;
   
 }
@@ -40,7 +40,7 @@
   // make new settings if needed
   if (self.settings == nil) {
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
-    Settings *newSettings = [[NSManagedObject alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+    Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
     self.settings = newSettings;
   }
 }
