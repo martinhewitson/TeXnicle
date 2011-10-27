@@ -279,7 +279,7 @@
       [box setContentView:self.miniConsole.view];
     }
   }
-  [self.miniConsole message:@"Welcome."];
+  [self.miniConsole message:@"Welcome to TeXnicle."];
   
   [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
   [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
