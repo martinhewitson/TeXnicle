@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TPEngine.h"
+#import "MHConsoleManager.h"
 
 extern NSString * const TPEngineCompilingCompletedNotification;
 
@@ -23,14 +24,18 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 
 @interface TPEngineManager : NSObject <TPEngineDelegate> {
 @private
+  MHConsoleManager *consoleManager;
 }
 
 @property (assign) id<TPEngineManagerDelegate> delegate;
 @property (retain) NSMutableArray *engines;
+@property (retain) MHConsoleManager *consoleManager;
 
 - (id)initWithDelegate:(id<TPEngineManagerDelegate>)aDelegate;
 + (TPEngineManager*)engineManagerWithDelegate:(id<TPEngineManagerDelegate>)aDelegate;
 - (void)loadEngines;
+
+- (BOOL)registerConsole:(id<MHConsoleViewer>)aViewer;
 
 +(NSArray*)builtinEngineNames;
 + (NSString*)engineDir;

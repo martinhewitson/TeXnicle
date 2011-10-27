@@ -17,6 +17,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 
 @synthesize delegate;
 @synthesize engines;
+@synthesize consoleManager;
 
 +(NSArray*)builtinEngineNames
 {
@@ -130,8 +131,13 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   self = [super init];
   if (self) {
     self.delegate = aDelegate;
+    self.consoleManager = [[[MHConsoleManager alloc] init] autorelease];
+
 //    [TPEngineManager installEngines];
 //    [self loadEngines];
+    
+    [self.consoleManager registerConsole:[ConsoleController sharedConsoleController]];
+    
   }
   return self;  
 }
@@ -139,7 +145,13 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 - (void) dealloc
 {
   self.engines = nil;
+  self.consoleManager = nil;
   [super dealloc];
+}
+
+- (BOOL)registerConsole:(id<MHConsoleViewer>)aViewer
+{
+  return [self.consoleManager registerConsole:aViewer];
 }
 
 - (void)loadEngines
@@ -210,6 +222,9 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
 
 - (TPEngine*)engineNamed:(NSString*)name
 {
+  if (self.engines == nil) {
+    [self loadEngines];
+  }
   for (TPEngine *e in self.engines) {
     if ([e.name isEqualToString:[name lowercaseString]]) {
       return e;
@@ -263,6 +278,9 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   [e trashAuxFiles];  
 }
 
+#pragma mark -
+#pragma mark Engine delegate
+
 - (void) compileDidFinish:(BOOL)success
 {
   NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:success] forKey:@"success"];
@@ -271,5 +289,21 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
                                                     userInfo:dict];    
 
 }
+
+- (void)enginePostMessage:(NSString*)someText
+{
+  [self.consoleManager message:someText];
+}
+
+- (void)enginePostError:(NSString*)someText
+{
+  [self.consoleManager error:someText];
+}
+
+- (void)enginePostTextForAppending:(NSString*)someText
+{
+  [self.consoleManager appendText:someText];
+}
+
 
 @end
