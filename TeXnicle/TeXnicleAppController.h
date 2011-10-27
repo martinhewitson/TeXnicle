@@ -13,7 +13,10 @@
 @interface TeXnicleAppController : NSObject {
 @private
 	StartupScreenController *startupScreenController;    
+  BOOL openStartupScreenAtAppStartup;
 }
+
+@property (assign) BOOL openStartupScreenAtAppStartup;
 
 - (void) checkVersion;
 

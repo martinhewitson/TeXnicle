@@ -85,6 +85,8 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 @implementation TeXnicleAppController
 
+@synthesize openStartupScreenAtAppStartup;
+
 + (void) initialize
 {
   // create a dictionary for the ‘factory’ defaults
@@ -203,9 +205,11 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 - (id)init
 {
+//  NSLog(@"App delegate init");
   self = [super init];
   if (self) {
     // Initialization code here.
+    self.openStartupScreenAtAppStartup = YES;
   }
   
   return self;
@@ -265,10 +269,13 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
     }
 	}
   
-	if ([[[NSDocumentController sharedDocumentController] documents] count]==0) {
-		[self showStartupScreen:self];
-	}
+  if (self.openStartupScreenAtAppStartup) {
+    if ([[[NSDocumentController sharedDocumentController] documents] count]==0) {
+      [self showStartupScreen:self];
+    }
+  }
   
+//  NSLog(@"App finished launching");
 }
 
 - (void) checkVersion
