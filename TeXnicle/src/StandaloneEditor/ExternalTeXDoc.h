@@ -11,6 +11,7 @@
 #import "TeXTextView.h"
 #import "TPEngineManager.h"
 #import "TPEngineSettingsController.h"
+#import "MHMiniConsoleViewController.h"
 
 @class TeXEditorViewController;
 @class TPStatusView;
@@ -47,7 +48,15 @@
   NSMutableDictionary *settings;
   
   NSProgressIndicator *compileProgressIndicator;
+  MHMiniConsoleViewController *miniConsole;
+  
+  NSWindow *mainWindow;
+  
 }
+
+@property (assign) IBOutlet NSWindow *mainWindow;
+
+@property (retain) MHMiniConsoleViewController *miniConsole;
 
 @property (retain) NSMutableDictionary *settings;
 @property (assign) IBOutlet TPStatusView *statusView;

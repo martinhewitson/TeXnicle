@@ -32,6 +32,8 @@
 @synthesize drawer;
 @synthesize settings;
 @synthesize compileProgressIndicator;
+@synthesize miniConsole;
+@synthesize mainWindow;
 
 - (void)awakeFromNib
 {
@@ -86,6 +88,21 @@
     [self.statusView setShowRevealButton:YES];
   }
   [self.statusView setEditorStatus:@"No Selection."];
+  
+  
+  self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
+  NSArray *items = [[self.mainWindow toolbar] items];
+  for (NSToolbarItem *item in items) {
+//    NSLog(@"%@: %@", [item itemIdentifier], NSStringFromRect([[item view] frame]));
+    if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
+      NSBox *box = (NSBox*)[item view];
+      [box setContentView:self.miniConsole.view];
+    }
+  }
+  [self.miniConsole message:@"Welcome."];
+
+  // register the mini console
+  [self.engineManager registerConsole:self.miniConsole];
 }
 
 - (void) initSettings
@@ -147,6 +164,7 @@
   self.fileMonitor = nil;
   self.engineManager = nil;
   self.settings = nil;
+  self.miniConsole = nil;
 	[super dealloc];
 }
 
@@ -308,7 +326,6 @@
 {
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
-    
 	if (str) {
     self.fileLoadDate = [NSDate date];
 		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
@@ -331,6 +348,17 @@
 
 #pragma mark -
 #pragma mark control
+
+- (IBAction)reloadCurrentFileFromDisk:(id)sender
+{
+  NSRange selected = [self.texEditorViewController.textView selectedRange];
+  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
+  [self revertDocumentToSaved:self];
+  [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+  if (NSMaxRange(selected) < [[self.documentData string] length]) {
+    [self.texEditorViewController.textView setSelectedRange:selected];
+  }  
+}
 
 - (IBAction) addToProject:(id)sender
 {
@@ -620,6 +648,14 @@
   return [NSArray arrayWithObject:self];
 }
 
+- (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
+{
+  if (![self isDocumentEdited]) {
+    [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
+  }
+}
+
+
 -(void) fileMonitor:(TPFileMonitor *)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
   NSString *filename = [[[self fileURL] path] lastPathComponent];
@@ -717,7 +753,7 @@
 {
 	// build path to the pdf file
 	NSString *mainFile = [self documentToCompile]; 
-  NSString *docFile = [[mainFile stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+  NSString *docFile = [mainFile stringByAppendingPathExtension:@"pdf"];
   // check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:docFile]) {
