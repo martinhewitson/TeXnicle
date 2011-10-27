@@ -20,6 +20,7 @@
 
 - (NSArray*) fileMonitorFileList:(TPFileMonitor*)aMonitor;
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified;
+- (void) fileMonitor:(TPFileMonitor*)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate*)access;
 - (NSString*)fileMonitor:(TPFileMonitor*)aMonitor pathOnDiskForFile:(id)file;
 
 @end
