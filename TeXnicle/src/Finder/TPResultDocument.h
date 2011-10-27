@@ -23,7 +23,7 @@
 @property (readonly) NSAttributedString *selectedDisplayString;
 
 
-+ (TPResultDocument*)resultWithDocuemnt:(FileEntity*)aDocument;
++ (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument;
 - (id)initWithDocument:(FileEntity*)aDocument;
 
 - (void) addMatch:(TPDocumentMatch*)aMatch;

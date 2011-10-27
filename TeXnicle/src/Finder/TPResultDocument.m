@@ -14,7 +14,7 @@
 @synthesize document;
 @synthesize matches;
 
-+ (TPResultDocument*)resultWithDocuemnt:(FileEntity*)aDocument
++ (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument
 {
   return [[[TPResultDocument alloc] initWithDocument:aDocument] autorelease];
 }
