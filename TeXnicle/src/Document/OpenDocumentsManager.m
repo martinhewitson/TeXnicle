@@ -243,7 +243,7 @@
         NSTextContainer *textContainer = [doc textContainer];
         if (textContainer) {
           //				NSLog(@"TextView: %@", textView);
-          //NSLog(@"Setting up text container.. %@", textContainer);
+//          NSLog(@"Setting up text container.. %@", textContainer);
           // apply user preferences to textContainer size
           int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
           int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
@@ -257,6 +257,7 @@
             [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
           }
           [self.texEditorViewController.textView stopObservingTextStorage];
+//          [self.texEditorViewController.textView replaceTextContainer:textContainer];
           [textContainer setTextView:self.texEditorViewController.textView];
           [self.texEditorViewController.textView observeTextStorage];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
@@ -271,7 +272,7 @@
           [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)
                                                       withObject:nil
                                                       afterDelay:0.5];
-          //				NSLog(@"Did set text container");
+//          NSLog(@"Did set text container");
           [self enableImageView:NO];
         }
       } // end doc document is correct class
