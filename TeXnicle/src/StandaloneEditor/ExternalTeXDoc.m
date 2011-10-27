@@ -113,7 +113,7 @@
       [box setContentView:self.miniConsole.view];
     }
   }
-  [self.miniConsole message:@"Welcome."];
+  [self.miniConsole message:@"Welcome to TeXnicle."];
 
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
