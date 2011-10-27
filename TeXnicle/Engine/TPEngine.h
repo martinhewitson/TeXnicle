@@ -11,11 +11,14 @@
 
 @protocol TPEngineDelegate <NSObject>
 
--(void)compileDidFinish:(BOOL)success;
+- (void)compileDidFinish:(BOOL)success;
+- (void)enginePostMessage:(NSString*)someText;
+- (void)enginePostError:(NSString*)someText;
+- (void)enginePostTextForAppending:(NSString*)someText;
 
 @end
 
-@interface TPEngine : NSObject {
+@interface TPEngine : NSObject <TPEngineDelegate> {
 @private
   // Typesetting
 	NSTask *typesetTask;

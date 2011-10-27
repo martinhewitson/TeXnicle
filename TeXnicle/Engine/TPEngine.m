@@ -10,8 +10,6 @@
 #import "ConsoleController.h"
 #import "externs.h"
 
-
-
 @implementation TPEngine
 
 @synthesize path;
@@ -100,8 +98,8 @@
 //  NSLog(@"Compiling %@", self.documentPath);
 //  NSLog(@"Working dir %@", workingDir);
   
-	ConsoleController *console = [ConsoleController sharedConsoleController];
 	if (self.openConsole) {
+    ConsoleController *console = [ConsoleController sharedConsoleController];
 		[console showWindow:self];
 		[[console window] makeKeyAndOrderFront:self];
 	}
@@ -112,8 +110,9 @@
 	if (!mainFile) {
     
 		//NSLog(@"Specify a main file!");
-		[console error:@"No main file specified!"];	
-		
+//		[console error:@"No main file specified!"];	
+		[self enginePostError:@"No main file specified!"];
+    
     NSAlert *alert = nil;
     if (isProject) {
       alert = [NSAlert alertWithMessageText:@"No Main File Found."
@@ -133,8 +132,8 @@
 		return NO;
 	}
 	
-	[console message:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
-  
+//	[console message:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
 	
 	if (typesetTask) {
 		[typesetTask terminate];
@@ -153,7 +152,9 @@
 		}
 	}		
 	
-  [console message:[NSString stringWithFormat:@"Compiling with %@", self.path]];
+//  [console message:[NSString stringWithFormat:@"Compiling with %@", self.path]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
+  
 //	NSLog(@"Compiling with %@", self.path);
 	typesetTask = [[NSTask alloc] init];
 	
@@ -197,14 +198,15 @@
   [self.delegate compileDidFinish:!abortCompile];
   
 	if (abortCompile) {
-		ConsoleController *console = [ConsoleController sharedConsoleController];
-		[console message:[NSString stringWithFormat:@"Compile aborted."]];
+//		ConsoleController *console = [ConsoleController sharedConsoleController];
+//		[console message:[NSString stringWithFormat:@"Compile aborted."]];
+    [self enginePostMessage:[NSString stringWithFormat:@"Compile aborted."]];
 		return;
 	}
 	
-  ConsoleController *console = [ConsoleController sharedConsoleController];
-  [console message:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
-  
+//  ConsoleController *console = [ConsoleController sharedConsoleController];
+//  [console message:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
 }
 
 - (void) texOutputAvailable:(NSNotification*)aNote
@@ -216,20 +218,22 @@
 									objectForKey:NSFileHandleNotificationDataItem];
 	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
-	ConsoleController *console = [ConsoleController sharedConsoleController];
+//	ConsoleController *console = [ConsoleController sharedConsoleController];
 	
 	NSScanner *scanner = [NSScanner scannerWithString:output];
 	NSString *scanned;
 	if ([scanner scanUpToString:@"LaTeX Error:" intoString:&scanned]) {
 		NSInteger loc = [scanner scanLocation];
 		if (loc < [output length]) {
-			[console error:[output substringFromIndex:[scanner scanLocation]]];
+//			[console error:[output substringFromIndex:[scanner scanLocation]]];
+      [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
 		}
 	}	
 	
-	[console appendText:output];	
-	
+//	[console appendText:output];	
+	[self enginePostTextForAppending:output];
+  
 	[output release];
 	if( typesetTask && [data length] > 0 )
 		[typesetFileHandle readInBackgroundAndNotify];
@@ -246,7 +250,8 @@
 - (void) trashAuxFiles
 {
 	// build path to the pdf file
-  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
+//  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
   
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
   
@@ -257,20 +262,55 @@
     }
   }
   
-  //  NSLog(@"  deleting %@", filesToClear);
+//  NSLog(@"  deleting %@ for %@", filesToClear, self.documentPath);
   NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
 	for (NSString *ext in filesToClear) {
 		error = nil;
-		NSString *file = [[self.documentPath stringByDeletingPathExtension] stringByAppendingPathExtension:ext];
+		NSString *file = [self.documentPath stringByAppendingPathExtension:ext];
     if ([fm fileExistsAtPath:file]) {
       if ([fm removeItemAtPath:file error:&error]) {
-        [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Deleted: %@", file]];
+//        [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Deleted: %@", file]];
+        [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", file]];
       } else {
-        [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+//        [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+        [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
       } 
     }		
 	}		
 }
+
+#pragma mark -
+#pragma mark Engine delegate
+
+- (void)compileDidFinish:(BOOL)success
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(compileDidFinish:)]) {
+    [self.delegate compileDidFinish:success];
+  }
+}
+
+- (void)enginePostMessage:(NSString*)someText
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(enginePostMessage:)]) {
+    [self.delegate enginePostMessage:someText];
+  }
+}
+
+- (void)enginePostError:(NSString*)someText
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(enginePostError:)]) {
+    [self.delegate enginePostError:someText];
+  }
+}
+
+- (void)enginePostTextForAppending:(NSString*)someText
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(enginePostTextForAppending:)]) {
+    [self.delegate enginePostTextForAppending:someText];
+  }
+}
+
+
 
 @end
