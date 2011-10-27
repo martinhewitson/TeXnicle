@@ -269,8 +269,8 @@ withIntermediateDirectories:YES
 	NSEntityDescription *newFolderEntity = [NSEntityDescription entityForName:@"Folder"
 																											inManagedObjectContext:moc];
 	
-	FolderEntity *newFolder = [[NSManagedObject alloc] initWithEntity:newFolderEntity
-																		 insertIntoManagedObjectContext:moc];
+	FolderEntity *newFolder = [[FolderEntity alloc] initWithEntity:newFolderEntity
+                                  insertIntoManagedObjectContext:moc];
 	
 	// set name
 	[newFolder setValue:aName forKey:@"name"];
@@ -343,8 +343,8 @@ withIntermediateDirectories:YES
 		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];		
 	}
 	
-	newFile = [[NSManagedObject alloc] initWithEntity:entity
-										 insertIntoManagedObjectContext:moc];
+	newFile = [[FileEntity alloc] initWithEntity:entity
+                insertIntoManagedObjectContext:moc];
   
 	// set the parent object
 	id parent = [[self selectedObjects] firstObject];
