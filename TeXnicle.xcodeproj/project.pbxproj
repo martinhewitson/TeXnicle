@@ -243,6 +243,7 @@
 		25E50247139FC9F5004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
 		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
+		25E513CA1459968600D13D1D /* zoomToFit.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25E513C91459968600D13D1D /* zoomToFit.icns */; };
 		25ECE9131408FADE0050CB94 /* TPEngineSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */; };
 		25ECE9141408FADE0050CB94 /* TPEngineSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */; };
 		25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F2728A13ED7BFA0087E021 /* PaletteController.xib */; };
@@ -658,6 +659,7 @@
 		25DA73A414093CAD007ACA36 /* BashColoringEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BashColoringEngine.m; sourceTree = "<group>"; };
 		25E0812C13A11A9000898596 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
+		25E513C91459968600D13D1D /* zoomToFit.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomToFit.icns; sourceTree = "<group>"; };
 		25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineSettingsController.h; sourceTree = "<group>"; };
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
@@ -922,6 +924,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25E513C91459968600D13D1D /* zoomToFit.icns */,
 				25DA73A014092C37007ACA36 /* engineDoc.icns */,
 				258594011408BD6500C970A1 /* prefsTabBarImageDepressed.icns */,
 				258594021408BD6500C970A1 /* prefsTabBarImage.icns */,
@@ -1615,6 +1618,7 @@
 				25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */,
 				254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */,
 				253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */,
+				25E513CA1459968600D13D1D /* zoomToFit.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
