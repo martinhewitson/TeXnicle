@@ -373,7 +373,7 @@
     }
   }
   
-  return [TPResultDocument resultWithDocuemnt:aFile];
+  return [TPResultDocument resultWithDocument:aFile];
 }
 
 
