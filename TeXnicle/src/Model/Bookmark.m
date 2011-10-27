@@ -21,7 +21,7 @@
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inFile:(FileEntity*)aFile inManagedObjectContext:(NSManagedObjectContext*)aMOC
 {
   NSEntityDescription *desc = [NSEntityDescription entityForName:@"Bookmark" inManagedObjectContext:aMOC];
-  Bookmark *bookmark = [[NSManagedObject alloc] initWithEntity:desc insertIntoManagedObjectContext:aMOC];
+  Bookmark *bookmark = [[Bookmark alloc] initWithEntity:desc insertIntoManagedObjectContext:aMOC];
   bookmark.linenumber = [NSNumber numberWithInteger:aLinenumber];
   bookmark.parentFile = aFile;
   
