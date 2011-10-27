@@ -1439,7 +1439,7 @@
 {
 	NSInteger tag = [menuItem tag];
 
-  
+  // find text selection in pdf
   if (tag == 116020) {
     return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
   }
