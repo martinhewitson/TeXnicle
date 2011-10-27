@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11A511</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138</string>
-		<string key="IBDocument.HIToolboxVersion">566.00</string>
+		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.AppKitVersion">1138.23</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">1617</string>
-			<string key="com.apple.pdfkit.ibplugin">518</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">1938</string>
+			<string key="com.apple.pdfkit.ibplugin">822</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSTextField</string>
@@ -26,7 +26,10 @@
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string>com.apple.pdfkit.ibplugin</string>
 		</array>
-		<dictionary class="NSMutableDictionary" key="IBDocument.Metadata"/>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<object class="NSCustomObject" id="1001">
 				<string key="NSClassName">PDFViewerController</string>
@@ -45,16 +48,16 @@
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">290</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="NSButton" id="676606386">
+							<object class="NSButton" id="85915893">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{398, 3}, {40, 32}}</string>
+								<string key="NSFrame">{{355, 7}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="42749403"/>
+								<reference key="NSNextKeyView" ref="676606386"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
-								<object class="NSButtonCell" key="NSCell" id="3951738">
+								<object class="NSButtonCell" key="NSCell" id="662530191">
 									<int key="NSCellFlags">67239424</int>
 									<int key="NSCellFlags2">134217728</int>
 									<string key="NSContents"/>
@@ -64,9 +67,38 @@
 										<int key="NSfFlags">1044</int>
 									</object>
 									<string key="NSCellIdentifier">_NS:161</string>
+									<reference key="NSControlView" ref="85915893"/>
+									<int key="NSButtonFlags">-2033958657</int>
+									<int key="NSButtonFlags2">99</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="764546405">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">zoomToFit</string>
+									</object>
+									<reference key="NSAlternateImage" ref="764546405"/>
+									<string key="NSAlternateContents"/>
+									<string key="NSKeyEquivalent"/>
+									<int key="NSPeriodicDelay">200</int>
+									<int key="NSPeriodicInterval">25</int>
+								</object>
+							</object>
+							<object class="NSButton" id="676606386">
+								<reference key="NSNextResponder" ref="1061424173"/>
+								<int key="NSvFlags">265</int>
+								<string key="NSFrame">{{395, 8}, {32, 25}}</string>
+								<reference key="NSSuperview" ref="1061424173"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="42749403"/>
+								<string key="NSReuseIdentifierKey">_NS:161</string>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSButtonCell" key="NSCell" id="3951738">
+									<int key="NSCellFlags">67239424</int>
+									<int key="NSCellFlags2">134217728</int>
+									<string key="NSContents"/>
+									<reference key="NSSupport" ref="707693604"/>
+									<string key="NSCellIdentifier">_NS:161</string>
 									<reference key="NSControlView" ref="676606386"/>
 									<int key="NSButtonFlags">-2033958657</int>
-									<int key="NSButtonFlags2">65</int>
+									<int key="NSButtonFlags2">99</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="1013569888">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">zoomIn</string>
@@ -81,7 +113,7 @@
 							<object class="NSButton" id="42749403">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{433, 3}, {40, 32}}</string>
+								<string key="NSFrame">{{435, 8}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -95,7 +127,7 @@
 									<string key="NSCellIdentifier">_NS:161</string>
 									<reference key="NSControlView" ref="42749403"/>
 									<int key="NSButtonFlags">-2033958657</int>
-									<int key="NSButtonFlags2">65</int>
+									<int key="NSButtonFlags2">99</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="316337136">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">zoomOut</string>
@@ -111,7 +143,7 @@
 						<string key="NSFrameSize">{480, 42}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="676606386"/>
+						<reference key="NSNextKeyView" ref="85915893"/>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -185,10 +217,10 @@
 							<object class="NSTextField" id="789329994">
 								<reference key="NSNextResponder" ref="335253864"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{4, 13}, {466, 14}}</string>
+								<string key="NSFrame">{{10, 10}, {366, 14}}</string>
 								<reference key="NSSuperview" ref="335253864"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="486402246"/>
+								<reference key="NSNextKeyView" ref="5250611"/>
 								<string key="NSReuseIdentifierKey">_NS:3936</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="984995946">
@@ -213,10 +245,10 @@
 								<reference key="NSNextResponder" ref="335253864"/>
 								<int key="NSvFlags">1289</int>
 								<object class="NSPSMatrix" key="NSDrawMatrix"/>
-								<string key="NSFrame">{{381, 35}, {16, 16}}</string>
+								<string key="NSFrame">{{381, 9}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="335253864"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="789329994"/>
+								<reference key="NSNextKeyView" ref="486402246"/>
 								<string key="NSReuseIdentifierKey">_NS:3954</string>
 								<int key="NSpiFlags">28938</int>
 								<double key="NSMaxValue">100</double>
@@ -224,7 +256,7 @@
 							<object class="NSButton" id="486402246">
 								<reference key="NSNextResponder" ref="335253864"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{399, 25}, {40, 32}}</string>
+								<string key="NSFrame">{{405, 4}, {28, 25}}</string>
 								<reference key="NSSuperview" ref="335253864"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1068582969"/>
@@ -238,7 +270,7 @@
 									<string key="NSCellIdentifier">_NS:161</string>
 									<reference key="NSControlView" ref="486402246"/>
 									<int key="NSButtonFlags">-2033958657</int>
-									<int key="NSButtonFlags2">65</int>
+									<int key="NSButtonFlags2">99</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="449231556">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">upArrow</string>
@@ -253,7 +285,7 @@
 							<object class="NSButton" id="1068582969">
 								<reference key="NSNextResponder" ref="335253864"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{433, 25}, {40, 32}}</string>
+								<string key="NSFrame">{{439, 4}, {28, 25}}</string>
 								<reference key="NSSuperview" ref="335253864"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="355801115"/>
@@ -267,7 +299,7 @@
 									<string key="NSCellIdentifier">_NS:161</string>
 									<reference key="NSControlView" ref="1068582969"/>
 									<int key="NSButtonFlags">-2033958657</int>
-									<int key="NSButtonFlags2">65</int>
+									<int key="NSButtonFlags2">99</int>
 									<object class="NSCustomResource" key="NSNormalImage" id="599179089">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">downArrow</string>
@@ -282,10 +314,10 @@
 							<object class="NSSearchField" id="540074134">
 								<reference key="NSNextResponder" ref="335253864"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{7, 32}, {366, 22}}</string>
+								<string key="NSFrame">{{13, 32}, {454, 22}}</string>
 								<reference key="NSSuperview" ref="335253864"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="5250611"/>
+								<reference key="NSNextKeyView" ref="789329994"/>
 								<string key="NSReuseIdentifierKey">_NS:123</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSearchFieldCell" key="NSCell" id="509600163">
@@ -504,6 +536,22 @@
 					</object>
 					<int key="connectionID">43</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">zoomToFitButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="85915893"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">zoomToFit:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="85915893"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -639,6 +687,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="42749403"/>
 							<reference ref="676606386"/>
+							<reference ref="85915893"/>
 						</array>
 						<reference key="parent" ref="1005"/>
 					</object>
@@ -673,6 +722,19 @@
 						<reference key="object" ref="3951738"/>
 						<reference key="parent" ref="676606386"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">44</int>
+						<reference key="object" ref="85915893"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="662530191"/>
+						</array>
+						<reference key="parent" ref="1061424173"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">45</int>
+						<reference key="object" ref="662530191"/>
+						<reference key="parent" ref="85915893"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -695,7 +757,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="42749403"/>
-						<string key="toolTip">Jump to next result</string>
+						<string key="toolTip">Zoom out.</string>
 					</object>
 				</object>
 				<string key="32.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -706,12 +768,23 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="676606386"/>
-						<string key="toolTip">Jump to next result</string>
+						<string key="toolTip">Zoom in.</string>
 					</object>
 				</object>
 				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="44.CustomClassName">HHValidatedButton</string>
+				<object class="NSMutableDictionary" key="44.IBAttributePlaceholdersKey">
+					<string key="NS.key.0">ToolTip</string>
+					<object class="IBToolTipAttribute" key="NS.object.0">
+						<string key="name">ToolTip</string>
+						<reference key="object" ref="85915893"/>
+						<string key="toolTip">Zoom to fit.</string>
+					</object>
+				</object>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="7.CustomClassName">HHValidatedButton</string>
@@ -740,7 +813,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">43</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -769,6 +842,7 @@
 						<string key="showPreviousResult:">id</string>
 						<string key="zoomIn:">id</string>
 						<string key="zoomOut:">id</string>
+						<string key="zoomToFit:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="searchPDF:">
@@ -791,6 +865,10 @@
 							<string key="name">zoomOut:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="zoomToFit:">
+							<string key="name">zoomToFit:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="nextButton">HHValidatedButton</string>
@@ -804,6 +882,7 @@
 						<string key="toolbarView">NSView</string>
 						<string key="zoomInButton">HHValidatedButton</string>
 						<string key="zoomOutButton">HHValidatedButton</string>
+						<string key="zoomToFitButton">HHValidatedButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="nextButton">
@@ -850,6 +929,10 @@
 							<string key="name">zoomOutButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="zoomToFitButton">
+							<string key="name">zoomToFitButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -875,6 +958,7 @@
 			<string key="upArrow">{512, 512}</string>
 			<string key="zoomIn">{512, 512}</string>
 			<string key="zoomOut">{512, 512}</string>
+			<string key="zoomToFit">{512, 512}</string>
 		</dictionary>
 	</data>
 </archive>

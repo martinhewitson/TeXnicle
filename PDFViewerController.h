@@ -41,6 +41,7 @@
 @property (assign) IBOutlet HHValidatedButton *prevButton;
 @property (assign) IBOutlet HHValidatedButton *zoomInButton;
 @property (assign) IBOutlet HHValidatedButton *zoomOutButton;
+@property (assign) IBOutlet HHValidatedButton *zoomToFitButton;
 
 @property (assign) id<PDFViewerControllerDelegate> delegate;
 
@@ -57,9 +58,12 @@
 
 - (IBAction)zoomIn:(id)sender;
 - (IBAction)zoomOut:(id)sender;
+- (IBAction)zoomToFit:(id)sender;
 
 - (IBAction) searchPDF:(id)sender;
 - (IBAction) showPreviousResult:(id)sender;
 - (IBAction) showNextResult:(id)sender;
+
+
 
 @end

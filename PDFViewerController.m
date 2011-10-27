@@ -25,6 +25,7 @@
 @synthesize toolbarView;
 @synthesize zoomInButton;
 @synthesize zoomOutButton;
+@synthesize zoomToFitButton;
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
 {
@@ -65,6 +66,11 @@
     }
   }
   if (anItem == self.zoomOutButton) {
+    if (![self hasDocument]){
+      return NO;
+    }
+  }
+  if (anItem == self.zoomToFitButton) {
     if (![self hasDocument]){
       return NO;
     }
@@ -157,6 +163,8 @@
   NSString *searchText = [sender stringValue];
   if ([searchText length]==0) {
     [self.searchStatusText setStringValue:@""];
+    [self.searchResults removeAllObjects];
+    [self.pdfview clearSelection];
   } else {
     [self searchForStringInPDF:searchText];
   }
@@ -165,6 +173,11 @@
 - (BOOL) hasDocument
 {
   return [self.pdfview document] != nil;
+}
+
+- (IBAction)zoomToFit:(id)sender
+{
+  [self.pdfview setAutoScales:YES];
 }
 
 - (IBAction)zoomIn:(id)sender
