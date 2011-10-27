@@ -19,7 +19,7 @@
 
 @property (assign) IBOutlet HHValidatedButton *editButton;
 @property (assign) IBOutlet HHValidatedButton *duplicateButton;
-@property (assign) IBOutlet HHValidatedButton *newButton;
+@property (assign) IBOutlet HHValidatedButton *addEngineButton;
 @property (assign) IBOutlet HHValidatedButton *deleteButton;
 @property (assign) IBOutlet HHValidatedButton *revealButton;
 

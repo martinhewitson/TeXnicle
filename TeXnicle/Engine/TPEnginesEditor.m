@@ -16,7 +16,7 @@
 
 @synthesize editButton;
 @synthesize duplicateButton;
-@synthesize newButton;
+@synthesize addEngineButton;
 @synthesize deleteButton;
 @synthesize revealButton;
 
