@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MHConsoleViewer.h"
 
-
-@interface ConsoleController : NSWindowController {
+@interface ConsoleController : NSWindowController <MHConsoleViewer> {
 
 	IBOutlet NSTextView *textView;
 	IBOutlet NSPopUpButton *displayLevel;
