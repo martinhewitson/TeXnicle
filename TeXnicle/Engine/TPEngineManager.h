@@ -20,9 +20,6 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 -(NSNumber*)nCompile;
 -(NSString*)documentToCompile;
 -(NSString*)workingDirectory;
-- (BOOL)supportsDoBibtex;
-- (BOOL)supportsDoPS2PDF;
-- (BOOL)supportsNCompile;
 @end
 
 @interface TPEngineManager : NSObject <TPEngineDelegate> {
