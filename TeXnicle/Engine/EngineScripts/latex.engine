@@ -5,6 +5,7 @@
 # It runs latex the desired number of times, optionally running bibtex after the first run.
 # It then runs dvips, (optional) followed by ps2pdf.
 #
+# <support>nCompile,doBibtex,doPS2PDF</support>
 #
 #  pdflatex.engine
 #  TeXnicle

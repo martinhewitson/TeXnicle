@@ -6,6 +6,8 @@
 # This engine is assuming you have the stand-alone context package installed in ~/context. If
 # that's not the case, you need to modify the TEXROOT below.
 #
+# <support>nCompile,doBibtex</support>
+#
 #  pdflatex.engine
 #  TeXnicle
 
@@ -27,7 +29,6 @@ mainfile=$1
 outputDir=$2
 nCompile=$3
 doBibtex=$4
-doPS2PDF=$5
 
 echo "****************************"
 echo "*** Compiling $mainfile"

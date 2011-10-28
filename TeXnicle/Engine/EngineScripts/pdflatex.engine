@@ -4,6 +4,8 @@
 #
 # It runs pdflatex the desired number of times, optionally running bibtex after the first run.
 #
+# <support>nCompile,doBibtex</support>
+#
 #  pdflatex.engine
 #  TeXnicle
 
