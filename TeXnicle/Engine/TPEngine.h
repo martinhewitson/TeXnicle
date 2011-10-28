@@ -39,6 +39,9 @@
 @property (assign) BOOL doPS2PDF;
 @property (assign) BOOL openConsole;
 @property (assign) NSInteger nCompile;
+@property (assign) BOOL supportsDoBibtex;
+@property (assign) BOOL supportsDoPS2PDF;
+@property (assign) NSInteger supportsNCompile;
 @property (assign, getter = isBuiltIn) BOOL builtIn;
 @property (assign, getter = isCompiling) BOOL compiling;
 
@@ -53,5 +56,6 @@
 - (void) taskFinished:(NSNotification*)aNote;
 - (void) reset;
 - (void) trashAuxFiles;
+- (void) parseEngineFile;
 
 @end

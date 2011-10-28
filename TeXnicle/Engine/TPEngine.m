@@ -20,6 +20,11 @@
 @synthesize doBibtex;
 @synthesize doPS2PDF;
 @synthesize nCompile;
+@synthesize supportsDoBibtex;
+@synthesize supportsDoPS2PDF;
+@synthesize supportsNCompile;
+
+
 @synthesize openConsole;
 
 @synthesize builtIn;
@@ -50,7 +55,11 @@
     self.openConsole = YES;
     self.builtIn = NO;
     self.compiling = NO;
+    self.supportsDoBibtex = NO;
+    self.supportsDoPS2PDF = NO;
+    self.supportsNCompile = NO;
     [self setupObservers];    
+    [self parseEngineFile];
   }
   
   return self;
@@ -79,6 +88,39 @@
   
 }
 
+- (void) parseEngineFile
+{
+  NSError *error = nil;
+  NSString *str = [NSString stringWithContentsOfFile:self.path encoding:NSUTF8StringEncoding error:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }
+  
+  NSScanner *scanner = [NSScanner scannerWithString:str];
+  [scanner scanUpToString:@"<support>" intoString:NULL];
+  NSInteger start = [scanner scanLocation];
+  if (start<[str length]) {
+    start += 9;
+  }
+  [scanner scanUpToString:@"</support>" intoString:NULL];
+  NSInteger stop = [scanner scanLocation];
+
+  if (stop > start) {
+    NSString *optsStr = [str substringWithRange:NSMakeRange(start, stop-start)];
+    NSArray *opts = [optsStr componentsSeparatedByString:@","];
+    if ([opts containsObject:@"nCompile"]) {
+      self.supportsNCompile = YES;
+    }
+    if ([opts containsObject:@"doBibtex"]) {
+      self.supportsDoBibtex = YES;
+    }
+    if ([opts containsObject:@"doPS2PDF"]) {
+      self.supportsDoPS2PDF = YES;
+    }
+  }
+  
+}
 
 #pragma mark -
 #pragma mark Compiling
