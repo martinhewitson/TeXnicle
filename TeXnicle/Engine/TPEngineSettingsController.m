@@ -25,7 +25,6 @@
 
 - (void) awakeFromNib
 {
-  [self setupEngineSettings];
   
   NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
   NSColor *color2 = [NSColor colorWithDeviceRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
@@ -34,6 +33,7 @@
   pane2.fillColor = color2;
   pane3.fillColor = color1;
   
+  [self performSelector:@selector(setupEngineSettings) withObject:nil afterDelay:0];
 }
 
 - (void)setupEngineSettings
@@ -43,13 +43,33 @@
   if (engineName && [engineName length]>0) {    
     [engineSelector addItemWithTitle:[self engineName]];
   }
+  if ([self supportsDoBibtex]) {
+    [doBibtexButton setState:[[self doBibtex] intValue]];
+    [doBibtexButton setEnabled:YES];
+  } else {
+    [doBibtexButton setEnabled:NO];
+  }
   
-  [doBibtexButton setState:[[self doBibtex] intValue]];
-  [doPS2PDFButton setState:[[self doPS2PDF] intValue]];
+  if ([self supportsDoPS2PDF]) {
+    [doPS2PDFButton setState:[[self doPS2PDF] intValue]];
+    [doPS2PDFButton setEnabled:YES];
+  } else {
+    [doPS2PDFButton setEnabled:NO];
+  }
+  
+  if ([self supportsNCompile]) {
+    [nCompileTextField setIntegerValue:[[self nCompile] intValue]];
+    [nCompileStepper setIntegerValue:[[self nCompile] intValue]];
+    [nCompileStepper setEnabled:YES];
+    [nCompileTextField setEnabled:YES];
+    [nCompileLabel setTextColor:[NSColor controlTextColor]];
+  } else {
+    [nCompileStepper setEnabled:NO];
+    [nCompileTextField setEnabled:NO];
+    [nCompileLabel setTextColor:[NSColor disabledControlTextColor]];
+  }
+  
   [openConsoleButton setState:[[self openConsole] intValue]];
-  
-  [nCompileTextField setIntegerValue:[[self nCompile] intValue]];
-  [nCompileStepper setIntegerValue:[[self nCompile] intValue]];
 }
 
 
@@ -67,6 +87,7 @@
 - (IBAction)engineSelected:(id)sender
 {
   [self didSelectEngineName:[sender title]];
+  [self setupEngineSettings];
 }
 
 - (IBAction)selectedDoBibtex:(id)sender 
@@ -196,6 +217,28 @@
 }
 
 
+- (BOOL)supportsDoBibtex
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(supportsDoBibtex)]) {
+    return [self.delegate supportsDoBibtex];
+  }
+  return NO;
+}
 
+- (BOOL)supportsDoPS2PDF
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(supportsDoPS2PDF)]) {
+    return [self.delegate supportsDoPS2PDF];
+  }
+  return NO;
+}
+
+- (BOOL)supportsNCompile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(supportsNCompile)]) {
+    return [self.delegate supportsNCompile];
+  }
+  return NO;
+}
 
 @end

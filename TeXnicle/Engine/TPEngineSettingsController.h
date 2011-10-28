@@ -24,6 +24,11 @@
 -(NSNumber*)openConsole;
 -(NSNumber*)nCompile;
 
+- (BOOL)supportsDoBibtex;
+- (BOOL)supportsDoPS2PDF;
+- (BOOL)supportsNCompile;
+
+
 -(NSArray*)registeredEngineNames;
 
 @end
@@ -36,6 +41,7 @@
   IBOutlet NSButton *openConsoleButton;
   IBOutlet NSTextField *nCompileTextField;
   IBOutlet NSStepper *nCompileStepper;
+  IBOutlet NSTextField *nCompileLabel;
   
   IBOutlet MHStrokedFiledView *pane1;
   IBOutlet MHStrokedFiledView *pane2;
