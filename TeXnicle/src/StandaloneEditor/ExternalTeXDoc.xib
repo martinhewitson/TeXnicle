@@ -55,7 +55,7 @@
 			<object class="NSWindowTemplate" id="1005">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{496, 119}, {592, 625}}</string>
+				<string key="NSWindowRect">{{425, 139}, {600, 600}}</string>
 				<int key="NSWTFlags">544735232</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -390,7 +390,7 @@
 					<array key="NSToolbarIBSelectableItems" id="0"/>
 				</object>
 				<nil key="NSUserInterfaceItemIdentifier"/>
-				<string key="NSWindowContentMinSize">{500, 400}</string>
+				<string key="NSWindowContentMinSize">{600, 400}</string>
 				<object class="NSView" key="NSWindowView" id="1006">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
@@ -398,7 +398,7 @@
 						<object class="NSCustomView" id="763500502">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">290</int>
-							<string key="NSFrame">{{7, 5}, {535, 40}}</string>
+							<string key="NSFrame">{{7, 5}, {543, 40}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="553209657"/>
@@ -409,9 +409,10 @@
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">1313</int>
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{550, 9}, {32, 32}}</string>
+							<string key="NSFrame">{{558, 9}, {32, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:3954</string>
 							<int key="NSpiFlags">28682</int>
 							<double key="NSMaxValue">100</double>
@@ -423,7 +424,7 @@
 								<object class="NSCustomView" id="1001950842">
 									<reference key="NSNextResponder" ref="1023531812"/>
 									<int key="NSvFlags">274</int>
-									<string key="NSFrameSize">{377, 574}</string>
+									<string key="NSFrameSize">{382, 549}</string>
 									<reference key="NSSuperview" ref="1023531812"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="354661662"/>
@@ -436,22 +437,23 @@
 										<object class="NSCustomView" id="411306343">
 											<reference key="NSNextResponder" ref="354661662"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrame">{{0, -1}, {207, 575}}</string>
+											<string key="NSFrame">{{0, -1}, {210, 550}}</string>
 											<reference key="NSSuperview" ref="354661662"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="763500502"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
-									<string key="NSFrame">{{387, 0}, {207, 574}}</string>
+									<string key="NSFrame">{{392, 0}, {210, 549}}</string>
 									<reference key="NSSuperview" ref="1023531812"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="763500502"/>
+									<reference key="NSNextKeyView" ref="411306343"/>
 									<string key="NSReuseIdentifierKey">_NS:1192</string>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
-							<string key="NSFrame">{{0, 52}, {594, 574}}</string>
+							<string key="NSFrame">{{0, 52}, {602, 549}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1001950842"/>
@@ -460,14 +462,15 @@
 							<string key="NSAutosaveName">TeXnicleStandaloneEditorSplitView</string>
 						</object>
 					</array>
-					<string key="NSFrameSize">{592, 625}</string>
+					<string key="NSFrameSize">{600, 600}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1023531812"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
-				<string key="NSMinSize">{500, 485}</string>
+				<string key="NSMinSize">{600, 485}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<string key="NSFrameAutosaveName">TeXnicleStandaloneEditorWindow</string>
 				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
 				<double key="NSContentBorderThicknessMinY">52</double>
 				<int key="NSWindowCollectionBehavior">128</int>
@@ -1915,6 +1918,8 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersHorizontal"/>
+				<boolean value="YES" key="1.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBWindowTemplateEditedContentRect">{{502, 185}, {467, 625}}</string>
 				<integer value="1" key="1.NSWindowTemplate.visibleAtLaunch"/>

@@ -906,6 +906,33 @@
   return [self.settings valueForKey:@"nCompile"];  
 }
 
+- (BOOL) supportsDoBibtex
+{
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  if (engine) {
+    return engine.supportsDoBibtex;
+  }
+  return NO;
+}
+
+- (BOOL) supportsDoPS2PDF
+{
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  if (engine) {
+    return engine.supportsDoPS2PDF;
+  }
+  return NO;
+}
+
+- (BOOL) supportsNCompile
+{
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  if (engine) {
+    return engine.supportsNCompile;
+  }
+  return NO;
+}
+
 -(NSArray*)registeredEngineNames
 {
   return [self.engineManager registeredEngineNames];
