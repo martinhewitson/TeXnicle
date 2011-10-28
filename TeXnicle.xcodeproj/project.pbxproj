@@ -660,6 +660,7 @@
 		25E0812C13A11A9000898596 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
 		25E513C91459968600D13D1D /* zoomToFit.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomToFit.icns; sourceTree = "<group>"; };
+		25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 6.xcdatamodel"; sourceTree = "<group>"; };
 		25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineSettingsController.h; sourceTree = "<group>"; };
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
@@ -1991,6 +1992,7 @@
 		25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */,
 				25846DBD1408D14100A708E2 /* TeXProject 5.xcdatamodel */,
 				256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */,
 				25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */,

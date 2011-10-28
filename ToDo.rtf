@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf230
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
 \paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -10,6 +10,13 @@
 + Made separate "Typeset" menu which also works for stand-alone documents now.\
 + Added preference for setting the line highlight color\
 + Added preference for setting the matching words highlight color\
++ Engines now must opt-in to the three preferences by specifying the appropriate tag somewhere in \
+  the engine file. To support all three of the current engine options, use the tag:\
+    \cf2 \CocoaLigature0 <support>nCompile,doBibtex,doPS2PDF</support>\cf0 \
+\CocoaLigature1   If the engine doesn't support one or more of the options, remove it/them from the list. If the option\
+  key-word is not present between the <support> tags, then the corresponding user control on the engine\
+  settings panel will not be available.\
+  The four built-in engines are now configured for the options they support.\
 + Bug fix: clicking on code-folding gutter resulted in an 'empty' bookmark being created. This is now fixed.\
 + Other minor fixes and improvements.\
 \
@@ -26,11 +33,6 @@ To Do\
 + Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
 	- it's a mess!\
 \
-+ Make standalone pdfviewer windows. Should allow viewer for standalone tex documents with reverse search etc.\
-\
-+ Standalone document editor \
-	- make menu items for compiling. Can we make a document menu item appear? Should it always be there?\
-\
 + Finish help\
 \
 + Context menu on TeXEditor\
@@ -39,6 +41,12 @@ To Do\
             ->file->project list\
 				    ->from disk...\
 			 ->citation->projectlist\
+\
++ Arbitrary variable support in engine\
+	- engine should have a property 'variables' which is just an encoded data containing an array of EngineVariable objects\
+	- EngineVariable has a name, type, displayString, value\
+	- on engine settings controller we have a tableview which properly displays variables and type/value\
+	- in engine script we have an XML fragment to define the variables that the script supports\
 \
 \
 Bugs\
