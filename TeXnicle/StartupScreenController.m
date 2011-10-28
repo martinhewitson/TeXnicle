@@ -54,9 +54,7 @@
 
 - (void) awakeFromNib
 {
-  
-  [[self window] center];
-  
+    
   //	[[self window] setLevel:NSNormalWindowLevel];
   //	[[[[recentFilesTable tableColumns] objectAtIndex:0] dataCell] setFont:[NSFont systemFontOfSize:14.0]];
 	
