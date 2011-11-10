@@ -15,5 +15,8 @@
 }
 
 @property (assign) IBOutlet NSTextField *textField;
+@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
+
+- (void) setAnimating:(BOOL)state;
 
 @end

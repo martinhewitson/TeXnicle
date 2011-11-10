@@ -11,6 +11,7 @@
 @implementation MHMiniConsoleViewController
 
 @synthesize textField;
+@synthesize progressIndicator;
 
 - (id)init
 {
@@ -55,5 +56,13 @@
   [self.textField setToolTip:someText];
 }
 
+- (void) setAnimating:(BOOL)state
+{
+  if (state) {
+    [self.progressIndicator startAnimation:self];
+  } else {
+    [self.progressIndicator stopAnimation:self];
+  }
+}
 
 @end
