@@ -51,7 +51,7 @@
 							<object class="NSButton" id="85915893">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{355, 7}, {32, 25}}</string>
+								<string key="NSFrame">{{355, 5}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="676606386"/>
@@ -84,7 +84,7 @@
 							<object class="NSButton" id="676606386">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{395, 8}, {32, 25}}</string>
+								<string key="NSFrame">{{395, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="42749403"/>
@@ -113,7 +113,7 @@
 							<object class="NSButton" id="42749403">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{435, 8}, {32, 25}}</string>
+								<string key="NSFrame">{{435, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -140,7 +140,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{480, 42}</string>
+						<string key="NSFrameSize">{480, 40}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="85915893"/>
@@ -192,7 +192,7 @@
 								<set class="NSMutableSet" key="NSDragTypes">
 									<string>NSFilenamesPboardType</string>
 								</set>
-								<string key="NSFrameSize">{480, 507}</string>
+								<string key="NSFrameSize">{480, 509}</string>
 								<reference key="NSSuperview" ref="355801115"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -203,7 +203,7 @@
 								<bool key="AutoScale">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 42}, {480, 507}}</string>
+						<string key="NSFrame">{{0, 40}, {480, 509}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="593057694"/>
