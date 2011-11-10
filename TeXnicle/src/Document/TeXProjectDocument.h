@@ -23,6 +23,7 @@
 #import "TPOutlineView.h"
 #import "MHMiniConsoleViewController.h"
 #import "MHConsoleManager.h"
+#import "TPStatusViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -80,7 +81,6 @@
   NSView *texEditorContainer;
   TPImageViewerController *imageViewerController;
   NSView *imageViewerContainer;
-  TPStatusView *statusView;
   TPFileMonitor *fileMonitor;
       
   NSView *bookmarkContainerView;
@@ -98,16 +98,20 @@
   HHValidatedButton *newFolderButton;
   HHValidatedButton *newFileButton;
   
-  NSProgressIndicator *compileProgressIndicator;
   
   MHMiniConsoleViewController *miniConsole;
+  
+  NSView *statusViewContainer;
+  BOOL statusViewIsShowing;
 }
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
-@property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
 
 @property (retain)   NSTimer *statusTimer;
+
+@property (assign) IBOutlet NSView *statusViewContainer;
+@property (retain) TPStatusViewController *statusViewController;
 
 @property (assign) IBOutlet HHValidatedButton *newFolderButton;
 @property (assign) IBOutlet HHValidatedButton *newFileButton;
@@ -132,7 +136,6 @@
 @property (retain) LibraryController *library;
 
 @property (retain) PDFViewerController *pdfViewerController;
-@property (assign) IBOutlet TPStatusView *statusView;
 @property (retain) ProjectEntity *project;
 @property (assign) IBOutlet TPOutlineView *projectOutlineView;
 @property (assign) IBOutlet NSTabView *controlsTabview;
@@ -155,6 +158,8 @@
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
 
 - (void) updateStatusView;
+
+- (void) toggleStatusBar:(BOOL)animate;
 
 #pragma mark -
 #pragma mark Notification Handlers
@@ -258,6 +263,8 @@
 
 + (NSString*) newArticleMainFileCode;
 
+- (void) reloadCurrentFileFromDiskAndRestoreSelection:(FileEntity*)fileEntity;
+
 #pragma mark -
 #pragma mark Saving
 
@@ -286,9 +293,6 @@
 - (IBAction)toggleBookmark:(id)sender;
 - (IBAction)previousBookmark:(id)sender;
 - (IBAction)nextBookmark:(id)sender;
-
-#pragma mark -
-#pragma mark Settings
 
 
 

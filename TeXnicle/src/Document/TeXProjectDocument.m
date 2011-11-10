@@ -16,7 +16,6 @@
 #import "MHControlsTabBarController.h"
 #import "FinderController.h"
 #import "NSString+LaTeX.h"
-#import "TPStatusView.h"
 #import "TPImageViewerController.h"
 #import "PaletteController.h"
 #import "PDFViewerController.h"
@@ -34,7 +33,6 @@
 
 @synthesize statusTimer;
 
-@synthesize compileProgressIndicator;
 @synthesize newFileButton;
 @synthesize newFolderButton;
 
@@ -54,7 +52,6 @@
 @synthesize projectItemTreeController;
 @synthesize texEditorViewController;
 @synthesize texEditorContainer;
-@synthesize statusView;
 
 @synthesize fileMonitor;
 @synthesize imageViewerController;
@@ -70,6 +67,9 @@
 @synthesize engineManager;
 @synthesize engineSettings;
 @synthesize engineSettingsContainer;
+
+@synthesize statusViewContainer;
+@synthesize statusViewController;
 
 @synthesize miniConsole;
 
@@ -140,6 +140,16 @@
   [self.texEditorContainer setNeedsDisplay:YES];
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
+  
+  // setup status view
+  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
+  [self.statusViewContainer addSubview:self.statusViewController.view];
+  statusViewIsShowing = YES;
+  if (![self.project.settings.showStatusBar boolValue]) {
+    // the status bar is showing by default, so toggle it out
+    [self toggleStatusBar:NO];
+  }
   
   // setup image viewer
   self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
@@ -236,9 +246,10 @@
          selector:@selector(handleLineNumberClickedNotification:) 
              name:TELineNumberClickedNotification
            object:self.texEditorViewController.textView];
-  
-  [self.statusView setFilename:@""];
-  [self.statusView setEditorStatus:@"No Selection."];
+    
+  [self.statusViewController setFilenameText:@""];
+  [self.statusViewController setEditorStatusText:@"No Selection."];
+  [self.statusViewController setShowRevealButton:NO];
   
 	// spell checker language
 	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
@@ -615,11 +626,11 @@
   }
   
   if (path) {
-    self.statusView.showRevealButton = YES;
-    [self.statusView setFilename:path];
+    [self.statusViewController setFilenameText:path];
+    [self.statusViewController enable:YES];    
   } else {
-    self.statusView.showRevealButton = NO;
-    [self.statusView setFilename:@""];
+    [self.statusViewController setFilenameText:path];
+    [self.statusViewController enable:NO];    
   }
 }
 
@@ -959,6 +970,45 @@
 #pragma mark -
 #pragma mark Actions
 
+- (IBAction)toggleStatusView:(id)sender
+{
+  [self toggleStatusBar:YES];
+}
+
+- (void) toggleStatusBar:(BOOL)animate
+{
+  NSRect tefr = [self.texEditorContainer frame];
+  NSRect svfr = [self.statusViewContainer frame];
+  
+  id tec;
+  id sbc;
+  if (animate) {
+    tec = self.texEditorContainer.animator;
+    sbc = self.statusViewContainer.animator;
+  } else {
+    tec = self.texEditorContainer;
+    sbc = self.statusViewContainer;
+  }
+  
+  if (statusViewIsShowing) {
+    statusViewIsShowing = NO;
+    // move status view out
+    [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y-svfr.size.height, svfr.size.width, svfr.size.height)];    
+    // stretch tex editor container
+    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height)]; 
+  } else {
+    statusViewIsShowing = YES;
+    // move status view in
+    [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y+svfr.size.height, svfr.size.width, svfr.size.height)];    
+    // shrink tex editor container
+    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y+svfr.size.height, tefr.size.width, tefr.size.height-svfr.size.height)];
+  }
+  
+  // update settings if necessary
+  if ([self.project.settings.showStatusBar boolValue] != statusViewIsShowing) {
+    self.project.settings.showStatusBar = [NSNumber numberWithBool:statusViewIsShowing];        
+  }
+}
 
 - (IBAction) openStandaloneWindow:(id)sender
 {
@@ -1006,9 +1056,9 @@
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
   if (lineNumber == NSNotFound) {
-    [self.statusView setEditorStatus:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
   } else {
-    [self.statusView setEditorStatus:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
   }
 }
 
@@ -1342,7 +1392,7 @@
 
 - (void) build
 {
-  [self.compileProgressIndicator startAnimation:self];
+  [self.miniConsole setAnimating:YES];
   // setup the engine
   [self.engineManager compile];
   
@@ -1350,7 +1400,7 @@
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
-  [self.compileProgressIndicator stopAnimation:self];
+  [self.miniConsole setAnimating:NO];
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];  
@@ -1517,6 +1567,15 @@
     }
   }
   
+  // toggle status bar
+  if (tag == 2040) {
+    if ([self.project.settings.showStatusBar boolValue]) {
+      [menuItem setTitle:@"Hide Status Bar"];
+    } else {
+      [menuItem setTitle:@"Show Status Bar"];
+    }
+  }
+  
 	return [super validateMenuItem:menuItem];
 }
 
@@ -1647,6 +1706,7 @@
 - (IBAction)closeAllTabs:(id)sender
 {
   [openDocuments closeAllTabs];
+  [self.statusViewController setFilenameText:@""];
 }
 
 - (IBAction) closeCurrentTab:(id)sender
@@ -2187,12 +2247,17 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //  NSLog(@"File %@ was accessed at %@", [file valueForKey:@"name"], access);
   FileEntity *fileEntity = (FileEntity*)file;
   if (![file hasEdits]) {
-    NSRange selected = [self.texEditorViewController.textView selectedRange];
-    [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
-    [fileEntity reloadFromDisk];
-    [self.openDocuments updateDoc];  
-    [self.texEditorViewController.textView setSelectedRange:selected];
+    [self performSelectorOnMainThread:@selector(reloadCurrentFileFromDiskAndRestoreSelection:) withObject:fileEntity waitUntilDone:NO];
   }
+}
+
+- (void) reloadCurrentFileFromDiskAndRestoreSelection:(FileEntity*)fileEntity
+{
+  NSRange selected = [self.texEditorViewController.textView selectedRange];
+  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
+  [fileEntity reloadFromDisk];
+  [self.openDocuments updateDoc];  
+  [self.texEditorViewController.textView setSelectedRange:selected];
 }
 
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
