@@ -10,24 +10,27 @@
 #import "TeXTextView.h"
 #import "BookmarkManager.h"
 #import "TeXProjectDocument.h"
+#import "TPStatusViewController.h"
 
 @class FileEntity;
 @class TeXEditorViewController;
-@class TPStatusView;
 
 @interface DocWindowController : NSWindowController <TeXTextViewDelegate, BookmarkManagerDelegate> {
 
 	IBOutlet NSView *texEditorContainer;
-  IBOutlet TPStatusView *statusView;
 	TeXProjectDocument *mainDocument;
 	FileEntity *file;
 	TeXEditorViewController *texEditorViewController;
+  TPStatusViewController *statusViewController;
+  NSView *statusViewContainer;
 }
 
 @property (readwrite,assign) FileEntity *file;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (retain) IBOutlet NSView *texEditorContainer;
 @property (assign) TeXProjectDocument *mainDocument;
+@property (retain) TPStatusViewController *statusViewController;
+@property (assign) IBOutlet NSView *statusViewContainer;
 
 - (id) initWithFile:(FileEntity*)aFile document:(TeXProjectDocument*)document;
 - (IBAction) saveDocument:(id)sender;

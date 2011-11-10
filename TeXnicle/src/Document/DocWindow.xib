@@ -50,20 +50,21 @@
 						<object class="NSCustomView" id="510717691">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">274</int>
-							<string key="NSFrame">{{0, 50}, {517, 588}}</string>
+							<string key="NSFrame">{{0, 37}, {517, 601}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="350169153"/>
+							<reference key="NSNextKeyView" ref="985183168"/>
 							<string key="NSClassName">NSView</string>
 						</object>
-						<object class="NSCustomView" id="350169153">
+						<object class="NSCustomView" id="985183168">
 							<reference key="NSNextResponder" ref="1006"/>
-							<int key="NSvFlags">290</int>
-							<string key="NSFrame">{{9, 6}, {498, 38}}</string>
+							<int key="NSvFlags">258</int>
+							<string key="NSFrame">{{0, -1}, {517, 40}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<string key="NSReuseIdentifierKey">_NS:499</string>
-							<string key="NSClassName">TPStatusView</string>
+							<reference key="NSNextKeyView"/>
+							<string key="NSReuseIdentifierKey">_NS:1192</string>
+							<string key="NSClassName">NSView</string>
 						</object>
 					</array>
 					<string key="NSFrameSize">{517, 638}</string>
@@ -71,10 +72,8 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="510717691"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
-				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
-				<double key="NSContentBorderThicknessMinY">52</double>
 				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
 			<object class="NSUserDefaultsController" id="296721793">
@@ -101,11 +100,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">statusView</string>
+						<string key="label">statusViewContainer</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="350169153"/>
+						<reference key="destination" ref="985183168"/>
 					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">49</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -162,8 +161,8 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="1006"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="985183168"/>
 							<reference ref="510717691"/>
-							<reference ref="350169153"/>
 						</array>
 						<reference key="parent" ref="1005"/>
 					</object>
@@ -178,9 +177,8 @@
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">40</int>
-						<reference key="object" ref="350169153"/>
-						<array class="NSMutableArray" key="children"/>
+						<int key="objectID">48</int>
+						<reference key="object" ref="985183168"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 				</array>
@@ -195,13 +193,13 @@
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="48.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -243,13 +241,13 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="statusView">TPStatusView</string>
+						<string key="statusViewContainer">NSView</string>
 						<string key="texEditorContainer">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="statusView">
-							<string key="name">statusView</string>
-							<string key="candidateClassName">TPStatusView</string>
+						<object class="IBToOneOutletInfo" key="statusViewContainer">
+							<string key="name">statusViewContainer</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="texEditorContainer">
 							<string key="name">texEditorContainer</string>
@@ -259,14 +257,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/DocWindowController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TPStatusView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TPStatusView.h</string>
 					</object>
 				</object>
 			</array>

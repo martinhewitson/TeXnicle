@@ -12,7 +12,6 @@
 #import "TeXEditorViewController.h"
 #import "TeXTextView.h"
 #import "TPSectionListController.h"
-#import "TPStatusView.h"
 #import "Bookmark.h"
 #import "MHLineNumber.h"
 
@@ -22,6 +21,8 @@
 @synthesize texEditorContainer;
 @synthesize texEditorViewController;
 @synthesize mainDocument;
+@synthesize statusViewController;
+@synthesize statusViewContainer;
 
 - (id) initWithFile:(FileEntity*)aFile document:(id)document
 {
@@ -50,6 +51,12 @@
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
 	
+  // setup status view
+  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
+  [self.statusViewContainer addSubview:self.statusViewController.view];
+  
+  
 	FileDocument *doc = [file document];
 	
 	// Add the textview's layout manager to the list of managers
@@ -81,8 +88,9 @@
   
 	[self updateEditedState];
   
-  [statusView setFilename:[file pathOnDisk]];
-  [statusView setShowRevealButton:YES];
+  
+  [self.statusViewController setFilenameText:[file pathOnDisk]];
+  [self.statusViewController enable:YES];
   [self updateCursorInfoText];
 }
 
@@ -109,8 +117,13 @@
 
 - (void) updateCursorInfoText
 {
-	NSRange sel = [self.texEditorViewController.textView selectedRange];
-  [statusView setEditorStatus:[NSString stringWithFormat:@"character: %d", sel.location]];
+  NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
+  NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
+  if (lineNumber == NSNotFound) {
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
+  } else {
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
+  }
 }
 
 - (void)handleTextChanged:(NSNotification*)aNote
