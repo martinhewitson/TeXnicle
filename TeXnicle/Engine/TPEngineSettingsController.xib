@@ -56,7 +56,7 @@
 								<string key="NSFrame">{{18, 20}, {198, 18}}</string>
 								<reference key="NSSuperview" ref="485109492"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="14466283"/>
 								<string key="NSReuseIdentifierKey">_NS:239</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="10833545">
@@ -202,7 +202,7 @@
 								<string key="NSFrame">{{86, 13}, {104, 17}}</string>
 								<reference key="NSSuperview" ref="14466283"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="485109492"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:3936</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="614805059">
@@ -319,7 +319,7 @@
 								<string key="NSFrame">{{70, 16}, {147, 26}}</string>
 								<reference key="NSSuperview" ref="556740377"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="14466283"/>
+								<reference key="NSNextKeyView" ref="485109492"/>
 								<string key="NSReuseIdentifierKey">_NS:179</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSPopUpButtonCell" key="NSCell" id="609171107">
@@ -403,7 +403,7 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="556740377"/>
-				<string key="NSClassName">NSView</string>
+				<string key="NSClassName">MHStrokedFiledView</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
