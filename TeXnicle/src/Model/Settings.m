@@ -17,6 +17,7 @@
 @dynamic nCompile;
 @dynamic openConsole;
 @dynamic project;
+@dynamic showStatusBar;
 
 - (void) awakeFromInsert
 {
@@ -28,7 +29,7 @@
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
   self.nCompile = [defaults valueForKey:TPNRunsPDFLatex];
   self.openConsole = [defaults valueForKey:OpenConsoleOnTypeset];
-  
+
 }
 
 @end

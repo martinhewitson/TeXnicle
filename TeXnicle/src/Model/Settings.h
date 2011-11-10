@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSNumber * doPS2PDF;
 @property (nonatomic, retain) NSNumber * nCompile;
 @property (nonatomic, retain) NSNumber * openConsole;
+@property (nonatomic, retain) NSNumber * showStatusBar;
 @property (nonatomic, retain) ProjectEntity *project;
 
 @end
