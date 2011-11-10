@@ -293,9 +293,7 @@
         break;
       } // If should continue 
       
-      NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
-      
-      returnResult = [result stringByTrimmingCharactersInSet:ws];
+      NSString *returnResult = [result stringByTrimmingCharactersInSet:ws];
       returnResult = [returnResult stringByTrimmingCharactersInSet:ns];
       
       if ([aScanner scanUpToString:returnResult intoString:NULL]) {
@@ -307,18 +305,21 @@
           if (subrange.location != NSNotFound) {
             resultRange.location += subrange.location;
             resultRange.length = [searchTerm length];
-            
-            
+                        
             // scan back to start of word
             NSInteger idx = subrange.location;
             while (idx > 0) {
               if ([ws characterIsMember:[returnResult characterAtIndex:idx]]) {
+                idx++;
                 break;
               }
               idx--;
             }
-            NSInteger len = (NSInteger)MIN(subrange.location-idx+30, [returnResult length]-idx);
+            NSInteger len = (NSInteger)MIN(subrange.location-idx+30, [returnResult length]);
             len = MAX(len, [searchTerm length]);
+            if (len+idx > [returnResult length]) {
+              len = [returnResult length]-idx;
+            }
             NSString *matchingString = [returnResult substringWithRange:NSMakeRange(idx, len)];
             if (idx>0) {
               matchingString = [@"..." stringByAppendingString:matchingString];
