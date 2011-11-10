@@ -14,7 +14,6 @@
 #import "TeXEditorViewController.h"
 #import "externs.h"
 #import "ConsoleController.h"
-#import "TPStatusView.h"
 #import "UKXattrMetadataStore.h"
 #import "MHFileReader.h"
 #import "NSAttributedString+LineNumbers.h"
@@ -27,7 +26,6 @@
 @synthesize documentData;
 @synthesize texEditorContainer;
 @synthesize texEditorViewController;
-@synthesize statusView;
 @synthesize fileLoadDate;
 @synthesize fileMonitor;
 @synthesize engineManager;
@@ -35,16 +33,20 @@
 @synthesize drawerContentView;
 @synthesize drawer;
 @synthesize settings;
-@synthesize compileProgressIndicator;
 @synthesize miniConsole;
 @synthesize mainWindow;
 @synthesize pdfViewContainer;
 @synthesize pdfViewerController;
 @synthesize results;
+@synthesize slideViewController;
+@synthesize statusViewController;
+@synthesize statusViewContainer;
 
 - (void)awakeFromNib
 {
   self.results = [NSMutableArray array];
+  
+  [self.slideViewController slideOutAnimate:NO];
   
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
@@ -55,7 +57,7 @@
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
-	
+  
 	if (self.documentData) {
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
@@ -71,8 +73,10 @@
     
   // set up engine settings
   self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
-  [self.engineSettingsController.view setFrame:[self.drawerContentView bounds]];
-  [self.drawerContentView addSubview:self.engineSettingsController.view];
+//  [self.engineSettingsController.view setFrame:[self.drawerContentView bounds]];
+//  [self.drawerContentView addSubview:self.engineSettingsController.view];
+  [self.engineSettingsController.view setFrame:[self.slideViewController.sidePanel bounds]];
+  [self.slideViewController.sidePanel addSubview:self.engineSettingsController.view];
   [self.drawer setContentSize:NSMakeSize(230, 400)];
   [self.drawer setMinContentSize:NSMakeSize(230, 400)];
   [self.drawer setMaxContentSize:NSMakeSize(230, 400)];
@@ -96,14 +100,12 @@
            object:self.engineManager];
 
   if (![self fileURL]) {
-    [self.statusView setFilename:@"Welcome to TeXnicle!"];
+    [self.statusViewController enable:NO];
   } else {
-    [self.statusView setFilename:[[self fileURL] path]];
-    [self.statusView setShowRevealButton:YES];
+    [self.statusViewController setFilenameText:[[self fileURL] path]];
+    [self.statusViewController enable:YES];
   }
-  [self.statusView setEditorStatus:@"No Selection."];
-  
-  
+    
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -117,6 +119,22 @@
 
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
+  
+  
+  // setup status view
+  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
+  [self.statusViewContainer addSubview:self.statusViewController.view];  
+  statusViewIsShowing = YES; 
+  
+  NSNumber *showStatusBarSetting = [self.settings valueForKey:@"TPStandAloneEditorShowStatusBar"];
+  if (showStatusBarSetting) {
+    if(![showStatusBarSetting boolValue]) {
+      [self toggleStatusBar:NO];
+    }
+  } else {
+    [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+  }
   
   [self showDocument];
 }
@@ -132,9 +150,47 @@
                      [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
                      [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
+                     [NSNumber numberWithBool:YES], @"TPStandAloneEditorShowStatusBar",
                      nil];
   }
 }
+
+- (IBAction)toggleStatusView:(id)sender
+{
+  [self toggleStatusBar:YES];
+}
+
+- (void) toggleStatusBar:(BOOL)animate
+{
+  NSRect tefr = [self.texEditorContainer frame];
+  NSRect svfr = [self.statusViewContainer frame];
+  
+  id tec;
+  id sbc;
+  if (animate) {
+    tec = self.texEditorContainer.animator;
+    sbc = self.statusViewContainer.animator;
+  } else {
+    tec = self.texEditorContainer;
+    sbc = self.statusViewContainer;
+  }
+  
+  if (statusViewIsShowing) {
+    statusViewIsShowing = NO;        
+    // move status view out
+    [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y-svfr.size.height, svfr.size.width, svfr.size.height)];    
+    // stretch tex editor container
+    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height)]; 
+  } else {
+    statusViewIsShowing = YES;
+    // move status view in
+    [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y+svfr.size.height, svfr.size.width, svfr.size.height)];    
+    // shrink tex editor container
+    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y+svfr.size.height, tefr.size.width, tefr.size.height-svfr.size.height)];
+  }
+  [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+}
+
 
 - (void) setupSettings
 {
@@ -152,8 +208,13 @@
 
 - (void) updateCursorInfoText
 {
-	NSRange sel = [self.texEditorViewController.textView selectedRange];
-  [self.statusView setEditorStatus:[NSString stringWithFormat:@"character: %d", sel.location]];
+  NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
+  NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
+  if (lineNumber == NSNotFound) {
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
+  } else {
+    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
+  }
 }
 
 
@@ -198,6 +259,15 @@
   // Find PDF Selection in Source
   if (tag == 116030) {
     return [self pdfHasSelection]; 
+  }
+  
+  // toggle status bar
+  if (tag == 2040) {
+    if (statusViewIsShowing) {
+      [menuItem setTitle:@"Hide Status Bar"];
+    } else {
+      [menuItem setTitle:@"Show Status Bar"];
+    }
   }
 
 	return [super validateMenuItem:menuItem];
@@ -417,11 +487,10 @@
 - (void) updateFileStatus
 {
   if ([self fileURL]) {
-    [self.statusView setFilename:[[self fileURL] path]];    
-    [self.statusView setShowRevealButton:YES];
+    [self.statusViewController setFilenameText:[[self fileURL] path]];
+    [self.statusViewController enable:YES];
   } else {
-    [self.statusView setFilename:@"Welcome to TeXnicle!"];
-    [self.statusView setShowRevealButton:NO];
+    [self.statusViewController enable:NO];
   }
   self.fileLoadDate = [NSDate dateWithTimeIntervalSinceNow:2];
 }
@@ -781,13 +850,13 @@
      
 - (void) build
 {
-  [self.compileProgressIndicator startAnimation:self];
+  [self.miniConsole setAnimating:YES];
   [self.engineManager compile];
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
-  [self.compileProgressIndicator stopAnimation:self];
+  [self.miniConsole setAnimating:NO];
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];

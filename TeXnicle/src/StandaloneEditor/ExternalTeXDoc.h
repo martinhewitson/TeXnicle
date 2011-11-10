@@ -13,9 +13,10 @@
 #import "TPEngineSettingsController.h"
 #import "MHMiniConsoleViewController.h"
 #import "PDFViewerController.h"
+#import "MHSlideViewController.h"
+#import "TPStatusViewController.h"
 
 @class TeXEditorViewController;
-@class TPStatusView;
 
 @interface ExternalTeXDoc : NSDocument <PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
@@ -41,7 +42,6 @@
   NSView *texEditorContainer;
   
   BOOL openPDFAfterBuild;
-  TPStatusView *statusView;
   
   NSDate *fileLoadDate;
   TPFileMonitor *fileMonitor;
@@ -51,7 +51,6 @@
   NSView *drawerContentView;
   NSMutableDictionary *settings;
   
-  NSProgressIndicator *compileProgressIndicator;
   MHMiniConsoleViewController *miniConsole;
   
   NSWindow *mainWindow;
@@ -62,6 +61,8 @@
   
   BOOL shouldContinueSearching;
   
+  BOOL statusViewIsShowing;
+  
   NSMutableArray *results;
 }
 
@@ -69,16 +70,19 @@
 
 @property (retain) NSMutableArray *results;
 
+@property (assign) IBOutlet MHSlideViewController *slideViewController;
+
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
+@property (retain) TPStatusViewController *statusViewController;
+@property (assign) IBOutlet NSView *statusViewContainer;
+
 @property (retain) NSMutableDictionary *settings;
-@property (assign) IBOutlet TPStatusView *statusView;
 @property (assign) IBOutlet NSView *drawerContentView;
 @property (assign) IBOutlet NSDrawer *drawer;
-@property (assign) IBOutlet NSProgressIndicator *compileProgressIndicator;
 @property (retain) TPEngineSettingsController *engineSettingsController;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
@@ -110,6 +114,8 @@
 - (IBAction) endAddToNewProjectSheet:(id)sender;
 - (void) addToNewEmptyProject;
 - (void) insertTextToCurrentDocument:(NSString*)string;
+- (IBAction)toggleStatusView:(id)sender;
+- (void) toggleStatusBar:(BOOL)animate;
 
 #pragma mark -
 #pragma mark LaTeX Control
