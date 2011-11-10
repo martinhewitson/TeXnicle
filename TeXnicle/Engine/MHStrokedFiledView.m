@@ -12,6 +12,8 @@
 
 @synthesize fillColor;
 @synthesize strokeColor;
+@synthesize strokeSides;
+
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -20,6 +22,7 @@
     // Initialization code here.
     self.fillColor = [NSColor controlBackgroundColor];
     self.strokeColor = [NSColor darkGrayColor];
+    self.strokeSides = NO;
   }
   
   return self;
@@ -37,6 +40,13 @@
   [path lineToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y)];
   [path moveToPoint:NSMakePoint(r.origin.x, r.origin.y+r.size.height)];
   [path lineToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y+r.size.height)];
+  
+  if (self.strokeSides) {
+    [path moveToPoint:NSMakePoint(r.origin.x, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x, r.origin.y+r.size.height)];
+    [path moveToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y+r.size.height)];
+  }
   
   [path setLineWidth:1.0];
   [self.strokeColor set];
