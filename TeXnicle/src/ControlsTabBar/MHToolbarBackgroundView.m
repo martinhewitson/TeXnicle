@@ -11,6 +11,9 @@
 
 @implementation MHToolbarBackgroundView
 
+@synthesize strokeLeftSide;
+@synthesize strokeRightSide;
+
 -(void)awakeFromNib
 {
 	self.endingColor = [NSColor lightGrayColor];
@@ -38,6 +41,17 @@
 	[path moveToPoint:NSMakePoint(0.0, lineWidth)];
 	[path lineToPoint:NSMakePoint(r.size.width, lineWidth)];
 	[path stroke];
+  
+  if (self.strokeLeftSide) {
+    [path moveToPoint:NSMakePoint(r.origin.x, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x, r.origin.y+r.size.height)];
+    [path stroke];
+  }
+  if (self.strokeRightSide) {
+    [path moveToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y+r.size.height)];
+    [path stroke];
+  }  
 }
 
 @end

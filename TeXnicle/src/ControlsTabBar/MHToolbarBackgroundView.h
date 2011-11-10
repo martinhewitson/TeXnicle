@@ -14,4 +14,7 @@
     
 }
 
+@property (assign) BOOL strokeLeftSide;
+@property (assign) BOOL strokeRightSide;
+
 @end
