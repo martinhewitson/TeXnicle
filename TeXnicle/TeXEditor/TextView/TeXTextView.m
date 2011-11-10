@@ -462,6 +462,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [NSBezierPath fillRect:[self bounds]];
   }
   
+  
   // highlight current line
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightCurrentLine] boolValue]) {
@@ -1047,6 +1048,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
+  NSLog(@"%d", [[self string] length]);
   [self setSelectedRange:aRange];
   if (scroll) {    
     [self scrollRangeToVisible:aRange];
