@@ -58,7 +58,7 @@
 
 - (NSAttributedString*)displayString
 {
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:self.match] autorelease]; 
+  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:[self.match stringByReplacingOccurrencesOfString:@"\n" withString:@" "]] autorelease]; 
   NSString *lineNumberString = [self lineNumberString];
   NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
   [str addAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [str length])];
