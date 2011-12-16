@@ -47,7 +47,8 @@
 @property (assign) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
 @property (assign) IBOutlet NSTabView *tabView;
 @property (assign) TeXEditorViewController *texEditorViewController;
-@property (assign) TPImageViewerController *imageViewerController;;
+@property (assign) TPImageViewerController *imageViewerController;
+@property (assign) NSView *imageViewContainer;
 
 - (NSInteger) count;
 - (void) refreshTabForDocument:(FileEntity*)aDoc;
@@ -67,6 +68,7 @@
 - (void) disableTextView;
 - (void) enableTextView;
 - (void)enableImageView:(BOOL)state;
+- (void) disableImageView;
 
 - (void) setCursorAndScrollPositionForCurrentDoc;
 - (void) saveCursorAndScrollPosition;

@@ -22,12 +22,14 @@
 @synthesize tabView;
 @synthesize texEditorViewController;
 @synthesize imageViewerController;
+@synthesize imageViewContainer;
 
 - (void) awakeFromNib
 {
 	openDocuments = [[NSMutableArray alloc] init];
 	standaloneWindows = [[NSMutableArray alloc] init];
 	
+  //  @"Aqua" @"Unified" @"Adium" @"TPMetal"
 	[tabBar setStyleNamed:@"TPMetal"];
 	[tabBar setOrientation:PSMTabBarHorizontalOrientation];
 	[tabBar setAutomaticallyAnimates:YES];
@@ -36,8 +38,8 @@
 	
 	isOpening = NO;
 	
-	[self disableTextView];
-  [self enableImageView:NO];
+//  [self enableImageView:NO];
+//	[self disableTextView];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
@@ -80,7 +82,8 @@
 {
   NSArray *openFiles = [NSArray arrayWithArray:openDocuments];
   for (FileEntity *file in openFiles) {
-    [self removeDocument:file];
+    NSTabViewItem *item = [tabView tabViewItemAtIndex:[tabView indexOfTabViewItemWithIdentifier:file]];
+    [tabView removeTabViewItem:item];
   }
   [self performSelector:@selector(disableEditors) withObject:nil afterDelay:0];
 }
@@ -93,54 +96,17 @@
 
 - (void) closeCurrentTab
 {
-	FileEntity *selectedDoc = [[tabView selectedTabViewItem] identifier];
-	[self removeDocument:selectedDoc];	
+  [tabView removeTabViewItem:[tabView selectedTabViewItem]];
 }
 
 - (void) removeDocument:(FileEntity*)aDoc
 {
 	if (![openDocuments containsObject:aDoc]) {
-//    NSLog(@"Doc %@ is not open", aDoc);
 		return;
 	}
 	
-//	NSLog(@"Removing %@", [aDoc valueForKey:@"name"]);
-	NSInteger index = [self indexOfDocumentWithFile:aDoc];
-	if (index >= 0) {
-//		NSLog(@"Removing tab at index %ld", index);
-		
-		
-		// remove the tab		
-		[self.texEditorViewController.textView updateEditorRuler];
-		[openDocuments removeObject:aDoc];
-		[tabView removeTabViewItem:[tabView tabViewItemAtIndex:index]];
-	} else {
-		[openDocuments removeObject:aDoc];
-	}
-
-	
-//	NSLog(@"Current doc: %@", [currentDoc valueForKey:@"name"]);
-	
-	[self.texEditorViewController.textView setNeedsDisplay:YES];
-	
-	id cd = [[tabView selectedTabViewItem] identifier];
-	[self setCurrentDoc:cd];
-	
-	[self performSelector:@selector(updateDoc) withObject:self afterDelay:0.0];
-  
-	// remove from the standalone windows if it's there
-	DocWindowController *docToRemove = nil;
-	for (DocWindowController *win in standaloneWindows) {
-		if ([win file] == aDoc) {
-			docToRemove = win;
-		}
-	}
-
-	if (docToRemove) {
-		[docToRemove close];
-		[standaloneWindows removeObject:docToRemove];
-	}
-	
+  NSTabViewItem *item = [tabView tabViewItemAtIndex:[tabView indexOfTabViewItemWithIdentifier:aDoc]];
+  [tabView removeTabViewItem:item];  
 }
 
 
@@ -182,42 +148,22 @@
 			return;
 		}
 		
-    
 		// load this file from disk
 		[aDoc reloadFromDisk];
-		
 		[openDocuments addObject:aDoc];
-		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc] ;
+		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
 		[tabView addTabViewItem:newItem];
 		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
-		[self setCurrentDoc:aDoc];
 		[newItem release];
-    [self setupViewerForDoc:aDoc];
-//    if ([aDoc isImage]) {
-//      [self enableImageView:YES];      
-//    } else if ([[aDoc valueForKey:@"isText"] boolValue]) {
-//      [self enableTextView];
-//      [self enableImageView:NO];
-//    } else {
-//      [self enableImageView:YES];
-//    }
 	}	else {
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
 		[tabView selectTabViewItem:tab];
-		[self setCurrentDoc:[tab identifier]];		
-    [self setupViewerForDoc:aDoc];
-//    if ([[aDoc valueForKey:@"isText"] boolValue]) {
-//      [self enableTextView];
-//      [self enableImageView:NO];
-//    } else if ([aDoc isImage]) {
-//      [self enableImageView:YES];
-//    } else {
-//      [self enableImageView:YES];
-//    }
 	}
 	
-	[self.texEditorViewController.textView setNeedsDisplay:YES];
+  if ([aDoc isText]) {
+    [self.texEditorViewController.textView setNeedsDisplay:YES];
+  }
 }
 
 - (void)setupViewerForDoc:(FileEntity*)aDoc
@@ -314,6 +260,16 @@
 	
 //	NSLog(@"Switching to document %@", [aDoc valueForKey:@"name"]);
 	currentDoc = aDoc;
+  
+  // increase active state for this doc
+  [currentDoc increaseActiveCount];
+  
+  // and decrease for all others
+  for (FileEntity *doc in openDocuments) {
+    if (doc != currentDoc) {
+      [doc decreaseActiveCount];
+    }
+  }
 		
 	[self updateDoc];
   // tell project tree to select this item
@@ -359,6 +315,7 @@
 	FileEntity *file = [tabViewItem identifier];
 	[file updateFromTextStorage];
 	[openDocuments removeObject:file];
+  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
 //	NSLog(@"Removed %@", [file valueForKey:@"name"]);
 	
 	
@@ -369,45 +326,46 @@
     if (nextFile && nextFile != file) {
       [self setCurrentDoc:nextFile];
     } else {
+      [file.project setNilValueForKey:@"selected"];
       [self setCurrentDoc:nil];
-      [self disableTextView];
       [self enableImageView:NO];
+      [self disableTextView];
     }
   }	
 	
 	//[self removeObject:[tabViewItem identifier]];
-	//NSLog(@"Managing %d docs", [[self arrangedObjects] count]);
 }
 
 - (void) setCursorAndScrollPositionForCurrentDoc
 {
 //	if (isOpening)
 //		return;
-	
-  [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
-  
-	// reset cursor position
-	NSString *sr = [currentDoc valueForKey:@"cursor"];
-	if (sr) {
-		if (![sr isEqual:@""]) {
-			NSRange range = NSRangeFromString(sr);
-			if (range.location + range.length < [[self.texEditorViewController.textView string] length]) {
-//				NSLog(@"Trying to set range %@", NSStringFromRange(range));
-//        [textView performSelector:@selector(selectRange:) withObject:[NSValue valueWithRange:range] afterDelay:0.0];
-        [self.texEditorViewController.textView setSelectedRange:range];
-			}
-		}
-	}
-	// reset the visible rect
-	sr = [currentDoc valueForKey:@"visibleRect"];
-	if (sr) {
-		if (![sr isEqual:@""]) {
-			NSRect r = NSRectFromString(sr);
-//      NSLog(@"Setting visible rect: %@", NSStringFromRect(r));
-//      [textView performSelector:@selector(scrollToRect:) withObject:[NSValue valueWithRect:r] afterDelay:0.0];
-			[self.texEditorViewController.textView scrollRectToVisible:r];
-		}
-	}
+	if ([currentDoc isText]) {
+    [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
+    
+    // reset cursor position
+    NSString *sr = [currentDoc valueForKey:@"cursor"];
+    if (sr) {
+      if (![sr isEqual:@""]) {
+        NSRange range = NSRangeFromString(sr);
+        if (range.location + range.length < [[self.texEditorViewController.textView string] length]) {
+          //				NSLog(@"Trying to set range %@", NSStringFromRange(range));
+          //        [textView performSelector:@selector(selectRange:) withObject:[NSValue valueWithRange:range] afterDelay:0.0];
+          [self.texEditorViewController.textView setSelectedRange:range];
+        }
+      }
+    }
+    // reset the visible rect
+    sr = [currentDoc valueForKey:@"visibleRect"];
+    if (sr) {
+      if (![sr isEqual:@""]) {
+        NSRect r = NSRectFromString(sr);
+        //      NSLog(@"Setting visible rect: %@", NSStringFromRect(r));
+        //      [textView performSelector:@selector(scrollToRect:) withObject:[NSValue valueWithRect:r] afterDelay:0.0];
+        [self.texEditorViewController.textView scrollRectToVisible:r];
+      }
+    }
+  }
   
 }
 
@@ -419,15 +377,17 @@
 	
 	if (!currentDoc)
 		return;
-	
-	NSRect vr = [self.texEditorViewController.textView visibleRect];
-//	NSLog(@"Visible rect: %@", NSStringFromRect(vr));
-	if (!NSEqualSizes(vr.size, NSZeroSize)) {
-		[currentDoc setPrimitiveValue:NSStringFromRect(vr) forKey:@"visibleRect"];
-		// store cursor position
-		NSRange r = [self.texEditorViewController.textView selectedRange];
-		[currentDoc setPrimitiveValue:NSStringFromRange(r) forKey:@"cursor"];
-	}
+
+  if ([currentDoc isText]) {
+    NSRect vr = [self.texEditorViewController.textView visibleRect];
+    //	NSLog(@"Visible rect: %@", NSStringFromRect(vr));
+    if (!NSEqualSizes(vr.size, NSZeroSize)) {
+      [currentDoc setPrimitiveValue:NSStringFromRect(vr) forKey:@"visibleRect"];
+      // store cursor position
+      NSRange r = [self.texEditorViewController.textView selectedRange];
+      [currentDoc setPrimitiveValue:NSStringFromRange(r) forKey:@"cursor"];
+    }
+  }
 }
 
 
@@ -437,7 +397,10 @@
 		[file setValue:[NSNumber numberWithBool:YES] forKey:@"wasOpen"];
 	}
 	
-	
+	for (DocWindowController *newDoc in standaloneWindows) {
+    [[newDoc window] setDocumentEdited:NO];
+  }
+  
 //	NSLog(@"%@", [[projectDocument project] valueForKey:@"selected"]);
 	
 	if (currentDoc) {
@@ -446,7 +409,7 @@
 			[project setValue:currentDoc forKey:@"selected"];
 		}
 	} else {
-		[[delegate project] setValue:nil forKey:@"selected"];
+		[[delegate project] setNilValueForKey:@"selected"];
 	}
 	
 	[self saveCursorAndScrollPosition];
@@ -457,9 +420,17 @@
 	return YES;
 }
 
+- (void) disableImageView
+{
+  [self enableImageView:NO];
+}
+
 - (void)enableImageView:(BOOL)state
 {
   if (state) {
+    if (![[self.imageViewContainer subviews] containsObject:self.imageViewerController.view]) {
+      [self.imageViewContainer addSubview:self.imageViewerController.view];
+    }        
     if ([currentDoc isImage]) {
       NSImage *image = [[[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]] autorelease];
       [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
@@ -470,14 +441,18 @@
       [self.imageViewerController enable];
     }
     [self.texEditorViewController hide];
+    [tabBackground setHidden:NO];
+    [tabView setHidden:NO];
+    [tabBar setHidden:NO];
   } else {
+    [self.texEditorViewController enableEditor];
+    [self.imageViewerController.view removeFromSuperview];
     [self.imageViewerController disable];
   }
 }
 
 - (void) disableTextView
 {
-//  NSLog(@"Disable text view %@", self.texEditorViewController.textView);
   [self.texEditorViewController disableEditor];
 	[tabView setHidden:YES];
 	[tabBar setHidden:YES];
