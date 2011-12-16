@@ -26,6 +26,7 @@
 	
 	NSMenu *addMarkerActionMenu;
 	
+  id<TPSectionListControllerDelegate> delegate;
 }
 
 @property (nonatomic, retain) NSTimer *timer;
