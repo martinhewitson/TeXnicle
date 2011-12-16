@@ -584,7 +584,10 @@
 	
 //	[[NSColor colorWithCalibratedWhite:0.0 alpha:0.2] set];
 //	NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
-	NSDrawWindowBackground(rect);
+//	NSDrawWindowBackground(rect);
+  
+  [[NSColor lightGrayColor] set];
+  NSRectFill(rect);
 //	[[NSColor whiteColor] set];
 	
 //	if (orientation == PSMTabBarHorizontalOrientation) {
