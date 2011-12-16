@@ -15,16 +15,22 @@
 @interface FileEntity : ProjectItemEntity {
 
 	FileDocument *document;
-	
+	BOOL _hasEdits;
+  NSInteger isActive;
 }
 
 @property (assign) NSSet *bookmarks;
 @property (retain) NSDate *fileLoadDate;
 @property (copy) NSString *extension;
 @property (retain) NSData *content;
-@property (assign) BOOL isText;
+@property (assign) NSNumber *isText;
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
+
+@property (assign) NSInteger isActive;
+
+- (void)increaseActiveCount;
+- (void)decreaseActiveCount;
 
 - (Bookmark*)bookmarkForLinenumber:(NSInteger)aLinenumber;
 

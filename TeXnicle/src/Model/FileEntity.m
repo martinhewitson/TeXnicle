@@ -24,7 +24,7 @@
 @dynamic isText;
 @dynamic bookmarks;
 @synthesize document;
-
+@synthesize isActive;
 
 - (void) awakeFromInsert
 {
@@ -36,6 +36,8 @@
 ////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
 //		document = [[FileDocument alloc] initWithFile:self];
 //	}
+  
+  self.isActive = 0;
 }
 
 - (void) awakeFromFetch
@@ -56,7 +58,25 @@
 //		NSLog(@"awakeFromFetch: Created document for %@", [self valueForKey:@"name"]);
 //		document = [[FileDocument alloc] initWithFile:self];
 //	}
+  
+  self.isActive = 0;
 }
+
+- (void)increaseActiveCount
+{
+  self.isActive++;
+//  NSLog(@"++ Active count for %@ = %ld", self.name, self.isActive);
+}
+
+- (void)decreaseActiveCount
+{
+  self.isActive--;
+  if (self.isActive<0) {
+    self.isActive = 0;
+  }
+//  NSLog(@"-- Active count for %@ = %ld", self.name, self.isActive);
+}
+
 
 - (void) reloadFromDisk
 {
@@ -258,6 +278,21 @@
 // A file has edits if the textstorage string is different from that in content
 - (BOOL) hasEdits
 {
+  if (![[self valueForKey:@"isText"] boolValue]) {
+    return NO;
+  }
+  
+  if (_hasEdits) {
+//    NSLog(@"We know it has edits %d", _hasEdits);
+    return YES;
+  }
+
+  if (self.isActive == 0) {
+    return _hasEdits;
+  }
+  
+  // otherwise we check  
+//  NSLog(@"Checking for edits");
 	if ([self document]) {
 		if ([[self document] textStorage]) {
       MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
@@ -272,10 +307,12 @@
 //			NSString *textStr = [aStr unfoldedString];
 //			[aStr release];
 			if ([contentStr length] != [textStr length]) {
+        _hasEdits = YES;
 				return YES;
 			}
 			
 			if (![contentStr isEqual:textStr]) {
+        _hasEdits = YES;
 				return YES;
 			}
 		}
@@ -391,7 +428,7 @@
     
 		// update the save time for this file
 		[self setValue:[NSDate date] forKey:@"fileLoadDate"];
-		
+		_hasEdits = NO;
 //		NSLog(@"Done");
 	}	
 	return YES;
