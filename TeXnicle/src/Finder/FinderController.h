@@ -52,6 +52,11 @@
   HHValidatedButton *replaceAllButton;
   NSView *replaceView;
   NSTextField *replaceText;
+  
+  HHValidatedButton *jumpToButton;
+  NSSearchField *searchField;
+  NSProgressIndicator *progressIndicator;
+  NSTextField *statusLabel;
 }
 
 @property (assign) id<FinderControllerDelegate> delegate;
