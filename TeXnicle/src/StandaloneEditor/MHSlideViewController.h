@@ -9,7 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MHStrokedFiledView.h"
 
-@interface MHSlideViewController : NSObject
+@interface MHSlideViewController : NSObject {
+@private
+  MHStrokedFiledView *sidePanel;
+  NSView *mainPanel;
+  NSView *contentView;
+}
 
 @property (assign) IBOutlet MHStrokedFiledView *sidePanel;
 @property (assign) IBOutlet NSView *mainPanel;
