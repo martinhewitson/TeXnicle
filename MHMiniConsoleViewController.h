@@ -12,6 +12,7 @@
 @interface MHMiniConsoleViewController : NSViewController <MHConsoleViewer> {
 @private
   NSTextField *textField;
+  NSProgressIndicator *progressIndicator;
 }
 
 @property (assign) IBOutlet NSTextField *textField;
