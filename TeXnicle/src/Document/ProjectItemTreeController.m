@@ -386,8 +386,7 @@ withIntermediateDirectories:YES
 	}
 		
 	// configure the textstorage
-	[newFile reconfigureDocument];
-	
+	[newFile reconfigureDocument];	
 	
 	// set as main file if necessary	
 	if (main) {
@@ -1225,14 +1224,10 @@ withIntermediateDirectories:YES
 	ProjectItemEntity *object = [item representedObject];
 
 	[cell setImageSize:imageSize];
-  BOOL dirty = [object hasEdits];
-  if (dirty) {
-    [cell setTextColor:[NSColor lightGrayColor]];
-  } else {
-    [cell setTextColor:[NSColor blackColor]];
-  }
+  [cell setTextColor:[NSColor blackColor]];
 		
-	if ([object isKindOfClass:[FolderEntity class]]) {
+	if ([object isMemberOfClass:[FolderEntity class]]) {
+//    NSLog(@"%@ is a folder", [object name]);
 		if ([[object valueForKey:@"isExpanded"] boolValue]) {
 			NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
 			[cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
@@ -1241,7 +1236,19 @@ withIntermediateDirectories:YES
 			[cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
 		}
 	} else if ([object isKindOfClass:[FileEntity class]]) {
+//    NSLog(@"%@ is a file", [object name]);
 		
+    if ([[(FileEntity*)object valueForKey:@"isText"] boolValue]) {
+      BOOL dirty = [object hasEdits];
+      if (dirty) {
+        [cell setTextColor:[NSColor lightGrayColor]];
+      }
+    }
+    
+		if(![object existsOnDisk]) {
+			[cell setTextColor:[NSColor redColor]];
+		}	
+    
 		NSString *ext = [object valueForKey:@"extension"];
 		if (!ext)
 			ext = @"";
@@ -1264,12 +1271,12 @@ withIntermediateDirectories:YES
 		[cell setImage:icon];						
 	}
 	
-	// check if the file exists on disk, and if not, indicate by making red text
-	if ([object isKindOfClass:[FileEntity class]]) {
-		if(![object existsOnDisk]) {
-			[cell setTextColor:[NSColor redColor]];
-		}	
-	}
+//	// check if the file exists on disk, and if not, indicate by making red text
+//	if ([object isKindOfClass:[FileEntity class]]) {
+//		if(![object existsOnDisk]) {
+//			[cell setTextColor:[NSColor redColor]];
+//		}	
+//	}
 	
 }
 
