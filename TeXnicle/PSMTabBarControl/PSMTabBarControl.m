@@ -17,6 +17,7 @@
 #import "PSMAdiumTabStyle.h"
 #import "PSMTabDragAssistant.h"
 #import "PSMTabBarController.h"
+#import "TPMetalTabStyle.h"
 
 #include <bitstring.h>
 
@@ -372,6 +373,8 @@
 		newStyle = [[PSMUnifiedTabStyle alloc] init];
 	} else if ([name isEqualToString:@"Adium"]) {
 		newStyle = [[PSMAdiumTabStyle alloc] init];
+	} else if ([name isEqualToString:@"TPMetal"]) {
+		newStyle = [[TPMetalTabStyle alloc] init];
 	} else {
 		newStyle = [[PSMMetalTabStyle alloc] init];
 	}
@@ -674,8 +677,9 @@
 	}
 	
 	// stop watching identifier
-	[item removeObserver:self forKeyPath:@"identifier"];
-	
+  if ([item observationInfo]) {
+    [item removeObserver:self forKeyPath:@"identifier"];
+  }	
 	// remove indicator
 	if ([[self subviews] containsObject:[cell indicator]]) {
 		[[cell indicator] removeFromSuperview];
@@ -1791,7 +1795,6 @@
 			if ([[self delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)]) {
 				[[self delegate] tabView:aTabView didCloseTabViewItem:[cell representedObject]];
 			}
-			
 			[self removeTabForCell:cell];
 		}
 	}

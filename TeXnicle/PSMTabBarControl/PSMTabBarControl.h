@@ -185,6 +185,7 @@ enum {
 // internal bindings methods also used by the tab drag assistant
 - (void)bindPropertiesForCell:(PSMTabBarCell *)cell andTabViewItem:(NSTabViewItem *)item;
 - (void)removeTabForCell:(PSMTabBarCell *)cell;
+- (void)closeTabClick:(id)sender;
 
 @end
 
