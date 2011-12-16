@@ -35,5 +35,9 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;
+- (void) selectTabAtIndex:(NSInteger)index;
+
+- (id) buttonForTabIndex:(NSInteger)index;
+- (NSInteger)tabIndexForButton:(id)sender;
 
 @end

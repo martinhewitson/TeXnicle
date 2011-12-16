@@ -11,7 +11,8 @@
 
 @interface MHToolbarBackgroundView : SBGradientView {
 @private
-    
+  BOOL strokeLeftSide;
+  BOOL strokeRightSide;
 }
 
 @property (assign) BOOL strokeLeftSide;

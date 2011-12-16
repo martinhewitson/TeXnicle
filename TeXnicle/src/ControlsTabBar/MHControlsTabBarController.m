@@ -43,8 +43,38 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self.bookmarksButton setState:NSOffState];
   [self.prefsButton setState:NSOffState];
   
-  buttons = [[NSArray arrayWithObjects:self.projectButton, self.palletButton, self.libraryButton, self.outlineButton, self.findButton, self.bookmarksButton, self.prefsButton, nil] retain];
+  NSMutableArray *nonNilButtons = [NSMutableArray array];
+  if (self.projectButton != nil) {
+    [nonNilButtons addObject:self.projectButton];
+  }
+  if (self.palletButton != nil) {
+    [nonNilButtons addObject:self.palletButton];
+  }
+  if (self.libraryButton != nil) {
+    [nonNilButtons addObject:self.libraryButton];
+  }
+  if (self.outlineButton != nil) {
+    [nonNilButtons addObject:self.outlineButton];
+  }
+  if (self.findButton != nil) {
+    [nonNilButtons addObject:self.findButton];
+  }
+  if (self.bookmarksButton != nil) {
+    [nonNilButtons addObject:self.bookmarksButton];
+  }
+  if (self.prefsButton != nil) {
+    [nonNilButtons addObject:self.prefsButton];
+  }
   
+  buttons = [[NSArray arrayWithArray:nonNilButtons] retain];
+//  buttons = [[NSArray arrayWithObjects:self.projectButton, self.palletButton, self.libraryButton, self.outlineButton, self.findButton, self.bookmarksButton, self.prefsButton, nil] retain];
+  
+}
+
+- (void) selectTabAtIndex:(NSInteger)index
+{
+  [self.tabView selectTabViewItemAtIndex:index];
+  [self toggleOn:[self buttonForTabIndex:index]];
 }
 
 - (void)dealloc
@@ -60,7 +90,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (IBAction)buttonSelected:(id)sender
 {
-  NSInteger idx = [buttons indexOfObject:sender];
+  NSInteger idx = [self tabIndexForButton:sender];
   [self.tabView selectTabViewItemAtIndex:idx];
   [self toggleOn:sender];  
   
@@ -79,6 +109,58 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     }
   }
 }
+                                         
+                                         
+- (id) buttonForTabIndex:(NSInteger)index
+{
+  switch (index) {
+    case 0:
+      return self.projectButton;
+      break;
+    case 1:
+      return self.palletButton;
+      break;
+    case 2:
+      return self.libraryButton;
+      break;
+    case 3:
+      return self.outlineButton;
+      break;
+    case 4:
+      return self.findButton;
+      break;
+    case 5:
+      return self.bookmarksButton;
+      break;
+    case 6:
+      return self.prefsButton;
+      break;
+    default:
+      return nil;
+      break;
+  }
+}
+
+- (NSInteger)tabIndexForButton:(id)sender
+{
+  if (sender == self.projectButton) {
+    return 0;
+  } else if (sender == self.palletButton) {
+    return 1;
+  } else if (sender == self.libraryButton) {
+    return 2;
+  } else if (sender == self.outlineButton) {
+    return 3;
+  } else if (sender == self.findButton) {
+    return 4;
+  } else if (sender == self.bookmarksButton) {
+    return 5;
+  } else if (sender == self.prefsButton) {
+    return 6;
+  } else {
+    return 0;
+  }
+}
 
 #pragma mark -
 #pragma mark TabView Delegate
@@ -86,19 +168,19 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
   NSInteger idx = [self.tabView indexOfTabViewItem:tabViewItem];
-  if (idx == 0) {
+  if (idx == [buttons indexOfObject:self.projectButton]) {
     [self toggleOn:self.projectButton];
-  } else if (idx == 1) {
+  } else if (idx == [buttons indexOfObject:self.palletButton]) {
     [self toggleOn:self.palletButton];
-  } else if (idx == 2) {
+  } else if (idx == [buttons indexOfObject:self.libraryButton]) {
     [self toggleOn:self.libraryButton];
-  } else if (idx == 3) {
+  } else if (idx == [buttons indexOfObject:self.outlineButton]) {
     [self toggleOn:self.outlineButton];
-  } else if (idx == 4) {
+  } else if (idx == [buttons indexOfObject:self.findButton]) {
     [self toggleOn:self.findButton];    
-  } else if (idx == 5) {
+  } else if (idx == [buttons indexOfObject:self.bookmarksButton]) {
     [self toggleOn:self.bookmarksButton];    
-  } else if (idx == 6) {
+  } else if (idx == [buttons indexOfObject:self.prefsButton]) {
     [self toggleOn:self.prefsButton];    
   }
 }
