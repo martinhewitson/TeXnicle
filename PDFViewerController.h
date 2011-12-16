@@ -25,6 +25,19 @@
   PDFView *pdfview;
   id<PDFViewerControllerDelegate> delegate;
   NSInteger _currentHighlightedPDFSearchResult;
+  
+  NSSearchField *searchField;
+  NSTextField *statusText;
+  NSProgressIndicator *progressIndicator;
+  NSTextField *searchStatusText;
+  NSView *toolbarView;
+  HHValidatedButton *nextButton;
+  HHValidatedButton *prevButton;
+  HHValidatedButton *zoomInButton;
+  HHValidatedButton *zoomOutButton;
+  HHValidatedButton *zoomToFitButton;
+  
+  NSMutableArray *searchResults;
 }
 
 

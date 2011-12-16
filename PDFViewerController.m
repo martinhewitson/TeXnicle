@@ -82,12 +82,18 @@
 - (void) showViewer
 {
   [pdfViewContainer setHidden:NO];
+  [self.searchField setEnabled:YES];
+  [self.prevButton setEnabled:YES];
+  [self.nextButton setEnabled:YES];
   [self.statusText setHidden:YES];
 }
 
 - (void) hideViewer
 {
   [pdfViewContainer setHidden:YES];
+  [self.searchField setEnabled:NO];
+  [self.prevButton setEnabled:NO];
+  [self.nextButton setEnabled:NO];
   [self.statusText setHidden:NO];
 }
 
