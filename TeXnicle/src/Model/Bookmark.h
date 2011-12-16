@@ -13,6 +13,8 @@
 
 @interface Bookmark : NSManagedObject {
 @private
+  NSAttributedString *selectedDisplayString;
+  NSAttributedString *displayString;
 }
 @property (nonatomic, retain) NSNumber * linenumber;
 @property (nonatomic, retain) FileEntity *parentFile;
