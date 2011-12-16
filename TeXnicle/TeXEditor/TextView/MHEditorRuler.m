@@ -97,16 +97,17 @@
 	[super dealloc];
 }
 
-//- (void) drawRect:(NSRect)dirtyRect
-//{
-//  [super drawRect:dirtyRect];
-//  [self drawHashMarksAndLabelsInRect:dirtyRect];
-//}
+- (void) drawRect:(NSRect)dirtyRect
+{
+  [super drawRect:dirtyRect];
+  [self drawHashMarksAndLabelsInRect:dirtyRect];
+}
 
 - (void)resetLineNumbers
 {
-  self.lineNumbers = nil;
-  self.codeFolders = nil;
+  _recalculateLines = YES;
+//  self.lineNumbers = nil;
+//  self.codeFolders = nil;
 }
 
 - (void) setNeedsDisplay 
@@ -153,7 +154,12 @@
 //  NSRectFill(r);
     
   // calculate visible lines
-  if (self.lineNumbers == nil || !NSEqualRanges(visibleRange, lastVisibleRange)) {
+//  NSLog(@"Last range %@, this range %@", NSStringFromRange(lastVisibleRange), NSStringFromRange(visibleRange));
+//  if (self.lineNumbers == nil || !NSEqualRanges(visibleRange, lastVisibleRange)) {
+  if (_recalculateLines || !NSEqualRanges(visibleRange, lastVisibleRange)) {
+//  if (self.lineNumbers == nil || visibleRange.location != lastVisibleRange.location) {
+//    NSLog(@"Line numbers is nil? %d", self.lineNumbers == nil);
+//    NSLog(@"draw hash marks: calculations for range");
     [self calculationsForTextRange:visibleRange];
     lastVisibleRange = visibleRange;
   }
@@ -358,11 +364,17 @@
 #pragma mark -
 #pragma mark Lines and Folders
 
+- (void) recalculateThickness
+{
+  _forceThicknessRecalculation = YES;
+}
+
 // This computes the new set of line numbers and the new set of code folders
 // for the given range. It also updates the thickness of the ruler. The new 
 // linenumbers and code folders are then set to the instance properties.
 - (void)calculationsForTextRange:(NSRange)aRange
 {
+//  NSLog(@"Calculations for range %@", NSStringFromRange(aRange));
   // compute and cache the linenumbers in view
   NSArray *newLineNumbers = [self lineNumbersForTextRange:aRange];
   
@@ -373,23 +385,30 @@
 //  NSLog(@"Got folders: %@", newFolders);
   
   // update ruler thickness
-  float oldThickness = [self ruleThickness];
-  float newThickness = [self requiredThickness];
-  if (fabs(oldThickness - newThickness) > 1)
-  {
-    NSInvocation			*invocation;
-    
-    // Not a good idea to resize the view during calculations (which can happen during
-    // display). Do a delayed perform (using NSInvocation since arg is a float).
-    invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(setRuleThickness:)]];
-    [invocation setSelector:@selector(setRuleThickness:)];
-    [invocation setTarget:self];
-    [invocation setArgument:&newThickness atIndex:2];    
-    [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.0];
+//  NSLog(@"Last max line %ld: new max line %ld", [[newLineNumbers lastObject] number], _lastMaxVisibleLine);
+  if ([[newLineNumbers lastObject] number] > _lastMaxVisibleLine || _forceThicknessRecalculation) {
+    float oldThickness = [self ruleThickness];
+    float newThickness = [self requiredThickness];
+    if (fabs(oldThickness - newThickness) > 1)
+    {
+      NSInvocation			*invocation;
+      
+      // Not a good idea to resize the view during calculations (which can happen during
+      // display). Do a delayed perform (using NSInvocation since arg is a float).
+      invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(setRuleThickness:)]];
+      [invocation setSelector:@selector(setRuleThickness:)];
+      [invocation setTarget:self];
+      [invocation setArgument:&newThickness atIndex:2];    
+      [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.0];
+    }
+    _forceThicknessRecalculation = NO;
   }
   
   self.lineNumbers = newLineNumbers;
   self.codeFolders = newFolders;
+  _recalculateLines = NO;
+  
+  _lastMaxVisibleLine = [[self.lineNumbers lastObject] number];
 }
 
 
@@ -524,7 +543,7 @@
     return foundFoldingTags;
   }
   
-  NSUInteger start = aRange.location;
+//  NSUInteger start = aRange.location;
   NSString *text = [self.textView string];
   NSAttributedString *attStr = [self.textView attributedString];
   NSInteger lineNumber;
@@ -532,15 +551,19 @@
   // go forwards from the start until we reach the start of the input range
   NSUInteger idx;
   NSRange lineRange;
-  idx = aRange.location;
   
-  // count lines up to start of range
-  lineNumber = 1;
-  for (idx = 0; idx < start;) {
-    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-    lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
-		idx = NSMaxRange(lineRange);
-	}
+  if (self.lineNumbers == nil || [self.lineNumbers count] == 0) {
+    lineNumber = 1;
+    for (idx = 0; idx < aRange.location;) {
+      lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
+      lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
+      idx = NSMaxRange(lineRange);
+    }
+  } else {
+    MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+    idx = firstLine.range.location;
+    lineNumber = firstLine.number;
+  }
   
 //  NSInteger startIndex = idx;
 //  NSInteger startLineNumber = lineNumber;  
@@ -630,6 +653,19 @@
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange
 {
   NSAttributedString *attStr = [textView attributedString];
+  
+  // check the range against the linenumbers we already have
+  if (self.lineNumbers && [self.lineNumbers count] > 0) {
+    MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+//    NSLog(@"Requested range %@", NSStringFromRange(aRange));
+//    NSLog(@"Min line: %ld, %@", [[self.lineNumbers objectAtIndex:0] number], NSStringFromRange([[self.lineNumbers objectAtIndex:0] range]));  
+    
+    // if the visible range still includes our first line from last time, we can shortcut the calculation. We don't need to start 
+    // from the start of the file again.
+    if (aRange.location == firstLine.range.location) {
+      return [attStr lineNumbersForTextRange:aRange startIndex:firstLine.range.location startLine:firstLine.number];
+    }    
+  }
   return [attStr lineNumbersForTextRange:aRange];
 }
 
@@ -675,6 +711,7 @@
 	
   NSInteger idx = [[self.textView string] length];
 	lineCount = [[[self lineNumbersForTextRange:NSMakeRange(idx, 0)] lastObject] number];
+//	lineCount = [[self.lineNumbers lastObject] number];
 	digits = (unsigned)log10(lineCount) + 1;
   NSMutableString *sampleString = [NSMutableString stringWithString:@""];
 	for (i = 0; i < digits; i++)

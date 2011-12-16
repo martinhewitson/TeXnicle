@@ -28,6 +28,9 @@
   NSDictionary *alternateTextAttributesDictionary;
 	NSCharacterSet *newLineCharacterSet;
   NSGradient *_bookmarkGradient;
+  NSInteger _lastMaxVisibleLine;
+  BOOL _recalculateLines;
+  BOOL _forceThicknessRecalculation;
 }
 
 @property (retain) NSArray *lineNumbers;
@@ -62,6 +65,8 @@
 - (void) resetTrackingRects;
 - (void) resetLineNumbers;
 - (void) setNeedsDisplay;
+
+- (void) recalculateThickness;
 
 #pragma mark -
 #pragma mark Attributes
