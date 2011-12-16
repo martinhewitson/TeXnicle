@@ -14,6 +14,11 @@
   NSString *_editorStatusText;
   NSString *_filenameText;
   BOOL _showRevealButton;
+  NSTextField *editorStatusTextField;
+  NSTextField *filenameTextField;
+  BOOL showRevealButton;
+  NSButton *revealButton;
+  MHToolbarBackgroundView *rightPanel;
 }
 
 @property (assign) IBOutlet NSTextField *editorStatusTextField;

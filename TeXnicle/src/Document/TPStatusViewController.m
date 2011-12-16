@@ -60,8 +60,10 @@
   _filenameText = [filenameText copy];
   
   if (_filenameText) {
-    [self.filenameTextField setStringValue:_filenameText];
-    [self resizeLabels];
+    if (![_filenameText isEqualToString:[self.filenameTextField stringValue]]) {
+      [self.filenameTextField setStringValue:_filenameText];
+      [self resizeLabels];
+    }
   }
   
 }
@@ -80,11 +82,12 @@
   NSSize s = [[self.filenameTextField attributedStringValue] size];
   NSRect r = [self.filenameTextField frame];
   CGFloat w = MIN(10.0 + s.width, cr.size.width - br.size.width - 2.0 - 10.0);
-  
-  [self.filenameTextField setFrameSize:NSMakeSize(w, r.size.height)];
-  // move button
-  r = [self.filenameTextField frame];
-  [self.revealButton setFrameOrigin:NSMakePoint(r.origin.x + r.size.width + 2.0, br.origin.y)];
+  if (w != r.size.width) {
+    [self.filenameTextField setFrameSize:NSMakeSize(w, r.size.height)];
+    // move button
+    r = [self.filenameTextField frame];
+    [self.revealButton setFrameOrigin:NSMakePoint(r.origin.x + r.size.width + 2.0, br.origin.y)];
+  }
 }
 
 - (NSString*)filenameText
@@ -99,10 +102,9 @@
   }
   _editorStatusText = [editorStatusText copy];
   if (_editorStatusText) {
-    [self.editorStatusTextField setStringValue:_editorStatusText];
-//    NSSize s = [[self.editorStatusTextField attributedStringValue] size];
-//    NSRect r = [self.editorStatusTextField frame];
-//    [self.editorStatusTextField setFrameSize:NSMakeSize(s.width, r.size.height)];
+    if (![_editorStatusText isEqualToString:[self.editorStatusTextField stringValue]]) {
+      [self.editorStatusTextField setStringValue:_editorStatusText];
+    }
   }
 }
 
