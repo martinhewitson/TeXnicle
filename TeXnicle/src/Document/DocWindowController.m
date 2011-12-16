@@ -96,6 +96,7 @@
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
+  [file decreaseActiveCount];
 }
 
 - (void) dealloc
@@ -106,12 +107,12 @@
 - (IBAction) saveDocument:(id)sender
 {
 	[mainDocument saveDocument:sender];
-	[self updateEditedState];
+  [[self window] setDocumentEdited:NO];
+	[self performSelector:@selector(updateEditedState) withObject:nil afterDelay:1];
 }
 
 - (void) handleTextSelectionChanged:(NSNotification*)aNote
-{
-  
+{  
 	[self updateCursorInfoText];
 }
 
@@ -137,6 +138,8 @@
 - (void) updateEditedState
 {
 	BOOL fileState = [file hasEdits];
+//  NSLog(@"File has edits %d", fileState);
+//  NSLog(@"Document state %d", [[self window] isDocumentEdited]);
 	BOOL myState =  [[self window] isDocumentEdited];
 	if (myState != fileState) {
 		[[self window] setDocumentEdited:fileState];
@@ -276,6 +279,7 @@
   if (!b) {
     Bookmark *bookmark = [Bookmark bookmarkWithLinenumber:aLinenumber inFile:self.file inManagedObjectContext:self.mainDocument.managedObjectContext];    
     [self.texEditorViewController.textView setNeedsDisplay:YES];
+    [self.mainDocument.texEditorViewController.textView setNeedsDisplay:YES];
     [self.mainDocument.bookmarkManager reloadData];
   }
 }
@@ -292,6 +296,7 @@
   if (b) {
     [[self.file mutableSetValueForKey:@"bookmarks"] removeObject:b];
     [self.texEditorViewController.textView setNeedsDisplay:YES];
+    [self.mainDocument.texEditorViewController.textView setNeedsDisplay:YES];
     [self.mainDocument.bookmarkManager reloadData];
   }  
 }
