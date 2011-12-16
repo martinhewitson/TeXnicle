@@ -46,6 +46,8 @@
   IBOutlet MHStrokedFiledView *pane1;
   IBOutlet MHStrokedFiledView *pane2;
   IBOutlet MHStrokedFiledView *pane3;
+  
+  id<TPEngineSettingsDelegate> delegate;
 }
 
 @property (assign) id<TPEngineSettingsDelegate> delegate;
