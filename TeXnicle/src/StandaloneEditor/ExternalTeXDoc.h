@@ -15,10 +15,14 @@
 #import "PDFViewerController.h"
 #import "MHSlideViewController.h"
 #import "TPStatusViewController.h"
+#import "MHControlsTabBarController.h"
+#import "LibraryController.h"
+#import "PaletteController.h"
+#import "ProjectOutlineController.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   IBOutlet NSView *leftView;
   IBOutlet NSView *rightView;
@@ -48,7 +52,6 @@
   
   TPEngineManager *engineManager;
   
-  NSView *drawerContentView;
   NSMutableDictionary *settings;
   
   MHMiniConsoleViewController *miniConsole;
@@ -56,12 +59,20 @@
   NSWindow *mainWindow;
   
   NSView *pdfViewContainer;
-    
+  PDFViewerController *pdfViewerController;
+  
   BOOL shouldHighlightFirstMatch;
   
   BOOL shouldContinueSearching;
   
   BOOL statusViewIsShowing;
+  
+  TPEngineSettingsController *engineSettingsController;
+  
+  MHSlideViewController *slideViewController;
+  
+  TPStatusViewController *statusViewController;
+  NSView *statusViewContainer;
   
   NSMutableArray *results;
 }
@@ -69,6 +80,8 @@
 @property (assign) IBOutlet NSWindow *mainWindow;
 
 @property (retain) NSMutableArray *results;
+
+@property (assign) IBOutlet MHControlsTabBarController *tabbarController;
 
 @property (assign) IBOutlet MHSlideViewController *slideViewController;
 
@@ -81,9 +94,14 @@
 @property (assign) IBOutlet NSView *statusViewContainer;
 
 @property (retain) NSMutableDictionary *settings;
-@property (assign) IBOutlet NSView *drawerContentView;
-@property (assign) IBOutlet NSDrawer *drawer;
 @property (retain) TPEngineSettingsController *engineSettingsController;
+@property (assign) IBOutlet NSView *prefsContainerView;
+
+@property (retain) LibraryController *library;
+@property (assign) IBOutlet NSView *libraryContainerView;
+
+@property (retain) PaletteController *palette;
+@property (assign) IBOutlet NSView *paletteContainerView;
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
@@ -99,6 +117,9 @@
 - (void) updateFileStatus;
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
+
+
+- (void) wrappedHighlightSearchResult:(NSString*)result withRange:(NSString*)aRangeString inFile:(id)aFile;
 
 #pragma mark -
 #pragma mark Notification Handlers

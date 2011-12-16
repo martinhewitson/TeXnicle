@@ -29,9 +29,6 @@
 @synthesize fileLoadDate;
 @synthesize fileMonitor;
 @synthesize engineManager;
-@synthesize engineSettingsController;
-@synthesize drawerContentView;
-@synthesize drawer;
 @synthesize settings;
 @synthesize miniConsole;
 @synthesize mainWindow;
@@ -41,6 +38,16 @@
 @synthesize slideViewController;
 @synthesize statusViewController;
 @synthesize statusViewContainer;
+@synthesize tabbarController;
+
+@synthesize palette;
+@synthesize paletteContainerView;
+
+@synthesize library;
+@synthesize libraryContainerView;
+
+@synthesize engineSettingsController;
+@synthesize prefsContainerView;
 
 - (void)awakeFromNib
 {
@@ -50,6 +57,8 @@
   
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
+  
+  [self.tabbarController selectTabAtIndex:1];
   
 //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
@@ -73,14 +82,20 @@
     
   // set up engine settings
   self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
-//  [self.engineSettingsController.view setFrame:[self.drawerContentView bounds]];
-//  [self.drawerContentView addSubview:self.engineSettingsController.view];
-  [self.engineSettingsController.view setFrame:[self.slideViewController.sidePanel bounds]];
-  [self.slideViewController.sidePanel addSubview:self.engineSettingsController.view];
-  [self.drawer setContentSize:NSMakeSize(230, 400)];
-  [self.drawer setMinContentSize:NSMakeSize(230, 400)];
-  [self.drawer setMaxContentSize:NSMakeSize(230, 400)];
+  [self.engineSettingsController.view setFrame:[self.prefsContainerView bounds]];
+  [self.prefsContainerView addSubview:self.engineSettingsController.view];
     
+  // setup palette
+  self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
+  [self.palette.view setFrame:[self.paletteContainerView bounds]];
+  [self.paletteContainerView addSubview:self.palette.view];
+  
+  // setup library
+  self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
+  [self.library.view setFrame:[self.libraryContainerView bounds]];
+  [self.libraryContainerView addSubview:self.library.view];
+  
+  
   // set up engine settings
   [self setupSettings];
   
@@ -98,13 +113,7 @@
          selector:@selector(handleTypesettingCompletedNotification:)
              name:TPEngineCompilingCompletedNotification
            object:self.engineManager];
-
-  if (![self fileURL]) {
-    [self.statusViewController enable:NO];
-  } else {
-    [self.statusViewController setFilenameText:[[self fileURL] path]];
-    [self.statusViewController enable:YES];
-  }
+  
     
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
@@ -135,6 +144,7 @@
   } else {
     [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
   }
+  [self updateFileStatus];
   
   [self showDocument];
 }
@@ -241,6 +251,8 @@
   self.fileMonitor = nil;
   self.engineManager = nil;
   self.settings = nil;
+  self.palette = nil;
+  self.library = nil;
   self.miniConsole = nil;
   self.pdfViewerController = nil;
   self.results = nil;
@@ -595,7 +607,7 @@
 - (IBAction)reloadCurrentFileFromDisk:(id)sender
 {
   NSRange selected = [self.texEditorViewController.textView selectedRange];
-  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];
+  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];  
   [self revertDocumentToSaved:self];
   [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
   if (NSMaxRange(selected) < [[self.documentData string] length]) {
@@ -1093,5 +1105,98 @@
   
   return proposedMin;
 }
+
+#pragma mark -
+#pragma mark Palette delegate
+
+- (BOOL)paletteCanInsertText:(PaletteController*)aPalette
+{
+  return YES;
+}
+
+- (void)palette:(PaletteController*)aPalette insertText:(NSString*)aString
+{
+	[self.texEditorViewController.textView insertText:aString];
+	[self.texEditorViewController.textView colorVisibleText];
+}
+
+
+#pragma mark -
+#pragma mark Library delegate
+
+- (void) libraryController:(LibraryController*)library insertText:(NSString*)text
+{
+	[self.texEditorViewController.textView insertText:text];
+	[self.texEditorViewController.textView colorVisibleText];
+}
+
+#pragma mark -
+#pragma mark ProjectOutlineController delegate
+
+- (BOOL) shouldGenerateOutline
+{
+  // if outline tab is selected....
+  if ([self.tabbarController indexOfSelectedTab] == 3) {
+    return YES;
+  }
+  return NO;
+}
+
+- (NSAttributedString*)documentString
+{
+  return [self.texEditorViewController.textView attributedString];
+}
+
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile
+{	  
+  
+  if (aFile == nil || [[aFile path] isEqualToString:[[self fileURL] path]]) {
+    
+    // Now highlight the search term in that 
+    [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+    
+    // Make text view first responder
+    [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+    
+  } else {
+    
+    __block NSString *forwardResult = result;
+    __block NSRange forwardRange = aRange;
+    __block id forwardFile = aFile;
+    
+    [[NSDocumentController sharedDocumentController]
+      openDocumentWithContentsOfURL:aFile
+      display:YES
+      completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
+        if (document) {
+          ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
+          
+          NSString *rangeString = NSStringFromRange(forwardRange);
+          
+          NSInvocation			*invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(wrappedHighlightSearchResult:withRange:inFile:)]];
+          [invocation setSelector:@selector(wrappedHighlightSearchResult:withRange:inFile:)];
+          [invocation setTarget:doc];
+          [invocation setArgument:&forwardResult atIndex:2];    
+          [invocation setArgument:&rangeString atIndex:3];    
+          [invocation setArgument:&forwardFile atIndex:4];    
+          [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.1];
+          
+        } else {
+          if (error) {
+            [NSApp presentError:error];
+          }
+        }
+        
+      }];
+    
+  }
+  
+}
+
+- (void) wrappedHighlightSearchResult:(NSString*)result withRange:(NSString*)aRangeString inFile:(id)aFile
+{
+  [self highlightSearchResult:result withRange:NSRangeFromString(aRangeString) inFile:aFile];
+}
+
 
 @end
