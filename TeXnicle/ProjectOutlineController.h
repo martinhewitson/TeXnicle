@@ -15,9 +15,12 @@
 @protocol ProjectOutlineControllerDelegate <NSObject>
 
 - (ProjectEntity*)project;
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile;
-- (BOOL) shouldGenerateOutline;
 
+- (NSURL*)fileURL;
+- (NSAttributedString*)documentString;
+
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
+- (BOOL) shouldGenerateOutline;
 @end
 
 @interface ProjectOutlineController : NSWindowController <NSOutlineViewDelegate, NSOutlineViewDataSource> {
@@ -40,8 +43,12 @@
 @property (retain) TPDocumentSection *section;
 
 - (void) generateTOC;
+- (void) generateTOCForProject:(ProjectEntity*)project;
+- (void) generateTOCForFileAtURL:(NSURL*)aURL;
+
 //- (void) handleDocChanges:(NSNotification*)aNote;
-- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(FileEntity*)aFile inProject:(ProjectEntity*)project;
+- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(id)aFile inProject:(ProjectEntity*)project;
+- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr forString:(NSMutableAttributedString*)astring atURL:(NSURL*)aURL;
 -(void) turnOffWrapping;
 - (void) deactivate;
 

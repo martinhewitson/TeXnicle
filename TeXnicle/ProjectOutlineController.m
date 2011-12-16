@@ -14,6 +14,9 @@
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "RegexKitLite.h"
 #import "TPDocumentSection.h"
+#import "MHFileReader.h"
+#import "NSString+RelativePath.h"
+
 
 @implementation ProjectOutlineController
 
@@ -173,7 +176,6 @@
 	generating = YES;
 	
 //	NSLog(@"Generating TOC");
-	NSTextStorage *textStorage = [textView textStorage];
 //	[textStorage deleteCharactersInRange:NSMakeRange(0, [[textStorage string] length])];
 		
 	// start from the main doc
@@ -183,14 +185,99 @@
 	
 	ProjectEntity *project = [self.delegate project];
 //  NSLog(@"Project %@", project);
-	if (!project)
+	if (project) {
+    [self generateTOCForProject:project];
+  } else {
+    if ([self.delegate respondsToSelector:@selector(fileURL)]) {
+      NSURL *fileURL = [self.delegate fileURL];
+      [self generateTOCForFileAtURL:fileURL];
+    }
+  }
+		
+	
+//	[self setDocumentEdited:NO];
+	[textView didChangeText];				
+	
+	generating = NO;
+}
+
+- (void) generateTOCForFileAtURL:(NSURL*)aURL
+{
+	NSTextStorage *textStorage = [textView textStorage];
+  
+  if (![self.delegate respondsToSelector:@selector(documentString)]) {
+    return;
+  }
+  
+	NSAttributedString *attString = [self.delegate performSelector:@selector(documentString)];
+  NSString *string = [attString string]; 
+	// take \begin{document} as the start
+	if (!string)
 		return;
 	
+	NSScanner *aScanner = [NSScanner scannerWithString:string];
+	
+	NSString *tag = @"\\begin{document}";
+  NSInteger loc = 0;
+  NSInteger taglength = 0;
+	if ([aScanner scanUpToString:tag intoString:NULL]) {
+		
+		NSInteger scanloc = [aScanner scanLocation];
+		if (scanloc < 0 || scanloc >= [string length]) {
+      // do nothing
+    } else {
+      loc = scanloc;
+      taglength = [tag length];
+    }    
+	}  
+  
+  // add link to the textView
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  if (aURL) {
+    [dict setObject:aURL forKey:@"document"];
+    [dict setObject:NSStringFromRange(NSMakeRange(loc, taglength)) forKey:@"range"];
+    [dict setObject:[aURL lastPathComponent] forKey:@"result"];
+  }
+  
+  NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObject:dict forKey:NSLinkAttributeName];
+  
+  [attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
+  [attributes setObject:[NSCursor pointingHandCursor] forKey:NSCursorAttributeName];
+  [attributes setObject:[NSFont messageFontOfSize:16.0] forKey:NSFontAttributeName];
+  NSString *rootNode = @"Untitled";
+  if (aURL) {
+    rootNode = [[NSString stringWithFormat:@"%@", [aURL lastPathComponent]] stringByDeletingPathExtension];
+  }
+  NSMutableAttributedString* attrPath = [[NSMutableAttributedString alloc] initWithString:[rootNode stringByAppendingString:@"\n"]
+                                                                               attributes:attributes];
+  
+  // now start the recursive process of adding links for all sections etc
+  
+  NSMutableAttributedString *newStr = [self addLinksTo:attrPath forString:[attString mutableCopy] atURL:aURL];
+  
+  //		NSLog(@"Got TOC: %@", [newStr string]);
+  
+  if ([[textStorage string] isEqualToString:[newStr string]]) {
+    //      NSLog(@"Outline didn't change");
+  } else {
+    [textStorage setAttributedString:newStr];
+    [textView setLinkTextAttributes:attributes];
+  }
+  
+  [attrPath release];
+  
+}
+
+
+- (void) generateTOCForProject:(ProjectEntity*)project
+{
+	NSTextStorage *textStorage = [textView textStorage];
+  
 	FileEntity *mainFile = [project valueForKey:@"mainFile"];
-//  NSLog(@"Main file %@", mainFile);
+  //  NSLog(@"Main file %@", mainFile);
 	if (!mainFile)
 		return;
-	  
+  
 	NSString *string = [mainFile workingContentString];
 	
 	// take \begin{document} as the start
@@ -215,8 +302,6 @@
 		NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObject:dict forKey:NSLinkAttributeName];
 		
 		[attributes setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
-//		[attributes setObject:[NSColor darkGrayColor] forKey:NSForegroundColorAttributeName];
-//		[attributes setObject:[NSNumber numberWithBool: YES]  forKey: NSUnderlineStyleAttributeName];		
 		[attributes setObject:[NSCursor pointingHandCursor] forKey:NSCursorAttributeName];
 		[attributes setObject:[NSFont messageFontOfSize:16.0] forKey:NSFontAttributeName];
 		NSString *rootNode = [[NSString stringWithFormat:@"%@", [mainFile name]] stringByDeletingPathExtension];
@@ -224,19 +309,12 @@
 																																								 attributes:attributes];
 		
 		
-//		NSMutableAttributedString *aStr = [[NSMutableAttributedString alloc] init];
-//		[aStr appendAttributedString:attrPath];
-//		[attrPath release];
-		
 		// now start the recursive process of adding links for all sections etc
-		NSMutableAttributedString *newStr = [self addLinksTo:attrPath InFile:mainFile inProject:project];
+    NSMutableAttributedString *newStr;
+    newStr = [self addLinksTo:attrPath InFile:mainFile inProject:project];
 		
-    
-     
-//		NSLog(@"Got TOC: %@", [newStr string]);
-    
     if ([[textStorage string] isEqualToString:[newStr string]]) {
-//      NSLog(@"Outline didn't change");
+      //      NSLog(@"Outline didn't change");
     } else {
       [textStorage setAttributedString:newStr];
       [textView setLinkTextAttributes:attributes];
@@ -244,13 +322,7 @@
     
 		[attrPath release];
     
-	}	
-	
-	
-//	[self setDocumentEdited:NO];
-	[textView didChangeText];				
-	
-	generating = NO;
+	}  
 }
 
 - (NSDictionary*) sectionNamed:(NSString*)aString
@@ -263,16 +335,150 @@
 	return nil;
 }
 
-- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(FileEntity*)aFile inProject:(ProjectEntity*)project
+- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr forString:(NSMutableAttributedString*)astring atURL:(NSURL*)aURL
+{
+	NSMutableAttributedString *newStr = [[[NSMutableAttributedString alloc] initWithAttributedString:aStr] autorelease];
+  //	NSLog(@"Searching file %@", [aFile valueForKey:@"name"]);
+	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
+	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
+	  
+	NSString *string = [astring unfoldedString];
+	[astring release];
+	
+	string = [string stringByReplacingOccurrencesOfRegex:@"\n" withString:@" "];
+	//string = [string stringByReplacingOccurrencesOfRegex:@"\r" withString:@" "];
+	string = [@" " stringByAppendingString:string];
+  //	NSLog(@"Searching %@", [aFile name]);	
+	
+	NSUInteger loc = 0;
+	while (loc < [string length]) {
+		if ([ws characterIsMember:[string characterAtIndex:loc]] ||
+				[ns characterIsMember:[string characterAtIndex:loc]]) {
+			
+			NSString *word = [string nextWordStartingAtLocation:&loc];
+ 			word = [word stringByTrimmingCharactersInSet:ws];
+      
+      //			NSLog(@"Checking word '%@'", word);
+			// Get section, etc
+			for (NSDictionary *secDict in sections) {
+				NSString *sec = [secDict valueForKey:@"tag"];
+				if ([word hasPrefix:sec]) {
+          //					NSLog(@"Found word %@", word);
+					NSString *tag = [NSString stringWithFormat:@"%@", word];
+					NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+          if (aURL) {
+            [dict setObject:aURL forKey:@"document"];
+          }
+					NSInteger start = loc + 1 - [tag length];
+					
+					NSInteger partStart = -1;
+					NSInteger partEnd = -1;
+					while (start < [string length]) {
+            //						NSLog(@"Checking '%C'", [string characterAtIndex:start]);
+						if (partStart<0 && [string characterAtIndex:start] == '{') {
+							partStart = start+1;
+						}
+						if (partEnd<0 && [string characterAtIndex:start] == '}') {
+							partEnd = start;
+							break;
+						}
+						start++;
+					}
+					
+					if (partStart>=0 && partEnd>=0) {
+						NSRange tagRange = NSMakeRange(partStart, partEnd-partStart);
+            //						NSLog(@"Check range: '%@'", [string substringWithRange:tagRange]);
+						NSRange lineRange = tagRange;
+						lineRange.location--;
+						[dict setObject:NSStringFromRange(lineRange) forKey:@"range"];
+            if (aURL) {
+              [dict setObject:[aURL lastPathComponent] forKey:@"result"];
+            }
+						NSDictionary* attributes = [NSDictionary dictionaryWithObject:dict forKey:NSLinkAttributeName];
+						
+						NSString *disp = @"";					
+						for (int kk=0; kk<[[secDict valueForKey:@"indent"] intValue]; kk++) {
+							disp = [disp stringByAppendingString:@"    "];
+						}
+						disp = [disp stringByAppendingFormat:@"%@\n", [string substringWithRange:tagRange]];
+						NSMutableAttributedString* attrPath = [[NSMutableAttributedString alloc] initWithString:disp 
+																																												 attributes:attributes];
+						
+						NSRange dispRange = NSMakeRange(0,[attrPath length]);
+						[attrPath addAttribute:NSFontAttributeName 
+														 value:[NSFont messageFontOfSize:[[secDict valueForKey:@"size"] floatValue]] 
+														 range:dispRange];
+            [attrPath addAttribute:NSForegroundColorAttributeName
+                             value:[secDict valueForKey:@"color"]
+                             range:dispRange];
+            [attrPath addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:dispRange];
+						
+						[newStr appendAttributedString:attrPath];
+						[attrPath release];
+						
+						break;
+					}
+				}
+			}
+			
+			//			NSLog(@"Got word '%@'", word);
+			if ([word hasPrefix:@"\\input"] || [word hasPrefix:@"\\include"]) {
+        //				NSLog(@"Found %@", word);
+				
+				// get the file from this input
+				int sloc = 0;
+				int start = -1;
+				int end = -1;
+				while (sloc < [word length]) {
+					if ([word characterAtIndex:sloc]=='{') {
+						start = sloc;
+					}
+					if ([word characterAtIndex:sloc]=='}') {
+						end = sloc;
+					}
+					sloc++;
+				}
+				
+				NSString *filePath = nil;
+				if (start > 0 && end > 0) {
+					filePath = [word substringWithRange:NSMakeRange(start+1, end-start-1)];
+				}
+				
+				if (filePath && aURL) {
+          
+          NSString *rootPath = [[aURL URLByDeletingLastPathComponent] path];
+          NSString *targetPath = [rootPath stringByAppendingPathComponent:[rootPath relativePathTo:filePath]];          
+          if ([[NSFileManager defaultManager] fileExistsAtPath:targetPath]) {
+            NSURL *nextURL = [NSURL fileURLWithPath:targetPath];
+            if (nextURL) {
+              MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+              NSString *str = [fr readStringFromFileAtURL:nextURL];
+              if (str) {
+                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:str];
+                newStr = [self addLinksTo:newStr forString:newString atURL:nextURL];
+              }
+            }
+          }
+          
+				}				
+			} // end recursive call to input/include			
+		}
+		loc++;
+	}
+  
+	return newStr;
+}
+
+- (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(id)aFile inProject:(ProjectEntity*)project
 {
 	NSMutableAttributedString *newStr = [[[NSMutableAttributedString alloc] initWithAttributedString:aStr] autorelease];
 //	NSLog(@"Searching file %@", [aFile valueForKey:@"name"]);
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
 	
-	NSMutableAttributedString *astring = [[[aFile document] textStorage] mutableCopy];
-//	[astring unfoldAll];
-	
+  NSMutableAttributedString *astring;
+  astring = [[[aFile document] textStorage] mutableCopy];
+    
 	NSString *string = [astring unfoldedString];
 	[astring release];
 	
@@ -320,8 +526,8 @@
 						NSRange lineRange = tagRange;
 						lineRange.location--;
 						[dict setObject:NSStringFromRange(lineRange) forKey:@"range"];
-						[dict setObject:[aFile valueForKey:@"name"] forKey:@"result"];
-						
+            [dict setObject:[aFile valueForKey:@"name"] forKey:@"result"];
+            
 						NSDictionary* attributes = [NSDictionary dictionaryWithObject:dict forKey:NSLinkAttributeName];
 						
 						NSString *disp = @"";					
@@ -373,12 +579,12 @@
 				}
 				
 				if (filePath) {
-//					NSLog(@"Got file path %@", filePath);
+          //					NSLog(@"Got file path %@", filePath);
 					// find a file with this filepath
-					FileEntity *nextFile = [project fileWithPath:filePath];
-					if (nextFile) {
-						newStr = [self addLinksTo:newStr InFile:nextFile inProject:project];
-					}
+          FileEntity *nextFile = [project fileWithPath:filePath];
+          if (nextFile) {
+            newStr = [self addLinksTo:newStr InFile:nextFile inProject:project];
+          }
 				}				
 			} // end recursive call to input/include			
 		}
