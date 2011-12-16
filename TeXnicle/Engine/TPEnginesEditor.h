@@ -11,7 +11,14 @@
 #import "HHValidatedButton.h"
 
 @interface TPEnginesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate, TPEngineManagerDelegate> {
-  
+@private
+  TPEngineManager *engineManager;
+  NSTableView *tableView;
+  HHValidatedButton *editButton;
+  HHValidatedButton *duplicateButton;
+  HHValidatedButton *addEngineButton;
+  HHValidatedButton *deleteButton;
+  HHValidatedButton *revealButton;
 }
 
 @property (retain) TPEngineManager *engineManager;
