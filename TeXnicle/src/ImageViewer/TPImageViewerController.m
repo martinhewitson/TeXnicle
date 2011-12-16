@@ -34,14 +34,19 @@
   return self;
 }
 
+- (void) awakeFromNib
+{
+  [self disable];
+}
+
 - (void) enable 
 {
-  [self.contentView setHidden:NO];
+  [self.view setHidden:NO];
 }
 
 - (void) disable
 {
-  [self.contentView setHidden:YES];
+  [self.view setHidden:YES];
 }
 
 - (void) setImage:(NSImage*)anImage atPath:(NSString*)aPath
