@@ -50,7 +50,7 @@
 									 		
 		// Add a main layout manager
 		NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
-		[layoutManager setAllowsNonContiguousLayout:NO];
+		[layoutManager setAllowsNonContiguousLayout:YES];
 		[textStorage addLayoutManager:layoutManager];
 				
 		// Now add the container to the layout manager
