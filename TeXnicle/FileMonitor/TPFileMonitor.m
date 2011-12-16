@@ -93,7 +93,7 @@
         if ([modified compare:loadDate] == NSOrderedDescending) {
           [self fileMonitor:self fileChangedOnDisk:file modifiedDate:modified];
         } else if ([access compare:loadDate]==NSOrderedDescending) {
-          [self fileMonitor:self fileWasAccessedOnDisk:file accessDate:access];
+//          [self fileMonitor:self fileWasAccessedOnDisk:file accessDate:access];
         }
         
       }
