@@ -58,6 +58,7 @@
 	IBOutlet NSStepper *numSpacesStepper;
   IBOutlet NSTextField *spacesLabel;
 	
+  TPEnginesEditor *enginesEditor;
   NSView *enginesEditorContainer;
   
   IBOutlet NSPopUpButton *enginePopup;
