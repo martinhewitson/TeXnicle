@@ -228,10 +228,12 @@
   }
   
   if (str != nil) {
-    [UKXattrMetadataStore setString:[self nameOfEncoding:encoding]
-                             forKey:@"com.bobsoft.TeXnicleTextEncoding"
-                             atPath:[aURL path]
-                       traverseLink:YES];
+    if (![[self nameOfEncoding:encoding] isEqualToString:encodingString]) {
+      [UKXattrMetadataStore setString:[self nameOfEncoding:encoding]
+                               forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                               atPath:[aURL path]
+                         traverseLink:YES];
+    }
   }
   
   return str;
