@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import"TeXColoringEngine.h"
 
-@interface BashColoringEngine : TeXColoringEngine
+@interface BashColoringEngine : TeXColoringEngine {
+@private
+  NSArray *keywords;
+}
 
 @property (retain) NSArray *keywords;
 
