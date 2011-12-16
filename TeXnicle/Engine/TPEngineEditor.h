@@ -11,7 +11,12 @@
 
 @class TeXEditorViewController;
 
-@interface TPEngineEditor : NSDocument <TeXTextViewDelegate>
+@interface TPEngineEditor : NSDocument <TeXTextViewDelegate> {
+@private
+  NSMutableAttributedString *documentData;
+  TeXEditorViewController *texEditorViewController;
+  NSView *texEditorContainer;
+}
 
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
