@@ -36,8 +36,13 @@
   return NSNotFound;
 }
 
-// Build an array of line number objects for the given text range.
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange
+{
+  return [self lineNumbersForTextRange:aRange startIndex:0 startLine:1];
+}
+
+// Build an array of line number objects for the given text range.
+- (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine
 {
   NSAttributedString *attStr = self;
   NSMutableArray *lines = [NSMutableArray array];
@@ -47,10 +52,10 @@
   NSString *text = [attStr string];
   
   // go forwards from the start until we reach the start of the visible range
-  NSUInteger idx;
-  NSUInteger lineNumber = 1;
+  NSUInteger idx = aStartIndex;
+  NSUInteger lineNumber = aStartLine;
   NSRange lineRange;
-  for (idx = 0; idx < start;) {
+  for (; idx < start;) {
     lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
     lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
 		idx = NSMaxRange(lineRange);
