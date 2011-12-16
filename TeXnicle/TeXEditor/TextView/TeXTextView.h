@@ -55,6 +55,10 @@ extern NSString * const TELineNumberClickedNotification;
     
   NSMutableArray *commandList;
   NSMutableArray *beginList;
+  
+  NSRange _lastLineRange;
+  NSInteger _lastLineNumber;
+  NSRange _lastVisibleRange;
 }
 
 @property (retain) NSTimer *highlightingTimer;
@@ -113,6 +117,7 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) resetLineNumbers;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;
+- (void) highlightMatchingWords;
 
 #pragma mark -
 #pragma mark KVO 

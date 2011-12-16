@@ -126,10 +126,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
            object:[[self enclosingScrollView] contentView]];
   
  
-  [nc addObserver:self
-         selector:@selector(colorVisibleText)
-             name:NSTextStorageDidProcessEditingNotification
-           object:[self textStorage]];
+//  [nc addObserver:self
+//         selector:@selector(colorVisibleText)
+//             name:NSTextStorageDidProcessEditingNotification
+//           object:[self textStorage]];
 }
 
 
@@ -384,7 +384,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       return;
     }
   }
-//  NSLog(@"Coloring whole document %@", [self textStorage]);
+//  NSLog(@"Coloring whole document");
   [self.coloringEngine colorTextView:self
                          textStorage:[self textStorage]
                        layoutManager:[self layoutManager]
@@ -394,6 +394,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) colorVisibleText
 {
+//  NSLog(@"Color visible text");
   if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
@@ -435,15 +436,16 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void)didChangeText
 {
-//  NSLog(@"Did change text %@", [self string]);
-  [self updateEditorRuler];  
-  [self colorVisibleText];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1.0];
+//  NSLog(@"Did change text");
+  
+  // NOTE: I removed this on 11-11-11 since I think this just duplicates the calls. We do this in handleSelectionDidChange.
+//  [self updateEditorRuler];  
+//  [self colorVisibleText];
+//  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1.0];
 }
 
 - (void)viewWillDraw
 {
-//  [self colorVisibleText];
   [self.editorRuler setNeedsDisplay:YES];
 	[super viewWillDraw];
 }
@@ -494,14 +496,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
-//  NSLog(@"Frame change");
-//  [self updateEditorRuler];
-//  [self colorVisibleText];
+  [self highlightMatchingWords];
 }
 
 - (void) updateEditorRuler
 {
-//  NSLog(@"Update editor ruler...");
   [self.editorRuler resetLineNumbers];
   [self.editorRuler performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.1];
   [self setNeedsDisplay:YES];
@@ -540,6 +539,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]];
 }
@@ -579,6 +579,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
                 context:NULL];		
   
   [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
+  
+  [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];	
@@ -601,8 +606,14 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [self setBackgroundColor:c];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]]) {
     [self performSelector:@selector(updateEditorRuler) withObject:nil afterDelay:0];
+    [self.editorRuler recalculateThickness];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]]) {
     [self performSelector:@selector(updateEditorRuler) withObject:nil afterDelay:0];
+    [self.editorRuler recalculateThickness];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]]) {
+    NSRange vr = [self getVisibleRange];
+    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+    [self highlightMatchingWords];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]]) {
 		[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]]) {
@@ -991,6 +1002,17 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
+- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange
+{
+  // don't spell check commands
+  if (charRange.location > 0) {
+    if ([[self string] characterAtIndex:charRange.location-1] == '\\') {
+      return;
+    }
+  }
+  
+  [super setSpellingState:value range:charRange];
+}
 
 - (void) unfoldAttachment:(NSTextAttachment*)snippet atIndex:(NSNumber*)index
 {	
@@ -1048,13 +1070,14 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
-  NSLog(@"%d", [[self string] length]);
-  [self setSelectedRange:aRange];
-  if (scroll) {    
-    [self scrollRangeToVisible:aRange];
-  }
-  if (animate) {
-    [self showFindIndicatorForRange:aRange];
+  if (NSMaxRange(aRange) < [[self string] length]) {
+    [self setSelectedRange:aRange];
+    if (scroll) {    
+      [self scrollRangeToVisible:aRange];
+    }
+    if (animate) {
+      [self showFindIndicatorForRange:aRange];
+    }
   }
 }
 
@@ -1339,11 +1362,19 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self colorVisibleText];
   [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
 
+  [self highlightMatchingWords];
+}
+
+- (void) highlightMatchingWords
+{
+  NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
-  [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+  //  NSLog(@"Visible range %@", NSStringFromRange(vr));
+  
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
+    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
     if (r.length > 0) {
       NSString *word = [[[self string] substringWithRange:r] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       word = [word stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
@@ -1359,8 +1390,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         }
       }      
     }
-  }
-}
+  }}
 
 - (void) clearHighlight
 {
@@ -1829,6 +1859,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (NSInteger)lineNumberForRange:(NSRange)aRange
 {
+//  NSLog(@"Calculating line number");
   NSArray *lines = [self.editorRuler lineNumbersForTextRange:[self getVisibleRange]];
   //  NSLog(@"Got lines %@", lines);
   for (MHLineNumber *line in lines) {
@@ -1846,7 +1877,16 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 {
 //  NSLog(@"Getting line number for %@, from %@", self, self.editorRuler);
   NSRange sel = [self selectedRange];
-  return [self lineNumberForRange:sel];
+  NSString *str = [self string];
+  if (NSMaxRange(sel)>= [str length]) {
+    return NSNotFound;
+  }
+  NSRange lineRange = [str lineRangeForRange:sel];
+  if (lineRange.location != _lastLineRange.location) {
+    _lastLineRange = lineRange;
+    _lastLineNumber = [self lineNumberForRange:sel];
+  }
+  return _lastLineNumber;
 }
 
 
@@ -2007,7 +2047,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         return YES;
       }
       
-      if ([[file pathExtension] isText]) {
+      if ([[[file pathExtension] valueForKey:@"isText"] boolValue]) {
         [self insertIncludeForFile:file atLocation:characterIndex];        
         return YES;
       }
