@@ -22,6 +22,8 @@
   id<BookmarkOutlineViewDelegate> bookmarkDelegate;
   NSString *capturedString;
   NSDate *lastKeyStroke;
+  NSTimer *resetTimer;
+  NSTextField *selectingStatus;
 }
 
 @property (retain) NSTimer *resetTimer;

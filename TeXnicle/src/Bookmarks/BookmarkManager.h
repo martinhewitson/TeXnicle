@@ -30,6 +30,9 @@
   HHValidatedButton *jumpToButton;
   HHValidatedButton *deleteButton;
   NSInteger _currentSelectedBookmark;
+  
+  HHValidatedButton *expandAllButton;
+  HHValidatedButton *collapseAllButton;
 }
 
 @property (assign) id<BookmarkManagerDelegate> delegate;
