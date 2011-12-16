@@ -25,6 +25,8 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 @interface TPEngineManager : NSObject <TPEngineDelegate> {
 @private
   MHConsoleManager *consoleManager;
+  id<TPEngineManagerDelegate> delegate;
+  NSMutableArray *engines;
 }
 
 @property (assign) id<TPEngineManagerDelegate> delegate;
