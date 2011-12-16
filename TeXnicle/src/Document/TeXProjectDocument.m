@@ -27,7 +27,9 @@
 #import "UKXattrMetadataStore.h"
 #import "NSString+RelativePath.h"
 
-#define kSplitViewLeftMinSize 234
+#define kSplitViewLeftMinSize 230.0
+#define kSplitViewCenterMinSize 400.0
+#define kSplitViewRightMinSize 400.0
 
 @implementation TeXProjectDocument
 
@@ -36,13 +38,12 @@
 @synthesize newFileButton;
 @synthesize newFolderButton;
 
-@synthesize splitview;
 
 @synthesize library;
 @synthesize libraryContainerView;
 
 @synthesize bookmarkManager;
-@synthesize bookmarkContainverView;
+@synthesize bookmarkContainerView;
 
 @synthesize pdfViewerController;
 @synthesize project;
@@ -59,7 +60,7 @@
 @synthesize pdfHasSelection;
 
 @synthesize finder;
-@synthesize finderContainverView;
+@synthesize finderContainerView;
 
 @synthesize palette;
 @synthesize paletteContainverView;
@@ -70,6 +71,11 @@
 
 @synthesize statusViewContainer;
 @synthesize statusViewController;
+
+@synthesize splitview;
+@synthesize leftView;
+@synthesize rightView;
+@synthesize centerView;
 
 @synthesize miniConsole;
 
@@ -154,9 +160,9 @@
   // setup image viewer
   self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
   self.openDocuments.imageViewerController = self.imageViewerController;
+  self.openDocuments.imageViewContainer = self.imageViewerContainer;
   [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
-  [self.openDocuments enableImageView:NO];
   
   // setup pdf viewer
   self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
@@ -175,10 +181,10 @@
   
   // setup finder
   self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
-  NSRect frame = [self.finderContainverView bounds];
+  NSRect frame = [self.finderContainerView bounds];
   NSView *finderView = [self.finder view];
   [finderView setFrame:frame];
-  [self.finderContainverView addSubview:finderView];
+  [self.finderContainerView addSubview:finderView];
   
   // setup palette
   self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
@@ -189,8 +195,8 @@
   // setup bookmark manager
   self.bookmarkManager = [[[BookmarkManager alloc] initWithDelegate:self] autorelease];
   NSView *bookmarkView = [self.bookmarkManager view];
-  [bookmarkView setFrame:[self.bookmarkContainverView bounds]];
-  [self.bookmarkContainverView addSubview:bookmarkView];
+  [bookmarkView setFrame:[self.bookmarkContainerView bounds]];
+  [self.bookmarkContainerView addSubview:bookmarkView];
   
   // setup engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
@@ -298,6 +304,7 @@
 
 - (void) restoreOpenTabs
 {
+  
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
@@ -309,13 +316,20 @@
   }
   
   FileEntity *selected = [self.project valueForKey:@"selected"];
-  [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
+  if (selected) {
+    [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
+  }
+  
+  if ([self.openDocuments currentDoc] == nil) {
+//    [self.openDocuments performSelector:@selector(disableImageView) withObject:nil afterDelay:0];
+//    [self.openDocuments performSelector:@selector(disableTextView) withObject:nil afterDelay:0];
+  }
+  
 }
 
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
-  
   // stop timer
   [self.statusTimer invalidate];
   self.statusTimer = nil;
@@ -323,10 +337,6 @@
   // stop file monitor
 	self.fileMonitor.delegate = nil;
   
-	// make sure we store the current status of open docs
-	[self.openDocuments commitStatus];
-  [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
-	
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
 		[self.openDocuments.tabView removeTabViewItem:item];
@@ -632,6 +642,7 @@
     [self.statusViewController setFilenameText:path];
     [self.statusViewController enable:NO];    
   }
+  
 }
 
 - (IBAction)reopenUsingEncoding:(id)sender
@@ -1016,6 +1027,7 @@
 	for (ProjectItemEntity *item in selected) {
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			if ([[item valueForKey:@"isText"] boolValue]) {
+        [(FileEntity*)item increaseActiveCount];
 				[openDocuments standaloneWindowForFile:(FileEntity*)item];
 			} else {				
 				// pass the opening of the file to the system
@@ -1092,29 +1104,82 @@
 #pragma mark -
 #pragma mark Split view delegate
 
+- (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+  //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
+  
+  NSSize splitViewSize = [sender frame].size;  
+  NSSize leftSize = [self.leftView frame].size;
+  leftSize.height = splitViewSize.height;
+  
+  NSSize centerSize = [self.centerView frame].size;
+  centerSize.height = splitViewSize.height;
+  
+  NSSize rightSize;
+  rightSize.width = splitViewSize.width - centerSize.width;
+  rightSize.width -= 2.0*[sender dividerThickness];
+  
+  if (![sender isSubviewCollapsed:self.leftView]) {
+    rightSize.width -= leftSize.width;
+  }
+  
+  rightSize.height = splitViewSize.height;
+  
+  if (![sender isSubviewCollapsed:self.leftView]) {
+    [self.leftView setFrameSize:leftSize];
+  }
+  [self.centerView setFrameSize:centerSize];
+  if (![sender isSubviewCollapsed:self.rightView]) {
+    [self.rightView setFrameSize:rightSize];
+  }
+  
+  [sender adjustSubviews];
+}
+
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
- if (subview == leftView || subview == rightView)
-   return NO;
-    
+  
+  if (subview == self.leftView || subview == self.centerView)
+    return NO;
+  
+  
+  if (subview == self.rightView) {
+    NSRect b = [self.rightView bounds];
+    if (b.size.width < kSplitViewRightMinSize) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 
 
 - (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
 {
+  if (subview == self.centerView) {
+    return NO;
+  }
+  
   return YES;
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
 {
+  if (dividerIndex == 0) {
+    NSRect b = [splitView bounds];
+    NSRect rb = [self.rightView bounds];
+    CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
+    return max;
+  }
+  
   if (dividerIndex == 1) {
     NSRect b = [splitView bounds];
-    return b.size.width-250;
+    return b.size.width-kSplitViewRightMinSize;
   }
- 
+  
   return proposedMax;
 }
+
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
@@ -1123,10 +1188,47 @@
   }
   
   if (dividerIndex == 1) {
-    return 400;
+    NSRect lb = [self.leftView bounds];
+    
+    if ([splitView isSubviewCollapsed:self.leftView]) {
+      return kSplitViewCenterMinSize;
+    }
+    return lb.size.width + kSplitViewCenterMinSize;
   }
   
+  
+  
   return proposedMin;
+}
+
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
+{
+  NSSize leftSize = [self.leftView frame].size;
+  NSSize centerSize = [self.centerView frame].size;  
+  NSSize rightSize = [self.rightView frame].size;
+  
+  //  NSLog(@"Left %@", NSStringFromSize(leftSize));
+  //  NSLog(@"Center %@", NSStringFromSize(centerSize));
+  //  NSLog(@"Right %@", NSStringFromSize(rightSize));
+  
+  CGFloat w = 0.0;
+  
+  if (![self.splitview isSubviewCollapsed:self.leftView]) {
+    w += leftSize.width;
+    w += [self.splitview dividerThickness];
+  }
+  if (![self.splitview isSubviewCollapsed:self.centerView]) {
+    w += centerSize.width;
+    w += [self.splitview dividerThickness];
+  }
+  
+  if (![self.splitview isSubviewCollapsed:self.rightView]) {
+    if ((frameSize.width - w) < kSplitViewRightMinSize) {
+      frameSize.width = w + kSplitViewRightMinSize;
+    }  
+  }
+  
+  return frameSize; 
 }
 
 #pragma mark -
@@ -1249,7 +1351,12 @@
 
 -(void) openDocumentsManager:(OpenDocumentsManager*)aDocumentManager didSelectFile:(FileEntity*)aFile
 {
-  [self.projectItemTreeController selectItem:aFile];
+  NSArray *selected = [self.projectItemTreeController selectedObjects];
+  if ([selected count] == 1) {
+    if ([selected objectAtIndex:0] != aFile) {
+      [self.projectItemTreeController selectItem:aFile];
+    }
+  }
 }
 
 
@@ -2062,9 +2169,8 @@
   [imagesFolder setValue:[NSNumber numberWithInt:2] forKey:@"sortIndex"];
 	
 	// select the main file
-	[openDocuments addDocument:(TeXFileEntity*)file];		
-  [projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.2];
-  
+  [openDocuments performSelector:@selector(addDocument:) withObject:file afterDelay:0.1];
+  [projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.5];
 }
 
 - (IBAction) newMainTeXFile:(id)sender
@@ -2156,9 +2262,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	
 	// commit changes for open docs
 	[openDocuments commitStatus];
+  // make sure we store the current status of open docs
+  if ([self.openDocuments currentDoc]) {
+    [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
+  } else {
+    [self.project setValue:nil forKey:@"selected"];
+  }
 	
 	// make sure we save the files here
-	if ([self saveAllProjectFiles]) {
+	if ([self saveAllProjectFiles]) {    
     NSString *path = [absoluteURL path];
     NSURL *url = [NSURL fileURLWithPath:path];
 		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
@@ -2177,10 +2289,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 		if ([item isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)item;
 			//NSLog(@"Watching %@ %d", [file pathOnDisk], watching);
-			success = [file saveContentsToDisk];
+      if ([file isText]) {
+        success = [file saveContentsToDisk];
+      }
 			//NSLog(@"Saved %@ %d ", [file pathOnDisk], success);
 		} // end if item is a file
 	}
+    
 	return success;
 }
 
@@ -2188,6 +2303,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   [super saveDocument:self];
 }
+
 //
 //
 //#pragma mark -

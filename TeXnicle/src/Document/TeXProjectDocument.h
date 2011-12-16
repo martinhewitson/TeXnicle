@@ -49,10 +49,11 @@
 	IBOutlet NSWindow *newFileSheet;
 	IBOutlet NSTextField *newFilenameTextField;
   
-  // split views
-  IBOutlet NSView *leftView;
-  IBOutlet NSView *midView;
-  IBOutlet NSView *rightView;
+  // split views  
+  NSSplitView *splitview;
+  NSView *leftView;
+  NSView *rightView;
+  NSView *centerView;
   
   NSInteger selectedControlsTab;
   
@@ -102,7 +103,21 @@
   MHMiniConsoleViewController *miniConsole;
   
   NSView *statusViewContainer;
+  TPStatusViewController *statusViewController;
   BOOL statusViewIsShowing;
+  
+  LibraryController *library;
+  NSView *libraryContainerView;
+  
+  PDFViewerController *pdfViewerController;
+  
+  PaletteController *palette;
+  NSView *paletteContainverView;
+  
+  BOOL pdfHasSelection;
+  
+//  NSRange lastLineRange;
+//  NSInteger lastLineNumber;
 }
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
@@ -122,14 +137,17 @@
 @property (retain) TPEngineManager *engineManager;
 
 @property (assign) IBOutlet NSSplitView *splitview;
+@property (assign) IBOutlet NSView *leftView;
+@property (assign) IBOutlet NSView *rightView;
+@property (assign) IBOutlet NSView *centerView;
 
-@property (assign) IBOutlet NSView *bookmarkContainverView;
+@property (assign) IBOutlet NSView *bookmarkContainerView;
 @property (retain) BookmarkManager *bookmarkManager;
 
 @property (assign) IBOutlet NSView *paletteContainverView;
 @property (retain) PaletteController *palette;
 
-@property (assign) IBOutlet NSView *finderContainverView;
+@property (assign) IBOutlet NSView *finderContainerView;
 @property (retain) FinderController *finder;
 
 @property (assign) IBOutlet NSView *libraryContainerView;
