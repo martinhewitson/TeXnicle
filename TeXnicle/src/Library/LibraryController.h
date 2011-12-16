@@ -46,6 +46,15 @@ extern NSString * const kItemsTableViewNodeType;
 	NSMenu *catActionMenu;
 	
   id<LibraryControllerDelegate> delegate;
+  
+  HHValidatedButton *addCategoryButton;
+  HHValidatedButton *deleteCategoryButton;
+  HHValidatedButton *addClipButton;
+  HHValidatedButton *deleteClipButton;
+  HHValidatedButton *reloadClipButton;
+  HHValidatedButton *insertClipButton;
+  HHValidatedButton *editClipButton;
+  HHValidatedButton *copyClipButton;
 }
 
 @property (assign) id<LibraryControllerDelegate> delegate;
