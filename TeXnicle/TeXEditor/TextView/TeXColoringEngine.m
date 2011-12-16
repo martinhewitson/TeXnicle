@@ -175,22 +175,6 @@
   // make sure the glyphs are present otherwise colouring gives errors
   [layoutManager ensureGlyphsForCharacterRange:aRange];
   
-  
-  // apply default font and color, if necessary
-//  NSDictionary *currentAtts = [textStorage attributesAtIndex:aRange.location effectiveRange:NULL];
-//  NSColor *currentTextColor = [currentAtts valueForKey:NSForegroundColorAttributeName];
-//  NSFont *currentTextFont = [currentAtts valueForKey:NSFontAttributeName];
-//  if (![currentTextColor isEqualTo:self.textColor] || ![currentTextFont isEqualTo:self.textFont]) {
-  
-    // Note to self: replace this by setting typing attributes and by setting attributes when 
-    // textstorage is created.
-  
-//    [textStorage beginEditing];  
-//    [textStorage addAttribute:NSForegroundColorAttributeName value:self.textColor range:aRange];
-//    [textStorage addAttribute:NSFontAttributeName value:self.textFont range:aRange];		  
-//    [textStorage endEditing];
-//  }
-  
   // remove existing temporary attributes
 	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
     

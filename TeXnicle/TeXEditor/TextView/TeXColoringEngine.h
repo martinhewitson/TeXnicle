@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kHighlightInterval 0.1
+#define kHighlightInterval 0.2
 
 @interface TeXColoringEngine : NSObject <NSTextStorageDelegate, NSTextViewDelegate> {
 @protected
