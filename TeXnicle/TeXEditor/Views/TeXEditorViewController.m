@@ -48,6 +48,11 @@
   [super dealloc];
 }
 
+- (void) awakeFromNib
+{
+  [self disableEditor];
+}
+
 #pragma mark -
 #pragma Control 
 
@@ -60,18 +65,23 @@
 
 - (void) disableEditor
 {
+//  NSLog(@"Disable editor");
   [containerView setHidden:NO];
-  self.isHidden = NO;
+  [jumpBar setHidden:YES];
+  self.isHidden = YES;
 	[self.textView setHidden:YES];
 	[[self.textView enclosingScrollView] setHidden:YES];
   [self.sectionListPopup setHidden:YES];
   [self.markerButton setHidden:YES];
   [self.unfoldButton setHidden:YES];
+  [containerView setNeedsDisplay:YES];
 }
 
 - (void) enableEditor
 {
+//  NSLog(@"Enable editor");
   [containerView setHidden:NO];
+  [jumpBar setHidden:NO];
   self.isHidden = NO;
 	[self.textView setHidden:NO];
 	[[self.textView enclosingScrollView] setHidden:NO];
