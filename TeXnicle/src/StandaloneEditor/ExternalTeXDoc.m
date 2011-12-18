@@ -284,6 +284,25 @@
       [menuItem setTitle:@"Show Status Bar"];
     }
   }
+  
+  // open pdf viewer
+  if (tag == 60) {
+    if ([self compiledDocumentPath]) {
+      return YES;
+    } else {
+      return NO;
+    }    
+  }
+  
+  // open with system pdf viewer
+  if (tag == 65) {
+    if ([self compiledDocumentPath]) {
+      return YES;
+    } else {
+      return NO;
+    }    
+  }
+  
 
 	return [super validateMenuItem:menuItem];
 }
@@ -443,6 +462,13 @@
   // build and view
   if ([theItem tag] == 40) {
     if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // view
+  if ([theItem tag] == 45) {
+    if (![self compiledDocumentPath]) {
       return NO;
     }
   }
@@ -896,6 +922,17 @@
   }
 }
 
+- (IBAction)openWithSystemPDFViewer:(id)sender
+{
+  NSString *docFile = [self compiledDocumentPath];
+  
+  // check if the pdf exists
+	if (docFile) {
+		[[NSWorkspace sharedWorkspace] openFile:docFile];
+	}
+  
+  // .. if not, ask the user if they want to typeset the project
+}
 
 - (IBAction) openPDF:(id)sender
 {
@@ -905,14 +942,6 @@
   }
   [self.pdfViewer showWindow:self];
   
-//  NSString *docFile = [self compiledDocumentPath];
-//	// check if the pdf exists
-//	if (docFile) {
-//		//NSLog(@"Opening %@", pdfFile);
-//		[[NSWorkspace sharedWorkspace] openFile:docFile];
-//	}
-	
-	// .. if not, ask the user if they want to typeset the project
 }
 
 
