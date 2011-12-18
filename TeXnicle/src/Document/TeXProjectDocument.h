@@ -225,6 +225,7 @@
 - (IBAction) buildProject:(id)sender;
 - (void) build;
 - (IBAction) openPDF:(id)sender;
+- (IBAction)openWithSystemPDFViewer:(id)sender;
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
 
 

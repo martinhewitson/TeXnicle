@@ -589,6 +589,13 @@
     }
   }
   
+  // view
+  if ([theItem tag] == 45) {
+    if (![self compiledDocumentPath]) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 
@@ -1543,23 +1550,26 @@
   return nil;
 }
 
+- (IBAction)openWithSystemPDFViewer:(id)sender
+{
+  NSString *docFile = [self compiledDocumentPath];
+
+  // check if the pdf exists
+	if (docFile) {
+		[[NSWorkspace sharedWorkspace] openFile:docFile];
+	}
+
+  // .. if not, ask the user if they want to typeset the project
+}
 
 - (IBAction) openPDF:(id)sender
 {
-//  NSString *docFile = [self compiledDocumentPath];
 	  
   if (!self.pdfViewer) {
     self.pdfViewer = [[[PDFViewer alloc] initWithDelegate:self] autorelease];
   }
   [self.pdfViewer showWindow:self];
   
-	// check if the pdf exists
-//	if (docFile) {
-//		//NSLog(@"Opening %@", pdfFile);
-//		[[NSWorkspace sharedWorkspace] openFile:docFile];
-//	}
-	
-	// .. if not, ask the user if they want to typeset the project
 }
 
 - (BOOL) canViewPDF
@@ -1688,6 +1698,24 @@
     } else {
       [menuItem setTitle:@"Show Status Bar"];
     }
+  }
+  
+  // open pdf viewer
+  if (tag == 60) {
+    if ([self compiledDocumentPath]) {
+      return YES;
+    } else {
+      return NO;
+    }    
+  }
+  
+  // open with system pdf viewer
+  if (tag == 65) {
+    if ([self compiledDocumentPath]) {
+      return YES;
+    } else {
+      return NO;
+    }    
   }
   
 	return [super validateMenuItem:menuItem];
