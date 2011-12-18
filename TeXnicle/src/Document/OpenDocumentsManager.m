@@ -239,7 +239,9 @@
     return;
   }
 	NSTabViewItem *item = [tabView tabViewItemAtIndex:index];
-	[tabView selectTabViewItem:item];
+  if ([tabView selectedTabViewItem] != item) {
+    [tabView selectTabViewItem:item];
+  }
 }
 
 - (NSInteger) indexOfDocumentWithFile:(FileEntity*)aFile
@@ -466,6 +468,8 @@
 	[tabBar setHidden:NO];
   [self.texEditorViewController enableEditor];
   [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
+  
+//  [[self.texEditorViewController.textView window] makeFirstResponder:self.texEditorViewController.textView];
 }
 
 
