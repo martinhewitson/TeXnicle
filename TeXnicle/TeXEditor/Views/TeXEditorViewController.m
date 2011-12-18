@@ -65,8 +65,6 @@
 
 - (void) disableEditor
 {
-//  NSLog(@"Disable editor");
-  [containerView setHidden:NO];
   [jumpBar setHidden:YES];
   self.isHidden = YES;
 	[self.textView setHidden:YES];
@@ -79,8 +77,7 @@
 
 - (void) enableEditor
 {
-//  NSLog(@"Enable editor");
-  [containerView setHidden:NO];
+  [self.view setHidden:NO];
   [jumpBar setHidden:NO];
   self.isHidden = NO;
 	[self.textView setHidden:NO];
