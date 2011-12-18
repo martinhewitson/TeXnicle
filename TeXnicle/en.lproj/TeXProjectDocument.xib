@@ -86,12 +86,14 @@
 										<int key="NSvFlags">274</int>
 										<string key="NSFrame">{{1, 1}, {404, 37}}</string>
 										<reference key="NSSuperview" ref="165304930"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:21</string>
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {406, 39}}</string>
 								<reference key="NSSuperview"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="225707791"/>
 								<string key="NSReuseIdentifierKey">_NS:18</string>
 								<string key="NSOffsets">{0, 0}</string>
@@ -179,7 +181,7 @@
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
-						<object class="NSToolbarItem" key="58142194-24B5-4B04-86A1-8FE83A876491" id="301928420">
+						<object class="NSToolbarItem" key="58142194-24B5-4B04-86A1-8FE83A876491" id="764437359">
 							<object class="NSMutableString" key="NSToolbarItemIdentifier">
 								<characters key="NS.bytes">58142194-24B5-4B04-86A1-8FE83A876491</characters>
 							</object>
@@ -197,7 +199,7 @@
 							<string key="NSToolbarItemMaxSize">{0, 0}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
-							<int key="NSToolbarItemTag">40</int>
+							<int key="NSToolbarItemTag">45</int>
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
@@ -352,14 +354,14 @@
 						<reference ref="898080870"/>
 						<reference ref="286728786"/>
 						<reference ref="594405630"/>
-						<reference ref="301928420"/>
+						<reference ref="764437359"/>
 						<reference ref="16148072"/>
 						<reference ref="512118704"/>
 					</array>
 					<array key="NSToolbarIBDefaultItems">
 						<reference ref="286728786"/>
 						<reference ref="594405630"/>
-						<reference ref="301928420"/>
+						<reference ref="764437359"/>
 						<reference ref="898080870"/>
 						<reference ref="512118704"/>
 						<reference ref="898080870"/>
@@ -3223,7 +3225,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openPDF:</string>
 						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="301928420"/>
+						<reference key="destination" ref="764437359"/>
 					</object>
 					<int key="connectionID">100851</int>
 				</object>
@@ -5208,7 +5210,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<reference ref="594405630"/>
 							<reference ref="16148072"/>
 							<reference ref="512118704"/>
-							<reference ref="301928420"/>
+							<reference ref="764437359"/>
 						</array>
 						<reference key="parent" ref="275939982"/>
 					</object>
@@ -5340,7 +5342,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100849</int>
-						<reference key="object" ref="301928420"/>
+						<reference key="object" ref="764437359"/>
 						<reference key="parent" ref="732040264"/>
 					</object>
 				</array>
@@ -6122,6 +6124,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
 						<string key="projectTypeChanged:">id</string>
@@ -6243,6 +6246,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="openProjectFolderInFinder:">
 							<string key="name">openProjectFolderInFinder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
+							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="pasteAsImage:">
