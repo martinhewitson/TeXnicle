@@ -38,6 +38,7 @@
 @synthesize newFileButton;
 @synthesize newFolderButton;
 
+@synthesize pdfViewer;
 
 @synthesize library;
 @synthesize libraryContainerView;
@@ -93,6 +94,7 @@
   self.library = nil;
   self.engineManager = nil;
   self.engineSettings = nil;
+  self.pdfViewer = nil;
   [super dealloc];
 }
 
@@ -1544,13 +1546,18 @@
 
 - (IBAction) openPDF:(id)sender
 {
-  NSString *docFile = [self compiledDocumentPath];
-	
+//  NSString *docFile = [self compiledDocumentPath];
+	  
+  if (!self.pdfViewer) {
+    self.pdfViewer = [[[PDFViewer alloc] initWithDelegate:self] autorelease];
+  }
+  [self.pdfViewer showWindow:self];
+  
 	// check if the pdf exists
-	if (docFile) {
-		//NSLog(@"Opening %@", pdfFile);
-		[[NSWorkspace sharedWorkspace] openFile:docFile];
-	}
+//	if (docFile) {
+//		//NSLog(@"Opening %@", pdfFile);
+//		[[NSWorkspace sharedWorkspace] openFile:docFile];
+//	}
 	
 	// .. if not, ask the user if they want to typeset the project
 }
@@ -2413,15 +2420,28 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSString *text = [self.texEditorViewController selectedText];
   [self.pdfViewerController setSearchText:text];
   [self.pdfViewerController searchForStringInPDF:text];
+  
+  if (self.pdfViewer) {
+    if ([self.pdfViewer.window isVisible]) {
+      [self.pdfViewer.pdfViewerController setSearchText:text];
+      [self.pdfViewer.pdfViewerController searchForStringInPDF:text];
+    }
+  }
+  
 }
 
 - (IBAction)findSource:(id)sender
 {
   PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
   NSString *selectedText = [selection string];
+  [self findSourceOfText:selectedText];
+}
+
+- (void) findSourceOfText:(NSString *)string
+{
   [controlsTabview selectTabViewItemAtIndex:4];
-  [self.finder setSearchTerm:selectedText];
-  [self.finder searchForTerm:selectedText];
+  [self.finder setSearchTerm:string];
+  [self.finder searchForTerm:string];
   shouldHighlightFirstMatch = YES;
 }
 

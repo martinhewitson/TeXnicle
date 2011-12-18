@@ -24,6 +24,7 @@
 #import "MHMiniConsoleViewController.h"
 #import "MHConsoleManager.h"
 #import "TPStatusViewController.h"
+#import "PDFViewer.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -33,7 +34,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -118,10 +119,12 @@
   
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
+  PDFViewer *pdfViewer;
 }
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
+@property (retain) PDFViewer *pdfViewer;
 
 @property (retain)   NSTimer *statusTimer;
 
@@ -293,6 +296,7 @@
 
 - (IBAction) findCorrespondingPDFText:(id)sender;
 - (IBAction) findSource:(id)sender;
+- (void) findSourceOfText:(NSString *)string;
 - (BOOL) pdfHasSelection;
 - (void) showDocument;
 
