@@ -12,6 +12,7 @@
 #import "ConsoleController.h"
 
 NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCompletedNotification";
+NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNotification";
 
 @implementation TPEngineManager
 
@@ -276,6 +277,7 @@ NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCom
   // ensure the engine has a document path
   e.documentPath = [self.delegate documentToCompile];
   [e trashAuxFiles];  
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineDidTrashFilesNotification object:self];
 }
 
 #pragma mark -

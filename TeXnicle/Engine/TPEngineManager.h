@@ -11,6 +11,7 @@
 #import "MHConsoleManager.h"
 
 extern NSString * const TPEngineCompilingCompletedNotification;
+extern NSString * const TPEngineDidTrashFilesNotification;
 
 @protocol TPEngineManagerDelegate <NSObject>
 -(NSString*)engineName;
