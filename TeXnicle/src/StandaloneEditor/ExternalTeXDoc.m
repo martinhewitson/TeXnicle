@@ -49,6 +49,8 @@
 @synthesize engineSettingsController;
 @synthesize prefsContainerView;
 
+@synthesize pdfViewer;
+
 - (void)awakeFromNib
 {
   self.results = [NSMutableArray array];
@@ -69,6 +71,7 @@
   
 	if (self.documentData) {
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+    [self.texEditorViewController enableEditor];
 	}
 	
   // setup pdf viewer
@@ -294,18 +297,21 @@
   NSString *text = [self.texEditorViewController selectedText];
   [self.pdfViewerController setSearchText:text];
   [self.pdfViewerController searchForStringInPDF:text];
+  
+  if (self.pdfViewer) {
+    if ([self.pdfViewer.window isVisible]) {
+      [self.pdfViewer.pdfViewerController setSearchText:text];
+      [self.pdfViewer.pdfViewerController searchForStringInPDF:text];
+    }
+  }
+  
 }
 
-- (IBAction)findSource:(id)sender
+- (void) findSourceOfText:(NSString *)searchTerm
 {
-  [self.results removeAllObjects];
-  
   NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
   NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
   
-  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
-  NSString *searchTerm = [selection string];
-
   // search this string
   NSMutableAttributedString *aStr = [[self.texEditorViewController.textView textStorage] mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
@@ -382,8 +388,8 @@
       } // end scanner
     } // end loop over results
   } // end if [results count] > 0  
-
-
+  
+  
   // highlight first result
   if ([self.results count]>0) {
     TPDocumentMatch *first = [self.results objectAtIndex:0];
@@ -398,8 +404,18 @@
     [self.mainWindow makeFirstResponder:self.texEditorViewController.textView]; 
     
   }
+    
+}
+
+- (IBAction)findSource:(id)sender
+{
+  [self.results removeAllObjects];
   
   
+  PDFSelection *selection = [self.pdfViewerController.pdfview currentSelection];
+  NSString *searchTerm = [selection string];
+
+  [self findSourceOfText:searchTerm];  
 }
       
 
@@ -472,6 +488,8 @@
   if (hasDoc) {
     [view scrollRectToVisible:r];
   }
+  
+  
 }
 
 - (IBAction) saveDocument:(id)sender
@@ -881,12 +899,18 @@
 
 - (IBAction) openPDF:(id)sender
 {
-  NSString *docFile = [self compiledDocumentPath];
-	// check if the pdf exists
-	if (docFile) {
-		//NSLog(@"Opening %@", pdfFile);
-		[[NSWorkspace sharedWorkspace] openFile:docFile];
-	}
+  
+  if (self.pdfViewer == nil) {
+    self.pdfViewer = [[[PDFViewer alloc] initWithDelegate:self] autorelease];
+  }
+  [self.pdfViewer showWindow:self];
+  
+//  NSString *docFile = [self compiledDocumentPath];
+//	// check if the pdf exists
+//	if (docFile) {
+//		//NSLog(@"Opening %@", pdfFile);
+//		[[NSWorkspace sharedWorkspace] openFile:docFile];
+//	}
 	
 	// .. if not, ask the user if they want to typeset the project
 }

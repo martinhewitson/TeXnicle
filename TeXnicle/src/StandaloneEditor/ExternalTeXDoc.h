@@ -19,10 +19,11 @@
 #import "LibraryController.h"
 #import "PaletteController.h"
 #import "ProjectOutlineController.h"
+#import "PDFViewer.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   IBOutlet NSView *leftView;
   IBOutlet NSView *rightView;
@@ -75,11 +76,16 @@
   NSView *statusViewContainer;
   
   NSMutableArray *results;
+  
+  PDFViewer *pdfViewer;
+  
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 
 @property (retain) NSMutableArray *results;
+
+@property (retain) PDFViewer *pdfViewer;
 
 @property (assign) IBOutlet MHControlsTabBarController *tabbarController;
 
