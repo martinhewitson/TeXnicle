@@ -84,7 +84,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
   self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
 //  self.highlightingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(colorVisibleText) userInfo:nil repeats:YES];
-  
     
 }
 
