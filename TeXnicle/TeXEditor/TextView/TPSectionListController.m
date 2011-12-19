@@ -120,7 +120,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void) dealloc
 {
-  NSLog(@"TPSectionListController dealloc");
+  [self.timer invalidate];
   self.timer = nil;
 	[addMarkerActionMenu release];
 	[sections release];
