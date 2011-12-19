@@ -51,6 +51,7 @@
     }
   }
   
+  CFRelease(supportedTypes);
   CFRelease(fileUTI);
   
   return fileIsImage;  
