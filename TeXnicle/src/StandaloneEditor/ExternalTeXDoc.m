@@ -520,6 +520,11 @@
 
 - (IBAction) saveDocument:(id)sender
 {
+  // cache chosen language
+  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
+	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+  
 	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];

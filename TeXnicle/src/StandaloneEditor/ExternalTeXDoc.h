@@ -79,6 +79,12 @@
   
   PDFViewer *pdfViewer;
   
+  MHControlsTabBarController *tabbarController;
+  PaletteController *palette;
+  NSView *paletteContainerView;
+  LibraryController *library;
+  NSView *libraryContainerView;
+  NSView *prefsContainerView;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
