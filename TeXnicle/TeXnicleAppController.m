@@ -238,7 +238,6 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
-//  NSLog(@"Application will finish launching");
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
