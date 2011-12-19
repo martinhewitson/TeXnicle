@@ -332,6 +332,8 @@
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
+  _windowIsClosing = YES;
+  
   // stop timer
   [self.statusTimer invalidate];
   self.statusTimer = nil;
@@ -1295,6 +1297,10 @@
 
 - (BOOL) shouldSyntaxHighlightDocument
 {
+  if (_windowIsClosing) {
+    return NO;
+  }
+  
   FileEntity *file = [self.openDocuments currentDoc];
 	NSString *ext = [file valueForKey:@"extension"] ;
 	if ([ext isEqual:@"tex"] ||
@@ -2303,6 +2309,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   } else {
     [self.project setValue:nil forKey:@"selected"];
   }
+  
+  // cache chosen language
+  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
+	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	// make sure we save the files here
 	if ([self saveAllProjectFiles]) {    
@@ -2608,6 +2619,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSArray*)bookmarksForCurrentFile
 {
+  if (_windowIsClosing) {
+    return nil;
+  }
+  
   FileEntity *file = [self.openDocuments currentDoc];
   return [file.bookmarks allObjects];
 }

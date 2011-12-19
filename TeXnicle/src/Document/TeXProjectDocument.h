@@ -117,6 +117,8 @@
   
   BOOL pdfHasSelection;
   
+  BOOL _windowIsClosing;
+  
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
   PDFViewer *pdfViewer;
