@@ -38,6 +38,7 @@
 	NSTabView *tabView;
   TeXEditorViewController *texEditorViewController;
 	TPImageViewerController *imageViewerController;
+  NSView *imageViewContainer;
 	BOOL isOpening;
 	
 }
