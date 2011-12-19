@@ -41,7 +41,7 @@
 }
 
 
-@property (assign) NSMutableArray *searchResults;
+@property (retain) NSMutableArray *searchResults;
 
 @property (assign) IBOutlet PDFView *pdfview;
 @property (assign) IBOutlet NSSearchField *searchField;

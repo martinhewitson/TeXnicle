@@ -42,10 +42,20 @@
   if (self) {
     // Initialization code here.
     self.searchResults = [NSMutableArray array];
-    [self hideViewer];    
   }
   
   return self;
+}
+
+- (void) awakeFromNib
+{
+  [self hideViewer];    
+}
+
+- (void) dealloc
+{
+  self.searchResults = nil;
+  [super dealloc];
 }
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
