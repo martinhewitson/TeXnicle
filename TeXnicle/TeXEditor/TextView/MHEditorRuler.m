@@ -733,7 +733,7 @@
     minWidth = kDEFAULT_THICKNESS + kFOLDING_GUTTER;
 	}
   
-  CGFloat width = ceilf(MAX(minWidth, stringSize.width + kRULER_MARGIN * 2 + foldWidth));
+  CGFloat width = ceilf(MAX(minWidth, 10.0+stringSize.width + kRULER_MARGIN * 2 + foldWidth));
   
 	return width;
 }
