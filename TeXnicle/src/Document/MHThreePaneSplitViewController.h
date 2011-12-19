@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MHThreePaneSplitViewController : NSObject <NSSplitViewDelegate, NSWindowDelegate>
+@interface MHThreePaneSplitViewController : NSObject <NSSplitViewDelegate, NSWindowDelegate> {
+@private
+  NSView *leftView;
+  NSView *rightView;
+  NSView *centerView;
+  NSSplitView *mainSplitView;
+}
 
 @property (assign) IBOutlet NSView *leftView;
 @property (assign) IBOutlet NSView *rightView;
