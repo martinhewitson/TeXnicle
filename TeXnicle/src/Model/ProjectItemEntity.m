@@ -101,13 +101,18 @@
 {
 	ProjectEntity *project = [self project];
 	NSString *projectFolder = [project valueForKey:@"folder"];
-//	NSString *projectFolder = [[self valueForKey:@"projectPath"] stringByDeletingLastPathComponent];
+  if (!projectFolder) {
+    return nil;
+  }
 	NSString *fpath = [self valueForKey:@"filepath"];
 	if (!fpath) {
 		return nil; 
 	}
 	NSString *path =  [projectFolder stringByAppendingPathComponent:fpath];
 	NSURL *fileURL = [NSURL fileURLWithPath:path];
+  if (!fileURL) {
+    return nil;
+  }
 	return [[fileURL standardizedURL] path];
 }
 
