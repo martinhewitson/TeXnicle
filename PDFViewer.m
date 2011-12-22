@@ -27,6 +27,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
   self.pdfViewerController = nil;
   [super dealloc];
 }
