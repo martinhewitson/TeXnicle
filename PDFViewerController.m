@@ -54,6 +54,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
   self.searchResults = nil;
   [super dealloc];
 }
