@@ -75,7 +75,7 @@
 	}
 	
   // setup pdf viewer
-  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
+  self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
   NSView *pdfViewer = [self.pdfViewerController view];
   [pdfViewer setFrame:[self.pdfViewContainer bounds]];
   [self.pdfViewContainer addSubview:pdfViewer];
@@ -84,7 +84,7 @@
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
     
   // set up engine settings
-  self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
+  self.engineSettingsController = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [self.engineSettingsController.view setFrame:[self.prefsContainerView bounds]];
   [self.prefsContainerView addSubview:self.engineSettingsController.view];
     
@@ -256,9 +256,14 @@
   self.settings = nil;
   self.palette = nil;
   self.library = nil;
+  self.texEditorViewController = nil;
   self.miniConsole = nil;
+  self.settings = nil;
+  self.engineSettingsController = nil;
+  self.statusViewContainer = nil;
   self.pdfViewerController = nil;
   self.results = nil;
+  self.pdfViewer = nil;
 	[super dealloc];
 }
 
@@ -591,7 +596,7 @@
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
 	if (str) {
     self.fileLoadDate = [NSDate date];
-		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
     
     // read settings
@@ -632,7 +637,7 @@
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
     self.fileLoadDate = [NSDate date];
-		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
