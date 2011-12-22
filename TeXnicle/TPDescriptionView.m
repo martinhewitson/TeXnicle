@@ -34,6 +34,8 @@
 - (void) dealloc
 {
   [descriptionCell release];
+  [backgroundColor release];
+  [borderColor release];
   [super dealloc];
 }
 
