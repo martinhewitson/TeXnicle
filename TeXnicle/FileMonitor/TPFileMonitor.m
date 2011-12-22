@@ -43,6 +43,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
   [self.timer invalidate];
   self.timer = nil;
   [super dealloc];
@@ -57,7 +58,7 @@
   
   for (id file in files) {
     NSDate *loadDate = [file valueForKey:@"fileLoadDate"];
-    NSInteger load = (NSInteger)floor([loadDate timeIntervalSinceReferenceDate]);
+//    NSInteger load = (NSInteger)floor([loadDate timeIntervalSinceReferenceDate]);
     
     NSString *path = [self fileMonitor:self pathOnDiskForFile:file];
 //    NSLog(@"Checking %@", path);
