@@ -193,8 +193,8 @@
 		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];		
 	}
 	
-	newFile = [[FileEntity alloc] initWithEntity:entity
-                insertIntoManagedObjectContext:moc];
+	newFile = [[[FileEntity alloc] initWithEntity:entity
+                insertIntoManagedObjectContext:moc] autorelease];
   
 	// set the parent object
   [newFile setParent:folder];
@@ -216,7 +216,7 @@
       [NSApp presentError:error];
     }
   }
-  
+  CFRelease(fileUTI);
 	if (contents) {
 		isTextFile = YES;
 	}	
@@ -273,7 +273,7 @@
     if (createFolder) {
       // make the folder
       NSEntityDescription *newFolderEntity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:moc];
-      FolderEntity *newFolder = [[FolderEntity alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc];
+      FolderEntity *newFolder = [[[FolderEntity alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc] autorelease];
       
       // set name
       [newFolder setValue:comp forKey:@"name"];
