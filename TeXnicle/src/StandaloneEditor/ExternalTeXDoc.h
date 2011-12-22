@@ -117,7 +117,7 @@
 
 @property(readwrite, assign) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
-@property (retain) IBOutlet NSView *texEditorContainer;
+@property (assign) IBOutlet NSView *texEditorContainer;
 @property (retain) NSDate *fileLoadDate;
 
 @property (retain) TPFileMonitor *fileMonitor;
