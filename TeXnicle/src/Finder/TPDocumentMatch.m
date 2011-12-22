@@ -49,7 +49,7 @@
 {
   NSString *lineNumberString = [self lineNumberString];
   
-  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
+  NSMutableAttributedString *att = [[[self displayString] mutableCopy] autorelease]; 
   NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:matchRange];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
