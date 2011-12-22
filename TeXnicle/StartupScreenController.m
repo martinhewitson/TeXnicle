@@ -19,32 +19,32 @@
 - (id) init
 {
   //	NSLog(@"Startup init");
-	
-	if (![super initWithWindowNibName:@"StartupScreen"]) 
-		return nil;
-  
-	recentFiles = [[NSMutableArray alloc] init];
-  query = [[NSMetadataQuery alloc] init];
-  texnicleFiles = [[NSMutableArray alloc] init];
-  
-  // setup our Spotlight notifications 
-  NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
-  [nf addObserver:self selector:@selector(queryNotification:) name:nil object:query];
-  
-  // initialize our Spotlight query
-  //  [query setSortDescriptors:
-  //   [NSArray arrayWithObject:
-  //    [[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
-  //  
-  //  [query setDelegate: self];
-	
-  //	[[self window] setAlphaValue:1.0];
-	
+	self =  [super initWithWindowNibName:@"StartupScreen"];
+  if (self) {
+    
+    recentFiles = [[NSMutableArray alloc] init];
+    query = [[NSMetadataQuery alloc] init];
+    texnicleFiles = [[NSMutableArray alloc] init];
+    
+    // setup our Spotlight notifications 
+    NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
+    [nf addObserver:self selector:@selector(queryNotification:) name:nil object:query];
+    
+    // initialize our Spotlight query
+    //  [query setSortDescriptors:
+    //   [NSArray arrayWithObject:
+    //    [[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
+    //  
+    //  [query setDelegate: self];
+    
+    //	[[self window] setAlphaValue:1.0];
+	}
 	return self;
 }
 
 - (void) dealloc
 {
+  [query release];
   [texnicleFiles release];
 	[recentFiles release];
 	[super dealloc];
@@ -108,7 +108,7 @@
     NSError *error = nil;
     NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];  
     NSDate *date = [atts valueForKey:NSFileModificationDate];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [dateLabel setStringValue:[formatter stringFromDate:date]];
