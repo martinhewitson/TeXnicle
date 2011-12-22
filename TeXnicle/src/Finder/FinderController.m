@@ -64,6 +64,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
   [ws release];
   [ns release];
 	dispatch_release(queue);
