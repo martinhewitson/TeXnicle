@@ -142,8 +142,8 @@
   }
   
   NSError *error = nil;
-  NSString *content = [[NSString alloc] initWithData:data
-                                            encoding:encoding];
+  NSString *content = [[[NSString alloc] initWithData:data
+                                            encoding:encoding] autorelease];
   [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
   if (error) {
     [NSApp presentError:error];
