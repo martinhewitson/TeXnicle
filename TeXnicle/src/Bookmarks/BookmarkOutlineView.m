@@ -25,6 +25,7 @@
 {
   [self.resetTimer invalidate];
   self.resetTimer = nil;
+  self.lastKeyStroke = nil;
   [super dealloc];
 }
 
