@@ -1188,6 +1188,7 @@
 								</object>
 								<object class="NSMenuItem" id="419605019">
 									<reference key="NSMenu" ref="367990463"/>
+									<bool key="NSIsHidden">YES</bool>
 									<string key="NSTitle">BibTeX Project</string>
 									<string key="NSKeyEquiv">B</string>
 									<int key="NSKeyEquivModMask">1048576</int>
@@ -4621,6 +4622,8 @@
 						<string key="bookmarkContainerView">NSView</string>
 						<string key="centerView">NSView</string>
 						<string key="controlsTabview">NSTabView</string>
+						<string key="createFileButton">HHValidatedButton</string>
+						<string key="createFolderButton">HHValidatedButton</string>
 						<string key="documentCode">NSTextView</string>
 						<string key="documentName">NSTextField</string>
 						<string key="engineSettingsContainer">NSView</string>
@@ -4628,10 +4631,8 @@
 						<string key="imageViewerContainer">NSView</string>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
-						<string key="newFileButton">HHValidatedButton</string>
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
-						<string key="newFolderButton">HHValidatedButton</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
@@ -4663,6 +4664,14 @@
 							<string key="name">controlsTabview</string>
 							<string key="candidateClassName">NSTabView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="createFileButton">
+							<string key="name">createFileButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="createFolderButton">
+							<string key="name">createFolderButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="documentCode">
 							<string key="name">documentCode</string>
 							<string key="candidateClassName">NSTextView</string>
@@ -4691,10 +4700,6 @@
 							<string key="name">libraryContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="newFileButton">
-							<string key="name">newFileButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="newFileSheet">
 							<string key="name">newFileSheet</string>
 							<string key="candidateClassName">NSWindow</string>
@@ -4702,10 +4707,6 @@
 						<object class="IBToOneOutletInfo" key="newFilenameTextField">
 							<string key="name">newFilenameTextField</string>
 							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newFolderButton">
-							<string key="name">newFolderButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>
