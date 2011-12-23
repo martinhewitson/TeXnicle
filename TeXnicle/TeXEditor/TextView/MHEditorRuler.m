@@ -410,7 +410,7 @@
       [invocation setSelector:@selector(setRuleThickness:)];
       [invocation setTarget:self];
       [invocation setArgument:&newThickness atIndex:2];    
-      [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.0];
+      [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.1];
     }
     _forceThicknessRecalculation = NO;
   }
