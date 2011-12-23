@@ -34,7 +34,7 @@
 
 @property (nonatomic, copy) NSString *searchString;
 
-@property (readwrite, retain) NSString *title;
+@property (readwrite, copy) NSString *title;
 @property (readwrite, assign) id delegate;
 
 - (IBAction) searchFieldAction:(id)sender;

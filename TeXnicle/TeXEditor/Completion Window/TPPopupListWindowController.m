@@ -124,6 +124,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[entries release];
 	[self dismiss];
