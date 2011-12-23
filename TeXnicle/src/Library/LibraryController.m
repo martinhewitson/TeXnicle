@@ -12,6 +12,7 @@
 #import "NSNotificationAdditions.h"
 #import "LibraryImageGenerator.h"
 #import "externs.h"
+#import "TPLibraryCommandFormatter.h"
 
 @implementation LibraryController
 
@@ -25,8 +26,12 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 @synthesize deleteClipButton;
 @synthesize reloadClipButton;
 @synthesize editClipButton;
-@synthesize copyClipButton;
+@synthesize clipCopyButton;
 @synthesize insertClipButton;
+@synthesize commandTextField;
+@synthesize defaultLibrary;
+@synthesize commandMessageLabel;
+@synthesize knownCommands;
 
 - (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate
 {
@@ -43,6 +48,11 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 {
 //  NSLog(@"Library Controller awakeFromNib");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
+  
+  // load the library plist from the bundle
+	NSString *libpath = [[NSBundle mainBundle] pathForResource:@"Library" ofType:@"plist"];
+	self.defaultLibrary = [NSMutableDictionary dictionaryWithContentsOfFile:libpath];
+
   
   // set row height
   [slider setFloatValue:[[defaults valueForKey:TPLibraryRowHeight] floatValue]];
@@ -63,6 +73,8 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
                 options:NSKeyValueObservingOptionNew 
                 context:NULL];
   
+  TPLibraryCommandFormatter *formatter = [[[TPLibraryCommandFormatter alloc] init] autorelease];
+  [self.commandTextField setFormatter:formatter];
 }
 
 - (void) setupLibrary
@@ -83,6 +95,8 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   //	NSLog(@"Loaded library: %@", library);
   //	NSMutableArray *categories = [NSMutableArray arrayWithArray:[library valueForKey:@"Categories"]];
 	[categoryController setContent:categories];
+  
+  [self regenerateKnownCommandCodes];
 }
 
 - (void) reloadLibrary
@@ -117,6 +131,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 			NSMutableDictionary *newClip = [[NSMutableDictionary alloc] initWithDictionary:clip];
 			[newClip setValue:[[clip valueForKey:@"Code"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] 
 								 forKey:@"Code"];
+      
+      [newClip setValue:[clip valueForKey:@"Command"] forKey:@"Command"];
+      [newClip setValue:[clip valueForKey:@"BuiltIn"] forKey:@"BuiltIn"];
 			
 			NSData *data = [clip valueForKey:@"Image"];
 			NSImage *image = nil;
@@ -137,7 +154,25 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 			}
 			
 			[newClip setValue:[NSNumber numberWithBool:YES] forKey:@"validImage"];
-			
+//      NSLog(@"Checking new clip %@", [newClip valueForKey:@"Code"]);
+//      NSLog(@"    command: %@", [newClip valueForKey:@"Command"]);
+      // apply default command if it is currently empty
+      if ([newClip valueForKey:@"Command"] == nil && [[newClip valueForKey:@"BuiltIn"] boolValue]) {
+//        [newClip setValue:@"" forKey:@"Command"];
+        for (NSDictionary *dcategory in [self.defaultLibrary valueForKey:@"Categories"]) {
+          for (NSMutableDictionary *dclip in [dcategory valueForKey:@"Contents"]) {
+            NSString *command = [dclip valueForKey:@"Command"];
+            if (command != nil) {
+//              NSLog(@"Default code: %@", [dclip valueForKey:@"Code"]);
+//              NSLog(@"   new clip: %@", [newClip valueForKey:@"Code"]);
+              if ([[dclip valueForKey:@"Code"] isEqualToString:[newClip valueForKey:@"Code"]]) {
+//                NSLog(@"Assign command %@", command);
+                [newClip setValue:command forKey:@"Command"]; 
+              }
+            }
+          }
+        }
+      }
 			// add the new clip to the contents
 			[clips addObject:newClip];			
 			[newClip release];
@@ -241,7 +276,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
     return [contentsController canRemove];
   }
   
-  if (anItem == self.copyClipButton) {
+  if (anItem == self.clipCopyButton) {
     return [contentsController canRemove];
   }
   
@@ -256,6 +291,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   self.delegate = nil;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
   [defaults removeObserver:self forKeyPath:@"Library"];
+  self.defaultLibrary = nil;
   [addMenu release];
 	[unknownImage release];
 	[library release];
@@ -394,13 +430,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 - (void) addDefaultCategories
 {
 	
-	// load the library plist from the bundle
-	NSString *libpath = [[NSBundle mainBundle] pathForResource:@"Library" ofType:@"plist"];
-	NSDictionary *defaultLibrary = [NSMutableDictionary dictionaryWithContentsOfFile:libpath];
-
 	// Add each category to the current library
 	// check all images
-	for (NSDictionary *category in [defaultLibrary valueForKey:@"Categories"]) {
+	for (NSDictionary *category in [self.defaultLibrary valueForKey:@"Categories"]) {
 		NSMutableDictionary *newCategory = [[NSMutableDictionary alloc] init];
 		[newCategory setValue:[category valueForKey:@"Name"] forKey:@"Name"];		
 		NSMutableArray *clips = [NSMutableArray array];		
@@ -409,6 +441,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 			NSMutableDictionary *newClip = [[NSMutableDictionary alloc] initWithDictionary:clip];
 			[newClip setValue:[[clip valueForKey:@"Code"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] 
 								 forKey:@"Code"];
+      
+      [newClip setValue:[clip valueForKey:@"Command"] forKey:@"Command"];
+      [newClip setValue:[clip valueForKey:@"BuiltIn"] forKey:@"BuiltIn"];
 			
 			NSData *data = [clip valueForKey:@"Image"];
 			NSImage *image = nil;
@@ -656,6 +691,57 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 }
 
 
+- (void)regenerateKnownCommandCodes
+{
+  NSMutableArray *codes = [NSMutableArray array];
+  for (NSDictionary *dcategory in [self.defaultLibrary valueForKey:@"Categories"]) {
+    for (NSMutableDictionary *dclip in [dcategory valueForKey:@"Contents"]) {
+      NSString *cmd = [dclip valueForKey:@"Command"];
+      if (cmd != nil) {
+        [codes addObject:cmd];
+      }
+    }
+  }
+  self.knownCommands = codes;
+}
+
+-(NSString*)codeForCommand:(NSString*)command
+{
+  for (NSDictionary *category in [library valueForKey:@"Categories"]) {
+    for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {
+      NSString *clipCommand = [clip valueForKey:@"Command"];
+      if (clipCommand) {
+        if ([clipCommand isEqualToString:command]) {
+          return [clip valueForKey:@"Code"];
+        }
+      }
+    }
+  }
+  return nil;
+}
+
+- (NSArray*)commandsBeginningWith:(NSString*)prefix
+{
+  NSMutableArray *commands = [NSMutableArray array];
+  if (prefix == nil || [prefix length] == 0) {
+    return commands;    
+  }
+  
+  if ([prefix characterAtIndex:0] != '#') {
+    return commands;
+  }
+    
+  NSString *cmdPrefix = [prefix substringFromIndex:1];
+//  NSLog(@"Checking command %@", cmdPrefix);
+  BOOL zeroLengthCommand = ([cmdPrefix length] == 0);
+  for (NSString *cmd in self.knownCommands) {
+    if ([cmd hasPrefix:cmdPrefix] || zeroLengthCommand) {
+      [commands addObject:[@"#" stringByAppendingString:cmd]];
+    }
+  }
+  return commands;
+}
+
 #pragma mark -
 #pragma mark TableView data source
 
@@ -834,6 +920,8 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 }
 
 
+
+
 - (void) imageGeneratorTaskEnded:(NSString*)aPath
 {
 //	NSLog(@"Task ended %@", aPath);
@@ -852,6 +940,28 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
   if (self.delegate && [self.delegate respondsToSelector:@selector(libraryController:insertText:)]) {
     [self.delegate libraryController:self insertText:text];
   }
+}
+
+
+#pragma mark -
+#pragma mark Text field delegate
+
+- (BOOL) control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+{
+  NSString *proposed = [fieldEditor string];
+  
+  for (NSString* cmd in self.knownCommands) {
+    if ([cmd isEqualToString:proposed]) {
+      [self.commandMessageLabel setStringValue:@"Command exists."];
+      return NO;
+    }
+  }
+  [self.commandMessageLabel setStringValue:@""];
+  
+//  NSLog(@"Set %@", [[contentsController selectedObjects] objectAtIndex:0]);
+  [self saveLibrary];
+  [self regenerateKnownCommandCodes];
+  return YES;
 }
 
 

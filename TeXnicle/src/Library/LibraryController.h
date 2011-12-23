@@ -20,7 +20,7 @@ extern NSString * const kItemsTableViewNodeType;
 
 @end
 
-@interface LibraryController : NSViewController <NSUserInterfaceValidations, LibraryControllerDelegate> {
+@interface LibraryController : NSViewController <NSUserInterfaceValidations, NSTextFieldDelegate, LibraryControllerDelegate> {
 
 	NSMutableDictionary *library;
 	
@@ -54,7 +54,13 @@ extern NSString * const kItemsTableViewNodeType;
   HHValidatedButton *reloadClipButton;
   HHValidatedButton *insertClipButton;
   HHValidatedButton *editClipButton;
-  HHValidatedButton *copyClipButton;
+  HHValidatedButton *clipCopyButton;
+  
+  NSTextField *commandTextField;
+  
+  NSDictionary *defaultLibrary;
+  NSTextField *commandMessageLabel;
+  NSArray *knownCommands;
 }
 
 @property (assign) id<LibraryControllerDelegate> delegate;
@@ -67,7 +73,11 @@ extern NSString * const kItemsTableViewNodeType;
 @property (assign) IBOutlet HHValidatedButton *reloadClipButton;
 @property (assign) IBOutlet HHValidatedButton *insertClipButton;
 @property (assign) IBOutlet HHValidatedButton *editClipButton;
-@property (assign) IBOutlet HHValidatedButton *copyClipButton;
+@property (assign) IBOutlet HHValidatedButton *clipCopyButton;
+@property (assign) IBOutlet NSTextField *commandTextField;
+@property (assign) IBOutlet NSTextField *commandMessageLabel;
+@property (retain) NSArray *knownCommands;
+@property (retain) NSDictionary *defaultLibrary;
 
 - (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate;
 
@@ -109,6 +119,9 @@ extern NSString * const kItemsTableViewNodeType;
 
 - (void) newClippingWithCode:(NSString*)someCode;
 - (void) imageGeneratorTaskEnded:(NSString*)aPath;
+- (void) regenerateKnownCommandCodes;
+- (NSArray*) commandsBeginningWith:(NSString*)prefix;
+-(NSString*)codeForCommand:(NSString*)command;
 
 #pragma mark -
 #pragma mark TableView data source
