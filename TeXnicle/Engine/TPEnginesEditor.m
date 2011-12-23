@@ -20,12 +20,18 @@
 @synthesize deleteButton;
 @synthesize revealButton;
 
+- (void) dealloc
+{
+  self.engineManager = nil;
+  [super dealloc];
+}
+
 - (id)init
 {
   self = [super initWithNibName:@"TPEnginesEditor" bundle:nil];
   if (self) {
     // Initialization code here.
-    self.engineManager = [[TPEngineManager alloc] initWithDelegate:self];
+    self.engineManager = [[[TPEngineManager alloc] initWithDelegate:self] autorelease];
   }
   
   return self;
