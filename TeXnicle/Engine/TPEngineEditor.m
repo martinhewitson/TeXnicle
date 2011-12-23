@@ -24,6 +24,12 @@
 	return @"EngineEditorWindow";
 }
 
+- (void) dealloc
+{
+  self.texEditorViewController = nil;
+  [super dealloc];
+}
+
 - (void) awakeFromNib
 {
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
@@ -79,7 +85,7 @@
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
 	
 	if (str) {
-		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
 	}
 }
 
@@ -109,7 +115,7 @@
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	
 	if (str) {
-		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
+		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
 		return YES;
 	}
   
