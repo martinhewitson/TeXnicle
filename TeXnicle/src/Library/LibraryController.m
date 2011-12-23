@@ -253,6 +253,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 - (void) dealloc
 {
   [self saveLibrary];
+  self.delegate = nil;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
   [defaults removeObserver:self forKeyPath:@"Library"];
   [addMenu release];
