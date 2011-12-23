@@ -28,6 +28,13 @@
   return self;
 }
 
+- (void) dealloc
+{
+  self.fillColor = nil;
+  self.strokeColor = nil;
+  [super dealloc];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
   // Drawing code here.
