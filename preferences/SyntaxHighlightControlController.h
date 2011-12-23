@@ -15,13 +15,10 @@
 	IBOutlet NSColorWell *colorWell;
 	IBOutlet NSTextField *label;
 	
-	id delegate;
-	
 	NSString *bindingTag;
   NSString *name;
 }
 
-@property (nonatomic, readwrite, assign) id delegate;
 @property (nonatomic, readwrite, copy) NSString *bindingTag;
 @property (nonatomic, readwrite, copy) NSString *name;
 
