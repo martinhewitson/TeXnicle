@@ -321,7 +321,6 @@ withIntermediateDirectories:YES
                                          otherButton:nil 
                            informativeTextWithFormat:@"The file %@ already exists in the project. Do you want to add it again?", name];
 			NSInteger result = [alert runModal];
-			[alert release];
       if (result == NSAlertDefaultReturn) {
         return nil;
       }
@@ -938,7 +937,7 @@ withIntermediateDirectories:YES
       [NSApp presentError:error];
     }
   }
-
+  CFRelease(fileUTI);
 	if (contents) {
 		isTextFile = YES;
 	}	
