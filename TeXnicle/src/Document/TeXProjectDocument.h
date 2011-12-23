@@ -97,8 +97,8 @@
   TPEngineSettingsController *engineSettings;
   NSView *engineSettingsContainer;
   
-  HHValidatedButton *newFolderButton;
-  HHValidatedButton *newFileButton;
+  HHValidatedButton *createFolderButton;
+  HHValidatedButton *createFileButton;
   
   
   MHMiniConsoleViewController *miniConsole;
@@ -133,8 +133,8 @@
 @property (assign) IBOutlet NSView *statusViewContainer;
 @property (retain) TPStatusViewController *statusViewController;
 
-@property (assign) IBOutlet HHValidatedButton *newFolderButton;
-@property (assign) IBOutlet HHValidatedButton *newFileButton;
+@property (assign) IBOutlet HHValidatedButton *createFolderButton;
+@property (assign) IBOutlet HHValidatedButton *createFileButton;
 
 @property (retain) TPEngineSettingsController *engineSettings;
 @property (assign) IBOutlet NSView *engineSettingsContainer;

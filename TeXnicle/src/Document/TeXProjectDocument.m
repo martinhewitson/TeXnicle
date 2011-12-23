@@ -35,8 +35,8 @@
 
 @synthesize statusTimer;
 
-@synthesize newFileButton;
-@synthesize newFolderButton;
+@synthesize createFileButton;
+@synthesize createFolderButton;
 
 @synthesize pdfViewer;
 
@@ -82,10 +82,17 @@
 
 - (void) dealloc
 {
-//  NSLog(@"TeXProjectDocument dealloc");
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [projectOutlineController deactivate];
-  [finder release];
+  
+  [self.statusTimer invalidate];
+  self.statusTimer = nil;
+ 
+  self.statusViewController = nil;
+  
+  self.bookmarkManager = nil;
+  self.palette = nil;
+  self.project = nil;  
   self.pdfViewerController = nil;
   self.imageViewerController = nil;
   self.texEditorViewController = nil;
@@ -95,7 +102,12 @@
   self.engineManager = nil;
   self.engineSettings = nil;
   self.pdfViewer = nil;
+  self.miniConsole = nil;
   [super dealloc];
+}
+
+- (void) awakeFromNib
+{
 }
 
 - (id)init
@@ -121,7 +133,7 @@
   NSString *projectName = self.project.name;
   
   if ((pStore != nil) && (projectName != nil)) {
-    NSMutableDictionary *metadata = [[psc metadataForPersistentStore:pStore] mutableCopy];
+    NSMutableDictionary *metadata = [[[psc metadataForPersistentStore:pStore] mutableCopy] autorelease];
     if (metadata == nil) {
       metadata = [NSMutableDictionary dictionary];
     }
@@ -167,7 +179,7 @@
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
   
   // setup pdf viewer
-  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
+  self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
   NSView *pdfViewer = [self.pdfViewerController view];
   [pdfViewer setFrame:[pdfViewerContainerView bounds]];
   [pdfViewerContainerView addSubview:pdfViewer];
@@ -367,7 +379,7 @@
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
   NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
+  ProjectEntity *project = [[[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc] autorelease]; 
   
   // set name and folder of the project
   NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
@@ -500,7 +512,7 @@
 //  NSLog(@"Got model %@", model);
 	//	Create a persistent store
   
-	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
+	NSPersistentStoreCoordinator *psc = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
 //  NSLog(@"Coordinator %@", psc);
   
 	if (!psc)
@@ -520,7 +532,7 @@
 	
 	//	Create a managed object context for the store
 	
-	NSManagedObjectContext* managedContext = [[NSManagedObjectContext alloc] init];
+	NSManagedObjectContext* managedContext = [[[NSManagedObjectContext alloc] init] autorelease];
 	if (!managedContext)
 		return nil;
 	
@@ -603,11 +615,11 @@
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
-  if (anItem == self.newFolderButton) {
+  if (anItem == self.createFolderButton) {
     return [self.projectItemTreeController canAdd];
   }
   
-  if (anItem == self.newFileButton) {
+  if (anItem == self.createFileButton) {
 //    if ([self.projectItemTreeController canAdd]) {
 //      NSArray *selected = [self.projectItemTreeController selectedObjects];
 //      if ([selected count] == 1) {
@@ -2424,23 +2436,32 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
-  NSString *filename = [file valueForKey:@"shortName"];
-  NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
-                                   defaultButton:@"Reload"
-                                 alternateButton:@"Continue"
-                                     otherButton:nil 
-                       informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
-  NSInteger result = [alert runModal];
-  if (result == NSAlertDefaultReturn) {
+  if ([file hasEdits]) {
     
+    NSString *filename = [file valueForKey:@"shortName"];
+    NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
+                                     defaultButton:@"Reload"
+                                   alternateButton:@"Continue"
+                                       otherButton:nil 
+                         informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
+    NSInteger result = [alert runModal];
+    if (result == NSAlertDefaultReturn) {
+      
+      FileEntity *fileEntity = (FileEntity*)file;
+      [fileEntity reloadFromDisk];
+      [self.openDocuments updateDoc];
+      
+    } else {
+      [file setValue:modified forKey:@"fileLoadDate"];
+    }
+    
+  } else {
+    // silently reload
     FileEntity *fileEntity = (FileEntity*)file;
     [fileEntity reloadFromDisk];
     [self.openDocuments updateDoc];
     
-  } else {
-    [file setValue:modified forKey:@"fileLoadDate"];
   }
-  
   
 }
 
