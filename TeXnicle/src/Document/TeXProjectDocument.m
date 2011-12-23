@@ -1257,6 +1257,17 @@
 #pragma mark -
 #pragma mark TeXEditorView delegate
 
+-(NSString*)codeForCommand:(NSString*)command
+{
+  NSString *code = [self.library codeForCommand:command];
+  return code;
+}
+
+- (NSArray*)commandsBeginningWithPrefix:(NSString *)prefix
+{
+  return [self.library commandsBeginningWith:prefix];
+}
+
 -(NSString*)fileExtension
 {
   return [[[self.openDocuments currentDoc] pathOnDisk] pathExtension];
@@ -2360,6 +2371,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void)saveDocument:(id)sender
 {
   [super saveDocument:self];
+  [self.projectOutlineView setNeedsDisplay];
 }
 
 //
