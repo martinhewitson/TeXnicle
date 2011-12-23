@@ -16,20 +16,19 @@ static ConsoleController *sharedConsoleController = nil;
 
 - (id)init
 {
-	if (![super initWithWindowNibName:@"Console"])
-		return nil;
-	
-	[[self window] setLevel:NSNormalWindowLevel];
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-	[textView setFont:font];
-  
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  [nc addObserver:self
-         selector:@selector(handleUserDefaultsChanged:)
-             name:NSUserDefaultsDidChangeNotification
-           object:nil];
-  
+  self = [super initWithWindowNibName:@"Console"];
+	if (self){
+    [[self window] setLevel:NSNormalWindowLevel];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
+    [textView setFont:font];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleUserDefaultsChanged:)
+               name:NSUserDefaultsDidChangeNotification
+             object:nil];
+  }  
 	return self;
 }
 
