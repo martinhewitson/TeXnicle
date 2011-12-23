@@ -16,7 +16,7 @@ extern NSString * const TELineNumberClickedNotification;
 @class MHCodeFolder;
 @class TeXColoringEngine;
 @class TPPopupListWindowController;
-@class  FileEntity;
+@class FileEntity;
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate>
 
@@ -28,7 +28,8 @@ extern NSString * const TELineNumberClickedNotification;
 -(BOOL)shouldSyntaxHighlightDocument;
 -(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange;
 -(NSString*)fileExtension;
-
+-(NSArray*)commandsBeginningWithPrefix:(NSString*)prefix;
+-(NSString*)codeForCommand:(NSString*)command;
 @end
 
 @interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
@@ -147,6 +148,10 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) clearSpellingList;
 - (NSArray*)userDefaultCommands;
 
+- (void) didSelectPopupListItem;
+- (void) didDismissPopupList;
+
+
 #pragma mark -
 #pragma mark Selection
 
@@ -167,6 +172,8 @@ extern NSString * const TELineNumberClickedNotification;
 - (NSRange) rangeForCurrentWord;
 - (NSString*) currentWord;
 - (NSPoint) listPointForCurrentWord;
+- (NSRange) rangeForCurrentCommand;
+- (NSString*) currentCommand;
 
 - (void) checkForMatchingBracketAfterMovingLeft;
 - (void) checkForMatchingBracketAfterMovingRight;

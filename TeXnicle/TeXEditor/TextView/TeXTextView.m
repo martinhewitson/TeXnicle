@@ -29,7 +29,6 @@
 #import "KSPathUtilities.h"
 
 #import "MHLineNumber.h"
-
 #import "NSString+FileTypes.h"
 
 #import "externs.h"
@@ -777,6 +776,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       // otherwise we just call super
       //			[super complete:sender];
     }
+	} else if ([word hasPrefix:@"#"]) {
+    
+    NSArray *possibleCommands = [self commandsBeginningWithPrefix:[self currentCommand]];
+    [self completeFromList:possibleCommands];
+    
 	} else {
 		// otherwise we just call super
 //    NSLog(@"Spell checking");
@@ -1036,6 +1040,32 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 }
 
 #pragma mark -
+#pragma mark TeXTextView delegate
+
+-(NSString*)codeForCommand:(NSString *)command
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(codeForCommand:)]) {
+    if (command && [command length]>0) {
+      if ([command characterAtIndex:0] == '#') {
+        command = [command substringFromIndex:1];
+      }
+      NSString *code = [self.delegate performSelector:@selector(codeForCommand:) withObject:command];
+      return code;
+    }
+  }
+  return nil;
+}
+
+-(NSArray*)commandsBeginningWithPrefix:(NSString*)prefix;
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(commandsBeginningWithPrefix:)]) {
+    return [self.delegate performSelector:@selector(commandsBeginningWithPrefix:) withObject:prefix];
+  }
+  return nil;
+}
+
+
+#pragma mark -
 #pragma mark Selection
 
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine
@@ -1110,6 +1140,58 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	NSString *text = [string substringWithRange:sel];	
 	return text;
 }
+
+- (NSRange) rangeForCurrentCommand
+{
+  NSString *string = [self string];
+  NSRange sel = [self selectedRange];
+  NSInteger end = sel.location;
+  if (end < 0 || end >= [string length]) {
+    return NSMakeRange(NSNotFound, 0);
+  }
+  NSInteger idx = end-1;
+  NSInteger start = -1;  
+  while (idx >= 0) {
+    
+    unichar c = [string characterAtIndex:idx];
+    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
+      start = idx+1;
+      break;
+    }
+    
+    idx--;
+  }
+  
+  if (start < 0 || start >= [string length]) {
+    return NSMakeRange(NSNotFound, 0);
+  }
+  //  NSLog(@"Start %d, end %d", start, end);
+  NSRange r = NSMakeRange(start, end-start);  
+  return r;
+}
+
+- (NSString*)currentCommand
+{
+  NSString *string = [self string];
+  NSRange r = [self rangeForCurrentCommand];
+  if (r.location == NSNotFound || r.location >= [string length]) {
+    return nil;
+  }
+  
+//  NSLog(@"Range %@", NSStringFromRange(r));
+  NSString *word = [string substringWithRange:r];
+//  NSLog(@"Current word %@", word);
+  if ([word length] == 0) {
+    return nil;
+  }
+  if ([word characterAtIndex:0] == '#') {
+    return word;
+  }
+  
+  return nil;
+}
+
+
 
 - (NSRange) rangeForCurrentWord
 {
@@ -1559,11 +1641,31 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 			return;
 		}	
 	} else {
+    
 		[super insertText:aString];
-	}
+    
+    NSString *command = [self currentCommand];
+    if (command != nil && [command length] > 0) {
+      NSString *code = [self codeForCommand:command];
+      if (code && [code length]>0) {
+        NSRange commandRange = [self rangeForCurrentCommand];
+        [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] forCharacterRange:commandRange];
+      }
+    }
+    
+  }
 		
 	[self wrapLine];
 }
+
+- (void) didSelectPopupListItem
+{
+}
+
+- (void) didDismissPopupList
+{
+}
+
 
 - (void) insertNewline:(id)sender
 {	
@@ -1588,7 +1690,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	previousLine = [previousLine stringByTrimmingCharactersInSet:newLineCharacterSet];
 	
 	// Now let's do some special actions....
-	
 	//---- If the previous line was a \begin, we append the \end
 	if ([previousLine hasPrefix:@"\\begin{"]) {			
 		
@@ -1642,8 +1743,19 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 			} // end if insert
 		} // if we are at the end of the \begin statement			
 	} // end if \begin
-	
-	
+	else 
+  {
+  	NSString *currentCommand = [self currentCommand];
+    if (currentCommand) {
+      NSString *code = [self codeForCommand:currentCommand];
+      if (code) {
+        NSRange commandRange = [self rangeForCurrentCommand];
+        [self replaceCharactersInRange:commandRange withString:code];
+        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+      }
+    }
+  }
+  
 	[super insertNewline:sender];
 	
 	// update line numbers
