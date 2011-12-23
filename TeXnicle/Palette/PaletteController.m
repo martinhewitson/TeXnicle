@@ -13,7 +13,7 @@
 @implementation PaletteController
 
 @synthesize delegate;
-
+@synthesize palettes;
 
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate
 {
@@ -26,8 +26,9 @@
 
 - (void) dealloc
 {
-	[palettes release];
-	
+  [palettesController setContent:nil];
+  self.delegate = nil;
+  self.palettes = nil;
 	[super dealloc];
 }
 
@@ -40,7 +41,7 @@
 	[symbolsTable setRowHeight:[slider floatValue]];
   
 	[self loadPalette];
-	[palettesController setContent:palettes];
+	[palettesController setContent:self.palettes];
 	
 //	NSLog(@"Loaded palette: %@", [palettesController arrangedObjects]);
 	
@@ -66,11 +67,10 @@
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"palette" ofType:@"plist"];
 	palette = [NSDictionary dictionaryWithContentsOfFile:path];
 	
-	palettes = [palette valueForKey:@"Palettes"];
-//	palettes = [[palette valueForKey:@"Palettes"] retain];
+	self.palettes = [palette valueForKey:@"Palettes"];
 	
 	// load all images
-	for (NSDictionary *p in palettes) {
+	for (NSDictionary *p in self.palettes) {
 		
 		NSArray *symbols = [p valueForKey:@"Symbols"];
 		for (NSMutableDictionary *symbol in symbols) {
@@ -109,9 +109,9 @@
 - (NSArray*) listOfCommands
 {
 	NSMutableArray *commands = [[NSMutableArray alloc] init];
-	if (palettes) {
+	if (self.palettes) {
 		// load all images
-		for (NSDictionary *p in palettes) {		
+		for (NSDictionary *p in self.palettes) {		
 			NSArray *symbols = [p valueForKey:@"Symbols"];
 			for (NSMutableDictionary *symbol in symbols) {
 				[commands addObject:[symbol valueForKey:@"Code"]];

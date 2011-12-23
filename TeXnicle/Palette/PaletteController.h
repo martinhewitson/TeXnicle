@@ -38,6 +38,7 @@
 }
 
 @property (assign) id<PaletteControllerDelegate> delegate;
+@property (retain) NSArray *palettes;
 
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate;
 
