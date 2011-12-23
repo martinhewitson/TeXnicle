@@ -21,7 +21,7 @@ extern NSString * const TPLibraryImageGeneratorTaskDidFinishNotification;
 
 - (id) initWithSymbol:(NSMutableDictionary*)aSymbol mathMode:(BOOL)mode andController:(LibraryController*)aController;
 
-@property (readwrite, assign) NSMutableDictionary *symbol;
+@property (readwrite, retain) NSMutableDictionary *symbol;
 @property (readwrite, assign) BOOL mathMode;
 
 @end

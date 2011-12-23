@@ -24,10 +24,9 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	if (self) {
     
     controller = aController;
-    
-    [self setSymbol:aSymbol];
-    [self setMathMode:mode];
-    
+    self.symbol = aSymbol;
+    self.mathMode = mode;
+        
     //	NSLog(@"Created generator with symbol: %@", [symbol valueForKey:@"Code"]);
     
   }
