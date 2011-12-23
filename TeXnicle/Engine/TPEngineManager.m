@@ -145,6 +145,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) dealloc
 {
+  self.delegate = nil;
   self.engines = nil;
   self.consoleManager = nil;
   [super dealloc];
