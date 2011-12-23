@@ -73,6 +73,10 @@
 
 - (void)setClientView:(NSView *)client
 {
+  if (client == nil) {
+    return;
+  }
+  
 	if ([client isKindOfClass:[NSTextView class]]) {
 		TeXTextView *aTextView = (TeXTextView*)client;
     self.textView = aTextView;
@@ -84,15 +88,18 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc MHEditorRuler");
   [newLineCharacterSet release];
+	[self setClientView:nil];	
   self.foldingTagDescriptions = nil;
   self.textColor = nil;
+  self.alternateTextColor = nil;
   self.backgroundColor = nil;
   self.font = nil;
   self.lineNumbers = nil;
   self.codeFolders = nil;
   self.textAttributesDictionary = nil;
-	[self setClientView:nil];	
+  self.alternateTextAttributesDictionary = nil;
   [_bookmarkGradient release];
 	[super dealloc];
 }
@@ -112,6 +119,10 @@
 
 - (void) setNeedsDisplay 
 {
+  if (self.textView == nil) {
+    return;
+  }
+  
   [self setNeedsDisplay:YES];
   [self performSelector:@selector(invalidateHashMarks) withObject:nil afterDelay:0];
 }
