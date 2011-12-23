@@ -27,7 +27,7 @@
 
 @property (readwrite,assign) FileEntity *file;
 @property (retain) TeXEditorViewController *texEditorViewController;
-@property (retain) IBOutlet NSView *texEditorContainer;
+@property (assign) IBOutlet NSView *texEditorContainer;
 @property (assign) TeXProjectDocument *mainDocument;
 @property (retain) TPStatusViewController *statusViewController;
 @property (assign) IBOutlet NSView *statusViewContainer;

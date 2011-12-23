@@ -26,17 +26,11 @@
 
 - (id) initWithFile:(FileEntity*)aFile document:(id)document
 {
-	
-	if (![self initWithWindowNibName:@"DocWindow"]) {
-		return nil;
+	self = [super initWithWindowNibName:@"DocWindow"];
+  if (self) {    
+    self.mainDocument = document;
+    self.file = aFile;
 	}
-	
-	self.mainDocument = document;
-	[self setFile:aFile];
-	
-//	NSLog(@"New view for %@", [file valueForKey:@"name"]);
-	[self setFile:aFile];
-	
 	
 	return self;
 }
@@ -101,6 +95,8 @@
 
 - (void) dealloc
 {
+  self.texEditorViewController = nil;
+  self.statusViewContainer = nil;
 	[super dealloc];
 }
 
