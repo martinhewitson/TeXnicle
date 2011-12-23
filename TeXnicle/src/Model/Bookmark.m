@@ -26,7 +26,7 @@
   bookmark.parentFile = aFile;
   
   // extract text
-  NSMutableAttributedString *aStr = [[[aFile document] textStorage] mutableCopy];
+  NSMutableAttributedString *aStr = [[[[aFile document] textStorage] mutableCopy] autorelease];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
@@ -66,7 +66,7 @@
 - (NSAttributedString*)selectedDisplayString
 {
   NSString *lineNumberString = [self lineNumberString];  
-  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
+  NSMutableAttributedString *att = [[[self displayString] mutableCopy] autorelease]; 
   [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
   [att addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
   if ([self.text length]==0) {
