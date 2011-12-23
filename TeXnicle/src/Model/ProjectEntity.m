@@ -26,7 +26,7 @@
   // make new settings
   NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
   Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-  self.settings = newSettings;
+  self.settings = [newSettings autorelease];
   
 }
 
@@ -41,7 +41,7 @@
   if (self.settings == nil) {
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
     Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-    self.settings = newSettings;
+    self.settings = [newSettings autorelease];
   }
 }
 
@@ -113,7 +113,7 @@
 - (NSArray*)folders
 {
   NSManagedObjectContext *moc = [self managedObjectContext];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
 	NSError *fetchError = nil;
 	NSArray *fetchResults;
 	
@@ -121,7 +121,7 @@
 																						inManagedObjectContext:moc];
 	
 	[fetchRequest setEntity:entity];
-	fetchResults = [[moc executeFetchRequest:fetchRequest error:&fetchError] autorelease];
+	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	
 	if (fetchError != nil) {
 		[NSApp presentError:fetchError];
