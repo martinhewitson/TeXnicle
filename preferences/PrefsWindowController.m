@@ -45,7 +45,7 @@
 	[self wrapStyleChanged:self];
   
   // setup engines editor
-  self.enginesEditor = [[TPEnginesEditor alloc] init];
+  self.enginesEditor = [[[TPEnginesEditor alloc] init] autorelease];
   [[self.enginesEditor view] setFrame:[self.enginesEditorContainer bounds]];
   [self.enginesEditorContainer addSubview:[self.enginesEditor view]];
   
