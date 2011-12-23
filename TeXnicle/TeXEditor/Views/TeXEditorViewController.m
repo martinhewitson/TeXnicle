@@ -39,11 +39,9 @@
 
 - (void)dealloc
 {
+//  NSLog(@"Dealloc TeXEditorViewController");
+  self.textView.delegate = nil;
   [sectionListController deactivate];
-  self.sectionListPopup = nil;
-  self.textView = nil;
-  self.unfoldButton = nil;
-  self.markerButton = nil;
   self.delegate = nil;
   [super dealloc];
 }
