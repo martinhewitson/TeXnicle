@@ -20,16 +20,17 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 
 - (id) initWithSymbol:(NSMutableDictionary*)aSymbol mathMode:(BOOL)mode andController:(LibraryController*)aController
 {
-	if (![super init])
-		return nil;
-	
-	controller = aController;
-	
-	[self setSymbol:aSymbol];
-	[self setMathMode:mode];
-	
-//	NSLog(@"Created generator with symbol: %@", [symbol valueForKey:@"Code"]);
-	
+  self = [super init];
+	if (self) {
+    
+    controller = aController;
+    
+    [self setSymbol:aSymbol];
+    [self setMathMode:mode];
+    
+    //	NSLog(@"Created generator with symbol: %@", [symbol valueForKey:@"Code"]);
+    
+  }
 	
 	return self;
 }
