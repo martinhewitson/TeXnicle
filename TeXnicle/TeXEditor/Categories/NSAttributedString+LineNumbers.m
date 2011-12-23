@@ -67,6 +67,10 @@
   {
     // get the range of the current line
     lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
+    if (NSMaxRange(lineRange) > [text length]) {
+      idx = NSMaxRange(lineRange);
+      continue;
+    }
     // make a line object with the given number and starting index
     line = [MHLineNumber lineNumberWithValue:lineNumber index:lineRange.location range:lineRange];    
     [lines addObject:line];
@@ -80,7 +84,7 @@
 		idx = NSMaxRange(lineRange);
   }
   
-  //  NSLog(@"idx=%ld, text length = %ld", idx, [text length]);
+//  NSLog(@"idx=%ld, text length = %ld", idx, [text length]);
   
   //  if ([text length]>0) {
   //    NSLog(@"Last char %c", [text characterAtIndex:[text length]-1]);
