@@ -58,17 +58,14 @@
 	[super drawRect:rect];
 	
 	// draw line alone the bottom
-//	NSRect r = [self bounds];
-//	[[NSColor blackColor] set];
-//	NSBezierPath *path = [NSBezierPath bezierPath];
-//	CGFloat lineWidth = 1;
-//	[path setLineWidth:lineWidth];
-//	[path moveToPoint:NSMakePoint(0.0, r.size.height-lineWidth)];
-//	[path lineToPoint:NSMakePoint(r.size.width, r.size.height-lineWidth)];
-//	[path stroke];
-//	[path moveToPoint:NSMakePoint(0.0, lineWidth)];
-//	[path lineToPoint:NSMakePoint(r.size.width, lineWidth)];
-//	[path stroke];
+	NSRect r = [self bounds];
+	[[NSColor darkGrayColor] set];
+	NSBezierPath *path = [NSBezierPath bezierPath];
+	CGFloat lineWidth = 0.5;
+	[path setLineWidth:lineWidth];
+	[path moveToPoint:NSMakePoint(0.0, lineWidth)];
+	[path lineToPoint:NSMakePoint(r.size.width, lineWidth)];
+	[path stroke];
 }
 
 @end
