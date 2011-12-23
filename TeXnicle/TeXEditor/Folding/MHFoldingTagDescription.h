@@ -22,8 +22,8 @@ enum {
 }
 
 @property (assign) NSInteger index;
-@property (retain) NSString *startTag;
-@property (retain) NSString *endTag;
+@property (copy) NSString *startTag;
+@property (copy) NSString *endTag;
 @property (assign) BOOL hasFollowingArgument;
 
 + (MHFoldingTagDescription*) deepCopyOfTag:(MHFoldingTagDescription*)aTag;
