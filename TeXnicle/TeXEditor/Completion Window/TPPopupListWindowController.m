@@ -151,6 +151,9 @@
 		[attachedWindow close];
 		attachedWindow = nil;
 	}
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissPopupList)]) {
+    [self.delegate performSelector:@selector(didDismissPopupList)];
+  }
 }
 
 
@@ -173,6 +176,12 @@
 			[delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:selected];
 		}
 	}
+  
+  if ([delegate respondsToSelector:@selector(didSelectPopupListItem)]) {
+    [delegate performSelector:@selector(didSelectPopupListItem)];
+  }
+  
+  
 }
 
 #pragma mark -
