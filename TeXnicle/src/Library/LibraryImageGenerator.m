@@ -36,10 +36,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 
 - (void) dealloc
 {
-//	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-//	[typesetTask release];
-//	[nc removeObserver:self];
-//	[image release];
+  self.symbol = nil;
 	[super dealloc];
 }
 
