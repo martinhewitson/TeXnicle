@@ -23,6 +23,12 @@
   return self;
 }
 
+- (void) dealloc
+{
+  self.delegate = nil;
+  [super dealloc];
+}
+
 - (void) awakeFromNib
 {
   MHStrokedFiledView *view = (MHStrokedFiledView*)[self view];
