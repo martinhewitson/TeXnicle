@@ -48,9 +48,6 @@
 - (void)dealloc
 {
   self.tag = nil;
-  self.foldedText = nil;
-  self.startRect = nil;
-  self.endRect = nil;
   [super dealloc];
 }
 
