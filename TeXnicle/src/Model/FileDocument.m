@@ -33,8 +33,8 @@
 		NSError *error = nil;
     MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
-		NSString *str = [[NSString alloc] initWithData:[file valueForKey:@"content"]
-																					encoding:encoding];
+		NSString *str = [[[NSString alloc] initWithData:[file valueForKey:@"content"]
+																					encoding:encoding] autorelease];
 		if (error) {
 			[NSApp presentError:error];
 			return nil;
@@ -62,8 +62,6 @@
 		// Clean up
 		[textContainer release];
 		[layoutManager release];
-		[str release];
-		
 		
 		// Now watch for changes to the text so that we can 
 		// update the managed object
@@ -127,13 +125,10 @@
 		
 		if (![[file valueForKey:@"content"] isEqual:data]) {
 			[file setValue:data forKey:@"content"];
-//			[string release];
 			return YES;
 		}	else {
-//			NSLog(@"Nothing to commit for %@", [file valueForKey:@"name"]);
 		}
 	}	else {
-//		NSLog(@"Nothing to commit for %@", [file valueForKey:@"name"]);
 	}
 	return NO;
 }
