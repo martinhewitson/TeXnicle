@@ -120,6 +120,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc TPSectionListController");
   [self.timer invalidate];
   self.timer = nil;
 	[addMarkerActionMenu release];
@@ -264,7 +265,10 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 					break;
 				}
 				loc++;
-			}			
+			}	
+      if (tagEnd < 0) {
+        continue;
+      }
 			NSString *type = [returnResult substringWithRange:NSMakeRange(1, tagEnd-1)];
 			type = [type uppercaseString];
 			
