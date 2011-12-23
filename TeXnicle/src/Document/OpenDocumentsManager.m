@@ -62,6 +62,7 @@
 
 - (void) dealloc
 {
+  self.delegate = nil;
 	[openDocuments release];
 	[standaloneWindows release];
 	[super dealloc];
