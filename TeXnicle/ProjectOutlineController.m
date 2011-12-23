@@ -135,12 +135,10 @@
 
 - (void) dealloc
 {
-//  NSLog(@"ProjectOutlineController dealloc");
   self.delegate = nil;
-//	projectDocument = nil;
+  [self.timer invalidate];
   self.timer = nil;
-	
-//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	self.section = nil;
 	[sections release];
 	[super dealloc];
 }
@@ -253,7 +251,7 @@
   
   // now start the recursive process of adding links for all sections etc
   
-  NSMutableAttributedString *newStr = [self addLinksTo:attrPath forString:[attString mutableCopy] atURL:aURL];
+  NSMutableAttributedString *newStr = [self addLinksTo:attrPath forString:[[attString mutableCopy] autorelease] atURL:aURL];
   
   //		NSLog(@"Got TOC: %@", [newStr string]);
   
@@ -348,7 +346,8 @@
 	string = [string stringByReplacingOccurrencesOfRegex:@"\n" withString:@" "];
 	//string = [string stringByReplacingOccurrencesOfRegex:@"\r" withString:@" "];
 	string = [@" " stringByAppendingString:string];
-  //	NSLog(@"Searching %@", [aFile name]);	
+  
+  NSLog(@"Searching %@", aURL);	
 	
 	NSUInteger loc = 0;
 	while (loc < [string length]) {
@@ -472,7 +471,6 @@
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(id)aFile inProject:(ProjectEntity*)project
 {
 	NSMutableAttributedString *newStr = [[[NSMutableAttributedString alloc] initWithAttributedString:aStr] autorelease];
-//	NSLog(@"Searching file %@", [aFile valueForKey:@"name"]);
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
 	
@@ -494,6 +492,7 @@
 			
 			NSString *word = [string nextWordStartingAtLocation:&loc];
  			word = [word stringByTrimmingCharactersInSet:ws];
+ 			word = [word stringByTrimmingCharactersInSet:ns];
 		
 //			NSLog(@"Checking word '%@'", word);
 			// Get section, etc
