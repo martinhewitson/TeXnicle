@@ -11,7 +11,6 @@
 
 @implementation SyntaxHighlightControlController
 
-@synthesize delegate;
 @synthesize bindingTag;
 @synthesize name;
 
