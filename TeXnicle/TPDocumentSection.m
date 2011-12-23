@@ -26,6 +26,14 @@
   return [[[TPDocumentSection alloc] initWithRange:aRange result:aName document:aDocument] autorelease];
 }
 
+- (void) dealloc
+{
+  [sections release];
+  self.subsections = nil;
+  
+  [super dealloc];
+}
+
 - (id)initWithRange:(NSRange)aRange result:(NSString*)aName document:(id)aDocument
 {
   self = [super init];
