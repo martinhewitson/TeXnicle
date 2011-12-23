@@ -52,18 +52,20 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 @synthesize beginList;
 
 
-
 - (void) dealloc
 {
 //  NSLog(@"TextView dealloc");
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.delegate = nil;
+  [self stopObserving];
   self.editorRuler = nil;
   self.lineHighlightColor = nil;
   self.coloringEngine = nil;
-  [self.highlightingTimer invalidate];
-  self.highlightingTimer = nil;
+  self.syntaxHighlightTags = nil;
+  self.commandList = nil;
+  self.beginList = nil;
 	[newLineCharacterSet release];
 	[whitespaceCharacterSet release];
-  [self stopObserving];
   [super dealloc];
 }
 
@@ -83,7 +85,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self setAutomaticSpellingCorrectionEnabled:NO];
   
   self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
-//  self.highlightingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(colorVisibleText) userInfo:nil repeats:YES];
     
 }
 
@@ -156,7 +157,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	NSDictionary *commmandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
   path = [[NSBundle mainBundle] pathForResource:@"ContextCommands" ofType:@"plist"];
 	NSDictionary *contextCommandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-	self.commandList = [[NSMutableArray alloc] init];								
+	self.commandList = [[[NSMutableArray alloc] init] autorelease];								
 	[self.commandList addObjectsFromArray:[commmandDict valueForKey:@"Commands"]];
 	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];
 	
@@ -170,7 +171,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self.commandList addObjectsFromArray:[c componentsSeparatedByString:@" "]];
 	
 	// possible sections and completions for \begin
-	self.beginList = [[NSMutableArray alloc] init];
+	self.beginList = [[[NSMutableArray alloc] init] autorelease];
 	[self.beginList addObject:@"enumerate"];
 	[self.beginList addObject:@"array"];
 	[self.beginList addObject:@"matrix"];
@@ -339,7 +340,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	}
 	
   // color visible text
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
 	
 	return;
 }
@@ -378,22 +379,25 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) colorWholeDocument
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+//  NSLog(@"Color whole doc: delegate %@", self.delegate);
+  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
     }
   }
 //  NSLog(@"Coloring whole document");
-  [self.coloringEngine colorTextView:self
-                         textStorage:[self textStorage]
-                       layoutManager:[self layoutManager]
-                             inRange:NSMakeRange(0, [[self string] length])];
-  [self setNeedsDisplay:YES];
+  if (self.coloringEngine) {
+    [self.coloringEngine colorTextView:self
+                           textStorage:[self textStorage]
+                         layoutManager:[self layoutManager]
+                               inRange:NSMakeRange(0, [[self string] length])];
+    [self setNeedsDisplay:YES];
+  }
 }
 
 - (void) colorVisibleText
 {
-//  NSLog(@"Color visible text");
+//  NSLog(@"Color visible text: delegate %@", self.delegate);
   if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
@@ -423,10 +427,12 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
   
 //  NSLog(@"Coloring range %ld-%ld", r.location, r.location+r.length);
-  [self.coloringEngine colorTextView:self
-                         textStorage:[self textStorage]
-                       layoutManager:[self layoutManager]
-                             inRange:r];
+  if (self.coloringEngine) {
+    [self.coloringEngine colorTextView:self
+                           textStorage:[self textStorage]
+                         layoutManager:[self layoutManager]
+                               inRange:r];
+  }
   
 }
 
@@ -501,7 +507,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 - (void) updateEditorRuler
 {
   [self.editorRuler resetLineNumbers];
-  [self.editorRuler performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.1];
+  [self.editorRuler setNeedsDisplay];
   [self setNeedsDisplay:YES];
 }
 
@@ -629,7 +635,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 - (void) setTypingColor:(NSColor*)aColor
 {
   NSDictionary *catts = [NSDictionary currentTypingAttributes];
-  NSMutableDictionary *atts = [catts mutableCopy];
+  NSMutableDictionary *atts = [[catts mutableCopy] autorelease];
   [atts setValue:aColor forKey:NSForegroundColorAttributeName];
   [self setTypingAttributes:atts];
 }
@@ -1034,7 +1040,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine
 {
-  NSMutableAttributedString *aStr = [[[aFile document] textStorage] mutableCopy];
+  NSMutableAttributedString *aStr = [[[[aFile document] textStorage] mutableCopy] autorelease];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
