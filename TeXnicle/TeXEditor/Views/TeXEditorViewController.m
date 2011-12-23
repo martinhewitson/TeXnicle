@@ -202,6 +202,23 @@
   return nil;
 }
 
+- (NSArray*)commandsBeginningWithPrefix:(NSString*)prefix
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(commandsBeginningWithPrefix:)]) {
+    return [self.delegate commandsBeginningWithPrefix:prefix];
+  }
+  return nil;
+}
+
+-(NSString*)codeForCommand:(NSString*)command
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(codeForCommand:)]) {
+    NSString *code = [self.delegate codeForCommand:command];
+    return code;
+  }
+  return nil;
+}
+
 #pragma mark -
 #pragma mark Section List Delegate
 
