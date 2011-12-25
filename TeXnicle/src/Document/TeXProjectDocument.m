@@ -180,9 +180,8 @@
   
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
-  NSView *pdfViewer = [self.pdfViewerController view];
-  [pdfViewer setFrame:[pdfViewerContainerView bounds]];
-  [pdfViewerContainerView addSubview:pdfViewer];
+  [self.pdfViewerController.view setFrame:[pdfViewerContainerView bounds]];
+  [pdfViewerContainerView addSubview:self.pdfViewerController.view];
     
   // setup library
   self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
@@ -195,10 +194,8 @@
   
   // setup finder
   self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
-  NSRect frame = [self.finderContainerView bounds];
-  NSView *finderView = [self.finder view];
-  [finderView setFrame:frame];
-  [self.finderContainerView addSubview:finderView];
+  [self.finder.view setFrame:[self.finderContainerView bounds]];
+  [self.finderContainerView addSubview:self.finder.view];
   
   // setup palette
   self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
