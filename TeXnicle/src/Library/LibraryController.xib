@@ -312,7 +312,7 @@
 							<object class="NSTextField" id="781674593">
 								<reference key="NSNextResponder" ref="941087041"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{80, 137}, {150, 11}}</string>
+								<string key="NSFrame">{{80, 104}, {150, 11}}</string>
 								<reference key="NSSuperview" ref="941087041"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="445341014"/>
@@ -341,7 +341,7 @@
 							<object class="NSTextField" id="120076860">
 								<reference key="NSNextResponder" ref="941087041"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{5, 159}, {73, 17}}</string>
+								<string key="NSFrame">{{5, 126}, {73, 17}}</string>
 								<reference key="NSSuperview" ref="941087041"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="541708218"/>
@@ -361,7 +361,7 @@
 							<object class="NSTextField" id="541708218">
 								<reference key="NSNextResponder" ref="941087041"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{83, 156}, {144, 22}}</string>
+								<string key="NSFrame">{{83, 123}, {144, 22}}</string>
 								<reference key="NSSuperview" ref="941087041"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="781674593"/>
@@ -485,7 +485,7 @@
 								<bool key="NSEditable">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{235, 188}</string>
+						<string key="NSFrameSize">{235, 163}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="120076860"/>
@@ -535,7 +535,7 @@
 									<object class="NSTableView" id="110791541">
 										<reference key="NSNextResponder" ref="136924810"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{235, 141}</string>
+										<string key="NSFrameSize">{235, 166}</string>
 										<reference key="NSSuperview" ref="136924810"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="392534429"/>
@@ -634,7 +634,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</array>
-								<string key="NSFrame">{{0, 17}, {235, 141}}</string>
+								<string key="NSFrame">{{0, 17}, {235, 166}}</string>
 								<reference key="NSSuperview" ref="300947779"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="110791541"/>
@@ -681,7 +681,7 @@
 								<int key="NScvFlags">4</int>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 225}, {235, 158}}</string>
+						<string key="NSFrame">{{0, 200}, {235, 183}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="801379555"/>
@@ -824,7 +824,7 @@
 								<bool key="NSEditable">YES</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 187}, {235, 37}}</string>
+						<string key="NSFrame">{{0, 163}, {235, 37}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="307214374"/>
