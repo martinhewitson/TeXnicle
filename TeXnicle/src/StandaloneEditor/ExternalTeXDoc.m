@@ -239,6 +239,7 @@
 {		
   // stop filemonitor from reaching us
   self.fileMonitor.delegate = nil;
+  outlineController.delegate = nil;
   
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
@@ -832,7 +833,18 @@
 
 
 #pragma mark -
-#pragma mark Text Colorer delegate
+#pragma mark Text Editor delegate
+
+-(NSString*)codeForCommand:(NSString*)command
+{
+  NSString *code = [self.library codeForCommand:command];
+  return code;
+}
+
+- (NSArray*)commandsBeginningWithPrefix:(NSString *)prefix
+{
+  return [self.library commandsBeginningWith:prefix];
+}
 
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
 {

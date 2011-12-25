@@ -172,7 +172,7 @@
 							<string key="NSToolbarItemPaletteLabel"/>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSBox" key="NSToolbarItemView" id="699098339">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSView" id="346379004">
 										<reference key="NSNextResponder" ref="699098339"/>
@@ -183,7 +183,6 @@
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {406, 39}}</string>
-								<reference key="NSSuperview"/>
 								<reference key="NSNextKeyView" ref="346379004"/>
 								<string key="NSReuseIdentifierKey">_NS:18</string>
 								<string key="NSOffsets">{0, 0}</string>
@@ -370,7 +369,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="820151834"/>
 						<reference ref="287667320"/>
 						<reference ref="532706813"/>
@@ -415,7 +414,6 @@
 											<string key="NSFrameSize">{307, 576}</string>
 											<reference key="NSSuperview" ref="961650512"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="678629790"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="885399720">
 													<string key="NSIdentifier">1</string>
@@ -1075,7 +1073,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSFrame">{{0, -1}, {282, 602}}</string>
 											<reference key="NSSuperview" ref="354661662"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -1891,6 +1888,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="519517703"/>
 					</object>
 					<int key="connectionID">310</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">outlineController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="619317761"/>
+					</object>
+					<int key="connectionID">311</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3128,7 +3133,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">310</int>
+			<int key="maxID">311</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3197,6 +3202,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="libraryContainerView">NSView</string>
 						<string key="mainWindow">NSWindow</string>
 						<string key="makeMainFileCheckButton">NSButton</string>
+						<string key="outlineController">ProjectOutlineController</string>
 						<string key="paletteContainerView">NSView</string>
 						<string key="pdfViewContainer">NSView</string>
 						<string key="prefsContainerView">NSView</string>
@@ -3243,6 +3249,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="makeMainFileCheckButton">
 							<string key="name">makeMainFileCheckButton</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="outlineController">
+							<string key="name">outlineController</string>
+							<string key="candidateClassName">ProjectOutlineController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="paletteContainerView">
 							<string key="name">paletteContainerView</string>
@@ -4003,6 +4013,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="bookmarkContainerView">NSView</string>
 						<string key="centerView">NSView</string>
 						<string key="controlsTabview">NSTabView</string>
+						<string key="createFileButton">HHValidatedButton</string>
+						<string key="createFolderButton">HHValidatedButton</string>
 						<string key="documentCode">NSTextView</string>
 						<string key="documentName">NSTextField</string>
 						<string key="engineSettingsContainer">NSView</string>
@@ -4010,10 +4022,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="imageViewerContainer">NSView</string>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
-						<string key="newFileButton">HHValidatedButton</string>
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
-						<string key="newFolderButton">HHValidatedButton</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
@@ -4045,6 +4055,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">controlsTabview</string>
 							<string key="candidateClassName">NSTabView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="createFileButton">
+							<string key="name">createFileButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="createFolderButton">
+							<string key="name">createFolderButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="documentCode">
 							<string key="name">documentCode</string>
 							<string key="candidateClassName">NSTextView</string>
@@ -4073,10 +4091,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">libraryContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="newFileButton">
-							<string key="name">newFileButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="newFileSheet">
 							<string key="name">newFileSheet</string>
 							<string key="candidateClassName">NSWindow</string>
@@ -4084,10 +4098,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="newFilenameTextField">
 							<string key="name">newFilenameTextField</string>
 							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newFolderButton">
-							<string key="name">newFolderButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>

@@ -85,6 +85,8 @@
   LibraryController *library;
   NSView *libraryContainerView;
   NSView *prefsContainerView;
+  
+  IBOutlet ProjectOutlineController *outlineController;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
