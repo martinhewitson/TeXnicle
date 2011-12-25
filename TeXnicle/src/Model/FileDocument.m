@@ -102,16 +102,8 @@
 {
 	
 	NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
-//	NSDate *loadDate = [file valueForKey:@"fileLoadDate"];
-//	
-//	NSLog(@"Last edit: %@", lastEdit);
-//	NSLog(@"Loaded: %@", loadDate);
 	
 	if (lastEdit) {
-//		NSComparisonResult res = [loadDate compare:lastEdit];
-//		NSLog(@"Res: %d", res);
-//		if (res == NSOrderedDescending) {
-			//	NSAttributedString *attStr = [textStorage attributedString];
 		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:textStorage];
 		[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
 		
@@ -119,8 +111,9 @@
 		[string release];
 		
 		//	NSString *str = [textStorage string];
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
+    [fr release];
 		NSData *data = [str dataUsingEncoding:encoding];
 		
 		if (![[file valueForKey:@"content"] isEqual:data]) {
