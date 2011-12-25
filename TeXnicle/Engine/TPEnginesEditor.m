@@ -37,6 +37,11 @@
   return self;
 }
 
+- (void) awakeFromNib
+{
+
+}
+
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
   TPEngine *engine = [self selectedEngine];
