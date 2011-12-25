@@ -31,13 +31,14 @@
 @synthesize progressIndicator;
 @synthesize statusLabel;
 @synthesize results;
-@synthesize backgroundView;
+@synthesize topbarView;
 @synthesize modeSelector;
 @synthesize scrollview;
 @synthesize replaceButton;
 @synthesize replaceAllButton;
 @synthesize replaceView;
 @synthesize replaceText;
+@synthesize bottomBarView;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate
 {
@@ -178,17 +179,18 @@
 - (IBAction)selectMode:(id)sender
 {
   NSRect contentBounds = [self.view bounds];
+  NSRect bottomBarBounds = [self.bottomBarView bounds];
   if ([modeSelector indexOfSelectedItem] == 0) {
     // find
-    NSRect fr = [self.backgroundView frame];
-    [self.backgroundView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarSmall+1, fr.size.width, kFindBarSmall)];
-    [self.scrollview setFrame:NSMakeRect(0, 0, fr.size.width, contentBounds.size.height-kFindBarSmall)];
+    NSRect fr = [self.topbarView frame];
+    [self.topbarView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarSmall+1, fr.size.width, kFindBarSmall)];
+    [self.scrollview setFrame:NSMakeRect(0, bottomBarBounds.size.height, fr.size.width, contentBounds.size.height-kFindBarSmall-bottomBarBounds.size.height)];
     [self.replaceView setHidden:YES];
   } else {
     // replace
-    NSRect fr = [self.backgroundView frame];
-    [self.backgroundView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarLarge+1, fr.size.width, kFindBarLarge)];
-    [self.scrollview setFrame:NSMakeRect(0, 0, fr.size.width, contentBounds.size.height-kFindBarLarge)];
+    NSRect fr = [self.topbarView frame];
+    [self.topbarView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarLarge+1, fr.size.width, kFindBarLarge)];
+    [self.scrollview setFrame:NSMakeRect(0, bottomBarBounds.size.height, fr.size.width, contentBounds.size.height-kFindBarLarge-bottomBarBounds.size.height)];
     [self.replaceView setHidden:NO];
   }
 }

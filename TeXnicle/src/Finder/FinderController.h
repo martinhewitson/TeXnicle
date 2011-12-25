@@ -45,7 +45,7 @@
   BOOL shouldContinueSearching;
   BOOL shouldSearchOnEnd;
   
-  NSView *backgroundView;
+  NSView *topbarView;
   NSPopUpButton *modeSelector;
   NSScrollView *scrollview;
   HHValidatedButton *replaceButton;
@@ -65,12 +65,13 @@
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) IBOutlet NSTextField *statusLabel;
-@property (assign) IBOutlet NSView *backgroundView;
+@property (assign) IBOutlet NSView *topbarView;
 @property (assign) IBOutlet NSPopUpButton *modeSelector;
 @property (assign) IBOutlet NSScrollView *scrollview;
 @property (assign) IBOutlet HHValidatedButton *replaceButton;
 @property (assign) IBOutlet HHValidatedButton *replaceAllButton;
 @property (assign) IBOutlet NSView *replaceView;
+@property (assign) IBOutlet NSView *bottomBarView;
 @property (assign) IBOutlet NSTextField *replaceText;
 @property (retain) NSMutableArray *results;
 
