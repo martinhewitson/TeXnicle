@@ -51,6 +51,8 @@
   
   [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
   
+  [self.texEditorViewController enableEditor];
+  [self.texEditorViewController disableJumpBar];
 }
 
 
