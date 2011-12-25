@@ -135,6 +135,7 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc ProjectOutlineController");
   self.delegate = nil;
   [self.timer invalidate];
   self.timer = nil;
@@ -159,8 +160,13 @@
 
 - (void) generateTOC
 {
-  if (generating)
+//  NSLog(@"Generate TOC");
+  if (self.delegate == nil) {
     return;
+  }
+  if (generating) {
+    return;
+  }
   if (![self.delegate respondsToSelector:@selector(shouldGenerateOutline)]) {
     return;
   }
@@ -250,9 +256,8 @@
                                                                                attributes:attributes];
   
   // now start the recursive process of adding links for all sections etc
-  
-  NSMutableAttributedString *newStr = [self addLinksTo:attrPath forString:[[attString mutableCopy] autorelease] atURL:aURL];
-  
+  NSMutableAttributedString *searchString = [[NSMutableAttributedString alloc] initWithAttributedString:attString];
+  NSMutableAttributedString *newStr = [self addLinksTo:attrPath forString:searchString atURL:aURL];
   //		NSLog(@"Got TOC: %@", [newStr string]);
   
   if ([[textStorage string] isEqualToString:[newStr string]]) {
@@ -262,6 +267,7 @@
     [textView setLinkTextAttributes:attributes];
   }
   
+  [searchString release];
   [attrPath release];
   
 }
@@ -335,19 +341,18 @@
 
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr forString:(NSMutableAttributedString*)astring atURL:(NSURL*)aURL
 {
-	NSMutableAttributedString *newStr = [[[NSMutableAttributedString alloc] initWithAttributedString:aStr] autorelease];
+	NSMutableAttributedString *newStr = [[NSMutableAttributedString alloc] initWithAttributedString:aStr];
   //	NSLog(@"Searching file %@", [aFile valueForKey:@"name"]);
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
 	  
 	NSString *string = [astring unfoldedString];
-	[astring release];
 	
 	string = [string stringByReplacingOccurrencesOfRegex:@"\n" withString:@" "];
 	//string = [string stringByReplacingOccurrencesOfRegex:@"\r" withString:@" "];
 	string = [@" " stringByAppendingString:string];
   
-  NSLog(@"Searching %@", aURL);	
+//  NSLog(@"Searching %@", aURL);	
 	
 	NSUInteger loc = 0;
 	while (loc < [string length]) {
@@ -453,8 +458,8 @@
               MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
               NSString *str = [fr readStringFromFileAtURL:nextURL];
               if (str) {
-                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:str];
-                newStr = [self addLinksTo:newStr forString:newString atURL:nextURL];
+                NSMutableAttributedString *searchString = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+                newStr = [self addLinksTo:newStr forString:searchString atURL:nextURL];
               }
             }
           }
@@ -465,7 +470,7 @@
 		loc++;
 	}
   
-	return newStr;
+	return [newStr autorelease];
 }
 
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(id)aFile inProject:(ProjectEntity*)project
@@ -478,7 +483,6 @@
   astring = [[[aFile document] textStorage] mutableCopy];
     
 	NSString *string = [astring unfoldedString];
-	[astring release];
 	
 	string = [string stringByReplacingOccurrencesOfRegex:@"\n" withString:@" "];
 	//string = [string stringByReplacingOccurrencesOfRegex:@"\r" withString:@" "];
@@ -590,6 +594,8 @@
 		loc++;
 	}
 
+  [astring release];
+  
 	return newStr;
 }
 
