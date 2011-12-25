@@ -15,7 +15,7 @@
 - (NSString*)unfoldedString
 {
 	[self unfoldAll];
-	return [[[self string] copy] autorelease];
+	return [[[self string] mutableCopy] autorelease];
 }
 
 // unfolds all attachments in the attributed string.
