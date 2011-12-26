@@ -1462,7 +1462,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
     [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
-    if (r.length > 0) {
+    NSString *string = [self string];
+    if (r.length > 0 && NSMaxRange(r)<[string length]) {
       NSString *word = [[[self string] substringWithRange:r] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       word = [word stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
       if (word && [word length]>0) {
