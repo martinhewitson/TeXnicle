@@ -341,7 +341,7 @@
 
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr forString:(NSMutableAttributedString*)astring atURL:(NSURL*)aURL
 {
-	NSMutableAttributedString *newStr = [[NSMutableAttributedString alloc] initWithAttributedString:aStr];
+	NSMutableAttributedString *newStr = [[[NSMutableAttributedString alloc] initWithAttributedString:aStr] autorelease];
   //	NSLog(@"Searching file %@", [aFile valueForKey:@"name"]);
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
@@ -470,7 +470,7 @@
 		loc++;
 	}
   
-	return [newStr autorelease];
+	return newStr;
 }
 
 - (NSMutableAttributedString*) addLinksTo:(NSMutableAttributedString*)aStr InFile:(id)aFile inProject:(ProjectEntity*)project
