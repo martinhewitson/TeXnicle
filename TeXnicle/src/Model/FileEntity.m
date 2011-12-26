@@ -131,7 +131,7 @@
 			extension = [[self filepath] pathExtension];
 		}
 		
-		if (extension) {
+		if (extension != nil && newName != nil) {
 			newName = [newName stringByAppendingPathExtension:extension];
 		}
 	}
@@ -230,7 +230,7 @@
 		}
 	}
 	NSString *ext = [self valueForKey:@"extension"];
-	if (ext) {
+	if (ext != nil) {
 		return [[self valueForKey:@"name"] stringByAppendingPathExtension:ext];
 	} else {
 		return [self valueForKey:@"name"];
