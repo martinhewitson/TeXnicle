@@ -66,6 +66,9 @@
 
 - (FileEntity*)fileWithPath:(NSString*)aPath
 {
+  if (aPath == nil)
+    return nil;
+  
 	NSString *pathToTest = aPath;
 	if (![[aPath pathExtension] isEqual:@"tex"]) {
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
@@ -89,6 +92,9 @@
 
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath
 {
+  if (aPath == nil)
+    return nil;
+  
 	NSString *pathToTest = aPath;
 	if (![[aPath pathExtension] isEqual:@"tex"]) {
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
