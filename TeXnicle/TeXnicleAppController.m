@@ -238,6 +238,11 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+	// set spell checker language
+	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
+	if (![language isEqualToString:@""]) {
+		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
+	}
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
