@@ -110,7 +110,7 @@
   return nil;
 }
 
-- (void)deleteSelectedBookmark:(id)sender
+- (IBAction)deleteSelectedBookmark:(id)sender
 {
   Bookmark *b = [self selectedBookmark];
   if (b) {    
@@ -123,9 +123,12 @@
 
 - (IBAction)previousBookmark:(id)sender
 {
+  NSArray *bookmarks = [self allBookmarks];
   if (_currentSelectedBookmark < 0) {
-    if ([[self allBookmarks] count] > 0) {
+    if ([bookmarks count] > 0) {
       _currentSelectedBookmark = 0;
+    } else {
+      return;
     }
   } else {
     _currentSelectedBookmark--;
@@ -135,7 +138,7 @@
     _currentSelectedBookmark = [[self allBookmarks] count]-1;
   }
   
-  Bookmark *bookmark = [[self allBookmarks] objectAtIndex:_currentSelectedBookmark];
+  Bookmark *bookmark = [bookmarks objectAtIndex:_currentSelectedBookmark];
   [self.outlineView expandItem:bookmark.parentFile];
   [self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outlineView rowForItem:bookmark]]
                 byExtendingSelection:NO];
@@ -181,7 +184,7 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-  
+//  NSLog(@"Bookmark manager validateMenuItem");
   NSInteger tag = [menuItem tag];
   
   // delete bookmark
@@ -216,7 +219,7 @@
     }
   }
   
-  return NO;
+  return [super validateMenuItem:menuItem];
 }
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
