@@ -68,10 +68,10 @@
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
+  [self.texEditorViewController enableEditor];
   
 	if (self.documentData) {
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
-    [self.texEditorViewController enableEditor];
 	}
 	
   // setup pdf viewer
