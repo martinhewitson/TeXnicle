@@ -659,6 +659,75 @@
 #pragma mark -
 #pragma mark control
 
+
+- (IBAction)pasteAsImage:(id)sender
+{  
+  
+  // make a filename for the image checking the selected path in the project
+  NSString *root = [[[self fileURL] path] stringByDeletingLastPathComponent];
+  
+  NSString *fileRoot = @"pastedImage";
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSInteger count = 0;
+  
+  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
+  if (type) {
+    NSString *ext = [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:type];
+    NSString *imagePath = [[root stringByAppendingPathComponent:fileRoot] stringByAppendingPathExtension:ext];
+    while ([fm fileExistsAtPath:imagePath]) {
+      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%d", count]] stringByAppendingPathExtension:ext];
+      count++;
+    }
+    
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    [panel setTitle:@"Save pasted image"];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:type]];
+    [panel setAllowsOtherFileTypes:NO];
+    [panel setCanCreateDirectories:YES];
+    [panel setMessage:@"Save pasted image"];
+    [panel setNameFieldLabel:@"Image Path"];
+    [panel setNameFieldStringValue:[imagePath lastPathComponent]];
+    [panel setDirectoryURL:[NSURL fileURLWithPath:[imagePath stringByDeletingLastPathComponent]]];
+    
+    [panel beginSheetModalForWindow:self.windowForSheet completionHandler:^(NSInteger result) {
+      
+      if (result == NSFileHandlingPanelCancelButton) {
+        return;
+      }
+      
+      NSURL *url = [panel URL];
+      
+      // get data
+      NSData *data = [pboard dataForType:type];    
+      
+      // write the file
+      if ([data writeToURL:url atomically:YES]) {
+        // insert text
+        NSMutableString *insert = [NSMutableString stringWithFormat:@"\\begin{figure}[htbp]\n"];
+        [insert appendFormat:@"\\centering\n"];
+        [insert appendFormat:@"\\includegraphics[width=0.8\\textwidth]{%@}\n", [url path]];
+        [insert appendFormat:@"\\caption{My Nice Pasted Figure.}\n"];
+        [insert appendFormat:@"\\label{fig:%@}\n", [[url lastPathComponent] stringByDeletingPathExtension]];
+        [insert appendFormat:@"\\end{figure}\n"];
+        [self insertTextToCurrentDocument:insert];
+      } else {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Creating Image Failed"
+                                         defaultButton:@"OK"
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"Failed to create image from the clipboard at %@", [url path]];
+        [alert beginSheetModalForWindow:self.windowForSheet modalDelegate:nil didEndSelector:nil contextInfo:NULL];
+      }
+      
+      
+    }];
+    
+  }
+  
+}
+
+
 - (IBAction)reloadCurrentFileFromDisk:(id)sender
 {
   NSRange selected = [self.texEditorViewController.textView selectedRange];
