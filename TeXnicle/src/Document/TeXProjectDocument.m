@@ -268,12 +268,12 @@
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
   
-	// spell checker language
-	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
-	if (![language isEqual:@""]) {
-    //		NSLog(@"Setting language to %@", language);
-		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
-	}
+//	// spell checker language
+//	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
+//	if (![language isEqual:@""]) {
+//    //		NSLog(@"Setting language to %@", language);
+//		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
+//	}
   
   
   // ensure the project has the same name as on disk
@@ -1638,7 +1638,7 @@
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
 	NSInteger tag = [menuItem tag];
-
+  
   // find text selection in pdf
   if (tag == 116020) {
     return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
@@ -1692,9 +1692,49 @@
   
   // toggle bookmark
   if (tag == 406010) {
-    if ([self.openDocuments count]>0) {
+    NSRange sel = [self.texEditorViewController.textView selectedRange];
+    if ([self.openDocuments count]>0 && sel.location>0) {
       return YES;
     } else {
+      return NO;
+    }
+  }
+  
+  // delete selected bookmark
+//  NSLog(@"Tag = %d", tag);
+//  NSResponder *responder = [[self windowForSheet] firstResponder];
+//  NSLog(@"Document: %@", self);
+//  NSLog(@"First responder: %@", responder);
+//  while ((responder = [responder nextResponder])) {
+//    NSLog(@"  %@", responder);
+//  }
+//  NSLog(@"Selected bookmark: %@", [self.bookmarkManager selectedBookmark]);
+  if (tag == 406020) {
+    if ([self.bookmarkManager selectedBookmark]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  // jump to selected bookmark
+  if (tag == 406030) {
+    if ([self.bookmarkManager selectedBookmark]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  // previous bookmark
+  if (tag == 406040) {
+    if ([[self bookmarksForProject] count] == 0) {
+      return NO;
+    }
+  }
+  // next bookmark
+  if (tag == 406050) {
+    if ([[self bookmarksForProject] count] == 0) {
       return NO;
     }
   }
@@ -2662,6 +2702,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.controlsTabview selectTabViewItemAtIndex:5];
   [self.bookmarkManager expandAll:self];
   [[self windowForSheet] makeFirstResponder:self.bookmarkManager.outlineView];
+}
+
+- (IBAction)deleteSelectedBookmark:(id)sender
+{
+  [self.bookmarkManager deleteSelectedBookmark:sender];
+}
+
+- (IBAction)jumpToSelectedBookmark:(id)sender
+{
+  [self.bookmarkManager jumpToSelectedBookmark:sender];
 }
 
 - (void) didDeleteBookmark

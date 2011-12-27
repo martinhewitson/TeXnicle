@@ -307,6 +307,8 @@
 #pragma mark Bookmarks
 
 - (IBAction)showBookmarks:(id)sender;
+- (IBAction)deleteSelectedBookmark:(id)sender;
+- (IBAction)jumpToSelectedBookmark:(id)sender;
 - (Bookmark*)bookmarkForCurrentLine;
 - (Bookmark*)bookmarkForLine:(NSInteger)linenumber;
 - (BOOL) hasBookmarkAtCurrentLine:(id)sender;
