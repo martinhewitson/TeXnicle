@@ -70,7 +70,7 @@
 						<object class="NSButton" id="1026360097">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{18, 11}, {72, 29}}</string>
+							<string key="NSFrame">{{18, 13}, {56, 25}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="597121009"/>
@@ -86,8 +86,9 @@
 									<int key="NSfFlags">1044</int>
 								</object>
 								<reference key="NSControlView" ref="1026360097"/>
-								<int key="NSButtonFlags">-2033434369</int>
-								<int key="NSButtonFlags2">130</int>
+								<int key="NSButtonFlags">-2038021889</int>
+								<int key="NSButtonFlags2">163</int>
+								<reference key="NSAlternateImage" ref="52740842"/>
 								<string key="NSAlternateContents"/>
 								<string type="base64-UTF8" key="NSKeyEquivalent">DQ</string>
 								<int key="NSPeriodicDelay">400</int>
@@ -97,9 +98,10 @@
 						<object class="NSCustomView" id="597121009">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{96, 15}, {458, 23}}</string>
+							<string key="NSFrame">{{82, 15}, {485, 23}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:499</string>
 							<string key="NSClassName">TPDescriptionView</string>
 						</object>
