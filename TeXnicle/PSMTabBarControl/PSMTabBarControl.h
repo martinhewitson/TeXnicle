@@ -177,6 +177,8 @@ enum {
 - (NSInteger)numberOfVisibleTabs;
 - (PSMTabBarCell *)lastVisibleTab;
 
+- (NSRect) rectForSelectedCell;
+
 // special effects
 - (void)hideTabBar:(BOOL)hide animate:(BOOL)animate;
 - (BOOL)isTabBarHidden;

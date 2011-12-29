@@ -2031,6 +2031,17 @@
 	return nil;
 }
 
+- (NSRect) rectForSelectedCell
+{
+	NSInteger i, cellCount = [_cells count];
+	for (i = 0; i < cellCount; i++) {
+		if ([[_cells objectAtIndex:i] isSelected]) {
+      return [_controller cellFrameAtIndex:i];
+		}
+	}
+  return NSZeroRect;
+}
+
 - (PSMTabBarCell *)lastVisibleTab
 {
 	NSInteger i, cellCount = [_cells count];
