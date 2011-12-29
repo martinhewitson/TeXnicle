@@ -16,13 +16,12 @@
 
 - (void) awakeFromNib
 {
-  self.sidePanel.fillColor = [NSColor controlColor];
-  self.sidePanel.strokeColor = [NSColor blackColor];
+  _sidePanelisVisible = YES;
 }
 
 - (IBAction)togglePanel:(id)sender
 {
-  NSToolbarItem *item = (NSToolbarItem*)sender;
+//  NSButton *item = (NSButton*)sender;
   NSRect fr = [contentView frame];
   NSRect sr = [sidePanel frame];
 //  NSLog(@"Content rect %@", NSStringFromRect(fr));
@@ -30,16 +29,17 @@
   if (sr.origin.x > fr.size.width) {
     // slide in 
     [self slideInAnimate:YES];
-    [[item toolbar] setSelectedItemIdentifier:[item itemIdentifier]];
   } else {
     // slide out
     [self slideOutAnimate:YES];
-    [[item toolbar] setSelectedItemIdentifier:nil];
   }
 }
 
 - (void) slideInAnimate:(BOOL)animate
 {
+  if (_sidePanelisVisible)
+    return;
+  
   NSRect sr = [sidePanel frame];
   NSRect mr = [mainPanel frame];
   NSRect fr = [contentView frame];
@@ -58,10 +58,14 @@
     [sidePanel setFrame:nsr];
     [mainPanel setFrame:nmr];
   }
+  _sidePanelisVisible = YES;
 }
 
 - (void) slideOutAnimate:(BOOL)animate
 {
+  if (!_sidePanelisVisible)
+    return;
+  
   NSRect sr = [sidePanel frame];
   NSRect mr = [mainPanel frame];
   NSRect fr = [contentView frame];
@@ -79,6 +83,7 @@
     [sidePanel setFrame:nsr];
     [mainPanel setFrame:nmr];
   }
+  _sidePanelisVisible = NO;
 }
 
 @end
