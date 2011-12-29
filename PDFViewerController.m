@@ -13,6 +13,9 @@
 
 @implementation PDFViewerController
 
+@synthesize showSearchResultsButton;
+@synthesize searchResultsTable;
+@synthesize slideViewController;
 @synthesize pdfview;
 @synthesize delegate;
 @synthesize searchField;
@@ -26,6 +29,7 @@
 @synthesize zoomInButton;
 @synthesize zoomOutButton;
 @synthesize zoomToFitButton;
+@synthesize printButton;
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
 {
@@ -50,6 +54,9 @@
 - (void) awakeFromNib
 {
   [self hideViewer];    
+  [self.slideViewController slideOutAnimate:NO];
+  [self.searchResultsTable setTarget:self];
+  [self.searchResultsTable setDoubleAction:@selector(highlightSelectedSearchResult)];
 }
 
 - (void) dealloc
@@ -58,6 +65,17 @@
   self.searchResults = nil;
   [super dealloc];
 }
+
+- (IBAction)toggleResultsTable:(id)sender
+{
+  [self.slideViewController togglePanel:sender];
+}
+
+- (IBAction)printPDF:(id)sender
+{
+  [self.pdfview print:self];
+}
+
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
@@ -83,6 +101,17 @@
   }
   if (anItem == self.zoomToFitButton) {
     if (![self hasDocument]){
+      return NO;
+    }
+  }
+  if (anItem == self.printButton) {
+    if (![self hasDocument]){
+      return NO;
+    }
+  }
+  
+  if (anItem == self.showSearchResultsButton) {
+    if ([self.searchResults count] == 0) {
       return NO;
     }
   }
@@ -134,11 +163,10 @@
   [self hideViewer];  
 }
 
-
-
 - (void) searchForStringInPDF:(NSString*)searchText
 {
   [self.searchResults removeAllObjects];
+  [self.searchResultsTable reloadData];
   _currentHighlightedPDFSearchResult = -1;
   [[self.pdfview document] beginFindString:searchText withOptions:NSCaseInsensitiveSearch];
 }
@@ -152,11 +180,9 @@
   if (_currentHighlightedPDFSearchResult < 0) {
     _currentHighlightedPDFSearchResult = [self.searchResults count]-1;
   }
-  PDFSelection *selection = [self.searchResults objectAtIndex:_currentHighlightedPDFSearchResult];
-  [self.pdfview setCurrentSelection:selection];
-  [self.pdfview scrollSelectionToVisible:self];
-  [self.pdfview setCurrentSelection:selection animate:YES];
-  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %d of %d", _currentHighlightedPDFSearchResult+1, [self.searchResults count]]];
+  [self selectSearchResult:_currentHighlightedPDFSearchResult];
+  [self.searchResultsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:_currentHighlightedPDFSearchResult] byExtendingSelection:NO];
+  [self.searchResultsTable scrollRowToVisible:_currentHighlightedPDFSearchResult];
 }
 
 - (IBAction) showNextResult:(id)sender
@@ -168,11 +194,18 @@
   if (_currentHighlightedPDFSearchResult >= [self.searchResults count]) {
     _currentHighlightedPDFSearchResult = 0;
   }
-  PDFSelection *selection = [self.searchResults objectAtIndex:_currentHighlightedPDFSearchResult];
+  [self selectSearchResult:_currentHighlightedPDFSearchResult];
+  [self.searchResultsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:_currentHighlightedPDFSearchResult] byExtendingSelection:NO];
+  [self.searchResultsTable scrollRowToVisible:_currentHighlightedPDFSearchResult];
+}
+
+- (void) selectSearchResult:(NSInteger)index
+{
+  PDFSelection *selection = [self.searchResults objectAtIndex:index];
   [self.pdfview setCurrentSelection:selection];
   [self.pdfview scrollSelectionToVisible:self];
   [self.pdfview setCurrentSelection:selection animate:YES];
-  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %d of %d", _currentHighlightedPDFSearchResult+1, [self.searchResults count]]];
+  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %d of %d", index+1, [self.searchResults count]]];
 }
 
 - (IBAction) searchPDF:(id)sender
@@ -182,6 +215,8 @@
     [self.searchStatusText setStringValue:@""];
     [self.searchResults removeAllObjects];
     [self.pdfview clearSelection];
+    [self.slideViewController slideOutAnimate:YES];
+    [self.showSearchResultsButton setState:NSOffState];
   } else {
     [self searchForStringInPDF:searchText];
   }
@@ -237,9 +272,94 @@
     [self.pdfview setCurrentSelection:selection];
     [self.pdfview scrollSelectionToVisible:self];
     [self.pdfview setCurrentSelection:selection animate:YES];
+  } else if ([self.searchResults count] == 2) {
+    [self.slideViewController slideInAnimate:YES];
+    [self.showSearchResultsButton setState:NSOnState];
   }
+  
+  [self.searchResultsTable reloadData];
 }
 
+#pragma mark -
+#pragma mark Search table delegate
+
+- (void) highlightSelectedSearchResult
+{
+  NSInteger row = [self.searchResultsTable selectedRow];
+  if (row >= 0 && row < [self.searchResults count]) {
+    [self selectSearchResult:row];
+  }  
+}
+
+- (void) tableViewSelectionDidChange:(NSNotification *)notification
+{
+  [self highlightSelectedSearchResult];
+}
+
+#pragma mark -
+#pragma mark Search table data source
+
+- (NSInteger) numberOfRowsInTableView:(NSTableView *)tableView
+{
+  return [self.searchResults count];
+}
+
+- (id) tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+  if (row <0 || row >= [self.searchResults count]) {
+    return nil;
+  }
+  PDFSelection *selection = [self.searchResults objectAtIndex:row];
+  PDFPage *page =  [[selection pages] objectAtIndex:0];
+  NSRect r = NSIntegralRect([selection boundsForPage:page]);
+  PDFSelection *extendedSelection = [page selectionForRect:r];
+  
+//  PDFSelection *extendedSelection = [[[PDFSelection alloc] initWithDocument:self.pdfview.document] autorelease];
+//  [extendedSelection addSelection:selection];
+  [extendedSelection extendSelectionAtStart:10];
+  [extendedSelection extendSelectionAtEnd:10];
+  NSString *string = [[[extendedSelection string] stringByReplacingOccurrencesOfString:@"\n" withString:@" "] stringByReplacingOccurrencesOfString:@"\r" withString:@" "];
+//  NSLog(@"Selection %@", string);
+  
+  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] init] autorelease];
+  
+  NSMutableAttributedString *pageNo = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Page %@", [page label]]] autorelease];
+  [pageNo addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [pageNo length])];
+  
+  [att appendAttributedString:pageNo];
+  
+  NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" ... %@ ...", string]] autorelease];
+  [text addAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(15, [[selection string] length])];
+  [att appendAttributedString:text];
+  
+
+  
+//  NSRange selectedRange = [self rangeOfSelection:selection];
+//  NSString *selectedString = [page selectionForRange:selectedRange];
+
+  return att;
+}
+
+- (NSRange)rangeOfSelection:(PDFSelection*)selection
+{
+  PDFPage *page =  [[selection pages] objectAtIndex:0];  
+  NSRect bounds = [selection boundsForPage:page];
+  NSString *selectedString = [selection string];
+  NSString *pageString = [page string];
+  NSRange startRange = NSMakeRange(0, [pageString length]);
+  NSRange r = [pageString rangeOfString:selectedString options:NSLiteralSearch range:startRange];
+  while (r.location != NSNotFound) {
+    PDFSelection *testSelection = [page selectionForRange:r];
+    NSRect testBounds = [testSelection boundsForPage:page];
+    if (NSEqualRects(bounds, testBounds)) {
+      return r;
+    }
+    
+    r = [pageString rangeOfString:selectedString options:NSLiteralSearch range:NSMakeRange(r.location+1, [pageString length]-r.location-1)];
+  }
+  
+  return NSMakeRange(NSNotFound, 0);
+}
 
 
 @end
