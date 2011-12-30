@@ -13,20 +13,17 @@
 @synthesize contentView;
 @synthesize sidePanel;
 @synthesize mainPanel;
+@synthesize rightSided;
 
 - (void) awakeFromNib
 {
   _sidePanelisVisible = YES;
+  self.rightSided = YES;
 }
 
 - (IBAction)togglePanel:(id)sender
 {
-//  NSButton *item = (NSButton*)sender;
-  NSRect fr = [contentView frame];
-  NSRect sr = [sidePanel frame];
-//  NSLog(@"Content rect %@", NSStringFromRect(fr));
-//  NSLog(@"Slide rect %@", NSStringFromRect(sr));
-  if (sr.origin.x > fr.size.width) {
+  if (!_sidePanelisVisible) {
     // slide in 
     [self slideInAnimate:YES];
   } else {
@@ -46,11 +43,14 @@
   NSRect nsr;
   NSRect nmr;
   CGFloat w = sr.size.width;
-//  NSLog(@"Width = %f", w);
   // slide in 
-  nsr = NSMakeRect(fr.size.width-w, sr.origin.y, sr.size.width, sr.size.height);
-//  NSLog(@"Slide in to %@", NSStringFromRect(nsr));
-  nmr = NSMakeRect(0, mr.origin.y, fr.size.width-w, mr.size.height);
+  if (self.rightSided) {
+    nsr = NSMakeRect(fr.size.width-w, sr.origin.y, sr.size.width, sr.size.height);
+    nmr = NSMakeRect(0, mr.origin.y, fr.size.width-w, mr.size.height);
+  } else {
+    nsr = NSMakeRect(0, sr.origin.y, sr.size.width, sr.size.height);
+    nmr = NSMakeRect(w, mr.origin.y, fr.size.width-w, mr.size.height);
+  }
   if (animate) {
     [[sidePanel animator] setFrame:nsr];
     [[mainPanel animator] setFrame:nmr];
@@ -73,9 +73,13 @@
   NSRect nmr;
   CGFloat w = sr.size.width;
   // slide out
-  nsr = NSMakeRect(fr.size.width+1, sr.origin.y, sr.size.width, sr.size.height);
-//  NSLog(@"Slide out to %@", NSStringFromRect(nsr));
-  nmr = NSMakeRect(0, mr.origin.y, fr.size.width, mr.size.height);
+  if (self.rightSided) {
+    nsr = NSMakeRect(fr.size.width+1, sr.origin.y, sr.size.width, sr.size.height);
+    nmr = NSMakeRect(0, mr.origin.y, fr.size.width, mr.size.height);
+  } else {
+    nsr = NSMakeRect(-w, sr.origin.y, sr.size.width, sr.size.height);
+    nmr = NSMakeRect(0, mr.origin.y, fr.size.width, mr.size.height);
+  }
   if (animate) {
     [[sidePanel animator] setFrame:nsr];
     [[mainPanel animator] setFrame:nmr];

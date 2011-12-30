@@ -14,11 +14,13 @@
   NSView *mainPanel;
   NSView *contentView;
   BOOL _sidePanelisVisible;
+  BOOL rightSided;
 }
 
 @property (assign) IBOutlet NSView *sidePanel;
 @property (assign) IBOutlet NSView *mainPanel;
 @property (assign) IBOutlet NSView *contentView;
+@property (assign) BOOL rightSided;
 
 
 - (IBAction)togglePanel:(id)sender;
