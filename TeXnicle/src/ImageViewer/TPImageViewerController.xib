@@ -36,7 +36,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSCustomView" id="336498516">
@@ -56,6 +56,7 @@
 								</set>
 								<string key="NSFrame">{{10, 10}, {420, 350}}</string>
 								<reference key="NSSuperview" ref="336498516"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:1658</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSImageCell" key="NSCell" id="821697838">
@@ -72,6 +73,7 @@
 						</array>
 						<string key="NSFrame">{{20, 37}, {440, 370}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="409404391"/>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">TPImageViewerBackgroundView</string>
@@ -85,6 +87,7 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{415, 7}, {45, 19}}</string>
 								<reference key="NSSuperview" ref="49314293"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="336498516"/>
 								<string key="NSReuseIdentifierKey">_NS:1534</string>
 								<bool key="NSEnabled">YES</bool>
@@ -108,14 +111,17 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{480, 445}</string>
+						<string key="NSFrame">{{0, -1}, {480, 446}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="619033279"/>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">TETopBarView</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{480, 445}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="49314293"/>
 				<string key="NSClassName">NSView</string>
 			</object>
