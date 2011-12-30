@@ -71,7 +71,10 @@
 	[path setLineWidth:lineWidth];
 	[path moveToPoint:NSMakePoint(0.0, lineWidth)];
 	[path lineToPoint:NSMakePoint(r.size.width, lineWidth)];
-	[path stroke];
+	
+//  [path moveToPoint:NSMakePoint(0.0, r.size.height-lineWidth)];
+//  [path lineToPoint:NSMakePoint(r.size.width, r.size.height-lineWidth)];
+  [path stroke];
 }
 
 @end
