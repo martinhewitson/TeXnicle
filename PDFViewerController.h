@@ -40,18 +40,22 @@
   HHValidatedButton *printButton;
   
   MHSlideViewController *slideViewController;
+  MHSlideViewController *thumbSlideViewController;
   NSTableView *searchResultsTable;
   NSMutableArray *searchResults;
   
   HHValidatedButton *showSearchResultsButton;
+  HHValidatedButton *toggleThumbsButton;
 }
 
 
 @property (retain) NSMutableArray *searchResults;
 
 @property (assign) IBOutlet HHValidatedButton *showSearchResultsButton;
+@property (assign) IBOutlet HHValidatedButton *toggleThumbsButton;
 @property (assign) IBOutlet NSTableView *searchResultsTable;
 @property (assign) IBOutlet MHSlideViewController *slideViewController;
+@property (assign) IBOutlet MHSlideViewController *thumbSlideViewController;
 @property (assign) IBOutlet PDFView *pdfview;
 @property (assign) IBOutlet NSSearchField *searchField;
 @property (assign) IBOutlet NSTextField *statusText;
@@ -89,6 +93,8 @@
 - (IBAction) showPreviousResult:(id)sender;
 - (IBAction) showNextResult:(id)sender;
 - (IBAction)toggleResultsTable:(id)sender;
+- (IBAction)toggleThumbsTable:(id)sender;
+
 - (void) selectSearchResult:(NSInteger)index;
 - (NSRange)rangeOfSelection:(PDFSelection*)selection;
 - (void) highlightSelectedSearchResult;

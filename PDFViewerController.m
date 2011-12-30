@@ -14,8 +14,10 @@
 @implementation PDFViewerController
 
 @synthesize showSearchResultsButton;
+@synthesize toggleThumbsButton;
 @synthesize searchResultsTable;
 @synthesize slideViewController;
+@synthesize thumbSlideViewController;
 @synthesize pdfview;
 @synthesize delegate;
 @synthesize searchField;
@@ -55,8 +57,12 @@
 {
   [self hideViewer];    
   [self.slideViewController slideOutAnimate:NO];
+  [self.thumbSlideViewController setRightSided:NO];
   [self.searchResultsTable setTarget:self];
   [self.searchResultsTable setDoubleAction:@selector(highlightSelectedSearchResult)];
+  
+  [self.thumbSlideViewController slideInAnimate:NO];
+  [self.toggleThumbsButton setState:NSOnState];
 }
 
 - (void) dealloc
@@ -70,6 +76,12 @@
 {
   [self.slideViewController togglePanel:sender];
 }
+
+- (IBAction)toggleThumbsTable:(id)sender
+{
+  [self.thumbSlideViewController togglePanel:sender];
+}
+
 
 - (IBAction)printPDF:(id)sender
 {
@@ -105,6 +117,11 @@
     }
   }
   if (anItem == self.printButton) {
+    if (![self hasDocument]){
+      return NO;
+    }
+  }
+  if (anItem == self.toggleThumbsButton) {
     if (![self hasDocument]){
       return NO;
     }
