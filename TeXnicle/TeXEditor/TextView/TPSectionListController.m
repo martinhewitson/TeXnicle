@@ -282,6 +282,9 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 				}
 				loc++;
 			}			
+      if (tagEnd < 0) {
+        continue;
+      }
 			
 			NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
 			arg = [arg stringByTrimmingCharactersInSet:ws];
