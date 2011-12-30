@@ -659,7 +659,6 @@
 														<nil key="NSNextResponder"/>
 														<int key="NSvFlags">256</int>
 														<string key="NSFrameSize">{225, 576}</string>
-														<reference key="NSNextKeyView" ref="1002247264"/>
 													</object>
 													<string key="NSLabel">View</string>
 													<reference key="NSColor" ref="1051993651"/>
@@ -1102,7 +1101,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="632442715">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">4370</int>
-											<string key="NSFrame">{{0, 40}, {584, 540}}</string>
+											<string key="NSFrame">{{0, 40}, {584, 536}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="749074883"/>
@@ -1111,7 +1110,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="792010655">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">4370</int>
-											<string key="NSFrame">{{0, 40}, {584, 540}}</string>
+											<string key="NSFrame">{{0, 40}, {584, 536}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="632442715"/>
@@ -1133,7 +1132,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 										<object class="NSCustomView" id="582867506">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">266</int>
-											<string key="NSFrame">{{0, 556}, {584, 45}}</string>
+											<string key="NSFrame">{{0, 573}, {584, 29}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="792010655"/>
@@ -6102,12 +6101,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="closeAllTabs:">id</string>
 						<string key="closeCurrentTab:">id</string>
 						<string key="delete:">id</string>
+						<string key="deleteSelectedBookmark:">id</string>
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="endTemplateSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
 						<string key="findSource:">id</string>
 						<string key="jumpToMainFile:">id</string>
+						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="locateItem:">id</string>
 						<string key="newFile:">id</string>
 						<string key="newFolder:">id</string>
@@ -6184,6 +6185,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">delete:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="deleteSelectedBookmark:">
+							<string key="name">deleteSelectedBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="endNewFileSheet:">
 							<string key="name">endNewFileSheet:</string>
 							<string key="candidateClassName">id</string>
@@ -6206,6 +6211,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
 							<string key="name">jumpToMainFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="jumpToSelectedBookmark:">
+							<string key="name">jumpToSelectedBookmark:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="locateItem:">
