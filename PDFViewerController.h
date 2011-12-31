@@ -10,6 +10,7 @@
 #import <Quartz/Quartz.h>
 #import "HHValidatedButton.h"
 #import "MHSlideViewController.h"
+#import "MHSlidingSplitViewController.h"
 
 @class PDFViewerController;
 
@@ -20,10 +21,11 @@
 @end
 
 
-@interface PDFViewerController : NSViewController <NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
+@interface PDFViewerController : NSViewController <MHSlidingSplitViewDelegate, NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
 @private
   IBOutlet NSView *pdfViewContainer;
   PDFView *pdfview;
+  PDFThumbnailView *pdfThumbnailView;
   id<PDFViewerControllerDelegate> delegate;
   NSInteger _currentHighlightedPDFSearchResult;
   
@@ -39,13 +41,14 @@
   HHValidatedButton *zoomToFitButton;
   HHValidatedButton *printButton;
   
-  MHSlideViewController *slideViewController;
-  MHSlideViewController *thumbSlideViewController;
+  MHSlidingSplitViewController *searchResultsSlideViewController;
+  MHSlidingSplitViewController *thumbSlideViewController;
   NSTableView *searchResultsTable;
   NSMutableArray *searchResults;
   
   HHValidatedButton *showSearchResultsButton;
   HHValidatedButton *toggleThumbsButton;
+  NSSlider *thumbSizeSlider;
 }
 
 
@@ -54,9 +57,10 @@
 @property (assign) IBOutlet HHValidatedButton *showSearchResultsButton;
 @property (assign) IBOutlet HHValidatedButton *toggleThumbsButton;
 @property (assign) IBOutlet NSTableView *searchResultsTable;
-@property (assign) IBOutlet MHSlideViewController *slideViewController;
-@property (assign) IBOutlet MHSlideViewController *thumbSlideViewController;
+@property (assign) IBOutlet MHSlidingSplitViewController *searchResultsSlideViewController;
+@property (assign) IBOutlet MHSlidingSplitViewController *thumbSlideViewController;
 @property (assign) IBOutlet PDFView *pdfview;
+@property (assign) IBOutlet PDFThumbnailView *pdfThumbnailView;
 @property (assign) IBOutlet NSSearchField *searchField;
 @property (assign) IBOutlet NSTextField *statusText;
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
@@ -69,6 +73,7 @@
 @property (assign) IBOutlet HHValidatedButton *zoomInButton;
 @property (assign) IBOutlet HHValidatedButton *zoomOutButton;
 @property (assign) IBOutlet HHValidatedButton *zoomToFitButton;
+@property (assign) IBOutlet NSSlider *thumbSizeSlider;
 
 @property (assign) id<PDFViewerControllerDelegate> delegate;
 
@@ -94,6 +99,7 @@
 - (IBAction) showNextResult:(id)sender;
 - (IBAction)toggleResultsTable:(id)sender;
 - (IBAction)toggleThumbsTable:(id)sender;
+- (IBAction)setThumbSize:(id)sender;
 
 - (void) selectSearchResult:(NSInteger)index;
 - (NSRange)rangeOfSelection:(PDFSelection*)selection;

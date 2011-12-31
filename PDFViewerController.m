@@ -7,16 +7,18 @@
 //
 
 #import "PDFViewerController.h"
+#import "MHSlidingSplitViewController.h"
 
 #define kToolbarFullHeight 64.0
 #define kToolbarReducedHeight 44.0
 
 @implementation PDFViewerController
 
+@synthesize pdfThumbnailView;
 @synthesize showSearchResultsButton;
 @synthesize toggleThumbsButton;
 @synthesize searchResultsTable;
-@synthesize slideViewController;
+@synthesize searchResultsSlideViewController;
 @synthesize thumbSlideViewController;
 @synthesize pdfview;
 @synthesize delegate;
@@ -32,6 +34,8 @@
 @synthesize zoomOutButton;
 @synthesize zoomToFitButton;
 @synthesize printButton;
+@synthesize thumbSizeSlider;
+
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
 {
@@ -56,13 +60,17 @@
 - (void) awakeFromNib
 {
   [self hideViewer];    
-  [self.slideViewController slideOutAnimate:NO];
-  [self.thumbSlideViewController setRightSided:NO];
+  [self.searchResultsSlideViewController setDelegate:self];
+  [self.searchResultsSlideViewController slideOutAnimated:NO];
   [self.searchResultsTable setTarget:self];
   [self.searchResultsTable setDoubleAction:@selector(highlightSelectedSearchResult)];
   
-  [self.thumbSlideViewController slideInAnimate:NO];
+  [self.thumbSlideViewController setRightSided:NO];
   [self.toggleThumbsButton setState:NSOnState];
+  
+  [self.thumbSlideViewController setDelegate:self];
+  [self.thumbSlideViewController.splitView setNeedsLayout:YES];
+  [self.thumbSizeSlider setFloatValue:64.0];
 }
 
 - (void) dealloc
@@ -74,14 +82,25 @@
 
 - (IBAction)toggleResultsTable:(id)sender
 {
-  [self.slideViewController togglePanel:sender];
+  [self.searchResultsSlideViewController toggle:sender];
 }
 
 - (IBAction)toggleThumbsTable:(id)sender
 {
-  [self.thumbSlideViewController togglePanel:sender];
+  if ([self.toggleThumbsButton state] == NSOnState) {
+    [self.thumbSizeSlider setEnabled:YES]; 
+  } else {
+    [self.thumbSizeSlider setEnabled:NO];
+  }
+  [self.thumbSlideViewController toggle:sender];
 }
 
+
+- (IBAction)setThumbSize:(id)sender
+{
+  CGFloat s = [sender floatValue];
+  [self.pdfThumbnailView setThumbnailSize:NSMakeSize(s, s)];
+}
 
 - (IBAction)printPDF:(id)sender
 {
@@ -232,7 +251,7 @@
     [self.searchStatusText setStringValue:@""];
     [self.searchResults removeAllObjects];
     [self.pdfview clearSelection];
-    [self.slideViewController slideOutAnimate:YES];
+    [self.searchResultsSlideViewController slideOutAnimated:YES];
     [self.showSearchResultsButton setState:NSOffState];
   } else {
     [self searchForStringInPDF:searchText];
@@ -290,7 +309,7 @@
     [self.pdfview scrollSelectionToVisible:self];
     [self.pdfview setCurrentSelection:selection animate:YES];
   } else if ([self.searchResults count] == 2) {
-    [self.slideViewController slideInAnimate:YES];
+    [self.searchResultsSlideViewController slideInAnimated:YES];
     [self.showSearchResultsButton setState:NSOnState];
   }
   
@@ -378,5 +397,27 @@
   return NSMakeRange(NSNotFound, 0);
 }
 
+#pragma mark -
+#pragma mark Sliding splitview delegate
 
+- (void)splitView:(NSSplitView *)aSplitView didCollapseSubview:(NSView *)aView
+{
+  if (aSplitView == self.thumbSlideViewController.splitView) {
+    [self.toggleThumbsButton setState:NSOffState];
+  }
+  if (aSplitView == self.searchResultsSlideViewController.splitView) {
+    [self.showSearchResultsButton setState:NSOffState];
+  }
+}
+
+- (void)splitView:(NSSplitView *)aSplitView didUncollapseSubview:(NSView *)aView
+{
+  if (aSplitView == self.thumbSlideViewController.splitView) {
+    [self.toggleThumbsButton setState:NSOnState];
+  }
+  if (aSplitView == self.searchResultsSlideViewController.splitView) {
+    [self.showSearchResultsButton setState:NSOnState];
+  }
+  
+}
 @end
