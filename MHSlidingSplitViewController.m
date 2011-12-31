@@ -13,6 +13,9 @@
 @synthesize splitView;
 @synthesize inspectorView;
 @synthesize mainView;
+@synthesize delegate;
+
+#define kMinInspectorPanelWidth 64.0
 
 - (void) awakeFromNib
 {
@@ -72,6 +75,10 @@
   NSRect newMainFrame = self.mainView.frame;
   NSRect newInspectorFrame = self.inspectorView.frame;
   newInspectorFrame.size.width = lastInspectorWidth;
+  if (newInspectorFrame.size.width < kMinInspectorPanelWidth) {
+    newInspectorFrame.size.width = kMinInspectorPanelWidth;
+  }
+  
   newMainFrame.size.width =  self.splitView.frame.size.width-lastInspectorWidth;
   if (self.rightSided) {
     newInspectorFrame.origin.x = self.splitView.frame.size.width-lastInspectorWidth;
@@ -122,5 +129,55 @@
   }
   return result;
 }
+
+- (void)splitViewWillResizeSubviews:(NSNotification *)notification
+{
+}
+
+- (void)splitViewDidResizeSubviews:(NSNotification *)aNotification
+{
+  // collapsing
+  if (_sidePanelIsVisible == YES && [self.splitView isSubviewCollapsed:self.inspectorView]) {
+    _sidePanelIsVisible = NO;
+    // notify delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(splitView:didCollapseSubview:)]) {
+      [self.delegate splitView:self.splitView didCollapseSubview:self.inspectorView];
+    }
+  }
+  
+  // uncollapsing
+  if (_sidePanelIsVisible == NO && ![self.splitView isSubviewCollapsed:self.inspectorView]) {
+    _sidePanelIsVisible = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(splitView:didUncollapseSubview:)]) {
+      [self.delegate splitView:self.splitView didUncollapseSubview:self.inspectorView];
+    }
+    
+  }
+  
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
+{
+  if (self.rightSided == NO) {
+    if (dividerIndex == 0) {
+      return kMinInspectorPanelWidth;
+    }
+  }
+  
+  return proposedMin;
+}
+
+- (CGFloat)splitView:(NSSplitView *)aSplitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex
+{
+  if (self.rightSided == YES) {
+    if (dividerIndex == 0) {
+      NSRect r = [aSplitView bounds];
+      return r.size.width - kMinInspectorPanelWidth;
+    }
+  }
+  
+  return proposedMaximumPosition;
+}
+
 
 @end

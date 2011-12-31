@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol MHSlidingSplitViewDelegate <NSObject>
+
+-(void)splitView:(NSSplitView*)aSplitView didCollapseSubview:(NSView*)aView;
+-(void)splitView:(NSSplitView*)aSplitView didUncollapseSubview:(NSView*)aView;
+
+@end
+
 @interface MHSlidingSplitViewController : NSObject <NSSplitViewDelegate> {
 @private
   NSSplitView *splitView;
@@ -16,8 +23,10 @@
   NSView *inspectorView;
   NSView *mainView;
   CGFloat lastInspectorWidth;
+  id<MHSlidingSplitViewDelegate> delegate;
 }
 
+@property (assign) id<MHSlidingSplitViewDelegate> delegate;
 @property (assign) IBOutlet NSSplitView *splitView;
 @property (assign) IBOutlet NSView *inspectorView;
 @property (assign) IBOutlet NSView *mainView;
