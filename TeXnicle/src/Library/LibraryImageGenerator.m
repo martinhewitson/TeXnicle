@@ -11,6 +11,7 @@
 #import "NSWorkspaceExtended.h"
 #import "NSNotificationAdditions.h"
 #import "RegexKitLite.h"
+#import "externs.h"
 
 @implementation LibraryImageGenerator
 
@@ -98,8 +99,8 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	
 	// pdflatex it
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *gspath = [[defaults valueForKey:@"TPGSPath"] stringByDeletingLastPathComponent];
-	NSString *texpath = [[defaults valueForKey:@"TPPDFLatexPath"] stringByDeletingLastPathComponent]; 
+	NSString *gspath = [[defaults valueForKey:TPGSPath] stringByDeletingLastPathComponent];
+	NSString *texpath = [[defaults valueForKey:TPPDFLatexPath] stringByDeletingLastPathComponent]; 
 	NSString* script = [NSString stringWithFormat:@"%@/makePDFimage.sh",[[NSBundle mainBundle] resourcePath]];
 		
 	// check if the pdf exists
