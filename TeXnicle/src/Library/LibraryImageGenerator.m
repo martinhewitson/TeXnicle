@@ -10,6 +10,7 @@
 #import "NSStringUUID.h"
 #import "NSWorkspaceExtended.h"
 #import "NSNotificationAdditions.h"
+#import "RegexKitLite.h"
 
 @implementation LibraryImageGenerator
 
@@ -54,6 +55,17 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	[doc appendString:@"\\usepackage{amsmath} %maths\n"];
 	[doc appendString:@"\\usepackage[utf8]{inputenc} %useful to type directly diacritic characters\n"];
 	NSString *code = [symbol valueForKey:@"Code"];
+  
+  // replace placeholders
+  NSString *regexp = [LibraryController placeholderRegexp];
+  NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+  for (NSString *placeholder in placeholders) {
+    placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSRange r = [code rangeOfString:placeholder];
+    NSString *replacement = [placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)];
+    code = [code stringByReplacingCharactersInRange:r withString:replacement];
+  }
+  
 	if (mathMode) {
 		[doc appendFormat:@"\\pagestyle{empty} \\begin{document}$%@$\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
 	} else {
