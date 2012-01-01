@@ -42,7 +42,7 @@
 																			atIndex:loc
 															 effectiveRange:&effRange];
 			
-			if (att) {			
+			if (att && [att respondsToSelector:@selector(object)]) {			
 				NSData *data = [[att fileWrapper] regularFileContents];
 				NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
 				NSRange attRange = NSMakeRange(loc, 1);
