@@ -2664,8 +2664,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void)libraryController:(LibraryController *)library insertText:(NSString *)text
 {
-	[self.texEditorViewController.textView insertText:text];
-	[self.texEditorViewController.textView colorVisibleText];
+  TeXTextView *textView = self.texEditorViewController.textView;
+  NSRange sel = [textView selectedRange];
+  NSRange textRange = NSMakeRange(sel.location, [text length]);
+  
+  [[textView undoManager] beginUndoGrouping];
+  [textView shouldChangeTextInRange:sel replacementString:text];
+  [textView replaceCharactersInRange:sel withString:text];
+  [textView replacePlaceholdersInString:text range:textRange];      
+  [textView didChangeText];
+  [[textView undoManager] endUndoGrouping];
+  [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];  
+  
 }
 
 #pragma mark -
