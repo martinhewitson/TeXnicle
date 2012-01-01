@@ -19,6 +19,7 @@
 #import "NSAttributedString+CodeFolding.h"
 #import "NSAttributedString+LineNumbers.h"
 #import "Bookmark.h"
+#import "TPFoldedCodeSnippet.h"
 
 #define kDEFAULT_THICKNESS	22.0
 #define kRULER_MARGIN		5.0
@@ -622,9 +623,11 @@
     NSAttributedString *attLine = [attStr attributedSubstringFromRange:lineRange];
     if ([attLine containsAttachments]) {
       NSTextAttachment *att = [attLine firstAttachment];
-      MHCodeFolder *attFolder = [att valueForKey:@"object"];
-      if (attFolder) {
-        lineNumber += attFolder.lineCount;
+      if (att && [att isKindOfClass:[TPFoldedCodeSnippet class]]) {
+        MHCodeFolder *attFolder = [att valueForKey:@"object"];
+        if (attFolder) {
+          lineNumber += attFolder.lineCount;
+        }
       }
     } // end if line contains attachments
     
