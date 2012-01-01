@@ -41,7 +41,7 @@
   if (isFolded) {
     NSTextAttachment *att = [aLine firstAttachment];
     
-    if (att) {			
+    if (att && [att respondsToSelector:@selector(object)]) {			
       MHCodeFolder *folder = [att valueForKey:@"object"];
       return folder.lineCount+1;
     }
