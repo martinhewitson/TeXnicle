@@ -13,6 +13,7 @@
 #import "LibraryImageGenerator.h"
 #import "externs.h"
 #import "TPLibraryCommandFormatter.h"
+#import "NSStringUUID.h"
 
 @implementation LibraryController
 
@@ -32,6 +33,11 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 @synthesize defaultLibrary;
 @synthesize commandMessageLabel;
 @synthesize knownCommands;
+
++ (NSString*) placeholderRegexp
+{
+ return @"\\@[^\\@]*\\@";
+}
 
 - (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate
 {
@@ -398,13 +404,20 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 - (IBAction) restoreDefaultLibrary
 {
 	// As the user 
+	NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
+  NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
 	
-	
-	
+  NSString *informativeText;
+	if (userLibraryVersion == nil) {
+    informativeText = @"Do you really want to restore the default Library? You will lose any changes you've made to the Library.";
+  } else {
+    informativeText = @"Do you really want to restore the default Library? You will lose any changes you've made to the default categories and clips of the Library.";
+  }
+  
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Restore Default Library?"
 																	 defaultButton:@"No" alternateButton:@"Yes"
 																		 otherButton:nil 
-											 informativeTextWithFormat:@"Do you really want to restore the default Library? You will lose any changes you've made to the Library."
+											 informativeTextWithFormat:informativeText
 										]; 
 	[alert beginSheetModalForWindow:[[self view ] window] modalDelegate:self
 									 didEndSelector:@selector(restoreLibraryEnded:code:context:) 
@@ -421,11 +434,106 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	} 	
 	
 	if (choice == NSAlertAlternateReturn) {		
-		[categoryController removeObjects:[categoryController arrangedObjects]];		
-		// add new 
-		[self addDefaultCategories];
+    
+    // check library version
+    NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
+    NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
+    
+    if (userLibraryVersion != nil) {
+      [self restoreDefaultCategoriesAndCodes];
+    } else {
+      
+      [categoryController removeObjects:[categoryController arrangedObjects]];		
+      [self addDefaultCategories];
+    }
 	}	
 }	
+
+- (void) restoreDefaultCategoriesAndCodes
+{
+//  NSLog(@"Restoring library defaults...");
+  NSArray *clipKeys = [NSArray arrayWithObjects:@"Code", @"BuiltIn", @"Command", @"Image", @"validImage", nil];
+  
+  // go through each default category
+	for (NSDictionary *defaultCategory in [self.defaultLibrary valueForKey:@"Categories"]) {
+    // go through each user category looking for a match
+    for (NSDictionary *userCategory in [library valueForKey:@"Categories"]) {
+      if ([[userCategory valueForKey:@"Name"] isEqualToString:[defaultCategory valueForKey:@"Name"]]) {
+//        NSLog(@"Working on default category %@", [defaultCategory valueForKey:@"Name"]);
+        // check each clip
+        for (NSMutableDictionary *defaultClip in [defaultCategory valueForKey:@"Contents"]) {
+
+          //          NSLog(@"  Checking for default clip %@", [defaultClip valueForKey:@"UUID"]);
+          NSInteger clipIndex = 0;
+          
+          for (NSMutableDictionary *userClip in [userCategory valueForKey:@"Contents"]) {
+//            NSLog(@"    Checking user clip %@", [userClip valueForKey:@"UUID"]);
+            NSString *defaultUUID = [defaultClip valueForKey:@"UUID"];
+            NSString *userUUID = [userClip valueForKey:@"UUID"];
+            
+            if ([defaultUUID isEqualToString:userUUID]) {
+              
+              for (NSString *key in clipKeys) {
+                [userClip setValue:[defaultClip valueForKey:key] forKey:key];
+              }
+              
+            } // end if user clip is built-in
+            clipIndex++;
+          } // end loop over user clips
+          
+          
+          
+        } // end loop over default clips
+      } // end if category names the same
+    } // end loop over user categories
+  } // end loop over default categories
+  
+  NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
+  NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
+  
+  [library setValue:defaultLibraryVersion forKey:@"Version"];
+  
+  [self saveLibrary];
+  [categoryTable reloadData];
+  [itemsTable reloadData];
+}
+
+- (NSDictionary*)copyOfClip:(NSDictionary*)clip
+{
+  NSMutableDictionary *newClip = [[NSMutableDictionary alloc] initWithDictionary:clip];
+  [newClip setValue:[[clip valueForKey:@"Code"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] 
+             forKey:@"Code"];
+  
+  [newClip setValue:[clip valueForKey:@"Command"] forKey:@"Command"];
+  [newClip setValue:[clip valueForKey:@"BuiltIn"] forKey:@"BuiltIn"];
+  if ([clip valueForKey:@"UUID"]) {
+    [newClip setValue:[clip valueForKey:@"UUID"] forKey:@"UUID"];
+  } else {
+    [newClip setValue:[NSString stringWithUUID]  forKey:@"UUID"];  
+  }
+  
+  NSData *data = [clip valueForKey:@"Image"];
+  NSImage *image = nil;
+  if (data) {
+    if ([data length] > 0) {
+      image = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+  }
+  
+  if (image == nil || ![image isValid]) {
+    [newClip setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];						
+    // launch a thread to compute the image
+    LibraryImageGenerator *ig = [[[LibraryImageGenerator alloc] initWithSymbol:newClip
+                                                                      mathMode:NO
+                                                                 andController:self] autorelease];
+    
+    [NSThread detachNewThreadSelector:@selector(generateImage) toTarget:ig withObject:nil];
+  }
+  
+  [newClip setValue:[NSNumber numberWithBool:YES] forKey:@"validImage"];
+  
+  return [newClip autorelease];
+}
 
 - (void) addDefaultCategories
 {
@@ -436,38 +544,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 		NSMutableDictionary *newCategory = [[NSMutableDictionary alloc] init];
 		[newCategory setValue:[category valueForKey:@"Name"] forKey:@"Name"];		
 		NSMutableArray *clips = [NSMutableArray array];		
-		for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {
-			
-			NSMutableDictionary *newClip = [[NSMutableDictionary alloc] initWithDictionary:clip];
-			[newClip setValue:[[clip valueForKey:@"Code"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] 
-								 forKey:@"Code"];
-      
-      [newClip setValue:[clip valueForKey:@"Command"] forKey:@"Command"];
-      [newClip setValue:[clip valueForKey:@"BuiltIn"] forKey:@"BuiltIn"];
-			
-			NSData *data = [clip valueForKey:@"Image"];
-			NSImage *image = nil;
-			if (data) {
-				if ([data length] > 0) {
-					image = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-				}
-			}
-			
-			if (image == nil || ![image isValid]) {
-				[newClip setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];						
-				// launch a thread to compute the image
-				LibraryImageGenerator *ig = [[[LibraryImageGenerator alloc] initWithSymbol:newClip
-																																					mathMode:NO
-																																		 andController:self] autorelease];
-				
-				[NSThread detachNewThreadSelector:@selector(generateImage) toTarget:ig withObject:nil];
-			}
-			
-			[newClip setValue:[NSNumber numberWithBool:YES] forKey:@"validImage"];
-			
+		for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {			
 			// add the new clip to the contents
-			[clips addObject:newClip];			
-			[newClip release];
+			[clips addObject:[self copyOfClip:clip]];			
 		}		
 		[newCategory setValue:clips forKey:@"Contents"];		
 		// Category is ready, add it to the array
@@ -475,6 +554,9 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 		[newCategory release];
 	}
 	
+  NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
+  
+  [library setValue:defaultLibraryVersion forKey:@"Version"];
 	[self saveLibrary];
 	
 }
@@ -539,6 +621,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	NSMutableDictionary *newCategory = [NSMutableDictionary dictionary];
 	[newCategory setObject:[NSString stringWithFormat:@"New Category %d", N] forKey:@"Name"];
 	[newCategory setObject:[NSMutableArray array] forKey:@"Contents"];
+  [newCategory setValue:[NSNumber numberWithBool:NO] forKey:@"BuiltIn"];
 	[categoryController addObject:newCategory];
 	[self saveLibrary];
 }
@@ -669,6 +752,8 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 {
 	NSMutableDictionary *newClipping = [NSMutableDictionary dictionary];
 	[newClipping setObject:someCode forKey:@"Code"];
+  [newClipping setValue:[NSNumber numberWithBool:NO] forKey:@"BuiltIn"];  
+  [newClipping setValue:[NSString stringWithUUID] forKey:@"UUID"];
 	[contentsController addObject:newClipping];
 	[self saveLibrary];
 }
@@ -704,6 +789,8 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   }
   self.knownCommands = codes;
 }
+
+
 
 -(NSString*)codeForCommand:(NSString*)command
 {

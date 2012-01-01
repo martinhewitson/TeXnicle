@@ -79,6 +79,8 @@ extern NSString * const kItemsTableViewNodeType;
 @property (retain) NSArray *knownCommands;
 @property (retain) NSDictionary *defaultLibrary;
 
++ (NSString*) placeholderRegexp;
+
 - (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate;
 
 - (void) setupLibrary;
@@ -117,9 +119,12 @@ extern NSString * const kItemsTableViewNodeType;
 - (IBAction) addClipping:(id)sender;
 - (void) saveLibrary;
 
+- (NSDictionary*)copyOfClip:(NSDictionary*)clip;
 - (void) newClippingWithCode:(NSString*)someCode;
 - (void) imageGeneratorTaskEnded:(NSString*)aPath;
 - (void) regenerateKnownCommandCodes;
+- (void) restoreDefaultCategoriesAndCodes;
+
 - (NSArray*) commandsBeginningWith:(NSString*)prefix;
 -(NSString*)codeForCommand:(NSString*)command;
 
