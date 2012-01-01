@@ -20,6 +20,7 @@
 	IBOutlet NSView *templatesView;
 	IBOutlet NSView *engineView;
 	IBOutlet NSView *userCommandsView;
+	IBOutlet NSView *libraryPrefsView;
 
   
   IBOutlet NSTableView *userCommandsTable;
@@ -98,5 +99,7 @@
 - (IBAction)setDefaultLineHighlightingColor:(id)sender;
 - (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender;
 
+- (IBAction) browseForGSExecutable:(id)sender;
+- (IBAction) browseForPDFLatexExecutable:(id)sender;
 
 @end

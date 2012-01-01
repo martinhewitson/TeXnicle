@@ -120,6 +120,10 @@
   [self addView:userCommandsView
 					label:@"Commands" image:[NSImage imageNamed:@"commandsPrefs"]];	
   
+  [self addView:libraryPrefsView
+          label:@"Palette & Library"
+          image:[NSImage imageNamed:@"libraryPrefs"]];
+  
 	[templateEditor setFont:f];
 	
 	[templatesController setSelectsInsertedObjects:YES];
@@ -258,6 +262,56 @@
 		[wrapCharsLabel setTextColor:[NSColor controlTextColor]];
 	}
 }
+
+- (IBAction) browseForGSExecutable:(id)sender
+{
+	// get user to choose file
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanCreateDirectories:NO];
+	[openPanel setMessage:@"Locate Ghostscript (gs) binary"];
+	
+  [openPanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+    if (result == NSCancelButton) 
+      return;
+    
+    NSString *path = [[openPanel URL] path];
+    
+    // set the path to the item
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:TPGSPath];
+    
+  }];
+  
+	
+}
+
+
+- (IBAction) browseForPDFLatexExecutable:(id)sender
+{
+	// get user to choose file
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel]; 
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanCreateDirectories:NO];
+	[openPanel setMessage:@"Locate pdflatex binary"];
+	
+  [openPanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+    if (result == NSCancelButton) 
+      return;
+    
+    NSString *path = [[openPanel URL] path];
+    
+    // set the path to the item
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:TPPDFLatexPath];
+    
+    
+  }];
+  
+}
+
 
 - (IBAction)selectDocFont:(id)sender
 {
