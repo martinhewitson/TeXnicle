@@ -174,6 +174,10 @@ extern NSString * const TELineNumberClickedNotification;
 - (NSPoint) listPointForCurrentWord;
 - (NSRange) rangeForCurrentCommand;
 - (NSString*) currentCommand;
+- (void) expandCurrentCommand;
+- (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange;
+- (IBAction)jumpToPreviousPlaceholder:(id)sender;
+- (IBAction)jumpToNextPlaceholder:(id)sender;
 
 - (void) checkForMatchingBracketAfterMovingLeft;
 - (void) checkForMatchingBracketAfterMovingRight;

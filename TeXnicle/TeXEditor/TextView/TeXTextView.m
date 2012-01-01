@@ -8,7 +8,7 @@
 
 #import "TeXTextView.h"
 #import "RegexKitLite.h"
-
+#import "LibraryController.h"
 #import "NSArray+Color.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "NSAttributedString+CodeFolding.h"
@@ -30,6 +30,8 @@
 
 #import "MHLineNumber.h"
 #import "NSString+FileTypes.h"
+
+#import "MHPlaceholderAttachment.h"
 
 #import "externs.h"
 
@@ -932,7 +934,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 																		atIndex:idx
 														 effectiveRange:&effRange];
 		
-		if (att) {			
+		if (att && [att respondsToSelector:@selector(object)]) {			
 			NSData *data = [[att fileWrapper] regularFileContents];
 			NSString *code = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 			// delete the line up to and including the attachment
@@ -1466,7 +1468,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     if (r.length > 0 && NSMaxRange(r)<[string length]) {
       NSString *word = [[[self string] substringWithRange:r] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       word = [word stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-      if (word && [word length]>0) {
+      if (word && [word length]>1) {
         NSString *textToSearch = [[self string] substringWithRange:vr];
         NSArray *matches = [textToSearch rangesOfString:word];
         
@@ -1533,24 +1535,21 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		return;
 	}
                              
-	if (selRange.location < [string length]) {
+	if (selRange.location >= 0 && selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
 																			atIndex:selRange.location
 															 effectiveRange:&effRange];
 		if (att) {
-			NSRange lineRange = [[self string] lineRangeForRange:selRange];
-			[self unfoldAllInRange:lineRange max:10000];
-			return;
-		}
-		if (selRange.location>0) {
-			NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
-																				atIndex:selRange.location-1
-																 effectiveRange:&effRange];
-			if (att) {
-				NSRange lineRange = [[self string] lineRangeForRange:selRange];
-				[self unfoldAllInRange:lineRange max:10000];
-				return;
-			}
+      if ([att isKindOfClass:[TPFoldedCodeSnippet class]]) {
+        NSRange lineRange = [[self string] lineRangeForRange:selRange];
+        [self unfoldAllInRange:lineRange max:10000];
+        return;
+      }
+      
+      if ([att isKindOfClass:[MHPlaceholderAttachment class]]) {
+        [super replaceCharactersInRange:selRange withString:aString];
+        return;
+      }
 		}
 	}
   
@@ -1743,25 +1742,121 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 				return;
 			} // end if insert
 		} // if we are at the end of the \begin statement			
+    [super insertNewline:sender];    
 	} // end if \begin
-	else 
+	else if ([self currentCommand])
   {
-  	NSString *currentCommand = [self currentCommand];
-    if (currentCommand) {
-      NSString *code = [self codeForCommand:currentCommand];
-      if (code) {
-        NSRange commandRange = [self rangeForCurrentCommand];
-        [self replaceCharactersInRange:commandRange withString:code];
-        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
-      }
-    }
+    [self expandCurrentCommand];
+  } else {
+    [super insertNewline:sender];    
   }
   
-	[super insertNewline:sender];
-	
 	// update line numbers
 	[self updateEditorRuler];
 	
+}
+
+- (void) expandCurrentCommand
+{
+  NSString *currentCommand = [self currentCommand];
+  if (currentCommand) {
+    NSString *code = [self codeForCommand:currentCommand];
+    if (code) {
+      NSRange commandRange = [self rangeForCurrentCommand];
+      [[self undoManager] beginUndoGrouping];
+      [self shouldChangeTextInRange:commandRange replacementString:code];
+      [self replaceCharactersInRange:commandRange withString:code];
+      [self replacePlaceholdersInString:code range:commandRange];      
+      [self didChangeText];
+      [[self undoManager] endUndoGrouping];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+    }
+  }
+}
+
+- (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange
+{
+  // Replace placeholders
+  NSString *regexp = [LibraryController placeholderRegexp];
+  NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+  NSRange firstPlaceholder = NSMakeRange(NSNotFound, 0);
+  for (NSString *placeholder in placeholders) {
+    placeholder = [placeholder stringByTrimmingCharactersInSet:whitespaceCharacterSet];
+    NSRange r = [code rangeOfString:placeholder];
+    if (firstPlaceholder.location == NSNotFound) {
+      firstPlaceholder = NSMakeRange(commandRange.location+r.location, 1);
+    }
+    // make attachment
+    MHPlaceholderAttachment *placeholderAttachment = [[[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]] autorelease];
+    
+    NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
+    NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
+    [self shouldChangeTextInRange:placeholderRange replacementString:@" "];
+    [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
+    [self didChangeText];
+    // replace placeholder with blank just to make the counting right
+    code = [code stringByReplacingCharactersInRange:r withString:@" "];
+  }      
+  
+  // select the first placeholder
+  if (firstPlaceholder.location != NSNotFound) {
+    [self setSelectedRange:firstPlaceholder];
+  }
+  
+}
+
+- (IBAction)jumpToPreviousPlaceholder:(id)sender
+{
+  NSRange selRange = [self selectedRange];
+  NSRange vr = [self getVisibleRange];
+  NSInteger idx = selRange.location;
+  if (idx>0)
+    idx--;
+  
+  while (idx > vr.location) {
+    
+    NSRange effRange;
+    NSTextAttachment *att = [[self attributedString] attribute:NSAttachmentAttributeName
+                                                       atIndex:idx
+                                                effectiveRange:&effRange];
+    
+    if (att && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
+      [self setSelectedRange:NSMakeRange(idx, 1)];
+      return;
+    }
+    idx--;
+    
+    if (idx == vr.location) {
+      idx = NSMaxRange(vr);
+    }
+  }
+  
+}
+
+- (IBAction)jumpToNextPlaceholder:(id)sender
+{
+  NSRange selRange = [self selectedRange];
+  NSRange vr = [self getVisibleRange];
+  NSInteger idx = NSMaxRange(selRange);
+  
+  while (idx < NSMaxRange(vr)) {
+    
+    NSRange effRange;
+    NSTextAttachment *att = [[self attributedString] attribute:NSAttachmentAttributeName
+                                                       atIndex:idx
+                                                effectiveRange:&effRange];
+    
+    if (att && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
+      [self setSelectedRange:NSMakeRange(idx, 1)];
+      return;
+    }
+    idx++;
+    
+    if (idx == NSMaxRange(vr)) {
+      idx = vr.location;
+    }
+  }
+  
 }
 
 - (void) insertTab:(id)sender
@@ -2200,6 +2295,23 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void)concludeDragOperation:(id < NSDraggingInfo >)sender
 {
+//  NSLog(@"Drag concluded %@", sender);
+  
+  // perform some post drag corrections
+  NSRange selRange = [self selectedRange];
+  NSString *str = [[self string] substringWithRange:selRange];
+  
+  // replace placeholders
+  [self replacePlaceholdersInString:str range:selRange];
+  
+  // make sure the right font is used
+  NSDictionary *atts = [NSDictionary currentTypingAttributes];
+  [[self textStorage] addAttributes:atts range:selRange];  
+  
+  // grab keyboard
+  [[self window] makeFirstResponder:self];
+  
+  // color
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
