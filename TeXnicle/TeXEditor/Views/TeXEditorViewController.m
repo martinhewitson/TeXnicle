@@ -9,6 +9,8 @@
 #import "TeXEditorViewController.h"
 #import "TeXTextView.h"
 #import "TPSectionListController.h"
+#import "TPFoldedCodeSnippet.h"
+#import "MHPlaceholderAttachment.h"
 
 @implementation TeXEditorViewController
 
@@ -129,10 +131,25 @@
 - (void)textView:(NSTextView *)aTextView clickedOnCell:(id < NSTextAttachmentCell >)cell inRect:(NSRect)cellFrame atIndex:(NSUInteger)charIndex
 {
 	NSTextAttachment *att = [[aTextView textStorage] attribute:NSAttachmentAttributeName atIndex:charIndex effectiveRange:NULL];
-	
-  if ([aTextView respondsToSelector:@selector(unfoldAttachment:atIndex:)]) {
-    [aTextView performSelector:@selector(unfoldAttachment:atIndex:) withObject:att withObject:[NSNumber numberWithUnsignedLong:charIndex]];
+  if (att != nil) {
+    
+    // code folded cells
+    if ([att respondsToSelector:@selector(object)] && [att isKindOfClass:[TPFoldedCodeSnippet class]]) {
+      if ([aTextView respondsToSelector:@selector(unfoldAttachment:atIndex:)]) {
+        [aTextView performSelector:@selector(unfoldAttachment:atIndex:) withObject:att withObject:[NSNumber numberWithUnsignedLong:charIndex]];
+      }
+    }
+    
+    // placeholder cell
+    if ([att isKindOfClass:[MHPlaceholderAttachment class]]) {
+      
+      //    [[aTextView layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] forCharacterRange:NSMakeRange(charIndex, 1)];
+      [aTextView setSelectedRange:NSMakeRange(charIndex, 1)];
+    }
+    
   }
+  
+  
 }
 
 
