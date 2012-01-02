@@ -82,6 +82,7 @@
   
 	[self updateEditedState];
   
+  [self.texEditorViewController enableEditor];
   
   [self.statusViewController setFilenameText:[file pathOnDisk]];
   [self.statusViewController enable:YES];
@@ -160,6 +161,18 @@
 {
 	return [mainDocument listOfTeXFilesPrependedWith:string];
 }
+
+-(NSString*)codeForCommand:(NSString*)command
+{
+  NSString *code = [mainDocument.library codeForCommand:command];
+  return code;
+}
+
+- (NSArray*)commandsBeginningWithPrefix:(NSString *)prefix
+{
+  return [mainDocument.library commandsBeginningWith:prefix];
+}
+
 
 - (NSArray*) listOfCitations
 {
