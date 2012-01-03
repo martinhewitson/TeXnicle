@@ -17,6 +17,8 @@
 @dynamic items;
 @dynamic type;
 @dynamic settings;
+@dynamic selected;
+@dynamic mainFile;
 
 - (void) awakeFromInsert
 {

@@ -20,7 +20,8 @@
 @property (assign) NSSet *items;
 @property (copy) NSString *type;
 @property (assign) Settings *settings;
-
+@property (assign) FileEntity *selected;
+@property (assign) FileEntity *mainFile;
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
