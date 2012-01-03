@@ -64,19 +64,38 @@
   if ([self isEqualToString:@"engine"]) {
     return YES;
   }
+  
+  if ([self isEqualToString:@"tex"]) {
+    return YES;
+  }
 
+  if ([self isEqualToString:@"cls"]) {
+    return YES;
+  }
+  
+  if ([self isEqualToString:@"bib"]) {
+    return YES;
+  }
+  
+//  NSLog(@"Checking ext %@", self);
+  
   BOOL fileIsText = NO;
     
   CFStringRef fileExtension = (CFStringRef) self;
   CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-  
   if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
     fileIsText = YES;
   }  
 
   CFRelease(fileUTI);
   
-  return fileIsText;  
+  return fileIsText;
+  
+//  BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:self isValidForType:(NSString *)kUTTypeText];  
+//  
+//  NSLog(@"Result %d", result);
+//  
+//  return result;
 }
 
 @end
