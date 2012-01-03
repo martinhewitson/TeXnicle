@@ -60,6 +60,8 @@ extern NSString * const TELineNumberClickedNotification;
   NSRange _lastLineRange;
   NSInteger _lastLineNumber;
   NSRange _lastVisibleRange;
+  
+  NSMutableArray *wordHighlightRanges;
 }
 
 @property (retain) NSTimer *highlightingTimer;
@@ -71,6 +73,7 @@ extern NSString * const TELineNumberClickedNotification;
 @property (assign) BOOL shiftKeyOn;
 @property (retain) NSMutableArray *commandList;
 @property (retain) NSMutableArray *beginList;
+@property (retain) NSMutableArray *wordHighlightRanges;
 
 - (void) setupLists;
 - (void) setUpRuler;

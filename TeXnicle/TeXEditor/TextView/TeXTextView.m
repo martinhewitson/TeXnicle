@@ -51,7 +51,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 @synthesize shiftKeyOn;
 @synthesize commandList;
 @synthesize beginList;
-
+@synthesize wordHighlightRanges;
 
 - (void) dealloc
 {
@@ -440,64 +440,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark Actions
 
-- (void)didChangeText
-{
-//  NSLog(@"Did change text");
-  
-  // NOTE: I removed this on 11-11-11 since I think this just duplicates the calls. We do this in handleSelectionDidChange.
-//  [self updateEditorRuler];  
-//  [self colorVisibleText];
-//  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1.0];
-}
-
-- (void)viewWillDraw
-{
-  [self.editorRuler setNeedsDisplay:YES];
-	[super viewWillDraw];
-}
-
-- (void) drawViewBackgroundInRect:(NSRect)rect
-{
-	[super drawViewBackgroundInRect:rect];
-	
-  // additional highlight range
-	if (self.highlightRange) {    
-    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];		
-		[[[self backgroundColor] shadowWithLevel:0.2] set];
-		[NSBezierPath fillRect:aRect];
-	} else {
-    [[self backgroundColor] set];
-    [NSBezierPath fillRect:[self bounds]];
-  }
-  
-  
-  // highlight current line
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  if ([[defaults valueForKey:TEHighlightCurrentLine] boolValue]) {
-    NSRange sel = [self selectedRange];
-    NSString *str = [self string];
-    if (sel.location <= [str length]) {
-      NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
-      NSRect lineRect = [self highlightRectForRange:lineRange];
-      NSColor *highlightColor = [[defaults valueForKey:TEHighlightCurrentLineColor] colorValue];
-      [highlightColor set];
-      [NSBezierPath fillRect:lineRect];
-    }
-  }
-  
-  
-  // line width
-  int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-  if (wrapStyle == TPHardWrap || wrapStyle == TPSoftWrap) {
-    int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
-    CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
-    NSRect vr = [self visibleRect];
-    NSRect r = NSMakeRect(scale*wrapAt+1, vr.origin.y, vr.size.width, vr.size.height);
-    [[[self backgroundColor] shadowWithLevel:0.05] set];
-    [NSBezierPath fillRect:r];
-  }
-  
-}
 
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
@@ -512,25 +454,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self setNeedsDisplay:YES];
 }
 
-- (void)keyDown:(NSEvent *)theEvent
-{
-	if ([theEvent keyCode] == 36) {		
-		if ([theEvent modifierFlags] & NSShiftKeyMask) {
-      self.shiftKeyOn = YES;
-		} else {
-      self.shiftKeyOn = NO;
-		}		
-	}
-  
-	[super keyDown:theEvent];
-}
 
-- (void) mouseDown:(NSEvent *)theEvent
-{
-  [self clearHighlight];
-	[self clearSpellingList];
-	[super mouseDown:theEvent];
-}
 
 
 #pragma mark -
@@ -714,89 +638,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark Completion and spelling
 
-- (IBAction)complete:(id)sender
-{
-	NSString *string = [self string];
-	NSRange curr = [self selectedRange];
-	[self selectUpToCurrentLocation];
-	NSRange selectedRange = [self selectedRange];
-  //	NSRange wr = 	[self rangeForCurrentWord];
-	[self setSelectedRange:curr];
-	
-  
-	NSString *word = [string substringWithRange:selectedRange];
-	
-	
-//  NSLog(@"Completing... %@", word);
-	
-	// If we are completing one of the special cases (ref, cite, include, input, ...)
-	// then we use a custom popup list to present the options
-	
-	id delegate = [self delegate];
-  //	NSLog(@"Delegate: %@", delegate);
-	if ([word isEqual:@"\\include{"] || [word isEqual:@"\\input{"]) {
-		if ([delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
-			[self insertFromList:list];			
-		}
-	} else if ([word beginsWith:@"\\ref{"]) {
-		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
-      //			NSLog(@"List: %@", list);
-			[self insertFromList:list];			
-		}
-	} else if ([word beginsWith:@"\\cite{"]) {
-    //		NSLog(@"Checking for selector listOfCitations...");
-		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfCitations)];
-			[self insertFromList:list];			
-		}
-	} else if ([word isEqual:@"\\begin{"]) {
-		NSArray *list = self.beginList;
-		[self insertFromList:list];			
-	} else if ([word hasPrefix:@"\\"]) {
-    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
-    
-    // get list of user defaults commands
-    list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
-    
-    if ([delegate respondsToSelector:@selector(listOfCommands)]) {
-      list = [list arrayByAddingObjectsFromArray:[delegate listOfCommands]];
-    }
-    if ([word length]>1) {
-      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
-      list = [list filteredArrayUsingPredicate:predicate];			
-    }
-    if ([list count]>0) {
-      [self completeFromList:list];			
-    } else {
-      NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
-                                                                                 inString:word
-                                                                                 language:nil
-                                                                   inSpellDocumentWithTag:0];
-      [self completeFromList:list];
-      // otherwise we just call super
-      //			[super complete:sender];
-    }
-	} else if ([word hasPrefix:@"#"]) {
-    
-    NSArray *possibleCommands = [self commandsBeginningWithPrefix:[self currentCommand]];
-    [self completeFromList:possibleCommands];
-    
-	} else {
-		// otherwise we just call super
-//    NSLog(@"Spell checking");
-		NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
-																																							 inString:word
-																																							 language:nil
-																																 inSpellDocumentWithTag:0];
-		[self completeFromList:list];
-    //		[super complete:sender];
-		
-    
-		
-	}
-}
+
 
 - (NSArray*)userDefaultCommands
 {
@@ -1013,17 +855,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
-- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange
-{
-  // don't spell check commands
-  if (charRange.location > 0) {
-    if ([[self string] characterAtIndex:charRange.location-1] == '\\') {
-      return;
-    }
-  }
-  
-  [super setSpellingState:value range:charRange];
-}
+
 
 - (void) unfoldAttachment:(NSTextAttachment*)snippet atIndex:(NSNumber*)index
 {	
@@ -1455,7 +1287,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 }
 
 - (void) highlightMatchingWords
-{
+{  
+  if (self.wordHighlightRanges == nil) {
+    self.wordHighlightRanges = [NSMutableArray array];
+  }
+  
   NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
   //  NSLog(@"Visible range %@", NSStringFromRange(vr));
@@ -1463,7 +1299,15 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
-    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+//    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+    
+    // remove existing word highlights
+    for (NSString *rangeString in self.wordHighlightRanges) {
+      NSRange r = NSRangeFromString(rangeString);
+      [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:r];
+    }
+    [self.wordHighlightRanges removeAllObjects];
+    
     NSString *string = [self string];
     if (r.length > 0 && NSMaxRange(r)<[string length]) {
       NSString *word = [[[self string] substringWithRange:r] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -1477,6 +1321,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
           NSRange r = [match rangeValue];
           r.location += vr.location;
           [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
+          [self.wordHighlightRanges addObject:NSStringFromRange(r)];
+//          NSLog(@"+ Added range %@", NSStringFromRange(r));
         }
       }      
     }
@@ -1489,42 +1335,297 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 }
 
 #pragma mark -
-#pragma mark Text processing
+#pragma mark NSTextView overrides
 
-- (NSString*) stringForTab
+- (void) paste:(id)sender
 {
-	NSMutableString *str = [NSMutableString string];
+  // check pboard type
+  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+  
+  // check for an image type
+  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
+  if (type) {
+    [self pasteAsImage];
+  } else {
+    [self pasteAsPlainText:sender];
+  }
+  
+  [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+}
+
+- (void) insertTab:(id)sender
+{
+  //	[super insertTab:[self stringForTab]];
 	BOOL spaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TEInsertSpacesForTabs] boolValue];
 	if (spaces) {
 		int NSpaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TENumSpacesForTab] intValue];
+		NSMutableString *str = [NSMutableString string];
 		for (int i=0;i<NSpaces;i++) {
 			[str appendString:@" "];
 		}
+		[self insertText:str];		
 	} else {
-		[str appendString:@"\t"];
+		[super insertTab:sender];
 	}
-	return str;
+	
 }
 
-- (NSString*)fileExtension
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(fileExtension)]) {
-    return [self.delegate performSelector:@selector(fileExtension)];
+- (void) insertNewline:(id)sender
+{	
+	// read the last line
+	NSRange selRange = [self selectedRange];
+	
+	if (selRange.location == 0) {
+		// now put in the requested newline
+		[super insertNewline:sender];
+    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+		return;
+	}
+	
+	// using lineRangeForRange includes the line terminators so we do this by hand
+	NSString *str = [self string];
+	NSUInteger lineStart;
+	NSUInteger lineEnd;
+	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];		
+	NSRange lineRange = NSMakeRange(lineStart, lineEnd-lineStart); 
+	NSString *previousLine = [[str substringWithRange:lineRange] 
+														stringByTrimmingCharactersInSet:whitespaceCharacterSet];
+	previousLine = [previousLine stringByTrimmingCharactersInSet:newLineCharacterSet];
+	
+	// Now let's do some special actions....
+	//---- If the previous line was a \begin, we append the \end
+	if ([previousLine hasPrefix:@"\\begin{"]) {			
+		
+		// don't complete if the shift key is on, just add the tab
+		if (self.shiftKeyOn) {
+			[super insertNewline:sender];
+			[self insertTab:sender];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+			return;
+		}		
+		
+		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special			
+		if (selRange.location == lineRange.location+lineRange.length) {
+			int start = 0;
+			int end   = 0;
+			for (int kk=0; kk<[previousLine length]; kk++) {
+				if ([previousLine characterAtIndex:kk]=='{') {
+					start = kk+1;
+					kk++;
+				}
+				if ([previousLine characterAtIndex:kk]=='}') {
+					end = kk-1;
+					break;
+				}
+			}
+			
+			NSString *insert = nil;
+			if (start < end) {
+				NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
+				insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
+			}
+			
+			if (insert) {
+				// now put in the requested newline
+				[super insertNewline:sender];
+				
+				// add the new \end
+				[self insertTab:self];
+				
+				// record this location
+				selRange = [self selectedRange];
+				
+				// add the new \end
+				[self insertText:insert];
+				
+				// wind back the location of the cursor					
+				[self setSelectedRange:selRange];
+				
+        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+				return;
+			} // end if insert
+		} // if we are at the end of the \begin statement			
+    [super insertNewline:sender];    
+	} // end if \begin
+	else if ([self currentCommand])
+  {
+    [self expandCurrentCommand];
+  } else {
+    [super insertNewline:sender];    
   }
-  return @"";
+  
+	// update line numbers
+	[self updateEditorRuler];
+	
 }
 
-- (NSString*)commentChar
+- (void)setSpellingState:(NSInteger)value range:(NSRange)charRange
 {
-  if ([[self fileExtension] isEqualToString:@"tex"]) {
-    return @"%";
-  } 
-  return @"#";
+  // don't spell check commands
+  if (charRange.location > 0) {
+    if ([[self string] characterAtIndex:charRange.location-1] == '\\') {
+      return;
+    }
+  }
+  
+  [super setSpellingState:value range:charRange];
 }
+
+- (IBAction)complete:(id)sender
+{
+	NSString *string = [self string];
+	NSRange curr = [self selectedRange];
+	[self selectUpToCurrentLocation];
+	NSRange selectedRange = [self selectedRange];
+  //	NSRange wr = 	[self rangeForCurrentWord];
+	[self setSelectedRange:curr];
+	
+  
+	NSString *word = [string substringWithRange:selectedRange];
+	
+	
+  //  NSLog(@"Completing... %@", word);
+	
+	// If we are completing one of the special cases (ref, cite, include, input, ...)
+	// then we use a custom popup list to present the options
+	
+	id delegate = [self delegate];
+  //	NSLog(@"Delegate: %@", delegate);
+	if ([word isEqual:@"\\include{"] || [word isEqual:@"\\input{"]) {
+		if ([delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
+			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
+			[self insertFromList:list];			
+		}
+	} else if ([word beginsWith:@"\\ref{"]) {
+		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
+			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
+      //			NSLog(@"List: %@", list);
+			[self insertFromList:list];			
+		}
+	} else if ([word beginsWith:@"\\cite{"]) {
+    //		NSLog(@"Checking for selector listOfCitations...");
+		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
+			NSArray *list = [delegate performSelector:@selector(listOfCitations)];
+			[self insertFromList:list];			
+		}
+	} else if ([word isEqual:@"\\begin{"]) {
+		NSArray *list = self.beginList;
+		[self insertFromList:list];			
+	} else if ([word hasPrefix:@"\\"]) {
+    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
+    
+    // get list of user defaults commands
+    list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
+    
+    if ([delegate respondsToSelector:@selector(listOfCommands)]) {
+      list = [list arrayByAddingObjectsFromArray:[delegate listOfCommands]];
+    }
+    if ([word length]>1) {
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
+      list = [list filteredArrayUsingPredicate:predicate];			
+    }
+    if ([list count]>0) {
+      [self completeFromList:list];			
+    } else {
+      NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
+                                                                                 inString:word
+                                                                                 language:nil
+                                                                   inSpellDocumentWithTag:0];
+      [self completeFromList:list];
+      // otherwise we just call super
+      //			[super complete:sender];
+    }
+	} else if ([word hasPrefix:@"#"]) {
+    
+    NSArray *possibleCommands = [self commandsBeginningWithPrefix:[self currentCommand]];
+    [self completeFromList:possibleCommands];
+    
+	} else {
+		// otherwise we just call super
+		NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
+																																							 inString:word
+																																							 language:nil
+																																 inSpellDocumentWithTag:0];
+		[self completeFromList:list];
+    //		[super complete:sender];
+		
+    
+		
+	}
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+	if ([theEvent keyCode] == 36) {		
+		if ([theEvent modifierFlags] & NSShiftKeyMask) {
+      self.shiftKeyOn = YES;
+		} else {
+      self.shiftKeyOn = NO;
+		}		
+	}
+  
+	[super keyDown:theEvent];
+}
+
+- (void) mouseDown:(NSEvent *)theEvent
+{
+  [self clearHighlight];
+	[self clearSpellingList];
+	[super mouseDown:theEvent];
+}
+
+- (void)viewWillDraw
+{
+  [self.editorRuler setNeedsDisplay:YES];
+	[super viewWillDraw];
+}
+
+- (void) drawViewBackgroundInRect:(NSRect)rect
+{
+	[super drawViewBackgroundInRect:rect];
+  
+  // additional highlight range
+	if (self.highlightRange) {    
+    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];		
+		[[[self backgroundColor] shadowWithLevel:0.2] set];
+		[NSBezierPath fillRect:aRect];
+	} else {
+    [[self backgroundColor] set];
+    [NSBezierPath fillRect:[self bounds]];
+  }
+  
+  
+  // highlight current line
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([[defaults valueForKey:TEHighlightCurrentLine] boolValue]) {
+    NSRange sel = [self selectedRange];
+    NSString *str = [self string];
+    if (sel.location <= [str length]) {
+      NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
+      NSRect lineRect = [self highlightRectForRange:lineRange];
+      NSColor *highlightColor = [[defaults valueForKey:TEHighlightCurrentLineColor] colorValue];
+      [highlightColor set];
+      [NSBezierPath fillRect:lineRect];
+    }
+  }
+  
+  
+  // line width
+  int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
+  if (wrapStyle == TPHardWrap || wrapStyle == TPSoftWrap) {
+    int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+    CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
+    NSRect vr = [self visibleRect];
+    NSRect r = NSMakeRect(scale*wrapAt+1, vr.origin.y, vr.size.width, vr.size.height);
+    [[[self backgroundColor] shadowWithLevel:0.05] set];
+    [NSBezierPath fillRect:r];
+  }
+  
+}
+
 
 - (void)insertText:(id)aString
 {	
-//  NSLog(@"Insert %@", aString);
   
   // check if the next character or preceeding character was a text attachment
 	NSRange selRange = [self selectedRange];
@@ -1534,7 +1635,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		[super insertText:aString];
 		return;
 	}
-                             
+  
 	if (selRange.location >= 0 && selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
 																			atIndex:selRange.location
@@ -1554,8 +1655,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	}
   
   // setup typing attributes
-//  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;  
-//  NSRange wordRange = NSMakeRange(start, selRange.location-start);
+  //  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;  
+  //  NSRange wordRange = NSMakeRange(start, selRange.location-start);
   //  NSString *word = [[self string] substringWithRange:wordRange];
   NSRange pRange = [self rangeForCurrentParagraph];  
   NSRange lineRange = [[self string] lineRangeForRange:selRange];  
@@ -1654,9 +1755,45 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     }
     
   }
-		
+  
 	[self wrapLine];
 }
+
+#pragma mark -
+#pragma mark Text processing
+
+- (NSString*) stringForTab
+{
+	NSMutableString *str = [NSMutableString string];
+	BOOL spaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TEInsertSpacesForTabs] boolValue];
+	if (spaces) {
+		int NSpaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TENumSpacesForTab] intValue];
+		for (int i=0;i<NSpaces;i++) {
+			[str appendString:@" "];
+		}
+	} else {
+		[str appendString:@"\t"];
+	}
+	return str;
+}
+
+- (NSString*)fileExtension
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(fileExtension)]) {
+    return [self.delegate performSelector:@selector(fileExtension)];
+  }
+  return @"";
+}
+
+- (NSString*)commentChar
+{
+  if ([[self fileExtension] isEqualToString:@"tex"]) {
+    return @"%";
+  } 
+  return @"#";
+}
+
+
 
 - (void) didSelectPopupListItem
 {
@@ -1667,94 +1804,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 }
 
 
-- (void) insertNewline:(id)sender
-{	
-	// read the last line
-	NSRange selRange = [self selectedRange];
-	
-	if (selRange.location == 0) {
-		// now put in the requested newline
-		[super insertNewline:sender];
-    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
-		return;
-	}
-	
-	// using lineRangeForRange includes the line terminators so we do this by hand
-	NSString *str = [self string];
-	NSUInteger lineStart;
-	NSUInteger lineEnd;
-	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];		
-	NSRange lineRange = NSMakeRange(lineStart, lineEnd-lineStart); 
-	NSString *previousLine = [[str substringWithRange:lineRange] 
-														stringByTrimmingCharactersInSet:whitespaceCharacterSet];
-	previousLine = [previousLine stringByTrimmingCharactersInSet:newLineCharacterSet];
-	
-	// Now let's do some special actions....
-	//---- If the previous line was a \begin, we append the \end
-	if ([previousLine hasPrefix:@"\\begin{"]) {			
-		
-		// don't complete if the shift key is on, just add the tab
-		if (self.shiftKeyOn) {
-			[super insertNewline:sender];
-			[self insertTab:sender];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
-			return;
-		}		
-		
-		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special			
-		if (selRange.location == lineRange.location+lineRange.length) {
-			int start = 0;
-			int end   = 0;
-			for (int kk=0; kk<[previousLine length]; kk++) {
-				if ([previousLine characterAtIndex:kk]=='{') {
-					start = kk+1;
-					kk++;
-				}
-				if ([previousLine characterAtIndex:kk]=='}') {
-					end = kk-1;
-					break;
-				}
-			}
-			
-			NSString *insert = nil;
-			if (start < end) {
-				NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
-				insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
-			}
-			
-			if (insert) {
-				// now put in the requested newline
-				[super insertNewline:sender];
-				
-				// add the new \end
-				[self insertTab:self];
-				
-				// record this location
-				selRange = [self selectedRange];
-				
-				// add the new \end
-				[self insertText:insert];
-				
-				// wind back the location of the cursor					
-				[self setSelectedRange:selRange];
-				
-        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
-				return;
-			} // end if insert
-		} // if we are at the end of the \begin statement			
-    [super insertNewline:sender];    
-	} // end if \begin
-	else if ([self currentCommand])
-  {
-    [self expandCurrentCommand];
-  } else {
-    [super insertNewline:sender];    
-  }
-  
-	// update line numbers
-	[self updateEditorRuler];
-	
-}
+
 
 - (void) expandCurrentCommand
 {
@@ -1859,22 +1909,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
 }
 
-- (void) insertTab:(id)sender
-{
-  //	[super insertTab:[self stringForTab]];
-	BOOL spaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TEInsertSpacesForTabs] boolValue];
-	if (spaces) {
-		int NSpaces = [[[NSUserDefaults standardUserDefaults] valueForKey:TENumSpacesForTab] intValue];
-		NSMutableString *str = [NSMutableString string];
-		for (int i=0;i<NSpaces;i++) {
-			[str appendString:@" "];
-		}
-		[self insertText:str];		
-	} else {
-		[super insertTab:sender];
-	}
-	
-}
 
 - (void) moveRight:(id)sender
 {	
@@ -2357,21 +2391,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [[self layoutManager] ensureLayoutForCharacterRange:insertRange];
 }
 
-- (void) paste:(id)sender
-{
-  // check pboard type
-  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-    
-  // check for an image type
-  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
-  if (type) {
-    [self pasteAsImage];
-  } else {
-    [self pasteAsPlainText:sender];
-  }
-  
-  [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
-}
 
 - (void)pasteAsImage
 {
