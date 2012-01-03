@@ -162,7 +162,7 @@
 		[tabView selectTabViewItem:tab];
 	}
 	
-  if ([aDoc isText]) {
+  if ([[aDoc isText] boolValue]) {
     [self.texEditorViewController.textView setNeedsDisplay:YES];
   }
 }
@@ -183,13 +183,14 @@
 {
   if ([currentDoc isImage]) {
     [self enableImageView:YES];
-  } else if ([currentDoc valueForKey:@"isText"]) {
+  } else if ([[currentDoc valueForKey:@"isText"] boolValue]) {
     id doc = [currentDoc document];		
     if (doc) {
       if ([doc isKindOfClass:[FileDocument class]]) {
+//        NSLog(@"Setting doc %@", doc);
         NSTextContainer *textContainer = [doc textContainer];
         if (textContainer) {
-          //				NSLog(@"TextView: %@", textView);
+//          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
           // apply user preferences to textContainer size
           int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
@@ -207,7 +208,6 @@
 //          [self.texEditorViewController.textView replaceTextContainer:textContainer];
           [textContainer setTextView:self.texEditorViewController.textView];
           [self.texEditorViewController.textView observeTextStorage];
-          [self.texEditorViewController.textView setNeedsDisplay:YES];
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
@@ -329,7 +329,7 @@
     if (nextFile && nextFile != file) {
       [self setCurrentDoc:nextFile];
     } else {
-      [file.project setNilValueForKey:@"selected"];
+      file.project.selected = nil;
       [self setCurrentDoc:nil];
       [self enableImageView:NO];
       [self disableTextView];
@@ -343,7 +343,7 @@
 {
 //	if (isOpening)
 //		return;
-	if ([currentDoc isText]) {
+	if ([[currentDoc isText] boolValue]) {
     [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
     
     // reset cursor position
@@ -381,7 +381,7 @@
 	if (!currentDoc)
 		return;
 
-  if ([currentDoc isText]) {
+  if ([[currentDoc isText] boolValue]) {
     NSRect vr = [self.texEditorViewController.textView visibleRect];
     //	NSLog(@"Visible rect: %@", NSStringFromRect(vr));
     if (!NSEqualSizes(vr.size, NSZeroSize)) {
@@ -403,16 +403,15 @@
 	for (DocWindowController *newDoc in standaloneWindows) {
     [[newDoc window] setDocumentEdited:NO];
   }
-  
-//	NSLog(@"%@", [[projectDocument project] valueForKey:@"selected"]);
-	
-	if (currentDoc) {
+  	
+	if (currentDoc != nil) {
 		ProjectEntity *project = [currentDoc valueForKey:@"project"];
-		if (project) {
+		if (project != nil) {
 			[project setValue:currentDoc forKey:@"selected"];
 		}
 	} else {
-		[[delegate project] setNilValueForKey:@"selected"];
+		ProjectEntity *project = [delegate project];
+    project.selected = nil;
 	}
 	
 	[self saveCursorAndScrollPosition];
