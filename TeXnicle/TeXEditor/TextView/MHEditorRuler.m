@@ -61,7 +61,7 @@
     
     // initialise the folding tag descriptions
     self.foldingTagDescriptions = [[[NSMutableArray alloc] init] autorelease];    
-    [self.foldingTagDescriptions addObject:[MHFoldingTagDescription foldingTagWithStartTag:@"\\begin" endTag:@"\\end" followingArgument:YES]];        
+    [self.foldingTagDescriptions addObject:[MHFoldingTagDescription foldingTagWithStartTag:@"\\begin{" endTag:@"\\end{" followingArgument:YES]];        
     [self setClientView:aTextView];
     
     newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
