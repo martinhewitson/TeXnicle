@@ -217,7 +217,7 @@
 {
 	ProjectEntity *project = [treeController project];
 	if ([project valueForKey:@"mainFile"] == selectedItem) {
-		[project setValue:nil forKey:@"mainFile"];
+    project.mainFile = nil;
 	} else {
 		[project setValue:selectedItem forKey:@"mainFile"];
 	}
