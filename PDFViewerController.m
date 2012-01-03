@@ -59,17 +59,28 @@
 
 - (void) awakeFromNib
 {
+  [super awakeFromNib];
+  
   [self hideViewer];    
   [self.searchResultsSlideViewController setDelegate:self];
   [self.searchResultsSlideViewController slideOutAnimated:NO];
+  [self.showSearchResultsButton setState:NSOffState];    
   [self.searchResultsTable setTarget:self];
   [self.searchResultsTable setDoubleAction:@selector(highlightSelectedSearchResult)];
   
   [self.thumbSlideViewController setRightSided:NO];
-  [self.toggleThumbsButton setState:NSOnState];
-  
   [self.thumbSlideViewController setDelegate:self];
-  [self.thumbSizeSlider setFloatValue:64.0];
+  
+  if ([self hasDocument]) {
+    [self.toggleThumbsButton setState:NSOnState];  
+    [self.thumbSizeSlider setFloatValue:64.0];
+    
+  } else {
+    [self.thumbSlideViewController slideOutAnimated:NO];
+    [self.toggleThumbsButton setState:NSOffState];
+    [self.thumbSizeSlider setEnabled:NO];
+  }
+  
 }
 
 - (void) dealloc
@@ -146,7 +157,7 @@
   }
   
   if (anItem == self.showSearchResultsButton) {
-    if ([self.searchResults count] == 0) {
+    if ([self.searchResults count] == 0 || ![self hasDocument]) {
       return NO;
     }
   }
@@ -359,7 +370,7 @@
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] init] autorelease];
   
   NSMutableAttributedString *pageNo = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Page %@", [page label]]] autorelease];
-  [pageNo addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [pageNo length])];
+  [pageNo addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithDeviceWhite:0.6 alpha:1.0] range:NSMakeRange(0, [pageNo length])];
   
   [att appendAttributedString:pageNo];
   
@@ -415,7 +426,9 @@
     [self.toggleThumbsButton setState:NSOnState];
   }
   if (aSplitView == self.searchResultsSlideViewController.splitView) {
-    [self.showSearchResultsButton setState:NSOnState];
+    if ([self hasDocument]) {
+      [self.showSearchResultsButton setState:NSOnState];
+    }
   }
   
 }
