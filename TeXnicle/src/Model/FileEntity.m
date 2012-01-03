@@ -93,7 +93,7 @@
     MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:encoding] autorelease];
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
 		
-		//NSLog(@"Loaded string %@", str);
+//		NSLog(@"Loaded string %@", str);
 		if (!str) {
 			str = @"";
 		}
