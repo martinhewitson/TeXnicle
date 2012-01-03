@@ -1319,7 +1319,9 @@
   FileEntity *file = [self.openDocuments currentDoc];
 	NSString *ext = [file valueForKey:@"extension"] ;
 	if ([ext isEqual:@"tex"] ||
-			[ext isEqual:@"bib"]) {
+			[ext isEqual:@"bib"] ||
+      [ext isEqual:@"sty"] ||
+      [ext isEqual:@"cls"]) {
 		return YES;
 	}
   return NO;
