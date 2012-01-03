@@ -157,7 +157,6 @@
 
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
-  
   if (self.lastHighlight) {
     if ([[NSDate date] timeIntervalSinceDate:self.lastHighlight] < kHighlightInterval) {
       return;
