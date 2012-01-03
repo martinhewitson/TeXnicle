@@ -53,6 +53,7 @@
   [enginePopup removeAllItems];
   [enginePopup addItemWithTitle:[self engineName]];
   
+  [templateEditor performSelector:@selector(applyFontAndColor) withObject:nil afterDelay:0];
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
@@ -210,14 +211,10 @@
   
   NSArray *selectedObjects = [templatesController selectedObjects];
   if ([selectedObjects count] == 1) {
-    
-    NSDictionary *selected = [selectedObjects objectAtIndex:0];
-    NSString *code = [selected valueForKey:@"Code"];
-    
+        
+    [templateEditor applyFontAndColor];
     [templateEditor scrollRectToVisible:NSZeroRect];
     
-    [templateEditor setString:code];
-    [templateEditor didChangeText];
     [templateEditor performSelector:@selector(colorVisibleText)
                          withObject:nil
                          afterDelay:0.1];
