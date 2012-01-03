@@ -73,6 +73,10 @@
     return YES;
   }
   
+  if ([self isEqualToString:@"sty"]) {
+    return YES;
+  }
+  
   if ([self isEqualToString:@"bib"]) {
     return YES;
   }
