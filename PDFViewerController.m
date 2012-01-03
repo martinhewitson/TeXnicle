@@ -69,7 +69,6 @@
   [self.toggleThumbsButton setState:NSOnState];
   
   [self.thumbSlideViewController setDelegate:self];
-  [self.thumbSlideViewController.splitView setNeedsLayout:YES];
   [self.thumbSizeSlider setFloatValue:64.0];
 }
 
