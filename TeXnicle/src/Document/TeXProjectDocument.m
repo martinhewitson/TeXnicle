@@ -225,7 +225,6 @@
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
 	if (![saveFolder isEqual:projectFolder]) {
-    //    NSLog(@"Set project folder from %@ to %@", saveFolder, projectFolder);
 		[self.project setValue:projectFolder forKey:@"folder"];
 	}
   
@@ -279,7 +278,6 @@
   // ensure the project has the same name as on disk
   NSString *newProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
   if (![[self.project valueForKey:@"name"] isEqualToString:newProjectName]) {
-    //    NSLog(@"Setting project name %@", newProjectName);
     [self.project setValue:newProjectName forKey:@"name"];
   }
 
@@ -331,10 +329,7 @@
     [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
   }
   
-  if ([self.openDocuments currentDoc] == nil) {
-//    [self.openDocuments performSelector:@selector(disableImageView) withObject:nil afterDelay:0];
-//    [self.openDocuments performSelector:@selector(disableTextView) withObject:nil afterDelay:0];
-  }
+
   
 }
 
@@ -1877,7 +1872,7 @@
 		ProjectItemEntity *item = [items objectAtIndex:0];
 		if ([[item valueForKey:@"extension"] isEqual:@"tex"]) {
 			if ([project valueForKey:@"mainFile"] == item) {
-				[project setValue:nil forKey:@"mainFile"];
+        project.mainFile = nil;
 			} else {
 				[project setValue:item forKey:@"mainFile"];
 			}
@@ -2019,8 +2014,8 @@
     
     [documentCode scrollRectToVisible:NSZeroRect];
     
-    [documentCode setString:code];
-    [documentCode didChangeText];
+//    [documentCode setString:code];
+//    [documentCode didChangeText];
     [documentCode performSelector:@selector(colorVisibleText)
                        withObject:nil
                        afterDelay:0.1];
@@ -2364,10 +2359,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	// commit changes for open docs
 	[openDocuments commitStatus];
   // make sure we store the current status of open docs
-  if ([self.openDocuments currentDoc]) {
+  if ([self.openDocuments currentDoc] != nil) {
+//    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
     [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
   } else {
-    [self.project setValue:nil forKey:@"selected"];
+    self.project.selected = nil;
   }
   
   // cache chosen language
