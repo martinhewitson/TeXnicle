@@ -142,8 +142,6 @@
     
     // placeholder cell
     if ([att isKindOfClass:[MHPlaceholderAttachment class]]) {
-      
-      //    [[aTextView layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] forCharacterRange:NSMakeRange(charIndex, 1)];
       [aTextView setSelectedRange:NSMakeRange(charIndex, 1)];
     }
     
