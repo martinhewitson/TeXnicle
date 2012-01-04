@@ -14,6 +14,7 @@
 #import "TPSectionListController.h"
 #import "Bookmark.h"
 #import "MHLineNumber.h"
+#import "NSArray+LaTeX.h"
 
 @implementation DocWindowController
 
@@ -194,10 +195,11 @@
 	// If this is not a TeX document being edited, then we can return just 
 	// applying the plain doc settings
 	NSString *ext = [file valueForKey:@"extension"] ;
-	if ([ext isEqual:@"tex"] ||
-			[ext isEqual:@"bib"]) {
-		return YES;
-	}
+  for (NSString *lext in [NSArray latexFileTypes]) {
+    if ([ext isEqual:lext]) {
+      return YES;
+    }
+  }
 	
 	//NSLog(@"Don't recolor");
 	
