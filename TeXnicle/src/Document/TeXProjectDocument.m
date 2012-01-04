@@ -26,6 +26,7 @@
 #import "Settings.h"
 #import "UKXattrMetadataStore.h"
 #import "NSString+RelativePath.h"
+#import "NSArray+LaTeX.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -145,8 +146,20 @@
   return NO;
 }
 
+//+ (BOOL)autosavesInPlace
+//{
+//  return YES;
+//}
+
+//- (BOOL)revertToContentsOfURL:(NSURL *)inAbsoluteURL ofType:(NSString *)inTypeName error:(NSError **)outError
+//{
+//  NSLog(@"Reverting to %@ for type %@", inAbsoluteURL, inTypeName);
+//  return [super revertToContentsOfURL:inAbsoluteURL ofType:inTypeName error:outError];
+//}
+
 - (void) setupDocument
 {
+  
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
@@ -224,12 +237,25 @@
 	// Update the project folder in case the file was moved
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
-	if (![saveFolder isEqual:projectFolder]) {
-		[self.project setValue:projectFolder forKey:@"folder"];
-	}
-  
+//  NSLog(@"Saved folder %@", saveFolder);
+  if (saveFolder != nil) {
+    if (![saveFolder isEqual:projectFolder]) {
+      [self.project setValue:projectFolder forKey:@"folder"];
+    }
+  }  
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  
+  // versions
+  
+  [nc addObserver:self
+         selector:@selector(handleEnteredVersionsBrowser:)
+             name:NSWindowDidEnterVersionBrowserNotification
+           object:nil];
+  [nc addObserver:self
+         selector:@selector(handleExitedVersionsBrowser:)
+             name:NSWindowDidExitVersionBrowserNotification
+           object:nil];
   
   // observe changes to the selection of the project outline view
   [nc addObserver:self
@@ -276,7 +302,9 @@
   
   
   // ensure the project has the same name as on disk
+//  NSLog(@"Setting up project %@", self.project);
   NSString *newProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
+//  NSLog(@"Setting project name from %@ to %@", self.project.name, newProjectName);
   if (![[self.project valueForKey:@"name"] isEqualToString:newProjectName]) {
     [self.project setValue:newProjectName forKey:@"name"];
   }
@@ -290,8 +318,26 @@
   [self showDocument];
 }
 
+
+//- (void) handleEnteredVersionsBrowser:(NSNotification*)aNote
+//{
+//  NSLog(@"Entered Versions: %@", aNote);
+//}
+//
+//- (void) handleExitedVersionsBrowser:(NSNotification*)aNote
+//{
+//  NSLog(@"Exited Versions: %@", aNote);
+//  if ([[NSApp delegate] respondsToSelector:@selector(startupScreen)]) {
+//    id startupScreen = [[NSApp delegate] performSelector:@selector(startupScreen) withObject:self];
+//    if ([startupScreen respondsToSelector:@selector(displayOrCloseWindow:)]) {
+//      [startupScreen performSelector:@selector(displayOrCloseWindow:) withObject:self];
+//    }
+//  }
+//}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
+//  NSLog(@"windowControllerDidLoadNib %@", [self windowForSheet]);
   [super windowControllerDidLoadNib:aController];
   // Add any code here that needs to be executed once the windowController has loaded the document's window.
   // setup toolbar
@@ -336,6 +382,7 @@
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
+//  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
   _windowIsClosing = YES;
   
   // stop timer
@@ -352,7 +399,7 @@
 	
 	NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
 	[window setDelegate:nil];
-
+//  NSLog(@"Open windows %d", [[[NSDocumentController sharedDocumentController] documents] count]);
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
 			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
@@ -1318,12 +1365,11 @@
   
   FileEntity *file = [self.openDocuments currentDoc];
 	NSString *ext = [file valueForKey:@"extension"] ;
-	if ([ext isEqual:@"tex"] ||
-			[ext isEqual:@"bib"] ||
-      [ext isEqual:@"sty"] ||
-      [ext isEqual:@"cls"]) {
-		return YES;
-	}
+  for (NSString *lext in [NSArray latexFileTypes]) {
+    if ([ext isEqual:lext]) {
+      return YES;
+    }
+  }
   return NO;
 }
 
