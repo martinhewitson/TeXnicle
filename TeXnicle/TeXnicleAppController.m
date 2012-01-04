@@ -66,7 +66,11 @@ NSString * const TEConsoleFont = @"TEConsoleFont";
 
 // comment
 NSString * const TESyntaxCommentsColor = @"TESyntaxCommentsColor";
+NSString * const TESyntaxCommentsL2Color = @"TESyntaxCommentsL2Color";
+NSString * const TESyntaxCommentsL3Color = @"TESyntaxCommentsL3Color";
 NSString * const TESyntaxColorComments = @"TESyntaxColorComments";
+NSString * const TESyntaxColorCommentsL2 = @"TESyntaxColorCommentsL2";
+NSString * const TESyntaxColorCommentsL3 = @"TESyntaxColorCommentsL3";
 
 // special chars
 NSString * const TESyntaxSpecialCharsColor = @"TESyntaxSpecialCharsColor";
@@ -141,8 +145,12 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   
   // comments
-	[defaultValues setValue:[NSArray arrayWithColor:[NSColor lightGrayColor]] forKey:TESyntaxCommentsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.4 alpha:1.0]] forKey:TESyntaxCommentsColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.6 alpha:1.0]] forKey:TESyntaxCommentsL2Color];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.8 alpha:1.0]] forKey:TESyntaxCommentsL3Color];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL2];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL3];
 	
   // special chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
@@ -264,7 +272,6 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-//  NSLog(@"App finished launching...");
   [self checkVersion];
   [TPEngineManager installEngines];
   
