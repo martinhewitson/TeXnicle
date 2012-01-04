@@ -78,6 +78,12 @@
     [dict setObject:[NSColor blackColor] forKey:@"color"];
     [sections addObject:dict];
     
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:@"\\chapter" forKey:@"tag"];
+    [dict setObject:[NSNumber numberWithInt:1] forKey:@"indent"];
+    [dict setObject:[NSNumber numberWithFloat:topSize] forKey:@"size"];
+    [dict setObject:[NSColor colorWithDeviceRed:0.2 green:0.2 blue:0.8 alpha:1.0] forKey:@"color"];
+    [sections addObject:dict];    
     
     paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     [paragraphStyle setLineSpacing:3.0];
