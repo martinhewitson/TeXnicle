@@ -24,7 +24,11 @@
   NSFont *textFont;
   
   NSColor *commentColor;
+  NSColor *commentL2Color;
+  NSColor *commentL3Color;
   BOOL colorComments;
+  BOOL colorCommentsL2;
+  BOOL colorCommentsL3;
   
   NSColor *specialCharsColor;
   BOOL colorSpecialChars;
@@ -44,7 +48,11 @@
 @property (retain) NSFont *textFont;
 
 @property (retain) NSColor *commentColor;
+@property (retain) NSColor *commentL2Color;
+@property (retain) NSColor *commentL3Color;
 @property (assign) BOOL colorComments;
+@property (assign) BOOL colorCommentsL2;
+@property (assign) BOOL colorCommentsL3;
 
 @property (retain) NSColor *specialCharsColor;
 @property (assign) BOOL colorSpecialChars;

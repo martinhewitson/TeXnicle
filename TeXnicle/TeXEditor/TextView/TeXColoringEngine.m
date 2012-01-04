@@ -22,7 +22,11 @@
 @synthesize textFont;
 
 @synthesize commentColor;
+@synthesize commentL2Color;
+@synthesize commentL3Color;
 @synthesize colorComments;
+@synthesize colorCommentsL2;
+@synthesize colorCommentsL3;
 
 @synthesize specialCharsColor;
 @synthesize colorSpecialChars;
@@ -49,7 +53,8 @@
     specialChars = [[NSCharacterSet characterSetWithCharactersInString:@"${}[]()\"'"] retain];
     
     keys = [[NSArray arrayWithObjects:TEDocumentFont, TESyntaxTextColor,
-             TESyntaxCommentsColor, TESyntaxColorComments, 
+             TESyntaxCommentsColor, TESyntaxCommentsL2Color, TESyntaxCommentsL3Color, 
+             TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
              TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
              TESyntaxCommandColor, TESyntaxColorCommand, 
              TESyntaxArgumentsColor, TESyntaxColorArguments,
@@ -74,6 +79,8 @@
   self.textColor = nil;
   self.textFont = nil;
   self.commentColor = nil;
+  self.commentL2Color = nil;
+  self.commentL3Color = nil;
   self.specialCharsColor = nil;
   self.commandColor = nil;
   self.argumentsColor = nil;
@@ -138,7 +145,11 @@
   
   // comments
   self.commentColor = [[defaults valueForKey:TESyntaxCommentsColor] colorValue];
+  self.commentL2Color = [[defaults valueForKey:TESyntaxCommentsL2Color] colorValue];
+  self.commentL3Color = [[defaults valueForKey:TESyntaxCommentsL3Color] colorValue];
   self.colorComments = [[defaults valueForKey:TESyntaxColorComments] boolValue];
+  self.colorCommentsL2 = [[defaults valueForKey:TESyntaxColorCommentsL2] boolValue];
+  self.colorCommentsL3 = [[defaults valueForKey:TESyntaxColorCommentsL3] boolValue];
 
   // math
   self.specialCharsColor = [[defaults valueForKey:TESyntaxSpecialCharsColor] colorValue];
@@ -195,7 +206,7 @@
     }
 //    NSLog(@"Checking %c", cc);
     // color comments
-    if (cc == '%' && self.colorComments) {
+    if (cc == '%' && (self.colorComments || self.colorCommentsL2 || self.colorCommentsL3)) {
       // comment rest of the line
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
       colorRange = NSMakeRange(aRange.location+idx, NSMaxRange(lineRange)-idx);
@@ -205,10 +216,33 @@
 			}
 			if (idx==0 || c != '\\') {
 
-//          [newLineCharacterSet characterIsMember:c] ||
-//          [whitespaceCharacterSet characterIsMember:c]) {
-        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commentColor forCharacterRange:colorRange];
-        idx = NSMaxRange(lineRange)-1;
+        NSColor *color = nil;
+        
+        if (self.colorComments)
+          color = self.commentColor;
+        
+        if (idx < strLen-1) {
+          if ([text characterAtIndex:idx+1] == '%') {
+            if (self.colorCommentsL2) {
+              color = self.commentL2Color;
+            } else {
+//              color = nil;
+            }
+          }
+          if (idx < strLen-2) {
+            if ([text characterAtIndex:idx+2] == '%') {
+              if (self.colorCommentsL3) {
+                color = self.commentL3Color;
+              } else {
+//                color = nil;
+              }
+            }
+          }
+        }
+        if (color != nil) {
+          [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:colorRange];
+        }
+        idx = NSMaxRange(colorRange)-1;
 			}
     } else if ((cc == '{') && self.colorArguments) {      
       start = idx;
