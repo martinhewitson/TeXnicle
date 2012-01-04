@@ -49,8 +49,12 @@
 
 - (NSSet*)items
 {
-	[self willAccessValueForKey:@"items"];
 	NSManagedObjectContext *moc = [self managedObjectContext];
+  if (moc == nil) {
+    return nil;
+  }
+  
+	[self willAccessValueForKey:@"items"];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSError *fetchError = nil;
 	NSArray *fetchResults;
