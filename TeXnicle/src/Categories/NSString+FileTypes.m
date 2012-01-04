@@ -7,6 +7,7 @@
 //
 
 #import "NSString+FileTypes.h"
+#import "NSArray+LaTeX.h"
 
 @implementation NSString (FileTypes)
 
@@ -65,22 +66,12 @@
     return YES;
   }
   
-  if ([self isEqualToString:@"tex"]) {
-    return YES;
+  for (NSString *lext in [NSArray latexFileTypes]) {
+    if ([self isEqualToString:lext]) {
+      return YES;
+    }
   }
-
-  if ([self isEqualToString:@"cls"]) {
-    return YES;
-  }
-  
-  if ([self isEqualToString:@"sty"]) {
-    return YES;
-  }
-  
-  if ([self isEqualToString:@"bib"]) {
-    return YES;
-  }
-  
+    
 //  NSLog(@"Checking ext %@", self);
   
   BOOL fileIsText = NO;
