@@ -20,6 +20,7 @@
 #import "RegexKitLite.h"
 #import "MHLineNumber.h"
 #import "TPDocumentMatch.h"
+#import "NSArray+LaTeX.h"
 
 @implementation ExternalTeXDoc
 
@@ -951,10 +952,11 @@
 - (BOOL) shouldSyntaxHighlightDocument
 {
 	NSString *ext = [[[self fileURL] path] pathExtension];
-	if ([ext isEqual:@"tex"] ||
-			[ext isEqual:@"bib"]) {
-		return YES;
-	} 
+  for (NSString *lext in [NSArray latexFileTypes]) {
+    if ([ext isEqual:lext]) {
+      return YES;
+    }
+  }
   return NO;
 }
 
