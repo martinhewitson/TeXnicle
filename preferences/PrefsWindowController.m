@@ -23,9 +23,17 @@
   
 	
 	// Comments controller
-	commentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Comments" name:@"Comments"];
+	commentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Comments" name:@"Comments (%)"];
 	[commentsView addSubview:[commentsController view]];
 	
+	// Comments L2 controller
+	commentsL2Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"CommentsL2" name:@"Comments (%%)"];
+	[commentsL2View addSubview:[commentsL2Controller view]];
+  
+  // Comments L3 controller
+	commentsL3Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"CommentsL3" name:@"Comments (%%%)"];
+	[commentsL3View addSubview:[commentsL3Controller view]];
+
 	// math controller
 	mathController = [[SyntaxHighlightControlController alloc] initWithTag:@"SpecialChars" name:@"Special Characters"];
 	[mathView addSubview:[mathController view]];
@@ -69,6 +77,8 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.enginesEditor = nil;
 	[commentsController release];
+  [commentsL2Controller release];
+  [commentsL3Controller release];
 	[mathController release];
 	[commandsController release];
 	[argumentsController release];

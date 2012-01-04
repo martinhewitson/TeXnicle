@@ -35,7 +35,11 @@
 	
 	
 	SyntaxHighlightControlController *commentsController;
+	SyntaxHighlightControlController *commentsL2Controller;
+	SyntaxHighlightControlController *commentsL3Controller;
 	IBOutlet NSView *commentsView;
+	IBOutlet NSView *commentsL2View;
+	IBOutlet NSView *commentsL3View;
 	
 	SyntaxHighlightControlController *mathController;
 	IBOutlet NSView *mathView;
