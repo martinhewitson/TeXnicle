@@ -2197,17 +2197,26 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
 	NSString *lineBreakStr = [NSString stringWithFormat:@"\n", NSLineSeparatorCharacter];
 	int loc = 0;
-	int insert = lineWrapLength;
-	NSCharacterSet *wsCharSet = whitespaceCharacterSet;
+  NSInteger count = 0;
 	while (loc < [newString length]) {
-		if (loc > insert) {
-			if ([wsCharSet characterIsMember:[newString characterAtIndex:loc]]) {
+		if (count >= lineWrapLength) {
+			if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+        // rewind to previous whitespace if we are past the line length
+        if (count > lineWrapLength) {
+          loc--;
+          while (loc >= 0 
+                 && ![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]] 
+                 && ![newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {            
+            loc--;
+          }
+        }
+        
 				newString = [newString stringByReplacingCharactersInRange:NSMakeRange(loc, 1)
 																											 withString:lineBreakStr];
-				insert += lineWrapLength;				
-        //				currRange.location--;
+        count = 0;
 			}
 		}
+    count++;
 		loc++;
 	}
   
