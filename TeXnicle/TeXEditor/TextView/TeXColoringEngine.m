@@ -177,6 +177,9 @@
 //  NSLog(@"Coloring %@", NSStringFromRange(aRange));
   
   NSString *text = [[textStorage string] substringWithRange:aRange];
+//  NSLog(@"\n\n=======================================================================================");
+//  NSLog(@"Coloring %@", text);
+//  NSLog(@"=======================================================================================");
   NSInteger strLen = [text length];
   if (strLen == 0) {
     return;
@@ -204,12 +207,17 @@
     if ([newLineCharacterSet characterIsMember:cc]) {
       continue;
     }
-//    NSLog(@"Checking %c", cc);
+//    NSLog(@"Checking idx: %ld, %c", idx, cc);
+//    NSLog(@"idx 182 == %c'", [text characterAtIndex:182]);
+    
     // color comments
     if (cc == '%' && (self.colorComments || self.colorCommentsL2 || self.colorCommentsL3)) {
       // comment rest of the line
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
+//      NSLog(@"   idx %ld", idx);
+//      NSLog(@"   line range %@", NSStringFromRange(lineRange));
       colorRange = NSMakeRange(aRange.location+idx, NSMaxRange(lineRange)-idx);
+//      NSLog(@"   color range %@", NSStringFromRange(colorRange));
       unichar c = 0;
 			if (idx>0) {
 				c = [text characterAtIndex:idx-1];
@@ -240,9 +248,11 @@
           }
         }
         if (color != nil) {
+//          NSLog(@"Comment: %@", NSStringFromRange(colorRange));
           [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:colorRange];
         }
-        idx = NSMaxRange(colorRange)-1;
+        idx = NSMaxRange(lineRange)-1;
+//        NSLog(@"   advanced index to %ld", idx);
 			}
     } else if ((cc == '{') && self.colorArguments) {      
       start = idx;
@@ -259,6 +269,7 @@
         }
         if (argCount == 0) {
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
+//          NSLog(@"Argument: %@", NSStringFromRange(argRange));
           [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
           break;
         }
@@ -279,6 +290,7 @@
         }
         if (argCount == 0) {
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
+//          NSLog(@"Argument: %@", NSStringFromRange(argRange));
           [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
           break;
         }
@@ -298,6 +310,7 @@
           // highlight word
           NSRange wordRange = [textStorage doubleClickAtIndex:aRange.location+idx+1];
           colorRange = NSMakeRange(wordRange.location-1, wordRange.length+1);
+//          NSLog(@"Command: %@", NSStringFromRange(colorRange));
           [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commandColor forCharacterRange:colorRange];
           idx += colorRange.length-1;
         }
