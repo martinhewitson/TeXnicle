@@ -938,6 +938,14 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="667755923">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Toggle Control Characters</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 							</array>
 						</object>
 					</object>
@@ -2266,6 +2274,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleControlCharacters:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="667755923"/>
+					</object>
+					<int key="connectionID">722</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -2751,6 +2767,7 @@
 							<reference ref="661383451"/>
 							<reference ref="408246951"/>
 							<reference ref="605556331"/>
+							<reference ref="667755923"/>
 						</array>
 						<reference key="parent" ref="586577488"/>
 					</object>
@@ -3359,6 +3376,11 @@
 						<reference key="object" ref="629535222"/>
 						<reference key="parent" ref="789758025"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">720</int>
+						<reference key="object" ref="667755923"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3515,6 +3537,7 @@
 				<string key="714.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="717.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="720.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3531,7 +3554,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">719</int>
+			<int key="maxID">722</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4681,6 +4704,7 @@
 						<string key="createFolderButton">HHValidatedButton</string>
 						<string key="documentCode">NSTextView</string>
 						<string key="documentName">NSTextField</string>
+						<string key="documentOutlineViewContainer">NSView</string>
 						<string key="engineSettingsContainer">NSView</string>
 						<string key="finderContainerView">NSView</string>
 						<string key="imageViewerContainer">NSView</string>
@@ -4734,6 +4758,10 @@
 						<object class="IBToOneOutletInfo" key="documentName">
 							<string key="name">documentName</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="documentOutlineViewContainer">
+							<string key="name">documentOutlineViewContainer</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="engineSettingsContainer">
 							<string key="name">engineSettingsContainer</string>
@@ -4847,6 +4875,7 @@
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
+						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
@@ -4879,6 +4908,10 @@
 						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">
 							<string key="name">jumpToNextPlaceholder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="jumpToPreviousPlaceholder:">
+							<string key="name">jumpToPreviousPlaceholder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="pasteTable:">
