@@ -558,6 +558,10 @@
 //  NSUInteger start = aRange.location;
   NSString *text = [self.textView string];
   NSAttributedString *attStr = [self.textView attributedString];
+  if ([attStr length] == 0) {
+    return foundFoldingTags;
+  }
+  
   NSInteger lineNumber;
   
   // go forwards from the start until we reach the start of the input range
