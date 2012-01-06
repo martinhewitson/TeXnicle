@@ -102,8 +102,8 @@
 	while (*loc < [self length]) {
 		
 		if ([ws characterIsMember:[self characterAtIndex:*loc]] ||
-				[ns characterIsMember:[self characterAtIndex:*loc]]) {
-			NSString *s = [[self substringWithRange:NSMakeRange(start, *loc-start)] stringByTrimmingCharactersInSet:ws];
+				[ns characterIsMember:[self characterAtIndex:*loc]] || loc == 0) {
+			NSString *s = [self substringWithRange:NSMakeRange(start, *loc-start)];
 			(*loc)--;
 			return s;
 		}
@@ -283,6 +283,31 @@
 {
   return [self stringByReplacingOccurrencesOfString:@"_" withString:@"\\_"];
 }
+
+- (NSString*)parseArgumentStartingAt:(NSInteger*)loc
+{
+  NSInteger count = *loc;
+  NSInteger nameStart = -1;
+  NSInteger nameEnd   = -1;
+  while (count < [self length]) {
+    if ([self characterAtIndex:count] == '{') {
+      nameStart = count+1;
+    }
+    if ([self characterAtIndex:count] == '}') {
+      nameEnd = count;
+      break;
+    }
+    count++;
+  }
+  
+  if (nameEnd > nameStart && nameEnd >= 0 && nameStart >= 0) {
+    *loc = nameEnd;
+    return [self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)];
+  }
+  
+  return nil;
+}
+
 
 @end
 
