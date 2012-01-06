@@ -15,6 +15,7 @@
 #import "Bookmark.h"
 #import "NSString+FileTypes.h"
 #import "MHFileReader.h"
+#import "NSString+LaTeX.h"
 
 @implementation FileEntity
 
@@ -85,6 +86,8 @@
 
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding
 {
+//  NSLog(@"Loading with encoding %@", encoding);
+  
 	// We should load the text from the file
 	NSString *filepath = [self pathOnDisk];
 	
@@ -93,13 +96,13 @@
     MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:encoding] autorelease];
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
 		
-//		NSLog(@"Loaded string %@", str);
 		if (!str) {
 			str = @"";
 		}
-		NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"%@: %@", self, str);
+		NSData *data = [str dataUsingEncoding:[fr defaultEncoding]];
 		[self setPrimitiveValue:data forKey:@"content"];
-		
+		[self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
 	} 
   
   // This is not so nice because files transfered from another computer will have a different path
@@ -447,6 +450,37 @@
     }
   }
   return nil;
+}
+
+- (NSString*)consolidatedFileContents
+{  
+  NSString *string = [self workingContentString];
+  
+  NSUInteger loc = 0;
+	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
+  
+  while (loc < [string length]) {
+    NSString *word = [string nextWordStartingAtLocation:&loc];
+    word = [word stringByTrimmingCharactersInSet:ns];
+    
+    // check file links
+    if ([word hasPrefix:@"\\input{"] || [word hasPrefix:@"\\include{"]) {
+      NSInteger start = loc-[word length]+1;
+      NSInteger end   = start;
+      NSString *filePath = [string parseArgumentStartingAt:&end];
+      if (filePath) {
+        FileEntity *nextFile = [self.project fileWithPath:filePath];
+        if (nextFile) {
+          NSRange repRange = NSMakeRange(start, end-start+1);
+          NSString *repString = [nextFile consolidatedFileContents];
+          string = [string stringByReplacingCharactersInRange:repRange withString:repString];
+        }
+      }
+    }
+    loc++;    
+  }
+  
+  return string;
 }
 
 @end

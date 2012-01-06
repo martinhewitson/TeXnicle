@@ -26,6 +26,7 @@
 @property (assign) NSNumber *isText;
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
+@property (readonly) NSString *consolidatedFileContents;
 
 @property (assign) NSInteger isActive;
 
@@ -44,5 +45,6 @@
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding;
 - (BOOL) saveContentsToDisk;
 - (BOOL) writeContents;
+
 
 @end
