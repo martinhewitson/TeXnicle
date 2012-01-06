@@ -201,10 +201,13 @@
   } else {
     encoding = [self encodingWithName:encodingString];
   }
+//  NSLog(@"Reading string with encoding %@", encodingString);
   error = nil;
   str = [NSString stringWithContentsOfURL:aURL
                                  encoding:encoding
                                     error:&error];
+  
+  
   
 //  NSLog(@"Loaded string %@", str);
   
@@ -235,6 +238,9 @@
                          traverseLink:YES];
     }
   }
+  
+  // set the encoding we used in the end
+  self.selectedIndex = [NSNumber numberWithInteger:[self indexForEncoding:encoding]];
   
   return str;
 }
