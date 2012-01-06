@@ -25,6 +25,7 @@
 #import "MHConsoleManager.h"
 #import "TPStatusViewController.h"
 #import "PDFViewer.h"
+#import "TPDocumentOutlineViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -34,10 +35,13 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
+  
+  TPDocumentOutlineViewController *documentOutlineViewcontroller;
+  NSView *documentOutlineViewContainer;
   
 	NSArray *templateArray;
 	IBOutlet NSWindow *templateSheet;
@@ -123,6 +127,9 @@
 //  NSInteger lastLineNumber;
   PDFViewer *pdfViewer;
 }
+
+@property (retain) TPDocumentOutlineViewController *documentOutlineViewcontroller;
+@property (assign) IBOutlet NSView *documentOutlineViewContainer;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 

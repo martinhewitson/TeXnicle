@@ -36,6 +36,9 @@
 
 @synthesize statusTimer;
 
+@synthesize documentOutlineViewcontroller;
+@synthesize documentOutlineViewContainer;
+
 @synthesize createFileButton;
 @synthesize createFolderButton;
 
@@ -90,7 +93,8 @@
   self.statusTimer = nil;
  
   self.statusViewController = nil;
-  
+//  self.documentOutlineViewcontroller.delegate = nil;
+//  self.documentOutlineViewcontroller = nil;
   self.bookmarkManager = nil;
   self.palette = nil;
   self.project = nil;  
@@ -104,6 +108,7 @@
   self.engineSettings = nil;
   self.pdfViewer = nil;
   self.miniConsole = nil;
+  
   [super dealloc];
 }
 
@@ -164,6 +169,7 @@
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
   [self.engineSettingsContainer addSubview:[self.engineSettings view]];
+//  NSLog(@"Setup settings");
   
   // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
@@ -173,6 +179,7 @@
   [self.texEditorContainer setNeedsDisplay:YES];
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
+//  NSLog(@"Setup tex editor");
   
   // setup status view
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
@@ -183,6 +190,7 @@
     // the status bar is showing by default, so toggle it out
     [self toggleStatusBar:NO];
   }
+//  NSLog(@"Setup status");
   
   // setup image viewer
   self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
@@ -190,40 +198,53 @@
   self.openDocuments.imageViewContainer = self.imageViewerContainer;
   [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
+//  NSLog(@"Setup image viewer");
   
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
   [self.pdfViewerController.view setFrame:[pdfViewerContainerView bounds]];
   [pdfViewerContainerView addSubview:self.pdfViewerController.view];
+//  NSLog(@"Setup pdf viewer");
     
   // setup library
   self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
   NSView *libraryView = [self.library view];
   [libraryView setFrame:[self.libraryContainerView bounds]];
   [self.libraryContainerView addSubview:libraryView];
+//  NSLog(@"Setup library");
   
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
+//  NSLog(@"Setup filemonitor");
   
   // setup finder
   self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
   [self.finder.view setFrame:[self.finderContainerView bounds]];
   [self.finderContainerView addSubview:self.finder.view];
+//  NSLog(@"Setup finder");
   
   // setup palette
   self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
   NSView *paletteView = [self.palette view];
   [paletteView setFrame:[self.paletteContainverView bounds]];
   [self.paletteContainverView addSubview:paletteView];
+//  NSLog(@"Setup palette");
   
   // setup bookmark manager
   self.bookmarkManager = [[[BookmarkManager alloc] initWithDelegate:self] autorelease];
   NSView *bookmarkView = [self.bookmarkManager view];
   [bookmarkView setFrame:[self.bookmarkContainerView bounds]];
   [self.bookmarkContainerView addSubview:bookmarkView];
+//  NSLog(@"Setup bookmark manager");
+  
+  // set up document outline view controller
+//  self.documentOutlineViewcontroller = [[[TPDocumentOutlineViewController alloc] initWithDelegate:self] autorelease];
+//  [self.documentOutlineViewcontroller.view setFrame:[self.documentOutlineViewContainer bounds]];
+//  [self.documentOutlineViewContainer addSubview:self.documentOutlineViewcontroller.view];
   
   // setup engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
+//  NSLog(@"Setup engine manager");
   
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
@@ -238,24 +259,24 @@
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
 //  NSLog(@"Saved folder %@", saveFolder);
-  if (saveFolder != nil) {
+//  if (saveFolder != nil) {
     if (![saveFolder isEqual:projectFolder]) {
       [self.project setValue:projectFolder forKey:@"folder"];
     }
-  }  
+//  }  
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
   // versions
-  
-  [nc addObserver:self
-         selector:@selector(handleEnteredVersionsBrowser:)
-             name:NSWindowDidEnterVersionBrowserNotification
-           object:nil];
-  [nc addObserver:self
-         selector:@selector(handleExitedVersionsBrowser:)
-             name:NSWindowDidExitVersionBrowserNotification
-           object:nil];
+//  
+//  [nc addObserver:self
+//         selector:@selector(handleEnteredVersionsBrowser:)
+//             name:NSWindowDidEnterVersionBrowserNotification
+//           object:nil];
+//  [nc addObserver:self
+//         selector:@selector(handleExitedVersionsBrowser:)
+//             name:NSWindowDidExitVersionBrowserNotification
+//           object:nil];
   
   // observe changes to the selection of the project outline view
   [nc addObserver:self
@@ -710,7 +731,7 @@
 - (IBAction)reopenUsingEncoding:(id)sender
 {
   FileEntity *file = [self.openDocuments currentDoc];
-  
+//  NSLog(@"Reloading doc %@", file);
   // clear the xattr
   [UKXattrMetadataStore setString:@""
                            forKey:@"com.bobsoft.TeXnicleTextEncoding"
@@ -718,7 +739,8 @@
                      traverseLink:YES];
   
   [file reloadFromDiskWithEncoding:[sender title]];
-  [self.openDocuments updateDoc];
+  [self.openDocuments closeCurrentTab];
+  [self.openDocuments addDocument:file];
 }
 
 - (NSManagedObject *)project
