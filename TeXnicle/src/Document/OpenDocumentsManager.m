@@ -181,6 +181,8 @@
 
 - (void)updateDoc
 {
+//  NSLog(@"Update doc for doc %@: is text? %d", currentDoc, [[currentDoc valueForKey:@"isText"] boolValue]);
+  
   if ([currentDoc isImage]) {
     [self enableImageView:YES];
   } else if ([[currentDoc valueForKey:@"isText"] boolValue]) {
