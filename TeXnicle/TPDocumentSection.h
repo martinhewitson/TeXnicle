@@ -10,23 +10,29 @@
 
 @class FileEntity;
 @class ProjectEntity;
+@class TPDocumentSectionTemplate;
 
 @interface TPDocumentSection : NSObject {
 @private
-	NSMutableArray *sections;
-  NSString *range;
+  NSRange range;
   NSString *result;
-  id document;
+  TPDocumentSection *document;
   NSMutableArray *subsections;
+  NSString *name;
+  TPDocumentSectionTemplate *type;
 }
 
-@property (copy) NSString *range;
-@property (copy) NSString *result;
-@property (assign) id document;
+@property (assign) NSRange range;
+@property (assign) TPDocumentSectionTemplate *type;
+@property (copy) NSString *name;
+@property (assign) TPDocumentSection *document;
 @property (retain) NSMutableArray *subsections;
 
-+ (TPDocumentSection*)sectionWithRange:(NSRange)aRange result:(NSString*)aName document:(id)aDocument;
-- (id)initWithRange:(NSRange)aRange result:(NSString*)aName document:(id)aDocument;
++ (TPDocumentSection*)sectionWithRange:(NSRange)aRange type:(TPDocumentSectionTemplate*)aTemplate name:(NSString*)aName document:(id)aDocument;
+- (id)initWithRange:(NSRange)aRange type:(TPDocumentSectionTemplate*)aTemplate name:(NSString*)aName document:(id)aDocument;
 - (void) addSectionsFromFile:(FileEntity*)file inProject:(ProjectEntity*)project;
+
+- (void)addSubsection:(TPDocumentSection*)aSubsection;
+
 
 @end
