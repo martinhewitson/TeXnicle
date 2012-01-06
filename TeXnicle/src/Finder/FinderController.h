@@ -52,6 +52,7 @@
   HHValidatedButton *replaceAllButton;
   NSView *replaceView;
   NSTextField *replaceText;
+  NSView *bottomBarView;
   
   HHValidatedButton *jumpToButton;
   NSSearchField *searchField;
