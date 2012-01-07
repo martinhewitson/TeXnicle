@@ -7,12 +7,14 @@
 //
 
 #import "NSArray+LaTeX.h"
+#import "TPSupportedFilesManager.h"
 
 @implementation NSArray (LaTeX)
 
 + (NSArray*)latexFileTypes
 {
-  return [NSArray arrayWithObjects:@"tex", @"bib", @"sty", @"cls", @"bst", nil];
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  return [sfm supportedExtensions];
 }
 
 @end
