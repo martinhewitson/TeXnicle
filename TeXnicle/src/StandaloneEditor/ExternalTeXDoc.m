@@ -21,6 +21,7 @@
 #import "MHLineNumber.h"
 #import "TPDocumentMatch.h"
 #import "NSArray+LaTeX.h"
+#import "TPSupportedFilesManager.h"
 
 @implementation ExternalTeXDoc
 
@@ -52,6 +53,13 @@
 
 @synthesize pdfViewer;
 
+
++ (NSArray *)readableTypes
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  return [[sfm supportedTypes] arrayByAddingObjectsFromArray:[super readableTypes]];
+}
+
 - (void)awakeFromNib
 {
   self.results = [NSMutableArray array];
@@ -77,9 +85,8 @@
 	
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
-  NSView *pdfViewer = [self.pdfViewerController view];
-  [pdfViewer setFrame:[self.pdfViewContainer bounds]];
-  [self.pdfViewContainer addSubview:pdfViewer];
+  [self.pdfViewerController.view setFrame:[self.pdfViewContainer bounds]];
+  [self.pdfViewContainer addSubview:self.pdfViewerController.view];
   
   // set up engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
@@ -263,6 +270,7 @@
   self.settings = nil;
   self.engineSettingsController = nil;
   self.statusViewContainer = nil;
+  self.pdfViewerController.delegate = nil;
   self.pdfViewerController = nil;
   self.results = nil;
   self.pdfViewer = nil;
@@ -514,15 +522,15 @@
 
 - (void) showDocument
 {
-  NSView *view = [self.pdfViewerController.pdfview documentView];    
-  NSRect r = [view visibleRect];
-  BOOL hasDoc = [self.pdfViewerController hasDocument];
-  [self.pdfViewerController redisplayDocument];
-  if (hasDoc) {
-    [view scrollRectToVisible:r];
-  }
-  
-  
+  if (self.pdfViewerController && self.pdfViewerController.pdfview) {
+    NSView *view = [self.pdfViewerController.pdfview documentView];    
+    NSRect r = [view visibleRect];
+    BOOL hasDoc = [self.pdfViewerController hasDocument];
+    [self.pdfViewerController redisplayDocument];
+    if (hasDoc) {
+      [view scrollRectToVisible:r];
+    }    
+  }  
 }
 
 - (IBAction) saveDocument:(id)sender
@@ -536,7 +544,6 @@
 	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
   [self saveDocumentWithDelegate:self didSaveSelector:@selector(documentSave:didSave:contextInfo:) contextInfo:NULL];
-//	[super saveDocument:sender];
 	[self.texEditorViewController.textView setSelectedRange:selRange];
 	[self.texEditorViewController.textView scrollRectToVisible:selRect];
 	[[self windowForSheet] makeFirstResponder:r];
@@ -952,7 +959,8 @@
 - (BOOL) shouldSyntaxHighlightDocument
 {
 	NSString *ext = [[[self fileURL] path] pathExtension];
-  for (NSString *lext in [NSArray latexFileTypes]) {
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  for (NSString *lext in [sfm supportedExtensionsForHighlighting]) {
     if ([ext isEqual:lext]) {
       return YES;
     }
