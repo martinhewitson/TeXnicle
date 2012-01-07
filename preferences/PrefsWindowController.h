@@ -10,6 +10,7 @@
 #import "DBPrefsWindowController.h"
 #import "SyntaxHighlightControlController.h"
 #import "TeXTextView.h"
+#import "TPSupportedFilesEditor.h"
 
 @class TPEnginesEditor;
 
@@ -21,6 +22,7 @@
 	IBOutlet NSView *engineView;
 	IBOutlet NSView *userCommandsView;
 	IBOutlet NSView *libraryPrefsView;
+	IBOutlet NSView *fileTypesPrefsView;
 
   
   IBOutlet NSTableView *userCommandsTable;
@@ -67,8 +69,11 @@
   NSView *enginesEditorContainer;
   
   IBOutlet NSPopUpButton *enginePopup;
+  
+  TPSupportedFilesEditor *supportedFilesEditor;
 }
 
+@property (retain) TPSupportedFilesEditor *supportedFilesEditor;
 @property (retain) TPEnginesEditor *enginesEditor;
 @property (assign) IBOutlet NSView *enginesEditorContainer;
 

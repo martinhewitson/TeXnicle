@@ -17,6 +17,7 @@
 
 @synthesize enginesEditor;
 @synthesize enginesEditorContainer;
+@synthesize supportedFilesEditor;
 
 - (void) awakeFromNib
 {
@@ -63,6 +64,11 @@
   
   [templateEditor performSelector:@selector(applyFontAndColor) withObject:nil afterDelay:0];
   
+  // file types editor
+  self.supportedFilesEditor = [[[TPSupportedFilesEditor alloc] init] autorelease];
+  [self.supportedFilesEditor.view setFrame:[fileTypesPrefsView bounds]];
+  [fileTypesPrefsView addSubview:self.supportedFilesEditor.view];  
+  
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
   [nc addObserver:self
@@ -76,6 +82,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.enginesEditor = nil;
+  self.supportedFilesEditor = nil;
 	[commentsController release];
   [commentsL2Controller release];
   [commentsL3Controller release];
@@ -134,6 +141,12 @@
   [self addView:libraryPrefsView
           label:@"Palette & Library"
           image:[NSImage imageNamed:@"libraryPrefs"]];
+  
+  [self addView:fileTypesPrefsView
+          label:@"File Types"
+          image:[NSImage imageNamed:@"fileTypesPref"]];
+  
+  
   
 	[templateEditor setFont:f];
 	
