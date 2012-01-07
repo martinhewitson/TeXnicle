@@ -8,6 +8,7 @@
 
 #import "NSString+FileTypes.h"
 #import "NSArray+LaTeX.h"
+#import "TPSupportedFilesManager.h"
 
 @implementation NSString (FileTypes)
 
@@ -66,7 +67,13 @@
     return YES;
   }
   
-  for (NSString *lext in [NSArray latexFileTypes]) {
+  // ensure images are not interpreted as text files.
+  if ([self isImage]) {
+    return NO;
+  }
+  
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  for (NSString *lext in [sfm supportedExtensions]) {
     if ([self isEqualToString:lext]) {
       return YES;
     }
@@ -74,23 +81,25 @@
     
 //  NSLog(@"Checking ext %@", self);
   
-  BOOL fileIsText = NO;
-    
-  CFStringRef fileExtension = (CFStringRef) self;
-  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
-    fileIsText = YES;
-  }  
-
-  CFRelease(fileUTI);
-  
-  return fileIsText;
-  
-//  BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:self isValidForType:(NSString *)kUTTypeText];  
+//  BOOL fileIsText = NO;
+//    
+//  CFStringRef fileExtension = (CFStringRef) self;
+//  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
+//  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
+//    fileIsText = YES;
+//  }  
+//
+//  NSLog(@"File is text? %d", fileIsText);
 //  
+//  CFRelease(fileUTI);
+//  
+//  return fileIsText;
+  
+  BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:self isValidForType:(NSString *)kUTTypeText];  
+  
 //  NSLog(@"Result %d", result);
-//  
-//  return result;
+  
+  return result;
 }
 
 @end
