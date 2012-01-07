@@ -223,9 +223,7 @@
 				c = [text characterAtIndex:idx-1];
 			}
 			if (idx==0 || c != '\\') {
-
         NSColor *color = nil;
-        
         if (self.colorComments)
           color = self.commentColor;
         
@@ -233,18 +231,16 @@
           if ([text characterAtIndex:idx+1] == '%') {
             if (self.colorCommentsL2) {
               color = self.commentL2Color;
-            } else {
-//              color = nil;
             }
-          }
-          if (idx < strLen-2) {
-            if ([text characterAtIndex:idx+2] == '%') {
-              if (self.colorCommentsL3) {
-                color = self.commentL3Color;
-              } else {
-//                color = nil;
+            
+            if (idx < strLen-2) {
+              if ([text characterAtIndex:idx+2] == '%') {
+                if (self.colorCommentsL3) {
+                  color = self.commentL3Color;
+                }
               }
             }
+            
           }
         }
         if (color != nil) {
@@ -269,12 +265,21 @@
         }
         if (argCount == 0) {
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-//          NSLog(@"Argument: %@", NSStringFromRange(argRange));
-          [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
-          break;
+          if (argRange.length<1000) {
+            //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            break;
+          } else {
+            // if the argument is too long, color the first char
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(start, 1)];
+            idx = start;
+            break;
+          }
         }
         idx++;
       }
+      
+      
     } else if ((cc == '[') && self.colorArguments) {      
       start = idx;
       // look for the closing bracket
@@ -290,9 +295,16 @@
         }
         if (argCount == 0) {
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-//          NSLog(@"Argument: %@", NSStringFromRange(argRange));
-          [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
-          break;
+          if (argRange.length<1000) {
+            //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            break;
+          } else {
+            // if the argument is too long, color the first char
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(start, 1)];
+            idx = start;
+            break;
+          }
         }
         idx++;
       }
