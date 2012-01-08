@@ -17,6 +17,7 @@
 #import "TeXFileEntity.h"
 #import "MABSupportFolder.h"
 #import "TPEngineManager.h"
+#import "TPSupportedFile.h"
 
 NSString * const TEDocumentTemplates = @"TEDocumentTemplates";
 NSString * const TEUserCommands = @"TEUserCommands";
@@ -71,6 +72,7 @@ NSString * const TESyntaxCommentsL3Color = @"TESyntaxCommentsL3Color";
 NSString * const TESyntaxColorComments = @"TESyntaxColorComments";
 NSString * const TESyntaxColorCommentsL2 = @"TESyntaxColorCommentsL2";
 NSString * const TESyntaxColorCommentsL3 = @"TESyntaxColorCommentsL3";
+NSString * const TESyntaxColorArgumentMaxLength = @"TESyntaxColorArgumentMaxLength";
 
 // special chars
 NSString * const TESyntaxSpecialCharsColor = @"TESyntaxSpecialCharsColor";
@@ -88,6 +90,7 @@ NSString * const TESyntaxColorArguments = @"TESyntaxColorArguments";
 NSString * const TPPaletteRowHeight = @"TPPaletteRowHeight";
 NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
+NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
 @implementation TeXnicleAppController
 
@@ -151,7 +154,8 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL2];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL3];
-	
+	[defaultValues setValue:[NSNumber numberWithInteger:1000] forKey:TESyntaxColorArgumentMaxLength];
+  
   // special chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorSpecialChars];
@@ -208,6 +212,30 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 	[defaultValues setValue:@"" forKey:TPSpellCheckerLanguage];
   [defaultValues setValue:[NSNumber numberWithFloat:15.0] forKey:TPPaletteRowHeight];
   [defaultValues setValue:[NSNumber numberWithFloat:25.0] forKey:TPLibraryRowHeight];
+  
+  //---------- Supported File Types
+  NSMutableArray *supportedTypes = [NSMutableArray array];
+  // tex
+  TPSupportedFile *file;
+  file = [TPSupportedFile supportedFileWithName:@"TeX Files" extension:@"tex" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject: file];
+
+  // bib
+  file = [TPSupportedFile supportedFileWithName:@"BiBTeX Files" extension:@"bib" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject:file];
+
+  // sty
+  file = [TPSupportedFile supportedFileWithName:@"LaTeX Style Files" extension:@"sty" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject:file];
+
+  // cls
+  file = [TPSupportedFile supportedFileWithName:@"LaTeX Class Files" extension:@"cls" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject:file];
+  
+  // bst
+  file = [TPSupportedFile supportedFileWithName:@"BiBTeX Style Files" extension:@"bst" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject:file];
+  [defaultValues setValue:[NSKeyedArchiver archivedDataWithRootObject:supportedTypes] forKey:TPSupportedFileTypes];
   
   // register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	
