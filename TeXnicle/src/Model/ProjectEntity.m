@@ -9,6 +9,7 @@
 #import "ProjectEntity.h"
 #import "FileEntity.h"
 #import "Settings.h"
+#import "UISettings.h"
 
 @implementation ProjectEntity
 
@@ -19,6 +20,7 @@
 @dynamic settings;
 @dynamic selected;
 @dynamic mainFile;
+@dynamic uiSettings;
 
 - (void) awakeFromInsert
 {
@@ -30,6 +32,10 @@
   Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
   self.settings = [newSettings autorelease];
   
+  // make new UI settings
+  NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
+  UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+  self.uiSettings = [newUISettings autorelease];
 }
 
 - (void) awakeFromFetch
@@ -44,6 +50,13 @@
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
     Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
     self.settings = [newSettings autorelease];
+  }
+  
+  // make new ui settings if needed
+  if (self.uiSettings == nil) {
+    NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
+    UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
+    self.uiSettings = [newUISettings autorelease];
   }
 }
 

@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "UISettings.h"
 
 @class FileEntity;
 @class Settings;
+@class UISettings;
 
 @interface ProjectEntity : NSManagedObject {
 
@@ -22,6 +24,7 @@
 @property (assign) Settings *settings;
 @property (assign) FileEntity *selected;
 @property (assign) FileEntity *mainFile;
+@property (assign) UISettings *uiSettings;
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
