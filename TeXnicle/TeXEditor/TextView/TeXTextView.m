@@ -292,7 +292,45 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark Control
 
-- (IBAction) toggleCommentForSelection:(id)sender
+- (IBAction)commentSelection:(id)sender
+{
+	NSRange				selRange = [self selectedRange];
+	NSMutableString*	str = [[self textStorage] mutableString];
+  
+	// Get the range to edit
+	NSRange r = [str paragraphRangeForRange:selRange];	
+	// Get a mutable string for this range
+	NSInteger inserted = 0;
+  NSMutableString *newString = [NSMutableString string];
+	[newString appendString:[str substringWithRange:r]];
+  [newString insertString:@"%" atIndex:0];
+  inserted++;
+  
+	for (int ll=0; ll<[newString length]-1; ll++) {
+		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
+      [newString insertString:@"%" atIndex:ll+1];
+      inserted++;
+		}
+	}  
+  
+  if (inserted == 0)
+    return;
+  
+	[self setSelectedRange:r];
+	[self delete:self];
+	[self insertText:newString];
+	
+	NSInteger len = selRange.length+inserted-1;
+	
+  if (len<0)
+    len = 0;
+  [self setSelectedRange:NSMakeRange(selRange.location+1,len)];
+	
+  // color visible text
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
+}
+
+- (IBAction)uncommentSelection:(id)sender
 {
 	NSRange				selRange = [self selectedRange];
 	NSMutableString*	str = [[self textStorage] mutableString];
@@ -304,18 +342,69 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[newString appendString:[str substringWithRange:r]];
 	int inserted = 0;
 	if ([newString characterAtIndex:0]=='%') {
-		[newString replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
-		inserted--;
-	} else {
-		[newString insertString:@"%" atIndex:0];
-		inserted++;
+    
+    [newString replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    inserted--;
+    
 	}
-	
+  
 	for (int ll=0; ll<[newString length]-1; ll++) {
 		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
 			if ([newString characterAtIndex:ll+1] == '%') {
 				[newString replaceCharactersInRange:NSMakeRange(ll+1, 1) withString:@""];
 				inserted--;
+			}
+		}
+	}
+	
+  if (inserted == 0)
+    return;
+  
+	[self setSelectedRange:r];
+	[self delete:self];
+	[self insertText:newString];
+	NSInteger len = selRange.length+inserted+1;
+	
+  if (len<0)
+    len = 0;
+  [self setSelectedRange:NSMakeRange(selRange.location-1,len)];
+	
+  // color visible text
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];  
+}
+
+- (IBAction) toggleCommentForSelection:(id)sender
+{
+	NSRange				selRange = [self selectedRange];
+	NSMutableString*	str = [[self textStorage] mutableString];
+  
+	// Get the range to edit
+	NSRange r = [str paragraphRangeForRange:selRange];	
+	// Get a mutable string for this range
+	NSMutableString *newString = [NSMutableString string];
+	[newString appendString:[str substringWithRange:r]];
+	int move = 0;
+	if ([newString characterAtIndex:0]=='%') {
+    
+    // remove all comment chars
+    while([newString characterAtIndex:0]=='%') {
+      [newString replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
+      move--;
+    }
+    
+	} else {
+		[newString insertString:@"%" atIndex:0];
+		move++;
+	}
+  
+	NSInteger inserted = 0;
+	for (int ll=0; ll<[newString length]-1; ll++) {
+		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
+			if ([newString characterAtIndex:ll+1] == '%') {
+        while([newString characterAtIndex:ll+1]=='%') {
+          [newString replaceCharactersInRange:NSMakeRange(ll+1, 1) withString:@""];
+          inserted--;
+        }
 			} else {
 				[newString insertString:@"%" atIndex:ll+1];
 				inserted++;
@@ -328,20 +417,12 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self insertText:newString];
 	NSInteger len = selRange.length+inserted;
 	
-	if (inserted>0) {
-		len--;
-		if (len<0)
-			len = 0;
-		[self setSelectedRange:NSMakeRange(selRange.location+1,len)];
-	} else {
-		len++;
-		if (len<0)
-			len = 0;
-		[self setSelectedRange:NSMakeRange(selRange.location-1,len)];
-	}
+  if (len<0)
+    len = 0;
+  [self setSelectedRange:NSMakeRange(selRange.location+move,len)];
 	
   // color visible text
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 	
 	return;
 }
@@ -444,6 +525,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
+  [self colorVisibleText];
   [self highlightMatchingWords];
 }
 

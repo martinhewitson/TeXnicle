@@ -102,6 +102,8 @@ extern NSString * const TELineNumberClickedNotification;
 - (IBAction) toggleControlCharacters:(id)sender;
 - (IBAction) toggleInvisibleCharacters:(id)sender;
 - (IBAction) toggleCommentForSelection:(id)sender;
+- (IBAction)commentSelection:(id)sender;
+- (IBAction)uncommentSelection:(id)sender;
 
 - (IBAction) showSpellingList:(id)sender;
 - (IBAction)complete:(id)sender;
