@@ -105,5 +105,8 @@
 - (NSRange)rangeOfSelection:(PDFSelection*)selection;
 - (void) highlightSelectedSearchResult;
 
+- (void)restoreVisibleRectFromPersistentString:(NSString*)aString;
+- (NSString*)visibleRectForPersisting;
+
 
 @end
