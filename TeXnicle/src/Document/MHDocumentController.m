@@ -7,6 +7,8 @@
 //
 
 #import "MHDocumentController.h"
+#import "TPSupportedFilesManager.h"
+#import "ExternalTeXDoc.h"
 
 @implementation MHDocumentController
 
@@ -37,6 +39,42 @@
                       display:displayDocument
             completionHandler:completionHandler];
   
+}
+
+- (NSString *)typeForContentsOfURL:(NSURL *)inAbsoluteURL error:(NSError **)outError
+{
+  NSString *ext = [inAbsoluteURL pathExtension];
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  if (ext) {
+    NSString *type = [sfm typeForExtension:ext];
+    if (type) {
+      return type;
+    }
+  }
+  
+  return [super typeForContentsOfURL:inAbsoluteURL error:outError];
+}
+
+- (Class)documentClassForType:(NSString *)documentTypeName
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  NSString *ext = [sfm extensionForType:documentTypeName];
+  if (ext) {
+    return [ExternalTeXDoc class];
+  }
+  
+  return [super documentClassForType:documentTypeName];
+}
+
+- (NSArray *)fileExtensionsFromType:(NSString *)documentTypeName
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  NSString *ext = [sfm extensionForType:documentTypeName];
+  if (ext) {
+    return [NSArray arrayWithObject:ext];
+  }
+  
+  return [super fileExtensionsFromType:documentTypeName];
 }
 
 @end
