@@ -15,6 +15,7 @@
 #import "Bookmark.h"
 #import "MHLineNumber.h"
 #import "NSArray+LaTeX.h"
+#import "TPSupportedFilesManager.h"
 
 @implementation DocWindowController
 
@@ -195,7 +196,8 @@
 	// If this is not a TeX document being edited, then we can return just 
 	// applying the plain doc settings
 	NSString *ext = [file valueForKey:@"extension"] ;
-  for (NSString *lext in [NSArray latexFileTypes]) {
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  for (NSString *lext in [sfm supportedExtensionsForHighlighting]) {
     if ([ext isEqual:lext]) {
       return YES;
     }
