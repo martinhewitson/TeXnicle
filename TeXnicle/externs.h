@@ -53,6 +53,7 @@ extern NSString * const TESyntaxCommentsL3Color;
 extern NSString * const TESyntaxColorComments;
 extern NSString * const TESyntaxColorCommentsL2;
 extern NSString * const TESyntaxColorCommentsL3;
+extern NSString * const TESyntaxColorArgumentMaxLength;
 
 // special chars
 extern NSString * const TESyntaxSpecialCharsColor;
@@ -99,5 +100,7 @@ extern NSString * const OutlineViewNodeType;
 extern NSString * const TPPaletteRowHeight;
 extern NSString * const TPLibraryRowHeight;
 
+// Supported File Types (array of dictionaries)
+extern NSString * const TPSupportedFileTypes;
 
 
