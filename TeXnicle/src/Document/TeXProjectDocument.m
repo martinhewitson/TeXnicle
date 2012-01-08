@@ -27,6 +27,7 @@
 #import "UKXattrMetadataStore.h"
 #import "NSString+RelativePath.h"
 #import "NSArray+LaTeX.h"
+#import "TPSupportedFilesManager.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -81,6 +82,8 @@
 @synthesize leftView;
 @synthesize rightView;
 @synthesize centerView;
+
+@synthesize controlsTabBarController;
 
 @synthesize miniConsole;
 
@@ -336,6 +339,8 @@
                                                     userInfo:nil
                                                      repeats:YES];
   
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  
   [self showDocument];
 }
 
@@ -376,6 +381,7 @@
   
   [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
   [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
 }
 
 - (void) restoreOpenTabs
@@ -427,7 +433,49 @@
       [[ConsoleController sharedConsoleController] close];
 		}
 	}
-	
+}
+
+- (void) restoreUIstate
+{
+  // controls tab
+  [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
+  
+  // controls width
+  NSRect r = [self.leftView frame];
+  r.size.width = [self.project.uiSettings.controlsWidth floatValue];
+  if (r.size.width>=0) {
+    [self.leftView setFrame:r];
+  }
+  
+  // editor width
+  r = [self.centerView frame];
+  r.size.width = [self.project.uiSettings.editorWidth floatValue];
+  if (r.size.width>=0) {
+    [self.centerView setFrame:r];
+  }
+  
+  // pdf viewer visible rect
+  [self.pdfViewerController restoreVisibleRectFromPersistentString:self.project.uiSettings.pdfViewScrollRect];
+  
+}
+
+- (void) captureUIstate
+{
+  
+  // selected controls tab
+  self.project.uiSettings.selectedControlsTab = [NSNumber numberWithInteger:[self.controlsTabBarController indexOfSelectedTab]];
+  
+  // controls width
+  NSRect r = [self.leftView frame];
+  self.project.uiSettings.controlsWidth = [NSNumber numberWithFloat:r.size.width];
+  
+  // editor width
+  r = [self.centerView frame];
+  self.project.uiSettings.editorWidth = [NSNumber numberWithFloat:r.size.width];
+  
+  // pdf viewer visible rect
+  self.project.uiSettings.pdfViewScrollRect = [self.pdfViewerController visibleRectForPersisting];  
+  
 }
 
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL
@@ -1387,7 +1435,8 @@
   
   FileEntity *file = [self.openDocuments currentDoc];
 	NSString *ext = [file valueForKey:@"extension"] ;
-  for (NSString *lext in [NSArray latexFileTypes]) {
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  for (NSString *lext in [sfm supportedExtensionsForHighlighting]) {
     if ([ext isEqual:lext]) {
       return YES;
     }
@@ -2435,6 +2484,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   } else {
     self.project.selected = nil;
   }
+  
+  // capture UI state
+  [self captureUIstate];
   
   // cache chosen language
   NSString *language = [[NSSpellChecker sharedSpellChecker] language];	

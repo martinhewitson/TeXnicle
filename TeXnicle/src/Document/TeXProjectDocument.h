@@ -26,6 +26,8 @@
 #import "TPStatusViewController.h"
 #import "PDFViewer.h"
 #import "TPDocumentOutlineViewController.h"
+#import "TPSupportedFilesManager.h"
+#import "MHControlsTabBarController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -123,6 +125,8 @@
   
   BOOL _windowIsClosing;
   
+  MHControlsTabBarController *controlsTabBarController;
+  
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
   PDFViewer *pdfViewer;
@@ -177,7 +181,12 @@
 @property (retain) TPImageViewerController *imageViewerController;
 @property (retain) TPFileMonitor *fileMonitor;
 
+@property (assign) IBOutlet MHControlsTabBarController *controlsTabBarController;
+
 @property (readonly) BOOL pdfHasSelection;
+
+- (void) restoreUIstate;
+- (void) captureUIstate;
 
 - (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;
