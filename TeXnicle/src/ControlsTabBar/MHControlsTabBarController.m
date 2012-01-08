@@ -67,7 +67,6 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   }
   
   buttons = [[NSArray arrayWithArray:nonNilButtons] retain];
-//  buttons = [[NSArray arrayWithObjects:self.projectButton, self.palletButton, self.libraryButton, self.outlineButton, self.findButton, self.bookmarksButton, self.prefsButton, nil] retain];
   
 }
 
@@ -75,6 +74,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 {
   [self.tabView selectTabViewItemAtIndex:index];
   [self toggleOn:[self buttonForTabIndex:index]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPControlsTabSelectionDidChangeNotification
+                                                      object:self
+                                                    userInfo:nil];
 }
 
 - (void)dealloc
@@ -91,12 +93,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction)buttonSelected:(id)sender
 {
   NSInteger idx = [self tabIndexForButton:sender];
-  [self.tabView selectTabViewItemAtIndex:idx];
-  [self toggleOn:sender];  
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:TPControlsTabSelectionDidChangeNotification
-                                                      object:self
-                                                    userInfo:nil];
+  [self selectTabAtIndex:idx];
 }
 
 - (void) toggleOn:(id)except
