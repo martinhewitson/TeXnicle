@@ -571,9 +571,27 @@
 								</object>
 								<object class="NSMenuItem" id="863905378">
 									<reference key="NSMenu" ref="789758025"/>
-									<string key="NSTitle">Comment/Uncomment</string>
+									<string key="NSTitle">Toggle Comment</string>
 									<string key="NSKeyEquiv">/</string>
 									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="131634098">
+									<reference key="NSMenu" ref="789758025"/>
+									<string key="NSTitle">Increase Comment</string>
+									<string key="NSKeyEquiv">/</string>
+									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="788990906">
+									<reference key="NSMenu" ref="789758025"/>
+									<string key="NSTitle">Uncomment Selection</string>
+									<string key="NSKeyEquiv">/</string>
+									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
@@ -1834,14 +1852,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleCommentForSelection:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="863905378"/>
-					</object>
-					<int key="connectionID">574</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">reformatParagraph:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="66026405"/>
@@ -2282,6 +2292,30 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">uncommentSelection:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="788990906"/>
+					</object>
+					<int key="connectionID">727</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">commentSelection:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="131634098"/>
+					</object>
+					<int key="connectionID">729</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleCommentForSelection:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="863905378"/>
+					</object>
+					<int key="connectionID">730</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -2503,6 +2537,8 @@
 							<reference ref="942438780"/>
 							<reference ref="306581996"/>
 							<reference ref="629535222"/>
+							<reference ref="788990906"/>
+							<reference ref="131634098"/>
 						</array>
 						<reference key="parent" ref="952259628"/>
 					</object>
@@ -3381,6 +3417,16 @@
 						<reference key="object" ref="667755923"/>
 						<reference key="parent" ref="466310130"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">725</int>
+						<reference key="object" ref="788990906"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">728</int>
+						<reference key="object" ref="131634098"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3538,6 +3584,8 @@
 				<string key="717.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="720.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="725.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="728.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="75.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3554,7 +3602,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">722</int>
+			<int key="maxID">730</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4870,6 +4918,7 @@
 					<string key="superclassName">NSTextView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="collapseAll:">id</string>
+						<string key="commentSelection:">id</string>
 						<string key="complete:">id</string>
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
@@ -4882,12 +4931,17 @@
 						<string key="toggleCommentForSelection:">id</string>
 						<string key="toggleControlCharacters:">id</string>
 						<string key="toggleInvisibleCharacters:">id</string>
+						<string key="uncommentSelection:">id</string>
 						<string key="unfoldSelection:">id</string>
 						<string key="unindentSelection:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="collapseAll:">
 							<string key="name">collapseAll:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="commentSelection:">
+							<string key="name">commentSelection:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="complete:">
@@ -4936,6 +4990,10 @@
 						</object>
 						<object class="IBActionInfo" key="toggleInvisibleCharacters:">
 							<string key="name">toggleInvisibleCharacters:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="uncommentSelection:">
+							<string key="name">uncommentSelection:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="unfoldSelection:">
