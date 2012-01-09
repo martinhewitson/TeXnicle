@@ -85,6 +85,8 @@ extern NSString * const TPTrashDocumentFileWhenTrashing;
 extern NSString * const TPConsoleDisplayLevel;
 extern NSString * const TPSpellCheckerLanguage;
 
+extern NSString * const TPDefaultEncoding;
+
 // Notifications
 extern NSString * const TPSyntaxColorsChangedNotification;
 extern NSString * const TPFileItemTextStorageChangedNotification;
