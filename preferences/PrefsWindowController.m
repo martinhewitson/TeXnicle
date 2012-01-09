@@ -12,6 +12,7 @@
 #import "TeXTextView.h"
 #import "NSString+Comparisons.h"
 #import "TPEnginesEditor.h"
+#import "MHFileReader.h"
 
 @implementation PrefsWindowController
 
@@ -62,6 +63,13 @@
   [enginePopup removeAllItems];
   [enginePopup addItemWithTitle:[self engineName]];
   
+  // default encoding
+  [defaultEncodingPopup removeAllItems];
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  [defaultEncodingPopup addItemsWithTitles:fr.encodingNames];
+  NSString *defaultEncoding = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
+  [defaultEncodingPopup selectItemWithTitle:defaultEncoding];
+  
   [templateEditor performSelector:@selector(applyFontAndColor) withObject:nil afterDelay:0];
   
   // file types editor
@@ -101,6 +109,12 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (IBAction)defaultEncodingSelected:(id)sender
+{
+  NSString *encodingName = [defaultEncodingPopup titleOfSelectedItem];
+  [[NSUserDefaults standardUserDefaults] setValue:encodingName forKey:TPDefaultEncoding];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 - (void)setupToolbar
 {

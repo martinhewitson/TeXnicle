@@ -70,12 +70,17 @@
   
   IBOutlet NSPopUpButton *enginePopup;
   
+  IBOutlet NSPopUpButton *defaultEncodingPopup;
+  
   TPSupportedFilesEditor *supportedFilesEditor;
 }
 
 @property (retain) TPSupportedFilesEditor *supportedFilesEditor;
 @property (retain) TPEnginesEditor *enginesEditor;
 @property (assign) IBOutlet NSView *enginesEditorContainer;
+
+
+- (IBAction)defaultEncodingSelected:(id)sender;
 
 #pragma mark -
 #pragma mark Engine stuff
