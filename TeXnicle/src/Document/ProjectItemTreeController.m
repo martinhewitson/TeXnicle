@@ -45,6 +45,8 @@
 #import "ConsoleController.h"
 #import "NSFileManager+TeXnicle.h"
 #import "TPOutlineView.h"
+#import "MHFileReader.h"
+#import "NSString+FileTypes.h"
 
 @interface ProjectItemTreeController (Private)
 - (void)updateSortOrderOfModelObjects;
@@ -362,10 +364,10 @@ withIntermediateDirectories:YES
 	
 	if (codeStr && ![codeStr isEqual:@""]) {
 //		NSData *data = [codeStr RTFFromRange:NSMakeRange(0, [codeStr length]) documentAttributes:nil];	
-		NSData *data = [codeStr dataUsingEncoding:NSUTF8StringEncoding];
+		NSData *data = [codeStr dataUsingEncoding:[MHFileReader defaultEncoding]];
 		[newFile setValue:data forKey:@"content"];
 	} else {
-		[newFile setValue:[@"" dataUsingEncoding:NSUTF8StringEncoding] forKey:@"content"];
+		[newFile setValue:[@"" dataUsingEncoding:[MHFileReader defaultEncoding]] forKey:@"content"];
 	}
 		 
 	// set project
@@ -923,22 +925,10 @@ withIntermediateDirectories:YES
 	
 	// read the contents of the source file
 	BOOL isTextFile = NO;
-	NSStringEncoding encoding;
-	NSString *contents = [NSString stringWithContentsOfFile:aPath
-																						 usedEncoding:&encoding
-																										error:&error];
-  
-  // check if the file was a text file, If it is a text file and we couldn't load it, throw an error.
-  CFStringRef fileExtension = (CFStringRef) [aPath pathExtension];
-  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-  
-  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
-    if (error) {
-      [NSApp presentError:error];
-    }
-  }
-  CFRelease(fileUTI);
-	if (contents) {
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aPath]];
+
+	if ([aPath isText]) {
 		isTextFile = YES;
 	}	
 	
