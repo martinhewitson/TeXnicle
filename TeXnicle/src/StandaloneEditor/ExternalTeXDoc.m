@@ -23,6 +23,11 @@
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
 
+NSString * const TPExternalDocControlsTabIndexKey = @"TPExternalDocControlsTabIndexKey"; 
+NSString * const TPExternalDocControlsWidthKey = @"TPExternalDocControlsWidthKey"; 
+NSString * const TPExternalDocEditorWidthKey = @"TPExternalDocEditorWidthKey"; 
+NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectKey"; 
+
 @implementation ExternalTeXDoc
 
 @synthesize documentData;
@@ -59,6 +64,39 @@
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   return [[sfm supportedTypes] arrayByAddingObjectsFromArray:[super readableTypes]];
 }
+
+
+- (void) captureUIsettings
+{
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  
+  // controls tab index
+  [dict setValue:[NSNumber numberWithInteger:[self.tabbarController indexOfSelectedTab]] forKey:TPExternalDocControlsTabIndexKey];
+  
+  // controls width
+  NSRect r = [controlsViewContainer frame];
+  [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocControlsWidthKey];
+  
+  // editor width
+  r = [texEditorContainer frame];
+  [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocEditorWidthKey];
+  
+  // pdf view visible rect
+  [dict setValue:[self.pdfViewerController visibleRectForPersisting] forKey:TPExternalDocPDFVisibleRectKey];
+  
+  
+  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
+  NSLog(@"Setting UI settings %@ to %@", dict, [[self fileURL] path]);
+  NSLog(@"Data %@", data);
+  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
+  
+}
+
+- (void) restoreUIsettings
+{
+  
+}
+
 
 - (void)awakeFromNib
 {
@@ -276,6 +314,8 @@
   self.pdfViewer = nil;
 	[super dealloc];
 }
+
+
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
@@ -540,6 +580,9 @@
 	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
 	[[NSUserDefaults standardUserDefaults] synchronize];
   
+  // capture UI state
+  [self captureUIsettings];
+  
 	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
@@ -605,8 +648,13 @@
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
 	if (str) {
     self.fileLoadDate = [NSDate date];
-		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
-		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
+                                                        forKey:NSCharacterEncodingDocumentAttribute];
+    NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
+    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
+    //    NSLog(@"Made att str %@", attStr);
+		[self setDocumentData:attStr];
+    [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[[self fileURL] path] traverseLink:NO];
@@ -646,7 +694,13 @@
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
     self.fileLoadDate = [NSDate date];
-		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
+                                                        forKey:NSCharacterEncodingDocumentAttribute];
+    NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
+    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
+    //    NSLog(@"Made att str %@", attStr);
+		[self setDocumentData:attStr];
+    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];

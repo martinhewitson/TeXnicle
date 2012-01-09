@@ -87,9 +87,12 @@
   NSView *prefsContainerView;
   
   IBOutlet ProjectOutlineController *outlineController;
+  
+  IBOutlet NSView *controlsViewContainer;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
+
 
 @property (retain) NSMutableArray *results;
 
