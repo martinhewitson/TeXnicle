@@ -9,11 +9,19 @@
 #import "MHFileReader.h"
 #import "UKXattrMetadataStore.h"
 #import "NSString+FileTypes.h"
+#import "externs.h"
 
 @implementation MHFileReader
 @synthesize encodings;
 @synthesize encodingNames;
 @synthesize selectedIndex;
+
++ (NSStringEncoding)defaultEncoding
+{
+  NSString *defaultEncodingName = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  return [fr encodingWithName:defaultEncodingName];
+}
 
 - (id) init
 {
@@ -80,7 +88,9 @@
 
 - (NSStringEncoding) defaultEncoding
 {
-  return [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
+  NSString *defaultEncodingName = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
+  return [self encodingWithName:defaultEncodingName];
+  //  return [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
 }
 
 - (NSInteger)indexForEncoding:(NSStringEncoding)encoding
@@ -197,19 +207,30 @@
   NSString *str = nil;
   NSStringEncoding encoding;
   if (encodingString == nil || [encodingString length] == 0) {
-    encoding = [self defaultEncoding];
+    
+    str = [NSString stringWithContentsOfURL:aURL usedEncoding:&encoding error:&error];
+    //    NSLog(@"Loaded string %@", str);
+    // if we didn't get a string, then try the default encoding
+    if (str == nil) {
+      //      NSLog(@"   failed to guess.");
+      encoding = [self defaultEncoding];
+      //      NSLog(@" using default encoding %@", [self nameOfEncoding:encoding]);
+    }
+    
   } else {
     encoding = [self encodingWithName:encodingString];
   }
-//  NSLog(@"Reading string with encoding %@", encodingString);
-  error = nil;
-  str = [NSString stringWithContentsOfURL:aURL
-                                 encoding:encoding
-                                    error:&error];
+  //  NSLog(@"Reading string with encoding %@", encodingString);
+  // if we didn't get the string, try with the default encoding
+  if (str == nil) {
+    error = nil;
+    str = [NSString stringWithContentsOfURL:aURL
+                                   encoding:encoding
+                                      error:&error];
+    
+  }  
   
-  
-  
-//  NSLog(@"Loaded string %@", str);
+  //  NSLog(@"Loaded string %@", str);
   
   if (str == nil) {
     
@@ -222,7 +243,8 @@
     NSInteger result = [alert runModal];
     if (result == NSAlertDefaultReturn)       
     {
-      encoding = [self defaultEncoding];
+      // get the encoding the user selected
+      encoding = [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
       str = [NSString stringWithContentsOfURL:aURL
                                      encoding:encoding
                                         error:&error];
@@ -258,6 +280,11 @@
     encoding = [self encodingWithName:encodingString];
   }
   return encoding;
+}
+
+- (NSStringEncoding)encodingUsed
+{
+  return [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
 }
 
 @end

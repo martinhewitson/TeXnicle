@@ -19,6 +19,7 @@
 @property (retain) NSArray *encodingNames;
 @property (retain) NSNumber *selectedIndex;
 
++ (NSStringEncoding)defaultEncoding;
 - (id) initWithEncoding:(NSStringEncoding)encoding;
 - (id) initWithEncodingNamed:(NSString*)encodingName;
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL;
@@ -31,5 +32,5 @@
 - (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL;
 - (BOOL)writeDataToFileAsString:(NSData*)data toURL:(NSURL*)aURL;
 - (NSStringEncoding)encodingForFileAtPath:(NSString*)aPath;
-
+- (NSStringEncoding)encodingUsed;
 @end
