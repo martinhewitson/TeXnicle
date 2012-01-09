@@ -19,6 +19,8 @@
 #import "TPEngineManager.h"
 #import "TPSupportedFile.h"
 
+NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
+
 NSString * const TEDocumentTemplates = @"TEDocumentTemplates";
 NSString * const TEUserCommands = @"TEUserCommands";
 
@@ -236,6 +238,9 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   file = [TPSupportedFile supportedFileWithName:@"BiBTeX Style Files" extension:@"bst" isBuiltIn:YES syntaxHighlight:YES];
   [supportedTypes addObject:file];
   [defaultValues setValue:[NSKeyedArchiver archivedDataWithRootObject:supportedTypes] forKey:TPSupportedFileTypes];
+  
+  // default encoding
+  [defaultValues setValue:@"Unicode (UTF-8)" forKey:TPDefaultEncoding];
   
   // register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	
