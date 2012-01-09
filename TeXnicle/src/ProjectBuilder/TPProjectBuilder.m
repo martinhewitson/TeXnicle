@@ -16,6 +16,8 @@
 #import "FileEntity.h"
 #import "TeXFileEntity.h"
 #import "ProjectItemTreeController.h"
+#import "MHFileReader.h"
+#import "NSString+FileTypes.h"
 
 @implementation TPProjectBuilder
 
@@ -80,10 +82,14 @@
         NSError *error = nil;
         // load the file as a string
         error = nil;
-        NSString *str = [NSString stringWithContentsOfFile:fullpath
-                                                  encoding:NSUTF8StringEncoding
-                                                     error:&error];
-        if (!error) {
+        
+        MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+        NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
+        
+//        NSString *str = [NSString stringWithContentsOfFile:fullpath
+//                                                  encoding:NSUTF8StringEncoding
+//                                                     error:&error];
+        if (str) {
           // look for \documentclass
           NSString *scanned = nil;
           NSScanner *scanner = [NSScanner scannerWithString:str];
@@ -128,12 +134,14 @@
   NSManagedObjectContext *moc = [aDocument managedObjectContext];	
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
-  NSError *error = nil;
+//  NSError *error = nil;
   // load the file as a string
-  NSString *string = [NSString stringWithContentsOfFile:aFile
-                                            encoding:NSUTF8StringEncoding
-                                               error:&error];
-  if (error) {
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *string = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aFile]];
+//  NSString *string = [NSString stringWithContentsOfFile:aFile
+//                                            encoding:NSUTF8StringEncoding
+//                                               error:&error];
+  if (string == nil) {
     [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];    
   } else {
     
@@ -203,21 +211,16 @@
 	
   // set file content
 	BOOL isTextFile = NO;
-	NSStringEncoding encoding;
-	NSError *error = nil;
-	NSString *contents = [NSString stringWithContentsOfFile:fullpath
-																						 usedEncoding:&encoding
-																										error:&error];
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
+//	NSStringEncoding encoding;
+//	NSError *error = nil;
+//	NSString *contents = [NSString stringWithContentsOfFile:fullpath
+//																						 usedEncoding:&encoding
+//																										error:&error];
   
   // check if the file was a text file, If it is a text file and we couldn't load it, throw an error.
-  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef) extension, NULL);  
-  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
-    if (error) {
-      [NSApp presentError:error];
-    }
-  }
-  CFRelease(fileUTI);
-	if (contents) {
+	if ([fullpath isText]) {
 		isTextFile = YES;
 	}	
   NSData *data = [contents dataUsingEncoding:NSUTF8StringEncoding];
