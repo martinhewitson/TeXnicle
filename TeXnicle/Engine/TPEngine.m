@@ -9,6 +9,7 @@
 #import "TPEngine.h"
 #import "ConsoleController.h"
 #import "externs.h"
+#import "MHFileReader.h"
 
 @implementation TPEngine
 
@@ -91,10 +92,10 @@
 
 - (void) parseEngineFile
 {
-  NSError *error = nil;
-  NSString *str = [NSString stringWithContentsOfFile:self.path encoding:NSUTF8StringEncoding error:&error];
-  if (error) {
-    [NSApp presentError:error];
+  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:self.path]];
+
+  if (str == nil) {
     return;
   }
   
