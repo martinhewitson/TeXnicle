@@ -100,7 +100,7 @@
 			str = @"";
 		}
 //    NSLog(@"%@: %@", self, str);
-		NSData *data = [str dataUsingEncoding:[fr defaultEncoding]];
+		NSData *data = [str dataUsingEncoding:[fr encodingUsed]];
 		[self setPrimitiveValue:data forKey:@"content"];
 		[self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
 	} 
