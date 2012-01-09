@@ -32,7 +32,7 @@
 #import "NSString+FileTypes.h"
 
 #import "MHPlaceholderAttachment.h"
-
+#import "MHFileReader.h"
 #import "externs.h"
 
 #define LargeTextWidth  1e7
@@ -860,7 +860,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		
 		if (att && [att respondsToSelector:@selector(object)]) {			
 			NSData *data = [[att fileWrapper] regularFileContents];
-			NSString *code = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+			NSString *code = [[NSString alloc] initWithData:data encoding:[MHFileReader defaultEncoding]];
 			// delete the line up to and including the attachment
 			[[self textStorage] replaceCharactersInRange:NSMakeRange(lineRange.location, idx+2) 
 																				withString:[code stringByAppendingString:@"\n"]];
@@ -1370,9 +1370,9 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) highlightMatchingWords
 {  
-  if (self.wordHighlightRanges == nil) {
-    self.wordHighlightRanges = [NSMutableArray array];
-  }
+//  if (self.wordHighlightRanges == nil) {
+//    self.wordHighlightRanges = [NSMutableArray array];
+//  }
   
   NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
@@ -1381,14 +1381,14 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
-//    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
     
     // remove existing word highlights
-    for (NSString *rangeString in self.wordHighlightRanges) {
-      NSRange r = NSRangeFromString(rangeString);
-      [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:r];
-    }
-    [self.wordHighlightRanges removeAllObjects];
+//    for (NSString *rangeString in self.wordHighlightRanges) {
+//      NSRange r = NSRangeFromString(rangeString);
+//      [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:r];
+//    }
+//    [self.wordHighlightRanges removeAllObjects];
     
     NSString *string = [self string];
     if (r.length > 0 && NSMaxRange(r)<[string length]) {
@@ -1403,7 +1403,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
           NSRange r = [match rangeValue];
           r.location += vr.location;
           [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
-          [self.wordHighlightRanges addObject:NSStringFromRange(r)];
+//          [self.wordHighlightRanges addObject:NSStringFromRange(r)];
 //          NSLog(@"+ Added range %@", NSStringFromRange(r));
         }
       }      
