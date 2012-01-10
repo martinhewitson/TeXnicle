@@ -89,6 +89,8 @@
   IBOutlet ProjectOutlineController *outlineController;
   
   IBOutlet NSView *controlsViewContainer;
+  
+  NSStringEncoding _encoding;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;

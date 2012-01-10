@@ -22,6 +22,7 @@
 #import "TPDocumentMatch.h"
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
+#import "NSApplication+SystemVersion.h"
 
 NSString * const TPExternalDocControlsTabIndexKey = @"TPExternalDocControlsTabIndexKey"; 
 NSString * const TPExternalDocControlsWidthKey = @"TPExternalDocControlsWidthKey"; 
@@ -86,15 +87,44 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   
   
   NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
-  NSLog(@"Setting UI settings %@ to %@", dict, [[self fileURL] path]);
-  NSLog(@"Data %@", data);
-  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
-  
+  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
 }
 
 - (void) restoreUIsettings
 {
-  
+  NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
+  if (data) {
+    NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (dict) {
+      
+      // controls tab index
+      NSInteger tabIndex = [[dict valueForKey:TPExternalDocControlsTabIndexKey] integerValue];
+      [self.tabbarController selectTabAtIndex:tabIndex];
+      
+      if (![NSApp isLion]) {
+        // controls width
+        CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
+        if (controlsWidth >= 0.0) {
+          NSRect fr = [controlsViewContainer frame];
+          fr.size.width = controlsWidth;
+          [controlsViewContainer setFrame:fr];
+        }
+        
+        // editor width
+        CGFloat editorWidth = [[dict valueForKey:TPExternalDocEditorWidthKey] floatValue];
+        if (editorWidth >= 0.0) {
+          NSRect fr = [texEditorContainer frame];
+          fr.size.width = editorWidth;
+          [texEditorContainer setFrame:fr];
+        }
+      }
+      
+      // pdf view visible rect
+      NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
+      [self.pdfViewerController restoreVisibleRectFromPersistentString:pdfVisibleRect];
+      
+    }
+  }    
 }
 
 
@@ -196,6 +226,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self updateFileStatus];
   
   [self showDocument];
+  
+  [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
 }
 
 - (void) initSettings
@@ -580,8 +612,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
 	[[NSUserDefaults standardUserDefaults] synchronize];
   
-  // capture UI state
-  [self captureUIsettings];
   
 	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 	NSRect selRect = [self.texEditorViewController.textView visibleRect];
@@ -591,6 +621,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	[self.texEditorViewController.textView scrollRectToVisible:selRect];
 	[[self windowForSheet] makeFirstResponder:r];
   [self updateFileStatus];
+  // capture UI state
+  [self captureUIsettings];
 }
 
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
@@ -677,7 +709,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	NSString *str = [string string];
   
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
-  BOOL res = [fr writeString:str toURL:absoluteURL];
+  BOOL res = [fr writeString:str toURL:absoluteURL withEncoding:_encoding];
 	[string release];
   
   // now write project settings as xattr  
@@ -694,7 +726,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
     self.fileLoadDate = [NSDate date];
-    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
+    _encoding = [fr encodingUsed];
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:_encoding]
                                                         forKey:NSCharacterEncodingDocumentAttribute];
     NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
     //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
