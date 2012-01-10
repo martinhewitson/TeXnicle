@@ -185,16 +185,16 @@
 		// this must mean that the last run failed
 	}
 	
-	// check if the pdf exists
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:pdfFile]) {
-		NSError *error = nil;
-		[fm removeItemAtPath:pdfFile
-									 error:&error];
-		if (error) {
-			[NSApp presentError:error];
-		}
-	}		
+//	// check if the pdf exists
+//	NSFileManager *fm = [NSFileManager defaultManager];
+//	if ([fm fileExistsAtPath:pdfFile]) {
+//		NSError *error = nil;
+//		[fm removeItemAtPath:pdfFile
+//									 error:&error];
+//		if (error) {
+//			[NSApp presentError:error];
+//		}
+//	}		
 	
 //  [console message:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
