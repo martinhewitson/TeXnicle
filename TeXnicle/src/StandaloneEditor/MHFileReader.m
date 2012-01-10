@@ -89,6 +89,7 @@
 - (NSStringEncoding) defaultEncoding
 {
   NSString *defaultEncodingName = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
+//  NSLog(@"Getting default encoding...%@", defaultEncodingName);
   return [self encodingWithName:defaultEncodingName];
   //  return [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
 }
@@ -164,17 +165,8 @@
 }
 
 
-- (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL
+- (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL withEncoding:(NSStringEncoding)encoding
 {
-  NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
-                                                         atPath:[aURL path]
-                                                   traverseLink:YES];
-  NSStringEncoding encoding;
-  if (encodingString == nil || [encodingString length] == 0) {
-    encoding = [self defaultEncoding];
-  } else {
-    encoding = [self encodingWithName:encodingString];
-  }
   
   NSError *error = nil;
   [aString writeToURL:aURL atomically:YES encoding:encoding error:&error];
@@ -189,6 +181,22 @@
                      traverseLink:YES];
   
   return YES;
+}
+
+- (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL
+{
+  NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
+                                                         atPath:[aURL path]
+                                                   traverseLink:YES];
+  
+  NSStringEncoding encoding;
+  if (encodingString == nil || [encodingString length] == 0) {
+    encoding = [self defaultEncoding];
+  } else {
+    encoding = [self encodingWithName:encodingString];
+  }
+  
+  return [self writeString:aString toURL:aURL withEncoding:encoding];
 }
 
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL
