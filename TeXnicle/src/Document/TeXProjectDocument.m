@@ -28,6 +28,7 @@
 #import "NSString+RelativePath.h"
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
+#import "NSApplication+SystemVersion.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -440,20 +441,21 @@
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
   
-  // controls width
-  NSRect r = [self.leftView frame];
-  r.size.width = [self.project.uiSettings.controlsWidth floatValue];
-  if (r.size.width>=0) {
-    [self.leftView setFrame:r];
+  if(![NSApp isLion]) {
+    // controls width
+    NSRect r = [self.leftView frame];
+    r.size.width = [self.project.uiSettings.controlsWidth floatValue];
+    if (r.size.width>=0) {
+      [self.leftView setFrame:r];
+    }
+    
+    // editor width
+    r = [self.centerView frame];
+    r.size.width = [self.project.uiSettings.editorWidth floatValue];
+    if (r.size.width>=0) {
+      [self.centerView setFrame:r];
+    }
   }
-  
-  // editor width
-  r = [self.centerView frame];
-  r.size.width = [self.project.uiSettings.editorWidth floatValue];
-  if (r.size.width>=0) {
-    [self.centerView setFrame:r];
-  }
-  
   // pdf viewer visible rect
   [self.pdfViewerController restoreVisibleRectFromPersistentString:self.project.uiSettings.pdfViewScrollRect];
   
