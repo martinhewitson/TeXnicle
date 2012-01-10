@@ -49,19 +49,30 @@
   
 }
 
+- (void) redisplayDocument
+{
+  NSView *view = [self.pdfViewerController.pdfview documentView];    
+  NSRect r = [view visibleRect];
+  BOOL hasDoc = [self.pdfViewerController hasDocument];
+  [self.pdfViewerController redisplayDocument];
+  if (hasDoc) {
+    [view scrollRectToVisible:r];
+  }  
+}
+
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
-  [self.pdfViewerController redisplayDocument];
+  [self redisplayDocument];
 }
 
 - (void) handleCompileDidFinishNotification:(NSNotification*)aNote
 {
-  [self.pdfViewerController redisplayDocument];
+  [self redisplayDocument];
 }
 
 - (void) handleDidTrashFilesNotification:(NSNotification*)aNote
 {
-  [self.pdfViewerController redisplayDocument];
+  [self redisplayDocument];
 }
 
 
@@ -83,7 +94,7 @@
   [self.pdfViewerController.view setFrame:[self.containerView bounds]];
   [self.containerView addSubview:self.pdfViewerController.view];
   [self.pdfViewerController showViewer];
-  [self.pdfViewerController redisplayDocument];
+  [self redisplayDocument];
 }
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer

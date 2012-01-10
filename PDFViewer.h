@@ -32,6 +32,7 @@
 @property (assign) IBOutlet NSView *containerView;
 
 - (id)initWithDelegate:(id<PDFViewerDelegate>)aDelegate;
+- (void) redisplayDocument;
 
 - (IBAction)findSource:(id)sender;
 
