@@ -72,11 +72,13 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (void) selectTabAtIndex:(NSInteger)index
 {
-  [self.tabView selectTabViewItemAtIndex:index];
-  [self toggleOn:[self buttonForTabIndex:index]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:TPControlsTabSelectionDidChangeNotification
-                                                      object:self
-                                                    userInfo:nil];
+  if (index >= 0 && index < [self.tabView numberOfTabViewItems]) {
+    [self.tabView selectTabViewItemAtIndex:index];
+    [self toggleOn:[self buttonForTabIndex:index]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPControlsTabSelectionDidChangeNotification
+                                                        object:self
+                                                      userInfo:nil];
+  }
 }
 
 - (void)dealloc
