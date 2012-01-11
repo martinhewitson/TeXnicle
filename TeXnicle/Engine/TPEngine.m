@@ -149,7 +149,7 @@
 	}
 	
 	NSString *mainFile = self.documentPath;
-	NSString *pdfFile = [self compiledDocumentPath];
+//	NSString *pdfFile = [self compiledDocumentPath];
   
 	if (!mainFile) {
     
@@ -163,7 +163,7 @@
                               defaultButton:@"OK"
                             alternateButton:nil
                                 otherButton:nil
-                  informativeTextWithFormat:@"Specify a main TeX file using the context menu on project tree or by using the Project menu."];
+                  informativeTextWithFormat:@"Specify a main file using the context menu on project tree or by using the Project menu."];
     } else {
       alert = [NSAlert alertWithMessageText:@"No Main File Found."
                               defaultButton:@"OK"
@@ -176,7 +176,6 @@
 		return NO;
 	}
 	
-//	[console message:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
 	
 	if (typesetTask) {
@@ -184,19 +183,8 @@
 		[typesetTask release];		
 		// this must mean that the last run failed
 	}
+
 	
-//	// check if the pdf exists
-//	NSFileManager *fm = [NSFileManager defaultManager];
-//	if ([fm fileExistsAtPath:pdfFile]) {
-//		NSError *error = nil;
-//		[fm removeItemAtPath:pdfFile
-//									 error:&error];
-//		if (error) {
-//			[NSApp presentError:error];
-//		}
-//	}		
-	
-//  [console message:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   
 //	NSLog(@"Compiling with %@", self.path);
@@ -218,6 +206,7 @@
 	NSPipe *pipe;
 	pipe = [NSPipe pipe];
 	[typesetTask setStandardOutput:pipe];
+  [typesetTask setStandardError:pipe];
 	
 	typesetFileHandle = [pipe fileHandleForReading];
 	[typesetFileHandle readInBackgroundAndNotify];	
