@@ -89,7 +89,7 @@
 
 	// get the object for this row
 //	NSArray *items = [treeController selectedObjects]; //[treeController flattenedContent];
-	selectedItem = [[self itemAtRow:row] representedObject];
+	selectedItem = [[self itemAtRow:row] representedObject];  
   [treeController selectItem:selectedItem];
 	
 	NSMenu *theMenu = [[[NSMenu alloc] 
@@ -120,7 +120,7 @@
 	}
 	
 	//--------- set main file
-	if ([selectedItem isKindOfClass:[TeXFileEntity class]]) {
+	if ([selectedItem isKindOfClass:[FileEntity class]]) {
 		NSMenuItem *mainItem;
 		if ([[treeController project] valueForKey:@"mainFile"] == selectedItem) {
 			mainItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Unset \u201c%@\u201d as main file", itemName]
@@ -215,13 +215,16 @@
 
 - (IBAction) setMainItem:(id)sender
 {
-	ProjectEntity *project = [treeController project];
-	if ([project valueForKey:@"mainFile"] == selectedItem) {
-    project.mainFile = nil;
-	} else {
-		[project setValue:selectedItem forKey:@"mainFile"];
-	}
-	[self setNeedsDisplay:YES];
+  if ([selectedItem isKindOfClass:[FileEntity class]]) {
+    FileEntity *file = (FileEntity*)selectedItem;
+    ProjectEntity *project = [treeController project];
+    if ([project valueForKey:@"mainFile"] == selectedItem) {
+      project.mainFile = nil;
+    } else {
+      project.mainFile = file;
+    }
+    [self setNeedsDisplay:YES];
+  }
 }
 
 - (IBAction) revealItem:(id)sender
