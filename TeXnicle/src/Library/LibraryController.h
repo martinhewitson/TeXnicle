@@ -20,7 +20,7 @@ extern NSString * const kItemsTableViewNodeType;
 
 @end
 
-@interface LibraryController : NSViewController <NSUserInterfaceValidations, NSTextFieldDelegate, LibraryControllerDelegate> {
+@interface LibraryController : NSViewController <NSTableViewDelegate, NSTableViewDataSource, NSUserInterfaceValidations, NSTextFieldDelegate, LibraryControllerDelegate> {
 
 	NSMutableDictionary *library;
 	

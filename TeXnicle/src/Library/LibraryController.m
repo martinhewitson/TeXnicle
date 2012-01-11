@@ -756,6 +756,11 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   [newClipping setValue:[NSNumber numberWithBool:NO] forKey:@"BuiltIn"];  
   [newClipping setValue:[NSString stringWithUUID] forKey:@"UUID"];
 	[contentsController addObject:newClipping];
+  NSInteger idx = [[contentsController arrangedObjects] indexOfObject:newClipping];
+  if (idx != NSNotFound) {
+    [itemsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:idx] byExtendingSelection:NO];
+    [itemsTable scrollRowToVisible:idx];
+  }
 	[self saveLibrary];
 }
 
@@ -839,12 +844,13 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 - (NSDragOperation)tableView:(NSTableView*)aTableView 
 								validateDrop:(id <NSDraggingInfo>)info 
-								 proposedRow:(int)row 
+								 proposedRow:(NSInteger)row 
 			 proposedDropOperation:(NSTableViewDropOperation)op
 {
-//	NSTableView *sourceTable = [info draggingSource];
-	
-	if (aTableView == itemsTable) {
+	NSTableView *sourceTable = [info draggingSource];
+//	NSLog(@"Dragging from %@", sourceTable);
+	if (sourceTable != aTableView && aTableView == itemsTable) {
+//    NSLog(@"To items table");
 		/** Items Table **/
 //		if (op == NSTableViewDropAbove) {
 //			return NSDragOperationMove;
@@ -867,7 +873,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 - (BOOL)tableView:(NSTableView *)aTableView 
 			 acceptDrop:(id <NSDraggingInfo>)info
-							row:(int)row 
+							row:(NSInteger)row 
 		dropOperation:(NSTableViewDropOperation)operation
 {
 	//id source = [info draggingSource];
@@ -1036,19 +1042,27 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 
 - (BOOL) control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-  NSString *proposed = [fieldEditor string];
-  
-  for (NSString* cmd in self.knownCommands) {
-    if ([cmd isEqualToString:proposed]) {
-      [self.commandMessageLabel setStringValue:@"Command exists."];
-      return NO;
+  if (control == itemsTable) {
+
+    return YES;
+    
+  } else if (control == commandTextField) {
+    NSString *proposed = [fieldEditor string];
+    
+    for (NSString* cmd in self.knownCommands) {
+      if ([cmd isEqualToString:proposed]) {
+        [self.commandMessageLabel setStringValue:@"Command exists."];
+        return NO;
+      }
     }
+    [self.commandMessageLabel setStringValue:@""];
+    
+//    NSLog(@"Set %@", [[contentsController selectedObjects] objectAtIndex:0]);
+    [self saveLibrary];
+    [self regenerateKnownCommandCodes];
+    
   }
-  [self.commandMessageLabel setStringValue:@""];
   
-//  NSLog(@"Set %@", [[contentsController selectedObjects] objectAtIndex:0]);
-  [self saveLibrary];
-  [self regenerateKnownCommandCodes];
   return YES;
 }
 
