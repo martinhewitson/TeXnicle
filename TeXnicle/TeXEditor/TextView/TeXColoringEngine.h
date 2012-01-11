@@ -30,6 +30,8 @@
   BOOL colorCommentsL2;
   BOOL colorCommentsL3;
   
+  BOOL colorMultilineArguments;
+  
   NSColor *specialCharsColor;
   BOOL colorSpecialChars;
   
@@ -62,6 +64,7 @@
 
 @property (retain) NSColor *argumentsColor;
 @property (assign) BOOL colorArguments;
+@property (assign) BOOL colorMultilineArguments;
 
 - (id) initWithTextView:(NSTextView*)aTextView;
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView;

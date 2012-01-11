@@ -36,7 +36,7 @@
 
 @synthesize argumentsColor;
 @synthesize colorArguments;
-
+@synthesize colorMultilineArguments;
 
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView
 {
@@ -57,7 +57,7 @@
              TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
              TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
              TESyntaxCommandColor, TESyntaxColorCommand, 
-             TESyntaxArgumentsColor, TESyntaxColorArguments,
+             TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
              nil] retain];
 
     [self readColorsAndFontsFromPreferences];
@@ -162,12 +162,14 @@
   // arguments
   self.argumentsColor = [[defaults valueForKey:TESyntaxArgumentsColor] colorValue];
   self.colorArguments = [[defaults valueForKey:TESyntaxColorArguments] boolValue];
+  self.colorMultilineArguments = [[defaults valueForKey:TESyntaxColorMultilineArguments] boolValue];
   
 }
 
 
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
+//  NSLog(@"Starting coloring...");
   if (self.lastHighlight) {
     if ([[NSDate date] timeIntervalSinceDate:self.lastHighlight] < kHighlightInterval) {
       return;
@@ -185,6 +187,7 @@
     return;
   }
   
+//  NSLog(@"Str length %ld", strLen);
   // make sure the glyphs are present otherwise colouring gives errors
   [layoutManager ensureGlyphsForCharacterRange:aRange];
   
@@ -255,28 +258,45 @@
       // look for the closing bracket
       idx++;
       NSInteger argCount = 1;
+      NSInteger newLineCount = 0;
+//      NSLog(@"  looking for closing bracket starting at %ld", idx);
       while(idx < strLen) {
         nextChar = [text characterAtIndex:idx];
+//        NSLog(@"   checking next char '%c'", nextChar);
+        if ([newLineCharacterSet characterIsMember:nextChar]) {
+          newLineCount++;
+        }
         if (nextChar == '{') {
           argCount++;
         }
         if (nextChar == '}') {
           argCount--;
         }
+//        NSLog(@"Arg count %ld", argCount);
         if (argCount == 0) {
+//          NSLog(@"New line count %ld", newLineCount);
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-          if (argRange.length<1000) {
-            //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
+//          NSLog(@"Argument: %@", NSStringFromRange(argRange));
+          if (newLineCount == 0 || self.colorMultilineArguments) {
+//            NSLog(@"Coloring argument");
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
             break;
           } else {
-            // if the argument is too long, color the first char
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(start, 1)];
+//            NSLog(@"Not coloring argument");
+            // if the argument spans multiple lines, color the first char
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
             idx = start;
             break;
           }
         }
+        
         idx++;
+      }
+      
+      // if we didn't match an ending } then there's not much we can do
+      if (argCount>0) {
+        idx = start+1;
       }
       
       
@@ -285,8 +305,12 @@
       // look for the closing bracket
       idx++;
       NSInteger argCount = 1;
+      NSInteger newLineCount = 0;
       while(idx < strLen) {
         nextChar = [text characterAtIndex:idx];
+        if ([newLineCharacterSet characterIsMember:nextChar]) {
+          newLineCount++;
+        }
         if (nextChar == '[') {
           argCount++;
         }
@@ -295,19 +319,26 @@
         }
         if (argCount == 0) {
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-          if (argRange.length<1000) {
+          if (newLineCount == 0 || self.colorMultilineArguments) {
             //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
             break;
           } else {
-            // if the argument is too long, color the first char
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(start, 1)];
-            idx = start;
+            // if the argument spans multiple lines, color the first char
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+            idx = start+1;
             break;
           }
         }
         idx++;
       }
+      
+      // if we didn't match an ending } then there's not much we can do
+      if (argCount>0) {
+        idx = start+1;
+      }
+      
     } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
       
       colorRange = NSMakeRange(aRange.location+idx, 1);
