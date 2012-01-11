@@ -162,7 +162,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 #pragma mark -
 #pragma mark  Project control
 
-- (void) selectDocument:(TeXFileEntity*)aDoc
+- (void) selectDocument:(FileEntity*)aDoc
 {
 	NSTreeNode *node = [self treeNodeForObject:aDoc];
 	[self setSelectionIndexPath:[node indexPath]];
@@ -1246,15 +1246,13 @@ withIntermediateDirectories:YES
 		title = [object valueForKey:@"name"];
 		[cell setTitle:title];
 				
-		if ([object isKindOfClass:[TeXFileEntity class]] && [ext isEqual:@"tex"]) {
-			if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
-				NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
-				[title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
-				ImageAndTextCell *c = (ImageAndTextCell*)cell;
-				[c setAttributedStringValue:title];
-				[title release];
-			}
-		}
+    if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
+      NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
+      [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
+      ImageAndTextCell *c = (ImageAndTextCell*)cell;
+      [c setAttributedStringValue:title];
+      [title release];
+    }
     		
 		NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
 		[cell setImage:icon];						

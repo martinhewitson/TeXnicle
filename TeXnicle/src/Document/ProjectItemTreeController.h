@@ -95,7 +95,7 @@ extern NSString * const OutlineViewNodeType;
 
 - (void)updateSortOrder;
 
-- (void) selectDocument:(TeXFileEntity*)aDoc;
+- (void) selectDocument:(FileEntity*)aDoc;
 - (void) selectItem:(ProjectItemEntity*)aDoc;
 - (NSArray *)treeNodeSortDescriptors;
 
