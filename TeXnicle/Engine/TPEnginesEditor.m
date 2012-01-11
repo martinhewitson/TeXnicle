@@ -295,9 +295,11 @@
   [self.tableView reloadData];
   
   // select the new engine
-  [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.engineManager indexOfEngineNamed:newName]]
-              byExtendingSelection:NO];
-  
+  NSInteger index = [self.engineManager indexOfEngineNamed:newName];
+  if (index >= 0) {
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index]
+                byExtendingSelection:NO];
+  }
 }
 
 
