@@ -59,16 +59,16 @@
     
     dict = [NSMutableDictionary dictionary];
     [dict setObject:@"\\paragraph" forKey:@"tag"];
-    [dict setObject:[NSNumber numberWithInt:1] forKey:@"indent"];
-    [dict setObject:[NSNumber numberWithFloat:topSize] forKey:@"size"];
-    [dict setObject:[NSColor blackColor] forKey:@"color"];
+    [dict setObject:[NSNumber numberWithInt:4] forKey:@"indent"];
+    [dict setObject:[NSNumber numberWithFloat:topSize-5] forKey:@"size"];
+    [dict setObject:[NSColor lightGrayColor] forKey:@"color"];
     [sections addObject:dict];
     
     dict = [NSMutableDictionary dictionary];
     [dict setObject:@"\\subparagraph" forKey:@"tag"];
-    [dict setObject:[NSNumber numberWithInt:2] forKey:@"indent"];
-    [dict setObject:[NSNumber numberWithFloat:topSize-2] forKey:@"size"];
-    [dict setObject:[NSColor darkGrayColor] forKey:@"color"];
+    [dict setObject:[NSNumber numberWithInt:5] forKey:@"indent"];
+    [dict setObject:[NSNumber numberWithFloat:topSize-6] forKey:@"size"];
+    [dict setObject:[NSColor lightGrayColor] forKey:@"color"];
     [sections addObject:dict];
     
     dict = [NSMutableDictionary dictionary];
