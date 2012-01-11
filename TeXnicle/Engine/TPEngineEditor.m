@@ -34,9 +34,8 @@
 {
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
-  [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
-  [self.texEditorContainer addSubview:[self.texEditorViewController view]];
-  [self.texEditorViewController disableJumpBar];
+  [self.texEditorViewController.view setFrame:[self.texEditorContainer bounds]];
+  [self.texEditorContainer addSubview:self.texEditorViewController.view];
   [self.texEditorContainer setNeedsDisplay:YES];
   
   // set a bash engine
