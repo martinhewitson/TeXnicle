@@ -1716,7 +1716,7 @@
 
 - (BOOL) canViewPDF
 {
-	TeXFileEntity *mainfile = [project valueForKey:@"mainFile"];
+	FileEntity *mainfile = [project valueForKey:@"mainFile"];
 	if (!mainfile) {
 		return NO;
 	}
@@ -1977,7 +1977,7 @@
 
 - (IBAction) jumpToMainFile:(id)sender
 {
-	TeXFileEntity *mainFile = [project valueForKey:@"mainFile"];
+	FileEntity *mainFile = [project valueForKey:@"mainFile"];
 	
 	if (mainFile) {
 		[self.projectItemTreeController selectDocument:mainFile];
@@ -1991,7 +1991,8 @@
 	NSArray *items = [self getSelectedItems];
 	if ([items count] == 1) {
 		ProjectItemEntity *item = [items objectAtIndex:0];
-		if ([[item valueForKey:@"extension"] isEqual:@"tex"]) {
+    NSArray *exts = [[TPSupportedFilesManager sharedSupportedFilesManager] supportedExtensions];
+		if ([exts containsObject:[item valueForKey:@"extension"]]) {
 			if ([project valueForKey:@"mainFile"] == item) {
         project.mainFile = nil;
 			} else {
@@ -2744,6 +2745,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   // Make text view first responder
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+  
+  // and color the newly viewed text
+  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
 }
 
 - (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement
