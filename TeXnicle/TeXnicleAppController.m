@@ -74,7 +74,7 @@ NSString * const TESyntaxCommentsL3Color = @"TESyntaxCommentsL3Color";
 NSString * const TESyntaxColorComments = @"TESyntaxColorComments";
 NSString * const TESyntaxColorCommentsL2 = @"TESyntaxColorCommentsL2";
 NSString * const TESyntaxColorCommentsL3 = @"TESyntaxColorCommentsL3";
-NSString * const TESyntaxColorArgumentMaxLength = @"TESyntaxColorArgumentMaxLength";
+NSString * const TESyntaxColorMultilineArguments = @"TESyntaxColorMultilineArguments";
 
 // special chars
 NSString * const TESyntaxSpecialCharsColor = @"TESyntaxSpecialCharsColor";
@@ -156,7 +156,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL2];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL3];
-	[defaultValues setValue:[NSNumber numberWithInteger:1000] forKey:TESyntaxColorArgumentMaxLength];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMultilineArguments];
   
   // special chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
@@ -547,8 +547,11 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 					NSArray *items = [doc performSelector:@selector(getSelectedItems)];
 					if ([items count] == 1) {
 						ProjectItemEntity *item = [items objectAtIndex:0];
-						if ([item isKindOfClass:[TeXFileEntity class]]) {
-							if ([[item valueForKey:@"extension"] isEqual:@"tex"]) {
+						if ([item isKindOfClass:[FileEntity class]]) {
+              
+              NSArray *exts = [[TPSupportedFilesManager sharedSupportedFilesManager] supportedExtensions];
+              
+							if ([exts containsObject:[item valueForKey:@"extension"]]) {
 								[setMainItem setEnabled:YES];
 								if ([[doc project] valueForKey:@"mainFile"] == item) {
 									[setMainItem setTitle:[NSString stringWithFormat:@"Unset \u201c%@\u201d As Main File", [item valueForKey:@"name"]]];
