@@ -59,6 +59,15 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 @synthesize pdfViewer;
 
+- (id) init
+{
+  self = [super init];
+  if (self) {
+    _encoding = -1;
+  }
+  
+  return self;
+}
 
 + (NSArray *)readableTypes
 {
@@ -613,12 +622,12 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	[[NSUserDefaults standardUserDefaults] synchronize];
   
   
-	NSRange selRange = [self.texEditorViewController.textView selectedRange];
-	NSRect selRect = [self.texEditorViewController.textView visibleRect];
+//	NSRange selRange = [self.texEditorViewController.textView selectedRange];
+//	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
   [self saveDocumentWithDelegate:self didSaveSelector:@selector(documentSave:didSave:contextInfo:) contextInfo:NULL];
-	[self.texEditorViewController.textView setSelectedRange:selRange];
-	[self.texEditorViewController.textView scrollRectToVisible:selRect];
+//	[self.texEditorViewController.textView setSelectedRange:selRange];
+//	[self.texEditorViewController.textView scrollRectToVisible:selRect];
 	[[self windowForSheet] makeFirstResponder:r];
   [self updateFileStatus];
   // capture UI state
@@ -709,6 +718,9 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	NSString *str = [string string];
   
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  if (_encoding == -1) {
+    _encoding = [fr defaultEncoding];
+  }
   BOOL res = [fr writeString:str toURL:absoluteURL withEncoding:_encoding];
 	[string release];
   
@@ -1094,6 +1106,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
      
 - (void) build
 {
+//  NSLog(@"Building...");
   [self.miniConsole setAnimating:YES];
   [self.engineManager compile];
 }
@@ -1406,6 +1419,9 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     
     // Make text view first responder
     [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+    
+    // and color the newly viewed text
+    [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
     
   } else {
     
