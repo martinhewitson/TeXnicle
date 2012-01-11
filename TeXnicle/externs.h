@@ -53,7 +53,7 @@ extern NSString * const TESyntaxCommentsL3Color;
 extern NSString * const TESyntaxColorComments;
 extern NSString * const TESyntaxColorCommentsL2;
 extern NSString * const TESyntaxColorCommentsL3;
-extern NSString * const TESyntaxColorArgumentMaxLength;
+extern NSString * const TESyntaxColorMultilineArguments;
 
 // special chars
 extern NSString * const TESyntaxSpecialCharsColor;
