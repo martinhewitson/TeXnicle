@@ -228,7 +228,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     [self loadEngines];
   }
   for (TPEngine *e in self.engines) {
-    if ([e.name isEqualToString:[name lowercaseString]]) {
+    if ([[e.name lowercaseString] isEqualToString:[name lowercaseString]]) {
       return e;
     }
   }
@@ -266,9 +266,15 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.openConsole = [[self.delegate openConsole] boolValue];
   e.nCompile = [[self.delegate nCompile] integerValue];
   
-  [e compileDocumentAtPath:[self.delegate documentToCompile] 
-          workingDirectory:[self.delegate workingDirectory]
-                 isProject:YES];  
+  if (e) {
+  
+    [e compileDocumentAtPath:[self.delegate documentToCompile] 
+            workingDirectory:[self.delegate workingDirectory]
+                   isProject:YES];  
+  } else {
+    [self compileDidFinish:NO];
+  }
+  
 }
 
 - (void) trashAuxFiles
