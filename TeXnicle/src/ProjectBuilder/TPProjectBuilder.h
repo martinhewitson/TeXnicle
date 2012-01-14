@@ -18,7 +18,6 @@
   NSString *projectName;
   NSString *projectDir;
   NSString *mainfile;
-  NSURL *projectFileURL;
   NSMutableArray *filesOnDiskList;
 }
 
