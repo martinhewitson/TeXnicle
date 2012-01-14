@@ -39,4 +39,7 @@
 - (IBAction)deleteSelectedEngine:(id)sender;
 - (IBAction)revealSelectedEngine:(id)sender;
 
+- (void) selectEngineNamed:(NSString*)aName;
+
+
 @end

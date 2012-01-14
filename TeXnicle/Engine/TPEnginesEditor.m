@@ -295,13 +295,17 @@
   [self.tableView reloadData];
   
   // select the new engine
-  NSInteger index = [self.engineManager indexOfEngineNamed:newName];
-  if (index >= 0) {
+  [self performSelector:@selector(selectEngineNamed:) withObject:newName afterDelay:0];
+}
+
+- (void) selectEngineNamed:(NSString*)aName
+{
+  NSInteger index = [self.engineManager indexOfEngineNamed:aName];
+  if (index >= 0 && index != NSNotFound) {
     [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index]
                 byExtendingSelection:NO];
   }
 }
-
 
 #pragma mark -
 #pragma mark Table view Delegate
