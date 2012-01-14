@@ -93,11 +93,9 @@
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
 	}
 	
-//	NSLog(@"Looking for '%@'", aPath);
 	for (id item in [self valueForKey:@"items"]) {
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			FileEntity *file = (FileEntity*)item;
-//			NSLog(@"   checking '%@'", [file valueForKey:@"filepath"]);
 			NSString *fstr = [file valueForKey:@"filepath"];
 			NSRange r = [fstr rangeOfString:pathToTest];
 //			if (fstr isEqual:[aPath stringByDeletingPathExtension]]) {
@@ -115,7 +113,7 @@
     return nil;
   
 	NSString *pathToTest = aPath;
-	if (![[aPath pathExtension] isEqual:@"tex"]) {
+	if (![aPath pathExtension]) {
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
 	}
 	
