@@ -199,9 +199,9 @@
           int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
           if (wrapStyle == TPSoftWrap) {
             CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
-            [textContainer setContainerSize:NSMakeSize(scale*wrapAt, 1e7)];
+            [textContainer setContainerSize:NSMakeSize(scale*wrapAt, LargeTextHeight)];
           }	else if (wrapStyle == TPNoWrap) {
-            [textContainer setContainerSize:NSMakeSize(1e7, 1e7)];
+            [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
           } else {
             // set large size - hard wrap is handled in the textview
             [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
