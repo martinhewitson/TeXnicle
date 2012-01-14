@@ -119,7 +119,7 @@ extern NSString * const kItemsTableViewNodeType;
 - (IBAction) addClipping:(id)sender;
 - (void) saveLibrary;
 
-- (NSDictionary*)copyOfClip:(NSDictionary*)clip;
+- (NSDictionary*)createCopyOfClip:(NSDictionary*)clip;
 - (void) newClippingWithCode:(NSString*)someCode;
 - (void) imageGeneratorTaskEnded:(NSString*)aPath;
 - (void) regenerateKnownCommandCodes;

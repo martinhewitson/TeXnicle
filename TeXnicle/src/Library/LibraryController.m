@@ -406,7 +406,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 {
 	// As the user 
 	NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
-  NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
+//  NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
 	
   NSString *informativeText;
 	if (userLibraryVersion == nil) {
@@ -438,7 +438,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
     
     // check library version
     NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
-    NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
+//    NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
     
     if (userLibraryVersion != nil) {
       [self restoreDefaultCategoriesAndCodes];
@@ -489,7 +489,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
     } // end loop over user categories
   } // end loop over default categories
   
-  NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
+//  NSNumber *userLibraryVersion = [library valueForKey:@"Version"];
   NSNumber *defaultLibraryVersion = [self.defaultLibrary valueForKey:@"Version"];
   
   [library setValue:defaultLibraryVersion forKey:@"Version"];
@@ -499,7 +499,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   [itemsTable reloadData];
 }
 
-- (NSDictionary*)copyOfClip:(NSDictionary*)clip
+- (NSDictionary*)createCopyOfClip:(NSDictionary*)clip
 {
   NSMutableDictionary *newClip = [[NSMutableDictionary alloc] initWithDictionary:clip];
   [newClip setValue:[[clip valueForKey:@"Code"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] 
@@ -547,7 +547,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 		NSMutableArray *clips = [NSMutableArray array];		
 		for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {			
 			// add the new clip to the contents
-			[clips addObject:[self copyOfClip:clip]];			
+			[clips addObject:[self createCopyOfClip:clip]];			
 		}		
 		[newCategory setValue:clips forKey:@"Contents"];		
 		// Category is ready, add it to the array
