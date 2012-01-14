@@ -12,7 +12,7 @@
 @class PDFViewer;
 
 @protocol PDFViewerDelegate <NSObject>
-
+@optional
 - (NSString*)documentPathForViewer:(PDFViewer*)aPDFViewer;
 - (void) findSourceOfText:(NSString*)string;
 
