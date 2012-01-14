@@ -14,9 +14,11 @@
 + (NSString*) stringWithUUID {
 	CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
 	//get the string representation of the UUID
-	NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
+  CFStringRef uuidCFString = CFUUIDCreateString(nil, uuidObj);
+	NSString	*uuidString = [NSString stringWithString:(NSString*)uuidCFString];
 	CFRelease(uuidObj);
-	return [uuidString autorelease];
+  CFRelease(uuidCFString);
+	return uuidString;
 }
 
 @end
