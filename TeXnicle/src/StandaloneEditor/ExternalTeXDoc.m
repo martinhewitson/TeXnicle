@@ -449,7 +449,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
   
   NSScanner *aScanner = [NSScanner scannerWithString:string];
-  BOOL didMatch = NO;
   shouldContinueSearching = YES;
   if ([regexpresults count] > 0) {
     
@@ -458,7 +457,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
         break;
       } // If should continue 
       
-      NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
+      NSString *returnResult = nil; //[NSString stringWithControlsFilteredForString:result];
       
       returnResult = [result stringByTrimmingCharactersInSet:ws];
       returnResult = [returnResult stringByTrimmingCharactersInSet:ns];
@@ -495,9 +494,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
             TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber withRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:nil];
             if (![self.results containsObject:match]) {
               [self.results addObject:match];
-            }
-            didMatch = YES;
-            
+            }            
           } // end subrange found
         } // end result range founds
       } // end scanner
@@ -885,15 +882,16 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction) endAddToProjectSheet:(id)sender
 {
+  NSInteger tag = [sender tag];
 	// user clicked cancel
-	if ([sender tag] == 0) {
+	if (tag == 0) {
 		[NSApp endSheet:addToProjectSheet];
 		[addToProjectSheet orderOut:sender];
 		return;
 	}
 	
 	// user clicked new project button
-	if ([sender tag] == 2) {
+	if (tag == 2) {
 		[self addToNewEmptyProject];
 		return;
 	}
@@ -952,7 +950,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void) addToNewEmptyProject
 {  
-  id doc = [TeXProjectDocument newTeXnicleProject];
+  id doc = [TeXProjectDocument createNewTeXnicleProject];
   
 	if (doc) {
 		
