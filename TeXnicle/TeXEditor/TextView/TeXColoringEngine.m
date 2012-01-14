@@ -292,7 +292,7 @@
         }
         
         idx++;
-      }
+      } // end while loop
       
       // if we didn't match an ending } then there's not much we can do
       if (argCount>0) {
