@@ -53,7 +53,7 @@
     [collapseInspectorAnimationDict setObject:self.inspectorView forKey:NSViewAnimationTargetKey];
     [collapseInspectorAnimationDict setObject:[NSValue valueWithRect:newInspectorFrame] forKey:NSViewAnimationEndFrameKey];
     
-    NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:collapseMainAnimationDict, collapseInspectorAnimationDict, nil]];
+    NSViewAnimation *collapseAnimation = [[[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:collapseMainAnimationDict, collapseInspectorAnimationDict, nil]] autorelease ];
     [collapseAnimation setDuration:0.25f];
     [collapseAnimation startAnimation];
   } else {
