@@ -339,9 +339,7 @@
                                                     selector:@selector(updateStatusView)
                                                     userInfo:nil
                                                      repeats:YES];
-  
-  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
-  
+  // Show document
   [self showDocument];
 }
 
@@ -574,7 +572,7 @@
 }
 
 
-+ (TeXProjectDocument*)newTeXnicleProject
++ (TeXProjectDocument*)createNewTeXnicleProject
 {
   NSURL *url = [TeXProjectDocument getNewDocumentURL];
   
@@ -1218,11 +1216,9 @@
 	if ([all count] == 1) {
 		NSManagedObject *item = [all objectAtIndex:0];
 		if ([item isKindOfClass:[FileEntity class]]) {
-//			if ([[item valueForKey:@"isText"] boolValue]) {
-				if (openDocuments) {					
-					[openDocuments addDocument:(FileEntity*)item];          
-				}
-//			}
+      if (openDocuments) {					
+        [openDocuments addDocument:(FileEntity*)item];          
+      }
 		}
 	}
   
@@ -1339,7 +1335,7 @@
 {
   NSSize leftSize = [self.leftView frame].size;
   NSSize centerSize = [self.centerView frame].size;  
-  NSSize rightSize = [self.rightView frame].size;
+//  NSSize rightSize = [self.rightView frame].size;
   
   //  NSLog(@"Left %@", NSStringFromSize(leftSize));
   //  NSLog(@"Center %@", NSStringFromSize(centerSize));
@@ -2131,13 +2127,7 @@
   NSArray *selectedObjects = [templates selectedObjects];
   if ([selectedObjects count] == 1) {
     
-    NSDictionary *selected = [selectedObjects objectAtIndex:0];
-    NSString *code = [selected valueForKey:@"Code"];
-    
     [documentCode scrollRectToVisible:NSZeroRect];
-    
-//    [documentCode setString:code];
-//    [documentCode didChangeText];
     [documentCode performSelector:@selector(colorVisibleText)
                        withObject:nil
                        afterDelay:0.1];
@@ -2269,13 +2259,13 @@
 	}
 	
 	// Make the new file in the project
-	id newFile = [projectItemTreeController addNewFile:name
-                                          atFilepath:nil
-                                           extension:[name pathExtension]
-                                              isText:YES
-                                                code:[documentCode string]
-                                          asMainFile:[setAsMainFileCheckButton state]
-                                        createOnDisk:YES];
+	[projectItemTreeController addNewFile:name
+                             atFilepath:nil
+                              extension:[name pathExtension]
+                                 isText:YES
+                                   code:[documentCode string]
+                             asMainFile:[setAsMainFileCheckButton state]
+                           createOnDisk:YES];
   
 	// save templates back to the user defaults
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
@@ -2293,7 +2283,7 @@
 	[templateSheet orderOut:self];
 }
 
-+ (NSString*) newArticleMainFileCode
++ (NSString*) stringForNewArticleMainFileCode
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
 	//NSLog(@"User defaults: %@", defaults);
@@ -2351,7 +2341,7 @@
 {
 //  NSLog(@"********* Adding new main file to %@", project);
   
-	NSString *code = [TeXProjectDocument newArticleMainFileCode];
+	NSString *code = [TeXProjectDocument stringForNewArticleMainFileCode];
 	
 	// check if main.tex exists
 	NSString *newName = [NSString stringWithFormat:@"%@_main.tex", [project name]];
@@ -2970,9 +2960,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   if (!b) {
     FileEntity *file = [self.openDocuments currentDoc];
     Bookmark *bookmark = [Bookmark bookmarkWithLinenumber:aLinenumber inFile:file inManagedObjectContext:self.managedObjectContext];    
-    [self.texEditorViewController.textView setNeedsDisplay:YES];
-    [self.bookmarkManager reloadData];
-    [self didAddBookmark];
+    if (bookmark) {
+      [self.texEditorViewController.textView setNeedsDisplay:YES];
+      [self.bookmarkManager reloadData];
+      [self didAddBookmark];
+    }
   }
 }
 

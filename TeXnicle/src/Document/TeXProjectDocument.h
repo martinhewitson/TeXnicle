@@ -79,7 +79,6 @@
   NSMenu *treeActionMenu;
   ProjectItemEntity *selectedItem;
   NSInteger selectedRow;
-  NSInteger currentHighlightedPDFSearchResult;
   
   TPOutlineView *projectOutlineView;
   NSTabView *controlsTabview;
@@ -190,7 +189,7 @@
 
 - (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;
-+ (TeXProjectDocument*) newTeXnicleProject;
++ (TeXProjectDocument*) createNewTeXnicleProject;
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL;
 + (NSSavePanel*)getDocumentURLSavePanel;
 + (NSURL*)getNewDocumentURL;
@@ -301,7 +300,7 @@
 - (BOOL) canRemove;
 - (NSManagedObject*) addFileAtURL:(NSURL*)aURL copy:(BOOL)copyFile;
 
-+ (NSString*) newArticleMainFileCode;
++ (NSString*) stringForNewArticleMainFileCode;
 
 - (void) reloadCurrentFileFromDiskAndRestoreSelection:(FileEntity*)fileEntity;
 
