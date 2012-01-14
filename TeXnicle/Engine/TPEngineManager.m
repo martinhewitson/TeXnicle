@@ -25,7 +25,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   static NSArray *builtInEngineNames;
   
   if (builtInEngineNames == nil) {
-    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", nil] retain];  
+    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil] retain];  
   }
   return builtInEngineNames;
 }
