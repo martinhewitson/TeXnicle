@@ -14,7 +14,7 @@
 @class FileEntity;
 
 @protocol BookmarkManagerDelegate <NSObject>
-
+@optional
 - (NSArray*)bookmarksForCurrentFile;
 - (NSArray*)bookmarksForProject;
 - (void) jumpToBookmark:(Bookmark*)aBookmark;
