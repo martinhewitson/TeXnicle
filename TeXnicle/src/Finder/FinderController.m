@@ -288,7 +288,6 @@
   NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
   
   NSScanner *aScanner = [NSScanner scannerWithString:string];
-  BOOL didMatch = NO;
   if ([regexpresults count] > 0) {
     
     for (NSString *result in regexpresults) {
@@ -338,7 +337,6 @@
             if (![self.results containsObject:resultDoc]) {
               [self.results addObject:resultDoc];
             }
-            didMatch = YES;
             
             dispatch_sync(dispatch_get_main_queue(),
                           // block
