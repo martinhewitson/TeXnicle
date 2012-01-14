@@ -13,12 +13,10 @@
 @class TPDocumentSection;
 
 @protocol ProjectOutlineControllerDelegate <NSObject>
-
+@optional
 - (ProjectEntity*)project;
-
 - (NSURL*)fileURL;
 - (NSAttributedString*)documentString;
-
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
 - (BOOL) shouldGenerateOutline;
 @end
@@ -52,6 +50,6 @@
 -(void) turnOffWrapping;
 - (void) deactivate;
 
-- (void) reloadData;
+//- (void) reloadData;
 
 @end
