@@ -69,7 +69,7 @@
 
 - (TPDocumentSection*) generateSectionsForFile
 {
-  
+  return nil;
 }
 
 - (TPDocumentSection*) generateSectionsForProject
