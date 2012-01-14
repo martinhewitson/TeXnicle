@@ -15,7 +15,7 @@
 
 
 @protocol DocumentOutlineDelegate <NSObject>
-
+@optional
 - (ProjectEntity*)project;
 - (NSURL*)fileURL;
 - (NSAttributedString*)documentString;
