@@ -2736,8 +2736,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   // Make text view first responder
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
   
-  // and color the newly viewed text
-  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
 }
 
 - (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement
