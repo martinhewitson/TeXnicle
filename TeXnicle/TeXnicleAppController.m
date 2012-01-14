@@ -411,7 +411,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
 - (IBAction) newEmptyProject:(id)sender
 {
-  id doc = [TeXProjectDocument newTeXnicleProject];
+  id doc = [TeXProjectDocument createNewTeXnicleProject];
   
 	if (doc) {
 		[doc saveDocument:self];
