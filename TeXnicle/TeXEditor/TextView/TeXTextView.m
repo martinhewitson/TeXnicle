@@ -958,6 +958,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark TeXTextView delegate
 
+
 -(NSString*)codeForCommand:(NSString *)command
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(codeForCommand:)]) {
@@ -1718,7 +1719,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		return;
 	}
   
-	if (selRange.location >= 0 && selRange.location < [string length]) {
+	if (selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
 																			atIndex:selRange.location
 															 effectiveRange:&effRange];

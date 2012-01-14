@@ -20,6 +20,7 @@ extern NSString * const TELineNumberClickedNotification;
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate>
 
+@optional
 -(id)project;
 -(NSArray*)listOfCitations;
 -(NSArray*)listOfReferences;
@@ -59,7 +60,6 @@ extern NSString * const TELineNumberClickedNotification;
   
   NSRange _lastLineRange;
   NSInteger _lastLineNumber;
-  NSRange _lastVisibleRange;
   
   NSMutableArray *wordHighlightRanges;
 }
