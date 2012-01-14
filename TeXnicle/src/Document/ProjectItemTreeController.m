@@ -1343,10 +1343,6 @@ withIntermediateDirectories:YES
 	NSPasteboard *pboard = [info draggingPasteboard];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
 		NSArray* urls = [pboard propertyListForType:NSFilenamesPboardType];
-		BOOL copyFiles = NO;
-		if ([info draggingSourceOperationMask] & NSDragOperationCopy) {
-			copyFiles = YES;
-		}
 		for (NSString *path in urls) {			
 			// make sure the parent item is selected
 			[self setSelectionIndexPath:[self indexPathToObject:[proposedParentItem representedObject]]];
@@ -1356,21 +1352,11 @@ withIntermediateDirectories:YES
 			} else {
         if (([[NSApp currentEvent] modifierFlags] & NSControlKeyMask)) {
           // link
-//          NSLog(@"Linking file %@", path);
           newfile = [self addFileAtPath:path toFolder:nil copy:NO];
         } else {
           // copy
-//          NSLog(@"Copying file %@", path);
           newfile = [self addFileAtPath:path toFolder:nil copy:YES];
-        }
-        
-//        NSDragOperation op = [info draggingSourceOperationMask];
-//        NSLog(@"Drag op %d", op);
-//        if (op == NSDragOperationLink) {
-//        } else if (op == NSDragOperationCopy) {
-//        } else {
-//          return NO;
-//        }
+        }        
 			}
       if (newfile) {
         NSTreeNode *node = [self treeNodeForObject:newfile];
