@@ -15,7 +15,6 @@
 @interface TPDocumentSection : NSObject {
 @private
   NSRange range;
-  NSString *result;
   TPDocumentSection *document;
   NSMutableArray *subsections;
   NSString *name;
@@ -30,7 +29,7 @@
 
 + (TPDocumentSection*)sectionWithRange:(NSRange)aRange type:(TPDocumentSectionTemplate*)aTemplate name:(NSString*)aName document:(id)aDocument;
 - (id)initWithRange:(NSRange)aRange type:(TPDocumentSectionTemplate*)aTemplate name:(NSString*)aName document:(id)aDocument;
-- (void) addSectionsFromFile:(FileEntity*)file inProject:(ProjectEntity*)project;
+//- (void) addSectionsFromFile:(FileEntity*)file inProject:(ProjectEntity*)project;
 
 - (void)addSubsection:(TPDocumentSection*)aSubsection;
 
