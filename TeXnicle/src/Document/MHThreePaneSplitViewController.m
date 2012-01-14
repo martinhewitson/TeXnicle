@@ -121,7 +121,7 @@
 {
   NSSize leftSize = [leftView frame].size;
   NSSize centerSize = [centerView frame].size;  
-  NSSize rightSize = [rightView frame].size;
+//  NSSize rightSize = [rightView frame].size;
   
   //  NSLog(@"Left %@", NSStringFromSize(leftSize));
   //  NSLog(@"Center %@", NSStringFromSize(centerSize));
