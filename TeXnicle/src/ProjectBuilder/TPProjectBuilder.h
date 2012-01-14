@@ -19,17 +19,23 @@
   NSString *projectDir;
   NSString *mainfile;
   NSURL *projectFileURL;
+  NSMutableArray *filesOnDiskList;
 }
 
 @property (copy) NSString *projectName;
 @property (copy) NSString *projectDir;
 @property (copy) NSString *mainfile;
 @property (readonly) NSURL *projectFileURL;
+@property (retain) NSMutableArray *filesOnDiskList;
 
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath;
 - (id) initWithDirectory:(NSString*)aPath;
 + (TPProjectBuilder*)builderWithMainfile:(NSString*)aFile;
 - (id) initWithMainfile:(NSString*)aFile;
+
+- (void)generateFileList;
+- (void)gatherFilesRelativeTo:(NSString*)aPath;
+- (NSString*)fileForArgument:(NSString*)arg;
 
 + (NSString*) mainfileForDirectory:(NSString*)aPath;
 

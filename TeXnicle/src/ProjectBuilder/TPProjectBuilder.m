@@ -24,6 +24,7 @@
 @synthesize projectName;
 @synthesize projectDir;
 @synthesize mainfile;
+@synthesize filesOnDiskList;
 
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath
 {
@@ -54,8 +55,15 @@
     self.mainfile = [aFile lastPathComponent];
     self.projectDir = [aFile stringByDeletingLastPathComponent];
     self.projectName = [[aFile lastPathComponent] stringByDeletingPathExtension];
+    self.filesOnDiskList = [NSMutableArray array];
   }
   return self;
+}
+
+- (void) dealloc
+{
+  self.filesOnDiskList = nil;
+  [super dealloc];
 }
 
 // Look for the first tex file which has a \begin{document} in it and return that file.
@@ -103,18 +111,67 @@
       }
     }
   }
+  
+  // warn that no main file was found
+  NSAlert *alert = [NSAlert alertWithMessageText:@"Main File Not Found"
+                                   defaultButton:@"OK" 
+                                 alternateButton:nil
+                                     otherButton:nil
+                       informativeTextWithFormat:@"No file was found containing a \\documentclass command"];
+  [alert runModal];
     
+  return nil;
+}
+
+- (void)generateFileList
+{
+  [self.filesOnDiskList removeAllObjects];
+  [self gatherFilesRelativeTo:self.projectDir];
+}
+
+- (void)gatherFilesRelativeTo:(NSString*)aPath
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSError *error = nil;
+  NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];  
+  for (NSString *path in results) {
+    NSString *fullpath = [aPath stringByAppendingPathComponent:path];
+    NSDictionary *atts = [fm attributesOfItemAtPath:fullpath error:&error];
+    if (atts) {
+      if ([atts fileType] == NSFileTypeRegular) {
+        if ([[sfm supportedExtensions] containsObject:[fullpath pathExtension]] || [fullpath pathIsImage]) {
+          NSString *relative = [self.projectDir relativePathTo:fullpath];
+          [self.filesOnDiskList addObject:relative];
+        }
+      } else if ([atts fileType] == NSFileTypeDirectory) {
+        [self gatherFilesRelativeTo:fullpath];
+      }
+    }
+  }
+}
+
+- (NSString*)fileForArgument:(NSString*)arg
+{
+  for (NSString *file in self.filesOnDiskList) {
+    NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
+    if ([name isEqualToString:[arg lastPathComponent]]) {
+      return file;
+    }
+  }
   return nil;
 }
 
 - (NSArray*)includeTags
 {
-  return [NSArray arrayWithObjects:@"\\input", @"\\include", @"\\includegraphics", nil];
+  return [NSArray arrayWithObjects:@"\\input{", @"\\include{", @"\\includegraphics", nil];
 }
 
 // follow all includes etc from main file and populate the document project
 - (void)populateDocument:(TeXProjectDocument*)aDocument
 {
+  [self generateFileList];
+  
   if (self.mainfile) {
     NSString *mainFilePath = [self.projectDir stringByAppendingPathComponent:self.mainfile];
     ProjectEntity *project = [aDocument project];
@@ -130,17 +187,15 @@
 
 - (void)document:(TeXProjectDocument*)aDocument addProjectItemsFromFile:(NSString*)aFile
 {
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   ProjectEntity *project = [aDocument project];
+//  NSFileManager *fm = [NSFileManager defaultManager];
   NSManagedObjectContext *moc = [aDocument managedObjectContext];	
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
-//  NSError *error = nil;
   // load the file as a string
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *string = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aFile]];
-//  NSString *string = [NSString stringWithContentsOfFile:aFile
-//                                            encoding:NSUTF8StringEncoding
-//                                               error:&error];
   if (string == nil) {
     [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];    
   } else {
@@ -159,28 +214,60 @@
         
         // check if this word matches any of the tags
         for (NSString *tag in [self includeTags]) {
-          if ([word hasPrefix:tag]) {            
+          if ([word hasPrefix:tag]) {          
+//            NSLog(@"%ld, Matched tag %@ with word %@", loc, tag, word);
             // get argument to this include tag
-            NSString *arg = [word argument];
-            // assume a default file extension of tex
-            NSString *extension = [arg pathExtension];
-            if (!extension || [extension length]==0) {
-              arg = [arg stringByAppendingPathExtension:@"tex"];
-            }            
             
-            NSString *fullpath = [[self.projectDir stringByAppendingPathComponent:arg] stringByStandardizingPath];            
-            NSString *relativePath = [[[self.projectDir relativePathTo:fullpath] stringByDeletingLastPathComponent] stringByStandardizingPath];            
-            NSArray *pathComps = [relativePath pathComponents];                        
-
-            // Make folders for each path component, if required
-            FolderEntity *folder = [self makeFoldersForComponents:pathComps inProject:project inMOC:moc];
+            // we need a longer string here, we should probably pass the full string and a start index
+            // to look for the argument
+            NSInteger argStart = loc-[word length];
+            NSString *arg = [string parseArgumentStartingAt:&argStart];
             
-            // add file
-            FileEntity *file = [self addFileAtPath:fullpath toFolder:folder inProject:project inMOC:moc];
-            
-            // if this is a tex file, recursive call
-            if ([[file extension] isEqualToString:@"tex"]) {
-              [self document:aDocument addProjectItemsFromFile:[file pathOnDisk]];
+//            NSString *arg = [word argument];
+//            NSLog(@"Got arg %@", arg);
+            if (arg != nil && [arg length]>0) {
+              
+              
+              
+              // Now we have a name, we need to find it on disk, because we don't know what kind of file it is
+              NSString *filearg  = [self fileForArgument:arg];
+              if (!filearg) {
+//                NSLog(@"### No file found for %@", arg);
+                continue;
+              }
+              
+              NSString *fullpath = [[self.projectDir stringByAppendingPathComponent:filearg] stringByStandardizingPath]; 
+//              NSLog(@"Full path %@", fullpath);
+              
+//              // assume a default file extension of tex
+//              NSString *extension = [arg pathExtension];
+//              if (!extension || [extension length]==0) {
+//                arg = [arg stringByAppendingPathExtension:@"tex"];
+//              }            
+              
+              if ([project fileWithPathOnDisk:fullpath]) {
+                // do nothing
+//                NSLog(@"### Skipping %@, it's already there", fullpath);
+              } else {
+                if ([[sfm supportedExtensions] containsObject:[fullpath pathExtension]] || [fullpath pathIsImage]) {
+//                  NSLog(@"+ Adding %@", fullpath);
+                  NSString *relativePath = [[[self.projectDir relativePathTo:fullpath] stringByDeletingLastPathComponent] stringByStandardizingPath];            
+                  NSArray *pathComps = [relativePath pathComponents];                        
+                  
+                  // Make folders for each path component, if required
+                  FolderEntity *folder = [self makeFoldersForComponents:pathComps inProject:project inMOC:moc];
+                  
+                  // add file
+                  FileEntity *file = [self addFileAtPath:fullpath toFolder:folder inProject:project inMOC:moc];
+                  
+                  // if this is a tex file, recursive call
+                  if ([[file extension] isEqualToString:@"tex"]) {
+                    [self document:aDocument addProjectItemsFromFile:[file pathOnDisk]];
+                  }
+                } else {
+//                  NSLog(@"-- file is not supported or image: %@", fullpath);
+                }
+              }
             }
           }                    
         } // end loop over tags        
