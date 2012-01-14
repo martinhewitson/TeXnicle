@@ -22,12 +22,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 +(NSArray*)builtinEngineNames
 {
-  static NSArray *builtInEngineNames;
-  
-  if (builtInEngineNames == nil) {
-    builtInEngineNames = [[NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil] retain];  
-  }
-  return builtInEngineNames;
+  return [NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil];
 }
 
 + (void) installEngines
@@ -38,16 +33,13 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   
   
   for (NSString *name in [TPEngineManager builtinEngineNames]) {
+//    NSLog(@"Adding engine %@", name);
     NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"engine"];
 //    NSLog(@"Adding path %@", path);
     if (path) {
       [engines addObject:path];    
     }
   }
-  
-  
-  // application support directory 
-//  NSLog(@"Support folder: %@", [sf supportFolder]);
   
   // create engines folder
   NSFileManager *fm = [NSFileManager defaultManager];
@@ -81,7 +73,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     if (error) {
       [NSApp presentError:error];
     } else {
-      [fm moveItemAtPath:engine toPath:target error:&error];
+      [fm copyItemAtPath:engine toPath:target error:&error];
+//      [fm moveItemAtPath:engine toPath:target error:&error];
       if (error) {
         [NSApp presentError:error];
         NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
@@ -201,7 +194,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
       TPEngine *e = [TPEngine engineWithPath:filepath];
       [self.engines addObject:e];      
       for (NSString *bin in [TPEngineManager builtinEngineNames]) {
-        if ([bin isEqualToString:e.name]) {
+        if ([[bin lowercaseString] isEqualToString:[e.name lowercaseString]]) {
           e.builtIn = YES;
         }
       }
@@ -214,7 +207,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 {
   NSInteger index = 0;
   for (TPEngine *e in self.engines) {
-    if ([e.name isEqualToString:[name lowercaseString]]) {
+    if ([[e.name lowercaseString] isEqualToString:[name lowercaseString]]) {
       return index;
     }
     index++;
