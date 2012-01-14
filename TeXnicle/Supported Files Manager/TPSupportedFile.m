@@ -15,7 +15,9 @@
 @synthesize isBuiltIn;
 @synthesize syntaxHighlight;
 
-
+// Initialise with a name and extension.
+// Built-in defaults to NO.
+// Syntax highlighting defaults to NO.
 - (id) initWithName:(NSString*)aName extension:(NSString*)anExtension
 {
   self = [super init];
@@ -28,11 +30,13 @@
   return self;
 }
 
+// Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension
 {
   return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension] autorelease];
 }
 
+// Init with name and extension, and flag as built-in or not
 - (id) initWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn
 {
   self = [self initWithName:aName extension:anExtension];
@@ -42,12 +46,13 @@
   return self;
 }
 
-
+// Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn
 {
   return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn] autorelease];
 }
 
+// Init with name, extension, built-in and syntax highlight flags
 - (id) initWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight
 {
   self = [self initWithName:aName extension:anExtension isBuiltIn:builtIn];
@@ -57,6 +62,7 @@
   return self;
 }
 
+// Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight
 {
   return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight] autorelease];
@@ -68,7 +74,7 @@
 }
 
 #pragma mark -
-#pragma mark Encoding
+#pragma mark Support for NSCoding protocol
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {

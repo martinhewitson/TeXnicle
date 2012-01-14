@@ -26,7 +26,7 @@ extern NSString * const TPSupportedFileRemovedNotification;
 - (BOOL) removeSupportedFileType:(TPSupportedFile*)aDict;
 - (TPSupportedFile*) addSupportedFileType:(TPSupportedFile*)aDict;
 
-- (void) replaceSupportedFileAtIndex:(NSInteger)index withSupportedFile:(TPSupportedFile*)aDict;
+- (BOOL) replaceSupportedFileAtIndex:(NSInteger)index withSupportedFile:(TPSupportedFile*)aFile;
 - (TPSupportedFile*)fileAtIndex:(NSInteger)index;
 - (NSInteger)fileCount;
 - (NSInteger)indexOfFileType:(TPSupportedFile*)fileType;

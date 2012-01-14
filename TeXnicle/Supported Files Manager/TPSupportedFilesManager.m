@@ -18,7 +18,7 @@ NSString * const TPSupportedFileRemovedNotification = @"TPSupportedFileRemovedNo
 
 static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 
-
+// Initialise the supported files manager
 - (id)init
 {
   self = [super init];
@@ -34,6 +34,8 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 	return self;
 }
 
+// dealloc 
+// also save the file types here
 - (void) dealloc
 {
   [self saveTypes];
@@ -41,6 +43,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   [super dealloc];
 }
 
+// save supported file types back to the standard user defaults
 - (void) saveTypes
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -48,6 +51,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   [defaults synchronize];
 }
 
+// convenience constructor
 + (TPSupportedFilesManager*)sharedSupportedFilesManager
 {
 	@synchronized(self) {
@@ -94,6 +98,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 	return self;
 }
 
+// Returns an array of supported file type names
 - (NSArray*)supportedTypes
 {
   NSMutableArray *array = [NSMutableArray array];
@@ -103,6 +108,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return array;
 }
 
+// Returns the type for a given file extension, or nil
 - (NSString*)typeForExtension:(NSString*)ext
 {
   for (TPSupportedFile *file in self.supportedFileTypes) {
@@ -114,6 +120,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return nil;
 }
 
+// Returns the extension for a given file type, or nil
 - (NSString*)extensionForType:(NSString*)aType
 {
   for (TPSupportedFile *file in self.supportedFileTypes) {
@@ -125,6 +132,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return nil;
 }
 
+// Returns an array of supported file extensions
 - (NSArray*)supportedExtensions
 {
   NSMutableArray *array = [NSMutableArray array];
@@ -134,6 +142,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return array;
 }
 
+// Returns an array of supported file extensions which should be syntax highlighted
 - (NSArray*)supportedExtensionsForHighlighting
 {
   NSMutableArray *array = [NSMutableArray array];
@@ -146,21 +155,23 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 }
 
 
-
-- (BOOL) removeSupportedFileType:(NSDictionary*)aDict
+// Remove the given supported file type object. Returns YES if successful, otherwise NO.
+- (BOOL) removeSupportedFileType:(TPSupportedFile*)aFile
 {
-  if ([self.supportedFileTypes containsObject:aDict]) {
-    [self.supportedFileTypes removeObject:aDict];
+  if ([self.supportedFileTypes containsObject:aFile]) {
+    [self.supportedFileTypes removeObject:aFile];
     
+    // post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:TPSupportedFileRemovedNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:aDict forKey:@"fileType"]];
+                                                      userInfo:[NSDictionary dictionaryWithObject:aFile forKey:@"fileType"]];
     return YES;
   }
   
   return NO;
 }
 
+// Adds the given supported file type to the list of supported files
 - (TPSupportedFile*) addSupportedFileType:(TPSupportedFile*)aFile
 {
   [self.supportedFileTypes addObject:aFile];
@@ -172,23 +183,34 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return aFile;
 }
 
-
-- (void) replaceSupportedFileAtIndex:(NSInteger)index withSupportedFile:(TPSupportedFile*)aFile
+// Replace the file at the given index with the given supported file. Returns YES if the file is successfully replaced; NO otherwise.
+- (BOOL) replaceSupportedFileAtIndex:(NSInteger)index withSupportedFile:(TPSupportedFile*)aFile
 {
-  [self.supportedFileTypes replaceObjectAtIndex:index withObject:aFile];
-  [self saveTypes];
+  if (index >=0 && index < [self.supportedFileTypes count]) {
+    [self.supportedFileTypes replaceObjectAtIndex:index withObject:aFile];
+    [self saveTypes];
+    return YES;
+  }
+  return NO;
 }
 
+// Returns the file at the given index. If the index is out of bounds, nil is returned.
 - (TPSupportedFile*)fileAtIndex:(NSInteger)index
 {
-  return [self.supportedFileTypes objectAtIndex:index];
+  if (index >=0 && index < [self.supportedFileTypes count]) { 
+    return [self.supportedFileTypes objectAtIndex:index];
+  }
+  return nil;
 }
 
+// Returns the number of supported file types.
 - (NSInteger)fileCount
 {
   return [self.supportedFileTypes count];
 }
 
+
+// Returns the index of the given file.
 - (NSInteger)indexOfFileType:(TPSupportedFile*)fileType
 {
   return [self.supportedFileTypes indexOfObject:fileType];

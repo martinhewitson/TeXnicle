@@ -27,14 +27,17 @@
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
-  
+  // Add button
   if (anItem == self.addButton) {
     return YES;
   }
   
+  // Remove button
   if (anItem == self.removeButton) {
+    // Disable if there is no selected file...
     TPSupportedFile *file = [self selectedFile];
     if (file != nil) {
+      // ... or if the file is a built-in one.
       if ([file isBuiltIn]) {
         return NO;
       }
@@ -46,6 +49,7 @@
   return YES;
 }
 
+// Returns the currently selected file or nil.
 - (TPSupportedFile*)selectedFile
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
@@ -57,22 +61,30 @@
   return nil;
 }
 
+// Adds a new file type
 - (IBAction)addFileType:(id)sender
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   TPSupportedFile *newFile = [TPSupportedFile supportedFileWithName:@"New File Type" extension:@"ext"];
-  [sfm addSupportedFileType:newFile];
-  NSInteger index = [sfm indexOfFileType:newFile];
-  [self.tableView reloadData];
-  [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+  if (newFile) {
+    [sfm addSupportedFileType:newFile];
+    [self.tableView reloadData];
+    NSInteger index = [sfm indexOfFileType:newFile];
+    if (index >= 0 && index < [sfm fileCount]) {
+      [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    }
+  }
 }
 
+// Remove the selected file.
 - (IBAction)removeFileType:(id)sender
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   TPSupportedFile *file = [self selectedFile];
-  [sfm removeSupportedFileType:file];
-  [self.tableView reloadData];
+  if (file) {
+    [sfm removeSupportedFileType:file];
+    [self.tableView reloadData];
+  }
 }
 
 #pragma mark -

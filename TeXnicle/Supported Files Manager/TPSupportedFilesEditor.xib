@@ -46,10 +46,9 @@
 					<object class="NSButton" id="869646731">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{42, 19}, {23, 23}}</string>
+						<string key="NSFrame">{{42, 15}, {23, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:2466</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="210526403">
@@ -78,7 +77,7 @@
 					<object class="NSButton" id="857152352">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 19}, {23, 23}}</string>
+						<string key="NSFrame">{{20, 15}, {23, 23}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="869646731"/>
@@ -117,7 +116,7 @@
 										<string key="NSFrameSize">{388, 190}</string>
 										<reference key="NSSuperview" ref="1004288496"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="412110999"/>
+										<reference key="NSNextKeyView" ref="723543824"/>
 										<string key="NSReuseIdentifierKey">_NS:1828</string>
 										<bool key="NSEnabled">YES</bool>
 										<object class="NSTableHeaderView" key="NSHeaderView" id="220671372">
@@ -358,7 +357,7 @@
 						<string key="NSFrame">{{20, 43}, {390, 208}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="723543824"/>
+						<reference key="NSNextKeyView" ref="1004288496"/>
 						<string key="NSReuseIdentifierKey">_NS:1824</string>
 						<int key="NSsFlags">133682</int>
 						<reference key="NSVScroller" ref="412110999"/>
