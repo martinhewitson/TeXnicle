@@ -303,7 +303,7 @@
 
 - (IBAction) newEmptyProject:(id)sender
 {
-  id doc = [TeXProjectDocument newTeXnicleProject];
+  id doc = [TeXProjectDocument createNewTeXnicleProject];
   
 	if (doc) {
 		// Check if a document was opened
@@ -364,7 +364,7 @@
 
 - (IBAction) newArticleDocument:(id)sender
 {
-  id doc = [TeXProjectDocument newTeXnicleProject];
+  id doc = [TeXProjectDocument createNewTeXnicleProject];
   
 	// Check if a document was opened
 	if (doc) {
