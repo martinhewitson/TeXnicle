@@ -10,13 +10,12 @@
 #define TeXnicle_MHConsoleViewer_h
 
 @protocol MHConsoleViewer <NSObject>
-
+@optional
 - (void) clear;
 - (void) appendText:(NSString*)someText;
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor;
 - (void) error:(NSString*)someText;
 - (void) message:(NSString*)someText;
-
 @end
 
 #endif
