@@ -14,6 +14,7 @@ extern NSString * const TPEngineCompilingCompletedNotification;
 extern NSString * const TPEngineDidTrashFilesNotification;
 
 @protocol TPEngineManagerDelegate <NSObject>
+@optional
 -(NSString*)engineName;
 -(NSNumber*)doBibtex;
 -(NSNumber*)doPS2PDF;
