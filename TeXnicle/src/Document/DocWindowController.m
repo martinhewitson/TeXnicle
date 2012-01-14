@@ -291,9 +291,11 @@
   Bookmark *b = [self bookmarkForLine:aLinenumber];
   if (!b) {
     Bookmark *bookmark = [Bookmark bookmarkWithLinenumber:aLinenumber inFile:self.file inManagedObjectContext:self.mainDocument.managedObjectContext];    
-    [self.texEditorViewController.textView setNeedsDisplay:YES];
-    [self.mainDocument.texEditorViewController.textView setNeedsDisplay:YES];
-    [self.mainDocument.bookmarkManager reloadData];
+    if (bookmark) {
+      [self.texEditorViewController.textView setNeedsDisplay:YES];
+      [self.mainDocument.texEditorViewController.textView setNeedsDisplay:YES];
+      [self.mainDocument.bookmarkManager reloadData];
+    }
   }
 }
 
