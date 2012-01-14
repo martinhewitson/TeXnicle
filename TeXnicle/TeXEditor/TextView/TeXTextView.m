@@ -93,6 +93,12 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 // Do the default setup for the text view.
 - (void) defaultSetup
 {
+  if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
+    [self setUsesFindBar:YES];
+  } else {
+    [self setUsesFindPanel:YES];
+  }
+  
 //  NSLog(@"TeX TextView default setup");
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
   
@@ -303,6 +309,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	NSInteger inserted = 0;
   NSMutableString *newString = [NSMutableString string];
 	[newString appendString:[str substringWithRange:r]];
+  
   [newString insertString:@"%" atIndex:0];
   inserted++;
   
@@ -340,20 +347,40 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	// Get a mutable string for this range
 	NSMutableString *newString = [NSMutableString string];
 	[newString appendString:[str substringWithRange:r]];
-	int inserted = 0;
-	if ([newString characterAtIndex:0]=='%') {
+
+  // find first non-whitespace character
+  NSInteger start = 0;
+  while (start < [newString length]) {
+    if (![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:start]]) {
+      break;
+    }
+    start++;
+  }
+	
+  int inserted = 0;
+	if ([newString characterAtIndex:start]=='%') {
     
-    [newString replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
     inserted--;
     
 	}
   
 	for (int ll=0; ll<[newString length]-1; ll++) {
 		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
-			if ([newString characterAtIndex:ll+1] == '%') {
-				[newString replaceCharactersInRange:NSMakeRange(ll+1, 1) withString:@""];
-				inserted--;
-			}
+      
+      start = ll+1;
+      while (start < [newString length]) {
+        if (![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:start]]) {
+          break;
+        }
+        start++;
+      }
+      if (start < [newString length]) {
+        if ([newString characterAtIndex:start] == '%') {
+          [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
+          inserted--;
+        }
+      }
 		}
 	}
 	
@@ -380,15 +407,28 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
 	// Get the range to edit
 	NSRange r = [str paragraphRangeForRange:selRange];	
+  
+  // fix the range in case we don't start the paragraph at a comment
+  
+  
 	// Get a mutable string for this range
 	NSMutableString *newString = [NSMutableString string];
-	[newString appendString:[str substringWithRange:r]];
-	int move = 0;
-	if ([newString characterAtIndex:0]=='%') {
+  NSString *substring = [str substringWithRange:r];
+	[newString appendString:substring];  
+  // look for first non-whitespace character  
+  NSInteger move = 0;
+  NSInteger start = 0;
+  while (start < [newString length]) {
+    if (![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:start]]) {
+      break;
+    }
+    start++;
+  }
+	if (start < [newString length] && [newString characterAtIndex:start]=='%') {
     
     // remove all comment chars
-    while([newString characterAtIndex:0]=='%') {
-      [newString replaceCharactersInRange:NSMakeRange(0, 1) withString:@""];
+    while([newString characterAtIndex:start]=='%') {
+      [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
       move--;
     }
     
@@ -400,9 +440,19 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	NSInteger inserted = 0;
 	for (int ll=0; ll<[newString length]-1; ll++) {
 		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
-			if ([newString characterAtIndex:ll+1] == '%') {
-        while([newString characterAtIndex:ll+1]=='%') {
-          [newString replaceCharactersInRange:NSMakeRange(ll+1, 1) withString:@""];
+      
+      // look forward on the first line for the first non-whitespace character
+      start = ll+1;
+      while (start < [newString length]) {
+        if (![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:start]]) {
+          break;
+        }
+        start++;
+      }
+      
+			if (start < [newString length] && [newString characterAtIndex:start] == '%') {
+        while([newString characterAtIndex:start]=='%') {
+          [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
           inserted--;
         }
 			} else {
@@ -504,7 +554,9 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
   // make sure we start and end at line ends
   NSRange lr = [[self string] lineRangeForRange:NSMakeRange(loc, 0)];
+  NSInteger diff = loc - lr.location;
   loc = lr.location;
+  length += diff;
   lr = [[self string] lineRangeForRange:NSMakeRange(loc+length, 0)];
   NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
   
@@ -1031,6 +1083,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       [self showFindIndicatorForRange:aRange];
     }
   }
+  
+  [self colorVisibleText];
 }
 
 
