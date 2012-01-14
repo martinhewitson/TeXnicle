@@ -13,6 +13,14 @@
 
 static ConsoleController *sharedConsoleController = nil;
 
+- (void)awakeFromNib
+{
+  if ([textView respondsToSelector:@selector(setUsesFindBar:)]) {
+    [textView setUsesFindBar:YES];
+  } else {
+    [textView setUsesFindPanel:YES];
+  }
+}
 
 - (id)init
 {
