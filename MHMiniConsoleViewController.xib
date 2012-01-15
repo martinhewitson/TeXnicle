@@ -45,7 +45,6 @@
 						<string key="NSFrame">{{279, 3}, {16, 16}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:3891</string>
 						<int key="NSpiFlags">28938</int>
 						<double key="NSMaxValue">100</double>
@@ -65,8 +64,8 @@
 								<string key="NSAntiCompressionPriority">{250, 750}</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="589706640">
-									<int key="NSCellFlags">67239424</int>
-									<int key="NSCellFlags2">138678272</int>
+									<int key="NSCellFlags">67239488</int>
+									<int key="NSCellFlags2">138680832</int>
 									<string key="NSContents">Multiline Label</string>
 									<object class="NSFont" key="NSSupport">
 										<string key="NSName">LucidaGrande</string>
