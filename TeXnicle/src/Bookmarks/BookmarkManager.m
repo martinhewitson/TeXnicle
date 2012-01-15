@@ -21,6 +21,8 @@
 @synthesize expandAllButton;
 @synthesize collapseAllButton;
 
+
+// Initialise with a delegate
 - (id)initWithDelegate:(id<BookmarkManagerDelegate>)aDelegate
 {
   self = [self initWithNibName:@"BookmarkManager" bundle:nil];
@@ -36,16 +38,7 @@
   return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  if (self) {
-    // Initialization code here.
-  }
-  
-  return self;
-}
-
+// Dealloc and remove self from notifcation center
 - (void) dealloc
 {
   self.delegate = nil;
@@ -86,12 +79,13 @@
   }
 }
 
-
+// Reload the data in the outline view
 - (void) reloadData
 {
   [self.outlineView reloadData];
 }
 
+// Jump to the selected bookmark
 - (IBAction)jumpToSelectedBookmark:(id)sender
 {
   Bookmark *b = [self selectedBookmark];
@@ -100,16 +94,20 @@
   }
 }
 
+// Returns the currently selected bookmark, or nil
 - (Bookmark*)selectedBookmark
 {
   NSInteger row = [self.outlineView selectedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[Bookmark class]]) {
-    return item;
+  if (row >= 0 && row < [[self allBookmarks] count]) {
+    id item = [self.outlineView itemAtRow:row];
+    if ([item isKindOfClass:[Bookmark class]]) {
+      return item;
+    }
   }
   return nil;
 }
 
+// Delete the selected bookmark
 - (IBAction)deleteSelectedBookmark:(id)sender
 {
   Bookmark *b = [self selectedBookmark];
@@ -121,6 +119,7 @@
   }
 }
 
+// Jump to previous bookmark
 - (IBAction)previousBookmark:(id)sender
 {
   NSArray *bookmarks = [self allBookmarks];
@@ -146,6 +145,7 @@
   [self jumpToBookmark:bookmark];
 }
 
+// Jump to next bookmark
 - (IBAction)nextBookmark:(id)sender
 {
   if (_currentSelectedBookmark < 0) {
@@ -168,6 +168,7 @@
   [self jumpToBookmark:bookmark];
 }
 
+// Expand all bookmarks
 - (IBAction)expandAll:(id)sender
 {
   for (FileEntity *f in [self files]) {
@@ -175,6 +176,7 @@
   }
 }
 
+// Collapse all bookmarks
 - (IBAction)collapseAll:(id)sender
 {
   for (FileEntity *f in [self files]) {
@@ -182,6 +184,7 @@
   }
 }
 
+// Validate menu items
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 //  NSLog(@"Bookmark manager validateMenuItem");
@@ -256,6 +259,7 @@
 #pragma mark -
 #pragma mark BookmarkManager Delegate
 
+// Returns an array of bookmarks for the given project by asking the delegate
 - (NSArray*)bookmarksForProject
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForProject)]) {
@@ -264,6 +268,7 @@
   return [NSArray array];
 }
 
+// Ask the delegate to jump to the given bookmark
 - (void) jumpToBookmark:(Bookmark*)aBookmark
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(jumpToBookmark:)]) {
@@ -271,6 +276,7 @@
   }  
 }
 
+// Inform the delegate we did delete a bookmark
 - (void) didDeleteBookmark
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(didDeleteBookmark)]) {
@@ -281,6 +287,7 @@
 #pragma mark -
 #pragma mark outline view delegate
 
+// Select a bookmark with a given line number
 - (void)selectBookmarkForLinenumber:(NSInteger)aLinenumber
 {
   Bookmark *bookmark = nil;
@@ -312,8 +319,6 @@
       }
     }
   }
-  
-
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
@@ -327,12 +332,14 @@
 #pragma mark -
 #pragma mark outline view datasource
 
+// Returns the bookmarks for a given file entity
 - (NSArray*)bookmarksForFile:(FileEntity*)aFile
 {
   NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
   return [[aFile.bookmarks allObjects] sortedArrayUsingDescriptors:descriptors];
 }
 
+// Returns an array of all bookmarks for all files.
 - (NSArray*)allBookmarks
 {
   NSMutableArray *bookmarks = [NSMutableArray array];
@@ -342,6 +349,7 @@
   return bookmarks;
 }
 
+// Returns an array of all files by scanning through all bookmarks for this project
 - (NSArray*)files
 {
   NSArray *bookmarks = [self bookmarksForProject];
