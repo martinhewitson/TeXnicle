@@ -763,6 +763,38 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 #pragma mark -
 #pragma mark control
 
+- (IBAction)printDocument:(id)sender
+{
+  // set printing properties
+  NSPrintInfo *myPrintInfo = [[[NSPrintInfo alloc] initWithDictionary:[[self printInfo] dictionary]] autorelease];
+  [myPrintInfo setHorizontalPagination:NSFitPagination];
+  [myPrintInfo setHorizontallyCentered:YES];
+  [myPrintInfo setVerticallyCentered:NO];
+  [myPrintInfo setLeftMargin:72.0];
+  [myPrintInfo setRightMargin:72.0];
+  [myPrintInfo setTopMargin:72.0];
+  [myPrintInfo setBottomMargin:90.0];
+  
+  // create new view just for printing
+  NSTextView *printView = [[NSTextView alloc] initWithFrame:[myPrintInfo imageablePageBounds]];
+  //  NSTextView *printView = [[NSTextView alloc] initWithFrame:NSMakeRect(0.0, 0.0, 8.5 * 72, 11.0 * 72)];
+  //	[MyPrintInfo imageablePageBounds]];
+  
+  // copy the textview into the printview
+  NSRange textViewRange = NSMakeRange(0, [[self.texEditorViewController.textView textStorage] length]);
+  NSRange printViewRange = NSMakeRange(0, [[printView textStorage] length]);
+  
+  [printView replaceCharactersInRange:printViewRange 
+                              withRTF:[self.texEditorViewController.textView RTFFromRange: textViewRange]];
+  
+  NSPrintOperation *op = [NSPrintOperation printOperationWithView:printView printInfo:myPrintInfo];
+  [op setShowsPrintPanel:YES];
+  [self runModalPrintOperation: op delegate: nil didRunSelector: NULL 
+                   contextInfo: NULL];
+  
+  [printView release];
+  
+}
 
 - (IBAction)pasteAsImage:(id)sender
 {  
