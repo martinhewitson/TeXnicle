@@ -120,6 +120,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 //  NSLog(@"Dealloc TPSectionListController");
   [self.timer invalidate];
   self.timer = nil;
