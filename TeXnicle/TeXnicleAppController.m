@@ -349,7 +349,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   
 //  NSLog(@"Current %f, %f", currentVersion, currentBuild);
   
-  if (latestVersion > currentVersion || latestBuild > currentBuild) {
+  if (latestVersion > currentVersion || (latestVersion == currentVersion && latestBuild > currentBuild)) {
     NSAlert *alert = [NSAlert alertWithMessageText:@"New version available"
                                      defaultButton:@"Download Now"
                                    alternateButton:@"Download Later"
