@@ -18,6 +18,7 @@
 #import "ProjectItemTreeController.h"
 #import "MHFileReader.h"
 #import "NSString+FileTypes.h"
+#import "TPProjectBuilderReport.h"
 
 @implementation TPProjectBuilder
 
@@ -25,6 +26,7 @@
 @synthesize projectDir;
 @synthesize mainfile;
 @synthesize filesOnDiskList;
+@synthesize reportString;
 
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath
 {
@@ -63,6 +65,7 @@
 - (void) dealloc
 {
   self.filesOnDiskList = nil;
+  self.reportString = nil;
   [super dealloc];
 }
 
@@ -155,7 +158,7 @@
 {
   for (NSString *file in self.filesOnDiskList) {
     NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
-    if ([name isEqualToString:[arg lastPathComponent]]) {
+    if ([name isEqualToString:[[arg lastPathComponent] stringByDeletingPathExtension]]) {
       return file;
     }
   }
@@ -171,7 +174,7 @@
 - (void)populateDocument:(TeXProjectDocument*)aDocument
 {
   [self generateFileList];
-  
+//  NSLog(@"%@", self.filesOnDiskList);
   if (self.mainfile) {
     NSString *mainFilePath = [self.projectDir stringByAppendingPathComponent:self.mainfile];
     ProjectEntity *project = [aDocument project];
@@ -179,8 +182,16 @@
     FileEntity *file = [self addFileAtPath:mainFilePath toFolder:nil inProject:project inMOC:moc];
     // set as main file	
     [project setValue:file forKey:@"mainFile"];
+    self.reportString = [[[NSMutableAttributedString alloc] init] autorelease];
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
     [file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
+    if ([self.reportString length] > 0) {
+      
+      TPProjectBuilderReport *report = [[[TPProjectBuilderReport alloc] initWithReportString:self.reportString] autorelease];
+      [[report window] setTitle:[NSString stringWithFormat:@"Build Report for Project \u201c%@\u201d", self.projectName]];
+      [report showWindow:self];
+      
+    }
   }  
   [aDocument.projectItemTreeController updateSortOrder];
 }
@@ -221,9 +232,7 @@
             // we need a longer string here, we should probably pass the full string and a start index
             // to look for the argument
             NSInteger argStart = loc-[word length];
-            NSString *arg = [string parseArgumentStartingAt:&argStart];
-            
-//            NSString *arg = [word argument];
+            NSString *arg = [string parseArgumentStartingAt:&argStart];            
 //            NSLog(@"Got arg %@", arg);
             if (arg != nil && [arg length]>0) {
               
@@ -232,7 +241,10 @@
               // Now we have a name, we need to find it on disk, because we don't know what kind of file it is
               NSString *filearg  = [self fileForArgument:arg];
               if (!filearg) {
-//                NSLog(@"### No file found for %@", arg);
+                NSString *str = [NSString stringWithFormat:@"Couldn't find included file on disk: %@\n", [self.projectDir stringByAppendingPathComponent:arg]];
+                NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+                [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, 36)];
+                [self.reportString appendAttributedString:astr];
                 continue;
               }
               
@@ -265,6 +277,10 @@
                     [self document:aDocument addProjectItemsFromFile:[file pathOnDisk]];
                   }
                 } else {
+                  NSString *str = [NSString stringWithFormat:@"Not adding unsupported file type: %@\n", fullpath];
+                  NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+                  [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, 33)];
+                  [self.reportString appendAttributedString:astr];
 //                  NSLog(@"-- file is not supported or image: %@", fullpath);
                 }
               }

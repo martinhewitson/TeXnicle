@@ -19,6 +19,7 @@
   NSString *projectDir;
   NSString *mainfile;
   NSMutableArray *filesOnDiskList;
+  NSMutableAttributedString *reportString;
 }
 
 @property (copy) NSString *projectName;
@@ -26,6 +27,7 @@
 @property (copy) NSString *mainfile;
 @property (readonly) NSURL *projectFileURL;
 @property (retain) NSMutableArray *filesOnDiskList;
+@property (retain) NSMutableAttributedString *reportString;
 
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath;
 - (id) initWithDirectory:(NSString*)aPath;
