@@ -186,14 +186,15 @@
 
 - (void)restoreVisibleRectFromPersistentString:(NSString*)aString
 {
-  NSView *view = [self.pdfview documentView];    
-  NSRect r = NSRectFromString(aString);
-  BOOL hasDoc = [self hasDocument];
-  [self redisplayDocument];
-  if (hasDoc) {
-    [view scrollRectToVisible:r];
+  if (aString) {
+    NSRect r = NSRectFromString(aString);
+    NSView *view = [self.pdfview documentView];    
+    BOOL hasDoc = [self hasDocument];
+    [self redisplayDocument];
+    if (hasDoc) {
+      [view scrollRectToVisible:r];
+    }
   }
-  
 }
 
 - (NSString*)visibleRectForPersisting
