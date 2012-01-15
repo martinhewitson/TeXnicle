@@ -30,6 +30,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.editorStatusText = nil;
   self.filenameText = nil;
   [super dealloc];
