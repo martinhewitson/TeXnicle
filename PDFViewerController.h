@@ -11,6 +11,7 @@
 #import "HHValidatedButton.h"
 #import "MHSlideViewController.h"
 #import "MHSlidingSplitViewController.h"
+#import "MHPDFView.h"
 
 @class PDFViewerController;
 
@@ -24,7 +25,7 @@
 @interface PDFViewerController : NSViewController <MHSlidingSplitViewDelegate, NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
 @private
   IBOutlet NSView *pdfViewContainer;
-  PDFView *pdfview;
+  MHPDFView *pdfview;
   PDFThumbnailView *pdfThumbnailView;
   id<PDFViewerControllerDelegate> delegate;
   NSInteger _currentHighlightedPDFSearchResult;
@@ -59,7 +60,7 @@
 @property (assign) IBOutlet NSTableView *searchResultsTable;
 @property (assign) IBOutlet MHSlidingSplitViewController *searchResultsSlideViewController;
 @property (assign) IBOutlet MHSlidingSplitViewController *thumbSlideViewController;
-@property (assign) IBOutlet PDFView *pdfview;
+@property (assign) IBOutlet MHPDFView *pdfview;
 @property (assign) IBOutlet PDFThumbnailView *pdfThumbnailView;
 @property (assign) IBOutlet NSSearchField *searchField;
 @property (assign) IBOutlet NSTextField *statusText;
@@ -94,6 +95,7 @@
 
 - (IBAction)printPDF:(id)sender;
 
+- (IBAction)findInPDF:(id)sender;
 - (IBAction) searchPDF:(id)sender;
 - (IBAction) showPreviousResult:(id)sender;
 - (IBAction) showNextResult:(id)sender;

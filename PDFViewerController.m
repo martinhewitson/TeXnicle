@@ -71,6 +71,8 @@
   [self.thumbSlideViewController setRightSided:NO];
   [self.thumbSlideViewController setDelegate:self];
   
+  [self.pdfview setDelegate:self];
+  
   if ([self hasDocument]) {
     [self.toggleThumbsButton setState:NSOnState];  
     [self.thumbSizeSlider setFloatValue:64.0];
@@ -184,6 +186,7 @@
 }
 
 
+
 - (void)restoreVisibleRectFromPersistentString:(NSString*)aString
 {
   if (aString) {
@@ -272,6 +275,11 @@
   [self.pdfview scrollSelectionToVisible:self];
   [self.pdfview setCurrentSelection:selection animate:YES];
   [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %d of %d", index+1, [self.searchResults count]]];
+}
+
+- (IBAction)findInPDF:(id)sender
+{
+  [self.view.window makeFirstResponder:self.searchField];
 }
 
 - (IBAction) searchPDF:(id)sender
