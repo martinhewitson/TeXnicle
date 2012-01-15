@@ -103,6 +103,7 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 
 
 - (void) dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[toolbarIdentifiers release];
 	[toolbarViews release];
 	[toolbarItems release];
