@@ -62,6 +62,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
 	[openDocuments release];
 	[standaloneWindows release];
