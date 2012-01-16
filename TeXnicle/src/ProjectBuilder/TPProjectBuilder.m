@@ -28,11 +28,13 @@
 @synthesize filesOnDiskList;
 @synthesize reportString;
 
+// Convenience constructor
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath
 {
   return [[[TPProjectBuilder alloc] initWithDirectory:aPath] autorelease];
 }
 
+// Inialise the builder with the given directory
 - (id) initWithDirectory:(NSString*)aPath
 {
   NSString *file = [TPProjectBuilder mainfileForDirectory:aPath];
@@ -45,11 +47,13 @@
   return self;
 }
 
+// Convenience constructor
 + (TPProjectBuilder*)builderWithMainfile:(NSString*)aFile
 {
   return [[[TPProjectBuilder alloc] initWithMainfile:aFile] autorelease];
 }
 
+// Initialise the builder with the given main file.
 - (id) initWithMainfile:(NSString*)aFile
 {
   self = [super init];
@@ -72,7 +76,6 @@
 // Look for the first tex file which has a \begin{document} in it and return that file.
 + (NSString*) mainfileForDirectory:(NSString*)aPath
 {
-//  NSLog(@"Scanning %@ for contents", aPath);
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
   NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];  
@@ -84,12 +87,10 @@
   // look at each item in the directory
   for (NSString *path in results) {
     NSString *fullpath = [aPath stringByAppendingPathComponent:path];
-//    NSLog(@"  checking %@", fullpath);
     // look for files
     NSDictionary *atts = [fm attributesOfItemAtPath:fullpath error:&error];
     if (atts) {
       if ([atts fileType] == NSFileTypeRegular) {
-//        NSLog(@"    found file: %@", path);
         NSError *error = nil;
         // load the file as a string
         error = nil;
@@ -97,9 +98,6 @@
         MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
         NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
         
-//        NSString *str = [NSString stringWithContentsOfFile:fullpath
-//                                                  encoding:NSUTF8StringEncoding
-//                                                     error:&error];
         if (str) {
           // look for \documentclass
           NSString *scanned = nil;
@@ -107,7 +105,6 @@
           [scanner scanUpToString:@"\\documentclass" intoString:&scanned];
           if ([scanner scanLocation] < [str length]) {
             // we found the string
-//            NSLog(@"*** Found document main file %@", path);
             return fullpath;
           }
         }
@@ -126,12 +123,14 @@
   return nil;
 }
 
+// Generate a list of relative file paths to the files contained in the project dir.
 - (void)generateFileList
 {
   [self.filesOnDiskList removeAllObjects];
   [self gatherFilesRelativeTo:self.projectDir];
 }
 
+// Gather a list of files relative to the given path
 - (void)gatherFilesRelativeTo:(NSString*)aPath
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
@@ -154,6 +153,7 @@
   }
 }
 
+// Returns a file in the 'files on disk' array that matches the given argument. File extensions are ignored. Only the last path component (file name) is compared.
 - (NSString*)fileForArgument:(NSString*)arg
 {
   for (NSString *file in self.filesOnDiskList) {
@@ -165,6 +165,8 @@
   return nil;
 }
 
+
+// The tags to search for.
 - (NSArray*)includeTags
 {
   return [NSArray arrayWithObjects:@"\\input{", @"\\include{", @"\\includegraphics", nil];
@@ -196,6 +198,7 @@
   [aDocument.projectItemTreeController updateSortOrder];
 }
 
+// Add project items by scanning the given file string.
 - (void)document:(TeXProjectDocument*)aDocument addProjectItemsFromFile:(NSString*)aFile
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
@@ -293,6 +296,7 @@
   } // end if file load was successful
 }
 
+// Add a file at the given path to the given project.
 - (FileEntity*) addFileAtPath:(NSString*)fullpath toFolder:(FolderEntity*)folder inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
   NSString *extension = [fullpath pathExtension];
@@ -313,20 +317,16 @@
 	[moc processPendingChanges];
 	
   // set file content
-	BOOL isTextFile = NO;
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
-//	NSStringEncoding encoding;
-//	NSError *error = nil;
-//	NSString *contents = [NSString stringWithContentsOfFile:fullpath
-//																						 usedEncoding:&encoding
-//																										error:&error];
   
-  // check if the file was a text file, If it is a text file and we couldn't load it, throw an error.
+  // check if the file was a text file
+	BOOL isTextFile = NO;
 	if ([fullpath isText]) {
 		isTextFile = YES;
 	}	
-  NSData *data = [contents dataUsingEncoding:NSUTF8StringEncoding];
+  
+  NSData *data = [contents dataUsingEncoding:[fr encodingUsed]];
   [newFile setValue:data forKey:@"content"];
   
 	// set project
@@ -355,7 +355,7 @@
 }
 
 
-
+// Make folders in the project for the given path components.
 - (FolderEntity*) makeFoldersForComponents:(NSArray*)pathComps inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
   NSString *lastComp = nil;
