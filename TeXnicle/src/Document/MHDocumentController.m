@@ -43,38 +43,58 @@
 
 - (NSString *)typeForContentsOfURL:(NSURL *)inAbsoluteURL error:(NSError **)outError
 {
+//  NSLog(@"Getting type for contents of %@", inAbsoluteURL);
+  NSString *type = [super typeForContentsOfURL:inAbsoluteURL error:outError];
+//  NSLog(@"Got %@", type);
+  if (type) 
+    return type;
+  
   NSString *ext = [inAbsoluteURL pathExtension];
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   if (ext) {
     NSString *type = [sfm typeForExtension:ext];
     if (type) {
+//      NSLog(@"Returning %@", type);
       return type;
     }
   }
   
-  return [super typeForContentsOfURL:inAbsoluteURL error:outError];
+  return nil;
 }
 
 - (Class)documentClassForType:(NSString *)documentTypeName
 {
+//  NSLog(@"Document class for type %@", documentTypeName);
+  Class c = [super documentClassForType:documentTypeName];
+  
+//  NSLog(@"Got %@", c);
+  if (c)
+    return c;
+  
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   NSString *ext = [sfm extensionForType:documentTypeName];
   if (ext) {
     return [ExternalTeXDoc class];
   }
   
-  return [super documentClassForType:documentTypeName];
+  return nil;
 }
 
+
 - (NSArray *)fileExtensionsFromType:(NSString *)documentTypeName
-{
+{  
+  NSArray *exts = [super fileExtensionsFromType:documentTypeName];
+  if (exts && [exts count]>0) {
+    return exts;
+  }
+  
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   NSString *ext = [sfm extensionForType:documentTypeName];
   if (ext) {
     return [NSArray arrayWithObject:ext];
   }
   
-  return [super fileExtensionsFromType:documentTypeName];
+  return nil;
 }
 
 @end
