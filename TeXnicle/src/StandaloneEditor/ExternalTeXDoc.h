@@ -156,6 +156,7 @@
 - (void) insertTextToCurrentDocument:(NSString*)string;
 - (IBAction)toggleStatusView:(id)sender;
 - (void) toggleStatusBar:(BOOL)animate;
+- (IBAction)reloadCurrentFileFromDisk:(id)sender;
 
 #pragma mark -
 #pragma mark LaTeX Control
