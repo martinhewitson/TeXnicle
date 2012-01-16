@@ -72,68 +72,93 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 + (NSArray *)readableTypes
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
-  return [[sfm supportedTypes] arrayByAddingObjectsFromArray:[super readableTypes]];
+  return [[super readableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
 }
 
++ (NSArray *)writableTypes
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  return [[super writableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
+}
+
+- (NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation
+{
+  NSString *ext = [super fileNameExtensionForType:typeName saveOperation:saveOperation];
+  if (ext) {
+    return ext;
+  }
+  
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  ext = [sfm extensionForType:typeName];
+  if (ext) {
+    return ext;
+  }
+  
+  return nil;
+}
 
 - (void) captureUIsettings
 {
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  
-  // controls tab index
-  [dict setValue:[NSNumber numberWithInteger:[self.tabbarController indexOfSelectedTab]] forKey:TPExternalDocControlsTabIndexKey];
-  
-  // controls width
-  NSRect r = [controlsViewContainer frame];
-  [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocControlsWidthKey];
-  
-  // editor width
-  r = [texEditorContainer frame];
-  [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocEditorWidthKey];
-  
-  // pdf view visible rect
-  [dict setValue:[self.pdfViewerController visibleRectForPersisting] forKey:TPExternalDocPDFVisibleRectKey];
-  
-  
-  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
-  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
+  if ([self fileURL]) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    // controls tab index
+    [dict setValue:[NSNumber numberWithInteger:[self.tabbarController indexOfSelectedTab]] forKey:TPExternalDocControlsTabIndexKey];
+    
+    // controls width
+    NSRect r = [controlsViewContainer frame];
+    [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocControlsWidthKey];
+    
+    // editor width
+    r = [texEditorContainer frame];
+    [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocEditorWidthKey];
+    
+    // pdf view visible rect
+    [dict setValue:[self.pdfViewerController visibleRectForPersisting] forKey:TPExternalDocPDFVisibleRectKey];
+    
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
+    [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
+  }
 }
 
 - (void) restoreUIsettings
 {
-  NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
-  if (data) {
-    NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    if (dict) {
-      
-      // controls tab index
-      NSInteger tabIndex = [[dict valueForKey:TPExternalDocControlsTabIndexKey] integerValue];
-      [self.tabbarController selectTabAtIndex:tabIndex];
-      
-      if (![NSApp isLion]) {
-        // controls width
-        CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
-        if (controlsWidth >= 0.0) {
-          NSRect fr = [controlsViewContainer frame];
-          fr.size.width = controlsWidth;
-          [controlsViewContainer setFrame:fr];
+  if ([self fileURL]) {
+    NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
+    if (data) {
+      NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+      if (dict) {
+        
+        // controls tab index
+        NSInteger tabIndex = [[dict valueForKey:TPExternalDocControlsTabIndexKey] integerValue];
+        [self.tabbarController selectTabAtIndex:tabIndex];
+        
+        if (![NSApp isLion]) {
+          // controls width
+          CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
+          if (controlsWidth >= 0.0) {
+            NSRect fr = [controlsViewContainer frame];
+            fr.size.width = controlsWidth;
+            [controlsViewContainer setFrame:fr];
+          }
+          
+          // editor width
+          CGFloat editorWidth = [[dict valueForKey:TPExternalDocEditorWidthKey] floatValue];
+          if (editorWidth >= 0.0) {
+            NSRect fr = [texEditorContainer frame];
+            fr.size.width = editorWidth;
+            [texEditorContainer setFrame:fr];
+          }
         }
         
-        // editor width
-        CGFloat editorWidth = [[dict valueForKey:TPExternalDocEditorWidthKey] floatValue];
-        if (editorWidth >= 0.0) {
-          NSRect fr = [texEditorContainer frame];
-          fr.size.width = editorWidth;
-          [texEditorContainer setFrame:fr];
-        }
+        // pdf view visible rect
+        NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
+        [self.pdfViewerController restoreVisibleRectFromPersistentString:pdfVisibleRect];
+        
       }
-      
-      // pdf view visible rect
-      NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
-      [self.pdfViewerController restoreVisibleRectFromPersistentString:pdfVisibleRect];
-      
-    }
-  }    
+    }    
+  }
 }
 
 
@@ -202,7 +227,16 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
              name:TPEngineCompilingCompletedNotification
            object:self.engineManager];
   
-    
+//  // versions  
+//  [nc addObserver:self
+//         selector:@selector(handleEnteredVersionsBrowser:)
+//             name:NSWindowDidEnterVersionBrowserNotification
+//           object:nil];
+//  [nc addObserver:self
+//         selector:@selector(handleExitedVersionsBrowser:)
+//             name:NSWindowDidExitVersionBrowserNotification
+//           object:nil];
+
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -238,6 +272,23 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   
   [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
 }
+
+
+//- (void) handleEnteredVersionsBrowser:(NSNotification*)aNote
+//{
+//  NSLog(@"Entered Versions: %@", aNote);
+//}
+//
+//- (void) handleExitedVersionsBrowser:(NSNotification*)aNote
+//{
+//  NSLog(@"Exited Versions: %@", aNote);
+//  if ([[NSApp delegate] respondsToSelector:@selector(startupScreen)]) {
+//    id startupScreen = [[NSApp delegate] performSelector:@selector(startupScreen) withObject:self];
+//    if ([startupScreen respondsToSelector:@selector(displayOrCloseWindow:)]) {
+//      [startupScreen performSelector:@selector(displayOrCloseWindow:) withObject:self];
+//    }
+//  }
+//}
 
 - (void) initSettings
 {  
@@ -613,12 +664,13 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction) saveDocument:(id)sender
 {
+//  NSLog(@"Save doc...");
+  
   // cache chosen language
   NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
 	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-  
-  
+    
 //	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 //	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
@@ -672,38 +724,42 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	return @"ExternalTeXDoc";
 }
 
+//+ (BOOL)autosavesInPlace
+//{
+//  return YES;
+//}
+
 - (IBAction)reopenUsingEncoding:(id)sender
 {
   NSString *path = [[self fileURL] path];
-  
-  // clear the xattr
-  [UKXattrMetadataStore setString:@""
-                           forKey:@"com.bobsoft.TeXnicleTextEncoding"
-                           atPath:path
-                     traverseLink:YES];
-  
-  MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
-  NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
-	if (str) {
-    self.fileLoadDate = [NSDate date];
-    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
-                                                        forKey:NSCharacterEncodingDocumentAttribute];
-    NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
-    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
-    //    NSLog(@"Made att str %@", attStr);
-		[self setDocumentData:attStr];
-    [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+  if (path) {
+    // clear the xattr
+    [UKXattrMetadataStore setString:@""
+                             forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                             atPath:path
+                       traverseLink:YES];
     
-    // read settings
-    NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[[self fileURL] path] traverseLink:NO];
-    if (data) {
-      NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-      if (dict) {
-        self.settings = [NSMutableDictionary dictionaryWithDictionary:dict];
+    MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
+    NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
+    if (str) {
+      self.fileLoadDate = [NSDate date];
+      NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
+                                                          forKey:NSCharacterEncodingDocumentAttribute];
+      NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
+      [self setDocumentData:attStr];
+      [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+      
+      // read settings
+      NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[[self fileURL] path] traverseLink:NO];
+      if (data) {
+        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (dict) {
+          self.settings = [NSMutableDictionary dictionaryWithDictionary:dict];
+        }
       }
+      
     }
-    
-	}
+  }
 }
 
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -711,7 +767,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	NSAttributedString *attStr = [self.texEditorViewController.textView attributedString];
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:attStr];
 	[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
-	
+  [self setDocumentData:string];
 	NSString *str = [string string];
   
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
@@ -721,10 +777,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   BOOL res = [fr writeString:str toURL:absoluteURL withEncoding:_encoding];
 	[string release];
   
-  // now write project settings as xattr  
-  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.settings];
-  
-  [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
+  if (res) {
+    // now write project settings as xattr  
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.settings];
+    [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
+  }
   
 	return res;
 }
@@ -739,10 +796,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:_encoding]
                                                         forKey:NSCharacterEncodingDocumentAttribute];
     NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
-    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
-    //    NSLog(@"Made att str %@", attStr);
 		[self setDocumentData:attStr];
-    //		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
@@ -866,6 +920,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction)reloadCurrentFileFromDisk:(id)sender
 {
+//  NSLog(@"Reload current file from disk");
   NSRange selected = [self.texEditorViewController.textView selectedRange];
   [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];  
   [self revertDocumentToSaved:self];
@@ -1034,7 +1089,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 		}
 	}
 	
-	return YES;
+	return [super validateUserInterfaceItem:item];
 }
 
 
@@ -1191,26 +1246,37 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
 {
-  if (![self isDocumentEdited]) {
-    [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
+//  NSLog(@"File was accessed on disk...");
+  if ([self fileURL]) {
+    if (![self isDocumentEdited]) {
+      [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
+    }
   }
 }
 
 
 -(void) fileMonitor:(TPFileMonitor *)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
-  NSString *filename = [[[self fileURL] path] lastPathComponent];
-  NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
-                                   defaultButton:@"Reload"
-                                 alternateButton:@"Continue"
-                                     otherButton:nil 
-                       informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
-  NSInteger result = [alert runModal];
-  if (result == NSAlertDefaultReturn) {
-    [self revertDocumentToSaved:self];
-		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
-  } else {
-    self.fileLoadDate = modified;
+//  NSLog(@"File was changed on disk...%@", [self fileURL]);
+  if ([self fileURL]) {
+    if ([self isDocumentEdited]) {
+      NSString *filename = [[[self fileURL] path] lastPathComponent];
+      NSAlert *alert = [NSAlert alertWithMessageText:@"File Changed On Disk" 
+                                       defaultButton:@"Reload"
+                                     alternateButton:@"Continue"
+                                         otherButton:nil 
+                           informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
+      NSInteger result = [alert runModal];
+      if (result == NSAlertDefaultReturn) {
+        [self revertDocumentToSaved:self];
+        [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+      } else {
+        self.fileLoadDate = modified;
+      }
+    } else {
+      [self revertDocumentToSaved:self];
+      [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+    }
   }
 }
 
