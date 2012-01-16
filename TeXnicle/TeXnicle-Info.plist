@@ -7,21 +7,6 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>TeXnicle_Doc</string>
-			<key>CFBundleTypeName</key>
-			<string>TeXnicle text document</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>TEXT</string>
-				<string>utxt</string>
-				<string>TUTX</string>
-				<string>****</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-		</dict>
-		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>texnicle</string>
@@ -80,37 +65,9 @@
 			<string>TPEngineEditor</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>TeXnicle_Doc</string>
-			<key>CFBundleTypeName</key>
-			<string>Apple Simple Text document</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.apple.traditional-mac-plain-text</string>
-			</array>
-			<key>NSDocumentClass</key>
-			<string>ExternalTeXDoc</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeIconFile</key>
-			<string>TeXnicle_Doc</string>
-			<key>CFBundleTypeName</key>
-			<string>NSStringPboardType</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>public.plain-text</string>
-			</array>
-			<key>NSDocumentClass</key>
-			<string>ExternalTeXDoc</string>
-		</dict>
-		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>cls</string>
+				<string>clas</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>TeXnicle_Doc</string>
@@ -118,8 +75,6 @@
 			<string>LaTeX Class Files</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>NSDocumentClass</key>
-			<string>ExternalTeXDoc</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -132,8 +87,6 @@
 			<string>LaTeX Style Files</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>NSDocumentClass</key>
-			<string>ExternalTeXDoc</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
