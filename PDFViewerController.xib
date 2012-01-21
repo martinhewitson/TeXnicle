@@ -73,7 +73,6 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -99,7 +98,6 @@
 														<string key="NSFrameSize">{361, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView"/>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
 														<bool key="PageBreaks">YES</bool>
@@ -459,7 +457,6 @@
 								<string key="NSFrame">{{583, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295962500">
@@ -1714,6 +1711,7 @@
 					<string key="className">PDFViewerController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="findInPDF:">id</string>
 						<string key="printPDF:">id</string>
 						<string key="searchPDF:">id</string>
 						<string key="setThumbSize:">id</string>
@@ -1726,6 +1724,10 @@
 						<string key="zoomToFit:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="findInPDF:">
+							<string key="name">findInPDF:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="printPDF:">
 							<string key="name">printPDF:</string>
 							<string key="candidateClassName">id</string>
