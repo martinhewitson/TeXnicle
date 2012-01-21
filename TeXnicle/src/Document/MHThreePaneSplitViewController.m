@@ -22,7 +22,7 @@
 
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
-  //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
+//  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
   
   NSSize splitViewSize = [sender frame].size;  
   NSSize leftSize = [leftView frame].size;
@@ -123,9 +123,9 @@
   NSSize centerSize = [centerView frame].size;  
 //  NSSize rightSize = [rightView frame].size;
   
-  //  NSLog(@"Left %@", NSStringFromSize(leftSize));
-  //  NSLog(@"Center %@", NSStringFromSize(centerSize));
-  //  NSLog(@"Right %@", NSStringFromSize(rightSize));
+//  NSLog(@"Left %@", NSStringFromSize(leftSize));
+//  NSLog(@"Center %@", NSStringFromSize(centerSize));
+//  NSLog(@"Right %@", NSStringFromSize(rightSize));
   
   CGFloat w = 0.0;
   
