@@ -62,6 +62,11 @@
   NSView *rightView;
   NSView *centerView;
   
+  BOOL _inVersionsBrowser;
+  CGFloat _leftDividerPostion;
+  CGFloat _rightDividerPostion;
+  NSRect _windowFrame;
+  
   NSInteger selectedControlsTab;
   
 	IBOutlet NSWindow *renameSheet;
@@ -186,6 +191,8 @@
 
 - (void) restoreUIstate;
 - (void) captureUIstate;
+- (void) restoreSplitViewPositions;
+
 
 - (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;

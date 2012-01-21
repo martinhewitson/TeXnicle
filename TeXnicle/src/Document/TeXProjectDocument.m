@@ -166,8 +166,68 @@
 //  return [super revertToContentsOfURL:inAbsoluteURL ofType:inTypeName error:outError];
 //}
 
+
+- (void)windowWillEnterVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window will enter versions browser");
+  _leftDividerPostion = self.leftView.frame.size.width;
+  _rightDividerPostion = self.splitview.frame.size.width - self.rightView.frame.size.width;
+  _windowFrame = self.windowForSheet.frame;
+//  [self.splitview setPosition:0 ofDividerAtIndex:0];
+//  [self.splitview setPosition:self.splitview.frame.size.width ofDividerAtIndex:1];
+  
+  // disable some UI 
+  [self.texEditorViewController.textView setEditable:NO];  
+  [self.statusViewController enable:NO];
+}
+
+- (void)windowDidEnterVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window did enter versions");
+  _inVersionsBrowser = YES;
+}
+
+- (void)windowWillExitVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window will exit versions browser");
+}
+
+- (void)windowDidExitVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window did exit versions browser");
+  if (self.windowForSheet == [notification object]) {
+    _inVersionsBrowser = NO;
+    
+    CAAnimation *anim = [CABasicAnimation animation];
+    [anim setDelegate:self];
+    [self.windowForSheet setAnimations:[NSDictionary dictionaryWithObject:anim forKey:@"frame"]];
+    
+    [self.windowForSheet.animator setFrame:_windowFrame display:YES];
+  }
+//  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
+  
+  // reenable some UI
+  [self.texEditorViewController.textView setEditable:YES];  
+  [self.statusViewController enable:YES];
+}
+
+
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
+{
+//  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
+  [self.windowForSheet makeKeyAndOrderFront:self];
+}
+
+- (void) restoreSplitViewPositions
+{
+  //  NSLog(@"Restoring positions %f, %f", _leftDividerPostion, _rightDividerPostion);
+  [self.splitview setPosition:_leftDividerPostion ofDividerAtIndex:0];
+  [self.splitview setPosition:_rightDividerPostion ofDividerAtIndex:1];
+}
+
 - (void) setupDocument
 {
+//  NSLog(@"setupDocument");
   
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
@@ -262,25 +322,13 @@
 	// Update the project folder in case the file was moved
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
-//  NSLog(@"Saved folder %@", saveFolder);
-//  if (saveFolder != nil) {
-    if (![saveFolder isEqual:projectFolder]) {
-      [self.project setValue:projectFolder forKey:@"folder"];
-    }
-//  }  
+  if (![saveFolder isEqual:projectFolder]) {
+    [self.project setValue:projectFolder forKey:@"folder"];
+  }
+
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  
-  // versions
-//  
-//  [nc addObserver:self
-//         selector:@selector(handleEnteredVersionsBrowser:)
-//             name:NSWindowDidEnterVersionBrowserNotification
-//           object:nil];
-//  [nc addObserver:self
-//         selector:@selector(handleExitedVersionsBrowser:)
-//             name:NSWindowDidExitVersionBrowserNotification
-//           object:nil];
+
   
   // observe changes to the selection of the project outline view
   [nc addObserver:self
@@ -314,6 +362,7 @@
              name:TELineNumberClickedNotification
            object:self.texEditorViewController.textView];
     
+//  NSLog(@"Set status view values");
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
@@ -339,34 +388,16 @@
                                                     selector:@selector(updateStatusView)
                                                     userInfo:nil
                                                      repeats:YES];
+  
+//  NSLog(@"Setup document finished.");
   // Show document
   [self showDocument];
 }
-
-
-//- (void) handleEnteredVersionsBrowser:(NSNotification*)aNote
-//{
-//  NSLog(@"Entered Versions: %@", aNote);
-//}
-//
-//- (void) handleExitedVersionsBrowser:(NSNotification*)aNote
-//{
-//  NSLog(@"Exited Versions: %@", aNote);
-//  if ([[NSApp delegate] respondsToSelector:@selector(startupScreen)]) {
-//    id startupScreen = [[NSApp delegate] performSelector:@selector(startupScreen) withObject:self];
-//    if ([startupScreen respondsToSelector:@selector(displayOrCloseWindow:)]) {
-//      [startupScreen performSelector:@selector(displayOrCloseWindow:) withObject:self];
-//    }
-//  }
-//}
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
 //  NSLog(@"windowControllerDidLoadNib %@", [self windowForSheet]);
   [super windowControllerDidLoadNib:aController];
-  // Add any code here that needs to be executed once the windowController has loaded the document's window.
-  // setup toolbar
-  
   
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[[self windowForSheet] toolbar] items];
@@ -418,6 +449,9 @@
   // stop file monitor
 	self.fileMonitor.delegate = nil;
   
+  // stop engine manager
+  self.engineManager.delegate = nil;
+  
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
 		[self.openDocuments.tabView removeTabViewItem:item];
@@ -461,6 +495,12 @@
 
 - (void) captureUIstate
 {
+  if (_inVersionsBrowser)
+    return;
+  
+  if (self.project == nil) {
+    return;
+  }
   
   // selected controls tab
   self.project.uiSettings.selectedControlsTab = [NSNumber numberWithInteger:[self.controlsTabBarController indexOfSelectedTab]];
@@ -611,8 +651,8 @@
 
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL
 {
-	//	Find the document's model
-	
+//  NSLog(@"managedObjectContextForStoreURL %@", storeURL);
+	//	Find the document's model	
 	NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
 	if (!model)
 		return nil;
@@ -656,6 +696,7 @@
 																		 storeOptions:(NSDictionary*)storeOptions
 																						error:(NSError**)error
 {
+//  NSLog(@"configurePersistentStoreCoordinatorForURL %@", url);
   NSMutableDictionary *options = nil;
   if (storeOptions != nil) {
     options = [storeOptions mutableCopy];
@@ -690,6 +731,10 @@
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
   // build
   if ([theItem tag] == 30) {
     if ([self.engineManager isCompiling]) {
@@ -723,6 +768,10 @@
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
   if (anItem == self.createFolderButton) {
     return [self.projectItemTreeController canAdd];
   }
@@ -796,6 +845,7 @@
 	if (project != nil) {
 		return project;
 	}
+//  NSLog(@"Fetching project...");
 	NSManagedObjectContext *moc = [self managedObjectContext];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSError *fetchError = nil;
@@ -809,6 +859,7 @@
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
 		self.project = [fetchResults objectAtIndex:0];
 		[fetchRequest release];
+//    NSLog(@"   got project");
 		return project;
 	}
 	
@@ -819,6 +870,7 @@
 		// should present custom error message...
 	}
 	[fetchRequest release];
+//  NSLog(@"   got nil");
 	return nil;
 }
 
@@ -828,6 +880,10 @@
 
 - (IBAction) showCategoryActionMenu:(id)sender
 {
+  if (_inVersionsBrowser) {
+    return;
+  }
+  
 	if (treeActionMenu) {
     [treeActionMenu release];
     treeActionMenu = nil;
@@ -1013,6 +1069,7 @@
 		[self.project setValue:selectedItem forKey:@"mainFile"];
 	}
 	[self.projectOutlineView setNeedsDisplay:YES];
+  [self showDocument];
 }
 
 - (IBAction) revealItem:(id)sender
@@ -1704,7 +1761,14 @@
 
 - (NSString*)documentToCompile
 {
-  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
+  FileEntity *mainFile = self.project.mainFile;
+  if (mainFile) {
+    NSString *doc = [mainFile.pathOnDisk stringByDeletingPathExtension];
+    if (doc) {
+      return doc;
+    }
+  }
+  return nil;
 }
 
 - (NSString*)compiledDocumentPath
@@ -1782,6 +1846,10 @@
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
 	NSInteger tag = [menuItem tag];
   
   // find text selection in pdf
@@ -2476,7 +2544,6 @@
 //  return YES;
 //}
 
-
 - (BOOL)writeToURL:(NSURL *)absoluteURL
             ofType:(NSString *)typeName
   forSaveOperation:(NSSaveOperationType)saveOperation
@@ -2494,18 +2561,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                      error:error];
 }
 
-
-- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
- forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError
+- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *errorOrNil))completionHandler
 {
-  
-//	NSLog(@"Save %@, %d", typeName, saveOperation);
+  //	NSLog(@"Save %@, %d", typeName, saveOperation);
 	
 	// commit changes for open docs
 	[openDocuments commitStatus];
   // make sure we store the current status of open docs
   if ([self.openDocuments currentDoc] != nil) {
-//    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
+    //    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
     [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
   } else {
     self.project.selected = nil;
@@ -2521,12 +2585,44 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	
 	// make sure we save the files here
 	if ([self saveAllProjectFiles]) {    
-    NSString *path = [absoluteURL path];
+    NSString *path = [url path];
     NSURL *url = [NSURL fileURLWithPath:path];
-		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+    [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];    
 	}	
-	return NO;
 }
+//
+//- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
+// forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError
+//{
+//  
+////	NSLog(@"Save %@, %d", typeName, saveOperation);
+//	
+//	// commit changes for open docs
+//	[openDocuments commitStatus];
+//  // make sure we store the current status of open docs
+//  if ([self.openDocuments currentDoc] != nil) {
+////    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
+//    [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
+//  } else {
+//    self.project.selected = nil;
+//  }
+//  
+//  // capture UI state
+//  [self captureUIstate];
+//  
+//  // cache chosen language
+//  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
+//	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
+//	[[NSUserDefaults standardUserDefaults] synchronize];
+//	
+//	// make sure we save the files here
+//	if ([self saveAllProjectFiles]) {    
+//    NSString *path = [absoluteURL path];
+//    NSURL *url = [NSURL fileURLWithPath:path];
+//		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+//	}	
+//	return NO;
+//}
 
 - (BOOL) saveAllProjectFiles
 {
