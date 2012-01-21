@@ -241,9 +241,16 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (BOOL) isCompiling
 {
-  NSString *engineName = [self.delegate engineName];
-  TPEngine *e = [self engineNamed:engineName];
-  return e.isCompiling;
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineName)]) {
+    NSString *engineName = [self.delegate engineName];
+    TPEngine *e = [self engineNamed:engineName];
+    if (e) {
+      return e.isCompiling;
+    } else {
+      return NO;
+    }
+  }
+  return NO;
 }
 
 - (void) compile
