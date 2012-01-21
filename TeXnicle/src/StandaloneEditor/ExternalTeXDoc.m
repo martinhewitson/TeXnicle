@@ -24,6 +24,10 @@
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
 
+#define kSplitViewLeftMinSize 230.0
+#define kSplitViewCenterMinSize 400.0
+#define kSplitViewRightMinSize 400.0
+
 NSString * const TPExternalDocControlsTabIndexKey = @"TPExternalDocControlsTabIndexKey"; 
 NSString * const TPExternalDocControlsWidthKey = @"TPExternalDocControlsWidthKey"; 
 NSString * const TPExternalDocEditorWidthKey = @"TPExternalDocEditorWidthKey"; 
@@ -43,7 +47,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 @synthesize pdfViewContainer;
 @synthesize pdfViewerController;
 @synthesize results;
-@synthesize slideViewController;
 @synthesize statusViewController;
 @synthesize statusViewContainer;
 @synthesize tabbarController;
@@ -58,6 +61,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 @synthesize prefsContainerView;
 
 @synthesize pdfViewer;
+
+@synthesize leftView;
+@synthesize centerView;
+@synthesize rightView;
+@synthesize splitView;
 
 - (id) init
 {
@@ -166,8 +174,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 {
   self.results = [NSMutableArray array];
   
-  [self.slideViewController slideOutAnimate:NO];
-  
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
   
@@ -227,16 +233,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
              name:TPEngineCompilingCompletedNotification
            object:self.engineManager];
   
-//  // versions  
-//  [nc addObserver:self
-//         selector:@selector(handleEnteredVersionsBrowser:)
-//             name:NSWindowDidEnterVersionBrowserNotification
-//           object:nil];
-//  [nc addObserver:self
-//         selector:@selector(handleExitedVersionsBrowser:)
-//             name:NSWindowDidExitVersionBrowserNotification
-//           object:nil];
-
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -270,25 +266,88 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   
   [self showDocument];
   
+  
   [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
 }
 
+- (void)windowWillEnterVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window will enter versions browser");
+  _leftDividerPostion = self.leftView.frame.size.width;
+  _rightDividerPostion = self.splitView.frame.size.width - self.rightView.frame.size.width;
+  _windowFrame = self.windowForSheet.frame;
+  [self.splitView setPosition:0 ofDividerAtIndex:0];
+  [self.splitView setPosition:self.splitView.frame.size.width ofDividerAtIndex:1];
+  
+  // disable some UI 
+  [self.texEditorViewController.textView setEditable:NO];  
+  [self.statusViewController enable:NO];
+}
 
-//- (void) handleEnteredVersionsBrowser:(NSNotification*)aNote
-//{
-//  NSLog(@"Entered Versions: %@", aNote);
-//}
-//
-//- (void) handleExitedVersionsBrowser:(NSNotification*)aNote
-//{
-//  NSLog(@"Exited Versions: %@", aNote);
-//  if ([[NSApp delegate] respondsToSelector:@selector(startupScreen)]) {
-//    id startupScreen = [[NSApp delegate] performSelector:@selector(startupScreen) withObject:self];
-//    if ([startupScreen respondsToSelector:@selector(displayOrCloseWindow:)]) {
-//      [startupScreen performSelector:@selector(displayOrCloseWindow:) withObject:self];
-//    }
-//  }
-//}
+- (void)windowDidEnterVersionBrowser:(NSNotification *)notification
+{
+  _inVersionsBrowser = YES;
+}
+
+- (void)windowWillExitVersionBrowser:(NSNotification *)notification
+{
+//  NSLog(@"Window will exit versions browser");
+}
+
+- (void)windowDidExitVersionBrowser:(NSNotification *)notification
+{
+  if (self.windowForSheet == [notification object]) {
+    _inVersionsBrowser = NO;
+    
+    CAAnimation *anim = [CABasicAnimation animation];
+    [anim setDelegate:self];
+    [self.windowForSheet setAnimations:[NSDictionary dictionaryWithObject:anim forKey:@"frame"]];
+    
+    [self.windowForSheet.animator setFrame:_windowFrame display:YES];
+  }
+  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
+  
+  // reenable some UI
+  [self.texEditorViewController.textView setEditable:YES];  
+  [self.statusViewController enable:YES];
+}
+
+
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
+{
+  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
+  [self.windowForSheet makeKeyAndOrderFront:self];
+}
+
+
+- (void) restoreSplitViewPositions
+{
+//  NSLog(@"Restoring positions %f, %f", _leftDividerPostion, _rightDividerPostion);
+  [self.splitView setPosition:_leftDividerPostion ofDividerAtIndex:0];
+  [self.splitView setPosition:_rightDividerPostion ofDividerAtIndex:1];
+}
+
+- (void) windowDidBecomeKey:(NSNotification *)notification
+{
+}
+
+- (void)windowWillClose:(NSNotification *)notification 
+{		
+  // stop filemonitor from reaching us
+  self.fileMonitor.delegate = nil;
+  outlineController.delegate = nil;
+  
+//  NSLog(@"Window will close.");
+  if (!_inVersionsBrowser) {
+//    NSLog(@"Doc count %ld", [[[NSDocumentController sharedDocumentController] documents] count]);
+    if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
+      if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
+        [[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
+      }
+    }
+  }
+}
+
 
 - (void) initSettings
 {  
@@ -369,23 +428,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 }
 
 
-- (void) windowDidBecomeKey:(NSNotification *)notification
-{
-}
-
-- (void)windowWillClose:(NSNotification *)notification 
-{		
-  // stop filemonitor from reaching us
-  self.fileMonitor.delegate = nil;
-  outlineController.delegate = nil;
-  
-	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
-		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
-			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
-		}
-	}	
-}
-
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -411,6 +453,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
 	NSInteger tag = [menuItem tag];
   
   // find text selection in pdf
@@ -596,6 +642,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
   // build
   if ([theItem tag] == 30) {
     if ([self.engineManager isCompiling]) {
@@ -724,10 +774,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	return @"ExternalTeXDoc";
 }
 
-//+ (BOOL)autosavesInPlace
-//{
-//  return YES;
-//}
++ (BOOL)autosavesInPlace
+{
+  return YES;
+}
 
 - (IBAction)reopenUsingEncoding:(id)sender
 {
@@ -786,8 +836,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	return res;
 }
 
+
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+//  NSLog(@"Read from URL %@", absoluteURL);
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
@@ -797,6 +849,9 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
                                                         forKey:NSCharacterEncodingDocumentAttribute];
     NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
 		[self setDocumentData:attStr];
+    [[self.texEditorViewController.textView textStorage] setAttributedString:attStr];
+    [self.texEditorViewController.textView applyFontAndColor];
+    [self.texEditorViewController.textView colorWholeDocument];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
@@ -1082,6 +1137,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateUserInterfaceItem:(id < NSValidatedUserInterfaceItem >)item
 {
+  if (_inVersionsBrowser) {
+    return NO;
+  }
+  
 	// Add to project button
 	if (item == addToProjectButton) {
 		if ([self isDocumentEdited] || [self fileURL] == nil) {
@@ -1415,14 +1474,48 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 #pragma mark -
 #pragma mark Split view delegate
 
+- (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+  //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
+  
+  NSSize splitViewSize = [sender frame].size;  
+  NSSize leftSize = [self.leftView frame].size;
+  leftSize.height = splitViewSize.height;
+  
+  NSSize centerSize = [self.centerView frame].size;
+  centerSize.height = splitViewSize.height;
+  
+  NSSize rightSize;
+  rightSize.width = splitViewSize.width - centerSize.width;
+  rightSize.width -= 2.0*[sender dividerThickness];
+  
+  if (![sender isSubviewCollapsed:self.leftView]) {
+    rightSize.width -= leftSize.width;
+  }
+  
+  rightSize.height = splitViewSize.height;
+  
+  if (![sender isSubviewCollapsed:self.leftView]) {
+    [self.leftView setFrameSize:leftSize];
+  }
+  [self.centerView setFrameSize:centerSize];
+  if (![sender isSubviewCollapsed:self.rightView]) {
+    [self.rightView setFrameSize:rightSize];
+  }
+  
+  [sender adjustSubviews];
+}
+
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
-  if (subview == leftView)
+  
+  if (subview == self.leftView || subview == self.centerView)
     return NO;
   
-  if (subview == rightView) {
-    NSRect b = [rightView bounds];
-    if (b.size.width < 200) {
+  
+  if (subview == self.rightView) {
+    NSRect b = [self.rightView bounds];
+    if (b.size.width < kSplitViewRightMinSize) {
       return NO;
     }
   }
@@ -1433,27 +1526,79 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
 {
+  if (subview == self.centerView) {
+    return NO;
+  }
+  
   return YES;
 }
 
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
+- (CGFloat)splitView:(NSSplitView *)aSplitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
 {
   if (dividerIndex == 0) {
-    NSRect b = [splitView bounds];
-    return b.size.width-250;
+    NSRect b = [aSplitView bounds];
+    NSRect rb = [self.rightView bounds];
+    CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
+    return max;
+  }
+  
+  if (dividerIndex == 1) {
+    NSRect b = [aSplitView bounds];
+    return b.size.width-kSplitViewRightMinSize;
   }
   
   return proposedMax;
 }
 
-- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
+
+- (CGFloat)splitView:(NSSplitView *)aSplitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
-  
   if (dividerIndex == 0) {
-    return 250;
+    return kSplitViewLeftMinSize;
   }
   
+  if (dividerIndex == 1) {
+    NSRect lb = [self.leftView bounds];
+    
+    if ([aSplitView isSubviewCollapsed:self.leftView]) {
+      return kSplitViewCenterMinSize;
+    }
+    return lb.size.width + kSplitViewCenterMinSize;
+  }
+  
+  
+  
   return proposedMin;
+}
+
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
+{
+  NSSize leftSize = [self.leftView frame].size;
+  NSSize centerSize = [self.centerView frame].size;  
+  //  NSSize rightSize = [self.rightView frame].size;
+  
+  //  NSLog(@"Left %@", NSStringFromSize(leftSize));
+  //  NSLog(@"Center %@", NSStringFromSize(centerSize));
+  //  NSLog(@"Right %@", NSStringFromSize(rightSize));
+  
+  CGFloat w = 0.0;
+  
+  if (![self.splitView isSubviewCollapsed:self.leftView]) {
+    w += leftSize.width;
+    w += [self.splitView dividerThickness];
+  }
+  if (![self.splitView isSubviewCollapsed:self.centerView]) {
+    w += centerSize.width;
+    w += [self.splitView dividerThickness];
+  }
+  
+  if (![self.splitView isSubviewCollapsed:self.rightView]) {
+    if ((frameSize.width - w) < kSplitViewRightMinSize) {
+      frameSize.width = w + kSplitViewRightMinSize;
+    }  
+  }
+  
+  return frameSize; 
 }
 
 #pragma mark -

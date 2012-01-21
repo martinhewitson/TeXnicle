@@ -13,7 +13,6 @@
 #import "TPEngineSettingsController.h"
 #import "MHMiniConsoleViewController.h"
 #import "PDFViewerController.h"
-#import "MHSlideViewController.h"
 #import "TPStatusViewController.h"
 #import "MHControlsTabBarController.h"
 #import "LibraryController.h"
@@ -23,10 +22,20 @@
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <NSWindowDelegate, PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
-  IBOutlet NSView *leftView;
-  IBOutlet NSView *rightView;
+  NSView *leftView;
+  NSView *centerView;
+  NSView *rightView;
+  NSSplitView *splitView;
+  
+  NSRect _leftViewFrame;
+  NSRect _centerViewFrame;
+  NSRect _rightViewFrame;
+  
+  CGFloat _leftDividerPostion;
+  CGFloat _rightDividerPostion;
+  NSRect _windowFrame;
   
 	NSMutableAttributedString *documentData;
 
@@ -67,10 +76,9 @@
   BOOL shouldContinueSearching;
   
   BOOL statusViewIsShowing;
+  BOOL _inVersionsBrowser;
   
   TPEngineSettingsController *engineSettingsController;
-  
-  MHSlideViewController *slideViewController;
   
   TPStatusViewController *statusViewController;
   NSView *statusViewContainer;
@@ -95,14 +103,16 @@
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 
+@property (assign) IBOutlet NSView *leftView;
+@property (assign) IBOutlet NSView *centerView;
+@property (assign) IBOutlet NSView *rightView;
+@property (assign) IBOutlet NSSplitView *splitView;
 
 @property (retain) NSMutableArray *results;
 
 @property (retain) PDFViewer *pdfViewer;
 
 @property (assign) IBOutlet MHControlsTabBarController *tabbarController;
-
-@property (assign) IBOutlet MHSlideViewController *slideViewController;
 
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;
@@ -137,6 +147,7 @@
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 
+- (void) restoreSplitViewPositions;
 
 - (void) wrappedHighlightSearchResult:(NSString*)result withRange:(NSString*)aRangeString inFile:(id)aFile;
 
