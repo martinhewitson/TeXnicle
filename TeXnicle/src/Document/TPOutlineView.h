@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ProjectItemTreeController.h"
 #import "ESOutlineView.h"
+#import "TeXProjectDocument.h"
 
 @interface TPOutlineView : ESOutlineView {
 

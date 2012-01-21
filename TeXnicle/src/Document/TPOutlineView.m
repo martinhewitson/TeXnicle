@@ -225,6 +225,7 @@
     }
     [self setNeedsDisplay:YES];
   }
+  [mainDocument showDocument];
 }
 
 - (IBAction) revealItem:(id)sender
