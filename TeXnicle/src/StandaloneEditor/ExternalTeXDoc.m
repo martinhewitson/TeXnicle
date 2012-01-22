@@ -253,6 +253,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];  
   statusViewIsShowing = YES; 
+//  NSLog(@"Status view showing...");
   
   NSNumber *showStatusBarSetting = [self.settings valueForKey:@"TPStandAloneEditorShowStatusBar"];
   if (showStatusBarSetting) {
@@ -263,6 +264,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
   }
   [self updateFileStatus];
+  
+  if ([self isInViewingMode]) {
+    [self.texEditorViewController disableJumpBar];
+  }
   
   [self showDocument];
   
@@ -280,6 +285,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self.splitView setPosition:self.splitView.frame.size.width ofDividerAtIndex:1];
   
   // disable some UI 
+  [self.texEditorViewController disableJumpBar];
   [self.texEditorViewController.textView setEditable:NO];  
   [self.statusViewController enable:NO];
 }
@@ -308,6 +314,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
   
   // reenable some UI
+  [self.texEditorViewController enableJumpBar];
   [self.texEditorViewController.textView setEditable:YES];  
   [self.statusViewController enable:YES];
 }
@@ -338,7 +345,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   outlineController.delegate = nil;
   
 //  NSLog(@"Window will close.");
-  if (!_inVersionsBrowser) {
+  if (![self isInViewingMode]) {
 //    NSLog(@"Doc count %ld", [[[NSDocumentController sharedDocumentController] documents] count]);
     if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
       if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
@@ -453,7 +460,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
-  if (_inVersionsBrowser) {
+  if ([self isInViewingMode] || _inVersionsBrowser) {
     return NO;
   }
   
@@ -642,7 +649,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
-  if (_inVersionsBrowser) {
+  if ([self isInViewingMode] || _inVersionsBrowser) {
     return NO;
   }
   
@@ -744,7 +751,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void) updateFileStatus
 {
-  if ([self fileURL]) {
+  if ([self fileURL] && ![self isInViewingMode]) {
     [self.statusViewController setFilenameText:[[self fileURL] path]];
     [self.statusViewController enable:YES];
   } else {
@@ -1137,7 +1144,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateUserInterfaceItem:(id < NSValidatedUserInterfaceItem >)item
 {
-  if (_inVersionsBrowser) {
+  if ([self isInViewingMode] || _inVersionsBrowser) {
     return NO;
   }
   
