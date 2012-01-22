@@ -87,7 +87,7 @@
   [self.unfoldButton setHidden:NO];
 }
 
-- (void) enableJumpBar
+- (void) showJumpBar
 {
   [jumpBar setHidden:NO];
   NSRect fr = [scrollView frame];
@@ -95,12 +95,26 @@
   [scrollView setFrame:NSMakeRect(fr.origin.x, fr.origin.y, fr.size.width, fr.size.height-jr.size.height)];
 }
 
-- (void) disableJumpBar
+- (void) hideJumpBar
 {  
-  [jumpBar setHidden:YES];
   NSRect fr = [scrollView frame];
   NSRect jr = [jumpBar bounds];
+  [jumpBar setHidden:YES];
   [scrollView setFrame:NSMakeRect(fr.origin.x, fr.origin.y, fr.size.width, fr.size.height+jr.size.height)];
+}
+
+- (void) enableJumpBar
+{
+  [self.sectionListPopup setEnabled:YES]; 
+  [self.markerButton setEnabled:YES];
+  [self.unfoldButton setEnabled:YES];
+}
+
+- (void)disableJumpBar
+{
+  [self.sectionListPopup setEnabled:NO]; 
+  [self.markerButton setEnabled:NO];
+  [self.unfoldButton setEnabled:NO];
 }
 
 - (void) hide

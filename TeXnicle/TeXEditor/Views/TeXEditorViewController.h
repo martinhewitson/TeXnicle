@@ -44,7 +44,9 @@
 - (BOOL) textViewHasSelection;
 - (NSString*)selectedText;
 
-- (void) disableJumpBar;
+- (void) hideJumpBar;
+- (void) showJumpBar;
 - (void) enableJumpBar;
+- (void)disableJumpBar;
 
 @end
