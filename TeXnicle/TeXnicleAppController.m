@@ -18,6 +18,7 @@
 #import "MABSupportFolder.h"
 #import "TPEngineManager.h"
 #import "TPSupportedFile.h"
+#import "TPProjectBuilder.h"
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -418,6 +419,19 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	}
 }
 
+- (IBAction) newArticleDocument:(id)sender
+{
+  id doc = [TeXProjectDocument createNewTeXnicleProject];
+  
+	// Check if a document was opened
+	if (doc) {
+		// Add a new main TeX file to the doc
+		if ([doc respondsToSelector:@selector(addNewArticleMainFile)]) {
+			[doc performSelector:@selector(addNewArticleMainFile)];
+      [doc performSelector:@selector(saveDocument:) withObject:self];
+		}
+	}
+}
 
 - (IBAction) newLaTeXFile:(id)sender
 {
@@ -438,6 +452,81 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 		[[self startupScreen] displayOrCloseWindow:self];
 	}
 
+}
+
+- (IBAction)buildProject:(id)sender 
+{
+  // get a project director or file from the user  
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  [panel setTitle:@"Build New Project..."];
+  [panel setAllowedFileTypes:[NSArray arrayWithObject:@"trip"]];
+  [panel setNameFieldLabel:@"Source:"];
+  [panel setCanChooseFiles:YES];
+  [panel setCanChooseDirectories:YES];
+  [panel setCanCreateDirectories:NO];
+  [panel setMessage:@"Choose a main TeX file (one containing \\documentclass) or a directory of TeX files. \nIf a directory is chosen, the first TeX file containing \\documentclass is taken as the main file."];
+  [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"tex", NSFileTypeDirectory, nil]];
+  
+  BOOL result = [panel runModal];
+  
+  if (result == NSFileHandlingPanelCancelButton) {
+    return;
+  }
+  
+  
+  NSString *path = [[[panel URLs] objectAtIndex:0] path];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSError *error =nil;
+  NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }
+  TPProjectBuilder *pb = nil;
+  if ([atts fileType] == NSFileTypeDirectory) {
+    pb = [TPProjectBuilder builderWithDirectory:path];
+  } else {
+    pb = [TPProjectBuilder builderWithMainfile:path];
+  }
+  
+  // check if the project already exists and ask the user if they want to overwrite it
+  // Remove file if it is there
+  NSString *docpath = [pb.projectFileURL path];
+  if ([fm fileExistsAtPath:docpath]) {
+    
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
+    NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
+                                     defaultButton:@"Continue"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"A project file called %@ already exists in %@.\nIf you continue, the exiting project file will be moved to:\n%@.", [docpath lastPathComponent], [docpath stringByDeletingLastPathComponent], [movedPath lastPathComponent]];
+    
+    NSInteger result = [alert runModal];
+    
+    if (result == NSAlertAlternateReturn) {
+      return;
+    }
+    
+    NSError *moveError = nil;
+    [fm moveItemAtPath:docpath toPath:movedPath error:&moveError];
+    if (moveError) {
+      [NSApp presentError:moveError];
+      return;
+    }
+  }
+  
+  [TeXProjectDocument createTeXnicleProjectAtURL:pb.projectFileURL];
+  NSError *openError = nil;
+  TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:pb.projectFileURL display:YES error:&openError];
+  if (openError) {
+    [NSApp presentError:openError];
+    return;
+  }  
+  
+  [pb populateDocument:doc];  
 }
 
 #pragma mark -

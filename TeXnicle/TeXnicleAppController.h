@@ -28,6 +28,8 @@
 #pragma mark Document Control 
 
 - (IBAction) newEmptyProject:(id)sender;
+- (IBAction) newArticleDocument:(id)sender;
+- (IBAction)buildProject:(id)sender;
 - (IBAction) newLaTeXFile:(id)sender;
 
 @end
