@@ -626,7 +626,7 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   if ([fm fileExistsAtPath:path]) {
     NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm"];
+    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [path stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
     NSError *moveError = nil;
     [fm moveItemAtPath:path toPath:movedPath error:&moveError];
@@ -777,23 +777,7 @@
   }
   
   if (anItem == self.createFileButton) {
-//    if ([self.projectItemTreeController canAdd]) {
-//      NSArray *selected = [self.projectItemTreeController selectedObjects];
-//      if ([selected count] == 1) {
-//        id item = [selected objectAtIndex:0];
-//        if ([item isKindOfClass:[FolderEntity class]]) {
-//          return YES;
-//        }
-//        
-//        if ([item isKindOfClass:[FileEntity class]]) {
-//          FileEntity *file = (FileEntity*)item;
-//          if ([file parent]) {
-            return YES;
-//          }
-//        }
-//      }
-//    }
-//    return NO;
+    return YES;
   }
   
   return [super validateUserInterfaceItem:anItem];
