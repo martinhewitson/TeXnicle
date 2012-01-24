@@ -850,13 +850,24 @@ withIntermediateDirectories:YES
 {
 //	NSLog(@"Adding file to project: %@", aPath);
   
-
-	
 	// Look at the file we are adding
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;
 	NSString *projectPath = aPath;
 	
+  NSDictionary *sourceAttributes = [fm attributesOfItemAtPath:aPath error:&error];
+  if (![[sourceAttributes fileType] isEqualToString:NSFileTypeRegular]) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Source File Error"
+                                     defaultButton:@"OK" 
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil 
+                         informativeTextWithFormat:@"The source file is not a regular file. Aborting.", aPath
+                      ]; 
+    
+    [alert runModal];
+    return nil;
+  }
+  
 	// Copy first?
 	if (copyFile) {
 		
