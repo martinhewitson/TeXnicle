@@ -8,7 +8,6 @@
 
 #import "StartupScreenController.h"
 #import "TeXProjectDocument.h"
-#import "TPProjectBuilder.h"
 #import "TPDescriptionView.h"
 
 @implementation StartupScreenController
@@ -28,16 +27,7 @@
     
     // setup our Spotlight notifications 
     NSNotificationCenter *nf = [NSNotificationCenter defaultCenter];
-    [nf addObserver:self selector:@selector(queryNotification:) name:nil object:query];
-    
-    // initialize our Spotlight query
-    //  [query setSortDescriptors:
-    //   [NSArray arrayWithObject:
-    //    [[[NSSortDescriptor alloc] initWithKey:(id)kMDItemFSName ascending:YES] autorelease]]];
-    //  
-    //  [query setDelegate: self];
-    
-    //	[[self window] setAlphaValue:1.0];
+    [nf addObserver:self selector:@selector(queryNotification:) name:nil object:query];    
 	}
 	return self;
 }
@@ -55,9 +45,6 @@
 - (void) awakeFromNib
 {
     
-  //	[[self window] setLevel:NSNormalWindowLevel];
-  //	[[[[recentFilesTable tableColumns] objectAtIndex:0] dataCell] setFont:[NSFont systemFontOfSize:14.0]];
-	
 	[recentFilesTable setDoubleAction:@selector(recentFilesTableDoubleClick)];
   
 	openFrame = [[self window] frame];
@@ -227,91 +214,24 @@
 
 - (IBAction)buildProject:(id)sender 
 {
-  // get a project director or file from the user  
-  NSOpenPanel *panel = [NSOpenPanel openPanel];
-  [panel setTitle:@"Build New Project..."];
-  [panel setAllowedFileTypes:[NSArray arrayWithObject:@"trip"]];
-  [panel setNameFieldLabel:@"Source:"];
-  [panel setCanChooseFiles:YES];
-  [panel setCanChooseDirectories:YES];
-  [panel setCanCreateDirectories:NO];
-  [panel setMessage:@"Choose a main TeX file (one containing \\documentclass) or a directory of TeX files. \nIf a directory is chosen, the first TeX file containing \\documentclass is taken as the main file."];
-  [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"tex", NSFileTypeDirectory, nil]];
-  
-  BOOL result = [panel runModal];
-  
-  if (result == NSFileHandlingPanelCancelButton) {
-    return;
-  }
-  
-  
-  NSString *path = [[[panel URLs] objectAtIndex:0] path];
-  NSFileManager *fm = [NSFileManager defaultManager];
-  NSError *error =nil;
-  NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
-  if (error) {
-    [NSApp presentError:error];
-    return;
-  }
-  TPProjectBuilder *pb = nil;
-  if ([atts fileType] == NSFileTypeDirectory) {
-    pb = [TPProjectBuilder builderWithDirectory:path];
-  } else {
-    pb = [TPProjectBuilder builderWithMainfile:path];
-  }
-  
-  // check if the project already exists and ask the user if they want to overwrite it
-  // Remove file if it is there
-  NSString *docpath = [pb.projectFileURL path];
-  if ([fm fileExistsAtPath:docpath]) {
-    
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
-    NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
-    
-    NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
-                                     defaultButton:@"Continue"
-                                   alternateButton:@"Cancel"
-                                       otherButton:nil
-                         informativeTextWithFormat:@"A project file called %@ already exists in %@.\nIf you continue, the exiting project file will be moved to:\n%@.", [docpath lastPathComponent], [docpath stringByDeletingLastPathComponent], [movedPath lastPathComponent]];
-    
-    NSInteger result = [alert runModal];
-    
-    if (result == NSAlertAlternateReturn) {
-      return;
-    }
-    
-    NSError *moveError = nil;
-    [fm moveItemAtPath:docpath toPath:movedPath error:&moveError];
-    if (moveError) {
-      [NSApp presentError:moveError];
-      return;
+  id delegate = [NSApp delegate];
+  if (delegate && [delegate respondsToSelector:@selector(buildProject:)]) {
+    [delegate buildProject:sender];
+    if ([[[NSDocumentController sharedDocumentController] documents] count]>0) {
+      [self displayOrCloseWindow:self];
     }
   }
-  
-  [TeXProjectDocument createTeXnicleProjectAtURL:pb.projectFileURL];
-  NSError *openError = nil;
-  TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:pb.projectFileURL display:YES error:&openError];
-  if (openError) {
-    [NSApp presentError:openError];
-    return;
-  }  
-  
-  [pb populateDocument:doc];  
-  [self displayOrCloseWindow:self];
 }
 
 - (IBAction) newEmptyProject:(id)sender
 {
-  id doc = [TeXProjectDocument createNewTeXnicleProject];
-  
-	if (doc) {
-		// Check if a document was opened
-		if ([[NSDocumentController sharedDocumentController] currentDocument]) {
-			[self displayOrCloseWindow:self];
-		}
-		[doc saveDocument:self];
-	}
+  id delegate = [NSApp delegate];
+  if (delegate && [delegate respondsToSelector:@selector(newEmptyProject:)]) {
+    [delegate newEmptyProject:sender];
+    if ([[[NSDocumentController sharedDocumentController] documents] count]>0) {
+      [self displayOrCloseWindow:self];
+    }
+  }
 }
 
 - (void) show 
@@ -364,18 +284,13 @@
 
 - (IBAction) newArticleDocument:(id)sender
 {
-  id doc = [TeXProjectDocument createNewTeXnicleProject];
-  
-	// Check if a document was opened
-	if (doc) {
-		// Add a new main TeX file to the doc
-		if ([doc respondsToSelector:@selector(addNewArticleMainFile)]) {
-			[doc performSelector:@selector(addNewArticleMainFile)];
-      [doc performSelector:@selector(saveDocument:) withObject:self];
-		}
-		
-		[self displayOrCloseWindow:self];
-	}
+  id delegate = [NSApp delegate];
+  if (delegate && [delegate respondsToSelector:@selector(newArticleDocument:)]) {
+    [delegate newArticleDocument:sender];
+    if ([[[NSDocumentController sharedDocumentController] documents] count]>0) {
+      [self displayOrCloseWindow:self];
+    }
+  }
 }
 
 #pragma mark -
