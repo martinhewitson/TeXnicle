@@ -681,6 +681,13 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     }
   }
   
+  // add to project
+  if ([theItem tag] == 100) {
+    if ([self fileURL] == nil) {
+      return NO;
+    }
+  }
+  
   return YES;
 }
 
@@ -994,6 +1001,17 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction) addToProject:(id)sender
 {
+  if ([self fileURL] == nil) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Can't Add to Project"
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Please save the file before trying to add it to a project."];
+    [alert runModal];
+    return;
+  }
+  
+  
 	// Fill the popup button
 	NSMutableArray *projects = [NSMutableArray array];
 	NSArray *docs = [[NSDocumentController sharedDocumentController] documents];
@@ -1061,6 +1079,26 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 //		NSLog(@"Copy? %d", copy);
 		
 		// Now make the document
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSDictionary *attributes = [fm attributesOfItemAtPath:[[self fileURL] path] error:&error];
+    if (error) {
+      [NSApp presentError:error];
+      return;
+    }
+    
+    if (![[attributes fileType] isEqualToString:NSFileTypeRegular]) {
+      
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Adding to project failed."
+																			 defaultButton:@"OK"
+																		 alternateButton:nil
+																				 otherButton:nil
+													 informativeTextWithFormat:@"The current TeX file is not a standard file '%@'.", [self fileURL]];
+			
+      [alert runModal];
+      return;
+    }
+    
 		if ([doc addFileAtURL:[self fileURL] copy:copy]) {
 			[self close];
 		} else {			

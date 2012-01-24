@@ -138,7 +138,7 @@
 							<string key="NSToolbarItemMaxSize">{0, 0}</string>
 							<bool key="NSToolbarItemEnabled">YES</bool>
 							<bool key="NSToolbarItemAutovalidates">YES</bool>
-							<int key="NSToolbarItemTag">-1</int>
+							<int key="NSToolbarItemTag">100</int>
 							<bool key="NSToolbarIsUserRemovable">YES</bool>
 							<int key="NSToolbarItemVisibilityPriority">0</int>
 						</object>
@@ -172,17 +172,19 @@
 							<string key="NSToolbarItemPaletteLabel"/>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSBox" key="NSToolbarItemView" id="699098339">
-								<nil key="NSNextResponder"/>
+								<reference key="NSNextResponder"/>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSView" id="346379004">
 										<reference key="NSNextResponder" ref="699098339"/>
 										<int key="NSvFlags">274</int>
 										<string key="NSFrame">{{1, 1}, {404, 37}}</string>
 										<reference key="NSSuperview" ref="699098339"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:21</string>
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {406, 39}}</string>
+								<reference key="NSSuperview"/>
 								<reference key="NSNextKeyView" ref="346379004"/>
 								<string key="NSReuseIdentifierKey">_NS:18</string>
 								<string key="NSOffsets">{0, 0}</string>
@@ -678,7 +680,6 @@
 														<nil key="NSNextResponder"/>
 														<int key="NSvFlags">256</int>
 														<string key="NSFrameSize">{230, 575}</string>
-														<reference key="NSNextKeyView" ref="1001950842"/>
 													</object>
 													<string key="NSLabel">View</string>
 													<reference key="NSColor" ref="106525823"/>
@@ -825,7 +826,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																		<string key="NSFrame">{{0, 507}, {312, 15}}</string>
 																		<reference key="NSSuperview" ref="950750598"/>
 																		<reference key="NSWindow"/>
-																		<reference key="NSNextKeyView" ref="1001950842"/>
+																		<reference key="NSNextKeyView"/>
 																		<int key="NSsFlags">1</int>
 																		<reference key="NSTarget" ref="950750598"/>
 																		<string key="NSAction">_doScroller:</string>
@@ -3206,9 +3207,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="prefsContainerView">NSView</string>
 						<string key="projectsController">NSArrayController</string>
 						<string key="rightView">NSView</string>
-						<string key="slideViewController">MHSlideViewController</string>
 						<string key="splitView">NSSplitView</string>
-						<string key="splitViewController">MHThreePaneCollapsableSplitViewController</string>
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabbarController">MHControlsTabBarController</string>
 						<string key="texEditorContainer">NSView</string>
@@ -3282,17 +3281,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">rightView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="slideViewController">
-							<string key="name">slideViewController</string>
-							<string key="candidateClassName">MHSlideViewController</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="splitView">
 							<string key="name">splitView</string>
 							<string key="candidateClassName">NSSplitView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="splitViewController">
-							<string key="name">splitViewController</string>
-							<string key="candidateClassName">MHThreePaneCollapsableSplitViewController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="statusViewContainer">
 							<string key="name">statusViewContainer</string>
@@ -3378,120 +3369,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MHRoundedTopBottomView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHSlideViewController</string>
-					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">togglePanel:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">togglePanel:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">togglePanel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="contentView">NSView</string>
-						<string key="mainPanel">NSView</string>
-						<string key="sidePanel">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="contentView">
-							<string key="name">contentView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mainPanel">
-							<string key="name">mainPanel</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sidePanel">
-							<string key="name">sidePanel</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHSlideViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHThreePaneCollapsableSplitViewController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="slideBothIn:">id</string>
-						<string key="slideBothOut:">id</string>
-						<string key="slideLeftIn:">id</string>
-						<string key="slideLeftOut:">id</string>
-						<string key="slideRightIn:">id</string>
-						<string key="slideRightOut:">id</string>
-						<string key="toggleLeft:">id</string>
-						<string key="toggleRight:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="slideBothIn:">
-							<string key="name">slideBothIn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideBothOut:">
-							<string key="name">slideBothOut:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideLeftIn:">
-							<string key="name">slideLeftIn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideLeftOut:">
-							<string key="name">slideLeftOut:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideRightIn:">
-							<string key="name">slideRightIn:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="slideRightOut:">
-							<string key="name">slideRightOut:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleLeft:">
-							<string key="name">toggleLeft:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="toggleRight:">
-							<string key="name">toggleRight:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="leftView">NSView</string>
-						<string key="mainView">NSView</string>
-						<string key="rightView">NSView</string>
-						<string key="splitView">NSSplitView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="leftView">
-							<string key="name">leftView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="mainView">
-							<string key="name">mainView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="rightView">
-							<string key="name">rightView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="splitView">
-							<string key="name">splitView</string>
-							<string key="candidateClassName">NSSplitView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHThreePaneCollapsableSplitViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
