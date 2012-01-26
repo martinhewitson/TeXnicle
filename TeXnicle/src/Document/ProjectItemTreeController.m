@@ -241,6 +241,14 @@ withIntermediateDirectories:YES
 			return NO;
 		}
 	} else {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:[NSString stringWithFormat:@"File Exists"]];
+    [alert setInformativeText:[NSString stringWithFormat:@"A file already exists at %@", aPath]];
+    [alert setAlertStyle:NSWarningAlertStyle];		
+    [alert runModal];
+    [alert release];
+    
 //		NSLog(@"File exists at %@", aPath);
 	}	
 	
