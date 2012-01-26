@@ -74,7 +74,6 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
       [NSApp presentError:error];
     } else {
       [fm copyItemAtPath:engine toPath:target error:&error];
-//      [fm moveItemAtPath:engine toPath:target error:&error];
       if (error) {
         [NSApp presentError:error];
         NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
