@@ -1246,6 +1246,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL) shouldSyntaxHighlightDocument
 {
+  if ([self fileURL] == nil) {
+    return YES;
+  }
+  
 	NSString *ext = [[[self fileURL] path] pathExtension];
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   for (NSString *lext in [sfm supportedExtensionsForHighlighting]) {
