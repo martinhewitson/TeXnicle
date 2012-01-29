@@ -659,6 +659,9 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   return NO;
 }
 
+#pragma mark -
+#pragma mark Document stuff
+
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
   if ([self isInViewingMode] || _inVersionsBrowser) {
@@ -897,6 +900,16 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 #pragma mark -
 #pragma mark control
+
+- (IBAction)togglePanelFocus:(id)sender
+{
+  NSWindow *w = [self windowForSheet];
+  if ([w firstResponder] == self.texEditorViewController.textView) {
+    [w makeFirstResponder:self.pdfViewerController.pdfview];
+  } else {
+    [w makeFirstResponder:self.texEditorViewController.textView];
+  }
+}
 
 - (IBAction)printDocument:(id)sender
 {
