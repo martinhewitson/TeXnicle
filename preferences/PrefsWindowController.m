@@ -19,6 +19,8 @@
 @synthesize enginesEditor;
 @synthesize enginesEditorContainer;
 @synthesize supportedFilesEditor;
+@synthesize templateEditorView;
+@synthesize templateEditorViewContainer;
 
 - (void) awakeFromNib
 {
@@ -70,19 +72,16 @@
   NSString *defaultEncoding = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
   [defaultEncodingPopup selectItemWithTitle:defaultEncoding];
   
-  [templateEditor performSelector:@selector(applyFontAndColor) withObject:nil afterDelay:0];
+  
+  // template editor
+  self.templateEditorView = [[[TPTemplateEditorView alloc] init] autorelease];
+  [self.templateEditorView.view setFrame:[self.templateEditorViewContainer bounds]];
+  [self.templateEditorViewContainer addSubview:self.templateEditorView.view];
   
   // file types editor
   self.supportedFilesEditor = [[[TPSupportedFilesEditor alloc] init] autorelease];
   [self.supportedFilesEditor.view setFrame:[fileTypesPrefsView bounds]];
   [fileTypesPrefsView addSubview:self.supportedFilesEditor.view];  
-  
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  
-  [nc addObserver:self
-         selector:@selector(templateSelectionChanged:) 
-             name:NSTableViewSelectionDidChangeNotification
-           object:templatesTable];  
   
 }
 
@@ -91,6 +90,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.enginesEditor = nil;
   self.supportedFilesEditor = nil;
+  self.templateEditorView = nil;
 	[commentsController release];
   [commentsL2Controller release];
   [commentsL3Controller release];
@@ -104,9 +104,6 @@
 
 - (void) windowWillClose:(NSNotification *)notification
 {
-  // This is needed to force the text-editor to commit changes to the user defaults.
-  [templatesController commitEditing];
-  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)defaultEncodingSelected:(id)sender
@@ -160,13 +157,7 @@
           label:@"File Types"
           image:[NSImage imageNamed:@"fileTypesPref"]];
   
-  
-  
-	[templateEditor setFont:f];
-	
-	[templatesController setSelectsInsertedObjects:YES];
-
-	
+  	
 }
 
 #pragma mark -
@@ -227,44 +218,6 @@
 }
 
 
-#pragma mark -
-#pragma mark Templates Control
-
-- (IBAction) newTemplate:(id)sender
-{
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	
-	[dict setValue:[NSString stringWithFormat:@"New Template %d", [[templatesController arrangedObjects] count]]
-					forKey:@"Name"];
-	[dict setValue:@"New empty template" forKey:@"Description"];
-	
-	[templatesController insertObject:dict atArrangedObjectIndex:0];
-	[templatesController setSelectionIndex:0];
-	//[templatesController addObject:dict];
-}
-
-- (void) templateSelectionChanged:(NSNotification*)aNote
-{
-  
-  NSArray *selectedObjects = [templatesController selectedObjects];
-  if ([selectedObjects count] == 1) {
-        
-    [templateEditor applyFontAndColor];
-    [templateEditor scrollRectToVisible:NSZeroRect];
-    
-    [templateEditor performSelector:@selector(colorVisibleText)
-                         withObject:nil
-                         afterDelay:0.1];
-    [templateEditor performSelector:@selector(colorWholeDocument)
-                         withObject:nil
-                         afterDelay:0.2];    
-  }
-}
-
-- (void) handleCodeDidChange:(NSNotification*)aNote
-{
-//  [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 #pragma mark -
 #pragma mark Control 
@@ -367,7 +320,6 @@
 	[defaults synchronize];
 	[docFont setValue:f forKey:@"font"];	
 	[docFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-	[templateEditor setFont:f];
 }
 
 - (IBAction)selectConsoleFont:(id)sender
@@ -390,7 +342,6 @@
 	[defaults synchronize];
 	[consoleFont setValue:f forKey:@"font"];	
 	[consoleFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-	[templateEditor setFont:f];
 }
 
 

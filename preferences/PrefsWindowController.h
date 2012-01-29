@@ -11,6 +11,7 @@
 #import "SyntaxHighlightControlController.h"
 #import "TeXTextView.h"
 #import "TPSupportedFilesEditor.h"
+#import "TPTemplateEditorView.h"
 
 @class TPEnginesEditor;
 
@@ -27,11 +28,7 @@
   
   IBOutlet NSTableView *userCommandsTable;
 	IBOutlet NSArrayController *userCommandsController;
-  
-	IBOutlet NSArrayController *templatesController;
-	IBOutlet NSTableView *templatesTable;
-	IBOutlet TeXTextView *templateEditor;
-	
+  	
 	IBOutlet NSTextField *docFont;
 	IBOutlet NSTextField *consoleFont;
 	
@@ -78,7 +75,8 @@
 @property (retain) TPSupportedFilesEditor *supportedFilesEditor;
 @property (retain) TPEnginesEditor *enginesEditor;
 @property (assign) IBOutlet NSView *enginesEditorContainer;
-
+@property (retain) TPTemplateEditorView *templateEditorView;
+@property (assign) IBOutlet NSView *templateEditorViewContainer;
 
 - (IBAction)defaultEncodingSelected:(id)sender;
 
@@ -97,8 +95,6 @@
 #pragma mark Control 
 
 
-- (void) templateSelectionChanged:(NSNotification*)aNote;
-- (IBAction) newTemplate:(id)sender;
 
 - (IBAction) insertSpacesForTabsChanged:(id)sender;
 
