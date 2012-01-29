@@ -1425,9 +1425,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) highlightMatchingWords
 {  
-//  if (self.wordHighlightRanges == nil) {
-//    self.wordHighlightRanges = [NSMutableArray array];
-//  }
   
   NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
@@ -1437,13 +1434,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
     [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
-    
-    // remove existing word highlights
-//    for (NSString *rangeString in self.wordHighlightRanges) {
-//      NSRange r = NSRangeFromString(rangeString);
-//      [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:r];
-//    }
-//    [self.wordHighlightRanges removeAllObjects];
     
     NSString *string = [self string];
     if (r.length > 0 && NSMaxRange(r)<[string length]) {
@@ -1457,9 +1447,9 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         for (NSValue *match in matches) {
           NSRange r = [match rangeValue];
           r.location += vr.location;
-          [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
-//          [self.wordHighlightRanges addObject:NSStringFromRange(r)];
-//          NSLog(@"+ Added range %@", NSStringFromRange(r));
+          if ([[[string substringWithRange:r] stringByTrimmingCharactersInSet:whitespaceCharacterSet] length] > 0) {
+            [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
+          }
         }
       }      
     }
@@ -1588,7 +1578,23 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   {
     [self expandCurrentCommand];
   } else {
+    
+    // get the indentation of this line
+    NSRange indentRange = NSMakeRange(NSNotFound, 0);
+    if (!shiftKeyOn) {
+      NSRange sel = [self selectedRange];
+      indentRange = [self indentRangeForLineAtIndex:sel.location];
+    }
+    
+    // Insert newline
     [super insertNewline:sender];    
+        
+    // indent the new line
+    if (!shiftKeyOn && indentRange.location != NSNotFound) {
+      NSRange sel = [self selectedRange];
+      NSString *indentString = [str substringWithRange:indentRange];
+      [self replaceCharactersInRange:NSMakeRange(sel.location, 0) withString:indentString];
+    }
   }
   
 	// update line numbers
@@ -1898,6 +1904,30 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 #pragma mark -
 #pragma mark Text processing
+
+- (NSRange)indentRangeForLineAtIndex:(NSInteger)loc
+{
+  NSString *str = [self string];
+  NSInteger idx = NSNotFound;
+  if (loc <= [str length]) {
+    NSRange lineRange = [str lineRangeForRange:NSMakeRange(loc,0)];
+//    NSLog(@"Line range %@", NSStringFromRange(lineRange));
+    idx = lineRange.location;
+    while (idx < NSMaxRange(lineRange)) {
+//      NSLog(@"    checking char %c", [str characterAtIndex:idx]);
+      if (![whitespaceCharacterSet characterIsMember:[str characterAtIndex:idx]] && 
+          ![newLineCharacterSet characterIsMember:[str characterAtIndex:idx]]) {
+        break;
+      }
+      idx++;
+    }
+    if (idx < NSMaxRange(lineRange)) {
+      return NSMakeRange(lineRange.location, idx-lineRange.location);
+    }
+  }
+  
+  return NSMakeRange(NSNotFound, 0);
+}
 
 - (NSString*) stringForTab
 {
@@ -2214,9 +2244,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 				[self setSelectedRange:NSMakeRange(lastWhitespace, 1)];
         //				[self insertText:lineBreakStr];
 				[self insertNewline:self];
+        
         //				[super insertLineBreak:self];
         //				selRange.location++;
-				[self setSelectedRange:selRange];
+//				[self setSelectedRange:selRange];
         //				[self scrollRectToVisible:selRect];
 			} else {
 				
@@ -2327,7 +2358,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	
 	[self setSelectedRange:pRange];	
 	NSString *oldStr = [[self string] substringWithRange:pRange];
-	NSString *newString = [oldStr stringByReplacingOccurrencesOfRegex:@"[\n\r]+" withString:@" "];
+	NSString *newString = [oldStr stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" "];
   //	NSString *newString = [NSString stringWithControlsFilteredForString:oldStr];
 	
 	// Now go through and put in \n when we are past the linelength

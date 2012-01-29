@@ -200,6 +200,7 @@ extern NSString * const TELineNumberClickedNotification;
 #pragma mark -
 #pragma mark Formatting text
 
+- (NSRange)indentRangeForLineAtIndex:(NSInteger)loc;
 - (void) insertStringBeforeAllLinesInSelection:(NSString*)aStr;
 - (IBAction) reformatParagraph:(id)sender;
 - (IBAction) reformatRange:(NSRange)pRange;
