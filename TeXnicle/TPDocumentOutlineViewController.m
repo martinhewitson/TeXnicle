@@ -31,7 +31,6 @@
                                                 selector:@selector(reloadData)
                                                 userInfo:nil
                                                  repeats:YES];
-    NSLog(@"init TPDocumentOutlineViewController");
   }
   
   return self;
