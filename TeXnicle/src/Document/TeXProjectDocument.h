@@ -204,6 +204,8 @@
 
 - (void) toggleStatusBar:(BOOL)animate;
 
+- (IBAction)togglePanelFocus:(id)sender;
+
 #pragma mark -
 #pragma mark Notification Handlers
 

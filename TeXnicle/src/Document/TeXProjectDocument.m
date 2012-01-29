@@ -1157,6 +1157,16 @@
 #pragma mark -
 #pragma mark Actions
 
+- (IBAction)togglePanelFocus:(id)sender
+{
+  NSWindow *w = [self windowForSheet];
+  if ([w firstResponder] == self.texEditorViewController.textView) {
+    [w makeFirstResponder:self.pdfViewerController.pdfview];
+  } else {
+    [w makeFirstResponder:self.texEditorViewController.textView];
+  }
+}
+
 - (IBAction)printDocument:(id)sender
 {
   // set printing properties
@@ -2716,7 +2726,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (IBAction)findCorrespondingPDFText:(id)sender
 {
-  NSLog(@"findCorrespondingPDFText");
   // get selected text
   NSString *text = [self.texEditorViewController selectedText];
   [self.pdfViewerController setSearchText:text];
@@ -2729,20 +2738,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     }
   }
   
-  const char *pdfpath = [[self compiledDocumentPath] cStringUsingEncoding:NSUTF8StringEncoding];
-  NSLog(@"PDF %s", pdfpath);
-  synctex_scanner_t scanner = synctex_scanner_new_with_output_file(pdfpath, NULL, 1);
-  if (scanner != NULL) {
-    synctex_scanner_display(scanner);
-    //  if(synctex_display_query(scanner,name,line,column)>0) {
-    //    synctex_node_t node;
-    //    while((node = synctex_next_result(scanner))) {
-    //      
-    //    }
-    //  }
-    
-    synctex_scanner_free(scanner);  
-  }
+//  const char *pdfpath = [[self compiledDocumentPath] cStringUsingEncoding:NSUTF8StringEncoding];
+//  NSLog(@"PDF %s", pdfpath);
+//  synctex_scanner_t scanner = synctex_scanner_new_with_output_file(pdfpath, NULL, 1);
+//  if (scanner != NULL) {
+//    synctex_scanner_display(scanner);
+//    //  if(synctex_display_query(scanner,name,line,column)>0) {
+//    //    synctex_node_t node;
+//    //    while((node = synctex_next_result(scanner))) {
+//    //      
+//    //    }
+//    //  }
+//    
+//    synctex_scanner_free(scanner);  
+//  }
 }
 
 - (IBAction)findSource:(id)sender
