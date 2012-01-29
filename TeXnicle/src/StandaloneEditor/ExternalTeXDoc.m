@@ -23,6 +23,7 @@
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
+#import "TPProjectBuilder.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -1148,7 +1149,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void) addToNewEmptyProject
 {  
-  id doc = [TeXProjectDocument createNewTeXnicleProject];
+  TeXProjectDocument *doc = [TeXProjectDocument createNewTeXnicleProject];
   
 	if (doc) {
 		
@@ -1164,12 +1165,24 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 		[NSApp endSheet:addToEmptyProjectSheet];
 		[addToEmptyProjectSheet orderOut:self];
 		
+    
+    // TODO: in order to invoke the project builder here, we need to factor out the code in the project builder which 
+    // generates a list of project files from the code that adds the files. So we want to do something like:
+    //   NSArray *filelist = [pb listOfIncludeFilesForFile:somefile]; 
+    // This list should include somefile.
+    // Then add and copy them, if necessary:
+    //   for each file
+    //      id newDoc = [doc addFileAtURL:file copy:copy];
+    //   
+    
+
+    
 		id newDoc = [doc addFileAtURL:[self fileURL] copy:copy];
 		if (newDoc) {
 			if (makeMain) {
 				[[doc project] setValue:newDoc forKey:@"mainFile"];	
 			}
-			
+      
 			[self close];
 		}
 		
