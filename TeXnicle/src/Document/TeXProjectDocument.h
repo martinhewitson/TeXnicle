@@ -28,6 +28,7 @@
 #import "TPDocumentOutlineViewController.h"
 #import "TPSupportedFilesManager.h"
 #import "MHControlsTabBarController.h"
+#import "TPTemplateEditor.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -37,7 +38,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -45,13 +46,6 @@
   TPDocumentOutlineViewController *documentOutlineViewcontroller;
   NSView *documentOutlineViewContainer;
   
-	NSArray *templateArray;
-	IBOutlet NSWindow *templateSheet;
-	IBOutlet NSArrayController *templates;
-	IBOutlet NSTableView *templateTable;
-	IBOutlet NSTextField *documentName;
-	IBOutlet NSTextView *documentCode;
-	IBOutlet NSButton *setAsMainFileCheckButton;
 	// New file
 	IBOutlet NSWindow *newFileSheet;
 	IBOutlet NSTextField *newFilenameTextField;
@@ -134,6 +128,8 @@
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
   PDFViewer *pdfViewer;
+  
+  TPTemplateEditor *templateEditor;
 }
 
 @property (retain) TPDocumentOutlineViewController *documentOutlineViewcontroller;
@@ -184,6 +180,8 @@
 @property (assign) IBOutlet NSView *imageViewerContainer;
 @property (retain) TPImageViewerController *imageViewerController;
 @property (retain) TPFileMonitor *fileMonitor;
+
+@property (retain) TPTemplateEditor *templateEditor;
 
 @property (assign) IBOutlet MHControlsTabBarController *controlsTabBarController;
 
@@ -292,12 +290,12 @@
 - (void) newFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
 - (void) makeNewFile;
 - (IBAction) newTeXFile:(id)sender;
+
+// new template stuff
 - (void) showTemplatesSheet;
-- (void) templateSelectionChanged:(NSNotification*)aNote;
-- (IBAction) addNewTemplate:(id)sender;
-- (IBAction) endTemplateSheet:(id)sender;
+- (void) makeNewTexFileFromTemplate:(NSDictionary*)aTemplate withFilename:(NSString*)aFilename setAsMain:(BOOL)isMain;
+
 - (void) newTexFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;
-- (void) makeNewTexFileFromTemplate;
 - (void) addNewArticleMainFile;
 - (IBAction) newMainTeXFile:(id)sender;
 - (IBAction) delete:(id)sender;

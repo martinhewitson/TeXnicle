@@ -29,6 +29,7 @@
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
+#import "synctex_parser.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -83,6 +84,8 @@
 @synthesize leftView;
 @synthesize rightView;
 @synthesize centerView;
+
+@synthesize templateEditor;
 
 @synthesize controlsTabBarController;
 
@@ -2207,118 +2210,6 @@
 	[self showTemplatesSheet];	
 }
 
-- (void) templateSelectionChanged:(NSNotification*)aNote
-{
-  NSArray *selectedObjects = [templates selectedObjects];
-  if ([selectedObjects count] == 1) {
-    
-    [documentCode scrollRectToVisible:NSZeroRect];
-    [documentCode performSelector:@selector(colorVisibleText)
-                       withObject:nil
-                       afterDelay:0.1];
-    [documentCode performSelector:@selector(colorWholeDocument)
-                       withObject:nil
-                       afterDelay:0.2];
-  }
-}
-
-- (void) showTemplatesSheet
-{
-	
-	// we should ask the user what type of file they want
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	//NSLog(@"User defaults: %@", defaults);
-	templateArray = [defaults valueForKey:TEDocumentTemplates];
-	[templates setContent:templateArray];
-	
-	//NSLog(@"Got templates: %@", templateArray);
-	
-	NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02d", [[projectItemTreeController flattenedContent] count]];
-	[documentName setStringValue:suggestedDocumentName];
-	NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];	
-	[documentCode setFont:font];
-	
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(templateSelectionChanged:) 
-                                               name:NSTableViewSelectionDidChangeNotification
-                                             object:templateTable];
-	
-	[NSApp beginSheet:templateSheet
-		 modalForWindow:[self windowForSheet]
-			modalDelegate:self
-		 didEndSelector:NULL
-				contextInfo:NULL];	
-	
-}
-
-- (IBAction) addNewTemplate:(id)sender
-{
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	
-	[dict setValue:[NSString stringWithFormat:@"New Template %d", [[templates arrangedObjects] count]]
-					forKey:@"Name"];
-	[dict setValue:@"New empty template" forKey:@"Description"];
-	
-	[templates insertObject:dict atArrangedObjectIndex:0];
-	[templates setSelectionIndex:0];	
-}
-
-- (IBAction) endTemplateSheet:(id)sender
-{
-	// user clicked cancel
-	if ([sender tag] == 0) {
-		[NSApp endSheet:templateSheet];
-		[templateSheet orderOut:sender];
-		return;
-	}
-	
-	// before we add this file, we better check that the file doesn't exist
-	NSString *name = [documentName stringValue];
-	if ([[name pathExtension] length]==0) {
-		name = [name stringByAppendingPathExtension:@"tex"];
-	}
-	NSString *insertionPath = [projectItemTreeController pathForInsertion];
-  //	NSLog(@"Checking path on disk %@", insertionPath);
-	NSString *filename = [insertionPath stringByAppendingPathComponent:name];
-	
-  //	NSLog(@"Checking for file %@", filename);
-	
-	// check all project files
-	NSArray *allitems = [projectItemTreeController flattenedContent];
-	for (ProjectItemEntity *item in allitems) {
-		if ([item isKindOfClass:[FileEntity class]]) {
-			if ([[item pathOnDisk] isEqual:filename]) {
-				
-				NSAlert *alert = [NSAlert alertWithMessageText:@"File Exists"
-																				 defaultButton:@"OK"
-																			 alternateButton:nil
-																					 otherButton:nil 
-														 informativeTextWithFormat:@"The file \u201c%@\u201d already exists in the project; choose another name.", filename
-													]; 
-				
-				[alert runModal];
-				return;
-			}
-		}
-	}
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:filename]) {
-    //		NSLog(@"File exists...");
-		NSAlert *alert = [NSAlert alertWithMessageText:@"Overwrite?"
-																		 defaultButton:@"OK" alternateButton:@"Cancel"
-																			 otherButton:nil 
-												 informativeTextWithFormat:@"The file \u201c%@\u201d already exists. Do you want to overwrite it?", filename
-											]; 
-		[alert beginSheetModalForWindow:templateSheet
-											modalDelegate:self
-										 didEndSelector:@selector(newTexFileExists:code:context:) 
-												contextInfo:NULL];
-		return;		
-	}
-  
-	[self makeNewTexFileFromTemplate];
-}	
 
 - (void)newTexFileExists:(NSAlert *)alert 
 										code:(int)choice 
@@ -2326,46 +2217,16 @@
 {
 	
 	if (choice == NSAlertDefaultReturn) {
-		[self makeNewTexFileFromTemplate];
+    NSDictionary *template = (NSDictionary*)v;
+    if (template != nil) {
+      [self makeNewTexFileFromTemplate:template withFilename:[self.templateEditor filename] setAsMain:[self.templateEditor setAsMainFile]];
+      [NSApp endSheet:self.templateEditor.window];
+      [self.templateEditor.window orderOut:self];  
+    }
 	} else {
 		// do nothing
 	}
 	
-}
-
-- (void) makeNewTexFileFromTemplate
-{
-	//NSLog(@"Making new TeX file");
-	
-	NSString *name = [documentName stringValue];
-	NSString *ext = [name pathExtension];
-	if ([ext length]==0) {
-		name = [name stringByAppendingPathExtension:@"tex"];
-	}
-	
-	// Make the new file in the project
-	[projectItemTreeController addNewFile:name
-                             atFilepath:nil
-                              extension:[name pathExtension]
-                                 isText:YES
-                                   code:[documentCode string]
-                             asMainFile:[setAsMainFileCheckButton state]
-                           createOnDisk:YES];
-  
-	// save templates back to the user defaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	NSMutableArray *templatesToStore = [NSMutableArray array];
-	for (NSDictionary *dict in [templates arrangedObjects]) {
-		[templatesToStore addObject:[NSMutableDictionary dictionaryWithDictionary:dict]];
-	}
-	//NSLog(@"Setting templates: %@", templatesToStore);
-	[defaults setObject:templatesToStore forKey:TEDocumentTemplates];
-	[defaults synchronize];
-	
-	[self.texEditorViewController.textView colorWholeDocument];
-	
-	[NSApp endSheet:templateSheet];
-	[templateSheet orderOut:self];
 }
 
 + (NSString*) stringForNewArticleMainFileCode
@@ -2424,7 +2285,7 @@
 
 - (void) addNewArticleMainFile
 {
-//  NSLog(@"********* Adding new main file to %@", project);
+  //  NSLog(@"********* Adding new main file to %@", project);
   
 	NSString *code = [TeXProjectDocument stringForNewArticleMainFileCode];
 	
@@ -2438,7 +2299,7 @@
 		filename = [[project folder] stringByAppendingPathComponent:name];
 		dd++;
 	}
-//	NSLog(@"Filename %@", filename);
+  //	NSLog(@"Filename %@", filename);
 	
 	id file = [projectItemTreeController addNewFile:[filename lastPathComponent]
                                        atFilepath:nil
@@ -2450,7 +2311,7 @@
 	
 	
 	[file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
-   
+  
 	// add include folder
 	[projectItemTreeController setSelectionIndexPath:nil];
 	FolderEntity *includeFolder = [projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];	
@@ -2519,6 +2380,112 @@
 	
 	return nil;
 }
+
+#pragma mark -
+#pragma mark Template Stuff
+
+- (void) showTemplatesSheet
+{
+	if (self.templateEditor == nil) {
+    self.templateEditor = [[[TPTemplateEditor alloc] initWithDelegate:self activeFilename:YES] autorelease];  
+  }
+  
+  // set suggested filename
+  NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02d", [[projectItemTreeController flattenedContent] count]];
+  [self.templateEditor setFilename:suggestedDocumentName];
+  
+  [NSApp beginSheet:self.templateEditor.window
+		 modalForWindow:[self windowForSheet]
+			modalDelegate:self
+		 didEndSelector:NULL
+				contextInfo:NULL];
+}
+
+
+- (void)templateEditorDidCancelSelection:(TPTemplateEditor *)editor
+{
+  [NSApp endSheet:self.templateEditor.window];
+  [self.templateEditor.window orderOut:self];
+}
+
+- (void)templateEditor:(TPTemplateEditor *)editor didSelectTemplate:(NSDictionary *)aTemplate
+{
+  if (aTemplate) {
+    // before we add this file, we better check that the file doesn't exist
+    NSString *name = [self.templateEditor filename];
+    if ([[name pathExtension] length]==0) {
+      name = [name stringByAppendingPathExtension:@"tex"];
+    }
+    NSString *insertionPath = [projectItemTreeController pathForInsertion];
+    //	NSLog(@"Checking path on disk %@", insertionPath);
+    NSString *filename = [insertionPath stringByAppendingPathComponent:name];
+    
+    // check all project files
+    NSArray *allitems = [projectItemTreeController flattenedContent];
+    for (ProjectItemEntity *item in allitems) {
+      if ([item isKindOfClass:[FileEntity class]]) {
+        if ([[item pathOnDisk] isEqual:filename]) {
+          
+          NSAlert *alert = [NSAlert alertWithMessageText:@"File Exists"
+                                           defaultButton:@"OK"
+                                         alternateButton:nil
+                                             otherButton:nil 
+                               informativeTextWithFormat:@"The file \u201c%@\u201d already exists in the project; choose another name.", filename
+                            ]; 
+          
+          [alert runModal];
+          return;
+        }
+      }
+    }
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:filename]) {
+      //		NSLog(@"File exists...");
+      NSAlert *alert = [NSAlert alertWithMessageText:@"Overwrite?"
+                                       defaultButton:@"OK" alternateButton:@"Cancel"
+                                         otherButton:nil 
+                           informativeTextWithFormat:@"The file \u201c%@\u201d already exists on disk. Do you want to overwrite it?", filename
+                        ]; 
+      [alert beginSheetModalForWindow:editor.window
+                        modalDelegate:self
+                       didEndSelector:@selector(newTexFileExists:code:context:) 
+                          contextInfo:aTemplate];
+      
+      return;		
+    }
+    
+    // make new file
+    [self makeNewTexFileFromTemplate:aTemplate withFilename:name setAsMain:[self.templateEditor setAsMainFile]];
+    
+  }
+  
+  [NSApp endSheet:self.templateEditor.window];
+  [self.templateEditor.window orderOut:self];  
+}
+
+- (void) makeNewTexFileFromTemplate:(NSDictionary*)aTemplate withFilename:(NSString*)aFilename setAsMain:(BOOL)isMain
+{
+	NSString *name = [aFilename copy];
+	NSString *ext = [name pathExtension];
+	if ([ext length]==0) {
+		name = [name stringByAppendingPathExtension:@"tex"];
+	}
+	
+	// Make the new file in the project
+	[projectItemTreeController addNewFile:name
+                             atFilepath:nil
+                              extension:[name pathExtension]
+                                 isText:YES
+                                   code:[aTemplate valueForKey:@"Code"]
+                             asMainFile:isMain
+                           createOnDisk:YES];
+	
+	[self.texEditorViewController.textView colorWholeDocument];	
+}
+
+
+
 
 #pragma mark -
 #pragma mark Saving
@@ -2749,6 +2716,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (IBAction)findCorrespondingPDFText:(id)sender
 {
+  NSLog(@"findCorrespondingPDFText");
   // get selected text
   NSString *text = [self.texEditorViewController selectedText];
   [self.pdfViewerController setSearchText:text];
@@ -2761,6 +2729,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     }
   }
   
+  const char *pdfpath = [[self compiledDocumentPath] cStringUsingEncoding:NSUTF8StringEncoding];
+  NSLog(@"PDF %s", pdfpath);
+  synctex_scanner_t scanner = synctex_scanner_new_with_output_file(pdfpath, NULL, 1);
+  if (scanner != NULL) {
+    synctex_scanner_display(scanner);
+    //  if(synctex_display_query(scanner,name,line,column)>0) {
+    //    synctex_node_t node;
+    //    while((node = synctex_next_result(scanner))) {
+    //      
+    //    }
+    //  }
+    
+    synctex_scanner_free(scanner);  
+  }
 }
 
 - (IBAction)findSource:(id)sender
