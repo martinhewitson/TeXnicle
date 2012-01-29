@@ -67,6 +67,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 @synthesize rightView;
 @synthesize splitView;
 
+@synthesize templateEditor;
+
 - (id) init
 {
   self = [super init];
@@ -269,11 +271,20 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     [self.texEditorViewController disableJumpBar];
   }
   
+  // Show associated pdf document, assuming we have on
   [self showDocument];
   
-  
+  // resture UI settings
   [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
+  
+  // Present templates if we have no URL
+  if ([self fileURL] == nil 
+      && ([self.texEditorViewController.textView string] == nil || [[self.texEditorViewController.textView string] length]==0)) {
+    [self performSelector:@selector(showTemplatesSheet) withObject:nil afterDelay:0];    
+  }
 }
+
+
 
 - (void)windowWillEnterVersionBrowser:(NSNotification *)notification
 {
@@ -1752,6 +1763,41 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 {
   [self highlightSearchResult:result withRange:NSRangeFromString(aRangeString) inFile:aFile];
 }
+
+
+#pragma mark -
+#pragma mark Template sheet
+
+- (void) showTemplatesSheet
+{
+  if (self.templateEditor == nil) {
+	 self.templateEditor = [[[TPTemplateEditor alloc] initWithDelegate:self activeFilename:NO] autorelease];
+  }
+  
+  [NSApp beginSheet:self.templateEditor.window
+		 modalForWindow:[self windowForSheet]
+			modalDelegate:self
+		 didEndSelector:NULL
+				contextInfo:NULL];	
+	
+}
+
+- (void)templateEditorDidCancelSelection:(TPTemplateEditor *)editor
+{
+  [NSApp endSheet:self.templateEditor.window];
+  [self.templateEditor.window orderOut:self];
+}
+
+- (void)templateEditor:(TPTemplateEditor *)editor didSelectTemplate:(NSDictionary *)aTemplate
+{
+  if (aTemplate) {
+    [self.texEditorViewController setString:[aTemplate valueForKey:@"Code"]];
+    [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+  }
+  [NSApp endSheet:self.templateEditor.window];
+  [self.templateEditor.window orderOut:self];  
+}
+
 
 
 @end

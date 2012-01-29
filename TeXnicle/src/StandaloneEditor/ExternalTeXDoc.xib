@@ -172,19 +172,17 @@
 							<string key="NSToolbarItemPaletteLabel"/>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSBox" key="NSToolbarItemView" id="699098339">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSView" id="346379004">
 										<reference key="NSNextResponder" ref="699098339"/>
 										<int key="NSvFlags">274</int>
 										<string key="NSFrame">{{1, 1}, {404, 37}}</string>
 										<reference key="NSSuperview" ref="699098339"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:21</string>
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {406, 39}}</string>
-								<reference key="NSSuperview"/>
 								<reference key="NSNextKeyView" ref="346379004"/>
 								<string key="NSReuseIdentifierKey">_NS:18</string>
 								<string key="NSOffsets">{0, 0}</string>
@@ -416,7 +414,6 @@
 											<string key="NSFrameSize">{307, 576}</string>
 											<reference key="NSSuperview" ref="961650512"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="678629790"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="885399720">
 													<string key="NSIdentifier">1</string>
@@ -635,7 +632,6 @@
 																		<int key="NSvFlags">289</int>
 																		<string key="NSFrame">{{189, 7}, {24, 24}}</string>
 																		<reference key="NSSuperview" ref="892794344"/>
-																		<reference key="NSNextKeyView" ref="1001950842"/>
 																		<bool key="NSEnabled">YES</bool>
 																		<object class="NSButtonCell" key="NSCell" id="68128466">
 																			<int key="NSCellFlags">-2080244224</int>
@@ -826,7 +822,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																		<string key="NSFrame">{{0, 507}, {312, 15}}</string>
 																		<reference key="NSSuperview" ref="950750598"/>
 																		<reference key="NSWindow"/>
-																		<reference key="NSNextKeyView"/>
+																		<reference key="NSNextKeyView" ref="1001950842"/>
 																		<int key="NSsFlags">1</int>
 																		<reference key="NSTarget" ref="950750598"/>
 																		<string key="NSAction">_doScroller:</string>
@@ -1073,7 +1069,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSFrame">{{0, -1}, {282, 602}}</string>
 											<reference key="NSSuperview" ref="354661662"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -3125,7 +3120,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">325</int>
+			<int key="maxID">366</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -19,10 +19,12 @@
 #import "PaletteController.h"
 #import "ProjectOutlineController.h"
 #import "PDFViewer.h"
+#import "TeXTextView.h"
+#import "TPTemplateEditor.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <NSWindowDelegate, PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -99,6 +101,8 @@
   IBOutlet NSView *controlsViewContainer;
   
   NSStringEncoding _encoding;
+  
+  TPTemplateEditor *templateEditor;
 }
 
 @property (assign) IBOutlet NSWindow *mainWindow;
@@ -141,6 +145,9 @@
 
 @property (retain) TPEngineManager *engineManager;
 
+@property (retain) TPTemplateEditor *templateEditor;
+
+
 - (void) initSettings;
 - (void) setupSettings;
 - (void) updateFileStatus;
@@ -182,6 +189,11 @@
 - (NSString*)compiledDocumentPath;
 
 - (BOOL) pdfHasSelection;
+
+#pragma mark -
+#pragma mark Template sheet
+- (void) showTemplatesSheet;
+- (void) templateSelectionChanged:(NSNotification*)aNote;
 
 @end
 
