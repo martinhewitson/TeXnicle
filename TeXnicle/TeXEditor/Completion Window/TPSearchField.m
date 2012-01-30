@@ -16,22 +16,5 @@
 	return YES;
 }
 
-- (BOOL) becomeFirstResponder
-{
-	return YES;
-}
-
-- (void) keyDown:(NSEvent *)theEvent
-{
-	
-	// escape key dismisses the window
-	if ([theEvent keyCode] == 53) {
-		if ([[self delegate] respondsToSelector:@selector(dismiss)]) {
-			[[self delegate] performSelector:@selector(dismiss)];
-		}
-	}
-		
-}
-
 
 @end
