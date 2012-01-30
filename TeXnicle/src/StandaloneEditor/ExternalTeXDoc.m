@@ -268,7 +268,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   }
   [self updateFileStatus];
   
-  if ([self isInViewingMode]) {
+  if ([self inVersionsMode]) {
     [self.texEditorViewController disableJumpBar];
   }
   
@@ -356,9 +356,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   self.fileMonitor.delegate = nil;
   outlineController.delegate = nil;
   
-//  NSLog(@"Window will close.");
-  if (![self isInViewingMode]) {
-//    NSLog(@"Doc count %ld", [[[NSDocumentController sharedDocumentController] documents] count]);
+  if (![self inVersionsMode]) {
     if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
       if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
         [[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
@@ -472,10 +470,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
-  if ([self isInViewingMode] || _inVersionsBrowser) {
+  if ([self inVersionsMode]) {
     return NO;
   }
-  
+    
 	NSInteger tag = [menuItem tag];
   
   // find text selection in pdf
@@ -664,7 +662,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {    
-  if ([self isInViewingMode] || _inVersionsBrowser) {
+  if ([self inVersionsMode]) {
     return NO;
   }
   
@@ -771,9 +769,17 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self updateFileStatus];  
 }
 
+- (BOOL) inVersionsMode
+{
+  if ([NSApp isLion]) {
+    return _inVersionsBrowser || [self isInViewingMode];
+  }
+  return NO;
+}
+
 - (void) updateFileStatus
 {
-  if ([self fileURL] && ![self isInViewingMode]) {
+  if ([self fileURL] && ![self inVersionsMode]) {
     [self.statusViewController setFilenameText:[[self fileURL] path]];
     [self.statusViewController enable:YES];
   } else {
@@ -1219,7 +1225,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)validateUserInterfaceItem:(id < NSValidatedUserInterfaceItem >)item
 {
-  if ([self isInViewingMode] || _inVersionsBrowser) {
+  if ([self inVersionsMode]) {
     return NO;
   }
   

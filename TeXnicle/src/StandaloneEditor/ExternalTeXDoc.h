@@ -195,5 +195,7 @@
 - (void) showTemplatesSheet;
 - (void) templateSelectionChanged:(NSNotification*)aNote;
 
+- (BOOL) inVersionsMode;
+
 @end
 
