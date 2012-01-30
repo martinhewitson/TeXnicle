@@ -45,11 +45,6 @@
 	return YES;
 }
 
-- (BOOL) becomeFirstResponder
-{
-	return YES;
-}
-
 - (void) listDoubleClick
 {
 	if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
