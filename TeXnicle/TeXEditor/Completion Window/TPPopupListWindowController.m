@@ -116,6 +116,7 @@
 		[gradientView setEndingColor:[NSColor lightGrayColor]];
 		[gradientView setAngle:270.0];
     
+    [attachedWindow setInitialFirstResponder:table];
     [searchField setNextKeyView:table];
     [table setNextKeyView:searchField];
     
@@ -130,6 +131,17 @@
 	[self dismiss];
 	[super dealloc];
 }
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
+{
+  if (command == @selector(cancelOperation:)) {
+    if ([[textView string] length]==0) {
+      [self dismiss];
+    } 
+  }
+  return NO;
+}
+
 
 - (void) showPopup
 {
