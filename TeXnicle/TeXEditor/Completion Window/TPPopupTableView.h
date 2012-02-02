@@ -1,13 +1,15 @@
 //
-//  TPPopupTableView.h
+//  TPSearchField.h
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 30/1/12.
-//  Copyright (c) 2012 bobsoft. All rights reserved.
+//  Created by Martin Hewitson on 15/01/11.
+//  Copyright 2011 bobsoft. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
+#import <Cocoa/Cocoa.h>
 
-@interface TPPopupTableView : NSTableView
+
+@interface TPPopupTableView : NSTableView {
+}
 
 @end
