@@ -8,6 +8,9 @@
 
 #import <Quartz/Quartz.h>
 
+extern NSString * const MHPDFViewDidGainFocusNotification;
+extern NSString * const MHPDFViewDidLoseFocusNotification;
+
 @interface MHPDFView : PDFView
 
 
