@@ -202,9 +202,12 @@
   }
   
   //  NSLog(@"Perform search %@", sender);
-  
-	NSString *searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"\\"
-                                                                         withString:@"\\\\"];
+  NSString *searchTerm = [sender stringValue];
+//	NSString *searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"\\"
+//                                                                         withString:@"\\\\"];
+//  
+//  searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"."
+//                                                               withString:@"\\."];
   [self searchForTerm:searchTerm];
 }
 
@@ -217,13 +220,14 @@
     return;
   }
   
-  [self.results removeAllObjects];
-  [self.outlineView reloadData];
   
   if ([searchTerm length] == 0) {
     [self didEndSearch:self];
     return;
   }
+  
+  [self.results removeAllObjects];
+  [self.outlineView reloadData];
   
   [self didBeginSearch:self];
 	
@@ -252,7 +256,8 @@
 			if ([[file valueForKey:@"isText"] boolValue]) {
         dispatch_async(queue, ^{						
           NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];          
-          [self searchForTerm:searchTerm inFile:file];
+//          [self searchForTerm:searchTerm inFile:file];
+          [self stringSearchForTerm:searchTerm inFile:file];
           [pool drain];      
         });
         filesProcessed++;
@@ -261,6 +266,89 @@
 	} // end loop over project items
   
 }
+
+- (void) stringSearchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file
+{
+  // get the text for this file
+  FileDocument *doc = [file document];
+  
+  NSMutableAttributedString *aStr = [[doc textStorage] mutableCopy];
+  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
+  NSString *string = [aStr unfoldedString];
+  [aStr release];
+  if (!string)
+    return;
+  
+  
+  NSScanner *aScanner = [NSScanner scannerWithString:string];
+  NSInteger scanLocation = 0;
+  while(scanLocation < [string length]) {
+    if (!shouldContinueSearching) {
+      break;
+    } // If should continue 
+    
+    // scan for the search term
+    if ([aScanner scanUpToString:searchTerm intoString:NULL]) {
+      scanLocation = [aScanner scanLocation];
+      if (scanLocation >= [string length]) {
+        break;
+      } else {
+        // move on
+        [aScanner setScanLocation:scanLocation+[searchTerm length]];
+        // we found a match
+        NSRange resultRange = NSMakeRange(scanLocation, [searchTerm length]);
+        if (resultRange.location != NSNotFound) {
+          NSInteger len = [searchTerm length] + 30;
+          NSRange matchingRange = NSMakeRange(scanLocation, len);
+          while (NSMaxRange(matchingRange) >= [string length]) {
+            matchingRange = NSMakeRange(scanLocation, --len);
+          }
+          NSString *matchingString = [string substringWithRange:matchingRange];
+          
+          TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
+          MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
+          NSInteger lineNumber = ln.number;
+          TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber 
+                                                              withRange:resultRange
+                                                               subrange:NSMakeRange(0, [searchTerm length])
+                                                         matchingString:matchingString 
+                                                             inDocument:resultDoc];
+          dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
+          [resultDoc addMatch:match];
+          if (![self.results containsObject:resultDoc]) {
+            [self.results addObject:resultDoc];
+          }
+          
+          dispatch_sync(dispatch_get_main_queue(),
+                        // block
+                        ^{
+                          [self didMakeMatch:self];
+                          [self.outlineView reloadData];
+                        });
+          dispatch_semaphore_signal(arrayLock);
+        } // end subrange found      
+      } // end if scanLocation less than string length
+    } else {
+      break;
+    } // end if scanner returns true
+  } // end while scanLocation less than string length
+  
+  filesProcessed--;
+  
+  // check if this is the last one?
+  if (filesProcessed == 0) {
+    [self didEndSearch:self];
+    if (!shouldContinueSearching) {
+      // send cancelled message
+      [self didCancelSearch:self];
+    }
+    isSearching = NO;
+    shouldContinueSearching = NO;
+    [self.outlineView reloadData];
+  }
+  
+}
+
 
 - (void) searchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file
 {
@@ -284,6 +372,8 @@
   [aStr release];
   if (!string)
     return;
+  
+  NSLog(@"Searching for %@", regexp);
   
   NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
   

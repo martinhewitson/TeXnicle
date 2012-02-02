@@ -88,6 +88,7 @@
 - (void) jumpToSearchResult:(NSInteger)index;
 - (IBAction) performSearch:(id)sender;
 - (IBAction)selectMode:(id)sender;
+- (void) stringSearchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file;
 - (void) searchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file;
 - (id)resultAtIndex:(NSInteger)anIndex;
 - (void)setSearchTerm:(NSString*)aString;
