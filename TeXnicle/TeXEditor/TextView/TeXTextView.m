@@ -1725,6 +1725,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) drawViewBackgroundInRect:(NSRect)rect
 {
+  
+  
 	[super drawViewBackgroundInRect:rect];
   
   // additional highlight range
@@ -1764,8 +1766,27 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [NSBezierPath fillRect:r];
   }
   
+  // focussed?
+  if ([[self window] firstResponder] == self) {
+    [[NSColor keyboardFocusIndicatorColor] set];
+    [NSBezierPath setDefaultLineWidth:1.0];
+    [NSBezierPath strokeRect:[self bounds]];
+  }
+
 }
 
+
+- (BOOL)becomeFirstResponder
+{
+  [self setNeedsDisplay:YES];
+  return [super becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder
+{
+  [self setNeedsDisplay:YES];
+  return [super resignFirstResponder];
+}
 
 - (void)insertText:(id)aString
 {	

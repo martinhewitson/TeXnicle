@@ -35,6 +35,7 @@ extern NSString * const TELineNumberClickedNotification;
 
 @interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
 @private
+  
 	TPPopupListWindowController *popupList;
   
   MHEditorRuler *editorRuler;
