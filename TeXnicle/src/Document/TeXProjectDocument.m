@@ -2522,47 +2522,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                      error:error];
 }
 
-- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *errorOrNil))completionHandler
-{
-  //	NSLog(@"Save %@, %d", typeName, saveOperation);
-	
-	// commit changes for open docs
-	[openDocuments commitStatus];
-  // make sure we store the current status of open docs
-  if ([self.openDocuments currentDoc] != nil) {
-    //    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
-    [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
-  } else {
-    self.project.selected = nil;
-  }
-  
-  // capture UI state
-  [self captureUIstate];
-  
-  // cache chosen language
-  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
-	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	
-	// make sure we save the files here
-	if ([self saveAllProjectFiles]) {    
-    NSString *path = [url path];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];    
-	}	
-}
-//
-//- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
-// forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError
+// #### CAREFUL: THIS DOESN'T WORK ON 10.6.8 !!!!!
+//- (void)saveToURL:(NSURL *)url ofType:(NSString *)typeName forSaveOperation:(NSSaveOperationType)saveOperation completionHandler:(void (^)(NSError *errorOrNil))completionHandler
 //{
-//  
-////	NSLog(@"Save %@, %d", typeName, saveOperation);
+//	NSLog(@"Save %@, %lu", typeName, saveOperation);
 //	
 //	// commit changes for open docs
 //	[openDocuments commitStatus];
 //  // make sure we store the current status of open docs
 //  if ([self.openDocuments currentDoc] != nil) {
-////    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
+//    //    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
 //    [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
 //  } else {
 //    self.project.selected = nil;
@@ -2578,13 +2547,46 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //	
 //	// make sure we save the files here
 //	if ([self saveAllProjectFiles]) {    
-//    NSString *path = [absoluteURL path];
+//    NSString *path = [url path];
 //    NSURL *url = [NSURL fileURLWithPath:path];
-//		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+//    [super saveToURL:url ofType:typeName forSaveOperation:saveOperation completionHandler:completionHandler];    
 //	}	
-//	return NO;
 //}
 
+
+- (BOOL)saveToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName 
+ forSaveOperation:(NSSaveOperationType)saveOperation error:(NSError **)outError
+{
+  
+//	NSLog(@"Save %@, %d", typeName, saveOperation);
+	
+	// commit changes for open docs
+	[openDocuments commitStatus];
+  // make sure we store the current status of open docs
+  if ([self.openDocuments currentDoc] != nil) {
+//    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
+    [self.project setValue:[self.openDocuments currentDoc] forKey:@"selected"];
+  } else {
+    self.project.selected = nil;
+  }
+  
+  // capture UI state
+  [self captureUIstate];
+  
+  // cache chosen language
+  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
+	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	// make sure we save the files here
+	if ([self saveAllProjectFiles]) {    
+    NSString *path = [absoluteURL path];
+    NSURL *url = [NSURL fileURLWithPath:path];
+		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+	}	
+	return NO;
+}
+  
 - (BOOL) saveAllProjectFiles
 {
 	// write contents of all files to disk
@@ -2599,7 +2601,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       if ([file isText]) {
         success = [file saveContentsToDisk];
       }
-			//NSLog(@"Saved %@ %d ", [file pathOnDisk], success);
+//			NSLog(@"Saved %@ %d ", [file pathOnDisk], success);
 		} // end if item is a file
 	}
     
