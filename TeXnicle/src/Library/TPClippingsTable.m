@@ -24,4 +24,11 @@
 	[super textDidEndEditing:notification];
 }
 
+- (IBAction) insertSelectedItems:(id)sender
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(insertSelectedItems:)]) {
+    [self.delegate performSelector:@selector(insertSelectedItems:) withObject:self];
+  }
+}
+
 @end

@@ -13,4 +13,6 @@
 	
 }
 
+- (IBAction) insertSelectedItems:(id)sender;
+
 @end
