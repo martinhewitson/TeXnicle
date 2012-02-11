@@ -20,6 +20,7 @@
 @synthesize unfoldButton;
 @synthesize markerButton;
 @synthesize isHidden;
+@synthesize tableConfigureWindow;
 
 - (id) init
 {
@@ -138,6 +139,8 @@
   }
   return nil;
 }
+
+
 
 #pragma mark -
 #pragma NSTextView delegate

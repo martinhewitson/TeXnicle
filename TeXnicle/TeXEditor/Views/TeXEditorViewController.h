@@ -10,6 +10,7 @@
 #import "TeXTextView.h"
 #import "TPSectionListController.h"
 
+
 @class TeXTextView;
 @class TPSectionListController;
 
@@ -26,15 +27,25 @@
   IBOutlet NSView *jumpBar;
   IBOutlet NSScrollView *scrollView;
   
+  NSWindow *tableConfigureWindow;
+  
+
+  
   BOOL isHidden;
 }
 
+
 @property (assign) BOOL isHidden;
+@property (assign) IBOutlet NSWindow *tableConfigureWindow;
 @property (assign) IBOutlet TeXTextView *textView;
 @property (assign) IBOutlet NSPopUpButton *sectionListPopup;
 @property (assign) IBOutlet NSButton *markerButton;
 @property (assign) IBOutlet NSButton *unfoldButton;
 @property (assign) id delegate;
+
+#pragma mark -
+#pragma mark Insert Table
+- (IBAction)insertTable:(id)sender;
 
 - (void) setString:(NSString*)aString;
 - (void) disableEditor;
