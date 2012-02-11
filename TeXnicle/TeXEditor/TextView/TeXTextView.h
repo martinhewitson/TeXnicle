@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UKTextDocGoToBox.h"
-
+#import "MHTableConfigureController.h"
 
 extern NSString * const TELineNumberClickedNotification;
 
@@ -18,7 +18,7 @@ extern NSString * const TELineNumberClickedNotification;
 @class TPPopupListWindowController;
 @class FileEntity;
 
-@protocol TeXTextViewDelegate <NSTextViewDelegate>
+@protocol TeXTextViewDelegate <NSTextViewDelegate, MHTableConfigureDelegate>
 
 @optional
 -(id)project;
@@ -63,8 +63,13 @@ extern NSString * const TELineNumberClickedNotification;
   NSInteger _lastLineNumber;
   
   NSMutableArray *wordHighlightRanges;
+  
+  MHTableConfigureController *tableConfigureController;
+  
+  NSInteger zoomFactor;
 }
 
+@property (assign) NSInteger zoomFactor;
 @property (retain) NSTimer *highlightingTimer;
 @property (retain) MHEditorRuler *editorRuler;
 @property (retain) TeXColoringEngine *coloringEngine;
@@ -75,6 +80,7 @@ extern NSString * const TELineNumberClickedNotification;
 @property (retain) NSMutableArray *commandList;
 @property (retain) NSMutableArray *beginList;
 @property (retain) NSMutableArray *wordHighlightRanges;
+@property (retain) MHTableConfigureController *tableConfigureController;
 
 - (void) setupLists;
 - (void) setUpRuler;
@@ -99,6 +105,9 @@ extern NSString * const TELineNumberClickedNotification;
 
 #pragma mark -
 #pragma mark Control
+
+- (IBAction)zoomIn:(id)sender;
+- (IBAction)zoomOut:(id)sender;
 
 - (IBAction) toggleControlCharacters:(id)sender;
 - (IBAction) toggleInvisibleCharacters:(id)sender;
@@ -211,6 +220,8 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) insertIncludeForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (IBAction) pasteTable:(id)sender;
+- (void)insertTableWithRows:(NSUInteger)nrows columns:(NSUInteger)ncols;
 - (void)pasteAsImage;
+- (IBAction)insertInlineMath:(id)sender;
 
 @end

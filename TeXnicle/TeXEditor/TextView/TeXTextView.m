@@ -42,6 +42,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 @implementation TeXTextView
 
+@synthesize tableConfigureController;
 @synthesize editorRuler;
 @synthesize coloringEngine;
 @synthesize highlightRange;
@@ -52,11 +53,14 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 @synthesize commandList;
 @synthesize beginList;
 @synthesize wordHighlightRanges;
+@synthesize zoomFactor;
 
 - (void) dealloc
 {
 //  NSLog(@"TextView dealloc");
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.tableConfigureController.delegate = nil;
+  self.tableConfigureController = nil;
   self.delegate = nil;
   [self stopObserving];
   self.editorRuler = nil;
@@ -73,6 +77,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 - (void) awakeFromNib
 {
 //  NSLog(@"TextView awakeFromNib");
+  
+  self.zoomFactor = 0;
   
 	newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
 	whitespaceCharacterSet = [[NSCharacterSet whitespaceCharacterSet] retain];	
@@ -298,6 +304,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 #pragma mark -
 #pragma mark Control
 
+
+
 - (IBAction)commentSelection:(id)sender
 {
 	NSRange				selRange = [self selectedRange];
@@ -488,7 +496,25 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [[self layoutManager] setShowsInvisibleCharacters:![[self layoutManager] showsInvisibleCharacters]];
 }
 
+- (IBAction)zoomIn:(id)sender
+{
+  self.zoomFactor += 2;
+  if (self.zoomFactor > 42) {
+    self.zoomFactor = 42;
+  }
+  
+  [self applyFontAndColor];
+}
 
+- (IBAction)zoomOut:(id)sender
+{
+  self.zoomFactor -= 2;
+  if (self.zoomFactor < 0) {
+    self.zoomFactor = 0;
+  }
+  
+  [self applyFontAndColor];
+}
 
 #pragma mark -
 #pragma mark Syntax highlighting
@@ -703,12 +729,13 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 {
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
+  newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
   NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
   if (![newFont isEqualTo:[self font]]) {
-    [self setFont:[atts valueForKey:NSFontAttributeName]];
+    [self setFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]]) {
-    [self setTextColor:[atts valueForKey:NSForegroundColorAttributeName]];
+    [self setTextColor:newColor];
   }
   
   NSDictionary *currentAtts = [self typingAttributes];
@@ -1765,14 +1792,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     [[[self backgroundColor] shadowWithLevel:0.05] set];
     [NSBezierPath fillRect:r];
   }
-  
-  // focussed?
-  if ([[self window] firstResponder] == self) {
-    [[NSColor keyboardFocusIndicatorColor] set];
-    [NSBezierPath setDefaultLineWidth:1.0];
-    [NSBezierPath strokeRect:[self bounds]];
-  }
-
 }
 
 
@@ -2025,9 +2044,9 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       firstPlaceholder = NSMakeRange(commandRange.location+r.location, 1);
     }
     // make attachment
-    MHPlaceholderAttachment *placeholderAttachment = [[[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]] autorelease];
-    
+    MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];    
     NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
+    [placeholderAttachment release];
     NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
     [self shouldChangeTextInRange:placeholderRange replacementString:@" "];
     [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
@@ -2048,10 +2067,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSRange selRange = [self selectedRange];
   NSRange vr = [self getVisibleRange];
   NSInteger idx = selRange.location;
+  NSInteger strLen = [[self string] length];
   if (idx>0)
     idx--;
   
-  while (idx > vr.location) {
+  while (idx > vr.location && idx < strLen) {
     
     NSRange effRange;
     NSTextAttachment *att = [[self attributedString] attribute:NSAttachmentAttributeName
@@ -2233,12 +2253,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	// - we only do this if we are at the end of a line	
 	NSString *str = [[self textStorage] string];
 	NSRange selRange = [self selectedRange];
-  //	NSRect selRect = [self visibleRect];
-	
-  //	NSLog(@"Checking character '%c'", [str characterAtIndex:selRange.location]);
 	
 	// is the next character a newline character, or are we at the end of the string?
-  //	NSLog(@"Checking location %d against length %d", selRange.location, [str length]);
 	NSUInteger strLen = [str length];
 	if (selRange.location == strLen || 
 			(selRange.location<strLen && 
@@ -2249,7 +2265,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 		
 		// then we are at the end of a line and we can do wrapping
 		NSString*	lstr = [self currentLineToCursor];
-    //		NSLog(@"Line: %@", lstr);
 		if ([lstr length] > lineWrapLength) {
 			
 			// Do a proper search for the last whitespace because
@@ -2259,31 +2274,15 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 			
 			// get location of the last whitespace
 			NSInteger lastWhitespace = [self locationOfLastWhitespaceLessThan:lineWrapLength];
-      //			NSLog(@"Last ws: %d", lastWhitespace);
 			if (lastWhitespace>=0) {
-        //				NSLog(@"Inserting new line");
 				[self setSelectedRange:NSMakeRange(lastWhitespace, 1)];
-        //				[self insertText:lineBreakStr];
-				[self insertNewline:self];
-        
-        //				[super insertLineBreak:self];
-        //				selRange.location++;
-//				[self setSelectedRange:selRange];
-        //				[self scrollRectToVisible:selRect];
+				[self insertNewline:self];        
+				[self setSelectedRange:selRange];
 			} else {
-				
-        //				NSLog(@"Last whitespace is not >0; %d", lastWhitespace);
+        // do nothing
 			}
-		} else {
-      //			NSLog(@"Line length: %d", [lstr length]);
-      //						NSLog(@"String not longer than lineWrap length");
 		}
-	} else {
-    //				NSLog(@"Next character '%c' is not a newline", [str characterAtIndex:selRange.location]);
 	}
-	
-	
-	
 }
 
 
@@ -2644,6 +2643,85 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   }
   
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+}
+
+
+#pragma mark -
+#pragma mark Insert Table
+
+- (IBAction)insertTable:(id)sender
+{
+  if (!self.tableConfigureController) {
+    self.tableConfigureController = [[[MHTableConfigureController alloc] initWithDelegate:self] autorelease];
+  }
+  
+  [NSApp beginSheet:self.tableConfigureController.window modalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:NULL];
+  
+}
+
+- (void)tableConfigureDidAcceptConfiguration
+{
+  [NSApp endSheet:self.tableConfigureController.window];
+  [self.tableConfigureController.window orderOut:self];
+  
+  NSInteger nrows = self.tableConfigureController.numberOfRows;
+  NSInteger ncols = self.tableConfigureController.numberOfColumns;
+  if (nrows != NSNotFound  && ncols != NSNotFound) {
+    [self insertTableWithRows:nrows columns:ncols];
+  }
+}
+
+- (void) tableConfigureDidCancelConfiguration
+{
+  [NSApp endSheet:self.tableConfigureController.window];
+  [self.tableConfigureController.window orderOut:self];
+}
+
+- (void)insertTableWithRows:(NSUInteger)nrows columns:(NSUInteger)ncols
+{
+  NSMutableString *tableString = [NSMutableString string];
+  
+  // prepare table
+  [tableString appendFormat:@"\\begin{table}[htdp]\n"];
+  [tableString appendFormat:@"\\begin{center}\n"];
+  [tableString appendFormat:@"\\begin{tabular}{|"];
+  for (int ii=0; ii<ncols; ii++) {
+    [tableString appendFormat:@"c|"];
+  }
+  [tableString appendFormat:@"} \\hline\n"];
+  
+  for (int rr=0; rr<nrows; rr++) {
+    for (int cc=0; cc<ncols; cc++) {
+      // make attachment
+      if (cc < ncols) {
+        [tableString appendFormat:@" @item%d%d@ ", rr, cc];
+      }
+      if (cc+1 < ncols) {
+        [tableString appendFormat:@"&"];
+      }
+    }
+    [tableString appendFormat:@"\\\\ \\hline\n"];
+  }
+  
+  [tableString appendFormat:@"\\end{tabular}\n"];
+  [tableString appendFormat:@"\\end{center}\n"];
+  [tableString appendFormat:@"\\caption{New Table}\n"];
+  [tableString appendFormat:@"\\label{tab:newTable}\n"];
+  [tableString appendFormat:@"\\end{table}\n"];
+  
+  NSRange sel = [self selectedRange];
+  [self insertText:tableString];    
+  
+  [self replacePlaceholdersInString:tableString range:sel];
+}
+
+- (IBAction)insertInlineMath:(id)sender
+{
+  NSRange sel = [self selectedRange];
+  NSString *mathString = @"$@x@$";
+  [self insertText:mathString];
+  [self replacePlaceholdersInString:mathString range:sel];
+  [self jumpToPreviousPlaceholder:self];
 }
 
 
