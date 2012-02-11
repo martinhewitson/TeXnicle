@@ -22,34 +22,31 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   }
 }
 
-//- (void)drawPage:(PDFPage *)page
-//{
-//  NSLog(@"Draw rect");
-//  [super drawPage:page];
-//  // focussed?
-//  if ([[self window] firstResponder] == self) {
-//    
-//    [[NSGraphicsContext currentContext] saveGraphicsState];
-//    
-//    NSRect displayRect = [page boundsForBox:[self displayBox]];
-//
-//    [[NSColor yellowColor] set];
-//    [NSBezierPath setDefaultLineWidth:1.0];
-//    [NSBezierPath strokeRect:displayRect];
-//        
-//    [[NSGraphicsContext currentContext] restoreGraphicsState];
-//  }
-//}
-//
+- (void)drawPage:(PDFPage *)page
+{
+  [super drawPage:page];
+  // focussed?
+  if ([[self window] firstResponder] == self && [NSApp isActive]) {
+    
+    [[self superview] lockFocus];
+		NSRect fr = [self frame];
+		NSSetFocusRingStyle(NSFocusRingOnly);
+		[[NSBezierPath bezierPathWithRect:fr] fill];
+		[[self superview] unlockFocus];
+  }
+}
+
 - (BOOL)becomeFirstResponder
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidGainFocusNotification object:self];
+//  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidGainFocusNotification object:self];
+  [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
   return [super becomeFirstResponder];
 }
 
 - (BOOL)resignFirstResponder
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidLoseFocusNotification object:self];
+//  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidLoseFocusNotification object:self];
+  [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
   return [super resignFirstResponder];
 }
 
