@@ -70,7 +70,7 @@
 											<string>NSFilenamesPboardType</string>
 											<string>NeXT TIFF v4.0 pasteboard type</string>
 										</set>
-										<string key="NSFrameSize">{100, 545}</string>
+										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView"/>
@@ -96,14 +96,14 @@
 														<set class="NSMutableSet" key="NSDragTypes">
 															<string>NSFilenamesPboardType</string>
 														</set>
-														<string key="NSFrameSize">{396, 545}</string>
+														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView"/>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
 														<bool key="PageBreaks">YES</bool>
-														<float key="ScaleFactor">0.61451613903045654</float>
+														<float key="ScaleFactor">0.61774194240570068</float>
 														<bool key="AutoScale">YES</bool>
 													</object>
 													<object class="NSScrollView" id="838368383">
@@ -117,7 +117,7 @@
 																	<object class="NSTableView" id="59311900">
 																		<reference key="NSNextResponder" ref="689821136"/>
 																		<int key="NSvFlags">257</int>
-																		<string key="NSFrameSize">{126, 543}</string>
+																		<string key="NSFrameSize">{126, 545}</string>
 																		<reference key="NSSuperview" ref="689821136"/>
 																		<reference key="NSWindow"/>
 																		<reference key="NSNextKeyView" ref="669437972"/>
@@ -226,7 +226,7 @@
 																		<int key="NSTableViewGroupRowStyle">1</int>
 																	</object>
 																</array>
-																<string key="NSFrame">{{1, 1}, {126, 543}}</string>
+																<string key="NSFrame">{{1, 1}, {126, 545}}</string>
 																<reference key="NSSuperview" ref="838368383"/>
 																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="59311900"/>
@@ -262,7 +262,7 @@
 																<double key="NSPercent">0.55905511811023623</double>
 															</object>
 														</array>
-														<string key="NSFrame">{{397, 0}, {128, 545}}</string>
+														<string key="NSFrame">{{399, 0}, {128, 547}}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="689821136"/>
@@ -274,7 +274,7 @@
 														<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 													</object>
 												</array>
-												<string key="NSFrameSize">{525, 545}</string>
+												<string key="NSFrameSize">{527, 547}</string>
 												<reference key="NSSuperview" ref="355801115"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="593057694"/>
@@ -283,7 +283,7 @@
 												<string key="NSAutosaveName"/>
 											</object>
 										</array>
-										<string key="NSFrame">{{101, 0}, {525, 545}}</string>
+										<string key="NSFrame">{{101, 0}, {527, 547}}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="31909942"/>
@@ -291,7 +291,7 @@
 										<string key="NSClassName">NSView</string>
 									</object>
 								</array>
-								<string key="NSFrame">{{1, 1}, {626, 545}}</string>
+								<string key="NSFrameSize">{628, 547}</string>
 								<reference key="NSSuperview" ref="70421638"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="201596503"/>
@@ -305,7 +305,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="534787291"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<string key="NSClassName">MHHighlightingView</string>
+						<string key="NSClassName">NSView</string>
 					</object>
 					<object class="NSCustomView" id="1061424173">
 						<reference key="NSNextResponder" ref="1005"/>
@@ -1646,14 +1646,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HHValidatedButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHHighlightingView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHHighlightingView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
