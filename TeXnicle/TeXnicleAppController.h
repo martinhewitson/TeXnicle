@@ -10,7 +10,7 @@
 
 @class StartupScreenController;
 
-@interface TeXnicleAppController : NSObject {
+@interface TeXnicleAppController : NSObject <NSApplicationDelegate> {
 @private
 	StartupScreenController *startupScreenController;    
   BOOL openStartupScreenAtAppStartup;

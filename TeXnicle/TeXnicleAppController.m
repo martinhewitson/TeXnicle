@@ -384,6 +384,13 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	return NO;
 }
 
+- (void) applicationWillResignActive:(NSNotification *)notification
+{
+  for (id doc in [[NSDocumentController sharedDocumentController] documents]) {
+    [[[doc windowForSheet] contentView] setNeedsDisplay:YES];
+  }
+}
+
 - (IBAction)showPreferences:(id)sender
 {
 	[[PrefsWindowController sharedPrefsWindowController] showWindow:nil];
