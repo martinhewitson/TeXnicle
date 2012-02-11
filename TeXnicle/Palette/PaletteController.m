@@ -39,6 +39,7 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [slider setFloatValue:[[defaults valueForKey:TPPaletteRowHeight] floatValue]];
 	[symbolsTable setRowHeight:[slider floatValue]];
+	
   
 	[self loadPalette];
 	[palettesController setContent:self.palettes];
@@ -47,6 +48,7 @@
 	
 	// Register the symbols table for dragging strings
 	[symbolsTable registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];	
+	[symbolsTable setVerticalMotionCanBeginDrag:YES];
   
   [symbolsTable setTarget:self];
   [symbolsTable setDoubleAction:@selector(handleTableDoubleClick)];
@@ -235,6 +237,7 @@
 	
 	return @"";
 }
+
 
 - (BOOL)tableView:(NSTableView *)aTableView 
 writeRowsWithIndexes:(NSIndexSet *)rowIndexes 
