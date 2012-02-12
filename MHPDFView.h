@@ -11,10 +11,22 @@
 extern NSString * const MHPDFViewDidGainFocusNotification;
 extern NSString * const MHPDFViewDidLoseFocusNotification;
 
+@class MHPDFView;
+
+@protocol MHPDFViewDelegate <NSObject>
+
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint;
+
+@end
+
 @interface MHPDFView : PDFView
 
+@property (assign) IBOutlet id<MHPDFViewDelegate> delegate;
 
 - (void)performFindPanelAction:(id)sender;
+- (void)setNeedsDisplayInRect:(NSRect)rect ofPage:(PDFPage *)page;
+
+- (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex;
 
 
 @end

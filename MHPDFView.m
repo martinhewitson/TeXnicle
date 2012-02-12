@@ -14,6 +14,7 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 
 @implementation MHPDFView
 
+@synthesize delegate;
 
 - (void)performFindPanelAction:(id)sender
 {
@@ -48,6 +49,49 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 //  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidLoseFocusNotification object:self];
   [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
   return [super resignFirstResponder];
+}
+
+- (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex
+{
+  if (pageIndex < [[self document] pageCount]) {
+    PDFPage *page = [[self document] pageAtIndex:pageIndex];
+    PDFSelection *sel = [page selectionForLineAtPoint:point];
+    NSRect rect = [sel boundsForPage:page];    
+    [self setCurrentSelection:sel animate:YES];    
+    [self goToRect:rect onPage:page];    
+    [self setNeedsDisplayInRect:rect ofPage:[[self document] pageAtIndex:pageIndex]];
+  }
+}
+
+- (void)setNeedsDisplayInRect:(NSRect)rect ofPage:(PDFPage *)page 
+{
+  NSRect aRect = [self convertRect:rect fromPage:page];
+  CGFloat scale = [self scaleFactor];
+  CGFloat maxX = ceil(NSMaxX(aRect) + scale);
+  CGFloat maxY = ceil(NSMaxY(aRect) + scale);
+  CGFloat minX = floor(NSMinX(aRect) - scale);
+  CGFloat minY = floor(NSMinY(aRect) - scale);
+  
+  aRect = NSIntersectionRect([self bounds], NSMakeRect(minX, minY, maxX - minX, maxY - minY));
+  if (NSIsEmptyRect(aRect) == NO)
+    [self setNeedsDisplayInRect:aRect];
+}
+
+- (void) mouseDown:(NSEvent *)theEvent
+{
+  NSUInteger modifiers = [theEvent modifierFlags];
+  if (modifiers & NSCommandKeyMask) {
+    NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    PDFPage *page = [self pageForPoint:mouseLoc nearest:YES];
+    NSPoint location = [self convertPoint:mouseLoc toPage:page];
+    NSUInteger pageIndex = [[page document] indexForPage:page];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pdfview:didCommandClickOnPage:inRect:atPoint:)]) {     
+      [self.delegate pdfview:self didCommandClickOnPage:pageIndex inRect:[page boundsForBox:kPDFDisplayBoxMediaBox] atPoint:location];
+    }
+  }
+  
+  [super mouseDown:theEvent];
+  
 }
 
 @end
