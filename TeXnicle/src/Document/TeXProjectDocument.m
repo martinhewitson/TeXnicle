@@ -29,7 +29,7 @@
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
-#import "synctex_parser.h"
+#import "MHSynctexController.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -2740,20 +2740,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     }
   }
   
-//  const char *pdfpath = [[self compiledDocumentPath] cStringUsingEncoding:NSUTF8StringEncoding];
-//  NSLog(@"PDF %s", pdfpath);
-//  synctex_scanner_t scanner = synctex_scanner_new_with_output_file(pdfpath, NULL, 1);
-//  if (scanner != NULL) {
-//    synctex_scanner_display(scanner);
-//    //  if(synctex_display_query(scanner,name,line,column)>0) {
-//    //    synctex_node_t node;
-//    //    while((node = synctex_next_result(scanner))) {
-//    //      
-//    //    }
-//    //  }
-//    
-//    synctex_scanner_free(scanner);  
-//  }
+}
+
+-(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
+{
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  [sync displaySelectionInPDFFile:[self compiledDocumentPath] 
+                       sourceFile:[[[self openDocuments] currentDoc] pathOnDisk] 
+                       lineNumber:lineNumber 
+                           column:column];
+  [sync release];
 }
 
 - (IBAction)findSource:(id)sender
@@ -2864,6 +2860,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 #pragma mark -
 #pragma mark PDFViewerController delegate
+
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
+{
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  NSInteger lineNumber = NSNotFound;
+  NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  FileEntity *file = [self.project fileWithPath:sourcefile];
+  if (file) {
+    [self.openDocuments selectTabForFile:file];
+    [self.texEditorViewController.textView goToLine:lineNumber];
+  }
+}
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
