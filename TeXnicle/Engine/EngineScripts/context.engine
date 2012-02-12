@@ -49,7 +49,7 @@ do
   echo "***------------------------------------------------------------"
   echo "*** Run $count..."
   echo "***------------------------------------------------------------"
-  $ENGINE --pdf --passon=" --interaction=nonstopmode "  "$mainfile"
+  $ENGINE --pdf --synctex --passon=" --interaction=nonstopmode "  "$mainfile"
 
   # if this is after the first run, run bibtex if requested
   if [ $count -eq 1 ]
