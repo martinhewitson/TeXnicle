@@ -24,6 +24,7 @@
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
 #import "TPProjectBuilder.h"
+#import "MHSynctexController.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -1243,6 +1244,14 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 #pragma mark -
 #pragma mark Text Editor delegate
 
+-(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
+{
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
+  [sync release];
+}
+
+
 -(NSString*)codeForCommand:(NSString*)command
 {
   NSString *code = [self.library codeForCommand:command];
@@ -1550,6 +1559,28 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 #pragma mark -
 #pragma mark PDFViewerController delegate
+
+
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
+{
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  NSInteger lineNumber = NSNotFound;
+  NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  if ([sourcefile isEqualToString:[[self fileURL] lastPathComponent]]) {
+    [self.texEditorViewController.textView goToLine:lineNumber];
+  } else {
+    // open the file in a new document
+    NSURL *path = [[[self fileURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent:sourcefile];
+    [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:path display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
+      // do stuff
+      ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
+      [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:[NSNumber numberWithInteger:lineNumber] afterDelay:0];
+    }];
+  }
+}
+
+
+
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
