@@ -15,6 +15,7 @@
 @optional
 - (NSString*)documentPathForViewer:(PDFViewer*)aPDFViewer;
 - (void) findSourceOfText:(NSString*)string;
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint;
 
 @end
 

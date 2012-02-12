@@ -115,4 +115,14 @@
   return nil;
 }
 
+#pragma mark -
+#pragma mark MHPDFView delegate
+
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfview:didCommandClickOnPage:inRect:atPoint:)]) {
+    [self.delegate pdfview:pdfView didCommandClickOnPage:pageIndex inRect:aRect atPoint:aPoint];
+  }
+}
+
 @end
