@@ -252,6 +252,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self setSelectedRange: theRange];
 }
 
+-(void)	goToLineWithNumber: (NSNumber*)targetLineNumber
+{
+  [self goToLine:[targetLineNumber integerValue]]; 
+}
+
 -(void)	goToLine: (int)targetLineNumber
 {
   NSString *text = [self string];  
@@ -1741,8 +1746,21 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 {
   [self clearHighlight];
 	[self clearSpellingList];
+  
+	if ([theEvent modifierFlags] & NSCommandKeyMask) {		
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textView:didCommandClickAtLine:column:)]) {
+      NSInteger idx = [self characterIndexForPoint:[NSEvent mouseLocation]]; 
+      NSInteger line = [self lineNumberForRange:NSMakeRange(idx, 0)];
+      NSInteger column = [self columnForRange:NSMakeRange(idx, 0)];
+      [self.delegate textView:self didCommandClickAtLine:line column:column];
+    }
+	}
+
+  
 	[super mouseDown:theEvent];
 }
+
 
 - (void)viewWillDraw
 {
@@ -2324,6 +2342,19 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   return _lastLineNumber;
 }
 
+- (NSInteger)columnForRange:(NSRange)aRange
+{
+  NSString *str = [self string];
+  NSRange lineRange = [str lineRangeForRange:aRange];
+  return aRange.location-lineRange.location;
+}
+
+- (NSInteger)column
+{
+  NSRange sel = [self selectedRange];
+  return [self columnForRange:sel];
+}
+
 
 #pragma mark -
 #pragma mark Formatting text
@@ -2478,7 +2509,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     
   NSPoint draggingLocation = [sender draggingLocation];
   draggingLocation = [self convertPoint:draggingLocation fromView:nil];
-  NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
+//  NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
+  NSUInteger characterIndex = [self characterIndexForPoint:draggingLocation];
   
 //	NSDragOperation sourceDragMask= [sender draggingSourceOperationMask];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] )

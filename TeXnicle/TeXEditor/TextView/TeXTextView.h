@@ -17,6 +17,7 @@ extern NSString * const TELineNumberClickedNotification;
 @class TeXColoringEngine;
 @class TPPopupListWindowController;
 @class FileEntity;
+@class TeXTextView;
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate, MHTableConfigureDelegate>
 
@@ -31,6 +32,7 @@ extern NSString * const TELineNumberClickedNotification;
 -(NSString*)fileExtension;
 -(NSArray*)commandsBeginningWithPrefix:(NSString*)prefix;
 -(NSString*)codeForCommand:(NSString*)command;
+-(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column;
 @end
 
 @interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
@@ -101,6 +103,7 @@ extern NSString * const TELineNumberClickedNotification;
 - (IBAction) gotoLine:(id)sender;
 -(void)	goToCharacter: (int)charNum;
 -(void)	goToLine: (int)targetLineNumber;
+-(void)	goToLineWithNumber: (NSNumber*)targetLineNumber;
 -(void) goToRangeFrom: (int)startCh toChar: (int)endCh;
 
 #pragma mark -
@@ -204,6 +207,8 @@ extern NSString * const TELineNumberClickedNotification;
 
 - (NSInteger)cursorPosition;
 - (NSInteger)lineNumber;
+- (NSInteger)column;
+- (NSInteger)columnForRange:(NSRange)aRange;
 - (NSInteger)lineNumberForRange:(NSRange)aRange;
 - (NSUInteger)characterIndexOfPoint:(NSPoint)aPoint;
 
