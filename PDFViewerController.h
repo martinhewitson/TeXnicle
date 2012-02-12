@@ -18,11 +18,12 @@
 @protocol PDFViewerControllerDelegate <NSObject>
 
 - (NSString*)documentPathForViewer:(PDFViewerController*)aPDFViewer;
+- (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint;
 
 @end
 
 
-@interface PDFViewerController : NSViewController <MHSlidingSplitViewDelegate, NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
+@interface PDFViewerController : NSViewController <MHPDFViewDelegate, MHSlidingSplitViewDelegate, NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
 @private
   IBOutlet NSView *pdfViewContainer;
   MHPDFView *pdfview;
