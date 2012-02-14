@@ -41,9 +41,9 @@
   
   pane1.fillColor = color1;
   pane1.strokeSides = YES;
-  pane2.fillColor = color2;
+  pane2.fillColor = color1;
   pane2.strokeSides = YES;
-  pane3.fillColor = color1;
+  pane3.fillColor = color2;
   pane3.strokeSides = YES;
   
   [self performSelector:@selector(setupEngineSettings) withObject:nil afterDelay:0];
