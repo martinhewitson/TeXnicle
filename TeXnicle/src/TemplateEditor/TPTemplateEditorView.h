@@ -12,7 +12,9 @@
 
 @interface TPTemplateEditorView : NSViewController <NSTextViewDelegate, NSTableViewDelegate, NSTableViewDataSource> {
 @private
-  
+  TeXTextView *templateCodeView;
+  NSTableView *templateTable; 
+  NSArrayController *templateArrayController;
 }
 
 
