@@ -70,6 +70,9 @@
   IBOutlet NSPopUpButton *defaultEncodingPopup;
   
   TPSupportedFilesEditor *supportedFilesEditor;
+  
+  TPTemplateEditorView *templateEditorView;
+  NSView *templateEditorViewContainer;
 }
 
 @property (retain) TPSupportedFilesEditor *supportedFilesEditor;
