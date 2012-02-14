@@ -13,6 +13,8 @@
 
 @interface MHSynctexController : NSObject {
 @private
+  TeXTextView *textView;
+  NSMutableArray *pdfViews;
 }
 
 @property (retain) TeXTextView *textView;
