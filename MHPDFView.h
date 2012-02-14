@@ -19,7 +19,10 @@ extern NSString * const MHPDFViewDidLoseFocusNotification;
 
 @end
 
-@interface MHPDFView : PDFView
+@interface MHPDFView : PDFView {
+@private
+  id<MHPDFViewDelegate> delegate;
+}
 
 @property (assign) IBOutlet id<MHPDFViewDelegate> delegate;
 
