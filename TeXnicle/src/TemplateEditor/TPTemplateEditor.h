@@ -26,6 +26,12 @@
   TPTemplateEditorView *templateEditorView;
   id<TemplateEditorDelegate> delegate;
   BOOL showFilename;
+  
+  NSButton *cancelButton;
+  NSButton *selectButton;
+  NSButton *setAsMainFileButton;
+  NSTextField *filenameField;
+  NSTextField *filenameLabel;
 }
 
 - (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename;
