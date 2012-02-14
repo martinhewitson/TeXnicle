@@ -19,6 +19,9 @@
 @private
   NSUInteger numberOfRows;
   NSUInteger numberOfColumns;
+  id<MHTableConfigureDelegate> delegate;
+  NSTextField *numRowsField;
+  NSTextField *numColsField;
 }
 
 @property (assign) id<MHTableConfigureDelegate> delegate;
