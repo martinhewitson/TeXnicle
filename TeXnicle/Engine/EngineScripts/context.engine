@@ -7,6 +7,13 @@
 # that's not the case, you need to modify the TEXROOT below.
 #
 # <support>nCompile,doBibtex</support>
+# <imageinclude>
+#  \placefigure
+#  [center]
+#  [fig:$NAME$]
+#  {My figure title}
+#  {\externalfigure[$PATH$][width=1.00\textwidth]}
+# </imageinclude>
 #
 #  pdflatex.engine
 #  TeXnicle
