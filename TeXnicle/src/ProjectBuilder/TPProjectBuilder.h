@@ -29,6 +29,9 @@
 @property (retain) NSMutableArray *filesOnDiskList;
 @property (retain) NSMutableAttributedString *reportString;
 
+
++ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path;
+
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath;
 - (id) initWithDirectory:(NSString*)aPath;
 + (TPProjectBuilder*)builderWithMainfile:(NSString*)aFile;

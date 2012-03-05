@@ -28,6 +28,54 @@
 @synthesize filesOnDiskList;
 @synthesize reportString;
 
+
++ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path
+{
+  NSFileManager *fm = [NSFileManager defaultManager];
+  TPProjectBuilder *pb = [TPProjectBuilder builderWithDirectory:path];
+  
+  // check if the project already exists and ask the user if they want to overwrite it
+  // Remove file if it is there
+  NSString *docpath = [pb.projectFileURL path];
+  if ([fm fileExistsAtPath:docpath]) {
+    
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
+    NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
+                                     defaultButton:@"Continue"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"A project file called %@ already exists in %@.\nIf you continue, the exiting project file will be moved to:\n%@.", [docpath lastPathComponent], [docpath stringByDeletingLastPathComponent], [movedPath lastPathComponent]];
+    
+    NSInteger result = [alert runModal];
+    
+    if (result == NSAlertAlternateReturn) {
+      return nil;
+    }
+    
+    NSError *moveError = nil;
+    [fm moveItemAtPath:docpath toPath:movedPath error:&moveError];
+    if (moveError) {
+      [NSApp presentError:moveError];
+      return nil;
+    }
+  }
+  
+  [TeXProjectDocument createTeXnicleProjectAtURL:pb.projectFileURL];
+  NSError *openError = nil;
+  TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:pb.projectFileURL display:YES error:&openError];
+  if (openError) {
+    [NSApp presentError:openError];
+    return nil;
+  }  
+  
+  [pb populateDocument:doc];  
+  
+  return doc;
+}
+
 // Convenience constructor
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath
 {
