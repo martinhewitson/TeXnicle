@@ -410,6 +410,10 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 {
 	// now get the selected
 	NSMenuItem *selected = [popupMenu selectedItem];
+  if ([popupMenu indexOfItem:selected] == 0) {
+    return;
+  }
+  
 //	[selected setState:NSOnState];
 	NSUInteger tag = [selected tag];
 	NSRange tagRange = NSMakeRange(tag, 0);
