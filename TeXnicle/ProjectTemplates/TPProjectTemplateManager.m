@@ -10,6 +10,7 @@
 #import "TPProjectTemplateCreator.h"
 #import "TPProjectTemplate.h"
 #import "TPProjectTemplateViewer.h"
+#import "MABSupportFolder.h"
 
 @interface TPProjectTemplateManager ()
 
@@ -46,6 +47,34 @@
   [self.templateListContainer addSubview:self.templateListViewController.view];
 }
 
+
++ (NSString*)templatesDir
+{
+  MABSupportFolder *sf = [MABSupportFolder sharedController];
+  return [[sf supportFolder] stringByAppendingPathComponent:@"projectTemplates"];
+}
+
++ (void)installBundleTemplates
+{
+  NSArray *templatesToInstall = [NSArray arrayWithObjects:@"Article", nil];  
+  NSFileManager *fm = [NSFileManager defaultManager];
+  
+  // get the bundle path to any .tpt files
+  for (NSString *template in templatesToInstall) {
+    NSString *source = [[NSBundle mainBundle] pathForResource:template ofType:@"tpt"];
+    
+    NSString *destination = [[[TPProjectTemplateManager templatesDir] stringByAppendingPathComponent:template] stringByAppendingPathExtension:@"tpt"];
+    
+    // check if the destination exists
+    if (![fm fileExistsAtPath:destination]) {
+      NSError *error = nil;
+      [fm copyItemAtPath:source toPath:destination error:&error];
+      if (error) {
+        [NSApp presentError:error];
+      }
+    }
+  }
+}
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {

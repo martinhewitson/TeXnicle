@@ -35,4 +35,7 @@
 - (IBAction)revealSelectedTemplate:(id)sender;
 - (void) deleteTemplateAlertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
++ (NSString*)templatesDir;
++ (void)installBundleTemplates;
+
 @end
