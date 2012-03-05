@@ -29,6 +29,8 @@
 #import "TPSupportedFilesManager.h"
 #import "MHControlsTabBarController.h"
 #import "TPTemplateEditor.h"
+#import "TPProjectTemplateCreator.h"
+
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -38,7 +40,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -237,6 +239,8 @@
 #pragma mark Text Handling
 
 - (IBAction)pasteAsImage:(id)sender;
+- (NSString*)imageTextForFile:(NSString*)filepath;
+
 - (void) insertTextToCurrentDocument:(NSString*)string;
 
 
@@ -344,5 +348,9 @@
 - (IBAction)nextBookmark:(id)sender;
 
 
+#pragma mark -
+#pragma mark Project Template Stuff
+
+- (IBAction)createProjectTemplate:(id)sender;
 
 @end

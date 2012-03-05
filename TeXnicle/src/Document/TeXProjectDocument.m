@@ -1666,14 +1666,12 @@
         // insert text
         NSString *projectFolder = [self.project valueForKey:@"folder"];
         NSString *file = [projectFolder relativePathTo:[url path]];
-        NSString *name = [[[url path] lastPathComponent] stringByDeletingPathExtension];
-        NSMutableString *insert = [NSMutableString stringWithFormat:@"\\begin{figure}[htbp]\n"];
-        [insert appendFormat:@"\\centering\n"];
-        [insert appendFormat:@"\\includegraphics[width=0.8\\textwidth]{%@}\n", file];
-        [insert appendFormat:@"\\caption{My Nice Pasted Figure.}\n"];
-        [insert appendFormat:@"\\label{fig:%@}\n", name];
-        [insert appendFormat:@"\\end{figure}\n"];
+        
+        NSString *insert = [self imageTextForFile:file];
+        
         [self insertTextToCurrentDocument:insert];
+        
+        
       } else {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Creating Image Failed"
                                          defaultButton:@"OK"
@@ -1688,6 +1686,16 @@
     
   }
   
+}
+
+- (NSString*)imageTextForFile:(NSString *)filepath
+{
+  NSString *name = [[filepath lastPathComponent] stringByDeletingPathExtension];
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  NSString *template = engine.imageIncludeString;
+  template = [template stringByReplacingOccurrencesOfString:@"$NAME$" withString:name];
+  template = [template stringByReplacingOccurrencesOfString:@"$PATH$" withString:filepath];
+  return [NSString stringWithFormat:@"%@", template];
 }
 
 
@@ -3181,6 +3189,27 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     return engine.supportsNCompile;
   }
   return NO;
+}
+
+
+#pragma mark -
+#pragma mark Project Template Stuff
+
+- (IBAction)createProjectTemplate:(id)sender
+{
+  TPProjectTemplateCreator *creator = [[[TPProjectTemplateCreator alloc] initWithDelegate:self] autorelease];
+  
+  // set suggested name
+  NSString *name = [self.project.name stringByAppendingString:@"_template"];
+  creator.suggestedTemplateName = name;
+  creator.suggestedTemplateDescription = [NSString stringWithFormat:@"Project template based on project %@", self.project.name];
+  
+  [NSApp beginSheet:creator.window
+     modalForWindow:[self windowForSheet]
+      modalDelegate:self
+     didEndSelector:nil
+        contextInfo:NULL];
+  
 }
 
 
