@@ -26,6 +26,7 @@
     [descriptionCell setWraps:YES];
     [descriptionCell setTextColor:[NSColor darkGrayColor]];
     [descriptionCell setBackgroundStyle:NSBackgroundStyleRaised];
+    [descriptionCell setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
   }
   
   return self;
