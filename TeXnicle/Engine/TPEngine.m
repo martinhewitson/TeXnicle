@@ -10,6 +10,7 @@
 #import "ConsoleController.h"
 #import "externs.h"
 #import "MHFileReader.h"
+#import "NSScanner+TeXnicle.h"
 
 @implementation TPEngine
 
@@ -25,6 +26,7 @@
 @synthesize supportsDoPS2PDF;
 @synthesize supportsNCompile;
 
+@synthesize imageIncludeString;
 
 @synthesize openConsole;
 
@@ -100,17 +102,11 @@
   }
   
   NSScanner *scanner = [NSScanner scannerWithString:str];
-  [scanner scanUpToString:@"<support>" intoString:NULL];
-  NSInteger start = [scanner scanLocation];
-  if (start<[str length]) {
-    start += 9;
-  }
-  [scanner scanUpToString:@"</support>" intoString:NULL];
-  NSInteger stop = [scanner scanLocation];
 
-  if (stop > start) {
-    NSString *optsStr = [str substringWithRange:NSMakeRange(start, stop-start)];
-    NSArray *opts = [optsStr componentsSeparatedByString:@","];
+  // support
+  NSString *supportString = [scanner stringForTag:@"support"];
+  if (supportString) {
+    NSArray *opts = [supportString componentsSeparatedByString:@","];
     if ([opts containsObject:@"nCompile"]) {
       self.supportsNCompile = YES;
     }
@@ -122,6 +118,24 @@
     }
   }
   
+  // image string
+  self.imageIncludeString = [scanner stringForTag:@"imageinclude"];
+  if (self.imageIncludeString == nil || [self.imageIncludeString length] == 0) {
+    self.imageIncludeString = [TPEngine defaultImageIncludeString];
+  }
+  
+}
+
++ (NSString*)defaultImageIncludeString
+{
+  NSMutableString *insert = nil;
+  insert = [NSMutableString stringWithFormat:@"\\begin{figure}[htbp]\n"];
+  [insert appendFormat:@"\\centering\n"];
+  [insert appendFormat:@"\\includegraphics[width=0.8\\textwidth]{$PATH$}\n"];
+  [insert appendFormat:@"\\caption{My Nice Pasted Figure.}\n"];
+  [insert appendFormat:@"\\label{fig:$NAME$}\n"];
+  [insert appendFormat:@"\\end{figure}\n"];
+  return insert;
 }
 
 #pragma mark -

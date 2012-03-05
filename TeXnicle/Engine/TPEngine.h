@@ -39,6 +39,7 @@
   NSInteger supportsNCompile;
   BOOL builtIn;
   id<TPEngineDelegate> delegate;
+  NSString *imageIncludeString;
 }
 
 @property (assign) id<TPEngineDelegate> delegate;
@@ -57,9 +58,11 @@
 @property (assign) NSInteger supportsNCompile;
 @property (assign, getter = isBuiltIn) BOOL builtIn;
 @property (assign, getter = isCompiling) BOOL compiling;
+@property (copy) NSString *imageIncludeString;
 
 - (id)initWithPath:(NSString*)aPath;
 + (TPEngine*)engineWithPath:(NSString*)aPath;
++ (NSString*)defaultImageIncludeString;
 - (void) setupObservers;
 
 
