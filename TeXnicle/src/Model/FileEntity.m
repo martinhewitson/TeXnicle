@@ -102,15 +102,14 @@
 //    NSLog(@"%@: %@", self, str);
 		NSData *data = [str dataUsingEncoding:[fr encodingUsed]];
 		[self setPrimitiveValue:data forKey:@"content"];
-		[self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
+    if ([filepath pathIsText]) {
+      [self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
+    } else {
+      [self setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
+    }
 	} 
   
-  // This is not so nice because files transfered from another computer will have a different path
-  // but may have content stored in the texnicle document so the process can continue.
-  //else {
-  //  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"File doesn't exist at %@", filepath]];
-	//}
-
+  // Reconfigure the supporting FileDocument
 	[self reconfigureDocument];
   
   // Set the time we load. When we save back to file we can 
@@ -132,6 +131,9 @@
 		extension = [self extension];
 		if (!extension) {
 			extension = [[self filepath] pathExtension];
+		}
+		if (!extension) {
+			extension = [[self pathOnDisk] pathExtension];
 		}
 		
 		if (extension != nil && newName != nil) {
@@ -158,10 +160,12 @@
 	
 //	NSLog(@"Renaming %@\nto %@", oldPath, newPath);
 	
-	if (newPath && oldPath && ![newPath isEqual:oldPath]) {
+	if (   newPath != nil 
+      && oldPath != nil 
+      && ![newPath isEqual:oldPath]) {
 		NSFileManager *fm = [NSFileManager defaultManager];
 		NSError *error = nil;
-		// If the old file exists, we can rename it
+		// If the old file exists, we can move it
 		if ([fm fileExistsAtPath:oldPath]) {
 			[fm moveItemAtPath:oldPath toPath:newPath error:&error];
 			if (error) {
@@ -247,30 +251,32 @@
 }
 
 
-- (NSString*) projectPath
-{
-	ProjectEntity *project = [self valueForKey:@"project"];
-	// try to make the folder on disk		
-	NSString *projectRoot = [project valueForKey:@"folder"];
-	
-	NSString *relativePath = [self valueForKey:@"name"];
-	NSManagedObject *parent = [self valueForKey:@"parent"];
-	while (parent != nil) {
-		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
-		parent = [parent valueForKey:@"parent"];
-	}
-	
-//	NSLog(@"Project root: %@", projectRoot);
-//	NSLog(@"Relative path: %@", relativePath);
-	
-	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
-//	NSString *ext = [self valueForKey:@"extension"];
-//	if (ext && [ext length]>0) {
-//		return [folderRoot stringByAppendingPathExtension:ext];
-//	} else {
-		return folderRoot;
+// MOVED TO SUPERCLASS 16-02-2012
+//
+//- (NSString*) projectPath
+//{
+//	ProjectEntity *project = [self valueForKey:@"project"];
+//	// try to make the folder on disk		
+//	NSString *projectRoot = [project valueForKey:@"folder"];
+//	
+//	NSString *relativePath = [self valueForKey:@"name"];
+//	NSManagedObject *parent = [self valueForKey:@"parent"];
+//	while (parent != nil) {
+//		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
+//		parent = [parent valueForKey:@"parent"];
 //	}
-}
+//	
+////	NSLog(@"Project root: %@", projectRoot);
+////	NSLog(@"Relative path: %@", relativePath);
+//	
+//	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
+////	NSString *ext = [self valueForKey:@"extension"];
+////	if (ext && [ext length]>0) {
+////		return [folderRoot stringByAppendingPathExtension:ext];
+////	} else {
+//		return folderRoot;
+////	}
+//}
 
 
 - (BOOL) updateFromTextStorage
@@ -413,6 +419,9 @@
 	} // end if item exists on disk
 	else {
 //		NSLog(@"Item doesn't exist on disk");
+    
+    // if there is nothing at that location, we could try to write the file
+    
 		success = YES;
 	}
 
