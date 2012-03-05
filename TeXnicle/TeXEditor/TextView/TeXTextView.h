@@ -192,7 +192,7 @@ extern NSString * const TELineNumberClickedNotification;
 - (NSPoint) listPointForCurrentWord;
 - (NSRange) rangeForCurrentCommand;
 - (NSString*) currentCommand;
-- (void) expandCurrentCommand;
+- (BOOL) expandCurrentCommand;
 - (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange;
 - (IBAction)jumpToPreviousPlaceholder:(id)sender;
 - (IBAction)jumpToNextPlaceholder:(id)sender;
@@ -226,7 +226,7 @@ extern NSString * const TELineNumberClickedNotification;
 - (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (IBAction) pasteTable:(id)sender;
 - (void)insertTableWithRows:(NSUInteger)nrows columns:(NSUInteger)ncols;
-- (void)pasteAsImage;
+- (IBAction)pasteAsImage:(id)sender;
 - (IBAction)insertInlineMath:(id)sender;
 
 @end

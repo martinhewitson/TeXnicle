@@ -1498,17 +1498,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) paste:(id)sender
 {
-  // check pboard type
-  NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-  
-  // check for an image type
-  NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
-  if (type) {
-    [self pasteAsImage];
-  } else {
-    [self pasteAsPlainText:sender];
-  }
-  
+  [self pasteAsPlainText:sender];
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
 }
 
@@ -1608,7 +1598,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	} // end if \begin
 	else if ([self currentCommand])
   {
-    [self expandCurrentCommand];
+    if (![self expandCurrentCommand]) {
+      [super insertNewline:self];
+    }
+    
   } else {
     
     // get the indentation of this line
@@ -2031,7 +2024,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 
 
-- (void) expandCurrentCommand
+- (BOOL) expandCurrentCommand
 {
   NSString *currentCommand = [self currentCommand];
   if (currentCommand) {
@@ -2045,8 +2038,10 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       [self didChangeText];
       [[self undoManager] endUndoGrouping];
       [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+      return YES;
     }
   }
+  return NO;
 }
 
 - (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange
@@ -2620,12 +2615,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [[self layoutManager] ensureLayoutForCharacterRange:insertRange];
 }
 
-
-- (void)pasteAsImage
-{
-  [NSApp sendAction:@selector(pasteAsImage:) to:nil from:self];  
-}
-
 - (IBAction) pasteTable:(id)sender
 {
   NSMutableString *stringToPaste = [NSMutableString string];;
@@ -2771,18 +2760,35 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     }
   }
   
+  // paste:
   if (tag == 1050) {
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObject:NSStringPboardType]];
+    if (type) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  // pasteAsImage:
+  if (tag == 1055) {
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
     NSString *type = [pboard availableTypeFromArray:[NSImage imageTypes]];
     if (type) {
       return YES;
     } else {
-      
-      type = [pboard availableTypeFromArray:[NSArray arrayWithObjects: NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, nil]];
-      if (type) {
-        return YES;
-      }
-      
+      return NO;
+    }
+  }
+  
+  // pasteAsTable:
+  if (tag == 1060) {
+    NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObject:NSPasteboardTypeTabularText]];
+    if (type) {
+      return YES;
+    } else {
       return NO;
     }
   }
