@@ -570,9 +570,14 @@
   
   if (self.lineNumbers == nil || [self.lineNumbers count] == 0) {
     lineNumber = 1;
-    for (idx = 0; idx < aRange.location;) {
+    for (idx = 0; idx < aRange.location & idx < [text length];) {
+      if (idx >= [text length]) {
+        break;
+      }
       lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-      lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
+      if (lineRange.location != NSNotFound) {
+        lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
+      }
       idx = NSMaxRange(lineRange);
     }
   } else {
