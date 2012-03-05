@@ -60,7 +60,6 @@
 - (void) setString:(NSString*)aString
 {
   [self.textView setString:aString];
-  [self.textView didChangeText];
   [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
 }
 
