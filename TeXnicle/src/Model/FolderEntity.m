@@ -8,13 +8,15 @@
 
 #import "FolderEntity.h"
 
-
 @implementation FolderEntity
 
 - (BOOL) isLeaf
 {
 	return NO;
 }
+
+
+
 
 - (NSString*) pathOnDisk
 {
@@ -32,24 +34,29 @@
 	return nil;
 }
 
-- (NSString*) projectPath
-{
-	ProjectEntity *project = [self valueForKey:@"project"];
-	// try to make the folder on disk		
-	NSString *projectRoot = [project valueForKey:@"folder"];
-//	NSLog(@"Got project root: %@", projectRoot);
-	
-	NSString *relativePath = [self valueForKey:@"name"];
-	NSManagedObject *parent = [self valueForKey:@"parent"];
-//	NSLog(@"Starting from parent %@", parent);
-	while (parent != nil) {
-		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
-		parent = [parent valueForKey:@"parent"];
-	}
-	
-	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
-	return folderRoot;
-}
+// MOVED TO SUPERCLASS 16-02-2012
+//
+//- (NSString*) projectPath
+//{
+//	ProjectEntity *project = [self valueForKey:@"project"];
+//	// try to make the folder on disk		
+//	NSString *projectRoot = [project valueForKey:@"folder"];
+////	NSLog(@"Got project root: %@", projectRoot);
+//	
+//	NSString *relativePath = [self valueForKey:@"name"];
+//	NSManagedObject *parent = [self valueForKey:@"parent"];
+////	NSLog(@"Starting from parent %@", parent);
+//	while (parent != nil) {
+//		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
+//		parent = [parent valueForKey:@"parent"];
+//	}
+//	
+//	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
+//	return folderRoot;
+//}
+
+
+
 //
 //- (void) setFilepath:(NSString *)aPath
 //{
