@@ -9,11 +9,15 @@
 #import "StartupScreenController.h"
 #import "TeXProjectDocument.h"
 #import "TPDescriptionView.h"
+#import "TPProjectTemplateViewer.h"
+#import "TPProjectTemplate.h"
 
 @implementation StartupScreenController
 
 @synthesize isOpen;
 @synthesize recentFiles;
+@synthesize templateListViewController;
+@synthesize templateListContainer;
 
 - (id) init
 {
@@ -34,6 +38,7 @@
 
 - (void) dealloc
 {
+  self.templateListViewController = nil;
   [query release];
   [texnicleFiles release];
 	[recentFiles release];
@@ -65,23 +70,43 @@
   NSPoint p = NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y);
   [buildView setFrameOrigin:p];
   [containerView addSubview:buildView];
+  [templateView setFrameOrigin:p];
+  [containerView addSubview:templateView];
   
   
+  NSColor *backgroundColor = [NSColor colorWithDeviceWhite:1.0 alpha:0.8];
   [emptyProjectDescription setDescriptionText:@"Creates a new empty TeXnicle project ready to be populated with files."];
-  [emptyProjectDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  [emptyProjectDescription setBackgroundColor:backgroundColor];
   [newArticleDescription setDescriptionText:@"Creates a new TeXnicle project with a standard article main file and folders for additional TeX files and images."];
-  [newArticleDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  [newArticleDescription setBackgroundColor:backgroundColor];
+  [fromTemplateDescription setDescriptionText:@"Create a new TeXnicle project from one of your project templates."];
+  [fromTemplateDescription setBackgroundColor:backgroundColor];
   [buildProjectDescription setDescriptionText:@"Creates a new TeXnicle project containing the files referenced by a main file. Choose either a TeX file or a directory. If a directory is choosen, the main file used is the first file found that contains \\documentclass command."];  
-  [buildProjectDescription setBackgroundColor:[NSColor colorWithDeviceWhite:1.0 alpha:0.7]];
+  [buildProjectDescription setBackgroundColor:backgroundColor];
   
   [fileLabel setBorderColor:[NSColor clearColor]];
   [fileLabel.descriptionCell setWraps:NO];
   [fileLabel.descriptionCell setLineBreakMode:NSLineBreakByTruncatingMiddle];
+  
+  self.templateListViewController = [[[TPProjectTemplateListViewController alloc] init] autorelease];
+  [self.templateListViewController.view setFrame:self.templateListContainer.bounds];
+  [self.templateListContainer addSubview:self.templateListViewController.view];
 }
 
 - (void) handleRecentFilesSelectionChanged:(NSNotification*)aNote
 {	
   [self updateFilepathLabel];
+}
+
+- (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == createBtn) {
+    if ([self.templateListViewController selectedTemplate] == nil) {
+      return NO;
+    }
+  }
+  
+  return YES;
 }
 
 - (void) updateFilepathLabel
@@ -178,6 +203,61 @@
 
 #pragma mark -
 #pragma mark Project controls
+
+- (IBAction)createProjectFromSelectedTemplate:(id)sender
+{
+  TPProjectTemplate *selected = [self.templateListViewController selectedTemplate];
+  NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
+  NSError *error = nil;
+  TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }
+  
+  [viewer makeWindowControllers];
+  NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];
+  [wc window];
+  [viewer createNewProject:sender];
+  [self displayOrCloseWindow:self];
+}
+
+- (IBAction)newProjectFromTemplate:(id)sender
+{
+  [self.templateListViewController refreshList];
+  
+  NSRect frame = [containerView bounds];
+  NSPoint templateViewOrigin = NSMakePoint(frame.origin.x, frame.origin.y);
+  NSPoint buildViewOrigin = NSMakePoint(frame.origin.x-frame.size.width, frame.origin.y);
+  
+  [fileLabel setHidden:YES];
+  [createBtn setHidden:NO];
+  
+  [bottomBarButton setTarget:self];
+  [bottomBarButton setAction:@selector(cancelTemplateProject:)];
+  [bottomBarButton setTitle:@"Cancel"];
+  
+  [[buildView animator] setFrameOrigin:buildViewOrigin];
+  [[templateView animator] setFrameOrigin:templateViewOrigin];
+}
+
+- (IBAction)cancelTemplateProject:(id)sender
+{
+  [bottomBarButton setTarget:self];
+  [bottomBarButton setAction:@selector(cancelNewProject:)];
+  [bottomBarButton setTitle:@"Cancel"];
+  
+  [fileLabel setHidden:YES];
+  [createBtn setHidden:YES];
+  
+  NSRect frame = [containerView bounds];
+  NSPoint templateViewOrigin = NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y);
+  NSPoint buildViewOrigin = NSMakePoint(frame.origin.x, frame.origin.y);
+  
+  [[buildView animator] setFrameOrigin:buildViewOrigin];
+  [[templateView animator] setFrameOrigin:templateViewOrigin];
+  
+}
 
 - (IBAction)newProject:(id)sender
 {

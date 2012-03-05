@@ -7,18 +7,22 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TPProjectTemplateListViewController.h"
+#import "HHValidatedButton.h"
 
 @class TPDescriptionView;
 
-@interface StartupScreenController : NSWindowController <NSMetadataQueryDelegate> {
+@interface StartupScreenController : NSWindowController <NSUserInterfaceValidations, NSMetadataQueryDelegate> {
   
   IBOutlet TPDescriptionView *emptyProjectDescription;
   IBOutlet TPDescriptionView *newArticleDescription;
+  IBOutlet TPDescriptionView *fromTemplateDescription;
   IBOutlet TPDescriptionView *buildProjectDescription;
   
   IBOutlet NSView *containerView;
   IBOutlet NSView *startView;
   IBOutlet NSView *buildView;
+  IBOutlet NSView *templateView;
   IBOutlet NSButton *bottomBarButton;
   
 	NSMutableArray *recentFiles;
@@ -33,12 +37,17 @@
   IBOutlet NSButton *recentBtn;
   IBOutlet NSButton *allBtn;
   
+  IBOutlet HHValidatedButton *createBtn;
+  
 	NSMetadataQuery* query;
   NSMutableArray *texnicleFiles;
   
 	BOOL isOpen;
 	
 	NSRect openFrame;
+  
+  TPProjectTemplateListViewController *templateListViewController;
+  NSView *templateListContainer;
 }
 
 -(IBAction)displayOrCloseWindow:(id)sender;
@@ -46,6 +55,9 @@
 
 @property (readwrite, assign) BOOL isOpen;
 @property (readwrite, assign) NSMutableArray *recentFiles;
+
+@property (retain) TPProjectTemplateListViewController *templateListViewController;
+@property (assign) IBOutlet NSView *templateListContainer;
 
 - (IBAction) openRecentFile:(id)sender;
 
@@ -57,6 +69,10 @@
 - (IBAction) openExistingDocument:(id)sender;
 - (IBAction) newArticleDocument:(id)sender;
 - (void) show;
+
+- (IBAction)createProjectFromSelectedTemplate:(id)sender;
+- (IBAction)newProjectFromTemplate:(id)sender;
+- (IBAction)cancelTemplateProject:(id)sender;
 
 - (void) updateFilepathLabel;
 
