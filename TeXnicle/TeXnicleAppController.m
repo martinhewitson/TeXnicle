@@ -19,6 +19,7 @@
 #import "TPEngineManager.h"
 #import "TPSupportedFile.h"
 #import "TPProjectBuilder.h"
+#import "TPProjectTemplateManager.h"
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -285,6 +286,9 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	if (![language isEqualToString:@""]) {
 		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
 	}
+  
+  // install templates
+  [TPProjectTemplateManager installBundleTemplates];
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
