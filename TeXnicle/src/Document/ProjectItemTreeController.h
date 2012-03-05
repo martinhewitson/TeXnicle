@@ -85,10 +85,11 @@ extern NSString * const OutlineViewNodeType;
 	int filesAddedCounter;
 	
 	BOOL isDeleting;
-	
+	BOOL dragEnabled;
 }
 
 @property (readwrite, assign) BOOL isDeleting;
+@property (assign) BOOL dragEnabled;
 
 @property (readwrite, assign) IBOutlet TeXProjectDocument *document;
 @property (readwrite, assign) ProjectEntity *project;

@@ -81,7 +81,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 @synthesize project;
 @synthesize document;
 @synthesize isDeleting;
-
+@synthesize dragEnabled;
 
 - (void)updateSortOrder
 {
@@ -123,6 +123,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) awakeFromNib
 {
+  self.dragEnabled = YES;
+  
 	// Set the outline view to accept the custom drag type OutlineViewNodeType...
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType,nil]];
 	// apply our custom ImageAndTextCell for rendering the first column's cells
@@ -1225,64 +1227,60 @@ withIntermediateDirectories:YES
 		 forTableColumn:(NSTableColumn *)tableColumn 
 							 item:(id)item
 {
-	
-	CGFloat imageSize = 20.0;
-	[anOutlineView setRowHeight:imageSize+2.0];
-	
-	ProjectItemEntity *object = [item representedObject];
 
-	[cell setImageSize:imageSize];
-  [cell setTextColor:[NSColor blackColor]];
+	if ([[tableColumn identifier] isEqualToString:@"NameColumn"]) {
+    CGFloat imageSize = 20.0;
+    [anOutlineView setRowHeight:imageSize+2.0];
+    
+    ProjectItemEntity *object = [item representedObject];
+    
+    [cell setImageSize:imageSize];
+    [cell setTextColor:[NSColor blackColor]];
 		
-	if ([object isMemberOfClass:[FolderEntity class]]) {
-//    NSLog(@"%@ is a folder", [object name]);
-		if ([[object valueForKey:@"isExpanded"] boolValue]) {
-			NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
-			[cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
-		} else {
-			NSString *folderFileType = NSFileTypeForHFSTypeCode(kGenericFolderIcon);
-			[cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
-		}
-	} else if ([object isKindOfClass:[FileEntity class]]) {
-//    NSLog(@"%@ is a file", [object name]);
-		
-    if ([[(FileEntity*)object valueForKey:@"isText"] boolValue]) {
-      BOOL dirty = [object hasEdits];
-      if (dirty) {
-        [cell setTextColor:[NSColor lightGrayColor]];
+    if ([object isMemberOfClass:[FolderEntity class]]) {
+      //    NSLog(@"%@ is a folder", [object name]);
+      if ([[object valueForKey:@"isExpanded"] boolValue]) {
+        NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
+        [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
+      } else {
+        NSString *folderFileType = NSFileTypeForHFSTypeCode(kGenericFolderIcon);
+        [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
       }
+    } else if ([object isKindOfClass:[FileEntity class]]) {
+      //    NSLog(@"%@ is a file", [object name]);
+      
+      if ([[(FileEntity*)object valueForKey:@"isText"] boolValue]) {
+        BOOL dirty = [object hasEdits];
+        if (dirty) {
+          [cell setTextColor:[NSColor lightGrayColor]];
+        }
+      }
+      
+      if(![object existsOnDisk]) {
+        [cell setTextColor:[NSColor redColor]];
+      }	
+      
+      NSString *ext = [object valueForKey:@"extension"];
+      if (!ext)
+        ext = @"";
+      
+      NSString *title;
+      title = [object valueForKey:@"name"];
+      [cell setTitle:title];
+      
+      if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
+        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
+        [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
+        ImageAndTextCell *c = (ImageAndTextCell*)cell;
+        [c setAttributedStringValue:title];
+        [title release];
+      }
+      
+      NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
+      [cell setImage:icon];						
     }
-    
-		if(![object existsOnDisk]) {
-			[cell setTextColor:[NSColor redColor]];
-		}	
-    
-		NSString *ext = [object valueForKey:@"extension"];
-		if (!ext)
-			ext = @"";
-		
-		NSString *title;
-		title = [object valueForKey:@"name"];
-		[cell setTitle:title];
-				
-    if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
-      NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
-      [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
-      ImageAndTextCell *c = (ImageAndTextCell*)cell;
-      [c setAttributedStringValue:title];
-      [title release];
-    }
-    		
-		NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
-		[cell setImage:icon];						
-	}
-	
-//	// check if the file exists on disk, and if not, indicate by making red text
-//	if ([object isKindOfClass:[FileEntity class]]) {
-//		if(![object existsOnDisk]) {
-//			[cell setTextColor:[NSColor redColor]];
-//		}	
-//	}
+  }
+
 	
 }
 
@@ -1339,8 +1337,9 @@ withIntermediateDirectories:YES
 /*
  Beginning the drag from the outline view.
  */
-- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard {
-	
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard 
+{
+	if (!self.dragEnabled) return NO;
 	
 	[pboard declareTypes:[NSArray arrayWithObject:OutlineViewNodeType] owner:self];
 	[pboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
