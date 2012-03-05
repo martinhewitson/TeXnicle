@@ -13,6 +13,7 @@
 #import "NSString+Comparisons.h"
 #import "TPEnginesEditor.h"
 #import "MHFileReader.h"
+#import "TPProjectTemplateManager.h"
 
 @implementation PrefsWindowController
 
@@ -21,6 +22,8 @@
 @synthesize supportedFilesEditor;
 @synthesize templateEditorView;
 @synthesize templateEditorViewContainer;
+@synthesize projectTemplateManager;
+@synthesize projectTemplateManagerContainer;
 
 - (void) awakeFromNib
 {
@@ -83,11 +86,17 @@
   [self.supportedFilesEditor.view setFrame:[fileTypesPrefsView bounds]];
   [fileTypesPrefsView addSubview:self.supportedFilesEditor.view];  
   
+  // project template chooser
+  self.projectTemplateManager = [[[TPProjectTemplateManager alloc] init] autorelease];
+  [self.projectTemplateManager.view setFrame:[self.projectTemplateManagerContainer bounds]];
+  [self.projectTemplateManagerContainer addSubview:self.projectTemplateManager.view];
+  
 }
 
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.projectTemplateManager = nil;
   self.enginesEditor = nil;
   self.supportedFilesEditor = nil;
   self.templateEditorView = nil;
@@ -156,8 +165,7 @@
   [self addView:fileTypesPrefsView
           label:@"File Types"
           image:[NSImage imageNamed:@"fileTypesPref"]];
-  
-  	
+    	
 }
 
 #pragma mark -

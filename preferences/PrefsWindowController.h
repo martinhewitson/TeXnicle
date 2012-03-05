@@ -12,6 +12,7 @@
 #import "TeXTextView.h"
 #import "TPSupportedFilesEditor.h"
 #import "TPTemplateEditorView.h"
+#import "TPProjectTemplateManager.h"
 
 @class TPEnginesEditor;
 
@@ -73,8 +74,14 @@
   
   TPTemplateEditorView *templateEditorView;
   NSView *templateEditorViewContainer;
+  
+  TPProjectTemplateManager *projectTemplateManager;
+  NSView *projectTemplateManagerContainer;
+  
 }
 
+@property (retain) TPProjectTemplateManager *projectTemplateManager;
+@property (assign) IBOutlet NSView *projectTemplateManagerContainer;
 @property (retain) TPSupportedFilesEditor *supportedFilesEditor;
 @property (retain) TPEnginesEditor *enginesEditor;
 @property (assign) IBOutlet NSView *enginesEditorContainer;
