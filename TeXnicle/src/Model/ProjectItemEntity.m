@@ -11,6 +11,8 @@
 
 @implementation ProjectItemEntity
 
+@synthesize isSelected = _isSelected;
+
 @dynamic isExpanded;
 @dynamic name;
 @dynamic filepath;
@@ -54,9 +56,23 @@
 
 - (NSString*) projectPath
 {
-	return @"";
+	ProjectEntity *project = [self valueForKey:@"project"];
+	NSString *projectRoot = [project valueForKey:@"folder"];
+	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:[self pathRelativeToProject]];
+  return folderRoot;
 }
 
+- (NSString*)pathRelativeToProject
+{
+  NSString *relativePath = [self valueForKey:@"name"];
+	NSManagedObject *parent = [self valueForKey:@"parent"];
+  //	NSLog(@"Starting from parent %@", parent);
+	while (parent != nil) {
+		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
+		parent = [parent valueForKey:@"parent"];
+	}
+  return relativePath;
+}
 
 - (NSManagedObject *)project
 {
@@ -157,21 +173,7 @@
 }
 
 - (BOOL) isManaged
-{
-//	NSString *projectFolder = [[self project] valueForKey:@"folder"];
-//	NSString *ppath = [self projectPath];
-//	NSString *fpath = [self pathOnDisk];
-//	NSLog(@"Checking managed state:");
-//	NSLog(@"   project path: %@", ppath);
-//	NSLog(@"      file path: %@", fpath);
-//	if (ppath && fpath) {
-//		if ([ppath isEqual:fpath]) {
-//			NSLog(@" !!! Managed");
-//			return YES;
-//		}
-//	}
-//	NSLog(@" !!! NOT Managed");
-	
+{	
 	return NO;
 }
 
@@ -198,6 +200,23 @@
 	return NO;
 }
 
+- (void) setIsSelected:(BOOL)isSelected
+{
+  _isSelected = isSelected;
+  
+  // if deselecting, deselect children
+  if (!_isSelected) {
+    for (ProjectItemEntity *child in self.children) {
+      child.isSelected = _isSelected;
+    }
+  }
+  
+  // if selecting, select parent
+  if (_isSelected) {
+    self.parent.isSelected = _isSelected;
+  }
+  
+}
 
 
 @end

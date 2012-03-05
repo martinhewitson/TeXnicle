@@ -15,9 +15,11 @@
 	BOOL isManaged;
 	BOOL isUnderProject;
 	BOOL hasEdits;
+  BOOL _isSelected;
 }
 
 @property (assign) BOOL isExpanded;
+@property (assign) BOOL isSelected;
 @property (assign) NSString *name;
 @property (assign) NSString *filepath;
 @property (assign) NSNumber *sortIndex;
@@ -26,6 +28,7 @@
 @property (assign) ProjectItemEntity *parent;
 @property (assign) ProjectEntity *project;
 
+@property (readonly) NSString *pathRelativeToProject;
 @property (readonly) NSString *projectPath;
 @property (readonly) NSString *pathOnDisk;
 @property (readonly) NSString *shortName;
