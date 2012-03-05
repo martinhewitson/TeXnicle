@@ -13,10 +13,19 @@
 @implementation TPOutlineView
 
 @synthesize dragLeftView;
+@synthesize showMenu;
 
+- (void) awakeFromNib
+{
+  self.showMenu = YES;
+}
 
 -(NSMenu*)menuForEvent:(NSEvent*)evt 
 {
+  if (!self.showMenu) {
+    return nil;
+  }
+  
 	NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
 	NSInteger row=[self rowAtPoint:pt];
 	
@@ -81,6 +90,8 @@
 
 -(NSMenu*)defaultMenuForRow:(NSInteger)row
 {
+  if (!self.showMenu) return nil;
+  
 	if (row < 0) return nil;
 	
 	selectedRow = row;

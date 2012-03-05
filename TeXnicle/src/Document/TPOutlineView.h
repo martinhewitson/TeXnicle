@@ -18,9 +18,11 @@
 	ProjectItemEntity *selectedItem;
 	NSUInteger selectedRow;
   BOOL dragLeftView;
+  BOOL showMenu;
 }
 
 @property (assign) BOOL dragLeftView;
+@property (assign) BOOL showMenu;
 
 -(NSMenu*)defaultMenuForRow:(NSInteger)row;
 - (NSMenu*)defaultMenu;
