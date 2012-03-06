@@ -27,6 +27,7 @@
 #pragma mark -
 #pragma mark Document Control 
 
+- (IBAction)createProjectFromTemplate:(id)sender;
 - (IBAction) newEmptyProject:(id)sender;
 - (IBAction) newArticleDocument:(id)sender;
 - (IBAction)buildProject:(id)sender;

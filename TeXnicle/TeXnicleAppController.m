@@ -20,6 +20,9 @@
 #import "TPSupportedFile.h"
 #import "TPProjectBuilder.h"
 #import "TPProjectTemplateManager.h"
+#import "TPProjectTemplateViewer.h"
+#import "TPProjectTemplate.h"
+#import "TPProjectTemplateListViewer.h"
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -420,6 +423,13 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
 #pragma mark -
 #pragma mark Document Control 
+
+- (IBAction)createProjectFromTemplate:(id)sender
+{
+  // make template list viewer
+  TPProjectTemplateListViewer *viewer = [[[TPProjectTemplateListViewer alloc] init] autorelease];
+  [NSApp runModalForWindow:viewer.window];  
+}
 
 - (IBAction) newEmptyProject:(id)sender
 {
