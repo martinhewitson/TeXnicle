@@ -20,6 +20,8 @@
 
 @implementation TPProjectTemplateViewer
 
+@synthesize delegate;
+
 @synthesize project;
 @synthesize managedObjectContext;
 @synthesize root;
@@ -258,6 +260,9 @@
   [panel beginSheetModalForWindow:[NSApp keyWindow] completionHandler:^(NSInteger result) {
     
     if (result == NSFileHandlingPanelCancelButton) {
+      if (self.delegate && [self.delegate respondsToSelector:@selector(templateViewerDidCancelProjectCreation:)]) {
+        [self.delegate performSelector:@selector(templateViewerDidCancelProjectCreation:) withObject:self];
+      }
       return;
     }  
     
@@ -334,6 +339,12 @@
     
     // save the project
     [doc saveDocument:self];
+    
+    // inform delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(templateViewer:didCreateProject:)]) {
+      [self.delegate performSelector:@selector(templateViewer:didCreateProject:) withObject:self withObject:doc];
+    }
+    
     
   }];
   

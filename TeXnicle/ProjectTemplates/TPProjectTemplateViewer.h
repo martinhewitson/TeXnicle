@@ -12,6 +12,15 @@
 #import "TPTemplateFile.h"
 #import "TeXEditorViewController.h"
 
+@class TPProjectTemplateViewer;
+
+@protocol TPProjectTemplateViewerDelegate <NSObject>
+
+-(void)templateViewer:(TPProjectTemplateViewer*)viewer didCreateProject:(id)doc;
+-(void)templateViewerDidCancelProjectCreation:(TPProjectTemplateViewer*)viewer;
+
+@end
+
 @interface TPProjectTemplateViewer : NSDocument <NSTextViewDelegate, NSSplitViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
 @private
   ProjectEntity *project;
@@ -32,8 +41,11 @@
   NSTextField *templateDescriptionDisplay;
   
   TPTemplateItem *selectedItem;
+  
+  id<TPProjectTemplateViewerDelegate> delegate;
 }
 
+@property (assign) id<TPProjectTemplateViewerDelegate> delegate;
 @property (retain) ProjectEntity *project;
 @property (retain) NSManagedObjectContext *managedObjectContext;
 @property (retain) TPTemplateDirectory *root;
