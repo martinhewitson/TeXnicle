@@ -209,6 +209,14 @@
 												<reference key="NSOnImage" ref="1033313550"/>
 												<reference key="NSMixedImage" ref="310636482"/>
 											</object>
+											<object class="NSMenuItem" id="712255622">
+												<reference key="NSMenu" ref="796957093"/>
+												<string key="NSTitle">From Template...</string>
+												<string key="NSKeyEquiv"/>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+											</object>
 											<object class="NSMenuItem" id="938474538">
 												<reference key="NSMenu" ref="796957093"/>
 												<string key="NSTitle">Build Project</string>
@@ -2599,6 +2607,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">createProjectFromTemplate:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="712255622"/>
+					</object>
+					<int key="connectionID">790</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -3693,6 +3709,7 @@
 							<reference ref="62979669"/>
 							<reference ref="73096523"/>
 							<reference ref="938474538"/>
+							<reference ref="712255622"/>
 						</array>
 						<reference key="parent" ref="609818042"/>
 					</object>
@@ -3870,6 +3887,11 @@
 						<int key="objectID">785</int>
 						<reference key="object" ref="576632131"/>
 						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">788</int>
+						<reference key="object" ref="712255622"/>
+						<reference key="parent" ref="796957093"/>
 					</object>
 				</array>
 			</object>
@@ -4059,6 +4081,7 @@
 				<string key="781.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="782.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="785.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="788.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4069,7 +4092,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">787</int>
+			<int key="maxID">790</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6123,6 +6146,7 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="buildProject:">id</string>
+						<string key="createProjectFromTemplate:">id</string>
 						<string key="newArticleDocument:">id</string>
 						<string key="newEmptyProject:">id</string>
 						<string key="newLaTeXFile:">id</string>
@@ -6132,6 +6156,10 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="buildProject:">
 							<string key="name">buildProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createProjectFromTemplate:">
+							<string key="name">createProjectFromTemplate:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="newArticleDocument:">
