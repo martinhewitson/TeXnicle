@@ -59,6 +59,14 @@
   NSArray *templatesToInstall = [NSArray arrayWithObjects:@"Article", nil];  
   NSFileManager *fm = [NSFileManager defaultManager];
   
+  // make sure the templates directory exists
+  NSError *error = nil;
+  [fm createDirectoryAtPath:[TPProjectTemplateManager templatesDir] withIntermediateDirectories:YES attributes:nil error:&error];
+  if (error) {
+    [NSApp presentError:error];
+    return;
+  }
+  
   // get the bundle path to any .tpt files
   for (NSString *template in templatesToInstall) {
     NSString *source = [[NSBundle mainBundle] pathForResource:template ofType:@"tpt"];
@@ -67,7 +75,7 @@
     
     // check if the destination exists
     if (![fm fileExistsAtPath:destination]) {
-      NSError *error = nil;
+      error = nil;
       [fm copyItemAtPath:source toPath:destination error:&error];
       if (error) {
         [NSApp presentError:error];
