@@ -1664,7 +1664,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
 			[self insertFromList:list];			
 		}
-	} else if ([word beginsWith:@"\\ref{"]) {
+	} else if ([word beginsWith:@"\\ref{"] || [word beginsWith:@"\\eqref{"]) {
 		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
       //			NSLog(@"List: %@", list);
