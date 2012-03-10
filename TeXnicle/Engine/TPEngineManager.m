@@ -22,7 +22,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 +(NSArray*)builtinEngineNames
 {
-  return [NSArray arrayWithObjects:@"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil];
+  return [NSArray arrayWithObjects:@"xelatex", @"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil];
 }
 
 + (void) installEngines
