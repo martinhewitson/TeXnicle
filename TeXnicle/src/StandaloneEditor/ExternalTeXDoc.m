@@ -875,11 +875,14 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
-//  NSLog(@"Read from URL %@", absoluteURL);
+	return [self loadFileAtURL:absoluteURL];
+}
+
+- (BOOL) loadFileAtURL:(NSURL*)absoluteURL
+{
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
-    self.fileLoadDate = [NSDate date];
     _encoding = [fr encodingUsed];
     NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:_encoding]
                                                         forKey:NSCharacterEncodingDocumentAttribute];
@@ -898,12 +901,24 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
       }
     }
     
+    self.fileLoadDate = [NSDate date];
+    [self setFileModificationDate:self.fileLoadDate];
+    [self updateChangeCount:NSChangeCleared];
+    [self syncFileModificationDate];
 		return YES;
 	}
   
-	return NO;
+	return NO;  
 }
 
+- (void)syncFileModificationDate 
+{
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSDictionary *fileAttributes = [fm attributesOfItemAtPath:[[self fileURL] path]
+                                                      error:NULL];
+  NSDate* newDate = [fileAttributes objectForKey:NSFileModificationDate];
+  [self setFileModificationDate:newDate];
+}
 
 #pragma mark -
 #pragma mark control
@@ -1404,15 +1419,15 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   return [NSArray arrayWithObject:self];
 }
 
-- (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
-{
-//  NSLog(@"File was accessed on disk...");
-  if ([self fileURL]) {
-    if (![self isDocumentEdited]) {
-      [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
-    }
-  }
-}
+//- (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
+//{
+////  NSLog(@"File was accessed on disk...");
+//  if ([self fileURL]) {
+//    if (![self isDocumentEdited]) {
+//      [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
+//    }
+//  }
+//}
 
 
 -(void) fileMonitor:(TPFileMonitor *)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
@@ -1428,14 +1443,16 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
                            informativeTextWithFormat:@"The file %@ changed on disk. Do you want to reload from disk? This may result in loss of changes.", filename];
       NSInteger result = [alert runModal];
       if (result == NSAlertDefaultReturn) {
-        [self revertDocumentToSaved:self];
-        [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+        [self loadFileAtURL:[self fileURL]];
+//        [self revertDocumentToSaved:self];
+//        [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
       } else {
         self.fileLoadDate = modified;
       }
     } else {
-      [self revertDocumentToSaved:self];
-      [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+      [self loadFileAtURL:[self fileURL]];
+//      [self revertDocumentToSaved:self];
+//      [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
     }
   }
 }

@@ -153,6 +153,8 @@
 - (void) updateFileStatus;
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
+- (BOOL) loadFileAtURL:(NSURL*)absoluteURL;
+- (void)syncFileModificationDate;
 
 - (void) restoreSplitViewPositions;
 
