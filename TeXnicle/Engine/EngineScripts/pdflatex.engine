@@ -8,6 +8,9 @@
 #
 #  pdflatex.engine
 #  TeXnicle
+#
+# DO NOT EDIT THIS ENGINE. It will be overwritten each time TeXnicle starts up.
+#
 
 if [ $# -lt 2 ]
 then
