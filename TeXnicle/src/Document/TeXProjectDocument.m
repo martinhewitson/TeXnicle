@@ -90,6 +90,9 @@
 @synthesize controlsTabBarController;
 
 @synthesize miniConsole;
+@synthesize embeddedConsoleContainer;
+@synthesize embeddedConsoleViewController;
+
 
 - (void) dealloc
 {
@@ -115,6 +118,7 @@
   self.engineSettings = nil;
   self.pdfViewer = nil;
   self.miniConsole = nil;
+  self.embeddedConsoleViewController = nil;
   
   [super dealloc];
 }
@@ -315,6 +319,12 @@
   
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
+  
+  // embedded console
+  self.embeddedConsoleViewController = [[[TPConsoleViewController alloc] init] autorelease];
+  [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
+  [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
+  [self.engineManager registerConsole:self.embeddedConsoleViewController];
   
 	// Don't select anything
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -1324,45 +1334,60 @@
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
   //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
-  
-  NSSize splitViewSize = [sender frame].size;  
-  NSSize leftSize = [self.leftView frame].size;
-  leftSize.height = splitViewSize.height;
-  
-  NSSize centerSize = [self.centerView frame].size;
-  centerSize.height = splitViewSize.height;
-  
-  NSSize rightSize;
-  rightSize.width = splitViewSize.width - centerSize.width;
-  rightSize.width -= 2.0*[sender dividerThickness];
-  
-  if (![sender isSubviewCollapsed:self.leftView]) {
-    rightSize.width -= leftSize.width;
+  if (sender == self.splitview) {
+    NSSize splitViewSize = [sender frame].size;  
+    NSSize leftSize = [self.leftView frame].size;
+    leftSize.height = splitViewSize.height;
+    
+    NSSize centerSize = [self.centerView frame].size;
+    centerSize.height = splitViewSize.height;
+    
+    NSSize rightSize;
+    rightSize.width = splitViewSize.width - centerSize.width;
+    rightSize.width -= 2.0*[sender dividerThickness];
+    
+    if (![sender isSubviewCollapsed:self.leftView]) {
+      rightSize.width -= leftSize.width;
+    }
+    
+    rightSize.height = splitViewSize.height;
+    
+    if (![sender isSubviewCollapsed:self.leftView]) {
+      [self.leftView setFrameSize:leftSize];
+    }
+    [self.centerView setFrameSize:centerSize];
+    if (![sender isSubviewCollapsed:self.rightView]) {
+      [self.rightView setFrameSize:rightSize];
+    }
   }
-  
-  rightSize.height = splitViewSize.height;
-  
-  if (![sender isSubviewCollapsed:self.leftView]) {
-    [self.leftView setFrameSize:leftSize];
-  }
-  [self.centerView setFrameSize:centerSize];
-  if (![sender isSubviewCollapsed:self.rightView]) {
-    [self.rightView setFrameSize:rightSize];
-  }
-  
+    
   [sender adjustSubviews];
 }
 
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
+  if (splitView == self.splitview) {
+    if (subview == self.leftView || subview == self.centerView)
+      return NO;
+    
+    
+    if (subview == self.rightView) {
+      NSRect b = [self.rightView bounds];
+      if (b.size.width < kSplitViewRightMinSize) {
+        return NO;
+      }
+    }
+  }
   
-  if (subview == self.leftView || subview == self.centerView)
-    return NO;
-  
-  
-  if (subview == self.rightView) {
-    NSRect b = [self.rightView bounds];
-    if (b.size.width < kSplitViewRightMinSize) {
+  return YES;
+    
+}
+
+
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
+{
+  if (splitView == self.splitview) {
+    if (subview == self.centerView) {
       return NO;
     }
   }
@@ -1370,28 +1395,25 @@
   return YES;
 }
 
-
-- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
-{
-  if (subview == self.centerView) {
-    return NO;
-  }
-  
-  return YES;
-}
-
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
 {
-  if (dividerIndex == 0) {
-    NSRect b = [splitView bounds];
-    NSRect rb = [self.rightView bounds];
-    CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
-    return max;
+  NSRect b = [splitView bounds];
+  
+  if (splitView == self.splitview) {
+    if (dividerIndex == 0) {
+      NSRect rb = [self.rightView bounds];
+      CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
+      return max;
+    }
+    
+    if (dividerIndex == 1) {
+      NSRect b = [splitView bounds];
+      return b.size.width-kSplitViewRightMinSize;
+    }
   }
   
-  if (dividerIndex == 1) {
-    NSRect b = [splitView bounds];
-    return b.size.width-kSplitViewRightMinSize;
+  if (splitView == editorSplitView) {    
+    return b.size.height - 26.0 - [splitView dividerThickness];    
   }
   
   return proposedMax;
@@ -1400,20 +1422,24 @@
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
-  if (dividerIndex == 0) {
-    return kSplitViewLeftMinSize;
-  }
-  
-  if (dividerIndex == 1) {
-    NSRect lb = [self.leftView bounds];
-    
-    if ([splitView isSubviewCollapsed:self.leftView]) {
-      return kSplitViewCenterMinSize;
+  if (splitView == self.splitview) {
+    if (dividerIndex == 0) {
+      return kSplitViewLeftMinSize;
     }
-    return lb.size.width + kSplitViewCenterMinSize;
+    
+    if (dividerIndex == 1) {
+      NSRect lb = [self.leftView bounds];
+      
+      if ([splitView isSubviewCollapsed:self.leftView]) {
+        return kSplitViewCenterMinSize;
+      }
+      return lb.size.width + kSplitViewCenterMinSize;
+    }
+  }  
+  
+  if (splitView == editorSplitView) {    
+    return 60.0;    
   }
-  
-  
   
   return proposedMin;
 }

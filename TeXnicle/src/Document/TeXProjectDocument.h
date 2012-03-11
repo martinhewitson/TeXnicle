@@ -30,7 +30,7 @@
 #import "MHControlsTabBarController.h"
 #import "TPTemplateEditor.h"
 #import "TPProjectTemplateCreator.h"
-
+#import "TPConsoleViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -108,6 +108,9 @@
   
   
   MHMiniConsoleViewController *miniConsole;
+  TPConsoleViewController *embeddedConsoleViewController;
+  NSView *embeddedConsoleContainer;
+  IBOutlet NSSplitView *editorSplitView;
   
   NSView *statusViewContainer;
   TPStatusViewController *statusViewController;
@@ -138,6 +141,10 @@
 @property (assign) IBOutlet NSView *documentOutlineViewContainer;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
+
+@property (retain) TPConsoleViewController *embeddedConsoleViewController;
+@property (assign) IBOutlet NSView *embeddedConsoleContainer;
+
 
 @property (retain) PDFViewer *pdfViewer;
 
