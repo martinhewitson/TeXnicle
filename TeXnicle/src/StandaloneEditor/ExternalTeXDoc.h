@@ -21,6 +21,7 @@
 #import "PDFViewer.h"
 #import "TeXTextView.h"
 #import "TPTemplateEditor.h"
+#import "TPConsoleViewController.h"
 
 @class TeXEditorViewController;
 
@@ -67,6 +68,9 @@
   NSMutableDictionary *settings;
   
   MHMiniConsoleViewController *miniConsole;
+  TPConsoleViewController *embeddedConsoleViewController;
+  NSView *embeddedConsoleContainer;
+  IBOutlet NSSplitView *editorSplitView;
   
   NSWindow *mainWindow;
   
@@ -122,6 +126,8 @@
 @property (retain) PDFViewerController *pdfViewerController;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
+@property (retain) TPConsoleViewController *embeddedConsoleViewController;
+@property (assign) IBOutlet NSView *embeddedConsoleContainer;
 
 @property (retain) TPStatusViewController *statusViewController;
 @property (assign) IBOutlet NSView *statusViewContainer;

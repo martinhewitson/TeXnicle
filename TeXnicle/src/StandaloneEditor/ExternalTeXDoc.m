@@ -44,7 +44,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 @synthesize fileMonitor;
 @synthesize engineManager;
 @synthesize settings;
+
 @synthesize miniConsole;
+@synthesize embeddedConsoleContainer;
+@synthesize embeddedConsoleViewController;
+
 @synthesize mainWindow;
 @synthesize pdfViewContainer;
 @synthesize pdfViewerController;
@@ -251,6 +255,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
   
+  // embedded console
+  self.embeddedConsoleViewController = [[[TPConsoleViewController alloc] init] autorelease];
+  [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
+  [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
+  [self.engineManager registerConsole:self.embeddedConsoleViewController];  
   
   // setup status view
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
@@ -457,6 +466,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   self.library = nil;
   self.texEditorViewController = nil;
   self.miniConsole = nil;
+  self.embeddedConsoleViewController = nil;
   self.settings = nil;
   self.engineSettingsController = nil;
   self.statusViewContainer = nil;
@@ -1617,46 +1627,48 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
   //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
-  
-  NSSize splitViewSize = [sender frame].size;  
-  NSSize leftSize = [self.leftView frame].size;
-  leftSize.height = splitViewSize.height;
-  
-  NSSize centerSize = [self.centerView frame].size;
-  centerSize.height = splitViewSize.height;
-  
-  NSSize rightSize;
-  rightSize.width = splitViewSize.width - centerSize.width;
-  rightSize.width -= 2.0*[sender dividerThickness];
-  
-  if (![sender isSubviewCollapsed:self.leftView]) {
-    rightSize.width -= leftSize.width;
-  }
-  
-  rightSize.height = splitViewSize.height;
-  
-  if (![sender isSubviewCollapsed:self.leftView]) {
-    [self.leftView setFrameSize:leftSize];
-  }
-  [self.centerView setFrameSize:centerSize];
-  if (![sender isSubviewCollapsed:self.rightView]) {
-    [self.rightView setFrameSize:rightSize];
+  if (sender == self.splitView) {
+    NSSize splitViewSize = [sender frame].size;  
+    NSSize leftSize = [self.leftView frame].size;
+    leftSize.height = splitViewSize.height;
+    
+    NSSize centerSize = [self.centerView frame].size;
+    centerSize.height = splitViewSize.height;
+    
+    NSSize rightSize;
+    rightSize.width = splitViewSize.width - centerSize.width;
+    rightSize.width -= 2.0*[sender dividerThickness];
+    
+    if (![sender isSubviewCollapsed:self.leftView]) {
+      rightSize.width -= leftSize.width;
+    }
+    
+    rightSize.height = splitViewSize.height;
+    
+    if (![sender isSubviewCollapsed:self.leftView]) {
+      [self.leftView setFrameSize:leftSize];
+    }
+    [self.centerView setFrameSize:centerSize];
+    if (![sender isSubviewCollapsed:self.rightView]) {
+      [self.rightView setFrameSize:rightSize];
+    }
   }
   
   [sender adjustSubviews];
 }
 
-- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
+- (BOOL)splitView:(NSSplitView *)aSplitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
-  
-  if (subview == self.leftView || subview == self.centerView)
-    return NO;
-  
-  
-  if (subview == self.rightView) {
-    NSRect b = [self.rightView bounds];
-    if (b.size.width < kSplitViewRightMinSize) {
+  if (aSplitView == self.splitView) { 
+    if (subview == self.leftView || subview == self.centerView)
       return NO;
+    
+    
+    if (subview == self.rightView) {
+      NSRect b = [self.rightView bounds];
+      if (b.size.width < kSplitViewRightMinSize) {
+        return NO;
+      }
     }
   }
   
@@ -1664,10 +1676,12 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 }
 
 
-- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
+- (BOOL)splitView:(NSSplitView *)aSplitView canCollapseSubview:(NSView *)subview
 {
-  if (subview == self.centerView) {
-    return NO;
+  if (aSplitView == self.splitView) {
+    if (subview == self.centerView) {
+      return NO;
+    }
   }
   
   return YES;
@@ -1675,16 +1689,23 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (CGFloat)splitView:(NSSplitView *)aSplitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex
 {
-  if (dividerIndex == 0) {
-    NSRect b = [aSplitView bounds];
-    NSRect rb = [self.rightView bounds];
-    CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
-    return max;
+  NSRect b = [aSplitView bounds];
+  
+  if (aSplitView == self.splitView) {
+    if (dividerIndex == 0) {
+      NSRect rb = [self.rightView bounds];
+      CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
+      return max;
+    }
+    
+    if (dividerIndex == 1) {
+      NSRect b = [aSplitView bounds];
+      return b.size.width-kSplitViewRightMinSize;
+    }
   }
   
-  if (dividerIndex == 1) {
-    NSRect b = [aSplitView bounds];
-    return b.size.width-kSplitViewRightMinSize;
+  if (aSplitView == editorSplitView) {    
+    return b.size.height - 26.0 - [splitView dividerThickness];    
   }
   
   return proposedMax;
@@ -1693,20 +1714,24 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (CGFloat)splitView:(NSSplitView *)aSplitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex
 {
-  if (dividerIndex == 0) {
-    return kSplitViewLeftMinSize;
-  }
-  
-  if (dividerIndex == 1) {
-    NSRect lb = [self.leftView bounds];
-    
-    if ([aSplitView isSubviewCollapsed:self.leftView]) {
-      return kSplitViewCenterMinSize;
+  if (aSplitView == self.splitView) {
+    if (dividerIndex == 0) {
+      return kSplitViewLeftMinSize;
     }
-    return lb.size.width + kSplitViewCenterMinSize;
+    
+    if (dividerIndex == 1) {
+      NSRect lb = [self.leftView bounds];
+      
+      if ([aSplitView isSubviewCollapsed:self.leftView]) {
+        return kSplitViewCenterMinSize;
+      }
+      return lb.size.width + kSplitViewCenterMinSize;
+    }
   }
   
-  
+  if (aSplitView == editorSplitView) {    
+    return 42.0;    
+  }
   
   return proposedMin;
 }
