@@ -1307,7 +1307,14 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 - (NSArray*) listOfCitations
 {
 	NSString *str = [self.texEditorViewController.textView string];
-	return [str citations];	
+  
+  NSMutableArray *citations = [NSMutableArray array];
+  
+  [citations addObjectsFromArray:[str citations]];
+  
+  [citations addObjectsFromArray:[str citationsFromBibliographyIncludedFromPath:[[self fileURL] path]]];
+  
+	return citations;	
 }
 
 - (NSArray*) listOfCommands
