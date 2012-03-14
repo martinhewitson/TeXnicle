@@ -13,6 +13,7 @@
 
 - (NSArray*) referenceLabels;
 - (NSArray*) citations;
+- (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile;
 + (NSString *)stringWithControlsFilteredForString:(NSString *)str ;
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
 - (NSString*)argument;

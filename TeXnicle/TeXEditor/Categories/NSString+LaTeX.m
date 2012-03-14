@@ -9,6 +9,7 @@
 #import "RegexKitLite.h"
 #import "NSString+LaTeX.h"
 #import "NSString+Comparisons.h"
+#import "MHFileReader.h"
 
 @implementation NSString (LaTeX) 
 
@@ -88,9 +89,37 @@
 		}
 		
 	}
-	
-	
+  
+  
 	return cites;
+}
+
+- (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
+{
+  NSMutableArray *citations = [NSMutableArray array];
+  
+	// search for \\bibliography{
+  NSScanner *scanner = [NSScanner scannerWithString:self];
+  
+  if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
+    NSInteger idx = [scanner scanLocation];
+    if (idx < [self length]) {
+      NSString *arg = [self parseArgumentStartingAt:&idx];
+      if (arg && [arg length]>0) {
+        if ([[arg pathExtension] length] == 0) {
+          arg = [arg stringByAppendingPathExtension:@"bib"];
+        }
+      }
+      NSString *bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
+      MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
+      NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
+      if (bibcontents && [bibcontents length]>0) {
+        [citations addObjectsFromArray:[bibcontents citations]]; 
+      }      
+    }  
+  }  
+  
+  return citations;
 }
 
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc
