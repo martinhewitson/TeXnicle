@@ -64,7 +64,7 @@
 	}
 	
 	// now look for bibtex commands
-	NSArray *bibtypes = [NSArray arrayWithObjects:@"article", @"book", @"booklet", 
+	NSArray *rawbibtypes = [NSArray arrayWithObjects:@"article", @"book", @"booklet", 
 											 @"commented", @"conference", @"glossdef", 
 											 @"inbook", @"incollection", @"inproceedings", 
 											 @"jurthesis", @"manual", @"mastersthesis", 
@@ -72,10 +72,16 @@
 											 @"proceedings", @"techreport", @"unpublished", 
 											 @"url", @"electronic", @"webpage", nil];
 	
+  NSMutableArray *bibtypes = [NSMutableArray array];
+  for (NSString *type in rawbibtypes) {
+    [bibtypes addObject:type];
+    [bibtypes addObject:[type uppercaseString]];
+  }
+  
 	for (NSString *type in bibtypes) {
 		NSString *pretag = [NSString stringWithFormat:@"\\@%@\\{", type];
 		NSString *search = [pretag  stringByAppendingString:@".*,"];
-		NSArray *entries = [self componentsMatchedByRegex:search];
+		NSArray *entries = [self componentsMatchedByRegex:search];    
 		
 		NSString *replace = [NSString stringWithFormat:@"@%@{", type];
 		for (NSString *entry in entries) {
