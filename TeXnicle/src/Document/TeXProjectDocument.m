@@ -1503,17 +1503,18 @@
 
 -(NSArray*)listOfCitations
 {
-  //	NSLog(@"Generating list of citations...");
+//  NSLog(@"Generating list of citations...");
 	NSMutableArray *citations = [NSMutableArray array];
-	
+  
 	NSArray *docs = [[self project] valueForKey:@"items"];
 	for (id doc in docs) {
-    //		NSLog(@"Checking doc: %@", doc);
+//    NSLog(@"Checking doc: %@", doc);
 		if ([doc isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)doc;
-      //			NSLog(@"Checking file %@", file);
+//      NSLog(@"Checking file %@", file);
 			if ([[file valueForKey:@"extension"] isEqual:@"bib"]) {				
 				NSString *content = [file workingContentString];
+//        NSLog(@"Got bib file content: %@", content);
 				if (content) {
 					NSArray *bibTags = [content citations];
 					[citations addObjectsFromArray:bibTags];
@@ -1523,14 +1524,19 @@
 				if (content) {
 					NSArray *docTags = [content citations];			
 					[citations addObjectsFromArray:docTags];			
+          
+          // add any citations from a \bibliography{} command
+          [citations addObjectsFromArray:[content citationsFromBibliographyIncludedFromPath:file.pathOnDisk]];
 				}				
 			} else {
 				// do nothing
 			}
 		}
 	} // end loop
-	
-	return citations;	
+
+	NSSet *uniqueCitations = [NSSet setWithArray:citations];
+  
+	return [[uniqueCitations allObjects] sortedArrayUsingSelector:@selector(compare:)];	
 }
 
 -(NSArray*)listOfCommands
