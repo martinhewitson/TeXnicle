@@ -2907,6 +2907,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   FileEntity *file = [self.project fileWithPath:sourcefile];
+  [self.openDocuments addDocument:file];
   if (file) {
     [self.openDocuments selectTabForFile:file];
     [self.texEditorViewController.textView goToLine:lineNumber];
