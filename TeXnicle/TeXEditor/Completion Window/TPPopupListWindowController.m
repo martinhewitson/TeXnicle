@@ -7,8 +7,9 @@
 //
 
 #import "TPPopupListWindowController.h"
+#import "BibliographyEntry.h"
 
-#define MAX_ENTRY_LENGTH 100
+#define MAX_ENTRY_LENGTH 200
 
 @implementation TPPopupListWindowController
 
@@ -30,14 +31,9 @@
 		mode = aMode;
 		parentWindow = aWindow;
 		entries = [[NSMutableArray alloc] initWithCapacity:[entryArray count]];
-		for (NSString *entry in entryArray) {
-			if ([entry length] > MAX_ENTRY_LENGTH) {
-				[entries addObject:[entry substringToIndex:MAX_ENTRY_LENGTH]];
-			} else {
-				[entries addObject:entry];
-			}
+		for (id entry in entryArray) {
+      [entries addObject:entry];
 		}
-//		[entries addObjectsFromArray:entryArray];
 		point = aPoint;
 		self.searchString = nil;
 		
@@ -65,7 +61,7 @@
 	if (!attachedWindow) {
 		NSView *view = [self view];
 		CGFloat rowHeight = [table rowHeight];
-		CGFloat width = 100.0;
+		CGFloat width = 200.0;
 		CGFloat height = MAX(150.0, 20.0 + rowHeight*(1+[entries count]));
 		
 		if (height > 500)
@@ -80,15 +76,22 @@
 //		NSLog(@"Font atts: %@", f);
 		CGFloat maxWidth = 0;
 		if (f) {
-			for (NSString *entry in entries) {
-				NSSize s = [entry sizeWithAttributes:f];
+			for (id entry in entries) {
+        NSSize s = NSZeroSize;
+        if ([entry isKindOfClass:[NSAttributedString class]]) {
+          s = [entry size];
+        } else if ([entry isKindOfClass:[BibliographyEntry class]]) {
+          s = [[entry attributedString] size];
+        } else {
+          s = [entry sizeWithAttributes:f];
+        }
 				if (s.width > maxWidth) {
 					maxWidth = s.width;
 				}
 			}
 		}
-		if (maxWidth > 400)
-			maxWidth = 400;
+		if (maxWidth > 600)
+			maxWidth = 600;
 		
 		
 		width = MAX(width, maxWidth);
@@ -174,18 +177,27 @@
 
 - (void) userSelectedRow:(NSNumber*)aRow
 {
-	NSString *selected = [[self filteredEntries] objectAtIndex:[aRow intValue]];
+	id value = [[self filteredEntries] objectAtIndex:[aRow intValue]];
+  NSString *tag = @"";
+  if ([value isKindOfClass:[BibliographyEntry class]]) {
+    tag = [value valueForKey:@"tag"];
+  } else if ([value isKindOfClass:[NSAttributedString class]]) {    
+    tag = [value string];    
+  } else {
+    tag = value;
+  }
+  
 	if (mode == TPPopupListInsert) {
 		if ([delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {
-			[delegate performSelector:@selector(insertWordAtCurrentLocation:) withObject:selected];
+			[delegate performSelector:@selector(insertWordAtCurrentLocation:) withObject:tag];
 		}
 	} else if (mode == TPPopupListSpell) {
 		if ([delegate respondsToSelector:@selector(replaceWordAtCurrentLocationWith:)]) {
-			[delegate performSelector:@selector(replaceWordAtCurrentLocationWith:) withObject:selected];
+			[delegate performSelector:@selector(replaceWordAtCurrentLocationWith:) withObject:tag];
 		}
 	} else if (mode == TPPopupListReplace) {
 		if ([delegate respondsToSelector:@selector(replaceWordUpToCurrentLocationWith:)]) {
-			[delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:selected];
+			[delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:tag];
 		}
 	}
   
@@ -231,7 +243,15 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 						row:(NSInteger)row;
 {
 	if (tableView == table) {
-		return [[self filteredEntries] objectAtIndex:row];
+    
+		id value = [[self filteredEntries] objectAtIndex:row];
+    
+    if ([value isKindOfClass:[BibliographyEntry class]]) {
+      return [value attributedString];
+    } else {
+      return value;
+    }
+    
 	}	
 	return nil;
 }
@@ -249,7 +269,22 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 - (NSArray*) filteredEntries 
 {
 	if (self.searchString) {
-		return [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF contains[cd] %@", self.searchString]];
+    NSMutableArray *filteredArray = [NSMutableArray array];
+    for (id entry in entries) {
+      NSString *test = entry;
+      if ([entry isKindOfClass:[NSAttributedString class]]) {
+        test = [entry string];
+      } else if ([entry isKindOfClass:[BibliographyEntry class]]) {
+        test = [[entry attributedString] string];
+      } else {
+        test = entry;
+      }
+      NSRange r = [[test lowercaseString] rangeOfString:[self.searchString lowercaseString]];
+      if (r.location != NSNotFound) {
+        [filteredArray addObject:entry];
+      }
+    }
+		return filteredArray; 
 	} else {
 		return entries;
 	}
