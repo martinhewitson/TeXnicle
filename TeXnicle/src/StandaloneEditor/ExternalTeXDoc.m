@@ -1311,7 +1311,6 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   NSMutableArray *citations = [NSMutableArray array];
   
   [citations addObjectsFromArray:[str citations]];
-  
   [citations addObjectsFromArray:[str citationsFromBibliographyIncludedFromPath:[[self fileURL] path]]];
   
 	return citations;	
