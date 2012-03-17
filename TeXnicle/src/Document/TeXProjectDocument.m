@@ -30,6 +30,7 @@
 #import "TPSupportedFilesManager.h"
 #import "NSApplication+SystemVersion.h"
 #import "MHSynctexController.h"
+#import "BibliographyEntry.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -1511,15 +1512,7 @@
 //    NSLog(@"Checking doc: %@", doc);
 		if ([doc isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)doc;
-//      NSLog(@"Checking file %@", file);
-			if ([[file valueForKey:@"extension"] isEqual:@"bib"]) {				
-				NSString *content = [file workingContentString];
-//        NSLog(@"Got bib file content: %@", content);
-				if (content) {
-					NSArray *bibTags = [content citations];
-					[citations addObjectsFromArray:bibTags];
-				}
-			} else if ([[file valueForKey:@"extension"] isEqual:@"tex"]) {
+      if ([file isText]) {
 				NSString *content = [file workingContentString];
 				if (content) {
 					NSArray *docTags = [content citations];			
@@ -1534,9 +1527,7 @@
 		}
 	} // end loop
 
-	NSSet *uniqueCitations = [NSSet setWithArray:citations];
-  
-	return [[uniqueCitations allObjects] sortedArrayUsingSelector:@selector(compare:)];	
+	return citations;	
 }
 
 -(NSArray*)listOfCommands
