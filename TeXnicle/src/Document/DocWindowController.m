@@ -16,6 +16,7 @@
 #import "MHLineNumber.h"
 #import "NSArray+LaTeX.h"
 #import "TPSupportedFilesManager.h"
+#import "MHSynctexController.h"
 
 @implementation DocWindowController
 
@@ -183,6 +184,16 @@
 
 #pragma mark -
 #pragma mark Text Colorer delegate
+
+-(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
+{
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.mainDocument.pdfViewerController.pdfview, self.mainDocument.pdfViewer.pdfViewerController.pdfview, nil]];
+  [sync displaySelectionInPDFFile:[self.mainDocument compiledDocumentPath] 
+                       sourceFile:[self.file pathOnDisk] 
+                       lineNumber:lineNumber 
+                           column:column];
+  [sync release];
+}
 
 -(id)project
 {
