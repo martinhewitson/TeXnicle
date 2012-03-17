@@ -10,6 +10,7 @@
 #import "NSString+LaTeX.h"
 #import "NSString+Comparisons.h"
 #import "MHFileReader.h"
+#import "BibliographyEntry.h"
 
 @implementation NSString (LaTeX) 
 
@@ -58,44 +59,11 @@
 		}
 		if (start>=0 && end>start) {
 			NSString *tag = [label substringWithRange:NSMakeRange(start, end-start+1)];
-//			tag = [@"cite{" stringByAppendingString:tag];
-			[cites addObject:tag];
+      NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
+      [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
+			[cites addObject:str];
 		}
 	}
-	
-	// now look for bibtex commands
-	NSArray *rawbibtypes = [NSArray arrayWithObjects:@"article", @"book", @"booklet", 
-											 @"commented", @"conference", @"glossdef", 
-											 @"inbook", @"incollection", @"inproceedings", 
-											 @"jurthesis", @"manual", @"mastersthesis", 
-											 @"misc", @"periodical", @"phdthesis", 
-											 @"proceedings", @"techreport", @"unpublished", 
-											 @"url", @"electronic", @"webpage", nil];
-	
-  NSMutableArray *bibtypes = [NSMutableArray array];
-  for (NSString *type in rawbibtypes) {
-    [bibtypes addObject:type];
-    [bibtypes addObject:[type uppercaseString]];
-  }
-  
-	for (NSString *type in bibtypes) {
-		NSString *pretag = [NSString stringWithFormat:@"\\@%@\\{", type];
-		NSString *search = [pretag  stringByAppendingString:@".*,"];
-		NSArray *entries = [self componentsMatchedByRegex:search];    
-		
-		NSString *replace = [NSString stringWithFormat:@"@%@{", type];
-		for (NSString *entry in entries) {
-			
-			// remove the @thing{ and the end ','
-			NSString *tag = [[entry stringByReplacingOccurrencesOfString:replace withString:@""] 
-											 stringByReplacingOccurrencesOfString:@"," withString:@""];																																															 
-											 
-//			tag = [@"cite{" stringByAppendingString:tag];
-			[cites addObject:tag];
-		}
-		
-	}
-  
   
 	return cites;
 }
@@ -120,7 +88,10 @@
       MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
       NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
       if (bibcontents && [bibcontents length]>0) {
-        [citations addObjectsFromArray:[bibcontents citations]]; 
+        NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
+        for (BibliographyEntry *entry in entries) {
+          [citations addObject:entry];
+        }
       }      
     }  
   }  
