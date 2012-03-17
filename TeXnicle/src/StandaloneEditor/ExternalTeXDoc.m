@@ -487,6 +487,21 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     
 	NSInteger tag = [menuItem tag];
   
+  // Open Project Folder in Finder
+  if (tag == 21) {
+    return NO;
+  }
+  
+  // Add Existing Folder...
+  if (tag == 28) {
+    return NO;
+  }
+  
+  // Create Project Template...
+  if (tag == 29) {
+    return NO;
+  }
+  
   // find text selection in pdf
   if (tag == 116020) {
     return [self.pdfViewerController hasDocument] && [self.texEditorViewController textViewHasSelection];
@@ -1596,7 +1611,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   if ([sourcefile isEqualToString:[[self fileURL] lastPathComponent]]) {
