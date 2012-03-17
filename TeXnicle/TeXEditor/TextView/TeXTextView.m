@@ -2392,10 +2392,75 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (IBAction) reformatParagraph:(id)sender
 {
-  //	NSLog(@"Reformat paragraph");
-	
+  NSRange sel = [self selectedRange];
+  NSInteger startIndex = sel.location;
+  
+  // get a range for the current paragraph. This will typically be too large, but it's
+  // a good place to start from.
 	NSRange pRange = [self rangeForCurrentParagraph];
-	
+  
+	NSInteger pStartIndex = startIndex - pRange.location;
+  NSInteger idx = pStartIndex;
+  NSString *paragraphString = [[self string] substringWithRange:pRange];
+  NSInteger newStart = NSNotFound;
+  // go backwards from the current position and stop when:
+  //   1. we reach an empty line
+  //   2. we reach a { or a }  
+  while (idx >= 0) {    
+    if ([paragraphString characterAtIndex:idx] == '{' ||
+        [paragraphString characterAtIndex:idx] == '}') {
+      
+      // go forwards now until we have a real character
+      idx++;
+      while (idx < [paragraphString length]) {
+        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
+            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
+            ) {
+          break;
+        }
+        idx++;
+      }
+      
+      newStart = idx;
+      break;
+    }    
+    idx--;
+  }
+  
+  // go forwards until we reach:
+  // 1. an empty line
+  // 2. a { or a } or a '\'
+  NSInteger newEnd = NSNotFound;
+  idx = pStartIndex;
+  while( idx < [paragraphString length]) {
+    if ([paragraphString characterAtIndex:idx] == '{' ||
+        [paragraphString characterAtIndex:idx] == '}' ||
+        [paragraphString characterAtIndex:idx] == '\\' 
+        ) {
+      
+      // go backwards until we have a real character
+      idx--;
+      while (idx >= 0) {
+        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
+            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
+            ) {
+          break;
+        }
+        idx--;
+      }
+      
+      newEnd = idx+1;
+      break;
+    }    
+    idx++;
+  }
+  
+  if (newStart != NSNotFound && newEnd != NSNotFound) {
+    if (newStart >= 0 && newStart < newEnd && newEnd < [[self string] length]) {
+      pRange = NSMakeRange(pRange.location + newStart, newEnd-newStart);  
+    }
+  }
+  
   [self reformatRange:pRange];
 	return;
 }
