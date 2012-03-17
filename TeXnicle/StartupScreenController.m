@@ -209,7 +209,7 @@
   TPProjectTemplate *selected = [self.templateListViewController selectedTemplate];
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
-  TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
+  TPProjectTemplateViewer *viewer = [[[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error] autorelease];
   if (error) {
     [NSApp presentError:error];
     return;
