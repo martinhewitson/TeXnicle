@@ -284,6 +284,10 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+  
+  // set default
+  lineToOpen = NSNotFound;
+  
 	// set spell checker language
 	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
 	if (![language isEqualToString:@""]) {
@@ -298,15 +302,37 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 {
 //  NSLog(@"Application open file %@", filename);
 	NSError *error = nil;
-	if ([[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename]
-																																						 display:YES
-																																							 error:&error]) {
+  
+  if (![[filename pathExtension] isEqualToString:@"tex"]) {
+    // do nothing, but don't cause a fuss
+    return YES;
+  }
+  
+  TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename]
+                                                                                  display:YES
+                                                                                    error:&error];
+	if (doc) {
+
+    NSArray *args = [[NSProcessInfo processInfo] arguments];
+    
+    if ([args count] == 4) {
+      NSString *tag = [args objectAtIndex:2];
+      if ([tag isEqualToString:@"-line"]) {
+        lineToOpen = [[args objectAtIndex:3] integerValue];
+      }    
+    }
+        
+    if (lineToOpen != NSNotFound) {
+      [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) 
+                                                 withObject:[NSNumber numberWithInteger:lineToOpen] 
+                                                 afterDelay:1];
+    }
 		return YES;
 	}
 	
-	if (error) {
-		[NSApp presentError:error];
-	}
+//	if (error) {
+//		[NSApp presentError:error];
+//	}
 	
 	return NO;
 }

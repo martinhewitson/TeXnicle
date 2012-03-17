@@ -14,6 +14,7 @@
 @private
 	StartupScreenController *startupScreenController;    
   BOOL openStartupScreenAtAppStartup;
+  NSInteger lineToOpen;
 }
 
 @property (assign) BOOL openStartupScreenAtAppStartup;
