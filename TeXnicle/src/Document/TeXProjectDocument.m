@@ -2507,7 +2507,7 @@
 
 - (void) makeNewTexFileFromTemplate:(NSDictionary*)aTemplate withFilename:(NSString*)aFilename setAsMain:(BOOL)isMain
 {
-	NSString *name = [aFilename copy];
+	NSString *name = aFilename;
 	NSString *ext = [name pathExtension];
 	if ([ext length]==0) {
 		name = [name stringByAppendingPathExtension:@"tex"];
@@ -2894,7 +2894,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   FileEntity *file = [self.project fileWithPath:sourcefile];
