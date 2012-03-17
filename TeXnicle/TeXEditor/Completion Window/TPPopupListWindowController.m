@@ -271,7 +271,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 	if (self.searchString) {
     NSMutableArray *filteredArray = [NSMutableArray array];
     for (id entry in entries) {
-      NSString *test = entry;
+      NSString *test = nil;
       if ([entry isKindOfClass:[NSAttributedString class]]) {
         test = [entry string];
       } else if ([entry isKindOfClass:[BibliographyEntry class]]) {
