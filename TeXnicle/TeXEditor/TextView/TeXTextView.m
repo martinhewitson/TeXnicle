@@ -92,7 +92,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self setAutomaticSpellingCorrectionEnabled:NO];
   
   self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
-    
+ 
+  [self applyFontAndColor];
 }
 
 
@@ -750,6 +751,11 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   } else {
 //    NSLog(@"Skipping setting atts");
   }
+  
+  // background color
+  NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
+  [self setBackgroundColor:c];
+  
 }
 
 - (void) setWrapStyle
