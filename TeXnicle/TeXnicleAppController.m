@@ -27,7 +27,12 @@
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
 NSString * const TEDocumentTemplates = @"TEDocumentTemplates";
+
 NSString * const TEUserCommands = @"TEUserCommands";
+NSString * const TERefCommands = @"TERefCommands";;
+NSString * const TECiteCommands = @"TECiteCommands";
+NSString * const TEBeginCommands = @"TEBeginCommands";
+NSString * const TEFileCommands = @"TEFileCommands";
 
 
 NSString * const TPGSPath = @"TPGSPath";
@@ -124,6 +129,42 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
   // user commands
   [defaultValues setObject:[NSMutableArray array] forKey:TEUserCommands];
+  
+  // ref commands
+  NSMutableArray *refCommands = [NSMutableArray array];
+  [refCommands addObject:@"\\ref"];
+  [refCommands addObject:@"\\eqref"];
+  [defaultValues setObject:refCommands forKey:TERefCommands];
+  
+  // cite commands
+  NSMutableArray *citeCommands = [NSMutableArray array];
+  [citeCommands addObject:@"\\cite"];
+  [defaultValues setObject:citeCommands forKey:TECiteCommands];
+  
+  // begin commands
+  NSMutableArray *beginCommands = [NSMutableArray array];
+	[beginCommands addObject:@"enumerate"];
+	[beginCommands addObject:@"array"];
+	[beginCommands addObject:@"matrix"];
+	[beginCommands addObject:@"itemize"];
+	[beginCommands addObject:@"eqnarray"];
+	[beginCommands addObject:@"description"];
+	[beginCommands addObject:@"quotation"];
+	[beginCommands addObject:@"quote"];
+	[beginCommands addObject:@"verbatim"];
+	[beginCommands addObject:@"verse"];
+	[beginCommands addObject:@"table"];
+	[beginCommands addObject:@"tabular"];
+	[beginCommands addObject:@"center"];
+	[beginCommands addObject:@"figure"];
+	[beginCommands addObject:@"table"];
+  [defaultValues setObject:beginCommands forKey:TEBeginCommands];
+  
+  // file commands
+  NSMutableArray *fileCommands = [NSMutableArray array];
+	[fileCommands addObject:@"\\input"];
+  [fileCommands addObject:@"\\include"];
+  [defaultValues setObject:fileCommands forKey:TEFileCommands];
   
 	// Document settings	
 	[defaultValues setValue:[NSNumber numberWithInt:TPHardWrap] forKey:TELineWrapStyle];
