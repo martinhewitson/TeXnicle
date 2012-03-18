@@ -50,7 +50,6 @@
   
   HHValidatedButton *showSearchResultsButton;
   HHValidatedButton *toggleThumbsButton;
-  NSSlider *thumbSizeSlider;
 }
 
 
@@ -75,7 +74,6 @@
 @property (assign) IBOutlet HHValidatedButton *zoomInButton;
 @property (assign) IBOutlet HHValidatedButton *zoomOutButton;
 @property (assign) IBOutlet HHValidatedButton *zoomToFitButton;
-@property (assign) IBOutlet NSSlider *thumbSizeSlider;
 
 @property (assign) id<PDFViewerControllerDelegate> delegate;
 
@@ -102,7 +100,6 @@
 - (IBAction) showNextResult:(id)sender;
 - (IBAction)toggleResultsTable:(id)sender;
 - (IBAction)toggleThumbsTable:(id)sender;
-- (IBAction)setThumbSize:(id)sender;
 
 - (void) selectSearchResult:(NSInteger)index;
 - (NSRange)rangeOfSelection:(PDFSelection*)selection;

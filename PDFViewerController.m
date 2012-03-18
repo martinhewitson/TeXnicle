@@ -34,7 +34,6 @@
 @synthesize zoomOutButton;
 @synthesize zoomToFitButton;
 @synthesize printButton;
-@synthesize thumbSizeSlider;
 
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
@@ -75,12 +74,10 @@
   
   if ([self hasDocument]) {
     [self.toggleThumbsButton setState:NSOnState];  
-    [self.thumbSizeSlider setFloatValue:64.0];
     
   } else {
     [self.thumbSlideViewController slideOutAnimated:NO];
     [self.toggleThumbsButton setState:NSOffState];
-    [self.thumbSizeSlider setEnabled:NO];
   }
   
 }
@@ -100,18 +97,9 @@
 - (IBAction)toggleThumbsTable:(id)sender
 {
   if ([self.toggleThumbsButton state] == NSOnState) {
-    [self.thumbSizeSlider setEnabled:YES]; 
   } else {
-    [self.thumbSizeSlider setEnabled:NO];
   }
   [self.thumbSlideViewController toggle:sender];
-}
-
-
-- (IBAction)setThumbSize:(id)sender
-{
-  CGFloat s = [sender floatValue];
-  [self.pdfThumbnailView setThumbnailSize:NSMakeSize(s, s)];
 }
 
 - (IBAction)printPDF:(id)sender

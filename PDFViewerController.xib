@@ -3,34 +3,32 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">1938</string>
-			<string key="com.apple.pdfkit.ibplugin">822</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">2182</string>
+			<string key="com.apple.pdfkit.ibplugin">1117</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSSliderCell</string>
-			<string>NSButton</string>
-			<string>NSCustomObject</string>
+			<string>NSScroller</string>
 			<string>NSSplitView</string>
-			<string>NSImageView</string>
-			<string>NSImageCell</string>
-			<string>NSTableView</string>
-			<string>NSSlider</string>
-			<string>NSSearchField</string>
-			<string>NSCustomView</string>
-			<string>NSSearchFieldCell</string>
-			<string>NSTextField</string>
-			<string>PDFThumbnailView</string>
-			<string>PDFView</string>
-			<string>NSTextFieldCell</string>
+			<string>NSButton</string>
 			<string>NSButtonCell</string>
-			<string>NSTableColumn</string>
+			<string>NSImageView</string>
+			<string>NSTextFieldCell</string>
 			<string>NSScrollView</string>
 			<string>NSProgressIndicator</string>
-			<string>NSScroller</string>
+			<string>NSSearchField</string>
+			<string>NSImageCell</string>
+			<string>PDFThumbnailView</string>
+			<string>NSTableView</string>
+			<string>NSSearchFieldCell</string>
+			<string>NSCustomObject</string>
+			<string>NSCustomView</string>
+			<string>NSTableColumn</string>
+			<string>PDFView</string>
+			<string>NSTextField</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -73,6 +71,7 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -98,6 +97,7 @@
 														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
+														<reference key="NSNextKeyView"/>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
 														<bool key="PageBreaks">YES</bool>
@@ -309,61 +309,6 @@
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">290</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="NSImageView" id="631235922">
-								<reference key="NSNextResponder" ref="1061424173"/>
-								<int key="NSvFlags">292</int>
-								<set class="NSMutableSet" key="NSDragTypes">
-									<string>Apple PDF pasteboard type</string>
-									<string>Apple PICT pasteboard type</string>
-									<string>Apple PNG pasteboard type</string>
-									<string>NSFilenamesPboardType</string>
-									<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
-									<string>NeXT TIFF v4.0 pasteboard type</string>
-								</set>
-								<string key="NSFrame">{{9, 8}, {21, 21}}</string>
-								<reference key="NSSuperview" ref="1061424173"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="604084295"/>
-								<bool key="NSEnabled">YES</bool>
-								<object class="NSImageCell" key="NSCell" id="297901003">
-									<int key="NSCellFlags">130560</int>
-									<int key="NSCellFlags2">33554432</int>
-									<object class="NSCustomResource" key="NSContents">
-										<string key="NSClassName">NSImage</string>
-										<string key="NSResourceName">resizeImage</string>
-									</object>
-									<int key="NSAlign">0</int>
-									<int key="NSScale">0</int>
-									<int key="NSStyle">0</int>
-									<bool key="NSAnimates">NO</bool>
-								</object>
-								<bool key="NSEditable">YES</bool>
-							</object>
-							<object class="NSSlider" id="604084295">
-								<reference key="NSNextResponder" ref="1061424173"/>
-								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{40, 12}, {57, 12}}</string>
-								<reference key="NSSuperview" ref="1061424173"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="455590945"/>
-								<string key="NSReuseIdentifierKey">_NS:779</string>
-								<bool key="NSEnabled">YES</bool>
-								<object class="NSSliderCell" key="NSCell" id="375697799">
-									<int key="NSCellFlags">-2080244224</int>
-									<int key="NSCellFlags2">262144</int>
-									<string key="NSContents"/>
-									<string key="NSCellIdentifier">_NS:779</string>
-									<reference key="NSControlView" ref="604084295"/>
-									<double key="NSMaxValue">256</double>
-									<double key="NSMinValue">32</double>
-									<double key="NSValue">64</double>
-									<double key="NSAltIncValue">0.0</double>
-									<int key="NSNumberOfTickMarks">0</int>
-									<int key="NSTickMarkPosition">1</int>
-									<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
-									<bool key="NSVertical">NO</bool>
-								</object>
-							</object>
 							<object class="NSButton" id="455590945">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
@@ -483,7 +428,7 @@
 						<string key="NSFrameSize">{628, 40}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="631235922"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:499</string>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -984,22 +929,6 @@
 					<int key="connectionID">80</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">thumbSizeSlider</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="604084295"/>
-					</object>
-					<int key="connectionID">119</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setThumbSize:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="604084295"/>
-					</object>
-					<int key="connectionID">115</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">zoomToFit:</string>
 						<reference key="source" ref="1001"/>
@@ -1421,24 +1350,9 @@
 							<reference ref="42749403"/>
 							<reference ref="676606386"/>
 							<reference ref="85915893"/>
-							<reference ref="604084295"/>
 							<reference ref="455590945"/>
-							<reference ref="631235922"/>
 						</array>
 						<reference key="parent" ref="1005"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">117</int>
-						<reference key="object" ref="631235922"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="297901003"/>
-						</array>
-						<reference key="parent" ref="1061424173"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">118</int>
-						<reference key="object" ref="297901003"/>
-						<reference key="parent" ref="631235922"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">76</int>
@@ -1452,19 +1366,6 @@
 						<int key="objectID">77</int>
 						<reference key="object" ref="864411863"/>
 						<reference key="parent" ref="455590945"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">113</int>
-						<reference key="object" ref="604084295"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="375697799"/>
-						</array>
-						<reference key="parent" ref="1061424173"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">114</int>
-						<reference key="object" ref="375697799"/>
-						<reference key="parent" ref="604084295"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">44</int>
@@ -1522,10 +1423,6 @@
 				<string key="104.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="111.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="113.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="114.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="117.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="118.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1612,6 +1509,7 @@
 				<string key="76.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="77.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="82.CustomClassName">MHPDFThumbnailView</string>
 				<string key="82.IBPluginDependency">com.apple.pdfkit.ibplugin</string>
 				<string key="84.CustomClassName">HHValidatedButton</string>
 				<object class="NSMutableDictionary" key="84.IBAttributePlaceholdersKey">
@@ -1651,6 +1549,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/HHValidatedButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MHPDFThumbnailView</string>
+					<string key="superclassName">PDFThumbnailView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MHPDFThumbnailView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1917,7 +1823,6 @@
 			<string key="downArrow">{512, 512}</string>
 			<string key="no_pdf_relief">{512, 512}</string>
 			<string key="printIcon">{512, 512}</string>
-			<string key="resizeImage">{167, 167}</string>
 			<string key="upArrow">{512, 512}</string>
 			<string key="zoomIn">{512, 512}</string>
 			<string key="zoomOut">{512, 512}</string>
