@@ -31,6 +31,8 @@
 #import "MHLineNumber.h"
 #import "NSString+FileTypes.h"
 
+#import "TPPasteTableConfigureWindowController.h"
+
 #import "MHPlaceholderAttachment.h"
 #import "MHFileReader.h"
 #import "externs.h"
@@ -2670,55 +2672,80 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (IBAction) pasteTable:(id)sender
 {
-  NSMutableString *stringToPaste = [NSMutableString string];;
   NSPasteboard *pboard = [NSPasteboard generalPasteboard];
   if ( [[pboard types] containsObject:NSStringPboardType] ) {
     NSString *rawstring = [pboard stringForType:NSStringPboardType];
-    NSArray *rows = [rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    _pastingRows = [[rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] retain];
+    // pop up a sheet asking for the column separator
+    TPPasteTableConfigureWindowController *pasteConfig = [[[TPPasteTableConfigureWindowController alloc] init] autorelease];
     
-    // check max columns
-    NSInteger columnCount = 0;
-    for (NSString *r in rows){
-      NSArray *cols = [r componentsSeparatedByString:@"\t"];
-      if ([cols count] > columnCount) {
-        columnCount = [cols count];
-      }
-    }
+    [NSApp beginSheet:pasteConfig.window
+       modalForWindow:[self window]
+        modalDelegate:self
+       didEndSelector:@selector(pasteTableConfigureSheetDidEnd:returnCode:contextInfo:) 
+          contextInfo:NULL];
     
-    // prepare table
-    [stringToPaste appendFormat:@"\\begin{table}[htdp]\n"];
-    [stringToPaste appendFormat:@"\\begin{center}\n"];
-    [stringToPaste appendFormat:@"\\begin{tabular}{|"];
-    for (int ii=0; ii<columnCount; ii++) {
-      [stringToPaste appendFormat:@"c|"];
-    }
-    [stringToPaste appendFormat:@"} \\hline\n"];
-    
-    for (NSString *r in rows) {
-      NSArray *cols = [r componentsSeparatedByString:@"\t"];
-      for (int cc=0; cc<columnCount; cc++) {
-        if (cc < [cols count]) {
-          [stringToPaste appendFormat:@" %@ ", [[cols objectAtIndex:cc] texString]];
-        }
-        if (cc+1 < columnCount) {
-          [stringToPaste appendFormat:@"&"];
-        }
-      }
-      [stringToPaste appendFormat:@"\\\\ \\hline\n"];
-    }
-    
-    [stringToPaste appendFormat:@"\\end{tabular}\n"];
-    [stringToPaste appendFormat:@"\\end{center}\n"];
-    [stringToPaste appendFormat:@"\\caption{Pasted Table}\n"];
-    [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
-    [stringToPaste appendFormat:@"\\end{table}\n"];
-    
-    [self insertText:stringToPaste];    
+  }
+}
+  
+- (void)pasteTableConfigureSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+ if (returnCode == NSCancelButton)
+   return;
+   
+  NSMutableString *stringToPaste = [NSMutableString string];
+  if (_pastingRows == nil) {
+    return;
   }
   
+  TPPasteTableConfigureWindowController *pasteConfig = [sheet windowController];
+  NSString *separator = [pasteConfig separator];  
+  
+  // check max columns
+  NSInteger columnCount = 0;
+  for (NSString *r in _pastingRows){
+    NSArray *cols = [r componentsSeparatedByString:separator];
+    if ([cols count] > columnCount) {
+      columnCount = [cols count];
+    }
+  }
+  
+  // prepare table
+  [stringToPaste appendFormat:@"\\begin{table}[htdp]\n"];
+  [stringToPaste appendFormat:@"\\begin{center}\n"];
+  [stringToPaste appendFormat:@"\\begin{tabular}{|"];
+  for (int ii=0; ii<columnCount; ii++) {
+    [stringToPaste appendFormat:@"c|"];
+  }
+  [stringToPaste appendFormat:@"} \\hline\n"];
+  
+  for (NSString *r in _pastingRows) {
+    NSArray *cols = [r componentsSeparatedByString:separator];
+    for (int cc=0; cc<columnCount; cc++) {
+      if (cc < [cols count]) {
+        [stringToPaste appendFormat:@" %@ ", [[cols objectAtIndex:cc] texString]];
+      }
+      if (cc+1 < columnCount) {
+        [stringToPaste appendFormat:@"&"];
+      }
+    }
+    [stringToPaste appendFormat:@"\\\\ \\hline\n"];
+  }
+  
+  [stringToPaste appendFormat:@"\\end{tabular}\n"];
+  [stringToPaste appendFormat:@"\\end{center}\n"];
+  [stringToPaste appendFormat:@"\\caption{Pasted Table}\n"];
+  [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
+  [stringToPaste appendFormat:@"\\end{table}\n"];
+  
+  [self insertText:stringToPaste];      
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+  [_pastingRows release];
+  
 }
 
+     
+     
 
 #pragma mark -
 #pragma mark Insert Table

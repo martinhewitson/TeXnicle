@@ -68,6 +68,8 @@ extern NSString * const TELineNumberClickedNotification;
   MHTableConfigureController *tableConfigureController;
   
   NSInteger zoomFactor;
+  
+  NSArray *_pastingRows;
 }
 
 @property (assign) NSInteger zoomFactor;
@@ -222,7 +224,10 @@ extern NSString * const TELineNumberClickedNotification;
 
 - (void) insertIncludeForFile:(NSString*)aFile atLocation:(NSUInteger)location;
 - (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location;
+
 - (IBAction) pasteTable:(id)sender;
+- (void)pasteTableConfigureSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+
 - (void)insertTableWithRows:(NSUInteger)nrows columns:(NSUInteger)ncols;
 - (IBAction)pasteAsImage:(id)sender;
 - (IBAction)insertInlineMath:(id)sender;
