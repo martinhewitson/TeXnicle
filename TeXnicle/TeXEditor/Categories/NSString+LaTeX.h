@@ -11,6 +11,7 @@
 
 @interface NSString (LaTeX) 
 
+- (NSInteger) beginsWithElementInArray:(NSArray*)terms;
 - (NSArray*) referenceLabels;
 - (NSArray*) citations;
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile;

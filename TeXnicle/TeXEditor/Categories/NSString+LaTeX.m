@@ -14,6 +14,24 @@
 
 @implementation NSString (LaTeX) 
 
+
+- (NSInteger) beginsWithElementInArray:(NSArray*)terms
+{
+  NSLog(@"Checking %@", self);
+  NSLog(@"against: %@", terms);
+  NSInteger idx = 0;
+  for (NSString *term in terms) {
+    NSString *searchTerm = [NSString stringWithFormat:@"%@{", term];
+    NSLog(@"   checking %@", searchTerm);
+    if ([self beginsWith:searchTerm]) {
+      return idx;
+    }
+    idx++;
+  }
+  
+  return NSNotFound;
+}
+
 - (NSArray*) referenceLabels
 {	
 	// scan string for all \label{something} and return the list of 'something's.
