@@ -2894,10 +2894,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
+//  NSLog(@"Clicked on PDF in project...");
   MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  sourcefile = [sourcefile stringByStandardizingPath];  
+  if ([sourcefile isAbsolutePath]) {
+//    NSLog(@"    source file is absolute path");
+    sourcefile = [self.project.folder relativePathTo:sourcefile];
+  }
+//  NSLog(@"  source file: %@", sourcefile);
   FileEntity *file = [self.project fileWithPath:sourcefile];
+//  NSLog(@"    got project file: %@", file);
   [self.openDocuments addDocument:file];
   if (file) {
     [self.openDocuments selectTabForFile:file];
