@@ -1611,14 +1611,28 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
+//  NSLog(@"Clicked on PDF...");
   MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  sourcefile = [sourcefile stringByStandardizingPath]; 
+//  NSLog(@"  source file: %@", sourcefile);
+//  NSLog(@"  my path: %@", [self fileURL]);  
+//  NSLog(@"  my last path component: %@", [[self fileURL] lastPathComponent]);
   if ([sourcefile isEqualToString:[[self fileURL] lastPathComponent]]) {
+//    NSLog(@"    source file is me");
     [self.texEditorViewController.textView goToLine:lineNumber];
   } else {
+//    NSLog(@"    opening source fil");
+    NSURL *path = nil;
     // open the file in a new document
-    NSURL *path = [[[self fileURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent:sourcefile];
+    if ([sourcefile isAbsolutePath]) {
+//      NSLog(@"     source file is absolute path");
+      path = [NSURL fileURLWithPath:sourcefile];
+    } else {
+      path = [[[self fileURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent:sourcefile];
+    }
+//    NSLog(@"        opening %@", path);
     [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:path display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
       // do stuff
       ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
