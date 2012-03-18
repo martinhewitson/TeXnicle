@@ -59,7 +59,6 @@ extern NSString * const TELineNumberClickedNotification;
 	IBOutlet UKTextDocGoToBox *goToLineController;
     
   NSMutableArray *commandList;
-  NSMutableArray *beginList;
   
   NSRange _lastLineRange;
   NSInteger _lastLineNumber;
@@ -80,7 +79,6 @@ extern NSString * const TELineNumberClickedNotification;
 @property (retain) NSMutableArray *syntaxHighlightTags;
 @property (assign) BOOL shiftKeyOn;
 @property (retain) NSMutableArray *commandList;
-@property (retain) NSMutableArray *beginList;
 @property (retain) NSMutableArray *wordHighlightRanges;
 @property (retain) MHTableConfigureController *tableConfigureController;
 

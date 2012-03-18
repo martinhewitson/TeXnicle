@@ -51,7 +51,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 @synthesize highlightingTimer;
 @synthesize shiftKeyOn;
 @synthesize commandList;
-@synthesize beginList;
 @synthesize wordHighlightRanges;
 @synthesize zoomFactor;
 
@@ -68,8 +67,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   self.coloringEngine = nil;
   self.syntaxHighlightTags = nil;
   self.commandList = nil;
-  self.beginList = nil;
-	[newLineCharacterSet release];
+  [newLineCharacterSet release];
 	[whitespaceCharacterSet release];
   [super dealloc];
 }
@@ -184,23 +182,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self.commandList removeAllObjects];
 	[self.commandList addObjectsFromArray:[c componentsSeparatedByString:@" "]];
 	
-	// possible sections and completions for \begin
-	self.beginList = [[[NSMutableArray alloc] init] autorelease];
-	[self.beginList addObject:@"enumerate"];
-	[self.beginList addObject:@"array"];
-	[self.beginList addObject:@"matrix"];
-	[self.beginList addObject:@"itemize"];
-	[self.beginList addObject:@"eqnarray"];
-	[self.beginList addObject:@"description"];
-	[self.beginList addObject:@"quotation"];
-	[self.beginList addObject:@"quote"];
-	[self.beginList addObject:@"verbatim"];
-	[self.beginList addObject:@"verse"];
-	[self.beginList addObject:@"table"];
-	[self.beginList addObject:@"tabular"];
-	[self.beginList addObject:@"center"];
-	[self.beginList addObject:@"figure"];
-	[self.beginList addObject:@"table"];
 }
 
 -(void) turnOffWrapping
@@ -1662,29 +1643,30 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	
 	// If we are completing one of the special cases (ref, cite, include, input, ...)
 	// then we use a custom popup list to present the options
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	id delegate = [self delegate];
   //	NSLog(@"Delegate: %@", delegate);
-	if ([word isEqual:@"\\include{"] || [word isEqual:@"\\input{"]) {
+  if ([word beginsWithElementInArray:[defaults valueForKey:TEFileCommands]] != NSNotFound) {
 		if ([delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
 			[self insertFromList:list];			
 		}
-	} else if ([word beginsWith:@"\\ref{"] || [word beginsWith:@"\\eqref{"]) {
+	} else if ([word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound) {
 		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
       //			NSLog(@"List: %@", list);
 			[self insertFromList:list];			
 		}
-	} else if ([word beginsWith:@"\\cite{"]) {
+	} else if ([word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound) {
     //		NSLog(@"Checking for selector listOfCitations...");
 		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfCitations)];
 			[self insertFromList:list];			
 		}
 	} else if ([word isEqual:@"\\begin{"]) {
-		NSArray *list = self.beginList;
-		[self insertFromList:list];			
+		[self insertFromList:[defaults valueForKey:TEBeginCommands]];			
 	} else if ([word hasPrefix:@"\\"]) {
     NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
     
