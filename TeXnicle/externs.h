@@ -25,7 +25,13 @@ typedef enum {
 } TPWrapStyle;
 
 extern NSString * const TEDocumentTemplates;
+
+// command completion
 extern NSString * const TEUserCommands;
+extern NSString * const TERefCommands;
+extern NSString * const TECiteCommands;
+extern NSString * const TEBeginCommands;
+extern NSString * const TEFileCommands;
 
 extern NSString * const TECursorPositionDidChangeNotification;
 extern NSString * const TELineWrapStyle;
