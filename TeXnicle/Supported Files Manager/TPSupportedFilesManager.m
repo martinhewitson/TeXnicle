@@ -160,6 +160,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 {
   if ([self.supportedFileTypes containsObject:aFile]) {
     [self.supportedFileTypes removeObject:aFile];
+    [self saveTypes];
     
     // post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:TPSupportedFileRemovedNotification
