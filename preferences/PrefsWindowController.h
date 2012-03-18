@@ -28,6 +28,11 @@
 
   
   IBOutlet NSTableView *userCommandsTable;
+  IBOutlet NSTableView *refCommandsTable;
+  IBOutlet NSTableView *citeCommandsTable;
+  IBOutlet NSTableView *beginCommandsTable;
+  IBOutlet NSTableView *fileCommandsTable;
+  
 	IBOutlet NSArrayController *userCommandsController;
   	
 	IBOutlet NSTextField *docFont;
@@ -105,6 +110,8 @@
 #pragma mark Control 
 
 
+- (NSString*)formatNewCommand:(NSString*)userInput;
+- (void)editSelectedInTableView:(NSTableView*)aTableView;
 
 - (IBAction) insertSpacesForTabsChanged:(id)sender;
 
@@ -121,5 +128,25 @@
 
 - (IBAction) browseForGSExecutable:(id)sender;
 - (IBAction) browseForPDFLatexExecutable:(id)sender;
+
+#pragma mark -
+#pragma mark Cite Command Control
+- (IBAction)newCiteCommand:(id)sender;
+- (IBAction)deleteSelectedCiteCommand:(id)sender;
+
+#pragma mark -
+#pragma mark Ref Command Control
+- (IBAction)newRefCommand:(id)sender;
+- (IBAction)deleteSelectedRefCommand:(id)sender;
+
+#pragma mark -
+#pragma mark File Command Control
+- (IBAction)newFileCommand:(id)sender;
+- (IBAction)deleteSelectedFileCommand:(id)sender;
+
+#pragma mark -
+#pragma mark Begin Command Control
+- (IBAction)newBeginCommand:(id)sender;
+- (IBAction)deleteSelectedBeginCommand:(id)sender;
 
 @end

@@ -215,17 +215,227 @@
 
 -(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *newCommand = [self formatNewCommand:object];
   if (tableView == userCommandsTable) {
-    NSString *newCommand = object;
-    newCommand = [newCommand stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    if (![newCommand beginsWith:@"\\"]) {
-      newCommand = [@"\\" stringByAppendingString:newCommand];
+    if (row >= 0 && row < [[userCommandsController arrangedObjects] count]) {
       [[[userCommandsController arrangedObjects] objectAtIndex:row] setValue:newCommand forKey:@"Name"];
     }
+  } else if (tableView == citeCommandsTable) {
+    NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+    if (row >= 0 && row < [commands count]) {
+      [commands replaceObjectAtIndex:row withObject:newCommand];
+      [defaults setObject:commands forKey:TECiteCommands];
+    }
+  } else if (tableView == refCommandsTable) {
+    NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+    if (row >= 0 && row < [commands count]) {
+      [commands replaceObjectAtIndex:row withObject:newCommand];
+      [defaults setObject:commands forKey:TERefCommands];
+    }
+  } else if (tableView == fileCommandsTable) {
+    NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+    if (row >= 0 && row < [commands count]) {
+      [commands replaceObjectAtIndex:row withObject:newCommand];
+      [defaults setObject:commands forKey:TEFileCommands];
+    }
+  } else if (tableView == beginCommandsTable) {
+    NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+    if (row >= 0 && row < [commands count]) {
+      newCommand = [newCommand stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+      [commands replaceObjectAtIndex:row withObject:newCommand];
+      [defaults setObject:commands forKey:TEBeginCommands];
+    }
+  }
+
+  [defaults synchronize];
+}
+
+- (NSString*)formatNewCommand:(NSString*)userInput
+{
+  userInput = [userInput stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+  if (![userInput beginsWith:@"\\"]) {
+    userInput = [@"\\" stringByAppendingString:userInput];
+  }
+  return userInput;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if (tableView == citeCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TECiteCommands];
+    if (row >= 0 && row < [commands count]) {
+      return [commands objectAtIndex:row];
+    }
+  } else if (tableView == refCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TERefCommands];
+    if (row >= 0 && row < [commands count]) {
+      return [commands objectAtIndex:row];
+    }
+  } else if (tableView == fileCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TEFileCommands];
+    if (row >= 0 && row < [commands count]) {
+      return [commands objectAtIndex:row];
+    }
+  } else if (tableView == beginCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TEBeginCommands];
+    if (row >= 0 && row < [commands count]) {
+      return [commands objectAtIndex:row];
+    }
+  }
+
+  
+  return nil;
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if (tableView == citeCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TECiteCommands];
+    return [commands count];
+  } else if (tableView == refCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TERefCommands];
+    return [commands count];
+  } else if (tableView == fileCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TEFileCommands];
+    return [commands count];
+  } else if (tableView == beginCommandsTable) {
+    NSArray *commands = [defaults valueForKey:TEBeginCommands];
+    return [commands count];
+  }
+
+  
+  return 0;
+}
+
+#pragma mark -
+#pragma mark Cite Command Control
+
+- (void)editSelectedInTableView:(NSTableView*)aTableView
+{
+  NSInteger row = [aTableView selectedRow];
+  if (row >= 0 && row != NSNotFound) {
+    [aTableView scrollRowToVisible:row];
+    [aTableView editColumn:0 row:row withEvent:nil select:YES];
+  }
+}
+
+- (IBAction)newCiteCommand:(id)sender
+{
+  NSString *newCommand = @"\\newCite";
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+  [commands addObject:newCommand];
+  [defaults setObject:commands forKey:TECiteCommands];
+  [defaults synchronize];
+  [citeCommandsTable reloadData];
+  [citeCommandsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:[commands count]-1] byExtendingSelection:NO];
+  [self performSelector:@selector(editSelectedInTableView:) withObject:citeCommandsTable afterDelay:0];
+}
+
+   
+- (IBAction)deleteSelectedCiteCommand:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+  NSInteger row = [citeCommandsTable selectedRow];
+  if (row >=0 && row < [commands count]) {
+    [commands removeObjectAtIndex:row];
+    [defaults setObject:commands forKey:TECiteCommands];
+    [defaults synchronize];
+    [citeCommandsTable reloadData];
+  }
+}
+
+#pragma mark -
+#pragma mark Ref Command Control
+
+- (IBAction)newRefCommand:(id)sender
+{
+  NSString *newCommand = @"\\newRef";
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+  [commands addObject:newCommand];
+  [defaults setObject:commands forKey:TERefCommands];
+  [defaults synchronize];
+  [refCommandsTable reloadData];
+  [refCommandsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:[commands count]-1] byExtendingSelection:NO];
+  [self performSelector:@selector(editSelectedInTableView:) withObject:refCommandsTable afterDelay:0];
+}
+
+- (IBAction)deleteSelectedRefCommand:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+  NSInteger row = [refCommandsTable selectedRow];
+  if (row >=0 && row < [commands count]) {
+    [commands removeObjectAtIndex:row];
+    [defaults setObject:commands forKey:TERefCommands];
+    [defaults synchronize];
+    [refCommandsTable reloadData];
   }
 }
 
 
+#pragma mark -
+#pragma mark File Command Control
+
+- (IBAction)newFileCommand:(id)sender
+{
+  NSString *newCommand = @"\\newFile";
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+  [commands addObject:newCommand];
+  [defaults setObject:commands forKey:TEFileCommands];
+  [defaults synchronize];
+  [fileCommandsTable reloadData];
+  [fileCommandsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:[commands count]-1] byExtendingSelection:NO];
+  [self performSelector:@selector(editSelectedInTableView:) withObject:fileCommandsTable afterDelay:0];
+}
+
+- (IBAction)deleteSelectedFileCommand:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+  NSInteger row = [fileCommandsTable selectedRow];
+  if (row >=0 && row < [commands count]) {
+    [commands removeObjectAtIndex:row];
+    [defaults setObject:commands forKey:TEFileCommands];
+    [defaults synchronize];
+    [fileCommandsTable reloadData];
+  }
+}
+
+#pragma mark -
+#pragma mark Begin Command Control
+
+- (IBAction)newBeginCommand:(id)sender
+{
+  NSString *newCommand = @"newBegin";
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+  [commands addObject:newCommand];
+  [defaults setObject:commands forKey:TEBeginCommands];
+  [defaults synchronize];
+  [beginCommandsTable reloadData];
+  [beginCommandsTable selectRowIndexes:[NSIndexSet indexSetWithIndex:[commands count]-1] byExtendingSelection:NO];
+  [self performSelector:@selector(editSelectedInTableView:) withObject:beginCommandsTable afterDelay:0];
+}
+
+- (IBAction)deleteSelectedBeginCommand:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+  NSInteger row = [beginCommandsTable selectedRow];
+  if (row >=0 && row < [commands count]) {
+    [commands removeObjectAtIndex:row];
+    [defaults setObject:commands forKey:TEBeginCommands];
+    [defaults synchronize];
+    [beginCommandsTable reloadData];
+  }
+}
 
 #pragma mark -
 #pragma mark Control 
