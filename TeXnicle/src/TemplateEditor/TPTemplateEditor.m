@@ -74,6 +74,7 @@
 - (void)setFilename:(NSString*)aFilename
 {
   _filename = aFilename;
+  [self.filenameField setStringValue:_filename];
 }
 
 - (NSString*)filename
