@@ -153,4 +153,14 @@
   return fetchResults;
 }
 
+- (BOOL) hasChanges
+{
+  for (FileEntity *file in self.items) {
+    if ([file hasChanges]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
 @end

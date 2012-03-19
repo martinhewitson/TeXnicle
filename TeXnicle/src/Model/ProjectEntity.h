@@ -31,5 +31,6 @@
 
 - (NSArray*)folders;
 - (void) setupSettings;
+- (BOOL) hasChanges;
 
 @end
