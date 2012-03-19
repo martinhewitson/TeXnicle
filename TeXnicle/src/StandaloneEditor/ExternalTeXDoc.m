@@ -75,6 +75,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 @synthesize templateEditor;
 
+@synthesize liveUpdateTimer;
+
 - (id) init
 {
   self = [super init];
@@ -293,6 +295,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
       && ([self.texEditorViewController.textView string] == nil || [[self.texEditorViewController.textView string] length]==0)) {
     [self performSelector:@selector(showTemplatesSheet) withObject:nil afterDelay:0];    
   }
+  
+  _building = NO;
+  _liveUpdate = NO;
+  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  
 }
 
 
@@ -458,6 +465,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 - (void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.liveUpdateTimer invalidate];
+  self.liveUpdateTimer = nil;
   self.fileLoadDate = nil;
   self.fileMonitor = nil;
   self.engineManager = nil;
@@ -1399,7 +1408,17 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 {
 //  NSLog(@"Building...");
   [self.miniConsole setAnimating:YES];
+  _building = YES;
   [self.engineManager compile];
+}
+
+- (IBAction)liveUpdate:(id)sender
+{
+  if ([sender state] == NSOnState) {
+    _liveUpdate = YES;
+  } else {
+    _liveUpdate = NO;
+  }
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
@@ -1412,6 +1431,21 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
       [self openPDF:self];
     }
   }
+  _building = NO;
+  lastBuildDate = [NSDate date];
+}
+
+- (BOOL)hasChanges
+{
+  return ![[self.documentData string] isEqualToString:[self.texEditorViewController.textView string]];
+}
+
+- (void)doLiveBuild
+{
+  if (!_building && _liveUpdate && [self hasChanges] && [self.pdfViewerController hasDocument]) {
+    [self saveDocument:self];
+    [self build];
+  }  
 }
 
 - (IBAction)openWithSystemPDFViewer:(id)sender
@@ -1542,6 +1576,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 -(NSNumber*)nCompile
 {
+  if (_liveUpdate) {
+    return [NSNumber numberWithInt:1];
+  }
+  
   return [self.settings valueForKey:@"nCompile"];  
 }
 

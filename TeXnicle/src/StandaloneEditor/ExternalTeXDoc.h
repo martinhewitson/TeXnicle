@@ -107,7 +107,15 @@
   NSStringEncoding _encoding;
   
   TPTemplateEditor *templateEditor;
+  
+  
+  BOOL _liveUpdate;
+  BOOL _building;
+  NSDate *lastBuildDate;
+  NSTimer *liveUpdateTimer;
 }
+
+@property (retain) NSTimer *liveUpdateTimer;
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 
@@ -191,6 +199,11 @@
 - (IBAction) buildAndView:(id)sender;
 - (IBAction) buildProject:(id)sender;
 - (void) build;
+
+- (IBAction)liveUpdate:(id)sender;
+- (BOOL)hasChanges;
+- (void)doLiveBuild;
+
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote;
 - (IBAction) openPDF:(id)sender;
 - (void) showDocument;
