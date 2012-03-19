@@ -135,7 +135,13 @@
   PDFViewer *pdfViewer;
   
   TPTemplateEditor *templateEditor;
+  
+  BOOL _liveUpdate;
+  BOOL _building;
+  NSTimer *liveUpdateTimer;
 }
+
+@property (retain) NSTimer *liveUpdateTimer;
 
 @property (retain) TPDocumentOutlineViewController *documentOutlineViewcontroller;
 @property (assign) IBOutlet NSView *documentOutlineViewContainer;
@@ -258,6 +264,10 @@
 - (IBAction) projectTypeChanged:(id)sender;
 - (IBAction) buildAndView:(id)sender;
 - (IBAction) buildProject:(id)sender;
+
+- (IBAction)liveUpdate:(id)sender;
+- (void)doLiveBuild;
+
 - (void) build;
 - (IBAction) openPDF:(id)sender;
 - (IBAction)openWithSystemPDFViewer:(id)sender;

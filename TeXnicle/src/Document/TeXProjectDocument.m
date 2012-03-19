@@ -94,6 +94,7 @@
 @synthesize embeddedConsoleContainer;
 @synthesize embeddedConsoleViewController;
 
+@synthesize liveUpdateTimer;
 
 - (void) dealloc
 {
@@ -120,12 +121,17 @@
   self.pdfViewer = nil;
   self.miniConsole = nil;
   self.embeddedConsoleViewController = nil;
+  [self.liveUpdateTimer invalidate];
+  self.liveUpdateTimer = nil;
   
   [super dealloc];
 }
 
 - (void) awakeFromNib
 {
+  _building = NO;
+  _liveUpdate = NO;
+  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
 }
 
 - (id)init
@@ -1766,8 +1772,17 @@
 {
   [self.miniConsole setAnimating:YES];
   // setup the engine
+  _building = YES;
   [self.engineManager compile];
-  
+}
+
+- (IBAction)liveUpdate:(id)sender
+{
+  if ([sender state] == NSOnState) {
+    _liveUpdate = YES;
+  } else {
+    _liveUpdate = NO;
+  }
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
@@ -1779,7 +1794,16 @@
     if (openPDFAfterBuild) {
       [self openPDF:self];
     }
-  }
+  }    
+  _building = NO;
+}
+
+- (void)doLiveBuild
+{
+  if (!_building && _liveUpdate && [self.project hasChanges]) {
+		[self saveDocument:self];
+    [self build];
+  }  
 }
 
 - (NSString*)workingDirectory
@@ -3193,6 +3217,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 -(NSNumber*)nCompile
 {
+  if (_liveUpdate)
+    return [NSNumber numberWithInt:1];
+  
   return self.project.settings.nCompile;
 }
 
