@@ -50,6 +50,7 @@
 - (void) dismiss;
 - (void) setupWindow;
 - (NSArray*) filteredEntries;
--(NSWindow*)window;
+- (NSWindow*)window;
+- (void)setList:(NSArray*)aList;
 
 @end

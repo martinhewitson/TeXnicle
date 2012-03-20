@@ -50,6 +50,12 @@
 	return self;
 }
 
+- (void)setList:(NSArray*)aList
+{
+  [entries removeAllObjects];
+  [entries addObjectsFromArray:aList];
+  [table reloadData];
+}
 
 - (void) awakeFromNib
 {
@@ -64,8 +70,8 @@
 		CGFloat width = 200.0;
 		CGFloat height = MAX(150.0, 20.0 + rowHeight*(1+[entries count]));
 		
-		if (height > 500)
-			height = 500;
+		if (height > 200)
+			height = 200;
 		
 //    NSLog(@"Row height: %f", rowHeight);
 //    NSLog(@"Table height: %f", 20.0 + rowHeight*(1+[entries count]));
@@ -96,7 +102,16 @@
 		
 		width = MAX(width, maxWidth);
     
+    MAWindowPosition pos = MAPositionBottomRight;
 		
+    // compare point on screen coordinates to check if the 
+    // window will be off the bottom of the screen
+    NSPoint screenPoint = [parentWindow convertBaseToScreen:point]; 
+    CGFloat y = screenPoint.y - height;
+    if (y<0) {
+      pos = MAPositionTopRight;
+    }
+    
 //		NSLog(@"Setting table bounds: %f x %f", width , height);
 //		NSLog(@"Attaching window at: %f x %f", point.x , point.y);
 		
@@ -104,11 +119,11 @@
 		attachedWindow = [[MAAttachedWindow alloc] initWithView:view
 																						attachedToPoint:point 
 																									 inWindow:parentWindow 
-																										 onSide:MAPositionAutomatic 
-																								 atDistance:0.0];
+																										 onSide:pos 
+																								 atDistance:5.0];
 		[attachedWindow setBorderColor:[NSColor clearColor]];
-		[attachedWindow setBackgroundColor:[NSColor lightGrayColor]];
-		[attachedWindow setViewMargin:0.0];
+		[attachedWindow setBackgroundColor:[NSColor whiteColor]];
+		[attachedWindow setViewMargin:10.0];
 		[attachedWindow setBorderWidth:3.0];
 		[attachedWindow setCornerRadius:10.0];
 		[attachedWindow setHasArrow:NO];
@@ -124,6 +139,11 @@
     [table setNextKeyView:searchField];
     
 	}
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+  [self.delegate keyDown:theEvent];
 }
 
 - (void) dealloc
