@@ -17,12 +17,12 @@
 
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms
 {
-  NSLog(@"Checking %@", self);
-  NSLog(@"against: %@", terms);
+//  NSLog(@"Checking %@", self);
+//  NSLog(@"against: %@", terms);
   NSInteger idx = 0;
   for (NSString *term in terms) {
     NSString *searchTerm = [NSString stringWithFormat:@"%@{", term];
-    NSLog(@"   checking %@", searchTerm);
+//    NSLog(@"   checking %@", searchTerm);
     if ([self beginsWith:searchTerm]) {
       return idx;
     }
@@ -88,6 +88,7 @@
 
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
 {
+  NSLog(@"Checking for bib files included in %@", sourceFile);
   NSMutableArray *citations = [NSMutableArray array];
   
 	// search for \\bibliography{
@@ -102,7 +103,18 @@
           arg = [arg stringByAppendingPathExtension:@"bib"];
         }
       }
-      NSString *bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
+      
+      NSLog(@"Found \\bibliography with argument %@", arg);
+      NSString *bibpath = nil;
+      if ([arg isAbsolutePath]) {
+        NSLog(@"   path is absolute");
+        bibpath = arg;
+      } else {        
+        NSLog(@"   path is relative to project");
+        bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
+      }
+      NSLog(@"Bib file is %@", bibpath);
+      
       MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
       NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
       if (bibcontents && [bibcontents length]>0) {
