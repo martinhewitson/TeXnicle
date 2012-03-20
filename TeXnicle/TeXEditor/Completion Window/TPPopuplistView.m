@@ -61,11 +61,13 @@
 - (void) keyDown:(NSEvent *)theEvent
 {
 //	NSLog(@"Key down on list %@", theEvent);
-	
+//	NSLog(@"Delegate: %@", delegate);
+  
 	// escape key dismisses the window
 	if ([theEvent keyCode] == 53) {
 		if ([delegate respondsToSelector:@selector(dismiss)]) {
 			[delegate performSelector:@selector(dismiss)];
+      return;
 		}
 	}
 	
@@ -74,9 +76,13 @@
 		if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
 			NSInteger row = [table selectedRow];
 			[delegate performSelector:@selector(userSelectedRow:) withObject:[NSNumber numberWithInteger:row]];
+      return;
 		}		
 	}
 	
+  // pass to delegate
+  [delegate keyDown:theEvent];
+  
 }
 
 
