@@ -1799,7 +1799,7 @@
 }
 
 - (void)doLiveBuild
-{
+{  
   if (!_building && _liveUpdate && [self.project hasChanges]) {
 		[self saveDocument:self];
     [self build];
