@@ -34,6 +34,7 @@ NSString * const TECiteCommands = @"TECiteCommands";
 NSString * const TEBeginCommands = @"TEBeginCommands";
 NSString * const TEFileCommands = @"TEFileCommands";
 
+NSString * const TEAutomaticallyShowCommandCompletionList = @"TEAutomaticallyShowCommandCompletionList";
 
 NSString * const TPGSPath = @"TPGSPath";
 NSString * const TPPDFLatexPath = @"TPPDFLatexPath";
@@ -159,6 +160,8 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	[beginCommands addObject:@"figure"];
 	[beginCommands addObject:@"table"];
   [defaultValues setObject:beginCommands forKey:TEBeginCommands];
+  
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCommandCompletionList];
   
   // file commands
   NSMutableArray *fileCommands = [NSMutableArray array];

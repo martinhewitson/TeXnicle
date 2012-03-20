@@ -33,6 +33,8 @@ extern NSString * const TECiteCommands;
 extern NSString * const TEBeginCommands;
 extern NSString * const TEFileCommands;
 
+extern NSString * const TEAutomaticallyShowCommandCompletionList;
+
 extern NSString * const TECursorPositionDidChangeNotification;
 extern NSString * const TELineWrapStyle;
 extern NSString * const TELineLength;
