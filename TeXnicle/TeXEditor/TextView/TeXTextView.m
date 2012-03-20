@@ -2100,19 +2100,20 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   NSRange vr = [self getVisibleRange];
   NSInteger idx = NSMaxRange(selRange);
   
-  while (idx < NSMaxRange(vr)) {
+  while (idx>=0 && idx < NSMaxRange(vr)) {
     
     NSRange effRange;
     NSTextAttachment *att = [[self attributedString] attribute:NSAttachmentAttributeName
                                                        atIndex:idx
                                                 effectiveRange:&effRange];
     
-    if (att && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
+    if (att != nil && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
       [self setSelectedRange:NSMakeRange(idx, 1)];
       return;
     }
     idx++;
     
+    // wrap around
     if (idx == NSMaxRange(vr)) {
       idx = vr.location;
     }
