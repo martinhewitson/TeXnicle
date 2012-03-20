@@ -808,21 +808,22 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) completeFromList:(NSArray*)aList
 {
-//  NSLog(@"Completing from list %@", aList);
 	if ([aList count]==0) 
 		return;
 	
 	NSPoint point = [self listPointForCurrentWord];
-	//			NSLog(@"Point for word:%@", NSStringFromPoint(point));
 	NSPoint wp = [self convertPoint:point toView:nil];
-	[self clearSpellingList];
-	popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
-																													 atPoint:wp
-																										inParentWindow:[self window]
-																															mode:TPPopupListReplace
-																														 title:@"Replace..."];
-	[popupList setDelegate:self];
-	[popupList showPopup];	
+  if (popupList == nil) {
+    popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
+                                                             atPoint:wp
+                                                      inParentWindow:[self window]
+                                                                mode:TPPopupListReplace
+                                                               title:@"Replace..."];
+    [popupList setDelegate:self];
+    [popupList showPopup];	
+  } else {
+    [popupList setList:aList];
+  }
 }
 
 - (void) insertFromList:(NSArray*)aList
@@ -870,7 +871,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) clearSpellingList
 {
-//  NSLog(@"Clearing old spelling list %@", popupList);
 	if (popupList) {
     [popupList dismiss];
 		[popupList release];
@@ -887,6 +887,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self shouldChangeTextInRange:rr replacementString:replacement];
 	[self replaceCharactersInRange:rr withString:replacement];
 	[self clearSpellingList];
+  [self colorVisibleText];
 }
 
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord
@@ -898,6 +899,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self shouldChangeTextInRange:sel replacementString:replacement];
 	[self replaceCharactersInRange:sel withString:replacement];
 	[self clearSpellingList];
+  [self colorVisibleText];
 }
 
 - (void) replaceWordAtCurrentLocationWith:(NSString*)aWord
@@ -909,6 +911,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	[self shouldChangeTextInRange:sel replacementString:replacement];
 	[self replaceCharactersInRange:sel withString:replacement];
 	[self clearSpellingList];
+  [self colorVisibleText];
 }
 
 
@@ -1176,7 +1179,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   if ([word length] == 0) {
     return nil;
   }
-  if ([word characterAtIndex:0] == '#') {
+  if ([word characterAtIndex:0] == '#' ||
+      [word characterAtIndex:0] == '\\') {
     return word;
   }
   
@@ -1929,6 +1933,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
     
 		[super insertText:aString];
     
+    // check if this is a short-cut code command
     NSString *command = [self currentCommand];
     if (command != nil && [command length] > 0) {
       NSString *code = [self codeForCommand:command];
@@ -1936,11 +1941,52 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
         NSRange commandRange = [self rangeForCurrentCommand];
         [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] forCharacterRange:commandRange];
       }
-    }
-    
+    }    
   }
   
 	[self wrapLine];
+}
+
+
+- (void)didChangeText
+{
+  [super didChangeText];
+  
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
+    NSString *command = [self currentCommand];
+    if (command != nil && [command length] > 0) {
+      NSArray *commands = [self commandsMatchingWord:command];
+      if ([commands count]>0) {
+        [self completeFromList:commands];
+        return;
+      }
+    }
+  }  
+  
+  // dismiss the popup list
+  [popupList dismiss];
+}
+
+
+- (NSArray*)commandsMatchingWord:(NSString*)word
+{
+  if ([word hasPrefix:@"\\"]) {
+    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
+    
+    // get list of user defaults commands
+    list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
+    
+    if ([self.delegate respondsToSelector:@selector(listOfCommands)]) {
+      list = [list arrayByAddingObjectsFromArray:[self.delegate performSelector:@selector(listOfCommands)]];
+    }
+    if ([word length]>1) {
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
+      list = [list filteredArrayUsingPredicate:predicate];			
+    }
+    return list;
+  }
+
+  return nil;
 }
 
 #pragma mark -
@@ -2009,6 +2055,8 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) didDismissPopupList
 {
+  [popupList release];
+  popupList = nil;
 }
 
 
