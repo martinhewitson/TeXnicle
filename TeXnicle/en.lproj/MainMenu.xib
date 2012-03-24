@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2182</string>
+			<string key="NS.object.0">2177</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSMenu</string>
@@ -4092,7 +4092,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">790</int>
+			<int key="maxID">793</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4241,6 +4241,7 @@
 						<string key="clean:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
+						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="toggleStatusView:">id</string>
@@ -4268,6 +4269,10 @@
 						</object>
 						<object class="IBActionInfo" key="endAddToProjectSheet:">
 							<string key="name">endAddToProjectSheet:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="liveUpdate:">
+							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="openPDF:">
@@ -4823,7 +4828,6 @@
 						<string key="findInPDF:">id</string>
 						<string key="printPDF:">id</string>
 						<string key="searchPDF:">id</string>
-						<string key="setThumbSize:">id</string>
 						<string key="showNextResult:">id</string>
 						<string key="showPreviousResult:">id</string>
 						<string key="toggleResultsTable:">id</string>
@@ -4843,10 +4847,6 @@
 						</object>
 						<object class="IBActionInfo" key="searchPDF:">
 							<string key="name">searchPDF:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="setThumbSize:">
-							<string key="name">setThumbSize:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showNextResult:">
@@ -4892,7 +4892,6 @@
 						<string key="searchStatusText">NSTextField</string>
 						<string key="showSearchResultsButton">HHValidatedButton</string>
 						<string key="statusText">NSTextField</string>
-						<string key="thumbSizeSlider">NSSlider</string>
 						<string key="thumbSlideViewController">MHSlidingSplitViewController</string>
 						<string key="toggleThumbsButton">HHValidatedButton</string>
 						<string key="toolbarView">NSView</string>
@@ -4952,10 +4951,6 @@
 						<object class="IBToOneOutletInfo" key="statusText">
 							<string key="name">statusText</string>
 							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="thumbSizeSlider">
-							<string key="name">thumbSizeSlider</string>
-							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="thumbSlideViewController">
 							<string key="name">thumbSlideViewController</string>
@@ -5536,19 +5531,23 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">TeXEditorViewController</string>
 					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">insertTable:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">insertTable:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="insertTable:">id</string>
+						<string key="showErrorMenu:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="insertTable:">
 							<string key="name">insertTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="showErrorMenu:">
+							<string key="name">showErrorMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="containerView">NSView</string>
+						<string key="errorPopup">NSButton</string>
 						<string key="jumpBar">NSView</string>
 						<string key="markerButton">NSButton</string>
 						<string key="scrollView">NSScrollView</string>
@@ -5562,6 +5561,10 @@
 						<object class="IBToOneOutletInfo" key="containerView">
 							<string key="name">containerView</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="errorPopup">
+							<string key="name">errorPopup</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="jumpBar">
 							<string key="name">jumpBar</string>
@@ -5624,6 +5627,7 @@
 						<string key="findSource:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
+						<string key="liveUpdate:">id</string>
 						<string key="locateItem:">id</string>
 						<string key="newFile:">id</string>
 						<string key="newFolder:">id</string>
@@ -5727,6 +5731,10 @@
 						</object>
 						<object class="IBActionInfo" key="jumpToSelectedBookmark:">
 							<string key="name">jumpToSelectedBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="liveUpdate:">
+							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="locateItem:">
@@ -5996,6 +6004,7 @@
 					<string key="className">TeXTextView</string>
 					<string key="superclassName">NSTextView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="checkSyntax:">id</string>
 						<string key="collapseAll:">id</string>
 						<string key="commentSelection:">id</string>
 						<string key="complete:">id</string>
@@ -6019,6 +6028,10 @@
 						<string key="zoomOut:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="checkSyntax:">
+							<string key="name">checkSyntax:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="collapseAll:">
 							<string key="name">collapseAll:</string>
 							<string key="candidateClassName">id</string>
