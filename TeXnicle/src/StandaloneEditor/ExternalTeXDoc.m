@@ -196,6 +196,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
   [self.texEditorViewController enableEditor];
+  [self.texEditorViewController setPerformSyntaxCheck:YES];
   
 	if (self.documentData) {
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
