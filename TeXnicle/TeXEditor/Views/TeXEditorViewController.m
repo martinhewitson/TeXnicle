@@ -34,6 +34,7 @@
 @synthesize performSyntaxCheck;
 @synthesize errorImage;
 @synthesize noErrorImage;
+@synthesize checkFailedImage;
 
 - (id) init
 {
@@ -50,6 +51,7 @@
     // Initialization code here.
     self.errorImage = [NSImage imageNamed:@"error"];
     self.noErrorImage = [NSImage imageNamed:@"noerror"];  
+    self.checkFailedImage = [NSImage imageNamed:@"checkfailed"];
   }
   
   return self;
@@ -64,6 +66,7 @@
   self.syntaxCheckTimer = nil;
   self.errorImage = nil;
   self.noErrorImage = nil;
+  self.checkFailedImage = nil;
   self.checker = nil;
   self.textView.delegate = nil;
   [sectionListController deactivate];
@@ -126,6 +129,12 @@
   [self.markerButton setHidden:YES];
   [self.unfoldButton setHidden:YES];
   [containerView setNeedsDisplay:YES];
+}
+
+- (void) setCheckFailed
+{
+  [self.errorPopup setImage:self.checkFailedImage];
+  self.errors = nil;
 }
 
 - (void) setHasErrors:(BOOL)state
@@ -287,6 +296,12 @@
       }
     }
   }
+}
+
+- (void)syntaxCheckerCheckFailed:(TPSyntaxChecker *)checker
+{
+  _checkingSyntax = NO;
+  [self setCheckFailed];
 }
 
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker

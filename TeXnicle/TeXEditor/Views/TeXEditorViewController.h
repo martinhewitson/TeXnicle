@@ -43,10 +43,12 @@
   
   NSImage *errorImage;
   NSImage *noErrorImage;
+  NSImage *checkFailedImage;
 }
 
 @property (retain) NSImage *errorImage;
 @property (retain) NSImage *noErrorImage;
+@property (retain) NSImage *checkFailedImage;
 @property (assign) BOOL performSyntaxCheck;
 @property (retain) NSTimer *syntaxCheckTimer;
 @property (retain) TPSyntaxChecker *checker;
@@ -68,6 +70,7 @@
 
 - (IBAction)showErrorMenu:(id)sender;
 - (void) setHasErrors:(BOOL)state;
+- (void) setCheckFailed;
 - (void)jumpToLine:(NSMenuItem*)anItem;
 
 - (void) setString:(NSString*)aString;
