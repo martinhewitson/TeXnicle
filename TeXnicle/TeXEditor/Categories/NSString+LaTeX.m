@@ -15,6 +15,27 @@
 @implementation NSString (LaTeX) 
 
 
++ (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix
+{
+  NSString *  result;
+  CFUUIDRef   uuid;
+  CFStringRef uuidStr;
+  
+  uuid = CFUUIDCreate(NULL);
+  assert(uuid != NULL);
+  
+  uuidStr = CFUUIDCreateString(NULL, uuid);
+  assert(uuidStr != NULL);
+  
+  result = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%@", prefix, uuidStr]];
+  assert(result != nil);
+  
+  CFRelease(uuidStr);
+  CFRelease(uuid);
+  
+  return result;
+}
+
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms
 {
 //  NSLog(@"Checking %@", self);
@@ -97,32 +118,35 @@
   if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
     NSInteger idx = [scanner scanLocation];
     if (idx < [self length]) {
-      NSString *arg = [self parseArgumentStartingAt:&idx];
-      if (arg && [arg length]>0) {
-        if ([[arg pathExtension] length] == 0) {
-          arg = [arg stringByAppendingPathExtension:@"bib"];
+      NSString *argString = [self parseArgumentStartingAt:&idx];
+      NSArray *args = [argString componentsSeparatedByString:@","];
+      for (NSString *arg in args) {
+        if (arg && [arg length]>0) {
+          if ([[arg pathExtension] length] == 0) {
+            arg = [arg stringByAppendingPathExtension:@"bib"];
+          }
         }
-      }
-      
-      NSLog(@"Found \\bibliography with argument %@", arg);
-      NSString *bibpath = nil;
-      if ([arg isAbsolutePath]) {
-        NSLog(@"   path is absolute");
-        bibpath = arg;
-      } else {        
-        NSLog(@"   path is relative to project");
-        bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
-      }
-      NSLog(@"Bib file is %@", bibpath);
-      
-      MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
-      NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
-      if (bibcontents && [bibcontents length]>0) {
-        NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
-        for (BibliographyEntry *entry in entries) {
-          [citations addObject:entry];
+        
+        NSLog(@"Found \\bibliography with argument %@", arg);
+        NSString *bibpath = nil;
+        if ([arg isAbsolutePath]) {
+          NSLog(@"   path is absolute");
+          bibpath = arg;
+        } else {        
+          NSLog(@"   path is relative to project");
+          bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
         }
-      }      
+        NSLog(@"Bib file is %@", bibpath);
+        
+        MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
+        NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
+        if (bibcontents && [bibcontents length]>0) {
+          NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
+          for (BibliographyEntry *entry in entries) {
+            [citations addObject:entry];
+          }
+        }    
+      }
     }  
   }  
   

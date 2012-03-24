@@ -11,6 +11,7 @@
 
 @interface NSString (LaTeX) 
 
++ (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms;
 - (NSArray*) referenceLabels;
 - (NSArray*) citations;
