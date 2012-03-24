@@ -23,6 +23,7 @@
 #import "TPProjectTemplateViewer.h"
 #import "TPProjectTemplate.h"
 #import "TPProjectTemplateListViewer.h"
+#import "TPSyntaxChecker.h"
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -35,6 +36,10 @@ NSString * const TEBeginCommands = @"TEBeginCommands";
 NSString * const TEFileCommands = @"TEFileCommands";
 
 NSString * const TEAutomaticallyShowCommandCompletionList = @"TEAutomaticallyShowCommandCompletionList";
+
+NSString * const TPCheckSyntax = @"TPCheckSyntax";
+NSString * const TPCheckSyntaxErrors = @"TPCheckSyntaxErrors";
+NSString * const TPChkTeXpath = @"TPChkTeXpath";
 
 NSString * const TPGSPath = @"TPGSPath";
 NSString * const TPPDFLatexPath = @"TPPDFLatexPath";
@@ -161,7 +166,13 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	[beginCommands addObject:@"table"];
   [defaultValues setObject:beginCommands forKey:TEBeginCommands];
   
+  // automaticall show completion list
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCommandCompletionList];
+  
+  // check syntax
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPCheckSyntax];
+  [defaultValues setObject:[TPSyntaxChecker defaultSyntaxErrors] forKey:TPCheckSyntaxErrors];
+  [defaultValues setObject:@"/usr/texbin/chktex" forKey:TPChkTeXpath];
   
   // file commands
   NSMutableArray *fileCommands = [NSMutableArray array];
@@ -347,10 +358,6 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 //  NSLog(@"Application open file %@", filename);
 	NSError *error = nil;
   
-  if (![[filename pathExtension] isEqualToString:@"tex"]) {
-    // do nothing, but don't cause a fuss
-    return YES;
-  }
   
   TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename]
                                                                                   display:YES
