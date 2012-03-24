@@ -83,6 +83,12 @@
   TPProjectTemplateManager *projectTemplateManager;
   NSView *projectTemplateManagerContainer;
   
+  IBOutlet NSTableView *syntaxErrorsTable;
+  IBOutlet NSTextField *chktexBinaryPath;
+  IBOutlet NSButton *chktexBinaryPathBrowse;
+  IBOutlet NSButton *activateAllChecksButton;
+  IBOutlet NSButton *deactivateAllChecksButton;
+  IBOutlet NSButton *defaultChecksButton;
 }
 
 @property (retain) TPProjectTemplateManager *projectTemplateManager;
@@ -100,6 +106,15 @@
 
 - (IBAction)selectEngineName:(id)sender;
 - (NSString*)engineName;
+
+#pragma mark -
+#pragma mark Syntax check control
+
+- (IBAction)syntaxCheckStateChanged:(id)sender;
+- (IBAction)selectChkTeXPath:(id)sender;
+- (IBAction)activateAllErrorChecks:(id)sender;
+- (IBAction)deactivateAllErrorChecks:(id)sender;
+- (IBAction)defaultErrorChecks:(id)sender;
 
 #pragma mark -
 #pragma mark Commands Control

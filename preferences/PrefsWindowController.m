@@ -146,7 +146,7 @@
 					image:[NSImage imageNamed:NSImageNamePreferencesGeneral]];	
 	
   [self addView:engineView 
-					label:@"Engine" 
+					label:@"Typesetting" 
 					image:[NSImage imageNamed:@"engine"]];		
 	
   [self addView:syntaxColorsView 
@@ -195,6 +195,94 @@
   [enginePopup selectItemWithTitle:[self engineName]];
 }
 
+#pragma mark -
+#pragma mark Syntax check control
+
+- (IBAction)syntaxCheckStateChanged:(id)sender
+{
+  if ([sender state] == NSOnState) {
+    [syntaxErrorsTable setEnabled:YES];
+    [chktexBinaryPath setEnabled:YES];
+    [chktexBinaryPathBrowse setEnabled:YES];
+    [activateAllChecksButton setEnabled:YES];
+    [deactivateAllChecksButton setEnabled:YES];
+    [defaultChecksButton setEnabled:YES];
+  } else {
+    [syntaxErrorsTable setEnabled:NO];
+    [chktexBinaryPath setEnabled:NO];
+    [chktexBinaryPathBrowse setEnabled:NO];
+    [activateAllChecksButton setEnabled:NO];
+    [deactivateAllChecksButton setEnabled:NO];
+    [defaultChecksButton setEnabled:NO];
+  }
+}
+
+- (IBAction)selectChkTeXPath:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  [panel setCanChooseFiles:YES];
+  [panel setCanChooseDirectories:NO];
+  [panel setCanCreateDirectories:NO];
+  [panel setMessage:@"Select binary for chktex"];
+  [panel setPrompt:@"chktex binary"];
+  [panel setRepresentedFilename:[defaults valueForKey:TPChkTeXpath]];
+  [panel setAllowsMultipleSelection:NO];
+  [panel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+    if (result == NSCancelButton) {
+      return;
+    }
+    
+    NSURL *url = [panel URL];
+    [defaults setValue:[url path] forKey:TPChkTeXpath];
+    [defaults synchronize];
+  }];
+}
+
+
+- (IBAction)activateAllErrorChecks:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+  for (NSDictionary *error in errors) {
+    
+    NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"check", 
+                              [error valueForKey:@"code"], @"code", 
+                              [error valueForKey:@"message"], @"message", 
+                              nil];
+    
+    [errors replaceObjectAtIndex:[errors indexOfObject:error] withObject:newError];
+  }
+  
+  [defaults synchronize];
+  [syntaxErrorsTable reloadData];
+}
+
+- (IBAction)deactivateAllErrorChecks:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+  for (NSDictionary *error in errors) {
+    
+    NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"check", 
+                              [error valueForKey:@"code"], @"code", 
+                              [error valueForKey:@"message"], @"message", 
+                              nil];
+    
+    [errors replaceObjectAtIndex:[errors indexOfObject:error] withObject:newError];
+  }
+  
+  [defaults synchronize];
+  [syntaxErrorsTable reloadData];
+}
+
+- (IBAction)defaultErrorChecks:(id)sender
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:[TPSyntaxChecker defaultSyntaxErrors] forKey:TPCheckSyntaxErrors];
+  [defaults synchronize];
+  [syntaxErrorsTable reloadData];
+}
 
 #pragma mark -
 #pragma mark Commands Control
@@ -216,6 +304,23 @@
 -(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  if (tableView == syntaxErrorsTable) {
+    NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+    if (row >= 0 && row < [errors count]) {
+      if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCheckColumn"]) {
+        NSDictionary *error = [errors objectAtIndex:row];
+        NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:object, @"check", 
+                                  [error valueForKey:@"code"], @"code", 
+                                  [error valueForKey:@"message"], @"message", 
+                                  nil];
+        [errors replaceObjectAtIndex:row withObject:newError];
+        [defaults synchronize];
+        return;
+      }
+    }
+  }
+  
   NSString *newCommand = [self formatNewCommand:object];
   if (tableView == userCommandsTable) {
     if (row >= 0 && row < [[userCommandsController arrangedObjects] count]) {
@@ -247,7 +352,7 @@
       [defaults setObject:commands forKey:TEBeginCommands];
     }
   }
-
+  
   [defaults synchronize];
 }
 
@@ -283,6 +388,17 @@
     if (row >= 0 && row < [commands count]) {
       return [commands objectAtIndex:row];
     }
+  } else if (tableView == syntaxErrorsTable) {
+    NSArray *errors = [defaults valueForKey:TPCheckSyntaxErrors];
+    if (row >= 0 && row < [errors count]) {
+      if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCheckColumn"]) {
+        return [[errors objectAtIndex:row] valueForKey:@"check"];
+      } else if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsMessageColumn"]) {
+        return [[errors objectAtIndex:row] valueForKey:@"message"];
+      } else if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCodeColumn"]) {
+        return [[errors objectAtIndex:row] valueForKey:@"code"];
+      }
+    }
   }
 
   
@@ -304,6 +420,8 @@
   } else if (tableView == beginCommandsTable) {
     NSArray *commands = [defaults valueForKey:TEBeginCommands];
     return [commands count];
+  } else if (tableView == syntaxErrorsTable) {
+    return [[defaults valueForKey:TPCheckSyntaxErrors] count]; 
   }
 
   
