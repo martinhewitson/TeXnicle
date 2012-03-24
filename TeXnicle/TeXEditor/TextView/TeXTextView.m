@@ -1555,14 +1555,15 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 					start = kk+1;
 					kk++;
 				}
-				if ([previousLine characterAtIndex:kk]=='}') {
-					end = kk-1;
-					break;
-				}
+        if (kk < [previousLine length]) {
+          if ([previousLine characterAtIndex:kk]=='}') {
+            end = kk-1;
+            break;
+          }
+        }
 			}
-			
 			NSString *insert = nil;
-			if (start < end) {
+			if (start < end && start != NSNotFound && end != NSNotFound) {
 				NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
 				insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
 			}
