@@ -386,6 +386,17 @@
     return;
   }
   
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *chktexPath = [defaults valueForKey:TPChkTeXpath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if (![fm fileExistsAtPath:chktexPath]) {
+    self.errors = nil;
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(syntaxCheckerCheckFailed:)]) {
+      [self.delegate syntaxCheckerCheckFailed:self];
+      return;
+    }
+  }
+    
   if (lacheckTask) {
 		[lacheckTask terminate];
 		[lacheckTask release];		
@@ -398,8 +409,7 @@
   
 	lacheckTask = [[NSTask alloc] init];
   
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[lacheckTask setLaunchPath:[defaults valueForKey:TPChkTeXpath]];
+	[lacheckTask setLaunchPath:chktexPath];
   [lacheckTask setCurrentDirectoryPath:[aPath stringByDeletingLastPathComponent]];
   
 	NSArray *arguments;

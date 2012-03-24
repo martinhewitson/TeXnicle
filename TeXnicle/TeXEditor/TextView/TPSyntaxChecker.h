@@ -12,6 +12,7 @@
 
 @protocol SyntaxCheckerDelegate <NSObject>
 
+- (void)syntaxCheckerCheckFailed:(TPSyntaxChecker*)checker;
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker;
 
 @end
