@@ -11,6 +11,8 @@
 #import "TeXEditorViewController.h"
 #import "TPImageViewerController.h"
 
+extern NSString * const TPOpenDocumentsDidChangeFileNotification;
+
 @class FileEntity;
 @class OpenDocument;
 @class ProjectEntity;

@@ -14,6 +14,8 @@
 #import "NSString+CharacterSize.h"
 #import "DocWindowController.h"
 
+NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDidChangeFileNotification";
+
 @implementation OpenDocumentsManager
 
 @synthesize currentDoc;
@@ -166,6 +168,12 @@
   if ([[aDoc isText] boolValue]) {
     [self.texEditorViewController.textView setNeedsDisplay:YES];
   }
+  
+  NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:aDoc, @"file", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
+                                                      object:self
+                                                    userInfo:dictionary];
+  
 }
 
 - (void)setupViewerForDoc:(FileEntity*)aDoc
