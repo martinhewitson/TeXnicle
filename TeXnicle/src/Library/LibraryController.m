@@ -752,7 +752,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 - (void) newClippingWithCode:(NSString*)someCode
 {
 	NSMutableDictionary *newClipping = [NSMutableDictionary dictionary];
-	[newClipping setObject:someCode forKey:@"Code"];
+	[newClipping setValue:someCode forKey:@"Code"];
   [newClipping setValue:[NSNumber numberWithBool:NO] forKey:@"BuiltIn"];  
   [newClipping setValue:[NSString stringWithUUID] forKey:@"UUID"];
 	[contentsController addObject:newClipping];
