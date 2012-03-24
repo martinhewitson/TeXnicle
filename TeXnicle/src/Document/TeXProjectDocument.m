@@ -255,6 +255,8 @@
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
+  [self.texEditorViewController setPerformSyntaxCheck:YES];
+  
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
 //  NSLog(@"Setup tex editor");
