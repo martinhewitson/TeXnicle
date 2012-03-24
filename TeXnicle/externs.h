@@ -35,6 +35,10 @@ extern NSString * const TEFileCommands;
 
 extern NSString * const TEAutomaticallyShowCommandCompletionList;
 
+extern NSString * const TPCheckSyntax;
+extern NSString * const TPCheckSyntaxErrors;
+extern NSString * const TPChkTeXpath;
+
 extern NSString * const TECursorPositionDidChangeNotification;
 extern NSString * const TELineWrapStyle;
 extern NSString * const TELineLength;
