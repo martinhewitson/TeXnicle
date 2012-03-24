@@ -14,6 +14,7 @@
 #import "TPEnginesEditor.h"
 #import "MHFileReader.h"
 #import "TPProjectTemplateManager.h"
+#import "TPSyntaxChecker.h"
 
 @implementation PrefsWindowController
 
