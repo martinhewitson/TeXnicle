@@ -11,6 +11,12 @@
 #import "TPSectionListController.h"
 #import "TPFoldedCodeSnippet.h"
 #import "MHPlaceholderAttachment.h"
+#import "TPSyntaxChecker.h"
+#import "TPSyntaxError.h"
+#import "NSString+LaTeX.h"
+#import "OpenDocumentsManager.h"
+#import "FileEntity.h"
+#import "externs.h"
 
 @implementation TeXEditorViewController
 
@@ -19,8 +25,15 @@
 @synthesize sectionListPopup;
 @synthesize unfoldButton;
 @synthesize markerButton;
+@synthesize errorPopup;
 @synthesize isHidden;
 @synthesize tableConfigureWindow;
+@synthesize errors;
+@synthesize checker;
+@synthesize syntaxCheckTimer;
+@synthesize performSyntaxCheck;
+@synthesize errorImage;
+@synthesize noErrorImage;
 
 - (id) init
 {
@@ -35,6 +48,8 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     // Initialization code here.
+    self.errorImage = [NSImage imageNamed:@"error"];
+    self.noErrorImage = [NSImage imageNamed:@"noerror"];  
   }
   
   return self;
@@ -42,7 +57,14 @@
 
 - (void)dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
 //  NSLog(@"Dealloc TeXEditorViewController");
+  [self.syntaxCheckTimer invalidate];
+  self.syntaxCheckTimer = nil;
+  self.errorImage = nil;
+  self.noErrorImage = nil;
+  self.checker = nil;
   self.textView.delegate = nil;
   [sectionListController deactivate];
   self.delegate = nil;
@@ -52,15 +74,46 @@
 - (void) awakeFromNib
 {
   [self disableEditor];
+  
+  self.checker = [[[TPSyntaxChecker alloc] initWithDelegate:self] autorelease];
+  _shouldCheckSyntax = YES; // check at least once
+  _checkingSyntax    = NO;
+  self.performSyntaxCheck = NO;
+  
+  self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
+                                                           target:self
+                                                         selector:@selector(checkSyntaxTimerFired) 
+                                                         userInfo:nil
+                                                          repeats:YES];
+  
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self
+         selector:@selector(handleDocumentChanged:) 
+             name:TPOpenDocumentsDidChangeFileNotification
+           object:nil];
+  
 }
 
 #pragma mark -
 #pragma Control 
 
+- (void) handleDocumentChanged:(NSNotification*)aNote
+{
+  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
+  if ([[file extension] isEqualToString:@"tex"]) {
+    _shouldCheckSyntax = YES;
+  } else {
+    self.errors = nil;
+    [self setHasErrors:NO];
+    _shouldCheckSyntax = NO;
+  }
+}
+
 - (void) setString:(NSString*)aString
 {
   [self.textView setString:aString];
   [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
+  _shouldCheckSyntax = YES;
 }
 
 - (void) disableEditor
@@ -73,6 +126,19 @@
   [self.markerButton setHidden:YES];
   [self.unfoldButton setHidden:YES];
   [containerView setNeedsDisplay:YES];
+}
+
+- (void) setHasErrors:(BOOL)state
+{
+  if (state) {
+    if (![[[self.errorPopup image] name] isEqualToString:@"error"]) {
+      [self.errorPopup setImage:errorImage];
+    }
+  } else {
+    if (![[[self.errorPopup image] name] isEqualToString:@"noerror"]) {
+      [self.errorPopup setImage:noErrorImage];
+    }
+  }
 }
 
 - (void) enableEditor
@@ -139,7 +205,104 @@
   return nil;
 }
 
+- (IBAction)showErrorMenu:(id)sender
+{
+	NSRect frame = [(NSButton *)sender frame];
+	NSPoint menuOrigin = [[(NSButton *)sender superview] 
+												convertPoint:NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y+frame.size.height)																		 
+												toView:nil];
+	
+	NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+																			 location:menuOrigin
+																	modifierFlags:NSLeftMouseDownMask // 0x100
+																			timestamp:0
+																	 windowNumber:[[(NSButton *)sender window] windowNumber]
+																				context:[[(NSButton *)sender window] graphicsContext]
+																		eventNumber:0
+																		 clickCount:1
+																			 pressure:1];
+	
+  // populate menu with errors
+  if (errorMenu) {
+    [errorMenu release];
+  }
+  
+  errorMenu = [[NSMenu alloc] initWithTitle:@"Error Menu"];
+  
+  for (TPSyntaxError *error in self.errors) {
+    NSString *title = [NSString stringWithFormat:@"%@: %@", error.line, error.message];
+    NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:title
+                                                   action:@selector(jumpToLine:)
+                                            keyEquivalent:@""] autorelease];
+    [item setAttributedTitle:[error attributedString]];
+    [item setTarget:self];
+    [item setRepresentedObject:error];
+    [errorMenu addItem:item];
+  }
+	
+	[NSMenu popUpContextMenu:errorMenu withEvent:event forView:(NSButton *)sender];  
+}
 
+- (void)jumpToLine:(NSMenuItem*)anItem
+{
+  TPSyntaxError *error = (TPSyntaxError*)[anItem representedObject];
+  
+  [self.textView goToLineWithNumber:error.line];
+  
+}
+
+#pragma mark -
+#pragma mark syntax checking
+
+- (void) checkSyntaxTimerFired
+{
+  if (self.performSyntaxCheck) {
+    [self checkSyntax:self];
+  }
+}
+
+- (IBAction)checkSyntax:(id)sender
+{  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  if (![[defaults valueForKey:TPCheckSyntax] boolValue]) {
+    self.errors = nil;
+    [self setHasErrors:NO];
+    [self.errorPopup setEnabled:NO];
+    return;
+  } else {
+    [self.errorPopup setEnabled:YES];
+  }
+  
+//  NSLog(@"Should check syntax? %d", _shouldCheckSyntax);
+  if (_shouldCheckSyntax && !_checkingSyntax) {
+    _checkingSyntax = YES;
+    // write string to tmp file
+    NSString *path = [[[NSString pathForTemporaryFileWithPrefix:@"tmp"] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"texnicle_syntax_check.tex"];
+    NSString *content = [self.textView string];
+//    NSLog(@"Content length %d", [content length]);
+    if ([content length] > 0) {
+      if ([content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
+        [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
+      }
+    }
+  }
+}
+
+- (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker
+{
+//  NSLog(@"Got errors %d from %@", [self.checker.errors count], checker);
+  
+  if ([self.checker.errors count] > 0) {
+    [self setHasErrors:YES];
+    [self setErrors:self.checker.errors];
+  } else {
+    [self setHasErrors:NO];
+    [self setErrors:nil];
+  }
+  
+  _checkingSyntax = NO;
+}
 
 #pragma mark -
 #pragma NSTextView delegate
