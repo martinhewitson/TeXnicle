@@ -865,20 +865,24 @@
 }
 
 
-- (void)mouseEntered:(NSEvent *)theEvent {
+- (void)mouseEntered:(NSEvent *)theEvent 
+{
   wasAcceptingMouseEvents = [[self window] acceptsMouseMovedEvents];
   [[self window] setAcceptsMouseMovedEvents:YES];
   [[self window] makeFirstResponder:self];
-  NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-  MHCodeFolder *folder = [self folderForPoint:point];
-  if (folder) {
-//    NSLog(@"%@", folder);
-    // set highlight rect on textview
-    NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
-    [[self textView] setHighlightRange:NSStringFromRange(r)];
-    [[self textView] setNeedsDisplay:YES];
-  }
-  
+//  NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+//  MHCodeFolder *folder = [self folderForPoint:point];
+//  if (folder) {
+////    NSLog(@"%@", folder);
+//    // set highlight rect on textview
+//    NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
+//    [[self textView] setHighlightRange:NSStringFromRange(r)];
+//    [[self textView] setNeedsDisplay:YES];
+//  } else {
+//    [[self textView] setHighlightRange:nil];
+//    [[self textView] setNeedsDisplay:YES];
+//  }
+//  
   [self setNeedsDisplay:YES];
 }
 
@@ -886,11 +890,18 @@
 {
   NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
   MHCodeFolder *folder = [self folderForPoint:point];
-  if (folder) {
-    // set highlight rect on textview
-    NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
-    [[self textView] setHighlightRange:NSStringFromRange(r)];
-    [[self textView] setNeedsDisplay:YES];
+  if (folder != nil) {
+    if (folder != highlightedFolder) {
+      highlightedFolder = folder;
+      // set highlight rect on textview
+      NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
+      [[self textView] setHighlightRange:NSStringFromRange(r)];
+      [[self textView] setHighlightAlpha:0.0];
+      [[self textView] setNeedsDisplay:YES];
+    }
+  } else {
+    highlightedFolder = nil;
+    [[self textView] clearHighlight];
   }
   [self setNeedsDisplay:YES];
 }
@@ -899,6 +910,7 @@
 {
   [[self window] setAcceptsMouseMovedEvents:wasAcceptingMouseEvents];
   [[self textView] clearHighlight];
+  highlightedFolder = nil;
   [[self window] makeFirstResponder:[self textView]];
   [self setNeedsDisplay:YES];
 }

@@ -31,6 +31,8 @@
   NSInteger _lastMaxVisibleLine;
   BOOL _recalculateLines;
   BOOL _forceThicknessRecalculation;
+  
+  MHCodeFolder *highlightedFolder;
 }
 
 @property (retain) NSArray *lineNumbers;
