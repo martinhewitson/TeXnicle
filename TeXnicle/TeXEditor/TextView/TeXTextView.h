@@ -70,6 +70,10 @@ extern NSString * const TELineNumberClickedNotification;
   NSInteger zoomFactor;
   
   NSArray *_pastingRows;
+  
+  CGFloat highlightAlpha;
+  NSTimer *highlightAlphaTimer;
+  
 }
 
 @property (assign) NSInteger zoomFactor;
@@ -78,6 +82,7 @@ extern NSString * const TELineNumberClickedNotification;
 @property (retain) TeXColoringEngine *coloringEngine;
 @property (retain) NSColor *lineHighlightColor;
 @property (copy) NSString *highlightRange;
+@property (assign) CGFloat highlightAlpha;
 @property (retain) NSMutableArray *syntaxHighlightTags;
 @property (assign) BOOL shiftKeyOn;
 @property (retain) NSMutableArray *commandList;

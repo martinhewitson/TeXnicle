@@ -55,6 +55,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 @synthesize commandList;
 @synthesize wordHighlightRanges;
 @synthesize zoomFactor;
+@synthesize highlightAlpha;
 
 - (void) dealloc
 {
@@ -96,6 +97,34 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   [self applyFontAndColor];
 }
 
+- (void) setHighlightAlpha:(CGFloat)aValue
+{
+  if (highlightAlphaTimer == nil) {
+    highlightAlpha = aValue;
+    
+//    NSLog(@"Starting timer");
+    highlightAlphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                           target:self 
+                                                         selector:@selector(incrementHighlightAlpha)
+                                                         userInfo:nil
+                                                          repeats:YES];
+  }
+}
+
+- (void) incrementHighlightAlpha
+{
+//  NSLog(@"Timer fired");
+  highlightAlpha+=0.01;
+  if (highlightAlpha>=0.1) {
+//    NSLog(@"Stop timer");
+    [highlightAlphaTimer invalidate];
+    [highlightAlphaTimer release];
+    highlightAlphaTimer = nil;
+  }
+//  NSLog(@"Setting alpha %f", highlightAlpha);
+  
+  [self setNeedsDisplay:YES];
+}
 
 // Do the default setup for the text view.
 - (void) defaultSetup
@@ -1765,7 +1794,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   // additional highlight range
 	if (self.highlightRange) {    
     NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];		
-		[[[self backgroundColor] shadowWithLevel:0.2] set];
+		[[[self backgroundColor] shadowWithLevel:highlightAlpha] set];
 		[NSBezierPath fillRect:aRect];
 	} else {
     [[self backgroundColor] set];
