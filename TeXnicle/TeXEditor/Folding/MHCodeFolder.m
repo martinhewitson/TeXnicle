@@ -83,7 +83,7 @@
 
 - (NSString*) description
 {
-  return [NSString stringWithFormat:@"%d: lines: %d:%d (%d), range: %d,%d", self.folded, self.startLine, self.endLine, self.lineCount, self.startIndex, self.endIndex];
+  return [NSString stringWithFormat:@"%d: lines: %d:%d (%d), range: %d,%d (%@ -> %@)", self.folded, self.startLine, self.endLine, self.lineCount, self.startIndex, self.endIndex, self.startRect, self.endRect];
 }
 
 // Try to complete the folder. This means, first check we have and end and start. 
