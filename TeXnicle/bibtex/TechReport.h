@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BibliographyEntry.h";
+#import "BibliographyEntry.h"
 
 @interface TechReport : BibliographyEntry <NSCoding, NSCopying> {
 
