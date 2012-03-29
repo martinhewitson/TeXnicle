@@ -1341,11 +1341,18 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 	return citations;	
 }
 
-- (NSArray*) listOfCommands
+-(NSArray*)listOfCommands
 {
-  return [NSArray array];
+  NSMutableArray *commands = [NSMutableArray array];
+  // consolidated main file
+  NSString *allText = [self.texEditorViewController.textView string];
+  NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+  for (NSString *newCommand in newCommands) {
+    [commands addObject:[newCommand argument]];
+  }
+  
+  return commands; //[NSArray array]; 
 }
-
 - (NSArray*) listOfReferences
 {
 	NSString *str = [self.texEditorViewController.textView string];
@@ -1970,7 +1977,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 - (void)templateEditor:(TPTemplateEditor *)editor didSelectTemplate:(NSDictionary *)aTemplate
 {
   if (aTemplate) {
-    [self.texEditorViewController setString:[aTemplate valueForKey:@"Code"]];
+    NSString *code = [aTemplate valueForKey:@"Code"];
+    if (code != nil && [code length]>0) {
+      [self.texEditorViewController setString:code];
+    }
     [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
   }
   [NSApp endSheet:self.templateEditor.window];
