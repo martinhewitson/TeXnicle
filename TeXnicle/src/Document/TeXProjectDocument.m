@@ -31,6 +31,7 @@
 #import "NSApplication+SystemVersion.h"
 #import "MHSynctexController.h"
 #import "BibliographyEntry.h"
+#import "RegexKitLite.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -1540,7 +1541,15 @@
 
 -(NSArray*)listOfCommands
 {
-  return [NSArray array]; 
+  NSMutableArray *commands = [NSMutableArray array];
+  // consolidated main file
+  NSString *allText = [self.project.mainFile consolidatedFileContents];
+  NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+  for (NSString *newCommand in newCommands) {
+    [commands addObject:[newCommand argument]];
+  }
+  
+  return commands; //[NSArray array]; 
 }
 
 - (BOOL) shouldSyntaxHighlightDocument
@@ -2639,8 +2648,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	if ([self saveAllProjectFiles]) {    
     NSString *path = [absoluteURL path];
     NSURL *url = [NSURL fileURLWithPath:path];
-		return [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+        
+		BOOL result = [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
+    
+    if (result && [[[NSUserDefaults standardUserDefaults] valueForKey:TPCompileOnSave] boolValue]) {
+      [self build];
+    }
+    
+    return result;
 	}	
+  
 	return NO;
 }
   
