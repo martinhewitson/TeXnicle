@@ -169,6 +169,7 @@
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo;
 - (BOOL) loadFileAtURL:(NSURL*)absoluteURL;
 - (void)syncFileModificationDate;
+- (void)checkToShowTemplateSheet;
 
 - (void) restoreSplitViewPositions;
 

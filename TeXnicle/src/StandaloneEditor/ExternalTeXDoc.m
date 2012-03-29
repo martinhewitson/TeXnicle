@@ -292,10 +292,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
   
   // Present templates if we have no URL
-  if ([self fileURL] == nil 
-      && ([self.texEditorViewController.textView string] == nil || [[self.texEditorViewController.textView string] length]==0)) {
-    [self performSelector:@selector(showTemplatesSheet) withObject:nil afterDelay:0];    
-  }
+  [self performSelector:@selector(checkToShowTemplateSheet) withObject:nil afterDelay:0];
   
   _building = NO;
   _liveUpdate = NO;
@@ -303,7 +300,13 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   
 }
 
-
+- (void)checkToShowTemplateSheet
+{
+  if ([self fileURL] == nil 
+      && ([self.texEditorViewController.textView string] == nil || [[self.texEditorViewController.textView string] length]==0)) {
+    [self performSelector:@selector(showTemplatesSheet) withObject:nil afterDelay:0];    
+  }
+}
 
 - (void)windowWillEnterVersionBrowser:(NSNotification *)notification
 {
