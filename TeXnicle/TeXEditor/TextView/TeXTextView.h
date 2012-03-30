@@ -11,6 +11,7 @@
 #import "MHTableConfigureController.h"
 
 extern NSString * const TELineNumberClickedNotification;
+extern NSString * const TEDidFoldUnfoldTextNotification;
 
 @class MHEditorRuler;
 @class MHCodeFolder;

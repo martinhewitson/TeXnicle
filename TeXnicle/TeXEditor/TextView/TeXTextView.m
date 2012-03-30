@@ -41,6 +41,7 @@
 #define LargeTextHeight 1e7
 
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
+NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
 
 @implementation TeXTextView
 
@@ -621,18 +622,18 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
+//  NSLog(@"Frame change");
   [self colorVisibleText];
   [self highlightMatchingWords];
+  [self updateEditorRuler];
 }
 
 - (void) updateEditorRuler
 {
   [self.editorRuler resetLineNumbers];
-  [self.editorRuler setNeedsDisplay];
+  [self.editorRuler setNeedsDisplay:YES];
   [self setNeedsDisplay:YES];
 }
-
-
 
 
 #pragma mark -
@@ -708,7 +709,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-//  NSLog(@"Changed in %@", keyPath);
+  NSLog(@"Changed in %@", keyPath);
 	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]]) {	
     NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
     [self setBackgroundColor:c];
@@ -992,18 +993,17 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) unfoldAllInRange:(NSRange)aRange max:(NSInteger)max
 {
+//  NSLog(@"unfoldAllInRange");
 	NSAttributedString *text = [[self textStorage] attributedSubstringFromRange:aRange];
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:text];
+	NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithAttributedString:text] autorelease];
   
 	[string unfoldAllInRange:aRange max:max];
 	
-	[[self textStorage] beginEditing];
 	[[self textStorage] deleteCharactersInRange:aRange];
 	[[self textStorage] insertAttributedString:string atIndex:aRange.location];
-	[[self textStorage] endEditing];
-	[string release];
   
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
 - (void) unfoldTextWithFolder:(MHCodeFolder*)aFolder
@@ -1014,17 +1014,18 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) foldTextWithFolder:(MHCodeFolder*)aFolder
 {	
+//  NSLog(@"foldTextWithFolder");
 	NSRange foldRange = NSMakeRange(aFolder.startIndex, aFolder.endIndex-aFolder.startIndex);
 //  NSLog(@"Folding range %@", NSStringFromRange(foldRange));
 	NSAttributedString *fold = [[self textStorage] attributedSubstringFromRange:foldRange];
   
 	// make an attachement object
-	TPFoldedCodeSnippet *snippet = [[TPFoldedCodeSnippet alloc] initWithCode:fold];
+	TPFoldedCodeSnippet *snippet = [[[TPFoldedCodeSnippet alloc] initWithCode:fold] autorelease];
   snippet.object = aFolder;
 	
 	// make an attachment	
 	NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:snippet];
-	NSMutableAttributedString *aaa = [[NSMutableAttributedString alloc] initWithAttributedString:attachment];
+	NSMutableAttributedString *aaa = [[[NSMutableAttributedString alloc] initWithAttributedString:attachment] autorelease];
 	
 	[aaa addAttribute:NSCursorAttributeName 
               value:[NSCursor pointingHandCursor] 
@@ -1032,32 +1033,27 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
   
 	[[self textStorage] deleteCharactersInRange:foldRange];
 	[[self textStorage] insertAttributedString:aaa atIndex:foldRange.location];
-	
-	[aaa release];
-	[snippet release];
   
   // update editor ruler
-	[self.editorRuler resetLineNumbers];
-  [self.editorRuler setNeedsDisplay:YES];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
 }
 
 
 
 - (void) unfoldAttachment:(NSTextAttachment*)snippet atIndex:(NSNumber*)index
 {	
+//  NSLog(@"unfoldAttachment");
 	// find the location of this attachment in the text	
 	NSData *data = [[snippet fileWrapper] regularFileContents];
-	NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
+	NSAttributedString *code = [[[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil] autorelease];
 	NSRange attRange = NSMakeRange([index unsignedLongValue], 1);
 	[[self textStorage] removeAttribute:NSAttachmentAttributeName range:attRange];
 	[[self textStorage] replaceCharactersInRange:attRange withAttributedString:code];
-	[code release];
   
   // update editor ruler
-	[self.editorRuler resetLineNumbers];
-  [self.editorRuler setNeedsDisplay:YES];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+  [self updateEditorRuler];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
 }
 
 #pragma mark -
@@ -1463,7 +1459,6 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
-  
   [self setNeedsDisplay:YES];
   [self updateEditorRuler];
   NSRange r = [self selectedRange];
@@ -1716,6 +1711,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
       list = [list filteredArrayUsingPredicate:predicate];			
     }
+    NSLog(@"List %@", list);
     if ([list count]>0) {
       [self completeFromList:list];			
     } else {
@@ -1779,16 +1775,14 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 }
 
 
-- (void)viewWillDraw
-{
-  [self.editorRuler setNeedsDisplay:YES];
-	[super viewWillDraw];
-}
+//- (void)viewWillDraw
+//{
+//  [self.editorRuler setNeedsDisplay:YES];
+//	[super viewWillDraw];
+//}
 
 - (void) drawViewBackgroundInRect:(NSRect)rect
 {
-  
-  
 	[super drawViewBackgroundInRect:rect];
   
   // additional highlight range
@@ -1799,8 +1793,7 @@ NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotifica
 	} else {
     [[self backgroundColor] set];
     [NSBezierPath fillRect:[self bounds]];
-  }
-  
+  }  
   
   // highlight current line
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
