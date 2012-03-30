@@ -164,6 +164,10 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void)fillSectionMenu
 {
+  if (![NSApp isActive]) {
+    return;
+  }
+  
 	if (!popupMenu) {
 //    NSLog(@"No popupMenu");
 		return;
@@ -183,7 +187,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	NSMutableArray *found = [NSMutableArray array];
 	
 	NSString *string = [textView string];
-	if (!string || [string isEqual:@""]) {   
+	if (string == nil || [string length] == 0) {   
 //    NSLog(@"String empty");
 		[popupMenu removeAllItems];		
     [self addTitle];
@@ -267,7 +271,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 				}
 				loc++;
 			}	
-      if (tagEnd < 0) {
+      if (tagEnd < 1) {
         continue;
       }
 			NSString *type = [returnResult substringWithRange:NSMakeRange(1, tagEnd-1)];
@@ -283,14 +287,17 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 				}
 				loc++;
 			}			
-      if (tagEnd < 0) {
+      if (tagEnd < 1) {
         continue;
       }
+      
+      if (tagEnd<=tagStart)
+        continue;
 			
 			NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
 			arg = [arg stringByTrimmingCharactersInSet:ws];
 			NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
-			NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
+			NSMutableAttributedString *adisp = [[[NSMutableAttributedString alloc] initWithString:disp] autorelease];
 			[adisp addAttribute:NSForegroundColorAttributeName
 										value:[NSColor lightGrayColor]
 										range:NSMakeRange(0, [type length])];
@@ -299,7 +306,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			[dict setObject:adisp forKey:@"title"];
 			[dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
 			[found addObject:dict];
-			[adisp release];				
 		}
 	}
 	
