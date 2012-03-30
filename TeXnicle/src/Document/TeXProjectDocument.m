@@ -2651,9 +2651,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
         
 		BOOL result = [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
     
-    if (result && [[[NSUserDefaults standardUserDefaults] valueForKey:TPCompileOnSave] boolValue]) {
-      [self build];
-    }
+    [self.projectOutlineView setNeedsDisplay:YES];
     
     return result;
 	}	
