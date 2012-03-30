@@ -1460,7 +1460,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
   [self setNeedsDisplay:YES];
-  [self updateEditorRuler];
   NSRange r = [self selectedRange];
   [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
                                                       object:self
@@ -1975,6 +1974,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   [super didChangeText];
   
+  [self updateEditorRuler];
+  
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
     NSString *command = [self currentCommand];
     if (command != nil && [command length] > 0) {
@@ -1988,6 +1989,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // dismiss the popup list
   [popupList dismiss];
+  
 }
 
 
