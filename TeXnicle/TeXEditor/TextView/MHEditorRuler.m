@@ -588,6 +588,10 @@
   
 //  NSUInteger start = aRange.location;
   NSString *text = [self.textView string];
+  if (text == nil) {
+    return foundFoldingTags;
+  }
+  
   NSAttributedString *attStr = [self.textView attributedString];
   if ([attStr length] == 0) {
     return foundFoldingTags;
@@ -615,6 +619,10 @@
     MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
     idx = firstLine.range.location;
     lineNumber = firstLine.number;
+  }
+  
+  if (idx >= [text length]) {
+    return foundFoldingTags;
   }
   
 //  NSInteger startIndex = idx;
