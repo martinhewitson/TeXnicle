@@ -891,6 +891,7 @@
       [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
                                                           object:self.textView
                                                         userInfo:dict];
+      [self setNeedsDisplay:YES];
     }
   } else {
     [self toggleFoldedStateForFolder:folder];
