@@ -265,6 +265,10 @@
 
 - (void) checkSyntaxTimerFired
 {
+  if (![NSApp isActive]) {
+    return;
+  }
+
   if (self.performSyntaxCheck) {
     [self checkSyntax:self];
   }
