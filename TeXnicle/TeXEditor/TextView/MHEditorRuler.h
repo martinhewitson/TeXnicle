@@ -32,9 +32,18 @@
   BOOL _recalculateLines;
   BOOL _forceThicknessRecalculation;
   
+  CGFloat _lineGutterWidth;
+  CGFloat _folderGutterWidth;
+  
+  BOOL _showLineNumbers;
+  BOOL _showCodeFolders;
+  
+  NSDate *lastCalculation;
+  
   MHCodeFolder *highlightedFolder;
 }
 
+@property (retain) NSDate *lastCalculation;
 @property (retain) NSArray *lineNumbers;
 @property (retain) NSArray *codeFolders;
 @property (retain) NSMutableArray *foldingTagDescriptions;
@@ -67,6 +76,7 @@
 - (void) resetTrackingRects;
 - (void) resetLineNumbers;
 - (void) setNeedsDisplay;
+- (void) handleTextViewDidFoldUnfoldNotification:(NSNotification*)aNote;
 
 - (void) recalculateThickness;
 

@@ -24,6 +24,7 @@
 #define kDEFAULT_THICKNESS	22.0
 #define kRULER_MARGIN		5.0
 #define kFOLDING_GUTTER 20.0
+#define kLineCalculationUpdateRate 0.05
 
 @implementation MHEditorRuler
 
@@ -37,6 +38,8 @@
 @synthesize backgroundColor;
 @synthesize font;
 @synthesize foldingTagDescriptions;
+@synthesize lastCalculation;
+
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView
 {
@@ -65,12 +68,43 @@
     [self setClientView:aTextView];
     
     newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
-  
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    _showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
+    _showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleChangesToUserDefaults:) 
+               name:NSUserDefaultsDidChangeNotification
+             object:nil];
+    
+    [nc addObserver:self
+           selector:@selector(handleTextViewDidFoldUnfoldNotification:)
+               name:TEDidFoldUnfoldTextNotification
+             object:self.textView];
   }
 	  
 	return self;
 }
 
+- (void) handleTextViewDidFoldUnfoldNotification:(NSNotification*)aNote
+{
+//  NSLog(@"Textview did fold/unfold");  
+  [self resetLineNumbers];
+}
+
+- (void) handleChangesToUserDefaults:(NSNotification*)aNote
+{
+//  NSLog(@"User defaults changed");
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  _showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
+  _showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+  NSRange visibleRange = [self.textView getVisibleRange];
+  [self recalculateThickness];
+  [self calculationsForTextRange:visibleRange];
+  [self setNeedsDisplay:YES];
+}
 
 - (void)setClientView:(NSView *)client
 {
@@ -89,6 +123,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 //  NSLog(@"Dealloc MHEditorRuler");
   [newLineCharacterSet release];
 	[self setClientView:nil];	
@@ -108,34 +143,30 @@
 - (void) drawRect:(NSRect)dirtyRect
 {
   [super drawRect:dirtyRect];
+//  NSLog(@"Draw rect %@", NSStringFromRect(dirtyRect));
   [self drawHashMarksAndLabelsInRect:dirtyRect];
 }
 
 - (void)resetLineNumbers
 {
+//  NSLog(@"resetLineNumbers");
   _recalculateLines = YES;
-//  self.lineNumbers = nil;
-//  self.codeFolders = nil;
+  NSRange visibleRange = [self.textView getVisibleRange];
+  if (!NSEqualRanges(visibleRange, lastVisibleRange)) {
+    [self calculationsForTextRange:visibleRange];
+    lastVisibleRange = visibleRange;
+    [self setNeedsDisplay:YES];
+  }
 }
 
-- (void) setNeedsDisplay 
-{
-  if (self.textView == nil) {
-    return;
-  }
-  
-  [self setNeedsDisplay:YES];
-  [self performSelector:@selector(invalidateHashMarks) withObject:nil afterDelay:0];
-}
 
 - (void)drawHashMarksAndLabelsInRect:(NSRect)aRect
 {
-//  NSLog(@"drawHashMarksAndLabelsInRect");
+//  NSLog(@"drawHashMarksAndLabelsInRect %@", NSStringFromRect(aRect));
   
   // check user defaults
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL shouldDrawLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
-	BOOL shouldFoldCode = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+	BOOL shouldDrawLineNumbers = _showLineNumbers;
+  BOOL shouldFoldCode = _showCodeFolders;
   
   NSRectArray  rects;
   NSUInteger   rectCount;
@@ -162,14 +193,11 @@
 			[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(r)-foldWidth-0.5, NSMinY(r)) toPoint:NSMakePoint(NSMaxX(r) - foldWidth - 0.5, NSMaxY(r))];
 		}
 	}
-//  [self.backgroundColor set];
-//  NSRectFill(r);
     
   // calculate visible lines
-//  NSLog(@"Last range %@, this range %@", NSStringFromRange(lastVisibleRange), NSStringFromRange(visibleRange));
-//  if (self.lineNumbers == nil || !NSEqualRanges(visibleRange, lastVisibleRange)) {
-  if (_recalculateLines || !NSEqualRanges(visibleRange, lastVisibleRange)) {
-//  if (self.lineNumbers == nil || visibleRange.location != lastVisibleRange.location) {
+//  NSLog(@"   Last range %@, this range %@", NSStringFromRange(lastVisibleRange), NSStringFromRange(visibleRange));
+  if (!NSEqualRanges(visibleRange, lastVisibleRange)) {
+//  if (_recalculateLines || !NSEqualRanges(visibleRange, lastVisibleRange)) {
 //    NSLog(@"Line numbers is nil? %d", self.lineNumbers == nil);
 //    NSLog(@"draw hash marks: calculations for range");
     [self calculationsForTextRange:visibleRange];
@@ -286,7 +314,7 @@
             
             // compute the rect for the image to be drawn in
             NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectHeight)/2.0, 
-                                       ypos + (rectHeight - stringSize.height) / 2.0, 
+                                       ypos - 3.0 + (rectHeight - stringSize.height) / 2.0, 
                                        rectHeight, rectHeight);
             NSImage *im = nil;
             if (folder.isValid) {
@@ -317,7 +345,7 @@
               if (!folder.folded) {
                 // make rect for placing the image
                 NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectHeight)/2.0, 
-                                           ypos + (rectHeight - stringSize.height) / 2.0, 
+                                           ypos - 3.0 + (rectHeight - stringSize.height) / 2.0, 
                                            rectHeight, rectHeight);
                 NSImage *im = nil;
                 if (folder.isValid) {
@@ -378,6 +406,7 @@
 
 - (void) recalculateThickness
 {
+//  NSLog(@"recalculateThickness");
   _forceThicknessRecalculation = YES;
 }
 
@@ -386,6 +415,8 @@
 // linenumbers and code folders are then set to the instance properties.
 - (void)calculationsForTextRange:(NSRange)aRange
 {
+//  NSLog(@"calculationsForTextRange");
+  
 //  NSLog(@"Calculations for range %@", NSStringFromRange(aRange));
   // compute and cache the linenumbers in view
   NSArray *newLineNumbers = [self lineNumbersForTextRange:aRange];
@@ -401,7 +432,7 @@
   if ([[newLineNumbers lastObject] number] > _lastMaxVisibleLine || _forceThicknessRecalculation) {
     float oldThickness = [self ruleThickness];
     float newThickness = [self requiredThickness];
-    if (fabs(oldThickness - newThickness) > 1)
+    if (fabs(oldThickness - newThickness) >= 1)
     {
       NSInvocation			*invocation;
       
@@ -694,18 +725,18 @@
 
 - (MHLineNumber*)lineNumberForPoint:(NSPoint)aPoint
 {
-  CGFloat foldWidth = 0.0;
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEShowCodeFolders] boolValue]) {
-    foldWidth = kFOLDING_GUTTER;
-  }
+//  CGFloat foldWidth = 0.0;
+//  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEShowCodeFolders] boolValue]) {
+//    foldWidth = kFOLDING_GUTTER;
+//  }
   
   // some useful numbers for drawing the line numbers
-  CGFloat boundsWidth = NSWidth([self bounds]);
-  CGFloat rwidth = boundsWidth - foldWidth;
+//  CGFloat boundsWidth = NSWidth([self bounds]);
+//  CGFloat rwidth = boundsWidth - foldWidth;
 //  NSLog(@"Looking for point %@", NSStringFromPoint(aPoint));
   for (MHLineNumber *line in self.lineNumbers) {
 //    NSLog(@"  in %@", line);
-    NSRect r = NSMakeRect(0, line.rect.origin.y, rwidth, line.rect.size.height);
+    NSRect r = NSMakeRect(0, line.rect.origin.y, _lineGutterWidth, line.rect.size.height);
     if (NSPointInRect(aPoint, r)) {
       return line;
     }
@@ -718,9 +749,9 @@
 // Compute the required thickness of the ruler.
 - (CGFloat)requiredThickness
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL includeLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
-	BOOL includeCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+//	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL includeLineNumbers = _showLineNumbers; //[[defaults valueForKey:TEShowLineNumbers] boolValue];
+	BOOL includeCodeFolders = _showCodeFolders; //[[defaults valueForKey:TEShowCodeFolders] boolValue];
   
 	if (!includeLineNumbers) {
 		if (!includeCodeFolders)
@@ -734,6 +765,8 @@
 	
   NSInteger idx = [[self.textView string] length];
 	lineCount = [[[self lineNumbersForTextRange:NSMakeRange(idx, 0)] lastObject] number];
+  
+  
 //	lineCount = [[self.lineNumbers lastObject] number];
 	digits = (unsigned)log10(lineCount) + 1;
   NSMutableString *sampleString = [NSMutableString stringWithString:@""];
@@ -756,7 +789,9 @@
     minWidth = kDEFAULT_THICKNESS + kFOLDING_GUTTER;
 	}
   
-  CGFloat width = ceilf(MAX(minWidth, 10.0+stringSize.width + kRULER_MARGIN * 2 + foldWidth));
+  _lineGutterWidth = 10.0+stringSize.width + kRULER_MARGIN * 2;
+  _folderGutterWidth = foldWidth;
+  CGFloat width = ceilf(MAX(minWidth, _lineGutterWidth + _folderGutterWidth));
   
 	return width;
 }
@@ -782,7 +817,6 @@
 {
 	MHCodeFolder *folder = nil;
 	while ((folder = [self firstUnfoldedSection])) {
-		[self setNeedsDisplay:YES];
 		[self toggleFoldedStateForFolder:folder];
 		[self resetLineNumbers];
 	}
@@ -802,23 +836,21 @@
 // Toggle the folded state of the given folder.
 - (void) toggleFoldedStateForFolder:(MHCodeFolder*)aFolder
 {
+//  NSLog(@"Toggle state for folder %@", aFolder);
 	id view = [self clientView];
 	if ([view isKindOfClass:[NSTextView class]]) {
 		if (aFolder) {
 			if (aFolder.folded) {
-        if ([self.textView respondsToSelector:@selector(unfoldTextWithFolder:)]) {
-          [self.textView performSelector:@selector(unfoldTextWithFolder:) withObject:aFolder];
-          aFolder.folded = NO;
-        }
+        aFolder.folded = NO;
+//        NSLog(@"   unfold");
+        [self.textView unfoldTextWithFolder:aFolder];
 			} else {
-        if ([self.textView respondsToSelector:@selector(foldTextWithFolder:)]) {
-          [self.textView performSelector:@selector(foldTextWithFolder:) withObject:aFolder];
-          aFolder.folded = YES;
-        }
+        aFolder.folded = YES;
+//        NSLog(@"   fold");
+        [self.textView foldTextWithFolder:aFolder];
       }
     }
   }
-	[self setNeedsDisplay:YES];
 }
 
 - (NSRange) rangeForLinenumber:(NSInteger)aLinenumber
@@ -846,22 +878,25 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
+//  NSLog(@"--------------- Mouse down");
 	NSPoint clickPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	MHCodeFolder *folder = [self folderForPoint:clickPoint];
+  MHCodeFolder *folder = nil;
+  folder = [self folderForPoint:clickPoint];
   
-  // can we get the line number clicked on?
-  MHLineNumber *clickedLine = [self lineNumberForPoint:clickPoint];
-  if (clickedLine) {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
-                                                        object:self.textView
-                                                      userInfo:dict];
+  if (folder == nil) {
+    // can we get the line number clicked on?
+    MHLineNumber *clickedLine = [self lineNumberForPoint:clickPoint];
+    if (clickedLine) {
+      NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
+      [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
+                                                          object:self.textView
+                                                        userInfo:dict];
+    }
+  } else {
+    [self toggleFoldedStateForFolder:folder];
   }
   
 //  NSLog(@"Clicked on %@", folder);
-  [self resetLineNumbers];
-	[self toggleFoldedStateForFolder:folder];
-  [self setNeedsDisplay:YES];
 }
 
 
@@ -870,21 +905,8 @@
   wasAcceptingMouseEvents = [[self window] acceptsMouseMovedEvents];
   [[self window] setAcceptsMouseMovedEvents:YES];
   [[self window] makeFirstResponder:self];
-//  NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-//  MHCodeFolder *folder = [self folderForPoint:point];
-//  if (folder) {
-////    NSLog(@"%@", folder);
-//    // set highlight rect on textview
-//    NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
-//    [[self textView] setHighlightRange:NSStringFromRange(r)];
-//    [[self textView] setNeedsDisplay:YES];
-//  } else {
-//    [[self textView] setHighlightRange:nil];
-//    [[self textView] setNeedsDisplay:YES];
-//  }
-//  
-  [self setNeedsDisplay:YES];
 }
+
 
 - (void)mouseMoved:(NSEvent *)theEvent 
 {
@@ -903,7 +925,6 @@
     highlightedFolder = nil;
     [[self textView] clearHighlight];
   }
-  [self setNeedsDisplay:YES];
 }
 
 - (void)mouseExited:(NSEvent *)theEvent 
@@ -912,7 +933,6 @@
   [[self textView] clearHighlight];
   highlightedFolder = nil;
   [[self window] makeFirstResponder:[self textView]];
-  [self setNeedsDisplay:YES];
 }
 
 #pragma mark -
