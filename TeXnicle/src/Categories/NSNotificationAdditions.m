@@ -1,3 +1,8 @@
+//
+// Taken from http://www.cocoadev.com/index.pl?NotificationsAcrossThreads
+//
+
+
 #import "NSNotificationAdditions.h"
 #import <pthread.h>
 

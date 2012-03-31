@@ -1,3 +1,7 @@
+//
+// Taken from http://www.cocoadev.com/index.pl?NotificationsAcrossThreads
+//
+
 @interface NSNotificationCenter (NSNotificationCenterAdditions)
 - (void) postNotificationOnMainThread:(NSNotification *) notification;
 - (void) postNotificationOnMainThread:(NSNotification *) notification waitUntilDone:(BOOL) wait;
