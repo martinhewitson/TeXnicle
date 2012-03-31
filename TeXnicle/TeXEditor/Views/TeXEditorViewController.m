@@ -89,7 +89,6 @@
              name:TPOpenDocumentsDidChangeFileNotification
            object:nil];
   
-  [self performSelector:@selector(setupSyntaxChecker) withObject:nil afterDelay:2.0];
 }
 
 #pragma mark -
@@ -97,6 +96,12 @@
 
 - (void) setupSyntaxChecker
 {
+  if (self.syntaxCheckTimer) {
+    [self.syntaxCheckTimer invalidate];
+    [self.syntaxCheckTimer release];
+    self.syntaxCheckTimer = nil;
+  }
+  
   self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
                                                            target:self
                                                          selector:@selector(checkSyntaxTimerFired) 
@@ -107,6 +112,8 @@
 
 - (void) handleDocumentChanged:(NSNotification*)aNote
 {
+  [self setupSyntaxChecker];
+  
   FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
   if ([[file extension] isEqualToString:@"tex"]) {
     _shouldCheckSyntax = YES;
@@ -122,6 +129,7 @@
   [self.textView setString:aString];
   [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
   _shouldCheckSyntax = YES;
+  [self setupSyntaxChecker];
 }
 
 - (void) disableEditor
