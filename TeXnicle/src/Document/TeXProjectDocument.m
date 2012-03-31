@@ -257,6 +257,7 @@
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
   [self.texEditorViewController setPerformSyntaxCheck:YES];
+  [self.texEditorViewController setupSyntaxChecker];
   
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
@@ -2854,22 +2855,27 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) showDocument
 {
-//  NSLog(@"Show doc");
+  //  NSLog(@"Show doc");
   NSView *view = [self.pdfViewerController.pdfview documentView];    
   PDFPage *page = [self.pdfViewerController.pdfview currentPage];
   NSInteger index = [self.pdfViewerController.pdfview.document indexForPage:page];
   NSRect r = [view visibleRect];
-//  NSLog(@"Visible rect %@", NSStringFromRect(r));
+  //  NSLog(@"Visible rect %@", NSStringFromRect(r));
   BOOL hasDoc = [self.pdfViewerController hasDocument];
   [self.pdfViewerController redisplayDocument];
   if (hasDoc) {
-    if (page) {
-      [self.pdfViewerController.pdfview goToPage:[self.pdfViewerController.pdfview.document pageAtIndex:index]];
-    } else {
+    PDFDisplayMode mode = [self.pdfViewerController.pdfview displayMode];
+    if (mode == kPDFDisplaySinglePageContinuous ||
+        mode == kPDFDisplayTwoUpContinuous) {
       [view scrollRectToVisible:r];
+    } else {
+      if (page) {
+        [self.pdfViewerController.pdfview goToPage:[self.pdfViewerController.pdfview.document pageAtIndex:index]];
+      }
     }
   }
 }
+
 
 #pragma mark -
 #pragma mark Finder Delegate
