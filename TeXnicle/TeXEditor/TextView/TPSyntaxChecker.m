@@ -330,6 +330,8 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.errors = nil;
+  [lacheckTask release];
+  
   [super dealloc];
 }
 
@@ -337,9 +339,9 @@
 {
   self = [super init];
   if (self) {
-    
     self.delegate = aDelegate;
-    
+    lacheckTask = nil;
+    _taskRunning = NO;
   }
   
   return self;
@@ -382,8 +384,19 @@
 
 - (void) checkSyntaxOfFileAtPath:(NSString*)aPath
 {
-  if (_taskRunning) {
-    return;
+//  NSLog(@"Check syntax: running %d", [lacheckTask isRunning]);
+  
+//  if ([lacheckTask isRunning]) {
+//    return;
+//  }
+  
+  if (lacheckTask == nil) {
+    lacheckTask = [[NSTask alloc] init];    
+    pipe = [NSPipe pipe];
+    [lacheckTask setStandardOutput:pipe];
+    [lacheckTask setStandardError:pipe];    
+    lacheckFileHandle = [pipe fileHandleForReading];
+    [self setupObservers];
   }
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -397,17 +410,9 @@
     }
   }
     
-  if (lacheckTask) {
-		[lacheckTask terminate];
-		[lacheckTask release];		
-    lacheckTask = nil;
-		// this must mean that the last run failed
-	}
-
   self.output = @"";
 //  NSLog(@"Checking %@", aPath);
   
-	lacheckTask = [[NSTask alloc] init];
   
 	[lacheckTask setLaunchPath:chktexPath];
   [lacheckTask setCurrentDirectoryPath:[aPath stringByDeletingLastPathComponent]];
@@ -420,16 +425,10 @@
 //  NSLog(@"Args %@", arguments);
 	[lacheckTask setArguments:arguments];
 	
-	NSPipe *pipe = [NSPipe pipe];
-	[lacheckTask setStandardOutput:pipe];
-  [lacheckTask setStandardError:pipe];
-	
-	lacheckFileHandle = [pipe fileHandleForReading];
 	[lacheckFileHandle readInBackgroundAndNotify];	
   
-	[self setupObservers];
-	[lacheckTask launch];	  
   _taskRunning = YES;
+	[lacheckTask launch];	  
 }
 
 - (void) taskFinished:(NSNotification*)aNote
@@ -438,10 +437,13 @@
   
 	if ([aNote object] != lacheckTask)
 		return;
+  
+  if (lacheckTask) {
+    [lacheckTask release];
+    lacheckTask = nil;
+  }
 	
   _taskRunning = NO;
-	[lacheckTask release];
-	lacheckTask = nil;
   
 }
 
@@ -456,10 +458,9 @@
 	
 	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
 //  NSLog(@"Got data %@", data);
-  NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+  NSString *string = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
 //  NSLog(@"Got string %@", string);
 	self.output = [self.output stringByAppendingString:string];
-  [string release];
   
 	if( [data length] > 0) {
 		[lacheckFileHandle readInBackgroundAndNotify];
@@ -467,6 +468,9 @@
 //    NSLog(@"output: %@", self.output);
     [self createErrors];
     [self syntaxCheckerCheckDidFinish:self];
+    [lacheckTask release];
+    lacheckTask = nil;
+    _taskRunning = NO;
   }
 	
 }

@@ -21,6 +21,7 @@
 @private
 	NSTask *lacheckTask;
 	NSFileHandle *lacheckFileHandle;
+  NSPipe *pipe;
   
   NSString *output;
   NSArray *errors;
