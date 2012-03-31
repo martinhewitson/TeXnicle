@@ -83,22 +83,27 @@
   _checkingSyntax    = NO;
   self.performSyntaxCheck = NO;
   
-  self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
-                                                           target:self
-                                                         selector:@selector(checkSyntaxTimerFired) 
-                                                         userInfo:nil
-                                                          repeats:YES];
-  
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self
          selector:@selector(handleDocumentChanged:) 
              name:TPOpenDocumentsDidChangeFileNotification
            object:nil];
   
+  [self performSelector:@selector(setupSyntaxChecker) withObject:nil afterDelay:2.0];
 }
 
 #pragma mark -
 #pragma Control 
+
+- (void) setupSyntaxChecker
+{
+  self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
+                                                           target:self
+                                                         selector:@selector(checkSyntaxTimerFired) 
+                                                         userInfo:nil
+                                                          repeats:YES];
+  
+}
 
 - (void) handleDocumentChanged:(NSNotification*)aNote
 {

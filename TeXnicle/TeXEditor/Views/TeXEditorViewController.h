@@ -63,6 +63,7 @@
 @property (assign) id delegate;
 
 - (void) handleDocumentChanged:(NSNotification*)aNote;
+- (void) setupSyntaxChecker;
 
 #pragma mark -
 #pragma mark Insert Table
