@@ -1,10 +1,10 @@
 TTeXnicleImporter
-v4
+v5
 r1
 cCheck dependencies
 cProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist TeXnicleImporter/TeXnicleImporter-Info.plist
-cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -13,9 +13,34 @@ cCpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents
 cCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleImporter/en.lproj/InfoPlist.strings
 cTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
 
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
+c000000004F29C61A00000000000000EE
+t1328137754
+s238
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004F72BD56000000000003D5DC
+t1332919638
+s251356
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+c000000004F72BD560000000000078034
+t1332919638
+s491572
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreServices.framework/CoreServices
+c000000004F72BD560000000000007B40
+t1332919638
+s31552
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004F72BD5600000000000ADFFC
+t1332919638
+s712700
+
 N/Developer/SDKs/MacOSX10.7.sdk
-c000000004E96A66F00000000000000EE
-t1318495855
+c000000004EAE575E00000000000000EE
+t1320048478
 s238
 
 N/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreData.framework/CoreData
@@ -74,54 +99,146 @@ t1307610133
 s992
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
-t1319735395
+t1333017641
 s102
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist
-t1319735392
-s1867
+t1333017635
+s1870
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle
-t1319735395
-s24312
+t1333017641
+s24508
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings
-t1319735395
+t1329807227
 s92
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml
-t1319735395
+t1331033987
 s992
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o
-t1319735394
-s4312
+t1333017639
+s5296
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o
-t1319735394
-s26936
+t1333017640
+s30804
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/TeXnicle.LinkFileList
-c000000004EA9906000000000000001A6
-t1319735392
+c000000004F433F7800000000000001A6
+t1329807224
 s422
 
 N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o
-t1319735393
-s8664
+t1333017637
+s10592
 
-N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth
-t1319735392
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/GetMetadataForFile.plist
+t1332395972
+s276
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/MySpotlightImporter.plist
+t1332395973
+s276
+
+N/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/main.plist
+t1332395972
+s276
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth
+t1331398424
+s76336
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth
+t1329588273
+s74352
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.pth
+t1331982516
+s76336
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.pth
+t1331982516
+s74352
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth
+t1329588273
+s76336
+
+N/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth
+t1331398424
+s74352
+
+N/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth
+t1331706936
+s76336
+
+N/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cnkmclprnggenwdjzsxzttdnysan/TeXnicleImporter-Prefix.pch.pth
+t1328271057
 s73456
 
-N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth
-t1319735392
+N/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cvxourbvgynguldwsrrfazrzfobx/TeXnicleImporter-Prefix.pch.pth
+t1328271057
 s75604
+
+N/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth
+t1331706936
+s74352
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth
+t1333017635
+s76336
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth
+t1333017635
+s74352
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.pth
+t1332395971
+s74352
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth
+t1329807224
+s74352
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth
+t1329807224
+s76336
+
+N/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.pth
+t1332395971
+s76336
 
 NTeXnicleImporter/TeXnicleImporter-Info.plist
 c000000004DF08C2300000000000005F0
 t1307610147
 s1520
+
+CAnalyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m
+s354088771.180102
+e354088772.919240
+r1
+xAnalyze
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m09362e43f71ab541^9c6ff044f71ab541^---0#0#0#-19%DVTDocumentLocation2@105"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m0000000000000000^2477"Analyze TeXnicleImporter/GetMetadataForFile.m    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -Xclang -analyzer-checker -Xclang osx.cocoa.experimental.SelfInit -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/GetMetadataForFile.d --analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/GetMetadataForFile.plist36"CE90D064-E385-4B01-8699-8C419C6058D2-
+
+CAnalyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m
+s354088772.089098
+e354088773.224672
+r1
+xAnalyze
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection98"Analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.me0f41644f71ab541^158d3945f71ab541^---0#0#0#-19%DVTDocumentLocation2@106"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m0000000000000000^2481"Analyze TeXnicleImporter/MySpotlightImporter.m    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -Xclang -analyzer-checker -Xclang osx.cocoa.experimental.SelfInit -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/MySpotlightImporter.d --analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/MySpotlightImporter.plist36"549079E4-959B-4215-B469-3A6D94A9301E-
+
+CAnalyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c
+s354088771.179579
+e354088772.086557
+r1
+xAnalyze
+x/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.ccb112e43f71ab541^a22a1644f71ab541^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c0000000000000000^2041"Analyze TeXnicleImporter/main.c    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/main.d --analyze /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/StaticAnalyzer/normal/x86_64/main.plist36"340C1D1A-9E00-489B-93EB-B1C57FC370C9-
 
 CBuild AST from /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m
 r0
@@ -134,11 +251,11 @@ r0
 
 CCheck dependencies
 r0
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies286354ab855ab441^e31c55ab855ab441^---0#1#0#--18"Check dependencies36"20E64894-A641-4D34-9E30-08214A489B41-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesf7cd01f93027b541^640632f93027b541^---0#1#0#--18"Check dependencies36"39E78E7E-FB2E-4903-9419-E7D2490C238E-
 
 CCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s341428192.575655
-e341428194.753442
+s354710435.800899
+e354710439.400747
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o
@@ -147,11 +264,11 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m037c93e0c759b441^05180ee3c759b441^---0#0#0#-19%DVTDocumentLocation2@105"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m0000000000000000^2015"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o36"C43B3854-A21E-4F92-9734-9DA9E7769AE4-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m3734cda37324b541^d3a266a77324b541^---0#0#0#-19%DVTDocumentLocation2@105"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m0000000000000000^2649"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.d --serialize-diagnostics /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o36"56710576-35A4-4297-96B6-3C5DFE7C9C8F-
 
 CCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s341428193.467456
-e341428194.988919
+s354710437.801012
+e354710440.145899
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o
@@ -160,11 +277,11 @@ xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection98"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m86c677e1c759b441^0c220ee3c759b441^---0#0#0#-19%DVTDocumentLocation2@106"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m0000000000000000^2020"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o TeXnicleImporter/MySpotlightImporter.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o36"9C1874AA-0FE2-4167-86E1-D711CBAF7288-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection98"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m1231cda57324b541^1e1527a87324b541^---0#0#0#-19%DVTDocumentLocation2@106"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m0000000000000000^2655"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o TeXnicleImporter/MySpotlightImporter.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.d --serialize-diagnostics /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o36"0C2BAFD4-EFEC-4851-8A55-8438BA048201-
 
 CCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s341428192.534871
-e341428193.465446
+s354710435.799245
+e354710437.794441
 r1
 xCompileC
 xbuild/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o
@@ -173,82 +290,242 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.ce7c589e0c759b441^1651f7e1c759b441^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c0000000000000000^1762"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o TeXnicleImporter/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.d -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o36"45AE6721-DB4D-4E43-99EB-EBC673981178-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c13b9cca37324b541^e63fe8a57324b541^---0#0#0#-19%DVTDocumentLocation2@91"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c0000000000000000^2241"CompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o TeXnicleImporter/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -include /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch -MMD -MT dependencies -MF /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.d --serialize-diagnostics /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o36"6637FC27-883E-4AE3-97D3-D2FBEAD47DB0-
 
 CCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleImporter/en.lproj/InfoPlist.strings
-s341428195.042688
-e341428195.067719
+s351500027.680793
+e351500027.685912
 r1
 xCopyStringsFile
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings
 xTeXnicleImporter/en.lproj/InfoPlist.strings
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection48"Copy TeXnicleImporter/en.lproj/InfoPlist.strings93fe0ae3c759b441^a25d11e3c759b441^---0#0#0#-19%DVTDocumentLocation2@111"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/en.lproj/InfoPlist.strings0000000000000000^446"CopyStringsFile build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleImporter/en.lproj/InfoPlist.strings    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding UTF-16 --outdir /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj -- TeXnicleImporter/en.lproj/InfoPlist.strings36"3CD795E2-6897-424B-B7E4-5CBE4393E1FC-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection48"Copy TeXnicleImporter/en.lproj/InfoPlist.strings9e61aefb76f3b441^22a7affb76f3b441^---0#0#0#-19%DVTDocumentLocation2@111"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/en.lproj/InfoPlist.strings0000000000000000^446"CopyStringsFile build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleImporter/en.lproj/InfoPlist.strings    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding UTF-16 --outdir /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj -- TeXnicleImporter/en.lproj/InfoPlist.strings36"4F7A7981-C977-4683-98F5-A300290A3DFA-
 
 CCpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml
-s341428195.041826
-e341428195.044627
+s352726787.748832
+e352726787.751916
 r1
 xCpResource
 xTeXnicleImporter/schema.xml
 xbuild/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Copy build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml7ec90ae3c759b441^342c0ee3c759b441^---0#0#0#-19%DVTDocumentLocation2@129"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml00f4843cdeffdf42^455"CpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/schema.xml /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources36"E6D7E29F-71F7-478D-88D2-FCD8449DD9FC-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection66"Copy build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xmlacc5bf032f06b541^b189c0032f06b541^---0#0#0#-19%DVTDocumentLocation2@129"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml0000000000000000^560"CpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -strip-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/schema.xml /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources36"D4346169-8346-4B28-B79C-1B50F47A05AA-
 
 CLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle normal x86_64
-s341428194.995973
-e341428195.033628
+s354710440.153168
+e354710441.095580
 r1
 xLd
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle
 xnormal
 xx86_64
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection112"Link /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXniclecc0cffe2c759b441^bf270ee3c759b441^---0#0#0#--781"Ld build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle normal x86_64    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/clang -arch x86_64 -bundle -isysroot /Developer/SDKs/MacOSX10.7.sdk -L/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -filelist /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/TeXnicle.LinkFileList -mmacosx-version-min=10.6 -framework CoreServices -framework CoreFoundation -framework CoreData -framework Foundation -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle36"24F3884D-6C02-4B85-BC47-20472ADFF960-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection112"Link /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXniclea14c27a87324b541^418018a97324b541^---0#0#0#--917"Ld build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle normal x86_64    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch x86_64 -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -L/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -filelist /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/TeXnicle.LinkFileList -mmacosx-version-min=10.6 -framework CoreServices -framework CoreFoundation -framework CoreData -framework Foundation -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle36"4F6250BE-A6A4-4741-AE91-3E73DC15B220-
 
 CProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist TeXnicleImporter/TeXnicleImporter-Info.plist
-s341428192.426416
-e341428192.430783
+s354710435.665156
+e354710435.671606
 r1
 xProcessInfoPlistFile
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist
 xTeXnicleImporter/TeXnicleImporter-Info.plist
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Process TeXnicleImporter/TeXnicleImporter-Info.plistfb3d6de0c759b441^2f6b6ee0c759b441^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Info.plist0000000000000000^396"ProcessInfoPlistFile build/Debug/TeXnicle.mdimporter/Contents/Info.plist TeXnicleImporter/TeXnicleImporter-Info.plist    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-infoPlistUtility TeXnicleImporter/TeXnicleImporter-Info.plist -expandbuildsettings -platform macosx -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist36"CF593780-3620-461A-8B79-30FF92695E38-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection52"Process TeXnicleImporter/TeXnicleImporter-Info.plist9c69aaa37324b541^dbf8aba37324b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Info.plist0000000000000000^396"ProcessInfoPlistFile build/Debug/TeXnicle.mdimporter/Contents/Info.plist TeXnicleImporter/TeXnicleImporter-Info.plist    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    builtin-infoPlistUtility TeXnicleImporter/TeXnicleImporter-Info.plist -expandbuildsettings -platform macosx -o /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Info.plist36"5352ED03-448C-4685-9131-A00716A2BFDB-
 
-CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-gzmjmwrrrwotzgdcyechzjggiqtf_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-acqhknvitodbvwgycwfjexpqwowq_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
 r0
 
-CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-hdtflgzbjkpitkggceijcumgcymk_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-afyafqteyazirpgmjfuvezjzupwr_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
 r0
 
-CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-s341428192.438994
-e341428192.528229
-r1
-xProcessPCH
-x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth
-xTeXnicleImporter/TeXnicleImporter-Prefix.pch
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch5b7a70e0c759b441^98c108e1c759b441^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^1823"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-awfzxlvkcreabtdlurkovopcazgw/TeXnicleImporter-Prefix.pch.d36"221AF4E1-5C8C-4645-9460-AF5EC65D77C3-
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-bhjelrqhrzmvkvgzefynzayhfahn_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
 
-CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s341428192.440510
-e341428192.536399
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-cfplhbipsmiivddqjpksleyyhpdm_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-eevuwvhypwfxubeykwikgnvyemwb_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-elrxnrdpieejpxbjwkwjcngjdbrg_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-etsbybaymsirwmdjhnwqxwnwcicg_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /Users/hewitson/Library/Developer/Xcode/DerivedData/TeXnicle-dbrkdgqkngojkkghnkixtsnndplw/Index/PrecompiledHeaders/TeXnicleImporter-Prefix-fwuosxsmsmpuldhixjljlruplnce_ast/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s353091224.186337
+e353091224.483898
 r1
 xProcessPCH
-x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth
+x/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth
 xTeXnicleImporter/TeXnicleImporter-Prefix.pch
 xnormal
 xx86_64
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch8bdf70e0c759b441^8acc08e1c759b441^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2006"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.6 -gdwarf-2 -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-domkrjsdpqopnvbubvuytvdsmtxb/TeXnicleImporter-Prefix.pch.d36"E00C4E9A-56E0-4BA2-90ED-588F6AC3679C-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch6ff62f98be0bb541^7219a399be0bb541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2672"ProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.d36"405F9205-3C8B-41CB-9128-30D3BBA681EB-
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.analyzer
+s353675315.977530
+e353675316.028250
+r1
+xProcessPCH
+x/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.analyzer
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch795afa33a814b541^9f750934a814b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2607"ProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.analyzer    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -Xclang -analyzer-checker -Xclang osx.cocoa.experimental.SelfInit -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dprytysxreszjzetgpyqqdcjmqdv/TeXnicleImporter-Prefix.pch.d36"F3DD32A6-8587-483C-ABEE-267563091FE9-
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.analyzer
+s353675315.977375
+e353675316.010411
+r1
+xProcessPCH
+x/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.analyzer
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch4f58fa33a814b541^3baa0234a814b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2217"ProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.analyzer    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-dsvkhoefvlzehwaglvpyuulhbgbe/TeXnicleImporter-Prefix.pch.d36"07A118FC-5F6F-480B-852E-2B8628211987-
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s353091224.183473
+e353091224.260647
+r1
+xProcessPCH
+x/var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch938d2f98be0bb541^520da399be0bb541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2348"ProcessPCH /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/7l/6p8vr0y92wgff5dl7bpc3jym0000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.d36"56FD5ADD-B12C-4952-AC7D-EF0704CD30BB-
+
+CProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s353399736.461868
+e353399736.755194
+r1
+xProcessPCH
+x/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch2b6c76b87310b541^145bc1b87310b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2672"ProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-bcirmlfqagcxfadekjujkxgakagl/TeXnicleImporter-Prefix.pch.d36"6B93CDC8-A960-42A5-9036-02628A13BF07-
+
+CProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cnkmclprnggenwdjzsxzttdnysan/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cvxourbvgynguldwsrrfazrzfobx/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s353399736.461858
+e353399736.755134
+r1
+xProcessPCH
+x/var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch236a76b87310b541^3350c1b87310b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2348"ProcessPCH /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/_d/1hpg3zt55tv955sl39fmccb40000gq/C/com.apple.Xcode.503/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fylzulxdntazswhhiksajnrncvmc/TeXnicleImporter-Prefix.pch.d36"9C61A058-1601-45B1-B3E9-3C34E7150EEF-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s354710435.680891
+e354710435.794081
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pcha377aea37324b541^3c50cba37324b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2672"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.d36"F9E3C033-5699-4FA9-9A89-CE184B078430-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s354710435.680357
+e354710435.792461
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pchc763aea37324b541^dbf9caa37324b541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2348"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.d36"B1C6DC44-C464-4F53-85D4-A20847891B2E-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.analyzer
+s354088770.893290
+e354088771.172512
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.analyzer
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch03cce442f71ab541^2c472c43f71ab541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2217"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.analyzer    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-crgexpfldzweribwkqdkbvelerqe/TeXnicleImporter-Prefix.pch.d36"45C3EF6F-2CBB-4722-9966-9B51DA6E90D6-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
+s351500024.341494
+e351500024.430215
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch2a8e57f876f3b441^1f316ef876f3b441^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2348"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cwexhzhbjitjjxgcbyvvytuohxjn/TeXnicleImporter-Prefix.pch.d36"177A566F-E373-4084-9762-9B8CE756F901-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s351500024.342520
+e351500024.452972
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pch74ce57f876f3b441^975574f876f3b441^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2672"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug --serialize-diagnostics /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.dia -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-fcjrdvddnxuoohatanrwhppnnepw/TeXnicleImporter-Prefix.pch.d36"A48E3F22-913C-4518-8F57-1DDEC072B4DE-
+
+CProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.analyzer
+s354088770.893829
+e354088771.171897
+r1
+xProcessPCH
+x/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.pth
+xTeXnicleImporter/TeXnicleImporter-Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.analyzer
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile TeXnicleImporter/TeXnicleImporter-Prefix.pchfeefe442f71ab541^b83e2c43f71ab541^---0#0#0#-19%DVTDocumentLocation2@112"file://localhost/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch0000000000000000^2607"ProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.analyzer    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch x86_64 -fmessage-length=0 -std=gnu99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-sign-compare -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -Wprotocol -Wdeprecated-declarations -mmacosx-version-min=10.6 -g -Wno-conversion -Wno-sign-conversion "-DIBOutlet=__attribute__((iboutlet))" "-DIBOutletCollection(ClassName)=__attribute__((iboutletcollection(ClassName)))" "-DIBAction=void)__attribute__((ibaction)" -Xclang -analyzer-disable-checker -Xclang deadcode.IdempotentOperations -Xclang -analyzer-checker -Xclang osx.cocoa.experimental.SelfInit -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/TeXnicle.hmap -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/include -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources/x86_64 -I/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/TeXnicle.build/Debug/TeXnicleImporter.build/DerivedSources -F/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/TeXnicleImporter-Prefix.pch -o /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.pth -MMD -MT dependencies -MF /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-hbhjqufykdczqmdqaqyzenfhqrus/TeXnicleImporter-Prefix.pch.d36"0CD5B9A4-4B71-467A-9985-28452948A8E9-
 
 CTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
-s341428195.087578
-e341428195.102682
+s354710441.117855
+e354710441.140023
 r1
 xTouch
 x/Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
-lSLF04#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Touch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimportere4f316e3c759b441^c24d1ae3c759b441^---0#0#0#--203"Touch build/Debug/TeXnicle.mdimporter    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /usr/bin/touch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter36"68AC1A5A-324B-4399-B22A-E5DCDF2724FA-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Touch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimportera4391ea97324b541^08e723a97324b541^---0#0#0#--203"Touch build/Debug/TeXnicle.mdimporter    cd /Users/hewitson/working/software/cocoa/mac/TeXnicle    /usr/bin/touch -c /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter36"505470BC-7FFA-40BA-A9D6-DB76DEA0FFA5-
 

@@ -38,6 +38,14 @@
     font-weight: 700;
     line-height: 24px;
 }
+.style_2 {
+    font-family: 'Monaco', 'Courier', serif;
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+}
 .style_SkipStroke_2 {
     background: transparent;
     opacity: 1.00;
@@ -108,11 +116,11 @@
 .graphic_shape_layout_style_default_External_320_41 {
     position: relative;
 }
-.graphic_textbox_layout_style_default_External_669_483 {
-    position: relative;
-}
 .graphic_textbox_layout_style_default {
     padding: 4px;
+}
+.graphic_textbox_layout_style_default_External_669_1235 {
+    position: relative;
 }
 .graphic_textbox_style_default_SkipStroke {
     background: transparent;

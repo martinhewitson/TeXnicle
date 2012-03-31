@@ -1,43 +1,27 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf230
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+\f3\fnil\fcharset0 LucidaGrande;}
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red24\green84\blue167;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0\fs28 \cf0 Beta 17\
--------\
-\
-+ Made separate "Typeset" menu which also works for stand-alone documents now.\
-+ Added preference for setting the line highlight color\
-+ Added preference for setting the matching words highlight color\
-+ Engines now must opt-in to the three preferences by specifying the appropriate tag somewhere in \
-  the engine file. To support all three of the current engine options, use the tag:\
-    \cf2 \CocoaLigature0 <support>nCompile,doBibtex,doPS2PDF</support>\cf0 \
-\CocoaLigature1   If the engine doesn't support one or more of the options, remove it/them from the list. If the option\
-  key-word is not present between the <support> tags, then the corresponding user control on the engine\
-  settings panel will not be available.\
-  The four built-in engines are now configured for the options they support.\
-+ Bug fix: clicking on code-folding gutter resulted in an 'empty' bookmark being created. This is now fixed.\
-+ Other minor fixes and improvements.\
+\f0\fs28 \cf0 \
 \
 To Do\
 -----\
 \
-**** Macro editor. Assign key shortcuts to snippets\
++ SVN and git support, like Xcode\
 \
 + Stand-alone documents could have bookmarks and save them in the xattr.\
   - also could save the selection point in the xattr\
 \
 + Split pane on the viewer\
 \
-+ Clean up delegate/protocol between TeXTextView->TeXEditorViewController->TeXProjectDocument\
-	- it's a mess!\
-\
 + Finish help\
 \
 + Context menu on TeXEditor\
 	- insert->figure->projectlist\
-					  ->from disk...\
+					  ->from disk...`\
             ->file->project list\
 				    ->from disk...\
 			 ->citation->projectlist\
@@ -47,12 +31,520 @@ To Do\
 	- EngineVariable has a name, type, displayString, value\
 	- on engine settings controller we have a tableview which properly displays variables and type/value\
 	- in engine script we have an XML fragment to define the variables that the script supports\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx18280\pardirnatural
+\cf0 \
++ Display options for outline view\
+	- show which sections\
+	- store in project settings as dictionary?\
+	- make a simple depth setting that matches the order in the new templates\
+		- make a slider to increase detail\
+	- make our own view? Then we can have little lines to join up the sections, like /bin/tree does\
+\
++ Make a 'dynamic wrap' option where the text wraps to the editor width.\
+\
++ Make a nicer Library with proper objects rather than a dictionary. Store in 'Application Support'. Support drag-n-drop. Think about iCloud key-value sync.\
+	- maybe we can stick with the dictionary based library, but move to dataSource and delegate methods rather than array controller and bindings.\
 \
 \
-Bugs\
+### Correct search results as files are edited\
+	- how?\
+\pard\pardeftab720
+\cf0 \
+### Add bookmarks to standalone editor\
+	- store in xattr
+\f1\fs24 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+Spell check dictionary\
+NB. not sure if these are TeXnicle problems, or just dictionary problems, or compatibility problems\'85\
+- system set to 'automatic by language', but when changing it to a specific language (British English) in a TeXnicle file it does not stay selected after restart.\
+- incorrectly spelled word for 'automatic by language' (US English) is underlined in red, when switching to British English, the underlining does not go away even though it is correctly spelled for British English (and the next incorrect word is shown when selecting the British word and opening "Spelling and grammar", so the underlined but correctly spelled word IS recognised as correctly spelled\'85)
+\f2\fs28 \
+\pard\pardeftab720
+\cf0 == Maybe broken on 10.6?\
+\pard\pardeftab720
+
+\f0 \cf0 \
+--------------\
+\pard\pardeftab720
+
+\f1 \cf0 - It might be nice to be able to double click the titles in the document outline and have it open an extra editing window, just as it does when double clicking a file in the project files tab\
+\pard\pardeftab720
+
+\f0 \cf0 --------------\
+\pard\pardeftab720
+
+\f1 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 + Store size of standalone pdf window for a project.\
+\pard\pardeftab720
+
+\f1 \cf0 + Add nomenclo engine\cf2 \
+\
+Another request: I notice when I select a paragraph (or put the cursor somewhere in a paragraph of plain text), TeXnicle tells me at the bottom which line it is and how many characters the paragraph contains. Nice! Could you expand this function to include number of words, split into per section, per chapter, per all documents excluding appendices etc, and per entire project.. only counting plain text words, not commands etc? Would be really helpful!\
+\
+Maybe it's an idea to incorporate language settings in the settings of each project (in the settings tab), for the spelling and grammar correction things? That way the language is easily set without having to go through spelling and grammar and the user is sure it is set for the entire project, not just for one of the project's tex files...\'a0
+\fs24 \
+
+\fs28 \cf0 \
+- adding new files from template as above to new project, once you added the files they appear in the Project Files tab, but not in alphabetical order, and not in the order of them being added either! (weird)
+\f3 \cf3 \
+
+\f1 \cf0 \
++ spelling language in project/file settings\
+\
++ automatically show files available in a folder, even if they are not part of the project?\
+	- perhaps show then faded?\
+	- with a context menu to add them to the project?\
+	- but then what's the point of a project if it just shows all files in the directory?\
+\
++ placeholders\
+	- find out what character is left in the text file for a placeholder and replace them when loading the file\
+\
++ validate project menu\
+\
++ better parsing of console output\
+	- jump to errors?\
+\
++ Applescript ability\
+	- tell project XX to select file\
+	- tell texnicle to jump to line in file\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 Bugs\
 ----\
 \
-+ Paste a large amount of text in. Colouring not properly working.\
+Beta 39\
+-------\
+\
++ Command completion now includes new commands defined in the project or file.\
++ Bug fix: creating a new TeX document from the empty template works now.\
++ Bug fix: when pdf viewer is in page mode, the visible page is restored now after typesetting.\
++ Bug fixes and optimisations to do with code folding.\
++ Various other small bug fixes.\
+\
+Beta 38\
+-------\
+\
+Focus area: Live Update\
+\
+TeXnicle has a first implementation of 'live update' on projects and standalone files. \
+If the 'Live Update' button is on then TeXnicle will attempt to continuously typeset \
+the project. Before each automatic typeset, the project/document is saved. The \
+project/document is only typeset if there have been changes to any of the project \
+files (or to the standalone file) since the last time it was typeset.\
+\
+\
+Other changes in beta 38:\
+\
++ TeXnicle now has syntax checking based on the chktex program. You can setup how this\
+  is used in the preferences under the 'Typesetting' tab.\
++ Improved look of completion lists.\
++ When typing a command (\\something) TeXnicle now automatically shows a completion list. \
+  This behaviour can be deactivated in the preferences on the Commands tab.\
++ When pasting a table, you are now prompted to select the separator character for \
+  parsing columns of the pasted text.\
++ Thumbnails beside the PDF view automatically resize as the split-view is resized. \
+  Removed the manual resizing slider.\
++ Added the ability to define the lists for smart completion of references, citations, \
+  file includes, and \\begin environments. See the 'Commands' tab in the preferences.\
++ Bug fixes to synctex support. In some cases the file paths are absolute; this wasn't \
+  handled properly before.\
++ Bug fixes: better handling of included .bib files when listing possible citations.\
++ Bug fix: when adding a new file from template, the suggested filename now changes \
+  each time you add a new file.\
++ Bug fix: removing a 'supported file type' is now persistent across app restarts.\
++ Bug fix: hitting enter after typing \\begin\{ no longer causes an exception to be thrown.\
++ Other minor bug fixes and improvements.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f1\fs24 \cf2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 	\
+Beta 37\
+-------\
+\
++ Improved citation smart completion list. For bibtex entries this now shows title and author in the list.\
++ Smart-complete of citations now works for stand-alone tex files which contain a \\bibliography\{xxx.bib\} command.\
++ Smart-complete of citations in TeXnicle projects no-longer explicitly needs the .bib file to be part of the project.\
++ Added support for command-line option '-line': \
+  Example: /Applications/TeXnicle.app/Contents/MacOS/TeXnicle test.tex  -line 3\
++ Improved paragraph reformatting.\
++ Bug fix: cmd-click on PDF now opens the corresponding file in a tab if it wasn't already open.\
++ Bug fix: cmd-click on additional project editor windows (opened by double-clicking on file in project tree) now \
+  jumps to selection in PDF, as with the main editor.\
++ Bug fix: setting background colour of editor now persists across app restarts.\
++ Fixed various minor bugs and memory leaks.\
+\
+\pard\pardeftab720
+
+\f1 \cf0 Beta 36\
+----------\
+\
++ Added an embedded console below the editor of both the standalone file editor and the project editor. This is \
+  much more useful when working in full-screen mode.\
++ Added an XeLaTeX engine.\
++ Added a "File->New Project->FromTemplate..." menu option.\
++ Smart completion works now for \\eqref\{\} as well as for \\ref\{\}\
++ Bug fix: sometimes stand-alone editors would go crazy jumping in and out of the Versions browser \
+   if the file changed on disk by another program. This is fixed now.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
+\pard\pardeftab720
+
+\f1 \cf0 Beta 35\
+----------\
+\
+Focus Area: Project Templates\
+\
+TeXnicle has a first implementation of project templates. \
+\
+Project templates are file bundles which contain the raw files (source and images) needed for the template as well as an info.plist and a settings.plist (optional). These bundles must\
+called <some_name>.tpt and must reside in the directory\
+\
+~/Library/Application Support/TeXnicle/projectTemplates/\
+\
+When this version of TeXnicle first launches, it will copy a very simple example template in to the directory.\
+\
+Creating project templates\
+\
+You can create a project template in two ways (currently):\
+\
+1) You can create a template from an existing project using the "Project->Create Project Template..." menu item. \
+\
+You will be shown a dialog where you can select which of the project files should be included in the template. You can give the project a name and a description.\
+\
+2) Create a project template by hand\
+\
+a) In the directory specified above, create a directory with your desired template name and put in there all the files necessary for the template. \
+b) Create an info.plist file and populate it with the following content:\
+\
+<?xml version="1.0" encoding="UTF-8"?>\
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\
+<plist version="1.0">\
+<dict>\
+        <key>description</key>\
+        <string>Project template which creates a simple LaTeX article project.</string>\
+        <key>name</key>\
+        <string>Article</string>\
+</dict>\
+</plist>\
+\
+c) Optionally, create a settings.plist file with the following content:\
+\
+<?xml version="1.0" encoding="UTF-8"?>\
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\
+<plist version="1.0">\
+<dict>\
+        <key>doBibtex</key>\
+        <integer>1</integer>\
+        <key>doPS2PDF</key>\
+        <integer>1</integer>\
+        <key>engineName</key>\
+        <string>pdflatex</string>\
+        <key>mainfile</key>\
+        <string>Article_main.tex</string>\
+        <key>nCompile</key>\
+        <integer>3</integer>\
+        <key>openConsole</key>\
+        <integer>1</integer>\
+        <key>showStatusBar</key>\
+        <integer>1</integer>\
+</dict>\
+</plist>\
+\
+This settings.plist will be used to set the project settings for any project derived from the template.\
+\
+d) Finally, rename the template directory so that it has a ".tpt" file extension. You should see that the icon changes to the TeXnicle project template icon.\
+\
+Working with project templates\
+\
+You can view the existing project templates using the template manager which is part of TeXnicle's preferences under the "Templates" tab.\
+You can edit the existing project templates from there too. Editing is currently limited to changing the content of the source files. \
+\
+To create a new project from a template, you can use the "Welcome to TeXnicle" screen. Click on "New Project..." then on "From Template...". Select the template\
+you want to use and click "Create Project".\
+\
+\
+Other changes in beta 35:\
+\
++ When loading engine files, TeXnicle now parses out the text between tag <imageinclude></imageinclude>. The text between\
+  these tags is used when pasting an image in to the text editor. If these tags are not found, TeXnicle uses a standard LaTeX\
+  includegraphics block.\
+\
++ The built-in context engine has been updated to include a <imageinclude></imageinclude> tag.\
+\
++ Bug Fix: clicking on "Jump to Section..." in the popup section list no longer jumps to the top of the file.\
++ Bug Fix: trying to use a code completion on an unknown command shortcut allows a newline now.\
++ Bug Fix: better handling of paste, paste-as-image, and paste-as-table\
+\pard\pardeftab720
+
+\f0 \cf0 \
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 Beta 34\
+-------\
+\
++ Added synctex support. Now command-click on editor highlights corresponding line in pdf and \
+  command-click on pdf highlights line in source file. The text-search based cmd-j and shift-cmd-j\
+  still work as before.\
+\
++ Built-in engines for pdflatex, latex and context now generate synctex files.\
+  \
+\
+Beta 33\
+-------\
+\
++ Made a new menu "Editor". Moved some items from "Edit" to "Editor".\
+\
++ Added menu items under "Editor" for inserting the selected code clip or symbol to complement the\
+  existing buttons.\
+\
++ Added a new "Insert In-line Math" menu item under "Editor" with shortcut key shift-alt-cmd-m.\
+\
++ Added a new menu item "Editor -> Insert Table" where you can enter the number of rows and columns \
+  and TeXnicle will insert a table for you with placeholder ready for populating.\
+\
++ Added zoom ability on the editor. Using cmd+ and cmd- you can temporarily increase or decrease\
+  the font size in the editor. This is not persistent so will be set back to the font size set \
+  in the preferences when the document is reopened.\
+\
++ Bug fix: line wrapping when on hard-wrap got broken in the last release.\
+\
+Beta 32\
+-------\
+\
++ Bug fix: beta 31 had a nasty bug which could stop projects saving properly on 10.6.8.\
+\
+\
+Beta 31\
+-------\
+\
++ Improved indentation support on the editor. When entering a newline (by hitting enter) the \
+  indentation of the current line will be used for the following line. To go to a newline \
+  without indentation, you can do shift-enter.\
++ Added new keyboard short-cut (alt-cmd-tab) to toggle focus between editor and pdf viewer. The two\
+  viewers also give some focus indication now.\
++ Added new keyboard short-cuts (cmd-up and down arrows) to move page up and down in pdf viewer.\
++ Better template support. New standalone files allow selection from the defined templates.\
++ The File->New Project menu now has sub-menus which map the functionality of the \
+  Welcome screen: "New Empty Project", "New Article Project", "Build Project"\
++ Implemented a better (hopefully) project-wide search function.\
++ Bug fix: fixed a nasty bug which could result in overwriting files and folders when trying \
+  to add a new standalone tex file to a project before saving the standalone tex file.\
++ Bug fix: new stand-alone TeX files would not syntax highlight text until the file was saved. \
+  This is fixed now.\
++ Bug fix: on the completion pop-up windows, it's now possible to tab between the list and the search field.\
+\
+Beta 30\
+-------\
+\
++ Stand-alone editors now work with Lion's autosave and Versions system.\
++ Printing editor contents now works for project editor, project stand-alone windows, stand-alone tex editor.\
++ Bug fix: under some circumstances saving new stand-alone tex files resulted in the contents being lost.\
++ Bug fix: cmd-f on the pdf view now sets the focus to the search field.\
+\
+\
+Beta 29\
+-------\
+\
+\pard\pardeftab720
+\cf0 + TeXnicle now restores more state of the user-interface on a per-document basis.\'a0\
+\'a0 For example: selected control tab, visible part of pdf, widths of controls and\
+  editor window (for Lion users, some of this already 'just works').\
++ TeXnicle can now be configured to support other types of (text) files.\'a0\
+\'a0 In the preferences, there is a new tab 'File Types'. There you can add your own supported\
+\'a0 file types by specifying the extension and description, and whether or not TeXnicle should\'a0\
+\'a0 syntax highlight them.\
++ Added a preference to specify the coloring of multi-line arguments ( \{\} or [] ). If you have code\
+  which contains arguments spanning many lines, then the multi-line argument coloring is very hard to\
+  do without using a lot of cpu power. So this is off by default, meaning single line arguments will \
+  be coloured, multi-line arguments won't be.\
++ Added two new menu commands to increase and decrease the comment level (alt-cmd-/ and ctrl-cmd-/).\
++ Added a Lilypond engine. Currently this assumes that Lilypond.app is installed in /Applications. If \
+  that's not the case, you will need to duplicate the engine and edit it to point it at the location of\
+  the lilypond binary.\
++ Main project files are no longer limited to being tex files. Any file in the supported files list \
+  can be a main file now.\
++ The project builder has been made significantly more robust.\
++ Bug fix: word highlighting got a little broken in release 28. It's fixed now.\
++ Bug fix: uncommenting (cmd-/) multi-'%' comments now works.\
++ Bug fix: syntax highlighting of multi-'%' comments was not always working correctly.\
++ Bug fix: syntax highlighting got a little broken due to changes in beta 28.\
++ Bug fix: some experimental code got left in beta 28 which caused a crash when running on 10.6.8.\
++ Bug fix: different file encodings were not properly displayed in the editor in project mode.\
++ Bug fix: stand-alone PDF viewer no longer loses its scroll position when recompiling document.\
++ Bug fix: pdf is no longer deleted just before compiling.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 + Bug fix: Engine editor window was chopping lines off the top.\
++ Bug fix: Syntax highlighting properly updates when jumping to previously unseen text via the \
+           document outline view.\
++ Bug fix: New code clippings are now selected after being added.\
++ Bug fix: Editing code clippings in place (double-click code column table entries) now works (again).\
++ Bug fix: Dragging clippings around on the clippings table was not supposed to be possible but it was\
+           working to some extent but producing strange results. It is no longer possible to drag \
+           clippings around on the clippings table.\
++ Bug fix: Editor find panel now works again on 10.6.\
++ Bug fix: Find panel/bar now works on the Console.\
++ Bug fix: Document outline now searches for \\bibliography sections.\
++ Bug fix: Built-in engines are reinstalled when TeXnicle starts in case you deleted them.\
++ Bug fix: Renaming engines starting with a capital letter doesn't cause problems anymore.\
+\
+Please note: if you are upgrading from a version earlier than beta 27, I recommend you read the release notes for beta 27. In particular:\
+\
+    ** It is strongly recommended that you restore the default library **\
+\
+\
+Beta 28\
+-------\
+\
++ Added two new syntax coloring commands for double and triple comments (%%, %%%). These are off by default but can be switched on in the preferences.\
++ Added better support for sty, cls, and bst files.\
++ Dynamic outline view now supports chapters\
++ Bug fix: Continuous spell checking now works properly.\
++ Bug fix (Major): Loading of files was sometimes failing when running on 10.6.8. (Thanks to \
++ Bug fix: Template editor (both in preferences and in new file sheet) was broken for new templates.\
++ Bug fix: Free-standing project text editor windows were broken. Now they are fixed and the command \
+           expanding works as well. So double-click those project files to get your additional windows!\
++ Bug fix: Paragraph reformatting (ctrl-q) better respects the chosen line length now.\
+\
+Please note: if you are upgrading from a version earlier than beta 27, I recommend you read the release notes for beta 27. In particular:\
+\
+    ** It is strongly recommended that you restore the default library **\
+\
+\
+Beta 27\
+-------\
+\
++ Code Snippets Library\
+\
+  - Code snippets now support placeholders. A placeholder is indicated by enclosing a string in '@'. For example, you can have a snippet like\
+    \\section\{@section@\}\
+  - The text editor replaces the placeholders with tokens. You can jump to the next or previous placeholder token with cmd-enter and shift-cmd-enter.\
+  - The library has some major structural changes to allow for better future support. In the past, restoring the default library would result in all your \
+    own library additions being lost. This will no longer happen if you do one more restore. The new library structure has a version number and each code \
+    clipping has a UUID to better support future upgrades and restoring of defaults without destroying user-added categories and clips.\
+    \
+    ** It is strongly recommended that you restore the default library **\
+    \
+    To do that, select the library pane and click on the action button under the categories list. Select "Restore Default Library". Since you have an old-style\
+    library currently, any changes you made will be lost. I'm sorry about this, but this is the best/only way to improve this situation for the future. The library\
+    is actually stored in the preferences plist for TeXnicle which is in /Users/<username>/Library/Preferences/com.bobsoft.TeXnicle.plist. You could back-up this file\
+    then do the restore in TeXnicle, then merge any changes you had made back in to the upgraded file by hand. I can provide instructions on this if anyone needs this.\
+\
++ Preferences has a new panel to edit the pdflatex and gs paths needed for compiling code snippet previews.\
++ PDF viewer now has a (collapsable, resizable) thumbnail list.\
++ The PDF viewer search results list is now resizable.\
+\
+Beta 26\
+-------\
+\
++ PDF viewer has a list of search matches which slides in from the right.\
++ PDF viewer has a new print button.\
++ Standalone editor gets "Paste as Image" functionality. \
++ Updated help documentation (but still far from complete).\
++ Various other small bug fixes.\
+\
+Beta 25\
+-------\
+\
++ The engine editor window got broken in one of the recent releases. This is now fixed.\
+\
+Beta 24\
+-------\
+\
++ Standalone editor now supports the code completion commands.\
++ Bug fix: the scrolling in the project finder was going crazy for large numbers of search results.\
++ Further memory management bug fixes.\
+\
+Beta 23\
+-------\
+\
++ Code snippets in the library can now be assigned a command code. This can be auto-expanded in the tex editor:\
+  Type:\
+        #<cmd>\
+  then hit enter to expand the command with the assigned code snippet.\
+  Example:\
+      #be<enter>\
+  will expand a \\begin\{equation\} environment.\
+  These commands also work with the popup completion. Type a '#' then hit <escape> to get a list of possible commands.\
+  A number of commands are assigned in the default snippet library, and users can modify these or add their own.\
++ New standalone PDF viewer window (with ability to search and jump to/from text in source)\
++ New menu item (in Typeset) to open in system pdf viewer\
++ Files that are modified outside TeXnicle will silently reload if there are no unsaved changes.\
++ Various bug fixes to do with memory management and stability.\
+\
+\
+Beta 22\
+-------\
+\
++ Fixed a nasty bug which appeared in beta 21 causing the tex editor to be unresponsive under some conditions\
++ Bug fixes to 'no document' and 'no pdf' views\
+\
+Beta 21\
+-------\
+\
++ Fixed various bugs to do with document selection in projects and closing of tabs.\
++ Search bar on the PDF previewer is now properly disabled when no pdf is shown.\
++ Both the text editor and the pdfview both show nice icons now when no document is being displayed.\
++ Resizing of split views on project windows behaves better now.\
++ Don't highlight commands as incorrectly spelt.\
+\
+Beta 20\
+-------\
+\
++ Stand-alone tex editor now has a left tab bar just like the project window. This includes the symbol \
+  palette, the code library, the document outline, and the compile preferences. (Note: the compile \
+  preferences is no longer revealed by the toolbar 'Settings' button.)\
+\
++ Disabled the checking of 'file access time'. This was being used to try to handle files being changed \
+  by CVS which seems to update files (if you have the $Id:$ tag in it) without changing the modification \
+  date. The access time is changed by CVS, but this causes all sorts of other problems so it's a poor \
+  workaround. Need to find a better way to handle file reloading for CVS commits.\
+\
++ Bug fix: when making a new standalone latex file the status bar was showing wrong labels.\
++ Bug fix: sometimes making a new article project resulted in an empty file in the editor.\
++ Bug fix: 10.6 users sometimes experienced issues loading old texnicle files.\
+\
+Beta 19\
+-------\
+\
++ Some shuffling of the user interface with regards the status bar at the bottom of document windows. The status bar is more integrated now and can be toggled on and off.\
++ Some significant editor optimisation\
++ Bug fix: when searching for terms containing line breaks, sometimes TeXnicle would crash.\
++ Bug fix: word highlighting updates when text view scrolls. Also when the preference is activated and deactivated. \
++ Bug fix: bookmark changes on editor windows didn't propagate to the main project window. This is now fixed.\
+\
+Beta 18\
+-------\
+\
++ The mini-console gets a progress indicator, and as such, the progress indicator is removed from the bottom of the window.\
++ On the stand-alone editor, the project compile settings now slide in from the right rather than sliding out in a drawer (which didn't work in fullscreen mode)\
++ Toolbars are customizable again (this got switched off in the last beta)\
++ The "Jump to mainfile" menu item has a new keyboard shortcut: shift-cmd-m. This means that the normal use of cmd-m for minimizing windows works again.\
+\
+\
+Beta 17\
+-------\
+\
++ Made separate "Typeset" menu which also works for stand-alone documents now.\
++ Added preference for setting the line highlight color\
++ Added preference for setting the matching words highlight color\
++ Engines now must opt-in to the three preferences by specifying the appropriate tag somewhere in \
+  the engine file. To support all three of the current engine options, use the tag:\
+    \CocoaLigature0 <support>nCompile,doBibtex,doPS2PDF</support>\
+\CocoaLigature1   If the engine doesn't support one or more of the options, remove it/them from the list. If the option\
+  key-word is not present between the <support> tags, then the corresponding user control on the engine\
+  settings panel will not be available.\
+  The four built-in engines are now configured for the options they support.\
++ Bug fix: clicking on code-folding gutter resulted in an 'empty' bookmark being created. This is now fixed.\
++ Other minor fixes and improvements.\
 \
 Beta 16\
 -------\
@@ -251,13 +743,13 @@ Beta 4\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
 + Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
-\f1 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed Console window title (thanks to Murray 
-\f1 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed code folding bug (thanks to Murray 
-\f1 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Made default syntax highlighting colours more muted\
 + Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\

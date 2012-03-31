@@ -9,20 +9,20 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TeXnicle/src/Document/ProjectItemTreeController.m"
-         timestampString = "337069994.126906"
+         timestampString = "350903245.579638"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1178"
-         endingLineNumber = "1178"
-         landmarkName = "-promptForSaveForItem:"
+         startingLineNumber = "1163"
+         endingLineNumber = "1163"
+         landmarkName = "-removeFile:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
-         filePath = "/var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/T/QfMAl2Kn-TeXProjectDocument.m"
+         filePath = "/../../../../../../../var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/T/QfMAl2Kn-TeXProjectDocument.m"
          timestampString = "333554362.00012"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TeXnicle/src/StandaloneEditor/MHFileReader.m"
-         timestampString = "336553450.986419"
+         timestampString = "347744299.533715"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-initWithEncodingNamed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,18 +51,60 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TeXnicle/StartupScreenController.m"
-         timestampString = "337070736.25587"
+         timestampString = "351541243.532722"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "216"
-         endingLineNumber = "216"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "-cancelNewProject:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TeXnicle/src/Finder/FinderController.m"
+         timestampString = "349811999.354079"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "397"
+         endingLineNumber = "397"
+         landmarkName = "-searchForTerm:inFile:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TeXnicle/TeXEditor/TextView/TeXColoringEngine.m"
+         timestampString = "347963974.689249"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
+         landmarkName = "-colorTextView:textStorage:layoutManager:inRange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "TeXnicle/src/Document/TeXProjectDocument.m"
+         timestampString = "354885835.002582"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2588"
+         endingLineNumber = "2588"
+         landmarkName = "-writeToURL:ofType:forSaveOperation:originalContentsURL:error:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          scope = "1"

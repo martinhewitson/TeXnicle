@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>11C74</string>
+	<string>11D50</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -66,6 +66,46 @@
 			<key>NSDocumentClass</key>
 			<string>TPEngineEditor</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>clas</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>TeXnicle_Doc</string>
+			<key>CFBundleTypeName</key>
+			<string>LaTeX Class Files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>sty</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>TeXnicle_Doc</string>
+			<key>CFBundleTypeName</key>
+			<string>LaTeX Style Files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>tpt</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>TeXnicle_relief</string>
+			<key>CFBundleTypeName</key>
+			<string>TeXnicle Project Template</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<true/>
+			<key>NSDocumentClass</key>
+			<string>TPProjectTemplateViewer</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>TeXnicle</string>
@@ -87,24 +127,22 @@
 	<string>2.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 	<key>CFBundleVersion</key>
-	<string>17</string>
+	<string>38</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>4D199</string>
+	<string>4E2002</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>11C63</string>
+	<string>11D50a</string>
 	<key>DTSDKName</key>
 	<string>macosx10.7</string>
 	<key>DTXcode</key>
-	<string>0420</string>
+	<string>0432</string>
 	<key>DTXcodeBuild</key>
-	<string>4D199</string>
+	<string>4E2002</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.productivity</string>
 	<key>LSMinimumSystemVersion</key>
@@ -115,8 +153,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSServices</key>
-	<array/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -143,7 +179,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
 </dict>
 </plist>
