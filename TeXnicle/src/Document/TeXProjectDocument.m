@@ -2854,12 +2854,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) showDocument
 {
+//  NSLog(@"Show doc");
   NSView *view = [self.pdfViewerController.pdfview documentView];    
+  PDFPage *page = [self.pdfViewerController.pdfview currentPage];
+  NSInteger index = [self.pdfViewerController.pdfview.document indexForPage:page];
   NSRect r = [view visibleRect];
+//  NSLog(@"Visible rect %@", NSStringFromRect(r));
   BOOL hasDoc = [self.pdfViewerController hasDocument];
   [self.pdfViewerController redisplayDocument];
   if (hasDoc) {
-    [view scrollRectToVisible:r];
+    if (page) {
+      [self.pdfViewerController.pdfview goToPage:[self.pdfViewerController.pdfview.document pageAtIndex:index]];
+    } else {
+      [view scrollRectToVisible:r];
+    }
   }
 }
 
