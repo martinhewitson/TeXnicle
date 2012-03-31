@@ -311,10 +311,6 @@
 			
 			NSTextStorage *ts = [[self document] textStorage];
 			NSString *textStr = [ts string];
-//			NSAttributedString *aa = [ts attributedSubstringFromRange:NSMakeRange(0, [ts length])];
-//			NSMutableAttributedString *aStr = [[NSMutableAttributedString alloc] initWithAttributedString:aa];
-//			NSString *textStr = [aStr unfoldedString];
-//			[aStr release];
 			if ([contentStr length] != [textStr length]) {
         _hasEdits = YES;
 				return YES;
