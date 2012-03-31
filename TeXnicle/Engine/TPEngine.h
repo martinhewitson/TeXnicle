@@ -23,6 +23,7 @@
   // Typesetting
 	NSTask *typesetTask;
 	NSFileHandle *typesetFileHandle;
+  NSPipe *pipe;
 	int compilationsDone;
 	BOOL abortCompile;
   BOOL compiling;

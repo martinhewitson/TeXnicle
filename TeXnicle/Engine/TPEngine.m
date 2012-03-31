@@ -61,7 +61,7 @@
     self.supportsDoBibtex = NO;
     self.supportsDoPS2PDF = NO;
     self.supportsNCompile = NO;
-    [self setupObservers];    
+    
     [self parseEngineFile];
   }
   
@@ -70,8 +70,11 @@
 
 - (void) dealloc
 {
-  self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.delegate = nil;
+  
+  [typesetTask release];
+  
   [super dealloc];
 }
 
@@ -79,6 +82,8 @@
 {
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc removeObserver:self];
+  
   
   [nc addObserver:self
          selector:@selector(texOutputAvailable:)
@@ -163,12 +168,9 @@
 	}
 	
 	NSString *mainFile = self.documentPath;
-//	NSString *pdfFile = [self compiledDocumentPath];
   
 	if (!mainFile) {
     
-		//NSLog(@"Specify a main file!");
-//		[console error:@"No main file specified!"];	
 		[self enginePostError:@"No main file specified!"];
     
     NSAlert *alert = nil;
@@ -190,20 +192,18 @@
 		return NO;
 	}
 	
-  [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];
-	
-	if (typesetTask) {
-		[typesetTask terminate];
-		[typesetTask release];		
-		// this must mean that the last run failed
-	}
-
-	
+  [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];	
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   
-//	NSLog(@"Compiling with %@", self.path);
-	typesetTask = [[NSTask alloc] init];
-	
+  if (typesetTask == nil) {
+    typesetTask = [[NSTask alloc] init];
+    pipe = [NSPipe pipe];
+    [typesetTask setStandardOutput:pipe];
+    [typesetTask setStandardError:pipe];    
+    typesetFileHandle = [pipe fileHandleForReading];    
+    [self setupObservers];    
+  }
+  
 	[typesetTask setLaunchPath:self.path];
   [typesetTask setCurrentDirectoryPath:workingDir];
     
@@ -217,13 +217,8 @@
                nil];
 	[typesetTask setArguments:arguments];
 	
-	NSPipe *pipe;
-	pipe = [NSPipe pipe];
-	[typesetTask setStandardOutput:pipe];
-  [typesetTask setStandardError:pipe];
-	
-	typesetFileHandle = [pipe fileHandleForReading];
 	[typesetFileHandle readInBackgroundAndNotify];	
+  
   self.compiling = YES;
 	[typesetTask launch];	
 	
@@ -232,58 +227,54 @@
 
 - (void) taskFinished:(NSNotification*)aNote
 {
+//  NSLog(@"Task finished %@", [aNote object]);
 	if ([aNote object] != typesetTask)
 		return;
 	
-	[typesetTask terminate];
-	[typesetTask release];
-	typesetTask = nil;
   self.compiling = NO;
 	compilationsDone++;
 	
   // notify interested parties
+//  NSLog(@"Compile finished - informing delegate");
   [self.delegate compileDidFinish:!abortCompile];
   
 	if (abortCompile) {
-//		ConsoleController *console = [ConsoleController sharedConsoleController];
-//		[console message:[NSString stringWithFormat:@"Compile aborted."]];
     [self enginePostMessage:[NSString stringWithFormat:@"Compile aborted."]];
 		return;
 	}
 	
-//  ConsoleController *console = [ConsoleController sharedConsoleController];
-//  [console message:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
+  
+  [typesetTask release];
+  typesetTask = nil;
 }
 
 - (void) texOutputAvailable:(NSNotification*)aNote
 {	
+  
 	if( [aNote object] != typesetFileHandle )
 		return;
 	
-	NSData *data = [[aNote userInfo] 
-									objectForKey:NSFileHandleNotificationDataItem];
-	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-	
-//	ConsoleController *console = [ConsoleController sharedConsoleController];
+//  NSLog(@"texOutputAvailable %@", [aNote object]);
+  
+	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
+	NSString *output = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
 	
 	NSScanner *scanner = [NSScanner scannerWithString:output];
 	NSString *scanned;
 	if ([scanner scanUpToString:@"LaTeX Error:" intoString:&scanned]) {
 		NSInteger loc = [scanner scanLocation];
 		if (loc < [output length]) {
-//			[console error:[output substringFromIndex:[scanner scanLocation]]];
       [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
 		}
 	}	
 	
-//	[console appendText:output];	
 	[self enginePostTextForAppending:output];
   
-	[output release];
-	if( typesetTask && [data length] > 0 )
+	if([data length] > 0 ) {
 		[typesetFileHandle readInBackgroundAndNotify];
+  }
 	
 }
 
@@ -297,7 +288,6 @@
 - (void) trashAuxFiles
 {
 	// build path to the pdf file
-//  [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
   [self enginePostMessage:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
   
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
@@ -317,10 +307,8 @@
 		NSString *file = [self.documentPath stringByAppendingPathExtension:ext];
     if ([fm fileExistsAtPath:file]) {
       if ([fm removeItemAtPath:file error:&error]) {
-//        [[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Deleted: %@", file]];
         [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", file]];
       } else {
-//        [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
         [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
       } 
     }		
