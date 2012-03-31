@@ -767,15 +767,25 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void) showDocument
 {
-  if (self.pdfViewerController && self.pdfViewerController.pdfview) {
-    NSView *view = [self.pdfViewerController.pdfview documentView];    
-    NSRect r = [view visibleRect];
-    BOOL hasDoc = [self.pdfViewerController hasDocument];
-    [self.pdfViewerController redisplayDocument];
-    if (hasDoc) {
+  //  NSLog(@"Show doc");
+  NSView *view = [self.pdfViewerController.pdfview documentView];    
+  PDFPage *page = [self.pdfViewerController.pdfview currentPage];
+  NSInteger index = [self.pdfViewerController.pdfview.document indexForPage:page];
+  NSRect r = [view visibleRect];
+  //  NSLog(@"Visible rect %@", NSStringFromRect(r));
+  BOOL hasDoc = [self.pdfViewerController hasDocument];
+  [self.pdfViewerController redisplayDocument];
+  if (hasDoc) {
+    PDFDisplayMode mode = [self.pdfViewerController.pdfview displayMode];
+    if (mode == kPDFDisplaySinglePageContinuous ||
+        mode == kPDFDisplayTwoUpContinuous) {
       [view scrollRectToVisible:r];
-    }    
-  }  
+    } else {
+      if (page) {
+        [self.pdfViewerController.pdfview goToPage:[self.pdfViewerController.pdfview.document pageAtIndex:index]];
+      }
+    }
+  }
 }
 
 - (IBAction) saveDocument:(id)sender
