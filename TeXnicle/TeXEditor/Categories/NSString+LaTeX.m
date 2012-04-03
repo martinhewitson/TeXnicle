@@ -128,7 +128,7 @@
 
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
 {
-  NSLog(@"Checking for bib files included in %@", sourceFile);
+//  NSLog(@"Checking for bib files included in %@", sourceFile);
   NSMutableArray *citations = [NSMutableArray array];
   
 	// search for \\bibliography{
@@ -146,16 +146,16 @@
           }
         }
         
-        NSLog(@"Found \\bibliography with argument %@", arg);
+//        NSLog(@"Found \\bibliography with argument %@", arg);
         NSString *bibpath = nil;
         if ([arg isAbsolutePath]) {
-          NSLog(@"   path is absolute");
+//          NSLog(@"   path is absolute");
           bibpath = arg;
         } else {        
-          NSLog(@"   path is relative to project");
+//          NSLog(@"   path is relative to project");
           bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
         }
-        NSLog(@"Bib file is %@", bibpath);
+//        NSLog(@"Bib file is %@", bibpath);
         
         MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
         NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
@@ -387,6 +387,36 @@
   return nil;
 }
 
+- (NSString*)parseArgumentAroundIndex:(NSInteger*)loc
+{
+  NSInteger count = *loc;
+  NSInteger nameStart = -1;
+  NSInteger nameEnd   = -1;
+  
+  // go back to look for {
+  while (count >= 0) {
+    if ([self characterAtIndex:count] == '{') {
+      nameStart = count+1;
+      break;
+    }
+    count--;
+  }
+  
+  while (count < [self length]) {
+    if ([self characterAtIndex:count] == '}') {
+      nameEnd = count;
+      break;
+    }
+    count++;
+  }
+  
+  if (nameEnd > nameStart && nameEnd >= 0 && nameStart >= 0) {
+    *loc = nameEnd;
+    return [self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)];
+  }
+  
+  return nil;
+}
 
 @end
 

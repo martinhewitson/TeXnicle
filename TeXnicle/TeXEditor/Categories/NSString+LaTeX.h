@@ -38,6 +38,7 @@
 + (NSString *)stringWithControlsFilteredForString:(NSString *)str ;
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
 - (NSString*)argument;
+- (NSString*)parseArgumentAroundIndex:(NSInteger*)loc;
 - (NSString*)parseArgumentStartingAt:(NSInteger*)loc;
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
