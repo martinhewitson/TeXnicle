@@ -1397,11 +1397,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 		
 		// other possible word breaks include '~' '\,'
-		if (c == '~' || c == '{' || c == '[' || c == '(') {
+		if (c == '~') { 
 			start = loc+1;
 			break;
 		}
-		
+    
+    // If we have started to collect characters, then all a word to be delimited by brackets as well.
+    // We need to check that loc<curr.lcoation-1 to ensure we are not just at the argument of a command, 
+    // for example, hitting escape with the cursor between the brackets of this text: '\cite{}'
+    if (loc < curr.location-1 
+        && ( c == '{' || c == '[' || c == '(' )
+        ) {
+			start = loc+1;
+			break;
+		}
+    
 		if (loc > 1) {
 			if (c == ',' && [string characterAtIndex:loc-1] == '\\') {
 				start = loc+1;
@@ -1688,7 +1698,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *word = [string substringWithRange:selectedRange];
 	
 	
-//  NSLog(@"Completing... %@", word);
+  NSLog(@"Completing... %@", word);
 	
 	// If we are completing one of the special cases (ref, cite, include, input, ...)
 	// then we use a custom popup list to present the options
@@ -1705,6 +1715,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else if ([word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound) {
 		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
+      
+      // filter the list by existing characters
+      NSLog(@"arg: %@", [word argument]);
+      
       //			NSLog(@"List: %@", list);
 			[self insertFromList:list];			
 		}
