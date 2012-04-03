@@ -54,6 +54,8 @@
 
 #import "MHPlaceholderAttachment.h"
 #import "MHFileReader.h"
+#import "BibliographyEntry.h"
+
 #import "externs.h"
 
 #define LargeTextWidth  1e7
@@ -1190,10 +1192,28 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   NSInteger idx = end-1;
   NSInteger start = -1;  
+  BOOL foundSlash = NO;
   while (idx >= 0) {
     
     unichar c = [string characterAtIndex:idx];
-    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
+    if (   [newLineCharacterSet characterIsMember:c] 
+        || [whitespaceCharacterSet characterIsMember:c]
+        ) {
+      start = idx+1;
+      break;
+    }
+    
+    if (c == '\\') {
+      foundSlash = YES;
+    }
+    
+    if ( foundSlash &&
+        (  c == '{'
+        || c == '('
+        || c == '['
+        || c == '~'
+        )
+       ) {
       start = idx+1;
       break;
     }
@@ -1685,6 +1705,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [super setSpellingState:value range:charRange];
 }
 
+// Return yes if the cursor is in the argument of any of the defined
+// citation commands
+- (BOOL)selectionIsInCitationCommand
+{
+  NSString *word = [self currentCommand];
+  if (word == nil || [word length]==0) {
+    return NO;
+  }
+  
+  // check if it is one of the citation commands
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  return [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
+}
+
 - (IBAction)complete:(id)sender
 {
 	NSString *string = [self string];
@@ -1698,7 +1732,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *word = [string substringWithRange:selectedRange];
 	
 	
-  NSLog(@"Completing... %@", word);
+//  NSLog(@"Completing... %@", word);
 	
 	// If we are completing one of the special cases (ref, cite, include, input, ...)
 	// then we use a custom popup list to present the options
@@ -1716,17 +1750,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
       
-      // filter the list by existing characters
-      NSLog(@"arg: %@", [word argument]);
       
       //			NSLog(@"List: %@", list);
 			[self insertFromList:list];			
 		}
-	} else if ([word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound) {
-    //		NSLog(@"Checking for selector listOfCitations...");
+	} else if ([self selectionIsInCitationCommand]) {
 		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfCitations)];
-			[self insertFromList:list];			
+      
+      // filter the list by existing characters
+      NSInteger idx = curr.location;
+      NSString *arg = [string parseArgumentAroundIndex:&idx];
+      if (arg != nil && [arg length] > 0) {
+        NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+          
+          // the list can contain NSAttributedString or BibliographyEntry objects, but both
+          // support the -string message.
+          NSString *testString = [obj string];
+          if ([testString beginsWith:arg]) {
+            return YES;
+          }
+          
+          return NO;
+        }];
+        
+        list = [list objectsAtIndexes:indices];			
+        [self completeFromList:list];
+      } else {
+        [self insertFromList:list];
+      }
 		}
 	} else if ([word isEqual:@"\\begin{"]) {
 		[self insertFromList:[defaults valueForKey:TEBeginCommands]];			
@@ -2011,6 +2063,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
     NSString *command = [self currentCommand];
+//    NSLog(@"Current command %@", command);
     if (command != nil && [command length] > 0) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
