@@ -323,6 +323,11 @@
 	return [NSString stringWithFormat:@"[%@], [%@], [%@], [%@]", tag, author, title, publishedDate];
 }
 
+- (NSString*) string
+{
+  return [[self attributedString] string];
+}
+
 - (NSAttributedString*) displayString
 {
 	NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] init] autorelease];

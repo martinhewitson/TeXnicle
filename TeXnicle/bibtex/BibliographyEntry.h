@@ -61,6 +61,7 @@
 - (NSAttributedString*)attributedString;
 
 - (NSAttributedString*) displayString;
+- (NSString*) string;
 - (NSString*) bibtexEntry;
 
 
