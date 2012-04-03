@@ -1719,6 +1719,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
 }
 
+// Return yes if the cursor is in the argument of any of the defined
+// reference commands
+- (BOOL)selectionIsInRefCommand
+{
+  NSString *word = [self currentCommand];
+  if (word == nil || [word length]==0) {
+    return NO;
+  }
+  
+  // check if it is one of the citation commands
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  return [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
+}
+
 - (IBAction)complete:(id)sender
 {
 	NSString *string = [self string];
@@ -1746,13 +1760,33 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
 			[self insertFromList:list];			
 		}
-	} else if ([word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound) {
+	} else if ([self selectionIsInRefCommand]) {
+    
 		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
 			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
       
+      // filter the list by existing characters
+      NSInteger idx = curr.location;
+      NSString *arg = [string parseArgumentAroundIndex:&idx];
+      if (arg != nil && [arg length] > 0) {
+        NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+          
+          // the list can contain NSAttributedString or BibliographyEntry objects, but both
+          // support the -string message.
+          NSString *testString = (NSString*)obj;
+          if ([testString beginsWith:arg]) {
+            return YES;
+          }
+          
+          return NO;
+        }];
+        
+        list = [list objectsAtIndexes:indices];			
+        [self completeFromList:list];
+      } else {
+        [self insertFromList:list];
+      }
       
-      //			NSLog(@"List: %@", list);
-			[self insertFromList:list];			
 		}
 	} else if ([self selectionIsInCitationCommand]) {
 		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
