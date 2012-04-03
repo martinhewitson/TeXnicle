@@ -1397,7 +1397,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 		
 		// other possible word breaks include '~' '\,'
-		if (c == '~') {
+		if (c == '~' || c == '{' || c == '[' || c == '(') {
 			start = loc+1;
 			break;
 		}
@@ -1688,7 +1688,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *word = [string substringWithRange:selectedRange];
 	
 	
-  //  NSLog(@"Completing... %@", word);
+//  NSLog(@"Completing... %@", word);
 	
 	// If we are completing one of the special cases (ref, cite, include, input, ...)
 	// then we use a custom popup list to present the options
@@ -1729,7 +1729,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
       list = [list filteredArrayUsingPredicate:predicate];			
     }
-    NSLog(@"List %@", list);
+//    NSLog(@"List %@", list);
     if ([list count]>0) {
       [self completeFromList:list];			
     } else {
