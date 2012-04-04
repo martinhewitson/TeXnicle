@@ -492,7 +492,7 @@
       NSInteger start = loc-[word length]+1;
       NSInteger end   = start;
       NSString *filePath = [string parseArgumentStartingAt:&end];
-      if (filePath) {
+      if (filePath != nil && ![filePath isEqualToString:[self projectPath]]) {
         FileEntity *nextFile = [self.project fileWithPath:filePath];
         if (nextFile) {
           NSRange repRange = NSMakeRange(start, end-start+1);
@@ -501,6 +501,7 @@
         }
       }
     }
+    
     loc++;    
   }
   
