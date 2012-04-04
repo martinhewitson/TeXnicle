@@ -227,13 +227,30 @@
       while (idx < strLen) {
         if ([content characterAtIndex:idx] == '{') {
           start = idx+1;
-        }
-        if ([content characterAtIndex:idx] == '}') {
-          end = idx;
           break;
         }
         idx++;
       }
+      
+      idx = start;
+      NSInteger bracketCount = 1;
+      while (idx < strLen) {
+        unichar c = [content characterAtIndex:idx];
+        
+        if (c == '{') {
+          bracketCount++;
+        }
+
+        if (c == '}') {
+          bracketCount--;
+          if (bracketCount == 0) {
+            end = idx;
+            break;
+          }
+        }
+        idx++;
+      }      
+      
       
       return [content substringWithRange:NSMakeRange(start, end-start)];
       
