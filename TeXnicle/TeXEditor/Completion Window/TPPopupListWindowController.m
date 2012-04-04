@@ -216,7 +216,15 @@
 
 - (void) userSelectedRow:(NSNumber*)aRow
 {
-	id value = [[self filteredEntries] objectAtIndex:[aRow intValue]];
+  NSInteger row = [aRow intValue];
+  if (row<0) {
+    row = 0;
+  }
+  if ([[self filteredEntries] count] == 0) {
+    return;
+  }
+  
+	id value = [[self filteredEntries] objectAtIndex:row];
   NSString *tag = @"";
   if ([value isKindOfClass:[BibliographyEntry class]]) {
     tag = [value valueForKey:@"tag"];
