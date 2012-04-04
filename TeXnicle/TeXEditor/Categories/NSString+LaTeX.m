@@ -61,7 +61,7 @@
 //  NSLog(@"against: %@", terms);
   NSInteger idx = 0;
   for (NSString *term in terms) {
-    NSString *searchTerm = [NSString stringWithFormat:@"%@{", term];
+    NSString *searchTerm = [NSString stringWithFormat:@"%@", term];
 //    NSLog(@"   checking %@", searchTerm);
     if ([self beginsWith:searchTerm]) {
       return idx;
@@ -389,21 +389,45 @@
 
 - (NSString*)parseArgumentAroundIndex:(NSInteger*)loc
 {
-  NSInteger count = *loc;
+  NSInteger count = (*loc) - 1; // start one character before
   NSInteger nameStart = -1;
   NSInteger nameEnd   = -1;
   
+  
+  // edge case, we could be in between {}
+  if (*loc > 0 && *loc < [self length]-1) {
+    if ([self characterAtIndex:*loc-1] == '{' &&
+        [self characterAtIndex:*loc] == '}') {
+      return @"";
+    }
+  }
+    
   // go back to look for {
   while (count >= 0) {
-    if ([self characterAtIndex:count] == '{') {
+    unichar c = [self characterAtIndex:count];
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+        [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
+      break;
+    }
+    
+    if (c == '{') {
       nameStart = count+1;
       break;
     }
     count--;
   }
   
+  if (nameStart < 0) {
+    return nil;
+  }
+  
   while (count < [self length]) {
-    if ([self characterAtIndex:count] == '}') {
+    unichar c = [self characterAtIndex:count];
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+        [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
+      break;
+    }
+    if (c == '}') {
       nameEnd = count;
       break;
     }
