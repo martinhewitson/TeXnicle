@@ -29,6 +29,7 @@
 #import "FileEntity.h"
 #import "Settings.h"
 #import "UISettings.h"
+#import "NSString+Comparisons.h"
 
 @implementation ProjectEntity
 
@@ -111,16 +112,15 @@
 	if (![[aPath pathExtension] isEqual:@"tex"]) {
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
 	}
-	
+  pathToTest = [pathToTest stringByStandardizingPath];
+  
 	for (id item in [self valueForKey:@"items"]) {
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			FileEntity *file = (FileEntity*)item;
-			NSString *fstr = [file valueForKey:@"filepath"];
-			NSRange r = [fstr rangeOfString:pathToTest];
-//			if (fstr isEqual:[aPath stringByDeletingPathExtension]]) {
-			if (r.location != NSNotFound) {
-				return file;
-			}
+			NSString *fstr = [[file valueForKey:@"filepath"] stringByStandardizingPath];
+      if ([fstr isEqualToString:pathToTest]) {
+        return file;
+      }
 		}
 	}
 	return nil;
@@ -135,18 +135,15 @@
 	if (![aPath pathExtension]) {
 		pathToTest = [aPath stringByAppendingPathExtension:@"tex"];
 	}
+  pathToTest = [pathToTest stringByStandardizingPath];
 	
-	//	NSLog(@"Looking for '%@'", aPath);
 	for (id item in [self valueForKey:@"items"]) {
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			FileEntity *file = (FileEntity*)item;
-			//			NSLog(@"   checking '%@'", [file valueForKey:@"filepath"]);
-			NSString *fstr = [file pathOnDisk];
-			NSRange r = [fstr rangeOfString:pathToTest];
-			//			if (fstr isEqual:[aPath stringByDeletingPathExtension]]) {
-			if (r.location != NSNotFound) {
-				return file;
-			}
+			NSString *fstr = [[file pathOnDisk] stringByStandardizingPath];
+      if ([fstr isEqualToString:pathToTest]) {
+        return file;
+      }
 		}
 	}
 	return nil;
