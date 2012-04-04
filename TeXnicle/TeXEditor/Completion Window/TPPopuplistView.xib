@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2177</string>
+			<string key="NS.object.0">2182</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -52,7 +52,6 @@
 						<string key="NSFrame">{{5, 7}, {133, 19}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSSearchFieldCell" key="NSCell" id="249980968">
 							<int key="NSCellFlags">343014976</int>
@@ -214,13 +213,13 @@
 											</object>
 										</object>
 										<double key="NSRowHeight">20</double>
-										<int key="NSTvFlags">1388314624</int>
+										<int key="NSTvFlags">1119879168</int>
 										<reference key="NSDelegate"/>
 										<reference key="NSDataSource"/>
 										<int key="NSColumnAutoresizingStyle">4</int>
 										<int key="NSDraggingSourceMaskForLocal">15</int>
 										<int key="NSDraggingSourceMaskForNonLocal">0</int>
-										<bool key="NSAllowsTypeSelect">YES</bool>
+										<bool key="NSAllowsTypeSelect">NO</bool>
 										<int key="NSTableViewDraggingDestinationStyle">0</int>
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
