@@ -197,8 +197,15 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 
 #pragma mark -
 #pragma mark Selection
+- (NSString*)currentArgument;
 - (BOOL) selectionIsInCitationCommand;
 - (BOOL) selectionIsInRefCommand;
+- (BOOL) selectionIsInFileCommand;
+- (void) showListOfFileCompletions;
+- (void) showListOfRefCompletions;
+- (void) showListOfCiteCompletions;
+- (BOOL) completeArgument;
+
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine;
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
 - (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate;

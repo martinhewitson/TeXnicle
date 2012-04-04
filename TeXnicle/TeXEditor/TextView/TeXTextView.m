@@ -859,8 +859,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) completeFromList:(NSArray*)aList
 {
-	if ([aList count]==0) 
+	if ([aList count]==0) {
+    [popupList dismiss];
 		return;
+  }
 	
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
@@ -1193,39 +1195,70 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSInteger idx = end-1;
   NSInteger start = -1;  
   BOOL foundSlash = NO;
+  
+  // edge case: if we are at the just outside the end of a command with an argument
+  // this algorithm will return the command, which it shouldn't. So check for closing
+  // brackets just before the selection point
+  if (sel.location > 0) {
+    unichar c = [string characterAtIndex:sel.location-1];
+    if (c == '}' || c == ']') {
+      return NSMakeRange(NSNotFound, 0);
+    }
+  }
+  
+  // go backwards until we find a '\' or whitespace/newline
   while (idx >= 0) {
-    
     unichar c = [string characterAtIndex:idx];
-    if (   [newLineCharacterSet characterIsMember:c] 
-        || [whitespaceCharacterSet characterIsMember:c]
-        ) {
-      start = idx+1;
+
+    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
       break;
     }
     
     if (c == '\\') {
       foundSlash = YES;
-    }
-    
-    if ( foundSlash &&
-        (  c == '{'
-        || c == '('
-        || c == '['
-        || c == '~'
-        )
-       ) {
-      start = idx+1;
+      start = idx;
       break;
     }
     
     idx--;
   }
   
-  if (start < 0 || start >= [string length]) {
+  // if we didn't find a '\', return not found
+  if (!foundSlash) {
     return NSMakeRange(NSNotFound, 0);
   }
-  //  NSLog(@"Start %d, end %d", start, end);
-  NSRange r = NSMakeRange(start, end-start);  
+  
+  // go forwards until we find { followed by } or a whitespace or a newline
+  while (idx < [string length]) {
+    unichar c = [string characterAtIndex:idx];
+    
+    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
+      end = idx-1;
+      break;
+    }
+    if (c == '}' || c == ')' || c == ']' || c == '~') {
+      end = idx-1;
+      break;
+    }
+    
+    if (c == '{') {
+      end = idx-1;
+      break;
+    }
+    
+    idx++;
+  }
+  
+//  NSLog(@"End %d", end);
+  
+  // if we get past the selection point we return not found
+  if (end > sel.location) {
+    return NSMakeRange(NSNotFound, 0);
+  }
+  
+  // the text between the '\' and the { is the command, but only if the original selection point was within the full range
+  NSRange r = NSMakeRange(start, end-start+1);  
+
   return r;
 }
 
@@ -1239,7 +1272,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 //  NSLog(@"Range %@", NSStringFromRange(r));
   NSString *word = [string substringWithRange:r];
-//  NSLog(@"Current word %@", word);
+//  NSLog(@"Current command %@", word);
   if ([word length] == 0) {
     return nil;
   }
@@ -1425,10 +1458,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     // If we have started to collect characters, then all a word to be delimited by brackets as well.
     // We need to check that loc<curr.lcoation-1 to ensure we are not just at the argument of a command, 
     // for example, hitting escape with the cursor between the brackets of this text: '\cite{}'
-    if (loc < curr.location-1 
-        && ( c == '{' || c == '[' || c == '(' )
-        ) {
+    if ( c == '{' || c == '[' || c == '(' ) {
 			start = loc+1;
+			break;
+		}
+    if (c == '\\') {
+			start = loc;
 			break;
 		}
     
@@ -1518,6 +1553,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
 
   [self highlightMatchingWords];
+  [popupList dismiss];
 }
 
 - (void) highlightMatchingWords
@@ -1705,6 +1741,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [super setSpellingState:value range:charRange];
 }
 
+
+- (NSString*)currentArgument
+{
+  NSRange sel = [self selectedRange];
+  NSInteger loc = sel.location;
+  return [[self string] parseArgumentAroundIndex:&loc];
+}
+
 // Return yes if the cursor is in the argument of any of the defined
 // citation commands
 - (BOOL)selectionIsInCitationCommand
@@ -1713,11 +1757,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (word == nil || [word length]==0) {
     return NO;
   }
-  
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  return [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
+  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
+  if (citeCommand == NO) {
+    return NO;
+  }
+  
+  // now check we are in an argument
+  NSString *arg = [self currentArgument];
+  if (arg == nil) {    
+    return NO;
+  }
+  
+  return YES;
 }
+
 
 // Return yes if the cursor is in the argument of any of the defined
 // reference commands
@@ -1730,7 +1785,151 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  return [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
+  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
+  if (citeCommand == NO) {
+    return NO;
+  }
+  
+  // now check we are in an argument
+  NSString *arg = [self currentArgument];
+  if (arg == nil) {
+    return NO;
+  }
+  
+  return YES;
+}
+
+// Return yes if the cursor is in the argument of any of the defined
+// file input commands
+- (BOOL)selectionIsInFileCommand
+{
+  NSString *word = [self currentCommand];
+  if (word == nil || [word length]==0) {
+    return NO;
+  }
+  
+  // check if it is one of the citation commands
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TEFileCommands]] != NSNotFound;  
+  if (citeCommand == NO) {
+    return NO;
+  }
+  
+  // now check we are in an argument
+  NSString *arg = [self currentArgument];
+  if (arg == nil) {
+    return NO;
+  }
+  
+  return YES;
+}
+
+- (void) showListOfFileCompletions
+{  
+  if ([self.delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
+    NSArray *list = [self.delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
+    // filter the list by existing characters
+    NSString *arg = [self currentArgument];
+    if (arg != nil && [arg length] > 0) {
+      arg = [arg lowercaseString];
+      NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSString *testString = [(NSString*)obj lowercaseString];
+        if ([testString beginsWith:arg]) {
+          return YES;
+        }
+        
+        return NO;
+      }];
+      
+      list = [list objectsAtIndexes:indices];			
+      [self completeFromList:list];
+    } else {
+      [self insertFromList:list];
+    }
+  }
+}
+
+- (void) showListOfRefCompletions
+{
+  if ([self.delegate respondsToSelector:@selector(listOfReferences)]) {
+    NSArray *list = [self.delegate performSelector:@selector(listOfReferences)];
+    
+    // filter the list by existing characters
+    NSString *arg = [self currentArgument];
+    if (arg != nil && [arg length] > 0) {
+      arg = [arg lowercaseString];
+      NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSString *testString = [(NSString*)obj lowercaseString];
+        if ([testString beginsWith:arg]) {
+          return YES;
+        }
+        
+        return NO;
+      }];
+      
+      list = [list objectsAtIndexes:indices];			
+      [self completeFromList:list];
+    } else {
+      [self insertFromList:list];
+    }    
+  }
+}
+
+- (void) showListOfCiteCompletions
+{
+  if ([self.delegate respondsToSelector:@selector(listOfCitations)]) {
+    NSArray *list = [self.delegate performSelector:@selector(listOfCitations)];
+    
+    // filter the list by existing characters
+    NSString *arg = [self currentArgument];
+    if (arg != nil && [arg length]>0) {
+      arg = [arg lowercaseString];
+      NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        
+        // the list can contain NSAttributedString or BibliographyEntry objects, but both
+        // support the -string message.
+        NSString *testString = [[obj string] lowercaseString];
+        if ([testString beginsWith:arg]) {
+          return YES;
+        }
+        
+        return NO;
+      }];
+      
+      list = [list objectsAtIndexes:indices];	
+      [self completeFromList:list];
+    } else {
+      [self completeFromList:list];
+    }
+  }
+}
+
+- (BOOL) completeArgument
+{
+  // check for completing arguments
+  NSString *arg = [self currentArgument];
+//  NSLog(@"Completing arg %@", arg);
+  if (arg != nil) {
+    if ([self selectionIsInRefCommand]) {
+//      NSLog(@"In ref");
+      [self showListOfRefCompletions];
+      return YES;
+    }
+    if ([self selectionIsInCitationCommand]) {
+//      NSLog(@"In cite");
+      [self showListOfCiteCompletions];
+      return YES;
+    }
+    if ([self selectionIsInFileCommand]) {
+//      NSLog(@"In file");
+      [self showListOfFileCompletions];
+      return YES;
+    }
+  }
+  
+  return NO;
 }
 
 - (IBAction)complete:(id)sender
@@ -1744,94 +1943,39 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	
   
 	NSString *word = [string substringWithRange:selectedRange];
-	
+	NSString *command = [self currentCommand];
+  NSString *arg = [self currentArgument];
 	
 //  NSLog(@"Completing... %@", word);
-	
-	// If we are completing one of the special cases (ref, cite, include, input, ...)
-	// then we use a custom popup list to present the options
+//	NSLog(@"       or command: %@", command);
+//	NSLog(@"       or arg: %@", arg);
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	id delegate = [self delegate];
   //	NSLog(@"Delegate: %@", delegate);
-  if ([word beginsWithElementInArray:[defaults valueForKey:TEFileCommands]] != NSNotFound) {
-		if ([delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
-			[self insertFromList:list];			
-		}
-	} else if ([self selectionIsInRefCommand]) {
-    
-		if ([delegate respondsToSelector:@selector(listOfReferences)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfReferences)];
-      
-      // filter the list by existing characters
-      NSInteger idx = curr.location;
-      NSString *arg = [string parseArgumentAroundIndex:&idx];
-      if (arg != nil && [arg length] > 0) {
-        NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-          
-          // the list can contain NSAttributedString or BibliographyEntry objects, but both
-          // support the -string message.
-          NSString *testString = (NSString*)obj;
-          if ([testString beginsWith:arg]) {
-            return YES;
-          }
-          
-          return NO;
-        }];
-        
-        list = [list objectsAtIndexes:indices];			
-        [self completeFromList:list];
-      } else {
-        [self insertFromList:list];
-      }
-      
-		}
-	} else if ([self selectionIsInCitationCommand]) {
-		if ([delegate respondsToSelector:@selector(listOfCitations)]) {
-			NSArray *list = [delegate performSelector:@selector(listOfCitations)];
-      
-      // filter the list by existing characters
-      NSInteger idx = curr.location;
-      NSString *arg = [string parseArgumentAroundIndex:&idx];
-      if (arg != nil && [arg length] > 0) {
-        NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-          
-          // the list can contain NSAttributedString or BibliographyEntry objects, but both
-          // support the -string message.
-          NSString *testString = [obj string];
-          if ([testString beginsWith:arg]) {
-            return YES;
-          }
-          
-          return NO;
-        }];
-        
-        list = [list objectsAtIndexes:indices];			
-        [self completeFromList:list];
-      } else {
-        [self insertFromList:list];
-      }
-		}
-	} else if ([word isEqual:@"\\begin{"]) {
+  if ([self completeArgument]) {
+    // do completion
+	} else if ([command isEqual:@"\\begin{"]) {
 		[self insertFromList:[defaults valueForKey:TEBeginCommands]];			
-	} else if ([word hasPrefix:@"\\"]) {
-    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
+	} else if (command != nil && [command length] > 0 && (arg == nil || [arg isEqualToString:command]) ) {
     
+    NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
+
     // get list of user defaults commands
     list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
     
     if ([delegate respondsToSelector:@selector(listOfCommands)]) {
       list = [list arrayByAddingObjectsFromArray:[delegate listOfCommands]];
     }
-    if ([word length]>1) {
-      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
+    if ([command length]>1) {
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", command];
       list = [list filteredArrayUsingPredicate:predicate];			
     }
-//    NSLog(@"List %@", list);
     if ([list count]>0) {
       [self completeFromList:list];			
+      
+      
     } else {
       NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
                                                                                  inString:word
@@ -2011,6 +2155,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     } else {
       [super insertText:@"{}"];
       [self moveLeft:self];
+      [self completeArgument];
     }
 	} else 	if ([aString isEqual:@"["]) {
 		NSRange r = [self selectedRange];
@@ -2096,9 +2241,29 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self updateEditorRuler];
   
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
+    
+    // check for completing arguments
+    NSString *arg = [self currentArgument];
+//    NSLog(@"Arg %@",arg);
+    if (arg != nil) {
+      if ([self selectionIsInRefCommand]) {
+        [self showListOfRefCompletions];
+        return;
+      }
+      if ([self selectionIsInCitationCommand]) {
+        [self showListOfCiteCompletions];
+        return;
+      }
+      if ([self selectionIsInFileCommand]) {
+        [self showListOfFileCompletions];
+        return;
+      }
+    }
+    
+    // if we have a command, and arg is nil, or arg is the same as the command, then complete the command
     NSString *command = [self currentCommand];
 //    NSLog(@"Current command %@", command);
-    if (command != nil && [command length] > 0) {
+    if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
         [self completeFromList:commands];
@@ -2753,10 +2918,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
   NSPoint draggingLocation = [sender draggingLocation];
   draggingLocation = [self convertPoint:draggingLocation fromView:nil];
-//  NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
-  NSUInteger characterIndex = [self characterIndexForPoint:draggingLocation];
+  // can't use Apple's characterIndexForPoint: here because that works in screen coords
+  NSUInteger characterIndex = [self characterIndexOfPoint:draggingLocation];
   
-//	NSDragOperation sourceDragMask= [sender draggingSourceOperationMask];
 	if ( [[pboard types] containsObject:NSFilenamesPboardType] )
 	{
 		NSArray* files = [pboard propertyListForType:NSFilenamesPboardType];
