@@ -107,6 +107,11 @@ Maybe it's an idea to incorporate language settings in the settings of each proj
 	- tell project XX to select file\
 	- tell texnicle to jump to line in file\
 \
+- splitivew on editor\
+	- first abstract away all calls to the textview and override them in texeditorcontroller [BIG JOB]\
+	- then texeditorcontroller should have an array of textviews which these various methods deal with\
+	- texeditorcontroller has an active textview (one with current focus)\
+\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -116,10 +121,11 @@ Maybe it's an idea to incorporate language settings in the settings of each proj
 Beta 40\
 -------\
 \
-\
-+ Bug fix: citations are now filtered by the text already input in the \\cite\{\} command.\
++ Bug fix: parsing of bibtex entries improved.\
++ Bug fix: citations and references are now filtered by the text already input in the \\cite\{\}, \\input\{\} or \\ref\{\} command.\
 + Bug fix: command completion now works on commands immediately preceded by a bracket. For example,\
   completion of '\{\\tex' now works.\
++ Various other fixes and improvements to code completion.\
 \
 \
 Beta 39\
