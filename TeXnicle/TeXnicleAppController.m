@@ -55,6 +55,10 @@ NSString * const TEBeginCommands = @"TEBeginCommands";
 NSString * const TEFileCommands = @"TEFileCommands";
 
 NSString * const TEAutomaticallyShowCommandCompletionList = @"TEAutomaticallyShowCommandCompletionList";
+NSString * const TEAutomaticallyShowCiteCompletionList = @"TEAutomaticallyShowCiteCompletionList";
+NSString * const TEAutomaticallyShowRefCompletionList = @"TEAutomaticallyShowRefCompletionList";
+NSString * const TEAutomaticallyShowFileCompletionList = @"TEAutomaticallyShowFileCompletionList";
+
 
 NSString * const TPCheckSyntax = @"TPCheckSyntax";
 NSString * const TPCheckSyntaxErrors = @"TPCheckSyntaxErrors";
@@ -187,6 +191,9 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   
   // automaticall show completion list
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCommandCompletionList];
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCiteCompletionList];
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowRefCompletionList];
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowFileCompletionList];
   
   // check syntax
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPCheckSyntax];
