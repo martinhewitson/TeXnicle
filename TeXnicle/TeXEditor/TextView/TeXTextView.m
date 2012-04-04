@@ -1284,6 +1284,47 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return nil;
 }
 
+- (NSRange)rangeForCurrentSnippetCommand
+{
+  NSString *string = [self string];
+  NSRange sel = [self selectedRange];
+  NSInteger end = sel.location;
+  NSInteger start = NSNotFound;
+  NSInteger loc = end-1;
+  
+  while (loc < [string length]) {
+    unichar c = [string characterAtIndex:loc];
+    
+    if ([whitespaceCharacterSet characterIsMember:c] ||
+        [newLineCharacterSet characterIsMember:c]) {
+      return NSMakeRange(NSNotFound, 0);
+    }
+    
+    if (c == '#') {
+      start = loc;
+      break;
+    }
+    
+    loc--;
+  }
+  
+  if (start != NSNotFound && start < end) {
+    return NSMakeRange(start, end-start);
+  }
+  
+  return NSMakeRange(NSNotFound, 0);
+}
+
+- (NSString*)currentSnippetCommand
+{
+  NSString *string = [self string];
+  NSRange r = [self rangeForCurrentSnippetCommand];
+  if (r.location == NSNotFound) {
+    return nil;
+  }
+  
+  return [string substringWithRange:r];
+}
 
 
 - (NSRange) rangeForCurrentWord
@@ -1698,7 +1739,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		} // if we are at the end of the \begin statement			
     [super insertNewline:sender];    
 	} // end if \begin
-	else if ([self currentCommand])
+	else if ([self currentSnippetCommand])
   {
     if (![self expandCurrentCommand]) {
       [super insertNewline:self];
@@ -1891,7 +1932,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         // the list can contain NSAttributedString or BibliographyEntry objects, but both
         // support the -string message.
         NSString *testString = [[obj string] lowercaseString];
-        if ([testString beginsWith:arg]) {
+        NSRange matchRange = [testString rangeOfString:arg];
+        if (matchRange.location != NSNotFound) {
           return YES;
         }
         
@@ -2220,11 +2262,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		[super insertText:aString];
     
     // check if this is a short-cut code command
-    NSString *command = [self currentCommand];
+    NSString *command = [self currentSnippetCommand];
     if (command != nil && [command length] > 0) {
       NSString *code = [self codeForCommand:command];
       if (code && [code length]>0) {
-        NSRange commandRange = [self rangeForCurrentCommand];
+        NSRange commandRange = [self rangeForCurrentSnippetCommand];
         [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] forCharacterRange:commandRange];
       }
     }    
@@ -2239,27 +2281,41 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [super didChangeText];
   
   [self updateEditorRuler];
+
+  NSString *arg = [self currentArgument];
   
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
-    
-    // check for completing arguments
-    NSString *arg = [self currentArgument];
-//    NSLog(@"Arg %@",arg);
+  // show citation completion list?
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCiteCompletionList] boolValue]) {
+    if (arg != nil) {
+      if ([self selectionIsInCitationCommand]) {
+        [self showListOfCiteCompletions];
+        return;
+      }
+    }
+  }
+  
+  // show reference completion list?
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowRefCompletionList] boolValue]) {
     if (arg != nil) {
       if ([self selectionIsInRefCommand]) {
         [self showListOfRefCompletions];
         return;
       }
-      if ([self selectionIsInCitationCommand]) {
-        [self showListOfCiteCompletions];
-        return;
-      }
+    }
+  }
+  
+  // show file completion list?
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowFileCompletionList] boolValue]) {
+    if (arg != nil) {
       if ([self selectionIsInFileCommand]) {
         [self showListOfFileCompletions];
         return;
       }
     }
-    
+  }
+  
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
+        
     // if we have a command, and arg is nil, or arg is the same as the command, then complete the command
     NSString *command = [self currentCommand];
 //    NSLog(@"Current command %@", command);
@@ -2374,11 +2430,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (BOOL) expandCurrentCommand
 {
-  NSString *currentCommand = [self currentCommand];
+  NSString *currentCommand = [self currentSnippetCommand];
   if (currentCommand) {
     NSString *code = [self codeForCommand:currentCommand];
     if (code) {
-      NSRange commandRange = [self rangeForCurrentCommand];
+      NSRange commandRange = [self rangeForCurrentSnippetCommand];
       [[self undoManager] beginUndoGrouping];
       [self shouldChangeTextInRange:commandRange replacementString:code];
       [self replaceCharactersInRange:commandRange withString:code];

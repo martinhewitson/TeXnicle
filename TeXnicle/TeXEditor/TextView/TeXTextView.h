@@ -225,6 +225,8 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (NSPoint) listPointForCurrentWord;
 - (NSRange) rangeForCurrentCommand;
 - (NSString*) currentCommand;
+- (NSString*)currentSnippetCommand;
+- (NSString*)rangeForCurrentSnippetCommand;
 - (BOOL) expandCurrentCommand;
 - (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange;
 - (IBAction)jumpToPreviousPlaceholder:(id)sender;
