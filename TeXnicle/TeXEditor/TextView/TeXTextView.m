@@ -2197,7 +2197,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     } else {
       [super insertText:@"{}"];
       [self moveLeft:self];
-      [self completeArgument];
+      [self autocompleteArgument];
     }
 	} else 	if ([aString isEqual:@"["]) {
 		NSRange r = [self selectedRange];
@@ -2276,16 +2276,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 
-- (void)didChangeText
+- (void) autocompleteArgument
 {
-  [super didChangeText];
-  
-  [self updateEditorRuler];
-
   NSString *arg = [self currentArgument];
   
   // show citation completion list?
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCiteCompletionList] boolValue]) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  if ([[defaults valueForKey:TEAutomaticallyShowCiteCompletionList] boolValue]) {
     if (arg != nil) {
       if ([self selectionIsInCitationCommand]) {
         [self showListOfCiteCompletions];
@@ -2295,7 +2293,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   // show reference completion list?
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowRefCompletionList] boolValue]) {
+  if ([[defaults valueForKey:TEAutomaticallyShowRefCompletionList] boolValue]) {
     if (arg != nil) {
       if ([self selectionIsInRefCommand]) {
         [self showListOfRefCompletions];
@@ -2305,7 +2303,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   // show file completion list?
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowFileCompletionList] boolValue]) {
+  if ([[defaults valueForKey:TEAutomaticallyShowFileCompletionList] boolValue]) {
     if (arg != nil) {
       if ([self selectionIsInFileCommand]) {
         [self showListOfFileCompletions];
@@ -2313,12 +2311,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     }
   }
-  
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
-        
+    
+  // dismiss the popup list
+  [popupList dismiss];  
+}
+
+- (void) autocompleteCommand
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *arg = [self currentArgument];
+  if ([[defaults valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
+    
     // if we have a command, and arg is nil, or arg is the same as the command, then complete the command
     NSString *command = [self currentCommand];
-//    NSLog(@"Current command %@", command);
+    //    NSLog(@"Current command %@", command);
     if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
@@ -2329,8 +2335,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }  
   
   // dismiss the popup list
-  [popupList dismiss];
+  [popupList dismiss];  
+}
+
+- (void)didChangeText
+{
+  [super didChangeText];
   
+  [self updateEditorRuler];
+
+  [self autocompleteArgument];
+  [self autocompleteCommand];
 }
 
 
