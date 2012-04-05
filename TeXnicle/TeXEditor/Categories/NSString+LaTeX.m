@@ -57,12 +57,12 @@
 
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms
 {
-//  NSLog(@"Checking %@", self);
-//  NSLog(@"against: %@", terms);
+  //  NSLog(@"Checking %@", self);
+  //  NSLog(@"against: %@", terms);
   NSInteger idx = 0;
   for (NSString *term in terms) {
     NSString *searchTerm = [NSString stringWithFormat:@"%@", term];
-//    NSLog(@"   checking %@", searchTerm);
+    //    NSLog(@"   checking %@", searchTerm);
     if ([self beginsWith:searchTerm]) {
       return idx;
     }
@@ -77,8 +77,8 @@
 	// scan string for all \label{something} and return the list of 'something's.
 	NSArray *labels = [self componentsMatchedByRegex:@"\\\\label\\{.*?\\}"];
 	
-//	NSLog(@"Scanning %@", self);
-//	NSLog(@"Found: %@",labels);
+  //	NSLog(@"Scanning %@", self);
+  //	NSLog(@"Found: %@",labels);
 	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[labels count]];
 	
 	for (NSString *label in labels) {
@@ -90,7 +90,6 @@
 		
 	}
 	
-	
 	return tags;
 }
 
@@ -99,36 +98,116 @@
 {
 	NSMutableArray *cites = [NSMutableArray array];
 	
-	// First standard \bibitem commands
-	NSArray *labels = [self componentsMatchedByRegex:@"\\\\bibitem[\\[[0-9]+\\]]*\\{.*\\}"];
-	for (NSString *label in labels) {
-		
-		// get the range between { and }
-		int start = -1;
-		int end   = -1;
-		for (int kk=0; kk<[label length]; kk++) {
-			if ([label characterAtIndex:kk]=='{') {
-				start = kk+1;
-			}
-			if ([label characterAtIndex:kk]=='}' && start >= 0) {				
-				end = kk-1;
-				break;
-			}
-		}
-		if (start>=0 && end>start) {
-			NSString *tag = [label substringWithRange:NSMakeRange(start, end-start+1)];
-      NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
-      [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
-			[cites addObject:str];
-		}
-	}
+  // 1) look for lines starting with \bibitem
+  NSScanner *scanner = [NSScanner scannerWithString:self];
+  NSInteger scanLocation = 0;
+  while(scanLocation < [self length]) {
+    if ([scanner scanUpToString:@"\\bibitem" intoString:NULL]) {
+      scanLocation = [scanner scanLocation];
+//      NSLog(@"Found bibitem at %d", scanLocation);
+      
+      if (scanLocation == [self length]) {
+        break;
+      }
+      scanLocation += 8;
+
+      // 2) check if \bibitem is followed by [, if yes, scan forward to ]
+      if ([self characterAtIndex:scanLocation] == '[') {
+//        NSLog(@"  cite has option");
+        BOOL foundClosingBracket = NO;
+        NSInteger bracketCount = 1;
+        scanLocation++;
+        while (scanLocation < [self length]) {
+          if ([self characterAtIndex:scanLocation] == '[') {
+            bracketCount++;
+          }
+          if ([self characterAtIndex:scanLocation] == ']') {
+            bracketCount--;
+            if (bracketCount == 0) {
+              foundClosingBracket = YES;
+              break;
+            }
+          }
+          scanLocation++;
+        }
+        
+        // we didn't find a closing ] so bail out
+        if (foundClosingBracket == NO) {
+//          NSLog(@"    option is not closed properly");
+          break;
+        }
+        
+        scanLocation++;
+      }
+      
+      // we should now go forward until we find a {
+      NSInteger start = NSNotFound;
+      NSInteger end   = NSNotFound;
+      while (scanLocation < [self length]) {        
+        if ([self characterAtIndex:scanLocation] == '{') {
+          start = scanLocation+1;
+          break;
+        }        
+        scanLocation++;
+      }
+      
+      if (start == NSNotFound) {
+        break; // bail out
+      }
+//      NSLog(@"  found start of tag at %d", start);
+      
+      // now go forwards and look for a }
+      scanLocation = start;
+      NSInteger bracketCount = 1;
+      while (scanLocation < [self length]) {
+        if ([self characterAtIndex:scanLocation] == '{') {
+          bracketCount++;
+        }
+        if ([self characterAtIndex:scanLocation] == '}') {
+          bracketCount--;
+          if (bracketCount == 0) {
+            end = scanLocation-1;
+            break;
+          }
+        }
+        scanLocation++;
+      }
+//      NSLog(@"  found end of tag at %d", end);
+      
+      if (start != NSNotFound && end != NSNotFound && start < end) {
+        NSString *tag = [self substringWithRange:NSMakeRange(start, end-start+1)];
+        NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
+        [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
+        [cites addObject:str];    
+      }
+      
+      [scanner setScanLocation:scanLocation];
+    } else {
+      break;
+    }
+  }
+  
+  return cites;
+  
+//  //  \bibitem[{Ahn(2011)}]{ahn11}
+//  NSString *regexp = @"\\\\bibitem(.*)";
+//  NSLog(@"regexp: %@", regexp);
+//  
+//	NSArray *terms = [self arrayOfCaptureComponentsMatchedByRegex:regexp];
+//  NSLog(@"Terms %@", terms);
+//  for (NSArray *term in terms) {
+//    NSString *tag = [term objectAtIndex:1];
+//    NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
+//    [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
+//    [cites addObject:str];    
+//  }
   
 	return cites;
 }
 
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
 {
-//  NSLog(@"Checking for bib files included in %@", sourceFile);
+  //  NSLog(@"Checking for bib files included in %@", sourceFile);
   NSMutableArray *citations = [NSMutableArray array];
   
 	// search for \\bibliography{
@@ -146,16 +225,16 @@
           }
         }
         
-//        NSLog(@"Found \\bibliography with argument %@", arg);
+        //        NSLog(@"Found \\bibliography with argument %@", arg);
         NSString *bibpath = nil;
         if ([arg isAbsolutePath]) {
-//          NSLog(@"   path is absolute");
+          //          NSLog(@"   path is absolute");
           bibpath = arg;
         } else {        
-//          NSLog(@"   path is relative to project");
+          //          NSLog(@"   path is relative to project");
           bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
         }
-//        NSLog(@"Bib file is %@", bibpath);
+        //        NSLog(@"Bib file is %@", bibpath);
         
         MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
         NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
@@ -201,17 +280,17 @@
 	// make a character set of control characters (but not whitespace/newline
 	// characters), and keep a static immutable copy to use for filtering
 	// strings
-//	NSCharacterSet *ctrlChars = [NSCharacterSet controlCharacterSet];
+  //	NSCharacterSet *ctrlChars = [NSCharacterSet controlCharacterSet];
 	NSCharacterSet *newLineChars = [NSCharacterSet newlineCharacterSet];
-//	NSCharacterSet *newlineWsChars = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-//	NSCharacterSet *nonNewlineWsChars = [newlineWsChars invertedSet];
+  //	NSCharacterSet *newlineWsChars = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+  //	NSCharacterSet *nonNewlineWsChars = [newlineWsChars invertedSet];
 	
 	NSMutableCharacterSet *mutableChars = [[newLineChars mutableCopy] autorelease];
-//	[mutableChars formIntersectionWithCharacterSet:nonNewlineWsChars];
-//	[mutableChars formUnionWithCharacterSet:ctrlChars];
-//	[mutableChars addCharactersInRange:NSMakeRange(0x0B, 2)]; // filter vt, ff
+  //	[mutableChars formIntersectionWithCharacterSet:nonNewlineWsChars];
+  //	[mutableChars formUnionWithCharacterSet:ctrlChars];
+  //	[mutableChars addCharactersInRange:NSMakeRange(0x0B, 2)]; // filter vt, ff
 	[mutableChars addCharactersInRange:NSMakeRange(0x2028, 2)]; // filter vt, ff
-//	[mutableChars addCharactersInRange:NSMakeRange(0x000b, 2)]; 
+  //	[mutableChars addCharactersInRange:NSMakeRange(0x000b, 2)]; 
 	
 	filterChars = [mutableChars copy];
   
@@ -225,11 +304,11 @@
     while (range.location != NSNotFound) {
       
       [mutableStr deleteCharactersInRange:range];
-//			[mutableStr replaceCharactersInRange:range withString:@" "];
+      //			[mutableStr replaceCharactersInRange:range withString:@" "];
       
       range = [mutableStr rangeOfCharacterFromSet:filterChars]; 
     }
-   
+    
 		[filterChars release];
     return mutableStr;
   }
@@ -401,7 +480,7 @@
       return @"";
     }
   }
-    
+  
   // go back to look for {
   while (count >= 0) {
     unichar c = [self characterAtIndex:count];
