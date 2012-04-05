@@ -869,6 +869,7 @@
 		25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineSettingsController.h; sourceTree = "<group>"; };
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
+		25EF95FA152D693C00D4AFB7 /* TeXnicle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TeXnicle.entitlements; sourceTree = "<group>"; };
 		25F10D44150B66B200C00AA3 /* xelatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatex.engine; sourceTree = "<group>"; };
 		25F251021519C83100453F6F /* TPSyntaxChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSyntaxChecker.h; sourceTree = "<group>"; };
 		25F251031519C83100453F6F /* TPSyntaxChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSyntaxChecker.m; sourceTree = "<group>"; };
@@ -981,6 +982,7 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				25EF95FA152D693C00D4AFB7 /* TeXnicle.entitlements */,
 				258348941513B2C3008A21BE /* bibtex */,
 				25D57FB114EA5255008E02B5 /* Project Templates */,
 				25CED75414B73F0B0091D55F /* SupportedFilesManager */,
@@ -2408,6 +2410,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2429,6 +2432,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

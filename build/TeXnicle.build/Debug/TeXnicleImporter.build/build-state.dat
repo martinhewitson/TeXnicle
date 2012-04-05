@@ -6,11 +6,11 @@ cProcessInfoPlistFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/
 cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-cqpwzugvxfgvwcasnauuxgvyegfp/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
 cProcessPCH /var/folders/mh/pvk9ng_n6z36jh8qywxmkx280000gp/C/com.apple.Xcode.502/SharedPrecompiledHeaders/TeXnicleImporter-Prefix-btarhuxonjdefzakbeyamvnvjkev/TeXnicleImporter-Prefix.pch.pth TeXnicleImporter/TeXnicleImporter-Prefix.pch normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/main.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/main.c normal x86_64 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/MySpotlightImporter.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/MySpotlightImporter.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cLd /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/MacOS/TeXnicle normal x86_64
-cCpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml
 cCopyStringsFile /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter/Contents/Resources/en.lproj/InfoPlist.strings TeXnicleImporter/en.lproj/InfoPlist.strings
+cCpResource TeXnicleImporter/schema.xml build/Debug/TeXnicle.mdimporter/Contents/Resources/schema.xml
 cTouch /Users/hewitson/working/software/cocoa/mac/TeXnicle/build/Debug/TeXnicle.mdimporter
 
 N/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk
@@ -251,7 +251,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies484fdd04cb2cb541^85e9f704cb2cb541^---0#1#0#--18"Check dependencies36"D3675678-3556-4318-83BC-A6FF4B94BD1A-
+lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies05a2eb81a62db541^8369ec81a62db541^---0#1#0#--18"Check dependencies36"D14A1670-19AD-4950-A226-0D55CDFF327A-
 
 CCompileC build/TeXnicle.build/Debug/TeXnicleImporter.build/Objects-normal/x86_64/GetMetadataForFile.o /Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicleImporter/GetMetadataForFile.m normal x86_64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s354710435.800899
