@@ -283,7 +283,9 @@
 - (NSArray*)bookmarksForProject
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForProject)]) {
-    return [self.delegate bookmarksForProject];
+    NSArray *bookmarks = [self.delegate bookmarksForProject];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"displayString != nil"];
+    return [bookmarks filteredArrayUsingPredicate:predicate];
   }
   return [NSArray array];
 }
