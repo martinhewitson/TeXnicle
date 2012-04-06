@@ -327,6 +327,27 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			[found addObject:dict];
 		}
 	}
+  
+  // add bookmarks
+  if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
+    NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+    NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
+    for (Bookmark *b in bookmarks) {
+      if (b.displayString != nil) {
+        NSMutableAttributedString *str = [[b.displayString mutableCopy] autorelease];
+        [str addAttribute:NSForegroundColorAttributeName
+                    value:[NSColor blueColor]
+                    range:NSMakeRange(0, [str length])];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        [dict setObject:str forKey:@"title"];
+        NSInteger index = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
+        [dict setObject:[NSNumber numberWithInteger:index] forKey:@"index"];
+        [found addObject:dict];
+      }
+    }
+  }
+  
 	
 	// sort items by index
 	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
@@ -385,17 +406,20 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		}
     
     // add bookmarks
-    if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
-      NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
-      NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
-      for (Bookmark *b in bookmarks) {
-        NSAttributedString *str = b.displayString;
-        [popupMenu addItemWithTitle:[str string]];
-        [[popupMenu lastItem] setAttributedTitle:str];
-        NSInteger linenumber = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
-        [[popupMenu lastItem] setTag:linenumber];
-      }
-    }
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
+//      NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+//      NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
+//      for (Bookmark *b in bookmarks) {
+//        NSMutableAttributedString *str = [[b.displayString mutableCopy] autorelease];
+//        [str addAttribute:NSForegroundColorAttributeName
+//                      value:[NSColor blueColor]
+//                      range:NSMakeRange(0, [str length])];
+//        [popupMenu addItemWithTitle:[str string]];
+//        [[popupMenu lastItem] setAttributedTitle:str];
+//        NSInteger linenumber = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
+//        [[popupMenu lastItem] setTag:linenumber];
+//      }
+//    }
     
     
 //    NSLog(@"Menus %@", [popupMenu itemArray]);
