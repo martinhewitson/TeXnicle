@@ -60,13 +60,19 @@
 		[view setDelegate:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(dismiss)
+                                             selector:@selector(handleWindowDidResignKeyNotification)
                                                  name:NSWindowDidResignKeyNotification
                                                object:[self window]];
     
 	}
 	
 	return self;
+}
+
+- (void) handleWindowDidResignKeyNotification
+{
+//  NSLog(@"Window resigned key");
+  [self dismiss];
 }
 
 - (void)setList:(NSArray*)aList
@@ -167,6 +173,7 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc");
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[entries release];
@@ -196,6 +203,7 @@
 
 - (void) dismiss
 {
+//  NSLog(@"Dismiss");
 //	[attachedWindow resignKeyWindow];
 //	[table resignFirstResponder];
 	if ([[parentWindow childWindows] containsObject:attachedWindow]) {
