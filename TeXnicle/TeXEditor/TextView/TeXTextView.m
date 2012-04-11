@@ -866,7 +866,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
+//  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
   if (popupList == nil) {
+//    NSLog(@"Making popup...");
     popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
                                                              atPoint:wp
                                                       inParentWindow:[self window]
@@ -946,7 +948,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord
 {
 	NSString *replacement = [NSString stringWithString:aWord];
-  //	NSLog(@"Replacing current word with %@", replacement);
 	[self selectUpToCurrentLocation];
 	NSRange sel = [self selectedRange];
 	[self shouldChangeTextInRange:sel replacementString:replacement];
@@ -1209,8 +1210,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // go backwards until we find a '\' or whitespace/newline
   while (idx >= 0) {
     unichar c = [string characterAtIndex:idx];
-
-    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
+    if ([newLineCharacterSet characterIsMember:c]) {
       break;
     }
     
@@ -1490,8 +1490,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			break;
 		}
 		
-		// other possible word breaks include '~' '\,'
-		if (c == '~') { 
+		// other possible word breaks include '~' '\,' ','
+		if (c == '~' || c == ',') { 
 			start = loc+1;
 			break;
 		}
@@ -1794,23 +1794,28 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // citation commands
 - (BOOL)selectionIsInCitationCommand
 {
+//  NSLog(@"Selection is in citation?");
   NSString *word = [self currentCommand];
   if (word == nil || [word length]==0) {
+//    NSLog(@"   no");
     return NO;
   }
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
   if (citeCommand == NO) {
+//    NSLog(@"   no");
     return NO;
   }
   
   // now check we are in an argument
   NSString *arg = [self currentArgument];
   if (arg == nil) {    
+//    NSLog(@"   no");
     return NO;
   }
   
+//  NSLog(@"   yes");
   return YES;
 }
 
@@ -1920,11 +1925,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) showListOfCiteCompletions
 {
+//  NSLog(@"Showing list of citation completions...");
+  
   if ([self.delegate respondsToSelector:@selector(listOfCitations)]) {
     NSArray *list = [self.delegate performSelector:@selector(listOfCitations)];
     
     // filter the list by existing characters
     NSString *arg = [self currentArgument];
+//    NSLog(@"Completing arg %@", arg);
     if (arg != nil && [arg length]>0) {
       arg = [arg lowercaseString];
       NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -1952,7 +1960,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   // check for completing arguments
   NSString *arg = [self currentArgument];
-//  NSLog(@"Completing arg %@", arg);
+//  NSLog(@"Completing arg '%@'", arg);
   if (arg != nil) {
     if ([self selectionIsInRefCommand]) {
 //      NSLog(@"In ref");
@@ -1981,8 +1989,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[self selectUpToCurrentLocation];
 	NSRange selectedRange = [self selectedRange];
   //	NSRange wr = 	[self rangeForCurrentWord];
-	[self setSelectedRange:curr];
-	
+	[self setSelectedRange:curr];	
   
 	NSString *word = [string substringWithRange:selectedRange];
 	NSString *command = [self currentCommand];
@@ -2276,9 +2283,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 
-- (void) autocompleteArgument
+- (BOOL) autocompleteArgument
 {
   NSString *arg = [self currentArgument];
+//  NSLog(@"Autocomplete arg %@", arg);
   
   // show citation completion list?
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -2287,7 +2295,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (arg != nil) {
       if ([self selectionIsInCitationCommand]) {
         [self showListOfCiteCompletions];
-        return;
+        return YES;
       }
     }
   }
@@ -2297,7 +2305,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (arg != nil) {
       if ([self selectionIsInRefCommand]) {
         [self showListOfRefCompletions];
-        return;
+        return YES;
       }
     }
   }
@@ -2307,17 +2315,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (arg != nil) {
       if ([self selectionIsInFileCommand]) {
         [self showListOfFileCompletions];
-        return;
+        return YES;
       }
     }
   }
     
   // dismiss the popup list
   [popupList dismiss];  
+  
+  return NO;
 }
 
-- (void) autocompleteCommand
+- (BOOL) autocompleteCommand
 {
+//  NSLog(@"Autocomplete command");
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *arg = [self currentArgument];
   if ([[defaults valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
@@ -2329,13 +2340,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
         [self completeFromList:commands];
-        return;
+        return YES;
       }
     }
   }  
   
   // dismiss the popup list
   [popupList dismiss];  
+  return NO;
 }
 
 - (void)didChangeText
@@ -2344,8 +2356,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [self updateEditorRuler];
 
-  [self autocompleteArgument];
-  [self autocompleteCommand];
+  if (![self autocompleteArgument]) {
+    [self autocompleteCommand];
+  }
 }
 
 

@@ -205,8 +205,8 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) showListOfRefCompletions;
 - (void) showListOfCiteCompletions;
 - (BOOL) completeArgument;
-- (void) autocompleteCommand;
-- (void) autocompleteArgument;
+- (BOOL) autocompleteCommand;
+- (BOOL) autocompleteArgument;
 
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine;
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
