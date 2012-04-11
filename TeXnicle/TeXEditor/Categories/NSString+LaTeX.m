@@ -481,15 +481,16 @@
     }
   }
   
-  // go back to look for {
+  // go back to look for { or ,
   while (count >= 0) {
     unichar c = [self characterAtIndex:count];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
-        [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
+//    ||
+//    [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c]){
       break;
     }
     
-    if (c == '{') {
+    if (c == '{' || c == ',') {
       nameStart = count+1;
       break;
     }
@@ -499,23 +500,26 @@
   if (nameStart < 0) {
     return nil;
   }
-  
+//  ||
+//  [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]
+  count = nameStart;  
   while (count < [self length]) {
     unichar c = [self characterAtIndex:count];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
-        [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c]) {
       break;
     }
-    if (c == '}') {
+    if (c == '}' || c == ',') {
       nameEnd = count;
       break;
     }
     count++;
   }
   
-  if (nameEnd > nameStart && nameEnd >= 0 && nameStart >= 0) {
+//  NSLog(@"end %d, start %d", nameEnd, nameStart);
+  
+  if (nameEnd >= nameStart && nameEnd >= 0 && nameStart >= 0) {
     *loc = nameEnd;
-    return [self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)];
+    return [[self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   }
   
   return nil;
