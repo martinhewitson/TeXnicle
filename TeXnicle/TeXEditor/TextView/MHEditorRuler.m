@@ -71,6 +71,7 @@
 											 orientation:NSVerticalRuler];
 	
   if (self) {
+    _newThickness = -1.0;
     self.lineNumbers = [NSArray array];
     self.textView = (TeXTextView*)aTextView;
     self.textColor = [NSColor darkGrayColor];
@@ -451,17 +452,10 @@
   if ([[newLineNumbers lastObject] number] > _lastMaxVisibleLine || _forceThicknessRecalculation) {
     float oldThickness = [self ruleThickness];
     float newThickness = [self requiredThickness];
-    if (fabs(oldThickness - newThickness) >= 1)
+    if (fabs(oldThickness - newThickness) > 1)
     {
-      NSInvocation			*invocation;
-      
-      // Not a good idea to resize the view during calculations (which can happen during
-      // display). Do a delayed perform (using NSInvocation since arg is a float).
-      invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(setRuleThickness:)]];
-      [invocation setSelector:@selector(setRuleThickness:)];
-      [invocation setTarget:self];
-      [invocation setArgument:&newThickness atIndex:2];    
-      [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0];
+      _newThickness = newThickness;
+      [self performSelector:@selector(setNewThickness) withObject:nil afterDelay:0];
     }
     _forceThicknessRecalculation = NO;
   }
@@ -471,6 +465,13 @@
   _recalculateLines = NO;
   
   _lastMaxVisibleLine = [[self.lineNumbers lastObject] number];
+}
+
+- (void) setNewThickness
+{
+  if (_newThickness >=0) {
+    [self setRuleThickness:_newThickness];
+  }
 }
 
 
