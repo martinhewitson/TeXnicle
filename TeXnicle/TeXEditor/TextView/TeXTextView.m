@@ -1207,10 +1207,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
   }
   
-  // go backwards until we find a '\' or whitespace/newline
+  // go backwards until we find a '\' 
+  // stop if we hit a } or a newline
   while (idx >= 0) {
     unichar c = [string characterAtIndex:idx];
-    if ([newLineCharacterSet characterIsMember:c]) {
+    if ([newLineCharacterSet characterIsMember:c] ||
+        c == '}' ) {
       break;
     }
     
@@ -1796,6 +1798,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
 //  NSLog(@"Selection is in citation?");
   NSString *word = [self currentCommand];
+//  NSLog(@"word %@", word);
   if (word == nil || [word length]==0) {
 //    NSLog(@"   no");
     return NO;
@@ -1810,6 +1813,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // now check we are in an argument
   NSString *arg = [self currentArgument];
+//  NSLog(@"arg %@", arg);
   if (arg == nil) {    
 //    NSLog(@"   no");
     return NO;
@@ -1831,8 +1835,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
-  if (citeCommand == NO) {
+  BOOL refCommand = [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
+  if (refCommand == NO) {
     return NO;
   }
   
@@ -2335,7 +2339,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
     // if we have a command, and arg is nil, or arg is the same as the command, then complete the command
     NSString *command = [self currentCommand];
-    //    NSLog(@"Current command %@", command);
+//    NSLog(@"Current command %@", command);
     if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
