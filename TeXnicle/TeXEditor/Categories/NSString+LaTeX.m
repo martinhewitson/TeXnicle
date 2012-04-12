@@ -482,11 +482,11 @@
   }
   
   // go back to look for { or ,
+  // stop if we hit a newline or a }
   while (count >= 0) {
     unichar c = [self characterAtIndex:count];
-//    ||
-//    [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]) {
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c]){
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] 
+        || c == '}' ){
       break;
     }
     
@@ -500,8 +500,9 @@
   if (nameStart < 0) {
     return nil;
   }
-//  ||
-//  [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c]
+
+  // go forwards looking for a } or a ,
+  // stop if we hit a newline
   count = nameStart;  
   while (count < [self length]) {
     unichar c = [self characterAtIndex:count];
