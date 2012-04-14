@@ -1569,7 +1569,7 @@
     [commands addObject:[newCommand argument]];
   }
   
-  return commands; //[NSArray array]; 
+  return commands;
 }
 
 - (BOOL) shouldSyntaxHighlightDocument
@@ -1618,7 +1618,8 @@
 	NSArray *files = [project valueForKey:@"items"];
 	for (ProjectItemEntity *item in files) {
 		if ([item isKindOfClass:[FileEntity class]]) {
-			[texfiles addObject:[prefix stringByAppendingString:[item valueForKey:@"filepath"]]];
+      NSString *path = [[prefix stringByAppendingString:[item valueForKey:@"filepath"]] stringByStandardizingPath];
+			[texfiles addObject:path];
 		}
 	}	
 	return texfiles;

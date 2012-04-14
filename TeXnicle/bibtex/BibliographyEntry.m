@@ -187,6 +187,12 @@
   NSAttributedString *comma = [[[NSAttributedString alloc] initWithString:@", "] autorelease];
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
   
+  NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
+  [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
+  [att appendAttributedString:tagString];
+  [att appendAttributedString:comma];
+
+  
   if ([self.title length] > 0) {
     NSMutableAttributedString *titleString = [[[NSMutableAttributedString alloc] initWithString:self.title] autorelease];
     [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [self.title length])];
@@ -203,12 +209,12 @@
     [att appendAttributedString:authorString];
   }
   
-  // if we don't have an author or title, use the tag
-  if ([att length]==0) {    
-    NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
-    [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
-    [att appendAttributedString:tagString];
-  }
+//  // if we don't have an author or title, use the tag
+//  if ([att length]==0) {    
+//    NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
+//    [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
+//    [att appendAttributedString:tagString];
+//  }
   
   return att;
 }
@@ -227,13 +233,30 @@
       while (idx < strLen) {
         if ([content characterAtIndex:idx] == '{') {
           start = idx+1;
-        }
-        if ([content characterAtIndex:idx] == '}') {
-          end = idx;
           break;
         }
         idx++;
       }
+      
+      idx = start;
+      NSInteger bracketCount = 1;
+      while (idx < strLen) {
+        unichar c = [content characterAtIndex:idx];
+        
+        if (c == '{') {
+          bracketCount++;
+        }
+
+        if (c == '}') {
+          bracketCount--;
+          if (bracketCount == 0) {
+            end = idx;
+            break;
+          }
+        }
+        idx++;
+      }      
+      
       
       return [content substringWithRange:NSMakeRange(start, end-start)];
       
@@ -321,6 +344,11 @@
 - (NSString*) description
 {
 	return [NSString stringWithFormat:@"[%@], [%@], [%@], [%@]", tag, author, title, publishedDate];
+}
+
+- (NSString*) string
+{
+  return [[self attributedString] string];
 }
 
 - (NSAttributedString*) displayString

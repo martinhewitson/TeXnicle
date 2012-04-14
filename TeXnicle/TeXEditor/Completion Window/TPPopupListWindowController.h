@@ -64,6 +64,7 @@
 								mode:(NSUInteger)aMode
 								 title:(NSString*)aTitle;
 
+- (void) handleWindowDidResignKeyNotification;
 - (void) userSelectedRow:(NSNumber*)aRow;
 - (void) showPopup;
 - (void) dismiss;

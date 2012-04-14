@@ -53,6 +53,7 @@
   
   CGFloat _lineGutterWidth;
   CGFloat _folderGutterWidth;
+  CGFloat _newThickness;
   
   BOOL _showLineNumbers;
   BOOL _showCodeFolders;
