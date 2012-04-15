@@ -1281,8 +1281,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if ([word length] == 0) {
     return nil;
   }
-  if ([word characterAtIndex:0] == '#' ||
-      [word characterAtIndex:0] == '\\') {
+  if ([word characterAtIndex:0] == '\\') {
     return word;
   }
   
