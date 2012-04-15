@@ -1209,14 +1209,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // go backwards until we find a '\' 
   // stop if we hit a } or a newline
+  unichar lastchar;
+  unichar c;
   while (idx >= 0) {
-    unichar c = [string characterAtIndex:idx];
+    lastchar = c;
+    c = [string characterAtIndex:idx];
     if ([newLineCharacterSet characterIsMember:c] ||
         c == '}' ) {
       break;
     }
     
-    if (c == '\\') {
+    if (c == '\\' && ![whitespaceCharacterSet characterIsMember:lastchar]) {
       foundSlash = YES;
       start = idx;
       break;
