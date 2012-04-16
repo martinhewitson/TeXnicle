@@ -2340,7 +2340,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if ([[defaults valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
     
     // if we have a command, and arg is nil, or arg is the same as the command, then complete the command
-    NSString *command = [self currentCommand];
+    NSRange commandRange = [self rangeForCurrentCommand];
+    NSString *command = [[self string] substringWithRange:commandRange];
+    
+    // if the current cursor position is not part of the current command range, we don't have an argument
+    // then don't complete
+    NSRange sel = [self selectedRange];
+    if (sel.location > NSMaxRange(commandRange)) {
+      return NO;
+    }
+    
 //    NSLog(@"Current command %@", command);
     if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
