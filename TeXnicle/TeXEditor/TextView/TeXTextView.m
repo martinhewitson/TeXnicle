@@ -730,7 +730,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-  NSLog(@"Changed in %@", keyPath);
 	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]]) {	
     NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
     [self setBackgroundColor:c];
