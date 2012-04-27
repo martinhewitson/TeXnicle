@@ -593,6 +593,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
 }
 
+- (void) applyCurrentTextColorToLine
+{
+  NSRange pRange = [self rangeForCurrentLine];  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  [[self textStorage] addAttribute:NSForegroundColorAttributeName value:color range:pRange];
+}
+
 - (void) colorVisibleText
 {
 //  NSLog(@"Color visible text: delegate %@", self.delegate);
@@ -1459,6 +1467,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	return -1;
 }
 
+- (NSRange)rangeForCurrentLine
+{
+  return [[self string] lineRangeForRange:[self selectedRange]];
+}
+
 - (NSString*) currentLineToCursor
 {
 	NSRange selRange = [self selectedRange];
@@ -2150,6 +2163,34 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setNeedsDisplay:YES];
   return [super resignFirstResponder];
 }
+
+
+// Override these delete methods to update text color which may have been set when inserting text 
+// within commands, comments etc. To make a nicer appearance we attempt to set the typing color of
+// the text before inserting it in -insertText:. The result is that foreground color text attributes
+// are sometimes applied to text fragements. We need to get rid of these when we, for example, delete
+// the comment character.
+- (void)deleteBackward:(id)sender
+{
+  [super deleteBackward:sender];
+  [self applyCurrentTextColorToLine];
+  [self colorVisibleText];
+}
+
+- (void)deleteWordBackward:(id)sender
+{
+  [super deleteWordBackward:sender];
+  [self applyCurrentTextColorToLine];
+  [self colorVisibleText];
+}
+
+- (void)deleteToBeginningOfLine:(id)sender
+{
+  [super deleteToBeginningOfLine:sender];
+  [self applyCurrentTextColorToLine];
+  [self colorVisibleText];
+}
+
 
 - (void)insertText:(id)aString
 {	

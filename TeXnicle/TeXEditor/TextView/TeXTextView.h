@@ -162,6 +162,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) colorWholeDocument;
 - (void) colorVisibleText;
 - (void) highlightMatchingWords;
+- (void) applyCurrentTextColorToLine;
 
 #pragma mark -
 #pragma mark KVO 
@@ -214,6 +215,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
+- (NSRange)rangeForCurrentLine;
 - (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength;
 - (NSString*) currentLineToCursor;
 - (NSRange) getVisibleRange;
