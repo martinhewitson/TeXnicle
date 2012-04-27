@@ -43,6 +43,8 @@
 @property (assign) BOOL dragLeftView;
 @property (assign) BOOL showMenu;
 
+- (void) setNeedsDisplay;
+
 -(NSMenu*)defaultMenuForRow:(NSInteger)row;
 - (NSMenu*)defaultMenu;
 

@@ -39,6 +39,11 @@
   self.showMenu = YES;
 }
 
+- (void) setNeedsDisplay
+{
+  [self setNeedsDisplay:YES];
+}
+
 -(NSMenu*)menuForEvent:(NSEvent*)evt 
 {
   if (!self.showMenu) {
