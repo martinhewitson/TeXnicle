@@ -114,6 +114,9 @@
 @synthesize embeddedConsoleContainer;
 @synthesize embeddedConsoleViewController;
 
+@synthesize otherFilesContainer;
+@synthesize otherFilesViewController;
+
 @synthesize liveUpdateTimer;
 
 - (void) dealloc
@@ -141,6 +144,7 @@
   self.pdfViewer = nil;
   self.miniConsole = nil;
   self.embeddedConsoleViewController = nil;
+  self.otherFilesViewController = nil;
   [self.liveUpdateTimer invalidate];
   self.liveUpdateTimer = nil;
   
@@ -269,6 +273,12 @@
   [self.engineSettingsContainer addSubview:[self.engineSettings view]];
 //  NSLog(@"Setup settings");
   
+//  // setup other files viewer
+//  self.otherFilesViewController = [[[OtherFilesViewController alloc] initWithURL:[[self fileURL] URLByDeletingLastPathComponent] delegate:self] autorelease];
+//  [self.otherFilesViewController.view setFrame:[self.otherFilesContainer bounds]];
+//  [self.otherFilesContainer addSubview:self.otherFilesViewController.view];
+//  [self.otherFilesViewController reloadData];
+  
   // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
@@ -307,6 +317,7 @@
   [pdfViewerContainerView addSubview:self.pdfViewerController.view];
 //  NSLog(@"Setup pdf viewer");
     
+  
   // setup library
   self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
   NSView *libraryView = [self.library view];
@@ -3321,6 +3332,22 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
         contextInfo:NULL];
   
 }
+
+//#pragma mark -
+//#pragma mark OtherFilesViewer delegate
+//
+//- (BOOL) otherFilesViewer:(OtherFilesViewController *)anOtherFilesViewer shouldIncludeItemAtPath:(NSURL *)aURL
+//{
+//  if ([[aURL pathExtension] isEqualToString:@"texnicle"]) {
+//    return NO;
+//  }
+//  
+//  if ([self.project fileWithPathOnDisk:[aURL path]] != nil) {
+//    return NO;
+//  }
+//  
+//  return YES;
+//}
 
 
 @end

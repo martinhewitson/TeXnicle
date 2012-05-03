@@ -50,6 +50,7 @@
 #import "TPTemplateEditor.h"
 #import "TPProjectTemplateCreator.h"
 #import "TPConsoleViewController.h"
+#import "OtherFilesViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -59,7 +60,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
@@ -143,6 +144,9 @@
   PaletteController *palette;
   NSView *paletteContainverView;
   
+  OtherFilesViewController *otherFilesViewController;
+  NSView *otherFilesContainer;
+  
   BOOL pdfHasSelection;
   
   BOOL _windowIsClosing;
@@ -161,6 +165,10 @@
 }
 
 @property (retain) NSTimer *liveUpdateTimer;
+
+@property (retain) OtherFilesViewController *otherFilesViewController;
+@property (assign) IBOutlet NSView *otherFilesContainer;
+
 
 @property (retain) TPDocumentOutlineViewController *documentOutlineViewcontroller;
 @property (assign) IBOutlet NSView *documentOutlineViewContainer;
