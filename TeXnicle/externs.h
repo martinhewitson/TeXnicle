@@ -56,6 +56,9 @@ extern NSString * const TEAutomaticallyShowCommandCompletionList;
 extern NSString * const TEAutomaticallyShowCiteCompletionList;
 extern NSString * const TEAutomaticallyShowRefCompletionList;
 extern NSString * const TEAutomaticallyShowFileCompletionList;
+extern NSString * const TEAutomaticallyShowBeginCompletionList;
+
+extern NSString * const TEAutomaticallyAddEndToBeginStatement;
 
 extern NSString * const TPCheckSyntax;
 extern NSString * const TPCheckSyntaxErrors;
