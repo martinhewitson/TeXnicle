@@ -59,6 +59,8 @@ extern NSString * const TEAutomaticallyShowFileCompletionList;
 extern NSString * const TEAutomaticallyShowBeginCompletionList;
 
 extern NSString * const TEAutomaticallyAddEndToBeginStatement;
+extern NSString * const TEAutomaticallyInsertClosingBrace;
+extern NSString * const TEAutomaticallyReplaceOpeningDoubleQuote;
 
 extern NSString * const TPCheckSyntax;
 extern NSString * const TPCheckSyntaxErrors;

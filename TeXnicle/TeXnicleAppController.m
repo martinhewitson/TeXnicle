@@ -61,6 +61,8 @@ NSString * const TEAutomaticallyShowFileCompletionList = @"TEAutomaticallyShowFi
 NSString * const TEAutomaticallyShowBeginCompletionList = @"TEAutomaticallyShowBeginCompletionList";
 
 NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEndToBeginStatement";
+NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
+NSString * const TEAutomaticallyReplaceOpeningDoubleQuote = @"TEAutomaticallyReplaceOpeningDoubleQuote";
 
 NSString * const TPCheckSyntax = @"TPCheckSyntax";
 NSString * const TPCheckSyntaxErrors = @"TPCheckSyntaxErrors";
@@ -191,15 +193,16 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	[beginCommands addObject:@"table"];
   [defaultValues setObject:beginCommands forKey:TEBeginCommands];
   
+  // completion stuff
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyAddEndToBeginStatement];
-  
-  // automaticall show completion list
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyInsertClosingBrace];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCommandCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCiteCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowRefCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowFileCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowBeginCompletionList];
-  
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyReplaceOpeningDoubleQuote];
+
   // check syntax
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPCheckSyntax];
   [defaultValues setObject:[TPSyntaxChecker defaultSyntaxErrors] forKey:TPCheckSyntaxErrors];
