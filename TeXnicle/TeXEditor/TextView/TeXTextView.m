@@ -2292,7 +2292,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor];
   }
   
-  if ([aString isEqual:@"{"]) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];
+  
+  if ([aString isEqual:@"{"] && completeBrace) {
     // get selected text
     if (selRange.length > 0) {
       NSString *selected = [[string string] substringWithRange:selRange];
@@ -2302,13 +2305,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self moveLeft:self];
       [self autocompleteArgument];
     }
-	} else 	if ([aString isEqual:@"["]) {
+	} else 	if ([aString isEqual:@"["] && completeBrace) {
 		NSRange r = [self selectedRange];
 		r.location-=2;
 		r.length+=2;
 		[super insertText:@"[]"];
 		[self moveLeft:self];
-	} else 	if ([aString isEqual:@"("]) {
+	} else 	if ([aString isEqual:@"("] && completeBrace) {
 		NSRange r = [self selectedRange];
 		r.location-=2;
 		r.length+=2;
@@ -2336,7 +2339,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			[super insertText:aString];
 			return;
 		}	
-	} else	if ([aString isEqual:@"\""] && [[self fileExtension] isEqualToString:@"tex"]) {
+	} else	if ([aString isEqual:@"]"]) {
+		// will this be an extra closing bracket?
+		NSRange r = [self selectedRange];
+		if ([[self string] characterAtIndex:r.location] == ']') {
+			// move right
+			[self moveRight:self];
+			return;
+		}	else {
+			[super insertText:aString];
+			return;
+		}	
+	} else	if ([[defaults valueForKey:TEAutomaticallyReplaceOpeningDoubleQuote] boolValue]
+              && [aString isEqual:@"\""] 
+              && [[self fileExtension] isEqualToString:@"tex"]) {
 		// do smart replacements
 		NSRange r = [self selectedRange];
     if (r.location>0) {
@@ -2349,17 +2365,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     } else {
       [super insertText:aString];
     }
-	} else	if ([aString isEqual:@"]"]) {
-		// will this be an extra closing bracket?
-		NSRange r = [self selectedRange];
-		if ([[self string] characterAtIndex:r.location] == ']') {
-			// move right
-			[self moveRight:self];
-			return;
-		}	else {
-			[super insertText:aString];
-			return;
-		}	
 	} else {
     
 		[super insertText:aString];
