@@ -1699,9 +1699,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 														stringByTrimmingCharactersInSet:whitespaceCharacterSet];
 	previousLine = [previousLine stringByTrimmingCharactersInSet:newLineCharacterSet];
 	
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
 	// Now let's do some special actions....
 	//---- If the previous line was a \begin, we append the \end
-	if ([previousLine hasPrefix:@"\\begin{"]) {			
+	if ([[defaults valueForKey:TEAutomaticallyAddEndToBeginStatement] boolValue] 
+      && [previousLine hasPrefix:@"\\begin{"]) {			
 		
 		// don't complete if the shift key is on, just add the tab
 		if (self.shiftKeyOn) {
@@ -1888,6 +1891,27 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return YES;
 }
 
+- (BOOL) selectionIsInBeginCommand
+{
+  NSString *word = [self currentCommand];
+  if (word == nil || [word length]==0) {
+    return NO;
+  }
+  
+  // check if the command is \begin
+  if (![word isEqualToString:@"\\begin"]) {
+    return NO;
+  }
+  
+  // now check we are in an argument
+  NSString *arg = [self currentArgument];
+  if (arg == nil) {
+    return NO;
+  }
+  
+  return YES;  
+}
+
 - (void) showListOfFileCompletions
 {  
   if ([self.delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
@@ -1912,6 +1936,32 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self insertFromList:list];
     }
   }
+}
+
+- (void) showListOfBeginCompletions
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *list = [defaults valueForKey:TEBeginCommands];
+  // filter the list by existing characters
+  NSString *arg = [self currentArgument];
+  if (arg != nil && [arg length] > 0) {
+    arg = [arg lowercaseString];
+    NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+      
+      NSString *testString = [(NSString*)obj lowercaseString];
+      if ([testString beginsWith:arg]) {
+        return YES;
+      }
+      
+      return NO;
+    }];
+    
+    list = [list objectsAtIndexes:indices];			
+    [self completeFromList:list];
+  } else {
+    [self insertFromList:list];
+  }    
+
 }
 
 - (void) showListOfRefCompletions
@@ -1995,6 +2045,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self showListOfFileCompletions];
       return YES;
     }
+    if ([self selectionIsInBeginCommand]) {
+      [self showListOfBeginCompletions];
+      return YES;
+    }
   }
   
   return NO;
@@ -2017,14 +2071,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 //	NSLog(@"       or command: %@", command);
 //	NSLog(@"       or arg: %@", arg);
   
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
 	id delegate = [self delegate];
   //	NSLog(@"Delegate: %@", delegate);
   if ([self completeArgument]) {
     // do completion
-	} else if ([command isEqual:@"\\begin{"]) {
-		[self insertFromList:[defaults valueForKey:TEBeginCommands]];			
 	} else if (command != nil && [command length] > 0 && (arg == nil || [arg isEqualToString:command]) ) {
     
     NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
@@ -2366,6 +2416,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
   }
     
+  // show begin completion list?
+  if ([[defaults valueForKey:TEAutomaticallyShowBeginCompletionList] boolValue]) {
+    if (arg != nil) {
+      if ([self selectionIsInBeginCommand]) {
+        [self showListOfBeginCompletions];
+        return YES;
+      }
+    }
+  }
+  
   // dismiss the popup list
   [popupList dismiss];  
   
