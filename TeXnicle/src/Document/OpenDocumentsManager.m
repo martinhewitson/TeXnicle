@@ -241,7 +241,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
-          [self.texEditorViewController.textView applyFontAndColor];
+          [self.texEditorViewController.textView applyFontAndColor:YES];
           [self selectTabForFile:currentDoc];
           [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
                                                       withObject:nil 

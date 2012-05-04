@@ -957,7 +957,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
 		[self setDocumentData:attStr];
     [[self.texEditorViewController.textView textStorage] setAttributedString:attStr];
-    [self.texEditorViewController.textView applyFontAndColor];
+    [self.texEditorViewController.textView applyFontAndColor:YES];
     [self.texEditorViewController.textView colorWholeDocument];
     
     // read settings

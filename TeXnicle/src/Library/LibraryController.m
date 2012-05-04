@@ -343,7 +343,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   [[editTextView textStorage] beginEditing];
   [[editTextView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:code] autorelease]];
   [[editTextView textStorage] endEditing];
-  [editTextView applyFontAndColor];
+  [editTextView applyFontAndColor:YES];
   
 	if (textBeforeEditing) {
 		[textBeforeEditing release];

@@ -116,37 +116,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
  
-  [self applyFontAndColor];
+  [self applyFontAndColor:YES];
 }
 
-- (void) setHighlightAlpha:(CGFloat)aValue
-{
-  if (highlightAlphaTimer == nil) {
-    highlightAlpha = aValue;
-    
-//    NSLog(@"Starting timer");
-    highlightAlphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                           target:self 
-                                                         selector:@selector(incrementHighlightAlpha)
-                                                         userInfo:nil
-                                                          repeats:YES];
-  }
-}
 
-- (void) incrementHighlightAlpha
-{
-//  NSLog(@"Timer fired");
-  highlightAlpha+=0.01;
-  if (highlightAlpha>=0.1) {
-//    NSLog(@"Stop timer");
-    [highlightAlphaTimer invalidate];
-    [highlightAlphaTimer release];
-    highlightAlphaTimer = nil;
-  }
-//  NSLog(@"Setting alpha %f", highlightAlpha);
-  
-  [self setNeedsDisplay:YES];
-}
 
 // Do the default setup for the text view.
 - (void) defaultSetup
@@ -157,11 +130,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setUsesFindPanel:YES];
   }
   
-//  NSLog(@"TeX TextView default setup");
+  // set color for line highlighting
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
   
 	[[self layoutManager] setAllowsNonContiguousLayout:YES];
-//	[self setTextContainerInset:NSMakeSize(3, 3)];
   [self turnOffWrapping];
   [self observePreferences];
   
@@ -189,12 +161,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
          selector:@selector(handleFrameChangeNotification:)
              name:NSViewBoundsDidChangeNotification 
            object:[[self enclosingScrollView] contentView]];
-  
- 
-//  [nc addObserver:self
-//         selector:@selector(colorVisibleText)
-//             name:NSTextStorageDidProcessEditingNotification
-//           object:[self textStorage]];
 }
 
 
@@ -224,17 +190,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSDictionary *contextCommandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
 	self.commandList = [[[NSMutableArray alloc] init] autorelease];								
 	[self.commandList addObjectsFromArray:[commmandDict valueForKey:@"Commands"]];
-	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];
-	
-	// add all commands from the palette
-  //	NSArray *pcommands = [[PaletteController sharedPaletteController] listOfCommands];	
-  //	[commands addObjectsFromArray:pcommands];
-	
-	// remove \ from the front of commands
-	NSString *c = [self.commandList componentsJoinedByString:@" "];
-	[self.commandList removeAllObjects];
-	[self.commandList addObjectsFromArray:[c componentsSeparatedByString:@" "]];
-	
+	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];	
 }
 
 -(void) turnOffWrapping
@@ -273,9 +229,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 
--(void) goToRangeFrom: (int)startCh toChar: (int)endCh
+-(void) goToRangeFrom:(int)startCh toChar:(int)endCh
 {
-	NSRange		theRange = { 0, 0 };
+	NSRange theRange = { 0, 0 };
 	
 	theRange.location = startCh -1;
 	theRange.length = endCh -startCh;
@@ -287,12 +243,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[self setSelectedRange: theRange];
 }
 
--(void)	goToLineWithNumber: (NSNumber*)targetLineNumber
+-(void)	goToLineWithNumber:(NSNumber*)targetLineNumber
 {
   [self goToLine:[targetLineNumber integerValue]]; 
 }
 
--(void)	goToLine: (int)targetLineNumber
+-(void)	goToLine:(int)targetLineNumber
 {
   NSString *text = [self string];  
   NSInteger lineNumber = 0;
@@ -344,8 +300,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark Control
 
-
-
+// Comment out the selected text.
 - (IBAction)commentSelection:(id)sender
 {
 	NSRange				selRange = [self selectedRange];
@@ -385,6 +340,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
+// Uncomment the selected text
 - (IBAction)uncommentSelection:(id)sender
 {
 	NSRange				selRange = [self selectedRange];
@@ -448,6 +404,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];  
 }
 
+// Toggle the commented out state for the current selection
 - (IBAction) toggleCommentForSelection:(id)sender
 {
 	NSRange				selRange = [self selectedRange];
@@ -456,8 +413,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	// Get the range to edit
 	NSRange r = [str paragraphRangeForRange:selRange];	
   
-  // fix the range in case we don't start the paragraph at a comment
-  
+  // fix the range in case we don't start the paragraph at a comment  
   
 	// Get a mutable string for this range
 	NSMutableString *newString = [NSMutableString string];
@@ -543,7 +499,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.zoomFactor = 42;
   }
   
-  [self applyFontAndColor];
+  [self applyFontAndColor:YES];
 }
 
 - (IBAction)zoomOut:(id)sender
@@ -553,7 +509,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.zoomFactor = 0;
   }
   
-  [self applyFontAndColor];
+  [self applyFontAndColor:YES];
 }
 
 #pragma mark -
@@ -758,9 +714,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineLength]]) {
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
-    [self applyFontAndColor];
+    [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
-    [self applyFontAndColor];
+    [self applyFontAndColor:YES];
 	}
 }
 
@@ -772,21 +728,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setTypingAttributes:atts];
 }
 
-- (void) applyFontAndColor
+- (void) applyFontAndColor:(BOOL)forceUpdate
 {
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
   NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
-  if (![newFont isEqualTo:[self font]]) {
+  if (![newFont isEqualTo:[self font]] || forceUpdate) {
     [self setFont:newFont];
   }
-  if (![newColor isEqualTo:[self textColor]]) {
+  if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
     [self setTextColor:newColor];
   }
   
   NSDictionary *currentAtts = [self typingAttributes];
-  if (![currentAtts isEqualToDictionary:atts]) {
+  if (![currentAtts isEqualToDictionary:atts] || forceUpdate) {
 //    NSLog(@"setting typing atts");
     [self setTypingAttributes:atts];
   } else {
@@ -1558,6 +1514,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return charRange;
 }
 
+- (void) setHighlightAlpha:(CGFloat)aValue
+{
+  if (highlightAlphaTimer == nil) {
+    highlightAlpha = aValue;
+    
+    //    NSLog(@"Starting timer");
+    highlightAlphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                           target:self 
+                                                         selector:@selector(incrementHighlightAlpha)
+                                                         userInfo:nil
+                                                          repeats:YES];
+  }
+}
+
+- (void) incrementHighlightAlpha
+{
+  //  NSLog(@"Timer fired");
+  highlightAlpha+=0.01;
+  if (highlightAlpha>=0.1) {
+    //    NSLog(@"Stop timer");
+    [highlightAlphaTimer invalidate];
+    [highlightAlphaTimer release];
+    highlightAlphaTimer = nil;
+  }
+  //  NSLog(@"Setting alpha %f", highlightAlpha);
+  
+  [self setNeedsDisplay:YES];
+}
+
 // Returns a rectangle suitable for highlighting a background rectangle for the given text range.
 - (NSRect) highlightRectForRange:(NSRange)aRange
 {
@@ -1657,6 +1642,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) paste:(id)sender
 {
   [self pasteAsPlainText:sender];
+  [self applyFontAndColor:YES];
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
 }
 
@@ -1748,11 +1734,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				
 				// add the new \end
 				[self insertText:insert];
+        [self applyFontAndColor:YES];
 				
 				// wind back the location of the cursor					
-				[self setSelectedRange:selRange];
-				
-        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+				[self setSelectedRange:selRange];				
+        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];        
+        
 				return;
 			} // end if insert
 		} // if we are at the end of the \begin statement			
@@ -2289,7 +2276,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   } else if ([line isCommandBeforeIndex:selRange.location-pRange.location]) {
     [self setTypingColor:self.coloringEngine.commandColor];
   } else {
-    [self applyFontAndColor];
+    [self applyFontAndColor:NO];
   }
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
