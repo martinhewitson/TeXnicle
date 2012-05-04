@@ -61,6 +61,8 @@
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
 
+#define kMaxZoom 42
+
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
 
@@ -495,8 +497,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (IBAction)zoomIn:(id)sender
 {
   self.zoomFactor += 2;
-  if (self.zoomFactor > 42) {
-    self.zoomFactor = 42;
+  if (self.zoomFactor > kMaxZoom) {
+    self.zoomFactor = kMaxZoom;
   }
   
   [self applyFontAndColor:YES];
@@ -3425,6 +3427,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     } else {
       return NO;
     }
+  }
+  
+  // zoom in
+  if (tag == 2050) {
+    if (self.zoomFactor == kMaxZoom)
+      return NO;
+  }  
+  
+  // zoom out
+  if (tag == 2060) {
+    if (self.zoomFactor == 0) 
+      return NO;
   }
   
   return [super validateMenuItem:menuItem];

@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2177</string>
+			<string key="NS.object.0">2182</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSMenu</string>
@@ -925,7 +925,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
-									<int key="NSTag">2040</int>
+									<int key="NSTag">2050</int>
 								</object>
 								<object class="NSMenuItem" id="681002288">
 									<reference key="NSMenu" ref="466310130"/>
@@ -935,7 +935,7 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
-									<int key="NSTag">2040</int>
+									<int key="NSTag">2060</int>
 								</object>
 								<object class="NSMenuItem" id="106501282">
 									<reference key="NSMenu" ref="466310130"/>
@@ -5864,6 +5864,7 @@
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
+						<string key="otherFilesContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
@@ -5946,6 +5947,10 @@
 							<string key="name">openDocuments</string>
 							<string key="candidateClassName">OpenDocumentsManager</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="otherFilesContainer">
+							<string key="name">otherFilesContainer</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="paletteContainverView">
 							<string key="name">paletteContainverView</string>
 							<string key="candidateClassName">NSView</string>
@@ -6004,7 +6009,6 @@
 					<string key="className">TeXTextView</string>
 					<string key="superclassName">NSTextView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="checkSyntax:">id</string>
 						<string key="collapseAll:">id</string>
 						<string key="commentSelection:">id</string>
 						<string key="complete:">id</string>
@@ -6028,10 +6032,6 @@
 						<string key="zoomOut:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="checkSyntax:">
-							<string key="name">checkSyntax:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="collapseAll:">
 							<string key="name">collapseAll:</string>
 							<string key="candidateClassName">id</string>
