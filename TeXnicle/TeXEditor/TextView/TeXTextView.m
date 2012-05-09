@@ -2630,6 +2630,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (idx>0)
     idx--;
   
+  BOOL didWrap = NO;
   while (idx > vr.location && idx < strLen) {
     
     NSRange effRange;
@@ -2643,8 +2644,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     idx--;
     
+    
+    if (idx <= vr.location && didWrap) {
+      break;
+    }
+    
+    // wrap around
     if (idx == vr.location) {
       idx = NSMaxRange(vr);
+      didWrap = YES;
     }
   }
   
@@ -2655,7 +2663,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSRange selRange = [self selectedRange];
   NSRange vr = [self getVisibleRange];
   NSInteger idx = NSMaxRange(selRange);
-  
+  BOOL didWrap = NO;
   while (idx>=0 && idx < NSMaxRange(vr)) {
     
     NSRange effRange;
@@ -2669,9 +2677,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     idx++;
     
+    // check if we've finished searching
+    if (idx > NSMaxRange(selRange) && didWrap) {
+      break;
+    }
+    
     // wrap around
     if (idx == NSMaxRange(vr)) {
       idx = vr.location;
+      didWrap = YES;
     }
   }
   
