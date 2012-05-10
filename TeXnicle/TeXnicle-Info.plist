@@ -67,7 +67,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>clas</string>
+				<string>cls</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>TeXnicle_Doc</string>
@@ -75,6 +75,8 @@
 			<string>LaTeX Class Files</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>ExternalTeXDoc</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
@@ -87,6 +89,8 @@
 			<string>LaTeX Style Files</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>ExternalTeXDoc</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
