@@ -110,17 +110,22 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 + (NSArray *)readableTypes
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
-  return [[super readableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
+  NSArray *types =  [[super readableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
+//  NSLog(@"Readable types: %@", types);
+  return types;
 }
 
 + (NSArray *)writableTypes
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
-  return [[super writableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
+  NSArray *types = [[super writableTypes] arrayByAddingObjectsFromArray:[sfm supportedTypes]];
+//  NSLog(@"Writable types: %@", types);
+  return types;
 }
 
 - (NSString *)fileNameExtensionForType:(NSString *)typeName saveOperation:(NSSaveOperationType)saveOperation
 {
+//  NSLog(@"Getting file extension for type %@", typeName);
   NSString *ext = [super fileNameExtensionForType:typeName saveOperation:saveOperation];
   if (ext) {
     return ext;
