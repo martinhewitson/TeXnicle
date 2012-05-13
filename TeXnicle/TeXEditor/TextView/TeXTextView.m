@@ -315,12 +315,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSMutableString *newString = [NSMutableString string];
 	[newString appendString:[str substringWithRange:r]];
   
-  [newString insertString:@"%" atIndex:0];
+  NSString *commentString = [NSString stringWithFormat:@"%c", [self.coloringEngine commentCharacter]];
+  
+  [newString insertString:commentString atIndex:0];
   inserted++;
   
 	for (int ll=0; ll<[newString length]-1; ll++) {
 		if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:ll]]) {
-      [newString insertString:@"%" atIndex:ll+1];
+      [newString insertString:commentString atIndex:ll+1];
       inserted++;
 		}
 	}  
@@ -362,9 +364,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     start++;
   }
+  
+  unichar commentChar = [self.coloringEngine commentCharacter];
 	
   int inserted = 0;
-	if ([newString characterAtIndex:start]=='%') {
+	if ([newString characterAtIndex:start]==commentChar) {
     
     [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
     inserted--;
@@ -382,7 +386,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         start++;
       }
       if (start < [newString length]) {
-        if ([newString characterAtIndex:start] == '%') {
+        if ([newString characterAtIndex:start] == commentChar) {
           [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
           inserted--;
         }
@@ -411,6 +415,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
 	NSRange				selRange = [self selectedRange];
 	NSMutableString*	str = [[self textStorage] mutableString];
+  unichar commentChar = [self.coloringEngine commentCharacter];
   
 	// Get the range to edit
 	NSRange r = [str paragraphRangeForRange:selRange];	
@@ -430,16 +435,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     start++;
   }
-	if (start < [newString length] && [newString characterAtIndex:start]=='%') {
+	if (start < [newString length] && [newString characterAtIndex:start]==commentChar) {
     
     // remove all comment chars
-    while([newString characterAtIndex:start]=='%') {
+    while([newString characterAtIndex:start]==commentChar) {
       [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
       move--;
     }
     
 	} else {
-		[newString insertString:@"%" atIndex:0];
+		[newString insertString:[NSString stringWithFormat:@"%c", commentChar] atIndex:0];
 		move++;
 	}
   
@@ -456,13 +461,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         start++;
       }
       
-			if (start < [newString length] && [newString characterAtIndex:start] == '%') {
-        while([newString characterAtIndex:start]=='%') {
+			if (start < [newString length] && [newString characterAtIndex:start] == commentChar) {
+        while([newString characterAtIndex:start]==commentChar) {
           [newString replaceCharactersInRange:NSMakeRange(start, 1) withString:@""];
           inserted--;
         }
 			} else {
-				[newString insertString:@"%" atIndex:ll+1];
+				[newString insertString:[NSString stringWithFormat:@"%c", commentChar] atIndex:ll+1];
 				inserted++;
 			}
 		}
