@@ -111,6 +111,11 @@
   [super dealloc];
 }
 
+- (unichar)commentCharacter
+{
+  return '%';
+}
+
 #pragma mark -
 #pragma mark KVO 
 

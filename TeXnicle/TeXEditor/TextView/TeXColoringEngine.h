@@ -62,6 +62,7 @@
 }
 
 @property (retain) NSDate *lastHighlight;
+@property (readonly) unichar commentCharacter;
 
 @property (assign) IBOutlet NSTextView *textView;
 
