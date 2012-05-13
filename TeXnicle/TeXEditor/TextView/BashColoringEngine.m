@@ -49,6 +49,12 @@
   [super dealloc];
 }
 
+- (unichar)commentCharacter
+{
+  return '#';
+}
+
+
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
   if (self.lastHighlight) {
