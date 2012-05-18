@@ -54,7 +54,7 @@
 @synthesize zoomOutButton;
 @synthesize zoomToFitButton;
 @synthesize printButton;
-
+@synthesize liveUpdateButton;
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
 {

@@ -62,6 +62,7 @@
   HHValidatedButton *zoomOutButton;
   HHValidatedButton *zoomToFitButton;
   HHValidatedButton *printButton;
+  NSButton *liveUpdateButton;
   
   MHSlidingSplitViewController *searchResultsSlideViewController;
   MHSlidingSplitViewController *thumbSlideViewController;
@@ -94,6 +95,7 @@
 @property (assign) IBOutlet HHValidatedButton *zoomInButton;
 @property (assign) IBOutlet HHValidatedButton *zoomOutButton;
 @property (assign) IBOutlet HHValidatedButton *zoomToFitButton;
+@property (assign) IBOutlet NSButton *liveUpdateButton;
 
 @property (assign) id<PDFViewerControllerDelegate> delegate;
 

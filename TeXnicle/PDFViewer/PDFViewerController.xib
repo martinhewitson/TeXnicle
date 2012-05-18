@@ -2,12 +2,12 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
-		<string key="IBDocument.AppKitVersion">1138.32</string>
-		<string key="IBDocument.HIToolboxVersion">568.00</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="com.apple.InterfaceBuilder.CocoaPlugin">2177</string>
+			<string key="com.apple.InterfaceBuilder.CocoaPlugin">2182</string>
 			<string key="com.apple.pdfkit.ibplugin">1117</string>
 		</dictionary>
 		<array key="IBDocument.IntegratedClassDependencies">
@@ -71,7 +71,6 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -97,7 +96,7 @@
 														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView"/>
+														<bool key="NSViewCanDrawConcurrently">YES</bool>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
 														<bool key="PageBreaks">YES</bool>
@@ -426,7 +425,6 @@
 								<string key="NSFrame">{{583, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295962500">
@@ -1010,6 +1008,14 @@
 					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">liveUpdateButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="436286741"/>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">liveUpdate:</string>
 						<reference key="source" ref="1003"/>
@@ -1588,7 +1594,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">127</int>
+			<int key="maxID">128</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2012,6 +2018,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="liveUpdateButton">NSButton</string>
 						<string key="nextButton">HHValidatedButton</string>
 						<string key="pdfThumbnailView">PDFThumbnailView</string>
 						<string key="pdfViewContainer">NSView</string>
@@ -2033,6 +2040,10 @@
 						<string key="zoomToFitButton">HHValidatedButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="liveUpdateButton">
+							<string key="name">liveUpdateButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="nextButton">
 							<string key="name">nextButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
@@ -2634,6 +2645,7 @@
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
+						<string key="otherFilesContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
@@ -2715,6 +2727,10 @@
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>
 							<string key="candidateClassName">OpenDocumentsManager</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="otherFilesContainer">
+							<string key="name">otherFilesContainer</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="paletteContainverView">
 							<string key="name">paletteContainverView</string>

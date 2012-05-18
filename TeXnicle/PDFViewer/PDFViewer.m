@@ -116,6 +116,8 @@
   [self.containerView addSubview:self.pdfViewerController.view];
   [self.pdfViewerController showViewer];
   [self redisplayDocument];
+  
+  [self.pdfViewerController.liveUpdateButton setHidden:YES];
 }
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
