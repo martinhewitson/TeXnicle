@@ -77,6 +77,8 @@ extern NSString * const TEHighlightCurrentLine;
 extern NSString * const TEHighlightCurrentLineColor;
 extern NSString * const TEHighlightMatchingWords;
 extern NSString * const TEHighlightMatchingWordsColor;
+extern NSString * const TESelectedTextColor;
+extern NSString * const TESelectedTextBackgroundColor;
 extern NSString * const TPSaveOnCompile;
 
 extern NSString * const TEDocumentBackgroundColor;

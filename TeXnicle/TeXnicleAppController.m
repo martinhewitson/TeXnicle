@@ -102,6 +102,9 @@ NSString * const TEHighlightCurrentLine = @"TEHighlightCurrentLine";
 NSString * const TEHighlightCurrentLineColor = @"TEHighlightCurrentLineColor";
 NSString * const TEHighlightMatchingWords = @"TEHighlightMatchingWords"; 
 NSString * const TEHighlightMatchingWordsColor = @"TEHighlightMatchingWordsColor";
+NSString * const TESelectedTextColor = @"TESelectedTextColor";
+NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor";
+
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
@@ -229,6 +232,9 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightMatchingWords];
   [defaultValues setValue:[NSArray arrayWithColor:[[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6]] forKey:TEHighlightMatchingWordsColor];
+  
+  [defaultValues setValue:[NSArray arrayWithColor:[NSColor selectedTextBackgroundColor]] forKey:TESelectedTextBackgroundColor];
+  [defaultValues setValue:[NSArray arrayWithColor:[NSColor selectedTextColor]] forKey:TESelectedTextColor];
   
   [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPSaveOnCompile];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:OpenConsoleOnTypeset];
