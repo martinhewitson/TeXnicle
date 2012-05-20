@@ -641,6 +641,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]];  
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]];
 }
@@ -683,6 +685,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];		
+
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
+
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]
@@ -720,6 +732,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineLength]]) {
     [self setWrapStyle];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]]) {
+    [self applyFontAndColor:YES];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]]) {
+    [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
     [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
@@ -760,6 +776,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
   [self setBackgroundColor:c];
   
+  // selection color
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [self setSelectedTextAttributes:
+   [NSDictionary dictionaryWithObjectsAndKeys:
+    [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue], NSBackgroundColorAttributeName,
+    [[defaults valueForKey:TESelectedTextColor] colorValue], NSForegroundColorAttributeName,
+    nil]];
 }
 
 - (void) setWrapStyle
