@@ -723,4 +723,19 @@
   [defaults synchronize];
 }
 
+- (IBAction)setDefaultSelectedTextColor:(id)sender
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setValue:[NSArray arrayWithColor:[NSColor selectedTextColor]] forKey:TESelectedTextColor];
+  [defaults synchronize];
+}
+
+- (IBAction)setDefaultSelectedTextBackgroundColor:(id)sender
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setValue:[NSArray arrayWithColor:[NSColor selectedTextBackgroundColor]] forKey:TESelectedTextBackgroundColor];
+  [defaults synchronize];
+}
+
+
 @end

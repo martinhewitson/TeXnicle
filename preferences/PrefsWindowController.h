@@ -160,6 +160,8 @@
 
 - (IBAction)setDefaultLineHighlightingColor:(id)sender;
 - (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender;
+- (IBAction)setDefaultSelectedTextColor:(id)sender;
+- (IBAction)setDefaultSelectedTextBackgroundColor:(id)sender;
 
 - (IBAction) browseForGSExecutable:(id)sender;
 - (IBAction) browseForPDFLatexExecutable:(id)sender;
