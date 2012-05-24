@@ -269,6 +269,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
              name:TPEngineCompilingCompletedNotification
            object:self.engineManager];
   
+  [nc addObserver:self
+         selector:@selector(handleTextChanged:) 
+             name:NSTextDidChangeNotification
+           object:self.texEditorViewController.textView];
+  
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -841,6 +846,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 //  } else {
 //  }
   [self updateFileStatus];  
+  [self.texEditorViewController.textView breakUndoCoalescing];
 }
 
 - (BOOL) inVersionsMode
@@ -1332,6 +1338,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 #pragma mark -
 #pragma mark Text Editor delegate
 
+- (id)currentUndoManager
+{
+  return [self undoManager];
+}
+
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
@@ -1467,6 +1478,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   }
 }
 
+- (void) handleTextChanged:(NSNotification*)aNote
+{
+  // nothing to do
+}
+
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
   [self.miniConsole setAnimating:NO];
@@ -1479,6 +1495,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   }
   _building = NO;
   lastBuildDate = [NSDate date];
+}
+
+- (void) updateChangeCount:(NSDocumentChangeType)change
+{
+  [super updateChangeCount:change];
 }
 
 - (BOOL)hasChanges
