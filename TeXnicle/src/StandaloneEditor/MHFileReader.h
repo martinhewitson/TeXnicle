@@ -40,6 +40,8 @@
 @property (retain) NSNumber *selectedIndex;
 
 + (NSStringEncoding)defaultEncoding;
++ (NSString*)defaultEncodingName;
+
 - (id) initWithEncoding:(NSStringEncoding)encoding;
 - (id) initWithEncodingNamed:(NSString*)encodingName;
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL;

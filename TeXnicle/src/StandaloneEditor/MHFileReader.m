@@ -43,6 +43,13 @@
   return [fr encodingWithName:defaultEncodingName];
 }
 
++ (NSString*)defaultEncodingName
+{
+  NSString *defaultEncodingName = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
+  return defaultEncodingName;
+}
+
+
 - (id) init
 {
   self = [super initWithNibName:@"MHFileReader" bundle:nil];
@@ -165,6 +172,9 @@
   NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
                                                          atPath:[aURL path]
                                                    traverseLink:YES];
+//  NSLog(@"Write to file at URL %@", aURL);
+//  NSLog(@"Encoding string %@", encodingString);
+  
   NSStringEncoding encoding;
   if (encodingString == nil || [encodingString length] == 0) {
     encoding = [self defaultEncoding];
@@ -179,6 +189,8 @@
   // TODO: Check that the URL we want to write to is a file and not a directory
   // Don't know a better way that just checking that the path has an extension?
   
+//  NSLog(@"Writing with encoding %@", [self nameOfEncoding:encoding]);
+  
   [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
   if (error) {
     [NSApp presentError:error];
@@ -191,6 +203,7 @@
 
 - (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL withEncoding:(NSStringEncoding)encoding
 {
+//  NSLog(@"Write string to %@ with encoding %@", aURL, [self nameOfEncoding:encoding]);
   
   NSError *error = nil;
   [aString writeToURL:aURL atomically:YES encoding:encoding error:&error];
@@ -209,6 +222,8 @@
 
 - (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL
 {
+//  NSLog(@"Write string to URL %@", aURL);
+  
   NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
                                                          atPath:[aURL path]
                                                    traverseLink:YES];
@@ -243,7 +258,7 @@
     str = [NSString stringWithContentsOfURL:aURL usedEncoding:&encoding error:&error];
     //    NSLog(@"Loaded string %@", str);
     // if we didn't get a string, then try the default encoding
-    if (str == nil) {
+    if (str == nil || [str isEqualToString:@""]) {
       //      NSLog(@"   failed to guess.");
       encoding = [self defaultEncoding];
       //      NSLog(@" using default encoding %@", [self nameOfEncoding:encoding]);
