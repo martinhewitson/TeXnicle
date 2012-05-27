@@ -100,12 +100,11 @@
 
 - (void) reloadFromDisk
 {
-  [self reloadFromDiskWithEncoding:@"Unicode (UTF-8)"];
+  [self reloadFromDiskWithEncoding:[MHFileReader defaultEncodingName]];
 }
 
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding
 {
-//  NSLog(@"Loading with encoding %@", encoding);
   
 	// We should load the text from the file
 	NSString *filepath = [self pathOnDisk];
@@ -113,6 +112,7 @@
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:filepath]) {
     MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:encoding] autorelease];
+//    NSLog(@"Loading with encoding %@", encoding);
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
 		
 		if (!str) {
@@ -120,6 +120,7 @@
 		}
 //    NSLog(@"%@: %@", self, str);
 		NSData *data = [str dataUsingEncoding:[fr encodingUsed]];
+//    NSLog(@"Loaded with encoding %@", [fr nameOfEncoding:[fr encodingUsed]]);
 		[self setPrimitiveValue:data forKey:@"content"];
     if ([filepath pathIsText]) {
       [self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
