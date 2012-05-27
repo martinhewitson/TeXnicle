@@ -227,7 +227,7 @@ withIntermediateDirectories:YES
 
 - (BOOL) makeFileOnDisk:(NSString*)aPath withContents:(NSData*)data overwrite:(BOOL)overwrite
 {
-//	NSLog(@"Making file on disk: %@ with contents: \n%@", aPath, data);
+
 	NSFileManager *fm = [NSFileManager defaultManager];
 	// Check if the file already exists on disk
 	if (![fm fileExistsAtPath:aPath] || overwrite) {		
@@ -373,6 +373,9 @@ withIntermediateDirectories:YES
   
 	[moc processPendingChanges];
 	
+//  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+//  NSLog(@"Making code string with encoding %@", [fr nameOfEncoding:[MHFileReader defaultEncoding]] );
+  
 	if (codeStr && ![codeStr isEqual:@""]) {
 //		NSData *data = [codeStr RTFFromRange:NSMakeRange(0, [codeStr length]) documentAttributes:nil];	
 		NSData *data = [codeStr dataUsingEncoding:[MHFileReader defaultEncoding]];
