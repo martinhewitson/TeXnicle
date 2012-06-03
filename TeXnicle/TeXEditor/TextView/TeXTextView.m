@@ -1183,7 +1183,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSString *string = [self string];
   NSRange sel = [self selectedRange];
   NSInteger end = sel.location;
-  if (end < 0 || end >= [string length]) {
+  if (end < 0 || end > [string length]) {
     return NSMakeRange(NSNotFound, 0);
   }
   NSInteger idx = end-1;
@@ -1199,6 +1199,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       return NSMakeRange(NSNotFound, 0);
     }
   }
+//  NSLog(@"Location %d, string length %d", end, [string length]);
   
   // go backwards until we find a '\' 
   // stop if we hit a } or a newline
@@ -1221,16 +1222,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     idx--;
   }
   
+//  NSLog(@"Found slash %d, index %d, start %d", foundSlash, idx, start);
+  
   // if we didn't find a '\', return not found
-  if (!foundSlash) {
+  if (!foundSlash || start < 0) {
     return NSMakeRange(NSNotFound, 0);
   }
   
-  // go forwards until we find { followed by } or a whitespace or a newline
+  // go forwards until we find { followed by } or a whitespace or a newline, or the end of file
   while (idx < [string length]) {
     unichar c = [string characterAtIndex:idx];
     
-    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c]) {
+    if ([newLineCharacterSet characterIsMember:c] || [whitespaceCharacterSet characterIsMember:c] || idx == [string length]) {
       end = idx-1;
       break;
     }
@@ -1255,6 +1258,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   // the text between the '\' and the { is the command, but only if the original selection point was within the full range
+  if (end >= [string length]) {
+    end = [string length]-1;
+  }
   NSRange r = NSMakeRange(start, end-start+1);  
 
   return r;
@@ -2309,6 +2315,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:NO];
   }
   
+//  NSLog(@"Inserting text at index %d", selRange.location);
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];
   
@@ -2337,7 +2345,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@"}"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-		if ([[self string] characterAtIndex:r.location] == '}') {
+//    NSLog(@"Range %@", NSStringFromRange(r));
+		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == '}') {
 			// move right
 			[self moveRight:self];
 			return;
@@ -2348,7 +2357,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@")"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-		if ([[self string] characterAtIndex:r.location] == ')') {
+		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == ')') {
 			// move right
 			[self moveRight:self];
 			return;
@@ -2359,7 +2368,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@"]"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-		if ([[self string] characterAtIndex:r.location] == ']') {
+		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == ']') {
 			// move right
 			[self moveRight:self];
 			return;
