@@ -63,6 +63,7 @@ NSString * const TEAutomaticallyShowBeginCompletionList = @"TEAutomaticallyShowB
 NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEndToBeginStatement";
 NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
 NSString * const TEAutomaticallyReplaceOpeningDoubleQuote = @"TEAutomaticallyReplaceOpeningDoubleQuote";
+NSString * const TEAutomaticallySkipClosingBrackets = @"TEAutomaticallySkipClosingBrackets";
 
 NSString * const TPCheckSyntax = @"TPCheckSyntax";
 NSString * const TPCheckSyntaxErrors = @"TPCheckSyntaxErrors";
@@ -205,7 +206,8 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowFileCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowBeginCompletionList];
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyReplaceOpeningDoubleQuote];
-
+  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallySkipClosingBrackets];
+  
   // check syntax
   [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPCheckSyntax];
   [defaultValues setObject:[TPSyntaxChecker defaultSyntaxErrors] forKey:TPCheckSyntaxErrors];
