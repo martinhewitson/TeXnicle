@@ -2319,6 +2319,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];
+  BOOL skipClosingBrace = [[defaults valueForKey:TEAutomaticallySkipClosingBrackets] boolValue];
   
   if ([aString isEqual:@"{"] && completeBrace) {
     // get selected text
@@ -2346,7 +2347,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
 //    NSLog(@"Range %@", NSStringFromRange(r));
-		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == '}') {
+		if (skipClosingBrace && r.location < [string length] && [[self string] characterAtIndex:r.location] == '}') {
 			// move right
 			[self moveRight:self];
 			return;
@@ -2357,7 +2358,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@")"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == ')') {
+		if (skipClosingBrace && r.location < [string length] && [[self string] characterAtIndex:r.location] == ')') {
 			// move right
 			[self moveRight:self];
 			return;
@@ -2368,7 +2369,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@"]"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-		if (r.location < [string length] && [[self string] characterAtIndex:r.location] == ']') {
+		if (skipClosingBrace && r.location < [string length] && [[self string] characterAtIndex:r.location] == ']') {
 			// move right
 			[self moveRight:self];
 			return;
