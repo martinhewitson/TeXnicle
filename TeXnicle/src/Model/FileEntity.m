@@ -331,12 +331,17 @@
 			
 			NSTextStorage *ts = [[self document] textStorage];
 			NSString *textStr = [ts string];
+//      NSLog(@"Content string %@", contentStr);
+//      NSLog(@"Text storage %@", textStr);
+      
 			if ([contentStr length] != [textStr length]) {
+//        NSLog(@"File %@ has diffent length", self.name);
         _hasEdits = YES;
 				return YES;
 			}
 			
 			if (![contentStr isEqual:textStr]) {
+//        NSLog(@"File %@ has diffent string", self.name);
         _hasEdits = YES;
 				return YES;
 			}
