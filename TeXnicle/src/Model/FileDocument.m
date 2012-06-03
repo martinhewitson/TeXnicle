@@ -138,9 +138,9 @@
 		
 		if (![[file valueForKey:@"content"] isEqual:data]) {
 			[file setValue:data forKey:@"content"];
-			return YES;
-		}	else {
-		}
+    }
+    return YES;
+    
 	}	else {
 	}
 	return NO;
