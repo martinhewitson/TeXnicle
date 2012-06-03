@@ -240,7 +240,7 @@
 
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL
 {
-  
+//  NSLog(@"Reading string from file %@", aURL);
   if (![[aURL path] pathIsText]) {
     return nil;
   }
