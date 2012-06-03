@@ -237,5 +237,7 @@
 - (void) showTemplatesSheet;
 - (void) templateSelectionChanged:(NSNotification*)aNote;
 
+- (void) syncDocumentDataFromEditor;
+
 @end
 

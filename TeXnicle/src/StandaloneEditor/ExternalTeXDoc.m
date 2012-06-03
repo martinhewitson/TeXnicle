@@ -207,6 +207,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (void)awakeFromNib
 {
+//  NSLog(@"Awake from nib");
   self.results = [NSMutableArray array];
   
   // ensure we have a settings dictionary before proceeding
@@ -224,6 +225,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self.texEditorViewController setPerformSyntaxCheck:YES];
   
 	if (self.documentData) {
+//    NSLog(@"Setting document data to %@", self.documentData);
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
@@ -822,6 +824,11 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 {
 //  NSLog(@"Save doc...");
   
+  if ([self fileURL] == nil) {
+    // make sure we store the text editor string to our document string
+    [self syncDocumentDataFromEditor];
+  }
+    
   // cache chosen language
   NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
 	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
@@ -896,6 +903,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction)reopenUsingEncoding:(id)sender
 {
+//  NSLog(@"Reopen using encoding %@", [sender title]);
+  
   NSString *path = [[self fileURL] path];
   if (path) {
     // clear the xattr
@@ -929,9 +938,13 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL)writeToURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError
 {
+//  NSLog(@"Write to URL %@", absoluteURL);
+  
 	NSAttributedString *attStr = [self.texEditorViewController.textView attributedString];
+//  NSLog(@"Text editor string %@", attStr);
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:attStr];
 	[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
+//  NSLog(@"Set document data %@", string);
   [self setDocumentData:string];
 	NSString *str = [string string];
   
@@ -959,6 +972,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (BOOL) loadFileAtURL:(NSURL*)absoluteURL
 {
+//  NSLog(@"Loading file at URL %@", absoluteURL);
+  
   MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
@@ -1115,14 +1130,15 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 - (IBAction)reloadCurrentFileFromDisk:(id)sender
 {
-//  NSLog(@"Reload current file from disk");
-  NSRange selected = [self.texEditorViewController.textView selectedRange];
-  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];  
-  [self revertDocumentToSaved:self];
-  [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
-  if (NSMaxRange(selected) < [[self.documentData string] length]) {
-    [self.texEditorViewController.textView setSelectedRange:selected];
-  }  
+  if ([self fileURL] != nil) {
+    NSRange selected = [self.texEditorViewController.textView selectedRange];
+    [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0, 0)];  
+    [self revertDocumentToSaved:self];
+    [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+    if (NSMaxRange(selected) < [[self.documentData string] length]) {
+      [self.texEditorViewController.textView setSelectedRange:selected];
+    }  
+  }
 }
 
 - (IBAction) addToProject:(id)sender
@@ -2039,6 +2055,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     NSString *code = [aTemplate valueForKey:@"Code"];
     if (code != nil && [code length]>0) {
       [self.texEditorViewController setString:code];
+      [self syncDocumentDataFromEditor];
     }
     [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
   }
@@ -2046,6 +2063,14 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   [self.templateEditor.window orderOut:self];  
 }
 
+
+- (void) syncDocumentDataFromEditor
+{
+  NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[MHFileReader defaultEncoding]]
+                                                           forKey:NSCharacterEncodingDocumentAttribute];
+  NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options] autorelease];
+  [self setDocumentData:attStr];
+}
 
 
 @end
