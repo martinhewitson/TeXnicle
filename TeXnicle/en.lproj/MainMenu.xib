@@ -1361,7 +1361,7 @@
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="836959703">
 									<reference key="NSMenu" ref="367990463"/>
-									<string key="NSTitle">Typset Project</string>
+									<string key="NSTitle">Typeset Project</string>
 									<string key="NSKeyEquiv">r</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -4879,6 +4879,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="liveUpdateButton">NSButton</string>
 						<string key="nextButton">HHValidatedButton</string>
 						<string key="pdfThumbnailView">PDFThumbnailView</string>
 						<string key="pdfViewContainer">NSView</string>
@@ -4900,6 +4901,10 @@
 						<string key="zoomToFitButton">HHValidatedButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="liveUpdateButton">
+							<string key="name">liveUpdateButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="nextButton">
 							<string key="name">nextButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
