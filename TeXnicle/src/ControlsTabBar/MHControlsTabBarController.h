@@ -30,7 +30,7 @@
 
 extern NSString * const TPControlsTabSelectionDidChangeNotification;
 
-@interface MHControlsTabBarController : NSObject <NSTabViewDelegate> {
+@interface MHControlsTabBarController : NSResponder <NSTabViewDelegate> {
 @private
   NSArray *buttons;
   NSButton *projectButton;
@@ -41,6 +41,8 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
   NSButton *bookmarksButton;
   NSButton *prefsButton;
   NSTabView *tabView;
+  NSSplitView *splitview;
+  NSView *containerView;
 }
 
 @property (assign) IBOutlet NSButton *projectButton;
@@ -50,7 +52,8 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @property (assign) IBOutlet NSButton *findButton;
 @property (assign) IBOutlet NSButton *bookmarksButton;
 @property (assign) IBOutlet NSButton *prefsButton;
-
+@property (assign) IBOutlet NSSplitView *splitview;
+@property (assign) IBOutlet NSView *containerView;
 @property (assign) IBOutlet NSTabView *tabView;
 
 - (void) toggleOn:(id)except;
@@ -59,5 +62,24 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 
 - (id) buttonForTabIndex:(NSInteger)index;
 - (NSInteger)tabIndexForButton:(id)sender;
+
+#pragma mark -
+#pragma mark Control
+
+- (IBAction) showProjectTree:(id)sender;
+- (void) showProjectTree;
+- (IBAction) showSymbolPalette:(id)sender;
+- (void) showSymbolPalette;
+- (IBAction) showClippingsLibrary:(id)sender;
+- (void) showClippingsLibrary;
+- (IBAction) showDocumentOutline:(id)sender;
+- (void) showDocumentOutline;
+- (IBAction) showProjectSearch:(id)sender;
+- (void) showProjectSearch;
+- (IBAction) showBookmarks:(id)sender;
+- (void) showBookmarks;
+- (IBAction) showProjectSettings:(id)sender;
+- (void) showProjectSettings;
+- (IBAction) showNavigator:(id)sender;
 
 @end

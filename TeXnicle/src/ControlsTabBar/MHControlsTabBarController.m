@@ -41,6 +41,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 @synthesize tabView;
 @synthesize bookmarksButton;
 @synthesize prefsButton;
+@synthesize splitview;
+@synthesize containerView;
 
 - (id)init
 {
@@ -202,6 +204,181 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   } else if (idx == [buttons indexOfObject:self.prefsButton]) {
     [self toggleOn:self.prefsButton];    
   }
+}
+
+#pragma mark -
+#pragma mark Control
+
+- (IBAction) showProjectTree:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showProjectTree) withObject:nil afterDelay:0];
+}
+
+- (void) showProjectTree 
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.projectButton]];
+}
+
+- (IBAction) showSymbolPalette:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showSymbolPalette) withObject:nil afterDelay:0];
+}
+
+- (void) showSymbolPalette
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.palletButton]];
+}
+
+- (IBAction) showClippingsLibrary:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showClippingsLibrary) withObject:nil afterDelay:0];
+}
+
+- (void) showClippingsLibrary
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.libraryButton]];
+}
+
+- (IBAction) showDocumentOutline:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showDocumentOutline) withObject:nil afterDelay:0];
+}
+
+- (void) showDocumentOutline
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.outlineButton]];
+}
+
+- (IBAction) showProjectSearch:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showProjectSearch) withObject:nil afterDelay:0];
+}
+
+- (void) showProjectSearch
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.findButton]];
+}
+
+- (IBAction) showBookmarks:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showBookmarks) withObject:nil afterDelay:0];
+}
+
+- (void) showBookmarks
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.bookmarksButton]];
+}
+
+- (IBAction) showProjectSettings:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showProjectSettings) withObject:nil afterDelay:0];
+}
+
+- (void) showProjectSettings
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.prefsButton]];
+}
+
+- (IBAction) showNavigator:(id)sender
+{
+  NSView *leftView = [[self.splitview subviews] objectAtIndex:0];
+  NSView *midView = [[self.splitview subviews] objectAtIndex:1];
+  
+//  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
+//  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
+  
+  CGFloat size = [buttons count]*36.0;
+  if (size < 230.0) 
+    size = 230.0;
+  
+  
+  NSRect leftfr = [leftView frame];
+  if ([leftView isHidden] == NO) {
+    return;
+  }
+  
+  CGFloat offset = leftfr.size.width - size;
+  leftfr.size.width = size;
+  NSRect midfr = [midView frame];
+  midfr.size.width = midfr.size.width - size;
+  midfr.origin.x = size;
+  
+  [midView setFrame:midfr];
+  [leftView.animator setFrame:leftfr];
+  [leftView setHidden:NO];
+}
+
+- (BOOL) validateMenuItem:(NSMenuItem *)menuItem
+{
+  // 2110 -> 2180
+  
+  NSInteger tag = [menuItem tag];
+  
+  if (tag == 2110) {
+    // show project tree
+    if (self.projectButton) {
+      return YES;
+    }
+  }
+
+  if (tag == 2120) {
+    // show palette
+    if (self.palletButton) {
+      return YES;
+    }
+  }
+
+  if (tag == 2130) {
+    // show library 
+    if (self.libraryButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2140) {
+    // show document outline 
+    if (self.outlineButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2150) {
+    // show project search 
+    if (self.findButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2160) {
+    // show bookmarks 
+    if (self.bookmarksButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2170) {
+    // show settings 
+    if (self.prefsButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2180) {
+    // show navigator 
+    NSView *leftView = [[self.splitview subviews] objectAtIndex:0];
+    if ([leftView isHidden] == YES) {
+      return YES;
+    }
+  }
+  
+  return NO;
 }
 
 @end
