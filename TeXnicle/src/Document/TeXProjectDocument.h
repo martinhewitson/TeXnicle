@@ -62,6 +62,9 @@
 
 @interface TeXProjectDocument : NSPersistentDocument <OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
+  
+  NSWindow *mainWindow;
+  
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
   
@@ -163,6 +166,8 @@
   BOOL _building;
   NSTimer *liveUpdateTimer;
 }
+
+@property (assign) IBOutlet NSWindow *mainWindow;
 
 @property (retain) NSTimer *liveUpdateTimer;
 

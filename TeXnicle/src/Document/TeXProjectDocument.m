@@ -58,6 +58,8 @@
 
 @implementation TeXProjectDocument
 
+@synthesize mainWindow;
+
 @synthesize statusTimer;
 
 @synthesize documentOutlineViewcontroller;
@@ -156,6 +158,7 @@
   _building = NO;
   _liveUpdate = NO;
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  
 }
 
 - (id)init
@@ -442,6 +445,10 @@
                                                     selector:@selector(updateStatusView)
                                                     userInfo:nil
                                                      repeats:YES];
+  
+  // insert controls tab bar in the responder chain
+  [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
+  [self.mainWindow setNextResponder:self.controlsTabBarController];  
   
 //  NSLog(@"Setup document finished.");
   // Show document
