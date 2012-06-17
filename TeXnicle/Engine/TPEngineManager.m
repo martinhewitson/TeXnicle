@@ -29,6 +29,7 @@
 #import "MABSupportFolder.h"
 #import "TPEngine.h"
 #import "ConsoleController.h"
+#import "externs.h"
 
 NSString * const TPEngineCompilingCompletedNotification = @"TPEngineCompilingCompletedNotification";
 NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNotification";
@@ -285,6 +286,12 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.nCompile = [[self.delegate nCompile] integerValue];
   
   if (e) {
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults valueForKey:TPClearConsoleOnCompile] boolValue]) {
+      [self.consoleManager clear];
+    }
   
     [e compileDocumentAtPath:[self.delegate documentToCompile] 
             workingDirectory:[self.delegate workingDirectory]
