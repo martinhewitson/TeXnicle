@@ -182,6 +182,7 @@
 @property (retain) TPTemplateEditor *templateEditor;
 
 
+- (void) insertTabbarControllerIntoResponderChain;
 - (void) initSettings;
 - (void) setupSettings;
 - (void) updateFileStatus;

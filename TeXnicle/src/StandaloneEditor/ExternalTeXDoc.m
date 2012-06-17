@@ -326,10 +326,19 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   // Present templates if we have no URL
   [self performSelector:@selector(checkToShowTemplateSheet) withObject:nil afterDelay:0];
   
+  // insert controls tab bar in the responder chain
+  [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
+  
   _building = NO;
   _liveUpdate = NO;
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
   
+}
+
+- (void) insertTabbarControllerIntoResponderChain
+{
+  [self.tabbarController setNextResponder:self.mainWindow.nextResponder];
+  [self.mainWindow setNextResponder:self.tabbarController];    
 }
 
 - (void)checkToShowTemplateSheet
