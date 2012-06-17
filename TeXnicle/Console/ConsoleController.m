@@ -113,6 +113,11 @@ static ConsoleController *sharedConsoleController = nil;
 	return self;
 }
 
+- (void) clear
+{
+  [self clear:self];
+}
+
 - (IBAction) clear:(id)sender
 {
 	NSTextStorage *textStorage = [textView textStorage];	
