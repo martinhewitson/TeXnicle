@@ -470,23 +470,47 @@
 
 - (void) restoreOpenTabs
 {
-  
+  NSMutableArray *openFiles = [NSMutableArray array];
+  // build array of open files.
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
-      if ([[file valueForKey:@"wasOpen"] boolValue]) {        
-        [self.openDocuments addDocument:file];          
+      NSInteger pos = [[file valueForKey:@"wasOpen"] integerValue];
+      if (pos >= 0) {        
+        [openFiles addObject:file];
       }
-      [file setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
     }
   }
   
+  // now sort the array
+  NSArray *sortedFiles = [openFiles sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    
+    NSInteger pos1 = [[obj1 valueForKey:@"wasOpen"] integerValue];
+    NSInteger pos2 = [[obj2 valueForKey:@"wasOpen"] integerValue];
+    
+    if (pos1 > pos2) {
+      return (NSComparisonResult)NSOrderedDescending;
+    }
+    
+    if (pos1 < pos2) {
+      return (NSComparisonResult)NSOrderedAscending;
+    }
+    
+    return (NSComparisonResult)NSOrderedSame;
+    
+  }];
+  
+  // open the sorted files
+  for (FileEntity *file in sortedFiles) {
+    [self.openDocuments addDocument:file];
+    [file setPrimitiveValue:[NSNumber numberWithInteger:-1] forKey:@"wasOpen"];
+  }
+  
+  // select the previously selected file
   FileEntity *selected = [self.project valueForKey:@"selected"];
   if (selected) {
     [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
   }
-  
-
   
 }
 
