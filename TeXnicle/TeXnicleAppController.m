@@ -107,6 +107,8 @@ NSString * const TESelectedTextColor = @"TESelectedTextColor";
 NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor";
 
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
+NSString * const TPClearConsoleOnCompile = @"TPClearConsoleOnCompile";
+
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentFont = @"TEDocumentFont";
@@ -239,6 +241,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor selectedTextColor]] forKey:TESelectedTextColor];
   
   [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPSaveOnCompile];
+  [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPClearConsoleOnCompile];
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:OpenConsoleOnTypeset];
 
   // console

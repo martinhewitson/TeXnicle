@@ -81,6 +81,7 @@ extern NSString * const TEHighlightMatchingWordsColor;
 extern NSString * const TESelectedTextColor;
 extern NSString * const TESelectedTextBackgroundColor;
 extern NSString * const TPSaveOnCompile;
+extern NSString * const TPClearConsoleOnCompile;
 
 extern NSString * const TEDocumentBackgroundColor;
 extern NSString * const TESyntaxTextColor;
