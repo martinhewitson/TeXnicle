@@ -40,6 +40,7 @@
 
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote;
 - (IBAction) clear:(id)sender;
+- (void) clear;
 - (void) appendText:(NSString*)someText;
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor;
 - (void) error:(NSString*)someText;

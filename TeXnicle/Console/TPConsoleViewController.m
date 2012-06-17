@@ -73,6 +73,11 @@
 	[textView setFont:font];
 }
 
+- (void) clear
+{
+  [self clear:self];
+}
+
 - (IBAction) clear:(id)sender
 {
 	NSTextStorage *textStorage = [textView textStorage];	
