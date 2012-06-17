@@ -350,7 +350,8 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 	FileEntity *file = [tabViewItem identifier];
 	[file updateFromTextStorage];
 	[openDocuments removeObject:file];
-  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
+  [file setValue:[NSNumber numberWithInteger:-1] forKey:@"wasOpen"];
+//  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
 //	NSLog(@"Removed %@", [file valueForKey:@"name"]);
 	
 	
@@ -428,8 +429,12 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 
 - (void) commitStatus
 {
+  NSInteger count = 0;
 	for (FileEntity *file in openDocuments) {
-		[file setValue:[NSNumber numberWithBool:YES] forKey:@"wasOpen"];
+    NSInteger pos = [self.tabView indexOfTabViewItemWithIdentifier:file];
+		[file setValue:[NSNumber numberWithInteger:pos] forKey:@"wasOpen"];
+//		[file setValue:[NSNumber numberWithBool:YES] forKey:@"wasOpen"];
+    count++;
 	}
 	
 	for (DocWindowController *newDoc in standaloneWindows) {
