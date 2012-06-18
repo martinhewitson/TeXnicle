@@ -102,6 +102,10 @@ extern NSString * const TESyntaxColorMultilineArguments;
 extern NSString * const TESyntaxSpecialCharsColor;
 extern NSString * const TESyntaxColorSpecialChars;
 
+// dollar chars
+extern NSString * const TESyntaxDollarCharsColor;
+extern NSString * const TESyntaxColorDollarChars;
+
 // command
 extern NSString * const TESyntaxCommandColor;
 extern NSString * const TESyntaxColorCommand;
