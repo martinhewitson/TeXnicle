@@ -1736,49 +1736,48 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			return;
 		}		
 		
-		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special			
-		if (selRange.location == lineRange.location+lineRange.length) {
-			int start = 0;
-			int end   = 0;
-			for (int kk=0; kk<[previousLine length]; kk++) {
-				if ([previousLine characterAtIndex:kk]=='{') {
-					start = kk+1;
-					kk++;
-				}
-        if (kk < [previousLine length]) {
-          if ([previousLine characterAtIndex:kk]=='}') {
-            end = kk-1;
-            break;
-          }
+		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special    
+    int start = 0;
+    int end   = 0;
+    for (int kk=0; kk<[previousLine length]; kk++) {
+      if ([previousLine characterAtIndex:kk]=='{') {
+        start = kk+1;
+        kk++;
+      }
+      if (kk < [previousLine length]) {
+        if ([previousLine characterAtIndex:kk]=='}') {
+          end = kk-1;
+          break;
         }
-			}
-			NSString *insert = nil;
-			if (start < end && start != NSNotFound && end != NSNotFound) {
-				NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
-				insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
-			}
-			
-			if (insert) {
-				// now put in the requested newline
-				[super insertNewline:sender];
-				
-				// add the new \end
-				[self insertTab:self];
-				
-				// record this location
-				selRange = [self selectedRange];
-				
-				// add the new \end
-				[self insertText:insert];
-        [self applyFontAndColor:YES];
-				
-				// wind back the location of the cursor					
-				[self setSelectedRange:selRange];				
-        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];        
-        
-				return;
-			} // end if insert
-		} // if we are at the end of the \begin statement			
+      }
+    }
+    NSString *insert = nil;
+    if (start < end && start != NSNotFound && end != NSNotFound) {
+      NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
+      insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
+    }
+    
+    if (insert) {
+      // now put in the requested newline
+      [super insertNewline:sender];
+      
+      // add the new \end
+      [self insertTab:self];
+      
+      // record this location
+      selRange = [self selectedRange];
+      
+      // add the new \end
+      [self insertText:insert];
+      [self applyFontAndColor:YES];
+      
+      // wind back the location of the cursor					
+      [self setSelectedRange:selRange];				
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];        
+      
+      return;
+    } // end if insert
+
     [super insertNewline:sender];    
 	} // end if \begin
 	else if ([self currentSnippetCommand])
