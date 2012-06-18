@@ -53,6 +53,9 @@
 @synthesize commandColor;
 @synthesize colorCommand;
 
+@synthesize dollarColor;
+@synthesize colorDollarChars;
+
 @synthesize argumentsColor;
 @synthesize colorArguments;
 @synthesize colorMultilineArguments;
@@ -69,13 +72,14 @@
     self.textView = aTextView;
     newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
     whitespaceCharacterSet = [[NSCharacterSet whitespaceCharacterSet] retain];	
-    specialChars = [[NSCharacterSet characterSetWithCharactersInString:@"${}[]()\"'"] retain];
+    specialChars = [[NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"] retain];
     
     keys = [[NSArray arrayWithObjects:TEDocumentFont, TESyntaxTextColor,
              TESyntaxCommentsColor, TESyntaxCommentsL2Color, TESyntaxCommentsL3Color, 
              TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
              TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
              TESyntaxCommandColor, TESyntaxColorCommand, 
+             TESyntaxDollarCharsColor, TESyntaxColorDollarChars, 
              TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
              nil] retain];
 
@@ -102,6 +106,7 @@
   self.commentL3Color = nil;
   self.specialCharsColor = nil;
   self.commandColor = nil;
+  self.dollarColor = nil;
   self.argumentsColor = nil;
   
   [keys release];
@@ -182,6 +187,10 @@
   // command
   self.commandColor = [[defaults valueForKey:TESyntaxCommandColor] colorValue];
   self.colorCommand = [[defaults valueForKey:TESyntaxColorCommand] boolValue];
+  
+  // command
+  self.dollarColor = [[defaults valueForKey:TESyntaxDollarCharsColor] colorValue];
+  self.colorDollarChars = [[defaults valueForKey:TESyntaxColorDollarChars] boolValue];
   
   // arguments
   self.argumentsColor = [[defaults valueForKey:TESyntaxArgumentsColor] colorValue];
@@ -363,10 +372,16 @@
         idx = start+1;
       }
       
+    } else if (cc == '$' && self.colorDollarChars) { 
+      
+      colorRange = NSMakeRange(aRange.location+idx, 1);
+      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.dollarColor forCharacterRange:colorRange];
+      
     } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
       
       colorRange = NSMakeRange(aRange.location+idx, 1);
       [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+            
     } else if ((cc == '\\' || cc == '@') && self.colorCommand) {      
       // if we find \ we start a command unless we have \, or whitespace
       if (idx < strLen-1) {

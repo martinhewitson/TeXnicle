@@ -54,6 +54,9 @@
   NSColor *specialCharsColor;
   BOOL colorSpecialChars;
   
+  NSColor *dollarColor;
+  BOOL colorDollarChars;
+  
   NSColor *commandColor;
   BOOL colorCommand;
   
@@ -78,6 +81,9 @@
 
 @property (retain) NSColor *specialCharsColor;
 @property (assign) BOOL colorSpecialChars;
+
+@property (retain) NSColor *dollarColor;
+@property (assign) BOOL colorDollarChars;
 
 @property (retain) NSColor *commandColor;
 @property (assign) BOOL colorCommand;
