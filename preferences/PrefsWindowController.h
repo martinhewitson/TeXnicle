@@ -77,7 +77,10 @@
 	
 	SyntaxHighlightControlController *argumentsController;
 	IBOutlet NSView *argumentsView;
-  	
+
+	SyntaxHighlightControlController *dollarController;
+	IBOutlet NSView *dollarView;  
+  
 	IBOutlet NSPopUpButton *wrapStylePopup;
 	IBOutlet NSStepper *wrapWidthStepper;
 	IBOutlet NSTextField *wrapWidthEdit;

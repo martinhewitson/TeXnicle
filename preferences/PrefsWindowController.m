@@ -74,6 +74,10 @@
 	argumentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Arguments" name:@"Arguments"];
 	[argumentsView addSubview:[argumentsController view]];
 	
+	// dollar controller
+	dollarController = [[SyntaxHighlightControlController alloc] initWithTag:@"DollarChars" name:@"Dollar ($)"];
+	[dollarView addSubview:[dollarController view]];
+  
 	// keywords controller
 //	keywordsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Keywords"];
 //	[keywordsView addSubview:[keywordsController view]];
@@ -127,6 +131,7 @@
 	[mathController release];
 	[commandsController release];
 	[argumentsController release];
+  [dollarController release];
 //	[keywordsController release];
 	
 	[super dealloc];
