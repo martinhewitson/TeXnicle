@@ -136,16 +136,16 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	system([cmd cStringUsingEncoding:NSUTF8StringEncoding]);
 	
 	// Set image
-	NSImage *image = [[NSImage alloc] initWithContentsOfFile:croppedPDF];
+	NSImage *image = [[[NSImage alloc] initWithContentsOfFile:croppedPDF] autorelease];
 	if (image == nil) {
     image = [self generateBeamerImage];
     if (image == nil) {
-      image = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
+      image = [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
     }
 	}	
 	[symbol setObject:[NSKeyedArchiver archivedDataWithRootObject:image] forKey:@"Image"];	
 	[symbol setValue:[NSNumber numberWithBool:YES] forKey:@"validImage"];
-	[image release];
+  
 	// tell the controller so the library can be saved
 	[controller performSelectorOnMainThread:@selector(imageGeneratorTaskEnded:) withObject:croppedPDF waitUntilDone:NO];
 	
