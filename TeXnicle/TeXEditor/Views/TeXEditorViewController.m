@@ -117,7 +117,6 @@
 {
   if (self.syntaxCheckTimer) {
     [self.syntaxCheckTimer invalidate];
-    [self.syntaxCheckTimer release];
     self.syntaxCheckTimer = nil;
   }
   
