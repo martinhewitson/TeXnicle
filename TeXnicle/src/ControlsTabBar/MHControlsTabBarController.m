@@ -304,7 +304,6 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     return;
   }
   
-  CGFloat offset = leftfr.size.width - size;
   leftfr.size.width = size;
   NSRect midfr = [midView frame];
   midfr.size.width = midfr.size.width - size;
