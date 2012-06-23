@@ -1204,7 +1204,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // go backwards until we find a '\' 
   // stop if we hit a } or a newline
   unichar lastchar;
-  unichar c;
+  unichar c = 'x';
   while (idx >= 0) {
     lastchar = c;
     c = [string characterAtIndex:idx];
