@@ -202,10 +202,11 @@
 	
 	//NSLog(@"Tmp dir: %@", filepath);
 	NSError *error = nil;
-	[doc writeToFile:filepath atomically:YES
-					encoding:NSUTF8StringEncoding
-						 error:&error];
-	if (error) {
+  BOOL success;
+	success = [doc writeToFile:filepath atomically:YES
+                    encoding:NSUTF8StringEncoding
+                       error:&error];
+	if (success == NO) {
 		[doc release];
 		[NSApp presentError:error];
 		return nil;
@@ -228,8 +229,8 @@
 	
 	// Copy cropped pdf to the right path
 	NSFileManager *fm = [NSFileManager defaultManager];
-	[fm copyItemAtPath:croppedPDF toPath:aPath error:&error];
-	if (error) {
+	success = [fm copyItemAtPath:croppedPDF toPath:aPath error:&error];
+	if (success == NO) {
 		//NSLog(@"Failed to copy %@ to %@", croppedPDF, aPath);
 		[NSApp presentError:error];
 		return nil;

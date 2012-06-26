@@ -64,7 +64,7 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
   NSArray *contents = [fm contentsOfDirectoryAtPath:templatesDir error:&error];
-  if (error) {
+  if (contents == nil) {
     [NSApp presentError:error];
     return;
   }

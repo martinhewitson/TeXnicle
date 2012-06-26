@@ -230,7 +230,7 @@
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
   TPProjectTemplateViewer *viewer = [[[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error] autorelease];
-  if (error) {
+  if (viewer == nil) {
     [NSApp presentError:error];
     return;
   }
@@ -359,10 +359,10 @@
     }
     
     if (!exists) {
-      [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url
-                                                                             display:YES
-                                                                               error:&error];
-      if (error) {
+      id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url
+                                                                                      display:YES
+                                                                                        error:&error];
+      if (doc == nil) {
         [NSApp presentError:error];
         return;
       }

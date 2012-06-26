@@ -191,11 +191,13 @@
   
 //  NSLog(@"Writing with encoding %@", [self nameOfEncoding:encoding]);
   
-  [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
-  if (error) {
+  BOOL result = [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
+  if (result == NO) {
     [NSApp presentError:error];
     return NO;
   }
+  
+//  NSLog(@"Data written to file.");
   
   return YES;
 }
@@ -206,8 +208,8 @@
 //  NSLog(@"Write string to %@ with encoding %@", aURL, [self nameOfEncoding:encoding]);
   
   NSError *error = nil;
-  [aString writeToURL:aURL atomically:YES encoding:encoding error:&error];
-  if (error) {
+  BOOL success = [aString writeToURL:aURL atomically:YES encoding:encoding error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return NO;
   }

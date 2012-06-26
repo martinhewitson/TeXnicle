@@ -75,12 +75,13 @@
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
   TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
-  viewer.delegate = self;
   
-  if (error) {
+  if (viewer == nil) {
     [NSApp presentError:error];
     return;
   }
+  
+  viewer.delegate = self;
   
   [viewer makeWindowControllers];
   NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];

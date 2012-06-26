@@ -434,10 +434,6 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 		return YES;
 	}
 	
-//	if (error) {
-//		[NSApp presentError:error];
-//	}
-	
 	return NO;
 }
 
@@ -590,7 +586,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	NSError *error = nil;
   
 	id doc = [[NSDocumentController sharedDocumentController] makeUntitledDocumentOfType:@"TeX Document" error:&error];
-	if (error) {
+	if (doc == nil) {
 		[NSApp presentError:error];
 		return;
 	}
@@ -629,7 +625,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error =nil;
   NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
-  if (error) {
+  if (atts == nil) {
     [NSApp presentError:error];
     return;
   }

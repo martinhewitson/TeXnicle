@@ -184,8 +184,8 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   // make directory
   NSError *error = nil;
-  [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
-  if (error) {
+  BOOL success = [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return NO;
   }
@@ -209,8 +209,8 @@
   
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  [fm createDirectoryAtURL:[self fileURL] withIntermediateDirectories:YES attributes:nil error:&error];
-  if (error) {
+  BOOL success = [fm createDirectoryAtURL:[self fileURL] withIntermediateDirectories:YES attributes:nil error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return NO;
   }
@@ -322,16 +322,16 @@
       
       // remove destination
       error = nil;
-      [fm removeItemAtURL:projectURL error:&error];
-      if (error) {
+      BOOL success = [fm removeItemAtURL:projectURL error:&error];
+      if (success == NO) {
         [NSApp presentError:error];
         return;
       }
     }
         
     // copy the files from the template
-    [fm copyItemAtPath:[[self fileURL] path] toPath:[projectURL path] error:&error];
-    if (error) {
+    BOOL success = [fm copyItemAtPath:[[self fileURL] path] toPath:[projectURL path] error:&error];
+    if (success == NO) {
       [NSApp presentError:error];
       return;
     }
@@ -351,8 +351,8 @@
       settings.openConsole = [settingsDict valueForKey:@"openConsole"];
       settings.showStatusBar = [settingsDict valueForKey:@"showStatusBar"];
       error = nil;
-      [fm removeItemAtURL:settingsURL error:&error];
-      if (error) {
+      BOOL success = [fm removeItemAtURL:settingsURL error:&error];
+      if (success == NO) {
         [NSApp presentError:error];
       }
     }

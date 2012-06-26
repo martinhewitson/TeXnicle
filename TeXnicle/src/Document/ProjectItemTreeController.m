@@ -139,8 +139,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 	// make sure we have loaded all items before we try to observe them
 	NSError *error = nil;
-	[self fetchWithRequest:nil merge:YES error:&error];
-	if (error) {
+	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
+	if (success == NO) {
 		[NSApp presentError:error];
 		return;
 	}		
@@ -153,8 +153,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	//NSLog(@"ProjectItemTreeController dealloc");
 	NSError *error = nil;
-	[self fetchWithRequest:nil merge:YES error:&error];
-	if (error) {
+	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
+	if (success == NO) {
 		[NSApp presentError:error];
 		return;
 	}
@@ -212,12 +212,12 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	//NSLog(@"Creating %@", pathOnDisk);
 	NSFileManager *fm = [NSFileManager defaultManager];
 	NSError *error = nil;	
-	[fm createDirectoryAtPath:aPath
-withIntermediateDirectories:YES
-								 attributes:nil
-											error:&error];
+	BOOL success = [fm createDirectoryAtPath:aPath
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:&error];
 	
-	if (error) {
+	if (success == NO) {
 		[NSApp presentError:error];
 		return NO;
 	}
@@ -564,10 +564,10 @@ withIntermediateDirectories:YES
 			}
 			// if the folder doesn't exist or the user confirms overwrite, go ahead and copy
 			if (copyFolderConfirmed) {
-				[fm copyItemAtPath:srcfolder
-										toPath:dstfolder 
-										 error:&error];
-				if (error) {
+				BOOL success = [fm copyItemAtPath:srcfolder
+                                   toPath:dstfolder 
+                                    error:&error];
+				if (success == NO) {
 					[NSApp presentError:error];
 					return;
 				}
@@ -644,7 +644,7 @@ withIntermediateDirectories:YES
 	NSArray *contents = [fm contentsOfDirectoryAtPath:srcFolder
 																							error:&error];
 	
-	if (error) {
+	if (contents == nil) {
 		[NSApp presentError:error];
 	} else {
 		
@@ -929,8 +929,8 @@ withIntermediateDirectories:YES
 				if (result == NSAlertDefaultReturn) {
           // remove the file at the destination path
           NSError *error = nil;
-          [fm removeItemAtPath:dstPath error:&error];
-          if (error) {
+          BOOL success = [fm removeItemAtPath:dstPath error:&error];
+          if (success == NO) {
             [NSApp presentError:error];
             return nil;
           }
@@ -938,8 +938,8 @@ withIntermediateDirectories:YES
         
       }
 //			NSLog(@"Copying %@ \nto \n%@", aPath, dstPath); 
-			[fm copyItemAtPath:aPath toPath:dstPath error:&error];
-			if (error) {
+			BOOL success = [fm copyItemAtPath:aPath toPath:dstPath error:&error];
+			if (success == NO) {
 				[NSApp presentError:error];
 				return nil;
 			}

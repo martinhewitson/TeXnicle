@@ -49,16 +49,10 @@
 		file = aFile;
 		
 		// Get the string from the File entity
-		NSError *error = nil;
     MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
 		NSString *str = [[[NSString alloc] initWithData:[file valueForKey:@"content"]
 																					encoding:encoding] autorelease];
-//    NSLog(@"Loaded string %@", str);
-		if (error) {
-			[NSApp presentError:error];
-			return nil;
-		}
 		
 		// Setup undo manager for this file
 		undoManager = [[NSUndoManager alloc] init];

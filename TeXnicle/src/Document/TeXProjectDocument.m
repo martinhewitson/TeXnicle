@@ -580,6 +580,8 @@
 
 - (void) captureUIstate
 {
+//  NSLog(@"Capturing UI state...");
+  
   if (_inVersionsBrowser)
     return;
   
@@ -601,6 +603,7 @@
   // pdf viewer visible rect
   self.project.uiSettings.pdfViewScrollRect = [self.pdfViewerController visibleRectForPersisting];  
   
+//  NSLog(@"UI State captured.");
 }
 
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL
@@ -624,8 +627,8 @@
   [[moc undoManager] enableUndoRegistration];
   
   NSError *error = nil;
-  [moc save:&error];
-  if (error) {
+  BOOL success = [moc save:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return;
   }
@@ -689,8 +692,8 @@
   [[moc undoManager] enableUndoRegistration];
   
   NSError *error = nil;
-  [moc save:&error];
-  if (error) {
+  BOOL success = [moc save:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return;
   }  
@@ -2706,7 +2709,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
 	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-	
+//  NSLog(@"Language synchronized");
+  
 	// make sure we save the files here
 	if ([self saveAllProjectFiles]) {    
     NSString *path = [absoluteURL path];
@@ -2732,7 +2736,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	for (ProjectItemEntity *item in allItems) {
 		if ([item isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)item;
-			//NSLog(@"Watching %@ %d", [file pathOnDisk], watching);
       if ([file isText]) {
         success = [file saveContentsToDisk];
       }

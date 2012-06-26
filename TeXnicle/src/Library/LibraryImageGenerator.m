@@ -104,10 +104,10 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	//	NSLog(@"TeX file: %@, -> %@", filepath, croppedPDF);
 	
 	NSError *error = nil;
-	[doc writeToFile:filepath atomically:YES
-					encoding:NSUTF8StringEncoding
-						 error:&error];
-	if (error) {
+	BOOL success = [doc writeToFile:filepath atomically:YES
+                         encoding:NSUTF8StringEncoding
+                            error:&error];
+	if (success == NO) {
 		[doc release];
 		[NSApp presentError:error];
 		return;
@@ -126,8 +126,8 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	// check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:croppedPDF]) {
-		[fm removeItemAtPath:croppedPDF error:&error];
-		if (error) {
+		BOOL success = [fm removeItemAtPath:croppedPDF error:&error];
+		if (success == NO) {
 			[NSApp presentError:error];
 		}
 	}		
@@ -200,10 +200,10 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	//	NSLog(@"TeX file: %@, -> %@", filepath, croppedPDF);
 	
 	NSError *error = nil;
-	[doc writeToFile:filepath atomically:YES
-					encoding:NSUTF8StringEncoding
-						 error:&error];
-	if (error) {
+	BOOL success = [doc writeToFile:filepath atomically:YES
+                         encoding:NSUTF8StringEncoding
+                            error:&error];
+	if (success == NO) {
 		[doc release];
 		[NSApp presentError:error];
 		return nil;
@@ -222,8 +222,8 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	// check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:croppedPDF]) {
-		[fm removeItemAtPath:croppedPDF error:&error];
-		if (error) {
+		BOOL success = [fm removeItemAtPath:croppedPDF error:&error];
+		if (success == NO) {
 			[NSApp presentError:error];
 		}
 	}		

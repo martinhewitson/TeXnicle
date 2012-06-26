@@ -139,8 +139,8 @@
     
     // make new document
     NSError *error = nil;
-    [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:path] display:YES error:&error];
-    if (error) {
+    id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:path] display:YES error:&error];
+    if (doc == nil) {
       [NSApp presentError:error];
     }
   }
@@ -164,8 +164,8 @@
   // copy the file
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  [fm copyItemAtPath:path toPath:newPath error:&error];
-  if (error) {
+  BOOL success = [fm copyItemAtPath:path toPath:newPath error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
   }
   
@@ -201,8 +201,8 @@
   // copy template to new path
   NSString *template = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"engine"];
   NSError *error = nil;
-  [fm copyItemAtPath:template toPath:newEnginePath error:&error];
-  if (error) {
+  BOOL success = [fm copyItemAtPath:template toPath:newEnginePath error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
   }
     
@@ -302,8 +302,8 @@
   // move the file
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  [fm moveItemAtPath:oldPath toPath:newPath error:&error];
-  if (error) {
+  BOOL success = [fm moveItemAtPath:oldPath toPath:newPath error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
   }
   

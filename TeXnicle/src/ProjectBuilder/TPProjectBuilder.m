@@ -147,7 +147,7 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
   NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];  
-  if (error) {
+  if (results == nil) {
     [NSApp presentError:error];
     return nil;
   }

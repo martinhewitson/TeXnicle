@@ -66,8 +66,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   NSString *enginesDir = [TPEngineManager engineDir];
   if (![fm fileExistsAtPath:enginesDir]) {
     NSError *error = nil;
-    [fm createDirectoryAtPath:enginesDir withIntermediateDirectories:YES attributes:nil error:&error];
-    if (error) {
+    BOOL success = [fm createDirectoryAtPath:enginesDir withIntermediateDirectories:YES attributes:nil error:&error];
+    if (success == NO) {
       [NSApp presentError:error];
       NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
                                        defaultButton:@"OK"
@@ -85,16 +85,16 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     
     NSString *target = [enginesDir stringByAppendingPathComponent:[engine lastPathComponent]];
 //    NSLog(@"Installing %@ to %@", engine, target);
-    
+    BOOL success;
     if ([fm fileExistsAtPath:target]) {
       error = nil;
-      [fm removeItemAtPath:target error:&error];
+      success = [fm removeItemAtPath:target error:&error];
     }
-    if (error) {
+    if (success == NO) {
       [NSApp presentError:error];
     } else {
-      [fm copyItemAtPath:engine toPath:target error:&error];
-      if (error) {
+      success = [fm copyItemAtPath:engine toPath:target error:&error];
+      if (success == NO) {
         [NSApp presentError:error];
         NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
                                          defaultButton:@"OK"
@@ -112,8 +112,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
     // This actually sets the permissions
     error = nil;
-    [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:target error:&error];
-    if (error) {
+    success = [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:target error:&error];
+    if (success == NO) {
       [NSApp presentError:error];
       NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
                                        defaultButton:@"OK"
@@ -184,7 +184,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   
   NSError *error = nil;
   NSArray *contents = [fm contentsOfDirectoryAtPath:engineDir error:&error];
-  if (error) {
+  if (contents == nil) {
     [NSApp presentError:error];
     return;
   }  
@@ -199,8 +199,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
       NSDictionary *attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
       // This actually sets the permissions
       error = nil;
-      [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:filepath error:&error];
-      if (error) {
+      BOOL success = [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:filepath error:&error];
+      if (success == NO) {
         [NSApp presentError:error];
         NSAlert *alert = [NSAlert alertWithMessageText:@"Engine Installation Failed"
                                          defaultButton:@"OK"

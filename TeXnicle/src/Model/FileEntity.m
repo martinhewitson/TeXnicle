@@ -187,8 +187,8 @@
 		NSError *error = nil;
 		// If the old file exists, we can move it
 		if ([fm fileExistsAtPath:oldPath]) {
-			[fm moveItemAtPath:oldPath toPath:newPath error:&error];
-			if (error) {
+			BOOL success = [fm moveItemAtPath:oldPath toPath:newPath error:&error];
+			if (success == NO) {
 				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
 				[errorDetail setValue:@"Failed to rename file"
 											 forKey:NSLocalizedDescriptionKey];
@@ -400,7 +400,7 @@
 				NSError *error = nil;
 				NSDictionary *atts = [fm attributesOfItemAtPath:filepath
 																									error:&error];				
-				if (error) {
+				if (atts == nil) {
 					[NSApp presentError:error];
 				}
 				NSDate *lastModified = [atts valueForKey:NSFileModificationDate];

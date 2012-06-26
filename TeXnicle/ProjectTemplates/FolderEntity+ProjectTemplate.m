@@ -38,11 +38,11 @@
   // create directory with this name
   NSError *error = nil;
   NSFileManager *fm = [NSFileManager defaultManager];
-  [fm createDirectoryAtURL:url
-withIntermediateDirectories:YES
-                attributes:nil
-                     error:&error];
-  if (error) {
+  BOOL success = [fm createDirectoryAtURL:url
+              withIntermediateDirectories:YES
+                               attributes:nil
+                                    error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return;
   }

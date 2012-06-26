@@ -82,8 +82,8 @@
   
   // make sure the templates directory exists
   NSError *error = nil;
-  [fm createDirectoryAtPath:[TPProjectTemplateManager templatesDir] withIntermediateDirectories:YES attributes:nil error:&error];
-  if (error) {
+  BOOL success = [fm createDirectoryAtPath:[TPProjectTemplateManager templatesDir] withIntermediateDirectories:YES attributes:nil error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return;
   }
@@ -97,8 +97,8 @@
     // check if the destination exists
     if (![fm fileExistsAtPath:destination]) {
       error = nil;
-      [fm copyItemAtPath:source toPath:destination error:&error];
-      if (error) {
+      BOOL success = [fm copyItemAtPath:source toPath:destination error:&error];
+      if (success == NO) {
         [NSApp presentError:error];
       }
     }
@@ -156,8 +156,8 @@
   }
 
   NSError *error = nil;
-  [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:template.path] display:YES error:&error];
-  if (error) {
+  id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:template.path] display:YES error:&error];
+  if (doc == nil) {
     [NSApp presentError:error];
   }
 }
@@ -182,8 +182,8 @@
   }
   
   NSError *error = nil;
-  [fm copyItemAtPath:source toPath:dest error:&error];
-  if (error) {
+  BOOL success = [fm copyItemAtPath:source toPath:dest error:&error];
+  if (success == NO) {
     [NSApp presentError:error];
     return;
   }

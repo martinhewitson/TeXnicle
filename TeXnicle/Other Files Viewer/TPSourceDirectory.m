@@ -62,7 +62,7 @@
 																																	 options:options
 																																		 error:&error];
   
-  if (error) {
+  if (urls == nil) {
     [NSApp presentError:error];
     return;
   }

@@ -429,6 +429,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 
 - (void) commitStatus
 {
+//  NSLog(@"Committing document status...");
   NSInteger count = 0;
 	for (FileEntity *file in openDocuments) {
     NSInteger pos = [self.tabView indexOfTabViewItemWithIdentifier:file];
@@ -452,6 +453,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 	}
 	
 	[self saveCursorAndScrollPosition];
+//  NSLog(@"Status Commit Done.");
 }
 
 - (BOOL)tabView:(NSTabView*)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(PSMTabBarControl *)tabBarControl

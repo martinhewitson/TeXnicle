@@ -57,7 +57,7 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
   NSArray *contents = [fm contentsOfDirectoryAtPath:self.path error:&error];
-  if (error) {
+  if (contents == nil) {
     [NSApp presentError:error];
     return;
   }
@@ -69,7 +69,7 @@
     
     error = nil;
     NSDictionary *atts = [fm attributesOfItemAtPath:subpath error:&error];
-    if (error) {
+    if (atts == nil) {
       [NSApp presentError:error];
       continue;
     }    

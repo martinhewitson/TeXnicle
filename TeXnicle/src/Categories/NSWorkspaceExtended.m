@@ -48,16 +48,16 @@
   if (exists && !isDirectory)
   {
     NSError *error = nil;
-    [fileManager removeItemAtPath:temporaryPath error:&error];
-    if (error) {
+    BOOL success = [fileManager removeItemAtPath:temporaryPath error:&error];
+    if (success == NO) {
       [NSApp presentError:error];
     }
     exists = NO;
   }
   if (!exists) {
     NSError *error = nil;
-    [fileManager createDirectoryAtPath:temporaryPath withIntermediateDirectories:YES attributes:nil error:&error];
-    if (error) {
+    BOOL success = [fileManager createDirectoryAtPath:temporaryPath withIntermediateDirectories:YES attributes:nil error:&error];
+    if (success == NO) {
       [NSApp presentError:error];
     }
   }

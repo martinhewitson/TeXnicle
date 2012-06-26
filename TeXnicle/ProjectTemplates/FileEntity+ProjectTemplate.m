@@ -41,6 +41,7 @@
   NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]]; 
   
   // write contents
+  BOOL success;
   NSError *error = nil;
   if ([[self isText] boolValue]) {
     // write file with these contents
@@ -50,18 +51,20 @@
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *sourceURL = [NSURL fileURLWithPath:[self pathOnDisk]];
     if ([fm fileExistsAtPath:[url path]]) {
-      [fm removeItemAtURL:url error:&error];
-    }
-    if (error == nil) {
-      [fm copyItemAtURL:sourceURL toURL:url error:&error];
+      success = [fm removeItemAtURL:url error:&error];
+      if (success) {
+        success = [fm copyItemAtURL:sourceURL toURL:url error:&error];
+        if (success == NO) {
+          [NSApp presentError:error];
+        }
+      } else {
+        [NSApp presentError:error];
+      }
     }
   } else {
     // ??
   }
   
-  if (error) {
-    [NSApp presentError:error];
-  }
 }
 
 @end

@@ -1233,7 +1233,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     NSFileManager *fm = [NSFileManager defaultManager];
     NSError *error = nil;
     NSDictionary *attributes = [fm attributesOfItemAtPath:[[self fileURL] path] error:&error];
-    if (error) {
+    if (attributes == nil) {
       [NSApp presentError:error];
       return;
     }

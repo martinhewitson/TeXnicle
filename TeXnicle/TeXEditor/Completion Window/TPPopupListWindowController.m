@@ -173,7 +173,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc");
+//  NSLog(@"Dealloc");
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[entries release];
