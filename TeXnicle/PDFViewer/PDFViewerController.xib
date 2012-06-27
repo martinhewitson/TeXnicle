@@ -71,6 +71,7 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -96,6 +97,7 @@
 														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
+														<reference key="NSNextKeyView"/>
 														<bool key="NSViewCanDrawConcurrently">YES</bool>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
@@ -425,6 +427,7 @@
 								<string key="NSFrame">{{583, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295962500">
@@ -1797,21 +1800,71 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">MHControlsTabBarController</string>
-					<string key="superclassName">NSObject</string>
+					<string key="superclassName">NSResponder</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="showBookmarks:">id</string>
+						<string key="showClippingsLibrary:">id</string>
+						<string key="showDocumentOutline:">id</string>
+						<string key="showNavigator:">id</string>
+						<string key="showProjectSearch:">id</string>
+						<string key="showProjectSettings:">id</string>
+						<string key="showProjectTree:">id</string>
+						<string key="showSymbolPalette:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="showBookmarks:">
+							<string key="name">showBookmarks:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showClippingsLibrary:">
+							<string key="name">showClippingsLibrary:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showDocumentOutline:">
+							<string key="name">showDocumentOutline:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showNavigator:">
+							<string key="name">showNavigator:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectSearch:">
+							<string key="name">showProjectSearch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectSettings:">
+							<string key="name">showProjectSettings:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectTree:">
+							<string key="name">showProjectTree:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showSymbolPalette:">
+							<string key="name">showSymbolPalette:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bookmarksButton">NSButton</string>
+						<string key="containerView">NSView</string>
 						<string key="findButton">NSButton</string>
 						<string key="libraryButton">NSButton</string>
 						<string key="outlineButton">NSButton</string>
 						<string key="palletButton">NSButton</string>
 						<string key="prefsButton">NSButton</string>
 						<string key="projectButton">NSButton</string>
+						<string key="splitview">NSSplitView</string>
 						<string key="tabView">NSTabView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="bookmarksButton">
 							<string key="name">bookmarksButton</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="containerView">
+							<string key="name">containerView</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="findButton">
 							<string key="name">findButton</string>
@@ -1836,6 +1889,10 @@
 						<object class="IBToOneOutletInfo" key="projectButton">
 							<string key="name">projectButton</string>
 							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitview">
+							<string key="name">splitview</string>
+							<string key="candidateClassName">NSSplitView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tabView">
 							<string key="name">tabView</string>
@@ -2642,6 +2699,7 @@
 						<string key="imageViewerContainer">NSView</string>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
+						<string key="mainWindow">NSWindow</string>
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
@@ -2715,6 +2773,10 @@
 						<object class="IBToOneOutletInfo" key="libraryContainerView">
 							<string key="name">libraryContainerView</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainWindow">
+							<string key="name">mainWindow</string>
+							<string key="candidateClassName">NSWindow</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="newFileSheet">
 							<string key="name">newFileSheet</string>

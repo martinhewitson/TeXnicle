@@ -100,7 +100,10 @@
     [self.toggleThumbsButton setState:NSOffState];
   }
   
+  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
 }
+
+
 
 - (void) dealloc
 {

@@ -43,6 +43,11 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   }
 }
 
+- (void) setNeedsDisplay
+{
+  [self setNeedsDisplay:YES];
+}
+
 - (void)drawPage:(PDFPage *)page
 {
   [super drawPage:page];
