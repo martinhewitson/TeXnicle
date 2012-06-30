@@ -131,7 +131,7 @@ extern NSString * const TPTrashFiles;
 extern NSString * const TPTrashDocumentFileWhenTrashing;
 extern NSString * const TPConsoleDisplayLevel;
 extern NSString * const TPSpellCheckerLanguage;
-
+extern NSString * const TPRestoreOpenTabs;
 extern NSString * const TPDefaultEncoding;
 
 // Notifications

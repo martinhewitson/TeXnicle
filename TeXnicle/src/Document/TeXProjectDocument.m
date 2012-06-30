@@ -471,7 +471,9 @@
   [self.miniConsole message:@"Welcome to TeXnicle."];
   
   [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
-  [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPRestoreOpenTabs] boolValue]) {
+    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+  }
   [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
 }
 

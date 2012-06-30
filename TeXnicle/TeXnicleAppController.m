@@ -87,7 +87,7 @@ NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
 NSString * const TPTrashFiles = @"TPTrashFiles";
 NSString * const TPTrashDocumentFileWhenTrashing = @"TPTrashDocumentFileWhenTrashing";
 NSString * const TPSpellCheckerLanguage = @"TPSpellCheckerLanguage";
-
+NSString * const TPRestoreOpenTabs = @"TPRestoreOpenTabs";
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
 
 NSString * const TPFileItemTextStorageChangedNotification = @"TPFileItemTextStorageChangedNotification";
@@ -234,6 +234,8 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 	
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEShowLineNumbers];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TEShowCodeFolders];
+  
+  [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPRestoreOpenTabs];
   
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightCurrentLine];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0]] forKey:TEHighlightCurrentLineColor];
