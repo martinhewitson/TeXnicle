@@ -439,6 +439,7 @@
 		250C17401409295500BCEA3D /* TPEngineEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineEditor.h; sourceTree = "<group>"; };
 		250C17411409295500BCEA3D /* TPEngineEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineEditor.m; sourceTree = "<group>"; };
 		250C17431409296E00BCEA3D /* EngineEditorWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EngineEditorWindow.xib; sourceTree = "<group>"; };
+		250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
 		25131EA514E182C40065CDA7 /* MHTableConfigureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTableConfigureController.h; sourceTree = "<group>"; };
 		25131EA614E182C40065CDA7 /* MHTableConfigureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTableConfigureController.m; sourceTree = "<group>"; };
 		25131EA914E182D60065CDA7 /* MHTableConfigureWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHTableConfigureWindow.xib; sourceTree = "<group>"; };
@@ -2546,6 +2547,7 @@
 			isa = XCVersionGroup;
 			children = (
 				253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */,
+				250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */,
 				25D57FBB14EA5C3B008E02B5 /* TeXProject 9.xcdatamodel */,
 				25DD32B814B96C7300C5D1E3 /* TeXProject 7.xcdatamodel */,
 				25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */,
@@ -2554,7 +2556,7 @@
 				25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */,
 				25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */,
 			);
-			currentVersion = 253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */;
+			currentVersion = 250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */;
 			path = TeXProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

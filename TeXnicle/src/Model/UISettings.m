@@ -35,6 +35,7 @@
 @dynamic pdfViewScrollRect;
 @dynamic controlsWidth;
 @dynamic editorWidth;
+@dynamic maxOutlineDepth;
 @dynamic project;
 
 @end

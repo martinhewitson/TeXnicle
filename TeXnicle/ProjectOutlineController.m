@@ -35,7 +35,7 @@
 #import "TPDocumentSection.h"
 #import "MHFileReader.h"
 #import "NSString+RelativePath.h"
-
+#import "externs.h"
 
 @implementation ProjectOutlineController
 
@@ -385,7 +385,20 @@
 	string = [@" " stringByAppendingString:string];
   
 //  NSLog(@"Searching %@", aURL);	
-	
+  NSMutableArray *sectionsToScan;
+  if (self.delegate != nil) {
+    int maxDepth = [[self.delegate maxOutlineDepth] intValue];
+    sectionsToScan = [NSMutableArray array];
+    for (NSDictionary *secDict in sections) {
+      // skip indents greater than a set amount
+      if ([[secDict valueForKey:@"indent"] intValue] <= maxDepth) {
+        [sectionsToScan addObject:secDict];
+      }
+    }
+  } else {
+    sectionsToScan = sections;
+  }
+  
 	NSUInteger loc = 0;
 	while (loc < [string length]) {
 		if ([ws characterIsMember:[string characterAtIndex:loc]] ||
@@ -396,7 +409,8 @@
       
       //			NSLog(@"Checking word '%@'", word);
 			// Get section, etc
-			for (NSDictionary *secDict in sections) {
+			for (NSDictionary *secDict in sectionsToScan) {        
+        
 				NSString *sec = [secDict valueForKey:@"tag"];
 				if ([word hasPrefix:sec]) {
           //					NSLog(@"Found word %@", word);
@@ -521,6 +535,20 @@
 	string = [@" " stringByAppendingString:string];
 //	NSLog(@"Searching %@", [aFile name]);	
 	
+  NSMutableArray *sectionsToScan;
+  if (self.delegate != nil) {
+    int maxDepth = [[self.delegate maxOutlineDepth] intValue];
+    sectionsToScan = [NSMutableArray array];
+    for (NSDictionary *secDict in sections) {
+      // skip indents greater than a set amount
+      if ([[secDict valueForKey:@"indent"] intValue] <= maxDepth) {
+        [sectionsToScan addObject:secDict];
+      }
+    }
+  } else {
+    sectionsToScan = sections;
+  }
+  
 	NSUInteger loc = 0;
 	while (loc < [string length]) {
 		if ([ws characterIsMember:[string characterAtIndex:loc]] ||
@@ -532,7 +560,7 @@
 		
 //			NSLog(@"Checking word '%@'", word);
 			// Get section, etc
-			for (NSDictionary *secDict in sections) {
+			for (NSDictionary *secDict in sectionsToScan) {
 				NSString *sec = [secDict valueForKey:@"tag"];
 				if ([word hasPrefix:sec]) {
 //					NSLog(@"Found word %@", word);

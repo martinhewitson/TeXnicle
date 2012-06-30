@@ -34,6 +34,7 @@
 @protocol ProjectOutlineControllerDelegate <NSObject>
 @optional
 - (ProjectEntity*)project;
+- (NSNumber*)maxOutlineDepth;
 - (NSURL*)fileURL;
 - (NSAttributedString*)documentString;
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;

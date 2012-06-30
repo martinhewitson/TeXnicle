@@ -141,7 +141,6 @@ NSString * const TESyntaxColorCommand = @"TESyntaxColorCommand";
 NSString * const TESyntaxArgumentsColor = @"TESyntaxArgumentsColor";
 NSString * const TESyntaxColorArguments = @"TESyntaxColorArguments";
 
-
 NSString * const TPPaletteRowHeight = @"TPPaletteRowHeight";
 NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
@@ -155,7 +154,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 {
   // create a dictionary for the ‘factory’ defaults
 	NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
-	
+  
   // load library
   NSString *libpath = [[NSBundle mainBundle] pathForResource:@"Library" ofType:@"plist"];
 	NSDictionary *library = [NSMutableDictionary dictionaryWithContentsOfFile:libpath];

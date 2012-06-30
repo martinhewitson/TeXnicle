@@ -133,11 +133,14 @@
   BOOL _building;
   NSDate *lastBuildDate;
   NSTimer *liveUpdateTimer;
+  NSNumber *maxOutlineViewDepth;
 }
 
 @property (retain) NSTimer *liveUpdateTimer;
 
 @property (assign) IBOutlet NSWindow *mainWindow;
+
+@property (retain) NSNumber *maxOutlineViewDepth;
 
 @property (assign) IBOutlet NSView *leftView;
 @property (assign) IBOutlet NSView *centerView;

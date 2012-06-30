@@ -54,6 +54,7 @@ NSString * const TPExternalDocControlsTabIndexKey = @"TPExternalDocControlsTabIn
 NSString * const TPExternalDocControlsWidthKey = @"TPExternalDocControlsWidthKey"; 
 NSString * const TPExternalDocEditorWidthKey = @"TPExternalDocEditorWidthKey"; 
 NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectKey"; 
+NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth"; 
 
 @implementation ExternalTeXDoc
 
@@ -96,6 +97,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 @synthesize templateEditor;
 
 @synthesize liveUpdateTimer;
+@synthesize maxOutlineViewDepth;
 
 - (id) init
 {
@@ -159,6 +161,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
     // pdf view visible rect
     [dict setValue:[self.pdfViewerController visibleRectForPersisting] forKey:TPExternalDocPDFVisibleRectKey];
     
+    // max outline depth
+    [dict setValue:self.maxOutlineViewDepth forKey:TPMaxOutlineDepth];
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
     [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
@@ -194,6 +198,14 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
             [texEditorContainer setFrame:fr];
           }
         }
+        
+        // max outline depth
+        self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
+        if (self.maxOutlineViewDepth == nil) {
+          self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
+        }
+        
+        NSLog(@"Restored outline depth = %d", [self.maxOutlineViewDepth intValue]);
         
         // pdf view visible rect
         NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
@@ -349,6 +361,7 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
   }
 }
 
+
 - (void)windowWillEnterVersionBrowser:(NSNotification *)notification
 {
 //  NSLog(@"Window will enter versions browser");
@@ -425,6 +438,10 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
       }
     }
   }
+  
+  if ([NSApp isLion]) {
+    [self captureUIsettings];
+  }  
 }
 
 
@@ -442,6 +459,9 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
                      [NSNumber numberWithBool:YES], @"TPStandAloneEditorShowStatusBar",
                      nil];
   }
+  
+  self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
+  
 }
 
 - (IBAction)toggleStatusView:(id)sender
@@ -2029,6 +2049,13 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
+
+- (NSNumber*) maxOutlineDepth
+{
+  return maxOutlineViewDepth;
+}
+
+
 
 - (BOOL) shouldGenerateOutline
 {

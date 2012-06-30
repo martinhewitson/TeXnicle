@@ -1754,6 +1754,11 @@
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
+- (NSNumber*) maxOutlineDepth
+{
+  return self.project.uiSettings.maxOutlineDepth;
+}
+
 - (BOOL) shouldGenerateOutline
 {
   // if outline tab is selected....
