@@ -253,6 +253,10 @@
 
 - (IBAction)togglePanelFocus:(id)sender;
 
+- (IBAction) showIntegratedPDFViewer:(id)sender;
+- (IBAction) showIntegratedConsole:(id)sender;
+
+
 #pragma mark -
 #pragma mark Notification Handlers
 

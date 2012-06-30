@@ -1244,6 +1244,8 @@
 #pragma mark -
 #pragma mark Actions
 
+
+
 - (IBAction)togglePanelFocus:(id)sender
 {
   NSWindow *w = [self windowForSheet];
@@ -1407,6 +1409,52 @@
 
 #pragma mark -
 #pragma mark Split view delegate
+
+- (IBAction) showIntegratedPDFViewer:(id)sender
+{  
+  
+  NSRect rightfr = [rightView frame];
+  if ([rightView isHidden] == NO) {
+    return;
+  }
+  
+  CGFloat size = kSplitViewRightMinSize;
+  
+  rightfr.size.width = size;
+  NSRect midfr = [centerView frame];
+  midfr.size.width = midfr.size.width - size;
+  midfr.origin.x = size;
+  
+  [centerView setFrame:midfr];
+  [rightView.animator setFrame:rightfr];
+  [rightView setHidden:NO];
+}
+
+- (IBAction) showIntegratedConsole:(id)sender
+{
+  NSView *topView = [[editorSplitView subviews] objectAtIndex:0];
+  NSView *bottomView = [[editorSplitView subviews] objectAtIndex:1];
+  
+  //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
+  //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
+  
+  
+  NSRect bottomfr = [bottomView frame];
+  if ([bottomView isHidden] == NO) {
+    return;
+  }
+  
+  CGFloat size = 150.0;
+  
+  bottomfr.size.height = size;
+  NSRect topfr = [topView frame];
+  topfr.size.height = topfr.size.height - size;
+  topfr.origin.y = size;
+  
+  [topView setFrame:topfr];
+  [bottomView.animator setFrame:bottomfr];
+  [bottomView setHidden:NO];
+}
 
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
@@ -2107,6 +2155,24 @@
       [menuItem setTitle:@"Hide Status Bar"];
     } else {
       [menuItem setTitle:@"Show Status Bar"];
+    }
+  }
+
+  // show integrated console
+  if (tag == 2041) {
+    if ([[[editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
+      return NO;
+    } else {
+      return YES;
+    }
+  }
+  
+  // show integrated pdf viewer
+  if (tag == 2042) {
+    if ([rightView isHidden] == NO) {
+      return NO;
+    } else {
+      return YES;
     }
   }
   
