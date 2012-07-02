@@ -38,8 +38,8 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 
-#define kFindBarSmall 58
-#define kFindBarLarge 104
+#define kFindBarSmall 77
+#define kFindBarLarge 119
 
 
 @implementation FinderController
@@ -59,6 +59,8 @@
 @synthesize replaceView;
 @synthesize replaceText;
 @synthesize bottomBarView;
+@synthesize caseSensitiveCheckbox;
+@synthesize searchWholeWordsCheckbox;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate
 {
@@ -222,7 +224,8 @@
   }
   
   //  NSLog(@"Perform search %@", sender);
-  NSString *searchTerm = [sender stringValue];
+  NSString *searchTerm = [self.searchField stringValue];
+  
 //	NSString *searchTerm = [[sender stringValue] stringByReplacingOccurrencesOfString:@"\\"
 //                                                                         withString:@"\\\\"];
 //  
@@ -239,15 +242,26 @@
     shouldSearchOnEnd = YES;
     return;
   }
-  
-  
+    
   if ([searchTerm length] == 0) {
     [self didEndSearch:self];
     return;
   }
   
-  [self.results removeAllObjects];
-  [self.outlineView reloadData];
+  // clear existing search
+  dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
+  [self.results removeAllObjects];  
+  shouldContinueSearching = YES;
+  isSearching = YES;
+  dispatch_semaphore_signal(arrayLock);
+  
+  [self performSelector:@selector(beginSearchForTerm:) withObject:searchTerm afterDelay:0.1];
+}
+
+- (void) beginSearchForTerm:(NSString*)searchTerm
+{
+//  [self.results removeAllObjects];
+//  [self.outlineView reloadData];
   
   [self didBeginSearch:self];
 	
@@ -257,14 +271,7 @@
   ProjectEntity *project = [self project];
 	
   //  NSLog(@"Searching for '%@' in project %@", searchTerm, [project valueForKey:@"name"]);
-  //  NSLog(@"Searching with regexp: %@", regexp);
-	
-  dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
-  [self.results removeAllObjects];  
-  shouldContinueSearching = YES;
-  isSearching = YES;
-  dispatch_semaphore_signal(arrayLock);
-  
+  //  NSLog(@"Searching with regexp: %@", regexp);  
   
 	// go through each doc in the project
   NSArray *items = [project valueForKey:@"items"];
@@ -299,8 +306,17 @@
   if (!string)
     return;
   
-  
+  // check for case sensitive searches
   NSScanner *aScanner = [NSScanner scannerWithString:string];
+  if ([self.caseSensitiveCheckbox state] == NSOnState) {
+    [aScanner setCaseSensitive:YES];
+  }
+  
+  // check for matching full words
+  BOOL matchFullWords = [self.searchWholeWordsCheckbox state] == NSOnState;
+  NSCharacterSet *newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
+	NSCharacterSet *whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
+
   NSInteger scanLocation = 0;
   while(scanLocation < [string length]) {
     if (!shouldContinueSearching) {
@@ -318,34 +334,58 @@
         // we found a match
         NSRange resultRange = NSMakeRange(scanLocation, [searchTerm length]);
         if (resultRange.location != NSNotFound) {
-          NSInteger len = [searchTerm length] + 30;
-          NSRange matchingRange = NSMakeRange(scanLocation, len);
-          while (NSMaxRange(matchingRange) >= [string length]) {
-            matchingRange = NSMakeRange(scanLocation, --len);
-          }
-          NSString *matchingString = [string substringWithRange:matchingRange];
           
-          TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
-          MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
-          NSInteger lineNumber = ln.number;
-          TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber 
-                                                              withRange:resultRange
-                                                               subrange:NSMakeRange(0, [searchTerm length])
-                                                         matchingString:matchingString 
-                                                             inDocument:resultDoc];
-          dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
-          [resultDoc addMatch:match];
-          if (![self.results containsObject:resultDoc]) {
-            [self.results addObject:resultDoc];
+          BOOL acceptMatch = YES;
+          // check if we are matching full words
+          if (matchFullWords == YES) {
+           // this means there should be a whitespace of newline before and after the matched range
+            if (scanLocation > 0) {
+              char prefix = [string characterAtIndex:scanLocation-1];
+              if (![whitespaceCharacterSet characterIsMember:prefix] &&
+                  ![newLineCharacterSet characterIsMember:prefix]) {
+                acceptMatch = NO;
+              }
+            }
+            
+            if (scanLocation+[searchTerm length] < [string length]) {
+              char postfix = [string characterAtIndex:scanLocation+[searchTerm length]];
+              if (![whitespaceCharacterSet characterIsMember:postfix] &&
+                  ![newLineCharacterSet characterIsMember:postfix]) {
+                acceptMatch = NO;
+              }
+            }
           }
           
-          dispatch_sync(dispatch_get_main_queue(),
-                        // block
-                        ^{
-                          [self didMakeMatch:self];
-                          [self.outlineView reloadData];
-                        });
-          dispatch_semaphore_signal(arrayLock);
+          if (acceptMatch == YES) {
+            NSInteger len = [searchTerm length] + 30;
+            NSRange matchingRange = NSMakeRange(scanLocation, len);
+            while (NSMaxRange(matchingRange) >= [string length]) {
+              matchingRange = NSMakeRange(scanLocation, --len);
+            }
+            NSString *matchingString = [string substringWithRange:matchingRange];
+            
+            TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
+            MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
+            NSInteger lineNumber = ln.number;
+            TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber 
+                                                                withRange:resultRange
+                                                                 subrange:NSMakeRange(0, [searchTerm length])
+                                                           matchingString:matchingString 
+                                                               inDocument:resultDoc];
+            dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
+            [resultDoc addMatch:match];
+            if (![self.results containsObject:resultDoc]) {
+              [self.results addObject:resultDoc];
+            }
+            
+            dispatch_sync(dispatch_get_main_queue(),
+                          // block
+                          ^{
+                            [self didMakeMatch:self];
+                            [self.outlineView reloadData];
+                          });
+            dispatch_semaphore_signal(arrayLock);
+          }
         } // end subrange found      
       } // end if scanLocation less than string length
     } else {
@@ -393,7 +433,7 @@
   if (!string)
     return;
   
-  NSLog(@"Searching for %@", regexp);
+//  NSLog(@"Searching for %@", regexp);
   
   NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
   
@@ -609,6 +649,10 @@
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
+  if (item == nil) {
+    return NO;
+  }
+  
   if ([item isKindOfClass:[TPResultDocument class]]) {
     return YES;
   }
@@ -627,6 +671,10 @@
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
+  if (item == nil) {
+    return NO;
+  }
+  
   if ([item isKindOfClass:[TPResultDocument class]]) {
     return [[item valueForKey:@"matches"] count] > 0;
   }

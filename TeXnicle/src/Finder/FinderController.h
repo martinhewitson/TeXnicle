@@ -78,6 +78,9 @@
   NSSearchField *searchField;
   NSProgressIndicator *progressIndicator;
   NSTextField *statusLabel;
+  
+  NSButton *caseSensitiveCheckbox;
+  NSButton *searchWholeWordsCheckbox;
 }
 
 @property (assign) id<FinderControllerDelegate> delegate;
@@ -94,6 +97,8 @@
 @property (assign) IBOutlet NSView *replaceView;
 @property (assign) IBOutlet NSView *bottomBarView;
 @property (assign) IBOutlet NSTextField *replaceText;
+@property (assign) IBOutlet NSButton *caseSensitiveCheckbox;
+@property (assign) IBOutlet NSButton *searchWholeWordsCheckbox;
 @property (retain) NSMutableArray *results;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate;
