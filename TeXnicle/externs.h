@@ -145,6 +145,8 @@ extern NSString * const TPTreeSelectionDidChange;
 extern NSString * const TableViewNodeType;
 extern NSString * const OutlineViewNodeType;
 
+extern NSString * const TPLiveUpdateFrequency;
+
 // Settings
 extern NSString * const TPPaletteRowHeight;
 extern NSString * const TPLibraryRowHeight;

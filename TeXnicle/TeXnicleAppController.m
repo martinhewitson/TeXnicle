@@ -146,6 +146,8 @@ NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
 NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 
+NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
+
 @implementation TeXnicleAppController
 
 @synthesize openStartupScreenAtAppStartup;
@@ -355,6 +357,9 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
   
   // default encoding
   [defaultValues setValue:@"Unicode (UTF-8)" forKey:TPDefaultEncoding];
+  
+  // live update frequency
+  [defaultValues setValue:[NSNumber numberWithFloat:1.0] forKey:TPLiveUpdateFrequency];
   
   // register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	

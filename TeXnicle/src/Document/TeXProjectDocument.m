@@ -123,6 +123,7 @@
 
 - (void) dealloc
 {
+  [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [projectOutlineController deactivate];
   
@@ -157,9 +158,57 @@
 {
   _building = NO;
   _liveUpdate = NO;
-  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  
+  [self observePreferences];  
+  [self setupLiveUpdateTimer];
+}
+
+- (void)setupLiveUpdateTimer
+{
+  if (self.liveUpdateTimer) {
+    [self.liveUpdateTimer invalidate];
+    self.liveUpdateTimer = nil;
+  }
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  float updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
+  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
   
 }
+
+
+#pragma mark -
+#pragma mark KVO 
+
+- (void) stopObserving
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]];
+}
+
+- (void) observePreferences
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];		
+	
+	
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+											ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]]) {	
+    [self setupLiveUpdateTimer];
+	} 
+}
+
 
 - (id)init
 {
