@@ -71,11 +71,13 @@
   
   HHValidatedButton *showSearchResultsButton;
   HHValidatedButton *toggleThumbsButton;
+  NSTextField *pageCountDisplay;
 }
 
 
 @property (retain) NSMutableArray *searchResults;
 
+@property (assign) IBOutlet NSTextField *pageCountDisplay;
 @property (assign) IBOutlet HHValidatedButton *showSearchResultsButton;
 @property (assign) IBOutlet HHValidatedButton *toggleThumbsButton;
 @property (assign) IBOutlet NSTableView *searchResultsTable;

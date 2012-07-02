@@ -310,13 +310,46 @@
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">290</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="NSButton" id="436286741">
+							<object class="NSTextField" id="430558434">
 								<reference key="NSNextResponder" ref="1061424173"/>
-								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{12, 5}, {88, 25}}</string>
+								<int key="NSvFlags">269</int>
+								<string key="NSFrame">{{248, 11}, {132, 14}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="455590945"/>
+								<string key="NSReuseIdentifierKey">_NS:1505</string>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSTextFieldCell" key="NSCell" id="824948581">
+									<int key="NSCellFlags">68288064</int>
+									<int key="NSCellFlags2">138544128</int>
+									<string key="NSContents">Page XX of YY</string>
+									<reference key="NSSupport" ref="26"/>
+									<string key="NSCellIdentifier">_NS:1505</string>
+									<reference key="NSControlView" ref="430558434"/>
+									<object class="NSColor" key="NSBackgroundColor" id="55834950">
+										<int key="NSColorSpace">6</int>
+										<string key="NSCatalogName">System</string>
+										<string key="NSColorName">controlColor</string>
+										<reference key="NSColor" ref="877621743"/>
+									</object>
+									<object class="NSColor" key="NSTextColor">
+										<int key="NSColorSpace">6</int>
+										<string key="NSCatalogName">System</string>
+										<string key="NSColorName">disabledControlTextColor</string>
+										<object class="NSColor" key="NSColor">
+											<int key="NSColorSpace">3</int>
+											<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+										</object>
+									</object>
+								</object>
+							</object>
+							<object class="NSButton" id="436286741">
+								<reference key="NSNextResponder" ref="1061424173"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{8, 5}, {88, 25}}</string>
+								<reference key="NSSuperview" ref="1061424173"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="430558434"/>
 								<string key="NSReuseIdentifierKey">_NS:22</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="715497560">
@@ -337,7 +370,7 @@
 							<object class="NSButton" id="455590945">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{463, 5}, {32, 25}}</string>
+								<string key="NSFrame">{{486, 5}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="85915893"/>
@@ -366,7 +399,7 @@
 							<object class="NSButton" id="85915893">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{503, 5}, {32, 25}}</string>
+								<string key="NSFrame">{{520, 5}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="676606386"/>
@@ -395,7 +428,7 @@
 							<object class="NSButton" id="676606386">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{543, 6}, {32, 25}}</string>
+								<string key="NSFrame">{{554, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="42749403"/>
@@ -424,7 +457,7 @@
 							<object class="NSButton" id="42749403">
 								<reference key="NSNextResponder" ref="1061424173"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{583, 6}, {32, 25}}</string>
+								<string key="NSFrame">{{588, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -478,12 +511,7 @@
 									<reference key="NSSupport" ref="26"/>
 									<string key="NSCellIdentifier">_NS:3936</string>
 									<reference key="NSControlView" ref="789329994"/>
-									<object class="NSColor" key="NSBackgroundColor" id="55834950">
-										<int key="NSColorSpace">6</int>
-										<string key="NSCatalogName">System</string>
-										<string key="NSColorName">controlColor</string>
-										<reference key="NSColor" ref="877621743"/>
-									</object>
+									<reference key="NSBackgroundColor" ref="55834950"/>
 									<object class="NSColor" key="NSTextColor">
 										<int key="NSColorSpace">1</int>
 										<bytes key="NSRGB">MC40Mzg3NzU1MTAyIDAuNDM4Nzc1NTEwMiAwLjQzODc3NTUxMDIAA</bytes>
@@ -1019,6 +1047,14 @@
 					<int key="connectionID">128</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">pageCountDisplay</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="430558434"/>
+					</object>
+					<int key="connectionID">131</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">liveUpdate:</string>
 						<reference key="source" ref="1003"/>
@@ -1394,6 +1430,7 @@
 							<reference ref="85915893"/>
 							<reference ref="455590945"/>
 							<reference ref="436286741"/>
+							<reference ref="430558434"/>
 						</array>
 						<reference key="parent" ref="1005"/>
 					</object>
@@ -1467,6 +1504,19 @@
 						<reference key="object" ref="715497560"/>
 						<reference key="parent" ref="436286741"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">129</int>
+						<reference key="object" ref="430558434"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="824948581"/>
+						</array>
+						<reference key="parent" ref="1061424173"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">130</int>
+						<reference key="object" ref="824948581"/>
+						<reference key="parent" ref="430558434"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1482,6 +1532,8 @@
 				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="125.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="126.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="129.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="130.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1597,7 +1649,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">128</int>
+			<int key="maxID">131</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2077,6 +2129,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="liveUpdateButton">NSButton</string>
 						<string key="nextButton">HHValidatedButton</string>
+						<string key="pageCountDisplay">NSTextField</string>
 						<string key="pdfThumbnailView">PDFThumbnailView</string>
 						<string key="pdfViewContainer">NSView</string>
 						<string key="pdfview">MHPDFView</string>
@@ -2104,6 +2157,10 @@
 						<object class="IBToOneOutletInfo" key="nextButton">
 							<string key="name">nextButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pageCountDisplay">
+							<string key="name">pageCountDisplay</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="pdfThumbnailView">
 							<string key="name">pdfThumbnailView</string>
@@ -2491,6 +2548,8 @@
 						<string key="setMainItem:">id</string>
 						<string key="showBookmarks:">id</string>
 						<string key="showCategoryActionMenu:">id</string>
+						<string key="showIntegratedConsole:">id</string>
+						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
 					</dictionary>
@@ -2673,6 +2732,14 @@
 						</object>
 						<object class="IBActionInfo" key="showCategoryActionMenu:">
 							<string key="name">showCategoryActionMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedConsole:">
+							<string key="name">showIntegratedConsole:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
+							<string key="name">showIntegratedPDFViewer:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleBookmark:">

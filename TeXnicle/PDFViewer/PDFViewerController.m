@@ -34,6 +34,7 @@
 
 @implementation PDFViewerController
 
+@synthesize pageCountDisplay;
 @synthesize pdfThumbnailView;
 @synthesize showSearchResultsButton;
 @synthesize toggleThumbsButton;
@@ -101,12 +102,25 @@
   }
   
   [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+  
+  // get notified of page changes
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  
+  [nc addObserver:self
+         selector:@selector(pageChanged:) 
+             name:PDFViewPageChangedNotification
+           object:self.pdfview];
+  
+  
+  [self performSelector:@selector(updatePageCountDisplay) withObject:nil afterDelay:0];
+  
 }
 
 
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
   self.searchResults = nil;
   [super dealloc];
@@ -448,6 +462,23 @@
 
 #pragma mark -
 #pragma mark MHPDFView delegate
+
+
+- (void) pageChanged: (NSNotification *) notification
+{
+  [self updatePageCountDisplay];
+}
+
+- (void) updatePageCountDisplay
+{
+  unsigned int newPageIndex;
+  
+  newPageIndex = 1+[[self.pdfview document] indexForPage:[self.pdfview currentPage]];
+  
+  NSString *label = [NSString stringWithFormat:@"Page %d of %d", newPageIndex, [[self.pdfview document] pageCount]];
+  
+  [self.pageCountDisplay setStringValue:label];
+}
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
