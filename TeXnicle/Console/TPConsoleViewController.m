@@ -108,7 +108,6 @@
 		[[textView textStorage] appendAttributedString:attstr];
 		[attstr release];
 		[textView moveToEndOfDocument:self];
-		[textView setNeedsDisplay:YES];	
 	}
 }
 
@@ -158,6 +157,5 @@
 	}
 	
   [textView moveToEndOfDocument:self];
-  [textView setNeedsDisplay:YES];
 }
 @end
