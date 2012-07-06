@@ -65,5 +65,6 @@
 - (BOOL) saveContentsToDisk;
 - (BOOL) writeContents;
 
+- (void) textChanged;
 
 @end
