@@ -30,7 +30,7 @@
 #import "Bookmark.h"
 #import "FileEntity.h"
 #import "ImageAndTextCell.h"
-
+#import "externs.h"
 
 @implementation BookmarkManager
 
@@ -53,6 +53,10 @@
     [nc addObserver:self
            selector:@selector(handleUndoNotification:)
                name:NSUndoManagerDidUndoChangeNotification
+             object:nil];
+    [nc addObserver:self
+           selector:@selector(handleBookmarkChangedNotification:)
+               name:TPBookmarkDidUpdateNotification
              object:nil];
   }
   return self;
@@ -77,6 +81,12 @@
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
+  
+}
+
+- (void) handleBookmarkChangedNotification:(NSNotification*)aNote
+{
+  [self reloadData];
 }
 
 - (void) handleUndoNotification:(NSNotification*)aNote
