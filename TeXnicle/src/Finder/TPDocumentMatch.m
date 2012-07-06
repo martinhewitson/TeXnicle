@@ -67,7 +67,7 @@
 
 - (NSAttributedString*)selectedDisplayString
 {
-  NSString *lineNumberString = [self lineNumberString];
+  NSString *lineNumberString = @""; //[self lineNumberString];
   
   NSMutableAttributedString *att = [[[self displayString] mutableCopy] autorelease]; 
   NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
@@ -79,7 +79,7 @@
 - (NSAttributedString*)displayString
 {
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:[self.match stringByReplacingOccurrencesOfString:@"\n" withString:@" "]] autorelease]; 
-  NSString *lineNumberString = [self lineNumberString];
+  NSString *lineNumberString = @""; //[self lineNumberString];
   NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
   [str addAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [str length])];
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [str length])];

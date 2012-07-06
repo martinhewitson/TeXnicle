@@ -144,7 +144,7 @@ extern NSString * const TPDocumentWasRenamed;
 extern NSString * const TPTreeSelectionDidChange;
 extern NSString * const TableViewNodeType;
 extern NSString * const OutlineViewNodeType;
-
+extern NSString * const TPDocumentMatchAttributeName;
 extern NSString * const TPLiveUpdateFrequency;
 
 // Settings

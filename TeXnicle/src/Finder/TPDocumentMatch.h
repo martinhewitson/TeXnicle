@@ -30,7 +30,7 @@
 
 @class TPResultDocument;
 
-@interface TPDocumentMatch : NSObject {
+@interface TPDocumentMatch : NSTextAttachment {
 @private
   NSRange range;
   NSRange subrange;

@@ -39,6 +39,8 @@
 
 - (ProjectEntity*)project;
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile;
+- (void) highlightFinderSearchResult:(TPDocumentMatch*)result;
+- (void) replaceSearchResult:(TPDocumentMatch*)result withText:(NSString*)replacement;
 - (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement;
 - (void)didBeginSearch:(FinderController*)aFinder;
 - (void)didEndSearch:(FinderController*)aFinder;
@@ -58,7 +60,6 @@
   NSCharacterSet *ns;
   
 	dispatch_queue_t queue;
-  dispatch_semaphore_t arrayLock;
   
   NSInteger filesProcessed;
   BOOL isSearching;
@@ -99,10 +100,12 @@
 @property (assign) IBOutlet NSTextField *replaceText;
 @property (assign) IBOutlet NSButton *caseSensitiveCheckbox;
 @property (assign) IBOutlet NSButton *searchWholeWordsCheckbox;
-@property (retain) NSMutableArray *results;
+@property (atomic, retain) NSMutableArray *results;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate;
 
+- (IBAction)expandAll:(id)sender;
+- (IBAction)collapseAll:(id)sender;
 - (IBAction)replaceSelected:(id)sender;
 - (IBAction)replaceAll:(id)sender;
 - (void)searchForTerm:(NSString*)searchTerm;

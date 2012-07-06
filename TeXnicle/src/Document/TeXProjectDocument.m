@@ -26,6 +26,8 @@
 //
 
 #import "TeXProjectDocument.h"
+#import "TPDocumentMatch.h"
+#import "TPResultDocument.h"
 #import "ProjectEntity.h"
 #import "ProjectItemTreeController.h"
 #import "FileEntity.h"
@@ -3107,6 +3109,64 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   // Now highlight the search term in that 
   [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+  
+  // Make text view first responder
+  [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+  
+}
+
+- (void) highlightFinderSearchResult:(TPDocumentMatch*)result
+{	  
+  TPResultDocument *doc = result.parent;
+  FileEntity *file = doc.document;
+  
+  // first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  [openDocuments updateDoc];
+  
+  // search for result in attributed string
+  NSRange range = NSMakeRange(0, [[self.texEditorViewController.textView string] length]);
+    
+  [[self.texEditorViewController.textView textStorage] enumerateAttribute:TPDocumentMatchAttributeName inRange:range options:0
+                                                               usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                                                 
+                                                                 if (value == result) {
+                                                                   [self.texEditorViewController.textView selectRange:range scrollToVisible:YES animate:YES];
+                                                                   *stop = YES;
+                                                                 }                                                                 
+                                                               }];
+  
+  // Make text view first responder
+  [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
+  
+}
+
+- (void) replaceSearchResult:(TPDocumentMatch*)result withText:(NSString*)replacement
+{
+  TPResultDocument *doc = result.parent;
+  FileEntity *file = doc.document;
+  
+  // first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  [openDocuments updateDoc];
+  
+  // search for result in attributed string
+  NSRange range = NSMakeRange(0, [[self.texEditorViewController.textView string] length]);
+  
+  [[self.texEditorViewController.textView textStorage] enumerateAttribute:TPDocumentMatchAttributeName inRange:range options:0
+                                                               usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                                                 
+                                                                 if (value == result) {
+                                                                   [self.texEditorViewController.textView replaceRange:range withText:replacement scrollToVisible:YES animate:YES];
+                                                                   *stop = YES;
+                                                                 }                                                                 
+                                                               }];
   
   // Make text view first responder
   [[self windowForSheet] makeFirstResponder:self.texEditorViewController.textView];
