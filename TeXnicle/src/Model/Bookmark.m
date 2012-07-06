@@ -29,6 +29,7 @@
 #import "FileEntity.h"
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
+#import "externs.h"
 
 @implementation Bookmark
 @dynamic linenumber;
@@ -36,6 +37,11 @@
 @dynamic text;
 @synthesize selectedDisplayString;
 @synthesize displayString;
+
+- (void) awakeFromFetch
+{
+  [self observeTextStorage];
+}
 
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inFile:(FileEntity*)aFile inManagedObjectContext:(NSManagedObjectContext*)aMOC
 {
@@ -45,21 +51,53 @@
   bookmark.parentFile = aFile;
   
   // extract text
-  NSMutableAttributedString *aStr = [[[[aFile document] textStorage] mutableCopy] autorelease];
+  [bookmark updateText];
+  
+  // look for changes
+  [bookmark observeTextStorage];
+  
+  return [bookmark autorelease];
+}
+        
+        
+- (void) observeTextStorage
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self 
+                                           selector:@selector(handleTextChanged:) 
+                                               name:TPFileItemTextStorageChangedNotification 
+                                             object:self.parentFile];
+}
+
+- (void) dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super dealloc];
+}
+
+- (void) handleTextChanged:(NSNotification*)aNote
+{
+  [self updateText];
+}
+
+- (void) updateText
+{
+  NSMutableAttributedString *aStr = [[[[self.parentFile document] textStorage] mutableCopy] autorelease];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
-    if (line.number == aLinenumber) {
+    if (line.number == [self.linenumber integerValue]) {
       matchingLine = line;
       break;
     }
   }
   
   if (matchingLine) {
-    bookmark.text = [[aStr string] substringWithRange:matchingLine.range];
+    self.text = [[aStr string] substringWithRange:matchingLine.range];
+    // notify anyone interested that there were edits
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:TPBookmarkDidUpdateNotification object:self userInfo:nil];
   }
   
-  return [bookmark autorelease];
 }
 
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inArray:(NSArray*)bookmarks

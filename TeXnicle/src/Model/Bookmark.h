@@ -45,5 +45,6 @@
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inArray:(NSArray*)bookmarks;
 
 - (NSString*) lineNumberString;
+- (void) handleTextChanged:(NSNotification*)aNote;
 
 @end
