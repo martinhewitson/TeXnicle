@@ -163,12 +163,8 @@
 		}
 	}
 	
-	// notify anyone interested that there were edits
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	NSDictionary *dict = nil;
-	dict = [NSDictionary dictionaryWithObject:file forKey:@"File"];
-	[nc postNotificationName:TPFileItemTextStorageChangedNotification object:self userInfo:dict];
-	
+	// tell the parent file the text changed
+  [file textChanged];
 }
 
 
