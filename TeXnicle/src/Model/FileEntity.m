@@ -35,6 +35,7 @@
 #import "NSString+FileTypes.h"
 #import "MHFileReader.h"
 #import "NSString+LaTeX.h"
+#import "NSDictionary+TeXnicle.h"
 
 @implementation FileEntity
 
@@ -48,7 +49,6 @@
 
 - (void) awakeFromInsert
 {
-//	NSLog(@"Awake from insert.");
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
 	[self reconfigureDocument];
@@ -104,8 +104,7 @@
 }
 
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding
-{
-  
+{  
 	// We should load the text from the file
 	NSString *filepath = [self pathOnDisk];
 	
@@ -215,10 +214,26 @@
 
 - (void) reconfigureDocument
 {
+//  NSLog(@"Reconfiguring %@", [self name]);
 	if (document) {
-		[document release];
-	}
-	document = [[FileDocument alloc] initWithFile:self];
+//    NSLog(@"    already have document...");
+    // set the new text to the textstorage
+    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
+		NSString *str = [[[NSString alloc] initWithData:[self valueForKey:@"content"]
+                                           encoding:encoding] autorelease];
+		NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
+    
+    [[document textStorage] beginEditing];
+    [[document textStorage] setAttributedString:attStr];
+    [[document textStorage] endEditing];
+    
+//		[document release];
+	} else {
+//    NSLog(@"    create new document");
+    document = [[FileDocument alloc] initWithFile:self];
+  }
 }
 
 - (void) textChanged
@@ -276,34 +291,6 @@
 {
 	return YES;
 }
-
-
-// MOVED TO SUPERCLASS 16-02-2012
-//
-//- (NSString*) projectPath
-//{
-//	ProjectEntity *project = [self valueForKey:@"project"];
-//	// try to make the folder on disk		
-//	NSString *projectRoot = [project valueForKey:@"folder"];
-//	
-//	NSString *relativePath = [self valueForKey:@"name"];
-//	NSManagedObject *parent = [self valueForKey:@"parent"];
-//	while (parent != nil) {
-//		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
-//		parent = [parent valueForKey:@"parent"];
-//	}
-//	
-////	NSLog(@"Project root: %@", projectRoot);
-////	NSLog(@"Relative path: %@", relativePath);
-//	
-//	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
-////	NSString *ext = [self valueForKey:@"extension"];
-////	if (ext && [ext length]>0) {
-////		return [folderRoot stringByAppendingPathExtension:ext];
-////	} else {
-//		return folderRoot;
-////	}
-//}
 
 
 - (BOOL) updateFromTextStorage
