@@ -66,6 +66,8 @@
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
+  [self.texEditorViewController setPerformSyntaxCheck:YES];
+  [self.texEditorViewController setupSyntaxChecker];
 	
   // setup status view
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
