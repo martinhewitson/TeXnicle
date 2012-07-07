@@ -302,6 +302,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark Control
 
+
 // Comment out the selected text.
 - (IBAction)commentSelection:(id)sender
 {

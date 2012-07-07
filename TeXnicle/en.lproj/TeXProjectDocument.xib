@@ -639,7 +639,7 @@
 																			<object class="NSTextView" id="1066575944">
 																				<reference key="NSNextResponder" ref="562972770"/>
 																				<int key="NSvFlags">6418</int>
-																				<string key="NSFrameSize">{113, 9}</string>
+																				<string key="NSFrameSize">{113, 14}</string>
 																				<reference key="NSSuperview" ref="562972770"/>
 																				<reference key="NSWindow"/>
 																				<reference key="NSNextKeyView" ref="750276342"/>
@@ -1122,7 +1122,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																<object class="NSCustomView" id="632442715">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">4370</int>
-																	<string key="NSFrameSize">{584, 489}</string>
+																	<string key="NSFrameSize">{584, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="749074883"/>
@@ -1131,7 +1131,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																<object class="NSCustomView" id="792010655">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">4370</int>
-																	<string key="NSFrameSize">{584, 489}</string>
+																	<string key="NSFrameSize">{584, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="632442715"/>
@@ -1221,6 +1221,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 											<string key="NSFrame">{{0, -1}, {289, 602}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>

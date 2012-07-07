@@ -62,6 +62,18 @@
 	commentsL3Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"CommentsL3" name:@"Comments (%%%)"];
 	[commentsL3View addSubview:[commentsL3Controller view]];
 
+	// Markup L1 controller
+	markupL1Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL1" name:@"Markup (< >)"];
+	[markupL1View addSubview:[markupL1Controller view]];
+	
+	// Markup L2 controller
+	markupL2Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL2" name:@"Markup (<< >>)"];
+	[markupL2View addSubview:[markupL2Controller view]];
+
+  // Markup L3 controller
+	markupL3Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL3" name:@"Markup (<<< >>>)"];
+	[markupL3View addSubview:[markupL3Controller view]];
+
 	// math controller
 	mathController = [[SyntaxHighlightControlController alloc] initWithTag:@"SpecialChars" name:@"Special Characters"];
 	[mathView addSubview:[mathController view]];
@@ -128,6 +140,9 @@
 	[commentsController release];
   [commentsL2Controller release];
   [commentsL3Controller release];
+  [markupL1Controller release];
+  [markupL2Controller release];
+  [markupL3Controller release];
 	[mathController release];
 	[commandsController release];
 	[argumentsController release];

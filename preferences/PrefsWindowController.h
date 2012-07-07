@@ -65,6 +65,13 @@
 	IBOutlet NSView *commentsView;
 	IBOutlet NSView *commentsL2View;
 	IBOutlet NSView *commentsL3View;
+
+	SyntaxHighlightControlController *markupL1Controller;
+	SyntaxHighlightControlController *markupL2Controller;
+	SyntaxHighlightControlController *markupL3Controller;
+	IBOutlet NSView *markupL1View;
+	IBOutlet NSView *markupL2View;
+	IBOutlet NSView *markupL3View;
 	
 	SyntaxHighlightControlController *mathController;
 	IBOutlet NSView *mathView;

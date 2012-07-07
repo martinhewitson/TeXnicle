@@ -91,6 +91,7 @@ NSString * const TPRestoreOpenTabs = @"TPRestoreOpenTabs";
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
 
 NSString * const TPFileItemTextStorageChangedNotification = @"TPFileItemTextStorageChangedNotification";
+NSString * const TPBookmarkDidUpdateNotification = @"TPBookmarkDidUpdateNotification";
 
 NSString * const TECursorPositionDidChangeNotification = @"TECursorPositionDidChangeNotification";
 NSString * const TELineWrapStyle = @"TELineWrapStyle";
@@ -124,6 +125,14 @@ NSString * const TESyntaxColorComments = @"TESyntaxColorComments";
 NSString * const TESyntaxColorCommentsL2 = @"TESyntaxColorCommentsL2";
 NSString * const TESyntaxColorCommentsL3 = @"TESyntaxColorCommentsL3";
 NSString * const TESyntaxColorMultilineArguments = @"TESyntaxColorMultilineArguments";
+
+// markup
+NSString * const TESyntaxMarkupL1Color = @"TESyntaxMarkupL1Color";
+NSString * const TESyntaxMarkupL2Color = @"TESyntaxMarkupL2Color";
+NSString * const TESyntaxMarkupL3Color = @"TESyntaxMarkupL3Color";
+NSString * const TESyntaxColorMarkupL1 = @"TESyntaxColorMarkupL1";
+NSString * const TESyntaxColorMarkupL2 = @"TESyntaxColorMarkupL2";
+NSString * const TESyntaxColorMarkupL3 = @"TESyntaxColorMarkupL3";
 
 // special chars
 NSString * const TESyntaxSpecialCharsColor = @"TESyntaxSpecialCharsColor";
@@ -269,6 +278,14 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL2];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL3];
 	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMultilineArguments];
+  
+  // markup
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:1.0 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL1Color];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.8 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL2Color];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.5 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL3Color];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL1];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL2];
+	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL3];
   
   // special chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];

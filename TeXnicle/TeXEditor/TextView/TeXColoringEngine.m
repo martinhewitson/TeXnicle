@@ -47,6 +47,13 @@
 @synthesize colorCommentsL2;
 @synthesize colorCommentsL3;
 
+@synthesize colorMarkupL1;
+@synthesize colorMarkupL2;
+@synthesize colorMarkupL3;
+@synthesize markupL1Color;
+@synthesize markupL2Color;
+@synthesize markupL3Color;
+
 @synthesize specialCharsColor;
 @synthesize colorSpecialChars;
 
@@ -81,6 +88,8 @@
              TESyntaxCommandColor, TESyntaxColorCommand, 
              TESyntaxDollarCharsColor, TESyntaxColorDollarChars, 
              TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
+             TESyntaxColorMarkupL1, TESyntaxColorMarkupL2, TESyntaxColorMarkupL3, 
+             TESyntaxMarkupL1Color, TESyntaxMarkupL2Color, TESyntaxMarkupL3Color,
              nil] retain];
 
     [self readColorsAndFontsFromPreferences];
@@ -104,6 +113,9 @@
   self.commentColor = nil;
   self.commentL2Color = nil;
   self.commentL3Color = nil;
+  self.markupL1Color = nil;
+  self.markupL2Color = nil;
+  self.markupL3Color = nil;
   self.specialCharsColor = nil;
   self.commandColor = nil;
   self.dollarColor = nil;
@@ -173,13 +185,21 @@
   self.textColor = [[defaults valueForKey:TESyntaxTextColor] colorValue];
   
   // comments
-  self.commentColor = [[defaults valueForKey:TESyntaxCommentsColor] colorValue];
-  self.commentL2Color = [[defaults valueForKey:TESyntaxCommentsL2Color] colorValue];
-  self.commentL3Color = [[defaults valueForKey:TESyntaxCommentsL3Color] colorValue];
-  self.colorComments = [[defaults valueForKey:TESyntaxColorComments] boolValue];
+  self.commentColor    = [[defaults valueForKey:TESyntaxCommentsColor] colorValue];
+  self.commentL2Color  = [[defaults valueForKey:TESyntaxCommentsL2Color] colorValue];
+  self.commentL3Color  = [[defaults valueForKey:TESyntaxCommentsL3Color] colorValue];
+  self.colorComments   = [[defaults valueForKey:TESyntaxColorComments] boolValue];
   self.colorCommentsL2 = [[defaults valueForKey:TESyntaxColorCommentsL2] boolValue];
   self.colorCommentsL3 = [[defaults valueForKey:TESyntaxColorCommentsL3] boolValue];
 
+  // markup
+  self.colorMarkupL1 = [[defaults valueForKey:TESyntaxColorMarkupL1] boolValue];
+  self.colorMarkupL2 = [[defaults valueForKey:TESyntaxColorMarkupL2] boolValue];
+  self.colorMarkupL3 = [[defaults valueForKey:TESyntaxColorMarkupL3] boolValue];
+  self.markupL1Color = [[defaults valueForKey:TESyntaxMarkupL1Color] colorValue];
+  self.markupL2Color = [[defaults valueForKey:TESyntaxMarkupL2Color] colorValue];
+  self.markupL3Color = [[defaults valueForKey:TESyntaxMarkupL3Color] colorValue];
+  
   // math
   self.specialCharsColor = [[defaults valueForKey:TESyntaxSpecialCharsColor] colorValue];
   self.colorSpecialChars = [[defaults valueForKey:TESyntaxColorSpecialChars] boolValue];
@@ -285,6 +305,62 @@
         }
         idx = NSMaxRange(lineRange)-1;
 //        NSLog(@"   advanced index to %ld", idx);
+			}
+    } else if (cc == '<' && (self.colorMarkupL1 || self.colorMarkupL2 || self.colorMarkupL3)) {
+      int jump = 1;
+      unichar c = 0;
+			if (idx>0) {
+				c = [text characterAtIndex:idx-1];
+			}
+			if (idx==0 || c != '\\') {
+        NSColor *color = nil;
+        if (self.colorMarkupL1)
+          color = self.markupL1Color;
+        
+        if (idx < strLen-1) {
+          if ([text characterAtIndex:idx+1] == '<') {
+            jump++;
+            if (self.colorMarkupL2) {
+              color = self.markupL2Color;
+            }
+            
+            if (idx < strLen-2) {
+              if ([text characterAtIndex:idx+2] == '<') {
+                jump++;
+                if (self.colorMarkupL3) {
+                  color = self.markupL3Color;
+                }
+              }
+            }
+            
+          }
+        }
+        
+        // look for the closing >
+        start = idx;
+        idx++;
+        NSInteger argCount = 1;
+        while(idx < strLen) {
+          nextChar = [text characterAtIndex:idx];
+          if (nextChar == '<') {
+            argCount++;
+          }
+          if (nextChar == '>') {
+            argCount--;
+          }
+          if (argCount == 0) {
+            NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:argRange];
+            break;
+          }
+          idx++;
+        }
+        
+        // if we didn't match an ending } then there's not much we can do
+        if (argCount>0) {
+          idx = start+jump;
+        }
+                
 			}
     } else if ((cc == '{') && self.colorArguments) {      
       start = idx;

@@ -98,6 +98,15 @@ extern NSString * const TESyntaxColorCommentsL2;
 extern NSString * const TESyntaxColorCommentsL3;
 extern NSString * const TESyntaxColorMultilineArguments;
 
+// markup
+extern NSString * const TESyntaxMarkupL1Color;
+extern NSString * const TESyntaxMarkupL2Color;
+extern NSString * const TESyntaxMarkupL3Color;
+extern NSString * const TESyntaxColorMarkupL1;
+extern NSString * const TESyntaxColorMarkupL2;
+extern NSString * const TESyntaxColorMarkupL3;
+
+
 // special chars
 extern NSString * const TESyntaxSpecialCharsColor;
 extern NSString * const TESyntaxColorSpecialChars;
@@ -137,7 +146,7 @@ extern NSString * const TPDefaultEncoding;
 // Notifications
 extern NSString * const TPSyntaxColorsChangedNotification;
 extern NSString * const TPFileItemTextStorageChangedNotification;
-
+extern NSString * const TPBookmarkDidUpdateNotification;
 
 // String constants
 extern NSString * const TPDocumentWasRenamed;

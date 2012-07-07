@@ -49,6 +49,14 @@
   BOOL colorCommentsL2;
   BOOL colorCommentsL3;
   
+  BOOL colorMarkupL1;
+  BOOL colorMarkupL2;
+  BOOL colorMarkupL3;
+  
+  NSColor *markupL1Color;
+  NSColor *markupL2Color;
+  NSColor *markupL3Color;
+  
   BOOL colorMultilineArguments;
   
   NSColor *specialCharsColor;
@@ -78,6 +86,15 @@
 @property (assign) BOOL colorComments;
 @property (assign) BOOL colorCommentsL2;
 @property (assign) BOOL colorCommentsL3;
+
+
+@property (assign) BOOL colorMarkupL1;
+@property (assign) BOOL colorMarkupL2;
+@property (assign) BOOL colorMarkupL3;
+
+@property (retain) NSColor *markupL1Color;
+@property (retain) NSColor *markupL2Color;
+@property (retain) NSColor *markupL3Color;
 
 @property (retain) NSColor *specialCharsColor;
 @property (assign) BOOL colorSpecialChars;
