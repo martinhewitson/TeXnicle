@@ -355,7 +355,7 @@
 }
 
 #pragma mark -
-#pragma NSTextView delegate
+#pragma mark textview delegate
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
@@ -388,7 +388,7 @@
 
 
 #pragma mark -
-#pragma TeXTextView delegate
+#pragma mark TeXTextView delegate
 
 -(NSString*)fileExtension
 {
