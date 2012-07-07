@@ -2973,8 +2973,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     // silently reload
     FileEntity *fileEntity = (FileEntity*)file;
     [fileEntity reloadFromDisk];
-    [self.openDocuments updateDoc];
-    
+    [self.openDocuments updateDoc];    
   }
   
 }
