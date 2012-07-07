@@ -171,9 +171,13 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 			return;
 		}
 		
-		// load this file from disk
-		[aDoc reloadFromDisk];
-		[openDocuments addObject:aDoc];
+    // if the file has a document, we don't need to reload from disk
+    if ([aDoc document] == nil) {
+      // load this file from disk
+      [aDoc reloadFromDisk];
+		}
+    
+    [openDocuments addObject:aDoc];
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
 		[tabView addTabViewItem:newItem];
@@ -236,7 +240,27 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
           }
           [self.texEditorViewController.textView stopObservingTextStorage];
 //          [self.texEditorViewController.textView replaceTextContainer:textContainer];
+          
+          // clear the text view from all other document text containers
+          for (FileEntity *file in openDocuments) {
+            if (file != currentDoc) {
+              if ([[file valueForKey:@"isText"] boolValue]) {
+                id filedoc = [file document];		
+                if (filedoc) {
+                  if ([filedoc isKindOfClass:[FileDocument class]]) {
+//                    NSLog(@"Clearing textview from %@", [file name]);
+                    NSTextContainer *tc = [filedoc textContainer];
+                    [tc setTextView:nil];
+//                    NSLog(@"  Container %@, Textview %@", tc, [tc textView]);
+                  }
+                }
+              }
+            }
+          }
+          
           [textContainer setTextView:self.texEditorViewController.textView];
+//          NSLog(@"Set textview for %@", [currentDoc name]);
+//          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
           [self.texEditorViewController.textView observeTextStorage];
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
@@ -332,8 +356,8 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 {
   if (currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
+    [self setCursorAndScrollPositionForCurrentDoc];
   }
-	[self setCursorAndScrollPositionForCurrentDoc];
 }
 
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem;
