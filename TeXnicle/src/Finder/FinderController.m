@@ -233,19 +233,16 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
     return;
   }
     
+  // clear existing search
+  [self.results removeAllObjects];  
+  [self clearAllSearchResults];
+  
+  [self.outlineView reloadData];
+  
   if ([searchTerm length] == 0) {
     [self didEndSearch:self];
     return;
   }
-  
-  // clear existing search
-  dispatch_sync(queue, ^{
-    [self.results removeAllObjects];  
-  });
-  
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [self.outlineView reloadData];
-  });
   
   shouldContinueSearching = YES;
   isSearching = YES;
@@ -275,6 +272,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 			
 			FileEntity *file = (FileEntity*)item;
 			if ([[file valueForKey:@"isText"] boolValue]) {
+        [self clearSearchResultsFromFile:file];
         filesProcessed++;
       }
     }
@@ -285,7 +283,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 			
 			FileEntity *file = (FileEntity*)item;
 			if ([[file valueForKey:@"isText"] boolValue]) {
-        [self clearSearchResultsFromFile:file];
         dispatch_async(queue, ^{						
                     
           NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
@@ -299,9 +296,24 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   
 }
 
+- (void) clearAllSearchResults
+{
+  NSArray *items = [[self project] valueForKey:@"items"];
+	for (ProjectItemEntity *item in items) {
+		if ([item isKindOfClass:[FileEntity class]]) {			
+			FileEntity *file = (FileEntity*)item;
+			if ([[file valueForKey:@"isText"] boolValue]) {
+        [self clearSearchResultsFromFile:file];
+      }
+    }
+  }
+}
+
 - (void) clearSearchResultsFromFile:(FileEntity*)file
 {
+  [[file.document textStorage] beginEditing];
   [[file.document textStorage] removeAttribute:TPDocumentMatchAttributeName range:NSMakeRange(0, [[file.document textStorage] length])];
+  [[file.document textStorage] endEditing];
 }
 
 - (void) stringSearchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file
