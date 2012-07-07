@@ -78,7 +78,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
     ns = [[NSCharacterSet newlineCharacterSet] retain];
     
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
-    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);    
+    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
     
   }
