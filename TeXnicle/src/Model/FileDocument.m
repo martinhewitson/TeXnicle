@@ -45,7 +45,7 @@
 	
 	if (self) {
 		
-//		NSLog(@"Creating document for %@", aFile);
+//		NSLog(@"Creating document for %@", [aFile name]);
 		file = aFile;
 		
 		// Get the string from the File entity
@@ -53,7 +53,7 @@
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
 		NSString *str = [[[NSString alloc] initWithData:[file valueForKey:@"content"]
 																					encoding:encoding] autorelease];
-		
+    
 		// Setup undo manager for this file
 		undoManager = [[NSUndoManager alloc] init];
 		
@@ -83,16 +83,6 @@
 																						 selector:@selector(handleEdits:)
 																								 name:NSTextStorageDidProcessEditingNotification
 																							 object:textStorage];
-		
-		//
-//		if (empty) {			
-//			NSLog(@"Emptying text storage");
-//			[textStorage beginEditing];
-//			[textStorage deleteCharactersInRange:NSMakeRange(0, [[textStorage string] length])]; 
-//			[textStorage endEditing];
-//		}
-//		
-		
 	}
 	
 	return self;
