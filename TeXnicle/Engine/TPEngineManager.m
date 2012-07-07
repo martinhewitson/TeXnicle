@@ -85,7 +85,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     
     NSString *target = [enginesDir stringByAppendingPathComponent:[engine lastPathComponent]];
 //    NSLog(@"Installing %@ to %@", engine, target);
-    BOOL success;
+    BOOL success = YES;
     if ([fm fileExistsAtPath:target]) {
       error = nil;
       success = [fm removeItemAtPath:target error:&error];
