@@ -422,8 +422,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
+  
+  // set language for this project
+  [[NSSpellChecker sharedSpellChecker] setLanguage:[self.settings valueForKey:@"language"]];
+  
 }
-
 - (void)windowWillClose:(NSNotification *)notification 
 {		
   // stop filemonitor from reaching us
