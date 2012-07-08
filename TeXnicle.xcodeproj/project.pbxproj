@@ -286,6 +286,10 @@
 		25C72A6714D4539A00A81DEE /* TPTemplateEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C72A6514D4539A00A81DEE /* TPTemplateEditorView.xib */; };
 		25C850AE154BE4E00048311D /* ProjectFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C850AC154BE4E00048311D /* ProjectFilesViewController.m */; };
 		25C850AF154BE4E00048311D /* ProjectFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C850AD154BE4E00048311D /* ProjectFilesViewController.xib */; };
+		25C87DCE15A8722200E61E25 /* TPSpellCheckerListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C87DCC15A8722200E61E25 /* TPSpellCheckerListingViewController.m */; };
+		25C87DCF15A8722200E61E25 /* TPSpellCheckerListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C87DCD15A8722200E61E25 /* TPSpellCheckerListingViewController.xib */; };
+		25C87DD215A8858B00E61E25 /* TPSpellCheckedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C87DD115A8858A00E61E25 /* TPSpellCheckedFile.m */; };
+		25C87DD515A8863300E61E25 /* TPMisspelledWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C87DD415A8863300E61E25 /* TPMisspelledWord.m */; };
 		25CC008C14EC343500E6CB6A /* ProjectItemEntity+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC008B14EC343500E6CB6A /* ProjectItemEntity+ProjectTemplate.m */; };
 		25CC009014EC37D900E6CB6A /* FolderEntity+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC008F14EC37D900E6CB6A /* FolderEntity+ProjectTemplate.m */; };
 		25CC009314ECD02800E6CB6A /* FileEntity+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC009214ECD02800E6CB6A /* FileEntity+ProjectTemplate.m */; };
@@ -327,6 +331,10 @@
 		25E5A87014B4A0920043C4AF /* TPDocumentOutlineBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E5A86F14B4A0910043C4AF /* TPDocumentOutlineBuilder.m */; };
 		25ECE9131408FADE0050CB94 /* TPEngineSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */; };
 		25ECE9141408FADE0050CB94 /* TPEngineSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */; };
+		25F0AB3215A8A4360000EFFA /* spellingTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25F0AB3015A8A4360000EFFA /* spellingTabBarImage.icns */; };
+		25F0AB3315A8A4360000EFFA /* spellingTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25F0AB3115A8A4360000EFFA /* spellingTabBarImageDepressed.icns */; };
+		25F0AB3515A940D10000EFFA /* spellingMistake.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25F0AB3415A940D10000EFFA /* spellingMistake.icns */; };
+		25F0AB3815A94A050000EFFA /* TPSpellingOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */; };
 		25F10D45150B66B200C00AA3 /* xelatex.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25F10D44150B66B200C00AA3 /* xelatex.engine */; };
 		25F251041519C83100453F6F /* TPSyntaxChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F251031519C83100453F6F /* TPSyntaxChecker.m */; };
 		25F251081519DB9800453F6F /* TPSyntaxError.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F251071519DB9800453F6F /* TPSyntaxError.m */; };
@@ -828,6 +836,13 @@
 		25C850AB154BE4E00048311D /* ProjectFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectFilesViewController.h; sourceTree = "<group>"; };
 		25C850AC154BE4E00048311D /* ProjectFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectFilesViewController.m; sourceTree = "<group>"; };
 		25C850AD154BE4E00048311D /* ProjectFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectFilesViewController.xib; sourceTree = "<group>"; };
+		25C87DCB15A8722200E61E25 /* TPSpellCheckerListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellCheckerListingViewController.h; sourceTree = "<group>"; };
+		25C87DCC15A8722200E61E25 /* TPSpellCheckerListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellCheckerListingViewController.m; sourceTree = "<group>"; };
+		25C87DCD15A8722200E61E25 /* TPSpellCheckerListingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPSpellCheckerListingViewController.xib; sourceTree = "<group>"; };
+		25C87DD015A8858A00E61E25 /* TPSpellCheckedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellCheckedFile.h; sourceTree = "<group>"; };
+		25C87DD115A8858A00E61E25 /* TPSpellCheckedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellCheckedFile.m; sourceTree = "<group>"; };
+		25C87DD315A8863200E61E25 /* TPMisspelledWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMisspelledWord.h; sourceTree = "<group>"; };
+		25C87DD415A8863300E61E25 /* TPMisspelledWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMisspelledWord.m; sourceTree = "<group>"; };
 		25CC008A14EC343500E6CB6A /* ProjectItemEntity+ProjectTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectItemEntity+ProjectTemplate.h"; sourceTree = "<group>"; };
 		25CC008B14EC343500E6CB6A /* ProjectItemEntity+ProjectTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProjectItemEntity+ProjectTemplate.m"; sourceTree = "<group>"; };
 		25CC008E14EC37D900E6CB6A /* FolderEntity+ProjectTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FolderEntity+ProjectTemplate.h"; sourceTree = "<group>"; };
@@ -896,6 +911,12 @@
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
 		25EF95FA152D693C00D4AFB7 /* TeXnicle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TeXnicle.entitlements; sourceTree = "<group>"; };
+		25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 11.xcdatamodel"; sourceTree = "<group>"; };
+		25F0AB3015A8A4360000EFFA /* spellingTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingTabBarImage.icns; sourceTree = "<group>"; };
+		25F0AB3115A8A4360000EFFA /* spellingTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		25F0AB3415A940D10000EFFA /* spellingMistake.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingMistake.icns; sourceTree = "<group>"; };
+		25F0AB3615A94A050000EFFA /* TPSpellingOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellingOutlineView.h; sourceTree = "<group>"; };
+		25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellingOutlineView.m; sourceTree = "<group>"; };
 		25F10D44150B66B200C00AA3 /* xelatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatex.engine; sourceTree = "<group>"; };
 		25F251021519C83100453F6F /* TPSyntaxChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSyntaxChecker.h; sourceTree = "<group>"; };
 		25F251031519C83100453F6F /* TPSyntaxChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSyntaxChecker.m; sourceTree = "<group>"; };
@@ -1009,6 +1030,7 @@
 			isa = PBXGroup;
 			children = (
 				25EF95FA152D693C00D4AFB7 /* TeXnicle.entitlements */,
+				25C87DCA15A871D600E61E25 /* SpellChecker */,
 				258348941513B2C3008A21BE /* bibtex */,
 				25D57FB114EA5255008E02B5 /* Project Templates */,
 				25CED75414B73F0B0091D55F /* SupportedFilesManager */,
@@ -1204,6 +1226,9 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25F0AB3415A940D10000EFFA /* spellingMistake.icns */,
+				25F0AB3015A8A4360000EFFA /* spellingTabBarImage.icns */,
+				25F0AB3115A8A4360000EFFA /* spellingTabBarImageDepressed.icns */,
 				25627829151A061300778FFB /* noerror.icns */,
 				2562782A151A061300778FFB /* error.icns */,
 				25D173E914B896D800A387A9 /* fileTypesPref.icns */,
@@ -1816,6 +1841,23 @@
 			path = src/TemplateEditor;
 			sourceTree = "<group>";
 		};
+		25C87DCA15A871D600E61E25 /* SpellChecker */ = {
+			isa = PBXGroup;
+			children = (
+				25C87DCB15A8722200E61E25 /* TPSpellCheckerListingViewController.h */,
+				25C87DCC15A8722200E61E25 /* TPSpellCheckerListingViewController.m */,
+				25C87DCD15A8722200E61E25 /* TPSpellCheckerListingViewController.xib */,
+				25C87DD015A8858A00E61E25 /* TPSpellCheckedFile.h */,
+				25C87DD115A8858A00E61E25 /* TPSpellCheckedFile.m */,
+				25C87DD315A8863200E61E25 /* TPMisspelledWord.h */,
+				25C87DD415A8863300E61E25 /* TPMisspelledWord.m */,
+				25F0AB3615A94A050000EFFA /* TPSpellingOutlineView.h */,
+				25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */,
+			);
+			name = SpellChecker;
+			path = src/SpellChecker;
+			sourceTree = "<group>";
+		};
 		25CED75414B73F0B0091D55F /* SupportedFilesManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2102,6 +2144,10 @@
 				2562782C151A061300778FFB /* error.icns in Resources */,
 				250848C8154B1ECA0001685A /* OtherFilesViewController.xib in Resources */,
 				25C850AF154BE4E00048311D /* ProjectFilesViewController.xib in Resources */,
+				25C87DCF15A8722200E61E25 /* TPSpellCheckerListingViewController.xib in Resources */,
+				25F0AB3215A8A4360000EFFA /* spellingTabBarImage.icns in Resources */,
+				25F0AB3315A8A4360000EFFA /* spellingTabBarImageDepressed.icns in Resources */,
+				25F0AB3515A940D10000EFFA /* spellingMistake.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2329,6 +2375,10 @@
 				250848D4154B21580001685A /* TPSourceDirectory.m in Sources */,
 				250848DA154B22420001685A /* AFTreeScanner.m in Sources */,
 				25C850AE154BE4E00048311D /* ProjectFilesViewController.m in Sources */,
+				25C87DCE15A8722200E61E25 /* TPSpellCheckerListingViewController.m in Sources */,
+				25C87DD215A8858B00E61E25 /* TPSpellCheckedFile.m in Sources */,
+				25C87DD515A8863300E61E25 /* TPMisspelledWord.m in Sources */,
+				25F0AB3815A94A050000EFFA /* TPSpellingOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2548,6 +2598,7 @@
 			children = (
 				253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */,
 				250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */,
+				25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */,
 				25D57FBB14EA5C3B008E02B5 /* TeXProject 9.xcdatamodel */,
 				25DD32B814B96C7300C5D1E3 /* TeXProject 7.xcdatamodel */,
 				25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */,
@@ -2556,7 +2607,7 @@
 				25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */,
 				25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */,
 			);
-			currentVersion = 250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */;
+			currentVersion = 25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */;
 			path = TeXProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
