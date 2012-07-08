@@ -1129,13 +1129,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
-  [self setSelectedRange:aRange];
-  [self replaceCharactersInRange:aRange withString:replacement];
+  [self setSelectedRange:aRange];  
+  [self insertText:replacement];
+  
+  NSRange r = NSMakeRange(aRange.location, [replacement length]);
+  
   if (scroll) {    
-    [self scrollRangeToVisible:aRange];
+    [self scrollRangeToVisible:r];
   }
   if (animate) {
-    [self showFindIndicatorForRange:aRange];
+    [self showFindIndicatorForRange:r];
   }
 }
 
