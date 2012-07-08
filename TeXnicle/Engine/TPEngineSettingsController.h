@@ -36,6 +36,7 @@
 -(void)didSelectOpenConsole:(BOOL)state;
 -(void)didChangeNCompile:(NSInteger)number;
 -(void)didSelectEngineName:(NSString*)aName;
+-(void)didSelectLanguage:(NSString*)aName;
 
 -(NSString*)engineName;
 -(NSNumber*)doBibtex;
@@ -47,6 +48,7 @@
 - (BOOL)supportsDoPS2PDF;
 - (BOOL)supportsNCompile;
 
+- (NSString*)language;
 
 -(NSArray*)registeredEngineNames;
 
@@ -61,10 +63,12 @@
   IBOutlet NSTextField *nCompileTextField;
   IBOutlet NSStepper *nCompileStepper;
   IBOutlet NSTextField *nCompileLabel;
+  IBOutlet NSPopUpButton *languageSelector;
   
   IBOutlet MHStrokedFiledView *pane1;
   IBOutlet MHStrokedFiledView *pane2;
   IBOutlet MHStrokedFiledView *pane3;
+  IBOutlet MHStrokedFiledView *pane4;
   
   id<TPEngineSettingsDelegate> delegate;
 }

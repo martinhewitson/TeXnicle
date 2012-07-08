@@ -28,6 +28,9 @@
 #import "TPEngineSettingsController.h"
 #import "MHStrokedFiledView.h"
 
+NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageChangedNotification";
+
+
 @implementation TPEngineSettingsController
 
 @synthesize delegate;
@@ -64,8 +67,47 @@
   pane2.strokeSides = YES;
   pane3.fillColor = color2;
   pane3.strokeSides = YES;
+  pane4.fillColor = color1;
+  pane4.strokeSides = YES;
+  
+  // set available languages
+  [self setupLanguageOptions];
   
   [self performSelector:@selector(setupEngineSettings) withObject:nil afterDelay:0];
+}
+
+- (void) setupLanguageOptions
+{
+  [languageSelector removeAllItems];
+  NSArray *languageIDs = [[NSSpellChecker sharedSpellChecker] userPreferredLanguages];
+  for (NSString *languageID in languageIDs) {
+    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
+    NSString *displayNameString = [locale displayNameForKey:NSLocaleIdentifier value:languageID];
+    NSMenuItem *menuItem;
+    if (displayNameString == nil) {
+      displayNameString = languageID;
+    }
+    [languageSelector addItemWithTitle:displayNameString];
+    menuItem = [languageSelector itemWithTitle:displayNameString];
+    [menuItem setRepresentedObject:locale];
+  }
+  
+  // select the current language
+  NSString *languageID = [self language];
+  if (languageID) {
+    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
+    NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
+    [languageSelector selectItemAtIndex:index];
+  }
+}
+
+- (IBAction) languageSelected:(id)sender
+{
+  NSMenuItem *menuItem = [languageSelector selectedItem];
+  NSLocale *locale = [menuItem representedObject];
+  
+  [self didSelectLanguage:[locale localeIdentifier]];
+  
 }
 
 - (void)setupEngineSettings
@@ -107,13 +149,18 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu
 {
-  NSArray *engines = [self registeredEngineNames];
-  [menu removeAllItems];
-  for (NSString *name in engines) {    
-    NSMenuItem *item = [menu addItemWithTitle:name action:@selector(engineSelected:) keyEquivalent:@""];
-    [item setTarget:self];
+  if (menu == [engineSelector menu]) {
+    NSArray *engines = [self registeredEngineNames];
+    [menu removeAllItems];
+    for (NSString *name in engines) {    
+      NSMenuItem *item = [menu addItemWithTitle:name action:@selector(engineSelected:) keyEquivalent:@""];
+      [item setTarget:self];
+    }
+    [engineSelector selectItemWithTitle:[self engineName]];
+  } else if (menu == [languageSelector menu]) {
+    [self setupLanguageOptions];
   }
-  [engineSelector selectItemWithTitle:[self engineName]];
+  
 }
 
 - (IBAction)engineSelected:(id)sender
@@ -159,6 +206,14 @@
 #pragma mark -
 #pragma mark Delegate
 
+- (NSString*)language
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(language)]) {
+    return [self.delegate language];
+  }
+  return nil;
+}
+
 -(NSArray*)registeredEngineNames
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(registeredEngineNames)]) {
@@ -201,6 +256,16 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectEngineName:)]) {
     [self.delegate didSelectEngineName:aName];
   }  
+}
+
+-(void)didSelectLanguage:(NSString*)aName
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLanguage:)]) {
+    [self.delegate didSelectLanguage:aName];
+  }  
+  
+  // notify
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPSpellingLanguageChangedNotification object:self userInfo:nil];
 }
 
 -(NSString*)engineName
