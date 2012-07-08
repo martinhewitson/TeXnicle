@@ -205,7 +205,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
           self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
         }
         
-        NSLog(@"Restored outline depth = %d", [self.maxOutlineViewDepth intValue]);
         
         // pdf view visible rect
         NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
@@ -456,6 +455,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                      [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
                      [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
+                     [[NSSpellChecker sharedSpellChecker] language], @"language",
                      [NSNumber numberWithBool:YES], @"TPStandAloneEditorShowStatusBar",
                      nil];
   }
@@ -875,12 +875,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     // make sure we store the text editor string to our document string
     [self syncDocumentDataFromEditor];
   }
-    
-  // cache chosen language
-  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
-	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-    
+        
 //	NSRange selRange = [self.texEditorViewController.textView selectedRange];
 //	NSRect selRect = [self.texEditorViewController.textView visibleRect];
 	NSResponder *r = [[self windowForSheet] firstResponder];
@@ -1655,6 +1650,24 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 #pragma mark -
 #pragma mark Engine Settings Delegate
+
+- (NSString*)language
+{
+  NSString *language = [self.settings valueForKey:@"language"];
+  if (language == nil || [language length] == 0) {
+    language = [[NSSpellChecker sharedSpellChecker] language];
+    [self.settings setValue:language forKey:@"language"];
+  }
+  
+  return language;
+}
+
+- (void) didSelectLanguage:(NSString *)aName
+{
+  [self.settings setValue:aName forKey:@"language"];
+  [[NSSpellChecker sharedSpellChecker] setLanguage:aName];
+  [self.texEditorViewController.textView checkSpelling:self];
+}
 
 -(void)didSelectDoBibtex:(BOOL)state
 {
