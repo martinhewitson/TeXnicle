@@ -258,6 +258,15 @@
       return [first compare:second]==NSOrderedDescending;
     }];
 
+    // need to remove any checked-files which should be no longer checked
+    NSMutableArray *filesToRemove = [NSMutableArray array];
+    for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
+      if (![sortedItems containsObject:checkedFile.file]) {
+        [filesToRemove addObject:checkedFile];
+      }
+    }
+    [self.checkedFiles removeObjectsInArray:filesToRemove];
+    
     
     for (FileEntity *file in sortedItems) {
       if ([[file valueForKey:@"isText"] boolValue]) {
