@@ -40,6 +40,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 @synthesize findButton;
 @synthesize tabView;
 @synthesize bookmarksButton;
+@synthesize spellingButton;
 @synthesize prefsButton;
 @synthesize splitview;
 @synthesize containerView;
@@ -62,6 +63,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self.libraryButton setState:NSOffState];
   [self.outlineButton setState:NSOffState];
   [self.findButton setState:NSOffState];
+  [self.spellingButton setState:NSOffState];
   [self.bookmarksButton setState:NSOffState];
   [self.prefsButton setState:NSOffState];
   
@@ -80,6 +82,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   }
   if (self.findButton != nil) {
     [nonNilButtons addObject:self.findButton];
+  }
+  if (self.spellingButton != nil) {
+    [nonNilButtons addObject:self.spellingButton];
   }
   if (self.bookmarksButton != nil) {
     [nonNilButtons addObject:self.bookmarksButton];
@@ -154,6 +159,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
       return self.bookmarksButton;
       break;
     case 6:
+      return self.spellingButton;
+      break;
+    case 7:
       return self.prefsButton;
       break;
     default:
@@ -176,8 +184,10 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     return 4;
   } else if (sender == self.bookmarksButton) {
     return 5;
-  } else if (sender == self.prefsButton) {
+  } else if (sender == self.spellingButton) {
     return 6;
+  } else if (sender == self.prefsButton) {
+    return 7;
   } else {
     return 0;
   }
@@ -201,6 +211,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     [self toggleOn:self.findButton];    
   } else if (idx == [buttons indexOfObject:self.bookmarksButton]) {
     [self toggleOn:self.bookmarksButton];    
+  } else if (idx == [buttons indexOfObject:self.spellingButton]) {
+    [self toggleOn:self.spellingButton];    
   } else if (idx == [buttons indexOfObject:self.prefsButton]) {
     [self toggleOn:self.prefsButton];    
   }
@@ -275,6 +287,17 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self selectTabAtIndex:[self tabIndexForButton:self.bookmarksButton]];
 }
 
+- (IBAction) showSpelling:(id)sender
+{
+  [self showNavigator:self];
+  [self performSelector:@selector(showSpelling) withObject:nil afterDelay:0];
+}
+
+- (void) showSpelling
+{
+  [self selectTabAtIndex:[self tabIndexForButton:self.spellingButton]];
+}
+
 - (IBAction) showProjectSettings:(id)sender
 {
   [self showNavigator:self];
@@ -295,8 +318,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
   
   CGFloat size = [buttons count]*36.0;
-  if (size < 230.0) 
-    size = 230.0;
+  if (size < 250.0) 
+    size = 250.0;
   
   
   NSRect leftfr = [leftView frame];
@@ -358,6 +381,13 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   if (tag == 2160) {
     // show bookmarks 
     if (self.bookmarksButton) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2165) {
+    // show bookmarks 
+    if (self.spellingButton) {
       return YES;
     }
   }
