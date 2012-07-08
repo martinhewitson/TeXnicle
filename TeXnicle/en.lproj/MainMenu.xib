@@ -969,10 +969,20 @@
 												<reference key="NSMixedImage" ref="310636482"/>
 												<int key="NSTag">2160</int>
 											</object>
+											<object class="NSMenuItem" id="434431403">
+												<reference key="NSMenu" ref="562250606"/>
+												<string key="NSTitle">Show Spelling</string>
+												<string key="NSKeyEquiv">7</string>
+												<int key="NSKeyEquivModMask">1572864</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">2165</int>
+											</object>
 											<object class="NSMenuItem" id="453470277">
 												<reference key="NSMenu" ref="562250606"/>
 												<string key="NSTitle">Show Project Settings</string>
-												<string key="NSKeyEquiv">7</string>
+												<string key="NSKeyEquiv">0</string>
 												<int key="NSKeyEquivModMask">1572864</int>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
@@ -2790,6 +2800,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">showSpelling:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="434431403"/>
+					</object>
+					<int key="connectionID">825</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -4063,6 +4081,7 @@
 							<reference ref="453470277"/>
 							<reference ref="1066043868"/>
 							<reference ref="836972412"/>
+							<reference ref="434431403"/>
 						</array>
 						<reference key="parent" ref="92222984"/>
 					</object>
@@ -4125,6 +4144,11 @@
 						<int key="objectID">819</int>
 						<reference key="object" ref="385092572"/>
 						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">823</int>
+						<reference key="object" ref="434431403"/>
+						<reference key="parent" ref="562250606"/>
 					</object>
 				</array>
 			</object>
@@ -4327,6 +4351,7 @@
 				<string key="815.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="816.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="819.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="823.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
@@ -4334,7 +4359,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">822</int>
+			<int key="maxID">825</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4857,6 +4882,7 @@
 						<string key="showProjectSearch:">id</string>
 						<string key="showProjectSettings:">id</string>
 						<string key="showProjectTree:">id</string>
+						<string key="showSpelling:">id</string>
 						<string key="showSymbolPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -4888,6 +4914,10 @@
 							<string key="name">showProjectTree:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="showSpelling:">
+							<string key="name">showSpelling:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showSymbolPalette:">
 							<string key="name">showSymbolPalette:</string>
 							<string key="candidateClassName">id</string>
@@ -4902,6 +4932,7 @@
 						<string key="palletButton">NSButton</string>
 						<string key="prefsButton">NSButton</string>
 						<string key="projectButton">NSButton</string>
+						<string key="spellingButton">NSButton</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="tabView">NSTabView</string>
 					</dictionary>
@@ -4936,6 +4967,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="projectButton">
 							<string key="name">projectButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spellingButton">
+							<string key="name">spellingButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitview">
@@ -5177,6 +5212,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="liveUpdateButton">NSButton</string>
 						<string key="nextButton">HHValidatedButton</string>
+						<string key="pageCountDisplay">NSTextField</string>
 						<string key="pdfThumbnailView">PDFThumbnailView</string>
 						<string key="pdfViewContainer">NSView</string>
 						<string key="pdfview">MHPDFView</string>
@@ -5204,6 +5240,10 @@
 						<object class="IBToOneOutletInfo" key="nextButton">
 							<string key="name">nextButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pageCountDisplay">
+							<string key="name">pageCountDisplay</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="pdfThumbnailView">
 							<string key="name">pdfThumbnailView</string>
@@ -6185,6 +6225,7 @@
 						<string key="renameField">NSTextField</string>
 						<string key="renameSheet">NSWindow</string>
 						<string key="rightView">NSView</string>
+						<string key="spellCheckerContainerView">NSView</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabView">NSTabView</string>
@@ -6297,6 +6338,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="rightView">
 							<string key="name">rightView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spellCheckerContainerView">
+							<string key="name">spellCheckerContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitview">
