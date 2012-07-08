@@ -51,6 +51,7 @@
 #import "TPProjectTemplateCreator.h"
 #import "TPConsoleViewController.h"
 #import "OtherFilesViewController.h"
+#import "TPSpellCheckerListingViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -60,7 +61,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   
   NSWindow *mainWindow;
@@ -142,6 +143,9 @@
   LibraryController *library;
   NSView *libraryContainerView;
   
+  TPSpellCheckerListingViewController *spellcheckerViewController;
+  NSView *spellCheckerContainerView;
+  
   PDFViewerController *pdfViewerController;
   
   PaletteController *palette;
@@ -215,6 +219,9 @@
 
 @property (assign) IBOutlet NSView *libraryContainerView;
 @property (retain) LibraryController *library;
+
+@property (retain) TPSpellCheckerListingViewController *spellcheckerViewController;
+@property (assign) IBOutlet NSView *spellCheckerContainerView;
 
 @property (retain) PDFViewerController *pdfViewerController;
 @property (retain) ProjectEntity *project;

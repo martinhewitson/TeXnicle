@@ -54,7 +54,7 @@
 #import "BibliographyEntry.h"
 #import "RegexKitLite.h"
 
-#define kSplitViewLeftMinSize 230.0
+#define kSplitViewLeftMinSize 260.0
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
@@ -74,6 +74,9 @@
 
 @synthesize library;
 @synthesize libraryContainerView;
+
+@synthesize spellCheckerContainerView;
+@synthesize spellcheckerViewController;
 
 @synthesize bookmarkManager;
 @synthesize bookmarkContainerView;
@@ -144,6 +147,7 @@
   self.fileMonitor = nil;
   self.finder = nil;
   self.library = nil;
+  self.spellcheckerViewController = nil;
   self.engineManager = nil;
   self.engineSettings = nil;
   self.pdfViewer = nil;
@@ -379,6 +383,11 @@
   [self.libraryContainerView addSubview:libraryView];
 //  NSLog(@"Setup library");
   
+  // setup spellchecker
+  self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
+  [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
+  [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];  
+  
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
 //  NSLog(@"Setup filemonitor");
@@ -434,6 +443,7 @@
     [self.project setValue:projectFolder forKey:@"folder"];
   }
 
+
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
@@ -474,13 +484,6 @@
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
-  
-//	// spell checker language
-//	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
-//	if (![language isEqual:@""]) {
-//    //		NSLog(@"Setting language to %@", language);
-//		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
-//	}
   
   
   // ensure the project has the same name as on disk
@@ -574,6 +577,13 @@
   
 }
 
+- (void) windowDidBecomeKey:(NSNotification *)notification
+{
+  
+  // set language for this project
+  [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
+  
+}
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
@@ -2771,6 +2781,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   if ([self fileURL] != nil) {
     [self setMetadataForStoreAtURL:[self fileURL]];
   }
+  
   return [super writeToURL:absoluteURL
                     ofType:typeName
           forSaveOperation:saveOperation
@@ -3442,6 +3453,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Engine Settings
 
+- (NSString*)language
+{
+  return self.project.settings.language;
+}
+
+- (void) didSelectLanguage:(NSString *)aName
+{
+  self.project.settings.language = aName;
+  [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
+  [self.texEditorViewController.textView checkSpelling:self];
+}
+
 -(NSArray*)registeredEngineNames
 {
   return [self.engineManager registeredEngineNames];
@@ -3548,21 +3571,71 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
 }
 
-//#pragma mark -
-//#pragma mark OtherFilesViewer delegate
-//
-//- (BOOL) otherFilesViewer:(OtherFilesViewController *)anOtherFilesViewer shouldIncludeItemAtPath:(NSURL *)aURL
-//{
-//  if ([[aURL pathExtension] isEqualToString:@"texnicle"]) {
-//    return NO;
-//  }
-//  
-//  if ([self.project fileWithPathOnDisk:[aURL path]] != nil) {
-//    return NO;
-//  }
-//  
-//  return YES;
-//}
 
+#pragma mark -
+#pragma mark Spell Checker View Delegate
+
+- (NSArray*)filesToSpellCheck
+{
+  NSMutableArray *files = [NSMutableArray array];
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        [files addObject:file];
+      }
+    }    
+  }
+  
+  return files;
+}
+
+- (BOOL)shouldPerformSpellCheck
+{
+  // if spelling tab is selected....
+  if (selectedControlsTab == 6) {
+    return YES;
+  }
+  return NO;
+}
+
+- (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)file
+{
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // replace the word
+  [self.texEditorViewController.textView replaceRange:aRange withText:correction scrollToVisible:YES animate:YES];
+  
+}
+
+- (void) highlightMisspelledWord:(NSString *)word atRange:(NSRange)aRange inFile:(FileEntity*)file
+{
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // highlight the word
+  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+  
+}
+
+
+- (void) dictionaryDidLearnNewWord
+{
+  [self.texEditorViewController.textView checkSpelling:self];
+}
 
 @end
