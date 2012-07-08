@@ -147,6 +147,7 @@ extern NSString * const TPDefaultEncoding;
 extern NSString * const TPSyntaxColorsChangedNotification;
 extern NSString * const TPFileItemTextStorageChangedNotification;
 extern NSString * const TPBookmarkDidUpdateNotification;
+extern NSString * const TPSpellingLanguageChangedNotification;
 
 // String constants
 extern NSString * const TPDocumentWasRenamed;
