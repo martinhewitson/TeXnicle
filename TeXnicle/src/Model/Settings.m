@@ -30,6 +30,8 @@
 #import "externs.h"
 
 @implementation Settings
+
+@dynamic language;
 @dynamic engineName;
 @dynamic doBibtex;
 @dynamic doPS2PDF;
@@ -39,6 +41,26 @@
 @dynamic showStatusBar;
 
 - (void) awakeFromInsert
+{  
+  NSLog(@"Awake from insert: set language to %@", self.language);
+  [self performSelector:@selector(setupSettings) withObject:nil afterDelay:0];
+}
+
+- (void) awakeFromFetch
+{
+  [self performSelector:@selector(updateSettings) withObject:nil afterDelay:0];
+}
+
+
+- (void) updateSettings
+{
+  if (self.language == nil) {
+    self.language = [[NSSpellChecker sharedSpellChecker] language];
+    NSLog(@"Update settings: set language to %@", self.language);
+  }
+}
+
+- (void)setDefaultSettings
 {
   // setup defaults
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -48,7 +70,7 @@
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
   self.nCompile = [defaults valueForKey:TPNRunsPDFLatex];
   self.openConsole = [defaults valueForKey:OpenConsoleOnTypeset];
-
+  self.language = [[NSSpellChecker sharedSpellChecker] language];
 }
 
 @end

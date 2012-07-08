@@ -33,6 +33,7 @@
 @interface Settings : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSString * engineName;
 @property (nonatomic, retain) NSNumber * doBibtex;
 @property (nonatomic, retain) NSNumber * doPS2PDF;
