@@ -15,7 +15,7 @@
 @synthesize words;
 @synthesize needsUpdate;
 
-- (id) initWithFile:(FileEntity*)aFile
+- (id) initWithFile:(id)aFile
 {
   self = [super init];
   if (self) {
@@ -50,7 +50,13 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = [self.file name];
+  NSString *text = nil;
+  if ([file isKindOfClass:[FileEntity class]]) {
+    text = [self.file name];
+  } else {
+    text = [self.file lastPathComponent];
+  }
+  
   if ([text length]==0) {
     text = @"<blank>";
   }
@@ -88,7 +94,13 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = [self.file name];
+  NSString *text = nil;
+  if ([file isKindOfClass:[FileEntity class]]) {
+    text = [self.file name];
+  } else {
+    text = [self.file lastPathComponent];
+  }
+  
   if ([text length]==0) {
     text = @"<blank>";
   }

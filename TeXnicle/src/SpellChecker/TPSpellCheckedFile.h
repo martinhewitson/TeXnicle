@@ -11,18 +11,18 @@
 
 @interface TPSpellCheckedFile : NSObject {
   
-  FileEntity *file;
+  id file;
   NSDate *lastCheck;
   NSArray *words;
   BOOL needsUpdate;
 }
 
-@property (retain) FileEntity *file;
+@property (retain) id file;
 @property (retain) NSDate *lastCheck;
 @property (retain) NSArray *words;
 @property (assign) BOOL needsUpdate;
 
-- (id) initWithFile:(FileEntity*)aFile;
+- (id) initWithFile:(id)aFile;
 - (NSString*)displayString;
 
 @end
