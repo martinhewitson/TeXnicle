@@ -36,7 +36,7 @@
 - (void) awakeFromNib
 {
   [self.outlineBuilder buildOutline];
-  [self expandAllSections:self];
+  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0];
   
   [self.outlineBuilder startTimer];
   
@@ -67,18 +67,18 @@
   return nil;
 }
 
-- (id) fileWithPath:(NSString*)path
-{
-  if (self.delegate) {
-    return [self.delegate fileWithPath:path];
-  }
-  
-  return nil;
-}
-
 - (void) didComputeNewSections
 { 
-  [self.outlineView reloadData];
+  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+}
+
+- (BOOL) shouldGenerateOutline
+{
+  if (self.delegate) {
+    return [self.delegate shouldGenerateOutline];
+  }
+
+  return NO;
 }
 
 #pragma mark -
@@ -189,6 +189,7 @@
   NSInteger maxOutlineDepth = [sender integerValue];
   [self.delegate didSetMaxOutlineDepthTo:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;
+  [self.outlineBuilder buildOutline];
   [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0];
 }
 

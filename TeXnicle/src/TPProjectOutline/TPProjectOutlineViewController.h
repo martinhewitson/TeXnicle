@@ -13,11 +13,10 @@
 
 - (id) mainFile;
 - (NSString*) textForFile:(id)aFile;
-- (id) fileWithPath:(NSString*)path;
 - (NSNumber*) maxOutlineDepth;
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth;
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile;
-
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
+- (BOOL) shouldGenerateOutline;
 @end
 
 
