@@ -84,8 +84,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @synthesize library;
 @synthesize libraryContainerView;
 
+@synthesize outlineViewController;
+@synthesize outlineViewContainer;
+
 @synthesize engineSettingsController;
 @synthesize prefsContainerView;
+
+@synthesize spellcheckerViewController;
+@synthesize spellCheckerContainerView;
 
 @synthesize pdfViewer;
 
@@ -240,6 +246,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
+  // setup outline view  
+  self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
+  [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
+  [self.outlineViewContainer addSubview:self.outlineViewController.view];
+  
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
   [self.pdfViewerController.view setFrame:[self.pdfViewContainer bounds]];
@@ -263,6 +274,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.library.view setFrame:[self.libraryContainerView bounds]];
   [self.libraryContainerView addSubview:self.library.view];
   
+  // setup spellchecker
+  self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
+  [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
+  [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];  
   
   // set up engine settings
   [self setupSettings];
@@ -431,7 +446,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {		
   // stop filemonitor from reaching us
   self.fileMonitor.delegate = nil;
-  outlineController.delegate = nil;
   
   if (![self inVersionsMode]) {
     if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
@@ -535,6 +549,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.liveUpdateTimer invalidate];
   self.liveUpdateTimer = nil;
+  self.spellcheckerViewController = nil;
   self.fileLoadDate = nil;
   self.fileMonitor = nil;
   self.engineManager = nil;
@@ -2063,8 +2078,30 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];  
 }
 
+
+
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
+
+
+- (id) mainFile
+{
+  return [[self fileURL] path];
+}
+
+- (NSString*) textForFile:(id)aFile
+{
+  if ([[self mainFile] isEqual:aFile]) {
+    return [self.texEditorViewController.textView string];
+  }
+  
+  return @"";
+}
+
+- (void) didSetMaxOutlineDepthTo:(NSInteger)depth
+{
+  self.maxOutlineViewDepth = [NSNumber numberWithInteger:depth];
+}
 
 - (NSNumber*) maxOutlineDepth
 {
@@ -2088,9 +2125,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 }
 
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile
-{	  
-  
-  if (aFile == nil || [[aFile path] isEqualToString:[[self fileURL] path]]) {
+{	    
+  if (aFile == nil || [aFile isEqualToString:[[self fileURL] path]]) {
     
     // Now highlight the search term in that 
     [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
@@ -2108,7 +2144,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     __block id forwardFile = aFile;
     
     [[NSDocumentController sharedDocumentController]
-      openDocumentWithContentsOfURL:aFile
+      openDocumentWithContentsOfURL:[NSURL fileURLWithPath:aFile]
       display:YES
       completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
         if (document) {
@@ -2186,6 +2222,59 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                                                            forKey:NSCharacterEncodingDocumentAttribute];
   NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options] autorelease];
   [self setDocumentData:attStr];
+}
+
+#pragma mark -
+#pragma mark Spell Checker View Delegate
+
+- (BOOL) performSimpleSpellCheck
+{
+  return YES;
+}
+
+- (NSString*)fileToCheck
+{
+  return [[self fileURL] path];
+}
+
+- (NSString*) stringToCheck
+{
+  return [self.texEditorViewController.textView string];
+}
+
+- (BOOL)shouldPerformSpellCheck
+{
+  // if spelling tab is selected....
+  if ([self.tabbarController indexOfSelectedTab] == 6) {
+    return YES;
+  }
+  return NO;
+}
+
+- (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)file
+{  
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // replace the word
+  [self.texEditorViewController.textView replaceRange:aRange withText:correction scrollToVisible:YES animate:YES];
+  
+}
+
+- (void) highlightMisspelledWord:(NSString *)word atRange:(NSRange)aRange inFile:(FileEntity*)file
+{
+  // expand all folded code
+  [self.texEditorViewController.textView expandAll:self];
+  
+  // highlight the word
+  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
+  
+}
+
+
+- (void) dictionaryDidLearnNewWord
+{
+  [self.texEditorViewController.textView checkSpelling:self];
 }
 
 

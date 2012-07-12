@@ -37,15 +37,16 @@
 #import "MHControlsTabBarController.h"
 #import "LibraryController.h"
 #import "PaletteController.h"
-#import "ProjectOutlineController.h"
 #import "PDFViewer.h"
 #import "TeXTextView.h"
 #import "TPTemplateEditor.h"
 #import "TPConsoleViewController.h"
+#import "TPProjectOutlineViewController.h"
+#import "TPSpellCheckerListingViewController.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, ProjectOutlineControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -78,6 +79,9 @@
   TeXEditorViewController *texEditorViewController;
   NSView *texEditorContainer;
   
+  TPSpellCheckerListingViewController *spellcheckerViewController;
+  NSView *spellCheckerContainerView;
+  
   BOOL openPDFAfterBuild;
   
   NSDate *fileLoadDate;
@@ -96,6 +100,9 @@
   
   NSView *pdfViewContainer;
   PDFViewerController *pdfViewerController;
+  
+  TPProjectOutlineViewController *outlineViewController;
+  NSView *outlineViewContainer;
   
   BOOL shouldHighlightFirstMatch;
   
@@ -119,8 +126,6 @@
   LibraryController *library;
   NSView *libraryContainerView;
   NSView *prefsContainerView;
-  
-  IBOutlet ProjectOutlineController *outlineController;
   
   IBOutlet NSView *controlsViewContainer;
   
@@ -160,8 +165,14 @@
 @property (retain) TPConsoleViewController *embeddedConsoleViewController;
 @property (assign) IBOutlet NSView *embeddedConsoleContainer;
 
+@property (retain) TPProjectOutlineViewController *outlineViewController;
+@property (assign) IBOutlet NSView *outlineViewContainer;
+
 @property (retain) TPStatusViewController *statusViewController;
 @property (assign) IBOutlet NSView *statusViewContainer;
+
+@property (retain) TPSpellCheckerListingViewController *spellcheckerViewController;
+@property (assign) IBOutlet NSView *spellCheckerContainerView;
 
 @property (retain) NSMutableDictionary *settings;
 @property (retain) TPEngineSettingsController *engineSettingsController;
