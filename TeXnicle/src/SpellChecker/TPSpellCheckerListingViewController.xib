@@ -54,6 +54,7 @@
 								<string key="NSFrame">{{10, 12}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="377751880"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="546863002"/>
 								<string key="NSReuseIdentifierKey">_NS:926</string>
 								<int key="NSpiFlags">28938</int>
 								<double key="NSMaxValue">100</double>
@@ -90,7 +91,7 @@
 						<string key="NSFrame">{{0, -1}, {240, 40}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="546863002"/>
+						<reference key="NSNextKeyView" ref="854201665"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -98,13 +99,41 @@
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">266</int>
 						<array class="NSMutableArray" key="NSSubviews">
+							<object class="NSButton" id="314262074">
+								<reference key="NSNextResponder" ref="398768181"/>
+								<int key="NSvFlags">268</int>
+								<string key="NSFrame">{{89, 6}, {47, 19}}</string>
+								<reference key="NSSuperview" ref="398768181"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="323903320"/>
+								<string key="NSReuseIdentifierKey">_NS:22</string>
+								<bool key="NSEnabled">YES</bool>
+								<object class="NSButtonCell" key="NSCell" id="981291253">
+									<int key="NSCellFlags">-2080244224</int>
+									<int key="NSCellFlags2">134348800</int>
+									<string key="NSContents">Learn</string>
+									<reference key="NSSupport" ref="26"/>
+									<string key="NSCellIdentifier">_NS:22</string>
+									<reference key="NSControlView" ref="314262074"/>
+									<int key="NSButtonFlags">-2036055809</int>
+									<int key="NSButtonFlags2">163</int>
+									<object class="NSCustomResource" key="NSNormalImage" id="916339862">
+										<string key="NSClassName">NSImage</string>
+										<string key="NSResourceName">NSActionTemplate</string>
+									</object>
+									<string key="NSAlternateContents"/>
+									<string key="NSKeyEquivalent"/>
+									<int key="NSPeriodicDelay">400</int>
+									<int key="NSPeriodicInterval">75</int>
+								</object>
+							</object>
 							<object class="NSButton" id="944513793">
 								<reference key="NSNextResponder" ref="398768181"/>
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{8, 6}, {73, 19}}</string>
 								<reference key="NSSuperview" ref="398768181"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="323903320"/>
+								<reference key="NSNextKeyView" ref="314262074"/>
 								<string key="NSReuseIdentifierKey">_NS:22</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="550940223">
@@ -116,10 +145,7 @@
 									<reference key="NSControlView" ref="944513793"/>
 									<int key="NSButtonFlags">-2035531521</int>
 									<int key="NSButtonFlags2">163</int>
-									<object class="NSCustomResource" key="NSNormalImage">
-										<string key="NSClassName">NSImage</string>
-										<string key="NSResourceName">NSActionTemplate</string>
-									</object>
+									<reference key="NSNormalImage" ref="916339862"/>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
 									<int key="NSPeriodicDelay">400</int>
@@ -388,6 +414,22 @@
 					<int key="connectionID">94</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">learnWord:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="314262074"/>
+					</object>
+					<int key="connectionID">99</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">learnButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="314262074"/>
+					</object>
+					<int key="connectionID">100</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="469592696"/>
@@ -487,6 +529,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="323903320"/>
 							<reference ref="944513793"/>
+							<reference ref="314262074"/>
 						</array>
 						<reference key="parent" ref="1005"/>
 					</object>
@@ -543,6 +586,19 @@
 						<reference key="object" ref="854201665"/>
 						<reference key="parent" ref="377751880"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">95</int>
+						<reference key="object" ref="314262074"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="981291253"/>
+						</array>
+						<reference key="parent" ref="398768181"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">96</int>
+						<reference key="object" ref="981291253"/>
+						<reference key="parent" ref="314262074"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -568,12 +624,15 @@
 				<string key="86.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="87.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="95.CustomClassName">HHValidatedButton</string>
+				<string key="95.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="96.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">94</int>
+			<int key="maxID">100</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -606,6 +665,7 @@
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="correctButton">HHValidatedButton</string>
+						<string key="learnButton">HHValidatedButton</string>
 						<string key="outlineView">NSOutlineView</string>
 						<string key="progressIndicator">NSProgressIndicator</string>
 						<string key="revealButton">HHValidatedButton</string>
@@ -613,6 +673,10 @@
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="correctButton">
 							<string key="name">correctButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="learnButton">
+							<string key="name">learnButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineView">

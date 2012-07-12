@@ -37,6 +37,7 @@
   
   HHValidatedButton *correctButton;
   HHValidatedButton *revealButton;
+  HHValidatedButton *learnButton;
   
   NSProgressIndicator *progressIndicator;
 }
@@ -44,6 +45,7 @@
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) IBOutlet HHValidatedButton *correctButton;
 @property (assign) IBOutlet HHValidatedButton *revealButton;
+@property (assign) IBOutlet HHValidatedButton *learnButton;
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) id<TPSpellCheckerListingDelegate> delegate;
 @property (retain) NSTimer *spellCheckTimer;

@@ -25,6 +25,7 @@
 @synthesize outlineView;
 @synthesize revealButton;
 @synthesize correctButton;
+@synthesize learnButton;
 @synthesize progressIndicator;
 
 - (id) initWithDelegate:(id<TPSpellCheckerListingDelegate>)aDelegate
@@ -64,12 +65,7 @@
   
   
   [self setupSpellChecker];
-  if ([self performSimpleSpellCheck]) {
-    [self simpleSpellCheck];
-  } else {
-    [self checkSpellingTimerFired];
-  }
-  
+  [self performSelector:@selector(performSpellCheck) withObject:nil afterDelay:0];
 
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
@@ -77,6 +73,17 @@
          selector:@selector(updateAllLists) 
              name:TPSpellingLanguageChangedNotification
            object:nil];
+  
+}
+
+- (IBAction)learnWord:(id)sender
+{  
+  TPMisspelledWord *word = [self selectedWord];
+  
+  [[NSSpellChecker sharedSpellChecker] learnWord:word.word];
+  word.parent.needsUpdate = YES;
+  [self performSpellCheck];
+  [self dictionaryDidLearnNewWord];
   
 }
 
@@ -122,7 +129,8 @@
     
     [[NSSpellChecker sharedSpellChecker] learnWord:word.word];
     word.parent.needsUpdate = YES;
-    [self checkSpellingTimerFired];
+    [self performSpellCheck];
+    [self dictionaryDidLearnNewWord];
     
   } else {
   
@@ -139,9 +147,21 @@
 	
 	[theMenu setAutoenablesItems:NO];
 	
-  
+  NSLog(@"Target %@", [target class]);
   
 	NSMenuItem *menuItem;
+  
+  if (target == self.outlineView) {
+    menuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Learn \u201c%@\u201d", word.word]
+                                          action:@selector(selectedCorrection:)
+                                   keyEquivalent:@""];
+    [menuItem setTarget:target];
+    [theMenu addItem:menuItem];
+    [menuItem release];
+    
+    [theMenu addItem:[NSMenuItem separatorItem]];
+  }
+  
   
   menuItem = [[NSMenuItem alloc] initWithTitle:@"Possible Corrections"
                                         action:nil
@@ -152,14 +172,6 @@
   
   [theMenu addItem:[NSMenuItem separatorItem]];
   
-  menuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Learn \u201c%@\u201d", word.word]
-                                        action:@selector(selectedCorrection:)
-                                 keyEquivalent:@""];
-  [menuItem setTarget:target];
-  [theMenu addItem:menuItem];
-  [menuItem release];
-  
-  [theMenu addItem:[NSMenuItem separatorItem]];
   
   NSArray *corrections = word.corrections;
   
@@ -221,7 +233,7 @@
     checkedFile.needsUpdate = YES;
   }
   
-  [self checkSpellingTimerFired];
+  [self performSpellCheck];
 }
 
 - (IBAction)forceUpdate:(id)sender
@@ -240,14 +252,14 @@
   if ([self performSimpleSpellCheck]) {
     self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                             target:self
-                                                          selector:@selector(simpleSpellCheck) 
+                                                          selector:@selector(performSpellCheck) 
                                                           userInfo:nil
                                                            repeats:YES];
     
   } else {
     self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                             target:self
-                                                          selector:@selector(checkSpellingTimerFired) 
+                                                          selector:@selector(performSpellCheck) 
                                                           userInfo:nil
                                                            repeats:YES];
     
@@ -256,10 +268,19 @@
   
 }
 
+- (void) performSpellCheck
+{
+  if ([self performSimpleSpellCheck]) {
+    [self simpleSpellCheck];
+  } else {
+    [self checkSpellingTimerFired]; 
+  }
+   
+}
+
 - (void) simpleSpellCheck
 {
-  
-  if (checkingFiles > 0) {
+  if ([self shouldPerformSpellCheck] == NO) {
     return;
   }
   
@@ -281,7 +302,6 @@
     checkedFile = [self checkedFileForFile:[self fileToCheck]];
     if (checkedFile == nil) {
       checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
-      NSLog(@"Create checked file %@", checkedFile);
       addFile = YES;
     }
     
@@ -297,14 +317,10 @@
                    checkedFile.needsUpdate = NO;
                    if (addFile) {
                      [self.checkedFiles addObject:checkedFile];
-                     [checkedFile release];
                    }
                    [self.outlineView reloadData];
-                   checkingFiles--;
                    
-                   if (checkingFiles == 0) {
-                     [self.progressIndicator stopAnimation:self];
-                   }
+                   [self.progressIndicator stopAnimation:self];
                    
                  });
 }
@@ -312,6 +328,10 @@
 - (void) checkSpellingTimerFired
 {
   if (checkingFiles > 0) {
+    return;
+  }
+  
+  if ([self shouldPerformSpellCheck] == NO) {
     return;
   }
   
@@ -648,6 +668,12 @@
   }
   
   if (anItem == self.correctButton){
+    if ([self selectedWord]) {
+      return YES;
+    }
+  }
+  
+  if (anItem == self.learnButton){
     if ([self selectedWord]) {
       return YES;
     }
