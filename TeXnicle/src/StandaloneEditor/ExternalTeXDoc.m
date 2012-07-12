@@ -210,6 +210,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         if (self.maxOutlineViewDepth == nil) {
           self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
         }
+        [self.outlineViewController setOutlineDepth:[self.maxOutlineViewDepth integerValue]];
         
         
         // pdf view visible rect
@@ -2274,7 +2275,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) dictionaryDidLearnNewWord
 {
-  [self.texEditorViewController.textView checkSpelling:self];
 }
 
 
