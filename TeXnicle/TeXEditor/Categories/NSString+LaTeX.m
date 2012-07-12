@@ -368,6 +368,11 @@
   if ([self length] == 0) {
     return NO;
   }
+  
+  if (anIndex < 0 || anIndex >= [self length]) {
+    return NO;
+  }
+  
   NSRange lineRange = [self lineRangeForRange:NSMakeRange(anIndex, 0)];
 //  NSLog(@"Got line range %@", NSStringFromRange(lineRange));
   
