@@ -13,8 +13,8 @@
 
 - (id) mainFile;
 - (NSString*) textForFile:(id)aFile;
-- (id) fileWithPath:(NSString*)path;
 - (void) didComputeNewSections;
+- (BOOL) shouldGenerateOutline;
 
 @end
 

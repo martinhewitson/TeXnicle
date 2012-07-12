@@ -13,6 +13,7 @@
 #import "FileEntity.h"
 #import "externs.h"
 #import "TPFileEntityMetadata.h"
+#import "NSString+SectionsOutline.h"
 
 @implementation TPOutlineBuilder
 
@@ -83,27 +84,57 @@
 
 - (void) buildOutline
 {
+  if ([self.delegate shouldGenerateOutline] == NO && [self.sections count] > 0) {
+    return;
+  }
   
   // get the main file from the delegate
-  FileEntity *file = [self.delegate mainFile];
-  
-  [file generateSectionsForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] forceUpdate:NO];
+  id file = [self.delegate mainFile];
+  if ([file isKindOfClass:[FileEntity class]]) {    
+    [file generateSectionsForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] forceUpdate:NO];
+  } else {
+    // get text
+    NSString *text = [self.delegate textForFile:file];
+
+    dispatch_queue_t queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
+    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
+    dispatch_set_target_queue(queue,priority);
+    
+    __block NSArray *newSections;
+    dispatch_sync(queue, ^{      
+      newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
+    });
+        
+    // send notification of section update
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:file, @"file", newSections, @"sections", nil];
+    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                      object:self
+                    userInfo:dict];
+  }
   
 }
 
 - (void) handleFileMetadataSectionsUpdateNotifcation:(NSNotification*)aNote
 {
-  // get the metadata object that issued this notification
-  TPFileEntityMetadata *metadata = [aNote object];
   
-  // the file
-  FileEntity *file = metadata.parent;
-  if (file != [self.delegate mainFile]) {
-    return;
+  // get the user info
+  NSDictionary *dict = [aNote userInfo];
+    
+  // the file from the dictionary
+  id file = [dict valueForKey:@"file"];
+  if ([file isKindOfClass:[FileEntity class]]) {
+    if (file != [self.delegate mainFile]) {
+      return;
+    }
+  } else {
+    if ([file isEqualToString:[self.delegate mainFile]] == NO) {
+      return;
+    }
   }
   
-  // get the sections from the metadata
-  NSArray *newSections = metadata.sections;
+  // get the sections from the dictionary
+  NSArray *newSections = [dict valueForKey:@"sections"];
   
   // remove existing sections for this file
   [self.sections removeAllObjects];
@@ -148,7 +179,7 @@
   NSColor *color;
   
   color = [NSColor colorWithDeviceWhite:0.0 alpha:1.0];
-  TPSectionTemplate *document = [TPSectionTemplate documentSectionTemplateWithName:@"document" 
+  TPSectionTemplate *document = [TPSectionTemplate documentSectionTemplateWithName:@"begin" 
                                                                                tag:@"\\begin{document}" 
                                                                             parent:nil 
                                                                              color:color
