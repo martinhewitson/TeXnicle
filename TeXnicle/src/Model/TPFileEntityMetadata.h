@@ -7,20 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FileEntity.h"
+
+@class TPFileEntityMetadata;
+
+@protocol TPFileEntityMetadataDelegate <NSObject>
+
+- (NSString*) text;
+
+@end
 
 @interface TPFileEntityMetadata : NSObject {
   NSArray *sections;
   NSDate *lastUpdateOfSections;
-  FileEntity *parent;
+  id parent;
   dispatch_queue_t queue;
 }
 
-@property (assign) FileEntity *parent;
+@property (assign) id parent;
 @property (retain) NSArray *sections;
 @property (retain) NSDate *lastUpdateOfSections;
 
-- (id) initWithParent:(FileEntity*)aFile;
+- (id) initWithParent:(id)aFile;
 - (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 

@@ -36,7 +36,6 @@
 #import "MHFileReader.h"
 #import "NSString+LaTeX.h"
 #import "NSDictionary+TeXnicle.h"
-#import "TPFileEntityMetadata.h"
 
 @implementation FileEntity
 
@@ -523,5 +522,14 @@
   [self.metadata generateSectionsForTypes:templates forceUpdate:force];
 }
 
+- (NSString*)text
+{
+  return [self workingContentString];
+}
+
+- (TPFileEntityMetadata*)metadataForFileWithName:(NSString *)file
+{
+  return [[self.project fileWithPath:file] metadata];
+}
 
 @end

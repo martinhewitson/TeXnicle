@@ -27,12 +27,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ProjectItemEntity.h"
+#import "TPFileEntityMetadata.h"
 
-@class TPFileEntityMetadata;
 @class FileDocument;
 @class Bookmark;
 
-@interface FileEntity : ProjectItemEntity {
+@interface FileEntity : ProjectItemEntity <TPFileEntityMetadataDelegate> {
 
 	FileDocument *document;
 	BOOL _hasEdits;
