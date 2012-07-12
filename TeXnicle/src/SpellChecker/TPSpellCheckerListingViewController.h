@@ -19,6 +19,10 @@
 - (void)dictionaryDidLearnNewWord;
 - (NSArray*)filesToSpellCheck;
 
+- (BOOL) performSimpleSpellCheck;
+- (NSString*)stringToCheck;
+- (NSString*)fileToCheck;
+
 @end
 
 @interface TPSpellCheckerListingViewController : NSViewController <NSUserInterfaceValidations, TPSpellCheckerListingDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {

@@ -64,7 +64,11 @@
   
   
   [self setupSpellChecker];
-  [self checkSpellingTimerFired];
+  if ([self performSimpleSpellCheck]) {
+    [self simpleSpellCheck];
+  } else {
+    [self checkSpellingTimerFired];
+  }
   
 
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -233,12 +237,76 @@
     self.spellCheckTimer = nil;
   }
   
-  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                          target:self
-                                                        selector:@selector(checkSpellingTimerFired) 
-                                                        userInfo:nil
-                                                         repeats:YES];
+  if ([self performSimpleSpellCheck]) {
+    self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                            target:self
+                                                          selector:@selector(simpleSpellCheck) 
+                                                          userInfo:nil
+                                                           repeats:YES];
+    
+  } else {
+    self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                            target:self
+                                                          selector:@selector(checkSpellingTimerFired) 
+                                                          userInfo:nil
+                                                           repeats:YES];
+    
+  }
   
+  
+}
+
+- (void) simpleSpellCheck
+{
+  
+  if (checkingFiles > 0) {
+    return;
+  }
+  
+  //            NSLog(@"+ Checking file %@", [file name]);
+  checkingFiles++;
+  [self.progressIndicator startAnimation:self];
+  
+  __block TPSpellCheckedFile *checkedFile = nil;
+  __block BOOL addFile = NO;
+  __block NSArray *words = nil;
+  
+  dispatch_sync(queue, ^{						
+        
+    NSString *string = [self stringToCheck];     
+    if (string == nil) {
+      return;
+    }
+    
+    checkedFile = [self checkedFileForFile:[self fileToCheck]];
+    if (checkedFile == nil) {
+      checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
+      NSLog(@"Create checked file %@", checkedFile);
+      addFile = YES;
+    }
+    
+    words = [self listOfMisspelledWordsFromString:string forFile:checkedFile];
+    
+  });
+
+  dispatch_async(dispatch_get_main_queue(),
+                 // block
+                 ^{
+                   checkedFile.lastCheck = [NSDate date];
+                   checkedFile.words = words;
+                   checkedFile.needsUpdate = NO;
+                   if (addFile) {
+                     [self.checkedFiles addObject:checkedFile];
+                     [checkedFile release];
+                   }
+                   [self.outlineView reloadData];
+                   checkingFiles--;
+                   
+                   if (checkingFiles == 0) {
+                     [self.progressIndicator stopAnimation:self];
+                   }
+                   
+                 });
 }
 
 - (void) checkSpellingTimerFired
@@ -314,11 +382,19 @@
 //  NSLog(@"%@", self.lists);
 }
 
-- (TPSpellCheckedFile*)checkedFileForFile:(FileEntity*)file
+- (TPSpellCheckedFile*)checkedFileForFile:(id)file
 {
-  for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
-    if (checkedFile.file == file) {
-      return checkedFile;
+  if ([file isKindOfClass:[FileEntity class]]) {
+    for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
+      if (checkedFile.file == file) {
+        return checkedFile;
+      }
+    }
+  } else {
+    for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
+      if ([checkedFile.file isEqualToString:file]) {
+        return checkedFile;
+      }
     }
   }
   
@@ -329,13 +405,16 @@
 {
   NSString *string = [file workingContentString];     
   
+  __block BOOL addFile = NO;
+  __block TPSpellCheckedFile *checkedFile = nil;
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    checkedFile = [self checkedFileForFile:file];
+    if (checkedFile == nil) {
+      checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:file] autorelease];
+      addFile = YES;
+    }
+  });
   
-  TPSpellCheckedFile *checkedFile = [self checkedFileForFile:file];
-  BOOL addFile = NO;
-  if (checkedFile == nil) {
-    checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:file] autorelease];
-    addFile = YES;
-  }
   
   NSArray *words = [self listOfMisspelledWordsFromString:string forFile:checkedFile];
   
@@ -401,6 +480,30 @@
 
 #pragma mark -
 #pragma mark Delegate
+
+- (BOOL) performSimpleSpellCheck
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(performSimpleSpellCheck)]) {
+    return [self.delegate performSimpleSpellCheck];
+  }
+  return NO;
+}
+
+- (NSString*)stringToCheck
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(stringToCheck)]) {
+    return [self.delegate stringToCheck];
+  }
+  return nil;
+}
+
+- (NSString*)fileToCheck
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(fileToCheck)]) {
+    return [self.delegate fileToCheck];
+  }
+  return nil;
+}
 
 - (NSArray*)filesToSpellCheck
 {
