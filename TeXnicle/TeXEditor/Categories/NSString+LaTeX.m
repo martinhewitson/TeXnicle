@@ -57,12 +57,12 @@
 
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms
 {
-  //  NSLog(@"Checking %@", self);
-  //  NSLog(@"against: %@", terms);
+//    NSLog(@"Checking %@", self);
+//    NSLog(@"against: %@", terms);
   NSInteger idx = 0;
   for (NSString *term in terms) {
     NSString *searchTerm = [NSString stringWithFormat:@"%@", term];
-    //    NSLog(@"   checking %@", searchTerm);
+        //NSLog(@"   checking %@", searchTerm);
     if ([self beginsWith:searchTerm]) {
       return idx;
     }
@@ -317,6 +317,24 @@
   return [[str copy] autorelease];
 }
 
+- (NSString*)command
+{
+  if ([self characterAtIndex:0] != '\\') {
+    return nil;
+  }
+  
+  NSInteger start = 0;
+  while (start < [self length]) {
+    unichar c = [self characterAtIndex:start];
+    if (c == '{' || 
+        [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c] ||
+        [[NSCharacterSet newlineCharacterSet] characterIsMember:c]) {
+      return [self substringWithRange:NSMakeRange(0, start)];
+    }
+    start++;
+  }
+  return nil;
+}
 
 - (NSString*)argument
 {
@@ -345,15 +363,21 @@
 
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar
 {
+//  NSLog(@"Checking for comment before index %d", anIndex);
+  
   if ([self length] == 0) {
     return NO;
   }
+  NSRange lineRange = [self lineRangeForRange:NSMakeRange(anIndex, 0)];
+//  NSLog(@"Got line range %@", NSStringFromRange(lineRange));
   
-  NSRange commRange = [self rangeOfString:commChar];
+  NSString *line = [self substringWithRange:lineRange];
+  
+  NSRange commRange = [line rangeOfString:commChar];
   if (commRange.location != NSNotFound) {
-    if (commRange.location < anIndex) {
+    if (commRange.location < anIndex-lineRange.location) {
       if (commRange.location > 0) {
-        if ([self characterAtIndex:commRange.location-1] != '\\') {
+        if ([line characterAtIndex:commRange.location-1] != '\\') {
           return YES;
         }
       }
