@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class FileEntity;
 @class TPSectionTemplate;
 
 @interface TPSection : NSObject {
@@ -16,7 +15,7 @@
   TPSection *parent;
   NSArray *subsections;
   NSUInteger startIndex;
-  FileEntity *file;
+  id file;
   TPSectionTemplate *type;
   NSString *name;
   
@@ -25,7 +24,7 @@
 @property (assign) TPSection *parent;
 @property (retain) NSArray *subsections;
 @property (assign) NSUInteger startIndex;
-@property (assign) FileEntity *file;
+@property (assign) id file;
 @property (retain) TPSectionTemplate *type;
 @property (copy) NSString *name;
 

@@ -8,6 +8,7 @@
 
 #import "TPSection.h"
 #import "TPSectionTemplate.h"
+#import "FileEntity.h"
 
 @implementation TPSection
 
@@ -36,8 +37,12 @@
     return NO;
   }
   
-  if (self.file != s.file) {
-    return NO;
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    if (self.file != s.file) {
+      return NO;
+    }
+  } else {
+    return [self.file isEqualToString:s.file];
   }
   
   if (self.type != s.type) {
@@ -64,9 +69,17 @@
   return self;
 }
 
+- (NSString*)filename
+{
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    return [self.file valueForKey:@"name"];
+  }
+  return self.file;
+}
+
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", self.parent.name, [self.file valueForKey:@"name"], self.type.tag, self.name];
+  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", self.parent.name, [self filename], self.type.tag, self.name];
 }
 
 - (NSAttributedString*)selectedDisplayName
@@ -111,7 +124,7 @@
   if (showDetails) {
     // type, file
     [att appendAttributedString:[[[NSAttributedString alloc] initWithString:@"  "] autorelease]];
-    NSString *typeFileStr = [NSString stringWithFormat:@"(%@, %@)", self.type.name, [self.file name]];
+    NSString *typeFileStr = [NSString stringWithFormat:@"(%@, %@)", self.type.name, [self filename]];
     NSMutableAttributedString *typeStr = [[[NSMutableAttributedString alloc] initWithString:typeFileStr] autorelease]; 
     [typeStr addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [typeStr length])];
     [typeStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] range:NSMakeRange(0, [typeStr length])];
