@@ -74,7 +74,7 @@
   if ([self.file isKindOfClass:[FileEntity class]]) {
     return [self.file valueForKey:@"name"];
   }
-  return self.file;
+  return [self.file lastPathComponent];
 }
 
 - (NSString*)description
