@@ -64,9 +64,6 @@
 
 @synthesize statusTimer;
 
-@synthesize documentOutlineViewcontroller;
-@synthesize documentOutlineViewContainer;
-
 @synthesize createFileButton;
 @synthesize createFolderButton;
 
@@ -80,6 +77,9 @@
 
 @synthesize bookmarkManager;
 @synthesize bookmarkContainerView;
+
+@synthesize outlineViewContainer;
+@synthesize outlineViewController;
 
 @synthesize pdfViewerController;
 @synthesize project;
@@ -130,14 +130,12 @@
 {
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [projectOutlineController deactivate];
   
   [self.statusTimer invalidate];
   self.statusTimer = nil;
  
   self.statusViewController = nil;
-//  self.documentOutlineViewcontroller.delegate = nil;
-//  self.documentOutlineViewcontroller = nil;
+  self.outlineViewController = nil;
   self.bookmarkManager = nil;
   self.palette = nil;
   self.project = nil;  
@@ -321,10 +319,16 @@
   [self.splitview setPosition:_rightDividerPostion ofDividerAtIndex:1];
 }
 
+
+
 - (void) setupDocument
 {
 //  NSLog(@"setupDocument");
-  
+
+  self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
+  [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
+  [self.outlineViewContainer addSubview:self.outlineViewController.view];
+   
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
@@ -411,11 +415,6 @@
   [bookmarkView setFrame:[self.bookmarkContainerView bounds]];
   [self.bookmarkContainerView addSubview:bookmarkView];
 //  NSLog(@"Setup bookmark manager");
-  
-  // set up document outline view controller
-//  self.documentOutlineViewcontroller = [[[TPDocumentOutlineViewController alloc] initWithDelegate:self] autorelease];
-//  [self.documentOutlineViewcontroller.view setFrame:[self.documentOutlineViewContainer bounds]];
-//  [self.documentOutlineViewContainer addSubview:self.documentOutlineViewcontroller.view];
   
   // setup engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
@@ -1815,10 +1814,31 @@
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
+- (id)mainFile
+{
+  return self.project.mainFile;
+}
+
+- (NSString*)textForFile:(id)aFile
+{
+  return [aFile workingContentString];
+}
+
+- (id)fileWithPath:(NSString *)path
+{
+  return [self.project fileWithPath:path];
+}
+
 - (NSNumber*) maxOutlineDepth
 {
   return self.project.uiSettings.maxOutlineDepth;
 }
+
+- (void) didSetMaxOutlineDepthTo:(NSInteger)depth
+{
+  self.project.uiSettings.maxOutlineDepth = [NSNumber numberWithInteger:depth];
+}
+
 
 - (BOOL) shouldGenerateOutline
 {
@@ -3637,5 +3657,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   [self.texEditorViewController.textView checkSpelling:self];
 }
+
+
+
 
 @end

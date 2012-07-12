@@ -29,7 +29,6 @@
 #import <Quartz/Quartz.h>
 #import "OpenDocumentsManager.h"
 #import "TeXEditorViewController.h"
-#import "ProjectOutlineController.h"
 #import "TPFileMonitor.h"
 #import "HHValidatedButton.h"
 #import "PDFViewerController.h"
@@ -44,7 +43,6 @@
 #import "MHConsoleManager.h"
 #import "TPStatusViewController.h"
 #import "PDFViewer.h"
-#import "TPDocumentOutlineViewController.h"
 #import "TPSupportedFilesManager.h"
 #import "MHControlsTabBarController.h"
 #import "TPTemplateEditor.h"
@@ -52,6 +50,7 @@
 #import "TPConsoleViewController.h"
 #import "OtherFilesViewController.h"
 #import "TPSpellCheckerListingViewController.h"
+#import "TPProjectOutlineViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -61,16 +60,13 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, DocumentOutlineDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, ProjectOutlineControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   
   NSWindow *mainWindow;
   
   ProjectEntity *project;
   BOOL openPDFAfterBuild;
-  
-  TPDocumentOutlineViewController *documentOutlineViewcontroller;
-  NSView *documentOutlineViewContainer;
   
 	// New file
 	IBOutlet NSWindow *newFileSheet;
@@ -92,8 +88,6 @@
 	IBOutlet NSWindow *renameSheet;
 	IBOutlet NSTextField *renameField;
 	NSUInteger itemBeingRenamed;
-  
-  IBOutlet ProjectOutlineController *projectOutlineController;
   
   IBOutlet NSTabView *tabView;
   
@@ -130,6 +124,8 @@
   HHValidatedButton *createFolderButton;
   HHValidatedButton *createFileButton;
   
+  TPProjectOutlineViewController *outlineViewController;
+  NSView *outlineViewContainer;
   
   MHMiniConsoleViewController *miniConsole;
   TPConsoleViewController *embeddedConsoleViewController;
@@ -178,9 +174,8 @@
 @property (retain) OtherFilesViewController *otherFilesViewController;
 @property (assign) IBOutlet NSView *otherFilesContainer;
 
-
-@property (retain) TPDocumentOutlineViewController *documentOutlineViewcontroller;
-@property (assign) IBOutlet NSView *documentOutlineViewContainer;
+@property (retain) TPProjectOutlineViewController *outlineViewController;
+@property (assign) IBOutlet NSView *outlineViewContainer;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
