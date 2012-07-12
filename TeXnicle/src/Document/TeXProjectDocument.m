@@ -3655,7 +3655,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) dictionaryDidLearnNewWord
 {
-  [self.texEditorViewController.textView checkSpelling:self];
 }
 
 
