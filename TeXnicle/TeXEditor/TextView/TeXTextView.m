@@ -2308,11 +2308,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   paragraph = [paragraph stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   NSString *line = [[self string] substringWithRange:lineRange];
   line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-  if ([line isCommentLineBeforeIndex:selRange.location-pRange.location commentChar:[self commentChar]]) {
+  NSInteger lineIndex = selRange.location-pRange.location;
+  if (lineIndex < 0) 
+    lineIndex = 0;
+  
+  if ([line isCommentLineBeforeIndex:lineIndex commentChar:[self commentChar]]) {
     [self setTypingColor:self.coloringEngine.commentColor];
-  } else if ([paragraph isInArgumentAtIndex:selRange.location-pRange.location]) {
+  } else if ([paragraph isInArgumentAtIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.argumentsColor];
-  } else if ([line isCommandBeforeIndex:selRange.location-pRange.location]) {
+  } else if ([line isCommandBeforeIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.commandColor];
   } else {
     [self applyFontAndColor:NO];
