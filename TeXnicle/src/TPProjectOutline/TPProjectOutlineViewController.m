@@ -81,6 +81,12 @@
   return NO;
 }
 
+- (void) setOutlineDepth:(NSInteger)depth
+{
+  [self.depthSlider setIntegerValue:depth];
+  self.outlineBuilder.depth = depth;
+}
+
 #pragma mark -
 #pragma mark OutlineView delegate
 

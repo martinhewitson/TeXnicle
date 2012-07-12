@@ -38,5 +38,6 @@
 - (IBAction) expandAllSections:(id) sender;
 - (IBAction) collapseAllSections:(id) sender;
 - (IBAction) maxOutlineDepthChanged:(id)sender;
+- (void) setOutlineDepth:(NSInteger)depth;
 
 @end

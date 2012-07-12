@@ -95,7 +95,6 @@
 								<string key="NSFrame">{{177, 10}, {71, 17}}</string>
 								<reference key="NSSuperview" ref="645425910"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSSliderCell" key="NSCell" id="450815350">
@@ -224,7 +223,7 @@
 									<object class="NSOutlineView" id="522561169">
 										<reference key="NSNextResponder" ref="960034158"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{260, 292}</string>
+										<string key="NSFrameSize">{259, 292}</string>
 										<reference key="NSSuperview" ref="960034158"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="379480967"/>
@@ -240,7 +239,7 @@
 										<array class="NSMutableArray" key="NSTableColumns">
 											<object class="NSTableColumn" id="784500734">
 												<string key="NSIdentifier">NameColumn</string>
-												<double key="NSWidth">257.28125</double>
+												<double key="NSWidth">256.28125</double>
 												<double key="NSMinWidth">16</double>
 												<double key="NSMaxWidth">1000</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -310,7 +309,7 @@
 										<bool key="NSOutlineViewAutoresizesOutlineColumnKey">NO</bool>
 									</object>
 								</array>
-								<string key="NSFrameSize">{260, 292}</string>
+								<string key="NSFrameSize">{259, 292}</string>
 								<reference key="NSSuperview" ref="743024349"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="522561169"/>
@@ -345,7 +344,7 @@
 								<double key="NSPercent">0.99616858237547889</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{-1, 41}, {260, 292}}</string>
+						<string key="NSFrame">{{0, 40}, {259, 292}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
