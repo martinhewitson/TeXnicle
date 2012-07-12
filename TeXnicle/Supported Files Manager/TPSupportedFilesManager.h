@@ -52,6 +52,7 @@ extern NSString * const TPSupportedFileRemovedNotification;
 - (NSInteger)indexOfFileType:(TPSupportedFile*)fileType;
 
 - (NSArray*)supportedExtensionsForHighlighting;
+- (NSArray*)supportedExtensionsForSpellChecking;
 - (NSArray*)supportedExtensions;
 - (NSArray*)supportedTypes;
 

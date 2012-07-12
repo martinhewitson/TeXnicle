@@ -34,6 +34,7 @@
 @synthesize ext;
 @synthesize isBuiltIn;
 @synthesize syntaxHighlight;
+@synthesize spellcheck;
 
 // Initialise with a name and extension.
 // Built-in defaults to NO.
@@ -46,6 +47,7 @@
     self.ext = anExtension;
     self.isBuiltIn = NO;
     self.syntaxHighlight = NO;
+    self.spellcheck = NO;
   }
   return self;
 }
@@ -88,9 +90,25 @@
   return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight] autorelease];
 }
 
+// Init with name, extension, built-in and syntax highlight flags, spell check flags
+- (id) initWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight spellcheck:(BOOL)spellcheck
+{
+  self = [self initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight];
+  if (self) {
+    self.spellcheck = spellcheck;
+  }
+  return self;
+}
+
+// Convenience constructor
++ (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight spellcheck:(BOOL)spellcheck
+{
+  return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight spellcheck:spellcheck] autorelease];
+}
+
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"%@: '%@', builtIn=%d, syntaxHighlight=%d", self.ext, self.name, self.isBuiltIn, self.syntaxHighlight];
+  return [NSString stringWithFormat:@"%@: '%@', builtIn=%d, syntaxHighlight=%d, spellcheck=%d", self.ext, self.name, self.isBuiltIn, self.syntaxHighlight, self.spellcheck];
 }
 
 #pragma mark -
@@ -104,6 +122,7 @@
     self.ext  = [aDecoder decodeObjectForKey:@"ext"];
     self.isBuiltIn = [aDecoder decodeBoolForKey:@"isBuiltIn"];
     self.syntaxHighlight = [aDecoder decodeBoolForKey:@"syntaxHighlight"];
+    self.spellcheck = [aDecoder decodeBoolForKey:@"spellcheck"];
   }
   return self;
 }
@@ -114,6 +133,7 @@
   [aCoder encodeObject:self.ext forKey:@"ext"];
   [aCoder encodeBool:self.isBuiltIn forKey:@"isBuiltIn"];
   [aCoder encodeBool:self.syntaxHighlight forKey:@"syntaxHighlight"];
+  [aCoder encodeBool:self.spellcheck forKey:@"spellcheck"];
 }
 
 

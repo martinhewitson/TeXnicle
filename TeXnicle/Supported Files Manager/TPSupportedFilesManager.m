@@ -175,6 +175,18 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   return array;
 }
 
+// Returns an array of supported file extensions which should be spell checked
+- (NSArray*)supportedExtensionsForSpellChecking
+{
+  NSMutableArray *array = [NSMutableArray array];
+  for (TPSupportedFile *file in self.supportedFileTypes) {
+    if (file.spellcheck) {
+      [array addObject:file.ext];
+    }
+  }
+  return array;
+}
+
 
 // Remove the given supported file type object. Returns YES if successful, otherwise NO.
 - (BOOL) removeSupportedFileType:(TPSupportedFile*)aFile

@@ -127,6 +127,8 @@
     return file.name;
   } else if ([[tableColumn identifier] isEqualToString:@"HighlightColumn"]) {
     return [NSNumber numberWithBool:file.syntaxHighlight];
+  } else if ([[tableColumn identifier] isEqualToString:@"SpellCheckColumn"]) {
+    return [NSNumber numberWithBool:file.spellcheck];
   } else {
     return nil;
   }
@@ -143,6 +145,8 @@
     file.name = object;
   } else if ([[tableColumn identifier] isEqualToString:@"HighlightColumn"]) {
     file.syntaxHighlight = [object boolValue];
+  } else if ([[tableColumn identifier] isEqualToString:@"SpellCheckColumn"]) {
+    file.spellcheck = [object boolValue];
   } else {
     // do nothing
   }
@@ -180,7 +184,13 @@
     }
   } else if ([[tableColumn identifier] isEqualToString:@"HighlightColumn"]) {
     if ([file isBuiltIn]) {
-      [cell setEnabled:NO];
+      [cell setEnabled:YES];
+    } else {
+      [cell setEnabled:YES];
+    }
+  } else if ([[tableColumn identifier] isEqualToString:@"SpellCheckColumn"]) {
+    if ([file isBuiltIn]) {
+      [cell setEnabled:YES];
     } else {
       [cell setEnabled:YES];
     }

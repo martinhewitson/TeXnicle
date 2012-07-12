@@ -34,13 +34,14 @@
   NSString *ext;
   BOOL isBuiltIn;
   BOOL syntaxHighlight;
+  BOOL spellcheck;
 }
 
 @property (copy) NSString *name;
 @property (copy) NSString *ext;
 @property (assign) BOOL isBuiltIn;
 @property (assign) BOOL syntaxHighlight;
-
+@property (assign) BOOL spellcheck;
 
 - (id) initWithName:(NSString*)aName extension:(NSString*)anExtension;
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension;
@@ -51,6 +52,8 @@
 - (id) initWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight;
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight;
 
+- (id) initWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight spellcheck:(BOOL)spellcheck;
++ (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight spellcheck:(BOOL)spellcheck;
 
 @end
 
