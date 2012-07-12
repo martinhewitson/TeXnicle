@@ -28,6 +28,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ProjectItemEntity.h"
 
+@class TPFileEntityMetadata;
 @class FileDocument;
 @class Bookmark;
 
@@ -36,6 +37,8 @@
 	FileDocument *document;
 	BOOL _hasEdits;
   NSInteger isActive;
+  
+  TPFileEntityMetadata *metadata;
 }
 
 @property (assign) NSSet *bookmarks;
@@ -46,6 +49,8 @@
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
 @property (readonly) NSString *consolidatedFileContents;
+
+@property (retain) TPFileEntityMetadata *metadata;
 
 @property (assign) NSInteger isActive;
 
@@ -66,5 +71,10 @@
 - (BOOL) writeContents;
 
 - (void) textChanged;
+
+#pragma mark -
+#pragma mark Metadata
+
+- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 
 @end

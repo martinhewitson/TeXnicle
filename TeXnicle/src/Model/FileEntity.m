@@ -36,6 +36,7 @@
 #import "MHFileReader.h"
 #import "NSString+LaTeX.h"
 #import "NSDictionary+TeXnicle.h"
+#import "TPFileEntityMetadata.h"
 
 @implementation FileEntity
 
@@ -46,9 +47,12 @@
 @dynamic bookmarks;
 @synthesize document;
 @synthesize isActive;
+@synthesize metadata;
 
 - (void) awakeFromInsert
 {
+  self.metadata = [[[TPFileEntityMetadata alloc] initWithParent:self] autorelease];
+  
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
 	[self reconfigureDocument];
@@ -64,6 +68,8 @@
 {
 	[super awakeFromFetch];
 	
+  self.metadata = [[[TPFileEntityMetadata alloc] initWithParent:self] autorelease];
+  
 	[self reloadFromDisk];
 	
 	// we should make sure the name is in sync with the filepath
@@ -258,6 +264,7 @@
 		[document release];
 		document = nil;
 	}
+  self.metadata = nil;
   self.content = nil;
   self.fileLoadDate = nil;
 }
@@ -507,5 +514,14 @@
   
   return string;
 }
+
+#pragma mark -
+#pragma mark Metadata
+
+- (void)generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force 
+{
+  [self.metadata generateSectionsForTypes:templates forceUpdate:force];
+}
+
 
 @end
