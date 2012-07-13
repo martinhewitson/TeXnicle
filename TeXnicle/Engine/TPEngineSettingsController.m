@@ -29,7 +29,7 @@
 #import "MHStrokedFiledView.h"
 
 NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageChangedNotification";
-
+NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
 @implementation TPEngineSettingsController
 
@@ -79,11 +79,16 @@ NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageCha
 - (void) setupLanguageOptions
 {
   [languageSelector removeAllItems];
+  NSMenuItem *menuItem;
+  
+  [languageSelector addItemWithTitle:TPSpellingAutomaticByLanguage];
+  [[languageSelector menu] addItem:[NSMenuItem separatorItem]];
+  
+  
   NSArray *languageIDs = [[NSSpellChecker sharedSpellChecker] userPreferredLanguages];
   for (NSString *languageID in languageIDs) {
     NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
     NSString *displayNameString = [locale displayNameForKey:NSLocaleIdentifier value:languageID];
-    NSMenuItem *menuItem;
     if (displayNameString == nil) {
       displayNameString = languageID;
     }
@@ -95,19 +100,26 @@ NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageCha
   // select the current language
   NSString *languageID = [self language];
   if (languageID) {
-    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
-    NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
-    [languageSelector selectItemAtIndex:index];
+    if ([languageID isEqualToString:TPSpellingAutomaticByLanguage]) {
+      [languageSelector selectItemAtIndex:0];
+    } else {
+      NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
+      NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
+      [languageSelector selectItemAtIndex:index];
+    }
   }
 }
 
 - (IBAction) languageSelected:(id)sender
 {
   NSMenuItem *menuItem = [languageSelector selectedItem];
-  NSLocale *locale = [menuItem representedObject];
   
-  [self didSelectLanguage:[locale localeIdentifier]];
-  
+  if ([[menuItem title] isEqualToString:TPSpellingAutomaticByLanguage]) {
+    [self didSelectLanguage:[menuItem title]];
+  } else {
+    NSLocale *locale = [menuItem representedObject];  
+    [self didSelectLanguage:[locale localeIdentifier]];
+  }
 }
 
 - (void)setupEngineSettings
