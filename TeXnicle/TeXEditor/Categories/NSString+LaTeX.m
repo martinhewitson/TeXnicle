@@ -61,9 +61,9 @@
 //    NSLog(@"against: %@", terms);
   NSInteger idx = 0;
   for (NSString *term in terms) {
-    NSString *searchTerm = [NSString stringWithFormat:@"%@", term];
-        //NSLog(@"   checking %@", searchTerm);
-    if ([self beginsWith:searchTerm]) {
+//    NSString *searchTerm = [NSString stringWithFormat:@"%@", term];
+//    NSLog(@"   checking %@ [%@]", searchTerm, term);
+    if ([self beginsWith:term]) {
       return idx;
     }
     idx++;
