@@ -954,14 +954,12 @@
     path = [[openDocuments currentDoc] valueForKey:@"pathOnDisk"];
   }
   
+  [self.statusViewController setFilenameText:path];
   if (path) {
-    [self.statusViewController setFilenameText:path];
     [self.statusViewController enable:YES];    
   } else {
-    [self.statusViewController setFilenameText:path];
     [self.statusViewController enable:NO];    
   }
-  
 }
 
 - (IBAction)reopenUsingEncoding:(id)sender
@@ -1440,11 +1438,9 @@
 {
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
-  if (lineNumber == NSNotFound) {
-    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
-  } else {
-    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
-  }
+  [self.statusViewController setLineNumber:lineNumber];
+  [self.statusViewController setCharacter:cursorPosition];
+  [self.statusViewController updateDisplay];
 }
 
 
