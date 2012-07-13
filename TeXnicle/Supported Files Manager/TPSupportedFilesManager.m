@@ -32,6 +32,7 @@
 
 NSString * const TPSupportedFileAddedNotification = @"TPSupportedFileAddedNotification";
 NSString * const TPSupportedFileRemovedNotification = @"TPSupportedFileRemovedNotification";
+NSString * const TPSupportedFileSpellCheckFlagChangedNotification = @"TPSupportedFileSpellCheckFlagChangedNotification";
 
 @implementation TPSupportedFilesManager
 

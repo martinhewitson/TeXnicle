@@ -31,6 +31,7 @@
 
 extern NSString * const TPSupportedFileAddedNotification;
 extern NSString * const TPSupportedFileRemovedNotification;
+extern NSString * const TPSupportedFileSpellCheckFlagChangedNotification;
 
 @interface TPSupportedFilesManager : NSObject {
 @private
