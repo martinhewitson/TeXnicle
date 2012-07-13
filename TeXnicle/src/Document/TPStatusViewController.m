@@ -36,6 +36,9 @@
 @synthesize showRevealButton;
 @synthesize revealButton;
 @synthesize rightPanel;
+@synthesize wordCount;
+@synthesize character;
+@synthesize lineNumber;
 
 - (id) init
 {
@@ -158,5 +161,18 @@
 	[ws selectFile:self.filenameText inFileViewerRootedAtPath:[self.filenameText stringByDeletingLastPathComponent]];
   
 }
+
+- (void) updateDisplay
+{
+  // status
+  NSString *status = nil;
+  if (self.lineNumber == NSNotFound) {
+    status = [NSString stringWithFormat:@"line: -, char: %ld", self.character];
+  } else {
+    status = [NSString stringWithFormat:@"line: %ld, char: %ld", self.lineNumber, self.character];
+  }  
+  [self.editorStatusTextField setStringValue:status];
+}
+
 
 @end

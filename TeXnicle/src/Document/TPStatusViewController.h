@@ -38,6 +38,9 @@
   BOOL showRevealButton;
   NSButton *revealButton;
   MHToolbarBackgroundView *rightPanel;
+  NSInteger wordCount;
+  NSInteger character;
+  NSInteger lineNumber;
 }
 
 @property (assign) IBOutlet NSTextField *editorStatusTextField;
@@ -45,11 +48,15 @@
 @property (assign) IBOutlet NSButton *revealButton;
 @property (assign) IBOutlet MHToolbarBackgroundView *rightPanel;
 
+@property (assign) NSInteger character;
+@property (assign) NSInteger lineNumber;
+@property (assign) NSInteger wordCount;
 @property (copy) NSString *editorStatusText;
 @property (copy) NSString *filenameText;
 @property (assign) BOOL showRevealButton;
 
 - (void) resizeLabels;
 - (void) enable:(BOOL)state;
+- (void) updateDisplay;
 
 @end
