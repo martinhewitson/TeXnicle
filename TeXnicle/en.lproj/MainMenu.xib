@@ -397,15 +397,6 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
-								<object class="NSMenuItem" id="776162233">
-									<reference key="NSMenu" ref="720053764"/>
-									<string key="NSTitle">Close Tab</string>
-									<string key="NSKeyEquiv">W</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="1033313550"/>
-									<reference key="NSMixedImage" ref="310636482"/>
-								</object>
 								<object class="NSMenuItem" id="850857612">
 									<reference key="NSMenu" ref="720053764"/>
 									<string key="NSTitle">Close</string>
@@ -1639,6 +1630,15 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="776162233">
+									<reference key="NSMenu" ref="835318025"/>
+									<string key="NSTitle">Close Tab</string>
+									<string key="NSKeyEquiv">W</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 								<object class="NSMenuItem" id="998182653">
 									<reference key="NSMenu" ref="835318025"/>
 									<string key="NSTitle">Close All Tabs</string>
@@ -2125,14 +2125,6 @@
 						<reference key="destination" ref="850857612"/>
 					</object>
 					<int key="connectionID">563</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">closeCurrentTab:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="776162233"/>
-					</object>
-					<int key="connectionID">564</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2808,6 +2800,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">closeCurrentTab:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="776162233"/>
+					</object>
+					<int key="connectionID">564</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -2947,7 +2947,6 @@
 							<reference ref="722745758"/>
 							<reference ref="1025936716"/>
 							<reference ref="294629803"/>
-							<reference ref="776162233"/>
 							<reference ref="425164168"/>
 							<reference ref="1010469920"/>
 							<reference ref="718774975"/>
@@ -2990,11 +2989,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">77</int>
 						<reference key="object" ref="294629803"/>
-						<reference key="parent" ref="720053764"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">73</int>
-						<reference key="object" ref="776162233"/>
 						<reference key="parent" ref="720053764"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3256,6 +3250,7 @@
 							<reference ref="291276000"/>
 							<reference ref="863608159"/>
 							<reference ref="658470718"/>
+							<reference ref="776162233"/>
 						</array>
 						<reference key="parent" ref="713487014"/>
 					</object>
@@ -4150,6 +4145,11 @@
 						<reference key="object" ref="434431403"/>
 						<reference key="parent" ref="562250606"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">73</int>
+						<reference key="object" ref="776162233"/>
+						<reference key="parent" ref="835318025"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4569,12 +4569,13 @@
 						<string key="libraryContainerView">NSView</string>
 						<string key="mainWindow">NSWindow</string>
 						<string key="makeMainFileCheckButton">NSButton</string>
-						<string key="outlineController">ProjectOutlineController</string>
+						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainerView">NSView</string>
 						<string key="pdfViewContainer">NSView</string>
 						<string key="prefsContainerView">NSView</string>
 						<string key="projectsController">NSArrayController</string>
 						<string key="rightView">NSView</string>
+						<string key="spellCheckerContainerView">NSView</string>
 						<string key="splitView">NSSplitView</string>
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabbarController">MHControlsTabBarController</string>
@@ -4633,9 +4634,9 @@
 							<string key="name">makeMainFileCheckButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="outlineController">
-							<string key="name">outlineController</string>
-							<string key="candidateClassName">ProjectOutlineController</string>
+						<object class="IBToOneOutletInfo" key="outlineViewContainer">
+							<string key="name">outlineViewContainer</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="paletteContainerView">
 							<string key="name">paletteContainerView</string>
@@ -4655,6 +4656,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="rightView">
 							<string key="name">rightView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spellCheckerContainerView">
+							<string key="name">spellCheckerContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitView">
@@ -5543,33 +5548,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ProjectOutlineController</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="delegate">id</string>
-						<string key="outlineView">NSOutlineView</string>
-						<string key="textView">NSTextView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="delegate">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="outlineView">
-							<string key="name">outlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textView">
-							<string key="name">textView</string>
-							<string key="candidateClassName">NSTextView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ProjectOutlineController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">StartupScreenController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -6204,7 +6182,6 @@
 						<string key="controlsTabview">NSTabView</string>
 						<string key="createFileButton">HHValidatedButton</string>
 						<string key="createFolderButton">HHValidatedButton</string>
-						<string key="documentOutlineViewContainer">NSView</string>
 						<string key="editorSplitView">NSSplitView</string>
 						<string key="embeddedConsoleContainer">NSView</string>
 						<string key="engineSettingsContainer">NSView</string>
@@ -6217,10 +6194,10 @@
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
 						<string key="otherFilesContainer">NSView</string>
+						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
-						<string key="projectOutlineController">ProjectOutlineController</string>
 						<string key="projectOutlineView">TPOutlineView</string>
 						<string key="renameField">NSTextField</string>
 						<string key="renameSheet">NSWindow</string>
@@ -6255,10 +6232,6 @@
 						<object class="IBToOneOutletInfo" key="createFolderButton">
 							<string key="name">createFolderButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="documentOutlineViewContainer">
-							<string key="name">documentOutlineViewContainer</string>
-							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="editorSplitView">
 							<string key="name">editorSplitView</string>
@@ -6308,6 +6281,10 @@
 							<string key="name">otherFilesContainer</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="outlineViewContainer">
+							<string key="name">outlineViewContainer</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="paletteContainverView">
 							<string key="name">paletteContainverView</string>
 							<string key="candidateClassName">NSView</string>
@@ -6319,10 +6296,6 @@
 						<object class="IBToOneOutletInfo" key="projectItemTreeController">
 							<string key="name">projectItemTreeController</string>
 							<string key="candidateClassName">ProjectItemTreeController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="projectOutlineController">
-							<string key="name">projectOutlineController</string>
-							<string key="candidateClassName">ProjectOutlineController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="projectOutlineView">
 							<string key="name">projectOutlineView</string>
