@@ -75,4 +75,5 @@
 - (void) updateAllFilesWithExtension:(NSString*)ext;
 - (void) updateAllLists;
 - (void) performSpellCheck;
+- (void) stop;
 @end

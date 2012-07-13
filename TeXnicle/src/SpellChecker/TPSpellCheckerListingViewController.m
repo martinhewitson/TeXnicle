@@ -63,6 +63,7 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
   self.checkedFiles = nil;
   [self.spellCheckTimer invalidate];
   self.spellCheckTimer = nil;
@@ -166,7 +167,7 @@
 	
 	[theMenu setAutoenablesItems:NO];
 	
-  NSLog(@"Target %@", [target class]);
+//  NSLog(@"Target %@", [target class]);
   
 	NSMenuItem *menuItem;
   
@@ -276,6 +277,12 @@
 - (IBAction)forceUpdate:(id)sender
 {
   [self updateAllLists];
+}
+
+- (void) stop
+{
+  [self.spellCheckTimer invalidate];
+  self.spellCheckTimer = nil;
 }
 
 
