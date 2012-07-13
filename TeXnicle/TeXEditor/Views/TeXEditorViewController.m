@@ -313,22 +313,30 @@
 - (void) checkSyntaxTimerFired
 {
 //  NSLog(@"Syntax check timer fired!");
+  // no point in syntax checking while the app is not active
   if (![NSApp isActive]) {
 //    NSLog(@"  app not active");
     return;
   }
   
+  // if we have no delegate that means we are not being used
+  // so we shouldn't syntax check
   if (self.delegate == nil) {
 //    NSLog(@"  delegate nil");
+    // then we are done, so stop the timer
+    [self.syntaxCheckTimer invalidate];
+    self.syntaxCheckTimer = nil;
     return;
   }
   
+  // ask the delegate what he thinks about this
   if ([self syntaxCheckerShouldCheckSyntax:self.checker] == NO) {
 //    NSLog(@"Delegate says no!");
     return;
   }
 //  NSLog(@"Delegate says yes!");
 
+  // if we are configured to syntax check, then do it!
   if (self.performSyntaxCheck) {
     [self checkSyntax:self];
   }
