@@ -352,11 +352,11 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   NSMutableArray *supportedTypes = [NSMutableArray array];
   // tex
   TPSupportedFile *file;
-  file = [TPSupportedFile supportedFileWithName:@"TeX Files" extension:@"tex" isBuiltIn:YES syntaxHighlight:YES];
+  file = [TPSupportedFile supportedFileWithName:@"TeX Files" extension:@"tex" isBuiltIn:YES syntaxHighlight:YES spellcheck:YES];
   [supportedTypes addObject: file];
 
   // bib
-  file = [TPSupportedFile supportedFileWithName:@"BiBTeX Files" extension:@"bib" isBuiltIn:YES syntaxHighlight:YES];
+  file = [TPSupportedFile supportedFileWithName:@"BiBTeX Files" extension:@"bib" isBuiltIn:YES syntaxHighlight:YES spellcheck:YES];
   [supportedTypes addObject:file];
 
   // sty
