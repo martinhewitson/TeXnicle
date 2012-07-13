@@ -105,6 +105,8 @@
       newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
     });
         
+    dispatch_release(queue);
+    
     // send notification of section update
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:file, @"file", newSections, @"sections", nil];
