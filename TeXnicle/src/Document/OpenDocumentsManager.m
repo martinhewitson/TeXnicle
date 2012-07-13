@@ -363,7 +363,6 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
-  NSLog(@"Selected %@", tabViewItem);
   if (currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
