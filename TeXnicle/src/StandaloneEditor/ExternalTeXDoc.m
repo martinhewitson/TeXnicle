@@ -1682,7 +1682,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void) didSelectLanguage:(NSString *)aName
 {
   [self.settings setValue:aName forKey:@"language"];
-  [[NSSpellChecker sharedSpellChecker] setLanguage:aName];
+  if ([aName isEqualToString:TPSpellingAutomaticByLanguage]) {
+    [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:YES];
+  } else {
+    [[NSSpellChecker sharedSpellChecker] setLanguage:aName];
+    [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:NO];
+  }
   [self.texEditorViewController.textView checkSpelling:self];
 }
 

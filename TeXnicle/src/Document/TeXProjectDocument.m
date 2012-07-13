@@ -569,7 +569,7 @@
   
   // open the sorted files
   for (FileEntity *file in sortedFiles) {
-    [self.openDocuments addDocument:file];
+    [self.openDocuments addDocument:file select:NO];
     [file setPrimitiveValue:[NSNumber numberWithInteger:-1] forKey:@"wasOpen"];
   }
   
@@ -974,7 +974,7 @@
   
   [file reloadFromDiskWithEncoding:[sender title]];
   [self.openDocuments closeCurrentTab];
-  [self.openDocuments addDocument:file];
+  [self.openDocuments addDocument:file select:YES];
 }
 
 - (NSManagedObject *)project
@@ -1454,7 +1454,7 @@
 		NSManagedObject *item = [all objectAtIndex:0];
 		if ([item isKindOfClass:[FileEntity class]]) {
       if (openDocuments) {					
-        [openDocuments addDocument:(FileEntity*)item];          
+        [openDocuments addDocument:(FileEntity*)item select:YES];          
       }
 		}
 	}
@@ -1718,13 +1718,16 @@
 -(NSArray*)listOfCommands
 {
   NSMutableArray *commands = [NSMutableArray array];
-  // consolidated main file
-  NSString *allText = [self.project.mainFile consolidatedFileContents];
-  NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
-  for (NSString *newCommand in newCommands) {
-    [commands addObject:[newCommand argument]];
-  }
   
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        [commands addObjectsFromArray:[file listOfNewCommands]];
+      }
+    }
+  }
+    
   return commands;
 }
 
@@ -2620,7 +2623,7 @@
   [imagesFolder setValue:[NSNumber numberWithInt:2] forKey:@"sortIndex"];
 	
 	// select the main file
-  [openDocuments performSelector:@selector(addDocument:) withObject:file afterDelay:0.1];
+  [openDocuments performSelector:@selector(addAndSelectDocument:) withObject:file afterDelay:0.1];
   [projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.5];
 }
 
@@ -2671,7 +2674,7 @@
 {
 	id doc = [self.projectItemTreeController addFileAtPath:[aURL path] toFolder:nil copy:copyFile];
 	if (doc) {
-		[openDocuments addDocument:doc];
+		[openDocuments addDocument:doc select:YES];
 		return doc;
 	}
 	
@@ -3239,7 +3242,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //  NSLog(@"  source file: %@", sourcefile);
   FileEntity *file = [self.project fileWithPath:sourcefile];
 //  NSLog(@"    got project file: %@", file);
-  [self.openDocuments addDocument:file];
+  [self.openDocuments addDocument:file select:YES];
   if (file) {
     [self.openDocuments selectTabForFile:file];
     [self.texEditorViewController.textView goToLine:lineNumber];
@@ -3482,7 +3485,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) didSelectLanguage:(NSString *)aName
 {
   self.project.settings.language = aName;
-  [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
+  if ([aName isEqualToString:TPSpellingAutomaticByLanguage]) {
+    [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:YES];
+  } else {
+    [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
+    [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:NO];
+  }
   [self.texEditorViewController.textView checkSpelling:self];
 }
 
