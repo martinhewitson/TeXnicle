@@ -115,8 +115,10 @@
           // file is a 
           NSString *root = [file stringByDeletingLastPathComponent];
           NSString *filepath = [root stringByAppendingPathComponent:arg];
-          if ([[filepath pathExtension] isEqualToString:@""]) {
-            filepath = [filepath stringByAppendingPathExtension:@"tex"];
+          if ([filepath length] > 0) {
+            if ([[filepath pathExtension] isEqualToString:@""]) {
+              filepath = [filepath stringByAppendingPathExtension:@"tex"];
+            }
           }
           MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
           subtext = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];           
