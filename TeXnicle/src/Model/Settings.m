@@ -42,8 +42,7 @@
 
 - (void) awakeFromInsert
 {  
-  NSLog(@"Awake from insert: set language to %@", self.language);
-  [self performSelector:@selector(setupSettings) withObject:nil afterDelay:0];
+  [self performSelector:@selector(updateSettings) withObject:nil afterDelay:0];
 }
 
 - (void) awakeFromFetch
