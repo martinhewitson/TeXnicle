@@ -60,6 +60,12 @@
 
 @implementation TeXProjectDocument
 
+@synthesize tabHistory;
+@synthesize currentTabHistoryIndex;
+@synthesize navigatingHistory;
+@synthesize backTabButton;
+@synthesize forwardTabButton;
+
 @synthesize mainWindow;
 
 @synthesize statusTimer;
@@ -135,7 +141,7 @@
   
   [self.statusTimer invalidate];
   self.statusTimer = nil;
- 
+  self.tabHistory = nil;
   self.statusViewController = nil;
   self.outlineViewController = nil;
   self.bookmarkManager = nil;
@@ -165,6 +171,7 @@
   _building = NO;
   _liveUpdate = NO;
   
+  self.tabHistory = [NSMutableArray array];
   [self observePreferences];  
   [self setupLiveUpdateTimer];
 }
@@ -485,6 +492,16 @@
          selector:@selector(handleSupportedFileSpellCheckFlagChangedNotification:) 
              name:TPSupportedFileSpellCheckFlagChangedNotification 
            object:nil];
+  
+  [nc addObserver:self
+         selector:@selector(handleOpenDocumentsDidChangeFileNotification:) 
+             name:TPOpenDocumentsDidChangeFileNotification 
+           object:openDocuments];
+  
+  [nc addObserver:self
+         selector:@selector(handleOpenDocumentsDidAddFileNotification:) 
+             name:TPOpenDocumentsDidAddFileNotification 
+           object:openDocuments];
     
 //  NSLog(@"Set status view values");
   [self.statusViewController setFilenameText:@""];
@@ -581,6 +598,8 @@
     [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
   }
   
+  // clear history
+  [self clearTabHistory];
 }
 
 - (void) windowDidBecomeKey:(NSNotification *)notification
@@ -939,6 +958,18 @@
 {
   if (_inVersionsBrowser) {
     return NO;
+  }
+  
+  if (anItem == self.backTabButton) {
+    if ([self.tabHistory count] <= 1 || self.currentTabHistoryIndex == 0) {
+      return NO;
+    }
+  }
+  
+  if (anItem == self.forwardTabButton) {
+    if ([self.tabHistory count] <= 1 || self.currentTabHistoryIndex == [self.tabHistory count]-1) {
+      return NO;
+    }
   }
   
   if (anItem == self.createFolderButton) {
@@ -1429,7 +1460,86 @@
 }
 
 #pragma mark -
+#pragma mark Tab navigation
+
+- (void) clearTabHistory
+{
+  [self.tabHistory removeAllObjects];
+  self.currentTabHistoryIndex = -1;
+}
+
+- (IBAction)backTabButtonPressed:(id)sender
+{
+  self.navigatingHistory = YES;
+  // get the previous file
+  self.currentTabHistoryIndex--;
+  if (self.currentTabHistoryIndex < 0) {
+    self.currentTabHistoryIndex = 0;
+  }
+  //  NSLog(@"Going back to index %ld", self.currentTabHistoryIndex);
+  
+  FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
+  
+  // select document
+  [openDocuments selectTabForFile:file];
+  
+}
+
+- (IBAction)forwardTabButtonPressed:(id)sender
+{
+  self.navigatingHistory = YES;
+  self.currentTabHistoryIndex++;
+  if (self.currentTabHistoryIndex >= [self.tabHistory count]) {
+    self.currentTabHistoryIndex = [self.tabHistory count]-1;
+  }
+  //  NSLog(@"Going forward to index %d", self.currentTabHistoryIndex);
+  
+  // get the previous file
+  FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
+  
+  // select document
+  [openDocuments selectTabForFile:file];  
+}
+
+
+#pragma mark -
 #pragma mark Notification Handlers
+
+- (void) handleOpenDocumentsDidChangeFileNotification:(NSNotification*)aNote
+{
+  if (self.navigatingHistory) {
+    self.navigatingHistory = NO;
+    return;
+  }
+  
+  NSInteger historyLength = [self.tabHistory count];
+//  NSLog(@"History length %d", historyLength);
+//  NSLog(@"Current index %ld", self.currentTabHistoryIndex);
+  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
+  if (file) {
+    if (self.currentTabHistoryIndex+1 < historyLength) {
+      // insert this object
+      [self.tabHistory insertObject:file atIndex:self.currentTabHistoryIndex+1];
+//      NSLog(@"Inserted object at %ld", self.currentTabHistoryIndex+1);
+      // clear objects after this index
+      NSRange indexRange = NSMakeRange(self.currentTabHistoryIndex+2, historyLength-(self.currentTabHistoryIndex+2-1));
+      NSIndexSet *indicesToRemove = [NSIndexSet indexSetWithIndexesInRange:indexRange];
+//      NSLog(@"Removing indices %@", indicesToRemove);
+      [self.tabHistory removeObjectsAtIndexes:indicesToRemove];
+      self.currentTabHistoryIndex = [self.tabHistory count]-1;
+    } else {
+      // add to end of the history
+      [self.tabHistory addObject:file];
+      self.currentTabHistoryIndex = [self.tabHistory count]-1;
+//      NSLog(@"Added object at index %ld", self.currentTabHistoryIndex);
+    }
+  }  
+}
+
+- (void) handleOpenDocumentsDidAddFileNotification:(NSNotification*)aNote
+{
+}
+
 
 - (void) handleLineNumberClickedNotification:(NSNotification*)aNote
 {

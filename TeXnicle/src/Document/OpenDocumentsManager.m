@@ -34,6 +34,7 @@
 #import "DocWindowController.h"
 
 NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDidChangeFileNotification";
+NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAddFileNotification";
 
 @implementation OpenDocumentsManager
 
@@ -44,6 +45,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 @synthesize texEditorViewController;
 @synthesize imageViewerController;
 @synthesize imageViewContainer;
+@synthesize navigationButtonsView;
 
 - (void) awakeFromNib
 {
@@ -183,6 +185,11 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 		}
     
     [openDocuments addObject:aDoc];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentDoc, @"file", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidAddFileNotification
+                                                        object:self
+                                                      userInfo:dictionary];
+    
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
     [tabView addTabViewItem:newItem];
@@ -190,6 +197,8 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
       [tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
     }
 		[newItem release];
+    
+    
 	}	else {
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
 		[tabView selectTabViewItem:tab];
@@ -302,6 +311,11 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
   if ([tabView selectedTabViewItem] != item) {
     [tabView selectTabViewItem:item];
   }
+}
+
+- (FileEntity*)fileAtIndex:(NSInteger*)index
+{
+  return [openDocuments objectAtIndex:index];
 }
 
 - (NSInteger) indexOfDocumentWithFile:(FileEntity*)aFile
@@ -533,10 +547,13 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 	[tabView setHidden:YES];
 	[tabBar setHidden:YES];
 	[tabBackground setHidden:YES];
+  [self.navigationButtonsView setHidden:YES];
+  [self.delegate performSelector:@selector(clearTabHistory)];
 }
 
 - (void) enableTextView
 {
+  [self.navigationButtonsView setHidden:NO];
   [tabBackground setHidden:NO];
 	[tabView setHidden:NO];
 	[tabBar setHidden:NO];

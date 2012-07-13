@@ -165,7 +165,20 @@
   BOOL _liveUpdate;
   BOOL _building;
   NSTimer *liveUpdateTimer;
+  
+  NSMutableArray *tabHistory;
+  NSInteger currentTabHistoryIndex;
+  BOOL navigatingHistory;
+  HHValidatedButton *backTabButton;
+  HHValidatedButton *forwardTabButton;
+  
 }
+
+@property (assign) IBOutlet HHValidatedButton *backTabButton;
+@property (assign) IBOutlet HHValidatedButton *forwardTabButton;
+@property (retain) NSMutableArray *tabHistory;
+@property (assign) NSInteger currentTabHistoryIndex;
+@property (assign) BOOL navigatingHistory;
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 
@@ -407,5 +420,9 @@
 #pragma mark Project Template Stuff
 
 - (IBAction)createProjectTemplate:(id)sender;
+
+#pragma mark -
+#pragma mark Tab history
+- (void) clearTabHistory;
 
 @end

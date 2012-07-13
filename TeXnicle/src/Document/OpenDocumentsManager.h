@@ -31,6 +31,7 @@
 #import "TPImageViewerController.h"
 
 extern NSString * const TPOpenDocumentsDidChangeFileNotification;
+extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 @class FileEntity;
 @class OpenDocument;
@@ -61,9 +62,10 @@ extern NSString * const TPOpenDocumentsDidChangeFileNotification;
 	TPImageViewerController *imageViewerController;
   NSView *imageViewContainer;
 	BOOL isOpening;
-	
+	NSView *navigationButtonsView;
 }
 
+@property (assign) IBOutlet NSView *navigationButtonsView;
 @property (readwrite, assign) BOOL isOpening;
 @property (readwrite, assign) FileEntity *currentDoc;
 @property (assign) IBOutlet id<OpenDocumentsManagerDelegate> delegate;

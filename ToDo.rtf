@@ -1,12 +1,11 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf470
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
-\f3\fnil\fcharset0 LucidaGrande;}
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 LucidaGrande;
+\f3\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red24\green84\blue167;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
-\
 To Do\
 -----\
 \
@@ -31,68 +30,24 @@ To Do\
 	- in engine script we have an XML fragment to define the variables that the script supports\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx18280\pardirnatural
 \cf0 \
-+ Display options for outline view\
-	- show which sections\
-	- store in project settings as dictionary?\
-	- make a simple depth setting that matches the order in the new templates\
-		- make a slider to increase detail\
-	- make our own view? Then we can have little lines to join up the sections, like /bin/tree does\
-\
 + Make a 'dynamic wrap' option where the text wraps to the editor width.\
 \
 + Make a nicer Library with proper objects rather than a dictionary. Store in 'Application Support'. Support drag-n-drop. Think about iCloud key-value sync.\
 	- maybe we can stick with the dictionary based library, but move to dataSource and delegate methods rather than array controller and bindings.\
-\
-\
-### Correct search results as files are edited\
-	- how?
-\f1\fs24 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\pard\pardeftab720
 \cf0 \
-Spell check dictionary\
-NB. not sure if these are TeXnicle problems, or just dictionary problems, or compatibility problems\'85\
-- system set to 'automatic by language', but when changing it to a specific language (British English) in a TeXnicle file it does not stay selected after restart.\
-- incorrectly spelled word for 'automatic by language' (US English) is underlined in red, when switching to British English, the underlining does not go away even though it is correctly spelled for British English (and the next incorrect word is shown when selecting the British word and opening "Spelling and grammar", so the underlined but correctly spelled word IS recognised as correctly spelled\'85)
-\f2\fs28 \
-\pard\pardeftab720
-\cf0 == Maybe broken on 10.6?\
-\pard\pardeftab720
-
-\f0 \cf0 \
---------------\
-\pard\pardeftab720
-
-\f1 \cf0 - It might be nice to be able to double click the titles in the document outline and have it open an extra editing window, just as it does when double clicking a file in the project files tab\
-\pard\pardeftab720
-
-\f0 \cf0 --------------\
-\pard\pardeftab720
-
-\f1 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-
-\f0 \cf0 + Store size of standalone pdf window for a project.\
+\cf0 + Store size of standalone pdf window for a project.\
 \pard\pardeftab720
 
 \f1 \cf0 + Add nomenclo engine\cf2 \
 \
 Another request: I notice when I select a paragraph (or put the cursor somewhere in a paragraph of plain text), TeXnicle tells me at the bottom which line it is and how many characters the paragraph contains. Nice! Could you expand this function to include number of words, split into per section, per chapter, per all documents excluding appendices etc, and per entire project.. only counting plain text words, not commands etc? Would be really helpful!\
 \
-Maybe it's an idea to incorporate language settings in the settings of each project (in the settings tab), for the spelling and grammar correction things? That way the language is easily set without having to go through spelling and grammar and the user is sure it is set for the entire project, not just for one of the project's tex files...\'a0
-\fs24 \
-
-\fs28 \cf0 \
-- adding new files from template as above to new project, once you added the files they appear in the Project Files tab, but not in alphabetical order, and not in the order of them being added either! (weird)
-\f3 \cf3 \
+\cf0 - adding new files from template as above to new project, once you added the files they appear in the Project Files tab, but not in alphabetical order, and not in the order of them being added either! (weird)
+\f2 \cf3 \
 
 \f1 \cf0 \
-\
-\
-+ automatically show files available in a folder, even if they are not part of the project?\
-	- perhaps show then faded?\
-	- with a context menu to add them to the project?\
-	- but then what's the point of a project if it just shows all files in the directory?\
-\
 + placeholders\
 	- find out what character is left in the text file for a placeholder and replace them when loading the file\
 \
@@ -111,8 +66,6 @@ Maybe it's an idea to incorporate language settings in the settings of each proj
 	- texeditorcontroller has an active textview (one with current focus)\
 \
 \
-+ spelling language in project/file settings\
-\
 + ignore the "open console" during live update\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -120,16 +73,14 @@ Maybe it's an idea to incorporate language settings in the settings of each proj
 \f0 \cf0 - new engine from J\'fcrgen\
 \pard\pardeftab720
 
-\f2 \cf0 \
+\f3 \cf0 \
 + Highlight the current position in the outline view\
 \
 + Why is synctex requiring two cmd-clicks from editor to pdf?
 \f1 \
+	- because the silly PDFView doesn't work properly.\
 \
 + Split PDF viewer, split editor\
-\
-+ Profile the command completion stuff.\
-\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -139,7 +90,12 @@ Maybe it's an idea to incorporate language settings in the settings of each proj
 Beta 47\
 -------\
 \
-+ It is now possible to control the depth of the outline that's shown in the outline view.\
+\pard\pardeftab720
+\cf0 + New spelling panel for projects (see release notes).\
++ The spelling dictionary language can now be specified per project or document \
+  (see release notes).\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 + It is now possible to control the depth of the outline that's shown in the outline view.\
 + Added a preference to activate/deactivate restoring open tabs in projects.\
 + Added a preference to control the interval between live updates.\
 + Added two new menu items under view to show the integrated console and pdf viewer should they be collapsed.\
@@ -149,7 +105,8 @@ Beta 47\
 + PDF viewer now displays the current page number and total page count.\
 + Bug fix: added a workaround for the bug in 10.7.4 which stops PDFs being displayed properly.\
 + Bug fix: project search results remain valid even after the content of the files changes.\
-+ Various bug fixes, especially to the underlying project document management.\
++ Bug fix: selecting rearranged tabs could result in crashing.\
++ Various bug fixes and optimisations, especially to the underlying project document management.\
 \
 Beta 46\
 -------\
@@ -847,13 +804,13 @@ Beta 4\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
 + Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Fixed Console window title (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Fixed code folding bug (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Made default syntax highlighting colours more muted\
 + Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\
