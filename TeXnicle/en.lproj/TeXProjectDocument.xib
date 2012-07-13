@@ -340,7 +340,6 @@
 											<string key="NSFrameSize">{265, 576}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="501444860"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -696,7 +695,7 @@
 												<object class="NSButton" id="346422710">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{222, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{217, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="397531503"/>
@@ -726,7 +725,7 @@
 												<object class="NSButton" id="785694388">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{6, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{1, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="78832632"/>
@@ -756,7 +755,7 @@
 												<object class="NSButton" id="237065591">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{191, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{186, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="346422710"/>
@@ -786,7 +785,7 @@
 												<object class="NSButton" id="22592838">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{161, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{156, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="237065591"/>
@@ -816,7 +815,7 @@
 												<object class="NSButton" id="771552014">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{130, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{125, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="22592838"/>
@@ -846,7 +845,7 @@
 												<object class="NSButton" id="614004927">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{99, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{94, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="771552014"/>
@@ -876,7 +875,7 @@
 												<object class="NSButton" id="856961624">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{68, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{63, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="614004927"/>
@@ -906,7 +905,7 @@
 												<object class="NSButton" id="78832632">
 													<reference key="NSNextResponder" ref="783282180"/>
 													<int key="NSvFlags">264</int>
-													<string key="NSFrame">{{37, -1}, {36, 32}}</string>
+													<string key="NSFrame">{{32, -1}, {36, 32}}</string>
 													<reference key="NSSuperview" ref="783282180"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="856961624"/>
@@ -1065,7 +1064,6 @@
 											<string key="NSFrame">{{0, -1}, {289, 602}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -5129,33 +5127,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ProjectOutlineController</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="delegate">id</string>
-						<string key="outlineView">NSOutlineView</string>
-						<string key="textView">NSTextView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="delegate">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="outlineView">
-							<string key="name">outlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textView">
-							<string key="name">textView</string>
-							<string key="candidateClassName">NSTextView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ProjectOutlineController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">SBGradientView</string>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -5494,7 +5465,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
-						<string key="projectOutlineController">ProjectOutlineController</string>
 						<string key="projectOutlineView">TPOutlineView</string>
 						<string key="renameField">NSTextField</string>
 						<string key="renameSheet">NSWindow</string>
@@ -5593,10 +5563,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="projectItemTreeController">
 							<string key="name">projectItemTreeController</string>
 							<string key="candidateClassName">ProjectItemTreeController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="projectOutlineController">
-							<string key="name">projectOutlineController</string>
-							<string key="candidateClassName">ProjectOutlineController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="projectOutlineView">
 							<string key="name">projectOutlineView</string>
