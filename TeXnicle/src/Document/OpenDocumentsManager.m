@@ -273,7 +273,9 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
           [self.texEditorViewController.textView applyFontAndColor:YES];
-          [self selectTabForFile:currentDoc];
+          if ([[self.tabView selectedTabViewItem] identifier] != currentDoc) {
+            [self selectTabForFile:currentDoc];
+          }
           [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
                                                       withObject:nil 
                                                       afterDelay:0];
@@ -361,6 +363,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
+  NSLog(@"Selected %@", tabViewItem);
   if (currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
