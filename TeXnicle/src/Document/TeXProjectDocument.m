@@ -1686,11 +1686,17 @@
 {
 //  NSLog(@"Edit asking if it should syntax check of %@", [[openDocuments currentDoc] name]);
 //  NSLog(@"  checking window %@", [self mainWindow]);
-  if ([[self mainWindow] isKeyWindow]) {
-//    NSLog(@"     yes!");
-    return YES;
+  
+  if ([[[openDocuments currentDoc] extension] isEqualToString:@"tex"] == NO) {
+    return NO;
   }
-  return NO;
+  
+  if ([[self mainWindow] isKeyWindow] == NO) {
+//    NSLog(@"     yes!");
+    return NO;
+  }
+  
+  return YES;
 }
 
 -(NSString*)codeForCommand:(NSString*)command
