@@ -314,6 +314,18 @@
 
 - (void) performSpellCheck
 {
+  // don't bother if the app is not active
+  if (![NSApp isActive]) {
+    return;
+  }
+  
+  // if we don't have a delegate, don't proceed
+  if (self.delegate == nil) {
+    [self.spellCheckTimer invalidate];
+    self.spellCheckTimer = nil;
+    return;
+  }
+
   if ([self performSimpleSpellCheck]) {
     [self simpleSpellCheck];
   } else {
