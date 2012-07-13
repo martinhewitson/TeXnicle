@@ -33,6 +33,7 @@
 
 - (void)syntaxCheckerCheckFailed:(TPSyntaxChecker*)checker;
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker;
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker;
 
 @end
 
