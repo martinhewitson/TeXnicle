@@ -32,7 +32,7 @@
 
 @interface TPOutlineView : ESOutlineView {
 
-	IBOutlet TeXProjectDocument *mainDocument;
+  TeXProjectDocument *mainDocument;
 	IBOutlet ProjectItemTreeController *treeController;
 	ProjectItemEntity *selectedItem;
 	NSUInteger selectedRow;
@@ -40,6 +40,7 @@
   BOOL showMenu;
 }
 
+@property (assign) IBOutlet TeXProjectDocument *mainDocument;
 @property (assign) BOOL dragLeftView;
 @property (assign) BOOL showMenu;
 

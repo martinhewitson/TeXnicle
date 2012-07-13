@@ -33,6 +33,7 @@
 
 @synthesize dragLeftView;
 @synthesize showMenu;
+@synthesize mainDocument;
 
 - (void) awakeFromNib
 {
