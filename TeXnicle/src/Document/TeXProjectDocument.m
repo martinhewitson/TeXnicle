@@ -54,7 +54,7 @@
 #import "BibliographyEntry.h"
 #import "RegexKitLite.h"
 
-#define kSplitViewLeftMinSize 260.0
+#define kSplitViewLeftMinSize 255.0
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
