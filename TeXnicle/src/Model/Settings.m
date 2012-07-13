@@ -56,7 +56,6 @@
 {
   if (self.language == nil) {
     self.language = [[NSSpellChecker sharedSpellChecker] language];
-    NSLog(@"Update settings: set language to %@", self.language);
   }
 }
 
