@@ -135,7 +135,11 @@
           [sectionsFound addObject:ss];
         }
       }
-      index += [word length];
+      if (word == nil || [word length] == 0) {
+        index++;
+      } else {
+        index += [word length];
+      }
     } else {
       index++;
     }
