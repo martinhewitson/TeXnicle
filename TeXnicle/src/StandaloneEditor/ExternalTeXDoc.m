@@ -537,11 +537,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
-  if (lineNumber == NSNotFound) {
-    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: -, char: %ld", cursorPosition]];
-  } else {
-    [self.statusViewController setEditorStatusText:[NSString stringWithFormat:@"line: %ld, char: %ld", lineNumber, cursorPosition]];
-  }
+  [self.statusViewController setCharacter:cursorPosition];
+  [self.statusViewController setLineNumber:lineNumber];
+  [self.statusViewController updateDisplay];
 }
 
 
