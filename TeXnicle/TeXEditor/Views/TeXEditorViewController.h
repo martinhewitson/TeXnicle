@@ -43,6 +43,8 @@
   NSButton *unfoldButton;
   NSButton *markerButton;
   
+  NSString *fileBeingSyntaxChecked;
+  
   IBOutlet NSView *jumpBar;
   IBOutlet NSScrollView *scrollView;
   
@@ -65,6 +67,7 @@
   NSImage *checkFailedImage;
 }
 
+@property (copy) NSString *fileBeingSyntaxChecked;
 @property (retain) NSImage *errorImage;
 @property (retain) NSImage *noErrorImage;
 @property (retain) NSImage *checkFailedImage;

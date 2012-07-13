@@ -54,6 +54,7 @@
 @synthesize errorImage;
 @synthesize noErrorImage;
 @synthesize checkFailedImage;
+@synthesize fileBeingSyntaxChecked;
 
 - (id) init
 {
@@ -81,12 +82,15 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
 //  NSLog(@"Dealloc TeXEditorViewController");
+  
   [self.syntaxCheckTimer invalidate];
   self.syntaxCheckTimer = nil;
+  self.checker.delegate = nil;
+  self.checker = nil;
+  
   self.errorImage = nil;
   self.noErrorImage = nil;
   self.checkFailedImage = nil;
-  self.checker = nil;
   self.textView.delegate = nil;
   [sectionListController deactivate];
   self.delegate = nil;
@@ -132,7 +136,8 @@
 {
   [self setupSyntaxChecker];
   
-  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
+  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];  
+  
   if ([[file extension] isEqualToString:@"tex"]) {
     _shouldCheckSyntax = YES;
   } else {
@@ -294,11 +299,35 @@
 #pragma mark -
 #pragma mark syntax checking
 
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(syntaxCheckerShouldCheckSyntax:)]){
+    BOOL state = [self.delegate syntaxCheckerShouldCheckSyntax:aChecker];
+//    NSLog(@"Delegate responded with %d", state);
+    return state;
+  }
+  return NO;
+}
+
+
 - (void) checkSyntaxTimerFired
 {
+//  NSLog(@"Syntax check timer fired!");
   if (![NSApp isActive]) {
+//    NSLog(@"  app not active");
     return;
   }
+  
+  if (self.delegate == nil) {
+//    NSLog(@"  delegate nil");
+    return;
+  }
+  
+  if ([self syntaxCheckerShouldCheckSyntax:self.checker] == NO) {
+//    NSLog(@"Delegate says no!");
+    return;
+  }
+//  NSLog(@"Delegate says yes!");
 
   if (self.performSyntaxCheck) {
     [self checkSyntax:self];
@@ -319,15 +348,23 @@
   }
   
 //  NSLog(@"Should check syntax? %d", _shouldCheckSyntax);
+//  NSLog(@"Already checking syntax? %d", _checkingSyntax);
   if (_shouldCheckSyntax && !_checkingSyntax) {
     _checkingSyntax = YES;
     // write string to tmp file
-    NSString *path = [[[NSString pathForTemporaryFileWithPrefix:@"tmp"] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"texnicle_syntax_check.tex"];
-    NSString *content = [self.textView string];
-//    NSLog(@"Content length %d", [content length]);
-    if ([content length] > 0) {
-      if ([content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
-        [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
+    NSString *fileToCheck = [self nameOfFileBeingEdited];
+//    NSLog(@"Name of file to check %@", fileToCheck);
+    if (fileToCheck) {
+      NSString *filename = [NSString stringWithFormat:@"check_%@", fileToCheck]; //@"texnicle_syntax_check.tex";
+      NSString *path = [[[NSString pathForTemporaryFileWithPrefix:@"tmp"] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
+      NSString *content = [self.textView string];
+      //    NSLog(@"Content length %d", [content length]);
+      if ([content length] > 0) {
+        if ([content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
+          self.fileBeingSyntaxChecked = path;
+//          NSLog(@"Checking path %@", path);
+          [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
+        }
       }
     }
   }
@@ -349,6 +386,16 @@
   } else {
     [self setHasErrors:NO];
     [self setErrors:nil];
+  }
+  
+  // remove tmp file
+  if (self.fileBeingSyntaxChecked) {
+//    NSLog(@"Removing %@", self.fileBeingSyntaxChecked);
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
+      [NSApp presentError:error];
+    }
   }
   
   _checkingSyntax = NO;
@@ -386,9 +433,18 @@
   
 }
 
+- (NSString*) nameOfFileBeingEdited
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(nameOfFileBeingEdited)]) {
+    return [self.delegate nameOfFileBeingEdited];
+  }
+  return nil;
+}
+
 
 #pragma mark -
 #pragma mark TeXTextView delegate
+
 
 -(NSString*)fileExtension
 {
