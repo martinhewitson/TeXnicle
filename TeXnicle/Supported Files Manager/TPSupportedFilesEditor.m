@@ -147,6 +147,11 @@
     file.syntaxHighlight = [object boolValue];
   } else if ([[tableColumn identifier] isEqualToString:@"SpellCheckColumn"]) {
     file.spellcheck = [object boolValue];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPSupportedFileSpellCheckFlagChangedNotification 
+                                                        object:file 
+                                                      userInfo:nil];
+    
   } else {
     // do nothing
   }
