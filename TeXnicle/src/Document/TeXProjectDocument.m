@@ -478,6 +478,11 @@
          selector:@selector(handleLineNumberClickedNotification:) 
              name:TELineNumberClickedNotification
            object:self.texEditorViewController.textView];
+  
+  [nc addObserver:self
+         selector:@selector(handleSupportedFileSpellCheckFlagChangedNotification:) 
+             name:TPSupportedFileSpellCheckFlagChangedNotification 
+           object:nil];
     
 //  NSLog(@"Set status view values");
   [self.statusViewController setFilenameText:@""];
@@ -3595,6 +3600,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Spell Checker View Delegate
 
+- (void) handleSupportedFileSpellCheckFlagChangedNotification:(NSNotification*)aNote
+{
+  [self.spellcheckerViewController updateAllLists];
+}
+
 - (NSArray*)filesToSpellCheck
 {
   NSMutableArray *files = [NSMutableArray array];
@@ -3602,8 +3612,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        [files addObject:file];
+      
+      if ([file isText]) {        
+        NSString *ext = [file valueForKey:@"extension"] ;
+        TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+        for (NSString *lext in [sfm supportedExtensionsForSpellChecking]) {
+          if ([ext isEqual:lext]) {
+            [files addObject:file];
+          }
+        }        
       }
     }    
   }
