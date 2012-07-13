@@ -508,8 +508,7 @@
   while (range.location < [aString length] && misspelledWordCount <= 1000) {
     
     range = [checker checkSpellingOfString:aString startingAt:range.location];
-    
-    
+        
     if (range.location == NSNotFound) {
       break;
     }
