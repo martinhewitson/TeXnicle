@@ -128,6 +128,8 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
+  
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
@@ -593,7 +595,7 @@
 {
 //  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
   _windowIsClosing = YES;
-  
+    
   // stop timer
   [self.statusTimer invalidate];
   self.statusTimer = nil;
@@ -603,6 +605,18 @@
   
   // stop engine manager
   self.engineManager.delegate = nil;
+  
+  // stop texeditor
+  self.texEditorViewController.delegate = nil;
+  
+  // clear document from tree controller
+  self.projectItemTreeController.document = nil;
+  
+  // clear open docs delegate
+  self.openDocuments.delegate = nil;
+  
+  // clear main document from outline view
+  self.projectOutlineView.mainDocument = nil;
   
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
@@ -1662,6 +1676,22 @@
 
 #pragma mark -
 #pragma mark TeXEditorView delegate
+
+- (NSString*) nameOfFileBeingEdited
+{
+  return [[openDocuments currentDoc] name];
+}
+
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
+{
+//  NSLog(@"Edit asking if it should syntax check of %@", [[openDocuments currentDoc] name]);
+//  NSLog(@"  checking window %@", [self mainWindow]);
+  if ([[self mainWindow] isKeyWindow]) {
+//    NSLog(@"     yes!");
+    return YES;
+  }
+  return NO;
+}
 
 -(NSString*)codeForCommand:(NSString*)command
 {
