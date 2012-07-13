@@ -226,6 +226,24 @@
   return nil;
 }
 
+- (void)updateFile:(FileEntity*)aFile
+{
+  TPSpellCheckedFile *checkedFile = [self checkedFileForFile:aFile];
+  if (checkedFile) {
+    checkedFile.needsUpdate = YES;
+  }
+  [self performSpellCheck];
+}
+
+- (void)updateAllFilesWithExtension:(NSString*)ext
+{  
+  for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
+    if ([[checkedFile.file extension] isEqualToString:ext]) {
+      checkedFile.needsUpdate = YES;
+    }
+  }
+  [self performSpellCheck];
+}
 
 - (void) updateAllLists
 {
@@ -349,7 +367,7 @@
     // need to remove any checked-files which should be no longer checked
     NSMutableArray *filesToRemove = [NSMutableArray array];
     for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
-      if (![sortedItems containsObject:checkedFile.file]) {
+      if ([sortedItems containsObject:checkedFile.file] == NO) {
         [filesToRemove addObject:checkedFile];
       }
     }
@@ -404,6 +422,7 @@
 
 - (TPSpellCheckedFile*)checkedFileForFile:(id)file
 {
+  
   if ([file isKindOfClass:[FileEntity class]]) {
     for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
       if (checkedFile.file == file) {
@@ -574,8 +593,14 @@
       [files addObject:file];
     }
   }
+  
+  NSArray *sortedItems = [files sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSString *first  = [[(TPSpellCheckedFile*)a valueForKey:@"file"] valueForKey:@"name"];
+    NSString *second = [[(TPSpellCheckedFile*)b valueForKey:@"file"] valueForKey:@"name"];
+    return [first compare:second]==NSOrderedDescending;
+  }];
 
-  return files;
+  return sortedItems;
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item

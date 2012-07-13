@@ -52,5 +52,8 @@
 @property (retain) NSMutableArray *checkedFiles;
 
 - (id) initWithDelegate:(id<TPSpellCheckerListingDelegate>)aDelegate;
-
+- (void) updateFile:(FileEntity*)aFile;
+- (void) updateAllFilesWithExtension:(NSString*)ext;
+- (void) updateAllLists;
+- (void) performSpellCheck;
 @end
