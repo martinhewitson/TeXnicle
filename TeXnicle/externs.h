@@ -157,6 +157,7 @@ extern NSString * const TableViewNodeType;
 extern NSString * const OutlineViewNodeType;
 extern NSString * const TPDocumentMatchAttributeName;
 extern NSString * const TPLiveUpdateFrequency;
+extern NSString * const TPSpellingAutomaticByLanguage;
 
 // Settings
 extern NSString * const TPPaletteRowHeight;
