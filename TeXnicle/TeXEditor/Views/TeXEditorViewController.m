@@ -373,6 +373,10 @@
 - (void)syntaxCheckerCheckFailed:(TPSyntaxChecker *)checker
 {
   _checkingSyntax = NO;
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSError *error = nil;
+  if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
+  }
   [self setCheckFailed];
 }
 
