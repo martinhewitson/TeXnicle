@@ -199,10 +199,6 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
     [self.texEditorViewController.textView setNeedsDisplay:YES];
   }
   
-  NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:aDoc, @"file", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
-                                                      object:self
-                                                    userInfo:dictionary];
   
 }
 
@@ -327,6 +323,11 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 //	NSLog(@"Switching to document %@", [aDoc valueForKey:@"name"]);
 	currentDoc = aDoc;
   
+  NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentDoc, @"file", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
+                                                      object:self
+                                                    userInfo:dictionary];
+  
   // increase active state for this doc
   [currentDoc increaseActiveCount];
   
@@ -363,6 +364,7 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
+
   if (currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
