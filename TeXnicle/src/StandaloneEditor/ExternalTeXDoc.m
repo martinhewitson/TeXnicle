@@ -1479,10 +1479,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
 {
-  if ([[self mainWindow] isKeyWindow]) {
-    return YES;
+  if ([[[self fileURL] pathExtension] isEqualToString:@"tex"] == NO) {
+    return NO;
   }
-  return NO;
+  
+  if ([[self mainWindow] isKeyWindow] == NO) {
+    return NO;
+  }
+  return YES;
 }
 
 - (id)currentUndoManager
