@@ -235,7 +235,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
 //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
-  [self.texEditorViewController setDelegate:self];
+  self.texEditorViewController.delegate = self;
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
@@ -445,8 +445,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 }
 - (void)windowWillClose:(NSNotification *)notification 
 {		
-  // stop filemonitor from reaching us
-  self.fileMonitor.delegate = nil;
+//  NSLog(@"WindowWillClose %@", self);
   
   if (![self inVersionsMode]) {
     if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
@@ -459,6 +458,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([NSApp isLion]) {
     [self captureUIsettings];
   }  
+  
+  [self cleanUp];
 }
 
 
@@ -542,32 +543,90 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.statusViewController updateDisplay];
 }
 
+- (void) cleanUp
+{
+//  NSLog(@"### Clean up");
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // live update timer
+  [self.liveUpdateTimer invalidate];
+  self.liveUpdateTimer = nil;
+  
+  // max outline view depth
+  self.maxOutlineViewDepth= nil;
+  
+  // results
+  self.results = nil;
+  
+  // pdfviewer
+  self.pdfViewer.delegate = nil;
+  self.pdfViewer = nil;
+  
+  // pdf view controller
+  self.pdfViewerController.delegate = nil;
+  self.pdfViewerController = nil;
+
+  // mini console
+  self.miniConsole = nil;
+  
+  // console viewer
+  self.embeddedConsoleViewController = nil;
+  
+  // outline view controller
+  self.outlineViewController.delegate = nil;
+  self.outlineViewController = nil;
+  
+  // status view controller
+  self.statusViewController = nil;
+  
+  // spell checker  
+  self.spellcheckerViewController.delegate = nil;
+  [self.spellcheckerViewController stop];
+  self.spellcheckerViewController = nil;
+  
+  // settings
+  self.settings = nil;
+  
+  // engine settings controller
+  self.engineSettingsController.delegate = nil;
+  self.engineSettingsController = nil;
+  
+  // library
+  self.library.delegate = nil;
+  self.library = nil;
+  
+  // palette
+  self.palette.delegate = nil;
+  self.palette = nil;
+  
+  // tex editor view controller
+  self.texEditorViewController.textView.delegate = nil;
+  self.texEditorViewController.delegate = nil;
+  self.texEditorViewController = nil;
+  
+  // file load date
+  self.fileLoadDate = nil;
+  
+  // file monitor  
+  self.fileMonitor.delegate = nil;
+  self.fileMonitor = nil;
+  
+  // engine manager
+  self.engineManager.delegate = nil;  
+  self.engineManager = nil;
+  
+  // template editor
+  self.templateEditor.delegate = nil;
+  self.templateEditor = nil;
+ 
+}
+
 
 - (void) dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.liveUpdateTimer invalidate];
-  self.liveUpdateTimer = nil;
-  self.spellcheckerViewController = nil;
-  self.fileLoadDate = nil;
-  self.fileMonitor = nil;
-  self.engineManager = nil;
-  self.settings = nil;
-  self.palette = nil;
-  self.library = nil;
-  self.texEditorViewController = nil;
-  self.miniConsole = nil;
-  self.embeddedConsoleViewController = nil;
-  self.settings = nil;
-  self.engineSettingsController = nil;
-  self.statusViewContainer = nil;
-  self.pdfViewerController.delegate = nil;
-  self.pdfViewerController = nil;
-  self.results = nil;
-  self.pdfViewer = nil;
+//  NSLog(@"Dealloc %@", self);
 	[super dealloc];
 }
-
 
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
@@ -1412,6 +1471,19 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 #pragma mark -
 #pragma mark Text Editor delegate
+
+- (NSString*) nameOfFileBeingEdited
+{
+  return [[self fileURL] lastPathComponent];
+}
+
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
+{
+  if ([[self mainWindow] isKeyWindow]) {
+    return YES;
+  }
+  return NO;
+}
 
 - (id)currentUndoManager
 {
