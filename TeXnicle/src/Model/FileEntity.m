@@ -40,6 +40,7 @@
 @implementation FileEntity
 
 @dynamic fileLoadDate;
+@dynamic lastEditDate;
 @dynamic extension;
 @dynamic content;
 @dynamic isText;
@@ -492,22 +493,22 @@
   while (loc < [string length]) {
     NSString *word = [string nextWordStartingAtLocation:&loc];
     word = [word stringByTrimmingCharactersInSet:ns];
-    
-    // check file links
-    if ([word hasPrefix:@"\\input{"] || [word hasPrefix:@"\\include{"]) {
-      NSInteger start = loc-[word length]+1;
-      NSInteger end   = start;
-      NSString *filePath = [string parseArgumentStartingAt:&end];
-      if (filePath != nil && ![filePath isEqualToString:[self projectPath]]) {
-        FileEntity *nextFile = [self.project fileWithPath:filePath];
-        if (nextFile) {
-          NSRange repRange = NSMakeRange(start, end-start+1);
-          NSString *repString = [nextFile consolidatedFileContents];
-          string = [string stringByReplacingCharactersInRange:repRange withString:repString];
+    if ([word characterAtIndex:0] == '\\') {
+      // check file links
+      if ([word hasPrefix:@"\\input{"] || [word hasPrefix:@"\\include{"]) {
+        NSInteger start = loc-[word length]+1;
+        NSInteger end   = start;
+        NSString *filePath = [string parseArgumentStartingAt:&end];
+        if (filePath != nil && ![filePath isEqualToString:[self projectPath]]) {
+          FileEntity *nextFile = [self.project fileWithPath:filePath];
+          if (nextFile) {
+            NSRange repRange = NSMakeRange(start, end-start+1);
+            NSString *repString = [nextFile consolidatedFileContents];
+            string = [string stringByReplacingCharactersInRange:repRange withString:repString];
+          }
         }
       }
     }
-    
     loc++;    
   }
   
@@ -517,17 +518,22 @@
 #pragma mark -
 #pragma mark Metadata
 
-- (void)generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force 
+- (NSArray*) listOfNewCommands
+{
+  return [self.metadata listOfNewCommands];
+}
+
+- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force 
 {
   [self.metadata generateSectionsForTypes:templates forceUpdate:force];
 }
 
-- (NSString*)text
+- (NSString*) text
 {
   return [self workingContentString];
 }
 
-- (TPFileEntityMetadata*)metadataForFileWithName:(NSString *)file
+- (TPFileEntityMetadata*) metadataForFileWithName:(NSString *)file
 {
   return [[self.project fileWithPath:file] metadata];
 }

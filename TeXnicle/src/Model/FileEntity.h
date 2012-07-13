@@ -41,6 +41,7 @@
   TPFileEntityMetadata *metadata;
 }
 
+@property (retain) NSDate *lastEditDate;
 @property (assign) NSSet *bookmarks;
 @property (retain) NSDate *fileLoadDate;
 @property (copy) NSString *extension;
@@ -75,6 +76,7 @@
 #pragma mark -
 #pragma mark Metadata
 
+- (NSArray*) listOfNewCommands;
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 
 @end

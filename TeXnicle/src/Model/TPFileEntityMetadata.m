@@ -33,6 +33,7 @@
 #import "FileEntity.h"
 #import "ExternalTeXDoc.h"
 #import "NSString+SectionsOutline.h"
+#import "RegexKitLite.h"
 
 NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
 
@@ -41,12 +42,16 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
 @synthesize sections;
 @synthesize lastUpdateOfSections;
 @synthesize parent;
+@synthesize userNewCommands;
+@synthesize lastUpdateOfNewCommands;
 
 - (id) initWithParent:(id)aFile
 {
   self = [super init];
   if (self != nil) {
     self.parent = aFile;
+    self.lastUpdateOfNewCommands = nil;
+    self.lastUpdateOfSections = nil;
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
@@ -56,6 +61,7 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
 
 - (void) dealloc
 {
+  self.userNewCommands = nil;
   self.lastUpdateOfSections = nil;
   self.sections = nil;
 	dispatch_release(queue);
@@ -100,5 +106,36 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
   
   return sectionsFound;
 }
+
+#pragma mark -
+#pragma mark get new commands
+
+- (NSArray*)listOfNewCommands
+{
+//  NSLog(@"Getting commands for %@...", self.parent.name);
+  // if the file hasn't changed since we last generated the list, just return the list
+  NSDate *lastEdit = self.parent.lastEditDate;
+  NSDate *lastUpdate = self.lastUpdateOfNewCommands;
+  
+  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil) {
+//    NSLog(@"   generating");
+    NSMutableArray *commands = [NSMutableArray array];
+    // consolidated main file
+    NSString *allText = [self.parent workingContentString];
+    NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+    for (NSString *newCommand in newCommands) {
+      [commands addObject:[newCommand argument]];
+    }
+    
+    self.userNewCommands = [NSArray arrayWithArray:commands];
+  } else {
+//    NSLog(@"   skipping");
+  }
+  
+  
+  self.lastUpdateOfNewCommands = [NSDate date];
+  return self.userNewCommands;
+}
+
 
 @end

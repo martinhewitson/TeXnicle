@@ -28,6 +28,7 @@
 #import <Foundation/Foundation.h>
 
 @class TPFileEntityMetadata;
+@class FileEntity;
 
 @protocol TPFileEntityMetadataDelegate <NSObject>
 
@@ -36,18 +37,27 @@
 @end
 
 @interface TPFileEntityMetadata : NSObject {
+  NSArray *userNewCommands;
+  NSDate *lastUpdateOfNewCommands;
   NSArray *sections;
   NSDate *lastUpdateOfSections;
-  id parent;
+  FileEntity *parent;
   dispatch_queue_t queue;
 }
 
-@property (assign) id parent;
+@property (assign) FileEntity *parent;
 @property (retain) NSArray *sections;
 @property (retain) NSDate *lastUpdateOfSections;
+@property (retain) NSArray *userNewCommands;
+@property (retain) NSDate *lastUpdateOfNewCommands;
 
 - (id) initWithParent:(id)aFile;
 - (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
+
+#pragma mark -
+#pragma mark get new commands
+
+- (NSArray*)listOfNewCommands;
 
 @end
