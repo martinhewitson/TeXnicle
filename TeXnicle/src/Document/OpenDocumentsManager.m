@@ -147,7 +147,12 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
   return standaloneWindows;
 }
 
-- (void) addDocument:(FileEntity*)aDoc
+- (void) addAndSelectDocument:(FileEntity*)aDoc
+{
+  [self addDocument:aDoc select:YES];
+}
+
+- (void) addDocument:(FileEntity*)aDoc select:(BOOL)selectTab
 {	
 	if (!openDocuments)
 		return;
@@ -180,8 +185,10 @@ NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDid
     [openDocuments addObject:aDoc];
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
-		[tabView addTabViewItem:newItem];
-		[tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
+    [tabView addTabViewItem:newItem];
+    if (selectTab) {
+      [tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
+    }
 		[newItem release];
 	}	else {
 		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
