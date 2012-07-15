@@ -35,9 +35,13 @@
   NSAttributedString *selectedDisplayString;
   NSAttributedString *displayString;
 }
+
+// core data properties
 @property (nonatomic, retain) NSNumber * linenumber;
+@property (nonatomic, retain) NSString * text;
 @property (nonatomic, retain) FileEntity *parentFile;
-@property (nonatomic, copy) NSString * text;
+
+// other properties
 @property (readonly) NSAttributedString *selectedDisplayString;
 @property (readonly) NSAttributedString *displayString;
 
