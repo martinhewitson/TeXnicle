@@ -36,14 +36,15 @@
 
 }
 
-@property (assign) NSString *name;
-@property (assign) NSString *folder;
-@property (assign) NSSet *items;
-@property (copy) NSString *type;
-@property (assign) Settings *settings;
-@property (assign) FileEntity *selected;
-@property (assign) FileEntity *mainFile;
-@property (assign) UISettings *uiSettings;
+@property (nonatomic, retain) NSString * folder;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * type;
+@property (nonatomic, retain) NSSet *items;
+@property (nonatomic, retain) FileEntity *mainFile;
+@property (nonatomic, retain) FileEntity *selected;
+@property (nonatomic, retain) Settings *settings;
+@property (nonatomic, retain) UISettings *uiSettings;
+
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
