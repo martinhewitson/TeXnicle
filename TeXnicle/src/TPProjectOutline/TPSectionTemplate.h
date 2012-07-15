@@ -20,7 +20,7 @@
 @property (copy) NSString *tag;
 @property (copy) NSString *name;
 @property (assign) TPSectionTemplate *parent;
-@property (assign) NSColor *color;
+@property (retain) NSColor *color;
 @property (copy) NSString *mnemonic;
 
 + (id) documentSectionTemplateWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate*)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName;
