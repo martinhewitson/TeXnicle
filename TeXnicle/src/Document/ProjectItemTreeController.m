@@ -151,13 +151,17 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) dealloc
 {
-	//NSLog(@"ProjectItemTreeController dealloc");
+  outlineView.delegate = nil;
+  outlineView.dataSource = nil; 
 	NSError *error = nil;
 	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
 	if (success == NO) {
 		[NSApp presentError:error];
 		return;
 	}
+  
+  self.document = nil;
+  
 	[filesToAdd release];
 	[super dealloc];
 }
