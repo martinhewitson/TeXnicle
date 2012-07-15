@@ -64,9 +64,16 @@
 - (void) dealloc
 {
   self.delegate = nil;
-  [self.timer invalidate];
-  self.timer = nil;
+  [self stopTimer];
   [super dealloc];
+}
+
+- (void) stopTimer
+{
+  if (self.timer) {
+    [self.timer invalidate];
+    self.timer = nil;
+  }  
 }
 
 - (void)checkFilesTimerFired:(NSTimer*)theTimer

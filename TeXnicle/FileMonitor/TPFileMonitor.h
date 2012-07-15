@@ -58,5 +58,6 @@
 + (TPFileMonitor*)monitorWithDelegate:(id<TPFileMonitorDelegate>)aDelegate;
 
 - (void)checkFilesTimerFired:(NSTimer*)theTimer;
+- (void) stopTimer;
 
 @end
