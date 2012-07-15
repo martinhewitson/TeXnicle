@@ -37,16 +37,17 @@
   BOOL _isSelected;
 }
 
-@property (assign) BOOL isExpanded;
+// core data properties
+@property (nonatomic, retain) NSString * filepath;
+@property (nonatomic, retain) NSNumber * isExpanded;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * sortIndex;
+@property (nonatomic, retain) NSSet *children;
+@property (nonatomic, retain) ProjectItemEntity *parent;
+@property (nonatomic, retain) ProjectEntity *project;
+
+// other properties
 @property (assign) BOOL isSelected;
-@property (assign) NSString *name;
-@property (assign) NSString *filepath;
-@property (assign) NSNumber *sortIndex;
-
-@property (assign) NSSet *children;
-@property (assign) ProjectItemEntity *parent;
-@property (assign) ProjectEntity *project;
-
 @property (readonly) NSString *pathRelativeToProject;
 @property (readonly) NSString *projectPath;
 @property (readonly) NSString *pathOnDisk;
