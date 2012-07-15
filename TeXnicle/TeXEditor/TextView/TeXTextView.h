@@ -144,7 +144,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (IBAction)uncommentSelection:(id)sender;
 
 - (IBAction) showSpellingList:(id)sender;
-- (IBAction)complete:(id)sender;
+- (IBAction)completeStuff:(id)sender;
 
 #pragma mark -
 #pragma mark Text Storage Observing
