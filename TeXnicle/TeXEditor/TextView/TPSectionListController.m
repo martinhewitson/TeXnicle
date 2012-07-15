@@ -134,15 +134,18 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 - (void) deactivate
 {
 //	NSLog(@"Deactivate TPSectionListController");
-	[self.timer invalidate];
+  if (self.timer) {
+    [self.timer invalidate];
+    self.timer = nil;
+  }
 }
 
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 //  NSLog(@"Dealloc TPSectionListController");
-  [self.timer invalidate];
-  self.timer = nil;
+  [self deactivate];
+
 	[addMarkerActionMenu release];
 	[sections release];
 	[super dealloc];
