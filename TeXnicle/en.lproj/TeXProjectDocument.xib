@@ -641,7 +641,6 @@
 														<nil key="NSNextResponder"/>
 														<int key="NSvFlags">256</int>
 														<string key="NSFrameSize">{225, 576}</string>
-														<reference key="NSNextKeyView" ref="1002247264"/>
 													</object>
 													<string key="NSLabel">Item 4</string>
 													<reference key="NSColor" ref="1051993651"/>
@@ -3211,27 +3210,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="512844837"/>
-					</object>
-					<int key="connectionID">100097</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">tabView</string>
 						<reference key="source" ref="211197426"/>
 						<reference key="destination" ref="749074883"/>
 					</object>
 					<int key="connectionID">100118</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tabBar</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="582867506"/>
-					</object>
-					<int key="connectionID">100106</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3243,11 +3226,19 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">partnerView</string>
-						<reference key="source" ref="582867506"/>
-						<reference key="destination" ref="749074883"/>
+						<string key="label">tabBar</string>
+						<reference key="source" ref="211197426"/>
+						<reference key="destination" ref="582867506"/>
 					</object>
-					<int key="connectionID">100115</int>
+					<int key="connectionID">100106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="211197426"/>
+						<reference key="destination" ref="512844837"/>
+					</object>
+					<int key="connectionID">100097</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3264,6 +3255,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="211197426"/>
 					</object>
 					<int key="connectionID">100119</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">partnerView</string>
+						<reference key="source" ref="582867506"/>
+						<reference key="destination" ref="749074883"/>
+					</object>
+					<int key="connectionID">100115</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -4448,12 +4447,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="parent" ref="776577915"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">100100</int>
-						<reference key="object" ref="582867506"/>
-						<reference key="parent" ref="9263989"/>
-						<string key="objectName">Tab Bar Control</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">100110</int>
 						<reference key="object" ref="749074883"/>
 						<reference key="parent" ref="9263989"/>
@@ -4622,6 +4615,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<int key="objectID">100916</int>
 						<reference key="object" ref="981885193"/>
 						<reference key="parent" ref="269132885"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100100</int>
+						<reference key="object" ref="582867506"/>
+						<reference key="parent" ref="9263989"/>
+						<string key="objectName">Tab Bar Control</string>
 					</object>
 				</array>
 			</object>
@@ -4949,6 +4948,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="className">MHControlsTabBarController</string>
 					<string key="superclassName">NSResponder</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="buttonSelected:">id</string>
 						<string key="showBookmarks:">id</string>
 						<string key="showClippingsLibrary:">id</string>
 						<string key="showDocumentOutline:">id</string>
@@ -4960,6 +4960,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="showSymbolPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="buttonSelected:">
+							<string key="name">buttonSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showBookmarks:">
 							<string key="name">showBookmarks:</string>
 							<string key="candidateClassName">id</string>
@@ -5634,7 +5638,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
-						<string key="otherFilesContainer">NSView</string>
 						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
@@ -5725,10 +5728,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>
 							<string key="candidateClassName">OpenDocumentsManager</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="otherFilesContainer">
-							<string key="name">otherFilesContainer</string>
-							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineViewContainer">
 							<string key="name">outlineViewContainer</string>
