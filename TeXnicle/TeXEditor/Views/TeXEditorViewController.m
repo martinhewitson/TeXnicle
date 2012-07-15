@@ -81,10 +81,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
-//  NSLog(@"Dealloc TeXEditorViewController");
-  
-  [self.syntaxCheckTimer invalidate];
-  self.syntaxCheckTimer = nil;
+  [self stopSyntaxChecker];
   self.checker.delegate = nil;
   self.checker = nil;
   
@@ -117,12 +114,17 @@
 #pragma mark -
 #pragma Control 
 
-- (void) setupSyntaxChecker
+- (void) stopSyntaxChecker
 {
   if (self.syntaxCheckTimer) {
     [self.syntaxCheckTimer invalidate];
     self.syntaxCheckTimer = nil;
   }
+}
+
+- (void) setupSyntaxChecker
+{
+  [self stopSyntaxChecker];
   
   self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
                                                            target:self
@@ -314,7 +316,7 @@
 {
 //  NSLog(@"Syntax check timer fired!");
   // no point in syntax checking while the app is not active
-  if (![NSApp isActive]) {
+  if (![[NSApplication sharedApplication] isActive]) {
 //    NSLog(@"  app not active");
     return;
   }
@@ -324,8 +326,7 @@
   if (self.delegate == nil) {
 //    NSLog(@"  delegate nil");
     // then we are done, so stop the timer
-    [self.syntaxCheckTimer invalidate];
-    self.syntaxCheckTimer = nil;
+    [self stopSyntaxChecker];
     return;
   }
   
@@ -363,8 +364,8 @@
     NSString *fileToCheck = [self nameOfFileBeingEdited];
 //    NSLog(@"Name of file to check %@", fileToCheck);
     if (fileToCheck) {
-      NSString *filename = [NSString stringWithFormat:@"check_%@", fileToCheck]; //@"texnicle_syntax_check.tex";
-      NSString *path = [[[NSString pathForTemporaryFileWithPrefix:@"tmp"] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
+//      NSString *filename = [NSString stringWithFormat:@"check_%@", fileToCheck];
+      NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
       NSString *content = [self.textView string];
       //    NSLog(@"Content length %d", [content length]);
       if ([content length] > 0) {
@@ -372,6 +373,8 @@
           self.fileBeingSyntaxChecked = path;
 //          NSLog(@"Checking path %@", path);
           [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
+        } else {
+//          NSLog(@"Failed to write %@", path);
         }
       }
     }
@@ -380,16 +383,21 @@
 
 - (void)syntaxCheckerCheckFailed:(TPSyntaxChecker *)checker
 {
+//  NSLog(@"Checker failed");
   _checkingSyntax = NO;
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
+  if ([fm fileExistsAtPath:self.fileBeingSyntaxChecked]) {
+    if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
+//      NSLog(@"Failed to remove %@", self.fileBeingSyntaxChecked);
+    }
   }
   [self setCheckFailed];
 }
 
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker
 {
+//  NSLog(@"Checker finished");
 //  NSLog(@"Got errors %d from %@", [self.checker.errors count], checker);
   
   if ([self.checker.errors count] > 0) {
@@ -404,9 +412,11 @@
   if (self.fileBeingSyntaxChecked) {
 //    NSLog(@"Removing %@", self.fileBeingSyntaxChecked);
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
-    if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
-      [NSApp presentError:error];
+    if ([fm fileExistsAtPath:self.fileBeingSyntaxChecked]) {
+      NSError *error = nil;
+      if ([fm removeItemAtPath:self.fileBeingSyntaxChecked error:&error] == NO) {
+//        NSLog(@"Failed to remove %@", self.fileBeingSyntaxChecked);
+      }
     }
   }
   

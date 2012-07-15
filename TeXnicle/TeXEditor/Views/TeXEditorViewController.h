@@ -86,6 +86,7 @@
 
 - (void) handleDocumentChanged:(NSNotification*)aNote;
 - (void) setupSyntaxChecker;
+- (void) stopSyntaxChecker;
 
 #pragma mark -
 #pragma mark Insert Table
