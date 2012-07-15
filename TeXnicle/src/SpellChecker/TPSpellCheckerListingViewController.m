@@ -63,6 +63,8 @@
 
 - (void) dealloc
 {
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
   self.checkedFiles = nil;
   [self stop];
 	dispatch_release(queue);
