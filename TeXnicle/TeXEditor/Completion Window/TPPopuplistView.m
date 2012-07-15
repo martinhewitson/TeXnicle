@@ -78,18 +78,7 @@
 }
 
 - (void) keyDown:(NSEvent *)theEvent
-{
-//	NSLog(@"Key down on list %@", theEvent);
-//	NSLog(@"Delegate: %@", delegate);
-  
-	// escape key dismisses the window
-	if ([theEvent keyCode] == 53) {
-		if ([delegate respondsToSelector:@selector(dismiss)]) {
-			[delegate performSelector:@selector(dismiss)];
-      return;
-		}
-	}
-	
+{  
 	// user hit enter
 	if ([theEvent keyCode] == 36) {
 		if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
@@ -100,8 +89,7 @@
 	}
 	
   // pass to delegate
-  [delegate keyDown:theEvent];
-  
+  [delegate keyDown:theEvent];  
 }
 
 
