@@ -41,18 +41,23 @@
   TPFileEntityMetadata *metadata;
 }
 
-@property (retain) NSDate *lastEditDate;
-@property (assign) NSSet *bookmarks;
-@property (retain) NSDate *fileLoadDate;
-@property (copy) NSString *extension;
-@property (retain) NSData *content;
-@property (assign) NSNumber *isText;
+// core data properties
+@property (nonatomic, retain) NSData * content;
+@property (nonatomic, retain) NSString * cursor;
+@property (nonatomic, retain) NSString * extension;
+@property (nonatomic, retain) NSDate * fileLoadDate;
+@property (nonatomic, retain) NSNumber * isText;
+@property (nonatomic, retain) NSDate * lastEditDate;
+@property (nonatomic, retain) NSString * visibleRect;
+@property (nonatomic, retain) NSNumber * wasOpen;
+@property (nonatomic, retain) NSSet *bookmarks;
+@property (nonatomic, retain) ProjectEntity *mainFileOfProject;
+
+// other properties
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
 @property (readonly) NSString *consolidatedFileContents;
-
 @property (retain) TPFileEntityMetadata *metadata;
-
 @property (assign) NSInteger isActive;
 
 - (void)increaseActiveCount;

@@ -257,8 +257,8 @@
 	return document;
 }
 
-- (void)prepareForDeletion
-{
+- (void) willTurnIntoFault
+{  
 	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);
 		[document release];
@@ -266,7 +266,6 @@
 	}
   self.metadata = nil;
   self.content = nil;
-  self.fileLoadDate = nil;
 }
 
 - (NSString*) extension
@@ -517,6 +516,11 @@
 
 #pragma mark -
 #pragma mark Metadata
+
+- (void) updateMetadata
+{
+  [self.metadata updateMetadata];
+}
 
 - (NSArray*) listOfNewCommands
 {
