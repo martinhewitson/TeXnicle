@@ -229,6 +229,8 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	if (_currentTearOffStyle == PSMTabBarTearOffAlphaWindow && _draggedView) {
 		if (_fadeTimer) {
 			[_fadeTimer invalidate];
+      [_fadeTimer release];
+      _fadeTimer = nil;
 		}
 		
 		[[_draggedTab window] orderFront:nil];
@@ -477,21 +479,23 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	
 	_centersDragWindows = NO;
 	
-    [self setIsDragging:NO];
-    [self removeAllPlaceholdersFromTabBar:[self sourceTabBar]];
-    [self setSourceTabBar:nil];
-    [self setDestinationTabBar:nil];
-    NSEnumerator *e = [_participatingTabBars objectEnumerator];
-    PSMTabBarControl *tabBar;
-    while ( (tabBar = [e nextObject]) ) {
-        [self removeAllPlaceholdersFromTabBar:tabBar];
-    }
-    [_participatingTabBars removeAllObjects];
-    [self setDraggedCell:nil];
+  [self setIsDragging:NO];
+  [self removeAllPlaceholdersFromTabBar:[self sourceTabBar]];
+  [self setSourceTabBar:nil];
+  [self setDestinationTabBar:nil];
+  NSEnumerator *e = [_participatingTabBars objectEnumerator];
+  PSMTabBarControl *tabBar;
+  while ( (tabBar = [e nextObject]) ) {
+    [self removeAllPlaceholdersFromTabBar:tabBar];
+  }
+  [_participatingTabBars removeAllObjects];
+  [self setDraggedCell:nil];
+  if (_animationTimer) {
     [_animationTimer invalidate];
     _animationTimer = nil;
-    [_sineCurveWidths removeAllObjects];
-    [self setTargetCell:nil];
+  }
+  [_sineCurveWidths removeAllObjects];
+  [self setTargetCell:nil];
 }
 
 - (void)draggingBeganAt:(NSPoint)aPoint
