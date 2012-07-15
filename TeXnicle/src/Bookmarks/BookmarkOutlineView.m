@@ -41,10 +41,17 @@
   resetTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(resetTimerFired:) userInfo:nil repeats:YES];
 }
 
+- (void) stopTimer
+{
+  if (self.resetTimer) {
+    [self.resetTimer invalidate];
+    self.resetTimer = nil;
+  }
+}
+
 - (void) dealloc
 {
-  [self.resetTimer invalidate];
-  self.resetTimer = nil;
+  [self stopTimer];
   self.lastKeyStroke = nil;
   [super dealloc];
 }

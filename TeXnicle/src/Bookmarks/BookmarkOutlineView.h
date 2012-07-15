@@ -52,5 +52,6 @@
 @property (assign) IBOutlet NSTextField *selectingStatus;
 
 - (void) updateStatus;
+- (void) stopTimer;
 
 @end
