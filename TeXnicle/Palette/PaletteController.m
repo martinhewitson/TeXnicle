@@ -45,6 +45,8 @@
 
 - (void) dealloc
 {
+  symbolsTable.delegate = nil;
+  symbolsTable.dataSource = nil;
   [palettesController setContent:nil];
   self.delegate = nil;
   self.palettes = nil;
