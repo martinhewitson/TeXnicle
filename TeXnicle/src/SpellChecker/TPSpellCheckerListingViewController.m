@@ -63,10 +63,8 @@
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc %@", self);
   self.checkedFiles = nil;
-  [self.spellCheckTimer invalidate];
-  self.spellCheckTimer = nil;
+  [self stop];
 	dispatch_release(queue);
   [super dealloc];
 }
@@ -281,17 +279,16 @@
 
 - (void) stop
 {
-  [self.spellCheckTimer invalidate];
-  self.spellCheckTimer = nil;
+  if (self.spellCheckTimer) {
+    [self.spellCheckTimer invalidate];
+    self.spellCheckTimer = nil;
+  }
 }
 
 
 - (void) setupSpellChecker
 {
-  if (self.spellCheckTimer) {
-    [self.spellCheckTimer invalidate];
-    self.spellCheckTimer = nil;
-  }
+  [self stop];
   
   if ([self performSimpleSpellCheck]) {
     self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
@@ -314,15 +311,15 @@
 
 - (void) performSpellCheck
 {
+  
   // don't bother if the app is not active
-  if (![NSApp isActive]) {
+  if (![[NSApplication sharedApplication] isActive]) {
     return;
   }
   
   // if we don't have a delegate, don't proceed
   if (self.delegate == nil) {
-    [self.spellCheckTimer invalidate];
-    self.spellCheckTimer = nil;
+    [self stop];
     return;
   }
 
@@ -392,7 +389,6 @@
   }
   
   NSArray *filesToCheck = [self filesToSpellCheck];
-  
   checkingFiles = 0;
   if (filesToCheck) {
     
@@ -443,9 +439,7 @@
           [self.progressIndicator startAnimation:self];
           dispatch_async(queue, ^{						
             
-            NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
             [self addMisspelledWordsFromFile:file];
-            [pool drain];      
             
           });
         } else {
@@ -487,13 +481,14 @@
   dispatch_sync(dispatch_get_main_queue(), ^{
     checkedFile = [self checkedFileForFile:file];
     if (checkedFile == nil) {
-      checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:file] autorelease];
+      checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
       addFile = YES;
     }
   });
   
   
   NSArray *words = [self listOfMisspelledWordsFromString:string forFile:checkedFile];
+  
   
   dispatch_async(dispatch_get_main_queue(),
                  // block
@@ -504,6 +499,8 @@
                    if (addFile) {
                      [self.checkedFiles addObject:checkedFile];
                    }
+                   [checkedFile release];
+                   
                    [self.outlineView reloadData];
                    checkingFiles--;
                    
@@ -528,6 +525,14 @@
     
     range = [checker checkSpellingOfString:aString startingAt:range.location];
         
+    // there seems to be a bug here in checkSpellingOfString:startingAt: where it gets
+    // the same word again. So we check for that.
+    if (NSEqualRanges(range, lastRange)) {
+//      NSLog(@"Got same range %@", NSStringFromRange(range));
+      range = NSMakeRange(NSMaxRange(range), 0);
+//      NSLog(@"Jumping to %@", NSStringFromRange(range));
+    }
+    
     if (range.location == NSNotFound) {
       break;
     }
@@ -537,20 +542,25 @@
       break;
     }
     
+    // store last range
+    lastRange = range;
+    
     // did we get a word?
-    if (NSMaxRange(range) < [aString length]) {
+    if (NSMaxRange(range) < [aString length] && range.length > 0) {
       NSString *misspelledWord = [aString substringWithRange:range];
+//      NSLog(@"Found misspelled word [%@] at %@", misspelledWord, NSStringFromRange(range));
       NSArray *corrections = [checker guessesForWordRange:range inString:aString language:nil inSpellDocumentWithTag:0];
       TPMisspelledWord *word = [TPMisspelledWord wordWithWord:misspelledWord corrections:corrections range:range parent:aFile];
       [words addObject:word];
       misspelledWordCount++;
+      // move on
+      range = NSMakeRange(NSMaxRange(range), 0);
+//      NSLog(@"  moving on to %@", NSStringFromRange(range));
+    } else {
+      break;
     }
     
-    // store last range
-    lastRange = range;
     
-    // move on
-    range = NSMakeRange(NSMaxRange(range), 0);
   } // end while loop
   
   return words;
