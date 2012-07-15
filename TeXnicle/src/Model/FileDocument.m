@@ -49,19 +49,22 @@
 		file = aFile;
 		
 		// Get the string from the File entity
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
-		NSString *str = [[[NSString alloc] initWithData:[file valueForKey:@"content"]
-																					encoding:encoding] autorelease];
+		NSString *str = [[NSString alloc] initWithData:[file valueForKey:@"content"]
+																					encoding:encoding];
     
 		// Setup undo manager for this file
 		undoManager = [[NSUndoManager alloc] init];
 		
 		// Setup a text storage to hold this string
-		NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+		NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
 		textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
-									 		
+    [attStr release];
+    [str release];
+    [fr release];
+    
 		// Add a main layout manager
 		NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
 		[layoutManager setAllowsNonContiguousLayout:YES];
@@ -90,6 +93,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[undoManager release];
 	[textStorage release];
 	[super dealloc];
