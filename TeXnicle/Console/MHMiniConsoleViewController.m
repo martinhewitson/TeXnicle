@@ -33,6 +33,12 @@
 @synthesize textField;
 @synthesize progressIndicator;
 
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
 - (id)init
 {
   self = [super initWithNibName:@"MHMiniConsoleViewController" bundle:nil];
