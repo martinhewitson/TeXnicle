@@ -127,42 +127,10 @@
 @synthesize embeddedConsoleContainer;
 @synthesize embeddedConsoleViewController;
 
-@synthesize otherFilesContainer;
-@synthesize otherFilesViewController;
-
 @synthesize liveUpdateTimer;
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc %@", self);
-  
-  [self stopObserving];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
-  [self.statusTimer invalidate];
-  self.statusTimer = nil;
-  self.tabHistory = nil;
-  self.statusViewController = nil;
-  self.outlineViewController = nil;
-  self.bookmarkManager = nil;
-  self.palette = nil;
-  self.project = nil;  
-  self.pdfViewerController = nil;
-  self.imageViewerController = nil;
-  self.texEditorViewController = nil;
-  self.fileMonitor = nil;
-  self.finder = nil;
-  self.library = nil;
-  self.spellcheckerViewController = nil;
-  self.engineManager = nil;
-  self.engineSettings = nil;
-  self.pdfViewer = nil;
-  self.miniConsole = nil;
-  self.embeddedConsoleViewController = nil;
-  self.otherFilesViewController = nil;
-  [self.liveUpdateTimer invalidate];
-  self.liveUpdateTimer = nil;
-  
   [super dealloc];
 }
 
@@ -178,17 +146,21 @@
 
 - (void)setupLiveUpdateTimer
 {
-  if (self.liveUpdateTimer) {
-    [self.liveUpdateTimer invalidate];
-    self.liveUpdateTimer = nil;
-  }
+  [self stopLiveUpdateTimer];
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   float updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
-  
+
 }
 
+- (void) stopLiveUpdateTimer
+{
+  if (self.liveUpdateTimer) {
+    [self.liveUpdateTimer invalidate];
+    self.liveUpdateTimer = nil;
+  }
+}
 
 #pragma mark -
 #pragma mark KVO 
@@ -258,82 +230,11 @@
   return NO;
 }
 
-//+ (BOOL)autosavesInPlace
-//{
-//  return YES;
-//}
-
-//- (BOOL)revertToContentsOfURL:(NSURL *)inAbsoluteURL ofType:(NSString *)inTypeName error:(NSError **)outError
-//{
-//  NSLog(@"Reverting to %@ for type %@", inAbsoluteURL, inTypeName);
-//  return [super revertToContentsOfURL:inAbsoluteURL ofType:inTypeName error:outError];
-//}
-
-
-- (void)windowWillEnterVersionBrowser:(NSNotification *)notification
-{
-//  NSLog(@"Window will enter versions browser");
-  _leftDividerPostion = self.leftView.frame.size.width;
-  _rightDividerPostion = self.splitview.frame.size.width - self.rightView.frame.size.width;
-  _windowFrame = self.windowForSheet.frame;
-//  [self.splitview setPosition:0 ofDividerAtIndex:0];
-//  [self.splitview setPosition:self.splitview.frame.size.width ofDividerAtIndex:1];
-  
-  // disable some UI 
-  [self.texEditorViewController.textView setEditable:NO];  
-  [self.statusViewController enable:NO];
-}
-
-- (void)windowDidEnterVersionBrowser:(NSNotification *)notification
-{
-//  NSLog(@"Window did enter versions");
-  _inVersionsBrowser = YES;
-}
-
-- (void)windowWillExitVersionBrowser:(NSNotification *)notification
-{
-//  NSLog(@"Window will exit versions browser");
-}
-
-- (void)windowDidExitVersionBrowser:(NSNotification *)notification
-{
-//  NSLog(@"Window did exit versions browser");
-  if (self.windowForSheet == [notification object]) {
-    _inVersionsBrowser = NO;
-    
-    CAAnimation *anim = [CABasicAnimation animation];
-    [anim setDelegate:self];
-    [self.windowForSheet setAnimations:[NSDictionary dictionaryWithObject:anim forKey:@"frame"]];
-    
-    [self.windowForSheet.animator setFrame:_windowFrame display:YES];
-  }
-//  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
-  
-  // reenable some UI
-  [self.texEditorViewController.textView setEditable:YES];  
-  [self.statusViewController enable:YES];
-}
-
-
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag 
-{
-//  [self performSelector:@selector(restoreSplitViewPositions) withObject:nil afterDelay:0.2];
-  [self.windowForSheet makeKeyAndOrderFront:self];
-}
-
-- (void) restoreSplitViewPositions
-{
-  //  NSLog(@"Restoring positions %f, %f", _leftDividerPostion, _rightDividerPostion);
-  [self.splitview setPosition:_leftDividerPostion ofDividerAtIndex:0];
-  [self.splitview setPosition:_rightDividerPostion ofDividerAtIndex:1];
-}
-
-
-
 - (void) setupDocument
 {
 //  NSLog(@"setupDocument");
 
+  // outline view
   self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
   [self.outlineViewContainer addSubview:self.outlineViewController.view];
@@ -342,14 +243,7 @@
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
   [self.engineSettingsContainer addSubview:[self.engineSettings view]];
-//  NSLog(@"Setup settings");
-  
-//  // setup other files viewer
-//  self.otherFilesViewController = [[[OtherFilesViewController alloc] initWithURL:[[self fileURL] URLByDeletingLastPathComponent] delegate:self] autorelease];
-//  [self.otherFilesViewController.view setFrame:[self.otherFilesContainer bounds]];
-//  [self.otherFilesContainer addSubview:self.otherFilesViewController.view];
-//  [self.otherFilesViewController reloadData];
-  
+    
   // Setup text view  
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   [self.texEditorViewController setDelegate:self];
@@ -361,7 +255,6 @@
   
   self.openDocuments.texEditorViewController = self.texEditorViewController;
   [self.openDocuments disableTextView];
-//  NSLog(@"Setup tex editor");
   
   // setup status view
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
@@ -372,7 +265,6 @@
     // the status bar is showing by default, so toggle it out
     [self toggleStatusBar:NO];
   }
-//  NSLog(@"Setup status");
   
   // setup image viewer
   self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
@@ -380,21 +272,17 @@
   self.openDocuments.imageViewContainer = self.imageViewerContainer;
   [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
-//  NSLog(@"Setup image viewer");
   
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
   [self.pdfViewerController.view setFrame:[pdfViewerContainerView bounds]];
-  [pdfViewerContainerView addSubview:self.pdfViewerController.view];
-//  NSLog(@"Setup pdf viewer");
-    
+  [pdfViewerContainerView addSubview:self.pdfViewerController.view];    
   
   // setup library
   self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
   NSView *libraryView = [self.library view];
   [libraryView setFrame:[self.libraryContainerView bounds]];
   [self.libraryContainerView addSubview:libraryView];
-//  NSLog(@"Setup library");
   
   // setup spellchecker
   self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
@@ -403,31 +291,26 @@
   
   // setup file monitor
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
-//  NSLog(@"Setup filemonitor");
   
   // setup finder
   self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
   [self.finder.view setFrame:[self.finderContainerView bounds]];
   [self.finderContainerView addSubview:self.finder.view];
-//  NSLog(@"Setup finder");
   
   // setup palette
   self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
   NSView *paletteView = [self.palette view];
   [paletteView setFrame:[self.paletteContainverView bounds]];
   [self.paletteContainverView addSubview:paletteView];
-//  NSLog(@"Setup palette");
   
   // setup bookmark manager
   self.bookmarkManager = [[[BookmarkManager alloc] initWithDelegate:self] autorelease];
   NSView *bookmarkView = [self.bookmarkManager view];
   [bookmarkView setFrame:[self.bookmarkContainerView bounds]];
   [self.bookmarkContainerView addSubview:bookmarkView];
-//  NSLog(@"Setup bookmark manager");
   
   // setup engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
-//  NSLog(@"Setup engine manager");
   
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
@@ -503,16 +386,13 @@
              name:TPOpenDocumentsDidAddFileNotification 
            object:openDocuments];
     
-//  NSLog(@"Set status view values");
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
   
   
   // ensure the project has the same name as on disk
-//  NSLog(@"Setting up project %@", self.project);
   NSString *newProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
-//  NSLog(@"Setting project name from %@ to %@", self.project.name, newProjectName);
   if (![[self.project valueForKey:@"name"] isEqualToString:newProjectName]) {
     [self.project setValue:newProjectName forKey:@"name"];
   }
@@ -527,7 +407,6 @@
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
   [self.mainWindow setNextResponder:self.controlsTabBarController];  
   
-//  NSLog(@"Setup document finished.");
   // Show document
   [self showDocument];
 }
@@ -610,41 +489,128 @@
   
 }
 
-- (void)windowWillClose:(NSNotification *)notification 
+- (void) stopStatusTimer
 {
-//  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
-  _windowIsClosing = YES;
-    
-  // stop timer
-  [self.statusTimer invalidate];
-  self.statusTimer = nil;
-  
-  // stop file monitor
-	self.fileMonitor.delegate = nil;
-  
-  // stop engine manager
-  self.engineManager.delegate = nil;
-  
-  // stop texeditor
-  self.texEditorViewController.delegate = nil;
-  
-  // clear document from tree controller
-  self.projectItemTreeController.document = nil;
-  
-  // clear open docs delegate
-  self.openDocuments.delegate = nil;
-  
-  // clear main document from outline view
-  self.projectOutlineView.mainDocument = nil;
+  if (self.statusTimer) {
+    [self.statusTimer invalidate];
+    self.statusTimer = nil;
+  }
+}
+
+- (void) cleanUp
+{
+  NSLog(@"### Clean up");
   
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
 		[self.openDocuments.tabView removeTabViewItem:item];
 	}
-	
+  
+  // clear up open documents
+  self.openDocuments.texEditorViewController = nil;
+  self.openDocuments.delegate = nil;
+  self.openDocuments = nil;
+  
+  // stop observing notifications
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  // stop KVO
+  [self stopObserving];
+  
+  // stop timer
+  [self stopStatusTimer];
+  
+  // live update timer
+  [self stopLiveUpdateTimer];
+  
+  // tab history
+  self.tabHistory = nil;
+  
+  // outline view controller
+  [self.outlineViewController stop];
+  self.outlineViewController.delegate = nil;
+  self.outlineViewController = nil;
+  
+  // mini console
+  self.miniConsole = nil;
+  
+  // console viewer
+  self.embeddedConsoleViewController = nil;
+  
+  // pdfviewer
+  self.pdfViewer.delegate = nil;
+  self.pdfViewer = nil;
+  
+  // status view controller
+  self.statusViewController = nil;
+  
+  // engine settings controller
+  self.engineSettings.delegate = nil;
+  self.engineSettings = nil;
+  
+  // engine manager
+  self.engineManager.delegate = nil;  
+  self.engineManager = nil;
+  
+  // bookmark manager
+  self.bookmarkManager.delegate = nil;
+  self.bookmarkManager = nil;
+  
+  // palette
+  self.palette.delegate = nil;
+  self.palette = nil;
+  
+  // finder
+  self.finder.delegate = nil;
+  self.finder = nil;
+  
+  // library
+  self.library.delegate = nil;
+  self.library = nil;
+
+  // spell checker  
+  self.spellcheckerViewController.delegate = nil;
+  [self.spellcheckerViewController stop];
+  self.spellcheckerViewController = nil;  
+  
+  // pdf view controller
+  self.pdfViewerController.delegate = nil;
+  self.pdfViewerController = nil;  
+  
+  // project
+  self.project = nil;
+  
+  // tex editor view controller
+  [self.texEditorViewController stopSyntaxChecker];
+  self.texEditorViewController.textView.delegate = nil;
+  self.texEditorViewController.delegate = nil;
+  self.texEditorViewController = nil;
+  
+  // image viewer controller
+  self.imageViewerController = nil;
+  
+  // file monitor  
+  [self.fileMonitor stopTimer];
+  self.fileMonitor.delegate = nil;
+  self.fileMonitor = nil;
+  
+  // template editor
+  self.templateEditor.delegate = nil;
+  self.templateEditor = nil;
+  
+}
+
+
+- (void)windowWillClose:(NSNotification *)notification 
+{
+//  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
+  _windowIsClosing = YES;  
+    
+  [self cleanUp];
+  
+  // see if we want to open the startup screen
 	NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
 	[window setDelegate:nil];
-//  NSLog(@"Open windows %d", [[[NSDocumentController sharedDocumentController] documents] count]);
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
 			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];

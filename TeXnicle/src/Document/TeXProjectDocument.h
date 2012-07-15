@@ -146,10 +146,7 @@
   
   PaletteController *palette;
   NSView *paletteContainverView;
-  
-  OtherFilesViewController *otherFilesViewController;
-  NSView *otherFilesContainer;
-  
+    
   BOOL pdfHasSelection;
   
   BOOL _windowIsClosing;
@@ -183,9 +180,6 @@
 @property (assign) IBOutlet NSWindow *mainWindow;
 
 @property (retain) NSTimer *liveUpdateTimer;
-
-@property (retain) OtherFilesViewController *otherFilesViewController;
-@property (assign) IBOutlet NSView *otherFilesContainer;
 
 @property (retain) TPProjectOutlineViewController *outlineViewController;
 @property (assign) IBOutlet NSView *outlineViewContainer;
