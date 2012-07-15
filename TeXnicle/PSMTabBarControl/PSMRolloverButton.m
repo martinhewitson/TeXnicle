@@ -133,7 +133,7 @@
     // restore usual image
 	[self setImage:_usualImage];
 
-	[super mouseExited:theEvent];
+//	[super mouseExited:theEvent];
 }
 
 - (void)resetCursorRects
