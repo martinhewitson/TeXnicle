@@ -21,6 +21,15 @@
 @synthesize showDetailsButton;
 @synthesize depthSlider;
 
+- (void) dealloc
+{
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
+  [self.outlineBuilder stopTimer];
+  self.outlineBuilder = nil;
+  [super dealloc];
+}
+
 - (id)initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate
 {
   self = [super initWithNibName:@"TPProjectOutlineViewController" bundle:nil];
@@ -35,10 +44,7 @@
 
 - (void) awakeFromNib
 {
-  [self.outlineBuilder buildOutline];
-  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0];
-  
-  [self.outlineBuilder startTimer];
+  [self setupOutlineBuilder];
   
   NSInteger maxOutlineDepth = [[self.delegate maxOutlineDepth] integerValue];
   if (maxOutlineDepth >= [self.outlineBuilder.templates count]) {
@@ -46,6 +52,20 @@
   }
   [self.depthSlider setIntegerValue:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;
+  
+}
+
+- (void) setupOutlineBuilder
+{
+  [self.outlineBuilder performSelectorOnMainThread:@selector(buildOutline) withObject:nil waitUntilDone:YES];
+  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:2];
+  
+  [self.outlineBuilder startTimer];  
+}
+
+- (void) stop
+{
+  [self.outlineBuilder stopTimer];
 }
 
 #pragma mark -
@@ -125,53 +145,25 @@
 
 - (id) outlineView:(NSOutlineView *)anOutlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-  if ([[tableColumn identifier] isEqualToString:@"NameColumn"]) {
-    
-    BOOL showDetails = NO;
-    if ([self.showDetailsButton state] == NSOnState) {
-      showDetails = YES;
-    }
-    
-    if ([anOutlineView isRowSelected:[anOutlineView rowForItem:item]]) {
-      if (showDetails) {
-        return [item valueForKey:@"selectedDisplayNameWithDetails"];
-      } else {
-        return [item valueForKey:@"selectedDisplayName"];
-      }
+  
+  BOOL showDetails = NO;
+  if ([self.showDetailsButton state] == NSOnState) {
+    showDetails = YES;
+  }
+  
+  if ([anOutlineView isRowSelected:[anOutlineView rowForItem:item]]) {
+    if (showDetails) {
+      return [item valueForKey:@"selectedDisplayNameWithDetails"];
     } else {
-      if (showDetails) {
-        return [item valueForKey:@"displayNameWithDetails"];
-      } else {
-        return [item valueForKey:@"displayName"];
-      }
+      return [item valueForKey:@"selectedDisplayName"];
     }
-  } else if ([[tableColumn identifier] isEqualToString:@"FileColumn"]) {
-    NSString *name = [[item valueForKey:@"file"] valueForKey:@"name"];
-    NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:name] autorelease];     
-    NSColor *color;
-    if ([anOutlineView isRowSelected:[anOutlineView rowForItem:item]]) {
-      color = [NSColor alternateSelectedControlTextColor];
-    } else {
-      color = [NSColor darkGrayColor];    
-    }
-    [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
-    return att;
-  } else if ([[tableColumn identifier] isEqualToString:@"TypeColumn"]) {
-    NSString *name = [[item valueForKey:@"type"] valueForKey:@"name"];
-    NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:name] autorelease];     
-    
-    NSColor *color;
-    if ([anOutlineView isRowSelected:[anOutlineView rowForItem:item]]) {
-      color = [NSColor alternateSelectedControlTextColor];
-    } else {
-      color = [NSColor colorWithDeviceRed:0.2 green:0.6 blue:0.2 alpha:1.0];    
-    }
-    [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
-    
-    return att;
   } else {
-    return nil;
-  }  
+    if (showDetails) {
+      return [item valueForKey:@"displayNameWithDetails"];
+    } else {
+      return [item valueForKey:@"displayName"];
+    }
+  }
 }
 
 // Expand all sections
@@ -196,7 +188,7 @@
   [self.delegate didSetMaxOutlineDepthTo:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;
   [self.outlineBuilder buildOutline];
-  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0];
+  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0.1];
 }
 
 
