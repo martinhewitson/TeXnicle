@@ -2165,6 +2165,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 
+
 - (void)keyDown:(NSEvent *)theEvent
 {
   
@@ -2181,6 +2182,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
+  [popupList dismiss];
   [self clearHighlight];
 	[self clearSpellingList];
   
@@ -2193,7 +2195,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self.delegate textView:self didCommandClickAtLine:line column:column];
     }
 	}
-
   
 	[super mouseDown:theEvent];
 }
