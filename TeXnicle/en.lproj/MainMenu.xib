@@ -2136,14 +2136,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">complete:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="660555092"/>
-					</object>
-					<int key="connectionID">583</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">showSpellingList:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="345210975"/>
@@ -2805,6 +2797,14 @@
 						<reference key="destination" ref="776162233"/>
 					</object>
 					<int key="connectionID">564</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">completeStuff:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="660555092"/>
+					</object>
+					<int key="connectionID">826</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -4359,7 +4359,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">825</int>
+			<int key="maxID">826</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4880,6 +4880,7 @@
 					<string key="className">MHControlsTabBarController</string>
 					<string key="superclassName">NSResponder</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="buttonSelected:">id</string>
 						<string key="showBookmarks:">id</string>
 						<string key="showClippingsLibrary:">id</string>
 						<string key="showDocumentOutline:">id</string>
@@ -4891,6 +4892,10 @@
 						<string key="showSymbolPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="buttonSelected:">
+							<string key="name">buttonSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showBookmarks:">
 							<string key="name">showBookmarks:</string>
 							<string key="candidateClassName">id</string>
@@ -5012,6 +5017,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">MHPDFThumbnailView</string>
+					<string key="superclassName">PDFThumbnailView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MHPDFThumbnailView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">MHPDFView</string>
 					<string key="superclassName">PDFView</string>
 					<object class="NSMutableDictionary" key="outlets">
@@ -5100,6 +5113,7 @@
 					<string key="superclassName">NSResponder</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="delegate">id</string>
+						<string key="navigationButtonsView">NSView</string>
 						<string key="tabBackground">NSBox</string>
 						<string key="tabBar">PSMTabBarControl</string>
 						<string key="tabView">NSTabView</string>
@@ -5108,6 +5122,10 @@
 						<object class="IBToOneOutletInfo" key="delegate">
 							<string key="name">delegate</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="navigationButtonsView">
+							<string key="name">navigationButtonsView</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tabBackground">
 							<string key="name">tabBackground</string>
@@ -5218,7 +5236,7 @@
 						<string key="liveUpdateButton">NSButton</string>
 						<string key="nextButton">HHValidatedButton</string>
 						<string key="pageCountDisplay">NSTextField</string>
-						<string key="pdfThumbnailView">PDFThumbnailView</string>
+						<string key="pdfThumbnailView">MHPDFThumbnailView</string>
 						<string key="pdfViewContainer">NSView</string>
 						<string key="pdfview">MHPDFView</string>
 						<string key="prevButton">HHValidatedButton</string>
@@ -5252,7 +5270,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="pdfThumbnailView">
 							<string key="name">pdfThumbnailView</string>
-							<string key="candidateClassName">PDFThumbnailView</string>
+							<string key="candidateClassName">MHPDFThumbnailView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="pdfViewContainer">
 							<string key="name">pdfViewContainer</string>
@@ -6176,6 +6194,7 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="backTabButton">HHValidatedButton</string>
 						<string key="bookmarkContainerView">NSView</string>
 						<string key="centerView">NSView</string>
 						<string key="controlsTabBarController">MHControlsTabBarController</string>
@@ -6186,6 +6205,7 @@
 						<string key="embeddedConsoleContainer">NSView</string>
 						<string key="engineSettingsContainer">NSView</string>
 						<string key="finderContainerView">NSView</string>
+						<string key="forwardTabButton">HHValidatedButton</string>
 						<string key="imageViewerContainer">NSView</string>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
@@ -6193,7 +6213,6 @@
 						<string key="newFileSheet">NSWindow</string>
 						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
-						<string key="otherFilesContainer">NSView</string>
 						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="pdfViewerContainerView">NSView</string>
@@ -6209,6 +6228,10 @@
 						<string key="texEditorContainer">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="backTabButton">
+							<string key="name">backTabButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="bookmarkContainerView">
 							<string key="name">bookmarkContainerView</string>
 							<string key="candidateClassName">NSView</string>
@@ -6249,6 +6272,10 @@
 							<string key="name">finderContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="forwardTabButton">
+							<string key="name">forwardTabButton</string>
+							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="imageViewerContainer">
 							<string key="name">imageViewerContainer</string>
 							<string key="candidateClassName">NSView</string>
@@ -6276,10 +6303,6 @@
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>
 							<string key="candidateClassName">OpenDocumentsManager</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="otherFilesContainer">
-							<string key="name">otherFilesContainer</string>
-							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineViewContainer">
 							<string key="name">outlineViewContainer</string>
@@ -6345,7 +6368,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="collapseAll:">id</string>
 						<string key="commentSelection:">id</string>
-						<string key="complete:">id</string>
+						<string key="completeStuff:">id</string>
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
@@ -6374,8 +6397,8 @@
 							<string key="name">commentSelection:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="complete:">
-							<string key="name">complete:</string>
+						<object class="IBActionInfo" key="completeStuff:">
+							<string key="name">completeStuff:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="expandAll:">
