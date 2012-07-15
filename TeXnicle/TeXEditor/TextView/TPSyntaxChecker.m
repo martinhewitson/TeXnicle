@@ -409,14 +409,18 @@
 //    return;
 //  }
   
-  if (lacheckTask == nil) {
-    lacheckTask = [[NSTask alloc] init];    
-    pipe = [NSPipe pipe];
-    [lacheckTask setStandardOutput:pipe];
-    [lacheckTask setStandardError:pipe];    
-    lacheckFileHandle = [pipe fileHandleForReading];
-    [self setupObservers];
+  if (lacheckTask != nil) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [lacheckTask interrupt];
+    [lacheckTask release];
   }
+  
+  lacheckTask = [[NSTask alloc] init];    
+  pipe = [NSPipe pipe];
+  [lacheckTask setStandardOutput:pipe];
+  [lacheckTask setStandardError:pipe];    
+  lacheckFileHandle = [pipe fileHandleForReading];
+  [self setupObservers];
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *chktexPath = [defaults valueForKey:TPChkTeXpath];
@@ -452,16 +456,11 @@
 
 - (void) taskFinished:(NSNotification*)aNote
 {
-//  NSLog(@"Task finished, %@", aNote);
+//  NSLog(@"Task finished");
   
 	if ([aNote object] != lacheckTask)
 		return;
-  
-  if (lacheckTask) {
-    [lacheckTask release];
-    lacheckTask = nil;
-  }
-	
+  	
   _taskRunning = NO;
   
 }
@@ -470,7 +469,7 @@
 
 - (void) texOutputAvailable:(NSNotification*)aNote
 {	
-//  NSLog(@"Output available %@", aNote);
+//  NSLog(@"Output available");
   
 	if( [aNote object] != lacheckFileHandle )
 		return;
@@ -502,7 +501,7 @@
     errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ([errorString length]>0) {
       TPSyntaxError *error = [TPSyntaxError errorWithMessageLine:errorString];
-      if ([error.line integerValue] != NSNotFound && [error.message length]>0) {
+      if ([error.line integerValue] != NSNotFound && [error.message length]>0 && [newErrors containsObject:error] == NO) {
         [newErrors addObject:error];
       }
     }
