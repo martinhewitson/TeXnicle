@@ -198,15 +198,16 @@
 	 forTableColumn:(NSTableColumn *)aTableColumn 
 							row:(NSInteger)rowIndex
 {
-	NSDictionary *dict = [recentFiles objectAtIndex:rowIndex];
-  NSString *path = [[dict valueForKey:@"url"] path];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:path]) {
-		[aCell setTextColor:[NSColor blackColor]];
-	} else {
-		[aCell setTextColor:[NSColor redColor]];
-	}
-	
+  if (recentFiles != nil) {
+    NSDictionary *dict = [recentFiles objectAtIndex:rowIndex];
+    NSString *path = [[dict valueForKey:@"url"] path];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:path]) {
+      [aCell setTextColor:[NSColor blackColor]];
+    } else {
+      [aCell setTextColor:[NSColor redColor]];
+    }
+  }	
 }
 
 - (NSString *)tableView:(NSTableView *)aTableView 
