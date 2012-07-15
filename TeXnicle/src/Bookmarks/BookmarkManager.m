@@ -65,6 +65,8 @@
 // Dealloc and remove self from notifcation center
 - (void) dealloc
 {
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [super dealloc];
