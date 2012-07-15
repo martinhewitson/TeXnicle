@@ -283,16 +283,6 @@
 #pragma mark -
 #pragma mark Table delegate
 
-
-- (void)tableView:(NSTableView *)tableView 
-	willDisplayCell:(id)cell 
-	 forTableColumn:(NSTableColumn *)tableColumn 
-							row:(NSInteger)row
-{
-	if (tableView == table) {
-	}
-}
-
 - (id)tableView:(NSTableView *)tableView 
 objectValueForTableColumn:(NSTableColumn *)tableColumn 
 						row:(NSInteger)row;
