@@ -638,12 +638,14 @@
 
 - (NSArray*)nonEmptyCheckedFiles
 {
+  NSArray *existingFiles = [self.checkedFiles retain];
   NSMutableArray *files = [NSMutableArray array];
-  for (TPSpellCheckedFile *file in self.checkedFiles) {
+  for (TPSpellCheckedFile *file in existingFiles) {
     if ([file.words count] > 0) {
       [files addObject:file];
     }
   }
+  [existingFiles release];
   
   NSArray *sortedItems = [files sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
     NSString *first  = [[(TPSpellCheckedFile*)a valueForKey:@"file"] valueForKey:@"name"];
