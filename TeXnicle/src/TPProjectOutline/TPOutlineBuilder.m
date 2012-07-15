@@ -52,16 +52,15 @@
 
 - (void) stopTimer
 {
-  [self.timer invalidate];
-  self.timer = nil;
-}
-
-- (void) startTimer
-{
   if (self.timer) {
     [self.timer invalidate];
     self.timer = nil;
   }
+}
+
+- (void) startTimer
+{
+  [self stopTimer];
   
   self.timer = [NSTimer scheduledTimerWithTimeInterval:2 
                                                 target:self
@@ -74,8 +73,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.timer invalidate];
-  self.timer = nil;
+  [self stopTimer];
   self.templates = nil;
   self.sectionCommands = nil;
   self.sections = nil;
