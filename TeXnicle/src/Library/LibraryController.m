@@ -313,6 +313,10 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 - (void) dealloc
 {
+  categoryTable.delegate = nil;
+  categoryTable.dataSource = nil;
+  itemsTable.delegate = nil;
+  itemsTable.dataSource = nil;
   [self saveLibrary];
   self.delegate = nil;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
