@@ -83,12 +83,20 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.texEditorViewController.textView colorVisibleText];
 }
 
-- (void) dealloc
+- (void) cleanUp
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
+  self.tabView.delegate = nil;
+  tabBar.delegate = nil;
+  tabBar.partnerView = nil;
 	[openDocuments release];
-	[standaloneWindows release];
+	[standaloneWindows release];  
+}
+
+- (void) dealloc
+{
+  [self cleanUp];
 	[super dealloc];
 }
 
