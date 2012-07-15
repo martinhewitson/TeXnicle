@@ -33,9 +33,26 @@
 @synthesize line;
 @synthesize message;
 
+- (void) dealloc
+{
+  self.line = nil;
+  [super dealloc];
+}
+
 + (id) errorWithMessageLine:(NSString*)aLine
 {
   return [[[TPSyntaxError alloc] initWithMessageLine:aLine] autorelease];
+}
+
+- (BOOL) isEqual:(TPSyntaxError*)object
+{
+  if (![self.line isEqualToNumber:object.line]) {
+    return NO;
+  }
+  if (![self.message isEqualToString:object.message]) {
+    return NO;
+  }
+  return YES;
 }
 
 - (id) initWithMessageLine:(NSString*)aLine
