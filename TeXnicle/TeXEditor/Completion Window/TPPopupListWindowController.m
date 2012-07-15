@@ -72,8 +72,7 @@
 
 - (void) handleWindowDidResignKeyNotification
 {
-//  NSLog(@"Window resigned key");
-//  [self dismiss];
+  [self dismiss];
 }
 
 - (void)setList:(NSArray*)aList
