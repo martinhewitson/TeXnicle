@@ -62,6 +62,8 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 - (NSInteger) indexOfSelectedTab;
 - (void) selectTabAtIndex:(NSInteger)index;
 
+- (IBAction)buttonSelected:(id)sender;
+
 - (id) buttonForTabIndex:(NSInteger)index;
 - (NSInteger)tabIndexForButton:(id)sender;
 
