@@ -105,35 +105,31 @@
 
 - (NSAttributedString*)textForDisplayWithColor:(NSColor*)color details:(BOOL)showDetails
 {
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = [[self.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-  if ([text length]==0) {
-    text = @"<blank>";
-  }
-  if ([text length]>50) {
-    text = [[text substringToIndex:50] stringByAppendingString:@"..."];
-  }
-  
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
-  
+  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:self.name] autorelease]; 
+    
   [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
   
   if (showDetails) {
     // type, file
-    [att appendAttributedString:[[[NSAttributedString alloc] initWithString:@"  "] autorelease]];
+    NSAttributedString *blank = [[NSAttributedString alloc] initWithString:@"  "];
+    [att appendAttributedString:blank];
+    [blank release];
     NSString *typeFileStr = [NSString stringWithFormat:@"(%@, %@)", self.type.name, [self filename]];
-    NSMutableAttributedString *typeStr = [[[NSMutableAttributedString alloc] initWithString:typeFileStr] autorelease]; 
+    NSMutableAttributedString *typeStr = [[NSMutableAttributedString alloc] initWithString:typeFileStr]; 
     [typeStr addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [typeStr length])];
-    [typeStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] range:NSMakeRange(0, [typeStr length])];
-    
+    [typeStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] range:NSMakeRange(0, [typeStr length])];    
     [att appendAttributedString:typeStr];
+    [typeStr release];
   }
-  // set paragraph
-  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
   
+  // set paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
+  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  [ps release];
+    
   return att;  
 }
 
