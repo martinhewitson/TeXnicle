@@ -35,6 +35,12 @@
 @synthesize showMenu;
 @synthesize mainDocument;
 
+- (void) dealloc
+{
+  self.mainDocument = nil;
+  [super dealloc];
+}
+
 - (void) awakeFromNib
 {
   self.showMenu = YES;
