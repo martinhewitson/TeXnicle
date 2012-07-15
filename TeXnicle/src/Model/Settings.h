@@ -33,13 +33,16 @@
 @interface Settings : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSString * engineName;
+
+// core data properties
 @property (nonatomic, retain) NSNumber * doBibtex;
 @property (nonatomic, retain) NSNumber * doPS2PDF;
+@property (nonatomic, retain) NSString * engineName;
+@property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSNumber * nCompile;
 @property (nonatomic, retain) NSNumber * openConsole;
 @property (nonatomic, retain) NSNumber * showStatusBar;
 @property (nonatomic, retain) ProjectEntity *project;
+
 
 @end
