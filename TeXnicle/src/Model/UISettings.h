@@ -32,11 +32,12 @@
 
 @interface UISettings : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * selectedControlsTab;
-@property (nonatomic, retain) NSString * pdfViewScrollRect;
+// core data properties
 @property (nonatomic, retain) NSNumber * controlsWidth;
 @property (nonatomic, retain) NSNumber * editorWidth;
 @property (nonatomic, retain) NSNumber * maxOutlineDepth;
+@property (nonatomic, retain) NSString * pdfViewScrollRect;
+@property (nonatomic, retain) NSNumber * selectedControlsTab;
 @property (nonatomic, retain) ProjectEntity *project;
 
 @end
