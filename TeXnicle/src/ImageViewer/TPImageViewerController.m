@@ -35,6 +35,11 @@
 @synthesize toolbarView;
 @synthesize path;
 
+- (void) dealloc
+{
+  [super dealloc];
+}
+
 - (id) init
 {
   self = [self initWithNibName:@"TPImageViewerController" bundle:nil];
