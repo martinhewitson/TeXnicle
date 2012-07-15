@@ -121,6 +121,8 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.searchResultsTable.delegate = nil;
+  self.searchResultsTable.dataSource = nil;
   self.delegate = nil;
   self.searchResults = nil;
   [super dealloc];
