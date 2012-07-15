@@ -83,7 +83,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) dealloc
 {
-//  NSLog(@"TextView dealloc");
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.tableConfigureController.delegate = nil;
   self.tableConfigureController = nil;
