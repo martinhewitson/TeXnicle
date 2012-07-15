@@ -204,16 +204,25 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	//stop any animations that may be running
-	[_animationTimer invalidate];
-	[_animationTimer release]; _animationTimer = nil;
-	
-	[_showHideAnimationTimer invalidate];
-	[_showHideAnimationTimer release]; _showHideAnimationTimer = nil;
-	
+  if (_animationTimer) {
+    [_animationTimer invalidate];
+    [_animationTimer release]; 
+    _animationTimer = nil;
+	}
+  
+  if (_showHideAnimationTimer) {
+    [_showHideAnimationTimer invalidate];
+    [_showHideAnimationTimer release]; 
+    _showHideAnimationTimer = nil;
+	}
+  
 	//Also unwind the spring, if it's wound.
-	[_springTimer invalidate];
-	[_springTimer release]; _springTimer = nil;
-	
+	if (_springTimer) {
+    [_springTimer invalidate];
+    [_springTimer release]; 
+    _springTimer = nil;
+	}
+  
 	//unbind all the items to prevent crashing
 	//not sure if this is necessary or not
 	NSEnumerator *enumerator = [_cells objectEnumerator];
@@ -943,8 +952,11 @@
 			}
 		}
 		
-		[_showHideAnimationTimer invalidate];
-		[_showHideAnimationTimer release]; _showHideAnimationTimer = nil;
+    if (_showHideAnimationTimer) {
+      [_showHideAnimationTimer invalidate];
+      [_showHideAnimationTimer release]; 
+      _showHideAnimationTimer = nil;
+    }
 	}
 	[[self window] display];
 }
@@ -1132,9 +1144,12 @@
 			[_addTabButton setFrame:frame];
 		}
 		
-		[_animationTimer invalidate];
-		[_animationTimer release]; _animationTimer = nil;
-		
+    if (_animationTimer) {
+      [_animationTimer invalidate];
+      [_animationTimer release]; 
+      _animationTimer = nil;
+		}
+    
 		for (NSInteger i = 0; i < cellCount; i++) {
 			currentCell = [_cells objectAtIndex:i];
 			
@@ -1494,9 +1509,12 @@
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
-	[_springTimer invalidate];
-	[_springTimer release]; _springTimer = nil;
-	
+  if (_springTimer) {
+    [_springTimer invalidate];
+    [_springTimer release]; 
+    _springTimer = nil;
+	}
+  
 	[[PSMTabDragAssistant sharedDragAssistant] draggingExitedTabBar:self];
 }
 
@@ -1540,8 +1558,11 @@
 	[tabView selectTabViewItem:[cell representedObject]];
 	
 	_tabViewItemWithSpring = nil;
-	[_springTimer invalidate];
-	[_springTimer release]; _springTimer = nil;
+  if (_springTimer) {
+    [_springTimer invalidate];
+    [_springTimer release]; 
+    _springTimer = nil;
+  }
 }
 
 #pragma mark -
