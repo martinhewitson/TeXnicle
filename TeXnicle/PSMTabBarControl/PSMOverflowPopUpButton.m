@@ -81,7 +81,10 @@
 	if ([self isHidden] != value) {
 		if (value) {
 			// Stop any animating alternate image if we hide
-			[_animationTimer invalidate], _animationTimer = nil;
+      if (_animationTimer) {
+        [_animationTimer invalidate];
+        _animationTimer = nil;
+      }
 		} else if (_animatingAlternateImage) {
 			// Restart any animating alternate image if we unhide
 			_animationValue = ANIMATION_STEP;
@@ -112,7 +115,10 @@
 				[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSEventTrackingRunLoopMode];
 
 			} else {
-				[_animationTimer invalidate], _animationTimer = nil;
+        if (_animationTimer) {
+          [_animationTimer invalidate];
+          _animationTimer = nil;
+        }
 			}
 
 			[self setNeedsDisplay:YES];
