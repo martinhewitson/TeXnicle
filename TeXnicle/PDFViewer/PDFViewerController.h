@@ -32,6 +32,7 @@
 #import "MHSlideViewController.h"
 #import "MHSlidingSplitViewController.h"
 #import "MHPDFView.h"
+#import "MHPDFThumbnailView.h"
 
 @class PDFViewerController;
 
@@ -47,7 +48,7 @@
 @private
   IBOutlet NSView *pdfViewContainer;
   MHPDFView *pdfview;
-  PDFThumbnailView *pdfThumbnailView;
+  MHPDFThumbnailView *pdfThumbnailView;
   id<PDFViewerControllerDelegate> delegate;
   NSInteger _currentHighlightedPDFSearchResult;
   
@@ -84,7 +85,7 @@
 @property (assign) IBOutlet MHSlidingSplitViewController *searchResultsSlideViewController;
 @property (assign) IBOutlet MHSlidingSplitViewController *thumbSlideViewController;
 @property (assign) IBOutlet MHPDFView *pdfview;
-@property (assign) IBOutlet PDFThumbnailView *pdfThumbnailView;
+@property (assign) IBOutlet MHPDFThumbnailView *pdfThumbnailView;
 @property (assign) IBOutlet NSSearchField *searchField;
 @property (assign) IBOutlet NSTextField *statusText;
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;

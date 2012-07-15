@@ -121,6 +121,8 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.pdfThumbnailView.PDFView = nil;
+  self.pdfThumbnailView = nil;
   self.searchResultsTable.delegate = nil;
   self.searchResultsTable.dataSource = nil;
   self.delegate = nil;
