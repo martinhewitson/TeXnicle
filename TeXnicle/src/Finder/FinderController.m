@@ -88,6 +88,8 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
 - (void) dealloc
 {
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
   self.delegate = nil;
   [ws release];
   [ns release];
@@ -285,9 +287,9 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 			if ([[file valueForKey:@"isText"] boolValue]) {
         dispatch_async(queue, ^{						
                     
-          NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
+//          NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
           [self stringSearchForTerm:searchTerm inFile:file];
-          [pool drain];      
+//          [pool drain];      
           
         });
 			} // end if isText			
