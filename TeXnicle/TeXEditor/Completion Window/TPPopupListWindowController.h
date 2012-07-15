@@ -49,9 +49,11 @@
 	IBOutlet NSTableView *table;
 	IBOutlet SBGradientView *gradientView;
 	IBOutlet NSSearchField *searchField;
+  BOOL isVisible;
 }
 
 @property (nonatomic, copy) NSString *searchString;
+@property (assign) BOOL isVisible;
 
 @property (readwrite, copy) NSString *title;
 @property (readwrite, assign) id delegate;

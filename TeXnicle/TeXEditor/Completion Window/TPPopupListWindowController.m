@@ -35,6 +35,7 @@
 @synthesize delegate;
 @synthesize title;
 @synthesize searchString;
+@synthesize isVisible;
 
 - (id) initWithEntries:(NSArray*)entryArray 
 							 atPoint:(NSPoint)aPoint 
@@ -45,7 +46,7 @@
 	self = [super initWithNibName:@"TPPopuplistView" bundle:nil];
 	
 	if (self) {
-		
+		self.isVisible = NO;
 		[self setTitle:aTitle];
 		mode = aMode;
 		parentWindow = aWindow;
@@ -72,7 +73,7 @@
 - (void) handleWindowDidResignKeyNotification
 {
 //  NSLog(@"Window resigned key");
-  [self dismiss];
+//  [self dismiss];
 }
 
 - (void)setList:(NSArray*)aList
@@ -163,7 +164,7 @@
     [searchField setNextKeyView:table];
     [table setNextKeyView:searchField];
     
-	}
+	} // end if !attachedWindow
 }
 
 - (void)keyDown:(NSEvent *)theEvent
@@ -173,22 +174,11 @@
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc");
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[entries release];
-	[self dismiss];
+  [self dismiss];
 	[super dealloc];
-}
-
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command
-{
-  if (command == @selector(cancelOperation:)) {
-    if ([[textView string] length]==0) {
-      [self dismiss];
-    } 
-  }
-  return NO;
 }
 
 
@@ -199,13 +189,13 @@
 	[attachedWindow makeKeyAndOrderFront:self];
 	[attachedWindow makeFirstResponder:table];
 	[table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+  self.isVisible = YES;
 }
 
 - (void) dismiss
 {
 //  NSLog(@"Dismiss");
-//	[attachedWindow resignKeyWindow];
-//	[table resignFirstResponder];
+  
 	if ([[parentWindow childWindows] containsObject:attachedWindow]) {
 		[parentWindow removeChildWindow:attachedWindow];
 	}
@@ -213,6 +203,8 @@
 		[attachedWindow close];
 		attachedWindow = nil;
 	}
+  self.isVisible = NO;
+  
   if (self.delegate && [self.delegate respondsToSelector:@selector(didDismissPopupList)]) {
     [self.delegate performSelector:@selector(didDismissPopupList)];
   }
@@ -282,6 +274,15 @@
 
 #pragma mark -
 #pragma mark Table delegate
+
+- (void)tableView:(NSTableView *)tableView 
+	willDisplayCell:(id)cell 
+	 forTableColumn:(NSTableColumn *)tableColumn 
+							row:(NSInteger)row
+{
+	if (tableView == table) {
+	}
+}
 
 - (id)tableView:(NSTableView *)tableView 
 objectValueForTableColumn:(NSTableColumn *)tableColumn 
