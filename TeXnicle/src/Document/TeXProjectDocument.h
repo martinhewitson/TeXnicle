@@ -45,6 +45,7 @@
 #import "PDFViewer.h"
 #import "TPSupportedFilesManager.h"
 #import "MHControlsTabBarController.h"
+#import "MHInfoTabBarController.h"
 #import "TPTemplateEditor.h"
 #import "TPProjectTemplateCreator.h"
 #import "TPConsoleViewController.h"
@@ -80,7 +81,6 @@
   
   BOOL _inVersionsBrowser;
   
-  NSInteger selectedControlsTab;
   
 	IBOutlet NSWindow *renameSheet;
 	IBOutlet NSTextField *renameField;
@@ -149,6 +149,7 @@
   BOOL _windowIsClosing;
   
   MHControlsTabBarController *controlsTabBarController;
+  MHInfoTabBarController *infoControlsTabBarController;
   
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
@@ -237,6 +238,7 @@
 @property (retain) TPTemplateEditor *templateEditor;
 
 @property (assign) IBOutlet MHControlsTabBarController *controlsTabBarController;
+@property (assign) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
 
 @property (readonly) BOOL pdfHasSelection;
 

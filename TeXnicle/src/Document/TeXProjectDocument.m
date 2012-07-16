@@ -55,7 +55,7 @@
 #import "BibliographyEntry.h"
 #import "RegexKitLite.h"
 
-#define kSplitViewLeftMinSize 255.0
+#define kSplitViewLeftMinSize 235.0
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
@@ -123,6 +123,7 @@
 @synthesize templateEditor;
 
 @synthesize controlsTabBarController;
+@synthesize infoControlsTabBarController;
 
 @synthesize miniConsole;
 @synthesize embeddedConsoleContainer;
@@ -357,6 +358,11 @@
            object:nil];
   
   [nc addObserver:self
+         selector:@selector(handleInfoTabSelectionChanged:)
+             name:TPInfoControlsTabSelectionDidChangeNotification 
+           object:nil];
+  
+  [nc addObserver:self
          selector:@selector(handleTextEditorSelectionChanged:)
              name:NSTextViewDidChangeSelectionNotification 
            object:self.texEditorViewController.textView];
@@ -568,8 +574,8 @@
   self.libraryController = nil;
   
   // spell checker  
-  self.spellcheckerViewController.delegate = nil;
   [self.spellcheckerViewController stop];
+  self.spellcheckerViewController.delegate = nil;
   self.spellcheckerViewController = nil;  
   
   // pdf view controller
@@ -622,6 +628,8 @@
 {
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
+  [self.infoControlsTabBarController selectTabAtIndex:0];
+  
   
   if(![NSApp isLion]) {
     // controls width
@@ -1553,9 +1561,12 @@
 
 - (void) handleControlTabSelectionChanged:(NSNotification*)aNote
 {
-  id sender = [aNote object];
-  selectedControlsTab = [sender indexOfSelectedTab];
 }
+
+- (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
+{
+}
+
 
 #pragma mark -
 #pragma mark Split view delegate
@@ -1800,30 +1811,18 @@
 
 -(NSArray*)listOfCitations
 {
-//  NSLog(@"Generating list of citations...");
-	NSMutableArray *citations = [NSMutableArray array];
+  NSMutableArray *citations = [NSMutableArray array];
   
-	NSArray *docs = [[self project] valueForKey:@"items"];
-	for (id doc in docs) {
-//    NSLog(@"Checking doc: %@", doc);
-		if ([doc isKindOfClass:[FileEntity class]]) {
-			FileEntity *file = (FileEntity*)doc;
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
       if ([file isText]) {
-				NSString *content = [file workingContentString];
-				if (content) {
-					NSArray *docTags = [content citations];			
-					[citations addObjectsFromArray:docTags];			
-          
-          // add any citations from a \bibliography{} command
-          [citations addObjectsFromArray:[content citationsFromBibliographyIncludedFromPath:file.pathOnDisk]];
-				}				
-			} else {
-				// do nothing
-			}
-		}
-	} // end loop
-
-	return citations;	
+        [citations addObjectsFromArray:file.metadata.citations];
+      }
+    }
+  }
+  
+  return citations;
 }
 
 -(NSArray*)listOfCommands
@@ -1834,7 +1833,7 @@
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
       if ([file isText]) {
-        [commands addObjectsFromArray:[file listOfNewCommands]];
+        [commands addObjectsFromArray:file.metadata.userNewCommands];
       }
     }
   }
@@ -1862,22 +1861,15 @@
 -(NSArray*)listOfReferences
 {
 	NSMutableArray *tags = [NSMutableArray array];
-	
-	// go through all project documents
-	NSArray *docs = [[self project] valueForKey:@"items"];
-	for (id doc in docs) {				
-		if ([doc isKindOfClass:[FileEntity class]]) {
-			FileEntity *item = (FileEntity*)doc;
-			if ([[item valueForKey:@"extension"] isEqual:@"tex"]) {
-				NSString *content = [item workingContentString];
-				if (content) {
-          //NSLog(@"Collecting tags from %@", [doc name]);
-					NSArray *docTags = [content referenceLabels];			
-					[tags addObjectsFromArray:docTags];			
-				}
-			}
-		}
-	}
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        [tags addObjectsFromArray:file.metadata.labels];
+      }
+    }
+  }
 	
 	return tags;	
 }
@@ -1958,7 +1950,7 @@
 - (BOOL) shouldGenerateOutline
 {
   // if outline tab is selected....
-  if (selectedControlsTab == 3) {
+  if ([self.controlsTabBarController indexOfSelectedTab] == 3) {
     return YES;
   }
   return NO;
@@ -3745,9 +3737,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (BOOL)shouldPerformSpellCheck
 {
-  // if spelling tab is selected....
-  if (selectedControlsTab == 6) {
-    return YES;
+  // if info tab is selected....  
+  if ([self.controlsTabBarController indexOfSelectedTab] == 5) {
+    // and if the info tab is 2
+    if ([self.infoControlsTabBarController indexOfSelectedTab] == 2) {
+      return YES;
+    }
   }
   return NO;
 }
