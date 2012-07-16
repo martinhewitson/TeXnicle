@@ -31,18 +31,7 @@
 
 @implementation TPClippingsTable
 
-- (void) textDidEndEditing: (NSNotification *) notification
-{
-	//NSLog(@"Text did end editing %@", notification);
-	
-	NSInteger idx = [self editedRow];
-	if (idx >= 0) {
-		if ([[self delegate] respondsToSelector:@selector(refreshSymbolAtRow:)]) {
-			[[self delegate] performSelector:@selector(refreshSymbolAtRow:) withObject:[NSNumber numberWithInteger:idx]];
-		}
-	}
-	[super textDidEndEditing:notification];
-}
+
 
 - (IBAction) insertSelectedItems:(id)sender
 {
