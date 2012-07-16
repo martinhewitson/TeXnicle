@@ -53,6 +53,7 @@
 #import "TPSpellCheckerListingViewController.h"
 #import "TPProjectOutlineViewController.h"
 #import "TPWarningsViewController.h"
+#import "TPLabelsViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -62,7 +63,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   
   NSWindow *mainWindow;
@@ -143,6 +144,9 @@
   TPWarningsViewController *warningsViewController;
   NSView *warningsContainerView;
   
+  TPLabelsViewController *labelsViewController;
+  NSView *labelsContainerView;
+  
   PDFViewerController *pdfViewerController;
   
   PaletteController *palette;
@@ -189,6 +193,8 @@
 @property (retain) TPWarningsViewController *warningsViewController;
 @property (assign) IBOutlet NSView *warningsContainerView;
 
+@property (retain) TPLabelsViewController *labelsViewController;
+@property (assign) IBOutlet NSView *labelsContainerView;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 

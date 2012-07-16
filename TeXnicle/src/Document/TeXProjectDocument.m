@@ -55,6 +55,7 @@
 #import "BibliographyEntry.h"
 #import "RegexKitLite.h"
 #import "TPSyntaxError.h"
+#import "TPLabel.h"
 
 #define kSplitViewLeftMinSize 235.0
 #define kSplitViewCenterMinSize 400.0
@@ -91,6 +92,9 @@
 
 @synthesize warningsContainerView;
 @synthesize warningsViewController;
+
+@synthesize labelsContainerView;
+@synthesize labelsViewController;
 
 @synthesize pdfViewerController;
 @synthesize project;
@@ -249,6 +253,11 @@
   self.warningsViewController = [[[TPWarningsViewController alloc] initWithDelegate:self] autorelease];
   [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
   [self.warningsContainerView addSubview:self.warningsViewController.view];
+  
+  // labels view
+  self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
+  [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
+  [self.labelsContainerView addSubview:self.labelsViewController.view];
   
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
@@ -548,6 +557,10 @@
   // warnings view
   self.warningsViewController.delegate = nil;
   self.warningsViewController = nil;
+  
+  // labels view
+  self.labelsViewController.delegate = nil;
+  self.labelsViewController = nil;
   
   // mini console
   self.miniConsole = nil;
@@ -3836,6 +3849,48 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] inFile:anError.file select:YES];  
   [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];  
+}
+
+
+#pragma mark -
+#pragma mark Labels view delegate
+
+- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView
+{
+  NSMutableArray *files = [NSMutableArray array];
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        if ([file.metadata.labels count] > 0) {
+          [files addObject:file];
+        }
+      }
+    }
+  }
+  
+  return files;
+}
+
+- (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file
+{
+  return [[(FileEntity*)file metadata] labels];
+}
+
+- (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel
+{
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aLabel.file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // now select the text
+  NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+  
 }
 
 
