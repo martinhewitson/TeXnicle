@@ -25,6 +25,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "NSApplication+Library.h"
 #import "TeXProjectDocument.h"
 #import "TPDocumentMatch.h"
 #import "TPResultDocument.h"
@@ -75,7 +76,7 @@
 
 @synthesize pdfViewer;
 
-@synthesize library;
+@synthesize libraryController;
 @synthesize libraryContainerView;
 
 @synthesize spellCheckerContainerView;
@@ -279,10 +280,9 @@
   [pdfViewerContainerView addSubview:self.pdfViewerController.view];    
   
   // setup library
-  self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
-  NSView *libraryView = [self.library view];
-  [libraryView setFrame:[self.libraryContainerView bounds]];
-  [self.libraryContainerView addSubview:libraryView];
+  self.libraryController = [[[TPLibraryController alloc] initWithDelegate:self] autorelease];
+  [self.libraryController.view setFrame:self.libraryContainerView.bounds];
+  [self.libraryContainerView addSubview:self.libraryController.view];  
   
   // setup spellchecker
   self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
@@ -499,7 +499,6 @@
 
 - (void) cleanUp
 {
-  NSLog(@"### Clean up");
   
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
@@ -565,9 +564,9 @@
   self.finder = nil;
   
   // library
-  self.library.delegate = nil;
-  self.library = nil;
-
+  self.libraryController.delegate = nil;
+  self.libraryController = nil;
+  
   // spell checker  
   self.spellcheckerViewController.delegate = nil;
   [self.spellcheckerViewController stop];
@@ -597,7 +596,7 @@
   // template editor
   self.templateEditor.delegate = nil;
   self.templateEditor = nil;
-  
+    
 }
 
 
@@ -1777,13 +1776,13 @@
 
 -(NSString*)codeForCommand:(NSString*)command
 {
-  NSString *code = [self.library codeForCommand:command];
+  NSString *code = [self.libraryController codeForCommand:command];
   return code;
 }
 
 - (NSArray*)commandsBeginningWithPrefix:(NSString *)prefix
 {
-  return [self.library commandsBeginningWith:prefix];
+  return [self.libraryController commandsBeginningWith:prefix];
 }
 
 -(NSString*)fileExtension
@@ -3376,7 +3375,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Library Controller Delegate
 
-- (void)libraryController:(LibraryController *)library insertText:(NSString *)text
+- (void)libraryController:(TPLibraryController *)library insertText:(NSString *)text
 {
   TeXTextView *textView = self.texEditorViewController.textView;
   NSRange sel = [textView selectedRange];

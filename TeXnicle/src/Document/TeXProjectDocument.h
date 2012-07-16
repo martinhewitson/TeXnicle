@@ -33,7 +33,7 @@
 #import "HHValidatedButton.h"
 #import "PDFViewerController.h"
 #import "FinderController.h"
-#import "LibraryController.h"
+#import "TPLibraryController.h"
 #import "PaletteController.h"
 #import "BookmarkManager.h"
 #import "TPEngineManager.h"
@@ -60,7 +60,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   
   NSWindow *mainWindow;
@@ -79,9 +79,6 @@
   NSView *centerView;
   
   BOOL _inVersionsBrowser;
-  CGFloat _leftDividerPostion;
-  CGFloat _rightDividerPostion;
-  NSRect _windowFrame;
   
   NSInteger selectedControlsTab;
   
@@ -136,7 +133,7 @@
   TPStatusViewController *statusViewController;
   BOOL statusViewIsShowing;
   
-  LibraryController *library;
+  TPLibraryController *libraryController;
   NSView *libraryContainerView;
   
   TPSpellCheckerListingViewController *spellcheckerViewController;
@@ -220,7 +217,7 @@
 @property (retain) FinderController *finder;
 
 @property (assign) IBOutlet NSView *libraryContainerView;
-@property (retain) LibraryController *library;
+@property (retain) TPLibraryController *libraryController;
 
 @property (retain) TPSpellCheckerListingViewController *spellcheckerViewController;
 @property (assign) IBOutlet NSView *spellCheckerContainerView;
