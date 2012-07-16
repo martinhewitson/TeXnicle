@@ -136,8 +136,9 @@
       }
       
       NSString *entryString = [[aString substringWithRange:NSMakeRange(start, idx-start+1)] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-      BibliographyEntry *entry = [[[BibliographyEntry alloc] initWithString:entryString] autorelease];
+      BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:entryString];
       [entries addObject:entry];
+      [entry release];
       
     } // end found a @
     
