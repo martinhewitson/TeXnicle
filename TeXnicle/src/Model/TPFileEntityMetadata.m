@@ -35,7 +35,8 @@
 #import "ExternalTeXDoc.h"
 #import "NSString+SectionsOutline.h"
 #import "RegexKitLite.h"
-
+#import "TPSyntaxError.h"
+#import "externs.h"
 NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
 NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
 
@@ -44,6 +45,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 @synthesize checker;
 @synthesize temporaryFileForSyntaxCheck;
 
+@synthesize needsUpdate;
 @synthesize lastMetadataUpdate;
 @synthesize metadataTimer;
 
@@ -68,6 +70,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
     self.parent = aFile;
     self.lastUpdateOfNewCommands = nil;
     self.lastUpdateOfSections = nil;
+    self.needsUpdate = NO;
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
@@ -80,9 +83,27 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
                                                         userInfo:nil
                                                          repeats:YES];
     
+    NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+    
+    [defaults addObserver:self
+               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];		
+    
+    
     self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
   }
   return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+											ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]]) {	
+    self.needsUpdate = YES;
+  }
 }
 
 - (void) stopMetadataTimer
@@ -95,6 +116,9 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) dealloc
 {  
+  NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
+
 	[self stopMetadataTimer];
   dispatch_release(queue);
   self.checker = nil;
@@ -167,7 +191,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   NSDate *lastEdit = self.parent.lastEditDate;
   NSDate *lastUpdate = self.lastMetadataUpdate;
   
-  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil) {    
+  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {    
     if ([self.aQueue operationCount] == 0) {
       TPMetadataOperation *op = [[[TPMetadataOperation alloc] initWithFile:self.parent] autorelease];      
       [op setCompletionBlock:^{        
@@ -190,11 +214,17 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) notifyOfUpdate:(TPMetadataOperation*)op
 {
+  self.needsUpdate = NO;
   self.userNewCommands = op.commands;
   self.citations = op.citations;
   self.labels = op.labels;
   self.lastMetadataUpdate = [NSDate date];
   
+  [self performSelector:@selector(postUpdateNotification) withObject:nil afterDelay:0];
+}
+
+- (void) postUpdateNotification
+{
   // send notification of update
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self, @"metadata", nil];
@@ -220,6 +250,10 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 {
   [self cleanup];
   self.syntaxErrors = aChecker.errors;
+  for (TPSyntaxError *error in self.syntaxErrors) {
+    error.file = self.parent; 
+  }
+  [self postUpdateNotification];
 }
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker

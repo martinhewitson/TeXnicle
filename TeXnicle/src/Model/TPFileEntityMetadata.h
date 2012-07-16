@@ -44,6 +44,7 @@
   NSString *temporaryFileForSyntaxCheck;
   
   // meta data update
+  BOOL needsUpdate;
   NSDate *lastMetadataUpdate;
   NSTimer *metadataTimer;
   
@@ -78,6 +79,7 @@
 @property (retain) NSOperationQueue* aQueue;
 @property (assign) FileEntity *parent;
 
+@property (assign) BOOL needsUpdate;
 @property (retain) NSDate *lastMetadataUpdate;
 @property (retain) NSTimer *metadataTimer;
 
