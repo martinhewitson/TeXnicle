@@ -391,6 +391,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 			[tabView selectTabViewItem:item];
 		}
 		[tabView setDelegate:tempDelegate];
+    [item release];
 	}
 	
 	if (([self sourceTabBar] != [self destinationTabBar] || [[[self sourceTabBar] cells] indexOfObject:[self draggedCell]] != _draggedCellIndex) && [[[self sourceTabBar] delegate] respondsToSelector:@selector(tabView:didDropTabViewItem:inTabBar:)]) {
