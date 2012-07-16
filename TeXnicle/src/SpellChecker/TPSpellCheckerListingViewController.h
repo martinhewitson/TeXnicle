@@ -50,16 +50,18 @@
   NSMutableArray *checkedFiles;
   NSTimer *spellCheckTimer;
   NSOutlineView *outlineView;
-	dispatch_queue_t queue;
   
   NSInteger checkingFiles;
   
   HHValidatedButton *correctButton;
   HHValidatedButton *revealButton;
   HHValidatedButton *learnButton;
-  
+    
+  NSOperationQueue* aQueue;
   NSProgressIndicator *progressIndicator;
 }
+
+@property (retain) NSOperationQueue* aQueue;
 
 @property (assign) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) IBOutlet HHValidatedButton *correctButton;

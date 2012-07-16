@@ -31,6 +31,9 @@
 #import "FileEntity.h"
 #import "externs.h"
 #import "ImageAndTextCell.h"
+#import "TPSimpleSpellcheckOperation.h"
+#import "TPSpellCheckFileOperation.h"
+
 
 @interface TPSpellCheckerListingViewController ()
 
@@ -46,6 +49,7 @@
 @synthesize correctButton;
 @synthesize learnButton;
 @synthesize progressIndicator;
+@synthesize aQueue;
 
 - (id) initWithDelegate:(id<TPSpellCheckerListingDelegate>)aDelegate
 {
@@ -53,9 +57,7 @@
   if (self) {
     self.delegate = aDelegate;
     self.checkedFiles = [NSMutableArray array];
-    queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
-    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
-    dispatch_set_target_queue(queue,priority);
+    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
   }
   return self;
 }
@@ -63,11 +65,12 @@
 
 - (void) dealloc
 {
+  [self.aQueue cancelAllOperations];
+  self.aQueue = nil;
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.checkedFiles = nil;
   [self stop];
-	dispatch_release(queue);
   [super dealloc];
 }
 
@@ -292,21 +295,12 @@
 {
   [self stop];
   
-  if ([self performSimpleSpellCheck]) {
-    self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                            target:self
-                                                          selector:@selector(performSpellCheck) 
-                                                          userInfo:nil
-                                                           repeats:YES];
-    
-  } else {
-    self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                            target:self
-                                                          selector:@selector(performSpellCheck) 
-                                                          userInfo:nil
-                                                           repeats:YES];
-    
-  }
+  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                          target:self
+                                                        selector:@selector(performSpellCheck) 
+                                                        userInfo:nil
+                                                         repeats:YES];
+  
   
   
 }
@@ -326,61 +320,60 @@
   }
 
   if ([self performSimpleSpellCheck]) {
-    [self simpleSpellCheck];
+    
+    [self doSimpleSpellCheck];
+    
   } else {
-    [self checkSpellingTimerFired]; 
+    
+    [self spellCheckProjectFiles];
+    
   }
    
 }
 
-- (void) simpleSpellCheck
+- (void) doSimpleSpellCheck
 {
-  if ([self shouldPerformSpellCheck] == NO) {
-    return;
-  }
+  // get the text for this file
+  NSString *string = [self stringToCheck];     
   
-  //            NSLog(@"+ Checking file %@", [file name]);
-  checkingFiles++;
+  TPSimpleSpellcheckOperation *op = [[TPSimpleSpellcheckOperation alloc] initWithText:string];
+  [op setCompletionBlock:^{
+    [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:NO];
+  }];
+  
   [self.progressIndicator startAnimation:self];
-  
-  __block TPSpellCheckedFile *checkedFile = nil;
-  __block BOOL addFile = NO;
-  __block NSArray *words = nil;
-  
-  dispatch_sync(queue, ^{						
-        
-    NSString *string = [self stringToCheck];     
-    if (string == nil) {
-      return;
-    }
-    
-    checkedFile = [self checkedFileForFile:[self fileToCheck]];
-    if (checkedFile == nil) {
-      checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
-      addFile = YES;
-    }
-    
-    words = [self listOfMisspelledWordsFromString:string forFile:checkedFile];
-    
-  });
-
-  dispatch_async(dispatch_get_main_queue(),
-                 // block
-                 ^{
-                   checkedFile.lastCheck = [NSDate date];
-                   checkedFile.words = words;
-                   checkedFile.needsUpdate = NO;
-                   if (addFile) {
-                     [self.checkedFiles addObject:checkedFile];
-                   }
-                   [self.outlineView reloadData];
-                   
-                   [self.progressIndicator stopAnimation:self];
-                   
-                 });
+  [self.aQueue addOperation:op];
 }
 
-- (void) checkSpellingTimerFired
+- (void) notifyOfUpdate:(TPSimpleSpellcheckOperation*)op
+{
+  TPSpellCheckedFile *checkedFile = nil;
+  
+  if ([self.checkedFiles count] > 0) {
+    checkedFile = [self.checkedFiles objectAtIndex:0];
+  } else {  
+    checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
+    [self.checkedFiles addObject:checkedFile];
+  }
+  
+  NSArray *words = op.words;
+  for (TPMisspelledWord *word in words) {
+    word.parent = checkedFile;
+  }
+  
+  // set words
+  checkedFile.words = words;
+  checkedFile.lastCheck = [NSDate date];
+  checkedFile.needsUpdate = NO;
+  
+  // update UI
+  [self.progressIndicator stopAnimation:self];
+  [self.outlineView reloadData];
+}
+
+
+
+- (void) spellCheckProjectFiles
 {
   if (checkingFiles > 0) {
     return;
@@ -419,6 +412,8 @@
         TPSpellCheckedFile *checkedFile = [self checkedFileForFile:file];
         
         if (checkedFile == nil) {
+          checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:file] autorelease];
+          [self.checkedFiles addObject:checkedFile];
           shouldCheck = YES;
         }
         
@@ -438,20 +433,41 @@
         if (shouldCheck) {
           //            NSLog(@"+ Checking file %@", [file name]);
           checkingFiles++;
+          
+          TPSpellCheckFileOperation *op = [[TPSpellCheckFileOperation alloc] initWithFile:checkedFile];
+          [op setCompletionBlock:^{
+            [self performSelectorOnMainThread:@selector(notifyFileUpdatedWithOp:) withObject:op waitUntilDone:NO];
+          }];
+          
           [self.progressIndicator startAnimation:self];
-          dispatch_async(queue, ^{						
-            
-            [self addMisspelledWordsFromFile:file];
-            
-          });
-        } else {
-          //            NSLog(@"- Not checking file %@", [file name]);
-        }
-      }          
-    }
+          [self.aQueue addOperation:op];
+        } // end if shouldCheck
+      } // end if file is text file          
+    } // end loop over files
+  } // end if we have files to check
+}
+
+- (void) notifyFileUpdatedWithOp:(TPSpellCheckFileOperation*)op
+{
+  TPSpellCheckedFile *checkedFile = op.file;
+  
+  // update parent
+  NSArray *words = op.words;
+  for (TPMisspelledWord *word in words) {
+    word.parent = checkedFile;
   }
   
-//  NSLog(@"%@", self.lists);
+  checkedFile.lastCheck = [NSDate date];
+  checkedFile.words = words;
+  checkedFile.needsUpdate = NO;
+  
+  [self.outlineView reloadData];
+  checkingFiles--;
+  
+  if (checkingFiles == 0) {
+    [self.progressIndicator stopAnimation:self];
+  }
+  
 }
 
 - (TPSpellCheckedFile*)checkedFileForFile:(id)file
@@ -472,100 +488,6 @@
   }
   
   return nil;
-}
-
-- (void) addMisspelledWordsFromFile:(FileEntity*)file
-{
-  NSString *string = [file workingContentString];     
-  
-  __block BOOL addFile = NO;
-  __block TPSpellCheckedFile *checkedFile = nil;
-  dispatch_sync(dispatch_get_main_queue(), ^{
-    checkedFile = [self checkedFileForFile:file];
-    if (checkedFile == nil) {
-      checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
-      addFile = YES;
-    }
-  });
-  
-  
-  NSArray *words = [self listOfMisspelledWordsFromString:string forFile:checkedFile];
-  
-  
-  dispatch_async(dispatch_get_main_queue(),
-                 // block
-                 ^{
-                   checkedFile.lastCheck = [NSDate date];
-                   checkedFile.words = words;
-                   checkedFile.needsUpdate = NO;
-                   if (addFile) {
-                     [self.checkedFiles addObject:checkedFile];
-                   }
-                   [checkedFile release];
-                   
-                   [self.outlineView reloadData];
-                   checkingFiles--;
-                   
-                   if (checkingFiles == 0) {
-                     [self.progressIndicator stopAnimation:self];
-                   }
-                   
-                 });
-  
-}
-
-- (NSArray*)listOfMisspelledWordsFromString:(NSString*)aString forFile:(TPSpellCheckedFile*)aFile
-{
-  NSSpellChecker *checker = [NSSpellChecker sharedSpellChecker];
-  NSMutableArray *words = [NSMutableArray array];
-  NSRange range = NSMakeRange(0, 0);
-  NSRange lastRange = NSMakeRange(0, 0);
-  
-  NSInteger misspelledWordCount = 0;
-  
-  while (range.location < [aString length] && misspelledWordCount <= 1000) {
-    
-    range = [checker checkSpellingOfString:aString startingAt:range.location];
-        
-    // there seems to be a bug here in checkSpellingOfString:startingAt: where it gets
-    // the same word again. So we check for that.
-    if (NSEqualRanges(range, lastRange)) {
-//      NSLog(@"Got same range %@", NSStringFromRange(range));
-      range = NSMakeRange(NSMaxRange(range), 0);
-//      NSLog(@"Jumping to %@", NSStringFromRange(range));
-    }
-    
-    if (range.location == NSNotFound) {
-      break;
-    }
-    
-    // check if we wrapped
-    if (range.location < lastRange.location) {
-      break;
-    }
-    
-    // store last range
-    lastRange = range;
-    
-    // did we get a word?
-    if (NSMaxRange(range) < [aString length] && range.length > 0) {
-      NSString *misspelledWord = [aString substringWithRange:range];
-//      NSLog(@"Found misspelled word [%@] at %@", misspelledWord, NSStringFromRange(range));
-      NSArray *corrections = [checker guessesForWordRange:range inString:aString language:nil inSpellDocumentWithTag:0];
-      TPMisspelledWord *word = [TPMisspelledWord wordWithWord:misspelledWord corrections:corrections range:range parent:aFile];
-      [words addObject:word];
-      misspelledWordCount++;
-      // move on
-      range = NSMakeRange(NSMaxRange(range), 0);
-//      NSLog(@"  moving on to %@", NSStringFromRange(range));
-    } else {
-      break;
-    }
-    
-    
-  } // end while loop
-  
-  return words;
 }
 
 #pragma mark -
