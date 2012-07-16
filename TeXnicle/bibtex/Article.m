@@ -160,7 +160,7 @@
 
 - (NSAttributedString*) displayString
 {
-	NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithAttributedString:[super displayString]] autorelease];
+	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:[super displayString]];
 	
 	NSString *vstr = [self journal];
 	if (!vstr)
@@ -187,7 +187,7 @@
 		vstr = @"";	
 	[str addString:vstr withTag:@"Abstract\n\n"];
 	
-	return str;
+	return [str autorelease];
 }
 
 - (id)copyWithZone:(NSZone *)zone
