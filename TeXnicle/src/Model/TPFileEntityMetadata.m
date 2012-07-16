@@ -192,6 +192,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 {
   self.userNewCommands = op.commands;
   self.citations = op.citations;
+  self.labels = op.labels;
   self.lastMetadataUpdate = [NSDate date];
   
   // send notification of update
