@@ -16,7 +16,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-//  DISCLAIMED. IN NO EVENT SHALL DAN WOOD, MIKE ABDULLAH OR KARELIA SOFTWARE BE LIABLE FOR ANY
+//  DISCLAIMED. IN NO EVENT SHALL MARTIN HEWITSON OR BOBSOFT SOFTWARE BE LIABLE FOR ANY
 //  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 //  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 //   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -85,21 +85,33 @@
   return [NSString stringWithFormat:@"line %@: %@", self.line, self.message];
 }
 
+- (NSAttributedString*)selectedAttributedString
+{
+  return [self attributedStringWithColor:[NSColor alternateSelectedControlTextColor]];
+}
+
 - (NSAttributedString*)attributedString
+{
+  return [self attributedStringWithColor:[NSColor blackColor]];
+}
+
+
+- (NSAttributedString*)attributedStringWithColor:(NSColor*)aColor
 {
   NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
   
   // line number
   NSMutableAttributedString *lineNumber = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"line %@: ", self.line]] autorelease];
-  [lineNumber addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [lineNumber length])];
+  [lineNumber addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumber length])];
   [str appendAttributedString:lineNumber];
-
+  
   // message 
   NSMutableAttributedString *messageString = [[[NSMutableAttributedString alloc] initWithString:self.message] autorelease];
-  [messageString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [messageString length])];
+  [messageString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [messageString length])];
   [str appendAttributedString:messageString];
   
   return str;
 }
+
 
 @end
