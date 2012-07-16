@@ -232,15 +232,13 @@
 
 -(NSString*)codeForCommand:(NSString*)command
 {
-  NSString *code = [mainDocument.library codeForCommand:command];
-  return code;
+  return [self.mainDocument codeForCommand:command];
 }
 
 - (NSArray*)commandsBeginningWithPrefix:(NSString *)prefix
 {
-  return [mainDocument.library commandsBeginningWith:prefix];
+  return [self.mainDocument commandsBeginningWithPrefix:prefix];
 }
-
 
 - (NSArray*) listOfCitations
 {
