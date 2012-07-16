@@ -1,4 +1,4 @@
-//
+  //
 //  ExternalTeXDoc.m
 //  TeXnicle
 //
@@ -271,7 +271,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.paletteContainerView addSubview:self.palette.view];
   
   // setup library
-  self.library = [[[LibraryController alloc] initWithDelegate:self] autorelease];
+  self.library = [[[TPLibraryController alloc] initWithDelegate:self] autorelease];
   [self.library.view setFrame:[self.libraryContainerView bounds]];
   [self.libraryContainerView addSubview:self.library.view];
   
@@ -543,14 +543,21 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.statusViewController updateDisplay];
 }
 
+- (void) stopLiveUpdateTimer
+{
+  if (self.liveUpdateTimer) {
+    [self.liveUpdateTimer invalidate];
+    self.liveUpdateTimer = nil;
+  }    
+}
+
 - (void) cleanUp
 {
 //  NSLog(@"### Clean up");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
   // live update timer
-  [self.liveUpdateTimer invalidate];
-  self.liveUpdateTimer = nil;
+  [self stopLiveUpdateTimer];
   
   // max outline view depth
   self.maxOutlineViewDepth= nil;
@@ -624,7 +631,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc %@", self);
 	[super dealloc];
 }
 
@@ -2144,7 +2150,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark -
 #pragma mark Library delegate
 
-- (void) libraryController:(LibraryController*)library insertText:(NSString*)text
+- (void) libraryController:(TPLibraryController*)library insertText:(NSString*)text
 {
   TeXTextView *textView = self.texEditorViewController.textView;
   NSRange sel = [textView selectedRange];
@@ -2166,12 +2172,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (id) mainFile
 {
-  return [[self fileURL] path];
+  return [self fileURL];
 }
 
 - (NSString*) textForFile:(id)aFile
 {
-  if ([[self mainFile] isEqual:aFile]) {
+  if ([[self fileURL] isEqual:aFile]) {
     return [self.texEditorViewController.textView string];
   }
   
@@ -2206,7 +2212,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile
 {	    
-  if (aFile == nil || [aFile isEqualToString:[[self fileURL] path]]) {
+  
+  if (aFile == nil || [aFile isEqualTo:[self fileURL]]) {
     
     // Now highlight the search term in that 
     [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
@@ -2218,27 +2225,26 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
     
   } else {
-    
-    __block NSString *forwardResult = result;
-    __block NSRange forwardRange = aRange;
-    __block id forwardFile = aFile;
+    // TODO: this will break on 10.6.8 !!!!
     
     [[NSDocumentController sharedDocumentController]
-      openDocumentWithContentsOfURL:[NSURL fileURLWithPath:aFile]
+      openDocumentWithContentsOfURL:aFile
       display:YES
       completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
         if (document) {
           ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
           
-          NSString *rangeString = NSStringFromRange(forwardRange);
+          NSString *rangeString = NSStringFromRange(aRange);
+          NSString *forwardResult = result;
+          id forwardFile = aFile;          
           
-          NSInvocation			*invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(wrappedHighlightSearchResult:withRange:inFile:)]];
-          [invocation setSelector:@selector(wrappedHighlightSearchResult:withRange:inFile:)];
+          NSInvocation			*invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(highlightSearchResult:withRange:inFile:)]];
+          [invocation setSelector:@selector(highlightSearchResult:withRange:inFile:)];
           [invocation setTarget:doc];
           [invocation setArgument:&forwardResult atIndex:2];    
           [invocation setArgument:&rangeString atIndex:3];    
           [invocation setArgument:&forwardFile atIndex:4];    
-          [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0.1];
+          [invocation performSelector:@selector(invoke) withObject:nil afterDelay:0];
           
         } else {
           if (error) {

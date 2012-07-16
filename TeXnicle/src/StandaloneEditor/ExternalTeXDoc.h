@@ -35,7 +35,7 @@
 #import "PDFViewerController.h"
 #import "TPStatusViewController.h"
 #import "MHControlsTabBarController.h"
-#import "LibraryController.h"
+#import "TPLibraryController.h"
 #import "PaletteController.h"
 #import "PDFViewer.h"
 #import "TeXTextView.h"
@@ -46,7 +46,7 @@
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, LibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -123,7 +123,7 @@
   MHControlsTabBarController *tabbarController;
   PaletteController *palette;
   NSView *paletteContainerView;
-  LibraryController *library;
+  TPLibraryController *library;
   NSView *libraryContainerView;
   NSView *prefsContainerView;
   
@@ -178,7 +178,7 @@
 @property (retain) TPEngineSettingsController *engineSettingsController;
 @property (assign) IBOutlet NSView *prefsContainerView;
 
-@property (retain) LibraryController *library;
+@property (retain) TPLibraryController *library;
 @property (assign) IBOutlet NSView *libraryContainerView;
 
 @property (retain) PaletteController *palette;
