@@ -121,18 +121,21 @@
             }
           }
           MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
-          subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];           
-          subfile = [NSURL fileURLWithPath:filepath];
+          subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]]; 
+          if (subtext) 
+            subfile = [NSURL fileURLWithPath:filepath];
         }
-        NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
-        // check if we already have any of these sections
-        for (TPSection *ss in subsections) {
-          for (TPSection *s in sections) {
-            if ([s matches:ss] == YES) {
-              ss = s; 
+        if (subtext) {
+          NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
+          // check if we already have any of these sections
+          for (TPSection *ss in subsections) {
+            for (TPSection *s in sections) {
+              if ([s matches:ss] == YES) {
+                ss = s; 
+              }
             }
+            [sectionsFound addObject:ss];
           }
-          [sectionsFound addObject:ss];
         }
       }
       if (word == nil || [word length] == 0) {
