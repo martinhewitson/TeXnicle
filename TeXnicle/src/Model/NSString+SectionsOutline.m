@@ -112,8 +112,8 @@
           subfile = [project fileWithPath:arg];
           subtext = [subfile workingContentString];
         } else {
-          // file is a 
-          NSString *root = [file stringByDeletingLastPathComponent];
+          // file is a URL
+          NSString *root = [[file path] stringByDeletingLastPathComponent];
           NSString *filepath = [root stringByAppendingPathComponent:arg];
           if ([filepath length] > 0) {
             if ([[filepath pathExtension] isEqualToString:@""]) {
@@ -122,7 +122,7 @@
           }
           MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
           subtext = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];           
-          subfile = filepath;
+          subfile = [NSURL fileURLWithPath:filepath];
         }
         NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
         // check if we already have any of these sections
