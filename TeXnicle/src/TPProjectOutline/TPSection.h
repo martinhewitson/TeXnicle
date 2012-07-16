@@ -24,7 +24,7 @@
 @property (assign) TPSection *parent;
 @property (retain) NSArray *subsections;
 @property (assign) NSUInteger startIndex;
-@property (assign) id file;
+@property (retain) id file;
 @property (retain) TPSectionTemplate *type;
 @property (copy) NSString *name;
 

@@ -31,6 +31,7 @@
   if ([object isKindOfClass:[TPSection class]] == NO) {
     return NO;
   }
+  
   TPSection *s = (TPSection*)object;
   
   if (self.startIndex != s.startIndex) {
@@ -42,7 +43,9 @@
       return NO;
     }
   } else {
-    return [self.file isEqualToString:s.file];
+    if ([self.file isEqualTo:s.file] == NO) {
+      return NO;
+    }
   }
   
   if (self.type != s.type) {
@@ -69,6 +72,14 @@
   return self;
 }
 
+- (void) dealloc
+{
+  self.file = nil;
+  self.type = nil;
+  self.subsections = nil;
+  [super dealloc];
+}
+
 - (NSString*)filename
 {
   if ([self.file isKindOfClass:[FileEntity class]]) {
@@ -79,7 +90,15 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", self.parent.name, [self filename], self.type.tag, self.name];
+  NSString *displayName = nil;
+  if (self.parent) {
+    displayName = self.parent.name;
+  }
+  NSString *tag = nil;
+  if (self.type) {
+    tag = self.type.tag;
+  }
+  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", displayName, [self filename], tag, self.name];
 }
 
 - (NSAttributedString*)selectedDisplayName
