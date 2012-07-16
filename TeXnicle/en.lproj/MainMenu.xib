@@ -952,7 +952,7 @@
 											</object>
 											<object class="NSMenuItem" id="77494293">
 												<reference key="NSMenu" ref="562250606"/>
-												<string key="NSTitle">Show Bookmarks</string>
+												<string key="NSTitle">Show File Info</string>
 												<string key="NSKeyEquiv">6</string>
 												<int key="NSKeyEquivModMask">1572864</int>
 												<int key="NSMnemonicLoc">2147483647</int>
@@ -960,20 +960,10 @@
 												<reference key="NSMixedImage" ref="310636482"/>
 												<int key="NSTag">2160</int>
 											</object>
-											<object class="NSMenuItem" id="434431403">
-												<reference key="NSMenu" ref="562250606"/>
-												<string key="NSTitle">Show Spelling</string>
-												<string key="NSKeyEquiv">7</string>
-												<int key="NSKeyEquivModMask">1572864</int>
-												<int key="NSMnemonicLoc">2147483647</int>
-												<reference key="NSOnImage" ref="1033313550"/>
-												<reference key="NSMixedImage" ref="310636482"/>
-												<int key="NSTag">2165</int>
-											</object>
 											<object class="NSMenuItem" id="453470277">
 												<reference key="NSMenu" ref="562250606"/>
 												<string key="NSTitle">Show Project Settings</string>
-												<string key="NSKeyEquiv">0</string>
+												<string key="NSKeyEquiv">7</string>
 												<int key="NSKeyEquivModMask">1572864</int>
 												<int key="NSMnemonicLoc">2147483647</int>
 												<reference key="NSOnImage" ref="1033313550"/>
@@ -2744,14 +2734,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showBookmarks:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="77494293"/>
-					</object>
-					<int key="connectionID">812</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">showProjectSettings:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="453470277"/>
@@ -2784,14 +2766,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showSpelling:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="434431403"/>
-					</object>
-					<int key="connectionID">825</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">closeCurrentTab:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="776162233"/>
@@ -2805,6 +2779,14 @@
 						<reference key="destination" ref="660555092"/>
 					</object>
 					<int key="connectionID">826</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showFileInfo:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="77494293"/>
+					</object>
+					<int key="connectionID">827</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -4076,7 +4058,6 @@
 							<reference ref="453470277"/>
 							<reference ref="1066043868"/>
 							<reference ref="836972412"/>
-							<reference ref="434431403"/>
 						</array>
 						<reference key="parent" ref="92222984"/>
 					</object>
@@ -4139,11 +4120,6 @@
 						<int key="objectID">819</int>
 						<reference key="object" ref="385092572"/>
 						<reference key="parent" ref="466310130"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">823</int>
-						<reference key="object" ref="434431403"/>
-						<reference key="parent" ref="562250606"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">73</int>
@@ -4351,7 +4327,6 @@
 				<string key="815.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="816.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="819.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="823.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
@@ -4359,7 +4334,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">826</int>
+			<int key="maxID">827</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4711,193 +4686,22 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">LibraryController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addCategory:">id</string>
-						<string key="addClipping:">id</string>
-						<string key="categoryAction:">id</string>
-						<string key="copySelectedItemsToPasteboard:">id</string>
-						<string key="deleteItems:">id</string>
-						<string key="endEditSheet:">id</string>
-						<string key="insertSelectedItems:">id</string>
-						<string key="refreshImages:">id</string>
-						<string key="refreshSymbolAtRow:">NSNumber</string>
-						<string key="removeCategories:">id</string>
-						<string key="setRowHeight:">id</string>
-						<string key="startEditSheet:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addCategory:">
-							<string key="name">addCategory:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="addClipping:">
-							<string key="name">addClipping:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="categoryAction:">
-							<string key="name">categoryAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="copySelectedItemsToPasteboard:">
-							<string key="name">copySelectedItemsToPasteboard:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="deleteItems:">
-							<string key="name">deleteItems:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="endEditSheet:">
-							<string key="name">endEditSheet:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="insertSelectedItems:">
-							<string key="name">insertSelectedItems:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="refreshImages:">
-							<string key="name">refreshImages:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="refreshSymbolAtRow:">
-							<string key="name">refreshSymbolAtRow:</string>
-							<string key="candidateClassName">NSNumber</string>
-						</object>
-						<object class="IBActionInfo" key="removeCategories:">
-							<string key="name">removeCategories:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="setRowHeight:">
-							<string key="name">setRowHeight:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startEditSheet:">
-							<string key="name">startEditSheet:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="addCategoryButton">HHValidatedButton</string>
-						<string key="addClipButton">HHValidatedButton</string>
-						<string key="categoryController">NSArrayController</string>
-						<string key="categoryTable">NSTableView</string>
-						<string key="clipCopyButton">HHValidatedButton</string>
-						<string key="commandMessageLabel">NSTextField</string>
-						<string key="commandTextField">NSTextField</string>
-						<string key="contentsController">NSArrayController</string>
-						<string key="deleteCategoryButton">HHValidatedButton</string>
-						<string key="deleteClipButton">HHValidatedButton</string>
-						<string key="editClipButton">HHValidatedButton</string>
-						<string key="editSheet">NSWindow</string>
-						<string key="editTextView">TeXTextView</string>
-						<string key="imageView">NSImageView</string>
-						<string key="insertClipButton">HHValidatedButton</string>
-						<string key="itemsTable">NSTableView</string>
-						<string key="reloadClipButton">HHValidatedButton</string>
-						<string key="slider">NSSlider</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="addCategoryButton">
-							<string key="name">addCategoryButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="addClipButton">
-							<string key="name">addClipButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="categoryController">
-							<string key="name">categoryController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="categoryTable">
-							<string key="name">categoryTable</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="clipCopyButton">
-							<string key="name">clipCopyButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="commandMessageLabel">
-							<string key="name">commandMessageLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="commandTextField">
-							<string key="name">commandTextField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="contentsController">
-							<string key="name">contentsController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="deleteCategoryButton">
-							<string key="name">deleteCategoryButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="deleteClipButton">
-							<string key="name">deleteClipButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="editClipButton">
-							<string key="name">editClipButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="editSheet">
-							<string key="name">editSheet</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="editTextView">
-							<string key="name">editTextView</string>
-							<string key="candidateClassName">TeXTextView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageView">
-							<string key="name">imageView</string>
-							<string key="candidateClassName">NSImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="insertClipButton">
-							<string key="name">insertClipButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="itemsTable">
-							<string key="name">itemsTable</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="reloadClipButton">
-							<string key="name">reloadClipButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="slider">
-							<string key="name">slider</string>
-							<string key="candidateClassName">NSSlider</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LibraryController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">MHControlsTabBarController</string>
 					<string key="superclassName">NSResponder</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="buttonSelected:">id</string>
-						<string key="showBookmarks:">id</string>
 						<string key="showClippingsLibrary:">id</string>
 						<string key="showDocumentOutline:">id</string>
+						<string key="showFileInfo:">id</string>
 						<string key="showNavigator:">id</string>
 						<string key="showProjectSearch:">id</string>
 						<string key="showProjectSettings:">id</string>
 						<string key="showProjectTree:">id</string>
-						<string key="showSpelling:">id</string>
 						<string key="showSymbolPalette:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="buttonSelected:">
 							<string key="name">buttonSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showBookmarks:">
-							<string key="name">showBookmarks:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showClippingsLibrary:">
@@ -4906,6 +4710,10 @@
 						</object>
 						<object class="IBActionInfo" key="showDocumentOutline:">
 							<string key="name">showDocumentOutline:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showFileInfo:">
+							<string key="name">showFileInfo:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showNavigator:">
@@ -4924,39 +4732,34 @@
 							<string key="name">showProjectTree:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="showSpelling:">
-							<string key="name">showSpelling:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="showSymbolPalette:">
 							<string key="name">showSymbolPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="bookmarksButton">NSButton</string>
 						<string key="containerView">NSView</string>
 						<string key="findButton">NSButton</string>
+						<string key="infoButton">NSButton</string>
 						<string key="libraryButton">NSButton</string>
 						<string key="outlineButton">NSButton</string>
 						<string key="palletButton">NSButton</string>
 						<string key="prefsButton">NSButton</string>
 						<string key="projectButton">NSButton</string>
-						<string key="spellingButton">NSButton</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="tabView">NSTabView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="bookmarksButton">
-							<string key="name">bookmarksButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="containerView">
 							<string key="name">containerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="findButton">
 							<string key="name">findButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoButton">
+							<string key="name">infoButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="libraryButton">
@@ -4977,10 +4780,6 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="projectButton">
 							<string key="name">projectButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="spellingButton">
-							<string key="name">spellingButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitview">
@@ -5014,6 +4813,59 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MHDocumentController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MHInfoTabBarController</string>
+					<string key="superclassName">NSResponder</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">buttonSelected:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">buttonSelected:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">buttonSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="bookmarksButton">NSButton</string>
+						<string key="containerView">NSView</string>
+						<string key="spellingButton">NSButton</string>
+						<string key="splitview">NSSplitView</string>
+						<string key="tabView">NSTabView</string>
+						<string key="warningsButton">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="bookmarksButton">
+							<string key="name">bookmarksButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="containerView">
+							<string key="name">containerView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spellingButton">
+							<string key="name">spellingButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitview">
+							<string key="name">splitview</string>
+							<string key="candidateClassName">NSSplitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabView">
+							<string key="name">tabView</string>
+							<string key="candidateClassName">NSTabView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="warningsButton">
+							<string key="name">warningsButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MHInfoTabBarController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -6207,6 +6059,7 @@
 						<string key="finderContainerView">NSView</string>
 						<string key="forwardTabButton">HHValidatedButton</string>
 						<string key="imageViewerContainer">NSView</string>
+						<string key="infoControlsTabBarController">MHInfoTabBarController</string>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
 						<string key="mainWindow">NSWindow</string>
@@ -6279,6 +6132,10 @@
 						<object class="IBToOneOutletInfo" key="imageViewerContainer">
 							<string key="name">imageViewerContainer</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoControlsTabBarController">
+							<string key="name">infoControlsTabBarController</string>
+							<string key="candidateClassName">MHInfoTabBarController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="leftView">
 							<string key="name">leftView</string>
