@@ -46,6 +46,7 @@
 #import "TPProjectBuilder.h"
 #import "MHSynctexController.h"
 #import "TPSyntaxError.h"
+#import "TPLabel.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -84,6 +85,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @synthesize warningsContainerView;
 @synthesize warningsViewController;
 
+@synthesize labelsContainerView;
+@synthesize labelsViewController;
+
 @synthesize palette;
 @synthesize paletteContainerView;
 
@@ -109,6 +113,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @synthesize templateEditor;
 
 @synthesize liveUpdateTimer;
+@synthesize metadataUpdateTimer;
 @synthesize maxOutlineViewDepth;
 
 - (id) init
@@ -260,6 +265,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
   [self.warningsContainerView addSubview:self.warningsViewController.view];
   
+  // labels view
+  self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
+  [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
+  [self.labelsContainerView addSubview:self.labelsViewController.view];
+  
   // setup outline view  
   self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
@@ -372,6 +382,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   _building = NO;
   _liveUpdate = NO;
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  self.metadataUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateMetadata) userInfo:nil repeats:YES];
   
 }
 
@@ -544,7 +555,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) syntaxCheckerDidFinish
 {
-  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+//  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void) handleTextSelectionChanged:(NSNotification*)aNote
@@ -561,12 +572,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.statusViewController updateDisplay];
 }
 
-- (void) stopLiveUpdateTimer
+- (void) stopTimers
 {
   if (self.liveUpdateTimer) {
     [self.liveUpdateTimer invalidate];
     self.liveUpdateTimer = nil;
   }    
+  if (self.metadataUpdateTimer) {
+    [self.metadataUpdateTimer invalidate];
+    self.metadataUpdateTimer = nil;
+  }
 }
 
 - (void) cleanUp
@@ -574,8 +589,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 //  NSLog(@"### Clean up");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
-  // live update timer
-  [self stopLiveUpdateTimer];
+  // stop timers
+  [self stopTimers];
   
   // max outline view depth
   self.maxOutlineViewDepth= nil;
@@ -590,6 +605,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // warnings view
   self.warningsViewController.delegate = nil;
   self.warningsViewController = nil;
+  
+  // labels view
+  self.labelsViewController.delegate = nil;
+  self.labelsViewController = nil;
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
@@ -1659,7 +1678,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) handleTextChanged:(NSNotification*)aNote
 {
-  // nothing to do
+  
+  // update labels view
+  [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
@@ -2386,6 +2408,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
 }
 
+- (void) updateMetadata 
+{
+  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+}
+
 #pragma mark -
 #pragma mark Warnings view delegate
 
@@ -2404,5 +2432,27 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] select:YES];    
   [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
 }
+
+#pragma mark -
+#pragma mark Labels view delegate
+
+- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView
+{
+  return [NSArray arrayWithObject:[self fileURL]];
+}
+
+- (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file
+{
+  return [self listOfReferences];
+}
+
+- (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel
+{
+  // now select the text
+  NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
+}
+
 
 @end

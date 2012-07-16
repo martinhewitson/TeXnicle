@@ -172,6 +172,10 @@
 		2553F70614F13BC000DF0BD3 /* TPProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2553F70514F13BBF00DF0BD3 /* TPProjectTemplate.m */; };
 		255454B515AEEF9E006D36BF /* NSString+SectionsOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */; };
 		2555C31E14B0708C00FE6150 /* libraryPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2555C31D14B0708C00FE6150 /* libraryPrefs.icns */; };
+		255A16D515B48694004290CC /* citationsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */; };
+		255A16D615B48694004290CC /* citationsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D415B48694004290CC /* citationsTabBarImage.icns */; };
+		255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D815B48E1B004290CC /* commandsTabBarImage.icns */; };
+		255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */; };
 		255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB84813E56CB1007629C0 /* TPDescriptionView.m */; };
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
@@ -343,6 +347,10 @@
 		25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B415B4602E009E086A /* labelsTabBarImage.icns */; };
 		25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */; };
 		25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */; };
+		25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BE15B47887009E086A /* TPLabelsViewController.m */; };
+		25DB36C115B47887009E086A /* TPLabelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36BF15B47887009E086A /* TPLabelsViewController.xib */; };
+		25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C315B478DA009E086A /* TPLabelsSet.m */; };
+		25DB36C715B47D9B009E086A /* TPLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C615B47D9B009E086A /* TPLabel.m */; };
 		25DBBDD914EB812400C1D0CF /* MHWhitebackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */; };
 		25DC3FD414B43ED000CA3053 /* NSArray+LaTeX.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DC3FD314B43ED000CA3053 /* NSArray+LaTeX.m */; };
 		25DD32BF14B981CF00C5D1E3 /* UISettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD32BE14B981CF00C5D1E3 /* UISettings.m */; };
@@ -675,6 +683,10 @@
 		255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+SectionsOutline.h"; path = "../Model/NSString+SectionsOutline.h"; sourceTree = "<group>"; };
 		255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+SectionsOutline.m"; path = "../Model/NSString+SectionsOutline.m"; sourceTree = "<group>"; };
 		2555C31D14B0708C00FE6150 /* libraryPrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = libraryPrefs.icns; sourceTree = "<group>"; };
+		255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = citationsTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		255A16D415B48694004290CC /* citationsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = citationsTabBarImage.icns; sourceTree = "<group>"; };
+		255A16D815B48E1B004290CC /* commandsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsTabBarImage.icns; sourceTree = "<group>"; };
+		255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
 		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
 		255DB84B13E577BD007629C0 /* buildProject.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = buildProject.icns; sourceTree = "<group>"; };
@@ -958,6 +970,13 @@
 		25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25DB36B915B462FA009E086A /* TPOutlineBuilderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineBuilderOperation.h; sourceTree = "<group>"; };
 		25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineBuilderOperation.m; sourceTree = "<group>"; };
+		25DB36BD15B47887009E086A /* TPLabelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabelsViewController.h; sourceTree = "<group>"; };
+		25DB36BE15B47887009E086A /* TPLabelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsViewController.m; sourceTree = "<group>"; };
+		25DB36BF15B47887009E086A /* TPLabelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPLabelsViewController.xib; sourceTree = "<group>"; };
+		25DB36C215B478DA009E086A /* TPLabelsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabelsSet.h; sourceTree = "<group>"; };
+		25DB36C315B478DA009E086A /* TPLabelsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsSet.m; sourceTree = "<group>"; };
+		25DB36C515B47D9B009E086A /* TPLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabel.h; sourceTree = "<group>"; };
+		25DB36C615B47D9B009E086A /* TPLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabel.m; sourceTree = "<group>"; };
 		25DBBDD714EB812400C1D0CF /* MHWhitebackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWhitebackground.h; sourceTree = "<group>"; };
 		25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWhitebackground.m; sourceTree = "<group>"; };
 		25DC3FD214B43ED000CA3053 /* NSArray+LaTeX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LaTeX.h"; sourceTree = "<group>"; };
@@ -1128,6 +1147,9 @@
 				2523C7DF1405472600A47297 /* Engine */,
 				25C72A5714D451B600A81DEE /* Template Editor */,
 				250848C2154B1E800001685A /* Other Files Viewer */,
+				255A16DD15B48FEB004290CC /* CommandsView */,
+				255A16DC15B48FE1004290CC /* CitationsView */,
+				25DB36BC15B47819009E086A /* LabelsView */,
 				2589BC0015B40B3D00E24C9B /* WarningsView */,
 				25E7B13315AB396800373A56 /* TPProjectOutline */,
 				257B47AB138E5F9D00ED02C4 /* Document */,
@@ -1301,6 +1323,10 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				255A16D815B48E1B004290CC /* commandsTabBarImage.icns */,
+				255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */,
+				255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */,
+				255A16D415B48694004290CC /* citationsTabBarImage.icns */,
 				25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */,
 				25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */,
 				25BB152315B41770007A7FDF /* infoTabBarImage.icns */,
@@ -1565,6 +1591,22 @@
 				2523D7D41505080A008200DB /* Article.tpt */,
 			);
 			path = templates;
+			sourceTree = "<group>";
+		};
+		255A16DC15B48FE1004290CC /* CitationsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CitationsView;
+			path = src/CitationsView;
+			sourceTree = "<group>";
+		};
+		255A16DD15B48FEB004290CC /* CommandsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CommandsView;
+			path = src/CommandsView;
 			sourceTree = "<group>";
 		};
 		255DB85013E5D5CB007629C0 /* Image Viewer */ = {
@@ -1898,7 +1940,7 @@
 				25BB154215B444FC007A7FDF /* TPWarningSet.m */,
 			);
 			name = WarningsView;
-			path = ..;
+			path = src/WarningsView;
 			sourceTree = "<group>";
 		};
 		259530AD13DD685C00CA2894 /* File Monitor */ = {
@@ -2030,6 +2072,21 @@
 			);
 			name = "Project Templates";
 			path = ProjectTemplates;
+			sourceTree = "<group>";
+		};
+		25DB36BC15B47819009E086A /* LabelsView */ = {
+			isa = PBXGroup;
+			children = (
+				25DB36BD15B47887009E086A /* TPLabelsViewController.h */,
+				25DB36BE15B47887009E086A /* TPLabelsViewController.m */,
+				25DB36BF15B47887009E086A /* TPLabelsViewController.xib */,
+				25DB36C215B478DA009E086A /* TPLabelsSet.h */,
+				25DB36C315B478DA009E086A /* TPLabelsSet.m */,
+				25DB36C515B47D9B009E086A /* TPLabel.h */,
+				25DB36C615B47D9B009E086A /* TPLabel.m */,
+			);
+			name = LabelsView;
+			path = src/LabelsView;
 			sourceTree = "<group>";
 		};
 		25E7B13315AB396800373A56 /* TPProjectOutline */ = {
@@ -2295,6 +2352,11 @@
 				25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */,
 				25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */,
 				25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */,
+				25DB36C115B47887009E086A /* TPLabelsViewController.xib in Resources */,
+				255A16D515B48694004290CC /* citationsTabBarImageDepressed.icns in Resources */,
+				255A16D615B48694004290CC /* citationsTabBarImage.icns in Resources */,
+				255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */,
+				255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2544,6 +2606,9 @@
 				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
 				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
 				25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */,
+				25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */,
+				25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */,
+				25DB36C715B47D9B009E086A /* TPLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

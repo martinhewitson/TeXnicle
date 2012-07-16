@@ -129,7 +129,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) dealloc
 {  
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
   NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];

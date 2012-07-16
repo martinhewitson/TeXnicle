@@ -53,7 +53,7 @@
 									<object class="NSOutlineView" id="8127633">
 										<reference key="NSNextResponder" ref="448012792"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{238, 472}</string>
+										<string key="NSFrameSize">{238, 473}</string>
 										<reference key="NSSuperview" ref="448012792"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="411244065"/>
@@ -155,7 +155,7 @@
 										<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{1, 1}, {238, 472}}</string>
+								<string key="NSFrame">{{1, 1}, {238, 473}}</string>
 								<reference key="NSSuperview" ref="219765191"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="8127633"/>
@@ -190,7 +190,7 @@
 								<double key="NSPercent">0.98347107438016534</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 39}, {240, 474}}</string>
+						<string key="NSFrame">{{0, 38}, {240, 475}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="448012792"/>
@@ -211,6 +211,7 @@
 								<string key="NSFrame">{{94, 6}, {83, 19}}</string>
 								<reference key="NSSuperview" ref="518671559"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="219765191"/>
 								<string key="NSReuseIdentifierKey">_NS:1534</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="486387793">
@@ -256,7 +257,7 @@
 						<string key="NSFrame">{{0, 512}, {240, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="715987060"/>
+						<reference key="NSNextKeyView" ref="492689925"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -270,7 +271,7 @@
 								<string key="NSFrame">{{183, 10}, {47, 19}}</string>
 								<reference key="NSSuperview" ref="1001753446"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="219765191"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:22</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="991221352">
@@ -289,9 +290,10 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{240, 40}</string>
+						<string key="NSFrame">{{0, -1}, {240, 40}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="715987060"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -299,6 +301,7 @@
 				<string key="NSFrameSize">{240, 543}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="518671559"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 		</array>
@@ -508,6 +511,8 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="NO" key="1.IBNSViewMetadataLastInspectedTranslatesAutoresizingMaskIntoConstraints"/>
+				<boolean value="NO" key="1.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>

@@ -37,6 +37,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 @synthesize warningsButton;
 @synthesize spellingButton;
 @synthesize labelsButton;
+@synthesize citationsButton;
+@synthesize commandsButton;
 @synthesize splitview;
 @synthesize containerView;
 
@@ -47,6 +49,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   [self.bookmarksButton setState:NSOffState];
   [self.warningsButton setState:NSOffState];
   [self.labelsButton setState:NSOffState];
+  [self.citationsButton setState:NSOffState];
+  [self.commandsButton setState:NSOffState];
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];
   if (self.bookmarksButton != nil) {
@@ -60,6 +64,12 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   }
   if (self.labelsButton != nil) {
     [nonNilButtons addObject:self.labelsButton];
+  }
+  if (self.citationsButton != nil) {
+    [nonNilButtons addObject:self.citationsButton];
+  }
+  if (self.commandsButton != nil) {
+    [nonNilButtons addObject:self.commandsButton];
   }
   
   buttons = [[NSArray arrayWithArray:nonNilButtons] retain];
@@ -121,6 +131,12 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     case 3:
       return self.labelsButton;
       break;
+    case 4:
+      return self.citationsButton;
+      break;
+    case 5:
+      return self.commandsButton;
+      break;
     default:
       return nil;
       break;
@@ -137,6 +153,10 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     return 2;
   } else if (sender == self.labelsButton) {
     return 3;
+  } else if (sender == self.citationsButton) {
+    return 4;
+  } else if (sender == self.commandsButton) {
+    return 5;
   } else {
     return 0;
   }
@@ -156,6 +176,10 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     [self toggleOn:self.warningsButton];    
   } else if (idx == [buttons indexOfObject:self.labelsButton]) {
     [self toggleOn:self.labelsButton];    
+  } else if (idx == [buttons indexOfObject:self.citationsButton]) {
+    [self toggleOn:self.citationsButton];    
+  } else if (idx == [buttons indexOfObject:self.commandsButton]) {
+    [self toggleOn:self.commandsButton];    
   }
 }
 

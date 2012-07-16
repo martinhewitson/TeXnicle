@@ -45,10 +45,11 @@
 #import "TPProjectOutlineViewController.h"
 #import "TPSpellCheckerListingViewController.h"
 #import "TPWarningsViewController.h"
+#import "TPLabelsViewController.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -133,12 +134,17 @@
   TPWarningsViewController *warningsViewController;
   NSView *warningsContainerView;
   
+  TPLabelsViewController *labelsViewController;
+  NSView *labelsContainerView;
+  
   IBOutlet NSView *controlsViewContainer;
   
   NSStringEncoding _encoding;
   
   TPTemplateEditor *templateEditor;
   
+  
+  NSTimer *metadataUpdateTimer;
   
   BOOL _liveUpdate;
   BOOL _building;
@@ -148,6 +154,7 @@
 }
 
 @property (retain) NSTimer *liveUpdateTimer;
+@property (retain) NSTimer *metadataUpdateTimer;
 
 @property (assign) IBOutlet NSWindow *mainWindow;
 
@@ -167,6 +174,9 @@
 
 @property (retain) TPWarningsViewController *warningsViewController;
 @property (assign) IBOutlet NSView *warningsContainerView;
+
+@property (retain) TPLabelsViewController *labelsViewController;
+@property (assign) IBOutlet NSView *labelsContainerView;
 
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;
