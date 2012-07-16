@@ -30,7 +30,7 @@
 #import "ImageAndTextCell.h"
 #import "NSWorkspaceExtended.h"
 #import "NSNotificationAdditions.h"
-#import "LibraryImageGenerator.h"
+#import "TPLibraryImageGenerator.h"
 #import "externs.h"
 #import "TPLibraryCommandFormatter.h"
 #import "NSStringUUID.h"
@@ -58,6 +58,21 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 {
  return @"\\@[^\\@]*\\@";
 }
+
+- (void) dealloc
+{
+  NSLog(@"Dealloc %@", self);
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
+  [defaults removeObserver:self forKeyPath:@"Library"];
+  [self saveLibrary];
+  self.delegate = nil;
+  self.defaultLibrary = nil;
+  [addMenu release];
+	[unknownImage release];
+	[library release];
+	[super dealloc];
+}
+
 
 - (id) initWithDelegate:(id<LibraryControllerDelegate>)aDelegate
 {
@@ -99,13 +114,14 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
                 options:NSKeyValueObservingOptionNew 
                 context:NULL];
   
-  TPLibraryCommandFormatter *formatter = [[[TPLibraryCommandFormatter alloc] init] autorelease];
+  TPLibraryCommandFormatter *formatter = [[TPLibraryCommandFormatter alloc] init];
   [self.commandTextField setFormatter:formatter];
+  [formatter release];
 }
 
 - (void) setupLibrary
 {
-//  NSLog(@"Setting up library");
+  NSLog(@"Setting up library");
   
 	// Now make a mutable dictionary for the library
 	library = [[NSMutableDictionary alloc] init];
@@ -113,7 +129,6 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 	[library setObject:categories forKey:@"Categories"];
 	
 	// save this back the user defaults straight away
-//  [self saveLibrary];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
 	[defaults setObject:library forKey:@"Library"];
 	[defaults synchronize];
@@ -145,7 +160,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
   // read library
 	NSDictionary *libraryIn = [defaults valueForKey:@"Library"];  
-	NSMutableArray *categories = [NSMutableArray array];
+	NSMutableArray *categories = [[NSMutableArray array] retain];
 	
 	// check all images
 	for (NSDictionary *category in [libraryIn valueForKey:@"Categories"]) {
@@ -172,7 +187,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 			if (image == nil || ![image isValid]) {
 				[newClip setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];						
 				// launch a thread to compute the image
-				LibraryImageGenerator *ig = [[[LibraryImageGenerator alloc] initWithSymbol:newClip
+				TPLibraryImageGenerator *ig = [[[TPLibraryImageGenerator alloc] initWithSymbol:newClip
 																																					mathMode:NO
 																																		 andController:self] autorelease];
 				
@@ -208,7 +223,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 		[categories addObject:newCategory];		
 		[newCategory release];
 	}
-  return categories;
+  return [categories autorelease];
 }
 
 
@@ -217,7 +232,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-//  NSLog(@"Keypath changed: %@", keyPath);
+  NSLog(@"Keypath changed: %@", keyPath);
   if ([keyPath isEqualToString:@"Library"]) {
     [self reloadLibrary];
   }
@@ -311,22 +326,6 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 
 
 
-- (void) dealloc
-{
-  categoryTable.delegate = nil;
-  categoryTable.dataSource = nil;
-  itemsTable.delegate = nil;
-  itemsTable.dataSource = nil;
-  [self saveLibrary];
-  self.delegate = nil;
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-  [defaults removeObserver:self forKeyPath:@"Library"];
-  self.defaultLibrary = nil;
-  [addMenu release];
-	[unknownImage release];
-	[library release];
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Edit Sheet
@@ -548,7 +547,7 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
   if (image == nil || ![image isValid]) {
     [newClip setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];						
     // launch a thread to compute the image
-    LibraryImageGenerator *ig = [[[LibraryImageGenerator alloc] initWithSymbol:newClip
+    TPLibraryImageGenerator *ig = [[[TPLibraryImageGenerator alloc] initWithSymbol:newClip
                                                                       mathMode:NO
                                                                  andController:self] autorelease];
     
@@ -612,6 +611,8 @@ NSString * const kItemsTableViewNodeType = @"ItemsTableViewNodeType";
 		[symbol setValue:[NSNumber numberWithBool:NO] forKey:@"validImage"];
 	}
 }
+
+
 
 - (IBAction) copySelectedItemsToPasteboard:(id)sender
 {
@@ -1026,7 +1027,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 			[symbol setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];		
 			
 			// launch a thread to compute the image
-			LibraryImageGenerator *ig = [[[LibraryImageGenerator alloc] initWithSymbol:symbol
+			TPLibraryImageGenerator *ig = [[[TPLibraryImageGenerator alloc] initWithSymbol:symbol
 																																				mathMode:NO
 																																	 andController:self] autorelease];
 			
@@ -1038,7 +1039,13 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 }
 
 
+#pragma mark -
+#pragma mark Image generator delegate
 
+- (NSString*)placeholderRegexp
+{
+  return [LibraryController placeholderRegexp];
+}
 
 - (void) imageGeneratorTaskEnded:(NSString*)aPath
 {

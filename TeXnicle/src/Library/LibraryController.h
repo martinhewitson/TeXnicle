@@ -29,6 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TeXTextView.h"
 #import "HHValidatedButton.h"
+#import "TPLibraryImageGenerator.h"
 
 extern NSString * const kItemsTableViewNodeType;
 
@@ -40,7 +41,7 @@ extern NSString * const kItemsTableViewNodeType;
 
 @end
 
-@interface LibraryController : NSViewController <NSTableViewDelegate, NSTableViewDataSource, NSUserInterfaceValidations, NSTextFieldDelegate, LibraryControllerDelegate> {
+@interface LibraryController : NSViewController <TPLibraryImageGeneratorDelegate, NSTableViewDelegate, NSTableViewDataSource, NSUserInterfaceValidations, NSTextFieldDelegate, LibraryControllerDelegate> {
 
 	NSMutableDictionary *library;
 	
