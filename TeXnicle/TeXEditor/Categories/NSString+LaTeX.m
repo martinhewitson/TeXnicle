@@ -237,7 +237,7 @@
         //        NSLog(@"Bib file is %@", bibpath);
         
         MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
-        NSString *bibcontents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
+        NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
         if (bibcontents && [bibcontents length]>0) {
           NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
           for (BibliographyEntry *entry in entries) {
