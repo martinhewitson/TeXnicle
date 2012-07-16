@@ -16,7 +16,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-//  DISCLAIMED. IN NO EVENT SHALL DAN WOOD, MIKE ABDULLAH OR KARELIA SOFTWARE BE LIABLE FOR ANY
+//  DISCLAIMED. IN NO EVENT SHALL MARTIN HEWITSON OR BOBSOFT SOFTWARE BE LIABLE FOR ANY
 //  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 //  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 //   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -52,6 +52,7 @@
 #import "OtherFilesViewController.h"
 #import "TPSpellCheckerListingViewController.h"
 #import "TPProjectOutlineViewController.h"
+#import "TPWarningsViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -61,7 +62,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
 @private
   
   NSWindow *mainWindow;
@@ -139,6 +140,9 @@
   TPSpellCheckerListingViewController *spellcheckerViewController;
   NSView *spellCheckerContainerView;
   
+  TPWarningsViewController *warningsViewController;
+  NSView *warningsContainerView;
+  
   PDFViewerController *pdfViewerController;
   
   PaletteController *palette;
@@ -181,6 +185,10 @@
 
 @property (retain) TPProjectOutlineViewController *outlineViewController;
 @property (assign) IBOutlet NSView *outlineViewContainer;
+
+@property (retain) TPWarningsViewController *warningsViewController;
+@property (assign) IBOutlet NSView *warningsContainerView;
+
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 

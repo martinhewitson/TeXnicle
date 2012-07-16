@@ -16,7 +16,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-//  DISCLAIMED. IN NO EVENT SHALL DAN WOOD, MIKE ABDULLAH OR KARELIA SOFTWARE BE LIABLE FOR ANY
+//  DISCLAIMED. IN NO EVENT SHALL MARTIN HEWITSON OR BOBSOFT SOFTWARE BE LIABLE FOR ANY
 //  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 //  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 //   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -54,6 +54,7 @@
 #import "MHSynctexController.h"
 #import "BibliographyEntry.h"
 #import "RegexKitLite.h"
+#import "TPSyntaxError.h"
 
 #define kSplitViewLeftMinSize 235.0
 #define kSplitViewCenterMinSize 400.0
@@ -87,6 +88,9 @@
 
 @synthesize outlineViewContainer;
 @synthesize outlineViewController;
+
+@synthesize warningsContainerView;
+@synthesize warningsViewController;
 
 @synthesize pdfViewerController;
 @synthesize project;
@@ -241,6 +245,11 @@
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
   [self.outlineViewContainer addSubview:self.outlineViewController.view];
    
+  // warnings view
+  self.warningsViewController = [[[TPWarningsViewController alloc] initWithDelegate:self] autorelease];
+  [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
+  [self.warningsContainerView addSubview:self.warningsViewController.view];
+  
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
@@ -535,6 +544,10 @@
   [self.outlineViewController stop];
   self.outlineViewController.delegate = nil;
   self.outlineViewController = nil;
+  
+  // warnings view
+  self.warningsViewController.delegate = nil;
+  self.warningsViewController = nil;
   
   // mini console
   self.miniConsole = nil;
@@ -1565,6 +1578,9 @@
 
 - (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
 {
+  if ([self.infoControlsTabBarController indexOfSelectedTab] == 1) {
+    [self.warningsViewController updateUI];
+  }
 }
 
 
@@ -3784,6 +3800,43 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
 }
 
+#pragma mark -
+#pragma mark Warnings view delegate
+
+- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
+{
+  NSMutableArray *warningsFiles = [NSMutableArray array];
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        if ([file.metadata.syntaxErrors count] > 0) {
+          [warningsFiles addObject:file];
+        }
+      }
+    }
+  }
+  
+  return warningsFiles;
+}
+
+- (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
+{
+  return [[(FileEntity*)file metadata] syntaxErrors];
+}
+
+- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
+{
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:anError.file];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] inFile:anError.file select:YES];  
+  
+}
 
 
 
