@@ -26,9 +26,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPSyntaxChecker.h"
 
 @class TPFileEntityMetadata;
 @class FileEntity;
+@class TPMetadataOperation;
 
 @protocol TPFileEntityMetadataDelegate <NSObject>
 
@@ -36,20 +38,62 @@
 
 @end
 
-@interface TPFileEntityMetadata : NSObject {
+@interface TPFileEntityMetadata : NSObject <SyntaxCheckerDelegate> {
+  
+  TPSyntaxChecker *checker;
+  NSString *temporaryFileForSyntaxCheck;
+  
+  // meta data update
+  NSDate *lastMetadataUpdate;
+  NSTimer *metadataTimer;
+  
+  // new commands
   NSArray *userNewCommands;
   NSDate *lastUpdateOfNewCommands;
+  
+  // sections
   NSArray *sections;
   NSDate *lastUpdateOfSections;
+  
+  // citations
+  NSArray *citations;
+  
+  // labels
+  NSArray *labels;
+  
+  // includes/inputs
+  NSArray *includes;
+  
+  // syntax errors
+  NSArray *syntaxErrors;
+  
   FileEntity *parent;
   dispatch_queue_t queue;
+  NSOperationQueue* aQueue;
 }
 
+@property (retain) TPSyntaxChecker *checker;
+@property (copy) NSString *temporaryFileForSyntaxCheck;
+
+@property (retain) NSOperationQueue* aQueue;
 @property (assign) FileEntity *parent;
+
+@property (retain) NSDate *lastMetadataUpdate;
+@property (retain) NSTimer *metadataTimer;
+
 @property (retain) NSArray *sections;
 @property (retain) NSDate *lastUpdateOfSections;
+
+@property (retain) NSArray *syntaxErrors;
+
 @property (retain) NSArray *userNewCommands;
 @property (retain) NSDate *lastUpdateOfNewCommands;
+
+@property (retain) NSArray *citations;
+
+@property (retain) NSArray *labels;
+
+@property (retain) NSArray *includes;
 
 - (id) initWithParent:(id)aFile;
 - (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
@@ -59,5 +103,8 @@
 #pragma mark get new commands
 
 - (NSArray*)listOfNewCommands;
+- (void) updateMetadata;
+
+- (void) stopMetadataTimer;
 
 @end

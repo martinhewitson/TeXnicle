@@ -25,6 +25,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+#import "TPMetadataOperation.h"
 #import "TPFileEntityMetadata.h"
 #import "TPSectionTemplate.h"
 #import "TPSection.h"
@@ -39,11 +40,25 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
 
 @implementation TPFileEntityMetadata
 
+@synthesize checker;
+@synthesize temporaryFileForSyntaxCheck;
+
+@synthesize lastMetadataUpdate;
+@synthesize metadataTimer;
+
 @synthesize sections;
 @synthesize lastUpdateOfSections;
-@synthesize parent;
+
 @synthesize userNewCommands;
 @synthesize lastUpdateOfNewCommands;
+
+@synthesize syntaxErrors;
+@synthesize citations;
+@synthesize labels;
+@synthesize includes;
+@synthesize parent;
+
+@synthesize aQueue;
 
 - (id) initWithParent:(id)aFile
 {
@@ -55,27 +70,54 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
+        
+    self.checker = [[[TPSyntaxChecker alloc] initWithDelegate:self] autorelease];
+    
+    self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                          target:self
+                                                        selector:@selector(updateMetadata)
+                                                        userInfo:nil
+                                                         repeats:YES];
+    
+    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
   }
   return self;
 }
 
-- (void) dealloc
+- (void) stopMetadataTimer
 {
+  if (self.metadataTimer) {
+    [self.metadataTimer invalidate];
+    self.metadataTimer = nil;
+  }
+}
+
+- (void) dealloc
+{  
+	[self stopMetadataTimer];
+  dispatch_release(queue);
+  self.checker = nil;
+  [self.aQueue cancelAllOperations];
+  self.aQueue = nil;
   self.userNewCommands = nil;
-  self.lastUpdateOfSections = nil;
+  self.lastUpdateOfNewCommands = nil;
   self.sections = nil;
-	dispatch_release(queue);
+  self.syntaxErrors = nil;
+  self.lastUpdateOfSections = nil;
+  self.citations = nil;
+  self.labels = nil;
+  self.includes = nil;
+  
   [super dealloc];
 }
 
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
+  
   dispatch_async(queue, ^{						
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
     self.sections = [self updateSectionsForTypes:templates forceUpdate:force];
     self.lastUpdateOfSections = [NSDate date];
-    [pool drain];      
     
   });
   
@@ -83,12 +125,15 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
     // both blocks have completed
   });
   
-  // send notification of section update
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
-  [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                    object:self
-                  userInfo:dict];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    // send notification of section update
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
+    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                      object:self
+                    userInfo:dict];
+  });
+  
   
 }
 
@@ -112,30 +157,72 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
 
 - (NSArray*)listOfNewCommands
 {
-//  NSLog(@"Getting commands for %@...", self.parent.name);
-  // if the file hasn't changed since we last generated the list, just return the list
-  NSDate *lastEdit = self.parent.lastEditDate;
-  NSDate *lastUpdate = self.lastUpdateOfNewCommands;
-  
-  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil) {
-//    NSLog(@"   generating");
-    NSMutableArray *commands = [NSMutableArray array];
-    // consolidated main file
-    NSString *allText = [self.parent workingContentString];
-    NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
-    for (NSString *newCommand in newCommands) {
-      [commands addObject:[newCommand argument]];
-    }
-    
-    self.userNewCommands = [NSArray arrayWithArray:commands];
-  } else {
-//    NSLog(@"   skipping");
-  }
-  
-  
-  self.lastUpdateOfNewCommands = [NSDate date];
   return self.userNewCommands;
 }
 
+
+- (void) updateMetadata
+{
+  NSDate *lastEdit = self.parent.lastEditDate;
+  NSDate *lastUpdate = self.lastMetadataUpdate;
+  
+  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil) {    
+    if ([self.aQueue operationCount] == 0) {
+      TPMetadataOperation *op = [[[TPMetadataOperation alloc] initWithFile:self.parent] autorelease];      
+      [op setCompletionBlock:^{        
+        [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:NO];
+      }];
+      
+      [self.aQueue addOperation:op];
+    }
+    
+    //-------------- syntax errors
+    NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
+    if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
+      self.temporaryFileForSyntaxCheck = path;
+      [self.checker checkSyntaxOfFileAtPath:self.temporaryFileForSyntaxCheck];
+    }
+
+    
+  }  
+}
+
+- (void) notifyOfUpdate:(TPMetadataOperation*)op
+{
+  self.userNewCommands = op.commands;
+  self.citations = op.citations;
+  self.lastMetadataUpdate = [NSDate date];
+  
+  // send notification of update
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
+  [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                    object:self
+                  userInfo:dict];
+}
+
+- (void) cleanup
+{
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:self.temporaryFileForSyntaxCheck]) {
+    [fm removeItemAtPath:self.temporaryFileForSyntaxCheck error:NULL];
+  }  
+}
+
+- (void)syntaxCheckerCheckFailed:(TPSyntaxChecker*)checker
+{
+  [self cleanup];
+}
+
+- (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)aChecker
+{
+  [self cleanup];
+  self.syntaxErrors = aChecker.errors;
+}
+
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker
+{
+  return YES;
+}
 
 @end
