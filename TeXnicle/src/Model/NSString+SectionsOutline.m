@@ -121,7 +121,7 @@
             }
           }
           MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
-          subtext = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];           
+          subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];           
           subfile = [NSURL fileURLWithPath:filepath];
         }
         NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
