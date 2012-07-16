@@ -53,6 +53,9 @@
   [self.depthSlider setIntegerValue:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;
   
+  [self.outlineView setDoubleAction:@selector(jumpToSelectedResult)];
+  [self.outlineView setTarget:self];
+  
 }
 
 - (void) setupOutlineBuilder
@@ -112,8 +115,13 @@
 
 - (void) outlineViewSelectionDidChange:(NSNotification *)notification
 {
-  TPSection *section = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
+  [self jumpToSelectedResult];
+}
 
+- (void) jumpToSelectedResult
+{
+  TPSection *section = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
+  
   if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
     [self.delegate highlightSearchResult:section.name
                                withRange:NSMakeRange(section.startIndex+[section.type.name length]+2, [section.name length] )
