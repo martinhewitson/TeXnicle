@@ -34,10 +34,12 @@
   NSString* message;
 }
 
-@property (retain) id file;
+@property (assign) id file;
 @property (retain) NSNumber *line;
 @property (copy) NSString* message;
 
++ (id) errorWithMessage:(NSString*)aMessage line:(NSNumber*)aLine;
+- (id) initWithMessage:(NSString*)aMessage line:(NSNumber*)aLine;
 
 + (id) errorWithMessageLine:(NSString*)aLine;
 - (id) initWithMessageLine:(NSString*)aLine;

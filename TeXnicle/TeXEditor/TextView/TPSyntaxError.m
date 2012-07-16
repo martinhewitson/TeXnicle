@@ -32,11 +32,17 @@
 
 @synthesize line;
 @synthesize message;
+@synthesize file;
 
 - (void) dealloc
 {
   self.line = nil;
   [super dealloc];
+}
+
++ (id) errorWithMessage:(NSString*)aMessage line:(NSNumber*)aLine
+{
+  return [[[TPSyntaxError alloc] initWithMessage:aMessage line:aLine] autorelease];
 }
 
 + (id) errorWithMessageLine:(NSString*)aLine
@@ -53,6 +59,16 @@
     return NO;
   }
   return YES;
+}
+
+- (id) initWithMessage:(NSString*)aMessage line:(NSNumber*)aLine
+{
+  self = [super init];
+  if (self) {
+    self.message = aMessage;
+    self.line = aLine;
+  }
+  return self;
 }
 
 - (id) initWithMessageLine:(NSString*)aLine
