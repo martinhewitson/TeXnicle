@@ -37,6 +37,7 @@
 #import "RegexKitLite.h"
 
 NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
+NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
 
 @implementation TPFileEntityMetadata
 
