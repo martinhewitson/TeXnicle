@@ -160,16 +160,13 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 @implementation TeXnicleAppController
 
 @synthesize openStartupScreenAtAppStartup;
+@synthesize library;
 
 + (void) initialize
 {
   // create a dictionary for the ‘factory’ defaults
 	NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
   
-  // load library
-  NSString *libpath = [[NSBundle mainBundle] pathForResource:@"Library" ofType:@"plist"];
-	NSDictionary *library = [NSMutableDictionary dictionaryWithContentsOfFile:libpath];
-	[defaultValues setObject:library forKey:@"Library"];
   
   // get the templates from the app bundle plist
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"Templates" ofType:@"plist"];
@@ -400,6 +397,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 - (void)dealloc
 {
+  self.library = nil;
   [super dealloc];
 }
 
@@ -464,6 +462,9 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 {
   [self checkVersion];
   [TPEngineManager installEngines];
+  
+  // setup app-wide library
+  self.library = [[[TPLibrary alloc] init] autorelease];
   
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
@@ -921,6 +922,5 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	} // end view menu
 	
 }
-
 
 @end

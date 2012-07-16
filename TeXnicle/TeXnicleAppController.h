@@ -26,6 +26,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPLibrary.h"
 
 @class StartupScreenController;
 
@@ -34,9 +35,11 @@
 	StartupScreenController *startupScreenController;    
   BOOL openStartupScreenAtAppStartup;
   NSInteger lineToOpen;
+  TPLibrary *library;
 }
 
 @property (assign) BOOL openStartupScreenAtAppStartup;
+@property (retain) TPLibrary *library;
 
 - (void) checkVersion;
 
