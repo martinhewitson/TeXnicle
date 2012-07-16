@@ -45,6 +45,7 @@
 - (id) initWithEncoding:(NSStringEncoding)encoding;
 - (id) initWithEncodingNamed:(NSString*)encodingName;
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL;
+- (NSString*)silentlyReadStringFromFileAtURL:(NSURL*)aURL;
 - (NSStringEncoding)encodingWithName:(NSString*)encoding;
 - (NSInteger)indexForEncodingNamed:(NSString*)encoding;
 - (NSString*)defaultEncodingName;
