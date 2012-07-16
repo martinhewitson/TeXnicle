@@ -36,7 +36,7 @@
   BOOL needsUpdate;
 }
 
-@property (assign) id file;
+@property (retain) id file;
 @property (retain) NSDate *lastCheck;
 @property (retain) NSArray *words;
 @property (assign) BOOL needsUpdate;
