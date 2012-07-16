@@ -108,8 +108,10 @@
          selector:@selector(handleDocumentChanged:) 
              name:TPOpenDocumentsDidChangeFileNotification
            object:nil];
+
   
 }
+
 
 #pragma mark -
 #pragma Control 
@@ -418,6 +420,11 @@
 //        NSLog(@"Failed to remove %@", self.fileBeingSyntaxChecked);
       }
     }
+  }
+  
+  // tell delegate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(syntaxCheckerDidFinish)]) {
+    [self.delegate performSelector:@selector(syntaxCheckerDidFinish)];
   }
   
   _checkingSyntax = NO;

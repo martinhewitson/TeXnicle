@@ -45,6 +45,7 @@
 #import "NSApplication+SystemVersion.h"
 #import "TPProjectBuilder.h"
 #import "MHSynctexController.h"
+#import "TPSyntaxError.h"
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -79,6 +80,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 @synthesize tabbarController;
 @synthesize infoTabbarController;
+
+@synthesize warningsContainerView;
+@synthesize warningsViewController;
 
 @synthesize palette;
 @synthesize paletteContainerView;
@@ -251,6 +255,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
+  // warnings view
+  self.warningsViewController = [[[TPWarningsViewController alloc] initWithDelegate:self] autorelease];
+  [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
+  [self.warningsContainerView addSubview:self.warningsViewController.view];
+  
   // setup outline view  
   self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
@@ -533,6 +542,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark -
 #pragma mark Notification Handlers
 
+- (void) syntaxCheckerDidFinish
+{
+  [self.warningsViewController updateUI];
+}
+
 - (void) handleTextSelectionChanged:(NSNotification*)aNote
 {
 	[self updateCursorInfoText];
@@ -572,6 +586,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // pdfviewer
   self.pdfViewer.delegate = nil;
   self.pdfViewer = nil;
+  
+  // warnings view
+  self.warningsViewController.delegate = nil;
+  self.warningsViewController = nil;
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
@@ -2368,5 +2386,23 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
 }
 
+#pragma mark -
+#pragma mark Warnings view delegate
+
+- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
+{
+  return [NSArray arrayWithObject:[self fileURL]];
+}
+
+- (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
+{
+  return self.texEditorViewController.errors;
+}
+
+- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
+{
+  [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] select:YES];    
+  [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
+}
 
 @end

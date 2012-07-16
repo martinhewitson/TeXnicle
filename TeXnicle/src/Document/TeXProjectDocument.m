@@ -3835,7 +3835,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	[projectItemTreeController setSelectionIndexPath:idx];
   
   [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] inFile:anError.file select:YES];  
-  
+  [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];  
 }
 
 

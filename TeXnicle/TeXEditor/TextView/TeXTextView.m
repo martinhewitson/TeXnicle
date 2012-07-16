@@ -1122,6 +1122,30 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark Selection
 
+- (void) jumpToLine:(NSInteger)aLinenumber select:(BOOL)selectLine
+{
+  NSMutableAttributedString *aStr = [[[self textStorage] mutableCopy] autorelease];
+  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
+  MHLineNumber *matchingLine = nil;
+  for (MHLineNumber *line in lineNumbers) {
+    if (line.number == aLinenumber) {
+      matchingLine = line;
+      break;
+    }
+  }
+  if (matchingLine) {
+    if (selectLine) {
+      [self setSelectedRange:matchingLine.range];
+      [self scrollRangeToVisible:matchingLine.range];
+    } else {
+      NSRange r = NSMakeRange(matchingLine.range.location, 0);
+      [self setSelectedRange:r];
+      [self scrollRangeToVisible:r];
+    }
+  }
+}
+
+
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine
 {
   NSMutableAttributedString *aStr = [[[[aFile document] textStorage] mutableCopy] autorelease];

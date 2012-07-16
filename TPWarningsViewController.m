@@ -207,31 +207,25 @@
 - (void) updateUI
 {
   NSArray *newFiles = [self warningsViewlistOfFiles:self];
-//  NSLog(@"Got %u files from delegate", [newFiles count]);
-  NSArray *sortedItems = [newFiles sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *first  = [(ProjectItemEntity*)a valueForKey:@"name"];
-    NSString *second = [(ProjectItemEntity*)b valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];  
   
   // remove any stale files
   NSMutableArray *filesToRemove = [NSMutableArray array];
   for (TPWarningSet *set in self.sets) {
-    if ([sortedItems containsObject:set.file] == NO) {
+    if ([newFiles containsObject:set.file] == NO) {
       [filesToRemove addObject:set];
     }
   }
   [self.sets removeObjectsInArray:filesToRemove];
   
   // update our files
-  for (FileEntity *newFile in sortedItems) {
+  for (FileEntity *newFile in newFiles) {
     TPWarningSet *set = [self setForFile:newFile];
     if (set == nil) {
       set = [[[TPWarningSet alloc] initWithFile:newFile errors:[self warningsView:self warningsForFile:newFile]] autorelease];
       [self.sets addObject:set];
     } else {
       // update the errors
-      NSArray *newErrors = newFile.metadata.syntaxErrors;
+      NSArray *newErrors = [self warningsView:self warningsForFile:newFile];
       set.errors = newErrors;
     }
   }

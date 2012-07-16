@@ -53,8 +53,12 @@
 
 - (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
 {
-  NSString *text = [self.file valueForKey:@"name"];
-  
+  NSString *text = nil;
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    text = [self.file valueForKey:@"name"];
+  } else {
+    text = [self.file lastPathComponent];
+  }
   NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
   
   NSString *warningCountString = nil; 

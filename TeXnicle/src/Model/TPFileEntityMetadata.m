@@ -37,6 +37,8 @@
 #import "RegexKitLite.h"
 #import "TPSyntaxError.h"
 #import "externs.h"
+#import "NSNotificationAdditions.h"
+
 NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
 NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
 
@@ -90,6 +92,11 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
                   options:NSKeyValueObservingOptionNew
                   context:NULL];		
     
+    [defaults addObserver:self
+               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];		
+    
     
     self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
   }
@@ -102,6 +109,9 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
                        context:(void *)context
 {
 	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]]) {	
+    self.needsUpdate = YES;
+  }
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]]) {	
     self.needsUpdate = YES;
   }
 }
@@ -118,6 +128,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 {  
   NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
 
 	[self stopMetadataTimer];
   dispatch_release(queue);
@@ -154,9 +165,10 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
     // send notification of section update
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
-    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                      object:self
-                    userInfo:dict];
+    
+    [nc postNotificationOnMainThreadWithName:TPFileMetadataSectionsUpdatedNotification
+                                      object:self
+                                    userInfo:dict];
   });
   
   
@@ -202,13 +214,20 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
     }
     
     //-------------- syntax errors
-    NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
-    if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
-      self.temporaryFileForSyntaxCheck = path;
-      [self.checker checkSyntaxOfFileAtPath:self.temporaryFileForSyntaxCheck];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    if ([[defaults valueForKey:TPCheckSyntax] boolValue]) {
+      if ([self.parent.extension isEqualToString:@"tex"]) {
+        NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
+        if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
+          self.temporaryFileForSyntaxCheck = path;
+          [self.checker checkSyntaxOfFileAtPath:self.temporaryFileForSyntaxCheck];
+        }
+      } 
+    } else {
+      // clear errors
+      self.syntaxErrors = [NSArray array];
+      [self postUpdateNotification];
     }
-
-    
   }  
 }
 
@@ -227,10 +246,10 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 {
   // send notification of update
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self, @"metadata", nil];
-  [nc postNotificationName:TPFileMetadataUpdatedNotification
-                    object:self
-                  userInfo:dict];
+  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", nil];
+  [nc postNotificationOnMainThreadWithName:TPFileMetadataUpdatedNotification
+                                    object:self
+                                  userInfo:dict];
 }
 
 - (void) cleanup

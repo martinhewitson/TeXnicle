@@ -44,10 +44,11 @@
 #import "TPConsoleViewController.h"
 #import "TPProjectOutlineViewController.h"
 #import "TPSpellCheckerListingViewController.h"
+#import "TPWarningsViewController.h"
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -129,6 +130,9 @@
   NSView *libraryContainerView;
   NSView *prefsContainerView;
   
+  TPWarningsViewController *warningsViewController;
+  NSView *warningsContainerView;
+  
   IBOutlet NSView *controlsViewContainer;
   
   NSStringEncoding _encoding;
@@ -160,6 +164,9 @@
 
 @property (assign) IBOutlet MHControlsTabBarController *tabbarController;
 @property (assign) IBOutlet MHInfoTabBarController *infoTabbarController;
+
+@property (retain) TPWarningsViewController *warningsViewController;
+@property (assign) IBOutlet NSView *warningsContainerView;
 
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;

@@ -36,7 +36,6 @@
 		250848DA154B22420001685A /* AFTreeScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 250848D9154B22420001685A /* AFTreeScanner.m */; };
 		25086B38149F4467006A5A49 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25086B37149F4467006A5A49 /* newTeXDoc.icns */; };
 		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
-		2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2509B03C13EC6DFE0072961A /* LibraryController.xib */; };
 		250AF6E414EB952600A0332E /* ProjectEntity+ProjectTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */; };
 		250C173D140926CB00BCEA3D /* TPEnginesEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C173B140926CB00BCEA3D /* TPEnginesEditor.m */; };
 		250C173E140926CB00BCEA3D /* TPEnginesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */; };
@@ -138,12 +137,20 @@
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
 		253A3AC01457D895007C4D8C /* MHConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABF1457D895007C4D8C /* MHConsoleManager.m */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
-		253E5E3313951DD300566E23 /* LibraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2D13951DD300566E23 /* LibraryController.m */; };
-		253E5E3413951DD300566E23 /* LibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */; };
+		253E5E3413951DD300566E23 /* TPLibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */; };
 		253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E3113951DD300566E23 /* TPClippingsTable.m */; };
 		253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FA713A2151B00720CD0 /* zoomIn.icns */; };
 		253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */ = {isa = PBXBuildFile; fileRef = 253E8FAA13A2157C00720CD0 /* zoomOut.icns */; };
 		253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 253F7A4113E3EF16005C1051 /* TPProjectBuilder.m */; };
+		2540D8A215B2ACF800528982 /* library.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8A015B2ACF800528982 /* library.xcdatamodeld */; };
+		2540D8A515B2AE0400528982 /* TPLibraryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8A415B2AE0400528982 /* TPLibraryController.m */; };
+		2540D8AC15B2B94D00528982 /* TPLibraryCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8AB15B2B94D00528982 /* TPLibraryCategory.m */; };
+		2540D8AF15B2B94F00528982 /* TPLibraryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8AE15B2B94E00528982 /* TPLibraryEntry.m */; };
+		2540D8B815B2BCBF00528982 /* TPLibraryEntry+NSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8B715B2BCBE00528982 /* TPLibraryEntry+NSDictionary.m */; };
+		2540D8BA15B2C31E00528982 /* TPLibraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2540D8B915B2C31D00528982 /* TPLibraryView.xib */; };
+		2540D8BD15B2C4F400528982 /* NSApplication+Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8BC15B2C4F300528982 /* NSApplication+Library.m */; };
+		2540D8C315B2DDDC00528982 /* NSOutlineView+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8C215B2DDDC00528982 /* NSOutlineView+TeXnicle.m */; };
+		2540D8C615B2DE4200528982 /* NSTableView+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2540D8C515B2DE4100528982 /* NSTableView+TeXnicle.m */; };
 		254448A314EB930000377F82 /* TPProjectTemplateViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 254448A114EB930000377F82 /* TPProjectTemplateViewer.m */; };
 		254448A414EB930000377F82 /* TPProjectTemplateViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254448A214EB930000377F82 /* TPProjectTemplateViewer.xib */; };
 		2545864C13E9268700461494 /* PDFViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2545864A13E9268700461494 /* PDFViewerController.m */; };
@@ -247,6 +254,9 @@
 		258594041408BD6500C970A1 /* prefsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258594021408BD6500C970A1 /* prefsTabBarImage.icns */; };
 		25862F97148BE827004BC890 /* TeXnicle_relief.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25862F96148BE827004BC890 /* TeXnicle_relief.icns */; };
 		258834F5145FD35D0074DF7C /* MHSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258834F4145FD35D0074DF7C /* MHSlideViewController.m */; };
+		2589BBFB15B3385000E24C9B /* TPLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BBFA15B3384F00E24C9B /* TPLibrary.m */; };
+		2589BBFF15B3EEDC00E24C9B /* TPMetadataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */; };
+		2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */; };
 		258A1FBD149B43B100C55B69 /* no_pdf_relief.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258A1FBC149B43B100C55B69 /* no_pdf_relief.icns */; };
 		258BCAE815B067210092E914 /* TPTabbarMatchingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */; };
 		258BCAEC15B0698C0092E914 /* backbutton.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258BCAEA15B0698C0092E914 /* backbutton.icns */; };
@@ -277,6 +287,18 @@
 		25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AD69EA140E974100C131A6 /* MHFileReader.xib */; };
 		25AF2CBB14EE51A000A7152B /* Settings+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AF2CBA14EE51A000A7152B /* Settings+ProjectTemplate.m */; };
 		25B2000B147F8CED00890B09 /* MHThreePaneSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B2000A147F8CED00890B09 /* MHThreePaneSplitViewController.m */; };
+		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
+		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
+		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
+		25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */; };
+		25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */; };
+		25BB153115B4200A007A7FDF /* TPSimpleSpellcheckOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */; };
+		25BB153415B422A9007A7FDF /* NSString+Spelling.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153315B422A9007A7FDF /* NSString+Spelling.m */; };
+		25BB153815B42858007A7FDF /* TPSpellCheckFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */; };
+		25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */; };
+		25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */; };
+		25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */; };
+		25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB154215B444FC007A7FDF /* TPWarningSet.m */; };
 		25BB23EF14B772910015D4C1 /* TPSupportedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB23EE14B772910015D4C1 /* TPSupportedFile.m */; };
 		25BE010614BE1D38004FDDE7 /* Lilypond.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25BE010514BE1D38004FDDE7 /* Lilypond.engine */; };
 		25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25C0177913F195E8003E6FC6 /* bookmark.icns */; };
@@ -440,7 +462,6 @@
 		25086B37149F4467006A5A49 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
 		2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LineNumbers.h"; sourceTree = "<group>"; };
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
-		2509B03C13EC6DFE0072961A /* LibraryController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryController.xib; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
 		250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProjectEntity+ProjectTemplates.m"; sourceTree = "<group>"; };
 		250C173A140926CB00BCEA3D /* TPEnginesEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEnginesEditor.h; sourceTree = "<group>"; };
@@ -596,16 +617,30 @@
 		253A3AC41457DBE2007C4D8C /* MHConsoleViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsoleViewer.h; sourceTree = "<group>"; };
 		253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 8.xcdatamodel"; sourceTree = "<group>"; };
 		253E5E2B13951DD300566E23 /* Library.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Library.plist; sourceTree = "<group>"; };
-		253E5E2C13951DD300566E23 /* LibraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryController.h; sourceTree = "<group>"; };
-		253E5E2D13951DD300566E23 /* LibraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryController.m; sourceTree = "<group>"; };
-		253E5E2E13951DD300566E23 /* LibraryImageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryImageGenerator.h; sourceTree = "<group>"; };
-		253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryImageGenerator.m; sourceTree = "<group>"; };
+		253E5E2E13951DD300566E23 /* TPLibraryImageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryImageGenerator.h; sourceTree = "<group>"; };
+		253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryImageGenerator.m; sourceTree = "<group>"; };
 		253E5E3013951DD300566E23 /* TPClippingsTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPClippingsTable.h; sourceTree = "<group>"; };
 		253E5E3113951DD300566E23 /* TPClippingsTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPClippingsTable.m; sourceTree = "<group>"; };
 		253E8FA713A2151B00720CD0 /* zoomIn.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomIn.icns; sourceTree = "<group>"; };
 		253E8FAA13A2157C00720CD0 /* zoomOut.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomOut.icns; sourceTree = "<group>"; };
 		253F7A4013E3EF16005C1051 /* TPProjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectBuilder.h; sourceTree = "<group>"; };
 		253F7A4113E3EF16005C1051 /* TPProjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectBuilder.m; sourceTree = "<group>"; };
+		2540D8A115B2ACF800528982 /* library.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = library.xcdatamodel; sourceTree = "<group>"; };
+		2540D8A315B2AE0400528982 /* TPLibraryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryController.h; sourceTree = "<group>"; };
+		2540D8A415B2AE0400528982 /* TPLibraryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryController.m; sourceTree = "<group>"; };
+		2540D8AA15B2B94D00528982 /* TPLibraryCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryCategory.h; sourceTree = "<group>"; };
+		2540D8AB15B2B94D00528982 /* TPLibraryCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryCategory.m; sourceTree = "<group>"; };
+		2540D8AD15B2B94E00528982 /* TPLibraryEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryEntry.h; sourceTree = "<group>"; };
+		2540D8AE15B2B94E00528982 /* TPLibraryEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryEntry.m; sourceTree = "<group>"; };
+		2540D8B615B2BCBE00528982 /* TPLibraryEntry+NSDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TPLibraryEntry+NSDictionary.h"; sourceTree = "<group>"; };
+		2540D8B715B2BCBE00528982 /* TPLibraryEntry+NSDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TPLibraryEntry+NSDictionary.m"; sourceTree = "<group>"; };
+		2540D8B915B2C31D00528982 /* TPLibraryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPLibraryView.xib; sourceTree = "<group>"; };
+		2540D8BB15B2C4F200528982 /* NSApplication+Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+Library.h"; sourceTree = "<group>"; };
+		2540D8BC15B2C4F300528982 /* NSApplication+Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Library.m"; sourceTree = "<group>"; };
+		2540D8C115B2DDDB00528982 /* NSOutlineView+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOutlineView+TeXnicle.h"; sourceTree = "<group>"; };
+		2540D8C215B2DDDC00528982 /* NSOutlineView+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOutlineView+TeXnicle.m"; sourceTree = "<group>"; };
+		2540D8C415B2DE4100528982 /* NSTableView+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+TeXnicle.h"; sourceTree = "<group>"; };
+		2540D8C515B2DE4100528982 /* NSTableView+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+TeXnicle.m"; sourceTree = "<group>"; };
 		254448A014EB930000377F82 /* TPProjectTemplateViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateViewer.h; sourceTree = "<group>"; };
 		254448A114EB930000377F82 /* TPProjectTemplateViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateViewer.m; sourceTree = "<group>"; };
 		254448A214EB930000377F82 /* TPProjectTemplateViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateViewer.xib; sourceTree = "<group>"; };
@@ -634,8 +669,8 @@
 		2553F6FF14F0E76700DF0BD3 /* TPProjectTemplateManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateManager.xib; sourceTree = "<group>"; };
 		2553F70414F13BBF00DF0BD3 /* TPProjectTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplate.h; sourceTree = "<group>"; };
 		2553F70514F13BBF00DF0BD3 /* TPProjectTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplate.m; sourceTree = "<group>"; };
-		255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SectionsOutline.h"; sourceTree = "<group>"; };
-		255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SectionsOutline.m"; sourceTree = "<group>"; };
+		255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+SectionsOutline.h"; path = "../Model/NSString+SectionsOutline.h"; sourceTree = "<group>"; };
+		255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+SectionsOutline.m"; path = "../Model/NSString+SectionsOutline.m"; sourceTree = "<group>"; };
 		2555C31D14B0708C00FE6150 /* libraryPrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = libraryPrefs.icns; sourceTree = "<group>"; };
 		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
 		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
@@ -782,6 +817,12 @@
 		25862F96148BE827004BC890 /* TeXnicle_relief.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle_relief.icns; sourceTree = "<group>"; };
 		258834F3145FD35D0074DF7C /* MHSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSlideViewController.h; sourceTree = "<group>"; };
 		258834F4145FD35D0074DF7C /* MHSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSlideViewController.m; sourceTree = "<group>"; };
+		2589BBF915B3384F00E24C9B /* TPLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibrary.h; sourceTree = "<group>"; };
+		2589BBFA15B3384F00E24C9B /* TPLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibrary.m; sourceTree = "<group>"; };
+		2589BBFD15B3EEDB00E24C9B /* TPMetadataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataOperation.h; sourceTree = "<group>"; };
+		2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataOperation.m; sourceTree = "<group>"; };
+		2589BC0115B40DAD00E24C9B /* MHInfoTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHInfoTabBarController.h; sourceTree = "<group>"; };
+		2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoTabBarController.m; sourceTree = "<group>"; };
 		258A1FBC149B43B100C55B69 /* no_pdf_relief.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = no_pdf_relief.icns; sourceTree = "<group>"; };
 		258BCAE615B067210092E914 /* TPTabbarMatchingBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTabbarMatchingBackground.h; sourceTree = "<group>"; };
 		258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTabbarMatchingBackground.m; sourceTree = "<group>"; };
@@ -824,6 +865,25 @@
 		25AF2CBA14EE51A000A7152B /* Settings+ProjectTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Settings+ProjectTemplate.m"; sourceTree = "<group>"; };
 		25B20009147F8CED00890B09 /* MHThreePaneSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHThreePaneSplitViewController.h; path = ../Document/MHThreePaneSplitViewController.h; sourceTree = "<group>"; };
 		25B2000A147F8CED00890B09 /* MHThreePaneSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHThreePaneSplitViewController.m; path = ../Document/MHThreePaneSplitViewController.m; sourceTree = "<group>"; };
+		25BB152315B41770007A7FDF /* infoTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImage.icns; sourceTree = "<group>"; };
+		25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImage.icns; sourceTree = "<group>"; };
+		25BB152C15B418AB007A7FDF /* MHInfoToolbarBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHInfoToolbarBackgroundView.h; sourceTree = "<group>"; };
+		25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoToolbarBackgroundView.m; sourceTree = "<group>"; };
+		25BB152F15B4200A007A7FDF /* TPSimpleSpellcheckOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSimpleSpellcheckOperation.h; sourceTree = "<group>"; };
+		25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSimpleSpellcheckOperation.m; sourceTree = "<group>"; };
+		25BB153215B422A9007A7FDF /* NSString+Spelling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Spelling.h"; sourceTree = "<group>"; };
+		25BB153315B422A9007A7FDF /* NSString+Spelling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Spelling.m"; sourceTree = "<group>"; };
+		25BB153615B42857007A7FDF /* TPSpellCheckFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellCheckFileOperation.h; sourceTree = "<group>"; };
+		25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellCheckFileOperation.m; sourceTree = "<group>"; };
+		25BB153915B431F6007A7FDF /* TPWarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningsViewController.h; sourceTree = "<group>"; };
+		25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningsViewController.m; sourceTree = "<group>"; };
+		25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPWarningsViewController.xib; sourceTree = "<group>"; };
+		25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FileEntity+Warnings.h"; sourceTree = "<group>"; };
+		25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FileEntity+Warnings.m"; sourceTree = "<group>"; };
+		25BB154115B444FC007A7FDF /* TPWarningSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningSet.h; sourceTree = "<group>"; };
+		25BB154215B444FC007A7FDF /* TPWarningSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningSet.m; sourceTree = "<group>"; };
 		25BB23ED14B772910015D4C1 /* TPSupportedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSupportedFile.h; sourceTree = "<group>"; };
 		25BB23EE14B772910015D4C1 /* TPSupportedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSupportedFile.m; sourceTree = "<group>"; };
 		25BE010514BE1D38004FDDE7 /* Lilypond.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Lilypond.engine; sourceTree = "<group>"; };
@@ -927,8 +987,8 @@
 		25F10D44150B66B200C00AA3 /* xelatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatex.engine; sourceTree = "<group>"; };
 		25F251021519C83100453F6F /* TPSyntaxChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSyntaxChecker.h; sourceTree = "<group>"; };
 		25F251031519C83100453F6F /* TPSyntaxChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSyntaxChecker.m; sourceTree = "<group>"; };
-		25F251061519DB9800453F6F /* TPSyntaxError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSyntaxError.h; sourceTree = "<group>"; };
-		25F251071519DB9800453F6F /* TPSyntaxError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSyntaxError.m; sourceTree = "<group>"; };
+		25F251061519DB9800453F6F /* TPSyntaxError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPSyntaxError.h; path = ../../TeXEditor/TextView/TPSyntaxError.h; sourceTree = "<group>"; };
+		25F251071519DB9800453F6F /* TPSyntaxError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPSyntaxError.m; path = ../../TeXEditor/TextView/TPSyntaxError.m; sourceTree = "<group>"; };
 		25F2728A13ED7BFA0087E021 /* PaletteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteController.xib; sourceTree = "<group>"; };
 		25F4B75514BC1A6100351BE9 /* NSApplication+SystemVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+SystemVersion.h"; sourceTree = "<group>"; };
 		25F4B75614BC1A6100351BE9 /* NSApplication+SystemVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+SystemVersion.m"; sourceTree = "<group>"; };
@@ -1061,6 +1121,7 @@
 				2523C7DF1405472600A47297 /* Engine */,
 				25C72A5714D451B600A81DEE /* Template Editor */,
 				250848C2154B1E800001685A /* Other Files Viewer */,
+				2589BC0015B40B3D00E24C9B /* WarningsView */,
 				25E7B13315AB396800373A56 /* TPProjectOutline */,
 				257B47AB138E5F9D00ED02C4 /* Document */,
 				25077308138E5D82000F1118 /* MainMenu.xib */,
@@ -1233,6 +1294,10 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */,
+				25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */,
+				25BB152315B41770007A7FDF /* infoTabBarImage.icns */,
+				25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */,
 				25F0AB3415A940D10000EFFA /* spellingMistake.icns */,
 				25F0AB3015A8A4360000EFFA /* spellingTabBarImage.icns */,
 				25F0AB3115A8A4360000EFFA /* spellingTabBarImageDepressed.icns */,
@@ -1297,8 +1362,12 @@
 			children = (
 				2519491E138F9830007029E5 /* MHControlsTabBarController.h */,
 				2519491F138F9830007029E5 /* MHControlsTabBarController.m */,
+				2589BC0115B40DAD00E24C9B /* MHInfoTabBarController.h */,
+				2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */,
 				25194929138FA840007029E5 /* MHToolbarBackgroundView.h */,
 				2519492A138FA840007029E5 /* MHToolbarBackgroundView.m */,
+				25BB152C15B418AB007A7FDF /* MHInfoToolbarBackgroundView.h */,
+				25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */,
 			);
 			name = "Controls TabBar control";
 			path = src/ControlsTabBar;
@@ -1406,21 +1475,32 @@
 			isa = PBXGroup;
 			children = (
 				253E5E2B13951DD300566E23 /* Library.plist */,
-				253E5E2C13951DD300566E23 /* LibraryController.h */,
-				253E5E2D13951DD300566E23 /* LibraryController.m */,
 				2574375214A470EB0082FE96 /* TPLibraryCommandFormatter.h */,
 				2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */,
-				2509B03C13EC6DFE0072961A /* LibraryController.xib */,
 				25A8DEFE1397AA160097A62E /* MHImageView.h */,
 				25A8DEFF1397AA160097A62E /* MHImageView.m */,
-				253E5E2E13951DD300566E23 /* LibraryImageGenerator.h */,
-				253E5E2F13951DD300566E23 /* LibraryImageGenerator.m */,
+				253E5E2E13951DD300566E23 /* TPLibraryImageGenerator.h */,
+				253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */,
 				253E5E3013951DD300566E23 /* TPClippingsTable.h */,
 				253E5E3113951DD300566E23 /* TPClippingsTable.m */,
 				25E0EB0714AF0D0C0039E82B /* MHPlaceholderAttachment.h */,
 				25E0EB0814AF0D0C0039E82B /* MHPlaceholderAttachment.m */,
 				25E0EB0B14AF0D380039E82B /* MHPlaceholderAttachmentCell.h */,
 				25E0EB0C14AF0D380039E82B /* MHPlaceholderAttachmentCell.m */,
+				2540D8A015B2ACF800528982 /* library.xcdatamodeld */,
+				2540D8AD15B2B94E00528982 /* TPLibraryEntry.h */,
+				2540D8AE15B2B94E00528982 /* TPLibraryEntry.m */,
+				2540D8B615B2BCBE00528982 /* TPLibraryEntry+NSDictionary.h */,
+				2540D8B715B2BCBE00528982 /* TPLibraryEntry+NSDictionary.m */,
+				2540D8AA15B2B94D00528982 /* TPLibraryCategory.h */,
+				2540D8AB15B2B94D00528982 /* TPLibraryCategory.m */,
+				2540D8A315B2AE0400528982 /* TPLibraryController.h */,
+				2540D8A415B2AE0400528982 /* TPLibraryController.m */,
+				2589BBF915B3384F00E24C9B /* TPLibrary.h */,
+				2589BBFA15B3384F00E24C9B /* TPLibrary.m */,
+				2540D8BB15B2C4F200528982 /* NSApplication+Library.h */,
+				2540D8BC15B2C4F300528982 /* NSApplication+Library.m */,
+				2540D8B915B2C31D00528982 /* TPLibraryView.xib */,
 			);
 			name = Library;
 			path = src/Library;
@@ -1522,29 +1602,16 @@
 		257B4711138E5DA700ED02C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				257B471B138E5DE500ED02C4 /* FileDocument.h */,
-				257B471C138E5DE500ED02C4 /* FileDocument.m */,
 				25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */,
-				25DD32BD14B981CF00C5D1E3 /* UISettings.h */,
-				25DD32BE14B981CF00C5D1E3 /* UISettings.m */,
-				25846DC11408D36800A708E2 /* Settings.h */,
-				25846DC21408D36800A708E2 /* Settings.m */,
-				256C94D413EE591300AD8E3A /* Bookmark.h */,
-				256C94D513EE591300AD8E3A /* Bookmark.m */,
-				257B471E138E5DE500ED02C4 /* ProjectEntity.h */,
-				257B471F138E5DE500ED02C4 /* ProjectEntity.m */,
-				257B4720138E5DE500ED02C4 /* ProjectItemEntity.h */,
-				257B4721138E5DE500ED02C4 /* ProjectItemEntity.m */,
-				257B4722138E5DE500ED02C4 /* FolderEntity.h */,
-				257B4723138E5DE500ED02C4 /* FolderEntity.m */,
-				257B4724138E5DE500ED02C4 /* FileEntity.h */,
-				257B4725138E5DE500ED02C4 /* FileEntity.m */,
+				25BB153515B42378007A7FDF /* Entities */,
+				2589BBFD15B3EEDB00E24C9B /* TPMetadataOperation.h */,
+				2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */,
 				254AE6DD15AE9F4200680414 /* TPFileEntityMetadata.h */,
 				254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */,
-				255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */,
-				255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */,
-				257B4726138E5DE500ED02C4 /* TeXFileEntity.h */,
-				257B4727138E5DE500ED02C4 /* TeXFileEntity.m */,
+				257B471B138E5DE500ED02C4 /* FileDocument.h */,
+				257B471C138E5DE500ED02C4 /* FileDocument.m */,
+				25F251061519DB9800453F6F /* TPSyntaxError.h */,
+				25F251071519DB9800453F6F /* TPSyntaxError.m */,
 			);
 			name = Model;
 			path = src/Model;
@@ -1664,8 +1731,6 @@
 				257B476B138E5E9000ED02C4 /* TPSectionListController.m */,
 				25F251021519C83100453F6F /* TPSyntaxChecker.h */,
 				25F251031519C83100453F6F /* TPSyntaxChecker.m */,
-				25F251061519DB9800453F6F /* TPSyntaxError.h */,
-				25F251071519DB9800453F6F /* TPSyntaxError.m */,
 			);
 			path = TextView;
 			sourceTree = "<group>";
@@ -1740,6 +1805,10 @@
 				2579E58513FBB91C001B3974 /* NSString+FileTypes.m */,
 				254960DA14DB12770017245C /* NSView+Subview.h */,
 				254960DB14DB12770017245C /* NSView+Subview.m */,
+				2540D8C415B2DE4100528982 /* NSTableView+TeXnicle.h */,
+				2540D8C515B2DE4100528982 /* NSTableView+TeXnicle.m */,
+				2540D8C115B2DDDB00528982 /* NSOutlineView+TeXnicle.h */,
+				2540D8C215B2DDDC00528982 /* NSOutlineView+TeXnicle.m */,
 			);
 			name = Categories;
 			path = src/Categories;
@@ -1808,6 +1877,21 @@
 			path = bibtex;
 			sourceTree = "<group>";
 		};
+		2589BC0015B40B3D00E24C9B /* WarningsView */ = {
+			isa = PBXGroup;
+			children = (
+				25BB153915B431F6007A7FDF /* TPWarningsViewController.h */,
+				25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */,
+				25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */,
+				25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */,
+				25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */,
+				25BB154115B444FC007A7FDF /* TPWarningSet.h */,
+				25BB154215B444FC007A7FDF /* TPWarningSet.m */,
+			);
+			name = WarningsView;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		259530AD13DD685C00CA2894 /* File Monitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1816,6 +1900,29 @@
 			);
 			name = "File Monitor";
 			path = FileMonitor;
+			sourceTree = "<group>";
+		};
+		25BB153515B42378007A7FDF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				25DD32BD14B981CF00C5D1E3 /* UISettings.h */,
+				25DD32BE14B981CF00C5D1E3 /* UISettings.m */,
+				25846DC11408D36800A708E2 /* Settings.h */,
+				25846DC21408D36800A708E2 /* Settings.m */,
+				256C94D413EE591300AD8E3A /* Bookmark.h */,
+				256C94D513EE591300AD8E3A /* Bookmark.m */,
+				257B471E138E5DE500ED02C4 /* ProjectEntity.h */,
+				257B471F138E5DE500ED02C4 /* ProjectEntity.m */,
+				257B4720138E5DE500ED02C4 /* ProjectItemEntity.h */,
+				257B4721138E5DE500ED02C4 /* ProjectItemEntity.m */,
+				257B4722138E5DE500ED02C4 /* FolderEntity.h */,
+				257B4723138E5DE500ED02C4 /* FolderEntity.m */,
+				257B4724138E5DE500ED02C4 /* FileEntity.h */,
+				257B4725138E5DE500ED02C4 /* FileEntity.m */,
+				257B4726138E5DE500ED02C4 /* TeXFileEntity.h */,
+				257B4727138E5DE500ED02C4 /* TeXFileEntity.m */,
+			);
+			name = Entities;
 			sourceTree = "<group>";
 		};
 		25C72A5714D451B600A81DEE /* Template Editor */ = {
@@ -1846,6 +1953,12 @@
 				25C87DD415A8863300E61E25 /* TPMisspelledWord.m */,
 				25F0AB3615A94A050000EFFA /* TPSpellingOutlineView.h */,
 				25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */,
+				25BB152F15B4200A007A7FDF /* TPSimpleSpellcheckOperation.h */,
+				25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */,
+				25BB153615B42857007A7FDF /* TPSpellCheckFileOperation.h */,
+				25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */,
+				25BB153215B422A9007A7FDF /* NSString+Spelling.h */,
+				25BB153315B422A9007A7FDF /* NSString+Spelling.m */,
 			);
 			name = SpellChecker;
 			path = src/SpellChecker;
@@ -1913,6 +2026,8 @@
 		25E7B13315AB396800373A56 /* TPProjectOutline */ = {
 			isa = PBXGroup;
 			children = (
+				255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */,
+				255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */,
 				25E7B13415AB39C400373A56 /* TPSection.h */,
 				25E7B13515AB39C400373A56 /* TPSection.m */,
 				25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */,
@@ -2103,7 +2218,6 @@
 				2545865313E936FE00461494 /* upArrow.icns in Resources */,
 				2503357113EAD480005BD6CF /* FinderController.xib in Resources */,
 				25ACB35313EB15EF00289E4E /* textResult.icns in Resources */,
-				2509B03D13EC6DFE0072961A /* LibraryController.xib in Resources */,
 				25F2728B13ED7BFA0087E021 /* PaletteController.xib in Resources */,
 				251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */,
 				251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */,
@@ -2162,6 +2276,12 @@
 				258BCAED15B0698C0092E914 /* backbuttonDepressed.icns in Resources */,
 				258BCAF015B06B170092E914 /* forwardbutton.icns in Resources */,
 				258BCAF115B06B170092E914 /* forwardbuttonDepressed.icns in Resources */,
+				2540D8BA15B2C31E00528982 /* TPLibraryView.xib in Resources */,
+				25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */,
+				25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */,
+				25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */,
+				25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */,
+				25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2274,8 +2394,7 @@
 				25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */,
 				25717DAC1392D16200955620 /* PaletteController.m in Sources */,
 				25717DAF1392D60A00955620 /* NSWorkspaceExtended.m in Sources */,
-				253E5E3313951DD300566E23 /* LibraryController.m in Sources */,
-				253E5E3413951DD300566E23 /* LibraryImageGenerator.m in Sources */,
+				253E5E3413951DD300566E23 /* TPLibraryImageGenerator.m in Sources */,
 				253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */,
 				2528E85C1395209300834921 /* NSStringUUID.m in Sources */,
 				2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */,
@@ -2393,6 +2512,24 @@
 				254AE6DF15AE9F4200680414 /* TPFileEntityMetadata.m in Sources */,
 				255454B515AEEF9E006D36BF /* NSString+SectionsOutline.m in Sources */,
 				258BCAE815B067210092E914 /* TPTabbarMatchingBackground.m in Sources */,
+				2540D8A215B2ACF800528982 /* library.xcdatamodeld in Sources */,
+				2540D8A515B2AE0400528982 /* TPLibraryController.m in Sources */,
+				2540D8AC15B2B94D00528982 /* TPLibraryCategory.m in Sources */,
+				2540D8AF15B2B94F00528982 /* TPLibraryEntry.m in Sources */,
+				2540D8B815B2BCBF00528982 /* TPLibraryEntry+NSDictionary.m in Sources */,
+				2540D8BD15B2C4F400528982 /* NSApplication+Library.m in Sources */,
+				2540D8C315B2DDDC00528982 /* NSOutlineView+TeXnicle.m in Sources */,
+				2540D8C615B2DE4200528982 /* NSTableView+TeXnicle.m in Sources */,
+				2589BBFB15B3385000E24C9B /* TPLibrary.m in Sources */,
+				2589BBFF15B3EEDC00E24C9B /* TPMetadataOperation.m in Sources */,
+				2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */,
+				25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */,
+				25BB153115B4200A007A7FDF /* TPSimpleSpellcheckOperation.m in Sources */,
+				25BB153415B422A9007A7FDF /* NSString+Spelling.m in Sources */,
+				25BB153815B42858007A7FDF /* TPSpellCheckFileOperation.m in Sources */,
+				25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */,
+				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
+				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2465,6 +2602,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -2483,6 +2621,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2538,10 +2677,11 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
@@ -2562,9 +2702,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2607,6 +2748,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		2540D8A015B2ACF800528982 /* library.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2540D8A115B2ACF800528982 /* library.xcdatamodel */,
+			);
+			currentVersion = 2540D8A115B2ACF800528982 /* library.xcdatamodel */;
+			path = library.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

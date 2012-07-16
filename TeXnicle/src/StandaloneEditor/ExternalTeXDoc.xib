@@ -371,7 +371,6 @@
 											<string key="NSFrameSize">{225, 576}</string>
 											<reference key="NSSuperview" ref="961650512"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="658181076"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="885399720">
 													<string key="NSIdentifier">1</string>
@@ -758,7 +757,6 @@
 																<string key="NSFrame">{{0, 1}, {225, 551}}</string>
 																<reference key="NSSuperview" ref="658181076"/>
 																<reference key="NSWindow"/>
-																<reference key="NSNextKeyView" ref="301844082"/>
 																<string key="NSReuseIdentifierKey">_NS:9</string>
 																<array class="NSMutableArray" key="NSTabViewItems">
 																	<object class="NSTabViewItem" id="728684576">
@@ -1087,7 +1085,6 @@
 											<string key="NSFrame">{{0, -1}, {282, 602}}</string>
 											<reference key="NSSuperview" ref="354661662"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -1964,6 +1961,14 @@
 						<reference key="destination" ref="336045591"/>
 					</object>
 					<int key="connectionID">424</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">warningsContainerView</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="344898318"/>
+					</object>
+					<int key="connectionID">425</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3367,7 +3372,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">424</int>
+			<int key="maxID">425</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3462,6 +3467,7 @@
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabbarController">MHControlsTabBarController</string>
 						<string key="texEditorContainer">NSView</string>
+						<string key="warningsContainerView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="addToEmptyProjectSheet">
@@ -3562,6 +3568,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="texEditorContainer">
 							<string key="name">texEditorContainer</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="warningsContainerView">
+							<string key="name">warningsContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 					</dictionary>
@@ -4321,6 +4331,7 @@
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabView">NSTabView</string>
 						<string key="texEditorContainer">NSView</string>
+						<string key="warningsContainerView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="backTabButton">
@@ -4453,6 +4464,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="texEditorContainer">
 							<string key="name">texEditorContainer</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="warningsContainerView">
+							<string key="name">warningsContainerView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
 					</dictionary>
