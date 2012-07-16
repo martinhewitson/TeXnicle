@@ -196,8 +196,8 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   
   // send notification of update
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
-  [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self, @"metadata", nil];
+  [nc postNotificationName:TPFileMetadataUpdatedNotification
                     object:self
                   userInfo:dict];
 }
