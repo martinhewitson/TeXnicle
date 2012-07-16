@@ -403,7 +403,7 @@
 
 - (void) checkSyntaxOfFileAtPath:(NSString*)aPath
 {
-//  NSLog(@"Check syntax: running %d", [lacheckTask isRunning]);
+//  NSLog(@"Check syntax of %@", aPath);
   
 //  if ([lacheckTask isRunning]) {
 //    return;
@@ -456,16 +456,12 @@
 
 - (void) taskFinished:(NSNotification*)aNote
 {
-//  NSLog(@"Task finished");
-  
 	if ([aNote object] != lacheckTask)
 		return;
   	
   _taskRunning = NO;
   
 }
-
-
 
 - (void) texOutputAvailable:(NSNotification*)aNote
 {	
