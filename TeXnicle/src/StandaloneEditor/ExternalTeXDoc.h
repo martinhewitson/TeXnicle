@@ -35,6 +35,7 @@
 #import "PDFViewerController.h"
 #import "TPStatusViewController.h"
 #import "MHControlsTabBarController.h"
+#import "MHInfoTabBarController.h"
 #import "TPLibraryController.h"
 #import "PaletteController.h"
 #import "PDFViewer.h"
@@ -121,6 +122,7 @@
   PDFViewer *pdfViewer;
   
   MHControlsTabBarController *tabbarController;
+  MHInfoTabBarController *infoTabbarController;
   PaletteController *palette;
   NSView *paletteContainerView;
   TPLibraryController *library;
@@ -157,6 +159,7 @@
 @property (retain) PDFViewer *pdfViewer;
 
 @property (assign) IBOutlet MHControlsTabBarController *tabbarController;
+@property (assign) IBOutlet MHInfoTabBarController *infoTabbarController;
 
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;

@@ -76,7 +76,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @synthesize results;
 @synthesize statusViewController;
 @synthesize statusViewContainer;
+
 @synthesize tabbarController;
+@synthesize infoTabbarController;
 
 @synthesize palette;
 @synthesize paletteContainerView;
@@ -186,6 +188,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         // controls tab index
         NSInteger tabIndex = [[dict valueForKey:TPExternalDocControlsTabIndexKey] integerValue];
         [self.tabbarController selectTabAtIndex:tabIndex];
+        [self.infoTabbarController selectTabAtIndex:2];
         
         if (![NSApp isLion]) {
           // controls width
@@ -232,6 +235,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self initSettings];
   
   [self.tabbarController selectTabAtIndex:1];
+  [self.infoTabbarController selectTabAtIndex:2];
   
 //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
@@ -2330,9 +2334,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (BOOL)shouldPerformSpellCheck
 {
-  // if spelling tab is selected....
-  if ([self.tabbarController indexOfSelectedTab] == 6) {
-    return YES;
+  if ([self.tabbarController indexOfSelectedTab] == 5) {
+    // if spelling tab is selected....
+    if ([self.infoTabbarController indexOfSelectedTab] == 2) {
+      return YES;
+    }
   }
   return NO;
 }
