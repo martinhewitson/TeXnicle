@@ -259,6 +259,8 @@
 
 - (void) willTurnIntoFault
 {  
+  [self.metadata stopMetadataTimer];
+  
 	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);
 		[document release];
