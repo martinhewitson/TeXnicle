@@ -995,7 +995,7 @@
 		NSMutableParagraphStyle *centeredParagraphStyle = nil;
 		
 		if (!centeredParagraphStyle) {
-			centeredParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
+			centeredParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 			[centeredParagraphStyle setAlignment:NSCenterTextAlignment];
 		}
 		
