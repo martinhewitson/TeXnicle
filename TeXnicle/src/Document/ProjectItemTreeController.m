@@ -151,8 +151,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) dealloc
 {
-  outlineView.delegate = nil;
-  outlineView.dataSource = nil; 
 	NSError *error = nil;
 	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
 	if (success == NO) {
