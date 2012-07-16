@@ -39,8 +39,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 @synthesize outlineButton;
 @synthesize findButton;
 @synthesize tabView;
-@synthesize bookmarksButton;
-@synthesize spellingButton;
+@synthesize infoButton;
 @synthesize prefsButton;
 @synthesize splitview;
 @synthesize containerView;
@@ -63,8 +62,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self.libraryButton setState:NSOffState];
   [self.outlineButton setState:NSOffState];
   [self.findButton setState:NSOffState];
-  [self.spellingButton setState:NSOffState];
-  [self.bookmarksButton setState:NSOffState];
+  [self.infoButton setState:NSOffState];
   [self.prefsButton setState:NSOffState];
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];
@@ -83,11 +81,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   if (self.findButton != nil) {
     [nonNilButtons addObject:self.findButton];
   }
-  if (self.spellingButton != nil) {
-    [nonNilButtons addObject:self.spellingButton];
-  }
-  if (self.bookmarksButton != nil) {
-    [nonNilButtons addObject:self.bookmarksButton];
+  if (self.infoButton != nil) {
+    [nonNilButtons addObject:self.infoButton];
   }
   if (self.prefsButton != nil) {
     [nonNilButtons addObject:self.prefsButton];
@@ -156,12 +151,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
       return self.findButton;
       break;
     case 5:
-      return self.bookmarksButton;
+      return self.infoButton;
       break;
     case 6:
-      return self.spellingButton;
-      break;
-    case 7:
       return self.prefsButton;
       break;
     default:
@@ -182,12 +174,10 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     return 3;
   } else if (sender == self.findButton) {
     return 4;
-  } else if (sender == self.bookmarksButton) {
+  } else if (sender == self.infoButton) {
     return 5;
-  } else if (sender == self.spellingButton) {
-    return 6;
   } else if (sender == self.prefsButton) {
-    return 7;
+    return 6;
   } else {
     return 0;
   }
@@ -209,10 +199,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     [self toggleOn:self.outlineButton];
   } else if (idx == [buttons indexOfObject:self.findButton]) {
     [self toggleOn:self.findButton];    
-  } else if (idx == [buttons indexOfObject:self.bookmarksButton]) {
-    [self toggleOn:self.bookmarksButton];    
-  } else if (idx == [buttons indexOfObject:self.spellingButton]) {
-    [self toggleOn:self.spellingButton];    
+  } else if (idx == [buttons indexOfObject:self.infoButton]) {
+    [self toggleOn:self.infoButton];    
   } else if (idx == [buttons indexOfObject:self.prefsButton]) {
     [self toggleOn:self.prefsButton];    
   }
@@ -276,26 +264,15 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self selectTabAtIndex:[self tabIndexForButton:self.findButton]];
 }
 
-- (IBAction) showBookmarks:(id)sender
+- (IBAction) showFileInfo:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showBookmarks) withObject:nil afterDelay:0];
+  [self performSelector:@selector(showFileInfo) withObject:nil afterDelay:0];
 }
 
-- (void) showBookmarks
+- (void) showFileInfo
 {
-  [self selectTabAtIndex:[self tabIndexForButton:self.bookmarksButton]];
-}
-
-- (IBAction) showSpelling:(id)sender
-{
-  [self showNavigator:self];
-  [self performSelector:@selector(showSpelling) withObject:nil afterDelay:0];
-}
-
-- (void) showSpelling
-{
-  [self selectTabAtIndex:[self tabIndexForButton:self.spellingButton]];
+  [self selectTabAtIndex:[self tabIndexForButton:self.infoButton]];
 }
 
 - (IBAction) showProjectSettings:(id)sender
@@ -380,18 +357,11 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   
   if (tag == 2160) {
     // show bookmarks 
-    if (self.bookmarksButton) {
+    if (self.infoButton) {
       return YES;
     }
   }
-  
-  if (tag == 2165) {
-    // show bookmarks 
-    if (self.spellingButton) {
-      return YES;
-    }
-  }
-  
+    
   if (tag == 2170) {
     // show settings 
     if (self.prefsButton) {
