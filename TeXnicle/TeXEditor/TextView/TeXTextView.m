@@ -27,7 +27,7 @@
 
 #import "TeXTextView.h"
 #import "RegexKitLite.h"
-#import "LibraryController.h"
+#import "TPLibraryController.h"
 #import "NSArray+Color.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "NSAttributedString+CodeFolding.h"
@@ -2651,10 +2651,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return NO;
 }
 
-- (void) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange
+- (NSRange) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange
 {
+  NSString *originalCode = code;
+  
   // Replace placeholders
-  NSString *regexp = [LibraryController placeholderRegexp];
+  NSString *regexp = [TPLibraryController placeholderRegexp];
   NSArray *placeholders = [code componentsMatchedByRegex:regexp];
   NSRange firstPlaceholder = NSMakeRange(NSNotFound, 0);
   for (NSString *placeholder in placeholders) {
@@ -2663,6 +2665,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (firstPlaceholder.location == NSNotFound) {
       firstPlaceholder = NSMakeRange(commandRange.location+r.location, 1);
     }
+    
     // make attachment
     MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];    
     NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
@@ -2680,6 +2683,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setSelectedRange:firstPlaceholder];
   }
   
+  // adjust and return range
+  NSInteger reduction = [originalCode length] - [code length];
+  NSRange returnRange = NSMakeRange(commandRange.location, commandRange.length - reduction);
+  return returnRange;
 }
 
 - (IBAction)jumpToPreviousPlaceholder:(id)sender
@@ -3238,19 +3245,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (void)concludeDragOperation:(id < NSDraggingInfo >)sender
-{
-//  NSLog(@"Drag concluded %@", sender);
-  
+{  
   // perform some post drag corrections
   NSRange selRange = [self selectedRange];
+  
   NSString *str = [[self string] substringWithRange:selRange];
   
   // replace placeholders
-  [self replacePlaceholdersInString:str range:selRange];
+  NSRange newRange = [self replacePlaceholdersInString:str range:selRange];
   
   // make sure the right font is used
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
-  [[self textStorage] addAttributes:atts range:selRange];  
+  [[self textStorage] addAttributes:atts range:newRange];  
   
   // grab keyboard
   [[self window] makeFirstResponder:self];
