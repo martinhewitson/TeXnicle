@@ -21,6 +21,7 @@
   NSArray *commands;
   NSArray *citations;
   NSArray *syntaxErrors;
+  NSArray *labels;
 }
 
 @property (copy) NSString *text;
@@ -32,6 +33,7 @@
 @property (retain) NSArray *commands;
 @property (retain) NSArray *citations;
 @property (retain) NSArray *syntaxErrors;
+@property (retain) NSArray *labels;
 
 - (id) initWithFile:(FileEntity*)aFile;
 

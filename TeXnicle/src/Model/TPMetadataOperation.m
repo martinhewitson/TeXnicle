@@ -23,6 +23,7 @@
 @synthesize commands;
 @synthesize citations;
 @synthesize syntaxErrors;
+@synthesize labels;
 
 - (id) initWithFile:(FileEntity*)aFile
 {
@@ -40,6 +41,7 @@
   self.commands = nil;
   self.citations = nil;
   self.syntaxErrors = nil;
+  self.labels = nil;
   
   [super dealloc];
 }
@@ -65,6 +67,8 @@
     // add any citations from a \bibliography{} command
     [newCitations addObjectsFromArray:[self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk]];
         
+    //--------------- Labels    
+    self.labels = [self.text referenceLabels];			
     
     // update metadata        
     self.commands = newCommands;
