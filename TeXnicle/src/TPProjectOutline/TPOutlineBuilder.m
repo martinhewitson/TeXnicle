@@ -93,24 +93,25 @@
   } else {
     // get text
     NSString *text = [self.delegate textForFile:file];
-
+    
     dispatch_queue_t queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
-    dispatch_set_target_queue(queue,priority);
+    dispatch_set_target_queue(queue, priority);
     
-    __block NSArray *newSections;
     dispatch_sync(queue, ^{      
-      newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
+      NSArray *newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        // send notification of section update
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:file, @"file", newSections, @"sections", nil];
+        [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                          object:self
+                        userInfo:dict];
+      });
     });
         
     dispatch_release(queue);
     
-    // send notification of section update
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:file, @"file", newSections, @"sections", nil];
-    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                      object:self
-                    userInfo:dict];
   }
   
 }
@@ -128,7 +129,7 @@
       return;
     }
   } else {
-    if ([file isEqualToString:[self.delegate mainFile]] == NO) {
+    if ([file isEqual:[self.delegate mainFile]] == NO) {
       return;
     }
   }
