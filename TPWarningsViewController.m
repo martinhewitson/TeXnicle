@@ -196,7 +196,7 @@
 
 - (NSArray*)sortedWarningSets
 {
-  NSArray *sortedItems = [self.files sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+  NSArray *sortedItems = [self.sets sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
     NSString *first  = [(TPWarningSet*)a valueForKey:@"name"];
     NSString *second = [(TPWarningSet*)b valueForKey:@"name"];
     return [first compare:second]==NSOrderedDescending;
