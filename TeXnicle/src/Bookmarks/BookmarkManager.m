@@ -114,7 +114,7 @@
 // Reload the data in the outline view
 - (void) reloadData
 {
-  [self.outlineView reloadData];
+  [self.outlineView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 // Jump to the selected bookmark

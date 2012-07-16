@@ -259,6 +259,7 @@
 
 - (void) willTurnIntoFault
 {  
+//  NSLog(@"Will fault %@", self.name);
   [self.metadata stopMetadataTimer];
   
 	if (document) {
@@ -266,6 +267,7 @@
 		[document release];
 		document = nil;
 	}
+  self.metadata.parent = nil;
   self.metadata = nil;
   self.content = nil;
 }

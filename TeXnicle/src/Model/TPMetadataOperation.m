@@ -54,20 +54,24 @@
     NSMutableArray *newCommands = [NSMutableArray array];
     
     //-------------- get commands
+    if ([self isCancelled]) return;
     NSArray *parsedCommands = [self.text componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
     for (NSString *newCommand in parsedCommands) {
       [newCommands addObject:[newCommand argument]];
     }
     
     //-------------- get citatations
+    if ([self isCancelled]) return;
     NSMutableArray *newCitations = [NSMutableArray array];
     NSArray *docTags = [self.text citations];			
     [newCitations addObjectsFromArray:docTags];			
     
     // add any citations from a \bibliography{} command
+    if ([self isCancelled]) return;
     [newCitations addObjectsFromArray:[self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk]];
         
     //--------------- Labels    
+    if ([self isCancelled]) return;
     self.labels = [self.text referenceLabels];			
     
     // update metadata        

@@ -544,7 +544,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) syntaxCheckerDidFinish
 {
-  [self.warningsViewController updateUI];
+  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void) handleTextSelectionChanged:(NSNotification*)aNote

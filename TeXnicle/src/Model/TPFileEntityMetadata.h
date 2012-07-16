@@ -71,6 +71,8 @@
   FileEntity *parent;
   dispatch_queue_t queue;
   NSOperationQueue* aQueue;
+  
+  TPMetadataOperation *currentOperation;
 }
 
 @property (retain) TPSyntaxChecker *checker;

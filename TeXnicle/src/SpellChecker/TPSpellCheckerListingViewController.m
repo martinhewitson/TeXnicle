@@ -65,6 +65,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.aQueue cancelAllOperations];
   self.aQueue = nil;
   self.outlineView.delegate = nil;

@@ -340,6 +340,9 @@
 		25D788EC14AC5F0100C551D8 /* printIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25D788EB14AC5F0100C551D8 /* printIcon.icns */; };
 		25DA73A114092C37007ACA36 /* engineDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DA73A014092C37007ACA36 /* engineDoc.icns */; };
 		25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DA73A414093CAD007ACA36 /* BashColoringEngine.m */; };
+		25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B415B4602E009E086A /* labelsTabBarImage.icns */; };
+		25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */; };
+		25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */; };
 		25DBBDD914EB812400C1D0CF /* MHWhitebackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */; };
 		25DC3FD414B43ED000CA3053 /* NSArray+LaTeX.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DC3FD314B43ED000CA3053 /* NSArray+LaTeX.m */; };
 		25DD32BF14B981CF00C5D1E3 /* UISettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD32BE14B981CF00C5D1E3 /* UISettings.m */; };
@@ -951,6 +954,10 @@
 		25DA73A014092C37007ACA36 /* engineDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = engineDoc.icns; sourceTree = "<group>"; };
 		25DA73A314093CAD007ACA36 /* BashColoringEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BashColoringEngine.h; sourceTree = "<group>"; };
 		25DA73A414093CAD007ACA36 /* BashColoringEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BashColoringEngine.m; sourceTree = "<group>"; };
+		25DB36B415B4602E009E086A /* labelsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImage.icns; sourceTree = "<group>"; };
+		25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImageDepressed.icns; sourceTree = "<group>"; };
+		25DB36B915B462FA009E086A /* TPOutlineBuilderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineBuilderOperation.h; sourceTree = "<group>"; };
+		25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineBuilderOperation.m; sourceTree = "<group>"; };
 		25DBBDD714EB812400C1D0CF /* MHWhitebackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWhitebackground.h; sourceTree = "<group>"; };
 		25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWhitebackground.m; sourceTree = "<group>"; };
 		25DC3FD214B43ED000CA3053 /* NSArray+LaTeX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LaTeX.h"; sourceTree = "<group>"; };
@@ -1702,6 +1709,8 @@
 		257B4758138E5E9000ED02C4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25DB36B415B4602E009E086A /* labelsTabBarImage.icns */,
+				25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */,
 				258BCAEE15B06B170092E914 /* forwardbutton.icns */,
 				258BCAEF15B06B170092E914 /* forwardbuttonDepressed.icns */,
 				258BCAEA15B0698C0092E914 /* backbutton.icns */,
@@ -2032,6 +2041,8 @@
 				25E7B13515AB39C400373A56 /* TPSection.m */,
 				25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */,
 				25E7B13815AB3A6C00373A56 /* TPOutlineBuilder.m */,
+				25DB36B915B462FA009E086A /* TPOutlineBuilderOperation.h */,
+				25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */,
 				25E7B13A15AB3C7700373A56 /* TPSectionTemplate.h */,
 				25E7B13B15AB3C7700373A56 /* TPSectionTemplate.m */,
 				25E7B13D15AD697600373A56 /* TPProjectOutlineViewController.h */,
@@ -2282,6 +2293,8 @@
 				25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */,
 				25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */,
 				25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */,
+				25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */,
+				25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2530,6 +2543,7 @@
 				25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */,
 				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
 				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
+				25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

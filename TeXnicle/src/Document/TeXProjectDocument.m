@@ -1579,7 +1579,7 @@
 - (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
 {
   if ([self.infoControlsTabBarController indexOfSelectedTab] == 1) {
-    [self.warningsViewController updateUI];
+    [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
   }
 }
 

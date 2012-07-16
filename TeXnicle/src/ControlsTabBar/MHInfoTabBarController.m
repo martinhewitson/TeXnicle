@@ -36,6 +36,7 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 @synthesize bookmarksButton;
 @synthesize warningsButton;
 @synthesize spellingButton;
+@synthesize labelsButton;
 @synthesize splitview;
 @synthesize containerView;
 
@@ -45,6 +46,7 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   [self.spellingButton setState:NSOffState];
   [self.bookmarksButton setState:NSOffState];
   [self.warningsButton setState:NSOffState];
+  [self.labelsButton setState:NSOffState];
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];
   if (self.bookmarksButton != nil) {
@@ -55,6 +57,9 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   }
   if (self.spellingButton != nil) {
     [nonNilButtons addObject:self.spellingButton];
+  }
+  if (self.labelsButton != nil) {
+    [nonNilButtons addObject:self.labelsButton];
   }
   
   buttons = [[NSArray arrayWithArray:nonNilButtons] retain];
@@ -113,6 +118,9 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     case 2:
       return self.spellingButton;
       break;
+    case 3:
+      return self.labelsButton;
+      break;
     default:
       return nil;
       break;
@@ -127,6 +135,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     return 1;
   } else if (sender == self.spellingButton) {
     return 2;
+  } else if (sender == self.labelsButton) {
+    return 3;
   } else {
     return 0;
   }
@@ -144,6 +154,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     [self toggleOn:self.spellingButton];    
   } else if (idx == [buttons indexOfObject:self.warningsButton]) {
     [self toggleOn:self.warningsButton];    
+  } else if (idx == [buttons indexOfObject:self.labelsButton]) {
+    [self toggleOn:self.labelsButton];    
   }
 }
 

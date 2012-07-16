@@ -85,6 +85,8 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
                                                         userInfo:nil
                                                          repeats:YES];
     
+    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
+    
     NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
     
     [defaults addObserver:self
@@ -98,7 +100,6 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
                   context:NULL];		
     
     
-    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
   }
   return self;
 }
@@ -117,8 +118,10 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 }
 
 - (void) stopMetadataTimer
-{
+{  
   if (self.metadataTimer) {
+    [self.aQueue cancelAllOperations];
+    [self.aQueue release];
     [self.metadataTimer invalidate];
     self.metadataTimer = nil;
   }
@@ -126,6 +129,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) dealloc
 {  
+  NSLog(@"Dealloc %@", self);
   NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
@@ -133,8 +137,6 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 	[self stopMetadataTimer];
   dispatch_release(queue);
   self.checker = nil;
-  [self.aQueue cancelAllOperations];
-  self.aQueue = nil;
   self.userNewCommands = nil;
   self.lastUpdateOfNewCommands = nil;
   self.sections = nil;
@@ -166,9 +168,9 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
     
-    [nc postNotificationOnMainThreadWithName:TPFileMetadataSectionsUpdatedNotification
-                                      object:self
-                                    userInfo:dict];
+    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                      object:self
+                    userInfo:dict];
   });
   
   
@@ -205,12 +207,12 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   
   if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {    
     if ([self.aQueue operationCount] == 0) {
-      TPMetadataOperation *op = [[[TPMetadataOperation alloc] initWithFile:self.parent] autorelease];      
-      [op setCompletionBlock:^{        
-        [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:NO];
+      currentOperation = [[TPMetadataOperation alloc] initWithFile:self.parent];      
+      [currentOperation setCompletionBlock:^{        
+        [self performSelectorOnMainThread:@selector(notifyOfUpdate) withObject:nil waitUntilDone:NO];
       }];
       
-      [self.aQueue addOperation:op];
+      [self.aQueue addOperation:currentOperation];
     }
     
     //-------------- syntax errors
@@ -228,28 +230,28 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
       self.syntaxErrors = [NSArray array];
       [self postUpdateNotification];
     }
+    self.lastMetadataUpdate = [NSDate date];
   }  
 }
 
-- (void) notifyOfUpdate:(TPMetadataOperation*)op
+- (void) notifyOfUpdate
 {
-  self.needsUpdate = NO;
-  self.userNewCommands = op.commands;
-  self.citations = op.citations;
-  self.labels = op.labels;
-  self.lastMetadataUpdate = [NSDate date];
-  
-  [self performSelector:@selector(postUpdateNotification) withObject:nil afterDelay:0];
+  if (self && currentOperation) {
+    self.needsUpdate = NO;
+    self.userNewCommands = currentOperation.commands;
+    self.citations = currentOperation.citations;
+    self.labels = currentOperation.labels;
+    self.lastMetadataUpdate = [NSDate date];    
+    [self postUpdateNotification];
+    [currentOperation release];
+  }
 }
 
 - (void) postUpdateNotification
 {
   // send notification of update
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", nil];
-  [nc postNotificationOnMainThreadWithName:TPFileMetadataUpdatedNotification
-                                    object:self
-                                  userInfo:dict];
+  [nc postNotificationName:TPFileMetadataUpdatedNotification object:self];
 }
 
 - (void) cleanup

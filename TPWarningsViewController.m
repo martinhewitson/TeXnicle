@@ -46,6 +46,7 @@
 
 - (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.sets = nil;
   [super dealloc];
 }
@@ -59,10 +60,8 @@
 }
 
 - (void) handleMetadataUpdate:(NSNotification*)aNote
-{
-  NSDictionary *dict = [aNote userInfo];
-  
-  [self updateUI];
+{  
+  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
