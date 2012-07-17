@@ -11,6 +11,7 @@
 #import "NSString+LaTeX.h"
 #import "NSString+SectionsOutline.h"
 #import "FileDocument.h"
+#import "BibliographyEntry.h"
 
 @implementation TPMetadataOperation
 
@@ -52,6 +53,7 @@
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
     NSMutableArray *newCommands = [NSMutableArray array];
+//    NSLog(@"Generating meta data for %@", self.file.name);
     
     //-------------- get commands
     if ([self isCancelled]) return;
@@ -63,12 +65,13 @@
     //-------------- get citatations
     if ([self isCancelled]) return;
     NSMutableArray *newCitations = [NSMutableArray array];
-    NSArray *docTags = [self.text citations];			
-    [newCitations addObjectsFromArray:docTags];			
+    NSArray *citationsFound = [self.text citations];		
+    [newCitations addObjectsFromArray:citationsFound];			
     
-    // add any citations from a \bibliography{} command
+    // add any citations from a bibliography entries
     if ([self isCancelled]) return;
-    [newCitations addObjectsFromArray:[self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk]];
+    NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
+    [newCitations addObjectsFromArray:entries];
         
     //--------------- Labels    
     if ([self isCancelled]) return;
