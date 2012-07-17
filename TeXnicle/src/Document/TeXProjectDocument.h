@@ -55,6 +55,7 @@
 #import "TPWarningsViewController.h"
 #import "TPLabelsViewController.h"
 #import "TPCitationsViewController.h"
+#import "TPNewCommandsViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -64,7 +65,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPCitationsViewDelegate, TPLabelsViewDelegate, 
+@interface TeXProjectDocument : NSPersistentDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, 
 TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, 
 OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
@@ -158,6 +159,9 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   TPCitationsViewController *citationsViewController;
   NSView *citationsContainerView;
   
+  TPNewCommandsViewController *commandsViewController;
+  NSView *commandsContainerView;
+  
   PDFViewerController *pdfViewerController;
   
   PaletteController *palette;
@@ -209,6 +213,9 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 
 @property (retain) TPCitationsViewController *citationsViewController;
 @property (assign) IBOutlet NSView *citationsContainerView;
+
+@property (retain) TPNewCommandsViewController *commandsViewController;
+@property (assign) IBOutlet NSView *commandsContainerView;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 

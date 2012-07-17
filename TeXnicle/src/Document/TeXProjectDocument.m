@@ -56,6 +56,7 @@
 #import "RegexKitLite.h"
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
+#import "TPNewCommand.h"
 
 #define kSplitViewLeftMinSize 235.0
 #define kSplitViewCenterMinSize 400.0
@@ -98,6 +99,9 @@
 
 @synthesize citationsContainerView;
 @synthesize citationsViewController;
+
+@synthesize commandsContainerView;
+@synthesize commandsViewController;
 
 @synthesize pdfViewerController;
 @synthesize project;
@@ -144,6 +148,7 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
   [super dealloc];
 }
 
@@ -266,6 +271,11 @@
   self.citationsViewController = [[[TPCitationsViewController alloc] initWithDelegate:self] autorelease];
   [self.citationsViewController.view setFrame:self.citationsContainerView.bounds];
   [self.citationsContainerView addSubview:self.citationsViewController.view];
+  
+  // commands view
+  self.commandsViewController = [[[TPNewCommandsViewController alloc] initWithDelegate:self] autorelease];
+  [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
+  [self.commandsContainerView addSubview:self.commandsViewController.view];
   
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
@@ -529,8 +539,33 @@
   }
 }
 
+- (void) stopAllMetadataOperations
+{
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if (file.metadata) {
+        [file.metadata stopMetadataTimer];
+      }
+    }
+  }
+}
+
 - (void) cleanUp
 {
+  NSLog(@"----------- cleanup");
+  
+  // stop gathering metadata
+  [self stopAllMetadataOperations];
+  
+  // stop spell checking timer
+  [self.spellcheckerViewController stop];
+  
+  // stop timer
+  [self stopStatusTimer];  
+  
+  // live update timer
+  [self stopLiveUpdateTimer];
   
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
@@ -546,13 +581,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
   // stop KVO
-  [self stopObserving];
-  
-  // stop timer
-  [self stopStatusTimer];
-  
-  // live update timer
-  [self stopLiveUpdateTimer];
+  [self stopObserving];  
   
   // tab history
   self.tabHistory = nil;
@@ -571,8 +600,12 @@
   self.labelsViewController = nil;
   
   // citations view
-  self.labelsViewController.delegate = nil;
-  self.labelsViewController = nil;
+  self.citationsViewController.delegate = nil;
+  self.citationsViewController = nil;
+  
+  // commands view
+  self.commandsViewController.delegate = nil;
+  self.commandsViewController = nil;
   
   // mini console
   self.miniConsole = nil;
@@ -612,16 +645,12 @@
   self.libraryController = nil;
   
   // spell checker  
-  [self.spellcheckerViewController stop];
   self.spellcheckerViewController.delegate = nil;
   self.spellcheckerViewController = nil;  
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
-  self.pdfViewerController = nil;  
-  
-  // project
-  self.project = nil;
+  self.pdfViewerController = nil;    
   
   // tex editor view controller
   [self.texEditorViewController stopSyntaxChecker];
@@ -641,12 +670,14 @@
   self.templateEditor.delegate = nil;
   self.templateEditor = nil;
     
+  // project
+  self.project = nil;
 }
 
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
-//  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
+  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
   _windowIsClosing = YES;  
     
   [self cleanUp];
@@ -1874,7 +1905,9 @@
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
       if ([file isText]) {
-        [commands addObjectsFromArray:file.metadata.userNewCommands];
+        for (TPNewCommand *c in file.metadata.userNewCommands) {
+          [commands addObject:c.argument];
+        }
       }
     }
   }
@@ -3934,7 +3967,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
 {
   BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
-  NSLog(@" Source %@", entry.sourceString);
   
 	// first select the file
 	[projectItemTreeController setSelectionIndexPath:nil];
@@ -3958,6 +3990,50 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];    
   [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
 }
+
+#pragma mark -
+#pragma mark Commands view delegate
+
+- (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView
+{
+  NSMutableArray *files = [NSMutableArray array];
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        if ([file.metadata.userNewCommands count] > 0) {
+          [files addObject:file];
+        }
+      }
+    }
+  }
+  
+  return [NSArray arrayWithArray:files];
+}
+
+- (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
+{
+  return [[(FileEntity*)file metadata] userNewCommands];
+}
+
+- (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
+{
+  NSLog(@"Clicked on %@", [aCommand valueForKey:@"file"]);
+  NSLog(@"  source %@", [aCommand valueForKey:@"source"]);
+  
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:[aCommand valueForKey:@"file"]];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // now select the text
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
+  
+}
+
 
 
 
