@@ -47,6 +47,9 @@
 #import "MHSynctexController.h"
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
+#import "TPNewCommand.h"
+#import "BibliographyEntry.h"
+
 
 #define kSplitViewLeftMinSize 230.0
 #define kSplitViewCenterMinSize 400.0
@@ -59,6 +62,8 @@ NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectK
 NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth"; 
 
 @implementation ExternalTeXDoc
+
+@synthesize lastEdit;
 
 @synthesize documentData;
 @synthesize texEditorContainer;
@@ -87,6 +92,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 @synthesize labelsContainerView;
 @synthesize labelsViewController;
+
+@synthesize citationsContainerView;
+@synthesize citationsViewController;
+
+@synthesize commandsContainerView;
+@synthesize commandsViewController;
 
 @synthesize palette;
 @synthesize paletteContainerView;
@@ -269,6 +280,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
   [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
   [self.labelsContainerView addSubview:self.labelsViewController.view];
+  
+  // citations view
+  self.citationsViewController = [[[TPCitationsViewController alloc] initWithDelegate:self] autorelease];
+  [self.citationsViewController.view setFrame:self.citationsContainerView.bounds];
+  [self.citationsContainerView addSubview:self.citationsViewController.view];
+  
+  // commands view
+  self.commandsViewController = [[[TPNewCommandsViewController alloc] initWithDelegate:self] autorelease];
+  [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
+  [self.commandsContainerView addSubview:self.commandsViewController.view];
   
   // setup outline view  
   self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
@@ -610,6 +631,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.labelsViewController.delegate = nil;
   self.labelsViewController = nil;
   
+  // citations view
+  self.citationsViewController.delegate = nil;
+  self.citationsViewController = nil;
+  
+  // commands view
+  self.commandsViewController.delegate = nil;
+  self.commandsViewController = nil;
+  
   // pdf view controller
   self.pdfViewerController.delegate = nil;
   self.pdfViewerController = nil;
@@ -672,6 +701,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) dealloc
 {
+  self.lastEdit = nil;
 	[super dealloc];
 }
 
@@ -1682,6 +1712,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // update labels view
   [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
   
+  // update last edit time
+  self.lastEdit = [NSDate date];
 }
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
@@ -2383,6 +2415,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   return NO;
 }
 
+- (NSDate*)lastEditDate
+{
+  return lastEdit;
+}
+
 - (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)file
 {  
   // expand all folded code
@@ -2412,6 +2449,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
   [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self.citationsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self.commandsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark -
@@ -2451,6 +2490,70 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // now select the text
   NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
   NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
+}
+
+#pragma mark -
+#pragma mark Citations view delegate
+
+- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView
+{
+  return [NSArray arrayWithObject:[self fileURL]];
+}
+
+- (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
+{
+	NSString *str = [self.texEditorViewController.textView string];
+  return [str citations];
+}
+
+- (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
+{
+  BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
+    
+  // just search for the first line of the source string, or up to the first ','
+  NSInteger index = 0;
+  NSString *source = entry.sourceString;
+  while (index < [source length]) {
+    unichar c = [source characterAtIndex:index];
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+        c == ',') {
+      source = [source substringToIndex:index];
+      break;
+    }
+    index++;
+  }
+  
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+}
+
+#pragma mark -
+#pragma mark Commands view delegate
+
+- (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView
+{  
+  return [NSArray arrayWithObject:[self fileURL]];
+}
+
+- (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
+{
+  // the commands view expects a list of TPNewCommand objects
+  NSArray *commands = [self listOfCommands];
+  NSMutableArray *commandObjects = [NSMutableArray array];
+  for (NSString *str in commands) {
+    TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
+    [commandObjects addObject:c];
+    [c release];
+  }
+
+  return [NSArray arrayWithArray:commandObjects];
+}
+
+- (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
+{
+  // now select the text
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];
   [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
 }
 

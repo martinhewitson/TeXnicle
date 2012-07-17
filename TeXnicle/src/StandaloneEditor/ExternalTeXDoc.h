@@ -46,10 +46,13 @@
 #import "TPSpellCheckerListingViewController.h"
 #import "TPWarningsViewController.h"
 #import "TPLabelsViewController.h"
+#import "TPCitationsViewController.h"
+#import "TPNewCommandsViewController.h"
+
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
   NSView *leftView;
   NSView *centerView;
@@ -137,6 +140,12 @@
   TPLabelsViewController *labelsViewController;
   NSView *labelsContainerView;
   
+  TPCitationsViewController *citationsViewController;
+  NSView *citationsContainerView;
+  
+  TPNewCommandsViewController *commandsViewController;
+  NSView *commandsContainerView;
+  
   IBOutlet NSView *controlsViewContainer;
   
   NSStringEncoding _encoding;
@@ -149,10 +158,12 @@
   BOOL _liveUpdate;
   BOOL _building;
   NSDate *lastBuildDate;
+  NSDate *lastEdit;
   NSTimer *liveUpdateTimer;
   NSNumber *maxOutlineViewDepth;
 }
 
+@property (retain) NSDate *lastEdit;
 @property (retain) NSTimer *liveUpdateTimer;
 @property (retain) NSTimer *metadataUpdateTimer;
 
@@ -177,6 +188,12 @@
 
 @property (retain) TPLabelsViewController *labelsViewController;
 @property (assign) IBOutlet NSView *labelsContainerView;
+
+@property (retain) TPCitationsViewController *citationsViewController;
+@property (assign) IBOutlet NSView *citationsContainerView;
+
+@property (retain) TPNewCommandsViewController *commandsViewController;
+@property (assign) IBOutlet NSView *commandsContainerView;
 
 @property (assign) IBOutlet NSView *pdfViewContainer;
 @property (retain) PDFViewerController *pdfViewerController;
