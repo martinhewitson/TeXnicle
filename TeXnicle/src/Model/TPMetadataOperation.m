@@ -12,6 +12,7 @@
 #import "NSString+SectionsOutline.h"
 #import "FileDocument.h"
 #import "BibliographyEntry.h"
+#import "TPNewCommand.h"
 
 @implementation TPMetadataOperation
 
@@ -52,15 +53,16 @@
   @try {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
-    NSMutableArray *newCommands = [NSMutableArray array];
 //    NSLog(@"Generating meta data for %@", self.file.name);
     
     //-------------- get commands
     if ([self isCancelled]) return;
+    NSMutableArray *newCommands = [NSMutableArray array];
     NSArray *parsedCommands = [self.text componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
     for (NSString *newCommand in parsedCommands) {
-      [newCommands addObject:[newCommand argument]];
+      [newCommands addObject:[TPNewCommand commandWithSource:newCommand]];
     }
+    self.commands = [NSArray arrayWithArray:newCommands];
     
     //-------------- get citatations
     if ([self isCancelled]) return;
@@ -72,14 +74,13 @@
     if ([self isCancelled]) return;
     NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
     [newCitations addObjectsFromArray:entries];
+    
+    self.citations = [NSArray arrayWithArray:newCitations];
         
     //--------------- Labels    
     if ([self isCancelled]) return;
     self.labels = [self.text referenceLabels];			
     
-    // update metadata        
-    self.commands = newCommands;
-    self.citations = newCitations;
     
     [pool release];
   }
