@@ -45,6 +45,7 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
   self.citations = nil;
   [super dealloc];
 }

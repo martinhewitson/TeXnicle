@@ -220,6 +220,9 @@
 - (void) updateUI
 {
   NSArray *newFiles = [self labelsViewlistOfFiles:self];
+  if (newFiles == nil) {
+    newFiles = [NSArray array];
+  }
   
   // remove any stale files
   NSMutableArray *filesToRemove = [NSMutableArray array];

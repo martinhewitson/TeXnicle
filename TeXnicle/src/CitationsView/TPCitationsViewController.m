@@ -64,7 +64,10 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.delegate = nil;
+  [self.sets removeAllObjects];
   self.sets = nil;
   [super dealloc];
 }
@@ -221,6 +224,9 @@
 - (void) updateUI
 {
   NSArray *newFiles = [self citationsViewlistOfFiles:self];
+  if (newFiles == nil) {
+    newFiles = [NSArray array];
+  }
   
   // remove any stale files
   NSMutableArray *filesToRemove = [NSMutableArray array];
@@ -269,8 +275,8 @@
 
 - (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController *)aView
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(citationsViewlistOfFiles:)]) {
-    return [self.delegate citationsViewlistOfFiles:aView];
+  if (aView.delegate && [aView.delegate respondsToSelector:@selector(citationsViewlistOfFiles:)]) {
+    return [aView.delegate citationsViewlistOfFiles:aView];
   }
   return [NSArray array];
 }

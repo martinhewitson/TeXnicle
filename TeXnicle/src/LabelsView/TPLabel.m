@@ -28,4 +28,10 @@
   return self;
 }
 
+- (void) dealloc
+{
+//  NSLog(@"Dealloc %@", self);
+  [super dealloc];
+}
+
 @end
