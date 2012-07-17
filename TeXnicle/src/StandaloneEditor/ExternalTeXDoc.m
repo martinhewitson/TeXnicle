@@ -2538,10 +2538,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
 {
-  // the commands view expects a list of TPNewCommand objects
-  NSArray *commands = [self listOfCommands];
+  NSString *allText = [self.texEditorViewController.textView string];
+  NSArray *parsedCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
   NSMutableArray *commandObjects = [NSMutableArray array];
-  for (NSString *str in commands) {
+  for (NSString *str in parsedCommands) {
     TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
     [commandObjects addObject:c];
     [c release];
