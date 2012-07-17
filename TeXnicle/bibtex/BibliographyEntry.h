@@ -27,13 +27,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface BibliographyEntry : NSObject <NSCoding, NSCopying> {
+@interface BibliographyEntry : NSObject {
 
 	NSString *tag;
 	NSString *author;
 	NSString *title;
 	NSString *publishedDate;
-
+  NSString *sourceString;
 	BOOL isObservingKeys;
 	
 }
@@ -42,6 +42,7 @@
 @property (readwrite, retain) NSString *author;
 @property (readwrite, retain) NSString *title;
 @property (readwrite, retain) NSString *publishedDate;
+@property (readwrite, retain) NSString *sourceString;
 
 + (NSArray*)bibtexEntriesFromString:(NSString*)aString;
 
@@ -51,11 +52,6 @@
 
 - (void) setPropertiesFromEntry:(BibliographyEntry*)anEntry;
 
-#pragma mark - 
-#pragma mark KVO 
-- (void)observeKeys;
-- (void) stopObserving;
-- (NSArray*) observingKeys;
 - (void) parseContentFromString:(NSString*)content;
 - (NSString*)parseBibtexField:(NSString*)field fromString:(NSString*)content;
 - (NSAttributedString*)attributedString;

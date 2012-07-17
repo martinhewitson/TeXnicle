@@ -35,7 +35,7 @@
 @synthesize author;
 @synthesize title;
 @synthesize publishedDate;
-
+@synthesize sourceString;
 
 - (id)init
 {
@@ -43,10 +43,10 @@
 	
 	if (self) {
 	
-		[self setTag:@"Entry"];
-		[self setAuthor:@"Unknown"];
-		[self setTitle:@"Unknown"];
-		[self setPublishedDate:@"Unknown"];
+		[self setTag:@""];
+		[self setAuthor:@""];
+		[self setTitle:@""];
+		[self setPublishedDate:@""];
 		
 		
 	}
@@ -58,7 +58,7 @@
 {
   self = [self init];
   if (self) {
-    
+    self.sourceString = content;
     [self parseContentFromString:content];
     
   }
@@ -71,10 +71,10 @@
 	
 	if (self) {
 		
-		[self setTag:@"Entry"];
-		[self setAuthor:@"Unknown"];
-		[self setTitle:@"Unknown"];
-		[self setPublishedDate:@"Unknown"];
+		[self setTag:@""];
+		[self setAuthor:@""];
+		[self setTitle:@""];
+		[self setPublishedDate:@""];
 		
 		NSString *str = [entryData valueForKey:@"Tag"];
 		if (str)	
@@ -91,8 +91,6 @@
 		str = [entryData valueForKey:@"Year"];
 		if (str) 
 			[self setPublishedDate:str];
-
-		[self observeKeys];
 		
 	}
 	
@@ -191,14 +189,13 @@
   NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
   [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
   [att appendAttributedString:tagString];
-  [att appendAttributedString:comma];
 
   
   if ([self.title length] > 0) {
     NSMutableAttributedString *titleString = [[[NSMutableAttributedString alloc] initWithString:self.title] autorelease];
     [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [self.title length])];
-    [att appendAttributedString:titleString];
-    
+    [att appendAttributedString:comma];
+    [att appendAttributedString:titleString];    
   }
   
   if ([self.author length] > 0) {
@@ -207,17 +204,11 @@
     }
     NSMutableAttributedString *authorString = [[[NSMutableAttributedString alloc] initWithString:self.author] autorelease];
     [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [self.author length])];
+    [att appendAttributedString:comma];
     [att appendAttributedString:authorString];
   }
   
-//  // if we don't have an author or title, use the tag
-//  if ([att length]==0) {    
-//    NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
-//    [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
-//    [att appendAttributedString:tagString];
-//  }
-  
-  return att;
+  return [[[NSAttributedString alloc] initWithAttributedString:att] autorelease];
 }
 
 - (NSString*)parseBibtexField:(NSString*)field fromString:(NSString*)content
@@ -269,7 +260,6 @@
 
 - (void) dealloc
 {
-	[self stopObserving];
 	[super dealloc];
 }
 
@@ -279,67 +269,6 @@
 	[self setAuthor:[anEntry author]];
 	[self setTitle:[anEntry title]];
 	[self setPublishedDate:[anEntry publishedDate]];
-}
-
-
-#pragma mark -
-#pragma mark KVO 
-
-- (void)observeKeys
-{
-	for (NSString *key in [self observingKeys]) {
-		[self addObserver:self 
-					 forKeyPath:key
-							options:NSKeyValueObservingOptionNew 
-							context:NULL];
-	}	
-	isObservingKeys = YES;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath 
-											ofObject:(id)object
-												change:(NSDictionary *)change 
-											 context:(void *)context
-{
-//	[[NSNotificationCenter defaultCenter] postNotificationName:TPBibliographyChangedNotification object:self];
-}
-
-- (void) stopObserving
-{
-	if (isObservingKeys) {
-		for (NSString *key in [self observingKeys]) {
-			[self removeObserver:self forKeyPath:key];
-		}	
-		isObservingKeys = NO;
-	}
-}
-
-- (NSArray*) observingKeys
-{
-	return [NSArray arrayWithObjects:@"tag", @"author", @"title", @"publishedDate", @"category", nil];
-}
-
-#pragma mark -
-#pragma mark Encoding/decoding
-
-- (id)initWithCoder:(NSCoder *)coder
-{
-//	NSLog(@"InitWithCoder: BibliographyEntry");
-	[super init];
-	tag = [[coder decodeObjectForKey:@"tag"] retain];
-	author = [[coder decodeObjectForKey:@"author"] retain];
-	title = [[coder decodeObjectForKey:@"title"] retain];
-	publishedDate = [[coder decodeObjectForKey:@"publishedDate"] retain];
-//	NSLog(@"Loaded entry %@, %@, %@", author, title, publishedDate);
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-	[coder encodeObject:tag forKey:@"tag"];
-	[coder encodeObject:author forKey:@"author"];
-	[coder encodeObject:title forKey:@"title"];
-	[coder encodeObject:publishedDate forKey:@"publishedDate"];
 }
 
 - (NSString*) description
@@ -384,18 +313,6 @@
 
 #pragma mark -
 #pragma mark Control 
-
-- (id)copyWithZone:(NSZone *)zone
-{
-	BibliographyEntry *copy = [[[self class] allocWithZone: zone] init];
-
-	[copy setTag:[self tag]];
-	[copy setAuthor:[self author]];
-	[copy setTitle:[self title]];
-	[copy setPublishedDate:[self publishedDate]];
-			
-	return copy;
-}
 
 
 - (NSString*) bibtexEntry
