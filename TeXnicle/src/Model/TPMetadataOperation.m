@@ -51,22 +51,27 @@
 
 -(void)main {
   @try {
+    
+    
+    NSMutableArray *newCommands = [[NSMutableArray alloc] init];
+    NSMutableArray *newCitations = [[NSMutableArray alloc] init];
+    NSMutableArray *newLabels = [[NSMutableArray alloc] init];
+    
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
 //    NSLog(@"Generating meta data for %@", self.file.name);
     
     //-------------- get commands
     if ([self isCancelled]) return;
-    NSMutableArray *newCommands = [NSMutableArray array];
     NSArray *parsedCommands = [self.text componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
-    for (NSString *newCommand in parsedCommands) {
-      [newCommands addObject:[TPNewCommand commandWithSource:newCommand]];
+    for (NSString *str in parsedCommands) {
+      TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
+      [newCommands addObject:c];
+      [c release];
     }
-    self.commands = [NSArray arrayWithArray:newCommands];
     
     //-------------- get citatations
     if ([self isCancelled]) return;
-    NSMutableArray *newCitations = [NSMutableArray array];
     NSArray *citationsFound = [self.text citations];		
     [newCitations addObjectsFromArray:citationsFound];			
     
@@ -79,10 +84,17 @@
         
     //--------------- Labels    
     if ([self isCancelled]) return;
-    self.labels = [self.text referenceLabels];			
-    
+    [newLabels addObjectsFromArray:[self.text referenceLabels]];    
     
     [pool release];
+    
+    self.commands = newCommands;
+    [newCommands release];
+    self.citations = newCitations;
+    [newCitations release];
+    self.labels = newLabels;
+    [newLabels release];
+    
   }
   @catch(...) {
     // Do not rethrow exceptions.
