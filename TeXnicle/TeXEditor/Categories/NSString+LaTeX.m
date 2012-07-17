@@ -179,10 +179,11 @@
       
       if (start != NSNotFound && end != NSNotFound && start < end) {
         NSString *tag = [self substringWithRange:NSMakeRange(start, end-start+1)];
-        BibliographyEntry *bib = [[[BibliographyEntry alloc] init] autorelease];
+        BibliographyEntry *bib = [[BibliographyEntry alloc] init];
         bib.tag = tag;      
         bib.sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
-        [cites addObject:bib];    
+        [cites addObject:bib];
+        [bib release];
       }
       
       [scanner setScanLocation:scanLocation];
