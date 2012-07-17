@@ -96,6 +96,9 @@
 @synthesize labelsContainerView;
 @synthesize labelsViewController;
 
+@synthesize citationsContainerView;
+@synthesize citationsViewController;
+
 @synthesize pdfViewerController;
 @synthesize project;
 @synthesize projectOutlineView;
@@ -258,6 +261,11 @@
   self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
   [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
   [self.labelsContainerView addSubview:self.labelsViewController.view];
+  
+  // citations view
+  self.citationsViewController = [[[TPCitationsViewController alloc] initWithDelegate:self] autorelease];
+  [self.citationsViewController.view setFrame:self.citationsContainerView.bounds];
+  [self.citationsContainerView addSubview:self.citationsViewController.view];
   
   // setup settings
   self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
@@ -559,6 +567,10 @@
   self.warningsViewController = nil;
   
   // labels view
+  self.labelsViewController.delegate = nil;
+  self.labelsViewController = nil;
+  
+  // citations view
   self.labelsViewController.delegate = nil;
   self.labelsViewController = nil;
   
@@ -3891,6 +3903,60 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
   [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
   
+}
+
+#pragma mark -
+#pragma mark Citations view delegate
+
+- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView
+{
+  NSMutableArray *files = [NSMutableArray array];
+  
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+        if ([file.metadata.citations count] > 0) {
+          [files addObject:file];
+        }
+      }
+    }
+  }
+  
+  return files;
+}
+
+- (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
+{
+  return [[(FileEntity*)file metadata] citations];
+}
+
+- (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
+{
+  BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
+  NSLog(@" Source %@", entry.sourceString);
+  
+	// first select the file
+	[projectItemTreeController setSelectionIndexPath:nil];
+	// But now try to select the file
+	NSIndexPath *idx = [projectItemTreeController indexPathToObject:[aCitation valueForKey:@"file"]];
+	[projectItemTreeController setSelectionIndexPath:idx];
+  
+  // just search for the first line of the source string, or up to the first ','
+  NSInteger index = 0;
+  NSString *source = entry.sourceString;
+  while (index < [source length]) {
+    unichar c = [source characterAtIndex:index];
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+        c == ',') {
+      source = [source substringToIndex:index];
+      break;
+    }
+    index++;
+  }
+  
+  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];    
+  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
 }
 
 

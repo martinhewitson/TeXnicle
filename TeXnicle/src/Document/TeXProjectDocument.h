@@ -54,6 +54,7 @@
 #import "TPProjectOutlineViewController.h"
 #import "TPWarningsViewController.h"
 #import "TPLabelsViewController.h"
+#import "TPCitationsViewController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -63,7 +64,14 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+@interface TeXProjectDocument : NSPersistentDocument <TPCitationsViewDelegate, TPLabelsViewDelegate, 
+TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, 
+OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
+PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
+NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate, 
+PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, 
+FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+
 @private
   
   NSWindow *mainWindow;
@@ -147,6 +155,9 @@
   TPLabelsViewController *labelsViewController;
   NSView *labelsContainerView;
   
+  TPCitationsViewController *citationsViewController;
+  NSView *citationsContainerView;
+  
   PDFViewerController *pdfViewerController;
   
   PaletteController *palette;
@@ -195,6 +206,9 @@
 
 @property (retain) TPLabelsViewController *labelsViewController;
 @property (assign) IBOutlet NSView *labelsContainerView;
+
+@property (retain) TPCitationsViewController *citationsViewController;
+@property (assign) IBOutlet NSView *citationsContainerView;
 
 @property (retain) MHMiniConsoleViewController *miniConsole;
 
