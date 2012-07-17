@@ -97,7 +97,8 @@
 - (NSArray*) citations
 {
 	NSMutableArray *cites = [NSMutableArray array];
-	
+	NSInteger sourceStart;
+  NSInteger sourceEnd;
   // 1) look for lines starting with \bibitem
   NSScanner *scanner = [NSScanner scannerWithString:self];
   NSInteger scanLocation = 0;
@@ -105,6 +106,7 @@
     if ([scanner scanUpToString:@"\\bibitem" intoString:NULL]) {
       scanLocation = [scanner scanLocation];
 //      NSLog(@"Found bibitem at %d", scanLocation);
+      sourceStart = scanLocation;
       
       if (scanLocation == [self length]) {
         break;
@@ -166,6 +168,7 @@
         if ([self characterAtIndex:scanLocation] == '}') {
           bracketCount--;
           if (bracketCount == 0) {
+            sourceEnd = scanLocation;
             end = scanLocation-1;
             break;
           }
@@ -176,9 +179,10 @@
       
       if (start != NSNotFound && end != NSNotFound && start < end) {
         NSString *tag = [self substringWithRange:NSMakeRange(start, end-start+1)];
-        NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
-        [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
-        [cites addObject:str];    
+        BibliographyEntry *bib = [[[BibliographyEntry alloc] init] autorelease];
+        bib.tag = tag;      
+        bib.sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
+        [cites addObject:bib];    
       }
       
       [scanner setScanLocation:scanLocation];
