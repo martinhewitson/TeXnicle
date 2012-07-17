@@ -73,6 +73,8 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
     self.lastUpdateOfNewCommands = nil;
     self.lastUpdateOfSections = nil;
     self.needsUpdate = NO;
+    
+    
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
@@ -119,9 +121,10 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) stopMetadataTimer
 {  
+//  NSLog(@"Stopping metadata timer for %@", self);
   if (self.metadataTimer) {
     [self.aQueue cancelAllOperations];
-    [self.aQueue release];
+    self.aQueue = nil;
     [self.metadataTimer invalidate];
     self.metadataTimer = nil;
   }
@@ -129,12 +132,11 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) dealloc
 {  
-//  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc metadata %@", self);
   NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
 
-	[self stopMetadataTimer];
   dispatch_release(queue);
   self.checker = nil;
   self.userNewCommands = nil;
@@ -202,6 +204,11 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 
 - (void) updateMetadata
 {
+  // in case the file has gone
+  if (self.parent == nil) {
+    return;
+  }
+  
   NSDate *lastEdit = self.parent.lastEditDate;
   NSDate *lastUpdate = self.lastMetadataUpdate;
   
