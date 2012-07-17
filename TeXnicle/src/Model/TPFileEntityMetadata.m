@@ -55,7 +55,6 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
 @synthesize lastUpdateOfSections;
 
 @synthesize userNewCommands;
-@synthesize lastUpdateOfNewCommands;
 
 @synthesize syntaxErrors;
 @synthesize citations;
@@ -70,7 +69,6 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   self = [super init];
   if (self != nil) {
     self.parent = aFile;
-    self.lastUpdateOfNewCommands = nil;
     self.lastUpdateOfSections = nil;
     self.needsUpdate = NO;
     
@@ -138,12 +136,20 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
 
   dispatch_release(queue);
+  
   self.checker = nil;
-  self.userNewCommands = nil;
-  self.lastUpdateOfNewCommands = nil;
+  
+  self.aQueue = nil;
+  
+  self.lastMetadataUpdate = nil;
+  self.metadataTimer = nil;
+  
   self.sections = nil;
-  self.syntaxErrors = nil;
   self.lastUpdateOfSections = nil;
+  
+  self.syntaxErrors = nil;
+  
+  self.userNewCommands = nil;  
   self.citations = nil;
   self.labels = nil;
   self.includes = nil;

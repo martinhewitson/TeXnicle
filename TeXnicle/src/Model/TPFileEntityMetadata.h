@@ -48,13 +48,13 @@
   NSDate *lastMetadataUpdate;
   NSTimer *metadataTimer;
   
-  // new commands
-  NSArray *userNewCommands;
-  NSDate *lastUpdateOfNewCommands;
   
   // sections
   NSArray *sections;
   NSDate *lastUpdateOfSections;
+  
+  // new commands
+  NSArray *userNewCommands;
   
   // citations
   NSArray *citations;
@@ -91,7 +91,6 @@
 @property (retain) NSArray *syntaxErrors;
 
 @property (retain) NSArray *userNewCommands;
-@property (retain) NSDate *lastUpdateOfNewCommands;
 
 @property (retain) NSArray *citations;
 
