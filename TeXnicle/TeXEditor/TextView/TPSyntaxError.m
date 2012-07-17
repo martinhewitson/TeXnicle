@@ -127,6 +127,12 @@
   [messageString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [messageString length])];
   [str appendAttributedString:messageString];
   
+  // apply paragraph
+  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
+  [str addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [str length])];
+  
   return str;
 }
 
