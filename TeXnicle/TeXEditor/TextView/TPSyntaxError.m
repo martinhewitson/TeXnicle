@@ -36,6 +36,7 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
   self.line = nil;
   [super dealloc];
 }
