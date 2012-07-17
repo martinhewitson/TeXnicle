@@ -28,8 +28,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TPSimpleSpellcheckOperation : NSOperation {
-  NSString *text;
-  
+  NSString *text;  
   NSArray *words;
 }
 

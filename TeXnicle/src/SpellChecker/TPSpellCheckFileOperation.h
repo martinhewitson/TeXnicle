@@ -26,16 +26,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TPSpellCheckedFile.h"
+
+@class TPSpellCheckFileOperation;
+
+@protocol TPSpellCheckFileDelegate <NSObject>
+
+- (NSString*)spellCheckFileOperationTextToCheck:(TPSpellCheckFileOperation*)operation;
+- (void)spellCheckFileOperationDidCompleteCheck:(TPSpellCheckFileOperation*)operation;
+
+@end
 
 @interface TPSpellCheckFileOperation : NSOperation {
-  TPSpellCheckedFile *file;  
   NSArray *words;
+  id<TPSpellCheckFileDelegate> delegate;
 }
 
-@property (retain) TPSpellCheckedFile *file;
+@property (assign) id<TPSpellCheckFileDelegate> delegate;
 @property (retain) NSArray *words;
 
-- (id) initWithFile:(TPSpellCheckedFile*)aFile;
+- (id) initWithDelegate:(id<TPSpellCheckFileDelegate>)aDelegate;
 
 @end

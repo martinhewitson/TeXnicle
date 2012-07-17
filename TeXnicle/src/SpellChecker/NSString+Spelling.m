@@ -33,7 +33,11 @@
 
 - (NSArray*) listOfMisspelledWords
 {
-  NSString *aString = self;
+  NSString *aString = [self retain];
+  if ([aString length] == 0) {
+    return [NSArray array];
+  }
+  
   NSSpellChecker *checker = [NSSpellChecker sharedSpellChecker];
   NSMutableArray *words = [NSMutableArray array];
   NSRange range = NSMakeRange(0, 0);
@@ -82,6 +86,7 @@
     
     
   } // end while loop
+  [aString release];
   
   return words;
 }

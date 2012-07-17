@@ -31,20 +31,21 @@
 
 @implementation TPSpellCheckFileOperation
 
-@synthesize file;
 @synthesize words;
+@synthesize delegate;
 
-- (id) initWithFile:(TPSpellCheckedFile *)aFile
+- (id) initWithDelegate:(id<TPSpellCheckFileDelegate>)aDelegate;
 {
   self = [super init];
   if (self) {
-    self.file = aFile;
+    self.delegate = aDelegate;
   }
   return self;
 }
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
   self.words = nil;
   [super dealloc];
 }
@@ -54,7 +55,17 @@
   @try {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
-    self.words = [[self.file.file workingContentString] listOfMisspelledWords];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(spellCheckFileOperationTextToCheck:)]) {
+      NSString *text = [self.delegate spellCheckFileOperationTextToCheck:self];
+      if (text) {
+        self.words = [text listOfMisspelledWords];
+        if (self.words) {
+          if ([self.delegate respondsToSelector:@selector(spellCheckFileOperationDidCompleteCheck:)]) {
+            [self.delegate spellCheckFileOperationDidCompleteCheck:self];
+          }
+        }
+      }
+    }
     
     [pool release];
   }

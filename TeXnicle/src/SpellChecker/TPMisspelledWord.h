@@ -37,7 +37,7 @@
 }
 
 @property (copy) NSString *word;
-@property (copy) NSArray *corrections;
+@property (retain) NSArray *corrections;
 @property (assign) NSRange range;
 @property (assign) TPSpellCheckedFile *parent;
 

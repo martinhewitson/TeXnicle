@@ -65,13 +65,12 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.aQueue cancelAllOperations];
   self.aQueue = nil;
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.checkedFiles = nil;
-  [self stop];
   [super dealloc];
 }
 
@@ -89,7 +88,6 @@
   
   
   [self setupSpellChecker];
-  [self performSelector:@selector(performSpellCheck) withObject:nil afterDelay:0];
 
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
@@ -285,8 +283,18 @@
 
 - (void) stop
 {
+  NSLog(@"Stopping spelling timer...");
+  [self.aQueue cancelAllOperations];
+  [self performSelectorOnMainThread:@selector(tearDownTimer) withObject:nil waitUntilDone:YES];
+}
+   
+- (void) tearDownTimer
+{
+  NSLog(@" tearing down timer");
   if (self.spellCheckTimer) {
-    [self.spellCheckTimer invalidate];
+    if ([self.spellCheckTimer isValid]) {
+      [self.spellCheckTimer invalidate];
+    }
     self.spellCheckTimer = nil;
   }
 }
@@ -340,6 +348,7 @@
   TPSimpleSpellcheckOperation *op = [[TPSimpleSpellcheckOperation alloc] initWithText:string];
   [op setCompletionBlock:^{
     [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:NO];
+    [op setCompletionBlock:nil];
   }];
   
   [self.progressIndicator startAnimation:self];
@@ -376,6 +385,7 @@
 
 - (void) spellCheckProjectFiles
 {
+  NSLog(@"Spell check project files...");
   if (checkingFiles > 0) {
     return;
   }
@@ -385,6 +395,7 @@
   }
   
   NSArray *filesToCheck = [self filesToSpellCheck];
+  
   checkingFiles = 0;
   if (filesToCheck) {
     
@@ -413,8 +424,9 @@
         TPSpellCheckedFile *checkedFile = [self checkedFileForFile:file];
         
         if (checkedFile == nil) {
-          checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:file] autorelease];
+          checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
           [self.checkedFiles addObject:checkedFile];
+          [checkedFile release];
           shouldCheck = YES;
         }
         
@@ -435,9 +447,10 @@
           //            NSLog(@"+ Checking file %@", [file name]);
           checkingFiles++;
           
-          TPSpellCheckFileOperation *op = [[TPSpellCheckFileOperation alloc] initWithFile:checkedFile];
+          TPSpellCheckFileOperation *op = [[[TPSpellCheckFileOperation alloc] initWithDelegate:checkedFile] autorelease];
           [op setCompletionBlock:^{
-            [self performSelectorOnMainThread:@selector(notifyFileUpdatedWithOp:) withObject:op waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:NO];
+            [op setCompletionBlock:nil];
           }];
           
           [self.progressIndicator startAnimation:self];
@@ -448,27 +461,15 @@
   } // end if we have files to check
 }
 
-- (void) notifyFileUpdatedWithOp:(TPSpellCheckFileOperation*)op
+- (void) notifyFileUpdated
 {
-  TPSpellCheckedFile *checkedFile = op.file;
-  
-  // update parent
-  NSArray *words = op.words;
-  for (TPMisspelledWord *word in words) {
-    word.parent = checkedFile;
-  }
-  
-  checkedFile.lastCheck = [NSDate date];
-  checkedFile.words = words;
-  checkedFile.needsUpdate = NO;
-  
+    
   [self.outlineView reloadData];
   checkingFiles--;
   
   if (checkingFiles == 0) {
     [self.progressIndicator stopAnimation:self];
-  }
-  
+  }  
 }
 
 - (TPSpellCheckedFile*)checkedFileForFile:(id)file

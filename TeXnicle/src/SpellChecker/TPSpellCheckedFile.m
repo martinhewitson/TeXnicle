@@ -26,6 +26,7 @@
 //
 
 #import "TPSpellCheckedFile.h"
+#import "TPMisspelledWord.h"
 
 @implementation TPSpellCheckedFile
 
@@ -47,7 +48,7 @@
 
 - (void) dealloc
 {
-  self.file = nil;
+  NSLog(@"Dealloc %@", self);
   self.words = nil;
   self.lastCheck = nil;
   [super dealloc];
@@ -113,6 +114,28 @@
   
   return att;
 }
+
+#pragma mark -
+#pragma mark delegate
+
+- (NSString*)spellCheckFileOperationTextToCheck:(TPSpellCheckFileOperation*)operation
+{
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    return [(FileEntity*)self.file workingContentString];
+  }
+  return nil;
+}
+
+- (void)spellCheckFileOperationDidCompleteCheck:(TPSpellCheckFileOperation*)operation
+{
+  self.words = [NSArray arrayWithArray:operation.words];
+  for (TPMisspelledWord *word in self.words) {
+    word.parent = self;
+  }
+  self.lastCheck = [NSDate date];
+  self.needsUpdate = NO;
+}
+
 
 
 @end

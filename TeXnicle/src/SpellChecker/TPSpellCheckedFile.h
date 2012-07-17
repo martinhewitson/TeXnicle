@@ -27,8 +27,9 @@
 
 #import <Foundation/Foundation.h>
 #import "FileEntity.h"
+#import "TPSpellCheckFileOperation.h"
 
-@interface TPSpellCheckedFile : NSObject {
+@interface TPSpellCheckedFile : NSObject <TPSpellCheckFileDelegate> {
   
   id file;
   NSDate *lastCheck;
@@ -36,7 +37,7 @@
   BOOL needsUpdate;
 }
 
-@property (retain) id file;
+@property (assign) id file;
 @property (retain) NSDate *lastCheck;
 @property (retain) NSArray *words;
 @property (assign) BOOL needsUpdate;
