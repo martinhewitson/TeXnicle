@@ -354,7 +354,6 @@
 		25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DA73A414093CAD007ACA36 /* BashColoringEngine.m */; };
 		25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B415B4602E009E086A /* labelsTabBarImage.icns */; };
 		25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */; };
-		25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */; };
 		25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BE15B47887009E086A /* TPLabelsViewController.m */; };
 		25DB36C115B47887009E086A /* TPLabelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36BF15B47887009E086A /* TPLabelsViewController.xib */; };
 		25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C315B478DA009E086A /* TPLabelsSet.m */; };
@@ -990,8 +989,6 @@
 		25DA73A414093CAD007ACA36 /* BashColoringEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BashColoringEngine.m; sourceTree = "<group>"; };
 		25DB36B415B4602E009E086A /* labelsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImage.icns; sourceTree = "<group>"; };
 		25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImageDepressed.icns; sourceTree = "<group>"; };
-		25DB36B915B462FA009E086A /* TPOutlineBuilderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineBuilderOperation.h; sourceTree = "<group>"; };
-		25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOutlineBuilderOperation.m; sourceTree = "<group>"; };
 		25DB36BD15B47887009E086A /* TPLabelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabelsViewController.h; sourceTree = "<group>"; };
 		25DB36BE15B47887009E086A /* TPLabelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsViewController.m; sourceTree = "<group>"; };
 		25DB36BF15B47887009E086A /* TPLabelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPLabelsViewController.xib; sourceTree = "<group>"; };
@@ -2134,8 +2131,6 @@
 				25E7B13515AB39C400373A56 /* TPSection.m */,
 				25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */,
 				25E7B13815AB3A6C00373A56 /* TPOutlineBuilder.m */,
-				25DB36B915B462FA009E086A /* TPOutlineBuilderOperation.h */,
-				25DB36BA15B462FA009E086A /* TPOutlineBuilderOperation.m */,
 				25E7B13A15AB3C7700373A56 /* TPSectionTemplate.h */,
 				25E7B13B15AB3C7700373A56 /* TPSectionTemplate.m */,
 				25E7B13D15AD697600373A56 /* TPProjectOutlineViewController.h */,
@@ -2643,7 +2638,6 @@
 				25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */,
 				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
 				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
-				25DB36BB15B462FA009E086A /* TPOutlineBuilderOperation.m in Sources */,
 				25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */,
 				25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */,
 				25DB36C715B47D9B009E086A /* TPLabel.m in Sources */,
@@ -2734,7 +2728,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2750,6 +2744,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;

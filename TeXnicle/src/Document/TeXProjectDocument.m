@@ -4019,9 +4019,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
 {
-  NSLog(@"Clicked on %@", [aCommand valueForKey:@"file"]);
-  NSLog(@"  source %@", [aCommand valueForKey:@"source"]);
-  
 	// first select the file
 	[projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
