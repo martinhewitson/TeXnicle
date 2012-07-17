@@ -53,7 +53,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
   self.corrections = nil;
   [super dealloc];
 }

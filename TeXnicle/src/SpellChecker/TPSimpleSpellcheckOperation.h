@@ -27,14 +27,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPSimpleSpellcheckOperation : NSOperation {
+
+@interface TPSimpleSpellcheckOperation : NSOperation  {
   NSString *text;  
-  NSArray *words;
+  NSArray *_words;
 }
 
 @property (copy) NSString *text;
 @property (retain) NSArray *words;
 
 - (id) initWithText:(NSString*)aString;
+
 
 @end

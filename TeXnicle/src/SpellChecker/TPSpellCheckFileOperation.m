@@ -31,8 +31,8 @@
 
 @implementation TPSpellCheckFileOperation
 
-@synthesize words;
 @synthesize delegate;
+@synthesize words = _words;
 
 - (id) initWithDelegate:(id<TPSpellCheckFileDelegate>)aDelegate;
 {
@@ -47,27 +47,49 @@
 {
   NSLog(@"Dealloc %@", self);
   self.words = nil;
+//  [_words release];
   [super dealloc];
 }
 
+//- (NSArray*)words
+//{
+//  return _words;
+//}
 
 -(void)main {
   @try {
+    
+    NSMutableArray *someWords = [[NSMutableArray alloc] init];
+    
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
+    
+    if ([self isCancelled]) return;
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(spellCheckFileOperationTextToCheck:)]) {
-      NSString *text = [self.delegate spellCheckFileOperationTextToCheck:self];
+      NSString *text = [[self.delegate spellCheckFileOperationTextToCheck:self] copy];
       if (text) {
-        self.words = [text listOfMisspelledWords];
-        if (self.words) {
-          if ([self.delegate respondsToSelector:@selector(spellCheckFileOperationDidCompleteCheck:)]) {
-            [self.delegate spellCheckFileOperationDidCompleteCheck:self];
-          }
+        NSArray *misspelledWords = [text listOfMisspelledWords];
+        for (id word in misspelledWords) {
+          [someWords addObject:word];
         }
+        if ([self isCancelled]) return;
+        
       }
     }
     
-    [pool release];
+    [pool drain];
+    
+    if ([self isCancelled]) return;
+    self.words = someWords;
+    [someWords release];
+    
+    if (self.words) {
+      if ([self.delegate respondsToSelector:@selector(spellCheckFileOperationDidCompleteCheck:)]) {
+        [self.delegate performSelectorOnMainThread:@selector(spellCheckFileOperationDidCompleteCheck:) withObject:self waitUntilDone:YES];
+      }
+    }
+    
   }
   @catch(...) {
     // Do not rethrow exceptions.

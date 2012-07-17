@@ -41,6 +41,7 @@
 - (BOOL) performSimpleSpellCheck;
 - (NSString*)stringToCheck;
 - (NSString*)fileToCheck;
+- (NSDate*)lastEdit;
 
 @end
 

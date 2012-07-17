@@ -37,7 +37,7 @@
 @end
 
 @interface TPSpellCheckFileOperation : NSOperation {
-  NSArray *words;
+  NSArray *_words;
   id<TPSpellCheckFileDelegate> delegate;
 }
 

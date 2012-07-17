@@ -65,7 +65,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.aQueue = nil;
   self.outlineView.delegate = nil;
@@ -283,14 +283,14 @@
 
 - (void) stop
 {
-  NSLog(@"Stopping spelling timer...");
+//  NSLog(@"Stopping spelling timer...");
   [self.aQueue cancelAllOperations];
   [self performSelectorOnMainThread:@selector(tearDownTimer) withObject:nil waitUntilDone:YES];
 }
    
 - (void) tearDownTimer
 {
-  NSLog(@" tearing down timer");
+//  NSLog(@" tearing down timer");
   if (self.spellCheckTimer) {
     if ([self.spellCheckTimer isValid]) {
       [self.spellCheckTimer invalidate];
@@ -342,12 +342,30 @@
 
 - (void) doSimpleSpellCheck
 {
-  // get the text for this file
-  NSString *string = [self stringToCheck];     
   
-  TPSimpleSpellcheckOperation *op = [[TPSimpleSpellcheckOperation alloc] initWithText:string];
+  TPSpellCheckedFile *checkedFile = nil;
+  
+  if ([self.checkedFiles count] > 0) {
+    checkedFile = [self.checkedFiles objectAtIndex:0];
+  } else {
+    checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
+    [self.checkedFiles addObject:checkedFile];
+  }
+  
+  if (checkedFile.lastCheck) {
+  NSDate *lastEdit = [self.delegate lastEdit];
+  NSDate *lastCheck = checkedFile.lastCheck;
+    if ([lastEdit timeIntervalSinceDate:lastCheck] <= 0) {
+      return;
+    }    
+  }
+  
+  // set text
+  checkedFile.text = [self stringToCheck];
+  
+  TPSpellCheckFileOperation *op = [[TPSpellCheckFileOperation alloc] initWithDelegate:checkedFile];
   [op setCompletionBlock:^{
-    [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:YES];
     [op setCompletionBlock:nil];
   }];
   
@@ -356,26 +374,7 @@
 }
 
 - (void) notifyOfUpdate:(TPSimpleSpellcheckOperation*)op
-{
-  TPSpellCheckedFile *checkedFile = nil;
-  
-  if ([self.checkedFiles count] > 0) {
-    checkedFile = [self.checkedFiles objectAtIndex:0];
-  } else {  
-    checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
-    [self.checkedFiles addObject:checkedFile];
-  }
-  
-  NSArray *words = op.words;
-  for (TPMisspelledWord *word in words) {
-    word.parent = checkedFile;
-  }
-  
-  // set words
-  checkedFile.words = words;
-  checkedFile.lastCheck = [NSDate date];
-  checkedFile.needsUpdate = NO;
-  
+{  
   // update UI
   [self.progressIndicator stopAnimation:self];
   [self.outlineView reloadData];
@@ -385,7 +384,7 @@
 
 - (void) spellCheckProjectFiles
 {
-  NSLog(@"Spell check project files...");
+//  NSLog(@"Spell check project files...");
   if (checkingFiles > 0) {
     return;
   }
@@ -393,6 +392,7 @@
   if ([self shouldPerformSpellCheck] == NO) {
     return;
   }
+    
   
   NSArray *filesToCheck = [self filesToSpellCheck];
   
@@ -447,14 +447,18 @@
           //            NSLog(@"+ Checking file %@", [file name]);
           checkingFiles++;
           
+          
           TPSpellCheckFileOperation *op = [[[TPSpellCheckFileOperation alloc] initWithDelegate:checkedFile] autorelease];
+          
           [op setCompletionBlock:^{
-            [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:YES];
             [op setCompletionBlock:nil];
           }];
           
+          // start progress indicator and queue the operation
           [self.progressIndicator startAnimation:self];
           [self.aQueue addOperation:op];
+          
         } // end if shouldCheck
       } // end if file is text file          
     } // end loop over files
@@ -664,7 +668,7 @@
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
   if (anItem == self.revealButton){
-    if ([self selectedWord]) {
+    if ([self selectedWord] && checkingFiles == 0) {
       return YES;
     }
   }

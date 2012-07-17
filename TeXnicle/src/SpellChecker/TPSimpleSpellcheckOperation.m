@@ -31,7 +31,7 @@
 @implementation TPSimpleSpellcheckOperation
 
 @synthesize text;
-@synthesize words;
+@synthesize words = _words;
 
 - (id) initWithText:(NSString *)aString
 {
@@ -51,11 +51,18 @@
 
 -(void)main {
   @try {
+    
+    NSArray *someWords = nil;
+    
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
-    self.words = [self.text listOfMisspelledWords];
+    someWords = [[NSArray alloc] initWithArray:[self.text listOfMisspelledWords]];
         
-    [pool release];
+    [pool drain];
+    
+    self.words = someWords;
+    [someWords release];
+    
   }
   @catch(...) {
     // Do not rethrow exceptions.

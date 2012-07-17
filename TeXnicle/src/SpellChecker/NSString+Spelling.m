@@ -31,6 +31,7 @@
 @implementation NSString (Spelling)
 
 
+
 - (NSArray*) listOfMisspelledWords
 {
   NSString *aString = [self retain];
@@ -39,15 +40,17 @@
   }
   
   NSSpellChecker *checker = [NSSpellChecker sharedSpellChecker];
-  NSMutableArray *words = [NSMutableArray array];
-  NSRange range = NSMakeRange(0, 0);
+  NSMutableArray *words = [[NSMutableArray alloc] init];
+  __block NSRange range = NSMakeRange(0, 0);
   NSRange lastRange = NSMakeRange(0, 0);
   
   NSInteger misspelledWordCount = 0;
   
   while (range.location < [aString length] && misspelledWordCount <= 1000) {
-    
-    range = [checker checkSpellingOfString:aString startingAt:range.location];
+        
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      range = [checker checkSpellingOfString:aString startingAt:range.location];
+    });
     
     // there seems to be a bug here in checkSpellingOfString:startingAt: where it gets
     // the same word again. So we check for that.
@@ -72,10 +75,20 @@
     // did we get a word?
     if (NSMaxRange(range) < [aString length] && range.length > 0) {
       NSString *misspelledWord = [aString substringWithRange:range];
+      
       //      NSLog(@"Found misspelled word [%@] at %@", misspelledWord, NSStringFromRange(range));
-      NSArray *corrections = [checker guessesForWordRange:range inString:aString language:nil inSpellDocumentWithTag:0];
-      TPMisspelledWord *word = [TPMisspelledWord wordWithWord:misspelledWord corrections:corrections range:range parent:nil];
+      __block NSMutableArray *guesses = [[NSMutableArray alloc] init];
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        NSArray *corrections = [checker guessesForWordRange:range inString:aString language:nil inSpellDocumentWithTag:0];
+        for (NSString *c in corrections) {
+          [guesses addObject:c];
+        }
+      });
+                    
+      TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:guesses range:range parent:nil];
+      [guesses release];
       [words addObject:word];
+      [word release];
       misspelledWordCount++;
       // move on
       range = NSMakeRange(NSMaxRange(range), 0);
@@ -88,7 +101,7 @@
   } // end while loop
   [aString release];
   
-  return words;
+  return [words autorelease];
 }
 
 

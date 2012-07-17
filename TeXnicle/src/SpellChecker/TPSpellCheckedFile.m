@@ -34,6 +34,7 @@
 @synthesize lastCheck;
 @synthesize words;
 @synthesize needsUpdate;
+@synthesize text;
 
 - (id) initWithFile:(id)aFile
 {
@@ -48,7 +49,8 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
+  self.file = nil;
   self.words = nil;
   self.lastCheck = nil;
   [super dealloc];
@@ -80,14 +82,14 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
-  NSString *text = nil;
+  NSString *filename = nil;
   if ([file isKindOfClass:[FileEntity class]]) {
-    text = [self.file name];
+    filename = [self.file name];
   } else {
-    text = [self.file lastPathComponent];
+    filename = [self.file lastPathComponent];
   }
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
+  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:filename] autorelease]; 
   
   NSString *wordCountString = nil; 
   if ([self.words count] >= 1000) {
@@ -123,7 +125,8 @@
   if ([self.file isKindOfClass:[FileEntity class]]) {
     return [(FileEntity*)self.file workingContentString];
   }
-  return nil;
+  
+  return self.text;
 }
 
 - (void)spellCheckFileOperationDidCompleteCheck:(TPSpellCheckFileOperation*)operation
