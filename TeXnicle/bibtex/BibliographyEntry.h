@@ -38,11 +38,11 @@
 	
 }
 
-@property (readwrite, retain) NSString *tag;
-@property (readwrite, retain) NSString *author;
-@property (readwrite, retain) NSString *title;
-@property (readwrite, retain) NSString *publishedDate;
-@property (readwrite, retain) NSString *sourceString;
+@property (readwrite, copy) NSString *tag;
+@property (readwrite, copy) NSString *author;
+@property (readwrite, copy) NSString *title;
+@property (readwrite, copy) NSString *publishedDate;
+@property (readwrite, copy) NSString *sourceString;
 
 + (NSArray*)bibtexEntriesFromString:(NSString*)aString;
 
