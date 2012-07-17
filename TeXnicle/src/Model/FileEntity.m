@@ -259,16 +259,21 @@
 
 - (void) willTurnIntoFault
 {  
-//  NSLog(@"Will fault %@", self.name);
-  [self.metadata stopMetadataTimer];
+//  NSLog(@"Will fault %@ [%@]", self.name, self.metadata);
+}
+
+- (void) didTurnIntoFault
+{
+//  NSLog(@"Did fault");
+  
+  self.metadata.parent = nil;
+  self.metadata = nil;
   
 	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);
 		[document release];
 		document = nil;
 	}
-  self.metadata.parent = nil;
-  self.metadata = nil;
   self.content = nil;
 }
 
@@ -523,17 +528,25 @@
 
 - (void) updateMetadata
 {
-  [self.metadata updateMetadata];
+  if (self.metadata) {
+    [self.metadata updateMetadata];
+  }
 }
 
 - (NSArray*) listOfNewCommands
 {
+  if (self.metadata == nil) {
+    return [NSArray array];
+  }
+  
   return [self.metadata listOfNewCommands];
 }
 
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force 
 {
-  [self.metadata generateSectionsForTypes:templates forceUpdate:force];
+  if (self.metadata) {
+    [self.metadata generateSectionsForTypes:templates forceUpdate:force];
+  }
 }
 
 - (NSString*) text
