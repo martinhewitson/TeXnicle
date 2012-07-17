@@ -392,13 +392,10 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
             
             MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
             NSInteger lineNumber = ln.number;
-            TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber 
-                                                                withRange:resultRange
-                                                                 subrange:NSMakeRange(0, [searchTerm length])
-                                                           matchingString:matchingString 
-                                                               inDocument:resultDoc];
             
+            TPDocumentMatch *match = [[TPDocumentMatch alloc] initWithLine:lineNumber withRange:resultRange subrange:NSMakeRange(0, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
             [resultDoc addMatch:match];
+            [match release];
             
             dispatch_async(dispatch_get_main_queue(),
                            // block
