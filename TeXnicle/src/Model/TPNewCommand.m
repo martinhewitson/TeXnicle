@@ -69,5 +69,10 @@
   [super dealloc];
 }
 
+- (NSString*)string
+{
+  return self.argument;
+}
+
 
 @end

@@ -43,4 +43,6 @@
 + (id) commandWithFile:(id)aFile source:(NSString*)text;
 - (id) initWithFile:(id)aFile source:(NSString*)text;
 
+- (NSString*)string;
+
 @end
