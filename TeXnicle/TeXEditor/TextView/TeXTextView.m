@@ -876,8 +876,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
 //  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
-  if (popupList == nil) {
+  if (popupList == nil || [popupList mode] != TPPopupListReplace) {
 //    NSLog(@"Making popup...");
+    if (popupList) {
+      [popupList dismiss];
+      [popupList release];
+    }
+    
     popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
                                                              atPoint:wp
                                                       inParentWindow:[self window]
@@ -911,7 +916,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	//			NSLog(@"Point for word:%@", NSStringFromPoint(point));
 	NSPoint wp = [self convertPoint:point toView:nil];
 	[self clearSpellingList];
-  if (popupList == nil) {
+  if (popupList == nil || [popupList mode] != TPPopupListInsert) {
+    if (popupList) {
+      [popupList dismiss];
+      [popupList release];
+    }
     popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
                                                              atPoint:wp
                                                       inParentWindow:[self window]
