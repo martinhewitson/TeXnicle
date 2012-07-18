@@ -29,16 +29,36 @@
 
 @implementation TPPopupTableView
 
-- (void) keyDown:(NSEvent *)theEvent
+
+- (IBAction)moveDown:(id)sender
 {
-	// tab key jumps to next key view
-	if ([theEvent keyCode] == 48) {
-    NSView *next = [self nextKeyView];
-    [[self window] makeFirstResponder:next];
-    return;
-	}
+  NSInteger row = [self selectedRow];
   
-  [super keyDown:theEvent];
+  if (row == -1 && [self numberOfRows] > 0)
+    row = 0;
+  
+  if (row < [self numberOfRows]-1){
+    row ++;
+  }
+  
+  if (row >= 0)
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+}
+
+
+- (IBAction)moveUp:(id)sender
+{
+  NSInteger row = [self selectedRow];
+  
+  if (row == -1 && [self numberOfRows] > 0)
+    row = 0;
+  
+  if (row > 0){
+    row --;
+  }
+  
+  if (row >= 0)
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 }
 
 @end
