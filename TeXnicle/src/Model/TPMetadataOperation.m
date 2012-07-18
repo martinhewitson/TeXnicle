@@ -13,6 +13,7 @@
 #import "FileDocument.h"
 #import "BibliographyEntry.h"
 #import "TPNewCommand.h"
+#import "TPLabel.h"
 
 @implementation TPMetadataOperation
 
@@ -84,7 +85,13 @@
         
     //--------------- Labels    
     if ([self isCancelled]) return;
-    [newLabels addObjectsFromArray:[self.text referenceLabels]];    
+    
+    NSArray *parsedLabels = [self.text referenceLabels];
+    for (NSString *str in parsedLabels) {
+      TPLabel *l = [[TPLabel alloc] initWithFile:self.file text:str];
+      [newLabels addObject:l];
+      [l release];
+    }
     
     [pool release];
     
