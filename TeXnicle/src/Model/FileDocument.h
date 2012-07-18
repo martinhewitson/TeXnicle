@@ -36,7 +36,7 @@
 	NSUndoManager *undoManager;
 	
 }
-@property (readwrite, assign) NSManagedObject *file;
+@property (readwrite, assign) FileEntity *file;
 @property (readwrite, assign) NSTextStorage *textStorage;
 @property (readwrite, assign) NSUndoManager *undoManager;
 
