@@ -59,16 +59,6 @@
 	[super drawRect:dirtyRect];
 }
 
-- (BOOL) acceptsFirstResponder
-{
-	return YES;
-}
-
-- (BOOL) becomeFirstResponder
-{
-	return YES;
-}
-
 - (void) listDoubleClick
 {
 	if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
@@ -77,20 +67,6 @@
 	}		
 }
 
-- (void) keyDown:(NSEvent *)theEvent
-{  
-	// user hit enter
-	if ([theEvent keyCode] == 36) {
-		if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
-			NSInteger row = [table selectedRow];
-			[delegate performSelector:@selector(userSelectedRow:) withObject:[NSNumber numberWithInteger:row]];
-      return;
-		}		
-	}
-	
-  // pass to delegate
-  [delegate keyDown:theEvent];  
-}
 
 
 @end
