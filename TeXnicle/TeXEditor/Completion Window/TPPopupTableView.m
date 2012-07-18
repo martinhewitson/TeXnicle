@@ -45,14 +45,12 @@
   NSInteger       aRow = aVisibleRowIndexes.location;
   NSInteger       anEndRow = aRow + aVisibleRowIndexes.length;
   NSGradient *    gradient;
-  NSColor *       pathColor;
   
   // if the view is focused, use highlight color, otherwise use the out-of-focus highlight color
-  gradient = [[[NSGradient alloc] initWithColorsAndLocations:
-               [NSColor colorWithDeviceRed:(float)62/255 green:(float)133/255 blue:(float)197/255 alpha:1.0], 0.0,
-               [NSColor colorWithDeviceRed:(float)48/255 green:(float)95/255 blue:(float)152/255 alpha:1.0], 1.0, nil] retain]; //160 80
+  gradient = [[NSGradient alloc] initWithColorsAndLocations:
+               [NSColor colorWithDeviceRed:(float)163/255 green:(float)190/255 blue:(float)252/255 alpha:1.0], 0.0,
+               [NSColor colorWithDeviceRed:(float)80/255 green:(float)150/255 blue:(float)240/255 alpha:1.0], 1.0, nil]; //160 80
   
-  pathColor = [[NSColor colorWithDeviceRed:(float)48/255 green:(float)95/255 blue:(float)152/255 alpha:1.0] retain];
   
   // draw highlight for the visible, selected rows
   for (aRow; aRow < anEndRow; aRow++)
@@ -61,13 +59,13 @@
     {
       NSRect aRowRect = NSInsetRect([self rectOfRow:aRow], 1, 2); //first is horizontal, second is vertical
       NSBezierPath * path = [NSBezierPath bezierPathWithRoundedRect:aRowRect xRadius:2.0 yRadius:2.0]; //6.0
-      [path setLineWidth: 2];
-      [pathColor set];
-      [path stroke];
       
       [gradient drawInBezierPath:path angle:90];
     }
   }
+  
+  [gradient release];
+  
 }
 
 - (IBAction)moveDown:(id)sender
