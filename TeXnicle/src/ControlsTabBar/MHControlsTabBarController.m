@@ -295,8 +295,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
   
   CGFloat size = [buttons count]*36.0;
-  if (size < 250.0) 
-    size = 250.0;
+  if (size < 210.0) 
+    size = 210.0;
   
   
   NSRect leftfr = [leftView frame];
