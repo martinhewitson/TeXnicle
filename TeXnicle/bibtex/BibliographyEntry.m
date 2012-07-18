@@ -102,6 +102,7 @@
   NSMutableArray *entries = [NSMutableArray array];
   NSInteger idx = 0;
   NSInteger strLen = [aString length];
+  NSCharacterSet *wsnl = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   
   while( idx < strLen ) {
     
@@ -109,11 +110,16 @@
       
       // parse out an entry
       
-      NSInteger start = idx;
+      NSInteger start = NSNotFound;
       // scan forward until we find a {
       idx++;
       while (idx < strLen) {
-        if ([aString characterAtIndex:idx] == '{') {          
+        unichar c = [aString characterAtIndex:idx];
+        if ([wsnl characterIsMember:c]) {
+          break;
+        }
+        if (c == '{') {
+          start = idx;
           break;
         }
         idx++;
@@ -133,11 +139,13 @@
         idx++;
       }
       
-      NSString *entryString = [[aString substringWithRange:NSMakeRange(start, idx-start+1)] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-      BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:entryString];
-      [entries addObject:entry];
-      [entry release];
-      
+      if (start != NSNotFound) {
+        NSString *entryString = [[aString substringWithRange:NSMakeRange(start, idx-start+1)] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:entryString];
+        [entries addObject:entry];
+        [entry release];
+        
+      }
     } // end found a @
     
     idx++;
