@@ -41,8 +41,10 @@
     row ++;
   }
   
-  if (row >= 0)
+  if (row >= 0) {
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    [self scrollRowToVisible:row];
+  }
 }
 
 
@@ -57,8 +59,10 @@
     row --;
   }
   
-  if (row >= 0)
+  if (row >= 0) {
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    [self scrollRowToVisible:row];
+  }
 }
 
 @end
