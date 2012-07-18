@@ -51,7 +51,7 @@
 #import "BibliographyEntry.h"
 
 
-#define kSplitViewLeftMinSize 230.0
+#define kSplitViewLeftMinSize 210.0
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
