@@ -1633,7 +1633,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (NSArray*) listOfReferences
 {
 	NSString *str = [self.texEditorViewController.textView string];
-	return [str referenceLabels];	
+  
+  NSArray *parsedLabels = [str referenceLabels];
+  NSMutableArray *newLabels = [NSMutableArray array];
+  for (NSString *str in parsedLabels) {
+    TPLabel *l = [[TPLabel alloc] initWithFile:self text:str];
+    [newLabels addObject:l];
+    [l release];
+  }
+
+	return [NSArray arrayWithArray:newLabels];
 }
 
 - (BOOL) shouldSyntaxHighlightDocument
