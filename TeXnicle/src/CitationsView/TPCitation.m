@@ -54,5 +54,14 @@
   [super dealloc];
 }
 
+- (NSAttributedString*)attributedString
+{
+  return [self.entry attributedString];
+}
+
+- (NSString*)string
+{
+  return [self.entry string];
+}
 
 @end

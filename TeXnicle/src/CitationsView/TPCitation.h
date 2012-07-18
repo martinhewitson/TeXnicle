@@ -39,4 +39,7 @@
 + (id) citationWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;
 - (id) initWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;
 
+- (NSAttributedString*)attributedString;
+- (NSString*)string;
+
 @end
