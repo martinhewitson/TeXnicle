@@ -203,6 +203,7 @@
 		25717DB11392D64A00955620 /* makePDFimage.sh in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB01392D64A00955620 /* makePDFimage.sh */; };
 		25717DB51392DA1100955620 /* Palette in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB41392DA1100955620 /* Palette */; };
 		25717DB71392DF8100955620 /* resizeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB61392DF8100955620 /* resizeImage.png */; };
+		257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 257345EF15B6D83000DB92F1 /* RegexKitLite.m */; };
 		2574375414A470EB0082FE96 /* TPLibraryCommandFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */; };
 		2579E58613FBB91C001B3974 /* NSString+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2579E58513FBB91C001B3974 /* NSString+FileTypes.m */; };
 		257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471C138E5DE500ED02C4 /* FileDocument.m */; };
@@ -240,7 +241,6 @@
 		257B4799138E5E9000ED02C4 /* TeXTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4769138E5E9000ED02C4 /* TeXTextView.m */; };
 		257B479A138E5E9000ED02C4 /* TPSectionListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B476B138E5E9000ED02C4 /* TPSectionListController.m */; };
 		257B479B138E5E9000ED02C4 /* NSColorArrayTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B476E138E5E9000ED02C4 /* NSColorArrayTransformer.m */; };
-		257B479C138E5E9000ED02C4 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4770138E5E9000ED02C4 /* RegexKitLite.m */; };
 		257B479D138E5E9000ED02C4 /* SBGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4773138E5E9000ED02C4 /* SBGradientView.m */; };
 		257B479E138E5E9000ED02C4 /* TETopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4775138E5E9000ED02C4 /* TETopBarView.m */; };
 		257B479F138E5E9000ED02C4 /* TeXEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B4777138E5E9000ED02C4 /* TeXEditorViewController.m */; };
@@ -258,8 +258,6 @@
 		257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */; };
 		2581830F139222D200ECCCB1 /* Templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2581830E139222D200ECCCB1 /* Templates.plist */; };
 		258348981513B2FC008A21BE /* BibliographyEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348971513B2FC008A21BE /* BibliographyEntry.m */; };
-		2583489D1513B309008A21BE /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 2583489A1513B309008A21BE /* Article.m */; };
-		2583489E1513B309008A21BE /* TechReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2583489C1513B309008A21BE /* TechReport.m */; };
 		258348A51513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */; };
 		25846DC31408D36800A708E2 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25846DC21408D36800A708E2 /* Settings.m */; };
 		258594031408BD6500C970A1 /* prefsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258594011408BD6500C970A1 /* prefsTabBarImageDepressed.icns */; };
@@ -304,9 +302,6 @@
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
 		25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */; };
 		25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */; };
-		25BB153115B4200A007A7FDF /* TPSimpleSpellcheckOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */; };
-		25BB153415B422A9007A7FDF /* NSString+Spelling.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153315B422A9007A7FDF /* NSString+Spelling.m */; };
-		25BB153815B42858007A7FDF /* TPSpellCheckFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */; };
 		25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */; };
 		25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */; };
 		25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */; };
@@ -738,6 +733,8 @@
 		25717DB01392D64A00955620 /* makePDFimage.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = makePDFimage.sh; sourceTree = "<group>"; };
 		25717DB41392DA1100955620 /* Palette */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Palette; sourceTree = "<group>"; };
 		25717DB61392DF8100955620 /* resizeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resizeImage.png; sourceTree = "<group>"; };
+		257345EE15B6D83000DB92F1 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		257345EF15B6D83000DB92F1 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		2574375214A470EB0082FE96 /* TPLibraryCommandFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryCommandFormatter.h; sourceTree = "<group>"; };
 		2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryCommandFormatter.m; sourceTree = "<group>"; };
 		2579E58413FBB91C001B3974 /* NSString+FileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FileTypes.h"; sourceTree = "<group>"; };
@@ -807,8 +804,6 @@
 		257B476B138E5E9000ED02C4 /* TPSectionListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSectionListController.m; sourceTree = "<group>"; };
 		257B476D138E5E9000ED02C4 /* NSColorArrayTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSColorArrayTransformer.h; sourceTree = "<group>"; };
 		257B476E138E5E9000ED02C4 /* NSColorArrayTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSColorArrayTransformer.m; sourceTree = "<group>"; };
-		257B476F138E5E9000ED02C4 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		257B4770138E5E9000ED02C4 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		257B4772138E5E9000ED02C4 /* SBGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGradientView.h; sourceTree = "<group>"; };
 		257B4773138E5E9000ED02C4 /* SBGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGradientView.m; sourceTree = "<group>"; };
 		257B4774138E5E9000ED02C4 /* TETopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TETopBarView.h; sourceTree = "<group>"; };
@@ -839,10 +834,6 @@
 		2581830E139222D200ECCCB1 /* Templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Templates.plist; sourceTree = "<group>"; };
 		258348961513B2FC008A21BE /* BibliographyEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BibliographyEntry.h; sourceTree = "<group>"; };
 		258348971513B2FC008A21BE /* BibliographyEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BibliographyEntry.m; sourceTree = "<group>"; };
-		258348991513B309008A21BE /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
-		2583489A1513B309008A21BE /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
-		2583489B1513B309008A21BE /* TechReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechReport.h; sourceTree = "<group>"; };
-		2583489C1513B309008A21BE /* TechReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechReport.m; sourceTree = "<group>"; };
 		258348A31513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BibFieldDisplay.h"; sourceTree = "<group>"; };
 		258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+BibFieldDisplay.m"; sourceTree = "<group>"; };
 		25846DBD1408D14100A708E2 /* TeXProject 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -907,12 +898,6 @@
 		25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImage.icns; sourceTree = "<group>"; };
 		25BB152C15B418AB007A7FDF /* MHInfoToolbarBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHInfoToolbarBackgroundView.h; sourceTree = "<group>"; };
 		25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoToolbarBackgroundView.m; sourceTree = "<group>"; };
-		25BB152F15B4200A007A7FDF /* TPSimpleSpellcheckOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSimpleSpellcheckOperation.h; sourceTree = "<group>"; };
-		25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSimpleSpellcheckOperation.m; sourceTree = "<group>"; };
-		25BB153215B422A9007A7FDF /* NSString+Spelling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Spelling.h"; sourceTree = "<group>"; };
-		25BB153315B422A9007A7FDF /* NSString+Spelling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Spelling.m"; sourceTree = "<group>"; };
-		25BB153615B42857007A7FDF /* TPSpellCheckFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellCheckFileOperation.h; sourceTree = "<group>"; };
-		25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellCheckFileOperation.m; sourceTree = "<group>"; };
 		25BB153915B431F6007A7FDF /* TPWarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningsViewController.h; sourceTree = "<group>"; };
 		25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningsViewController.m; sourceTree = "<group>"; };
 		25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPWarningsViewController.xib; sourceTree = "<group>"; };
@@ -1822,10 +1807,10 @@
 		257B476C138E5E9000ED02C4 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				257345EE15B6D83000DB92F1 /* RegexKitLite.h */,
+				257345EF15B6D83000DB92F1 /* RegexKitLite.m */,
 				257B476D138E5E9000ED02C4 /* NSColorArrayTransformer.h */,
 				257B476E138E5E9000ED02C4 /* NSColorArrayTransformer.m */,
-				257B476F138E5E9000ED02C4 /* RegexKitLite.h */,
-				257B4770138E5E9000ED02C4 /* RegexKitLite.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1951,10 +1936,6 @@
 			children = (
 				258348A31513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.h */,
 				258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */,
-				258348991513B309008A21BE /* Article.h */,
-				2583489A1513B309008A21BE /* Article.m */,
-				2583489B1513B309008A21BE /* TechReport.h */,
-				2583489C1513B309008A21BE /* TechReport.m */,
 				258348961513B2FC008A21BE /* BibliographyEntry.h */,
 				258348971513B2FC008A21BE /* BibliographyEntry.m */,
 			);
@@ -2037,12 +2018,6 @@
 				25C87DD415A8863300E61E25 /* TPMisspelledWord.m */,
 				25F0AB3615A94A050000EFFA /* TPSpellingOutlineView.h */,
 				25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */,
-				25BB152F15B4200A007A7FDF /* TPSimpleSpellcheckOperation.h */,
-				25BB153015B4200A007A7FDF /* TPSimpleSpellcheckOperation.m */,
-				25BB153615B42857007A7FDF /* TPSpellCheckFileOperation.h */,
-				25BB153715B42857007A7FDF /* TPSpellCheckFileOperation.m */,
-				25BB153215B422A9007A7FDF /* NSString+Spelling.h */,
-				25BB153315B422A9007A7FDF /* NSString+Spelling.m */,
 			);
 			name = SpellChecker;
 			path = src/SpellChecker;
@@ -2456,7 +2431,6 @@
 				257B4799138E5E9000ED02C4 /* TeXTextView.m in Sources */,
 				257B479A138E5E9000ED02C4 /* TPSectionListController.m in Sources */,
 				257B479B138E5E9000ED02C4 /* NSColorArrayTransformer.m in Sources */,
-				257B479C138E5E9000ED02C4 /* RegexKitLite.m in Sources */,
 				257B479D138E5E9000ED02C4 /* SBGradientView.m in Sources */,
 				257B479E138E5E9000ED02C4 /* TETopBarView.m in Sources */,
 				257B479F138E5E9000ED02C4 /* TeXEditorViewController.m in Sources */,
@@ -2595,8 +2569,6 @@
 				25701AF11505F9F50097E8DA /* TPProjectTemplateListViewer.m in Sources */,
 				251FFD53150BC0B700A5A7EF /* TPConsoleViewController.m in Sources */,
 				258348981513B2FC008A21BE /* BibliographyEntry.m in Sources */,
-				2583489D1513B309008A21BE /* Article.m in Sources */,
-				2583489E1513B309008A21BE /* TechReport.m in Sources */,
 				258348A51513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m in Sources */,
 				25D017161515F30000E27635 /* MHPDFThumbnailView.m in Sources */,
 				25D0171A1515FFCF00E27635 /* TPPasteTableConfigureWindowController.m in Sources */,
@@ -2632,9 +2604,6 @@
 				2589BBFF15B3EEDC00E24C9B /* TPMetadataOperation.m in Sources */,
 				2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */,
 				25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */,
-				25BB153115B4200A007A7FDF /* TPSimpleSpellcheckOperation.m in Sources */,
-				25BB153415B422A9007A7FDF /* NSString+Spelling.m in Sources */,
-				25BB153815B42858007A7FDF /* TPSpellCheckFileOperation.m in Sources */,
 				25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */,
 				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
 				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
@@ -2647,6 +2616,7 @@
 				255A16F315B545E2004290CC /* TPNewCommand.m in Sources */,
 				255A16F715B54733004290CC /* TPNewCommandsViewController.m in Sources */,
 				255A16FB15B5474B004290CC /* TPCommandSet.m in Sources */,
+				257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

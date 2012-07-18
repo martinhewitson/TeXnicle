@@ -55,6 +55,7 @@
 - (void) parseContentFromString:(NSString*)content;
 - (NSString*)parseBibtexField:(NSString*)field fromString:(NSString*)content;
 - (NSAttributedString*)attributedString;
+- (NSAttributedString*)alternativeAttributedString;
 
 - (NSAttributedString*) displayString;
 - (NSString*) string;

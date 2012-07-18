@@ -152,7 +152,7 @@
 - (NSArray*)folders
 {
   NSManagedObjectContext *moc = [self managedObjectContext];
-	NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSError *fetchError = nil;
 	NSArray *fetchResults;
 	
@@ -161,7 +161,8 @@
 	
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	
+	[fetchRequest release];
+  
 	if (fetchError != nil) {
 		[NSApp presentError:fetchError];
     return nil;

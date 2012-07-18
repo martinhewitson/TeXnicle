@@ -191,32 +191,72 @@
 
 - (NSAttributedString*)attributedString
 {
-  NSAttributedString *comma = [[[NSAttributedString alloc] initWithString:@", "] autorelease];
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+  NSAttributedString *comma = [[NSAttributedString alloc] initWithString:@", "];
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@""];
   
-  NSMutableAttributedString *tagString = [[[NSMutableAttributedString alloc] initWithString:self.tag] autorelease];
+  NSMutableAttributedString *tagString = [[NSMutableAttributedString alloc] initWithString:self.tag];
   [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
   [att appendAttributedString:tagString];
-
+  [tagString release];
   
   if ([self.title length] > 0) {
-    NSMutableAttributedString *titleString = [[[NSMutableAttributedString alloc] initWithString:self.title] autorelease];
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
     [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [self.title length])];
     [att appendAttributedString:comma];
-    [att appendAttributedString:titleString];    
+    [att appendAttributedString:titleString];
+    [titleString release];
   }
   
   if ([self.author length] > 0) {
     if ([att length]>0){
       [att appendAttributedString:comma];    
     }
-    NSMutableAttributedString *authorString = [[[NSMutableAttributedString alloc] initWithString:self.author] autorelease];
+    NSMutableAttributedString *authorString = [[NSMutableAttributedString alloc] initWithString:self.author];
     [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [self.author length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:authorString];
+    [authorString release];
   }
   
-  return [[[NSAttributedString alloc] initWithAttributedString:att] autorelease];
+  [comma release];
+  
+  return [att autorelease];
+}
+
+
+- (NSAttributedString*)alternativeAttributedString
+{
+  NSAttributedString *comma = [[NSAttributedString alloc] initWithString:@", "];
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@""];
+  
+  NSMutableAttributedString *tagString = [[NSMutableAttributedString alloc] initWithString:self.tag];
+  [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];
+  [tagString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.tag length])];
+  [att appendAttributedString:tagString];
+  [tagString release];
+  
+  if ([self.title length] > 0) {
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
+    [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.title length])];
+    [att appendAttributedString:comma];
+    [att appendAttributedString:titleString];
+    [titleString release];
+  }
+  
+  if ([self.author length] > 0) {
+    if ([att length]>0){
+      [att appendAttributedString:comma];
+    }
+    NSMutableAttributedString *authorString = [[NSMutableAttributedString alloc] initWithString:self.author];
+    [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.author length])];
+    [att appendAttributedString:comma];
+    [att appendAttributedString:authorString];
+    [authorString release];
+  }
+  
+  [comma release];
+  
+  return [att autorelease];
 }
 
 - (NSString*)parseBibtexField:(NSString*)field fromString:(NSString*)content
@@ -291,7 +331,7 @@
 
 - (NSAttributedString*) displayString
 {
-	NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] init] autorelease];
+	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] init];
 	// TAG
 	NSString *vstr = [self tag];
 	if (!vstr)
@@ -316,7 +356,7 @@
 		vstr = @"";
 	[str addString:vstr withTag:@"Published:"];
 	
-	return str;
+	return [str autorelease];
 }
 
 #pragma mark -

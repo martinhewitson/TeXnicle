@@ -39,12 +39,17 @@
 
 @implementation FileEntity
 
-@dynamic fileLoadDate;
-@dynamic lastEditDate;
-@dynamic extension;
 @dynamic content;
+@dynamic cursor;
+@dynamic extension;
+@dynamic fileLoadDate;
 @dynamic isText;
+@dynamic lastEditDate;
+@dynamic visibleRect;
+@dynamic wasOpen;
 @dynamic bookmarks;
+@dynamic mainFileOfProject;
+
 @synthesize document;
 @synthesize isActive;
 @synthesize metadata;
@@ -116,7 +121,7 @@
 	
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:filepath]) {
-    MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:encoding] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:encoding];
 //    NSLog(@"Loading with encoding %@", encoding);
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
 		
@@ -132,6 +137,8 @@
     } else {
       [self setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
     }
+    // release file reader
+    [fr release];
 	} 
   
   // Reconfigure the supporting FileDocument
@@ -224,16 +231,22 @@
 	if (document) {
 //    NSLog(@"    already have document...");
     // set the new text to the textstorage
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
-		NSString *str = [[[NSString alloc] initWithData:[self valueForKey:@"content"]
-                                           encoding:encoding] autorelease];
-		NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+		NSString *str = [[NSString alloc] initWithData:[self valueForKey:@"content"]
+                                           encoding:encoding];
+		NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
     
     [[document textStorage] beginEditing];
     [[document textStorage] setAttributedString:attStr];
     [[document textStorage] endEditing];
+    
+    [str release];
+    [attStr release];
+    
+    // release file reader
+    [fr release];
     
 //		[document release];
 	} else {
@@ -316,8 +329,10 @@
 // A file has edits if the textstorage string is different from that in content
 - (BOOL) hasEdits
 {
+  BOOL success = NO;
+  
   if (![[self valueForKey:@"isText"] boolValue]) {
-    return NO;
+    return success;
   }
   
   if (_hasEdits) {
@@ -333,10 +348,10 @@
 //  NSLog(@"Checking for edits");
 	if ([self document]) {
 		if ([[self document] textStorage]) {
-      MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+      MHFileReader *fr = [[MHFileReader alloc] init];
       NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
-			NSString *contentStr = [[[NSString alloc] initWithData:[self valueForKey:@"content"]
-																										encoding:encoding] autorelease];
+			NSString *contentStr = [[NSString alloc] initWithData:[self valueForKey:@"content"]
+																										encoding:encoding];
 			
 			NSTextStorage *ts = [[self document] textStorage];
 			NSString *textStr = [ts string];
@@ -346,18 +361,24 @@
 			if ([contentStr length] != [textStr length]) {
 //        NSLog(@"File %@ has diffent length", self.name);
         _hasEdits = YES;
-				return YES;
+				success = YES;
 			}
 			
 			if (![contentStr isEqual:textStr]) {
 //        NSLog(@"File %@ has diffent string", self.name);
         _hasEdits = YES;
-				return YES;
+				success = YES;
 			}
+      
+      // clean up
+      [contentStr release];
+      
+      // release file reader
+      [fr release];
 		}
 	}
 	
-	return NO;
+	return success;
 }
 
 
@@ -373,10 +394,12 @@
 	}
 	
 	NSData *data = [self valueForKey:@"content"];
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
-	NSString *str = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
-	return str;
+	NSString *str = [[NSString alloc] initWithData:data encoding:encoding];
+  [fr release];
+  
+	return [str autorelease];
 }
 
 - (NSString*) workingContentString

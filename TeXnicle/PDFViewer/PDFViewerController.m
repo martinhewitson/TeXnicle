@@ -246,10 +246,11 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(documentPathForViewer:)]) {
     NSString *path = [self.delegate documentPathForViewer:self];
     if (path) {
-      PDFDocument *doc = [[[PDFDocument alloc] initWithURL: [NSURL fileURLWithPath:path]] autorelease];
+      PDFDocument *doc = [[PDFDocument alloc] initWithURL: [NSURL fileURLWithPath:path]];
       if (doc) {
         [doc setDelegate:self];
         [self.pdfview setDocument:doc];
+        [doc release];
         [self showViewer];
         return;
       }
@@ -417,30 +418,28 @@
   NSRect r = NSIntegralRect([selection boundsForPage:page]);
   PDFSelection *extendedSelection = [page selectionForRect:r];
   
-//  PDFSelection *extendedSelection = [[[PDFSelection alloc] initWithDocument:self.pdfview.document] autorelease];
-//  [extendedSelection addSelection:selection];
   [extendedSelection extendSelectionAtStart:10];
   [extendedSelection extendSelectionAtEnd:10];
   NSString *string = [[[extendedSelection string] stringByReplacingOccurrencesOfString:@"\n" withString:@" "] stringByReplacingOccurrencesOfString:@"\r" withString:@" "];
-//  NSLog(@"Selection %@", string);
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] init] autorelease];
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] init];
   
-  NSMutableAttributedString *pageNo = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Page %@", [page label]]] autorelease];
+  NSMutableAttributedString *pageNo = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Page %@", [page label]]];
   [pageNo addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithDeviceWhite:0.6 alpha:1.0] range:NSMakeRange(0, [pageNo length])];
   
   [att appendAttributedString:pageNo];
+  [pageNo release];
   
-  NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" ... %@ ...", string]] autorelease];
+  NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" ... %@ ...", string]];
   [text addAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(15, [[selection string] length])];
   [att appendAttributedString:text];
-  
+  [text release];
 
   
 //  NSRange selectedRange = [self rangeOfSelection:selection];
 //  NSString *selectedString = [page selectionForRange:selectedRange];
 
-  return att;
+  return [att autorelease];
 }
 
 - (NSRange)rangeOfSelection:(PDFSelection*)selection

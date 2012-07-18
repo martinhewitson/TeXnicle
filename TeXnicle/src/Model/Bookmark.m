@@ -123,21 +123,18 @@
 - (NSAttributedString*)selectedDisplayString
 {
   NSString *lineNumberString = [self lineNumberString];  
-  NSMutableAttributedString *att = [[[self displayString] mutableCopy] autorelease]; 
+  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
   [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
   [att addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
   if ([self.text length]==0) {
     [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
   }
-  return att;
+  return [att autorelease];
 }
 
 - (NSAttributedString*)displayString
 {
   
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
   NSString *text = [[self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
   if ([text length]==0) {
@@ -147,20 +144,27 @@
     text = [[text substringToIndex:50] stringByAppendingString:@"..."];
   }
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *lineNumberString = [self lineNumberString];
-  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:lineNumberString];
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [str length])];
   [str appendAttributedString:att];
+  [att release];
+  
+  // set paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [str addAttribute:NSParagraphStyleAttributeName
               value:ps
               range:NSMakeRange(0, [str length])];
+  [ps release];
   
   if ([self.text length]==0) {
     [str addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [str length]-[lineNumberString length])];
   }
-  return str;
+  return [str autorelease];
 }
 
 

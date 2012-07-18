@@ -73,23 +73,25 @@
   } else {
     text = [self.file lastPathComponent];
   }
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *labelCountString = nil; 
   labelCountString = [NSString stringWithFormat:@" [%d] ", [self.labels count]];
 
-  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:labelCountString] autorelease];
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:labelCountString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
   [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
   [att appendAttributedString:str];
+  [str release];
   
   // apply paragraph
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  [ps release];
   
-  return att;
+  return [att autorelease];
 }
 
 

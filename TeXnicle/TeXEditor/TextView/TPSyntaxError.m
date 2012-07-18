@@ -115,25 +115,28 @@
 
 - (NSAttributedString*)attributedStringWithColor:(NSColor*)aColor
 {
-  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@""];
   
   // line number
-  NSMutableAttributedString *lineNumber = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"line %@: ", self.line]] autorelease];
+  NSMutableAttributedString *lineNumber = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"line %@: ", self.line]];
   [lineNumber addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumber length])];
   [str appendAttributedString:lineNumber];
+  [lineNumber release];
   
   // message 
-  NSMutableAttributedString *messageString = [[[NSMutableAttributedString alloc] initWithString:self.message] autorelease];
+  NSMutableAttributedString *messageString = [[NSMutableAttributedString alloc] initWithString:self.message];
   [messageString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [messageString length])];
   [str appendAttributedString:messageString];
+  [messageString release];
   
   // apply paragraph
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [str addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [str length])];
+  [ps release];
   
-  return str;
+  return [str autorelease];
 }
 
 

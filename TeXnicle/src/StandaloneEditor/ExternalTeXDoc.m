@@ -696,6 +696,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.templateEditor.delegate = nil;
   self.templateEditor = nil;
  
+  // document data
+  self.documentData = nil;
 }
 
 
@@ -1108,14 +1110,15 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                              atPath:path
                        traverseLink:YES];
     
-    MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:[sender title]];
     NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
     if (str) {
       self.fileLoadDate = [NSDate date];
       NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
                                                           forKey:NSCharacterEncodingDocumentAttribute];
-      NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
+      NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
       [self setDocumentData:attStr];
+      [attStr release];
       [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
       
       // read settings
@@ -1126,8 +1129,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
           self.settings = [NSMutableDictionary dictionaryWithDictionary:dict];
         }
       }
-      
-    }
+    } // end if str
+    
+    // release file reader
+    [fr release];
+    
   }
 }
 
@@ -1143,11 +1149,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self setDocumentData:string];
 	NSString *str = [string string];
   
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   if (_encoding == -1) {
     _encoding = [fr defaultEncoding];
   }
   BOOL res = [fr writeString:str toURL:absoluteURL withEncoding:_encoding];
+  
+  // clean up
+  [fr release];
 	[string release];
   
   if (res) {
@@ -1168,18 +1177,22 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (BOOL) loadFileAtURL:(NSURL*)absoluteURL
 {
 //  NSLog(@"Loading file at URL %@", absoluteURL);
+  BOOL success = NO;
   
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
     _encoding = [fr encodingUsed];
     NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:_encoding]
                                                         forKey:NSCharacterEncodingDocumentAttribute];
-    NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:str attributes:options] autorelease];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
 		[self setDocumentData:attStr];
     [[self.texEditorViewController.textView textStorage] setAttributedString:attStr];
     [self.texEditorViewController.textView applyFontAndColor:YES];
     [self.texEditorViewController.textView colorWholeDocument];
+    
+    // free attributed string
+    [attStr release];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
@@ -1194,10 +1207,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [self setFileModificationDate:self.fileLoadDate];
     [self updateChangeCount:NSChangeCleared];
     [self syncFileModificationDate];
-		return YES;
+		success = YES;
 	}
   
-	return NO;  
+  // clean up
+  [fr release];
+  
+	return success;
 }
 
 - (void)syncFileModificationDate 
@@ -1982,7 +1998,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
 //  NSLog(@"Clicked on PDF...");
-  MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView
+                                                                 pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   sourcefile = [sourcefile stringByStandardizingPath]; 
@@ -2009,6 +2026,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:[NSNumber numberWithInteger:lineNumber] afterDelay:0];
     }];
   }
+  
+  // release synctex controller
+  [sync release];
 }
 
 
@@ -2391,8 +2411,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[MHFileReader defaultEncoding]]
                                                            forKey:NSCharacterEncodingDocumentAttribute];
-  NSMutableAttributedString *attStr = [[[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options] autorelease];
+  NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options];
   [self setDocumentData:attStr];
+  [attStr release];
 }
 
 #pragma mark -

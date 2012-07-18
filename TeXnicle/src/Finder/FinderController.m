@@ -106,10 +106,11 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   
   // outline view
 	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:NO];
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
 	[tableColumn setDataCell:imageAndTextCell];	
+  [imageAndTextCell release];
   
   [self.modeSelector selectItemAtIndex:0];
   [self selectMode:self];

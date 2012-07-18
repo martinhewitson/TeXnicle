@@ -118,9 +118,10 @@
 
 - (void) parseEngineFile
 {
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:self.path]];
-
+  [fr release];
+  
   if (str == nil) {
     return;
   }
@@ -230,9 +231,9 @@
 	arguments = [NSArray arrayWithObjects:
                [mainFile lastPathComponent], 
                workingDir, 
-               [NSString stringWithFormat:@"%d", self.nCompile], 
-               [NSString stringWithFormat:@"%d", self.doBibtex], 
-               [NSString stringWithFormat:@"%d", self.doPS2PDF], 
+               [NSString stringWithFormat:@"%ld", self.nCompile],
+               [NSString stringWithFormat:@"%ld", self.doBibtex],
+               [NSString stringWithFormat:@"%ld", self.doPS2PDF],
                nil];
 	[typesetTask setArguments:arguments];
 	

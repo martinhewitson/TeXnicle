@@ -193,21 +193,6 @@
   }
   
   return cites;
-  
-//  //  \bibitem[{Ahn(2011)}]{ahn11}
-//  NSString *regexp = @"\\\\bibitem(.*)";
-//  NSLog(@"regexp: %@", regexp);
-//  
-//	NSArray *terms = [self arrayOfCaptureComponentsMatchedByRegex:regexp];
-//  NSLog(@"Terms %@", terms);
-//  for (NSArray *term in terms) {
-//    NSString *tag = [term objectAtIndex:1];
-//    NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:tag] autorelease];
-//    [str addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [str length])];  
-//    [cites addObject:str];    
-//  }
-  
-	return cites;
 }
 
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
@@ -241,14 +226,16 @@
         }
         //        NSLog(@"Bib file is %@", bibpath);
         
-        MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];      
+        MHFileReader *fr = [[MHFileReader alloc] init];
         NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
         if (bibcontents && [bibcontents length]>0) {
           NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
           for (BibliographyEntry *entry in entries) {
             [citations addObject:entry];
           }
-        }    
+        }
+        // clean up
+        [fr release];
       }
     }  
   }  

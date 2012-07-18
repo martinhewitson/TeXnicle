@@ -241,8 +241,9 @@
   for (FileEntity *newFile in newFiles) {
     TPCitationSet *set = [self setForFile:newFile];
     if (set == nil) {
-      set = [[[TPCitationSet alloc] initWithFile:newFile bibliographyArray:[self citationsView:self citationsForFile:newFile]] autorelease];
+      set = [[TPCitationSet alloc] initWithFile:newFile bibliographyArray:[self citationsView:self citationsForFile:newFile]];
       [self.sets addObject:set];
+      [set release];
     } else {
       // update the citations
       NSArray *newCitations = [self citationsView:self citationsForFile:newFile];

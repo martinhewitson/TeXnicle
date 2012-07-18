@@ -280,13 +280,14 @@
   
   for (TPSyntaxError *error in self.errors) {
     NSString *title = [NSString stringWithFormat:@"%@: %@", error.line, error.message];
-    NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:title
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:title
                                                    action:@selector(jumpToLine:)
-                                            keyEquivalent:@""] autorelease];
+                                            keyEquivalent:@""];
     [item setAttributedTitle:[error attributedString]];
     [item setTarget:self];
     [item setRepresentedObject:error];
     [errorMenu addItem:item];
+    [item release];
   }
 	
 	[NSMenu popUpContextMenu:errorMenu withEvent:event forView:(NSButton *)sender];  

@@ -75,8 +75,8 @@
 - (NSAttributedString*)displayString
 {
   NSString *str = [NSString stringWithFormat:@"%@: %d Matches", [self.document valueForKey:@"name"], [self.matches count]];
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:str] autorelease]; 
-  return att;
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str]; 
+  return [att autorelease];
 }
 
 

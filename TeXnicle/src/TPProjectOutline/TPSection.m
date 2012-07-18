@@ -125,7 +125,7 @@
 - (NSAttributedString*)textForDisplayWithColor:(NSColor*)color details:(BOOL)showDetails
 {
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:self.name] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.name]; 
     
   [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
   
@@ -149,7 +149,7 @@
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
   [ps release];
     
-  return att;  
+  return [att autorelease];
 }
 
 

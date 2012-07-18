@@ -74,9 +74,7 @@
 - (NSMenu*)defaultMenu
 {
 	
-	NSMenu *theMenu = [[[NSMenu alloc] 
-											initWithTitle:@"Project Tree Context Menu"] 
-										 autorelease];
+	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Project Tree Context Menu"];
 	
 	[theMenu setAutoenablesItems:NO];
 	
@@ -96,7 +94,7 @@
 	[theMenu addItem:menuItem];
 	[menuItem release];
 	
-	return theMenu;
+	return [theMenu autorelease];
 }
 
 - (IBAction) addExistingFolder:(id)sender
@@ -134,9 +132,7 @@
 	selectedItem = [[self itemAtRow:row] representedObject];  
   [treeController selectItem:selectedItem];
 	
-	NSMenu *theMenu = [[[NSMenu alloc] 
-											initWithTitle:@"Project Item Context Menu"] 
-										 autorelease];
+	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Project Item Context Menu"];
 	
 	[theMenu setAutoenablesItems:NO];
 	
@@ -237,7 +233,7 @@
 	
 	//--------- Add menu
 	
-	return theMenu;        
+	return [theMenu autorelease];
 }
 
 - (IBAction) newSubfolder:(id)sender

@@ -529,8 +529,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       [self.imageViewContainer addSubview:self.imageViewerController.view];
     }        
     if ([currentDoc isImage]) {
-      NSImage *image = [[[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]] autorelease];
+      NSImage *image = [[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]];
       [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
+      [image release];
       [self.imageViewerController enable];
     } else {
       NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:[currentDoc extension]];

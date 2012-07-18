@@ -71,13 +71,10 @@
 
 - (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
 {
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
   NSString *text = self.word;
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:text] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];  
   
@@ -86,15 +83,21 @@
     if ([correctionString length] > 100) {
       correctionString = [NSString stringWithFormat:@"%@ ...", [correctionString substringToIndex:100]];
     }
-    NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:correctionString] autorelease];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:correctionString];
     [str addAttribute:NSForegroundColorAttributeName value:detailsColor range:NSMakeRange(0, [str length])];  
     [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
     [att appendAttributedString:str];
-  }  
+    [str release];
+  }
   
+  // set paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  [ps release];
   
-  return att;
+  return [att autorelease];
 }
 
 

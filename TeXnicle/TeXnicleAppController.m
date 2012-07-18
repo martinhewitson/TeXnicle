@@ -665,9 +665,10 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   NSString *docpath = [pb.projectFileURL path];
   if ([fm fileExistsAtPath:docpath]) {
     
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    [formatter release];
     
     NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
                                      defaultButton:@"Continue"

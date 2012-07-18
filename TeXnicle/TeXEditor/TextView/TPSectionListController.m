@@ -319,13 +319,14 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
 			arg = [arg stringByTrimmingCharactersInSet:ws];
 			NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
-			NSMutableAttributedString *adisp = [[[NSMutableAttributedString alloc] initWithString:disp] autorelease];
+			NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
 			[adisp addAttribute:NSForegroundColorAttributeName
 										value:[NSColor lightGrayColor]
 										range:NSMakeRange(0, [type length])];
 			
 			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 			[dict setObject:adisp forKey:@"title"];
+      [adisp release];
 			[dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
 			[found addObject:dict];
 		}
@@ -337,13 +338,14 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
     for (Bookmark *b in bookmarks) {
       if (b.displayString != nil) {
-        NSMutableAttributedString *str = [[b.displayString mutableCopy] autorelease];
+        NSMutableAttributedString *str = [b.displayString mutableCopy];
         [str addAttribute:NSForegroundColorAttributeName
                     value:[NSColor blueColor]
                     range:NSMakeRange(0, [str length])];
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:str forKey:@"title"];
+        [str release];
         NSInteger index = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
         [dict setObject:[NSNumber numberWithInteger:index] forKey:@"index"];
         [found addObject:dict];
@@ -394,12 +396,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		
 	if (!sameMenu) {
 		
-//		NSLog(@"Different menu");
-//    NSLog(@"Results: %@", results);
-		// can we return to the same selection?
-//		NSString *selectedTitle = [[popupMenu selectedItem] title];
-//		NSInteger selectedTag   = [[popupMenu selectedItem] tag];
-		
 		[popupMenu removeAllItems];		
     [self addTitle];
 		for (NSDictionary *result in results) {
@@ -408,32 +404,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			[[popupMenu lastItem] setTag:[[result valueForKey:@"index"] intValue]];
 		}
     
-    // add bookmarks
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
-//      NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
-//      NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
-//      for (Bookmark *b in bookmarks) {
-//        NSMutableAttributedString *str = [[b.displayString mutableCopy] autorelease];
-//        [str addAttribute:NSForegroundColorAttributeName
-//                      value:[NSColor blueColor]
-//                      range:NSMakeRange(0, [str length])];
-//        [popupMenu addItemWithTitle:[str string]];
-//        [[popupMenu lastItem] setAttributedTitle:str];
-//        NSInteger linenumber = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
-//        [[popupMenu lastItem] setTag:linenumber];
-//      }
-//    }
-    
-    
-//    NSLog(@"Menus %@", [popupMenu itemArray]);
     [popupMenu selectItemAtIndex:0];
-    
-    
-    
-		    
-//		if (![popupMenu selectItemWithTag:selectedTag]) {
-//			[popupMenu selectItemWithTitle:selectedTitle];
-//		}		
+
 	}
 	
 	[desc release];		
@@ -444,12 +416,13 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
   [popupMenu setTitle:TPsectionListPopupTitle];
   [popupMenu addItemWithTitle:TPsectionListPopupTitle];
   
-  NSMutableAttributedString *titleString = [[[NSMutableAttributedString alloc] initWithString:@"Jump to section..."] autorelease];
+  NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Jump to section..."];
   [titleString addAttribute:NSForegroundColorAttributeName
                       value:[NSColor lightGrayColor]
                       range:NSMakeRange(0, [titleString length])];
   
   [[popupMenu lastItem] setAttributedTitle:titleString];
+  [titleString release];
   [[popupMenu lastItem] setTag:0];
 }
 

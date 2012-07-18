@@ -237,8 +237,9 @@
   for (FileEntity *newFile in newFiles) {
     TPLabelsSet *set = [self setForFile:newFile];
     if (set == nil) {
-      set = [[[TPLabelsSet alloc] initWithFile:newFile labels:[self labelsView:self labelsForFile:newFile]] autorelease];
+      set = [[TPLabelsSet alloc] initWithFile:newFile labels:[self labelsView:self labelsForFile:newFile]];
       [self.sets addObject:set];
+      [set release];
     } else {
       // update the labels
       NSArray *newLabels = [self labelsView:self labelsForFile:newFile];

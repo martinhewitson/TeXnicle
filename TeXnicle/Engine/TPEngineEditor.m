@@ -101,9 +101,10 @@
                            atPath:path
                      traverseLink:YES];
   
-  MHFileReader *fr = [[[MHFileReader alloc] initWithEncodingNamed:[sender title]] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:[sender title]];
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
-	
+	[fr release];
+  
 	if (str) {
 		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
 	}
@@ -120,9 +121,9 @@
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:attStr];
 	
 	NSString *str = [string string];  
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   BOOL res = [fr writeString:str toURL:absoluteURL];
-  
+  [fr release];
 	[string release];
 	return res;
 }
@@ -131,9 +132,10 @@
 {
 //	NSStringEncoding encoding;
   
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
-	
+	[fr release];
+  
 	if (str) {
 		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
 		return YES;

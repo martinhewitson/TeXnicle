@@ -37,7 +37,7 @@
   
   
   // get the encoding of this file
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]]; 
   
   // write contents
@@ -64,6 +64,9 @@
   } else {
     // ??
   }
+  
+  // release file reader
+  [fr release];
   
 }
 

@@ -213,6 +213,9 @@
 - (void) dismiss
 {
 //  NSLog(@"Dismiss");
+  if (attachedWindow == nil || parentWindow == nil) {
+    return;
+  }
   
 	if ([[parentWindow childWindows] containsObject:attachedWindow]) {
 		[parentWindow removeChildWindow:attachedWindow];

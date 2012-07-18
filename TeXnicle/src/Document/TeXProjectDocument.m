@@ -236,13 +236,14 @@
   NSString *projectName = self.project.name;
   
   if ((pStore != nil) && (projectName != nil)) {
-    NSMutableDictionary *metadata = [[[psc metadataForPersistentStore:pStore] mutableCopy] autorelease];
+    NSMutableDictionary *metadata = [[psc metadataForPersistentStore:pStore] mutableCopy];
     if (metadata == nil) {
-      metadata = [NSMutableDictionary dictionary];
+      metadata = [[NSMutableDictionary alloc] init];
     }
     [metadata setObject:[NSArray arrayWithObject:projectName]
                  forKey:(NSString *)kMDItemKeywords];
     [psc setMetadata:metadata forPersistentStore:pStore];
+    [metadata release];
     return YES;
   }
   return NO;
@@ -757,7 +758,7 @@
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
   NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc] autorelease]; 
+  ProjectEntity *project = [[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
   
   // set name and folder of the project
   NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
@@ -770,6 +771,10 @@
   
   NSError *error = nil;
   BOOL success = [moc save:&error];
+  
+  // release project
+  [project release];
+  
   if (success == NO) {
     [NSApp presentError:error];
     return;
@@ -855,9 +860,10 @@
   // Remove file if it is there
   NSFileManager *fm = [NSFileManager defaultManager];
   if ([fm fileExistsAtPath:path]) {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [path stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
+    [formatter release];
     NSError *moveError = nil;
     [fm moveItemAtPath:path toPath:movedPath error:&moveError];
     if (moveError) {
@@ -2716,7 +2722,6 @@
 	NSString *code = nil;
 	for (NSDictionary *dict in templateArray) {
 		if ([[dict valueForKey:@"Name"] isEqual:@"Article"]) {
-      //			code = [[[NSAttributedString alloc] initWithString:[dict valueForKey:@"Code"]] autorelease];
 			code = [NSString stringWithString:[dict valueForKey:@"Code"]];
 			break;
 		}
@@ -3408,9 +3413,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
 //  NSLog(@"Clicked on PDF in project...");
-  MHSynctexController *sync = [[[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]] autorelease];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  [sync release];
+  
   sourcefile = [sourcefile stringByStandardizingPath];  
   if ([sourcefile isAbsolutePath]) {
 //    NSLog(@"    source file is absolute path");
@@ -3422,7 +3429,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.openDocuments addDocument:file select:YES];
   if (file) {
     [self.openDocuments selectTabForFile:file];
-    [self.texEditorViewController.textView goToLine:lineNumber];
+    [self.texEditorViewController.textView goToLine:(int)lineNumber];
   }
 }
 

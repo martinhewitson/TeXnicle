@@ -120,8 +120,9 @@
               filepath = [filepath stringByAppendingPathExtension:@"tex"];
             }
           }
-          MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
-          subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]]; 
+          MHFileReader *fr = [[MHFileReader alloc] init];
+          subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
+          [fr release];
           if (subtext) 
             subfile = [NSURL fileURLWithPath:filepath];
         }

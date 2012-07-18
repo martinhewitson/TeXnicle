@@ -100,21 +100,19 @@
 			
 			NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[symbol valueForKey:@"Image"]];
 //			NSLog(@"Loading image: %@", imagePath);			
-			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
+			NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
 //      NSLog(@" ... %@", image);
 			if (!image) {
 //        NSLog(@"... Generating image");
-				image = [self generateImageForCode:[symbol valueForKey:@"Code"] 
+				image = [[self generateImageForCode:[symbol valueForKey:@"Code"]
 																		atPath:imagePath 
-																inMathMode:[[symbol valueForKey:@"mathMode"] boolValue]];
+																inMathMode:[[symbol valueForKey:@"mathMode"] boolValue]] retain];
 				if (!image) {
-					image = [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
+					image = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 				}
 			}
 			[symbol setObject:image forKey:@"ImageData"];
-			//[image release];
-			//			[image release];
-			//			NSLog(@"Loaded image data %@", [symbol valueForKey:@"ImageData"]);
+			[image release];
 		}
 	}
 }
@@ -240,9 +238,9 @@
 	
 	// read pdf data in
 //	NSData *data = [NSData dataWithContentsOfFile:croppedPDF];
-	NSImage *pdfimage = [[[NSImage alloc] initWithContentsOfFile:croppedPDF] autorelease];
+	NSImage *pdfimage = [[NSImage alloc] initWithContentsOfFile:croppedPDF];
 	//NSLog(@"made image at: %@", aPath);
-	return pdfimage;
+	return [pdfimage autorelease];
 }
 
 

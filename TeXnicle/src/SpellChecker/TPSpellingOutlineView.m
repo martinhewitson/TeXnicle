@@ -49,9 +49,7 @@
 - (NSMenu*)defaultMenu
 {
 	
-	NSMenu *theMenu = [[[NSMenu alloc] 
-											initWithTitle:@"Spelling Context Menu"] 
-										 autorelease];
+	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Spelling Context Menu"];
 	
 	[theMenu setAutoenablesItems:NO];
 	
@@ -64,7 +62,7 @@
 	[theMenu addItem:menuItem];
 	[menuItem release];
 		
-	return theMenu;
+	return [theMenu autorelease];
 }
 
 #pragma mark -

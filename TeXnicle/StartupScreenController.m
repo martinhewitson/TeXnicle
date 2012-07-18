@@ -140,10 +140,11 @@
     NSError *error = nil;
     NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];  
     NSDate *date = [atts valueForKey:NSFileModificationDate];
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [dateLabel setStringValue:[formatter stringFromDate:date]];
+    [formatter release];
   }
   
   
@@ -230,7 +231,7 @@
   TPProjectTemplate *selected = [self.templateListViewController selectedTemplate];
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
-  TPProjectTemplateViewer *viewer = [[[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error] autorelease];
+  TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
   if (viewer == nil) {
     [NSApp presentError:error];
     return;
@@ -240,6 +241,7 @@
   NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];
   [wc window];
   [viewer createNewProject:sender];
+  [viewer release];
   [self displayOrCloseWindow:self];
 }
 

@@ -75,7 +75,7 @@
 	NSSize strSize = [string size];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSFont *f = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];									
-  NSMutableAttributedString *smallerString = [[[NSMutableAttributedString alloc] initWithAttributedString:string] autorelease];
+  NSMutableAttributedString *smallerString = [[NSMutableAttributedString alloc] initWithAttributedString:string];
   [smallerString addAttribute:NSFontAttributeName 
                         value:[NSFont fontWithName:[f fontName] size:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]   
                         range:NSMakeRange(0, [string length])];
@@ -88,7 +88,7 @@
 												irect.origin.y+irect.size.height/2.0-smallSize.height/2.0, 
 												strSize.width, strSize.height);
 	[smallerString drawInRect:r];
-	
+	[smallerString release];
 }
 
 - (NSSize) cellSize

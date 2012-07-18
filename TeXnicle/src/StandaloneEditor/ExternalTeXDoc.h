@@ -221,7 +221,7 @@
 @property (retain) PaletteController *palette;
 @property (assign) IBOutlet NSView *paletteContainerView;
 
-@property(readwrite, assign) NSMutableAttributedString *documentData;
+@property (readwrite, retain) NSMutableAttributedString *documentData;
 @property (retain) TeXEditorViewController *texEditorViewController;
 @property (assign) IBOutlet NSView *texEditorContainer;
 @property (retain) NSDate *fileLoadDate;

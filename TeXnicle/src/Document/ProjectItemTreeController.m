@@ -130,11 +130,12 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType,nil]];
 	// apply our custom ImageAndTextCell for rendering the first column's cells
 	NSTableColumn *tableColumn = [outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:YES];
 	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
 	[tableColumn setDataCell:imageAndTextCell];
-	
+	[imageAndTextCell release];
+  
 	[outlineView setSortDescriptors:[self treeNodeSortDescriptors]];
 
 	// make sure we have loaded all items before we try to observe them
@@ -375,11 +376,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
 	[moc processPendingChanges];
 	
-//  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
-//  NSLog(@"Making code string with encoding %@", [fr nameOfEncoding:[MHFileReader defaultEncoding]] );
   
 	if (codeStr && ![codeStr isEqual:@""]) {
-//		NSData *data = [codeStr RTFFromRange:NSMakeRange(0, [codeStr length]) documentAttributes:nil];	
 		NSData *data = [codeStr dataUsingEncoding:[MHFileReader defaultEncoding]];
 		[newFile setValue:data forKey:@"content"];
 	} else {

@@ -389,7 +389,7 @@
 {
 	NSMutableAttributedString *attrStr;
 	NSString *contents = [cell stringValue];
-	attrStr = [[[NSMutableAttributedString alloc] initWithString:contents] autorelease];
+	attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
 	NSRange range = NSMakeRange(0, [contents length]);
 
 	// Add font attribute
@@ -404,7 +404,7 @@
 	}
 	[attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
 
-	return attrStr;
+	return [attrStr autorelease];
 }
 
 #pragma mark -

@@ -79,12 +79,12 @@
   [self.outlineView setTarget:self];
   
 	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:NO];
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
-  
+  [imageAndTextCell release];
   
   [self setupSpellChecker];
 
@@ -162,9 +162,7 @@
 
 - (NSMenu*)correctionMenuForWord:(TPMisspelledWord*)word withTarget:(id)target
 {
-  NSMenu *theMenu = [[[NSMenu alloc] 
-											initWithTitle:@"Spelling Item Context Menu"] 
-										 autorelease];
+  NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@"Spelling Item Context Menu"];
 	
 	[theMenu setAutoenablesItems:NO];
 	
@@ -206,7 +204,7 @@
     
   }  
   
-  return theMenu;
+  return [theMenu autorelease];
 }
 
 
@@ -347,8 +345,9 @@
   if ([self.checkedFiles count] > 0) {
     checkedFile = [self.checkedFiles objectAtIndex:0];
   } else {
-    checkedFile = [[[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]] autorelease];
+    checkedFile = [[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]];
     [self.checkedFiles addObject:checkedFile];
+    [checkedFile release];
   }
   
   NSDate *lastEdit = [self.delegate lastEdit];

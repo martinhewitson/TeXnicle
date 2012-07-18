@@ -69,23 +69,25 @@
 {
   NSString *lineNumberString = @""; //[self lineNumberString];
   
-  NSMutableAttributedString *att = [[[self displayString] mutableCopy] autorelease]; 
+  NSMutableAttributedString *att = [[self displayString] mutableCopy]; 
   NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:matchRange];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
-  return att;
+  return [att autorelease];
 }
 
 - (NSAttributedString*)displayString
 {
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:[self.match stringByReplacingOccurrencesOfString:@"\n" withString:@" "]] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:[self.match stringByReplacingOccurrencesOfString:@"\n" withString:@" "]]; 
   NSString *lineNumberString = @""; //[self lineNumberString];
-  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:lineNumberString] autorelease];
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:lineNumberString];
   [str addAttribute:NSBackgroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [str length])];
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [str length])];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor colorWithDeviceRed:240.0/255.0 green:240.0/255.0 blue:180.0/255.0 alpha:1.0] range:self.subrange];
   [str appendAttributedString:att];
-  return str;
+  [att release];
+  
+  return [str autorelease];
 }
 
 @end

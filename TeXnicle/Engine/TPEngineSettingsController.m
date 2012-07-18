@@ -87,7 +87,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   
   NSArray *languageIDs = [[NSSpellChecker sharedSpellChecker] userPreferredLanguages];
   for (NSString *languageID in languageIDs) {
-    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:languageID];
     NSString *displayNameString = [locale displayNameForKey:NSLocaleIdentifier value:languageID];
     if (displayNameString == nil) {
       displayNameString = languageID;
@@ -95,6 +95,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     [languageSelector addItemWithTitle:displayNameString];
     menuItem = [languageSelector itemWithTitle:displayNameString];
     [menuItem setRepresentedObject:locale];
+    [locale release];
   }
   
   // select the current language
@@ -103,9 +104,10 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     if ([languageID isEqualToString:TPSpellingAutomaticByLanguage]) {
       [languageSelector selectItemAtIndex:0];
     } else {
-      NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:languageID] autorelease];
+      NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:languageID];
       NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
       [languageSelector selectItemAtIndex:index];
+      [locale release];
     }
   }
 }

@@ -78,12 +78,12 @@
   [self.outlineView setTarget:self];
   
 	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:NO];
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
-  
+  [imageAndTextCell release];
 }
 
 - (void) handleBookmarkChangedNotification:(NSNotification*)aNote

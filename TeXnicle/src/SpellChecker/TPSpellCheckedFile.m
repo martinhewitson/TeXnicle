@@ -56,15 +56,6 @@
   [super dealloc];
 }
 
-
-//- (NSString*)displayString
-//{
-//  NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-//  [formatter setDateStyle:NSDateFormatterNoStyle];
-//  [formatter setTimeStyle:NSDateFormatterShortStyle];  
-//  return [NSString stringWithFormat:@"%@ | %d (last checked %@)", [self.file name], [self.words count], [formatter stringFromDate:self.lastCheck]];
-//}
-
 - (NSAttributedString*)selectedDisplayString
 {
   return [self stringForDisplayWithColor:[NSColor alternateSelectedControlTextColor] detailsColor:[NSColor alternateSelectedControlTextColor]];
@@ -78,9 +69,6 @@
 - (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
 {
   
-  NSMutableParagraphStyle *ps = [[[NSMutableParagraphStyle alloc] init] autorelease];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   
   NSString *filename = nil;
   if ([file isKindOfClass:[FileEntity class]]) {
@@ -89,7 +77,7 @@
     filename = [self.file lastPathComponent];
   }
   
-  NSMutableAttributedString *att = [[[NSMutableAttributedString alloc] initWithString:filename] autorelease]; 
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:filename]; 
   
   NSString *wordCountString = nil; 
   if ([self.words count] >= 1000) {
@@ -97,24 +85,32 @@
   } else {
     wordCountString = [NSString stringWithFormat:@" [%d] ", [self.words count]];
   }
-  NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:wordCountString] autorelease];
+  
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:wordCountString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
   [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
   [att appendAttributedString:str];
+  [str release];
   
-  NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   [formatter setDateStyle:NSDateFormatterNoStyle];
   [formatter setTimeStyle:NSDateFormatterShortStyle];  
   NSString *updateString = [NSString stringWithFormat:@"(updated: %@)", [formatter stringFromDate:self.lastCheck]];
-  str = [[[NSMutableAttributedString alloc] initWithString:updateString] autorelease];
+  str = [[NSMutableAttributedString alloc] initWithString:updateString];
   [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
   [str addAttribute:NSForegroundColorAttributeName value:detailsColor range:NSMakeRange(0, [str length])];
   [att appendAttributedString:str];
+  [str release];
+  [formatter release];
   
   // apply paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  [ps release];
   
-  return att;
+  return [att autorelease];
 }
 
 
