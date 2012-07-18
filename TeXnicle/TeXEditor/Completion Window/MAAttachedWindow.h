@@ -142,6 +142,9 @@ typedef enum _MAWindowPosition {
 - (NSColor *)windowBackgroundColor;                    // See note 4 below.
 - (void)setBackgroundColor:(NSColor *)value;
 
+- (void) moveToPoint:(NSPoint)aPoint;
+- (NSPoint)currentPoint;
+
 /*
  Notes regarding accessor methods:
  

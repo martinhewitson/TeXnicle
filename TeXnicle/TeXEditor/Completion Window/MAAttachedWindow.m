@@ -177,6 +177,18 @@
 
 #pragma mark Geometry
 
+- (NSPoint)currentPoint
+{
+  return _point;
+}
+
+- (void) moveToPoint:(NSPoint)aPoint
+{
+  _point = aPoint;
+	NSDisableScreenUpdates();
+	[self _updateGeometry];
+	NSEnableScreenUpdates();
+}
 
 - (void)_updateGeometry
 {
