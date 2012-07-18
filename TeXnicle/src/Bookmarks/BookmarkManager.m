@@ -130,11 +130,10 @@
 - (Bookmark*)selectedBookmark
 {
   NSInteger row = [self.outlineView selectedRow];
-  if (row >= 0 && row < [[self allBookmarks] count]) {
-    id item = [self.outlineView itemAtRow:row];
-    if ([item isKindOfClass:[Bookmark class]]) {
-      return item;
-    }
+  
+  id item = [self.outlineView itemAtRow:row];
+  if ([item isKindOfClass:[Bookmark class]]) {
+    return item;
   }
   return nil;
 }
