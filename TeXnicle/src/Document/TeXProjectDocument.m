@@ -148,7 +148,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
   [super dealloc];
 }
 
@@ -553,7 +553,7 @@
 
 - (void) cleanUp
 {
-  NSLog(@"----------- cleanup");
+//  NSLog(@"----------- cleanup");
   
   // stop gathering metadata
   [self stopAllMetadataOperations];
@@ -677,8 +677,8 @@
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
-  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
-  _windowIsClosing = YES;  
+//  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
+  _windowIsClosing = YES;
     
   [self cleanUp];
   
