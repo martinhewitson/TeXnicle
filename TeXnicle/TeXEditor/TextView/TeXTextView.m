@@ -615,6 +615,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
 //  NSLog(@"Frame change");
+  [popupList dismiss];
   [self colorVisibleText];
   [self highlightMatchingWords];
   [self updateEditorRuler];
@@ -865,12 +866,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (void) completeFromList:(NSArray*)aList
-{  
+{
+//  NSLog(@"Complete from list");
 	if ([aList count]==0) {
     [popupList dismiss];
 		return;
   }
-	
+  
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
 //  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
@@ -884,6 +886,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [popupList setDelegate:self];
     [popupList showPopup];	
   } else {
+    NSPoint point = [self listPointForCurrentWord];
+    NSPoint current = [popupList currentPoint];
+    NSPoint wp = [self convertPoint:point toView:nil];
+    // update the window in y
+    if (current.y == 0.0 && current.x == 0.0) {
+      [popupList moveToPoint:wp];
+    } else {
+      [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+    }
     [popupList setList:aList];
     [popupList showPopup];
   }
@@ -909,6 +920,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [popupList setDelegate:self];
     [popupList showPopup];	
   } else {
+    NSPoint point = [self listPointForCurrentWord];
+    NSPoint current = [popupList currentPoint];
+    NSPoint wp = [self convertPoint:point toView:nil];
+    // update the window in y
+    if (current.y == 0.0 && current.x == 0.0) {
+      [popupList moveToPoint:wp];
+    } else {
+      [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+    }
     [popupList setList:aList];
     [popupList showPopup];
   }
@@ -928,13 +948,23 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       //			NSLog(@"Point for word:%@", NSStringFromPoint(point));
 			NSPoint wp = [self convertPoint:point toView:nil];
 			[self clearSpellingList];
-			popupList = [[TPPopupListWindowController alloc] initWithEntries:guesses
-																															 atPoint:wp
-																												inParentWindow:[self window]
-																																	mode:TPPopupListSpell
-																																 title:@"Correct..."];
-			[popupList setDelegate:self];
-			[popupList showPopup];
+      if (popupList == nil) {
+        popupList = [[TPPopupListWindowController alloc] initWithEntries:guesses
+                                                                 atPoint:wp
+                                                          inParentWindow:[self window]
+                                                                    mode:TPPopupListSpell
+                                                                   title:@"Correct..."];
+        [popupList setDelegate:self];
+        [popupList showPopup];
+      } else {
+        NSPoint point = [self listPointForCurrentWord];
+        NSPoint current = [popupList currentPoint];
+        NSPoint wp = [self convertPoint:point toView:nil];
+        // update the window in y
+        [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+        [popupList setList:guesses];
+        [popupList showPopup];
+      }
 		}
 	}
 }
@@ -1034,12 +1064,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithAttributedString:text] autorelease];
   
 	[string unfoldAllInRange:aRange max:max];
-	
-	[[self textStorage] deleteCharactersInRange:aRange];
-	[[self textStorage] insertAttributedString:string atIndex:aRange.location];
-  
-  [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+	if ([[string string] isEqualToString:[text string]] == NO) {
+    // then we unfoled
+    [[self textStorage] deleteCharactersInRange:aRange];
+    [[self textStorage] insertAttributedString:string atIndex:aRange.location];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
+    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+  }
 }
 
 - (void) unfoldTextWithFolder:(MHCodeFolder*)aFolder
@@ -1745,7 +1777,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (void) insertNewline:(id)sender
-{	
+{
+  if ([popupList isVisible]) {
+    [popupList selectSelectedItem:self];
+    return;
+  }
+  
 	// read the last line
 	NSRange selRange = [self selectedRange];
 	
@@ -2136,7 +2173,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *command = [self currentCommand];
   NSString *arg = [self currentArgument];
 	
-//  NSLog(@"Completing... %@", word);
+  NSLog(@"Completing... %@", word);
+  command = word;
 //	NSLog(@"       or command: %@", command);
 //	NSLog(@"       or arg: %@", arg);
   
@@ -2200,7 +2238,55 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       self.shiftKeyOn = NO;
 		}		
 	}
+  
+  if ([popupList isVisible]) {
+    // move down
+    if ([theEvent keyCode] == 125 ) {
+      [popupList moveDown:self];
+      return;
+    }
+    // move up
+    if ([theEvent keyCode] == 126 ) {
+      [popupList moveUp:self];
+      return;
+    }
     
+    // move right
+    if ([theEvent keyCode] == 124 ) {
+      // if the next character is a newline or whitespace, we dismiss the popup
+      NSRange sel = [self selectedRange];
+      if (sel.location < [[self string] length]) {
+        unichar c = [[self string] characterAtIndex:sel.location];
+        if ([whitespaceCharacterSet characterIsMember:c] || [newLineCharacterSet characterIsMember:c]) {
+          [popupList dismiss];
+        } else {
+          [super keyDown:theEvent];
+          [self performSelector:@selector(completeStuff:) withObject:self afterDelay:0];
+          return;
+        }
+      }
+    }
+    
+    // move left
+    if ([theEvent keyCode] == 123 ) {
+      // if the previous character is a newline or whitespace, we dismiss the popup
+      NSRange sel = [self selectedRange];
+      if (sel.location > 0) {
+        unichar c = [[self string] characterAtIndex:sel.location-1];
+        if ([whitespaceCharacterSet characterIsMember:c] || [newLineCharacterSet characterIsMember:c]) {
+          [popupList dismiss];
+        } else {
+          // update the popup list
+          [super keyDown:theEvent];
+          [self performSelector:@selector(completeStuff:) withObject:self afterDelay:0];
+          return;
+        }
+      }
+    }
+    
+    
+  }
+      
 	[super keyDown:theEvent];
 }
 
