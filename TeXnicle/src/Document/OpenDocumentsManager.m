@@ -285,7 +285,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
-          [self.texEditorViewController.textView applyFontAndColor:YES];
           if ([[self.tabView selectedTabViewItem] identifier] != currentDoc) {
             [self selectTabForFile:currentDoc];
           }
