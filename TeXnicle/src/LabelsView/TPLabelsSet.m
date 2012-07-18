@@ -39,7 +39,7 @@
   self = [super init];
   if (self) {
     self.file = aFile;
-    [self setLabelsFromStringArray:someLabels];
+    self.labels = someLabels;
   }
   return self;
 }
@@ -49,17 +49,6 @@
   self.labels = nil;
   [super dealloc];
 }
-
-- (void) setLabelsFromStringArray:(NSArray*)array
-{
-  NSMutableArray *newLabels = [NSMutableArray array];
-  for (NSString *string in array) {
-    TPLabel *l = [TPLabel labelWithFile:self.file text:string];
-    [newLabels addObject:l];
-  }
-  self.labels = [NSArray arrayWithArray:newLabels];
-}
-
 
 - (NSString*) name
 {

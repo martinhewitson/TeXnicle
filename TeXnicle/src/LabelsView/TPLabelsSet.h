@@ -40,6 +40,5 @@
 
 - (id) initWithFile:(FileEntity*)aFile labels:(NSArray*)someLabels;
 
-- (void) setLabelsFromStringArray:(NSArray*)array;
 
 @end

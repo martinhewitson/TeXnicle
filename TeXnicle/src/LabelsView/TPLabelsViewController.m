@@ -86,7 +86,7 @@
   if (anItem == self.revealButton) {
     NSInteger row = [self.outlineView selectedRow];
     id item = [self.outlineView itemAtRow:row];
-    if ([item isKindOfClass:[NSString class]] == NO) {
+    if ([item isKindOfClass:[TPLabel class]] == NO) {
       return NO;
     }
   }
@@ -114,7 +114,7 @@
 {
   NSInteger row = [self.outlineView selectedRow];
   id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[NSString class]]) {
+  if ([item isKindOfClass:[TPLabel class]]) {
     [self labelsView:self didSelectLabel:item];
   }
 }
@@ -242,7 +242,7 @@
     } else {
       // update the labels
       NSArray *newLabels = [self labelsView:self labelsForFile:newFile];
-      [set setLabelsFromStringArray:newLabels];
+      set.labels = newLabels;
     }
   }
   //  NSLog(@"I have now %u sets", [self.files count]);

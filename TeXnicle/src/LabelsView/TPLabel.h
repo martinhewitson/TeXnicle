@@ -19,4 +19,6 @@
 + (id) labelWithFile:(id)aFile text:(NSString*)aString;
 - (id) initWithFile:(id)aFile text:(NSString*)aString;
 
+- (NSString*)string;
+
 @end

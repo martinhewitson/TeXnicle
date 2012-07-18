@@ -34,4 +34,9 @@
   [super dealloc];
 }
 
+- (NSString*)string
+{
+  return self.text;
+}
+
 @end
