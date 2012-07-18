@@ -117,28 +117,15 @@
   return att;
 }
 
-#pragma mark -
-#pragma mark delegate
 
-- (NSString*)spellCheckFileOperationTextToCheck:(TPSpellCheckFileOperation*)operation
+- (void) updateWithWords:(NSArray*)anArray
 {
-  if ([self.file isKindOfClass:[FileEntity class]]) {
-    return [(FileEntity*)self.file workingContentString];
-  }
-  
-  return self.text;
-}
-
-- (void)spellCheckFileOperationDidCompleteCheck:(TPSpellCheckFileOperation*)operation
-{
-  self.words = [NSArray arrayWithArray:operation.words];
-  for (TPMisspelledWord *word in self.words) {
-    word.parent = self;
+  if (anArray) {
+    self.words = [NSArray arrayWithArray:anArray];
   }
   self.lastCheck = [NSDate date];
   self.needsUpdate = NO;
 }
-
 
 
 @end

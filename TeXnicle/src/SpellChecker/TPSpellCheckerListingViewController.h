@@ -57,6 +57,7 @@
   HHValidatedButton *correctButton;
   HHValidatedButton *revealButton;
   HHValidatedButton *learnButton;
+  HHValidatedButton *forceCheckButton;
     
   NSOperationQueue* aQueue;
   NSProgressIndicator *progressIndicator;
@@ -68,6 +69,7 @@
 @property (assign) IBOutlet HHValidatedButton *correctButton;
 @property (assign) IBOutlet HHValidatedButton *revealButton;
 @property (assign) IBOutlet HHValidatedButton *learnButton;
+@property (assign) IBOutlet HHValidatedButton *forceCheckButton;
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) id<TPSpellCheckerListingDelegate> delegate;
 @property (retain) NSTimer *spellCheckTimer;

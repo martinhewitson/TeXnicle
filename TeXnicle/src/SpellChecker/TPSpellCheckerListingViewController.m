@@ -31,8 +31,6 @@
 #import "FileEntity.h"
 #import "externs.h"
 #import "ImageAndTextCell.h"
-#import "TPSimpleSpellcheckOperation.h"
-#import "TPSpellCheckFileOperation.h"
 
 
 @interface TPSpellCheckerListingViewController ()
@@ -48,6 +46,7 @@
 @synthesize revealButton;
 @synthesize correctButton;
 @synthesize learnButton;
+@synthesize forceCheckButton;
 @synthesize progressIndicator;
 @synthesize aQueue;
 
@@ -352,34 +351,73 @@
     [self.checkedFiles addObject:checkedFile];
   }
   
-  if (checkedFile.lastCheck) {
   NSDate *lastEdit = [self.delegate lastEdit];
   NSDate *lastCheck = checkedFile.lastCheck;
-    if ([lastEdit timeIntervalSinceDate:lastCheck] <= 0) {
-      return;
-    }    
+  if (checkedFile.needsUpdate || [lastEdit timeIntervalSinceDate:lastCheck] > 0 || lastCheck == nil) {
+    // set text
+    checkedFile.text = [self stringToCheck];
+    // check the file
+    [self checkFile:checkedFile];
   }
   
-  // set text
-  checkedFile.text = [self stringToCheck];
+}
+
+- (void) checkFile:(TPSpellCheckedFile*)aFile
+{
+  __block TPSpellCheckedFile *checkedFile = aFile;
   
-  TPSpellCheckFileOperation *op = [[TPSpellCheckFileOperation alloc] initWithDelegate:checkedFile];
-  [op setCompletionBlock:^{
-    [self performSelectorOnMainThread:@selector(notifyOfUpdate:) withObject:op waitUntilDone:YES];
-    [op setCompletionBlock:nil];
-  }];
+  NSString *string = nil;
   
+  if ([checkedFile.file isKindOfClass:[FileEntity class]]) {
+    string = [checkedFile.file workingContentString];
+  } else {
+    string = checkedFile.text;
+  }
+  
+  if (string == nil || [string length] == 0) {
+    return;
+  }
+  
+  // start progress indicator and track this file count
+  checkingFiles++;
   [self.progressIndicator startAnimation:self];
-  [self.aQueue addOperation:op];
-}
+  
+  // check string
+  NSSpellChecker *checker = [NSSpellChecker sharedSpellChecker];
+  [checker requestCheckingOfString:string
+                             range:NSMakeRange(0, [string length])
+                             types:NSTextCheckingTypeSpelling
+                           options:nil
+            inSpellDocumentWithTag:0
+                 completionHandler:^(NSInteger sequenceNumber, NSArray *results, NSOrthography *orthography, NSInteger wordCount) {
+                   
+                   NSMutableArray *words = [[NSMutableArray alloc] init];
+                   
+                   for (NSTextCheckingResult *result in results) {
+                     NSString *misspelledWord = [string substringWithRange:result.range];
+                     __block NSMutableArray *guesses = [[NSMutableArray alloc] init];
+                     dispatch_sync(dispatch_get_main_queue(), ^{
+                       NSArray *corrections = [checker guessesForWordRange:NSMakeRange(0, [misspelledWord length]) inString:misspelledWord language:nil inSpellDocumentWithTag:0];
+                       for (NSString *c in corrections) {
+                         [guesses addObject:c];
+                       }
+                     });
+                     
+                     TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:guesses range:result.range parent:checkedFile];
+                     [guesses release];
+                     [words addObject:word];
+                     [word release];
+                   }
+                   
+                   [checkedFile performSelectorOnMainThread:@selector(updateWithWords:) withObject:words waitUntilDone:NO];
+                   [words release];
+                   
+                   [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:YES];
+                   
+                   
+                 }];
 
-- (void) notifyOfUpdate:(TPSimpleSpellcheckOperation*)op
-{  
-  // update UI
-  [self.progressIndicator stopAnimation:self];
-  [self.outlineView reloadData];
 }
-
 
 
 - (void) spellCheckProjectFiles
@@ -417,47 +455,24 @@
     
     for (FileEntity *file in sortedItems) {
       if ([[file valueForKey:@"isText"] boolValue]) {
-        
-        BOOL shouldCheck = NO;
-        
+                
         // File's object
-        TPSpellCheckedFile *checkedFile = [self checkedFileForFile:file];
+        __block TPSpellCheckedFile *checkedFile = [self checkedFileForFile:file];
         
         if (checkedFile == nil) {
           checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
           [self.checkedFiles addObject:checkedFile];
           [checkedFile release];
-          shouldCheck = YES;
         }
         
-        if (shouldCheck == NO) {
-          // check the last edit time against the last checked time
-          NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
-          NSDate *lastCheck = checkedFile.lastCheck;
-          if ([lastEdit timeIntervalSinceDate:lastCheck] > 0) {
-            shouldCheck = YES;
-          }            
-        }  
+        // check the last edit time against the last checked time
+        NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
+        NSDate *lastCheck = checkedFile.lastCheck;
         
-        if (checkedFile.needsUpdate) {
-          shouldCheck = YES;
-        }
-        
-        if (shouldCheck) {
+        if (checkedFile.needsUpdate || [lastEdit timeIntervalSinceDate:lastCheck] > 0 || lastCheck == nil) {
           //            NSLog(@"+ Checking file %@", [file name]);
-          checkingFiles++;
           
-          
-          TPSpellCheckFileOperation *op = [[[TPSpellCheckFileOperation alloc] initWithDelegate:checkedFile] autorelease];
-          
-          [op setCompletionBlock:^{
-            [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:YES];
-            [op setCompletionBlock:nil];
-          }];
-          
-          // start progress indicator and queue the operation
-          [self.progressIndicator startAnimation:self];
-          [self.aQueue addOperation:op];
+          [self checkFile:checkedFile];
           
         } // end if shouldCheck
       } // end if file is text file          
@@ -667,8 +682,14 @@
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
+  if (anItem == self.forceCheckButton){
+    if (checkingFiles == 0) {
+      return YES;
+    }
+  }
+  
   if (anItem == self.revealButton){
-    if ([self selectedWord] && checkingFiles == 0) {
+    if ([self selectedWord]) {
       return YES;
     }
   }
