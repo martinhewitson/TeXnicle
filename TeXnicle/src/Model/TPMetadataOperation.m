@@ -76,13 +76,13 @@
     NSArray *citationsFound = [self.text citations];		
     [newCitations addObjectsFromArray:citationsFound];			
     
-    // add any citations from a bibliography entries
+    // add any citations from any bib files
     if ([self isCancelled]) return;
-    NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
-    [newCitations addObjectsFromArray:entries];
+    if ([self.file.extension isEqualToString:@"bib"]) {
+      NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
+      [newCitations addObjectsFromArray:entries];
+    }
     
-    self.citations = [NSArray arrayWithArray:newCitations];
-        
     //--------------- Labels    
     if ([self isCancelled]) return;
     
