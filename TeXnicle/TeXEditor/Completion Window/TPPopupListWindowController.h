@@ -54,6 +54,7 @@
 
 @property (readwrite, copy) NSString *title;
 @property (readwrite, assign) id delegate;
+@property (readonly) NSUInteger mode;
 
 - (IBAction) searchFieldAction:(id)sender;
 

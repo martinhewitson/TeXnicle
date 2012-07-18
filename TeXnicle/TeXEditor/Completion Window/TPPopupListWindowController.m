@@ -26,7 +26,6 @@
 //
 
 #import "TPPopupListWindowController.h"
-#import "BibliographyEntry.h"
 
 #define MAX_ENTRY_LENGTH 200
 
@@ -35,6 +34,7 @@
 @synthesize delegate;
 @synthesize title;
 @synthesize isVisible;
+@synthesize mode;
 
 - (id) initWithEntries:(NSArray*)entryArray 
 							 atPoint:(NSPoint)aPoint 
@@ -42,7 +42,6 @@
 								mode:(NSUInteger)aMode
 								 title:(NSString*)aTitle
 {
-  NSLog(@"Init popup list");
 	self = [super initWithNibName:@"TPPopuplistView" bundle:nil];
 	
 	if (self) {
@@ -108,14 +107,16 @@
 		if (f) {
 			for (id entry in entries) {
         NSSize s = NSZeroSize;
-        if ([entry isKindOfClass:[NSAttributedString class]]) {
-          s = [entry size];
-        } else if ([entry isKindOfClass:[BibliographyEntry class]]) {
+        
+        if ([entry respondsToSelector:@selector(attributedString)]) {
           s = [[entry attributedString] size];
+        } else if ([entry respondsToSelector:@selector(string)]) {
+          s = [[entry string] sizeWithAttributes:f];
         } else {
           s = [entry sizeWithAttributes:f];
         }
-				if (s.width > maxWidth) {
+        
+        if (s.width > maxWidth) {
 					maxWidth = s.width;
 				}
 			}
@@ -249,9 +250,9 @@
   
 	id value = [[self filteredEntries] objectAtIndex:row];
   NSString *tag = @"";
-  if ([value isKindOfClass:[BibliographyEntry class]]) {
+  if ([value respondsToSelector:@selector(tag)]) {
     tag = [value valueForKey:@"tag"];
-  } else if ([value isKindOfClass:[NSAttributedString class]]) {    
+  } else if ([value respondsToSelector:@selector(string)]) {
     tag = [value string];    
   } else {
     tag = value;
@@ -298,13 +299,15 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     
 		id value = [[self filteredEntries] objectAtIndex:row];
     
-    if ([value isKindOfClass:[BibliographyEntry class]]) {
+    if ([value respondsToSelector:@selector(attributedString)]) {
       return [value attributedString];
+    } else if ([value respondsToSelector:@selector(string)]) {
+      return [value string];
     } else {
       return value;
     }
     
-	}	
+	}
 	return nil;
 }
 
