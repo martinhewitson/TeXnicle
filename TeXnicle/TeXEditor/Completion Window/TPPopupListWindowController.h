@@ -43,16 +43,13 @@
 	NSWindow *parentWindow;
 	MAAttachedWindow *attachedWindow;
 	NSMutableArray *entries;
-	NSString *searchString;
 	NSPoint point;
 	NSUInteger mode;
 	IBOutlet NSTableView *table;
 	IBOutlet SBGradientView *gradientView;
-	IBOutlet NSSearchField *searchField;
   BOOL isVisible;
 }
 
-@property (nonatomic, copy) NSString *searchString;
 @property (assign) BOOL isVisible;
 
 @property (readwrite, copy) NSString *title;
@@ -74,5 +71,11 @@
 - (NSArray*) filteredEntries;
 - (NSWindow*)window;
 - (void)setList:(NSArray*)aList;
+
+- (IBAction)moveUp:(id)sender;
+- (IBAction)moveDown:(id)sender;
+- (IBAction)selectSelectedItem:(id)sender;
+- (void) moveToPoint:(NSPoint)aPoint;
+- (NSPoint)currentPoint;
 
 @end

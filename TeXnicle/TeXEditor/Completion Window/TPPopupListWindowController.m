@@ -34,7 +34,6 @@
 
 @synthesize delegate;
 @synthesize title;
-@synthesize searchString;
 @synthesize isVisible;
 
 - (id) initWithEntries:(NSArray*)entryArray 
@@ -43,6 +42,7 @@
 								mode:(NSUInteger)aMode
 								 title:(NSString*)aTitle
 {
+  NSLog(@"Init popup list");
 	self = [super initWithNibName:@"TPPopuplistView" bundle:nil];
 	
 	if (self) {
@@ -55,7 +55,6 @@
       [entries addObject:entry];
 		}
 		point = aPoint;
-		self.searchString = nil;
 		
 		TPPopuplistView *view = (TPPopuplistView*)[self view];
 		[view setDelegate:self];
@@ -148,28 +147,25 @@
 																								 atDistance:5.0];
 		[attachedWindow setBorderColor:[NSColor clearColor]];
 		[attachedWindow setBackgroundColor:[NSColor whiteColor]];
-		[attachedWindow setViewMargin:10.0];
+		[attachedWindow setViewMargin:5.0];
 		[attachedWindow setBorderWidth:3.0];
-		[attachedWindow setCornerRadius:10.0];
+		[attachedWindow setCornerRadius:5.0];
 		[attachedWindow setHasArrow:NO];
-		[attachedWindow setDrawsRoundCornerBesideArrow:YES];	
+		[attachedWindow setDrawsRoundCornerBesideArrow:YES];
 		
 		[titleView setStringValue:self.title];
 		[gradientView setStartingColor:[NSColor whiteColor]];
 		[gradientView setEndingColor:[NSColor lightGrayColor]];
 		[gradientView setAngle:270.0];
     
-    [attachedWindow setInitialFirstResponder:table];
-    [searchField setNextKeyView:table];
-    [table setNextKeyView:searchField];
     
 	} // end if !attachedWindow
 }
 
-- (void)keyDown:(NSEvent *)theEvent
-{
-  [self.delegate keyDown:theEvent];
-}
+//- (void)keyDown:(NSEvent *)theEvent
+//{
+//  [self.delegate keyDown:theEvent];
+//}
 
 - (void) dealloc
 {
@@ -180,15 +176,37 @@
 	[super dealloc];
 }
 
+- (void) moveToPoint:(NSPoint)aPoint
+{
+  point = aPoint;
+  [attachedWindow moveToPoint:aPoint];
+  [attachedWindow displayIfNeeded];
+}
+
+- (NSPoint)currentPoint
+{
+  return [attachedWindow currentPoint];
+}
+
 
 - (void) showPopup
 {
 	[self setupWindow];
 	[parentWindow addChildWindow:attachedWindow ordered:NSWindowAbove];	
-	[attachedWindow makeKeyAndOrderFront:self];
+//	[attachedWindow makeKeyAndOrderFront:self];
 	[attachedWindow makeFirstResponder:table];
 	[table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
   self.isVisible = YES;
+}
+
+- (IBAction)moveUp:(id)sender
+{
+  [table moveUp:sender];
+}
+
+- (IBAction)moveDown:(id)sender
+{
+  [table moveDown:sender];
 }
 
 - (void) dismiss
@@ -213,9 +231,15 @@
 #pragma mark -
 #pragma mark List View delegate
 
+- (IBAction)selectSelectedItem:(id)sender
+{
+  NSInteger row = [table selectedRow];
+  [self userSelectedRow:[NSNumber numberWithInteger:row]];
+}
+
 - (void) userSelectedRow:(NSNumber*)aRow
 {
-  NSInteger row = [aRow intValue];
+  NSInteger row = [aRow integerValue];
   if (row<0) {
     row = 0;
   }
@@ -252,23 +276,6 @@
   }
   
   
-}
-
-#pragma mark -
-#pragma mark SearchField delegate
-
-- (IBAction) searchFieldAction:(id)sender
-{
-	NSString *searchFieldText = [searchField stringValue];
-	searchFieldText = [searchFieldText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-	
-	if ([searchFieldText isEqual:@""]) {
-		self.searchString = nil;
-	} else {
-		self.searchString = searchFieldText;
-	}
-	
-	[table reloadData];
 }
 
 #pragma mark -
@@ -311,28 +318,9 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 	return 0;
 }
 
-- (NSArray*) filteredEntries 
+- (NSArray*) filteredEntries
 {
-	if (self.searchString) {
-    NSMutableArray *filteredArray = [NSMutableArray array];
-    for (id entry in entries) {
-      NSString *test = nil;
-      if ([entry isKindOfClass:[NSAttributedString class]]) {
-        test = [entry string];
-      } else if ([entry isKindOfClass:[BibliographyEntry class]]) {
-        test = [[entry attributedString] string];
-      } else {
-        test = entry;
-      }
-      NSRange r = [[test lowercaseString] rangeOfString:[self.searchString lowercaseString]];
-      if (r.location != NSNotFound) {
-        [filteredArray addObject:entry];
-      }
-    }
-		return filteredArray; 
-	} else {
-		return entries;
-	}
+  return entries;
 }
 
 -(NSWindow*)window
