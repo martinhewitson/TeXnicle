@@ -299,7 +299,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     
 		id value = [[self filteredEntries] objectAtIndex:row];
     
-    if ([value respondsToSelector:@selector(attributedString)]) {
+    BOOL isHighlighted = [tableView selectedRow] == row;
+    
+    if (isHighlighted && [value respondsToSelector:@selector(alternativeAttributedString)]) {
+      return [value alternativeAttributedString];
+    } else if ([value respondsToSelector:@selector(attributedString)]) {
       return [value attributedString];
     } else if ([value respondsToSelector:@selector(string)]) {
       return [value string];
