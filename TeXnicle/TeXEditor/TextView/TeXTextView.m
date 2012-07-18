@@ -56,6 +56,8 @@
 #import "MHFileReader.h"
 #import "BibliographyEntry.h"
 
+#import "TPLabel.h"
+
 #import "externs.h"
 
 #define LargeTextWidth  1e7
@@ -2088,7 +2090,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       arg = [arg lowercaseString];
       NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         
-        NSString *testString = [(NSString*)obj lowercaseString];
+        TPLabel *label = (TPLabel*)obj;
+        
+        NSString *testString = [[label string] lowercaseString];
         if ([testString beginsWith:arg]) {
           return YES;
         }
@@ -2179,11 +2183,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[self setSelectedRange:curr];	
   
 	NSString *word = [string substringWithRange:selectedRange];
-	NSString *command = [self currentCommand];
+//	NSString *command = [self currentCommand];
   NSString *arg = [self currentArgument];
 	
-  NSLog(@"Completing... %@", word);
-  command = word;
+//  NSLog(@"Completing... %@", word);
+  NSString *command = word;
 //	NSLog(@"       or command: %@", command);
 //	NSLog(@"       or arg: %@", arg);
   
