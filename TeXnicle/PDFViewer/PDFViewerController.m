@@ -101,7 +101,7 @@
     [self.toggleThumbsButton setState:NSOffState];
   }
   
-  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0];
+  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
   
   // get notified of page changes
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -203,6 +203,7 @@
   [self.prevButton setEnabled:YES];
   [self.nextButton setEnabled:YES];
   [self.statusText setHidden:YES];
+  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
 }
 
 - (void) hideViewer
@@ -476,7 +477,7 @@
 {
   unsigned int newPageIndex;
   
-  newPageIndex = 1+[[self.pdfview document] indexForPage:[self.pdfview currentPage]];
+  newPageIndex = 1l+[[self.pdfview document] indexForPage:[self.pdfview currentPage]];
   
   NSString *label = [NSString stringWithFormat:@"Page %d of %d", newPageIndex, [[self.pdfview document] pageCount]];
   
