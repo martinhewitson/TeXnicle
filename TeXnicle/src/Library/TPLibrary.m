@@ -73,7 +73,15 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 {
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
-  return [appSupportURL URLByAppendingPathComponent:@"TeXnicle"];
+  NSURL *applicationSupportDirectory = [appSupportURL URLByAppendingPathComponent:@"TeXnicle"];
+  if ([fileManager fileExistsAtPath:[applicationSupportDirectory path]] == NO) {
+    NSError *error = nil;
+    if ([fileManager createDirectoryAtPath:[applicationSupportDirectory path] withIntermediateDirectories:YES attributes:nil error:&error] == NO) {
+      [[NSApplication sharedApplication] presentError:error];
+      return nil;
+    }
+  }
+  return applicationSupportDirectory;
 }
 
 // Creates if necessary and returns the managed object model for the application.
