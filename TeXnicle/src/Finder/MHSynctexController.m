@@ -77,6 +77,7 @@
               y = NSMaxY([page boundsForBox:kPDFDisplayBoxMediaBox]) - y;
               NSPoint point = NSMakePoint(x, y);
               [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex];
+              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex];
             }
           }
         }
