@@ -625,7 +625,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 }
 
-- (IBAction)buildProject:(id)sender 
+- (IBAction) buildNewProject:(id)sender 
 {
   // get a project director or file from the user  
   NSOpenPanel *panel = [NSOpenPanel openPanel];

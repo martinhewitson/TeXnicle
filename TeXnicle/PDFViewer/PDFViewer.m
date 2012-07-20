@@ -120,6 +120,13 @@
   [self.pdfViewerController.liveUpdateButton setHidden:YES];
 }
 
+- (IBAction)buildProject:(id)sender
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(buildProject:)]) {
+    [self.delegate performSelector:@selector(buildProject:) withObject:self];
+  }
+}
+
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(documentPathForViewer:)]) {    

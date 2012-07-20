@@ -315,11 +315,11 @@
   
 }
 
-- (IBAction)buildProject:(id)sender 
+- (IBAction)buildNewProject:(id)sender
 {
-  id delegate = [NSApp delegate];
-  if (delegate && [delegate respondsToSelector:@selector(buildProject:)]) {
-    [delegate buildProject:sender];
+  id delegate = [[NSApplication sharedApplication] delegate];
+  if (delegate && [delegate respondsToSelector:@selector(buildNewProject:)]) {
+    [delegate buildNewProject:sender];
     if ([[[NSDocumentController sharedDocumentController] documents] count]>0) {
       [self displayOrCloseWindow:self];
     }

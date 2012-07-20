@@ -132,6 +132,9 @@
 		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		253009D314ECEA0500426ED2 /* TPTemplateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D214ECEA0500426ED2 /* TPTemplateDirectory.m */; };
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
+		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
+		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
+		253312EC15B7013E00F9FD00 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 253312EB15B7013E00F9FD00 /* dsa_pub.pem */; };
 		253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */; };
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
@@ -408,6 +411,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		253312E915B6FF4B00F9FD00 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		25E5024A13A09F7A004A983E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -620,6 +633,10 @@
 		253009D214ECEA0500426ED2 /* TPTemplateDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateDirectory.m; sourceTree = "<group>"; };
 		253009D514ECEBBD00426ED2 /* TPTemplateFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateFile.h; sourceTree = "<group>"; };
 		253009D614ECEBBD00426ED2 /* TPTemplateFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateFile.m; sourceTree = "<group>"; };
+		253312E615B6FF3500F9FD00 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		253312EB15B7013E00F9FD00 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		253312ED15B7028000F9FD00 /* texnicle_appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = texnicle_appcast.xml; sourceTree = "<group>"; };
+		253312EE15B7086C00F9FD00 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		253A3AB51457D212007C4D8C /* MHMiniConsoleBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleBackground.h; sourceTree = "<group>"; };
 		253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMiniConsoleBackground.m; sourceTree = "<group>"; };
 		253A3AB91457D31C007C4D8C /* MHMiniConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleViewController.h; sourceTree = "<group>"; };
@@ -1058,6 +1075,7 @@
 				25E0812D13A11A9000898596 /* Quartz.framework in Frameworks */,
 				257B47A3138E5E9800ED02C4 /* libicucore.dylib in Frameworks */,
 				250772F1138E5D81000F1118 /* Cocoa.framework in Frameworks */,
+				253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1116,7 @@
 		250772EF138E5D81000F1118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				253312E615B6FF3500F9FD00 /* Sparkle.framework */,
 				25F90EF114D054F600760F0B /* libz.dylib */,
 				25E0812C13A11A9000898596 /* Quartz.framework */,
 				257B47A2138E5E9800ED02C4 /* libicucore.dylib */,
@@ -1170,6 +1189,7 @@
 		250772F7138E5D81000F1118 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				253312EB15B7013E00F9FD00 /* dsa_pub.pem */,
 				25CD0E9B139959D3004EB857 /* TeXnicle_Help */,
 				250772F8138E5D81000F1118 /* TeXnicle-Info.plist */,
 				250772F9138E5D81000F1118 /* InfoPlist.strings */,
@@ -1643,8 +1663,10 @@
 		2560F10813923489005E3208 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				253312ED15B7028000F9FD00 /* texnicle_appcast.xml */,
 				2514741413929DF60075CB5C /* ToDo.rtf */,
 				25D555CB151655A700E15749 /* description.rtf */,
+				253312EE15B7086C00F9FD00 /* test.html */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2148,6 +2170,7 @@
 				250772EA138E5D81000F1118 /* Resources */,
 				25E5024A13A09F7A004A983E /* CopyFiles */,
 				25AAC8EC1407E00400B61B1A /* ShellScript */,
+				253312E915B6FF4B00F9FD00 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2365,6 +2388,7 @@
 				255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */,
 				255A16E715B52B06004290CC /* TPCitationsViewController.xib in Resources */,
 				255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */,
+				253312EC15B7013E00F9FD00 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2763,6 +2787,10 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;
@@ -2789,6 +2817,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

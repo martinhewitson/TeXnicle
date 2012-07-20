@@ -1,7 +1,8 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 LucidaGrande;
 \f3\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red24\green84\blue167;}
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red24\green84\blue167;\red16\green73\blue188;
+}
 \paperw11900\paperh16840\margl1440\margr1440\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -83,27 +84,32 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 + Split PDF viewer, split editor\
 \
 \
-MEMORY WORK (getting rid of gc)\
---------------------------------------------\
 \
-Finish memory cleanup of TeXProjectDocument\
-\
-+ do ExternalTeXDoc next\
-+ DocWindowController\
-\
-+ Check for leaks\
-\
-----------------\
-\
-+ PDF click problem: make PDF key before jumping and highlighting\
-\
-+ Finish metadata work\
+\pard\pardeftab720
+
+\fs24 \cf4 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
+\pard\pardeftab720
+
+\fs28 \cf0 \
 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 Bugs\
 ----\
+\
+\pard\pardeftab720
+
+\f1\fs24 \cf4 - Hitting cmd-R when the external PDF view or the external console window is active prompts to build a new project, instead of typesetting the current one\'85\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \
+\pard\pardeftab720
+
+\f1 \cf4 The second bug is a little more serious. If I open a document that was not already automatically reopened upon loading the project, and then if I try to re-order that tab with a tab that was already open, the tabs at the top have some sort of bug. If I click one of the tabs I just reordered, it either makes the program freeze (until I force-quit and reload, and then it's fine) or clicking Tab A, for example, will open Tab B instead, and vice-versa. I don't really see any rhyme or reason to how the program reacts to re-ordering the tabs, but it happens consistently. If it doesn't crash the program, sometimes the problem clears up, and other times I have to quit (not force-quit, though) and reload to fix the problem.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
 \
 Beta 47\
 -------\

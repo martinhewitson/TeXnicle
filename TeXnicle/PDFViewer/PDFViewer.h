@@ -56,5 +56,6 @@
 - (void) redisplayDocument;
 
 - (IBAction)findSource:(id)sender;
+- (IBAction)buildProject:(id)sender;
 
 @end

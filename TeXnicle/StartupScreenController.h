@@ -82,17 +82,17 @@
 - (IBAction) openRecentFile:(id)sender;
 
 - (IBAction) newProject:(id)sender;
-- (IBAction)cancelNewProject:(id)sender;
+- (IBAction) cancelNewProject:(id)sender;
 
-- (IBAction) buildProject:(id)sender;
+- (IBAction) buildNewProject:(id)sender;
 - (IBAction) newEmptyProject:(id)sender;
 - (IBAction) openExistingDocument:(id)sender;
 - (IBAction) newArticleDocument:(id)sender;
 - (void) show;
 
-- (IBAction)createProjectFromSelectedTemplate:(id)sender;
-- (IBAction)newProjectFromTemplate:(id)sender;
-- (IBAction)cancelTemplateProject:(id)sender;
+- (IBAction) createProjectFromSelectedTemplate:(id)sender;
+- (IBAction) newProjectFromTemplate:(id)sender;
+- (IBAction) cancelTemplateProject:(id)sender;
 
 - (void) updateFilepathLabel;
 
