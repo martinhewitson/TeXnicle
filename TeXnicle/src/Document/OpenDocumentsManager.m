@@ -208,7 +208,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     
     
 	}	else {
-		NSTabViewItem *tab = [tabView tabViewItemAtIndex:fileIndex];
+    NSInteger index = [tabView indexOfTabViewItemWithIdentifier:aDoc];
+		NSTabViewItem *tab = [tabView tabViewItemAtIndex:index];
 		[tabView selectTabViewItem:tab];
 	}
 	
@@ -310,7 +311,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   if (aFile == nil) {
     return;
   }
-	NSInteger index = [self indexOfDocumentWithFile:aFile];
+	NSInteger index = [tabView indexOfTabViewItemWithIdentifier:aFile];
   if (index < 0) {
     return;
   }
@@ -384,8 +385,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 }
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
-{
-
+{  
   if (currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
@@ -413,7 +413,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	
 	// Set another file if this is the selected one and if possible
   if (file == currentDoc) {
-    FileEntity *nextFile = [openDocuments lastObject];
+    NSTabViewItem *tabItem = [[tabView tabViewItems] lastObject];
+    
+    FileEntity *nextFile = [tabItem identifier];
     //	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
     if (nextFile && nextFile != file) {
       [self setCurrentDoc:nextFile];
