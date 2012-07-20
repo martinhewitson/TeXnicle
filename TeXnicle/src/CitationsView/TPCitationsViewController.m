@@ -49,7 +49,7 @@
   if (self) {
     // Initialization code here.
     self.delegate = aDelegate;
-    
+    firstView = YES;
     self.sets = [NSMutableArray array];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -253,6 +253,11 @@
   //  NSLog(@"I have now %u sets", [self.files count]);
   //  NSLog(@"   updating %@", self.outlineView);
   [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+
+  if (firstView == YES) {
+    [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.1];
+    firstView = NO;
+  }
 }
 
 - (TPCitationSet*)setForFile:(FileEntity*)aFile

@@ -45,7 +45,7 @@
   NSOutlineView *outlineView;
   id<TPLabelsViewDelegate> delegate;
   HHValidatedButton *revealButton;
-  
+  BOOL firstView;
 }
 
 @property (assign) IBOutlet HHValidatedButton *revealButton;

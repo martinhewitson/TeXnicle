@@ -45,7 +45,8 @@
   NSMutableArray *sets;
   NSOutlineView *outlineView;
   id<TPNewCommandsViewDelegate> delegate;
-  HHValidatedButton *revealButton;  
+  HHValidatedButton *revealButton;
+  BOOL firstView;
 }
 
 @property (assign) IBOutlet HHValidatedButton *revealButton;
