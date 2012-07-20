@@ -79,16 +79,19 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 - (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex
 {
   if (pageIndex < [[self document] pageCount]) {
+    [[self window] makeFirstResponder:self];
     PDFPage *page = [[self document] pageAtIndex:pageIndex];
     PDFSelection *sel = [page selectionForLineAtPoint:point];
-    [self goToPage:page];
-    NSRect rect = [sel boundsForPage:page];    
-    [self setNeedsDisplayInRect:rect ofPage:[[self document] pageAtIndex:pageIndex]];
+    [self performSelectorOnMainThread:@selector(goToPage:) withObject:page waitUntilDone:YES];
     [self setCurrentSelection:sel];
     [self scrollSelectionToVisible:self];
-    [self setCurrentSelectionAndAnimate:sel];
+    [self display];
+    [self setCurrentSelection:nil];
+    [self performSelector:@selector(setCurrentSelectionAndAnimate:) withObject:sel afterDelay:0];
   }
 }
+
+
 
 - (void) setCurrentSelectionAndAnimate:(PDFSelection*)sel
 {
