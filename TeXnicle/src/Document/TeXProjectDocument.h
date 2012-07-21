@@ -190,7 +190,10 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   HHValidatedButton *backTabButton;
   HHValidatedButton *forwardTabButton;
   
+  NSMenu *createFolderMenu;
 }
+
+@property (retain) NSMenu *createFolderMenu;
 
 @property (assign) IBOutlet HHValidatedButton *backTabButton;
 @property (assign) IBOutlet HHValidatedButton *forwardTabButton;

@@ -146,6 +146,8 @@
 
 @synthesize liveUpdateTimer;
 
+@synthesize createFolderMenu;
+
 - (void) dealloc
 {
 //  NSLog(@"Dealloc %@", self);
@@ -483,9 +485,11 @@
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
-      NSInteger pos = [[file valueForKey:@"wasOpen"] integerValue];
-      if (pos >= 0) {        
-        [openFiles addObject:file];
+      if ([file existsOnDisk]){
+        NSInteger pos = [[file valueForKey:@"wasOpen"] integerValue];
+        if (pos >= 0) {
+          [openFiles addObject:file];
+        }
       }
     }
   }
@@ -673,6 +677,9 @@
     
   // project
   self.project = nil;
+  
+  // create folder menu
+  self.createFolderMenu = nil;
 }
 
 
@@ -1895,7 +1902,11 @@
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
       if ([file isText]) {
-        [citations addObjectsFromArray:file.metadata.citations];
+        for (BibliographyEntry *entry in file.metadata.citations) {
+          if (![citations containsObject:entry]) {
+            [citations addObjectsFromArray:file.metadata.citations];
+          }
+        }
       }
     }
   }
@@ -2608,7 +2619,66 @@
 
 - (IBAction) newFolder:(id)sender
 {
-	[projectItemTreeController addNewFolder];
+  // create popup menu
+	NSRect frame = [(NSButton *)sender frame];
+	NSPoint menuOrigin = [[(NSButton *)sender superview]
+												convertPoint:NSMakePoint(frame.origin.x+frame.size.width, frame.origin.y+frame.size.height)
+												toView:nil];
+	
+	NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
+																			 location:menuOrigin
+																	modifierFlags:NSLeftMouseDownMask // 0x100
+																			timestamp:0
+																	 windowNumber:[[(NSButton *)sender window] windowNumber]
+																				context:[[(NSButton *)sender window] graphicsContext]
+																		eventNumber:0
+																		 clickCount:1
+																			 pressure:1];
+  
+  // if we selected item is a real folder on disk, then we can make a subfolder
+  NSArray *selectedItems = [projectItemTreeController selectedObjects];
+ 
+  ProjectItemEntity *selectedProjectItem = nil;
+  if ([selectedItems count] > 0)
+    selectedProjectItem = [selectedItems objectAtIndex:0];
+  
+  // Make popup menu with bound actions
+  self.createFolderMenu = [[[NSMenu alloc] initWithTitle:@"New Folder Action Menu"] autorelease];
+  [self.createFolderMenu setAutoenablesItems:YES];
+  
+  NSMenuItem *item;
+  
+  if (selectedProjectItem == nil || [selectedProjectItem pathOnDisk]) {
+    // New folder on disk
+    item = [[NSMenuItem alloc] initWithTitle:@"Create New Folder on Disk"
+                                                  action:@selector(newFolderOnDisk:)
+                                           keyEquivalent:@""];
+    [item setTarget:self];
+    [self.createFolderMenu addItem:item];
+    [item release];
+  }
+  
+  // New group folder
+  item = [[NSMenuItem alloc] initWithTitle:@"Create New Group Folder"
+                                    action:@selector(newGroupFolder:)
+                             keyEquivalent:@""];
+  [item setTarget:self];
+  [self.createFolderMenu addItem:item];
+  [item release];
+  	
+	
+	[NSMenu popUpContextMenu:self.createFolderMenu withEvent:event forView:(NSButton *)sender];
+    
+}
+
+- (void) newGroupFolder:(id) sender
+{
+  [projectItemTreeController addNewFolder];
+}
+
+- (void) newFolderOnDisk:(id)sender
+{
+  [projectItemTreeController addNewFolderCreateOnDisk];
 }
 
 - (IBAction) newFile:(id)sender
