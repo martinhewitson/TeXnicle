@@ -205,8 +205,10 @@
   
   if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
     NSInteger idx = [scanner scanLocation];
+    NSInteger sourceStart = idx;
     if (idx < [self length]) {
       NSString *argString = [self parseArgumentStartingAt:&idx];
+      NSInteger sourceEnd = idx;
       NSArray *args = [argString componentsSeparatedByString:@","];
       for (NSString *arg in args) {
         if (arg && [arg length]>0) {
@@ -231,6 +233,9 @@
         if (bibcontents && [bibcontents length]>0) {
           NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
           for (BibliographyEntry *entry in entries) {
+            if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
+              [entry setSourceString:[self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)]];
+            }
             [citations addObject:entry];
           }
         }
@@ -468,13 +473,20 @@
   NSInteger count = *loc;
   NSInteger nameStart = -1;
   NSInteger nameEnd   = -1;
+  NSInteger braceCount = 0;
   while (count < [self length]) {
     if ([self characterAtIndex:count] == '{') {
-      nameStart = count+1;
+      braceCount++;
+      if (nameStart < 0) {
+        nameStart = count+1;
+      }
     }
     if ([self characterAtIndex:count] == '}') {
-      nameEnd = count;
-      break;
+      braceCount--;
+      if (braceCount == 0) {
+        nameEnd = count;
+        break;
+      }
     }
     count++;
   }
