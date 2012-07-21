@@ -97,6 +97,14 @@
 	return self;
 }
 
+// two bib entries are equal for the purposes of sorting if they have the same tag
+- (BOOL) isEqual:(BibliographyEntry*)entry
+{
+//  NSLog(@"%@ == %@ ? %d", self.tag, entry.tag, [self.tag isEqualToString:entry.tag]);
+  
+  return [self.tag isEqualToString:entry.tag];
+}
+
 + (NSArray*)bibtexEntriesFromString:(NSString*)aString
 {
   NSMutableArray *entries = [NSMutableArray array];
