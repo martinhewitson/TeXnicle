@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
-   <channel>
-      <title>TeXnicle's Changelog</title>
-      <link>http://you.com/app/appcast.xml</link>
-      <description>Most recent changes with links to updates.</description>
-      <language>en</language>
+	<channel>
+		<title>TeXnicle's Changelog</title>
+		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
+		<description>Most recent changes with links to updates.</description>
+		<language>en</language>
 
-     <!-- Version 2.0 beta 47 -->
-     <item>
+    
+    <!-- Version 2.0 beta 48 -->
+    
+		<!-- Version 2.0 beta 47 -->
+		<item>
        <title>Version 2.0 (beta 47)</title>
        <description><![CDATA[
          <p>
-         This will be the last beta release with feature changes. The plan is for one (or possibly two) more beta release focussing on any reported bugs before releasing the final version of TeXnicle 2.0. Further change requests will be looked at in the development of version 2.1.
+         This will be the last beta release with feature changes. The plan is for one (or possibly two) more beta
+         release focussing on any reported bugs before releasing the final version of TeXnicle 2.0. Further change
+         requests will be looked at in the development of version 2.1.
          </p>
          <p>
          A Significant amount of behind-the-scenes changes have taken place in this release, so it is recommended
-         that you have a good backup of any files (including TeXnicle's preferences file found under ~/Library/Preferences/com.bobsoft.TeXnicle.plist) before using this version. No problems are expected, but you
-         never know.
+         that you have a good backup of any files (including TeXnicle's preferences file found under
+         ~/Library/Preferences/com.bobsoft.TeXnicle.plist) before using this version. No problems are expected,
+         but you never know.
          </p>
-         <p>
          <h3>Focus Area: Spell Checking</h3>
          <p>
          TeXnicle has two new features associated with spell checking. The first is that the dictionary language
@@ -61,25 +66,21 @@
          <li>Bug fix: selecting rearranged tabs could result in crashing.</li>
          <li>Various bug fixes and optimisations, especially to the underlying project document management.</li>
          </ul>
+         </p>
        ]]></description>
-       <sparkle:releaseNotesLink>
-         http://www.bobsoft-mac.de/resources/TeXnicle/Beta/Changelog_beta47.rtf
-       </sparkle:releaseNotesLink>
        <pubDate>23 June 2012</pubDate>
-       <enclosure
-       url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta47.zip"
-       sparkle:shortVersionString="2.0 (beta 47)"
+       <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta47.zip"
+       sparkle:shortVersionString="2.0"
        sparkle:version="47"
-       length="1472893"
+       length="22712320"
        type="application/octet-stream"
-       sparkle:dsaSignature="MEQCIFx8ciNg934w0ArQskwPvuWY+h+mNl7vM8xbR49QUPGxAiAIveR1fQI96FGOsrGvBqIMEt3i/t57cHdVWkwe8EA+2g=="
-       length="12750258"
+      sparkle:dsaSignature="MEQCIHA4jFYOa8xBzrtS+CNSQdbzMi0FWjAqR/H6kcRZjVDhAiBAx1tnJwg+uL6ZnaGbyFco1wLBMEtPqqozsg9OAwUdyA=="
        />
      </item>
 
      
-     <!-- Version 2.0 beta 46 -->
-         <item>
+		<!-- Version 2.0 beta 46 -->
+		<item>
             <title>Version 2.0 (beta 46)</title>
             <description><![CDATA[
               <h2>New features</h2>
@@ -97,18 +98,13 @@
                 <li>Various other minor bug fixes.</li>
               </ul>
             ]]></description>
-            <sparkle:releaseNotesLink>
-							http://www.bobsoft-mac.de/resources/TeXnicle/Beta/Changelog_beta46.rtf
-						</sparkle:releaseNotesLink>
             <pubDate>23 June 2012</pubDate>
-            <enclosure
-                        url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta46.zip"
-                        sparkle:shortVersionString="2.0 (beta 46)"
+            <enclosure	url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta46.zip"
+                        sparkle:shortVersionString="2.0"
                         sparkle:version="46"
                         length="1472893"
                         type="application/octet-stream"
                         sparkle:dsaSignature="MEQCIFx8ciNg934w0ArQskwPvuWY+h+mNl7vM8xbR49QUPGxAiAIveR1fQI96FGOsrGvBqIMEt3i/t57cHdVWkwe8EA+2g=="
-                        length="12750258"
             />
          </item>
 

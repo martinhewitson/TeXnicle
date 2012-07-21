@@ -296,6 +296,8 @@
 		25AAC8EA1407C45C00B61B1A /* pdflatex.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25AAC8E91407C45C00B61B1A /* pdflatex.engine */; };
 		25AAC8EE1407E65400B61B1A /* context.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25AAC8ED1407E65400B61B1A /* context.engine */; };
 		25ACB35313EB15EF00289E4E /* textResult.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25ACB35213EB15EF00289E4E /* textResult.icns */; };
+		25AD5A0915BAB29100737610 /* groupFolderOpen.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25AD5A0715BAB29100737610 /* groupFolderOpen.icns */; };
+		25AD5A0A15BAB29100737610 /* groupFolder.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25AD5A0815BAB29100737610 /* groupFolder.icns */; };
 		25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AD69E9140E974100C131A6 /* MHFileReader.m */; };
 		25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AD69EA140E974100C131A6 /* MHFileReader.xib */; };
 		25AF2CBB14EE51A000A7152B /* Settings+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AF2CBA14EE51A000A7152B /* Settings+ProjectTemplate.m */; };
@@ -902,6 +904,10 @@
 		25AAC8E91407C45C00B61B1A /* pdflatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pdflatex.engine; sourceTree = "<group>"; };
 		25AAC8ED1407E65400B61B1A /* context.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = context.engine; sourceTree = "<group>"; };
 		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
+		25AD5A0015BA6C4E00737610 /* profileConfig.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = profileConfig.php; path = php_sparkle_stats_server/profileConfig.php; sourceTree = "<group>"; };
+		25AD5A0115BA6C4E00737610 /* profileInfo.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = profileInfo.php; path = php_sparkle_stats_server/profileInfo.php; sourceTree = "<group>"; };
+		25AD5A0715BAB29100737610 /* groupFolderOpen.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = groupFolderOpen.icns; sourceTree = "<group>"; };
+		25AD5A0815BAB29100737610 /* groupFolder.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = groupFolder.icns; sourceTree = "<group>"; };
 		25AD69E8140E974100C131A6 /* MHFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHFileReader.h; sourceTree = "<group>"; };
 		25AD69E9140E974100C131A6 /* MHFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFileReader.m; sourceTree = "<group>"; };
 		25AD69EA140E974100C131A6 /* MHFileReader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHFileReader.xib; sourceTree = "<group>"; };
@@ -1347,6 +1353,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25AD5A0715BAB29100737610 /* groupFolderOpen.icns */,
+				25AD5A0815BAB29100737610 /* groupFolder.icns */,
 				255A16D815B48E1B004290CC /* commandsTabBarImage.icns */,
 				255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */,
 				255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */,
@@ -1663,10 +1671,12 @@
 		2560F10813923489005E3208 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				253312ED15B7028000F9FD00 /* texnicle_appcast.xml */,
 				2514741413929DF60075CB5C /* ToDo.rtf */,
+				253312ED15B7028000F9FD00 /* texnicle_appcast.xml */,
 				25D555CB151655A700E15749 /* description.rtf */,
 				253312EE15B7086C00F9FD00 /* test.html */,
+				25AD5A0015BA6C4E00737610 /* profileConfig.php */,
+				25AD5A0115BA6C4E00737610 /* profileInfo.php */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2389,6 +2399,8 @@
 				255A16E715B52B06004290CC /* TPCitationsViewController.xib in Resources */,
 				255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */,
 				253312EC15B7013E00F9FD00 /* dsa_pub.pem in Resources */,
+				25AD5A0915BAB29100737610 /* groupFolderOpen.icns in Resources */,
+				25AD5A0A15BAB29100737610 /* groupFolder.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
