@@ -308,6 +308,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) selectTabForFile:(FileEntity*)aFile
 {
+  if (![aFile existsOnDisk]) {
+    return;
+  }
   if (aFile == nil) {
     return;
   }
