@@ -2843,11 +2843,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">buildProject:</string>
+						<string key="label">buildNewProject:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="938474538"/>
 					</object>
-					<int key="connectionID">740</int>
+					<int key="connectionID">832</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -4383,7 +4383,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">831</int>
+			<int key="maxID">832</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5130,17 +5130,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PDFViewer</string>
 					<string key="superclassName">NSWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">findSource:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">findSource:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="buildProject:">id</string>
+						<string key="findSource:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="buildProject:">
+							<string key="name">buildProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">containerView</string>
 						<string key="NS.object.0">NSView</string>
@@ -5578,177 +5581,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">StartupScreenController</string>
-					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="buildProject:">id</string>
-						<string key="cancelNewProject:">id</string>
-						<string key="cancelTemplateProject:">id</string>
-						<string key="createProjectFromSelectedTemplate:">id</string>
-						<string key="displayOrCloseWindow:">id</string>
-						<string key="displayWindow:">id</string>
-						<string key="fileSourceChanged:">id</string>
-						<string key="newArticleDocument:">id</string>
-						<string key="newEmptyProject:">id</string>
-						<string key="newProject:">id</string>
-						<string key="newProjectFromTemplate:">id</string>
-						<string key="openExistingDocument:">id</string>
-						<string key="openRecentFile:">id</string>
-						<string key="startFileQuery:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="buildProject:">
-							<string key="name">buildProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelNewProject:">
-							<string key="name">cancelNewProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelTemplateProject:">
-							<string key="name">cancelTemplateProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="createProjectFromSelectedTemplate:">
-							<string key="name">createProjectFromSelectedTemplate:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="displayOrCloseWindow:">
-							<string key="name">displayOrCloseWindow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="displayWindow:">
-							<string key="name">displayWindow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="fileSourceChanged:">
-							<string key="name">fileSourceChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="newArticleDocument:">
-							<string key="name">newArticleDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="newEmptyProject:">
-							<string key="name">newEmptyProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="newProject:">
-							<string key="name">newProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="newProjectFromTemplate:">
-							<string key="name">newProjectFromTemplate:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openExistingDocument:">
-							<string key="name">openExistingDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openRecentFile:">
-							<string key="name">openRecentFile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startFileQuery:">
-							<string key="name">startFileQuery:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="allBtn">NSButton</string>
-						<string key="bottomBarButton">NSButton</string>
-						<string key="buildProjectDescription">TPDescriptionView</string>
-						<string key="buildView">NSView</string>
-						<string key="containerView">NSView</string>
-						<string key="createBtn">HHValidatedButton</string>
-						<string key="dateLabel">NSTextField</string>
-						<string key="emptyProjectDescription">TPDescriptionView</string>
-						<string key="fileLabel">TPDescriptionView</string>
-						<string key="fromTemplateDescription">TPDescriptionView</string>
-						<string key="newArticleDescription">TPDescriptionView</string>
-						<string key="recentBtn">NSButton</string>
-						<string key="recentFilesController">NSArrayController</string>
-						<string key="recentFilesTable">NSTableView</string>
-						<string key="startView">NSView</string>
-						<string key="templateListContainer">NSView</string>
-						<string key="templateView">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="allBtn">
-							<string key="name">allBtn</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="bottomBarButton">
-							<string key="name">bottomBarButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="buildProjectDescription">
-							<string key="name">buildProjectDescription</string>
-							<string key="candidateClassName">TPDescriptionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="buildView">
-							<string key="name">buildView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="containerView">
-							<string key="name">containerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="createBtn">
-							<string key="name">createBtn</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="dateLabel">
-							<string key="name">dateLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="emptyProjectDescription">
-							<string key="name">emptyProjectDescription</string>
-							<string key="candidateClassName">TPDescriptionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="fileLabel">
-							<string key="name">fileLabel</string>
-							<string key="candidateClassName">TPDescriptionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="fromTemplateDescription">
-							<string key="name">fromTemplateDescription</string>
-							<string key="candidateClassName">TPDescriptionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newArticleDescription">
-							<string key="name">newArticleDescription</string>
-							<string key="candidateClassName">TPDescriptionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="recentBtn">
-							<string key="name">recentBtn</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="recentFilesController">
-							<string key="name">recentFilesController</string>
-							<string key="candidateClassName">NSArrayController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="recentFilesTable">
-							<string key="name">recentFilesTable</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="startView">
-							<string key="name">startView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="templateListContainer">
-							<string key="name">templateListContainer</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="templateView">
-							<string key="name">templateView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/StartupScreenController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">TPClippingsTable</string>
 					<string key="superclassName">NSTableView</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -5765,14 +5597,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/TPClippingsTable.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TPDescriptionView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TPDescriptionView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -6531,7 +6355,7 @@
 					<string key="className">TeXnicleAppController</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="buildProject:">id</string>
+						<string key="buildNewProject:">id</string>
 						<string key="createProjectFromTemplate:">id</string>
 						<string key="newArticleDocument:">id</string>
 						<string key="newEmptyProject:">id</string>
@@ -6540,8 +6364,8 @@
 						<string key="showStartupScreen:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="buildProject:">
-							<string key="name">buildProject:</string>
+						<object class="IBActionInfo" key="buildNewProject:">
+							<string key="name">buildNewProject:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="createProjectFromTemplate:">
