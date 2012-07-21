@@ -91,8 +91,8 @@
 }
 
 - (void) didComputeNewSections
-{ 
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+{
+  [self.outlineView reloadData];
 }
 
 - (BOOL) shouldGenerateOutline

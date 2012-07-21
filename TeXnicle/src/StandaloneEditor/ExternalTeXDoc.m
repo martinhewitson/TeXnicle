@@ -576,7 +576,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) syntaxCheckerDidFinish
 {
-//  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void) handleTextSelectionChanged:(NSNotification*)aNote
@@ -1809,16 +1808,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   return [NSArray arrayWithObject:self];
 }
 
-//- (void) fileMonitor:(TPFileMonitor *)aMonitor fileWasAccessedOnDisk:(id)file accessDate:(NSDate *)access
-//{
-////  NSLog(@"File was accessed on disk...");
-//  if ([self fileURL]) {
-//    if (![self isDocumentEdited]) {
-//      [self performSelector:@selector(reloadCurrentFileFromDisk:) withObject:self afterDelay:0];
-//    }
-//  }
-//}
-
 
 -(void) fileMonitor:(TPFileMonitor *)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
@@ -1834,15 +1823,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       NSInteger result = [alert runModal];
       if (result == NSAlertDefaultReturn) {
         [self loadFileAtURL:[self fileURL]];
-//        [self revertDocumentToSaved:self];
-//        [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
       } else {
         self.fileLoadDate = modified;
       }
     } else {
       [self loadFileAtURL:[self fileURL]];
-//      [self revertDocumentToSaved:self];
-//      [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
     }
   }
 }
@@ -2330,7 +2315,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
     
   } else {
-    // TODO: this will break on 10.6.8 !!!!
+    // TODO: this may break on 10.6.8 !!!!
     
     [[NSDocumentController sharedDocumentController]
       openDocumentWithContentsOfURL:aFile
@@ -2475,12 +2460,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
 }
 
-- (void) updateMetadata 
+- (void) updateMetadata
 {
-  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-  [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-  [self.citationsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-  [self.commandsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
+  [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
+  [self.citationsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
+  [self.commandsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
 }
 
 #pragma mark -

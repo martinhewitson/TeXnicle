@@ -447,7 +447,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
         NSRange range = NSRangeFromString(sr);
         if (range.location + range.length < [[self.texEditorViewController.textView string] length]) {
           //				NSLog(@"Trying to set range %@", NSStringFromRange(range));
-          //        [textView performSelector:@selector(selectRange:) withObject:[NSValue valueWithRange:range] afterDelay:0.0];
           [self.texEditorViewController.textView setSelectedRange:range];
         }
       }
@@ -458,7 +457,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       if (![sr isEqual:@""]) {
         NSRect r = NSRectFromString(sr);
         //      NSLog(@"Setting visible rect: %@", NSStringFromRect(r));
-        //      [textView performSelector:@selector(scrollToRect:) withObject:[NSValue valueWithRect:r] afterDelay:0.0];
         [self.texEditorViewController.textView scrollRectToVisible:r];
       }
     }

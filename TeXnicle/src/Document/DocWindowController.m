@@ -165,7 +165,7 @@
 {
 	[mainDocument saveDocument:sender];
   [[self window] setDocumentEdited:NO];
-	[self performSelector:@selector(updateEditedState) withObject:nil afterDelay:1];
+  [self updateEditedState];
 }
 
 - (void) handleTextSelectionChanged:(NSNotification*)aNote

@@ -3129,8 +3129,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
         
 		BOOL result = [super saveToURL:url ofType:typeName forSaveOperation:saveOperation error:outError];
     
-    [self.projectOutlineView performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:1];
-    
     return result;
 	}	
   

@@ -161,22 +161,6 @@
   NSString *string = [strings componentsJoinedByString:@" "];
   
   [self palette:self insertText:string];
-  
-//	// get the selected text
-//	id doc = [[NSDocumentController sharedDocumentController] currentDocument];
-//	if (doc) {
-//		
-//		if ([doc respondsToSelector:@selector(insertTextToCurrentDocument:)]) {
-//			NSArray *items = [symbolsController selectedObjects];
-//			NSMutableArray *strings = [NSMutableArray array];
-//			for (id symbol in items) {
-//				[strings addObject:[symbol valueForKey:@"Code"]];
-//			}
-//			
-//			NSString *string = [strings componentsJoinedByString:@" "];
-//			[doc performSelector:@selector(insertTextToCurrentDocument:) withObject:string];
-//		}		
-//	}
 }
 
 - (NSImage*) generateImageForCode:(NSString*)code atPath:(NSString*)aPath inMathMode:(BOOL)mathMode

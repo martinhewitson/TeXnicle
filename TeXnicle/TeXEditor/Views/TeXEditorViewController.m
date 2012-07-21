@@ -126,7 +126,9 @@
 
 - (void) setupSyntaxChecker
 {
-  [self stopSyntaxChecker];
+  if (self.syntaxCheckTimer) {
+    [self stopSyntaxChecker];
+  }
   
   self.syntaxCheckTimer = [NSTimer scheduledTimerWithTimeInterval:2
                                                            target:self
@@ -154,7 +156,10 @@
 - (void) setString:(NSString*)aString
 {
   [self.textView setString:aString];
-  [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
+  
+  if (aString)
+    [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
+
   _shouldCheckSyntax = YES;
   [self setupSyntaxChecker];
 }

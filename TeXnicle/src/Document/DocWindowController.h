@@ -34,7 +34,7 @@
 @class FileEntity;
 @class TeXEditorViewController;
 
-@interface DocWindowController : NSWindowController <TeXTextViewDelegate, BookmarkManagerDelegate> {
+@interface DocWindowController : NSWindowController <NSWindowDelegate, TeXTextViewDelegate, BookmarkManagerDelegate> {
 
 	IBOutlet NSView *texEditorContainer;
 	TeXProjectDocument *mainDocument;

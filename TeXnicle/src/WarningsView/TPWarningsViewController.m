@@ -80,7 +80,7 @@
 
 - (void) handleMetadataUpdate:(NSNotification*)aNote
 {  
-  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
 }
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -253,7 +253,7 @@
   }
 //  NSLog(@"I have now %u sets", [self.files count]);
 //  NSLog(@"   updating %@", self.outlineView);
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+  [self.outlineView reloadData];
   
   if (firstView == YES) {
     [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
