@@ -153,10 +153,7 @@
 
 - (BOOL) existsOnDisk
 {
-//	NSString *projectFolder = [[self project] valueForKey:@"folder"];
-//	NSString *projectFolder = [[self projectPath] stringByDeletingLastPathComponent];
 	NSFileManager *fm = [NSFileManager defaultManager];
-//	if ([fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:[self valueForKey:@"filepath"]]]) {
 	if ([fm fileExistsAtPath:[self valueForKey:@"pathOnDisk"]]) {
 		return YES;
 	}
@@ -171,6 +168,14 @@
 
 - (void) resetFilePath
 {
+  ProjectItemEntity *parent = self.parent;
+  if (parent != nil) {
+    NSString *parentPath = [parent filepath];
+    if (parentPath) {
+      NSString *newPath = [parentPath stringByAppendingPathComponent:[self.filepath lastPathComponent]];
+      [self setFilepath:newPath];
+    }
+  }
 }
 
 - (void) setFilepath:(NSString *)aPath
@@ -183,7 +188,7 @@
 	
 	[self setPrimitiveValue:relativePath forKey:@"filepath"];
 	[self didChangeValueForKey:@"filepath"];
-	//NSLog(@"Set filepath: %@", self.filepath);
+//	NSLog(@"Set filepath: %@", self.filepath);
 }
 
 - (BOOL) isLeaf

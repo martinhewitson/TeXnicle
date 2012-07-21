@@ -60,5 +60,6 @@
 
 - (BOOL) isUnderPath:(NSString*)aPath;
 //- (BOOL) hasEdits;
+- (void) resetFilePath;
 
 @end
