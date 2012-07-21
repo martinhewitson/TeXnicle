@@ -278,6 +278,14 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[self addFolder:folderName withFilePath:nil createOnDisk:NO];
 }
 
+// Add a new folder to the project and create on disk
+- (void) addNewFolderCreateOnDisk
+{
+	NSString *folderName = [NSString stringWithFormat:@"New Folder %02d", [[self flattenedContent] count]];
+	[self addFolder:folderName withFilePath:nil createOnDisk:YES];
+}
+
+
 // Add a folder to the project with the given name and filepath, and create on disk if requested.
 - (FolderEntity*) addFolder:(NSString*)aName withFilePath:(NSString*)filepath createOnDisk:(BOOL)create
 {
@@ -289,8 +297,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
                                   insertIntoManagedObjectContext:moc];
 	
 	// set name
-	[newFolder setValue:aName forKey:@"name"];
-//	NSLog(@"Adding new folder: %@", newFolder);
+  [newFolder setPrimitiveValue:aName forKey:@"name"];
+
 	
 	// set parent
 	id parent = [[self selectedObjects] firstObject];
@@ -304,7 +312,22 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     // expand parent
     [outlineView expandItem:parentNode];
 	}
-	
+  
+  if (parent == nil) {
+    [newFolder setFilepath:[@"." stringByAppendingPathComponent:aName]];
+  }
+  
+  [newFolder resetFilePath];
+  if (create) {
+    NSString *newPath = [[newFolder.project folder] stringByAppendingPathComponent:newFolder.filepath];
+    if (newPath) {
+      NSFileManager *fm = [NSFileManager defaultManager];
+      if (![fm fileExistsAtPath:newPath]) {
+        [fm createDirectoryAtPath:newPath withIntermediateDirectories:YES attributes:nil error:NULL];
+      }
+    }
+  }
+  
 	// console log
 	[[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Added Folder: %@", aName]];
 	
@@ -1243,12 +1266,21 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		
     if ([object isMemberOfClass:[FolderEntity class]]) {
       //    NSLog(@"%@ is a folder", [object name]);
-      if ([[object valueForKey:@"isExpanded"] boolValue]) {
-        NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
-        [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
+      NSString *pathOnDisk = [object valueForKey:@"pathOnDisk"];
+      if (pathOnDisk) {
+        if ([[object valueForKey:@"isExpanded"] boolValue]) {
+          NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
+          [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];
+        } else {
+          NSString *folderFileType = NSFileTypeForHFSTypeCode(kGenericFolderIcon);
+          [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];
+        }
       } else {
-        NSString *folderFileType = NSFileTypeForHFSTypeCode(kGenericFolderIcon);
-        [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];		
+        if ([[object valueForKey:@"isExpanded"] boolValue]) {
+          [cell setImage:[NSImage imageNamed:@"groupFolderOpen"]];
+        } else {
+          [cell setImage:[NSImage imageNamed:@"groupFolder"]];
+        }
       }
     } else if ([object isKindOfClass:[FileEntity class]]) {
       //    NSLog(@"%@ is a file", [object name]);
@@ -1341,12 +1373,23 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 /*
  Beginning the drag from the outline view.
  */
-- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard 
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard
 {
 	if (!self.dragEnabled) return NO;
 	
-	[pboard declareTypes:[NSArray arrayWithObject:OutlineViewNodeType] owner:self];
-	[pboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
+  // if the items being dragged contain a folder which exists on disk, don't allow the drag
+  for (NSTreeNode *node in items) {
+    ProjectItemEntity *item = [node representedObject];
+    NSLog(@"Checking item %@", [item name]);
+    if ([item isKindOfClass:[FolderEntity class]]) {
+      if ([item pathOnDisk]) {
+        return NO;
+      }
+    }
+  }
+  
+	[pasteboard declareTypes:[NSArray arrayWithObject:OutlineViewNodeType] owner:self];
+	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
 	// Return YES so that the drag actually begins...
 	return YES;
 }

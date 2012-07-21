@@ -47,7 +47,7 @@ extern NSString * const OutlineViewNodeType;
 @class TeXFileEntity;
 @class TPOutlineView;
 
-@interface ProjectItemTreeController : NSTreeController {
+@interface ProjectItemTreeController : NSTreeController <NSOutlineViewDataSource, NSOutlineViewDelegate> {
 	
 	TeXProjectDocument *document;
 	ProjectEntity *project;
@@ -130,7 +130,8 @@ extern NSString * const OutlineViewNodeType;
 											context:(void *)v;
 
 - (void) addNewFolder;
-- (FolderEntity*) addFolder:(NSString*)aName 
+- (void) addNewFolderCreateOnDisk;
+- (FolderEntity*) addFolder:(NSString*)aName
 							 withFilePath:(NSString*)filepath 
 							 createOnDisk:(BOOL)create;
 - (FileEntity*) addNewFile:(NSString*)name 
