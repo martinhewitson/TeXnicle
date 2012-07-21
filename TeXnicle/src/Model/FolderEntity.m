@@ -35,8 +35,6 @@
 }
 
 
-
-
 - (NSString*) pathOnDisk
 {
 	// If the projectpath maps to a folder on disk, we can return
@@ -53,41 +51,61 @@
 	return nil;
 }
 
-// MOVED TO SUPERCLASS 16-02-2012
-//
-//- (NSString*) projectPath
-//{
-//	ProjectEntity *project = [self valueForKey:@"project"];
-//	// try to make the folder on disk		
-//	NSString *projectRoot = [project valueForKey:@"folder"];
-////	NSLog(@"Got project root: %@", projectRoot);
-//	
-//	NSString *relativePath = [self valueForKey:@"name"];
-//	NSManagedObject *parent = [self valueForKey:@"parent"];
-////	NSLog(@"Starting from parent %@", parent);
-//	while (parent != nil) {
-//		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
-//		parent = [parent valueForKey:@"parent"];
-//	}
-//	
-//	NSString *folderRoot = [projectRoot stringByAppendingPathComponent:relativePath];
-//	return folderRoot;
-//}
-
-
-
-//
-//- (void) setFilepath:(NSString *)aPath
-//{
-//	[self willChangeValueForKey:@"filepath"];
-//	
-//	// make sure that this path is always relative to the project
-//	NSString *projectFolder = [[self project] valueForKey:@"folder"];
-//	NSString *relativePath = [projectFolder relativePathTo:aPath];
-//	
-//	[self setPrimitiveValue:relativePath forKey:@"filepath"];
-//	[self didChangeValueForKey:@"filepath"];
-//	NSLog(@"Set filepath: %@", self.filepath);
-//}
+- (void) setName:(NSString *)newName
+{
+	[self willChangeValueForKey:@"name"];
+  
+	// rename the file on disk, if necessary	
+	NSString *oldPath = [self pathOnDisk];
+  if (oldPath != nil && self.name != nil && [self existsOnDisk]) {
+    
+    NSString *newPath = nil;
+    
+    newPath = [oldPath stringByDeletingLastPathComponent];
+    newPath = [newPath stringByAppendingPathComponent:newName];
+    
+    //	NSLog(@"Renaming %@\nto %@", oldPath, newPath);
+    
+    if (newPath != nil && ![newPath isEqual:oldPath]) {
+      
+      // gather a list of children which will need to be updated
+      NSMutableArray *childrenToUpdate = [NSMutableArray array];
+      for (ProjectItemEntity *item in self.children) {
+        if ([item isUnderPath:self.pathOnDisk]) {
+          [childrenToUpdate addObject:item];
+        }
+      }
+      
+      NSFileManager *fm = [NSFileManager defaultManager];
+      NSError *error = nil;
+      // If the old file exists, we can move it
+      if ([fm fileExistsAtPath:oldPath]) {
+        BOOL success = [fm moveItemAtPath:oldPath toPath:newPath error:&error];
+        if (success == NO) {
+          NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+          [errorDetail setValue:@"Failed to rename folder"
+                         forKey:NSLocalizedDescriptionKey];
+          NSString *errorDescription = [NSString stringWithFormat:@"Failed to move \u201c%@\u201d to \u201c%@\u201d", oldPath, newPath];
+          [errorDetail setValue:errorDescription forKey:NSLocalizedRecoverySuggestionErrorKey];
+          error = [NSError errorWithDomain:@"TeXnicle" code:0 userInfo:errorDetail];
+          [NSApp presentError:error];
+          return;
+        }
+      }
+      
+      // set the new filepath
+      [self setValue:newPath forKey:@"filepath"];
+      
+      // update filepaths of all children
+      for (ProjectItemEntity *item in childrenToUpdate) {
+        [item resetFilePath];
+      }
+    }    
+  }
+  
+	// now go ahead and rename the item
+	[self setPrimitiveValue:newName forKey:@"name"];
+	[self didChangeValueForKey:@"name"];
+}
 
 @end
