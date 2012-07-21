@@ -53,6 +53,8 @@
 -(void)main {
   @try {
     
+    if (self.text == nil || [self.text length] ==0)
+      return;
     
     NSMutableArray *newCommands = [[NSMutableArray alloc] init];
     NSMutableArray *newCitations = [[NSMutableArray alloc] init];
@@ -76,6 +78,10 @@
     NSArray *citationsFound = [self.text citations];		
     [newCitations addObjectsFromArray:citationsFound];			
     
+    // citations from any bib files included in this file but not in the project
+    NSArray *entries = [self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
+    [newCitations addObjectsFromArray:entries];
+
     // add any citations from any bib files
     if ([self isCancelled]) return;
     if ([self.file.extension isEqualToString:@"bib"]) {
