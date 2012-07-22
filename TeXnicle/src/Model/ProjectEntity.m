@@ -44,41 +44,36 @@
 
 - (void) awakeFromInsert
 {
-	//NSLog(@"Inserted project");
+//	NSLog(@"Inserted project");
   self.type = @"PDFLaTeX";
+  [self createSettings];
+}
+
+- (void) createSettings
+{
+  if (self.settings == nil) {
+    // make new settings
+    NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
+    Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];
+    self.settings = [newSettings autorelease];
+//    NSLog(@"Made settings %@", self.settings);
+  }
   
-  // make new settings
-  NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
-  Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-  self.settings = [newSettings autorelease];
-  
-  // make new UI settings
-  NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
-  UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-  self.uiSettings = [newUISettings autorelease];
+  if (self.uiSettings == nil) {
+    // make new UI settings
+    NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
+    UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];
+    self.uiSettings = [newUISettings autorelease];
+//    NSLog(@"Made UI settings %@", self.uiSettings);
+  }
 }
 
 - (void) awakeFromFetch
 {
-  [self performSelector:@selector(setupSettings) withObject:nil afterDelay:0];
+//  NSLog(@"Awake from fetch %@", self);
+  [self performSelector:@selector(createSettings) withObject:nil afterDelay:0.1];
 }
 
-- (void) setupSettings
-{
-  // make new settings if needed
-  if (self.settings == nil) {
-    NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
-    Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-    self.settings = [newSettings autorelease];
-  }
-  
-  // make new ui settings if needed
-  if (self.uiSettings == nil) {
-    NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
-    UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];   
-    self.uiSettings = [newUISettings autorelease];
-  }
-}
 
 - (NSSet*)items
 {
