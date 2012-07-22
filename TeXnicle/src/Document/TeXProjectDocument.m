@@ -302,6 +302,9 @@
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
   statusViewIsShowing = YES;
+  
+//  NSLog(@"Project settings %@", self.project.settings);
+  
   if (![self.project.settings.showStatusBar boolValue]) {
     // the status bar is showing by default, so toggle it out
     [self toggleStatusBar:NO];
@@ -470,12 +473,14 @@
     }
   }
   [self.miniConsole message:@"Welcome to TeXnicle."];
-  
-  [self performSelector:@selector(setupDocument) withObject:nil afterDelay:0];
+  [self setupDocument];
+
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPRestoreOpenTabs] boolValue]) {
-    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+    [self restoreOpenTabs];
+//    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
   }
-  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
+//  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
+  [self restoreUIstate];
 }
 
 - (void) restoreOpenTabs
@@ -530,11 +535,19 @@
 
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
-  
+//  NSLog(@"Window did become key");
+  ProjectEntity *p = [self project];
   // set language for this project
-  [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
-  
+  if (p) {
+    if (p.settings) {
+      if (p.settings.language) {
+        [[NSSpellChecker sharedSpellChecker] setLanguage:p.settings.language];
+//        NSLog(@"Did set language %@", self.project.settings.language);
+      }
+    }
+  }
 }
+
 
 - (void) stopStatusTimer
 {
@@ -703,6 +716,7 @@
 
 - (void) restoreUIstate
 {
+//  NSLog(@"Restore UI");
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
   [self.infoControlsTabBarController selectTabAtIndex:0];
@@ -758,6 +772,8 @@
 
 + (void) createTeXnicleProjectAtURL:(NSURL*)aURL
 {
+//  NSLog(@"Creating new project %@", aURL);
+  
   // make a new managed object context  
   NSManagedObjectContext *moc = [TeXProjectDocument managedObjectContextForStoreURL:aURL];
   NSString *path = [aURL path];
@@ -765,7 +781,8 @@
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
   NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
+  ProjectEntity *project = [[[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc] autorelease];
+  [project createSettings];
   
   // set name and folder of the project
   NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
@@ -779,8 +796,6 @@
   NSError *error = nil;
   BOOL success = [moc save:&error];
   
-  // release project
-  [project release];
   
   if (success == NO) {
     [NSApp presentError:error];
@@ -1097,6 +1112,11 @@
 		self.project = [fetchResults objectAtIndex:0];
 		[fetchRequest release];
 //    NSLog(@"   got project");
+    
+    
+    [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
+//    NSLog(@"Did set language %@", self.project.settings.language);
+    
 		return project;
 	}
 	
