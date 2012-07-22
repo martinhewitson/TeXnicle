@@ -41,8 +41,8 @@
 @dynamic showStatusBar;
 
 - (void) awakeFromInsert
-{  
-  [self performSelector:@selector(updateSettings) withObject:nil afterDelay:0];
+{
+  [self setDefaultSettings];
 }
 
 - (void) awakeFromFetch
