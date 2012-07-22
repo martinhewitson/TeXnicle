@@ -236,15 +236,20 @@
       [filesToRemove addObject:set];
     }
   }
-  [self.sets removeObjectsInArray:filesToRemove];
+  if ([filesToRemove count] > 0) {
+    [self.sets removeObjectsInArray:filesToRemove];
+  }
   
   // update our files
   for (FileEntity *newFile in newFiles) {
     TPWarningSet *set = [self setForFile:newFile];
     if (set == nil) {
-      set = [[TPWarningSet alloc] initWithFile:newFile errors:[self warningsView:self warningsForFile:newFile]];
-      [self.sets addObject:set];
-      [set release];
+      NSArray *warnings = [self warningsView:self warningsForFile:newFile];
+      if (warnings && [warnings count] > 0) {
+        set = [[TPWarningSet alloc] initWithFile:newFile errors:warnings];
+        [self.sets addObject:set];
+        [set release];
+      }
     } else {
       // update the errors
       NSArray *newErrors = [self warningsView:self warningsForFile:newFile];

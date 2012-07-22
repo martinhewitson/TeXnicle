@@ -238,9 +238,12 @@
   for (FileEntity *file in files) {
     TPCommandSet *set = [self setForFile:file];
     if (set == nil) {
-      set = [[TPCommandSet alloc] initWithFile:file commandArray:[self commandsView:self newCommandsForFile:file]];
-      [self.sets addObject:set];
-      [set release];
+      NSArray *commands = [self commandsView:self newCommandsForFile:file];
+      if (commands && [commands count] > 0) {
+        set = [[TPCommandSet alloc] initWithFile:file commandArray:commands];
+        [self.sets addObject:set];
+        [set release];
+      }
     } else {
       // update the commands
       NSArray *commands = [self commandsView:self newCommandsForFile:file];
