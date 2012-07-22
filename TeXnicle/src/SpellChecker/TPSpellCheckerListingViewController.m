@@ -339,15 +339,23 @@
 
 - (void) doSimpleSpellCheck
 {
+  if (self.checkedFiles == nil)
+    return;
   
   TPSpellCheckedFile *checkedFile = nil;
+  
   
   if ([self.checkedFiles count] > 0) {
     checkedFile = [self.checkedFiles objectAtIndex:0];
   } else {
-    checkedFile = [[TPSpellCheckedFile alloc] initWithFile:[self fileToCheck]];
-    [self.checkedFiles addObject:checkedFile];
-    [checkedFile release];
+    id file = [self fileToCheck];
+    if (file) {
+      checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
+      [self.checkedFiles addObject:checkedFile];
+      [checkedFile release];
+    } else {
+      return;
+    }
   }
   
   NSDate *lastEdit = [self.delegate lastEdit];
@@ -580,20 +588,25 @@
 
 - (NSArray*)nonEmptyCheckedFiles
 {
-  NSArray *existingFiles = [self.checkedFiles retain];
   NSMutableArray *files = [NSMutableArray array];
-  for (TPSpellCheckedFile *file in existingFiles) {
-    if ([file.words count] > 0) {
-      [files addObject:file];
+  for (TPSpellCheckedFile *file in self.checkedFiles) {
+    if (file.words) {
+      if ([file.words count] > 0) {
+        [files addObject:file];
+      }
     }
   }
-  [existingFiles release];
   
   NSArray *sortedItems = [files sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
     NSString *first  = [[(TPSpellCheckedFile*)a valueForKey:@"file"] valueForKey:@"name"];
     NSString *second = [[(TPSpellCheckedFile*)b valueForKey:@"file"] valueForKey:@"name"];
     return [first compare:second]==NSOrderedDescending;
   }];
+  
+  if ([sortedItems count] == 0)
+    return nil;
+  
+  NSLog(@"Returning sorted items %@", sortedItems);
 
   return sortedItems;
 }
@@ -612,12 +625,15 @@
 }
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{  
-  if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {    
-    return [item valueForKey:@"selectedDisplayString"];
-  } else {
-    return [item valueForKey:@"displayString"];
+{
+  if (item) {
+    if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
+      return [item valueForKey:@"selectedDisplayString"];
+    } else {
+      return [item valueForKey:@"displayString"];
+    }
   }
+  return nil;
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
