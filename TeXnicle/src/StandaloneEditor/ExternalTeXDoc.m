@@ -132,6 +132,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self = [super init];
   if (self) {
     _encoding = -1;
+    _didSetupUI = NO;
   }
   
   return self;
@@ -199,6 +200,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) restoreUIsettings
 {
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
   if ([self fileURL]) {
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
     if (data) {
@@ -249,6 +251,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void)awakeFromNib
 {
 //  NSLog(@"Awake from nib");
+  if (!_didSetupUI) {
+    [self setupUI];
+  }
+}
+
+- (void) setupUI
+{
   self.results = [NSMutableArray array];
   
   // ensure we have a settings dictionary before proceeding
@@ -257,7 +266,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.tabbarController selectTabAtIndex:1];
   [self.infoTabbarController selectTabAtIndex:2];
   
-//  NSLog(@"Awake from nib");
+  //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
   self.texEditorViewController.delegate = self;
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
@@ -267,7 +276,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.texEditorViewController setPerformSyntaxCheck:YES];
   
 	if (self.documentData) {
-//    NSLog(@"Setting document data to %@", self.documentData);
+    //    NSLog(@"Setting document data to %@", self.documentData);
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
 	}
 	
@@ -291,7 +300,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
   [self.commandsContainerView addSubview:self.commandsViewController.view];
   
-  // setup outline view  
+  // setup outline view
   self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
   [self.outlineViewContainer addSubview:self.outlineViewController.view];
@@ -303,12 +312,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // set up engine manager
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
-    
+  
   // set up engine settings
   self.engineSettingsController = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
   [self.engineSettingsController.view setFrame:[self.prefsContainerView bounds]];
   [self.prefsContainerView addSubview:self.engineSettingsController.view];
-    
+  
   // setup palette
   self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
   [self.palette.view setFrame:[self.paletteContainerView bounds]];
@@ -322,7 +331,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // setup spellchecker
   self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
   [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
-  [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];  
+  [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];
   
   // set up engine settings
   [self setupSettings];
@@ -336,28 +345,28 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 				 selector:@selector(handleTextSelectionChanged:)
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self.texEditorViewController.textView];
-	  
+  
   [nc addObserver:self
          selector:@selector(handleTypesettingCompletedNotification:)
              name:TPEngineCompilingCompletedNotification
            object:self.engineManager];
   
   [nc addObserver:self
-         selector:@selector(handleTextChanged:) 
+         selector:@selector(handleTextChanged:)
              name:NSTextDidChangeNotification
            object:self.texEditorViewController.textView];
   
   self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
-//    NSLog(@"%@: %@", [item itemIdentifier], NSStringFromRect([[item view] frame]));
+    //    NSLog(@"%@: %@", [item itemIdentifier], NSStringFromRect([[item view] frame]));
     if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
       NSBox *box = (NSBox*)[item view];
       [box setContentView:self.miniConsole.view];
     }
   }
   [self.miniConsole message:@"Welcome to TeXnicle."];
-
+  
   // register the mini console
   [self.engineManager registerConsole:self.miniConsole];
   
@@ -365,14 +374,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.embeddedConsoleViewController = [[[TPConsoleViewController alloc] init] autorelease];
   [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
   [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
-  [self.engineManager registerConsole:self.embeddedConsoleViewController];  
+  [self.engineManager registerConsole:self.embeddedConsoleViewController];
   
   // setup status view
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
-  [self.statusViewContainer addSubview:self.statusViewController.view];  
-  statusViewIsShowing = YES; 
-//  NSLog(@"Status view showing...");
+  [self.statusViewContainer addSubview:self.statusViewController.view];
+  statusViewIsShowing = YES;
+  //  NSLog(@"Status view showing...");
   
   NSNumber *showStatusBarSetting = [self.settings valueForKey:@"TPStandAloneEditorShowStatusBar"];
   if (showStatusBarSetting) {
@@ -392,19 +401,22 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self showDocument];
   
   // resture UI settings
-  [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
+  [self restoreUIsettings];
+  //  [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
   
   // Present templates if we have no URL
   [self performSelector:@selector(checkToShowTemplateSheet) withObject:nil afterDelay:0];
   
   // insert controls tab bar in the responder chain
-  [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
+  [self insertTabbarControllerIntoResponderChain];
+  //  [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
   
   _building = NO;
   _liveUpdate = NO;
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
   self.metadataUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateMetadata) userInfo:nil repeats:YES];
-  
+
+  _didSetupUI = YES;
 }
 
 - (void) insertTabbarControllerIntoResponderChain
@@ -424,6 +436,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void)windowWillEnterVersionBrowser:(NSNotification *)notification
 {
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
 //  NSLog(@"Window will enter versions browser");
   _leftDividerPostion = self.leftView.frame.size.width;
   _rightDividerPostion = self.splitView.frame.size.width - self.rightView.frame.size.width;
@@ -444,11 +457,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void)windowWillExitVersionBrowser:(NSNotification *)notification
 {
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
 //  NSLog(@"Window will exit versions browser");
 }
 
 - (void)windowDidExitVersionBrowser:(NSNotification *)notification
 {
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
   if (self.windowForSheet == [notification object]) {
     _inVersionsBrowser = NO;
     
@@ -483,10 +498,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
-  
+//  NSLog(@"Window did become key");
   // set language for this project
-  [[NSSpellChecker sharedSpellChecker] setLanguage:[self.settings valueForKey:@"language"]];
-  
+  NSString *language = [self.settings valueForKey:@"language"];
+  if (language) {
+    [[NSSpellChecker sharedSpellChecker] setLanguage:language];
+  }  
 }
 - (void)windowWillClose:(NSNotification *)notification 
 {		
@@ -1028,28 +1045,22 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([self fileURL] == nil) {
     // make sure we store the text editor string to our document string
     [self syncDocumentDataFromEditor];
+//    NSLog(@" doc data synced");
   }
         
-//	NSRange selRange = [self.texEditorViewController.textView selectedRange];
-//	NSRect selRect = [self.texEditorViewController.textView visibleRect];
-	NSResponder *r = [[self windowForSheet] firstResponder];
   [self saveDocumentWithDelegate:self didSaveSelector:@selector(documentSave:didSave:contextInfo:) contextInfo:NULL];
-//	[self.texEditorViewController.textView setSelectedRange:selRange];
-//	[self.texEditorViewController.textView scrollRectToVisible:selRect];
-	[[self windowForSheet] makeFirstResponder:r];
-  [self updateFileStatus];
-  // capture UI state
-  [self captureUIsettings];
 }
 
 - (void)documentSave:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
-{
-//  if (didSave) {
-//    [self.engine setFilepath:[[self fileURL] path]];
-//  } else {
-//  }
-  [self updateFileStatus];  
-  [self.texEditorViewController.textView breakUndoCoalescing];
+{  
+  if (didSave) {
+//    NSLog(@" did save");
+    
+    [self updateFileStatus];
+    [self.texEditorViewController.textView breakUndoCoalescing];
+    // capture UI state
+    [self captureUIsettings];
+  }
 }
 
 - (BOOL) inVersionsMode
@@ -1080,10 +1091,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void)documentSaveAndBuild:(NSDocument *)doc didSave:(BOOL)didSave contextInfo:(void  *)contextInfo
 {
   if (didSave) {
-//    [self.engine setFilepath:[[self fileURL] path]];
     [self build];
   } else {
   }
+  
   [self updateFileStatus];  
 }
 
@@ -1215,8 +1226,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	return success;
 }
 
-- (void)syncFileModificationDate 
+- (void)syncFileModificationDate
 {
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
   NSFileManager *fm = [NSFileManager defaultManager];
   NSDictionary *fileAttributes = [fm attributesOfItemAtPath:[[self fileURL] path]
                                                       error:NULL];
@@ -1566,11 +1578,19 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSString*) nameOfFileBeingEdited
 {
+  if ([self fileURL] == nil) {
+    return nil;
+  }
+  
   return [[self fileURL] lastPathComponent];
 }
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
 {
+  if ([self fileURL] == nil) {
+    return NO;
+  }
+  
   if ([[[self fileURL] pathExtension] isEqualToString:@"tex"] == NO) {
     return NO;
   }
@@ -2411,6 +2431,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSString*)fileToCheck
 {
+  if ([self fileURL] == nil)
+    return @"untitled";
+  
   return [[self fileURL] path];
 }
 
@@ -2462,6 +2485,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) updateMetadata
 {
+  NSString *str = [self.texEditorViewController.textView string];
+  if (str == nil || [str length] == 0) {
+    return;
+  }
+  
   [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
   [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
   [self.citationsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
@@ -2473,6 +2501,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
 {
+  if ([self fileURL] == nil)
+    return @[@"untitled"];
+  
   return [NSArray arrayWithObject:[self fileURL]];
 }
 
@@ -2492,6 +2523,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView
 {
+  if ([self fileURL] == nil)
+    return @[@"untitled"];
+  
   return [NSArray arrayWithObject:[self fileURL]];
 }
 
@@ -2513,6 +2547,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView
 {
+  if ([self fileURL] == nil)
+    return @[@"untitled"];
+  
   return [NSArray arrayWithObject:[self fileURL]];
 }
 
@@ -2547,7 +2584,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark Commands view delegate
 
 - (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView
-{  
+{
+  if ([self fileURL] == nil)
+    return @[@"untitled"];
+  
   return [NSArray arrayWithObject:[self fileURL]];
 }
 

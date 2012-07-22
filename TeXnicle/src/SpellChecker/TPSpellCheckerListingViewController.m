@@ -606,7 +606,7 @@
   if ([sortedItems count] == 0)
     return nil;
   
-  NSLog(@"Returning sorted items %@", sortedItems);
+//  NSLog(@"Returning sorted items %@", sortedItems);
 
   return sortedItems;
 }

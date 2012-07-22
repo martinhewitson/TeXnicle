@@ -191,6 +191,8 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   HHValidatedButton *forwardTabButton;
   
   NSMenu *createFolderMenu;
+  
+  BOOL _didSetup;
 }
 
 @property (retain) NSMenu *createFolderMenu;

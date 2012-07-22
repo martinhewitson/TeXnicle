@@ -337,10 +337,9 @@
 										<object class="NSTabView" id="397531503">
 											<reference key="NSNextResponder" ref="282066192"/>
 											<int key="NSvFlags">18</int>
-											<string key="NSFrameSize">{265, 576}</string>
+											<string key="NSFrameSize">{235, 576}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="913435364"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -417,7 +416,7 @@
 																	<object class="NSButton" id="552241396">
 																		<reference key="NSNextResponder" ref="289218011"/>
 																		<int key="NSvFlags">289</int>
-																		<string key="NSFrame">{{229, 7}, {24, 24}}</string>
+																		<string key="NSFrame">{{199, 7}, {24, 24}}</string>
 																		<reference key="NSSuperview" ref="289218011"/>
 																		<reference key="NSWindow"/>
 																		<reference key="NSNextKeyView" ref="1002247264"/>
@@ -442,7 +441,7 @@
 																		<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																	</object>
 																</array>
-																<string key="NSFrame">{{0, -1}, {265, 40}}</string>
+																<string key="NSFrame">{{0, -1}, {235, 40}}</string>
 																<reference key="NSSuperview" ref="913435364"/>
 																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="66560347"/>
@@ -459,7 +458,7 @@
 																			<object class="NSOutlineView" id="433385401">
 																				<reference key="NSNextResponder" ref="688878657"/>
 																				<int key="NSvFlags">4352</int>
-																				<string key="NSFrameSize">{265, 536}</string>
+																				<string key="NSFrameSize">{235, 536}</string>
 																				<reference key="NSSuperview" ref="688878657"/>
 																				<reference key="NSWindow"/>
 																				<reference key="NSNextKeyView" ref="993744224"/>
@@ -474,7 +473,7 @@
 																				<array class="NSMutableArray" key="NSTableColumns">
 																					<object class="NSTableColumn" id="594890412">
 																						<string key="NSIdentifier">NameColumn</string>
-																						<double key="NSWidth">262</double>
+																						<double key="NSWidth">232</double>
 																						<double key="NSMinWidth">16</double>
 																						<double key="NSMaxWidth">1000</double>
 																						<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -557,7 +556,7 @@
 																				<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 																			</object>
 																		</array>
-																		<string key="NSFrameSize">{265, 536}</string>
+																		<string key="NSFrameSize">{235, 536}</string>
 																		<reference key="NSSuperview" ref="821625925"/>
 																		<reference key="NSWindow"/>
 																		<reference key="NSNextKeyView" ref="433385401"/>
@@ -591,7 +590,7 @@
 																		<double key="NSPercent">0.99585062240663902</double>
 																	</object>
 																</array>
-																<string key="NSFrame">{{0, 39}, {265, 536}}</string>
+																<string key="NSFrame">{{0, 39}, {235, 536}}</string>
 																<reference key="NSSuperview" ref="913435364"/>
 																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="688878657"/>
@@ -605,7 +604,7 @@
 																<double key="NSMagnification">1</double>
 															</object>
 														</array>
-														<string key="NSFrameSize">{265, 576}</string>
+														<string key="NSFrameSize">{235, 576}</string>
 														<reference key="NSSuperview" ref="397531503"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="821625925"/>
@@ -1198,14 +1197,14 @@
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 												</object>
 											</array>
-											<string key="NSFrame">{{0, 576}, {265, 25}}</string>
+											<string key="NSFrame">{{0, 576}, {235, 25}}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="785694388"/>
 											<string key="NSClassName">MHToolbarBackgroundView</string>
 										</object>
 									</array>
-									<string key="NSFrameSize">{265, 600}</string>
+									<string key="NSFrameSize">{235, 600}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="783282180"/>
@@ -1230,7 +1229,7 @@
 																<object class="NSCustomView" id="632442715">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">4370</int>
-																	<string key="NSFrameSize">{544, 485}</string>
+																	<string key="NSFrameSize">{513, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="582867506"/>
@@ -1239,7 +1238,7 @@
 																<object class="NSCustomView" id="792010655">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">4370</int>
-																	<string key="NSFrameSize">{544, 485}</string>
+																	<string key="NSFrameSize">{513, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="632442715"/>
@@ -1339,14 +1338,14 @@
 																<object class="NSCustomView" id="582867506">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">266</int>
-																	<string key="NSFrame">{{56, 483}, {488, 27}}</string>
+																	<string key="NSFrame">{{56, 483}, {457, 27}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="749074883"/>
 																	<string key="NSClassName">PSMTabBarControl</string>
 																</object>
 															</array>
-															<string key="NSFrameSize">{544, 509}</string>
+															<string key="NSFrameSize">{513, 509}</string>
 															<reference key="NSSuperview" ref="776577915"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="88865871"/>
@@ -1354,7 +1353,7 @@
 															<string key="NSClassName">NSView</string>
 														</object>
 													</array>
-													<string key="NSFrameSize">{544, 509}</string>
+													<string key="NSFrameSize">{513, 509}</string>
 													<reference key="NSSuperview" ref="249746137"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="9263989"/>
@@ -1364,7 +1363,7 @@
 												<object class="NSCustomView" id="268931328">
 													<reference key="NSNextResponder" ref="249746137"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 510}, {544, 51}}</string>
+													<string key="NSFrame">{{0, 510}, {513, 51}}</string>
 													<reference key="NSSuperview" ref="249746137"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="748353080"/>
@@ -1372,7 +1371,7 @@
 													<string key="NSClassName">NSView</string>
 												</object>
 											</array>
-											<string key="NSFrame">{{0, 39}, {544, 561}}</string>
+											<string key="NSFrame">{{0, 39}, {513, 561}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="776577915"/>
@@ -1383,7 +1382,7 @@
 										<object class="NSCustomView" id="748353080">
 											<reference key="NSNextResponder" ref="1002247264"/>
 											<int key="NSvFlags">290</int>
-											<string key="NSFrame">{{0, -1}, {544, 40}}</string>
+											<string key="NSFrame">{{0, -1}, {513, 40}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="323224487"/>
@@ -1391,7 +1390,7 @@
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
-									<string key="NSFrame">{{266, 0}, {544, 600}}</string>
+									<string key="NSFrame">{{236, 0}, {513, 600}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="249746137"/>
@@ -1404,15 +1403,14 @@
 										<object class="NSCustomView" id="913261726">
 											<reference key="NSNextResponder" ref="323224487"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrame">{{0, -1}, {289, 602}}</string>
+											<string key="NSFrame">{{0, -1}, {350, 602}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
-									<string key="NSFrame">{{811, 0}, {289, 600}}</string>
+									<string key="NSFrame">{{750, 0}, {350, 600}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="913261726"/>
@@ -6178,6 +6176,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
@@ -6189,7 +6188,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -6201,9 +6202,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="projectTypeChanged:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
@@ -6211,6 +6214,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -6222,6 +6226,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -6242,6 +6247,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -6288,8 +6297,16 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -6336,6 +6353,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -6346,6 +6367,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="projectTypeChanged:">
@@ -6374,6 +6399,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -6418,6 +6447,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="togglePanelFocus:">
 							<string key="name">togglePanelFocus:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

@@ -161,6 +161,8 @@
   NSDate *lastEdit;
   NSTimer *liveUpdateTimer;
   NSNumber *maxOutlineViewDepth;
+  
+  BOOL _didSetupUI;
 }
 
 @property (retain) NSDate *lastEdit;

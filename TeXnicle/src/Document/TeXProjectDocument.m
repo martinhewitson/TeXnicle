@@ -156,12 +156,13 @@
 
 - (void) awakeFromNib
 {
+  if ([super respondsToSelector:@selector(awakeFromNib)])
+    [super awakeFromNib];
+  
   _building = NO;
   _liveUpdate = NO;
   
   self.tabHistory = [NSMutableArray array];
-  [self observePreferences];  
-  [self setupLiveUpdateTimer];
 }
 
 - (void)setupLiveUpdateTimer
@@ -253,6 +254,9 @@
 
 - (void) setupDocument
 {
+  if (_didSetup)
+    return;
+  
 //  NSLog(@"setupDocument");
 
   // outline view
@@ -457,6 +461,8 @@
   
   // Show document
   [self showDocument];
+  
+  _didSetup = YES;
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
@@ -474,13 +480,14 @@
   }
   [self.miniConsole message:@"Welcome to TeXnicle."];
   [self setupDocument];
+  [self observePreferences];
+  [self setupLiveUpdateTimer];
 
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPRestoreOpenTabs] boolValue]) {
-    [self restoreOpenTabs];
-//    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
   }
-//  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
-  [self restoreUIstate];
+  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
+  
 }
 
 - (void) restoreOpenTabs
