@@ -10,6 +10,12 @@
 
 @class TPSectionTemplate;
 
+enum TPOutlineExpansionState : NSInteger {
+  TPOutlineExpansionStateUnknown = -1,
+  TPOutlineExpansionStateCollapse = 0,
+  TPOutlineExpansionStateExpanded = 1
+  } TPOutlineExpansionState;
+  
 @interface TPSection : NSObject {
   
   TPSection *parent;
@@ -18,9 +24,10 @@
   id file;
   TPSectionTemplate *type;
   NSString *name;
-  
+  NSInteger expansionState;
 }
 
+@property (assign) NSInteger expansionState;
 @property (assign) TPSection *parent;
 @property (retain) NSArray *subsections;
 @property (assign) NSUInteger startIndex;

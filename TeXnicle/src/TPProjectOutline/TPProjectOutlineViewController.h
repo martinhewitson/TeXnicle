@@ -20,6 +20,7 @@
 @end
 
 
+
 @interface TPProjectOutlineViewController : NSViewController <NSTextViewDelegate, TPOutlineBuilderDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
   TPOutlineBuilder *outlineBuilder;
   id<TPProjectOutlineDelegate> delegate;

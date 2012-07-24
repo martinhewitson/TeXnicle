@@ -18,6 +18,7 @@
 @synthesize startIndex;
 @synthesize type;
 @synthesize name;
+@synthesize expansionState;
 
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName
 {
@@ -68,6 +69,7 @@
     self.file = aFile;
     self.type = aType;
     self.name = aName;
+    self.expansionState = TPOutlineExpansionStateUnknown;
   }
   return self;
 }

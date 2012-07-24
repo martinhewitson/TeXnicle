@@ -93,6 +93,8 @@
 - (void) didComputeNewSections
 {
   [self.outlineView reloadData];
+  // restore state
+  [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];
 }
 
 - (BOOL) shouldGenerateOutline
@@ -112,6 +114,41 @@
 
 #pragma mark -
 #pragma mark OutlineView delegate
+
+- (void) restoreExpansionState
+{
+  for (TPSection *s in self.outlineBuilder.sections) {
+    switch (s.expansionState) {
+      case TPOutlineExpansionStateCollapse:
+        [self.outlineView collapseItem:s];
+        break;
+      case TPOutlineExpansionStateExpanded:
+        [self.outlineView expandItem:s];
+        break;
+      case TPOutlineExpansionStateUnknown:
+        [self.outlineView expandItem:s];
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+- (void) outlineViewItemDidCollapse:(NSNotification *)notification
+{
+  TPSection *section = [[notification userInfo] valueForKey:@"NSObject"];
+  if (section) {
+    section.expansionState = TPOutlineExpansionStateCollapse;
+  }
+}
+
+- (void) outlineViewItemDidExpand:(NSNotification *)notification
+{
+  TPSection *section = [[notification userInfo] valueForKey:@"NSObject"];
+  if (section) {
+    section.expansionState = TPOutlineExpansionStateExpanded;
+  }
+}
 
 - (void) outlineViewSelectionDidChange:(NSNotification *)notification
 {
