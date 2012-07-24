@@ -41,6 +41,7 @@
 
 NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
 NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
+NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWarningsUpdatedNotification";
 
 @implementation TPFileEntityMetadata
 
@@ -267,6 +268,14 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   [nc postNotificationName:TPFileMetadataUpdatedNotification object:self];
 }
 
+- (void) postWarningsUpdateNotification
+{
+  // send notification of update
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc postNotificationName:TPFileMetadataWarningsUpdatedNotification object:self];
+}
+
+
 - (void) cleanup
 {
   NSFileManager *fm = [NSFileManager defaultManager];
@@ -287,7 +296,7 @@ NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNoti
   for (TPSyntaxError *error in self.syntaxErrors) {
     error.file = self.parent; 
   }
-  [self postUpdateNotification];
+  [self postWarningsUpdateNotification];
 }
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker
