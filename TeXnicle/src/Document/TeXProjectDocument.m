@@ -1998,7 +1998,7 @@
 	NSArray *files = [project valueForKey:@"items"];
 	for (ProjectItemEntity *item in files) {
 		if ([item isKindOfClass:[FileEntity class]]) {
-      NSString *path = [[prefix stringByAppendingString:[item valueForKey:@"filepath"]] stringByStandardizingPath];
+      NSString *path = [[[prefix stringByAppendingString:[item valueForKey:@"filepath"]] stringByStandardizingPath] stringByDeletingPathExtension];
 			[texfiles addObject:path];
 		}
 	}	
