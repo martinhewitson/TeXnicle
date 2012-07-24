@@ -25,8 +25,10 @@ enum TPOutlineExpansionState : NSInteger {
   TPSectionTemplate *type;
   NSString *name;
   NSInteger expansionState;
+  BOOL needsReload;
 }
 
+@property (assign) BOOL needsReload;
 @property (assign) NSInteger expansionState;
 @property (assign) TPSection *parent;
 @property (retain) NSArray *subsections;
@@ -38,6 +40,7 @@ enum TPOutlineExpansionState : NSInteger {
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName;
 - (id) initWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName;
 - (BOOL)matches:(id)object;
+- (BOOL)nearlyMatches:(id)object;
 
 - (NSAttributedString*)selectedDisplayNameWithDetails;
 - (NSAttributedString*)displayNameWithDetails;

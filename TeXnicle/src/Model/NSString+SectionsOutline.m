@@ -93,7 +93,15 @@
             // if we don't already have this section, we add it
             for (TPSection *s in sections) {
               if ([s matches:section] == YES) {
-                section = s; 
+//                NSLog(@"Section %@ already exists", section);
+                section = s;
+              } else {
+                // if the thing matches except for startIndex, then just set the parent the same
+                if ([s nearlyMatches:section] == YES) {
+                  NSInteger newIndex = section.startIndex;
+                  section = s;
+                  section.startIndex = newIndex;
+                }
               }
             }
             [sectionsFound addObject:section];

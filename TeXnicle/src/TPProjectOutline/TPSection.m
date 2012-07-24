@@ -19,6 +19,7 @@
 @synthesize type;
 @synthesize name;
 @synthesize expansionState;
+@synthesize needsReload;
 
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName
 {
@@ -38,6 +39,38 @@
   if (self.startIndex != s.startIndex) {
     return NO;
   }
+  
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    if (self.file != s.file) {
+      return NO;
+    }
+  } else {
+    if ([self.file isEqualTo:s.file] == NO) {
+      return NO;
+    }
+  }
+  
+  if (self.type != s.type) {
+    return NO;
+  }
+  
+  if ([self.name isEqualTo:s.name] == NO) {
+    return NO;
+  }
+  
+  return YES;
+}
+
+
+- (BOOL)nearlyMatches:(id)object
+{
+  //  NSLog(@"Checking %@ against %@", self, object);
+  
+  if ([object isKindOfClass:[TPSection class]] == NO) {
+    return NO;
+  }
+  
+  TPSection *s = (TPSection*)object;
   
   if ([self.file isKindOfClass:[FileEntity class]]) {
     if (self.file != s.file) {

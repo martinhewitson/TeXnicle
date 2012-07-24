@@ -136,6 +136,8 @@
   
   // get the sections from the dictionary
   NSArray *newSections = [dict valueForKey:@"sections"];
+  NSInteger newSectionsCount = [newSections count];
+  NSInteger existingSectionsCount = [self.sections count];
   
   // remove existing sections for this file
   [self.sections removeAllObjects];
@@ -147,6 +149,10 @@
   if ([self.sections count] > 0) {
     // set parents
     TPSection *root = [self.sections objectAtIndex:0];
+    if (newSectionsCount != existingSectionsCount) {
+      // reload
+      root.needsReload = YES;
+    }
     for (int kk=1; kk<[self.sections count]; kk++) {
       TPSection *s = [self.sections objectAtIndex:kk];
       
@@ -154,7 +160,10 @@
       TPSection *parent = [self.sections objectAtIndex:jj];
       while (jj>=0) {      
         if ([TPSectionTemplate template:s.type isChildOf:parent.type]) {
-          s.parent = parent;
+          if (s.parent != parent) {
+            s.parent = parent;
+            parent.needsReload = YES;
+          }
           break;
         } 
         if (jj>=0) {

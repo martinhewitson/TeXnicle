@@ -61,6 +61,8 @@
 - (void) setupOutlineBuilder
 {
   [self.outlineBuilder performSelectorOnMainThread:@selector(buildOutline) withObject:nil waitUntilDone:YES];
+  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
+//  [self.outlineView reloadData];
   [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:2];
   
   [self.outlineBuilder startTimer];  
@@ -91,10 +93,26 @@
 }
 
 - (void) didComputeNewSections
-{
-  [self.outlineView reloadData];
-  // restore state
-  [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];
+{  
+  // we should only reload items which have new items in them...
+  if ([self.outlineBuilder.sections count] > 0) {
+//    TPSection *root = [self.outlineBuilder.sections objectAtIndex:0];
+//    if (root.needsReload) {
+//      [self.outlineView reloadData];
+//      root.needsReload = NO;
+//    } else {
+      for (TPSection *s in self.outlineBuilder.sections) {
+        if (s.needsReload) {
+          [self.outlineView reloadData];
+          s.needsReload = NO;
+        }
+      }
+//    }
+    //  [self.outlineView reloadData];
+    
+    // restore state
+    [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];
+  }
 }
 
 - (BOOL) shouldGenerateOutline
