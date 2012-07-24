@@ -75,13 +75,19 @@
     
     //-------------- get citatations
     if ([self isCancelled]) return;
-    NSArray *citationsFound = [self.text citations];		
-    [newCitations addObjectsFromArray:citationsFound];			
     
-    // citations from any bib files included in this file but not in the project
-    NSArray *entries = [self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
-    [newCitations addObjectsFromArray:entries];
-
+    // don't check bst files.
+    if ([self.file.extension isEqualToString:@"bst"] == NO) {
+      // get \bibitem entries
+      NSArray *citationsFound = [self.text citations];
+      [newCitations addObjectsFromArray:citationsFound];
+      
+      // citations from any bib files included in this file but not in the project
+      if ([self isCancelled]) return;
+      NSArray *entries = [self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
+      [newCitations addObjectsFromArray:entries];
+    }
+    
     // add any citations from any bib files
     if ([self isCancelled]) return;
     if ([self.file.extension isEqualToString:@"bib"]) {
