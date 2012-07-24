@@ -55,7 +55,7 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(handleMetadataUpdate:)
-               name:TPFileMetadataUpdatedNotification
+               name:TPFileMetadataWarningsUpdatedNotification
              object:nil];
     
   }
