@@ -496,10 +496,11 @@
   for (NSString *errorString in errorStrings) {
     errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ([errorString length]>0) {
-      TPSyntaxError *error = [TPSyntaxError errorWithMessageLine:errorString];
+      TPSyntaxError *error = [[TPSyntaxError alloc] initWithMessageLine:errorString];
       if ([error.line integerValue] != NSNotFound && [error.message length]>0 && [newErrors containsObject:error] == NO) {
         [newErrors addObject:error];
       }
+      [error release];
     }
   }
   
