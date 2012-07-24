@@ -100,7 +100,7 @@
 
 - (FileEntity*)fileWithPath:(NSString*)aPath
 {
-  if (aPath == nil)
+  if (aPath == nil || [aPath length] == 0)
     return nil;
   
 	NSString *pathToTest = aPath;
@@ -123,7 +123,7 @@
 
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath
 {
-  if (aPath == nil)
+  if (aPath == nil || [aPath length] == 0)
     return nil;
   
 	NSString *pathToTest = aPath;
