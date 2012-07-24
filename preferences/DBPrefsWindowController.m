@@ -201,6 +201,11 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 
 - (IBAction)showWindow:(id)sender 
 {
+  if ([[self window] isVisible]) {
+    [[self window] makeKeyAndOrderFront:self];
+    return;
+  }
+  
 		// This forces the resources in the nib to load.
 	(void)[self window];
 
