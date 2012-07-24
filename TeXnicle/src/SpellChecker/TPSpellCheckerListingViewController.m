@@ -476,7 +476,7 @@
         NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
         NSDate *lastCheck = checkedFile.lastCheck;
         
-        if (checkedFile.needsUpdate || [lastEdit timeIntervalSinceDate:lastCheck] > 0 || lastCheck == nil) {
+        if (checkedFile.needsUpdate || [lastCheck timeIntervalSinceDate:lastEdit] < 2 || lastCheck == nil) {
           //            NSLog(@"+ Checking file %@", [file name]);
           
           [self checkFile:checkedFile];
