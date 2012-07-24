@@ -493,6 +493,9 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   NSURL *url = [NSURL URLWithString:html];
   NSString *latest = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
   
+  if (latest == nil)
+    return;
+  
   NSArray *parts = [latest componentsSeparatedByString:@" "];
   CGFloat latestVersion = [[parts objectAtIndex:0] floatValue];
   CGFloat latestBuild = [[parts objectAtIndex:1] floatValue];
