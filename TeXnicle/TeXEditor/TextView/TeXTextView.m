@@ -1810,8 +1810,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSUInteger lineEnd;
 	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];		
 	NSRange lineRange = NSMakeRange(lineStart, lineEnd-lineStart); 
-	NSString *previousLine = [[str substringWithRange:lineRange] 
-														stringByTrimmingCharactersInSet:whitespaceCharacterSet];
+	NSString *previousLine = [str substringWithRange:lineRange];
+  // get indentation
+  NSInteger count = 0;
+  NSString *indentString = @"";
+  while (count < [previousLine length]) {
+    unichar c = [previousLine characterAtIndex:count];
+    if ([whitespaceCharacterSet characterIsMember:c] == NO) {
+      indentString = [previousLine substringToIndex:count];
+      break;
+    }
+    count++;
+  }
+	previousLine = [previousLine stringByTrimmingCharactersInSet:whitespaceCharacterSet];
 	previousLine = [previousLine stringByTrimmingCharactersInSet:newLineCharacterSet];
 	
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -1847,14 +1858,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *insert = nil;
     if (start < end && start != NSNotFound && end != NSNotFound) {
       NSString *tag = [previousLine substringWithRange:NSMakeRange(start, end-start+1)];
-      insert = [NSString stringWithFormat:@"\n\\end{%@}", tag];
+      insert = [NSString stringWithFormat:@"\n%@\\end{%@}", indentString, tag];
     }
     
     if (insert) {
       // now put in the requested newline
       [super insertNewline:sender];
       
-      // add the new \end
+      // insert the indent string
+      [super insertText:indentString];
+      
+      // tab in
       [self insertTab:self];
       
       // record this location
