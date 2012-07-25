@@ -14,6 +14,7 @@
 #import "externs.h"
 #import "TPFileEntityMetadata.h"
 #import "NSString+SectionsOutline.h"
+#import "NSArray+Color.h"
 
 @implementation TPOutlineBuilder
 
@@ -43,9 +44,48 @@
            selector:@selector(handleFileMetadataSectionsUpdateNotifcation:)
                name:TPFileMetadataSectionsUpdatedNotification
              object:nil];
+    
+    [self observePreferences];
   }
   
   return self;
+}
+
+- (NSArray*)keysToObserve
+{
+  return @[TPOutlineDocumentColor, TPOutlinePartColor, TPOutlineChapterColor, TPOutlineSectionColor, TPOutlineSubsectionColor, TPOutlineSubsubsectionColor, TPOutlineParagraphColor, TPOutlineSubparagraphColor];
+}
+
+- (void) stopObserving
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  for (NSString *key in [self keysToObserve]) {
+    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", key]];
+  }
+}
+
+- (void) observePreferences
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  for (NSString *key in [self keysToObserve]) {
+    [defaults addObserver:self
+               forKeyPath:[NSString stringWithFormat:@"values.%@", key]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+    
+  }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+											ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+  for (NSString *key in [self keysToObserve]) {
+    if ([keyPath isEqualToString:[NSString stringWithFormat:@"values.%@", key]]) {
+      [self setTemplateColors];
+    }
+  }
 }
 
 
@@ -72,6 +112,7 @@
 
 - (void) dealloc
 {
+  [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
   self.templates = nil;
@@ -262,6 +303,40 @@
   
   self.depth = [self.templates count]-1;
   
+  [self setTemplateColors];
+  
+}
+
+- (void) setTemplateColors
+{
+  [self setColorForName:@"begin" withPreferenceName:TPOutlineDocumentColor];
+  [self setColorForName:@"part" withPreferenceName:TPOutlinePartColor];
+  [self setColorForName:@"chapter" withPreferenceName:TPOutlineChapterColor];
+  [self setColorForName:@"section" withPreferenceName:TPOutlineSectionColor];
+  [self setColorForName:@"subsection" withPreferenceName:TPOutlineSubsectionColor];
+  [self setColorForName:@"subsubsection" withPreferenceName:TPOutlineSubsubsectionColor];
+  [self setColorForName:@"paragraph" withPreferenceName:TPOutlineParagraphColor];
+  [self setColorForName:@"subparagraph" withPreferenceName:TPOutlineSubparagraphColor];  
+}
+
+- (void) setColorForName:(NSString*)name withPreferenceName:(NSString*)prefName
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *colorVals = nil;
+  
+  for (TPSectionTemplate *s in self.templates) {
+    if ([s.name isEqualToString:name]) {
+      
+      colorVals = [defaults valueForKey:prefName];
+      if (colorVals) {
+        [s setColor:[colorVals colorValue]];
+      } else {
+        [s setColor:[NSColor blackColor]];
+      }
+      
+      break;
+    }
+  }
 }
 
 - (NSArray*) childrenOfSection:(id)parent

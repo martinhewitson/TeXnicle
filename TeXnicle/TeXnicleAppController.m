@@ -150,6 +150,17 @@ NSString * const TESyntaxColorCommand = @"TESyntaxColorCommand";
 NSString * const TESyntaxArgumentsColor = @"TESyntaxArgumentsColor";
 NSString * const TESyntaxColorArguments = @"TESyntaxColorArguments";
 
+// outline colors
+NSString * const TPOutlineDocumentColor = @"TPOutlineDocumentColor";
+NSString * const TPOutlinePartColor = @"TPOutlinePartColor";
+NSString * const TPOutlineChapterColor = @"TPOutlineChapterColor";
+NSString * const TPOutlineSectionColor = @"TPOutlineSectionColor";
+NSString * const TPOutlineSubsectionColor = @"TPOutlineSubsectionColor";
+NSString * const TPOutlineSubsubsectionColor = @"TPOutlineSubsubsectionColor";
+NSString * const TPOutlineParagraphColor = @"TPOutlineParagraphColor";
+NSString * const TPOutlineSubparagraphColor = @"TPOutlineSubparagraphColor";
+
+
 NSString * const TPPaletteRowHeight = @"TPPaletteRowHeight";
 NSString * const TPLibraryRowHeight = @"TPLibraryRowHeight";
 
@@ -300,6 +311,18 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.0/255.0 green:100.0/255.0 blue:185.0/255.0 alpha:1.0]] forKey:TESyntaxArgumentsColor];
 	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorArguments];
 	
+  
+  // outline colors
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  blackColor]] forKey:TPOutlineDocumentColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  darkGrayColor]] forKey:TPOutlinePartColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  darkGrayColor]] forKey:TPOutlineChapterColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceRed:0.8 green:0.2 blue:0.2 alpha:1.0]] forKey:TPOutlineSectionColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceRed:0.6 green:0.5 blue:0.5 alpha:1.0]] forKey:TPOutlineSubsectionColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceRed:0.6 green:0.5 blue:0.5 alpha:1.0]] forKey:TPOutlineSubsubsectionColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceWhite:0.6 alpha:1.0]] forKey:TPOutlineParagraphColor];
+	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceWhite:0.7 alpha:1.0]] forKey:TPOutlineSubparagraphColor];
+
+  
   //---------- Paths
 	// GS
 	[defaultValues setObject:@"/usr/local/bin/gs" forKey:TPGSPath];

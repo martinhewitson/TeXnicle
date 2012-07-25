@@ -106,6 +106,15 @@ extern NSString * const TESyntaxColorMarkupL1;
 extern NSString * const TESyntaxColorMarkupL2;
 extern NSString * const TESyntaxColorMarkupL3;
 
+// outline colors
+extern NSString * const TPOutlineDocumentColor;
+extern NSString * const TPOutlinePartColor;
+extern NSString * const TPOutlineChapterColor;
+extern NSString * const TPOutlineSectionColor;
+extern NSString * const TPOutlineSubsectionColor;
+extern NSString * const TPOutlineSubsubsectionColor;
+extern NSString * const TPOutlineParagraphColor;
+extern NSString * const TPOutlineSubparagraphColor;
 
 // special chars
 extern NSString * const TESyntaxSpecialCharsColor;
