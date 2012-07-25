@@ -1,0 +1,2753 @@
+bplist00“?_WebSubresources_WebMainResource´!&+05:‘	
+_WebResourceData_WebResourceMIMEType^WebResourceURL_WebResourceResponseO//* @group General Styles */
+
+body {
+	background: #ffffff url(images/content_bg.png) repeat-y;
+	text-align: center;
+	margin: 0;
+	color: #000000;
+	font: 0.78em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	padding: 0;
+}
+
+p {
+}
+
+b, strong {
+
+}
+
+a:link, a:visited {
+	color: #21536a;
+}
+
+a:hover, a:active {
+	color: #ffa000;
+}
+
+img {
+	border-style: none;
+}
+
+.image-left {
+	float: left;
+	margin: 3px 3px 3px 0;
+	padding: 3px 3px 3px 0;
+}
+
+.image-right {
+	float: right;
+	margin: 3px 0 3px 3px;
+	padding: 3px 0 3px 3px;
+}
+	
+/* @end */
+
+/* @group Layout */
+
+#container {
+	text-align: left;
+	margin-left: 215px;
+	margin-right: 20px;
+}
+
+.clearer {
+	clear: both;
+}
+
+#pageHeader {
+	border-bottom: 1px solid #d6d6d6;
+}
+
+#pageHeader img {
+	float: right;
+	margin-right: 10px;
+}
+
+#pageHeader h1 {
+	font: bold 2em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	margin: 10px 0 0px;
+	color: #21536a;
+}
+
+#pageHeader h2 {
+	font: 1.6em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	margin: 0px 0 10px;
+	color: #ffa000;
+}
+
+#contentContainer {
+}
+
+#contentContainer #content {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#sidebarContainer {
+	float: left;
+ 	width: 199px;
+	position: absolute;
+	top: 0;
+	text-align: left;
+	left: 0;
+}
+
+#sidebarContainer #sidebar {
+	padding: 5px;
+}
+
+#sidebarContainer .sideHeader {
+	padding: 15px 5px 0;
+	margin: 0 -5px;
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #1f5369;
+}
+
+#footer {
+	text-align: left;
+	border-top: 1px solid #d6d6d6;
+}
+
+#footer p {
+	padding-top: 10px;
+	margin: 0;
+}
+
+#footer a:link, #footer a:visited {
+}
+
+#footer a:hover, #footer a:active {
+}
+	
+/* @end */
+
+/* @group Bread-crumb */
+
+#breadcrumbcontainer {
+	padding-bottom: 10px;
+}
+
+#breadcrumbcontainer ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#breadcrumbcontainer li {
+	display: inline;
+}
+
+#breadcrumbcontainer a {
+}
+
+#breadcrumbcontainer a:hover {
+
+}
+	
+/* @end */
+
+/* @group Toolbar */
+
+/* Toolbar Styles */
+
+#navcontainer {
+}
+
+#navcontainer #current {
+	text-decoration: none;
+	background: url(images/button_over.jpg) repeat-x;
+	font-weight: bold;
+	color: #21536a;
+	text-shadow: 0px 1px 0px #ffffff;
+}
+
+#navcontainer #current:hover {
+}
+
+#navcontainer .currentAncestor {
+	text-decoration: none;
+	background: url(images/button_over.jpg) repeat-x;
+	font-weight: bold;
+}
+/* Parent - Level 0 */
+
+#navcontainer ul{
+	width: 199px;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#navcontainer li {
+}
+
+#navcontainer a {
+	display: block;
+	text-decoration: none;
+	background: url(images/button_normal.jpg) repeat-x;
+	border-bottom: 1px solid #c3c3c3;
+	padding: 5px;
+	font-weight: bold;
+	height: 15px;
+	color: #21536a;
+	text-shadow: 0px 1px 0px #ffffff;
+}
+
+#navcontainer a:hover {
+	background: url(images/button_over.jpg) repeat-x;
+}
+
+#navcontainer a:active {
+}
+
+/* Child - Level 1 */
+
+#navcontainer ul ul {
+}
+
+#navcontainer ul ul li {
+
+}
+
+#navcontainer ul ul a {
+	text-indent: 20px;
+}
+
+#navcontainer ul ul a:hover{
+}
+
+#navcontainer ul ul #current{
+}
+
+/* Child - Level 2 */
+
+#navcontainer ul ul ul {
+}
+
+#navcontainer ul ul ul li { 
+}
+
+#navcontainer ul ul ul a{
+	text-indent: 40px;
+}
+
+#navcontainer ul ul ul a:hover{
+
+}
+
+/* Child Level 3 */
+
+#navcontainer ul ul ul ul {
+}
+
+#navcontainer ul ul ul ul li { 
+}
+
+#navcontainer ul ul ul ul a{
+	text-indent: 60px;
+}
+
+#navcontainer ul ul ul ul a:hover{
+
+}
+
+/* Child Level 4 */
+
+#navcontainer ul ul ul ul ul {
+}
+
+#navcontainer ul ul ul ul ul li { 
+}
+
+#navcontainer ul ul ul ul ul a{
+	text-indent: 80px;
+}
+
+#navcontainer ul ul ul ul ul a:hover{
+
+}
+
+/* Child Level 5 */
+
+#navcontainer ul ul ul ul ul ul {
+}
+
+#navcontainer ul ul ul ul ul ul li { 
+}
+
+#navcontainer ul ul ul ul ul ul a{
+	text-indent: 100px;
+}
+
+#navcontainer ul ul ul ul ul ul a:hover{
+
+}
+
+/* @end */
+
+/* @group Global Classes */
+
+blockquote, .standout {
+	color: #1c5380;
+	font-style: italic;
+	margin: 10px 0;
+	padding: 0 10px;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+.imageStyle {
+
+}
+
+/* Main content area unordered list styles */
+#contentContainer #content ul {
+}
+
+#contentContainer #content li {
+}
+
+ul.disc {
+	list-style-type: disc;
+}
+
+ul.circle {
+	list-style-type: circle;
+}
+
+ul.square {
+	list-style-type: square;
+}
+
+ol.arabic-numbers {
+	list-style-type: decimal;
+}
+
+ol.upper-alpha {
+	list-style-type: upper-alpha;
+}
+
+ol.lower-alpha {
+	list-style-type: lower-alpha;
+}
+
+ol.upper-roman {
+	list-style-type: upper-roman;
+}
+
+ol.lower-roman {
+	list-style-type: lower-roman;
+}
+
+/* Sidebar area unordered list styles */
+#sidebarContainer #sidebar ul {
+	margin: 10px 0;
+	padding: 0;
+}
+
+#sidebarContainer #sidebar li {
+}
+
+/* Table Styles */
+table {
+	font-size: 1em;
+}
+	
+/* @end */
+
+/* @group Blog */
+
+/* @group Tag Cloud */
+ul.blog-tag-cloud {
+	margin: 0 0 10px;
+	padding: 0;
+	text-align: justify;
+}
+
+ul.blog-tag-cloud li {
+	display: inline;
+	padding-right: 5px;
+}
+
+.blog-tag-size-1 {	
+	font-size: 0.8em;
+}
+
+.blog-tag-size-2 {	
+	font-size: 0.85em;
+}
+
+.blog-tag-size-3 {	
+	font-size: 0.9em;
+}
+
+.blog-tag-size-4 {	
+	font-size: 0.95em;
+}
+
+.blog-tag-size-5 {	
+	font-size: 1em;
+}
+
+.blog-tag-size-6 {	
+	font-size: 1.05em;
+}
+
+.blog-tag-size-7 {	
+	font-size: 1.1em;
+}
+
+.blog-tag-size-8 {	
+	font-size: 1.15em;
+}
+
+.blog-tag-size-9 {	
+	font-size: 1.2em;
+}
+
+.blog-tag-size-10 {	
+	font-size: 1.25em;
+}
+
+.blog-tag-size-11 {	
+	font-size: 1.3em;
+}
+
+.blog-tag-size-12 {	
+	font-size: 1.35em;
+}
+
+.blog-tag-size-13 {
+	font-size: 1.4em;
+}
+
+.blog-tag-size-14 {	
+	font-size: 1.45em;
+}
+
+.blog-tag-size-15 {
+	font-size: 1.5em;
+}
+
+.blog-tag-size-16 {	
+	font-size: 1.55em;
+}
+
+.blog-tag-size-17 {	
+	font-size: 1.6em;
+}
+
+.blog-tag-size-18 {	
+	font-size: 1.65em;
+}
+
+.blog-tag-size-19 {
+	font-size: 1.7em;
+}
+
+.blog-tag-size-20 {	
+	font-size: 1.75em;
+}
+
+/* @end */
+
+/* @group Archive Page */
+
+.blog-archive-background {
+}
+
+.blog-entry-summary {
+	margin-bottom: 10px;
+}.blog-archive-headings-wrapper {
+	margin-bottom: 25px;
+}
+
+.blog-archive-entries-wrapper {
+}
+
+.blog-archive-entries-wrapper .blog-entry {
+}.blog-archive-month {
+	font-size: 1.6em;
+	color: #21536a;
+}
+
+.blog-archive-link {
+}.blog-archive-link a:link, .blog-archive-link a:visited {
+}
+	
+/* @end */
+
+.blog-entry {
+	margin-bottom: 25px;
+}
+
+.blog-entry-title {
+	font-size: 1.6em;
+	color: #21536a;
+	font-weight: normal;
+	margin: 0;
+}
+
+.blog-entry-title a {
+	color: #21536a;
+	text-decoration: none;
+}
+
+.blog-entry-title a:hover {
+	color: #ffa000;
+}
+
+.blog-entry-date {
+	margin-bottom: 10px;
+	color: #21536a;
+}
+
+.blog-read-more {
+	display: block;
+	padding-top: 10px;
+	margin-bottom: 10px;
+	font-style: italic;
+}
+
+.blog-entry-body {
+}
+
+.blog-entry-comments {
+
+}
+
+/*styles the category link in the main entry */
+.blog-entry-category {
+}
+
+.blog-entry-category a:link, .blog-entry-category a:visited {
+}
+
+/*styles the permalink link in the main entry */
+.blog-entry-permalink {
+}
+
+.blog-entry-permalink a:link, .blog-entry-permalink a:visited {
+}
+
+/* styles the archives in the blog sidebar */
+#blog-archives {
+	margin-bottom: 10px;
+}
+
+.blog-archive-link-enabled {
+}
+
+.blog-archive-link-disabled {
+}
+
+/* Styles the blog categories in the blog sidebar */
+#blog-categories {
+	margin-bottom: 10px;
+}
+
+.blog-category-link-enabled {
+}
+
+.blog-category-link-disabled {
+}
+
+/* Styles the blog RSS feeds in the blog sidebar */
+#blog-rss-feeds {
+	margin-bottom: 10px;
+}
+
+.blog-rss-link {
+}
+
+.blog-comments-rss-link {
+}
+	
+/* @end */
+
+/* @group File Sharing */
+
+.filesharing-description {
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	color: #21536a;
+}
+
+.filesharing-item {
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+.filesharing-item-title a:link {
+	font-size: 1.5em;
+}
+
+.filesharing-item-title a:hover {
+}
+
+.filesharing-item-title a:visited {
+
+}
+
+.filesharing-item-description {
+}
+
+/* @end */
+
+/* @group Photo Album */
+
+/* @group Index Page (Thumbnail view) */
+
+.album-title {
+	font-size: 1.6em;
+	color: #21536a;
+}
+
+.album-description {
+	margin-bottom: 60px;
+}
+
+.album-wrapper {
+	display: block;
+	width: 99%;
+	position: relative;
+}
+
+.thumbnail-wrap {
+	text-align: center;
+	position: relative;
+	float: left;
+	margin-bottom: 60px;
+	margin-right: 10px;
+}
+
+
+.thumbnail-frame {
+	border: Solid 1px #cccccc;
+	padding: 1px;
+	position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.thumbnail-frame:hover {
+}
+
+.thumbnail-frame a {
+}
+
+.thumbnail-frame a:hover {
+}
+
+.thumbnail-frame img {
+	margin: auto;
+    border: none;
+}
+
+.thumbnail-caption {
+	font-size: 0.85em;
+	color: #21536a;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 38px;
+	display: block;
+}
+	
+/* @end */
+
+/* @group Single Page (Photo view) */
+
+.photo-background {
+	text-align: left;
+}
+
+.photo-navigation {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 199px;
+}
+
+.photo-links {
+	display: block;
+	text-decoration: none;
+	background: url(images/button_normal.jpg) repeat-x;
+	border-bottom: 1px solid #c3c3c3;
+	padding: 5px 0 5px 10px;
+	font-weight: bold;
+	height: 15px;
+}
+
+.photo-navigation a:link, .photo-navigation a:visited {
+}
+
+.photo-navigation a:hover {
+
+}
+
+.photo-frame{
+	position: absolute;
+	top: 10px;
+	left: 210px;
+}
+
+.photo-title {
+	font: bold 1.5em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	margin: 10px 0 0px;
+	padding-left: 10px;
+	color: #21536a;
+}
+
+.photo-caption {
+	font: 1em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	padding-left: 10px;
+	margin: 0px 0 10px;
+	color: #ffa000;
+}
+
+/* @group EXIF data */
+/* Data wrapper */
+.exif-data {
+	text-align: left;
+	width: 180px;
+	position: absolute;
+	top: 110px;
+}
+
+/* p tag classes for all exif data */
+p.exif-version {
+}
+
+p.exif-colour-space {
+}
+
+p.exif-focal-length {
+}
+
+p.exif-dimensions {
+}
+
+p.exif-pixel-y-dimension {
+}
+
+p.exif-pixel-x-dimension {
+}
+
+p.exif-oecf-value {
+}
+
+p.exif-subsec-time-original {
+}
+
+p.exif-exposure-mode {
+}
+
+p.exif-spatial-frequency-response {
+}
+
+p.exif-scene-capture-type {
+}
+
+p.exif-subject-location {
+}
+
+p.exif-shutter-speed {
+}
+
+p.exif-datetime-original {
+}
+
+p.exif-subsec-time {
+}
+
+p.exif-compressed-bits-per-pixel {
+}
+
+p.exif-flash-energy {
+}
+
+p.exif-saturation {
+}
+
+p.exif-brightness {
+}
+
+p.exif-exposure-time {
+}
+
+p.exif-f-number {
+}
+
+p.exif-file-source {
+}
+
+p.exif-gain-control {
+}
+
+p.exif-subject-area {
+}
+
+p.exif-cfa-pattern {
+}
+
+p.exif-scene-type {
+}
+
+p.exif-white-balance {
+}
+
+p.exif-flash {
+}
+
+p.exif-exposure-index {
+}
+
+p.exif-flashpix-version {
+}
+
+p.exif-device-setting-description {
+}
+
+p.exif-focalplane-x-resolution {
+}
+
+p.exif-image-uniqueid {
+}
+
+p.exif-components-configuration {
+}
+
+p.exif-light-source {
+}
+
+p.exif-sensing-method {
+}
+
+p.exif-aperture {
+}
+
+p.exif-sharpness {
+}
+
+p.exif-exposure-program {
+}
+
+p.exif-subject-distance {
+}
+
+p.exif-subsec-time-digitized {
+}
+
+p.exif-contrast {
+}
+
+p.exif-focalplane-resolution-unit {
+}
+
+p.exif-gamma {
+}
+
+p.exif-35mm-focal-length {
+}
+
+p.exif-datetime-digitized {
+}
+
+p.exif-subject-distance-range {
+}
+
+p.exif-custom-rendered {
+}
+
+p.exif-max-aperture {
+}
+
+p.exif-sound-file {
+}
+
+p.exif-metering-mode {
+}
+
+p.exif-spectral-sensitivity {
+}
+
+p.exif-exposure-bias {
+}
+
+p.exif-focalplane-y-resolution {
+}
+
+p.exif-iso-rating {
+}
+
+p.exif-maker-note {
+}
+
+p.exif-digital-zoom-ratio {
+}
+
+p.exif-user-comment {
+}
+
+/* @end */
+
+/* @end */
+	
+/* @end */
+
+/* @group Quicktime Page */
+
+.movie-description {
+
+}
+	
+/* @end */
+
+/* @group Quicktime Album */
+
+/* @group Index Page (Movie Thumbnail view) */
+
+.movie-page-title {
+	font-size: 1.6em;
+	color: #21536a;
+}.movie-page-description {
+	margin-bottom: 10px;
+}.movie-thumbnail-frame {
+	border: Solid 1px #cccccc;
+	padding: 1px;
+	float: left;
+	width: 132px;
+	height: 132px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.movie-thumbnail-frame:hover {
+}
+
+.movie-thumbnail-caption {
+	color: #21536a;
+}
+	
+/* @end */
+
+/* @group Single Page (Movie View) */
+
+.movie-background {
+	margin: 5px;
+	background: none #ffffff;
+}
+
+.movie-title {
+	font: 1.2em 'Lucida Grande', LucidaGrande, Lucida, Helvetica, Arial, sans-serif;
+	color: #ffa000;
+}
+
+.movie-frame {
+
+}
+	
+/* @end */
+
+
+/* @end */
+
+/* @group Contact Form */
+.message-text { 
+} 
+
+.required-text {
+} 
+
+.form-input-field {
+} 
+
+.form-input-button { 
+} 
+/* @end */
+
+
+Xtext/css_Chttp://www.meandmark.com/rw_common/themes/simplebusiness/styles.cssO
+bplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Chttp://www.meandmark.com/rw_common/themes/simplebusiness/styles.css“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëR◊…ﬁ»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApacheXtext/css_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:02 GMT_timeout=5, max=100U12059ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionary/“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›#(3<BEKT]_fny{ÑÜàäåéêíîùü°£•ß©´≠¥¡œ›‚Ì¸7=]rxÉàû¢Ø≤∑Àœ„Ò             f              ‘OÜâPNG
+
+   IHDR   »      ›vµ   gAMA  ÷ÿ‘OX2   tEXtSoftware Adobe ImageReadyq…e<   IDATx⁄b¸¯Ò#√(TOü>0 ¶Ñ˛”    IENDÆB`ÇYimage/png_Nhttp://www.meandmark.com/rw_common/themes/simplebusiness/images/content_bg.pngObplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Nhttp://www.meandmark.com/rw_common/themes/simplebusiness/images/content_bg.png“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëZ≈© »”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApacheYimage/png_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:10 GMT_timeout=5, max=98S134ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionaryÜ“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›.3>GMPV_hjqyÑÜèëìïóôõùü®™¨Æ∞≤¥∂∏øÃ⁄ËÌ¯#CIi}Ååëß´∏∫ø”◊Î˘$             f              &‘OÍ/*<group=General Styles>*/
+
+body {
+	background: transparent none;
+	margin: 0px 5% 0px 5%;
+	text-align: left;
+	color: #000000;
+	letter-spacing: 0.5px;
+	word-spacing: 1px;
+	padding: 0px;
+	font: 10pt Georgia, Times New Roman, Times, serif;
+}
+
+p { 
+}
+
+b, strong {
+	font-weight: bold;
+}
+
+a:link, a:visited {
+}
+
+a:hover, a:active {
+}
+	
+/*</group>*/
+
+/*<group=Layout>*/
+
+#container {	text-align: left;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#pageHeader {
+	text-align: left;
+	background: none;
+	border-bottom: 1px solid #cccccc;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#pageHeader img {
+	float: right;
+}
+
+#pageHeader h1 {
+	color: #000000;
+	margin: 0px;
+	font-weight: bold;
+	font-size: 16pt;
+	padding: 0px;
+}
+
+#pageHeader h2 {
+	color: #333333;
+	margin: 0px;
+	font-size: 13pt;
+	font-weight: normal;
+	padding: 0px;
+}
+
+#contentContainer {
+	float: none !important;
+	padding: 0px;
+	margin-bottom: 10px;
+}
+
+#contentContainer #content {
+	padding: 0px;
+}
+
+#contentContainer #content img {
+}
+
+#sidebarContainer {
+	float: none;
+	width: auto;
+	border-bottom: 1px solid #cccccc;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+#sidebarContainer .sidebar {
+}
+
+#footer {
+	text-align: center; 
+	background: none;
+	color: #000000;
+	font-size: 10pt;
+	border-top: 1px solid #cccccc;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+#footer a {
+}
+
+#footer a:hover {
+}
+	
+/*</group>*/
+
+/*<group=toolbar>*/
+
+#navcontainer {
+	display: none;
+}
+	
+/*</group>*/
+
+/*<group=Bread-crumb>*/
+
+#breadcrumbcontainer {
+	display: none;
+}
+	
+/*</group>*/
+
+/*<group=Global Classes>*/
+
+.standout {
+	color: #474747;
+	font-size: 11pt;
+	font-weight: bold;
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	padding: 40px;
+	background-color: #f5f5f5;
+	font-style: italic;
+}
+
+h1 {
+	font-size: 20pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+h2 {
+	font-size: 18pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+h3 {
+	font-size: 16pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+h4 {
+	font-size: 14pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+h5 {
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.imageStyle {
+}
+	
+/*</group>*/
+
+/*<group=Blog>*/
+
+.blog-entry {
+	border-style: none;
+}
+
+.blog-entry-title {
+	font-size: 16pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+	border-style: none;
+}
+
+.blog-entry-date {
+	margin-bottom: 10px;
+	margin-top: 5px;
+	border-style: none;
+	font-size: 10pt;
+	color: #333333;
+}
+
+.blog-entry-body {
+	margin-bottom: 45px;
+	border-style: none;
+}
+	
+/*</group>*/
+
+/*<group=File Sharing>*/
+
+.filesharing-description {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.filesharing-item {
+	
+}
+
+.filesharing-item-title {
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.filesharing-item-description {
+	margin-bottom: 10px;
+}
+
+/*</group>*/
+
+/*<group=Photo Album>*/
+
+/*<group=Index Page (Thumbnail view)>*/
+
+.album-title {
+	font-size: 16pt;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.album-description {
+}
+
+.thumbnail-frame {
+	margin: 0px;
+	padding: 0px;
+}
+
+.thumbnail-frame a {
+}
+
+.thumbnail-frame a:hover {
+	height: 30px;
+}
+
+.thumbnail-frame img {
+	background: repeat url(images/sidebar_bg.png);
+}
+
+.thumbnail-caption {
+	color: #4c4c4c;
+	margin-top: -2px;
+	font-size: 10pt;
+}
+	
+/*</group>*/
+
+/*<group=Single Page (Photo view)>*/
+
+.photo-background {
+	text-align: center;
+}
+
+.photo-navigation {
+	background: none;
+	display: none;
+}
+
+.photo-navigation a {
+	display: none;
+}
+
+.photo-navigation a:hover {
+	display: none;
+}
+
+.photo-frame{
+
+}
+
+.photo-links {
+	display: none;
+}
+
+.photo-title {
+	display: none;
+}
+
+.photo-caption {
+	font-size: 11pt;
+	margin: 0px;
+	text-align: center;
+}
+
+/*</group>*/
+	
+/*</group>*/
+
+/*<group=Quicktime Page>*/
+
+.movie-title {
+	font-size: 16pt;
+	font-weight: bold;
+	text-align: left;
+}
+
+.movie-description {
+	text-align: center;
+}
+
+.movie-frame {
+	text-align: center;
+	margin-bottom: 10px;
+}
+	
+/*</group>*/
+
+
+Xtext/css_Bhttp://www.meandmark.com/rw_common/themes/simplebusiness/print.cssObplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Bhttp://www.meandmark.com/rw_common/themes/simplebusiness/print.css“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥Îë[†[»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApacheXtext/css_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:10 GMT_timeout=5, max=97T3818ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionaryÍ“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›"'2;ADJS\^emxzÉÖáâãçèëìúû†¢§¶®™¨≥¿Œ‹·Ï˚6<\puÄÖõü¨Ø¥»Ã‡Ó              f              ‘Ou/*<group=General Styles>*/
+
+body {
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+	margin: 0px;
+	padding: 0;
+	white-space: pre;
+}
+
+p {
+}
+
+b, strong {
+
+}
+
+a:link {
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #681796;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+	background: #0000ff;
+	color: #ffffff;
+}
+
+img {
+	max-width: 99%;
+}
+
+.image-left {
+
+}
+
+.image-right {
+
+}
+	
+/*</group>*/
+
+/*<group=Layout>*/
+
+#container { 
+	background: #ffffff;
+	background-image: none;
+	width: 100%;
+}
+
+#pageHeader {
+	height: auto;
+	text-align: left;
+	margin-bottom: 8px;
+	background: #000000;
+	padding: 3px;
+	border-bottom: solid #191919 2px;
+}
+
+#pageHeader img {
+	position: relative;
+	top: auto;
+	right: auto;
+}
+
+#pageHeader h1 {
+	color: #ffffff;
+	font-size: 1.3em;
+	margin: 0 0 5px;
+	padding-top: 0px;
+	font-weight: bold;
+}
+
+#pageHeader h2 {
+	font-size: 1.1em;
+	margin: 0;
+	color: #ffffff;
+	font-weight: normal;
+}
+
+#contentContainer {
+	margin: 0px;
+	display: block;
+	width: auto;
+}
+
+#contentContainer #content {
+	margin: 0;
+	padding: 0;
+}
+
+#sidebarContainer {
+	float: none;
+	width: auto;
+	display: block;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #808080;
+}
+
+#sidebarContainer #sidebar {
+	margin: 0;
+	padding: 0px;
+}
+
+#sidebarContainer .sideHeader {
+	color: #000000;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#footer { 
+	width: auto;
+	text-align: left;
+	padding: 0px;
+	margin: 0;
+}
+
+#footer p {
+}
+
+#footer a:link, #footer a:visited {
+
+}
+
+#footer a:hover, #footer a:active {
+}
+	
+/*</group>*/
+
+/*<group=Bread-crumb>*/
+
+#breadcrumbcontainer {
+	margin-bottom: 5px;
+}
+
+#breadcrumbcontainer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#breadcrumbcontainer li {
+	display: inline;
+	padding: 0;
+	margin: 0;
+}
+
+#breadcrumbcontainer a {
+	padding: 0;
+}
+
+#breadcrumbcontainer a:hover {
+
+}
+	
+/*</group>*/
+
+/*<group=Toolbar>*/
+
+/* Toolbar Styles */
+
+#navcontainer {
+	color: #000000;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+#navcontainer #current {
+
+}
+
+#navcontainer #current:hover {
+}
+
+#navcontainer .currentAncestor {
+
+}
+
+/* Parent - Level 0 */
+
+#navcontainer ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#navcontainer li {
+	margin: 0;
+	padding: 0;
+}
+
+#navcontainer a {
+	padding: 0;
+}
+
+#navcontainer a:hover {
+}
+
+#navcontainer a:active {
+}
+
+/* Child - Level 1 */
+
+#navcontainer ul ul {
+	list-style-type: none;
+	margin-left: 2px;
+	padding: 0;
+	color: black;
+}
+
+#navcontainer ul ul li {
+	padding-left: 5px;
+}
+
+#navcontainer ul ul a {
+	padding: 0;
+}
+
+#navcontainer ul ul a:hover{
+}
+
+#navcontainer ul ul #current{
+}
+
+/* Child - Level 2 */
+
+#navcontainer ul ul ul {
+
+}
+
+#navcontainer ul ul ul li {
+	padding-left: 10px;
+}
+
+#navcontainer ul ul ul a{
+}
+
+#navcontainer ul ul ul a:hover{
+
+}
+
+/* Child Level 3 */
+
+#navcontainer ul ul ul {
+
+}
+
+#navcontainer ul ul ul ul li {
+	padding-left: 15px;
+}
+
+#navcontainer ul ul ul ul a{
+}
+
+#navcontainer ul ul ul ul a:hover{
+
+}
+
+/* Child Level 4 */
+
+#navcontainer ul ul ul ul {
+
+}
+
+#navcontainer ul ul ul ul ul li {
+	padding-left: 20px;
+}
+
+#navcontainer ul ul ul ul ul a{
+}
+
+#navcontainer ul ul ul ul ul a:hover{
+
+}
+
+/* Child Level 5 */
+
+#navcontainer ul ul ul ul ul {
+
+}
+
+#navcontainer ul ul ul ul ul ul li { 
+}
+
+#navcontainer ul ul ul ul ul ul a{
+}
+
+#navcontainer ul ul ul ul ul ul a:hover{
+
+}
+
+/*</group>*/
+
+/*<group=Global Classes>*/
+
+blockquote, .standout {
+	margin: 0;
+	padding: 5px;
+	font-weight: bold;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+.imageStyle {
+
+}
+	
+/*</group>*/
+
+/*<group=Blog>*/
+
+/*<group=Archive Page>*/
+
+.blog-archive-background {
+}.blog-archive-headings-wrapper {
+}
+
+.blog-archive-entries-wrapper {
+}
+
+.blog-archive-entries-wrapper .blog-entry {
+}.blog-archive-month {
+}
+
+.blog-archive-link {
+}.blog-archive-link a:link, .blog-archive-link a:visited {
+}
+	
+/*</group>*/
+
+.blog-entry {
+}
+
+.blog-entry-title {
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.blog-entry-date {
+	margin-bottom: 8px;
+	font-size: 0.9em;
+	color: #808080;
+}
+
+.blog-entry-body {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.blog-entry-comments {
+	display: none;
+}
+
+.blog-entry-category {
+}
+
+.blog-category-link-enabled {
+}
+
+.blog-category-link-disabled {
+}
+
+/*</group>*/
+
+/*<group=File Sharing>*/
+
+.filesharing-description {
+}
+
+.filesharing-item {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.filesharing-item-title a:link {
+}
+
+.filesharing-item-title a:hover {
+}
+
+.filesharing-item-title a:visited {
+
+}
+
+.filesharing-item-description {
+}
+
+/*</group>*/
+
+/*<group=Photo Album>*/
+
+/*<group=Index Page (Thumbnail view)>*/
+
+.album-title {
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+.album-description {
+	margin-bottom: 8px;
+	font-size: 0.9em;
+	color: #808080;
+}
+
+table.thumbnail-table {
+	width: 99%;
+}
+
+table.thumbnail-table, table.thumbnail-table tr, table.thumbnail-table td {
+	display: block;
+}
+
+.thumbnail-frame {
+}
+
+.thumbnail-frame:hover {
+}
+
+.thumbnail-frame a {
+}
+
+.thumbnail-frame a:hover {
+}
+
+.thumbnail-frame img {
+}
+
+.thumbnail-caption {
+}
+	
+/*</group>*/
+
+/*<group=Single Page (Photo view)>*/
+
+.photo-background {
+}
+
+.photo-navigation {
+}
+
+.photo-links {
+}
+
+.photo-navigation a:link, .photo-navigation a:visited {
+
+}
+
+.photo-navigation a:hover {
+
+}
+
+.photo-frame{
+}
+
+.photo-title {
+}
+
+.photo-caption {
+}
+
+/*</group>*/
+	
+/*</group>*/
+
+/*<group=Quicktime Page>*/
+
+.movie-description {
+
+}
+	
+/*</group>*/
+
+/*<group=Quicktime Album>*/
+
+/*<group=Index Page (Movie Thumbnail view)>*/
+
+.movie-page-title {
+	font-weight: bold;
+	margin-bottom: 3px;
+}.movie-page-description {
+	margin-bottom: 8px;
+	font-size: 0.9em;
+	color: #808080;
+}.movie-thumbnail-frame {
+}
+
+.movie-thumbnail-frame:hover {
+}
+
+.movie-thumbnail-caption {
+}
+	
+/*</group>*/
+
+/*<group=Single Page (Movie View)>*/
+
+.movie-background {
+}
+
+.movie-title {
+}
+
+.movie-frame {
+
+}
+	
+/*</group>*/
+
+
+/*</group>*/
+
+/*<group=Contact Form>*/
+.message-text { 
+} 
+
+.required-text {
+} 
+
+.form-input-field {
+	max-width: 100%;
+} 
+
+.form-input-button { 
+} 
+/*</group>*/
+
+
+Xtext/css_Ehttp://www.meandmark.com/rw_common/themes/simplebusiness/handheld.cssO
+bplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Ehttp://www.meandmark.com/rw_common/themes/simplebusiness/handheld.css“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥Îë\*‘√»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApacheXtext/css_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:12 GMT_timeout=5, max=96T6005ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionaryu“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›%*5>DGMV_ahp{}Üàäåéêíîñü°£•ß©´≠Ø∂√—ﬂ‰Ô˛	9?_sxÉàû¢Ø≤∑Àœ„Ò             f              ‘ OA#sidebarContainer {
+	float: left;
+}
+
+.exif-data {
+	left: 10px;
+}
+Xtext/css_Uhttp://www.meandmark.com/rw_common/themes/simplebusiness/css/sidebar/sidebar_left.cssObplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Uhttp://www.meandmark.com/rw_common/themes/simplebusiness/css/sidebar/sidebar_left.css“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëRÿa∑»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApacheXtext/css_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:02 GMT_timeout=5, max=100R65ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionaryA“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›5:ENTW]foqxÄãçñòöúû†¢§¶Ø±≥µ∑πªΩø∆”·ÔÙˇ )IOoÑáíó≠±æ¿≈Ÿ›Òˇ*             f              ,‘"#$%O9/*
+ * RapidWeaver 3.5.0 theme functions.
+ * Script Version 2.1
+ * Updated 26 May 2006.
+ */
+
+
+
+/*
+ * Function to generate "open in new window" link as W3C compliant
+ */
+
+function externalLinks() {
+if (!document.getElementsByTagName) return; 
+var anchors = document.getElementsByTagName("a"); 
+for (var i=0; i<anchors.length; i++) { 
+var anchor = anchors[i]; 
+if (anchor.getAttribute("href") && 
+anchor.getAttribute("rel") == "external") 
+anchor.target = "_blank";
+} 
+} 
+window.onload = externalLinks;
+
+
+
+
+/*
+ * Functions to generate OBJECT and EMBED tags for Flash content.
+ * Resource: http://blog.deconcept.com/swfobject/
+ *
+ * SWFObject is (c) 2006 Geoff Stearns and is released under the MIT License:
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+if(typeof deconcept == "undefined") var deconcept = new Object();
+if(typeof deconcept.util == "undefined") deconcept.util = new Object();
+if(typeof deconcept.SWFObjectUtil == "undefined") deconcept.SWFObjectUtil = new Object();
+deconcept.SWFObject = function(swf, id, w, h, ver, c, useExpressInstall, quality, xiRedirectUrl, redirectUrl, detectKey){
+	if (!document.createElement || !document.getElementById) { return; }
+	this.DETECT_KEY = detectKey ? detectKey : 'detectflash';
+	this.skipDetect = deconcept.util.getRequestParameter(this.DETECT_KEY);
+	this.params = new Object();
+	this.variables = new Object();
+	this.attributes = new Array();
+	if(swf) { this.setAttribute('swf', swf); }
+	if(id) { this.setAttribute('id', id); }
+	if(w) { this.setAttribute('width', w); }
+	if(h) { this.setAttribute('height', h); }
+	if(ver) { this.setAttribute('version', new deconcept.PlayerVersion(ver.toString().split("."))); }
+	this.installedVer = deconcept.SWFObjectUtil.getPlayerVersion(this.getAttribute('version'), useExpressInstall);
+	if(c) { this.addParam('bgcolor', c); }
+	var q = quality ? quality : 'high';
+	this.addParam('quality', q);
+	this.setAttribute('useExpressInstall', useExpressInstall);
+	this.setAttribute('doExpressInstall', false);
+	var xir = (xiRedirectUrl) ? xiRedirectUrl : window.location;
+	this.setAttribute('xiRedirectUrl', xir);
+	this.setAttribute('redirectUrl', '');
+	if(redirectUrl) { this.setAttribute('redirectUrl', redirectUrl); }
+}
+deconcept.SWFObject.prototype = {
+	setAttribute: function(name, value){
+		this.attributes[name] = value;
+	},
+	getAttribute: function(name){
+		return this.attributes[name];
+	},
+	addParam: function(name, value){
+		this.params[name] = value;
+	},
+	getParams: function(){
+		return this.params;
+	},
+	addVariable: function(name, value){
+		this.variables[name] = value;
+	},
+	getVariable: function(name){
+		return this.variables[name];
+	},
+	getVariables: function(){
+		return this.variables;
+	},
+	getVariablePairs: function(){
+		var variablePairs = new Array();
+		var key;
+		var variables = this.getVariables();
+		for(key in variables){
+			variablePairs.push(key +"="+ variables[key]);
+		}
+		return variablePairs;
+	},
+	getSWFHTML: function() {
+		var swfNode = "";
+		if (navigator.plugins && navigator.mimeTypes && navigator.mimeTypes.length) { // netscape plugin architecture
+			if (this.getAttribute("doExpressInstall")) this.addVariable("MMplayerType", "PlugIn");
+			swfNode = '<embed type="application/x-shockwave-flash" src="'+ this.getAttribute('swf') +'" width="'+ this.getAttribute('width') +'" height="'+ this.getAttribute('height') +'"';
+			swfNode += ' id="'+ this.getAttribute('id') +'" name="'+ this.getAttribute('id') +'" ';
+			var params = this.getParams();
+			 for(var key in params){ swfNode += [key] +'="'+ params[key] +'" '; }
+			var pairs = this.getVariablePairs().join("&");
+			 if (pairs.length > 0){ swfNode += 'flashvars="'+ pairs +'"'; }
+			swfNode += '/>';
+		} else { // PC IE
+			if (this.getAttribute("doExpressInstall")) this.addVariable("MMplayerType", "ActiveX");
+			swfNode = '<object id="'+ this.getAttribute('id') +'" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+ this.getAttribute('width') +'" height="'+ this.getAttribute('height') +'">';
+			swfNode += '<param name="movie" value="'+ this.getAttribute('swf') +'" />';
+			var params = this.getParams();
+			for(var key in params) {
+			 swfNode += '<param name="'+ key +'" value="'+ params[key] +'" />';
+			}
+			var pairs = this.getVariablePairs().join("&");
+			if(pairs.length > 0) {swfNode += '<param name="flashvars" value="'+ pairs +'" />';}
+			swfNode += "</object>";
+		}
+		return swfNode;
+	},
+	write: function(elementId){
+		if(this.getAttribute('useExpressInstall')) {
+			// check to see if we need to do an express install
+			var expressInstallReqVer = new deconcept.PlayerVersion([6,0,65]);
+			if (this.installedVer.versionIsValid(expressInstallReqVer) && !this.installedVer.versionIsValid(this.getAttribute('version'))) {
+				this.setAttribute('doExpressInstall', true);
+				this.addVariable("MMredirectURL", escape(this.getAttribute('xiRedirectUrl')));
+				document.title = document.title.slice(0, 47) + " - Flash Player Installation";
+				this.addVariable("MMdoctitle", document.title);
+			}
+		}
+		if(this.skipDetect || this.getAttribute('doExpressInstall') || this.installedVer.versionIsValid(this.getAttribute('version'))){
+			var n = (typeof elementId == 'string') ? document.getElementById(elementId) : elementId;
+			n.innerHTML = this.getSWFHTML();
+			return true;
+		}else{
+			if(this.getAttribute('redirectUrl') != "") {
+				document.location.replace(this.getAttribute('redirectUrl'));
+			}
+		}
+		return false;
+	}
+}
+
+/* ---- detection functions ---- */
+deconcept.SWFObjectUtil.getPlayerVersion = function(reqVer, xiInstall){
+	var PlayerVersion = new deconcept.PlayerVersion([0,0,0]);
+	if(navigator.plugins && navigator.mimeTypes.length){
+		var x = navigator.plugins["Shockwave Flash"];
+		if(x && x.description) {
+			PlayerVersion = new deconcept.PlayerVersion(x.description.replace(/([a-z]|[A-Z]|\s)+/, "").replace(/(\s+r|\s+b[0-9]+)/, ".").split("."));
+		}
+	}else{
+		try{
+			var axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+			for (var i=3; axo!=null; i++) {
+				axo = new ActiveXObject("ShockwaveFlash.ShockwaveFlash."+i);
+				PlayerVersion = new deconcept.PlayerVersion([i,0,0]);
+			}
+		}catch(e){}
+		if (reqVer && PlayerVersion.major > reqVer.major) return PlayerVersion; // version is ok, skip minor detection
+		// this only does the minor rev lookup if the user's major version 
+		// is not 6 or we are checking for a specific minor or revision number
+		// see http://blog.deconcept.com/2006/01/11/getvariable-setvariable-crash-internet-explorer-flash-6/
+		if (!reqVer || ((reqVer.minor != 0 || reqVer.rev != 0) && PlayerVersion.major == reqVer.major) || PlayerVersion.major != 6 || xiInstall) {
+			try{
+				PlayerVersion = new deconcept.PlayerVersion(axo.GetVariable("$version").split(" ")[1].split(","));
+			}catch(e){}
+		}
+	}
+	return PlayerVersion;
+}
+deconcept.PlayerVersion = function(arrVersion){
+	this.major = parseInt(arrVersion[0]) != null ? parseInt(arrVersion[0]) : 0;
+	this.minor = parseInt(arrVersion[1]) || 0;
+	this.rev = parseInt(arrVersion[2]) || 0;
+}
+deconcept.PlayerVersion.prototype.versionIsValid = function(fv){
+	if(this.major < fv.major) return false;
+	if(this.major > fv.major) return true;
+	if(this.minor < fv.minor) return false;
+	if(this.minor > fv.minor) return true;
+	if(this.rev < fv.rev) return false;
+	return true;
+}
+/* ---- get value of query string param ---- */
+deconcept.util = {
+	getRequestParameter: function(param){
+		var q = document.location.search || document.location.hash;
+		if(q){
+			var startIndex = q.indexOf(param +"=");
+			var endIndex = (q.indexOf("&", startIndex) > -1) ? q.indexOf("&", startIndex) : q.length;
+			if (q.length > 1 && startIndex > -1) {
+				return q.substring(q.indexOf("=", startIndex)+1, endIndex);
+			}
+		}
+		return "";
+	}
+}
+/* fix for video streaming bug */
+deconcept.SWFObjectUtil.cleanupSWFs = function() {
+	var objects = document.getElementsByTagName("OBJECT");
+	for (var i=0; i < objects.length; i++) {
+		for (var x in objects[i]) {
+			if (typeof objects[i][x] == 'function') {
+				objects[i][x] = null;
+			}
+		}
+	}
+}
+if (typeof window.onunload == 'function') {
+	var oldunload = window.onunload;
+		window.onunload = function() {
+		deconcept.SWFObjectUtil.cleanupSWFs();
+		oldunload();
+	}
+} else {
+	window.onunload = deconcept.SWFObjectUtil.cleanupSWFs;
+}
+/* add Array.push if needed (ie5) */
+if (Array.prototype.push == null) { Array.prototype.push = function(item) { this[this.length] = item; return this.length; }}
+
+/* add some aliases for ease of use/backwards compatibility */
+var getQueryParamValue = deconcept.util.getRequestParameter;
+var FlashObject = deconcept.SWFObject; // for legacy support
+var SWFObject = deconcept.SWFObject;
+
+
+
+
+
+/*
+ * Functions to generate OBJECT and EMBED tags for QuickTime content.
+ * Resource: http://developer.apple.com/internet/ieembedfix.html
+ */
+
+/************** LOCALIZABLE GLOBAL VARIABLES ****************/
+
+var gArgCountErr =	'The "%%" function requires an even number of arguments.'
+				+	'\nArguments should be in the form "atttributeName", "attributeValue", ...';
+
+/******************** END LOCALIZABLE **********************/
+
+var gTagAttrs				= null;
+var gQTGeneratorVersion		= 1.0;
+
+function AC_QuickTimeVersion()	{ return gQTGeneratorVersion; }
+
+function _QTComplain(callingFcnName, errMsg)
+{
+    errMsg = errMsg.replace("%%", callingFcnName);
+	alert(errMsg);
+}
+
+function _QTAddAttribute(prefix, slotName, tagName)
+{
+	var		value;
+
+	value = gTagAttrs[prefix + slotName];
+	if ( null == value )
+		value = gTagAttrs[slotName];
+
+	if ( null != value )
+	{
+		if ( 0 == slotName.indexOf(prefix) && (null == tagName) )
+			tagName = slotName.substring(prefix.length); 
+		if ( null == tagName ) 
+			tagName = slotName;
+		return tagName + '="' + value + '" ';
+	}
+	else
+		return "";
+}
+
+function _QTAddObjectAttr(slotName, tagName)
+{
+	// don't bother if it is only for the embed tag
+	if ( 0 == slotName.indexOf("emb#") )
+		return "";
+
+	if ( 0 == slotName.indexOf("obj#") && (null == tagName) )
+		tagName = slotName.substring(4); 
+
+	return _QTAddAttribute("obj#", slotName, tagName);
+}
+
+function _QTAddEmbedAttr(slotName, tagName)
+{
+	// don't bother if it is only for the object tag
+	if ( 0 == slotName.indexOf("obj#") )
+		return "";
+
+	if ( 0 == slotName.indexOf("emb#") && (null == tagName) )
+		tagName = slotName.substring(4); 
+
+	return _QTAddAttribute("emb#", slotName, tagName);
+}
+
+
+function _QTAddObjectParam(slotName, generateXHTML)
+{
+	var		paramValue;
+	var		paramStr = "";
+	var		endTagChar = (generateXHTML) ? ' />' : '>';
+
+	if ( -1 == slotName.indexOf("emb#") )
+	{
+		// look for the OBJECT-only param first. if there is none, look for a generic one
+		paramValue = gTagAttrs["obj#" + slotName];
+		if ( null == paramValue )
+			paramValue = gTagAttrs[slotName];
+
+		if ( 0 == slotName.indexOf("obj#") )
+			slotName = slotName.substring(4); 
+	
+		if ( null != paramValue )
+			paramStr = '  <param name="' + slotName + '" value="' + paramValue + '"' + endTagChar + '\n';
+	}
+
+	return paramStr;
+}
+
+function _QTDeleteTagAttrs()
+{
+	for ( var ndx = 0; ndx < arguments.length; ndx++ )
+	{
+		var attrName = arguments[ndx];
+		delete gTagAttrs[attrName];
+		delete gTagAttrs["emb#" + attrName];
+		delete gTagAttrs["obj#" + attrName];
+	}
+}
+
+		
+
+// generate an embed and object tag, return as a string
+function _QTGenerate(callingFcnName, generateXHTML, args)
+{
+	// is the number of optional arguments even?
+	if ( args.length < 4 || (0 != (args.length % 2)) )
+	{
+		_QTComplain(callingFcnName, gArgCountErr);
+		return "";
+	}
+	
+	// allocate an array, fill in the required attributes with fixed place params and defaults
+	gTagAttrs = new Array();
+	gTagAttrs["src"] = args[0];
+	gTagAttrs["width"] = args[1];
+	gTagAttrs["height"] = args[2];
+	gTagAttrs["classid"] = "clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B";
+	gTagAttrs["pluginspage"] = "http://www.apple.com/quicktime/download/";
+
+	// set up codebase attribute with specified or default version before parsing args so
+	//  anything passed in will override
+	var activexVers = args[3]
+	if ( (null == activexVers) || ("" == activexVers) )
+		activexVers = "6,0,2,0";
+	gTagAttrs["codebase"] = "http://www.apple.com/qtactivex/qtplugin.cab#version=" + activexVers;
+
+	var	attrName,
+		attrValue;
+
+	// add all of the optional attributes to the array
+	for ( var ndx = 4; ndx < args.length; ndx += 2)
+	{
+		attrName = args[ndx].toLowerCase();
+		attrValue = args[ndx + 1];
+
+		// "name" and "id" should have the same value, the former goes in the embed and the later goes in
+		//  the object. use one array slot 
+		if ( "name" == attrName || "id" == attrName )
+			gTagAttrs["name"] = attrValue;
+
+		else 
+			gTagAttrs[attrName] = attrValue;
+	}
+
+	// init both tags with the required and "special" attributes
+	var objTag =  '<object '
+					+ _QTAddObjectAttr("classid")
+					+ _QTAddObjectAttr("width")
+					+ _QTAddObjectAttr("height")
+					+ _QTAddObjectAttr("codebase")
+					+ _QTAddObjectAttr("name", "id")
+					+ _QTAddObjectAttr("tabindex")
+					+ _QTAddObjectAttr("hspace")
+					+ _QTAddObjectAttr("vspace")
+					+ _QTAddObjectAttr("border")
+					+ _QTAddObjectAttr("align")
+					+ _QTAddObjectAttr("class")
+					+ _QTAddObjectAttr("title")
+					+ _QTAddObjectAttr("accesskey")
+					+ _QTAddObjectAttr("noexternaldata")
+					+ '>\n'
+					+ _QTAddObjectParam("src", generateXHTML);
+	var embedTag = '  <embed '
+					+ _QTAddEmbedAttr("src")
+					+ _QTAddEmbedAttr("width")
+					+ _QTAddEmbedAttr("height")
+					+ _QTAddEmbedAttr("pluginspage")
+					+ _QTAddEmbedAttr("name")
+					+ _QTAddEmbedAttr("align")
+					+ _QTAddEmbedAttr("tabindex");
+
+	// delete the attributes/params we have already added
+	_QTDeleteTagAttrs("src","width","height","pluginspage","classid","codebase","name","tabindex",
+					"hspace","vspace","border","align","noexternaldata","class","title","accesskey");
+
+	// and finally, add all of the remaining attributes to the embed and object
+	for ( var attrName in gTagAttrs )
+	{
+		attrValue = gTagAttrs[attrName];
+		if ( null != attrValue )
+		{
+			embedTag += _QTAddEmbedAttr(attrName);
+			objTag += _QTAddObjectParam(attrName, generateXHTML);
+		}
+	} 
+
+	// end both tags, we're done
+	return objTag + embedTag + '> </em' + 'bed>\n</ob' + 'ject' + '>';
+}
+
+// return the object/embed as a string
+function QT_GenerateOBJECTText()
+{
+	return _QTGenerate("QT_GenerateOBJECTText", false, arguments);
+}
+
+function QT_GenerateOBJECTText_XHTML()
+{
+	return _QTGenerate("QT_GenerateOBJECTText_XHTML", true, arguments);
+}
+
+function QT_WriteOBJECT()
+{
+	document.writeln(_QTGenerate("QT_WriteOBJECT", false, arguments));
+}
+
+function QT_WriteOBJECT_XHTML()
+{
+	document.writeln(_QTGenerate("QT_WriteOBJECT_XHTML", true, arguments));
+}
+
+
+_application/javascript_Fhttp://www.meandmark.com/rw_common/themes/simplebusiness/javascript.jsObplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Fhttp://www.meandmark.com/rw_common/themes/simplebusiness/javascript.js“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëS∆È%»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApache_application/javascript_Thu, 10 Sep 2009 17:35:40 GMTUbytes_Wed, 15 Feb 2012 07:08:03 GMT_timeout=5, max=99U14608ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionary9“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›&+6?EHNW`biq|~áâãçèëìïó†¢§¶®™¨Æ∞∑ƒ“‡Âˇ
+*JPpÑäïö∞¥¡ƒ…›·ı.             f              0‘'()*O4function convertEntities(b){var d,a;d=function(c){if(/&[^;]+;/.test(c)){var f=document.createElement("div");f.innerHTML=c;return !f.firstChild?c:f.firstChild.nodeValue}return c};if(typeof b==="string"){return d(b)}else{if(typeof b==="object"){for(a in b){if(typeof b[a]==="string"){b[a]=d(b[a])}}}}return b};_application/javascript_=http://meandmark.com/blog/wp-includes/js/l10n.js?ver=20101110Obplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _=http://meandmark.com/blog/wp-includes/js/l10n.js?ver=20101110“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëWƒ@Ú»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApache_application/javascript_Thu, 20 Jan 2011 23:09:37 GMTUbytes_Wed, 15 Feb 2012 07:08:07 GMT_timeout=5, max=100S308ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionary4“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›"-6<?ENWY`hsu~ÄÇÑÜàäåéóôõùü°£•ßÆª…◊‹Áˆ!AGg|Äãê¶™∑∫ø”◊Î˘$             f              &‘,-./OaddComment={moveForm:function(d,f,i,c){var m=this,a,h=m.I(d),b=m.I(i),l=m.I("cancel-comment-reply-link"),j=m.I("comment_parent"),k=m.I("comment_post_ID");if(!h||!b||!l||!j){return}m.respondId=i;c=c||false;if(!m.I("wp-temp-form-div")){a=document.createElement("div");a.id="wp-temp-form-div";a.style.display="none";b.parentNode.insertBefore(a,b)}h.parentNode.insertBefore(b,h.nextSibling);if(k&&c){k.value=c}j.value=f;l.style.display="";l.onclick=function(){var n=addComment,e=n.I("wp-temp-form-div"),o=n.I(n.respondId);if(!e||!o){return}n.I("comment_parent").value="0";e.parentNode.insertBefore(o,e);e.parentNode.removeChild(e);this.style.display="none";this.onclick=null;return false};try{m.I("comment").focus()}catch(g){}return false},I:function(a){return document.getElementById(a)}};_application/javascript_Fhttp://meandmark.com/blog/wp-includes/js/comment-reply.js?ver=20090102Obplist00‘bcX$versionX$objectsY$archiverT$top Ü†Ø"()012HIJKLMNOPQRSTUVWX\]U$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Fhttp://meandmark.com/blog/wp-includes/js/comment-reply.js?ver=20090102“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëXKO/»”3456?WNS.keysZNS.objectsÄ®789:;<=>Ä	Ä
+ÄÄÄÄÄÄ®@ABCDEFGÄÄÄÄÄÄÄÄVServer\Content-Type]Last-Modified]Accept-RangesTDateZKeep-Alive^Content-LengthZConnectionVApache_application/javascript_Fri, 02 Jan 2009 15:08:58 GMTUbytes_Wed, 15 Feb 2012 07:08:07 GMT_timeout=5, max=100S786ZKeep-Alive“*+YZ_NSMutableDictionary£Y[/\NSDictionary“*+^__NSHTTPURLResponse£`a/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—de_WebResourceResponseÄ    # - 2 7 V \ w z ~ Å Ñ á ã é ï ò õ û ° § ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º √ œ ◊ Ÿ € ›&+6?EHNW`biq|~áâãçèëìïó†¢§¶®™¨Æ∞∑ƒ“‡Âˇ
+*JPpÖâîôØ≥¿√»‹‡Ù-             f              /‘1234O|âPNG
+
+   IHDR           szzÙ  CIDATX√-ñIè]◊uÖø”‹ˆıÔU’´Ü,V±XEäñ’[ç!¡ÇdIêê·A‚$≥ … ?°&˘A$xê?êAƒ¢¿v$“V"[TGJ§ÿâ¨*Vˇ∫€ﬂsN‘`cO7÷¬^Î?˙´Ô∫nœg:Æ)m Ã•»ñ;+úÚ}æ⁄ﬂaî+b—ÊÃ⁄2Ω^M6Û©G3ŒÕ/s‡öd5îåfÏÔûpxº«¸@ßÈu§ŸòtVbÑ%ÚkCn‹Âå,–≈Ã±=Õ	ü™Ó
+AÄbf-¢ùêÒl …2≈˛tègW_ÊïÔΩÕÍŸãDç6NúµL∆#æºsì/Ô}ƒï´øƒ0≈ÿêfË#l¡ÃfiNˆ®`ö7˘‡´ƒÎo>ÂùÄF#"nÃ·˘÷ùP*GHìÜE·Söê~o¿ÀØº∆+œΩDQ‰ÊVôŒJD‡„Íä2/à Å∑>·„Àù€øfi0è©j∆á˚lO4EiÒº]§Ç¿˜¿o—È59Œr:M≈ÍR»˛Ìí4qî§xÅ«[o˛.õg◊H3GØªÃÒÒ	ií‚tÄ1ÜÿSú9ìÈ¨,oÃüø»Ω˚ﬂ„_~Ú˜\:≠8’T›òj˙—l°.ø∂¥’ÓŒ3ôNŸŸ”}¬vãnœêeÎ⁄≈Ôø˘oº˙6£Òî,=‰ËháÈtÑ±Ü∫2Tµ¡ôú—$¡Éß5ŒfyFß?‰ôß_Êøﬁ}è§ê¨Ω:Ω÷å¬>BºÛ◊œπÒn¿\ªœ•ÕÛ(givúΩtT¿ù∑ôYÕﬂ˛/88‹•,*Í∫¢¨2¶”c§î(’¢≤öÇÒ4Ei?l µB(IFÙ˚Ûhc˘ß¯;2µK´"Ç)‚á?zÀñ⁄teõﬂ¸Í# ¢¿ZK˙º˙˙ÎºÛß… ⁄kK2ôPÂ)û0õ%åO‡lâÚÁp∆0õMêJÉ–dUI‡˘DçòF´E´›°F¸„è∑∏uÔÌAÄ:u°∑uf8‰⁄˚üP‰9Œ ä¨‰ÛOÆÛÔˇˆØL&G,Æ¨"§%0Œ±≥Ûê›ÌªAÉ∏—≈YCQ’XkòNgå'c¥ˆ£§ ∆XPäü{É˜ﬂø¬ﬁÒı¬œoëî<z∏áµñ⁄¨5‰EIRN¶9\{ˇ]Ñ∞¥ÛxAH≈tzsÏÏÓÎ˜ﬁewÁ6æ!Ñ¬4õ-? IúµÄ¿a©çA{>ÛÉ!7>Ωäz·µ[„Ì#“Y
+8úuÿ⁄ëV5Yi–Å)9∫yùW¡¡¡>*åÒ£à˛`ûıÕK‰πÂ˙gÇ3¯AÃtr¬…Ò	i2°»
+Ú,GB`¨ÂÙÈuÆ\˝9‚œ˛Êm7˝ÍÑÈhäsñ¢¨H√,ØH≤äç^Éı^õıSã¥ÁÜ\∞À—hDZî,ÁË,,≤pÍÕ^%5˜Óﬂ¬
+Xﬂ8OØ?$àb§ê(≠AHÇ8¢€Î—àõ¸Á/˛µ~~yã‹a !†¥èΩ kã'%ﬂZrÈÙ2É~üØg ÛÒú°”†.à™åÈ£m≤Gë„1˝∏≈Éù>¯7ú›Xeqi?1÷·iÖRcÅ‡˚ÍÃŸ·÷|øC>…±÷`å≈÷é≤ÆôÂñs+<}zô£“‘Û/≥ynïﬁÚ:7æzÄç8s˘w∏tÒiù6+√!√~ü≈ÂEÆ›∏ÕOˆﬂL∆˚úY_£—l!ï¢™+LY·¨%éZ®K/^ÿBîëŒbçÁpV]û›<MÍs˝Èhèü^˘êÎ;˚Ù\…RdâdÜ,S<⁄Â§äÒ€ãî.‡Ê›{SÛÂów¯‡WWYZ≈MÑH%…”î„£C‘ Í“÷Ù®‰8I»ÖC6ötK\~Ê<WV¯xgF5¯Ï´ñ∫tŒ-87ài7#:ë†©KΩ&sMÖ_ßPßÃÍí;w<èÒÒà_]π R?¶ø∞àÁ˘,ù:≈√Ìmt2ôb]çÔi¸X”ã)ÚáìÓ‹Oôk5x}9‰´Ωfó3´¸™@ò·X~à’BÖ® ¢(26åœ≠Ò“•'hIG∂üËxõπªüë?˘"∑o‹`}mÒ∆Ô=ÔÑÆ±•cs% lú·ÊÕgg¸Ò≥πk ¬4õÙñâZ÷Å3Ç2)»”íR¯‘RS◊HâïÇiñp0ô“éÏdè˚wæf}e˚hèÀ?¯‰≈gIg3ÙÚúá—ö„â·≠MÿŸaÔ∞Å◊m∞π–£ö‘§÷·ÀàF´MÿàAz$„)UïíWÜR¨Ç¢»P–
+Î≠ûîúÏ‹£Æs÷ñI¢Gwn†◊¯…?ˇ›^à1µnÃÀ|1©vyı‘w8≥≤…≠Ÿ]ö-…h4C›ªœ∆∑û¢2ñd:&)2Ú™¢5∂Ñ∫,(]çÙ}êQ¢Ñ£ b/do{áÖ•U~˛…L¢¯Ù≥è–ø˝|á¡∞œ \ƒN9·Îª‚˛"s“„ÓÛÀk_0ö%º∏∂ÃËD”ùk tL2ùêÕ2JéäÅ<ÑU(Ì!•&
+#Ú,eñ:z]˙É>^Ú≥œÔRﬁ∏Oÿµhd…dÙ©ÜÏÔßÿiAˇ‹Z„P\^“Ôˆ8µ~ä*œ( )≥qBí¥Øq √*©A‡aåAKI]◊∏<·•oüC˚vrƒï/nÒı¡ûÁsÈ‚Yt£·ëœjÓÓQ‡ÈÄŸ¡#¥{<øyñw~áß0ï°HíIé™S§÷°¬	ã‡Iâ÷
+cJ¨©¡VkIèÿ8ªAY+&V2c§ê‘∆2Ÿ-ê *∫-üãa$®´äzísÌÓ9Ç∏›!pé:ùÚ`˚!WÆ}Œ˝É#¥B:P⁄9îsò,°*så©® ú¢ÃŸ;9·≥Îü≥wt@*%R8å}\˘„£}¥=£5≤]K|€Aí–láL˝cnéˆÒnlsÌ√O1Ba•¶ÀM§¥ ,ZÇµé≤Ã©#Ï„‹G¢Ñ‚‘˘ÛDù∂*±∂‡Ù“<æ‘Œb™’t∂ÊÁ:tmr;&Ít ±µ¡+Ÿn2l6iÙ|.]Zcyÿaëå5§yâAP·Hãå∫6Xg—B∑õ¯qÑ£FHA‡+Ó±spL´›A≠?1‹ä„&V@ñLIf%EZRVäΩI¬<˚{{èxòrzmé•·¬Häö∫»H”ú¨∂TŒ·Ä“‘‘÷¢≠5A‡„¥BãPœ˜8µ<‰`îPîjÌ¸‹Vmao{¬Ïÿ‡µ=í§Ni«/]>œÊÖ'YY[C{äIR≤;JH”åYQbÖ¬~‡PBHâˆ5:éë
+¥Á!ÑD)IØ”∆y!_nﬂEW∆ß¥í∞—%è¶¥DqD29°≠⁄\=Ò⁄≈ß$;á«d…å„Y¡ﬁ8≈T>–‘Ââ‡iâ≠5ŒVH°í«H Á…Õ>:zÄxıèûwB®®Å±)R4(¶«diÜtéﬁﬂ=5`£3Ms¶YŒ8≥xJ„	Cß¯>û‘HÛßœ„à∞Ÿ T°tDwÂ˝Â5¢VöM¥◊X¿‘∂vd©£’™Iìî:Õ1ÄNwyÔ~Ç.Qñ’cp5-Q3&|%ëÄRH•ÒExûD«mñû|ë•≥O‚> 
+®ùúåC…·Ó!÷VTâfz8AK/ˆ@8\Ú?”æ›Ós∂›!Õ<©â≠$JJ%ZI<_ƒ>A§È,oÚƒwæèﬂhÚ¯˚A|≥=@5{z´»µ…® 4qF°=áp
+È˚ÿƒP◊íÎ€˝òç·< |-Q
+Ñp¯Z¢µƒ4û4:-÷ûyì'^z·è’¸f$PX(¸?où†ÎC¸    IENDÆB`ÇYimage/png_öhttp://1.gravatar.com/avatar/79874cedccd1cf5baa8cb264b5091ee6?s=32&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&r=PGOÉbplist00‘z{X$versionX$objectsY$archiverT$top Ü†Ø("()012TUVWXYZ[\]^_`abcdefghijklmnoptuU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ Ä&Ä'ÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _öhttp://1.gravatar.com/avatar/79874cedccd1cf5baa8cb264b5091ee6?s=32&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&r=PG“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ÎëwöL◊»”3456EWNS.keysZNS.objectsÄ%Æ789:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄÄÄÄÆFGHIJKLMNOPQRSÄÄÄÄÄÄÄÄÄÄ Ä!Ä"Ä#Ä$_Access-Control-Allow-Origin\Content-TypeWX-CacheZSource-AgeYX-VarnishSViaVServer_Content-DispositionWExpires]Cache-ControlTDate^Content-Length]Accept-Ranges]Last-ModifiedQ*Yimage/pngSHITQ0Z2656549961[1.1 varnish^ECS (lhr/4BB5)_7inline; filename="79874cedccd1cf5baa8cb264b5091ee6.png"_Wed, 15 Feb 2012 07:13:36 GMT[max-age=300_Wed, 15 Feb 2012 07:08:36 GMTT2940Ubytes_Thu, 20 Jan 2011 03:48:16 GMT“*+qr_NSMutableDictionary£qs/\NSDictionary|“*+vw_NSHTTPURLResponse£xy/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—|}_WebResourceResponseÄ    # - 2 7 b h É Ü ä ç ê ì ó ö ° § ß ™ ≠ ∞ ≤ ¥ ∂ ∏ ∫ º æ ¿ ¬ ƒ ∆ » œ € „ Â Á ÈÜãñü•®Æ∑¿¬…—‹ﬁÌÔÒÛı˜˘˚˝ˇ	 "$&(*,.024R_gr|Äáù•≥∏«’„ÂÔÛı UuÅ°¶¨Ã—ÁÎ¯˚ ,:LOe             ~              g‘6789O˛âPNG
+
+   IHDR           szzÙ  ≈IDATX√ÌñM´™@«ˇ„diJ¢aë/°À}ˇ}ü°]‰f`Z
+Q`û≈ÖÀπ‰ÈŒÿ»·¿yñ:ÛÃÔy»~øÔçb‡õÂ‡gò¶âÈt˙¿DıÇ„8à¢æÔc2˘sΩm[TUŒ9Í∫ I§i
+B»?ﬂ)•X.óÇ úsîe©?Ií`ª›>=˛Y!à„YñÈpiöJ+›l6X,˙ ¢(zi˘Wû–‡˚ærv{û√0ﬁ0MÛo∂+’∑a`6õΩ†‚˙Q—˝~G€∂ äªÆ√Ìv”ìUU)\.<= ústù⁄⁄¿9◊Wu]K+ !Ñ¥◊§;aYñRûB‡x<é3ÖhöÊÀˇM”(áK™¿)•»≤´’ÍeY∫Æã›náÛ˘å”È$U=ˇ∞må1Xñ%›Ü◊Î5<œ√·p¿ız€∂QÖÙ„ü≈≤,E€∂áPJ¡ÉiöomLå1PJ’Ú<dyü'Ú<Wp]ajÎ˜a¬u]yÄ8éµ°W˚Å—∑ ¥OΩ zÛ…Ë;8∆&ÑÙˆ ªÀë>›O Û˘|4Ä>›O 2k‘PÈ”˝qtd◊∑qå    IENDÆB`ÇYimage/png_öhttp://0.gravatar.com/avatar/a275cc5487ff5c0b58d941bcde5bd020?s=32&d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&r=PGO7bplist00‘z{X$versionX$objectsY$archiverT$top Ü†Ø("()012TUVWXYZ[\]^_`abcdefghijklmnoptuU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ Ä&Ä'ÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Bhttp://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥Îë}æa»”3456EWNS.keysZNS.objectsÄ%Æ789:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄÄÄÄÆFGHIJKLMNOPQRSÄÄÄÄÄÄÄÄÄÄ Ä!Ä"Ä#Ä$_Access-Control-Allow-Origin\Content-TypeWX-CacheZSource-AgeYX-VarnishSViaVServer_Content-DispositionWExpires]Cache-ControlTDate^Content-Length]Accept-Ranges]Last-ModifiedQ*Yimage/pngSHITS635_373656671 372154146[1.1 varnish^ECS (lhr/4BA3)_7inline; filename="ad516503a11cd5ca435acc9bb6523536.png"_Wed, 15 Feb 2012 07:13:39 GMT[max-age=300_Wed, 15 Feb 2012 07:08:39 GMTS510Ubytes_Sat, 01 Mar 2008 02:44:06 GMT“*+qr_NSMutableDictionary£qs/\NSDictionary˛“*+vw_NSHTTPURLResponse£xy/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—|}_WebResourceResponseÄ    # - 2 7 b h É Ü ä ç ê ì ó ö ° § ß ™ ≠ ∞ ≤ ¥ ∂ ∏ ∫ º æ ¿ ¬ ƒ ∆ » œ € „ Â Á È.3>GMPV_hjqyÑÜïóôõùü°£•ß©´≠Ø±¿¬ƒ∆» ÃŒ–“‘÷ÿ⁄‹˙$(/EM[`o}ãçóõüµ¡–
+*6VZ`ÄÖõü¨Ø¥»Ã‡Ó              ~              ‘;<=>O˛âPNG
+
+   IHDR           szzÙ  ≈IDATX√ÌñM´™@«ˇ„diJ¢aë/°À}ˇ}ü°]‰f`Z
+Q`û≈ÖÀπ‰ÈŒÿ»·¿yñ:ÛÃÔy»~øÔçb‡õÂ‡gò¶âÈt˙¿DıÇ„8à¢æÔc2˘sΩm[TUŒ9Í∫ I§i
+B»?ﬂ)•X.óÇ úsîe©?Ií`ª›>=˛Y!à„YñÈpiöJ+›l6X,˙ ¢(zi˘Wû–‡˚ærv{û√0ﬁ0MÛo∂+’∑a`6õΩ†‚˙Q—˝~G€∂ äªÆ√Ìv”ìUU)\.<= ústù⁄⁄¿9◊Wu]K+ !Ñ¥◊§;aYñRûB‡x<é3ÖhöÊÀˇM”(áK™¿)•»≤´’ÍeY∫Æã›náÛ˘å”È$U=ˇ∞må1Xñ%›Ü◊Î5<œ√·p¿ız€∂QÖÙ„ü≈≤,E€∂áPJ¡ÉiöomLå1PJ’Ú<dyü'Ú<Wp]ajÎ˜a¬u]yÄ8éµ°W˚Å—∑ ¥OΩ zÛ…Ë;8∆&ÑÙˆ ªÀë>›O Û˘|4Ä>›O 2k‘PÈ”˝qtd◊∑qå    IENDÆB`ÇYimage/png_öhttp://1.gravatar.com/avatar/d22af8445d0d082a595a8f18e95476c4?s=32&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&r=PGO7bplist00‘z{X$versionX$objectsY$archiverT$top Ü†Ø("()012TUVWXYZ[\]^_`abcdefghijklmnoptuU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ Ä&Ä'ÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _Bhttp://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥Îë|=»”3456EWNS.keysZNS.objectsÄ%Æ789:;<=>?@ABCDÄ	Ä
+ÄÄÄÄÄÄÄÄÄÄÄÄÆFGHIJKLMNOPQRSÄÄÄÄÄÄÄÄÄÄ Ä!Ä"Ä#Ä$_Access-Control-Allow-Origin\Content-TypeWX-CacheZSource-AgeYX-VarnishSViaVServer_Content-DispositionWExpires]Cache-ControlTDate^Content-Length]Accept-Ranges]Last-ModifiedQ*Yimage/pngSHITS635_373656671 372154146[1.1 varnish^ECS (lhr/4BA3)_7inline; filename="ad516503a11cd5ca435acc9bb6523536.png"_Wed, 15 Feb 2012 07:13:44 GMT[max-age=300_Wed, 15 Feb 2012 07:08:44 GMTS510Ubytes_Sat, 01 Mar 2008 02:44:06 GMT“*+qr_NSMutableDictionary£qs/\NSDictionary˛“*+vw_NSHTTPURLResponse£xy/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—|}_WebResourceResponseÄ    # - 2 7 b h É Ü ä ç ê ì ó ö ° § ß ™ ≠ ∞ ≤ ¥ ∂ ∏ ∫ º æ ¿ ¬ ƒ ∆ » œ € „ Â Á È.3>GMPV_hjqyÑÜïóôõùü°£•ß©´≠Ø±¿¬ƒ∆» ÃŒ–“‘÷ÿ⁄‹˙$(/EM[`o}ãçóõüµ¡–
+*6VZ`ÄÖõü¨Ø¥»Ã‡Ó              ~              ’@ABCDEF_WebResourceTextEncodingName_WebResourceFrameNameOäX<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="robots" content="all">
+  <meta name="generator" content="RapidWeaver">
+
+  <title>  Working with Cocoa File Packages</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="http://www.meandmark.com/rw_common/themes/simplebusiness/styles.css">
+  <link rel="stylesheet" type="text/css" media="print" href="http://www.meandmark.com/rw_common/themes/simplebusiness/print.css">
+  <link rel="stylesheet" type="text/css" media="handheld" href="http://www.meandmark.com/rw_common/themes/simplebusiness/handheld.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="http://www.meandmark.com/rw_common/themes/simplebusiness/css/sidebar/sidebar_left.css">
+
+  <script type="text/javascript" src="http://www.meandmark.com/rw_common/themes/simplebusiness/javascript.js">
+</script>
+  <base href="http://www.meandmark.com/blog/">
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0 feed" href="http://meandmark.com/blog/feed/">  <style type="text/css" media="all">
+/*<![CDATA[*/
+  .contentheader { width: 99%; } .contentfooter { width: 99%; } .wordpress-credit-content { width: 99%; text-align: center; font-size: 0.8em; } .wordpress-credit-sidebar { width: 99%; text-align: center; font-size: 0.7em; }   /*]]>*/
+  </style>  <style type="text/css" media="screen">
+/*<![CDATA[*/
+  #blog-search-sidebar { width: 99%; text-align: left; margin: 0; padding: 0; } .blog-search-input { width: 95%; margin: 0px 0px 6px 0px; padding: 0; } .blog-search-submit { margin: 0; padding: 0; } #comment { width: 99%; }
+  ul.blog-navigation { list-style-type: none; margin: 0; padding: 0; overflow: hidden; width: 99%; }
+  ul.blog-navigation li.oldernav { width: 49%; float: left; text-align: left; }
+  ul.blog-navigation li.newernav { width: 49%; float: right; text-align: right; }
+  p img { max-width: 100%; padding: 0; } img.centered, div.aligncenter, .aligncenter { display: block; margin-left: auto; margin-right: auto; } img.alignright { display: inline; padding: 4px; margin: 0 0 2px 6px; } img.alignleft { display: inline; padding: 4px; margin: 0 6px 2px 0; } .alignright { float: right; } .alignleft { float: left } ol.commentlist { list-style: none; margin: 0; padding: 0; text-indent: 0; } ol.commentlist li { border: 1px dashed; margin: 0 0 10px; padding: 5px 7px 5px 57px; position:relative; } ol.commentlist li div.vcard img.avatar { border: 2px solid; left: 8px; position: absolute; top: 8px; } ol.commentlist li div.comment-meta { font-weight: bold; font-size: 0.8em; position: absolute; right: 10px; text-align: right; top: 5px; } ol.commentlist li div.comment-meta a { text-decoration: none; } ol.commentlist li p { margin: 0 0 1em; } ol.commentlist li ul { list-style: square; margin: 0 0 1em; padding: 0; text-indent: 0; } ol.commentlist li div.reply { font-weight: bold; padding: 5px 10px; } ol.commentlist li ul.children { list-style: none; margin: 1em 0 0; text-indent: 0; } ol.commentlist li ul.children li.depth-2 { margin: 0 0 .25em; } ol.commentlist li ul.children li.depth-3 { margin: 0 0 .25em; } ol.commentlist li ul.children li.depth-4 { margin: 0 0 .25em; }
+  /*]]>*/
+  </style><link rel="alternate" type="application/rss+xml" title="meandmark.com ¬ª Feed" href="http://meandmark.com/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="meandmark.com ¬ª Comments Feed" href="http://meandmark.com/blog/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="meandmark.com ¬ª Working with Cocoa File Packages Comments Feed" href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/feed/">
+<script type="text/javascript" src="http://meandmark.com/blog/wp-includes/js/l10n.js?ver=20101110"></script>
+<script type="text/javascript" src="http://meandmark.com/blog/wp-includes/js/comment-reply.js?ver=20090102"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://meandmark.com/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://meandmark.com/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="meandmark.com" href="http://meandmark.com/blog/">
+<link rel="start" title="Switched to Blogger" href="http://meandmark.com/blog/2006/11/switched-to-blogger/">
+<link rel="prev" title="Locating the Unit Testing Bundle in Cocoa" href="http://meandmark.com/blog/2010/10/locating-the-unit-testing-bundle-in-cocoa/">
+<link rel="next" title="Loading Files for Unit Testing in Cocoa" href="http://meandmark.com/blog/2010/11/loading-files-for-unit-testing-in-cocoa/">
+<meta name="generator" content="WordPress 3.1">
+<link rel="canonical" href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/">
+<link rel="shortlink" href="http://meandmark.com/blog/?p=225">
+<style type="text/css">
+	#bsbm_form { clear:both; margin:20px 0; }
+	#bsbm_form label { font-size: 16px; font-weight:bold; color: #999; margin:0; padding:10px 0;}
+	#bsbm_form .question { font-size: 14px; font-weight:normal; margin:0; padding:5px 0;}
+	#bsbm_form .answer { font-size: 12px; font-weight:normal;}
+	#bsbm_form .notice { font-size: 11px; font-weight:normal;}	
+</style>
+</head>
+
+<body>
+  <div id="sidebarContainer">
+    <!-- Start Sidebar wrapper -->
+
+    <div id="navcontainer">
+      <!-- Start Navigation -->
+    </div><!-- End navigation -->
+
+    <div id="sidebar">
+      <!-- Start sidebar content -->
+
+      <h1 class="sideHeader"></h1><!-- Sidebar header -->
+
+      <h4>Site Map</h4><a href="http://www.meandmark.com/index.html" title="Home">Home</a>
+      <br>
+      <a href="http://www.meandmark.com/books.html" id="Books" name="Books">Books</a>
+      <br>
+      <a href="http://www.meandmark.com/articles.html" id="Articles" name="Articles">Articles</a>
+      <br>
+      <a href="http://www.meandmark.com/software.html" id="Software" name="Software">Software</a>
+      <br>
+      <a href="http://www.meandmark.com/contact.html" id="Contact" name="Contact">Contact</a>
+      <br>
+      <a href="http://www.meandmark.com/blog.html" id="Blog" name="Blog">Blog</a>
+      <br>
+      <br>
+      <!-- sidebar content you enter in the page inspector -->
+       <!-- Start WP-Blog sidebar -->
+      <div id="blog-search-sidebar"><form method="get" action="http://meandmark.com/blog/"><p><input type="text" value="" name="s" class="blog-search-input"><input type="submit" class="blog-search-submit" value="Search"></p></form></div><div id="blog-categories">	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/blog/" title="View all posts filed under Blog">Blog</a> (2)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/cocoa/" title="View all posts filed under cocoa">cocoa</a> (10)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/game-development/" title="View all posts filed under Game Development">Game Development</a> (9)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/instruments/" title="View all posts filed under Instruments">Instruments</a> (7)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/interface-builder/" title="View all posts filed under Interface Builder">Interface Builder</a> (3)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/mac/" title="View all posts filed under Mac Development">Mac Development</a> (22)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/none/" title="View all posts filed under None">None</a> (5)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/opengl/" title="View all posts filed under OpenGL">OpenGL</a> (4)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/scm/" title="View all posts filed under scm">scm</a> (3)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/sdl/" title="View all posts filed under SDL">SDL</a> (13)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a> (30)<br>
+	<a class="blog-category-link-enabled" href="http://meandmark.com/blog/category/xcode/" title="View all posts filed under Xcode">Xcode</a> (65)<br>
+</div><div id="blog-archives">	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2012/01/" title="January 2012">January 2012</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/12/" title="December 2011">December 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/11/" title="November 2011">November 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/10/" title="October 2011">October 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/09/" title="September 2011">September 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/08/" title="August 2011">August 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/07/" title="July 2011">July 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/06/" title="June 2011">June 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/05/" title="May 2011">May 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/04/" title="April 2011">April 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/03/" title="March 2011">March 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/02/" title="February 2011">February 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2011/01/" title="January 2011">January 2011</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/12/" title="December 2010">December 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/11/" title="November 2010">November 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/10/" title="October 2010">October 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/09/" title="September 2010">September 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/08/" title="August 2010">August 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/06/" title="June 2010">June 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/05/" title="May 2010">May 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/04/" title="April 2010">April 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/03/" title="March 2010">March 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/02/" title="February 2010">February 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2010/01/" title="January 2010">January 2010</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2009/12/" title="December 2009">December 2009</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2009/10/" title="October 2009">October 2009</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2009/09/" title="September 2009">September 2009</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2009/05/" title="May 2009">May 2009</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/11/" title="November 2008">November 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/09/" title="September 2008">September 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/08/" title="August 2008">August 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/07/" title="July 2008">July 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/06/" title="June 2008">June 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/04/" title="April 2008">April 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/02/" title="February 2008">February 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2008/01/" title="January 2008">January 2008</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/12/" title="December 2007">December 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/10/" title="October 2007">October 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/09/" title="September 2007">September 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/08/" title="August 2007">August 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/07/" title="July 2007">July 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/06/" title="June 2007">June 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/05/" title="May 2007">May 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/04/" title="April 2007">April 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/03/" title="March 2007">March 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/02/" title="February 2007">February 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2007/01/" title="January 2007">January 2007</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2006/12/" title="December 2006">December 2006</a><br>
+	<a class="blog-archive-link-enabled" href="http://meandmark.com/blog/2006/11/" title="November 2006">November 2006</a><br>
+</div>
+      <div id="blog-rss-feeds">
+        <a class="blog-rss-link" href="http://meandmark.com/blog/feed/" rel="alternate" type="application/rss+xml" title="Syndicate this site using RSS">RSS 2.0 feed</a><br>      </div><!-- End WP-Blog sidebar -->
+      <!-- sidebar content such as the blog archive links -->
+    </div><!-- End sidebar content -->
+  </div><!-- End sidebar wrapper -->
+
+  <div id="container">
+    <!-- Start container -->
+
+    <div id="pageHeader">
+      <!-- Start page header -->
+
+      <h1>Me and Mark Publishing</h1>
+    </div><!-- End page header -->
+
+    <div id="contentContainer">
+      <!-- Start main content wrapper -->
+
+      <div id="content">
+        <!-- Start content -->
+        <!-- Start WP-Blog content -->
+        <!-- Generated by WP-Blog v1.1.3 Build 515 (240ba1c) (WPBlogStyle36) -->
+        <div id="unique-entry-id-225" class="blog-entry"><h1 class="blog-entry-title"><a href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/" class="blog-permalink">Working with Cocoa File Packages</a></h1><div class="blog-entry-date">October-27-2010  Filed in: <span class="blog-entry-category"><a href="http://meandmark.com/blog/category/cocoa/" title="View all posts in cocoa" rel="category tag">cocoa</a> | <a href="http://meandmark.com/blog/category/mac/" title="View all posts in Mac Development" rel="category tag">Mac Development</a></span></div><div class="blog-entry-body"><p>Saving a Cocoa application‚Äôs data in a file package is not much more difficult than saving the data in a single file. This post shows you how to save your document‚Äôs data in a file package and read the data from the package.</p>
+<h2>Introduction to File Packages</h2>
+<p>A file package is a bundle, which is a collection of one or more directories that appears as a single file to the user. Xcode projects use file packages. Select an Xcode project in the Finder, right-click, and choose Show Package Contents to examine the file package.</p>
+<p>When should you use a file package? Use a file package when you want to save your application‚Äôs document data in multiple files. A game level editor may want to save the level layout, the level‚Äôs enemy list, and the level‚Äôs treasure list in separate files. Screenwriting software may want to save each scene in its own text file.</p>
+<p>The simplest file package is a single directory that contains all the files. But you can have multiple directories to group files if you‚Äôre going to store lots of files in your file package.</p>
+<p>There are two tasks you must perform to add file package support to your application. First, you must add a document type for the package to your Xcode project‚Äôs target. Second, you must implement the methods fileWrapperOfType: and readFromFileWrapper: in your NSDocument subclass.</p>
+<h2>Adding a Document Type to Your Project</h2>
+<p>By adding a document type to your project‚Äôs target and setting the document type as a package, your document‚Äôs data will be saved as a file package. If you don‚Äôt add the document type, your data will appear as a folder in the Finder instead of as a single file, which makes it easier for someone to accidentally delete or move a file.</p>
+<p>To access the inspector for your target, perform the following steps in Xcode:</p>
+<ol>
+<li>Select your target from the Groups and Files list.</li>
+<li>Click the Info button on the project window toolbar to open the target‚Äôs inspector.</li>
+<li>Click the Properties tab in the inspector.</li>
+</ol>
+<p>At the bottom of the target inspector is a list of document types. You should see the following columns of information:</p>
+<ul>
+<li>Name</li>
+<li>UTI</li>
+<li>Extensions</li>
+<li>MIME Types</li>
+<li>OS Types</li>
+<li>Class</li>
+<li>Icon File</li>
+<li>Store Type</li>
+<li>Role</li>
+<li>Package</li>
+</ul>
+<p>If you have a document-based Cocoa application project, there should be one document type in the list. Click the + button in the lower left corner of the inspector to add a document type if you need another one.</p>
+<h3>Mandatory Document Type Fields for File Packages</h3>
+<p>At a minimum, you must deal with the Name, Extensions, Role, and Package fields for your file package‚Äôs document type. For the Name field, give a description for your file type. For the Extensions field, list the file extension you want for your file type, skipping the period. If you wanted your file to have the extension .xyz, you would enter the following for the Extensions field:</p>
+<pre>xyz</pre>
+<p>Make sure the Role is Editor. An editor can read and write files. Select the Package checkbox to make your document type a file package.</p>
+<h3>The Other Document Type Fields</h3>
+<p>UTI stands for uniform type identifier, which identifies an abstract type, such as a file format. A UTI takes the following form:</p>
+<pre>com.CompanyName.DocumentType</pre>
+<p>MIME (Multimedia Email Extensions) types are file types a web browser uses. Web browsers don‚Äôt open file packages so you shouldn‚Äôt have to worry about setting MIME types.</p>
+<p>OS Types are four-character codes for the document‚Äôs file type. Before Mac OS X, Mac applications used OS Types instead of file extensions to identify themselves as the creator of a particular file. Today, you should use file extensions and UTIs to identify a document type.</p>
+<p>The Class field contains the name of your NSDocument subclass. The Icon File field contains the file name for the document icon. If you use a custom icon for your file package, enter the file name in the Icon File field. You should also add the icon file to your project.</p>
+<p>The Store Type field is used by Core Data applications. If you‚Äôre not using Core Data, you can ignore this field.</p>
+<h2>Writing to a File Package</h2>
+<p>To write your document‚Äôs data to a file package, your NSDocument subclass must implement the method fileWrapperOfType:. This method takes the following form:</p>
+<pre>- (NSFileWrapper *)fileWrapperOfType:(NSString *)typeName error:(NSError **)outError</pre>
+<p>The file wrapper that fileWrapperOfType: returns is the main directory for the file package. The typeName argument identifies the type of document. You shouldn‚Äôt have to worry about the typeName argument. If there is a problem during the write, the outError argument will contain the reason for the problem.</p>
+<p>In your implementation of fileWrapperOfType:, you must perform the following tasks:</p>
+<ul>
+<li>Create a directory file wrapper.</li>
+<li>Get your data into a NSData object.</li>
+<li>Create a file wrapper and add the file to a directory file wrapper.</li>
+</ul>
+<h3>Creating a Directory File Wrapper</h3>
+<p>Call NSFileWrapper‚Äôs initDirectoryWithFileWrappers: method to create a directory file wrapper. The following code creates an empty directory:</p>
+<pre>NSFileWrapper* mainDirectory;</pre>
+<pre>[mainDirectory initDirectoryWithFileWrappers:nil];</pre>
+<p>If you‚Äôre going to store all your files in one directory, you‚Äôre done with the directory file wrapper for now. But if you‚Äôre going to store your files in folders inside the file package, you must create a directory file wrapper for each folder and give that folder a preferred filename. Call NSFileWrapper‚Äôs setPreferredFilename: method to give the folder a preferred filename. The following code creates an empty directory named HTML inside the file package:</p>
+<pre>NSFileWrapper* htmlDirectory;</pre>
+<pre>[htmlDirectory initDirectoryWithFileWrappers:nil];</pre>
+<pre>[htmlDirectory setPreferredFilename:@"HTML"];</pre>
+<h3>Getting Your Data into a NSData Object</h3>
+<p>NSFileWrapper‚Äôs methods use NSData objects to write data to files and read data from files. How you get your data into a NSData object depends on your application, but the following code shows how to convert the RTF data of a text view to NSData:</p>
+<pre>NSTextView* textView;</pre>
+<pre>NSData* myData;</pre>
+<pre>NSRange range = NSMakeRange(0, [[textView textStorage] length]);</pre>
+<pre>myData = [[textView textStorage]RTFFromRange:range documentAttributes:nil];</pre>
+<p>The following code demonstrates how to convert an XML document to NSData:</p>
+<pre>NSXMLDocument* xmlDoc;</pre>
+<pre>NSData* myData = [xmlDoc XMLData];</pre>
+<h3>Creating a File Wrapper</h3>
+<p>You can create a file wrapper and add it to a directory file wrapper with one method call. Call NSFileWrapper‚Äôs addRegularFileWithContents: method. This method takes two arguments. The first argument is the NSData object you created, and the second argument is the filename you want for the file. The following code adds a file named ‚Äúindex‚Äù to the HTML directory:</p>
+<pre>NSFileWrapper* htmlDirectory;</pre>
+<pre>NSData* myData;</pre>
+<pre>[htmlDirectory addRegularFileWithContents:myData preferredFilename:@‚Äùindex‚Äù];</pre>
+<p>Call addRegularFileWithContents: for each file you‚Äôre going to save in the file package.</p>
+<p>To add a subdirectory to the directory, call NSFileWrapper‚Äôs addFileWrapper: method. The following code adds the HTML directory to the main directory:</p>
+<pre>NSFileWrapper* htmlDirectory;</pre>
+<pre>NSFileWrapper* mainDirectory;</pre>
+<pre>[mainDirectory addFileWrapper:htmlDirectory];</pre>
+<p>&nbsp;</p>
+<h2>Reading from a File Package</h2>
+<p>To read from a file package, your NSDocument subclass must implement the method readFromFileWrapper:. This method takes the following form:</p>
+<pre>- (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper ofType:(NSString *)typeName error:(NSError **)outError</pre>
+<p>The fileWrapper argument is the main directory where all the files in the wrapper are stored. You can give it a more descriptive name than fileWrapper if you want. The typeName argument identifies the type of document. You shouldn‚Äôt have to worry about the typeName argument. If there is a problem during the read, the outError argument will contain the reason for the problem.</p>
+<p>If you have all your files inside the main wrapper, call NSFileWrapper‚Äôs fileWrappers: method, which contains all the file wrappers inside a directory.</p>
+<pre>NSFileWrapper* mainDirectory;</pre>
+<pre>NSDictionary* files = [mainDirectory fileWrappers];</pre>
+<p>If you need to find a particular file or directory, call NSFileWrapper‚Äôs objectForKey: method. The following code locates the HTML folder in the file wrapper:</p>
+<pre>NSFileWrapper* mainDirectory;</pre>
+<pre>NSFileWrapper* htmlDirectory = [[mainDirectory fileWrappers] objectForKey:@‚ÄùHTML"];</pre>
+<p>Once you get a directory, call fileWrappers: to get the list of files in that directory.</p>
+<pre>NSFileWrapper* htmlFiles = [htmlDirectory fileWrappers];</pre>
+<h3>Reading the Individual Files</h3>
+<p>When you call NSFileWrapper‚Äôs fileWrappers: method, it returns a NSDictionary object containing all the files in the directory. Assuming you want to read all the files, the easiest thing to do is create an NSEnumerator object and use that object to go through the files.</p>
+<p>A dictionary contains a list of key-value pairs. The enumerator for a dictionary can either be a key enumerator or an object enumerator. For a file wrapper you should use a key enumerator that contains all of the filenames in the dictionary.</p>
+<pre>NSDictionary* files;</pre>
+<pre>NSEnumerator* fileEnumerator = [files keyEnumerator];</pre>
+<p>Use NSEnumerator‚Äôs nextObject: method to go through the files in the dictionary. Call NSEnumerator‚Äôs objectForKey: method to get the file wrapper. Call NSFileWrapper‚Äôs regularFileContents: method to get the contents of the file in a NSData object.</p>
+<pre>id currentFilename;</pre>
+<pre>NSFileWrapper* currentFile;</pre>
+<pre>NSData* myData;</pre>
+<pre>while (currentFilename = [fileEnumerator nextObject]) {</pre>
+<pre><span style="white-space: pre;">	</span>currentFile = [files objectForKey:currentFilename];</pre>
+<pre><span style="white-space: pre;">	</span>myData = [currentFile regularFileContents];</pre>
+<pre><span style="white-space: pre;">	</span>// Load myData.</pre>
+<pre>}</pre>
+<h3>Loading the Data</h3>
+<p>How you load the data depends on the data you‚Äôre storing. If you store RTF data, you can use NSTextStorage‚Äôs initWithRTF: method to load a text view with the contents of a text file.</p>
+<pre>NSTextView* textView;</pre>
+<pre>NSData* myData;</pre>
+<pre>[[textView textStorage] initWithRTF:myData documentAttributes:nil];</pre>
+<p>If you‚Äôre loading an XML document, call NSXMLDocument‚Äôs initWithData: method to load the document from disk to the NSXMLDocument.</p>
+<pre>NSError* error;</pre>
+<pre>NSXMLDocument* xmlDoc;</pre>
+<pre>[xmlDoc initWithData:myData options:NSXMLDocumentValidate error:&amp;error];</pre>
+<p>&nbsp;</p>
+<h2>Additional Information</h2>
+<p>Read Apple‚Äôs documentation for the NSFileWrapper, NSData, and NSDocument classes for more information on working with file packages.</p>
+<div class="blog-entry-comments"><a href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/#comments" class="blog-comment-link" title="Comment on Working with Cocoa File Packages">Comments (3)</a> | <a class="blog-trackback-link" href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/trackback/">Trackback</a></div></div></div>
+<!-- You can start editing here. -->
+
+	<h3 id="comments">3 Responses to ‚ÄúWorking with Cocoa File Packages‚Äù</h3>
+
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+
+	<ol class="commentlist">
+			<li class="comment even thread-even depth-1" id="comment-2378">
+				<div id="div-comment-2378" class="comment-body">
+				<div class="comment-author vcard">
+		<img alt="" src="http://1.gravatar.com/avatar/79874cedccd1cf5baa8cb264b5091ee6?s=32&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=PG" class="avatar avatar-32 photo" height="32" width="32">		<cite class="fn"><a href="http://twitter.com/thousandnights" rel="external nofollow" class="url">Kaz</a></cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/comment-page-1/#comment-2378">
+			May 5, 2011 at 6:21 am</a>		</div>
+
+		<p>Thank you, this is great articles.  Many of articles don‚Äôt talk about the purpose of this architecture and background, and explain only about API like the way, ‚Äúread file wrappers and process what ever you need to.‚Äù or something similar‚Ä¶ Excuse me‚Ä¶   I had some idea about NSFileWrapper but there were too many missing pieces, and I feel like I finally found those.</p>
+<p>I have a question, if you need to supply data for addRegularFileWithContents: to creating a packaged document, it would be pretty memory intensive if you trying work on like site management type of app that requires to store thousands of file.  I thought packaging is designed to avoid reading nor writing  whole data structure.  Or, do I still have some missing pieces?</p>
+
+		<div class="reply">
+				</div>
+				</div>
+		</li>
+		<li class="comment byuser comment-author-mark bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-2379">
+				<div id="div-comment-2379" class="comment-body">
+				<div class="comment-author vcard">
+		<img alt="" src="http://0.gravatar.com/avatar/a275cc5487ff5c0b58d941bcde5bd020?s=32&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=PG" class="avatar avatar-32 photo" height="32" width="32">		<cite class="fn">mark</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/comment-page-1/#comment-2379">
+			May 5, 2011 at 3:13 pm</a>		</div>
+
+		<p>Kaz,</p>
+<p>I have not tried saving a file package with thousands of files, but I think the size of the files being saved would have the greatest impact on memory use. Saving lots of large files would be more memory intensive than saving lots of small files.</p>
+<p>The main purpose of packaging is to make a folder of files look like a single file to the user. Let‚Äôs take your site management app example. If you did not use a file package, you would end up saving a folder with thousands of files inside it. The user could delete or rename some of the files, which could cause problems if the user tries to run the app and load the file. Using a file package makes it more difficult for users to delete or rename files the app needs.</p>
+
+		<div class="reply">
+				</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1" id="comment-2412">
+				<div id="div-comment-2412" class="comment-body">
+				<div class="comment-author vcard">
+		<img alt="" src="http://1.gravatar.com/avatar/d22af8445d0d082a595a8f18e95476c4?s=32&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=PG" class="avatar avatar-32 photo" height="32" width="32">		<cite class="fn">berfis</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/comment-page-1/#comment-2412">
+			July 17, 2011 at 9:27 am</a>		</div>
+
+		<p>A good thing with file wrappers is to organize information much better as writing a huge .plist file.<br>
+A second point is that file wrappers are, for occasional users, much easier to handle, rename, move, join to an e-mail and so on.<br>
+A third advantage is that the file wrapper is (relatively) opaque for smarter users. I‚Äôm writing a game, and this opacity is useful to hide some critical features.</p>
+<p>Note: I‚Äôm using the Applescript-Cocoa bridge named ‚ÄúApplescriptObjC‚Äù, not well documented but easy to learn for an AS scripter. So I have to ‚Äútranslate‚Äù a bit Obj-C code examples like yours, but it‚Äôs not so difficult. Your article about file wrappers is welcome! Thanks!</p>
+
+		<div class="reply">
+				</div>
+				</div>
+		</li>
+	</ol>
+
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+ 
+
+
+<div id="respond">
+
+<h3>Leave a Reply</h3>
+
+<div class="cancel-comment-reply">
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/2010/10/working-with-cocoa-file-packages/#respond" style="display:none;">Click here to cancel reply.</a></small>
+</div>
+
+
+<form action="http://meandmark.com/blog/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required="true">
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required="true">
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3">
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="58" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment">
+<input type="hidden" name="comment_post_ID" value="225" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<p style="display:none;"><input type="text" name="53f5011f25d16afd3252bca232" value=""><input type="text" name="93806e0416892" value="c33445aeb4ef063fb5d92dcf9588"></p><div id="bsbm_form"><label for="bsbm_question">Security Question:</label>
+	<div class="question">What is 6 + 2 ?</div>
+	<div class="answer">
+	<input type="text" tabindex="5" name="mathvalue2" value="">
+		<div style="display:none">Please leave these two fields as-is:
+		<input type="text" name="mathvalue0" value="6">
+		<input type="text" name="mathvalue1" value="2">
+		</div>
+	</div>
+	<div class="notice">IMPORTANT! To be able to proceed, you need to solve the following simple math (so we know that you are a human) :-)</div></div>
+</form>
+
+</div>
+
+<ul class="blog-navigation"><li class="oldernav"></li><li class="newernav"></li></ul><div class="wordpress-credit-content">Powered by <a href="http://wordpress.org/" rel="external" target="_blank">WordPress</a></div><!-- End WP-Blog content -->
+      </div><!-- End content -->
+    </div><!-- End main content wrapper -->
+
+    <div class="clearer"></div>
+
+    <div id="breadcrumbcontainer">
+      <!-- Start the breadcrumb wrapper -->
+    </div><!-- End breadcrumb -->
+
+    <div id="footer">
+      <!-- Start Footer -->
+    </div><!-- End Footer -->
+  </div><!-- End container -->
+
+
+</body></html>Ytext/htmlUUTF-8P_Chttp://meandmark.com/blog/2010/10/working-with-cocoa-file-packages/            1   =   F   X   n   }   ì  /≤  /ª  0  4  4  4°  4´  4¸  9  9  H	  H  HW  Lb  Lk  c‰  cÌ  d5  hC  hL  hê  hô  hÒ  m  m  ¶*  ¶C  ¶å  ™¨  ™µ  ´Ì  ¨  ¨F  ∞\  ∞e  ≥{  ≥î  ≥›  ∑¸  ∏  √Ö  √è  ƒ,  …≥  …º  Àæ  À»  Ãe  —†  —©  ”´  ”µ  ‘R  Ÿç  Ÿò  Ÿ∂  ŸÕ d) d3 d9 d:             G             dÄ

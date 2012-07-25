@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage{url,times,geometry}
+\geometry{margin=2cm}
+\title{The \LaTeX{} CUED thesis/dissertation style}
+\author{Tim Love}
+\begin{document}
+\maketitle
+
+This class was written to help people write documents conforming to the
+requirements of the Engineering Department, Cambridge University. It
+goes rather beyond those minimal requirements, especially in its support
+of PDF options for online documents. This document aims to help you select
+options.
+
+Harish Bhanderi wrote the class and the template which includes:
+\begin{itemize}
+\item  all necessary directories appropriately referenced in the main \texttt{thesis.tex} document;
+\item  a sample thesis directory structure with sub-directories (appropriately referenced) for figures;
+\item  handling of .eps, .ps and .png, .jpg and .pdf graphics files;
+\item  a Makefile to produce .dvi, .ps and .pdf files;
+\item  compiled thesis.dvi, thesis.ps, thesis.pdf files;
+\end{itemize}
+
+Tim Love (\texttt{tl136@cam.ac.uk}) currently maintains it. 
+
+\section{Installation}
+Download the Tarball (2 MB) or, Zip file (1 MB) from
+\url{http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/ThesisStyle/}. 
+You needn't install the class file in with the LaTeX distribution.
+Once you've downloaded the files, try changing the name of \texttt{thesis.pdf} then running \texttt{make thesis.pdf}
+to produce a new version. If you get output ending with something like
+\begin{verbatim}
+   Output written on thesis.pdf (19 pages, 224756 bytes).
+   Transcript written on thesis.log.
+\end{verbatim}
+then a  \texttt{thesis.pdf} file has been produced that you can read with Acrobat Reader, etc, and you're ready to write your document. 
+
+
+
+\section{Departmental Publication Requirements}
+ \url{http://www.eng.cam.ac.uk/graduate/postgrad/Handbook/PhD%20Planning.htm}
+mentions several requirements for Ph.D Theses
+\begin{itemize}
+\item There will normally be a preface and table of contents, in addition to the summary required by Regulations.
+\item A numbered list of references should be included either as a single list at the end of the dissertation or by chapter. When a reference is quoted in the text both the name of the author(s) and the number of the reference should be included.
+\item Dissertations should include a page giving a list of key words. 
+\item The limit in length of a PhD dissertation is 65,000 words including appendices, bibliography, footnotes, tables and equations. The limit on the number of figures is 150.
+\item Candidates should select a type font that produces clear script of adequate size. The text must be clear and of a size that is easy to read. As a guide, about 12 words per line and 45 lines per page would be suitable. It is permissible for dissertations to be printed on both sides of the page using one and a half spaced typing. The Board of Graduate Studies accept dissertations in either A4 or A5 format. 
+\end{itemize}
+
+\noindent\url{http://www.eng.cam.ac.uk/teaching/courses/projects/yr4_proj/2ndNotice.pdf}
+mentions several requirements for IIB project reports
+\begin{itemize}
+\item The Final Report should not exceed 12,000 words or 50 A4 pages, including figures and appendices (but not counting the title page and Technical Abstract). It can be single or double sided, typed in 12 point at one-and-a-half line spacing. Margins are to be approximately 25mm all round.
+\end{itemize}
+\section{Book or Report}
+You can choose to base your document on LaTeX's book class or report
+class. The book class lets you have Parts and Chapters, and numbers 
+section starting at 1. The Report class numbers sections starting at 0.
+Choose either \texttt{book} (the default) or  \texttt{article} as a 
+class option.
+
+\section{Packages}
+The class uses several packages. Here's a list of the main ones with the release that the template has been tested with
+\begin{itemize}
+\item amssymb v2.2d
+\item babel v3.8l
+\item color v1.0j
+\item eucal v2.2d
+\item fancyhdr 3.2
+\item footmisc v5.4a
+\item graphicx v1.0f
+\item hyperref v1.2
+\item ifpdf v1.6
+\item ifthen v1.1c
+\item natbib 8.1
+\item nomencl v4.2
+\item setspace 6.7
+\item tocbibind v1.5g
+\end{itemize}
+
+
+ 3 in particular are worth mentioning
+because they control features that you might wish to change
+\begin{itemize}
+\item \textit{hyperref} - the hyperref packages provides most of 
+the support for online PDF. It's extensively documented at \url{http://www.tug.org/applications/hyperref/manual.html}.
+The class uses these options for PDF output
+\begin{verbatim}
+   \usepackage[ pdftex, plainpages = false, pdfpagelabels,
+                 pdfpagelayout = useoutlines,
+                 bookmarks,
+                 bookmarksopen = true,
+                 bookmarksnumbered = true,
+                 breaklinks = true,
+                 linktocpage,
+                 pagebackref,
+                 colorlinks = true,
+                 linkcolor = blue,
+                 urlcolor  = blue,
+                 citecolor = red,
+                 anchorcolor = green,
+                 hyperindex = true,
+                 hyperfigures
+\end{verbatim}
+The extra meta information for the PDF document is provided using
+the \verb|pdfinfo| command. For Postscript production the options are
+
+\begin{verbatim}
+    \usepackage[ dvips,
+                 bookmarks,
+                 bookmarksopen = true,
+                 bookmarksnumbered = true,
+                 breaklinks = true,
+                 linktocpage,
+                 pagebackref,
+                 colorlinks = true,
+                 linkcolor = blue,
+                 urlcolor  = blue,
+                 citecolor = red,
+                 anchorcolor = green,
+                 hyperindex = true
+\end{verbatim}
+
+For the front pages you also need to set some other variables
+\begin{verbatim}
+\author
+\collegeordept
+\university
+\crest
+\degree
+\degreedate
+\end{verbatim}
+
+
+\item \textit{nomencl} -
+This package has gone through a significant release since the class was created.
+Version 1.1 of this class assumes that you have \texttt{nomencl} version 4 or newer.
+
+\item \textit{fancyhdr} - this controls headers and footers. This
+package uses the following options
+\begin{verbatim}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter. #1 }}{}}
+\renewcommand{\sectionmark}[1]{}
+\fancyhf{}
+\fancyhead[RO]{\bfseries\rightmark}
+\fancyhead[LE]{\bfseries\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt}
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\end{verbatim}
+\end{itemize}
+
+\section{Location of Graphics files}
+For PDF production, PNG, PDF and JPG graphics files are sought in ThesisFigs/PNG/, ThesisFigs/PDF/ or ThesisFigs/. For Postscript output, EPS files are sought in
+ in ThesisFigs/EPS/ and ThesisFigs/
+
+\section{Margins}
+Various page dimensions are set to these defaults
+\begin{verbatim}
+\setlength{\evensidemargin}{1.96cm}
+\setlength{\topmargin}{1mm}
+\setlength{\headheight}{1.36cm}
+\setlength{\headsep}{1.00cm}
+\setlength{\textheight}{20.84cm}
+\setlength{\textwidth}{14.5cm}
+\setlength{\marginparsep}{1mm}
+\setlength{\marginparwidth}{3cm}
+\setlength{\footskip}{2.36cm}
+\end{verbatim}
+You can reset these values in the preamble.
+
+
+\section{Frequently Asked Questions}
+\begin{itemize}
+\item \textit{How do you make the references not red and the links to Figures not blue in the PDF?} - The class's options for the hyperref package include  
+\begin{verbatim}
+                       colorlinks = true,
+                       linkcolor = blue,
+                       urlcolor  = blue,
+                       citecolor = red,
+\end{verbatim}
+You can override these in your thesis file - either set the colors to black or set colorlinks to false. For example you could do
+\begin{verbatim}
+   \hypersetup{colorlinks = false}
+\end{verbatim}
+
+\item \textit{How can I have square brackets around references, and the references by number?} - The natbib package is used. In the Classes/CUEDthesisPSnPDF.cls file change
+\begin{verbatim}
+   \usepackage[round, sort, numbers, authoryear]{natbib}
+\end{verbatim}
+      (at about line 39) to
+\begin{verbatim}
+   \usepackage[square, sort, numbers, authoryear]{natbib}
+\end{verbatim}
+      Furthermore, in the thesis.tex file you need to have
+\begin{verbatim}
+   \bibliographystyle{Classes/CUEDbiblio}
+\end{verbatim}
+as the only active bibliographystyle line
+\item \textit{How can I have numbered references sorted by order of their appearance in the document?} - In the thesis.tex file, try
+\begin{verbatim}
+       \bibliographystyle{unsrtnat}
+\end{verbatim}
+      or
+\begin{verbatim}
+       \bibliographystyle{unsrt}
+\end{verbatim}
+\item \textit{Some headers aren't quite on the right page. Why?} - (the following is from the fancyhdr documentation) note that the * forms of the  \verb|\chapter| etc. commands do not call the mark commands. So if you want your preface to set the header info but not be numbered nor be put in the table of contents, you must issue the  \verb|\markboth| command yourself, e.g.
+\begin{verbatim}
+   \chapter*{Preface\markboth{Preface}{}}
+\end{verbatim}
+      Entering the \verb|\markboth| command inside the \verb|\chapter*| insures that the mark will not be separated from the title by a page break.
+\end{itemize}
+
+\section{Changes}
+Version 1.1 appeared in July 2010, with these changes 
+\begin{itemize}
+\item \texttt{book} and \texttt{report} options added.
+
+\item \verb|\usepackage{tocbibind}| added.
+
+\item
+\begin{verbatim}
+\usepackage{setspace}
+\onehalfspacing
+\end{verbatim}
+used instead of 
+\begin{verbatim}
+\renewcommand\baselinestretch{1.2}
+\baselineskip=18pt plus1pt
+\end{verbatim}
+
+\item The current version of \texttt{nomencl} assumed.
+\end{itemize}
+
+\end{document}

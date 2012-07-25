@@ -1,0 +1,50 @@
+\documentclass[12pt,twoside]{article}
+\usepackage{natbib}
+
+\begin{document}
+  
+\cite{}
+\cite{ahnsailor10,eckardt01,chomsky86a,tobi05,ahn11}
+
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+
+\bibitem[{Ahn(2011)}]{ahn11}
+Ahn, Byron. 2011.
+\newblock Tongan relative clauses at the syntax-prosody interface.
+\newblock In {\em Proceedings of the 18th Annual Conference of the
+  {A}ustronesian {F}ormal {L}inguistics {A}ssociation\/}.
+
+\bibitem[{Ahn and Sailor(To appear)}]{ahnsailor10}
+Ahn, Byron, and Craig Sailor. To appear.
+\newblock The emerging middle class.
+\newblock In {\em Proceedings from the 46th Annual Meeting of the {C}hicago
+  {L}inguistic {S}ociety\/}.
+
+\bibitem[{Beckman et~al.(2005)Beckman, Hirschberg, and
+  Shattuck-Hufnagel}]{tobi05}
+Beckman, Mary~E., Julia Hirschberg, and Stefanie Shattuck-Hufnagel. 2005.
+\newblock The original {ToBI} system and the evolution of the {ToBI} framework.
+\newblock In {\em Prosodic typology\/}, ed. Sun-Ah Jun. Oxford University
+  Press.
+
+\bibitem[{Chomsky(1986)}]{chomsky86a}
+Chomsky, Noam. 1986.
+\newblock {\em Barriers\/}.
+\newblock Linguistic Inquiry Monographs. MIT Press.
+
+\bibitem[{Eckardt(2001)}]{eckardt01}
+Eckardt, Regine. 2001.
+\newblock Reanalysing selbst.
+\newblock {\em Natural Language Semantics\/} 9:371--412.
+
+\end{thebibliography}
+
+
+\bibliographystyle{linquiry2} 
+
+
+\end{document}

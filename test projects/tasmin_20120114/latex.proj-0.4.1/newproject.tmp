@@ -1,0 +1,90 @@
+#!/bin/sh
+#
+# PATH and IFS are here for paranoia's sake
+# The path may be modified as necessary.
+IFS=''
+PATH=/etc:/bin:/usr/bin:/usr/ucb:/usr/etc:/usr/local/bin:$USER/scripts
+export PATH IFS
+
+# Correct command-line invocation usage:
+Usage="Usage: `basename $0` [-h] new_project_name"
+
+# Generic Tmpfile
+Tmpfile=$0.$$
+
+# Clean up temporary file on normal exit or interrupt:
+trap 'rm $Tmpfile > /dev/null 2>&1; exit 0' 0 1 2 3 15
+
+# Usage fragment
+if [ $# -ne 1 ]
+then
+  echo $Usage >&2
+  exit 1
+else
+  PROJECT=$1
+fi
+
+case $PROJECT in
+  -*) echo $Usage >&2 ; exit 1 ;;	# Help, presumably....
+esac
+
+# Here we begin cloning this project template...
+# We will assume that this is being run IN the project directory
+# and will clone it one notch up (presumably in e.g. $HOME/Src if
+# one usually keeps the project template in $HOME/Src/project).
+mkdir -p ../$PROJECT
+if [ ! -d ../$PROJECT ]
+then
+  echo "Oops, unable to create project directory ../$PROJECT"
+  exit 1
+fi
+
+# The project directory now exists.  Let's fill it, converting
+# filenames and internal variables as needed, one at a time.
+# This is as simple as anything, really.
+
+# COPYING
+cat COPYING |  \
+  sed -e "s/project (standard simple project prototype)/              $PROJECT/" > ../$PROJECT/COPYING
+
+# Makefile.  First the DIR, same as the project name
+cat Makefile | \
+  sed -e "s/DIR = project.tex/DIR = $PROJECT/" > ../$PROJECT/Makefile.tmp
+# Then the sourcefile and anyplace else that project might appear.
+cat ../$PROJECT/Makefile.tmp | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/Makefile
+/bin/rm ../$PROJECT/Makefile.tmp
+
+# README (straight copy)
+cp README ../$PROJECT/README
+
+# copyright (OPL?)
+cat copyright | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/copyright
+
+# OPL
+cat OPL.tex | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/OPL.tex
+
+# project_tex.tex (main source)
+cat project_tex.tex | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/$PROJECT.tex
+
+# project_tex.php (php to facilitate automated website)
+cat project_tex.php | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/$PROJECT.php
+
+# project_tex.abs (project abstract for website)
+cat project_tex.abs | \
+  sed -e "s/project/$PROJECT/" > ../$PROJECT/$PROJECT.abs
+
+# project.tex.cvs.time
+echo "New Checkin `date`" >../$PROJECT/$PROJECT.cvs.time
+
+# Done, I think, for the moment.
+echo "Project directory ../$PROJECT is created and loaded."
+echo "It is STRONGLY SUGGESTED that your next step be to put"
+echo "$PROJECT under CVS control..."
+
+exit 0
+

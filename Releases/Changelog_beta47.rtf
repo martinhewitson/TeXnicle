@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187
+\cocoascreenfonts1{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17620\viewh16520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \ul \ulc0 TeXnicle Beta 47, 21st July 2012\ulnone \
+\
+\pard\pardeftab720
+\cf0 This will be the last beta release with feature changes. The plan is for one (or possibly two) more beta release focusing on any reported bugs before releasing the final version of TeXnicle 2.0. Further change requests will be looked at in the development of version 2.1.\
+\
+A Significant amount of behind-the-scenes changes have taken place in this release, so it is recommended\
+that you have a good backup of any files (including TeXnicle's preferences file found under ~/Library/Preferences/com.bobsoft.TeXnicle.plist) before using this version. No problems are expected, but you\
+never know.\
+\
+\ul Focus Area: Spell Checking\
+\
+\ulnone TeXnicle has two new features associated with spell checking. \
+\
+The first is that the dictionary language can be specified for individual documents or projects. This is done on the project/document settings tab.\
+\
+The second is a project-wide spelling list which appears as a new navigation pane on projects. This shows a list of project files and misspelled words within them.\
+\
+You can correct words directly from the spelling pane using the "Correct" action button, or using the context menu of the listed words. You can also jump to the misspelled word in the editor by double clicking on the word in the list or by clicking the "Reveal" button.\
+\
+Files are checked every 5s, but only if there have been changes since the last check. You can force a full check of all files by clicking the "Force Check" button.\
+\
+The spell checking is only done for file types which are listed in the "File Types" preference pane and which have Spell Check selected.\
+\
+It is recommended to install CocoaASpell from http://cocoaspell.leuski.net/. This provides system-wide dictionaries which are TeX aware. The following article is a useful read: http://www.jkwchui.com/2010/03/spellchecking-latex-in-macosx/.\
+\
+\
+\ul Other Changes\
+\
+\ulnone + New spelling panel for projects (see release notes).\
++ The spelling dictionary language can now be specified per project or document (see release notes).\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural
+\cf0 + It is now possible to control the depth of the outline that's shown in the outline view.\
++ Added a preference to activate/deactivate restoring open tabs in projects.\
++ Added a preference to control the interval between live updates.\
++ Added two new menu items under view to show the integrated console and pdf viewer should they be collapsed.\
++ Added 3 new syntax highlighting elements which 'markup' the text between < >, << >>, or <<< >>>. Useful for\
+  marking text that needs to be edited later. These elements are off by default.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 + A clearer distinction is now made between 'project folders' (which exist on disk) and project groups \
+  (which don't exist on disk). Folders are displayed as blue, groups in grey. Folders can not be moved by \
+  drag and drop, nor can they be created under groups. \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural
+\cf0 + Project searching can now be restricted to case sensitive or whole word searches.\
++ PDF viewer now displays the current page number and total page count.\
++ Bug fix: added a workaround for the bug in 10.7.4 which stops PDFs being displayed properly.\
++ Bug fix: project search results remain valid even after the content of the files changes.\
++ Bug fix: selecting rearranged tabs could result in crashing.\
++ Various bug fixes and optimisations, especially to the underlying project document management.}

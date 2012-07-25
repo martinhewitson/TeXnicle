@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf320
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20940\viewh16520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \ul \ulc0 TeXnicle Beta 35, 5th March 2012\ulnone \
+\
+\
+\pard\pardeftab720
+
+\f1\b \cf0 Focus Area: Project Templates
+\b0 \
+\
+TeXnicle has a first implementation of project templates. \
+\
+Project templates are file bundles which contain the raw files (source and images) needed for the template as well as an info.plist and a settings.plist (optional). These bundles must be called 
+\f2\fs26 <some_name>.tpt
+\f1\fs28  and must reside in the directory\
+\
+
+\f2\fs26 ~/Library/Application Support/TeXnicle/projectTemplates/
+\f1\fs28 \
+\
+When this version of TeXnicle first launches, it will copy a very simple example template in to the directory.\
+\
+For further details about project templates, see below.\
+\
+
+\b Other changes in beta 35:
+\b0 \
+\
++ When loading engine files, TeXnicle now parses out the text between tag 
+\f2\fs26 <imageinclude></imageinclude>
+\f1\fs28 . The text between\
+  these tags is used when pasting an image in to the text editor. If these tags are not found, TeXnicle uses a standard LaTeX\
+  
+\f2\fs26 includegraphics
+\f1\fs28  block.\
+\
++ The built-in context engine has been updated to include a 
+\f2\fs26 <imageinclude></imageinclude>
+\f1\fs28  tag.\
+\
++ Bug Fix: clicking on "Jump to Section..." in the popup section list no longer jumps to the top of the file.\
++ Bug Fix: trying to use a code completion on an unknown command shortcut allows a newline now.\
++ Bug Fix: better handling of paste, paste-as-image, and paste-as-table\
+\
+\
+
+\b Creating project templates
+\b0 \
+\
+At the moment you can create a project template in two ways:\
+\
+1) You can create a template from an existing project using the "Project->Create Project Template..." menu item. \
+\
+You will be shown a dialog where you can select which of the project files should be included in the template. You can give the project a name and a description.\
+\
+2) Create a project template by hand\
+\
+  a) In the directory specified above, create a directory with your desired template name and put in there all the files necessary for the template.  \
+  b) Create an info.plist file and populate it with the following content:\
+\
+
+\f2\fs24 <?xml version="1.0" encoding="UTF-8"?>\
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\
+<plist version="1.0">\
+<dict>\
+        <key>description</key>\
+        <string>Project template which creates a simple LaTeX article project.</string>\
+        <key>name</key>\
+        <string>Article</string>\
+</dict>\
+</plist>
+\f1\fs28 \
+\
+  c) Optionally, create a settings.plist file with the following content:\
+\
+
+\f2\fs24 <?xml version="1.0" encoding="UTF-8"?>\
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\
+<plist version="1.0">\
+<dict>\
+        <key>doBibtex</key>\
+        <integer>1</integer>\
+        <key>doPS2PDF</key>\
+        <integer>1</integer>\
+        <key>engineName</key>\
+        <string>pdflatex</string>\
+        <key>mainfile</key>\
+        <string>Article_main.tex</string>\
+        <key>nCompile</key>\
+        <integer>3</integer>\
+        <key>openConsole</key>\
+        <integer>1</integer>\
+        <key>showStatusBar</key>\
+        <integer>1</integer>\
+</dict>\
+</plist>
+\f1\fs28 \
+\
+This settings.plist will be used to set the project settings for any project derived from the template.\
+\
+  d) Finally, rename the template directory so that it has a ".tpt" file extension. You should see that the icon changes to the TeXnicle project template icon.\
+\
+
+\b Working with project templates
+\b0 \
+\
+You can view the existing project templates using the template manager which is part of TeXnicle's preferences under the "Templates" tab.\
+You can edit the existing project templates from there too. Editing is currently limited to changing the content of the source files. \
+\
+To create a new project from a template, you can use the "Welcome to TeXnicle" screen. Click on "New Project..." then on "From Template...". Select the template\
+you want to use and click "Create Project".\
+\
+}

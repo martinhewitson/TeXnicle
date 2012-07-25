@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>B7B8902B-0A51-4961-A5A3-D6B273E61A5E</UUID>
+        <nextObjectID>103</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>358</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>File</key>
+                        <data>
+		SIcXmxCoKtFW+YhDSLEkwmXSrw4caz9RzuU6RdD8wRE=
+		</data>
+                        <key>Folder</key>
+                        <data>
+		Grij332X1rMYXqmN3lNQISkMHRf2/DdXELst812WKGE=
+		</data>
+                        <key>Project</key>
+                        <data>
+		77EjZJf+xpmgyr0pFJbXwUaIZN6MKS/o2PFxZbvsCsc=
+		</data>
+                        <key>ProjectItem</key>
+                        <data>
+		WtaPU9rm7J0aQWjjEf7sfCn2HZlql+cuYhRsDffn51Q=
+		</data>
+                        <key>TeXFile</key>
+                        <data>
+		7+kViVWxvtxxOsB7FryvRxcxR7jVqaNMyRZDLX9s/qk=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string></string>
+                    </array>
+                    <key>kMDItemKeywords</key>
+                    <array>
+                        <string>murray_test_1</string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="PROJECT" id="z102">
+        <attribute name="type" type="string">pdflatex</attribute>
+        <attribute name="name" type="string">murray_test_1</attribute>
+        <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/test projects/murray_test_1</attribute>
+        <relationship name="mainfile" type="1/1" destination="TEXFILE"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z103"></relationship>
+        <relationship name="items" type="0/0" destination="PROJECTITEM"></relationship>
+    </object>
+    <object type="TEXFILE" id="z103">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{5, 0}, {565, 596}}</attribute>
+        <attribute name="lasteditdate" type="date">332750895.63445699214935302734</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">332750804.36645001173019409180</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{115, 0}</attribute>
+        <attribute name="sortindex" type="int32">0</attribute>
+        <attribute name="name" type="string">main.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./main.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+    </object>
+</database>

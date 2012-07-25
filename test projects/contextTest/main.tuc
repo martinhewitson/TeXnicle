@@ -1,0 +1,280 @@
+-- version: 1.14
+-- file: main
+-- format: cont-en
+-- stamp: 2011.08.26 13:32
+-- escape: [===[ ... ]===]
+
+job = job or { }
+job.variables = job.variables or { }
+job.variables.checksums = job.variables.checksums or { }
+job.variables.checksums={
+ ["new"]="22AF645D1859CB5CA6DA0C484F1F37EA",
+ ["old"]="149603E6C03516362A8DA23F624DB945",
+}
+job = job or { }
+job.variables = job.variables or { }
+job.variables.collected = job.variables.collected or { }
+job.variables.collected={
+ ["randomseed"]=0.056198115486744,
+ ["totalnofparbackgrounds"]="0",
+}
+job = job or { }
+job.passes = job.passes or { }
+job.passes.collected = job.passes.collected or { }
+job.passes.collected={
+}
+structures = structures or { }
+structures.specials = structures.specials or { }
+structures.specials.collected = structures.specials.collected or { }
+structures.specials.collected={
+}
+structures = structures or { }
+structures.counters = structures.counters or { }
+structures.counters.collected = structures.counters.collected or { }
+structures.counters.collected={
+ ["endnote"]={
+  { 0, 0, 0, 0 },
+ },
+ ["figure"]={
+  { 0, 0, 0 },
+ },
+ ["footnote"]={
+  { 0, 0, 0, 0 },
+ },
+ ["formula"]={
+  { 0, 0, 2 },
+ },
+ ["graphic"]={
+  { 0, 0, 0 },
+ },
+ ["intermezzo"]={
+  { 0, 0, 0 },
+ },
+ ["itemgroup:itemize"]={
+  { 0, 0, 0 },
+ },
+ ["linenote"]={
+  { 0, 0, 0, 0 },
+ },
+ ["realpage"]={
+  { 0, 1 },
+ },
+ ["subpage"]={
+  { 0, 1 },
+ },
+ ["table"]={
+  { 0, 0, 0 },
+ },
+ ["userpage"]={
+  { 0, 1 },
+ },
+}
+structures = structures or { }
+structures.lists = structures.lists or { }
+structures.lists.collected = structures.lists.collected or { }
+structures.lists.collected={
+ {
+  ["metadata"]=3,
+  ["numberdata"]=2,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=1,
+   ["realpage"]=1,
+   ["section"]=0,
+   ["tag"]="?",
+  },
+  ["titledata"]={
+   ["label"]="chapter",
+   ["title"]="\\CONTEXT ",
+  },
+ },
+ {
+  ["metadata"]=6,
+  ["numberdata"]=5,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=2,
+   ["realpage"]=1,
+   ["section"]=1,
+   ["tag"]="?",
+  },
+  ["titledata"]={
+   ["label"]="section",
+   ["title"]="Text",
+  },
+ },
+ {
+  ["metadata"]=6,
+  ["numberdata"]=8,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=3,
+   ["realpage"]=1,
+   ["section"]=2,
+   ["tag"]="?",
+  },
+  ["titledata"]={
+   ["label"]="section",
+   ["title"]="Maths",
+  },
+ },
+ {
+  ["metadata"]=12,
+  ["numberdata"]=11,
+  ["prefixdata"]=9,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=4,
+   ["realpage"]=1,
+   ["reference"]="eqn:famous-emc",
+   ["section"]=2,
+  },
+  ["titledata"]={
+   ["title"]="\\namedformulaentry ",
+  },
+ },
+ {
+  ["metadata"]=12,
+  ["numberdata"]=14,
+  ["prefixdata"]=9,
+  ["references"]={
+   ["block"]="bodypart",
+   ["internal"]=5,
+   ["realpage"]=1,
+   ["reference"]="eqn:def-m",
+   ["section"]=2,
+  },
+  ["titledata"]={
+   ["title"]="\\namedformulaentry ",
+  },
+ },
+}
+structures = structures or { }
+structures.pages = structures.pages or { }
+structures.pages.collected = structures.pages.collected or { }
+structures.pages.collected={
+ {
+  ["block"]="bodypart",
+  ["number"]=1,
+  ["numberdata"]=15,
+  ["prefixdata"]=16,
+ },
+}
+structures = structures or { }
+structures.references = structures.references or { }
+structures.references.collected = structures.references.collected or { }
+structures.references.collected={
+}
+structures = structures or { }
+structures.references = structures.references or { }
+structures.references.referred = structures.references.referred or { }
+structures.references.referred={
+}
+structures = structures or { }
+structures.registers = structures.registers or { }
+structures.registers.collected = structures.registers.collected or { }
+structures.registers.collected={
+}
+job = job or { }
+job.positions = job.positions or { }
+job.positions.collected = job.positions.collected or { }
+job.positions.collected={
+}
+job = job or { }
+job.objects = job.objects or { }
+job.objects.collected = job.objects.collected or { }
+job.objects.collected={
+}
+structures = structures or { }
+structures.synonyms = structures.synonyms or { }
+structures.synonyms.collected = structures.synonyms.collected or { }
+structures.synonyms.collected={
+}
+structures = structures or { }
+structures.blocks = structures.blocks or { }
+structures.blocks.collected = structures.blocks.collected or { }
+structures.blocks.collected={
+}
+job = job or { }
+job.files = job.files or { }
+job.files.collected = job.files.collected or { }
+job.files.collected={
+}
+job.packed={
+ ["index"]={
+  { 0, 0 },
+  {
+   ["block"]="bodypart",
+   ["hidenumber"]=true,
+   ["numbers"]=1,
+   ["set"]="all",
+  },
+  {
+   ["catcodes"]=9,
+   ["coding"]="tex",
+   ["kind"]="section",
+   ["name"]="title",
+   ["nolist"]=true,
+  },
+  { 0, 0, 1 },
+  {
+   ["block"]="bodypart",
+   ["numbers"]=4,
+   ["set"]="all",
+  },
+  {
+   ["catcodes"]=9,
+   ["coding"]="tex",
+   ["increment"]="yes",
+   ["kind"]="section",
+   ["name"]="section",
+  },
+  { 0, 0, 2 },
+  {
+   ["block"]="bodypart",
+   ["numbers"]=7,
+   ["set"]="all",
+  },
+  {
+   ["connector"]=".",
+   ["prefix"]="yes",
+   ["segments"]="2:2",
+  },
+  { 1 },
+  {
+   ["conversionset"]="formula",
+   ["numbers"]=10,
+  },
+  {
+   ["catcodes"]=9,
+   ["kind"]="formula",
+   ["level"]=3,
+   ["name"]="formula",
+  },
+  { 2 },
+  {
+   ["conversionset"]="formula",
+   ["numbers"]=13,
+  },
+  {
+   ["conversionset"]="pagenumber",
+  },
+  {
+   ["connector"]="–",
+   ["prefix"]="no",
+   ["set"]="part",
+  },
+ },
+ ["keys"]={
+  ["directives"]=true,
+  ["metadata"]=true,
+  ["numberdata"]=true,
+  ["numbers"]=true,
+  ["pagedata"]=true,
+  ["prefixdata"]=true,
+  ["processors"]=true,
+  ["sectiondata"]=true,
+  ["specification"]=true,
+ },
+ ["version"]=1.01,
+}

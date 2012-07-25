@@ -1,0 +1,84 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>7F83B354-30B8-4BBA-BB82-9AD0FD74C218</UUID>
+        <nextObjectID>104</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>358</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>Bookmark</key>
+                        <data>
+		DomRcT1vfHnhCpD4hL1oyiuZNfU1acRc5Sa8FV4eSzw=
+		</data>
+                        <key>File</key>
+                        <data>
+		Ow+iGdBKIP6AijDPzNT2dGmjwrSu3RsK6bNp03vZ4jY=
+		</data>
+                        <key>Folder</key>
+                        <data>
+		Grij332X1rMYXqmN3lNQISkMHRf2/DdXELst812WKGE=
+		</data>
+                        <key>Project</key>
+                        <data>
+		WeS8dr2dP74D2G4eO7AvRrVbufOi0GR7gpB57bjBiG8=
+		</data>
+                        <key>ProjectItem</key>
+                        <data>
+		WtaPU9rm7J0aQWjjEf7sfCn2HZlql+cuYhRsDffn51Q=
+		</data>
+                        <key>Settings</key>
+                        <data>
+		/kR6J9LdHdGeQ3bOEG69CfXq/Glm07/1uVJBvThbtrk=
+		</data>
+                        <key>TeXFile</key>
+                        <data>
+		6CluIfoPedvZZaGidwNyxpUQEVkzbR2uHZVaqhL5Vl8=
+		</data>
+                        <key>UISettings</key>
+                        <data>
+		AL0Sr6YIEDccEl/u3ahjfjR2096wLe14w4hI35Vhx0U=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string>5</string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="UISETTINGS" id="z102">
+        <attribute name="selectedcontrolstab" type="int16">0</attribute>
+        <attribute name="editorwidth" type="float">-1</attribute>
+        <attribute name="controlswidth" type="float">-1</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z103"></relationship>
+    </object>
+    <object type="PROJECT" id="z103">
+        <attribute name="type" type="string">PDFLaTeX</attribute>
+        <attribute name="name" type="string">project</attribute>
+        <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/test projects/tasmin_20120114/latex.proj-0.4.1</attribute>
+        <relationship name="mainfile" type="1/1" destination="FILE"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE"></relationship>
+        <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z104"></relationship>
+        <relationship name="uisettings" type="1/1" destination="UISETTINGS" idrefs="z102"></relationship>
+        <relationship name="items" type="0/0" destination="PROJECTITEM"></relationship>
+    </object>
+    <object type="SETTINGS" id="z104">
+        <attribute name="showstatusbar" type="bool">1</attribute>
+        <attribute name="openconsole" type="bool">1</attribute>
+        <attribute name="ncompile" type="int16">3</attribute>
+        <attribute name="enginename" type="string">pdflatex</attribute>
+        <attribute name="dops2pdf" type="bool">1</attribute>
+        <attribute name="dobibtex" type="bool">1</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z103"></relationship>
+    </object>
+</database>

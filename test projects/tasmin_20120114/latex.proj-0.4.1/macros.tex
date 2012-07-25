@@ -1,0 +1,59 @@
+%
+% These are some macros I find useful doing e.g. physics textbooks on 
+% electrodynamics.  Some just shorten typing -- it is much easier to
+% type \be than \begin{equation}.  Others encapsulate complex commands,
+% such as commands that add dynamic links to wikipedia content (which is
+% VERY USEFUL for online content!  I'm quite proud of my "\wikinote{}"
+% below, as it is nearly a one-stop-shop for references these days.
+\newcommand{\Vec}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\Hat}[1]{\hat{\mbox{\boldmath $#1$}}}
+\newcommand{\partialdiv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ppartialdiv}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\del}{{\bf \Vec{\nabla}}}
+\newcommand{\deldot}{\del \cdot}
+\newcommand{\curl}{\del \times}
+\newcommand{\lapl}{\nabla^2}
+\newcommand{\vsh}[2]{\Vec{Y}_{#1}^{#2}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\RE}{\rm I \hspace{-.180em} R}
+\newcommand{\be}{ \begin{equation} }
+\newcommand{\ee}{ \end{equation} }
+\newcommand{\bea}{ \begin{eqnarray} }
+\newcommand{\eea}{ \end{eqnarray} }
+\newcommand{\spade}{\framebox{$\spadesuit$}}
+\newcommand{\heart}{\framebox{$\heartsuit$}}
+\renewcommand{\diamond}{\framebox{$\diamondsuit$}}
+\newcommand{\club}{\framebox{$\clubsuit$}}
+\newcommand{\notrump}{\framebox{\rule[2.75mm]{0cm}{0cm}\rule[-0.5mm]{0cm}{0cm}\ \ }}
+\newcommand{\link}[2]{\htmladdnormallink{#1}{#2}}
+\newcommand{\GIYF}{ \htmladdnormallink{GIYF}{http://www.google.com} }
+\newcommand{\WIYF}{\htmladdnormallink{WIYF}{http://www.wikipedia.org} }
+\newcommand{\MWIYF}{\htmladdnormallink{MWIYF}{http://mathworld.wolfram.com}}
+\newcommand{\wikinote}[2]{\footnote{Wikipedia: \htmladdnormallink{http://www.wikipedia.org/wiki/#1.}{http://www.wikipedia.org/wiki/#1} #2} }
+\newcommand{\googlenote}[2]{\footnote{GIYF: \htmladdnormallink{#1 }{http://www.google.com/search?hl=en&lr=&q=#1&btnG=Search} #2} }
+\newcommand{\vx}{\Vec{x}}
+\newcommand{\vm}{\Vec{m}}
+\newcommand{\vr}{\Vec{r}}
+\newcommand{\vk}{\Vec{k}}
+\newcommand{\vE}{\Vec{E}}
+\newcommand{\vD}{\Vec{D}}
+\newcommand{\vB}{\Vec{B}}
+\newcommand{\vH}{\Vec{H}}
+\newcommand{\vA}{\Vec{A}}
+\newcommand{\vM}{\Vec{M}}
+\newcommand{\vN}{\Vec{N}}
+\newcommand{\vS}{\Vec{S}}
+\newcommand{\vJ}{\Vec{J}}
+\newcommand{\vQ}{\Vec{Q}}
+\newcommand{\vL}{\Vec{L}}
+\newcommand{\vp}{\Vec{p}}
+\newcommand{\hx}{\Hat{x}}
+\newcommand{\hy}{\Hat{y}}
+\newcommand{\hz}{\Hat{z}}
+\newcommand{\hn}{\Hat{n}}
+\newcommand{\hr}{\Hat{r}}
+\newcommand{\hk}{\Hat{k}}
+\newcommand{\he}{\Hat{\epsilon}}
+\newcommand{\Z}{\sqrt{ \frac{\mu_0}{\epsilon_0} }}
+\newcommand{\Ylm}{Y_{\ell m}}
+\newcommand{\YL}{Y_L}

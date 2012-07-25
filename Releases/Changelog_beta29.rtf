@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf230
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20940\viewh16520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \ul \ulc0 TeXnicle Beta 29, 15th January 2012\ulnone \
+\
+\pard\pardeftab720
+\cf0 + TeXnicle now restores more state of the user-interface on a per-document basis.\'a0\
+\'a0 For example: selected control tab, visible part of pdf, widths of controls and\
+  editor window (for Lion users, some of this already 'just works').\
++ TeXnicle can now be configured to support other types of (text) files.\'a0\
+\'a0 In the preferences, there is a new tab 'File Types'. There you can add your own supported\
+\'a0 file types by specifying the extension and description, and whether or not TeXnicle should\'a0\
+\'a0 syntax highlight them.\
++ Added a preference to specify the coloring of multi-line arguments ( \{\} or [] ). If you have code\
+  which contains arguments spanning many lines, then the multi-line argument coloring is very hard to\
+  do without using a lot of cpu power. So this is off by default, meaning single line arguments will \
+  be coloured, multi-line arguments won't be.\
++ Added two new menu commands to increase and decrease the comment level (alt-cmd-/ and ctrl-cmd-/).\
++ Added a Lilypond engine. Currently this assumes that Lilypond.app is installed in /Applications. If \
+  that's not the case, you will need to duplicate the engine and edit it to point it at the location of\
+  the lilypond binary.\
++ Main project files are no longer limited to being tex files. Any file in the supported files list \
+  can be a main file now.\
++ The project builder has been made significantly more robust.\
++ Bug fix: word highlighting got a little broken in release 28. It's fixed now.\
++ Bug fix: uncommenting (cmd-/) multi-'%' comments now works.\
++ Bug fix: syntax highlighting of multi-'%' comments was not always working correctly.\
++ Bug fix: syntax highlighting got a little broken due to changes in beta 28.\
++ Bug fix: some experimental code got left in beta 28 which caused a crash when running on 10.6.8.\
++ Bug fix: different file encodings were not properly displayed in the editor in project mode.\
++ Bug fix: stand-alone PDF viewer no longer loses its scroll position when recompiling document.\
++ Bug fix: pdf is no longer deleted just before compiling.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural
+\cf0 + Bug fix: Engine editor window was chopping lines off the top.\
++ Bug fix: Syntax highlighting properly updates when jumping to previously unseen text via the \
+           document outline view.\
++ Bug fix: New code clippings are now selected after being added.\
++ Bug fix: Editing code clippings in place (double-click code column table entries) now works (again).\
++ Bug fix: Dragging clippings around on the clippings table was not supposed to be possible but it was\
+           working to some extent but producing strange results. It is no longer possible to drag \
+           clippings around on the clippings table.\
++ Bug fix: Editor find panel now works again on 10.6.\
++ Bug fix: Find panel/bar now works on the Console.\
++ Bug fix: Document outline now searches for \\bibliography sections.\
++ Bug fix: Built-in engines are reinstalled when TeXnicle starts in case you deleted them.\
++ Bug fix: Renaming engines starting with a capital letter doesn't cause problems anymore.\
+\
+Please note: if you are upgrading from a version earlier than beta 27, I recommend you read the release notes for beta 27. In particular:\
+\
+    
+\f1\b ** It is strongly recommended that you restore the default library **}

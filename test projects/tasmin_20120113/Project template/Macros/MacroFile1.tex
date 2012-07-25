@@ -1,0 +1,32 @@
+\newcommand{\PdfPsText}[2]{
+  \ifpdf
+     #1
+  \else
+     #2
+  \fi
+}
+
+\newcommand{\IncludeGraphicsH}[3]{
+  \PdfPsText{\includegraphics[height=#2]{#1}}{\includegraphics[bb = #3, height=#2]{#1}}
+}
+
+\newcommand{\IncludeGraphicsW}[3]{
+  \PdfPsText{\includegraphics[width=#2]{#1}}{\includegraphics[bb = #3, width=#2]{#1}}
+}
+
+\newcommand{\InsertFig}[3]{
+  \begin{figure}[!htbp]
+    \begin{center}
+      \leavevmode
+      #1
+      \caption{#2}
+      \label{#3}
+    \end{center}
+  \end{figure}
+}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "~/Documents/LaTeX/CUEDThesisPSnPDF/thesis"
+%%% End: 

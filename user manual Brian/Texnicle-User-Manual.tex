@@ -1,0 +1,122 @@
+\documentclass[11pt]{report}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{parskip}
+\usepackage{fullpage}
+\usepackage{xspace}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\newcommand{\texnicle}{\textsc{TeXnicle}\xspace}
+
+\title{\texnicle: A User's Manual}
+\author{Martin Hewitson\\MPI-Hannover \and Brian L.\ Cansler\\UNC-CH}
+\date{}
+
+\begin{document}
+\normalem
+\maketitle
+
+\tableofcontents
+
+\chapter{Introducing \texnicle}
+\label{intro}
+\texnicle is an editor and project manager for producing documents using {\LaTeX} and similar typesetting languages. \texnicle has been under development since 2010 and is intended to provide a fast, feature-rich environment for writing {\LaTeX} documents under Mac OS X. Employing all the features of modern Mac OS X applications, \texnicle fits right at home on a Mac.
+One of the main design drivers for \texnicle was to produce an editing environment similar to Xcode the development environment Apple provides for building applications on Mac OS X.
+
+\section{In This Manual}
+\label{inthismanual}
+This manual is split into four chapters. The first two are just to get us started: This introduction; an installation and requirements discussion in Chapter \ref{requirements}. Chapter \ref{userguide} is a User Guide that covers typical usage scenarios and introduces the basic concepts used throughout \texnicle. Chapter \ref{reference} is an in-depth reference guide to \texnicle’s features.
+
+\section{Development}
+\label{dev}
+I am a senior researcher (presumably?)\ at the Max Planck Institute for Something-Physics in Hannover, Germany. Add more here. May want to add acknowledgements to any resources, funding or otherwise, especially if the MPI provided backing.
+
+\chapter{Installation, Setup, and Requirements}
+\label{requirements}
+\texnicle is designed to run on 32-bit and 64-bit machines running Mac OS X 10.6 (Snow Leopard), 10.7 (Lion), or 10.8 (Mountain Lion). There are currently no plans to support previous versions of Mac OS X or to support Windows operating system. \texnicle is a free application and will remain so.
+
+\texnicle expects you to have an installed {\LaTeX} typesetting system on your machine. \footnote{Put in something about how \texnicle works with {\LaTeX} installations on shared systems like those at the MPI. The MPI in Nijmegen, for example, has a shared computer system with {\LaTeX} installed on some root within the system network rather than on each computer. As many of your users will probably be using shared-network systems, this might be good to include.} By default, \texnicle is set up to work with installations of MacTeX. If you have an alternative {\LaTeX} installation, you may need to set up some new paths. In particular, you may need to copy and edit one or more of the built-in engines that Texnicle uses to typeset documents; this is described in section \ref{reference.editengine}.
+
+In addition to the engines described above, \texnicle uses some commands for typesetting code snippet previews. These are set in the Preferences pane ``Palette \& Library'' and are discussed further in section \ref{reference.preferences.palettelibrary}.
+
+\chapter{User Guide}
+\label{userguide}
+This chapter focuses on how to use \texnicle for common tasks. It will start with the basics and move through the most important features. A more comprehensive description of all the bells and whistles can be found in chapter \ref{reference}.
+
+\section{Welcome Screen}
+\label{userguide.welcome}
+When opening \texnicle for the first time, or when opening the application without loading an existing document, the welcome screen will be displayed. It has four major components:
+	\begin{description}
+		\item[Recent Files] on the left displays a list of the files most recently opened with \texnicle. These files can be opened by selecting the file and clicking ``Open'' at the bottom or by double-clicking the file name.
+		\item[New Project\ldots] on the right will open a panel to walk the user through creating a new project. This is described in section \ref{userguide.newproject}.
+		\item[Open Existing\ldots] will open the familiar Mac OS X dialogue box that will allow you to search your system for a file you wish to open.
+		\item[New {\LaTeX} File] will create a new {}.tex document. A menu will appear with template options, or you may opt to open a blank document. See section \ref{userguide.newdoc}.
+	\end{description}
+	
+\section{Quick Start}
+\label{userguide.quickstart}
+The \texnicle window is divided into five major panes, which are described below. The Navigators pane, the Integrated PDF Viewer, and the Console may all be hidden and shown from the View menu (Window menu for the Console) at the top of the screen.
+
+\subsection{The Toolbar} at the top includes quick access to functions that will allow typeset your project and open them in the built-in PDF viewer. It has a console window with status updates on the compilation of your document or project and a button to trash all auxiliary files\footnote{Setting defaults for files that should be trashed is done through Preferences $>$ Typesetting $>$ Trash.}. If the current document is not included in a project, there is also a button to add that file to a project.
+
+\subsection{Main Editor}
+The second part is the main editor window, located in the center. Text font, text colour, background colour, syntax highlighting, line break length, and much more can be changed under Preferences $>$ General and Preferences $>$ Fonts \& Colours. This is where you will write your document. In project windows, there is a bar of tabs above the main text window which shows all open documents in the project.
+
+\subsection{Navigators Pane}
+To the left of the window is the Navigators pane, which includes seven subcomponents (five in non-project windows).
+
+The first icon, a folder, shows the Tree View of your project (and so does not appear in non-project windows). All of the project's components (files, pictures, bibliographies, folder organization, etc.)\ are listed here. The main file of the project is in bold. Group folders (groupings of files that appear in \texnicle but not on the disc) are grey; file folders (folders that do exist on the disc) are in blue.
+
+The second icon is a delta symbol ($\delta$), which opens the Symbol Palette. The category of symbols shown may be changed using the drop-down menu at the top (the default is Foreign), and the symbol may be dragged into the open document, double-clicked, orinserted using ``insert'' at the bottom. The slider at the bottom changes the size of the symbols.
+
+The third component of the Navigators pane is the Code Library (two superimposed rectangles), which includes code snippets that you can insert into your document just like symbols from the Symbol Palette. New snippets and categories of snippets may be added from this pane, as well.
+
+The fourth component is Outline View, which shows the outline of your project or document based on sectioning commands (Part, Chapter, Section, Subsection, and so on). The depth of this may be controlled using the slider at the bottom. The next component only appears in the Navigators pane for projects: Project Search. This will allow you to search all files in a project for a word or phrase. Options to conduct case-sensitive searches and to search only for whole words are available.
+
+The sixth component is the WHAT DO YOU CALL THIS? tab, represented by a lowercase letter \textsl{i}. This contains many important features: a list of coding errors, a list of misspelled words, a list of labels, a citation list, and a list of new commands that have been declared in each document using the \textsl{newcommand} or \textsl{renewcommand} codes. In a stand-alone document, this shows everything for the open file; for a project, this shows information for every document in the project. Projects also include a tab within this section for project bookmarks
+
+The final component is the Project Settings tab, which appears for all documents and projects. It allows you to choose the engine used to compile your document, whether to run BibTeX and ps2pdf, how many times to run LaTeX, and more.
+
+\subsection{Integrated PDF Viewer}
+
+The fourth important part of the TeXnicle window is on the right: the Integrated PDF Viewer. This pane shows a live update (compiled at an interval that can be set under Preferences $>$ Typesetting) of your document. It has a page count of the PDF output, a search function, zoom capability, and an option to print your document.
+
+\subsection{Console}
+
+The final pane is the Console Pane, which appears at the bottom of the screen. When typesetting your document, this pane will show the output of the compilation commands. You can choose whether to show all messages from the console, errors only, or TeXnicle messages only.
+
+\subsection{Creating a New {\LaTeX} FIle}
+\label{userguide.newdoc}
+Whether a new {}.tex file is created from the welcome screen or from File $>$ New Standalone {\LaTex} File (cmd-N), a new window will appear with a template selection dialogue box. Select one of the pre-existing templates from the list shown; if you choose, you may also edit the code before opening the document using the preview window below the list. Alternatively, you may create a new template by clicking the $+$ icon below the list (similarly, the $-$ icon deletes templates). The templates included are:
+	\begin{description}
+		\item[Empty] contains no code. It's a blank slate.
+		\item[Section] will create a document for a new section.
+		\item[Custom] is a blank template in which you may create a custom template.
+		\item[Article] creates a document with a useful preamble for the Article class.
+		\item[Book] creates a document formatted for the Book class.
+		\item[Report] starts a new document in the Report class.
+		\item[Beamer] creates a {}.tex document set up for a new presentation using Beamer.
+	\end{description}
+
+Once you have chosen a template, enter a name for the new document and click ``Select.''
+
+\subsection{Creating a New \texnicle Project}
+\label{userguide.newproject}
+While \texnicle can of course work with simple {\LaTeX} documents, its true power is in its Project capabilities. A project creates a work environment with all of the files you need in one place, displaying them in an integrated tree view.
+
+When you opt to create a new project, you have four options:
+	\begin{description}
+		\item[Empty Project] creates a new empty \texnicle project to which you can add your files (or from within which you can create new files).
+		\item[New Article] creates a new \texnicle project with a standard article main file and folders for additional files, images, and other resources.
+		\item[From Tempate\ldots] creates a new \texnicle project from an existing project template.
+		\item[Build Project\ldots] creates a new \texnicle project containing the files referenced by a main file (using \textsl{input} and \textsl{include} commands). You may choose either a {}.tex file or a directory. If a directory is chosen, the main file used is the first file found with a \textsl{documentclass} command.
+	\end{description}
+
+\texnicle will then create the project based on your selection.
+
+
+
+\end{document}
+			

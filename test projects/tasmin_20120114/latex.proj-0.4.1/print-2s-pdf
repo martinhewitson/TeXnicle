@@ -1,0 +1,105 @@
+#!/bin/sh
+#
+#
+# PATH and IFS are here for paranoia's sake
+# The path may be modified as necessary.
+IFS=''
+PATH=/etc:/bin:/usr/bin:/usr/ucb:/usr/etc:/usr/local/bin:$USER/scripts
+export PATH IFS
+
+# Correct command-line invocation usage:
+Usage="Usage: `basename $0` filename (no extension) [poddstart-pevenfinish]"
+
+#========================================================================
+# This script is an encapsulation of the commands necessary to
+# print first the odd-side, then the reversed even-side pages in some 
+# range, from a given dvi file, from a given range.  The range must
+# start with an odd page and end with an even page OR care must be taken
+# to handle the first or last page.
+#
+# To use this on my HP 1200, one uses latex to generate longarticle.dvi
+# and then runs e.g.
+#
+#  print-2s-pdf longarticle
+#
+# which creates longarticle.odd.pdf and longarticle.even.pdf.  
+#
+# Then run:
+#
+#  lpr -PBW longarticle.odd.pdf
+#
+# to print the odd pages only.
+#
+# To ensure that the RIGHT evens print on the back side of the odds
+# ensure that longarticle.even.pdf ENDED on the last page number + 1
+# relative to the odd; otherwise remove the last page and set it aside.
+# Then take the odd pages, place them face DOWN into the paper tray of
+# your printer being sure that the foot of the page is oriented
+# correctly (or your even/odd pages will all be relatively upside
+# down!)  It helps to try this once or twice with a small file to see 
+# how it goes.  Finally run:
+#
+#  lpr -PBW longarticle.even.pdf
+#
+# and your even side pages should print, perfectly, on the back of the
+# odds starting at the END and running back to the BEGINNING (hence the
+# reveral required).  The result should be correctly sorted 2 sided
+# printing.  This should work even if you print a range beginning on an
+# even page, as long as you still have paper in your tray to handle the
+# last (first, even) page, which has no odd side printed.
+#
+#========================================================================
+
+# Generic Tmpfile
+Tmpfile=`basename $0`.$$
+
+# Clean up temporary file on normal exit or interrupt:
+trap 'rm $Tmpfile > /dev/null 2>&1; exit 0' 0 1 2 3 15
+
+RANGE=""
+if [ $# -ge 1 ]
+then
+  FILENAME=$1
+fi
+
+if [ $# -eq 2 ]
+then
+  RANGE=$2
+fi
+
+if [ $# -lt 1 ]
+then
+  echo $Usage >&2
+  exit 1
+fi
+
+DVI="$FILENAME.dvi"
+ODD="$FILENAME.odd.ps"
+EVEN="$FILENAME.even.ps"
+
+echo "Printing odd pages only of range: $RANGE from $DVI into $ODD"
+
+# Do some simple testing FIRST
+if [ ! -f $DVI ]
+then
+  echo "$DVI not found" >&2
+  exit
+fi
+
+if [ -z "$RANGE" ]
+then
+  echo "Running dvips -A -o $ODD $DVI"
+  dvips -A -o $ODD $DVI
+  echo "Running dvips -B -r -o $EVEN $DVI"
+  dvips -B -r -o $EVEN $DVI
+else
+  echo "Running dvips -A -pp $RANGE -o $ODD $DVI"
+  dvips -A -pp $RANGE -o $ODD $DVI
+  echo "Running dvips -B -r -pp $RANGE -o $EVEN $DVI"
+  dvips -B -r -pp $RANGE -o $EVEN $DVI
+fi
+
+ps2pdf $ODD
+ps2pdf $EVEN
+
+echo "Done!"

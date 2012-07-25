@@ -1,0 +1,131 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>09C4DD70-245C-4539-AD03-4C70A8C5C223</UUID>
+        <nextObjectID>106</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>358</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>Bookmark</key>
+                        <data>
+		DomRcT1vfHnhCpD4hL1oyiuZNfU1acRc5Sa8FV4eSzw=
+		</data>
+                        <key>File</key>
+                        <data>
+		g0dbBJCoqMq/YyTpIK/2Dwq9QbDIoJwXXAAngvjlug4=
+		</data>
+                        <key>Folder</key>
+                        <data>
+		Grij332X1rMYXqmN3lNQISkMHRf2/DdXELst812WKGE=
+		</data>
+                        <key>Project</key>
+                        <data>
+		vo1aWgOsgAms71hKtfeAG72uwKbTsY2VrKDDPGAOjjc=
+		</data>
+                        <key>ProjectItem</key>
+                        <data>
+		WtaPU9rm7J0aQWjjEf7sfCn2HZlql+cuYhRsDffn51Q=
+		</data>
+                        <key>Settings</key>
+                        <data>
+		/kR6J9LdHdGeQ3bOEG69CfXq/Glm07/1uVJBvThbtrk=
+		</data>
+                        <key>TeXFile</key>
+                        <data>
+		YMkOcubel3kPbZmFNGyeWzLDN8JOKBgXRj6LJdZfmms=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string>5</string>
+                    </array>
+                    <key>kMDItemKeywords</key>
+                    <array>
+                        <string>Optical_spring_matt</string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="PROJECT" id="z102">
+        <attribute name="type" type="string">pdflatex</attribute>
+        <attribute name="name" type="string">Optical_spring_matt</attribute>
+        <attribute name="folder" type="string">/Users/sthild/work/svn-glasgow/interferometry/trunk/paper/Optical_spring_3m</attribute>
+        <relationship name="mainfile" type="1/1" destination="TEXFILE" idrefs="z104"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z106"></relationship>
+        <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z103"></relationship>
+        <relationship name="items" type="0/0" destination="PROJECTITEM" idrefs="z106 z105 z104"></relationship>
+    </object>
+    <object type="SETTINGS" id="z103">
+        <attribute name="showstatusbar" type="bool">1</attribute>
+        <attribute name="openconsole" type="bool">1</attribute>
+        <attribute name="ncompile" type="int16">3</attribute>
+        <attribute name="enginename" type="string">pdflatex</attribute>
+        <attribute name="dops2pdf" type="bool">1</attribute>
+        <attribute name="dobibtex" type="bool">1</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+    </object>
+    <object type="TEXFILE" id="z104">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 500}, {733, 671}}</attribute>
+        <attribute name="lasteditdate" type="date">337177535.93178099393844604492</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">342697835.37079501152038574219</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{29844, 19}</attribute>
+        <attribute name="sortindex" type="int32">0</attribute>
+        <attribute name="name" type="string">Optical_spring_matt.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./Optical_spring_matt.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+    <object type="TEXFILE" id="z105">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 628}, {739, 671}}</attribute>
+        <attribute name="lasteditdate" type="date">342720905.13943600654602050781</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">342720947.77331900596618652344</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{2134, 0}</attribute>
+        <attribute name="sortindex" type="int32">1</attribute>
+        <attribute name="name" type="string">literature.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./literature.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+    <object type="TEXFILE" id="z106">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 130}, {739, 686}}</attribute>
+        <attribute name="lasteditdate" type="date">342721216.12872499227523803711</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">342721218.24833101034164428711</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{2386, 0}</attribute>
+        <attribute name="sortindex" type="int32">2</attribute>
+        <attribute name="name" type="string">intro.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./intro.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+</database>

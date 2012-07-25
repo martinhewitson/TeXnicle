@@ -1,0 +1,54 @@
+<center><H1>Latex Project Template</H1></center>
+
+<center><H3>by Robert G. Brown (rgb)</H3></center>
+
+<p>This is a reusable template for latex projects.  Download the tarball
+and unpack it with e.g.<br>
+<pre>
+  tar xvfz latex.proj-0.4.1.tgz
+  cd latex.proj-0.4.1
+</pre>
+Place it under e.g. Subversion control so that you can back off any
+changes you make to it.</p>
+
+<p>Look over the Makefile to familiarize yourself with the various
+targets.  Not all of them are guaranteed to work, and some may not work
+for <i>you</i> without some editing, at least.  Do not modify the
+Makefile yet, though -- work at first on a copy created as below and
+then backport the changes to the original Makefile <i>carefully</i> when
+you are sure they work.</p>
+
+<p>In this directory, run the "newproject" command:</p>
+<pre>
+ ./newproject projectname
+ cd ../projectname
+</pre>
+
+<p>Place the new project under your choice of version control --
+subversion is currently supported by a couple of targets in the Makefile
+that will require a bit of editing to make work for you but CVS is
+equally possible with a bit more editing.</p>
+
+<p>Note that newproject SHOULD have changed all the basic filenames
+around so that they correspond to your project name.  Only make changes
+in the template itself if you want to make them permanent features of a
+new latex project!</p>
+
+<p>You should be able to type "make" in the new project directory at any
+time and have it just work to build dvi, pdf, and a4pdf (a pdf for A4
+sized paper commonly used in Europe).  Bring up the dvi file for preview
+with a command such as:<br>
+<pre>
+ xdvi projectname &
+</pre>
+Then start up your favorite editor on the projectname.tex source file.
+If it is emacs or jove (or any editor that permits you to invoke make
+from inside the editor) you should be able to make simple changes to the
+latex source, invoke make via e.g. ^x ^e, and bring the preview screen
+to the foreground, where it will automatically refresh to the
+current/new dvi file!  This makes the edit, make/debug, view/debug, edit
+cycle quite painless and generally faster than most latex IDE GUI
+tools.</p>
+
+<p>Good luck!  Feel free to contact me with e.g. bug reports or
+problems.</p>

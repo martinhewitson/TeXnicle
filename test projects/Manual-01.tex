@@ -1,0 +1,294 @@
+
+\setupoutput[pdftex]
+\definebodyfont[12pt][rm][tfe=Regular at 48pt]
+\setupcolors[state=start]
+\definecolor[darkblue][r=.1,g=.1,b=.5]
+\definecolor[gray][s=.65]
+\setuppapersize[letter][letter]
+
+
+\enablemode[ecran]
+\mainlanguage[fr] \language[fr] 
+
+\startmode[ecran]
+	\setuppapersize[landscape][landscape]
+\stopmode
+
+   \setupheadertexts[] 
+   \setupheadertexts[{Sample\ $\cdot$  \darkblue \headnumber[section] $\cdot$ \getmarking[section]}][{\pagenumber}]
+   \setupheader[text][after=\hrule]
+
+\setupcolors[state=start0]
+\setupinteraction[state=start,color=darkgreen]
+\setupurl [color=darkblue]
+
+\def\code#1{{\tt{\darkred #1}}}
+\def\Sample{{\tt{\darkblue Sample}}}
+\def\ms{{\tt{\darkblue ms}}}
+\def\fsc{{\tt{\darkblue FastSimCoal}}}
+\def\MapArg{{\tt{\darkblue MapArg}}}
+
+\def\maincppprogramm{main.cpp}
+
+%% Pour la table des matieres...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \setuplist
+        [chapter]
+        [before=\blank,style=bold]
+    \setuplist
+        [section]
+        [margin=2em, width=2cm , distance=0.5em]
+    \setuplist
+        [subsection]
+        [margin=4em, width=3em,distance=1em]
+    \setupcombinedlist
+        [content]
+        [alternative=c, aligntitle=no, width=2em]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \setupheads[style=slanted,alternative=inmargin]
+  \setuphead[chapter][color=darkred]
+  \setuphead[section][color=darkred]
+
+\useURL
+[cygwin]
+[http://www.cygwin.com/]
+[]
+[{\tt
+http://www.cygwin.com/}]
+
+\useURL
+[mapage]
+[http://www.labmath.uqam.ca/~fabricel/]
+[]
+[{Page web de Fabrice}]
+
+
+\useURL
+[ms]
+[http://home.uchicago.edu/~rhudson1/source/mksamples.html]
+[]
+[{ms}]
+
+\useURL
+[ctan]
+[http://www.tug.org/ctan.html]
+[]
+[{CTAN}]
+
+\useURL
+[fastsimcoal]
+[http://cmpg.unibe.ch/software/fastsimcoal/]
+[]
+[{FastSimCoal}]
+
+
+
+
+\useURL
+[gnuplot]
+[http://www.gnuplot.info/]
+[]
+[{GnuPlot}]
+
+
+\useURL
+[beamer]
+[https://sourceforge.net/projects/latex-beamer/]
+[]
+[{LaTeX Beamer and pgf/Tikz Class}]
+
+
+\useURL
+[moncourriel]
+[mailto:larribe.fabrice@uqam.ca]
+[]
+[larribe.fabrice@uqam.ca]
+
+
+\starttext
+{
+\startstandardmakeup
+\line{Universit\'e du Qu\'ebec \`a Montr\'eal \hfill D\'epartement de Math\'ematiques}
+\blank[medium]
+\hrule
+\blank[medium]
+\line{Manuel de Sample\high{\darkred{\tfxx\copyright}} \hfill {\em par} Fabrice Larribe}
+\line{Conversion d'un \'echantillon de FastSimCoal vers MapArg\hfill}
+%\line{{\tt larribe.fabrice@uqam.ca}}
+\blank[medium]
+\hrule
+\blank[medium]
+\line{ {\from[mapage]} \hfill {\from[moncourriel]} }
+
+\vfill
+%\centerline{\definedfont[SerifBold at 24pt] {\gray Fabrice\ \ Larribe  }}
+%\line{\definedfont[SerifBold at 24pt] {\gray Fabrice}\hfill {\gray Larribe }}
+\blank
+
+\centerline{ \externalfigure[mapArglogo.pdf][width=.6\textwidth]  }
+%\centerline{\definedfont[SerifBold at 180pt] {\gray Map }}
+%centerline{\definedfont[SerifBold at 180pt] {\gray ARG }}
+\vskip0.1cm
+%\line{\definedfont[SerifBold at 24pt] {\gray March 2006}\hfill {\gray version 0.3001 }}
+\centerline{\definedfont[SerifBold at 14pt] {\gray juillet 2011 ${\darkred ::}$ version 0.8 }}
+\vfill
+\centerline{\gray\tfx  Dernière modification: \date[][weekday,day,month,year]} 
+\stopstandardmakeup }
+
+\setuptyping[tab=5,style={\tt\tfx},numbering=line,margin=yes,color=darkred] 
+\setuptype[style={\tt},color=darkred]
+
+\blank[big]
+\leftline{\tfb Tables des mati\`eres}
+\blank[big]
+\placecontent
+
+\section{Introduction}
+
+\Sample\  a pour objet de convertir la sortie du programme \fsc\ de Laurent Excoffier en un fichier lisible
+par \MapArg. Ce court manuel explique la logique du programme, et donne un exemple.
+\blank
+
+
+\section{Installation de \fsc}
+
+Le programme \fsc\ est disponible sur une page dédiée page: \from[fastsimcoal]. Sur cette page, téléchargez la version {\tt MacOSX 64 bits}. La distribution contient un manuel tr\`es bien fait qui d\'ecrit son usage. Pour se faciliter la vie, on l'installera dans le système pour pourvoir l'utiliser de n'importe quelle place de travail. Étapes à suivre:
+\startitemize[n]
+\item création du répertoire \type{.bin} sur votre compte (ce répertoire contiendra tous vos exécutables, qui seront trouvés par le système dès que vous appeler un des programmes présents dans ce répertoire):\blank[small]
+\type{mkdir ~/.bin} 
+\item En supposant que \fsc\ se trouve téléchargé dans le répertoire \type{fsc_mac64} du répertoire \type{Downloads} (par défaut, ça devrait être comme cela !)\vskip0cm
+\type{cp ~/Downloads/fsc_mac64/fastsimcoal ~/.bin}
+\item pour que le système trouve les programmes du répertoire \type{.bin}, il faut l'ajouter au \type{PATH}:\vskip0cm
+\startitemize[a,packed]
+\item Éditer le fichier \type{~/.bash_profile} avec un éditeur de texte;
+\item Rajouter à la fin la ligne: \type{PATH="~/.bin:${PATH}"};
+\item Fermer le shell actuel, ou faire \type{source ~/.bash_profile}.
+\stopitemize
+\stopitemize
+
+
+
+\section{Utilisation de \fsc}
+
+Pour utiliser \fsc\, il faut un fichier paramètre. Des exemples sont dans la distribution et dans le manuel. Voici un exemple avec le fichier \type{PopAEch1.par}:
+\starttyping
+//Number of population samples (demes)
+1
+//Population effective sizes (number of genes)
+20000
+//Sample sizes
+1000
+//Growth rates	: negative growth implies population expansion
+0
+//Number of migration matrices : 0 implies no migration between demes
+0
+//historical event: time, source, sink, migrants, new size, new growth rate, migr. matrix 
+0  historical event 
+//Number of independent loci [chromosome] 
+1 0
+//Per chromosome: Number of linkage blocks
+1
+//per Block: data type, num loci, rec. rate and mut rate + optional parameters
+SNP 150 0.000001 0.00000002 0.01
+\stoptyping
+Brièvement, on demande la simulation d'un échantillon de 1000 haplotypes d'une population de taille effective 20 000. On demande la simulation de 150 SNPs tel que le taux de recombinaison entre 2 SNPs est 0.000001, et le taux de mutation 0.00000002. Cela nous fait un taux de recombinaison global de:
+\startformula
+\rho = 4 \times Ne \times (L-1) \times r  = 4\times 20 000\times (150-1)\times 0.000001
+\stopformula
+La commande typique ressemble \`a ceci:
+\blank[small]
+\type{fastsimcoal -i PopAEch1.par -n 1 -g -p -I }
+\blank[small]
+Vous pourrez voir les autres options et les d\'etails dans le manuel de \fsc. Les options \type{-g} et \type{-p} sont importantes, elles demandent une sortie de fichiers avec des diplotypes phasés.
+\blank
+\fsc\ va automatiquement créer un répertoire de nom \type{PopAEch1} (le nom du fichier paramètre), et créer le fichier \type{PopAEch1_1_1.arp} qui contient les diplotypes:
+c'est de fichier qui nous intéresse.
+
+
+
+\section{Aper\c cu g\'en\'eral de \Sample}
+
+Ce programme, en partant d'une population\footnote{on abuse car il s'agit \`a proprement parl\'e d'un \'echantillon et non pas d'une population}, tire un \'echantillon al\'eatoire (stratifi\'e ou al\'eatoire simple), applique un mod\`ele de p\'en\'etrance, puis \'ecris divers fichiers utilisables dans MapArg.
+
+\section{Changements r\'ecents}
+
+Voir la section 7 sur les nouvelles options.
+
+\section{Compilation}
+
+Le projet XCode est fourni, c'est donc la façon la plus simple de le compiler.
+
+\section{Ligne de commande et options disponibles}
+
+La ligne de commande typique ressemble à:
+\blank[small]
+\code{./Sample -i PopAEch1.par -d 0.1 -s 100 100 -F 0.01 0.01 0.90 -o toto -n 1 }
+\blank[small]
+
+Les options sont:
+\medskip
+\startitemize[10*broad,packed]
+\sym {\code{-o} $abcd$} fichier de sortie;
+%\sym {\code{-m} $x$} fréquence minimale de l'allèle le moins fréquent pour garder le marqueur;
+\sym {\code{-d} $x$ } $\xi$, fréquence du TIM;
+\sym {\code{-i} $abcd$} fichier d'entrée;
+\sym {\code{-r} $x$ } racine du générateur aléatoire;
+\sym {\code{-s} $n_{\text{cas}}$  $n_{\text{con}}$} sélectionne $n_{\text{cas}}$ individus atteints, et $n_{\text{con}}$ individus non atteints;
+\sym {\code{-S} $x$} sélectionne $x$ individus au hasard dans la population, sans regard à leur statut cas/contrôles;
+\sym {\code{-F} $f_0\  f_1\ f_2$} pénétrances dans le cas diploïde;
+\sym {\code{-T}} pour garder obligatoirement le TIM dans les marqueurs.
+\sym {\code{-n} $x$} nombres de TIMs (1 par défaut)
+\sym {\code{-M} $abcd$} si plusieurs TIMs, modèle génétique pour créer la maladie (<<rare>>, ou <<aumoins1>>).
+\sym {\code{-y}  $abcd$} où  $abcd=\{FSC,MS\}$ pour indiquer que le fichier de données provient de \fsc\ (défaut) ou de \ms\ respectivement.
+\stopitemize
+
+La nouvelle option (expérimentale) permet de simuler l'effet de plusieurs TIMs. Actuellement, seulement deux modèles sont disponibles, mais
+il est très facile d'en créer de nouveaux;
+\startitemize
+\item <<rare>>: pour chacun des TIMs, un individu est malade avec les pénétrances $F=(f_0,f_1,f_2)$. Il est ensuite considérer comme malade
+si il malade à un des TIMs.
+\item <<aumoins1>>: on commencer à regarder si l'individu si il possède au moins une allèle mutante pour un des TIMs: si oui, il est malade avec les
+pénétrances $f_0,f_1$.
+\stopitemize
+
+Deux nouvelles options (expérimentales) ont étés mises en place:
+
+\medskip
+\startitemize[10*broad,packed]
+\sym {\code{-E}} enrichir les cas si nécessaire;
+%\sym {\code{-m} $x$} fréquence minimale de l'allèle le moins fréquent pour garder le marqueur;
+\sym {\code{-P} $x$ } crée une population de $x$ diploïdes.
+\stopitemize
+
+L'option \code{-P} $x$, crée une population de $x$ diploïdes à partir  de l'échantillon de \fsc\ ; pour cela, pour chaque individu que l'on veut créer, on tire au hasard de la population d'haploïdes (on ne tient pas compte des diplotypes déjà formés donc) deux haplotypes que l'on met ensemble pour former un diplotype. Ce que l'on fait  est de créer de nouveaux ``enfants'' d'une population de ``parents'' ou il n'y aurait dans le processus ni recombinaison ni mutation (mais notons qu'il ne s'agit alors que d'une seule génération). La taille du nouvel échantillon ($x$) est limité par la taille de la mémoire (1 million facilement, mais plus... pas facile !). 
+\blank
+L'option \code{-E} (sans aucun paramètre) permet, si cela est nécessaire, de générer plus de cas que l'échantillon de \fsc\ en possède. 
+Le principe est le même qu'avec l'option \code{-P} mis à part qu'ici on ne garde que les cas. Récapitulons: si le nombre de cas demandés dans l'option \code{-s} est plus grand que le nombre de cas disponible dans l'échantillon \fsc\, alors si l'option \code{-E} est présente, on va générer autant de cas que demandés; sur le principe décrit ci dessus, on génère des diplotypes, puis on attribue au hasard selon $F=(f_0,f_1,f_2)$ un statut cas/contrôle au diplotype généré; si c'est un contrôle, on l'oublie, si c'est un cas, on le garde. Comme on ne garde que les cas (contrairement à l'option \code{-P}), on peut générer un nombre de cas beaucoup plus grand.
+\blank
+{\darkgreen Attention}: ces deux options ne sont en place qu'avec un seul TIM (bien que ce serait possible de le faire pour plus de TIMs).
+
+\section{Fichiers de sortie}
+
+\Sample\ crée automatiquement un certain nombre de fichiers de sortie; le nom des fichiers est basé sur
+la chaîne de caractère suivant l'option \code{-o} dans la ligne de commande. Ainsi, pour \code{-o toto}, on a
+\startitemize[8]
+\item \code{toto-info.txt}: contient les informations sur l'exécution du programme.
+\stopitemize
+
+
+
+De plus, les fichiers suivants sont crées (ils contiennent tous des diplotypes):
+
+\startitemize[continue]
+\item \code{totoGD.dat}: contient les séquences générées; la première colonne contient un identificateur (la position originale dans le fichier provenant de \code{fsc}. La seconde colonne contient le phénotype, crée à partir des pénétrances $f_0$ et $f_1$, et enfin les autres colonnes contiennent les marqueurs. 
+\item \code{totoGD.par}: contient les paramètres (coordonnées, taux de recombinaison, mutation, etc).
+\item \code{totoHD.dat}: même fichier que \code{totoGD.dat}, mais à part que ce sont des diplotypes phasés.
+\item \code{totoHD.dat}: même fichier que \code{totoGD.par}, mais à part que les paramètres réferrent
+à des diplotypes phasés.
+\stopitemize
+
+\blank[4*big]
+\centerline{$\therefore$\ {\sl fin}\ $\therefore$ }
+\page[yes]
+\stoptext

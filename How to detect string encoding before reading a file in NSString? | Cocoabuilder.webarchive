@@ -1,0 +1,1196 @@
+bplist00“_WebMainResource_WebSubresources’	
+_WebResourceFrameName^WebResourceURL_WebResourceData_WebResourceMIMEType_WebResourceTextEncodingNameP_shttp://www.cocoabuilder.com/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.htmlO§¸<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang=""><head>
+  <title>How to detect string encoding before reading a file in NSString? | Cocoabuilder</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon">
+  <meta http-equiv="content-language" content="en">
+  <meta name="description" content="">
+
+    <link rel="stylesheet" type="text/css" href="/css/screen.css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <div id="logo">
+        <a href="http://www.cocoabuilder.com"><img src="/img/logo.gif" alt="Cocoabuilder"></a>
+      </div>
+      <div class="clear">
+        <form action="/archive/search/1" method="get" id="search">
+          <input type="text" style="width:260px;margin-right:2px" name="q" id="q" title="Search archive..." value="" class="example">
+          <select name="l">
+            <option value="cocoa" selected="selected">cocoa</option>
+            <option value="xcode">xcode</option>
+          </select>
+          <input type="submit" value="search">
+        </form>
+      
+        <ul id="lists">
+          <a href="/archive/cocoa" title="Browse the cocoa archive">cocoa</a>
+          <a href="/archive/xcode" title="Browse the xcode archive">xcode</a>
+        </ul>
+      </div>
+    </div>
+    <div class="main clear">
+      <div id="content">
+      <div id="Archive-message">
+	<h1>How to detect string encoding before reading a file in NSString?</h1>
+
+	<ul id="thread">
+	    <li class="message">
+      <div class="meta">
+        <a name="302318" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302318">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:13</span>
+			  </a>
+			</div>
+	    <div class="body">I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302319" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302319">
+			  <span class="author">Dave DeLong</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:18</span>
+			  </a>
+			</div>
+	    <div class="body">You'd have to guess (by reading the first few bytes of the file, seeing what they are and how they're laid out, etc), or use the initWithContentsOfFile:usedEncoding:error: variant to let NSString guess for you.<br>
+<br>
+Dave<br>
+<br>
+On Apr 26, 2011, at 11:13 AM, Laurent Daudelin wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+&gt; <br>
+&gt; -Laurent.<br>
+&gt; --<br>
+&gt; Laurent Daudelin<br>
+&gt; AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+&gt; Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302320" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302320">
+			  <span class="author">Heath Borders</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:20</span>
+			  </a>
+			</div>
+	    <div class="body">Obviously, there are sometimes overlaps between encodings when you're<br>
+trying to guess.<br>
+<br>
+<a href="http://en.wikipedia.org/wiki/Bush_hid_the_facts">http://en.wikipedia.org/wiki/Bush_hid_the_facts</a><br>
+<br>
+-Heath Borders<br>
+&lt;heath.borders...&gt;<br>
+Twitter: heathborders<br>
+<a href="http://heath-tech.blogspot.com">http://heath-tech.blogspot.com</a><br>
+<br>
+On Tue, Apr 26, 2011 at 1:18 PM, Dave DeLong &lt;davedelong...&gt; wrote:<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; You'd have to guess (by reading the first few bytes of the file, seeing what they are and how they're laid out, etc), or use the initWithContentsOfFile:usedEncoding:error: variant to let NSString guess for you.<br>
+&gt; <br>
+&gt; Dave<br>
+&gt; <br>
+&gt; On Apr 26, 2011, at 11:13 AM, Laurent Daudelin wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+&gt;&gt; <br>
+&gt;&gt; -Laurent.<br>
+&gt;&gt; --<br>
+&gt;&gt; Laurent Daudelin<br>
+&gt;&gt; AIM/iChat/Skype:LaurentDaudelin &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+&gt;&gt; Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+</span><span class="quoted1"><br>
+&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302321" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302321">
+			  <span class="author">Nick Zitzmann</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:43</span>
+			  </a>
+			</div>
+	    <div class="body">On Apr 26, 2011, at 12:13 PM, Laurent Daudelin wrote:<br>
+<br>
+<div class="quote"><span class="quoted1">&gt; I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+</span></div><br>
+TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+<br>
+Nick Zitzmann<br>
+&lt;<a href="http://www.chronosnet.com/">http://www.chronosnet.com/</a>&gt;</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302322" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302322">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:49</span>
+			  </a>
+			</div>
+	    <div class="body">On Apr 26, 2011, at 11:43, Nick Zitzmann wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; On Apr 26, 2011, at 12:13 PM, Laurent Daudelin wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+</span><span class="quoted1">&gt; <br>
+&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br><br>
+Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302323" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302323">
+			  <span class="author">Nick Zitzmann</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 20:53</span>
+			  </a>
+			</div>
+	    <div class="body">On Apr 26, 2011, at 12:49 PM, Laurent Daudelin wrote:<br>
+<br>
+<div class="quote"><span class="quoted2">&gt;&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span><span class="quoted1">&gt; <br>
+&gt; Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+</span></div><br>
+That was a long time ago, so it may have been fixed. But if it's still happening, then one workaround would be to try and open the file as UTF-8 first, and if that fails, then fall back on the above method. The UTF-8 parser often returns nil on text that is not in UTF-8 format IIRC.<br>
+<br>
+Nick Zitzmann<br>
+&lt;<a href="http://www.chronosnet.com/">http://www.chronosnet.com/</a>&gt;</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302324" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302324">
+			  <span class="author">John Pannell</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 21:39</span>
+			  </a>
+			</div>
+	    <div class="body">Hi Laurent-<br>
+<br>
+I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+<br>
+1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+ 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+ 3b.&nbsp; Attempt to create a string with the encoding.<br>
+<br>
+There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+<br>
+<a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+<br>
+Hope this helps!<br>
+<br>
+John<br>
+<br>
+John Pannell<br>
+<a href="http://www.positivespinmedia.com">http://www.positivespinmedia.com</a><br>
+<br>
+On Apr 26, 2011, at 12:53 PM, Nick Zitzmann wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; <br>
+&gt; On Apr 26, 2011, at 12:49 PM, Laurent Daudelin wrote:<br>
+&gt; <br>
+</span><span class="quoted3">&gt;&gt;&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+</span><span class="quoted1">&gt; <br>
+&gt; That was a long time ago, so it may have been fixed. But if it's still happening, then one workaround would be to try and open the file as UTF-8 first, and if that fails, then fall back on the above method. The UTF-8 parser often returns nil on text that is not in UTF-8 format IIRC.<br>
+&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302325" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302325">
+			  <span class="author">Andrew Thompson</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 22:26</span>
+			  </a>
+			</div>
+	    <div class="body">Another battle tested piece of code would be Mozilla's sniffer, if external libraries and it's license suit you.<br>
+<br>
+This document is out of date, bur explains the ideas.<br>
+<br>
+<a href="http://www.mozilla.org/projects/intl/detectorsrc.html">http://www.mozilla.org/projects/intl/detectorsrc.html</a><br>
+<br>
+On Apr 26, 2011, at 3:39 PM, John Pannell &lt;john...&gt; wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; Hi Laurent-<br>
+&gt; <br>
+&gt; I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+&gt; <br>
+&gt; 1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+&gt; 2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+&gt; 3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+&gt; 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+&gt; 3b.&nbsp; Attempt to create a string with the encoding.<br>
+&gt; <br>
+&gt; There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+&gt; <br>
+&gt; <a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+&gt; <br>
+&gt; Hope this helps!<br>
+&gt; <br>
+&gt; John<br>
+&gt; <br>
+&gt; <br>
+&gt; John Pannell<br>
+&gt; <a href="http://www.positivespinmedia.com">http://www.positivespinmedia.com</a><br>
+&gt; <br>
+&gt; On Apr 26, 2011, at 12:53 PM, Nick Zitzmann wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; On Apr 26, 2011, at 12:49 PM, Laurent Daudelin wrote:<br>
+&gt;&gt; <br>
+</span><span class="quoted4">&gt;&gt;&gt;&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span><span class="quoted3">&gt;&gt;&gt; <br>
+&gt;&gt;&gt; Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; That was a long time ago, so it may have been fixed. But if it's still happening, then one workaround would be to try and open the file as UTF-8 first, and if that fails, then fall back on the above method. The UTF-8 parser often returns nil on text that is not in UTF-8 format IIRC.<br>
+&gt;&gt; <br>
+</span><span class="quoted1"><br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302326" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302326">
+			  <span class="author">Greg Guerin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 26 2011, 22:41</span>
+			  </a>
+			</div>
+	    <div class="body">Laurent Daudelin wrote:<br>
+<br>
+<div class="quote"><span class="quoted1">&gt; I've found different ways to do that (some pure Cocoa, some using<br>
+&gt; Carbon) but I was wondering about the wisdom of this list as to<br>
+&gt; what is the best way to detect the encoding of a file before<br>
+&gt; passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+</span></div><br>
+You might not have to guess at all, if the file has an xattr of<br>
+"com.apple.TextEncoding" attached to it.&nbsp; I don't know if any of the<br>
+NSString encoding-guessing methods use this xattr or not.&nbsp; It's easy<br>
+to test, though: TextEdit.app writes the xattr when you Save As and<br>
+choose an encoding.<br>
+<br>
+The contents of the xattr is a text-encoding name (such as "utf-8"),<br>
+then a semicolon, then a longish decimal number.<br>
+<br>
+You can see a file's xattrs with the xattr command in Terminal.&nbsp; Type<br>
+'xattr -h' for a summary of options and args.&nbsp; The xattr API works<br>
+great in C (BSD functions, exist since OS 10.4 Tiger).<br>
+<br>
+Google search terms:<br>
+xattr site:developer.apple.com<br>
+<br>
+&nbsp;  -- GG</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302334" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302334">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 27 2011, 01:34</span>
+			  </a>
+			</div>
+	    <div class="body">Thanks, John. I'll have a look and let you know if I need more help!<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+<br>
+On Apr 26, 2011, at 12:39, John Pannell wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; Hi Laurent-<br>
+&gt; <br>
+&gt; I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+&gt; <br>
+&gt; 1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+&gt; 2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+&gt; 3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+&gt; 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+&gt; 3b.&nbsp; Attempt to create a string with the encoding.<br>
+&gt; <br>
+&gt; There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+&gt; <br>
+&gt; <a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+&gt; <br>
+&gt; Hope this helps!<br>
+&gt; <br>
+&gt; On Apr 26, 2011, at 12:53 PM, Nick Zitzmann wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; On Apr 26, 2011, at 12:49 PM, Laurent Daudelin wrote:<br>
+&gt;&gt; <br>
+</span><span class="quoted4">&gt;&gt;&gt;&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span><span class="quoted3">&gt;&gt;&gt; <br>
+&gt;&gt;&gt; Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; That was a long time ago, so it may have been fixed. But if it's still happening, then one workaround would be to try and open the file as UTF-8 first, and if that fails, then fall back on the above method. The UTF-8 parser often returns nil on text that is not in UTF-8 format IIRC.<br>
+&gt;&gt; <br>
+</span><span class="quoted1">&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302403" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302403">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 27 2011, 21:08</span>
+			  </a>
+			</div>
+	    <div class="body">On Apr 26, 2011, at 11:43, Nick Zitzmann wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; On Apr 26, 2011, at 12:13 PM, Laurent Daudelin wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; I've found different ways to do that (some pure Cocoa, some using Carbon) but I was wondering about the wisdom of this list as to what is the best way to detect the encoding of a file before passing it to NSString initWithContentsOfFile:encoding:error:?<br>
+</span><span class="quoted1">&gt; <br>
+&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br><br>
+I finally got around building a little test program and I tried a few files that were sent to me by a coworker from a Windows machine compressed into a zip archive. I did unarchive the files and fed them to my test program. All of them failed mightily. Just a bunch symbols showing clearly that the framework cannot guess the encoding. Each file had a specific encoding but each time, it guessed the encoding as NSMacOSRomanStringEncoding which is plainly wrong. I tried opening the files in TextEdit and they show up the same way, wrong encoding.<br>
+<br>
+Looks like I'll have to look for other suggested alternatives‚Ä¶.<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;</div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302407" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302407">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 27 2011, 21:18</span>
+			  </a>
+			</div>
+	    <div class="body">John,<br>
+<br>
+Not sure if you read my last email on the topic but using the NSAttributedString initWithURL:encoding:documentAttributes: is failing. I have read a bit about the Text Conversion Manager but if you had already some code you could share, that would spare me reinventing the wheel!<br>
+<br>
+Thanks in advance!<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+<br>
+On Apr 26, 2011, at 12:39, John Pannell wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; Hi Laurent-<br>
+&gt; <br>
+&gt; I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+&gt; <br>
+&gt; 1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+&gt; 2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+&gt; 3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+&gt; 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+&gt; 3b.&nbsp; Attempt to create a string with the encoding.<br>
+&gt; <br>
+&gt; There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+&gt; <br>
+&gt; <a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+&gt; <br>
+&gt; Hope this helps!<br>
+&gt; <br>
+&gt; John<br>
+&gt; <br>
+&gt; <br>
+&gt; John Pannell<br>
+&gt; <a href="http://www.positivespinmedia.com">http://www.positivespinmedia.com</a><br>
+&gt; <br>
+&gt; On Apr 26, 2011, at 12:53 PM, Nick Zitzmann wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; On Apr 26, 2011, at 12:49 PM, Laurent Daudelin wrote:<br>
+&gt;&gt; <br>
+</span><span class="quoted4">&gt;&gt;&gt;&gt; TextEdit's encoding guesser just uses the built-in NSAttributedString method -initWithURL:options:documentAttributes:error:, which will guess the file's encoding when opening it. But it has been mentioned that heuristics are not infallible, and this method's heuristics are no exception. It does a good job overall, but I've found that it usually misinterprets UTF-8 format text.<br>
+</span><span class="quoted3">&gt;&gt;&gt; <br>
+&gt;&gt;&gt; Yes, I know that all the guess jobs can fail. I was starting to be excited when started reading your reply but if it usually misinterprets UTF-8, that's a pretty significant problem...<br>
+</span><span class="quoted2">&gt;&gt; <br>
+&gt;&gt; That was a long time ago, so it may have been fixed. But if it's still happening, then one workaround would be to try and open the file as UTF-8 first, and if that fails, then fall back on the above method. The UTF-8 parser often returns nil on text that is not in UTF-8 format IIRC.<br>
+&gt;&gt; <br>
+</span><span class="quoted1">&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302410" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302410">
+			  <span class="author">John Pannell</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 27 2011, 21:35</span>
+			  </a>
+			</div>
+	    <div class="body">Hi Laurent-<br>
+<br>
+Certainly.&nbsp; I've zipped up two classes that wrap some functionality from the Text Conversion Manager functions.&nbsp; I'm certain I got these from somewhere else years ago, but failed to find them now.&nbsp; Download at:<br>
+<br>
+<a href="http://www.positivespinmedia.com/dev/TEC.zip">http://www.positivespinmedia.com/dev/TEC.zip</a><br>
+<br>
+Usage looks something like this:<br>
+<br>
+ NSInteger i = 0;<br>
+ NSString *myResultantString = nil;<br>
+ TECSniffer *sniffer = [[TECSniffer alloc] initWithWebTextEncodings];<br>
+&nbsp; &nbsp; &nbsp; &nbsp; NSArray *results = [sniffer sniff:yourNSDataObjectGoesHere];<br>
+&nbsp; &nbsp; &nbsp; &nbsp; while(!myResultantString &amp;&amp; i &lt; [results count]){<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  myResultantString = [[NSString alloc] initWithData:yourNSDataObjectGoesHere encoding:[[results objectAtIndex:i] unsignedIntValue]];<br>
+&nbsp; i++;<br>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br>
+<br>
+ // ideally, you've got a legitimate NSString object when the above is finished<br>
+<br>
+If memory serves, you'll need to link CoreServices into your app to use TEC.&nbsp; Hope this helps!<br>
+<br>
+John<br>
+<br>
+On Apr 27, 2011, at 1:18 PM, Laurent Daudelin wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; John,<br>
+&gt; <br>
+&gt; Not sure if you read my last email on the topic but using the NSAttributedString initWithURL:encoding:documentAttributes: is failing. I have read a bit about the Text Conversion Manager but if you had already some code you could share, that would spare me reinventing the wheel!<br>
+&gt; <br>
+&gt; Thanks in advance!<br>
+&gt; <br>
+&gt; -Laurent.<br>
+&gt; --<br>
+&gt; Laurent Daudelin<br>
+&gt; AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+&gt; Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+&gt; <br>
+&gt; On Apr 26, 2011, at 12:39, John Pannell wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; Hi Laurent-<br>
+&gt;&gt; <br>
+&gt;&gt; I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+&gt;&gt; <br>
+&gt;&gt; 1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+&gt;&gt; 2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+&gt;&gt; 3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+&gt;&gt; 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+&gt;&gt; 3b.&nbsp; Attempt to create a string with the encoding.<br>
+&gt;&gt; <br>
+&gt;&gt; There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+&gt;&gt; <br>
+&gt;&gt; <a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+&gt;&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+	    <li class="message">
+      <div class="meta">
+        <a name="302411" class="clear" href="/archive/cocoa/302318-how-to-detect-string-encoding-before-reading-file-in-nsstring.html#302411">
+			  <span class="author">Laurent Daudelin</span>
+        <span class="subject">Re: How to detect string encoding before reading a file in NSString?</span>
+			  <span class="posted">Apr 27 2011, 21:56</span>
+			  </a>
+			</div>
+	    <div class="body">Thanks, John. I'll give it a shot!<br>
+<br>
+-Laurent.<br>
+--<br>
+Laurent Daudelin<br>
+AIM/iChat/Skype:LaurentDaudelin&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.nemesys-soft.com/">http://www.nemesys-soft.com/</a><br>
+Logiciels Nemesys Software &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;laurent...&gt;<br>
+<br>
+On Apr 27, 2011, at 12:35, John Pannell wrote:<br>
+<br>
+<div class="quote" style="display: none; "><span class="quoted1">&gt; Hi Laurent-<br>
+&gt; <br>
+&gt; Certainly.&nbsp; I've zipped up two classes that wrap some functionality from the Text Conversion Manager functions.&nbsp; I'm certain I got these from somewhere else years ago, but failed to find them now.&nbsp; Download at:<br>
+&gt; <br>
+&gt; <a href="http://www.positivespinmedia.com/dev/TEC.zip">http://www.positivespinmedia.com/dev/TEC.zip</a><br>
+&gt; <br>
+&gt; Usage looks something like this:<br>
+&gt; <br>
+&gt; NSInteger i = 0;<br>
+&gt; NSString *myResultantString = nil;<br>
+&gt; TECSniffer *sniffer = [[TECSniffer alloc] initWithWebTextEncodings];<br>
+&gt; NSArray *results = [sniffer sniff:yourNSDataObjectGoesHere];<br>
+&gt; while(!myResultantString &amp;&amp; i &lt; [results count]){<br>
+&gt; myResultantString = [[NSString alloc] initWithData:yourNSDataObjectGoesHere encoding:[[results objectAtIndex:i] unsignedIntValue]];<br>
+&gt; i++;<br>
+&gt; }<br>
+&gt; <br>
+&gt; // ideally, you've got a legitimate NSString object when the above is finished<br>
+&gt; <br>
+&gt; If memory serves, you'll need to link CoreServices into your app to use TEC.&nbsp; Hope this helps!<br>
+&gt; <br>
+&gt; John<br>
+&gt; <br>
+&gt; <br>
+&gt; On Apr 27, 2011, at 1:18 PM, Laurent Daudelin wrote:<br>
+&gt; <br>
+</span><span class="quoted2">&gt;&gt; John,<br>
+&gt;&gt; <br>
+&gt;&gt; Not sure if you read my last email on the topic but using the NSAttributedString initWithURL:encoding:documentAttributes: is failing. I have read a bit about the Text Conversion Manager but if you had already some code you could share, that would spare me reinventing the wheel!<br>
+&gt;&gt; <br>
+&gt;&gt; Thanks in advance!<br>
+&gt;&gt; <br>
+&gt;&gt; -Laurent.<br>
+&gt;&gt; <br>
+&gt;&gt; On Apr 26, 2011, at 12:39, John Pannell wrote:<br>
+&gt;&gt; <br>
+</span><span class="quoted3">&gt;&gt;&gt; Hi Laurent-<br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; I have an app that collects a lot of text off the web; my string creation algorithm is something like the following:<br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; 1.&nbsp; Attempt to create an NSString with NSUTF8StringEncoding.<br>
+&gt;&gt;&gt; 2.&nbsp; If the string is nil, attempt to create the string using the encoding returned from the server.<br>
+&gt;&gt;&gt; 3.&nbsp; If string is still nil, ask the Text Encoding Conversion Manager to sniff out the encoding from the data.<br>
+&gt;&gt;&gt; 3a.&nbsp; This returns an array of likely encodings.&nbsp; For each item in the array:<br>
+&gt;&gt;&gt; 3b.&nbsp; Attempt to create a string with the encoding.<br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; There was a little too much code associated with this to copy/paste into email, but I'd be happy to share... I have a wrapper object for the needed interaction with the Text Encoding Conversion Manager.&nbsp; Some more about it:<br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; <a href="http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP30000123">http://developer.apple.com/library/mac/#documentation/Carbon/Reference/Text<br>
+_Encodin_sion_Manager/Reference/reference.html%23//apple_ref/doc/uid/TP3000<br>
+0123</a><br>
+&gt;&gt;&gt; <br>
+</span><span class="quoted1">&gt; <br>
+</span></div><a class="readmore" href="#">&gt; show quoted text</a><br></div>
+	  </li>
+		</ul>
+
+</div>
+      </div>
+      <div id="col">
+            <ul id="breadcrumb" class="clear">
+		<li><h4><a href="/archive/cocoa/2011/04/26/1">Cocoa - April 26, 2011</a></h4></li>
+	</ul>      
+      <table cellspacing="0" cellpadding="0" id="calendar">
+<tbody><tr>
+<td align="left" class="caltop"><a class="caltop" href="/archive/cocoa/2011/03/31/1" title="Previous month"><img src="/img/cal_prev.gif" border="0" alt="previous month"></a></td>
+<td align="center" class="caltop" nowrap="nowrap" colspan="5">april 2011</td>
+<td align="right" class="caltop"><a class="caltop" href="/archive/cocoa/2011/05/01/1" title="Next month"><img src="/img/cal_next.gif" border="0" alt="next month"></a></td>
+</tr>
+<tr><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr>
+
+<tr>
+    
+  <td>&nbsp;</td>
+      
+  <td>&nbsp;</td>
+      
+  <td>&nbsp;</td>
+      
+  <td>&nbsp;</td>
+      <td><a href="/archive/cocoa/2011/04/01/1"> 1 </a></td>
+      <td><a href="/archive/cocoa/2011/04/02/1"> 2 </a></td>
+      <td><a href="/archive/cocoa/2011/04/03/1"> 3 </a></td>
+  </tr>
+<tr>
+    <td><a href="/archive/cocoa/2011/04/04/1"> 4 </a></td>
+      <td><a href="/archive/cocoa/2011/04/05/1"> 5 </a></td>
+      <td><a href="/archive/cocoa/2011/04/06/1"> 6 </a></td>
+      <td><a href="/archive/cocoa/2011/04/07/1"> 7 </a></td>
+      <td><a href="/archive/cocoa/2011/04/08/1"> 8 </a></td>
+      <td><a href="/archive/cocoa/2011/04/09/1"> 9 </a></td>
+      <td><a href="/archive/cocoa/2011/04/10/1">10</a></td>
+  </tr>
+<tr>
+    <td><a href="/archive/cocoa/2011/04/11/1">11</a></td>
+      <td><a href="/archive/cocoa/2011/04/12/1">12</a></td>
+      <td><a href="/archive/cocoa/2011/04/13/1">13</a></td>
+      <td><a href="/archive/cocoa/2011/04/14/1">14</a></td>
+      <td><a href="/archive/cocoa/2011/04/15/1">15</a></td>
+      <td><a href="/archive/cocoa/2011/04/16/1">16</a></td>
+      <td><a href="/archive/cocoa/2011/04/17/1">17</a></td>
+  </tr>
+<tr>
+    <td><a href="/archive/cocoa/2011/04/18/1">18</a></td>
+      <td><a href="/archive/cocoa/2011/04/19/1">19</a></td>
+      <td><a href="/archive/cocoa/2011/04/20/1">20</a></td>
+      <td><a href="/archive/cocoa/2011/04/21/1">21</a></td>
+      <td><a href="/archive/cocoa/2011/04/22/1">22</a></td>
+      <td><a href="/archive/cocoa/2011/04/23/1">23</a></td>
+      <td><a href="/archive/cocoa/2011/04/24/1">24</a></td>
+  </tr>
+<tr>
+    <td><a href="/archive/cocoa/2011/04/25/1">25</a></td>
+      <td class="selected"><a href="/archive/cocoa/2011/04/26/1">26</a></td>
+      <td><a href="/archive/cocoa/2011/04/27/1">27</a></td>
+      <td><a href="/archive/cocoa/2011/04/28/1">28</a></td>
+      <td><a href="/archive/cocoa/2011/04/29/1">29</a></td>
+      <td><a href="/archive/cocoa/2011/04/30/1">30</a></td>
+      
+  <td>&nbsp;</td>
+  </tr>
+<tr>
+<td class="calbot" align="center" colspan="7"><a href="/archive/cocoa/2011/08/31/1" title="Go to today">Go to today</a></td>
+</tr>
+</tbody></table>
+
+				
+      </div>
+    </div>
+    <div id="footer">
+      <p><b>Cocoabuilder.com</b> <i>beta</i> - Site by Bertrand Mansion - <a href="mailto:cocoabuilder@mamasam.com">contact</a><br>
+          <span style="font-size:11px">This site is an archive of mailing lists related to osx and iphone development.</span><br>
+          <span style="font-size:11px"><b>Hint :</b>configure your browser Monospace font in the Preferences.</span>
+      </p>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.example.js"></script>
+<script type="text/javascript" src="/js/cocoabuilder.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+$('div.quote').readmore();$('li.message').threadize();$('#q').example(function() { return $(this).attr('title'); });
+});
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-273643-13");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body></html>Ytext/htmlUUTF-8®$).3‘_WebResourceResponse_*http://www.cocoabuilder.com/css/screen.cssO.bplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _*http://www.cocoabuilder.com/css/screen.css“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥≠Ä»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-aliveXtext/css_Wed, 31 Aug 2011 06:56:47 GMT_Tue, 22 Dec 2009 16:54:35 GMTT4941_Fri, 30 Sep 2011 06:56:47 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionaryM“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ%+.4=FHOWbdnprtvxz|~Ääåéêíîñòöú£±º…Œ‹ÎÛ(Hhmçü§∫æÀŒ”ÁÎˇ"8             j              :OM/* Reset ---------------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+body{line-height:1;font:12px/1.5 Arial,'Liberation Sans',FreeSans,sans-serif;color:#222;}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+:focus{outline:0}
+ins{text-decoration:none}
+del{text-decoration:line-through}
+table{border-collapse:collapse;border-spacing:0}
+a:focus{background-color:#FFFFC3;}
+hr{border:0 #ccc solid;border-top-width:1px;clear:both;height:0;}
+h1{font-size:23px;margin:10px 0;}
+h2{font-size:21px;}
+h3{font-size:19px;}
+h4{font-size:17px;}
+h5{font-size:15px;}
+h6{font-size:13px;}
+ol{list-style:decimal;}
+ul{list-style:square;}
+li{margin-left:26px;}
+p,hr,h1,h2,h3,h4,h5,h6,pre,address{margin-bottom:10px;}
+.clear:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0}
+.clear{display:inline-block}
+* html .clear{height:1%}
+.clear{display:block}
+/* Containers ------------------------------------------*/
+html, body { background-color:#9d9a88;margin:0; padding:0; text-align:center; } 
+#container{ width:98%; text-align:left;  margin-left:auto;  margin-right:auto;} 
+#header{position:relative;width:100%;} 
+.main{float: right;  display:inline;  position: relative;  width:100%; }
+#footer{height:100px; clear:both;} 
+
+/* Styles */
+a {color:#004080;text-decoration:none;font-weight:bold;}
+a:active, a:visited {color:#800040;text-decoration:none;}
+
+#messages, #thread {margin:10px 0;list-style:none;}
+#messages li, #thread li {margin:0;}
+
+#messages .message a {font-weight:normal;color:#000;padding:4px;display:block;}
+#messages .message a:hover {background-color:#E8CAA5;}
+#messages .odd {background-color:#fff;}
+.even {background-color:#F5F0E9;}
+#messages .message .posted {float:left;width:35px;font-size:10px;}
+#messages .message .author {float:left;font-size:11px;}
+#messages .message .subject {float:left;font-weight:bold;color:#004080;margin-right:10px;}
+
+#messages .message a:active .subject, 
+#messages .message a:visited .subject {color:#800040;}
+
+#Archive-message #thread .message {background-color:#fff; margin-bottom:1px}
+#Archive-message #thread .message .meta {background-color:#F5F0E9;}
+#Archive-message #thread .message .meta a {padding:4px;}
+#Archive-message #thread .message .meta a:hover {background-color:#E8CAA5;}
+#thread .message .posted {float:right;font-weight:normal;font-size:11px;color:#666;}
+#thread .message .author {float:left;margin-right:10px;}
+#thread .message .subject {float:left;font-weight:normal;color:#004080;margin-right:10px;}
+#Archive-search #thread .message {padding:5px;background-color:#fff;}
+.body {font-family:monospace;font-size:12px;line-height:16px;padding:5px 5px 10px 8px;}
+.body a {color:#004080;font-weight:normal;}
+.body a.readmore {color:#004080;font:bold 11px arial,sans-serif;}
+
+.quoted1 {color:#309;}
+.quoted2 {color:#070;}
+.quoted3 {color:#f00;}
+.quoted4 {color:#808;}
+.quoted5 {color:#0CC;}
+
+#logo {margin-top:6px;}
+#content {width:640px;float:left;}
+#col {float:left;margin:53px 0 0 20px;}
+#breadcrumb {margin:0;list-style:none;}
+#breadcrumb li {float:left;margin:0;padding-right:14px;}
+
+#q {padding:3px; font-size:13px;}
+.example {color:#666;}
+
+#footer {padding:50px 10px 30px 10px;}
+#search {float:left;}
+h6 {font-weight:normal;}
+#lists {float:left;margin-left:10px;}
+#lists a {border-left:1px solid #E2E4D4;font-size:22px;padding-left:20px;font-weight:normal;margin:0 10px;color:#E2E4D4;}
+#lists a:hover {color:#673B3B;}
+
+#calendar {
+	border:0;
+	margin:0;
+	padding:0;
+	width:200px;
+	background-color:#898671;
+}
+
+#calendar th {
+	font-weight:bold;
+	text-align:center;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#calendar td {
+	text-align: center;
+	color:#633;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+
+#calendar td.selected a, #calendar td.selected a:link {
+	color:#000;
+	background:#e2e4d4;
+	padding:2px;
+	text-decoration:none;
+}
+
+#calendar a, #calendar a:link {
+	color:#e2e4d4;
+	padding:2px;
+	text-decoration:none;
+}
+
+#calendar a:hover {
+	color:#e2e4d4;
+	background:#633;
+	padding:2px;
+	text-decoration:none;
+}
+
+#calendar td.caltop, #calendar td.calbot {
+	color:#000;
+	font-weight:bold;
+	background-color:#9C9988;
+}
+
+#calendar a:hover.caltop {
+	background: transparent;
+}
+
+#calendar td.calbot a:hover {
+	background: transparent;
+	color:#633;
+}
+
+.pager { margin:10px 0; font-size:18px; text-align:center;word-spacing:10px;}
+.pager a.active {color:#000;font-weight:bold; background-color:#E2E3D4;padding:0 5px;}
+
+#pub {margin-top:20px;padding:15px 0;text-align:center;background-color:#B7B39F;}
+Xtext/css‘_(http://www.cocoabuilder.com/img/logo.gifO-bplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _(http://www.cocoabuilder.com/img/logo.gif“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥Æi8»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-aliveYimage/gif_Wed, 31 Aug 2011 06:56:47 GMT_Sun, 13 Dec 2009 14:00:05 GMTT3413_Fri, 30 Sep 2011 06:56:47 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionaryU“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ
+#),2;DFMU`blnprtvxz|~àäåéêíîñòö°Ø∫«Ã⁄ÈÒˇ'Gglåû£πΩ Õ“ÊÍ˛!7             j              9OUGIF89aë5 ƒ  ùöà¢Ì´®ï¯¡∞2ˇˇˇææ≠””√’/&g;;‚‰‘»«∏¢üç<=†zUUˆΩí∏µ¢‚⁄ÿªÊ˚´óÀaƒÛß£ëØ≠ööut\Õy=É°õäô∫$Ãƒﬂ“Ò·ÒÔÍsj°!˘     ,    ë5  ˇ  édiûh™ÆlÎæp,œtmﬂxÆÔ|Ôˇ¿†pH,è»QE Y"û®T™à#…Ìzø‡∞òV±,†Öt¥i∑•jœ"–åÔ¯º~œ71h	äãäàÜ
+i
+}óòôöõ/ âå¶ß¶à†
+[ú±≤≥¥Hiá®ºΩå´°µƒ≈∆«.†æŒœ	Ç»÷◊ÿõ¡Õ–ﬁæQ√Ÿ‰ÂÊ\”ﬂÏæ∏„5ÛÙ/Ùı0˜∞,˙˜˝Œ	úÒè^@ÁLÇKCªáΩàÁ¬”3f<∞†Ç5ä\ÍDê"GˇZ2—$dJJ<ÆàÑë‚âó)9B0a°fåH¿∏RD»8Er4∞0i x.ù^Yò‚d‘îäíhôÙäÃ=3ér¡@d
+â ™Eµ†@54ùf¸
+@Ä\çﬁéÄp7„ŒÆ:˝ã¢ﬁ}≈ñkP°DIuëÿoâ P++–´Çob¬ WvÆœQ0ê≥∂ı/9pÅb·⁄∆± √¥@∑6ÑêA˜äÖ†UÑÖ°%ﬂ¶√≥IF™"êá§}ô“æ{Œ1rf¸ìdZ'wØtùûÅ∏†Åñﬂ˜5‰˙yŸÉw^¿Ò‘#Bí§n!ªÇ~aÖ‘
+¿%wÇD•∏Êˇ n˘Ûÿ
+!¡â|* ßóibÙógΩù¿ÅÈÜ€Mﬁ©°q>±`tëÂg‡xñ(¬ä-àwñÜàÖ∏rÍ∏¬âå—òÇ]
+8Òb	O(®§Xè, ∑Rä**0NX#¢·E™Iñ#9äç&y¬E#û®çR*ß R2Œﬁf™@Ê	eYi‚m,lßóEÇUM†°@ì wä‡AZJ*ËDî-Ó9gXÖ¶Ä&äzV9ü-’Â4Y‚Y•t˛yfúj¶¿f§ $Íò©xRYß•G“˙)	©æ∫i†ù »òà+‰‘ùÜD¿h£≠-¿¡3’™•Oa’áÇß,ŒYeˇpT˛Ë¨Q%Ê	f©∑"âj∂™∆Ÿ¶ãoRÎ©ÚÕ
+b∫Æ[≠¥eñHn
+a	™'MnÖ#ô Ä¿Î €⁄d–Äù€˙1èG»ı{`âÁ˛òE]8∂÷Bû·FtÓ∫òÊΩ$RXq´óÏó‡¬‡™∏·Œ´Ò≈DíÍ!F∞p◊1√ˇ°ØÅ¡≠yêp<ÀÄ‹Kp≤∆¨JZﬂ°¬eZoÃ"‰IQÆ*èpÚÀW«o»&ÄÌ"÷O˜5æ-˙˘ÛbúíÙ$H4;ùtM˜ön⁄⁄Z´∂‡Y9+Ÿ„Jrÿ^≥j6	d7>∂ºßæ≠kÜÑCù9€÷~Â	¸r˚vˇ–∞¿›ÅÚAH”j9§ØOk ‡Rªm	ûŸDı’ÙÓªÔFn∑’köÎx å√ÓÔÃ˚Ó&Ï6À√ÌöØÙ°∞± (∑¿•PÍﬂ¥U¿Í≠ø´4ÚOŒæv‡ÙÚuHΩaIb_çqùº”««ﬁµÚ3&ˆºj∂°˛6«>€µçJ°Kü+–UÇ†! ﬁﬂ3$ä∞no0Ëˇh«πˆO+∫πU¢6rÄö–Ñ	à˝™c≤¸¡	kﬂ)%NH√∫©/Äé‰<x3ˆ–zTíü∏~∂=ÅM#ì‡) æpÄuÂ´‹˘ÙgÇ¶qY>t·>WB›œC,”óìX¯ùˇ†rî\À^ úêv<‘b1D‚EHqº]ÁñÜ4pCâåGp¥(ñg|;£=,Œ—>˘£
+∞»∏âF;¸&˘Ä»πÈ=˜·‘ç8Ωı˝S	®G8ÉÃÖ›Óv\ƒ“Çt›#È∑jç—ëúò\wê»ÈÜ0+Dc	˜∏5≤`BŒ¨˙Ú§ â˘2‘\)ÇΩ¬Â±ï#p‡  KfÃ“5 ¿c˘D(bnéè	ã5ªX¢d2∞ì§dÅgVô±âü0Ï_<ÏŸøeöëäîdAÍ≤3zësøºg?+˘¢TÌéã‡ö¿0 ∫≈ˇ≤èM"EkÄÒâèˆë∏4§·Èùl∆+8ıô@ìq$Õt…ìA\\Bx–Æ,èûºß§~”…ËTÅó$¡$*Tçrî£‰4È$PD bâVΩ $¢*’  ∏îSDöõâ2l,›åW∫.’hä 5â·N≠&D§ïßöºVéMÖû1ôwu∑æ:_›+Bπ;‰Ëû QèJ’§®G@Ÿ'(Ä´è=ÈW¡™R•ärH):*3PÜ¿≠~ıòv(˙Õ»©(!Eæ¶H≤¬Ó+AÕ(# ‘rµÒ¬MÆF≈ ¶Ä±O≈lfóÀ‹XJ`≥_]œÊ…H 7ˇû—ÀC97ñà±@7„,à(πƒ°ã∫€≈´qãPœê7çy›-Æ.*≥j±ª>Rxì
+≥œπOmÆÄú
+@˜´;o„ôÍM(Tö˝î@ËÒfëòsaˇ¿"±œÏßzﬁÉío
+¸`p\VÍ¶Ê5O&#.JL∏øß=Õç*Ã·0êî‘¥pá„ í!g}dpc	Ã‰«¯¿qbFóæ–Ær°ñÂB¯ÌUî6]HïπÃbt›eJö)f÷´EäiÀ]Ò◊h8 jÜ+…JÄ$öÃÁ4< QÓ”òïÚ∆œç%1$⁄∏¶î¿*Râˇâ¸À3X$f¯:tN:R≈¸ùπwÒJΩË«Ê·πŸTãéÙA ›I”ŸPã√sûï€ÁÂ˛–ÿdè ∞è|ÏÉ: ‹áÛêê‰≈6ûÆ3Ï‰9πµ∞Wç‡c[˚⁄ÿ¡≥°m[S{≥Ÿ∑∏À±ÌßÓπ€&Ωı∑«ÕÓv£‹Ou,∫5˚mpª˚ﬁ¯Œº{Ón´ªﬁÅŒ∑¿>Ü}3àvûp{¸·GÇ¡9∫ ∂∞0@ÄÜò–µ}Ñ=Úá)ıv®ÀÖksèØz)g∂	
+¢fÄ.`@±-aÛ{‘°!oπhüü@BW ˇ]©€G ÉÓÛîgÌÊøV˘ÃÈQsxù8∆vB~^ÆÁa‚∞∏⁄/æÄ–⁄X «’ÓqË~∑(ÄÄG*5h —LHy‡P®ùî0zØø!ã˝≠,!ÕW@S)“Íã)Jﬂ	?§ÁÔo˝–?z;úD&HÙÊGæõF é∆<X∂£èÒ]Û+!åÁ9è;\ûÙˆQv–æˆ‚_»O˛‹çﬂÒ∫º*Z—Ô∑‚tK¸˝¬¢ÍΩÏÀ˛w´˙&)¸*ø˙C~/,È˝…]úÉÊ˙Û%¡ı·Ôc¬„‹€∑ÍMû~•ÁÊÛîát∂«~ˇã±wÚ∑ï◊{Ê Ù'WqÃÅhqŒ˜|Ö}Ÿ∑‘!}ΩWxˇW}ÿy„g"Ω¡ vêÄâßË∑Ç‘◊Ç˛á+Ωqx†ëwÍßTe«(±Ä:h=êÁÁ5XÄ=®Ç5h1òÅYÉÄ˝á~!®7ÅR»|xw?∏§áfátƒQsËÅepÖÅ«ÉBat.XEF∑@F~Z8’†wWÿc:Hı@*(Ü)»ÇDà;@Ñ‘¿wÜúózBáy&sò~ÑëzìÜWòzo¡Y‡}hpSòâkÁ|V¯É˝à%†L∞É_®}º·â;AÜπ~M(Çˇ¨»{L–Üî«zH˘ááˆ˜ÉLpïbÇ™®wıaÄÈG_ÙEàÜ'-ãøxÑËgá
+äπàÖ¥¡¬«Åöòâú∏€Á~<A4¯Ñ»Ñ‘◊çKP2h"¥q1	v8ãGòÉ˘WåCßÑ7∏ñ¯
+‚ÿ}	Hè7Ëåüè«Ë!¿ÅÀà+”hè|à◊Wcuòòçö∏ç˙•ﬁà;V'à*T≈x}ÊHxﬁóxçDÉùGzÌ8é{è∆HÄ‡(~‡óOòzoµëm»z$π∞}{àÛáßzÿí∏3Ç≠ä©Hçî)ë⁄Ëqwáê—¯É¢Xy˜í»r“KËU9Ñ∆QWtoâ`â£ò&áWÿÄß«áh)ïã¯ÇNóxW˘íıÒåeiñ’ ñ„h¿ÖåÁWπì‚àñ`˜b	»täWïQñsâábôÉøÁªw oÿ»îRËî,†·ôπô,gl~˜t·y∆öÆ»Ä¶©¢	t·öë®1hu8ô1äTAu˝êõäáﬁ'ä¸Ác˛»õ:®hèvÖ˝@õáô5˝êìá)ñ2aú«©h∏˘h~G‘q‹Ÿùﬁ˘ù‡ûﬂ ;Yimage/gif‘_,http://www.cocoabuilder.com/img/cal_prev.gifO/bplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _,http://www.cocoabuilder.com/img/cal_prev.gif“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥a≤p»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-aliveYimage/gif_Wed, 31 Aug 2011 06:56:48 GMT_Sun, 13 Dec 2009 14:00:05 GMTS188_Fri, 30 Sep 2011 06:56:48 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionaryº“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ'-06?HJQYdfprtvxz|~ÄÇåéêíîñòöúû•≥æÀ–ﬁÌı!+Kkoè°¶º¿Õœ‘ËÏ  #9             j              ;OºGIF89a  ƒ  ìáxtLHÑlbl?=i98yWQõñÖôìÇóèi87h76nB?åymÇg^úòÜóé~ävj{[TúôáÇh_ç}pòíÅ}]Vf33ùöà                     !˘     ,       9 &édiäHqä∆î\+3\¥	tNVÓã¡˜√Pƒ¢Cò¨ç*ë¶W4AfŒì°°Ä≠D’ó ;Yimage/gif‘ !"#_,http://www.cocoabuilder.com/img/cal_next.gifO/bplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _,http://www.cocoabuilder.com/img/cal_next.gif“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ew2»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-aliveYimage/gif_Wed, 31 Aug 2011 06:56:48 GMT_Sun, 13 Dec 2009 14:00:05 GMTS189_Fri, 30 Sep 2011 06:56:48 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionaryΩ“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ'-06?HJQYdfprtvxz|~ÄÇåéêíîñòöúû•≥æÀ–ﬁÌı!+Kkoè°¶º¿Õœ‘ËÏ  #9             j              ;OΩGIF89a  ƒ  ìáxtLHÑlbl?=i98yWQõñÖôìÇóèi87h76nB?åymÇg^úòÜóé~ävj{[TúôáÇh_ç}pòíÅ}]Vf33ùöà                     !˘     ,       : &é$Y ez%ìëéW<0/ﬂ†ﬁ∑uê<A yäÒx:ñ¡H»ÀÌ.HÌ¢h∏jÖGmú
+ ;Yimage/gif‘%&'(_,http://www.cocoabuilder.com/js/jquery.min.jsOCbplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _,http://www.cocoabuilder.com/js/jquery.min.js“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥J%Ö»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-alive_application/x-javascript_Wed, 31 Aug 2011 06:56:48 GMT_Sat, 02 May 2009 18:24:28 GMTU57254_Fri, 30 Sep 2011 06:56:48 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionaryﬂ¶“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ'-06?HJQYdfprtvxz|~ÄÇåéêíîñòöúû•≥æÀ–ﬁÌı!<\|Ç¢¥πœ”‡„Ë¸ "47M             j              OOﬂ¶/*
+ * jQuery JavaScript Library v1.3.2
+ * http://jquery.com/
+ *
+ * Copyright (c) 2009 John Resig
+ * Dual licensed under the MIT and GPL licenses.
+ * http://docs.jquery.com/License
+ *
+ * Date: 2009-02-19 17:34:21 -0500 (Thu, 19 Feb 2009)
+ * Revision: 6246
+ */
+(function(){var l=this,g,y=l.jQuery,p=l.$,o=l.jQuery=l.$=function(E,F){return new o.fn.init(E,F)},D=/^[^<]*(<(.|\s)+>)[^>]*$|^#([\w-]+)$/,f=/^.[^:#\[\.,]*$/;o.fn=o.prototype={init:function(E,H){E=E||document;if(E.nodeType){this[0]=E;this.length=1;this.context=E;return this}if(typeof E==="string"){var G=D.exec(E);if(G&&(G[1]||!H)){if(G[1]){E=o.clean([G[1]],H)}else{var I=document.getElementById(G[3]);if(I&&I.id!=G[3]){return o().find(E)}var F=o(I||[]);F.context=document;F.selector=E;return F}}else{return o(H).find(E)}}else{if(o.isFunction(E)){return o(document).ready(E)}}if(E.selector&&E.context){this.selector=E.selector;this.context=E.context}return this.setArray(o.isArray(E)?E:o.makeArray(E))},selector:"",jquery:"1.3.2",size:function(){return this.length},get:function(E){return E===g?Array.prototype.slice.call(this):this[E]},pushStack:function(F,H,E){var G=o(F);G.prevObject=this;G.context=this.context;if(H==="find"){G.selector=this.selector+(this.selector?" ":"")+E}else{if(H){G.selector=this.selector+"."+H+"("+E+")"}}return G},setArray:function(E){this.length=0;Array.prototype.push.apply(this,E);return this},each:function(F,E){return o.each(this,F,E)},index:function(E){return o.inArray(E&&E.jquery?E[0]:E,this)},attr:function(F,H,G){var E=F;if(typeof F==="string"){if(H===g){return this[0]&&o[G||"attr"](this[0],F)}else{E={};E[F]=H}}return this.each(function(I){for(F in E){o.attr(G?this.style:this,F,o.prop(this,E[F],G,I,F))}})},css:function(E,F){if((E=="width"||E=="height")&&parseFloat(F)<0){F=g}return this.attr(E,F,"curCSS")},text:function(F){if(typeof F!=="object"&&F!=null){return this.empty().append((this[0]&&this[0].ownerDocument||document).createTextNode(F))}var E="";o.each(F||this,function(){o.each(this.childNodes,function(){if(this.nodeType!=8){E+=this.nodeType!=1?this.nodeValue:o.fn.text([this])}})});return E},wrapAll:function(E){if(this[0]){var F=o(E,this[0].ownerDocument).clone();if(this[0].parentNode){F.insertBefore(this[0])}F.map(function(){var G=this;while(G.firstChild){G=G.firstChild}return G}).append(this)}return this},wrapInner:function(E){return this.each(function(){o(this).contents().wrapAll(E)})},wrap:function(E){return this.each(function(){o(this).wrapAll(E)})},append:function(){return this.domManip(arguments,true,function(E){if(this.nodeType==1){this.appendChild(E)}})},prepend:function(){return this.domManip(arguments,true,function(E){if(this.nodeType==1){this.insertBefore(E,this.firstChild)}})},before:function(){return this.domManip(arguments,false,function(E){this.parentNode.insertBefore(E,this)})},after:function(){return this.domManip(arguments,false,function(E){this.parentNode.insertBefore(E,this.nextSibling)})},end:function(){return this.prevObject||o([])},push:[].push,sort:[].sort,splice:[].splice,find:function(E){if(this.length===1){var F=this.pushStack([],"find",E);F.length=0;o.find(E,this[0],F);return F}else{return this.pushStack(o.unique(o.map(this,function(G){return o.find(E,G)})),"find",E)}},clone:function(G){var E=this.map(function(){if(!o.support.noCloneEvent&&!o.isXMLDoc(this)){var I=this.outerHTML;if(!I){var J=this.ownerDocument.createElement("div");J.appendChild(this.cloneNode(true));I=J.innerHTML}return o.clean([I.replace(/ jQuery\d+="(?:\d+|null)"/g,"").replace(/^\s*/,"")])[0]}else{return this.cloneNode(true)}});if(G===true){var H=this.find("*").andSelf(),F=0;E.find("*").andSelf().each(function(){if(this.nodeName!==H[F].nodeName){return}var I=o.data(H[F],"events");for(var K in I){for(var J in I[K]){o.event.add(this,K,I[K][J],I[K][J].data)}}F++})}return E},filter:function(E){return this.pushStack(o.isFunction(E)&&o.grep(this,function(G,F){return E.call(G,F)})||o.multiFilter(E,o.grep(this,function(F){return F.nodeType===1})),"filter",E)},closest:function(E){var G=o.expr.match.POS.test(E)?o(E):null,F=0;return this.map(function(){var H=this;while(H&&H.ownerDocument){if(G?G.index(H)>-1:o(H).is(E)){o.data(H,"closest",F);return H}H=H.parentNode;F++}})},not:function(E){if(typeof E==="string"){if(f.test(E)){return this.pushStack(o.multiFilter(E,this,true),"not",E)}else{E=o.multiFilter(E,this)}}var F=E.length&&E[E.length-1]!==g&&!E.nodeType;return this.filter(function(){return F?o.inArray(this,E)<0:this!=E})},add:function(E){return this.pushStack(o.unique(o.merge(this.get(),typeof E==="string"?o(E):o.makeArray(E))))},is:function(E){return !!E&&o.multiFilter(E,this).length>0},hasClass:function(E){return !!E&&this.is("."+E)},val:function(K){if(K===g){var E=this[0];if(E){if(o.nodeName(E,"option")){return(E.attributes.value||{}).specified?E.value:E.text}if(o.nodeName(E,"select")){var I=E.selectedIndex,L=[],M=E.options,H=E.type=="select-one";if(I<0){return null}for(var F=H?I:0,J=H?I+1:M.length;F<J;F++){var G=M[F];if(G.selected){K=o(G).val();if(H){return K}L.push(K)}}return L}return(E.value||"").replace(/\r/g,"")}return g}if(typeof K==="number"){K+=""}return this.each(function(){if(this.nodeType!=1){return}if(o.isArray(K)&&/radio|checkbox/.test(this.type)){this.checked=(o.inArray(this.value,K)>=0||o.inArray(this.name,K)>=0)}else{if(o.nodeName(this,"select")){var N=o.makeArray(K);o("option",this).each(function(){this.selected=(o.inArray(this.value,N)>=0||o.inArray(this.text,N)>=0)});if(!N.length){this.selectedIndex=-1}}else{this.value=K}}})},html:function(E){return E===g?(this[0]?this[0].innerHTML.replace(/ jQuery\d+="(?:\d+|null)"/g,""):null):this.empty().append(E)},replaceWith:function(E){return this.after(E).remove()},eq:function(E){return this.slice(E,+E+1)},slice:function(){return this.pushStack(Array.prototype.slice.apply(this,arguments),"slice",Array.prototype.slice.call(arguments).join(","))},map:function(E){return this.pushStack(o.map(this,function(G,F){return E.call(G,F,G)}))},andSelf:function(){return this.add(this.prevObject)},domManip:function(J,M,L){if(this[0]){var I=(this[0].ownerDocument||this[0]).createDocumentFragment(),F=o.clean(J,(this[0].ownerDocument||this[0]),I),H=I.firstChild;if(H){for(var G=0,E=this.length;G<E;G++){L.call(K(this[G],H),this.length>1||G>0?I.cloneNode(true):I)}}if(F){o.each(F,z)}}return this;function K(N,O){return M&&o.nodeName(N,"table")&&o.nodeName(O,"tr")?(N.getElementsByTagName("tbody")[0]||N.appendChild(N.ownerDocument.createElement("tbody"))):N}}};o.fn.init.prototype=o.fn;function z(E,F){if(F.src){o.ajax({url:F.src,async:false,dataType:"script"})}else{o.globalEval(F.text||F.textContent||F.innerHTML||"")}if(F.parentNode){F.parentNode.removeChild(F)}}function e(){return +new Date}o.extend=o.fn.extend=function(){var J=arguments[0]||{},H=1,I=arguments.length,E=false,G;if(typeof J==="boolean"){E=J;J=arguments[1]||{};H=2}if(typeof J!=="object"&&!o.isFunction(J)){J={}}if(I==H){J=this;--H}for(;H<I;H++){if((G=arguments[H])!=null){for(var F in G){var K=J[F],L=G[F];if(J===L){continue}if(E&&L&&typeof L==="object"&&!L.nodeType){J[F]=o.extend(E,K||(L.length!=null?[]:{}),L)}else{if(L!==g){J[F]=L}}}}}return J};var b=/z-?index|font-?weight|opacity|zoom|line-?height/i,q=document.defaultView||{},s=Object.prototype.toString;o.extend({noConflict:function(E){l.$=p;if(E){l.jQuery=y}return o},isFunction:function(E){return s.call(E)==="[object Function]"},isArray:function(E){return s.call(E)==="[object Array]"},isXMLDoc:function(E){return E.nodeType===9&&E.documentElement.nodeName!=="HTML"||!!E.ownerDocument&&o.isXMLDoc(E.ownerDocument)},globalEval:function(G){if(G&&/\S/.test(G)){var F=document.getElementsByTagName("head")[0]||document.documentElement,E=document.createElement("script");E.type="text/javascript";if(o.support.scriptEval){E.appendChild(document.createTextNode(G))}else{E.text=G}F.insertBefore(E,F.firstChild);F.removeChild(E)}},nodeName:function(F,E){return F.nodeName&&F.nodeName.toUpperCase()==E.toUpperCase()},each:function(G,K,F){var E,H=0,I=G.length;if(F){if(I===g){for(E in G){if(K.apply(G[E],F)===false){break}}}else{for(;H<I;){if(K.apply(G[H++],F)===false){break}}}}else{if(I===g){for(E in G){if(K.call(G[E],E,G[E])===false){break}}}else{for(var J=G[0];H<I&&K.call(J,H,J)!==false;J=G[++H]){}}}return G},prop:function(H,I,G,F,E){if(o.isFunction(I)){I=I.call(H,F)}return typeof I==="number"&&G=="curCSS"&&!b.test(E)?I+"px":I},className:{add:function(E,F){o.each((F||"").split(/\s+/),function(G,H){if(E.nodeType==1&&!o.className.has(E.className,H)){E.className+=(E.className?" ":"")+H}})},remove:function(E,F){if(E.nodeType==1){E.className=F!==g?o.grep(E.className.split(/\s+/),function(G){return !o.className.has(F,G)}).join(" "):""}},has:function(F,E){return F&&o.inArray(E,(F.className||F).toString().split(/\s+/))>-1}},swap:function(H,G,I){var E={};for(var F in G){E[F]=H.style[F];H.style[F]=G[F]}I.call(H);for(var F in G){H.style[F]=E[F]}},css:function(H,F,J,E){if(F=="width"||F=="height"){var L,G={position:"absolute",visibility:"hidden",display:"block"},K=F=="width"?["Left","Right"]:["Top","Bottom"];function I(){L=F=="width"?H.offsetWidth:H.offsetHeight;if(E==="border"){return}o.each(K,function(){if(!E){L-=parseFloat(o.curCSS(H,"padding"+this,true))||0}if(E==="margin"){L+=parseFloat(o.curCSS(H,"margin"+this,true))||0}else{L-=parseFloat(o.curCSS(H,"border"+this+"Width",true))||0}})}if(H.offsetWidth!==0){I()}else{o.swap(H,G,I)}return Math.max(0,Math.round(L))}return o.curCSS(H,F,J)},curCSS:function(I,F,G){var L,E=I.style;if(F=="opacity"&&!o.support.opacity){L=o.attr(E,"opacity");return L==""?"1":L}if(F.match(/float/i)){F=w}if(!G&&E&&E[F]){L=E[F]}else{if(q.getComputedStyle){if(F.match(/float/i)){F="float"}F=F.replace(/([A-Z])/g,"-$1").toLowerCase();var M=q.getComputedStyle(I,null);if(M){L=M.getPropertyValue(F)}if(F=="opacity"&&L==""){L="1"}}else{if(I.currentStyle){var J=F.replace(/\-(\w)/g,function(N,O){return O.toUpperCase()});L=I.currentStyle[F]||I.currentStyle[J];if(!/^\d+(px)?$/i.test(L)&&/^\d/.test(L)){var H=E.left,K=I.runtimeStyle.left;I.runtimeStyle.left=I.currentStyle.left;E.left=L||0;L=E.pixelLeft+"px";E.left=H;I.runtimeStyle.left=K}}}}return L},clean:function(F,K,I){K=K||document;if(typeof K.createElement==="undefined"){K=K.ownerDocument||K[0]&&K[0].ownerDocument||document}if(!I&&F.length===1&&typeof F[0]==="string"){var H=/^<(\w+)\s*\/?>$/.exec(F[0]);if(H){return[K.createElement(H[1])]}}var G=[],E=[],L=K.createElement("div");o.each(F,function(P,S){if(typeof S==="number"){S+=""}if(!S){return}if(typeof S==="string"){S=S.replace(/(<(\w+)[^>]*?)\/>/g,function(U,V,T){return T.match(/^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i)?U:V+"></"+T+">"});var O=S.replace(/^\s+/,"").substring(0,10).toLowerCase();var Q=!O.indexOf("<opt")&&[1,"<select multiple='multiple'>","</select>"]||!O.indexOf("<leg")&&[1,"<fieldset>","</fieldset>"]||O.match(/^<(thead|tbody|tfoot|colg|cap)/)&&[1,"<table>","</table>"]||!O.indexOf("<tr")&&[2,"<table><tbody>","</tbody></table>"]||(!O.indexOf("<td")||!O.indexOf("<th"))&&[3,"<table><tbody><tr>","</tr></tbody></table>"]||!O.indexOf("<col")&&[2,"<table><tbody></tbody><colgroup>","</colgroup></table>"]||!o.support.htmlSerialize&&[1,"div<div>","</div>"]||[0,"",""];L.innerHTML=Q[1]+S+Q[2];while(Q[0]--){L=L.lastChild}if(!o.support.tbody){var R=/<tbody/i.test(S),N=!O.indexOf("<table")&&!R?L.firstChild&&L.firstChild.childNodes:Q[1]=="<table>"&&!R?L.childNodes:[];for(var M=N.length-1;M>=0;--M){if(o.nodeName(N[M],"tbody")&&!N[M].childNodes.length){N[M].parentNode.removeChild(N[M])}}}if(!o.support.leadingWhitespace&&/^\s/.test(S)){L.insertBefore(K.createTextNode(S.match(/^\s*/)[0]),L.firstChild)}S=o.makeArray(L.childNodes)}if(S.nodeType){G.push(S)}else{G=o.merge(G,S)}});if(I){for(var J=0;G[J];J++){if(o.nodeName(G[J],"script")&&(!G[J].type||G[J].type.toLowerCase()==="text/javascript")){E.push(G[J].parentNode?G[J].parentNode.removeChild(G[J]):G[J])}else{if(G[J].nodeType===1){G.splice.apply(G,[J+1,0].concat(o.makeArray(G[J].getElementsByTagName("script"))))}I.appendChild(G[J])}}return E}return G},attr:function(J,G,K){if(!J||J.nodeType==3||J.nodeType==8){return g}var H=!o.isXMLDoc(J),L=K!==g;G=H&&o.props[G]||G;if(J.tagName){var F=/href|src|style/.test(G);if(G=="selected"&&J.parentNode){J.parentNode.selectedIndex}if(G in J&&H&&!F){if(L){if(G=="type"&&o.nodeName(J,"input")&&J.parentNode){throw"type property can't be changed"}J[G]=K}if(o.nodeName(J,"form")&&J.getAttributeNode(G)){return J.getAttributeNode(G).nodeValue}if(G=="tabIndex"){var I=J.getAttributeNode("tabIndex");return I&&I.specified?I.value:J.nodeName.match(/(button|input|object|select|textarea)/i)?0:J.nodeName.match(/^(a|area)$/i)&&J.href?0:g}return J[G]}if(!o.support.style&&H&&G=="style"){return o.attr(J.style,"cssText",K)}if(L){J.setAttribute(G,""+K)}var E=!o.support.hrefNormalized&&H&&F?J.getAttribute(G,2):J.getAttribute(G);return E===null?g:E}if(!o.support.opacity&&G=="opacity"){if(L){J.zoom=1;J.filter=(J.filter||"").replace(/alpha\([^)]*\)/,"")+(parseInt(K)+""=="NaN"?"":"alpha(opacity="+K*100+")")}return J.filter&&J.filter.indexOf("opacity=")>=0?(parseFloat(J.filter.match(/opacity=([^)]*)/)[1])/100)+"":""}G=G.replace(/-([a-z])/ig,function(M,N){return N.toUpperCase()});if(L){J[G]=K}return J[G]},trim:function(E){return(E||"").replace(/^\s+|\s+$/g,"")},makeArray:function(G){var E=[];if(G!=null){var F=G.length;if(F==null||typeof G==="string"||o.isFunction(G)||G.setInterval){E[0]=G}else{while(F){E[--F]=G[F]}}}return E},inArray:function(G,H){for(var E=0,F=H.length;E<F;E++){if(H[E]===G){return E}}return -1},merge:function(H,E){var F=0,G,I=H.length;if(!o.support.getAll){while((G=E[F++])!=null){if(G.nodeType!=8){H[I++]=G}}}else{while((G=E[F++])!=null){H[I++]=G}}return H},unique:function(K){var F=[],E={};try{for(var G=0,H=K.length;G<H;G++){var J=o.data(K[G]);if(!E[J]){E[J]=true;F.push(K[G])}}}catch(I){F=K}return F},grep:function(F,J,E){var G=[];for(var H=0,I=F.length;H<I;H++){if(!E!=!J(F[H],H)){G.push(F[H])}}return G},map:function(E,J){var F=[];for(var G=0,H=E.length;G<H;G++){var I=J(E[G],G);if(I!=null){F[F.length]=I}}return F.concat.apply([],F)}});var C=navigator.userAgent.toLowerCase();o.browser={version:(C.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)||[0,"0"])[1],safari:/webkit/.test(C),opera:/opera/.test(C),msie:/msie/.test(C)&&!/opera/.test(C),mozilla:/mozilla/.test(C)&&!/(compatible|webkit)/.test(C)};o.each({parent:function(E){return E.parentNode},parents:function(E){return o.dir(E,"parentNode")},next:function(E){return o.nth(E,2,"nextSibling")},prev:function(E){return o.nth(E,2,"previousSibling")},nextAll:function(E){return o.dir(E,"nextSibling")},prevAll:function(E){return o.dir(E,"previousSibling")},siblings:function(E){return o.sibling(E.parentNode.firstChild,E)},children:function(E){return o.sibling(E.firstChild)},contents:function(E){return o.nodeName(E,"iframe")?E.contentDocument||E.contentWindow.document:o.makeArray(E.childNodes)}},function(E,F){o.fn[E]=function(G){var H=o.map(this,F);if(G&&typeof G=="string"){H=o.multiFilter(G,H)}return this.pushStack(o.unique(H),E,G)}});o.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(E,F){o.fn[E]=function(G){var J=[],L=o(G);for(var K=0,H=L.length;K<H;K++){var I=(K>0?this.clone(true):this).get();o.fn[F].apply(o(L[K]),I);J=J.concat(I)}return this.pushStack(J,E,G)}});o.each({removeAttr:function(E){o.attr(this,E,"");if(this.nodeType==1){this.removeAttribute(E)}},addClass:function(E){o.className.add(this,E)},removeClass:function(E){o.className.remove(this,E)},toggleClass:function(F,E){if(typeof E!=="boolean"){E=!o.className.has(this,F)}o.className[E?"add":"remove"](this,F)},remove:function(E){if(!E||o.filter(E,[this]).length){o("*",this).add([this]).each(function(){o.event.remove(this);o.removeData(this)});if(this.parentNode){this.parentNode.removeChild(this)}}},empty:function(){o(this).children().remove();while(this.firstChild){this.removeChild(this.firstChild)}}},function(E,F){o.fn[E]=function(){return this.each(F,arguments)}});function j(E,F){return E[0]&&parseInt(o.curCSS(E[0],F,true),10)||0}var h="jQuery"+e(),v=0,A={};o.extend({cache:{},data:function(F,E,G){F=F==l?A:F;var H=F[h];if(!H){H=F[h]=++v}if(E&&!o.cache[H]){o.cache[H]={}}if(G!==g){o.cache[H][E]=G}return E?o.cache[H][E]:H},removeData:function(F,E){F=F==l?A:F;var H=F[h];if(E){if(o.cache[H]){delete o.cache[H][E];E="";for(E in o.cache[H]){break}if(!E){o.removeData(F)}}}else{try{delete F[h]}catch(G){if(F.removeAttribute){F.removeAttribute(h)}}delete o.cache[H]}},queue:function(F,E,H){if(F){E=(E||"fx")+"queue";var G=o.data(F,E);if(!G||o.isArray(H)){G=o.data(F,E,o.makeArray(H))}else{if(H){G.push(H)}}}return G},dequeue:function(H,G){var E=o.queue(H,G),F=E.shift();if(!G||G==="fx"){F=E[0]}if(F!==g){F.call(H)}}});o.fn.extend({data:function(E,G){var H=E.split(".");H[1]=H[1]?"."+H[1]:"";if(G===g){var F=this.triggerHandler("getData"+H[1]+"!",[H[0]]);if(F===g&&this.length){F=o.data(this[0],E)}return F===g&&H[1]?this.data(H[0]):F}else{return this.trigger("setData"+H[1]+"!",[H[0],G]).each(function(){o.data(this,E,G)})}},removeData:function(E){return this.each(function(){o.removeData(this,E)})},queue:function(E,F){if(typeof E!=="string"){F=E;E="fx"}if(F===g){return o.queue(this[0],E)}return this.each(function(){var G=o.queue(this,E,F);if(E=="fx"&&G.length==1){G[0].call(this)}})},dequeue:function(E){return this.each(function(){o.dequeue(this,E)})}});
+/*
+ * Sizzle CSS Selector Engine - v0.9.3
+ *  Copyright 2009, The Dojo Foundation
+ *  Released under the MIT, BSD, and GPL Licenses.
+ *  More information: http://sizzlejs.com/
+ */
+(function(){var R=/((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?/g,L=0,H=Object.prototype.toString;var F=function(Y,U,ab,ac){ab=ab||[];U=U||document;if(U.nodeType!==1&&U.nodeType!==9){return[]}if(!Y||typeof Y!=="string"){return ab}var Z=[],W,af,ai,T,ad,V,X=true;R.lastIndex=0;while((W=R.exec(Y))!==null){Z.push(W[1]);if(W[2]){V=RegExp.rightContext;break}}if(Z.length>1&&M.exec(Y)){if(Z.length===2&&I.relative[Z[0]]){af=J(Z[0]+Z[1],U)}else{af=I.relative[Z[0]]?[U]:F(Z.shift(),U);while(Z.length){Y=Z.shift();if(I.relative[Y]){Y+=Z.shift()}af=J(Y,af)}}}else{var ae=ac?{expr:Z.pop(),set:E(ac)}:F.find(Z.pop(),Z.length===1&&U.parentNode?U.parentNode:U,Q(U));af=F.filter(ae.expr,ae.set);if(Z.length>0){ai=E(af)}else{X=false}while(Z.length){var ah=Z.pop(),ag=ah;if(!I.relative[ah]){ah=""}else{ag=Z.pop()}if(ag==null){ag=U}I.relative[ah](ai,ag,Q(U))}}if(!ai){ai=af}if(!ai){throw"Syntax error, unrecognized expression: "+(ah||Y)}if(H.call(ai)==="[object Array]"){if(!X){ab.push.apply(ab,ai)}else{if(U.nodeType===1){for(var aa=0;ai[aa]!=null;aa++){if(ai[aa]&&(ai[aa]===true||ai[aa].nodeType===1&&K(U,ai[aa]))){ab.push(af[aa])}}}else{for(var aa=0;ai[aa]!=null;aa++){if(ai[aa]&&ai[aa].nodeType===1){ab.push(af[aa])}}}}}else{E(ai,ab)}if(V){F(V,U,ab,ac);if(G){hasDuplicate=false;ab.sort(G);if(hasDuplicate){for(var aa=1;aa<ab.length;aa++){if(ab[aa]===ab[aa-1]){ab.splice(aa--,1)}}}}}return ab};F.matches=function(T,U){return F(T,null,null,U)};F.find=function(aa,T,ab){var Z,X;if(!aa){return[]}for(var W=0,V=I.order.length;W<V;W++){var Y=I.order[W],X;if((X=I.match[Y].exec(aa))){var U=RegExp.leftContext;if(U.substr(U.length-1)!=="\\"){X[1]=(X[1]||"").replace(/\\/g,"");Z=I.find[Y](X,T,ab);if(Z!=null){aa=aa.replace(I.match[Y],"");break}}}}if(!Z){Z=T.getElementsByTagName("*")}return{set:Z,expr:aa}};F.filter=function(ad,ac,ag,W){var V=ad,ai=[],aa=ac,Y,T,Z=ac&&ac[0]&&Q(ac[0]);while(ad&&ac.length){for(var ab in I.filter){if((Y=I.match[ab].exec(ad))!=null){var U=I.filter[ab],ah,af;T=false;if(aa==ai){ai=[]}if(I.preFilter[ab]){Y=I.preFilter[ab](Y,aa,ag,ai,W,Z);if(!Y){T=ah=true}else{if(Y===true){continue}}}if(Y){for(var X=0;(af=aa[X])!=null;X++){if(af){ah=U(af,Y,X,aa);var ae=W^!!ah;if(ag&&ah!=null){if(ae){T=true}else{aa[X]=false}}else{if(ae){ai.push(af);T=true}}}}}if(ah!==g){if(!ag){aa=ai}ad=ad.replace(I.match[ab],"");if(!T){return[]}break}}}if(ad==V){if(T==null){throw"Syntax error, unrecognized expression: "+ad}else{break}}V=ad}return aa};var I=F.selectors={order:["ID","NAME","TAG"],match:{ID:/#((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,CLASS:/\.((?:[\w\u00c0-\uFFFF_-]|\\.)+)/,NAME:/\[name=['"]*((?:[\w\u00c0-\uFFFF_-]|\\.)+)['"]*\]/,ATTR:/\[\s*((?:[\w\u00c0-\uFFFF_-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,TAG:/^((?:[\w\u00c0-\uFFFF\*_-]|\\.)+)/,CHILD:/:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,POS:/:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,PSEUDO:/:((?:[\w\u00c0-\uFFFF_-]|\\.)+)(?:\((['"]*)((?:\([^\)]+\)|[^\2\(\)]*)+)\2\))?/},attrMap:{"class":"className","for":"htmlFor"},attrHandle:{href:function(T){return T.getAttribute("href")}},relative:{"+":function(aa,T,Z){var X=typeof T==="string",ab=X&&!/\W/.test(T),Y=X&&!ab;if(ab&&!Z){T=T.toUpperCase()}for(var W=0,V=aa.length,U;W<V;W++){if((U=aa[W])){while((U=U.previousSibling)&&U.nodeType!==1){}aa[W]=Y||U&&U.nodeName===T?U||false:U===T}}if(Y){F.filter(T,aa,true)}},">":function(Z,U,aa){var X=typeof U==="string";if(X&&!/\W/.test(U)){U=aa?U:U.toUpperCase();for(var V=0,T=Z.length;V<T;V++){var Y=Z[V];if(Y){var W=Y.parentNode;Z[V]=W.nodeName===U?W:false}}}else{for(var V=0,T=Z.length;V<T;V++){var Y=Z[V];if(Y){Z[V]=X?Y.parentNode:Y.parentNode===U}}if(X){F.filter(U,Z,true)}}},"":function(W,U,Y){var V=L++,T=S;if(!U.match(/\W/)){var X=U=Y?U:U.toUpperCase();T=P}T("parentNode",U,V,W,X,Y)},"~":function(W,U,Y){var V=L++,T=S;if(typeof U==="string"&&!U.match(/\W/)){var X=U=Y?U:U.toUpperCase();T=P}T("previousSibling",U,V,W,X,Y)}},find:{ID:function(U,V,W){if(typeof V.getElementById!=="undefined"&&!W){var T=V.getElementById(U[1]);return T?[T]:[]}},NAME:function(V,Y,Z){if(typeof Y.getElementsByName!=="undefined"){var U=[],X=Y.getElementsByName(V[1]);for(var W=0,T=X.length;W<T;W++){if(X[W].getAttribute("name")===V[1]){U.push(X[W])}}return U.length===0?null:U}},TAG:function(T,U){return U.getElementsByTagName(T[1])}},preFilter:{CLASS:function(W,U,V,T,Z,aa){W=" "+W[1].replace(/\\/g,"")+" ";if(aa){return W}for(var X=0,Y;(Y=U[X])!=null;X++){if(Y){if(Z^(Y.className&&(" "+Y.className+" ").indexOf(W)>=0)){if(!V){T.push(Y)}}else{if(V){U[X]=false}}}}return false},ID:function(T){return T[1].replace(/\\/g,"")},TAG:function(U,T){for(var V=0;T[V]===false;V++){}return T[V]&&Q(T[V])?U[1]:U[1].toUpperCase()},CHILD:function(T){if(T[1]=="nth"){var U=/(-?)(\d*)n((?:\+|-)?\d*)/.exec(T[2]=="even"&&"2n"||T[2]=="odd"&&"2n+1"||!/\D/.test(T[2])&&"0n+"+T[2]||T[2]);T[2]=(U[1]+(U[2]||1))-0;T[3]=U[3]-0}T[0]=L++;return T},ATTR:function(X,U,V,T,Y,Z){var W=X[1].replace(/\\/g,"");if(!Z&&I.attrMap[W]){X[1]=I.attrMap[W]}if(X[2]==="~="){X[4]=" "+X[4]+" "}return X},PSEUDO:function(X,U,V,T,Y){if(X[1]==="not"){if(X[3].match(R).length>1||/^\w/.test(X[3])){X[3]=F(X[3],null,null,U)}else{var W=F.filter(X[3],U,V,true^Y);if(!V){T.push.apply(T,W)}return false}}else{if(I.match.POS.test(X[0])||I.match.CHILD.test(X[0])){return true}}return X},POS:function(T){T.unshift(true);return T}},filters:{enabled:function(T){return T.disabled===false&&T.type!=="hidden"},disabled:function(T){return T.disabled===true},checked:function(T){return T.checked===true},selected:function(T){T.parentNode.selectedIndex;return T.selected===true},parent:function(T){return !!T.firstChild},empty:function(T){return !T.firstChild},has:function(V,U,T){return !!F(T[3],V).length},header:function(T){return/h\d/i.test(T.nodeName)},text:function(T){return"text"===T.type},radio:function(T){return"radio"===T.type},checkbox:function(T){return"checkbox"===T.type},file:function(T){return"file"===T.type},password:function(T){return"password"===T.type},submit:function(T){return"submit"===T.type},image:function(T){return"image"===T.type},reset:function(T){return"reset"===T.type},button:function(T){return"button"===T.type||T.nodeName.toUpperCase()==="BUTTON"},input:function(T){return/input|select|textarea|button/i.test(T.nodeName)}},setFilters:{first:function(U,T){return T===0},last:function(V,U,T,W){return U===W.length-1},even:function(U,T){return T%2===0},odd:function(U,T){return T%2===1},lt:function(V,U,T){return U<T[3]-0},gt:function(V,U,T){return U>T[3]-0},nth:function(V,U,T){return T[3]-0==U},eq:function(V,U,T){return T[3]-0==U}},filter:{PSEUDO:function(Z,V,W,aa){var U=V[1],X=I.filters[U];if(X){return X(Z,W,V,aa)}else{if(U==="contains"){return(Z.textContent||Z.innerText||"").indexOf(V[3])>=0}else{if(U==="not"){var Y=V[3];for(var W=0,T=Y.length;W<T;W++){if(Y[W]===Z){return false}}return true}}}},CHILD:function(T,W){var Z=W[1],U=T;switch(Z){case"only":case"first":while(U=U.previousSibling){if(U.nodeType===1){return false}}if(Z=="first"){return true}U=T;case"last":while(U=U.nextSibling){if(U.nodeType===1){return false}}return true;case"nth":var V=W[2],ac=W[3];if(V==1&&ac==0){return true}var Y=W[0],ab=T.parentNode;if(ab&&(ab.sizcache!==Y||!T.nodeIndex)){var X=0;for(U=ab.firstChild;U;U=U.nextSibling){if(U.nodeType===1){U.nodeIndex=++X}}ab.sizcache=Y}var aa=T.nodeIndex-ac;if(V==0){return aa==0}else{return(aa%V==0&&aa/V>=0)}}},ID:function(U,T){return U.nodeType===1&&U.getAttribute("id")===T},TAG:function(U,T){return(T==="*"&&U.nodeType===1)||U.nodeName===T},CLASS:function(U,T){return(" "+(U.className||U.getAttribute("class"))+" ").indexOf(T)>-1},ATTR:function(Y,W){var V=W[1],T=I.attrHandle[V]?I.attrHandle[V](Y):Y[V]!=null?Y[V]:Y.getAttribute(V),Z=T+"",X=W[2],U=W[4];return T==null?X==="!=":X==="="?Z===U:X==="*="?Z.indexOf(U)>=0:X==="~="?(" "+Z+" ").indexOf(U)>=0:!U?Z&&T!==false:X==="!="?Z!=U:X==="^="?Z.indexOf(U)===0:X==="$="?Z.substr(Z.length-U.length)===U:X==="|="?Z===U||Z.substr(0,U.length+1)===U+"-":false},POS:function(X,U,V,Y){var T=U[2],W=I.setFilters[T];if(W){return W(X,V,U,Y)}}}};var M=I.match.POS;for(var O in I.match){I.match[O]=RegExp(I.match[O].source+/(?![^\[]*\])(?![^\(]*\))/.source)}var E=function(U,T){U=Array.prototype.slice.call(U);if(T){T.push.apply(T,U);return T}return U};try{Array.prototype.slice.call(document.documentElement.childNodes)}catch(N){E=function(X,W){var U=W||[];if(H.call(X)==="[object Array]"){Array.prototype.push.apply(U,X)}else{if(typeof X.length==="number"){for(var V=0,T=X.length;V<T;V++){U.push(X[V])}}else{for(var V=0;X[V];V++){U.push(X[V])}}}return U}}var G;if(document.documentElement.compareDocumentPosition){G=function(U,T){var V=U.compareDocumentPosition(T)&4?-1:U===T?0:1;if(V===0){hasDuplicate=true}return V}}else{if("sourceIndex" in document.documentElement){G=function(U,T){var V=U.sourceIndex-T.sourceIndex;if(V===0){hasDuplicate=true}return V}}else{if(document.createRange){G=function(W,U){var V=W.ownerDocument.createRange(),T=U.ownerDocument.createRange();V.selectNode(W);V.collapse(true);T.selectNode(U);T.collapse(true);var X=V.compareBoundaryPoints(Range.START_TO_END,T);if(X===0){hasDuplicate=true}return X}}}}(function(){var U=document.createElement("form"),V="script"+(new Date).getTime();U.innerHTML="<input name='"+V+"'/>";var T=document.documentElement;T.insertBefore(U,T.firstChild);if(!!document.getElementById(V)){I.find.ID=function(X,Y,Z){if(typeof Y.getElementById!=="undefined"&&!Z){var W=Y.getElementById(X[1]);return W?W.id===X[1]||typeof W.getAttributeNode!=="undefined"&&W.getAttributeNode("id").nodeValue===X[1]?[W]:g:[]}};I.filter.ID=function(Y,W){var X=typeof Y.getAttributeNode!=="undefined"&&Y.getAttributeNode("id");return Y.nodeType===1&&X&&X.nodeValue===W}}T.removeChild(U)})();(function(){var T=document.createElement("div");T.appendChild(document.createComment(""));if(T.getElementsByTagName("*").length>0){I.find.TAG=function(U,Y){var X=Y.getElementsByTagName(U[1]);if(U[1]==="*"){var W=[];for(var V=0;X[V];V++){if(X[V].nodeType===1){W.push(X[V])}}X=W}return X}}T.innerHTML="<a href='#'></a>";if(T.firstChild&&typeof T.firstChild.getAttribute!=="undefined"&&T.firstChild.getAttribute("href")!=="#"){I.attrHandle.href=function(U){return U.getAttribute("href",2)}}})();if(document.querySelectorAll){(function(){var T=F,U=document.createElement("div");U.innerHTML="<p class='TEST'></p>";if(U.querySelectorAll&&U.querySelectorAll(".TEST").length===0){return}F=function(Y,X,V,W){X=X||document;if(!W&&X.nodeType===9&&!Q(X)){try{return E(X.querySelectorAll(Y),V)}catch(Z){}}return T(Y,X,V,W)};F.find=T.find;F.filter=T.filter;F.selectors=T.selectors;F.matches=T.matches})()}if(document.getElementsByClassName&&document.documentElement.getElementsByClassName){(function(){var T=document.createElement("div");T.innerHTML="<div class='test e'></div><div class='test'></div>";if(T.getElementsByClassName("e").length===0){return}T.lastChild.className="e";if(T.getElementsByClassName("e").length===1){return}I.order.splice(1,0,"CLASS");I.find.CLASS=function(U,V,W){if(typeof V.getElementsByClassName!=="undefined"&&!W){return V.getElementsByClassName(U[1])}}})()}function P(U,Z,Y,ad,aa,ac){var ab=U=="previousSibling"&&!ac;for(var W=0,V=ad.length;W<V;W++){var T=ad[W];if(T){if(ab&&T.nodeType===1){T.sizcache=Y;T.sizset=W}T=T[U];var X=false;while(T){if(T.sizcache===Y){X=ad[T.sizset];break}if(T.nodeType===1&&!ac){T.sizcache=Y;T.sizset=W}if(T.nodeName===Z){X=T;break}T=T[U]}ad[W]=X}}}function S(U,Z,Y,ad,aa,ac){var ab=U=="previousSibling"&&!ac;for(var W=0,V=ad.length;W<V;W++){var T=ad[W];if(T){if(ab&&T.nodeType===1){T.sizcache=Y;T.sizset=W}T=T[U];var X=false;while(T){if(T.sizcache===Y){X=ad[T.sizset];break}if(T.nodeType===1){if(!ac){T.sizcache=Y;T.sizset=W}if(typeof Z!=="string"){if(T===Z){X=true;break}}else{if(F.filter(Z,[T]).length>0){X=T;break}}}T=T[U]}ad[W]=X}}}var K=document.compareDocumentPosition?function(U,T){return U.compareDocumentPosition(T)&16}:function(U,T){return U!==T&&(U.contains?U.contains(T):true)};var Q=function(T){return T.nodeType===9&&T.documentElement.nodeName!=="HTML"||!!T.ownerDocument&&Q(T.ownerDocument)};var J=function(T,aa){var W=[],X="",Y,V=aa.nodeType?[aa]:aa;while((Y=I.match.PSEUDO.exec(T))){X+=Y[0];T=T.replace(I.match.PSEUDO,"")}T=I.relative[T]?T+"*":T;for(var Z=0,U=V.length;Z<U;Z++){F(T,V[Z],W)}return F.filter(X,W)};o.find=F;o.filter=F.filter;o.expr=F.selectors;o.expr[":"]=o.expr.filters;F.selectors.filters.hidden=function(T){return T.offsetWidth===0||T.offsetHeight===0};F.selectors.filters.visible=function(T){return T.offsetWidth>0||T.offsetHeight>0};F.selectors.filters.animated=function(T){return o.grep(o.timers,function(U){return T===U.elem}).length};o.multiFilter=function(V,T,U){if(U){V=":not("+V+")"}return F.matches(V,T)};o.dir=function(V,U){var T=[],W=V[U];while(W&&W!=document){if(W.nodeType==1){T.push(W)}W=W[U]}return T};o.nth=function(X,T,V,W){T=T||1;var U=0;for(;X;X=X[V]){if(X.nodeType==1&&++U==T){break}}return X};o.sibling=function(V,U){var T=[];for(;V;V=V.nextSibling){if(V.nodeType==1&&V!=U){T.push(V)}}return T};return;l.Sizzle=F})();o.event={add:function(I,F,H,K){if(I.nodeType==3||I.nodeType==8){return}if(I.setInterval&&I!=l){I=l}if(!H.guid){H.guid=this.guid++}if(K!==g){var G=H;H=this.proxy(G);H.data=K}var E=o.data(I,"events")||o.data(I,"events",{}),J=o.data(I,"handle")||o.data(I,"handle",function(){return typeof o!=="undefined"&&!o.event.triggered?o.event.handle.apply(arguments.callee.elem,arguments):g});J.elem=I;o.each(F.split(/\s+/),function(M,N){var O=N.split(".");N=O.shift();H.type=O.slice().sort().join(".");var L=E[N];if(o.event.specialAll[N]){o.event.specialAll[N].setup.call(I,K,O)}if(!L){L=E[N]={};if(!o.event.special[N]||o.event.special[N].setup.call(I,K,O)===false){if(I.addEventListener){I.addEventListener(N,J,false)}else{if(I.attachEvent){I.attachEvent("on"+N,J)}}}}L[H.guid]=H;o.event.global[N]=true});I=null},guid:1,global:{},remove:function(K,H,J){if(K.nodeType==3||K.nodeType==8){return}var G=o.data(K,"events"),F,E;if(G){if(H===g||(typeof H==="string"&&H.charAt(0)==".")){for(var I in G){this.remove(K,I+(H||""))}}else{if(H.type){J=H.handler;H=H.type}o.each(H.split(/\s+/),function(M,O){var Q=O.split(".");O=Q.shift();var N=RegExp("(^|\\.)"+Q.slice().sort().join(".*\\.")+"(\\.|$)");if(G[O]){if(J){delete G[O][J.guid]}else{for(var P in G[O]){if(N.test(G[O][P].type)){delete G[O][P]}}}if(o.event.specialAll[O]){o.event.specialAll[O].teardown.call(K,Q)}for(F in G[O]){break}if(!F){if(!o.event.special[O]||o.event.special[O].teardown.call(K,Q)===false){if(K.removeEventListener){K.removeEventListener(O,o.data(K,"handle"),false)}else{if(K.detachEvent){K.detachEvent("on"+O,o.data(K,"handle"))}}}F=null;delete G[O]}}})}for(F in G){break}if(!F){var L=o.data(K,"handle");if(L){L.elem=null}o.removeData(K,"events");o.removeData(K,"handle")}}},trigger:function(I,K,H,E){var G=I.type||I;if(!E){I=typeof I==="object"?I[h]?I:o.extend(o.Event(G),I):o.Event(G);if(G.indexOf("!")>=0){I.type=G=G.slice(0,-1);I.exclusive=true}if(!H){I.stopPropagation();if(this.global[G]){o.each(o.cache,function(){if(this.events&&this.events[G]){o.event.trigger(I,K,this.handle.elem)}})}}if(!H||H.nodeType==3||H.nodeType==8){return g}I.result=g;I.target=H;K=o.makeArray(K);K.unshift(I)}I.currentTarget=H;var J=o.data(H,"handle");if(J){J.apply(H,K)}if((!H[G]||(o.nodeName(H,"a")&&G=="click"))&&H["on"+G]&&H["on"+G].apply(H,K)===false){I.result=false}if(!E&&H[G]&&!I.isDefaultPrevented()&&!(o.nodeName(H,"a")&&G=="click")){this.triggered=true;try{H[G]()}catch(L){}}this.triggered=false;if(!I.isPropagationStopped()){var F=H.parentNode||H.ownerDocument;if(F){o.event.trigger(I,K,F,true)}}},handle:function(K){var J,E;K=arguments[0]=o.event.fix(K||l.event);K.currentTarget=this;var L=K.type.split(".");K.type=L.shift();J=!L.length&&!K.exclusive;var I=RegExp("(^|\\.)"+L.slice().sort().join(".*\\.")+"(\\.|$)");E=(o.data(this,"events")||{})[K.type];for(var G in E){var H=E[G];if(J||I.test(H.type)){K.handler=H;K.data=H.data;var F=H.apply(this,arguments);if(F!==g){K.result=F;if(F===false){K.preventDefault();K.stopPropagation()}}if(K.isImmediatePropagationStopped()){break}}}},props:"altKey attrChange attrName bubbles button cancelable charCode clientX clientY ctrlKey currentTarget data detail eventPhase fromElement handler keyCode metaKey newValue originalTarget pageX pageY prevValue relatedNode relatedTarget screenX screenY shiftKey srcElement target toElement view wheelDelta which".split(" "),fix:function(H){if(H[h]){return H}var F=H;H=o.Event(F);for(var G=this.props.length,J;G;){J=this.props[--G];H[J]=F[J]}if(!H.target){H.target=H.srcElement||document}if(H.target.nodeType==3){H.target=H.target.parentNode}if(!H.relatedTarget&&H.fromElement){H.relatedTarget=H.fromElement==H.target?H.toElement:H.fromElement}if(H.pageX==null&&H.clientX!=null){var I=document.documentElement,E=document.body;H.pageX=H.clientX+(I&&I.scrollLeft||E&&E.scrollLeft||0)-(I.clientLeft||0);H.pageY=H.clientY+(I&&I.scrollTop||E&&E.scrollTop||0)-(I.clientTop||0)}if(!H.which&&((H.charCode||H.charCode===0)?H.charCode:H.keyCode)){H.which=H.charCode||H.keyCode}if(!H.metaKey&&H.ctrlKey){H.metaKey=H.ctrlKey}if(!H.which&&H.button){H.which=(H.button&1?1:(H.button&2?3:(H.button&4?2:0)))}return H},proxy:function(F,E){E=E||function(){return F.apply(this,arguments)};E.guid=F.guid=F.guid||E.guid||this.guid++;return E},special:{ready:{setup:B,teardown:function(){}}},specialAll:{live:{setup:function(E,F){o.event.add(this,F[0],c)},teardown:function(G){if(G.length){var E=0,F=RegExp("(^|\\.)"+G[0]+"(\\.|$)");o.each((o.data(this,"events").live||{}),function(){if(F.test(this.type)){E++}});if(E<1){o.event.remove(this,G[0],c)}}}}}};o.Event=function(E){if(!this.preventDefault){return new o.Event(E)}if(E&&E.type){this.originalEvent=E;this.type=E.type}else{this.type=E}this.timeStamp=e();this[h]=true};function k(){return false}function u(){return true}o.Event.prototype={preventDefault:function(){this.isDefaultPrevented=u;var E=this.originalEvent;if(!E){return}if(E.preventDefault){E.preventDefault()}E.returnValue=false},stopPropagation:function(){this.isPropagationStopped=u;var E=this.originalEvent;if(!E){return}if(E.stopPropagation){E.stopPropagation()}E.cancelBubble=true},stopImmediatePropagation:function(){this.isImmediatePropagationStopped=u;this.stopPropagation()},isDefaultPrevented:k,isPropagationStopped:k,isImmediatePropagationStopped:k};var a=function(F){var E=F.relatedTarget;while(E&&E!=this){try{E=E.parentNode}catch(G){E=this}}if(E!=this){F.type=F.data;o.event.handle.apply(this,arguments)}};o.each({mouseover:"mouseenter",mouseout:"mouseleave"},function(F,E){o.event.special[E]={setup:function(){o.event.add(this,F,a,E)},teardown:function(){o.event.remove(this,F,a)}}});o.fn.extend({bind:function(F,G,E){return F=="unload"?this.one(F,G,E):this.each(function(){o.event.add(this,F,E||G,E&&G)})},one:function(G,H,F){var E=o.event.proxy(F||H,function(I){o(this).unbind(I,E);return(F||H).apply(this,arguments)});return this.each(function(){o.event.add(this,G,E,F&&H)})},unbind:function(F,E){return this.each(function(){o.event.remove(this,F,E)})},trigger:function(E,F){return this.each(function(){o.event.trigger(E,F,this)})},triggerHandler:function(E,G){if(this[0]){var F=o.Event(E);F.preventDefault();F.stopPropagation();o.event.trigger(F,G,this[0]);return F.result}},toggle:function(G){var E=arguments,F=1;while(F<E.length){o.event.proxy(G,E[F++])}return this.click(o.event.proxy(G,function(H){this.lastToggle=(this.lastToggle||0)%F;H.preventDefault();return E[this.lastToggle++].apply(this,arguments)||false}))},hover:function(E,F){return this.mouseenter(E).mouseleave(F)},ready:function(E){B();if(o.isReady){E.call(document,o)}else{o.readyList.push(E)}return this},live:function(G,F){var E=o.event.proxy(F);E.guid+=this.selector+G;o(document).bind(i(G,this.selector),this.selector,E);return this},die:function(F,E){o(document).unbind(i(F,this.selector),E?{guid:E.guid+this.selector+F}:null);return this}});function c(H){var E=RegExp("(^|\\.)"+H.type+"(\\.|$)"),G=true,F=[];o.each(o.data(this,"events").live||[],function(I,J){if(E.test(J.type)){var K=o(H.target).closest(J.data)[0];if(K){F.push({elem:K,fn:J})}}});F.sort(function(J,I){return o.data(J.elem,"closest")-o.data(I.elem,"closest")});o.each(F,function(){if(this.fn.call(this.elem,H,this.fn.data)===false){return(G=false)}});return G}function i(F,E){return["live",F,E.replace(/\./g,"`").replace(/ /g,"|")].join(".")}o.extend({isReady:false,readyList:[],ready:function(){if(!o.isReady){o.isReady=true;if(o.readyList){o.each(o.readyList,function(){this.call(document,o)});o.readyList=null}o(document).triggerHandler("ready")}}});var x=false;function B(){if(x){return}x=true;if(document.addEventListener){document.addEventListener("DOMContentLoaded",function(){document.removeEventListener("DOMContentLoaded",arguments.callee,false);o.ready()},false)}else{if(document.attachEvent){document.attachEvent("onreadystatechange",function(){if(document.readyState==="complete"){document.detachEvent("onreadystatechange",arguments.callee);o.ready()}});if(document.documentElement.doScroll&&l==l.top){(function(){if(o.isReady){return}try{document.documentElement.doScroll("left")}catch(E){setTimeout(arguments.callee,0);return}o.ready()})()}}}o.event.add(l,"load",o.ready)}o.each(("blur,focus,load,resize,scroll,unload,click,dblclick,mousedown,mouseup,mousemove,mouseover,mouseout,mouseenter,mouseleave,change,select,submit,keydown,keypress,keyup,error").split(","),function(F,E){o.fn[E]=function(G){return G?this.bind(E,G):this.trigger(E)}});o(l).bind("unload",function(){for(var E in o.cache){if(E!=1&&o.cache[E].handle){o.event.remove(o.cache[E].handle.elem)}}});(function(){o.support={};var F=document.documentElement,G=document.createElement("script"),K=document.createElement("div"),J="script"+(new Date).getTime();K.style.display="none";K.innerHTML='   <link/><table></table><a href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select><object><param/></object>';var H=K.getElementsByTagName("*"),E=K.getElementsByTagName("a")[0];if(!H||!H.length||!E){return}o.support={leadingWhitespace:K.firstChild.nodeType==3,tbody:!K.getElementsByTagName("tbody").length,objectAll:!!K.getElementsByTagName("object")[0].getElementsByTagName("*").length,htmlSerialize:!!K.getElementsByTagName("link").length,style:/red/.test(E.getAttribute("style")),hrefNormalized:E.getAttribute("href")==="/a",opacity:E.style.opacity==="0.5",cssFloat:!!E.style.cssFloat,scriptEval:false,noCloneEvent:true,boxModel:null};G.type="text/javascript";try{G.appendChild(document.createTextNode("window."+J+"=1;"))}catch(I){}F.insertBefore(G,F.firstChild);if(l[J]){o.support.scriptEval=true;delete l[J]}F.removeChild(G);if(K.attachEvent&&K.fireEvent){K.attachEvent("onclick",function(){o.support.noCloneEvent=false;K.detachEvent("onclick",arguments.callee)});K.cloneNode(true).fireEvent("onclick")}o(function(){var L=document.createElement("div");L.style.width=L.style.paddingLeft="1px";document.body.appendChild(L);o.boxModel=o.support.boxModel=L.offsetWidth===2;document.body.removeChild(L).style.display="none"})})();var w=o.support.cssFloat?"cssFloat":"styleFloat";o.props={"for":"htmlFor","class":"className","float":w,cssFloat:w,styleFloat:w,readonly:"readOnly",maxlength:"maxLength",cellspacing:"cellSpacing",rowspan:"rowSpan",tabindex:"tabIndex"};o.fn.extend({_load:o.fn.load,load:function(G,J,K){if(typeof G!=="string"){return this._load(G)}var I=G.indexOf(" ");if(I>=0){var E=G.slice(I,G.length);G=G.slice(0,I)}var H="GET";if(J){if(o.isFunction(J)){K=J;J=null}else{if(typeof J==="object"){J=o.param(J);H="POST"}}}var F=this;o.ajax({url:G,type:H,dataType:"html",data:J,complete:function(M,L){if(L=="success"||L=="notmodified"){F.html(E?o("<div/>").append(M.responseText.replace(/<script(.|\s)*?\/script>/g,"")).find(E):M.responseText)}if(K){F.each(K,[M.responseText,L,M])}}});return this},serialize:function(){return o.param(this.serializeArray())},serializeArray:function(){return this.map(function(){return this.elements?o.makeArray(this.elements):this}).filter(function(){return this.name&&!this.disabled&&(this.checked||/select|textarea/i.test(this.nodeName)||/text|hidden|password|search/i.test(this.type))}).map(function(E,F){var G=o(this).val();return G==null?null:o.isArray(G)?o.map(G,function(I,H){return{name:F.name,value:I}}):{name:F.name,value:G}}).get()}});o.each("ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend".split(","),function(E,F){o.fn[F]=function(G){return this.bind(F,G)}});var r=e();o.extend({get:function(E,G,H,F){if(o.isFunction(G)){H=G;G=null}return o.ajax({type:"GET",url:E,data:G,success:H,dataType:F})},getScript:function(E,F){return o.get(E,null,F,"script")},getJSON:function(E,F,G){return o.get(E,F,G,"json")},post:function(E,G,H,F){if(o.isFunction(G)){H=G;G={}}return o.ajax({type:"POST",url:E,data:G,success:H,dataType:F})},ajaxSetup:function(E){o.extend(o.ajaxSettings,E)},ajaxSettings:{url:location.href,global:true,type:"GET",contentType:"application/x-www-form-urlencoded",processData:true,async:true,xhr:function(){return l.ActiveXObject?new ActiveXObject("Microsoft.XMLHTTP"):new XMLHttpRequest()},accepts:{xml:"application/xml, text/xml",html:"text/html",script:"text/javascript, application/javascript",json:"application/json, text/javascript",text:"text/plain",_default:"*/*"}},lastModified:{},ajax:function(M){M=o.extend(true,M,o.extend(true,{},o.ajaxSettings,M));var W,F=/=\?(&|$)/g,R,V,G=M.type.toUpperCase();if(M.data&&M.processData&&typeof M.data!=="string"){M.data=o.param(M.data)}if(M.dataType=="jsonp"){if(G=="GET"){if(!M.url.match(F)){M.url+=(M.url.match(/\?/)?"&":"?")+(M.jsonp||"callback")+"=?"}}else{if(!M.data||!M.data.match(F)){M.data=(M.data?M.data+"&":"")+(M.jsonp||"callback")+"=?"}}M.dataType="json"}if(M.dataType=="json"&&(M.data&&M.data.match(F)||M.url.match(F))){W="jsonp"+r++;if(M.data){M.data=(M.data+"").replace(F,"="+W+"$1")}M.url=M.url.replace(F,"="+W+"$1");M.dataType="script";l[W]=function(X){V=X;I();L();l[W]=g;try{delete l[W]}catch(Y){}if(H){H.removeChild(T)}}}if(M.dataType=="script"&&M.cache==null){M.cache=false}if(M.cache===false&&G=="GET"){var E=e();var U=M.url.replace(/(\?|&)_=.*?(&|$)/,"$1_="+E+"$2");M.url=U+((U==M.url)?(M.url.match(/\?/)?"&":"?")+"_="+E:"")}if(M.data&&G=="GET"){M.url+=(M.url.match(/\?/)?"&":"?")+M.data;M.data=null}if(M.global&&!o.active++){o.event.trigger("ajaxStart")}var Q=/^(\w+:)?\/\/([^\/?#]+)/.exec(M.url);if(M.dataType=="script"&&G=="GET"&&Q&&(Q[1]&&Q[1]!=location.protocol||Q[2]!=location.host)){var H=document.getElementsByTagName("head")[0];var T=document.createElement("script");T.src=M.url;if(M.scriptCharset){T.charset=M.scriptCharset}if(!W){var O=false;T.onload=T.onreadystatechange=function(){if(!O&&(!this.readyState||this.readyState=="loaded"||this.readyState=="complete")){O=true;I();L();T.onload=T.onreadystatechange=null;H.removeChild(T)}}}H.appendChild(T);return g}var K=false;var J=M.xhr();if(M.username){J.open(G,M.url,M.async,M.username,M.password)}else{J.open(G,M.url,M.async)}try{if(M.data){J.setRequestHeader("Content-Type",M.contentType)}if(M.ifModified){J.setRequestHeader("If-Modified-Since",o.lastModified[M.url]||"Thu, 01 Jan 1970 00:00:00 GMT")}J.setRequestHeader("X-Requested-With","XMLHttpRequest");J.setRequestHeader("Accept",M.dataType&&M.accepts[M.dataType]?M.accepts[M.dataType]+", */*":M.accepts._default)}catch(S){}if(M.beforeSend&&M.beforeSend(J,M)===false){if(M.global&&!--o.active){o.event.trigger("ajaxStop")}J.abort();return false}if(M.global){o.event.trigger("ajaxSend",[J,M])}var N=function(X){if(J.readyState==0){if(P){clearInterval(P);P=null;if(M.global&&!--o.active){o.event.trigger("ajaxStop")}}}else{if(!K&&J&&(J.readyState==4||X=="timeout")){K=true;if(P){clearInterval(P);P=null}R=X=="timeout"?"timeout":!o.httpSuccess(J)?"error":M.ifModified&&o.httpNotModified(J,M.url)?"notmodified":"success";if(R=="success"){try{V=o.httpData(J,M.dataType,M)}catch(Z){R="parsererror"}}if(R=="success"){var Y;try{Y=J.getResponseHeader("Last-Modified")}catch(Z){}if(M.ifModified&&Y){o.lastModified[M.url]=Y}if(!W){I()}}else{o.handleError(M,J,R)}L();if(X){J.abort()}if(M.async){J=null}}}};if(M.async){var P=setInterval(N,13);if(M.timeout>0){setTimeout(function(){if(J&&!K){N("timeout")}},M.timeout)}}try{J.send(M.data)}catch(S){o.handleError(M,J,null,S)}if(!M.async){N()}function I(){if(M.success){M.success(V,R)}if(M.global){o.event.trigger("ajaxSuccess",[J,M])}}function L(){if(M.complete){M.complete(J,R)}if(M.global){o.event.trigger("ajaxComplete",[J,M])}if(M.global&&!--o.active){o.event.trigger("ajaxStop")}}return J},handleError:function(F,H,E,G){if(F.error){F.error(H,E,G)}if(F.global){o.event.trigger("ajaxError",[H,F,G])}},active:0,httpSuccess:function(F){try{return !F.status&&location.protocol=="file:"||(F.status>=200&&F.status<300)||F.status==304||F.status==1223}catch(E){}return false},httpNotModified:function(G,E){try{var H=G.getResponseHeader("Last-Modified");return G.status==304||H==o.lastModified[E]}catch(F){}return false},httpData:function(J,H,G){var F=J.getResponseHeader("content-type"),E=H=="xml"||!H&&F&&F.indexOf("xml")>=0,I=E?J.responseXML:J.responseText;if(E&&I.documentElement.tagName=="parsererror"){throw"parsererror"}if(G&&G.dataFilter){I=G.dataFilter(I,H)}if(typeof I==="string"){if(H=="script"){o.globalEval(I)}if(H=="json"){I=l["eval"]("("+I+")")}}return I},param:function(E){var G=[];function H(I,J){G[G.length]=encodeURIComponent(I)+"="+encodeURIComponent(J)}if(o.isArray(E)||E.jquery){o.each(E,function(){H(this.name,this.value)})}else{for(var F in E){if(o.isArray(E[F])){o.each(E[F],function(){H(F,this)})}else{H(F,o.isFunction(E[F])?E[F]():E[F])}}}return G.join("&").replace(/%20/g,"+")}});var m={},n,d=[["height","marginTop","marginBottom","paddingTop","paddingBottom"],["width","marginLeft","marginRight","paddingLeft","paddingRight"],["opacity"]];function t(F,E){var G={};o.each(d.concat.apply([],d.slice(0,E)),function(){G[this]=F});return G}o.fn.extend({show:function(J,L){if(J){return this.animate(t("show",3),J,L)}else{for(var H=0,F=this.length;H<F;H++){var E=o.data(this[H],"olddisplay");this[H].style.display=E||"";if(o.css(this[H],"display")==="none"){var G=this[H].tagName,K;if(m[G]){K=m[G]}else{var I=o("<"+G+" />").appendTo("body");K=I.css("display");if(K==="none"){K="block"}I.remove();m[G]=K}o.data(this[H],"olddisplay",K)}}for(var H=0,F=this.length;H<F;H++){this[H].style.display=o.data(this[H],"olddisplay")||""}return this}},hide:function(H,I){if(H){return this.animate(t("hide",3),H,I)}else{for(var G=0,F=this.length;G<F;G++){var E=o.data(this[G],"olddisplay");if(!E&&E!=="none"){o.data(this[G],"olddisplay",o.css(this[G],"display"))}}for(var G=0,F=this.length;G<F;G++){this[G].style.display="none"}return this}},_toggle:o.fn.toggle,toggle:function(G,F){var E=typeof G==="boolean";return o.isFunction(G)&&o.isFunction(F)?this._toggle.apply(this,arguments):G==null||E?this.each(function(){var H=E?G:o(this).is(":hidden");o(this)[H?"show":"hide"]()}):this.animate(t("toggle",3),G,F)},fadeTo:function(E,G,F){return this.animate({opacity:G},E,F)},animate:function(I,F,H,G){var E=o.speed(F,H,G);return this[E.queue===false?"each":"queue"](function(){var K=o.extend({},E),M,L=this.nodeType==1&&o(this).is(":hidden"),J=this;for(M in I){if(I[M]=="hide"&&L||I[M]=="show"&&!L){return K.complete.call(this)}if((M=="height"||M=="width")&&this.style){K.display=o.css(this,"display");K.overflow=this.style.overflow}}if(K.overflow!=null){this.style.overflow="hidden"}K.curAnim=o.extend({},I);o.each(I,function(O,S){var R=new o.fx(J,K,O);if(/toggle|show|hide/.test(S)){R[S=="toggle"?L?"show":"hide":S](I)}else{var Q=S.toString().match(/^([+-]=)?([\d+-.]+)(.*)$/),T=R.cur(true)||0;if(Q){var N=parseFloat(Q[2]),P=Q[3]||"px";if(P!="px"){J.style[O]=(N||1)+P;T=((N||1)/R.cur(true))*T;J.style[O]=T+P}if(Q[1]){N=((Q[1]=="-="?-1:1)*N)+T}R.custom(T,N,P)}else{R.custom(T,S,"")}}});return true})},stop:function(F,E){var G=o.timers;if(F){this.queue([])}this.each(function(){for(var H=G.length-1;H>=0;H--){if(G[H].elem==this){if(E){G[H](true)}G.splice(H,1)}}});if(!E){this.dequeue()}return this}});o.each({slideDown:t("show",1),slideUp:t("hide",1),slideToggle:t("toggle",1),fadeIn:{opacity:"show"},fadeOut:{opacity:"hide"}},function(E,F){o.fn[E]=function(G,H){return this.animate(F,G,H)}});o.extend({speed:function(G,H,F){var E=typeof G==="object"?G:{complete:F||!F&&H||o.isFunction(G)&&G,duration:G,easing:F&&H||H&&!o.isFunction(H)&&H};E.duration=o.fx.off?0:typeof E.duration==="number"?E.duration:o.fx.speeds[E.duration]||o.fx.speeds._default;E.old=E.complete;E.complete=function(){if(E.queue!==false){o(this).dequeue()}if(o.isFunction(E.old)){E.old.call(this)}};return E},easing:{linear:function(G,H,E,F){return E+F*G},swing:function(G,H,E,F){return((-Math.cos(G*Math.PI)/2)+0.5)*F+E}},timers:[],fx:function(F,E,G){this.options=E;this.elem=F;this.prop=G;if(!E.orig){E.orig={}}}});o.fx.prototype={update:function(){if(this.options.step){this.options.step.call(this.elem,this.now,this)}(o.fx.step[this.prop]||o.fx.step._default)(this);if((this.prop=="height"||this.prop=="width")&&this.elem.style){this.elem.style.display="block"}},cur:function(F){if(this.elem[this.prop]!=null&&(!this.elem.style||this.elem.style[this.prop]==null)){return this.elem[this.prop]}var E=parseFloat(o.css(this.elem,this.prop,F));return E&&E>-10000?E:parseFloat(o.curCSS(this.elem,this.prop))||0},custom:function(I,H,G){this.startTime=e();this.start=I;this.end=H;this.unit=G||this.unit||"px";this.now=this.start;this.pos=this.state=0;var E=this;function F(J){return E.step(J)}F.elem=this.elem;if(F()&&o.timers.push(F)&&!n){n=setInterval(function(){var K=o.timers;for(var J=0;J<K.length;J++){if(!K[J]()){K.splice(J--,1)}}if(!K.length){clearInterval(n);n=g}},13)}},show:function(){this.options.orig[this.prop]=o.attr(this.elem.style,this.prop);this.options.show=true;this.custom(this.prop=="width"||this.prop=="height"?1:0,this.cur());o(this.elem).show()},hide:function(){this.options.orig[this.prop]=o.attr(this.elem.style,this.prop);this.options.hide=true;this.custom(this.cur(),0)},step:function(H){var G=e();if(H||G>=this.options.duration+this.startTime){this.now=this.end;this.pos=this.state=1;this.update();this.options.curAnim[this.prop]=true;var E=true;for(var F in this.options.curAnim){if(this.options.curAnim[F]!==true){E=false}}if(E){if(this.options.display!=null){this.elem.style.overflow=this.options.overflow;this.elem.style.display=this.options.display;if(o.css(this.elem,"display")=="none"){this.elem.style.display="block"}}if(this.options.hide){o(this.elem).hide()}if(this.options.hide||this.options.show){for(var I in this.options.curAnim){o.attr(this.elem.style,I,this.options.orig[I])}}this.options.complete.call(this.elem)}return false}else{var J=G-this.startTime;this.state=J/this.options.duration;this.pos=o.easing[this.options.easing||(o.easing.swing?"swing":"linear")](this.state,J,0,1,this.options.duration);this.now=this.start+((this.end-this.start)*this.pos);this.update()}return true}};o.extend(o.fx,{speeds:{slow:600,fast:200,_default:400},step:{opacity:function(E){o.attr(E.elem.style,"opacity",E.now)},_default:function(E){if(E.elem.style&&E.elem.style[E.prop]!=null){E.elem.style[E.prop]=E.now+E.unit}else{E.elem[E.prop]=E.now}}}});if(document.documentElement.getBoundingClientRect){o.fn.offset=function(){if(!this[0]){return{top:0,left:0}}if(this[0]===this[0].ownerDocument.body){return o.offset.bodyOffset(this[0])}var G=this[0].getBoundingClientRect(),J=this[0].ownerDocument,F=J.body,E=J.documentElement,L=E.clientTop||F.clientTop||0,K=E.clientLeft||F.clientLeft||0,I=G.top+(self.pageYOffset||o.boxModel&&E.scrollTop||F.scrollTop)-L,H=G.left+(self.pageXOffset||o.boxModel&&E.scrollLeft||F.scrollLeft)-K;return{top:I,left:H}}}else{o.fn.offset=function(){if(!this[0]){return{top:0,left:0}}if(this[0]===this[0].ownerDocument.body){return o.offset.bodyOffset(this[0])}o.offset.initialized||o.offset.initialize();var J=this[0],G=J.offsetParent,F=J,O=J.ownerDocument,M,H=O.documentElement,K=O.body,L=O.defaultView,E=L.getComputedStyle(J,null),N=J.offsetTop,I=J.offsetLeft;while((J=J.parentNode)&&J!==K&&J!==H){M=L.getComputedStyle(J,null);N-=J.scrollTop,I-=J.scrollLeft;if(J===G){N+=J.offsetTop,I+=J.offsetLeft;if(o.offset.doesNotAddBorder&&!(o.offset.doesAddBorderForTableAndCells&&/^t(able|d|h)$/i.test(J.tagName))){N+=parseInt(M.borderTopWidth,10)||0,I+=parseInt(M.borderLeftWidth,10)||0}F=G,G=J.offsetParent}if(o.offset.subtractsBorderForOverflowNotVisible&&M.overflow!=="visible"){N+=parseInt(M.borderTopWidth,10)||0,I+=parseInt(M.borderLeftWidth,10)||0}E=M}if(E.position==="relative"||E.position==="static"){N+=K.offsetTop,I+=K.offsetLeft}if(E.position==="fixed"){N+=Math.max(H.scrollTop,K.scrollTop),I+=Math.max(H.scrollLeft,K.scrollLeft)}return{top:N,left:I}}}o.offset={initialize:function(){if(this.initialized){return}var L=document.body,F=document.createElement("div"),H,G,N,I,M,E,J=L.style.marginTop,K='<div style="position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;"><div></div></div><table style="position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;" cellpadding="0" cellspacing="0"><tr><td></td></tr></table>';M={position:"absolute",top:0,left:0,margin:0,border:0,width:"1px",height:"1px",visibility:"hidden"};for(E in M){F.style[E]=M[E]}F.innerHTML=K;L.insertBefore(F,L.firstChild);H=F.firstChild,G=H.firstChild,I=H.nextSibling.firstChild.firstChild;this.doesNotAddBorder=(G.offsetTop!==5);this.doesAddBorderForTableAndCells=(I.offsetTop===5);H.style.overflow="hidden",H.style.position="relative";this.subtractsBorderForOverflowNotVisible=(G.offsetTop===-5);L.style.marginTop="1px";this.doesNotIncludeMarginInBodyOffset=(L.offsetTop===0);L.style.marginTop=J;L.removeChild(F);this.initialized=true},bodyOffset:function(E){o.offset.initialized||o.offset.initialize();var G=E.offsetTop,F=E.offsetLeft;if(o.offset.doesNotIncludeMarginInBodyOffset){G+=parseInt(o.curCSS(E,"marginTop",true),10)||0,F+=parseInt(o.curCSS(E,"marginLeft",true),10)||0}return{top:G,left:F}}};o.fn.extend({position:function(){var I=0,H=0,F;if(this[0]){var G=this.offsetParent(),J=this.offset(),E=/^body|html$/i.test(G[0].tagName)?{top:0,left:0}:G.offset();J.top-=j(this,"marginTop");J.left-=j(this,"marginLeft");E.top+=j(G,"borderTopWidth");E.left+=j(G,"borderLeftWidth");F={top:J.top-E.top,left:J.left-E.left}}return F},offsetParent:function(){var E=this[0].offsetParent||document.body;while(E&&(!/^body|html$/i.test(E.tagName)&&o.css(E,"position")=="static")){E=E.offsetParent}return o(E)}});o.each(["Left","Top"],function(F,E){var G="scroll"+E;o.fn[G]=function(H){if(!this[0]){return null}return H!==g?this.each(function(){this==l||this==document?l.scrollTo(!F?H:o(l).scrollLeft(),F?H:o(l).scrollTop()):this[G]=H}):this[0]==l||this[0]==document?self[F?"pageYOffset":"pageXOffset"]||o.boxModel&&document.documentElement[G]||document.body[G]:this[0][G]}});o.each(["Height","Width"],function(I,G){var E=I?"Left":"Top",H=I?"Right":"Bottom",F=G.toLowerCase();o.fn["inner"+G]=function(){return this[0]?o.css(this[0],F,false,"padding"):null};o.fn["outer"+G]=function(K){return this[0]?o.css(this[0],F,false,K?"margin":"border"):null};var J=G.toLowerCase();o.fn[J]=function(K){return this[0]==l?document.compatMode=="CSS1Compat"&&document.documentElement["client"+G]||document.body["client"+G]:this[0]==document?Math.max(document.documentElement["client"+G],document.body["scroll"+G],document.documentElement["scroll"+G],document.body["offset"+G],document.documentElement["offset"+G]):K===g?(this.length?o.css(this[0],J):null):this.css(J,typeof K==="string"?K:K+"px")}})})();_application/x-javascript‘*+,-_0http://www.cocoabuilder.com/js/jquery.example.jsOFbplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _0http://www.cocoabuilder.com/js/jquery.example.js“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥KŒ1»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-alive_application/x-javascript_Wed, 31 Aug 2011 06:56:48 GMT_Fri, 02 Oct 2009 22:45:28 GMTT6179_Fri, 30 Sep 2011 06:56:48 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionary#“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ"+14:CLNU]hjtvxz|~ÄÇÑÜêíîñòöúû†¢©∑¬œ‘‚Ò˘%@`ÄÖ•∑º“÷„ÊÎˇ%7:P             j              RO#/*
+ * jQuery Form Example Plugin 1.4.2
+ * Populate form inputs with example text that disappears on focus.
+ *
+ * e.g.
+ *  $('input#name').example('Bob Smith');
+ *  $('input[@title]').example(function() {
+ *    return $(this).attr('title');
+ *  });
+ *  $('textarea#message').example('Type your message here', {
+ *    className: 'example_text'
+ *  });
+ *
+ * Copyright (c) Paul Mucur (http://mucur.name), 2007-2008.
+ * Dual-licensed under the BSD (BSD-LICENSE.txt) and GPL (GPL-LICENSE.txt)
+ * licenses.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+(function($) {
+  
+  $.fn.example = function(text, args) {
+    
+    /* Only calculate once whether a callback has been used. */
+    var isCallback = $.isFunction(text);
+    
+    /* Merge the arguments and given example text into one options object. */
+    var options = $.extend({}, args, {example: text});
+    
+    return this.each(function() {
+      
+      /* Reduce method calls by saving the current jQuery object. */
+      var $this = $(this);
+      
+      /* Merge the plugin defaults with the given options and, if present,
+       * any metadata.
+       */
+      if ($.metadata) {        
+        var o = $.extend({}, $.fn.example.defaults, $this.metadata(), options);
+      } else {
+        var o = $.extend({}, $.fn.example.defaults, options);
+      }
+      
+      /* The following event handlers only need to be bound once
+       * per class name. In order to do this, an array of used
+       * class names is stored and checked on each use of the plugin.
+       * If the class name is in the array then this whole section 
+       * is skipped. If not, the events are bound and the class name 
+       * added to the array.
+       *
+       * As of 1.3.2, the class names are stored as keys in the
+       * array, rather than as elements. This removes the need for
+       * $.inArray().
+       */
+      if (!$.fn.example.boundClassNames[o.className]) {
+      
+        /* Because Gecko-based browsers cache form values
+         * but ignore all other attributes such as class, all example
+         * values must be cleared on page unload to prevent them from
+         * being saved.
+         */
+        $(window).unload(function() {
+          $('.' + o.className).val('');
+        });
+      
+        /* Clear fields that are still examples before any form is submitted
+         * otherwise those examples will be sent along as well.
+         * 
+         * Prior to 1.3, this would only be bound to forms that were
+         * parents of example fields but this meant that a page with
+         * multiple forms would not work correctly.
+         */
+        $('form').submit(function() {
+        
+          /* Clear only the fields inside this particular form. */
+          $(this).find('.' + o.className).val('');
+        });
+      
+        /* Add the class name to the array. */
+        $.fn.example.boundClassNames[o.className] = true;
+      }
+    
+      /* Internet Explorer will cache form values even if they are cleared
+       * on unload, so this will clear any value that matches the example
+       * text and hasn't been specified in the value attribute.
+       *
+       * If a callback is used, it is not possible or safe to predict
+       * what the example text is going to be so all non-default values
+       * are cleared. This means that caching is effectively disabled for
+       * that field.
+       *
+       * Many thanks to Klaus Hartl for helping resolve this issue.
+       */
+      if ($.browser.msie && !$this.attr('defaultValue') && (isCallback || $this.val() == o.example))
+        $this.val('');
+      
+      /* Initially place the example text in the field if it is empty
+       * and doesn't have focus yet.
+       */
+      if ($this.val() == '' && this != document.activeElement) {
+        $this.addClass(o.className);
+        
+        /* The text argument can now be a function; if this is the case,
+         * call it, passing the current element as `this`.
+         */
+        $this.val(isCallback ? o.example.call(this) : o.example);
+      }
+      
+      /* Make the example text disappear when someone focuses.
+       *
+       * To determine whether the value of the field is an example or not,
+       * check for the example class name only; comparing the actual value
+       * seems wasteful and can stop people from using example values as real 
+       * input.
+       */
+      $this.focus(function() {
+        
+        /* jQuery 1.1 has no hasClass(), so is() must be used instead. */
+        if ($(this).is('.' + o.className)) {
+          $(this).val('');
+          $(this).removeClass(o.className);
+        }
+      });
+
+      /* Detect a change event to the field and remove the example class. */
+      $this.change(function() {
+        if ($(this).is('.' + o.className)) {
+          $(this).removeClass(o.className);
+        }
+      });
+
+      /* Make the example text reappear if the input is blank on blurring. */
+      $this.blur(function() {
+        if ($(this).val() == '') {
+          $(this).addClass(o.className);
+          
+          /* Re-evaluate the callback function every time the user
+           * blurs the field without entering anything. While this
+           * is not as efficient as caching the value, it allows for
+           * more dynamic applications of the plugin.
+           */
+          $(this).val(isCallback ? o.example.call(this) : o.example);
+        }
+      });
+    });
+  };
+  
+  /* Users can override the defaults for the plugin like so:
+   *
+   *   $.fn.example.defaults.className = 'not_example';
+   */
+  $.fn.example.defaults = {
+    className: 'example'
+  };
+  
+  /* All the class names used are stored as keys in the following array. */
+  $.fn.example.boundClassNames = [];
+  
+})(jQuery);_application/x-javascript‘/012_.http://www.cocoabuilder.com/js/cocoabuilder.jsODbplist00‘fgX$versionX$objectsY$archiverT$top Ü†Ø"()012JKLMNOPQRSTUVWXYZ[\`aU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ ÄÄÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _.http://www.cocoabuilder.com/js/cocoabuilder.js“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥`à¯»”3456@WNS.keysZNS.objectsÄ©789:;<=>?Ä	Ä
+ÄÄÄÄÄÄÄ©ABCDEFGHIÄÄÄÄÄÄÄÄÄVServer]Accept-RangesZConnection\Content-TypeTDate]Last-Modified^Content-LengthWExpires]Cache-Control\nginx/0.8.19UbytesZkeep-alive_application/x-javascript_Wed, 31 Aug 2011 06:56:48 GMT_Tue, 25 May 2010 18:51:43 GMTT2788_Fri, 30 Sep 2011 06:56:48 GMT_max-age=2592000“*+]^_NSMutableDictionary£]_/\NSDictionary
+‰“*+bc_NSHTTPURLResponse£de/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—hi_WebResourceResponseÄ    # - 2 7 X ^ y | Ä É Ü â ç ê ó ö ù † £ ¶ ® ™ ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ≈ — Ÿ € › ﬂ )/28AJLS[fhrtvxz|~ÄÇÑéêíîñòöúû†ßµ¿Õ“‡Ô˜#>^~É£µ∫–‘·‰È˝#58N             j              PO
+‰
+/* Author : Bertrand Mansion <bmansion@mamasam.com> */
+
+(function($) {
+    $.fn.colorize = function() {
+        this.each(function() {
+          var html = $(this).html();
+          var lines = html.split('<br>');
+          lines.push('');
+          var buf = [];
+          var num = 0;
+          var RegExp = /^\s*([>\s]+)/;
+          var quoted = false;
+          $.each(lines, function() {
+            var line = this.replace(/&gt;/g, '>');
+            var quotes = line.match(RegExp);
+            if (!quotes) {
+              quotes = [''];
+              if (quoted) {
+                buf.push('</div>');
+              }
+              quoted = false;
+            }
+            var match = quotes[0].replace(/ /g, '');
+            if (num != match.length) {
+              if (num > 0) {
+                buf.push('</span>');
+              }
+              if (!quoted && match.length != 0) {
+                buf.push('<div class="quote">');
+                quoted = true;
+              }
+              num = match.length;
+              if (num > 0) {
+                buf.push('<span class="quoted' + num + '">');
+              }
+            }
+            buf.push(this + '<br>');
+          });
+          var res = buf.join('');
+          $(this).html(res);
+        });
+        return $(this);
+    }
+})(jQuery);
+
+function hideQuote(el) {
+  var l = $('<a class="readmore" href="#">&gt; show quoted text</a><br />').click(function (e) {
+    e.preventDefault();
+    $(l).hide();
+    el.show();
+  });
+  el.hide().after(l);
+}
+
+(function($) {
+    $.fn.readmore = function() {
+        this.each(function() {
+          var div = $(this);
+          if (div.parent().find(":last").closest(".quote").get(0) == div.get(0)) {
+            hideQuote(div);
+          } else {
+            var len = $.trim(div.text()).length;
+            if (len < 80*8) {
+              return;
+            }
+            hideQuote(div);
+          }
+        });
+        return $(this);
+    }
+})(jQuery);
+
+(function($) {
+    $.fn.threadize = function() {
+        var hash = unescape(self.document.location.hash.substring(1));
+        if (hash == '') return $(this);
+        this.each(function() {
+          var mess = $(this);
+          var meta = $(this).find(".meta a");
+          var body = $(this).find(".body");
+          if (hash != meta.attr("name")) {
+            body.hide();
+            mess.css("background-color", "#eeeeee");
+          }
+          meta.click(function(e) {
+            e.preventDefault();
+            if (body.is(":visible")) {
+              mess.css("background-color", "#eeeeee");
+              body.hide();
+            } else {
+              mess.css("background-color", "#ffffff");
+              body.show();
+            }
+          });
+        });
+        return $(this);
+    }
+})(jQuery);
+_application/x-javascript‘4567_%http://www.google-analytics.com/ga.jsO®bplist00‘rsX$versionX$objectsY$archiverT$top Ü†Ø$"()012PQRSTUVWXYZ[\]^_`abcdefghlmU$null›	
+ !R$6S$10R$2R$7R$3S$11R$8V$classR$4R$9R$0R$5R$1ÄÄÄ Ä"Ä#ÄÄ Ä”#$%&[NS.relativeWNS.baseÄÄÄ _%http://www.google-analytics.com/ga.js“*+,-Z$classnameX$classesUNSURL¢./UNSURLXNSObject#A¥ T—∑»”3456CWNS.keysZNS.objectsÄ!¨789:;<=>?@ABÄ	Ä
+ÄÄÄÄÄÄÄÄÄÄ¨DEFGHIJKLMNOÄÄÄÄÄÄÄÄÄÄÄÄ VServerZConnection_Content-EncodingTVary\Content-TypeWExpires]Cache-Control]Last-Modified_X-Content-Type-OptionsTDateSAge^Content-LengthWGFE/2.0ZKeep-AliveTgzip_Accept-Encoding_text/javascript_Wed, 31 Aug 2011 07:02:14 GMT_max-age=7200, public_Tue, 16 Aug 2011 05:00:45 GMTWnosniff_Wed, 31 Aug 2011 05:02:14 GMTT2090U12371“*+ij_NSMutableDictionary£ik/\NSDictionaryzd“*+no_NSHTTPURLResponse£pq/_NSHTTPURLResponse]NSURLResponse_NSKeyedArchiver—tu_WebResourceResponseÄ    # - 2 7 ^ d  Ç Ü â å è ì ñ ù † £ ¶ © ¨ Æ ∞ ≤ ¥ ∂ ∏ ∫ º æ ¿ ¬ ƒ À ◊ ﬂ · „ Â&,/5>GIPXcertvxz|~ÄÇÑÜàäóôõùü°£•ß©´≠Ø∂¡‘ŸÊÓ¸
+#(,;CNSewóÆŒ÷ˆ˚ -05IMaoÅÑö             v              úOzd(function(){var g=void 0,h=null,aa=encodeURIComponent,ba=decodeURIComponent,i=Math;function ca(a,b){return a.name=b}var j="push",da="replace",ea="load",m="charAt",fa="value",n="indexOf",ga="match",ia="name",ja="host",p="toString",r="length",s="prototype",t="split",u="stopPropagation",ka="scope",v="location",w="getString",x="substring",la="navigator",y="join",A="toLowerCase",B;function ma(a,b){switch(b){case 0:return""+a;case 1:return a*1;case 2:return!!a;case 3:return a*1E3}return a}function C(a){return g==a||"-"==a||""==a}function na(a){if(!a||""==a)return"";for(;a&&" \n\r\t"[n](a[m](0))>-1;)a=a[x](1);for(;a&&" \n\r\t"[n](a[m](a[r]-1))>-1;)a=a[x](0,a[r]-1);return a}function D(a){var b=1,c=0,d;if(!C(a)){b=0;for(d=a[r]-1;d>=0;d--)c=a.charCodeAt(d),b=(b<<6&268435455)+c+(c<<14),c=b&266338304,b=c!=0?b^c>>21:b}return b}function oa(){return i.round(i.random()*2147483647)}
+function pa(){}function E(a,b){return aa instanceof Function?b?encodeURI(a):aa(a):(F(68),escape(a))}function G(a){a=a[t]("+")[y](" ");if(ba instanceof Function)try{return ba(a)}catch(b){F(17)}else F(68);return unescape(a)}var qa=function(a,b,c,d){a.addEventListener?a.addEventListener(b,c,!!d):a.attachEvent&&a.attachEvent("on"+b,c)},ra=function(a,b,c,d){a.removeEventListener?a.removeEventListener(b,c,!!d):a.detachEvent&&a.detachEvent("on"+b,c)};function H(a){return a&&a[r]>0?a[0]:""}
+function sa(a){var b=a?a[r]:0;return b>0?a[b-1]:""}var ta=function(){this.prefix="ga.";this.F={}};ta[s].set=function(a,b){this.F[this.prefix+a]=b};ta[s].get=function(a){return this.F[this.prefix+a]};ta[s].contains=function(a){return this.get(a)!==g};function ua(a){a[n]("www.")==0&&(a=a[x](4));return a[A]()}function va(a,b){var c,d={url:a,protocol:"http",host:"",path:"",c:new ta,anchor:""};if(!a)return d;c=a[n]("://");if(c>=0)d.protocol=a[x](0,c),a=a[x](c+3);c=a.search("/|\\?|#");if(c>=0)d.host=a[x](0,c)[A](),a=a[x](c);else return d.host=a[A](),d;c=a[n]("#");if(c>=0)d.anchor=a[x](c+1),a=a[x](0,c);c=a[n]("?");c>=0&&(wa(d.c,a[x](c+1)),a=a[x](0,c));d.anchor&&b&&wa(d.c,d.anchor);a&&a[m](0)=="/"&&(a=a[x](1));d.path=a;return d}
+function wa(a,b){function c(b,c){a.contains(b)||a.set(b,[]);a.get(b)[j](c)}for(var d=na(b)[t]("&"),e=0;e<d[r];e++)if(d[e]){var f=d[e][n]("=");f<0?c(d[e],"1"):c(d[e][x](0,f),d[e][x](f+1))}}function xa(a,b){if(C(a))return"-";if("["==a[m](0)&&"]"==a[m](a[r]-1))return"-";var c=I.domain;c+=b&&b!="/"?b:"";return a[n](c)==(a[n]("http://")==0?7:a[n]("https://")==0?8:0)?"0":a};var ya=0;function J(a){return(a?"_":"")+ya++}
+var za=J(),Aa=J(),Ba=J(),Ca=J(),Da=J(),K=J(),L=J(),Ea=J(),Fa=J(),Ga=J(),Ha=J(),Ia=J(),Ja=J(),Ka=J(),La=J(),Ma=J(),Na=J(),Oa=J(),Pa=J(),Qa=J(),Ra=J(),Sa=J(),Ta=J(),Ua=J(),Va=J(),Wa=J(),Xa=J(),Ya=J(),Za=J(),$a=J(),ab=J(),bb=J(),cb=J(),db=J(),eb=J(),M=J(!0),fb=J(),gb=J(),hb=J(),ib=J(),jb=J(),kb=J(),lb=J(),mb=J(),nb=J(),ob=J(),N=J(!0),pb=J(!0),qb=J(!0),rb=J(!0),sb=J(!0),ub=J(!0),vb=J(!0),wb=J(!0),xb=J(!0),yb=J(!0),zb=J(!0),O=J(!0),Ab=J(!0),Bb=J(!0),Cb=J(!0),Db=J(!0),Eb=J(!0),Fb=J(!0),Gb=J(!0),Hb=J(!0),
+Ib=J(!0),Jb=J(!0),Kb=J(!0),Lb=J(!0),Mb=J(!0),Nb=J(),Ob=J();J();var Pb=J(),Qb=J(),Rb=J(),Sb=J(),Tb=J(),Ub=J(),Xb=J(),Yb=J(),Zb=J();J();var $b=J(),ac=J();var bc=function(){function a(a,c,d){P(Q[s],a,c,d)}R("_getName",Ba,58);R("_getAccount",za,64);R("_visitCode",N,54);R("_getClientInfo",Ka,53,1);R("_getDetectTitle",Na,56,1);R("_getDetectFlash",La,65,1);R("_getLocalGifPath",Xa,57);R("_getServiceMode",Ya,59);S("_setClientInfo",Ka,66,2);S("_setAccount",za,3);S("_setNamespace",Aa,48);S("_setAllowLinker",Ha,11,2);S("_setDetectFlash",La,61,2);S("_setDetectTitle",Na,62,2);S("_setLocalGifPath",Xa,46,0);S("_setLocalServerMode",Ya,92,g,0);S("_setRemoteServerMode",
+Ya,63,g,1);S("_setLocalRemoteServerMode",Ya,47,g,2);S("_setSampleRate",Wa,45,1);S("_setCampaignTrack",Ma,36,2);S("_setAllowAnchor",Ia,7,2);S("_setCampNameKey",Pa,41);S("_setCampContentKey",Ua,38);S("_setCampIdKey",Oa,39);S("_setCampMediumKey",Sa,40);S("_setCampNOKey",Va,42);S("_setCampSourceKey",Ra,43);S("_setCampTermKey",Ta,44);S("_setCampCIdKey",Qa,37);S("_setCookiePath",L,9,0);S("_setMaxCustomVariables",Za,0,1);S("_setVisitorCookieTimeout",Ea,28,1);S("_setSessionCookieTimeout",Fa,26,1);S("_setCampaignCookieTimeout",
+Ga,29,1);S("_setReferrerOverride",hb,49);a("_trackPageview",Q[s].ka,1);a("_trackEvent",Q[s].t,4);a("_trackSocial",Q[s].la,104);a("_trackPageLoadTime",Q[s].ja,100);a("_trackTrans",Q[s].ma,18);a("_sendXEvent",Q[s].s,78);a("_createEventTracker",Q[s].S,74);a("_getVersion",Q[s].X,60);a("_setDomainName",Q[s].r,6);a("_setAllowHash",Q[s].ba,8);a("_getLinkerUrl",Q[s].W,52);a("_link",Q[s].link,101);a("_linkByPost",Q[s].aa,102);a("_setTrans",Q[s].ea,20);a("_addTrans",Q[s].L,21);a("_addItem",Q[s].J,19);a("_setTransactionDelim",
+Q[s].fa,82);a("_setCustomVar",Q[s].ca,10);a("_deleteCustomVar",Q[s].U,35);a("_getVisitorCustomVar",Q[s].Y,50);a("_setXKey",Q[s].ha,83);a("_setXValue",Q[s].ia,84);a("_getXKey",Q[s].Z,76);a("_getXValue",Q[s].$,77);a("_clearXKey",Q[s].P,72);a("_clearXValue",Q[s].Q,73);a("_createXObj",Q[s].T,75);a("_addIgnoredOrganic",Q[s].H,15);a("_clearIgnoredOrganic",Q[s].M,97);a("_addIgnoredRef",Q[s].I,31);a("_clearIgnoredRef",Q[s].N,32);a("_addOrganic",Q[s].K,14);a("_clearOrganic",Q[s].O,70);a("_cookiePathCopy",
+Q[s].R,30);a("_get",Q[s].V,106);a("_set",Q[s].da,107);a("_addEventListener",Q[s].addEventListener,108);a("_removeEventListener",Q[s].removeEventListener,109);a("_initData",Q[s].l,2);a("_setVar",Q[s].ga,22);S("_setSessionTimeout",Fa,27,3);S("_setCookieTimeout",Ga,25,3);S("_setCookiePersistence",Ea,24,1);a("_setAutoTrackOutbound",pa,79);a("_setTrackOutboundSubdomains",pa,81);a("_setHrefExamineLimit",pa,80)},P=function(a,b,c,d){a[b]=function(){F(d);return c.apply(this,arguments)}},R=function(a,b,c,d){Q[s][a]=
+function(){F(c);return ma(this.a.get(b),d)}},S=function(a,b,c,d,e){Q[s][a]=function(a){F(c);e==g?this.a.set(b,ma(a,d)):this.a.set(b,e)}},cc=function(a,b){return{type:b,target:a,stopPropagation:function(){throw"aborted";}}};var dc=function(a,b){return b!=="/"?!1:(a[n]("www.google.")==0||a[n](".google.")==0||a[n]("google.")==0)&&!(a[n]("google.org")>-1)?!0:!1},ec=function(a){var b=a.get(Da),c=a[w](L,"/");dc(b,c)&&a[u]()};var ic=function(){var a={},b={},c=new fc;this.g=function(a,b){c.add(a,b)};var d=new fc;this.d=function(a,b){d.add(a,b)};var e=!1,f=!1,k=!0;this.G=function(){e=!0};this.f=function(a){this[ea]();this.set(Nb,a,!0);e=!1;d.execute(this);e=!0;b={};this.i()};this.load=function(){e&&(e=!1,this.na(),gc(this),f||(f=!0,c.execute(this),hc(this),gc(this)),e=!0)};this.i=function(){if(e)if(f)e=!1,hc(this),e=!0;else this[ea]()};this.get=function(c){c&&c[m](0)=="_"&&this[ea]();return b[c]!==g?b[c]:a[c]};this.set=
+function(c,d,e){c&&c[m](0)=="_"&&this[ea]();e?b[c]=d:a[c]=d;c&&c[m](0)=="_"&&this.i()};this.m=function(b){a[b]=this.b(b,0)+1};this.b=function(a,b){var c=this.get(a);return c==g||c===""?b:c*1};this.getString=function(a,b){var c=this.get(a);return c==g?b:c+""};this.na=function(){if(k){var b=this[w](Da,""),c=this[w](L,"/");dc(b,c)||(a[K]=a[Ja]&&b!=""?D(b):1,k=!1)}}};ic[s].stopPropagation=function(){throw"aborted";};function jc(a,b){for(var b=b||[],c=0;c<b[r];c++){var d=b[c];if(""+a==d||d[n](a+".")==0)return d}return"-"}
+var lc=function(a,b,c){c=c?"":a[w](K,"1");b=b[t](".");if(b[r]!==6||kc(b[0],c))return!1;var c=b[1]*1,d=b[2]*1,e=b[3]*1,f=b[4]*1,b=b[5]*1;if(!(c>=0&&d>0&&e>0&&f>0&&b>=0))return F(110),!1;a.set(N,c);a.set(sb,d);a.set(ub,e);a.set(vb,f);a.set(wb,b);return!0},mc=function(a){var b=a.get(N),c=a.get(sb),d=a.get(ub),e=a.get(vb),f=a.b(wb,1);b==g?F(113):b==NaN&&F(114);b>=0&&c>0&&d>0&&e>0&&f>=0||F(115);return[a.b(K,1),b!=g?b:"-",c||"-",d||"-",e||"-",f][y](".")},nc=function(a){return[a.b(K,1),a.b(zb,0),a.b(O,1),
+a.b(Ab,0)][y](".")},oc=function(a,b,c){var c=c?"":a[w](K,"1"),d=b[t](".");if(d[r]!==4||kc(d[0],c))d=h;a.set(zb,d?d[1]*1:0);a.set(O,d?d[2]*1:10);a.set(Ab,d?d[3]*1:a.get(Ca));return d!=h||!kc(b,c)},pc=function(a,b){var c=E(a[w](qb,"")),d=[],e=a.get(M);if(!b&&e){for(var f=0;f<e[r];f++){var k=e[f];k&&k[ka]==1&&d[j](f+"="+E(k[ia])+"="+E(k[fa])+"=1")}d[r]>0&&(c+="|"+d[y](","))}return c?a.b(K,1)+"."+c:h},qc=function(a,b,c){c=c?"":a[w](K,"1");b=b[t](".");if(b[r]<2||kc(b[0],c))return!1;b=b.slice(1)[y](".")[t]("|");
+b[r]>0&&a.set(qb,G(b[0]));if(b[r]<=1)return!0;for(var c=b[1][t](b[1][n](",")==-1?"^":","),d=0;d<c[r];d++){var e=c[d][t]("=");if(e[r]==4){var f={};ca(f,G(e[1]));f.value=G(e[2]);f.scope=1;a.get(M)[e[0]]=f}}b[1][n]("^")>=0&&F(125);return!0},sc=function(a,b){var c=rc(a,b);return c?[a.b(K,1),a.b(Bb,0),a.b(Cb,1),a.b(Db,1),c][y]("."):""},rc=function(a){function b(b,e){if(!C(a.get(b))){var f=a[w](b,""),f=f[t](" ")[y]("%20"),f=f[t]("+")[y]("%20");c[j](e+"="+f)}}var c=[];b(Fb,"utmcid");b(Jb,"utmcsr");b(Hb,
+"utmgclid");b(Ib,"utmdclid");b(Gb,"utmccn");b(Kb,"utmcmd");b(Lb,"utmctr");b(Mb,"utmcct");return c[y]("|")},uc=function(a,b,c){c=c?"":a[w](K,"1");b=b[t](".");if(b[r]<5||kc(b[0],c))return a.set(Bb,g),a.set(Cb,g),a.set(Db,g),a.set(Fb,g),a.set(Gb,g),a.set(Jb,g),a.set(Kb,g),a.set(Lb,g),a.set(Mb,g),a.set(Hb,g),a.set(Ib,g),!1;a.set(Bb,b[1]*1);a.set(Cb,b[2]*1);a.set(Db,b[3]*1);tc(a,b.slice(4)[y]("."));return!0},tc=function(a,b){function c(a){return(a=b[ga](a+"=(.*?)(?:\\|utm|$)"))&&a[r]==2?a[1]:g}function d(b,
+c){c&&(c=e?G(c):c[t]("%20")[y](" "),a.set(b,c))}b[n]("=")==-1&&(b=G(b));var e=c("utmcvr")=="2";d(Fb,c("utmcid"));d(Gb,c("utmccn"));d(Jb,c("utmcsr"));d(Kb,c("utmcmd"));d(Lb,c("utmctr"));d(Mb,c("utmcct"));d(Hb,c("utmgclid"));d(Ib,c("utmdclid"))},kc=function(a,b){return b?a!=b:!/^\d+$/.test(a)};var fc=function(){this.q=[]};fc[s].add=function(a,b){this.q[j]({name:a,ua:b})};fc[s].execute=function(a){try{for(var b=0;b<this.q[r];b++)this.q[b].ua.call(T,a)}catch(c){}};function vc(a){a.get(Wa)!=100&&a.get(N)%1E4>=a.get(Wa)*100&&a[u]()}function wc(a){xc()&&a[u]()}function yc(a){I[v].protocol=="file:"&&a[u]()}function zc(a){a.get(gb)||a.set(gb,I.title,!0);a.get(fb)||a.set(fb,I[v].pathname+I[v].search,!0)};var Ac=new function(){var a=[];this.set=function(b){a[b]=!0};this.va=function(){for(var b=[],c=0;c<a[r];c++)a[c]&&(b[i.floor(c/6)]^=1<<c%6);for(c=0;c<b[r];c++)b[c]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"[m](b[c]||0);return b[y]("")+"~"}};function F(a){Ac.set(a)};var T=window,I=document,xc=function(){var a=T._gaUserPrefs;return a&&a.ioo&&a.ioo()},Bc=function(a,b){setTimeout(a,b)},U=function(a){for(var b=[],c=I.cookie[t](";"),a=RegExp("^\\s*"+a+"=\\s*(.*?)\\s*$"),d=0;d<c[r];d++){var e=c[d][ga](a);e&&b[j](e[1])}return b},V=function(a,b,c,d,e){var f;f=xc()?!1:dc(d,c)?!1:!0;if(f){if(b&&T[la].userAgent[n]("Firefox")>=0){b=b[da](/\n|\r/g," ");f=0;for(var k=b[r];f<k;++f){var o=b.charCodeAt(f)&255;if(o==10||o==13)b=b[x](0,f)+"?"+b[x](f+1)}}b&&b[r]>2E3&&(b=b[x](0,
+2E3),F(69));a=a+"="+b+"; path="+c+"; ";e&&(a+="expires="+(new Date((new Date).getTime()+e)).toGMTString()+"; ");d&&(a+="domain="+d+";");I.cookie=a}};var Cc,Dc,Ec=function(){if(!Cc){var a={},b=T[la],c=T.screen;a.C=c?c.width+"x"+c.height:"-";a.B=c?c.colorDepth+"-bit":"-";a.language=(b&&(b.language||b.browserLanguage)||"-")[A]();a.javaEnabled=b&&b.javaEnabled()?1:0;a.characterSet=I.characterSet||I.charset||"-";Cc=a}},Fc=function(){Ec();for(var a=Cc,b=T[la],a=b.appName+b.version+a.language+b.platform+b.userAgent+a.javaEnabled+a.C+a.B+(I.cookie?I.cookie:"")+(I.referrer?I.referrer:""),b=a[r],c=T.history[r];c>0;)a+=c--^b++;return D(a)},Gc=function(a){Ec();
+var b=Cc;a.set(jb,b.C);a.set(kb,b.B);a.set(nb,b.language);a.set(ob,b.characterSet);a.set(lb,b.javaEnabled);if(a.get(Ka)&&a.get(La)){if(!(b=Dc)){var c,d,e;d="ShockwaveFlash";if((b=(b=T[la])?b.plugins:g)&&b[r]>0)for(c=0;c<b[r]&&!e;c++)d=b[c],d[ia][n]("Shockwave Flash")>-1&&(e=d.description[t]("Shockwave Flash ")[1]);else{d=d+"."+d;try{c=new ActiveXObject(d+".7"),e=c.GetVariable("$version")}catch(f){}if(!e)try{c=new ActiveXObject(d+".6"),e="WIN 6,0,21,0",c.AllowScriptAccess="always",e=c.GetVariable("$version")}catch(k){}if(!e)try{c=
+new ActiveXObject(d),e=c.GetVariable("$version")}catch(o){}e&&(e=e[t](" ")[1][t](","),e=e[0]+"."+e[1]+" r"+e[2])}b=e?e:"-"}Dc=b;a.set(mb,Dc)}else a.set(mb,"-")};var W=function(){P(W[s],"push",W[s][j],5);P(W[s],"_createAsyncTracker",W[s].wa,33);P(W[s],"_getAsyncTracker",W[s].xa,34)};W[s].wa=function(a,b){return Z.k(a,b||"")};W[s].xa=function(a){return Z.p(a)};W[s].push=function(a){for(var b=arguments,c=0,d=0;d<b[r];d++)try{if(typeof b[d]==="function")b[d]();else{var e="",f=b[d][0],k=f.lastIndexOf(".");k>0&&(e=f[x](0,k),f=f[x](k+1));var o=e=="_gat"?Z:e=="_gaq"?Hc:Z.p(e);o[f].apply(o,b[d].slice(1))}}catch(l){c++}return c};var Kc=function(){function a(a,b,c,d){g==f[a]&&(f[a]={});g==f[a][b]&&(f[a][b]=[]);f[a][b][c]=d}function b(a,b,c){if(g!=f[a]&&g!=f[a][b])return f[a][b][c]}function c(a,b){if(g!=f[a]&&g!=f[a][b]){f[a][b]=g;var c=!0,d;for(d=0;d<k[r];d++)if(g!=f[a][k[d]]){c=!1;break}c&&(f[a]=g)}}function d(a){var b="",c=!1,d,e;for(d=0;d<k[r];d++)if(e=a[k[d]],g!=e){c&&(b+=k[d]);for(var c=[],f=g,X=g,X=0;X<e[r];X++)if(g!=e[X]){f="";X!=Y&&g==e[X-1]&&(f+=X[p]()+ha);for(var Mc=e[X],Nc="",tb=g,Vb=g,Wb=g,tb=0;tb<Mc[r];tb++)Vb=
+Mc[m](tb),Wb=z[Vb],Nc+=g!=Wb?Wb:Vb;f+=Nc;c[j](f)}b+=o+c[y](q)+l;c=!1}else c=!0;return b}var e=this,f=[],k=["k","v"],o="(",l=")",q="*",ha="!",z={"'":"'0"};z[l]="'1";z[q]="'2";z[ha]="'3";var Y=1;e.qa=function(a){return g!=f[a]};e.n=function(){for(var a="",b=0;b<f[r];b++)g!=f[b]&&(a+=b[p]()+d(f[b]));return a};e.pa=function(a){if(a==g)return e.n();for(var b=a.n(),c=0;c<f[r];c++)g!=f[c]&&!a.qa(c)&&(b+=c[p]()+d(f[c]));return b};e.e=function(b,c,d){if(!Ic(d))return!1;a(b,"k",c,d);return!0};e.j=function(b,
+c,d){if(!Jc(d))return!1;a(b,"v",c,d[p]());return!0};e.w=function(a,c){return b(a,"k",c)};e.z=function(a,c){return b(a,"v",c)};e.u=function(a){c(a,"k")};e.v=function(a){c(a,"v")};P(e,"_setKey",e.e,89);P(e,"_setValue",e.j,90);P(e,"_getKey",e.w,87);P(e,"_getValue",e.z,88);P(e,"_clearKey",e.u,85);P(e,"_clearValue",e.v,86)};function Ic(a){return typeof a=="string"}function Jc(a){return typeof a!="number"&&(g==Number||!(a instanceof Number))||i.round(a)!=a||a==NaN||a==Infinity?!1:!0};var Lc=function(a){var b=T.gaGlobal;a&&!b&&(T.gaGlobal=b={});return b},Oc=function(){var a=Lc(!0).hid;if(a==h)a=oa(),Lc(!0).hid=a;return a},Pc=function(a){a.set(ib,Oc());var b=Lc();if(b&&b.dh==a.get(K)){var c=b.sid;c&&(c=="0"&&F(112),a.set(vb,c),a.get(pb)&&a.set(ub,c));b=b.vid;a.get(pb)&&b&&(b=b[t]("."),b[1]*1||F(112),a.set(N,b[0]*1),a.set(sb,b[1]*1))}};var Qc,Rc=function(a,b,c){var d=a[w](Da,""),e=a[w](L,"/"),a=a.b(Ea,0);V(b,c,e,d,a)},hc=function(a){var b=a[w](Da,"");a.b(K,1);var c=a[w](L,"/");V("__utma",mc(a),c,b,a.get(Ea));V("__utmb",nc(a),c,b,a.get(Fa));V("__utmc",""+a.b(K,1),c,b);var d=sc(a,!0);d?V("__utmz",d,c,b,a.get(Ga)):V("__utmz","",c,b,-1);(d=pc(a,!1))?V("__utmv",d,c,b,a.get(Ea)):V("__utmv","",c,b,-1)},gc=function(a){var b=a.b(K,1);if(!lc(a,jc(b,U("__utma"))))return a.set(rb,!0),!1;var c=!oc(a,jc(b,U("__utmb")));a.set(yb,c);uc(a,jc(b,
+U("__utmz")));qc(a,jc(b,U("__utmv")));Qc=!c;return!0},Sc=function(a){!Qc&&!(U("__utmb")[r]>0)&&(V("__utmd","1",a[w](L,"/"),a[w](Da,""),1E4),U("__utmd")[r]==0&&a[u]())};var Vc=function(a){a.get(N)==g?Tc(a):a.get(rb)&&!a.get($b)?Tc(a):a.get(yb)&&Uc(a)},Wc=function(a){a.get(Eb)&&!a.get(xb)&&(Uc(a),a.set(Cb,a.get(wb)))},Tc=function(a){var b=a.get(Ca);a.set(pb,!0);a.set(N,oa()^Fc(a)&2147483647);a.set(qb,"");a.set(sb,b);a.set(ub,b);a.set(vb,b);a.set(wb,1);a.set(xb,!0);a.set(zb,0);a.set(O,10);a.set(Ab,b);a.set(M,[]);a.set(rb,!1);a.set(yb,!1)},Uc=function(a){a.set(ub,a.get(vb));a.set(vb,a.get(Ca));a.m(wb);a.set(xb,!0);a.set(zb,0);a.set(O,10);a.set(Ab,a.get(Ca));a.set(yb,
+!1)};var Xc="daum:q,eniro:search_word,naver:query,pchome:q,images.google:q,google:q,yahoo:p,yahoo:q,msn:q,bing:q,aol:query,aol:encquery,aol:q,lycos:query,ask:q,altavista:q,netscape:query,cnn:query,about:terms,mamma:q,alltheweb:q,voila:rdata,virgilio:qs,live:q,baidu:wd,alice:qs,yandex:text,najdi:q,mama:query,seznam:q,search:q,wp:szukaj,onet:qt,szukacz:q,yam:k,kvasir:q,sesam:q,ozu:q,terra:query,mynet:q,ekolay:q,rambler:query".split(","),cd=function(a){if(a.get(Ma)&&!a.get($b)){for(var b=!C(a.get(Fb))||!C(a.get(Jb))||
+!C(a.get(Hb))||!C(a.get(Ib)),c={},d=0;d<Yc[r];d++){var e=Yc[d];c[e]=a.get(e)}d=va(I[v].href,a.get(Ia));if(!(sa(d.c.get(a.get(Va)))=="1"&&b)&&(!Zc(a,d)&&!$c(a)&&!b&&a.get(xb)&&a.get(xb)&&ad(a,g,"(direct)",g,g,"(direct)","(none)",g,g),a.set(Eb,bd(a,c)),b=a.get(Jb)=="(direct)"&&a.get(Gb)=="(direct)"&&a.get(Kb)=="(none)",a.get(Eb)||a.get(xb)&&!b))a.set(Bb,a.get(Ca)),a.set(Cb,a.get(wb)),a.m(Db)}},Zc=function(a,b){function c(c,d){var d=d||"-",e=sa(b.c.get(a.get(c)));return e&&e!="-"?G(e):d}var d=sa(b.c.get(a.get(Oa)))||
+"-",e=sa(b.c.get(a.get(Ra)))||"-",f=sa(b.c.get(a.get(Qa)))||"-",k=sa(b.c.get("dclid"))||"-",o=c(Pa,"(not set)"),l=c(Sa,"(not set)"),q=c(Ta),ha=c(Ua);if(C(d)&&C(f)&&C(k)&&C(e))return!1;if(C(q)){var z=xa(a.get(hb),a.get(L)),z=va(z,!0);(z=dd(a,z))&&!C(z[1]&&!z[2])&&(q=z[1])}ad(a,d,e,f,k,o,l,q,ha);return!0},$c=function(a){var b=xa(a.get(hb),a.get(L)),c=va(b,!0);if(!(b!=g&&b!=h&&b!=""&&b!="0"&&b!="-"&&b[n]("://")>=0)||c&&c[ja][n]("google")>-1&&c.c.contains("q")&&c.path=="cse")return!1;if((b=dd(a,c))&&
+!b[2])return ad(a,g,b[0],g,g,"(organic)","organic",b[1],g),!0;else if(b)return!1;if(a.get(xb))a:{for(var b=a.get(bb),d=ua(c[ja]),e=0;e<b[r];++e)if(d[n](b[e])>-1){a=!1;break a}ad(a,g,d,g,g,"(referral)","referral",g,"/"+c.path);a=!0}else a=!1;return a},dd=function(a,b){for(var c=a.get($a),d=0;d<c[r];++d){var e=c[d][t](":");if(b[ja][n](e[0][A]())>-1){var f=H(b.c.get(e[1]));if(f){a:{for(var c=f,d=a.get(ab),c=G(c)[A](),k=0;k<d[r];++k)if(c==d[k]){c=!0;break a}c=!1}return[e[0],f,c]}}}return h},ad=function(a,
+b,c,d,e,f,k,o,l){a.set(Fb,b);a.set(Jb,c);a.set(Hb,d);a.set(Ib,e);a.set(Gb,f);a.set(Kb,k);a.set(Lb,o);a.set(Mb,l)},Yc=[Gb,Fb,Hb,Ib,Jb,Kb,Lb,Mb],bd=function(a,b){function c(a){a=(""+a)[t]("+")[y]("%20");return a=a[t](" ")[y]("%20")}for(var d=0;d<Yc[r];d++){var e=Yc[d],f=b[e]||"-",e=a.get(e)||"-";if(c(f)!=c(e))return!0}return!1};var fd=function(a){ed(a,I[v].href)?(a.set($b,!0),F(12)):a.set($b,!1)},ed=function(a,b){if(!a.get(Ha))return!1;var c=va(b,a.get(Ia)),d=H(c.c.get("__utma")),e=H(c.c.get("__utmb")),f=H(c.c.get("__utmc")),k=H(c.c.get("__utmx")),o=H(c.c.get("__utmz")),l=H(c.c.get("__utmv")),c=H(c.c.get("__utmk"));if(D(""+d+e+f+k+o+l)!=c){d=G(d);e=G(e);f=G(f);k=G(k);a:{for(var f=d+e+f+k,q=0;q<3;q++){for(var ha=0;ha<3;ha++){if(c==D(f+o+l)){F(127);c=[o,l];break a}var z=o[da](/ /g,"%20"),Y=l[da](/ /g,"%20");if(c==D(f+z+Y)){F(128);
+c=[z,Y];break a}z=z[da](/\+/g,"%20");Y=Y[da](/\+/g,"%20");if(c==D(f+z+Y)){F(129);c=[z,Y];break a}o=G(o)}l=G(l)}c=g}if(!c)return!1;o=c[0];l=c[1]}if(!lc(a,d,!0))return!1;oc(a,e,!0);uc(a,o,!0);qc(a,l,!0);gd(a,k,!0);return!0},id=function(a,b,c){var d;d=mc(a)||"-";var e=nc(a)||"-",f=""+a.b(K,1)||"-",k=hd(a)||"-",o=sc(a,!1)||"-",a=pc(a,!1)||"-",l=D(""+d+e+f+k+o+a),q=[];q[j]("__utma="+d);q[j]("__utmb="+e);q[j]("__utmc="+f);q[j]("__utmx="+k);q[j]("__utmz="+o);q[j]("__utmv="+a);q[j]("__utmk="+l);d=q[y]("&");
+if(!d)return b;e=b[n]("#");return c?e<0?b+"#"+d:b+"&"+d:(c="",f=b[n]("?"),e>0&&(c=b[x](e),b=b[x](0,e)),f<0?b+"?"+d+c:b+"&"+d+c)};var jd="|",ld=function(a,b,c,d,e,f,k,o,l){var q=kd(a,b);q||(q={},a.get(cb)[j](q));q.id_=b;q.affiliation_=c;q.total_=d;q.tax_=e;q.shipping_=f;q.city_=k;q.state_=o;q.country_=l;q.items_=q.items_||[];return q},md=function(a,b,c,d,e,f,k){var a=kd(a,b)||ld(a,b,"",0,0,0,"","",""),o;a:{if(a&&a.items_){o=a.items_;for(var l=0;l<o[r];l++)if(o[l].sku_==c){o=o[l];break a}}o=h}l=o||{};l.transId_=b;l.sku_=c;l.name_=d;l.category_=e;l.price_=f;l.quantity_=k;o||a.items_[j](l);return l},kd=function(a,b){for(var c=
+a.get(cb),d=0;d<c[r];d++)if(c[d].id_==b)return c[d];return h};var nd,od=function(a){var f;var e;if(!nd){var b;b=I[v].hash;var c=T[ia],d=/^#?gaso=([^&]*)/;if(f=(e=(b=b&&b[ga](d)||c&&c[ga](d))?b[1]:H(U("GASO")),b=e)&&b[ga](/^(?:\|([-0-9a-z.]{1,40})\|)?([-.\w]{10,1200})$/i),c=f)if(Rc(a,"GASO",""+b),Z._gasoDomain=a.get(Da),Z._gasoCPath=a.get(L),b="https://"+((c[1]||"www")+".google.com")+"/analytics/reporting/overlay_js?gaso="+c[2]+"&"+oa())a=I.createElement("script"),a.type="text/javascript",a.async=!0,a.src=b,a.id="_gasojs",a.onload=g,b=I.getElementsByTagName("script")[0],
+b.parentNode.insertBefore(a,b);nd=!0}};var gd=function(a,b,c){c&&(b=G(b));c=a.b(K,1);b=b[t](".");!(b[r]<2)&&/^\d+$/.test(b[0])&&(b[0]=""+c,Rc(a,"__utmx",b[y](".")))},hd=function(a,b){var c=jc(a.get(K),U("__utmx"));c=="-"&&(c="");return b?E(c):c};var sd=function(a,b){if(a.b(N,0)%100>=a.b(Zb,0))return!1;var c=pd();c==g&&(c=qd());if(c==g||c==Infinity||isNaN(c))return!1;c>0?b(rd(c)):qa(T,"load",function(){sd(a,b)},!1);return!0},rd=function(a){var b=new Kc,c=i.min(i.floor(a/100),5E3);b.e(14,1,c>0?c+"00":"0");b.j(14,1,a);return b},pd=function(){var a=T.performance||T.webkitPerformance;return(a=a&&a.timing)&&a.loadEventStart-a.fetchStart},qd=function(){if(T.top==T){var a=T.external,b=a&&a.onloadT;a&&!a.isValidLoadTime&&(b=g);b>2147483648&&(b=g);
+b>0&&a.setPageReadyTime();return b}};var Q=function(a,b,c){function d(a){return function(b){if((b=b.get(ac)[a])&&b[r])for(var c=cc(e,a),d=0;d<b[r];d++)b[d].call(e,c)}}var e=this;this.a=new ic;this.get=function(a){return this.a.get(a)};this.set=function(a,b,c){this.a.set(a,b,c)};this.set(za,b||"UA-XXXXX-X");this.set(Ba,a||"");this.set(Aa,c||"");this.set(Ca,i.round((new Date).getTime()/1E3));this.set(L,"/");this.set(Ea,63072E6);this.set(Ga,15768E6);this.set(Fa,18E5);this.set(Ha,!1);this.set(Za,50);this.set(Ia,!1);this.set(Ja,!0);this.set(Ka,
+!0);this.set(La,!0);this.set(Ma,!0);this.set(Na,!0);this.set(Pa,"utm_campaign");this.set(Oa,"utm_id");this.set(Qa,"gclid");this.set(Ra,"utm_source");this.set(Sa,"utm_medium");this.set(Ta,"utm_term");this.set(Ua,"utm_content");this.set(Va,"utm_nooverride");this.set(Wa,100);this.set(Zb,10);this.set(Xa,"/__utm.gif");this.set(Ya,1);this.set(cb,[]);this.set(M,[]);this.set($a,Xc);this.set(ab,[]);this.set(bb,[]);this.r("auto");this.set(hb,I.referrer);this.set(ac,{hit:[],load:[]});this.a.g("0",fd);this.a.g("1",
+Vc);this.a.g("2",cd);this.a.g("3",Wc);this.a.g("4",d("load"));this.a.g("5",od);this.a.d("A",wc);this.a.d("B",yc);this.a.d("C",Vc);this.a.d("D",vc);this.a.d("E",ec);this.a.d("F",td);this.a.d("G",Sc);this.a.d("H",zc);this.a.d("I",Gc);this.a.d("J",Pc);this.a.d("K",d("hit"));this.a.d("L",ud);this.a.d("M",vd);this.get(Ca)===0&&F(111);this.a.G()};B=Q[s];B.h=function(){var a=this.get(db);a||(a=new Kc,this.set(db,a));return a};
+B.oa=function(a){for(var b in a){var c=a[b];a.hasOwnProperty(b)&&typeof c!="function"&&this.set(b,c,!0)}};B.ka=function(a){a&&a!=g&&(a.constructor+"")[n]("String")>-1?(F(13),this.set(fb,a,!0)):typeof a==="object"&&a!==h&&this.oa(a);this.a.f("page")};B.t=function(a,b,c,d,e){if(a==""||!Ic(a)||b==""||!Ic(b))return!1;if(c!=g&&!Ic(c))return!1;if(d!=g&&!Jc(d))return!1;this.set(Qb,a,!0);this.set(Rb,b,!0);this.set(Sb,c,!0);this.set(Tb,d,!0);this.set(Pb,!!e,!0);this.a.f("event");return!0};
+B.la=function(a,b,c,d){if(!a||!b)return!1;this.set(Ub,a[x](0,15),!0);this.set(Xb,b[x](0,15),!0);this.set(Yb,c||I[v].href,!0);d&&this.set(fb,d,!0);this.a.f("social");return!0};B.ja=function(){var a=this;return sd(this.a,function(b){a.s(b)})};B.ma=function(){this.a.f("trans")};B.s=function(a){this.set(eb,a,!0);this.a.f("event")};B.S=function(a){this.l();var b=this;return{_trackEvent:function(c,d,e){F(91);b.t(a,c,d,e)}}};B.V=function(a){return this.get(a)};
+B.da=function(a,b){if(a)if(a!=g&&(a.constructor+"")[n]("String")>-1)this.set(a,b);else if(typeof a=="object")for(var c in a)a.hasOwnProperty(c)&&this.set(c,a[c])};B.addEventListener=function(a,b){var c=this.get(ac)[a];c&&c[j](b)};B.removeEventListener=function(a,b){for(var c=this.get(ac)[a],d=0;c&&d<c[r];d++)if(c[d]==b){c.splice(d,1);break}};B.X=function(){return"5.1.5"};B.r=function(a){this.get(Ja);a=a=="auto"?ua(I.domain):!a||a=="-"||a=="none"?"":a[A]();this.set(Da,a)};
+B.ba=function(a){this.set(Ja,!!a)};B.W=function(a,b){return id(this.a,a,b)};B.link=function(a,b){if(this.a.get(Ha)&&a){var c=id(this.a,a,b);I[v].href=c}};B.aa=function(a,b){this.a.get(Ha)&&a&&a.action&&(a.action=id(this.a,a.action,b))};
+B.ea=function(){this.l();var a=this.a,b=I.getElementById?I.getElementById("utmtrans"):I.utmform&&I.utmform.utmtrans?I.utmform.utmtrans:h;if(b&&b[fa]){a.set(cb,[]);for(var b=b[fa][t]("UTM:"),c=0;c<b[r];c++){b[c]=na(b[c]);for(var d=b[c][t](jd),e=0;e<d[r];e++)d[e]=na(d[e]);"T"==d[0]?ld(a,d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[8]):"I"==d[0]&&md(a,d[1],d[2],d[3],d[4],d[5],d[6])}}};B.L=function(a,b,c,d,e,f,k,o){return ld(this.a,a,b,c,d,e,f,k,o)};B.J=function(a,b,c,d,e,f){return md(this.a,a,b,c,d,e,f)};
+B.fa=function(a){jd=a||"|"};B.ca=function(a,b,c,d){var e=this.a;if(a<=0||a>e.get(Za))a=!1;else if(!b||!c||E(b)[r]+E(c)[r]>64)a=!1;else{d!=1&&d!=2&&(d=3);var f={};ca(f,b);f.value=c;f.scope=d;e.get(M)[a]=f;a=!0}a&&this.a.i();return a};B.U=function(a){this.a.get(M)[a]=g;this.a.i()};B.Y=function(a){return(a=this.a.get(M)[a])&&a[ka]==1?a[fa]:g};B.ha=function(a,b,c){this.h().e(a,b,c)};B.ia=function(a,b,c){this.h().j(a,b,c)};B.Z=function(a,b){return this.h().w(a,b)};
+B.$=function(a,b){return this.h().z(a,b)};B.P=function(a){this.h().u(a)};B.Q=function(a){this.h().v(a)};B.T=function(){return new Kc};B.H=function(a){a&&this.get(ab)[j](a[A]())};B.M=function(){this.set(ab,[])};B.I=function(a){a&&this.get(bb)[j](a[A]())};B.N=function(){this.set(bb,[])};B.K=function(a,b,c){if(a&&b){var d=this.get($a);d.splice(c?0:d[r],0,a+":"+b[A]())}};B.O=function(){this.set($a,[])};
+B.R=function(a){this.a[ea]();var b=this.get(L),c=hd(this.a);this.set(L,a);this.a.i();gd(this.a,c);this.set(L,b)};B.l=function(){this.a[ea]()};B.ga=function(a){a&&a!=""&&(this.set(qb,a),this.a.f("var"))};var td=function(a){a.get(Nb)!=="trans"&&a.b(zb,0)>=500&&a[u]();if(a.get(Nb)==="event"){var b=(new Date).getTime(),c=a.b(Ab,0),d=a.b(vb,0),c=i.floor(0.2*((b-(c!=d?c:c*1E3))/1E3));c>0&&(a.set(Ab,b),a.set(O,i.min(10,a.b(O,0)+c)));a.b(O,0)<=0&&a[u]()}},vd=function(a){a.get(Nb)==="event"&&a.set(O,i.max(0,a.b(O,10)-1))};var wd=function(){var a=[];this.add=function(b,c,d){d&&(c=E(""+c));a[j](b+"="+c)};this.toString=function(){return a[y]("&")}},xd=function(a,b){(b||a.get(Ya)!=2)&&a.m(zb)},yd=function(a,b){b.add("utmwv","5.1.5");b.add("utms",a.get(zb));b.add("utmn",oa());var c=I[v].hostname;C(c)||b.add("utmhn",c,!0);c=a.get(Wa);c!=100&&b.add("utmsp",c,!0)},Ad=function(a,b){b.add("utmac",a.get(za));a.get(Pb)&&b.add("utmni",1);zd(a,b);Z.o&&b.add("aip",1);b.add("utmu",Ac.va())},zd=function(a,b){function c(a,b){b&&d[j](a+
+"="+b+";")}var d=[];c("__utma",mc(a));c("__utmz",sc(a,!1));c("__utmv",pc(a,!0));c("__utmx",hd(a));b.add("utmcc",d[y]("+"),!0)},Bd=function(a,b){a.get(Ka)&&(b.add("utmcs",a.get(ob),!0),b.add("utmsr",a.get(jb)),b.add("utmsc",a.get(kb)),b.add("utmul",a.get(nb)),b.add("utmje",a.get(lb)),b.add("utmfl",a.get(mb),!0))},Cd=function(a,b){a.get(Na)&&a.get(gb)&&b.add("utmdt",a.get(gb),!0);b.add("utmhid",a.get(ib));b.add("utmr",xa(a.get(hb),a.get(L)),!0);b.add("utmp",E(a.get(fb),!0),!0)},Dd=function(a,b){for(var c=
+a.get(db),d=a.get(eb),e=a.get(M)||[],f=0;f<e[r];f++){var k=e[f];k&&(c||(c=new Kc),c.e(8,f,k[ia]),c.e(9,f,k[fa]),k[ka]!=3&&c.e(11,f,""+k[ka]))}!C(a.get(Qb))&&!C(a.get(Rb))&&(c||(c=new Kc),c.e(5,1,a.get(Qb)),c.e(5,2,a.get(Rb)),e=a.get(Sb),e!=g&&c.e(5,3,e),e=a.get(Tb),e!=g&&c.j(5,1,e));c?b.add("utme",c.pa(d),!0):d&&b.add("utme",d.n(),!0)},Ed=function(a,b,c){var d=new wd;xd(a,c);yd(a,d);d.add("utmt","tran");d.add("utmtid",b.id_,!0);d.add("utmtst",b.affiliation_,!0);d.add("utmtto",b.total_,!0);d.add("utmttx",
+b.tax_,!0);d.add("utmtsp",b.shipping_,!0);d.add("utmtci",b.city_,!0);d.add("utmtrg",b.state_,!0);d.add("utmtco",b.country_,!0);!c&&Ad(a,d);return d[p]()},Fd=function(a,b,c){var d=new wd;xd(a,c);yd(a,d);d.add("utmt","item");d.add("utmtid",b.transId_,!0);d.add("utmipc",b.sku_,!0);d.add("utmipn",b.name_,!0);d.add("utmiva",b.category_,!0);d.add("utmipr",b.price_,!0);d.add("utmiqt",b.quantity_,!0);!c&&Ad(a,d);return d[p]()},Gd=function(a,b){var c=a.get(Nb);if(c=="page")c=new wd,xd(a,b),yd(a,c),Dd(a,c),
+Bd(a,c),Cd(a,c),!b&&Ad(a,c),c=[c[p]()];else if(c=="event")c=new wd,xd(a,b),yd(a,c),c.add("utmt","event"),Dd(a,c),Bd(a,c),Cd(a,c),!b&&Ad(a,c),c=[c[p]()];else if(c=="var")c=new wd,xd(a,b),yd(a,c),c.add("utmt","var"),!b&&Ad(a,c),c=[c[p]()];else if(c=="trans")for(var c=[],d=a.get(cb),e=0;e<d[r];++e){c[j](Ed(a,d[e],b));for(var f=d[e].items_,k=0;k<f[r];++k)c[j](Fd(a,f[k],b))}else c=="social"?b?c=[]:(c=new wd,xd(a,b),yd(a,c),c.add("utmt","social"),c.add("utmsn",a.get(Ub),!0),c.add("utmsa",a.get(Xb),!0),
+c.add("utmsid",a.get(Yb),!0),Dd(a,c),Bd(a,c),Cd(a,c),Ad(a,c),c=[c[p]()]):c=[];return c},ud=function(a){var b,c=a.get(Ob),d=a.get(Ya);if(d==0||d==2){var e=a.get(Xa)+"?";b=Gd(a,!0);for(var f=0,k=b[r];f<k;f++)Hd(b[f],d!=2&&f==k-1&&c,e,!0)}if(d==1||d==2){b=Gd(a);f=0;for(k=b[r];f<k;f++)try{Hd(b[f],f==k-1&&c)}catch(o){var d=a,e=o,l=new wd;l.add("err",e[ia]);l.add("max",e.message);l.add("len",e.D);l.add("utmwv","5.1.5e");l.add("utmac",d.get(za));l.add("utmn",oa());Z.o&&l.add("aip",1);Hd(l[p]())}}};var Id="https:"==I[v].protocol?"https://ssl.google-analytics.com":"http://www.google-analytics.com",Jd=function(a){ca(this,"len");this.message=8192;this.D=a},Kd=function(a){ca(this,"ff2post");this.message=2036;this.D=a},Hd=function(a,b,c,d){b=b||pa;if(d||a[r]<=2036)Ld(a,b,c);else if(a[r]<=8192){if(T[la].userAgent[n]("Firefox")>=0&&![].reduce)throw new Kd(a[r]);Md(a,b)||Nd(a,b)}else throw new Jd(a[r]);},Ld=function(a,b,c){var c=c||Id+"/__utm.gif?",d=new Image(1,1);d.src=c+a;d.onload=function(){d.onload=
+h;b()}},Md=function(a,b){var c,d=Id+"/p/__utm.gif",e=T.XDomainRequest;if(e)c=new e,c.open("POST",d);else if(e=T.XMLHttpRequest)e=new e,"withCredentials"in e&&(c=e,c.open("POST",d,!0),c.setRequestHeader("Content-Type","text/plain"));if(c)return c.onreadystatechange=function(){c.readyState==4&&(b(),c=h)},c.send(a),!0},Nd=function(a,b){if(I.body){a=aa(a);try{var c=I.createElement('<iframe name="'+a+'"></iframe>')}catch(d){c=I.createElement("iframe"),ca(c,a)}c.height="0";c.width="0";c.style.display="none";
+c.style.visibility="hidden";var e=I[v],e=Id+"/u/post_iframe.html#"+aa(e.protocol+"//"+e[ja]+"/favicon.ico"),f=function(){c.src="";c.parentNode&&c.parentNode.removeChild(c)};qa(T,"beforeunload",f);var k=!1,o=0,l=function(){if(!k){try{if(o>9||c.contentWindow[v][ja]==I[v][ja]){k=!0;f();ra(T,"beforeunload",f);b();return}}catch(a){}o++;setTimeout(l,200)}};qa(c,"load",l);I.body.appendChild(c);c.src=e}else Bc(function(){Nd(a,b)},100)};var $=function(){this.o=!1;this.A={};this.ra=0;this._gasoCPath=this._gasoDomain=g;P($[s],"_createTracker",$[s].k,55);P($[s],"_getTracker",$[s].ta,0);P($[s],"_getTrackerByName",$[s].p,51);P($[s],"_anonymizeIp",$[s].sa,16);bc()};$[s].ta=function(a,b){return this.k(a,g,b)};$[s].k=function(a,b,c){b&&F(23);c&&F(67);b==g&&(b="~"+Z.ra++);return Z.A[b]=new Q(b,a,c)};$[s].p=function(a){a=a||"";return Z.A[a]||Z.k(g,a)};$[s].sa=function(){this.o=!0};var Od=function(a){if(I.webkitVisibilityState=="prerender")return!1;a();return!0};var Z=new $;var Pd=T._gat;Pd&&typeof Pd._getTracker=="function"?Z=Pd:T._gat=Z;var Hc=new W;(function(a){if(!Od(a)){F(123);var b=!1,c=function(){!b&&Od(a)&&(F(124),b=!0,ra(I,"webkitvisibilitychange",c))};qa(I,"webkitvisibilitychange",c)}})(function(){var a=T._gaq,b=!1;if(a&&typeof a[j]=="function"&&(b=Object[s][p].call(Object(a))=="[object Array]",!b)){Hc=a;return}T._gaq=Hc;b&&Hc[j].apply(Hc,a)});})();
+_text/javascript            1   <   S   b   t   ä   ®   ©    ¶  ¶)  ¶/  ¶8  ¶A  ¶W  ¶Ñ  ™∂  æ  æ  æ  æD  ¬u  œŒ  œÿ  œ·  –  ‘C  ’  ’  ’  ’D  Ÿw  ⁄7  ⁄A  ⁄J  ⁄y  ﬁ¿ æj æÖ æé æ¡ √ €2 €M €V €á ﬂœ Í∑ Í“ Í€ Î ÔØ j             8             j)

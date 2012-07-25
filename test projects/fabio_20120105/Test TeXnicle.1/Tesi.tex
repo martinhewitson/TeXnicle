@@ -1,0 +1,138 @@
+% DOCUMENTO PRINCIPALE DELLA TESI
+% Leggere i commenti nel file e i file PDF acclusi
+%
+% Ultima modifica: 10/10/2007
+
+\documentclass[nocite]{cls/dimeg04}
+%Le opzioni possibili sono:
+%  nocorr 	:non mette il correlatore
+%  nofront	:non mette il frontespizio (col logo unipd)
+%  nolatex	:non mette il retro-frontespizio (coll'indicazione del latex)
+%  nodedica	:non mette la pagina con la dedica
+%  nocite 	:non mette la pagina con la citazione
+
+\usepackage{latexsym}
+
+%per rendere l'indice cliccabile
+%\usepackage[dvips]{hyperref}
+\usepackage[pdftex]{hyperref}
+%\usepackage[ps2pdf,colorlinks]{hyperref}. 
+
+%per poter inserire le figure
+%\usepackage[dvips]{graphicx}
+\usepackage[pdftex]{graphicx}
+
+%per suddividere le figure in sottofigure
+%\usepackage{subfigure}
+
+%titoli e sillabazione in italiano
+\usepackage[italian]{babel}
+
+%per usare lettere greche in grassetto (inserito da Oscari)
+\usepackage{bm}
+
+%per allineare equazioni spezzate, etc. (inserito da Oscari)
+\usepackage{amsmath}
+
+%per figure allineate con 1 didascalia (inserito da Oscari)
+\usepackage{subfig}
+
+%creato da Oscari per pedici/apici senza math mode
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+
+%per simbolo dell'euro (inserito da Oscari)
+%\usepackage{eurosym}
+%\usepackage{textcomp}
+\usepackage{marvosym}
+
+%per forzare la posizione dell figure (inserito da Oscari)
+\usepackage{float}
+
+%per ruotare tabelle (inserito da Oscari)
+%\usepackage{lscape}
+
+%per andare a capo nelle celle delle tabelle (inserito da Oscari)
+\usepackage{tabularx}
+
+%per celle multiriga nelle tabelle (inserito da Oscari)
+\usepackage{multirow}
+
+%per ombre oggetti (inserito da Oscari)
+%\usepackage{pstricks}
+
+%correggere manualmente la sillabazione delle parole che il babel non sillaba correttamente
+\hyphenation{ro-bo-ti-ca me-di-ca}
+\hyphenation{ge-ne-ra-li}
+\hyphenation{ca-rat-te-ri-sti-che}
+\hyphenation{ci-ne-ma-ti-ca}
+
+
+%per poter usare l'ambiente verbatim (va benissimo per il codice sorgente)
+\usepackage{verbatim}
+
+%pacchetto floatflt.sty' che permette di avere figure a lato del testo 
+\usepackage[vflt]{floatflt}
+
+
+%regolazioni pagina
+\linespread{1.4} %interlinea
+\voffset-0.3cm   %'1 pollice + voffset' é la distanza tra la pagina e il bordo alto
+
+
+\frenchspacing
+\begin{document}
+
+
+%qui vanno specificati i dati della Tesi (rispettare Maiuscolo-Minuscolo !)
+\author{FABIO OSCARI}
+\title{STUDIO DI SISTEMI ROBOTICI ATTIVI INTERAGENTI PER RIEDUCAZIONE MOTORIA}
+\relatore{Ch.mo Prof. Ing. ALDO ROSSI} 
+\correlatore{Ch.mo Prof. Ing. ALBERTO TREVISANI}
+\annoa{XIV}
+
+% utilizzare la prima riga per tesi Specialistiche, la seconda per Triennali
+\tipoLaurea{INDIRIZZO MECCATRONICA E SISTEMI INDUSTRIALI}
+
+\dedica{alla mia famiglia e alla mia ragazza...}
+%\citazione{\textquotedblleft{} Ora ti dirň tutta la mia idea intorno alla Casa dello Specchio, bla bla \textquotedblright}
+%\autoreCitazione{Lewis Carroll - Alice attraverso lo specchio, 1871}
+
+
+%Inizio della tesi, numerazione latina, e indice
+\pagenumbering{Roman}
+\maketitle
+\tableofcontents
+
+%\include{Sommario}
+%\include{Introduzione}
+
+%Inizio del corpo della tesi, numerazione araba
+\pagestyle{headings}
+\setcounter{chapter}{0}\setcounter{section}{0}
+\pagenumbering{arabic}
+
+%Inclusione dei vari capitoli
+\part{Neuroriabilitazione della mano}
+\include{Cap1/capitolo1}
+%\include{Cap2/capitolo2}
+%\include{Cap3/capitolo3}
+%\include{Cap4/capitolo4}
+
+\part{Progettazione e validazione sperimentale di architettura di controllo per tele-valutazione e tele-riabilitazione della mano}
+
+%\include{Cap5/capitolo5}
+%\include{Cap6/capitolo6}
+
+\part{Progettazione e realizzazione di nuovo prototipo di ortesi motorizzata}
+
+\part{Controllo multi-feedback con sensory substitution}
+
+%Questi sono capitoli particolari, senza la scritta "capitolo"
+%\include{Conclusioni}
+%\include{Appendice/Appendice}
+%
+%\include{Bibliografia}
+%\include{Grazie}
+
+\end{document}

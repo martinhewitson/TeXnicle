@@ -1,0 +1,137 @@
+% 
+% This document is copyrighted by Robert G. Brown as of the latest 
+% revision date below, as are all earlier revisions.
+%
+% $Id: project.tex 37 2006-10-26 06:54:23Z rgb $
+%
+% Filename: project.tex
+% Description:  Latex sources for a simple article/project
+
+\documentclass{article}
+\usepackage{epsfig}
+\usepackage{html}
+
+% Useful parameters to set in the book documentclass.
+% \setlength{\topmargin}{-1.0in}
+% \setlength{\textheight}{9.2in}
+% \setlength{\oddsidemargin}{0.0in}
+% \setlength{\textwidth}{6.5in}
+%   EITHER comment both out OR uncomment both of these, usually.
+%   As it is, it doesn't indent but skips a small space between
+%   paragraphs, good for e.g. lecture notes, not so good for books
+%   or articles depending.
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.1in}
+
+\input{macros.tex}
+
+% Spare figure template
+%\begin{figure}
+%  \centerline{
+%    \def \epsfsize#1#2{0.5#1}
+%    \centerline{\epsfbox{vector.1.eps}}
+%  }
+%  \caption{This would be a figure.}
+%  \label{figure_label}
+%\end{figure}
+%
+% Inline unnumbered figure (no caption)
+% \def \epsfsize#1#2{0.5#1}
+% \centerline{\epsfbox{vector.1.eps}}
+% \medskip
+% 
+%
+
+\begin{document}
+
+\title{A Nifty Latex Template}
+
+\date{\today}
+
+\author{\bf Robert G. Brown \\
+Duke University Physics Department \\
+Durham, NC 27708-0305 \\
+rgb@phy.duke.edu}
+
+\maketitle
+
+\vspace*{\fill}
+
+\centerline{\large \bf Copyright Notice}
+\centerline{Copyright Robert G. Brown 2006}
+\centerline{See attached Open Publication License}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+% Inline figure example
+\def \epsfsize#1#2{0.5#1}
+\centerline{\epsfbox{project.eps}}
+
+% For all books and most complex documents (with many sections) it is
+% probably a good idea to break up the source into many smaller files, one
+% per chapter or section.  You could then input them like:
+% \input{section_one.tex} or \input{chapter_one.tex}
+% This document is very simple, so I don't bother, except for the OPL
+% which is "standard" to all my documents of this sort.  If you don't
+% like it or need it, comment it out or delete it and remove the file.
+\section{Section One}
+
+This is text in section one.
+
+It can contain inline math: $E = \hbar \omega$.
+
+It can contain numbered equations:
+\be
+  H\psi = E\psi = \hbar \omega \psi
+\ee
+
+It can even contain numbered aligned equation ``arrays'':
+\bea
+ H\psi & = & -i\hbar \partialdiv{\psi}{t} \nonumber \\
+       & = & \hbar \omega \psi \nonumber \\
+       & = & E \psi
+\eea
+
+
+\subsection{Subsectioning Text}
+
+Subsectioning text is certainly possible, and yields a trace in the
+table of contents (if any).
+
+\subsubsection{Subsubsectioned Text}
+
+Text at this level still gets a TOC entry in some document classes, but
+not all.  TOC's usually only go three levels deep, four if you use
+the ``part'' command in a book.  Still useful for the formatting.
+
+That's {\em really} about it.  You can do stuff like {\bf boldfacing}
+and using {\tiny tiny} fonts or {\huge HUGE} fonts, but you probably
+shouldn't as they make the text look odd.  You can do tables and tabs
+and much more, but that is too much to demo in a simple template like
+this, especially when a lot of that will vary as you add packages.
+
+Simple latex is the best, unless you are writing for a very specific
+purpose with very specific requirements.  It is what latex is really
+designed for -- the whole idea of markup is to trust {\em professionals}
+to lay out appropriate fonts, sizes, and so on for various document
+objects in a completely uniform way.  Latex documents invariably look
+like they are ripped right out of the pages of a book, even when they
+are really simple ones (like this one)!
+
+Good Luck!
+
+The following appendix is an {\em example} of a Gnu Open Publication
+License.  Don't worry, you can take this template and use it any way
+that you wish, with or without the OPL announcement.  However, if you
+use it you owe me a beer...
+
+\input{OPL.tex}
+
+\end{document}
+
+
+

@@ -1,0 +1,103 @@
+#!/bin/tcsh
+# Updated on 2006/10/17 - Thanks to Marc Schonbrun!
+#
+##########################
+# HOW TO USE THIS FILE:  #
+##########################
+#
+# 0) Set the variable LILYPONDFOLDER below to the absolute path
+#    of the folder containing the Lilypond application.
+#    For example, if you have put the Lilypond app in a folder
+#    called Music inside the Applications folder, the path
+#    is /Applications/Music and the line below must read
+#
+#       set LILYPONDFOLDER = /Applications/Music
+#
+#    If Lilypond is installed in the Applications folder,
+#    then just skip this step.
+#
+set TSBIN=$HOME/Library/TeXShop/bin
+set LTMKBIN=$HOME/Library/TeXShop/bin/tslatexmk
+set LILYPONDFOLDER = /Applications
+set path = ($path $LILYPONDFOLDER/LilyPond.app/Contents/Resources/bin/)
+
+#
+# 1) Rename this file by dropping the .txt suffix
+#    and put it into your Library/TeXShop/Engines folder.
+#
+# 2) Run the Terminal application (which you find in the Utilities folder)
+#    and, in the Terminal window, type:
+#
+#       cd  ~/Library/TeXShop/Engines
+#
+#    then, press the Enter key and type:
+#
+#       chmod +x Lilypond-LaTeX.engine
+#
+#    and press Enter again. The above command makes this script executable.
+#
+# 3) Switch to TeXShop, open a LaTeX file with Lilypond code,
+#    choose the Lilypond-LaTeX engine and typeset!
+#
+#######
+# HINT
+#######
+# 
+# Write:
+#
+#    %!TEX TS-program = Lilypond-LaTeX
+#
+# at the very beginning of your document: this will let TeXShop
+# automatically switch to the right engine!
+#
+#######
+# NOTE about including pictures with \includegraphics:
+#######
+#
+# you may want to include the following in the preamble of your
+# source file:
+#
+#    \usepackage{graphicx}
+#    \graphicspath{{../}}
+#
+# since the generated LaTeX file is put into a subdirectory
+# of the current directory.
+#
+# In general, if your directory structure is as follows
+#
+#   MyLilyPondDocs/
+#   MyLilyPondDocs/lilybook.lytex
+#   MyLilyPondDocs/MyPictures/
+#   MyLilyPondDocs/MyPictures/pic1.eps
+#   ...
+#   MyLilyPondDocs/MyPictures/picn.eps
+#
+#   the preamble of lilybook.lytex should contain:
+#
+#    \graphicspath{{../MyPictures/}}
+#
+# The trailing slash "/" is required!
+#
+# Delete existing output (PDF, Synctex, IDX) file
+ rmdir "$1:r"-out
+ rm "$1:r".pdf
+  rm "$1:r".synctex.gz
+
+  # Create directory to put all temporary stuff
+  # macht Lilypond-Book alleine
+  mkdir -p "$1:r"-out/
+    # Invoke L-B
+     lilypond-book --output="$1:r"-out --pdf "$1"
+     cd "$1:r"-out
+     ${LTMKBIN}/latexmk -pdf -r "${LTMKBIN}/xelatexmkrc" "$1"
+    # Copy output (PDF) file to parent directory
+     cp "$1:r".pdf ..
+     cp "$1:r".synctex.gz ..
+  # Delete temporary stuff
+   rm -rf *
+ cd ..
+  # Delete (empty) temp directory
+   rmdir "$1:r"-out
+  # Display output (PDF) file
+# open "$1:r".pdf
+

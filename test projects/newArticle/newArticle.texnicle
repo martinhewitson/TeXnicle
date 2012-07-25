@@ -1,0 +1,144 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>B063DCC9-77C3-47EB-99A6-5A1500BE7390</UUID>
+        <nextObjectID>108</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>358</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>Bookmark</key>
+                        <data>
+		DomRcT1vfHnhCpD4hL1oyiuZNfU1acRc5Sa8FV4eSzw=
+		</data>
+                        <key>File</key>
+                        <data>
+		g0dbBJCoqMq/YyTpIK/2Dwq9QbDIoJwXXAAngvjlug4=
+		</data>
+                        <key>Folder</key>
+                        <data>
+		Grij332X1rMYXqmN3lNQISkMHRf2/DdXELst812WKGE=
+		</data>
+                        <key>Project</key>
+                        <data>
+		vo1aWgOsgAms71hKtfeAG72uwKbTsY2VrKDDPGAOjjc=
+		</data>
+                        <key>ProjectItem</key>
+                        <data>
+		WtaPU9rm7J0aQWjjEf7sfCn2HZlql+cuYhRsDffn51Q=
+		</data>
+                        <key>Settings</key>
+                        <data>
+		/kR6J9LdHdGeQ3bOEG69CfXq/Glm07/1uVJBvThbtrk=
+		</data>
+                        <key>TeXFile</key>
+                        <data>
+		YMkOcubel3kPbZmFNGyeWzLDN8JOKBgXRj6LJdZfmms=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string>5</string>
+                    </array>
+                    <key>kMDItemKeywords</key>
+                    <array>
+                        <string>newArticle</string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="PROJECT" id="z102">
+        <attribute name="type" type="string">PDFLaTeX</attribute>
+        <attribute name="name" type="string">newArticle</attribute>
+        <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/test projects/newArticle</attribute>
+        <relationship name="mainfile" type="1/1" destination="TEXFILE" idrefs="z106"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z107"></relationship>
+        <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z103"></relationship>
+        <relationship name="items" type="0/0" destination="PROJECTITEM"></relationship>
+    </object>
+    <object type="SETTINGS" id="z103">
+        <attribute name="showstatusbar" type="bool">1</attribute>
+        <attribute name="openconsole" type="bool">1</attribute>
+        <attribute name="ncompile" type="int16">3</attribute>
+        <attribute name="enginename" type="string">pdflatex</attribute>
+        <attribute name="dops2pdf" type="bool">1</attribute>
+        <attribute name="dobibtex" type="bool">1</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+    </object>
+    <object type="FOLDER" id="z104">
+        <attribute name="sortindex" type="int32">3</attribute>
+        <attribute name="name" type="string">images</attribute>
+        <attribute name="isexpanded" type="bool">1</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM" idrefs="z108"></relationship>
+    </object>
+    <object type="FOLDER" id="z105">
+        <attribute name="sortindex" type="int32">2</attribute>
+        <attribute name="name" type="string">include</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+    </object>
+    <object type="TEXFILE" id="z106">
+        <attribute name="wasopen" type="bool">0</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {481, 655}}</attribute>
+        <attribute name="lasteditdate" type="date">345288894.35183298587799072266</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">345302392.34171599149703979492</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{0, 0}</attribute>
+        <attribute name="sortindex" type="int32">0</attribute>
+        <attribute name="name" type="string">newArticle_main.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./newArticle_main.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+    <object type="TEXFILE" id="z107">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {481, 655}}</attribute>
+        <attribute name="lasteditdate" type="date">345289135.43903297185897827148</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">345302480.19125598669052124023</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{0, 0}</attribute>
+        <attribute name="sortindex" type="int32">1</attribute>
+        <attribute name="name" type="string">untitled03.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./untitled03.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+    <object type="FILE" id="z108">
+        <attribute name="wasopen" type="bool">0</attribute>
+        <attribute name="lasteditdate" type="date">345289199.54514598846435546875</attribute>
+        <attribute name="istext" type="bool">0</attribute>
+        <attribute name="fileloaddate" type="date">345302393.43116301298141479492</attribute>
+        <attribute name="extension" type="string">pdf</attribute>
+        <attribute name="sortindex" type="int32">4</attribute>
+        <attribute name="name" type="string">lpf_icon.pdf</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./lpf_icon.pdf</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z104"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+</database>

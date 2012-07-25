@@ -1,0 +1,166 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE database SYSTEM "file:///System/Library/DTDs/CoreData.dtd">
+
+<database>
+    <databaseInfo>
+        <version>134481920</version>
+        <UUID>415C1D36-59CF-497C-8147-D5000631DE0F</UUID>
+        <nextObjectID>116</nextObjectID>
+        <metadata>
+            <plist version="1.0">
+                <dict>
+                    <key>NSPersistenceFrameworkVersion</key>
+                    <integer>358</integer>
+                    <key>NSStoreModelVersionHashes</key>
+                    <dict>
+                        <key>Bookmark</key>
+                        <data>
+		DomRcT1vfHnhCpD4hL1oyiuZNfU1acRc5Sa8FV4eSzw=
+		</data>
+                        <key>File</key>
+                        <data>
+		Ow+iGdBKIP6AijDPzNT2dGmjwrSu3RsK6bNp03vZ4jY=
+		</data>
+                        <key>Folder</key>
+                        <data>
+		Grij332X1rMYXqmN3lNQISkMHRf2/DdXELst812WKGE=
+		</data>
+                        <key>Project</key>
+                        <data>
+		WeS8dr2dP74D2G4eO7AvRrVbufOi0GR7gpB57bjBiG8=
+		</data>
+                        <key>ProjectItem</key>
+                        <data>
+		WtaPU9rm7J0aQWjjEf7sfCn2HZlql+cuYhRsDffn51Q=
+		</data>
+                        <key>Settings</key>
+                        <data>
+		/kR6J9LdHdGeQ3bOEG69CfXq/Glm07/1uVJBvThbtrk=
+		</data>
+                        <key>TeXFile</key>
+                        <data>
+		6CluIfoPedvZZaGidwNyxpUQEVkzbR2uHZVaqhL5Vl8=
+		</data>
+                        <key>UISettings</key>
+                        <data>
+		AL0Sr6YIEDccEl/u3ahjfjR2096wLe14w4hI35Vhx0U=
+		</data>
+                    </dict>
+                    <key>NSStoreModelVersionHashesVersion</key>
+                    <integer>3</integer>
+                    <key>NSStoreModelVersionIdentifiers</key>
+                    <array>
+                        <string>5</string>
+                    </array>
+                    <key>kMDItemKeywords</key>
+                    <array>
+                        <string>TransformerStationM</string>
+                    </array>
+                </dict>
+            </plist>
+        </metadata>
+    </databaseInfo>
+    <object type="BOOKMARK" id="z102">
+        <attribute name="linenumber" type="int64">0</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE" idrefs="z115"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z103">
+        <attribute name="text" type="string">\\usepackage{url}
+</attribute>
+        <attribute name="linenumber" type="int64">11</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z104">
+        <attribute name="text" type="string">\\usepackage{url}
+</attribute>
+        <attribute name="linenumber" type="int64">11</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z105">
+        <attribute name="text" type="string">Electromagnetic fields arouse a strong interest due to their diverse consequences. They provoke the appearance of potentials and currents in electric facilities in certain contexts. They also disturb the functioning of other electric and electronic devices. In addition, their interaction with living organisms and their possible physiological effects on them, are being studied\\cite{EMFWHO}. The latter is a controversial issue which generates concern and uneasiness in society.  As a result, it is necessary to quantify the values of the fields associated with the transportation and distribution of electric energy.
+</attribute>
+        <attribute name="linenumber" type="int64">63</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z106">
+        <attribute name="linenumber" type="int64">0</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z107">
+        <attribute name="linenumber" type="int64">0</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z108">
+        <attribute name="text" type="string">\\ifCLASSINFOpdf
+</attribute>
+        <attribute name="linenumber" type="int64">2</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z109">
+        <attribute name="text" type="string">Electromagnetic, measurements, simulation, substation.
+</attribute>
+        <attribute name="linenumber" type="int64">56</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z110">
+        <attribute name="text" type="string">\\begin{table}[htdp]
+</attribute>
+        <attribute name="linenumber" type="int64">38</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z111">
+        <attribute name="text" type="string">\\else
+</attribute>
+        <attribute name="linenumber" type="int64">4</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z112">
+        <attribute name="text" type="string"></attribute>
+        <attribute name="linenumber" type="int64">7</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
+    </object>
+    <object type="PROJECT" id="z113">
+        <attribute name="type" type="string">PDFLaTeX</attribute>
+        <attribute name="name" type="string">TransformerStationM</attribute>
+        <attribute name="folder" type="string">/Volumes/Data/Papers/Paper-Transformer station measurements/paper_vo_subM/paper_TransformerStationM</attribute>
+        <relationship name="mainfile" type="1/1" destination="FILE" idrefs="z115"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z115"></relationship>
+        <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z114"></relationship>
+        <relationship name="uisettings" type="1/1" destination="UISETTINGS" idrefs="z116"></relationship>
+        <relationship name="items" type="0/0" destination="PROJECTITEM" idrefs="z115"></relationship>
+    </object>
+    <object type="SETTINGS" id="z114">
+        <attribute name="showstatusbar" type="bool">1</attribute>
+        <attribute name="openconsole" type="bool">0</attribute>
+        <attribute name="ncompile" type="int16">3</attribute>
+        <attribute name="enginename" type="string">latex</attribute>
+        <attribute name="dops2pdf" type="bool">1</attribute>
+        <attribute name="dobibtex" type="bool">1</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z113"></relationship>
+    </object>
+    <object type="TEXFILE" id="z115">
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{1, 4228}, {546, 922}}</attribute>
+        <attribute name="lasteditdate" type="date">346243188.31743800640106201172</attribute>
+        <attribute name="istext" type="bool">1</attribute>
+        <attribute name="fileloaddate" type="date">353957220.80047100782394409180</attribute>
+        <attribute name="extension" type="string">tex</attribute>
+        <attribute name="cursor" type="string">{21596, 0}</attribute>
+        <attribute name="sortindex" type="int32">0</attribute>
+        <attribute name="name" type="string">paperTransformerStationM.tex</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
+        <attribute name="filepath" type="string">./paperTransformerStationM.tex</attribute>
+        <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z113"></relationship>
+        <relationship name="mainfileofproject" type="1/1" destination="PROJECT" idrefs="z113"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
+        <relationship name="bookmarks" type="0/0" destination="BOOKMARK" idrefs="z102"></relationship>
+    </object>
+    <object type="UISETTINGS" id="z116">
+        <attribute name="selectedcontrolstab" type="int16">0</attribute>
+        <attribute name="pdfviewscrollrect" type="string">{{0, 8801}, {1092, 1062}}</attribute>
+        <attribute name="editorwidth" type="float">584</attribute>
+        <attribute name="controlswidth" type="float">225</attribute>
+        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z113"></relationship>
+    </object>
+</database>

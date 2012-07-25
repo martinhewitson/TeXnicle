@@ -1,0 +1,72 @@
+% \pagebreak[4]
+% \hspace*{1cm}
+% \pagebreak[4]
+% \hspace*{1cm}
+% \pagebreak[4]
+
+\chapter{My First Chapter But Note The Numbering ...}
+\ifpdf
+    \graphicspath{{Chapter1/Chapter1Figs/PNG/}{Chapter1/Chapter1Figs/PDF/}{Chapter1/Chapter1Figs/}}
+\else
+    \graphicspath{{Chapter1/Chapter1Figs/EPS/}{Chapter1/Chapter1Figs/}}
+\fi
+
+\section{First Paragraph}
+And now I begin my first chapter here ...
+
+Here is an equation\footnote{the notation is explained in the nomenclature section :-)}:
+\begin{eqnarray}
+CIF: \hspace*{5mm}F_0^j(a) &=& \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
+\end{eqnarray}
+\nomenclature[zcif]{$CIF$}{Cauchy's Integral Formula}                                % first letter Z is for Acronyms 
+\nomenclature[aF]{$F$}{complex function}                                                   % first letter A is for Roman symbols
+\nomenclature[gp]{$\pi$}{ $\simeq 3.14\ldots$}                                             % first letter G is for Greek Symbols
+\nomenclature[gi]{$\iota$}{unit imaginary number $\sqrt{-1}$}                      % first letter G is for Greek Symbols
+\nomenclature[gg]{$\gamma$}{a simply closed curve on a complex plane}  % first letter G is for Greek Symbols
+\nomenclature[xi]{$\oint_\gamma$}{integration around a curve $\gamma$} % first letter X is for Other Symbols
+\nomenclature[rj]{$j$}{superscript index}                                                       % first letter R is for superscripts
+\nomenclature[s0]{$0$}{subscript index}                                                        % first letter S is for subscripts
+
+\section{Second Paragraph}
+and here I write more ...\cite{texbook}
+
+\subsection{sub first paragraph}
+... and some more ...
+
+Now I would like to cite the following: \cite{latex} and \cite{texbook}
+and \cite{Rud73}.
+
+I would also like to include a picture ...
+
+\begin{figure}[!htbp]
+  \begin{center}
+    \leavevmode
+    \ifpdf
+      \includegraphics[height=6in]{aflow}
+    \else
+      \includegraphics[bb = 92 86 545 742, height=6in]{aflow}
+    \fi
+    \caption{Airfoil Picture}
+    \label{FigAir}
+  \end{center}
+\end{figure}
+
+% above code has been macro-fied in Classes/MacroFile.tex file
+%\InsertFig{\IncludeGraphicsH{aflow}{6in}{92 86 545 742}}{Airfoil Picture}{FigAir}
+
+So as we have now labelled it we can reference it, like so (\ref{FigAir}) and it
+is on Page \pageref{FigAir}. And as we can see, it is a very nice picture and we
+can talk about it all we want and when we are tired we can move on to the next
+chapter ...
+
+I would also like to add an extra bookmark in acroread like so ...
+\ifpdf
+  \pdfbookmark[2]{bookmark text is here}{And this is what I want bookmarked}
+\fi
+% ------------------------------------------------------------------------
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../thesis"
+%%% End: 

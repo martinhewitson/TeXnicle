@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17760\viewh16520\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs28 \cf0 \ul \ulc0 TeXnicle Beta 7, 28th August 2011\ulnone \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 + New engine system\
+  - TeXnicle now supports engine files. These are scripts which do the typesetting. \
+    - TeXnicle passes these inputs to the script: \
+      1) The name of the file to compile\
+      2) The working directory of the project\
+      3) A number corresponding to the 'Number of runs' setting \
+      4) A boolean (0 or 1) corresponding to the state of the 'run bibtex' checkbox\
+      5) A boolean (0 or 1) corresponding to the state of the 'run ps2pdf' checkbox\
+			\
+  - In the preferences, engines can be duplicated, edited, created new, deleted.\
+  - TeXnicle currently has 3 built-in (non-editable) engines: latex, pdflatex, and context\
+\
++ Compile settings are now document based rather than global. There is a new 'settings' tab on \
+  the project window where you can set the engine to use, as well as some other details of the \
+  compiling process. \
+\
++ Better handling of file encodings. There is also a menu to "File->Reopen Using Encoding" now.\
+\
++ Stand-alone tex files now have a pop-out drawer containing the compiler settings. When opened \
+  the document gets the default settings from the preferences. Changes to these preferences are \
+  persistent across restarts/reloads.\
+\
++ List of commands for completion now includes 520 context commands (thanks to Fabrice Larribe for the list!)\
+\
++ The section jump bar now includes bookmarks for that file.\
+\
++ Open tabs are restored when project is loaded.\
+\
++ Bug fix: creating new documents from "File->New Project" or "Project->New Project" now results \
+  in working documents\
+\
++ Bug fix: starred sections (like \\section*\{...\}) now appear in the section popup list\
+\
++ Bug fix: bookmarks now work properly on open document windows\
+\
++ Bug fix: dragging files on to the text view now results in correct \\input\{\} statements for \
+  files both under and above the project tree.\
+}

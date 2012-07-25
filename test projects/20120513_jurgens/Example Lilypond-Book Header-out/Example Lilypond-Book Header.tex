@@ -1,0 +1,180 @@
+%%!TEX TS-program = Lilypond-XeLaTeX
+
+
+\documentclass[BCOR12mm,DIV11,headings=normal]{scrbook}
+\usepackage{scrpage2}
+\synctex=1
+\usepackage{graphicx}
+\graphicspath{{/Users/jurgenkramlofsky/Desktop/Das-Buch/Bilder2/}}
+\usepackage{appendix}
+
+%%%% Andere Absatzbehandlung
+\newenvironment{absaetze}
+{\addtolength{\parskip}{\baselineskip}\parindent 0pt}
+{}
+%%%%
+
+%\usepackage{geometry}
+\usepackage{placeins}
+\usepackage[font={scriptsize,it},singlelinecheck=false,format=hang,justification=raggedright,skip=15pt]{caption}
+\usepackage[T1]{fontenc}
+
+\usepackage{ifxetex}
+\ifxetex
+ %xetex specific stuff
+
+ \usepackage{xunicode,fontspec,xltxtra}
+% \usepackage[biolinum]{xelibertine}
+ \defaultfontfeatures{Mapping=tex-text}
+ %Fontauswahl
+% \setmainfont[LetterSpace=1.0,Scale=1]{GaramondNo8} % Hauptzeichensatz
+% \setmonofont{monofur} % Haupt Monospaced
+%
+% \newfontface\Notenschrift[Scale=1.5]{StaffClefPitchesEasy}
+% \newfontface\Symbole[Scale=1]{AppleMyungjo}
+% \newfontface\Notation[Scale=1.6]{Accidentals}
+% \newfontface\Notationklein [Scale=2]{Accidentals}
+% \newfontface\Altdeutsch[Scale=1.2]{Alte Schwabacher}
+% \newfontfamily\Chordname[Scale=1]{MgOpen Cosmetica}	
+ \newfontfamily\Note[Scale=1]{Kabala}
+\else
+\usepackage[utf8]{inputenc}
+ %This can be empty if you are not going to use pdftex
+ %
+\fi
+
+\usepackage[ngerman,portuguese,danish,french,american]{babel}
+\usepackage[babel,german=guillemets]{csquotes}
+\usepackage[normalem]{ulem}
+\newcommand{\neuq}[1]{\foreignquote{danish}{#1}}
+
+
+\usepackage{makeidx}
+
+\usepackage{calc}
+
+%Textpos relevante Sachen
+\usepackage{textpos}
+\newcommand{\cd}[2]{\begin{textblock}{2}(#1,#2)
+                       \includegraphics[scale=.15]{CD2}
+                    \end{textblock}
+            \vspace{4ex}}
+%\newcommand{\lang}[1]{\widthof{1}(#1)}
+
+%\usepackage{MnSymbol}
+\usepackage{lettrine}
+
+%
+\usepackage{setspace}
+%\linespread{1.1}
+%\onehalfspacing
+\spacing{1.1}
+%\typearea[current]{last}
+%
+
+
+%\makeglossary
+ \makeindex
+\pagestyle{scrheadings}
+%raggedbottom
+
+\usepackage{natbib}
+\usepackage{textcomp}
+
+%\usepackage{fancyvrb}			% Allow \verbatim et al. in footnotes
+\usepackage{booktabs}			% Better tables
+\usepackage{subfig}
+\usepackage[subfigure]{tocloft}
+%\usepackage{array}
+%\usepackage{tabulary}			% Support longer table cells
+%\usepackage{xcolor}				% Allow for color (annotations)
+
+%\usepackage[parfill]{parskip}	% Activate to begin paragraphs with an empty
+								% line rather than an indent
+								
+
+							
+
+%Macros für die unterschiedlichen Vorzeichen
+
+\newcommand{\Altbe}{\Altdeutsch \enquote{\hspace{.5mm}b\hspace{.3mm}}}
+\newcommand{\Altha}{\Altdeutsch \enquote{\hspace{.5mm}h\hspace{.3mm}}}
+\newcommand{\nat}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][1.9mm]4}}
+\newcommand{\naturaly}{\textsuperscript{\Notation \hspace{.3mm}n}}
+\newcommand{\ben}{\Notation \hspace{.3mm}\raisebox{.9mm}{b}\hspace{.3mm}}
+\newcommand{\bb}{\Notation \hspace{.3mm}\raisebox{.9mm}{B}\hspace{.3mm}}
+\newcommand{\xx}{\Notation \hspace{.3mm}\raisebox{.9mm}{x}\hspace{.3mm}}
+\newcommand{\be}{\textsuperscript{\Notation \hspace{.3mm}b}}
+\newcommand{\beklein}{\textsuperscript{\Notationklein \hspace{.3mm}b}}
+\newcommand{\kreuz}{\textsuperscript{\Notation \hspace{.3mm}s}}
+\newcommand{\kreuzn}{\Notation \hspace{.3mm}\raisebox{.9mm}{s}\hspace{.3mm}}
+\newcommand{\kreuzklein}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][.5mm]{s}}}
+\newcommand{\halfdim}{\textsuperscript{\rmfamily \hspace{.3mm}ø}}
+
+
+
+
+%Macros für die Akkordbezeichnungen
+\newcommand{\sus}{\textsuperscript{\Chordname7sus4}}
+\newcommand{\sechs}{\textsuperscript{\Chordname6}}
+\newcommand{\sechsneun}{\textsuperscript{\Chordname 6/9}}
+\newcommand{\sieben}{\textsuperscript{\Chordname7{\kern -0.15em}}}
+\newcommand{\siebenflat}{\textsuperscript{\Chordname7({\beklein}5)}}
+\newcommand{\siebenflatneunelf}{\textsuperscript{\Chordname7({\beklein}5,9,11)}}
+\newcommand{\siebensharp}{\textsuperscript{\Chordname7({\kreuzklein}5)}}
+\newcommand{\siebenbneun}{\textsuperscript{\Chordname7({\beklein}9)}}
+\newcommand{\siebenkneun}{\textsuperscript{\Chordname7({\kreuzklein}9)}}
+\newcommand{\siebenbneunbdreizehn}{\textsuperscript{\Chordname7({\beklein}9,{\beklein}13)}}
+\newcommand{\siebensharpbneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\beklein}9)}}
+\newcommand{\siebenflatbneun}{\textsuperscript{\Chordname7({\beklein}5,{\beklein}9)}}
+\newcommand{\siebenbneunkelf}{\textsuperscript{\Chordname7({\beklein}9,{\kreuzklein}11)}}
+\newcommand{\siebenkneunkelf}{\textsuperscript{\Chordname7({\kreuzklein}9,{\kreuzklein}11)}}
+\newcommand{\siebensharpkneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\kreuzklein}9)}}
+\newcommand{\siebenkelf}{\textsuperscript{\Chordname7({\kreuzklein}11)}}
+\newcommand{\msieben}{\textsuperscript{\Chordname maj7{\kern -0.15em}}}
+\newcommand{\msiebensharp}{\textsuperscript{\Chordname maj7({\kreuzklein}5)}}
+\newcommand{\neun}{\textsuperscript{\Chordname9}}
+\newcommand{\neunsharpkelf}{\textsuperscript{\Chordname9({\kreuzklein}5,{\kreuzklein}11)}}
+\newcommand{\neunsus}{\textsuperscript{\Chordname9sus4}}
+\newcommand{\neunkelf}{\textsuperscript{\Chordname9({\kreuzklein}11)}}
+\newcommand{\neunbdreizehn}{\textsuperscript{\Chordname9({\beklein}13)}}
+\newcommand{\mneun}{\textsuperscript{\Chordname maj9{\kern -0.15em}}}
+\newcommand{\mneunsharp}{\textsuperscript{\Chordname maj9({\kreuzklein}5)}}
+\newcommand{\elf}{\textsuperscript{\Chordname11}}
+\newcommand{\dreizehnkelf}{\textsuperscript{\Chordname13({\kreuzklein}11)}}
+\newcommand{\dreizehnbneun}{\textsuperscript{\Chordname13({\beklein}9)}}
+\newcommand{\dreizehn}{\textsuperscript{\Chordname13}}
+\newcommand{\dreizehnnoneun}{\textsuperscript{\Chordname13(no9)}}
+\newcommand{\mdreizehn}{\textsuperscript{\Chordname maj13{\kern -0.15em}}}
+\newcommand{\mdreizehnkelf}{\textsuperscript{\Chordname maj13({\kreuzklein}11)}}
+\newcommand{\mdreizehnsharpkelf}{\textsuperscript{\Chordname maj13({\kreuzklein}5,{\kreuzklein}11)}}
+\newcommand{\mdreizehnnoelf}{\textsuperscript{\Chordname maj13(no11){\kern -0.15em}}}
+\newcommand{\dreizehnnoelf}{\textsuperscript{\Chordname13(no11)}}
+\newcommand{\elfnoneun}{\textsuperscript{\Chordname11(no9)}}
+\newcommand{\mneunkelf}{\textsuperscript{\Chordname maj9({\kreuzklein}11)}}
+\newcommand{\msiebenkelf}{\textsuperscript{\Chordname maj7({\kreuzklein}11)}}
+\newcommand{\bedreizehn}{\textsuperscript{\Chordname({\beklein}13)}}
+\newcommand{\melf}{\textsuperscript{\Chordname maj11{\kern -0.15em}}}
+\newcommand{\dimneun}{°\textsuperscript{\Chordname 7(9)}}
+
+
+% Makros für Abkürzungen
+\newcommand{\zB}{\mbox{z.\,B. }}
+\newcommand{\uU}{\mbox{u.\,U. }}
+\newcommand{\idr}{\mbox{i.\,d.\,R. }}
+\newcommand{\iA}{\mbox{i.\,A. }}
+
+
+
+
+%
+%	PDF Stuff
+%
+
+%\usepackage[plainpages=false,pdfpagelabels,pdftitle={\mytitle},pagebackref,pdfauthor={\myauthor},pdfkeywords={\mykeywords}]{hyperref}
+\usepackage{graphics}
+\begin{document}
+  
+\input{Melo-Optionstoene.tex}
+\end{document}
+

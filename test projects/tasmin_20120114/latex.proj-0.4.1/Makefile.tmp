@@ -1,0 +1,175 @@
+# 
+# $Id: Makefile,v 1.1.1.1 2003/11/20 20:01:36 rgb Exp $
+#
+#======================================================================
+# THIS IS A "GENERIC" MAKEFILE FOR LATEX PROJECTS
+#
+# make          alone makes only the $(DVI) file, running latex twice
+# so that all references and toc's are correct.
+#
+# make ps       makes $(PS) (and $(DVI) if necessary)
+# make pdf      makes $(PDF) (and $(PS) and $(DVI) as necessary)
+# make html     makes $(HTML) via latex2html, I hope...
+# make clean    deletes all transient build files and output formats.
+# make tar      makes $(TAR) from >>all<< the sources
+# make gz       makes $(TARGZ) from >>all<< the sources
+# make cvs      does a cvs commit and creates the timestamp $(CVS)
+# make sync     does a cvs commit and runs synccvs to list of
+#               CVSROOT hosts
+# 
+#=======================================================================
+# We always define the project_tex directory name all by itself as
+# one project_tex may have many sources.  This directory name is the name
+# of the CVS tree and the base name of any packaging of the project_tex
+# in default targets below.
+DIR = latex.proj
+SOURCE = project.tex
+WEBSITEHOST = ganesh.phy.duke.edu
+# Relative to $(HOME) on WEBSITEHOST
+WEBDIR = public_html/General
+VERSION = 0.4
+RELEASE = 1
+
+# The list of includes are things required for the build to work.  Examples
+
+# might be included .tex or .sty files, embedded .eps files, and so forth.
+# Naturally, anything on this list should be in the CVS tree.
+INCLUDE = OPL.tex
+
+# Source and temporary objects
+SOURCES = $(SOURCE) $(INCLUDE)
+LOGS = $(SOURCES:.tex=.log)
+TOC = $(SOURCE:.tex=.toc)
+AUX = $(SOURCE:.tex=.aux)
+ERR = $(SOURCE:.tex=.err)
+DVI = $(SOURCE:.tex=.dvi)
+# Production objects
+HTMLDIR = $(SOURCE:.tex=)
+ABS = $(SOURCE:.tex=.abs)
+PHP = $(SOURCE:.tex=.php)
+PS = $(SOURCE:.tex=.ps)
+PDF = $(SOURCE:.tex=.pdf)
+A4PS = $(SOURCE:.tex=.a4.ps)
+A4PDF = $(SOURCE:.tex=.a4.pdf)
+TAR = $(DIR).tar
+TGZ = $(DIR)-$(VERSION).$(RELEASE).tgz
+CVS = $(DIR).cvs.time
+
+# Build targets (from rules)
+all:	$(DVI)
+ps:	$(DVI) $(PS)
+pdf:	$(DVI) $(PS) $(PDF)
+a4ps:	$(DVI) $(A4PS)
+a4pdf:	$(DVI) $(A4PS) $(A4PDF)
+tar:	$(TAR)
+tgz:	$(TGZ)
+
+# Build targets (from commands)
+html:	$(SOURCES)
+	latex2html -local_icons $(SOURCE)
+
+$(HTMLDIR):
+	make html
+
+tar:	$(SOURCES)
+	rm -f $(DVI) $(AUX) $(LOG) $(ERR) $(PS) $(PDF)
+	rm -f .$(DIR)-$(VERSION).$(RELEASE)
+	mkdir -p .$(DIR)-$(VERSION).$(RELEASE)
+	cp -a * .$(DIR)-$(VERSION).$(RELEASE)
+	mv .$(DIR)-$(VERSION).$(RELEASE) $(DIR)-$(VERSION).$(RELEASE)
+	# Exclude any cruft/development directories and CVS stuff.  Add
+	# lines as needed.  Note that we exclude ALL tarballs.
+	tar -cvpf $(TAR) \
+            --exclude=CVS --exclude=CRUFT \
+            --exclude=*.tgz \
+            --exclude=*.tar \
+            ./$(DIR)-$(VERSION).$(RELEASE)
+	rm -rf $(DIR)-$(VERSION).$(RELEASE)
+
+#========================================================================
+# This is a complicated target, but VERY USEFUL.  It makes a .tgz tarball
+# of the exact form preferred for an RPM.  Eventually I'll add a sed script
+# that automatically fixes the accompanying rpm spec file to correspond
+# right before building the tgz to really automate this, so that I can just
+# move the spec to SPEC, move the source tgz to SOURCE and do an
+# rpm -ba blah.spec.
+#========================================================================
+tgz:	$(SOURCES)
+	rm -f $(DVI) $(AUX) $(LOG) $(ERR) $(PS) $(PDF)
+	rm -f .$(DIR)-$(VERSION).$(RELEASE)
+	mkdir -p .$(DIR)-$(VERSION).$(RELEASE)
+	cp -a * .$(DIR)-$(VERSION).$(RELEASE)
+	mv .$(DIR)-$(VERSION).$(RELEASE) $(DIR)-$(VERSION).$(RELEASE)
+	# Exclude any cruft/development directories and CVS stuff.  Add
+	# lines as needed.  Note that we exclude ALL tarballs.
+	tar -cvpf $(TAR) \
+            --exclude=CVS --exclude=CRUFT \
+            --exclude=*.tgz \
+            --exclude=*.tar \
+            ./$(DIR)-$(VERSION).$(RELEASE)
+	gzip $(TAR)
+	mv $(TAR).gz $(TGZ)
+	rm -rf $(DIR)-$(VERSION).$(RELEASE)
+
+cvs:
+	cat $(CVS) | \
+	sed -e '/^New Checkin/d' >> $(CVS).tmp
+	mv $(CVS).tmp $(CVS)
+	echo "New Checkin `date`" >> $(CVS)	# Will force a commit and increment revision
+	cvs commit .		# doesn't sync (yet).
+
+sync:
+	cat $(CVS) | \
+	sed -e '/^New Checkin/d' >> $(CVS).tmp
+	mv $(CVS).tmp $(CVS)
+	echo "New Checkin `date`" >> $(CVS)	# Will force a commit and increment revision
+	cvs commit .		# Do the commit
+	synccvs $(DIR) ganesh.phy.duke.edu
+	synccvs $(DIR) 209.42.212.5
+
+# Clean up all the junk build files and output formats to save space.
+clean:
+	rm -f $(DVI) $(AUX) $(LOGS) $(TOC) $(ERR) $(PS) $(PDF)
+
+# Note that this is a wee bit tricky.  $(DIR) won't exist on
+# the WEBSITEHOST the first time this runs.  So we have to
+# create it, but not if it already exists.  Worse, HTMLDIR may
+# have the same name as $(DIR) -- or it may not!  So we make
+# DIR locally (if it isn't there) and rsync it to the toplevel 
+# web dir, but exclude its contents.  We then rsync HTMLDIR
+# which may have the same name and may have been the same
+# directory) one level down where it belongs.  This leaves behind
+# a spurious empty DIR, but we can always clean it up if anyone
+# cares.
+install: $(HTMLDIR) $(PS) $(PDF) $(A4PS) $(A4PDF) $(ABS) $(PHP)
+	(ssh $(WEBSITEHOST) mkdir -p $(WEBDIR)/$(DIR);\
+	rsync -avz $(HTMLDIR) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(PDF) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(PS) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(A4PDF) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(A4PS) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(ABS) $(WEBSITEHOST):$(WEBDIR)/$(DIR)/;\
+	rsync -avz $(PHP) $(WEBSITEHOST):$(WEBDIR)/)
+
+# Rule for making dvi out of tex.  Do it twice to build table of contents
+# and resolve forward references.
+%.dvi:%.tex	 $(SOURCES)
+	latex $< $@
+	latex $< $@
+
+# Rule for making postscript image
+%.ps:%.dvi
+	dvips -Pamz -Pcmz -o $@ $<
+
+# Rule for making pdf image
+%.pdf:%.ps
+	ps2pdf $<
+
+# Rule for making postscript image
+%.a4.ps:%.dvi
+	dvips -Pamz -Pcmz -t A4 -o $@ $<
+
+# Rule for making pdf image
+%.a4.pdf:%.a4.ps
+	ps2pdf $<
+
