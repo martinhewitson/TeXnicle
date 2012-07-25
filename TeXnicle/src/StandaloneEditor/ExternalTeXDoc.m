@@ -2279,6 +2279,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
+- (id) currentFile
+{
+  return [self fileURL];
+}
+
+- (NSInteger) locationInCurrentEditor
+{
+  NSRange s = [self.texEditorViewController.textView selectedRange];
+  return s.location;
+}
 
 - (id) mainFile
 {
