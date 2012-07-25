@@ -188,7 +188,7 @@
   }
   if ([item isKindOfClass:[TPCommandSet class]]) {
     TPCommandSet *set = (TPCommandSet*)item;
-    return [set.commands objectAtIndex:index];
+    return [[self sortedCommandsForSet:set] objectAtIndex:index];
   }
   
   return nil;  
@@ -217,6 +217,17 @@
   }];
   return sortedItems;
 }
+
+- (NSArray*)sortedCommandsForSet:(TPCommandSet*)set
+{
+  NSArray *sortedItems = [set.commands sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+    NSString *first  = [(TPCommandSet*)a valueForKey:@"argument"];
+    NSString *second = [(TPCommandSet*)b valueForKey:@"argument"];
+    return [first compare:second]==NSOrderedDescending;
+  }];
+  return sortedItems;
+}
+
 
 - (void) updateUI
 {
