@@ -64,6 +64,8 @@
 
 @implementation TeXProjectDocument
 
+@synthesize templateCreator;
+
 @synthesize tabHistory;
 @synthesize currentTabHistoryIndex;
 @synthesize navigatingHistory;
@@ -700,6 +702,9 @@
   
   // create folder menu
   self.createFolderMenu = nil;
+  
+  // template creator
+  self.templateCreator = nil;
 }
 
 
@@ -3877,14 +3882,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (IBAction)createProjectTemplate:(id)sender
 {
-  TPProjectTemplateCreator *creator = [[[TPProjectTemplateCreator alloc] initWithDelegate:self] autorelease];
+  if (self.templateCreator == nil) {
+    self.templateCreator = [[[TPProjectTemplateCreator alloc] initWithDelegate:self] autorelease];
+  }
   
   // set suggested name
   NSString *name = [self.project.name stringByAppendingString:@"_template"];
-  creator.suggestedTemplateName = name;
-  creator.suggestedTemplateDescription = [NSString stringWithFormat:@"Project template based on project %@", self.project.name];
+  self.templateCreator.suggestedTemplateName = name;
+  self.templateCreator.suggestedTemplateDescription = [NSString stringWithFormat:@"Project template based on project %@", self.project.name];
   
-  [NSApp beginSheet:creator.window
+  [NSApp beginSheet:self.templateCreator.window
      modalForWindow:[self windowForSheet]
       modalDelegate:self
      didEndSelector:nil

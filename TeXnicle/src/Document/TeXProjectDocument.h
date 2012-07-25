@@ -193,7 +193,11 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   NSMenu *createFolderMenu;
   
   BOOL _didSetup;
+  
+  TPProjectTemplateCreator *templateCreator;
 }
+
+@property (retain) TPProjectTemplateCreator *templateCreator;
 
 @property (retain) NSMenu *createFolderMenu;
 
