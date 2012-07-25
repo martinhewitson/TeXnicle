@@ -20,6 +20,7 @@
 @synthesize outlineView;
 @synthesize showDetailsButton;
 @synthesize depthSlider;
+@synthesize currentSection;
 
 - (void) dealloc
 {
@@ -86,38 +87,80 @@
 
 - (NSString*) textForFile:(id)aFile
 {
-  if (self.delegate) {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(textForFile:)]) {
     return [self.delegate textForFile:aFile];
   }
   return nil;
 }
 
+- (IBAction)changeDetailsState:(id)sender
+{
+  [self.outlineView reloadData];
+}
+
 - (void) didComputeNewSections
 {  
-  // we should only reload items which have new items in them...
   if ([self.outlineBuilder.sections count] > 0) {
-//    TPSection *root = [self.outlineBuilder.sections objectAtIndex:0];
-//    if (root.needsReload) {
-//      [self.outlineView reloadData];
-//      root.needsReload = NO;
-//    } else {
-      for (TPSection *s in self.outlineBuilder.sections) {
-        if (s.needsReload) {
-          [self.outlineView reloadData];
-          s.needsReload = NO;
+    
+    id currentFile = nil;
+    NSInteger location = NSNotFound;
+    
+    // find out the selection in the tex editor and
+    if (self.delegate && [self.delegate respondsToSelector:@selector(currentFile)] && [self.delegate respondsToSelector:@selector(locationInCurrentEditor)]) {
+      currentFile = [self.delegate currentFile];
+      location = [self.delegate locationInCurrentEditor];
+    }
+    
+    TPSection *lastSection = nil;
+    self.currentSection = nil;
+    BOOL didReload = NO;
+    for (TPSection *s in self.outlineBuilder.sections) {
+      if (s.needsReload) {
+        [self.outlineView reloadData];
+        s.needsReload = NO;
+        didReload = YES;
+      }
+      
+      if (lastSection != nil &&
+          lastSection.file == currentFile) {
+        
+        // if the current file matches, we need to check the index, otherwise we just take the last section
+        if (s.file == currentFile) {
+          
+          if (location > lastSection.startIndex && location < s.startIndex) {
+            self.currentSection = lastSection;
+          }
+          
+        } else {
+          if (location > lastSection.startIndex) {
+            self.currentSection = lastSection;
+          }
+        }
+        
+        // edge case for the last section
+        if (self.currentSection == nil && s == [self.outlineBuilder.sections lastObject]) {
+          if (currentFile == s.file && location > s.startIndex) {
+            self.currentSection = s;
+          }
         }
       }
-//    }
-    //  [self.outlineView reloadData];
+      
+      lastSection = s;
+    }
+    
     
     // restore state
-    [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];
+    if (didReload) {
+      [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];    
+    }
+    
+    [self.outlineView setNeedsDisplay:YES];
   }
 }
 
 - (BOOL) shouldGenerateOutline
 {
-  if (self.delegate) {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldGenerateOutline)]) {
     return [self.delegate shouldGenerateOutline];
   }
 
@@ -168,6 +211,7 @@
   }
 }
 
+
 - (void) outlineViewSelectionDidChange:(NSNotification *)notification
 {
   [self jumpToSelectedResult];
@@ -182,6 +226,16 @@
                                withRange:NSMakeRange(section.startIndex+[section.type.name length]+2, [section.name length] )
                                   inFile:section.file];
     
+  }
+}
+
+- (void) outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+  if (self.currentSection == item) {
+    NSMutableAttributedString *title = [[cell objectValue] mutableCopy];
+    [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
+    [cell setObjectValue:title];
+    [title release];
   }
 }
 
@@ -251,7 +305,7 @@
   [self.delegate didSetMaxOutlineDepthTo:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;
   [self.outlineBuilder buildOutline];
-  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:0.1];
+  [self restoreExpansionState];
 }
 
 

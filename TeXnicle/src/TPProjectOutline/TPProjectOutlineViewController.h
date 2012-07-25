@@ -17,6 +17,10 @@
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth;
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
 - (BOOL) shouldGenerateOutline;
+
+- (id) currentFile;
+- (NSInteger) locationInCurrentEditor;
+
 @end
 
 
@@ -27,8 +31,11 @@
   NSOutlineView *outlineView;
   NSButton *showDetailsButton;
   NSSlider *depthSlider;
+  
+  TPSection *currentSection;
 }
 
+@property (assign) TPSection *currentSection;
 @property (assign) IBOutlet NSSlider *depthSlider;
 @property (assign) IBOutlet NSButton *showDetailsButton;
 @property (assign) IBOutlet NSOutlineView *outlineView;
