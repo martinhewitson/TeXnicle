@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
 		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2818</string>
 		<string key="IBDocument.AppKitVersion">1187</string>
 		<string key="IBDocument.HIToolboxVersion">624.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">2818</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSArrayController</string>
@@ -680,7 +680,6 @@
 														<nil key="NSNextResponder"/>
 														<int key="NSvFlags">256</int>
 														<string key="NSFrameSize">{225, 576}</string>
-														<reference key="NSNextKeyView" ref="1001950842"/>
 													</object>
 													<string key="NSLabel">Item 4</string>
 													<reference key="NSColor" ref="106525823"/>
@@ -920,7 +919,7 @@
 																			<string key="NSFrameSize">{225, 552}</string>
 																			<reference key="NSSuperview" ref="465574377"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="1001950842"/>
+																			<reference key="NSNextKeyView"/>
 																		</object>
 																		<string key="NSLabel">Item 4</string>
 																		<reference key="NSColor" ref="106525823"/>
@@ -1227,6 +1226,7 @@
 											<string key="NSFrame">{{0, -1}, {282, 602}}</string>
 											<reference key="NSSuperview" ref="354661662"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -3635,7 +3635,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="770137637"/>
-						<string key="toolTip">Spelling</string>
+						<string key="toolTip">Document Info</string>
 					</object>
 				</object>
 				<string key="393.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4482,6 +4482,7 @@
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
@@ -4493,7 +4494,9 @@
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -4505,9 +4508,11 @@
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="projectTypeChanged:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
@@ -4515,6 +4520,7 @@
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -4526,6 +4532,7 @@
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -4546,6 +4553,10 @@
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -4592,8 +4603,16 @@
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -4640,6 +4659,10 @@
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -4650,6 +4673,10 @@
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="projectTypeChanged:">
@@ -4678,6 +4705,10 @@
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -4722,6 +4753,10 @@
 						</object>
 						<object class="IBActionInfo" key="togglePanelFocus:">
 							<string key="name">togglePanelFocus:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
