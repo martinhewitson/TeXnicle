@@ -2075,6 +2075,19 @@
 }
 
 
+- (id) currentFile
+{
+  return self.openDocuments.currentDoc;
+}
+
+- (NSInteger) locationInCurrentEditor
+{
+  NSRange s = [self.texEditorViewController.textView selectedRange];
+  return s.location;
+}
+
+
+
 #pragma mark -
 #pragma mark Text Handling
 
