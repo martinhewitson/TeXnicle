@@ -73,6 +73,20 @@
       [c release];
     }
     
+    parsedCommands = [self.text componentsMatchedByRegex:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}"];
+    for (NSString *str in parsedCommands) {
+      TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
+      [newCommands addObject:c];
+      [c release];
+    }
+    
+    parsedCommands = [self.text componentsMatchedByRegex:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}"];
+    for (NSString *str in parsedCommands) {
+      TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
+      [newCommands addObject:c];
+      [c release];
+    }
+    
     //-------------- get citatations
     if ([self isCancelled]) return;
     
