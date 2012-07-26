@@ -1443,6 +1443,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	return sel;
 }
 
+- (NSRange) lineRangeUptoCurrentSelection
+{
+  NSRange sel = [self selectedRange];
+  NSAttributedString *astr = [self attributedString];
+	NSUInteger idx = [astr lineBreakBeforeIndex:sel.location withinRange:NSMakeRange(0, sel.location)];
+  NSInteger length = sel.location - idx;
+  return NSMakeRange(idx, length);
+}
 
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location
 {
@@ -1809,7 +1817,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSUInteger lineStart;
 	NSUInteger lineEnd;
 	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];		
-	NSRange lineRange = NSMakeRange(lineStart, lineEnd-lineStart); 
+	NSRange lineRange = NSMakeRange(lineStart, selRange.location-lineStart);
 	NSString *previousLine = [str substringWithRange:lineRange];
   // get indentation
   NSInteger count = 0;
