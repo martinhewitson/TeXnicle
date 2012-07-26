@@ -301,7 +301,7 @@
 {
   [self stop];
   
-  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1
+  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                           target:self
                                                         selector:@selector(performSpellCheck) 
                                                         userInfo:nil
