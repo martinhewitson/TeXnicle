@@ -483,7 +483,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  [self checkVersion];
+//  [self checkVersion];
   [TPEngineManager installEngines];
   
   // setup app-wide library
