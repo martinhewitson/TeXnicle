@@ -340,7 +340,6 @@
 											<string key="NSFrameSize">{235, 576}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="348311776"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -862,7 +861,6 @@
 																<string key="NSFrameSize">{235, 552}</string>
 																<reference key="NSSuperview" ref="348311776"/>
 																<reference key="NSWindow"/>
-																<reference key="NSNextKeyView" ref="863572798"/>
 																<string key="NSReuseIdentifierKey">_NS:9</string>
 																<array class="NSMutableArray" key="NSTabViewItems">
 																	<object class="NSTabViewItem" id="770206019">
@@ -1406,7 +1404,6 @@
 											<string key="NSFrame">{{0, -1}, {350, 602}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -1717,7 +1714,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="943599098">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="211366969">
@@ -1725,6 +1722,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{17, 54}, {76, 17}}</string>
 							<reference key="NSSuperview" ref="943599098"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="39557186"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="722769348">
@@ -1743,6 +1741,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">270</int>
 							<string key="NSFrame">{{98, 52}, {361, 22}}</string>
 							<reference key="NSSuperview" ref="943599098"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="648114416"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="161200172">
@@ -1767,6 +1766,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{369, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="943599098"/>
+							<reference key="NSWindow"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="318886683">
@@ -1789,6 +1789,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{273, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="943599098"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="345580488"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="372745692">
@@ -1808,6 +1809,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 					</array>
 					<string key="NSFrameSize">{479, 91}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="211366969"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
@@ -2433,7 +2436,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{473, 134}</string>
 				<object class="NSView" key="NSWindowView" id="410455195">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSCustomView" id="563101653">
@@ -2445,6 +2448,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{17, 8}, {186, 17}}</string>
 									<reference key="NSSuperview" ref="563101653"/>
+									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="605198312"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="349659786">
@@ -2461,6 +2465,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							</array>
 							<string key="NSFrame">{{20, 71}, {433, 33}}</string>
 							<reference key="NSSuperview" ref="410455195"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="889093684"/>
 							<string key="NSClassName">MHRoundedTopView</string>
 						</object>
@@ -2469,6 +2474,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">266</int>
 							<string key="NSFrame">{{20, 49}, {433, 22}}</string>
 							<reference key="NSSuperview" ref="410455195"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="382505693"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="47967809">
@@ -2488,6 +2494,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{363, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="410455195"/>
+							<reference key="NSWindow"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="341070024">
@@ -2510,6 +2517,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{267, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="410455195"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1034064169"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="745864327">
@@ -2529,6 +2537,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 					</array>
 					<string key="NSFrameSize">{473, 134}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="563101653"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
@@ -2740,22 +2750,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<int key="connectionID">100385</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">renameSheet</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="609291430"/>
-					</object>
-					<int key="connectionID">100400</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">renameField</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="39557186"/>
-					</object>
-					<int key="connectionID">100401</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">endRenameSheet:</string>
 						<reference key="source" ref="512844837"/>
@@ -2770,22 +2764,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="345580488"/>
 					</object>
 					<int key="connectionID">100403</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newFilenameTextField</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="605198312"/>
-					</object>
-					<int key="connectionID">100552</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newFileSheet</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="372425529"/>
-					</object>
-					<int key="connectionID">100553</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2810,14 +2788,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="323224487"/>
 					</object>
 					<int key="connectionID">100602</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">pdfViewerContainerView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="913261726"/>
-					</object>
-					<int key="connectionID">100666</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2909,27 +2879,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">tabView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="749074883"/>
-					</object>
-					<int key="connectionID">100540</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">embeddedConsoleContainer</string>
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="268931328"/>
 					</object>
 					<int key="connectionID">100867</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">editorSplitView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="249746137"/>
-					</object>
-					<int key="connectionID">100868</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3082,6 +3036,62 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="32374643"/>
 					</object>
 					<int key="connectionID">100998</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_editorSplitView</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="249746137"/>
+					</object>
+					<int key="connectionID">100999</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_newFilenameTextField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="605198312"/>
+					</object>
+					<int key="connectionID">101000</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_newFileSheet</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="372425529"/>
+					</object>
+					<int key="connectionID">101001</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_pdfViewerContainerView</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="913261726"/>
+					</object>
+					<int key="connectionID">101002</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_renameField</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="39557186"/>
+					</object>
+					<int key="connectionID">101003</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_renameSheet</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="609291430"/>
+					</object>
+					<int key="connectionID">101004</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_tabView</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="749074883"/>
+					</object>
+					<int key="connectionID">101005</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -5635,7 +5645,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">100998</int>
+			<int key="maxID">101005</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6193,7 +6203,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
-						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
@@ -6205,9 +6214,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
-						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
-						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -6219,11 +6226,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
-						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
-						<string key="printDocument:">id</string>
 						<string key="projectTypeChanged:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
@@ -6231,7 +6236,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
-						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -6243,7 +6247,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
-						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -6264,10 +6267,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="backTabButtonPressed:">
-							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -6314,16 +6313,8 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="findInProject:">
-							<string key="name">findInProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="forwardTabButtonPressed:">
-							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -6370,10 +6361,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="openStandaloneWindow:">
-							<string key="name">openStandaloneWindow:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -6384,10 +6371,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="projectTypeChanged:">
@@ -6416,10 +6399,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocument:">
-							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -6466,12 +6445,15 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toggleStatusView:">
-							<string key="name">toggleStatusView:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_editorSplitView">NSSplitView</string>
+						<string key="_newFileSheet">NSWindow</string>
+						<string key="_newFilenameTextField">NSTextField</string>
+						<string key="_pdfViewerContainerView">NSView</string>
+						<string key="_renameField">NSTextField</string>
+						<string key="_renameSheet">NSWindow</string>
+						<string key="_tabView">NSTabView</string>
 						<string key="backTabButton">HHValidatedButton</string>
 						<string key="bookmarkContainerView">NSView</string>
 						<string key="centerView">NSView</string>
@@ -6481,7 +6463,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="controlsTabview">NSTabView</string>
 						<string key="createFileButton">HHValidatedButton</string>
 						<string key="createFolderButton">HHValidatedButton</string>
-						<string key="editorSplitView">NSSplitView</string>
 						<string key="embeddedConsoleContainer">NSView</string>
 						<string key="engineSettingsContainer">NSView</string>
 						<string key="finderContainerView">NSView</string>
@@ -6492,25 +6473,47 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
 						<string key="mainWindow">NSWindow</string>
-						<string key="newFileSheet">NSWindow</string>
-						<string key="newFilenameTextField">NSTextField</string>
 						<string key="openDocuments">OpenDocumentsManager</string>
 						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
-						<string key="pdfViewerContainerView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
 						<string key="projectOutlineView">TPOutlineView</string>
-						<string key="renameField">NSTextField</string>
-						<string key="renameSheet">NSWindow</string>
 						<string key="rightView">NSView</string>
 						<string key="spellCheckerContainerView">NSView</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="statusViewContainer">NSView</string>
-						<string key="tabView">NSTabView</string>
 						<string key="texEditorContainer">NSView</string>
 						<string key="warningsContainerView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_editorSplitView">
+							<string key="name">_editorSplitView</string>
+							<string key="candidateClassName">NSSplitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_newFileSheet">
+							<string key="name">_newFileSheet</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_newFilenameTextField">
+							<string key="name">_newFilenameTextField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_pdfViewerContainerView">
+							<string key="name">_pdfViewerContainerView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_renameField">
+							<string key="name">_renameField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_renameSheet">
+							<string key="name">_renameSheet</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_tabView">
+							<string key="name">_tabView</string>
+							<string key="candidateClassName">NSTabView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="backTabButton">
 							<string key="name">backTabButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
@@ -6546,10 +6549,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="createFolderButton">
 							<string key="name">createFolderButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="editorSplitView">
-							<string key="name">editorSplitView</string>
-							<string key="candidateClassName">NSSplitView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="embeddedConsoleContainer">
 							<string key="name">embeddedConsoleContainer</string>
@@ -6591,14 +6590,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">mainWindow</string>
 							<string key="candidateClassName">NSWindow</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="newFileSheet">
-							<string key="name">newFileSheet</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="newFilenameTextField">
-							<string key="name">newFilenameTextField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="openDocuments">
 							<string key="name">openDocuments</string>
 							<string key="candidateClassName">OpenDocumentsManager</string>
@@ -6611,10 +6602,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">paletteContainverView</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="pdfViewerContainerView">
-							<string key="name">pdfViewerContainerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="projectItemTreeController">
 							<string key="name">projectItemTreeController</string>
 							<string key="candidateClassName">ProjectItemTreeController</string>
@@ -6622,14 +6609,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="projectOutlineView">
 							<string key="name">projectOutlineView</string>
 							<string key="candidateClassName">TPOutlineView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="renameField">
-							<string key="name">renameField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="renameSheet">
-							<string key="name">renameSheet</string>
-							<string key="candidateClassName">NSWindow</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightView">
 							<string key="name">rightView</string>
@@ -6646,10 +6625,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="statusViewContainer">
 							<string key="name">statusViewContainer</string>
 							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tabView">
-							<string key="name">tabView</string>
-							<string key="candidateClassName">NSTabView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="texEditorContainer">
 							<string key="name">texEditorContainer</string>
