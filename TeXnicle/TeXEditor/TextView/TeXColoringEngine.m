@@ -350,7 +350,9 @@
           }
           if (argCount == 0) {
             NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:argRange];
+            if (color != nil) {
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:argRange];
+            }
             break;
           }
           idx++;
@@ -388,13 +390,17 @@
 //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
           if (newLineCount == 0 || self.colorMultilineArguments) {
 //            NSLog(@"Coloring argument");
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            if (self.argumentsColor != nil) {
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            }
             break;
           } else {
 //            NSLog(@"Not coloring argument");
             // if the argument spans multiple lines, color the first char
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+            if (self.specialCharsColor) {
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+            }
             idx = start;
             break;
           }
@@ -430,12 +436,16 @@
           NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
           if (newLineCount == 0 || self.colorMultilineArguments) {
             //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            if (self.argumentsColor != nil) {
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+            }
             break;
           } else {
             // if the argument spans multiple lines, color the first char
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+            if (self.specialCharsColor) {
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+            }
             idx = start+1;
             break;
           }
@@ -451,12 +461,16 @@
     } else if (cc == '$' && self.colorDollarChars) { 
       
       colorRange = NSMakeRange(aRange.location+idx, 1);
-      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.dollarColor forCharacterRange:colorRange];
+      if (self.dollarColor != nil) {
+        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.dollarColor forCharacterRange:colorRange];
+      }
       
     } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
       
       colorRange = NSMakeRange(aRange.location+idx, 1);
-      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+      if (self.specialCharsColor != nil) {
+        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+      }
             
     } else if ((cc == '\\' || cc == '@') && self.colorCommand) {      
       // if we find \ we start a command unless we have \, or whitespace
@@ -469,7 +483,9 @@
           NSRange wordRange = [textStorage doubleClickAtIndex:aRange.location+idx+1];
           colorRange = NSMakeRange(wordRange.location-1, wordRange.length+1);
 //          NSLog(@"Command: %@", NSStringFromRange(colorRange));
-          [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commandColor forCharacterRange:colorRange];
+          if (self.commandColor != nil) {
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commandColor forCharacterRange:colorRange];
+          }
           idx += colorRange.length-1;
         }
       }            
