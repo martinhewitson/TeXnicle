@@ -58,7 +58,7 @@
 #import "TPLabel.h"
 #import "TPNewCommand.h"
 
-#define kSplitViewLeftMinSize 235.0
+#define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
