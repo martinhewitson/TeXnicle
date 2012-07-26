@@ -63,69 +63,69 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 @implementation ExternalTeXDoc
 
-@synthesize lastEdit;
+@synthesize lastEdit = _lastEdit;
 
-@synthesize documentData;
-@synthesize texEditorContainer;
-@synthesize texEditorViewController;
-@synthesize fileLoadDate;
-@synthesize fileMonitor;
-@synthesize engineManager;
-@synthesize settings;
+@synthesize documentData = _documentData;
+@synthesize texEditorContainer = _texEditorContainer;
+@synthesize texEditorViewController = _texEditorViewController;
+@synthesize fileLoadDate = _fileLoadDate;
+@synthesize fileMonitor = _fileMonitor;
+@synthesize engineManager = _engineManager;
+@synthesize settings = _settings;
 
-@synthesize miniConsole;
-@synthesize embeddedConsoleContainer;
-@synthesize embeddedConsoleViewController;
+@synthesize miniConsole = _miniConsole;
+@synthesize embeddedConsoleContainer = _embeddedConsoleContainer;
+@synthesize embeddedConsoleViewController = _embeddedConsoleViewController;
 
-@synthesize mainWindow;
-@synthesize pdfViewContainer;
-@synthesize pdfViewerController;
-@synthesize results;
-@synthesize statusViewController;
-@synthesize statusViewContainer;
+@synthesize mainWindow = _mainWindow;
+@synthesize pdfViewContainer = _pdfViewContainer;
+@synthesize pdfViewerController = _pdfViewerController;
+@synthesize results = _results;
+@synthesize statusViewController = _statusViewController;
+@synthesize statusViewContainer = _statusViewContainer;
 
-@synthesize tabbarController;
-@synthesize infoTabbarController;
+@synthesize tabbarController = _tabbarController;
+@synthesize infoTabbarController = _infoTabbarController;
 
-@synthesize warningsContainerView;
-@synthesize warningsViewController;
+@synthesize warningsContainerView = _warningsContainerView;
+@synthesize warningsViewController = _warningsViewController;
 
-@synthesize labelsContainerView;
-@synthesize labelsViewController;
+@synthesize labelsContainerView = _labelsContainerView;
+@synthesize labelsViewController = _labelsViewController;
 
-@synthesize citationsContainerView;
-@synthesize citationsViewController;
+@synthesize citationsContainerView = _citationsContainerView;
+@synthesize citationsViewController = _citationsViewController;
 
-@synthesize commandsContainerView;
-@synthesize commandsViewController;
+@synthesize commandsContainerView = _commandsContainerView;
+@synthesize commandsViewController = _commandsViewController;
 
-@synthesize palette;
-@synthesize paletteContainerView;
+@synthesize palette = _palette;
+@synthesize paletteContainerView = _paletteContainerView;
 
-@synthesize library;
-@synthesize libraryContainerView;
+@synthesize library = _library;
+@synthesize libraryContainerView = _libraryContainerView;
 
-@synthesize outlineViewController;
-@synthesize outlineViewContainer;
+@synthesize outlineViewController = _outlineViewController;
+@synthesize outlineViewContainer = _outlineViewContainer;
 
-@synthesize engineSettingsController;
-@synthesize prefsContainerView;
+@synthesize engineSettingsController = _engineSettingsController;
+@synthesize prefsContainerView = _prefsContainerView;
 
-@synthesize spellcheckerViewController;
-@synthesize spellCheckerContainerView;
+@synthesize spellcheckerViewController = _spellcheckerViewController;
+@synthesize spellCheckerContainerView = _spellCheckerContainerView;
 
-@synthesize pdfViewer;
+@synthesize pdfViewer = _pdfViewer;
 
-@synthesize leftView;
-@synthesize centerView;
-@synthesize rightView;
-@synthesize splitView;
+@synthesize leftView = _leftView;
+@synthesize centerView = _centerView;
+@synthesize rightView = _rightView;
+@synthesize splitView = _splitView;
 
-@synthesize templateEditor;
+@synthesize templateEditor = _templateEditor;
 
-@synthesize liveUpdateTimer;
-@synthesize metadataUpdateTimer;
-@synthesize maxOutlineViewDepth;
+@synthesize liveUpdateTimer = _liveUpdateTimer;
+@synthesize metadataUpdateTimer = _metadataUpdateTimer;
+@synthesize maxOutlineViewDepth = _maxOutlineViewDepth;
 
 - (id) init
 {
@@ -180,11 +180,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [dict setValue:[NSNumber numberWithInteger:[self.tabbarController indexOfSelectedTab]] forKey:TPExternalDocControlsTabIndexKey];
     
     // controls width
-    NSRect r = [controlsViewContainer frame];
+    NSRect r = [_controlsViewContainer frame];
     [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocControlsWidthKey];
     
     // editor width
-    r = [texEditorContainer frame];
+    r = [self.texEditorContainer frame];
     [dict setValue:[NSNumber numberWithFloat:r.size.width] forKey:TPExternalDocEditorWidthKey];
     
     // pdf view visible rect
@@ -216,17 +216,17 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
           // controls width
           CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
           if (controlsWidth >= 0.0) {
-            NSRect fr = [controlsViewContainer frame];
+            NSRect fr = [_controlsViewContainer frame];
             fr.size.width = controlsWidth;
-            [controlsViewContainer setFrame:fr];
+            [_controlsViewContainer setFrame:fr];
           }
           
           // editor width
           CGFloat editorWidth = [[dict valueForKey:TPExternalDocEditorWidthKey] floatValue];
           if (editorWidth >= 0.0) {
-            NSRect fr = [texEditorContainer frame];
+            NSRect fr = [self.texEditorContainer frame];
             fr.size.width = editorWidth;
-            [texEditorContainer setFrame:fr];
+            [self.texEditorContainer setFrame:fr];
           }
         }
         
@@ -380,7 +380,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
-  statusViewIsShowing = YES;
+  _statusViewIsShowing = YES;
   //  NSLog(@"Status view showing...");
   
   NSNumber *showStatusBarSetting = [self.settings valueForKey:@"TPStandAloneEditorShowStatusBar"];
@@ -389,7 +389,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       [self toggleStatusBar:NO];
     }
   } else {
-    [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+    [self.settings setObject:[NSNumber numberWithBool:_statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
   }
   [self updateFileStatus];
   
@@ -565,20 +565,20 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     sbc = self.statusViewContainer;
   }
   
-  if (statusViewIsShowing) {
-    statusViewIsShowing = NO;        
+  if (_statusViewIsShowing) {
+    _statusViewIsShowing = NO;
     // move status view out
     [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y-svfr.size.height, svfr.size.width, svfr.size.height)];    
     // stretch tex editor container
     [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height)]; 
   } else {
-    statusViewIsShowing = YES;
+    _statusViewIsShowing = YES;
     // move status view in
     [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y+svfr.size.height, svfr.size.width, svfr.size.height)];    
     // shrink tex editor container
     [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y+svfr.size.height, tefr.size.width, tefr.size.height-svfr.size.height)];
   }
-  [self.settings setObject:[NSNumber numberWithBool:statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+  [self.settings setObject:[NSNumber numberWithBool:_statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
 }
 
 
@@ -613,11 +613,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   if (self.liveUpdateTimer) {
     [self.liveUpdateTimer invalidate];
-    self.liveUpdateTimer = nil;
-  }    
+    [_liveUpdateTimer release];
+  }
   if (self.metadataUpdateTimer) {
     [self.metadataUpdateTimer invalidate];
-    self.metadataUpdateTimer = nil;
+    [_metadataUpdateTimer release];
   }
 }
 
@@ -630,96 +630,98 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self stopTimers];
   
   // max outline view depth
-  self.maxOutlineViewDepth= nil;
+  [_maxOutlineViewDepth release];
   
   // results
-  self.results = nil;
+  [_results release];
   
   // pdfviewer
   self.pdfViewer.delegate = nil;
-  self.pdfViewer = nil;
+  [_pdfViewer release];
   
   // warnings view
   self.warningsViewController.delegate = nil;
-  self.warningsViewController = nil;
+  [_warningsViewController release];
   
   // labels view
   self.labelsViewController.delegate = nil;
-  self.labelsViewController = nil;
+  [_labelsViewController release];
   
   // citations view
   self.citationsViewController.delegate = nil;
-  self.citationsViewController = nil;
+  [_citationsViewController release];
   
   // commands view
   self.commandsViewController.delegate = nil;
-  self.commandsViewController = nil;
+  [_commandsViewController release];
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
-  self.pdfViewerController = nil;
+  [_pdfViewerController release];
 
   // mini console
-  self.miniConsole = nil;
+  [_miniConsole release];
   
   // console viewer
-  self.embeddedConsoleViewController = nil;
+  [_embeddedConsoleViewController release];
   
   // outline view controller
   self.outlineViewController.delegate = nil;
-  self.outlineViewController = nil;
+  [_outlineViewController release];
   
   // status view controller
-  self.statusViewController = nil;
+  [_statusViewController release];
   
   // spell checker  
   self.spellcheckerViewController.delegate = nil;
   [self.spellcheckerViewController stop];
-  self.spellcheckerViewController = nil;
+  [_spellcheckerViewController release];
   
   // settings
-  self.settings = nil;
+  [_settings release];
   
   // engine settings controller
   self.engineSettingsController.delegate = nil;
-  self.engineSettingsController = nil;
+  [_engineSettingsController release];
   
   // library
   self.library.delegate = nil;
-  self.library = nil;
+  [_library release];
   
   // palette
   self.palette.delegate = nil;
-  self.palette = nil;
+  [_palette release];
   
   // tex editor view controller
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
-  self.texEditorViewController = nil;
+  [_texEditorViewController release];
   
   // file load date
-  self.fileLoadDate = nil;
+  [_fileLoadDate release];
   
   // file monitor  
   self.fileMonitor.delegate = nil;
-  self.fileMonitor = nil;
+  [_fileMonitor release];
   
   // engine manager
   self.engineManager.delegate = nil;  
-  self.engineManager = nil;
+  [_engineManager release];
   
   // template editor
   self.templateEditor.delegate = nil;
-  self.templateEditor = nil;
+  [_templateEditor release];
  
   // document data
-  self.documentData = nil;
+  [_documentData release];
+  
+  // last edit data
+  [_lastEdit release];
 }
 
 
 - (void) dealloc
 {
-  self.lastEdit = nil;
 	[super dealloc];
 }
 
@@ -759,7 +761,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // toggle status bar
   if (tag == 2040) {
-    if (statusViewIsShowing) {
+    if (_statusViewIsShowing) {
       [menuItem setTitle:@"Hide Status Bar"];
     } else {
       [menuItem setTitle:@"Show Status Bar"];
@@ -768,7 +770,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // show integrated console
   if (tag == 2041) {
-    if ([[[editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
+    if ([[[_editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -777,7 +779,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // show integrated pdf viewer
   if (tag == 2042) {
-    if ([rightView isHidden] == NO) {
+    if ([self.rightView isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -852,11 +854,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
   
   NSScanner *aScanner = [NSScanner scannerWithString:string];
-  shouldContinueSearching = YES;
+  _shouldContinueSearching = YES;
   if ([regexpresults count] > 0) {
     
     for (NSString *result in regexpresults) {
-      if (!shouldContinueSearching) {
+      if (!_shouldContinueSearching) {
         break;
       } // If should continue 
       
@@ -1391,10 +1393,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	}
 	
 	if ([projects count] > 0) {
-		[projectsController setContent:projects];
+		[_projectsController setContent:projects];
 		
 		// launch window
-		[NSApp beginSheet:addToProjectSheet
+		[NSApp beginSheet:_addToProjectSheet
 			 modalForWindow:[self windowForSheet]
 				modalDelegate:self
 			 didEndSelector:NULL
@@ -1402,7 +1404,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	} else {
 		
 		// launch window
-		[NSApp beginSheet:addToEmptyProjectSheet
+		[NSApp beginSheet:_addToEmptyProjectSheet
 			 modalForWindow:[self windowForSheet]
 				modalDelegate:self
 			 didEndSelector:NULL
@@ -1416,8 +1418,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSInteger tag = [sender tag];
 	// user clicked cancel
 	if (tag == 0) {
-		[NSApp endSheet:addToProjectSheet];
-		[addToProjectSheet orderOut:sender];
+		[NSApp endSheet:_addToProjectSheet];
+		[_addToProjectSheet orderOut:sender];
 		return;
 	}
 	
@@ -1428,17 +1430,17 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	}
 	
 	
-	NSArray *selected = [projectsController selectedObjects];
+	NSArray *selected = [_projectsController selectedObjects];
 //	NSLog(@"Selected: %@", selected);
 	if ([selected count] == 1) {
 		TeXProjectDocument *doc = [[selected objectAtIndex:0] valueForKey:@"Project"];
 //		NSLog(@"Adding to %@", [doc project]);
 		BOOL copy = NO;
-		if ([copyToProjectCheckButton state]==NSOnState) {
+		if ([_copyToProjectCheckButton state]==NSOnState) {
 			copy = YES;
 		}
-		[NSApp endSheet:addToProjectSheet];
-		[addToProjectSheet orderOut:sender];
+		[NSApp endSheet:_addToProjectSheet];
+		[_addToProjectSheet orderOut:sender];
 		
 //		NSLog(@"Copy? %d", copy);
 		
@@ -1480,8 +1482,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 		}
 	} else {
-		[NSApp endSheet:addToProjectSheet];
-		[addToProjectSheet orderOut:sender];
+		[NSApp endSheet:_addToProjectSheet];
+		[_addToProjectSheet orderOut:sender];
 	}			
 }
 
@@ -1489,8 +1491,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
 	// user clicked cancel
 	if ([sender tag] == 0) {
-		[NSApp endSheet:addToEmptyProjectSheet];
-		[addToEmptyProjectSheet orderOut:sender];
+		[NSApp endSheet:_addToEmptyProjectSheet];
+		[_addToEmptyProjectSheet orderOut:sender];
 		return;
 	}
 	
@@ -1506,16 +1508,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	if (doc) {
 		
 		BOOL copy = NO;
-		if ([copyToNewProjectCheckButton state]==NSOnState) {
+		if ([_copyToNewProjectCheckButton state]==NSOnState) {
 			copy = YES;
 		}
 		BOOL makeMain = NO;
-		if ([makeMainFileCheckButton state] == NSOnState) {
+		if ([_makeMainFileCheckButton state] == NSOnState) {
 			makeMain = YES;
 		}
 		
-		[NSApp endSheet:addToEmptyProjectSheet];
-		[addToEmptyProjectSheet orderOut:self];
+		[NSApp endSheet:_addToEmptyProjectSheet];
+		[_addToEmptyProjectSheet orderOut:self];
 		
     
     // TODO: in order to invoke the project builder here, we need to factor out the code in the project builder which 
@@ -1539,8 +1541,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 		}
 		
 	} else {
-		[NSApp endSheet:addToEmptyProjectSheet];
-		[addToEmptyProjectSheet orderOut:self];
+		[NSApp endSheet:_addToEmptyProjectSheet];
+		[_addToEmptyProjectSheet orderOut:self];
 	}
 }
 
@@ -1563,7 +1565,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   }
   
 	// Add to project button
-	if (item == addToProjectButton) {
+	if (item == _addToProjectButton) {
 		if ([self isDocumentEdited] || [self fileURL] == nil) {
 			return NO;
 		}
@@ -1595,7 +1597,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     return NO;
   }
   
-  if ([[self mainWindow] isKeyWindow] == NO) {
+  if ([self.mainWindow isKeyWindow] == NO) {
     return NO;
   }
   return YES;
@@ -1713,7 +1715,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) buildAndView:(id)sender
 {
-  openPDFAfterBuild = YES;
+  _openPDFAfterBuild = YES;
 	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
 		[self saveDocument:self];
 	}
@@ -1722,7 +1724,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) buildProject:(id)sender
 {
-  openPDFAfterBuild = NO;
+  _openPDFAfterBuild = NO;
 	
 	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
 //		[self saveDocument:self];
@@ -1766,12 +1768,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];
-    if (openPDFAfterBuild) {
+    if (_openPDFAfterBuild) {
       [self openPDF:self];
     }
   }
   _building = NO;
-  lastBuildDate = [NSDate date];
+  _lastBuildDate = [NSDate date];
 }
 
 - (void) updateChangeCount:(NSDocumentChangeType)change
@@ -2057,27 +2059,27 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (IBAction) showIntegratedPDFViewer:(id)sender
 {  
   
-  NSRect rightfr = [rightView frame];
-  if ([rightView isHidden] == NO) {
+  NSRect rightfr = [self.rightView frame];
+  if ([self.rightView isHidden] == NO) {
     return;
   }
   
   CGFloat size = kSplitViewRightMinSize;
   
   rightfr.size.width = size;
-  NSRect midfr = [centerView frame];
+  NSRect midfr = [self.centerView frame];
   midfr.size.width = midfr.size.width - size;
   midfr.origin.x = size;
   
-  [centerView setFrame:midfr];
-  [rightView.animator setFrame:rightfr];
-  [rightView setHidden:NO];
+  [self.centerView setFrame:midfr];
+  [self.rightView.animator setFrame:rightfr];
+  [self.rightView setHidden:NO];
 }
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [[editorSplitView subviews] objectAtIndex:0];
-  NSView *bottomView = [[editorSplitView subviews] objectAtIndex:1];
+  NSView *topView = [[_editorSplitView subviews] objectAtIndex:0];
+  NSView *bottomView = [[_editorSplitView subviews] objectAtIndex:1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -2180,8 +2182,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }
   }
   
-  if (aSplitView == editorSplitView) {    
-    return b.size.height - 26.0 - [splitView dividerThickness];    
+  if (aSplitView == _editorSplitView) {
+    return b.size.height - 26.0 - [self.splitView dividerThickness];
   }
   
   return proposedMax;
@@ -2205,7 +2207,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }
   }
   
-  if (aSplitView == editorSplitView) {    
+  if (aSplitView == _editorSplitView) {
     return 42.0;    
   }
   
@@ -2311,7 +2313,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSNumber*) maxOutlineDepth
 {
-  return maxOutlineViewDepth;
+  return self.maxOutlineViewDepth;
 }
 
 
@@ -2465,7 +2467,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSDate*)lastEditDate
 {
-  return lastEdit;
+  return self.lastEdit;
 }
 
 - (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)file

@@ -54,10 +54,10 @@
 
 @interface ExternalTeXDoc : NSDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
 
-  NSView *leftView;
-  NSView *centerView;
-  NSView *rightView;
-  NSSplitView *splitView;
+  NSView *_leftView;
+  NSView *_centerView;
+  NSView *_rightView;
+  NSSplitView *_splitView;
   
   NSRect _leftViewFrame;
   NSRect _centerViewFrame;
@@ -67,100 +67,98 @@
   CGFloat _rightDividerPostion;
   NSRect _windowFrame;
   
-	NSMutableAttributedString *documentData;
+	NSMutableAttributedString *_documentData;
 
-	IBOutlet NSWindow *addToProjectSheet;
-	IBOutlet NSWindow *addToEmptyProjectSheet;
+	IBOutlet NSWindow *_addToProjectSheet;
+	IBOutlet NSWindow *_addToEmptyProjectSheet;
 	
 	// Add to project
-	IBOutlet NSArrayController *projectsController;
+	IBOutlet NSArrayController *_projectsController;
 	
-	IBOutlet NSButton *copyToProjectCheckButton;
-	IBOutlet NSToolbarItem *addToProjectButton;
+	IBOutlet NSButton *_copyToProjectCheckButton;
+	IBOutlet NSToolbarItem *_addToProjectButton;
 	
 	// Add to new project
-	IBOutlet NSButton *copyToNewProjectCheckButton;
-	IBOutlet NSButton *makeMainFileCheckButton;
+	IBOutlet NSButton *_copyToNewProjectCheckButton;
+	IBOutlet NSButton *_makeMainFileCheckButton;
 		
-  TeXEditorViewController *texEditorViewController;
-  NSView *texEditorContainer;
+  TeXEditorViewController *_texEditorViewController;
+  NSView *_texEditorContainer;
   
-  TPSpellCheckerListingViewController *spellcheckerViewController;
-  NSView *spellCheckerContainerView;
+  TPSpellCheckerListingViewController *_spellcheckerViewController;
+  NSView *_spellCheckerContainerView;
   
-  BOOL openPDFAfterBuild;
+  BOOL _openPDFAfterBuild;
   
-  NSDate *fileLoadDate;
-  TPFileMonitor *fileMonitor;
+  NSDate *_fileLoadDate;
+  TPFileMonitor *_fileMonitor;
   
-  TPEngineManager *engineManager;
+  TPEngineManager *_engineManager;
   
-  NSMutableDictionary *settings;
+  NSMutableDictionary *_settings;
   
-  MHMiniConsoleViewController *miniConsole;
-  TPConsoleViewController *embeddedConsoleViewController;
-  NSView *embeddedConsoleContainer;
-  IBOutlet NSSplitView *editorSplitView;
+  MHMiniConsoleViewController *_miniConsole;
+  TPConsoleViewController *_embeddedConsoleViewController;
+  NSView *_embeddedConsoleContainer;
+  IBOutlet NSSplitView *_editorSplitView;
   
-  NSWindow *mainWindow;
+  NSWindow *_mainWindow;
   
-  NSView *pdfViewContainer;
-  PDFViewerController *pdfViewerController;
+  NSView *_pdfViewContainer;
+  PDFViewerController *_pdfViewerController;
   
-  TPProjectOutlineViewController *outlineViewController;
-  NSView *outlineViewContainer;
+  TPProjectOutlineViewController *_outlineViewController;
+  NSView *_outlineViewContainer;
+    
+  BOOL _shouldContinueSearching;
   
-  BOOL shouldHighlightFirstMatch;
-  
-  BOOL shouldContinueSearching;
-  
-  BOOL statusViewIsShowing;
+  BOOL _statusViewIsShowing;
   BOOL _inVersionsBrowser;
   
-  TPEngineSettingsController *engineSettingsController;
+  TPEngineSettingsController *_engineSettingsController;
   
-  TPStatusViewController *statusViewController;
-  NSView *statusViewContainer;
+  TPStatusViewController *_statusViewController;
+  NSView *_statusViewContainer;
   
-  NSMutableArray *results;
+  NSMutableArray *_results;
   
-  PDFViewer *pdfViewer;
+  PDFViewer *_pdfViewer;
   
-  MHControlsTabBarController *tabbarController;
-  MHInfoTabBarController *infoTabbarController;
-  PaletteController *palette;
-  NSView *paletteContainerView;
-  TPLibraryController *library;
-  NSView *libraryContainerView;
-  NSView *prefsContainerView;
+  MHControlsTabBarController *_tabbarController;
+  MHInfoTabBarController *_infoTabbarController;
+  PaletteController *_palette;
+  NSView *_paletteContainerView;
+  TPLibraryController *_library;
+  NSView *_libraryContainerView;
+  NSView *_prefsContainerView;
   
-  TPWarningsViewController *warningsViewController;
-  NSView *warningsContainerView;
+  TPWarningsViewController *_warningsViewController;
+  NSView *_warningsContainerView;
   
-  TPLabelsViewController *labelsViewController;
-  NSView *labelsContainerView;
+  TPLabelsViewController *_labelsViewController;
+  NSView *_labelsContainerView;
   
-  TPCitationsViewController *citationsViewController;
-  NSView *citationsContainerView;
+  TPCitationsViewController *_citationsViewController;
+  NSView *_citationsContainerView;
   
-  TPNewCommandsViewController *commandsViewController;
-  NSView *commandsContainerView;
+  TPNewCommandsViewController *_commandsViewController;
+  NSView *_commandsContainerView;
   
-  IBOutlet NSView *controlsViewContainer;
+  IBOutlet NSView *_controlsViewContainer;
   
   NSStringEncoding _encoding;
   
-  TPTemplateEditor *templateEditor;
+  TPTemplateEditor *_templateEditor;
   
   
-  NSTimer *metadataUpdateTimer;
+  NSTimer *_metadataUpdateTimer;
   
   BOOL _liveUpdate;
   BOOL _building;
-  NSDate *lastBuildDate;
-  NSDate *lastEdit;
-  NSTimer *liveUpdateTimer;
-  NSNumber *maxOutlineViewDepth;
+  NSDate *_lastBuildDate;
+  NSDate *_lastEdit;
+  NSTimer *_liveUpdateTimer;
+  NSNumber *_maxOutlineViewDepth;
   
   BOOL _didSetupUI;
 }
