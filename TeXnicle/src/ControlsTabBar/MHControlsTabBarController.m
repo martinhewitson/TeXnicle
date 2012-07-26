@@ -294,10 +294,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
 //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
   
-  CGFloat size = [buttons count]*36.0;
-  if (size < 210.0) 
-    size = 210.0;
-  
+  CGFloat size = [buttons count]*31.0;
+  if (size < 220.0)
+    size = 220.0;
   
   NSRect leftfr = [leftView frame];
   if ([leftView isHidden] == NO) {
