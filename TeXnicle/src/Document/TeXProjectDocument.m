@@ -64,91 +64,91 @@
 
 @implementation TeXProjectDocument
 
-@synthesize templateCreator;
+@synthesize templateCreator = _templateCreator;
 
-@synthesize tabHistory;
-@synthesize currentTabHistoryIndex;
-@synthesize navigatingHistory;
-@synthesize backTabButton;
-@synthesize forwardTabButton;
+@synthesize tabHistory = _tabHistory;
+@synthesize currentTabHistoryIndex = _currentTabHistoryIndex;
+@synthesize navigatingHistory = _navigatingHistory;
+@synthesize backTabButton = _backTabButton;
+@synthesize forwardTabButton = _forwardTabButton;
 
-@synthesize mainWindow;
+@synthesize mainWindow = _mainWindow;
 
-@synthesize statusTimer;
+@synthesize statusTimer = _statusTimer;
 
-@synthesize createFileButton;
-@synthesize createFolderButton;
+@synthesize createFileButton = _createFileButton;
+@synthesize createFolderButton = _createFolderButton;
 
-@synthesize pdfViewer;
+@synthesize pdfViewer = _pdfViewer;
 
-@synthesize libraryController;
-@synthesize libraryContainerView;
+@synthesize libraryController = _libraryController;
+@synthesize libraryContainerView = _libraryContainerView;
 
-@synthesize spellCheckerContainerView;
-@synthesize spellcheckerViewController;
+@synthesize spellCheckerContainerView = _spellCheckerContainerView;
+@synthesize spellcheckerViewController = _spellcheckerViewController;
 
-@synthesize bookmarkManager;
-@synthesize bookmarkContainerView;
+@synthesize bookmarkManager = _bookmarkManager;
+@synthesize bookmarkContainerView = _bookmarkContainerView;
 
-@synthesize outlineViewContainer;
-@synthesize outlineViewController;
+@synthesize outlineViewContainer = _outlineViewContainer;
+@synthesize outlineViewController = _outlineViewController;
 
-@synthesize warningsContainerView;
-@synthesize warningsViewController;
+@synthesize warningsContainerView = _warningsContainerView;
+@synthesize warningsViewController = _warningsViewController;
 
-@synthesize labelsContainerView;
-@synthesize labelsViewController;
+@synthesize labelsContainerView = _labelsContainerView;
+@synthesize labelsViewController = _labelsViewController;
 
-@synthesize citationsContainerView;
-@synthesize citationsViewController;
+@synthesize citationsContainerView = _citationsContainerView;
+@synthesize citationsViewController = _citationsViewController;
 
-@synthesize commandsContainerView;
-@synthesize commandsViewController;
+@synthesize commandsContainerView = _commandsContainerView;
+@synthesize commandsViewController = _commandsViewController;
 
-@synthesize pdfViewerController;
-@synthesize project;
-@synthesize projectOutlineView;
-@synthesize controlsTabview;
-@synthesize openDocuments;
-@synthesize projectItemTreeController;
-@synthesize texEditorViewController;
-@synthesize texEditorContainer;
+@synthesize pdfViewerController = _pdfViewerController;
+@synthesize project = _project;
+@synthesize projectOutlineView = _projectOutlineView;
+@synthesize controlsTabview = _controlsTabview;
+@synthesize openDocuments = _openDocuments;
+@synthesize projectItemTreeController = _projectItemTreeController;
+@synthesize texEditorViewController = _texEditorViewController;
+@synthesize texEditorContainer = _texEditorContainer;
 
-@synthesize fileMonitor;
-@synthesize imageViewerController;
-@synthesize imageViewerContainer;
-@synthesize pdfHasSelection;
+@synthesize fileMonitor = _fileMonitor;
+@synthesize imageViewerController = _imageViewerController;
+@synthesize imageViewerContainer = _imageViewerContainer;
+@synthesize pdfHasSelection = _pdfHasSelection;
 
-@synthesize finder;
-@synthesize finderContainerView;
+@synthesize finder = _finder;
+@synthesize finderContainerView = _finderContainerView;
 
-@synthesize palette;
-@synthesize paletteContainverView;
+@synthesize palette = _palette;
+@synthesize paletteContainverView = _paletteContainverView;
 
-@synthesize engineManager;
-@synthesize engineSettings;
-@synthesize engineSettingsContainer;
+@synthesize engineManager = _engineManager;
+@synthesize engineSettings = _engineSettings;
+@synthesize engineSettingsContainer = _engineSettingsContainer;
 
-@synthesize statusViewContainer;
-@synthesize statusViewController;
+@synthesize statusViewContainer = _statusViewContainer;
+@synthesize statusViewController = _statusViewController;
 
-@synthesize splitview;
-@synthesize leftView;
-@synthesize rightView;
-@synthesize centerView;
+@synthesize splitview = _splitview;
+@synthesize leftView = _leftView;
+@synthesize rightView = _rightView;
+@synthesize centerView = _centerView;
 
-@synthesize templateEditor;
+@synthesize templateEditor = _templateEditor;
 
-@synthesize controlsTabBarController;
-@synthesize infoControlsTabBarController;
+@synthesize controlsTabBarController = _controlsTabBarController;
+@synthesize infoControlsTabBarController = _infoControlsTabBarController;
 
-@synthesize miniConsole;
-@synthesize embeddedConsoleContainer;
-@synthesize embeddedConsoleViewController;
+@synthesize miniConsole = _miniConsole;
+@synthesize embeddedConsoleContainer = _embeddedConsoleContainer;
+@synthesize embeddedConsoleViewController = _embeddedConsoleViewController;
 
-@synthesize liveUpdateTimer;
+@synthesize liveUpdateTimer = _liveUpdateTimer;
 
-@synthesize createFolderMenu;
+@synthesize createFolderMenu = _createFolderMenu;
 
 - (void) dealloc
 {
@@ -181,7 +181,7 @@
 {
   if (self.liveUpdateTimer) {
     [self.liveUpdateTimer invalidate];
-    self.liveUpdateTimer = nil;
+    [_liveUpdateTimer release];
   }
 }
 
@@ -307,7 +307,7 @@
   self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
-  statusViewIsShowing = YES;
+  _statusViewIsShowing = YES;
   
 //  NSLog(@"Project settings %@", self.project.settings);
   
@@ -325,8 +325,8 @@
   
   // setup pdf viewer
   self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
-  [self.pdfViewerController.view setFrame:[pdfViewerContainerView bounds]];
-  [pdfViewerContainerView addSubview:self.pdfViewerController.view];    
+  [self.pdfViewerController.view setFrame:[_pdfViewerContainerView bounds]];
+  [_pdfViewerContainerView addSubview:self.pdfViewerController.view];
   
   // setup library
   self.libraryController = [[[TPLibraryController alloc] initWithDelegate:self] autorelease];
@@ -433,12 +433,12 @@
   [nc addObserver:self
          selector:@selector(handleOpenDocumentsDidChangeFileNotification:) 
              name:TPOpenDocumentsDidChangeFileNotification 
-           object:openDocuments];
+           object:self.openDocuments];
   
   [nc addObserver:self
          selector:@selector(handleOpenDocumentsDidAddFileNotification:) 
              name:TPOpenDocumentsDidAddFileNotification 
-           object:openDocuments];
+           object:self.openDocuments];
     
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
@@ -545,7 +545,7 @@
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
 //  NSLog(@"Window did become key");
-  ProjectEntity *p = [self project];
+  ProjectEntity *p = self.project;
   // set language for this project
   if (p) {
     if (p.settings) {
@@ -562,7 +562,7 @@
 {
   if (self.statusTimer) {
     [self.statusTimer invalidate];
-    self.statusTimer = nil;
+    [_statusTimer release];
   }
 }
 
@@ -581,6 +581,9 @@
 - (void) cleanUp
 {
 //  NSLog(@"----------- cleanup");
+  
+  // stop observing notifications
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
   // stop gathering metadata
   [self stopAllMetadataOperations];
@@ -601,110 +604,106 @@
   
   // clear up open documents
   self.openDocuments.texEditorViewController = nil;
-  self.openDocuments.delegate = nil;
-  self.openDocuments = nil;
-  
-  // stop observing notifications
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.openDocuments.delegate = nil;  
   
   // stop KVO
   [self stopObserving];  
   
   // tab history
-  self.tabHistory = nil;
+  [_tabHistory release];
   
   // outline view controller
   [self.outlineViewController stop];
   self.outlineViewController.delegate = nil;
-  self.outlineViewController = nil;
+  [_outlineViewController release];
   
   // warnings view
   self.warningsViewController.delegate = nil;
-  self.warningsViewController = nil;
+  [_warningsViewController release];
   
   // labels view
   self.labelsViewController.delegate = nil;
-  self.labelsViewController = nil;
+  [_labelsViewController release];
   
   // citations view
   self.citationsViewController.delegate = nil;
-  self.citationsViewController = nil;
+  [_citationsViewController release];
   
   // commands view
   self.commandsViewController.delegate = nil;
-  self.commandsViewController = nil;
+  [_commandsViewController release];
   
   // mini console
-  self.miniConsole = nil;
+  [_miniConsole release];
   
   // console viewer
-  self.embeddedConsoleViewController = nil;
+  [_embeddedConsoleViewController release];
   
   // pdfviewer
   self.pdfViewer.delegate = nil;
-  self.pdfViewer = nil;
+  [_pdfViewer release];
   
   // status view controller
-  self.statusViewController = nil;
+  [_statusViewController release];
   
   // engine settings controller
   self.engineSettings.delegate = nil;
-  self.engineSettings = nil;
+  [_engineSettings release];
   
   // engine manager
-  self.engineManager.delegate = nil;  
-  self.engineManager = nil;
+  self.engineManager.delegate = nil;
+  [_engineManager release];
   
   // bookmark manager
   self.bookmarkManager.delegate = nil;
-  self.bookmarkManager = nil;
+  [_bookmarkManager release];
   
   // palette
   self.palette.delegate = nil;
-  self.palette = nil;
+  [_palette release];
   
   // finder
   self.finder.delegate = nil;
-  self.finder = nil;
+  [_finder release];
   
   // library
   self.libraryController.delegate = nil;
-  self.libraryController = nil;
+  [_libraryController release];
   
   // spell checker  
   self.spellcheckerViewController.delegate = nil;
-  self.spellcheckerViewController = nil;  
+  [_spellcheckerViewController release];
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
-  self.pdfViewerController = nil;    
+  [_pdfViewerController release];
   
   // tex editor view controller
   [self.texEditorViewController stopSyntaxChecker];
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
-  self.texEditorViewController = nil;
+  [_texEditorViewController release];
   
   // image viewer controller
-  self.imageViewerController = nil;
+  [_imageViewerController release];
   
   // file monitor  
   [self.fileMonitor stopTimer];
   self.fileMonitor.delegate = nil;
-  self.fileMonitor = nil;
+  [_fileMonitor release];
   
   // template editor
   self.templateEditor.delegate = nil;
-  self.templateEditor = nil;
+  [_templateEditor release];
     
   // project
-  self.project = nil;
+  [_project release];
   
   // create folder menu
-  self.createFolderMenu = nil;
+  [_createFolderMenu release];
   
   // template creator
-  self.templateCreator = nil;
+  [_templateCreator release];
 }
 
 
@@ -1078,7 +1077,7 @@
   // if nothing is selected in the outline view, fall back to the current
   // file in the open documents manager.
   if (!path && [all count]==0) {
-    path = [[openDocuments currentDoc] valueForKey:@"pathOnDisk"];
+    path = [[self.openDocuments currentDoc] valueForKey:@"pathOnDisk"];
   }
   
   [self.statusViewController setFilenameText:path];
@@ -1106,8 +1105,8 @@
 
 - (NSManagedObject *)project
 {
-	if (project != nil) {
-		return project;
+	if (_project != nil) {
+		return _project;
 	}
 //  NSLog(@"Fetching project...");
 	NSManagedObjectContext *moc = [self managedObjectContext];
@@ -1121,7 +1120,7 @@
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		self.project = [fetchResults objectAtIndex:0];
+		_project = [[fetchResults objectAtIndex:0] retain];
 		[fetchRequest release];
 //    NSLog(@"   got project");
     
@@ -1129,7 +1128,7 @@
     [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
 //    NSLog(@"Did set language %@", self.project.settings.language);
     
-		return project;
+		return _project;
 	}
 	
 	if (fetchError != nil) {
@@ -1153,16 +1152,15 @@
     return;
   }
   
-	if (treeActionMenu) {
-    [treeActionMenu release];
-    treeActionMenu = nil;
+	if (_treeActionMenu) {
+    [_treeActionMenu release];
   }
   
-  selectedItem = nil;
+  _selectedItem = nil;
   
 	// Make popup menu with bound actions
-	treeActionMenu = [[NSMenu alloc] initWithTitle:@"Project Tree Action Menu"];	
-	[treeActionMenu setAutoenablesItems:NO];
+	_treeActionMenu = [[NSMenu alloc] initWithTitle:@"Project Tree Action Menu"];
+	[_treeActionMenu setAutoenablesItems:NO];
   
   // check selected item(s)
   NSArray *selectedItems = [self.projectItemTreeController selectedObjects];
@@ -1175,7 +1173,7 @@
                                                   action:@selector(addExistingFile:)
                                            keyEquivalent:@""];
     [item setTarget:self];
-    [treeActionMenu addItem:item];
+    [_treeActionMenu addItem:item];
     [item release];		
     
     // add existing folders
@@ -1183,24 +1181,24 @@
                                       action:@selector(addExistingFolder:)
                                keyEquivalent:@""];
     [item setTarget:self];
-    [treeActionMenu addItem:item];
+    [_treeActionMenu addItem:item];
     [item release];		
 
   } else if ([selectedItems count] == 1) {
     
-    selectedItem = [selectedItems objectAtIndex:0];
-    selectedRow = [self.projectOutlineView selectedRow];
-    NSString *itemName = [selectedItem valueForKey:@"name"];
+    _selectedItem = [selectedItems objectAtIndex:0];
+    _selectedRow = [self.projectOutlineView selectedRow];
+    NSString *itemName = [_selectedItem valueForKey:@"name"];
     
     // if a folder is selected...
-    if ([selectedItem isKindOfClass:[FolderEntity class]]) {
+    if ([_selectedItem isKindOfClass:[FolderEntity class]]) {
       
       // add existing files
       NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Add Existing file(s)..."
                                                     action:@selector(addExistingFileToSelectedFolder:)
                                              keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // add existing folders
@@ -1208,7 +1206,7 @@
                                         action:@selector(addExistingFolder:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // add existing folders
@@ -1216,7 +1214,7 @@
                                         action:@selector(addNewFolder:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // rename selected
@@ -1224,7 +1222,7 @@
                                         action:@selector(renameItem:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // Remove selected
@@ -1232,7 +1230,7 @@
                                         action:@selector(removeItem:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
     } else {
       
@@ -1241,7 +1239,7 @@
                                         action:@selector(renameItem:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // Remove selected
@@ -1249,7 +1247,7 @@
                                         action:@selector(removeItem:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // reveal selected
@@ -1257,11 +1255,11 @@
                                         action:@selector(revealItem:)
                                  keyEquivalent:@""];
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // reveal selected
-      if ([self.project valueForKey:@"mainFile"] == selectedItem) {
+      if ([self.project valueForKey:@"mainFile"] == _selectedItem) {
         item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Unset \u201c%@\u201d as main file", itemName]
                                           action:@selector(setMainItem:)
                                    keyEquivalent:@""];
@@ -1272,17 +1270,17 @@
       }
       
       [item setTarget:self];
-      [treeActionMenu addItem:item];
+      [_treeActionMenu addItem:item];
       [item release];		
       
       // Locate selected
       NSFileManager *fm = [NSFileManager defaultManager];
-      if (![fm fileExistsAtPath:[selectedItem valueForKey:@"pathOnDisk"]]) {
+      if (![fm fileExistsAtPath:[_selectedItem valueForKey:@"pathOnDisk"]]) {
         item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Locate \u201c%@\u201d on disk", itemName]
                                           action:@selector(locateItem:)
                                    keyEquivalent:@""];
         [item setTarget:self];
-        [treeActionMenu addItem:item];
+        [_treeActionMenu addItem:item];
         [item release];		
       }      
       
@@ -1297,7 +1295,7 @@
                                       action:@selector(removeItem:)
                                keyEquivalent:@""];
     [item setTarget:self];
-    [treeActionMenu addItem:item];
+    [_treeActionMenu addItem:item];
     [item release];		
     
     // 
@@ -1305,7 +1303,7 @@
     
   }
   
-//  NSLog(@"Made menu %@", treeActionMenu);
+//  NSLog(@"Made menu %@", _treeActionMenu);
   
 	NSRect frame = [(NSButton *)sender frame];
 	NSPoint menuOrigin = [[(NSButton *)sender superview] 
@@ -1323,7 +1321,7 @@
 																			 pressure:1];
 	
 	
-	[NSMenu popUpContextMenu:treeActionMenu withEvent:event forView:(NSButton *)sender];
+	[NSMenu popUpContextMenu:_treeActionMenu withEvent:event forView:(NSButton *)sender];
 
 	
 	
@@ -1332,10 +1330,10 @@
 
 - (IBAction) setMainItem:(id)sender
 {
-	if ([self.project valueForKey:@"mainFile"] == selectedItem) {
+	if ([self.project valueForKey:@"mainFile"] == _selectedItem) {
 		[self.project setValue:nil forKey:@"mainFile"];
 	} else {
-		[self.project setValue:selectedItem forKey:@"mainFile"];
+		[self.project setValue:_selectedItem forKey:@"mainFile"];
 	}
 	[self.projectOutlineView setNeedsDisplay:YES];
   [self showDocument];
@@ -1344,13 +1342,13 @@
 - (IBAction) revealItem:(id)sender
 {
 	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-	NSString *fullpath = [selectedItem valueForKey:@"pathOnDisk"];
+	NSString *fullpath = [_selectedItem valueForKey:@"pathOnDisk"];
 	[ws selectFile:fullpath inFileViewerRootedAtPath:[fullpath stringByDeletingLastPathComponent]];
 }
 
 - (IBAction) renameItem:(id)sender
 {
-  [self renameItemAtRow:selectedRow];
+  [self renameItemAtRow:_selectedRow];
 }
 
 
@@ -1373,20 +1371,20 @@
 	NSArray *items = [self.projectItemTreeController flattenedContent];
 	
 	// get the name of the item at this row
-	itemBeingRenamed = row;
+	_itemBeingRenamed = row;
 	
 	NSString *oldName = [[items objectAtIndex:row] valueForKey:@"name"];
-	[renameField setStringValue:oldName];
+	[_renameField setStringValue:oldName];
 	
 	// show the sheet
-	[NSApp beginSheet:renameSheet
+	[NSApp beginSheet:_renameSheet
 		 modalForWindow:[self windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
 				contextInfo:NULL];	
 	
 	// select only the name up to the extension
-	NSText* textEditor = [renameSheet fieldEditor:YES forObject:renameField];
+	NSText* textEditor = [_renameSheet fieldEditor:YES forObject:_renameField];
 	NSRange r = [oldName rangeOfString:[oldName stringByDeletingPathExtension]];
 	[textEditor setSelectedRange:r];
 }
@@ -1394,18 +1392,18 @@
 - (IBAction) endRenameSheet:(id)sender
 {
 	if ([sender tag] == 0) {
-		[NSApp endSheet:renameSheet];
-		[renameSheet orderOut:sender];
+		[NSApp endSheet:_renameSheet];
+		[_renameSheet orderOut:sender];
 		return;
 	}
 	
-	[NSApp endSheet:renameSheet];
-	[renameSheet orderOut:sender];
+	[NSApp endSheet:_renameSheet];
+	[_renameSheet orderOut:sender];
 	
 	// else we go on and rename
   //	NSLog(@"Renaming to %@", [nameField stringValue]);
 	
-	[self performSelector:@selector(renameItemTo:) withObject:[renameField stringValue] afterDelay:0.0];
+	[self performSelector:@selector(renameItemTo:) withObject:[_renameField stringValue] afterDelay:0.0];
   //	[self renameItemTo:[nameField stringValue]];
 	
 }
@@ -1415,8 +1413,8 @@
 	[[self managedObjectContext] processPendingChanges];
 	[[[self managedObjectContext] undoManager] disableUndoRegistration];
 	
-	NSArray *items = [projectItemTreeController flattenedContent];
-	ProjectItemEntity *item = [items objectAtIndex:itemBeingRenamed];
+	NSArray *items = [self.projectItemTreeController flattenedContent];
+	ProjectItemEntity *item = [items objectAtIndex:_itemBeingRenamed];
   //	NSLog(@"Renaming %@", item);
 	
 	[item setValue:newName forKey:@"name"];
@@ -1428,7 +1426,7 @@
 	// notify all listeners that a file was renamed
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:item forKey:@"document"];
-	[nc postNotificationName:TPDocumentWasRenamed object:projectItemTreeController userInfo:dict];
+	[nc postNotificationName:TPDocumentWasRenamed object:self.projectItemTreeController userInfo:dict];
 	
   // update status bar
   [self updateStatusView];
@@ -1504,14 +1502,14 @@
     sbc = self.statusViewContainer;
   }
   
-  if (statusViewIsShowing) {
-    statusViewIsShowing = NO;
+  if (_statusViewIsShowing) {
+    _statusViewIsShowing = NO;
     // move status view out
     [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y-svfr.size.height, svfr.size.width, svfr.size.height)];    
     // stretch tex editor container
     [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height)]; 
   } else {
-    statusViewIsShowing = YES;
+    _statusViewIsShowing = YES;
     // move status view in
     [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y+svfr.size.height, svfr.size.width, svfr.size.height)];    
     // shrink tex editor container
@@ -1519,8 +1517,8 @@
   }
   
   // update settings if necessary
-  if ([self.project.settings.showStatusBar boolValue] != statusViewIsShowing) {
-    self.project.settings.showStatusBar = [NSNumber numberWithBool:statusViewIsShowing];        
+  if ([self.project.settings.showStatusBar boolValue] != _statusViewIsShowing) {
+    self.project.settings.showStatusBar = [NSNumber numberWithBool:_statusViewIsShowing];
   }
 }
 
@@ -1531,7 +1529,7 @@
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			if ([[item valueForKey:@"isText"] boolValue]) {
         [(FileEntity*)item increaseActiveCount];
-				[openDocuments standaloneWindowForFile:(FileEntity*)item];
+				[self.openDocuments standaloneWindowForFile:(FileEntity*)item];
 			} else {				
 				// pass the opening of the file to the system
 				[[NSWorkspace sharedWorkspace] openFile:[item valueForKey:@"pathOnDisk"]];				
@@ -1542,7 +1540,7 @@
 
 - (IBAction) findInProject:(id)sender
 {
-  [controlsTabview selectTabViewItemAtIndex:4];	
+  [self.controlsTabview selectTabViewItemAtIndex:4];
   [self.windowForSheet makeFirstResponder:self.finder.searchField];
 }
 
@@ -1568,7 +1566,7 @@
   FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
   
   // select document
-  [openDocuments selectTabForFile:file];
+  [self.openDocuments selectTabForFile:file];
   
 }
 
@@ -1585,7 +1583,7 @@
   FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
   
   // select document
-  [openDocuments selectTabForFile:file];  
+  [self.openDocuments selectTabForFile:file];
 }
 
 
@@ -1664,8 +1662,8 @@
 	if ([all count] == 1) {
 		NSManagedObject *item = [all objectAtIndex:0];
 		if ([item isKindOfClass:[FileEntity class]]) {
-      if (openDocuments) {					
-        [openDocuments addDocument:(FileEntity*)item select:YES];          
+      if (self.openDocuments) {
+        [self.openDocuments addDocument:(FileEntity*)item select:YES];
       }
 		}
 	}
@@ -1691,27 +1689,27 @@
 - (IBAction) showIntegratedPDFViewer:(id)sender
 {  
   
-  NSRect rightfr = [rightView frame];
-  if ([rightView isHidden] == NO) {
+  NSRect rightfr = [self.rightView frame];
+  if ([self.rightView isHidden] == NO) {
     return;
   }
   
   CGFloat size = kSplitViewRightMinSize;
   
   rightfr.size.width = size;
-  NSRect midfr = [centerView frame];
+  NSRect midfr = [self.centerView frame];
   midfr.size.width = midfr.size.width - size;
   midfr.origin.x = size;
   
-  [centerView setFrame:midfr];
-  [rightView.animator setFrame:rightfr];
-  [rightView setHidden:NO];
+  [self.centerView setFrame:midfr];
+  [self.rightView.animator setFrame:rightfr];
+  [self.rightView setHidden:NO];
 }
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [[editorSplitView subviews] objectAtIndex:0];
-  NSView *bottomView = [[editorSplitView subviews] objectAtIndex:1];
+  NSView *topView = [[_editorSplitView subviews] objectAtIndex:0];
+  NSView *bottomView = [[_editorSplitView subviews] objectAtIndex:1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -1815,7 +1813,7 @@
     }
   }
   
-  if (splitView == editorSplitView) {    
+  if (splitView == _editorSplitView) {
     return b.size.height - 26.0 - [splitView dividerThickness];    
   }
   
@@ -1840,7 +1838,7 @@
     }
   }  
   
-  if (splitView == editorSplitView) {    
+  if (splitView == _editorSplitView) {
     return 60.0;    
   }
   
@@ -1882,15 +1880,15 @@
 
 - (NSString*) nameOfFileBeingEdited
 {
-  return [[openDocuments currentDoc] name];
+  return [[self.openDocuments currentDoc] name];
 }
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
 {
-//  NSLog(@"Edit asking if it should syntax check of %@", [[openDocuments currentDoc] name]);
+//  NSLog(@"Edit asking if it should syntax check of %@", [[self.openDocuments currentDoc] name]);
 //  NSLog(@"  checking window %@", [self mainWindow]);
   
-  if ([[[openDocuments currentDoc] extension] isEqualToString:@"tex"] == NO) {
+  if ([[[self.openDocuments currentDoc] extension] isEqualToString:@"tex"] == NO) {
     return NO;
   }
   
@@ -1920,7 +1918,7 @@
 
 - (NSUndoManager*)currentUndoManager
 {
-	id file = [openDocuments currentDoc];
+	id file = [self.openDocuments currentDoc];
 	FileDocument *doc = [file document];
 	return [doc undoManager];
 }
@@ -2000,7 +1998,7 @@
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix
 {
 	NSMutableArray *texfiles = [NSMutableArray array];
-	NSArray *files = [project valueForKey:@"items"];
+	NSArray *files = [self.project valueForKey:@"items"];
 	for (ProjectItemEntity *item in files) {
 		if ([item isKindOfClass:[FileEntity class]]) {
       NSString *path = [[[prefix stringByAppendingString:[item valueForKey:@"filepath"]] stringByStandardizingPath] stringByDeletingPathExtension];
@@ -2201,12 +2199,12 @@
 
 - (IBAction) projectTypeChanged:(id)sender
 {
-  [self.project setValue:[[sender selectedItem] title] forKey:@"type"];
+  [self.project setValue:[[sender _selectedItem] title] forKey:@"type"];
 }
 
 - (IBAction) buildAndView:(id)sender
 {
-  openPDFAfterBuild = YES;
+  _openPDFAfterBuild = YES;
 	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
 		[self saveDocument:self];
 	}
@@ -2215,7 +2213,7 @@
 
 - (IBAction) buildProject:(id)sender
 {
-  openPDFAfterBuild = NO;
+  _openPDFAfterBuild = NO;
 	
 	if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSaveOnCompile] boolValue]) {
 		[self saveDocument:self];
@@ -2247,7 +2245,7 @@
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];  
-    if (openPDFAfterBuild) {
+    if (_openPDFAfterBuild) {
       [self openPDF:self];
     }
   }    
@@ -2317,7 +2315,7 @@
 
 - (BOOL) canViewPDF
 {
-	FileEntity *mainfile = [project valueForKey:@"mainFile"];
+	FileEntity *mainfile = [self.project valueForKey:@"mainFile"];
 	if (!mainfile) {
 		return NO;
 	}
@@ -2334,7 +2332,7 @@
 
 - (BOOL) canTypeset
 {
-	if ([project valueForKey:@"mainFile"]) {
+	if ([self.project valueForKey:@"mainFile"]) {
 		return YES;
 	}	
 	return NO;
@@ -2342,7 +2340,7 @@
 
 - (BOOL) canBibTeX
 {
-	if ([project valueForKey:@"mainFile"]) {
+	if ([self.project valueForKey:@"mainFile"]) {
 		return YES;
 	}	
 	return NO;	
@@ -2367,44 +2365,44 @@
   
   // Find PDF Selection in Source
   if (tag == 116030) {
-    return [self pdfHasSelection]; 
+    return [self pdfHasSelection];
   }
 
 	if (tag == 1010) {		
-		if ([openDocuments count]>0) {
-			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:0] label]]];
+		if ([self.openDocuments count]>0) {
+			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[_tabView tabViewItemAtIndex:0] label]]];
 			return YES;
 		} else {
 			return NO;
 		}
 	}
 	if (tag == 1020) {
-		if ([openDocuments count]>1) {
-			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:1] label]]];
+		if ([self.openDocuments count]>1) {
+			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[_tabView tabViewItemAtIndex:1] label]]];
 			return YES;
 		} else {
 			return NO;
 		}
 	}
 	if (tag == 1030) {
-		if ([openDocuments count]>2) {
-			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:2] label]]];
+		if ([self.openDocuments count]>2) {
+			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[_tabView tabViewItemAtIndex:2] label]]];
 			return YES;
 		} else {
 			return NO;
 		}
 	}
 	if (tag == 1040) {
-		if ([openDocuments count]>3) {
-			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:3] label]]];
+		if ([self.openDocuments count]>3) {
+			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[_tabView tabViewItemAtIndex:3] label]]];
 			return YES;
 		} else {
 			return NO;
 		}
 	}
 	if (tag == 1050) {
-		if ([openDocuments count]>4) {
-			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[tabView tabViewItemAtIndex:4] label]]];
+		if ([self.openDocuments count]>4) {
+			[menuItem setTitle:[NSString stringWithFormat:@"Tab \u201c%@\u201d", [[_tabView tabViewItemAtIndex:4] label]]];
 			return YES;
 		} else {
 			return NO;
@@ -2489,7 +2487,7 @@
 
   // show integrated console
   if (tag == 2041) {
-    if ([[[editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
+    if ([[[_editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -2498,7 +2496,7 @@
   
   // show integrated pdf viewer
   if (tag == 2042) {
-    if ([rightView isHidden] == NO) {
+    if ([self.rightView isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -2544,15 +2542,15 @@
 	NSMenuItem *item = (NSMenuItem*)sender;
 	NSInteger tag = [item tag];
 	if (tag == 1010) {		
-		[tabView selectTabViewItemAtIndex:0];
+		[_tabView selectTabViewItemAtIndex:0];
 	} else if (tag == 1020) {
-		[tabView selectTabViewItemAtIndex:1];
+		[_tabView selectTabViewItemAtIndex:1];
 	} else if (tag == 1030) {
-		[tabView selectTabViewItemAtIndex:2];
+		[_tabView selectTabViewItemAtIndex:2];
 	} else if (tag == 1040) {
-		[tabView selectTabViewItemAtIndex:3];
+		[_tabView selectTabViewItemAtIndex:3];
 	} else if (tag == 1050) {
-		[tabView selectTabViewItemAtIndex:4];
+		[_tabView selectTabViewItemAtIndex:4];
 	} else {
 		// do nothing
 	}
@@ -2560,12 +2558,12 @@
 
 - (IBAction) selectNextTab:(id)sender
 {
-	[tabView selectNextTabViewItem:self];
+	[_tabView selectNextTabViewItem:self];
 }
 
 - (IBAction) selectPreviousTab:(id)sender
 {
-	[tabView selectPreviousTabViewItem:self];
+	[_tabView selectPreviousTabViewItem:self];
 }
 
 - (IBAction) addExistingFile:(id)sender
@@ -2587,7 +2585,7 @@
 
 - (IBAction) addExistingFileToSelectedFolder:(id)sender
 {
-	[self.projectItemTreeController addExistingFile:self toFolder:(FolderEntity*)selectedItem];
+	[self.projectItemTreeController addExistingFile:self toFolder:(FolderEntity*)_selectedItem];
 }
 
 
@@ -2595,12 +2593,12 @@
 
 - (NSArray*)getSelectedItems
 {
-	return [projectItemTreeController selectedObjects];
+	return [self.projectItemTreeController selectedObjects];
 }
 
 - (IBAction) jumpToMainFile:(id)sender
 {
-	FileEntity *mainFile = [project valueForKey:@"mainFile"];
+	FileEntity *mainFile = [self.project valueForKey:@"mainFile"];
 	
 	if (mainFile) {
 		[self.projectItemTreeController selectDocument:mainFile];
@@ -2616,12 +2614,12 @@
 		ProjectItemEntity *item = [items objectAtIndex:0];
     NSArray *exts = [[TPSupportedFilesManager sharedSupportedFilesManager] supportedExtensions];
 		if ([exts containsObject:[item valueForKey:@"extension"]]) {
-			if ([project valueForKey:@"mainFile"] == item) {
-        project.mainFile = nil;
+			if ([self.project valueForKey:@"mainFile"] == item) {
+        self.project.mainFile = nil;
 			} else {
-				[project setValue:item forKey:@"mainFile"];
+				[self.project setValue:item forKey:@"mainFile"];
 			}
-			[projectOutlineView setNeedsDisplay:YES];
+			[self.projectOutlineView setNeedsDisplay:YES];
 		}
 	}
 }
@@ -2638,7 +2636,7 @@
 
 - (NSString*) nameOfSelectedProjectItem
 {
-	NSArray *selected = [projectItemTreeController selectedObjects];
+	NSArray *selected = [self.projectItemTreeController selectedObjects];
 	if ([selected count] == 1) {
     id obj = [selected objectAtIndex:0];
     NSString *name = [obj valueForKey:@"name"];
@@ -2653,13 +2651,13 @@
 
 - (IBAction)closeAllTabs:(id)sender
 {
-  [openDocuments closeAllTabs];
+  [self.openDocuments closeAllTabs];
   [self.statusViewController setFilenameText:@""];
 }
 
 - (IBAction) closeCurrentTab:(id)sender
 {
-	[openDocuments closeCurrentTab];
+	[self.openDocuments closeCurrentTab];
 }
 
 - (IBAction) newFolder:(id)sender
@@ -2681,7 +2679,7 @@
 																			 pressure:1];
   
   // if we selected item is a real folder on disk, then we can make a subfolder
-  NSArray *selectedItems = [projectItemTreeController selectedObjects];
+  NSArray *selectedItems = [self.projectItemTreeController selectedObjects];
  
   ProjectItemEntity *selectedProjectItem = nil;
   if ([selectedItems count] > 0)
@@ -2718,18 +2716,18 @@
 
 - (void) newGroupFolder:(id) sender
 {
-  [projectItemTreeController addNewFolder];
+  [self.projectItemTreeController addNewFolder];
 }
 
 - (void) newFolderOnDisk:(id)sender
 {
-  [projectItemTreeController addNewFolderCreateOnDisk];
+  [self.projectItemTreeController addNewFolderCreateOnDisk];
 }
 
 - (IBAction) newFile:(id)sender
 {
 	// ask the user for a new file name
-	[NSApp beginSheet:newFileSheet
+	[NSApp beginSheet:_newFileSheet
 		 modalForWindow:[self windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
@@ -2741,14 +2739,14 @@
 {
 	// user clicked cancel
 	if ([sender tag] == 0) {
-		[NSApp endSheet:newFileSheet];
-		[newFileSheet orderOut:sender];
+		[NSApp endSheet:_newFileSheet];
+		[_newFileSheet orderOut:sender];
 		return;
 	}
 	
 	// before we add this file, we better check that the file doesn't exist
-	NSString *name = [newFilenameTextField stringValue];
-	NSString *pathOnDisk = [projectItemTreeController pathForInsertion];
+	NSString *name = [_newFilenameTextField stringValue];
+	NSString *pathOnDisk = [self.projectItemTreeController pathForInsertion];
 	NSString *filename = [pathOnDisk stringByAppendingPathComponent:name];
 	
   //	NSLog(@"Checking for file %@ ay %@", name, pathOnDisk);
@@ -2760,7 +2758,7 @@
 																			 otherButton:nil 
 												 informativeTextWithFormat:@"The file \u201c%@\u201d already exists. Do you want to overwrite it?", filename
 											]; 
-		[alert beginSheetModalForWindow:newFileSheet
+		[alert beginSheetModalForWindow:_newFileSheet
 											modalDelegate:self
 										 didEndSelector:@selector(newFileExists:code:context:) 
 												contextInfo:NULL];
@@ -2788,18 +2786,18 @@
 
 - (void) makeNewFile
 {
-	NSString *name = [newFilenameTextField stringValue];	
+	NSString *name = [_newFilenameTextField stringValue];
 	
-	[projectItemTreeController addNewFile:name
-														 atFilepath:nil
-															extension:nil
-																 isText:YES
-																	 code:nil
-														 asMainFile:NO
-													 createOnDisk:YES];
+	[self.projectItemTreeController addNewFile:name
+                                  atFilepath:nil
+                                   extension:nil
+                                      isText:YES
+                                        code:nil
+                                  asMainFile:NO
+                                createOnDisk:YES];
 	
-	[NSApp endSheet:newFileSheet];
-	[newFileSheet orderOut:self];
+	[NSApp endSheet:_newFileSheet];
+	[_newFileSheet orderOut:self];
 	return;
 }
 
@@ -2887,18 +2885,18 @@
 	NSString *code = [TeXProjectDocument stringForNewArticleMainFileCode];
 	
 	// check if main.tex exists
-	NSString *newName = [NSString stringWithFormat:@"%@_main.tex", [project name]];
-	NSString *filename = [[project folder] stringByAppendingPathComponent:newName];
+	NSString *newName = [NSString stringWithFormat:@"%@_main.tex", [self.project name]];
+	NSString *filename = [[self.project folder] stringByAppendingPathComponent:newName];
 	NSFileManager *fm = [NSFileManager defaultManager];
 	int dd = 1;
 	while ([fm fileExistsAtPath:filename]) {
-		NSString *name = [NSString stringWithFormat:@"%@_main%d.tex", [project name], dd];
-		filename = [[project folder] stringByAppendingPathComponent:name];
+		NSString *name = [NSString stringWithFormat:@"%@_main%d.tex", [self.project name], dd];
+		filename = [[self.project folder] stringByAppendingPathComponent:name];
 		dd++;
 	}
   //	NSLog(@"Filename %@", filename);
 	
-	id file = [projectItemTreeController addNewFile:[filename lastPathComponent]
+	id file = [self.projectItemTreeController addNewFile:[filename lastPathComponent]
                                        atFilepath:nil
                                         extension:@"tex"
                                            isText:YES
@@ -2910,18 +2908,18 @@
 	[file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
   
 	// add include folder
-	[projectItemTreeController setSelectionIndexPath:nil];
-	FolderEntity *includeFolder = [projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];	
+	[self.projectItemTreeController setSelectionIndexPath:nil];
+	FolderEntity *includeFolder = [self.projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];
   [includeFolder setValue:[NSNumber numberWithInt:1] forKey:@"sortIndex"];
   
 	// add images folder
-	[projectItemTreeController setSelectionIndexPath:nil];
-	FolderEntity *imagesFolder = [projectItemTreeController addFolder:@"images" withFilePath:nil createOnDisk:YES];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
+	FolderEntity *imagesFolder = [self.projectItemTreeController addFolder:@"images" withFilePath:nil createOnDisk:YES];
   [imagesFolder setValue:[NSNumber numberWithInt:2] forKey:@"sortIndex"];
 	
 	// select the main file
-  [openDocuments performSelector:@selector(addAndSelectDocument:) withObject:file afterDelay:0.1];
-  [projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.5];
+  [self.openDocuments performSelector:@selector(addAndSelectDocument:) withObject:file afterDelay:0.1];
+  [self.projectItemTreeController performSelector:@selector(selectItem:) withObject:file afterDelay:0.5];
 }
 
 - (IBAction) newMainTeXFile:(id)sender
@@ -2934,7 +2932,7 @@
 	
 	
 	[newFile setValue:@"main" forKey:@"name"];
-	[projectItemTreeController addObject:newFile];
+	[self.projectItemTreeController addObject:newFile];
 	[self.project setValue:newFile forKey:@"mainFile"];
 	
 	[newFile release];			
@@ -2943,35 +2941,35 @@
 
 - (IBAction) delete:(id)sender
 {
-	[projectItemTreeController remove:self];
+	[self.projectItemTreeController remove:self];
 }
 
 - (BOOL) canAddNewFile
 {
-	return [projectItemTreeController canAdd];
+	return [self.projectItemTreeController canAdd];
 }
 
 
 - (BOOL) canAddNewTeXFile
 {
-	return [projectItemTreeController canAdd];
+	return [self.projectItemTreeController canAdd];
 }
 
 - (BOOL) canAddNewFolder
 {
-	return [projectItemTreeController canAdd];
+	return [self.projectItemTreeController canAdd];
 }
 
 - (BOOL) canRemove
 {
-	return [projectItemTreeController canRemove];
+	return [self.projectItemTreeController canRemove];
 }
 
 - (NSManagedObject*) addFileAtURL:(NSURL*)aURL copy:(BOOL)copyFile
 {
 	id doc = [self.projectItemTreeController addFileAtPath:[aURL path] toFolder:nil copy:copyFile];
 	if (doc) {
-		[openDocuments addDocument:doc select:YES];
+		[self.openDocuments addDocument:doc select:YES];
 		return doc;
 	}
 	
@@ -2988,7 +2986,7 @@
   }
   
   // set suggested filename
-  NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02d", [[projectItemTreeController flattenedContent] count]];
+  NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02d", [[self.projectItemTreeController flattenedContent] count]];
   [self.templateEditor setFilename:suggestedDocumentName];
   
   [NSApp beginSheet:self.templateEditor.window
@@ -3013,12 +3011,12 @@
     if ([[name pathExtension] length]==0) {
       name = [name stringByAppendingPathExtension:@"tex"];
     }
-    NSString *insertionPath = [projectItemTreeController pathForInsertion];
+    NSString *insertionPath = [self.projectItemTreeController pathForInsertion];
     //	NSLog(@"Checking path on disk %@", insertionPath);
     NSString *filename = [insertionPath stringByAppendingPathComponent:name];
     
     // check all project files
-    NSArray *allitems = [projectItemTreeController flattenedContent];
+    NSArray *allitems = [self.projectItemTreeController flattenedContent];
     for (ProjectItemEntity *item in allitems) {
       if ([item isKindOfClass:[FileEntity class]]) {
         if ([[item pathOnDisk] isEqual:filename]) {
@@ -3070,7 +3068,7 @@
 	}
 	
 	// Make the new file in the project
-	[projectItemTreeController addNewFile:name
+	[self.projectItemTreeController addNewFile:name
                              atFilepath:nil
                               extension:[name pathExtension]
                                  isText:YES
@@ -3116,7 +3114,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //	NSLog(@"Save %@, %lu", typeName, saveOperation);
 //	
 //	// commit changes for open docs
-//	[openDocuments commitStatus];
+//	[self.openDocuments commitStatus];
 //  // make sure we store the current status of open docs
 //  if ([self.openDocuments currentDoc] != nil) {
 //    //    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
@@ -3149,7 +3147,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //	NSLog(@"Save %@, %d", typeName, saveOperation);
 	
 	// commit changes for open docs
-	[openDocuments commitStatus];
+	[self.openDocuments commitStatus];
   // make sure we store the current status of open docs
   if ([self.openDocuments currentDoc] != nil) {
 //    NSLog(@"Setting selected to %@", [self.openDocuments currentDoc]);
@@ -3183,7 +3181,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (BOOL) saveAllProjectFiles
 {
 	// write contents of all files to disk
-	NSArray *allItems = [projectItemTreeController flattenedContent];
+	NSArray *allItems = [self.projectItemTreeController flattenedContent];
   
 //  NSLog(@"Saving %@", allItems);
 	BOOL success = YES;
@@ -3337,7 +3335,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] 
-                       sourceFile:[[[self openDocuments] currentDoc] pathOnDisk] 
+                       sourceFile:[[self.openDocuments currentDoc] pathOnDisk]
                        lineNumber:lineNumber 
                            column:column];
   [sync release];
@@ -3352,10 +3350,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) findSourceOfText:(NSString *)string
 {
-  [controlsTabview selectTabViewItemAtIndex:4];
+  [self.controlsTabview selectTabViewItemAtIndex:4];
   [self.finder setSearchTerm:string];
   [self.finder searchForTerm:string];
-  shouldHighlightFirstMatch = YES;
+  _shouldHighlightFirstMatch = YES;
 }
 
 - (BOOL) pdfHasSelection
@@ -3404,12 +3402,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) didEndSearch:(FindInProjectController *)aFinder
 {
-  if (shouldHighlightFirstMatch) {
+  if (_shouldHighlightFirstMatch) {
     if ([self.finder count]>0) {
       [self.finder jumpToSearchResult:0];
     }
   }
-  shouldHighlightFirstMatch = NO;
+  _shouldHighlightFirstMatch = NO;
 }
 
 - (void) didCancelSearch:(FindInProjectController *)aFinder
@@ -3428,10 +3426,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
 {	
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aFile];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aFile];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
     
   // expand all folded code
   [self.texEditorViewController.textView expandAll:self];
@@ -3450,11 +3448,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   FileEntity *file = doc.document;
   
   // first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
-	[projectItemTreeController setSelectionIndexPath:idx];
-  [openDocuments updateDoc];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
+  [self.openDocuments updateDoc];
   
   // search for result in attributed string
   NSRange range = NSMakeRange(0, [[self.texEditorViewController.textView string] length]);
@@ -3479,11 +3477,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   FileEntity *file = doc.document;
   
   // first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
-	[projectItemTreeController setSelectionIndexPath:idx];
-  [openDocuments updateDoc];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
+  [self.openDocuments updateDoc];
   
   // search for result in attributed string
   NSRange range = NSMakeRange(0, [[self.texEditorViewController.textView string] length]);
@@ -3505,10 +3503,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) replaceSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile withText:(NSString*)replacement
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aFile];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aFile];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // expand all folded code
   [self.texEditorViewController.textView expandAll:self];
@@ -3655,10 +3653,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //  }
   
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // expand all folded code
   [self.texEditorViewController.textView expandAll:self];
@@ -3946,10 +3944,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)file
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // expand all folded code
   [self.texEditorViewController.textView expandAll:self];
@@ -3962,10 +3960,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) highlightMisspelledWord:(NSString *)word atRange:(NSRange)aRange inFile:(FileEntity*)file
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:file];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // expand all folded code
   [self.texEditorViewController.textView expandAll:self];
@@ -4009,10 +4007,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:anError.file];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:anError.file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] inFile:anError.file select:YES];  
   [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];  
@@ -4048,10 +4046,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:aLabel.file];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aLabel.file];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // now select the text
   NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
@@ -4091,10 +4089,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
   
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:[aCitation valueForKey:@"file"]];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[aCitation valueForKey:@"file"]];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // just search for the first line of the source string, or up to the first ','
   NSInteger index = 0;
@@ -4142,10 +4140,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
 {
 	// first select the file
-	[projectItemTreeController setSelectionIndexPath:nil];
+	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [projectItemTreeController indexPathToObject:[aCommand valueForKey:@"file"]];
-	[projectItemTreeController setSelectionIndexPath:idx];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[aCommand valueForKey:@"file"]];
+	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // now select the text
   NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];

@@ -75,126 +75,126 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 
 @private
   
-  NSWindow *mainWindow;
+  NSWindow *_mainWindow;
   
-  ProjectEntity *project;
-  BOOL openPDFAfterBuild;
+  ProjectEntity *_project;
+  BOOL _openPDFAfterBuild;
   
 	// New file
-	IBOutlet NSWindow *newFileSheet;
-	IBOutlet NSTextField *newFilenameTextField;
+	IBOutlet NSWindow *_newFileSheet;
+	IBOutlet NSTextField *_newFilenameTextField;
   
   // split views  
-  NSSplitView *splitview;
-  NSView *leftView;
-  NSView *rightView;
-  NSView *centerView;
+  NSSplitView *_splitview;
+  NSView *_leftView;
+  NSView *_rightView;
+  NSView *_centerView;
   
   BOOL _inVersionsBrowser;
   
   
-	IBOutlet NSWindow *renameSheet;
-	IBOutlet NSTextField *renameField;
-	NSUInteger itemBeingRenamed;
+	IBOutlet NSWindow *_renameSheet;
+	IBOutlet NSTextField *_renameField;
+	NSUInteger _itemBeingRenamed;
   
-  IBOutlet NSTabView *tabView;
+  IBOutlet NSTabView *_tabView;
   
-  IBOutlet NSView *pdfViewerContainerView;
+  IBOutlet NSView *_pdfViewerContainerView;
   
-  NSTimer *statusTimer;
+  NSTimer *_statusTimer;
   
-  NSMenu *treeActionMenu;
-  ProjectItemEntity *selectedItem;
-  NSInteger selectedRow;
+  NSMenu *_treeActionMenu;
+  ProjectItemEntity *_selectedItem;
+  NSInteger _selectedRow;
   
-  TPOutlineView *projectOutlineView;
-  NSTabView *controlsTabview;
-  OpenDocumentsManager *openDocuments;
-  ProjectItemTreeController *projectItemTreeController;
-  TeXEditorViewController *texEditorViewController;
-  NSView *texEditorContainer;
-  TPImageViewerController *imageViewerController;
-  NSView *imageViewerContainer;
-  TPFileMonitor *fileMonitor;
+  TPOutlineView *_projectOutlineView;
+  NSTabView *_controlsTabview;
+  OpenDocumentsManager *_openDocuments;
+  ProjectItemTreeController *_projectItemTreeController;
+  TeXEditorViewController *_texEditorViewController;
+  NSView *_texEditorContainer;
+  TPImageViewerController *_imageViewerController;
+  NSView *_imageViewerContainer;
+  TPFileMonitor *_fileMonitor;
       
-  NSView *bookmarkContainerView;
-  BookmarkManager *bookmarkManager;
+  NSView *_bookmarkContainerView;
+  BookmarkManager *_bookmarkManager;
   
-  NSView *finderContainerView;
-  FinderController *finder;
-  BOOL shouldHighlightFirstMatch;
+  NSView *_finderContainerView;
+  FinderController *_finder;
+  BOOL _shouldHighlightFirstMatch;
   
-  TPEngineManager *engineManager;
+  TPEngineManager *_engineManager;
   
-  TPEngineSettingsController *engineSettings;
-  NSView *engineSettingsContainer;
+  TPEngineSettingsController *_engineSettings;
+  NSView *_engineSettingsContainer;
   
-  HHValidatedButton *createFolderButton;
-  HHValidatedButton *createFileButton;
+  HHValidatedButton *_createFolderButton;
+  HHValidatedButton *_createFileButton;
   
-  TPProjectOutlineViewController *outlineViewController;
-  NSView *outlineViewContainer;
+  TPProjectOutlineViewController *_outlineViewController;
+  NSView *_outlineViewContainer;
   
-  MHMiniConsoleViewController *miniConsole;
-  TPConsoleViewController *embeddedConsoleViewController;
-  NSView *embeddedConsoleContainer;
-  IBOutlet NSSplitView *editorSplitView;
+  MHMiniConsoleViewController *_miniConsole;
+  TPConsoleViewController *_embeddedConsoleViewController;
+  NSView *_embeddedConsoleContainer;
+  IBOutlet NSSplitView *_editorSplitView;
   
-  NSView *statusViewContainer;
-  TPStatusViewController *statusViewController;
-  BOOL statusViewIsShowing;
+  NSView *_statusViewContainer;
+  TPStatusViewController *_statusViewController;
+  BOOL _statusViewIsShowing;
   
-  TPLibraryController *libraryController;
-  NSView *libraryContainerView;
+  TPLibraryController *_libraryController;
+  NSView *_libraryContainerView;
   
-  TPSpellCheckerListingViewController *spellcheckerViewController;
-  NSView *spellCheckerContainerView;
+  TPSpellCheckerListingViewController *_spellcheckerViewController;
+  NSView *_spellCheckerContainerView;
   
-  TPWarningsViewController *warningsViewController;
-  NSView *warningsContainerView;
+  TPWarningsViewController *_warningsViewController;
+  NSView *_warningsContainerView;
   
-  TPLabelsViewController *labelsViewController;
-  NSView *labelsContainerView;
+  TPLabelsViewController *_labelsViewController;
+  NSView *_labelsContainerView;
   
-  TPCitationsViewController *citationsViewController;
-  NSView *citationsContainerView;
+  TPCitationsViewController *_citationsViewController;
+  NSView *_citationsContainerView;
   
-  TPNewCommandsViewController *commandsViewController;
-  NSView *commandsContainerView;
+  TPNewCommandsViewController *_commandsViewController;
+  NSView *_commandsContainerView;
   
-  PDFViewerController *pdfViewerController;
+  PDFViewerController *_pdfViewerController;
   
-  PaletteController *palette;
-  NSView *paletteContainverView;
+  PaletteController *_palette;
+  NSView *_paletteContainverView;
     
-  BOOL pdfHasSelection;
+  BOOL _pdfHasSelection;
   
   BOOL _windowIsClosing;
   
-  MHControlsTabBarController *controlsTabBarController;
-  MHInfoTabBarController *infoControlsTabBarController;
+  MHControlsTabBarController *_controlsTabBarController;
+  MHInfoTabBarController *_infoControlsTabBarController;
   
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
-  PDFViewer *pdfViewer;
+  PDFViewer *_pdfViewer;
   
-  TPTemplateEditor *templateEditor;
+  TPTemplateEditor *_templateEditor;
   
   BOOL _liveUpdate;
   BOOL _building;
-  NSTimer *liveUpdateTimer;
+  NSTimer *_liveUpdateTimer;
   
-  NSMutableArray *tabHistory;
-  NSInteger currentTabHistoryIndex;
-  BOOL navigatingHistory;
-  HHValidatedButton *backTabButton;
-  HHValidatedButton *forwardTabButton;
+  NSMutableArray *_tabHistory;
+  NSInteger _currentTabHistoryIndex;
+  BOOL _navigatingHistory;
+  HHValidatedButton *_backTabButton;
+  HHValidatedButton *_forwardTabButton;
   
-  NSMenu *createFolderMenu;
+  NSMenu *_createFolderMenu;
   
   BOOL _didSetup;
   
-  TPProjectTemplateCreator *templateCreator;
+  TPProjectTemplateCreator *_templateCreator;
 }
 
 @property (retain) TPProjectTemplateCreator *templateCreator;
