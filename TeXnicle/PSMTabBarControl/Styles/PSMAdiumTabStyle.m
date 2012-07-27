@@ -628,7 +628,8 @@
 			drawingRect.origin.y += drawingRect.size.height;
 		}
 
-		[closeButtonOrIcon compositeToPoint:drawingRect.origin operation:NSCompositeSourceOver fraction:1.0];
+    [closeButtonOrIcon drawInRect:drawingRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+//		[closeButtonOrIcon compositeToPoint:drawingRect.origin operation:NSCompositeSourceOver fraction:1.0];
 		
 		// scoot label over
 		switch (orientation)
