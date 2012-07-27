@@ -196,12 +196,8 @@
 		imageFrame.origin.y -= kImageOriginYOffset;
 		imageFrame.size = isize;
 		
-		if ([controlView isFlipped])
-			imageFrame.origin.y += ceil((cellFrame.size.height + imageFrame.size.height) / 2);
-		else
-			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
-		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
-		
+    [image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
+    
 		NSRect newFrame = cellFrame;
 		newFrame.origin.x += kTextOriginXOffset;
 		newFrame.origin.y += kTextOriginYOffset;
