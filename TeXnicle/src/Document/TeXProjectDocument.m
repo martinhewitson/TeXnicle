@@ -3623,7 +3623,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) didDeleteBookmark
 {
-  [self.texEditorViewController.textView setNeedsDisplay:YES];
+  [self.texEditorViewController.textView updateEditorRuler];
   
   // forward this to all open document windows
   for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
@@ -3634,7 +3634,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) didAddBookmark
 {
-  [self.texEditorViewController.textView setNeedsDisplay:YES];
+  [self.texEditorViewController.textView updateEditorRuler];
   
   // forward this to all open document windows
   for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
