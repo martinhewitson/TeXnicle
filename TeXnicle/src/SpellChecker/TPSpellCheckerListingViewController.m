@@ -46,6 +46,7 @@
 @synthesize revealButton;
 @synthesize correctButton;
 @synthesize learnButton;
+@synthesize ignoreButton;
 @synthesize forceCheckButton;
 @synthesize progressIndicator;
 @synthesize aQueue;
@@ -108,6 +109,17 @@
   
 }
 
+- (IBAction)ignoreWord:(id)sender
+{
+  TPMisspelledWord *word = [self selectedWord];
+  
+  [[NSSpellChecker sharedSpellChecker] ignoreWord:word.word inSpellDocumentWithTag:0];
+  word.parent.needsUpdate = YES;
+  [self performSpellCheck];
+  [self dictionaryDidIgnoreWord];
+  
+}
+
 - (IBAction) correct:(id)sender
 {
 	
@@ -153,6 +165,13 @@
     [self performSpellCheck];
     [self dictionaryDidLearnNewWord];
     
+  } else if ([correction hasPrefix:@"Ignore"]) {
+      
+      [[NSSpellChecker sharedSpellChecker] ignoreWord:word.word inSpellDocumentWithTag:0];
+      word.parent.needsUpdate = YES;
+      [self performSpellCheck];
+      [self dictionaryDidIgnoreWord];
+    
   } else {
   
     [self replaceMisspelledWord:word.word atRange:word.range withCorrection:correction inFile:word.parent.file];
@@ -171,6 +190,7 @@
 	NSMenuItem *menuItem;
   
   if (target == self.outlineView) {
+    // learn
     menuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Learn \u201c%@\u201d", word.word]
                                           action:@selector(selectedCorrection:)
                                    keyEquivalent:@""];
@@ -178,7 +198,17 @@
     [theMenu addItem:menuItem];
     [menuItem release];
     
+    
+//    // ignore
+//    menuItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Ignore \u201c%@\u201d", word.word]
+//                                          action:@selector(selectedCorrection:)
+//                                   keyEquivalent:@""];
+//    [menuItem setTarget:target];
+//    [theMenu addItem:menuItem];
+//    [menuItem release];
+    
     [theMenu addItem:[NSMenuItem separatorItem]];
+    
   }
   
   
@@ -192,7 +222,10 @@
   [theMenu addItem:[NSMenuItem separatorItem]];
   
   
-  NSArray *corrections = word.corrections;
+  NSSpellChecker *checker = [NSSpellChecker sharedSpellChecker];
+  NSArray *corrections = [checker guessesForWordRange:NSMakeRange(0, [word.word length]) inString:word.word language:nil inSpellDocumentWithTag:0];
+  
+//  NSArray *corrections = word.corrections;
   
   for (NSString *correction in corrections) {
     menuItem = [[NSMenuItem alloc] initWithTitle:correction
@@ -301,7 +334,7 @@
 {
   [self stop];
   
-  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:5
+  self.spellCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                           target:self
                                                         selector:@selector(performSpellCheck) 
                                                         userInfo:nil
@@ -403,12 +436,13 @@
                    for (NSTextCheckingResult *result in results) {
                      NSString *misspelledWord = [string substringWithRange:result.range];
                      __block NSMutableArray *guesses = [[NSMutableArray alloc] init];
-                     dispatch_sync(dispatch_get_main_queue(), ^{
-                       NSArray *corrections = [checker guessesForWordRange:NSMakeRange(0, [misspelledWord length]) inString:misspelledWord language:nil inSpellDocumentWithTag:0];
-                       for (NSString *c in corrections) {
-                         [guesses addObject:c];
-                       }
-                     });
+                     // This is really expensive, so don't do it here. Just do it when presenting the list to the user in the popup menu.
+//                     dispatch_sync(dispatch_get_main_queue(), ^{
+//                       NSArray *corrections = [checker guessesForWordRange:NSMakeRange(0, [misspelledWord length]) inString:misspelledWord language:nil inSpellDocumentWithTag:0];
+//                       for (NSString *c in corrections) {
+//                         [guesses addObject:c];
+//                       }
+//                     });
                      
                      TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:guesses range:result.range parent:checkedFile];
                      [guesses release];
@@ -582,6 +616,13 @@
   }
 }
 
+- (void)dictionaryDidIgnoreWord
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(dictionaryDidIgnoreWord)]) {
+    [self.delegate dictionaryDidIgnoreWord];
+  }
+}
+
 
 #pragma mark -
 #pragma mark OutlineView Data Source
@@ -716,6 +757,12 @@
   }
   
   if (anItem == self.learnButton){
+    if ([self selectedWord]) {
+      return YES;
+    }
+  }
+  
+  if (anItem == self.ignoreButton){
     if ([self selectedWord]) {
       return YES;
     }

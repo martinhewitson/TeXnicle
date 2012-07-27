@@ -36,6 +36,7 @@
 - (void)highlightMisspelledWord:(NSString*)word atRange:(NSRange)aRange inFile:(FileEntity*)aFile;
 - (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)aFile;
 - (void)dictionaryDidLearnNewWord;
+- (void)dictionaryDidIgnoreWord;
 - (NSArray*)filesToSpellCheck;
 
 - (BOOL) performSimpleSpellCheck;
@@ -57,6 +58,7 @@
   HHValidatedButton *correctButton;
   HHValidatedButton *revealButton;
   HHValidatedButton *learnButton;
+  HHValidatedButton *ignoreButton;
   HHValidatedButton *forceCheckButton;
     
   NSOperationQueue* aQueue;
@@ -69,6 +71,7 @@
 @property (assign) IBOutlet HHValidatedButton *correctButton;
 @property (assign) IBOutlet HHValidatedButton *revealButton;
 @property (assign) IBOutlet HHValidatedButton *learnButton;
+@property (assign) IBOutlet HHValidatedButton *ignoreButton;
 @property (assign) IBOutlet HHValidatedButton *forceCheckButton;
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) id<TPSpellCheckerListingDelegate> delegate;
