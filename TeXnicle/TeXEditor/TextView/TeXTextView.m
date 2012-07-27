@@ -70,6 +70,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 @implementation TeXTextView
 
+@synthesize pasteConfigController = _pasteConfigController;
 @synthesize tableConfigureController;
 @synthesize editorRuler;
 @synthesize coloringEngine;
@@ -97,6 +98,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   self.commandList = nil;
   [newLineCharacterSet release];
 	[whitespaceCharacterSet release];
+  [_pasteConfigController release];
   [super dealloc];
 }
 
@@ -617,7 +619,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
 //  NSLog(@"Frame change");
-  [popupList dismiss];
+  [_popupList dismiss];
   [self colorVisibleText];
   [self highlightMatchingWords];
   [self updateEditorRuler];
@@ -855,8 +857,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (IBAction)cancelOperation:(id)sender
 {
-  if (popupList && popupList.isVisible) {
-    [popupList dismiss];
+  if (_popupList && _popupList.isVisible) {
+    [_popupList dismiss];
   } else {
     [self completeStuff:sender];
   }
@@ -871,46 +873,46 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
 //  NSLog(@"Complete from list");
 	if ([aList count]==0) {
-    [popupList dismiss];
+    [_popupList dismiss];
 		return;
   }
   
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
 //  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
-  if (popupList == nil || [popupList mode] != TPPopupListReplace) {
+  if (_popupList == nil || [_popupList mode] != TPPopupListReplace) {
 //    NSLog(@"Making popup...");
-    if (popupList) {
-      [popupList dismiss];
-      [popupList release];
+    if (_popupList) {
+      [_popupList dismiss];
+      [_popupList release];
     }
     
-    popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
-                                                             atPoint:wp
-                                                      inParentWindow:[self window]
-                                                                mode:TPPopupListReplace
-                                                               title:@"Replace..."];
-    [popupList setDelegate:self];
-    [popupList showPopup];	
+    _popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
+                                                              atPoint:wp
+                                                       inParentWindow:[self window]
+                                                                 mode:TPPopupListReplace
+                                                                title:@"Replace..."];
+    [_popupList setDelegate:self];
+    [_popupList showPopup];
   } else {
     NSPoint point = [self listPointForCurrentWord];
-    NSPoint current = [popupList currentPoint];
+    NSPoint current = [_popupList currentPoint];
     NSPoint wp = [self convertPoint:point toView:nil];
     // update the window in y
     if (current.y == 0.0 && current.x == 0.0) {
-      [popupList moveToPoint:wp];
+      [_popupList moveToPoint:wp];
     } else {
-      [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+      [_popupList moveToPoint:NSMakePoint(current.x, wp.y)];
     }
-    [popupList setList:aList];
-    [popupList showPopup];
+    [_popupList setList:aList];
+    [_popupList showPopup];
   }
 }
 
 - (void) insertFromList:(NSArray*)aList
 {
 	if ([aList count]==0) {
-    [popupList dismiss];
+    [_popupList dismiss];
 		return;
   }
 	
@@ -918,30 +920,30 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	//			NSLog(@"Point for word:%@", NSStringFromPoint(point));
 	NSPoint wp = [self convertPoint:point toView:nil];
 	[self clearSpellingList];
-  if (popupList == nil || [popupList mode] != TPPopupListInsert) {
-    if (popupList) {
-      [popupList dismiss];
-      [popupList release];
+  if (_popupList == nil || [_popupList mode] != TPPopupListInsert) {
+    if (_popupList) {
+      [_popupList dismiss];
+      [_popupList release];
     }
-    popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
-                                                             atPoint:wp
-                                                      inParentWindow:[self window]
-                                                                mode:TPPopupListInsert
-                                                               title:@"Insert..."];
-    [popupList setDelegate:self];
-    [popupList showPopup];	
+    _popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
+                                                              atPoint:wp
+                                                       inParentWindow:[self window]
+                                                                 mode:TPPopupListInsert
+                                                                title:@"Insert..."];
+    [_popupList setDelegate:self];
+    [_popupList showPopup];
   } else {
     NSPoint point = [self listPointForCurrentWord];
-    NSPoint current = [popupList currentPoint];
+    NSPoint current = [_popupList currentPoint];
     NSPoint wp = [self convertPoint:point toView:nil];
     // update the window in y
     if (current.y == 0.0 && current.x == 0.0) {
-      [popupList moveToPoint:wp];
+      [_popupList moveToPoint:wp];
     } else {
-      [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+      [_popupList moveToPoint:NSMakePoint(current.x, wp.y)];
     }
-    [popupList setList:aList];
-    [popupList showPopup];
+    [_popupList setList:aList];
+    [_popupList showPopup];
   }
 }
 
@@ -959,22 +961,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       //			NSLog(@"Point for word:%@", NSStringFromPoint(point));
 			NSPoint wp = [self convertPoint:point toView:nil];
 			[self clearSpellingList];
-      if (popupList == nil) {
-        popupList = [[TPPopupListWindowController alloc] initWithEntries:guesses
-                                                                 atPoint:wp
-                                                          inParentWindow:[self window]
-                                                                    mode:TPPopupListSpell
-                                                                   title:@"Correct..."];
-        [popupList setDelegate:self];
-        [popupList showPopup];
+      if (_popupList == nil) {
+        _popupList = [[TPPopupListWindowController alloc] initWithEntries:guesses
+                                                                  atPoint:wp
+                                                           inParentWindow:[self window]
+                                                                     mode:TPPopupListSpell
+                                                                    title:@"Correct..."];
+        [_popupList setDelegate:self];
+        [_popupList showPopup];
       } else {
         NSPoint point = [self listPointForCurrentWord];
-        NSPoint current = [popupList currentPoint];
+        NSPoint current = [_popupList currentPoint];
         NSPoint wp = [self convertPoint:point toView:nil];
         // update the window in y
-        [popupList moveToPoint:NSMakePoint(current.x, wp.y)];
-        [popupList setList:guesses];
-        [popupList showPopup];
+        [_popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+        [_popupList setList:guesses];
+        [_popupList showPopup];
       }
 		}
 	}
@@ -982,8 +984,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) clearSpellingList
 {
-	if (popupList) {
-    [popupList dismiss];
+	if (_popupList) {
+    [_popupList dismiss];
 	}
 }
 
@@ -1797,8 +1799,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) insertNewline:(id)sender
 {
-  if ([popupList isVisible]) {
-    [popupList selectSelectedItem:self];
+  if ([_popupList isVisible]) {
+    [_popupList selectSelectedItem:self];
     return;
   }
   
@@ -2274,15 +2276,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}		
 	}
   
-  if ([popupList isVisible]) {
+  if ([_popupList isVisible]) {
     // move down
     if ([theEvent keyCode] == 125 ) {
-      [popupList moveDown:self];
+      [_popupList moveDown:self];
       return;
     }
     // move up
     if ([theEvent keyCode] == 126 ) {
-      [popupList moveUp:self];
+      [_popupList moveUp:self];
       return;
     }
     
@@ -2293,7 +2295,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       if (sel.location < [[self string] length]) {
         unichar c = [[self string] characterAtIndex:sel.location];
         if ([whitespaceCharacterSet characterIsMember:c] || [newLineCharacterSet characterIsMember:c]) {
-          [popupList dismiss];
+          [_popupList dismiss];
         } else {
           [super keyDown:theEvent];
           [self performSelector:@selector(completeStuff:) withObject:self afterDelay:0];
@@ -2309,7 +2311,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       if (sel.location > 0) {
         unichar c = [[self string] characterAtIndex:sel.location-1];
         if ([whitespaceCharacterSet characterIsMember:c] || [newLineCharacterSet characterIsMember:c]) {
-          [popupList dismiss];
+          [_popupList dismiss];
         } else {
           // update the popup list
           [super keyDown:theEvent];
@@ -2327,7 +2329,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
-  [popupList dismiss];
+  [_popupList dismiss];
   [self clearHighlight];
 	[self clearSpellingList];
   
@@ -2678,7 +2680,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
   if (![self autocompleteArgument]) {
     if (![self autocompleteCommand]) {
-      [popupList dismiss];
+      [_popupList dismiss];
     }
   }
 }
@@ -3459,9 +3461,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *rawstring = [pboard stringForType:NSStringPboardType];
     _pastingRows = [[rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] retain];
     // pop up a sheet asking for the column separator
-    TPPasteTableConfigureWindowController *pasteConfig = [[[TPPasteTableConfigureWindowController alloc] init] autorelease];
-    
-    [NSApp beginSheet:pasteConfig.window
+    if (self.pasteConfigController == nil) {
+      self.pasteConfigController = [[[TPPasteTableConfigureWindowController alloc] init] autorelease];
+    }
+    [NSApp beginSheet:self.pasteConfigController.window
        modalForWindow:[self window]
         modalDelegate:self
        didEndSelector:@selector(pasteTableConfigureSheetDidEnd:returnCode:contextInfo:) 
@@ -3480,8 +3483,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return;
   }
   
-  TPPasteTableConfigureWindowController *pasteConfig = [sheet windowController];
-  NSString *separator = [pasteConfig separator];  
+  NSString *separator = [self.pasteConfigController separator];
   
   // check max columns
   NSInteger columnCount = 0;

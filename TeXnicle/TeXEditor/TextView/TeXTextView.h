@@ -38,6 +38,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 @class TPPopupListWindowController;
 @class FileEntity;
 @class TeXTextView;
+@class TPPasteTableConfigureWindowController;
 
 @protocol TeXTextViewDelegate <NSTextViewDelegate, MHTableConfigureDelegate>
 
@@ -58,7 +59,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 @interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
 @private
   
-	TPPopupListWindowController *popupList;
+	TPPopupListWindowController *_popupList;
   
   MHEditorRuler *editorRuler;
   TeXColoringEngine *coloringEngine;
@@ -93,9 +94,11 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
   
   CGFloat highlightAlpha;
   NSTimer *highlightAlphaTimer;
-  
+ 
+  TPPasteTableConfigureWindowController *_pasteConfigController;
 }
 
+@property (retain) TPPasteTableConfigureWindowController *pasteConfigController;
 @property (assign) NSInteger zoomFactor;
 @property (retain) NSTimer *highlightingTimer;
 @property (retain) MHEditorRuler *editorRuler;
