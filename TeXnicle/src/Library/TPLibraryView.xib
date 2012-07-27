@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
 		<string key="IBDocument.SystemVersion">12A269</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2818</string>
 		<string key="IBDocument.AppKitVersion">1187</string>
 		<string key="IBDocument.HIToolboxVersion">624.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">2818</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -363,8 +363,8 @@
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="1061857082">
 									<int key="NSCellFlags">68157504</int>
-									<int key="NSCellFlags2">272630784</int>
-									<string key="NSContents">Command:</string>
+									<int key="NSCellFlags2">71304192</int>
+									<string key="NSContents">Shortcut:</string>
 									<reference key="NSSupport" ref="698054080"/>
 									<string key="NSCellIdentifier">_NS:3944</string>
 									<reference key="NSControlView" ref="832212231"/>
@@ -1076,7 +1076,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSScroller" id="424956560">
 													<reference key="NSNextResponder" ref="380218622"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{430, 0}, {15, 175}}</string>
+													<string key="NSFrame">{{429, 0}, {16, 181}}</string>
 													<reference key="NSSuperview" ref="380218622"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="19002970"/>
@@ -1089,7 +1089,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 												<object class="NSScroller" id="64563322">
 													<reference key="NSNextResponder" ref="380218622"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 166}, {439, 15}}</string>
+													<string key="NSFrame">{{0, 165}, {445, 16}}</string>
 													<reference key="NSSuperview" ref="380218622"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="424956560"/>
