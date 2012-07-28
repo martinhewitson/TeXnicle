@@ -396,6 +396,8 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 - (IBAction)closeAllTabs:(id)sender;
 - (IBAction) closeCurrentTab:(id)sender;
 - (IBAction) newFolder:(id)sender;
+- (IBAction) newFolderOnDisk:(id)sender;
+- (IBAction) newGroupFolder:(id) sender;
 - (IBAction) newFile:(id)sender;
 - (IBAction) endNewFileSheet:(id)sender;
 - (void) newFileExists:(NSAlert *)alert code:(int)choice context:(void *)v;

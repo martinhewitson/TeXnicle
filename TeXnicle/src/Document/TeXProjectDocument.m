@@ -2714,12 +2714,12 @@
     
 }
 
-- (void) newGroupFolder:(id) sender
+- (IBAction) newGroupFolder:(id) sender
 {
   [self.projectItemTreeController addNewFolder];
 }
 
-- (void) newFolderOnDisk:(id)sender
+- (IBAction) newFolderOnDisk:(id)sender
 {
   [self.projectItemTreeController addNewFolderCreateOnDisk];
 }
