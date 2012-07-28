@@ -5,7 +5,38 @@
 		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
-
+    
+    
+    <!-- Version 2.0 beta 49 -->
+		<item>
+      <title>Version 2.0 (beta 49)</title>
+      <description><![CDATA[
+        <p>
+        <b>NOTE: If you are using TeXnicle on a 32-bit machine, please contact support@bobsoft-mac.de and let us know.
+        The current intention is to drop support for 32-bit machines in the next release!</b>
+        </p>
+        <p>
+        This release contains various minor bug fixes and optimisations.
+        </p>
+        <p>
+        <u>Some changes of note</u>
+        <ul>
+        <li>The Spelling navigator no longer shows the possible corrections in the table. It turns out that gathering the possible corrections
+        for all misspelled words is <i>very</i> computationally expensive for any reasonable sized documents. The corrections are just presented
+        now on demand.</li>
+        <li>Added the ability to set your own colors for the document outline view.</li>
+        </ul>
+        <p>
+      ]]></description>
+      <pubDate>22nd July 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta49.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="49"
+      length="15479810"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFFnHb6hb6B1dowvsMd4IiNxXQ5wYAhUAmItlQs5Jl83UE3XERA//pCIew3E="
+      />
+    </item>
     
     <!-- Version 2.0 beta 48 -->
 		<item>
@@ -28,102 +59,102 @@
     
 		<!-- Version 2.0 beta 47 -->
 		<item>
-       <title>Version 2.0 (beta 47)</title>
-       <description><![CDATA[
-         <p>
-         This will be the last beta release with feature changes. The plan is for one (or possibly two) more beta
-         release focussing on any reported bugs before releasing the final version of TeXnicle 2.0. Further change
-         requests will be looked at in the development of version 2.1.
-         </p>
-         <p>
-         A Significant amount of behind-the-scenes changes have taken place in this release, so it is recommended
-         that you have a good backup of any files (including TeXnicle's preferences file found under
-         ~/Library/Preferences/com.bobsoft.TeXnicle.plist) before using this version. No problems are expected,
-         but you never know.
-         </p>
-         <h3>Focus Area: Spell Checking</h3>
-         <p>
-         TeXnicle has two new features associated with spell checking. The first is that the dictionary language
-         can be specified for individual documents or projects. This is done on the project/document settings tab.
-         </p>
-         <p>
-         The second is a project-wide spelling list which appears as a new navigation pane on projects. This
-         shows a list of project files and misspelled words within them.
-         </p>
-         <p>
-         You can correct words directly from the spelling pane using the "Correct" action button, or using the
-         context menu of the listed words. You can also jump to the misspelled word in the editor by double
-         clicking on the word in the list or by clicking the "Reveal" button.
-         </p>
-         <p>
-         Files are checked every 1s, but only if there have been changes since the last check. You can force a
-         full check of all files by clicking the "Force Check" button. The spell checking is only done for file
-         types which are listed in the "File Types" preference pane and which have Spell Check selected.
-         </p>
-         <p>
-         It is recommended to install CocoaASpell from http://cocoaspell.leuski.net/. This provides
-         system-wide dictionaries which are TeX aware. The following article is a useful
-         read: http://www.jkwchui.com/2010/03/spellchecking-latex-in-macosx/.
-         </p>
-         <p>
-         <h3>Other Changes</h3>
-         <ul>
-         <li>New spelling panel for projects (see release notes).</li>
-         <li>The spelling dictionary language can now be specified per project or document (see release notes).</li>
-         <li>It is now possible to control the depth of the outline that's shown in the outline view.</li>
-         <li>Added a preference to activate/deactivate restoring open tabs in projects.</li>
-         <li>Added a preference to control the interval between live updates.</li>
-         <li>Added two new menu items under view to show the integrated console and pdf viewer should they be collapsed.</li>
-         <li>Added 3 new syntax highlighting elements which 'markup' the text between < >, << >>, or <<< >>>. Useful for
-         marking text that needs to be edited later. These elements are off by default.</li>
-         <li>Project searching can now be restricted to case sensitive or whole word searches.</li>
-         <li>PDF viewer now displays the current page number and total page count.</li>
-         <li>Bug fix: added a workaround for the bug in 10.7.4 which stops PDFs being displayed properly.</li>
-         <li>Bug fix: project search results remain valid even after the content of the files changes.</li>
-         <li>Bug fix: selecting rearranged tabs could result in crashing.</li>
-         <li>Various bug fixes and optimisations, especially to the underlying project document management.</li>
-         </ul>
-         </p>
-       ]]></description>
-       <pubDate>21st July 2012</pubDate>
-       <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta47.zip"
-       sparkle:shortVersionString="2.0"
-       sparkle:version="47"
-       length="22712320"
-       type="application/octet-stream"
+      <title>Version 2.0 (beta 47)</title>
+      <description><![CDATA[
+        <p>
+        This will be the last beta release with feature changes. The plan is for one (or possibly two) more beta
+        release focussing on any reported bugs before releasing the final version of TeXnicle 2.0. Further change
+        requests will be looked at in the development of version 2.1.
+        </p>
+        <p>
+        A Significant amount of behind-the-scenes changes have taken place in this release, so it is recommended
+        that you have a good backup of any files (including TeXnicle's preferences file found under
+        ~/Library/Preferences/com.bobsoft.TeXnicle.plist) before using this version. No problems are expected,
+        but you never know.
+        </p>
+        <h3>Focus Area: Spell Checking</h3>
+        <p>
+        TeXnicle has two new features associated with spell checking. The first is that the dictionary language
+        can be specified for individual documents or projects. This is done on the project/document settings tab.
+        </p>
+        <p>
+        The second is a project-wide spelling list which appears as a new navigation pane on projects. This
+        shows a list of project files and misspelled words within them.
+        </p>
+        <p>
+        You can correct words directly from the spelling pane using the "Correct" action button, or using the
+        context menu of the listed words. You can also jump to the misspelled word in the editor by double
+        clicking on the word in the list or by clicking the "Reveal" button.
+        </p>
+        <p>
+        Files are checked every 1s, but only if there have been changes since the last check. You can force a
+        full check of all files by clicking the "Force Check" button. The spell checking is only done for file
+        types which are listed in the "File Types" preference pane and which have Spell Check selected.
+        </p>
+        <p>
+        It is recommended to install CocoaASpell from http://cocoaspell.leuski.net/. This provides
+        system-wide dictionaries which are TeX aware. The following article is a useful
+        read: http://www.jkwchui.com/2010/03/spellchecking-latex-in-macosx/.
+        </p>
+        <p>
+        <h3>Other Changes</h3>
+        <ul>
+        <li>New spelling panel for projects (see release notes).</li>
+        <li>The spelling dictionary language can now be specified per project or document (see release notes).</li>
+        <li>It is now possible to control the depth of the outline that's shown in the outline view.</li>
+        <li>Added a preference to activate/deactivate restoring open tabs in projects.</li>
+        <li>Added a preference to control the interval between live updates.</li>
+        <li>Added two new menu items under view to show the integrated console and pdf viewer should they be collapsed.</li>
+        <li>Added 3 new syntax highlighting elements which 'markup' the text between < >, << >>, or <<< >>>. Useful for
+        marking text that needs to be edited later. These elements are off by default.</li>
+        <li>Project searching can now be restricted to case sensitive or whole word searches.</li>
+        <li>PDF viewer now displays the current page number and total page count.</li>
+        <li>Bug fix: added a workaround for the bug in 10.7.4 which stops PDFs being displayed properly.</li>
+        <li>Bug fix: project search results remain valid even after the content of the files changes.</li>
+        <li>Bug fix: selecting rearranged tabs could result in crashing.</li>
+        <li>Various bug fixes and optimisations, especially to the underlying project document management.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>21st July 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta47.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="47"
+      length="22712320"
+      type="application/octet-stream"
       sparkle:dsaSignature="MEQCIHA4jFYOa8xBzrtS+CNSQdbzMi0FWjAqR/H6kcRZjVDhAiBAx1tnJwg+uL6ZnaGbyFco1wLBMEtPqqozsg9OAwUdyA=="
-       />
-     </item>
-
-     
+      />
+    </item>
+    
+    
 		<!-- Version 2.0 beta 46 -->
 		<item>
-            <title>Version 2.0 (beta 46)</title>
-            <description><![CDATA[
-              <h2>New features</h2>
-              <ul>
-                <li>Added a syntax highlighting element for $ characters.</li>
-                <li>Added new 'Navigators' menu under 'View' which allows switching between the various
-                    navigators, and showing the left panel when it's collapsed.</li>
-                <li>Added a preference on the Typesetting preference pane to clear consoles on typesetting.</li>
-                <li>Project tabs are now reopened in the order in which they were when the project was closed.</li>
-              </ul>
-              <h2>Bug fixes</h2>
-              <ul>
-                <li>Automatically adding \end after \begin now works even if some text follows the \begin{} statement.</li>
-                <li>Saving projects after rearranging editor tabs sometimes caused a crash. This is fixed now.</li>
-                <li>Various other minor bug fixes.</li>
-              </ul>
-            ]]></description>
-            <pubDate>23 June 2012</pubDate>
-            <enclosure	url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta46.zip"
-                        sparkle:shortVersionString="2.0"
-                        sparkle:version="46"
-                        length="1472893"
-                        type="application/octet-stream"
-                        sparkle:dsaSignature="MEQCIFx8ciNg934w0ArQskwPvuWY+h+mNl7vM8xbR49QUPGxAiAIveR1fQI96FGOsrGvBqIMEt3i/t57cHdVWkwe8EA+2g=="
-            />
-         </item>
-
-   </channel>
+      <title>Version 2.0 (beta 46)</title>
+      <description><![CDATA[
+        <h2>New features</h2>
+        <ul>
+        <li>Added a syntax highlighting element for $ characters.</li>
+        <li>Added new 'Navigators' menu under 'View' which allows switching between the various
+        navigators, and showing the left panel when it's collapsed.</li>
+        <li>Added a preference on the Typesetting preference pane to clear consoles on typesetting.</li>
+        <li>Project tabs are now reopened in the order in which they were when the project was closed.</li>
+        </ul>
+        <h2>Bug fixes</h2>
+        <ul>
+        <li>Automatically adding \end after \begin now works even if some text follows the \begin{} statement.</li>
+        <li>Saving projects after rearranging editor tabs sometimes caused a crash. This is fixed now.</li>
+        <li>Various other minor bug fixes.</li>
+        </ul>
+      ]]></description>
+      <pubDate>23 June 2012</pubDate>
+      <enclosure	url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta46.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="46"
+      length="1472893"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MEQCIFx8ciNg934w0ArQskwPvuWY+h+mNl7vM8xbR49QUPGxAiAIveR1fQI96FGOsrGvBqIMEt3i/t57cHdVWkwe8EA+2g=="
+      />
+    </item>
+    
+  </channel>
 </rss>
