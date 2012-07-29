@@ -29,14 +29,9 @@
 #import <Foundation/Foundation.h>
 #import "TPTemplateItem.h"
 
-@interface TPTemplateDirectory : TPTemplateItem {
-@private
-  NSArray *children;
-}
+@interface TPTemplateDirectory : TPTemplateItem
 
 @property (strong) NSArray *children;
-
-
 
 - (void) populateChildren;
 - (void) saveContents;

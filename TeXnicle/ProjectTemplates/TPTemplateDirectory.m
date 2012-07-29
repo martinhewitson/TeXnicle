@@ -32,9 +32,6 @@
 
 @implementation TPTemplateDirectory
 
-
-@synthesize children;
-
 - (id) initWithPath:(NSString*)aPath
 {
   self = [super initWithPath:aPath];

@@ -28,11 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPTemplateItem : NSObject {
-@private
-  NSString *path;
-  NSNumber *isExpanded;
-}
+@interface TPTemplateItem : NSObject
 
 @property (copy) NSString *path;
 @property (strong) NSNumber *isExpanded;

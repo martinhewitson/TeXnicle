@@ -31,12 +31,12 @@
 
 @interface TPProjectTemplateListViewController ()
 
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
+@property (strong) NSMutableArray *templates;
+
 @end
 
 @implementation TPProjectTemplateListViewController
-
-@synthesize templates;
-@synthesize tableView;
 
 
 - (id)init

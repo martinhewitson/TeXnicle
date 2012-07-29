@@ -30,24 +30,7 @@
 #import "HHValidatedButton.h"
 #import "TPProjectTemplateListViewController.h"
 
-
-@class TPProjectTemplate;
-
-@interface TPProjectTemplateManager : NSViewController <NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
-  HHValidatedButton *__unsafe_unretained editButton;
-  HHValidatedButton *__unsafe_unretained duplicateButton;
-  HHValidatedButton *__unsafe_unretained deleteButton;
-  HHValidatedButton *__unsafe_unretained revealButton;
-  TPProjectTemplateListViewController *templateListViewController; 
-  NSView *__unsafe_unretained templateListContainer;
-}
-
-@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
-@property (strong) TPProjectTemplateListViewController *templateListViewController;
+@interface TPProjectTemplateManager : NSViewController <NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource>
 
 - (IBAction)editSelectedTemplate:(id)sender;
 - (IBAction)duplicateSelectedTemplate:(id)sender;

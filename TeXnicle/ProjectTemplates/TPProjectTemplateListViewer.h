@@ -30,15 +30,7 @@
 #import "TPProjectTemplateListViewController.h"
 #import "TPProjectTemplateViewer.h"
 
-@interface TPProjectTemplateListViewer : NSWindowController <TPProjectTemplateViewerDelegate>{
-@private
-  TPProjectTemplateListViewController *listViewController;
-  NSView *__unsafe_unretained listViewContainer;
-}
-
-@property (strong) TPProjectTemplateListViewController *listViewController;
-@property (unsafe_unretained) IBOutlet NSView *listViewContainer;
-
+@interface TPProjectTemplateListViewer : NSWindowController <TPProjectTemplateViewerDelegate>
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)createProjectFromSelectedTemplate:(id)sender;

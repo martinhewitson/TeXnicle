@@ -28,12 +28,12 @@
 
 #import "TPProjectTemplate.h"
 
-@implementation TPProjectTemplate
+@interface TPProjectTemplate ()
 
-@synthesize name;
-@synthesize path;
-@synthesize isBuiltIn;
-@synthesize desc;
+
+@end
+
+@implementation TPProjectTemplate
 
 - (id) initWithPath:(NSString*)aPath
 {

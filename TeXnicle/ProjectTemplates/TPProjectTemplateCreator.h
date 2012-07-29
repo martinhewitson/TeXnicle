@@ -38,9 +38,7 @@
 
 @end
 
-@interface TPProjectTemplateCreator : NSWindowController <NSWindowDelegate> {
-@private
-}
+@interface TPProjectTemplateCreator : NSWindowController <NSWindowDelegate>
 
 @property (unsafe_unretained) id<TPProjectTemplateCreateDelegate> delegate;
 @property (copy) NSString *suggestedTemplateName;

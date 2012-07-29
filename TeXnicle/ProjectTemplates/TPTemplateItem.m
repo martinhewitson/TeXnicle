@@ -29,8 +29,6 @@
 #import "TPTemplateItem.h"
 
 @implementation TPTemplateItem
-@synthesize path;
-@synthesize isExpanded;
 
 - (id) initWithPath:(NSString*)aPath
 {

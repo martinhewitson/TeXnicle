@@ -29,14 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TPProjectTemplate.h"
 
-@interface TPProjectTemplateListViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
-@private
-  NSMutableArray *templates;  
-  NSTableView *__unsafe_unretained tableView;
-}
-
-@property (unsafe_unretained) IBOutlet NSTableView *tableView;
-@property (strong) NSMutableArray *templates;
+@interface TPProjectTemplateListViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
 
 - (void) generateTemplateList;
 - (TPProjectTemplate*)selectedTemplate;

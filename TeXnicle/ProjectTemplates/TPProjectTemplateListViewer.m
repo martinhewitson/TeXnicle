@@ -29,10 +29,14 @@
 #import "TPProjectTemplateListViewer.h"
 #import "TPProjectTemplateViewer.h"
 
-@implementation TPProjectTemplateListViewer
+@interface TPProjectTemplateListViewer ()
 
-@synthesize listViewContainer;
-@synthesize listViewController;
+@property (strong) TPProjectTemplateListViewController *listViewController;
+@property (unsafe_unretained) IBOutlet NSView *listViewContainer;
+
+@end
+
+@implementation TPProjectTemplateListViewer
 
 - (id)init
 {

@@ -28,13 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPProjectTemplate : NSObject {
-@private
-  NSString *name;
-  NSString *path;
-  BOOL isBuiltIn;
-  NSString *desc;
-}
+@interface TPProjectTemplate : NSObject
 
 @property (copy) NSString *name;
 @property (copy) NSString *path;

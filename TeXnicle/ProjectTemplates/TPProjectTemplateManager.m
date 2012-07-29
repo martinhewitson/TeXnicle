@@ -35,15 +35,16 @@
 
 @interface TPProjectTemplateManager ()
 
+@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (strong) TPProjectTemplateListViewController *templateListViewController;
+
 @end
 
 @implementation TPProjectTemplateManager
-@synthesize editButton;
-@synthesize duplicateButton;
-@synthesize deleteButton;
-@synthesize revealButton;
-@synthesize templateListViewController;
-@synthesize templateListContainer;
 
 - (id)init
 {
