@@ -50,7 +50,6 @@
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;
 
 - (NSArray*)folders;
-- (void) setupSettings;
 - (BOOL) hasChanges;
 - (void) createSettings;
 
