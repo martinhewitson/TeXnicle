@@ -39,39 +39,9 @@
 @end
 
 @interface TPFileEntityMetadata : NSObject <SyntaxCheckerDelegate> {
-  
-  TPSyntaxChecker *checker;
-  NSString *temporaryFileForSyntaxCheck;
-  
-  // meta data update
-  BOOL needsUpdate;
-  NSDate *lastMetadataUpdate;
-  NSTimer *metadataTimer;
-  
-  
-  // sections
-  NSArray *sections;
-  NSDate *lastUpdateOfSections;
-  
-  // new commands
-  NSArray *userNewCommands;
-  
-  // citations
-  NSArray *citations;
-  
-  // labels
-  NSArray *labels;
-  
-  // includes/inputs
-  NSArray *includes;
-  
-  // syntax errors
-  NSArray *syntaxErrors;
-  
-  FileEntity *__unsafe_unretained parent;
+
+@private  
   dispatch_queue_t queue;
-  NSOperationQueue* aQueue;
-  
   TPMetadataOperation *currentOperation;
 }
 

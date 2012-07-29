@@ -17,17 +17,6 @@
 
 @implementation TPMetadataOperation
 
-@synthesize text;
-
-// inputs
-@synthesize file;
-
-// metadata
-@synthesize commands;
-@synthesize citations;
-@synthesize syntaxErrors;
-@synthesize labels;
-
 - (id) initWithFile:(FileEntity*)aFile
 {
   self = [super init];

@@ -29,13 +29,8 @@
 
 @class FileEntity;
 
-@interface FileDocument : NSObject {
+@interface FileDocument : NSObject
 
-	FileEntity *__unsafe_unretained file;
-	NSTextStorage *textStorage;
-	NSUndoManager *undoManager;
-	
-}
 @property (readwrite, unsafe_unretained) FileEntity *file;
 @property (readwrite) NSTextStorage *textStorage;
 @property (readwrite) NSUndoManager *undoManager;

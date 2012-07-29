@@ -27,12 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPSyntaxError : NSObject {
-@private
-  id __unsafe_unretained file;
-  NSNumber *line;
-  NSString* message;
-}
+@interface TPSyntaxError : NSObject
 
 @property (unsafe_unretained) id file;
 @property (strong) NSNumber *line;

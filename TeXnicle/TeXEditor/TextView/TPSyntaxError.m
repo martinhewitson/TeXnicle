@@ -30,11 +30,6 @@
 
 @implementation TPSyntaxError
 
-@synthesize line;
-@synthesize message;
-@synthesize file;
-
-
 + (id) errorWithMessage:(NSString*)aMessage line:(NSNumber*)aLine
 {
   return [[TPSyntaxError alloc] initWithMessage:aMessage line:aLine];

@@ -35,10 +35,6 @@
 
 @implementation FileDocument
 
-@synthesize file;
-@synthesize textStorage;
-@synthesize undoManager;
-
 - (id) initWithFile:(FileEntity*)aFile
 {
 	self = [super init];
@@ -46,26 +42,26 @@
 	if (self) {
 		
 //		NSLog(@"Creating document for %@", [aFile name]);
-		file = aFile;
+		self.file = aFile;
 		
 		// Get the string from the File entity
     MHFileReader *fr = [[MHFileReader alloc] init];
-    NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
-		NSString *str = [[NSString alloc] initWithData:[file valueForKey:@"content"]
+    NSStringEncoding encoding = [fr encodingForFileAtPath:[self.file pathOnDisk]];
+		NSString *str = [[NSString alloc] initWithData:[self.file valueForKey:@"content"]
 																					encoding:encoding];
     
 		// Setup undo manager for this file
-		undoManager = [[NSUndoManager alloc] init];
+		self.undoManager = [[NSUndoManager alloc] init];
 		
 		// Setup a text storage to hold this string
 		NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
-		textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
+		self.textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
     
 		// Add a main layout manager
 		NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
 		[layoutManager setAllowsNonContiguousLayout:YES];
-		[textStorage addLayoutManager:layoutManager];
+		[self.textStorage addLayoutManager:layoutManager];
 				
 		// Now add the container to the layout manager
 		NSTextContainer *textContainer = [[NSTextContainer alloc] initWithContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
@@ -80,7 +76,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self
 																						 selector:@selector(handleEdits:)
 																								 name:NSTextStorageDidProcessEditingNotification
-																							 object:textStorage];
+																							 object:self.textStorage];
 	}
 	
 	return self;
@@ -95,27 +91,27 @@
 - (NSTextContainer*)textContainer
 {
 	// An ugly quick hack to return the 'main' text container for this document
-	return [[textStorage layoutManagers][0] textContainers][0];
+	return [[self.textStorage layoutManagers][0] textContainers][0];
 }
 
 - (BOOL) commitEdits
 {
 	
-	NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
+	NSDate *lastEdit = [self.file valueForKey:@"lastEditDate"];
 	
 	if (lastEdit) {
-		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:textStorage];
+		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:self.textStorage];
 		[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
 		
 		NSString *str = [string unfoldedString];
 		
 		//	NSString *str = [textStorage string];
     MHFileReader *fr = [[MHFileReader alloc] init];
-    NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
+    NSStringEncoding encoding = [fr encodingForFileAtPath:[self.file pathOnDisk]];
 		NSData *data = [str dataUsingEncoding:encoding];
 		
-		if (![[file valueForKey:@"content"] isEqual:data]) {
-			[file setValue:data forKey:@"content"];
+		if (![[self.file valueForKey:@"content"] isEqual:data]) {
+			[self.file setValue:data forKey:@"content"];
     }
     return YES;
     
@@ -126,29 +122,29 @@
 
 - (void) handleEdits:(NSNotification*)aNote
 {
-  NSDate *loaded = [file valueForKey:@"fileLoadDate"];
-  NSDate *lastEdit = [file valueForKey:@"lastEditDate"];
+  NSDate *loaded = [self.file valueForKey:@"fileLoadDate"];
+  NSDate *lastEdit = [self.file valueForKey:@"lastEditDate"];
   
   // if the last edit is prior to the load, then we didn't edit so far
   if ([loaded compare:lastEdit] == NSOrderedAscending) {
 //    NSLog(@"Edit date later than loaded date");
-    [file setValue:@YES forKey:@"hasEdits"];
-    [file setValue:[NSDate date] forKey:@"lastEditDate"];
+    [self.file setValue:@YES forKey:@"hasEdits"];
+    [self.file setValue:[NSDate date] forKey:@"lastEditDate"];
   } else {
 //    NSLog(@"Edit date earlier than loaded date");
-    [file setValue:@NO forKey:@"hasEdits"];
-    [file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
+    [self.file setValue:@NO forKey:@"hasEdits"];
+    [self.file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
   }
   	
 	// update all views
-	for (NSLayoutManager *layout in [textStorage layoutManagers]) {
+	for (NSLayoutManager *layout in [self.textStorage layoutManagers]) {
 		for (NSTextContainer *tc in [layout textContainers]) {
 			[[tc textView] setNeedsDisplay:YES];
 		}
 	}
 	
 	// tell the parent file the text changed
-  [file textChanged];
+  [self.file textChanged];
 }
 
 

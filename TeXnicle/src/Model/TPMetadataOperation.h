@@ -10,19 +10,7 @@
 #import "TPFileEntityMetadata.h"
 #import "FileEntity.h"
 
-@interface TPMetadataOperation : NSOperation  {
-
-  NSString *text;
-  
-  // inputs
-  FileEntity *file;
-  
-  // metadata
-  NSArray *commands;
-  NSArray *citations;
-  NSArray *syntaxErrors;
-  NSArray *labels;
-}
+@interface TPMetadataOperation : NSOperation
 
 @property (copy, nonatomic) NSString *text;
 

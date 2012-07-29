@@ -45,24 +45,6 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
 @implementation TPFileEntityMetadata
 
-@synthesize checker;
-@synthesize temporaryFileForSyntaxCheck;
-
-@synthesize needsUpdate;
-@synthesize lastMetadataUpdate;
-@synthesize metadataTimer;
-
-@synthesize sections;
-@synthesize lastUpdateOfSections;
-
-@synthesize userNewCommands;
-
-@synthesize syntaxErrors;
-@synthesize citations;
-@synthesize labels;
-@synthesize includes;
-@synthesize parent;
-
 @synthesize aQueue;
 
 - (id) initWithParent:(id)aFile
