@@ -48,9 +48,8 @@ extern NSString * const OutlineViewNodeType;
 @class TPOutlineView;
 
 @interface ProjectItemTreeController : NSTreeController <NSOutlineViewDataSource, NSOutlineViewDelegate> {
-	
-	TeXProjectDocument *__unsafe_unretained document;
-	ProjectEntity *__unsafe_unretained project;
+
+@private
 	IBOutlet TPOutlineView *outlineView;
 	IBOutlet OpenDocumentsManager *openDocumentsManager;
 	ProjectItemEntity *lastInserted;
@@ -84,16 +83,13 @@ extern NSString * const OutlineViewNodeType;
 	IBOutlet NSButton *finishedAddingFilesBtn;
 	int recurseCount;
 	int filesAddedCounter;
-	
-	BOOL isDeleting;
-	BOOL dragEnabled;
 }
 
 @property (readwrite, assign) BOOL isDeleting;
 @property (assign) BOOL dragEnabled;
 
-@property (readwrite, unsafe_unretained) IBOutlet TeXProjectDocument *document;
-@property (readwrite, unsafe_unretained) ProjectEntity *project;
+@property (unsafe_unretained) IBOutlet TeXProjectDocument *document;
+@property (nonatomic, strong) ProjectEntity *project;
 
 - (void)updateSortOrder;
 

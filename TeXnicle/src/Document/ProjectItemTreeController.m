@@ -79,11 +79,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 @implementation ProjectItemTreeController
 
-@synthesize project;
-@synthesize document;
-@synthesize isDeleting;
-@synthesize dragEnabled;
-
 - (void)updateSortOrder
 {
   [self updateSortOrderOfModelObjects];
@@ -91,8 +86,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (NSManagedObject *)project
 {
-	if (project != nil) {
-		return project;
+	if (_project != nil) {
+		return _project;
 	}
 	
 	NSManagedObjectContext *moc = [self managedObjectContext];
@@ -107,8 +102,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		self.project = fetchResults[0];
-		return project;
+		_project = fetchResults[0];
+		return _project;
 	}
 	
 	if (fetchError != nil) {
@@ -189,7 +184,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	if (projectFolder) {
 		pathOnDisk = [NSString stringWithString:projectFolder];
 	} else {
-		pathOnDisk = [NSString stringWithString:[[[document fileURL] path] stringByDeletingLastPathComponent]];
+		pathOnDisk = [NSString stringWithString:[[[self.document fileURL] path] stringByDeletingLastPathComponent]];
 	}
 	
 	// See if we can get a better folder path for insertion
@@ -267,14 +262,14 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 // Add a new folder to the project
 - (void) addNewFolder
 {
-	NSString *folderName = [NSString stringWithFormat:@"New Folder %02d", [[self flattenedContent] count]];
+	NSString *folderName = [NSString stringWithFormat:@"New Folder %02lu", [[self flattenedContent] count]];
 	[self addFolder:folderName withFilePath:nil createOnDisk:NO];
 }
 
 // Add a new folder to the project and create on disk
 - (void) addNewFolderCreateOnDisk
 {
-	NSString *folderName = [NSString stringWithFormat:@"New Folder %02d", [[self flattenedContent] count]];
+	NSString *folderName = [NSString stringWithFormat:@"New Folder %02lu", [[self flattenedContent] count]];
 	[self addFolder:folderName withFilePath:nil createOnDisk:YES];
 }
 
@@ -484,7 +479,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[openPanel setAllowsMultipleSelection:NO];
 	[openPanel setCanCreateDirectories:NO];
   
-  [openPanel beginSheetModalForWindow:[document windowForSheet]
+  [openPanel beginSheetModalForWindow:[self.document windowForSheet]
                     completionHandler:^(NSInteger result) {
                       if (result == NSCancelButton) 
                         return;
@@ -525,7 +520,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	// prompt user to include files and folders recursively in to selected folder or project folder, or not
 	
 	[NSApp beginSheet:addExistingFolderSheet
-		 modalForWindow:[document windowForSheet]
+		 modalForWindow:[self.document windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
 				contextInfo:NULL];	
@@ -602,7 +597,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[finishedAddingFilesBtn setEnabled:NO];
 	
 	[NSApp beginSheet:addingFilesSheet
-		 modalForWindow:[document windowForSheet]
+		 modalForWindow:[self.document windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
 				contextInfo:NULL];	
@@ -745,7 +740,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	selectedFolder = aFolder;
 	
-  [openPanel beginSheetModalForWindow:[document windowForSheet]
+  [openPanel beginSheetModalForWindow:[self.document windowForSheet]
                     completionHandler:^(NSInteger result) {
                       if (result == NSCancelButton) 
                         return;
@@ -891,7 +886,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
                                      defaultButton:@"OK" 
                                    alternateButton:@"Cancel"
                                        otherButton:nil 
-                         informativeTextWithFormat:@"The source file is not a regular file. Aborting.", aPath
+                         informativeTextWithFormat:@"The source file at %@ is not a regular file. Aborting.", aPath
                       ]; 
     
     [alert runModal];
@@ -1055,7 +1050,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 																		 otherButton:nil 
 											 informativeTextWithFormat:@"Do you really want to delete the selected items?"
 										]; 
-	[alert beginSheetModalForWindow:[document windowForSheet]
+	[alert beginSheetModalForWindow:[self.document windowForSheet]
 										modalDelegate:self
 									 didEndSelector:@selector(removeItemsAlertEnded:code:context:) 
 											contextInfo:NULL];
