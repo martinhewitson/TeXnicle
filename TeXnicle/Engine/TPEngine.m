@@ -30,6 +30,7 @@
 #import "externs.h"
 #import "MHFileReader.h"
 #import "NSScanner+TeXnicle.h"
+#import "NSApplication+SystemVersion.h"
 
 @implementation TPEngine
 
@@ -253,7 +254,7 @@
 	
   // notify interested parties
 //  NSLog(@"Compile finished - informing delegate");
-  [self.delegate compileDidFinish:!abortCompile];
+  [self compileDidFinish:!abortCompile];
   
 	if (abortCompile) {
     [self enginePostMessage:[NSString stringWithFormat:@"Compile aborted."]];
@@ -338,9 +339,26 @@
 
 - (void)compileDidFinish:(BOOL)success
 {
+  if ([[NSApplication sharedApplication] isMountainLion]) {
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    [notification setTitle:@"Typesetting Completed"];
+    if (success) {
+      [notification setInformativeText:[NSString stringWithFormat:@"Typesetting of %@ with engine %@ completed", [self.documentPath lastPathComponent], self.name]];
+    } else {
+      [notification setInformativeText:[NSString stringWithFormat:@"Typesetting of %@ with engine %@ failed", [self.documentPath lastPathComponent], self.name]];
+    }
+    [notification setDeliveryDate:[NSDate date]];
+    [notification setSoundName:NSUserNotificationDefaultSoundName];
+    
+    //Get the default notification center
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    //Scheldule our NSUserNotification
+    [center scheduleNotification:notification];
+  }
+  
   if (self.delegate && [self.delegate respondsToSelector:@selector(compileDidFinish:)]) {
     [self.delegate compileDidFinish:success];
-  }
+  }  
 }
 
 - (void)enginePostMessage:(NSString*)someText
