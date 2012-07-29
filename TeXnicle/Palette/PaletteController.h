@@ -39,21 +39,14 @@
 
 @interface PaletteController : NSViewController <NSTableViewDelegate, PaletteControllerDelegate, NSUserInterfaceValidations> {
 
+@private
 	NSDictionary *palette;
 	
-	NSArray *palettes;
 	IBOutlet NSArrayController *palettesController;
 	IBOutlet NSArrayController *symbolsController;
-	
-//	IBOutlet NSSegmentedControl *tabControl;
-//	IBOutlet NSTabView *tabView;
 	IBOutlet NSTableView *symbolsTable;
-	
 	IBOutlet NSSlider *slider;
-  
   IBOutlet HHValidatedButton *insertButton;
-  
-  id<PaletteControllerDelegate> __unsafe_unretained delegate;
 }
 
 @property (unsafe_unretained) id<PaletteControllerDelegate> delegate;

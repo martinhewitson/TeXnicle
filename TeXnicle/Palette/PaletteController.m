@@ -31,9 +31,6 @@
 
 @implementation PaletteController
 
-@synthesize delegate;
-@synthesize palettes;
-
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate
 {
   self = [super initWithNibName:@"PaletteController" bundle:nil];
