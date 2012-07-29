@@ -34,14 +34,12 @@
 
 @interface TPWarningsViewController ()
 
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+
 @end
 
 @implementation TPWarningsViewController
-
-@synthesize revealButton;
-@synthesize delegate;
-@synthesize outlineView;
-@synthesize sets;
 
 - (id) initWithDelegate:(id<TPWarningsViewDelegate>)aDelegate 
 {

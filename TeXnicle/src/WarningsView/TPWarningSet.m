@@ -31,9 +31,6 @@
 
 @implementation TPWarningSet
 
-@synthesize file;
-@synthesize errors;
-
 - (id) initWithFile:(FileEntity*)aFile errors:(NSArray *)someErrors
 {
   self = [super init];
@@ -76,7 +73,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *warningCountString = nil; 
-  warningCountString = [NSString stringWithFormat:@" [%d] ", [self.errors count]];
+  warningCountString = [NSString stringWithFormat:@" [%lu] ", [self.errors count]];
   
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:warningCountString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  

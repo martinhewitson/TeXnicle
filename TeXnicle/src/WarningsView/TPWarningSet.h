@@ -29,10 +29,7 @@
 
 @class FileEntity;
 
-@interface TPWarningSet : NSObject {
-  id __unsafe_unretained file;
-  NSArray *errors;
-}
+@interface TPWarningSet : NSObject
 
 @property (strong) NSArray *errors;
 @property (unsafe_unretained) id file;

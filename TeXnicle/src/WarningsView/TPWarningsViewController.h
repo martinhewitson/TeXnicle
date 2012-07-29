@@ -40,17 +40,11 @@
 @end
 
 @interface TPWarningsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPWarningsViewDelegate> {
-  
-  NSMutableArray *sets;
-  NSOutlineView *__unsafe_unretained outlineView;
-  id<TPWarningsViewDelegate> __unsafe_unretained delegate;
-  HHValidatedButton *__unsafe_unretained revealButton;
+@private
   BOOL firstView;
 }
 
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
 @property (unsafe_unretained) id<TPWarningsViewDelegate> delegate;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
 @property (strong) NSMutableArray *sets;
 
 - (id) initWithDelegate:(id<TPWarningsViewDelegate>)aDelegate;
