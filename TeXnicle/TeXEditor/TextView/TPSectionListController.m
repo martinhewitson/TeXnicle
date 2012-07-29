@@ -257,8 +257,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
                         range:NSMakeRange([type length]+1, [disp length]-[type length]-1)];
           
           NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-          [dict setObject:adisp forKey:@"title"];
-          [dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
+          dict[@"title"] = adisp;
+          dict[@"index"] = [NSNumber numberWithInteger:[aScanner scanLocation]];
           [found addObject:dict];
         }
 			} // end loop over results
@@ -316,15 +316,15 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 										range:NSMakeRange(0, [type length])];
 			
 			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-			[dict setObject:adisp forKey:@"title"];
-			[dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
+			dict[@"title"] = adisp;
+			dict[@"index"] = [NSNumber numberWithInteger:[aScanner scanLocation]];
 			[found addObject:dict];
 		}
 	}
   
   // add bookmarks
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
-    NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+    NSArray *descriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
     NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
     for (Bookmark *b in bookmarks) {
       if (b.displayString != nil) {
@@ -334,9 +334,9 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
                     range:NSMakeRange(0, [str length])];
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:str forKey:@"title"];
+        dict[@"title"] = str;
         NSInteger index = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
-        [dict setObject:[NSNumber numberWithInteger:index] forKey:@"index"];
+        dict[@"index"] = @(index);
         [found addObject:dict];
       }
     }
@@ -345,7 +345,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
 	// sort items by index
 	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	NSArray *results = [found sortedArrayUsingDescriptors:[NSArray arrayWithObject:desc]];	
+	NSArray *results = [found sortedArrayUsingDescriptors:@[desc]];	
 	NSMutableArray *current = [NSMutableArray array];
 	for (NSMenuItem *item in [popupMenu itemArray]) {
     
@@ -357,8 +357,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:[item title] forKey:@"title"];
-    [dict setObject:[NSNumber numberWithInteger:[item tag]] forKey:@"index"];
+    dict[@"title"] = [item title];
+    dict[@"index"] = @([item tag]);
     [current addObject:dict];
 	}
 	
@@ -368,7 +368,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		// compare contents
 		int jj=0;
 		for (NSDictionary *cdict in current) {
-			NSDictionary *rdict = [results objectAtIndex:jj];
+			NSDictionary *rdict = results[jj];
 			if (![[[rdict valueForKey:@"title"] string] isEqual:[cdict valueForKey:@"title"]]) {
 				sameMenu = NO;
 				break;

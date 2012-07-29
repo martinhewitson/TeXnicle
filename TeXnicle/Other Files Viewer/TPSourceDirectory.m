@@ -36,13 +36,11 @@
 {
   static NSArray *scanProperties = nil;
   if (!scanProperties) {
-    scanProperties = [NSArray arrayWithObjects:
-                       NSURLNameKey, 
+    scanProperties = @[NSURLNameKey, 
                        NSURLIsDirectoryKey, 
                        NSURLIsRegularFileKey, 
                        NSURLIsHiddenKey,
-                       NSURLIsPackageKey,
-                       nil];
+                       NSURLIsPackageKey];
   }
   return scanProperties;
 }

@@ -59,7 +59,7 @@
   self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
-	[self setValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
+	[self setValue:@NO forKey:@"isText"];
 	[self reconfigureDocument];
 //	if (!document) {
 ////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
@@ -133,9 +133,9 @@
 //    NSLog(@"Loaded with encoding %@", [fr nameOfEncoding:[fr encodingUsed]]);
 		[self setPrimitiveValue:data forKey:@"content"];
     if ([filepath pathIsText]) {
-      [self setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
+      [self setPrimitiveValue:@YES forKey:@"isText"];
     } else {
-      [self setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
+      [self setPrimitiveValue:@NO forKey:@"isText"];
     }
     // release file reader
 	} 
@@ -551,7 +551,7 @@
 - (NSArray*) listOfNewCommands
 {
   if (self.metadata == nil) {
-    return [NSArray array];
+    return @[];
   }
   
   return [self.metadata listOfNewCommands];

@@ -242,7 +242,7 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   NSArray *children = [self.outlineBuilder childrenOfSection:item];
-  return [children objectAtIndex:index];
+  return children[index];
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item

@@ -79,7 +79,7 @@
 {
   NSInteger row = [self.tableView selectedRow];
   if (row >=0 && row < [self.templates count]) {
-    return [self.templates objectAtIndex:row];
+    return (self.templates)[row];
   }
   return nil;
 }
@@ -101,7 +101,7 @@
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
   if (row < [self.templates count]) {
-    TPProjectTemplate *template = [self.templates objectAtIndex:row];
+    TPProjectTemplate *template = (self.templates)[row];
     if ([[tableColumn identifier] isEqualToString:@"NameColumn"]) {
       return template.name;
     } else if ([[tableColumn identifier] isEqualToString:@"DescriptionColumn"]) {

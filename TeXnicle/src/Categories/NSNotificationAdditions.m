@@ -35,18 +35,18 @@
 	if( pthread_main_np() ) return [self postNotificationName:name object:object userInfo:userInfo];
 
 	NSMutableDictionary *info = [[NSMutableDictionary allocWithZone:nil] initWithCapacity:3];
-	if( name ) [info setObject:name forKey:@"name"];
-	if( object ) [info setObject:object forKey:@"object"];
-	if( userInfo ) [info setObject:userInfo forKey:@"userInfo"];
+	if( name ) info[@"name"] = name;
+	if( object ) info[@"object"] = object;
+	if( userInfo ) info[@"userInfo"] = userInfo;
 
 	[[self class] performSelectorOnMainThread:@selector( _postNotificationName: ) withObject:info waitUntilDone:wait];
 
 }
 
 + (void) _postNotificationName:(NSDictionary *) info {
-	NSString *name = [info objectForKey:@"name"];
-	id object = [info objectForKey:@"object"];
-	NSDictionary *userInfo = [info objectForKey:@"userInfo"];
+	NSString *name = info[@"name"];
+	id object = info[@"object"];
+	NSDictionary *userInfo = info[@"userInfo"];
 
 	[[self defaultCenter] postNotificationName:name object:object userInfo:userInfo];
 }

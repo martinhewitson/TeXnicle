@@ -61,7 +61,7 @@
 	int count = 0;
 	for (NSTreeNode *node in [self flattenedNodes]) {
 //    [[node representedObject] setPrimitiveValue:[NSNumber numberWithInt:count] forKey:@"sortIndex"];
-		[[node representedObject] setValue:[NSNumber numberWithInt:count] forKey:@"sortIndex"];
+		[[node representedObject] setValue:@(count) forKey:@"sortIndex"];
 //    NSLog(@"Set %@", [node representedObject]);
 		count++;
 	}
@@ -107,7 +107,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		self.project = [fetchResults objectAtIndex:0];
+		self.project = fetchResults[0];
 		return project;
 	}
 	
@@ -125,7 +125,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   self.dragEnabled = YES;
   
 	// Set the outline view to accept the custom drag type OutlineViewNodeType...
-	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType,nil]];
+	[outlineView registerForDraggedTypes:@[OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType]];
 	// apply our custom ImageAndTextCell for rendering the first column's cells
 	NSTableColumn *tableColumn = [outlineView tableColumnWithIdentifier:@"NameColumn"];
 	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
@@ -407,7 +407,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[newFile setValue:name forKey:@"name"];
 	
 	// set isText
-	[newFile setValue:[NSNumber numberWithBool:textFile] forKey:@"isText"];
+	[newFile setValue:@(textFile) forKey:@"isText"];
 	
 	// set extension
 	if (extension) {
@@ -506,7 +506,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	NSArray *selectedObjects = [self selectedObjects];
 	//NSLog(@"Selected: %@", selectedObjects);
 	if ([selectedObjects count] == 1) {
-		ProjectItemEntity *item = [selectedObjects objectAtIndex:0];
+		ProjectItemEntity *item = selectedObjects[0];
 		if ([item isKindOfClass:[FolderEntity class]]) {
 			dstfolderPath = [item valueForKey:@"pathOnDisk"];
 		}
@@ -633,7 +633,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 							 recursive:(BOOL)recursively
 {
 	
-	NSArray *skipFiles = [NSArray arrayWithObjects:@"CVS", nil];
+	NSArray *skipFiles = @[@"CVS"];
 	
 	recurseCount++;
 	
@@ -685,7 +685,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 			if ([fileType isEqual:NSFileTypeRegular]) {
 				isFile = YES;
 				NSString *ext = [itempath pathExtension];
-				NSArray *textExtensions = [NSArray arrayWithObjects:@"tex", nil];
+				NSArray *textExtensions = @[@"tex"];
 				if ([textExtensions containsObject:ext]) {
 					isTeXFile = YES;
 				}
@@ -802,7 +802,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	if ([filesToAdd count]==1) {
 		
-		NSString *path = [filesToAdd objectAtIndex:0];
+		NSString *path = filesToAdd[0];
 		
 		
 		[copyFileLabel setStringValue:path];
@@ -1325,15 +1325,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 - (void)outlineViewItemDidCollapse:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
-	NSTreeNode *node = [dict objectForKey:@"NSObject"];
-	[[node representedObject] setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
+	NSTreeNode *node = dict[@"NSObject"];
+	[[node representedObject] setPrimitiveValue:@NO forKey:@"isExpanded"];
 }
 
 - (void)outlineViewItemDidExpand:(NSNotification *)notification
 {
 	NSDictionary *dict = [notification userInfo];
-	NSTreeNode *node = [dict objectForKey:@"NSObject"];
-	[[node representedObject] setPrimitiveValue:[NSNumber numberWithBool:YES] forKey:@"isExpanded"];
+	NSTreeNode *node = dict[@"NSObject"];
+	[[node representedObject] setPrimitiveValue:@YES forKey:@"isExpanded"];
 }
 
 //- (void)outlineViewSelectionDidChange:(NSNotification *)notification
@@ -1358,7 +1358,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (NSArray *)treeNodeSortDescriptors
 {
-	return [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"sortIndex" ascending:YES]];
+	return @[[[NSSortDescriptor alloc] initWithKey:@"sortIndex" ascending:YES]];
 }
 
 
@@ -1380,7 +1380,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     }
   }
   
-	[pasteboard declareTypes:[NSArray arrayWithObject:OutlineViewNodeType] owner:self];
+	[pasteboard declareTypes:@[OutlineViewNodeType] owner:self];
 	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
 	// Return YES so that the drag actually begins...
 	return YES;
@@ -1522,11 +1522,11 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	{
 		[items addObject:[anOutlineView itemAtRow:i]];
 	}
-	for (i = 0; i < [items count] && ![object isEqualToString:[[[[[items objectAtIndex:i] representedObject] objectID] URIRepresentation] absoluteString]]; i++)
+	for (i = 0; i < [items count] && ![object isEqualToString:[[[[items[i] representedObject] objectID] URIRepresentation] absoluteString]]; i++)
 	{
-		[items addObjectsFromArray:[[items objectAtIndex:i] childNodes]];
+		[items addObjectsFromArray:[items[i] childNodes]];
 	}
-	return i < [items count] ? [items objectAtIndex:i] : nil;
+	return i < [items count] ? items[i] : nil;
 }
 
 - (id)outlineView:(NSOutlineView *)anOutlineView persistentObjectForItem:(id)item

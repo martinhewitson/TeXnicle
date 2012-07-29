@@ -181,11 +181,11 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self sortedLabelSets] objectAtIndex:index];
+    return [self sortedLabelSets][index];
   }
   if ([item isKindOfClass:[TPLabelsSet class]]) {
     TPLabelsSet *set = (TPLabelsSet*)item;
-    return [set.labels objectAtIndex:index];
+    return (set.labels)[index];
   }
   
   return nil;  
@@ -219,7 +219,7 @@
 {
   NSArray *newFiles = [self labelsViewlistOfFiles:self];
   if (newFiles == nil) {
-    newFiles = [NSArray array];
+    newFiles = @[];
   }
   
   // remove any stale files
@@ -279,7 +279,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(labelsViewlistOfFiles:)]) {
     return [self.delegate labelsViewlistOfFiles:aLabelsView];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (NSArray*) labelsView:(TPLabelsViewController *)aLabelsView labelsForFile:(id)file

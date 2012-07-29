@@ -93,7 +93,7 @@
       while ((node = synctex_next_result(scanner))) {
         if ((file = synctex_scanner_get_name(scanner, synctex_node_tag(node)))) {
           *line = MAX(synctex_node_line(node), 1);
-          return [NSString stringWithCString:file encoding:NSUTF8StringEncoding];
+          return @(file);
         }
       }
     }

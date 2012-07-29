@@ -72,7 +72,7 @@
 
 + (void)installBundleTemplates
 {
-  NSArray *templatesToInstall = [NSArray arrayWithObjects:@"Article", nil];  
+  NSArray *templatesToInstall = @[@"Article"];  
   NSFileManager *fm = [NSFileManager defaultManager];
   
   // make sure the templates directory exists
@@ -221,7 +221,7 @@
   
   TPProjectTemplate *template = [self.templateListViewController selectedTemplate];
   NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-  NSArray *urls = [NSArray arrayWithObject:[NSURL fileURLWithPath:template.path]];
+  NSArray *urls = @[[NSURL fileURLWithPath:template.path]];
   [ws recycleURLs:urls completionHandler:^(NSDictionary *newURLs, NSError *error) {
     [self.templateListViewController refreshList];
   }];

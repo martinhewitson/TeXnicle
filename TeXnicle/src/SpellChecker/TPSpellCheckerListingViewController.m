@@ -372,7 +372,7 @@
   
   
   if ([self.checkedFiles count] > 0) {
-    checkedFile = [self.checkedFiles objectAtIndex:0];
+    checkedFile = (self.checkedFiles)[0];
   } else {
     id file = [self fileToCheck];
     if (file) {
@@ -572,7 +572,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(filesToSpellCheck)]) {
     return [self.delegate filesToSpellCheck];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (BOOL)shouldPerformSpellCheck
@@ -681,10 +681,10 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self nonEmptyCheckedFiles] objectAtIndex:index];
+    return [self nonEmptyCheckedFiles][index];
   }
   
-  return [[item valueForKey:@"words"] objectAtIndex:index];  
+  return [item valueForKey:@"words"][index];  
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item

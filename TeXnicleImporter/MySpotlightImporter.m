@@ -46,7 +46,7 @@
         // set the display name for Spotlight search result
 
         NSString *yourDisplayString =  [NSString stringWithFormat:@"TeXnicle Project %@", [instance valueForKey:@"name"]]; 
-        [spotlightData setObject: yourDisplayString forKey:(NSString *)kMDItemDisplayName];
+        spotlightData[(NSString *)kMDItemDisplayName] = yourDisplayString;
         
          /*
             Determine how you want to store the instance information in 'spotlightData' dictionary.
@@ -91,7 +91,7 @@ static NSDate				*cachedModelModificationDate =nil;
     if (managedObjectModel != nil) return managedObjectModel;
 	
 	NSDictionary *modelFileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[modelURL path] error:nil];
-	NSDate *modelModificationDate =  [modelFileAttributes objectForKey:NSFileModificationDate];
+	NSDate *modelModificationDate =  modelFileAttributes[NSFileModificationDate];
 	
 	if ([cachedModelURL isEqual:modelURL] && [modelModificationDate isEqualToDate:cachedModelModificationDate]) {
 		managedObjectModel = [cachedModel retain];

@@ -397,7 +397,7 @@
 		cache = [[NSMutableDictionary alloc] init];
 	if ([cache count] > 100) //100 items should be trivial in terms of memory overhead, but sufficient
 		[cache removeAllObjects];
-	NSNumber *cachedHeight = [cache objectForKey:inAttributedString];
+	NSNumber *cachedHeight = cache[inAttributedString];
 	if (cachedHeight)
 		return [cachedHeight doubleValue];
 	else {
@@ -416,7 +416,7 @@
 		CGFloat height = [layoutManager usedRectForTextContainer:textContainer].size.height;
 		
 		
-		[cache setObject:[NSNumber numberWithDouble:height] forKey:inAttributedString];
+		cache[inAttributedString] = @(height);
 		
 		return height;
 	}

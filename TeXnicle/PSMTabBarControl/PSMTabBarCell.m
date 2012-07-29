@@ -491,7 +491,7 @@
 	static NSArray *actions;
 	
 	if (!actions) {
-		actions = [[NSArray alloc] initWithObjects:NSAccessibilityPressAction, nil];
+		actions = @[NSAccessibilityPressAction];
 	}
 	return actions;
 }

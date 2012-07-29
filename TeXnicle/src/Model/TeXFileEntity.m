@@ -34,7 +34,7 @@
 {
 	[super awakeFromInsert];
 	[self setValue:@"tex" forKey:@"extension"];
-	[self setValue:[NSNumber numberWithBool:YES] forKey:@"isText"];
+	[self setValue:@YES forKey:@"isText"];
 }
 
 - (BOOL) isLeaf

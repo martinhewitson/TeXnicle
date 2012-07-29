@@ -25,19 +25,19 @@
 
 -(NSString*) applicationVersion
 {
-  NSString* result = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+  NSString* result = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
   return result;
 }
 //end applicationVersion
 
 -(NSString*) temporaryDirectory
 {
-  NSString* thisVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+  NSString* thisVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
   if (!thisVersion)
     thisVersion = @"";
   NSArray* components = [thisVersion componentsSeparatedByString:@" "];
   if (components && [components count])
-    thisVersion = [components objectAtIndex:0];
+    thisVersion = components[0];
 
   NSString* temporaryPath =
     [NSTemporaryDirectory() stringByAppendingPathComponent:

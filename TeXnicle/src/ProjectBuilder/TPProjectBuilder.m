@@ -231,7 +231,7 @@
 // The tags to search for.
 - (NSArray*)includeTags
 {
-  return [NSArray arrayWithObjects:@"\\input{", @"\\include{", @"\\includegraphics", nil];
+  return @[@"\\input{", @"\\include{", @"\\includegraphics"];
 }
 
 // follow all includes etc from main file and populate the document project
@@ -248,7 +248,7 @@
     [project setValue:file forKey:@"mainFile"];
     self.reportString = [[NSMutableAttributedString alloc] init];
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
-    [file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
+    [file setValue:@0 forKey:@"sortIndex"];
     if ([self.reportString length] > 0) {
       
       TPProjectBuilderReport *report = [[TPProjectBuilderReport alloc] initWithReportString:self.reportString];
@@ -398,7 +398,7 @@
 	[newFile setValue:[[fullpath lastPathComponent] stringByDeletingPathExtension] forKey:@"name"];
 	
 	// set isText
-	[newFile setValue:[NSNumber numberWithBool:isTextFile] forKey:@"isText"];
+	[newFile setValue:@(isTextFile) forKey:@"isText"];
 	
 	// set extension
   [newFile setValue:extension forKey:@"extension"];

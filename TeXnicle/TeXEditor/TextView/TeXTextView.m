@@ -525,7 +525,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     id<TeXTextViewDelegate> d = (id<TeXTextViewDelegate>)self.delegate;
     return [d bookmarksForCurrentFileInLineRange:aRange];
   }  
-  return [NSArray array];
+  return @[];
 }
 
 
@@ -777,10 +777,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // selection color
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [self setSelectedTextAttributes:
-   [NSDictionary dictionaryWithObjectsAndKeys:
-    [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue], NSBackgroundColorAttributeName,
-    [[defaults valueForKey:TESelectedTextColor] colorValue], NSForegroundColorAttributeName,
-    nil]];
+   @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
+    NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
 }
 
 - (void) setWrapStyle
@@ -1713,7 +1711,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSRange r = [self selectedRange];
   [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:r.location] forKey:@"index"]];
+                                                    userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
   
   [self colorVisibleText];
   [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
@@ -3497,7 +3495,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSArray *cols = [r componentsSeparatedByString:separator];
     for (int cc=0; cc<columnCount; cc++) {
       if (cc < [cols count]) {
-        [stringToPaste appendFormat:@" %@ ", [[cols objectAtIndex:cc] texString]];
+        [stringToPaste appendFormat:@" %@ ", [cols[cc] texString]];
       }
       if (cc+1 < columnCount) {
         [stringToPaste appendFormat:@"&"];
@@ -3605,7 +3603,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (tag == 1060) {
     // paste as table. Check we have text on the pasteboard
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObjects:NSRTFDPboardType, NSRTFPboardType, NSStringPboardType,nil]];
+    NSString *type = [pboard availableTypeFromArray:@[NSRTFDPboardType, NSRTFPboardType, NSStringPboardType]];
     if (type) {
       return YES;
     } else {
@@ -3616,7 +3614,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // paste:
   if (tag == 1050) {
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObject:NSStringPboardType]];
+    NSString *type = [pboard availableTypeFromArray:@[NSStringPboardType]];
     if (type) {
       return YES;
     } else {
@@ -3638,7 +3636,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // pasteAsTable:
   if (tag == 1060) {
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
-    NSString *type = [pboard availableTypeFromArray:[NSArray arrayWithObject:NSPasteboardTypeTabularText]];
+    NSString *type = [pboard availableTypeFromArray:@[NSPasteboardTypeTabularText]];
     if (type) {
       return YES;
     } else {

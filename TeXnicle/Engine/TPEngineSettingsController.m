@@ -230,7 +230,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   if (self.delegate && [self.delegate respondsToSelector:@selector(registeredEngineNames)]) {
     return [self.delegate registeredEngineNames];
   }
-  return [NSArray array];
+  return @[];
 }
 
 -(void)didSelectDoBibtex:(BOOL)state
@@ -294,7 +294,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     return [self.delegate doBibtex];
   }
   
-  return [NSNumber numberWithBool:NO];  
+  return @NO;  
 }
 
 -(NSNumber*)doPS2PDF
@@ -303,7 +303,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     return [self.delegate doPS2PDF];
   }
   
-  return [NSNumber numberWithBool:NO];  
+  return @NO;  
 }
 
 -(NSNumber*)openConsole
@@ -312,7 +312,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     return [self.delegate openConsole];
   }
   
-  return [NSNumber numberWithBool:YES];  
+  return @YES;  
 }
 
 -(NSNumber*)nCompile
@@ -321,7 +321,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     return [self.delegate nCompile];
   }
   
-  return [NSNumber numberWithInteger:1];  
+  return @1;  
 }
 
 

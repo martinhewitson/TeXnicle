@@ -240,8 +240,7 @@
     if (metadata == nil) {
       metadata = [[NSMutableDictionary alloc] init];
     }
-    [metadata setObject:[NSArray arrayWithObject:projectName]
-                 forKey:(NSString *)kMDItemKeywords];
+    metadata[(NSString *)kMDItemKeywords] = @[projectName];
     [psc setMetadata:metadata forPersistentStore:pStore];
     return YES;
   }
@@ -523,7 +522,7 @@
   // open the sorted files
   for (FileEntity *file in sortedFiles) {
     [self.openDocuments addDocument:file select:NO];
-    [file setPrimitiveValue:[NSNumber numberWithInteger:-1] forKey:@"wasOpen"];
+    [file setPrimitiveValue:@-1 forKey:@"wasOpen"];
   }
   
   // select the previously selected file
@@ -683,7 +682,7 @@
   [self cleanUp];
   
   // see if we want to open the startup screen
-	NSWindow *window = [[[self windowControllers] objectAtIndex:0] window];
+	NSWindow *window = [[self windowControllers][0] window];
 	[window setDelegate:nil];
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
@@ -733,7 +732,7 @@
   }
   
   // selected controls tab
-  self.project.uiSettings.selectedControlsTab = [NSNumber numberWithInteger:[self.controlsTabBarController indexOfSelectedTab]];
+  self.project.uiSettings.selectedControlsTab = @([self.controlsTabBarController indexOfSelectedTab]);
   
   // controls width
   NSRect r = [self.leftView frame];
@@ -787,7 +786,7 @@
   // get a project name from the user
   NSSavePanel *savePanel = [NSSavePanel savePanel];
   [savePanel setTitle:@"Save New Project..."];
-  [savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"texnicle"]];
+  [savePanel setAllowedFileTypes:@[@"texnicle"]];
   [savePanel setPrompt:@"Create"];
   [savePanel setMessage:@"Choose a name and location for the new TeXnicle project document."];
   [savePanel setNameFieldLabel:@"Create Project:"];
@@ -904,8 +903,7 @@
 	  
 	NSError *error = nil;
   NSMutableDictionary *options = nil;
-  [options setObject:[NSNumber numberWithBool:YES] 
-							forKey:NSMigratePersistentStoresAutomaticallyOption];
+  options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
 	NSPersistentStore *store = [psc addPersistentStoreWithType:NSXMLStoreType
                                                configuration:nil 
                                                          URL:storeURL 
@@ -940,10 +938,8 @@
     options = [[NSMutableDictionary alloc] init];
   }
 	
-  [options setObject:[NSNumber numberWithBool:YES] 
-							forKey:NSMigratePersistentStoresAutomaticallyOption];
-  [options setObject:[NSNumber numberWithBool:YES]
-              forKey:NSInferMappingModelAutomaticallyOption];
+  options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
+  options[NSInferMappingModelAutomaticallyOption] = @YES;
   
   BOOL result = [super configurePersistentStoreCoordinatorForURL:url
 																													ofType:fileType
@@ -955,8 +951,7 @@
   if (result) {
     NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
     NSPersistentStore *pStore = [psc persistentStoreForURL:url];
-    id existingMetadata = [[psc metadataForPersistentStore:pStore]
-                           objectForKey:(NSString *)kMDItemKeywords];
+    id existingMetadata = [psc metadataForPersistentStore:pStore][(NSString *)kMDItemKeywords];
     if (existingMetadata == nil) {
       result = [self setMetadataForStoreAtURL:url];
     }  
@@ -1037,7 +1032,7 @@
   //  NSLog(@"Selected %@", all);
   NSString *path = nil;
 	if ([all count] == 1) {
-		NSManagedObject *item = [all objectAtIndex:0];
+		NSManagedObject *item = all[0];
     path = [item valueForKey:@"pathOnDisk"];
   }  
   
@@ -1087,7 +1082,7 @@
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		_project = [fetchResults objectAtIndex:0];
+		_project = fetchResults[0];
 //    NSLog(@"   got project");
     
     
@@ -1146,7 +1141,7 @@
 
   } else if ([selectedItems count] == 1) {
     
-    _selectedItem = [selectedItems objectAtIndex:0];
+    _selectedItem = selectedItems[0];
     _selectedRow = [self.projectOutlineView selectedRow];
     NSString *itemName = [_selectedItem valueForKey:@"name"];
     
@@ -1322,7 +1317,7 @@
 	// get the name of the item at this row
 	_itemBeingRenamed = row;
 	
-	NSString *oldName = [[items objectAtIndex:row] valueForKey:@"name"];
+	NSString *oldName = [items[row] valueForKey:@"name"];
 	[_renameField setStringValue:oldName];
 	
 	// show the sheet
@@ -1363,7 +1358,7 @@
 	[[[self managedObjectContext] undoManager] disableUndoRegistration];
 	
 	NSArray *items = [self.projectItemTreeController flattenedContent];
-	ProjectItemEntity *item = [items objectAtIndex:_itemBeingRenamed];
+	ProjectItemEntity *item = items[_itemBeingRenamed];
   //	NSLog(@"Renaming %@", item);
 	
 	[item setValue:newName forKey:@"name"];
@@ -1374,7 +1369,7 @@
 	
 	// notify all listeners that a file was renamed
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	NSDictionary *dict = [NSDictionary dictionaryWithObject:item forKey:@"document"];
+	NSDictionary *dict = @{@"document": item};
 	[nc postNotificationName:TPDocumentWasRenamed object:self.projectItemTreeController userInfo:dict];
 	
   // update status bar
@@ -1466,7 +1461,7 @@
   
   // update settings if necessary
   if ([self.project.settings.showStatusBar boolValue] != _statusViewIsShowing) {
-    self.project.settings.showStatusBar = [NSNumber numberWithBool:_statusViewIsShowing];
+    self.project.settings.showStatusBar = @(_statusViewIsShowing);
   }
 }
 
@@ -1511,7 +1506,7 @@
   }
   //  NSLog(@"Going back to index %ld", self.currentTabHistoryIndex);
   
-  FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
+  FileEntity *file = (self.tabHistory)[self.currentTabHistoryIndex];
   
   // select document
   [self.openDocuments selectTabForFile:file];
@@ -1528,7 +1523,7 @@
   //  NSLog(@"Going forward to index %d", self.currentTabHistoryIndex);
   
   // get the previous file
-  FileEntity *file = [self.tabHistory objectAtIndex:self.currentTabHistoryIndex];
+  FileEntity *file = (self.tabHistory)[self.currentTabHistoryIndex];
   
   // select document
   [self.openDocuments selectTabForFile:file];
@@ -1608,7 +1603,7 @@
   
 	NSArray *all = [self.projectItemTreeController selectedObjects];	
 	if ([all count] == 1) {
-		NSManagedObject *item = [all objectAtIndex:0];
+		NSManagedObject *item = all[0];
 		if ([item isKindOfClass:[FileEntity class]]) {
       if (self.openDocuments) {
         [self.openDocuments addDocument:(FileEntity*)item select:YES];
@@ -1656,8 +1651,8 @@
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [[_editorSplitView subviews] objectAtIndex:0];
-  NSView *bottomView = [[_editorSplitView subviews] objectAtIndex:1];
+  NSView *topView = [_editorSplitView subviews][0];
+  NSView *bottomView = [_editorSplitView subviews][1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -1979,7 +1974,7 @@
 {
   NSArray *selected = [self.projectItemTreeController selectedObjects];
   if ([selected count] == 1) {
-    if ([selected objectAtIndex:0] != aFile) {
+    if (selected[0] != aFile) {
       [self.projectItemTreeController selectItem:aFile];
     }
   }
@@ -2012,7 +2007,7 @@
 
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth
 {
-  self.project.uiSettings.maxOutlineDepth = [NSNumber numberWithInteger:depth];
+  self.project.uiSettings.maxOutlineDepth = @(depth);
 }
 
 
@@ -2064,7 +2059,7 @@
         
     NSSavePanel *panel = [NSSavePanel savePanel];
     [panel setTitle:@"Save pasted image"];
-    [panel setAllowedFileTypes:[NSArray arrayWithObject:type]];
+    [panel setAllowedFileTypes:@[type]];
     [panel setAllowsOtherFileTypes:NO];
     [panel setCanCreateDirectories:YES];
     [panel setMessage:@"Save pasted image"];
@@ -2430,7 +2425,7 @@
 
   // show integrated console
   if (tag == 2041) {
-    if ([[[_editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
+    if ([[_editorSplitView subviews][1] isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -2554,7 +2549,7 @@
 	// get selected file
 	NSArray *items = [self getSelectedItems];
 	if ([items count] == 1) {
-		ProjectItemEntity *item = [items objectAtIndex:0];
+		ProjectItemEntity *item = items[0];
     NSArray *exts = [[TPSupportedFilesManager sharedSupportedFilesManager] supportedExtensions];
 		if ([exts containsObject:[item valueForKey:@"extension"]]) {
 			if ([self.project valueForKey:@"mainFile"] == item) {
@@ -2581,7 +2576,7 @@
 {
 	NSArray *selected = [self.projectItemTreeController selectedObjects];
 	if ([selected count] == 1) {
-    id obj = [selected objectAtIndex:0];
+    id obj = selected[0];
     NSString *name = [obj valueForKey:@"name"];
     //NSLog(@"Selected project item %@", name);
     if (name) {
@@ -2626,7 +2621,7 @@
  
   ProjectItemEntity *selectedProjectItem = nil;
   if ([selectedItems count] > 0)
-    selectedProjectItem = [selectedItems objectAtIndex:0];
+    selectedProjectItem = selectedItems[0];
   
   // Make popup menu with bound actions
   self.createFolderMenu = [[NSMenu alloc] initWithTitle:@"New Folder Action Menu"];
@@ -2846,17 +2841,17 @@
                                      createOnDisk:YES];
 	
 	
-	[file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
+	[file setValue:@0 forKey:@"sortIndex"];
   
 	// add include folder
 	[self.projectItemTreeController setSelectionIndexPath:nil];
 	FolderEntity *includeFolder = [self.projectItemTreeController addFolder:@"include" withFilePath:nil createOnDisk:YES];
-  [includeFolder setValue:[NSNumber numberWithInt:1] forKey:@"sortIndex"];
+  [includeFolder setValue:@1 forKey:@"sortIndex"];
   
 	// add images folder
 	[self.projectItemTreeController setSelectionIndexPath:nil];
 	FolderEntity *imagesFolder = [self.projectItemTreeController addFolder:@"images" withFilePath:nil createOnDisk:YES];
-  [imagesFolder setValue:[NSNumber numberWithInt:2] forKey:@"sortIndex"];
+  [imagesFolder setValue:@2 forKey:@"sortIndex"];
 	
 	// select the main file
   [self.openDocuments performSelector:@selector(addAndSelectDocument:) withObject:file afterDelay:0.1];
@@ -3273,7 +3268,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] 
                        sourceFile:[[self.openDocuments currentDoc] pathOnDisk]
                        lineNumber:lineNumber 
@@ -3463,7 +3458,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
 //  NSLog(@"Clicked on PDF in project...");
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   
@@ -3734,22 +3729,22 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 -(void)didSelectDoBibtex:(BOOL)state
 {
-  self.project.settings.doBibtex = [NSNumber numberWithBool:state];
+  self.project.settings.doBibtex = @(state);
 }
 
 -(void)didSelectDoPS2PDF:(BOOL)state
 {
-  self.project.settings.doPS2PDF = [NSNumber numberWithBool:state];
+  self.project.settings.doPS2PDF = @(state);
 }
 
 -(void)didSelectOpenConsole:(BOOL)state
 {
-  self.project.settings.openConsole = [NSNumber numberWithBool:state];
+  self.project.settings.openConsole = @(state);
 }
 
 -(void)didChangeNCompile:(NSInteger)number
 {
-  self.project.settings.nCompile = [NSNumber numberWithInteger:number];
+  self.project.settings.nCompile = @(number);
 }
 
 -(void)didSelectEngineName:(NSString*)aName
@@ -3780,7 +3775,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 -(NSNumber*)nCompile
 {
   if (_liveUpdate)
-    return [NSNumber numberWithInt:1];
+    return @1;
   
   return self.project.settings.nCompile;
 }

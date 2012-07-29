@@ -81,7 +81,7 @@
     whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
     specialChars = [NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"];
     
-    keys = [NSArray arrayWithObjects:TEDocumentFont, TESyntaxTextColor,
+    keys = @[TEDocumentFont, TESyntaxTextColor,
              TESyntaxCommentsColor, TESyntaxCommentsL2Color, TESyntaxCommentsL3Color, 
              TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
              TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
@@ -89,8 +89,7 @@
              TESyntaxDollarCharsColor, TESyntaxColorDollarChars, 
              TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
              TESyntaxColorMarkupL1, TESyntaxColorMarkupL2, TESyntaxColorMarkupL3, 
-             TESyntaxMarkupL1Color, TESyntaxMarkupL2Color, TESyntaxMarkupL3Color,
-             nil];
+             TESyntaxMarkupL1Color, TESyntaxMarkupL2Color, TESyntaxMarkupL3Color];
 
     [self readColorsAndFontsFromPreferences];
     [self observePreferences];

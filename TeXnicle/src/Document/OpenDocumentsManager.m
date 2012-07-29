@@ -189,7 +189,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 		}
     
     [openDocuments addObject:aDoc];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentDoc, @"file", nil];
+    NSDictionary *dictionary = @{@"file": aDoc};
     [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidAddFileNotification
                                                         object:self
                                                       userInfo:dictionary];
@@ -319,9 +319,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   }
 }
 
-- (FileEntity*)fileAtIndex:(NSInteger*)index
+- (FileEntity*)fileAtIndex:(NSInteger)index
 {
-  return [openDocuments objectAtIndex:index];
+  return openDocuments[index];
 }
 
 - (NSInteger) indexOfDocumentWithFile:(FileEntity*)aFile
@@ -343,10 +343,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //	NSLog(@"Switching to document %@", [aDoc valueForKey:@"name"]);
 	currentDoc = aDoc;
   
-  NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentDoc, @"file", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
-                                                      object:self
-                                                    userInfo:dictionary];
+  if (currentDoc != nil) {
+    NSDictionary *dictionary = @{@"file": currentDoc};
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
+                                                        object:self
+                                                      userInfo:dictionary];
+  }
   
   // increase active state for this doc
   [currentDoc increaseActiveCount];
@@ -404,7 +406,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	FileEntity *file = [tabViewItem identifier];
 	[file updateFromTextStorage];
 	[openDocuments removeObject:file];
-  [file setValue:[NSNumber numberWithInteger:-1] forKey:@"wasOpen"];
+  [file setValue:@-1 forKey:@"wasOpen"];
 //  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
 //	NSLog(@"Removed %@", [file valueForKey:@"name"]);
 	
@@ -487,7 +489,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   NSInteger count = 0;
 	for (FileEntity *file in openDocuments) {
     NSInteger pos = [self.tabView indexOfTabViewItemWithIdentifier:file];
-		[file setValue:[NSNumber numberWithInteger:pos] forKey:@"wasOpen"];
+		[file setValue:@(pos) forKey:@"wasOpen"];
 //		[file setValue:[NSNumber numberWithBool:YES] forKey:@"wasOpen"];
     count++;
 	}

@@ -164,7 +164,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
     // post notification
     [[NSNotificationCenter defaultCenter] postNotificationName:TPSupportedFileRemovedNotification
                                                         object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:aFile forKey:@"fileType"]];
+                                                      userInfo:@{@"fileType": aFile}];
     return YES;
   }
   
@@ -179,7 +179,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
   // post notification
   [[NSNotificationCenter defaultCenter] postNotificationName:TPSupportedFileAddedNotification
                                                       object:self
-                                                    userInfo:[NSDictionary dictionaryWithObject:aFile forKey:@"fileType"]];
+                                                    userInfo:@{@"fileType": aFile}];
   return aFile;
 }
 
@@ -187,7 +187,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 - (BOOL) replaceSupportedFileAtIndex:(NSInteger)index withSupportedFile:(TPSupportedFile*)aFile
 {
   if (index >=0 && index < [self.supportedFileTypes count]) {
-    [self.supportedFileTypes replaceObjectAtIndex:index withObject:aFile];
+    (self.supportedFileTypes)[index] = aFile;
     [self saveTypes];
     return YES;
   }
@@ -198,7 +198,7 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 - (TPSupportedFile*)fileAtIndex:(NSInteger)index
 {
   if (index >=0 && index < [self.supportedFileTypes count]) { 
-    return [self.supportedFileTypes objectAtIndex:index];
+    return (self.supportedFileTypes)[index];
   }
   return nil;
 }

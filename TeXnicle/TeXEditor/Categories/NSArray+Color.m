@@ -49,11 +49,11 @@
 {
 	float			fRed, fGreen, fBlue, fAlpha = 1.0;
 	
-	fRed = [[self objectAtIndex:0] floatValue];
-	fGreen = [[self objectAtIndex:1] floatValue];
-	fBlue = [[self objectAtIndex:2] floatValue];
+	fRed = [self[0] floatValue];
+	fGreen = [self[1] floatValue];
+	fBlue = [self[2] floatValue];
 	if( [self count] > 3 )	// Have alpha info?
-		fAlpha = [[self objectAtIndex:3] floatValue];
+		fAlpha = [self[3] floatValue];
 	
 	return [NSColor colorWithCalibratedRed: fRed green: fGreen blue: fBlue alpha: fAlpha];
 }

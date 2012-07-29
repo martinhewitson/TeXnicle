@@ -186,11 +186,11 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self sortedWarningSets] objectAtIndex:index];
+    return [self sortedWarningSets][index];
   }
   if ([item isKindOfClass:[TPWarningSet class]]) {
     TPWarningSet *set = (TPWarningSet*)item;
-    return [set.errors objectAtIndex:index];
+    return (set.errors)[index];
   }
   
   return nil;  
@@ -224,7 +224,7 @@
 {
   NSArray *newFiles = [self warningsViewlistOfFiles:self];
   if (newFiles == nil) {
-    newFiles = [NSArray array];
+    newFiles = @[];
   }
   
   // remove any stale files
@@ -286,7 +286,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(warningsViewlistOfFiles:)]) {
     return [self.delegate warningsViewlistOfFiles:warningsView];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file

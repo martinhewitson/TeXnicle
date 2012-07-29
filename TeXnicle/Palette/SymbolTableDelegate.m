@@ -32,7 +32,7 @@
 
 - (void) awakeFromNib
 {
-	[symbolsTable registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
+	[symbolsTable registerForDraggedTypes:@[NSStringPboardType]];
 	[symbolsTable setVerticalMotionCanBeginDrag:YES];
 	
 	//NSLog(@"Awaking with %@", symbolsTable);

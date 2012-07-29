@@ -37,7 +37,7 @@
 {
   self = [super initWithTextView:aTextView];
   if (self) {
-    self.keywords = [NSArray arrayWithObjects:@"if", @"then", @"fi", @"done", @"do", @"while", @"echo", @"exit", @"export", nil];
+    self.keywords = @[@"if", @"then", @"fi", @"done", @"do", @"while", @"echo", @"exit", @"export"];
   }
   
   return self;

@@ -30,7 +30,7 @@
 {
   NSArray *items = [self selectedItems];
   if ([items count]>0) {
-    return [items objectAtIndex:0];
+    return items[0];
   }
   return nil;
 }

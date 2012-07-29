@@ -185,11 +185,11 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self sortedSets] objectAtIndex:index];
+    return [self sortedSets][index];
   }
   if ([item isKindOfClass:[TPCitationSet class]]) {
     TPCitationSet *set = (TPCitationSet*)item;
-    return [set.citations objectAtIndex:index];
+    return (set.citations)[index];
   }
   
   return nil;  
@@ -223,7 +223,7 @@
 {
   NSArray *newFiles = [self citationsViewlistOfFiles:self];
   if (newFiles == nil) {
-    newFiles = [NSArray array];
+    newFiles = @[];
   }
   
   // remove any stale files
@@ -284,7 +284,7 @@
   if (aView.delegate && [aView.delegate respondsToSelector:@selector(citationsViewlistOfFiles:)]) {
     return [aView.delegate citationsViewlistOfFiles:aView];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (NSArray*) citationsView:(TPCitationsViewController *)aView citationsForFile:(id)file

@@ -182,11 +182,11 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self sortedSets] objectAtIndex:index];
+    return [self sortedSets][index];
   }
   if ([item isKindOfClass:[TPCommandSet class]]) {
     TPCommandSet *set = (TPCommandSet*)item;
-    return [[self sortedCommandsForSet:set] objectAtIndex:index];
+    return [self sortedCommandsForSet:set][index];
   }
   
   return nil;  
@@ -231,7 +231,7 @@
 {
   NSArray *files = [self commandsViewlistOfFiles:self];
   if (files == nil) {
-    files = [NSArray array];
+    files = @[];
   }
   
   // remove any stale files
@@ -295,7 +295,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(commandsViewlistOfFiles:)]) {
     return [self.delegate commandsViewlistOfFiles:aView];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (NSArray*) commandsView:(TPNewCommandsViewController *)aView newCommandsForFile:(id)file

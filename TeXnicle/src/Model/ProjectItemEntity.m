@@ -59,7 +59,7 @@
 
 - (void) awakeFromInsert
 {
-	[self setValue:[NSNumber numberWithBool:NO] forKey:@"isLeaf"];
+	[self setValue:@NO forKey:@"isLeaf"];
 	[self setValue:[self project] forKey:@"project"];
 }
 
@@ -115,7 +115,7 @@
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		ProjectEntity *mocproject = [fetchResults objectAtIndex:0];
+		ProjectEntity *mocproject = fetchResults[0];
 		return mocproject;
 	}
 	

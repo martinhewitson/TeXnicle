@@ -283,8 +283,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (IBAction) showNavigator:(id)sender
 {
-  NSView *leftView = [[self.splitview subviews] objectAtIndex:0];
-  NSView *midView = [[self.splitview subviews] objectAtIndex:1];
+  NSView *leftView = [self.splitview subviews][0];
+  NSView *midView = [self.splitview subviews][1];
   
 //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
 //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -365,7 +365,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   
   if (tag == 2180) {
     // show navigator 
-    NSView *leftView = [[self.splitview subviews] objectAtIndex:0];
+    NSView *leftView = [self.splitview subviews][0];
     if ([leftView isHidden] == YES) {
       return YES;
     }

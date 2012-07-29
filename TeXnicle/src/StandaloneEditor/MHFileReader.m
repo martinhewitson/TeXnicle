@@ -54,8 +54,7 @@
 {
   self = [super initWithNibName:@"MHFileReader" bundle:nil];
   if (self) {
-    self.encodingNames = [NSArray arrayWithObjects:
-                          @"ASCII",
+    self.encodingNames = @[@"ASCII",
                           @"Unicode (UTF-8)",
                           @"Unicode (UTF-16)",
                           @"Unicode (UTF-16 Little-Endian)",
@@ -63,21 +62,18 @@
                           @"Western (ISO Latin 1)",
                           @"Western (ISO Latin 9)",
                           @"Western (Mac OS Roman)",
-                          @"Western (Windows Latin 1)",
-                          nil];                      
+                          @"Western (Windows Latin 1)"];                      
     
-    self.encodings = [NSArray arrayWithObjects:
-                      [NSNumber numberWithInteger:NSASCIIStringEncoding],
-                      [NSNumber numberWithInteger:NSUTF8StringEncoding],
-                      [NSNumber numberWithInteger:NSUTF16StringEncoding],
-                      [NSNumber numberWithInteger:NSUTF16LittleEndianStringEncoding],
-                      [NSNumber numberWithInteger:NSUTF16BigEndianStringEncoding],
-                      [NSNumber numberWithInteger:NSISOLatin1StringEncoding],
-                      [NSNumber numberWithInteger:NSISOLatin2StringEncoding],
-                      [NSNumber numberWithInteger:NSMacOSRomanStringEncoding],
-                      [NSNumber numberWithInteger:NSWindowsCP1251StringEncoding],
-                      nil];
-    self.selectedIndex = [NSNumber numberWithInteger:1];
+    self.encodings = @[@(NSASCIIStringEncoding),
+                      @(NSUTF8StringEncoding),
+                      @(NSUTF16StringEncoding),
+                      @(NSUTF16LittleEndianStringEncoding),
+                      @(NSUTF16BigEndianStringEncoding),
+                      @(NSISOLatin1StringEncoding),
+                      @(NSISOLatin2StringEncoding),
+                      @(NSMacOSRomanStringEncoding),
+                      @(NSWindowsCP1251StringEncoding)];
+    self.selectedIndex = @1;
  }
   return self;
 }
@@ -86,7 +82,7 @@
 {
   self = [self init];
   if (self) {
-    self.selectedIndex = [NSNumber numberWithInteger:[self indexForEncodingNamed:encodingName]];
+    self.selectedIndex = @([self indexForEncodingNamed:encodingName]);
   }
   return self;
 }
@@ -95,7 +91,7 @@
 {
   self = [self init];
   if (self) {
-    self.selectedIndex = [NSNumber numberWithInteger:[self indexForEncoding:encoding]];
+    self.selectedIndex = @([self indexForEncoding:encoding]);
   }
   return self;
 }
@@ -103,7 +99,7 @@
 
 - (NSString*)defaultEncodingName
 {
-  return [self.encodingNames objectAtIndex:[self.selectedIndex integerValue]];
+  return (self.encodingNames)[[self.selectedIndex integerValue]];
 }
 
 - (NSStringEncoding) defaultEncoding
@@ -144,7 +140,7 @@
 - (NSStringEncoding)encodingWithName:(NSString*)encoding
 {  
   NSInteger idx = [self indexForEncodingNamed:encoding];
-  return [[self.encodings objectAtIndex:idx] integerValue];
+  return [(self.encodings)[idx] integerValue];
 }
 
 - (NSString*)nameOfEncoding:(NSStringEncoding)encoding
@@ -152,7 +148,7 @@
   NSInteger idx = 0;
   for (NSNumber *e in self.encodings) {
     if ([e integerValue] == encoding) {
-      return [self.encodingNames objectAtIndex:idx];
+      return (self.encodingNames)[idx];
     }
     idx++;
   }
@@ -287,7 +283,7 @@
     if (result == NSAlertDefaultReturn)       
     {
       // get the encoding the user selected
-      encoding = [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
+      encoding = [(self.encodings)[[self.selectedIndex integerValue]] integerValue];
       str = [NSString stringWithContentsOfURL:aURL
                                      encoding:encoding
                                         error:&error];
@@ -305,7 +301,7 @@
   }
   
   // set the encoding we used in the end
-  self.selectedIndex = [NSNumber numberWithInteger:[self indexForEncoding:encoding]];
+  self.selectedIndex = @([self indexForEncoding:encoding]);
   
   return str;
 }
@@ -360,7 +356,7 @@
   }
   
   // set the encoding we used in the end
-  self.selectedIndex = [NSNumber numberWithInteger:[self indexForEncoding:encoding]];
+  self.selectedIndex = @([self indexForEncoding:encoding]);
   
   return str;
 }
@@ -383,7 +379,7 @@
 
 - (NSStringEncoding)encodingUsed
 {
-  return [[self.encodings objectAtIndex:[self.selectedIndex integerValue]] integerValue];
+  return [(self.encodings)[[self.selectedIndex integerValue]] integerValue];
 }
 
 @end

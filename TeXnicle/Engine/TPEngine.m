@@ -226,13 +226,11 @@
   [typesetTask setCurrentDirectoryPath:workingDir];
     
 	NSArray *arguments;
-	arguments = [NSArray arrayWithObjects:
-               [mainFile lastPathComponent], 
+	arguments = @[[mainFile lastPathComponent], 
                workingDir, 
                [NSString stringWithFormat:@"%ld", self.nCompile],
                [NSString stringWithFormat:@"%ld", self.doBibtex],
-               [NSString stringWithFormat:@"%ld", self.doPS2PDF],
-               nil];
+               [NSString stringWithFormat:@"%ld", self.doPS2PDF]];
 	[typesetTask setArguments:arguments];
 	
 	[typesetFileHandle readInBackgroundAndNotify];	
@@ -274,7 +272,7 @@
 	
 //  NSLog(@"texOutputAvailable %@", [aNote object]);
   
-	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
+	NSData *data = [aNote userInfo][NSFileHandleNotificationDataItem];
 	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
 	NSScanner *scanner = [NSScanner scannerWithString:output];

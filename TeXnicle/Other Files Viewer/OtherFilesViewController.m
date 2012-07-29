@@ -95,12 +95,12 @@
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
 	if (item == nil) {
-		return [self.tree.children objectAtIndex:index];
+		return (self.tree.children)[index];
 	}
 	if ([item isKindOfClass:[TPSourceFile class]]) {
     return nil;
 	}
-  id child = [[item valueForKey:@"children"] objectAtIndex:index];
+  id child = [item valueForKey:@"children"][index];
 	return child;
 }
 

@@ -36,7 +36,7 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
   NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
-  return [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, color, NSForegroundColorAttributeName, nil];
+  return @{NSFontAttributeName: font, NSForegroundColorAttributeName: color};
 }
 
 @end

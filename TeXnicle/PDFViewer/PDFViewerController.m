@@ -298,7 +298,7 @@
 
 - (void) selectSearchResult:(NSInteger)index
 {
-  PDFSelection *selection = [self.searchResults objectAtIndex:index];
+  PDFSelection *selection = (self.searchResults)[index];
   [self.pdfview setCurrentSelection:selection];
   [self.pdfview scrollSelectionToVisible:self];
   [self.pdfview setCurrentSelection:selection animate:YES];
@@ -411,8 +411,8 @@
   if (row <0 || row >= [self.searchResults count]) {
     return nil;
   }
-  PDFSelection *selection = [self.searchResults objectAtIndex:row];
-  PDFPage *page =  [[selection pages] objectAtIndex:0];
+  PDFSelection *selection = (self.searchResults)[row];
+  PDFPage *page =  [selection pages][0];
   NSRect r = NSIntegralRect([selection boundsForPage:page]);
   PDFSelection *extendedSelection = [page selectionForRect:r];
   
@@ -440,7 +440,7 @@
 
 - (NSRange)rangeOfSelection:(PDFSelection*)selection
 {
-  PDFPage *page =  [[selection pages] objectAtIndex:0];  
+  PDFPage *page =  [selection pages][0];  
   NSRect bounds = [selection boundsForPage:page];
   NSString *selectedString = [selection string];
   NSString *pageString = [page string];

@@ -42,7 +42,7 @@
   if (self) {
     self.file = aFile;
     self.needsUpdate = NO;
-    self.words = [NSArray array];
+    self.words = @[];
   }
   
   return self;

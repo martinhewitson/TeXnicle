@@ -68,7 +68,7 @@
   [self.selectedEntry performSelector:@selector(setContent:) withObject:nil afterDelay:0];
   
 	// Set up the tables
-	[self.entriesTable registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];
+	[self.entriesTable registerForDraggedTypes:@[NSStringPboardType]];
 //	[self.entriesTable registerForDraggedTypes:[NSArray arrayWithObjects:kItemsTableViewNodeType,nil]];
   
   // set row height
@@ -123,7 +123,7 @@
 			self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 		}
     symbol.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
-    symbol.imageIsValid = [NSNumber numberWithBool:NO];
+    symbol.imageIsValid = @NO;
 	}
   
   [self.entriesTable reloadData];
@@ -136,7 +136,7 @@
     self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
   }
   entry.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
-  entry.imageIsValid = [NSNumber numberWithBool:NO];
+  entry.imageIsValid = @NO;
   [self.entriesTable reloadData];
   [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self.library];
 }
@@ -158,7 +158,7 @@
 	NSArray *items = [self selectedEntries];
 	NSString *string = [[items valueForKey:@"code"] componentsJoinedByString:@"\n"];
 	NSPasteboard *pb = [NSPasteboard generalPasteboard];
-	[pb declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+	[pb declareTypes:@[NSStringPboardType] owner:self];
 	[pb setString:string forType:NSStringPboardType];
 }
 
@@ -176,14 +176,14 @@
     return [self.library entriesForCategory:category];
   }
   
-  return [NSArray array];
+  return @[];
 }
 
 - (void) selectCategory:(TPLibraryCategory*)category
 {
   // get index of this category
   NSInteger index = [self.library indexOfCategory:category];
-  [self.categoriesTable performSelector:@selector(selectRowNumber:) withObject:[NSNumber numberWithInteger:index] afterDelay:0];
+  [self.categoriesTable performSelector:@selector(selectRowNumber:) withObject:@(index) afterDelay:0];
   [self.entriesTable performSelector:@selector(reloadData) withObject:nil afterDelay:0];
 }
 
@@ -191,7 +191,7 @@
 {
   // get index of this entry
   NSInteger index = [[self entriesForSelectedCategory] indexOfObject:entry];
-  [self.entriesTable performSelector:@selector(selectRowNumber:) withObject:[NSNumber numberWithInteger:index] afterDelay:0];
+  [self.entriesTable performSelector:@selector(selectRowNumber:) withObject:@(index) afterDelay:0];
 }
 
 
@@ -201,7 +201,7 @@
   
   NSInteger row = [self.categoriesTable selectedRow];
   if (row >= 0 && row < [categories count]) {
-    return [categories objectAtIndex:row];
+    return categories[row];
   }
 
   return nil;
@@ -229,7 +229,7 @@
   if (entries) {
     NSInteger row = [self.entriesTable selectedRow];
     if (row >= 0 && row < [entries count]) {
-      return [entries objectAtIndex:row];
+      return entries[row];
     }
   }
   return nil;
@@ -493,14 +493,14 @@
   if (tableView == self.categoriesTable) {
     NSArray *categories = [self.library categories];
     if (row >= 0 && row < [categories count]) {
-      return [[categories objectAtIndex:row] name];
+      return [categories[row] name];
     }
   }
   
   if (tableView == self.entriesTable) {
     NSArray *entries = [self entriesForSelectedCategory];
     if (row >=0 && row < [entries count]) {
-      TPLibraryEntry *entry = [entries objectAtIndex:row];
+      TPLibraryEntry *entry = entries[row];
       if ([[tableColumn identifier] isEqualToString:@"ImageColumn"]) {
         NSData *imageData = entry.image;   
         NSImage *image = nil;
@@ -546,9 +546,9 @@
     
     NSArray *entries = [self entriesForSelectedCategory];
     if (row >= 0 && row < [entries count]) {
-      TPLibraryEntry *entry = [entries objectAtIndex:row];
+      TPLibraryEntry *entry = entries[row];
       entry.code = object;
-      entry.imageIsValid = [NSNumber numberWithBool:NO];
+      entry.imageIsValid = @NO;
       [tableView reloadData];
       [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self.library];
     }
@@ -614,7 +614,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
     //		id str = [[strings componentsJoinedByString:@"\n"] retain];
 		id str = [strings componentsJoinedByString:@"\n"];
     //		NSLog(@"Writing to pboard: %@", str);
-		[pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+		[pboard declareTypes:@[NSStringPboardType] owner:self];
 		return [pboard setString:str forType:NSStringPboardType];
 	}
 	
@@ -646,7 +646,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 					mouseLocation:(NSPoint)mouseLocation
 {
 	if (aTableView == self.entriesTable) {
-    TPLibraryEntry *entry = [[[[self selectedCategory] entries] allObjects] objectAtIndex:row];
+    TPLibraryEntry *entry = [[[self selectedCategory] entries] allObjects][row];
 		return entry.code;		
 	}
 	
@@ -714,7 +714,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 	
 	TPLibraryEntry *item = nil;
 	if ([selected count] == 1) {
-		item = [selected objectAtIndex:0];
+		item = selected[0];
 	} else {
     return;
   }

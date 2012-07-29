@@ -83,7 +83,7 @@
 {
   NSArray *selectedObjects = [self.templateArrayController selectedObjects];
   if ([selectedObjects count] > 0) {
-    return [selectedObjects objectAtIndex:0];
+    return selectedObjects[0];
   }
   return nil;
 }

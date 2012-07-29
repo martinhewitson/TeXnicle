@@ -13,7 +13,7 @@
 
 + (id)ellipsis
 {
-	return [NSString stringWithUTF8String:"\xE2\x80\xA6"];
+	return @"\xE2\x80\xA6";
 }
 
 - (NSString *)stringWithEllipsisByTruncatingToLength:(NSUInteger)length

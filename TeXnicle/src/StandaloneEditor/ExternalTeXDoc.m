@@ -177,7 +177,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     // controls tab index
-    [dict setValue:[NSNumber numberWithInteger:[self.tabbarController indexOfSelectedTab]] forKey:TPExternalDocControlsTabIndexKey];
+    [dict setValue:@([self.tabbarController indexOfSelectedTab]) forKey:TPExternalDocControlsTabIndexKey];
     
     // controls width
     NSRect r = [_controlsViewContainer frame];
@@ -233,7 +233,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         // max outline depth
         self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
         if (self.maxOutlineViewDepth == nil) {
-          self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
+          self.maxOutlineViewDepth = @5;
         }
         [self.outlineViewController setOutlineDepth:[self.maxOutlineViewDepth integerValue]];
         
@@ -389,7 +389,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       [self toggleStatusBar:NO];
     }
   } else {
-    [self.settings setObject:[NSNumber numberWithBool:_statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+    (self.settings)[@"TPStandAloneEditorShowStatusBar"] = @(_statusViewIsShowing);
   }
   [self updateFileStatus];
   
@@ -469,7 +469,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     
     CAAnimation *anim = [CABasicAnimation animation];
     [anim setDelegate:self];
-    [self.windowForSheet setAnimations:[NSDictionary dictionaryWithObject:anim forKey:@"frame"]];
+    [self.windowForSheet setAnimations:@{@"frame": anim}];
     
     [self.windowForSheet.animator setFrame:_windowFrame display:YES];
   }
@@ -537,11 +537,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                      [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
                      [[NSSpellChecker sharedSpellChecker] language], @"language",
-                     [NSNumber numberWithBool:YES], @"TPStandAloneEditorShowStatusBar",
+                     @YES, @"TPStandAloneEditorShowStatusBar",
                      nil];
   }
   
-  self.maxOutlineViewDepth = [NSNumber numberWithInt:5];
+  self.maxOutlineViewDepth = @5;
   
 }
 
@@ -578,7 +578,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     // shrink tex editor container
     [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y+svfr.size.height, tefr.size.width, tefr.size.height-svfr.size.height)];
   }
-  [self.settings setObject:[NSNumber numberWithBool:_statusViewIsShowing] forKey:@"TPStandAloneEditorShowStatusBar"];
+  (self.settings)[@"TPStandAloneEditorShowStatusBar"] = @(_statusViewIsShowing);
 }
 
 
@@ -740,7 +740,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // show integrated console
   if (tag == 2041) {
-    if ([[[_editorSplitView subviews] objectAtIndex:1] isHidden] == NO) {
+    if ([[_editorSplitView subviews][1] isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -841,7 +841,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         NSRange resultRange = NSMakeRange([aScanner scanLocation], [returnResult length]);
         if (resultRange.location != NSNotFound) {
           
-          NSRange subrange    = [returnResult rangeOfRegex:[searchTerms objectAtIndex:0]];
+          NSRange subrange    = [returnResult rangeOfRegex:searchTerms[0]];
           if (subrange.location != NSNotFound) {
             resultRange.location += subrange.location;
             resultRange.length = [searchTerm length];
@@ -878,7 +878,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // highlight first result
   if ([self.results count]>0) {
-    TPDocumentMatch *first = [self.results objectAtIndex:0];
+    TPDocumentMatch *first = (self.results)[0];
     
     // expand all folded code
     [self.texEditorViewController.textView expandAll:self];
@@ -1095,8 +1095,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
     if (str) {
       self.fileLoadDate = [NSDate date];
-      NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[fr encodingUsed]]
-                                                          forKey:NSCharacterEncodingDocumentAttribute];
+      NSDictionary *options = @{NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInteger:[fr encodingUsed]]};
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
       [self setDocumentData:attStr];
       [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
@@ -1160,8 +1159,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
 	if (str) {
     _encoding = [fr encodingUsed];
-    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:_encoding]
-                                                        forKey:NSCharacterEncodingDocumentAttribute];
+    NSDictionary *options = @{NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInteger:_encoding]};
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
 		[self setDocumentData:attStr];
     [[self.texEditorViewController.textView textStorage] setAttributedString:attStr];
@@ -1197,7 +1195,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSFileManager *fm = [NSFileManager defaultManager];
   NSDictionary *fileAttributes = [fm attributesOfItemAtPath:[[self fileURL] path]
                                                       error:NULL];
-  NSDate* newDate = [fileAttributes objectForKey:NSFileModificationDate];
+  NSDate* newDate = fileAttributes[NSFileModificationDate];
   [self setFileModificationDate:newDate];
 }
 
@@ -1268,7 +1266,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     
     NSSavePanel *panel = [NSSavePanel savePanel];
     [panel setTitle:@"Save pasted image"];
-    [panel setAllowedFileTypes:[NSArray arrayWithObject:type]];
+    [panel setAllowedFileTypes:@[type]];
     [panel setAllowsOtherFileTypes:NO];
     [panel setCanCreateDirectories:YES];
     [panel setMessage:@"Save pasted image"];
@@ -1348,8 +1346,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 		if ([doc isKindOfClass:[TeXProjectDocument class]]) {
 			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 			ProjectEntity *project = [doc project];
-			[dict setObject:[project valueForKey:@"name"] forKey:@"Name"];
-			[dict setObject:doc forKey:@"Project"];
+			dict[@"Name"] = [project valueForKey:@"name"];
+			dict[@"Project"] = doc;
 			[projects addObject:dict];
 		}
 	}
@@ -1395,7 +1393,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	NSArray *selected = [_projectsController selectedObjects];
 //	NSLog(@"Selected: %@", selected);
 	if ([selected count] == 1) {
-		TeXProjectDocument *doc = [[selected objectAtIndex:0] valueForKey:@"Project"];
+		TeXProjectDocument *doc = [selected[0] valueForKey:@"Project"];
 //		NSLog(@"Adding to %@", [doc project]);
 		BOOL copy = NO;
 		if ([_copyToProjectCheckButton state]==NSOnState) {
@@ -1572,7 +1570,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
 }
 
@@ -1590,7 +1588,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
 {
-  return [NSArray array];
+  return @[];
 }
 
 -(NSString*)fileExtension
@@ -1660,7 +1658,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(NSArray*)bookmarksForCurrentFileInLineRange:(NSRange)aRange
 {
-  return [NSArray array];
+  return @[];
 }
 
 
@@ -1787,7 +1785,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (NSArray*)fileMonitorFileList:(TPFileMonitor *)aMonitor
 {
-  return [NSArray arrayWithObject:self];
+  return @[self];
 }
 
 
@@ -1843,25 +1841,25 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(void)didSelectDoBibtex:(BOOL)state
 {
-  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doBibtex"];
+  [self.settings setValue:@(state) forKey:@"doBibtex"];
   [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectDoPS2PDF:(BOOL)state
 {
-  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"doPS2PDF"];
+  [self.settings setValue:@(state) forKey:@"doPS2PDF"];
   [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectOpenConsole:(BOOL)state
 {
-  [self.settings setValue:[NSNumber numberWithBool:state] forKey:@"openConsole"];
+  [self.settings setValue:@(state) forKey:@"openConsole"];
   [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didChangeNCompile:(NSInteger)number
 {
-  [self.settings setValue:[NSNumber numberWithInteger:number] forKey:@"nCompile"];
+  [self.settings setValue:@(number) forKey:@"nCompile"];
 }
 
 -(void)didSelectEngineName:(NSString*)aName
@@ -1892,7 +1890,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 -(NSNumber*)nCompile
 {
   if (_liveUpdate) {
-    return [NSNumber numberWithInt:1];
+    return @1;
   }
   
   return [self.settings valueForKey:@"nCompile"];  
@@ -1966,7 +1964,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
 //  NSLog(@"Clicked on PDF...");
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView
-                                                                 pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
+                                                                 pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   sourcefile = [sourcefile stringByStandardizingPath]; 
@@ -1990,7 +1988,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:path display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
       // do stuff
       ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
-      [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:[NSNumber numberWithInteger:lineNumber] afterDelay:0];
+      [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:@(lineNumber) afterDelay:0];
     }];
   }
   
@@ -2037,8 +2035,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [[_editorSplitView subviews] objectAtIndex:0];
-  NSView *bottomView = [[_editorSplitView subviews] objectAtIndex:1];
+  NSView *topView = [_editorSplitView subviews][0];
+  NSView *bottomView = [_editorSplitView subviews][1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -2267,7 +2265,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth
 {
-  self.maxOutlineViewDepth = [NSNumber numberWithInteger:depth];
+  self.maxOutlineViewDepth = @(depth);
 }
 
 - (NSNumber*) maxOutlineDepth
@@ -2385,8 +2383,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) syncDocumentDataFromEditor
 {
-  NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[MHFileReader defaultEncoding]]
-                                                           forKey:NSCharacterEncodingDocumentAttribute];
+  NSDictionary *options = @{NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInteger:[MHFileReader defaultEncoding]]};
   NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options];
   [self setDocumentData:attStr];
 }
@@ -2474,7 +2471,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([self fileURL] == nil)
     return @[@"untitled"];
   
-  return [NSArray arrayWithObject:[self fileURL]];
+  return @[[self fileURL]];
 }
 
 - (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
@@ -2496,7 +2493,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([self fileURL] == nil)
     return @[@"untitled"];
   
-  return [NSArray arrayWithObject:[self fileURL]];
+  return @[[self fileURL]];
 }
 
 - (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file
@@ -2520,7 +2517,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([self fileURL] == nil)
     return @[@"untitled"];
   
-  return [NSArray arrayWithObject:[self fileURL]];
+  return @[[self fileURL]];
 }
 
 - (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
@@ -2558,7 +2555,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([self fileURL] == nil)
     return @[@"untitled"];
   
-  return [NSArray arrayWithObject:[self fileURL]];
+  return @[[self fileURL]];
 }
 
 - (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file

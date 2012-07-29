@@ -43,7 +43,7 @@
 	int prefixCount = 0; 
 	if( ! [self isEqual: endPath] ){ 
 		NSInteger iLen = MIN([startComponents count], [endComponents count]); 
-		for(prefixCount = 0; prefixCount < iLen && [[startComponents objectAtIndex: prefixCount] isEqual: [endComponents objectAtIndex: prefixCount]]; ++prefixCount){} 
+		for(prefixCount = 0; prefixCount < iLen && [startComponents[prefixCount] isEqual: endComponents[prefixCount]]; ++prefixCount){} 
 	} 
 	if(0 == prefixCount){ 
 		resultComponents = [NSMutableArray arrayWithArray: endComponents]; 

@@ -198,7 +198,7 @@
       NSError *error = nil;
       NSArray *projects = [self.managedObjectContext executeFetchRequest:request error:&error];
       if ([projects count] > 0) {
-        self.project = [projects objectAtIndex:0];
+        self.project = projects[0];
       }
     }
   }
@@ -224,7 +224,7 @@
   [settings writeToURL:settingsPlist atomically:YES];
   
   // write info dictionary
-  NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:self.templateName, @"name", self.templateDescription, @"description", nil];
+  NSDictionary *info = @{@"name": self.templateName, @"description": self.templateDescription};
   NSURL *infoPlist = [[self fileURL] URLByAppendingPathComponent:@"info.plist"];
   [info writeToURL:infoPlist atomically:YES];
   
@@ -375,7 +375,7 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [self.root.children objectAtIndex:index];
+    return (self.root.children)[index];
   }
   
   if ([item isMemberOfClass:[TPTemplateFile class]]) {
@@ -384,7 +384,7 @@
   
   TPTemplateDirectory *dir = (TPTemplateDirectory*)item;
   
-  return [dir.children objectAtIndex:index];
+  return (dir.children)[index];
 }
 
 - (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
@@ -453,13 +453,13 @@
 - (void) outlineViewItemDidCollapse:(NSNotification *)notification
 {
   id object = [[notification userInfo] valueForKey:@"NSObject"];  
-  [object setValue:[NSNumber numberWithBool:NO] forKey:@"isExpanded"];
+  [object setValue:@NO forKey:@"isExpanded"];
 }
 
 - (void) outlineViewItemDidExpand:(NSNotification *)notification
 {
   id object = [[notification userInfo] valueForKey:@"NSObject"];  
-  [object setValue:[NSNumber numberWithBool:YES] forKey:@"isExpanded"];
+  [object setValue:@YES forKey:@"isExpanded"];
 }
 
 #pragma mark -

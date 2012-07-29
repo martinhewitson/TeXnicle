@@ -43,302 +43,302 @@
   
   // Warning 1
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:1] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@1 forKey:@"code"];
   [error setValue:@"Command terminated with space" forKey:@"message"];
   [errors addObject:error];
   
   // Warning 2
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:2] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@2 forKey:@"code"];
   [error setValue:@"Non-breaking space ('~') should have been used." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 3
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:3] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@3 forKey:@"code"];
   [error setValue:@"You should enclose the previous parenthesis with '{}'." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 4
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:4] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@4 forKey:@"code"];
   [error setValue:@"Italic correction ('\\/') found in non-italic buffer." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 5
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:5] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@5 forKey:@"code"];
   [error setValue:@"Italic correction ('\\/') found more than once." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 6
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:6] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@6 forKey:@"code"];
   [error setValue:@"No italic correction ('\\/') found." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 7
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:7] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@7 forKey:@"code"];
   [error setValue:@"Accent command 'command' needs use of 'command'." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 8
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:8] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@8 forKey:@"code"];
   [error setValue:@"Wrong length of dash may have been used." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 9
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:9] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@9 forKey:@"code"];
   [error setValue:@"'X' expected, found 'Y'." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 10
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:10] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@10 forKey:@"code"];
   [error setValue:@"Solo 'X' found." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 11
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:11] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@11 forKey:@"code"];
   [error setValue:@"You should use '\\ldots' or '\\cdots' to achieve an ellipsis." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 12
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:12] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@12 forKey:@"code"];
   [error setValue:@"Interword spacing (‘\\ ’) should perhaps be used." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 13
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:13] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@13 forKey:@"code"];
   [error setValue:@"Intersentence spacing ('\\@') should perhaps be used." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 14
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:14] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@14 forKey:@"code"];
   [error setValue:@"Could not find argument for command." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 15
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:15] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@15 forKey:@"code"];
   [error setValue:@"No match found for 'X'." forKey:@"message"];
   [errors addObject:error];
   
   // Warning 16
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:16] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@16 forKey:@"code"];
   [error setValue:@"Mathmode still on at end of LaTeX file." forKey:@"message"];
   [errors addObject:error];  
   
   // Warning 17
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:17] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@17 forKey:@"code"];
   [error setValue:@"Number of open brackets doesn’t match the number of closing brackets." forKey:@"message"];
   [errors addObject:error];  
   
   // Warning 18
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:18] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@18 forKey:@"code"];
   [error setValue:@"You should use either `` or '' as an alternative to \"." forKey:@"message"];
   [errors addObject:error];  
   
   // Warning 19
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:19] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@19 forKey:@"code"];
   [error setValue:@"You should use \"’\" (ASCII 39) instead of \"’\" (ASCII 180)." forKey:@"message"];
   [errors addObject:error];  
   
   // Warning 20
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:20] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@20 forKey:@"code"];
   [error setValue:@"User-specified pattern found." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 21
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:NO] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:21] forKey:@"code"];
+  [error setValue:@NO forKey:@"check"];
+  [error setValue:@21 forKey:@"code"];
   [error setValue:@"This command might not be intended." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 22
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:NO] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:22] forKey:@"code"];
+  [error setValue:@NO forKey:@"check"];
+  [error setValue:@22 forKey:@"code"];
   [error setValue:@"Comment displayed." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 23
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:23] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@23 forKey:@"code"];
   [error setValue:@"Either ’’\\,’ or ’\\,’’ will look better." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 24
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:24] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@24 forKey:@"code"];
   [error setValue:@"Delete this space to maintain correct pagereferences." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 25
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:25] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@25 forKey:@"code"];
   [error setValue:@"You might wish to put this between a pair of ‘{}’." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 26
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:26] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@26 forKey:@"code"];
   [error setValue:@"You ought to remove spaces in front of punctuation." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 27
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:27] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@27 forKey:@"code"];
   [error setValue:@"Could not execute LaTeX command." forKey:@"message"];
   [errors addObject:error];   
 
   // Warning 28
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:28] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@28 forKey:@"code"];
   [error setValue:@"Don’t use \\/ in front of small punctuation." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 29
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:29] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@29 forKey:@"code"];
   [error setValue:@"$\times$ may look prettier here." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 30
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:NO] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:30] forKey:@"code"];
+  [error setValue:@NO forKey:@"check"];
+  [error setValue:@30 forKey:@"code"];
   [error setValue:@"Multiple spaces detected in output." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 31
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:31] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@31 forKey:@"code"];
   [error setValue:@"This text may be ignored." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 32
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:32] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@32 forKey:@"code"];
   [error setValue:@"Use ‘ to begin quotation, not ’." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 33
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:33] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@33 forKey:@"code"];
   [error setValue:@"Use ’ to end quotation, not ‘." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 34
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:34] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@34 forKey:@"code"];
   [error setValue:@"Don’t mix quotes." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 35
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:35] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@35 forKey:@"code"];
   [error setValue:@"You should perhaps use ‘cmd’ instead." forKey:@"message"];
   [errors addObject:error]; 
   
   // Warning 36
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:36] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@36 forKey:@"code"];
   [error setValue:@"You should put a space in front of/after parenthesis." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 37
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:37] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@37 forKey:@"code"];
   [error setValue:@"You should avoid spaces in front of/after parenthesis." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 38
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:38] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@38 forKey:@"code"];
   [error setValue:@"You should not use punctuation in front of/after quotes." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 39
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:39] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@39 forKey:@"code"];
   [error setValue:@"Double space found." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 40
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:40] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@40 forKey:@"code"];
   [error setValue:@"You should put punctuation outside inner/inside display math mode." forKey:@"message"];
   [errors addObject:error];   
 
   // Warning 41
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:NO] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:41] forKey:@"code"];
+  [error setValue:@NO forKey:@"check"];
+  [error setValue:@41 forKey:@"code"];
   [error setValue:@"You ought to not use primitive TeX in LaTeX code." forKey:@"message"];
   [errors addObject:error];   
 
   // Warning 42
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:42] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@42 forKey:@"code"];
   [error setValue:@"You should remove spaces in front of ‘X’." forKey:@"message"];
   [errors addObject:error];   
   
   // Warning 43
   error = [NSMutableDictionary dictionary];
-  [error setValue:[NSNumber numberWithBool:YES] forKey:@"check"];
-  [error setValue:[NSNumber numberWithInteger:43] forKey:@"code"];
+  [error setValue:@YES forKey:@"check"];
+  [error setValue:@43 forKey:@"code"];
   [error setValue:@"‘X’ is normally not followed by ‘Y’." forKey:@"message"];
   [errors addObject:error];   
   
@@ -466,7 +466,7 @@
 	if( [aNote object] != lacheckFileHandle )
 		return;
 	
-	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
+	NSData *data = [aNote userInfo][NSFileHandleNotificationDataItem];
 //  NSLog(@"Got data %@", data);
   NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 //  NSLog(@"Got string %@", string);

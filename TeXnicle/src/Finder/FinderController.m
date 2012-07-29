@@ -724,10 +724,10 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return [[self orderedResults] objectAtIndex:index];
+    return [self orderedResults][index];
   }
   
-  return [[item valueForKey:@"matches"] objectAtIndex:index];  
+  return [item valueForKey:@"matches"][index];  
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item

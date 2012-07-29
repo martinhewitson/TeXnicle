@@ -66,7 +66,7 @@
 //	NSLog(@"Loaded palette: %@", [palettesController arrangedObjects]);
 	
 	// Register the symbols table for dragging strings
-	[symbolsTable registerForDraggedTypes:[NSArray arrayWithObject:NSStringPboardType]];	
+	[symbolsTable registerForDraggedTypes:@[NSStringPboardType]];	
 	[symbolsTable setVerticalMotionCanBeginDrag:YES];
   
   [symbolsTable setTarget:self];
@@ -109,7 +109,7 @@
 					image = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 				}
 			}
-			[symbol setObject:image forKey:@"ImageData"];
+			symbol[@"ImageData"] = image;
 		}
 	}
 }
@@ -230,7 +230,7 @@
 - (NSString *)tableView:(NSTableView *)aTableView toolTipForCell:(NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
 {
 	if (aTableView == symbolsTable) {
-		NSDictionary *symbol = [[symbolsController arrangedObjects] objectAtIndex:row];
+		NSDictionary *symbol = [symbolsController arrangedObjects][row];
 		return [symbol valueForKey:@"Code"];
 	}
 	
@@ -254,10 +254,10 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 		NSUInteger idx;		
 		NSMutableArray *strings = [NSMutableArray array];
 		for (idx = 0; idx < bufSize; idx++) {
-			NSDictionary *symbol = [items objectAtIndex:buf[idx]];
+			NSDictionary *symbol = items[buf[idx]];
 			[strings addObject:[symbol valueForKey:@"Code"]];
 		}
-		[pboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:self];
+		[pboard declareTypes:@[NSStringPboardType] owner:self];
 
 		return [pboard setString:[strings componentsJoinedByString:@" "] forType:NSStringPboardType];
 	}

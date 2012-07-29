@@ -48,7 +48,7 @@
 {
   NSEntityDescription *desc = [NSEntityDescription entityForName:@"Bookmark" inManagedObjectContext:aMOC];
   Bookmark *bookmark = [[Bookmark alloc] initWithEntity:desc insertIntoManagedObjectContext:aMOC];
-  bookmark.linenumber = [NSNumber numberWithInteger:aLinenumber];
+  bookmark.linenumber = @(aLinenumber);
   bookmark.parentFile = aFile;
   
   // extract text

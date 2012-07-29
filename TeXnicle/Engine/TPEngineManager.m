@@ -42,7 +42,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 +(NSArray*)builtinEngineNames
 {
-  return [NSArray arrayWithObjects:@"xelatex", @"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond", nil];
+  return @[@"xelatex", @"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond"];
 }
 
 + (void) installEngines
@@ -108,8 +108,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     // make executable
     NSDictionary *attributes;
     NSNumber *permissions;
-    permissions = [NSNumber numberWithUnsignedLong: 493];
-    attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
+    permissions = @493UL;
+    attributes = @{NSFilePosixPermissions: permissions};
     // This actually sets the permissions
     error = nil;
     success = [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:target error:&error];
@@ -192,8 +192,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     if ([fm fileExistsAtPath:filepath] && [[filepath pathExtension] isEqualToString:@"engine"]) {     
       
       // ensure the engine is executable
-      NSNumber *permissions = [NSNumber numberWithUnsignedLong: 493];
-      NSDictionary *attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
+      NSNumber *permissions = @493UL;
+      NSDictionary *attributes = @{NSFilePosixPermissions: permissions};
       // This actually sets the permissions
       error = nil;
       BOOL success = [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:filepath error:&error];
@@ -314,7 +314,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) compileDidFinish:(BOOL)success
 {
-  NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:success] forKey:@"success"];
+  NSDictionary *dict = @{@"success": @(success)};
   [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineCompilingCompletedNotification
                                                       object:self
                                                     userInfo:dict];    

@@ -45,7 +45,7 @@ static MABSupportFolder *_sharedController;
 		_sharedController = self;
 		
 		//create the application support folder path
-		_supportFolder = [NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+		_supportFolder = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES)[0];
 		_supportFolder = [_supportFolder stringByAppendingPathComponent:[[NSBundle mainBundle]  objectForInfoDictionaryKey:@"CFBundleName"]];
 		
 		_fileManager = [NSFileManager defaultManager];

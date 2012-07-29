@@ -103,7 +103,7 @@
   }
   
   // get the selected engine name
-  NSString *name = [[self.engineManager registeredEngineNames] objectAtIndex:aRow];
+  NSString *name = [self.engineManager registeredEngineNames][aRow];
   
   // get the engine
   TPEngine *engine = [self.engineManager engineNamed:name];
@@ -242,7 +242,7 @@
   [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
                                                source:source 
                                           destination:@""
-                                                files:[NSArray arrayWithObject:file] 
+                                                files:@[file] 
                                                   tag:nil];
   
   // reload engines
@@ -278,7 +278,7 @@
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-  return [[self.engineManager registeredEngineNames] objectAtIndex:row];
+  return [self.engineManager registeredEngineNames][row];
 }
 
 - (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row

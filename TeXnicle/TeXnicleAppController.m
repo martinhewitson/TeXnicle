@@ -186,21 +186,21 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	for (NSDictionary *dict in [templateDictionary valueForKey:@"Templates"]) {
 		[templates addObject:[NSMutableDictionary dictionaryWithDictionary:dict]];
 	}
-	[defaultValues setObject:templates forKey:TEDocumentTemplates];
+	defaultValues[TEDocumentTemplates] = templates;
 
   // user commands
-  [defaultValues setObject:[NSMutableArray array] forKey:TEUserCommands];
+  defaultValues[TEUserCommands] = [NSMutableArray array];
   
   // ref commands
   NSMutableArray *refCommands = [NSMutableArray array];
   [refCommands addObject:@"\\ref"];
   [refCommands addObject:@"\\eqref"];
-  [defaultValues setObject:refCommands forKey:TERefCommands];
+  defaultValues[TERefCommands] = refCommands;
   
   // cite commands
   NSMutableArray *citeCommands = [NSMutableArray array];
   [citeCommands addObject:@"\\cite"];
-  [defaultValues setObject:citeCommands forKey:TECiteCommands];
+  defaultValues[TECiteCommands] = citeCommands;
   
   // begin commands
   NSMutableArray *beginCommands = [NSMutableArray array];
@@ -219,62 +219,62 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	[beginCommands addObject:@"center"];
 	[beginCommands addObject:@"figure"];
 	[beginCommands addObject:@"table"];
-  [defaultValues setObject:beginCommands forKey:TEBeginCommands];
+  defaultValues[TEBeginCommands] = beginCommands;
   
   // completion stuff
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyAddEndToBeginStatement];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyInsertClosingBrace];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCommandCompletionList];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowCiteCompletionList];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowRefCompletionList];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowFileCompletionList];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyShowBeginCompletionList];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallyReplaceOpeningDoubleQuote];
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TEAutomaticallySkipClosingBrackets];
+  defaultValues[TEAutomaticallyAddEndToBeginStatement] = @YES;
+  defaultValues[TEAutomaticallyInsertClosingBrace] = @YES;
+  defaultValues[TEAutomaticallyShowCommandCompletionList] = @YES;
+  defaultValues[TEAutomaticallyShowCiteCompletionList] = @YES;
+  defaultValues[TEAutomaticallyShowRefCompletionList] = @YES;
+  defaultValues[TEAutomaticallyShowFileCompletionList] = @YES;
+  defaultValues[TEAutomaticallyShowBeginCompletionList] = @YES;
+  defaultValues[TEAutomaticallyReplaceOpeningDoubleQuote] = @YES;
+  defaultValues[TEAutomaticallySkipClosingBrackets] = @YES;
   
   // check syntax
-  [defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPCheckSyntax];
-  [defaultValues setObject:[TPSyntaxChecker defaultSyntaxErrors] forKey:TPCheckSyntaxErrors];
-  [defaultValues setObject:@"/usr/texbin/chktex" forKey:TPChkTeXpath];
+  defaultValues[TPCheckSyntax] = @YES;
+  defaultValues[TPCheckSyntaxErrors] = [TPSyntaxChecker defaultSyntaxErrors];
+  defaultValues[TPChkTeXpath] = @"/usr/texbin/chktex";
   
   // file commands
   NSMutableArray *fileCommands = [NSMutableArray array];
 	[fileCommands addObject:@"\\input"];
   [fileCommands addObject:@"\\include"];
-  [defaultValues setObject:fileCommands forKey:TEFileCommands];
+  defaultValues[TEFileCommands] = fileCommands;
   
 	// Document settings	
-	[defaultValues setValue:[NSNumber numberWithInt:TPHardWrap] forKey:TELineWrapStyle];
-	[defaultValues setValue:[NSNumber numberWithInt:80] forKey:TELineLength];
+	[defaultValues setValue:@(TPHardWrap) forKey:TELineWrapStyle];
+	[defaultValues setValue:@80 forKey:TELineLength];
 	
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEInsertSpacesForTabs];
-	[defaultValues setValue:[NSNumber numberWithInt:2] forKey:TENumSpacesForTab];
+	[defaultValues setValue:@YES forKey:TEInsertSpacesForTabs];
+	[defaultValues setValue:@2 forKey:TENumSpacesForTab];
 	
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEShowLineNumbers];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TEShowCodeFolders];
+	[defaultValues setValue:@YES forKey:TEShowLineNumbers];
+	[defaultValues setValue:@NO forKey:TEShowCodeFolders];
   
-  [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPRestoreOpenTabs];
+  [defaultValues setValue:@YES forKey:TPRestoreOpenTabs];
   
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightCurrentLine];
+	[defaultValues setValue:@YES forKey:TEHighlightCurrentLine];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0]] forKey:TEHighlightCurrentLineColor];
 
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TEHighlightMatchingWords];
+	[defaultValues setValue:@YES forKey:TEHighlightMatchingWords];
   [defaultValues setValue:[NSArray arrayWithColor:[[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6]] forKey:TEHighlightMatchingWordsColor];
   
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor selectedTextBackgroundColor]] forKey:TESelectedTextBackgroundColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor selectedTextColor]] forKey:TESelectedTextColor];
   
-  [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPSaveOnCompile];
-  [defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TPClearConsoleOnCompile];
-	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:OpenConsoleOnTypeset];
+  [defaultValues setValue:@YES forKey:TPSaveOnCompile];
+  [defaultValues setValue:@YES forKey:TPClearConsoleOnCompile];
+	defaultValues[OpenConsoleOnTypeset] = @YES;
 
   // console
-  [defaultValues setObject:[NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]] forKey:TEConsoleFont];  
+  defaultValues[TEConsoleFont] = [NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]];  
 	
 	//--- colors for syntax highlighting
 	
   // default text
-  [defaultValues setObject:[NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]] forKey:TEDocumentFont];  
+  defaultValues[TEDocumentFont] = [NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]];  
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   
@@ -282,34 +282,34 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.4 alpha:1.0]] forKey:TESyntaxCommentsColor];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.6 alpha:1.0]] forKey:TESyntaxCommentsL2Color];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.8 alpha:1.0]] forKey:TESyntaxCommentsL3Color];
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorComments];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL2];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorCommentsL3];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMultilineArguments];
+	[defaultValues setValue:@YES forKey:TESyntaxColorComments];
+	[defaultValues setValue:@NO forKey:TESyntaxColorCommentsL2];
+	[defaultValues setValue:@NO forKey:TESyntaxColorCommentsL3];
+	[defaultValues setValue:@NO forKey:TESyntaxColorMultilineArguments];
   
   // markup
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:1.0 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL1Color];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.8 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL2Color];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.5 green:0.1 blue:0.1 alpha:1.0]] forKey:TESyntaxMarkupL3Color];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL1];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL2];
-	[defaultValues setValue:[NSNumber numberWithBool:NO] forKey:TESyntaxColorMarkupL3];
+	[defaultValues setValue:@NO forKey:TESyntaxColorMarkupL1];
+	[defaultValues setValue:@NO forKey:TESyntaxColorMarkupL2];
+	[defaultValues setValue:@NO forKey:TESyntaxColorMarkupL3];
   
   // special chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:35.0/255.0 blue:1.0 alpha:1.0]] forKey:TESyntaxSpecialCharsColor];
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorSpecialChars];
+	[defaultValues setValue:@YES forKey:TESyntaxColorSpecialChars];
   
   // dollar chars
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor redColor]] forKey:TESyntaxDollarCharsColor];
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorDollarChars];
+	[defaultValues setValue:@YES forKey:TESyntaxColorDollarChars];
   
   // commands
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:25.0/255.0 green:20.0/255.0 blue:150.0/255.0 alpha:1.0]] forKey:TESyntaxCommandColor];
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorCommand];
+	[defaultValues setValue:@YES forKey:TESyntaxColorCommand];
   
   // arguments
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceRed:0.0/255.0 green:100.0/255.0 blue:185.0/255.0 alpha:1.0]] forKey:TESyntaxArgumentsColor];
-	[defaultValues setValue:[NSNumber numberWithBool:YES] forKey:TESyntaxColorArguments];
+	[defaultValues setValue:@YES forKey:TESyntaxColorArguments];
 	
   
   // outline colors
@@ -325,48 +325,48 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   
   //---------- Paths
 	// GS
-	[defaultValues setObject:@"/usr/local/bin/gs" forKey:TPGSPath];
+	defaultValues[TPGSPath] = @"/usr/local/bin/gs";
 	
 	// PDFLatex
-	[defaultValues setObject:@"/usr/texbin/pdflatex" forKey:TPPDFLatexPath];
+	defaultValues[TPPDFLatexPath] = @"/usr/texbin/pdflatex";
 	
 	// Latex
-	[defaultValues setObject:@"/usr/texbin/latex" forKey:TPLatexPath];
+	defaultValues[TPLatexPath] = @"/usr/texbin/latex";
 	
 	// dvips
-	[defaultValues setObject:@"/usr/texbin/dvips" forKey:TPDvipsPath];
+	defaultValues[TPDvipsPath] = @"/usr/texbin/dvips";
 	
 	// BibTeX path
-	[defaultValues setObject:@"/usr/texbin/bibtex" forKey:TPBibTeXPath];
+	defaultValues[TPBibTeXPath] = @"/usr/texbin/bibtex";
 	
 	// ps2pdf path
-	[defaultValues setObject:@"" forKey:TPPS2PDFPath];
+	defaultValues[TPPS2PDFPath] = @"";
   
 	// Number of times to run pdflatex
-	[defaultValues setValue:[NSNumber numberWithUnsignedInt:3] forKey:TPNRunsPDFLatex];
+	[defaultValues setValue:@3U forKey:TPNRunsPDFLatex];
 	
 	// BibTeX during typeset
-	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:BibTeXDuringTypeset];
+	defaultValues[BibTeXDuringTypeset] = @YES;
 	
 	// Run ps2pdf after typeset
-	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPShouldRunPS2PDF];
+	defaultValues[TPShouldRunPS2PDF] = @YES;
   
   // Default engine name
-  [defaultValues setObject:@"pdflatex" forKey:TPDefaultEngineName];
+  defaultValues[TPDefaultEngineName] = @"pdflatex";
   
 	// --------- Trash
-	NSArray *files = [NSArray arrayWithObjects:@"aux", @"log", @"bbl", @"out", nil];
-	[defaultValues setObject:files forKey:TPTrashFiles];
-	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:TPTrashDocumentFileWhenTrashing];
+	NSArray *files = @[@"aux", @"log", @"bbl", @"out"];
+	defaultValues[TPTrashFiles] = files;
+	defaultValues[TPTrashDocumentFileWhenTrashing] = @YES;
   
 	//---------- Console settings
-	[defaultValues setValue:[NSNumber numberWithInt:0] forKey:TPConsoleDisplayLevel];	
+	[defaultValues setValue:@0 forKey:TPConsoleDisplayLevel];	
 	
 	
 	//---------- Hidden settings
 	[defaultValues setValue:@"" forKey:TPSpellCheckerLanguage];
-  [defaultValues setValue:[NSNumber numberWithFloat:15.0] forKey:TPPaletteRowHeight];
-  [defaultValues setValue:[NSNumber numberWithFloat:25.0] forKey:TPLibraryRowHeight];
+  [defaultValues setValue:@15.0f forKey:TPPaletteRowHeight];
+  [defaultValues setValue:@25.0f forKey:TPLibraryRowHeight];
   
   //---------- Supported File Types
   NSMutableArray *supportedTypes = [NSMutableArray array];
@@ -396,7 +396,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   [defaultValues setValue:@"Unicode (UTF-8)" forKey:TPDefaultEncoding];
   
   // live update frequency
-  [defaultValues setValue:[NSNumber numberWithFloat:1.0] forKey:TPLiveUpdateFrequency];
+  [defaultValues setValue:@1.0f forKey:TPLiveUpdateFrequency];
   
   // register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	
@@ -459,15 +459,15 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
     NSArray *args = [[NSProcessInfo processInfo] arguments];
     
     if ([args count] == 4) {
-      NSString *tag = [args objectAtIndex:2];
+      NSString *tag = args[2];
       if ([tag isEqualToString:@"-line"]) {
-        lineToOpen = [[args objectAtIndex:3] integerValue];
+        lineToOpen = [args[3] integerValue];
       }    
     }
         
     if (lineToOpen != NSNotFound) {
       [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) 
-                                                 withObject:[NSNumber numberWithInteger:lineToOpen] 
+                                                 withObject:@(lineToOpen) 
                                                  afterDelay:1];
     }
 		return YES;
@@ -490,7 +490,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
     if (![[url pathExtension] isEqualToString:@"engine"]) {
       NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[[url path] lastPathComponent]
                                                                      forKey:@"path"];
-      [dict setObject:url forKey:@"url"];
+      dict[@"url"] = url;
       [[controller recentFiles] addObject:dict];
     }
 	}
@@ -515,8 +515,8 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
     return;
   
   NSArray *parts = [latest componentsSeparatedByString:@" "];
-  CGFloat latestVersion = [[parts objectAtIndex:0] floatValue];
-  CGFloat latestBuild = [[parts objectAtIndex:1] floatValue];
+  CGFloat latestVersion = [parts[0] floatValue];
+  CGFloat latestBuild = [parts[1] floatValue];
   
 //  NSLog(@"Latest ver %f, build %f", latestVersion, latestBuild);
   
@@ -651,13 +651,13 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   // get a project director or file from the user  
   NSOpenPanel *panel = [NSOpenPanel openPanel];
   [panel setTitle:@"Build New Project..."];
-  [panel setAllowedFileTypes:[NSArray arrayWithObject:@"trip"]];
+  [panel setAllowedFileTypes:@[@"trip"]];
   [panel setNameFieldLabel:@"Source:"];
   [panel setCanChooseFiles:YES];
   [panel setCanChooseDirectories:YES];
   [panel setCanCreateDirectories:NO];
   [panel setMessage:@"Choose a main TeX file (one containing \\documentclass) or a directory of TeX files. \nIf a directory is chosen, the first TeX file containing \\documentclass is taken as the main file."];
-  [panel setAllowedFileTypes:[NSArray arrayWithObjects:@"tex", NSFileTypeDirectory, nil]];
+  [panel setAllowedFileTypes:@[@"tex", NSFileTypeDirectory]];
   
   BOOL result = [panel runModal];
   
@@ -666,7 +666,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   }
   
   
-  NSString *path = [[[panel URLs] objectAtIndex:0] path];
+  NSString *path = [[panel URLs][0] path];
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error =nil;
   NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
@@ -827,7 +827,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 				if ([doc respondsToSelector:@selector(getSelectedItems)]) {
 					NSArray *items = [doc performSelector:@selector(getSelectedItems)];
 					if ([items count] == 1) {
-						ProjectItemEntity *item = [items objectAtIndex:0];
+						ProjectItemEntity *item = items[0];
 						if ([item isKindOfClass:[FileEntity class]]) {
               
               NSArray *exts = [[TPSupportedFilesManager sharedSupportedFilesManager] supportedExtensions];

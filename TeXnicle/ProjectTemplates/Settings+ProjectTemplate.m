@@ -36,13 +36,13 @@
 {
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   
-  [dict setObject:self.engineName forKey:@"engineName"];
-  [dict setObject:self.doBibtex forKey:@"doBibtex"];
-  [dict setObject:self.doPS2PDF forKey:@"doPS2PDF"];
-  [dict setObject:self.nCompile forKey:@"nCompile"];
-  [dict setObject:self.openConsole forKey:@"openConsole"];
-  [dict setObject:self.showStatusBar forKey:@"showStatusBar"];
-  [dict setObject:[self.project.mainFile pathRelativeToProject] forKey:@"mainfile"];
+  dict[@"engineName"] = self.engineName;
+  dict[@"doBibtex"] = self.doBibtex;
+  dict[@"doPS2PDF"] = self.doPS2PDF;
+  dict[@"nCompile"] = self.nCompile;
+  dict[@"openConsole"] = self.openConsole;
+  dict[@"showStatusBar"] = self.showStatusBar;
+  dict[@"mainfile"] = [self.project.mainFile pathRelativeToProject];
   
   return dict;
 }

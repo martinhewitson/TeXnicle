@@ -98,7 +98,7 @@
 //        NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
 //        NSDate *modified = [atts objectForKey:NSFileModificationDate];
         NSURL *url = [NSURL fileURLWithPath:path];
-        NSDictionary *vals = [url resourceValuesForKeys:[NSArray arrayWithObjects:NSURLContentModificationDateKey, NSURLContentAccessDateKey, nil] error:&error];
+        NSDictionary *vals = [url resourceValuesForKeys:@[NSURLContentModificationDateKey, NSURLContentAccessDateKey] error:&error];
         NSDate *access = [vals valueForKey:NSURLContentAccessDateKey];
         NSDate *modified = [vals valueForKey:NSURLContentModificationDateKey];
         
@@ -144,7 +144,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(fileMonitorFileList:)]) {
     return [self.delegate fileMonitorFileList:self];
   }
-  return [NSArray array];
+  return @[];
 }
 
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified

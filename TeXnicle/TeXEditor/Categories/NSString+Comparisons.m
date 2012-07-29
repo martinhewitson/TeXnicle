@@ -74,11 +74,9 @@
 - (BOOL) isTextFile
 {
 	// Create an array of strings specifying valid extensions and HFS file types.
-	NSArray *fileTypes = [NSArray arrayWithObjects:
-												@"txt",
+	NSArray *fileTypes = @[@"txt",
 												@"text",
-												NSFileTypeForHFSTypeCode('TEXT'),
-												nil];
+												NSFileTypeForHFSTypeCode('TEXT')];
 	
 	// Try to get the HFS file type as a string.
 	NSString *fileType = NSHFSTypeOfFile(self);

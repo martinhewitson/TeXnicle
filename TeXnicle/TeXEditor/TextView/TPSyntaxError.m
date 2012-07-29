@@ -71,7 +71,7 @@
   self = [super init];
   if (self) {
     
-    self.line = [NSNumber numberWithInteger:NSNotFound];
+    self.line = @(NSNotFound);
     self.message = @"";
     
     [self parseMessageLine:aLine];
@@ -84,10 +84,10 @@
 {
   NSArray *comps = [aLine captureComponentsMatchedByRegex:@"line ([0-9]*):(.*)"];
   if ([comps count] >= 2) {
-    self.line = [NSNumber numberWithInteger:[[comps objectAtIndex:1] integerValue]];
+    self.line = @([comps[1] integerValue]);
   }
   if ([comps count] >= 3) {
-    self.message = [comps objectAtIndex:2];
+    self.message = comps[2];
   }
 }
 

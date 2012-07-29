@@ -163,7 +163,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   dispatch_async(dispatch_get_main_queue(), ^{
     // send notification of section update
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.parent, @"file", self.sections, @"sections", nil];
+    NSDictionary *dict = @{@"file": self.parent, @"sections": self.sections};
     
     [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
                       object:self
@@ -229,7 +229,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
       } 
     } else {
       // clear errors
-      self.syntaxErrors = [NSArray array];
+      self.syntaxErrors = @[];
       [self postUpdateNotification];
     }
     self.lastMetadataUpdate = [NSDate date];

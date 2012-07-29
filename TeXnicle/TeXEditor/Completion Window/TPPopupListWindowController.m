@@ -101,7 +101,7 @@
 //    NSLog(@"Setting height %f", height);
     
 		// get max width of entries
-		NSDictionary *f = [NSDictionary dictionaryWithObject:[NSFont systemFontOfSize:12.0] forKey:NSFontAttributeName];		
+		NSDictionary *f = @{NSFontAttributeName: [NSFont systemFontOfSize:12.0]};		
 //		NSLog(@"Font atts: %@", f);
 		CGFloat maxWidth = 0;
 		if (f) {
@@ -236,7 +236,7 @@
 - (IBAction)selectSelectedItem:(id)sender
 {
   NSInteger row = [table selectedRow];
-  [self userSelectedRow:[NSNumber numberWithInteger:row]];
+  [self userSelectedRow:@(row)];
 }
 
 - (void) userSelectedRow:(NSNumber*)aRow
@@ -249,7 +249,7 @@
     return;
   }
   
-	id value = [[self filteredEntries] objectAtIndex:row];
+	id value = [self filteredEntries][row];
   NSString *tag = @"";
   if ([value respondsToSelector:@selector(tag)]) {
     tag = [value valueForKey:@"tag"];
@@ -298,7 +298,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
 {
 	if (tableView == table) {
     
-		id value = [[self filteredEntries] objectAtIndex:row];
+		id value = [self filteredEntries][row];
     
     BOOL isHighlighted = [tableView selectedRow] == row;
     

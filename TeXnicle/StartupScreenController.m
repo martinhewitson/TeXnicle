@@ -125,7 +125,7 @@
 {
   NSInteger row = [recentFilesTable selectedRow];
 	if (row>=0) {
-    NSString *path = [[[recentFiles objectAtIndex:row] valueForKey:@"url"] path];
+    NSString *path = [[recentFiles[row] valueForKey:@"url"] path];
     [fileLabel setDescriptionText:path];
     [fileLabel setNeedsDisplay:YES];
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -191,7 +191,7 @@
 							row:(NSInteger)rowIndex
 {
   if (recentFiles != nil) {
-    NSDictionary *dict = [recentFiles objectAtIndex:rowIndex];
+    NSDictionary *dict = recentFiles[rowIndex];
     NSString *path = [[dict valueForKey:@"url"] path];
     NSFileManager *fm = [NSFileManager defaultManager];
     if ([fm fileExistsAtPath:path]) {
@@ -209,7 +209,7 @@
 										row:(NSInteger)row 
 					mouseLocation:(NSPoint)mouseLocation
 {
-	NSDictionary *dict = [recentFiles objectAtIndex:row];
+	NSDictionary *dict = recentFiles[row];
 	return [[dict valueForKey:@"url"] path];
 }
 
@@ -229,7 +229,7 @@
   }
   
   [viewer makeWindowControllers];
-  NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];
+  NSWindowController *wc = [viewer windowControllers][0];
   [wc window];
   [viewer createNewProject:sender];
   [self displayOrCloseWindow:self];
@@ -339,7 +339,7 @@
 	if (row>=0) {
 		NSError *error = nil;
     
-    NSURL *url = [[recentFiles objectAtIndex:row] valueForKey:@"url"];
+    NSURL *url = [recentFiles[row] valueForKey:@"url"];
     
     // check if the document is already open
     NSArray *docs = [[NSDocumentController sharedDocumentController] documents];
@@ -398,7 +398,7 @@
     for (NSURL *url in recentURLs) {
       NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[[url path] lastPathComponent]
                                                                      forKey:@"path"];
-      [dict setObject:url forKey:@"url"];
+      dict[@"url"] = url;
       [self.recentFiles addObject:dict];
     }
   } else {
@@ -469,7 +469,7 @@
     for (i = 0; i < count; i++)
     {
       // get the result item
-      NSMetadataItem* item = [results objectAtIndex: i];
+      NSMetadataItem* item = results[i];
       
       NSString* storePath = [[item valueForAttribute:
                               (NSString *)kMDItemPath] stringByResolvingSymlinksInPath];
@@ -480,7 +480,7 @@
         NSURL* storeURL = [NSURL fileURLWithPath: storePath];
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:[[storeURL path] lastPathComponent]
                                                                        forKey:@"path"];
-        [dict setObject:storeURL forKey:@"url"];
+        dict[@"url"] = storeURL;
         [texnicleFiles addObject:dict];
         NSLog(@"Found %@", storeURL);
       }

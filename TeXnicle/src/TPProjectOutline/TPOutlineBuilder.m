@@ -140,7 +140,7 @@
       dispatch_async(dispatch_get_main_queue(), ^{
         // send notification of section update
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:file, @"file", newSections, @"sections", nil];
+        NSDictionary *dict = @{@"file": file, @"sections": newSections};
         [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
                           object:self
                         userInfo:dict];
@@ -185,16 +185,16 @@
   // update parents
   if ([self.sections count] > 0) {
     // set parents
-    TPSection *root = [self.sections objectAtIndex:0];
+    TPSection *root = (self.sections)[0];
     if (newSectionsCount != existingSectionsCount) {
       // reload
       root.needsReload = YES;
     }
     for (int kk=1; kk<[self.sections count]; kk++) {
-      TPSection *s = [self.sections objectAtIndex:kk];
+      TPSection *s = (self.sections)[kk];
       
       int jj = kk-1;
-      TPSection *parent = [self.sections objectAtIndex:jj];
+      TPSection *parent = (self.sections)[jj];
       while (jj>=0) {      
         if ([TPSectionTemplate template:s.type isChildOf:parent.type]) {
           if (s.parent != parent) {
@@ -204,7 +204,7 @@
           break;
         } 
         if (jj>=0) {
-          parent = [self.sections objectAtIndex:jj];
+          parent = (self.sections)[jj];
         }
         jj--;
       }

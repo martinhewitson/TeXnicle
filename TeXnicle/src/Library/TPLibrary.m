@@ -50,11 +50,11 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 	for (TPLibraryCategory *category in [self categories]) {
     
     // get category with this name, or make one
-    category.sortIndex = [NSNumber numberWithInteger:categoryIndex];
+    category.sortIndex = @(categoryIndex);
     
     NSInteger entryIndex = 0;
 		for (TPLibraryEntry *entry in [self entriesForCategory:category]) {      
-      entry.sortIndex = [NSNumber numberWithInteger:entryIndex];
+      entry.sortIndex = @(entryIndex);
       entryIndex++;
     }
     categoryIndex++;
@@ -111,7 +111,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
   NSError *error = nil;
   
-  NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsDirectoryKey] error:&error];
+  NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:@[NSURLIsDirectoryKey] error:&error];
   
   if (!properties) {
     BOOL ok = NO;
@@ -123,7 +123,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
       return nil;
     }
   } else {
-    if (![[properties objectForKey:NSURLIsDirectoryKey] boolValue]) {
+    if (![properties[NSURLIsDirectoryKey] boolValue]) {
       // Customize and localize this error.
       NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
       
@@ -138,8 +138,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   
   NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"library.storedata"];
   NSMutableDictionary *options = nil;
-  [options setObject:[NSNumber numberWithBool:YES] 
-							forKey:NSMigratePersistentStoresAutomaticallyOption];
+  options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
   NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
   if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]) {
     [[NSApplication sharedApplication] presentError:error];
@@ -234,7 +233,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 	NSMutableArray *categories = [self categorySetFromDefaults:defaultLibrary];	
   if (categories != nil) {
     NSMutableDictionary *library = [[NSMutableDictionary alloc] init];
-    [library setObject:categories forKey:@"Categories"];
+    library[@"Categories"] = categories;
     return library;
   }
   return nil;
@@ -249,7 +248,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
     
     // get category with this name, or make one
     TPLibraryCategory *newCategory = [self getOrCreateCategoryWithName:categoryName];
-    newCategory.sortIndex = [NSNumber numberWithInteger:categoryCount];
+    newCategory.sortIndex = @(categoryCount);
     
     NSInteger entryCount = 0;
 		for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {
@@ -261,7 +260,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
       if (entry.uuid == nil || [entry.uuid length] == 0) {
         entry.uuid = [NSString stringWithUUID];
       }
-      entry.sortIndex = [NSNumber numberWithInteger:entryCount];
+      entry.sortIndex = @(entryCount);
       entryCount++;
     }
     
@@ -305,10 +304,10 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 			}
 			
 			if (image == nil || ![image isValid]) {
-				[newClip setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]] forKey:@"Image"];						
+				newClip[@"Image"] = [NSKeyedArchiver archivedDataWithRootObject:[NSImage imageNamed:NSImageNameRefreshTemplate]];						
 			}
 			
-			[newClip setValue:[NSNumber numberWithBool:YES] forKey:@"validImage"];
+			[newClip setValue:@YES forKey:@"validImage"];
       //      NSLog(@"Checking new clip %@", [newClip valueForKey:@"Code"]);
       //      NSLog(@"    command: %@", [newClip valueForKey:@"Command"]);
       // apply default command if it is currently empty
@@ -356,7 +355,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   
   if (fetchResults) {
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
-    NSArray *descriptors = [NSArray arrayWithObject:descriptor];
+    NSArray *descriptors = @[descriptor];
     return [fetchResults sortedArrayUsingDescriptors:descriptors];    
   }
   
@@ -367,14 +366,14 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 {
   NSArray *entries = [category.entries allObjects];
   NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
-  NSArray *descriptors = [NSArray arrayWithObject:descriptor];
+  NSArray *descriptors = @[descriptor];
   return [entries sortedArrayUsingDescriptors:descriptors];    
 }
 
 - (TPLibraryCategory*) categoryAtIndex:(NSInteger)index
 {
   NSArray *categories = [self categories];
-  return [categories objectAtIndex:index];
+  return categories[index];
 }
 
 - (NSInteger)indexOfCategory:(TPLibraryCategory*)category
@@ -399,7 +398,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
   
   if (fetchResults != nil && [fetchResults count] > 0)
-    return [fetchResults objectAtIndex:0];
+    return fetchResults[0];
   
   return nil;	
 }
@@ -483,7 +482,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
     return fetchResults;    
   }
   
-  return [NSArray array];
+  return @[];
 }
 
 - (NSString*) codeForCommand:(NSString*)command
@@ -507,7 +506,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   
   if (fetchResults && [fetchResults count] > 0) {
     NSArray *codes = [fetchResults valueForKey:@"code"];    
-    return [codes objectAtIndex:0];
+    return codes[0];
   }
   
   return nil;

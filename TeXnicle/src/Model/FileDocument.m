@@ -95,7 +95,7 @@
 - (NSTextContainer*)textContainer
 {
 	// An ugly quick hack to return the 'main' text container for this document
-	return [[[[textStorage layoutManagers] objectAtIndex:0] textContainers] objectAtIndex:0];
+	return [[textStorage layoutManagers][0] textContainers][0];
 }
 
 - (BOOL) commitEdits
@@ -132,11 +132,11 @@
   // if the last edit is prior to the load, then we didn't edit so far
   if ([loaded compare:lastEdit] == NSOrderedAscending) {
 //    NSLog(@"Edit date later than loaded date");
-    [file setValue:[NSNumber numberWithBool:YES] forKey:@"hasEdits"];
+    [file setValue:@YES forKey:@"hasEdits"];
     [file setValue:[NSDate date] forKey:@"lastEditDate"];
   } else {
 //    NSLog(@"Edit date earlier than loaded date");
-    [file setValue:[NSNumber numberWithBool:NO] forKey:@"hasEdits"];
+    [file setValue:@NO forKey:@"hasEdits"];
     [file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
   }
   	

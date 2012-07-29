@@ -65,8 +65,7 @@
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
 	
 	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
-	[bindingOptions setObject:@"ColorArrayTransformer"
-										 forKey:@"NSValueTransformerName"];
+	bindingOptions[@"NSValueTransformerName"] = @"ColorArrayTransformer";
 	
 	// Color well binding
 	NSString *path = [NSString stringWithFormat:@"values.TESyntax%@Color", bindingTag] ;

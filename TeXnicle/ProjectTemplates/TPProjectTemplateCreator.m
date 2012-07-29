@@ -81,14 +81,14 @@
 - (IBAction)selectAllFiles:(id)sender
 {
 	for (NSTreeNode *node in [self.treeController flattenedNodes]) {
-    [[node representedObject] setValue:[NSNumber numberWithBool:YES] forKey:@"isSelected"];
+    [[node representedObject] setValue:@YES forKey:@"isSelected"];
   }
 }
 
 - (IBAction)deselectAllFiles:(id)sender
 {
 	for (NSTreeNode *node in [self.treeController flattenedNodes]) {
-    [[node representedObject] setValue:[NSNumber numberWithBool:NO] forKey:@"isSelected"];
+    [[node representedObject] setValue:@NO forKey:@"isSelected"];
   }
 }
 

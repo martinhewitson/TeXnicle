@@ -62,7 +62,7 @@
 {
 	if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
 		NSInteger row = [table selectedRow];
-		[delegate performSelector:@selector(userSelectedRow:) withObject:[NSNumber numberWithInteger:row]];
+		[delegate performSelector:@selector(userSelectedRow:) withObject:@(row)];
 	}		
 }
 

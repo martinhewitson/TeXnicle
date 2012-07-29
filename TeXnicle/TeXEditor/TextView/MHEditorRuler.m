@@ -72,7 +72,7 @@
 	
   if (self) {
     _newThickness = -1.0;
-    self.lineNumbers = [NSArray array];
+    self.lineNumbers = @[];
     self.textView = (TeXTextView*)aTextView;
     self.textColor = [NSColor darkGrayColor];
     self.alternateTextColor = [NSColor whiteColor];
@@ -213,7 +213,7 @@
     return;
   
   // bookmarks
-  MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+  MHLineNumber *firstLine = (self.lineNumbers)[0];
   MHLineNumber *lastLine = [self.lineNumbers lastObject];
   NSArray *bookmarks = [self.textView bookmarksForLineRange:NSMakeRange(firstLine.number, lastLine.number - firstLine.number)];
   
@@ -518,27 +518,27 @@
   // If we only have one tag, it's hard to make a pair, so return two empty arrays.
   NSInteger Ntags = [foldingTagArray count];
   if (Ntags<1 || !foldingTagArray) {
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray array], @"folders", [NSArray array], @"tags", nil];
+    return @{@"folders": @[], @"tags": @[]};
   }
   
   NSMutableArray *returnFolders = [NSMutableArray array];
   NSMutableArray *usedTags      = [NSMutableArray array];
   
   // get first tag  
-  MHFoldingTag *firstTag = [foldingTagArray objectAtIndex:0];
+  MHFoldingTag *firstTag = foldingTagArray[0];
 //  NSLog(@"* Building folder for %@ from %@", firstTag, foldingTagArray);
   // If this is an end tag, we build a code folder with a missing start index. This will get completed later.
   // The assumption is that the start of this code folder is out of view.
   if (!firstTag.isStartTag) {
     MHCodeFolder *folder = [MHCodeFolder codeFolderWithStartIndex:NSNotFound endIndex:firstTag.index startLine:NSNotFound endLine:firstTag.lineNumber tag:firstTag.tag];
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:folder], @"folders", [NSArray arrayWithObject:firstTag], @"tags", nil];
+    return @{@"folders": @[folder], @"tags": @[firstTag]};
   }
   
   // Here we must have a start tag, so now we loop over the rest looking for a matching end tag
   MHFoldingTag *nextTag = nil;
   BOOL matchFound = NO;
   for (NSInteger kk=1; kk<Ntags; kk++) {
-    nextTag = [foldingTagArray objectAtIndex:kk];
+    nextTag = foldingTagArray[kk];
 //    NSLog(@"  Checking tag: %@ for %@", nextTag, firstTag);
     if (nextTag.isStartTag) {
 //      NSLog(@"      Is start tag %@", nextTag);
@@ -577,7 +577,7 @@
   }
     
   // return the code folders and the used tags
-  return [NSDictionary dictionaryWithObjectsAndKeys:returnFolders, @"folders", usedTags, @"tags", nil];  
+  return @{@"folders": returnFolders, @"tags": usedTags};  
 }
 
 // Get an array of all folding tags found in the given text range.
@@ -620,7 +620,7 @@
       idx = NSMaxRange(lineRange);
     }
   } else {
-    MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+    MHLineNumber *firstLine = (self.lineNumbers)[0];
     idx = firstLine.range.location;
     lineNumber = firstLine.number;
   }
@@ -722,7 +722,7 @@
   
   // check the range against the linenumbers we already have
   if (self.lineNumbers && [self.lineNumbers count] > 0) {
-    MHLineNumber *firstLine = [self.lineNumbers objectAtIndex:0];
+    MHLineNumber *firstLine = (self.lineNumbers)[0];
 //    NSLog(@"Requested range %@", NSStringFromRange(aRange));
 //    NSLog(@"Min line: %ld, %@", [[self.lineNumbers objectAtIndex:0] number], NSStringFromRange([[self.lineNumbers objectAtIndex:0] range]));  
     
@@ -899,7 +899,7 @@
     // can we get the line number clicked on?
     MHLineNumber *clickedLine = [self lineNumberForPoint:clickPoint];
     if (clickedLine) {
-      NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:clickedLine, @"LineNumber", nil];
+      NSDictionary *dict = @{@"LineNumber": clickedLine};
       [[NSNotificationCenter defaultCenter] postNotificationName:TELineNumberClickedNotification
                                                           object:self.textView
                                                         userInfo:dict];
@@ -955,10 +955,8 @@
 {
   if (!self.textAttributesDictionary) {
     
-    self.textAttributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                      self.font, NSFontAttributeName, 
-                      self.textColor, NSForegroundColorAttributeName,
-                      nil];
+    self.textAttributesDictionary = @{NSFontAttributeName: self.font, 
+                      NSForegroundColorAttributeName: self.textColor};
     
   }
   
@@ -969,10 +967,8 @@
 {
   if (!self.alternateTextAttributesDictionary) {
     
-    self.alternateTextAttributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     self.font, NSFontAttributeName, 
-                                     self.alternateTextColor, NSForegroundColorAttributeName,
-                                     nil];
+    self.alternateTextAttributesDictionary = @{NSFontAttributeName: self.font, 
+                                     NSForegroundColorAttributeName: self.alternateTextColor};
     
   }
   

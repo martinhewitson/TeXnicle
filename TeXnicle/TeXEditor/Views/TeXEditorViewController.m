@@ -445,7 +445,7 @@
     // code folded cells
     if ([att respondsToSelector:@selector(object)] && [att isKindOfClass:[TPFoldedCodeSnippet class]]) {
       if ([aTextView respondsToSelector:@selector(unfoldAttachment:atIndex:)]) {
-        [aTextView performSelector:@selector(unfoldAttachment:atIndex:) withObject:att withObject:[NSNumber numberWithUnsignedLong:charIndex]];
+        [aTextView performSelector:@selector(unfoldAttachment:atIndex:) withObject:att withObject:@(charIndex)];
       }
     }
     
@@ -560,7 +560,7 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {
     return [self.delegate bookmarksForCurrentFile];
   }
-  return [NSArray array];
+  return @[];
 }
 
 @end

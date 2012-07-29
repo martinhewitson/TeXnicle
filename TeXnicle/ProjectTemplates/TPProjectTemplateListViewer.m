@@ -79,7 +79,7 @@
   viewer.delegate = self;
   
   [viewer makeWindowControllers];
-  NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];
+  NSWindowController *wc = [viewer windowControllers][0];
   [wc window];
   [viewer createNewProject:sender];
   

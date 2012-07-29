@@ -66,14 +66,14 @@
   
   if (animate) {
     NSMutableDictionary *collapseMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [collapseMainAnimationDict setObject:self.mainView forKey:NSViewAnimationTargetKey];
-    [collapseMainAnimationDict setObject:[NSValue valueWithRect:newMainFrame] forKey:NSViewAnimationEndFrameKey];
+    collapseMainAnimationDict[NSViewAnimationTargetKey] = self.mainView;
+    collapseMainAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:newMainFrame];
     
     NSMutableDictionary *collapseInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [collapseInspectorAnimationDict setObject:self.inspectorView forKey:NSViewAnimationTargetKey];
-    [collapseInspectorAnimationDict setObject:[NSValue valueWithRect:newInspectorFrame] forKey:NSViewAnimationEndFrameKey];
+    collapseInspectorAnimationDict[NSViewAnimationTargetKey] = self.inspectorView;
+    collapseInspectorAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:newInspectorFrame];
     
-    NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:collapseMainAnimationDict, collapseInspectorAnimationDict, nil]];
+    NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:@[collapseMainAnimationDict, collapseInspectorAnimationDict]];
     [collapseAnimation setDuration:0.25f];
     [collapseAnimation startAnimation];
   } else {
@@ -108,14 +108,14 @@
   
   if (animate) {
     NSMutableDictionary *expandMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [expandMainAnimationDict setObject:self.mainView forKey:NSViewAnimationTargetKey];
-    [expandMainAnimationDict setObject:[NSValue valueWithRect:newMainFrame] forKey:NSViewAnimationEndFrameKey];
+    expandMainAnimationDict[NSViewAnimationTargetKey] = self.mainView;
+    expandMainAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:newMainFrame];
     
     NSMutableDictionary *expandInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [expandInspectorAnimationDict setObject:self.inspectorView forKey:NSViewAnimationTargetKey];
-    [expandInspectorAnimationDict setObject:[NSValue valueWithRect:newInspectorFrame] forKey:NSViewAnimationEndFrameKey];
+    expandInspectorAnimationDict[NSViewAnimationTargetKey] = self.inspectorView;
+    expandInspectorAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:newInspectorFrame];
     
-    NSViewAnimation *expandAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObjects:expandMainAnimationDict, expandInspectorAnimationDict, nil]];
+    NSViewAnimation *expandAnimation = [[NSViewAnimation alloc] initWithViewAnimations:@[expandMainAnimationDict, expandInspectorAnimationDict]];
     [expandAnimation setDuration:0.25f];
     [expandAnimation startAnimation];
   } else {

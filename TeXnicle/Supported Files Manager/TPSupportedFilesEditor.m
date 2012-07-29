@@ -126,9 +126,9 @@
   } else if ([[tableColumn identifier] isEqualToString:@"NameColumn"]) {
     return file.name;
   } else if ([[tableColumn identifier] isEqualToString:@"HighlightColumn"]) {
-    return [NSNumber numberWithBool:file.syntaxHighlight];
+    return @(file.syntaxHighlight);
   } else if ([[tableColumn identifier] isEqualToString:@"SpellCheckColumn"]) {
-    return [NSNumber numberWithBool:file.spellcheck];
+    return @(file.spellcheck);
   } else {
     return nil;
   }

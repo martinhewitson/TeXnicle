@@ -166,7 +166,7 @@
     _currentSelectedBookmark = [[self allBookmarks] count]-1;
   }
   
-  Bookmark *bookmark = [bookmarks objectAtIndex:_currentSelectedBookmark];
+  Bookmark *bookmark = bookmarks[_currentSelectedBookmark];
   [self.outlineView expandItem:bookmark.parentFile];
   [self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outlineView rowForItem:bookmark]]
                 byExtendingSelection:NO];
@@ -189,7 +189,7 @@
     _currentSelectedBookmark = 0;
   }
   
-  Bookmark *bookmark = [[self allBookmarks] objectAtIndex:_currentSelectedBookmark];
+  Bookmark *bookmark = [self allBookmarks][_currentSelectedBookmark];
   [self.outlineView expandItem:bookmark.parentFile];
   [self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.outlineView rowForItem:bookmark]]
                 byExtendingSelection:NO];
@@ -296,7 +296,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"displayString != nil"];
     return [bookmarks filteredArrayUsingPredicate:predicate];
   }
-  return [NSArray array];
+  return @[];
 }
 
 // Ask the delegate to jump to the given bookmark
@@ -366,7 +366,7 @@
 // Returns the bookmarks for a given file entity
 - (NSArray*)bookmarksForFile:(FileEntity*)aFile
 {
-  NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+  NSArray *descriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
   return [[aFile.bookmarks allObjects] sortedArrayUsingDescriptors:descriptors];
 }
 
@@ -390,7 +390,7 @@
       [files addObject:b.parentFile];
     }
   }
-  NSArray *descriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
+  NSArray *descriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
   return [files sortedArrayUsingDescriptors:descriptors];
 }
 
@@ -427,13 +427,13 @@
 {
   // nil
   if (item == nil) {
-    return [[self files] objectAtIndex:index];
+    return [self files][index];
   }
   
   // file
   if ([item isKindOfClass:[FileEntity class]]) {
     FileEntity *file = (FileEntity*)item;
-    return [[self bookmarksForFile:file] objectAtIndex:index];
+    return [self bookmarksForFile:file][index];
   }
   
   // bookmark

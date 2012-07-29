@@ -51,7 +51,7 @@
   
 //  NSLog(@"Reopen doc %@", urlOrNil);
   
-  [self.appDelegate setValue:[NSNumber numberWithBool:NO] forKey:@"openStartupScreenAtAppStartup"];
+  [self.appDelegate setValue:@NO forKey:@"openStartupScreenAtAppStartup"];
   
   [super reopenDocumentForURL:urlOrNil 
             withContentsOfURL:contentsURL
@@ -110,7 +110,7 @@
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   NSString *ext = [sfm extensionForType:documentTypeName];
   if (ext) {
-    return [NSArray arrayWithObject:ext];
+    return @[ext];
   }
   
   return nil;

@@ -272,12 +272,11 @@
   NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
   for (NSDictionary *error in errors) {
     
-    NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"check", 
-                              [error valueForKey:@"code"], @"code", 
-                              [error valueForKey:@"message"], @"message", 
-                              nil];
+    NSDictionary *newError = @{@"check": @YES, 
+                              @"code": [error valueForKey:@"code"], 
+                              @"message": [error valueForKey:@"message"]};
     
-    [errors replaceObjectAtIndex:[errors indexOfObject:error] withObject:newError];
+    errors[[errors indexOfObject:error]] = newError;
   }
   
   [defaults synchronize];
@@ -290,12 +289,11 @@
   NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
   for (NSDictionary *error in errors) {
     
-    NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"check", 
-                              [error valueForKey:@"code"], @"code", 
-                              [error valueForKey:@"message"], @"message", 
-                              nil];
+    NSDictionary *newError = @{@"check": @NO, 
+                              @"code": [error valueForKey:@"code"], 
+                              @"message": [error valueForKey:@"message"]};
     
-    [errors replaceObjectAtIndex:[errors indexOfObject:error] withObject:newError];
+    errors[[errors indexOfObject:error]] = newError;
   }
   
   [defaults synchronize];
@@ -335,12 +333,11 @@
     NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
     if (row >= 0 && row < [errors count]) {
       if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCheckColumn"]) {
-        NSDictionary *error = [errors objectAtIndex:row];
-        NSDictionary *newError = [NSDictionary dictionaryWithObjectsAndKeys:object, @"check", 
-                                  [error valueForKey:@"code"], @"code", 
-                                  [error valueForKey:@"message"], @"message", 
-                                  nil];
-        [errors replaceObjectAtIndex:row withObject:newError];
+        NSDictionary *error = errors[row];
+        NSDictionary *newError = @{@"check": object, 
+                                  @"code": [error valueForKey:@"code"], 
+                                  @"message": [error valueForKey:@"message"]};
+        errors[row] = newError;
         [defaults synchronize];
         return;
       }
@@ -350,31 +347,31 @@
   NSString *newCommand = [self formatNewCommand:object];
   if (tableView == userCommandsTable) {
     if (row >= 0 && row < [[userCommandsController arrangedObjects] count]) {
-      [[[userCommandsController arrangedObjects] objectAtIndex:row] setValue:newCommand forKey:@"Name"];
+      [[userCommandsController arrangedObjects][row] setValue:newCommand forKey:@"Name"];
     }
   } else if (tableView == citeCommandsTable) {
     NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
     if (row >= 0 && row < [commands count]) {
-      [commands replaceObjectAtIndex:row withObject:newCommand];
+      commands[row] = newCommand;
       [defaults setObject:commands forKey:TECiteCommands];
     }
   } else if (tableView == refCommandsTable) {
     NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
     if (row >= 0 && row < [commands count]) {
-      [commands replaceObjectAtIndex:row withObject:newCommand];
+      commands[row] = newCommand;
       [defaults setObject:commands forKey:TERefCommands];
     }
   } else if (tableView == fileCommandsTable) {
     NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
     if (row >= 0 && row < [commands count]) {
-      [commands replaceObjectAtIndex:row withObject:newCommand];
+      commands[row] = newCommand;
       [defaults setObject:commands forKey:TEFileCommands];
     }
   } else if (tableView == beginCommandsTable) {
     NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
     if (row >= 0 && row < [commands count]) {
       newCommand = [newCommand stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-      [commands replaceObjectAtIndex:row withObject:newCommand];
+      commands[row] = newCommand;
       [defaults setObject:commands forKey:TEBeginCommands];
     }
   }
@@ -397,32 +394,32 @@
   if (tableView == citeCommandsTable) {
     NSArray *commands = [defaults valueForKey:TECiteCommands];
     if (row >= 0 && row < [commands count]) {
-      return [commands objectAtIndex:row];
+      return commands[row];
     }
   } else if (tableView == refCommandsTable) {
     NSArray *commands = [defaults valueForKey:TERefCommands];
     if (row >= 0 && row < [commands count]) {
-      return [commands objectAtIndex:row];
+      return commands[row];
     }
   } else if (tableView == fileCommandsTable) {
     NSArray *commands = [defaults valueForKey:TEFileCommands];
     if (row >= 0 && row < [commands count]) {
-      return [commands objectAtIndex:row];
+      return commands[row];
     }
   } else if (tableView == beginCommandsTable) {
     NSArray *commands = [defaults valueForKey:TEBeginCommands];
     if (row >= 0 && row < [commands count]) {
-      return [commands objectAtIndex:row];
+      return commands[row];
     }
   } else if (tableView == syntaxErrorsTable) {
     NSArray *errors = [defaults valueForKey:TPCheckSyntaxErrors];
     if (row >= 0 && row < [errors count]) {
       if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCheckColumn"]) {
-        return [[errors objectAtIndex:row] valueForKey:@"check"];
+        return [errors[row] valueForKey:@"check"];
       } else if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsMessageColumn"]) {
-        return [[errors objectAtIndex:row] valueForKey:@"message"];
+        return [errors[row] valueForKey:@"message"];
       } else if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCodeColumn"]) {
-        return [[errors objectAtIndex:row] valueForKey:@"code"];
+        return [errors[row] valueForKey:@"code"];
       }
     }
   }

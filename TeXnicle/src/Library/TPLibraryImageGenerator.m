@@ -145,7 +145,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
     
     // update clipping
     self.clip.image = [NSKeyedArchiver archivedDataWithRootObject:image];
-    self.clip.imageIsValid = [NSNumber numberWithBool:YES];
+    self.clip.imageIsValid = @YES;
     
     // tell the controller so the library can be saved
     [self performSelectorOnMainThread:@selector(imageGeneratorTaskEnded:) withObject:croppedPDF waitUntilDone:NO];
