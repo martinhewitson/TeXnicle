@@ -30,12 +30,6 @@
 
 @implementation TPSpellCheckedFile
 
-@synthesize file;
-@synthesize lastCheck;
-@synthesize words;
-@synthesize needsUpdate;
-@synthesize text;
-
 - (id) initWithFile:(id)aFile
 {
   self = [super init];
@@ -64,7 +58,7 @@
   
   
   NSString *filename = nil;
-  if ([file isKindOfClass:[FileEntity class]]) {
+  if ([self.file isKindOfClass:[FileEntity class]]) {
     filename = [self.file name];
   } else {
     filename = [self.file lastPathComponent];
@@ -74,9 +68,9 @@
   
   NSString *wordCountString = nil; 
   if ([self.words count] >= 1000) {
-    wordCountString = [NSString stringWithFormat:@" [>%d] ", [self.words count]];
+    wordCountString = [NSString stringWithFormat:@" [>%lu] ", [self.words count]];
   } else {
-    wordCountString = [NSString stringWithFormat:@" [%d] ", [self.words count]];
+    wordCountString = [NSString stringWithFormat:@" [%lu] ", [self.words count]];
   }
   
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:wordCountString];

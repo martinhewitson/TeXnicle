@@ -29,12 +29,6 @@
 #import "FileEntity.h"
 
 @interface TPSpellCheckedFile : NSObject  {
-  
-  id file;
-  NSDate *lastCheck;
-  NSArray *words;
-  NSString *text;
-  BOOL needsUpdate;
 }
 
 @property (copy) NSString *text;
