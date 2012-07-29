@@ -38,27 +38,28 @@
 #define kTemplateViewerSplitViewLeftMinSize 200.0
 #define kTemplateViewerSplitViewRightMinSize 300.0
 
+@interface TPProjectTemplateViewer ()
+
+@property (strong) ProjectEntity *project;
+@property (strong) NSManagedObjectContext *managedObjectContext;
+@property (strong) TPTemplateDirectory *root;
+@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionDisplay;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet NSView *projectNameView;
+@property (unsafe_unretained) IBOutlet NSTextField *projectNameField;
+@property (copy) NSString *templateName;
+@property (copy) NSString *templateDescription;
+
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
+
+@property (strong) TeXEditorViewController *texEditorViewController;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+
+
+@end
+
 @implementation TPProjectTemplateViewer
-
-@synthesize delegate;
-
-@synthesize project;
-@synthesize managedObjectContext;
-@synthesize root;
-@synthesize outlineView;
-
-@synthesize leftView;
-@synthesize rightView;
-
-@synthesize texEditorViewController;
-@synthesize texEditorContainer;
-
-@synthesize projectNameView;
-@synthesize projectNameField;
-
-@synthesize templateName;
-@synthesize templateDescription;
-@synthesize templateDescriptionDisplay;
 
 - (void) dealloc
 {
