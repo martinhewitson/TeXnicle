@@ -17,38 +17,41 @@
 #import "NSStringUUID.h"
 #import "TPLibraryCommandFormatter.h"
 
+@interface TPLibraryController ()
+
+@property (copy) NSString *textBeforeEditing;
+@property (unsafe_unretained) IBOutlet NSWindow *editSheet;
+@property (unsafe_unretained) IBOutlet TeXTextView *editTextView;
+
+@property (strong) 	NSImage *unknownImage;
+
+
+@property (unsafe_unretained) IBOutlet NSObjectController *selectedEntry;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addCategoryButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteCategoryButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *reloadClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *insertClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *clipCopyButton;
+
+@property (unsafe_unretained) IBOutlet NSTextField *commandTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *commandMessageLabel;
+
+@property (strong) NSMenu *addMenu;
+@property (strong) NSMenu *catActionMenu;
+
+@property (unsafe_unretained) IBOutlet NSTableView *categoriesTable;
+@property (unsafe_unretained) IBOutlet NSTableView *entriesTable;
+@property (unsafe_unretained) IBOutlet NSSlider *entryRowHeightSlider;
+
+@property (unsafe_unretained) TPLibrary *library;
+
+
+@end
+
 @implementation TPLibraryController
-
-@synthesize library;
-
-@synthesize textBeforeEditing;
-@synthesize editSheet;
-@synthesize editTextView;
-
-@synthesize  unknownImage;
-
-@synthesize delegate;
-
-@synthesize selectedEntry;
-
-@synthesize addCategoryButton;
-@synthesize deleteCategoryButton;
-@synthesize addClipButton;
-@synthesize deleteClipButton;
-@synthesize reloadClipButton;
-@synthesize editClipButton;
-@synthesize clipCopyButton;
-@synthesize insertClipButton;
-
-@synthesize commandTextField;
-@synthesize commandMessageLabel;
-
-@synthesize entryRowHeightSlider;
-@synthesize categoriesTable;
-@synthesize entriesTable;
-
-@synthesize addMenu;
-@synthesize catActionMenu;
 
 
 - (id) initWithDelegate:(id<TPLibraryControllerDelegate>)aDelegate;
@@ -122,7 +125,7 @@
 		if (self.unknownImage == nil) {
 			self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 		}
-    symbol.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
+    symbol.image = [NSKeyedArchiver archivedDataWithRootObject:self.unknownImage];
     symbol.imageIsValid = @NO;
 	}
   
@@ -135,7 +138,7 @@
   if (self.unknownImage == nil) {
     self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
   }
-  entry.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
+  entry.image = [NSKeyedArchiver archivedDataWithRootObject:self.unknownImage];
   entry.imageIsValid = @NO;
   [self.entriesTable reloadData];
   [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self.library];
@@ -276,7 +279,7 @@
 {	
   TPLibraryCategory *category = [self selectedCategory];
   if (category) {
-    [self createClipWithCode:[NSString stringWithFormat:@"New Clip %d", [category.entries count]] inCategory:category];
+    [self createClipWithCode:[NSString stringWithFormat:@"New Clip %lu", [category.entries count]] inCategory:category];
   }
 }
 
@@ -302,7 +305,7 @@
 
 - (IBAction)createCategory:(id)sender
 {
-  NSString *name = [NSString stringWithFormat:@"New Category %d", [[self.library categories] count]];
+  NSString *name = [NSString stringWithFormat:@"New Category %lu", [[self.library categories] count]];
   TPLibraryCategory *category = [self.library createCategoryWithName:name];
   // reload table
   [self.categoriesTable reloadData];
@@ -394,7 +397,7 @@
 																			 pressure:1];
 	
 	
-	[NSMenu popUpContextMenu:catActionMenu withEvent:event forView:(NSButton *)sender];
+	[NSMenu popUpContextMenu:self.catActionMenu withEvent:event forView:(NSButton *)sender];
 	
 	
 }
@@ -418,7 +421,7 @@
 																			 pressure:1];
 	
 	
-	[NSMenu popUpContextMenu:addMenu withEvent:event forView:(NSButton *)sender];
+	[NSMenu popUpContextMenu:self.addMenu withEvent:event forView:(NSButton *)sender];
   
 }
 
@@ -426,22 +429,22 @@
 {
 	
 	// Make popup menu with bound actions
-	self.catActionMenu = [[NSMenu alloc] initWithTitle:@"Library Category Action Menu"];	
-	[catActionMenu setAutoenablesItems:YES];
+	self.catActionMenu = [[NSMenu alloc] initWithTitle:@"Library Category Action Menu"];
+	[self.catActionMenu setAutoenablesItems:YES];
 	
 	// Add default categories
 	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"Add Default Categories"
 																								action:@selector(addDefaultCategories)
 																				 keyEquivalent:@""];
   [item setTarget:self];
-	[catActionMenu addItem:item];
+	[self.catActionMenu addItem:item];
 	
 	// Restore default library
 	item = [[NSMenuItem alloc] initWithTitle:@"Restore Default Library"
 																		action:@selector(restoreDefaultLibrary)
 														 keyEquivalent:@""];
   [item setTarget:self];
-	[catActionMenu addItem:item];
+	[self.catActionMenu addItem:item];
 	
 	
 }
@@ -451,14 +454,14 @@
 	
 	// Make popup menu with bound actions
 	self.addMenu = [[NSMenu alloc] initWithTitle:@"Library Add Context Menu"];	
-	[addMenu setAutoenablesItems:YES];
+	[self.addMenu setAutoenablesItems:YES];
 	
 	// Add empty clipping
 	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"New clip"
 																								action:@selector(addEmptyClipping)
 																				 keyEquivalent:@""];
   [item setTarget:self];
-	[addMenu addItem:item];
+	[self.addMenu addItem:item];
 	
 	
 	// Clipping from the pasteboard
@@ -466,7 +469,7 @@
 																		action:@selector(addClipFromPasteboard)
 														 keyEquivalent:@""];
   [item setTarget:self];
-	[addMenu addItem:item];
+	[self.addMenu addItem:item];
   
 	
 }
@@ -735,7 +738,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 				contextInfo:NULL];	
 	
   
-  [editTextView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
+  [self.editTextView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
 }
 
 - (void)editSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
@@ -744,7 +747,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
     return;
   
 	NSString *newText = nil;
-  newText = [editTextView string];
+  newText = [self.editTextView string];
   TPLibraryEntry *item = [self getSelectedEntry];
 	if (item) {
     item.code = newText;    
@@ -761,15 +764,15 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 - (IBAction) endEditSheet:(id)sender
 {	
   didCancelEditSheet = NO;
-	[NSApp endSheet:editSheet];
-	[editSheet orderOut:self];
+	[NSApp endSheet:self.editSheet];
+	[self.editSheet orderOut:self];
 }
 
 - (IBAction) cancelEditSheet:(id)sender
 {	
   didCancelEditSheet = YES;
-	[NSApp endSheet:editSheet];
-	[editSheet orderOut:self];
+	[NSApp endSheet:self.editSheet];
+	[self.editSheet orderOut:self];
 }
 
 

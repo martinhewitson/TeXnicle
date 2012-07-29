@@ -34,13 +34,18 @@
 #import "externs.h"
 #import "TPLibraryEntry.h"
 
-@implementation TPLibraryImageGenerator
-
 NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryImageGeneratorTaskDidFinishNotification";
 
-@synthesize mathMode;
-@synthesize clip;
-@synthesize delegate;
+@interface TPLibraryImageGenerator ()
+
+@property (readwrite, strong) TPLibraryEntry *clip;
+@property (readwrite, assign) BOOL mathMode;
+@property (unsafe_unretained) id<TPLibraryImageGeneratorDelegate> delegate;
+
+@end
+
+@implementation TPLibraryImageGenerator
+
 
 - (id) initWithSymbol:(TPLibraryEntry*)aSymbol mathMode:(BOOL)mode andController:(id<TPLibraryImageGeneratorDelegate>)aController
 {
@@ -88,12 +93,11 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
       code = [code stringByReplacingCharactersInRange:r withString:replacement];
     }
     
-    if (mathMode) {
+    if (self.mathMode) {
       [doc appendFormat:@"\\pagestyle{empty} \\begin{document}$%@$\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
     } else {
       [doc appendFormat:@"\\pagestyle{empty} \\begin{document}%@\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
     }
-    
     
     // write tmp file
     NSString* workingDirectory =  [[NSWorkspace sharedWorkspace] temporaryDirectory];
@@ -164,7 +168,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	NSMutableString *doc = [[NSMutableString alloc] init];
 	
 	[doc appendString:@"\\documentclass[20pt]{beamer}\n\\usetheme{default}\n"];
-	NSString *code = clip.code;
+	NSString *code = self.clip.code;
   
   // replace placeholders
   NSString *regexp = [self placeholderRegexp];
@@ -176,7 +180,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
     code = [code stringByReplacingCharactersInRange:r withString:replacement];
   }
   
-	if (mathMode) {
+	if (self.mathMode) {
 		[doc appendFormat:@"\\pagestyle{empty} \\begin{document}{\\Huge $%@$}\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
 	} else {
 		[doc appendFormat:@"\\pagestyle{empty} \\begin{document}{\\Huge %@}\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];

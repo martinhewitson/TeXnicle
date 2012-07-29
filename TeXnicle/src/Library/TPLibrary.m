@@ -12,12 +12,15 @@
 
 NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotification";
 
+@interface TPLibrary ()
+
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@end
 
 @implementation TPLibrary
-
-@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
-@synthesize managedObjectModel = __managedObjectModel;
-@synthesize managedObjectContext = __managedObjectContext;
 
 - (id) init
 {
@@ -85,20 +88,20 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 // Creates if necessary and returns the managed object model for the application.
 - (NSManagedObjectModel *)managedObjectModel
 {
-  if (__managedObjectModel) {
-    return __managedObjectModel;
+  if (_managedObjectModel) {
+    return _managedObjectModel;
   }
 	
   NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"library" withExtension:@"momd"];
-  __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-  return __managedObjectModel;
+  _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  return _managedObjectModel;
 }
 
 // Returns the persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.)
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-  if (__persistentStoreCoordinator) {
-    return __persistentStoreCoordinator;
+  if (_persistentStoreCoordinator) {
+    return _persistentStoreCoordinator;
   }
   
   NSManagedObjectModel *mom = [self managedObjectModel];
@@ -144,16 +147,16 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
     [[NSApplication sharedApplication] presentError:error];
     return nil;
   }
-  __persistentStoreCoordinator = coordinator;
+  _persistentStoreCoordinator = coordinator;
   
-  return __persistentStoreCoordinator;
+  return _persistentStoreCoordinator;
 }
 
 // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
 - (NSManagedObjectContext *)managedObjectContext
 {
-  if (__managedObjectContext) {
-    return __managedObjectContext;
+  if (_managedObjectContext) {
+    return _managedObjectContext;
   }
   
   NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
@@ -165,12 +168,12 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
     [[NSApplication sharedApplication] presentError:error];
     return nil;
   }
-  __managedObjectContext = [[NSManagedObjectContext alloc] init];
-  [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+  _managedObjectContext = [[NSManagedObjectContext alloc] init];
+  [_managedObjectContext setPersistentStoreCoordinator:coordinator];
   
-  [__managedObjectContext setUndoManager:[[NSApplication sharedApplication] undoManager]];
+  [_managedObjectContext setUndoManager:[[NSApplication sharedApplication] undoManager]];
   
-  return __managedObjectContext;
+  return _managedObjectContext;
 }
 
 

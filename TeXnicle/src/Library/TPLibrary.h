@@ -10,16 +10,8 @@
 #import "TPLibraryCategory.h"
 #import "TPLibraryEntry.h"
 
-@interface TPLibrary : NSObject {
-  NSPersistentStoreCoordinator *__persistentStoreCoordinator;
-  NSManagedObjectModel *__managedObjectModel;
-  NSManagedObjectContext *__managedObjectContext;
+@interface TPLibrary : NSObject
 
-}
-
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 
 - (IBAction)saveAction:(id)sender;

@@ -40,17 +40,10 @@ extern NSString * const TPLibraryImageGeneratorTaskDidFinishNotification;
 @end
 
 @interface TPLibraryImageGenerator : NSObject <TPLibraryImageGeneratorDelegate> {
-
-	TPLibraryEntry *clip;
-	BOOL mathMode;
-  id<TPLibraryImageGeneratorDelegate> __unsafe_unretained delegate;
 	
 }
 
 - (id) initWithSymbol:(TPLibraryEntry*)aSymbol mathMode:(BOOL)mode andController:(id<TPLibraryImageGeneratorDelegate>)aController;
 
-@property (readwrite, strong) TPLibraryEntry *clip;
-@property (readwrite, assign) BOOL mathMode;
-@property (unsafe_unretained) id<TPLibraryImageGeneratorDelegate> delegate;
 
 @end
