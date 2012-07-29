@@ -28,14 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPSupportedFile : NSObject <NSCoding> {
-@private
-  NSString *name;
-  NSString *ext;
-  BOOL isBuiltIn;
-  BOOL syntaxHighlight;
-  BOOL spellcheck;
-}
+@interface TPSupportedFile : NSObject <NSCoding>
 
 @property (copy) NSString *name;
 @property (copy) NSString *ext;

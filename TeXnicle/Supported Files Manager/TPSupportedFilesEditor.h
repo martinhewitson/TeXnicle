@@ -30,17 +30,7 @@
 #import "HHValidatedButton.h"
 #import "TPSupportedFile.h"
 
-@interface TPSupportedFilesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate> {
-@private
-  NSTableView *__unsafe_unretained tableView;
-  HHValidatedButton *__unsafe_unretained addButton;
-  HHValidatedButton *__unsafe_unretained removeButton;
-}
-
-@property (unsafe_unretained) IBOutlet NSTableView *tableView;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *addButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *removeButton;
-
+@interface TPSupportedFilesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate>
 
 - (IBAction)addFileType:(id)sender;
 - (IBAction)removeFileType:(id)sender;

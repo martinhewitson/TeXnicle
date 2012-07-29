@@ -29,11 +29,15 @@
 #import "TPSupportedFilesEditor.h"
 #import "TPSupportedFilesManager.h"
 
-@implementation TPSupportedFilesEditor
+@interface TPSupportedFilesEditor()
 
-@synthesize tableView;
-@synthesize addButton;
-@synthesize removeButton;
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *removeButton;
+
+@end
+
+@implementation TPSupportedFilesEditor
 
 - (id)init
 {

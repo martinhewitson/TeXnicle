@@ -28,13 +28,11 @@
 
 #import "TPSupportedFile.h"
 
-@implementation TPSupportedFile
+@interface TPSupportedFile()
 
-@synthesize name;
-@synthesize ext;
-@synthesize isBuiltIn;
-@synthesize syntaxHighlight;
-@synthesize spellcheck;
+@end
+
+@implementation TPSupportedFile
 
 // Initialise with a name and extension.
 // Built-in defaults to NO.

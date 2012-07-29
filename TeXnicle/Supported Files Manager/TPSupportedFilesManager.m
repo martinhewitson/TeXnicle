@@ -34,11 +34,13 @@ NSString * const TPSupportedFileAddedNotification = @"TPSupportedFileAddedNotifi
 NSString * const TPSupportedFileRemovedNotification = @"TPSupportedFileRemovedNotification";
 NSString * const TPSupportedFileSpellCheckFlagChangedNotification = @"TPSupportedFileSpellCheckFlagChangedNotification";
 
+@interface TPSupportedFilesManager ()
+
+@property (strong) NSMutableArray *supportedFileTypes;
+
+@end
+
 @implementation TPSupportedFilesManager
-
-@synthesize supportedFileTypes;
-
-static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 
 // Initialise the supported files manager
 - (id)init

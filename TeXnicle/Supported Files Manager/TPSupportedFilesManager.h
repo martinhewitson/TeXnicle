@@ -33,13 +33,7 @@ extern NSString * const TPSupportedFileAddedNotification;
 extern NSString * const TPSupportedFileRemovedNotification;
 extern NSString * const TPSupportedFileSpellCheckFlagChangedNotification;
 
-@interface TPSupportedFilesManager : NSObject {
-@private
-  NSMutableArray *supportedFileTypes;
-}
-
-
-@property (strong) NSMutableArray *supportedFileTypes;
+@interface TPSupportedFilesManager : NSObject
 
 + (TPSupportedFilesManager*)sharedSupportedFilesManager;
 - (void) saveTypes;
