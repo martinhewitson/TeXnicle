@@ -31,8 +31,6 @@
 
 @implementation MHDocumentController
 
-@synthesize appDelegate;
-
 - (id) init
 {
   self = [super init];

@@ -27,10 +27,7 @@
 
 #import <AppKit/AppKit.h>
 
-@interface MHDocumentController : NSDocumentController {
-@private
-  id __unsafe_unretained appDelegate;
-}
+@interface MHDocumentController : NSDocumentController
 
 @property (unsafe_unretained) IBOutlet id appDelegate;
 
