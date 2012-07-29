@@ -52,22 +52,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [unifiedCloseButton release];
-    [unifiedCloseButtonDown release];
-    [unifiedCloseButtonOver release];
-    [unifiedCloseDirtyButton release];
-    [unifiedCloseDirtyButtonDown release];
-    [unifiedCloseDirtyButtonOver release]; 
-    [_addTabButtonImage release];
-    [_addTabButtonPressedImage release];
-    [_addTabButtonRolloverImage release];
-    
-    [_objectCountStringAttributes release];
-    
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Control Specific
@@ -282,14 +266,14 @@
 - (NSAttributedString *)attributedObjectCountValueForTabCell:(PSMTabBarCell *)cell
 {
     NSString *contents = [NSString stringWithFormat:@"%lu", (unsigned long)[cell count]];
-    return [[[NSMutableAttributedString alloc] initWithString:contents attributes:_objectCountStringAttributes] autorelease];
+    return [[NSMutableAttributedString alloc] initWithString:contents attributes:_objectCountStringAttributes];
 }
 
 - (NSAttributedString *)attributedStringValueForTabCell:(PSMTabBarCell *)cell
 {
     NSMutableAttributedString *attrStr;
     NSString * contents = [cell stringValue];
-    attrStr = [[[NSMutableAttributedString alloc] initWithString:contents] autorelease];
+    attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
     NSRange range = NSMakeRange(0, [contents length]);
     
     [attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
@@ -297,7 +281,7 @@
     // Paragraph Style for Truncating Long Text
     static NSMutableParagraphStyle *TruncatingTailParagraphStyle = nil;
     if (!TruncatingTailParagraphStyle) {
-        TruncatingTailParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
+        TruncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         [TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
     }
     [attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
@@ -535,7 +519,7 @@
         labelRect.origin.y += 4.0;
         NSMutableAttributedString *attrStr;
         NSString *contents = @"PSMTabBarControl";
-        attrStr = [[[NSMutableAttributedString alloc] initWithString:contents] autorelease];
+        attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
         NSRange range = NSMakeRange(0, [contents length]);
         [attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
         NSMutableParagraphStyle *centeredParagraphStyle = nil;
@@ -545,7 +529,6 @@
         }
         [attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
         [attrStr drawInRect:labelRect];
-				[centeredParagraphStyle release];
         return;
     }
     
@@ -583,15 +566,15 @@
    // self = [super initWithCoder:aDecoder];
     //if (self) {
         if ([aDecoder allowsKeyedCoding]) {
-            unifiedCloseButton = [[aDecoder decodeObjectForKey:@"unifiedCloseButton"] retain];
-            unifiedCloseButtonDown = [[aDecoder decodeObjectForKey:@"unifiedCloseButtonDown"] retain];
-            unifiedCloseButtonOver = [[aDecoder decodeObjectForKey:@"unifiedCloseButtonOver"] retain];
-            unifiedCloseDirtyButton = [[aDecoder decodeObjectForKey:@"unifiedCloseDirtyButton"] retain];
-            unifiedCloseDirtyButtonDown = [[aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonDown"] retain];
-            unifiedCloseDirtyButtonOver = [[aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonOver"] retain];
-            _addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-            _addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-            _addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
+            unifiedCloseButton = [aDecoder decodeObjectForKey:@"unifiedCloseButton"];
+            unifiedCloseButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseButtonDown"];
+            unifiedCloseButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseButtonOver"];
+            unifiedCloseDirtyButton = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButton"];
+            unifiedCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonDown"];
+            unifiedCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonOver"];
+            _addTabButtonImage = [aDecoder decodeObjectForKey:@"addTabButtonImage"];
+            _addTabButtonPressedImage = [aDecoder decodeObjectForKey:@"addTabButtonPressedImage"];
+            _addTabButtonRolloverImage = [aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"];
         }
     //}
     return self;

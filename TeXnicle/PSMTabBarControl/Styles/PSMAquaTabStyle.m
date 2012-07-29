@@ -69,26 +69,6 @@
 	_addTabButtonRolloverImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AquaTabNewRollover"]];
 }
 
-- (void)dealloc
-{
-	[aquaTabBg release];
-	[aquaTabBgDown release];
-	[aquaDividerDown release];
-	[aquaDivider release];
-	[aquaCloseButton release];
-	[aquaCloseButtonDown release];
-	[aquaCloseButtonOver release];
-	[aquaCloseDirtyButton release];
-	[aquaCloseDirtyButtonDown release];
-	[aquaCloseDirtyButtonOver release];
-	[_addTabButtonImage release];
-	[_addTabButtonPressedImage release];
-	[_addTabButtonRolloverImage release];
-	
-	[_objectCountStringAttributes release];
-	
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Control Specifics
@@ -297,14 +277,14 @@
 - (NSAttributedString *)attributedObjectCountValueForTabCell:(PSMTabBarCell *)cell
 {
 	NSString *contents = [NSString stringWithFormat:@"%lu", (unsigned long)[cell count]];
-	return [[[NSMutableAttributedString alloc] initWithString:contents attributes:_objectCountStringAttributes] autorelease];
+	return [[NSMutableAttributedString alloc] initWithString:contents attributes:_objectCountStringAttributes];
 }
 
 - (NSAttributedString *)attributedStringValueForTabCell:(PSMTabBarCell *)cell
 {
 	NSMutableAttributedString *attrStr;
 	NSString * contents = [cell stringValue];
-	attrStr = [[[NSMutableAttributedString alloc] initWithString:contents] autorelease];
+	attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
 	NSRange range = NSMakeRange(0, [contents length]);
 	
 	[attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
@@ -312,7 +292,7 @@
 	// Paragraph Style for Truncating Long Text
 	static NSMutableParagraphStyle *TruncatingTailParagraphStyle = nil;
 	if (!TruncatingTailParagraphStyle) {
-		TruncatingTailParagraphStyle = [[[NSParagraphStyle defaultParagraphStyle] mutableCopy] retain];
+		TruncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		[TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
 		[TruncatingTailParagraphStyle setAlignment:NSCenterTextAlignment];
 	}
@@ -409,7 +389,7 @@
 		labelRect.origin.y += 4.0;
 		NSMutableAttributedString *attrStr;
 		NSString *contents = @"PSMTabBarControl";
-		attrStr = [[[NSMutableAttributedString alloc] initWithString:contents] autorelease];
+		attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
 		NSRange range = NSMakeRange(0, [contents length]);
 		[attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11.0] range:range];
 		NSMutableParagraphStyle *centeredParagraphStyle = nil;
@@ -419,7 +399,6 @@
 		}
 		[attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
 		[attrStr drawInRect:labelRect];
-		[centeredParagraphStyle release];
 		return;
 	}
 	
@@ -550,21 +529,21 @@
 	//self = [super initWithCoder:aDecoder];
 	//if (self) {
 	if ([aDecoder allowsKeyedCoding]) {
-		aquaTabBg = [[aDecoder decodeObjectForKey:@"aquaTabBg"] retain];
-		aquaTabBgDown = [[aDecoder decodeObjectForKey:@"aquaTabBgDown"] retain];
-		aquaTabBgDownGraphite = [[aDecoder decodeObjectForKey:@"aquaTabBgDownGraphite"] retain];
-		aquaTabBgDownNonKey = [[aDecoder decodeObjectForKey:@"aquaTabBgDownNonKey"] retain];
-		aquaDividerDown = [[aDecoder decodeObjectForKey:@"aquaDividerDown"] retain];
-		aquaDivider = [[aDecoder decodeObjectForKey:@"aquaDivider"] retain];
-		aquaCloseButton = [[aDecoder decodeObjectForKey:@"aquaCloseButton"] retain];
-		aquaCloseButtonDown = [[aDecoder decodeObjectForKey:@"aquaCloseButtonDown"] retain];
-		aquaCloseButtonOver = [[aDecoder decodeObjectForKey:@"aquaCloseButtonOver"] retain];
-		aquaCloseDirtyButton = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButton"] retain];
-		aquaCloseDirtyButtonDown = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonDown"] retain];
-		aquaCloseDirtyButtonOver = [[aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonOver"] retain];
-		_addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-		_addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-		_addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
+		aquaTabBg = [aDecoder decodeObjectForKey:@"aquaTabBg"];
+		aquaTabBgDown = [aDecoder decodeObjectForKey:@"aquaTabBgDown"];
+		aquaTabBgDownGraphite = [aDecoder decodeObjectForKey:@"aquaTabBgDownGraphite"];
+		aquaTabBgDownNonKey = [aDecoder decodeObjectForKey:@"aquaTabBgDownNonKey"];
+		aquaDividerDown = [aDecoder decodeObjectForKey:@"aquaDividerDown"];
+		aquaDivider = [aDecoder decodeObjectForKey:@"aquaDivider"];
+		aquaCloseButton = [aDecoder decodeObjectForKey:@"aquaCloseButton"];
+		aquaCloseButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseButtonDown"];
+		aquaCloseButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseButtonOver"];
+		aquaCloseDirtyButton = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButton"];
+		aquaCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonDown"];
+		aquaCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonOver"];
+		_addTabButtonImage = [aDecoder decodeObjectForKey:@"addTabButtonImage"];
+		_addTabButtonPressedImage = [aDecoder decodeObjectForKey:@"addTabButtonPressedImage"];
+		_addTabButtonRolloverImage = [aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"];
 	}
 	//}
 	return self;
