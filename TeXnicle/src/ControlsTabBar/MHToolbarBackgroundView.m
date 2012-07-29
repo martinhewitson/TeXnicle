@@ -31,9 +31,6 @@
 
 @implementation MHToolbarBackgroundView
 
-@synthesize strokeLeftSide;
-@synthesize strokeRightSide;
-
 -(void)awakeFromNib
 {
 	self.endingColor = [NSColor lightGrayColor];

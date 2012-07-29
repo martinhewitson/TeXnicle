@@ -32,16 +32,6 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 @implementation MHInfoTabBarController
 
-@synthesize tabView;
-@synthesize bookmarksButton;
-@synthesize warningsButton;
-@synthesize spellingButton;
-@synthesize labelsButton;
-@synthesize citationsButton;
-@synthesize commandsButton;
-@synthesize splitview;
-@synthesize containerView;
-
 - (void) awakeFromNib
 {
   [self.tabView selectTabViewItemAtIndex:0];

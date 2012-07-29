@@ -32,18 +32,6 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 @implementation MHControlsTabBarController
 
-
-@synthesize projectButton;
-@synthesize palletButton;
-@synthesize libraryButton;
-@synthesize outlineButton;
-@synthesize findButton;
-@synthesize tabView;
-@synthesize infoButton;
-@synthesize prefsButton;
-@synthesize splitview;
-@synthesize containerView;
-
 - (id)init
 {
   self = [super init];

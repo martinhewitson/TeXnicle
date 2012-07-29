@@ -31,19 +31,8 @@
 extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
 
 @interface MHInfoTabBarController : NSResponder <NSTabViewDelegate>  {
-  
-  
 @private
   NSArray *buttons;
-  NSButton *__unsafe_unretained bookmarksButton;
-  NSButton *__unsafe_unretained warningsButton;
-  NSButton *__unsafe_unretained spellingButton;
-  NSButton *__unsafe_unretained labelsButton;
-  NSButton *__unsafe_unretained citationsButton;
-  NSButton *__unsafe_unretained commandsButton;
-  NSTabView *__unsafe_unretained tabView;
-  NSSplitView *__unsafe_unretained splitview;
-  NSView *__unsafe_unretained containerView;
 }
 
 @property (unsafe_unretained) IBOutlet NSButton *bookmarksButton;
