@@ -30,11 +30,7 @@
 
 @class FileEntity;
 
-@interface Bookmark : NSManagedObject {
-@private
-  NSAttributedString *__unsafe_unretained selectedDisplayString;
-  NSAttributedString *__unsafe_unretained displayString;
-}
+@interface Bookmark : NSManagedObject 
 
 // core data properties
 @property (nonatomic, strong) NSNumber * linenumber;

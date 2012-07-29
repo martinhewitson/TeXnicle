@@ -36,8 +36,6 @@
 @dynamic linenumber;
 @dynamic parentFile;
 @dynamic text;
-@synthesize selectedDisplayString;
-@synthesize displayString;
 
 - (void) awakeFromFetch
 {
@@ -112,12 +110,12 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"%d: %@", [self.linenumber integerValue], self.text];
+  return [NSString stringWithFormat:@"%ld: %@", [self.linenumber integerValue], self.text];
 }
 
 - (NSString*) lineNumberString
 {
-  return [NSString stringWithFormat:@"line %d ", [self.linenumber integerValue]];
+  return [NSString stringWithFormat:@"line %ld ", [self.linenumber integerValue]];
 }
 
 - (NSAttributedString*)selectedDisplayString
