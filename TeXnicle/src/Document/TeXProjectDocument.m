@@ -63,94 +63,69 @@
 #define kSplitViewCenterMinSize 400.0
 #define kSplitViewRightMinSize 400.0
 
+@interface TeXProjectDocument ()
+
+@property (assign) BOOL navigatingHistory;
+@property (readonly) BOOL pdfHasSelection;
+
+@property (strong) TPProjectTemplateCreator *templateCreator;
+@property (strong) NSMenu *createFolderMenu;
+@property (strong) NSMutableArray *tabHistory;
+@property (assign) NSInteger currentTabHistoryIndex;
+@property (strong) NSTimer *liveUpdateTimer;
+@property (strong) TPProjectOutlineViewController *outlineViewController;
+@property (strong) TPWarningsViewController *warningsViewController;
+@property (strong) TPLabelsViewController *labelsViewController;
+@property (strong) TPCitationsViewController *citationsViewController;
+@property (strong) TPNewCommandsViewController *commandsViewController;
+@property (strong) MHMiniConsoleViewController *miniConsole;
+@property (strong) TPConsoleViewController *embeddedConsoleViewController;
+@property (strong) NSTimer *statusTimer;
+@property (strong) TPStatusViewController *statusViewController;
+@property (strong) TPEngineSettingsController *engineSettings;
+@property (strong) TPEngineManager *engineManager;
+@property (strong) PaletteController *palette;
+@property (strong) FinderController *finder;
+@property (strong) TPLibraryController *libraryController;
+@property (strong) TPSpellCheckerListingViewController *spellcheckerViewController;
+@property (strong) ProjectEntity *project;
+@property (strong) TPImageViewerController *imageViewerController;
+@property (strong) TPFileMonitor *fileMonitor;
+@property (strong) TPTemplateEditor *templateEditor;
+
+@property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *forwardTabButton;
+@property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
+@property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
+@property (unsafe_unretained) IBOutlet NSView *warningsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
+@property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *createFolderButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *createFileButton;
+@property (unsafe_unretained) IBOutlet NSView *engineSettingsContainer;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
+@property (unsafe_unretained) IBOutlet NSView *centerView;
+@property (unsafe_unretained) IBOutlet NSView *bookmarkContainerView;
+@property (unsafe_unretained) IBOutlet NSView *paletteContainverView;
+@property (unsafe_unretained) IBOutlet NSView *finderContainerView;
+@property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
+@property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
+@property (unsafe_unretained) IBOutlet TPOutlineView *projectOutlineView;
+@property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
+@property (unsafe_unretained) IBOutlet OpenDocumentsManager *openDocuments;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+@property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
+@property (unsafe_unretained) IBOutlet MHControlsTabBarController *controlsTabBarController;
+@property (unsafe_unretained) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
+
+@end
+
 @implementation TeXProjectDocument
-
-@synthesize templateCreator = _templateCreator;
-
-@synthesize tabHistory = _tabHistory;
-@synthesize currentTabHistoryIndex = _currentTabHistoryIndex;
-@synthesize navigatingHistory = _navigatingHistory;
-@synthesize backTabButton = _backTabButton;
-@synthesize forwardTabButton = _forwardTabButton;
-
-@synthesize mainWindow = _mainWindow;
-
-@synthesize statusTimer = _statusTimer;
-
-@synthesize createFileButton = _createFileButton;
-@synthesize createFolderButton = _createFolderButton;
-
-@synthesize pdfViewer = _pdfViewer;
-
-@synthesize libraryController = _libraryController;
-@synthesize libraryContainerView = _libraryContainerView;
-
-@synthesize spellCheckerContainerView = _spellCheckerContainerView;
-@synthesize spellcheckerViewController = _spellcheckerViewController;
-
-@synthesize bookmarkManager = _bookmarkManager;
-@synthesize bookmarkContainerView = _bookmarkContainerView;
-
-@synthesize outlineViewContainer = _outlineViewContainer;
-@synthesize outlineViewController = _outlineViewController;
-
-@synthesize warningsContainerView = _warningsContainerView;
-@synthesize warningsViewController = _warningsViewController;
-
-@synthesize labelsContainerView = _labelsContainerView;
-@synthesize labelsViewController = _labelsViewController;
-
-@synthesize citationsContainerView = _citationsContainerView;
-@synthesize citationsViewController = _citationsViewController;
-
-@synthesize commandsContainerView = _commandsContainerView;
-@synthesize commandsViewController = _commandsViewController;
-
-@synthesize pdfViewerController = _pdfViewerController;
-@synthesize project = _project;
-@synthesize projectOutlineView = _projectOutlineView;
-@synthesize controlsTabview = _controlsTabview;
-@synthesize openDocuments = _openDocuments;
-@synthesize projectItemTreeController = _projectItemTreeController;
-@synthesize texEditorViewController = _texEditorViewController;
-@synthesize texEditorContainer = _texEditorContainer;
-
-@synthesize fileMonitor = _fileMonitor;
-@synthesize imageViewerController = _imageViewerController;
-@synthesize imageViewerContainer = _imageViewerContainer;
-@synthesize pdfHasSelection = _pdfHasSelection;
-
-@synthesize finder = _finder;
-@synthesize finderContainerView = _finderContainerView;
-
-@synthesize palette = _palette;
-@synthesize paletteContainverView = _paletteContainverView;
-
-@synthesize engineManager = _engineManager;
-@synthesize engineSettings = _engineSettings;
-@synthesize engineSettingsContainer = _engineSettingsContainer;
-
-@synthesize statusViewContainer = _statusViewContainer;
-@synthesize statusViewController = _statusViewController;
-
-@synthesize splitview = _splitview;
-@synthesize leftView = _leftView;
-@synthesize rightView = _rightView;
-@synthesize centerView = _centerView;
-
-@synthesize templateEditor = _templateEditor;
-
-@synthesize controlsTabBarController = _controlsTabBarController;
-@synthesize infoControlsTabBarController = _infoControlsTabBarController;
-
-@synthesize miniConsole = _miniConsole;
-@synthesize embeddedConsoleContainer = _embeddedConsoleContainer;
-@synthesize embeddedConsoleViewController = _embeddedConsoleViewController;
-
-@synthesize liveUpdateTimer = _liveUpdateTimer;
-
-@synthesize createFolderMenu = _createFolderMenu;
-
 
 - (void) awakeFromNib
 {
@@ -724,8 +699,6 @@
 {
 //  NSLog(@"Capturing UI state...");
   
-  if (_inVersionsBrowser)
-    return;
   
   if (self.project == nil) {
     return;
@@ -961,10 +934,7 @@
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
-{    
-  if (_inVersionsBrowser) {
-    return NO;
-  }
+{
   
   // build
   if ([theItem tag] == 30) {
@@ -999,9 +969,6 @@
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
-  if (_inVersionsBrowser) {
-    return NO;
-  }
   
   if (anItem == self.backTabButton) {
     if ([self.tabHistory count] <= 1 || self.currentTabHistoryIndex == 0) {
@@ -1108,10 +1075,6 @@
 
 - (IBAction) showCategoryActionMenu:(id)sender
 {
-  if (_inVersionsBrowser) {
-    return;
-  }
-  
   
   _selectedItem = nil;
   
@@ -2290,9 +2253,6 @@
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
-  if (_inVersionsBrowser) {
-    return NO;
-  }
   
 	NSInteger tag = [menuItem tag];
   
@@ -3268,7 +3228,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
+  NSMutableArray *pdfViews = [NSMutableArray array];
+  if (self.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewerController.pdfview];
+  }
+  if (self.pdfViewer.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
+  }
+  
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:pdfViews];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] 
                        sourceFile:[[self.openDocuments currentDoc] pathOnDisk]
                        lineNumber:lineNumber 
@@ -3458,7 +3426,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
 //  NSLog(@"Clicked on PDF in project...");
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
+  
+  NSMutableArray *pdfViews = [NSMutableArray array];
+  if (self.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewerController.pdfview];
+  }
+  if (self.pdfViewer.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
+  }
+  
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:pdfViews];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   
