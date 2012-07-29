@@ -72,6 +72,7 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -98,6 +99,7 @@
 														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
+														<reference key="NSNextKeyView"/>
 														<bool key="NSViewCanDrawConcurrently">YES</bool>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
@@ -472,6 +474,7 @@
 								<string key="NSFrame">{{588, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295962500">
@@ -1367,6 +1370,7 @@
 							<reference ref="534787291"/>
 						</array>
 						<reference key="parent" ref="1005"/>
+						<string key="objectName">PDF View Container</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">103</int>
@@ -2649,6 +2653,7 @@
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
@@ -2660,28 +2665,34 @@
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="locateItem:">id</string>
 						<string key="newFile:">id</string>
 						<string key="newFolder:">id</string>
+						<string key="newFolderOnDisk:">id</string>
+						<string key="newGroupFolder:">id</string>
 						<string key="newMainTeXFile:">id</string>
 						<string key="newTeXFile:">id</string>
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
-						<string key="projectTypeChanged:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -2693,6 +2704,7 @@
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -2713,6 +2725,10 @@
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -2759,8 +2775,16 @@
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -2787,6 +2811,14 @@
 							<string key="name">newFolder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="newFolderOnDisk:">
+							<string key="name">newFolderOnDisk:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="newGroupFolder:">
+							<string key="name">newGroupFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="newMainTeXFile:">
 							<string key="name">newMainTeXFile:</string>
 							<string key="candidateClassName">id</string>
@@ -2807,6 +2839,10 @@
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -2819,8 +2855,8 @@
 							<string key="name">previousBookmark:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="projectTypeChanged:">
-							<string key="name">projectTypeChanged:</string>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -2845,6 +2881,10 @@
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -2889,6 +2929,10 @@
 						</object>
 						<object class="IBActionInfo" key="togglePanelFocus:">
 							<string key="name">togglePanelFocus:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

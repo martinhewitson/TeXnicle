@@ -46,61 +46,14 @@
 
 @interface PDFViewerController : NSViewController <MHPDFViewDelegate, MHSlidingSplitViewDelegate, NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
 @private
-  IBOutlet NSView *pdfViewContainer;
-  MHPDFView *__unsafe_unretained pdfview;
-  MHPDFThumbnailView *__unsafe_unretained pdfThumbnailView;
-  id<PDFViewerControllerDelegate> __unsafe_unretained delegate;
   NSInteger _currentHighlightedPDFSearchResult;
-  
-  NSSearchField *__unsafe_unretained searchField;
-  NSTextField *__unsafe_unretained statusText;
-  NSProgressIndicator *__unsafe_unretained progressIndicator;
-  NSTextField *__unsafe_unretained searchStatusText;
-  NSView *__unsafe_unretained toolbarView;
-  HHValidatedButton *__unsafe_unretained nextButton;
-  HHValidatedButton *__unsafe_unretained prevButton;
-  HHValidatedButton *__unsafe_unretained zoomInButton;
-  HHValidatedButton *__unsafe_unretained zoomOutButton;
-  HHValidatedButton *__unsafe_unretained zoomToFitButton;
-  HHValidatedButton *__unsafe_unretained printButton;
-  NSButton *__unsafe_unretained liveUpdateButton;
-  
-  MHSlidingSplitViewController *__unsafe_unretained searchResultsSlideViewController;
-  MHSlidingSplitViewController *__unsafe_unretained thumbSlideViewController;
-  NSTableView *__unsafe_unretained searchResultsTable;
-  NSMutableArray *searchResults;
-  
-  HHValidatedButton *__unsafe_unretained showSearchResultsButton;
-  HHValidatedButton *__unsafe_unretained toggleThumbsButton;
-  NSTextField *__unsafe_unretained pageCountDisplay;
 }
 
 
-@property (strong) NSMutableArray *searchResults;
-
-@property (unsafe_unretained) IBOutlet NSTextField *pageCountDisplay;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *showSearchResultsButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *toggleThumbsButton;
-@property (unsafe_unretained) IBOutlet NSTableView *searchResultsTable;
-@property (unsafe_unretained) IBOutlet MHSlidingSplitViewController *searchResultsSlideViewController;
-@property (unsafe_unretained) IBOutlet MHSlidingSplitViewController *thumbSlideViewController;
-@property (unsafe_unretained) IBOutlet MHPDFView *pdfview;
-@property (unsafe_unretained) IBOutlet MHPDFThumbnailView *pdfThumbnailView;
-@property (unsafe_unretained) IBOutlet NSSearchField *searchField;
-@property (unsafe_unretained) IBOutlet NSTextField *statusText;
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
-@property (unsafe_unretained) IBOutlet NSTextField *searchStatusText;
-@property (unsafe_unretained) IBOutlet NSView *toolbarView;
-
-@property (unsafe_unretained) IBOutlet HHValidatedButton *printButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *nextButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *prevButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomInButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomOutButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomToFitButton;
-@property (unsafe_unretained) IBOutlet NSButton *liveUpdateButton;
 
 @property (unsafe_unretained) id<PDFViewerControllerDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSButton *liveUpdateButton;
+@property (unsafe_unretained) IBOutlet MHPDFView *pdfview;
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate;
 

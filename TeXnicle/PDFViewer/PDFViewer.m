@@ -29,11 +29,13 @@
 #import "PDFViewer.h"
 #import "TPEngineManager.h"
 
-@implementation PDFViewer
+@interface PDFViewer ()
 
-@synthesize pdfViewerController;
-@synthesize delegate;
-@synthesize containerView;
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+
+@end
+
+@implementation PDFViewer
 
 - (id)initWithDelegate:(id<PDFViewerDelegate>)aDelegate
 {

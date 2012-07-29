@@ -39,18 +39,10 @@
 
 @end
 
-@interface PDFViewer : NSWindowController <PDFViewerControllerDelegate, PDFViewerDelegate, NSWindowDelegate> {
-@private
-  PDFViewerController *pdfViewerController;
-  id<PDFViewerDelegate> __unsafe_unretained delegate;
-  NSView *__unsafe_unretained containerView;
-}
-
-
+@interface PDFViewer : NSWindowController <PDFViewerControllerDelegate, PDFViewerDelegate, NSWindowDelegate>
 
 @property (strong) PDFViewerController *pdfViewerController;
 @property (unsafe_unretained) id<PDFViewerDelegate> delegate;
-@property (unsafe_unretained) IBOutlet NSView *containerView;
 
 - (id)initWithDelegate:(id<PDFViewerDelegate>)aDelegate;
 - (void) redisplayDocument;

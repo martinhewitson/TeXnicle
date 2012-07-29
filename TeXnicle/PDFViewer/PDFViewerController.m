@@ -32,30 +32,34 @@
 #define kToolbarFullHeight 64.0
 #define kToolbarReducedHeight 44.0
 
-@implementation PDFViewerController
+@interface PDFViewerController ()
 
-@synthesize pageCountDisplay;
-@synthesize pdfThumbnailView;
-@synthesize showSearchResultsButton;
-@synthesize toggleThumbsButton;
-@synthesize searchResultsTable;
-@synthesize searchResultsSlideViewController;
-@synthesize thumbSlideViewController;
-@synthesize pdfview;
-@synthesize delegate;
-@synthesize searchField;
-@synthesize prevButton;
-@synthesize nextButton;
-@synthesize searchResults;
-@synthesize statusText;
-@synthesize progressIndicator;
-@synthesize searchStatusText;
-@synthesize toolbarView;
-@synthesize zoomInButton;
-@synthesize zoomOutButton;
-@synthesize zoomToFitButton;
-@synthesize printButton;
-@synthesize liveUpdateButton;
+@property (strong) NSMutableArray *searchResults;
+
+@property (unsafe_unretained) IBOutlet NSView *pdfViewContainer;
+@property (unsafe_unretained) IBOutlet NSTextField *pageCountDisplay;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *showSearchResultsButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *toggleThumbsButton;
+@property (unsafe_unretained) IBOutlet NSTableView *searchResultsTable;
+@property (unsafe_unretained) IBOutlet MHSlidingSplitViewController *searchResultsSlideViewController;
+@property (unsafe_unretained) IBOutlet MHSlidingSplitViewController *thumbSlideViewController;
+@property (unsafe_unretained) IBOutlet MHPDFThumbnailView *pdfThumbnailView;
+@property (unsafe_unretained) IBOutlet NSSearchField *searchField;
+@property (unsafe_unretained) IBOutlet NSTextField *statusText;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet NSTextField *searchStatusText;
+@property (unsafe_unretained) IBOutlet NSView *toolbarView;
+
+@property (unsafe_unretained) IBOutlet HHValidatedButton *printButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *nextButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *prevButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomInButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomOutButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *zoomToFitButton;
+
+@end
+
+@implementation PDFViewerController
 
 - (id)initWithDelegate:(id<PDFViewerControllerDelegate>)aDelegate
 {
@@ -196,7 +200,7 @@
 
 - (void) showViewer
 {
-  [pdfViewContainer setHidden:NO];
+  [self.pdfViewContainer setHidden:NO];
   [self.searchField setEnabled:YES];
   [self.prevButton setEnabled:YES];
   [self.nextButton setEnabled:YES];
@@ -206,7 +210,7 @@
 
 - (void) hideViewer
 {
-  [pdfViewContainer setHidden:YES];
+  [self.pdfViewContainer setHidden:YES];
   [self.searchField setEnabled:NO];
   [self.prevButton setEnabled:NO];
   [self.nextButton setEnabled:NO];
@@ -350,7 +354,7 @@
 
 - (void)documentDidBeginDocumentFind:(NSNotification *)notification
 {
-  [searchStatusText setStringValue:@"Searching..."];  
+  [self.searchStatusText setStringValue:@"Searching..."];
   [self.progressIndicator startAnimation:self];
   [self.prevButton setEnabled:NO];
   [self.nextButton setEnabled:NO];
@@ -361,7 +365,7 @@
   [self.progressIndicator stopAnimation:self];
   [self.prevButton setEnabled:YES];
   [self.nextButton setEnabled:YES];
-  [searchStatusText setStringValue:[NSString stringWithFormat:@"Found %d matches.", [self.searchResults count]]];
+  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Found %lu matches.", [self.searchResults count]]];
   [self showNextResult:self];
 }
 
@@ -369,7 +373,7 @@
 {
   PDFSelection *selection = [[notification userInfo] valueForKey:@"PDFDocumentFoundSelection"];
   [self.searchResults addObject:selection];
-  [searchStatusText setStringValue:[NSString stringWithFormat:@"Found %d matches...", [self.searchResults count]]];
+  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Found %lu matches...", [self.searchResults count]]];
   if ([self.searchResults count] == 1) {
     [self.pdfview setCurrentSelection:selection];
     [self.pdfview scrollSelectionToVisible:self];
@@ -470,11 +474,11 @@
 
 - (void) updatePageCountDisplay
 {
-  unsigned int newPageIndex;
+  NSUInteger newPageIndex;
   
-  newPageIndex = 1l+[[self.pdfview document] indexForPage:[self.pdfview currentPage]];
+  newPageIndex = 1lu + [[self.pdfview document] indexForPage:[self.pdfview currentPage]];
   
-  NSString *label = [NSString stringWithFormat:@"Page %d of %d", newPageIndex, [[self.pdfview document] pageCount]];
+  NSString *label = [NSString stringWithFormat:@"Page %lu of %lu", newPageIndex, [[self.pdfview document] pageCount]];
   
   [self.pageCountDisplay setStringValue:label];
 }

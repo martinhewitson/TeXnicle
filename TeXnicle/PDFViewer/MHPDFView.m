@@ -34,8 +34,6 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 
 @implementation MHPDFView
 
-@synthesize delegate;
-
 - (void)performFindPanelAction:(id)sender
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(findInPDF:)]) {

@@ -29,11 +29,6 @@
 #import "MHSlidingSplitViewController.h"
 
 @implementation MHSlidingSplitViewController
-@synthesize rightSided;
-@synthesize splitView;
-@synthesize inspectorView;
-@synthesize mainView;
-@synthesize delegate;
 
 #define kMinInspectorPanelWidth 64.0
 
@@ -50,7 +45,7 @@
 - (void) slideOutAnimated:(BOOL)animate
 {
   // Store last width so we can jump back
-  lastInspectorWidth = self.inspectorView.frame.size.width;
+  _lastInspectorWidth = self.inspectorView.frame.size.width;
   
   
   NSRect newMainFrame = self.mainView.frame;
@@ -94,16 +89,16 @@
   
   NSRect newMainFrame = self.mainView.frame;
   NSRect newInspectorFrame = self.inspectorView.frame;
-  newInspectorFrame.size.width = lastInspectorWidth;
+  newInspectorFrame.size.width = _lastInspectorWidth;
   if (newInspectorFrame.size.width < kMinInspectorPanelWidth) {
     newInspectorFrame.size.width = kMinInspectorPanelWidth;
   }
   
-  newMainFrame.size.width =  self.splitView.frame.size.width-lastInspectorWidth;
+  newMainFrame.size.width =  self.splitView.frame.size.width-_lastInspectorWidth;
   if (self.rightSided) {
-    newInspectorFrame.origin.x = self.splitView.frame.size.width-lastInspectorWidth;
+    newInspectorFrame.origin.x = self.splitView.frame.size.width-_lastInspectorWidth;
   } else {
-    newMainFrame.origin.x = lastInspectorWidth;
+    newMainFrame.origin.x = _lastInspectorWidth;
   }
   
   if (animate) {
