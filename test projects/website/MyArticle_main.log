@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  24 JUL 2012 17:12
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  27 JUL 2012 05:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -310,11 +310,39 @@ Overfull \hbox (5.07773pt too wide) in paragraph at lines 1--1
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2]) (./MyArticle_main.bbl)
-./MyArticle_main.tex:59: Undefined control sequence.
+
+./introduction.tex:109: LaTeX Error: Something's wrong--perhaps a missing \item
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.109 \end{enumerate}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[2]) (./conclusions.tex
+Runaway argument?
+./conclusions.tex:22: Paragraph ended before \@citex was complete.
+<to be read again> 
+                   \par 
+l.22 
+     
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 26.
+
+) (./MyArticle_main.bbl)
+./MyArticle_main.tex:62: Undefined control sequence.
 <argument> ...operation of the dual-recycled \geo 
                                                   
-l.59 	of the dual-recycled \geo}
+l.62 	of the dual-recycled \geo}
                                  J~R~Smith \textit{et al}, Class. Quantum Gr...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -322,24 +350,25 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 70.
 [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 70.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 73.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 73.
  (./MyArticle_main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 70.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 70.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 73.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 73.
 Package rerunfilecheck Info: File `MyArticle_main.out' has not changed.
-(rerunfilecheck)             Checksum: 7377760860AEC0DE19F85F0A16727A78;460.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 70.
+(rerunfilecheck)             Checksum: 4AE27CBEF9250ED82E344EFD4C3793EE;603.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 73.
  ) 
 Here is how much of TeX's memory you used:
- 5125 strings out of 493488
- 76727 string characters out of 3141327
- 157656 words of memory out of 3000000
- 8379 multiletter control sequences out of 15000+200000
+ 5134 strings out of 493488
+ 76853 string characters out of 3141327
+ 157691 words of memory out of 3000000
+ 8382 multiletter control sequences out of 15000+200000
  9157 words of font info for 32 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 31i,16n,31p,245b,342s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 31i,16n,31p,245b,454s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -348,10 +377,10 @@ sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
 /local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
 ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
 l/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on MyArticle_main.pdf (3 pages, 107112 bytes).
+Output written on MyArticle_main.pdf (4 pages, 110011 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 23 named destinations out of 1000 (max. 500000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 

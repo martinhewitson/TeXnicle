@@ -120,6 +120,7 @@
 		2523C7E91405511500A47297 /* MABSupportFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523C7E81405511500A47297 /* MABSupportFolder.m */; };
 		2523C7EC1405530800A47297 /* TPEngineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523C7EB1405530800A47297 /* TPEngineManager.m */; };
 		2523D7D51505080A008200DB /* Article.tpt in Resources */ = {isa = PBXBuildFile; fileRef = 2523D7D41505080A008200DB /* Article.tpt */; };
+		2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2527487C15C3AF5800D12D69 /* dsa_pub.pem */; };
 		2528E85C1395209300834921 /* NSStringUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85B1395209300834921 /* NSStringUUID.m */; };
 		2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85F139520B300834921 /* NSNotificationAdditions.m */; };
 		2528E8671395402F00834921 /* ExternalTeXDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E8651395402F00834921 /* ExternalTeXDoc.m */; };
@@ -134,7 +135,6 @@
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
 		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
 		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
-		253312EC15B7013E00F9FD00 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 253312EB15B7013E00F9FD00 /* dsa_pub.pem */; };
 		253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */; };
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
@@ -206,7 +206,7 @@
 		25717DB11392D64A00955620 /* makePDFimage.sh in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB01392D64A00955620 /* makePDFimage.sh */; };
 		25717DB51392DA1100955620 /* Palette in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB41392DA1100955620 /* Palette */; };
 		25717DB71392DF8100955620 /* resizeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB61392DF8100955620 /* resizeImage.png */; };
-		257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 257345EF15B6D83000DB92F1 /* RegexKitLite.m */; };
+		257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 257345EF15B6D83000DB92F1 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2574375414A470EB0082FE96 /* TPLibraryCommandFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */; };
 		2579E58613FBB91C001B3974 /* NSString+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2579E58513FBB91C001B3974 /* NSString+FileTypes.m */; };
 		257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471C138E5DE500ED02C4 /* FileDocument.m */; };
@@ -614,6 +614,7 @@
 		2523C7EA1405530800A47297 /* TPEngineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineManager.h; sourceTree = "<group>"; };
 		2523C7EB1405530800A47297 /* TPEngineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineManager.m; sourceTree = "<group>"; };
 		2523D7D41505080A008200DB /* Article.tpt */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Article.tpt; sourceTree = "<group>"; };
+		2527487C15C3AF5800D12D69 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = SOURCE_ROOT; };
 		2528E85A1395209300834921 /* NSStringUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringUUID.h; sourceTree = "<group>"; };
 		2528E85B1395209300834921 /* NSStringUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringUUID.m; sourceTree = "<group>"; };
 		2528E85E139520B300834921 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
@@ -636,7 +637,6 @@
 		253009D514ECEBBD00426ED2 /* TPTemplateFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateFile.h; sourceTree = "<group>"; };
 		253009D614ECEBBD00426ED2 /* TPTemplateFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateFile.m; sourceTree = "<group>"; };
 		253312E615B6FF3500F9FD00 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		253312EB15B7013E00F9FD00 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		253312ED15B7028000F9FD00 /* texnicle_appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = texnicle_appcast.xml; sourceTree = "<group>"; };
 		253312EE15B7086C00F9FD00 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		253A3AB51457D212007C4D8C /* MHMiniConsoleBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleBackground.h; sourceTree = "<group>"; };
@@ -1195,7 +1195,7 @@
 		250772F7138E5D81000F1118 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				253312EB15B7013E00F9FD00 /* dsa_pub.pem */,
+				2527487C15C3AF5800D12D69 /* dsa_pub.pem */,
 				25CD0E9B139959D3004EB857 /* TeXnicle_Help */,
 				250772F8138E5D81000F1118 /* TeXnicle-Info.plist */,
 				250772F9138E5D81000F1118 /* InfoPlist.strings */,
@@ -2215,7 +2215,7 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = bobsoft;
 			};
 			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
@@ -2398,9 +2398,9 @@
 				255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */,
 				255A16E715B52B06004290CC /* TPCitationsViewController.xib in Resources */,
 				255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */,
-				253312EC15B7013E00F9FD00 /* dsa_pub.pem in Resources */,
 				25AD5A0915BAB29100737610 /* groupFolderOpen.icns in Resources */,
 				25AD5A0A15BAB29100737610 /* groupFolder.icns in Resources */,
+				2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2759,6 +2759,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2777,6 +2778,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2795,7 +2797,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -2811,11 +2814,12 @@
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2824,7 +2828,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -2839,10 +2844,12 @@
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
