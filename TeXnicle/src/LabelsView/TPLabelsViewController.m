@@ -32,15 +32,12 @@
 
 @interface TPLabelsViewController ()
 
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+
 @end
 
 @implementation TPLabelsViewController
-
-@synthesize revealButton;
-@synthesize delegate;
-@synthesize outlineView;
-@synthesize sets;
-
 
 - (id)initWithDelegate:(id<TPLabelsViewDelegate>)aDelegate
 {

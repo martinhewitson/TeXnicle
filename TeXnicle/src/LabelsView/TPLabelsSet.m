@@ -31,9 +31,6 @@
 
 @implementation TPLabelsSet 
 
-@synthesize file;
-@synthesize labels;
-
 - (id) initWithFile:(FileEntity*)aFile labels:(NSArray *)someLabels
 {
   self = [super init];
@@ -71,7 +68,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *labelCountString = nil; 
-  labelCountString = [NSString stringWithFormat:@" [%d] ", [self.labels count]];
+  labelCountString = [NSString stringWithFormat:@" [%lu] ", [self.labels count]];
 
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:labelCountString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  

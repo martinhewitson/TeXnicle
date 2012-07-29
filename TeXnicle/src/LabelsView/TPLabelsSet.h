@@ -29,10 +29,7 @@
 
 @class FileEntity;
 
-@interface TPLabelsSet : NSObject {
-  id __unsafe_unretained file;
-  NSArray *labels;
-}
+@interface TPLabelsSet : NSObject
 
 @property (strong) NSArray *labels;
 @property (unsafe_unretained) id file;

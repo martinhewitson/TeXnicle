@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPLabel : NSObject {
-  NSString *text;
-  id __unsafe_unretained file;
-}
+@interface TPLabel : NSObject
 
 @property (copy) NSString *text;
 @property (unsafe_unretained) id file;

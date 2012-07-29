@@ -10,9 +10,6 @@
 
 @implementation TPLabel
 
-@synthesize text;
-@synthesize file;
-
 + (id) labelWithFile:(id)aFile text:(NSString*)aString
 {
   return [[TPLabel alloc] initWithFile:aFile text:aString];
