@@ -37,15 +37,17 @@
 #import "ProjectEntity.h"
 #import "ProjectEntity+ProjectTemplates.h"
 
+@interface TPProjectTemplateCreator ()
+
+@property (unsafe_unretained) NSManagedObjectContext *managedObjectContext;
+@property (unsafe_unretained) IBOutlet TPOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet ProjectItemTreeController *treeController;
+@property (unsafe_unretained) IBOutlet NSTextField *templateNameTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionField;
+
+@end
+
 @implementation TPProjectTemplateCreator
-@synthesize delegate;
-@synthesize managedObjectContext;
-@synthesize outlineView;
-@synthesize treeController;
-@synthesize templateNameTextField;
-@synthesize suggestedTemplateName;
-@synthesize templateDescriptionField;
-@synthesize suggestedTemplateDescription;
 
 + (NSString*) projectTemplatesDirectory
 {

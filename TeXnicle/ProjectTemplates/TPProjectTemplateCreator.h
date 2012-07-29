@@ -40,24 +40,12 @@
 
 @interface TPProjectTemplateCreator : NSWindowController <NSWindowDelegate> {
 @private
-  id<TPProjectTemplateCreateDelegate> __unsafe_unretained delegate;
-  NSManagedObjectContext *__unsafe_unretained managedObjectContext;
-  TPOutlineView *__unsafe_unretained outlineView;
-  ProjectItemTreeController *__unsafe_unretained treeController;
-  NSTextField *__unsafe_unretained templateNameTextField;
-  NSString *suggestedTemplateName;
-  NSTextField *__unsafe_unretained templateDescriptionField;
-  NSString *suggestedTemplateDescription;
 }
 
 @property (unsafe_unretained) id<TPProjectTemplateCreateDelegate> delegate;
-@property (unsafe_unretained) NSManagedObjectContext *managedObjectContext;
-@property (unsafe_unretained) IBOutlet TPOutlineView *outlineView;
-@property (unsafe_unretained) IBOutlet ProjectItemTreeController *treeController;
-@property (unsafe_unretained) IBOutlet NSTextField *templateNameTextField;
 @property (copy) NSString *suggestedTemplateName;
-@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionField;
 @property (copy) NSString *suggestedTemplateDescription;
+
 
 + (NSString*) projectTemplatesDirectory;
 
