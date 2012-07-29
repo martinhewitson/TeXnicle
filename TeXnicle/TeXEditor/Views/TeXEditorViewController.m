@@ -133,9 +133,13 @@
 
 - (void) handleDocumentChanged:(NSNotification*)aNote
 {
+  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
+  if (file == nil) {
+    return;
+  }
+  
   [self setupSyntaxChecker];
   
-  FileEntity *file = [[aNote userInfo] valueForKey:@"file"];  
   
   if ([[file extension] isEqualToString:@"tex"]) {
     _shouldCheckSyntax = YES;
