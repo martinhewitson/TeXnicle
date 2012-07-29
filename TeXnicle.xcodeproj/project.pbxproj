@@ -488,6 +488,7 @@
 		250848D8154B22420001685A /* AFTreeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTreeScanner.h; sourceTree = "<group>"; };
 		250848D9154B22420001685A /* AFTreeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTreeScanner.m; sourceTree = "<group>"; };
 		25086B37149F4467006A5A49 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
+		2509382B15C4F647007DACD2 /* TeXnicle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TeXnicle.entitlements; sourceTree = "<group>"; };
 		2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LineNumbers.h"; sourceTree = "<group>"; };
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
@@ -1151,6 +1152,7 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				2509382B15C4F647007DACD2 /* TeXnicle.entitlements */,
 				25C87DCA15A871D600E61E25 /* SpellChecker */,
 				258348941513B2C3008A21BE /* bibtex */,
 				25D57FB114EA5255008E02B5 /* Project Templates */,
@@ -2799,6 +2801,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -2830,6 +2833,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
