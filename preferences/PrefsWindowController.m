@@ -96,10 +96,6 @@
 	dollarController = [[SyntaxHighlightControlController alloc] initWithTag:@"DollarChars" name:@"Dollar ($)"];
 	[dollarView addSubview:[dollarController view]];
   
-	// keywords controller
-//	keywordsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Keywords"];
-//	[keywordsView addSubview:[keywordsController view]];
-	
 	[self wrapStyleChanged:self];
   
   // setup engines editor
@@ -322,7 +318,7 @@
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	[dict setValue:[NSString stringWithFormat:@"\\newCommand%d", [[userCommandsController arrangedObjects] count]]
+	[dict setValue:[NSString stringWithFormat:@"\\newCommand%lu", [[userCommandsController arrangedObjects] count]]
 					forKey:@"Name"];
 	
 	[userCommandsController insertObject:dict atArrangedObjectIndex:0];

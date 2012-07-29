@@ -79,9 +79,6 @@
 	SyntaxHighlightControlController *commandsController;
 	IBOutlet NSView *commandsView;
 	
-	SyntaxHighlightControlController *keywordsController;
-	IBOutlet NSView *keywordsView;
-	
 	SyntaxHighlightControlController *argumentsController;
 	IBOutlet NSView *argumentsView;
 

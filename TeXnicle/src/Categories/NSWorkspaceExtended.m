@@ -90,11 +90,11 @@
 
 @implementation NSWorkspace (Bridge10_5)
 
--(BOOL) filenameExtension:(NSString*)filenameExtension isValidForType:(NSString *)typeName
-{
-  BOOL result = YES;
-  return result;
-}
+//-(BOOL) filenameExtension:(NSString*)filenameExtension isValidForType:(NSString *)typeName
+//{
+//  BOOL result = YES;
+//  return result;
+//}
 //end filenameExtension:isValidForType:
 
 @end

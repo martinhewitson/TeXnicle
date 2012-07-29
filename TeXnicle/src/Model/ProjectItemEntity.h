@@ -47,7 +47,7 @@
 @property (nonatomic, strong) ProjectEntity *project;
 
 // other properties
-@property (assign) BOOL isSelected;
+@property (nonatomic, assign) BOOL isSelected;
 @property (unsafe_unretained, readonly) NSString *pathRelativeToProject;
 @property (unsafe_unretained, readonly) NSString *projectPath;
 @property (unsafe_unretained, readonly) NSString *pathOnDisk;
@@ -56,7 +56,7 @@
 @property (readonly) BOOL isLeaf;
 @property (readonly) BOOL isManaged;
 @property (readonly) BOOL isUnderProject;
-@property (readwrite) BOOL hasEdits;
+@property (nonatomic, readwrite) BOOL hasEdits;
 
 - (BOOL) isUnderPath:(NSString*)aPath;
 //- (BOOL) hasEdits;

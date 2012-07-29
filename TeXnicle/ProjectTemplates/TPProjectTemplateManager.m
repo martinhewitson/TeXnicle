@@ -172,7 +172,7 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   NSInteger counter = 0;
   while ([fm fileExistsAtPath:dest]) {
-    name = [NSString stringWithFormat:@"%@_copy_%d", template.name, counter];
+    name = [NSString stringWithFormat:@"%@_copy_%ld", template.name, counter];
     dest = [[source stringByDeletingLastPathComponent] stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"tpt"]];
     counter++;
   }

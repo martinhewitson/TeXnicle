@@ -88,7 +88,7 @@
 @property (strong) FinderController *finder;
 @property (strong) TPLibraryController *libraryController;
 @property (strong) TPSpellCheckerListingViewController *spellcheckerViewController;
-@property (strong) ProjectEntity *project;
+@property (nonatomic, strong) ProjectEntity *project;
 @property (strong) TPImageViewerController *imageViewerController;
 @property (strong) TPFileMonitor *fileMonitor;
 @property (strong) TPTemplateEditor *templateEditor;
@@ -2016,7 +2016,7 @@
     NSString *ext = [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:type];
     NSString *imagePath = [[root stringByAppendingPathComponent:fileRoot] stringByAppendingPathExtension:ext];
     while ([fm fileExistsAtPath:imagePath]) {
-      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%d", count]] stringByAppendingPathExtension:ext];
+      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%lu", count]] stringByAppendingPathExtension:ext];
       count++;
     }
         
@@ -2739,7 +2739,7 @@
 	if (!code) {
 		
     
-    code = [NSString stringWithString:@"\
+    code = @"\
             % Built-in Article Template\n\
             \\documentclass[11pt]{article}\n\
             \n\
@@ -2768,7 +2768,7 @@
             \\maketitle\\n\
             \\section{Section}\n\
             \\subsection{Subsection}\n\
-            \\end{document}"];  
+            \\end{document}";
   }
   
   return code;
@@ -2881,7 +2881,7 @@
   }
   
   // set suggested filename
-  NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02d", [[self.projectItemTreeController flattenedContent] count]];
+  NSString *suggestedDocumentName = [NSString stringWithFormat:@"untitled%02lu", [[self.projectItemTreeController flattenedContent] count]];
   [self.templateEditor setFilename:suggestedDocumentName];
   
   [NSApp beginSheet:self.templateEditor.window

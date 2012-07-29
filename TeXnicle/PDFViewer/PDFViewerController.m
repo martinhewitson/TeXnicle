@@ -306,7 +306,7 @@
   [self.pdfview setCurrentSelection:selection];
   [self.pdfview scrollSelectionToVisible:self];
   [self.pdfview setCurrentSelection:selection animate:YES];
-  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %d of %d", index+1, [self.searchResults count]]];
+  [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Showing result %ld of %lu", index+1, [self.searchResults count]]];
 }
 
 - (IBAction)findInPDF:(id)sender

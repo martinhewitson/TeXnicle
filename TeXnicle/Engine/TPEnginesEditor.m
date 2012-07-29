@@ -189,7 +189,7 @@
   NSInteger counter = 1;
   NSFileManager *fm = [NSFileManager defaultManager];
   while ([fm fileExistsAtPath:[[engineDir stringByAppendingPathComponent:testName] stringByAppendingPathExtension:@"engine"]]) {
-    testName = [name stringByAppendingFormat:@"_%d", counter];
+    testName = [name stringByAppendingFormat:@"_%ld", counter];
     counter++;
   }
   

@@ -52,7 +52,6 @@ extern NSString * const OutlineViewNodeType;
 @private
 	IBOutlet TPOutlineView *outlineView;
 	IBOutlet OpenDocumentsManager *openDocumentsManager;
-	ProjectItemEntity *lastInserted;
 	
 	// Add existing file
 	IBOutlet NSWindow *addExistingFileSheet;

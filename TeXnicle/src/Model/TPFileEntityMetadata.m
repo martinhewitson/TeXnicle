@@ -188,12 +188,16 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   
   NSDate *lastEdit = self.parent.lastEditDate;
   NSDate *lastUpdate = self.lastMetadataUpdate;
+  __block TPFileEntityMetadata *blockSelf = self;
   
   if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {    
     if ([self.aQueue operationCount] == 0) {
       currentOperation = [[TPMetadataOperation alloc] initWithFile:self.parent];      
-      [currentOperation setCompletionBlock:^{        
-        [self performSelectorOnMainThread:@selector(notifyOfUpdate) withObject:nil waitUntilDone:NO];
+      [currentOperation setCompletionBlock:^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+          [blockSelf notifyOfUpdate];
+          blockSelf = nil;
+        });
       }];
       
       [self.aQueue addOperation:currentOperation];

@@ -48,7 +48,7 @@
 
 - (NSString *)ks_stringWithPathSuffix:(NSString *)aString;
 {
-    NSString *result = self;
+    NSString *result = nil;
     
     NSString *extension = [self pathExtension];
     if ([extension length])
@@ -247,7 +247,7 @@
     
     _basePath = [basePath copy];
     _suffix = suffix;
-    _storage = [[basePath ks_stringWithPathSuffix:[NSString stringWithFormat:@"-%u", suffix]] copy];
+    _storage = [[basePath ks_stringWithPathSuffix:[NSString stringWithFormat:@"-%lu", suffix]] copy];
     
     return self;
 }

@@ -101,8 +101,6 @@
   [[NSSpellChecker sharedSpellChecker] ignoreWord:word.word inSpellDocumentWithTag:0];
   word.parent.needsUpdate = YES;
   [self performSpellCheck];
-  [self dictionaryDidIgnoreWord];
-  
 }
 
 - (IBAction) correct:(id)sender
@@ -155,7 +153,6 @@
       [[NSSpellChecker sharedSpellChecker] ignoreWord:word.word inSpellDocumentWithTag:0];
       word.parent.needsUpdate = YES;
       [self performSpellCheck];
-      [self dictionaryDidIgnoreWord];
     
   } else {
   
@@ -599,13 +596,6 @@
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(dictionaryDidLearnNewWord)]) {
     [self.delegate dictionaryDidLearnNewWord];
-  }
-}
-
-- (void)dictionaryDidIgnoreWord
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(dictionaryDidIgnoreWord)]) {
-    [self.delegate dictionaryDidIgnoreWord];
   }
 }
 

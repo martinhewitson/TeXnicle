@@ -208,8 +208,8 @@
 	arguments = @[[mainFile lastPathComponent], 
                workingDir, 
                [NSString stringWithFormat:@"%ld", self.nCompile],
-               [NSString stringWithFormat:@"%ld", self.doBibtex],
-               [NSString stringWithFormat:@"%ld", self.doPS2PDF]];
+               [NSString stringWithFormat:@"%d", self.doBibtex],
+               [NSString stringWithFormat:@"%d", self.doPS2PDF]];
 	[typesetTask setArguments:arguments];
 	
 	[typesetFileHandle readInBackgroundAndNotify];	

@@ -85,7 +85,7 @@
   if ([selected isEqualToString:@"comma"]) {
     return @",";
   } else if ([selected isEqualToString:@"tab"]) {
-    return [NSString stringWithString:@"\t"];
+    return @"\t";
   } else if ([selected isEqualToString:@"whitespace"]) {
     return @" ";
   } else if ([selected isEqualToString:@"custom"]) {

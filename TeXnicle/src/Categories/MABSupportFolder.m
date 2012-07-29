@@ -58,9 +58,9 @@ static MABSupportFolder *_sharedController;
 
 -(void) createSupportFolder {
 	if(![_fileManager fileExistsAtPath:_supportFolder]) {//if the app support folder for dictpod isn't created
-		if(![_fileManager createDirectoryAtPath:_supportFolder
-									 attributes:nil]) {
-			NSLog(@"Error creating app-support folder");	
+    NSError *error = nil;
+    if (![_fileManager createDirectoryAtPath:_supportFolder withIntermediateDirectories:YES attributes:nil error:&error]) {
+			NSLog(@"Error creating app-support folder: %@", error);
 		}
 	}
 }

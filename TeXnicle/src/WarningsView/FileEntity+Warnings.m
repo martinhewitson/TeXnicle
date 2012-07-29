@@ -49,9 +49,9 @@
   
   NSString *warningCountString = nil; 
   if ([self.metadata.syntaxErrors count] >= 1000) {
-    warningCountString = [NSString stringWithFormat:@" [>%d] ", [self.metadata.syntaxErrors count]];
+    warningCountString = [NSString stringWithFormat:@" [>%lu] ", [self.metadata.syntaxErrors count]];
   } else {
-    warningCountString = [NSString stringWithFormat:@" [%d] ", [self.metadata.syntaxErrors count]];
+    warningCountString = [NSString stringWithFormat:@" [%lu] ", [self.metadata.syntaxErrors count]];
   }
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:warningCountString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  

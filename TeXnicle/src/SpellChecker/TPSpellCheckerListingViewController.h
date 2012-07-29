@@ -36,9 +36,9 @@
 - (void)highlightMisspelledWord:(NSString*)word atRange:(NSRange)aRange inFile:(FileEntity*)aFile;
 - (void)replaceMisspelledWord:(NSString*)word atRange:(NSRange)aRange withCorrection:(NSString*)correction inFile:(FileEntity*)aFile;
 - (void)dictionaryDidLearnNewWord;
-- (void)dictionaryDidIgnoreWord;
-- (NSArray*)filesToSpellCheck;
 
+@optional
+- (NSArray*)filesToSpellCheck;
 - (BOOL) performSimpleSpellCheck;
 - (NSString*)stringToCheck;
 - (NSString*)fileToCheck;

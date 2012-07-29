@@ -26,9 +26,6 @@
 @synthesize processing;
 @synthesize failures;
 
-static AFTreeScanner *sharedScanner = nil;
-
-
 - (id)init
 {
   self = [super init];

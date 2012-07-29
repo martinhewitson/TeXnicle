@@ -47,7 +47,6 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 @interface OpenDocumentsManager : NSResponder {
 
 @private
-	id sectionListController;
 	
 	NSMutableArray *openDocuments;
 	NSMutableArray *standaloneWindows;

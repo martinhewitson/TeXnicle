@@ -55,7 +55,7 @@
 	CGFloat imageSize;
 }
 
-@property (readwrite, assign) CGFloat imageSize;
+@property (nonatomic, assign) CGFloat imageSize;
 
 - (void)setImage:(NSImage *)anImage;
 - (NSImage*)image;

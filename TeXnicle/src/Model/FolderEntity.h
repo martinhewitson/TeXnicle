@@ -32,6 +32,4 @@
 
 }
 
-- (NSString*)pathRelativeToProject;
-
 @end

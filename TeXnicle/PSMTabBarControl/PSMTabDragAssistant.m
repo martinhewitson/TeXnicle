@@ -558,7 +558,7 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 	PSMTabBarControl *control = (PSMTabBarControl*)[cell controlView];
 	NSImage *viewImage = nil;
 	
-	if (outMask) {
+	if (outMask != NULL) {
 		*outMask = NSBorderlessWindowMask;
 	}
 	

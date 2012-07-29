@@ -20,6 +20,6 @@
 
 @interface NSWorkspace (Bridge10_5)
 
--(BOOL) filenameExtension:(NSString*)filenameExtension isValidForType:(NSString *)typeName;
+//-(BOOL) filenameExtension:(NSString*)filenameExtension isValidForType:(NSString *)typeName;
 
 @end

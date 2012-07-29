@@ -49,7 +49,6 @@
 #import "TPTemplateEditor.h"
 #import "TPProjectTemplateCreator.h"
 #import "TPConsoleViewController.h"
-#import "OtherFilesViewController.h"
 #import "TPSpellCheckerListingViewController.h"
 #import "TPProjectOutlineViewController.h"
 #import "TPWarningsViewController.h"
@@ -66,8 +65,7 @@
 @class Bookmark;
 
 @interface TeXProjectDocument : NSPersistentDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, 
-TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate,
-OtherFilesViewControllerDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
+TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,
 PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, 
@@ -107,8 +105,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 
 - (void) restoreUIstate;
 - (void) captureUIstate;
-- (void) restoreSplitViewPositions;
-
 
 - (IBAction)reopenUsingEncoding:(id)sender;
 - (void) restoreOpenTabs;
