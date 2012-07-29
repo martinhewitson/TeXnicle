@@ -35,5 +35,6 @@
                        bugFix:(unsigned *)bugFix;
 
 - (BOOL) isLion;
+- (BOOL) isMountainLion;
 
 @end

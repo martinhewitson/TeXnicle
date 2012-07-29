@@ -76,4 +76,16 @@ fail:
   }
 }
 
+- (BOOL) isMountainLion
+{
+  unsigned major, minor, bugFix;
+  [[NSApplication sharedApplication]
+   getSystemVersionMajor:&major minor:&minor bugFix:&bugFix];
+  if (major == 10 && minor == 8) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
 @end
