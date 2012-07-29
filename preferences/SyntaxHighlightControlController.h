@@ -30,13 +30,10 @@
 
 
 @interface SyntaxHighlightControlController : NSViewController {
-
+@private
 	IBOutlet NSButton *activeButton;
 	IBOutlet NSColorWell *colorWell;
 	IBOutlet NSTextField *label;
-	
-	NSString *bindingTag;
-  NSString *name;
 }
 
 @property (nonatomic, readwrite, copy) NSString *bindingTag;

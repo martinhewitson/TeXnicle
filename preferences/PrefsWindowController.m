@@ -36,15 +36,21 @@
 #import "TPProjectTemplateManager.h"
 #import "TPSyntaxChecker.h"
 
+
+@interface PrefsWindowController ()
+
+@property (strong) TPProjectTemplateManager *projectTemplateManager;
+@property (unsafe_unretained) IBOutlet NSView *projectTemplateManagerContainer;
+@property (strong) TPSupportedFilesEditor *supportedFilesEditor;
+@property (strong) TPEnginesEditor *enginesEditor;
+@property (unsafe_unretained) IBOutlet NSView *enginesEditorContainer;
+@property (strong) TPTemplateEditorView *templateEditorView;
+@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
+
+@end
+
 @implementation PrefsWindowController
 
-@synthesize enginesEditor;
-@synthesize enginesEditorContainer;
-@synthesize supportedFilesEditor;
-@synthesize templateEditorView;
-@synthesize templateEditorViewContainer;
-@synthesize projectTemplateManager;
-@synthesize projectTemplateManagerContainer;
 
 - (void) awakeFromNib
 {

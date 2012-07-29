@@ -37,7 +37,7 @@
 @class TPEnginesEditor;
 
 @interface PrefsWindowController : DBPrefsWindowController <NSTableViewDelegate, NSTableViewDataSource> {
-
+@private
 	IBOutlet NSView *generalPrefsView;
 	IBOutlet NSView *syntaxColorsView;
 	IBOutlet NSView *templatesView;
@@ -98,20 +98,9 @@
 	IBOutlet NSStepper *numSpacesStepper;
   IBOutlet NSTextField *spacesLabel;
 	
-  TPEnginesEditor *enginesEditor;
-  NSView *__unsafe_unretained enginesEditorContainer;
-  
   IBOutlet NSPopUpButton *enginePopup;
   
   IBOutlet NSPopUpButton *defaultEncodingPopup;
-  
-  TPSupportedFilesEditor *supportedFilesEditor;
-  
-  TPTemplateEditorView *templateEditorView;
-  NSView *__unsafe_unretained templateEditorViewContainer;
-  
-  TPProjectTemplateManager *projectTemplateManager;
-  NSView *__unsafe_unretained projectTemplateManagerContainer;
   
   IBOutlet NSTableView *syntaxErrorsTable;
   IBOutlet NSTextField *chktexBinaryPath;
@@ -121,13 +110,6 @@
   IBOutlet NSButton *defaultChecksButton;
 }
 
-@property (strong) TPProjectTemplateManager *projectTemplateManager;
-@property (unsafe_unretained) IBOutlet NSView *projectTemplateManagerContainer;
-@property (strong) TPSupportedFilesEditor *supportedFilesEditor;
-@property (strong) TPEnginesEditor *enginesEditor;
-@property (unsafe_unretained) IBOutlet NSView *enginesEditorContainer;
-@property (strong) TPTemplateEditorView *templateEditorView;
-@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
 
 - (IBAction)defaultEncodingSelected:(id)sender;
 

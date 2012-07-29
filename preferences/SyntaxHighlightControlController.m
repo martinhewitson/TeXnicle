@@ -31,9 +31,6 @@
 
 @implementation SyntaxHighlightControlController
 
-@synthesize bindingTag;
-@synthesize name;
-
 - (id) initWithTag:(NSString*)aTag name:(NSString*)aName
 {
 	self = [super initWithNibName:@"SyntaxColorControl" bundle:nil];
@@ -68,14 +65,14 @@
 	bindingOptions[@"NSValueTransformerName"] = @"ColorArrayTransformer";
 	
 	// Color well binding
-	NSString *path = [NSString stringWithFormat:@"values.TESyntax%@Color", bindingTag] ;
+	NSString *path = [NSString stringWithFormat:@"values.TESyntax%@Color", self.bindingTag] ;
 	[colorWell bind:@"value"
 				 toObject:defaults 
 			withKeyPath:path
 					options:bindingOptions];
 	
 	// Active binding
-	path = [NSString stringWithFormat:@"values.TESyntaxColor%@", bindingTag] ;
+	path = [NSString stringWithFormat:@"values.TESyntaxColor%@", self.bindingTag] ;
 	[activeButton bind:@"value"
 					toObject:defaults 
 			 withKeyPath:path

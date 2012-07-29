@@ -42,8 +42,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface DBPrefsWindowController : NSWindowController <NSAnimationDelegate, NSToolbarDelegate, NSWindowDelegate> {
-
-//@interface DBPrefsWindowController : NSWindowController <NSAnimationDelegate, NSToolbarDelegate> {
+@private
 	NSMutableArray *toolbarIdentifiers;
 	NSMutableDictionary *toolbarViews;
 	NSMutableDictionary *toolbarItems;
