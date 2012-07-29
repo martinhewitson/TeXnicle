@@ -29,31 +29,14 @@
 #import "MHToolbarBackgroundView.h"
 
 
-@interface TPStatusViewController : NSViewController {
-  NSString *_editorStatusText;
-  NSString *_filenameText;
-  BOOL _showRevealButton;
-  NSTextField *__unsafe_unretained editorStatusTextField;
-  NSTextField *__unsafe_unretained filenameTextField;
-  BOOL showRevealButton;
-  NSButton *__unsafe_unretained revealButton;
-  MHToolbarBackgroundView *__unsafe_unretained rightPanel;
-  NSInteger wordCount;
-  NSInteger character;
-  NSInteger lineNumber;
-}
-
-@property (unsafe_unretained) IBOutlet NSTextField *editorStatusTextField;
-@property (unsafe_unretained) IBOutlet NSTextField *filenameTextField;
-@property (unsafe_unretained) IBOutlet NSButton *revealButton;
-@property (unsafe_unretained) IBOutlet MHToolbarBackgroundView *rightPanel;
+@interface TPStatusViewController : NSViewController
 
 @property (assign) NSInteger character;
 @property (assign) NSInteger lineNumber;
 @property (assign) NSInteger wordCount;
-@property (copy) NSString *editorStatusText;
-@property (copy) NSString *filenameText;
-@property (assign) BOOL showRevealButton;
+@property (nonatomic, copy) NSString *editorStatusText;
+@property (nonatomic, copy) NSString *filenameText;
+@property (nonatomic, assign) BOOL showRevealButton;
 
 - (void) resizeLabels;
 - (void) enable:(BOOL)state;

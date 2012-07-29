@@ -27,18 +27,16 @@
 
 #import "TPStatusViewController.h"
 
-@implementation TPStatusViewController
+@interface TPStatusViewController ()
 
-@synthesize editorStatusTextField;
-@synthesize filenameTextField;
-@synthesize editorStatusText = _editorStatusText;
-@synthesize filenameText = _filenameText;
-@synthesize showRevealButton;
-@synthesize revealButton;
-@synthesize rightPanel;
-@synthesize wordCount;
-@synthesize character;
-@synthesize lineNumber;
+@property (unsafe_unretained) IBOutlet NSTextField *editorStatusTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameTextField;
+@property (unsafe_unretained) IBOutlet NSButton *revealButton;
+@property (unsafe_unretained) IBOutlet MHToolbarBackgroundView *rightPanel;
+
+@end
+
+@implementation TPStatusViewController
 
 - (id) init
 {
@@ -109,11 +107,6 @@
   }
 }
 
-- (NSString*)filenameText
-{
-  return _filenameText;
-}
-
 - (void)setEditorStatusText:(NSString *)editorStatusText
 {
   _editorStatusText = [editorStatusText copy];
@@ -124,10 +117,6 @@
   }
 }
 
-- (NSString*)editorStatusText
-{
-  return _editorStatusText;
-}
 
 - (void)setShowRevealButton:(BOOL)state
 {
@@ -140,11 +129,6 @@
   [self.revealButton setHidden:!state];
   [self.editorStatusTextField setHidden:!state];
   [self.filenameTextField setHidden:!state];
-}
-
-- (BOOL)showRevealButton
-{
-  return _showRevealButton;
 }
 
 - (IBAction)revealFile:(id)sender
