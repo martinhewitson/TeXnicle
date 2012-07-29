@@ -29,11 +29,6 @@
 
 @interface BibliographyEntry : NSObject {
 
-	NSString *tag;
-	NSString *author;
-	NSString *title;
-	NSString *publishedDate;
-  NSString *sourceString;
 	BOOL isObservingKeys;
 	
 }

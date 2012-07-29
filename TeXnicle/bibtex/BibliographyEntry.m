@@ -31,12 +31,6 @@
 @implementation BibliographyEntry
 
 
-@synthesize tag;
-@synthesize author;
-@synthesize title;
-@synthesize publishedDate;
-@synthesize sourceString;
-
 - (id)init
 {
 	self = [super init];
@@ -316,7 +310,7 @@
 
 - (NSString*) description
 {
-	return [NSString stringWithFormat:@"[%@], [%@], [%@], [%@]", tag, author, title, publishedDate];
+	return [NSString stringWithFormat:@"[%@], [%@], [%@], [%@]", self.tag, self.author, self.title, self.publishedDate];
 }
 
 - (NSString*) string
