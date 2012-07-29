@@ -29,13 +29,7 @@
 #import "TeXTextView.h"
 
 
-@interface TPTemplateEditorView : NSViewController <NSTextViewDelegate, NSTableViewDelegate, NSTableViewDataSource> {
-@private
-  TeXTextView *__unsafe_unretained templateCodeView;
-  NSTableView *__unsafe_unretained templateTable; 
-  NSArrayController *__unsafe_unretained templateArrayController;
-}
-
+@interface TPTemplateEditorView : NSViewController <NSTextViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 
 @property (unsafe_unretained) IBOutlet TeXTextView *templateCodeView;
 @property (unsafe_unretained) IBOutlet NSTableView *templateTable;

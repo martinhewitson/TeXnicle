@@ -27,17 +27,19 @@
 
 #import "TPTemplateEditor.h"
 
+@interface TPTemplateEditor ()
+
+@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
+@property (unsafe_unretained) IBOutlet NSButton *cancelButton;
+@property (unsafe_unretained) IBOutlet NSButton *selectButton;
+@property (unsafe_unretained) IBOutlet NSButton *setAsMainFileButton;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameField;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameLabel;
+
+@end
+
 @implementation TPTemplateEditor
 
-@synthesize templateEditorViewContainer;
-@synthesize templateEditorView;
-@synthesize cancelButton;
-@synthesize selectButton;
-@synthesize setAsMainFileButton;
-@synthesize filenameField;
-@synthesize filenameLabel;
-@synthesize delegate;
-@synthesize showFilename;
 
 - (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename
 {

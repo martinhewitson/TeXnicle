@@ -30,10 +30,6 @@
 
 @implementation TPTemplateEditorView
 
-@synthesize templateCodeView;
-@synthesize templateTable;
-@synthesize templateArrayController;
-
 - (id)init
 {
   self = [super initWithNibName:@"TPTemplateEditorView" bundle:nil];
@@ -69,13 +65,13 @@
 {
   NSArray *selectedObjects = [self.templateArrayController selectedObjects];
   if ([selectedObjects count] == 1) {
-    [templateCodeView scrollRectToVisible:NSZeroRect];
-    [templateCodeView performSelector:@selector(colorVisibleText)
-                           withObject:nil
-                           afterDelay:0.1];
-    [templateCodeView performSelector:@selector(colorWholeDocument)
-                           withObject:nil
-                           afterDelay:0.2];
+    [self.templateCodeView scrollRectToVisible:NSZeroRect];
+    [self.templateCodeView performSelector:@selector(colorVisibleText)
+                                withObject:nil
+                                afterDelay:0.1];
+    [self.templateCodeView performSelector:@selector(colorWholeDocument)
+                                withObject:nil
+                                afterDelay:0.2];
   }
 }
 
@@ -92,7 +88,7 @@
 {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	[dict setValue:[NSString stringWithFormat:@"New Template %d", [[self.templateArrayController arrangedObjects] count]]
+	[dict setValue:[NSString stringWithFormat:@"New Template %lu", [[self.templateArrayController arrangedObjects] count]]
 					forKey:@"Name"];
 	[dict setValue:@"New empty template" forKey:@"Description"];
 	

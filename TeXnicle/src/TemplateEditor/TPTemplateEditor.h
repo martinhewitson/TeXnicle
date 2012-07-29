@@ -41,27 +41,11 @@
 @interface TPTemplateEditor : NSWindowController {
 @private
   NSString *_filename;
-  NSView *__unsafe_unretained templateEditorViewContainer;
-  TPTemplateEditorView *templateEditorView;
-  id<TemplateEditorDelegate> __unsafe_unretained delegate;
-  BOOL showFilename;
-  
-  NSButton *__unsafe_unretained cancelButton;
-  NSButton *__unsafe_unretained selectButton;
-  NSButton *__unsafe_unretained setAsMainFileButton;
-  NSTextField *__unsafe_unretained filenameField;
-  NSTextField *__unsafe_unretained filenameLabel;
 }
 
 - (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename;
 
 @property (unsafe_unretained) id<TemplateEditorDelegate> delegate;
-@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
-@property (unsafe_unretained) IBOutlet NSButton *cancelButton;
-@property (unsafe_unretained) IBOutlet NSButton *selectButton;
-@property (unsafe_unretained) IBOutlet NSButton *setAsMainFileButton;
-@property (unsafe_unretained) IBOutlet NSTextField *filenameField;
-@property (unsafe_unretained) IBOutlet NSTextField *filenameLabel;
 @property (assign) BOOL showFilename;
 
 @property (strong) TPTemplateEditorView *templateEditorView;
