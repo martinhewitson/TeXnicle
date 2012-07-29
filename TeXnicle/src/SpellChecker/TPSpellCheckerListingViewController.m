@@ -39,17 +39,6 @@
 
 @implementation TPSpellCheckerListingViewController
 
-@synthesize delegate;
-@synthesize spellCheckTimer;
-@synthesize checkedFiles;
-@synthesize outlineView;
-@synthesize revealButton;
-@synthesize correctButton;
-@synthesize learnButton;
-@synthesize ignoreButton;
-@synthesize forceCheckButton;
-@synthesize progressIndicator;
-@synthesize aQueue;
 
 - (id) initWithDelegate:(id<TPSpellCheckerListingDelegate>)aDelegate
 {
@@ -542,6 +531,15 @@
 
 #pragma mark -
 #pragma mark Delegate
+
+- (NSDate*)lastEdit
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(lastEdit)]) {
+    return [self.delegate lastEdit];
+  }
+  
+  return nil;
+}
 
 - (BOOL) performSimpleSpellCheck
 {

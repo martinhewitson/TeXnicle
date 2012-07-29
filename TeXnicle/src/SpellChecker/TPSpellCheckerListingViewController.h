@@ -47,22 +47,9 @@
 @end
 
 @interface TPSpellCheckerListingViewController : NSViewController <NSUserInterfaceValidations, TPSpellCheckerListingDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
-  
-  id<TPSpellCheckerListingDelegate> __unsafe_unretained delegate;
-  NSMutableArray *checkedFiles;
-  NSTimer *spellCheckTimer;
-  NSOutlineView *__unsafe_unretained outlineView;
-  
-  NSInteger checkingFiles;
-  
-  HHValidatedButton *__unsafe_unretained correctButton;
-  HHValidatedButton *__unsafe_unretained revealButton;
-  HHValidatedButton *__unsafe_unretained learnButton;
-  HHValidatedButton *__unsafe_unretained ignoreButton;
-  HHValidatedButton *__unsafe_unretained forceCheckButton;
     
-  NSOperationQueue* aQueue;
-  NSProgressIndicator *__unsafe_unretained progressIndicator;
+@private
+  NSInteger checkingFiles;
 }
 
 @property (strong) NSOperationQueue* aQueue;
