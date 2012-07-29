@@ -3142,11 +3142,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			inserted+=slen;
 		}
 	}
-	
+	  
 	[self setSelectedRange:r];
 	[self delete:self];
 	[self insertText:newString];
-	[self setSelectedRange:NSMakeRange(selRange.location+slen, selRange.length)];
+  
+	r = [str paragraphRangeForRange:NSMakeRange(r.location, [newString length])];
+  [self setSelectedRange:r];
 }
 
 - (IBAction) reformatParagraph:(id)sender
@@ -3319,10 +3321,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[self setSelectedRange:r];
 	[self delete:self];
 	[self insertText:newString];
-  NSInteger diff = selRange.location-removed;
-  if (diff>=0) {
-    [self setSelectedRange:NSMakeRange(diff, selRange.length)];
-  }
+  
+  r = [str paragraphRangeForRange:NSMakeRange(r.location, [newString length])];
+  [self setSelectedRange:r];
 }
 
 #pragma mark -
