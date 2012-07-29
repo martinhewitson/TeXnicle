@@ -29,8 +29,6 @@
 #import "MHSynctexController.h"
 
 @implementation MHSynctexController
-@synthesize textView;
-@synthesize pdfViews;
 
 - (id) initWithEditor:(TeXTextView*)aTextView pdfViews:(NSArray*)pdfViewArray;
 {

@@ -52,55 +52,17 @@
 
 @interface FinderController : NSViewController <NSOutlineViewDelegate, NSOutlineViewDataSource, FinderControllerDelegate, NSUserInterfaceValidations> {
 @private
-  
-  NSOutlineView *__unsafe_unretained outlineView;	
-  id<FinderControllerDelegate> __unsafe_unretained delegate;  
-  NSMutableArray *results;
   NSCharacterSet *ws;
   NSCharacterSet *ns;
-  
 	dispatch_queue_t queue;
-  
   NSInteger filesProcessed;
   BOOL isSearching;
   BOOL shouldContinueSearching;
   BOOL shouldSearchOnEnd;
-  
-  NSView *__unsafe_unretained topbarView;
-  NSPopUpButton *__unsafe_unretained modeSelector;
-  NSScrollView *__unsafe_unretained scrollview;
-  HHValidatedButton *__unsafe_unretained replaceButton;
-  HHValidatedButton *__unsafe_unretained replaceAllButton;
-  NSView *__unsafe_unretained replaceView;
-  NSTextField *__unsafe_unretained replaceText;
-  NSView *__unsafe_unretained bottomBarView;
-  
-  HHValidatedButton *__unsafe_unretained jumpToButton;
-  NSSearchField *__unsafe_unretained searchField;
-  NSProgressIndicator *__unsafe_unretained progressIndicator;
-  NSTextField *__unsafe_unretained statusLabel;
-  
-  NSButton *__unsafe_unretained caseSensitiveCheckbox;
-  NSButton *__unsafe_unretained searchWholeWordsCheckbox;
 }
 
 @property (unsafe_unretained) id<FinderControllerDelegate> delegate;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *jumpToButton;
 @property (unsafe_unretained) IBOutlet NSSearchField *searchField;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
-@property (unsafe_unretained) IBOutlet NSTextField *statusLabel;
-@property (unsafe_unretained) IBOutlet NSView *topbarView;
-@property (unsafe_unretained) IBOutlet NSPopUpButton *modeSelector;
-@property (unsafe_unretained) IBOutlet NSScrollView *scrollview;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *replaceButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *replaceAllButton;
-@property (unsafe_unretained) IBOutlet NSView *replaceView;
-@property (unsafe_unretained) IBOutlet NSView *bottomBarView;
-@property (unsafe_unretained) IBOutlet NSTextField *replaceText;
-@property (unsafe_unretained) IBOutlet NSButton *caseSensitiveCheckbox;
-@property (unsafe_unretained) IBOutlet NSButton *searchWholeWordsCheckbox;
-@property (atomic, strong) NSMutableArray *results;
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate;
 

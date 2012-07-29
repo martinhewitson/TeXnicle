@@ -31,17 +31,12 @@
 @class FileEntity;
 @class TPDocumentMatch;
 
-@interface TPResultDocument : NSObject {
-@private
-  FileEntity *document;
-  NSMutableArray *matches;
-}
+@interface TPResultDocument : NSObject
 
 @property (strong) FileEntity *document;
 @property (strong) NSMutableArray *matches;
 @property (unsafe_unretained, readonly) NSAttributedString *displayString;
 @property (unsafe_unretained, readonly) NSAttributedString *selectedDisplayString;
-
 
 + (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument;
 - (id)initWithDocument:(FileEntity*)aDocument;

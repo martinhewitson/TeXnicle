@@ -31,11 +31,7 @@
 #import "TeXTextView.h"
 #import "MHPDFView.h"
 
-@interface MHSynctexController : NSObject {
-@private
-  TeXTextView *textView;
-  NSMutableArray *pdfViews;
-}
+@interface MHSynctexController : NSObject
 
 @property (strong) TeXTextView *textView;
 @property (strong) NSMutableArray *pdfViews;

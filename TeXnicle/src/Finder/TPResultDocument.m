@@ -29,10 +29,11 @@
 #import "TPResultDocument.h"
 #import "FileEntity.h"
 
-@implementation TPResultDocument
+@interface TPResultDocument ()
 
-@synthesize document;
-@synthesize matches;
+@end
+
+@implementation TPResultDocument
 
 + (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument
 {
@@ -68,7 +69,7 @@
 
 - (NSAttributedString*)displayString
 {
-  NSString *str = [NSString stringWithFormat:@"%@: %d Matches", [self.document valueForKey:@"name"], [self.matches count]];
+  NSString *str = [NSString stringWithFormat:@"%@: %lu Matches", [self.document valueForKey:@"name"], [self.matches count]];
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str]; 
   return att;
 }

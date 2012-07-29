@@ -30,14 +30,7 @@
 
 @class TPResultDocument;
 
-@interface TPDocumentMatch : NSTextAttachment {
-@private
-  NSRange range;
-  NSRange subrange;
-  NSString *match;
-  NSInteger lineNumber;
-  TPResultDocument *__unsafe_unretained parent;
-}
+@interface TPDocumentMatch : NSTextAttachment
 
 @property (assign) NSInteger lineNumber;
 @property (unsafe_unretained) TPResultDocument *parent;

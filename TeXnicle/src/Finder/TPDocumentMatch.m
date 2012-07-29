@@ -28,13 +28,11 @@
 
 #import "TPDocumentMatch.h"
 
-@implementation TPDocumentMatch
+@interface TPDocumentMatch ()
 
-@synthesize parent;
-@synthesize match;
-@synthesize range;
-@synthesize subrange;
-@synthesize lineNumber;
+@end
+
+@implementation TPDocumentMatch
 
 + (TPDocumentMatch*)documentMatchInLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
 {
@@ -62,7 +60,7 @@
 
 - (NSString*) lineNumberString
 {
-  return [NSString stringWithFormat:@" %d ", self.lineNumber];
+  return [NSString stringWithFormat:@" %ld ", self.lineNumber];
 }
 
 - (NSAttributedString*)selectedDisplayString

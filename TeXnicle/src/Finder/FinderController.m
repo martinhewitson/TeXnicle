@@ -46,25 +46,27 @@
 
 NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
-@implementation FinderController
+@interface FinderController()
 
-@synthesize delegate;
-@synthesize jumpToButton;
-@synthesize searchField;
-@synthesize outlineView;
-@synthesize progressIndicator;
-@synthesize statusLabel;
-@synthesize results;
-@synthesize topbarView;
-@synthesize modeSelector;
-@synthesize scrollview;
-@synthesize replaceButton;
-@synthesize replaceAllButton;
-@synthesize replaceView;
-@synthesize replaceText;
-@synthesize bottomBarView;
-@synthesize caseSensitiveCheckbox;
-@synthesize searchWholeWordsCheckbox;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *jumpToButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet NSTextField *statusLabel;
+@property (unsafe_unretained) IBOutlet NSView *topbarView;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *modeSelector;
+@property (unsafe_unretained) IBOutlet NSScrollView *scrollview;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *replaceButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *replaceAllButton;
+@property (unsafe_unretained) IBOutlet NSView *replaceView;
+@property (unsafe_unretained) IBOutlet NSView *bottomBarView;
+@property (unsafe_unretained) IBOutlet NSTextField *replaceText;
+@property (unsafe_unretained) IBOutlet NSButton *caseSensitiveCheckbox;
+@property (unsafe_unretained) IBOutlet NSButton *searchWholeWordsCheckbox;
+@property (atomic, strong) NSMutableArray *results;
+
+@end
+
+@implementation FinderController
 
 - (id) initWithDelegate:(id<FinderControllerDelegate>)aDelegate
 {
@@ -114,7 +116,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
-  if (anItem == jumpToButton) {
+  if (anItem == self.jumpToButton) {
     if ([self.outlineView selectedRow] == -1) {
       return NO;
     }
@@ -180,7 +182,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 {
   NSRect contentBounds = [self.view bounds];
   NSRect bottomBarBounds = [self.bottomBarView bounds];
-  if ([modeSelector indexOfSelectedItem] == 0) {
+  if ([self.modeSelector indexOfSelectedItem] == 0) {
     // find
     NSRect fr = [self.topbarView frame];
     [self.topbarView setFrame:NSMakeRect(fr.origin.x, contentBounds.size.height-kFindBarSmall+1, fr.size.width, kFindBarSmall)];
@@ -830,7 +832,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   
   [self.progressIndicator stopAnimation:self];
   if ([aFinder count] > 0) {
-    NSString *string = [NSString stringWithFormat:@"Found %d results in %d files.", [aFinder count], [self.results count]];
+    NSString *string = [NSString stringWithFormat:@"Found %lu results in %lu files.", [aFinder count], [self.results count]];
     [self.statusLabel setStringValue:string];
   } else {
     [self.statusLabel setStringValue:@"No results."];
@@ -855,7 +857,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 - (void)didMakeMatch:(FinderController *)aFinder
 {
   //  NSLog(@"Did match");
-  NSString *string = [NSString stringWithFormat:@"Found %d results...", [aFinder count]];
+  NSString *string = [NSString stringWithFormat:@"Found %lu results...", [aFinder count]];
   [self.statusLabel setStringValue:string];
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(didMakeMatch:)]) {
