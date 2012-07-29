@@ -30,8 +30,6 @@
 
 @implementation TPPopuplistView
 
-@synthesize delegate;
-
 - (id)initWithFrame:(NSRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
@@ -50,6 +48,7 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
 	[self setDelegate:nil];
 }
 
@@ -60,9 +59,9 @@
 
 - (void) listDoubleClick
 {
-	if ([delegate respondsToSelector:@selector(userSelectedRow:)]) {
+	if ([self.delegate respondsToSelector:@selector(userSelectedRow:)]) {
 		NSInteger row = [table selectedRow];
-		[delegate performSelector:@selector(userSelectedRow:) withObject:@(row)];
+		[self.delegate performSelector:@selector(userSelectedRow:) withObject:@(row)];
 	}		
 }
 

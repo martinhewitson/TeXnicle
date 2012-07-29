@@ -31,11 +31,6 @@
 
 @implementation TPPopupListWindowController
 
-@synthesize delegate;
-@synthesize title;
-@synthesize isVisible;
-@synthesize mode;
-
 - (id) initWithEntries:(NSArray*)entryArray 
 							 atPoint:(NSPoint)aPoint 
 				inParentWindow:(NSWindow*)aWindow
@@ -45,9 +40,10 @@
 	self = [super initWithNibName:@"TPPopuplistView" bundle:nil];
 	
 	if (self) {
+    attachedWindow = nil;
 		self.isVisible = NO;
 		[self setTitle:aTitle];
-		mode = aMode;
+		self.mode = aMode;
 		parentWindow = aWindow;
 		entries = [[NSMutableArray alloc] initWithCapacity:[entryArray count]];
 		for (id entry in entryArray) {
@@ -141,11 +137,13 @@
 //		NSLog(@"Attaching window at: %f x %f", point.x , point.y);
 		
 		[view setFrame:NSMakeRect(0, 0, width+20.0, height)];
-		attachedWindow = [[MAAttachedWindow alloc] initWithView:view
-																						attachedToPoint:point 
-																									 inWindow:parentWindow 
-																										 onSide:pos 
-																								 atDistance:5.0];
+    if (attachedWindow == nil) {
+      attachedWindow = [[MAAttachedWindow alloc] initWithView:view
+                                              attachedToPoint:point
+                                                     inWindow:parentWindow
+                                                       onSide:pos
+                                                   atDistance:5.0];
+    }
 		[attachedWindow setBorderColor:[NSColor clearColor]];
 		[attachedWindow setBackgroundColor:[NSColor whiteColor]];
 		[attachedWindow setViewMargin:5.0];
@@ -192,7 +190,6 @@
 {
 	[self setupWindow];
 	[parentWindow addChildWindow:attachedWindow ordered:NSWindowAbove];	
-//	[attachedWindow makeKeyAndOrderFront:self];
 	[attachedWindow makeFirstResponder:table];
 	[table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
   self.isVisible = YES;
@@ -210,7 +207,6 @@
 
 - (void) dismiss
 {
-//  NSLog(@"Dismiss");
   if (attachedWindow == nil || parentWindow == nil) {
     return;
   }
@@ -259,22 +255,22 @@
     tag = value;
   }
   
-	if (mode == TPPopupListInsert) {
-		if ([delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {
-			[delegate performSelector:@selector(insertWordAtCurrentLocation:) withObject:tag];
+	if (self.mode == TPPopupListInsert) {
+		if ([self.delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {
+			[self.delegate performSelector:@selector(insertWordAtCurrentLocation:) withObject:tag];
 		}
-	} else if (mode == TPPopupListSpell) {
-		if ([delegate respondsToSelector:@selector(replaceWordAtCurrentLocationWith:)]) {
-			[delegate performSelector:@selector(replaceWordAtCurrentLocationWith:) withObject:tag];
+	} else if (self.mode == TPPopupListSpell) {
+		if ([self.delegate respondsToSelector:@selector(replaceWordAtCurrentLocationWith:)]) {
+			[self.delegate performSelector:@selector(replaceWordAtCurrentLocationWith:) withObject:tag];
 		}
-	} else if (mode == TPPopupListReplace) {
-		if ([delegate respondsToSelector:@selector(replaceWordUpToCurrentLocationWith:)]) {
-			[delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:tag];
+	} else if (self.mode == TPPopupListReplace) {
+		if ([self.delegate respondsToSelector:@selector(replaceWordUpToCurrentLocationWith:)]) {
+			[self.delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:tag];
 		}
 	}
   
-  if ([delegate respondsToSelector:@selector(didSelectPopupListItem)]) {
-    [delegate performSelector:@selector(didSelectPopupListItem)];
+  if ([self.delegate respondsToSelector:@selector(didSelectPopupListItem)]) {
+    [self.delegate performSelector:@selector(didSelectPopupListItem)];
   }
   
   

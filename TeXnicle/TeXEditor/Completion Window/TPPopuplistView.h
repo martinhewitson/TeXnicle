@@ -29,10 +29,8 @@
 
 
 @interface TPPopuplistView : NSView {
-
-	IBOutlet NSTableView *table;
-	id __unsafe_unretained delegate;
-	
+@private
+	IBOutlet NSTableView *table;	
 }
 
 @property (readwrite, unsafe_unretained) id delegate;

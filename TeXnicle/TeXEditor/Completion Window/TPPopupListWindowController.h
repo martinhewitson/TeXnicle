@@ -37,26 +37,19 @@
 
 
 @interface TPPopupListWindowController : NSViewController <NSTextFieldDelegate> {
-	id __unsafe_unretained delegate;
-	NSString *title;
+@private
 	IBOutlet NSTextField *titleView;
 	NSWindow *parentWindow;
 	MAAttachedWindow *attachedWindow;
 	NSMutableArray *entries;
 	NSPoint point;
-	NSUInteger mode;
 	IBOutlet NSTableView *table;
 	IBOutlet SBGradientView *gradientView;
-  BOOL isVisible;
 }
 
 @property (assign) BOOL isVisible;
-
-@property (readwrite, copy) NSString *title;
 @property (readwrite, unsafe_unretained) id delegate;
-@property (readonly) NSUInteger mode;
-
-- (IBAction) searchFieldAction:(id)sender;
+@property (assign) NSUInteger mode;
 
 - (id) initWithEntries:(NSArray*)entries 
 							 atPoint:(NSPoint)aPoint 
