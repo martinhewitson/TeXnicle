@@ -30,10 +30,7 @@
 
 @class FileEntity;
 
-@interface TPCitationSet : NSObject {
-  id __unsafe_unretained file;
-  NSArray *citations;
-}
+@interface TPCitationSet : NSObject
 
 @property (strong) NSArray *citations;
 @property (unsafe_unretained) id file;

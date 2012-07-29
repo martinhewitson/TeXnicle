@@ -33,14 +33,12 @@
 
 @interface TPCitationsViewController ()
 
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+
 @end
 
 @implementation TPCitationsViewController
-
-@synthesize revealButton;
-@synthesize delegate;
-@synthesize outlineView;
-@synthesize sets;
 
 
 - (id)initWithDelegate:(id<TPCitationsViewDelegate>)aDelegate

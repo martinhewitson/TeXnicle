@@ -30,9 +30,6 @@
 
 @implementation TPCitationSet
 
-@synthesize file;
-@synthesize citations;
-
 - (id) initWithFile:(FileEntity*)aFile bibliographyArray:(NSArray *)aList
 {
   self = [super init];
@@ -80,7 +77,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *countString = nil; 
-  countString = [NSString stringWithFormat:@" [%d] ", [self.citations count]];
+  countString = [NSString stringWithFormat:@" [%lu] ", [self.citations count]];
   
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:countString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  

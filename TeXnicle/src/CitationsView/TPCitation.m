@@ -29,9 +29,6 @@
 
 @implementation TPCitation
 
-@synthesize entry;
-@synthesize file;
-
 + (id) citationWithFile:(id)aFile entry:(BibliographyEntry *)anEntry
 {
   return [[TPCitation alloc] initWithFile:aFile entry:anEntry];

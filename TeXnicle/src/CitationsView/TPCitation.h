@@ -28,10 +28,7 @@
 #import <Foundation/Foundation.h>
 #import "BibliographyEntry.h"
 
-@interface TPCitation : NSObject {
-  BibliographyEntry *entry;
-  id __unsafe_unretained file;
-}
+@interface TPCitation : NSObject
 
 @property (strong) BibliographyEntry *entry;
 @property (unsafe_unretained) id file;
