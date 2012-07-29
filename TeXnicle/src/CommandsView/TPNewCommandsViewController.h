@@ -41,17 +41,11 @@
 
 
 @interface TPNewCommandsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPNewCommandsViewDelegate> {
-  
-  NSMutableArray *sets;
-  NSOutlineView *__unsafe_unretained outlineView;
-  id<TPNewCommandsViewDelegate> __unsafe_unretained delegate;
-  HHValidatedButton *__unsafe_unretained revealButton;
+@private
   BOOL firstView;
 }
 
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
 @property (unsafe_unretained) id<TPNewCommandsViewDelegate> delegate;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
 @property (strong) NSMutableArray *sets;
 
 - (id) initWithDelegate:(id<TPNewCommandsViewDelegate>)aDelegate;

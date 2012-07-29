@@ -30,8 +30,6 @@
 
 @implementation TPCommandSet
 
-@synthesize file;
-@synthesize commands;
 
 - (id) initWithFile:(FileEntity*)aFile commandArray:(NSArray *)aList
 {
@@ -70,7 +68,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
   
   NSString *countString = nil; 
-  countString = [NSString stringWithFormat:@" [%d] ", [self.commands count]];
+  countString = [NSString stringWithFormat:@" [%lu] ", [self.commands count]];
   
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:countString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  

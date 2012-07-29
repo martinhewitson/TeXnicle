@@ -29,10 +29,7 @@
 
 @class FileEntity;
 
-@interface TPCommandSet : NSObject {
-  id __unsafe_unretained file;
-  NSArray *commands;
-}
+@interface TPCommandSet : NSObject
 
 @property (strong) NSArray *commands;
 @property (unsafe_unretained) id file;

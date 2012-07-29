@@ -27,11 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPNewCommand : NSObject {
-  NSString *source;
-  NSString *argument;
-  id __unsafe_unretained file;
-}
+@interface TPNewCommand : NSObject
 
 @property (copy) NSString *source;
 @property (copy) NSString *argument;

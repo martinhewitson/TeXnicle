@@ -30,9 +30,6 @@
 
 @implementation TPNewCommand
 
-@synthesize source;
-@synthesize argument;
-@synthesize file;
 
 + (id) commandWithFile:(id)aFile source:(NSString*)text
 {
