@@ -29,11 +29,6 @@
 
 @implementation TPMisspelledWord
 
-@synthesize word;
-@synthesize corrections;
-@synthesize range;
-@synthesize parent;
-
 + (TPMisspelledWord*) wordWithWord:(NSString*)aWord corrections:(NSArray*)correctionList range:(NSRange)aRange parent:(TPSpellCheckedFile*)aParent
 {
   return [[TPMisspelledWord alloc] initWithWord:aWord corrections:correctionList range:aRange parent:aParent];

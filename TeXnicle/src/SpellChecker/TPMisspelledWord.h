@@ -30,10 +30,6 @@
 @class TPSpellCheckedFile;
 
 @interface TPMisspelledWord : NSObject {
-  NSString *word;
-  NSArray *corrections;
-  NSRange range;
-  TPSpellCheckedFile *__unsafe_unretained parent;
 }
 
 @property (copy) NSString *word;
