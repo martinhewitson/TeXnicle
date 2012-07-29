@@ -28,15 +28,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TPFoldedCodeSnippet : NSTextAttachment {
+@interface TPFoldedCodeSnippet : NSTextAttachment
 
-	NSString *__unsafe_unretained code;
-	id object;
-	
-}
-
-@property (readwrite, unsafe_unretained) NSString *code;
-@property (readwrite, strong) id object;
+@property (copy) NSString *code;
+@property (strong) id object;
 
 - (id) initWithCode:(NSAttributedString*)aString;
 

@@ -28,13 +28,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MHFoldingTagDescription.h"
 
-@interface MHFoldingTag : NSObject {
-@private
-  BOOL isStartTag;
-  MHFoldingTagDescription *tag;
-  NSInteger index;
-  NSInteger lineNumber;
-}
+@interface MHFoldingTag : NSObject
 
 @property (assign) BOOL isStartTag;
 @property (strong) MHFoldingTagDescription *tag;

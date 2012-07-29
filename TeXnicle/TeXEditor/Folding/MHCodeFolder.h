@@ -34,22 +34,7 @@ enum {
 
 @class MHFoldingTagDescription;
 
-@interface MHCodeFolder : NSObject {
-@private
-
-  BOOL folded;
-  NSInteger startLine;
-  NSInteger endLine;
-  NSInteger startIndex;
-  NSInteger endIndex;
-  NSInteger lineCount;
-  NSString *foldedText;
-  NSString *startRect;
-  NSString *endRect;
-  NSTrackingRectTag startTrackingRect;
-  NSTrackingRectTag endTrackingRect;
-  MHFoldingTagDescription *tag;
-}
+@interface MHCodeFolder : NSObject
 
 @property (strong) MHFoldingTagDescription *tag;
 @property (assign) NSInteger startLine;

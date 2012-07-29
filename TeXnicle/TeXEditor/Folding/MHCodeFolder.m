@@ -31,20 +31,6 @@
 
 @implementation MHCodeFolder
 
-@synthesize startLine;
-@synthesize endLine;
-@synthesize startIndex;
-@synthesize endIndex;
-@synthesize folded;
-@synthesize foldedText;
-@synthesize startRect;
-@synthesize endRect;
-@synthesize startTrackingRect;
-@synthesize endTrackingRect;
-@synthesize tag;
-@synthesize lineCount;
-
-
 + (MHCodeFolder*) codeFolderWithStartIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex startLine:(NSInteger)startLine endLine:(NSInteger)endLine tag:(MHFoldingTagDescription*)aTag
 {
   return [[MHCodeFolder alloc] initWithStartIndex:startIndex endIndex:endIndex startLine:startLine endLine:endLine tag:(MHFoldingTagDescription*)aTag];

@@ -30,9 +30,6 @@
 
 @implementation TPFoldedCodeSnippet
 
-@synthesize code;
-@synthesize object;
-
 - (id) initWithCode:(NSAttributedString*)aString
 {
 	NSData *d = [aString RTFDFromRange:NSMakeRange(0, [aString length])

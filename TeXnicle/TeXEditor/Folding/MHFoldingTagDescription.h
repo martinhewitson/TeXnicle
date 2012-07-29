@@ -27,10 +27,10 @@
 
 #import <Foundation/Foundation.h>
 
-enum {
+typedef enum MHFoldingTagState : NSInteger {
   MHFoldingTagStartMatched,
   MHFoldingTagEndMatched
-};
+} MHFoldingTagState;
 
 @interface MHFoldingTagDescription : NSObject {
 @private

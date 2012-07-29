@@ -30,11 +30,6 @@
 
 @implementation MHFoldingTag
 
-@synthesize tag;
-@synthesize index;
-@synthesize lineNumber;
-@synthesize isStartTag;
-
 + (MHFoldingTag*) tagWithStartTag:(MHFoldingTagDescription*)aTag index:(NSInteger)anIndex lineNumber:(NSInteger)aLineNumber isStartTag:(BOOL)result
 {
   return [[MHFoldingTag alloc] initWithStartTag:aTag index:anIndex lineNumber:aLineNumber isStartTag:result];
