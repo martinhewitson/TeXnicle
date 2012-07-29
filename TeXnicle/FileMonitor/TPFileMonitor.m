@@ -35,6 +35,12 @@
 
 #define kFileCheckInterval 1.0
 
+@interface TPFileMonitor ()
+
+@property (strong) NSTimer *timer;
+
+@end
+
 @implementation TPFileMonitor
 
 @synthesize timer;

@@ -45,13 +45,8 @@
 
 @end
 
-@interface TPFileMonitor : NSObject <TPFileMonitorDelegate> {
-@private
-  NSTimer *timer;
-  id<TPFileMonitorDelegate> __unsafe_unretained delegate;
-}
+@interface TPFileMonitor : NSObject <TPFileMonitorDelegate>
 
-@property (strong) NSTimer *timer;
 @property (unsafe_unretained) id<TPFileMonitorDelegate> delegate;
 
 - (id)initWithDelegate:(id<TPFileMonitorDelegate>)aDelegate;
