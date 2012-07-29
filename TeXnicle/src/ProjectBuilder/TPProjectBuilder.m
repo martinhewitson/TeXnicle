@@ -40,13 +40,17 @@
 #import "NSString+FileTypes.h"
 #import "TPProjectBuilderReport.h"
 
-@implementation TPProjectBuilder
+@interface TPProjectBuilder ()
 
-@synthesize projectName;
-@synthesize projectDir;
-@synthesize mainfile;
-@synthesize filesOnDiskList;
-@synthesize reportString;
+@property (copy) NSString *projectName;
+@property (copy) NSString *projectDir;
+@property (copy) NSString *mainfile;
+@property (strong) NSMutableArray *filesOnDiskList;
+@property (strong) NSMutableAttributedString *reportString;
+
+@end
+
+@implementation TPProjectBuilder
 
 
 + (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path

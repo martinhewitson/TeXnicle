@@ -28,14 +28,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TPProjectBuilderReport : NSWindowController {
-@private
-  NSAttributedString *reportString;
-  NSTextView *__unsafe_unretained textView;
-}
+@interface TPProjectBuilderReport : NSWindowController
 
-@property (strong) NSAttributedString *reportString;
-@property (unsafe_unretained) IBOutlet NSTextView *textView;
 
 - (id)initWithReportString:(NSAttributedString*)str;
 

@@ -28,10 +28,14 @@
 
 #import "TPProjectBuilderReport.h"
 
-@implementation TPProjectBuilderReport
+@interface TPProjectBuilderReport ()
 
-@synthesize reportString;
-@synthesize textView;
+@property (strong) NSAttributedString *reportString;
+@property (unsafe_unretained) IBOutlet NSTextView *textView;
+
+@end
+
+@implementation TPProjectBuilderReport
 
 - (id)initWithReportString:(NSAttributedString*)str
 {

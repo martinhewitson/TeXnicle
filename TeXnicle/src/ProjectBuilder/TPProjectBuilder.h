@@ -33,22 +33,9 @@
 @class FileEntity;
 @class ProjectEntity;
 
-@interface TPProjectBuilder : NSObject {
-@private
-  NSString *projectName;
-  NSString *projectDir;
-  NSString *mainfile;
-  NSMutableArray *filesOnDiskList;
-  NSMutableAttributedString *reportString;
-}
+@interface TPProjectBuilder : NSObject
 
-@property (copy) NSString *projectName;
-@property (copy) NSString *projectDir;
-@property (copy) NSString *mainfile;
 @property (unsafe_unretained, readonly) NSURL *projectFileURL;
-@property (strong) NSMutableArray *filesOnDiskList;
-@property (strong) NSMutableAttributedString *reportString;
-
 
 + (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path;
 
