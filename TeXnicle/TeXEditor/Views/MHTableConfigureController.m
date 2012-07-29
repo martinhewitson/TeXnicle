@@ -27,13 +27,14 @@
 
 #import "MHTableConfigureController.h"
 
-@implementation MHTableConfigureController
+@interface MHTableConfigureController ()
 
-@synthesize delegate;
-@synthesize numColsField;
-@synthesize numRowsField;
-@synthesize numberOfRows;
-@synthesize numberOfColumns;
+@property (unsafe_unretained) IBOutlet NSTextField *numRowsField;
+@property (unsafe_unretained) IBOutlet NSTextField *numColsField;
+
+@end
+
+@implementation MHTableConfigureController
 
 - (id)initWithDelegate:(id<MHTableConfigureDelegate>)aDelegate
 {

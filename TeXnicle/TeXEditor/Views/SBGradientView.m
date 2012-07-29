@@ -26,16 +26,12 @@
 //
 #import "SBGradientView.h"
 
+@interface SBGradientView ()
+
+@end
 
 @implementation SBGradientView
 
-// Automatically create accessor methods
-@synthesize startingColor;
-@synthesize endingColor;
-@synthesize angle;
-@synthesize cornerRadius;
-@synthesize borderColor;
-@synthesize borderWidth;
 
 - (id)initWithFrame:(NSRect)frame {
   self = [super initWithFrame:frame];
@@ -54,11 +50,11 @@
 
 - (void)setStartingColor:(NSColor *)aColor
 {
-	if (startingColor) {
-		startingColor = nil;
+	if (_startingColor) {
+		_startingColor = nil;
 	}
 	
-	startingColor = [aColor copy];
+	_startingColor = [aColor copy];
 		
 	aGradient = nil;
 }
@@ -66,11 +62,11 @@
 
 - (void) setEndingColor:(NSColor *)aColor
 {
-	if (endingColor) {
-		endingColor = nil;
+	if (_endingColor) {
+		_endingColor = nil;
 	}
 	
-	endingColor = [aColor copy];
+	_endingColor = [aColor copy];
 	
 	aGradient = nil;
 }
@@ -80,18 +76,18 @@
 	// from startingColor to endingColor
 	if (!aGradient) {
 		aGradient = [[NSGradient alloc]
-									initWithStartingColor:startingColor
-									endingColor:endingColor];
+									initWithStartingColor:_startingColor
+									endingColor:_endingColor];
 	}
-	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:cornerRadius yRadius:cornerRadius];
-	[aGradient drawInBezierPath:path angle:angle];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:_cornerRadius yRadius:_cornerRadius];
+	[aGradient drawInBezierPath:path angle:_angle];
 	
 	// stroke border
-	if (borderColor && borderWidth>0.0) {
-		NSRect r = NSInsetRect([self bounds], borderWidth, borderWidth);
-		path = [NSBezierPath bezierPathWithRoundedRect:r xRadius:cornerRadius yRadius:cornerRadius];
-		[path setLineWidth:borderWidth];
-		[borderColor set];
+	if (_borderColor && _borderWidth>0.0) {
+		NSRect r = NSInsetRect([self bounds], _borderWidth, _borderWidth);
+		path = [NSBezierPath bezierPathWithRoundedRect:r xRadius:_cornerRadius yRadius:_cornerRadius];
+		[path setLineWidth:_borderWidth];
+		[_borderColor set];
 		[path stroke];
 	}
 	

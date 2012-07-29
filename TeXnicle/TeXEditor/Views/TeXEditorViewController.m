@@ -37,24 +37,22 @@
 #import "FileEntity.h"
 #import "externs.h"
 
-@implementation TeXEditorViewController
+@interface TeXEditorViewController ()
 
-@synthesize textView;
-@synthesize delegate;
-@synthesize sectionListPopup;
-@synthesize unfoldButton;
-@synthesize markerButton;
-@synthesize errorPopup;
-@synthesize isHidden;
-@synthesize tableConfigureWindow;
-@synthesize errors;
-@synthesize checker;
-@synthesize syntaxCheckTimer;
-@synthesize performSyntaxCheck;
-@synthesize errorImage;
-@synthesize noErrorImage;
-@synthesize checkFailedImage;
-@synthesize fileBeingSyntaxChecked;
+@property (copy) NSString *fileBeingSyntaxChecked;
+@property (strong) NSImage *errorImage;
+@property (strong) NSImage *noErrorImage;
+@property (strong) NSImage *checkFailedImage;
+@property (strong) NSTimer *syntaxCheckTimer;
+@property (strong) TPSyntaxChecker *checker;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *sectionListPopup;
+@property (unsafe_unretained) IBOutlet NSButton *markerButton;
+@property (unsafe_unretained) IBOutlet NSButton *errorPopup;
+@property (unsafe_unretained) IBOutlet NSButton *unfoldButton;
+
+@end
+
+@implementation TeXEditorViewController
 
 - (id) init
 {
@@ -181,11 +179,11 @@
 {
   if (state) {
     if (![[[self.errorPopup image] name] isEqualToString:@"error"]) {
-      [self.errorPopup setImage:errorImage];
+      [self.errorPopup setImage:_errorImage];
     }
   } else {
     if (![[[self.errorPopup image] name] isEqualToString:@"noerror"]) {
-      [self.errorPopup setImage:noErrorImage];
+      [self.errorPopup setImage:_noErrorImage];
     }
   }
 }
@@ -511,8 +509,8 @@
 - (NSUndoManager *)undoManagerForTextView:(NSTextView *)aTextView
 {
 	// ask my delegate for an undo manager to use
-	if ([[self delegate] respondsToSelector:@selector(currentUndoManager)]) {
-		return [delegate performSelector:@selector(currentUndoManager)];
+	if ([self.delegate respondsToSelector:@selector(currentUndoManager)]) {
+		return [self.delegate performSelector:@selector(currentUndoManager)];
 	}
 	
 	return nil;
@@ -520,8 +518,8 @@
 
 -(BOOL)shouldSyntaxHighlightDocument
 {
-  if ([[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
-    return [[self delegate] shouldSyntaxHighlightDocument];
+  if ([self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    return [self.delegate shouldSyntaxHighlightDocument];
   }
   return NO;
 }

@@ -27,14 +27,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TPPasteTableConfigureWindowController : NSWindowController {
-@private
-  NSTextField *__unsafe_unretained customSeparatorField;
-  NSMatrix *__unsafe_unretained separatorMatrix;
-}
+@interface TPPasteTableConfigureWindowController : NSWindowController
 
-@property (unsafe_unretained) IBOutlet NSTextField *customSeparatorField;
-@property (unsafe_unretained) IBOutlet NSMatrix *separatorMatrix;
 
 - (IBAction)selectNewSeparator:(id)sender;
 

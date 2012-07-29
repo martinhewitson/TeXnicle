@@ -34,18 +34,9 @@
 
 @end
 
-@interface MHTableConfigureController : NSWindowController {
-@private
-  NSUInteger numberOfRows;
-  NSUInteger numberOfColumns;
-  id<MHTableConfigureDelegate> __unsafe_unretained delegate;
-  NSTextField *__unsafe_unretained numRowsField;
-  NSTextField *__unsafe_unretained numColsField;
-}
+@interface MHTableConfigureController : NSWindowController
 
 @property (unsafe_unretained) id<MHTableConfigureDelegate> delegate;
-@property (unsafe_unretained) IBOutlet NSTextField *numRowsField;
-@property (unsafe_unretained) IBOutlet NSTextField *numColsField;
 @property (assign) NSUInteger numberOfRows;
 @property (assign) NSUInteger numberOfColumns;
 

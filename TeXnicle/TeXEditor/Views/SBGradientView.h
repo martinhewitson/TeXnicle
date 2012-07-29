@@ -29,16 +29,8 @@
 
 
 @interface SBGradientView : NSView {
-	
-	NSColor *borderColor;
-  NSColor *startingColor;
-  NSColor *endingColor;
-	int cornerRadius;
-  int angle;
-	CGFloat borderWidth;
-	
+@private
 	NSGradient *aGradient;
-	
 }
 
 // Define the variables as properties
