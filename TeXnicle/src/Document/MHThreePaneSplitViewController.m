@@ -35,38 +35,34 @@
 
 @implementation MHThreePaneSplitViewController
 
-@synthesize leftView;
-@synthesize centerView;
-@synthesize rightView;
-@synthesize mainSplitView;
 
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 //  NSLog(@"Resize with old size %@", NSStringFromSize(oldSize));
   
   NSSize splitViewSize = [sender frame].size;  
-  NSSize leftSize = [leftView frame].size;
+  NSSize leftSize = [self.leftView frame].size;
   leftSize.height = splitViewSize.height;
   
-  NSSize centerSize = [centerView frame].size;
+  NSSize centerSize = [self.centerView frame].size;
   centerSize.height = splitViewSize.height;
   
   NSSize rightSize;
   rightSize.width = splitViewSize.width - centerSize.width;
   rightSize.width -= 2.0*[sender dividerThickness];
   
-  if (![sender isSubviewCollapsed:leftView]) {
+  if (![sender isSubviewCollapsed:self.leftView]) {
     rightSize.width -= leftSize.width;
   }
   
   rightSize.height = splitViewSize.height;
   
-  if (![sender isSubviewCollapsed:leftView]) {
-    [leftView setFrameSize:leftSize];
+  if (![sender isSubviewCollapsed:self.leftView]) {
+    [self.leftView setFrameSize:leftSize];
   }
-  [centerView setFrameSize:centerSize];
-  if (![sender isSubviewCollapsed:rightView]) {
-    [rightView setFrameSize:rightSize];
+  [self.centerView setFrameSize:centerSize];
+  if (![sender isSubviewCollapsed:self.rightView]) {
+    [self.rightView setFrameSize:rightSize];
   }
   
   [sender adjustSubviews];
@@ -75,12 +71,12 @@
 - (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
 {
   
-  if (subview == leftView || subview == centerView)
+  if (subview == self.leftView || subview == self.centerView)
     return NO;
   
   
-  if (subview == rightView) {
-    NSRect b = [rightView bounds];
+  if (subview == self.rightView) {
+    NSRect b = [self.rightView bounds];
     if (b.size.width < kSplitViewRightMinSize) {
       return NO;
     }
@@ -92,7 +88,7 @@
 
 - (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview
 {
-  if (subview == centerView) {
+  if (subview == self.centerView) {
     return NO;
   }
   
@@ -103,7 +99,7 @@
 {
   if (dividerIndex == 0) {
     NSRect b = [splitView bounds];
-    NSRect rb = [rightView bounds];
+    NSRect rb = [self.rightView bounds];
     CGFloat max =  b.size.width - rb.size.width - kSplitViewCenterMinSize;
     return max;
   }
@@ -124,9 +120,9 @@
   }
   
   if (dividerIndex == 1) {
-    NSRect lb = [leftView bounds];
+    NSRect lb = [self.leftView bounds];
     
-    if ([splitView isSubviewCollapsed:leftView]) {
+    if ([splitView isSubviewCollapsed:self.leftView]) {
       return kSplitViewCenterMinSize;
     }
     return lb.size.width + kSplitViewCenterMinSize;
@@ -139,8 +135,8 @@
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
 {
-  NSSize leftSize = [leftView frame].size;
-  NSSize centerSize = [centerView frame].size;  
+  NSSize leftSize = [self.leftView frame].size;
+  NSSize centerSize = [self.centerView frame].size;  
 //  NSSize rightSize = [rightView frame].size;
   
 //  NSLog(@"Left %@", NSStringFromSize(leftSize));
@@ -149,16 +145,16 @@
   
   CGFloat w = 0.0;
   
-  if (![mainSplitView isSubviewCollapsed:leftView]) {
+  if (![self.mainSplitView isSubviewCollapsed:self.leftView]) {
     w += leftSize.width;
-    w += [mainSplitView dividerThickness];
+    w += [self.mainSplitView dividerThickness];
   }
-  if (![mainSplitView isSubviewCollapsed:centerView]) {
+  if (![self.mainSplitView isSubviewCollapsed:self.centerView]) {
     w += centerSize.width;
-    w += [mainSplitView dividerThickness];
+    w += [self.mainSplitView dividerThickness];
   }
   
-  if (![mainSplitView isSubviewCollapsed:rightView]) {
+  if (![self.mainSplitView isSubviewCollapsed:self.rightView]) {
     if ((frameSize.width - w) < 200.0) {
       frameSize.width = w + 200.0;
     }  

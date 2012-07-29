@@ -32,9 +32,7 @@
 #import "externs.h"
 
 @implementation MHFileReader
-@synthesize encodings;
-@synthesize encodingNames;
-@synthesize selectedIndex;
+
 
 + (NSStringEncoding)defaultEncoding
 {

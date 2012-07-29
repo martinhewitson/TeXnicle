@@ -28,13 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MHThreePaneSplitViewController : NSObject <NSSplitViewDelegate, NSWindowDelegate> {
-@private
-  NSView *__unsafe_unretained leftView;
-  NSView *__unsafe_unretained rightView;
-  NSView *__unsafe_unretained centerView;
-  NSSplitView *__unsafe_unretained mainSplitView;
-}
+@interface MHThreePaneSplitViewController : NSObject <NSSplitViewDelegate, NSWindowDelegate>
 
 @property (unsafe_unretained) IBOutlet NSView *leftView;
 @property (unsafe_unretained) IBOutlet NSView *rightView;

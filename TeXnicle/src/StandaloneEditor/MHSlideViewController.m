@@ -30,11 +30,6 @@
 
 @implementation MHSlideViewController
 
-@synthesize contentView;
-@synthesize sidePanel;
-@synthesize mainPanel;
-@synthesize rightSided;
-
 - (void) awakeFromNib
 {
   _sidePanelisVisible = YES;
@@ -57,9 +52,9 @@
   if (_sidePanelisVisible)
     return;
   
-  NSRect sr = [sidePanel frame];
-  NSRect mr = [mainPanel frame];
-  NSRect fr = [contentView frame];
+  NSRect sr = [self.sidePanel frame];
+  NSRect mr = [self.mainPanel frame];
+  NSRect fr = [self.contentView frame];
   NSRect nsr;
   NSRect nmr;
   CGFloat w = sr.size.width;
@@ -72,11 +67,11 @@
     nmr = NSMakeRect(w, mr.origin.y, fr.size.width-w, mr.size.height);
   }
   if (animate) {
-    [[sidePanel animator] setFrame:nsr];
-    [[mainPanel animator] setFrame:nmr];
+    [[self.sidePanel animator] setFrame:nsr];
+    [[self.mainPanel animator] setFrame:nmr];
   } else {
-    [sidePanel setFrame:nsr];
-    [mainPanel setFrame:nmr];
+    [self.sidePanel setFrame:nsr];
+    [self.mainPanel setFrame:nmr];
   }
   _sidePanelisVisible = YES;
 }
@@ -86,9 +81,9 @@
   if (!_sidePanelisVisible)
     return;
   
-  NSRect sr = [sidePanel frame];
-  NSRect mr = [mainPanel frame];
-  NSRect fr = [contentView frame];
+  NSRect sr = [self.sidePanel frame];
+  NSRect mr = [self.mainPanel frame];
+  NSRect fr = [self.contentView frame];
   NSRect nsr;
   NSRect nmr;
   CGFloat w = sr.size.width;
@@ -101,11 +96,11 @@
     nmr = NSMakeRect(0, mr.origin.y, fr.size.width, mr.size.height);
   }
   if (animate) {
-    [[sidePanel animator] setFrame:nsr];
-    [[mainPanel animator] setFrame:nmr];
+    [[self.sidePanel animator] setFrame:nsr];
+    [[self.mainPanel animator] setFrame:nmr];
   } else {
-    [sidePanel setFrame:nsr];
-    [mainPanel setFrame:nmr];
+    [self.sidePanel setFrame:nsr];
+    [self.mainPanel setFrame:nmr];
   }
   _sidePanelisVisible = NO;
 }

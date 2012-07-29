@@ -28,12 +28,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MHFileReader : NSViewController {
-@private
-  NSArray *encodings;
-  NSArray *encodingNames;
-  NSNumber *selectedIndex;
-}
+@interface MHFileReader : NSViewController
 
 @property (strong) NSArray *encodings;
 @property (strong) NSArray *encodingNames;

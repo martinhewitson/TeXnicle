@@ -61,71 +61,33 @@ NSString * const TPExternalDocEditorWidthKey = @"TPExternalDocEditorWidthKey";
 NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectKey"; 
 NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth"; 
 
+@interface ExternalTeXDoc ()
+
+@property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *centerView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
+@property (unsafe_unretained) IBOutlet MHControlsTabBarController *tabbarController;
+@property (unsafe_unretained) IBOutlet MHInfoTabBarController *infoTabbarController;
+@property (unsafe_unretained) IBOutlet NSView *warningsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *pdfViewContainer;
+@property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
+@property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
+@property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
+@property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
+@property (unsafe_unretained) IBOutlet NSView *prefsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
+@property (unsafe_unretained) IBOutlet NSView *paletteContainerView;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+
+@end
+
 @implementation ExternalTeXDoc
 
-@synthesize lastEdit = _lastEdit;
-
-@synthesize documentData = _documentData;
-@synthesize texEditorContainer = _texEditorContainer;
-@synthesize texEditorViewController = _texEditorViewController;
-@synthesize fileLoadDate = _fileLoadDate;
-@synthesize fileMonitor = _fileMonitor;
-@synthesize engineManager = _engineManager;
-@synthesize settings = _settings;
-
-@synthesize miniConsole = _miniConsole;
-@synthesize embeddedConsoleContainer = _embeddedConsoleContainer;
-@synthesize embeddedConsoleViewController = _embeddedConsoleViewController;
-
-@synthesize mainWindow = _mainWindow;
-@synthesize pdfViewContainer = _pdfViewContainer;
-@synthesize pdfViewerController = _pdfViewerController;
-@synthesize results = _results;
-@synthesize statusViewController = _statusViewController;
-@synthesize statusViewContainer = _statusViewContainer;
-
-@synthesize tabbarController = _tabbarController;
-@synthesize infoTabbarController = _infoTabbarController;
-
-@synthesize warningsContainerView = _warningsContainerView;
-@synthesize warningsViewController = _warningsViewController;
-
-@synthesize labelsContainerView = _labelsContainerView;
-@synthesize labelsViewController = _labelsViewController;
-
-@synthesize citationsContainerView = _citationsContainerView;
-@synthesize citationsViewController = _citationsViewController;
-
-@synthesize commandsContainerView = _commandsContainerView;
-@synthesize commandsViewController = _commandsViewController;
-
-@synthesize palette = _palette;
-@synthesize paletteContainerView = _paletteContainerView;
-
-@synthesize library = _library;
-@synthesize libraryContainerView = _libraryContainerView;
-
-@synthesize outlineViewController = _outlineViewController;
-@synthesize outlineViewContainer = _outlineViewContainer;
-
-@synthesize engineSettingsController = _engineSettingsController;
-@synthesize prefsContainerView = _prefsContainerView;
-
-@synthesize spellcheckerViewController = _spellcheckerViewController;
-@synthesize spellCheckerContainerView = _spellCheckerContainerView;
-
-@synthesize pdfViewer = _pdfViewer;
-
-@synthesize leftView = _leftView;
-@synthesize centerView = _centerView;
-@synthesize rightView = _rightView;
-@synthesize splitView = _splitView;
-
-@synthesize templateEditor = _templateEditor;
-
-@synthesize liveUpdateTimer = _liveUpdateTimer;
-@synthesize metadataUpdateTimer = _metadataUpdateTimer;
-@synthesize maxOutlineViewDepth = _maxOutlineViewDepth;
 
 - (id) init
 {
@@ -627,10 +589,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // stop timers
   [self stopTimers];
   
-  // max outline view depth
-  
-  // results
-  
   // pdfviewer
   self.pdfViewer.delegate = nil;
   
@@ -649,20 +607,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // pdf view controller
   self.pdfViewerController.delegate = nil;
 
-  // mini console
-  
-  // console viewer
-  
   // outline view controller
   self.outlineViewController.delegate = nil;
   
-  // status view controller
-  
-  // spell checker  
+  // spell checker
   self.spellcheckerViewController.delegate = nil;
   [self.spellcheckerViewController stop];
-  
-  // settings
   
   // engine settings controller
   self.engineSettingsController.delegate = nil;
@@ -677,9 +627,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
   
-  // file load date
-  
-  // file monitor  
+  // file monitor
   self.fileMonitor.delegate = nil;
   
   // engine manager
@@ -687,10 +635,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // template editor
   self.templateEditor.delegate = nil;
- 
-  // document data
-  
-  // last edit data
 }
 
 
@@ -1260,7 +1204,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     NSString *ext = [[NSWorkspace sharedWorkspace] preferredFilenameExtensionForType:type];
     NSString *imagePath = [[root stringByAppendingPathComponent:fileRoot] stringByAppendingPathExtension:ext];
     while ([fm fileExistsAtPath:imagePath]) {
-      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%d", count]] stringByAppendingPathExtension:ext];
+      imagePath = [[root stringByAppendingPathComponent:[fileRoot stringByAppendingFormat:@"-%ld", count]] stringByAppendingPathExtension:ext];
       count++;
     }
     
