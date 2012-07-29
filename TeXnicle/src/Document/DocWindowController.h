@@ -34,15 +34,7 @@
 @class FileEntity;
 @class TeXEditorViewController;
 
-@interface DocWindowController : NSWindowController <NSWindowDelegate, TeXTextViewDelegate, BookmarkManagerDelegate> {
-
-	IBOutlet NSView *__unsafe_unretained texEditorContainer;
-	TeXProjectDocument *__unsafe_unretained mainDocument;
-	FileEntity *__unsafe_unretained file;
-	TeXEditorViewController *texEditorViewController;
-  TPStatusViewController *statusViewController;
-  NSView *__unsafe_unretained statusViewContainer;
-}
+@interface DocWindowController : NSWindowController <NSWindowDelegate, TeXTextViewDelegate, BookmarkManagerDelegate>
 
 @property (readwrite,unsafe_unretained) FileEntity *file;
 @property (strong) TeXEditorViewController *texEditorViewController;

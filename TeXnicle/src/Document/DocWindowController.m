@@ -37,14 +37,12 @@
 #import "TPSupportedFilesManager.h"
 #import "MHSynctexController.h"
 
+@interface DocWindowController()
+
+@end
+
 @implementation DocWindowController
 
-@synthesize file;
-@synthesize texEditorContainer;
-@synthesize texEditorViewController;
-@synthesize mainDocument;
-@synthesize statusViewController;
-@synthesize statusViewContainer;
 
 - (id) initWithFile:(FileEntity*)aFile document:(id)document
 {
@@ -75,7 +73,7 @@
   [self.statusViewContainer addSubview:self.statusViewController.view];
   
   
-	FileDocument *doc = [file document];
+	FileDocument *doc = [self.file document];
 	
 	// Add the textview's layout manager to the list of managers
 	// for the text storage
@@ -108,14 +106,14 @@
   
   [self.texEditorViewController enableEditor];
   
-  [self.statusViewController setFilenameText:[file pathOnDisk]];
+  [self.statusViewController setFilenameText:[self.file pathOnDisk]];
   [self.statusViewController enable:YES];
   [self updateCursorInfoText];
 }
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
-  [file decreaseActiveCount];
+  [self.file decreaseActiveCount];
 }
 
 - (void) dealloc
@@ -160,7 +158,7 @@
 
 - (IBAction) saveDocument:(id)sender
 {
-	[mainDocument saveDocument:sender];
+	[self.mainDocument saveDocument:sender];
   [[self window] setDocumentEdited:NO];
   [self updateEditedState];
 }
@@ -189,7 +187,7 @@
 
 - (void) updateEditedState
 {
-	BOOL fileState = [file hasEdits];
+	BOOL fileState = [self.file hasEdits];
 //  NSLog(@"File has edits %d", fileState);
 //  NSLog(@"Document state %d", [[self window] isDocumentEdited]);
 	BOOL myState =  [[self window] isDocumentEdited];
@@ -212,18 +210,18 @@
 
 -(id)project
 {
-  return [file valueForKey:@"project"];
+  return [self.file valueForKey:@"project"];
 }
 
 -(NSString*)fileExtension
 {
-  return [[file pathOnDisk] pathExtension];
+  return [[self.file pathOnDisk] pathExtension];
 }
 
 
 - (NSArray*) listOfTeXFilesPrependedWith:(NSString*)string
 {
-	return [mainDocument listOfTeXFilesPrependedWith:string];
+	return [self.mainDocument listOfTeXFilesPrependedWith:string];
 }
 
 -(NSString*)codeForCommand:(NSString*)command
@@ -238,24 +236,24 @@
 
 - (NSArray*) listOfCitations
 {
-	return [mainDocument listOfCitations];
+	return [self.mainDocument listOfCitations];
 }
 
 - (NSArray*)listOfCommands
 {
-  return [mainDocument listOfCommands];
+  return [self.mainDocument listOfCommands];
 }
 
 - (NSArray*) listOfReferences
 {
-	return [mainDocument listOfReferences];
+	return [self.mainDocument listOfReferences];
 }
 
 - (BOOL) shouldSyntaxHighlightDocument
 {
 	// If this is not a TeX document being edited, then we can return just 
 	// applying the plain doc settings
-	NSString *ext = [file valueForKey:@"extension"] ;
+	NSString *ext = [self.file valueForKey:@"extension"] ;
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   for (NSString *lext in [sfm supportedExtensionsForHighlighting]) {
     if ([ext isEqual:lext]) {
@@ -399,7 +397,7 @@
     [self.texEditorViewController.textView expandAll:self];
     
     // Now highlight the search term in that 
-    [self.texEditorViewController.textView jumpToLine:linenumber inFile:file select:YES];
+    [self.texEditorViewController.textView jumpToLine:linenumber inFile:self.file select:YES];
   }
   
   //  [self.texEditorViewController.textView selectRange:aRange scrollToVisible:YES animate:YES];
