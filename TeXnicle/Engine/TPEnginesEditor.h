@@ -29,25 +29,9 @@
 #import "TPEngineManager.h"
 #import "HHValidatedButton.h"
 
-@interface TPEnginesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate, TPEngineManagerDelegate> {
-@private
-  TPEngineManager *engineManager;
-  NSTableView *__unsafe_unretained tableView;
-  HHValidatedButton *__unsafe_unretained editButton;
-  HHValidatedButton *__unsafe_unretained duplicateButton;
-  HHValidatedButton *__unsafe_unretained addEngineButton;
-  HHValidatedButton *__unsafe_unretained deleteButton;
-  HHValidatedButton *__unsafe_unretained revealButton;
-}
+@interface TPEnginesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate, TPEngineManagerDelegate>
 
 @property (strong) TPEngineManager *engineManager;
-@property (unsafe_unretained) IBOutlet NSTableView *tableView;
-
-@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *addEngineButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
 
 - (TPEngine*)selectedEngine;
 - (TPEngine*)engineAtRow:(NSInteger)aRow;

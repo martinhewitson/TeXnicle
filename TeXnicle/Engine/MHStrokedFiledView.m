@@ -29,11 +29,6 @@
 
 @implementation MHStrokedFiledView
 
-@synthesize fillColor;
-@synthesize strokeColor;
-@synthesize strokeSides;
-
-
 - (id)initWithFrame:(NSRect)frame
 {
   self = [super initWithFrame:frame];

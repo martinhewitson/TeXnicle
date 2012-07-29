@@ -34,27 +34,6 @@
 
 @implementation TPEngine
 
-@synthesize path;
-@synthesize script;
-@synthesize name;
-@synthesize documentPath;
-
-@synthesize doBibtex;
-@synthesize doPS2PDF;
-@synthesize nCompile;
-@synthesize supportsDoBibtex;
-@synthesize supportsDoPS2PDF;
-@synthesize supportsNCompile;
-
-@synthesize imageIncludeString;
-
-@synthesize openConsole;
-
-@synthesize builtIn;
-@synthesize compiling;
-
-@synthesize delegate;
-
 - (NSString*)description
 {
   return [NSString stringWithFormat:@"%p: %@, %@, %@, [%d]", self, self.name, self.path, self.documentPath, self.builtIn];

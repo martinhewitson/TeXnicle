@@ -43,12 +43,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 -(NSString*)workingDirectory;
 @end
 
-@interface TPEngineManager : NSObject <TPEngineDelegate> {
-@private
-  MHConsoleManager *consoleManager;
-  id<TPEngineManagerDelegate> __unsafe_unretained delegate;
-  NSMutableArray *engines;
-}
+@interface TPEngineManager : NSObject <TPEngineDelegate>
 
 @property (unsafe_unretained) id<TPEngineManagerDelegate> delegate;
 @property (strong) NSMutableArray *engines;

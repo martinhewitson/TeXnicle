@@ -27,12 +27,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MHStrokedFiledView : NSView {
-@private
-  NSColor *fillColor;
-  NSColor *strokeColor;
-  BOOL strokeSides;
-}
+@interface MHStrokedFiledView : NSView
 
 @property (strong) NSColor *fillColor;
 @property (strong) NSColor *strokeColor;

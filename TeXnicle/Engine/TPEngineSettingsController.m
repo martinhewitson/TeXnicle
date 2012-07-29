@@ -33,8 +33,6 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
 @implementation TPEngineSettingsController
 
-@synthesize delegate;
-
 - (id)initWithDelegate:(id<TPEngineSettingsDelegate>)aDelegate
 {
   self = [super initWithNibName:@"TPEngineSettingsController" bundle:nil];

@@ -30,15 +30,9 @@
 
 @class TeXEditorViewController;
 
-@interface TPEngineEditor : NSDocument <TeXTextViewDelegate> {
-@private
-  NSMutableAttributedString *__unsafe_unretained documentData;
-  TeXEditorViewController *texEditorViewController;
-  NSView *__unsafe_unretained texEditorContainer;
-}
+@interface TPEngineEditor : NSDocument <TeXTextViewDelegate>
 
-
-@property(readwrite, unsafe_unretained) NSMutableAttributedString *documentData;
+@property (strong) NSMutableAttributedString *documentData;
 @property (strong) TeXEditorViewController *texEditorViewController;
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 

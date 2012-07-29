@@ -45,21 +45,6 @@
   NSPipe *pipe;
 	int compilationsDone;
 	BOOL abortCompile;
-  BOOL compiling;
-  NSString *path;
-  NSString *script;
-  NSString *name;
-  NSString *documentPath;
-  BOOL doBibtex;
-  BOOL doPS2PDF;
-  BOOL openConsole;
-  NSInteger nCompile;
-  BOOL supportsDoBibtex;
-  BOOL supportsDoPS2PDF;
-  NSInteger supportsNCompile;
-  BOOL builtIn;
-  id<TPEngineDelegate> __unsafe_unretained delegate;
-  NSString *imageIncludeString;
 }
 
 @property (unsafe_unretained) id<TPEngineDelegate> delegate;

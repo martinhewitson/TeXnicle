@@ -33,10 +33,6 @@
 
 @implementation TPEngineEditor
 
-@synthesize documentData;
-@synthesize texEditorViewController;
-@synthesize texEditorContainer;
-
 - (NSString *)windowNibName 
 {
 	// Implement this to return a nib to load OR implement -makeWindowControllers to manually create your controllers.
@@ -73,6 +69,8 @@
 {	
   //	NSLog(@"Closing window %@", [[NSDocumentController sharedDocumentController] documents]);
 	
+  self.texEditorViewController.delegate = nil;
+  
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
     //    NSLog(@"Showing startup...");
 		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
@@ -84,6 +82,11 @@
 -(BOOL)shouldSyntaxHighlightDocument
 {
   return YES;
+}
+
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)aChecker
+{
+  return NO;
 }
 
 - (IBAction)reopenUsingEncoding:(id)sender

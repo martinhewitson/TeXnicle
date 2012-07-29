@@ -28,16 +28,19 @@
 #import "TPEnginesEditor.h"
 #import "TPEngine.h"
 
+@interface TPEnginesEditor ()
+
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
+
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addEngineButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+
+@end
+
 @implementation TPEnginesEditor
-
-@synthesize engineManager;
-@synthesize tableView;
-
-@synthesize editButton;
-@synthesize duplicateButton;
-@synthesize addEngineButton;
-@synthesize deleteButton;
-@synthesize revealButton;
 
 
 - (id)init

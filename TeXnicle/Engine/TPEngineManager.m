@@ -36,10 +36,6 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 @implementation TPEngineManager
 
-@synthesize delegate;
-@synthesize engines;
-@synthesize consoleManager;
-
 +(NSArray*)builtinEngineNames
 {
   return @[@"xelatex", @"latex", @"pdflatex", @"context", @"latexmk", @"Lilypond"];
