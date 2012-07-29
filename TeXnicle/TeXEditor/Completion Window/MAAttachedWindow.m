@@ -66,7 +66,7 @@
 		[self setOpaque:NO];
 		[self setHasShadow:YES];
 		[self useOptimizedDrawing:YES];
-		[self setReleasedWhenClosed:YES];
+		[self setReleasedWhenClosed:NO];
 		
 		// Set up some sensible defaults for display.
 		_MABackgroundColor = [MAATTACHEDWINDOW_DEFAULT_BACKGROUND_COLOR copy];
