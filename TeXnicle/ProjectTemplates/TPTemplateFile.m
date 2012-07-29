@@ -30,9 +30,12 @@
 #import "NSString+FileTypes.h"
 #import "MHFileReader.h"
 
+@interface TPTemplateFile ()
+
+
+@end
+
 @implementation TPTemplateFile
-@synthesize stringContent;
-@synthesize dataContent;
 
 - (id) initWithPath:(NSString*)aPath
 {

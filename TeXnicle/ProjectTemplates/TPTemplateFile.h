@@ -30,9 +30,6 @@
 #import "TPTemplateItem.h"
 
 @interface TPTemplateFile : TPTemplateItem {
-@private
-  NSString *stringContent;
-  NSData   *dataContent;
 }
 
 @property (copy) NSString *stringContent;
