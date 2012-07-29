@@ -42,22 +42,22 @@
 }
 
 // core data properties
-@property (nonatomic, retain) NSData * content;
-@property (nonatomic, retain) NSString * cursor;
-@property (nonatomic, retain) NSString * extension;
-@property (nonatomic, retain) NSDate * fileLoadDate;
-@property (nonatomic, retain) NSNumber * isText;
-@property (nonatomic, retain) NSDate * lastEditDate;
-@property (nonatomic, retain) NSString * visibleRect;
-@property (nonatomic, retain) NSNumber * wasOpen;
-@property (nonatomic, retain) NSSet *bookmarks;
-@property (nonatomic, retain) ProjectEntity *mainFileOfProject;
+@property (nonatomic, strong) NSData * content;
+@property (nonatomic, strong) NSString * cursor;
+@property (nonatomic, strong) NSString * extension;
+@property (nonatomic, strong) NSDate * fileLoadDate;
+@property (nonatomic, strong) NSNumber * isText;
+@property (nonatomic, strong) NSDate * lastEditDate;
+@property (nonatomic, strong) NSString * visibleRect;
+@property (nonatomic, strong) NSNumber * wasOpen;
+@property (nonatomic, strong) NSSet *bookmarks;
+@property (nonatomic, strong) ProjectEntity *mainFileOfProject;
 
 // other properties
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
-@property (readonly) NSString *consolidatedFileContents;
-@property (retain) TPFileEntityMetadata *metadata;
+@property (unsafe_unretained, readonly) NSString *consolidatedFileContents;
+@property (strong) TPFileEntityMetadata *metadata;
 @property (assign) NSInteger isActive;
 
 - (void)increaseActiveCount;

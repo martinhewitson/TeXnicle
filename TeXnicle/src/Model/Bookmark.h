@@ -32,18 +32,18 @@
 
 @interface Bookmark : NSManagedObject {
 @private
-  NSAttributedString *selectedDisplayString;
-  NSAttributedString *displayString;
+  NSAttributedString *__unsafe_unretained selectedDisplayString;
+  NSAttributedString *__unsafe_unretained displayString;
 }
 
 // core data properties
-@property (nonatomic, retain) NSNumber * linenumber;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) FileEntity *parentFile;
+@property (nonatomic, strong) NSNumber * linenumber;
+@property (nonatomic, strong) NSString * text;
+@property (nonatomic, strong) FileEntity *parentFile;
 
 // other properties
-@property (readonly) NSAttributedString *selectedDisplayString;
-@property (readonly) NSAttributedString *displayString;
+@property (unsafe_unretained, readonly) NSAttributedString *selectedDisplayString;
+@property (unsafe_unretained, readonly) NSAttributedString *displayString;
 
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inFile:(FileEntity*)aFile inManagedObjectContext:(NSManagedObjectContext*)aMOC;
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inArray:(NSArray*)bookmarks;

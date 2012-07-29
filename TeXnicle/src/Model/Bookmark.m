@@ -30,6 +30,7 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 #import "externs.h"
+#import "FileDocument.h"
 
 @implementation Bookmark
 @dynamic linenumber;
@@ -56,7 +57,7 @@
   // look for changes
   [bookmark observeTextStorage];
   
-  return [bookmark autorelease];
+  return bookmark;
 }
         
         
@@ -71,7 +72,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super dealloc];
 }
 
 - (void) handleTextChanged:(NSNotification*)aNote
@@ -81,7 +81,7 @@
 
 - (void) updateText
 {
-  NSMutableAttributedString *aStr = [[[[self.parentFile document] textStorage] mutableCopy] autorelease];
+  NSMutableAttributedString *aStr = [[[self.parentFile document] textStorage] mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
@@ -129,7 +129,7 @@
   if ([self.text length]==0) {
     [att addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [att length]-[lineNumberString length])];
   }
-  return [att autorelease];
+  return att;
 }
 
 - (NSAttributedString*)displayString
@@ -150,7 +150,6 @@
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:lineNumberString];
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [str length])];
   [str appendAttributedString:att];
-  [att release];
   
   // set paragraph
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
@@ -159,12 +158,11 @@
   [str addAttribute:NSParagraphStyleAttributeName
               value:ps
               range:NSMakeRange(0, [str length])];
-  [ps release];
   
   if ([self.text length]==0) {
     [str addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [str length]-[lineNumberString length])];
   }
-  return [str autorelease];
+  return str;
 }
 
 

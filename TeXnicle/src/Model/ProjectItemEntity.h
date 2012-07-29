@@ -38,20 +38,20 @@
 }
 
 // core data properties
-@property (nonatomic, retain) NSString * filepath;
-@property (nonatomic, retain) NSNumber * isExpanded;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * sortIndex;
-@property (nonatomic, retain) NSSet *children;
-@property (nonatomic, retain) ProjectItemEntity *parent;
-@property (nonatomic, retain) ProjectEntity *project;
+@property (nonatomic, strong) NSString * filepath;
+@property (nonatomic, strong) NSNumber * isExpanded;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSNumber * sortIndex;
+@property (nonatomic, strong) NSSet *children;
+@property (nonatomic, strong) ProjectItemEntity *parent;
+@property (nonatomic, strong) ProjectEntity *project;
 
 // other properties
 @property (assign) BOOL isSelected;
-@property (readonly) NSString *pathRelativeToProject;
-@property (readonly) NSString *projectPath;
-@property (readonly) NSString *pathOnDisk;
-@property (readonly) NSString *shortName;
+@property (unsafe_unretained, readonly) NSString *pathRelativeToProject;
+@property (unsafe_unretained, readonly) NSString *projectPath;
+@property (unsafe_unretained, readonly) NSString *pathOnDisk;
+@property (unsafe_unretained, readonly) NSString *shortName;
 @property (readonly) BOOL existsOnDisk;
 @property (readonly) BOOL isLeaf;
 @property (readonly) BOOL isManaged;

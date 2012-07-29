@@ -56,7 +56,7 @@
 
 - (void) awakeFromInsert
 {
-  self.metadata = [[[TPFileEntityMetadata alloc] initWithParent:self] autorelease];
+  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
@@ -73,7 +73,7 @@
 {
 	[super awakeFromFetch];
 	
-  self.metadata = [[[TPFileEntityMetadata alloc] initWithParent:self] autorelease];
+  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self reloadFromDisk];
 	
@@ -138,7 +138,6 @@
       [self setPrimitiveValue:[NSNumber numberWithBool:NO] forKey:@"isText"];
     }
     // release file reader
-    [fr release];
 	} 
   
   // Reconfigure the supporting FileDocument
@@ -242,11 +241,8 @@
     [[document textStorage] setAttributedString:attStr];
     [[document textStorage] endEditing];
     
-    [str release];
-    [attStr release];
     
     // release file reader
-    [fr release];
     
 //		[document release];
 	} else {
@@ -284,7 +280,6 @@
   
 	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);
-		[document release];
 		document = nil;
 	}
   self.content = nil;
@@ -371,10 +366,8 @@
 			}
       
       // clean up
-      [contentStr release];
       
       // release file reader
-      [fr release];
 		}
 	}
 	
@@ -397,9 +390,8 @@
   MHFileReader *fr = [[MHFileReader alloc] init];
   NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
 	NSString *str = [[NSString alloc] initWithData:data encoding:encoding];
-  [fr release];
   
-	return [str autorelease];
+	return str;
 }
 
 - (NSString*) workingContentString
@@ -488,7 +480,7 @@
 	NSData *data = [self valueForKey:@"content"];
 	if (data && [data length]>0) {
     
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     [fr writeDataToFileAsString:data toURL:[NSURL fileURLWithPath:filepath]];
     
 		// update the save time for this file

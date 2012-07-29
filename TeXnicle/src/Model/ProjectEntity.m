@@ -55,7 +55,7 @@
     // make new settings
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
     Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];
-    self.settings = [newSettings autorelease];
+    self.settings = newSettings;
 //    NSLog(@"Made settings %@", self.settings);
   }
   
@@ -63,7 +63,7 @@
     // make new UI settings
     NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
     UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];
-    self.uiSettings = [newUISettings autorelease];
+    self.uiSettings = newUISettings;
 //    NSLog(@"Made UI settings %@", self.uiSettings);
   }
 }
@@ -92,7 +92,6 @@
 		
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];	
-	[fetchRequest release];	
 	
 	[self didAccessValueForKey:@"items"];
 	return [NSSet setWithArray:fetchResults];
@@ -156,7 +155,6 @@
 	
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	[fetchRequest release];
   
 	if (fetchError != nil) {
 		[NSApp presentError:fetchError];

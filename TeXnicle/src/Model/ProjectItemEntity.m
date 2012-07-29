@@ -116,7 +116,6 @@
 	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
 		ProjectEntity *mocproject = [fetchResults objectAtIndex:0];
-		[fetchRequest release];
 		return mocproject;
 	}
 	
@@ -125,7 +124,6 @@
 	} else {
 		// should present custom error message...
 	}
-	[fetchRequest release];	
 
 	return proj;
 }

@@ -35,14 +35,14 @@
 }
 
 // core data properties
-@property (nonatomic, retain) NSNumber * doBibtex;
-@property (nonatomic, retain) NSNumber * doPS2PDF;
-@property (nonatomic, retain) NSString * engineName;
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSNumber * nCompile;
-@property (nonatomic, retain) NSNumber * openConsole;
-@property (nonatomic, retain) NSNumber * showStatusBar;
-@property (nonatomic, retain) ProjectEntity *project;
+@property (nonatomic, strong) NSNumber * doBibtex;
+@property (nonatomic, strong) NSNumber * doPS2PDF;
+@property (nonatomic, strong) NSString * engineName;
+@property (nonatomic, strong) NSString * language;
+@property (nonatomic, strong) NSNumber * nCompile;
+@property (nonatomic, strong) NSNumber * openConsole;
+@property (nonatomic, strong) NSNumber * showStatusBar;
+@property (nonatomic, strong) ProjectEntity *project;
 
 
 @end
