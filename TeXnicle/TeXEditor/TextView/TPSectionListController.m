@@ -34,10 +34,14 @@
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
+@interface TPSectionListController ()
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@end
+
 @implementation TPSectionListController
 
-@synthesize timer;
-@synthesize delegate;
 
 - (id) init
 {
@@ -192,7 +196,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		return;
   }
 
-	if (!timer) {
+	if (!_timer) {
 //    NSLog(@"No timer");
 		return;
   }

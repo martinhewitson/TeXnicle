@@ -28,13 +28,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MHLineNumber : NSObject {
-@private
-  NSUInteger number;
-  NSUInteger index;
-  NSRange range;
-  NSRect rect;
-}
+@interface MHLineNumber : NSObject
 
 @property (assign) NSRect rect;
 @property (assign) NSUInteger number;

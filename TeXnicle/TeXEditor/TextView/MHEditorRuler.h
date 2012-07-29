@@ -33,18 +33,8 @@
 
 @interface MHEditorRuler : NSRulerView {
 @private
-  TeXTextView *__unsafe_unretained textView;
-  NSArray *lineNumbers;
-  NSArray *codeFolders;
-  NSColor *textColor;
-  NSColor *alternateTextColor;
-  NSColor *backgroundColor;
-  NSFont  *font;
-  NSMutableArray *foldingTagDescriptions;
   BOOL wasAcceptingMouseEvents;
   NSRange lastVisibleRange;
-  NSDictionary *textAttributesDictionary;
-  NSDictionary *alternateTextAttributesDictionary;
 	NSCharacterSet *newLineCharacterSet;
   NSGradient *_bookmarkGradient;
   NSInteger _lastMaxVisibleLine;
@@ -58,22 +48,9 @@
   BOOL _showLineNumbers;
   BOOL _showCodeFolders;
   
-  NSDate *lastCalculation;
-  
   MHCodeFolder *highlightedFolder;
 }
 
-@property (strong) NSDate *lastCalculation;
-@property (strong) NSArray *lineNumbers;
-@property (strong) NSArray *codeFolders;
-@property (strong) NSMutableArray *foldingTagDescriptions;
-@property (unsafe_unretained) TeXTextView *textView;
-@property (strong) NSColor *textColor;
-@property (strong) NSColor *alternateTextColor;
-@property (strong) NSColor *backgroundColor;
-@property (strong) NSFont *font;
-@property (strong) NSDictionary *textAttributesDictionary;
-@property (strong) NSDictionary *alternateTextAttributesDictionary;
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView;
 - (id)initWithTextView:(NSTextView*)aTextView;
@@ -95,7 +72,6 @@
 - (void) removeAllTrackingRects;
 - (void) resetTrackingRects;
 - (void) resetLineNumbers;
-- (void) setNeedsDisplay;
 - (void) handleTextViewDidFoldUnfoldNotification:(NSNotification*)aNote;
 
 - (void) recalculateThickness;

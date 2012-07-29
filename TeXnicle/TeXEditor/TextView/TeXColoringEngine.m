@@ -31,41 +31,36 @@
 #import "NSArray+Color.h"
 
 
+@interface TeXColoringEngine ()
+
+@property (strong) NSColor *textColor;
+@property (strong) NSFont *textFont;
+
+@property (strong) NSColor *commentL2Color;
+@property (strong) NSColor *commentL3Color;
+@property (assign) BOOL colorCommentsL2;
+@property (assign) BOOL colorCommentsL3;
+
+@property (assign) BOOL colorMarkupL1;
+@property (assign) BOOL colorMarkupL2;
+@property (assign) BOOL colorMarkupL3;
+
+@property (strong) NSColor *markupL1Color;
+@property (strong) NSColor *markupL2Color;
+@property (strong) NSColor *markupL3Color;
+
+@property (strong) NSColor *specialCharsColor;
+@property (assign) BOOL colorSpecialChars;
+
+@property (strong) NSColor *dollarColor;
+@property (assign) BOOL colorDollarChars;
+
+@property (assign) BOOL colorMultilineArguments;
+
+@end
+
 @implementation TeXColoringEngine
 
-@synthesize lastHighlight;
-
-@synthesize textView;
-
-@synthesize textColor;
-@synthesize textFont;
-
-@synthesize commentColor;
-@synthesize commentL2Color;
-@synthesize commentL3Color;
-@synthesize colorComments;
-@synthesize colorCommentsL2;
-@synthesize colorCommentsL3;
-
-@synthesize colorMarkupL1;
-@synthesize colorMarkupL2;
-@synthesize colorMarkupL3;
-@synthesize markupL1Color;
-@synthesize markupL2Color;
-@synthesize markupL3Color;
-
-@synthesize specialCharsColor;
-@synthesize colorSpecialChars;
-
-@synthesize commandColor;
-@synthesize colorCommand;
-
-@synthesize dollarColor;
-@synthesize colorDollarChars;
-
-@synthesize argumentsColor;
-@synthesize colorArguments;
-@synthesize colorMultilineArguments;
 
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView
 {
@@ -145,12 +140,12 @@
   for (NSString *str in keys) {
     if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", str]]) {
       [self readColorsAndFontsFromPreferences];
-      if ([textView respondsToSelector:@selector(colorVisibleText)]) {
-        [textView performSelector:@selector(colorVisibleText)];
+      if ([self.textView respondsToSelector:@selector(colorVisibleText)]) {
+        [self.textView performSelector:@selector(colorVisibleText)];
       }
       self.lastHighlight = nil;
-      if ([textView respondsToSelector:@selector(colorWholeDocument)]) {
-        [textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+      if ([self.textView respondsToSelector:@selector(colorWholeDocument)]) {
+        [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
       }
     }    
   }

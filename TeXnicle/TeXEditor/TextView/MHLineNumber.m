@@ -30,10 +30,6 @@
 
 @implementation MHLineNumber
 
-@synthesize number;
-@synthesize index;
-@synthesize range;
-@synthesize rect;
 
 + (MHLineNumber*) lineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange
 {
@@ -54,7 +50,7 @@
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"%d (%d) : %@", self.number, self.index, NSStringFromRange(self.range)];
+  return [NSString stringWithFormat:@"%lu (%lu) : %@", self.number, self.index, NSStringFromRange(self.range)];
 }
 
 + (MHLineNumber*)lineNumberContainingIndex:(NSInteger)anIndex inArray:(NSArray*)lineNumbers

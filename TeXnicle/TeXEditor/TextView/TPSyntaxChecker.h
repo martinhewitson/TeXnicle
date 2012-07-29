@@ -42,11 +42,6 @@
 	NSTask *lacheckTask;
 	NSFileHandle *lacheckFileHandle;
   NSPipe *pipe;
-  
-  NSString *output;
-  NSArray *errors;
-  id<SyntaxCheckerDelegate> __unsafe_unretained delegate;
-  
   BOOL _taskRunning;
 }
 

@@ -31,83 +31,27 @@
 
 @interface TeXColoringEngine : NSObject <NSTextStorageDelegate, NSTextViewDelegate> {
 @protected
-  NSTextView *__unsafe_unretained textView;
 	// Character sets
 	NSCharacterSet *newLineCharacterSet;
 	NSCharacterSet *whitespaceCharacterSet;
   NSCharacterSet *specialChars;
   NSArray *keys;
-  NSDate *lastHighlight;
-  
-  NSColor *textColor;
-  NSFont *textFont;
-  
-  NSColor *commentColor;
-  NSColor *commentL2Color;
-  NSColor *commentL3Color;
-  BOOL colorComments;
-  BOOL colorCommentsL2;
-  BOOL colorCommentsL3;
-  
-  BOOL colorMarkupL1;
-  BOOL colorMarkupL2;
-  BOOL colorMarkupL3;
-  
-  NSColor *markupL1Color;
-  NSColor *markupL2Color;
-  NSColor *markupL3Color;
-  
-  BOOL colorMultilineArguments;
-  
-  NSColor *specialCharsColor;
-  BOOL colorSpecialChars;
-  
-  NSColor *dollarColor;
-  BOOL colorDollarChars;
-  
-  NSColor *commandColor;
-  BOOL colorCommand;
-  
-  NSColor *argumentsColor;
-  BOOL colorArguments;
 }
+
+@property (unsafe_unretained) IBOutlet NSTextView *textView;
 
 @property (strong) NSDate *lastHighlight;
 @property (readonly) unichar commentCharacter;
 
-@property (unsafe_unretained) IBOutlet NSTextView *textView;
-
-@property (strong) NSColor *textColor;
-@property (strong) NSFont *textFont;
-
 @property (strong) NSColor *commentColor;
-@property (strong) NSColor *commentL2Color;
-@property (strong) NSColor *commentL3Color;
 @property (assign) BOOL colorComments;
-@property (assign) BOOL colorCommentsL2;
-@property (assign) BOOL colorCommentsL3;
 
-
-@property (assign) BOOL colorMarkupL1;
-@property (assign) BOOL colorMarkupL2;
-@property (assign) BOOL colorMarkupL3;
-
-@property (strong) NSColor *markupL1Color;
-@property (strong) NSColor *markupL2Color;
-@property (strong) NSColor *markupL3Color;
-
-@property (strong) NSColor *specialCharsColor;
-@property (assign) BOOL colorSpecialChars;
-
-@property (strong) NSColor *dollarColor;
-@property (assign) BOOL colorDollarChars;
+@property (strong) NSColor *argumentsColor;
+@property (assign) BOOL colorArguments;
 
 @property (strong) NSColor *commandColor;
 @property (assign) BOOL colorCommand;
 
-@property (strong) NSColor *argumentsColor;
-@property (assign) BOOL colorArguments;
-@property (assign) BOOL colorMultilineArguments;
 
 - (id) initWithTextView:(NSTextView*)aTextView;
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView;

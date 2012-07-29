@@ -45,20 +45,23 @@
 #define kFOLDING_GUTTER 20.0
 #define kLineCalculationUpdateRate 0.05
 
+@interface MHEditorRuler ()
+
+@property (strong) NSDate *lastCalculation;
+@property (strong) NSArray *lineNumbers;
+@property (strong) NSArray *codeFolders;
+@property (strong) NSMutableArray *foldingTagDescriptions;
+@property (unsafe_unretained) TeXTextView *textView;
+@property (strong) NSColor *textColor;
+@property (strong) NSColor *alternateTextColor;
+@property (strong) NSColor *backgroundColor;
+@property (strong) NSFont *font;
+@property (strong) NSDictionary *textAttributesDictionary;
+@property (strong) NSDictionary *alternateTextAttributesDictionary;
+
+@end
+
 @implementation MHEditorRuler
-
-@synthesize textAttributesDictionary;
-@synthesize alternateTextAttributesDictionary;
-@synthesize textView;
-@synthesize lineNumbers;
-@synthesize codeFolders;
-@synthesize textColor;
-@synthesize alternateTextColor;
-@synthesize backgroundColor;
-@synthesize font;
-@synthesize foldingTagDescriptions;
-@synthesize lastCalculation;
-
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView
 {
@@ -229,7 +232,7 @@
   // the gutter will change width. This could be avoided by computing the total line 
   // count in an independent way.
   NSUInteger maxLine = [[self.lineNumbers lastObject] number];
-  NSMutableAttributedString *labelText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", maxLine + 1] attributes:[self textAttributes]];
+  NSMutableAttributedString *labelText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", maxLine + 1] attributes:[self textAttributes]];
   NSSize stringSize = [labelText size];
 
   // some useful numbers for drawing the line numbers
@@ -285,7 +288,7 @@
           // check for bookmark
           Bookmark *b = [Bookmark bookmarkWithLinenumber:line.number inArray:bookmarks];
           // set string
-          [[labelText mutableString] setString:[NSString stringWithFormat:@"%d", line.number]];
+          [[labelText mutableString] setString:[NSString stringWithFormat:@"%lu", line.number]];
           if (b) {
             [labelText setAttributes:[self alternateTextAttributes] range:NSMakeRange(0, [labelText length])];
           } else {
@@ -718,7 +721,7 @@
 // Build an array of line number objects for the given text range.
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange
 {
-  NSAttributedString *attStr = [textView attributedString];
+  NSAttributedString *attStr = [self.textView attributedString];
   
   // check the range against the linenumbers we already have
   if (self.lineNumbers && [self.lineNumbers count] > 0) {

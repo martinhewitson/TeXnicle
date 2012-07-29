@@ -61,56 +61,23 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
   
 	TPPopupListWindowController *_popupList;
   
-  MHEditorRuler *editorRuler;
-  TeXColoringEngine *coloringEngine;
-  NSString *highlightRange;
-  NSColor *lineHighlightColor;
-  
 	// Character sets
 	NSCharacterSet *newLineCharacterSet;
 	NSCharacterSet *whitespaceCharacterSet;
-  
-  NSMutableArray *syntaxHighlightTags;
-  
-  NSTimer *highlightingTimer;
-  
-  BOOL shiftKeyOn;
-  
+    
 	// Go to line
 	IBOutlet UKTextDocGoToBox *goToLineController;
     
-  NSMutableArray *commandList;
-  
   NSRange _lastLineRange;
   NSInteger _lastLineNumber;
-  
-  NSMutableArray *wordHighlightRanges;
-  
-  MHTableConfigureController *tableConfigureController;
-  
-  NSInteger zoomFactor;
-  
   NSArray *_pastingRows;
-  
-  CGFloat highlightAlpha;
   NSTimer *highlightAlphaTimer;
- 
-  TPPasteTableConfigureWindowController *_pasteConfigController;
 }
 
-@property (strong) TPPasteTableConfigureWindowController *pasteConfigController;
-@property (assign) NSInteger zoomFactor;
-@property (strong) NSTimer *highlightingTimer;
-@property (strong) MHEditorRuler *editorRuler;
-@property (strong) TeXColoringEngine *coloringEngine;
-@property (strong) NSColor *lineHighlightColor;
 @property (copy) NSString *highlightRange;
-@property (assign) CGFloat highlightAlpha;
-@property (strong) NSMutableArray *syntaxHighlightTags;
-@property (assign) BOOL shiftKeyOn;
-@property (strong) NSMutableArray *commandList;
-@property (strong) NSMutableArray *wordHighlightRanges;
-@property (strong) MHTableConfigureController *tableConfigureController;
+@property (nonatomic, assign) CGFloat highlightAlpha;
+@property (strong) TeXColoringEngine *coloringEngine;
+
 
 - (void) setupLists;
 - (void) setUpRuler;
@@ -129,10 +96,10 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 #pragma mark GoTo Box protocol methods 
 
 - (IBAction) gotoLine:(id)sender;
--(void)	goToCharacter: (int)charNum;
--(void)	goToLine: (int)targetLineNumber;
+-(void)	goToCharacter: (NSInteger)charNum;
+-(void)	goToLine: (NSInteger)targetLineNumber;
 -(void)	goToLineWithNumber: (NSNumber*)targetLineNumber;
--(void) goToRangeFrom: (int)startCh toChar: (int)endCh;
+-(void) goToRangeFrom: (NSInteger)startCh toChar: (NSInteger)endCh;
 
 #pragma mark -
 #pragma mark Control
@@ -274,7 +241,6 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void)pasteTableConfigureSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
 - (void)insertTableWithRows:(NSUInteger)nrows columns:(NSUInteger)ncols;
-- (IBAction)pasteAsImage:(id)sender;
 - (IBAction)insertInlineMath:(id)sender;
 
 @end

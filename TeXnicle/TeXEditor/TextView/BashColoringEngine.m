@@ -29,9 +29,13 @@
 #import "RegexKitLite.h"
 #import "NSString+Comparisons.h"
 
-@implementation BashColoringEngine
+@interface BashColoringEngine ()
 
-@synthesize keywords;
+@property (strong) NSArray *keywords;
+
+@end
+
+@implementation BashColoringEngine
 
 - (id) initWithTextView:(NSTextView*)aTextView
 {

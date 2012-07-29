@@ -29,11 +29,12 @@
 #import "TPSyntaxError.h"
 #import "externs.h"
 
+@interface TPSyntaxChecker ()
+
+@end
+
 @implementation TPSyntaxChecker
 
-@synthesize output;
-@synthesize errors;
-@synthesize delegate;
 
 + (NSArray*) defaultSyntaxErrors
 {
@@ -388,10 +389,10 @@
   
   for (NSDictionary *error in errorCodes) {
     if ([[error valueForKey:@"check"] boolValue]) {
-      [args addObject:[NSString stringWithFormat:@"-w%d", [[error valueForKey:@"code"] integerValue]]];
+      [args addObject:[NSString stringWithFormat:@"-w%ld", [[error valueForKey:@"code"] integerValue]]];
     }
     else {
-      [args addObject:[NSString stringWithFormat:@"-n%d", [[error valueForKey:@"code"] integerValue]]];
+      [args addObject:[NSString stringWithFormat:@"-n%ld", [[error valueForKey:@"code"] integerValue]]];
     }
   }
   
@@ -501,11 +502,29 @@
   self.errors = newErrors;
 }
 
+#pragma mark -
+#pragma mark Delegate
+
+- (void)syntaxCheckerCheckFailed:(TPSyntaxChecker*)checker
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(syntaxCheckerCheckFailed:)]) {
+    [self.delegate syntaxCheckerCheckFailed:self];
+  }
+}
+
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)checker
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(syntaxCheckerCheckDidFinish:)]) {
     [self.delegate syntaxCheckerCheckDidFinish:self];
   }
+}
+
+- (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(syntaxCheckerShouldCheckSyntax:)]) {
+    return [self.delegate syntaxCheckerShouldCheckSyntax:self];
+  }
+  return NO;
 }
 
 @end

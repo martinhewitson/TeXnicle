@@ -28,11 +28,7 @@
 #import <Foundation/Foundation.h>
 #import"TeXColoringEngine.h"
 
-@interface BashColoringEngine : TeXColoringEngine {
-@private
-  NSArray *keywords;
-}
+@interface BashColoringEngine : TeXColoringEngine
 
-@property (strong) NSArray *keywords;
 
 @end

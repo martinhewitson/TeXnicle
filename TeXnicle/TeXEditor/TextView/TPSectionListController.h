@@ -34,21 +34,13 @@
 @end
 
 @interface TPSectionListController : NSObject {
-
+@private
 	NSMutableArray *sections;
-	
-	NSTimer *timer;
-	
 	IBOutlet NSTextView *textView;
-	
 	IBOutlet NSPopUpButton *popupMenu;
-	
 	NSMenu *addMarkerActionMenu;
-	
-  id<TPSectionListControllerDelegate> __unsafe_unretained delegate;
 }
 
-@property (nonatomic, strong) NSTimer *timer;
 @property (unsafe_unretained) IBOutlet id<TPSectionListControllerDelegate> delegate;
 
 - (void) deactivate;

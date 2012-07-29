@@ -70,21 +70,22 @@
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
 
-@implementation TeXTextView
+@interface TeXTextView ()
 
-@synthesize pasteConfigController = _pasteConfigController;
-@synthesize tableConfigureController;
-@synthesize editorRuler;
-@synthesize coloringEngine;
-@synthesize highlightRange;
-@synthesize lineHighlightColor;
-@synthesize syntaxHighlightTags;
-@synthesize highlightingTimer;
-@synthesize shiftKeyOn;
-@synthesize commandList;
-@synthesize wordHighlightRanges;
-@synthesize zoomFactor;
-@synthesize highlightAlpha;
+@property (strong) TPPasteTableConfigureWindowController *pasteConfigController;
+@property (assign) NSInteger zoomFactor;
+@property (strong) NSTimer *highlightingTimer;
+@property (strong) MHEditorRuler *editorRuler;
+@property (strong) NSColor *lineHighlightColor;
+@property (strong) NSMutableArray *syntaxHighlightTags;
+@property (assign) BOOL shiftKeyOn;
+@property (strong) NSMutableArray *commandList;
+@property (strong) NSMutableArray *wordHighlightRanges;
+@property (strong) MHTableConfigureController *tableConfigureController;
+
+@end
+
+@implementation TeXTextView
 
 - (void) dealloc
 {
@@ -221,13 +222,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[goToLineController showGoToSheet:[self window]];
 }
 
--(void)	goToCharacter: (int)charNum
+-(void)	goToCharacter: (NSInteger)charNum
 {
 	[self goToRangeFrom: charNum toChar: charNum +1];
 }
 
 
--(void) goToRangeFrom:(int)startCh toChar:(int)endCh
+-(void) goToRangeFrom:(NSInteger)startCh toChar:(NSInteger)endCh
 {
 	NSRange theRange = { 0, 0 };
 	
@@ -246,7 +247,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self goToLine:[targetLineNumber integerValue]]; 
 }
 
--(void)	goToLine:(int)targetLineNumber
+-(void)	goToLine:(NSInteger)targetLineNumber
 {
   NSString *text = [self string];  
   NSInteger lineNumber = 0;
@@ -282,7 +283,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     // did the user ask for a line number greater than the document length?
     if (targetLineNumber < lineNumber) {
       // didn't find a line number, this shouldn't happen
-      NSString *format = [NSString stringWithFormat:@"Line number %d not found in text"];
+      NSString *format = [NSString stringWithFormat:@"Line number %ld not found in text", targetLineNumber];
       [NSException raise:@"Line number not found" format:format, targetLineNumber];
     } else {
       // tell the user the line number is too high
@@ -1640,7 +1641,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) setHighlightAlpha:(CGFloat)aValue
 {
   if (highlightAlphaTimer == nil) {
-    highlightAlpha = aValue;
+    _highlightAlpha = aValue;
     
     //    NSLog(@"Starting timer");
     highlightAlphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
@@ -1654,8 +1655,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) incrementHighlightAlpha
 {
   //  NSLog(@"Timer fired");
-  highlightAlpha+=0.01;
-  if (highlightAlpha>=0.1) {
+  _highlightAlpha+=0.01;
+  if (_highlightAlpha>=0.1) {
     //    NSLog(@"Stop timer");
     [highlightAlphaTimer invalidate];
     highlightAlphaTimer = nil;
@@ -1894,7 +1895,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
     // get the indentation of this line
     NSRange indentRange = NSMakeRange(NSNotFound, 0);
-    if (!shiftKeyOn) {
+    if (!_shiftKeyOn) {
       NSRange sel = [self selectedRange];
       indentRange = [self indentRangeForLineAtIndex:sel.location];
     }
@@ -1903,7 +1904,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [super insertNewline:sender];    
         
     // indent the new line
-    if (!shiftKeyOn && indentRange.location != NSNotFound) {
+    if (!_shiftKeyOn && indentRange.location != NSNotFound) {
       NSRange sel = [self selectedRange];
       NSString *indentString = [str substringWithRange:indentRange];
       [self replaceCharactersInRange:NSMakeRange(sel.location, 0) withString:indentString];
@@ -2349,7 +2350,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // additional highlight range
 	if (self.highlightRange) {    
     NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];		
-		[[[self backgroundColor] shadowWithLevel:highlightAlpha] set];
+		[[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
 		[NSBezierPath fillRect:aRect];
 	} else {
     [[self backgroundColor] set];
@@ -3238,7 +3239,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	
 	// Now go through and put in \n when we are past the linelength
   //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
-	NSString *lineBreakStr = [NSString stringWithFormat:@"\n", NSLineSeparatorCharacter];
+	NSString *lineBreakStr = [NSString stringWithFormat:@"\n"];
 	int loc = 0;
   NSInteger count = 0;
 	while (loc < [newString length]) {
