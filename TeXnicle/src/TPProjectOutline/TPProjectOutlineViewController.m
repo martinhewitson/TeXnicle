@@ -11,16 +11,14 @@
 
 @interface TPProjectOutlineViewController ()
 
+@property (unsafe_unretained) IBOutlet NSSlider *depthSlider;
+@property (unsafe_unretained) IBOutlet NSButton *showDetailsButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) TPSection *currentSection;
+
 @end
 
 @implementation TPProjectOutlineViewController
-
-@synthesize outlineBuilder;
-@synthesize delegate;
-@synthesize outlineView;
-@synthesize showDetailsButton;
-@synthesize depthSlider;
-@synthesize currentSection;
 
 - (void) dealloc
 {

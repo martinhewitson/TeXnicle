@@ -18,13 +18,6 @@
 
 @implementation TPOutlineBuilder
 
-@synthesize delegate;
-@synthesize templates;
-@synthesize sectionCommands;
-@synthesize sections;
-@synthesize timer;
-@synthesize depth;
-
 + (id) outlineBuilderWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate
 {
   return [[TPOutlineBuilder alloc] initWithDelegate:aDelegate];

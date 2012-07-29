@@ -10,12 +10,6 @@
 
 @implementation TPSectionTemplate
 
-@synthesize name;
-@synthesize tag;
-@synthesize parent;
-@synthesize color;
-@synthesize mnemonic;
-
 + (id)documentSectionTemplateWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
 {
   return [[TPSectionTemplate alloc] initWithName:aName tag:aTag parent:aParent color:aColor mnemonic:shortName];

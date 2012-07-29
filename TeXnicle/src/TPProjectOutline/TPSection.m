@@ -12,15 +12,6 @@
 
 @implementation TPSection
 
-@synthesize file;
-@synthesize parent;
-@synthesize subsections;
-@synthesize startIndex;
-@synthesize type;
-@synthesize name;
-@synthesize expansionState;
-@synthesize needsReload;
-
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName
 {
   return [[TPSection alloc] initWithParent:aParent start:index inFile:aFile type:aType name:aName];

@@ -16,17 +16,7 @@ enum TPOutlineExpansionState : NSInteger {
   TPOutlineExpansionStateExpanded = 1
   } TPOutlineExpansionState;
   
-@interface TPSection : NSObject {
-  
-  TPSection *__unsafe_unretained parent;
-  NSArray *subsections;
-  NSUInteger startIndex;
-  id file;
-  TPSectionTemplate *type;
-  NSString *name;
-  NSInteger expansionState;
-  BOOL needsReload;
-}
+@interface TPSection : NSObject
 
 @property (assign) BOOL needsReload;
 @property (assign) NSInteger expansionState;

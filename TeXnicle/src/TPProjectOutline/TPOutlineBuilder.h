@@ -18,15 +18,7 @@
 
 @end
 
-@interface TPOutlineBuilder : NSObject {
-  id<TPOutlineBuilderDelegate> __unsafe_unretained delegate;
-  TPSection *outline;
-  NSArray *templates;
-  NSArray *sectionCommands;
-  NSMutableArray *sections;
-  NSTimer *timer;
-  NSInteger depth;
-}
+@interface TPOutlineBuilder : NSObject
 
 @property (assign) NSInteger depth;
 @property (strong) NSTimer *timer;

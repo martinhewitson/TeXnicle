@@ -8,14 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPSectionTemplate : NSObject {
-@private
-  NSString *tag;
-  NSString *name;
-  TPSectionTemplate *__unsafe_unretained parent;
-  NSColor *color;
-  NSString *mnemonic;
-}
+@interface TPSectionTemplate : NSObject
 
 @property (copy) NSString *tag;
 @property (copy) NSString *name;

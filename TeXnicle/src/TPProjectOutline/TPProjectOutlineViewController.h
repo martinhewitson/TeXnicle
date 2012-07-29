@@ -25,20 +25,8 @@
 
 
 
-@interface TPProjectOutlineViewController : NSViewController <NSTextViewDelegate, TPOutlineBuilderDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
-  TPOutlineBuilder *outlineBuilder;
-  id<TPProjectOutlineDelegate> __unsafe_unretained delegate;
-  NSOutlineView *__unsafe_unretained outlineView;
-  NSButton *__unsafe_unretained showDetailsButton;
-  NSSlider *__unsafe_unretained depthSlider;
-  
-  TPSection *__unsafe_unretained currentSection;
-}
+@interface TPProjectOutlineViewController : NSViewController <NSTextViewDelegate, TPOutlineBuilderDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource>
 
-@property (unsafe_unretained) TPSection *currentSection;
-@property (unsafe_unretained) IBOutlet NSSlider *depthSlider;
-@property (unsafe_unretained) IBOutlet NSButton *showDetailsButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
 @property (strong) TPOutlineBuilder *outlineBuilder;
 @property (unsafe_unretained) id<TPProjectOutlineDelegate> delegate;
 
