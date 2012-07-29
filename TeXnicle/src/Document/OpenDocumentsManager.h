@@ -46,28 +46,19 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 @interface OpenDocumentsManager : NSResponder {
 
+@private
 	id sectionListController;
 	
-	FileEntity  *__unsafe_unretained currentDoc;
 	NSMutableArray *openDocuments;
-	
 	NSMutableArray *standaloneWindows;
-	
-  id<OpenDocumentsManagerDelegate> __unsafe_unretained delegate;
-	
+  
   IBOutlet PSMTabBarControl *tabBar;
   IBOutlet NSBox *tabBackground;
-	NSTabView *__unsafe_unretained tabView;
-  TeXEditorViewController *__unsafe_unretained texEditorViewController;
-	TPImageViewerController *__unsafe_unretained imageViewerController;
-  NSView *__unsafe_unretained imageViewContainer;
-	BOOL isOpening;
-	NSView *__unsafe_unretained navigationButtonsView;
 }
 
+@property (nonatomic, assign) BOOL isOpening;
 @property (unsafe_unretained) IBOutlet NSView *navigationButtonsView;
-@property (readwrite, assign) BOOL isOpening;
-@property (readwrite, unsafe_unretained) FileEntity *currentDoc;
+@property (nonatomic, unsafe_unretained) FileEntity *currentDoc;
 @property (unsafe_unretained) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSTabView *tabView;
 @property (unsafe_unretained) TeXEditorViewController *texEditorViewController;

@@ -38,14 +38,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 @implementation OpenDocumentsManager
 
-@synthesize currentDoc;
-@synthesize isOpening;
-@synthesize delegate;
-@synthesize tabView;
-@synthesize texEditorViewController;
-@synthesize imageViewerController;
-@synthesize imageViewContainer;
-@synthesize navigationButtonsView;
 
 - (void) awakeFromNib
 {
@@ -59,7 +51,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[tabBar setCanCloseOnlyTab:YES];
 	[tabBar setHideForSingleTab:NO];
 	
-	isOpening = NO;
+	_isOpening = NO;
 	
 //  [self enableImageView:NO];
 //	[self disableTextView];
@@ -70,7 +62,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 						 name:TPDocumentWasRenamed
 					 object:nil];
 	
-	currentDoc = nil;
+	self.currentDoc = nil;
 	
 }
 
@@ -99,7 +91,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) refreshTabForDocument:(FileEntity*)aDoc
 {
-	NSArray *tabs = [tabView tabViewItems];
+	NSArray *tabs = [self.tabView tabViewItems];
 	for (NSTabViewItem *tab in tabs) {
 		if ([tab identifier] == aDoc) {
 			[tab setLabel:[aDoc valueForKey:@"shortName"]];
@@ -112,8 +104,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
   NSArray *openFiles = [NSArray arrayWithArray:openDocuments];
   for (FileEntity *file in openFiles) {
-    NSTabViewItem *item = [tabView tabViewItemAtIndex:[tabView indexOfTabViewItemWithIdentifier:file]];
-    [tabView removeTabViewItem:item];
+    NSTabViewItem *item = [self.tabView tabViewItemAtIndex:[self.tabView indexOfTabViewItemWithIdentifier:file]];
+    [self.tabView removeTabViewItem:item];
   }
   [self performSelector:@selector(disableEditors) withObject:nil afterDelay:0];
 }
@@ -126,7 +118,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) closeCurrentTab
 {
-  [tabView removeTabViewItem:[tabView selectedTabViewItem]];
+  [self.tabView removeTabViewItem:[self.tabView selectedTabViewItem]];
 }
 
 - (void) removeDocument:(FileEntity*)aDoc
@@ -135,14 +127,14 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 		return;
 	}
 	
-  NSTabViewItem *item = [tabView tabViewItemAtIndex:[tabView indexOfTabViewItemWithIdentifier:aDoc]];
-  [tabView removeTabViewItem:item];  
+  NSTabViewItem *item = [self.tabView tabViewItemAtIndex:[self.tabView indexOfTabViewItemWithIdentifier:aDoc]];
+  [self.tabView removeTabViewItem:item];  
 }
 
 
 - (void) standaloneWindowForFile:(FileEntity*)aFile
 {
-	DocWindowController *newDoc = [[DocWindowController alloc] initWithFile:aFile document:(id)delegate];
+	DocWindowController *newDoc = [[DocWindowController alloc] initWithFile:aFile document:(id)self.delegate];
 	[newDoc showWindow:self];
 	[[newDoc window] makeKeyAndOrderFront:self];
 	[standaloneWindows addObject:newDoc];
@@ -196,16 +188,16 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
-    [tabView addTabViewItem:newItem];
+    [self.tabView addTabViewItem:newItem];
     if (selectTab) {
-      [tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
+      [self.tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
     }
     
     
 	}	else {
-    NSInteger index = [tabView indexOfTabViewItemWithIdentifier:aDoc];
-		NSTabViewItem *tab = [tabView tabViewItemAtIndex:index];
-		[tabView selectTabViewItem:tab];
+    NSInteger index = [self.tabView indexOfTabViewItemWithIdentifier:aDoc];
+		NSTabViewItem *tab = [self.tabView tabViewItemAtIndex:index];
+		[self.tabView selectTabViewItem:tab];
 	}
 	
   if ([[aDoc isText] boolValue]) {
@@ -231,10 +223,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
 //  NSLog(@"Update doc for doc %@: is text? %d", currentDoc, [[currentDoc valueForKey:@"isText"] boolValue]);
   
-  if ([currentDoc isImage]) {
+  if ([self.currentDoc isImage]) {
     [self enableImageView:YES];
-  } else if ([[currentDoc valueForKey:@"isText"] boolValue]) {
-    id doc = [currentDoc document];		
+  } else if ([[self.currentDoc valueForKey:@"isText"] boolValue]) {
+    id doc = [self.currentDoc document];		
     if (doc) {
       if ([doc isKindOfClass:[FileDocument class]]) {
 //        NSLog(@"Setting doc %@", doc);
@@ -259,7 +251,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           
           // clear the text view from all other document text containers
           for (FileEntity *file in openDocuments) {
-            if (file != currentDoc) {
+            if (file != self.currentDoc) {
               if ([[file valueForKey:@"isText"] boolValue]) {
                 id filedoc = [file document];		
                 if (filedoc) {
@@ -281,8 +273,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
-          if ([[self.tabView selectedTabViewItem] identifier] != currentDoc) {
-            [self selectTabForFile:currentDoc];
+          if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
+            [self selectTabForFile:self.currentDoc];
           }
           [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
                                                       withObject:nil 
@@ -309,13 +301,13 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   if (aFile == nil) {
     return;
   }
-	NSInteger index = [tabView indexOfTabViewItemWithIdentifier:aFile];
+	NSInteger index = [self.tabView indexOfTabViewItemWithIdentifier:aFile];
   if (index < 0) {
     return;
   }
-	NSTabViewItem *item = [tabView tabViewItemAtIndex:index];
-  if ([tabView selectedTabViewItem] != item) {
-    [tabView selectTabViewItem:item];
+	NSTabViewItem *item = [self.tabView tabViewItemAtIndex:index];
+  if ([self.tabView selectedTabViewItem] != item) {
+    [self.tabView selectTabViewItem:item];
   }
 }
 
@@ -337,25 +329,25 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) setCurrentDoc:(FileEntity *)aDoc
 {
-	if (currentDoc == aDoc) 
+	if (_currentDoc == aDoc)
 		return;
 	
 //	NSLog(@"Switching to document %@", [aDoc valueForKey:@"name"]);
-	currentDoc = aDoc;
+	_currentDoc = aDoc;
   
-  if (currentDoc != nil) {
-    NSDictionary *dictionary = @{@"file": currentDoc};
+  if (_currentDoc != nil) {
+    NSDictionary *dictionary = @{@"file": _currentDoc};
     [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidChangeFileNotification
                                                         object:self
                                                       userInfo:dictionary];
   }
   
   // increase active state for this doc
-  [currentDoc increaseActiveCount];
+  [_currentDoc increaseActiveCount];
   
   // and decrease for all others
   for (FileEntity *doc in openDocuments) {
-    if (doc != currentDoc) {
+    if (doc != _currentDoc) {
       [doc decreaseActiveCount];
     }
   }
@@ -363,11 +355,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self updateDoc];
   // tell project tree to select this item
   [self.delegate openDocumentsManager:self didSelectFile:aDoc];
-}
-
-- (FileEntity*) currentDoc
-{
-	return currentDoc;
 }
 
 - (NSInteger) count
@@ -386,7 +373,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {  
-  if (currentDoc != [tabViewItem identifier]) {
+  if (self.currentDoc != [tabViewItem identifier]) {
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
   }
@@ -412,8 +399,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	
 	
 	// Set another file if this is the selected one and if possible
-  if (file == currentDoc) {
-    NSTabViewItem *tabItem = [[tabView tabViewItems] lastObject];
+  if (file == self.currentDoc) {
+    NSTabViewItem *tabItem = [[self.tabView tabViewItems] lastObject];
     
     FileEntity *nextFile = [tabItem identifier];
     //	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
@@ -434,11 +421,11 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
 //	if (isOpening)
 //		return;
-	if ([[currentDoc isText] boolValue]) {
+	if ([[self.currentDoc isText] boolValue]) {
     [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
     
     // reset cursor position
-    NSString *sr = [currentDoc valueForKey:@"cursor"];
+    NSString *sr = [self.currentDoc valueForKey:@"cursor"];
     if (sr) {
       if (![sr isEqual:@""]) {
         NSRange range = NSRangeFromString(sr);
@@ -449,7 +436,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       }
     }
     // reset the visible rect
-    sr = [currentDoc valueForKey:@"visibleRect"];
+    sr = [self.currentDoc valueForKey:@"visibleRect"];
     if (sr) {
       if (![sr isEqual:@""]) {
         NSRect r = NSRectFromString(sr);
@@ -464,20 +451,20 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void) saveCursorAndScrollPosition
 {	
 //	NSLog(@"Saving cursor and scroll position");
-	if (isOpening)
+	if (self.isOpening)
 		return;
 	
-	if (!currentDoc)
+	if (!self.currentDoc)
 		return;
 
-  if ([[currentDoc isText] boolValue]) {
+  if ([[self.currentDoc isText] boolValue]) {
     NSRect vr = [self.texEditorViewController.textView visibleRect];
     //	NSLog(@"Visible rect: %@", NSStringFromRect(vr));
     if (!NSEqualSizes(vr.size, NSZeroSize)) {
-      [currentDoc setPrimitiveValue:NSStringFromRect(vr) forKey:@"visibleRect"];
+      [self.currentDoc setPrimitiveValue:NSStringFromRect(vr) forKey:@"visibleRect"];
       // store cursor position
       NSRange r = [self.texEditorViewController.textView selectedRange];
-      [currentDoc setPrimitiveValue:NSStringFromRange(r) forKey:@"cursor"];
+      [self.currentDoc setPrimitiveValue:NSStringFromRange(r) forKey:@"cursor"];
     }
   }
 }
@@ -498,13 +485,13 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     [[newDoc window] setDocumentEdited:NO];
   }
   	
-	if (currentDoc != nil) {
-		ProjectEntity *project = [currentDoc valueForKey:@"project"];
+	if (self.currentDoc != nil) {
+		ProjectEntity *project = [self.currentDoc valueForKey:@"project"];
 		if (project != nil) {
-			[project setValue:currentDoc forKey:@"selected"];
+			[project setValue:self.currentDoc forKey:@"selected"];
 		}
 	} else {
-		ProjectEntity *project = [delegate project];
+		ProjectEntity *project = [self.delegate project];
     project.selected = nil;
 	}
 	
@@ -528,18 +515,18 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if (![[self.imageViewContainer subviews] containsObject:self.imageViewerController.view]) {
       [self.imageViewContainer addSubview:self.imageViewerController.view];
     }        
-    if ([currentDoc isImage]) {
-      NSImage *image = [[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]];
-      [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
+    if ([self.currentDoc isImage]) {
+      NSImage *image = [[NSImage alloc] initWithContentsOfFile:[self.currentDoc pathOnDisk]];
+      [self.imageViewerController setImage:image atPath:[self.currentDoc pathOnDisk]];
       [self.imageViewerController enable];
     } else {
-      NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:[currentDoc extension]];
-      [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
+      NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:[self.currentDoc extension]];
+      [self.imageViewerController setImage:image atPath:[self.currentDoc pathOnDisk]];
       [self.imageViewerController enable];
     }
     [self.texEditorViewController hide];
     [tabBackground setHidden:NO];
-    [tabView setHidden:NO];
+    [self.tabView setHidden:NO];
     [tabBar setHidden:NO];
   } else {
     [self.texEditorViewController enableEditor];
@@ -551,7 +538,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void) disableTextView
 {
   [self.texEditorViewController disableEditor];
-	[tabView setHidden:YES];
+	[self.tabView setHidden:YES];
 	[tabBar setHidden:YES];
 	[tabBackground setHidden:YES];
   [self.navigationButtonsView setHidden:YES];
@@ -562,7 +549,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
   [self.navigationButtonsView setHidden:NO];
   [tabBackground setHidden:NO];
-	[tabView setHidden:NO];
+	[self.tabView setHidden:NO];
 	[tabBar setHidden:NO];
   [self.texEditorViewController enableEditor];
   [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
