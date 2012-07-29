@@ -28,13 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TPDescriptionView : NSView {
-@private
-  NSTextFieldCell *descriptionCell;
-  NSString *descriptionText;
-  NSColor *backgroundColor;
-  NSColor *borderColor;
-}
+@interface TPDescriptionView : NSView
 
 @property (strong) NSTextFieldCell *descriptionCell;
 @property (copy) NSString *descriptionText;

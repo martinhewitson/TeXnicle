@@ -28,12 +28,11 @@
 
 #import "TPDescriptionView.h"
 
-@implementation TPDescriptionView
+@interface TPDescriptionView ()
 
-@synthesize descriptionText;
-@synthesize backgroundColor;
-@synthesize descriptionCell;
-@synthesize borderColor;
+@end
+
+@implementation TPDescriptionView
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -42,11 +41,11 @@
     self.descriptionText = @"";
     self.backgroundColor = [NSColor clearColor];
     self.borderColor = [NSColor lightGrayColor];
-    descriptionCell = [[NSTextFieldCell alloc] initTextCell:self.descriptionText];
-    [descriptionCell setWraps:YES];
-    [descriptionCell setTextColor:[NSColor darkGrayColor]];
-    [descriptionCell setBackgroundStyle:NSBackgroundStyleRaised];
-    [descriptionCell setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
+    self.descriptionCell = [[NSTextFieldCell alloc] initTextCell:self.descriptionText];
+    [self.descriptionCell setWraps:YES];
+    [self.descriptionCell setTextColor:[NSColor darkGrayColor]];
+    [self.descriptionCell setBackgroundStyle:NSBackgroundStyleRaised];
+    [self.descriptionCell setFont:[NSFont controlContentFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
   }
   
   return self;
@@ -68,11 +67,11 @@
   [path fill];
   
   if (self.descriptionText) {
-    [descriptionCell setStringValue:self.descriptionText];
+    [self.descriptionCell setStringValue:self.descriptionText];
   } else {
-    [descriptionCell setStringValue:@""];    
+    [self.descriptionCell setStringValue:@""];
   }
-  [descriptionCell drawWithFrame:NSInsetRect(bounds, 3.0, 3.0) inView:self];
+  [self.descriptionCell drawWithFrame:NSInsetRect(bounds, 3.0, 3.0) inView:self];
 }
 
 @end

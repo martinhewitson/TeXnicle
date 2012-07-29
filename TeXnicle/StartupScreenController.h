@@ -34,6 +34,7 @@
 
 @interface StartupScreenController : NSWindowController <NSUserInterfaceValidations, NSMetadataQueryDelegate> {
   
+@private
   IBOutlet TPDescriptionView *emptyProjectDescription;
   IBOutlet TPDescriptionView *newArticleDescription;
   IBOutlet TPDescriptionView *fromTemplateDescription;
@@ -44,8 +45,6 @@
   IBOutlet NSView *buildView;
   IBOutlet NSView *templateView;
   IBOutlet NSButton *bottomBarButton;
-  
-	NSMutableArray *recentFiles;
 	
 	IBOutlet NSTableView *recentFilesTable;
 		
@@ -62,22 +61,15 @@
 	NSMetadataQuery* query;
   NSMutableArray *texnicleFiles;
   
-	BOOL isOpen;
-	
 	NSRect openFrame;
-  
-  TPProjectTemplateListViewController *templateListViewController;
-  NSView *__unsafe_unretained templateListContainer;
 }
+
+
+@property (readwrite) NSMutableArray *recentFiles;
+
 
 -(IBAction)displayOrCloseWindow:(id)sender;
 -(IBAction)displayWindow:(id)sender;
-
-@property (readwrite, assign) BOOL isOpen;
-@property (readwrite) NSMutableArray *recentFiles;
-
-@property (strong) TPProjectTemplateListViewController *templateListViewController;
-@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
 
 - (IBAction) openRecentFile:(id)sender;
 

@@ -32,12 +32,17 @@
 #import "TPProjectTemplateViewer.h"
 #import "TPProjectTemplate.h"
 
+@interface StartupScreenController ()
+
+@property (readwrite, assign) BOOL isOpen;
+
+@property (strong) TPProjectTemplateListViewController *templateListViewController;
+@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
+
+@end
+
 @implementation StartupScreenController
 
-@synthesize isOpen;
-@synthesize recentFiles;
-@synthesize templateListViewController;
-@synthesize templateListContainer;
 
 - (id) init
 {
@@ -45,7 +50,7 @@
 	self =  [super initWithWindowNibName:@"StartupScreen"];
   if (self) {
     
-    recentFiles = [[NSMutableArray alloc] init];
+    _recentFiles = [[NSMutableArray alloc] init];
     query = [[NSMetadataQuery alloc] init];
     texnicleFiles = [[NSMutableArray alloc] init];
     
@@ -125,7 +130,7 @@
 {
   NSInteger row = [recentFilesTable selectedRow];
 	if (row>=0) {
-    NSString *path = [[recentFiles[row] valueForKey:@"url"] path];
+    NSString *path = [[self.recentFiles[row] valueForKey:@"url"] path];
     [fileLabel setDescriptionText:path];
     [fileLabel setNeedsDisplay:YES];
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -159,9 +164,9 @@
   [self cancelNewProject:self];
   
 	//Fades in & out nicely
-	if(isOpen) {
+	if(self.isOpen) {
 		[[[self window] animator] setAlphaValue:0.0];
-		isOpen = NO;
+		self.isOpen = NO;
 		[self close];
 	}
 	else {
@@ -170,7 +175,7 @@
     
     
 		[[[self window] animator] setAlphaValue:1.0];
-		isOpen = YES;
+		self.isOpen = YES;
 	}
 }
 
@@ -179,7 +184,7 @@
   [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
   [[self window] performSelector:@selector(makeKeyAndOrderFront:) withObject:self afterDelay:0];
   [[[self window] animator] setAlphaValue:1.0];
-  isOpen = YES;
+  self.isOpen = YES;
 }
 
 #pragma mark -
@@ -190,8 +195,8 @@
 	 forTableColumn:(NSTableColumn *)aTableColumn 
 							row:(NSInteger)rowIndex
 {
-  if (recentFiles != nil) {
-    NSDictionary *dict = recentFiles[rowIndex];
+  if (self.recentFiles != nil) {
+    NSDictionary *dict = self.recentFiles[rowIndex];
     NSString *path = [[dict valueForKey:@"url"] path];
     NSFileManager *fm = [NSFileManager defaultManager];
     if ([fm fileExistsAtPath:path]) {
@@ -209,7 +214,7 @@
 										row:(NSInteger)row 
 					mouseLocation:(NSPoint)mouseLocation
 {
-	NSDictionary *dict = recentFiles[row];
+	NSDictionary *dict = self.recentFiles[row];
 	return [[dict valueForKey:@"url"] path];
 }
 
@@ -339,7 +344,7 @@
 	if (row>=0) {
 		NSError *error = nil;
     
-    NSURL *url = [recentFiles[row] valueForKey:@"url"];
+    NSURL *url = [self.recentFiles[row] valueForKey:@"url"];
     
     // check if the document is already open
     NSArray *docs = [[NSDocumentController sharedDocumentController] documents];
@@ -406,7 +411,7 @@
     [self.recentFiles addObjectsFromArray:texnicleFiles];
   }
   
-  [recentFilesController setContent:recentFiles];
+  [recentFilesController setContent:self.recentFiles];
 }
 
 
