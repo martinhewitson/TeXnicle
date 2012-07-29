@@ -39,17 +39,9 @@
 
 @interface BookmarkOutlineView : NSOutlineView {
 @private
-  id<BookmarkOutlineViewDelegate> __unsafe_unretained bookmarkDelegate;
-  NSString *capturedString;
-  NSDate *lastKeyStroke;
-  NSTimer *resetTimer;
-  NSTextField *__unsafe_unretained selectingStatus;
+  NSString *_capturedString;
 }
 
-@property (strong) NSTimer *resetTimer;
-@property (unsafe_unretained) IBOutlet id<BookmarkOutlineViewDelegate> bookmarkDelegate;
-@property (strong) NSDate *lastKeyStroke;
-@property (unsafe_unretained) IBOutlet NSTextField *selectingStatus;
 
 - (void) updateStatus;
 - (void) stopTimer;

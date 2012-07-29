@@ -32,15 +32,17 @@
 #import "ImageAndTextCell.h"
 #import "externs.h"
 
+
+@interface BookmarkManager ()
+
+@property (unsafe_unretained) IBOutlet HHValidatedButton *jumpToButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *expandAllButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
+
+@end
+
 @implementation BookmarkManager
-
-@synthesize delegate;
-@synthesize outlineView;
-@synthesize jumpToButton;
-@synthesize deleteButton;
-@synthesize expandAllButton;
-@synthesize collapseAllButton;
-
 
 // Initialise with a delegate
 - (id)initWithDelegate:(id<BookmarkManagerDelegate>)aDelegate

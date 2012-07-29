@@ -45,22 +45,11 @@
 
 @interface BookmarkManager : NSViewController <NSUserInterfaceValidations, BookmarkManagerDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
 @private
-  id<BookmarkManagerDelegate> __unsafe_unretained delegate;
-  NSOutlineView *__unsafe_unretained outlineView;
-  HHValidatedButton *__unsafe_unretained jumpToButton;
-  HHValidatedButton *__unsafe_unretained deleteButton;
   NSInteger _currentSelectedBookmark;
-  
-  HHValidatedButton *__unsafe_unretained expandAllButton;
-  HHValidatedButton *__unsafe_unretained collapseAllButton;
 }
 
 @property (unsafe_unretained) id<BookmarkManagerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *jumpToButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *expandAllButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
 
 
 - (id)initWithDelegate:(id<BookmarkManagerDelegate>)aDelegate;
