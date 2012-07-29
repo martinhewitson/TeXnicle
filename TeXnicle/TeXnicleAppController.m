@@ -170,9 +170,6 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 @implementation TeXnicleAppController
 
-@synthesize openStartupScreenAtAppStartup;
-@synthesize library;
-
 + (void) initialize
 {
   // create a dictionary for the ‘factory’ defaults
@@ -478,7 +475,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  [self checkVersion];
+//  [self checkVersion];
   [TPEngineManager installEngines];
   
   // setup app-wide library

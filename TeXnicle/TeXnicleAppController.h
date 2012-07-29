@@ -33,9 +33,7 @@
 @interface TeXnicleAppController : NSObject <NSApplicationDelegate> {
 @private
 	StartupScreenController *startupScreenController;    
-  BOOL openStartupScreenAtAppStartup;
   NSInteger lineToOpen;
-  TPLibrary *library;
 }
 
 @property (assign) BOOL openStartupScreenAtAppStartup;
