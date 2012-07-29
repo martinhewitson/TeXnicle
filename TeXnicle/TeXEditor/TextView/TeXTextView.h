@@ -40,7 +40,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 @class TeXTextView;
 @class TPPasteTableConfigureWindowController;
 
-@protocol TeXTextViewDelegate <NSTextViewDelegate, MHTableConfigureDelegate>
+@protocol TeXTextViewDelegate <NSTextViewDelegate>
 
 @optional
 -(id)project;
@@ -56,7 +56,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column;
 @end
 
-@interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget> {
+@interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget, MHTableConfigureDelegate> {
 @private
   
 	TPPopupListWindowController *_popupList;
