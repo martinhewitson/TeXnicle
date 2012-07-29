@@ -31,13 +31,10 @@
 #import "TeXProjectDocument.h"
 
 @interface TPOutlineView : ESOutlineView {
-
-  TeXProjectDocument *__unsafe_unretained mainDocument;
+@private
 	IBOutlet ProjectItemTreeController *treeController;
 	ProjectItemEntity *selectedItem;
 	NSUInteger selectedRow;
-  BOOL dragLeftView;
-  BOOL showMenu;
 }
 
 @property (unsafe_unretained) IBOutlet TeXProjectDocument *mainDocument;

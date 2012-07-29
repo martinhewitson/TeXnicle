@@ -31,10 +31,6 @@
 
 @implementation TPOutlineView
 
-@synthesize dragLeftView;
-@synthesize showMenu;
-@synthesize mainDocument;
-
 - (void) dealloc
 {
   self.mainDocument = nil;
@@ -232,7 +228,7 @@
 	NSManagedObject *newFolder = [[NSManagedObject alloc] initWithEntity:[NSEntityDescription entityForName:@"Folder"
 																																									 inManagedObjectContext:moc]
 																				insertIntoManagedObjectContext:moc];
-	[newFolder setValue:[NSString stringWithFormat:@"New Folder %02d", [[treeController flattenedContent] count]]
+	[newFolder setValue:[NSString stringWithFormat:@"New Folder %02lu", [[treeController flattenedContent] count]]
 							 forKey:@"name"];
 		
 	[treeController addObject:newFolder];
@@ -251,7 +247,7 @@
     }
     [self setNeedsDisplay:YES];
   }
-  [mainDocument showDocument];
+  [self.mainDocument showDocument];
 }
 
 - (IBAction) revealItem:(id)sender
@@ -263,8 +259,8 @@
 
 - (IBAction) renameItem:(id)sender
 {
-	if ([mainDocument respondsToSelector:@selector(renameItemAtRow:)]) {		
-		[mainDocument renameItemAtRow:selectedRow];
+	if ([self.mainDocument respondsToSelector:@selector(renameItemAtRow:)]) {		
+		[self.mainDocument renameItemAtRow:selectedRow];
 	}
 //	[treeController renameItemAtRow:selectedRow];
 //	[self editColumn:0 row:selectedRow withEvent:nil select:YES];
@@ -318,7 +314,7 @@
 - (BOOL)prepareForDragOperation:(id < NSDraggingInfo >)sender
 {
 //  NSLog(@"prepareForDragOperation: %d", dragLeftView);
-  if (dragLeftView)
+  if (self.dragLeftView)
     return NO;
   
   return [super prepareForDragOperation:sender];
@@ -327,17 +323,17 @@
 - (void)draggingEnded:(id < NSDraggingInfo >)sender
 {
 //  NSLog(@"Dragging ended");
-  if (dragLeftView) {
+  if (self.dragLeftView) {
     [self reloadData];
   }
-  dragLeftView = NO;
+  self.dragLeftView = NO;
   [self setNeedsDisplay:YES];
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender 
 {
 //  NSLog(@"performDragOperation: %d", dragLeftView);
-  if (dragLeftView)
+  if (self.dragLeftView)
     return NO;
   
   return [super performDragOperation:sender];
@@ -345,7 +341,7 @@
 
 - (void)draggingExited:(id < NSDraggingInfo >)sender
 {
-  dragLeftView = YES;
+  self.dragLeftView = YES;
   
 //  NSLog(@"Dragging from %@", sender);
   NSPasteboard *pboard = [sender draggingPasteboard];
