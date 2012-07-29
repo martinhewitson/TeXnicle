@@ -52,8 +52,6 @@
 - (void) dealloc
 {
   [self stopTimer];
-  self.lastKeyStroke = nil;
-  [super dealloc];
 }
 
 - (void) keyDown:(NSEvent *)theEvent

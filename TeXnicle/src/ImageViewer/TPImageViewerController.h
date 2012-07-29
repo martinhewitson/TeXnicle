@@ -29,17 +29,17 @@
 
 @interface TPImageViewerController : NSViewController {
 @private
-  NSView *contentView;
-  NSImageView *imageViewer;
-  NSView *backgroundView;
-  NSView *toolbarView;
+  NSView *__unsafe_unretained contentView;
+  NSImageView *__unsafe_unretained imageViewer;
+  NSView *__unsafe_unretained backgroundView;
+  NSView *__unsafe_unretained toolbarView;
   NSString *path;
 }
 
-@property (assign) IBOutlet NSView *contentView;
-@property (assign) IBOutlet NSImageView *imageViewer;
-@property (assign) IBOutlet NSView *backgroundView;
-@property (assign) IBOutlet NSView *toolbarView;
+@property (unsafe_unretained) IBOutlet NSView *contentView;
+@property (unsafe_unretained) IBOutlet NSImageView *imageViewer;
+@property (unsafe_unretained) IBOutlet NSView *backgroundView;
+@property (unsafe_unretained) IBOutlet NSView *toolbarView;
 @property (copy) NSString *path;
 
 - (void) enable;

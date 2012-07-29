@@ -35,7 +35,7 @@
   NSMutableSet *consoles;
 }
 
-@property (retain) NSMutableSet *consoles;
+@property (strong) NSMutableSet *consoles;
 
 - (BOOL) registerConsole:(id<MHConsoleViewer>)aConsole;
 

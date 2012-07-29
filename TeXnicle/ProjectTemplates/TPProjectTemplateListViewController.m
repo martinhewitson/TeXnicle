@@ -51,11 +51,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.templates = nil;
-  [super dealloc];
-}
 
 - (void) generateTemplateList
 {
@@ -74,7 +69,7 @@
     error = nil;
     NSDictionary *attrs = [fm attributesOfItemAtPath:filepath error:&error];
     if ([[attrs fileType] isEqualToString:NSFileTypeDirectory] && [[path pathExtension] isEqualToString:@"tpt"]) {
-      TPProjectTemplate *t = [[[TPProjectTemplate alloc] initWithPath:filepath] autorelease];
+      TPProjectTemplate *t = [[TPProjectTemplate alloc] initWithPath:filepath];
       [self.templates addObject:t];
     }
   }

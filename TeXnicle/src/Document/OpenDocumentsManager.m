@@ -90,14 +90,11 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   self.tabView.delegate = nil;
   tabBar.delegate = nil;
   tabBar.partnerView = nil;
-	[openDocuments release];
-	[standaloneWindows release];  
 }
 
 - (void) dealloc
 {
   [self cleanUp];
-	[super dealloc];
 }
 
 - (void) refreshTabForDocument:(FileEntity*)aDoc
@@ -149,7 +146,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[newDoc showWindow:self];
 	[[newDoc window] makeKeyAndOrderFront:self];
 	[standaloneWindows addObject:newDoc];
-	[newDoc release];
 }
 
 - (NSArray*)standaloneWindows
@@ -204,7 +200,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if (selectTab) {
       [tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
     }
-		[newItem release];
     
     
 	}	else {
@@ -534,7 +529,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if ([currentDoc isImage]) {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile:[currentDoc pathOnDisk]];
       [self.imageViewerController setImage:image atPath:[currentDoc pathOnDisk]];
-      [image release];
       [self.imageViewerController enable];
     } else {
       NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:[currentDoc extension]];

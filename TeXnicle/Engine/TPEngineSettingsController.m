@@ -48,7 +48,6 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 - (void) dealloc
 {
   self.delegate = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -95,7 +94,6 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     [languageSelector addItemWithTitle:displayNameString];
     menuItem = [languageSelector itemWithTitle:displayNameString];
     [menuItem setRepresentedObject:locale];
-    [locale release];
   }
   
   // select the current language
@@ -107,7 +105,6 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
       NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:languageID];
       NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
       [languageSelector selectItemAtIndex:index];
-      [locale release];
     }
   }
 }

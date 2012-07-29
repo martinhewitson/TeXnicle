@@ -58,17 +58,17 @@
   BOOL supportsDoPS2PDF;
   NSInteger supportsNCompile;
   BOOL builtIn;
-  id<TPEngineDelegate> delegate;
+  id<TPEngineDelegate> __unsafe_unretained delegate;
   NSString *imageIncludeString;
 }
 
-@property (assign) id<TPEngineDelegate> delegate;
+@property (unsafe_unretained) id<TPEngineDelegate> delegate;
 
 @property (copy) NSString *path;
 @property (copy) NSString *script;
 @property (copy) NSString *name;
 @property (copy) NSString *documentPath;
-@property (readonly) NSString *compiledDocumentPath;
+@property (unsafe_unretained, readonly) NSString *compiledDocumentPath;
 @property (assign) BOOL doBibtex;
 @property (assign) BOOL doPS2PDF;
 @property (assign) BOOL openConsole;

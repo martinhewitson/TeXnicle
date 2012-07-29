@@ -418,11 +418,6 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   return self;
 }
 
-- (void)dealloc
-{
-  self.library = nil;
-  [super dealloc];
-}
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
@@ -483,11 +478,11 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-//  [self checkVersion];
+  [self checkVersion];
   [TPEngineManager installEngines];
   
   // setup app-wide library
-  self.library = [[[TPLibrary alloc] init] autorelease];
+  self.library = [[TPLibrary alloc] init];
   
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
@@ -603,7 +598,7 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 - (IBAction)createProjectFromTemplate:(id)sender
 {
   // make template list viewer
-  TPProjectTemplateListViewer *viewer = [[[TPProjectTemplateListViewer alloc] init] autorelease];
+  TPProjectTemplateListViewer *viewer = [[TPProjectTemplateListViewer alloc] init];
   [NSApp runModalForWindow:viewer.window];  
 }
 
@@ -694,7 +689,6 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
-    [formatter release];
     
     NSAlert *alert = [NSAlert alertWithMessageText:@"A TeXnicle Project Already Exists"
                                      defaultButton:@"Continue"

@@ -51,18 +51,13 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.templateEditorView = nil;
-  [super dealloc];
-}
 
 - (void)windowDidLoad
 {
   [super windowDidLoad];
   
   // create a template editor view
-  self.templateEditorView = [[[TPTemplateEditorView alloc] init] autorelease];
+  self.templateEditorView = [[TPTemplateEditorView alloc] init];
   [self.templateEditorView.view setFrame:[self.templateEditorViewContainer bounds]];
   [self.templateEditorViewContainer addSubview:self.templateEditorView.view];
 

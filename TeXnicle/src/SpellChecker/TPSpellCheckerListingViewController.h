@@ -48,35 +48,35 @@
 
 @interface TPSpellCheckerListingViewController : NSViewController <NSUserInterfaceValidations, TPSpellCheckerListingDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
   
-  id<TPSpellCheckerListingDelegate> delegate;
+  id<TPSpellCheckerListingDelegate> __unsafe_unretained delegate;
   NSMutableArray *checkedFiles;
   NSTimer *spellCheckTimer;
-  NSOutlineView *outlineView;
+  NSOutlineView *__unsafe_unretained outlineView;
   
   NSInteger checkingFiles;
   
-  HHValidatedButton *correctButton;
-  HHValidatedButton *revealButton;
-  HHValidatedButton *learnButton;
-  HHValidatedButton *ignoreButton;
-  HHValidatedButton *forceCheckButton;
+  HHValidatedButton *__unsafe_unretained correctButton;
+  HHValidatedButton *__unsafe_unretained revealButton;
+  HHValidatedButton *__unsafe_unretained learnButton;
+  HHValidatedButton *__unsafe_unretained ignoreButton;
+  HHValidatedButton *__unsafe_unretained forceCheckButton;
     
   NSOperationQueue* aQueue;
-  NSProgressIndicator *progressIndicator;
+  NSProgressIndicator *__unsafe_unretained progressIndicator;
 }
 
-@property (retain) NSOperationQueue* aQueue;
+@property (strong) NSOperationQueue* aQueue;
 
-@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
-@property (assign) IBOutlet HHValidatedButton *correctButton;
-@property (assign) IBOutlet HHValidatedButton *revealButton;
-@property (assign) IBOutlet HHValidatedButton *learnButton;
-@property (assign) IBOutlet HHValidatedButton *ignoreButton;
-@property (assign) IBOutlet HHValidatedButton *forceCheckButton;
-@property (assign) IBOutlet NSOutlineView *outlineView;
-@property (assign) id<TPSpellCheckerListingDelegate> delegate;
-@property (retain) NSTimer *spellCheckTimer;
-@property (retain) NSMutableArray *checkedFiles;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *correctButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *learnButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *ignoreButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *forceCheckButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) id<TPSpellCheckerListingDelegate> delegate;
+@property (strong) NSTimer *spellCheckTimer;
+@property (strong) NSMutableArray *checkedFiles;
 
 - (id) initWithDelegate:(id<TPSpellCheckerListingDelegate>)aDelegate;
 - (void) updateFile:(FileEntity*)aFile;

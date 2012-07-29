@@ -34,7 +34,7 @@
 
 + (id) citationWithFile:(id)aFile entry:(BibliographyEntry *)anEntry
 {
-  return [[[TPCitation alloc] initWithFile:aFile entry:anEntry] autorelease];
+  return [[TPCitation alloc] initWithFile:aFile entry:anEntry];
 }
 
 - (id) initWithFile:(id)aFile entry:(BibliographyEntry *)anEntry
@@ -47,12 +47,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  self.entry = nil;
-  [super dealloc];
-}
 
 - (NSAttributedString*)attributedString
 {

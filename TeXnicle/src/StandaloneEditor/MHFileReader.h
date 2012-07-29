@@ -35,9 +35,9 @@
   NSNumber *selectedIndex;
 }
 
-@property (retain) NSArray *encodings;
-@property (retain) NSArray *encodingNames;
-@property (retain) NSNumber *selectedIndex;
+@property (strong) NSArray *encodings;
+@property (strong) NSArray *encodingNames;
+@property (strong) NSNumber *selectedIndex;
 
 + (NSStringEncoding)defaultEncoding;
 + (NSString*)defaultEncodingName;

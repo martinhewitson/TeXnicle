@@ -30,13 +30,13 @@
 @class FileEntity;
 
 @interface TPCommandSet : NSObject {
-  id file;
+  id __unsafe_unretained file;
   NSArray *commands;
 }
 
-@property (retain) NSArray *commands;
-@property (assign) id file;
-@property (readonly) NSString *name;
+@property (strong) NSArray *commands;
+@property (unsafe_unretained) id file;
+@property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile commandArray:(NSArray *)aList;
 

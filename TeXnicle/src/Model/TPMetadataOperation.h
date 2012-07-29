@@ -27,13 +27,13 @@
 @property (copy, nonatomic) NSString *text;
 
 // inputs
-@property (retain, nonatomic) FileEntity *file;
+@property (strong, nonatomic) FileEntity *file;
 
 // metadata
-@property (retain, nonatomic) NSArray *commands;
-@property (retain, nonatomic) NSArray *citations;
-@property (retain, nonatomic) NSArray *syntaxErrors;
-@property (retain, nonatomic) NSArray *labels;
+@property (strong, nonatomic) NSArray *commands;
+@property (strong, nonatomic) NSArray *citations;
+@property (strong, nonatomic) NSArray *syntaxErrors;
+@property (strong, nonatomic) NSArray *labels;
 
 - (id) initWithFile:(FileEntity*)aFile;
 

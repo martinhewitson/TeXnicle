@@ -46,41 +46,41 @@
   ProjectEntity *project;
   NSManagedObjectContext *managedObjectContext;
   TPTemplateDirectory *root;
-  NSOutlineView *outlineView;
+  NSOutlineView *__unsafe_unretained outlineView;
   TeXEditorViewController *texEditorViewController;
-  NSView *texEditorContainer;
+  NSView *__unsafe_unretained texEditorContainer;
   
-  NSView *leftView;
-  NSView *rightView;
+  NSView *__unsafe_unretained leftView;
+  NSView *__unsafe_unretained rightView;
   
-  NSView *projectNameView;
-  NSTextField *projectNameField;
+  NSView *__unsafe_unretained projectNameView;
+  NSTextField *__unsafe_unretained projectNameField;
   
   NSString *templateName;
   NSString *templateDescription;
-  NSTextField *templateDescriptionDisplay;
+  NSTextField *__unsafe_unretained templateDescriptionDisplay;
   
   TPTemplateItem *selectedItem;
   
-  id<TPProjectTemplateViewerDelegate> delegate;
+  id<TPProjectTemplateViewerDelegate> __unsafe_unretained delegate;
 }
 
-@property (assign) id<TPProjectTemplateViewerDelegate> delegate;
-@property (retain) ProjectEntity *project;
-@property (retain) NSManagedObjectContext *managedObjectContext;
-@property (retain) TPTemplateDirectory *root;
-@property (assign) IBOutlet NSTextField *templateDescriptionDisplay;
-@property (assign) IBOutlet NSOutlineView *outlineView;
-@property (assign) IBOutlet NSView *projectNameView;
-@property (assign) IBOutlet NSTextField *projectNameField;
+@property (unsafe_unretained) id<TPProjectTemplateViewerDelegate> delegate;
+@property (strong) ProjectEntity *project;
+@property (strong) NSManagedObjectContext *managedObjectContext;
+@property (strong) TPTemplateDirectory *root;
+@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionDisplay;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet NSView *projectNameView;
+@property (unsafe_unretained) IBOutlet NSTextField *projectNameField;
 @property (copy) NSString *templateName;
 @property (copy) NSString *templateDescription;
 
-@property (assign) IBOutlet NSView *leftView;
-@property (assign) IBOutlet NSView *rightView;
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
 
-@property (retain) TeXEditorViewController *texEditorViewController;
-@property (assign) IBOutlet NSView *texEditorContainer;
+@property (strong) TeXEditorViewController *texEditorViewController;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 
 - (id)initWithProject:(ProjectEntity*)aProject name:(NSString*)aName description:(NSString*)aDescription;
 - (BOOL) savePackageContentsFromProject;

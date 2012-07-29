@@ -36,20 +36,20 @@
 
 @interface DocWindowController : NSWindowController <NSWindowDelegate, TeXTextViewDelegate, BookmarkManagerDelegate> {
 
-	IBOutlet NSView *texEditorContainer;
-	TeXProjectDocument *mainDocument;
-	FileEntity *file;
+	IBOutlet NSView *__unsafe_unretained texEditorContainer;
+	TeXProjectDocument *__unsafe_unretained mainDocument;
+	FileEntity *__unsafe_unretained file;
 	TeXEditorViewController *texEditorViewController;
   TPStatusViewController *statusViewController;
-  NSView *statusViewContainer;
+  NSView *__unsafe_unretained statusViewContainer;
 }
 
-@property (readwrite,assign) FileEntity *file;
-@property (retain) TeXEditorViewController *texEditorViewController;
-@property (assign) IBOutlet NSView *texEditorContainer;
-@property (assign) TeXProjectDocument *mainDocument;
-@property (retain) TPStatusViewController *statusViewController;
-@property (assign) IBOutlet NSView *statusViewContainer;
+@property (readwrite,unsafe_unretained) FileEntity *file;
+@property (strong) TeXEditorViewController *texEditorViewController;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+@property (unsafe_unretained) TeXProjectDocument *mainDocument;
+@property (strong) TPStatusViewController *statusViewController;
+@property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
 
 - (id) initWithFile:(FileEntity*)aFile document:(TeXProjectDocument*)document;
 - (IBAction) saveDocument:(id)sender;

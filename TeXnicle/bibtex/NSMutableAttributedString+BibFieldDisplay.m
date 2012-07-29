@@ -44,7 +44,6 @@
 							value:[NSColor grayColor]
 							range:NSMakeRange(0, [aTag length])];
 	[self appendAttributedString:str];
-	[str release];
 }
 
 

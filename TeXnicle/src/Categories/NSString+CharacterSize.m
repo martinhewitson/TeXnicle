@@ -33,7 +33,7 @@
 + (CGFloat)averageCharacterWidthForCurrentFont
 {
 	NSFont *font = [NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentFont]];		
-	NSMutableAttributedString *str = [[[NSMutableAttributedString alloc] initWithString:@"1234567890abcdefghijklmnopqrstuvwxzy" attributes:nil] autorelease];
+	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"1234567890abcdefghijklmnopqrstuvwxzy" attributes:nil];
 	[str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [str length])];
 	NSSize strsize = [str size];
 	return 1.0*strsize.width/[str length];

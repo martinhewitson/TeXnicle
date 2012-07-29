@@ -30,15 +30,15 @@
 
 @interface MHThreePaneSplitViewController : NSObject <NSSplitViewDelegate, NSWindowDelegate> {
 @private
-  NSView *leftView;
-  NSView *rightView;
-  NSView *centerView;
-  NSSplitView *mainSplitView;
+  NSView *__unsafe_unretained leftView;
+  NSView *__unsafe_unretained rightView;
+  NSView *__unsafe_unretained centerView;
+  NSSplitView *__unsafe_unretained mainSplitView;
 }
 
-@property (assign) IBOutlet NSView *leftView;
-@property (assign) IBOutlet NSView *rightView;
-@property (assign) IBOutlet NSView *centerView;
-@property (assign) IBOutlet NSSplitView *mainSplitView;
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
+@property (unsafe_unretained) IBOutlet NSView *centerView;
+@property (unsafe_unretained) IBOutlet NSSplitView *mainSplitView;
 
 @end

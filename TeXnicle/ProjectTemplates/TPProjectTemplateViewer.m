@@ -63,10 +63,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.project = nil;
-  self.managedObjectContext = nil;
-  self.texEditorViewController = nil;
-  [super dealloc];
 }
 
 - (id)initWithProject:(ProjectEntity*)aProject name:(NSString*)aName description:(NSString*)aDescription
@@ -114,13 +110,13 @@
 {
   // apply our custom ImageAndTextCell for rendering the first column's cells
 	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:YES];
 	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
 	[tableColumn setDataCell:imageAndTextCell];
   
   // set up text editor
-  self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
+  self.texEditorViewController = [[TeXEditorViewController alloc] init];
   self.texEditorViewController.delegate = self;
   [self.texEditorViewController.view setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:self.texEditorViewController.view];
@@ -198,7 +194,7 @@
   
   if (!self.project) {
     if (self.managedObjectContext) {
-      NSFetchRequest *request = [[[NSFetchRequest alloc] initWithEntityName:@"Project"] autorelease];
+      NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Project"];
       NSError *error = nil;
       NSArray *projects = [self.managedObjectContext executeFetchRequest:request error:&error];
       if ([projects count] > 0) {
@@ -245,7 +241,7 @@
 
 - (void) readFileTreeFromURL:(NSURL*)absoluteURL
 {
-  self.root = [[[TPTemplateDirectory alloc] initWithPath:[absoluteURL path]] autorelease];
+  self.root = [[TPTemplateDirectory alloc] initWithPath:[absoluteURL path]];
   // read info
   NSDictionary *info = [NSDictionary dictionaryWithContentsOfURL:[absoluteURL URLByAppendingPathComponent:@"info.plist"]];
   if (info) {

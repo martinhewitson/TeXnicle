@@ -59,7 +59,7 @@
   NSString *docpath = [pb.projectFileURL path];
   if ([fm fileExistsAtPath:docpath]) {
     
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [docpath stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
     
@@ -99,7 +99,7 @@
 // Convenience constructor
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath
 {
-  return [[[TPProjectBuilder alloc] initWithDirectory:aPath] autorelease];
+  return [[TPProjectBuilder alloc] initWithDirectory:aPath];
 }
 
 // Inialise the builder with the given directory
@@ -118,7 +118,7 @@
 // Convenience constructor
 + (TPProjectBuilder*)builderWithMainfile:(NSString*)aFile
 {
-  return [[[TPProjectBuilder alloc] initWithMainfile:aFile] autorelease];
+  return [[TPProjectBuilder alloc] initWithMainfile:aFile];
 }
 
 // Initialise the builder with the given main file.
@@ -134,12 +134,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.filesOnDiskList = nil;
-  self.reportString = nil;
-  [super dealloc];
-}
 
 // Look for the first tex file which has a \begin{document} in it and return that file.
 + (NSString*) mainfileForDirectory:(NSString*)aPath
@@ -163,7 +157,7 @@
         // load the file as a string
         error = nil;
         
-        MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+        MHFileReader *fr = [[MHFileReader alloc] init];
         NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
         
         if (str) {
@@ -252,12 +246,12 @@
     FileEntity *file = [self addFileAtPath:mainFilePath toFolder:nil inProject:project inMOC:moc];
     // set as main file	
     [project setValue:file forKey:@"mainFile"];
-    self.reportString = [[[NSMutableAttributedString alloc] init] autorelease];
+    self.reportString = [[NSMutableAttributedString alloc] init];
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
     [file setValue:[NSNumber numberWithInt:0] forKey:@"sortIndex"];
     if ([self.reportString length] > 0) {
       
-      TPProjectBuilderReport *report = [[[TPProjectBuilderReport alloc] initWithReportString:self.reportString] autorelease];
+      TPProjectBuilderReport *report = [[TPProjectBuilderReport alloc] initWithReportString:self.reportString];
       [[report window] setTitle:[NSString stringWithFormat:@"Build Report for Project \u201c%@\u201d", self.projectName]];
       [report showWindow:self];
       
@@ -276,7 +270,7 @@
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
   // load the file as a string
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *string = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aFile]];
   if (string == nil) {
     [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];    
@@ -313,7 +307,7 @@
               NSString *filearg  = [self fileForArgument:arg];
               if (!filearg) {
                 NSString *str = [NSString stringWithFormat:@"Couldn't find included file on disk: %@\n", [self.projectDir stringByAppendingPathComponent:arg]];
-                NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+                NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
                 [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, 36)];
                 [self.reportString appendAttributedString:astr];
                 continue;
@@ -349,7 +343,7 @@
                   }
                 } else {
                   NSString *str = [NSString stringWithFormat:@"Not adding unsupported file type: %@\n", fullpath];
-                  NSMutableAttributedString *astr = [[[NSMutableAttributedString alloc] initWithString:str] autorelease];
+                  NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
                   [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, 33)];
                   [self.reportString appendAttributedString:astr];
 //                  NSLog(@"-- file is not supported or image: %@", fullpath);
@@ -376,8 +370,8 @@
 		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];		
 	}
 	
-	newFile = [[[FileEntity alloc] initWithEntity:entity
-                insertIntoManagedObjectContext:moc] autorelease];
+	newFile = [[FileEntity alloc] initWithEntity:entity
+                insertIntoManagedObjectContext:moc];
   
 	// set the parent object
   [newFile setParent:folder];
@@ -385,7 +379,7 @@
 	[moc processPendingChanges];
 	
   // set file content
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
   
   // check if the file was a text file
@@ -447,7 +441,7 @@
     if (createFolder) {
       // make the folder
       NSEntityDescription *newFolderEntity = [NSEntityDescription entityForName:@"Folder" inManagedObjectContext:moc];
-      FolderEntity *newFolder = [[[FolderEntity alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc] autorelease];
+      FolderEntity *newFolder = [[FolderEntity alloc] initWithEntity:newFolderEntity insertIntoManagedObjectContext:moc];
       
       // set name
       [newFolder setValue:comp forKey:@"name"];

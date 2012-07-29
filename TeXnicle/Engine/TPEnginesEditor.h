@@ -32,22 +32,22 @@
 @interface TPEnginesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate, TPEngineManagerDelegate> {
 @private
   TPEngineManager *engineManager;
-  NSTableView *tableView;
-  HHValidatedButton *editButton;
-  HHValidatedButton *duplicateButton;
-  HHValidatedButton *addEngineButton;
-  HHValidatedButton *deleteButton;
-  HHValidatedButton *revealButton;
+  NSTableView *__unsafe_unretained tableView;
+  HHValidatedButton *__unsafe_unretained editButton;
+  HHValidatedButton *__unsafe_unretained duplicateButton;
+  HHValidatedButton *__unsafe_unretained addEngineButton;
+  HHValidatedButton *__unsafe_unretained deleteButton;
+  HHValidatedButton *__unsafe_unretained revealButton;
 }
 
-@property (retain) TPEngineManager *engineManager;
-@property (assign) IBOutlet NSTableView *tableView;
+@property (strong) TPEngineManager *engineManager;
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
 
-@property (assign) IBOutlet HHValidatedButton *editButton;
-@property (assign) IBOutlet HHValidatedButton *duplicateButton;
-@property (assign) IBOutlet HHValidatedButton *addEngineButton;
-@property (assign) IBOutlet HHValidatedButton *deleteButton;
-@property (assign) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addEngineButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
 
 - (TPEngine*)selectedEngine;
 - (TPEngine*)engineAtRow:(NSInteger)aRow;

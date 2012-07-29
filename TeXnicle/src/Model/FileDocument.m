@@ -61,9 +61,6 @@
 		NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
 		textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
-    [attStr release];
-    [str release];
-    [fr release];
     
 		// Add a main layout manager
 		NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
@@ -77,8 +74,6 @@
 		[layoutManager addTextContainer:textContainer];
 						
 		// Clean up
-		[textContainer release];
-		[layoutManager release];
 		
 		// Now watch for changes to the text so that we can 
 		// update the managed object
@@ -94,9 +89,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[undoManager release];
-	[textStorage release];
-	[super dealloc];
 }
 
 
@@ -116,12 +108,10 @@
 		[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
 		
 		NSString *str = [string unfoldedString];
-		[string release];
 		
 		//	NSString *str = [textStorage string];
     MHFileReader *fr = [[MHFileReader alloc] init];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[file pathOnDisk]];
-    [fr release];
 		NSData *data = [str dataUsingEncoding:encoding];
 		
 		if (![[file valueForKey:@"content"] isEqual:data]) {

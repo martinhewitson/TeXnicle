@@ -51,22 +51,15 @@
   return self;
 }
 
-- (void) dealloc
-{
-	[aGradient release];
-	[super dealloc];
-}
 
 - (void)setStartingColor:(NSColor *)aColor
 {
 	if (startingColor) {
-		[startingColor release];
 		startingColor = nil;
 	}
 	
 	startingColor = [aColor copy];
 		
-	[aGradient release];
 	aGradient = nil;
 }
 
@@ -74,13 +67,11 @@
 - (void) setEndingColor:(NSColor *)aColor
 {
 	if (endingColor) {
-		[endingColor release];
 		endingColor = nil;
 	}
 	
 	endingColor = [aColor copy];
 	
-	[aGradient release];
 	aGradient = nil;
 }
 

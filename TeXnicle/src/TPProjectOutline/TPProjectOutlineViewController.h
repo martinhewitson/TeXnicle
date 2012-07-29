@@ -27,20 +27,20 @@
 
 @interface TPProjectOutlineViewController : NSViewController <NSTextViewDelegate, TPOutlineBuilderDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
   TPOutlineBuilder *outlineBuilder;
-  id<TPProjectOutlineDelegate> delegate;
-  NSOutlineView *outlineView;
-  NSButton *showDetailsButton;
-  NSSlider *depthSlider;
+  id<TPProjectOutlineDelegate> __unsafe_unretained delegate;
+  NSOutlineView *__unsafe_unretained outlineView;
+  NSButton *__unsafe_unretained showDetailsButton;
+  NSSlider *__unsafe_unretained depthSlider;
   
-  TPSection *currentSection;
+  TPSection *__unsafe_unretained currentSection;
 }
 
-@property (assign) TPSection *currentSection;
-@property (assign) IBOutlet NSSlider *depthSlider;
-@property (assign) IBOutlet NSButton *showDetailsButton;
-@property (assign) IBOutlet NSOutlineView *outlineView;
-@property (retain) TPOutlineBuilder *outlineBuilder;
-@property (assign) id<TPProjectOutlineDelegate> delegate;
+@property (unsafe_unretained) TPSection *currentSection;
+@property (unsafe_unretained) IBOutlet NSSlider *depthSlider;
+@property (unsafe_unretained) IBOutlet NSButton *showDetailsButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (strong) TPOutlineBuilder *outlineBuilder;
+@property (unsafe_unretained) id<TPProjectOutlineDelegate> delegate;
 
 - (id) initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate;
 - (IBAction) expandAllSections:(id) sender;

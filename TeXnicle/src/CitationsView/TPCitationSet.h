@@ -31,13 +31,13 @@
 @class FileEntity;
 
 @interface TPCitationSet : NSObject {
-  id file;
+  id __unsafe_unretained file;
   NSArray *citations;
 }
 
-@property (retain) NSArray *citations;
-@property (assign) id file;
-@property (readonly) NSString *name;
+@property (strong) NSArray *citations;
+@property (unsafe_unretained) id file;
+@property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile bibliographyArray:(NSArray *)aList;
 - (void) setCitationsFromBibliographyArray:(NSArray*)aList;

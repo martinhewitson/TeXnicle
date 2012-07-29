@@ -45,7 +45,6 @@
 																															attributes:dict];
 		[self setAttributedStringValue:str];
 		[self setEditable:YES];
-		[str release];
 		
 	}
 	return self;
@@ -82,13 +81,11 @@
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
   [ps setAlignment:NSCenterTextAlignment];
   [smallerString addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [smallerString length])];
-  [ps release];
 	NSSize smallSize = [smallerString size];
   NSRect r = NSMakeRect(irect.origin.x+(irect.size.width-strSize.width)/2.0, 
 												irect.origin.y+irect.size.height/2.0-smallSize.height/2.0, 
 												strSize.width, strSize.height);
 	[smallerString drawInRect:r];
-	[smallerString release];
 }
 
 - (NSSize) cellSize

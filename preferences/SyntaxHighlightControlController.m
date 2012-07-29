@@ -58,7 +58,7 @@
 - (void) setupBindings
 {
 	
-	[NSValueTransformer setValueTransformer: [[[NSColorArrayTransformer alloc] init] autorelease] 
+	[NSValueTransformer setValueTransformer: [[NSColorArrayTransformer alloc] init] 
 																	forName: @"ColorArrayTransformer"];
 	
 	

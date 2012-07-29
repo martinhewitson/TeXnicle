@@ -29,13 +29,13 @@
 
 @interface TPSyntaxError : NSObject {
 @private
-  id file;
+  id __unsafe_unretained file;
   NSNumber *line;
   NSString* message;
 }
 
-@property (assign) id file;
-@property (retain) NSNumber *line;
+@property (unsafe_unretained) id file;
+@property (strong) NSNumber *line;
 @property (copy) NSString* message;
 
 + (id) errorWithMessage:(NSString*)aMessage line:(NSNumber*)aLine;

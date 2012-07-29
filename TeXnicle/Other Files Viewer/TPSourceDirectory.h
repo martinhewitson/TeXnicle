@@ -21,12 +21,12 @@
 @private
   NSArray *children;
 	BOOL didPopulate;
-  id<TPSourceDirectoryDelegate> delegate;
+  id<TPSourceDirectoryDelegate> __unsafe_unretained delegate;
 }
 
-@property (retain) NSArray *children;
+@property (strong) NSArray *children;
 @property (assign) BOOL didPopulate;
-@property (assign) id<TPSourceDirectoryDelegate> delegate;
+@property (unsafe_unretained) id<TPSourceDirectoryDelegate> delegate;
 
 + (TPSourceDirectory*)directoryWithParent:(TPSourceItem *)aParent path:(NSURL *)aURL delegate:(id<TPSourceDirectoryDelegate>)aDelegate;
 - (id)initWithParent:(TPSourceItem *)aParent path:(NSURL *)aURL delegate:(id<TPSourceDirectoryDelegate>)aDelegate;

@@ -17,7 +17,7 @@
 
 + (TPSourceDirectory*)directoryWithParent:(TPSourceItem *)aParent path:(NSURL *)aURL delegate:(id<TPSourceDirectoryDelegate>)aDelegate
 {
-  return [[[TPSourceDirectory alloc] initWithParent:aParent path:aURL delegate:aDelegate] autorelease];
+  return [[TPSourceDirectory alloc] initWithParent:aParent path:aURL delegate:aDelegate];
 }
 
 - (id)initWithParent:(TPSourceItem *)aParent path:(NSURL *)aURL delegate:(id<TPSourceDirectoryDelegate>)aDelegate
@@ -31,23 +31,18 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.children = nil;
-  [super dealloc];
-}
 
 + (NSArray *)scanProperties
 {
   static NSArray *scanProperties = nil;
   if (!scanProperties) {
-    scanProperties = [[NSArray arrayWithObjects:
+    scanProperties = [NSArray arrayWithObjects:
                        NSURLNameKey, 
                        NSURLIsDirectoryKey, 
                        NSURLIsRegularFileKey, 
                        NSURLIsHiddenKey,
                        NSURLIsPackageKey,
-                       nil] retain];
+                       nil];
   }
   return scanProperties;
 }

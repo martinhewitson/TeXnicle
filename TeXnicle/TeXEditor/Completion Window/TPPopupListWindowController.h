@@ -37,7 +37,7 @@
 
 
 @interface TPPopupListWindowController : NSViewController <NSTextFieldDelegate> {
-	id delegate;
+	id __unsafe_unretained delegate;
 	NSString *title;
 	IBOutlet NSTextField *titleView;
 	NSWindow *parentWindow;
@@ -53,7 +53,7 @@
 @property (assign) BOOL isVisible;
 
 @property (readwrite, copy) NSString *title;
-@property (readwrite, assign) id delegate;
+@property (readwrite, unsafe_unretained) id delegate;
 @property (readonly) NSUInteger mode;
 
 - (IBAction) searchFieldAction:(id)sender;

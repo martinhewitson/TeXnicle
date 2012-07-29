@@ -31,15 +31,15 @@
 
 @interface TPTemplateEditorView : NSViewController <NSTextViewDelegate, NSTableViewDelegate, NSTableViewDataSource> {
 @private
-  TeXTextView *templateCodeView;
-  NSTableView *templateTable; 
-  NSArrayController *templateArrayController;
+  TeXTextView *__unsafe_unretained templateCodeView;
+  NSTableView *__unsafe_unretained templateTable; 
+  NSArrayController *__unsafe_unretained templateArrayController;
 }
 
 
-@property (assign) IBOutlet TeXTextView *templateCodeView;
-@property (assign) IBOutlet NSTableView *templateTable;
-@property (assign) IBOutlet NSArrayController *templateArrayController;
+@property (unsafe_unretained) IBOutlet TeXTextView *templateCodeView;
+@property (unsafe_unretained) IBOutlet NSTableView *templateTable;
+@property (unsafe_unretained) IBOutlet NSArrayController *templateArrayController;
 
 - (NSDictionary*)selectedTemplate;
 

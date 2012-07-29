@@ -69,7 +69,6 @@
   self.outlineView.dataSource = nil;
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -83,7 +82,6 @@
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
-  [imageAndTextCell release];
 }
 
 - (void) handleBookmarkChangedNotification:(NSNotification*)aNote

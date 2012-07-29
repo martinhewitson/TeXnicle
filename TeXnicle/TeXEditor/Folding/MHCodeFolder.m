@@ -47,7 +47,7 @@
 
 + (MHCodeFolder*) codeFolderWithStartIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex startLine:(NSInteger)startLine endLine:(NSInteger)endLine tag:(MHFoldingTagDescription*)aTag
 {
-  return [[[MHCodeFolder alloc] initWithStartIndex:startIndex endIndex:endIndex startLine:startLine endLine:endLine tag:(MHFoldingTagDescription*)aTag] autorelease];
+  return [[MHCodeFolder alloc] initWithStartIndex:startIndex endIndex:endIndex startLine:startLine endLine:endLine tag:(MHFoldingTagDescription*)aTag];
 }
 
 - (id) initWithStartIndex:(NSInteger)aStartIndex endIndex:(NSInteger)anEndIndex startLine:(NSInteger)aStartLine endLine:(NSInteger)anEndLine tag:(MHFoldingTagDescription*)aTag
@@ -64,11 +64,6 @@
 }
 
 
-- (void)dealloc
-{
-  self.tag = nil;
-  [super dealloc];
-}
 
 
 - (BOOL) isValid

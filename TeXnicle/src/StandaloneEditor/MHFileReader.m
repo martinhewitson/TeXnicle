@@ -39,7 +39,7 @@
 + (NSStringEncoding)defaultEncoding
 {
   NSString *defaultEncodingName = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   return [fr encodingWithName:defaultEncodingName];
 }
 
@@ -100,13 +100,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.encodings = nil;
-  self.selectedIndex = nil;
-  self.encodingNames = nil;
-  [super dealloc];
-}
 
 - (NSString*)defaultEncodingName
 {
@@ -192,7 +185,6 @@
 //  NSLog(@"Writing with encoding %@", [self nameOfEncoding:encoding]);
   
   BOOL result = [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
-  [content release];
   
   if (result == NO) {
     [NSApp presentError:error];

@@ -37,7 +37,7 @@
 
 + (MHLineNumber*) lineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange
 {
-  return [[[MHLineNumber alloc] initWithLineNumberWithValue:lineNumber index:anIndex range:aRange] autorelease];
+  return [[MHLineNumber alloc] initWithLineNumberWithValue:lineNumber index:anIndex range:aRange];
 }
 
 - (id) initWithLineNumberWithValue:(NSUInteger)lineNumber index:(NSUInteger)anIndex range:(NSRange)aRange
@@ -51,10 +51,6 @@
   return self;
 }
 
-- (void)dealloc
-{
-  [super dealloc];
-}
 
 - (NSString*)description
 {

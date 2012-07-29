@@ -29,12 +29,12 @@
 
 @interface TPPasteTableConfigureWindowController : NSWindowController {
 @private
-  NSTextField *customSeparatorField;
-  NSMatrix *separatorMatrix;
+  NSTextField *__unsafe_unretained customSeparatorField;
+  NSMatrix *__unsafe_unretained separatorMatrix;
 }
 
-@property (assign) IBOutlet NSTextField *customSeparatorField;
-@property (assign) IBOutlet NSMatrix *separatorMatrix;
+@property (unsafe_unretained) IBOutlet NSTextField *customSeparatorField;
+@property (unsafe_unretained) IBOutlet NSMatrix *separatorMatrix;
 
 - (IBAction)selectNewSeparator:(id)sender;
 

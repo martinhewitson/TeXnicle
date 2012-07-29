@@ -172,9 +172,7 @@
 {
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[entries release];
   [self dismiss];
-	[super dealloc];
 }
 
 - (void) moveToPoint:(NSPoint)aPoint
@@ -305,7 +303,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     BOOL isHighlighted = [tableView selectedRow] == row;
     
     if (isHighlighted && [value respondsToSelector:@selector(alternativeAttributedString)]) {
-      return [value alternativeAttributedString];
+      return [value performSelector:@selector(alternativeAttributedString)];
     } else if ([value respondsToSelector:@selector(attributedString)]) {
       return [value attributedString];
     } else if ([value respondsToSelector:@selector(string)]) {

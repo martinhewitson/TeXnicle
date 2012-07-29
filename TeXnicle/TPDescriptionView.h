@@ -36,10 +36,10 @@
   NSColor *borderColor;
 }
 
-@property (retain) NSTextFieldCell *descriptionCell;
+@property (strong) NSTextFieldCell *descriptionCell;
 @property (copy) NSString *descriptionText;
-@property (retain) NSColor *backgroundColor;
-@property (retain) NSColor *borderColor;
+@property (strong) NSColor *backgroundColor;
+@property (strong) NSColor *borderColor;
 
 
 @end

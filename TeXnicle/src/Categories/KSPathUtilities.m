@@ -69,7 +69,7 @@
 
 - (NSString *)ks_stringByIncrementingPath;
 {
-    return [[[KSIncrementedPath alloc] initWithBasePath:self suffix:2] autorelease];
+    return [[KSIncrementedPath alloc] initWithBasePath:self suffix:2];
 }
 
 #pragma mark Comparing Paths
@@ -252,16 +252,10 @@
     return self;
 }
 
-- (void)dealloc;
-{
-    [_basePath release];
-    [_storage release];
-    [super dealloc];
-}
 
 - (NSString *)ks_stringByIncrementingPath;
 {
-    return [[[[self class] alloc] initWithBasePath:_basePath suffix:(_suffix + 1)] autorelease];
+    return [[[self class] alloc] initWithBasePath:_basePath suffix:(_suffix + 1)];
 }
 
 #pragma mark NSString Primitives

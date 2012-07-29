@@ -40,20 +40,13 @@
 	NSFileWrapper *fw = [[NSFileWrapper alloc] initRegularFileWithContents:d];
 	[fw setPreferredFilename:@"snippet"];
 	self = [super initWithFileWrapper:fw];
-	[fw release];
 	if (self) {
 		TPFoldedAttachmentCell *aCell = [[TPFoldedAttachmentCell alloc] initTextCell:@"..."];
 		[self setAttachmentCell:aCell];
-		[aCell release];
 	}
 	
 	return self;
 }
 
-- (void) dealloc
-{
-  self.object = nil;
-  [super dealloc];
-}
 
 @end

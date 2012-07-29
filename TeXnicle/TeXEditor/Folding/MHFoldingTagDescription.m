@@ -44,7 +44,7 @@
 
 + (MHFoldingTagDescription*)foldingTagWithStartTag:(NSString*)aStartTag endTag:(NSString*)anEndTag followingArgument:(BOOL)hasArgument
 {
-  return [[[MHFoldingTagDescription alloc] initWithStartTag:aStartTag endTag:anEndTag followingArgument:hasArgument] autorelease];
+  return [[MHFoldingTagDescription alloc] initWithStartTag:aStartTag endTag:anEndTag followingArgument:hasArgument];
 }
 
 - (id)initWithStartTag:(NSString*)aStartTag endTag:(NSString*)anEndTag followingArgument:(BOOL)hasArgument
@@ -60,12 +60,6 @@
   return self;
 }
 
-- (void)dealloc
-{
-  self.startTag = nil;
-  self.endTag = nil;
-  [super dealloc];
-}
 
 + (MHFoldingTagDescription*) foldingTagInLine:(NSString*)line atIndex:(NSInteger*)index fromTags:(NSArray*)tags matched:(NSInteger*)matchingTag
 {

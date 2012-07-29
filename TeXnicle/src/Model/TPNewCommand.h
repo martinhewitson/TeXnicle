@@ -30,12 +30,12 @@
 @interface TPNewCommand : NSObject {
   NSString *source;
   NSString *argument;
-  id file;
+  id __unsafe_unretained file;
 }
 
 @property (copy) NSString *source;
 @property (copy) NSString *argument;
-@property (assign) id file;
+@property (unsafe_unretained) id file;
 
 + (id) commandWithSource:(NSString*)text;
 - (id) initWithSource:(NSString*)text;

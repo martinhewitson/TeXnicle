@@ -64,7 +64,6 @@
     }
   }
   
-  [gradient release];
   
 }
 

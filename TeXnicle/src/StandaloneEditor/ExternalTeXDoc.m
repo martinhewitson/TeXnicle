@@ -267,7 +267,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.infoTabbarController selectTabAtIndex:2];
   
   //  NSLog(@"Awake from nib");
-  self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
+  self.texEditorViewController = [[TeXEditorViewController alloc] init];
   self.texEditorViewController.delegate = self;
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
@@ -281,32 +281,32 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	}
 	
   // warnings view
-  self.warningsViewController = [[[TPWarningsViewController alloc] initWithDelegate:self] autorelease];
+  self.warningsViewController = [[TPWarningsViewController alloc] initWithDelegate:self];
   [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
   [self.warningsContainerView addSubview:self.warningsViewController.view];
   
   // labels view
-  self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
+  self.labelsViewController = [[TPLabelsViewController alloc] initWithDelegate:self];
   [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
   [self.labelsContainerView addSubview:self.labelsViewController.view];
   
   // citations view
-  self.citationsViewController = [[[TPCitationsViewController alloc] initWithDelegate:self] autorelease];
+  self.citationsViewController = [[TPCitationsViewController alloc] initWithDelegate:self];
   [self.citationsViewController.view setFrame:self.citationsContainerView.bounds];
   [self.citationsContainerView addSubview:self.citationsViewController.view];
   
   // commands view
-  self.commandsViewController = [[[TPNewCommandsViewController alloc] initWithDelegate:self] autorelease];
+  self.commandsViewController = [[TPNewCommandsViewController alloc] initWithDelegate:self];
   [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
   [self.commandsContainerView addSubview:self.commandsViewController.view];
   
   // setup outline view
-  self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
+  self.outlineViewController = [[TPProjectOutlineViewController alloc] initWithDelegate:self];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
   [self.outlineViewContainer addSubview:self.outlineViewController.view];
   
   // setup pdf viewer
-  self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
+  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
   [self.pdfViewerController.view setFrame:[self.pdfViewContainer bounds]];
   [self.pdfViewContainer addSubview:self.pdfViewerController.view];
   
@@ -314,22 +314,22 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.engineManager = [TPEngineManager engineManagerWithDelegate:self];
   
   // set up engine settings
-  self.engineSettingsController = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
+  self.engineSettingsController = [[TPEngineSettingsController alloc] initWithDelegate:self];
   [self.engineSettingsController.view setFrame:[self.prefsContainerView bounds]];
   [self.prefsContainerView addSubview:self.engineSettingsController.view];
   
   // setup palette
-  self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
+  self.palette = [[PaletteController alloc] initWithDelegate:self];
   [self.palette.view setFrame:[self.paletteContainerView bounds]];
   [self.paletteContainerView addSubview:self.palette.view];
   
   // setup library
-  self.library = [[[TPLibraryController alloc] initWithDelegate:self] autorelease];
+  self.library = [[TPLibraryController alloc] initWithDelegate:self];
   [self.library.view setFrame:[self.libraryContainerView bounds]];
   [self.libraryContainerView addSubview:self.library.view];
   
   // setup spellchecker
-  self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
+  self.spellcheckerViewController = [[TPSpellCheckerListingViewController alloc] initWithDelegate:self];
   [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
   [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];
   
@@ -356,7 +356,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
              name:NSTextDidChangeNotification
            object:self.texEditorViewController.textView];
   
-  self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
+  self.miniConsole = [[MHMiniConsoleViewController alloc] init];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
     //    NSLog(@"%@: %@", [item itemIdentifier], NSStringFromRect([[item view] frame]));
@@ -371,13 +371,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.engineManager registerConsole:self.miniConsole];
   
   // embedded console
-  self.embeddedConsoleViewController = [[[TPConsoleViewController alloc] init] autorelease];
+  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] init];
   [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
   [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
   [self.engineManager registerConsole:self.embeddedConsoleViewController];
   
   // setup status view
-  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  self.statusViewController = [[TPStatusViewController alloc] init];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
   _statusViewIsShowing = YES;
@@ -613,11 +613,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   if (self.liveUpdateTimer) {
     [self.liveUpdateTimer invalidate];
-    [_liveUpdateTimer release];
   }
   if (self.metadataUpdateTimer) {
     [self.metadataUpdateTimer invalidate];
-    [_metadataUpdateTimer release];
   }
 }
 
@@ -630,100 +628,72 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self stopTimers];
   
   // max outline view depth
-  [_maxOutlineViewDepth release];
   
   // results
-  [_results release];
   
   // pdfviewer
   self.pdfViewer.delegate = nil;
-  [_pdfViewer release];
   
   // warnings view
   self.warningsViewController.delegate = nil;
-  [_warningsViewController release];
   
   // labels view
   self.labelsViewController.delegate = nil;
-  [_labelsViewController release];
   
   // citations view
   self.citationsViewController.delegate = nil;
-  [_citationsViewController release];
   
   // commands view
   self.commandsViewController.delegate = nil;
-  [_commandsViewController release];
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
-  [_pdfViewerController release];
 
   // mini console
-  [_miniConsole release];
   
   // console viewer
-  [_embeddedConsoleViewController release];
   
   // outline view controller
   self.outlineViewController.delegate = nil;
-  [_outlineViewController release];
   
   // status view controller
-  [_statusViewController release];
   
   // spell checker  
   self.spellcheckerViewController.delegate = nil;
   [self.spellcheckerViewController stop];
-  [_spellcheckerViewController release];
   
   // settings
-  [_settings release];
   
   // engine settings controller
   self.engineSettingsController.delegate = nil;
-  [_engineSettingsController release];
   
   // library
   self.library.delegate = nil;
-  [_library release];
   
   // palette
   self.palette.delegate = nil;
-  [_palette release];
   
   // tex editor view controller
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
-  [_texEditorViewController release];
   
   // file load date
-  [_fileLoadDate release];
   
   // file monitor  
   self.fileMonitor.delegate = nil;
-  [_fileMonitor release];
   
   // engine manager
   self.engineManager.delegate = nil;  
-  [_engineManager release];
   
   // template editor
   self.templateEditor.delegate = nil;
-  [_templateEditor release];
  
   // document data
-  [_documentData release];
   
   // last edit data
-  [_lastEdit release];
 }
 
 
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
@@ -836,7 +806,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSMutableAttributedString *aStr = [[self.texEditorViewController.textView textStorage] mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   NSString *string = [aStr unfoldedString];
-  [aStr release];
   if (!string)
     return;
   
@@ -1130,7 +1099,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                                                           forKey:NSCharacterEncodingDocumentAttribute];
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
       [self setDocumentData:attStr];
-      [attStr release];
       [self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
       
       // read settings
@@ -1144,7 +1112,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     } // end if str
     
     // release file reader
-    [fr release];
     
   }
 }
@@ -1168,8 +1135,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   BOOL res = [fr writeString:str toURL:absoluteURL withEncoding:_encoding];
   
   // clean up
-  [fr release];
-	[string release];
   
   if (res) {
     // now write project settings as xattr  
@@ -1204,7 +1169,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [self.texEditorViewController.textView colorWholeDocument];
     
     // free attributed string
-    [attStr release];
     
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
@@ -1223,7 +1187,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	}
   
   // clean up
-  [fr release];
   
 	return success;
 }
@@ -1254,7 +1217,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (IBAction)printDocument:(id)sender
 {
   // set printing properties
-  NSPrintInfo *myPrintInfo = [[[NSPrintInfo alloc] initWithDictionary:[[self printInfo] dictionary]] autorelease];
+  NSPrintInfo *myPrintInfo = [[NSPrintInfo alloc] initWithDictionary:[[self printInfo] dictionary]];
   [myPrintInfo setHorizontalPagination:NSFitPagination];
   [myPrintInfo setHorizontallyCentered:YES];
   [myPrintInfo setVerticallyCentered:NO];
@@ -1280,7 +1243,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self runModalPrintOperation: op delegate: nil didRunSelector: NULL 
                    contextInfo: NULL];
   
-  [printView release];
   
 }
 
@@ -1415,7 +1377,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) endAddToProjectSheet:(id)sender
 {
-  NSInteger tag = [sender tag];
+  NSInteger tag = [(NSButton*)sender tag];
 	// user clicked cancel
 	if (tag == 0) {
 		[NSApp endSheet:_addToProjectSheet];
@@ -1490,7 +1452,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (IBAction) endAddToNewProjectSheet:(id)sender
 {
 	// user clicked cancel
-	if ([sender tag] == 0) {
+	if ([(NSButton*)sender tag] == 0) {
 		[NSApp endSheet:_addToEmptyProjectSheet];
 		[_addToEmptyProjectSheet orderOut:sender];
 		return;
@@ -1612,7 +1574,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
-  [sync release];
 }
 
 
@@ -1676,7 +1637,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   for (NSString *str in parsedLabels) {
     TPLabel *l = [[TPLabel alloc] initWithFile:self text:str];
     [newLabels addObject:l];
-    [l release];
   }
 
 	return [NSArray arrayWithArray:newLabels];
@@ -1745,7 +1705,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction)liveUpdate:(id)sender
 {
-  if ([sender state] == NSOnState) {
+  if ([(NSButton*)sender state] == NSOnState) {
     _liveUpdate = YES;
   } else {
     _liveUpdate = NO;
@@ -1810,7 +1770,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   
   if (self.pdfViewer == nil) {
-    self.pdfViewer = [[[PDFViewer alloc] initWithDelegate:self] autorelease];
+    self.pdfViewer = [[PDFViewer alloc] initWithDelegate:self];
   }
   [self.pdfViewer showWindow:self];
   
@@ -2035,7 +1995,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   }
   
   // release synctex controller
-  [sync release];
 }
 
 
@@ -2356,9 +2315,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         if (document) {
           ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
           
-          NSString *rangeString = NSStringFromRange(aRange);
-          NSString *forwardResult = result;
-          id forwardFile = aFile;          
+          __unsafe_unretained NSString *rangeString = NSStringFromRange(aRange);
+          __unsafe_unretained NSString *forwardResult = result;
+          __unsafe_unretained id forwardFile = aFile;          
           
           NSInvocation			*invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:@selector(highlightSearchResult:withRange:inFile:)]];
           [invocation setSelector:@selector(highlightSearchResult:withRange:inFile:)];
@@ -2392,7 +2351,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void) showTemplatesSheet
 {
   if (self.templateEditor == nil) {
-	 self.templateEditor = [[[TPTemplateEditor alloc] initWithDelegate:self activeFilename:NO] autorelease];
+	 self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:NO];
   }
   
   [NSApp beginSheet:self.templateEditor.window
@@ -2430,7 +2389,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                                                            forKey:NSCharacterEncodingDocumentAttribute];
   NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:[self.texEditorViewController.textView string] attributes:options];
   [self setDocumentData:attStr];
-  [attStr release];
 }
 
 #pragma mark -
@@ -2611,7 +2569,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   for (NSString *str in parsedCommands) {
     TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
     [commandObjects addObject:c];
-    [c release];
   }
 
   return [NSArray arrayWithArray:commandObjects];

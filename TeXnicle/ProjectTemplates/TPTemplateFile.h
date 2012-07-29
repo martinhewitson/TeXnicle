@@ -36,7 +36,7 @@
 }
 
 @property (copy) NSString *stringContent;
-@property (retain) NSData *dataContent;
+@property (strong) NSData *dataContent;
 
 - (void) readContent;
 - (void) saveContent;

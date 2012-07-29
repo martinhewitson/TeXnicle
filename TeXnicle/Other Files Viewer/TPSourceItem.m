@@ -23,11 +23,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.path = nil;
-  [super dealloc];
-}
 
 - (NSString*)name
 {

@@ -31,11 +31,11 @@
 @interface TPProjectBuilderReport : NSWindowController {
 @private
   NSAttributedString *reportString;
-  NSTextView *textView;
+  NSTextView *__unsafe_unretained textView;
 }
 
-@property (retain) NSAttributedString *reportString;
-@property (assign) IBOutlet NSTextView *textView;
+@property (strong) NSAttributedString *reportString;
+@property (unsafe_unretained) IBOutlet NSTextView *textView;
 
 - (id)initWithReportString:(NSAttributedString*)str;
 

@@ -30,13 +30,13 @@
 
 @interface TPFoldedCodeSnippet : NSTextAttachment {
 
-	NSString *code;
+	NSString *__unsafe_unretained code;
 	id object;
 	
 }
 
-@property (readwrite, assign) NSString *code;
-@property (readwrite, retain) id object;
+@property (readwrite, unsafe_unretained) NSString *code;
+@property (readwrite, strong) id object;
 
 - (id) initWithCode:(NSAttributedString*)aString;
 

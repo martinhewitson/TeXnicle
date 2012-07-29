@@ -137,7 +137,7 @@
     [alert beginSheetModalForWindow:self.window 
                       modalDelegate:self
                      didEndSelector:@selector(overwriteAlertDidEnd:returnCode:contextInfo:) 
-                        contextInfo:url];
+                        contextInfo:(__bridge void *)(url)];
     
   } else {
   
@@ -158,7 +158,7 @@
   }
   
   // create template bundle
-  NSURL *url = (NSURL*)contextInfo;
+  NSURL *url = (__bridge NSURL*)contextInfo;
   [[self.delegate project] saveTemplateBundleWithName:[self.templateNameTextField stringValue]
                                           description:[self.templateDescriptionField stringValue]
                                                 toURL:url];

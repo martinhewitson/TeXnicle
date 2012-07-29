@@ -70,10 +70,10 @@
   IBOutlet MHStrokedFiledView *pane3;
   IBOutlet MHStrokedFiledView *pane4;
   
-  id<TPEngineSettingsDelegate> delegate;
+  id<TPEngineSettingsDelegate> __unsafe_unretained delegate;
 }
 
-@property (assign) id<TPEngineSettingsDelegate> delegate;
+@property (unsafe_unretained) id<TPEngineSettingsDelegate> delegate;
 
 - (id) initWithDelegate:(id<TPEngineSettingsDelegate>)aDelegate;
 

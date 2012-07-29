@@ -38,7 +38,7 @@
 
 + (TPDocumentMatch*)documentMatchInLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
 {
-  return [[[TPDocumentMatch alloc] initWithLine:aLineNumber withRange:aRange subrange:(NSRange)aSubrange matchingString:aString inDocument:(TPResultDocument*)aParent] autorelease];
+  return [[TPDocumentMatch alloc] initWithLine:aLineNumber withRange:aRange subrange:(NSRange)aSubrange matchingString:aString inDocument:(TPResultDocument*)aParent];
 }
 
 - (id)initWithLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent
@@ -73,7 +73,7 @@
   NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:matchRange];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
-  return [att autorelease];
+  return att;
 }
 
 - (NSAttributedString*)displayString
@@ -85,9 +85,8 @@
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [str length])];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor colorWithDeviceRed:240.0/255.0 green:240.0/255.0 blue:180.0/255.0 alpha:1.0] range:self.subrange];
   [str appendAttributedString:att];
-  [att release];
   
-  return [str autorelease];
+  return str;
 }
 
 @end

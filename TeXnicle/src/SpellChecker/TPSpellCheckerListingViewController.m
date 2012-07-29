@@ -57,7 +57,7 @@
   if (self) {
     self.delegate = aDelegate;
     self.checkedFiles = [NSMutableArray array];
-    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
+    self.aQueue = [[NSOperationQueue alloc] init];
   }
   return self;
 }
@@ -67,11 +67,8 @@
 {
 //  NSLog(@"Dealloc %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.aQueue = nil;
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
-  self.checkedFiles = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -85,7 +82,6 @@
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
-  [imageAndTextCell release];
   
   [self setupSpellChecker];
 
@@ -196,7 +192,6 @@
                                    keyEquivalent:@""];
     [menuItem setTarget:target];
     [theMenu addItem:menuItem];
-    [menuItem release];
     
     
 //    // ignore
@@ -217,7 +212,6 @@
                                  keyEquivalent:@""];
   [menuItem setEnabled:NO];
   [theMenu addItem:menuItem];
-  [menuItem release];
   
   [theMenu addItem:[NSMenuItem separatorItem]];
   
@@ -233,11 +227,10 @@
                                    keyEquivalent:@""];
     [menuItem setTarget:target];
     [theMenu addItem:menuItem];
-    [menuItem release];
     
   }  
   
-  return [theMenu autorelease];
+  return theMenu;
 }
 
 
@@ -385,7 +378,6 @@
     if (file) {
       checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
       [self.checkedFiles addObject:checkedFile];
-      [checkedFile release];
     } else {
       return;
     }
@@ -404,7 +396,7 @@
 
 - (void) checkFile:(TPSpellCheckedFile*)aFile
 {
-  __block TPSpellCheckedFile *checkedFile = aFile;
+  __unsafe_unretained TPSpellCheckedFile *checkedFile = aFile;
   
   NSString *string = nil;
   
@@ -445,13 +437,10 @@
 //                     });
                      
                      TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:guesses range:result.range parent:checkedFile];
-                     [guesses release];
                      [words addObject:word];
-                     [word release];
                    }
                    
                    [checkedFile performSelectorOnMainThread:@selector(updateWithWords:) withObject:words waitUntilDone:NO];
-                   [words release];
                    
                    [self performSelectorOnMainThread:@selector(notifyFileUpdated) withObject:nil waitUntilDone:YES];
                    
@@ -503,7 +492,6 @@
         if (checkedFile == nil) {
           checkedFile = [[TPSpellCheckedFile alloc] initWithFile:file];
           [self.checkedFiles addObject:checkedFile];
-          [checkedFile release];
         }
         
         // check the last edit time against the last checked time

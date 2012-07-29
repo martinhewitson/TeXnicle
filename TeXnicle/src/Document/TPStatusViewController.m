@@ -55,7 +55,6 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.editorStatusText = nil;
   self.filenameText = nil;
-  [super dealloc];
 }
 
 - (void)awakeFromNib
@@ -77,9 +76,6 @@
 
 - (void)setFilenameText:(NSString *)filenameText
 {
-  if (_filenameText) {
-    [_filenameText release];
-  }
   _filenameText = [filenameText copy];
   
   if (_filenameText) {
@@ -120,9 +116,6 @@
 
 - (void)setEditorStatusText:(NSString *)editorStatusText
 {
-  if (_editorStatusText) {
-    [_editorStatusText release];
-  }
   _editorStatusText = [editorStatusText copy];
   if (_editorStatusText) {
     if (![_editorStatusText isEqualToString:[self.editorStatusTextField stringValue]]) {

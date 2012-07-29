@@ -15,7 +15,7 @@
 
 + (id) labelWithFile:(id)aFile text:(NSString*)aString
 {
-  return [[[TPLabel alloc] initWithFile:aFile text:aString] autorelease];
+  return [[TPLabel alloc] initWithFile:aFile text:aString];
 }
 
 - (id) initWithFile:(id)aFile text:(NSString*)aString
@@ -28,11 +28,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  [super dealloc];
-}
 
 - (NSString*)string
 {

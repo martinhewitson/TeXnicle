@@ -12,15 +12,15 @@
 @private
   NSString *tag;
   NSString *name;
-  TPSectionTemplate *parent;
+  TPSectionTemplate *__unsafe_unretained parent;
   NSColor *color;
   NSString *mnemonic;
 }
 
 @property (copy) NSString *tag;
 @property (copy) NSString *name;
-@property (assign) TPSectionTemplate *parent;
-@property (retain) NSColor *color;
+@property (unsafe_unretained) TPSectionTemplate *parent;
+@property (strong) NSColor *color;
 @property (copy) NSString *mnemonic;
 
 + (id) documentSectionTemplateWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate*)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName;

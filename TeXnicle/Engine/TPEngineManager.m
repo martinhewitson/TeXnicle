@@ -135,7 +135,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 + (TPEngineManager*)engineManagerWithDelegate:(id<TPEngineManagerDelegate>)aDelegate
 {
-  return [[[TPEngineManager alloc] initWithDelegate:aDelegate] autorelease];
+  return [[TPEngineManager alloc] initWithDelegate:aDelegate];
 }
 
 
@@ -144,7 +144,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   self = [super init];
   if (self) {
     self.delegate = aDelegate;
-    self.consoleManager = [[[MHConsoleManager alloc] init] autorelease];
+    self.consoleManager = [[MHConsoleManager alloc] init];
 
 //    [TPEngineManager installEngines];
 //    [self loadEngines];
@@ -158,9 +158,6 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 - (void) dealloc
 {
   self.delegate = nil;
-  self.engines = nil;
-  self.consoleManager = nil;
-  [super dealloc];
 }
 
 - (BOOL)registerConsole:(id<MHConsoleViewer>)aViewer

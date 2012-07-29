@@ -43,12 +43,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.textView = nil;
-  self.pdfViews = nil;
-  [super dealloc];
-}
 
 - (void) displaySelectionInPDFFile:(NSString*)pdfpath sourceFile:(NSString*)sourcepath lineNumber:(NSInteger)lineNumber column:(NSInteger)column
 {

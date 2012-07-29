@@ -151,7 +151,6 @@
         NSString *entryString = [[aString substringWithRange:NSMakeRange(start, idx-start+1)] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:entryString];
         [entries addObject:entry];
-        [entry release];
         
       }
     } // end found a @
@@ -205,14 +204,12 @@
   NSMutableAttributedString *tagString = [[NSMutableAttributedString alloc] initWithString:self.tag];
   [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
   [att appendAttributedString:tagString];
-  [tagString release];
   
   if ([self.title length] > 0) {
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
     [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [self.title length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:titleString];
-    [titleString release];
   }
   
   if ([self.author length] > 0) {
@@ -223,12 +220,10 @@
     [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [self.author length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:authorString];
-    [authorString release];
   }
   
-  [comma release];
   
-  return [att autorelease];
+  return att;
 }
 
 
@@ -241,14 +236,12 @@
   [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];
   [tagString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.tag length])];
   [att appendAttributedString:tagString];
-  [tagString release];
   
   if ([self.title length] > 0) {
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
     [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.title length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:titleString];
-    [titleString release];
   }
   
   if ([self.author length] > 0) {
@@ -259,12 +252,10 @@
     [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.author length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:authorString];
-    [authorString release];
   }
   
-  [comma release];
   
-  return [att autorelease];
+  return att;
 }
 
 - (NSString*)parseBibtexField:(NSString*)field fromString:(NSString*)content
@@ -314,10 +305,6 @@
   return @"";
 }
 
-- (void) dealloc
-{
-	[super dealloc];
-}
 
 - (void) setPropertiesFromEntry:(BibliographyEntry*)anEntry
 {
@@ -364,7 +351,7 @@
 		vstr = @"";
 	[str addString:vstr withTag:@"Published:"];
 	
-	return [str autorelease];
+	return str;
 }
 
 #pragma mark -

@@ -45,9 +45,9 @@
 @property (copy) NSString *projectName;
 @property (copy) NSString *projectDir;
 @property (copy) NSString *mainfile;
-@property (readonly) NSURL *projectFileURL;
-@property (retain) NSMutableArray *filesOnDiskList;
-@property (retain) NSMutableAttributedString *reportString;
+@property (unsafe_unretained, readonly) NSURL *projectFileURL;
+@property (strong) NSMutableArray *filesOnDiskList;
+@property (strong) NSMutableAttributedString *reportString;
 
 
 + (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path;

@@ -69,7 +69,7 @@
 
 + (TeXColoringEngine*)coloringEngineWithTextView:(NSTextView*)aTextView
 {
-  return [[[TeXColoringEngine alloc] initWithTextView:aTextView] autorelease];
+  return [[TeXColoringEngine alloc] initWithTextView:aTextView];
 }
            
 - (id) initWithTextView:(NSTextView*)aTextView
@@ -77,11 +77,11 @@
   self = [super init];
   if (self) {
     self.textView = aTextView;
-    newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
-    whitespaceCharacterSet = [[NSCharacterSet whitespaceCharacterSet] retain];	
-    specialChars = [[NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"] retain];
+    newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
+    whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
+    specialChars = [NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"];
     
-    keys = [[NSArray arrayWithObjects:TEDocumentFont, TESyntaxTextColor,
+    keys = [NSArray arrayWithObjects:TEDocumentFont, TESyntaxTextColor,
              TESyntaxCommentsColor, TESyntaxCommentsL2Color, TESyntaxCommentsL3Color, 
              TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
              TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
@@ -90,7 +90,7 @@
              TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
              TESyntaxColorMarkupL1, TESyntaxColorMarkupL2, TESyntaxColorMarkupL3, 
              TESyntaxMarkupL1Color, TESyntaxMarkupL2Color, TESyntaxMarkupL3Color,
-             nil] retain];
+             nil];
 
     [self readColorsAndFontsFromPreferences];
     [self observePreferences];
@@ -107,25 +107,7 @@
 {
   [self stopObserving];
   
-  self.lastHighlight = nil;
-  self.textColor = nil;
-  self.textFont = nil;
-  self.commentColor = nil;
-  self.commentL2Color = nil;
-  self.commentL3Color = nil;
-  self.markupL1Color = nil;
-  self.markupL2Color = nil;
-  self.markupL3Color = nil;
-  self.specialCharsColor = nil;
-  self.commandColor = nil;
-  self.dollarColor = nil;
-  self.argumentsColor = nil;
   
-  [keys release];
-  [specialChars release];
-	[newLineCharacterSet release];
-	[whitespaceCharacterSet release];
-  [super dealloc];
 }
 
 - (unichar)commentCharacter

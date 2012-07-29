@@ -30,16 +30,16 @@
 
 @interface MHSlideViewController : NSObject {
 @private
-  NSView *sidePanel;
-  NSView *mainPanel;
-  NSView *contentView;
+  NSView *__unsafe_unretained sidePanel;
+  NSView *__unsafe_unretained mainPanel;
+  NSView *__unsafe_unretained contentView;
   BOOL _sidePanelisVisible;
   BOOL rightSided;
 }
 
-@property (assign) IBOutlet NSView *sidePanel;
-@property (assign) IBOutlet NSView *mainPanel;
-@property (assign) IBOutlet NSView *contentView;
+@property (unsafe_unretained) IBOutlet NSView *sidePanel;
+@property (unsafe_unretained) IBOutlet NSView *mainPanel;
+@property (unsafe_unretained) IBOutlet NSView *contentView;
 @property (assign) BOOL rightSided;
 
 

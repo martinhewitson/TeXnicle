@@ -106,7 +106,7 @@
 		NSArray *decs = [node descendants];
 		[mutableArray addObjectsFromArray:decs];
 	}
-	return [[mutableArray copy] autorelease];	
+	return [mutableArray copy];	
 }
 
 - (NSTreeNode *)treeNodeForObject:(id)object;

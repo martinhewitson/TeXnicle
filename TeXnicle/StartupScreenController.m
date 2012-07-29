@@ -56,14 +56,6 @@
 	return self;
 }
 
-- (void) dealloc
-{
-  self.templateListViewController = nil;
-  [query release];
-  [texnicleFiles release];
-	[recentFiles release];
-	[super dealloc];
-}
 
 
 
@@ -108,7 +100,7 @@
   [fileLabel.descriptionCell setWraps:NO];
   [fileLabel.descriptionCell setLineBreakMode:NSLineBreakByTruncatingMiddle];
   
-  self.templateListViewController = [[[TPProjectTemplateListViewController alloc] init] autorelease];
+  self.templateListViewController = [[TPProjectTemplateListViewController alloc] init];
   [self.templateListViewController.view setFrame:self.templateListContainer.bounds];
   [self.templateListContainer addSubview:self.templateListViewController.view];
 }
@@ -144,7 +136,6 @@
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [dateLabel setStringValue:[formatter stringFromDate:date]];
-    [formatter release];
   }
   
   
@@ -241,7 +232,6 @@
   NSWindowController *wc = [[viewer windowControllers] objectAtIndex:0];
   [wc window];
   [viewer createNewProject:sender];
-  [viewer release];
   [self displayOrCloseWindow:self];
 }
 

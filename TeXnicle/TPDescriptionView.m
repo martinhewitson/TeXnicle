@@ -52,13 +52,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  [descriptionCell release];
-  [backgroundColor release];
-  [borderColor release];
-  [super dealloc];
-}
 
 
 - (void)drawRect:(NSRect)dirtyRect

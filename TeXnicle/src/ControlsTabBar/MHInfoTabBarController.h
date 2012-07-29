@@ -35,26 +35,26 @@ extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
   
 @private
   NSArray *buttons;
-  NSButton *bookmarksButton;
-  NSButton *warningsButton;
-  NSButton *spellingButton;
-  NSButton *labelsButton;
-  NSButton *citationsButton;
-  NSButton *commandsButton;
-  NSTabView *tabView;
-  NSSplitView *splitview;
-  NSView *containerView;
+  NSButton *__unsafe_unretained bookmarksButton;
+  NSButton *__unsafe_unretained warningsButton;
+  NSButton *__unsafe_unretained spellingButton;
+  NSButton *__unsafe_unretained labelsButton;
+  NSButton *__unsafe_unretained citationsButton;
+  NSButton *__unsafe_unretained commandsButton;
+  NSTabView *__unsafe_unretained tabView;
+  NSSplitView *__unsafe_unretained splitview;
+  NSView *__unsafe_unretained containerView;
 }
 
-@property (assign) IBOutlet NSButton *bookmarksButton;
-@property (assign) IBOutlet NSButton *warningsButton;
-@property (assign) IBOutlet NSButton *spellingButton;
-@property (assign) IBOutlet NSButton *labelsButton;
-@property (assign) IBOutlet NSButton *citationsButton;
-@property (assign) IBOutlet NSButton *commandsButton;
-@property (assign) IBOutlet NSSplitView *splitview;
-@property (assign) IBOutlet NSView *containerView;
-@property (assign) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) IBOutlet NSButton *bookmarksButton;
+@property (unsafe_unretained) IBOutlet NSButton *warningsButton;
+@property (unsafe_unretained) IBOutlet NSButton *spellingButton;
+@property (unsafe_unretained) IBOutlet NSButton *labelsButton;
+@property (unsafe_unretained) IBOutlet NSButton *citationsButton;
+@property (unsafe_unretained) IBOutlet NSButton *commandsButton;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+@property (unsafe_unretained) IBOutlet NSTabView *tabView;
 
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;

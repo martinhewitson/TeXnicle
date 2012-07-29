@@ -11,12 +11,12 @@
 @interface TPSourceItem : NSObject {
 @private
   NSURL *path;
-  TPSourceItem *parent;
+  TPSourceItem *__unsafe_unretained parent;
 }
 
-@property (retain) NSURL *path;
-@property (readonly) NSString *name;
-@property (assign) TPSourceItem *parent;
+@property (strong) NSURL *path;
+@property (unsafe_unretained, readonly) NSString *name;
+@property (unsafe_unretained) TPSourceItem *parent;
 
 - (id) initWithParent:(TPSourceItem*)aParent path:(NSURL*)aURL;
 

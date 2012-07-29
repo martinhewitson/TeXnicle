@@ -33,11 +33,11 @@
 @interface TPProjectTemplateListViewer : NSWindowController <TPProjectTemplateViewerDelegate>{
 @private
   TPProjectTemplateListViewController *listViewController;
-  NSView *listViewContainer;
+  NSView *__unsafe_unretained listViewContainer;
 }
 
-@property (retain) TPProjectTemplateListViewController *listViewController;
-@property (assign) IBOutlet NSView *listViewContainer;
+@property (strong) TPProjectTemplateListViewController *listViewController;
+@property (unsafe_unretained) IBOutlet NSView *listViewContainer;
 
 
 - (IBAction)cancel:(id)sender;

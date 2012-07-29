@@ -28,7 +28,7 @@
   // add to category
   [category addEntriesObject:entry];
   
-  return [entry autorelease];
+  return entry;
 }
 
 @end

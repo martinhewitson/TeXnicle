@@ -33,20 +33,20 @@
   NSString *_editorStatusText;
   NSString *_filenameText;
   BOOL _showRevealButton;
-  NSTextField *editorStatusTextField;
-  NSTextField *filenameTextField;
+  NSTextField *__unsafe_unretained editorStatusTextField;
+  NSTextField *__unsafe_unretained filenameTextField;
   BOOL showRevealButton;
-  NSButton *revealButton;
-  MHToolbarBackgroundView *rightPanel;
+  NSButton *__unsafe_unretained revealButton;
+  MHToolbarBackgroundView *__unsafe_unretained rightPanel;
   NSInteger wordCount;
   NSInteger character;
   NSInteger lineNumber;
 }
 
-@property (assign) IBOutlet NSTextField *editorStatusTextField;
-@property (assign) IBOutlet NSTextField *filenameTextField;
-@property (assign) IBOutlet NSButton *revealButton;
-@property (assign) IBOutlet MHToolbarBackgroundView *rightPanel;
+@property (unsafe_unretained) IBOutlet NSTextField *editorStatusTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameTextField;
+@property (unsafe_unretained) IBOutlet NSButton *revealButton;
+@property (unsafe_unretained) IBOutlet MHToolbarBackgroundView *rightPanel;
 
 @property (assign) NSInteger character;
 @property (assign) NSInteger lineNumber;

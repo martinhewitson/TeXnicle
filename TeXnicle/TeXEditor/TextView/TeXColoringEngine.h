@@ -31,7 +31,7 @@
 
 @interface TeXColoringEngine : NSObject <NSTextStorageDelegate, NSTextViewDelegate> {
 @protected
-  NSTextView *textView;
+  NSTextView *__unsafe_unretained textView;
 	// Character sets
 	NSCharacterSet *newLineCharacterSet;
 	NSCharacterSet *whitespaceCharacterSet;
@@ -72,17 +72,17 @@
   BOOL colorArguments;
 }
 
-@property (retain) NSDate *lastHighlight;
+@property (strong) NSDate *lastHighlight;
 @property (readonly) unichar commentCharacter;
 
-@property (assign) IBOutlet NSTextView *textView;
+@property (unsafe_unretained) IBOutlet NSTextView *textView;
 
-@property (retain) NSColor *textColor;
-@property (retain) NSFont *textFont;
+@property (strong) NSColor *textColor;
+@property (strong) NSFont *textFont;
 
-@property (retain) NSColor *commentColor;
-@property (retain) NSColor *commentL2Color;
-@property (retain) NSColor *commentL3Color;
+@property (strong) NSColor *commentColor;
+@property (strong) NSColor *commentL2Color;
+@property (strong) NSColor *commentL3Color;
 @property (assign) BOOL colorComments;
 @property (assign) BOOL colorCommentsL2;
 @property (assign) BOOL colorCommentsL3;
@@ -92,20 +92,20 @@
 @property (assign) BOOL colorMarkupL2;
 @property (assign) BOOL colorMarkupL3;
 
-@property (retain) NSColor *markupL1Color;
-@property (retain) NSColor *markupL2Color;
-@property (retain) NSColor *markupL3Color;
+@property (strong) NSColor *markupL1Color;
+@property (strong) NSColor *markupL2Color;
+@property (strong) NSColor *markupL3Color;
 
-@property (retain) NSColor *specialCharsColor;
+@property (strong) NSColor *specialCharsColor;
 @property (assign) BOOL colorSpecialChars;
 
-@property (retain) NSColor *dollarColor;
+@property (strong) NSColor *dollarColor;
 @property (assign) BOOL colorDollarChars;
 
-@property (retain) NSColor *commandColor;
+@property (strong) NSColor *commandColor;
 @property (assign) BOOL colorCommand;
 
-@property (retain) NSColor *argumentsColor;
+@property (strong) NSColor *argumentsColor;
 @property (assign) BOOL colorArguments;
 @property (assign) BOOL colorMultilineArguments;
 

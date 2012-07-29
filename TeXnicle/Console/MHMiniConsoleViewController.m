@@ -34,10 +34,6 @@
 @synthesize progressIndicator;
 
 
-- (void) dealloc
-{
-  [super dealloc];
-}
 
 - (id)init
 {

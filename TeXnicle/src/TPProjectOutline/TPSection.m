@@ -23,7 +23,7 @@
 
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName
 {
-  return [[[TPSection alloc] initWithParent:aParent start:index inFile:aFile type:aType name:aName] autorelease];
+  return [[TPSection alloc] initWithParent:aParent start:index inFile:aFile type:aType name:aName];
 }
 
 - (BOOL)matches:(id)object
@@ -107,13 +107,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.file = nil;
-  self.type = nil;
-  self.subsections = nil;
-  [super dealloc];
-}
 
 - (NSString*)filename
 {
@@ -168,13 +161,11 @@
     // type, file
     NSAttributedString *blank = [[NSAttributedString alloc] initWithString:@"  "];
     [att appendAttributedString:blank];
-    [blank release];
     NSString *typeFileStr = [NSString stringWithFormat:@"(%@, %@)", self.type.name, [self filename]];
     NSMutableAttributedString *typeStr = [[NSMutableAttributedString alloc] initWithString:typeFileStr]; 
     [typeStr addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [typeStr length])];
     [typeStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] range:NSMakeRange(0, [typeStr length])];    
     [att appendAttributedString:typeStr];
-    [typeStr release];
   }
   
   // set paragraph
@@ -182,9 +173,8 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
-  [ps release];
     
-  return [att autorelease];
+  return att;
 }
 
 

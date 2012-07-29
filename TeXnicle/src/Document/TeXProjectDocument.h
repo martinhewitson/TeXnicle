@@ -75,7 +75,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 
 @private
   
-  NSWindow *_mainWindow;
+  NSWindow *__unsafe_unretained _mainWindow;
   
   ProjectEntity *_project;
   BOOL _openPDFAfterBuild;
@@ -85,10 +85,10 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 	IBOutlet NSTextField *_newFilenameTextField;
   
   // split views  
-  NSSplitView *_splitview;
-  NSView *_leftView;
-  NSView *_rightView;
-  NSView *_centerView;
+  NSSplitView *__unsafe_unretained _splitview;
+  NSView *__unsafe_unretained _leftView;
+  NSView *__unsafe_unretained _rightView;
+  NSView *__unsafe_unretained _centerView;
   
   BOOL _inVersionsBrowser;
   
@@ -107,72 +107,72 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   ProjectItemEntity *_selectedItem;
   NSInteger _selectedRow;
   
-  TPOutlineView *_projectOutlineView;
-  NSTabView *_controlsTabview;
-  OpenDocumentsManager *_openDocuments;
-  ProjectItemTreeController *_projectItemTreeController;
+  TPOutlineView *__unsafe_unretained _projectOutlineView;
+  NSTabView *__unsafe_unretained _controlsTabview;
+  OpenDocumentsManager *__unsafe_unretained _openDocuments;
+  ProjectItemTreeController *__unsafe_unretained _projectItemTreeController;
   TeXEditorViewController *_texEditorViewController;
-  NSView *_texEditorContainer;
+  NSView *__unsafe_unretained _texEditorContainer;
   TPImageViewerController *_imageViewerController;
-  NSView *_imageViewerContainer;
+  NSView *__unsafe_unretained _imageViewerContainer;
   TPFileMonitor *_fileMonitor;
       
-  NSView *_bookmarkContainerView;
+  NSView *__unsafe_unretained _bookmarkContainerView;
   BookmarkManager *_bookmarkManager;
   
-  NSView *_finderContainerView;
+  NSView *__unsafe_unretained _finderContainerView;
   FinderController *_finder;
   BOOL _shouldHighlightFirstMatch;
   
   TPEngineManager *_engineManager;
   
   TPEngineSettingsController *_engineSettings;
-  NSView *_engineSettingsContainer;
+  NSView *__unsafe_unretained _engineSettingsContainer;
   
-  HHValidatedButton *_createFolderButton;
-  HHValidatedButton *_createFileButton;
+  HHValidatedButton *__unsafe_unretained _createFolderButton;
+  HHValidatedButton *__unsafe_unretained _createFileButton;
   
   TPProjectOutlineViewController *_outlineViewController;
-  NSView *_outlineViewContainer;
+  NSView *__unsafe_unretained _outlineViewContainer;
   
   MHMiniConsoleViewController *_miniConsole;
   TPConsoleViewController *_embeddedConsoleViewController;
-  NSView *_embeddedConsoleContainer;
+  NSView *__unsafe_unretained _embeddedConsoleContainer;
   IBOutlet NSSplitView *_editorSplitView;
   
-  NSView *_statusViewContainer;
+  NSView *__unsafe_unretained _statusViewContainer;
   TPStatusViewController *_statusViewController;
   BOOL _statusViewIsShowing;
   
   TPLibraryController *_libraryController;
-  NSView *_libraryContainerView;
+  NSView *__unsafe_unretained _libraryContainerView;
   
   TPSpellCheckerListingViewController *_spellcheckerViewController;
-  NSView *_spellCheckerContainerView;
+  NSView *__unsafe_unretained _spellCheckerContainerView;
   
   TPWarningsViewController *_warningsViewController;
-  NSView *_warningsContainerView;
+  NSView *__unsafe_unretained _warningsContainerView;
   
   TPLabelsViewController *_labelsViewController;
-  NSView *_labelsContainerView;
+  NSView *__unsafe_unretained _labelsContainerView;
   
   TPCitationsViewController *_citationsViewController;
-  NSView *_citationsContainerView;
+  NSView *__unsafe_unretained _citationsContainerView;
   
   TPNewCommandsViewController *_commandsViewController;
-  NSView *_commandsContainerView;
+  NSView *__unsafe_unretained _commandsContainerView;
   
   PDFViewerController *_pdfViewerController;
   
   PaletteController *_palette;
-  NSView *_paletteContainverView;
+  NSView *__unsafe_unretained _paletteContainverView;
     
   BOOL _pdfHasSelection;
   
   BOOL _windowIsClosing;
   
-  MHControlsTabBarController *_controlsTabBarController;
-  MHInfoTabBarController *_infoControlsTabBarController;
+  MHControlsTabBarController *__unsafe_unretained _controlsTabBarController;
+  MHInfoTabBarController *__unsafe_unretained _infoControlsTabBarController;
   
 //  NSRange lastLineRange;
 //  NSInteger lastLineNumber;
@@ -187,8 +187,8 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   NSMutableArray *_tabHistory;
   NSInteger _currentTabHistoryIndex;
   BOOL _navigatingHistory;
-  HHValidatedButton *_backTabButton;
-  HHValidatedButton *_forwardTabButton;
+  HHValidatedButton *__unsafe_unretained _backTabButton;
+  HHValidatedButton *__unsafe_unretained _forwardTabButton;
   
   NSMenu *_createFolderMenu;
   
@@ -197,92 +197,92 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   TPProjectTemplateCreator *_templateCreator;
 }
 
-@property (retain) TPProjectTemplateCreator *templateCreator;
+@property (strong) TPProjectTemplateCreator *templateCreator;
 
-@property (retain) NSMenu *createFolderMenu;
+@property (strong) NSMenu *createFolderMenu;
 
-@property (assign) IBOutlet HHValidatedButton *backTabButton;
-@property (assign) IBOutlet HHValidatedButton *forwardTabButton;
-@property (retain) NSMutableArray *tabHistory;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *forwardTabButton;
+@property (strong) NSMutableArray *tabHistory;
 @property (assign) NSInteger currentTabHistoryIndex;
 @property (assign) BOOL navigatingHistory;
 
-@property (assign) IBOutlet NSWindow *mainWindow;
+@property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
 
-@property (retain) NSTimer *liveUpdateTimer;
+@property (strong) NSTimer *liveUpdateTimer;
 
-@property (retain) TPProjectOutlineViewController *outlineViewController;
-@property (assign) IBOutlet NSView *outlineViewContainer;
+@property (strong) TPProjectOutlineViewController *outlineViewController;
+@property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
 
-@property (retain) TPWarningsViewController *warningsViewController;
-@property (assign) IBOutlet NSView *warningsContainerView;
+@property (strong) TPWarningsViewController *warningsViewController;
+@property (unsafe_unretained) IBOutlet NSView *warningsContainerView;
 
-@property (retain) TPLabelsViewController *labelsViewController;
-@property (assign) IBOutlet NSView *labelsContainerView;
+@property (strong) TPLabelsViewController *labelsViewController;
+@property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
 
-@property (retain) TPCitationsViewController *citationsViewController;
-@property (assign) IBOutlet NSView *citationsContainerView;
+@property (strong) TPCitationsViewController *citationsViewController;
+@property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
 
-@property (retain) TPNewCommandsViewController *commandsViewController;
-@property (assign) IBOutlet NSView *commandsContainerView;
+@property (strong) TPNewCommandsViewController *commandsViewController;
+@property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
 
-@property (retain) MHMiniConsoleViewController *miniConsole;
+@property (strong) MHMiniConsoleViewController *miniConsole;
 
-@property (retain) TPConsoleViewController *embeddedConsoleViewController;
-@property (assign) IBOutlet NSView *embeddedConsoleContainer;
+@property (strong) TPConsoleViewController *embeddedConsoleViewController;
+@property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 
 
-@property (retain) PDFViewer *pdfViewer;
+@property (strong) PDFViewer *pdfViewer;
 
-@property (retain)   NSTimer *statusTimer;
+@property (strong)   NSTimer *statusTimer;
 
-@property (assign) IBOutlet NSView *statusViewContainer;
-@property (retain) TPStatusViewController *statusViewController;
+@property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
+@property (strong) TPStatusViewController *statusViewController;
 
-@property (assign) IBOutlet HHValidatedButton *createFolderButton;
-@property (assign) IBOutlet HHValidatedButton *createFileButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *createFolderButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *createFileButton;
 
-@property (retain) TPEngineSettingsController *engineSettings;
-@property (assign) IBOutlet NSView *engineSettingsContainer;
+@property (strong) TPEngineSettingsController *engineSettings;
+@property (unsafe_unretained) IBOutlet NSView *engineSettingsContainer;
 
-@property (retain) TPEngineManager *engineManager;
+@property (strong) TPEngineManager *engineManager;
 
-@property (assign) IBOutlet NSSplitView *splitview;
-@property (assign) IBOutlet NSView *leftView;
-@property (assign) IBOutlet NSView *rightView;
-@property (assign) IBOutlet NSView *centerView;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
+@property (unsafe_unretained) IBOutlet NSView *leftView;
+@property (unsafe_unretained) IBOutlet NSView *rightView;
+@property (unsafe_unretained) IBOutlet NSView *centerView;
 
-@property (assign) IBOutlet NSView *bookmarkContainerView;
-@property (retain) BookmarkManager *bookmarkManager;
+@property (unsafe_unretained) IBOutlet NSView *bookmarkContainerView;
+@property (strong) BookmarkManager *bookmarkManager;
 
-@property (assign) IBOutlet NSView *paletteContainverView;
-@property (retain) PaletteController *palette;
+@property (unsafe_unretained) IBOutlet NSView *paletteContainverView;
+@property (strong) PaletteController *palette;
 
-@property (assign) IBOutlet NSView *finderContainerView;
-@property (retain) FinderController *finder;
+@property (unsafe_unretained) IBOutlet NSView *finderContainerView;
+@property (strong) FinderController *finder;
 
-@property (assign) IBOutlet NSView *libraryContainerView;
-@property (retain) TPLibraryController *libraryController;
+@property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
+@property (strong) TPLibraryController *libraryController;
 
-@property (retain) TPSpellCheckerListingViewController *spellcheckerViewController;
-@property (assign) IBOutlet NSView *spellCheckerContainerView;
+@property (strong) TPSpellCheckerListingViewController *spellcheckerViewController;
+@property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
 
-@property (retain) PDFViewerController *pdfViewerController;
-@property (retain) ProjectEntity *project;
-@property (assign) IBOutlet TPOutlineView *projectOutlineView;
-@property (assign) IBOutlet NSTabView *controlsTabview;
-@property (assign) IBOutlet OpenDocumentsManager *openDocuments;
-@property (assign) IBOutlet	ProjectItemTreeController *projectItemTreeController;
-@property (retain) TeXEditorViewController *texEditorViewController;
-@property (assign) IBOutlet NSView *texEditorContainer;
-@property (assign) IBOutlet NSView *imageViewerContainer;
-@property (retain) TPImageViewerController *imageViewerController;
-@property (retain) TPFileMonitor *fileMonitor;
+@property (strong) PDFViewerController *pdfViewerController;
+@property (strong) ProjectEntity *project;
+@property (unsafe_unretained) IBOutlet TPOutlineView *projectOutlineView;
+@property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
+@property (unsafe_unretained) IBOutlet OpenDocumentsManager *openDocuments;
+@property (unsafe_unretained) IBOutlet	ProjectItemTreeController *projectItemTreeController;
+@property (strong) TeXEditorViewController *texEditorViewController;
+@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+@property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
+@property (strong) TPImageViewerController *imageViewerController;
+@property (strong) TPFileMonitor *fileMonitor;
 
-@property (retain) TPTemplateEditor *templateEditor;
+@property (strong) TPTemplateEditor *templateEditor;
 
-@property (assign) IBOutlet MHControlsTabBarController *controlsTabBarController;
-@property (assign) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
+@property (unsafe_unretained) IBOutlet MHControlsTabBarController *controlsTabBarController;
+@property (unsafe_unretained) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
 
 @property (readonly) BOOL pdfHasSelection;
 
@@ -349,7 +349,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark LaTeX Control
 
 - (IBAction) clean:(id)sender;
-- (IBAction) projectTypeChanged:(id)sender;
 - (IBAction) buildAndView:(id)sender;
 - (IBAction) buildProject:(id)sender;
 

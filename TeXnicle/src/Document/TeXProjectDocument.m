@@ -57,6 +57,7 @@
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
 #import "TPNewCommand.h"
+#import "FileDocument.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -150,11 +151,6 @@
 
 @synthesize createFolderMenu = _createFolderMenu;
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  [super dealloc];
-}
 
 - (void) awakeFromNib
 {
@@ -181,7 +177,6 @@
 {
   if (self.liveUpdateTimer) {
     [self.liveUpdateTimer invalidate];
-    [_liveUpdateTimer release];
   }
 }
 
@@ -248,7 +243,6 @@
     [metadata setObject:[NSArray arrayWithObject:projectName]
                  forKey:(NSString *)kMDItemKeywords];
     [psc setMetadata:metadata forPersistentStore:pStore];
-    [metadata release];
     return YES;
   }
   return NO;
@@ -262,37 +256,37 @@
 //  NSLog(@"setupDocument");
 
   // outline view
-  self.outlineViewController = [[[TPProjectOutlineViewController alloc] initWithDelegate:self] autorelease];
+  self.outlineViewController = [[TPProjectOutlineViewController alloc] initWithDelegate:self];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
   [self.outlineViewContainer addSubview:self.outlineViewController.view];
    
   // warnings view
-  self.warningsViewController = [[[TPWarningsViewController alloc] initWithDelegate:self] autorelease];
+  self.warningsViewController = [[TPWarningsViewController alloc] initWithDelegate:self];
   [self.warningsViewController.view setFrame:self.warningsContainerView.bounds];
   [self.warningsContainerView addSubview:self.warningsViewController.view];
   
   // labels view
-  self.labelsViewController = [[[TPLabelsViewController alloc] initWithDelegate:self] autorelease];
+  self.labelsViewController = [[TPLabelsViewController alloc] initWithDelegate:self];
   [self.labelsViewController.view setFrame:self.labelsContainerView.bounds];
   [self.labelsContainerView addSubview:self.labelsViewController.view];
   
   // citations view
-  self.citationsViewController = [[[TPCitationsViewController alloc] initWithDelegate:self] autorelease];
+  self.citationsViewController = [[TPCitationsViewController alloc] initWithDelegate:self];
   [self.citationsViewController.view setFrame:self.citationsContainerView.bounds];
   [self.citationsContainerView addSubview:self.citationsViewController.view];
   
   // commands view
-  self.commandsViewController = [[[TPNewCommandsViewController alloc] initWithDelegate:self] autorelease];
+  self.commandsViewController = [[TPNewCommandsViewController alloc] initWithDelegate:self];
   [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
   [self.commandsContainerView addSubview:self.commandsViewController.view];
   
   // setup settings
-  self.engineSettings = [[[TPEngineSettingsController alloc] initWithDelegate:self] autorelease];
+  self.engineSettings = [[TPEngineSettingsController alloc] initWithDelegate:self];
   [[self.engineSettings view] setFrame:[self.engineSettingsContainer bounds]];
   [self.engineSettingsContainer addSubview:[self.engineSettings view]];
     
   // Setup text view  
-  self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
+  self.texEditorViewController = [[TeXEditorViewController alloc] init];
   [self.texEditorViewController setDelegate:self];
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
@@ -304,7 +298,7 @@
   [self.openDocuments disableTextView];
   
   // setup status view
-  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  self.statusViewController = [[TPStatusViewController alloc] init];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
   _statusViewIsShowing = YES;
@@ -317,24 +311,24 @@
   }
   
   // setup image viewer
-  self.imageViewerController = [[[TPImageViewerController alloc] init] autorelease];
+  self.imageViewerController = [[TPImageViewerController alloc] init];
   self.openDocuments.imageViewerController = self.imageViewerController;
   self.openDocuments.imageViewContainer = self.imageViewerContainer;
   [[self.imageViewerController view] setFrame:[self.imageViewerContainer bounds]];
   [self.imageViewerContainer addSubview:[self.imageViewerController view]];
   
   // setup pdf viewer
-  self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
+  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
   [self.pdfViewerController.view setFrame:[_pdfViewerContainerView bounds]];
   [_pdfViewerContainerView addSubview:self.pdfViewerController.view];
   
   // setup library
-  self.libraryController = [[[TPLibraryController alloc] initWithDelegate:self] autorelease];
+  self.libraryController = [[TPLibraryController alloc] initWithDelegate:self];
   [self.libraryController.view setFrame:self.libraryContainerView.bounds];
   [self.libraryContainerView addSubview:self.libraryController.view];  
   
   // setup spellchecker
-  self.spellcheckerViewController = [[[TPSpellCheckerListingViewController alloc] initWithDelegate:self] autorelease];
+  self.spellcheckerViewController = [[TPSpellCheckerListingViewController alloc] initWithDelegate:self];
   [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
   [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];  
   
@@ -342,18 +336,18 @@
   self.fileMonitor = [TPFileMonitor monitorWithDelegate:self];
   
   // setup finder
-  self.finder = [[[FinderController alloc] initWithDelegate:self] autorelease];
+  self.finder = [[FinderController alloc] initWithDelegate:self];
   [self.finder.view setFrame:[self.finderContainerView bounds]];
   [self.finderContainerView addSubview:self.finder.view];
   
   // setup palette
-  self.palette = [[[PaletteController alloc] initWithDelegate:self] autorelease];
+  self.palette = [[PaletteController alloc] initWithDelegate:self];
   NSView *paletteView = [self.palette view];
   [paletteView setFrame:[self.paletteContainverView bounds]];
   [self.paletteContainverView addSubview:paletteView];
   
   // setup bookmark manager
-  self.bookmarkManager = [[[BookmarkManager alloc] initWithDelegate:self] autorelease];
+  self.bookmarkManager = [[BookmarkManager alloc] initWithDelegate:self];
   NSView *bookmarkView = [self.bookmarkManager view];
   [bookmarkView setFrame:[self.bookmarkContainerView bounds]];
   [self.bookmarkContainerView addSubview:bookmarkView];
@@ -365,7 +359,7 @@
   [self.engineManager registerConsole:self.miniConsole];
   
   // embedded console
-  self.embeddedConsoleViewController = [[[TPConsoleViewController alloc] init] autorelease];
+  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] init];
   [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
   [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
   [self.engineManager registerConsole:self.embeddedConsoleViewController];
@@ -472,7 +466,7 @@
 //  NSLog(@"windowControllerDidLoadNib %@", [self windowForSheet]);
   [super windowControllerDidLoadNib:aController];
   
-  self.miniConsole = [[[MHMiniConsoleViewController alloc] init] autorelease];
+  self.miniConsole = [[MHMiniConsoleViewController alloc] init];
   NSArray *items = [[[self windowForSheet] toolbar] items];
   for (NSToolbarItem *item in items) {
     if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
@@ -562,7 +556,6 @@
 {
   if (self.statusTimer) {
     [self.statusTimer invalidate];
-    [_statusTimer release];
   }
 }
 
@@ -610,100 +603,75 @@
   [self stopObserving];  
   
   // tab history
-  [_tabHistory release];
   
   // outline view controller
   [self.outlineViewController stop];
   self.outlineViewController.delegate = nil;
-  [_outlineViewController release];
   
   // warnings view
   self.warningsViewController.delegate = nil;
-  [_warningsViewController release];
   
   // labels view
   self.labelsViewController.delegate = nil;
-  [_labelsViewController release];
   
   // citations view
   self.citationsViewController.delegate = nil;
-  [_citationsViewController release];
   
   // commands view
   self.commandsViewController.delegate = nil;
-  [_commandsViewController release];
   
   // mini console
-  [_miniConsole release];
   
   // console viewer
-  [_embeddedConsoleViewController release];
   
   // pdfviewer
   self.pdfViewer.delegate = nil;
-  [_pdfViewer release];
   
   // status view controller
-  [_statusViewController release];
   
   // engine settings controller
   self.engineSettings.delegate = nil;
-  [_engineSettings release];
   
   // engine manager
   self.engineManager.delegate = nil;
-  [_engineManager release];
   
   // bookmark manager
   self.bookmarkManager.delegate = nil;
-  [_bookmarkManager release];
   
   // palette
   self.palette.delegate = nil;
-  [_palette release];
   
   // finder
   self.finder.delegate = nil;
-  [_finder release];
   
   // library
   self.libraryController.delegate = nil;
-  [_libraryController release];
   
   // spell checker  
   self.spellcheckerViewController.delegate = nil;
-  [_spellcheckerViewController release];
   
   // pdf view controller
   self.pdfViewerController.delegate = nil;
-  [_pdfViewerController release];
   
   // tex editor view controller
   [self.texEditorViewController stopSyntaxChecker];
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
-  [_texEditorViewController release];
   
   // image viewer controller
-  [_imageViewerController release];
   
   // file monitor  
   [self.fileMonitor stopTimer];
   self.fileMonitor.delegate = nil;
-  [_fileMonitor release];
   
   // template editor
   self.templateEditor.delegate = nil;
-  [_templateEditor release];
     
   // project
-  [_project release];
   
   // create folder menu
-  [_createFolderMenu release];
   
   // template creator
-  [_templateCreator release];
 }
 
 
@@ -792,7 +760,7 @@
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
   NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-  ProjectEntity *project = [[[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc] autorelease];
+  ProjectEntity *project = [[ProjectEntity alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc];
   [project createSettings];
   
   // set name and folder of the project
@@ -896,7 +864,6 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@".yyyy_MM_dd_HH_mm_ss"];
     NSString *movedPath = [path stringByAppendingFormat:@"%@", [formatter stringFromDate:[NSDate date]]];
-    [formatter release];
     NSError *moveError = nil;
     [fm moveItemAtPath:path toPath:movedPath error:&moveError];
     if (moveError) {
@@ -929,7 +896,7 @@
 //  NSLog(@"Got model %@", model);
 	//	Create a persistent store
   
-	NSPersistentStoreCoordinator *psc = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model] autorelease];
+	NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
 //  NSLog(@"Coordinator %@", psc);
   
 	if (!psc)
@@ -949,7 +916,7 @@
 	
 	//	Create a managed object context for the store
 	
-	NSManagedObjectContext* managedContext = [[[NSManagedObjectContext alloc] init] autorelease];
+	NSManagedObjectContext* managedContext = [[NSManagedObjectContext alloc] init];
 	if (!managedContext)
 		return nil;
 	
@@ -983,7 +950,7 @@
 																							modelConfiguration:configuration
 																										storeOptions:options
 																													 error:error];
-  [options release], options = nil;
+  options = nil;
   
   if (result) {
     NSPersistentStoreCoordinator *psc = [[self managedObjectContext] persistentStoreCoordinator];
@@ -1120,8 +1087,7 @@
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		_project = [[fetchResults objectAtIndex:0] retain];
-		[fetchRequest release];
+		_project = [fetchResults objectAtIndex:0];
 //    NSLog(@"   got project");
     
     
@@ -1137,7 +1103,6 @@
 	else {
 		// should present custom error message...
 	}
-	[fetchRequest release];
 //  NSLog(@"   got nil");
 	return nil;
 }
@@ -1152,9 +1117,6 @@
     return;
   }
   
-	if (_treeActionMenu) {
-    [_treeActionMenu release];
-  }
   
   _selectedItem = nil;
   
@@ -1174,7 +1136,6 @@
                                            keyEquivalent:@""];
     [item setTarget:self];
     [_treeActionMenu addItem:item];
-    [item release];		
     
     // add existing folders
     item = [[NSMenuItem alloc] initWithTitle:@"Add Existing folder..."
@@ -1182,7 +1143,6 @@
                                keyEquivalent:@""];
     [item setTarget:self];
     [_treeActionMenu addItem:item];
-    [item release];		
 
   } else if ([selectedItems count] == 1) {
     
@@ -1199,7 +1159,6 @@
                                              keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // add existing folders
       item = [[NSMenuItem alloc] initWithTitle:@"Add Existing folder..."
@@ -1207,7 +1166,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // add existing folders
       item = [[NSMenuItem alloc] initWithTitle:@"New Folder"
@@ -1215,7 +1173,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // rename selected
       item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rename \u201c%@\u201d", itemName]
@@ -1223,7 +1180,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // Remove selected
       item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Remove \u201c%@\u201d", itemName]
@@ -1231,7 +1187,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
     } else {
       
       // rename selected
@@ -1240,7 +1195,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // Remove selected
       item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Remove \u201c%@\u201d", itemName]
@@ -1248,7 +1202,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // reveal selected
       item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Reveal \u201c%@\u201d in Finder", itemName]
@@ -1256,7 +1209,6 @@
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // reveal selected
       if ([self.project valueForKey:@"mainFile"] == _selectedItem) {
@@ -1271,7 +1223,6 @@
       
       [item setTarget:self];
       [_treeActionMenu addItem:item];
-      [item release];		
       
       // Locate selected
       NSFileManager *fm = [NSFileManager defaultManager];
@@ -1281,7 +1232,6 @@
                                    keyEquivalent:@""];
         [item setTarget:self];
         [_treeActionMenu addItem:item];
-        [item release];		
       }      
       
     }
@@ -1296,7 +1246,6 @@
                                keyEquivalent:@""];
     [item setTarget:self];
     [_treeActionMenu addItem:item];
-    [item release];		
     
     // 
     
@@ -1391,7 +1340,7 @@
 
 - (IBAction) endRenameSheet:(id)sender
 {
-	if ([sender tag] == 0) {
+	if ([(NSButton*)sender tag] == 0) {
 		[NSApp endSheet:_renameSheet];
 		[_renameSheet orderOut:sender];
 		return;
@@ -1452,7 +1401,7 @@
 - (IBAction)printDocument:(id)sender
 {
   // set printing properties
-  NSPrintInfo *myPrintInfo = [[[NSPrintInfo alloc] initWithDictionary:[[self printInfo] dictionary]] autorelease];
+  NSPrintInfo *myPrintInfo = [[NSPrintInfo alloc] initWithDictionary:[[self printInfo] dictionary]];
   [myPrintInfo setHorizontalPagination:NSFitPagination];
   [myPrintInfo setHorizontallyCentered:YES];
   [myPrintInfo setVerticallyCentered:NO];
@@ -1478,7 +1427,6 @@
   [self runModalPrintOperation: op delegate: nil didRunSelector: NULL 
                    contextInfo: NULL];
   
-  [printView release];
   
 }
 
@@ -2197,11 +2145,6 @@
   [self showDocument];
 }
 
-- (IBAction) projectTypeChanged:(id)sender
-{
-  [self.project setValue:[[sender _selectedItem] title] forKey:@"type"];
-}
-
 - (IBAction) buildAndView:(id)sender
 {
   _openPDFAfterBuild = YES;
@@ -2232,7 +2175,7 @@
 
 - (IBAction)liveUpdate:(id)sender
 {
-  if ([sender state] == NSOnState) {
+  if ([(NSButton*)sender state] == NSOnState) {
     _liveUpdate = YES;
   } else {
     _liveUpdate = NO;
@@ -2307,7 +2250,7 @@
 {
 	  
   if (!self.pdfViewer) {
-    self.pdfViewer = [[[PDFViewer alloc] initWithDelegate:self] autorelease];
+    self.pdfViewer = [[PDFViewer alloc] initWithDelegate:self];
   }
   [self.pdfViewer showWindow:self];
   
@@ -2686,7 +2629,7 @@
     selectedProjectItem = [selectedItems objectAtIndex:0];
   
   // Make popup menu with bound actions
-  self.createFolderMenu = [[[NSMenu alloc] initWithTitle:@"New Folder Action Menu"] autorelease];
+  self.createFolderMenu = [[NSMenu alloc] initWithTitle:@"New Folder Action Menu"];
   [self.createFolderMenu setAutoenablesItems:YES];
   
   NSMenuItem *item;
@@ -2698,7 +2641,6 @@
                                            keyEquivalent:@""];
     [item setTarget:self];
     [self.createFolderMenu addItem:item];
-    [item release];
   }
   
   // New group folder
@@ -2707,7 +2649,6 @@
                              keyEquivalent:@""];
   [item setTarget:self];
   [self.createFolderMenu addItem:item];
-  [item release];
   	
 	
 	[NSMenu popUpContextMenu:self.createFolderMenu withEvent:event forView:(NSButton *)sender];
@@ -2738,7 +2679,7 @@
 - (IBAction) endNewFileSheet:(id)sender
 {
 	// user clicked cancel
-	if ([sender tag] == 0) {
+	if ([(NSButton*)sender tag] == 0) {
 		[NSApp endSheet:_newFileSheet];
 		[_newFileSheet orderOut:sender];
 		return;
@@ -2813,7 +2754,7 @@
 {
 	
 	if (choice == NSAlertDefaultReturn) {
-    NSDictionary *template = (NSDictionary*)v;
+    NSDictionary *template = (__bridge NSDictionary*)v;
     if (template != nil) {
       [self makeNewTexFileFromTemplate:template withFilename:[self.templateEditor filename] setAsMain:[self.templateEditor setAsMainFile]];
       [NSApp endSheet:self.templateEditor.window];
@@ -2935,7 +2876,6 @@
 	[self.projectItemTreeController addObject:newFile];
 	[self.project setValue:newFile forKey:@"mainFile"];
 	
-	[newFile release];			
 	
 }
 
@@ -2982,7 +2922,7 @@
 - (void) showTemplatesSheet
 {
 	if (self.templateEditor == nil) {
-    self.templateEditor = [[[TPTemplateEditor alloc] initWithDelegate:self activeFilename:YES] autorelease];  
+    self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:YES];  
   }
   
   // set suggested filename
@@ -3045,7 +2985,7 @@
       [alert beginSheetModalForWindow:editor.window
                         modalDelegate:self
                        didEndSelector:@selector(newTexFileExists:code:context:) 
-                          contextInfo:aTemplate];
+                          contextInfo:(__bridge void *)(aTemplate)];
       
       return;		
     }
@@ -3338,7 +3278,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                        sourceFile:[[self.openDocuments currentDoc] pathOnDisk]
                        lineNumber:lineNumber 
                            column:column];
-  [sync release];
 }
 
 - (IBAction)findSource:(id)sender
@@ -3527,7 +3466,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:[NSArray arrayWithObjects:self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview, nil]];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
-  [sync release];
   
   sourcefile = [sourcefile stringByStandardizingPath];  
   if ([sourcefile isAbsolutePath]) {
@@ -3881,7 +3819,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (IBAction)createProjectTemplate:(id)sender
 {
   if (self.templateCreator == nil) {
-    self.templateCreator = [[[TPProjectTemplateCreator alloc] initWithDelegate:self] autorelease];
+    self.templateCreator = [[TPProjectTemplateCreator alloc] initWithDelegate:self];
   }
   
   // set suggested name

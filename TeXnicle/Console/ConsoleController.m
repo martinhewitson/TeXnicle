@@ -67,50 +67,16 @@ static ConsoleController *sharedConsoleController = nil;
 	[textView setFont:font];
 }
 
+
 + (ConsoleController*)sharedConsoleController
 {
-	@synchronized(self) {
-		if (sharedConsoleController == nil) {
-			[[self alloc] init]; // assignment not done here
-		}
-	}
-	return sharedConsoleController;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-	@synchronized(self) {
-		if (sharedConsoleController == nil) {
-			sharedConsoleController = [super allocWithZone:zone];
-			return sharedConsoleController;  // assignment and return on first allocation
-		}
-	}
-	return nil; //on subsequent allocation attempts return nil
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-	return self;
-}
-
-- (id)retain
-{
-	return self;
-}
-
-- (NSUInteger)retainCount
-{
-	return UINT_MAX;  //denotes an object that cannot be released
-}
-
-- (void)release
-{
-	//do nothing
-}
-
-- (id)autorelease
-{
-	return self;
+  static ConsoleController *sharedInstance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [[ConsoleController alloc] init];
+    // Do any other initialisation stuff here
+  });
+  return sharedInstance;
 }
 
 - (void) clear
@@ -146,7 +112,6 @@ static ConsoleController *sharedConsoleController = nil;
                    value:font
                    range:stringRange];
 		[[textView textStorage] appendAttributedString:attstr];
-		[attstr release];
 		[textView moveToEndOfDocument:self];
 		[textView setNeedsDisplay:YES];	
 	}
@@ -178,7 +143,7 @@ static ConsoleController *sharedConsoleController = nil;
 	}
 	NSArray *strings = [str componentsSeparatedByString:@"\n"];
 	
-	for (NSString *string in strings) {
+	for (__strong NSString *string in strings) {
 		string = [string stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 		if ([string length]>0) {
 			if ([string characterAtIndex:[string length]-1] != '\n') {
@@ -193,7 +158,6 @@ static ConsoleController *sharedConsoleController = nil;
                      value:font
                      range:stringRange];
 			[[textView textStorage] appendAttributedString:attstr];
-			[attstr release];
 		}
 	}
 	

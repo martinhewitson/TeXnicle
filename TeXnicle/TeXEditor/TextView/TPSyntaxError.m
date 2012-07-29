@@ -34,21 +34,15 @@
 @synthesize message;
 @synthesize file;
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  self.line = nil;
-  [super dealloc];
-}
 
 + (id) errorWithMessage:(NSString*)aMessage line:(NSNumber*)aLine
 {
-  return [[[TPSyntaxError alloc] initWithMessage:aMessage line:aLine] autorelease];
+  return [[TPSyntaxError alloc] initWithMessage:aMessage line:aLine];
 }
 
 + (id) errorWithMessageLine:(NSString*)aLine
 {
-  return [[[TPSyntaxError alloc] initWithMessageLine:aLine] autorelease];
+  return [[TPSyntaxError alloc] initWithMessageLine:aLine];
 }
 
 - (BOOL) isEqual:(TPSyntaxError*)object
@@ -121,22 +115,19 @@
   NSMutableAttributedString *lineNumber = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"line %@: ", self.line]];
   [lineNumber addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumber length])];
   [str appendAttributedString:lineNumber];
-  [lineNumber release];
   
   // message 
   NSMutableAttributedString *messageString = [[NSMutableAttributedString alloc] initWithString:self.message];
   [messageString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [messageString length])];
   [str appendAttributedString:messageString];
-  [messageString release];
   
   // apply paragraph
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [str addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [str length])];
-  [ps release];
   
-  return [str autorelease];
+  return str;
 }
 
 

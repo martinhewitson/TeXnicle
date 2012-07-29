@@ -27,7 +27,7 @@
 
 + (id) outlineBuilderWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate
 {
-  return [[[TPOutlineBuilder alloc] initWithDelegate:aDelegate] autorelease];
+  return [[TPOutlineBuilder alloc] initWithDelegate:aDelegate];
 }
 
 - (id) initWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate
@@ -115,10 +115,6 @@
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
-  self.templates = nil;
-  self.sectionCommands = nil;
-  self.sections = nil;
-  [super dealloc];
 }
 
 - (void) buildOutline

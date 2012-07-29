@@ -31,14 +31,14 @@
 
 @interface FileDocument : NSObject {
 
-	FileEntity *file;
+	FileEntity *__unsafe_unretained file;
 	NSTextStorage *textStorage;
 	NSUndoManager *undoManager;
 	
 }
-@property (readwrite, assign) FileEntity *file;
-@property (readwrite, assign) NSTextStorage *textStorage;
-@property (readwrite, assign) NSUndoManager *undoManager;
+@property (readwrite, unsafe_unretained) FileEntity *file;
+@property (readwrite) NSTextStorage *textStorage;
+@property (readwrite) NSUndoManager *undoManager;
 
 
 - (id) initWithFile:(FileEntity*)aFile;

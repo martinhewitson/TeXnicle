@@ -29,9 +29,9 @@
 
 @interface MHDocumentController : NSDocumentController {
 @private
-  id appDelegate;
+  id __unsafe_unretained appDelegate;
 }
 
-@property (assign) IBOutlet id appDelegate;
+@property (unsafe_unretained) IBOutlet id appDelegate;
 
 @end

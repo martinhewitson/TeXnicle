@@ -16,7 +16,7 @@
 {
 	PSMTabDragWindow *window = [PSMTabDragWindow dragWindowWithImage:image styleMask:styleMask];
 	if ( (self = [super initWithWindow:window]) ) {
-		_view = [[window dragView] retain];
+		_view = [window dragView];
 		_tearOffStyle = tearOffStyle;
 		
 		if (tearOffStyle == PSMTabBarTearOffMiniwindow) {
@@ -35,12 +35,7 @@
 		[_timer invalidate];
 	}
 	
-	if (_animation) {
-		[_animation release];
-	}
 	
-	[_view release];
-	[super dealloc];
 }
 
 - (NSImage *)image
@@ -76,7 +71,6 @@
 		//An animation already exists, get the current progress
 		progress = 1.0f - [_animation currentProgress];
 		[_animation stopAnimation];
-		[_animation release];
 	}
 	
 	//begin animating
@@ -110,7 +104,7 @@
 	[[self window] setFrame:frame display:YES];
 	
 	if (![_animation isAnimating]) {
-		[_animation release], _animation = nil;
+		_animation = nil;
 		[timer invalidate];
 		_timer = nil;
 	}

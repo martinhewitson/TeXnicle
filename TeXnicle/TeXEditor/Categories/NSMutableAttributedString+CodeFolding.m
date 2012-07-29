@@ -34,7 +34,7 @@
 - (NSString*)unfoldedString
 {
 	[self unfoldAll];
-	return [[[self string] mutableCopy] autorelease];
+	return [[self string] mutableCopy];
 }
 
 // unfolds all attachments in the attributed string.
@@ -67,7 +67,6 @@
 				NSRange attRange = NSMakeRange(loc, 1);
 				[self removeAttribute:NSAttachmentAttributeName range:attRange];
 				[self replaceCharactersInRange:attRange withAttributedString:code];
-				[code release];
 				found++;
 				done++;
 				break;

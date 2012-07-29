@@ -32,18 +32,12 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.tree = nil;
-  self.root = nil;
-  [super dealloc];
-}
 
 - (void) awakeFromNib
 {
 	// apply our custom ImageAndTextCell for rendering the first column's cells
 	NSTableColumn *tableColumn = [outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:YES];
 	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
 	[tableColumn setDataCell:imageAndTextCell];

@@ -43,7 +43,6 @@
 																															attributes:dict];
 		[self setAttributedStringValue:str];
 		
-		[str release];
 		
 	}
 	return self;
@@ -64,7 +63,6 @@
 															yRadius:0.5*irect.size.height];
 	
 	[bp fill];
-	[bp release];
 	NSSize strSize = [[self attributedStringValue] size];
 	NSRect r = NSMakeRect(irect.origin.x+(irect.size.width-strSize.width)/2.0, 
 												irect.origin.y-strSize.height/3.0, 

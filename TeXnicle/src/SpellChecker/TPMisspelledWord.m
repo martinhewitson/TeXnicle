@@ -36,7 +36,7 @@
 
 + (TPMisspelledWord*) wordWithWord:(NSString*)aWord corrections:(NSArray*)correctionList range:(NSRange)aRange parent:(TPSpellCheckedFile*)aParent
 {
-  return [[[TPMisspelledWord alloc] initWithWord:aWord corrections:correctionList range:aRange parent:aParent] autorelease];
+  return [[TPMisspelledWord alloc] initWithWord:aWord corrections:correctionList range:aRange parent:aParent];
 }
 
 - (id) initWithWord:(NSString*)aWord corrections:(NSArray*)correctionList range:(NSRange)aRange parent:(TPSpellCheckedFile*)aParent
@@ -51,12 +51,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  self.corrections = nil;
-  [super dealloc];
-}
 
 - (NSAttributedString*)selectedDisplayString
 {
@@ -87,7 +81,6 @@
     [str addAttribute:NSForegroundColorAttributeName value:detailsColor range:NSMakeRange(0, [str length])];  
     [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
     [att appendAttributedString:str];
-    [str release];
   }
   
   // set paragraph
@@ -95,9 +88,8 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
-  [ps release];
   
-  return [att autorelease];
+  return att;
 }
 
 

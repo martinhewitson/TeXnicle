@@ -38,7 +38,6 @@
 - (void) dealloc
 {
   self.mainDocument = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -85,16 +84,14 @@
 																				action:@selector(addExistingFile:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
-	[menuItem release];
 	
 	//------ Add existing folder	
 	menuItem = [[NSMenuItem alloc] initWithTitle:@"Add existing folder..."
 																				action:@selector(addExistingFolder:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
-	[menuItem release];
 	
-	return [theMenu autorelease];
+	return theMenu;
 }
 
 - (IBAction) addExistingFolder:(id)sender
@@ -146,14 +143,12 @@
 																									action:@selector(addExistingFileToSelectedFolder:)
 																					 keyEquivalent:@""];
 		[theMenu addItem:item];
-		[item release];		
 		
 		//------ Add existing folder	
 		item = [[NSMenuItem alloc] initWithTitle:@"Add existing folder..."
 																					action:@selector(addExistingFolder:)
 																	 keyEquivalent:@""];
 		[theMenu addItem:item];
-		[item release];
 		
 	}
 	
@@ -170,7 +165,6 @@
 																								 keyEquivalent:@""];
 		}
 		[theMenu addItem:mainItem];
-		[mainItem release];
 	}
 	
 	//--------- rename item
@@ -179,7 +173,6 @@
 																												action:@selector(renameItem:)
 																								 keyEquivalent:@""];
 		[theMenu addItem:renameItem];
-		[renameItem release];
 	}
 	
 	//--------- remove item
@@ -187,7 +180,6 @@
 																											action:@selector(removeItem:)
 																							 keyEquivalent:@""];
 	[theMenu addItem:removeItem];
-	[removeItem release];
 	
   //--------- Reveal in Finder
 	if ([selectedItem isKindOfClass:[FileEntity class]] || 
@@ -199,7 +191,6 @@
                                                           action:@selector(revealItem:)
                                                    keyEquivalent:@""];
       [theMenu addItem:revealItem];
-      [revealItem release];
     }
 		
   }
@@ -214,7 +205,6 @@
 																													action:@selector(locateItem:) 
 																									 keyEquivalent:@""];
 			[theMenu addItem:locateItem];
-			[locateItem release];
 			[theMenu addItem:[NSMenuItem separatorItem]];
 		}
 	}
@@ -225,7 +215,6 @@
 																													action:@selector(newSubfolder:)
 																									 keyEquivalent:@""];
 		[theMenu addItem:newSubfolder];
-		[newSubfolder release];
 	}
 	
 	
@@ -233,7 +222,7 @@
 	
 	//--------- Add menu
 	
-	return [theMenu autorelease];
+	return theMenu;
 }
 
 - (IBAction) newSubfolder:(id)sender
@@ -248,7 +237,6 @@
 		
 	[treeController addObject:newFolder];
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
-	[newFolder release];
 }
 
 - (IBAction) setMainItem:(id)sender

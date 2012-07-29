@@ -34,8 +34,8 @@
   BOOL strokeSides;
 }
 
-@property (retain) NSColor *fillColor;
-@property (retain) NSColor *strokeColor;
+@property (strong) NSColor *fillColor;
+@property (strong) NSColor *strokeColor;
 @property (assign) BOOL strokeSides;
 
 @end

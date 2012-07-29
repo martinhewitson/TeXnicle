@@ -348,10 +348,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.errors = nil;
-  [lacheckTask release];
   
-  [super dealloc];
 }
 
 - (id) initWithDelegate:(id<SyntaxCheckerDelegate>)aDelegate
@@ -412,7 +409,6 @@
   if (lacheckTask != nil) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [lacheckTask interrupt];
-    [lacheckTask release];
   }
   
   lacheckTask = [[NSTask alloc] init];    
@@ -472,7 +468,7 @@
 	
 	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
 //  NSLog(@"Got data %@", data);
-  NSString *string = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+  NSString *string = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 //  NSLog(@"Got string %@", string);
 	self.output = [self.output stringByAppendingString:string];
   
@@ -482,7 +478,6 @@
 //    NSLog(@"output: %@", self.output);
     [self createErrors];
     [self syntaxCheckerCheckDidFinish:self];
-    [lacheckTask release];
     lacheckTask = nil;
     _taskRunning = NO;
   }
@@ -493,14 +488,13 @@
 {
   NSMutableArray *newErrors = [NSMutableArray array];
   NSArray *errorStrings = [self.output componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-  for (NSString *errorString in errorStrings) {
+  for (__strong NSString *errorString in errorStrings) {
     errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if ([errorString length]>0) {
       TPSyntaxError *error = [[TPSyntaxError alloc] initWithMessageLine:errorString];
       if ([error.line integerValue] != NSNotFound && [error.message length]>0 && [newErrors containsObject:error] == NO) {
         [newErrors addObject:error];
       }
-      [error release];
     }
   }
   

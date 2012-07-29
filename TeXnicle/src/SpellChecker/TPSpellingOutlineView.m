@@ -60,9 +60,8 @@
 																				action:@selector(forceUpdate:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
-	[menuItem release];
 		
-	return [theMenu autorelease];
+	return theMenu;
 }
 
 #pragma mark -

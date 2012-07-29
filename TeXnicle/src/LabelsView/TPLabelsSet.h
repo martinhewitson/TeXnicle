@@ -30,13 +30,13 @@
 @class FileEntity;
 
 @interface TPLabelsSet : NSObject {
-  id file;
+  id __unsafe_unretained file;
   NSArray *labels;
 }
 
-@property (retain) NSArray *labels;
-@property (assign) id file;
-@property (readonly) NSString *name;
+@property (strong) NSArray *labels;
+@property (unsafe_unretained) id file;
+@property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile labels:(NSArray*)someLabels;
 

@@ -69,64 +69,22 @@ static AFTreeScanner *sharedScanner = nil;
   dispatch_release(processLock);
   
   [self.queueWatcher invalidate];
-  self.queueWatcher = nil;
   
   [self.processTimer invalidate];
-  self.processTimer = nil;
-	[treeScannerQueue release];
-	[treeScannerCompleteQueue release];
-	self.trees = nil;
-  self.failures = nil;
-  self.processing = nil;
-  self.lastPost = nil;
-	[super dealloc];
 }
+
 
 + (AFTreeScanner*)sharedScanner
 {
-	@synchronized(self) {
-		if (sharedScanner == nil) {
-			[[self alloc] init]; // assignment not done here
-		}
-	}
-	return sharedScanner;
+  static AFTreeScanner *sharedInstance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [[AFTreeScanner alloc] init];
+    // Do any other initialisation stuff here
+  });
+  return sharedInstance;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
-{
-	@synchronized(self) {
-		if (sharedScanner == nil) {
-			sharedScanner = [super allocWithZone:zone];
-			return sharedScanner;  // assignment and return on first allocation
-		}
-	}
-	return nil; //on subsequent allocation attempts return nil
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-	return self;
-}
-
-- (id)retain
-{
-	return self;
-}
-
-- (NSUInteger)retainCount
-{
-	return UINT_MAX;  //denotes an object that cannot be released
-}
-
-- (void)release
-{
-	//do nothing
-}
-
-- (id)autorelease
-{
-	return self;
-}
 
 #pragma mark -
 #pragma mark control 
@@ -191,56 +149,56 @@ static AFTreeScanner *sharedScanner = nil;
       
       dispatch_async(queue, ^{						
         if (valid) {
-          NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];          
-          NSError *error = nil;
-          [nextTree populateChildren];
-          if (error) {
+          @autoreleasepool {          
+            NSError *error = nil;
+            [nextTree populateChildren];
+            if (error) {
 //            NSLog(@"Failed to scan %@", nextTree);
-            [self.failures addObject:nextTree];            
-            dispatch_semaphore_wait(processLock, DISPATCH_TIME_FOREVER);
-            [processing removeObject:nextTree];
-            dispatch_semaphore_signal(processLock);
-          } else {
-            nextTree.didPopulate = YES;
-            dispatch_semaphore_wait(processLock, DISPATCH_TIME_FOREVER);
-            [processing removeObject:nextTree];
-            dispatch_semaphore_signal(processLock);
-            
-            
-            if (lastPost) {		
-              NSDate *now = [NSDate date];
-              NSTimeInterval ti = [now timeIntervalSinceDate:lastPost];
-              if (ti > kMinUpdateInterval) {    
+              [self.failures addObject:nextTree];            
+              dispatch_semaphore_wait(processLock, DISPATCH_TIME_FOREVER);
+              [processing removeObject:nextTree];
+              dispatch_semaphore_signal(processLock);
+            } else {
+              nextTree.didPopulate = YES;
+              dispatch_semaphore_wait(processLock, DISPATCH_TIME_FOREVER);
+              [processing removeObject:nextTree];
+              dispatch_semaphore_signal(processLock);
+              
+              
+              if (lastPost) {		
+                NSDate *now = [NSDate date];
+                NSTimeInterval ti = [now timeIntervalSinceDate:lastPost];
+                if (ti > kMinUpdateInterval) {    
+                  dispatch_async(dispatch_get_main_queue(),
+                                // block
+                                ^{
+                                  if (valid) {
+                                    [self postNotificationsForTree:nextTree];
+                                  }
+                                });
+                  self.lastPost = now;
+                }
+                
+              } else {
+                [self postNotificationsForTree:nextTree];
+                self.lastPost = [NSDate date];
+              }
+              
+              if ([trees count]==0) {
                 dispatch_async(dispatch_get_main_queue(),
                               // block
                               ^{
                                 if (valid) {
-                                  [self postNotificationsForTree:nextTree];
-                                }
-                              });
-                self.lastPost = now;
-              }
-              
-            } else {
-              [self postNotificationsForTree:nextTree];
-              self.lastPost = [NSDate date];
-            }
-            
-            if ([trees count]==0) {
-              dispatch_async(dispatch_get_main_queue(),
-                            // block
-                            ^{
-                              if (valid) {
 //                                [[NSNotificationCenter defaultCenter] postNotificationName:AFTreeScannerQueueEmptiedNotification
 //                                                                                    object:self
 //                                                                                  userInfo:NULL];																		 
+                                }
                               }
-                            }
-                            );      
-              
-            } // end tree count == 0
-          } // end if no error
-          [pool drain];      
+                              );      
+                
+              } // end tree count == 0
+            } // end if no error
+          }      
         } // end if valid
       });
       

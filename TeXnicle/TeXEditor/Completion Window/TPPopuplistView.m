@@ -51,7 +51,6 @@
 - (void) dealloc
 {
 	[self setDelegate:nil];
-	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

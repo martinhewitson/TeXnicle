@@ -61,101 +61,97 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 - (void) dealloc
 {
   self.delegate = nil;
-  self.clip = nil;
-	[super dealloc];
 }
 
 - (void) generateImage
 {
   //START:mainloop
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	// create doc string
-	NSMutableString *doc = [[NSMutableString alloc] init];
-	
-	[doc appendString:@"\\documentclass[136pt]{article}\n"];
-	[doc appendString:@"\\usepackage[usenames]{color}\\color[rgb]{0,0,0} %used for font color\n"];
-	[doc appendString:@"\\usepackage{amssymb} %maths\n"];
-	[doc appendString:@"\\usepackage{amsmath} %maths\n"];
-	[doc appendString:@"\\usepackage[utf8]{inputenc} %useful to type directly diacritic characters\n"];
-	NSString *code = self.clip.code;
-  
-  // replace placeholders
-  NSString *regexp = [self placeholderRegexp];
-  NSArray *placeholders = [code componentsMatchedByRegex:regexp];
-  for (NSString *placeholder in placeholders) {
-    placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSRange r = [code rangeOfString:placeholder];
-    NSString *replacement = [placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)];
-    code = [code stringByReplacingCharactersInRange:r withString:replacement];
-  }
-  
-	if (mathMode) {
-		[doc appendFormat:@"\\pagestyle{empty} \\begin{document}$%@$\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
-	} else {
-		[doc appendFormat:@"\\pagestyle{empty} \\begin{document}%@\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
-	}
-	
-	
-	// write tmp file
-	NSString* workingDirectory =  [[NSWorkspace sharedWorkspace] temporaryDirectory];
-	NSString *uuid = [NSString stringWithUUID];
-	NSString *tmpfile = [uuid stringByAppendingPathExtension:@"tex"];
-	NSString *filepath = [workingDirectory stringByAppendingPathComponent:tmpfile];
-	NSString *croppedPDF = [workingDirectory stringByAppendingPathComponent:[uuid stringByAppendingString:@"_cropped.pdf"]];
-	
-	//	NSLog(@"TeX file: %@, -> %@", filepath, croppedPDF);
-	
-	NSError *error = nil;
-	BOOL success = [doc writeToFile:filepath atomically:YES
-                         encoding:NSUTF8StringEncoding
-                            error:&error];
-	if (success == NO) {
-		[doc release];
-		[NSApp presentError:error];
-		return;
-	}
-	
-	[doc release];
-	
-  // file://localhost/private/var/folders/V3/V3+QAXE-HIi9y796X1o4Q++++TI/-Tmp-/TeXnicle-1/
-	
-	// pdflatex it
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *gspath = [[defaults valueForKey:TPGSPath] stringByDeletingLastPathComponent];
-	NSString *texpath = [[defaults valueForKey:TPPDFLatexPath] stringByDeletingLastPathComponent]; 
-	NSString* script = [NSString stringWithFormat:@"%@/makePDFimage.sh",[[NSBundle mainBundle] resourcePath]];
-		
-	// check if the pdf exists
-	NSFileManager *fm = [NSFileManager defaultManager];
-	if ([fm fileExistsAtPath:croppedPDF]) {
-		BOOL success = [fm removeItemAtPath:croppedPDF error:&error];
-		if (success == NO) {
-			[NSApp presentError:error];
-		}
-	}		
-	
-	NSString *cmd = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", script, workingDirectory, filepath, croppedPDF, texpath, gspath] ;
-	system([cmd cStringUsingEncoding:NSUTF8StringEncoding]);
-	
-	// Set image
-	NSImage *image = [[[NSImage alloc] initWithContentsOfFile:croppedPDF] autorelease];
-	if (image == nil) {
-    image = [self generateBeamerImage];
-    if (image == nil) {
-      image = [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
+  @autoreleasepool {
+    
+    // create doc string
+    NSMutableString *doc = [[NSMutableString alloc] init];
+    
+    [doc appendString:@"\\documentclass[136pt]{article}\n"];
+    [doc appendString:@"\\usepackage[usenames]{color}\\color[rgb]{0,0,0} %used for font color\n"];
+    [doc appendString:@"\\usepackage{amssymb} %maths\n"];
+    [doc appendString:@"\\usepackage{amsmath} %maths\n"];
+    [doc appendString:@"\\usepackage[utf8]{inputenc} %useful to type directly diacritic characters\n"];
+    NSString *code = self.clip.code;
+    
+    // replace placeholders
+    NSString *regexp = [self placeholderRegexp];
+    NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+    for (__strong NSString *placeholder in placeholders) {
+      placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      NSRange r = [code rangeOfString:placeholder];
+      NSString *replacement = [placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)];
+      code = [code stringByReplacingCharactersInRange:r withString:replacement];
     }
-	}	
-  
-  // update clipping
-  self.clip.image = [NSKeyedArchiver archivedDataWithRootObject:image];	
-  self.clip.imageIsValid = [NSNumber numberWithBool:YES];
-  
-	// tell the controller so the library can be saved
-  [self performSelectorOnMainThread:@selector(imageGeneratorTaskEnded:) withObject:croppedPDF waitUntilDone:NO];
-	
-	
-  [pool drain], pool = nil;
+    
+    if (mathMode) {
+      [doc appendFormat:@"\\pagestyle{empty} \\begin{document}$%@$\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
+    } else {
+      [doc appendFormat:@"\\pagestyle{empty} \\begin{document}%@\\end{document}", [code stringByReplacingOccurrencesOfString:@"\/" withString:@"\\/"]];
+    }
+    
+    
+    // write tmp file
+    NSString* workingDirectory =  [[NSWorkspace sharedWorkspace] temporaryDirectory];
+    NSString *uuid = [NSString stringWithUUID];
+    NSString *tmpfile = [uuid stringByAppendingPathExtension:@"tex"];
+    NSString *filepath = [workingDirectory stringByAppendingPathComponent:tmpfile];
+    NSString *croppedPDF = [workingDirectory stringByAppendingPathComponent:[uuid stringByAppendingString:@"_cropped.pdf"]];
+    
+    //	NSLog(@"TeX file: %@, -> %@", filepath, croppedPDF);
+    
+    NSError *error = nil;
+    BOOL success = [doc writeToFile:filepath atomically:YES
+                           encoding:NSUTF8StringEncoding
+                              error:&error];
+    if (success == NO) {
+      [NSApp presentError:error];
+      return;
+    }
+    
+    
+    // file://localhost/private/var/folders/V3/V3+QAXE-HIi9y796X1o4Q++++TI/-Tmp-/TeXnicle-1/
+    
+    // pdflatex it
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *gspath = [[defaults valueForKey:TPGSPath] stringByDeletingLastPathComponent];
+    NSString *texpath = [[defaults valueForKey:TPPDFLatexPath] stringByDeletingLastPathComponent];
+    NSString* script = [NSString stringWithFormat:@"%@/makePDFimage.sh",[[NSBundle mainBundle] resourcePath]];
+		
+    // check if the pdf exists
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:croppedPDF]) {
+      BOOL success = [fm removeItemAtPath:croppedPDF error:&error];
+      if (success == NO) {
+        [NSApp presentError:error];
+      }
+    }
+    
+    NSString *cmd = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", script, workingDirectory, filepath, croppedPDF, texpath, gspath] ;
+    system([cmd cStringUsingEncoding:NSUTF8StringEncoding]);
+    
+    // Set image
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:croppedPDF];
+    if (image == nil) {
+      image = [self generateBeamerImage];
+      if (image == nil) {
+        image = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];
+      }
+    }
+    
+    // update clipping
+    self.clip.image = [NSKeyedArchiver archivedDataWithRootObject:image];
+    self.clip.imageIsValid = [NSNumber numberWithBool:YES];
+    
+    // tell the controller so the library can be saved
+    [self performSelectorOnMainThread:@selector(imageGeneratorTaskEnded:) withObject:croppedPDF waitUntilDone:NO];
+    
+    
+  }
   //END:mainloop
 	
 }
@@ -173,7 +169,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
   // replace placeholders
   NSString *regexp = [self placeholderRegexp];
   NSArray *placeholders = [code componentsMatchedByRegex:regexp];
-  for (NSString *placeholder in placeholders) {
+  for (__strong NSString *placeholder in placeholders) {
     placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSRange r = [code rangeOfString:placeholder];
     NSString *replacement = [placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)];
@@ -201,12 +197,10 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
                          encoding:NSUTF8StringEncoding
                             error:&error];
 	if (success == NO) {
-		[doc release];
 		[NSApp presentError:error];
 		return nil;
 	}
 	
-	[doc release];
 	
   // file://localhost/private/var/folders/V3/V3+QAXE-HIi9y796X1o4Q++++TI/-Tmp-/TeXnicle-1/
 	
@@ -230,11 +224,11 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
 	
   // now check if the command was successful
 	if ([fm fileExistsAtPath:croppedPDF] == NO) {
-    return [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
+    return [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
   }
   
 	// Set image
-	return [[[NSImage alloc] initWithContentsOfFile:croppedPDF] autorelease];	
+	return [[NSImage alloc] initWithContentsOfFile:croppedPDF];	
 }
 
 #pragma mark -

@@ -88,7 +88,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     [nonNilButtons addObject:self.prefsButton];
   }
   
-  buttons = [[NSArray arrayWithArray:nonNilButtons] retain];
+  buttons = [NSArray arrayWithArray:nonNilButtons];
   
 }
 
@@ -103,11 +103,6 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   }
 }
 
-- (void)dealloc
-{
-  [buttons release];
-  [super dealloc];
-}
 
 - (NSInteger) indexOfSelectedTab
 {

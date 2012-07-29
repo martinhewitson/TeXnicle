@@ -38,9 +38,9 @@
 }
 
 @property (copy) NSString *text;
-@property (retain) id file;
-@property (retain) NSDate *lastCheck;
-@property (retain) NSArray *words;
+@property (strong) id file;
+@property (strong) NSDate *lastCheck;
+@property (strong) NSArray *words;
 @property (assign) BOOL needsUpdate;
 
 - (id) initWithFile:(id)aFile;

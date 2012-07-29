@@ -108,7 +108,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
 		self.project = [fetchResults objectAtIndex:0];
-		[fetchRequest release];
 		return project;
 	}
 	
@@ -118,7 +117,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	else {
 		// should present custom error message...
 	}
-	[fetchRequest release];
 	return nil;
 }
 
@@ -134,7 +132,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[imageAndTextCell setEditable:YES];
 	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
 	[tableColumn setDataCell:imageAndTextCell];
-	[imageAndTextCell release];
   
 	[outlineView setSortDescriptors:[self treeNodeSortDescriptors]];
 
@@ -161,8 +158,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
   self.document = nil;
   
-	[filesToAdd release];
-	[super dealloc];
 }
 
 #pragma mark -
@@ -242,7 +237,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 			[alert setInformativeText:[NSString stringWithFormat:@"It was not possible to create a new file at %@", aPath]];
 			[alert setAlertStyle:NSWarningAlertStyle];		
 			[alert runModal];
-			[alert release];
 			//			[[self managedObjectContext] deleteObject:object];
 			return NO;
 		}
@@ -253,7 +247,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     [alert setInformativeText:[NSString stringWithFormat:@"A file already exists at %@", aPath]];
     [alert setAlertStyle:NSWarningAlertStyle];		
     [alert runModal];
-    [alert release];
     
 //		NSLog(@"File exists at %@", aPath);
 	}	
@@ -338,7 +331,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   [self performSelector:@selector(selectItem:) withObject:newFolder afterDelay:0.1];
 	
 	// This is now managed by the controller so we can release it here
-	return [newFolder autorelease];				
+	return newFolder;				
 }
 
 - (NSManagedObject*) addNewFile:(NSString*)name 
@@ -473,7 +466,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 //	NSLog(@"Added object: %@", newFile);
 	
-	return [newFile autorelease];				
+	return newFile;				
 }
 
 
@@ -763,7 +756,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
                       for (NSURL *url in [openPanel URLs]) {
                         [filenames addObject:[url path]];
                       }
-                      [self addFiles:filenames withContext:selectedFolder];
+                      [self addFiles:filenames withContext:(__bridge void *)(selectedFolder)];
                     }];
 }
 
@@ -778,12 +771,12 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 //	NSLog(@"Adding files: %@", filesToAdd);
 	
 	NSString *folderPath = nil;
-	id passed = context;
+	id passed = (__bridge id)(context);
 //	NSLog(@"Passed folder: %@", passed);
 	if (passed) {
 		//NSLog(@"Passed context %@", passed);
 		if ([passed isKindOfClass:[FolderEntity class]]) {
-			FolderEntity *folder = context;
+			FolderEntity *folder = (__bridge FolderEntity *)(context);
 			folderPath = [folder projectPath];
 		}
 	} 
@@ -973,7 +966,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	// read the contents of the source file
 	BOOL isTextFile = NO;
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aPath]];
 
 	if ([aPath isText]) {
@@ -1309,7 +1302,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
         ImageAndTextCell *c = (ImageAndTextCell*)cell;
         [c setAttributedStringValue:title];
-        [title release];
       }
       
       NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
@@ -1366,7 +1358,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (NSArray *)treeNodeSortDescriptors
 {
-	return [NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"sortIndex" ascending:YES] autorelease]];
+	return [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"sortIndex" ascending:YES]];
 }
 
 
@@ -1427,7 +1419,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         NSTreeNode *node = [self treeNodeForObject:newfile];
         NSIndexPath *proposedParentIndexPath;
         if (!proposedParentItem)
-          proposedParentIndexPath = [[[NSIndexPath alloc] init] autorelease]; // makes a NSIndexPath with length == 0
+          proposedParentIndexPath = [[NSIndexPath alloc] init]; // makes a NSIndexPath with length == 0
         else
           proposedParentIndexPath = [proposedParentItem indexPath];
         
@@ -1449,7 +1441,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	NSIndexPath *proposedParentIndexPath;
 	if (!proposedParentItem)
-		proposedParentIndexPath = [[[NSIndexPath alloc] init] autorelease]; // makes a NSIndexPath with length == 0
+		proposedParentIndexPath = [[NSIndexPath alloc] init]; // makes a NSIndexPath with length == 0
 	else
 		proposedParentIndexPath = [proposedParentItem indexPath];
 	

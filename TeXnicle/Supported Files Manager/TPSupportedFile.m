@@ -55,7 +55,7 @@
 // Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension
 {
-  return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension] autorelease];
+  return [[TPSupportedFile alloc] initWithName:aName extension:anExtension];
 }
 
 // Init with name and extension, and flag as built-in or not
@@ -71,7 +71,7 @@
 // Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn
 {
-  return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn] autorelease];
+  return [[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn];
 }
 
 // Init with name, extension, built-in and syntax highlight flags
@@ -87,7 +87,7 @@
 // Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight
 {
-  return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight] autorelease];
+  return [[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight];
 }
 
 // Init with name, extension, built-in and syntax highlight flags, spell check flags
@@ -103,7 +103,7 @@
 // Convenience constructor
 + (TPSupportedFile*)supportedFileWithName:(NSString*)aName extension:(NSString*)anExtension isBuiltIn:(BOOL)builtIn syntaxHighlight:(BOOL)highlight spellcheck:(BOOL)spellcheck
 {
-  return [[[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight spellcheck:spellcheck] autorelease];
+  return [[TPSupportedFile alloc] initWithName:aName extension:anExtension isBuiltIn:builtIn syntaxHighlight:highlight spellcheck:spellcheck];
 }
 
 - (NSString*)description

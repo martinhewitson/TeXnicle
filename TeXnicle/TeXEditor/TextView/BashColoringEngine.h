@@ -33,6 +33,6 @@
   NSArray *keywords;
 }
 
-@property (retain) NSArray *keywords;
+@property (strong) NSArray *keywords;
 
 @end

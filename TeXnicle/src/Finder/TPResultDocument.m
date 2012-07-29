@@ -36,7 +36,7 @@
 
 + (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument
 {
-  return [[[TPResultDocument alloc] initWithDocument:aDocument] autorelease];
+  return [[TPResultDocument alloc] initWithDocument:aDocument];
 }
 
 - (id)initWithDocument:(FileEntity*)aDocument
@@ -50,12 +50,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.document = nil;
-  self.matches = nil;
-  [super dealloc];
-}
 
 - (void) addMatch:(TPDocumentMatch *)aMatch
 {
@@ -76,7 +70,7 @@
 {
   NSString *str = [NSString stringWithFormat:@"%@: %d Matches", [self.document valueForKey:@"name"], [self.matches count]];
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str]; 
-  return [att autorelease];
+  return att;
 }
 
 

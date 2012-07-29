@@ -66,8 +66,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.sets = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -248,7 +246,6 @@
       if (warnings && [warnings count] > 0) {
         set = [[TPWarningSet alloc] initWithFile:newFile errors:warnings];
         [self.sets addObject:set];
-        [set release];
       }
     } else {
       // update the errors

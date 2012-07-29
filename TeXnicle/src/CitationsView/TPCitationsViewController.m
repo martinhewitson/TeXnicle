@@ -68,8 +68,6 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
   [self.sets removeAllObjects];
-  self.sets = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -245,7 +243,6 @@
       if (entries && [entries count] > 0) {
         set = [[TPCitationSet alloc] initWithFile:newFile bibliographyArray:entries];
         [self.sets addObject:set];
-        [set release];
       }
     } else {
       // update the citations

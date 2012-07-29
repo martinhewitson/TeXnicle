@@ -39,7 +39,7 @@
 }
 
 @property (assign) BOOL openStartupScreenAtAppStartup;
-@property (retain) TPLibrary *library;
+@property (strong) TPLibrary *library;
 
 - (void) checkVersion;
 

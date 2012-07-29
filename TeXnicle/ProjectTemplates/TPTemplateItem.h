@@ -35,7 +35,7 @@
 }
 
 @property (copy) NSString *path;
-@property (retain) NSNumber *isExpanded;
+@property (strong) NSNumber *isExpanded;
 
 - (id) initWithPath:(NSString*)aPath;
 

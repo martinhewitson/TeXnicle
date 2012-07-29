@@ -33,7 +33,7 @@
 
 @interface MHEditorRuler : NSRulerView {
 @private
-  TeXTextView *textView;
+  TeXTextView *__unsafe_unretained textView;
   NSArray *lineNumbers;
   NSArray *codeFolders;
   NSColor *textColor;
@@ -63,17 +63,17 @@
   MHCodeFolder *highlightedFolder;
 }
 
-@property (retain) NSDate *lastCalculation;
-@property (retain) NSArray *lineNumbers;
-@property (retain) NSArray *codeFolders;
-@property (retain) NSMutableArray *foldingTagDescriptions;
-@property (assign) TeXTextView *textView;
-@property (retain) NSColor *textColor;
-@property (retain) NSColor *alternateTextColor;
-@property (retain) NSColor *backgroundColor;
-@property (retain) NSFont *font;
-@property (retain) NSDictionary *textAttributesDictionary;
-@property (retain) NSDictionary *alternateTextAttributesDictionary;
+@property (strong) NSDate *lastCalculation;
+@property (strong) NSArray *lineNumbers;
+@property (strong) NSArray *codeFolders;
+@property (strong) NSMutableArray *foldingTagDescriptions;
+@property (unsafe_unretained) TeXTextView *textView;
+@property (strong) NSColor *textColor;
+@property (strong) NSColor *alternateTextColor;
+@property (strong) NSColor *backgroundColor;
+@property (strong) NSFont *font;
+@property (strong) NSDictionary *textAttributesDictionary;
+@property (strong) NSDictionary *alternateTextAttributesDictionary;
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView;
 - (id)initWithTextView:(NSTextView*)aTextView;

@@ -45,7 +45,7 @@
 {
   BOOL fileIsImage = NO;
   
-  CFStringRef fileExtension = (CFStringRef) self;
+  CFStringRef fileExtension = (__bridge CFStringRef) self;
   CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
     
   if (UTTypeConformsTo(fileUTI, kUTTypeImage) 

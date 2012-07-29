@@ -13,13 +13,13 @@
 
 @interface TPLibraryEntry : NSManagedObject
 
-@property (nonatomic, retain) NSNumber *sortIndex;
-@property (nonatomic, retain) NSString * command;
-@property (nonatomic, retain) NSNumber * imageIsValid;
-@property (nonatomic, retain) NSNumber * isBuiltIn;
-@property (nonatomic, retain) NSString * uuid;
-@property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain) NSData * image;
-@property (nonatomic, retain) TPLibraryCategory *category;
+@property (nonatomic, strong) NSNumber *sortIndex;
+@property (nonatomic, strong) NSString * command;
+@property (nonatomic, strong) NSNumber * imageIsValid;
+@property (nonatomic, strong) NSNumber * isBuiltIn;
+@property (nonatomic, strong) NSString * uuid;
+@property (nonatomic, strong) NSString * code;
+@property (nonatomic, strong) NSData * image;
+@property (nonatomic, strong) TPLibraryCategory *category;
 
 @end

@@ -31,12 +31,12 @@
 
 @interface MHMiniConsoleViewController : NSViewController <MHConsoleViewer> {
 @private
-  NSTextField *textField;
-  NSProgressIndicator *progressIndicator;
+  NSTextField *__unsafe_unretained textField;
+  NSProgressIndicator *__unsafe_unretained progressIndicator;
 }
 
-@property (assign) IBOutlet NSTextField *textField;
-@property (assign) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet NSTextField *textField;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
 
 - (void) setAnimating:(BOOL)state;
 

@@ -32,14 +32,14 @@
 
 @interface TPSupportedFilesEditor : NSViewController <NSUserInterfaceValidations, NSTableViewDataSource, NSTableViewDelegate> {
 @private
-  NSTableView *tableView;
-  HHValidatedButton *addButton;
-  HHValidatedButton *removeButton;
+  NSTableView *__unsafe_unretained tableView;
+  HHValidatedButton *__unsafe_unretained addButton;
+  HHValidatedButton *__unsafe_unretained removeButton;
 }
 
-@property (assign) IBOutlet NSTableView *tableView;
-@property (assign) IBOutlet HHValidatedButton *addButton;
-@property (assign) IBOutlet HHValidatedButton *removeButton;
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *removeButton;
 
 
 - (IBAction)addFileType:(id)sender;

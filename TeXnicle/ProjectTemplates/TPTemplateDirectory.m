@@ -44,11 +44,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.children = nil;
-  [super dealloc];
-}
 
 - (void) populateChildren
 {
@@ -76,11 +71,11 @@
     
     // if directory
     if ([[atts valueForKey:NSFileType] isEqualToString:NSFileTypeDirectory]) {
-      TPTemplateDirectory *subdir = [[[TPTemplateDirectory alloc] initWithPath:subpath] autorelease];
+      TPTemplateDirectory *subdir = [[TPTemplateDirectory alloc] initWithPath:subpath];
       [childArray addObject:subdir];
     } else {
       // add file
-      TPTemplateFile *newfile = [[[TPTemplateFile alloc] initWithPath:subpath] autorelease];
+      TPTemplateFile *newfile = [[TPTemplateFile alloc] initWithPath:subpath];
       [childArray addObject:newfile];
     }
     

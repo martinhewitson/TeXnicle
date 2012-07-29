@@ -34,20 +34,20 @@
 @class TPProjectTemplate;
 
 @interface TPProjectTemplateManager : NSViewController <NSUserInterfaceValidations, NSTableViewDelegate, NSTableViewDataSource> {
-  HHValidatedButton *editButton;
-  HHValidatedButton *duplicateButton;
-  HHValidatedButton *deleteButton;
-  HHValidatedButton *revealButton;
+  HHValidatedButton *__unsafe_unretained editButton;
+  HHValidatedButton *__unsafe_unretained duplicateButton;
+  HHValidatedButton *__unsafe_unretained deleteButton;
+  HHValidatedButton *__unsafe_unretained revealButton;
   TPProjectTemplateListViewController *templateListViewController; 
-  NSView *templateListContainer;
+  NSView *__unsafe_unretained templateListContainer;
 }
 
-@property (assign) IBOutlet NSView *templateListContainer;
-@property (assign) IBOutlet HHValidatedButton *editButton;
-@property (assign) IBOutlet HHValidatedButton *duplicateButton;
-@property (assign) IBOutlet HHValidatedButton *deleteButton;
-@property (assign) IBOutlet HHValidatedButton *revealButton;
-@property (retain) TPProjectTemplateListViewController *templateListViewController;
+@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *duplicateButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (strong) TPProjectTemplateListViewController *templateListViewController;
 
 - (IBAction)editSelectedTemplate:(id)sender;
 - (IBAction)duplicateSelectedTemplate:(id)sender;

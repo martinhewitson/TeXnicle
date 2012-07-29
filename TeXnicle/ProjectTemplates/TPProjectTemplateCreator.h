@@ -40,23 +40,23 @@
 
 @interface TPProjectTemplateCreator : NSWindowController <NSWindowDelegate> {
 @private
-  id<TPProjectTemplateCreateDelegate> delegate;
-  NSManagedObjectContext *managedObjectContext;
-  TPOutlineView *outlineView;
-  ProjectItemTreeController *treeController;
-  NSTextField *templateNameTextField;
+  id<TPProjectTemplateCreateDelegate> __unsafe_unretained delegate;
+  NSManagedObjectContext *__unsafe_unretained managedObjectContext;
+  TPOutlineView *__unsafe_unretained outlineView;
+  ProjectItemTreeController *__unsafe_unretained treeController;
+  NSTextField *__unsafe_unretained templateNameTextField;
   NSString *suggestedTemplateName;
-  NSTextField *templateDescriptionField;
+  NSTextField *__unsafe_unretained templateDescriptionField;
   NSString *suggestedTemplateDescription;
 }
 
-@property (assign) id<TPProjectTemplateCreateDelegate> delegate;
-@property (assign) NSManagedObjectContext *managedObjectContext;
-@property (assign) IBOutlet TPOutlineView *outlineView;
-@property (assign) IBOutlet ProjectItemTreeController *treeController;
-@property (assign) IBOutlet NSTextField *templateNameTextField;
+@property (unsafe_unretained) id<TPProjectTemplateCreateDelegate> delegate;
+@property (unsafe_unretained) NSManagedObjectContext *managedObjectContext;
+@property (unsafe_unretained) IBOutlet TPOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet ProjectItemTreeController *treeController;
+@property (unsafe_unretained) IBOutlet NSTextField *templateNameTextField;
 @property (copy) NSString *suggestedTemplateName;
-@property (assign) IBOutlet NSTextField *templateDescriptionField;
+@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionField;
 @property (copy) NSString *suggestedTemplateDescription;
 
 + (NSString*) projectTemplatesDirectory;

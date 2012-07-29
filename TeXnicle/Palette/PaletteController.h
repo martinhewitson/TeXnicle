@@ -53,11 +53,11 @@
   
   IBOutlet HHValidatedButton *insertButton;
   
-  id<PaletteControllerDelegate> delegate;
+  id<PaletteControllerDelegate> __unsafe_unretained delegate;
 }
 
-@property (assign) id<PaletteControllerDelegate> delegate;
-@property (retain) NSArray *palettes;
+@property (unsafe_unretained) id<PaletteControllerDelegate> delegate;
+@property (strong) NSArray *palettes;
 
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate;
 

@@ -37,8 +37,8 @@
   NSMutableArray *pdfViews;
 }
 
-@property (retain) TeXTextView *textView;
-@property (retain) NSMutableArray *pdfViews;
+@property (strong) TeXTextView *textView;
+@property (strong) NSMutableArray *pdfViews;
 
 - (id) initWithEditor:(TeXTextView*)aTextView pdfViews:(NSArray*)pdfViewArray;
 

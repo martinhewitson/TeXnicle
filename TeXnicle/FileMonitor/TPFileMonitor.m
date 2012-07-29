@@ -42,7 +42,7 @@
 
 + (TPFileMonitor*)monitorWithDelegate:(id<TPFileMonitorDelegate>)aDelegate
 {
-  return [[[TPFileMonitor alloc] initWithDelegate:aDelegate] autorelease];
+  return [[TPFileMonitor alloc] initWithDelegate:aDelegate];
 }
 
 - (id)initWithDelegate:(id<TPFileMonitorDelegate>)aDelegate
@@ -65,7 +65,6 @@
 {
   self.delegate = nil;
   [self stopTimer];
-  [super dealloc];
 }
 
 - (void) stopTimer

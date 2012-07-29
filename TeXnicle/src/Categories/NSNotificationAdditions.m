@@ -41,7 +41,6 @@
 
 	[[self class] performSelectorOnMainThread:@selector( _postNotificationName: ) withObject:info waitUntilDone:wait];
 
-	[info release];
 }
 
 + (void) _postNotificationName:(NSDictionary *) info {

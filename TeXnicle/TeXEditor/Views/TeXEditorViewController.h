@@ -35,22 +35,22 @@
 
 @interface TeXEditorViewController : NSViewController <SyntaxCheckerDelegate, TPSectionListControllerDelegate, TeXTextViewDelegate, NSTextStorageDelegate, NSTextViewDelegate> {
 @private
-  TeXTextView *textView;
-  id delegate;
+  TeXTextView *__unsafe_unretained textView;
+  id __unsafe_unretained delegate;
   IBOutlet TPSectionListController *sectionListController;
   IBOutlet NSView *containerView;
-  NSPopUpButton *sectionListPopup;
-  NSButton *unfoldButton;
-  NSButton *markerButton;
+  NSPopUpButton *__unsafe_unretained sectionListPopup;
+  NSButton *__unsafe_unretained unfoldButton;
+  NSButton *__unsafe_unretained markerButton;
   
   NSString *fileBeingSyntaxChecked;
   
   IBOutlet NSView *jumpBar;
   IBOutlet NSScrollView *scrollView;
   
-  NSWindow *tableConfigureWindow;
+  NSWindow *__unsafe_unretained tableConfigureWindow;
   
-  NSButton *errorPopup;
+  NSButton *__unsafe_unretained errorPopup;
 	NSMenu *errorMenu;
   NSArray *errors;
   
@@ -68,21 +68,21 @@
 }
 
 @property (copy) NSString *fileBeingSyntaxChecked;
-@property (retain) NSImage *errorImage;
-@property (retain) NSImage *noErrorImage;
-@property (retain) NSImage *checkFailedImage;
+@property (strong) NSImage *errorImage;
+@property (strong) NSImage *noErrorImage;
+@property (strong) NSImage *checkFailedImage;
 @property (assign) BOOL performSyntaxCheck;
-@property (retain) NSTimer *syntaxCheckTimer;
-@property (retain) TPSyntaxChecker *checker;
-@property (retain) NSArray *errors;
+@property (strong) NSTimer *syntaxCheckTimer;
+@property (strong) TPSyntaxChecker *checker;
+@property (strong) NSArray *errors;
 @property (assign) BOOL isHidden;
-@property (assign) IBOutlet NSWindow *tableConfigureWindow;
-@property (assign) IBOutlet TeXTextView *textView;
-@property (assign) IBOutlet NSPopUpButton *sectionListPopup;
-@property (assign) IBOutlet NSButton *markerButton;
-@property (assign) IBOutlet NSButton *errorPopup;
-@property (assign) IBOutlet NSButton *unfoldButton;
-@property (assign) id delegate;
+@property (unsafe_unretained) IBOutlet NSWindow *tableConfigureWindow;
+@property (unsafe_unretained) IBOutlet TeXTextView *textView;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *sectionListPopup;
+@property (unsafe_unretained) IBOutlet NSButton *markerButton;
+@property (unsafe_unretained) IBOutlet NSButton *errorPopup;
+@property (unsafe_unretained) IBOutlet NSButton *unfoldButton;
+@property (unsafe_unretained) id delegate;
 
 - (void) handleDocumentChanged:(NSNotification*)aNote;
 - (void) setupSyntaxChecker;

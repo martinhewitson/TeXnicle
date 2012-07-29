@@ -48,31 +48,31 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 	id sectionListController;
 	
-	FileEntity  *currentDoc;
+	FileEntity  *__unsafe_unretained currentDoc;
 	NSMutableArray *openDocuments;
 	
 	NSMutableArray *standaloneWindows;
 	
-  id<OpenDocumentsManagerDelegate> delegate;
+  id<OpenDocumentsManagerDelegate> __unsafe_unretained delegate;
 	
   IBOutlet PSMTabBarControl *tabBar;
   IBOutlet NSBox *tabBackground;
-	NSTabView *tabView;
-  TeXEditorViewController *texEditorViewController;
-	TPImageViewerController *imageViewerController;
-  NSView *imageViewContainer;
+	NSTabView *__unsafe_unretained tabView;
+  TeXEditorViewController *__unsafe_unretained texEditorViewController;
+	TPImageViewerController *__unsafe_unretained imageViewerController;
+  NSView *__unsafe_unretained imageViewContainer;
 	BOOL isOpening;
-	NSView *navigationButtonsView;
+	NSView *__unsafe_unretained navigationButtonsView;
 }
 
-@property (assign) IBOutlet NSView *navigationButtonsView;
+@property (unsafe_unretained) IBOutlet NSView *navigationButtonsView;
 @property (readwrite, assign) BOOL isOpening;
-@property (readwrite, assign) FileEntity *currentDoc;
-@property (assign) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
-@property (assign) IBOutlet NSTabView *tabView;
-@property (assign) TeXEditorViewController *texEditorViewController;
-@property (assign) TPImageViewerController *imageViewerController;
-@property (assign) NSView *imageViewContainer;
+@property (readwrite, unsafe_unretained) FileEntity *currentDoc;
+@property (unsafe_unretained) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) TeXEditorViewController *texEditorViewController;
+@property (unsafe_unretained) TPImageViewerController *imageViewerController;
+@property (unsafe_unretained) NSView *imageViewContainer;
 
 - (NSInteger) count;
 - (void) refreshTabForDocument:(FileEntity*)aDoc;

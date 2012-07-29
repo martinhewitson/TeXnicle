@@ -12,7 +12,7 @@
 
 + (TPSourceFile*)fileWithParent:(TPSourceItem*)aParent path:(NSURL*)aPath
 {
-  return [[[TPSourceFile alloc] initWithParent:aParent path:aPath] autorelease];
+  return [[TPSourceFile alloc] initWithParent:aParent path:aPath];
 }
 
 - (id) initWithParent:(TPSourceItem *)aParent path:(NSURL *)aURL

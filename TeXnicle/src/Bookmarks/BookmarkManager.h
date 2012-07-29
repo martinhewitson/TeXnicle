@@ -45,22 +45,22 @@
 
 @interface BookmarkManager : NSViewController <NSUserInterfaceValidations, BookmarkManagerDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource> {
 @private
-  id<BookmarkManagerDelegate> delegate;
-  NSOutlineView *outlineView;
-  HHValidatedButton *jumpToButton;
-  HHValidatedButton *deleteButton;
+  id<BookmarkManagerDelegate> __unsafe_unretained delegate;
+  NSOutlineView *__unsafe_unretained outlineView;
+  HHValidatedButton *__unsafe_unretained jumpToButton;
+  HHValidatedButton *__unsafe_unretained deleteButton;
   NSInteger _currentSelectedBookmark;
   
-  HHValidatedButton *expandAllButton;
-  HHValidatedButton *collapseAllButton;
+  HHValidatedButton *__unsafe_unretained expandAllButton;
+  HHValidatedButton *__unsafe_unretained collapseAllButton;
 }
 
-@property (assign) id<BookmarkManagerDelegate> delegate;
-@property (assign) IBOutlet NSOutlineView *outlineView;
-@property (assign) IBOutlet HHValidatedButton *jumpToButton;
-@property (assign) IBOutlet HHValidatedButton *deleteButton;
-@property (assign) IBOutlet HHValidatedButton *expandAllButton;
-@property (assign) IBOutlet HHValidatedButton *collapseAllButton;
+@property (unsafe_unretained) id<BookmarkManagerDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *jumpToButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *expandAllButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
 
 
 - (id)initWithDelegate:(id<BookmarkManagerDelegate>)aDelegate;

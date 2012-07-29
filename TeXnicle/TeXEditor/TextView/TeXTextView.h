@@ -98,19 +98,19 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
   TPPasteTableConfigureWindowController *_pasteConfigController;
 }
 
-@property (retain) TPPasteTableConfigureWindowController *pasteConfigController;
+@property (strong) TPPasteTableConfigureWindowController *pasteConfigController;
 @property (assign) NSInteger zoomFactor;
-@property (retain) NSTimer *highlightingTimer;
-@property (retain) MHEditorRuler *editorRuler;
-@property (retain) TeXColoringEngine *coloringEngine;
-@property (retain) NSColor *lineHighlightColor;
+@property (strong) NSTimer *highlightingTimer;
+@property (strong) MHEditorRuler *editorRuler;
+@property (strong) TeXColoringEngine *coloringEngine;
+@property (strong) NSColor *lineHighlightColor;
 @property (copy) NSString *highlightRange;
 @property (assign) CGFloat highlightAlpha;
-@property (retain) NSMutableArray *syntaxHighlightTags;
+@property (strong) NSMutableArray *syntaxHighlightTags;
 @property (assign) BOOL shiftKeyOn;
-@property (retain) NSMutableArray *commandList;
-@property (retain) NSMutableArray *wordHighlightRanges;
-@property (retain) MHTableConfigureController *tableConfigureController;
+@property (strong) NSMutableArray *commandList;
+@property (strong) NSMutableArray *wordHighlightRanges;
+@property (strong) MHTableConfigureController *tableConfigureController;
 
 - (void) setupLists;
 - (void) setUpRuler;

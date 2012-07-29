@@ -31,11 +31,11 @@
 @interface TPPopuplistView : NSView {
 
 	IBOutlet NSTableView *table;
-	id delegate;
+	id __unsafe_unretained delegate;
 	
 }
 
-@property (readwrite, assign) id delegate;
+@property (readwrite, unsafe_unretained) id delegate;
 - (void) listDoubleClick;
 
 @end

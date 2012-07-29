@@ -30,11 +30,11 @@
 
 @interface TPCitation : NSObject {
   BibliographyEntry *entry;
-  id file;
+  id __unsafe_unretained file;
 }
 
-@property (retain) BibliographyEntry *entry;
-@property (assign) id file;
+@property (strong) BibliographyEntry *entry;
+@property (unsafe_unretained) id file;
 
 + (id) citationWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;
 - (id) initWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;

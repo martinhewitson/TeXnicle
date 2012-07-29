@@ -34,7 +34,7 @@
   NSArray *children;
 }
 
-@property (retain) NSArray *children;
+@property (strong) NSArray *children;
 
 
 

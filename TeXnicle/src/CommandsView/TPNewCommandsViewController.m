@@ -65,8 +65,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.sets = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -253,7 +251,6 @@
       if (commands && [commands count] > 0) {
         set = [[TPCommandSet alloc] initWithFile:file commandArray:commands];
         [self.sets addObject:set];
-        [set release];
       }
     } else {
       // update the commands

@@ -36,7 +36,7 @@
 
 + (id) commandWithFile:(id)aFile source:(NSString*)text
 {
-  return [[[TPNewCommand alloc] initWithFile:aFile source:text] autorelease];
+  return [[TPNewCommand alloc] initWithFile:aFile source:text];
 }
 
 - (id) initWithFile:(id)aFile source:(NSString*)text
@@ -50,7 +50,7 @@
 
 + (id) commandWithSource:(NSString*)text
 {
-  return [[[TPNewCommand alloc] initWithSource:text] autorelease];
+  return [[TPNewCommand alloc] initWithSource:text];
 }
 
 - (id) initWithSource:(NSString*)text
@@ -63,11 +63,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-//  NSLog(@"Dealloc %@", self);
-  [super dealloc];
-}
 
 - (NSString*)string
 {

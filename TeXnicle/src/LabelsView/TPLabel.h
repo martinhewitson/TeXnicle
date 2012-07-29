@@ -10,11 +10,11 @@
 
 @interface TPLabel : NSObject {
   NSString *text;
-  id file;
+  id __unsafe_unretained file;
 }
 
 @property (copy) NSString *text;
-@property (assign) id file;
+@property (unsafe_unretained) id file;
 
 + (id) labelWithFile:(id)aFile text:(NSString*)aString;
 - (id) initWithFile:(id)aFile text:(NSString*)aString;

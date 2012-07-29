@@ -45,11 +45,11 @@
 	
 	NSMenu *addMarkerActionMenu;
 	
-  id<TPSectionListControllerDelegate> delegate;
+  id<TPSectionListControllerDelegate> __unsafe_unretained delegate;
 }
 
-@property (nonatomic, retain) NSTimer *timer;
-@property (assign) IBOutlet id<TPSectionListControllerDelegate> delegate;
+@property (nonatomic, strong) NSTimer *timer;
+@property (unsafe_unretained) IBOutlet id<TPSectionListControllerDelegate> delegate;
 
 - (void) deactivate;
 - (IBAction)calculateSections:(id)sender;

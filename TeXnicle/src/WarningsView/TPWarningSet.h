@@ -30,13 +30,13 @@
 @class FileEntity;
 
 @interface TPWarningSet : NSObject {
-  id file;
+  id __unsafe_unretained file;
   NSArray *errors;
 }
 
-@property (retain) NSArray *errors;
-@property (assign) id file;
-@property (readonly) NSString *name;
+@property (strong) NSArray *errors;
+@property (unsafe_unretained) id file;
+@property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile errors:(NSArray*)someErrors;
 

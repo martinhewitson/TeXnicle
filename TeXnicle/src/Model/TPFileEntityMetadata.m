@@ -78,7 +78,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
     dispatch_set_target_queue(queue,priority);
         
-    self.checker = [[[TPSyntaxChecker alloc] initWithDelegate:self] autorelease];
+    self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
     
     self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                           target:self
@@ -86,7 +86,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
                                                         userInfo:nil
                                                          repeats:YES];
     
-    self.aQueue = [[[NSOperationQueue alloc] init] autorelease];
+    self.aQueue = [[NSOperationQueue alloc] init];
     
     NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
     
@@ -138,24 +138,12 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
   dispatch_release(queue);
   
-  self.checker = nil;
   
-  self.aQueue = nil;
   
-  self.lastMetadataUpdate = nil;
-  self.metadataTimer = nil;
   
-  self.sections = nil;
-  self.lastUpdateOfSections = nil;
   
-  self.syntaxErrors = nil;
   
-  self.userNewCommands = nil;  
-  self.citations = nil;
-  self.labels = nil;
-  self.includes = nil;
   
-  [super dealloc];
 }
 
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
@@ -257,7 +245,6 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     self.labels = currentOperation.labels;
     self.lastMetadataUpdate = [NSDate date];    
     [self postUpdateNotification];
-    [currentOperation release];
   }
 }
 

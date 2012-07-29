@@ -38,7 +38,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [super dealloc];
 }
 
 - (id)init
@@ -106,7 +105,6 @@
                    value:font
                    range:stringRange];
 		[[textView textStorage] appendAttributedString:attstr];
-		[attstr release];
 		[textView moveToEndOfDocument:self];
 	}
 }
@@ -137,7 +135,7 @@
 	}
 	NSArray *strings = [str componentsSeparatedByString:@"\n"];
 	
-	for (NSString *string in strings) {
+	for (__strong NSString *string in strings) {
 		string = [string stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 		if ([string length]>0) {
 			if ([string characterAtIndex:[string length]-1] != '\n') {
@@ -152,7 +150,6 @@
                      value:font
                      range:stringRange];
 			[[textView textStorage] appendAttributedString:attstr];
-			[attstr release];
 		}
 	}
 	

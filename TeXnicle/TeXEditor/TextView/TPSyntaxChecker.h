@@ -45,14 +45,14 @@
   
   NSString *output;
   NSArray *errors;
-  id<SyntaxCheckerDelegate> delegate;
+  id<SyntaxCheckerDelegate> __unsafe_unretained delegate;
   
   BOOL _taskRunning;
 }
 
-@property (assign) id<SyntaxCheckerDelegate> delegate;
+@property (unsafe_unretained) id<SyntaxCheckerDelegate> delegate;
 @property (copy) NSString *output;
-@property (retain) NSArray *errors;
+@property (strong) NSArray *errors;
 
 + (NSArray*) defaultSyntaxErrors;
 

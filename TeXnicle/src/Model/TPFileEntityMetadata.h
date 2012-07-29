@@ -68,35 +68,35 @@
   // syntax errors
   NSArray *syntaxErrors;
   
-  FileEntity *parent;
+  FileEntity *__unsafe_unretained parent;
   dispatch_queue_t queue;
   NSOperationQueue* aQueue;
   
   TPMetadataOperation *currentOperation;
 }
 
-@property (retain) TPSyntaxChecker *checker;
+@property (strong) TPSyntaxChecker *checker;
 @property (copy) NSString *temporaryFileForSyntaxCheck;
 
-@property (retain) NSOperationQueue* aQueue;
-@property (assign) FileEntity *parent;
+@property (strong) NSOperationQueue* aQueue;
+@property (unsafe_unretained) FileEntity *parent;
 
 @property (assign) BOOL needsUpdate;
-@property (retain) NSDate *lastMetadataUpdate;
-@property (retain) NSTimer *metadataTimer;
+@property (strong) NSDate *lastMetadataUpdate;
+@property (strong) NSTimer *metadataTimer;
 
-@property (retain) NSArray *sections;
-@property (retain) NSDate *lastUpdateOfSections;
+@property (strong) NSArray *sections;
+@property (strong) NSDate *lastUpdateOfSections;
 
-@property (retain) NSArray *syntaxErrors;
+@property (strong) NSArray *syntaxErrors;
 
-@property (retain) NSArray *userNewCommands;
+@property (strong) NSArray *userNewCommands;
 
-@property (retain) NSArray *citations;
+@property (strong) NSArray *citations;
 
-@property (retain) NSArray *labels;
+@property (strong) NSArray *labels;
 
-@property (retain) NSArray *includes;
+@property (strong) NSArray *includes;
 
 - (id) initWithParent:(id)aFile;
 - (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;

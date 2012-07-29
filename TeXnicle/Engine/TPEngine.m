@@ -61,7 +61,7 @@
 
 + (TPEngine*)engineWithPath:(NSString*)aPath
 {
-  return [[[TPEngine alloc] initWithPath:aPath] autorelease];
+  return [[TPEngine alloc] initWithPath:aPath];
 }
 
 - (id)initWithPath:(NSString*)aPath
@@ -92,9 +92,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
   
-  [typesetTask release];
   
-  [super dealloc];
 }
 
 - (void) setupObservers
@@ -120,7 +118,6 @@
 {
   MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:self.path]];
-  [fr release];
   
   if (str == nil) {
     return;
@@ -265,7 +262,6 @@
 	
   [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   
-  [typesetTask release];
   typesetTask = nil;
 }
 
@@ -278,7 +274,7 @@
 //  NSLog(@"texOutputAvailable %@", [aNote object]);
   
 	NSData *data = [[aNote userInfo] objectForKey:NSFileHandleNotificationDataItem];
-	NSString *output = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
 	NSScanner *scanner = [NSScanner scannerWithString:output];
 	NSString *scanned;

@@ -38,6 +38,7 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 #import "externs.h"
+#import "FileDocument.h"
 
 #define kFindBarSmall 77
 #define kFindBarLarge 119
@@ -74,8 +75,8 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
     self.delegate = aDelegate;
     
     self.results = [NSMutableArray array];
-    ws = [[NSCharacterSet whitespaceCharacterSet] retain];
-    ns = [[NSCharacterSet newlineCharacterSet] retain];
+    ws = [NSCharacterSet whitespaceCharacterSet];
+    ns = [NSCharacterSet newlineCharacterSet];
     
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
@@ -91,11 +92,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;
-  [ws release];
-  [ns release];
 	dispatch_release(queue);
-  self.results = nil;
-  [super dealloc];
 }
 
 
@@ -110,7 +107,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 	[imageAndTextCell setEditable:NO];
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
 	[tableColumn setDataCell:imageAndTextCell];	
-  [imageAndTextCell release];
   
   [self.modeSelector selectItemAtIndex:0];
   [self selectMode:self];
@@ -327,7 +323,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   NSMutableAttributedString *aStr = [attributedString mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   NSString *string = [aStr unfoldedString];
-  [aStr release];
   if (!string)
     return;
   
@@ -396,7 +391,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
             
             TPDocumentMatch *match = [[TPDocumentMatch alloc] initWithLine:lineNumber withRange:resultRange subrange:NSMakeRange(0, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
             [resultDoc addMatch:match];
-            [match release];
             
             dispatch_async(dispatch_get_main_queue(),
                            // block

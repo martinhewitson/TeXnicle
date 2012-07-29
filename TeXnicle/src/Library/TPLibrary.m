@@ -7,6 +7,8 @@
 //
 
 #import "TPLibrary.h"
+#import "TPLibraryEntry+NSDictionary.h"
+#import "NSStringUUID.h"
 
 NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotification";
 
@@ -40,10 +42,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [__persistentStoreCoordinator release];
-  [__managedObjectModel release];
-  [__managedObjectContext release];
-  [super dealloc];
 }
 
 - (void) updateSortIndices
@@ -142,12 +140,12 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   NSMutableDictionary *options = nil;
   [options setObject:[NSNumber numberWithBool:YES] 
 							forKey:NSMigratePersistentStoresAutomaticallyOption];
-  NSPersistentStoreCoordinator *coordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom] autorelease];
+  NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
   if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]) {
     [[NSApplication sharedApplication] presentError:error];
     return nil;
   }
-  __persistentStoreCoordinator = [coordinator retain];
+  __persistentStoreCoordinator = coordinator;
   
   return __persistentStoreCoordinator;
 }
@@ -237,7 +235,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   if (categories != nil) {
     NSMutableDictionary *library = [[NSMutableDictionary alloc] init];
     [library setObject:categories forKey:@"Categories"];
-    return [library autorelease];
+    return library;
   }
   return nil;
 }
@@ -332,14 +330,12 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
       }
 			// add the new clip to the contents
 			[clips addObject:newClip];			
-			[newClip release];
 		}		
 		[newCategory setValue:clips forKey:@"Contents"];		
 		// Category is ready, add it to the array
 		[categories addObject:newCategory];		
-		[newCategory release];
 	}
-  return [categories autorelease];
+  return categories;
 }
 
 #pragma mark -
@@ -357,7 +353,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 	
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	[fetchRequest release];
   
   if (fetchResults) {
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
@@ -402,7 +397,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [fetchRequest setPredicate:predicate];  
   [fetchRequest setEntity:entity];
   fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-  [fetchRequest release];
   
   if (fetchResults != nil && [fetchResults count] > 0)
     return [fetchResults objectAtIndex:0];
@@ -421,7 +415,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   
   [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self];
   
-  return [category autorelease];
+  return category;
 }
 
 - (TPLibraryCategory*) getOrCreateCategoryWithName:(NSString*)name
@@ -457,7 +451,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [self updateSortIndices];
   [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self];
   
-  return [entry autorelease];  
+  return entry;  
 }
 
 - (void) removeEntries:(NSArray*)entriesToDelete
@@ -484,7 +478,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [fetchRequest setPredicate:predicate];
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	[fetchRequest release];
   
   if (fetchResults) {
     return fetchResults;    
@@ -511,7 +504,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [fetchRequest setPredicate:predicate];
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	[fetchRequest release];
   
   if (fetchResults && [fetchResults count] > 0) {
     NSArray *codes = [fetchResults valueForKey:@"code"];    
@@ -536,7 +528,6 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [fetchRequest setPredicate:predicate];
 	[fetchRequest setEntity:entity];
 	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	[fetchRequest release];
   
   if (fetchResults) {
     for (TPLibraryEntry *entry in fetchResults) {

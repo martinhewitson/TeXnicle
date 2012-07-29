@@ -38,14 +38,14 @@
 @private
   NSUInteger numberOfRows;
   NSUInteger numberOfColumns;
-  id<MHTableConfigureDelegate> delegate;
-  NSTextField *numRowsField;
-  NSTextField *numColsField;
+  id<MHTableConfigureDelegate> __unsafe_unretained delegate;
+  NSTextField *__unsafe_unretained numRowsField;
+  NSTextField *__unsafe_unretained numColsField;
 }
 
-@property (assign) id<MHTableConfigureDelegate> delegate;
-@property (assign) IBOutlet NSTextField *numRowsField;
-@property (assign) IBOutlet NSTextField *numColsField;
+@property (unsafe_unretained) id<MHTableConfigureDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSTextField *numRowsField;
+@property (unsafe_unretained) IBOutlet NSTextField *numColsField;
 @property (assign) NSUInteger numberOfRows;
 @property (assign) NSUInteger numberOfColumns;
 

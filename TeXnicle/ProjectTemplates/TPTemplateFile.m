@@ -46,13 +46,13 @@
 - (void) readContent
 {
   if ([self.path pathIsText]) {
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:self.path]];
     if (str) {
       self.stringContent = str;
     }
   } else if ([self.path pathIsImage]) {
-    self.dataContent = [[[NSData alloc] initWithContentsOfFile:self.path] autorelease];
+    self.dataContent = [[NSData alloc] initWithContentsOfFile:self.path];
   } else {
     NSLog(@"Unknown file type: this shouldn't happen");
   }  
@@ -61,7 +61,7 @@
 - (void) saveContent
 {
   if (self.stringContent) {
-    MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+    MHFileReader *fr = [[MHFileReader alloc] init];
     [fr writeString:self.stringContent toURL:[NSURL fileURLWithPath:self.path]];
   }
 }

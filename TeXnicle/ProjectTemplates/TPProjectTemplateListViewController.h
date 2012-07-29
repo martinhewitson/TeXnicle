@@ -32,11 +32,11 @@
 @interface TPProjectTemplateListViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 @private
   NSMutableArray *templates;  
-  NSTableView *tableView;
+  NSTableView *__unsafe_unretained tableView;
 }
 
-@property (assign) IBOutlet NSTableView *tableView;
-@property (retain) NSMutableArray *templates;
+@property (unsafe_unretained) IBOutlet NSTableView *tableView;
+@property (strong) NSMutableArray *templates;
 
 - (void) generateTemplateList;
 - (TPProjectTemplate*)selectedTemplate;

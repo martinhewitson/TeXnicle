@@ -18,7 +18,7 @@
 
 + (id)documentSectionTemplateWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
 {
-  return [[[TPSectionTemplate alloc] initWithName:aName tag:aTag parent:aParent color:aColor mnemonic:shortName] autorelease];
+  return [[TPSectionTemplate alloc] initWithName:aName tag:aTag parent:aParent color:aColor mnemonic:shortName];
 }
 
 - (id) initWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
@@ -34,11 +34,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.color = nil;
-  [super dealloc];
-}
 
 + (BOOL) template:(TPSectionTemplate*)t1 isChildOf:(TPSectionTemplate*)t2 
 {

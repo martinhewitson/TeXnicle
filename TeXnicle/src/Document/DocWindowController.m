@@ -61,7 +61,7 @@
 {
 	//NSLog(@"Standalone awakeFromNib for %@", [file valueForKey:@"name"]);
 	
-  self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
+  self.texEditorViewController = [[TeXEditorViewController alloc] init];
   [self.texEditorViewController setDelegate:self];
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
@@ -70,7 +70,7 @@
   [self.texEditorViewController setupSyntaxChecker];
 	
   // setup status view
-  self.statusViewController = [[[TPStatusViewController alloc] init] autorelease];
+  self.statusViewController = [[TPStatusViewController alloc] init];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];
   [self.statusViewContainer addSubview:self.statusViewController.view];
   
@@ -121,16 +121,14 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.texEditorViewController = nil;
   self.statusViewContainer = nil;
-	[super dealloc];
 }
 
 
 - (IBAction)printDocument:(id)sender
 {
   // set printing properties
-  NSPrintInfo *myPrintInfo = [[[NSPrintInfo alloc] initWithDictionary:[[self.mainDocument printInfo] dictionary]] autorelease];
+  NSPrintInfo *myPrintInfo = [[NSPrintInfo alloc] initWithDictionary:[[self.mainDocument printInfo] dictionary]];
   [myPrintInfo setHorizontalPagination:NSFitPagination];
   [myPrintInfo setHorizontallyCentered:YES];
   [myPrintInfo setVerticallyCentered:NO];
@@ -157,7 +155,6 @@
 //  [self.mainDocument runModalPrintOperation: op delegate: nil didRunSelector: NULL 
 //                   contextInfo: NULL];
   
-  [printView release];
   
 }
 
@@ -211,7 +208,6 @@
                        sourceFile:[self.file pathOnDisk] 
                        lineNumber:lineNumber 
                            column:column];
-  [sync release];
 }
 
 -(id)project

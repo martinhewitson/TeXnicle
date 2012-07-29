@@ -66,7 +66,6 @@
   }
   
   // release file reader
-  [fr release];
   
 }
 

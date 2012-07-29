@@ -37,7 +37,7 @@
 }
 
 @property (assign) BOOL isStartTag;
-@property (retain) MHFoldingTagDescription *tag;
+@property (strong) MHFoldingTagDescription *tag;
 @property (assign) NSInteger index;
 @property (assign) NSInteger lineNumber;
 

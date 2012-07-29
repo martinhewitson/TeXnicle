@@ -55,15 +55,10 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.templateListViewController = nil;
-  [super dealloc];
-}
 
 - (void) awakeFromNib
 {
-  self.templateListViewController = [[[TPProjectTemplateListViewController alloc] init] autorelease];
+  self.templateListViewController = [[TPProjectTemplateListViewController alloc] init];
   [self.templateListViewController.view setFrame:[self.templateListContainer bounds]];
   [self.templateListContainer addSubview:self.templateListViewController.view];
 }

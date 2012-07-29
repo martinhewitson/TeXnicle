@@ -183,7 +183,6 @@
         bib.tag = tag;      
         bib.sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
         [cites addObject:bib];
-        [bib release];
       }
       
       [scanner setScanLocation:scanLocation];
@@ -210,7 +209,7 @@
       NSString *argString = [self parseArgumentStartingAt:&idx];
       NSInteger sourceEnd = idx;
       NSArray *args = [argString componentsSeparatedByString:@","];
-      for (NSString *arg in args) {
+      for (__strong NSString *arg in args) {
         if (arg && [arg length]>0) {
           if ([[arg pathExtension] length] == 0) {
             arg = [arg stringByAppendingPathExtension:@"bib"];
@@ -240,7 +239,6 @@
           }
         }
         // clean up
-        [fr release];
       }
     }  
   }  
@@ -282,7 +280,7 @@
   //	NSCharacterSet *newlineWsChars = [NSCharacterSet whitespaceAndNewlineCharacterSet];
   //	NSCharacterSet *nonNewlineWsChars = [newlineWsChars invertedSet];
 	
-	NSMutableCharacterSet *mutableChars = [[newLineChars mutableCopy] autorelease];
+	NSMutableCharacterSet *mutableChars = [newLineChars mutableCopy];
   //	[mutableChars formIntersectionWithCharacterSet:nonNewlineWsChars];
   //	[mutableChars formUnionWithCharacterSet:ctrlChars];
   //	[mutableChars addCharactersInRange:NSMakeRange(0x0B, 2)]; // filter vt, ff
@@ -306,12 +304,10 @@
       range = [mutableStr rangeOfCharacterFromSet:filterChars]; 
     }
     
-		[filterChars release];
     return mutableStr;
   }
   
-	[filterChars release];
-  return [[str copy] autorelease];
+  return [str copy];
 }
 
 - (NSString*)command

@@ -39,7 +39,7 @@ extern NSString * const TPSupportedFileSpellCheckFlagChangedNotification;
 }
 
 
-@property (retain) NSMutableArray *supportedFileTypes;
+@property (strong) NSMutableArray *supportedFileTypes;
 
 + (TPSupportedFilesManager*)sharedSupportedFilesManager;
 - (void) saveTypes;

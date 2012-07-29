@@ -36,16 +36,16 @@
   NSRange subrange;
   NSString *match;
   NSInteger lineNumber;
-  TPResultDocument *parent;
+  TPResultDocument *__unsafe_unretained parent;
 }
 
 @property (assign) NSInteger lineNumber;
-@property (assign) TPResultDocument *parent;
+@property (unsafe_unretained) TPResultDocument *parent;
 @property (assign) NSRange range;
 @property (assign) NSRange subrange;
 @property (copy) NSString *match;
-@property (readonly) NSAttributedString *displayString;
-@property (readonly) NSAttributedString *selectedDisplayString;
+@property (unsafe_unretained, readonly) NSAttributedString *displayString;
+@property (unsafe_unretained, readonly) NSAttributedString *selectedDisplayString;
 
 - (id)initWithLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;
 + (TPDocumentMatch*)documentMatchInLine:(NSInteger)aLineNumber withRange:(NSRange)aRange subrange:(NSRange)aSubrange matchingString:(NSString*)aString inDocument:(TPResultDocument*)aParent;

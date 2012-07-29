@@ -21,16 +21,16 @@
 
 @interface OtherFilesViewController : NSViewController <TPSourceDirectoryDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate> {
 @private
-  id<OtherFilesViewControllerDelegate> delegate;
+  id<OtherFilesViewControllerDelegate> __unsafe_unretained delegate;
   NSURL *root;
   TPSourceDirectory *tree;
-  TPOtherFilesOutlineView *outlineView;
+  TPOtherFilesOutlineView *__unsafe_unretained outlineView;
 }
 
-@property (assign) id<OtherFilesViewControllerDelegate> delegate;
-@property (retain) NSURL *root;
-@property (retain) TPSourceDirectory *tree;
-@property (assign) IBOutlet TPOtherFilesOutlineView *outlineView;
+@property (unsafe_unretained) id<OtherFilesViewControllerDelegate> delegate;
+@property (strong) NSURL *root;
+@property (strong) TPSourceDirectory *tree;
+@property (unsafe_unretained) IBOutlet TPOtherFilesOutlineView *outlineView;
 
 - (id)initWithURL:(NSURL*)aURL delegate:(id<OtherFilesViewControllerDelegate>)aDelegate;
 

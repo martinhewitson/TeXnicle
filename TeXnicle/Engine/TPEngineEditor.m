@@ -43,22 +43,17 @@
 	return @"EngineEditorWindow";
 }
 
-- (void) dealloc
-{
-  self.texEditorViewController = nil;
-  [super dealloc];
-}
 
 - (void) awakeFromNib
 {
-  self.texEditorViewController = [[[TeXEditorViewController alloc] init] autorelease];
+  self.texEditorViewController = [[TeXEditorViewController alloc] init];
   [self.texEditorViewController setDelegate:self];
   [self.texEditorViewController.view setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:self.texEditorViewController.view];
   [self.texEditorContainer setNeedsDisplay:YES];
   
   // set a bash engine
-  self.texEditorViewController.textView.coloringEngine = [[[BashColoringEngine alloc] initWithTextView:self.texEditorViewController.textView] autorelease];	
+  self.texEditorViewController.textView.coloringEngine = [[BashColoringEngine alloc] initWithTextView:self.texEditorViewController.textView];	
   
   // disable spell checking
   [self.texEditorViewController.textView setContinuousSpellCheckingEnabled:NO];
@@ -103,10 +98,9 @@
   
   MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:[sender title]];
   NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
-	[fr release];
   
 	if (str) {
-		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
+		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
 	}
 }
 
@@ -123,8 +117,6 @@
 	NSString *str = [string string];  
   MHFileReader *fr = [[MHFileReader alloc] init];
   BOOL res = [fr writeString:str toURL:absoluteURL];
-  [fr release];
-	[string release];
 	return res;
 }
 
@@ -134,10 +126,9 @@
   
   MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *str = [fr readStringFromFileAtURL:absoluteURL];
-	[fr release];
   
 	if (str) {
-		[self setDocumentData:[[[NSMutableAttributedString alloc] initWithString:str] autorelease]];
+		[self setDocumentData:[[NSMutableAttributedString alloc] initWithString:str]];
 		return YES;
 	}
   

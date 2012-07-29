@@ -32,11 +32,6 @@
 
 @synthesize consoles;
 
-- (void) dealloc
-{
-  self.consoles = nil;
-  [super dealloc];
-}
 
 - (id) init
 {

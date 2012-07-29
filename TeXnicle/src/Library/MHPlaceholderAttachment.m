@@ -36,11 +36,9 @@
 	NSFileWrapper *fw = [[NSFileWrapper alloc] init];
 	[fw setPreferredFilename:@"placeholder"];
 	self = [super initWithFileWrapper:fw];
-	[fw release];
 	if (self) {
 		MHPlaceholderAttachmentCell *aCell = [[MHPlaceholderAttachmentCell alloc] initTextCell:aString];
 		[self setAttachmentCell:aCell];
-		[aCell release];
 	}
 	
 	return self;

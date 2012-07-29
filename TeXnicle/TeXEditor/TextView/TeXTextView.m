@@ -57,8 +57,10 @@
 #import "BibliographyEntry.h"
 
 #import "TPLabel.h"
-
+#import "FileEntity.h"
 #import "externs.h"
+#import "TeXEditorViewController.h"
+#import "FileDocument.h"
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
@@ -87,19 +89,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.editorRuler.clientView = nil;
   self.tableConfigureController.delegate = nil;
-  self.tableConfigureController = nil;
   self.delegate = nil;
   [self stopObserving];
-  self.editorRuler = nil;
-  self.lineHighlightColor = nil;
-  self.coloringEngine = nil;
-  self.syntaxHighlightTags = nil;
-  self.commandList = nil;
-  [newLineCharacterSet release];
-	[whitespaceCharacterSet release];
-  [_pasteConfigController release];
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -108,8 +101,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   self.zoomFactor = 0;
   
-	newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
-	whitespaceCharacterSet = [[NSCharacterSet whitespaceCharacterSet] retain];	
+	newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
+	whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
     
   [self defaultSetup];
   [self setUpRuler];
@@ -193,7 +186,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSDictionary *commmandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
   path = [[NSBundle mainBundle] pathForResource:@"ContextCommands" ofType:@"plist"];
 	NSDictionary *contextCommandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-	self.commandList = [[[NSMutableArray alloc] init] autorelease];								
+	self.commandList = [[NSMutableArray alloc] init];								
 	[self.commandList addObjectsFromArray:[commmandDict valueForKey:@"Commands"]];
 	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];	
 }
@@ -751,7 +744,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) setTypingColor:(NSColor*)aColor
 {
   NSDictionary *catts = [NSDictionary currentTypingAttributes];
-  NSMutableDictionary *atts = [[catts mutableCopy] autorelease];
+  NSMutableDictionary *atts = [catts mutableCopy];
   [atts setValue:aColor forKey:NSForegroundColorAttributeName];
   [self setTypingAttributes:atts];
 }
@@ -884,7 +877,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 //    NSLog(@"Making popup...");
     if (_popupList) {
       [_popupList dismiss];
-      [_popupList release];
     }
     
     _popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
@@ -923,7 +915,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (_popupList == nil || [_popupList mode] != TPPopupListInsert) {
     if (_popupList) {
       [_popupList dismiss];
-      [_popupList release];
     }
     _popupList = [[TPPopupListWindowController alloc] initWithEntries:aList
                                                               atPoint:wp
@@ -1049,7 +1040,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			// delete the line up to and including the attachment
 			[[self textStorage] replaceCharactersInRange:NSMakeRange(lineRange.location, idx+2) 
 																				withString:[code stringByAppendingString:@"\n"]];
-			[code release];
 			
 		}
 		
@@ -1074,7 +1064,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
 //  NSLog(@"unfoldAllInRange");
 	NSAttributedString *text = [[self textStorage] attributedSubstringFromRange:aRange];
-	NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithAttributedString:text] autorelease];
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:text];
   
 	[string unfoldAllInRange:aRange max:max];
 	if ([[string string] isEqualToString:[text string]] == NO) {
@@ -1101,12 +1091,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSAttributedString *fold = [[self textStorage] attributedSubstringFromRange:foldRange];
   
 	// make an attachement object
-	TPFoldedCodeSnippet *snippet = [[[TPFoldedCodeSnippet alloc] initWithCode:fold] autorelease];
+	TPFoldedCodeSnippet *snippet = [[TPFoldedCodeSnippet alloc] initWithCode:fold];
   snippet.object = aFolder;
 	
 	// make an attachment	
 	NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:snippet];
-	NSMutableAttributedString *aaa = [[[NSMutableAttributedString alloc] initWithAttributedString:attachment] autorelease];
+	NSMutableAttributedString *aaa = [[NSMutableAttributedString alloc] initWithAttributedString:attachment];
 	
 	[aaa addAttribute:NSCursorAttributeName 
               value:[NSCursor pointingHandCursor] 
@@ -1126,7 +1116,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 //  NSLog(@"unfoldAttachment");
 	// find the location of this attachment in the text	
 	NSData *data = [[snippet fileWrapper] regularFileContents];
-	NSAttributedString *code = [[[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil] autorelease];
+	NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
 	NSRange attRange = NSMakeRange([index unsignedLongValue], 1);
 	[[self textStorage] removeAttribute:NSAttachmentAttributeName range:attRange];
 	[[self textStorage] replaceCharactersInRange:attRange withAttributedString:code];
@@ -1169,7 +1159,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) jumpToLine:(NSInteger)aLinenumber select:(BOOL)selectLine
 {
-  NSMutableAttributedString *aStr = [[[self textStorage] mutableCopy] autorelease];
+  NSMutableAttributedString *aStr = [[self textStorage] mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
@@ -1193,7 +1183,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine
 {
-  NSMutableAttributedString *aStr = [[[[aFile document] textStorage] mutableCopy] autorelease];
+  NSMutableAttributedString *aStr = [[[aFile document] textStorage] mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
   MHLineNumber *matchingLine = nil;
   for (MHLineNumber *line in lineNumbers) {
@@ -1670,7 +1660,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (highlightAlpha>=0.1) {
     //    NSLog(@"Stop timer");
     [highlightAlphaTimer invalidate];
-    [highlightAlphaTimer release];
     highlightAlphaTimer = nil;
   }
   //  NSLog(@"Setting alpha %f", highlightAlpha);
@@ -2339,7 +2328,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSInteger idx = [self characterIndexForPoint:[NSEvent mouseLocation]]; 
       NSInteger line = [self lineNumberForRange:NSMakeRange(idx, 0)];
       NSInteger column = [self columnForRange:NSMakeRange(idx, 0)];
-      [self.delegate textView:self didCommandClickAtLine:line column:column];
+      if ([self.delegate respondsToSelector:@selector(textView:didCommandClickAtLine:column:)]) {
+        [(TeXEditorViewController*)self.delegate textView:self didCommandClickAtLine:line column:column];
+      }
     }
 	}
   
@@ -2806,7 +2797,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSString *regexp = [TPLibraryController placeholderRegexp];
   NSArray *placeholders = [code componentsMatchedByRegex:regexp];
   NSRange firstPlaceholder = NSMakeRange(NSNotFound, 0);
-  for (NSString *placeholder in placeholders) {
+  for (__strong NSString *placeholder in placeholders) {
     placeholder = [placeholder stringByTrimmingCharactersInSet:whitespaceCharacterSet];
     NSRange r = [code rangeOfString:placeholder];
     if (firstPlaceholder.location == NSNotFound) {
@@ -2816,7 +2807,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     // make attachment
     MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];    
     NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
-    [placeholderAttachment release];
     NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
     [self shouldChangeTextInRange:placeholderRange replacementString:@" "];
     [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
@@ -3459,10 +3449,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSPasteboard *pboard = [NSPasteboard generalPasteboard];
   if ( [[pboard types] containsObject:NSStringPboardType] ) {
     NSString *rawstring = [pboard stringForType:NSStringPboardType];
-    _pastingRows = [[rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] retain];
+    _pastingRows = [rawstring componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     // pop up a sheet asking for the column separator
     if (self.pasteConfigController == nil) {
-      self.pasteConfigController = [[[TPPasteTableConfigureWindowController alloc] init] autorelease];
+      self.pasteConfigController = [[TPPasteTableConfigureWindowController alloc] init];
     }
     [NSApp beginSheet:self.pasteConfigController.window
        modalForWindow:[self window]
@@ -3524,7 +3514,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [self insertText:stringToPaste];      
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
-  [_pastingRows release];
   
 }
 
@@ -3537,7 +3526,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (IBAction)insertTable:(id)sender
 {
   if (!self.tableConfigureController) {
-    self.tableConfigureController = [[[MHTableConfigureController alloc] initWithDelegate:self] autorelease];
+    self.tableConfigureController = [[MHTableConfigureController alloc] initWithDelegate:self];
   }
   
   [NSApp beginSheet:self.tableConfigureController.window modalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:NULL];

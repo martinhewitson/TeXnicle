@@ -43,11 +43,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.keywords = nil;
-  [super dealloc];
-}
 
 - (unichar)commentCharacter
 {

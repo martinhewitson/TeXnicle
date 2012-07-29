@@ -32,11 +32,6 @@
 @implementation MHRoundedTopBottomView
 
 
-- (void)dealloc
-{
-  [aGradient release];
-  [super dealloc];
-}
 
 - (void)drawRect:(NSRect)dirtyRect
 {

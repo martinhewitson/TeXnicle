@@ -51,7 +51,7 @@ enum {
   MHFoldingTagDescription *tag;
 }
 
-@property (retain) MHFoldingTagDescription *tag;
+@property (strong) MHFoldingTagDescription *tag;
 @property (assign) NSInteger startLine;
 @property (assign) NSInteger endLine;
 @property (assign) NSInteger startIndex;

@@ -126,8 +126,6 @@
   self.searchResultsTable.delegate = nil;
   self.searchResultsTable.dataSource = nil;
   self.delegate = nil;
-  self.searchResults = nil;
-  [super dealloc];
 }
 
 - (IBAction)toggleResultsTable:(id)sender
@@ -251,7 +249,6 @@
       if (doc) {
         [doc setDelegate:self];
         [self.pdfview setDocument:doc];
-        [doc release];
         [self showViewer];
         return;
       }
@@ -429,18 +426,16 @@
   [pageNo addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithDeviceWhite:0.6 alpha:1.0] range:NSMakeRange(0, [pageNo length])];
   
   [att appendAttributedString:pageNo];
-  [pageNo release];
   
   NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" ... %@ ...", string]];
   [text addAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(15, [[selection string] length])];
   [att appendAttributedString:text];
-  [text release];
 
   
 //  NSRange selectedRange = [self rangeOfSelection:selection];
 //  NSString *selectedString = [page selectionForRange:selectedRange];
 
-  return [att autorelease];
+  return att;
 }
 
 - (NSRange)rangeOfSelection:(PDFSelection*)selection

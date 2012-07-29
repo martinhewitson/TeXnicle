@@ -37,10 +37,10 @@
   NSMutableArray *matches;
 }
 
-@property (retain) FileEntity *document;
-@property (retain) NSMutableArray *matches;
-@property (readonly) NSAttributedString *displayString;
-@property (readonly) NSAttributedString *selectedDisplayString;
+@property (strong) FileEntity *document;
+@property (strong) NSMutableArray *matches;
+@property (unsafe_unretained, readonly) NSAttributedString *displayString;
+@property (unsafe_unretained, readonly) NSAttributedString *selectedDisplayString;
 
 
 + (TPResultDocument*)resultWithDocument:(FileEntity*)aDocument;

@@ -99,7 +99,7 @@
   IBOutlet NSTextField *spacesLabel;
 	
   TPEnginesEditor *enginesEditor;
-  NSView *enginesEditorContainer;
+  NSView *__unsafe_unretained enginesEditorContainer;
   
   IBOutlet NSPopUpButton *enginePopup;
   
@@ -108,10 +108,10 @@
   TPSupportedFilesEditor *supportedFilesEditor;
   
   TPTemplateEditorView *templateEditorView;
-  NSView *templateEditorViewContainer;
+  NSView *__unsafe_unretained templateEditorViewContainer;
   
   TPProjectTemplateManager *projectTemplateManager;
-  NSView *projectTemplateManagerContainer;
+  NSView *__unsafe_unretained projectTemplateManagerContainer;
   
   IBOutlet NSTableView *syntaxErrorsTable;
   IBOutlet NSTextField *chktexBinaryPath;
@@ -121,13 +121,13 @@
   IBOutlet NSButton *defaultChecksButton;
 }
 
-@property (retain) TPProjectTemplateManager *projectTemplateManager;
-@property (assign) IBOutlet NSView *projectTemplateManagerContainer;
-@property (retain) TPSupportedFilesEditor *supportedFilesEditor;
-@property (retain) TPEnginesEditor *enginesEditor;
-@property (assign) IBOutlet NSView *enginesEditorContainer;
-@property (retain) TPTemplateEditorView *templateEditorView;
-@property (assign) IBOutlet NSView *templateEditorViewContainer;
+@property (strong) TPProjectTemplateManager *projectTemplateManager;
+@property (unsafe_unretained) IBOutlet NSView *projectTemplateManagerContainer;
+@property (strong) TPSupportedFilesEditor *supportedFilesEditor;
+@property (strong) TPEnginesEditor *enginesEditor;
+@property (unsafe_unretained) IBOutlet NSView *enginesEditorContainer;
+@property (strong) TPTemplateEditorView *templateEditorView;
+@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
 
 - (IBAction)defaultEncodingSelected:(id)sender;
 

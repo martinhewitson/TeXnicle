@@ -33,28 +33,28 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @interface MHControlsTabBarController : NSResponder <NSTabViewDelegate> {
 @private
   NSArray *buttons;
-  NSButton *projectButton;
-  NSButton *palletButton;
-  NSButton *libraryButton;
-  NSButton *outlineButton;
-  NSButton *findButton;
-  NSButton *infoButton;
-  NSButton *prefsButton;
-  NSTabView *tabView;
-  NSSplitView *splitview;
-  NSView *containerView;
+  NSButton *__unsafe_unretained projectButton;
+  NSButton *__unsafe_unretained palletButton;
+  NSButton *__unsafe_unretained libraryButton;
+  NSButton *__unsafe_unretained outlineButton;
+  NSButton *__unsafe_unretained findButton;
+  NSButton *__unsafe_unretained infoButton;
+  NSButton *__unsafe_unretained prefsButton;
+  NSTabView *__unsafe_unretained tabView;
+  NSSplitView *__unsafe_unretained splitview;
+  NSView *__unsafe_unretained containerView;
 }
 
-@property (assign) IBOutlet NSButton *projectButton;
-@property (assign) IBOutlet NSButton *palletButton;
-@property (assign) IBOutlet NSButton *libraryButton;
-@property (assign) IBOutlet NSButton *outlineButton;
-@property (assign) IBOutlet NSButton *findButton;
-@property (assign) IBOutlet NSButton *infoButton;
-@property (assign) IBOutlet NSButton *prefsButton;
-@property (assign) IBOutlet NSSplitView *splitview;
-@property (assign) IBOutlet NSView *containerView;
-@property (assign) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) IBOutlet NSButton *projectButton;
+@property (unsafe_unretained) IBOutlet NSButton *palletButton;
+@property (unsafe_unretained) IBOutlet NSButton *libraryButton;
+@property (unsafe_unretained) IBOutlet NSButton *outlineButton;
+@property (unsafe_unretained) IBOutlet NSButton *findButton;
+@property (unsafe_unretained) IBOutlet NSButton *infoButton;
+@property (unsafe_unretained) IBOutlet NSButton *prefsButton;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+@property (unsafe_unretained) IBOutlet NSTabView *tabView;
 
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;

@@ -51,17 +51,12 @@
   
   // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
   
-  self.listViewController = [[[TPProjectTemplateListViewController alloc] init] autorelease];
+  self.listViewController = [[TPProjectTemplateListViewController alloc] init];
   [self.listViewController.view setFrame:[self.listViewContainer bounds]];
   [self.listViewContainer addSubview:self.listViewController.view];
   
 }
 
-- (void) dealloc
-{
-  self.listViewController = nil;
-  [super dealloc];
-}
 
 - (IBAction)cancel:(id)sender
 {

@@ -37,19 +37,19 @@
 
 @interface MHSlidingSplitViewController : NSObject <NSSplitViewDelegate> {
 @private
-  NSSplitView *splitView;
+  NSSplitView *__unsafe_unretained splitView;
   BOOL rightSided;
   BOOL _sidePanelIsVisible;
-  NSView *inspectorView;
-  NSView *mainView;
+  NSView *__unsafe_unretained inspectorView;
+  NSView *__unsafe_unretained mainView;
   CGFloat lastInspectorWidth;
-  id<MHSlidingSplitViewDelegate> delegate;
+  id<MHSlidingSplitViewDelegate> __unsafe_unretained delegate;
 }
 
-@property (assign) id<MHSlidingSplitViewDelegate> delegate;
-@property (assign) IBOutlet NSSplitView *splitView;
-@property (assign) IBOutlet NSView *inspectorView;
-@property (assign) IBOutlet NSView *mainView;
+@property (unsafe_unretained) id<MHSlidingSplitViewDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
+@property (unsafe_unretained) IBOutlet NSView *inspectorView;
+@property (unsafe_unretained) IBOutlet NSView *mainView;
 @property (assign) BOOL rightSided;
 
 

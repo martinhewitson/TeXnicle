@@ -67,17 +67,17 @@
 	NSRect openFrame;
   
   TPProjectTemplateListViewController *templateListViewController;
-  NSView *templateListContainer;
+  NSView *__unsafe_unretained templateListContainer;
 }
 
 -(IBAction)displayOrCloseWindow:(id)sender;
 -(IBAction)displayWindow:(id)sender;
 
 @property (readwrite, assign) BOOL isOpen;
-@property (readwrite, assign) NSMutableArray *recentFiles;
+@property (readwrite) NSMutableArray *recentFiles;
 
-@property (retain) TPProjectTemplateListViewController *templateListViewController;
-@property (assign) IBOutlet NSView *templateListContainer;
+@property (strong) TPProjectTemplateListViewController *templateListViewController;
+@property (unsafe_unretained) IBOutlet NSView *templateListContainer;
 
 - (IBAction) openRecentFile:(id)sender;
 

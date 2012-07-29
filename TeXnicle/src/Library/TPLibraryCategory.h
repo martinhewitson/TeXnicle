@@ -13,9 +13,9 @@
 
 @interface TPLibraryCategory : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet *entries;
-@property (nonatomic, retain) NSNumber *sortIndex;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSSet *entries;
+@property (nonatomic, strong) NSNumber *sortIndex;
 
 @end
 

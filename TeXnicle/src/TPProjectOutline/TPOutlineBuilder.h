@@ -19,7 +19,7 @@
 @end
 
 @interface TPOutlineBuilder : NSObject {
-  id<TPOutlineBuilderDelegate> delegate;
+  id<TPOutlineBuilderDelegate> __unsafe_unretained delegate;
   TPSection *outline;
   NSArray *templates;
   NSArray *sectionCommands;
@@ -29,11 +29,11 @@
 }
 
 @property (assign) NSInteger depth;
-@property (retain) NSTimer *timer;
-@property (assign) id<TPOutlineBuilderDelegate> delegate;
-@property (retain) NSArray *templates;
-@property (retain) NSArray *sectionCommands;
-@property (retain) NSMutableArray *sections;
+@property (strong) NSTimer *timer;
+@property (unsafe_unretained) id<TPOutlineBuilderDelegate> delegate;
+@property (strong) NSArray *templates;
+@property (strong) NSArray *sectionCommands;
+@property (strong) NSMutableArray *sections;
 
 + (id) outlineBuilderWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate;
 - (id) initWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate;

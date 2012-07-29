@@ -97,7 +97,7 @@
 	[self wrapStyleChanged:self];
   
   // setup engines editor
-  self.enginesEditor = [[[TPEnginesEditor alloc] init] autorelease];
+  self.enginesEditor = [[TPEnginesEditor alloc] init];
   [[self.enginesEditor view] setFrame:[self.enginesEditorContainer bounds]];
   [self.enginesEditorContainer addSubview:[self.enginesEditor view]];
   
@@ -107,24 +107,24 @@
   
   // default encoding
   [defaultEncodingPopup removeAllItems];
-  MHFileReader *fr = [[[MHFileReader alloc] init] autorelease];
+  MHFileReader *fr = [[MHFileReader alloc] init];
   [defaultEncodingPopup addItemsWithTitles:fr.encodingNames];
   NSString *defaultEncoding = [[NSUserDefaults standardUserDefaults] valueForKey:TPDefaultEncoding];
   [defaultEncodingPopup selectItemWithTitle:defaultEncoding];
   
   
   // template editor
-  self.templateEditorView = [[[TPTemplateEditorView alloc] init] autorelease];
+  self.templateEditorView = [[TPTemplateEditorView alloc] init];
   [self.templateEditorView.view setFrame:[self.templateEditorViewContainer bounds]];
   [self.templateEditorViewContainer addSubview:self.templateEditorView.view];
   
   // file types editor
-  self.supportedFilesEditor = [[[TPSupportedFilesEditor alloc] init] autorelease];
+  self.supportedFilesEditor = [[TPSupportedFilesEditor alloc] init];
   [self.supportedFilesEditor.view setFrame:[fileTypesPrefsView bounds]];
   [fileTypesPrefsView addSubview:self.supportedFilesEditor.view];  
   
   // project template chooser
-  self.projectTemplateManager = [[[TPProjectTemplateManager alloc] init] autorelease];
+  self.projectTemplateManager = [[TPProjectTemplateManager alloc] init];
   [self.projectTemplateManager.view setFrame:[self.projectTemplateManagerContainer bounds]];
   [self.projectTemplateManagerContainer addSubview:self.projectTemplateManager.view];
   
@@ -133,23 +133,8 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.projectTemplateManager = nil;
-  self.enginesEditor = nil;
-  self.supportedFilesEditor = nil;
-  self.templateEditorView = nil;
-	[commentsController release];
-  [commentsL2Controller release];
-  [commentsL3Controller release];
-  [markupL1Controller release];
-  [markupL2Controller release];
-  [markupL3Controller release];
-	[mathController release];
-	[commandsController release];
-	[argumentsController release];
-  [dollarController release];
 //	[keywordsController release];
 	
-	[super dealloc];
 }
 
 - (void) windowWillClose:(NSNotification *)notification

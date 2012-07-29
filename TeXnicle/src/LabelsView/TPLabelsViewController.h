@@ -42,16 +42,16 @@
 @interface TPLabelsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPLabelsViewDelegate> {
   
   NSMutableArray *sets;
-  NSOutlineView *outlineView;
-  id<TPLabelsViewDelegate> delegate;
-  HHValidatedButton *revealButton;
+  NSOutlineView *__unsafe_unretained outlineView;
+  id<TPLabelsViewDelegate> __unsafe_unretained delegate;
+  HHValidatedButton *__unsafe_unretained revealButton;
   BOOL firstView;
 }
 
-@property (assign) IBOutlet HHValidatedButton *revealButton;
-@property (assign) id<TPLabelsViewDelegate> delegate;
-@property (assign) IBOutlet NSOutlineView *outlineView;
-@property (retain) NSMutableArray *sets;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) id<TPLabelsViewDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (strong) NSMutableArray *sets;
 
 - (id) initWithDelegate:(id<TPLabelsViewDelegate>)aDelegate;
 

@@ -41,30 +41,30 @@
 @interface TPTemplateEditor : NSWindowController {
 @private
   NSString *_filename;
-  NSView *templateEditorViewContainer;
+  NSView *__unsafe_unretained templateEditorViewContainer;
   TPTemplateEditorView *templateEditorView;
-  id<TemplateEditorDelegate> delegate;
+  id<TemplateEditorDelegate> __unsafe_unretained delegate;
   BOOL showFilename;
   
-  NSButton *cancelButton;
-  NSButton *selectButton;
-  NSButton *setAsMainFileButton;
-  NSTextField *filenameField;
-  NSTextField *filenameLabel;
+  NSButton *__unsafe_unretained cancelButton;
+  NSButton *__unsafe_unretained selectButton;
+  NSButton *__unsafe_unretained setAsMainFileButton;
+  NSTextField *__unsafe_unretained filenameField;
+  NSTextField *__unsafe_unretained filenameLabel;
 }
 
 - (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename;
 
-@property (assign) id<TemplateEditorDelegate> delegate;
-@property (assign) IBOutlet NSView *templateEditorViewContainer;
-@property (assign) IBOutlet NSButton *cancelButton;
-@property (assign) IBOutlet NSButton *selectButton;
-@property (assign) IBOutlet NSButton *setAsMainFileButton;
-@property (assign) IBOutlet NSTextField *filenameField;
-@property (assign) IBOutlet NSTextField *filenameLabel;
+@property (unsafe_unretained) id<TemplateEditorDelegate> delegate;
+@property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
+@property (unsafe_unretained) IBOutlet NSButton *cancelButton;
+@property (unsafe_unretained) IBOutlet NSButton *selectButton;
+@property (unsafe_unretained) IBOutlet NSButton *setAsMainFileButton;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameField;
+@property (unsafe_unretained) IBOutlet NSTextField *filenameLabel;
 @property (assign) BOOL showFilename;
 
-@property (retain) TPTemplateEditorView *templateEditorView;
+@property (strong) TPTemplateEditorView *templateEditorView;
 
 - (void)setFilename:(NSString*)aFilename;
 - (BOOL) setAsMainFile;

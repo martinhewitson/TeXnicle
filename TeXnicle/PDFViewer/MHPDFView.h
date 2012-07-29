@@ -41,10 +41,10 @@ extern NSString * const MHPDFViewDidLoseFocusNotification;
 
 @interface MHPDFView : PDFView {
 @private
-  id<MHPDFViewDelegate> delegate;
+  id<MHPDFViewDelegate> __unsafe_unretained delegate;
 }
 
-@property (assign) IBOutlet id<MHPDFViewDelegate> delegate;
+@property (unsafe_unretained) IBOutlet id<MHPDFViewDelegate> delegate;
 
 - (void)performFindPanelAction:(id)sender;
 - (void)setNeedsDisplayInRect:(NSRect)rect ofPage:(PDFPage *)page;

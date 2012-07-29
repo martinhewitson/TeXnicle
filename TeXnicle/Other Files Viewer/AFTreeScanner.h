@@ -30,13 +30,13 @@
 }
 + (AFTreeScanner*)sharedScanner;
 
-@property (nonatomic, retain) NSMutableArray *failures;
-@property (nonatomic, retain) NSTimer * queueWatcher;
-@property (nonatomic, retain) NSTimer * processTimer;
+@property (nonatomic, strong) NSMutableArray *failures;
+@property (nonatomic, strong) NSTimer * queueWatcher;
+@property (nonatomic, strong) NSTimer * processTimer;
 @property (nonatomic, assign) NSUInteger queueJobs;
-@property (nonatomic, retain) NSMutableArray *trees;
-@property (nonatomic, retain) NSMutableArray *processing;
-@property (nonatomic, retain) NSDate *lastPost;
+@property (nonatomic, strong) NSMutableArray *trees;
+@property (nonatomic, strong) NSMutableArray *processing;
+@property (nonatomic, strong) NSDate *lastPost;
 
 - (void) scanTree:(TPSourceDirectory*)aTree;
 - (void) clearQueue;

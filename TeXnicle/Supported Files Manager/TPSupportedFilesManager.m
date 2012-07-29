@@ -61,8 +61,6 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 - (void) dealloc
 {
   [self saveTypes];
-  self.supportedFileTypes = nil;
-  [super dealloc];
 }
 
 // save supported file types back to the standard user defaults
@@ -74,51 +72,18 @@ static TPSupportedFilesManager *sharedSupportedFilesManager = nil;
 }
 
 // convenience constructor
+
 + (TPSupportedFilesManager*)sharedSupportedFilesManager
 {
-	@synchronized(self) {
-		if (sharedSupportedFilesManager == nil) {
-			[[self alloc] init]; // assignment not done here
-		}
-	}
-	return sharedSupportedFilesManager;
+  static TPSupportedFilesManager *sharedInstance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [[TPSupportedFilesManager alloc] init];
+    // Do any other initialisation stuff here
+  });
+  return sharedInstance;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
-{
-	@synchronized(self) {
-		if (sharedSupportedFilesManager == nil) {
-			sharedSupportedFilesManager = [super allocWithZone:zone];
-			return sharedSupportedFilesManager;  // assignment and return on first allocation
-		}
-	}
-	return nil; //on subsequent allocation attempts return nil
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-	return self;
-}
-
-- (id)retain
-{
-	return self;
-}
-
-- (NSUInteger)retainCount
-{
-	return UINT_MAX;  //denotes an object that cannot be released
-}
-
-- (void)release
-{
-	//do nothing
-}
-
-- (id)autorelease
-{
-	return self;
-}
 
 // Returns an array of supported file type names
 - (NSArray*)supportedTypes

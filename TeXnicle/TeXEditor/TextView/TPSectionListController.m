@@ -95,7 +95,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	[item setTarget:self];
 	[item setEnabled:YES];
 	[addMarkerActionMenu addItem:item];
-	[item release];		
 	
 	// FIGURE 
 	item = [[NSMenuItem alloc] initWithTitle:@"FIGURE"
@@ -103,7 +102,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 														 keyEquivalent:@""];
 	[item setTarget:self];
 	[addMarkerActionMenu addItem:item];
-	[item release];		
 	
 	// TABLE 
 	item = [[NSMenuItem alloc] initWithTitle:@"TABLE"
@@ -111,7 +109,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 														 keyEquivalent:@""];
 	[item setTarget:self];
 	[addMarkerActionMenu addItem:item];
-	[item release];		
 	
 	// LIST 
 	item = [[NSMenuItem alloc] initWithTitle:@"LIST"
@@ -119,7 +116,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 														 keyEquivalent:@""];
 	[item setTarget:self];
 	[addMarkerActionMenu addItem:item];
-	[item release];		
 	
 	// EQUATION 
 	item = [[NSMenuItem alloc] initWithTitle:@"EQUATION"
@@ -127,7 +123,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 														 keyEquivalent:@""];
 	[item setTarget:self];
 	[addMarkerActionMenu addItem:item];
-	[item release];		
 }
 
 
@@ -146,9 +141,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 //  NSLog(@"Dealloc TPSectionListController");
   [self deactivate];
 
-	[addMarkerActionMenu release];
-	[sections release];
-	[super dealloc];
 }
 
 #pragma mark -
@@ -268,7 +260,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           [dict setObject:adisp forKey:@"title"];
           [dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
           [found addObject:dict];
-          [adisp release];				
         }
 			} // end loop over results
 		} // end if [results count] > 0
@@ -326,7 +317,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			
 			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 			[dict setObject:adisp forKey:@"title"];
-      [adisp release];
 			[dict setObject:[NSNumber numberWithInteger:[aScanner scanLocation]] forKey:@"index"];
 			[found addObject:dict];
 		}
@@ -345,7 +335,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:str forKey:@"title"];
-        [str release];
         NSInteger index = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
         [dict setObject:[NSNumber numberWithInteger:index] forKey:@"index"];
         [found addObject:dict];
@@ -408,7 +397,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 	}
 	
-	[desc release];		
 }
 
 - (void) addTitle
@@ -422,7 +410,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
                       range:NSMakeRange(0, [titleString length])];
   
   [[popupMenu lastItem] setAttributedTitle:titleString];
-  [titleString release];
   [[popupMenu lastItem] setTag:0];
 }
 

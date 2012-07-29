@@ -83,22 +83,17 @@
   
   [self stopSyntaxChecker];
   self.checker.delegate = nil;
-  self.checker = nil;
   
-  self.errorImage = nil;
-  self.noErrorImage = nil;
-  self.checkFailedImage = nil;
   self.textView.delegate = nil;
   [sectionListController deactivate];
   self.delegate = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
 {
   [self disableEditor];
   
-  self.checker = [[[TPSyntaxChecker alloc] initWithDelegate:self] autorelease];
+  self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
   _shouldCheckSyntax = YES; // check at least once
   _checkingSyntax    = NO;
   self.performSyntaxCheck = NO;
@@ -277,9 +272,6 @@
 																			 pressure:1];
 	
   // populate menu with errors
-  if (errorMenu) {
-    [errorMenu release];
-  }
   
   errorMenu = [[NSMenu alloc] initWithTitle:@"Error Menu"];
   
@@ -292,7 +284,6 @@
     [item setTarget:self];
     [item setRepresentedObject:error];
     [errorMenu addItem:item];
-    [item release];
   }
 	
 	[NSMenu popUpContextMenu:errorMenu withEvent:event forView:(NSButton *)sender];  

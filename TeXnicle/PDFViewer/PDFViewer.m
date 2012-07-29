@@ -49,8 +49,6 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
-  self.pdfViewerController = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -111,7 +109,7 @@
   [super windowDidLoad];
   
   // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-  self.pdfViewerController = [[[PDFViewerController alloc] initWithDelegate:self] autorelease];
+  self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
   [self.pdfViewerController.view setFrame:[self.containerView bounds]];
   [self.containerView addSubview:self.pdfViewerController.view];
   [self.pdfViewerController showViewer];

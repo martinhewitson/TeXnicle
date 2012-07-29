@@ -62,7 +62,7 @@
 
 + (MHEditorRuler*) editorRulerWithTextView:(NSTextView*)aTextView
 {
-  return [[[MHEditorRuler alloc] initWithTextView:aTextView] autorelease];
+  return [[MHEditorRuler alloc] initWithTextView:aTextView];
 }
 
 - (id)initWithTextView:(NSTextView*)aTextView
@@ -83,11 +83,11 @@
     self.font = [NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]];
     
     // initialise the folding tag descriptions
-    self.foldingTagDescriptions = [[[NSMutableArray alloc] init] autorelease];    
+    self.foldingTagDescriptions = [[NSMutableArray alloc] init];    
     [self.foldingTagDescriptions addObject:[MHFoldingTagDescription foldingTagWithStartTag:@"\\begin{" endTag:@"\\end{" followingArgument:YES]];        
     [self setClientView:aTextView];
     
-    newLineCharacterSet = [[NSCharacterSet newlineCharacterSet] retain];
+    newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     _showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
@@ -127,11 +127,7 @@
 }
 
 - (void)setClientView:(NSView *)client
-{
-  if (client == nil) {
-    return;
-  }
-  
+{  
 	if ([client isKindOfClass:[NSTextView class]]) {
 		TeXTextView *aTextView = (TeXTextView*)client;
     self.textView = aTextView;
@@ -145,19 +141,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 //  NSLog(@"Dealloc MHEditorRuler");
-  [newLineCharacterSet release];
-	[self setClientView:nil];	
-  self.foldingTagDescriptions = nil;
-  self.textColor = nil;
-  self.alternateTextColor = nil;
-  self.backgroundColor = nil;
-  self.font = nil;
-  self.lineNumbers = nil;
-  self.codeFolders = nil;
-  self.textAttributesDictionary = nil;
-  self.alternateTextAttributesDictionary = nil;
-  [_bookmarkGradient release];
-	[super dealloc];
+//	[self setClientView:nil];	
 }
 
 - (void) drawRect:(NSRect)dirtyRect
@@ -245,7 +229,7 @@
   // the gutter will change width. This could be avoided by computing the total line 
   // count in an independent way.
   NSUInteger maxLine = [[self.lineNumbers lastObject] number];
-  NSMutableAttributedString *labelText = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", maxLine + 1] attributes:[self textAttributes]] autorelease];
+  NSMutableAttributedString *labelText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", maxLine + 1] attributes:[self textAttributes]];
   NSSize stringSize = [labelText size];
 
   // some useful numbers for drawing the line numbers

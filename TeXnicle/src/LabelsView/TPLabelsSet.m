@@ -44,11 +44,6 @@
   return self;
 }
 
-- (void) dealloc
-{
-  self.labels = nil;
-  [super dealloc];
-}
 
 - (NSString*) name
 {
@@ -82,16 +77,14 @@
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
   [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
   [att appendAttributedString:str];
-  [str release];
   
   // apply paragraph
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
-  [ps release];
   
-  return [att autorelease];
+  return att;
 }
 
 

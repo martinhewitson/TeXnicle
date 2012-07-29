@@ -23,69 +23,69 @@
 @interface TPLibraryController : NSViewController <NSUserInterfaceValidations, NSTextFieldDelegate, TPLibraryImageGeneratorDelegate, NSTableViewDelegate, NSTableViewDataSource> {
   
   
-	NSSlider *entryRowHeightSlider;
-  NSTableView *categoriesTable;
-  NSTableView *entriesTable;
+	NSSlider *__unsafe_unretained entryRowHeightSlider;
+  NSTableView *__unsafe_unretained categoriesTable;
+  NSTableView *__unsafe_unretained entriesTable;
   
 	NSMenu *addMenu;
 	NSMenu *catActionMenu;
     
-  HHValidatedButton *addCategoryButton;
-  HHValidatedButton *deleteCategoryButton;
-  HHValidatedButton *addClipButton;
-  HHValidatedButton *deleteClipButton;
-  HHValidatedButton *reloadClipButton;
-  HHValidatedButton *insertClipButton;
-  HHValidatedButton *editClipButton;
-  HHValidatedButton *clipCopyButton;
+  HHValidatedButton *__unsafe_unretained addCategoryButton;
+  HHValidatedButton *__unsafe_unretained deleteCategoryButton;
+  HHValidatedButton *__unsafe_unretained addClipButton;
+  HHValidatedButton *__unsafe_unretained deleteClipButton;
+  HHValidatedButton *__unsafe_unretained reloadClipButton;
+  HHValidatedButton *__unsafe_unretained insertClipButton;
+  HHValidatedButton *__unsafe_unretained editClipButton;
+  HHValidatedButton *__unsafe_unretained clipCopyButton;
   
-  NSObjectController *selectedEntry;
+  NSObjectController *__unsafe_unretained selectedEntry;
   
-  NSTextField *commandTextField;
-  NSTextField *commandMessageLabel;
+  NSTextField *__unsafe_unretained commandTextField;
+  NSTextField *__unsafe_unretained commandMessageLabel;
   
-  id<TPLibraryControllerDelegate> delegate;
+  id<TPLibraryControllerDelegate> __unsafe_unretained delegate;
 
 	NSImage *unknownImage;
   
   // Edit sheet
 	NSString *textBeforeEditing;
-	IBOutlet NSWindow *editSheet;
-	IBOutlet TeXTextView *editTextView;
+	IBOutlet NSWindow *__unsafe_unretained editSheet;
+	IBOutlet TeXTextView *__unsafe_unretained editTextView;
   BOOL didCancelEditSheet;
 
-  TPLibrary *library;
+  TPLibrary *__unsafe_unretained library;
 }
 
 @property (copy) NSString *textBeforeEditing;
-@property (assign) IBOutlet NSWindow *editSheet;
-@property (assign) IBOutlet TeXTextView *editTextView;
+@property (unsafe_unretained) IBOutlet NSWindow *editSheet;
+@property (unsafe_unretained) IBOutlet TeXTextView *editTextView;
 
-@property (retain) 	NSImage *unknownImage;
+@property (strong) 	NSImage *unknownImage;
 
-@property (assign) id<TPLibraryControllerDelegate> delegate;
+@property (unsafe_unretained) id<TPLibraryControllerDelegate> delegate;
 
-@property (assign) IBOutlet NSObjectController *selectedEntry;
-@property (assign) IBOutlet HHValidatedButton *addCategoryButton;
-@property (assign) IBOutlet HHValidatedButton *deleteCategoryButton;
-@property (assign) IBOutlet HHValidatedButton *addClipButton;
-@property (assign) IBOutlet HHValidatedButton *deleteClipButton;
-@property (assign) IBOutlet HHValidatedButton *reloadClipButton;
-@property (assign) IBOutlet HHValidatedButton *insertClipButton;
-@property (assign) IBOutlet HHValidatedButton *editClipButton;
-@property (assign) IBOutlet HHValidatedButton *clipCopyButton;
+@property (unsafe_unretained) IBOutlet NSObjectController *selectedEntry;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addCategoryButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteCategoryButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *addClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *deleteClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *reloadClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *insertClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *editClipButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *clipCopyButton;
 
-@property (assign) IBOutlet NSTextField *commandTextField;
-@property (assign) IBOutlet NSTextField *commandMessageLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *commandTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *commandMessageLabel;
 
-@property (retain) NSMenu *addMenu;
-@property (retain) NSMenu *catActionMenu;
+@property (strong) NSMenu *addMenu;
+@property (strong) NSMenu *catActionMenu;
 
-@property (assign) IBOutlet NSTableView *categoriesTable;
-@property (assign) IBOutlet NSTableView *entriesTable;
-@property (assign) IBOutlet NSSlider *entryRowHeightSlider;
+@property (unsafe_unretained) IBOutlet NSTableView *categoriesTable;
+@property (unsafe_unretained) IBOutlet NSTableView *entriesTable;
+@property (unsafe_unretained) IBOutlet NSSlider *entryRowHeightSlider;
 
-@property (assign) TPLibrary *library;
+@property (unsafe_unretained) TPLibrary *library;
 
 - (id) initWithDelegate:(id<TPLibraryControllerDelegate>)aDelegate;
 

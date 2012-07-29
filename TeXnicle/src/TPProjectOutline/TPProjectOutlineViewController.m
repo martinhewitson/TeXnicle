@@ -27,8 +27,6 @@
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   [self.outlineBuilder stopTimer];
-  self.outlineBuilder = nil;
-  [super dealloc];
 }
 
 - (id)initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate
@@ -235,7 +233,6 @@
     NSMutableAttributedString *title = [[cell objectValue] mutableCopy];
     [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
     [cell setObjectValue:title];
-    [title release];
   }
 }
 

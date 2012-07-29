@@ -130,14 +130,13 @@
           }
           MHFileReader *fr = [[MHFileReader alloc] init];
           subtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
-          [fr release];
           if (subtext) 
             subfile = [NSURL fileURLWithPath:filepath];
         }
         if (subtext) {
           NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
           // check if we already have any of these sections
-          for (TPSection *ss in subsections) {
+          for (__strong TPSection *ss in subsections) {
             for (TPSection *s in sections) {
               if ([s matches:ss] == YES) {
                 ss = s; 

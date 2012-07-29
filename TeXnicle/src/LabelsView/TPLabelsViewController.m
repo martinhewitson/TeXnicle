@@ -64,8 +64,6 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.sets = nil;
-  [super dealloc];
 }
 
 - (void) awakeFromNib
@@ -241,7 +239,6 @@
       if (labels && [labels count] > 0) {
         set = [[TPLabelsSet alloc] initWithFile:newFile labels:labels];
         [self.sets addObject:set];
-        [set release];
       }
     } else {
       // update the labels

@@ -81,7 +81,6 @@
   
   TPLibraryCommandFormatter *formatter = [[TPLibraryCommandFormatter alloc] init];
   [self.commandTextField setFormatter:formatter];
-  [formatter release];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(handleLibraryUpdate:)
@@ -102,11 +101,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.selectedEntry setContent:nil];
-  self.unknownImage = nil;
-  self.catActionMenu = nil;
-  self.addMenu = nil;
   
-  [super dealloc];
 }
 
 #pragma mark -
@@ -125,7 +120,7 @@
 	NSArray *selected = [self selectedEntries];
 	for (TPLibraryEntry *symbol in selected) {
 		if (self.unknownImage == nil) {
-			self.unknownImage = [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
+			self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 		}
     symbol.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
     symbol.imageIsValid = [NSNumber numberWithBool:NO];
@@ -138,7 +133,7 @@
 - (void) refreshImageForEntry:(TPLibraryEntry*)entry
 {
   if (self.unknownImage == nil) {
-    self.unknownImage = [[[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]] autorelease];				
+    self.unknownImage = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
   }
   entry.image = [NSKeyedArchiver archivedDataWithRootObject:unknownImage];
   entry.imageIsValid = [NSNumber numberWithBool:NO];
@@ -431,7 +426,7 @@
 {
 	
 	// Make popup menu with bound actions
-	self.catActionMenu = [[[NSMenu alloc] initWithTitle:@"Library Category Action Menu"] autorelease];	
+	self.catActionMenu = [[NSMenu alloc] initWithTitle:@"Library Category Action Menu"];	
 	[catActionMenu setAutoenablesItems:YES];
 	
 	// Add default categories
@@ -440,7 +435,6 @@
 																				 keyEquivalent:@""];
   [item setTarget:self];
 	[catActionMenu addItem:item];
-	[item release];		
 	
 	// Restore default library
 	item = [[NSMenuItem alloc] initWithTitle:@"Restore Default Library"
@@ -448,7 +442,6 @@
 														 keyEquivalent:@""];
   [item setTarget:self];
 	[catActionMenu addItem:item];
-	[item release];		
 	
 	
 }
@@ -457,7 +450,7 @@
 {
 	
 	// Make popup menu with bound actions
-	self.addMenu = [[[NSMenu alloc] initWithTitle:@"Library Add Context Menu"] autorelease];	
+	self.addMenu = [[NSMenu alloc] initWithTitle:@"Library Add Context Menu"];	
 	[addMenu setAutoenablesItems:YES];
 	
 	// Add empty clipping
@@ -466,7 +459,6 @@
 																				 keyEquivalent:@""];
   [item setTarget:self];
 	[addMenu addItem:item];
-	[item release];		
 	
 	
 	// Clipping from the pasteboard
@@ -475,7 +467,6 @@
 														 keyEquivalent:@""];
   [item setTarget:self];
 	[addMenu addItem:item];
-	[item release];		
   
 	
 }
@@ -517,9 +508,9 @@
           image = [NSImage imageNamed:NSImageNameRefreshTemplate];
           
           // launch a thread to compute the image
-          TPLibraryImageGenerator *ig = [[[TPLibraryImageGenerator alloc] initWithSymbol:entry
+          TPLibraryImageGenerator *ig = [[TPLibraryImageGenerator alloc] initWithSymbol:entry
                                                                                 mathMode:NO
-                                                                           andController:self] autorelease];
+                                                                           andController:self];
           
           [NSThread detachNewThreadSelector:@selector(generateImage) 
                                    toTarget:ig
@@ -730,7 +721,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 	
 	NSString *code = item.code;
   [[self.editTextView textStorage] beginEditing];
-  [[self.editTextView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:code] autorelease]];
+  [[self.editTextView textStorage] setAttributedString:[[NSAttributedString alloc] initWithString:code]];
   [[self.editTextView textStorage] endEditing];
   [self.editTextView applyFontAndColor:YES];
   
@@ -788,13 +779,13 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
 {
   if (anItem == self.deleteCategoryButton) {
-    if ([self selectedCategory] == NO) {
+    if ([self selectedCategory] == nil) {
       return NO;
     }
   }
   
   if (anItem == self.addClipButton) {
-    if ([self selectedCategory] == NO) {
+    if ([self selectedCategory] == nil) {
       return NO;
     }
   }

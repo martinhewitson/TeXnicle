@@ -11,6 +11,7 @@
 #import "PSMTabBarCell.h"
 #import "PSMTabStyle.h"
 #import "NSString_AITruncation.h"
+#import "PSMRolloverButton.h"
 
 #define MAX_OVERFLOW_MENUITEM_TITLE_LENGTH	60
 
@@ -42,15 +43,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	//NSLog(@"PSMTabBarController dealloc");
-	[_cellTrackingRects release];
-	[_closeButtonTrackingRects release];
-	[_cellFrames release];
-	[_overflowMenu release];
-	[super dealloc];
-}
 
 /*!
  @method     addButtonRect
@@ -526,7 +518,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum)
 	NSTabViewItem *selectedTabViewItem = [[_control tabView] selectedTabViewItem];
 	NSMenuItem *menuItem;
 	
-	[_overflowMenu release], _overflowMenu = nil;
+	_overflowMenu = nil;
 	
 	for (i = 0; i < cellCount; i++) {
 		cell = [cells objectAtIndex:i];

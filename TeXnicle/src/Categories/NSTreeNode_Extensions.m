@@ -43,7 +43,7 @@
 		[array addObject:child];
 		[array addObjectsFromArray:[child descendants]];
 	}
-	return [[array copy] autorelease];
+	return [array copy];
 }
 
 - (NSArray *)groupDescendants;
@@ -55,7 +55,7 @@
 			[array addObjectsFromArray:[item groupDescendants]];
 		}
 	}
-	return [[array copy] autorelease];
+	return [array copy];
 }
 
 - (NSArray *)leafDescendants;
@@ -67,7 +67,7 @@
 		else
 			[array addObjectsFromArray:[item leafDescendants]];
 	}
-	return [[array copy] autorelease];
+	return [array copy];
 }
 
 // all the siblings, including self

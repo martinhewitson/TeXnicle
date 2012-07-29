@@ -33,13 +33,13 @@
   NSString *word;
   NSArray *corrections;
   NSRange range;
-  TPSpellCheckedFile *parent;
+  TPSpellCheckedFile *__unsafe_unretained parent;
 }
 
 @property (copy) NSString *word;
-@property (retain) NSArray *corrections;
+@property (strong) NSArray *corrections;
 @property (assign) NSRange range;
-@property (assign) TPSpellCheckedFile *parent;
+@property (unsafe_unretained) TPSpellCheckedFile *parent;
 
 + (TPMisspelledWord*) wordWithWord:(NSString*)aWord corrections:(NSArray*)correctionList range:(NSRange)aRange parent:(TPSpellCheckedFile*)aParent;
 - (id) initWithWord:(NSString*)aWord corrections:(NSArray*)correctionList range:(NSRange)aRange parent:(TPSpellCheckedFile*)aParent;

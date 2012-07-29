@@ -49,8 +49,6 @@
   symbolsTable.dataSource = nil;
   [palettesController setContent:nil];
   self.delegate = nil;
-  self.palettes = nil;
-	[super dealloc];
 }
 
 - (void) awakeFromNib
@@ -104,15 +102,14 @@
 //      NSLog(@" ... %@", image);
 			if (!image) {
 //        NSLog(@"... Generating image");
-				image = [[self generateImageForCode:[symbol valueForKey:@"Code"]
+				image = [self generateImageForCode:[symbol valueForKey:@"Code"]
 																		atPath:imagePath 
-																inMathMode:[[symbol valueForKey:@"mathMode"] boolValue]] retain];
+																inMathMode:[[symbol valueForKey:@"mathMode"] boolValue]];
 				if (!image) {
 					image = [[NSImage alloc] initWithContentsOfFile:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Palette/unknown.pdf"]];				
 				}
 			}
 			[symbol setObject:image forKey:@"ImageData"];
-			[image release];
 		}
 	}
 }
@@ -139,7 +136,7 @@
 			}
 		}
 	}	
-	return [commands autorelease];
+	return commands;
 }
 
 - (void) handleTableDoubleClick
@@ -191,12 +188,10 @@
                     encoding:NSUTF8StringEncoding
                        error:&error];
 	if (success == NO) {
-		[doc release];
 		[NSApp presentError:error];
 		return nil;
 	}
 	
-	[doc release];
 	
   // file://localhost/private/var/folders/V3/V3+QAXE-HIi9y796X1o4Q++++TI/-Tmp-/TeXnicle-1/
 	
@@ -224,7 +219,7 @@
 //	NSData *data = [NSData dataWithContentsOfFile:croppedPDF];
 	NSImage *pdfimage = [[NSImage alloc] initWithContentsOfFile:croppedPDF];
 	//NSLog(@"made image at: %@", aPath);
-	return [pdfimage autorelease];
+	return pdfimage;
 }
 
 
