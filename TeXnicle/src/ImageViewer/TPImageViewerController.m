@@ -27,14 +27,17 @@
 
 #import "TPImageViewerController.h"
 
+@interface TPImageViewerController ()
+
+@property (unsafe_unretained) IBOutlet NSView *contentView;
+@property (unsafe_unretained) IBOutlet NSImageView *imageViewer;
+@property (unsafe_unretained) IBOutlet NSView *backgroundView;
+@property (unsafe_unretained) IBOutlet NSView *toolbarView;
+@property (copy) NSString *path;
+
+@end
+
 @implementation TPImageViewerController
-
-@synthesize imageViewer;
-@synthesize contentView;
-@synthesize backgroundView;
-@synthesize toolbarView;
-@synthesize path;
-
 
 - (id) init
 {

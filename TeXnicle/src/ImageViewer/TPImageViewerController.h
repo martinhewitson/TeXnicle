@@ -27,20 +27,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TPImageViewerController : NSViewController {
-@private
-  NSView *__unsafe_unretained contentView;
-  NSImageView *__unsafe_unretained imageViewer;
-  NSView *__unsafe_unretained backgroundView;
-  NSView *__unsafe_unretained toolbarView;
-  NSString *path;
-}
+@interface TPImageViewerController : NSViewController
 
-@property (unsafe_unretained) IBOutlet NSView *contentView;
-@property (unsafe_unretained) IBOutlet NSImageView *imageViewer;
-@property (unsafe_unretained) IBOutlet NSView *backgroundView;
-@property (unsafe_unretained) IBOutlet NSView *toolbarView;
-@property (copy) NSString *path;
 
 - (void) enable;
 - (void) disable;
