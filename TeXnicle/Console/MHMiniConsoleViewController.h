@@ -29,14 +29,8 @@
 #import <Cocoa/Cocoa.h>
 #import "MHConsoleViewer.h"
 
-@interface MHMiniConsoleViewController : NSViewController <MHConsoleViewer> {
-@private
-  NSTextField *__unsafe_unretained textField;
-  NSProgressIndicator *__unsafe_unretained progressIndicator;
-}
+@interface MHMiniConsoleViewController : NSViewController <MHConsoleViewer>
 
-@property (unsafe_unretained) IBOutlet NSTextField *textField;
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
 
 - (void) setAnimating:(BOOL)state;
 

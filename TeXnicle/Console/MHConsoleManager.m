@@ -28,9 +28,13 @@
 
 #import "MHConsoleManager.h"
 
-@implementation MHConsoleManager
+@interface MHConsoleManager ()
 
-@synthesize consoles;
+@property (strong) NSMutableSet *consoles;
+
+@end
+
+@implementation MHConsoleManager
 
 
 - (id) init

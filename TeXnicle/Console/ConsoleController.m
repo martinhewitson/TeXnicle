@@ -31,8 +31,6 @@
 
 @implementation ConsoleController
 
-static ConsoleController *sharedConsoleController = nil;
-
 - (void)awakeFromNib
 {
   if ([textView respondsToSelector:@selector(setUsesFindBar:)]) {

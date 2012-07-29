@@ -31,6 +31,7 @@
 
 @interface ConsoleController : NSWindowController <MHConsoleViewer> {
 
+@private
 	IBOutlet NSTextView *textView;
 	IBOutlet NSPopUpButton *displayLevel;
 	

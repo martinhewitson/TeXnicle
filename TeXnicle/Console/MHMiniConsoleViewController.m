@@ -28,12 +28,14 @@
 
 #import "MHMiniConsoleViewController.h"
 
+@interface MHMiniConsoleViewController ()
+
+@property (unsafe_unretained) IBOutlet NSTextField *textField;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+
+@end
+
 @implementation MHMiniConsoleViewController
-
-@synthesize textField;
-@synthesize progressIndicator;
-
-
 
 - (id)init
 {

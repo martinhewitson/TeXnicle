@@ -30,12 +30,7 @@
 #import "MHConsoleViewer.h"
 
 
-@interface MHConsoleManager : NSObject <MHConsoleViewer> {
-@private
-  NSMutableSet *consoles;
-}
-
-@property (strong) NSMutableSet *consoles;
+@interface MHConsoleManager : NSObject <MHConsoleViewer>
 
 - (BOOL) registerConsole:(id<MHConsoleViewer>)aConsole;
 
