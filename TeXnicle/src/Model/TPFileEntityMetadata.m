@@ -144,12 +144,14 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   
   dispatch_async(dispatch_get_main_queue(), ^{
     // send notification of section update
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    NSDictionary *dict = @{@"file": self.parent, @"sections": self.sections};
-    
-    [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                      object:self
-                    userInfo:dict];
+    if (self.parent != nil && self.sections != nil) {
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      NSDictionary *dict = @{@"file": self.parent, @"sections": self.sections};
+      
+      [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                        object:self
+                      userInfo:dict];
+    }
   });
   
   
