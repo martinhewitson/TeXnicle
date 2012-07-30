@@ -43,7 +43,7 @@ extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
 @property (unsafe_unretained) IBOutlet NSButton *commandsButton;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitview;
 @property (unsafe_unretained) IBOutlet NSView *containerView;
-@property (unsafe_unretained) IBOutlet NSTabView *tabView;
+@property (strong) IBOutlet NSTabView *tabView;
 
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;
