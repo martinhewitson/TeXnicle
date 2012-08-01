@@ -32,7 +32,7 @@
 @interface TPWarningSet : NSObject
 
 @property (strong) NSArray *errors;
-@property (unsafe_unretained) id file;
+@property (strong) id file;
 @property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile errors:(NSArray*)someErrors;

@@ -31,6 +31,11 @@
 
 @implementation TPWarningSet
 
+- (void) dealloc
+{
+  self.file = nil;
+}
+
 - (id) initWithFile:(FileEntity*)aFile errors:(NSArray *)someErrors
 {
   self = [super init];
