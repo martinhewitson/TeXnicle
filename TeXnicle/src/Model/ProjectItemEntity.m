@@ -57,6 +57,12 @@
 //  return filteredItems;
 //}
 
+- (void) didTurnIntoFault
+{
+  self.parent = nil;
+  self.project = nil;
+}
+
 - (void) awakeFromInsert
 {
 	[self setValue:@NO forKey:@"isLeaf"];
