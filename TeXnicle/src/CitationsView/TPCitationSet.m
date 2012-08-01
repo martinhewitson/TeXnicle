@@ -30,6 +30,11 @@
 
 @implementation TPCitationSet
 
+- (void) dealloc
+{
+  self.file = nil;
+}
+
 - (id) initWithFile:(FileEntity*)aFile bibliographyArray:(NSArray *)aList
 {
   self = [super init];
@@ -43,7 +48,11 @@
 
 - (NSString*) name
 {
-  return [self.file valueForKey:@"name"];
+  if (self.file != nil) {
+    return [self.file valueForKey:@"name"];
+  } else {
+    return nil;
+  }
 }
 
 - (void) setCitationsFromBibliographyArray:(NSArray*)aList

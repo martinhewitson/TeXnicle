@@ -33,7 +33,7 @@
 @interface TPCitationSet : NSObject
 
 @property (strong) NSArray *citations;
-@property (unsafe_unretained) id file;
+@property (strong) id file;
 @property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile bibliographyArray:(NSArray *)aList;
