@@ -76,7 +76,7 @@
         if (command != nil) {
           TPSectionTemplate *template = nil;
           for (TPSectionTemplate *t in templates) {
-            if ([t.tag beginsWith:command]) {
+            if ([command beginsWith:t.tag]) {
               template = t;
             }
           }
