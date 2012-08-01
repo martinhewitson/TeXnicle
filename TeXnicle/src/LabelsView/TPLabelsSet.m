@@ -31,6 +31,12 @@
 
 @implementation TPLabelsSet 
 
+- (void) dealloc
+{
+  self.file = nil;
+}
+
+
 - (id) initWithFile:(FileEntity*)aFile labels:(NSArray *)someLabels
 {
   self = [super init];
