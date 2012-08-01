@@ -72,11 +72,15 @@
       //      NSLog(@"Word: %@", word);
       if ([word beginsWithElementInArray:sectionCommands] != NSNotFound) {
         NSString *command = [word command];
+        if ([command characterAtIndex:[command length]-1] == '*') {
+          command = [command substringToIndex:[command length]-1];
+        }
+//        NSLog(@"Got command %@", command);
         
         if (command != nil) {
           TPSectionTemplate *template = nil;
           for (TPSectionTemplate *t in templates) {
-            if ([command beginsWith:t.tag]) {
+            if ([t.tag beginsWith:command]) {
               template = t;
             }
           }
