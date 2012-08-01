@@ -46,6 +46,11 @@
   return self;
 }
 
+- (void) dealloc
+{
+  self.parent = nil;
+}
+
 
 - (NSAttributedString*)selectedDisplayString
 {
