@@ -43,15 +43,15 @@
 
 // core data properties
 @property (nonatomic, strong) NSData * content;
-@property (nonatomic, strong) NSString * cursor;
-@property (nonatomic, strong) NSString * extension;
+@property (nonatomic, copy) NSString * cursor;
+@property (nonatomic, copy) NSString * extension;
 @property (nonatomic, strong) NSDate * fileLoadDate;
 @property (nonatomic, strong) NSNumber * isText;
 @property (nonatomic, strong) NSDate * lastEditDate;
-@property (nonatomic, strong) NSString * visibleRect;
+@property (nonatomic, copy) NSString * visibleRect;
 @property (nonatomic, strong) NSNumber * wasOpen;
 @property (nonatomic, strong) NSSet *bookmarks;
-@property (nonatomic, strong) ProjectEntity *mainFileOfProject;
+@property (nonatomic, unsafe_unretained) ProjectEntity *mainFileOfProject;
 
 // other properties
 @property (readonly) BOOL isImage;

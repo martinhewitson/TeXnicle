@@ -273,8 +273,7 @@
 
 - (void) didTurnIntoFault
 {
-//  NSLog(@"Did fault");
-  
+  self.mainFileOfProject = nil;
   self.metadata.parent = nil;
   self.metadata = nil;
   
