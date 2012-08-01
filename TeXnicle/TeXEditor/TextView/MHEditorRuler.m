@@ -920,13 +920,19 @@
 {
   wasAcceptingMouseEvents = [[self window] acceptsMouseMovedEvents];
   [[self window] setAcceptsMouseMovedEvents:YES];
-  [[self window] makeFirstResponder:self];
+  NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+  [self highlightFolderRangeForPoint:point];
+//  [[self window] makeFirstResponder:self.textView];
 }
 
-
-- (void)mouseMoved:(NSEvent *)theEvent 
+- (void)mouseMoved:(NSEvent *)theEvent
 {
   NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+  [self highlightFolderRangeForPoint:point];
+}
+
+- (void) highlightFolderRangeForPoint:(NSPoint)point
+{
   MHCodeFolder *folder = [self folderForPoint:point];
   if (folder != nil) {
     if (folder != highlightedFolder) {
