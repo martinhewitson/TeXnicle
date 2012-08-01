@@ -54,10 +54,10 @@
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
+  self.delegate = nil;
 }
 
 - (void) awakeFromNib
