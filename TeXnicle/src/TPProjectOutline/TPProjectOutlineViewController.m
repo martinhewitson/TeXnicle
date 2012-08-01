@@ -13,7 +13,7 @@
 
 @property (unsafe_unretained) IBOutlet NSSlider *depthSlider;
 @property (unsafe_unretained) IBOutlet NSButton *showDetailsButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+@property (strong) IBOutlet NSOutlineView *outlineView;
 @property (unsafe_unretained) TPSection *currentSection;
 
 @end
@@ -22,9 +22,10 @@
 
 - (void) dealloc
 {
+  [self.outlineBuilder performSelectorOnMainThread:@selector(stopTimer) withObject:nil waitUntilDone:YES];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
-  [self.outlineBuilder stopTimer];
+  self.outlineView = nil;
 }
 
 - (id)initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate
