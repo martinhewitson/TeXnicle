@@ -32,7 +32,7 @@
 @interface TPCommandSet : NSObject
 
 @property (strong) NSArray *commands;
-@property (unsafe_unretained) id file;
+@property (strong) id file;
 @property (unsafe_unretained, readonly) NSString *name;
 
 - (id) initWithFile:(FileEntity*)aFile commandArray:(NSArray *)aList;

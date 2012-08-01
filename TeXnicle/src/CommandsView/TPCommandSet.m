@@ -30,6 +30,11 @@
 
 @implementation TPCommandSet
 
+- (void) dealloc
+{
+  self.file = nil;
+}
+
 
 - (id) initWithFile:(FileEntity*)aFile commandArray:(NSArray *)aList
 {
