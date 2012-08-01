@@ -2806,7 +2806,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2837,7 +2837,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
