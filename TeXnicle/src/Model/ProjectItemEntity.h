@@ -38,13 +38,13 @@
 }
 
 // core data properties
-@property (nonatomic, strong) NSString * filepath;
+@property (nonatomic, copy) NSString * filepath;
 @property (nonatomic, strong) NSNumber * isExpanded;
-@property (nonatomic, strong) NSString * name;
+@property (nonatomic, copy) NSString * name;
 @property (nonatomic, strong) NSNumber * sortIndex;
 @property (nonatomic, strong) NSSet *children;
-@property (nonatomic, strong) ProjectItemEntity *parent;
-@property (nonatomic, strong) ProjectEntity *project;
+@property (nonatomic, unsafe_unretained) ProjectItemEntity *parent;
+@property (nonatomic, unsafe_unretained) ProjectEntity *project;
 
 // other properties
 @property (nonatomic, assign) BOOL isSelected;
