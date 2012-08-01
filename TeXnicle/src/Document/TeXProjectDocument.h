@@ -97,7 +97,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   BOOL _didSetup;
 }
 
-@property (unsafe_unretained) IBOutlet	ProjectItemTreeController *projectItemTreeController;
+@property (strong) IBOutlet	ProjectItemTreeController *projectItemTreeController;
 @property (strong) PDFViewer *pdfViewer;
 @property (strong) TeXEditorViewController *texEditorViewController;
 @property (strong) PDFViewerController *pdfViewerController;

@@ -93,6 +93,9 @@
 @property (strong) TPFileMonitor *fileMonitor;
 @property (strong) TPTemplateEditor *templateEditor;
 
+@property (strong) IBOutlet MHControlsTabBarController *controlsTabBarController;
+@property (strong) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
+
 @property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *forwardTabButton;
 @property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
@@ -120,8 +123,6 @@
 @property (unsafe_unretained) IBOutlet OpenDocumentsManager *openDocuments;
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 @property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
-@property (unsafe_unretained) IBOutlet MHControlsTabBarController *controlsTabBarController;
-@property (unsafe_unretained) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
 
 @end
 
@@ -226,6 +227,8 @@
 {
   if (_didSetup)
     return;
+  
+  ProjectEntity *project = [self project];
   
 //  NSLog(@"setupDocument");
 
@@ -546,9 +549,7 @@
 }
 
 - (void) cleanUp
-{
-//  NSLog(@"----------- cleanup");
-  
+{  
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
@@ -569,14 +570,17 @@
 		[self.openDocuments.tabView removeTabViewItem:item];
 	}
   
+  // clean up project item tree controller
+  [self.projectItemTreeController unbind:@"managedObjectContext"];
+  self.projectItemTreeController.managedObjectContext = nil;
+  self.projectItemTreeController.project = nil;
+  
   // clear up open documents
   self.openDocuments.texEditorViewController = nil;
   self.openDocuments.delegate = nil;  
   
   // stop KVO
   [self stopObserving];  
-  
-  // tab history
   
   // outline view controller
   [self.outlineViewController stop];
@@ -593,15 +597,9 @@
   
   // commands view
   self.commandsViewController.delegate = nil;
-  
-  // mini console
-  
-  // console viewer
-  
+    
   // pdfviewer
   self.pdfViewer.delegate = nil;
-  
-  // status view controller
   
   // engine settings controller
   self.engineSettings.delegate = nil;
@@ -632,20 +630,16 @@
   self.texEditorViewController.textView.delegate = nil;
   self.texEditorViewController.delegate = nil;
   
-  // image viewer controller
-  
   // file monitor  
   [self.fileMonitor stopTimer];
   self.fileMonitor.delegate = nil;
   
   // template editor
   self.templateEditor.delegate = nil;
+  
+  self.controlsTabBarController = nil;
+  self.infoControlsTabBarController = nil;
     
-  // project
-  
-  // create folder menu
-  
-  // template creator
 }
 
 
@@ -667,9 +661,10 @@
 	}
 }
 
+
 - (void) restoreUIstate
 {
-//  NSLog(@"Restore UI");
+  NSLog(@"Restore UI");
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
   [self.infoControlsTabBarController selectTabAtIndex:0];
@@ -697,7 +692,7 @@
 
 - (void) captureUIstate
 {
-//  NSLog(@"Capturing UI state...");
+  NSLog(@"Capturing UI state...");
   
   
   if (self.project == nil) {
@@ -1583,9 +1578,6 @@
 
 - (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
 {
-  if ([self.infoControlsTabBarController indexOfSelectedTab] == 1) {
-    [self.warningsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-  }
 }
 
 
@@ -1977,7 +1969,7 @@
 - (BOOL) shouldGenerateOutline
 {
   // if outline tab is selected....
-  if ([self.controlsTabBarController indexOfSelectedTab] == 3) {
+  if (self.controlsTabBarController != nil && [self.controlsTabBarController indexOfSelectedTab] == 3) {
     return YES;
   }
   return NO;
@@ -3842,9 +3834,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (BOOL)shouldPerformSpellCheck
 {
   // if info tab is selected....  
-  if ([self.controlsTabBarController indexOfSelectedTab] == 5) {
+  if (self.controlsTabBarController != nil && [self.controlsTabBarController indexOfSelectedTab] == 5) {
     // and if the info tab is 2
-    if ([self.infoControlsTabBarController indexOfSelectedTab] == 2) {
+    if (self.infoControlsTabBarController != nil && [self.infoControlsTabBarController indexOfSelectedTab] == 2) {
       return YES;
     }
   }
