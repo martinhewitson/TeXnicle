@@ -664,7 +664,7 @@
 
 - (void) restoreUIstate
 {
-  NSLog(@"Restore UI");
+//  NSLog(@"Restore UI");
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
   [self.infoControlsTabBarController selectTabAtIndex:0];
@@ -692,7 +692,7 @@
 
 - (void) captureUIstate
 {
-  NSLog(@"Capturing UI state...");
+//  NSLog(@"Capturing UI state...");
   
   
   if (self.project == nil) {
