@@ -43,6 +43,10 @@ NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSec
 NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
 NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWarningsUpdatedNotification";
 
+@interface TPFileEntityMetadata ()
+
+@end
+
 @implementation TPFileEntityMetadata
 
 @synthesize aQueue;
@@ -118,23 +122,15 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
 
-  dispatch_release(queue);
-  
-  
-  
-  
-  
-  
-  
+  dispatch_release(queue);  
 }
 
 - (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
-  
+  __block TPFileEntityMetadata *blockSelf = self;
   dispatch_async(queue, ^{						
     
-    self.sections = [self updateSectionsForTypes:templates forceUpdate:force];
-    self.lastUpdateOfSections = [NSDate date];
+    blockSelf.sections = [self updateSectionsForTypes:templates forceUpdate:force];
     
   });
   
@@ -143,13 +139,16 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   });
   
   dispatch_async(dispatch_get_main_queue(), ^{
+    
+    blockSelf.lastUpdateOfSections = [NSDate date];
+    
     // send notification of section update
-    if (self.parent != nil && self.sections != nil) {
+    if (blockSelf.parent != nil && blockSelf.sections != nil) {
       NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-      NSDictionary *dict = @{@"file": self.parent, @"sections": self.sections};
+      NSDictionary *dict = @{@"file": blockSelf.parent, @"sections": blockSelf.sections};
       
       [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                        object:self
+                        object:blockSelf
                       userInfo:dict];
     }
   });
