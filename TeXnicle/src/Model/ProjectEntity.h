@@ -36,9 +36,9 @@
 
 }
 
-@property (nonatomic, strong) NSString * folder;
-@property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSString * type;
+@property (nonatomic, copy) NSString * folder;
+@property (nonatomic, copy) NSString * name;
+@property (nonatomic, copy) NSString * type;
 @property (nonatomic, strong) NSSet *items;
 @property (nonatomic, strong) FileEntity *mainFile;
 @property (nonatomic, strong) FileEntity *selected;
