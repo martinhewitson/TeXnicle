@@ -42,6 +42,11 @@
   return self;
 }
 
+- (void) dealloc
+{
+  self.file = nil;
+}
+
 
 - (NSAttributedString*)selectedDisplayString
 {
