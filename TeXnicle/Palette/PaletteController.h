@@ -27,6 +27,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
+#import "TPPalette.h"
 
 @class PaletteController;
 
@@ -50,7 +51,7 @@
 }
 
 @property (unsafe_unretained) id<PaletteControllerDelegate> delegate;
-@property (strong) NSArray *palettes;
+@property (strong) TPPalette *palette;
 
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate;
 
