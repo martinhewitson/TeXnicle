@@ -43,6 +43,8 @@
 #import "TPProjectTemplate.h"
 #import "TPProjectTemplateListViewer.h"
 #import "TPSyntaxChecker.h"
+#import "NSWorkspaceExtended.h"
+
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -481,6 +483,9 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   // setup app-wide library
   self.library = [[TPLibrary alloc] init];
   
+  // setup app-wide palette
+  self.palette = [[TPPalette alloc] init];
+  
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
 	for (NSURL *url in recentURLs) {
@@ -500,6 +505,8 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
   
 //  NSLog(@"App finished launching");
 }
+
+
 
 - (void) checkVersion
 {

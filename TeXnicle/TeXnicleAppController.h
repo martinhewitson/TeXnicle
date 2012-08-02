@@ -27,6 +27,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TPLibrary.h"
+#import "TPPalette.h"
 
 @class StartupScreenController;
 
@@ -38,6 +39,8 @@
 
 @property (assign) BOOL openStartupScreenAtAppStartup;
 @property (strong) TPLibrary *library;
+@property (strong) TPPalette *palette;
+
 
 - (void) checkVersion;
 
