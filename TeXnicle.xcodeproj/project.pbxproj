@@ -191,6 +191,8 @@
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
 		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
+		256225CD15CA940600091A8C /* TPPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225CC15CA940600091A8C /* TPPalette.m */; };
+		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
 		2562782C151A061300778FFB /* error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2562782A151A061300778FFB /* error.icns */; };
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
@@ -729,6 +731,10 @@
 		255DB85113E5D5F8007629C0 /* TPImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerController.h; sourceTree = "<group>"; };
 		255DB85213E5D5F8007629C0 /* TPImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerController.m; sourceTree = "<group>"; };
 		255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPImageViewerController.xib; sourceTree = "<group>"; };
+		256225CB15CA940600091A8C /* TPPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPalette.h; sourceTree = "<group>"; };
+		256225CC15CA940600091A8C /* TPPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPalette.m; sourceTree = "<group>"; };
+		256225CF15CA943200091A8C /* NSApplication+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+Palette.h"; sourceTree = "<group>"; };
+		256225D015CA943200091A8C /* NSApplication+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Palette.m"; sourceTree = "<group>"; };
 		25627829151A061300778FFB /* noerror.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = noerror.icns; sourceTree = "<group>"; };
 		2562782A151A061300778FFB /* error.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = error.icns; sourceTree = "<group>"; };
 		25690D7A14F4D26D00E4101D /* NSScanner+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+TeXnicle.h"; sourceTree = "<group>"; };
@@ -1696,6 +1702,10 @@
 				25F2728A13ED7BFA0087E021 /* PaletteController.xib */,
 				25131EAB14E19F320065CDA7 /* MHPaletteTableView.h */,
 				25131EAC14E19F320065CDA7 /* MHPaletteTableView.m */,
+				256225CB15CA940600091A8C /* TPPalette.h */,
+				256225CC15CA940600091A8C /* TPPalette.m */,
+				256225CF15CA943200091A8C /* NSApplication+Palette.h */,
+				256225D015CA943200091A8C /* NSApplication+Palette.m */,
 			);
 			path = Palette;
 			sourceTree = "<group>";
@@ -2655,6 +2665,8 @@
 				255A16F715B54733004290CC /* TPNewCommandsViewController.m in Sources */,
 				255A16FB15B5474B004290CC /* TPCommandSet.m in Sources */,
 				257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */,
+				256225CD15CA940600091A8C /* TPPalette.m in Sources */,
+				256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
