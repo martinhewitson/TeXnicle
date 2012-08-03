@@ -132,11 +132,13 @@
       NSArray *newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
       dispatch_async(dispatch_get_main_queue(), ^{
         // send notification of section update
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        NSDictionary *dict = @{@"file": file, @"sections": newSections};
-        [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                          object:self
-                        userInfo:dict];
+        if (file != nil && newSections != nil) {
+          NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+          NSDictionary *dict = @{@"file": file, @"sections": newSections};
+          [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+                            object:self
+                          userInfo:dict];
+        }
       });
     });
         
