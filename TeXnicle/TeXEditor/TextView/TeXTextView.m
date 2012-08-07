@@ -408,6 +408,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];  
 }
 
+- (IBAction)toggleCommentForParagraph:(id)sender
+{
+  [self selectParagraph:self];
+  [self performSelector:@selector(toggleCommentForSelection:) withObject:self afterDelay:0];
+}
+
 // Toggle the commented out state for the current selection
 - (IBAction) toggleCommentForSelection:(id)sender
 {
@@ -3160,70 +3166,77 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // a good place to start from.
 	NSRange pRange = [self rangeForCurrentParagraph];
   
-	NSInteger pStartIndex = startIndex - pRange.location;
-  NSInteger idx = pStartIndex;
-  NSString *paragraphString = [[self string] substringWithRange:pRange];
-  NSInteger newStart = NSNotFound;
-  // go backwards from the current position and stop when:
-  //   1. we reach an empty line
-  //   2. we reach a { or a }  
-  while (idx >= 0) {    
-    if ([paragraphString characterAtIndex:idx] == '{' ||
-        [paragraphString characterAtIndex:idx] == '}') {
-      
-      // go forwards now until we have a real character
-      idx++;
-      while (idx < [paragraphString length]) {
-        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
-            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
-            ) {
-          break;
-        }
-        idx++;
-      }
-      
-      newStart = idx;
-      break;
-    }    
-    idx--;
-  }
-  
-  // go forwards until we reach:
-  // 1. an empty line
-  // 2. a { or a } or a '\'
-  NSInteger newEnd = NSNotFound;
-  idx = pStartIndex;
-  while( idx < [paragraphString length]) {
-    if ([paragraphString characterAtIndex:idx] == '{' ||
-        [paragraphString characterAtIndex:idx] == '}' ||
-        [paragraphString characterAtIndex:idx] == '\\' 
-        ) {
-      
-      // go backwards until we have a real character
-      idx--;
-      while (idx >= 0) {
-        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
-            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
-            ) {
-          break;
-        }
-        idx--;
-      }
-      
-      newEnd = idx+1;
-      break;
-    }    
-    idx++;
-  }
-  
-  if (newStart != NSNotFound && newEnd != NSNotFound) {
-    if (newStart >= 0 && newStart < newEnd && newEnd < [[self string] length]) {
-      pRange = NSMakeRange(pRange.location + newStart, newEnd-newStart);  
-    }
-  }
+//	NSInteger pStartIndex = startIndex - pRange.location;
+//  NSInteger idx = pStartIndex;
+//  NSString *paragraphString = [[self string] substringWithRange:pRange];
+//  NSInteger newStart = NSNotFound;
+//  // go backwards from the current position and stop when:
+//  //   1. we reach an empty line
+//  //   2. we reach a { or a }  
+//  while (idx >= 0) {    
+//    if ([paragraphString characterAtIndex:idx] == '{' ||
+//        [paragraphString characterAtIndex:idx] == '}') {
+//      
+//      // go forwards now until we have a real character
+//      idx++;
+//      while (idx < [paragraphString length]) {
+//        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
+//            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
+//            ) {
+//          break;
+//        }
+//        idx++;
+//      }
+//      
+//      newStart = idx;
+//      break;
+//    }    
+//    idx--;
+//  }
+//  
+//  // go forwards until we reach:
+//  // 1. an empty line
+//  // 2. a { or a } or a '\'
+//  NSInteger newEnd = NSNotFound;
+//  idx = pStartIndex;
+//  while( idx < [paragraphString length]) {
+//    if ([paragraphString characterAtIndex:idx] == '{' ||
+//        [paragraphString characterAtIndex:idx] == '}' ||
+//        [paragraphString characterAtIndex:idx] == '\\' 
+//        ) {
+//      
+//      // go backwards until we have a real character
+//      idx--;
+//      while (idx >= 0) {
+//        if (![newLineCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]] &&
+//            ![whitespaceCharacterSet characterIsMember:[paragraphString characterAtIndex:idx]]
+//            ) {
+//          break;
+//        }
+//        idx--;
+//      }
+//      
+//      newEnd = idx+1;
+//      break;
+//    }    
+//    idx++;
+//  }
+//  
+//  if (newStart != NSNotFound && newEnd != NSNotFound) {
+//    if (newStart >= 0 && newStart < newEnd && newEnd < [[self string] length]) {
+//      pRange = NSMakeRange(pRange.location + newStart, newEnd-newStart);  
+//    }
+//  }
   
   [self reformatRange:pRange];
+  
 	return;
+}
+
+- (IBAction)selectParagraph:(id)sender
+{
+	NSRange pRange = [self rangeForCurrentParagraph];
+  [self setSelectedRange:pRange];
 }
 
 - (IBAction) reformatRange:(NSRange)pRange
@@ -3242,25 +3255,50 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	// Now go through and put in \n when we are past the linelength
   //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
 	NSString *lineBreakStr = [NSString stringWithFormat:@"\n"];
-	int loc = 0;
+	NSInteger loc = 0;
   NSInteger count = 0;
 	while (loc < [newString length]) {
+//    NSLog(@"Checking location %d = '%c'", loc, [newString characterAtIndex:loc]);
 		if (count >= lineWrapLength) {
-			if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+//      NSLog(@"  past line wrap");
+      if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+        // if we already have a newline, reset the count
+//        NSLog(@"    already have newline");
+        count = 0;
+      } else if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
         // rewind to previous whitespace if we are past the line length
+//        NSLog(@"   rewinding to last whitespace");
+        NSInteger start = loc;
         if (count > lineWrapLength) {
           loc--;
-          while (loc >= 0 
-                 && ![whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]] 
-                 && ![newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {            
+          
+          // WE NEED TO CHECK IF WE ACTUALLY FIND A WHITESPACE OR NEWLINE, OTHERWISE CARRY ON FROM WHERE WE WERE!!
+          BOOL rewound = NO;
+          while (loc >= 0) {
+//            NSLog(@"      checking char '%c'", [newString characterAtIndex:loc]);
+            if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+              rewound = YES;
+              break;
+            }
+            
+            if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+              break;
+            }
             loc--;
+          }
+          
+          if (rewound == NO) {
+            loc = start;
           }
         }
         
+//        NSLog(@"   replacing newline at %d", loc);
 				newString = [newString stringByReplacingCharactersInRange:NSMakeRange(loc, 1)
 																											 withString:lineBreakStr];
         count = 0;
-			}
+			} else {
+        // do nothing
+      }
 		}
     count++;
 		loc++;

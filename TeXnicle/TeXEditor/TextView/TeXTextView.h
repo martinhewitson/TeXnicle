@@ -110,6 +110,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (IBAction) toggleControlCharacters:(id)sender;
 - (IBAction) toggleInvisibleCharacters:(id)sender;
 - (IBAction) toggleCommentForSelection:(id)sender;
+- (IBAction)toggleCommentForParagraph:(id)sender;
 - (IBAction)commentSelection:(id)sender;
 - (IBAction)uncommentSelection:(id)sender;
 
@@ -181,10 +182,12 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (BOOL) autocompleteCommand;
 - (BOOL) autocompleteArgument;
 
+
 - (void) jumpToLine:(NSInteger)aLinenumber select:(BOOL)selectLine;
 - (void) jumpToLine:(NSInteger)aLinenumber inFile:(FileEntity*)aFile select:(BOOL)selectLine;
 - (void) selectRange:(NSRange)aRange scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
 - (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate;
+- (IBAction)selectParagraph:(id)sender;
 
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
