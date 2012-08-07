@@ -594,6 +594,15 @@
 								</object>
 								<object class="NSMenuItem" id="66026405">
 									<reference key="NSMenu" ref="789758025"/>
+									<string key="NSTitle">Select Paragraph</string>
+									<string key="NSKeyEquiv">q</string>
+									<int key="NSKeyEquivModMask">786432</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="147145230">
+									<reference key="NSMenu" ref="789758025"/>
 									<string key="NSTitle">Reformat Paragraph</string>
 									<string key="NSKeyEquiv">q</string>
 									<int key="NSKeyEquivModMask">262144</int>
@@ -1466,6 +1475,15 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="666130997">
+									<reference key="NSMenu" ref="438284456"/>
+									<string key="NSTitle">Comment Paragraph</string>
+									<string key="NSKeyEquiv">/</string>
+									<int key="NSKeyEquivModMask">1835008</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
 								<object class="NSMenuItem" id="279422749">
 									<reference key="NSMenu" ref="438284456"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -2148,14 +2166,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">reformatParagraph:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="66026405"/>
-					</object>
-					<int key="connectionID">575</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">showSpellingList:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="345210975"/>
@@ -2828,6 +2838,30 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">reformatParagraph:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="147145230"/>
+					</object>
+					<int key="connectionID">838</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">selectParagraph:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="66026405"/>
+					</object>
+					<int key="connectionID">839</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleCommentForParagraph:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="666130997"/>
+					</object>
+					<int key="connectionID">842</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -3052,6 +3086,7 @@
 							<reference ref="345210975"/>
 							<reference ref="942438780"/>
 							<reference ref="576632131"/>
+							<reference ref="147145230"/>
 						</array>
 						<reference key="parent" ref="952259628"/>
 					</object>
@@ -3988,6 +4023,7 @@
 							<reference ref="611978844"/>
 							<reference ref="279422749"/>
 							<reference ref="242644186"/>
+							<reference ref="666130997"/>
 						</array>
 						<reference key="parent" ref="212066011"/>
 					</object>
@@ -4195,6 +4231,16 @@
 						<reference key="object" ref="226815707"/>
 						<reference key="parent" ref="561089521"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">837</int>
+						<reference key="object" ref="147145230"/>
+						<reference key="parent" ref="789758025"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">840</int>
+						<reference key="object" ref="666130997"/>
+						<reference key="parent" ref="438284456"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4401,13 +4447,15 @@
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="831.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="834.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="837.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="840.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">836</int>
+			<int key="maxID">842</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5680,128 +5728,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">TPSectionListController</string>
-					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addMarkAction:">id</string>
-						<string key="calculateSections:">id</string>
-						<string key="gotoSection:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addMarkAction:">
-							<string key="name">addMarkAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="calculateSections:">
-							<string key="name">calculateSections:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="gotoSection:">
-							<string key="name">gotoSection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="delegate">id</string>
-						<string key="popupMenu">NSPopUpButton</string>
-						<string key="textView">NSTextView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="delegate">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="popupMenu">
-							<string key="name">popupMenu</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textView">
-							<string key="name">textView</string>
-							<string key="candidateClassName">NSTextView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TPSectionListController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TeXEditorViewController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="insertTable:">id</string>
-						<string key="showErrorMenu:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="insertTable:">
-							<string key="name">insertTable:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showErrorMenu:">
-							<string key="name">showErrorMenu:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="containerView">NSView</string>
-						<string key="errorPopup">NSButton</string>
-						<string key="jumpBar">NSView</string>
-						<string key="markerButton">NSButton</string>
-						<string key="scrollView">NSScrollView</string>
-						<string key="sectionListController">TPSectionListController</string>
-						<string key="sectionListPopup">NSPopUpButton</string>
-						<string key="tableConfigureWindow">NSWindow</string>
-						<string key="textView">TeXTextView</string>
-						<string key="unfoldButton">NSButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="containerView">
-							<string key="name">containerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="errorPopup">
-							<string key="name">errorPopup</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="jumpBar">
-							<string key="name">jumpBar</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="markerButton">
-							<string key="name">markerButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="scrollView">
-							<string key="name">scrollView</string>
-							<string key="candidateClassName">NSScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sectionListController">
-							<string key="name">sectionListController</string>
-							<string key="candidateClassName">TPSectionListController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sectionListPopup">
-							<string key="name">sectionListPopup</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tableConfigureWindow">
-							<string key="name">tableConfigureWindow</string>
-							<string key="candidateClassName">NSWindow</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textView">
-							<string key="name">textView</string>
-							<string key="candidateClassName">TeXTextView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="unfoldButton">
-							<string key="name">unfoldButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TeXEditorViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">TeXProjectDocument</string>
 					<string key="superclassName">NSPersistentDocument</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -5828,6 +5754,8 @@
 						<string key="locateItem:">id</string>
 						<string key="newFile:">id</string>
 						<string key="newFolder:">id</string>
+						<string key="newFolderOnDisk:">id</string>
+						<string key="newGroupFolder:">id</string>
 						<string key="newMainTeXFile:">id</string>
 						<string key="newTeXFile:">id</string>
 						<string key="nextBookmark:">id</string>
@@ -5836,7 +5764,6 @@
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
-						<string key="projectTypeChanged:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
@@ -5948,6 +5875,14 @@
 							<string key="name">newFolder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="newFolderOnDisk:">
+							<string key="name">newFolderOnDisk:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="newGroupFolder:">
+							<string key="name">newGroupFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="newMainTeXFile:">
 							<string key="name">newMainTeXFile:</string>
 							<string key="candidateClassName">id</string>
@@ -5978,10 +5913,6 @@
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="projectTypeChanged:">
-							<string key="name">projectTypeChanged:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -6260,10 +6191,11 @@
 						<string key="insertInlineMath:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
-						<string key="pasteAsImage:">id</string>
 						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
+						<string key="selectParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
+						<string key="toggleCommentForParagraph:">id</string>
 						<string key="toggleCommentForSelection:">id</string>
 						<string key="toggleControlCharacters:">id</string>
 						<string key="toggleInvisibleCharacters:">id</string>
@@ -6310,10 +6242,6 @@
 							<string key="name">jumpToPreviousPlaceholder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="pasteAsImage:">
-							<string key="name">pasteAsImage:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="pasteTable:">
 							<string key="name">pasteTable:</string>
 							<string key="candidateClassName">id</string>
@@ -6322,8 +6250,16 @@
 							<string key="name">reformatParagraph:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="selectParagraph:">
+							<string key="name">selectParagraph:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showSpellingList:">
 							<string key="name">showSpellingList:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleCommentForParagraph:">
+							<string key="name">toggleCommentForParagraph:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleCommentForSelection:">
