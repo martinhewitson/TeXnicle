@@ -3265,25 +3265,35 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) showDocument
 {
-  //  NSLog(@"Show doc");
-  NSView *view = [self.pdfViewerController.pdfview documentView];    
-  PDFPage *page = [self.pdfViewerController.pdfview currentPage];
-  NSInteger index = [self.pdfViewerController.pdfview.document indexForPage:page];
-  NSRect r = [view visibleRect];
-  //  NSLog(@"Visible rect %@", NSStringFromRect(r));
-  BOOL hasDoc = [self.pdfViewerController hasDocument];
-  [self.pdfViewerController redisplayDocument];
-  if (hasDoc) {
-    PDFDisplayMode mode = [self.pdfViewerController.pdfview displayMode];
-    if (mode == kPDFDisplaySinglePageContinuous ||
-        mode == kPDFDisplayTwoUpContinuous) {
-      [view scrollRectToVisible:r];
-    } else {
-      if (page) {
-        [self.pdfViewerController.pdfview goToPage:[self.pdfViewerController.pdfview.document pageAtIndex:index]];
+  [self asyncShowDocument];
+}
+
+- (void) asyncShowDocument
+{
+  __block PDFViewerController *blockPdfViewControler = self.pdfViewerController;
+  
+  dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  dispatch_sync(globalQueue, ^{
+    //  NSLog(@"Show doc");
+    NSView *view = [blockPdfViewControler.pdfview documentView];
+    PDFPage *page = [blockPdfViewControler.pdfview currentPage];
+    NSInteger index = [blockPdfViewControler.pdfview.document indexForPage:page];
+    NSRect r = [view visibleRect];
+    //  NSLog(@"Visible rect %@", NSStringFromRect(r));
+    BOOL hasDoc = [blockPdfViewControler hasDocument];
+    [blockPdfViewControler redisplayDocument];
+    if (hasDoc) {
+      PDFDisplayMode mode = [blockPdfViewControler.pdfview displayMode];
+      if (mode == kPDFDisplaySinglePageContinuous ||
+          mode == kPDFDisplayTwoUpContinuous) {
+        [view scrollRectToVisible:r];
+      } else {
+        if (page) {
+          [blockPdfViewControler.pdfview goToPage:[blockPdfViewControler.pdfview.document pageAtIndex:index]];
+        }
       }
     }
-  }
+  });
 }
 
 
