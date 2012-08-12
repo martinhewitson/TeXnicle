@@ -271,7 +271,7 @@
 - (IBAction)activateAllErrorChecks:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+  NSMutableArray *errors = [[defaults arrayForKey:TPCheckSyntaxErrors] mutableCopy];
   for (NSDictionary *error in errors) {
     
     NSDictionary *newError = @{@"check": @YES, 
@@ -288,7 +288,7 @@
 - (IBAction)deactivateAllErrorChecks:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+  NSMutableArray *errors = [[defaults arrayForKey:TPCheckSyntaxErrors] mutableCopy];
   for (NSDictionary *error in errors) {
     
     NSDictionary *newError = @{@"check": @NO, 
@@ -332,7 +332,7 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
   if (tableView == syntaxErrorsTable) {
-    NSMutableArray *errors = [defaults mutableArrayValueForKey:TPCheckSyntaxErrors];
+    NSMutableArray *errors = [[defaults arrayForKey:TPCheckSyntaxErrors] mutableCopy];
     if (row >= 0 && row < [errors count]) {
       if ([[tableColumn identifier] isEqualToString:@"SyntaxErrorsCheckColumn"]) {
         NSDictionary *error = errors[row];
@@ -352,25 +352,25 @@
       [[userCommandsController arrangedObjects][row] setValue:newCommand forKey:@"Name"];
     }
   } else if (tableView == citeCommandsTable) {
-    NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+    NSMutableArray *commands = [[defaults arrayForKey:TECiteCommands] mutableCopy];
     if (row >= 0 && row < [commands count]) {
       commands[row] = newCommand;
       [defaults setObject:commands forKey:TECiteCommands];
     }
   } else if (tableView == refCommandsTable) {
-    NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+    NSMutableArray *commands = [[defaults arrayForKey:TERefCommands] mutableCopy];
     if (row >= 0 && row < [commands count]) {
       commands[row] = newCommand;
       [defaults setObject:commands forKey:TERefCommands];
     }
   } else if (tableView == fileCommandsTable) {
-    NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+    NSMutableArray *commands = [[defaults arrayForKey:TEFileCommands] mutableCopy];
     if (row >= 0 && row < [commands count]) {
       commands[row] = newCommand;
       [defaults setObject:commands forKey:TEFileCommands];
     }
   } else if (tableView == beginCommandsTable) {
-    NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+    NSMutableArray *commands = [[defaults arrayForKey:TEBeginCommands] mutableCopy];
     if (row >= 0 && row < [commands count]) {
       newCommand = [newCommand stringByReplacingOccurrencesOfString:@"\\" withString:@""];
       commands[row] = newCommand;
@@ -469,7 +469,7 @@
 {
   NSString *newCommand = @"\\newCite";
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TECiteCommands] mutableCopy];
   [commands addObject:newCommand];
   [defaults setObject:commands forKey:TECiteCommands];
   [defaults synchronize];
@@ -482,7 +482,7 @@
 - (IBAction)deleteSelectedCiteCommand:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TECiteCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TECiteCommands] mutableCopy];
   NSInteger row = [citeCommandsTable selectedRow];
   if (row >=0 && row < [commands count]) {
     [commands removeObjectAtIndex:row];
@@ -499,7 +499,7 @@
 {
   NSString *newCommand = @"\\newRef";
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TERefCommands] mutableCopy];
   [commands addObject:newCommand];
   [defaults setObject:commands forKey:TERefCommands];
   [defaults synchronize];
@@ -511,7 +511,7 @@
 - (IBAction)deleteSelectedRefCommand:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TERefCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TERefCommands] mutableCopy];
   NSInteger row = [refCommandsTable selectedRow];
   if (row >=0 && row < [commands count]) {
     [commands removeObjectAtIndex:row];
@@ -529,7 +529,7 @@
 {
   NSString *newCommand = @"\\newFile";
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TEFileCommands] mutableCopy];
   [commands addObject:newCommand];
   [defaults setObject:commands forKey:TEFileCommands];
   [defaults synchronize];
@@ -541,7 +541,7 @@
 - (IBAction)deleteSelectedFileCommand:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEFileCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TEFileCommands] mutableCopy];
   NSInteger row = [fileCommandsTable selectedRow];
   if (row >=0 && row < [commands count]) {
     [commands removeObjectAtIndex:row];
@@ -558,7 +558,7 @@
 {
   NSString *newCommand = @"newBegin";
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TEBeginCommands] mutableCopy];
   [commands addObject:newCommand];
   [defaults setObject:commands forKey:TEBeginCommands];
   [defaults synchronize];
@@ -570,7 +570,7 @@
 - (IBAction)deleteSelectedBeginCommand:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *commands = [defaults mutableArrayValueForKey:TEBeginCommands];
+  NSMutableArray *commands = [[defaults arrayForKey:TEBeginCommands] mutableCopy];
   NSInteger row = [beginCommandsTable selectedRow];
   if (row >=0 && row < [commands count]) {
     [commands removeObjectAtIndex:row];
