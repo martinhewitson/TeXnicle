@@ -245,7 +245,13 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 //        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
         if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:[aScanner scanLocation]] || isMarker) {
           NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-          NSString *arg = [returnResult stringByReplacingOccurrencesOfString:type withString:@""];
+          NSString *arg = [returnResult argument];
+          if (arg == nil) {
+            // just take the rest of the line
+            NSRange typeRange = [returnResult rangeOfString:type];
+            arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+          }
+          
           type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
           type = [type uppercaseString];
           arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
