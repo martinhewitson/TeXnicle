@@ -47,6 +47,7 @@
 
 @property (strong) TPSyntaxChecker *checker;
 @property (copy) NSString *temporaryFileForSyntaxCheck;
+@property (assign) BOOL needsSyntaxCheck;
 
 @property (strong) NSOperationQueue* aQueue;
 @property (unsafe_unretained) FileEntity *parent;

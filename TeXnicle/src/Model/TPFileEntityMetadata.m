@@ -58,7 +58,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     self.parent = aFile;
     self.lastUpdateOfSections = nil;
     self.needsUpdate = NO;
-    
+    self.needsSyntaxCheck = NO;
     
     queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
     dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
@@ -97,10 +97,9 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
                        context:(void *)context
 {
 	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]]) {	
-    self.needsUpdate = YES;
-  }
-	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]]) {	
-    self.needsUpdate = YES;
+    self.needsSyntaxCheck = YES;
+  } else if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]]) {
+    self.needsSyntaxCheck = YES;
   }
 }
 
@@ -191,7 +190,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   NSDate *lastUpdate = self.lastMetadataUpdate;
   __block TPFileEntityMetadata *blockSelf = self;
   
-  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {    
+  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {
     if ([self.aQueue operationCount] == 0) {
       currentOperation = [[TPMetadataOperation alloc] initWithFile:self.parent];      
       [currentOperation setCompletionBlock:^{
@@ -204,21 +203,27 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
       [self.aQueue addOperation:currentOperation];
     }
     
+    self.lastMetadataUpdate = [NSDate date];
+  }
+  
+  if ([lastEdit timeIntervalSinceDate:lastUpdate] > 1 || lastUpdate == nil || self.needsSyntaxCheck) {
     //-------------- syntax errors
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
-    if ([[defaults valueForKey:TPCheckSyntax] boolValue]) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults valueForKey:TPCheckSyntax] boolValue] == YES) {
       if ([self.parent.extension isEqualToString:@"tex"]) {
         NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
-        if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
+        if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {
           self.temporaryFileForSyntaxCheck = path;
           [self.checker checkSyntaxOfFileAtPath:self.temporaryFileForSyntaxCheck];
         }
-      } 
+      }
     } else {
       // clear errors
       self.syntaxErrors = @[];
-      [self postUpdateNotification];
+      [self postWarningsUpdateNotification];
     }
+
+    self.needsSyntaxCheck = NO;
     self.lastMetadataUpdate = [NSDate date];
   }  
 }
