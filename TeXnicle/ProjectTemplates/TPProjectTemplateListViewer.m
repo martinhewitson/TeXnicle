@@ -33,6 +33,7 @@
 
 @property (strong) TPProjectTemplateListViewController *listViewController;
 @property (unsafe_unretained) IBOutlet NSView *listViewContainer;
+@property (strong) TPProjectTemplateViewer *viewer;
 
 @end
 
@@ -73,20 +74,19 @@
   TPProjectTemplate *selected = [self.listViewController selectedTemplate];
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
-  TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
+  self.viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
   
-  if (viewer == nil) {
+  if (self.viewer == nil) {
     [NSApp presentError:error];
     return;
   }
   
-  viewer.delegate = self;
+  self.viewer.delegate = self;
   
-  [viewer makeWindowControllers];
-  NSWindowController *wc = [viewer windowControllers][0];
+  [self.viewer makeWindowControllers];
+  NSWindowController *wc = [self.viewer windowControllers][0];
   [wc window];
-  [viewer createNewProject:sender];
-  
+  [self.viewer createNewProject:sender];  
 }
 
 #pragma mark -

@@ -179,7 +179,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       // load this file from disk
       [aDoc reloadFromDisk];
 		}
-    
+        
     [openDocuments addObject:aDoc];
     NSDictionary *dictionary = @{@"file": aDoc};
     [[NSNotificationCenter defaultCenter] postNotificationName:TPOpenDocumentsDidAddFileNotification

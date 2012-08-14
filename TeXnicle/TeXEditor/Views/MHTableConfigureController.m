@@ -36,6 +36,12 @@
 
 @implementation MHTableConfigureController
 
+
+- (void) dealloc
+{
+  self.delegate = nil;
+}
+
 - (id)initWithDelegate:(id<MHTableConfigureDelegate>)aDelegate
 {
   self = [super initWithWindowNibName:@"MHTableConfigureWindow"];

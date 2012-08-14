@@ -80,7 +80,7 @@
 
 
 - (BOOL)isText
-{
+{  
   // work-around for engine files.
   if ([self isEqualToString:@"engine"]) {
     return YES;
@@ -97,22 +97,6 @@
       return YES;
     }
   }
-    
-//  NSLog(@"Checking ext %@", self);
-  
-//  BOOL fileIsText = NO;
-//    
-//  CFStringRef fileExtension = (CFStringRef) self;
-//  CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
-//  if (UTTypeConformsTo(fileUTI, kUTTypeText)) {
-//    fileIsText = YES;
-//  }  
-//
-//  NSLog(@"File is text? %d", fileIsText);
-//  
-//  CFRelease(fileUTI);
-//  
-//  return fileIsText;
   
   BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:self isValidForType:(NSString *)kUTTypeText];  
   

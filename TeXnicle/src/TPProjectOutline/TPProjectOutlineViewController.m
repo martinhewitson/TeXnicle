@@ -26,6 +26,7 @@
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.outlineView = nil;
+  self.delegate = nil;
 }
 
 - (id)initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate

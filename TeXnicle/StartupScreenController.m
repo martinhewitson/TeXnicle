@@ -39,6 +39,8 @@
 @property (strong) TPProjectTemplateListViewController *templateListViewController;
 @property (unsafe_unretained) IBOutlet NSView *templateListContainer;
 
+@property (strong) TPProjectTemplateViewer *templateViewer;
+
 @end
 
 @implementation StartupScreenController
@@ -161,6 +163,7 @@
 -(IBAction)displayOrCloseWindow:(id)sender 
 {
   // set back to start state
+  [self cancelTemplateProject:self];
   [self cancelNewProject:self];
   
 	//Fades in & out nicely
@@ -227,17 +230,17 @@
   TPProjectTemplate *selected = [self.templateListViewController selectedTemplate];
   NSURL *templateURL = [NSURL fileURLWithPath:selected.path];
   NSError *error = nil;
-  TPProjectTemplateViewer *viewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
-  if (viewer == nil) {
+  self.templateViewer = [[TPProjectTemplateViewer alloc] initWithContentsOfURL:templateURL ofType:@"tpt" error:&error];
+  if (self.templateViewer == nil) {
     [NSApp presentError:error];
     return;
   }
   
-  [viewer makeWindowControllers];
-  NSWindowController *wc = [viewer windowControllers][0];
+  [self.templateViewer makeWindowControllers];
+  NSWindowController *wc = [self.templateViewer windowControllers][0];
   [wc window];
-  [viewer createNewProject:sender];
   [self displayOrCloseWindow:self];
+  [self.templateViewer createNewProject:sender];
 }
 
 - (IBAction)newProjectFromTemplate:(id)sender

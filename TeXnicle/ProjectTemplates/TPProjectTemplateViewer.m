@@ -43,18 +43,18 @@
 @property (strong) ProjectEntity *project;
 @property (strong) NSManagedObjectContext *managedObjectContext;
 @property (strong) TPTemplateDirectory *root;
-@property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionDisplay;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-@property (unsafe_unretained) IBOutlet NSView *projectNameView;
-@property (unsafe_unretained) IBOutlet NSTextField *projectNameField;
+@property (strong) IBOutlet NSTextField *templateDescriptionDisplay;
+@property (strong) IBOutlet NSOutlineView *outlineView;
+@property (strong) IBOutlet NSView *projectNameView;
+@property (strong) IBOutlet NSTextField *projectNameField;
 @property (copy) NSString *templateName;
 @property (copy) NSString *templateDescription;
 
-@property (unsafe_unretained) IBOutlet NSView *leftView;
-@property (unsafe_unretained) IBOutlet NSView *rightView;
+@property (strong) IBOutlet NSView *leftView;
+@property (strong) IBOutlet NSView *rightView;
 
 @property (strong) TeXEditorViewController *texEditorViewController;
-@property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
+@property (strong) IBOutlet NSView *texEditorContainer;
 
 
 @end
@@ -64,6 +64,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.texEditorViewController.delegate = nil;
 }
 
 - (id)initWithProject:(ProjectEntity*)aProject name:(NSString*)aName description:(NSString*)aDescription
@@ -123,7 +124,8 @@
   [self.texEditorContainer addSubview:self.texEditorViewController.view];
   [self.texEditorViewController disableEditor];
   [self.texEditorViewController disableJumpBar];
-  [self.texEditorViewController performSelector:@selector(setString:) withObject:@"" afterDelay:0.0];
+  [self.texEditorViewController setString:@""];
+//  [self.texEditorViewController performSelector:@selector(setString:) withObject:@"" afterDelay:0.0];
   
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

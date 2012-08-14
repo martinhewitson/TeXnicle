@@ -57,7 +57,8 @@
 - (id) init
 {
   self = [self initWithNibName:@"TeXEditorViewController" bundle:nil];
-  if (self) {    
+  if (self) {
+    self.delegate = nil;
   }
   return self;
 }
@@ -67,6 +68,7 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     // Initialization code here.
+    self.delegate = nil;
     self.errorImage = [NSImage imageNamed:@"error"];
     self.noErrorImage = [NSImage imageNamed:@"noerror"];  
     self.checkFailedImage = [NSImage imageNamed:@"checkfailed"];
@@ -522,7 +524,7 @@
 
 -(BOOL)shouldSyntaxHighlightDocument
 {
-  if ([self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     return [self.delegate shouldSyntaxHighlightDocument];
   }
   return NO;

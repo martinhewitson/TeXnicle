@@ -349,7 +349,7 @@
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
+  self.delegate = nil;
 }
 
 - (id) initWithDelegate:(id<SyntaxCheckerDelegate>)aDelegate

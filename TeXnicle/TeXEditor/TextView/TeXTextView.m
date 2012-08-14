@@ -571,8 +571,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) colorVisibleText
 {
 //  NSLog(@"Color visible text: delegate %@", self.delegate);
-  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
-    if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
+  if ([self delegate] && [[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    if (![[self delegate] performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
     }
   }

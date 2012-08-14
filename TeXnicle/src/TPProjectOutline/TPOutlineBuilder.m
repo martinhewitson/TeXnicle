@@ -108,6 +108,7 @@
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
+  self.delegate = nil;
 }
 
 - (void) buildOutline

@@ -264,10 +264,10 @@
     
   // Setup text view  
   self.texEditorViewController = [[TeXEditorViewController alloc] init];
-  [self.texEditorViewController setDelegate:self];
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
+  [self.texEditorViewController setDelegate:self];
   [self.texEditorViewController setPerformSyntaxCheck:YES];
   [self.texEditorViewController setupSyntaxChecker];
   

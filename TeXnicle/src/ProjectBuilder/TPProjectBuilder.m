@@ -94,8 +94,7 @@
     [NSApp presentError:openError];
     return nil;
   }  
-  
-  [pb populateDocument:doc];  
+  [pb populateDocument:doc];
   
   return doc;
 }
@@ -248,7 +247,7 @@
     ProjectEntity *project = [aDocument project];
     NSManagedObjectContext *moc = [aDocument managedObjectContext];	
     FileEntity *file = [self addFileAtPath:mainFilePath toFolder:nil inProject:project inMOC:moc];
-    // set as main file	
+    // set as main file
     [project setValue:file forKey:@"mainFile"];
     self.reportString = [[NSMutableAttributedString alloc] init];
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
@@ -388,7 +387,7 @@
   
   // check if the file was a text file
 	BOOL isTextFile = NO;
-	if ([fullpath isText]) {
+	if ([[fullpath pathExtension] isText]) {
 		isTextFile = YES;
 	}	
   

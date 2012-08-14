@@ -48,7 +48,7 @@
 @property (assign) BOOL performSyntaxCheck;
 @property (assign) BOOL isHidden;
 @property (unsafe_unretained) id delegate;
-@property (unsafe_unretained) IBOutlet TeXTextView *textView;
+@property (strong) IBOutlet TeXTextView *textView;
 
 - (void) handleDocumentChanged:(NSNotification*)aNote;
 - (void) setupSyntaxChecker;

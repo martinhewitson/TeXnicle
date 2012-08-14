@@ -6,6 +6,34 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.0 beta 50 -->
+		<item>
+      <title>Version 2.0 (beta 50)</title>
+      <description><![CDATA[
+        <p>
+        <b>This release drops support for 32-bit machines.</b>
+        As such it uses the new Objective-C memory management system (ARC) which
+        should provide significant stability improvement in the long run. This version
+        includes a number of bug fixes and improvements.
+        </p>
+        <p>
+        This is intended to be the last beta release of version 2.0.
+        </p>
+        <p>
+        This version is tested to work Mountain Lion.
+        <p>
+      ]]></description>
+      <pubDate>12th August 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta50.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="50"
+      length="15120671"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFFJfoWq+j7QX+nFzfqAuBX/Kv0XeAhQs0qsc7LV+qNnehWryQEOl4VVSXw=="
+      />
+    </item>
+    
+    
     
     <!-- Version 2.0 beta 49 -->
 		<item>

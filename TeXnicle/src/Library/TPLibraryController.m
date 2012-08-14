@@ -104,6 +104,7 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.selectedEntry setContent:nil];
+  self.delegate = nil;
   
 }
 
