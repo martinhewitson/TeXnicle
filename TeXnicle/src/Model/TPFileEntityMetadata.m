@@ -129,7 +129,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   __block TPFileEntityMetadata *blockSelf = self;
   dispatch_async(queue, ^{						
     
-    blockSelf.sections = [self updateSectionsForTypes:templates forceUpdate:force];
+    blockSelf.sections = [blockSelf updateSectionsForTypes:templates forceUpdate:force];
     
   });
   
