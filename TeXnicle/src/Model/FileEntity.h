@@ -81,6 +81,6 @@
 #pragma mark Metadata
 
 - (NSArray*) listOfNewCommands;
-- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 
 @end

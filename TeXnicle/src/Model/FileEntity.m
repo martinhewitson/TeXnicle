@@ -556,11 +556,12 @@
   return [self.metadata listOfNewCommands];
 }
 
-- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force 
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
   if (self.metadata) {
-    [self.metadata generateSectionsForTypes:templates forceUpdate:force];
+    return [self.metadata generateSectionsForTypes:templates forceUpdate:force];
   }
+  return @[];
 }
 
 - (NSString*) text
