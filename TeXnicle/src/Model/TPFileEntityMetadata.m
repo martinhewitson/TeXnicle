@@ -124,50 +124,47 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   dispatch_release(queue);  
 }
 
-- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
-  __block TPFileEntityMetadata *blockSelf = self;
-  dispatch_async(queue, ^{						
-    
-    blockSelf.sections = [blockSelf updateSectionsForTypes:templates forceUpdate:force];
-    
-  });
+//  __block TPFileEntityMetadata *blockSelf = self;
+//  dispatch_async(queue, ^{
   
-  dispatch_sync(queue, ^{						
-    // both blocks have completed
-  });
-  
-  dispatch_async(dispatch_get_main_queue(), ^{
+    [self updateSectionsForTypes:templates forceUpdate:force];
     
-    blockSelf.lastUpdateOfSections = [NSDate date];
-    
-    // send notification of section update
-    if (blockSelf.parent != nil && blockSelf.sections != nil) {
-      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-      NSDictionary *dict = @{@"file": blockSelf.parent, @"sections": blockSelf.sections};
-      
-      [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                        object:blockSelf
-                      userInfo:dict];
-    }
-  });
+//  });
+  
+//  dispatch_sync(queue, ^{						
+//    // both blocks have completed
+//  });
+  
+//  dispatch_async(dispatch_get_main_queue(), ^{
+//    
+//    blockSelf.lastUpdateOfSections = [NSDate date];
+  
+//    // send notification of section update
+//    if (blockSelf.parent != nil && blockSelf.sections != nil) {
+//      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+//      NSDictionary *dict = @{@"file": blockSelf.parent, @"sections": blockSelf.sections};
+//      
+//      [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
+//                        object:blockSelf
+//                      userInfo:dict];
+//    }
+//  });
   
   
+  return self.sections;
 }
 
 
-- (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
+- (void)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
-  // prepare sections found array
-  NSArray *sectionsFound = nil;
-    
   // get the parent file and the text to search
   id file = self.parent;
   NSString *text = [self.parent text];
 
-  sectionsFound = [text sectionsInStringForTypes:templates existingSections:self.sections inFile:file];
+  self.sections = [text sectionsInStringForTypes:templates existingSections:self.sections inFile:file];
   
-  return sectionsFound;
 }
 
 #pragma mark -

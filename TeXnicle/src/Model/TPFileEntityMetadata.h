@@ -70,8 +70,8 @@
 @property (strong) NSArray *includes;
 
 - (id) initWithParent:(id)aFile;
-- (NSArray*)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
-- (void) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
+- (void)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 
 #pragma mark -
 #pragma mark get new commands
