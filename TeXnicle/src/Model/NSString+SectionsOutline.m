@@ -50,7 +50,8 @@
   // Gather section commands
   NSMutableArray *sectionCommands = [NSMutableArray array];
   for (TPSectionTemplate *template in templates) {
-    [sectionCommands addObject:template.tag];
+//    [sectionCommands addObject:template.tag];
+    [sectionCommands addObjectsFromArray:template.tags];
   }
   
   NSString *text = self;
@@ -69,19 +70,18 @@
       
       NSUInteger loc = index;
       NSString *word = [text nextWordStartingAtLocation:&loc];
-      //      NSLog(@"Word: %@", word);
+//      NSLog(@"Word: %@", word);
       if ([word beginsWithElementInArray:sectionCommands] != NSNotFound) {
         NSString *command = [word command];
-        if ([command characterAtIndex:[command length]-1] == '*') {
-          command = [command substringToIndex:[command length]-1];
-        }
-//        NSLog(@"Got command %@", command);
         
         if (command != nil) {
           TPSectionTemplate *template = nil;
           for (TPSectionTemplate *t in templates) {
-            if ([t.tag beginsWith:command]) {
-              template = t;
+            for (NSString *tag in t.tags) {
+              if ([tag beginsWith:command]) {
+                template = t;
+                break;
+              }
             }
           }
           
@@ -89,7 +89,10 @@
             NSInteger loc = index+1;
             NSString *arg = [text parseArgumentStartingAt:&loc];
             if (arg == nil) {
-              arg = @"<unknown>";
+              arg = template.defaultTitle;
+              if (arg == nil) {
+                arg = @"<unknown>";
+              }
             }
             
             TPSection *section = [TPSection sectionWithParent:nil start:index inFile:file type:template name:arg];
@@ -117,12 +120,16 @@
         
         // get argument
         NSString *arg = [word argument];
-        NSString *subtext = nil;
-        id subfile = nil;
+        __block NSString *subtext = nil;
+        __block id subfile = nil;
         if ([file isKindOfClass:[FileEntity class]]) {
           ProjectEntity *project = [(FileEntity*)file project];
-          subfile = [project fileWithPath:arg];
-          subtext = [subfile workingContentString];
+          // access the project on the main thread otherwise we can get mutex deadlocks
+          dispatch_sync(dispatch_get_main_queue(), ^{
+            subfile = [project fileWithPath:arg];
+//            NSLog(@"  got file %@", subfile);
+            subtext = [subfile workingContentString];
+          });
         } else {
           // file is a URL
           NSString *root = [[file path] stringByDeletingLastPathComponent];
@@ -159,8 +166,8 @@
       index++;
     }
   }
-
-  return sectionsFound;  
+  
+  return sectionsFound;
 }
 
 
