@@ -326,7 +326,7 @@
     }
     start++;
   }
-  return nil;
+  return self;
 }
 
 - (NSString*)argument
@@ -471,13 +471,20 @@
   NSInteger nameEnd   = -1;
   NSInteger braceCount = 0;
   while (count < [self length]) {
-    if ([self characterAtIndex:count] == '{') {
+    unichar c = [self characterAtIndex:count];
+    
+    // if we get to a newline without finding an opening brace, stop.
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] && braceCount == 0) {
+      break;
+    }
+    
+    if (c == '{') {
       braceCount++;
       if (nameStart < 0) {
         nameStart = count+1;
       }
     }
-    if ([self characterAtIndex:count] == '}') {
+    if (c == '}') {
       braceCount--;
       if (braceCount == 0) {
         nameEnd = count;
