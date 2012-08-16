@@ -97,20 +97,7 @@
             
             TPSection *section = [TPSection sectionWithParent:nil start:index inFile:file type:template name:arg];
             
-            // if we don't already have this section, we add it
-            for (TPSection *s in sections) {
-              if ([s matches:section] == YES) {
-//                NSLog(@"Section %@ already exists", section);
-                section = s;
-              } else {
-                // if the thing matches except for startIndex, then just set the parent the same
-                if ([s nearlyMatches:section] == YES) {
-                  NSInteger newIndex = section.startIndex;
-                  section = s;
-                  section.startIndex = newIndex;
-                }
-              }
-            }
+            // add the section
             [sectionsFound addObject:section];
           } // end if template is not nil
         } // end if command is not nil        
@@ -148,11 +135,6 @@
           NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
           // check if we already have any of these sections
           for (__strong TPSection *ss in subsections) {
-            for (TPSection *s in sections) {
-              if ([s matches:ss] == YES) {
-                ss = s; 
-              }
-            }
             [sectionsFound addObject:ss];
           }
         }
@@ -167,7 +149,44 @@
     }
   }
   
-  return sectionsFound;
+  // now we should replace sections with existing sections, where possible
+  
+  // replace a section with an existing section if:
+  // 1) there is an exact match according to -matches:
+  // 2) the order is the same and there is a near match
+  NSMutableArray *sectionsToReturn = [NSMutableArray array];
+  NSInteger matchIndex = 0;
+  for (TPSection *newSection in sectionsFound) {
+    BOOL didMatch = NO;
+    // check all sections after the last match
+    for (NSInteger ii=matchIndex; ii<[sections count]; ii++) {
+      TPSection *existingSection = [sections objectAtIndex:ii];
+      if ([newSection matches:existingSection] == YES) {
+        [sectionsToReturn addObject:existingSection];
+//        NSLog(@"Exact match: %@", existingSection);
+        didMatch = YES;
+        matchIndex = ii+1;
+        break;
+      }
+      
+      if ([sectionsFound indexOfObject:newSection] == [sections indexOfObject:existingSection]
+          && [existingSection nearlyMatches:newSection] == YES) {
+//        NSLog(@"Near match: %@", existingSection);
+        [sectionsToReturn addObject:existingSection];
+        matchIndex = ii+1;
+        didMatch = YES;
+        break;        
+      }
+      
+    }
+    
+    if (didMatch == NO) {
+      [sectionsToReturn addObject:newSection];
+    }
+  }
+  
+  
+  return sectionsToReturn;
 }
 
 

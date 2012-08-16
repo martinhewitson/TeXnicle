@@ -212,6 +212,8 @@
     }
   }
   
+//  NSLog(@"Got sections %@", newSections);
+  
 //  NSLog(@"Updating sections...");
   NSArray *updatedSections = [self getUpdatedSections:newSections];
   

@@ -125,7 +125,7 @@
   if (self.type) {
     tag = self.type.tag;
   }
-  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", displayName, [self filename], tag, self.name];
+  return [NSString stringWithFormat:@"%p: {%@ [%p], %@, %@, %@}", self, displayName, self.parent, [self filename], tag, self.name];
 }
 
 - (NSAttributedString*)selectedDisplayName
