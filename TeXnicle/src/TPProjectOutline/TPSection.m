@@ -14,7 +14,9 @@
 
 - (void) dealloc
 {
+//  NSLog(@"Dealloc %@", self);
   self.file = nil;
+  self.parent = nil;
 }
 
 
@@ -113,18 +115,18 @@
   return [self.file lastPathComponent];
 }
 
-//- (NSString*)description
-//{
-//  NSString *displayName = nil;
-//  if (self.parent) {
-//    displayName = self.parent.name;
-//  }
-//  NSString *tag = nil;
-//  if (self.type) {
-//    tag = self.type.tag;
-//  }
-//  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", displayName, [self filename], tag, self.name];
-//}
+- (NSString*)description
+{
+  NSString *displayName = nil;
+  if (self.parent) {
+    displayName = self.parent.name;
+  }
+  NSString *tag = nil;
+  if (self.type) {
+    tag = self.type.tag;
+  }
+  return [NSString stringWithFormat:@"{%@, %@, %@, %@}", displayName, [self filename], tag, self.name];
+}
 
 - (NSAttributedString*)selectedDisplayName
 {
