@@ -8,11 +8,35 @@
 
 #import "TPSectionTemplate.h"
 
+@interface TPSectionTemplate ()
+
+
+@end
+
 @implementation TPSectionTemplate
+
++ (id)documentSectionTemplateWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
+{
+  return [[TPSectionTemplate alloc] initWithName:aName tags:someTags parent:aParent color:aColor mnemonic:shortName];
+}
+
 
 + (id)documentSectionTemplateWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
 {
   return [[TPSectionTemplate alloc] initWithName:aName tag:aTag parent:aParent color:aColor mnemonic:shortName];
+}
+
+- (id) initWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
+{
+  self = [super init];
+  if (self) {
+    self.parent = aParent;
+    self.name = aName;
+    self.tags = someTags;
+    self.color = aColor;
+    self.mnemonic = shortName;
+  }
+  return self;
 }
 
 - (id) initWithName:(NSString*)aName tag:(NSString*)aTag parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
@@ -21,7 +45,7 @@
   if (self) {
     self.parent = aParent;
     self.name = aName;
-    self.tag = aTag;
+    self.tags = @[aTag];
     self.color = aColor;
     self.mnemonic = shortName;
   }
@@ -39,6 +63,11 @@
     template = template.parent;
   }
   return NO;
+}
+
+- (NSString*)tag
+{
+  return self.tags[0];
 }
 
 - (NSString*)description
