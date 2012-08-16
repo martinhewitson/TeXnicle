@@ -40,9 +40,7 @@
 
 @interface PaletteController : NSViewController <NSTableViewDelegate, PaletteControllerDelegate, NSUserInterfaceValidations> {
 
-@private
-	NSDictionary *palette;
-	
+@private	
 	IBOutlet NSArrayController *palettesController;
 	IBOutlet NSArrayController *symbolsController;
 	IBOutlet NSTableView *symbolsTable;
@@ -51,15 +49,11 @@
 }
 
 @property (unsafe_unretained) id<PaletteControllerDelegate> delegate;
-@property (strong) TPPalette *palette;
+@property (nonatomic, strong) TPPalette *palette;
 
 - (id) initWithDelegate:(id<PaletteControllerDelegate>)aDelegate;
 
-- (void) loadPalette;
 - (NSArray*) listOfCommands;
-
-- (NSImage*) generateImageForCode:(NSString*)code atPath:(NSString*)aPath inMathMode:(BOOL)mathMode;
-
 - (IBAction) setRowHeight:(id)sender;
 - (IBAction) insertSelectedSymbols:(id)sender;
 - (void) handleTableDoubleClick;

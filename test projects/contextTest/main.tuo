@@ -6,7 +6,7 @@
 % temporary files: 0
 %
 %
-% commands: 24
+% commands: 23
 %
 \thisissectionseparator{-}%
 \thisisutilityversion{2008.10.14}%
@@ -18,20 +18,19 @@
 \usedmapfile{=}{lm-rm}%
 \usedmapfile{=}{original-ams-euler}%
 \initializevariable\usedoutputdriver{pdftex}%
-\listentry{section}{1}{1}{Text}{2--0-0-1-0-0-0-0--1}{1}%
-\listentry{section}{2}{2}{Maths}{2--0-0-2-0-0-0-0--1}{1}%
-\mainreference{}{eqn:famous-emc}{2--0-0-2-0-0-0-0--1}{1}{1}%
-\mainreference{}{eqn:def-m}{2--0-0-2-0-0-0-0--1}{1}{2}%
+\listentry{chapter}{1}{1}{Chapter 1}{2--0-1-0-0-0-0-0--2}{2}%
+\listentry{section}{2}{1.1}{Text}{2--0-1-1-0-0-0-0--2}{2}%
 \initializevariable\usedcolorchannels{}%
-\twopassentry{floatdata}{1}{1::2}%
-\mainreference{}{fig:pastedImage}{2--0-0-2-0-0-0-0--2}{2}{{1}{My figure title}}%
-\listentry{figure}{3}{1}{My figure title}{2--0-0-2-0-0-0-0--2}{2}%
+\listentry{chapter}{3}{2}{Chapter 2}{2--0-2-0-0-0-0-0--3}{3}%
+\listentry{section}{4}{2.1}{Maths}{2--0-2-1-0-0-0-0--3}{3}%
+\mainreference{}{eqn:famous-emc}{2--0-2-1-0-0-0-0--3}{3}{2.1}%
+\mainreference{}{eqn:def-m}{2--0-2-1-0-0-0-0--3}{3}{2.2}%
 \initializevariable\currentstrategypass{1}%
 \initializevariable\totalnofpositions{0}%
 \initializevariable\totalnofMPgraphics{0}%
 \initializevariable\totalnofparbackgrounds{0}%
-\initializevariable\lastpage{2}%
-\initializevariable\lastpagenumber{2}%
+\initializevariable\lastpage{3}%
+\initializevariable\lastpagenumber{3}%
 %
 % programs: 0
 %

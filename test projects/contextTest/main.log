@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=cont-en 2011.1.24)  23 FEB 2012 07:28
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=cont-en 2011.1.24)  15 AUG 2012 13:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -56,8 +56,6 @@ publications    : file main.bbl not found, waiting for bibtex
 (./main.tuo)
 systems         : begin file main at line 10
 title           : - \CONTEXT 
-section         : 1 Text
-section         : 2 Maths
 fonts           : resetting map file list
 {/usr/local/texlive/2010/texmf-dist/fonts/map/pdftex/context/original-empty.map
 }
@@ -77,43 +75,43 @@ fonts           : using map file: lm-rm
 {/usr/local/texlive/2010/texmf-dist/fonts/map/dvips/lm/lm-rm.map}
 fonts           : using map file: original-ams-euler
 {/usr/local/texlive/2010/texmf-dist/fonts/map/pdftex/context/original-ams-euler
-.map} <./pastedImage.png (PNG copy)>
-figures         : dimensions of pastedImage.png loaded from figurefile itself
-(./main.tuo)
-floatblocks     : 1 saved
-floatblocks     : 1 moved
-(/usr/local/texlive/2010/texmf-dist/tex/context/base/sort-def.mkii)
+.map} (/usr/local/texlive/2010/texmf-dist/tex/context/base/sort-def.mkii)
 (/usr/local/texlive/2010/texmf-dist/tex/context/base/sort-lan.mkii) [1.1]
+chapter         : 1 Chapter 1
+section         : 1.1 Text
 [2.2]
-systems         : end file main at line 47
+chapter         : 2 Chapter 2
+section         : 2.1 Maths
+[3.3]
+systems         : end file main at line 43
  ) 
 Here is how much of TeX's memory you used:
- 1001 strings out of 456096
- 15955 string characters out of 2520604
+ 986 strings out of 456096
+ 15733 string characters out of 2520604
  4851688 words of memory out of 7259220
- 41876 multiletter control sequences out of 15000+200000
- 93961 words of font info for 41 fonts, out of 3000000 for 9000
+ 41865 multiletter control sequences out of 15000+200000
+ 96960 words of font info for 42 fonts, out of 3000000 for 9000
  396 hyphenation exceptions out of 8191
- 46i,17n,50p,260b,673s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2010/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2010/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2010/t
-exmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2010/texmf-dist/
-fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2010/texmf-dist/fonts/enc/
-dvips/lm/lm-mathex.enc}</usr/local/texlive/2010/texmf-dist/fonts/type1/public/l
-m/lmbx12.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmex10.p
-fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/l
-ocal/texlive/2010/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/local/texliv
-e/2010/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2010/texm
-f-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2010/texmf-dist/fonts
-/type1/public/lm/lmr8.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publi
-c/lm/lmr9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmssbx1
-0.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+ 50i,17n,57p,260b,542s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2010/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
+texlive/2010/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
+10/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2010/texmf-d
+ist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/2010/texmf-dist/fonts/
+enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2010/texmf-dist/fonts/type1/public/l
+m/lmex10.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmmi12.p
+fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/lo
+cal/texlive/2010/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive
+/2010/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2010/texmf-
+dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2010/texmf-dist/fonts/t
+ype1/public/lm/lmr9.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/
+lm/lmssbx10.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/lm/lmsy1
+0.pfb>
 
 pdfTeX warning: pdftex: no GlyphToUnicode entry has been inserted yet!
-Output written on main.pdf (2 pages, 134086 bytes).
+Output written on main.pdf (3 pages, 104595 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

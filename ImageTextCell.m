@@ -58,10 +58,7 @@
 	if ([[self dataDelegate] respondsToSelector: @selector(dataElementForCell:)]) {
 		data = [[self dataDelegate] dataElementForCell:self];
 	}
-		
-	//TODO: Selection with gradient and selection color in white with shadow
-	// check out http://www.cocoadev.com/index.pl?NSTableView
-	
+			
 	BOOL elementDisabled    = NO;	
 	if ([[self dataDelegate] respondsToSelector: @selector(disabledForCell:data:)]) {
 		elementDisabled = [[self dataDelegate] disabledForCell: self data: data];

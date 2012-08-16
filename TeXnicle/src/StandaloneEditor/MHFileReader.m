@@ -172,12 +172,7 @@
   NSError *error = nil;
   NSString *content = [[NSString alloc] initWithData:data
                                             encoding:encoding];
-  
-  // TODO: Check that the URL we want to write to is a file and not a directory
-  // Don't know a better way that just checking that the path has an extension?
-  
-//  NSLog(@"Writing with encoding %@", [self nameOfEncoding:encoding]);
-  
+    
   BOOL result = [content writeToURL:aURL atomically:YES encoding:encoding error:&error];
   
   if (result == NO) {

@@ -5,17 +5,25 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>4D140A37-98FA-436C-9D85-A78085152B6E</UUID>
-        <nextObjectID>106</nextObjectID>
+        <nextObjectID>105</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
                     <key>NSPersistenceFrameworkVersion</key>
-                    <integer>358</integer>
+                    <integer>407</integer>
                     <key>NSStoreModelVersionHashes</key>
                     <dict>
                         <key>Bookmark</key>
                         <data>
 		DomRcT1vfHnhCpD4hL1oyiuZNfU1acRc5Sa8FV4eSzw=
+		</data>
+                        <key>Category</key>
+                        <data>
+		Wg56R+oA6OkrQt/J/aRGOXyEWQQsyxpBAnCts8ij7AI=
+		</data>
+                        <key>Entry</key>
+                        <data>
+		P8M/GwsISeTwixFOCYHcLTp7zS7W99JZ9omFj/GtcXg=
 		</data>
                         <key>File</key>
                         <data>
@@ -35,7 +43,7 @@
 		</data>
                         <key>Settings</key>
                         <data>
-		/kR6J9LdHdGeQ3bOEG69CfXq/Glm07/1uVJBvThbtrk=
+		t4HONJYhnYCtV8c4JwxfAk24ARhglhnFciWisChnNlg=
 		</data>
                         <key>TeXFile</key>
                         <data>
@@ -43,13 +51,14 @@
 		</data>
                         <key>UISettings</key>
                         <data>
-		AL0Sr6YIEDccEl/u3ahjfjR2096wLe14w4hI35Vhx0U=
+		D+kGOMNE9WXpIkGKSN+1wlz/lgH0QO/bMQlEaQNsycY=
 		</data>
                     </dict>
                     <key>NSStoreModelVersionHashesVersion</key>
                     <integer>3</integer>
                     <key>NSStoreModelVersionIdentifiers</key>
                     <array>
+                        <string></string>
                         <string>5</string>
                     </array>
                     <key>kMDItemKeywords</key>
@@ -71,8 +80,9 @@
         <relationship name="items" type="0/0" destination="PROJECTITEM" idrefs="z104"></relationship>
     </object>
     <object type="SETTINGS" id="z103">
+        <attribute name="language" type="string">English (United Kingdom) [ise-w_accents]</attribute>
         <attribute name="showstatusbar" type="bool">1</attribute>
-        <attribute name="openconsole" type="bool">1</attribute>
+        <attribute name="openconsole" type="bool">0</attribute>
         <attribute name="ncompile" type="int16">3</attribute>
         <attribute name="enginename" type="string">context</attribute>
         <attribute name="dops2pdf" type="bool">0</attribute>
@@ -80,13 +90,13 @@
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="TEXFILE" id="z104">
-        <attribute name="wasopen" type="bool">1</attribute>
-        <attribute name="visiblerect" type="string">{{5, 79}, {532, 681}}</attribute>
-        <attribute name="lasteditdate" type="date">351675208.40108799934387207031</attribute>
+        <attribute name="wasopen" type="bool">0</attribute>
+        <attribute name="visiblerect" type="string">{{3, 0}, {552, 351}}</attribute>
+        <attribute name="lasteditdate" type="date">366832809.39052802324295043945</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">351675209.11508101224899291992</attribute>
+        <attribute name="fileloaddate" type="date">366832810.66431301832199096680</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{1100, 0}</attribute>
+        <attribute name="cursor" type="string">{337, 0}</attribute>
         <attribute name="sortindex" type="int32">0</attribute>
         <attribute name="name" type="string">main.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -98,8 +108,9 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="UISETTINGS" id="z105">
-        <attribute name="selectedcontrolstab" type="int16">0</attribute>
-        <attribute name="pdfviewscrollrect" type="string">{{0, 316}, {607, 726}}</attribute>
+        <attribute name="selectedcontrolstab" type="int16">3</attribute>
+        <attribute name="pdfviewscrollrect" type="string">{{0, 333}, {439, 537}}</attribute>
+        <attribute name="maxoutlinedepth" type="int16">6</attribute>
         <attribute name="editorwidth" type="float">584</attribute>
         <attribute name="controlswidth" type="float">230</attribute>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>

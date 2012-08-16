@@ -490,18 +490,17 @@ s l {abbreviation} {en}
 s l {logo} {en}
 s l {unit} {en}
 r l {index} {en}
-c \listentry{section}{1}{1}{Text}{2--0-0-1-0-0-0-0--1}{1}
-c \listentry{section}{2}{2}{Maths}{2--0-0-2-0-0-0-0--1}{1}
-c \mainreference{}{eqn:famous-emc}{2--0-0-2-0-0-0-0--1}{1}{1}
-c \mainreference{}{eqn:def-m}{2--0-0-2-0-0-0-0--1}{1}{2}
+c \listentry{chapter}{1}{1}{Chapter 1}{2--0-1-0-0-0-0-0--2}{2}
+c \listentry{section}{2}{1.1}{Text}{2--0-1-1-0-0-0-0--2}{2}
 c \initializevariable\usedcolorchannels{}
-c \twopassentry{floatdata}{1}{1::2}
-c \mainreference{}{fig:pastedImage}{2--0-0-2-0-0-0-0--2}{2}{{1}{My figure title}}
-c \listentry{figure}{3}{1}{My figure title}{2--0-0-2-0-0-0-0--2}{2}
+c \listentry{chapter}{3}{2}{Chapter 2}{2--0-2-0-0-0-0-0--3}{3}
+c \listentry{section}{4}{2.1}{Maths}{2--0-2-1-0-0-0-0--3}{3}
+c \mainreference{}{eqn:famous-emc}{2--0-2-1-0-0-0-0--3}{3}{2.1}
+c \mainreference{}{eqn:def-m}{2--0-2-1-0-0-0-0--3}{3}{2.2}
 c \initializevariable\currentstrategypass{1}
 c \initializevariable\totalnofpositions{0}
 c \initializevariable\totalnofMPgraphics{0}
 c \initializevariable\totalnofparbackgrounds{0}
 f e {main}
-c \initializevariable\lastpage{2}
-c \initializevariable\lastpagenumber{2}
+c \initializevariable\lastpage{3}
+c \initializevariable\lastpagenumber{3}

@@ -316,7 +316,6 @@
 
 - (void)compileDidFinish:(BOOL)success
 {
-  // TODO: test on Lion and 10.6.8
   if ([[NSApplication sharedApplication] isMountainLion]) {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     [notification setTitle:@"Typesetting Completed"];
