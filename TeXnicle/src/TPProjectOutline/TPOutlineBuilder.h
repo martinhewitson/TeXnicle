@@ -18,7 +18,10 @@
 
 @end
 
-@interface TPOutlineBuilder : NSObject
+@interface TPOutlineBuilder : NSObject {
+@private
+  dispatch_queue_t queue;
+}
 
 @property (assign) NSInteger depth;
 @property (strong) NSTimer *timer;
@@ -34,5 +37,5 @@
 - (void) startTimer;
 - (void) stopTimer;
 
-- (NSArray*) childrenOfSection:(id)parent;
+//- (NSArray*) childrenOfSection:(id)parent;
 @end

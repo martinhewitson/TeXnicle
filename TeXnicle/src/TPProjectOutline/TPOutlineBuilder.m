@@ -16,6 +16,12 @@
 #import "NSString+SectionsOutline.h"
 #import "NSArray+Color.h"
 
+@interface TPOutlineBuilder ()
+
+@property (assign) BOOL isUpdating;
+
+@end
+
 @implementation TPOutlineBuilder
 
 + (id) outlineBuilderWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate
@@ -30,14 +36,9 @@
     self.delegate = aDelegate;
     [self makeTemplates];
     self.sections = [NSMutableArray array];
-    
-    // handle updates to all FileEntity metadata
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(handleFileMetadataSectionsUpdateNotifcation:)
-               name:TPFileMetadataSectionsUpdatedNotification
-             object:nil];
-    
+    self.isUpdating = NO;
+    queue = dispatch_queue_create("com.bobsoft.TeXnicle.outlineArray", DISPATCH_QUEUE_SERIAL);
+        
     [self observePreferences];
   }
   
@@ -109,6 +110,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
   self.delegate = nil;
+  dispatch_release(queue);
 }
 
 - (void) buildOutline
@@ -117,90 +119,148 @@
     return;
   }
   
+  if (self.isUpdating)
+    return;
+  
+  
+  __block TPOutlineBuilder *blockSelf = self;
+  
+  NSArray *templatesToScanFor = [blockSelf.templates subarrayWithRange:NSMakeRange(0, 1+blockSelf.depth)];
+  
   // get the main file from the delegate
   id file = [self.delegate mainFile];
   if ([file isKindOfClass:[FileEntity class]]) {    
-    [file generateSectionsForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] forceUpdate:NO];
+
+    __block TPOutlineBuilder *blockSelf = self;
+    self.isUpdating = YES;
+    dispatch_async(queue, ^{
+      
+      
+      NSArray *newSections = [file generateSectionsForTypes:templatesToScanFor
+                                                forceUpdate:NO];
+      
+      [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];
+    });
+    
+    
   } else {
     // get text
     NSString *text = [self.delegate textForFile:file];
-    
-    dispatch_queue_t queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
-    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
-    dispatch_set_target_queue(queue, priority);
-    
-    dispatch_sync(queue, ^{      
-      NSArray *newSections = [text sectionsInStringForTypes:[self.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)] existingSections:self.sections inFile:file];
-      dispatch_async(dispatch_get_main_queue(), ^{
-        // send notification of section update
-        if (file != nil && newSections != nil) {
-          NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-          NSDictionary *dict = @{@"file": file, @"sections": newSections};
-          [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-                            object:self
-                          userInfo:dict];
-        }
-      });
-    });
         
-    dispatch_release(queue);
-    
+    dispatch_async(queue, ^{
+      NSArray *newSections = [text sectionsInStringForTypes:templatesToScanFor
+                                           existingSections:self.sections
+                                                     inFile:file];
+      
+      [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];
+    });
+            
   }
   
 }
 
-- (void) handleFileMetadataSectionsUpdateNotifcation:(NSNotification*)aNote
+- (void) processNewSections:(NSArray*)sections forFile:(id)file templates:(NSArray*)templates
 {
+  NSMutableArray *newSections = [NSMutableArray arrayWithArray:sections];
   
-  // get the user info
-  NSDictionary *dict = [aNote userInfo];
+  NSArray *existingSections = self.sections;
+  
+  // check if we have a root section, otherwise insert it, or reuse it
+  if ([newSections count] > 0) {
+    TPSection *firstSection = newSections[0];
+//    NSLog(@"First section %@", firstSection);
     
-  // the file from the dictionary
-  id file = [dict valueForKey:@"file"];
-  if ([file isKindOfClass:[FileEntity class]]) {
-    if (file != [self.delegate mainFile]) {
-      return;
+    if ([firstSection.type.name isEqualToString:@"begin"] == NO) {
+      
+      TPSection *root = [TPSection sectionWithParent:nil start:0 inFile:file type:templates[0] name:@"Root"];
+      
+      // see if we have an existing root which matches what we would anyway insert
+      TPSection *firstExistingSection = nil;
+      if ([existingSections count] > 0) {
+        firstExistingSection = existingSections[0];
+      }
+      
+      if (firstExistingSection != nil && [firstExistingSection matches:root]) {
+        
+        [newSections insertObject:firstExistingSection atIndex:0];
+        
+      } else {
+        
+//        NSLog(@"Inserting root");
+        root.needsReload = YES;
+        [newSections insertObject:root atIndex:0];
+        
+        // set all other parents to nil because they are invalid now
+        for (TPSection *s in newSections) {
+          s.parent = nil;
+        }
+      }
     }
-  } else {
-    if ([file isEqual:[self.delegate mainFile]] == NO) {
-      return;
+    
+    // get new root
+    if ([existingSections count] > 0) {
+      TPSection *root = newSections[0];
+      TPSection *existingRoot = existingSections[0];
+      
+      // if the new root doesn't match the old root, reset all parents
+      if ([root matches:existingRoot] == NO) {
+        // set all other parents to nil because they are invalid now
+        for (TPSection *s in newSections) {
+          s.parent = nil;
+        }
+      }
     }
   }
   
-  // get the sections from the dictionary
-  NSArray *newSections = [dict valueForKey:@"sections"];
-  NSInteger newSectionsCount = [newSections count];
+//  NSLog(@"Updating sections...");
+  NSArray *updatedSections = [self getUpdatedSections:newSections];
+  
+  if (updatedSections) {
+//    NSLog(@"Updated sections %@", updatedSections);
+    
+    [self.sections removeAllObjects];
+    [self.sections addObjectsFromArray:updatedSections];
+    
+    self.isUpdating = NO;
+    
+    // inform delegate
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.delegate didComputeNewSections];
+    });
+  }
+//  NSLog(@"--------------------------------------------  update done");
+}
+
+- (NSArray*) getUpdatedSections:(NSArray*)newSections
+{
   NSInteger existingSectionsCount = [self.sections count];
-  
-  // remove existing sections for this file
-  [self.sections removeAllObjects];
-  
-  // add new sections
-  [self.sections addObjectsFromArray:newSections];
+  NSInteger newSectionsCount = [newSections count];
   
   // update parents
-  if ([self.sections count] > 0) {
+  if ([newSections count] > 0) {
     // set parents
-    TPSection *root = (self.sections)[0];
+    TPSection *root = newSections[0];
+    
     if (newSectionsCount != existingSectionsCount) {
       // reload
       root.needsReload = YES;
     }
-    for (int kk=1; kk<[self.sections count]; kk++) {
-      TPSection *s = (self.sections)[kk];
+    
+    for (int kk=1; kk<[newSections count]; kk++) {
+      TPSection *s = newSections[kk];
       
       int jj = kk-1;
-      TPSection *parent = (self.sections)[jj];
-      while (jj>=0) {      
+      TPSection *parent = newSections[jj];
+      while (jj>=0) {
         if ([TPSectionTemplate template:s.type isChildOf:parent.type]) {
           if (s.parent != parent) {
             s.parent = parent;
             parent.needsReload = YES;
           }
           break;
-        } 
+        }
         if (jj>=0) {
-          parent = (self.sections)[jj];
+          parent = newSections[jj];
         }
         jj--;
       }
@@ -211,8 +271,8 @@
     }
   }
   
-  // inform delegate
-  [self.delegate didComputeNewSections];
+  
+  return newSections;  
 }
 
 - (void) makeTemplates
@@ -223,23 +283,24 @@
   
   color = [NSColor colorWithDeviceWhite:0.0 alpha:1.0];
   TPSectionTemplate *document = [TPSectionTemplate documentSectionTemplateWithName:@"begin" 
-                                                                               tag:@"\\begin{document}" 
-                                                                            parent:nil 
+                                                                              tags:@[@"\\begin{document}", @"\\starttext"]
+                                                                            parent:nil
                                                                              color:color
                                                                           mnemonic:@"D"];
+  document.defaultTitle = @"Document";
   [tmp addObject:document];
   
   color = [NSColor darkGrayColor];
   TPSectionTemplate *part = [TPSectionTemplate documentSectionTemplateWithName:@"part" 
-                                                                           tag:@"\\part" 
-                                                                        parent:document 
+                                                                          tags:@[@"\\part", @"\\part*"]
+                                                                        parent:document
                                                                          color:color
                                                                       mnemonic:@"P"];
   [tmp addObject:part];
   
   color = [NSColor darkGrayColor];
   TPSectionTemplate *chapter = [TPSectionTemplate documentSectionTemplateWithName:@"chapter" 
-                                                                              tag:@"\\chapter" 
+                                                                             tags:@[@"\\chapter", @"\\chapter*"]
                                                                            parent:part 
                                                                             color:color
                                                                          mnemonic:@"C"];
@@ -247,7 +308,7 @@
   
   color = [NSColor colorWithDeviceRed:0.8 green:0.2 blue:0.2 alpha:1.0];
   TPSectionTemplate *section = [TPSectionTemplate documentSectionTemplateWithName:@"section" 
-                                                                              tag:@"\\section" 
+                                                                             tags:@[@"\\section", @"\\section*", @"\\subject"]
                                                                            parent:chapter 
                                                                             color:color
                                                                          mnemonic:@"S"];
@@ -255,7 +316,7 @@
   
   color = [NSColor colorWithDeviceRed:0.6 green:0.3 blue:0.3 alpha:1.0];
   TPSectionTemplate *subsection = [TPSectionTemplate documentSectionTemplateWithName:@"subsection" 
-                                                                                 tag:@"\\subsection"
+                                                                                tags:@[@"\\subsection", @"\\subsection*", @"\\subsubject"]
                                                                               parent:section 
                                                                                color:color
                                                                             mnemonic:@"ss"];
@@ -263,23 +324,23 @@
   
   color = [NSColor colorWithDeviceRed:0.6 green:0.5 blue:0.5 alpha:1.0];
   TPSectionTemplate *subsubsection = [TPSectionTemplate documentSectionTemplateWithName:@"subsubsection" 
-                                                                                    tag:@"\\subsubsection" 
-                                                                                 parent:subsection 
+                                                                                   tags:@[@"\\subsubsection", @"\\subsubsection*", @"\\subsubsubject"]
+                                                                                 parent:subsection
                                                                                   color:color
                                                                                mnemonic:@"sss"];
   [tmp addObject:subsubsection];
   
   color = [NSColor colorWithDeviceWhite:0.6 alpha:1.0];
   TPSectionTemplate *paragraph = [TPSectionTemplate documentSectionTemplateWithName:@"paragraph" 
-                                                                                tag:@"\\paragraph" 
-                                                                             parent:subsubsection 
+                                                                               tags:@[@"\\paragraph", @"\\paragraph*"]
+                                                                             parent:subsubsection
                                                                               color:color
                                                                            mnemonic:@"p"];
   [tmp addObject:paragraph];
   
   color = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
   TPSectionTemplate *subparagraph = [TPSectionTemplate documentSectionTemplateWithName:@"subparagraph" 
-                                                                                   tag:@"\\subparagraph" 
+                                                                                  tags:@[@"\\subparagraph", @"\\subparagraph*"]
                                                                                 parent:paragraph
                                                                                  color:color
                                                                               mnemonic:@"sp"];
@@ -331,16 +392,7 @@
   }
 }
 
-- (NSArray*) childrenOfSection:(id)parent
-{
-  NSMutableArray *parents = [NSMutableArray array];
-  for (TPSection *s in self.sections) {
-    if (s.parent == parent) {
-      [parents addObject:s];
-    }
-  }
-  return [NSArray arrayWithArray:parents];
-}
+
 
 
 
