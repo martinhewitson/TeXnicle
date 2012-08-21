@@ -758,6 +758,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
 {
+  NSRect visibleRect = [self visibleRect];
+  
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
@@ -786,6 +788,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setSelectedTextAttributes:
    @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
     NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
+    
+  [self scrollRectToVisible:visibleRect];
 }
 
 - (void) setWrapStyle
@@ -1771,7 +1775,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   [self pasteAsPlainText:sender];
   [self applyFontAndColor:YES];
-  [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
 }
 
 - (void) insertTab:(id)sender
