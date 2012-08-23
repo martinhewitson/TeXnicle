@@ -1514,7 +1514,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
+  NSMutableArray *pdfViews = [NSMutableArray array];
+  if (self.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewerController.pdfview];
+  }
+  if (self.pdfViewer.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
+  }
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:pdfViews];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
 }
 
@@ -1906,9 +1913,15 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
-//  NSLog(@"Clicked on PDF...");
+  NSMutableArray *pdfViews = [NSMutableArray array];
+  if (self.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewerController.pdfview];
+  }
+  if (self.pdfViewer.pdfViewerController.pdfview != nil) {
+    [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
+  }//  NSLog(@"Clicked on PDF...");
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView
-                                                                 pdfViews:@[self.pdfViewerController.pdfview, self.pdfViewer.pdfViewerController.pdfview]];
+                                                                 pdfViews:pdfViews];
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   sourcefile = [sourcefile stringByStandardizingPath]; 
