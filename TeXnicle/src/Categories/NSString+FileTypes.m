@@ -78,27 +78,39 @@
   return fileIsImage;  
 }
 
-
+// checks the file extension is text
 - (BOOL)isText
-{  
+{
+  NSString *extension = self;
+  if ([[extension pathExtension] length] > 0) {
+    extension = [extension pathExtension];
+  }
+  
+//  NSLog(@"Checking if %@ is text", extension);
   // work-around for engine files.
-  if ([self isEqualToString:@"engine"]) {
+  if ([extension isEqualToString:@"engine"]) {
     return YES;
   }
   
   // ensure images are not interpreted as text files.
-  if ([self isImage]) {
+  if ([extension isImage]) {
+//    NSLog(@"Is image");
     return NO;
   }
   
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+//  NSLog(@"Is supported type?");
   for (NSString *lext in [sfm supportedExtensions]) {
-    if ([self isEqualToString:lext]) {
+//    NSLog(@" checking [%@]", lext);
+    if ([extension isEqualToString:lext]) {
+//      NSLog(@"    yes - %@", lext);
       return YES;
     }
   }
+//  NSLog(@"   no :( ");
   
-  BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:self isValidForType:(NSString *)kUTTypeText];  
+//  NSLog(@"Checking valid for type [%@]", kUTTypeText);
+  BOOL result =  [[NSWorkspace sharedWorkspace] filenameExtension:extension isValidForType:(NSString *)kUTTypeText];
   
 //  NSLog(@"Result %d", result);
   
