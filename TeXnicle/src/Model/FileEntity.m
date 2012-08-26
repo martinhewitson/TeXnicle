@@ -198,6 +198,33 @@
 		NSError *error = nil;
 		// If the old file exists, we can move it
 		if ([fm fileExistsAtPath:oldPath]) {
+      
+      // if a file exists at the new path, as the user if they want to overwrite
+      if ([fm fileExistsAtPath:newPath]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Overwrite?"
+                                         defaultButton:@"Overwrite"
+                                       alternateButton:@"Cancel"
+                                           otherButton:nil
+                             informativeTextWithFormat:@"A file already exists at %@. Do you want to overwrite it? (The file will be moved to the Trash.)", newPath
+                          ];
+        
+        NSInteger result = [alert runModal];
+        if (result == NSAlertDefaultReturn) {
+          NSError *error = nil;
+          BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
+                                                                      source:[newPath stringByDeletingLastPathComponent]
+                                                                 destination:@""
+                                                                       files:@[[newPath lastPathComponent]]
+                                                                         tag:nil];
+          
+//          BOOL success = [fm removeItemAtPath:newPath error:&error];
+          if (success == NO) {
+            [NSApp presentError:error];
+            return;
+          }
+        }
+      }
+
 			BOOL success = [fm moveItemAtPath:oldPath toPath:newPath error:&error];
 			if (success == NO) {
 				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
