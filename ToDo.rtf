@@ -1,8 +1,7 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 LucidaGrande;
-\f3\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red24\green84\blue167;\red16\green73\blue188;
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 }
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;}
 \paperw11900\paperh16840\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -17,13 +16,6 @@ To Do\
 \
 + Finish help\
 \
-+ Context menu on TeXEditor\
-	- insert->figure->projectlist\
-					  ->from disk...`\
-            ->file->project list\
-				    ->from disk...\
-			 ->citation->projectlist\
-\
 + Arbitrary variable support in engine\
 	- engine should have a property 'variables' which is just an encoded data containing an array of EngineVariable objects\
 	- EngineVariable has a name, type, displayString, value\
@@ -32,9 +24,6 @@ To Do\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx18280\pardirnatural
 \cf0 \
 + Make a 'dynamic wrap' option where the text wraps to the editor width.\
-\
-+ Make a nicer Library with proper objects rather than a dictionary. Store in 'Application Support'. Support drag-n-drop. Think about iCloud key-value sync.\
-	- maybe we can stick with the dictionary based library, but move to dataSource and delegate methods rather than array controller and bindings.\
 \pard\pardeftab720
 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -44,28 +33,13 @@ To Do\
 \f1 \cf0 + Add nomenclo engine\cf2 \
 \
 Another request: I notice when I select a paragraph (or put the cursor somewhere in a paragraph of plain text), TeXnicle tells me at the bottom which line it is and how many characters the paragraph contains. Nice! Could you expand this function to include number of words, split into per section, per chapter, per all documents excluding appendices etc, and per entire project.. only counting plain text words, not commands etc? Would be really helpful!\
-\
-\cf0 - adding new files from template as above to new project, once you added the files they appear in the Project Files tab, but not in alphabetical order, and not in the order of them being added either! (weird)
-\f2 \cf3 \
-
-\f1 \cf0 \
+\cf0 \
 + placeholders\
 	- find out what character is left in the text file for a placeholder and replace them when loading the file\
-\
-+ validate project menu\
-\
-+ better parsing of console output\
-	- jump to errors?\
 \
 + Applescript ability\
 	- tell project XX to select file\
 	- tell texnicle to jump to line in file\
-\
-- splitivew on editor\
-	- first abstract away all calls to the textview and override them in texeditorcontroller [BIG JOB]\
-	- then texeditorcontroller should have an array of textviews which these various methods deal with\
-	- texeditorcontroller has an active textview (one with current focus)\
-\
 \
 + ignore the "open console" during live update\
 \
@@ -74,28 +48,39 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \f0 \cf0 - new engine from J\'fcrgen\
 \pard\pardeftab720
 
-\f3 \cf0 \
-+ Highlight the current position in the outline view\
-\
-+ Why is synctex requiring two cmd-clicks from editor to pdf?
-\f1 \
-	- because the silly PDFView doesn't work properly.\
-\
+\f1 \cf0 \
 + Split PDF viewer, split editor\
 \
 \pard\pardeftab720
 
-\fs24 \cf4 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
+\fs24 \cf3 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
 \pard\pardeftab720
 
 \fs28 \cf0 \
+\
+Version 2.1\
+---------------\
+\
++ splitivew on editor\
+	- first abstract away all calls to the textview and override them in texeditorcontroller [BIG JOB]\
+	- then texeditorcontroller should have an array of textviews which these various methods deal with\
+	- texeditorcontroller has an active textview (one with current focus)\
+\
++ Better parsing of typesetting output into error and warning objects. Add ability to jump to errors.\
+\
++ Add support for Asymptote ({\field{\*\fldinst{HYPERLINK "http://asymptote.sourceforge.net/"}}{\fldrslt http://asymptote.sourceforge.net}})\
+\
 + Automatic sync between pdf and editor. Make a button and call synctex every N seconds.\
 \
 + Editor for shortcut keys.\
 \
++ Soft-wrap at view boundary\
+\
 + Menu item to bibtex main file.\
 \
 + autocomplete \\left( with \\right)\
+\
++ sync library code-clippings with iCloud\
 \
 + add a 'language' option to projects and documents to specify:\
 	- latex\
@@ -105,6 +90,8 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
    Then we can be more clever about outline sections, syntax highlighting etc\
 \
 + replace regexpkitlite with NSRegularExpression for platforms >10.7\
+\
+\
 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -856,13 +843,13 @@ Beta 4\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
 + Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed Console window title (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed code folding bug (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Made default syntax highlighting colours more muted\
 + Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\
