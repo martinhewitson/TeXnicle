@@ -964,14 +964,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aPath]];
 
-	if ([aPath isText]) {
+  NSString *extension = [aPath pathExtension];
+	if ([extension isText]) {
 		isTextFile = YES;
-	}	
+	}
 	
 	// Add to project
 	id doc = [self addNewFile:[aPath lastPathComponent]
 								 atFilepath:projectPath
-									extension:[aPath pathExtension]
+									extension:extension
 										 isText:isTextFile
 											 code:contents
 								 asMainFile:NO
