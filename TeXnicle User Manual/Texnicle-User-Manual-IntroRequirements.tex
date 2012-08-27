@@ -1,0 +1,24 @@
+\chapter{Introducing \texnicle}
+\label{intro}
+\texnicle is an editor and project manager for producing documents using \LaTeX\ and similar typesetting languages. \texnicle has been under development since 2010 and is intended to provide a fast, feature-rich environment for writing \LaTeX\ documents under Mac OS X. Employing all the features of modern Mac OS X applications, \texnicle fits right at home on a Mac.
+One of the main design drivers for \texnicle was to produce an editing environment similar to Xcode, the development environment Apple provides for building applications on Mac OS X.
+
+\section{In This Manual}
+\label{inthismanual}
+This manual is split into four chapters. The first two are just to get us started: This introduction, and a discussion of installation and requirements in Chapter \ref{requirements}. Chapter \ref{userguide} is a User Guide that covers typical usage scenarios and introduces the basic concepts used throughout \texnicle. Chapter \ref{reference} is an in-depth reference guide to \texnicle’s features.
+
+\section{Development}
+\label{dev}
+The developer, Martin Hewitson, is a German physicist who is going to write his own blurb once Brian stops bombarding him with emails at all hours of the day and night. For more information, please visit his \href{http://bobsoft-mac.de}{website}. To report bugs or request new features, please \href{mailto:martin@bobsoft-mac.de}{send him an email}.
+
+The primary author of this manual is Brian L.\ Cansler: linguist by day, avid \texnicle user by night. For more information, please visit his \href{http://unc.edu/~bcansler}{website}. To report inaccuracies or suggest changes, please \href{mailto:bcansler@me.com}{send him an email}.
+
+\chapter{Installation, Setup, and Requirements}
+\label{requirements}
+\texnicle is designed to run on 64-bit machines\footnote{32-bit machines are no longer supported by \texnicle. Beta versions of \texnicle that did support older machines can be downloaded \href{http://bobsoft-mac.de}{here}.} running Mac OS X 10.6 (Snow Leopard), 10.7 (Lion), or 10.8 (Mountain Lion). There are currently no plans to support previous versions of Mac OS X or to support Windows operating systems. \texnicle is a free application and will remain so.
+
+\texnicle expects you to have an installed \LaTeX\ typesetting system on your machine. By default, \texnicle is set up to work with installations of MacTeX located on the hard drive of your computer. If you have an alternative \LaTeX\ installation, you may need to set up some new paths. In particular, you may need to copy and edit one or more of the built-in engines that \texnicle uses to typeset documents; this is described in section \ref{reference.engines}.
+
+\noted{Computers that run \LaTeX\ from a central source on a network like those found in many academic institutions may also require tweaking of certain paths. As each network is set up differently, please contact your network administrator for instructions on how to do this.}
+
+In addition to the engines described above, \texnicle uses some commands for typesetting code snippet previews. These are set under \menu{Preferences > Palette \& Library} and are discussed further in section \ref{reference.prefs.palettelibrary}.
