@@ -1,0 +1,62 @@
+%&pdflatex
+%!iTeXMac(project):pdflatex
+% Basic LaTeX Document
+\documentclass[11pt]{article}
+\usepackage{applekeys}
+
+% comment out all of these lines to get regular CM
+%\usepackage{lucidabr}	% Commercial Fonts
+%\usepackage{fourier}	% Needs Adobe Utopia + Fourier Fonts
+%\usepackage{lmodern}	% Needs Latin Modern Fonts
+%\usepackage[T1]{fontenc}	% Needs CM Super Fonts
+
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+
+\title{The Applekeys Package}
+\author{Herb Schulz\footnote{E-mail: \href{mailto:herbs2@mac.com}{herbs2@mac.com}. Symbols converted to \doteps\ by Kino Quinon.}}
+\date{}
+
+\newcommand{\doteps}{\texttt{.eps}}
+\newcommand{\dotpdf}{\texttt{.pdf}}
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+Let's test the \texttt{applekeys} package commands to see if it works correctly. This is a stretch of the command to find something in the Finder:
+\begin{center}\Large
+\powerkey\,-\,\returnkey\,-\,\revreturnkey\,-\,\esckey\,-\,\tabkey\,-\,\revtabkey\,-\,\pencilkey\,-\,\ejectkey\,-\,\capslockkey\,-\,\openapplekey\,-\,\applekey\,-\,\delkey\,-\,\shiftkey\,-\,\ctlkey\,-\,\optkey\,-\,\cmdkey\,-\,F.
+\end{center}
+and here is a list of the commands:
+\begin{center}
+\begin{tabular}{llc}
+Key Name & Key Command & Result \\ \hline
+Command & \cmd{cmdkey} & \cmdkey \\
+Option & \cmd{optkey} & \optkey \\
+Control & \cmd{ctlkey} & \ctlkey \\
+Shift & \cmd{shiftkey} & \shiftkey \\
+Delete & \cmd{delkey} & \delkey \\
+Apple & \cmd{applekey} & \applekey \\
+Open Apple & \cmd{openapplekey} & \openapplekey \\
+Caps Lock & \cmd{capslockkey} & \capslockkey \\
+Eject & \cmd{ejectkey} & \ejectkey \\
+Pencil & \cmd{pencilkey} & \pencilkey \\
+Tab & \cmd{tabkey} & \tabkey \\
+Reverse Tab & \cmd{revtabkey} & \revtabkey \\
+Escape & \cmd{esckey} & \esckey \\
+Return & \cmd{returnkey} & \returnkey \\
+Reverse Return & \cmd{revreturnkey} & \revreturnkey \\
+Power & \cmd{power} & \powerkey \\
+\end{tabular}
+\end{center}
+
+Since the Apple Keys are simply included graphics files they will work with any font you use. The sizes and vertical placement look fine \emph{to my eyes} with the fonts I use; you are free to change them in the \texttt{applekeys.sty} package file but please don't ascribe the changes to me.
+
+The Symbols were extracted from Apple fonts and converted into \doteps\ format by Kino Quinon. They were then converted to \dotpdf\ by simply dropping them onto TeXShop. Both formats are included so that the symbols can be used with \texttt{pdflatex} (which prefers the \dotpdf\ form) or \texttt{latex+ghostscript} (which prefers the \doteps\ form) without change to the package file.
+
+\end{document}
+
+ 
