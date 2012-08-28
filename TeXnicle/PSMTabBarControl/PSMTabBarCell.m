@@ -396,7 +396,6 @@
   NSSize s = [image size];
   [image drawInRect:NSMakeRect(0.0, 0.0, s.width, s.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
   
-//    [image compositeToPoint:NSMakePoint(0.0, 0.0) operation:NSCompositeSourceOver fraction:1.0];
     [returnImage unlockFocus];
     if (![[self indicator] isHidden]) {
         NSImage *pi = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"pi"]];
@@ -404,7 +403,6 @@
         NSPoint indicatorPoint = NSMakePoint([self frame].size.width - MARGIN_X - kPSMTabBarIndicatorWidth, MARGIN_Y);
       NSSize s = [pi size];
       [pi drawInRect:NSMakeRect(indicatorPoint.x, indicatorPoint.y, s.width, s.height) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0 respectFlipped:YES hints:nil];
-//        [pi compositeToPoint:indicatorPoint operation:NSCompositeSourceOver fraction:1.0];
         [returnImage unlockFocus];
     }
     return returnImage;
