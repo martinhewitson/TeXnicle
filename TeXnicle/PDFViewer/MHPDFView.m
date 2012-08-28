@@ -36,8 +36,24 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 
 - (void)performFindPanelAction:(id)sender
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(findInPDF:)]) {
-    [self.delegate performSelector:@selector(findInPDF:) withObject:self];
+  NSEvent *event = [[NSApplication sharedApplication] currentEvent];
+  if ([event.characters isEqualToString:@"f"]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(findInPDF:)]) {
+      [self.delegate performSelector:@selector(findInPDF:) withObject:self];
+    }
+  } else if ([event.characters isEqualToString:@"g"]) {
+    NSUInteger modifiers = [event modifierFlags];
+    if (modifiers & NSShiftKeyMask) {
+      // find previous
+      if (self.delegate && [self.delegate respondsToSelector:@selector(showPreviousResult:)]) {
+        [self.delegate performSelector:@selector(showPreviousResult:) withObject:self];
+      }
+    } else {
+      // find next
+      if (self.delegate && [self.delegate respondsToSelector:@selector(showNextResult:)]) {
+        [self.delegate performSelector:@selector(showNextResult:) withObject:self];
+      }
+    }
   }
 }
 

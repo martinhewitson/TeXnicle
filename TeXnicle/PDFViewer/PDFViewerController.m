@@ -115,11 +115,27 @@
              name:PDFViewPageChangedNotification
            object:self.pdfview];
   
+  [nc addObserver:self
+         selector:@selector(handleDocumentChangedNotification:)
+             name:PDFViewDocumentChangedNotification
+           object:self.pdfview];
   
   [self performSelector:@selector(updatePageCountDisplay) withObject:nil afterDelay:0];
   
 }
 
+- (void) handleDocumentChangedNotification:(NSNotification*)aNote
+{
+  if ([self.searchResults count] > 0) {
+    [self.searchResults removeAllObjects];
+    [self.searchResultsTable reloadData];
+    __block PDFViewerController *blockSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+      NSString *searchText = [self.searchField stringValue];
+      [blockSelf searchForStringInPDF:searchText];
+    });
+  }
+}
 
 
 - (void) dealloc
@@ -131,6 +147,7 @@
   self.searchResultsTable.dataSource = nil;
   self.delegate = nil;
 }
+
 
 - (IBAction)toggleResultsTable:(id)sender
 {
@@ -367,6 +384,7 @@
   [self.nextButton setEnabled:YES];
   [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Found %lu matches.", [self.searchResults count]]];
   [self showNextResult:self];
+  [[self.pdfview window] makeFirstResponder:self.pdfview];
 }
 
 - (void)documentDidFindMatch:(NSNotification *)notification
@@ -393,6 +411,7 @@
 {
   NSInteger row = [self.searchResultsTable selectedRow];
   if (row >= 0 && row < [self.searchResults count]) {
+    _currentHighlightedPDFSearchResult = row;
     [self selectSearchResult:row];
   }  
 }
@@ -463,9 +482,6 @@
   return NSMakeRange(NSNotFound, 0);
 }
 
-#pragma mark -
-#pragma mark MHPDFView delegate
-
 
 - (void) pageChanged: (NSNotification *) notification
 {
@@ -482,6 +498,10 @@
   
   [self.pageCountDisplay setStringValue:label];
 }
+
+
+#pragma mark -
+#pragma mark MHPDFView delegate
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
