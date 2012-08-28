@@ -1,0 +1,57 @@
+\documentclass[12pt]{report}
+\usepackage{natbib} %%% bibliography management
+\usepackage{graphicx}
+\usepackage{changebar} %%% for marking changes in a document
+\usepackage{applekeys} %%% apple key symbols
+\usepackage{menukeys} %%% menu symbols
+\usepackage{verbatim} %%% verbatim environments
+\usepackage{fancyvrb} %%% verbatim environments
+\usepackage{ulem} %%% underlining
+\usepackage{mdwlist} %%% for starred list environments
+\usepackage{parskip} %%% skipping space between paragraphs
+\usepackage{fullpage} %%% one-inch margins
+\usepackage{fancyhdr} %%% header management
+\usepackage{xspace} %%% automatic spacing after macros
+\usepackage{xcolor} %%% colour management
+\usepackage{booktabs} %%% table improvements
+\usepackage[section]{placeins} %%% keep floats in their logical places
+\usepackage{wrapfig} %%% wrap text around floats
+\usepackage[plainpages=false, breaklinks=true, colorlinks=true]{hyperref} %%% sets up hyperref to use pdftex driver
+
+\pagestyle{fancy}
+\setlength{\headheight}{20pt}
+\setlength{\headsep}{\parskip}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhf{}
+\lhead{\texnicle: A User's Manual}
+\cfoot{\thepage}
+\rhead{\leftmark: \rightmark}
+\title{\texnicle: A User's Manual}
+\author{Martin Hewitson \and Brian L.\ Cansler}
+\frenchspacing
+\raggedbottom
+
+\DefineShortVerb{\|}
+\newcommand{\texnicle}{\TeX\textsc{nicle}\xspace} %%% \TEXNICLE, for typesetting TeXnicle
+\newcommand{\folder}{\drawtikzfolder\xspace} %%% \FOLDER, for drawing a folder
+\newcommand{\noted}[1]{\textcolor{blue}{Note: #1}} %%% \NOTED, for notes
+
+\begin{document}
+\normalem
+
+\input{Texnicle-User-Manual-Titlepage}
+
+\tableofcontents
+
+\include{Texnicle-User-Manual-IntroRequirements}
+
+\include{Texnicle-User-Manual-UserGuide}
+
+\include{Texnicle-User-Manual-Reference}
+
+\appendix
+
+\include{Texnicle-User-Manual-Apx-KeyboardShortcuts}
+
+\end{document}

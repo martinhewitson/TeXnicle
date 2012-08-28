@@ -1,0 +1,2202 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.27)  27 AUG 2012 16:25
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**Texnicle-User-Manual
+(./Texnicle-User-Manual.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, friulan, galician, german, ngerman, swissgerman, monogreek, greek, h
+ungarian, icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, ma
+rathi, oriya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, 
+kurmanji, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk,
+ polish, portuguese, romanian, romansh, russian, sanskrit, serbian, serbianc, s
+lovak, slovenian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, 
+welsh, loaded.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count88
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2012/../texmf-local/tex/latex/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2012/../texmf-local/tex/latex/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count89
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/changebar/changebar.sty
+Package: changebar 2005/09/18 v3.5c Indicate changes with marginal bars
+\cb@nextpoint=\count90
+\cb@topleft=\count91
+\cb@topright=\count92
+\cb@botleft=\count93
+\cb@botright=\count94
+\cb@cnta=\count95
+\cb@cntb=\count96
+\cb@dima=\dimen105
+\cb@curbarwd=\dimen106
+\cb@page=\count97
+\cb@pagecount=\count98
+\cb@odd@left=\dimen107
+\cb@odd@right=\dimen108
+\cb@even@left=\dimen109
+\cb@even@right=\dimen110
+\cb@writexy=\write3
+\cb@readxy=\read1
+\openout3 = `Texnicle-User-Manual.cb2'.
+
+\changebarwidth=\skip45
+\deletebarwidth=\skip46
+\changebarsep=\skip47
+\c@changebargrey=\count99
+\cb@write=\write4
+\cb@read=\read2
+\openout4 = `Texnicle-User-Manual.cb'.
+
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/applekeys.sty
+Package: applekeys 2005/08/24 H.S. For inclusion of apple key graphics 
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/menukeys/menukeys.sty
+Package: menukeys 2012/04/11 v1.1b a package to format menus paths and shortcut
+s
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3names.sty
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
+Package: l3bootstrap 2012/07/16 v3991 L3 Experimental bootstrap code
+)
+Package: l3names 2012/07/16 v3990 L3 Namespace for primitives
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count100
+)
+Package: expl3 2012/08/14 v4091 L3 Experimental code bundle wrapper
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3basics.sty
+Package: l3basics 2012/08/08 v4069 L3 Basic definitions
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3expan.sty
+Package: l3expan 2012/08/10 v4073 L3 Argument expansion
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3tl.sty
+Package: l3tl 2012/07/16 v3991 L3 Token lists
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3seq.sty
+Package: l3seq 2012/07/16 v3991 L3 Sequences and stacks
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3int.sty
+Package: l3int 2012/07/16 v3991 L3 Integers
+\c_max_int=\count101
+\l_tmpa_int=\count102
+\l_tmpb_int=\count103
+\g_tmpa_int=\count104
+\g_tmpb_int=\count105
+\l_tmpc_int=\count106
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3quark.sty
+Package: l3quark 2012/08/08 v4065 L3 Quarks
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3prg.sty
+Package: l3prg 2012/08/08 v4061 L3 Control structures
+\g__prg_map_int=\count107
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3clist.sty
+Package: l3clist 2012/07/16 v3991 L3 Comma separated lists
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3token.sty
+Package: l3token 2012/08/08 v4069 L3 Experimental token manipulation
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3prop.sty
+Package: l3prop 2012/07/16 v3991 L3 Property lists
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3msg.sty
+Package: l3msg 2012/08/10 v4077 L3 Messages
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3file.sty
+Package: l3file 2012/08/08 v4059 L3 File and I/O operations
+\l__ior_stream_int=\count108
+\l_iow_line_count_int=\count109
+\l__iow_target_count_int=\count110
+\l__iow_current_line_int=\count111
+\l__iow_current_word_int=\count112
+\l__iow_current_indentation_int=\count113
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3skip.sty
+Package: l3skip 2012/07/16 v3991 L3 Dimensions and skips
+\l_tmpa_dim=\dimen111
+\l_tmpb_dim=\dimen112
+\g_tmpa_dim=\dimen113
+\g_tmpb_dim=\dimen114
+\l_tmpa_skip=\skip48
+\l_tmpb_skip=\skip49
+\g_tmpa_skip=\skip50
+\g_tmpb_skip=\skip51
+\c_zero_muskip=\muskip10
+\c_max_muskip=\muskip11
+\l_tmpa_muskip=\muskip12
+\l_tmpb_muskip=\muskip13
+\g_tmpa_muskip=\muskip14
+\g_tmpb_muskip=\muskip15
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3keys.sty
+Package: l3keys 2012/07/16 v3991 L3 Experimental key-value interfaces
+\g__keyval_level_int=\count114
+\l_keys_choice_int=\count115
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3fp.sty
+Package: l3fp 2012/08/14 v4089 L3 Floating points
+\c__fp_leading_shift_int=\count116
+\c__fp_middle_shift_int=\count117
+\c__fp_trailing_shift_int=\count118
+\c__fp_big_leading_shift_int=\count119
+\c__fp_big_middle_shift_int=\count120
+\c__fp_big_trailing_shift_int=\count121
+\c__fp_Bigg_leading_shift_int=\count122
+\c__fp_Bigg_middle_shift_int=\count123
+\c__fp_Bigg_trailing_shift_int=\count124
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3box.sty
+Package: l3box 2012/07/16 v3991 L3 Experimental boxes
+\l_tmpb_box=\box26
+\g_tmpa_box=\box27
+\g_tmpb_box=\box28
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3coffins.sty
+Package: l3coffins 2012/07/20 v4011 L3 Coffin code layer
+\l__coffin_internal_box=\box29
+\l__coffin_internal_dim=\dimen115
+\l__coffin_offset_x_dim=\dimen116
+\l__coffin_offset_y_dim=\dimen117
+\l__coffin_x_dim=\dimen118
+\l__coffin_y_dim=\dimen119
+\l__coffin_x_prime_dim=\dimen120
+\l__coffin_y_prime_dim=\dimen121
+\c_empty_coffin=\box30
+\l__coffin_aligned_coffin=\box31
+\l__coffin_aligned_internal_coffin=\box32
+\l_tmpa_coffin=\box33
+\l_tmpb_coffin=\box34
+\l__coffin_display_coffin=\box35
+\l__coffin_display_coord_coffin=\box36
+\l__coffin_display_pole_coffin=\box37
+\l__coffin_display_offset_dim=\dimen122
+\l__coffin_display_x_dim=\dimen123
+\l__coffin_display_y_dim=\dimen124
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3color.sty
+Package: l3color 2012/07/16 v3991 L3 Experimental colour support
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3luatex.sty
+Package: l3luatex 2012/08/03 v4049 L3 Experimental LuaTeX-specific functions
+\g__cctab_allocate_int=\count125
+\g__cctab_stack_int=\count126
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/l3kernel/l3candidates.sty
+Package: l3candidates 2012/05/12 v3633 L3 Experimental additions to l3kernel
+\l__box_top_dim=\dimen125
+\l__box_bottom_dim=\dimen126
+\l__box_left_dim=\dimen127
+\l__box_right_dim=\dimen128
+\l__box_top_new_dim=\dimen129
+\l__box_bottom_new_dim=\dimen130
+\l__box_left_new_dim=\dimen131
+\l__box_right_new_dim=\dimen132
+\l__box_internal_box=\box38
+\l__coffin_bounding_shift_dim=\dimen133
+\l__coffin_left_corner_dim=\dimen134
+\l__coffin_right_corner_dim=\dimen135
+\l__coffin_bottom_corner_dim=\dimen136
+\l__coffin_top_corner_dim=\dimen137
+\l__coffin_scaled_total_height_dim=\dimen138
+\l__coffin_scaled_width_dim=\dimen139
+))
+Package: xparse 2012/08/14 v4091 L3 Experimental document command parser
+\l__xparse_current_arg_int=\count127
+\l__xparse_m_args_int=\count128
+\l__xparse_mandatory_args_int=\count129
+\l__xparse_processor_int=\count130
+\l__xparse_v_nesting_int=\count131
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/local/texlive/2012/texmf-dist/tex/generic/xstring/xstring.tex
+\@xs@message=\write5
+\integerpart=\count132
+\decimalpart=\count133
+)
+Package: xstring 2010/03/28  v1.5d  String manipulations (C Tellechea)
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
+\etb@tempcnta=\count134
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
+x
+\pgfutil@everybye=\toks15
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box39
+(/usr/local/texlive/2012/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks16
+\pgfkeys@temptoks=\toks17
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
+ode.tex
+\pgfkeys@tmptoks=\toks18
+))
+\pgf@x=\dimen140
+\pgf@y=\dimen141
+\pgf@xa=\dimen142
+\pgf@ya=\dimen143
+\pgf@xb=\dimen144
+\pgf@yb=\dimen145
+\pgf@xc=\dimen146
+\pgf@yc=\dimen147
+\w@pgf@writea=\write6
+\r@pgf@reada=\read3
+\c@pgf@counta=\count135
+\c@pgf@countb=\count136
+\c@pgf@countc=\count137
+\c@pgf@countd=\count138
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.d
+ef
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-p
+df.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
+code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count139
+\pgfsyssoftpath@bigbuffer@items=\count140
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
+code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/local/texlive/2012/../texmf-local/tex/latex/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen148
+\pgfmath@count=\count141
+\pgfmath@box=\box40
+\pgfmath@toks=\toks19
+\pgfmath@stack@operand=\toks20
+\pgfmath@stack@operation=\toks21
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
+tex
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic
+.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigo
+nometric.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.rando
+m.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.compa
+rison.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.
+code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round
+.code.tex)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.
+code.tex)))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count142
+))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
+de.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen149
+\pgf@picmaxx=\dimen150
+\pgf@picminy=\dimen151
+\pgf@picmaxy=\dimen152
+\pgf@pathminx=\dimen153
+\pgf@pathmaxx=\dimen154
+\pgf@pathminy=\dimen155
+\pgf@pathmaxy=\dimen156
+\pgf@xx=\dimen157
+\pgf@xy=\dimen158
+\pgf@yx=\dimen159
+\pgf@yy=\dimen160
+\pgf@zx=\dimen161
+\pgf@zy=\dimen162
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconst
+ruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen163
+\pgf@path@lasty=\dimen164
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage
+.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen165
+\pgf@shorten@start@additional=\dimen166
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.co
+de.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box41
+\pgf@hbox=\box42
+\pgf@layerbox@main=\box43
+\pgf@picture@serial@count=\count143
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
+ate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen167
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransform
+ations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen168
+\pgf@pt@y=\dimen169
+\pgf@pt@temp=\dimen170
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.cod
+e.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.c
+ode.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathproce
+ssing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.co
+de.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.cod
+e.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen171
+\pgf@sys@shading@range@num=\count144
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
+e.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.
+code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box44
+))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.co
+de.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretranspare
+ncy.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.
+code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.cod
+e.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box45
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.
+tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/compatibility/pgfcomp-ver
+sion-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen172
+\pgf@nodesepend=\dimen173
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/compatibility/pgfcomp-ver
+sion-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/utilities/pgffor.sty
+(/usr/local/texlive/2012/../texmf-local/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)
+) (/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen174
+\pgffor@skip=\dimen175
+\pgffor@stack=\toks22
+\pgffor@toks=\toks23
+))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
+e.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
+dlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count145
+\pgfplotmarksize=\dimen176
+)
+\tikz@lastx=\dimen177
+\tikz@lasty=\dimen178
+\tikz@lastxsaved=\dimen179
+\tikz@lastysaved=\dimen180
+\tikzleveldistance=\dimen181
+\tikzsiblingdistance=\dimen182
+\tikz@figbox=\box46
+\tikz@tempbox=\box47
+\tikztreelevel=\count146
+\tikznumberofchildren=\count147
+\tikznumberofcurrentchild=\count148
+\tikz@fig@count=\count149
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
+e.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count150
+\pgfmatrixcurrentcolumn=\count151
+\pgf@matrix@numberofcolumns=\count152
+)
+\tikz@expandcount=\count153
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+)))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2009/09/04 v2.10 (rcs-revision 1.6)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
+shapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2009/10/27 v2.10 (rcs-revision 1.3)
+))
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryshadows.code.tex
+File: tikzlibraryshadows.code.tex 2008/01/13 v2.10 (rcs-revision 1.3)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryfadings.code.tex
+File: tikzlibraryfadings.code.tex 2009/11/15 v2.10 (rcs-revision 1.2)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings
+.code.tex
+File: pgflibraryfadings.code.tex 2008/02/07 v2.10 (rcs-revision 1.3)
+)))
+(/usr/local/texlive/2012/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/local/texlive/2012/../texmf-local/tex/latex/keyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/local/texlive/2012/../texmf-local/tex/latex/keyval/xkeyval.tex
+\XKV@toks=\toks24
+\XKV@tempa@toks=\toks25
+\XKV@depth=\count154
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+(/usr/local/texlive/2012/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box48
+)
+\tc@llx=\dimen183
+\tc@lly=\dimen184
+\tc@urx=\dimen185
+\tc@ury=\dimen186
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen187
+\adjbox@Height=\dimen188
+\adjbox@Depth=\dimen189
+\adjbox@Totalheight=\dimen190
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count155
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box49
+\sift@deathcycles=\count156
+\@vwid@loff=\dimen191
+\@vwid@roff=\dimen192
+))
+(/usr/local/texlive/2012/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2011/09/21 ver 4.0
+
+Examine \normalsize starts \@setfontsize size may be \@xiipt. 
+Examine \small starts \@setfontsize size may be \@xipt. 
+Examine \footnotesize starts \@setfontsize size may be \@xpt. 
+Examine \large starts \@setfontsize size may be \@xivpt. 
+Examine \Large starts \@setfontsize size may be \@xviipt. 
+Examine \LARGE starts \@setfontsize size may be \@xxpt. 
+Examine \scriptsize starts \@setfontsize size may be \@viiipt. 
+Examine \tiny starts \@setfontsize size may be \@vipt. 
+Examine \huge starts \@setfontsize size may be \@xxvpt. 
+Examine \Huge starts \@setfontsize size may be \@xxvpt. )
+(/usr/local/texlive/2012/../texmf-local/tex/latex/catoptions.sty
+\m@one=\count157
+\z@pt=\dimen193
+Package: catoptions 2011/12/17 v0.2.7b Securing catcodes and parsing options (A
+M)
+\cpt@csvdepth=\count158
+\cpt@optdepth=\count159
+\cpt@cnta=\count160
+
+\cpt@exprcnt=\count161
+)
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@mk@gobble@args with arg. spec. 'm' on line 50.
+.................................................
+ (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@declare@style@simple with arg. spec. 's m
+. O{\tw@default@pre } m O{\tw@default@sep } O{\tw@default@post } m ' on line
+. 149.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@declare@sytle@extra@args with arg. spec.
+. 'O{\tw@default@post } m ' on line 155.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@declare@style with arg. spec. 's m
+. O{\tw@default@pre } m O{\tw@default@sep } m m m ' on line 182.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \newmenustylesimple with arg. spec. 's m' on line
+. 195.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \renewmenustylesimple with arg. spec. 's m' on
+. line 202.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \providemenustylesimple with arg. spec. 's m' on
+. line 216.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \newmenustyle with arg. spec. 's m' on line 230.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \renewmenustyle with arg. spec. 's m' on line 237.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \providemenustyle with arg. spec. 's m' on line
+. 251.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \changemenuelement with arg. spec. 's m m m' on
+. line 289.
+.................................................
+\c@tw@hyphen@char@num=\count162
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@define@menu@macro with arg. spec. 'm
+. O{\tw@default@input@sep } m ' on line 619.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \newmenumacro with arg. spec. 'm
+. O{\tw@default@input@sep } m' on line 628.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \renewmenumacro with arg. spec. 'm
+. O{\tw@default@input@sep } m' on line 632.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \providemenumacro with arg. spec. 'm
+. O{\tw@default@input@sep } m' on line 640.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@make@key@box with arg. spec. 'm m' on line
+. 655.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tw@make@key@macro with arg. spec. 's m' on line
+. 680.
+.................................................
+\tw@mk@box@shift=\box50
+\tw@mk@box@capslock@mac=\box51
+\tw@mk@box@capslock@win=\box52
+\tw@mk@box@tab@mac=\box53
+\tw@mk@box@tab@win=\box54
+\tw@mk@box@esc@mac=\box55
+\tw@mk@box@Alt@mac=\box56
+\tw@mk@box@cmd@mac=\box57
+\tw@mk@box@return@mac=\box58
+\tw@mk@box@return@win=\box59
+\tw@mk@box@enter@mac=\box60
+\tw@mk@box@winmenu@win=\box61
+\tw@mk@box@backspace=\box62
+\tw@mk@box@del@mac=\box63
+\tw@mk@box@arrowkeyup=\box64
+\tw@mk@box@arrowkeydown=\box65
+\tw@mk@box@arrowkeyright=\box66
+\tw@mk@box@arrowkeyleft=\box67
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks26
+\verbatim@line=\toks27
+\verbatim@in@stream=\read4
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count163
+\FV@InFile=\read5
+\FV@TabBox=\box68
+\c@FancyVerbLine=\count164
+\FV@StepNumber=\count165
+\FV@OutFile=\write7
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box69
+\UL@hyphenbox=\box70
+\UL@skip=\skip52
+\UL@hook=\toks28
+\UL@height=\dimen194
+\UL@pe=\count166
+\UL@pixel=\dimen195
+\ULC@box=\box71
+Package: ulem 2012/05/18
+\ULdepth=\dimen196
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/mdwlist.sty
+Package: mdwlist 1996/05/02 1.1 Various list-related things
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/parskip.sty
+Package: parskip 2001/04/09 non-zero parskip adjustments
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip53
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/fancyhdr.sty
+\fancy@headwidth=\skip54
+\f@ncyO@elh=\skip55
+\f@ncyO@erh=\skip56
+\f@ncyO@olh=\skip57
+\f@ncyO@orh=\skip58
+\f@ncyO@elf=\skip59
+\f@ncyO@erf=\skip60
+\f@ncyO@olf=\skip61
+\f@ncyO@orf=\skip62
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/tools/xspace.sty
+Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen197
+\lightrulewidth=\dimen198
+\cmidrulewidth=\dimen199
+\belowrulesep=\dimen200
+\belowbottomsep=\dimen201
+Normal \dimen register pool exhausted, switching to extended pool.
+\aboverulesep=\dimen256
+\abovetopsep=\dimen257
+\cmidrulesep=\dimen258
+\cmidrulekern=\dimen259
+\defaultaddspace=\dimen260
+\@cmidla=\count167
+\@cmidlb=\count168
+\@aboverulesep=\dimen261
+\@belowrulesep=\dimen262
+\@thisruleclass=\count169
+\@lastruleclass=\count170
+\@thisrulewidth=\dimen263
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(/usr/local/texlive/2012/../texmf-local/tex/latex/wrapfig.sty
+\wrapoverhang=\dimen264
+\WF@size=\dimen265
+\c@WF@wrappedlines=\count171
+\WF@box=\box72
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/08/21 v6.83c Hypertext links for LaTeX
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package hobsub Info: Skipping package `ifluatex' (already loaded).
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package hobsub Info: Skipping package `etexcmds' (already loaded).
+Package hobsub Info: Skipping package `kvsetkeys' (already loaded).
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2012/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+\@linkdim=\dimen266
+\Hy@linkcounter=\count172
+\Hy@pagecounter=\count173
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/08/21 v6.83c Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count174
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Option `plainpages' set `false' on input line 4139.
+Package hyperref Info: Option `breaklinks' set `true' on input line 4139.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4139.
+Package hyperref Info: Hyper figures OFF on input line 4263.
+Package hyperref Info: Link nesting OFF on input line 4268.
+Package hyperref Info: Hyper index ON on input line 4271.
+Package hyperref Info: Plain pages OFF on input line 4278.
+Package hyperref Info: Backreferencing OFF on input line 4283.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4501.
+\c@Hy@tempcnt=\count175
+
+(/usr/local/texlive/2012/../texmf-local/tex/latex/url.sty
+\Urlmuskip=\muskip16
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4854.
+\XeTeXLinkMargin=\dimen267
+\Fld@menulength=\count176
+\Field@Width=\dimen268
+\Fld@charsize=\dimen269
+Package hyperref Info: Hyper figures OFF on input line 6094.
+Package hyperref Info: Link nesting OFF on input line 6099.
+Package hyperref Info: Hyper index ON on input line 6102.
+Package hyperref Info: backreferencing OFF on input line 6109.
+Package hyperref Info: Link coloring ON on input line 6112.
+Package hyperref Info: Link coloring with OCG OFF on input line 6119.
+Package hyperref Info: PDF/A mode OFF on input line 6124.
+LaTeX Info: Redefining \ref on input line 6164.
+LaTeX Info: Redefining \pageref on input line 6168.
+\Hy@abspage=\count177
+\c@Item=\count178
+\c@Hfootnote=\count179
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/08/21 v6.83c Hyperref driver for pdfTeX
+\Fld@listcount=\count180
+\c@bookmark@seq@number=\count181
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip63
+)
+(./Texnicle-User-Manual.aux (./Texnicle-User-Manual-IntroRequirements.aux)
+(./Texnicle-User-Manual-UserGuide.aux
+
+LaTeX Warning: Label `fig:texnicle-newproject' multiply defined.
+
+) (./Texnicle-User-Manual-Reference.aux)
+(./Texnicle-User-Manual-Apx-KeyboardShortcuts.aux))
+\openout1 = `Texnicle-User-Manual.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+
+(/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count182
+\scratchdimen=\dimen270
+\scratchbox=\box73
+\nofMPsegments=\count183
+\nofMParguments=\count184
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count185
+\MPscratchDim=\dimen271
+\MPnumerator=\count186
+\makeMPintoPDFobject=\count187
+\everyMPtoPDFconversion=\toks31
+) (/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+ABD: EveryShipout initializing macros
+\AtBeginShipoutBox=\box74
+Package hyperref Info: Link coloring ON on input line 40.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/07/31 v2.42 Cross-referencing by name of section
+
+(/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count188
+)
+LaTeX Info: Redefining \ref on input line 40.
+LaTeX Info: Redefining \pageref on input line 40.
+LaTeX Info: Redefining \nameref on input line 40.
+
+(./Texnicle-User-Manual.out) (./Texnicle-User-Manual.out)
+\@outlinefile=\write8
+\openout8 = `Texnicle-User-Manual.out'.
+
+
+(./Texnicle-User-Manual-Titlepage.tex
+<TeXnicle-Images/texnicle-icon.png, id=163, 561.09625pt x 562.1pt>
+File: TeXnicle-Images/texnicle-icon.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-icon.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-icon.png used on input line 4
+.
+(pdftex.def)             Requested size: 85.35826pt x 85.50356pt.
+ [1
+
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./TeXni
+cle-Images/texnicle-icon.png>])
+(./Texnicle-User-Manual.toc
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 1.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.38 ....8.1}Paste as Image}{24}{subsection.4.8.1}
+                                                   [1
+
+])
+\tf@toc=\write9
+\openout9 = `Texnicle-User-Manual.toc'.
+
+ [2]
+\openout2 = `Texnicle-User-Manual-IntroRequirements.aux'.
+
+
+(./Texnicle-User-Manual-IntroRequirements.tex
+Chapter 1.
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+[3
+
+
+] [4]
+Chapter 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 19.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 19.
+) [5
+
+]
+\openout2 = `Texnicle-User-Manual-UserGuide.aux'.
+
+ (./Texnicle-User-Manual-UserGuide.tex
+Chapter 3.
+<TeXnicle-Images/texnicle-welcome.jpg, id=250, 581.17125pt x 368.37625pt>
+File: TeXnicle-Images/texnicle-welcome.jpg Graphic file (type jpg)
+
+<use TeXnicle-Images/texnicle-welcome.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-welcome.jpg used on input lin
+e 10.
+(pdftex.def)             Requested size: 352.31625pt x 223.3208pt.
+ [6
+
+
+
+ <./TeXnicle-Images/texnicle-welcome.jpg>]
+Overfull \hbox (0.89546pt too wide) in paragraph at lines 17--18
+[]\OT1/cmr/bx/n/12 Recent Files \OT1/cmr/m/n/12 on the left dis-plays a list of
+ the files most re-cently opened with T[]X\OT1/cmr/m/sc/12 nicle\OT1/cmr/m/n/12
+ .
+ []
+
+<TeXnicle-Images/texnicle-window.jpg, id=259, 1445.4pt x 903.375pt>
+File: TeXnicle-Images/texnicle-window.jpg Graphic file (type jpg)
+
+<use TeXnicle-Images/texnicle-window.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-window.jpg used on input line
+ 27.
+(pdftex.def)             Requested size: 234.8775pt x 146.7898pt.
+
+<TeXnicle-Images/texnicle-toolbar.png, id=261, 605.26125pt x 83.31125pt>
+File: TeXnicle-Images/texnicle-toolbar.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-toolbar.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-toolbar.png used on input lin
+e 39.
+(pdftex.def)             Requested size: 352.31625pt x 48.4947pt.
+ [7 <./TeXnicle-Images/texnicle-window.jpg>] <command.pdf, id=274, 435.21596pt 
+x 435.21596pt>
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 46.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<TeXnicle-Images/texnicle-navproj.png, id=275, 233.87375pt x 24.09pt>
+File: TeXnicle-Images/texnicle-navproj.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-navproj.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-navproj.png used on input lin
+e 62.
+(pdftex.def)             Requested size: 211.3883pt x 21.77487pt.
+
+<TeXnicle-Images/texnicle-navalone.png, id=276, 212.795pt x 26.0975pt>
+File: TeXnicle-Images/texnicle-navalone.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-navalone.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-navalone.png used on input li
+ne 67.
+(pdftex.def)             Requested size: 211.3883pt x 25.9262pt.
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 60--70
+[]$[]$ $[]$ 
+ []
+
+
+<TeXnicle-Images/texnicle-nav-projecttree.png, id=278, 275.0275pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-projecttree.png Graphic file (type png)
+<use TeXnicle-Images/texnicle-nav-projecttree.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projecttree.png used on i
+nput line 77.
+(pdftex.def)             Requested size: 225.4804pt x 237.99535pt.
+ [8 <./TeXnicle-Images/texnicle-toolbar.png> </usr/local/texlive/2012/../texmf-
+local/tex/latex/applekeys/command.pdf> <./TeXnicle-Images/texnicle-navproj.png>
+ <./TeXnicle-Images/texnicle-navalone.png>]
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<option.pdf, id=294, 476.9519pt x 414.49858pt>
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+
+<TeXnicle-Images/texnicle-nav-symbolpalette.png, id=295, 274.02374pt x 826.0862
+4pt>
+File: TeXnicle-Images/texnicle-nav-symbolpalette.png Graphic file (type png)
+ <use TeXnicle-Images/texnicle-nav-symbolpalette.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-symbolpalette.png used on
+ input line 85.
+(pdftex.def)             Requested size: 225.4804pt x 114.80626pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 89.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 89.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+ [9 <./TeXnicle-Images/texnicle-nav-projecttree.png> <./TeXnicle-Images/texnicl
+e-nav-symbolpalette.png> </usr/local/texlive/2012/../texmf-local/tex/latex/appl
+ekeys/option.pdf>]
+<TeXnicle-Images/texnicle-nav-cliplib.png, id=313, 275.0275pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-cliplib.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-cliplib.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-cliplib.png used on input
+ line 94.
+(pdftex.def)             Requested size: 165.45001pt x 496.34589pt.
+
+<return.pdf, id=315, 573.57286pt x 401.0483pt>
+File: return.pdf Graphic file (type pdf)
+ <use return.pdf>
+Package pdftex.def Info: return.pdf used on input line 104.
+(pdftex.def)             Requested size: 9.29462pt x 6.49994pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 106.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 106.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+ [10 <./TeXnicle-Images/texnicle-nav-cliplib.png> </usr/local/texlive/2012/../t
+exmf-local/tex/latex/applekeys/return.pdf>]
+<TeXnicle-Images/texnicle-nav-docoutline.png, id=326, 274.02374pt x 826.08624pt
+>
+File: TeXnicle-Images/texnicle-nav-docoutline.png Graphic file (type png)
+ <use TeXnicle-Images/texnicle-nav-docoutline.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-docoutline.png used on in
+put line 111.
+(pdftex.def)             Requested size: 225.4804pt x 159.40726pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 115.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 115.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+
+<TeXnicle-Images/texnicle-nav-projfind.png, id=328, 274.02374pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-projfind.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-projfind.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projfind.png used on inpu
+t line 119.
+(pdftex.def)             Requested size: 225.4804pt x 143.71432pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 123.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 123.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+
+Underfull \hbox (badness 4608) in paragraph at lines 123--124
+\OT1/cmr/m/n/12 Nav-i-ga-tors pane for projects and not
+ []
+
+[11
+
+ <./TeXnicle-Images/texnicle-nav-docoutline.png> <./TeXnicle-Images/texnicle-na
+v-projfind.png>]
+<TeXnicle-Images/texnicle-nav-info.png, id=341, 273.02pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-info.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-info.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-info.png used on input li
+ne 128.
+(pdftex.def)             Requested size: 225.4804pt x 174.08517pt.
+
+<TeXnicle-Images/texnicle-nav-projsettings.png, id=343, 275.0275pt x 827.09pt>
+File: TeXnicle-Images/texnicle-nav-projsettings.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-projsettings.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projsettings.png used on 
+input line 136.
+(pdftex.def)             Requested size: 225.4804pt x 236.67844pt.
+ [12
+
+ <./TeXnicle-Images/texnicle-nav-info.png> <./TeXnicle-Images/texnicle-nav-proj
+settings.png>]
+<TeXnicle-Images/texnicle-integratedpdf.png, id=357, 402.50375pt x 830.10126pt>
+File: TeXnicle-Images/texnicle-integratedpdf.png Graphic file (type png)
+<use TeXnicle-Images/texnicle-integratedpdf.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-integratedpdf.png used on inp
+ut line 147.
+(pdftex.def)             Requested size: 248.96957pt x 513.45418pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 151.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<shift.pdf, id=358, 476.9519pt x 449.2283pt>
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 151.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 151.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+Underfull \hbox (badness 3168) in paragraph at lines 151--152
+[]\OT1/cmr/m/n/12 The fourth im-por-tant part of the
+ []
+
+[13
+
+ <./TeXnicle-Images/texnicle-integratedpdf.png> </usr/local/texlive/2012/../tex
+mf-local/tex/latex/applekeys/shift.pdf>]
+<TeXnicle-Images/texnicle-console.png, id=368, 771.88374pt x 219.82124pt>
+File: TeXnicle-Images/texnicle-console.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-console.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-console.png used on input lin
+e 158.
+(pdftex.def)             Requested size: 305.33789pt x 86.95421pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 164.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 166.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+Overfull \hbox (0.14015pt too wide) in paragraph at lines 166--168
+\OT1/cmr/m/n/12 Whether a new T[]X file is cre-ated from the wel-come screen, f
+rom []  [],
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 168.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 168.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 181.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 181.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<TeXnicle-Images/texnicle-newproject.jpg, id=370, 582.175pt x 370.38374pt>
+File: TeXnicle-Images/texnicle-newproject.jpg Graphic file (type jpg)
+
+<use TeXnicle-Images/texnicle-newproject.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-newproject.jpg used on input 
+line 186.
+(pdftex.def)             Requested size: 284.52756pt x 181.02052pt.
+ [14
+
+ <./TeXnicle-Images/texnicle-console.png>]) [15 <./TeXnicle-Images/texnicle-new
+project.jpg>]
+\openout2 = `Texnicle-User-Manual-Reference.aux'.
+
+
+(./Texnicle-User-Manual-Reference.tex
+Chapter 4.
+File: command.pdf Graphic file (type pdf)
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 7.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 13.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+ [16
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 31.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 31.
+ [17]
+Overfull \hbox (3.0322pt too wide) in paragraph at lines 41--42
+\OT1/cmr/m/n/12 The Com-mands pane is home to many of the pow-er-ful and most c
+on-ve-nient fea-tures T[]X\OT1/cmr/m/sc/12 nicle
+ []
+
+<escape.pdf, id=397, 430.17714pt x 430.17714pt>
+File: escape.pdf Graphic file (type pdf)
+ <use escape.pdf>
+Package pdftex.def Info: escape.pdf used on input line 43.
+(pdftex.def)             Requested size: 7.49605pt x 7.5pt.
+ [18 </usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/escape.pdf>] [
+19]
+<TeXnicle-Images/texnicle-newtemplate.jpg, id=413, 609.27625pt x 394.47375pt>
+File: TeXnicle-Images/texnicle-newtemplate.jpg Graphic file (type jpg)
+
+<use TeXnicle-Images/texnicle-newtemplate.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-newtemplate.jpg used on input
+ line 86.
+(pdftex.def)             Requested size: 284.52756pt x 184.22292pt.
+ [20 <./TeXnicle-Images/texnicle-newtemplate.jpg>]
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 97.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 97.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 97.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+File: shift.pdf Graphic file (type pdf)
+
+<use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 97.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 97.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 99.
+(pdftex.def)             Requested size: 8.80576pt x 8.81241pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 99.
+(pdftex.def)             Requested size: 8.80576pt x 8.81241pt.
+
+<TeXnicle-Images/texnicle-clippingslibrary.jpg, id=419, 236.885pt x 845.1575pt>
+File: TeXnicle-Images/texnicle-clippingslibrary.jpg Graphic file (type jpg)
+<use TeXnicle-Images/texnicle-clippingslibrary.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-clippingslibrary.jpg used on 
+input line 106.
+(pdftex.def)             Requested size: 85.35826pt x 304.54018pt.
+
+Overfull \hbox (4.30942pt too wide) in paragraph at lines 117--118
+\OT1/cmr/m/n/12 ``Com-mand'' in-put field. For ex-am-ple, to cre-ate a short-cu
+t that will work by typ-ing \OT1/cmtt/m/n/12 #shortcut\OT1/cmr/m/n/12 ,
+ []
+
+<texnicle-validclip.jpg, id=422, 513.92pt x 73.27374pt>
+File: texnicle-validclip.jpg Graphic file (type jpg)
+
+<use texnicle-validclip.jpg>
+Package pdftex.def Info: texnicle-validclip.jpg used on input line 121.
+(pdftex.def)             Requested size: 234.8775pt x 33.4883pt.
+File: return.pdf Graphic file (type pdf)
+ <use return.pdf>
+Package pdftex.def Info: return.pdf used on input line 126.
+(pdftex.def)             Requested size: 9.29462pt x 6.49994pt.
+
+<TeXnicle-Images/texnicle-benexpanded.png, id=424, 275.0275pt x 188.705pt>
+File: TeXnicle-Images/texnicle-benexpanded.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-benexpanded.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-benexpanded.png used on input
+ line 129.
+(pdftex.def)             Requested size: 140.92793pt x 96.69897pt.
+ [21]
+<TeXnicle-Images/texnicle-customclipplaceholder.png, id=433, 295.1025pt x 171.6
+4125pt>
+File: TeXnicle-Images/texnicle-customclipplaceholder.png Graphic file (type png
+)
+ <use TeXnicle-Images/texnicle-customclipplaceholder.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-customclipplaceholder.png use
+d on input line 137.
+(pdftex.def)             Requested size: 140.92793pt x 81.97043pt.
+ [22 <./TeXnicle-Images/texnicle-clippingslibrary.jpg> <./texnicle-validclip.jp
+g>]
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 144.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<TeXnicle-Images/texnicle-bookmarks.png, id=441, 1158.3275pt x 284.06125pt>
+File: TeXnicle-Images/texnicle-bookmarks.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-bookmarks.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-bookmarks.png used on input l
+ine 147.
+(pdftex.def)             Requested size: 352.31625pt x 86.39798pt.
+ [23 <./TeXnicle-Images/texnicle-benexpanded.png> <./TeXnicle-Images/texnicle-c
+ustomclipplaceholder.png> <./TeXnicle-Images/texnicle-bookmarks.png>]
+<TeXnicle-Images/texnicle-codefold-open.png, id=448, 443.6575pt x 112.42pt>
+File: TeXnicle-Images/texnicle-codefold-open.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-codefold-open.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-codefold-open.png used on inp
+ut line 161.
+(pdftex.def)             Requested size: 258.36668pt x 65.4678pt.
+
+<TeXnicle-Images/texnicle-codefold-closed.png, id=449, 352.31625pt x 111.41624p
+t>
+File: TeXnicle-Images/texnicle-codefold-closed.png Graphic file (type png)
+ <use TeXnicle-Images/texnicle-codefold-closed.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-codefold-closed.png used on i
+nput line 166.
+(pdftex.def)             Requested size: 211.38832pt x 66.84856pt.
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 159--169
+[]$[]$ $[]$ 
+ []
+
+
+<TeXnicle-Images/texnicle-codefold-nomatch.png, id=450, 380.42125pt x 92.345pt>
+File: TeXnicle-Images/texnicle-codefold-nomatch.png Graphic file (type png)
+<use TeXnicle-Images/texnicle-codefold-nomatch.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-codefold-nomatch.png used on 
+input line 176.
+(pdftex.def)             Requested size: 234.8775pt x 57.01657pt.
+
+<control.pdf, id=451, 331.87991pt x 195.20929pt>
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 187.
+(pdftex.def)             Requested size: 7.64674pt x 4.49997pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 187.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+ [24 <./TeXnicle-Images/texnicle-codefold-open.png> <./TeXnicle-Images/texnicle
+-codefold-closed.png> <./TeXnicle-Images/texnicle-codefold-nomatch.png> </usr/l
+ocal/texlive/2012/../texmf-local/tex/latex/applekeys/control.pdf>]
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 193.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 193.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 199.
+(pdftex.def)             Requested size: 7.64674pt x 4.49997pt.
+File: escape.pdf Graphic file (type pdf)
+ <use escape.pdf>
+Package pdftex.def Info: escape.pdf used on input line 201.
+(pdftex.def)             Requested size: 7.49605pt x 7.5pt.
+File: control.pdf Graphic file (type pdf)
+
+<use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 203.
+(pdftex.def)             Requested size: 7.64674pt x 4.49997pt.
+ [25]
+<TeXnicle-Images/texnicle-inserttable.png, id=472, 259.97125pt x 248.93pt>
+File: TeXnicle-Images/texnicle-inserttable.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-inserttable.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-inserttable.png used on input
+ line 213.
+(pdftex.def)             Requested size: 140.92793pt x 134.94057pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 218.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+File: shift.pdf Graphic file (type pdf)
+
+<use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 218.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 218.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 220.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+) [26 <./TeXnicle-Images/texnicle-inserttable.png>]
+\openout2 = `Texnicle-User-Manual-Apx-KeyboardShortcuts.aux'.
+
+ (./Texnicle-User-Manual-Apx-KeyboardShortcuts.tex
+Appendix A.
+File: command.pdf Graphic file (type pdf)
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 7.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 8.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 9.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 10.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 10.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 11.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 12.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 13.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+
+<use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 14.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 14.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 15.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 16.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 16.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 17.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 18.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 18.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 19.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 20.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 21.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 22.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 22.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 23.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 23.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 24.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+
+<use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 25.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+ [27
+
+
+
+]
+File: escape.pdf Graphic file (type pdf)
+ <use escape.pdf>
+Package pdftex.def Info: escape.pdf used on input line 26.
+(pdftex.def)             Requested size: 8.24434pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 27.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 28.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+
+<use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 29.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 29.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 30.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 31.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 31.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 32.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 33.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 33.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 34.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 35.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 36.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 37.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 37.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 38.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 38.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 39.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 39.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 40.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 40.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 41.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 41.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 42.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 42.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 43.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 43.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 44.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 44.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 45.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 45.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 46.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 46.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 47.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 48.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 49.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 49.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 50.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 50.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 51.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 51.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 52.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 53.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+ <delete.pdf, id=482, 592.61403pt x 414.49858pt>
+File: delete.pdf Graphic file (type pdf)
+
+<use delete.pdf>
+Package pdftex.def Info: delete.pdf used on input line 53.
+(pdftex.def)             Requested size: 11.79147pt x 8.25005pt.
+ [28]
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 54.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 54.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 55.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 55.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 56.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 56.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 57.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 57.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 58.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 58.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 59.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 59.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 59.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 60.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 60.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 60.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 61.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 62.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 63.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 64.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 65.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 65.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: control.pdf Graphic file (type pdf)
+ <use control.pdf>
+Package pdftex.def Info: control.pdf used on input line 66.
+(pdftex.def)             Requested size: 8.41142pt x 4.94998pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 66.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 67.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: return.pdf Graphic file (type pdf)
+ <use return.pdf>
+Package pdftex.def Info: return.pdf used on input line 67.
+(pdftex.def)             Requested size: 10.22234pt x 7.14996pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 68.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 68.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: return.pdf Graphic file (type pdf)
+ <use return.pdf>
+Package pdftex.def Info: return.pdf used on input line 68.
+(pdftex.def)             Requested size: 10.22234pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 69.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 70.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 70.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 71.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 71.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 72.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 73.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 73.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+ <tab.pdf, id=487, 430.17714pt x 336.1057pt>
+File: tab.pdf Graphic file (type pdf)
+
+<use tab.pdf>
+Package pdftex.def Info: tab.pdf used on input line 73.
+(pdftex.def)             Requested size: 10.55486pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 74.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 74.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 75.
+(pdftex.def)             Requested size: 9.6866pt x 9.13007pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 75.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 75.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 76.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 76.
+
+LaTeX Font Info:    No file OMScmss.fd. on input line 76.
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/bx/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceright' on input line 76.
+
+File: command.pdf Graphic file (type pdf)
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 77.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 78.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 79.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 80.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+ [29 </usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/delete.pdf> </
+usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/tab.pdf>]
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 82.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 83.
+(pdftex.def)             Requested size: 8.22379pt x 7.14996pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 83.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 84.
+(pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
+)
+[30]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 57.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 57.
+ (./Texnicle-User-Manual.aux (./Texnicle-User-Manual-IntroRequirements.aux) (./
+Texnicle-User-Manual-UserGuide.aux) (./Texnicle-User-Manual-Reference.aux)
+(./Texnicle-User-Manual-Apx-KeyboardShortcuts.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 57.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 57.
+Package rerunfilecheck Info: File `Texnicle-User-Manual.out' has not changed.
+(rerunfilecheck)             Checksum: 24943B8A12E0B4AA50F1584C410F250E;2238.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 23697 strings out of 493488
+ 427440 string characters out of 3141326
+ 582913 words of memory out of 3000000
+ 26399 multiletter control sequences out of 15000+200000
+ 14003 words of font info for 49 fonts, out of 3000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 63i,12n,79p,1445b,791s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
+ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
+al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
+texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texl
+ive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texli
+ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive
+/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texliv
+e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
+2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Texnicle-User-Manual.pdf (31 pages, 1378082 bytes).
+PDF statistics:
+ 584 PDF objects out of 1000 (max. 8388607)
+ 461 compressed objects within 5 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 601 words of extra memory for PDF output out of 10000 (max. 10000000)
+
