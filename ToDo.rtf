@@ -58,6 +58,57 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 
 \fs28 \cf0 \
 \
+After search in PDF? Also cmd-g was not working...\
+\
+27/8/12 4:02:36.290 PM TeXnicle[1399]: NSMutableRLEArray objectAtIndex:effectiveRange:: Out of bounds\
+27/8/12 4:02:36.293 PM TeXnicle[1399]: (\
+	0   CoreFoundation                      0x00007fff8fbee716 __exceptionPreprocess + 198\
+	1   libobjc.A.dylib                     0x00007fff8ca12470 objc_exception_throw + 43\
+	2   CoreFoundation                      0x00007fff8fbee4ec +[NSException raise:format:] + 204\
+	3   Foundation                          0x00007fff88874407 -[NSRLEArray objectAtIndex:effectiveRange:] + 119\
+	4   Foundation                          0x00007fff88876029 -[NSConcreteMutableAttributedString addAttribute:value:range:] + 179\
+	5   TeXnicle                            0x00000001000a136e -[PDFViewerController tableView:objectValueForTableColumn:row:] + 1062\
+	6   AppKit                              0x00007fff918337f4 -[NSTableView preparedCellAtColumn:row:] + 416\
+	7   AppKit                              0x00007fff91833367 -[NSTableView _drawContentsAtRow:column:withCellFrame:] + 47\
+	8   AppKit                              0x00007fff91831d9e -[NSTableView drawRow:clipRect:] + 2131\
+	9   AppKit                              0x00007fff91821c93 -[NSTableView drawRowIndexes:clipRect:] + 397\
+	10  AppKit                              0x00007fff91820676 -[NSTableView drawRect:] + 1269\
+	11  AppKit                              0x00007fff91704a94 -[NSView _drawRect:clip:] + 4217\
+	12  AppKit                              0x00007fff917030f1 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 1656\
+	13  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	14  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	15  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	16  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	17  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	18  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	19  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	20  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	21  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	22  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	23  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	24  AppKit                              0x00007fff91703509 -[NSView _recursiveDisplayAllDirtyWithLockFocus:visRect:] + 2704\
+	25  AppKit                              0x00007fff91701122 -[NSView _recursiveDisplayRectIfNeededIgnoringOpacity:isVisibleRect:rectIsVisibleRectForView:topView:] + 817\
+	26  AppKit                              0x00007fff91700b73 -[NSThemeFrame _recursiveDisplayRectIfNeededIgnoringOpacity:isVisibleRect:rectIsVisibleRectForView:topView:] + 314\
+	27  AppKit                              0x00007fff916fc79d -[NSView _displayRectIgnoringOpacity:isVisibleRect:rectIsVisibleRectForView:] + 4675\
+	28  AppKit                              0x00007fff916c6703 -[NSView displayIfNeeded] + 1830\
+	29  AppKit                              0x00007fff916c5c3c _handleWindowNeedsDisplayOrLayoutOrUpdateConstraints + 738\
+	30  AppKit                              0x00007fff91c8dc81 __83-[NSWindow _postWindowNeedsDisplayOrLayoutOrUpdateConstraintsUnlessPostingDisabled]_block_invoke_01208 + 46\
+	31  CoreFoundation                      0x00007fff8fbb50c7 __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 23\
+	32  CoreFoundation                      0x00007fff8fbb5031 __CFRunLoopDoObservers + 369\
+	33  CoreFoundation                      0x00007fff8fb904a8 __CFRunLoopRun + 728\
+	34  CoreFoundation                      0x00007fff8fb8fdd2 CFRunLoopRunSpecific + 290\
+	35  HIToolbox                           0x00007fff90bee774 RunCurrentEventLoopInMode + 209\
+	36  HIToolbox                           0x00007fff90bee454 ReceiveNextEventCommon + 166\
+	37  HIToolbox                           0x00007fff90bee3a3 BlockUntilNextEventMatchingListInMode + 62\
+	38  AppKit                              0x00007fff916c2fa3 _DPSNextEvent + 685\
+	39  AppKit                              0x00007fff916c2862 -[NSApplication nextEventMatchingMask:untilDate:inMode:dequeue:] + 128\
+	40  AppKit                              0x00007fff916b9c03 -[NSApplication run] + 517\
+	41  AppKit                              0x00007fff9165e656 NSApplicationMain + 869\
+	42  TeXnicle                            0x0000000100002094 start + 52\
+)\
+\
+\
+\
 Version 2.1\
 ---------------\
 \
