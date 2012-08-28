@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  29 JUL 2012 11:46
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  28 AUG 2012 07:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -304,8 +304,12 @@ and I'll forget about whatever was undefined.
 
 (./introduction.tex [1
 
-{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]) (.
-/conclusions.tex
+{/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 60.
+
+[2]) (./conclusions.tex
 Runaway argument?
 ./conclusions.tex:22: Paragraph ended before \@citex was complete.
 <to be read again> 
@@ -340,14 +344,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 73.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 73.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 73.
 Package rerunfilecheck Info: File `MyArticle_main.out' has not changed.
-(rerunfilecheck)             Checksum: F7F9F9AA21A54E7F4108E01534960EF1;448.
+(rerunfilecheck)             Checksum: 94AC009F834B0CEDDA07F8BDA115683D;311.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 73.
  ) 
 Here is how much of TeX's memory you used:
- 5130 strings out of 493488
- 76803 string characters out of 3141327
+ 5128 strings out of 493488
+ 76753 string characters out of 3141327
  157691 words of memory out of 3000000
- 8380 multiletter control sequences out of 15000+200000
+ 8378 multiletter control sequences out of 15000+200000
  9157 words of font info for 32 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  31i,15n,31p,245b,452s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -359,10 +363,10 @@ sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
 /local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
 ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
 l/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on MyArticle_main.pdf (4 pages, 105318 bytes).
+Output written on MyArticle_main.pdf (4 pages, 105443 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  21 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
