@@ -228,7 +228,7 @@
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
     [self.delegate highlightSearchResult:section.name
-                               withRange:NSMakeRange(section.startIndex+[section.type.name length]+2, [section.name length] )
+                               withRange:NSMakeRange(section.startIndex, [section.name length] )
                                   inFile:section.file];
     
   }
