@@ -758,16 +758,23 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
 {
-  NSRect visibleRect = [self visibleRect];
+//  NSLog(@"Apply font and color");
+  
+//  NSRect visibleRect = [self visibleRect];
+//  NSRange sel = [self selectedRange];
+//  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
+//  NSLog(@"  Selected range %@", NSStringFromRange(sel));
   
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
   NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
   if (![newFont isEqualTo:[self font]] || forceUpdate) {
+//    NSLog(@"Setting new font");
     [self setFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
+//    NSLog(@"Setting new color");
     [self setTextColor:newColor];
   }
   
@@ -781,15 +788,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // background color
   NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
-  [self setBackgroundColor:c];
+  [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
+//  [self setBackgroundColor:c];
   
   // selection color
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [self setSelectedTextAttributes:
    @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
     NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
-    
-  [self scrollRectToVisible:visibleRect];
+  
+//  [self scrollRangeToVisible:sel];
+//  [self scrollRectToVisible:visibleRect];
+//  
+//  NSLog(@"Finished.");
+//  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
+//  NSLog(@"  Selected range %@", NSStringFromRange(sel));
+//  
 }
 
 - (void) setWrapStyle
