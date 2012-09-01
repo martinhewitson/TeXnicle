@@ -115,12 +115,17 @@
 
 - (void) buildOutline
 {
+//  NSLog(@"Build outline...");
+  
   if ([self.delegate shouldGenerateOutline] == NO && [self.sections count] > 0) {
+//    NSLog(@"   NO: Delegate says no, and I have sections already");
     return;
   }
   
-  if (self.isUpdating)
+  if (self.isUpdating && [self.sections count] > 0) {
+//    NSLog(@"   NO: already updating");
     return;
+  }
   
   
   __block TPOutlineBuilder *blockSelf = self;
@@ -129,19 +134,27 @@
   
   // get the main file from the delegate
   id file = [self.delegate mainFile];
-  if ([file isKindOfClass:[FileEntity class]]) {    
-
+//  NSLog(@"  main file %@", [file valueForKey:@"name"]);
+  
+  if ([file isKindOfClass:[FileEntity class]]) {
+    
     __block TPOutlineBuilder *blockSelf = self;
-    self.isUpdating = YES;
+    
     dispatch_async(queue, ^{
-      
       
       NSArray *newSections = [file generateSectionsForTypes:templatesToScanFor
                                                 forceUpdate:NO];
       
       [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];
+      
     });
     
+    self.isUpdating = YES;
+    
+    // This seems to be needed to make sure the queue is always executed. Sometimes it doesn't get
+    // executed and gets stuck there. Clearly this is a big hack and should be handled differently,
+    // if only I knew how.
+    usleep(1000);
     
   } else {
     // get text
