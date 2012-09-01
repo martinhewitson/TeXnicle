@@ -86,17 +86,23 @@
           }
           
           if (template != nil) {
-            NSInteger loc = index+1;
+            NSInteger loc = index+[command length];
+//            NSLog(@"Looking for section arg at %ld", loc);
             NSString *arg = [text parseArgumentStartingAt:&loc];
             if (arg == nil) {
               arg = template.defaultTitle;
               if (arg == nil) {
                 arg = @"<unknown>";
               }
+              loc = index;
+            } else {
+              loc -= [arg length];
             }
             
-            TPSection *section = [TPSection sectionWithParent:nil start:index inFile:file type:template name:arg];
+//            NSLog(@"Got section arg [%@] at %ld", arg, loc);
             
+            TPSection *section = [TPSection sectionWithParent:nil start:loc inFile:file type:template name:arg];
+//            NSLog(@"Made section %@", section);
             // add the section
             [sectionsFound addObject:section];
           } // end if template is not nil
@@ -112,11 +118,11 @@
         if ([file isKindOfClass:[FileEntity class]]) {
           ProjectEntity *project = [(FileEntity*)file project];
           // access the project on the main thread otherwise we can get mutex deadlocks
-          dispatch_sync(dispatch_get_main_queue(), ^{
+//          dispatch_sync(dispatch_get_main_queue(), ^{
             subfile = [project fileWithPath:arg];
 //            NSLog(@"  got file %@", subfile);
             subtext = [subfile workingContentString];
-          });
+//          });
         } else {
           // file is a URL
           NSString *root = [[file path] stringByDeletingLastPathComponent];
@@ -172,6 +178,8 @@
       if ([sectionsFound indexOfObject:newSection] == [sections indexOfObject:existingSection]
           && [existingSection nearlyMatches:newSection] == YES) {
 //        NSLog(@"Near match: %@", existingSection);
+        // set the start index
+        existingSection.startIndex = newSection.startIndex;
         [sectionsToReturn addObject:existingSection];
         matchIndex = ii+1;
         didMatch = YES;
