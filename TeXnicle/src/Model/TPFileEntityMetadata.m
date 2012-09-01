@@ -126,32 +126,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
 - (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
-//  __block TPFileEntityMetadata *blockSelf = self;
-//  dispatch_async(queue, ^{
-  
-    [self updateSectionsForTypes:templates forceUpdate:force];
-    
-//  });
-  
-//  dispatch_sync(queue, ^{						
-//    // both blocks have completed
-//  });
-  
-//  dispatch_async(dispatch_get_main_queue(), ^{
-//    
-//    blockSelf.lastUpdateOfSections = [NSDate date];
-  
-//    // send notification of section update
-//    if (blockSelf.parent != nil && blockSelf.sections != nil) {
-//      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-//      NSDictionary *dict = @{@"file": blockSelf.parent, @"sections": blockSelf.sections};
-//      
-//      [nc postNotificationName:TPFileMetadataSectionsUpdatedNotification
-//                        object:blockSelf
-//                      userInfo:dict];
-//    }
-//  });
-  
+  [self updateSectionsForTypes:templates forceUpdate:force];
   
   return self.sections;
 }
