@@ -118,25 +118,26 @@ Once your clip has been created, it's a good idea to set a command for the clip 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.5\textwidth]{texnicle-validclip.jpg}
+\includegraphics[width=0.5\textwidth]{TeXnicle-Images/texnicle-validclip.png}
 \caption{A valid clip from the library will turn yellow.}
 \label{fig:texnicle-validclip}
 \end{figure}
 
+
 Once the shortcut command turns yellow, press \keys{\returnkey} to insert the clip. The |#ben| command (shortcut for an |enumerate| environment) will yield the something like Figure \ref{fig:texnicle-benexpanded} in the editor:
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.3\textwidth]{TeXnicle-Images/texnicle-benexpanded.png}
+\includegraphics[width=0.3\textwidth]{TeXnicle-Images/texnicle-expandedben.png}
 \caption{An expansion of the code for an \texttt{enumerate} environment.}
-\label{fig:texnicle-benexpanded}
+\label{fig:texnicle-expandedben}
 \end{figure}
 
-Some clippings, like that in Figure \ref{fig:texnicle-benexpanded} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in \@ symbols. For example, to create a shortcut for text in small caps (the |\smallcaps| command), we will create a new clipping that contains |\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as |#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customclipplaceholder} below.
+Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in \@ symbols. For example, to create a shortcut for text in small caps (the |\smallcaps| command), we will create a new clipping that contains |\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as |#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customclipplaceholder} below.
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.3\textwidth]{TeXnicle-Images/texnicle-customclipplaceholder.png}
+\includegraphics[width=0.5\textwidth]{TeXnicle-Images/texnicle-customcliptag.png}
 \caption{After defining a placeholder, this is the output.}
-\label{fig:texnicle-customclipplaceholder}
+\label{fig:texnicle-customcliptag}
 \end{figure}
 
 \section{Bookmarks and Code Folding}
