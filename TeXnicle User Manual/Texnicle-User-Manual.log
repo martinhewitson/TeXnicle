@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  28 AUG 2012 06:21
-=======
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.8.27)  28 AUG 2012 15:25
->>>>>>> Updated pictures in manual.
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.7.8)  2 SEP 2012 15:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -108,7 +104,7 @@ Package: changebar 2005/09/18 v3.5c Indicate changes with marginal bars
 \openout4 = `Texnicle-User-Manual.cb'.
 
 )
-(./applekeys.sty
+(/Users/hewitson/Library/texmf/tex/latex/applekeys/applekeys.sty
 Package: applekeys 2005/08/24 H.S. For inclusion of apple key graphics 
 )
 (/usr/local/texlive/2012/texmf-dist/tex/latex/menukeys/menukeys.sty
@@ -1032,7 +1028,12 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Hy@SectionHShift=\skip65
 )
 (./Texnicle-User-Manual.aux (./Texnicle-User-Manual-IntroRequirements.aux)
-(./Texnicle-User-Manual-UserGuide.aux))
+(./Texnicle-User-Manual-UserGuide.aux
+
+LaTeX Warning: Label `fig:texnicle-newproject' multiply defined.
+
+) (./Texnicle-User-Manual-Reference.aux)
+(./Texnicle-User-Manual-Apx-KeyboardShortcuts.aux))
 \openout1 = `Texnicle-User-Manual.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
@@ -1100,7 +1101,7 @@ LaTeX Info: Redefining \nameref on input line 40.
 
 
 (./Texnicle-User-Manual-Titlepage.tex
-<TeXnicle-Images/texnicle-icon.png, id=55, 561.09625pt x 562.1pt>
+<TeXnicle-Images/texnicle-icon.png, id=163, 561.09625pt x 562.1pt>
 File: TeXnicle-Images/texnicle-icon.png Graphic file (type png)
 
 <use TeXnicle-Images/texnicle-icon.png>
@@ -1111,74 +1112,61 @@ Package pdftex.def Info: TeXnicle-Images/texnicle-icon.png used on input line 4
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./TeXni
 cle-Images/texnicle-icon.png>])
-(./Texnicle-User-Manual.toc)
-\tf@toc=\write9
-\openout9 = `Texnicle-User-Manual.toc'.
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.47 ...de{Texnicle-User-Manual-IntroRequirements}
-                                                   [1
-
-]
-\openout2 = `Texnicle-User-Manual-IntroRequirements.aux'.
-
-
-(./Texnicle-User-Manual-IntroRequirements.tex
-Chapter 1.
+(./Texnicle-User-Manual.toc
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 1.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 3.
+(Font)              <12> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 3.
+(Font)              <6> on input line 2.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.38 ....8.1}Paste as Image}{24}{subsection.4.8.1}
+                                                   [1
 
-LaTeX Warning: Reference `reference' on page 2 undefined on input line 9.
+])
+\tf@toc=\write9
+\openout9 = `Texnicle-User-Manual.toc'.
 
+ [2]
+\openout2 = `Texnicle-User-Manual-IntroRequirements.aux'.
+
+
+(./Texnicle-User-Manual-IntroRequirements.tex
+Chapter 1.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-[2
+[3
 
 
-] [3]
+] [4]
 Chapter 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 19.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 19.
-
-LaTeX Warning: Reference `reference.engines' on page 4 undefined on input line 
-21.
-
-
-LaTeX Warning: Reference `reference.prefs.palettelibrary' on page 4 undefined o
-n input line 25.
-
-) [4
+) [5
 
 ]
 \openout2 = `Texnicle-User-Manual-UserGuide.aux'.
 
  (./Texnicle-User-Manual-UserGuide.tex
 Chapter 3.
-
-LaTeX Warning: Reference `reference' on page 5 undefined on input line 3.
-
-<TeXnicle-Images/texnicle-welcome.jpg, id=98, 581.17125pt x 368.37625pt>
+<TeXnicle-Images/texnicle-welcome.jpg, id=250, 581.17125pt x 368.37625pt>
 File: TeXnicle-Images/texnicle-welcome.jpg Graphic file (type jpg)
 
 <use TeXnicle-Images/texnicle-welcome.jpg>
 Package pdftex.def Info: TeXnicle-Images/texnicle-welcome.jpg used on input lin
 e 10.
 (pdftex.def)             Requested size: 352.31625pt x 223.3208pt.
- [5
+ [6
 
 
 
@@ -1189,15 +1177,7 @@ Overfull \hbox (0.89546pt too wide) in paragraph at lines 17--18
  .
  []
 
-
-LaTeX Warning: Reference `userguide.newproject' on page 6 undefined on input li
-ne 18.
-
-
-LaTeX Warning: Reference `userguide.newdoc' on page 6 undefined on input line 2
-0.
-
-<TeXnicle-Images/texnicle-window.jpg, id=104, 1445.4pt x 903.375pt>
+<TeXnicle-Images/texnicle-window.jpg, id=259, 1445.4pt x 903.375pt>
 File: TeXnicle-Images/texnicle-window.jpg Graphic file (type jpg)
 
 <use TeXnicle-Images/texnicle-window.jpg>
@@ -1205,54 +1185,252 @@ Package pdftex.def Info: TeXnicle-Images/texnicle-window.jpg used on input line
  27.
 (pdftex.def)             Requested size: 234.8775pt x 146.7898pt.
 
-
-LaTeX Warning: Reference `fig:texnicle-toolbar' on page 6 undefined on input li
-ne 36.
-
-<TeXnicle-Images/texnicle-toolbar.png, id=105, 605.26125pt x 83.31125pt>
+<TeXnicle-Images/texnicle-toolbar.png, id=261, 605.26125pt x 83.31125pt>
 File: TeXnicle-Images/texnicle-toolbar.png Graphic file (type png)
 
 <use TeXnicle-Images/texnicle-toolbar.png>
 Package pdftex.def Info: TeXnicle-Images/texnicle-toolbar.png used on input lin
 e 39.
 (pdftex.def)             Requested size: 352.31625pt x 48.4947pt.
- [6 <./TeXnicle-Images/texnicle-window.jpg>]
+ [7 <./TeXnicle-Images/texnicle-window.jpg>] <command.pdf, id=274, 435.21596pt 
+x 435.21596pt>
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 46.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
 
-./Texnicle-User-Manual-UserGuide.tex:46: LaTeX Error: File `command' not found.
+<TeXnicle-Images/texnicle-navproj.png, id=275, 233.87375pt x 24.09pt>
+File: TeXnicle-Images/texnicle-navproj.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-navproj.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-navproj.png used on input lin
+e 62.
+(pdftex.def)             Requested size: 211.3883pt x 21.77487pt.
+
+<TeXnicle-Images/texnicle-navalone.png, id=276, 212.795pt x 26.0975pt>
+File: TeXnicle-Images/texnicle-navalone.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-navalone.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-navalone.png used on input li
+ne 67.
+(pdftex.def)             Requested size: 211.3883pt x 25.9262pt.
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 60--70
+[]$[]$ $[]$ 
+ []
 
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.46 ...eys{Typeset} button (or \keys{\cmdkey + R}
-                                                  ) will run your chosen eng...
+<TeXnicle-Images/texnicle-nav-projecttree.png, id=278, 275.0275pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-projecttree.png Graphic file (type png)
+<use TeXnicle-Images/texnicle-nav-projecttree.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projecttree.png used on i
+nput line 77.
+(pdftex.def)             Requested size: 225.4804pt x 237.99535pt.
+ [8 <./TeXnicle-Images/texnicle-toolbar.png> </Users/hewitson/Library/texmf/tex
+/latex/applekeys/command.pdf> <./TeXnicle-Images/texnicle-navproj.png> <./TeXni
+cle-Images/texnicle-navalone.png>]
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
 
-? 
-./Texnicle-User-Manual-UserGuide.tex:46: Emergency stop.
- ...                                              
-                                                  
-l.46 ...eys{Typeset} button (or \keys{\cmdkey + R}
-                                                  ) will run your chosen eng...
+<option.pdf, id=294, 476.9519pt x 414.49858pt>
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 81.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
 
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<TeXnicle-Images/texnicle-nav-symbolpalette.png, id=295, 274.02374pt x 826.0862
+4pt>
+File: TeXnicle-Images/texnicle-nav-symbolpalette.png Graphic file (type png)
+ <use TeXnicle-Images/texnicle-nav-symbolpalette.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-symbolpalette.png used on
+ input line 85.
+(pdftex.def)             Requested size: 225.4804pt x 114.80626pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 89.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
 
-<<<<<<< HEAD
- 
-Here is how much of TeX's memory you used:
- 22823 strings out of 493488
- 406377 string characters out of 3141327
- 521613 words of memory out of 3000000
- 25651 multiletter control sequences out of 15000+200000
- 10724 words of font info for 38 fonts, out of 3000000 for 9000
- 957 hyphenation exceptions out of 8191
- 63i,12n,76p,850b,771s stack positions out of 5000i,500n,10000p,200000b,50000s
-./Texnicle-User-Manual-UserGuide.tex:46:  ==> Fatal error occurred, no output P
-DF file produced!
-=======
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 89.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+ [9 <./TeXnicle-Images/texnicle-nav-projecttree.png> <./TeXnicle-Images/texnicl
+e-nav-symbolpalette.png> </Users/hewitson/Library/texmf/tex/latex/applekeys/opt
+ion.pdf>]
+<TeXnicle-Images/texnicle-nav-cliplib.png, id=313, 275.0275pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-cliplib.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-cliplib.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-cliplib.png used on input
+ line 94.
+(pdftex.def)             Requested size: 165.45001pt x 496.34589pt.
+
+<return.pdf, id=315, 573.57286pt x 401.0483pt>
+File: return.pdf Graphic file (type pdf)
+ <use return.pdf>
+Package pdftex.def Info: return.pdf used on input line 104.
+(pdftex.def)             Requested size: 9.29462pt x 6.49994pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 106.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+ <use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 106.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+ [10 <./TeXnicle-Images/texnicle-nav-cliplib.png> </Users/hewitson/Library/texm
+f/tex/latex/applekeys/return.pdf>]
+<TeXnicle-Images/texnicle-nav-docoutline.png, id=326, 274.02374pt x 826.08624pt
+>
+File: TeXnicle-Images/texnicle-nav-docoutline.png Graphic file (type png)
+ <use TeXnicle-Images/texnicle-nav-docoutline.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-docoutline.png used on in
+put line 111.
+(pdftex.def)             Requested size: 225.4804pt x 159.40726pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 115.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 115.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+
+<TeXnicle-Images/texnicle-nav-projfind.png, id=328, 274.02374pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-projfind.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-projfind.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projfind.png used on inpu
+t line 119.
+(pdftex.def)             Requested size: 225.4804pt x 143.71432pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 123.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+File: option.pdf Graphic file (type pdf)
+
+<use option.pdf>
+Package pdftex.def Info: option.pdf used on input line 123.
+(pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
+
+Underfull \hbox (badness 4608) in paragraph at lines 123--124
+\OT1/cmr/m/n/12 Nav-i-ga-tors pane for projects and not
+ []
+
+[11
+
+ <./TeXnicle-Images/texnicle-nav-docoutline.png> <./TeXnicle-Images/texnicle-na
+v-projfind.png>]
+<TeXnicle-Images/texnicle-nav-info.png, id=341, 273.02pt x 825.0825pt>
+File: TeXnicle-Images/texnicle-nav-info.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-info.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-info.png used on input li
+ne 128.
+(pdftex.def)             Requested size: 225.4804pt x 174.08517pt.
+
+<TeXnicle-Images/texnicle-nav-projsettings.png, id=343, 275.0275pt x 827.09pt>
+File: TeXnicle-Images/texnicle-nav-projsettings.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-nav-projsettings.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-nav-projsettings.png used on 
+input line 136.
+(pdftex.def)             Requested size: 225.4804pt x 236.67844pt.
+ [12
+
+ <./TeXnicle-Images/texnicle-nav-info.png> <./TeXnicle-Images/texnicle-nav-proj
+settings.png>]
+<TeXnicle-Images/texnicle-integratedpdf.png, id=357, 402.50375pt x 830.10126pt>
+File: TeXnicle-Images/texnicle-integratedpdf.png Graphic file (type png)
+<use TeXnicle-Images/texnicle-integratedpdf.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-integratedpdf.png used on inp
+ut line 147.
+(pdftex.def)             Requested size: 248.96957pt x 513.45418pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 151.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<shift.pdf, id=358, 476.9519pt x 449.2283pt>
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 151.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 151.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+Underfull \hbox (badness 3168) in paragraph at lines 151--152
+[]\OT1/cmr/m/n/12 The fourth im-por-tant part of the
+ []
+
+[13
+
+ <./TeXnicle-Images/texnicle-integratedpdf.png> </Users/hewitson/Library/texmf/
+tex/latex/applekeys/shift.pdf>]
+<TeXnicle-Images/texnicle-console.png, id=368, 771.88374pt x 219.82124pt>
+File: TeXnicle-Images/texnicle-console.png Graphic file (type png)
+
+<use TeXnicle-Images/texnicle-console.png>
+Package pdftex.def Info: TeXnicle-Images/texnicle-console.png used on input lin
+e 158.
+(pdftex.def)             Requested size: 305.33789pt x 86.95421pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 164.
+File: command.pdf Graphic file (type pdf)
+ <use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 166.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+Overfull \hbox (0.14015pt too wide) in paragraph at lines 166--168
+\OT1/cmr/m/n/12 Whether a new T[]X file is cre-ated from the wel-come screen, f
+rom []  [],
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 168.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 168.
+File: shift.pdf Graphic file (type pdf)
+ <use shift.pdf>
+Package pdftex.def Info: shift.pdf used on input line 181.
+(pdftex.def)             Requested size: 8.806pt x 8.30002pt.
+File: command.pdf Graphic file (type pdf)
+
+<use command.pdf>
+Package pdftex.def Info: command.pdf used on input line 181.
+(pdftex.def)             Requested size: 7.49751pt x 7.5pt.
+
+<TeXnicle-Images/texnicle-newproject.jpg, id=370, 582.175pt x 370.38374pt>
+File: TeXnicle-Images/texnicle-newproject.jpg Graphic file (type jpg)
+
+<use TeXnicle-Images/texnicle-newproject.jpg>
+Package pdftex.def Info: TeXnicle-Images/texnicle-newproject.jpg used on input 
+line 186.
+(pdftex.def)             Requested size: 284.52756pt x 181.02052pt.
+ [14
+
+ <./TeXnicle-Images/texnicle-console.png>]) [15 <./TeXnicle-Images/texnicle-new
+project.jpg>]
+\openout2 = `Texnicle-User-Manual-Reference.aux'.
+
+
 (./Texnicle-User-Manual-Reference.tex
 Chapter 4.
 File: command.pdf Graphic file (type pdf)
@@ -1286,8 +1464,7 @@ File: escape.pdf Graphic file (type pdf)
  <use escape.pdf>
 Package pdftex.def Info: escape.pdf used on input line 43.
 (pdftex.def)             Requested size: 7.49605pt x 7.5pt.
- [18 </usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/escape.pdf>] [
-19]
+ [18 </Users/hewitson/Library/texmf/tex/latex/applekeys/escape.pdf>] [19]
 <TeXnicle-Images/texnicle-newtemplate.jpg, id=413, 609.27625pt x 394.47375pt>
 File: TeXnicle-Images/texnicle-newtemplate.jpg Graphic file (type jpg)
 
@@ -1429,10 +1606,11 @@ File: command.pdf Graphic file (type pdf)
 Package pdftex.def Info: command.pdf used on input line 188.
 (pdftex.def)             Requested size: 7.49751pt x 7.5pt.
  [24 <./TeXnicle-Images/texnicle-codefold-open.png> <./TeXnicle-Images/texnicle
--codefold-closed.png> <./TeXnicle-Images/texnicle-codefold-nomatch.png> </usr/l
-ocal/texlive/2012/../texmf-local/tex/latex/applekeys/control.pdf>]
+-codefold-closed.png> <./TeXnicle-Images/texnicle-codefold-nomatch.png> </Users
+/hewitson/Library/texmf/tex/latex/applekeys/control.pdf>]
 File: option.pdf Graphic file (type pdf)
- <use option.pdf>
+
+<use option.pdf>
 Package pdftex.def Info: option.pdf used on input line 194.
 (pdftex.def)             Requested size: 7.47418pt x 6.49994pt.
 File: command.pdf Graphic file (type pdf)
@@ -2005,10 +2183,11 @@ File: command.pdf Graphic file (type pdf)
 <use command.pdf>
 Package pdftex.def Info: command.pdf used on input line 81.
 (pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
- [29 </usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/delete.pdf> </
-usr/local/texlive/2012/../texmf-local/tex/latex/applekeys/tab.pdf>]
+ [29 </Users/hewitson/Library/texmf/tex/latex/applekeys/delete.pdf> </Users/hew
+itson/Library/texmf/tex/latex/applekeys/tab.pdf>]
 File: command.pdf Graphic file (type pdf)
- <use command.pdf>
+
+<use command.pdf>
 Package pdftex.def Info: command.pdf used on input line 82.
 (pdftex.def)             Requested size: 8.24792pt x 8.25005pt.
 File: option.pdf Graphic file (type pdf)
@@ -2046,13 +2225,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 23699 strings out of 493488
- 427518 string characters out of 3141326
- 581945 words of memory out of 3000000
- 26401 multiletter control sequences out of 15000+200000
+ 23202 strings out of 493488
+ 415701 string characters out of 3141327
+ 601289 words of memory out of 3000000
+ 25895 multiletter control sequences out of 15000+200000
  14003 words of font info for 49 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 63i,13n,79p,1445b,791s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,13n,79p,1465b,791s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
@@ -2070,11 +2249,10 @@ ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive
 e/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Texnicle-User-Manual.pdf (31 pages, 1313535 bytes).
+Output written on Texnicle-User-Manual.pdf (31 pages, 1313482 bytes).
 PDF statistics:
  582 PDF objects out of 1000 (max. 8388607)
  459 compressed objects within 5 object streams
  109 named destinations out of 1000 (max. 500000)
  601 words of extra memory for PDF output out of 10000 (max. 10000000)
 
->>>>>>> Updated pictures in manual.

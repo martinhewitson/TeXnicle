@@ -72,13 +72,9 @@
     <object type="PROJECT" id="z102">
         <attribute name="type" type="string">PDFLaTeX</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual</attribute>
-<<<<<<< HEAD
         <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle User Manual</attribute>
-=======
-        <attribute name="folder" type="string">/Users/briancansler/Documents/LaTeX/TeXnicle/TeXnicle User Manual</attribute>
->>>>>>> Updated pictures in manual.
         <relationship name="mainfile" type="1/1" destination="FILE" idrefs="z105"></relationship>
-        <relationship name="selected" type="1/1" destination="FILE" idrefs="z118"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z119"></relationship>
         <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z103"></relationship>
         <relationship name="uisettings" type="1/1" destination="UISETTINGS" idrefs="z104"></relationship>
         <relationship name="items" type="0/0" destination="PROJECTITEM"></relationship>
@@ -94,33 +90,21 @@
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="UISETTINGS" id="z104">
-<<<<<<< HEAD
-        <attribute name="pdfviewscrollrect" type="string">{{0, 2383}, {337, 537}}</attribute>
+        <attribute name="pdfviewscrollrect" type="string">{{0, 15913}, {552, 730}}</attribute>
         <attribute name="selectedcontrolstab" type="int16">0</attribute>
         <attribute name="maxoutlinedepth" type="int16">7</attribute>
-        <attribute name="editorwidth" type="float">433</attribute>
-        <attribute name="controlswidth" type="float">240</attribute>
-=======
-        <attribute name="pdfviewscrollrect" type="string">{{0, 0}, {0, 0}}</attribute>
-        <attribute name="selectedcontrolstab" type="int16">4</attribute>
-        <attribute name="maxoutlinedepth" type="int16">7</attribute>
-        <attribute name="editorwidth" type="float">1071</attribute>
+        <attribute name="editorwidth" type="float">910</attribute>
         <attribute name="controlswidth" type="float">365</attribute>
->>>>>>> Updated pictures in manual.
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="TEXFILE" id="z105">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {1137, 425}}</attribute>
-        <attribute name="lasteditdate" type="date">367874695.66605001688003540039</attribute>
+        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286186.17882102727890014648</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.77494400739669799805</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48003101348876953125</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.21842801570892333984</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{88, 0}</attribute>
+        <attribute name="cursor" type="string">{610, 0}</attribute>
         <attribute name="sortindex" type="int32">0</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -135,11 +119,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364911101.56180298328399658203</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79034298658370971680</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29891097545623779297</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">17</attribute>
         <attribute name="name" type="string">texnicle-welcome.jpg</attribute>
@@ -152,14 +132,10 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="FILE" id="z111">
-        <attribute name="wasopen" type="bool">-1</attribute>
+        <attribute name="wasopen" type="bool">2</attribute>
         <attribute name="lasteditdate" type="date">364911118.88224202394485473633</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78402501344680786133</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874007.28990799188613891602</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286132.47725301980972290039</attribute>
         <attribute name="extension" type="string">pdf</attribute>
         <attribute name="sortindex" type="int32">7</attribute>
         <attribute name="name" type="string">texnicle_user_manual_main.pdf</attribute>
@@ -193,11 +169,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364915908.36169797182083129883</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79906302690505981445</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29063898324966430664</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">36</attribute>
         <attribute name="name" type="string">texnicle-newproject.jpg</attribute>
@@ -213,11 +185,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364916647.77071297168731689453</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79101198911666870117</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29944700002670288086</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">15</attribute>
         <attribute name="name" type="string">texnicle-newtemplate.jpg</attribute>
@@ -231,16 +199,12 @@
     </object>
     <object type="TEXFILE" id="z117">
         <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 2281}, {1010, 237}}</attribute>
-        <attribute name="lasteditdate" type="date">367874695.64698201417922973633</attribute>
+        <attribute name="visiblerect" type="string">{{0, 475}, {1025, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286186.15785402059555053711</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.77843898534774780273</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48512202501296997070</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.22426897287368774414</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{6579, 6}</attribute>
+        <attribute name="cursor" type="string">{2950, 7}</attribute>
         <attribute name="sortindex" type="int32">3</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual-UserGuide.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -252,15 +216,11 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z118">
-        <attribute name="wasopen" type="bool">0</attribute>
-        <attribute name="visiblerect" type="string">{{0, 2512}, {998, 237}}</attribute>
-        <attribute name="lasteditdate" type="date">367874700.46662700176239013672</attribute>
+        <attribute name="wasopen" type="bool">-1</attribute>
+        <attribute name="visiblerect" type="string">{{0, 2015}, {1013, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286186.18011200428009033203</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78080201148986816406</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48842799663543701172</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.22845602035522460938</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{16957, 0}</attribute>
         <attribute name="sortindex" type="int32">4</attribute>
@@ -274,17 +234,13 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z119">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 271}, {1137, 425}}</attribute>
-        <attribute name="lasteditdate" type="date">367874695.66636002063751220703</attribute>
+        <attribute name="wasopen" type="bool">4</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286461.76358401775360107422</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78008997440338134766</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48260998725891113281</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.22096800804138183594</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{1118, 0}</attribute>
+        <attribute name="cursor" type="string">{1125, 0}</attribute>
         <attribute name="sortindex" type="int32">2</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual-IntroRequirements.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -296,15 +252,11 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z120">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 69}, {1137, 425}}</attribute>
-        <attribute name="lasteditdate" type="date">367874695.66619497537612915039</attribute>
+        <attribute name="wasopen" type="bool">0</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286186.10248601436614990234</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.77801597118377685547</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48126000165939331055</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.21956300735473632812</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{478, 0}</attribute>
         <attribute name="sortindex" type="int32">1</attribute>
@@ -326,11 +278,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364943979.28783297538757324219</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78824001550674438477</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29727900028228759766</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">14</attribute>
         <attribute name="name" type="string">texnicle-clippingslibrary.jpg</attribute>
@@ -346,11 +294,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364993925.12790197134017944336</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79705697298049926758</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30544501543045043945</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">13</attribute>
         <attribute name="name" type="string">texnicle-icon.jpg</attribute>
@@ -366,11 +310,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364993913.79066997766494750977</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79572099447250366211</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30378097295761108398</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">12</attribute>
         <attribute name="name" type="string">texnicle-icon.png</attribute>
@@ -382,34 +322,11 @@
         <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
-<<<<<<< HEAD
-    <object type="FILE" id="z126">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="lasteditdate" type="date">364995091.57353597879409790039</attribute>
-        <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367819345.80029600858688354492</attribute>
-        <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">9</attribute>
-        <attribute name="name" type="string">texnicle-validclip.jpg</attribute>
-        <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./texnicle-validclip.jpg</attribute>
-        <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z113"></relationship>
-        <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
-        <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
-        <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
-        <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
-    </object>
-=======
->>>>>>> Updated pictures in manual.
     <object type="FILE" id="z129">
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364997537.43263000249862670898</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78690302371978759766</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29566597938537597656</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">18</attribute>
         <attribute name="name" type="string">texnicle-expandedben.png</attribute>
@@ -422,14 +339,10 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="FILE" id="z130">
-        <attribute name="wasopen" type="bool">2</attribute>
+        <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364997537.41423797607421875000</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.80165302753448486328</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874007.29287701845169067383</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286132.49075198173522949219</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">19</attribute>
         <attribute name="name" type="string">texnicle-customcliptag.png</attribute>
@@ -541,11 +454,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873929.25702399015426635742</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79964202642440795898</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29121500253677368164</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">9</attribute>
         <attribute name="name" type="string">texnicle-bookmarks.png</attribute>
@@ -561,11 +470,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873886.25874799489974975586</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78757601976394653320</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29674297571182250977</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">22</attribute>
         <attribute name="name" type="string">texnicle-codefold-nomatch.png</attribute>
@@ -581,11 +486,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873881.25870901346206665039</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79773497581481933594</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29399698972702026367</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">21</attribute>
         <attribute name="name" type="string">texnicle-codefold-closed.png</attribute>
@@ -601,11 +502,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873878.25885397195816040039</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79839801788330078125</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30490601062774658203</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">20</attribute>
         <attribute name="name" type="string">texnicle-codefold-open.png</attribute>
@@ -621,11 +518,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365085293.66334998607635498047</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79236102104187011719</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30052900314331054688</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">16</attribute>
         <attribute name="name" type="string">texnicle-inserttable.png</attribute>
@@ -641,11 +534,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365090952.60735499858856201172</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79370999336242675781</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29457598924636840820</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">11</attribute>
         <attribute name="name" type="string">texnicle-toolbar.png</attribute>
@@ -661,11 +550,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365091690.53169298171997070312</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78891998529434204102</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29619997739791870117</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">23</attribute>
         <attribute name="name" type="string">texnicle-window.jpg</attribute>
@@ -681,11 +566,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.01905900239944458008</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78977197408676147461</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29837197065353393555</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">31</attribute>
         <attribute name="name" type="string">texnicle-nav-info.png</attribute>
@@ -701,11 +582,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.09468400478363037109</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79505699872970581055</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30324101448059082031</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">24</attribute>
         <attribute name="name" type="string">texnicle-navproj.png</attribute>
@@ -721,11 +598,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.06109100580215454102</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.80097198486328125000</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29232501983642578125</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">27</attribute>
         <attribute name="name" type="string">texnicle-nav-docoutline.png</attribute>
@@ -741,11 +614,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.08360600471496582031</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78934800624847412109</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29782998561859130859</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">25</attribute>
         <attribute name="name" type="string">texnicle-navalone.png</attribute>
@@ -761,11 +630,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.05046701431274414062</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79638397693634033203</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30435001850128173828</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">28</attribute>
         <attribute name="name" type="string">texnicle-integratedpdf.png</attribute>
@@ -781,11 +646,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.99776798486709594727</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79168999195098876953</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29998600482940673828</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">33</attribute>
         <attribute name="name" type="string">texnicle-mainediting.png</attribute>
@@ -801,11 +662,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.00903600454330444336</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.80241000652313232422</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30215799808502197266</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">32</attribute>
         <attribute name="name" type="string">texnicle-nav-cliplib.png</attribute>
@@ -821,11 +678,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.95475298166275024414</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78487002849578857422</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30269801616668701172</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">35</attribute>
         <attribute name="name" type="string">texnicle-nav-projfind.png</attribute>
@@ -841,11 +694,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.02969002723693847656</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79438501596450805664</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30161398649215698242</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">30</attribute>
         <attribute name="name" type="string">texnicle-nav-projecttree.png</attribute>
@@ -861,11 +710,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.96640002727508544922</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78624302148818969727</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29512101411819458008</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">34</attribute>
         <attribute name="name" type="string">texnicle-nav-symbolpalette.png</attribute>
@@ -881,11 +726,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.04028701782226562500</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.78556698560714721680</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.29344600439071655273</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">29</attribute>
         <attribute name="name" type="string">texnicle-console.png</attribute>
@@ -901,11 +742,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.07248401641845703125</attribute>
         <attribute name="istext" type="bool">0</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.79303497076034545898</attribute>
-=======
         <attribute name="fileloaddate" type="date">367874007.30107498168945312500</attribute>
->>>>>>> Updated pictures in manual.
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">26</attribute>
         <attribute name="name" type="string">texnicle-nav-projsettings.png</attribute>
@@ -918,15 +755,11 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z166">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 1049}, {1137, 425}}</attribute>
-        <attribute name="lasteditdate" type="date">367874695.65021502971649169922</attribute>
+        <attribute name="wasopen" type="bool">3</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
+        <attribute name="lasteditdate" type="date">368286186.10161000490188598633</attribute>
         <attribute name="istext" type="bool">1</attribute>
-<<<<<<< HEAD
-        <attribute name="fileloaddate" type="date">367819345.77943801879882812500</attribute>
-=======
-        <attribute name="fileloaddate" type="date">367874773.48998999595642089844</attribute>
->>>>>>> Updated pictures in manual.
+        <attribute name="fileloaddate" type="date">368286462.23020499944686889648</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{186, 11}</attribute>
         <attribute name="sortindex" type="int32">5</attribute>
@@ -940,10 +773,10 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="FILE" id="z167">
-        <attribute name="wasopen" type="bool">1</attribute>
+        <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367874213.70841002464294433594</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874213.70840501785278320312</attribute>
+        <attribute name="fileloaddate" type="date">368286132.48963099718093872070</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">10</attribute>
         <attribute name="name" type="string">texnicle-validclip.png</attribute>

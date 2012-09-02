@@ -105,6 +105,7 @@
 		25194946138FB9F7007029E5 /* outlineTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194944138FB9F7007029E5 /* outlineTabBarImageDepressed.icns */; };
 		25194947138FB9F7007029E5 /* outlineTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25194945138FB9F7007029E5 /* outlineTabBarImage.icns */; };
 		251BA4F314D6961F00C217D8 /* TPPopupTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251BA4F214D6961E00C217D8 /* TPPopupTableView.m */; };
+		251D30E715F39B67002C52DB /* Texnicle-User-Manual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 251D30E615F39B67002C52DB /* Texnicle-User-Manual.pdf */; };
 		251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D899813EEFDE200301B6D /* BookmarkManager.m */; };
 		251D899B13EEFDE200301B6D /* BookmarkManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251D899913EEFDE200301B6D /* BookmarkManager.xib */; };
 		251D899E13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 251D899C13EFAE0600301B6D /* bookmarksTabBarImageDepressed.icns */; };
@@ -597,6 +598,7 @@
 		25194945138FB9F7007029E5 /* outlineTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlineTabBarImage.icns; sourceTree = "<group>"; };
 		251BA4F114D6961E00C217D8 /* TPPopupTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPopupTableView.h; sourceTree = "<group>"; };
 		251BA4F214D6961E00C217D8 /* TPPopupTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPopupTableView.m; sourceTree = "<group>"; };
+		251D30E615F39B67002C52DB /* Texnicle-User-Manual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Texnicle-User-Manual.pdf"; path = "TeXnicle User Manual/Texnicle-User-Manual.pdf"; sourceTree = SOURCE_ROOT; };
 		251D899713EEFDE200301B6D /* BookmarkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BookmarkManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		251D899813EEFDE200301B6D /* BookmarkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkManager.m; sourceTree = "<group>"; };
 		251D899913EEFDE200301B6D /* BookmarkManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkManager.xib; sourceTree = "<group>"; };
@@ -1453,6 +1455,7 @@
 		251D30E415F38953002C52DB /* User Manual */ = {
 			isa = PBXGroup;
 			children = (
+				251D30E615F39B67002C52DB /* Texnicle-User-Manual.pdf */,
 			);
 			name = "User Manual";
 			sourceTree = "<group>";
@@ -2426,6 +2429,7 @@
 				25AD5A0915BAB29100737610 /* groupFolderOpen.icns in Resources */,
 				25AD5A0A15BAB29100737610 /* groupFolder.icns in Resources */,
 				2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */,
+				251D30E715F39B67002C52DB /* Texnicle-User-Manual.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
