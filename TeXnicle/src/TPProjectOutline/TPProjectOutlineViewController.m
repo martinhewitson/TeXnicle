@@ -69,6 +69,11 @@
   [self.outlineBuilder startTimer];  
 }
 
+- (void) start
+{
+  [self.outlineBuilder startTimer];
+}
+
 - (void) stop
 {
   [self.outlineBuilder stopTimer];
