@@ -2146,8 +2146,8 @@
 }
 
 - (void)doLiveBuild
-{  
-  if (!_building && _liveUpdate && [self.project hasChanges]) {
+{    
+  if (!_building && _liveUpdate && [self.project hasEdits]) {
 		[self saveDocument:self];
     [self build];
   }  

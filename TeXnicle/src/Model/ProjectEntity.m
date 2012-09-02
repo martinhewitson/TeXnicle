@@ -163,10 +163,10 @@
   return fetchResults;
 }
 
-- (BOOL) hasChanges
+- (BOOL) hasEdits
 {
   for (FileEntity *file in self.items) {
-    if ([file hasChanges]) {
+    if ([file hasEdits]) {
       return YES;
     }
   }
