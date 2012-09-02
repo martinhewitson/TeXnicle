@@ -596,6 +596,21 @@ NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 	//	[[startupScreenController window] makeKeyAndOrderFront:self];
 }
 
+- (IBAction)showUserManual:(id)sender
+{
+  if (self.helpViewer == nil) {
+    self.helpViewer = [[PDFViewer alloc] initWithDelegate:self];
+  }
+  [self.helpViewer showWindow:self];
+}
+
+- (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
+{
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"Texnicle-User-Manual" ofType:@"pdf"];
+  return path;
+}
+
+
 #pragma mark -
 #pragma mark Document Control 
 

@@ -28,10 +28,11 @@
 #import <Foundation/Foundation.h>
 #import "TPLibrary.h"
 #import "TPPalette.h"
+#import "PDFViewer.h"
 
 @class StartupScreenController;
 
-@interface TeXnicleAppController : NSObject <NSApplicationDelegate> {
+@interface TeXnicleAppController : NSObject <NSApplicationDelegate, PDFViewerDelegate> {
 @private
 	StartupScreenController *startupScreenController;    
   NSInteger lineToOpen;
@@ -40,7 +41,7 @@
 @property (assign) BOOL openStartupScreenAtAppStartup;
 @property (strong) TPLibrary *library;
 @property (strong) TPPalette *palette;
-
+@property (strong) PDFViewer *helpViewer;
 
 - (void) checkVersion;
 
@@ -56,5 +57,6 @@
 - (IBAction) newArticleDocument:(id)sender;
 - (IBAction) buildNewProject:(id)sender;
 - (IBAction) newLaTeXFile:(id)sender;
+- (IBAction)showUserManual:(id)sender;
 
 @end
