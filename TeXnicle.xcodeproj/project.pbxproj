@@ -1206,6 +1206,7 @@
 		250772F7138E5D81000F1118 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				251D30E415F38953002C52DB /* User Manual */,
 				2527487C15C3AF5800D12D69 /* dsa_pub.pem */,
 				25CD0E9B139959D3004EB857 /* TeXnicle_Help */,
 				250772F8138E5D81000F1118 /* TeXnicle-Info.plist */,
@@ -1447,6 +1448,13 @@
 			);
 			name = "Controls TabBar control";
 			path = src/ControlsTabBar;
+			sourceTree = "<group>";
+		};
+		251D30E415F38953002C52DB /* User Manual */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "User Manual";
 			sourceTree = "<group>";
 		};
 		252144BD1398C23100656D3F /* Finder */ = {
@@ -2833,7 +2841,7 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
@@ -2864,6 +2872,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";

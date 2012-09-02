@@ -32,6 +32,20 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 @implementation MHControlsTabBarController
 
+- (void) dealloc
+{
+  self.tabView.delegate = nil;
+  self.projectButton = nil;
+  self.palletButton = nil;
+  self.libraryButton = nil;
+  self.outlineButton = nil;
+  self.findButton = nil;
+  self.infoButton = nil;
+  self.prefsButton = nil;
+  self.splitview = nil;
+  self.containerView = nil;
+}
+
 - (id)init
 {
   self = [super init];

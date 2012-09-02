@@ -95,6 +95,7 @@
 
 @property (strong) IBOutlet MHControlsTabBarController *controlsTabBarController;
 @property (strong) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
+@property (unsafe_unretained) IBOutlet NSTabView *tabbar;
 
 @property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *forwardTabButton;
@@ -577,7 +578,7 @@
   
   // clear up open documents
   self.openDocuments.texEditorViewController = nil;
-  self.openDocuments.delegate = nil;  
+  self.openDocuments.delegate = nil;
   
   // stop KVO
   [self stopObserving];  
@@ -637,9 +638,10 @@
   // template editor
   self.templateEditor.delegate = nil;
   
-  self.controlsTabBarController = nil;
-  self.infoControlsTabBarController = nil;
-    
+  self.tabbar.delegate = nil;
+//  self.controlsTabBarController = nil;
+//  self.infoControlsTabBarController = nil;
+  
 }
 
 

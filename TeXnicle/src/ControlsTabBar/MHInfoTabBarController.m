@@ -32,6 +32,20 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 @implementation MHInfoTabBarController
 
+- (void) dealloc
+{
+  self.tabView.delegate = nil;
+  self.bookmarksButton = nil;
+  self.warningsButton = nil;
+  self.spellingButton = nil;
+  self.labelsButton = nil;
+  self.citationsButton = nil;
+  self.commandsButton = nil;
+  self.splitview = nil;
+  self.containerView = nil;
+}
+
+
 - (void) awakeFromNib
 {
   [self.tabView selectTabViewItemAtIndex:0];
