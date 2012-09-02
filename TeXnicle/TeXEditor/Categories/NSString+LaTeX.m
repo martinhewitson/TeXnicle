@@ -319,7 +319,8 @@
   NSInteger start = 0;
   while (start < [self length]) {
     unichar c = [self characterAtIndex:start];
-    if (c == '{' || 
+    if (c == '{' ||
+        c == '[' ||
         [[NSCharacterSet whitespaceCharacterSet] characterIsMember:c] ||
         [[NSCharacterSet newlineCharacterSet] characterIsMember:c]) {
       return [self substringWithRange:NSMakeRange(0, start)];
