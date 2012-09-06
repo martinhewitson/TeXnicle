@@ -37,5 +37,6 @@
 - (void) setOutlineDepth:(NSInteger)depth;
 - (void) start;
 - (void) stop;
+- (void) tearDown;
 
 @end

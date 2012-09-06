@@ -15,7 +15,6 @@
 @property (unsafe_unretained) IBOutlet NSButton *showDetailsButton;
 @property (strong) IBOutlet NSOutlineView *outlineView;
 @property (unsafe_unretained) TPSection *currentSection;
-@property (strong) NSArray *sections;
 
 @end
 
@@ -23,6 +22,7 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
   [self.outlineBuilder performSelectorOnMainThread:@selector(stopTimer) withObject:nil waitUntilDone:YES];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
@@ -37,10 +37,21 @@
     // Initialization code here.
     self.delegate = aDelegate;
     self.outlineBuilder = [TPOutlineBuilder outlineBuilderWithDelegate:self];
-    self.sections = @[];
   }
   
   return self;
+}
+
+- (void) tearDown
+{
+//  NSLog(@"Outline view controller tearDown");
+  [self.view removeFromSuperview];
+  self.delegate = nil;
+  [self.outlineBuilder tearDown];
+  [self.outlineView reloadData];
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
+  self.outlineBuilder = nil;
 }
 
 - (void) awakeFromNib
@@ -61,11 +72,6 @@
 
 - (void) setupOutlineBuilder
 {
-  [self.outlineBuilder performSelectorOnMainThread:@selector(buildOutline) withObject:nil waitUntilDone:YES];
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
-//  [self.outlineView reloadData];
-  [self performSelector:@selector(expandAllSections:) withObject:self afterDelay:2];
-  
   [self.outlineBuilder startTimer];  
 }
 
@@ -105,11 +111,10 @@
 
 - (void) didComputeNewSections
 {
-//  NSLog(@"Receiving new sections...");
+  NSArray *sections = self.outlineBuilder.sections;
+//  NSLog(@"Received sections %ld", [sections count]);
   
-  self.sections = [self.outlineBuilder.sections copy];
-  
-  if ([self.sections count] > 0) {
+  if ([sections count] > 0) {
     
     id currentFile = nil;
     NSInteger location = NSNotFound;
@@ -124,7 +129,7 @@
     TPSection *lastSection = nil;
     self.currentSection = nil;
     BOOL didReload = NO;
-    for (TPSection *s in self.sections) {
+    for (TPSection *s in sections) {
       if (s.needsReload) {
         [self.outlineView reloadData];
         s.needsReload = NO;
@@ -148,7 +153,7 @@
         }
         
         // edge case for the last section
-        if (self.currentSection == nil && s == [self.sections lastObject]) {
+        if (self.currentSection == nil && s == [sections lastObject]) {
           if (currentFile == s.file && location > s.startIndex) {
             self.currentSection = s;
           }
@@ -157,8 +162,7 @@
       
       lastSection = s;
     }
-    
-    
+        
     // restore state
     if (didReload) {
       [self performSelector:@selector(restoreExpansionState) withObject:nil afterDelay:0];    
@@ -188,7 +192,8 @@
 
 - (void) restoreExpansionState
 {
-  for (TPSection *s in self.sections) {
+  NSArray *sections = self.outlineBuilder.sections;
+  for (TPSection *s in sections) {
     switch (s.expansionState) {
       case TPOutlineExpansionStateCollapse:
         [self.outlineView collapseItem:s];
@@ -266,8 +271,8 @@
 - (NSArray*) childrenOfSection:(id)parent
 {
   NSMutableArray *children = [NSMutableArray array];
-  
-  for (__strong TPSection *s in self.sections) {
+  NSArray *sections = self.outlineBuilder.sections;
+  for (__strong TPSection *s in sections) {
     if (s.parent == parent) {
       [children addObject:s];
     }
@@ -277,8 +282,9 @@
 }
 
 - (NSInteger) outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{  
+{
   NSArray *children = [self childrenOfSection:item];
+//  NSLog(@"Number of children of %@: %ld", item, [children count]);
   return [children count];
 }
 
@@ -308,7 +314,8 @@
 // Expand all sections
 - (IBAction) expandAllSections:(id) sender
 {
-  for (TPSection *s in self.sections) {
+  NSArray *sections = self.outlineBuilder.sections;
+  for (TPSection *s in sections) {
     [self.outlineView expandItem:s];
   }
 }
@@ -316,7 +323,8 @@
 // Collapse all sections
 - (IBAction) collapseAllSections:(id)sender
 {
-  for (TPSection *s in self.sections) {
+  NSArray *sections = self.outlineBuilder.sections;
+  for (TPSection *s in sections) {
     [self.outlineView collapseItem:s];
   }
 }
