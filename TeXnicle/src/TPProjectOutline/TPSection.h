@@ -16,7 +16,7 @@ enum TPOutlineExpansionState : NSInteger {
   TPOutlineExpansionStateExpanded = 1
   } TPOutlineExpansionState;
   
-@interface TPSection : NSObject
+@interface TPSection : NSObject <NSCopying>
 
 @property (assign) BOOL needsReload;
 @property (assign) NSInteger expansionState;

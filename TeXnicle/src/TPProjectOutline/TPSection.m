@@ -14,11 +14,21 @@
 
 - (void) dealloc
 {
-//  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %p", self);
   self.file = nil;
   self.parent = nil;
 }
 
+- (id) copyWithZone:(NSZone *)zone
+{
+  TPSection *copy = [[[self class] allocWithZone:zone] initWithParent:self.parent
+                                                                start:self.startIndex
+                                                               inFile:self.file
+                                                                 type:self.type
+                                                                 name:self.name];
+  
+  return copy;
+}
 
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName
 {
