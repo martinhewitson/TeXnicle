@@ -87,6 +87,8 @@
 - (void) stopTimer
 {
   if (self.timer) {
+//    NSLog(@"Invalidate timer...");
+    [self.sections removeAllObjects];
     [self.timer invalidate];
     self.timer = nil;
   }
@@ -106,11 +108,18 @@
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
+}
+
+- (void) tearDown
+{
+//  NSLog(@"Tear down outline builder...");
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
   self.delegate = nil;
   dispatch_release(queue);
+  [self.sections removeAllObjects];
 }
 
 - (void) buildOutline
@@ -121,12 +130,6 @@
 //    NSLog(@"   NO: Delegate says no, and I have sections already");
     return;
   }
-  
-  if (self.isUpdating && [self.sections count] > 0) {
-//    NSLog(@"   NO: already updating");
-    return;
-  }
-  
   
   __block TPOutlineBuilder *blockSelf = self;
   
@@ -142,27 +145,24 @@
     
     dispatch_async(queue, ^{
       
+//      NSLog(@"   computing sections...");
       NSArray *newSections = [file generateSectionsForTypes:templatesToScanFor
                                                 forceUpdate:NO];
-      
+//      NSLog(@"  got %ld", [newSections count]);
+//      NSLog(@"   processing sections...");
       [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];
-      
+//      NSLog(@"      done");
     });
     
-    self.isUpdating = YES;
     
-    // This seems to be needed to make sure the queue is always executed. Sometimes it doesn't get
-    // executed and gets stuck there. Clearly this is a big hack and should be handled differently,
-    // if only I knew how.
-    usleep(1000);
-    
+
   } else {
     // get text
     NSString *text = [self.delegate textForFile:file];
         
     dispatch_async(queue, ^{
       NSArray *newSections = [text sectionsInStringForTypes:templatesToScanFor
-                                           existingSections:self.sections
+                                           existingSections:blockSelf.sections
                                                      inFile:file];
       
       [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];

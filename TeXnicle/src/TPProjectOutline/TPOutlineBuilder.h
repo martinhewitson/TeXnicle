@@ -36,6 +36,7 @@
 - (void) buildOutline;
 - (void) startTimer;
 - (void) stopTimer;
+- (void) tearDown;
 
 //- (NSArray*) childrenOfSection:(id)parent;
 @end
