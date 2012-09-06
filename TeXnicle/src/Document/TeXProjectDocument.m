@@ -129,6 +129,11 @@
 
 @implementation TeXProjectDocument
 
+- (void) dealloc
+{
+  NSLog(@"Dealloc %@", self);
+}
+
 - (void) awakeFromNib
 {
   if ([super respondsToSelector:@selector(awakeFromNib)])
@@ -552,7 +557,9 @@
 }
 
 - (void) cleanUp
-{  
+{
+//  NSLog(@"Clean up...");
+  
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
@@ -586,8 +593,8 @@
   [self stopObserving];  
   
   // outline view controller
-  [self.outlineViewController stop];
-  self.outlineViewController.delegate = nil;
+  [self.outlineViewController tearDown];
+  self.outlineViewController = nil;
   
   // warnings view
   self.warningsViewController.delegate = nil;
@@ -641,8 +648,12 @@
   self.templateEditor.delegate = nil;
   
   self.tabbar.delegate = nil;
-//  self.controlsTabBarController = nil;
-//  self.infoControlsTabBarController = nil;
+  
+  [self.controlsTabBarController tearDown];
+  self.controlsTabBarController = nil;
+  
+  [self.infoControlsTabBarController tearDown];
+  self.infoControlsTabBarController = nil;
   
 }
 
