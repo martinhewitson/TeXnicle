@@ -57,5 +57,6 @@ extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
 #pragma mark -
 #pragma mark Control
 
+- (void) tearDown;
 
 @end

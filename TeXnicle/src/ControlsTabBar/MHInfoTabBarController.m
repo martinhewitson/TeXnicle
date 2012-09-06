@@ -34,6 +34,11 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 - (void) dealloc
 {
+  NSLog(@"Dealloc %@", self);
+}
+
+- (void) tearDown
+{
   self.tabView.delegate = nil;
   self.bookmarksButton = nil;
   self.warningsButton = nil;
