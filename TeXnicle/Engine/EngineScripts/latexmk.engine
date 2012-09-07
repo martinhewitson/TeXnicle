@@ -41,7 +41,7 @@ cd "$outputDir"
 #---------------------------
 # Put engine logic here
 
-$ENGINE -pdf "$mainfile"
+$ENGINE -interaction=nonstopmode -pdf "$mainfile"
 
 
 # Engine logic finished
