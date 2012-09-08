@@ -150,7 +150,15 @@
   [self stopLiveUpdateTimer];
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  float updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
+  float updateInterval;
+  if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 0) {
+    // time since last update
+    updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
+  } else {
+    // time since last edit; we check if we should update often enough
+    updateInterval = 1.0f;
+  }
+  
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
 
 }
@@ -189,7 +197,9 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]]) {	
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]] ||
+      [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateEditDelay]] ||
+      [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateMode]]) {
     [self setupLiveUpdateTimer];
 	} 
 }
@@ -563,6 +573,10 @@
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  // outline view controller
+  [self.outlineViewController tearDown];
+  self.outlineViewController = nil;
+  
   // stop gathering metadata
   [self stopAllMetadataOperations];
   
@@ -592,9 +606,6 @@
   // stop KVO
   [self stopObserving];  
   
-  // outline view controller
-  [self.outlineViewController tearDown];
-  self.outlineViewController = nil;
   
   // warnings view
   self.warningsViewController.delegate = nil;
@@ -2161,11 +2172,25 @@
 }
 
 - (void)doLiveBuild
-{    
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
   if (!_building && _liveUpdate && [self.project hasEdits]) {
-		[self saveDocument:self];
+    if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
+      // check for the last edit date
+      NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
+      NSDate *now = [NSDate date];
+      float lastEditInterval = [[defaults valueForKey:TPLiveUpdateEditDelay] floatValue];
+      if ([now timeIntervalSinceDate:lastEdit] < lastEditInterval) {
+        // do nothing
+        return;
+      }
+    }
+    
+    // do update
+    [self saveDocument:self];
     [self build];
-  }  
+  }
 }
 
 - (NSString*)workingDirectory

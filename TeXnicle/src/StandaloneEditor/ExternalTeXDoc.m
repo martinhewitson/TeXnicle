@@ -375,11 +375,75 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   _building = NO;
   _liveUpdate = NO;
-  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  
+  [self observePreferences];
+  [self setupLiveUpdateTimer];
+
   self.metadataUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateMetadata) userInfo:nil repeats:YES];
 
   _didSetupUI = YES;
 }
+
+- (void)setupLiveUpdateTimer
+{
+  [self stopLiveUpdateTimer];
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  float updateInterval;
+  if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 0) {
+    // time since last update
+    updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
+  } else {
+    // time since last edit; we check if we should update often enough
+    updateInterval = 1.0f;
+  }
+  
+  self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
+  
+}
+
+- (void) stopLiveUpdateTimer
+{
+  if (self.liveUpdateTimer) {
+    [self.liveUpdateTimer invalidate];
+  }
+}
+
+
+#pragma mark -
+#pragma mark KVO
+
+- (void) stopObserving
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]];
+}
+
+- (void) observePreferences
+{
+	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+  
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];
+	
+	
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+											ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]] ||
+      [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateEditDelay]] ||
+      [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateMode]]) {
+    [self setupLiveUpdateTimer];
+	}
+}
+
 
 - (void) insertTabbarControllerIntoResponderChain
 {
@@ -608,7 +672,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.pdfViewerController.delegate = nil;
 
   // outline view controller
-  self.outlineViewController.delegate = nil;
+  [self.outlineViewController tearDown];
+  self.outlineViewController = nil;
+  
+  // live update timer
+  [self stopLiveUpdateTimer];
   
   // spell checker
   self.spellcheckerViewController.delegate = nil;
@@ -1697,7 +1765,20 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void)doLiveBuild
 {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
   if (!_building && _liveUpdate && [self hasChanges] && [self.pdfViewerController hasDocument]) {
+    if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
+      // check for the last edit date
+      NSDate *lastEdit = self.lastEdit;
+      NSDate *now = [NSDate date];
+      float lastEditInterval = [[defaults valueForKey:TPLiveUpdateEditDelay] floatValue];
+      if ([now timeIntervalSinceDate:lastEdit] < lastEditInterval) {
+        // do nothing
+        return;
+      }
+    }
+    
     [self saveDocument:self];
     [self build];
   }  
