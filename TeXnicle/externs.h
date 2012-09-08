@@ -168,7 +168,11 @@ extern NSString * const TPTreeSelectionDidChange;
 extern NSString * const TableViewNodeType;
 extern NSString * const OutlineViewNodeType;
 extern NSString * const TPDocumentMatchAttributeName;
+
+extern NSString * const TPLiveUpdateMode;
 extern NSString * const TPLiveUpdateFrequency;
+extern NSString * const TPLiveUpdateEditDelay;
+
 extern NSString * const TPSpellingAutomaticByLanguage;
 
 // Settings
