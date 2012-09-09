@@ -2394,7 +2394,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (void) showTemplatesSheet
 {
   if (self.templateEditor == nil) {
-	 self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:NO];
+	 self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:NO editMode:NO];
   }
   
   [NSApp beginSheet:self.templateEditor.window

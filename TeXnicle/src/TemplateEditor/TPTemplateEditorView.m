@@ -35,6 +35,7 @@
   self = [super initWithNibName:@"TPTemplateEditorView" bundle:nil];
   if (self) {
     // Initialization code here.
+    self.editable = YES;
   }
   
   return self;
@@ -100,7 +101,10 @@
 #pragma mark -
 #pragma mark textview delegate
 
-
+- (BOOL) textShouldBeginEditing:(NSText *)textObject
+{
+  return self.editable;
+}
 
 #pragma mark -
 #pragma mark table view delegate

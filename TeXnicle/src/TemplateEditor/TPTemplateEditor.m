@@ -36,21 +36,27 @@
 @property (unsafe_unretained) IBOutlet NSTextField *filenameField;
 @property (unsafe_unretained) IBOutlet NSTextField *filenameLabel;
 
+@property (assign) BOOL editMode;
+
 @end
 
 @implementation TPTemplateEditor
 
-
-- (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename
+- (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename editMode:(BOOL)editable
 {
   self = [super initWithWindowNibName:@"TemplateEditor"];
   if (self) {
     // Initialization code here.
     self.delegate = aDelegate;
     self.showFilename = withFilename;
+    self.editMode = editable;
   }
-  
   return self;
+}
+
+- (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename
+{
+  return [self initWithDelegate:aDelegate activeFilename:withFilename editMode:YES];
 }
 
 
@@ -65,7 +71,7 @@
 
   // Enable UI elements
   [self.setAsMainFileButton setEnabled:self.showFilename];
-  [self.filenameField setEnabled:self.showFilename];  
+  [self.filenameField setEnabled:self.showFilename];
   if (self.showFilename) {
     [self.filenameLabel setTextColor:[NSColor controlTextColor]];
   } else {
@@ -80,6 +86,11 @@
   } else {
     [self.filenameField setStringValue:@""];
   }
+  
+  [self.templateEditorView.addTemplateButton setHidden:!self.editMode];
+  [self.templateEditorView.removeTemplateButton setHidden:!self.editMode];
+  [self.templateEditorView.templateCodeView setEditable:self.editMode];
+  self.templateEditorView.editable = self.editMode;
 }
 
 - (BOOL) setAsMainFile

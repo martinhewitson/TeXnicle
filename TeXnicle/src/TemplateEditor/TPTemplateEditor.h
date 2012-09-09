@@ -44,6 +44,7 @@
 }
 
 - (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename;
+- (id) initWithDelegate:(id<TemplateEditorDelegate>)aDelegate activeFilename:(BOOL)withFilename editMode:(BOOL)editable;
 
 @property (unsafe_unretained) id<TemplateEditorDelegate> delegate;
 @property (assign) BOOL showFilename;

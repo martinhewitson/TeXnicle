@@ -2909,7 +2909,7 @@
 - (void) showTemplatesSheet
 {
 	if (self.templateEditor == nil) {
-    self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:YES];  
+    self.templateEditor = [[TPTemplateEditor alloc] initWithDelegate:self activeFilename:YES editMode:NO];
   }
   
   // set suggested filename

@@ -34,6 +34,9 @@
 @property (unsafe_unretained) IBOutlet TeXTextView *templateCodeView;
 @property (unsafe_unretained) IBOutlet NSTableView *templateTable;
 @property (unsafe_unretained) IBOutlet NSArrayController *templateArrayController;
+@property (unsafe_unretained) IBOutlet NSButton *addTemplateButton;
+@property (unsafe_unretained) IBOutlet NSButton *removeTemplateButton;
+@property (assign) BOOL editable;
 
 - (NSDictionary*)selectedTemplate;
 
