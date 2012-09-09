@@ -703,6 +703,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // template editor
   self.templateEditor.delegate = nil;
+  
+  [self.tabbarController tearDown];
+  self.tabbarController = nil;
+  
+  [self.infoTabbarController tearDown];
+  self.infoTabbarController = nil;
+  
 }
 
 
