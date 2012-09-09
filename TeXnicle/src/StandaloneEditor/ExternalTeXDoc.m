@@ -395,7 +395,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     updateInterval = [[defaults valueForKey:TPLiveUpdateFrequency] floatValue];
   } else {
     // time since last edit; we check if we should update often enough
-    updateInterval = 1.0f;
+    updateInterval = 0.2f;
   }
   
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
