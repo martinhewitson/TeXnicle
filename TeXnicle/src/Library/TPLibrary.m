@@ -196,6 +196,60 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 #pragma mark -
 #pragma mark Library Management
 
+- (void) addDefaultCategories
+{
+  NSMutableDictionary *defaultLibrary = [self loadDefaultLibrary];
+  NSInteger categoryCount = 0;
+	for (NSDictionary *category in [defaultLibrary valueForKey:@"Categories"]) {
+    
+    NSString *categoryName = [category valueForKey:@"Name"];
+    
+    // check if we have a category with this name already
+    if ([self categoryNamed:categoryName] == nil) {
+      
+      // get category with this name, or make one
+      TPLibraryCategory *newCategory = [self getOrCreateCategoryWithName:categoryName];
+      newCategory.sortIndex = @(categoryCount);
+      
+      NSInteger entryCount = 0;
+      for (NSMutableDictionary *clip in [category valueForKey:@"Contents"]) {
+        
+        TPLibraryEntry *entry =[TPLibraryEntry entryWithDictionary:clip
+                                                        inCategory:newCategory
+                                            inManagedObjectContext:self.managedObjectContext];
+        
+        if (entry.uuid == nil || [entry.uuid length] == 0) {
+          entry.uuid = [NSString stringWithUUID];
+        }
+        entry.sortIndex = @(entryCount);
+        entryCount++;
+      }
+      categoryCount++;
+    }
+  }
+  
+  [self.managedObjectContext processPendingChanges];
+  
+}
+
+- (void) restoreDefaultLibrary
+{
+  // first delete all categories and entries
+  NSArray *categories = [self categories];
+  for (TPLibraryCategory *category in categories) {
+    // delete each entry
+    for (TPLibraryEntry *entry in category.entries) {
+      [self.managedObjectContext deleteObject:entry];
+    }
+    [self.managedObjectContext deleteObject:category];
+  }
+  [self.managedObjectContext processPendingChanges];
+  
+  // load the default library
+  NSMutableDictionary *defaultLibrary = [self loadDefaultLibrary];
+  [self migrateOldPlistLibrary:defaultLibrary];
+  [self saveAction:self];
+}
 
 - (void) setupLibrary
 {

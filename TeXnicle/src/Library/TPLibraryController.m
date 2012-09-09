@@ -450,6 +450,26 @@
 	
 }
 
+- (void) addDefaultCategories
+{
+  [self.library addDefaultCategories];
+}
+
+- (void) restoreDefaultLibrary
+{
+  NSAlert *alert = [NSAlert alertWithMessageText:@"Restore Defaults?"
+                                   defaultButton:@"Restore"
+                                 alternateButton:@"Cancel"
+                                     otherButton:nil
+                       informativeTextWithFormat:@"Are you sure you want to restore the default library?"
+                    ];
+  
+  NSInteger result = [alert runModal];
+  if (result == NSAlertDefaultReturn) {
+    [self.library restoreDefaultLibrary];
+  }
+}
+
 - (void) createAddMenu
 {
 	

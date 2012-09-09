@@ -31,5 +31,7 @@
 - (NSArray*) entriesWithDefinedCommands;
 - (NSString*) codeForCommand:(NSString*)command;
 - (NSArray*)commandsBeginningWith:(NSString*)prefix;
+- (void) restoreDefaultLibrary;
+- (void) addDefaultCategories;
 
 @end
