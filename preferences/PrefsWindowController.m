@@ -271,16 +271,17 @@
 - (IBAction)activateAllErrorChecks:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *errors = [[defaults arrayForKey:TPCheckSyntaxErrors] mutableCopy];
+  NSArray *errors = [defaults arrayForKey:TPCheckSyntaxErrors];
+  NSMutableArray *newErrors = [NSMutableArray array];
   for (NSDictionary *error in errors) {
     
     NSDictionary *newError = @{@"check": @YES, 
                               @"code": [error valueForKey:@"code"], 
                               @"message": [error valueForKey:@"message"]};
     
-    errors[[errors indexOfObject:error]] = newError;
+    [newErrors addObject:newError];
   }
-  
+  [defaults setValue:newErrors forKey:TPCheckSyntaxErrors];
   [defaults synchronize];
   [syntaxErrorsTable reloadData];
 }
@@ -288,16 +289,17 @@
 - (IBAction)deactivateAllErrorChecks:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *errors = [[defaults arrayForKey:TPCheckSyntaxErrors] mutableCopy];
+  NSArray *errors = [defaults arrayForKey:TPCheckSyntaxErrors];
+  NSMutableArray *newErrors = [NSMutableArray array];
   for (NSDictionary *error in errors) {
     
     NSDictionary *newError = @{@"check": @NO, 
                               @"code": [error valueForKey:@"code"], 
                               @"message": [error valueForKey:@"message"]};
     
-    errors[[errors indexOfObject:error]] = newError;
+    [newErrors addObject:newError];
   }
-  
+  [defaults setValue:newErrors forKey:TPCheckSyntaxErrors];
   [defaults synchronize];
   [syntaxErrorsTable reloadData];
 }
@@ -340,6 +342,7 @@
                                   @"code": [error valueForKey:@"code"], 
                                   @"message": [error valueForKey:@"message"]};
         errors[row] = newError;
+        [defaults setValue:errors forKey:TPCheckSyntaxErrors];
         [defaults synchronize];
         return;
       }
