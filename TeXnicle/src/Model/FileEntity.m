@@ -368,16 +368,17 @@
   // otherwise we check  
 //  NSLog(@"Checking for edits");
 	if ([self document]) {
-		if ([[self document] textStorage]) {
+    NSTextStorage *ts = [[self document] textStorage];
+		if (ts) {
       MHFileReader *fr = [[MHFileReader alloc] init];
       NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
 			NSString *contentStr = [[NSString alloc] initWithData:[self valueForKey:@"content"]
 																										encoding:encoding];
 			
-			NSTextStorage *ts = [[self document] textStorage];
-			NSString *textStr = [ts string];
-//      NSLog(@"Content string %@", contentStr);
-//      NSLog(@"Text storage %@", textStr);
+      
+      NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:ts];
+      [string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
+      NSString *textStr = [string unfoldedString];
       
 			if ([contentStr length] != [textStr length]) {
 //        NSLog(@"File %@ has diffent length", self.name);
