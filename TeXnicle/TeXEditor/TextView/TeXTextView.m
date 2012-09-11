@@ -1813,6 +1813,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if ([_popupList isVisible]) {
     [_popupList selectSelectedItem:self];
+    [self wrapLine];
     return;
   }
   
@@ -3050,6 +3051,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	if (wrapStyle != TPHardWrap) 
 		return;
   
+  // don't wrap while we are completing
+  if ([_popupList isVisible]) {
+    return;
+  }
+  
 	int lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
 	// check the length of this line and insert newline if required
 	// - we only do this if we are at the end of a line	
@@ -3077,9 +3083,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			// get location of the last whitespace
 			NSInteger lastWhitespace = [self locationOfLastWhitespaceLessThan:lineWrapLength];
 			if (lastWhitespace>=0) {
-				[self setSelectedRange:NSMakeRange(lastWhitespace, 1)];
-				[self insertNewline:self];        
-				[self setSelectedRange:selRange];
+        [self setSelectedRange:NSMakeRange(lastWhitespace, 0)];
+				[self insertNewline:self];
+        // now go to the end of the new line
+        NSRange linerange = [[self string] lineRangeForRange:selRange];
+				[self setSelectedRange:NSMakeRange(NSMaxRange(linerange)-1, 0)];
 			} else {
         // do nothing
 			}
