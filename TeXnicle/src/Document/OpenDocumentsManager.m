@@ -221,7 +221,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void)updateDoc
 {
-//  NSLog(@"Update doc for doc %@: is text? %d", currentDoc, [[currentDoc valueForKey:@"isText"] boolValue]);
   
   if ([self.currentDoc isImage]) {
     [self enableImageView:YES];
@@ -234,18 +233,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
         if (textContainer) {
 //          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
-          // apply user preferences to textContainer size
-          int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-          int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
-          if (wrapStyle == TPSoftWrap) {
-            CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
-            [textContainer setContainerSize:NSMakeSize(scale*wrapAt, LargeTextHeight)];
-          }	else if (wrapStyle == TPNoWrap) {
-            [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
-          } else {
-            // set large size - hard wrap is handled in the textview
-            [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
-          }
+          
+          [self.texEditorViewController.textView performSelector:@selector(setWrapStyle) withObject:nil afterDelay:0];
           [self.texEditorViewController.textView stopObservingTextStorage];
 //          [self.texEditorViewController.textView replaceTextContainer:textContainer];
           
