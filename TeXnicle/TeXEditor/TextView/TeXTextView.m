@@ -1558,8 +1558,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSInteger loc = selRange.location;
 	
 	while (loc >= 0) {
-		if ([self lengthOfLineUpToLocation:loc]<lineWrapLength &&
-				[whitespaceCharacterSet characterIsMember:[str characterAtIndex:loc-1]]) {
+    if ([whitespaceCharacterSet characterIsMember:[str characterAtIndex:loc-1]]) {
       //			NSLog(@"Returning %d", loc-1);
 			return loc-1;
 		}
@@ -3093,12 +3092,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			
 			// get location of the last whitespace
 			NSInteger lastWhitespace = [self locationOfLastWhitespaceLessThan:lineWrapLength];
-			if (lastWhitespace>=0) {
-        [self setSelectedRange:NSMakeRange(lastWhitespace, 0)];
+//      NSLog(@"Last whitespace %ld", lastWhitespace);
+      // if the last whitespace location is positive and greater than the start of this line
+      NSRange linerange = [[self string] lineRangeForRange:selRange];
+//      NSLog(@"Line starts at %ld", linerange.location);
+      
+			if (lastWhitespace >= 0 && lastWhitespace>linerange.location) {
+        NSInteger insertPoint = lastWhitespace+1;
+        // cache the offset from lastWhitespace and
+        NSInteger offset = selRange.location - insertPoint;
+        
+        [self setSelectedRange:NSMakeRange(insertPoint, 0)];
 				[self insertNewline:self];
         // now go to the end of the new line
-        NSRange linerange = [[self string] lineRangeForRange:selRange];
-				[self setSelectedRange:NSMakeRange(NSMaxRange(linerange)-1, 0)];
+        NSRange currentSelection = [self selectedRange];
+				[self setSelectedRange:NSMakeRange(currentSelection.location+offset, 0)];
 			} else {
         // do nothing
 			}
