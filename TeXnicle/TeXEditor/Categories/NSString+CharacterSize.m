@@ -27,12 +27,30 @@
 
 #import "NSString+CharacterSize.h"
 #import "TeXTextView.h"
+#import "externs.h"
+
+NSString * const kTestString = @"1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY1234567890abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXZY";
+
 
 @implementation NSString (CharacterSize)
 
++ (CGFloat)averageCharacterWidthForCurrentFont
+{
+	NSFont *font = [NSUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentFont]];
+	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:kTestString attributes:nil];
+	[str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [str length])];
+	NSSize strsize = [str size];
+	return 1.0*strsize.width/(1.0*[str length]);
+}
+
 + (CGFloat)averageCharacterWidthForFont:(NSFont*)aFont
 {
-	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"1234567890abcdefghijklmnopqrstuvwxzy" attributes:nil];
+  if (aFont == nil) {
+    return [NSString averageCharacterWidthForCurrentFont];
+  }
+  
+	NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:kTestString
+                                                                          attributes:nil];
 	[str addAttribute:NSFontAttributeName value:aFont range:NSMakeRange(0, [str length])];
 	NSSize strsize = [str size];
 	return 1.0*strsize.width/[str length];

@@ -30,6 +30,7 @@
 
 @interface NSString (CharacterSize)
 
++ (CGFloat)averageCharacterWidthForCurrentFont;
 + (CGFloat)averageCharacterWidthForFont:(NSFont*)aFont;
 
 @end
