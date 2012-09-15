@@ -67,6 +67,8 @@
 
 #define kMaxZoom 42
 
+#define kFontWrapScaleCorrection 1.07
+
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
 
@@ -812,8 +814,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
-    CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
-    [textContainer setContainerSize:NSMakeSize(scale*wrapAt, LargeTextHeight)];
+    CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
+    [textContainer setContainerSize:NSMakeSize(scale*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
   }	else if (wrapStyle == TPNoWrap) {
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
   } else {
@@ -2400,10 +2402,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // line width
   int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
   if (wrapStyle == TPHardWrap || wrapStyle == TPSoftWrap) {
-    int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
-    CGFloat scale = [NSString averageCharacterWidthForCurrentFont];
     NSRect vr = [self visibleRect];
-    NSRect r = NSMakeRect(scale*wrapAt+1, vr.origin.y, vr.size.width, vr.size.height);
+    NSRect r;
+    
+    if (wrapStyle == TPSoftWrap) {
+      NSSize inset = [self textContainerInset];
+      NSSize s = [[self textContainer] containerSize];
+      r = NSMakeRect(inset.width+s.width, vr.origin.y, vr.size.width, vr.size.height);
+    } else {
+      int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
+      r = NSMakeRect(scale*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
+    }
+    
     [[[self backgroundColor] shadowWithLevel:0.05] set];
     [NSBezierPath fillRect:r];
   }
