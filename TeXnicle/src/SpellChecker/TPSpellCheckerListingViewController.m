@@ -58,6 +58,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self tearDownTimer];
   [self.checkedFiles removeAllObjects];
+  [self.outlineView reloadData];
   self.checkedFiles = nil;
   [self.aQueue cancelAllOperations];
   self.outlineView.delegate = nil;
@@ -387,7 +388,7 @@
 
 - (void) checkFile:(TPSpellCheckedFile*)aFile
 {
-  __unsafe_unretained TPSpellCheckedFile *checkedFile = aFile;
+  TPSpellCheckedFile *checkedFile = aFile;
   
   NSString *string = nil;
   
@@ -417,17 +418,8 @@
                    NSMutableArray *words = [[NSMutableArray alloc] init];
                    
                    for (NSTextCheckingResult *result in results) {
-                     NSString *misspelledWord = [string substringWithRange:result.range];
-                     __block NSMutableArray *guesses = [[NSMutableArray alloc] init];
-                     // This is really expensive, so don't do it here. Just do it when presenting the list to the user in the popup menu.
-//                     dispatch_sync(dispatch_get_main_queue(), ^{
-//                       NSArray *corrections = [checker guessesForWordRange:NSMakeRange(0, [misspelledWord length]) inString:misspelledWord language:nil inSpellDocumentWithTag:0];
-//                       for (NSString *c in corrections) {
-//                         [guesses addObject:c];
-//                       }
-//                     });
-                     
-                     TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:guesses range:result.range parent:checkedFile];
+                     NSString *misspelledWord = [string substringWithRange:result.range];                     
+                     TPMisspelledWord *word = [[TPMisspelledWord alloc] initWithWord:misspelledWord corrections:@[] range:result.range parent:checkedFile];
                      [words addObject:word];
                    }
                    

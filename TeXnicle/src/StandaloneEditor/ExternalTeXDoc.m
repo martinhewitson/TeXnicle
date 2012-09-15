@@ -654,22 +654,28 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self stopTimers];
   
   // pdfviewer
-  self.pdfViewer.delegate = nil;
+  [self.pdfViewer tearDown];
+  self.pdfViewer = nil;
   
   // warnings view
-  self.warningsViewController.delegate = nil;
+  [self.warningsViewController tearDown];
+  self.warningsViewController = nil;
   
   // labels view
-  self.labelsViewController.delegate = nil;
+  [self.labelsViewController tearDown];
+  self.labelsViewController = nil;
   
   // citations view
-  self.citationsViewController.delegate = nil;
+  [self.citationsViewController tearDown];
+  self.citationsViewController = nil;
   
   // commands view
-  self.commandsViewController.delegate = nil;
+  [self.commandsViewController tearDown];
+  self.commandsViewController = nil;
   
   // pdf view controller
-  self.pdfViewerController.delegate = nil;
+  [self.pdfViewerController tearDown];
+  self.pdfViewerController = nil;
 
   // outline view controller
   [self.outlineViewController tearDown];
@@ -679,30 +685,36 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self stopLiveUpdateTimer];
   
   // spell checker
-  self.spellcheckerViewController.delegate = nil;
-  [self.spellcheckerViewController stop];
+  [self.spellcheckerViewController tearDown];
+  self.spellcheckerViewController = nil;
   
   // engine settings controller
-  self.engineSettingsController.delegate = nil;
+  [self.engineSettingsController tearDown];
+  self.engineSettingsController = nil;
   
   // library
-  self.library.delegate = nil;
+  [self.library tearDown];
+  self.library = nil;
   
   // palette
-  self.palette.delegate = nil;
+  [self.palette tearDown];
+  self.palette = nil;
   
   // tex editor view controller
-  self.texEditorViewController.textView.delegate = nil;
-  self.texEditorViewController.delegate = nil;
+  [self.texEditorViewController tearDown];
+  self.texEditorViewController = nil;
   
   // file monitor
-  self.fileMonitor.delegate = nil;
+  [self.fileMonitor tearDown];
+  self.fileMonitor = nil;
   
   // engine manager
-  self.engineManager.delegate = nil;  
+  [self.engineManager tearDown];
+  self.engineManager = nil;
   
   // template editor
-  self.templateEditor.delegate = nil;
+  [self.templateEditor tearDown];
+  self.templateEditor = nil;
   
   [self.tabbarController tearDown];
   self.tabbarController = nil;
