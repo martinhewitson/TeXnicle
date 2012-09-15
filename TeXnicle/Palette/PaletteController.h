@@ -59,5 +59,6 @@
 - (void) handleTableDoubleClick;
 
 - (BOOL) hasSelection;
+- (void) tearDown;
 
 @end

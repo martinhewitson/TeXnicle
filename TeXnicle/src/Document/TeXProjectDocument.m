@@ -568,14 +568,10 @@
 
 - (void) cleanUp
 {
-//  NSLog(@"Clean up...");
+  NSLog(@"Clean up...");
   
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-  
-  // outline view controller
-  [self.outlineViewController tearDown];
-  self.outlineViewController = nil;
   
   // stop gathering metadata
   [self stopAllMetadataOperations];
@@ -584,87 +580,104 @@
   [self.spellcheckerViewController stop];
   
   // stop timer
-  [self stopStatusTimer];  
+  [self stopStatusTimer];
   
   // live update timer
   [self stopLiveUpdateTimer];
-  
+
 	// close all tabs
 	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
 		[self.openDocuments.tabView removeTabViewItem:item];
 	}
   
-  // clean up project item tree controller
-  [self.projectItemTreeController unbind:@"managedObjectContext"];
-  self.projectItemTreeController.managedObjectContext = nil;
-  self.projectItemTreeController.project = nil;
-  
-  // clear up open documents
-  self.openDocuments.texEditorViewController = nil;
-  self.openDocuments.delegate = nil;
-  
   // stop KVO
-  [self stopObserving];  
+  [self stopObserving];
+
+  // outline view controller
+  [self.outlineViewController tearDown];
+  self.outlineViewController = nil;
   
-  
-  // warnings view
-  self.warningsViewController.delegate = nil;
-  
-  // labels view
-  self.labelsViewController.delegate = nil;
-  
-  // citations view
-  self.citationsViewController.delegate = nil;
-  
-  // commands view
-  self.commandsViewController.delegate = nil;
-    
-  // pdfviewer
-  self.pdfViewer.delegate = nil;
-  
-  // engine settings controller
-  self.engineSettings.delegate = nil;
-  
-  // engine manager
-  self.engineManager.delegate = nil;
-  
-  // bookmark manager
-  self.bookmarkManager.delegate = nil;
-  
-  // palette
-  self.palette.delegate = nil;
-  
-  // finder
-  self.finder.delegate = nil;
-  
-  // library
-  self.libraryController.delegate = nil;
-  
-  // spell checker  
-  self.spellcheckerViewController.delegate = nil;
-  
-  // pdf view controller
-  self.pdfViewerController.delegate = nil;
-  
-  // tex editor view controller
-  [self.texEditorViewController stopSyntaxChecker];
-  self.texEditorViewController.textView.delegate = nil;
-  self.texEditorViewController.delegate = nil;
-  
-  // file monitor  
-  [self.fileMonitor stopTimer];
-  self.fileMonitor.delegate = nil;
-  
-  // template editor
-  self.templateEditor.delegate = nil;
-  
-  self.tabbar.delegate = nil;
-  
+  // clean up tab bar controls
   [self.controlsTabBarController tearDown];
   self.controlsTabBarController = nil;
   
   [self.infoControlsTabBarController tearDown];
   self.infoControlsTabBarController = nil;
+  
+  // clean up project item tree controller
+  [self.projectItemTreeController tearDown];
+  self.projectItemTreeController.project = nil;
+  
+  // clear up open documents
+  [self.openDocuments tearDown];
+  self.openDocuments = nil;
+  
+  // warnings view
+  [self.warningsViewController tearDown];
+  self.warningsViewController = nil;
+  
+  // labels view
+  [self.labelsViewController tearDown];
+  self.labelsViewController = nil;
+  
+  // citations view
+  [self.citationsViewController tearDown];
+  self.citationsViewController = nil;
+  
+  // commands view
+  [self.commandsViewController tearDown];
+  self.commandsViewController = nil;
+    
+  // pdfviewer
+  [self.pdfViewer tearDown];
+  self.pdfViewer = nil;
+  
+  // engine settings controller
+  [self.engineSettings tearDown];
+  self.engineSettings = nil;
+  
+  // engine manager
+  [self.engineManager tearDown];
+  self.engineManager = nil;
+  
+  // bookmark manager
+  [self.bookmarkManager tearDown];
+  self.bookmarkManager = nil;
+  
+  // palette
+  [self.palette tearDown];
+  self.palette = nil;
+  
+  // finder
+  [self.finder tearDown];
+  self.finder = nil;
+  
+  // library
+  [self.libraryController tearDown];
+  self.libraryController = nil;
+  
+  // spell checker
+  [self.spellcheckerViewController tearDown];
+  self.spellcheckerViewController = nil;
+  
+  // pdf view controller
+  [self.pdfViewerController tearDown];
+  self.pdfViewerController = nil;
+  
+  // tex editor view controller
+  [self.texEditorViewController tearDown];
+  self.texEditorViewController = nil;
+  
+  // file monitor  
+  [self.fileMonitor tearDown];
+  self.fileMonitor = nil;
+  
+  // template editor
+  [self.templateEditor tearDown];
+  self.templateEditor = nil;
+  
+  self.tabbar.delegate = nil;
+  
   
 }
 

@@ -58,9 +58,12 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.sets removeAllObjects];
+  self.sets = nil;
   self.delegate = nil;
 }
 

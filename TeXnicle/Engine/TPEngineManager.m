@@ -151,8 +151,13 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   return self;  
 }
 
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
+  [self.consoleManager tearDown];
+  self.consoleManager = nil;
+  [self.engines removeAllObjects];
+  self.engines = nil;
   self.delegate = nil;
 }
 

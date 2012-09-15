@@ -47,9 +47,14 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [self.pdfViewerController tearDown];
+  self.pdfViewerController = nil;
+
   self.delegate = nil;
 }
 

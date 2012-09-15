@@ -68,5 +68,6 @@
 - (NSArray*)bookmarksForFile:(FileEntity*)aFile;
 - (NSArray*)files;
 - (NSArray*)allBookmarks;
+- (void) tearDown;
 
 @end

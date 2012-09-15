@@ -59,6 +59,11 @@
   return [self initWithDelegate:aDelegate activeFilename:withFilename editMode:YES];
 }
 
+- (void) tearDown
+{
+  NSLog(@"Tear down %@", self);
+  self.delegate = nil;
+}
 
 - (void)windowDidLoad
 {

@@ -86,5 +86,6 @@
 - (void)restoreVisibleRectFromPersistentString:(NSString*)aString;
 - (NSString*)visibleRectForPersisting;
 
+- (void) tearDown;
 
 @end

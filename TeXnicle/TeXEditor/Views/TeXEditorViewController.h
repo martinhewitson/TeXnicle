@@ -50,6 +50,8 @@
 @property (unsafe_unretained) id delegate;
 @property (strong) IBOutlet TeXTextView *textView;
 
+- (void) tearDown;
+
 - (void) handleDocumentChanged:(NSNotification*)aNote;
 - (void) setupSyntaxChecker;
 - (void) stopSyntaxChecker;

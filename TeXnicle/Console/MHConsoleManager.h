@@ -34,4 +34,6 @@
 
 - (BOOL) registerConsole:(id<MHConsoleViewer>)aConsole;
 
+- (void) tearDown;
+
 @end

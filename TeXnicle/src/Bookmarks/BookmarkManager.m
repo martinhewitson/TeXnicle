@@ -64,13 +64,14 @@
   return self;
 }
 
-// Dealloc and remove self from notifcation center
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)awakeFromNib

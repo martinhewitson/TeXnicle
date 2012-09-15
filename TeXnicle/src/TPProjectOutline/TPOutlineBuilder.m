@@ -113,7 +113,7 @@
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down outline builder...");
+  NSLog(@"Tear down %@", self);
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];

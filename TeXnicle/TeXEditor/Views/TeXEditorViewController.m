@@ -77,8 +77,9 @@
   return self;
 }
 
-- (void)dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   [self stopSyntaxChecker];
@@ -87,6 +88,7 @@
   self.textView.delegate = nil;
   [sectionListController deactivate];
   self.delegate = nil;
+  
 }
 
 - (void) awakeFromNib

@@ -67,10 +67,11 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
-  self.delegate = nil;
+  NSLog(@"Tear down %@", self);
   [self stopTimer];
+  self.delegate = nil;
 }
 
 - (void) stopTimer

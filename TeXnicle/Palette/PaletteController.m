@@ -41,8 +41,9 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   symbolsTable.delegate = nil;
   symbolsTable.dataSource = nil;
   [palettesController setContent:nil];

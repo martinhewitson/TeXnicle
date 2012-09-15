@@ -44,7 +44,7 @@
 
 - (void) tearDown
 {
-//  NSLog(@"Outline view controller tearDown");
+  NSLog(@"Tear down %@", self);
   [self.view removeFromSuperview];
   self.delegate = nil;
   [self.outlineBuilder tearDown];

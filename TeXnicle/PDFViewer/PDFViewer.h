@@ -49,5 +49,6 @@
 
 - (IBAction)findSource:(id)sender;
 - (IBAction)buildProject:(id)sender;
+- (void) tearDown;
 
 @end

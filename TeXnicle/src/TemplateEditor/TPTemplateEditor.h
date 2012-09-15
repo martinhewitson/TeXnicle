@@ -55,4 +55,6 @@
 - (BOOL) setAsMainFile;
 - (NSString*)filename;
 
+- (void) tearDown;
+
 @end

@@ -38,5 +38,6 @@
 - (NSString*) codeForCommand:(NSString*)command;
 - (NSArray*)commandsBeginningWith:(NSString*)prefix;
 + (NSString*) placeholderRegexp;
+- (void) tearDown;
 
 @end

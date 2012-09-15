@@ -91,7 +91,7 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 - (NSArray*)standaloneWindows;
 
-- (void) cleanUp;
+- (void) tearDown;
 
 @end
 

@@ -60,13 +60,15 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
-//  NSLog(@"Dealloc %@", self);
+  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.delegate = nil;
   [self.sets removeAllObjects];
+  self.sets = nil;
+  self.delegate = nil;
 }
+
 
 - (void) awakeFromNib
 {

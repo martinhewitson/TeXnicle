@@ -36,6 +36,12 @@
 
 @implementation MHConsoleManager
 
+- (void) tearDown
+{
+  NSLog(@"Tear down %@", self);
+  [self.consoles removeAllObjects];
+  self.consoles = nil;
+}
 
 - (id) init
 {

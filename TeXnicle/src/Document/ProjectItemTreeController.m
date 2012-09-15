@@ -79,6 +79,21 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 @implementation ProjectItemTreeController
 
+- (void) tearDown
+{
+  NSLog(@"Tear down %@", self);
+	NSError *error = nil;
+	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
+	if (success == NO) {
+		[NSApp presentError:error];
+		return;
+	}
+  
+  [self unbind:@"managedObjectContext"];
+  self.managedObjectContext = nil;
+  self.document = nil;
+}
+
 - (void)updateSortOrder
 {
   [self updateSortOrderOfModelObjects];
@@ -144,14 +159,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) dealloc
 {
-	NSError *error = nil;
-	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
-	if (success == NO) {
-		[NSApp presentError:error];
-		return;
-	}
-  
-  self.document = nil;
   
 }
 

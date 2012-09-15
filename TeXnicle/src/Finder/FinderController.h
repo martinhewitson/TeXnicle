@@ -81,5 +81,6 @@
 - (void) stringSearchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file;
 - (id)resultAtIndex:(NSInteger)anIndex;
 - (void)setSearchTerm:(NSString*)aString;
+- (void) tearDown;
 
 @end

@@ -52,6 +52,6 @@
 
 - (void) updateUI;
 - (IBAction)reveal:(id)sender;
-
+- (void) tearDown;
 
 @end

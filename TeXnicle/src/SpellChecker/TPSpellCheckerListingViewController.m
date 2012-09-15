@@ -52,9 +52,14 @@
 }
 
 
-- (void) dealloc
+- (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self tearDownTimer];
+  [self.checkedFiles removeAllObjects];
+  self.checkedFiles = nil;
+  [self.aQueue cancelAllOperations];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;

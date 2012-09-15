@@ -82,5 +82,6 @@
 - (IBAction)selectedDoPS2PDF:(id)sender;
 - (IBAction)selectedOpenConsole:(id)sender;
 - (IBAction)changeNCompile:(id)sender;
+- (void) tearDown;
 
 @end

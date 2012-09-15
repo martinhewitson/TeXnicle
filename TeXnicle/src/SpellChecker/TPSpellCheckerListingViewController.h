@@ -71,4 +71,6 @@
 - (void) updateAllLists;
 - (void) performSpellCheck;
 - (void) stop;
+- (void) tearDown;
+
 @end

@@ -154,5 +154,6 @@ extern NSString * const OutlineViewNodeType;
 - (IBAction) endAddExistingFolderSheet:(id)sender;
 - (FolderEntity*) addFolderAtPath:(NSString*)srcFolder includeTeXFiles:(BOOL)texFiles includeAllFiles:(BOOL)allFiles recursive:(BOOL)recursively;
 - (IBAction) endAddingFilesSheet:(id)sender;
+- (void) tearDown;
 
 @end

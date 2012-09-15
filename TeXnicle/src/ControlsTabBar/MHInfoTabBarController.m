@@ -39,6 +39,7 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 - (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   self.tabView.delegate = nil;
   self.bookmarksButton = nil;
   self.warningsButton = nil;

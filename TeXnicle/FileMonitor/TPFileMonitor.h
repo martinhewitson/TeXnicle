@@ -55,5 +55,6 @@
 
 - (void)checkFilesTimerFired:(NSTimer*)theTimer;
 - (void) stopTimer;
+- (void) tearDown;
 
 @end

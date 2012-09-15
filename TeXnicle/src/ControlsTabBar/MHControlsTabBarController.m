@@ -39,6 +39,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (void) tearDown
 {
+  NSLog(@"Tear down %@", self);
   self.tabView.delegate = nil;
   self.projectButton = nil;
   self.palletButton = nil;
