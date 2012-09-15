@@ -61,6 +61,7 @@
 #import "externs.h"
 #import "TeXEditorViewController.h"
 #import "FileDocument.h"
+#import "NSColor+Lightness.h"
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
@@ -2414,7 +2415,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       r = NSMakeRect(scale*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
     }
     
-    [[[self backgroundColor] shadowWithLevel:0.05] set];
+    if ([[self backgroundColor] isDarkerThan:0.7]) {
+      [[[self backgroundColor] highlightWithLevel:0.1] set];
+    } else {
+      [[[self backgroundColor] shadowWithLevel:0.1] set];
+    }
+        
     [NSBezierPath fillRect:r];
   }
 }
