@@ -48,7 +48,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
 	[self setDelegate:nil];
 }
 
