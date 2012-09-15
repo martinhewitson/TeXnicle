@@ -851,18 +851,19 @@
 // Toggle the folded state of the given folder.
 - (void) toggleFoldedStateForFolder:(MHCodeFolder*)aFolder
 {
-//  NSLog(@"Toggle state for folder %@", aFolder);
-	id view = [self clientView];
-	if ([view isKindOfClass:[NSTextView class]]) {
-		if (aFolder) {
-			if (aFolder.folded) {
-        aFolder.folded = NO;
-//        NSLog(@"   unfold");
-        [self.textView unfoldTextWithFolder:aFolder];
-			} else {
-        aFolder.folded = YES;
-//        NSLog(@"   fold");
-        [self.textView foldTextWithFolder:aFolder];
+  if ([aFolder isValid]) {
+    id view = [self clientView];
+    if ([view isKindOfClass:[NSTextView class]]) {
+      if (aFolder) {
+        if (aFolder.folded) {
+          aFolder.folded = NO;
+          //        NSLog(@"   unfold");
+          [self.textView unfoldTextWithFolder:aFolder];
+        } else {
+          aFolder.folded = YES;
+          //        NSLog(@"   fold");
+          [self.textView foldTextWithFolder:aFolder];
+        }
       }
     }
   }
