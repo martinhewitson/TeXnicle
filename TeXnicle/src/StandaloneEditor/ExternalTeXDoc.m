@@ -1779,7 +1779,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (BOOL)hasChanges
 {
-  return ![[self.documentData string] isEqualToString:[self.texEditorViewController.textView string]];
+  NSString *str = [[[self.texEditorViewController.textView attributedString] mutableCopy] unfoldedString];
+  return ![[self.documentData string] isEqualToString:str];
 }
 
 - (void)doLiveBuild
