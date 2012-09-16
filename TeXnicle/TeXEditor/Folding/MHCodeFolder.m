@@ -28,6 +28,10 @@
 #import "MHCodeFolder.h"
 #import "MHFoldingTagDescription.h"
 #import "NSString+Extension.h"
+#import "RegexKitLite.h"
+#import "NSAttributedString+LineNumbers.h"
+#import "MHLineNumber.h"
+#import "NSString+LaTeX.h"
 
 @implementation MHCodeFolder
 
@@ -83,7 +87,7 @@
 
 - (NSString*) description
 {
-  return [NSString stringWithFormat:@"%d: lines: %ld:%ld (%ld), range: %ld,%ld (%@ -> %@)", self.folded, self.startLine, self.endLine, self.lineCount, self.startIndex, self.endIndex, self.startRect, self.endRect];
+  return [NSString stringWithFormat:@"%d: lines: %ld:%ld (%ld), range: %ld,%ld", self.folded, self.startLine, self.endLine, self.lineCount, self.startIndex, self.endIndex];
 }
 
 // Try to complete the folder. This means, first check we have and end and start. 
@@ -123,44 +127,45 @@
 - (void) findEndTagInText:(NSString*)someText fromFoldingTags:(NSArray*)foldingTags
 {
 //  NSLog(@"Finding end tag for %@", self);
+//  NSLog(@"%@", foldingTags);
+//  NSLog(@"%@", someText);
+
+  __block NSMutableArray *tags = [NSMutableArray array];
+  [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+    NSRange range = capturedRanges[0];
+    [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
+  }];
   
-  MHFoldingTagDescription *tagFound = nil;
-  NSString *line = nil;
-  NSRange lineRange;
-  NSInteger idx = NSMaxRange([someText lineRangeForRange:NSMakeRange(self.startIndex, 0)]);
-  NSInteger matched;
-  NSInteger tagCount = 1;
-  NSInteger lineNumber = self.startLine+1;
-  NSInteger tagIndex;
-//  NSLog(@"Starting search from index %ld", idx);
-  while (idx < [someText length]) {
-    lineRange = [someText lineRangeForRange:NSMakeRange(idx, 0)];
-    line = [someText substringWithRange:lineRange];
-//    NSLog(@"Checking line %@", line);
-    // check for tag
-    tagIndex = 0;
-    tagFound = [MHFoldingTagDescription foldingTagInLine:line atIndex:&tagIndex fromTags:foldingTags matched:&matched];
-    if (tagFound) {
-      if (![line containsCommentCharBeforeIndex:tagIndex]) {
-        if (matched == MHFoldingTagStartMatched) {
-          tagCount++;
-          //        NSLog(@"  Found start tag");
-        } else {
-          tagCount--;
-          //        NSLog(@"  Found end tag");
-        }
-        if (tagCount==0) {
-          //        NSLog(@"  Found matching end tag");
-          self.endIndex = lineRange.location+tagFound.index;
-          self.endLine = lineNumber;
-          break;
-        }
-      }
+  [someText enumerateStringsMatchedByRegex:@"\\\\end" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+    NSRange range = capturedRanges[0];
+    [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
+  }];
+
+  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:YES];
+  [tags sortUsingDescriptors:@[descriptor]];
+  
+  // process start/end arrays
+  NSInteger count = 0;
+  for (NSDictionary *tag in tags) {
+    if ([tag[@"start"] boolValue] == YES) {
+      count++;
+    } else {
+      count--;
     }
-    
-    idx = NSMaxRange(lineRange);
-    lineNumber++;
+    if (count == 0) {
+      self.endIndex = [tag[@"range"] integerValue];
+      NSAttributedString *astr = [[NSAttributedString alloc] initWithString:someText];
+      NSArray *lineNumbers = [astr lineNumbersForTextRange:NSMakeRange(self.endIndex, 0) startIndex:self.startIndex startLine:self.startLine];
+      if ([lineNumbers count] == 0) {
+        self.endLine = self.startLine;
+      } else {
+        MHLineNumber *lineNumber = lineNumbers[0];
+        self.endLine = lineNumber.number;
+      }
+      break;
+    }
   }
+
 }
 
 // Find the next closing end tag in the given text. Here 'closing' means that we ignore
@@ -169,41 +174,60 @@
 {
   //  NSLog(@"Finding end tag for %@", self);
   
-  MHFoldingTagDescription *tagFound = nil;
-  NSString *line = nil;
-  NSRange lineRange = [someText lineRangeForRange:NSMakeRange(self.endIndex, 0)];
-  NSInteger idx = lineRange.location-1;
-  NSInteger matched;
-  NSInteger tagCount = 1;
-  NSInteger lineNumber = self.endLine-1;
-  NSInteger tagIndex;
-  while (idx >= 0) {
-    lineRange = [someText lineRangeForRange:NSMakeRange(idx, 0)];
-    line = [someText substringWithRange:lineRange];
-    //    NSLog(@"Checking line %@", line);
-    // check for tag
-    tagIndex = 0;
-    tagFound = [MHFoldingTagDescription foldingTagInLine:line atIndex:&tagIndex fromTags:foldingTags matched:&matched];
-    if (tagFound) {
-      if (![line containsCommentCharBeforeIndex:tagIndex]) {
-        if (matched == MHFoldingTagStartMatched) {
-          tagCount--;
-          //        NSLog(@"  Found start tag");
-        } else {
-          tagCount++;
-          //        NSLog(@"  Found end tag");
-        }
-        if (tagCount==0) {
-          //        NSLog(@"  Found matching end tag");
-          self.startIndex = lineRange.location+tagIndex;
-          self.startLine = lineNumber;
-          break;
-        }
-      }
+  __block NSMutableArray *tags = [NSMutableArray array];
+  [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+    NSRange range = capturedRanges[0];
+    [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
+  }];
+  
+  [someText enumerateStringsMatchedByRegex:@"\\\\end" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+    NSRange range = capturedRanges[0];
+    [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
+  }];
+  
+  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:NO];
+  [tags sortUsingDescriptors:@[descriptor]];
+  
+//  NSLog(@"Tags: %@", tags);
+  
+  // process start/end arrays
+  NSInteger count = 0;
+  for (NSDictionary *tag in tags) {
+    if ([tag[@"start"] boolValue] == YES) {
+      count--;
+    } else {
+      count++;
     }
-    
-    idx = lineRange.location-1;
-    lineNumber--;
+//    NSLog(@"   count %ld", count);
+    if (count == 0) {
+      self.startIndex = [tag[@"range"] integerValue];
+
+      // get line number
+      NSAttributedString *astr = [[NSAttributedString alloc] initWithString:someText];
+      // get the line number for this tag
+      NSArray *lineNumbers = [astr lineNumbersForTextRange:NSMakeRange(self.startIndex, 0) startIndex:0 startLine:1];
+      if ([lineNumbers count] == 0) {
+        self.startLine = self.endLine;
+      } else {
+        MHLineNumber *lineNumber = lineNumbers[0];
+        self.startLine = lineNumber.number;
+      }
+      
+      // move start index to end of the \begin{} phrase
+      NSRange lineRange = [someText lineRangeForRange:NSMakeRange(self.startIndex, 0)];
+      NSString *line = [someText substringWithRange:lineRange];
+      NSInteger loc = 0;
+      NSString *arg = [line parseArgumentStartingAt:&loc];
+      if (arg == nil) {
+        // this shouldn't happen, this means a bad tag
+        self.startIndex = NSNotFound;
+        return;
+      }
+      
+      self.startIndex += loc+1;
+      
+      break;
+    }
   }
 }
 
