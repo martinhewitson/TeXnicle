@@ -217,7 +217,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showProjectTree:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showProjectTree) withObject:nil afterDelay:0];
+  [self showProjectTree];
 }
 
 - (void) showProjectTree 
@@ -228,7 +228,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showSymbolPalette:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showSymbolPalette) withObject:nil afterDelay:0];
+  [self showSymbolPalette];
 }
 
 - (void) showSymbolPalette
@@ -239,7 +239,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showClippingsLibrary:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showClippingsLibrary) withObject:nil afterDelay:0];
+  [self showClippingsLibrary];
 }
 
 - (void) showClippingsLibrary
@@ -250,7 +250,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showDocumentOutline:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showDocumentOutline) withObject:nil afterDelay:0];
+  [self showDocumentOutline];
 }
 
 - (void) showDocumentOutline
@@ -261,7 +261,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showProjectSearch:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showProjectSearch) withObject:nil afterDelay:0];
+  [self showProjectSearch];
 }
 
 - (void) showProjectSearch
@@ -272,7 +272,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showFileInfo:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showFileInfo) withObject:nil afterDelay:0];
+  [self showFileInfo];
 }
 
 - (void) showFileInfo
@@ -283,7 +283,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 - (IBAction) showProjectSettings:(id)sender
 {
   [self showNavigator:self];
-  [self performSelector:@selector(showProjectSettings) withObject:nil afterDelay:0];
+  [self showProjectSettings];
 }
 
 - (void) showProjectSettings
