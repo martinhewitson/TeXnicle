@@ -44,7 +44,9 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
+  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
+  //  NSLog(@"Tear down %@", self);
   [self.view removeFromSuperview];
   self.delegate = nil;
   [self.outlineBuilder tearDown];
