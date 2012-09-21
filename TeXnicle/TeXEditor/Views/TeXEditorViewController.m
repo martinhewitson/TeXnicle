@@ -165,8 +165,9 @@
 {
   [self.textView setString:aString];
   
-  if (aString)
+  if (aString) {
     [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0.1];
+  }
 
   _shouldCheckSyntax = YES;
   [self setupSyntaxChecker];
