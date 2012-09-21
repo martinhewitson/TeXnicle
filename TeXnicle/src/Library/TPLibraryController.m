@@ -102,7 +102,7 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.selectedEntry setContent:nil];
   self.delegate = nil;

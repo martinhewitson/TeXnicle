@@ -45,7 +45,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   self.delegate = nil;
 }
 

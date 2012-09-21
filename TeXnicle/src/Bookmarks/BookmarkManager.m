@@ -66,7 +66,7 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.outlineView.delegate = nil;

@@ -140,7 +140,7 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.pdfThumbnailView.PDFView = nil;
   self.pdfThumbnailView = nil;

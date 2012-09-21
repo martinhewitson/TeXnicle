@@ -131,7 +131,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
 }
 
 - (void) awakeFromNib

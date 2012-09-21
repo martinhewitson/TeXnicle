@@ -38,7 +38,7 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   [self.consoles removeAllObjects];
   self.consoles = nil;
 }

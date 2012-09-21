@@ -69,7 +69,7 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   [self stopTimer];
   self.delegate = nil;
 }

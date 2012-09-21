@@ -108,12 +108,12 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
 }
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
   [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];

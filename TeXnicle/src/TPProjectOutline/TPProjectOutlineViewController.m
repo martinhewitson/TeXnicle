@@ -22,7 +22,7 @@
 
 - (void) dealloc
 {
-  NSLog(@"Dealloc %@", self);
+//  NSLog(@"Dealloc %@", self);
   [self.outlineBuilder performSelectorOnMainThread:@selector(stopTimer) withObject:nil waitUntilDone:YES];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;

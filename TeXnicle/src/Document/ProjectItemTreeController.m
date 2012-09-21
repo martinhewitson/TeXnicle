@@ -81,7 +81,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
 	NSError *error = nil;
 	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
 	if (success == NO) {
@@ -1375,7 +1375,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   // if the items being dragged contain a folder which exists on disk, don't allow the drag
   for (NSTreeNode *node in items) {
     ProjectItemEntity *item = [node representedObject];
-    NSLog(@"Checking item %@", [item name]);
+//    NSLog(@"Checking item %@", [item name]);
     if ([item isKindOfClass:[FolderEntity class]]) {
       if ([item pathOnDisk]) {
         return NO;
