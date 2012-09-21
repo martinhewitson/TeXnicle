@@ -54,7 +54,9 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+//  NSLog(@"Tear down %@", self);
+  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
+  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self tearDownTimer];
   [self.checkedFiles removeAllObjects];
