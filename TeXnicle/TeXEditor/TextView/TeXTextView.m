@@ -725,10 +725,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
     [self setBackgroundColor:c];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]]) {
-    [self performSelector:@selector(updateEditorRuler) withObject:nil afterDelay:0];
+    [self performSelectorOnMainThread:@selector(updateEditorRuler) withObject:nil waitUntilDone:YES];
     [self.editorRuler recalculateThickness];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]]) {
-    [self performSelector:@selector(updateEditorRuler) withObject:nil afterDelay:0];
+    [self performSelectorOnMainThread:@selector(updateEditorRuler) withObject:nil waitUntilDone:YES];
     [self.editorRuler recalculateThickness];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]]) {
     NSRange vr = [self getVisibleRange];
