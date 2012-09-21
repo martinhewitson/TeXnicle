@@ -58,7 +58,7 @@
 
 - (BOOL) isValid
 {
-  if (self.startLine==NSNotFound || self.startIndex==NSNotFound || self.endLine==NSNotFound || self.endIndex==NSNotFound) {
+  if (self.startLine==NSNotFound || self.startIndex==NSNotFound || self.endLine==NSNotFound || self.endIndex==NSNotFound || self.endIndex < self.startIndex) {
     return NO;
   }
   return YES;
