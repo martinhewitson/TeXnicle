@@ -385,7 +385,8 @@
         if ([content writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {    
           self.fileBeingSyntaxChecked = path;
 //          NSLog(@"Checking path %@", path);
-          [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
+          [self.checker checkSyntaxOfFileAtPath:path];
+//          [self.checker performSelector:@selector(checkSyntaxOfFileAtPath:) withObject:path afterDelay:0];
         } else {
 //          NSLog(@"Failed to write %@", path);
         }
