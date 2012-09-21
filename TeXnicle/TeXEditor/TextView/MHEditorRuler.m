@@ -268,7 +268,10 @@
           if (folder) {
             if (folder.isValid) {
               // check for attachment in the folder string
-              NSAttributedString *substr = [attStr attributedSubstringFromRange:NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1)];
+              NSRange r = NSMakeRange(folder.startIndex, folder.endIndex-folder.startIndex+1);
+//              NSLog(@"Folder %@", folder);
+//              NSLog(@"String range %@", NSStringFromRange(r));
+              NSAttributedString *substr = [attStr attributedSubstringFromRange:r];
 //              NSLog(@"Checking line %@", substr);
               // determine if this folder is folded. It must contain an attachment and the start and end line must be the same
               if ([substr containsAttachments] && folder.startLine == folder.endLine) {
