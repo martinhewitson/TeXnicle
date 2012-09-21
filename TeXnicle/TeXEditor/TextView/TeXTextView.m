@@ -791,8 +791,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // background color
   NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
+  // for some reason we need to do this otherwise the scrolling jumps around in the textview.
   [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
-//  [self setBackgroundColor:c];
   
   // selection color
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
