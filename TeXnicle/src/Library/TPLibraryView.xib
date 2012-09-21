@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12B19</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<string key="IBDocument.SystemVersion">12C54</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">2840</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -322,7 +322,7 @@
 							<object class="NSTextField" id="836607673">
 								<reference key="NSNextResponder" ref="1041666833"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{80, 105}, {150, 11}}</string>
+								<string key="NSFrame">{{80, 105}, {150, 17}}</string>
 								<reference key="NSSuperview" ref="1041666833"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1010807520"/>
@@ -443,7 +443,6 @@
 								<string key="NSFrame">{{175, 12}, {52, 25}}</string>
 								<reference key="NSSuperview" ref="1041666833"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="73391104">
 									<int key="NSCellFlags">-2080374784</int>
@@ -588,7 +587,7 @@
 										<string key="NSFrameSize">{235, 166}</string>
 										<reference key="NSSuperview" ref="480635558"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="624348285"/>
+										<reference key="NSNextKeyView" ref="36571276"/>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -738,7 +737,7 @@
 						<string key="NSFrame">{{0, 201}, {235, 183}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="36571276"/>
+						<reference key="NSNextKeyView" ref="480635558"/>
 						<int key="NSsFlags">133680</int>
 						<reference key="NSVScroller" ref="624348285"/>
 						<reference key="NSHScroller" ref="106149828"/>
@@ -1183,7 +1182,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="NSFrameSize">{480, 270}</string>
 					<reference key="NSNextKeyView" ref="410735706"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{480, 292}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">NO</bool>
@@ -2514,6 +2513,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
+			<real value="4500" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
