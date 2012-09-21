@@ -569,7 +569,10 @@
 
 - (void) cleanUp
 {
-  NSLog(@"Clean up...");
+//  NSLog(@"Clean up...");
+  
+  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
+  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
