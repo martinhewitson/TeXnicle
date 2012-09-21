@@ -111,7 +111,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     NSTabViewItem *item = [self.tabView tabViewItemAtIndex:[self.tabView indexOfTabViewItemWithIdentifier:file]];
     [self.tabView removeTabViewItem:item];
   }
-  [self performSelector:@selector(disableEditors) withObject:nil afterDelay:0];
+  [self performSelectorOnMainThread:@selector(disableEditors) withObject:nil waitUntilDone:YES];
 }
 
 - (void) disableEditors
@@ -238,9 +238,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
           
-          [self.texEditorViewController.textView performSelector:@selector(setWrapStyle) withObject:nil afterDelay:0];
+          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
           [self.texEditorViewController.textView stopObservingTextStorage];
-//          [self.texEditorViewController.textView replaceTextContainer:textContainer];
           
           // clear the text view from all other document text containers
           for (FileEntity *file in openDocuments) {
@@ -269,12 +268,14 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
             [self selectTabForFile:self.currentDoc];
           }
-          [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) 
-                                                      withObject:nil 
-                                                      afterDelay:0];
-          [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)
-                                                      withObject:nil
-                                                      afterDelay:0.5];
+          
+          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
+                                                                  withObject:nil
+                                                               waitUntilDone:YES];
+          
+          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorWholeDocument)
+                                                                  withObject:nil
+                                                               waitUntilDone:NO];
 //          NSLog(@"Did set text container");
           [self enableImageView:NO];
         }
