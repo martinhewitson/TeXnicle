@@ -223,7 +223,7 @@
   [self.prevButton setEnabled:YES];
   [self.nextButton setEnabled:YES];
   [self.statusText setHidden:YES];
-  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
+  [self.pdfview performSelectorOnMainThread:@selector(setNeedsDisplay) withObject:nil waitUntilDone:YES];
 }
 
 - (void) hideViewer
