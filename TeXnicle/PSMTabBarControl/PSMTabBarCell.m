@@ -300,7 +300,7 @@
 {
     // the progress indicator, label, icon, or count has changed - redraw the control view
     //I seem to have run into some odd issue with update not being called at the right time. This seems to avoid the problem.
-    [[self controlView] performSelector:@selector(update) withObject:nil afterDelay:0.0];
+  [(PSMTabBarControl*)[self controlView] update];
 }
 
 #pragma mark -
