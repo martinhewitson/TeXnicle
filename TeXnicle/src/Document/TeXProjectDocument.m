@@ -473,11 +473,12 @@
   [self setupLiveUpdateTimer];
 
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPRestoreOpenTabs] boolValue]) {
-    [self performSelector:@selector(restoreOpenTabs) withObject:nil afterDelay:0];
+    [self restoreOpenTabs];
   }
-  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
   
-  [self.outlineViewController performSelector:@selector(start) withObject:nil afterDelay:0];
+  [self restoreUIstate];
+  
+  [self.outlineViewController start];
   
 }
 
@@ -524,7 +525,7 @@
   // select the previously selected file
   FileEntity *selected = [self.project valueForKey:@"selected"];
   if (selected) {
-    [self performSelector:@selector(selectTabForFile:) withObject:selected afterDelay:0.2];
+    [self performSelectorOnMainThread:@selector(selectTabForFile:) withObject:selected waitUntilDone:YES];
   }
   
   // clear history
