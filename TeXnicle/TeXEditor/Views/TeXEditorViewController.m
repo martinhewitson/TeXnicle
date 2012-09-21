@@ -79,7 +79,14 @@
 
 - (void) tearDown
 {
-  NSLog(@"Tear down %@", self);
+  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
+  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
+  
+  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self.textView];
+  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self.textView];
+
+  
+//  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   [self stopSyntaxChecker];
