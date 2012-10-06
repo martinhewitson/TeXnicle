@@ -47,6 +47,7 @@
     self.delegate = aDelegate;
     self.checkedFiles = [NSMutableArray array];
     self.aQueue = [[NSOperationQueue alloc] init];
+    _cancelCheck = NO;
   }
   return self;
 }
@@ -54,6 +55,7 @@
 
 - (void) tearDown
 {
+  _cancelCheck = YES;
 //  NSLog(@"Tear down %@", self);
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
@@ -446,6 +448,9 @@
     return;
   }
     
+  if (_cancelCheck) {
+    return;
+  }
   
   NSArray *filesToCheck = [self filesToSpellCheck];
   
@@ -461,6 +466,9 @@
     // need to remove any checked-files which should be no longer checked
     NSMutableArray *filesToRemove = [NSMutableArray array];
     for (TPSpellCheckedFile *checkedFile in self.checkedFiles) {
+      if (_cancelCheck) {
+        return;
+      }
       if ([sortedItems containsObject:checkedFile.file] == NO) {
         [filesToRemove addObject:checkedFile];
       }
@@ -469,6 +477,11 @@
     
     
     for (FileEntity *file in sortedItems) {
+      
+      if (_cancelCheck) {
+        return;
+      }
+      
       if ([[file valueForKey:@"isText"] boolValue]) {
                 
         // File's object

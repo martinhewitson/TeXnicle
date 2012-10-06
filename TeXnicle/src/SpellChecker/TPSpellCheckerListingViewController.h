@@ -50,6 +50,7 @@
     
 @private
   NSInteger checkingFiles;
+  BOOL _cancelCheck;
 }
 
 @property (strong) NSOperationQueue* aQueue;
