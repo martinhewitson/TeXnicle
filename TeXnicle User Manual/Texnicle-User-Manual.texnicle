@@ -74,7 +74,7 @@
         <attribute name="name" type="string">Texnicle-User-Manual</attribute>
         <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle User Manual</attribute>
         <relationship name="mainfile" type="1/1" destination="FILE" idrefs="z105"></relationship>
-        <relationship name="selected" type="1/1" destination="FILE" idrefs="z119"></relationship>
+        <relationship name="selected" type="1/1" destination="FILE" idrefs="z118"></relationship>
         <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z103"></relationship>
         <relationship name="uisettings" type="1/1" destination="UISETTINGS" idrefs="z104"></relationship>
         <relationship name="items" type="0/0" destination="PROJECTITEM"></relationship>
@@ -90,11 +90,11 @@
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="UISETTINGS" id="z104">
-        <attribute name="pdfviewscrollrect" type="string">{{0, 15913}, {552, 730}}</attribute>
+        <attribute name="pdfviewscrollrect" type="string">{{0, 5892}, {383, 537}}</attribute>
         <attribute name="selectedcontrolstab" type="int16">0</attribute>
         <attribute name="maxoutlinedepth" type="int16">7</attribute>
-        <attribute name="editorwidth" type="float">910</attribute>
-        <attribute name="controlswidth" type="float">365</attribute>
+        <attribute name="editorwidth" type="float">688</attribute>
+        <attribute name="controlswidth" type="float">248</attribute>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="TEXFILE" id="z105">
@@ -102,7 +102,7 @@
         <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
         <attribute name="lasteditdate" type="date">368286186.17882102727890014648</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.21842801570892333984</attribute>
+        <attribute name="fileloaddate" type="date">368814113.02573102712631225586</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{610, 0}</attribute>
         <attribute name="sortindex" type="int32">0</attribute>
@@ -119,7 +119,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364911101.56180298328399658203</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29891097545623779297</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78331899642944335938</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">17</attribute>
         <attribute name="name" type="string">texnicle-welcome.jpg</attribute>
@@ -135,7 +135,7 @@
         <attribute name="wasopen" type="bool">2</attribute>
         <attribute name="lasteditdate" type="date">364911118.88224202394485473633</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">368286132.47725301980972290039</attribute>
+        <attribute name="fileloaddate" type="date">368814108.26709002256393432617</attribute>
         <attribute name="extension" type="string">pdf</attribute>
         <attribute name="sortindex" type="int32">7</attribute>
         <attribute name="name" type="string">texnicle_user_manual_main.pdf</attribute>
@@ -159,17 +159,17 @@
     <object type="FOLDER" id="z113">
         <attribute name="sortindex" type="int32">8</attribute>
         <attribute name="name" type="string">TeXnicle-Images</attribute>
-        <attribute name="isexpanded" type="bool">1</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./TeXnicle-Images</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
-        <relationship name="children" type="0/0" destination="PROJECTITEM" idrefs="z167 z114 z147 z156 z130 z164 z149 z152 z163 z129 z153 z148 z122 z157 z154 z110 z115 z159 z151 z165 z162 z160 z161 z155 z125 z158 z150 z124"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM" idrefs="z167 z160 z155 z158 z124 z122 z154 z115 z151 z114 z156 z130 z149 z163 z153 z162 z161 z125 z150 z157 z110 z159 z165 z147 z164 z152 z129 z148"></relationship>
     </object>
     <object type="FILE" id="z114">
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364915908.36169797182083129883</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29063898324966430664</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77423000335693359375</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">36</attribute>
         <attribute name="name" type="string">texnicle-newproject.jpg</attribute>
@@ -185,7 +185,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364916647.77071297168731689453</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29944700002670288086</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77258098125457763672</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">15</attribute>
         <attribute name="name" type="string">texnicle-newtemplate.jpg</attribute>
@@ -198,13 +198,13 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z117">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 475}, {1025, 395}}</attribute>
-        <attribute name="lasteditdate" type="date">368286186.15785402059555053711</attribute>
+        <attribute name="wasopen" type="bool">5</attribute>
+        <attribute name="visiblerect" type="string">{{0, 3577}, {600, 553}}</attribute>
+        <attribute name="lasteditdate" type="date">368636531.21207100152969360352</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.22426897287368774414</attribute>
+        <attribute name="fileloaddate" type="date">368814113.03297197818756103516</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{2950, 7}</attribute>
+        <attribute name="cursor" type="string">{9739, 0}</attribute>
         <attribute name="sortindex" type="int32">3</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual-UserGuide.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -216,13 +216,13 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z118">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 2015}, {1013, 395}}</attribute>
-        <attribute name="lasteditdate" type="date">368286186.18011200428009033203</attribute>
+        <attribute name="wasopen" type="bool">6</attribute>
+        <attribute name="visiblerect" type="string">{{0, 6632}, {650, 331}}</attribute>
+        <attribute name="lasteditdate" type="date">368638082.65295600891113281250</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.22845602035522460938</attribute>
+        <attribute name="fileloaddate" type="date">368814113.03766798973083496094</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{16957, 0}</attribute>
+        <attribute name="cursor" type="string">{22139, 0}</attribute>
         <attribute name="sortindex" type="int32">4</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual-Reference.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -235,12 +235,12 @@
     </object>
     <object type="TEXFILE" id="z119">
         <attribute name="wasopen" type="bool">4</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
-        <attribute name="lasteditdate" type="date">368286461.76358401775360107422</attribute>
+        <attribute name="visiblerect" type="string">{{0, 423}, {641, 553}}</attribute>
+        <attribute name="lasteditdate" type="date">368635865.98120802640914916992</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.22096800804138183594</attribute>
+        <attribute name="fileloaddate" type="date">368814113.02907800674438476562</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{1125, 0}</attribute>
+        <attribute name="cursor" type="string">{2044, 0}</attribute>
         <attribute name="sortindex" type="int32">2</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual-IntroRequirements.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
@@ -253,10 +253,10 @@
     </object>
     <object type="TEXFILE" id="z120">
         <attribute name="wasopen" type="bool">0</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {662, 331}}</attribute>
         <attribute name="lasteditdate" type="date">368286186.10248601436614990234</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.21956300735473632812</attribute>
+        <attribute name="fileloaddate" type="date">368814113.02735501527786254883</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{478, 0}</attribute>
         <attribute name="sortindex" type="int32">1</attribute>
@@ -278,7 +278,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364943979.28783297538757324219</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29727900028228759766</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77093499898910522461</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">14</attribute>
         <attribute name="name" type="string">texnicle-clippingslibrary.jpg</attribute>
@@ -294,7 +294,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364993925.12790197134017944336</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30544501543045043945</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77011400461196899414</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">13</attribute>
         <attribute name="name" type="string">texnicle-icon.jpg</attribute>
@@ -310,7 +310,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364993913.79066997766494750977</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30378097295761108398</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78083997964859008789</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">12</attribute>
         <attribute name="name" type="string">texnicle-icon.png</attribute>
@@ -326,7 +326,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364997537.43263000249862670898</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29566597938537597656</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78829300403594970703</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">18</attribute>
         <attribute name="name" type="string">texnicle-expandedben.png</attribute>
@@ -342,7 +342,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">364997537.41423797607421875000</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">368286132.49075198173522949219</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77588099241256713867</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">19</attribute>
         <attribute name="name" type="string">texnicle-customcliptag.png</attribute>
@@ -454,7 +454,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873929.25702399015426635742</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29121500253677368164</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78581398725509643555</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">9</attribute>
         <attribute name="name" type="string">texnicle-bookmarks.png</attribute>
@@ -470,7 +470,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873886.25874799489974975586</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29674297571182250977</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78912097215652465820</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">22</attribute>
         <attribute name="name" type="string">texnicle-codefold-nomatch.png</attribute>
@@ -486,7 +486,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873881.25870901346206665039</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29399698972702026367</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77670699357986450195</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">21</attribute>
         <attribute name="name" type="string">texnicle-codefold-closed.png</attribute>
@@ -502,7 +502,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367873878.25885397195816040039</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30490601062774658203</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78167700767517089844</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">20</attribute>
         <attribute name="name" type="string">texnicle-codefold-open.png</attribute>
@@ -518,7 +518,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365085293.66334998607635498047</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30052900314331054688</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77341598272323608398</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">16</attribute>
         <attribute name="name" type="string">texnicle-inserttable.png</attribute>
@@ -534,7 +534,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365090952.60735499858856201172</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29457598924636840820</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78746402263641357422</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">11</attribute>
         <attribute name="name" type="string">texnicle-toolbar.png</attribute>
@@ -550,7 +550,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365091690.53169298171997070312</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29619997739791870117</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77836501598358154297</attribute>
         <attribute name="extension" type="string">jpg</attribute>
         <attribute name="sortindex" type="int32">23</attribute>
         <attribute name="name" type="string">texnicle-window.jpg</attribute>
@@ -566,7 +566,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.01905900239944458008</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29837197065353393555</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77176302671432495117</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">31</attribute>
         <attribute name="name" type="string">texnicle-nav-info.png</attribute>
@@ -582,7 +582,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.09468400478363037109</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30324101448059082031</attribute>
+        <attribute name="fileloaddate" type="date">368635627.76840198040008544922</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">24</attribute>
         <attribute name="name" type="string">texnicle-navproj.png</attribute>
@@ -598,7 +598,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.06109100580215454102</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29232501983642578125</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77505302429199218750</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">27</attribute>
         <attribute name="name" type="string">texnicle-nav-docoutline.png</attribute>
@@ -614,7 +614,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.08360600471496582031</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29782998561859130859</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78250002861022949219</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">25</attribute>
         <attribute name="name" type="string">texnicle-navalone.png</attribute>
@@ -630,7 +630,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.05046701431274414062</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30435001850128173828</attribute>
+        <attribute name="fileloaddate" type="date">368635627.76929098367691040039</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">28</attribute>
         <attribute name="name" type="string">texnicle-integratedpdf.png</attribute>
@@ -646,7 +646,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.99776798486709594727</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29998600482940673828</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78414601087570190430</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">33</attribute>
         <attribute name="name" type="string">texnicle-mainediting.png</attribute>
@@ -662,7 +662,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.00903600454330444336</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30215799808502197266</attribute>
+        <attribute name="fileloaddate" type="date">368635627.76758098602294921875</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">32</attribute>
         <attribute name="name" type="string">texnicle-nav-cliplib.png</attribute>
@@ -678,7 +678,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.95475298166275024414</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30269801616668701172</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78001201152801513672</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">35</attribute>
         <attribute name="name" type="string">texnicle-nav-projfind.png</attribute>
@@ -694,7 +694,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.02969002723693847656</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30161398649215698242</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77919000387191772461</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">30</attribute>
         <attribute name="name" type="string">texnicle-nav-projecttree.png</attribute>
@@ -710,7 +710,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092829.96640002727508544922</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29512101411819458008</attribute>
+        <attribute name="fileloaddate" type="date">368635627.77754801511764526367</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">34</attribute>
         <attribute name="name" type="string">texnicle-nav-symbolpalette.png</attribute>
@@ -726,7 +726,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.04028701782226562500</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.29344600439071655273</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78663998842239379883</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">29</attribute>
         <attribute name="name" type="string">texnicle-console.png</attribute>
@@ -742,7 +742,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">365092830.07248401641845703125</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">367874007.30107498168945312500</attribute>
+        <attribute name="fileloaddate" type="date">368635627.78497701883316040039</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">26</attribute>
         <attribute name="name" type="string">texnicle-nav-projsettings.png</attribute>
@@ -759,7 +759,7 @@
         <attribute name="visiblerect" type="string">{{0, 0}, {864, 395}}</attribute>
         <attribute name="lasteditdate" type="date">368286186.10161000490188598633</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">368286462.23020499944686889648</attribute>
+        <attribute name="fileloaddate" type="date">368814113.03969997167587280273</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{186, 11}</attribute>
         <attribute name="sortindex" type="int32">5</attribute>
@@ -776,7 +776,7 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">367874213.70841002464294433594</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">368286132.48963099718093872070</attribute>
+        <attribute name="fileloaddate" type="date">368635627.76672697067260742188</attribute>
         <attribute name="extension" type="string">png</attribute>
         <attribute name="sortindex" type="int32">10</attribute>
         <attribute name="name" type="string">texnicle-validclip.png</attribute>

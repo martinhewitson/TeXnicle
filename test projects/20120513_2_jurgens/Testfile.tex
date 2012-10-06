@@ -1,348 +1,115 @@
 %%!TEX TS-program = Lilypond-XeLaTeX
-
-
 \documentclass[BCOR12mm,DIV11,headings=normal]{scrbook}
-\usepackage{scrpage2}
-\synctex=1
-\usepackage{graphicx}
-\graphicspath{{/Users/jurgenkramlofsky/Desktop/Das-Buch/Bilder2/}}
-\usepackage{appendix}
-
-%%%% Andere Absatzbehandlung
-\newenvironment{absaetze}
-{\addtolength{\parskip}{\baselineskip}\parindent 0pt}
-{}
-%%%%
-
-%\usepackage{geometry}
-\usepackage{placeins}
-\usepackage[font={scriptsize,it},singlelinecheck=false,format=hang,justification=raggedright,skip=15pt]{caption}
-\usepackage[T1]{fontenc}
-
-\usepackage{ifxetex}
-\ifxetex
- %xetex specific stuff
-
- \usepackage{xunicode,fontspec,xltxtra}
-% \usepackage[biolinum]{xelibertine}
- \defaultfontfeatures{Mapping=tex-text}
- %Fontauswahl
-% \setmainfont[LetterSpace=1.0,Scale=1]{GaramondNo8} % Hauptzeichensatz
-% \setmonofont{monofur} % Haupt Monospaced
- %\setsansfont{Kabala} % Haupt ohne Serifen
-% \setsansfont{URWClassico} % Haupt ohne Serifen
- %\setmainfont[LetterSpace=2.0,Scale=.96]{Pali} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=1]{Guru} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=1]{jGaramond} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=.96]{Liberation Serif} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=.9]{Bookman Old Style} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=1]{FreeSerif} % Hauptzeichensatz
- %\setmainfont[LetterSpace=2.0,Scale=.96]{Junicode} % Hauptzeichensatz
- %\setmainfont[LetterSpace=1.0,Scale=.96]{MgOpen Cosmetica} % Hauptzeichensatz
- %\setmainfont[LetterSpace=1.0,Scale=1]{MgOpen Canonica} % Hauptzeichensatz
- %\setmainfont[LetterSpace=1.0,Scale=1]{Gentium Book Basic} % Hauptzeichensatz
-% \setmainfont[LetterSpace=1.0,Scale=1]{Hoefler Text} % Hauptzeichensatz
-
- %%%
- %\newfontface\Notationklein[Scale=2]{ScaleDegrees Times}
- %\newfontface\Notation[Scale=1.4]{ScaleDegrees Times}
- %\newfontface\Altdeutsch[Scale=1.1]{Walbaum-Fraktur}
-% \newfontface\Notenschrift[Scale=1.5]{StaffClefPitchesEasy}
-% \newfontface\Symbole[Scale=1]{AppleMyungjo}
-% \newfontface\Notation[Scale=1.6]{Accidentals}
-% \newfontface\Notationklein [Scale=2]{Accidentals}
-% \newfontface\Altdeutsch[Scale=1.2]{Alte Schwabacher}
-% \newfontfamily\Chordname[Scale=1]{MgOpen Cosmetica}	
-% \newfontfamily\Note[Scale=1]{Kabala}
-\else
-\usepackage[utf8]{inputenc}
- %This can be empty if you are not going to use pdftex
- %
-\fi
-
-\usepackage[ngerman,portuguese,danish,french,american]{babel}
-\usepackage[babel,german=guillemets]{csquotes}
-\usepackage[normalem]{ulem}
-\newcommand{\neuq}[1]{\foreignquote{danish}{#1}}
-
-
-\usepackage{makeidx}
-
-\usepackage{calc}
-
-%Textpos relevante Sachen
-\usepackage{textpos}
-\newcommand{\cd}[2]{\begin{textblock}{2}(#1,#2)
-                       \includegraphics[scale=.15]{CD2}
-                    \end{textblock}
-            \vspace{4ex}}
-%\newcommand{\lang}[1]{\widthof{1}(#1)}
-
-%\usepackage{MnSymbol}
-\usepackage{lettrine}
-
-%
-\usepackage{setspace}
-%\linespread{1.1}
-%\onehalfspacing
-\spacing{1.1}
-\typearea[current]{last}
-%
-
-
-%\usepackage{pdfsync} Auskommentiert zu Gunsten von synctex
-%\makeglossary
- \makeindex
-\pagestyle{scrheadings}
-%raggedbottom
-
-\usepackage{natbib}
-\usepackage{textcomp}
-
-%\usepackage{fancyvrb}			% Allow \verbatim et al. in footnotes
-\usepackage{booktabs}			% Better tables
-\usepackage{subfig}
-\usepackage[subfigure]{tocloft}
-%\usepackage{array}
-%\usepackage{tabulary}			% Support longer table cells
-%\usepackage{xcolor}				% Allow for color (annotations)
-
-%\usepackage[parfill]{parskip}	% Activate to begin paragraphs with an empty
-								% line rather than an indent
-								
-
-							
-
-%Macros für die unterschiedlichen Vorzeichen
-
-\newcommand{\Altbe}{ \enquote{\hspace{.5mm}b\hspace{.3mm}}}
-\newcommand{\Altha}{ \enquote{\hspace{.5mm}h\hspace{.3mm}}}
-\newcommand{\nat}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][1.9mm]4}}
-\newcommand{\naturaly}{\textsuperscript{\Notation \hspace{.3mm}n}}
-\newcommand{\ben}{\Notation \hspace{.3mm}\raisebox{.9mm}{b}\hspace{.3mm}}
-\newcommand{\bb}{\Notation \hspace{.3mm}\raisebox{.9mm}{B}\hspace{.3mm}}
-\newcommand{\xx}{\Notation \hspace{.3mm}\raisebox{.9mm}{x}\hspace{.3mm}}
-\newcommand{\be}{\textsuperscript{\Notation \hspace{.3mm}b}}
-\newcommand{\beklein}{\textsuperscript{\Notationklein \hspace{.3mm}b}}
-\newcommand{\kreuz}{\textsuperscript{\Notation \hspace{.3mm}s}}
-\newcommand{\kreuzn}{\Notation \hspace{.3mm}\raisebox{.9mm}{s}\hspace{.3mm}}
-\newcommand{\kreuzklein}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][.5mm]{s}}}
-\newcommand{\halfdim}{\textsuperscript{\rmfamily \hspace{.3mm}ø}}
-%\newcommand{\TRI}{\Symbole ∆}
-
-
-
-%Macros für die Akkordbezeichnungen
-\newcommand{\sus}{\textsuperscript{\Chordname7sus4}}
-\newcommand{\sechs}{\textsuperscript{\Chordname6}}
-\newcommand{\sechsneun}{\textsuperscript{\Chordname 6/9}}
-\newcommand{\sieben}{\textsuperscript{\Chordname7{\kern -0.15em}}}
-\newcommand{\siebenflat}{\textsuperscript{\Chordname7({\beklein}5)}}
-\newcommand{\siebenflatneunelf}{\textsuperscript{\Chordname7({\beklein}5,9,11)}}
-\newcommand{\siebensharp}{\textsuperscript{\Chordname7({\kreuzklein}5)}}
-\newcommand{\siebenbneun}{\textsuperscript{\Chordname7({\beklein}9)}}
-\newcommand{\siebenkneun}{\textsuperscript{\Chordname7({\kreuzklein}9)}}
-\newcommand{\siebenbneunbdreizehn}{\textsuperscript{\Chordname7({\beklein}9,{\beklein}13)}}
-\newcommand{\siebensharpbneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\beklein}9)}}
-\newcommand{\siebenflatbneun}{\textsuperscript{\Chordname7({\beklein}5,{\beklein}9)}}
-\newcommand{\siebenbneunkelf}{\textsuperscript{\Chordname7({\beklein}9,{\kreuzklein}11)}}
-\newcommand{\siebenkneunkelf}{\textsuperscript{\Chordname7({\kreuzklein}9,{\kreuzklein}11)}}
-\newcommand{\siebensharpkneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\kreuzklein}9)}}
-\newcommand{\siebenkelf}{\textsuperscript{\Chordname7({\kreuzklein}11)}}
-\newcommand{\msieben}{\textsuperscript{\Chordname maj7{\kern -0.15em}}}
-\newcommand{\msiebensharp}{\textsuperscript{\Chordname maj7({\kreuzklein}5)}}
-\newcommand{\neun}{\textsuperscript{\Chordname9}}
-\newcommand{\neunsharpkelf}{\textsuperscript{\Chordname9({\kreuzklein}5,{\kreuzklein}11)}}
-\newcommand{\neunsus}{\textsuperscript{\Chordname9sus4}}
-\newcommand{\neunkelf}{\textsuperscript{\Chordname9({\kreuzklein}11)}}
-\newcommand{\neunbdreizehn}{\textsuperscript{\Chordname9({\beklein}13)}}
-\newcommand{\mneun}{\textsuperscript{\Chordname maj9{\kern -0.15em}}}
-\newcommand{\mneunsharp}{\textsuperscript{\Chordname maj9({\kreuzklein}5)}}
-\newcommand{\elf}{\textsuperscript{\Chordname11}}
-\newcommand{\dreizehnkelf}{\textsuperscript{\Chordname13({\kreuzklein}11)}}
-\newcommand{\dreizehnbneun}{\textsuperscript{\Chordname13({\beklein}9)}}
-\newcommand{\dreizehn}{\textsuperscript{\Chordname13}}
-\newcommand{\dreizehnnoneun}{\textsuperscript{\Chordname13(no9)}}
-\newcommand{\mdreizehn}{\textsuperscript{\Chordname maj13{\kern -0.15em}}}
-\newcommand{\mdreizehnkelf}{\textsuperscript{\Chordname maj13({\kreuzklein}11)}}
-\newcommand{\mdreizehnsharpkelf}{\textsuperscript{\Chordname maj13({\kreuzklein}5,{\kreuzklein}11)}}
-\newcommand{\mdreizehnnoelf}{\textsuperscript{\Chordname maj13(no11){\kern -0.15em}}}
-\newcommand{\dreizehnnoelf}{\textsuperscript{\Chordname13(no11)}}
-\newcommand{\elfnoneun}{\textsuperscript{\Chordname11(no9)}}
-\newcommand{\mneunkelf}{\textsuperscript{\Chordname maj9({\kreuzklein}11)}}
-\newcommand{\msiebenkelf}{\textsuperscript{\Chordname maj7({\kreuzklein}11)}}
-\newcommand{\bedreizehn}{\textsuperscript{\Chordname({\beklein}13)}}
-\newcommand{\melf}{\textsuperscript{\Chordname maj11{\kern -0.15em}}}
-\newcommand{\dimneun}{°\textsuperscript{\Chordname 7(9)}}
-
-
-% Makros für Abkürzungen
-\newcommand{\zB}{\mbox{z.\,B. }}
-\newcommand{\uU}{\mbox{u.\,U. }}
-\newcommand{\idr}{\mbox{i.\,d.\,R. }}
-\newcommand{\iA}{\mbox{i.\,A. }}
-
-%\newcommand\myauthor{Author}			% In case these were not included in metadata
-%\newcommand\mytitle{Title}
-%\newcommand\mykeywords{}
-%\newcommand\mybibliostyle{plain}
-%\newcommand\bibliocommand{}
-
-
-%\newcommand\address{filmmusik@sound-trax.de}
-\newcommand\myauthor{Jürgen Kramlofsky}
-%\newcommand\baseheaderlevel{2}
-\newcommand\mycopyright{2008 Jürgen Kramlofsky}
-%\date{11. November 2008}
-%\newcommand\mydate{11. November 2008}
-%\newcommand\format{complete}
-\newcommand\mykeywords{Skala, Akkord, Grundton, Terz, Septim, Optionston, Optionstöne, Griffbild, Solo, Begleitung}
-%\newcommand\latexxslt{memoir-twosided.xslt}
-%\newcommand\language{ngerman}
-\newcommand\mytitle{Jazz Akkorde einmal anders}
-%\newcommand\web{\href{http://www.sound-trax.de}{www.sound-trax.de}}
-
-
-%
-%	PDF Stuff
-%
-
-\usepackage[plainpages=false,pdfpagelabels,pdftitle={\mytitle},pagebackref,pdfauthor={\myauthor},pdfkeywords={\mykeywords}]{hyperref}
-
-
-%
-% Title Information
-%
-
-
-\title{\mytitle}
-\author{\myauthor}
-
-
-\begin{document}
-
-\pagenumbering{roman}
-%
-%		Front Matter
-%
-
-\selectlanguage{ngerman}
-
-%\selectlanguage{french}
-
-% Title Page
-
-\maketitle
-\clearpage
-
-% Copyright Page
-\vspace*{\fill}
-
-\setlength{\parindent}{0pt}
-
-\ifx\mycopyright\undefined
-\else
-	\textcopyright{} \mycopyright
-\fi
-
-
-\setlength{\parindent}{1em}
-\clearpage
-
-% Table of Contents
-\tableofcontents
-\listoffigures			% activate to include a List of Figures
-% \listoftables			% activate to include a List of Tables
-
-
-%
-% Main Content
-%
-
-
-% Layout settings
-\setlength{\parindent}{1em}
-
-\mainmatter
-\pagenumbering{arabic}
-
-\chapter{Widmung}
-\label{widmung}
-
-
-
-\chapter{Vorwort}
-\label{vorwort}
-
-\lettrine{D}ieses Buch richtet sich in erster Linie an den Gitarristen, der keine bzw. wenig Erfahrung mit Jazz Akkorden hat, oder mit der Art und Weise, wie sie ihm bisher vermittelt wurden, eher unzufrieden war. Das Buch benutzt einen sehr strukturierten Aufbau in kleinen Schritten. Die Voraussetzungen zum Gebrauch des Buches sind lediglich ein rudimentäres Verständnis der Notenschrift (Noten, Notenschlüssel, Takteinteilungen). Die Einfachheit der Herangehensweise bedeutet jedoch nicht, dass das Buch nicht auch für den schon fortgeschrittenen Jazz Gitarristen viele neue Ansätze zum Verständnis und Erarbeiten neuer Griffbilder oder Akkord-Progressionen bietet.
-
-Das erste Kapitel beschäftigt sich in erster Linie mit ein bisschen Jazzharmonielehre\index{Jazzharmonielehre}. Hier stehen einige Grundlagen, für all diejenigen, die von Tonleitern\index{Tonleitern} und Akkorden noch nichts oder nicht viel gehört haben, oder für jene, die gegen ein bisschen Auffrischung in dieser Richtung nichts einzuwenden haben. Wir nehmen die gängigsten Tonleitertypen und bestücken sie sozusagen mit Akkorden. Die hieraus gewonnenen Erkenntnisse setzen wir dann als Griffbilder\index{Griffbilder} für die Gitarre um.
-
-Alle Beispiel der Akkordfolgen sind auf der beiliegenden CD zum Anhören und Mitspielen aufgenommen. Eine Version mit Gitarre um ein Gefühl zu bekommen, wie es klingen könnte und eine Version ohne Gitarre um es selbst zu probieren und sich nicht durch eine Vorgabe einschränken zu lassen.
-
-chapter{Grundlagen}
-\label{grundlagen}
-
-\section{Einleitung}
-\label{einleitung}
-
-\lettrine{D}ie in diesem Buch vorkommenden Bezeichnungen und Begriffe entstammen der so genannten amerikanischen Schreibweise für Töne und Akkordsymbole\index{Akkordsymbole}, da der Jazz\index{Jazz} eine Musikrichtung ist, welche in den USA entstanden ist und ein Großteil der Jazz-Musikliteratur nach wie vor aus Amerika kommt.
-
-Konkret bedeutet dies, dass die Töne der C-Dur Tonleiter respektive der natürlichen A-Moll Tonleiter nicht den Ton H sondern das B enthalten. Dadurch ergibt sich beginnend auf A folgende Tonreihe: ABCDEFG. Dies entspricht dem Anfang des Alphabets. Eigentlich sinnvoller, als AHCDEFG.
-
-Eine Anekdote scheint die Erklärung für diesen Umstand zu geben. Noch vor der Erfindung des Buchdrucks lag die einzige Möglichkeit ein Buch oder Schriftstück zu vervielfältigen darin, es abzuschreiben. Selbst als der Buchdruck schon erfunden war, wurde diese Methode noch eine ganze Zeit weitergeführt. Dies geschah fast ausschließlich in den damaligen Klöstern. Der Erzählung nach hat sich also ein Kopist eines deutschen Klosters bei der Abschrift eines Schriftstückes der Musiklehre ein wenig vertan, bzw. nicht ganz genau hingesehen. So hat er beim kopieren aus dem altdeutschen Buchstaben {\Altbe} aus Versehen ein altdeutsches {\Altha} gemacht. Schon war es passiert; wenn man der Geschichte glauben schenken mag.
-
-Eine weitere Abweichung bei der Bezeichnung der Töne tritt dann ein, wenn diese Töne verändert, also alteriert werden. Alterationen\index{Alterationen} (Erhöhungen oder Erniedrigungen) dieser sieben Töne werden nicht, wie in Deutschland üblich durch das Anhängen der Silben -es (erniedrigt) bzw. -is (erhöht) kenntlich gemacht, sonder durch Anhängen der entsprechenden Vorzeichen aus der Notenschrift an den Notenbuchstaben. Aus einem erhöhten C wird dann also kein Cis sondern ein C\kreuz. Aus einem erniedrigtem D kein Des sondern ein D\be. Die englische Aussprache dieser beiden Töne ist dann C~sharp bzw. D~flat. Es bleibt einem natrlich selbst berlassen, trotzdem weiterhin die deutsche Aussprache zu verwenden.
-
-Unser deutsches B wird also in der englischen Schreibweise als B\be\ geschrieben. Damit hier keine Ungereimtheiten oder Verwechslungen entstehen knnen, werden kleine Hilfen hinzugesetzt. Das deutsche H wird also als B\nat\ (engl. B natural), das deutsche B als B\be\ (B~flat) geschrieben.
-
-Dieses Buch ist mehr oder weniger in 3 Abschnitte unterteilt. \index{Basisakkorde} Basisakkorde, Basisakkorde plus Optionstöne und Akkorde ohne Grundtöne. Die verwendeten Bezeichnungstypen für die jeweiligen Akkorde zeige ich hier an Hand von Akkorden mit dem Grundton C. Der große C-Durseptakkord wird in diesem Buch als C\msieben\ geschrieben, C-Dominatseptakkord als C\sieben, der C-Mollseptakkord als Cm\sieben, der halbverminderte C-Mollseptakkord als Cm\siebenflat\ und der verminderte C-Septakkord als C°\sieben. Im Englischen wird der verminderte Septakkord als \neuq{diminished} bezeichnet. Deswegen wird in diesem Buch des öfteren die Bezeichnung Dim\sieben\ für diesen Akkord verwendet.
-
-Für den maj7\index{maj7} Akkord findet man durchaus auch viele andere Abkürzungen, wie z.B. MAJ7, Maj7, M7, j7, ∆7 etc.\\
-Für den m\sieben\ Akkord Abkürzungen wie: min7, -7, mi7 etc.\\
-Für den m\siebenflat\ Akkord die Bezeichnung: \halfdim7 --- Im Zusammenhang mit diesem Symbol hört man oft auch die Bezeichnung \neuq{halbverminderter Septakkord}. Diese Benennung ist allerdings nicht ganz korrekt.
-
-Was diese ganzen Zahlen und Buchstabenkombinationen bedeuten, wird aber hier im ersten Kapitel noch einmal gründlich an Hand unterschiedlicher Beispiele erklärt.
-
-\clearpage
-
-
-\noindent
-Und nun  A-Melodisch Moll.
-
-\vspace{6mm}
-
-\input{Melo-Optionstoene}
-
-{\Chordname
-  \hspace{5mm} Am\mdreizehn\ \hfill\ Bm\dreizehnnoneun\ \hfill\ C\mdreizehnsharpkelf\ \hfill\ D\dreizehn\hfill\ E\neunbdreizehn\ \hfill\ F{\kreuz}m\siebenflatneunelf\hfill\ G{\kreuz}m\siebenflat\hfill}
-
-\vspace{6mm}
-
-
-
-%
-% Back Matter
-%
-
-%\chapter{Anhang}
-%\label{anhang}
-
-
-%\appendixpage
-%\appendix
-\backmatter
-
-%	Bibliography
-%\bibliographystyle{\mybibliostyle}
-%\bibliocommand
-
-%	Glossary
-%\printglossary
-
-%	Index
-%\renewcommand{\indexname}{Sachregister} 
-\addcontentsline{toc}{section}{Index}
-\printindex
-
-\end{document}
+\usepackage{scrpage2}\synctex=1\usepackage{graphicx}\graphicspath{{/Users/jurgenkramlofsky/Desktop/Das-Buch/Bilder2/}}
+\usepackage{appendix}%%%% Andere Absatzbehandlung\newenvironment{absaetze}{\addtolength{\parskip}{\baselineskip}\parindent 0pt}{}%%%%
+%\usepackage{geometry}\usepackage{placeins}
+\usepackage[font={scriptsize,it},singlelinecheck=false,format=hang,justification=raggedright,skip=15pt]{caption}\usepackage[T1]{fontenc}
+\usepackage{ifxetex}\ifxetex %xetex specific stuff \usepackage{xunicode,fontspec,xltxtra}% \usepackage[biolinum]{xelibertine} 
+\defaultfontfeatures{Mapping=tex-text} %Fontauswahl% \setmainfont[LetterSpace=1.0,Scale=1]{GaramondNo8} % Hauptzeichensatz% 
+\setmonofont{monofur} % Haupt Monospaced %\setsansfont{Kabala} % Haupt ohne Serifen% \setsansfont{URWClassico} % Haupt ohne Serifen %
+\setmainfont[LetterSpace=2.0,Scale=.96]{Pali} % Hauptzeichensatz %\setmainfont[LetterSpace=2.0,Scale=1]{Guru} % Hauptzeichensatz %
+\setmainfont[LetterSpace=2.0,Scale=1]{jGaramond} % Hauptzeichensatz %\setmainfont[LetterSpace=2.0,Scale=.96]{Liberation Serif} % 
+Hauptzeichensatz %\setmainfont[LetterSpace=2.0,Scale=.9]{Bookman Old Style} % Hauptzeichensatz %\setmainfont[LetterSpace=2.0,Scale=1]
+{FreeSerif} % Hauptzeichensatz %\setmainfont[LetterSpace=2.0,Scale=.96]{Junicode} % Hauptzeichensatz %\setmainfont[LetterSpace=1.0,Scale=.
+96]{MgOpen Cosmetica} % Hauptzeichensatz %\setmainfont[LetterSpace=1.0,Scale=1]{MgOpen Canonica} % Hauptzeichensatz %
+\setmainfont[LetterSpace=1.0,Scale=1]{Gentium Book Basic} % Hauptzeichensatz% \setmainfont[LetterSpace=1.0,Scale=1]{Hoefler Text} % 
+Hauptzeichensatz %%% %\newfontface\Notationklein[Scale=2]{ScaleDegrees Times} %\newfontface\Notation[Scale=1.4]{ScaleDegrees Times} %
+\newfontface\Altdeutsch[Scale=1.1]{Walbaum-Fraktur}% \newfontface\Notenschrift[Scale=1.5]{StaffClefPitchesEasy}% \newfontface\Symbole[Scale=1]
+{AppleMyungjo}% \newfontface\Notation[Scale=1.6]{Accidentals}% \newfontface\Notationklein [Scale=2]{Accidentals}% \newfontface
+\Altdeutsch[Scale=1.2]{Alte Schwabacher}% \newfontfamily\Chordname[Scale=1]{MgOpen Cosmetica}	% \newfontfamily\Note[Scale=1]{Kabala}\else
+\usepackage[utf8]{inputenc} %This can be empty if you are not going to use pdftex %\fi\usepackage[ngerman,portuguese,danish,french,american]
+{babel}\usepackage[babel,german=guillemets]{csquotes}\usepackage[normalem]{ulem}\newcommand{\neuq}[1]{\foreignquote{danish}{#1}}
+\usepackage{makeidx}\usepackage{calc}%Textpos relevante Sachen\usepackage{textpos}\newcommand{\cd}[2]{\begin{textblock}{2}(#1,#2)                       
+\includegraphics[scale=.15]{CD2}                    \end{textblock}            \vspace{4ex}}%\newcommand{\lang}[1]{\widthof{1}(#1)}%\usepackage{MnSymbol}
+\usepackage{lettrine}%\usepackage{setspace}%\linespread{1.1}%\onehalfspacing\spacing{1.1}\typearea[current]{last}%%\usepackage{pdfsync} 
+Auskommentiert zu Gunsten von synctex%\makeglossary \makeindex\pagestyle{scrheadings}%raggedbottom\usepackage{natbib}
+\usepackage{textcomp}%\usepackage{fancyvrb}			% Allow \verbatim et al. in footnotes\usepackage{booktabs}			% Better tables
+\usepackage{subfig}\usepackage[subfigure]{tocloft}%\usepackage{array}%\usepackage{tabulary}			% Support longer table cells%
+\usepackage{xcolor}				% Allow for color (annotations)%\usepackage[parfill]{parskip}	% Activate to begin paragraphs with an empty	
+							% line rather than an indent															%Macros 
+für die unterschiedlichen Vorzeichen\newcommand{\Altbe}{ \enquote{\hspace{.5mm}b\hspace{.3mm}}}\newcommand{\Altha}{ \enquote{\hspace{.
+5mm}h\hspace{.3mm}}}\newcommand{\nat}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][1.9mm]4}}\newcommand{\naturaly}
+{\textsuperscript{\Notation \hspace{.3mm}n}}\newcommand{\ben}{\Notation \hspace{.3mm}\raisebox{.9mm}{b}\hspace{.3mm}}\newcommand{\bb}
+{\Notation \hspace{.3mm}\raisebox{.9mm}{B}\hspace{.3mm}}\newcommand{\xx}{\Notation \hspace{.3mm}\raisebox{.9mm}{x}\hspace{.3mm}}
+\newcommand{\be}{\textsuperscript{\Notation \hspace{.3mm}b}}\newcommand{\beklein}{\textsuperscript{\Notationklein \hspace{.3mm}b}}
+\newcommand{\kreuz}{\textsuperscript{\Notation \hspace{.3mm}s}}\newcommand{\kreuzn}{\Notation \hspace{.3mm}\raisebox{.9mm}{s}\hspace{.3mm}}
+\newcommand{\kreuzklein}{\textsuperscript{\Notationklein \hspace{.3mm}\raisebox{0mm}[0mm][.5mm]{s}}}\newcommand{\halfdim}
+{\textsuperscript{\rmfamily \hspace{.3mm}ø}}%\newcommand{\TRI}{\Symbole ∆}%Macros für die Akkordbezeichnungen\newcommand{\sus}
+{\textsuperscript{\Chordname7sus4}}\newcommand{\sechs}{\textsuperscript{\Chordname6}}\newcommand{\sechsneun}{\textsuperscript{\Chordname 
+6/9}}\newcommand{\sieben}{\textsuperscript{\Chordname7{\kern -0.15em}}}\newcommand{\siebenflat}{\textsuperscript{\Chordname7({\beklein}5)}}
+\newcommand{\siebenflatneunelf}{\textsuperscript{\Chordname7({\beklein}5,9,11)}}\newcommand{\siebensharp}
+{\textsuperscript{\Chordname7({\kreuzklein}5)}}\newcommand{\siebenbneun}{\textsuperscript{\Chordname7({\beklein}9)}}
+\newcommand{\siebenkneun}{\textsuperscript{\Chordname7({\kreuzklein}9)}}\newcommand{\siebenbneunbdreizehn}
+{\textsuperscript{\Chordname7({\beklein}9,{\beklein}13)}}\newcommand{\siebensharpbneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\beklein}
+9)}}\newcommand{\siebenflatbneun}{\textsuperscript{\Chordname7({\beklein}5,{\beklein}9)}}\newcommand{\siebenbneunkelf}
+{\textsuperscript{\Chordname7({\beklein}9,{\kreuzklein}11)}}\newcommand{\siebenkneunkelf}{\textsuperscript{\Chordname7({\kreuzklein}9,
+{\kreuzklein}11)}}\newcommand{\siebensharpkneun}{\textsuperscript{\Chordname7({\kreuzklein}5,{\kreuzklein}9)}}\newcommand{\siebenkelf}
+{\textsuperscript{\Chordname7({\kreuzklein}11)}}\newcommand{\msieben}{\textsuperscript{\Chordname maj7{\kern -0.15em}}}
+\newcommand{\msiebensharp}{\textsuperscript{\Chordname maj7({\kreuzklein}5)}}\newcommand{\neun}{\textsuperscript{\Chordname9}}
+\newcommand{\neunsharpkelf}{\textsuperscript{\Chordname9({\kreuzklein}5,{\kreuzklein}11)}}\newcommand{\neunsus}
+{\textsuperscript{\Chordname9sus4}}\newcommand{\neunkelf}{\textsuperscript{\Chordname9({\kreuzklein}11)}}\newcommand{\neunbdreizehn}
+{\textsuperscript{\Chordname9({\beklein}13)}}\newcommand{\mneun}{\textsuperscript{\Chordname maj9{\kern -0.15em}}}
+\newcommand{\mneunsharp}{\textsuperscript{\Chordname maj9({\kreuzklein}5)}}\newcommand{\elf}{\textsuperscript{\Chordname11}}
+\newcommand{\dreizehnkelf}{\textsuperscript{\Chordname13({\kreuzklein}11)}}\newcommand{\dreizehnbneun}
+{\textsuperscript{\Chordname13({\beklein}9)}}\newcommand{\dreizehn}{\textsuperscript{\Chordname13}}\newcommand{\dreizehnnoneun}
+{\textsuperscript{\Chordname13(no9)}}\newcommand{\mdreizehn}{\textsuperscript{\Chordname maj13{\kern -0.15em}}}
+\newcommand{\mdreizehnkelf}{\textsuperscript{\Chordname maj13({\kreuzklein}11)}}\newcommand{\mdreizehnsharpkelf}
+{\textsuperscript{\Chordname maj13({\kreuzklein}5,{\kreuzklein}11)}}\newcommand{\mdreizehnnoelf}{\textsuperscript{\Chordname maj13(no11){\kern 
+-0.15em}}}\newcommand{\dreizehnnoelf}{\textsuperscript{\Chordname13(no11)}}\newcommand{\elfnoneun}{\textsuperscript{\Chordname11(no9)}}
+\newcommand{\mneunkelf}{\textsuperscript{\Chordname maj9({\kreuzklein}11)}}\newcommand{\msiebenkelf}{\textsuperscript{\Chordname 
+maj7({\kreuzklein}11)}}\newcommand{\bedreizehn}{\textsuperscript{\Chordname({\beklein}13)}}\newcommand{\melf}{\textsuperscript{\Chordname 
+maj11{\kern -0.15em}}}\newcommand{\dimneun}{°\textsuperscript{\Chordname 7(9)}}% Makros für Abkürzungen\newcommand{\zB}{\mbox{z.\,B. }}
+\newcommand{\uU}{\mbox{u.\,U. }}\newcommand{\idr}{\mbox{i.\,d.\,R. }}\newcommand{\iA}{\mbox{i.\,A. }}%\newcommand\myauthor{Author}		
+	% In case these were not included in metadata%\newcommand\mytitle{Title}%\newcommand\mykeywords{}%\newcommand
+\mybibliostyle{plain}%\newcommand\bibliocommand{}%\newcommand\address{filmmusik@sound-trax.de}\newcommand\myauthor{Jürgen 
+Kramlofsky}%\newcommand\baseheaderlevel{2}\newcommand\mycopyright{2008 Jürgen Kramlofsky}%\date{11. November 2008}%\newcommand
+\mydate{11. November 2008}%\newcommand\format{complete}\newcommand\mykeywords{Skala, Akkord, Grundton, Terz, Septim, Optionston, 
+Optionstöne, Griffbild, Solo, Begleitung}%\newcommand\latexxslt{memoir-twosided.xslt}%\newcommand\language{ngerman}\newcommand
+\mytitle{Jazz Akkorde einmal anders}%\newcommand\web{\href{http://www.sound-trax.de}{www.sound-trax.de}}%%	PDF Stuff%
+\usepackage[plainpages=false,pdfpagelabels,pdftitle={\mytitle},pagebackref,pdfauthor={\myauthor},pdfkeywords={\mykeywords}]{hyperref}%% Title 
+Information%\title{\mytitle}\author{\myauthor}\begin{document}\pagenumbering{roman}%%		Front Matter%\selectlanguage{ngerman}%
+\selectlanguage{french}% Title Page\maketitle\clearpage% Copyright Page\vspace*{\fill}\setlength{\parindent}{0pt}\ifx\mycopyright\undefined\else
+	\textcopyright{} \mycopyright\fi\setlength{\parindent}{1em}\clearpage% Table of Contents\tableofcontents\listoffigures			% activate to 
+include a List of Figures% \listoftables			% activate to include a List of Tables%% Main Content%% Layout settings\setlength{\parindent}
+{1em}\mainmatter\pagenumbering{arabic}\chapter{Widmung}\label{widmung}\chapter{Vorwort}\label{vorwort}\lettrine{D}ieses Buch richtet sich in 
+erster Linie an den Gitarristen, der keine bzw. wenig Erfahrung mit Jazz Akkorden hat, oder mit der Art und Weise, wie sie ihm bisher vermittelt 
+wurden, eher unzufrieden war. Das Buch benutzt einen sehr strukturierten Aufbau in kleinen Schritten. Die Voraussetzungen zum Gebrauch des 
+Buches sind lediglich ein rudimentäres Verständnis der Notenschrift (Noten, Notenschlüssel, Takteinteilungen). Die Einfachheit der 
+Herangehensweise bedeutet jedoch nicht, dass das Buch nicht auch für den schon fortgeschrittenen Jazz Gitarristen viele neue Ansätze zum 
+Verständnis und Erarbeiten neuer Griffbilder oder Akkord-Progressionen bietet.Das erste Kapitel beschäftigt sich in erster Linie mit ein bisschen 
+Jazzharmonielehre\index{Jazzharmonielehre}. Hier stehen einige Grundlagen, für all diejenigen, die von Tonleitern\index{Tonleitern} und Akkorden 
+noch nichts oder nicht viel gehört haben, oder für jene, die gegen ein bisschen Auffrischung in dieser Richtung nichts einzuwenden haben. Wir 
+nehmen die gängigsten Tonleitertypen und bestücken sie sozusagen mit Akkorden. Die hieraus gewonnenen Erkenntnisse setzen wir dann als 
+Griffbilder\index{Griffbilder} für die Gitarre um.Alle Beispiel der Akkordfolgen sind auf der beiliegenden CD zum Anhören und Mitspielen 
+aufgenommen. Eine Version mit Gitarre um ein Gefühl zu bekommen, wie es klingen könnte und eine Version ohne Gitarre um es selbst zu 
+probieren und sich nicht durch eine Vorgabe einschränken zu lassen.chapter{Grundlagen}\label{grundlagen}\section{Einleitung}\label{einleitung}
+\lettrine{D}ie in diesem Buch vorkommenden Bezeichnungen und Begriffe entstammen der so genannten amerikanischen Schreibweise für Töne 
+und Akkordsymbole\index{Akkordsymbole}, da der Jazz\index{Jazz} eine Musikrichtung ist, welche in den USA entstanden ist und ein Großteil der 
+Jazz-Musikliteratur nach wie vor aus Amerika kommt.Konkret bedeutet dies, dass die Töne der C-Dur Tonleiter respektive der natürlichen A-Moll 
+Tonleiter nicht den Ton H sondern das B enthalten. Dadurch ergibt sich beginnend auf A folgende Tonreihe: ABCDEFG. Dies entspricht dem Anfang 
+des Alphabets. Eigentlich sinnvoller, als AHCDEFG.Eine Anekdote scheint die Erklärung für diesen Umstand zu geben. Noch vor der Erfindung des 
+Buchdrucks lag die einzige Möglichkeit ein Buch oder Schriftstück zu vervielfältigen darin, es abzuschreiben. Selbst als der Buchdruck schon 
+erfunden war, wurde diese Methode noch eine ganze Zeit weitergeführt. Dies geschah fast ausschließlich in den damaligen Klöstern. Der 
+Erzählung nach hat sich also ein Kopist eines deutschen Klosters bei der Abschrift eines Schriftstückes der Musiklehre ein wenig vertan, bzw. nicht 
+ganz genau hingesehen. So hat er beim kopieren aus dem altdeutschen Buchstaben {\Altbe} aus Versehen ein altdeutsches {\Altha} gemacht. Schon 
+war es passiert; wenn man der Geschichte glauben schenken mag.Eine weitere Abweichung bei der Bezeichnung der Töne tritt dann ein, wenn 
+diese Töne verändert, also alteriert werden. Alterationen\index{Alterationen} (Erhöhungen oder Erniedrigungen) dieser sieben Töne werden 
+nicht, wie in Deutschland üblich durch das Anhängen der Silben -es (erniedrigt) bzw. -is (erhöht) kenntlich gemacht, sonder durch Anhängen der 
+entsprechenden Vorzeichen aus der Notenschrift an den Notenbuchstaben. Aus einem erhöhten C wird dann also kein Cis sondern ein C\kreuz. Aus 
+einem erniedrigtem D kein Des sondern ein D\be. Die englische Aussprache dieser beiden Töne ist dann C~sharp bzw. D~flat. Es bleibt einem 
+natrlich selbst berlassen, trotzdem weiterhin die deutsche Aussprache zu verwenden.Unser deutsches B wird also in der englischen Schreibweise als 
+B\be\ geschrieben. Damit hier keine Ungereimtheiten oder Verwechslungen entstehen knnen, werden kleine Hilfen hinzugesetzt. Das deutsche H 
+wird also als B\nat\ (engl. B natural), das deutsche B als B\be\ (B~flat) geschrieben.Dieses Buch ist mehr oder weniger in 3 Abschnitte unterteilt. 
+\index{Basisakkorde} Basisakkorde, Basisakkorde plus Optionstöne und Akkorde ohne Grundtöne. Die verwendeten Bezeichnungstypen für die 
+jeweiligen Akkorde zeige ich hier an Hand von Akkorden mit dem Grundton C. Der große C-Durseptakkord wird in diesem Buch als C\msieben\ 
+geschrieben, C-Dominatseptakkord als C\sieben, der C-Mollseptakkord als Cm\sieben, der halbverminderte C-Mollseptakkord als Cm\siebenflat\ und 
+der verminderte C-Septakkord als C°\sieben. Im Englischen wird der verminderte Septakkord als \neuq{diminished} bezeichnet. Deswegen wird in 
+diesem Buch des öfteren die Bezeichnung Dim\sieben\ für diesen Akkord verwendet.Für den maj7\index{maj7} Akkord findet man durchaus auch 
+viele andere Abkürzungen, wie z.B. MAJ7, Maj7, M7, j7, ∆7 etc.\\Für den m\sieben\ Akkord Abkürzungen wie: min7, -7, mi7 etc.\\Für den m
+\siebenflat\ Akkord die Bezeichnung: \halfdim7 --- Im Zusammenhang mit diesem Symbol hört man oft auch die Bezeichnung \neuq{halbverminderter 
+Septakkord}. Diese Benennung ist allerdings nicht ganz korrekt.Was diese ganzen Zahlen und Buchstabenkombinationen bedeuten, wird aber hier 
+im ersten Kapitel noch einmal gründlich an Hand unterschiedlicher Beispiele erklärt.\clearpage\noindentUnd nun  A-Melodisch Moll.\vspace{6mm}
+\input{Melo-Optionstoene}{\Chordname  \hspace{5mm} Am\mdreizehn\ \hfill\ Bm\dreizehnnoneun\ \hfill\ C\mdreizehnsharpkelf\ \hfill\ D\dreizehn\hfill\ E
+\neunbdreizehn\ \hfill\ F{\kreuz}m\siebenflatneunelf\hfill\ G{\kreuz}m\siebenflat\hfill}\vspace{6mm}%% Back Matter%%\chapter{Anhang}%
+\label{anhang}%\appendixpage%\appendix\backmatter%	Bibliography%\bibliographystyle{\mybibliostyle}%\bibliocommand%	Glossary%
+\printglossary%	Index%\renewcommand{\indexname}{Sachregister} \addcontentsline{toc}{section}{Index}\printindex\end{document}

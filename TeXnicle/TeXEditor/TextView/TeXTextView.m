@@ -1485,7 +1485,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		return NSMakeRange(0, 0);
 	}
 	
-	// go back until we find an empty line
+	// go back until we find an empty line, or the beginning of a command
 	// - what is an empty line? Just newline and whitespace
 	NSInteger start = selRange.location;
   //	NSLog(@"Starting from %@", NSStringFromRange(selRange));
@@ -1499,8 +1499,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		start--;
 	
   //	NSLog(@"Starting search");
-	while(start>=0 && start < [str length]) {		
-		if ([newLineCharacterSet characterIsMember:[str characterAtIndex:start]]) {
+	while(start>=0 && start < [str length]) {
+    unichar c = [str characterAtIndex:start];
+		if ([newLineCharacterSet characterIsMember:c]) {
       //      NSLog(@"Found new line at %d", start);
 			// this means we are at the end of a line. 
 			// Was the last line empty?
@@ -1516,31 +1517,64 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				start += lr.length+1;
 				break;
 			}
-		}		
+		} else if (c == '\\') {
+      if (start < [str length]) {
+        unichar nc = [str characterAtIndex:start+1];
+        if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
+          // we are at the start of a command, so stop here
+          break;
+        }
+      }
+    }
+    
 		start--;
 	}
 	if (start<0)
 		start = 0;
 	
 	
-	// go forward until we find an empty line
-	NSInteger end = start;
+	// go forward until we find an empty line or the start of a command
+	NSInteger end = start+1;
 	while(end < [str length]) {
-		
-		if ([newLineCharacterSet characterIsMember:[str characterAtIndex:end]]) {
+		unichar c = [str characterAtIndex:end];
+		if ([newLineCharacterSet characterIsMember:c]) {
 			
 			// we are at the end of a line; was it an empty line?
 			NSRange lr = [str lineRangeForRange:NSMakeRange(end, 0)];
 			NSString *lstr = [str substringWithRange:lr];
-			lstr = [lstr stringByTrimmingCharactersInSet:whitespaceCharacterSet];
+      
 			lstr = [lstr stringByTrimmingCharactersInSet:newLineCharacterSet];
+			lstr = [lstr stringByTrimmingCharactersInSet:whitespaceCharacterSet];
+      
 			if ([lstr length]==0) {
-				end--;
+				end -= lr.length;
 				break;
 			}
-		}		
+		} else if (c == '\\') {
+      if (end < [str length]) {
+        unichar nc = [str characterAtIndex:end+1];
+        if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
+          // we are at the start of a command, so stop here
+          break;
+        }
+      }
+    }
+    
 		end++;
 	}
+  
+  // if we ended at a command, wind back until we have a non-whitespace, non-newline character
+  if ([str characterAtIndex:end] == '\\') {
+    end--;
+    while (end >= 0) {
+      unichar c = [str characterAtIndex:end];
+      if (![whitespaceCharacterSet characterIsMember:c] && ![newLineCharacterSet characterIsMember:c]) {
+        end++;
+        break;
+      }
+      end--;
+    }
+  }
 	
 	if (end >= [str length]) 
 		end = [str length];
@@ -3230,19 +3264,45 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   //	NSLog(@"Reformat paragraph");
 	
-	int lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
 	NSRange currRange = [self selectedRange];
-//	NSRange pRange = [self rangeForCurrentParagraph];
 	
 	[self setSelectedRange:pRange];	
 	NSString *oldStr = [[self string] substringWithRange:pRange];
-	NSString *newString = [oldStr stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" "];
+  if ([oldStr length] == 0) {
+    return;
+  }
+  
+  // get the initial indent: either the number of whitespaces or the index in the line of the
+	NSInteger loc = 0;
+  NSString *indent = @"";
+  if ([oldStr characterAtIndex:0] == '\\') {
+    NSRange lineRange = [[self string] lineRangeForRange:pRange];
+    NSInteger offset = pRange.location - lineRange.location;
+    indent = [[self string] substringWithRange:NSMakeRange(lineRange.location, offset)];
+//    NSRange lineRange = ;
+  } else {
+    while ([whitespaceCharacterSet characterIsMember:[oldStr characterAtIndex:loc]]) {
+      loc++;
+    }
+    indent = [oldStr substringToIndex:loc];
+    pRange.location += [indent length];
+    pRange.length -= [indent length];
+  }
+  
+  
+	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue] - [indent length];
+  
+  NSString *newString = [oldStr substringFromIndex:loc];
+	newString = [newString stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" "];
   //	NSString *newString = [NSString stringWithControlsFilteredForString:oldStr];
+  
+  // replace multiple ' ' with a single space
+  newString = [newString stringByReplacingOccurrencesOfRegex:@"\\s+" withString:@" "];
 	
 	// Now go through and put in \n when we are past the linelength
   //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
 	NSString *lineBreakStr = [NSString stringWithFormat:@"\n"];
-	NSInteger loc = 0;
+  loc = 0;
   NSInteger count = 0;
 	while (loc < [newString length]) {
 //    NSLog(@"Checking location %d = '%c'", loc, [newString characterAtIndex:loc]);
@@ -3264,6 +3324,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
           while (loc >= 0) {
 //            NSLog(@"      checking char '%c'", [newString characterAtIndex:loc]);
             if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
+              loc++;
               rewound = YES;
               break;
             }
@@ -3280,7 +3341,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         }
         
 //        NSLog(@"   replacing newline at %d", loc);
-				newString = [newString stringByReplacingCharactersInRange:NSMakeRange(loc, 1)
+				newString = [newString stringByReplacingCharactersInRange:NSMakeRange(loc, 0)
 																											 withString:lineBreakStr];
         count = 0;
 			} else {
@@ -3290,8 +3351,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     count++;
 		loc++;
 	}
+    
+  newString = [newString stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent]];
+//  newString = [indent stringByAppendingString:newString];
   
-	newString = [newString stringByTrimmingCharactersInSet:whitespaceCharacterSet];
 	[self breakUndoCoalescing];
 	[self setSelectedRange:pRange];
   [self shouldChangeTextInRange:pRange replacementString:newString];
@@ -3299,7 +3362,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [[self textStorage] replaceCharactersInRange:pRange withString:newString];
   [[self textStorage] endEditing];
 	[self setSelectedRange:currRange];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
 	return;
 }
 
