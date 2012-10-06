@@ -370,8 +370,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self performSelector:@selector(checkToShowTemplateSheet) withObject:nil afterDelay:0];
   
   // insert controls tab bar in the responder chain
-  [self insertTabbarControllerIntoResponderChain];
-  //  [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
+  [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
   
   _building = NO;
   _liveUpdate = NO;
@@ -728,7 +727,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
-{
+{  
   if ([self inVersionsMode]) {
     return NO;
   }
