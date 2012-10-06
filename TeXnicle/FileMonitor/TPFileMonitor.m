@@ -57,11 +57,12 @@
   if (self) {
     // Initialization code here.
     self.delegate = aDelegate;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:kFileCheckInterval
-                                                  target:self
-                                                selector:@selector(checkFilesTimerFired:)
-                                                userInfo:nil
-                                                 repeats:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkFiles:)
+                                                 name:NSApplicationDidBecomeActiveNotification
+                                               object:nil];
+    
   }
   
   return self;
@@ -70,7 +71,6 @@
 - (void) tearDown
 {
 //  NSLog(@"Tear down %@", self);
-  [self stopTimer];
   self.delegate = nil;
 }
 
@@ -82,8 +82,9 @@
   }  
 }
 
-- (void)checkFilesTimerFired:(NSTimer*)theTimer
+- (void)checkFiles:(NSNotification*)aNote
 {
+  
   NSArray *files = [self fileMonitorFileList:self]; 
 //  NSLog(@"Checking files %@", files);
   NSFileManager *fm = [NSFileManager defaultManager];

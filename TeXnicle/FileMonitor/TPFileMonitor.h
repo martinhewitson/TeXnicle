@@ -53,7 +53,6 @@
 - (id)initWithDelegate:(id<TPFileMonitorDelegate>)aDelegate;
 + (TPFileMonitor*)monitorWithDelegate:(id<TPFileMonitorDelegate>)aDelegate;
 
-- (void)checkFilesTimerFired:(NSTimer*)theTimer;
 - (void) stopTimer;
 - (void) tearDown;
 
