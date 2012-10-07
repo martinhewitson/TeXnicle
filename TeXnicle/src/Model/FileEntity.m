@@ -505,7 +505,7 @@
 //	NSLog(@"Writing contents of %@ to disk", [self name]);
 	NSString *filepath = [self valueForKey:@"pathOnDisk"];
 	NSData *data = [self valueForKey:@"content"];
-	if (data && [data length]>0) {
+	if (data) {
     
     MHFileReader *fr = [[MHFileReader alloc] init];
     [fr writeDataToFileAsString:data toURL:[NSURL fileURLWithPath:filepath]];
