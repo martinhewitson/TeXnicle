@@ -42,15 +42,24 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 //  NSLog(@"Tear down %@", self);
+  self.splitview = nil;
   self.tabView.delegate = nil;
+  self.tabView = nil;
   self.bookmarksButton = nil;
   self.warningsButton = nil;
   self.spellingButton = nil;
   self.labelsButton = nil;
   self.citationsButton = nil;
   self.commandsButton = nil;
-  self.splitview = nil;
-  self.containerView = nil;
+}
+
+- (id) init
+{
+  self = [super initWithNibName:@"MHInfoTabBarController" bundle:nil];
+  if (self) {
+    
+  }
+  return self;
 }
 
 

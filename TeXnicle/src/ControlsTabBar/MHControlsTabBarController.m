@@ -42,7 +42,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 //  NSLog(@"Tear down %@", self);
+  self.splitview = nil;
   self.tabView.delegate = nil;
+  self.tabView = nil;
   self.projectButton = nil;
   self.palletButton = nil;
   self.libraryButton = nil;
@@ -50,13 +52,11 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   self.findButton = nil;
   self.infoButton = nil;
   self.prefsButton = nil;
-  self.splitview = nil;
-  self.containerView = nil;
 }
 
 - (id)init
 {
-  self = [super init];
+  self = [super initWithNibName:@"MHControlsTabBarController" bundle:nil];
   if (self) {
     // Initialization code here.
   }

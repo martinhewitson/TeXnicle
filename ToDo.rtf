@@ -1,7 +1,8 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
+\f3\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
 }
-{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;}
 \paperw11900\paperh16840\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -51,6 +52,11 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \f1 \cf0 \
 + Split PDF viewer, split editor\
 \
++ Add support for:\
+	 \\input section.tex\
+\
+	apparently tex supports this\
+\
 \pard\pardeftab720
 
 \fs24 \cf3 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
@@ -90,16 +96,50 @@ Version 2.1\
 \
 + replace regexpkitlite with NSRegularExpression for platforms >10.7\
 \
++ Themes for colors\
 \
++ Add a Terminal button to launch a terminal in the project's directory\
 \
++ New preference to only do live update when last edit is older than N secs\
+\
+	- Update if:\
+		- has edits and \
+			- n secs elapsed since last edit\
+		  or\
+			- n secs elapsed since last update\
+\
++ Better soft-wrap which respects indentation? layoutmanager 
+\f2\fs26 \cf4 \ul \ulc4 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
+\f1\fs28 \cf0 \ulnone \
+\
++ Library category import/export\
+\
++ Bookmarks on standalone editor\
+\pard\pardeftab720
+\cf0 \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 Bugs\
 ----\
 \
+\pard\pardeftab720
+
+\f1 \cf0 + Work on drag-n-drop of real folders. \
+$$$$$  Refactor Controls Tabbar control into standard viewcontrol with own xib.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
+\
 Version 2.0\
 -----------\
+\
+Improved paragraph selection and reformatting.\
+\
+\
+\
+Beta 52\
+-------\
 \
 A number of small bugs fixed and a new shiny user manual added. Access the manual through TeXnicle's Help menu.\
 \
@@ -851,13 +891,13 @@ Beta 4\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
 + Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Fixed Console window title (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Fixed code folding bug (thanks to Murray 
-\f2 Eisenberg)
+\f3 Eisenberg)
 \f0 \
 + Made default syntax highlighting colours more muted\
 + Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\

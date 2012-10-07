@@ -30,7 +30,7 @@
 
 extern NSString * const TPControlsTabSelectionDidChangeNotification;
 
-@interface MHControlsTabBarController : NSResponder <NSTabViewDelegate> {
+@interface MHControlsTabBarController : NSViewController <NSTabViewDelegate> {
 @private
   NSArray *buttons;
 }
@@ -43,7 +43,6 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @property (unsafe_unretained) IBOutlet NSButton *infoButton;
 @property (unsafe_unretained) IBOutlet NSButton *prefsButton;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitview;
-@property (unsafe_unretained) IBOutlet NSView *containerView;
 @property (strong) IBOutlet NSTabView *tabView;
 
 - (void) toggleOn:(id)except;

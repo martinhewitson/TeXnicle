@@ -93,8 +93,13 @@
 @property (strong) TPFileMonitor *fileMonitor;
 @property (strong) TPTemplateEditor *templateEditor;
 
-@property (strong) IBOutlet MHControlsTabBarController *controlsTabBarController;
-@property (strong) IBOutlet MHInfoTabBarController *infoControlsTabBarController;
+@property (strong) MHControlsTabBarController *controlsTabBarController;
+@property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
+@property (strong) MHInfoTabBarController *infoControlsTabBarController;
+@property (unsafe_unretained) IBOutlet NSView *infoControlsTabBarControlContainer;
+@property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
+@property (unsafe_unretained) IBOutlet NSTabView *infoControlsTabview;
+
 @property (unsafe_unretained) IBOutlet NSTabView *tabbar;
 
 @property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
@@ -120,7 +125,6 @@
 @property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
 @property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
 @property (unsafe_unretained) IBOutlet TPOutlineView *projectOutlineView;
-@property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
 @property (unsafe_unretained) IBOutlet OpenDocumentsManager *openDocuments;
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 @property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
@@ -370,7 +374,21 @@
     [self.project setValue:projectFolder forKey:@"folder"];
   }
 
-
+  // tab bar controls
+  self.controlsTabBarController = [[MHControlsTabBarController alloc] init];
+  [self.controlsTabBarController.view setFrame:[self.controlsTabBarControlContainer bounds]];
+  [self.controlsTabBarControlContainer addSubview:self.controlsTabBarController.view];
+  self.controlsTabBarController.tabView = self.controlsTabview;
+  self.controlsTabBarController.splitview = self.splitview;
+  self.controlsTabview.delegate = self.controlsTabBarController;
+  
+  self.infoControlsTabBarController = [[MHInfoTabBarController alloc] init];
+  [self.infoControlsTabBarController.view setFrame:[self.infoControlsTabBarControlContainer bounds]];
+  [self.infoControlsTabBarControlContainer addSubview:self.infoControlsTabBarController.view];
+  self.infoControlsTabBarController.tabView = self.infoControlsTabview;
+  self.infoControlsTabBarController.splitview = self.splitview;
+  self.infoControlsTabview.delegate = self.infoControlsTabBarController;
+  
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
@@ -390,12 +408,12 @@
   [nc addObserver:self
          selector:@selector(handleControlTabSelectionChanged:)
              name:TPControlsTabSelectionDidChangeNotification 
-           object:nil];
+           object:self.controlsTabBarController];
   
   [nc addObserver:self
          selector:@selector(handleInfoTabSelectionChanged:)
              name:TPInfoControlsTabSelectionDidChangeNotification 
-           object:nil];
+           object:self.infoControlsTabBarController];
   
   [nc addObserver:self
          selector:@selector(handleTextEditorSelectionChanged:)

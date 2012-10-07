@@ -5,6 +5,43 @@
 		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
+
+    <!-- Version 2.0 beta 53 -->
+		<item>
+      <title>Version 2.0 (beta 53)</title>
+      <description><![CDATA[
+        <p>
+        A nasty bug got left in beta 52 due to some testing. Sorry about that.
+        </p>
+      ]]></description>
+      <pubDate>17th September 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta53.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="53"
+      length="16593618"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFB2mPgypaIqur6nNcRjrGapmih0BAhRkTSCRYOuWrQH+SwSY0aLmvrUkqQ=="
+      />
+    </item>
+    
+    <!-- Version 2.0 beta 52 -->
+		<item>
+      <title>Version 2.0 (beta 52)</title>
+      <description><![CDATA[
+        <p>
+        Numerous small bug fixes and one minor new feature: you can now specify live update to happen some number of seconds since the last edit.
+        </p>
+      ]]></description>
+      <pubDate>16th September 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/Beta/TeXnicle.app.beta52.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="52"
+      length="16594383"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFEC2Wbmsl0UKq7zN1N1q4Dn2xk5OAhQiXqzStGy2XI0cqz7gLwo7Ajle9A=="
+      />
+    </item>
+
     
     <!-- Version 2.0 beta 51 -->
 		<item>
