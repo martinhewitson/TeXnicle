@@ -384,6 +384,10 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   file = [TPSupportedFile supportedFileWithName:@"LaTeX Style Files" extension:@"sty" isBuiltIn:YES syntaxHighlight:YES];
   [supportedTypes addObject:file];
 
+  // ly
+  file = [TPSupportedFile supportedFileWithName:@"Lilypond Files" extension:@"ly" isBuiltIn:YES syntaxHighlight:YES];
+  [supportedTypes addObject:file];
+  
   // cls
   file = [TPSupportedFile supportedFileWithName:@"LaTeX Class Files" extension:@"cls" isBuiltIn:YES syntaxHighlight:YES];
   [supportedTypes addObject:file];
