@@ -238,7 +238,7 @@
   
   [self.templateViewer makeWindowControllers];
   NSWindowController *wc = [self.templateViewer windowControllers][0];
-  [wc window];
+  [wc window]; // force window to load
   [self displayOrCloseWindow:self];
   [self.templateViewer createNewProject:sender];
 }
