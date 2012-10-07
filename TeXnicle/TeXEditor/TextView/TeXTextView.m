@@ -1518,7 +1518,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				break;
 			}
 		} else if (c == '\\') {
-      if (start < [str length]) {
+      if (start+1 < [str length]) {
         unichar nc = [str characterAtIndex:start+1];
         if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
           // we are at the start of a command, so stop here
@@ -1551,7 +1551,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				break;
 			}
 		} else if (c == '\\') {
-      if (end < [str length]) {
+      if (end+1 < [str length]) {
         unichar nc = [str characterAtIndex:end+1];
         if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
           // we are at the start of a command, so stop here
@@ -1563,24 +1563,27 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		end++;
 	}
   
-  // if we ended at a command, wind back until we have a non-whitespace, non-newline character
-  if ([str characterAtIndex:end] == '\\') {
-    end--;
-    while (end >= 0) {
-      unichar c = [str characterAtIndex:end];
-      if (![whitespaceCharacterSet characterIsMember:c] && ![newLineCharacterSet characterIsMember:c]) {
-        end++;
-        break;
-      }
-      end--;
-    }
-  }
-	
-	if (end >= [str length]) 
+  if (end >= [str length])
 		end = [str length];
 	
 	if (end < start)
 		end = start;
+
+  
+  // if we ended at a command, wind back until we have a non-whitespace, non-newline character
+  if (end < [str length]) {
+    if ([str characterAtIndex:end] == '\\') {
+      end--;
+      while (end >= 0) {
+        unichar c = [str characterAtIndex:end];
+        if (![whitespaceCharacterSet characterIsMember:c] && ![newLineCharacterSet characterIsMember:c]) {
+          end++;
+          break;
+        }
+        end--;
+      }
+    }
+  }
 	
 	return NSMakeRange(start, end-start);
 	
