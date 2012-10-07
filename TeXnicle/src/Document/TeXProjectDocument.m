@@ -3190,6 +3190,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSArray*) fileMonitorFileList:(TPFileMonitor*)aMonitor
 {
+  if (![self.mainWindow isVisible] || self.fileMonitor == nil || self.fileMonitor != aMonitor) {
+    return @[];
+  }
+  
   NSFileManager *fm = [NSFileManager defaultManager];
   NSMutableArray *files = [NSMutableArray array];
   for (id item in self.project.items) {
