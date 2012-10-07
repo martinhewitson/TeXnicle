@@ -139,6 +139,8 @@
              name:NSOutlineViewSelectionIsChangingNotification
            object:self.outlineView];
   
+  // tex editor view controller shouldn't be listening for notifications of document change here
+  [nc removeObserver:self.texEditorViewController name:TPOpenDocumentsDidChangeFileNotification object:nil];
   
 }
 
