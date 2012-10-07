@@ -489,38 +489,66 @@
 
 -(NSString*)fileExtension
 {
-  return [self.delegate performSelector:@selector(fileExtension)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(fileExtension)]) {
+    return [self.delegate performSelector:@selector(fileExtension)];
+  }
+  
+  return nil;
 }
 
 -(id)project
 {
-  return [self.delegate performSelector:@selector(project)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(project)]) {
+    return [self.delegate performSelector:@selector(project)];
+  }
+  
+  return nil;
 }
 
 - (NSArray*)commands
 {
 //  NSLog(@"Delegate %@", self.delegate);
-  return [self.delegate performSelector:@selector(commands)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(commands)]) {
+    return [self.delegate performSelector:@selector(commands)];
+  }
+  
+  return nil;
 }
 
 - (NSArray*)listOfCitations
 {
-  return [self.delegate performSelector:@selector(listOfCitations)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(listOfCitations)]) {
+    return [self.delegate performSelector:@selector(listOfCitations)];
+  }
+  
+  return nil;
 }
 
 - (NSArray*)listOfReferences
 {
-  return [self.delegate performSelector:@selector(listOfReferences)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(listOfReferences)]) {
+    return [self.delegate performSelector:@selector(listOfReferences)];
+  }
+  
+  return nil;
 }
 
 - (NSArray*)listOfTeXFilesPrependedWith:(NSString *)prefix
 {
-  return [self.delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:prefix];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
+    return [self.delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:prefix];
+  }
+  
+  return nil;
 }
 
 -(NSArray*)listOfCommands
 {
-  return [self.delegate performSelector:@selector(listOfCommands)];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(listOfCommands)]) {
+    return [self.delegate performSelector:@selector(listOfCommands)];
+  }
+  
+  return nil;
 }
 
 - (NSUndoManager *)undoManagerForTextView:(NSTextView *)aTextView
