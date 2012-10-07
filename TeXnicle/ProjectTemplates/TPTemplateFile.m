@@ -57,8 +57,15 @@
   } else if ([self.path pathIsImage]) {
     self.dataContent = [[NSData alloc] initWithContentsOfFile:self.path];
   } else {
-    NSLog(@"Unknown file type: this shouldn't happen");
-  }  
+    // try to load text
+    MHFileReader *fr = [[MHFileReader alloc] init];
+    NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:self.path]];
+    if (str) {
+      self.stringContent = str;
+    } else {
+      NSLog(@"Failed to load file type (%@): this shouldn't happen", self.path);
+    }
+  }
 }
 
 - (void) saveContent
