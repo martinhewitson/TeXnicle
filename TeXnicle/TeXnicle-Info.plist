@@ -116,7 +116,7 @@
 	<key>CFBundleHelpBookName</key>
 	<string>TeXnicle Help</string>
 	<key>CFBundleIconFile</key>
-	<string>TeXnicle_4</string>
+	<string>TeXnicle</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.bobsoft.TeXnicle</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -136,7 +136,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright (c) 2010, Martin Hewitson</string>
+	<string>Copyright (c) 2010-2012, Martin Hewitson</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -157,7 +157,7 @@
 			<key>UTTypeDescription</key>
 			<string>TeXnicle Project</string>
 			<key>UTTypeIconFile</key>
-			<string>TeXnicle_4</string>
+			<string>TeXnicle</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.bobsoft.TeXnicle.texnicle</string>
 			<key>UTTypeTagSpecification</key>
