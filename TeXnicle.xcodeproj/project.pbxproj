@@ -285,6 +285,8 @@
 		259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 259530AF13DD68DF00CA2894 /* TPFileMonitor.m */; };
 		25957E9C15EC8BAC001E4338 /* MHPDFSearchResultsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 25957E9B15EC8BAC001E4338 /* MHPDFSearchResultsTable.m */; };
 		2599F3DB1604A49E00FA9DB2 /* NSColor+Lightness.m in Sources */ = {isa = PBXBuildFile; fileRef = 2599F3DA1604A49E00FA9DB2 /* NSColor+Lightness.m */; };
+		2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2599F8F216247C4600853947 /* MHStandaloneControlsTabBarViewController.xib */; };
+		2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2599F8F816247E7700853947 /* MHStandaloneInfoTabBarViewController.xib */; };
 		259BCCD713F5345A001D700E /* NSDate+GMT.m in Sources */ = {isa = PBXBuildFile; fileRef = 259BCCD613F5345A001D700E /* NSDate+GMT.m */; };
 		259D9F0514EF923B0014DD0D /* TPTemplateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 259D9F0414EF923B0014DD0D /* TPTemplateItem.m */; };
 		25A1B70B1458820A008CF5E7 /* MHDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1B70A14588209008CF5E7 /* MHDocumentController.m */; };
@@ -897,6 +899,8 @@
 		25957E9B15EC8BAC001E4338 /* MHPDFSearchResultsTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPDFSearchResultsTable.m; sourceTree = "<group>"; };
 		2599F3D91604A49E00FA9DB2 /* NSColor+Lightness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+Lightness.h"; sourceTree = "<group>"; };
 		2599F3DA1604A49E00FA9DB2 /* NSColor+Lightness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Lightness.m"; sourceTree = "<group>"; };
+		2599F8F216247C4600853947 /* MHStandaloneControlsTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHStandaloneControlsTabBarViewController.xib; sourceTree = "<group>"; };
+		2599F8F816247E7700853947 /* MHStandaloneInfoTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHStandaloneInfoTabBarViewController.xib; sourceTree = "<group>"; };
 		259BCCD513F5345A001D700E /* NSDate+GMT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+GMT.h"; sourceTree = "<group>"; };
 		259BCCD613F5345A001D700E /* NSDate+GMT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+GMT.m"; sourceTree = "<group>"; };
 		259D9F0314EF923B0014DD0D /* TPTemplateItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateItem.h; sourceTree = "<group>"; };
@@ -1449,9 +1453,11 @@
 				2519491E138F9830007029E5 /* MHControlsTabBarController.h */,
 				2519491F138F9830007029E5 /* MHControlsTabBarController.m */,
 				252E121B162167490041B2BE /* MHControlsTabBarController.xib */,
+				2599F8F216247C4600853947 /* MHStandaloneControlsTabBarViewController.xib */,
 				2589BC0115B40DAD00E24C9B /* MHInfoTabBarController.h */,
 				2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */,
 				252E121E16216C460041B2BE /* MHInfoTabBarController.xib */,
+				2599F8F816247E7700853947 /* MHStandaloneInfoTabBarViewController.xib */,
 				25194929138FA840007029E5 /* MHToolbarBackgroundView.h */,
 				2519492A138FA840007029E5 /* MHToolbarBackgroundView.m */,
 				25BB152C15B418AB007A7FDF /* MHInfoToolbarBackgroundView.h */,
@@ -2442,6 +2448,8 @@
 				252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */,
 				252E12231621728F0041B2BE /* TeXnicle.icns in Resources */,
 				252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */,
+				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
+				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

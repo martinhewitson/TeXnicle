@@ -30,6 +30,12 @@
 
 NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoControlsTabSelectionDidChangeNotification";
 
+@interface MHInfoTabBarController()
+
+@property (assign) BOOL standalone;
+
+@end
+
 @implementation MHInfoTabBarController
 
 - (void) dealloc
@@ -55,9 +61,25 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 - (id) init
 {
-  self = [super initWithNibName:@"MHInfoTabBarController" bundle:nil];
+  self = [self initWithMode:NO];
   if (self) {
     
+  }
+  return self;
+}
+
+- (id) initWithMode:(BOOL)standAlone
+{
+  NSString *nibName = nil;
+  if (standAlone) {
+    nibName = @"MHStandaloneInfoTabBarViewController";
+  } else {
+    nibName = @"MHInfoTabBarController";
+  }
+  
+  self = [super initWithNibName:nibName bundle:nil];
+  if (self) {
+    self.standalone = standAlone;
   }
   return self;
 }

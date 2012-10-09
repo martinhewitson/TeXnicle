@@ -68,8 +68,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @property (unsafe_unretained) IBOutlet NSView *centerView;
 @property (unsafe_unretained) IBOutlet NSView *rightView;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitView;
-@property (unsafe_unretained) IBOutlet MHControlsTabBarController *tabbarController;
-@property (unsafe_unretained) IBOutlet MHInfoTabBarController *infoTabbarController;
+
+@property (strong) MHControlsTabBarController *controlsTabBarController;
+@property (strong) MHInfoTabBarController *infoControlsTabBarController;
+@property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
+@property (unsafe_unretained) IBOutlet NSView *infoControlsTabBarControlContainer;
+@property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
+@property (unsafe_unretained) IBOutlet NSTabView *infoControlsTabview;
+
 @property (unsafe_unretained) IBOutlet NSView *warningsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
@@ -139,7 +145,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
     // controls tab index
-    [dict setValue:@([self.tabbarController indexOfSelectedTab]) forKey:TPExternalDocControlsTabIndexKey];
+    [dict setValue:@([self.controlsTabBarController indexOfSelectedTab]) forKey:TPExternalDocControlsTabIndexKey];
     
     // controls width
     NSRect r = [_controlsViewContainer frame];
@@ -171,8 +177,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         
         // controls tab index
         NSInteger tabIndex = [[dict valueForKey:TPExternalDocControlsTabIndexKey] integerValue];
-        [self.tabbarController selectTabAtIndex:tabIndex];
-        [self.infoTabbarController selectTabAtIndex:2];
+        [self.controlsTabBarController selectTabAtIndex:tabIndex];
+        [self.infoControlsTabBarController selectTabAtIndex:2];
         
         if (![NSApp isLion]) {
           // controls width
@@ -225,8 +231,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
   
-  [self.tabbarController selectTabAtIndex:1];
-  [self.infoTabbarController selectTabAtIndex:2];
+  [self.controlsTabBarController selectTabAtIndex:1];
+  [self.infoControlsTabBarController selectTabAtIndex:2];
   
   //  NSLog(@"Awake from nib");
   self.texEditorViewController = [[TeXEditorViewController alloc] init];
@@ -294,6 +300,21 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   self.spellcheckerViewController = [[TPSpellCheckerListingViewController alloc] initWithDelegate:self];
   [self.spellcheckerViewController.view setFrame:[self.spellCheckerContainerView bounds]];
   [self.spellCheckerContainerView addSubview:self.spellcheckerViewController.view];
+  
+  // tab bar controls
+  self.controlsTabBarController = [[MHControlsTabBarController alloc] initWithMode:YES];
+  [self.controlsTabBarController.view setFrame:[self.controlsTabBarControlContainer bounds]];
+  [self.controlsTabBarControlContainer addSubview:self.controlsTabBarController.view];
+  self.controlsTabBarController.tabView = self.controlsTabview;
+  self.controlsTabBarController.splitview = self.splitView;
+  self.controlsTabview.delegate = self.controlsTabBarController;
+  
+  self.infoControlsTabBarController = [[MHInfoTabBarController alloc] initWithMode:YES];
+  [self.infoControlsTabBarController.view setFrame:[self.infoControlsTabBarControlContainer bounds]];
+  [self.infoControlsTabBarControlContainer addSubview:self.infoControlsTabBarController.view];
+  self.infoControlsTabBarController.tabView = self.infoControlsTabview;
+  self.infoControlsTabBarController.splitview = self.splitView;
+  self.infoControlsTabview.delegate = self.infoControlsTabBarController;
   
   // set up engine settings
   [self setupSettings];
@@ -446,8 +467,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) insertTabbarControllerIntoResponderChain
 {
-  [self.tabbarController setNextResponder:self.mainWindow.nextResponder];
-  [self.mainWindow setNextResponder:self.tabbarController];    
+  [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
+  [self.mainWindow setNextResponder:self.controlsTabBarController];
 }
 
 - (void)checkToShowTemplateSheet
@@ -715,11 +736,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.templateEditor tearDown];
   self.templateEditor = nil;
   
-  [self.tabbarController tearDown];
-  self.tabbarController = nil;
+  [self.controlsTabBarController tearDown];
+  self.controlsTabBarController = nil;
   
-  [self.infoTabbarController tearDown];
-  self.infoTabbarController = nil;
+  [self.infoControlsTabBarController tearDown];
+  self.infoControlsTabBarController = nil;
   
 }
 
@@ -2335,7 +2356,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (BOOL) shouldGenerateOutline
 {
   // if outline tab is selected....
-  if ([self.tabbarController indexOfSelectedTab] == 3) {
+  if ([self.controlsTabBarController indexOfSelectedTab] == 3) {
     return YES;
   }
   return NO;
@@ -2468,9 +2489,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (BOOL)shouldPerformSpellCheck
 {
-  if ([self.tabbarController indexOfSelectedTab] == 5) {
+  if ([self.controlsTabBarController indexOfSelectedTab] == 5) {
     // if spelling tab is selected....
-    if ([self.infoTabbarController indexOfSelectedTab] == 2) {
+    if ([self.infoControlsTabBarController indexOfSelectedTab] == 2) {
       return YES;
     }
   }

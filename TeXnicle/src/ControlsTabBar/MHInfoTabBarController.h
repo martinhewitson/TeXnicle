@@ -33,6 +33,7 @@ extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
 @interface MHInfoTabBarController : NSViewController <NSTabViewDelegate>  {
 @private
   NSArray *buttons;
+  
 }
 
 @property (unsafe_unretained) IBOutlet NSButton *bookmarksButton;
@@ -43,6 +44,8 @@ extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
 @property (unsafe_unretained) IBOutlet NSButton *commandsButton;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitview;
 @property (strong) IBOutlet NSTabView *tabView;
+
+- (id) initWithMode:(BOOL)standAlone;
 
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;

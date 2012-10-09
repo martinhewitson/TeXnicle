@@ -57,7 +57,24 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (id)init
 {
-  self = [super initWithNibName:@"MHControlsTabBarController" bundle:nil];
+  self = [self initWithMode:NO];
+  if (self) {
+    // Initialization code here.
+  }
+  
+  return self;
+}
+
+- (id)initWithMode:(BOOL)standAlone
+{
+  NSString *nibName = nil;
+  if (standAlone) {
+    nibName = @"MHStandaloneControlsTabBarViewController";
+  } else {
+    nibName = @"MHControlsTabBarController";
+  }
+  
+  self = [super initWithNibName:nibName bundle:nil];
   if (self) {
     // Initialization code here.
   }
@@ -67,14 +84,16 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (void) awakeFromNib
 {
-  [self.tabView selectTabViewItemAtIndex:0];
   [self.projectButton setState:NSOnState];
+  [self.findButton setState:NSOffState];
+  
+  [self.tabView selectTabViewItemAtIndex:0];
   [self.palletButton setState:NSOffState];
   [self.libraryButton setState:NSOffState];
   [self.outlineButton setState:NSOffState];
-  [self.findButton setState:NSOffState];
   [self.infoButton setState:NSOffState];
   [self.prefsButton setState:NSOffState];
+  
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];
   if (self.projectButton != nil) {

@@ -45,6 +45,8 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitview;
 @property (unsafe_unretained) IBOutlet NSTabView *tabView;
 
+- (id)initWithMode:(BOOL)standAlone;
+
 - (void) toggleOn:(id)except;
 - (NSInteger) indexOfSelectedTab;
 - (void) selectTabAtIndex:(NSInteger)index;
