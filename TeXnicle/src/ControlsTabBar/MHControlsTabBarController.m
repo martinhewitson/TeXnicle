@@ -42,6 +42,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 //  NSLog(@"Tear down %@", self);
+  buttons = nil;
   self.splitview = nil;
   self.tabView.delegate = nil;
   self.tabView = nil;
