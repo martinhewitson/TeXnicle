@@ -72,6 +72,7 @@
 {
 //  NSLog(@"Tear down %@", self);
   self.delegate = nil;
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) stopTimer
