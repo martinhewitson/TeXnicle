@@ -1531,8 +1531,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	}
 	if (start<0)
 		start = 0;
-	
-	
+	 
 	// go forward until we find an empty line or the start of a command
 	NSInteger end = start+1;
 	while(end < [str length]) {
@@ -1562,19 +1561,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
 		end++;
 	}
-  
+    
   if (end >= [str length])
 		end = [str length];
 	
 	if (end < start)
 		end = start;
+  
+  if (end == NSNotFound)
+    end = start;
 
   
   // if we ended at a command, wind back until we have a non-whitespace, non-newline character
-  if (end < [str length]) {
+  if (end < [str length] && end > start) {
     if ([str characterAtIndex:end] == '\\') {
       end--;
-      while (end >= 0) {
+      while (end >= start) {
         unichar c = [str characterAtIndex:end];
         if (![whitespaceCharacterSet characterIsMember:c] && ![newLineCharacterSet characterIsMember:c]) {
           end++;
@@ -1584,6 +1586,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     }
   }
+  
+  if (end >= [str length])
+		end = [str length];
+	
+	if (end < start)
+		end = start;
+  
+  if (end == NSNotFound)
+    end = start;
+
 	
 	return NSMakeRange(start, end-start);
 	
@@ -2373,6 +2385,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     }
     
+    // tab key to complete
+    if ([theEvent keyCode] == 48 ) {
+      [_popupList selectSelectedItem:self];
+      [self wrapLine];
+      return;
+    }
     
   }
       
@@ -2537,7 +2555,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;  
   //  NSRange wordRange = NSMakeRange(start, selRange.location-start);
   //  NSString *word = [[self string] substringWithRange:wordRange];
-  NSRange pRange = [self rangeForCurrentParagraph];  
+  NSRange pRange = [self rangeForCurrentParagraph];
   NSRange lineRange = [[self string] lineRangeForRange:selRange];  
   NSString *paragraph = [[self string] substringWithRange:pRange];
   paragraph = [paragraph stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
