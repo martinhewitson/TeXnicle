@@ -36,12 +36,14 @@
 @interface TPSectionListController : NSObject {
 @private
 	NSMutableArray *sections;
-	IBOutlet NSTextView *textView;
-	IBOutlet NSPopUpButton *popupMenu;
 	NSMenu *addMarkerActionMenu;
 }
 
-@property (unsafe_unretained) IBOutlet id<TPSectionListControllerDelegate> delegate;
+@property (unsafe_unretained) NSTextView *textView;
+@property (unsafe_unretained) NSPopUpButton *popupMenu;
+@property (unsafe_unretained) id<TPSectionListControllerDelegate> delegate;
+
+- (id) initWithDelegate:(id<TPSectionListControllerDelegate>)aDelegate;
 
 - (void) deactivate;
 - (IBAction)calculateSections:(id)sender;
@@ -52,6 +54,8 @@
 - (void) addSelectedMarker:(id)sender;
 - (IBAction) addMarkAction:(id)sender;
 - (void) addTitle;
+
+- (void) tearDown;
 
 @end
 

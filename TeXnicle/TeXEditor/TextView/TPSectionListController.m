@@ -42,6 +42,14 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 @implementation TPSectionListController
 
+- (id) initWithDelegate:(id<TPSectionListControllerDelegate>)aDelegate
+{
+  self = [self init];
+  if (self) {
+    self.delegate = aDelegate;
+  }
+  return self;
+}
 
 - (id) init
 {
@@ -67,13 +75,24 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	return self;
 }
 
+- (void) tearDown
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.timer invalidate];
+  self.timer = nil;
+  self.textView = nil;
+  self.popupMenu = nil;
+  self.delegate = nil;
+}
+
+
 - (void) awakeFromNib
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
 				 selector:@selector(calculateSections:)
 						 name:NSPopUpButtonWillPopUpNotification
-					 object:popupMenu];
+					 object:self.popupMenu];
 
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                 target:self
@@ -153,7 +172,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 - (void) addSelectedMarker:(id)sender
 {
 	NSString *prefix = @"\%\%";
-	[textView insertText:[[prefix stringByAppendingString:[sender title]] stringByAppendingString:@" "]];
+	[self.textView insertText:[[prefix stringByAppendingString:[sender title]] stringByAppendingString:@" "]];
 }
 
 - (IBAction) addMarkAction:(id)sender
@@ -186,12 +205,12 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     return;
   }
   
-	if (!popupMenu) {
+	if (!self.popupMenu) {
 //    NSLog(@"No popupMenu");
 		return;
   }
 	
-	if (!textView) {
+	if (!self.textView) {
 //    NSLog(@"No textView");
 		return;
   }
@@ -204,12 +223,12 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSMutableArray *found = [NSMutableArray array];
 	
-	NSString *string = [textView string];
+	NSString *string = [self.textView string];
 	if (string == nil || [string length] == 0) {   
 //    NSLog(@"String empty");
-		[popupMenu removeAllItems];		
+		[self.popupMenu removeAllItems];		
     [self addTitle];
-    [popupMenu setNeedsDisplay:YES];
+    [self.popupMenu setNeedsDisplay:YES];
 		return;
 	}
 	
@@ -345,7 +364,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"title"] = str;
-        NSInteger index = [[textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
+        NSInteger index = [[self.textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
         dict[@"index"] = @(index);
         [found addObject:dict];
       }
@@ -357,7 +376,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	NSArray *results = [found sortedArrayUsingDescriptors:@[desc]];	
 	NSMutableArray *current = [NSMutableArray array];
-	for (NSMenuItem *item in [popupMenu itemArray]) {
+	for (NSMenuItem *item in [self.popupMenu itemArray]) {
     
     // skip the placeholder
     NSString *title = [item title];
@@ -395,15 +414,15 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		
 	if (!sameMenu) {
 		
-		[popupMenu removeAllItems];		
+		[self.popupMenu removeAllItems];		
     [self addTitle];
 		for (NSDictionary *result in results) {
-			[popupMenu addItemWithTitle:@"foo"];
-			[[popupMenu lastItem] setAttributedTitle:[result valueForKey:@"title"]];
-			[[popupMenu lastItem] setTag:[[result valueForKey:@"index"] intValue]];
+			[self.popupMenu addItemWithTitle:@"foo"];
+			[[self.popupMenu lastItem] setAttributedTitle:[result valueForKey:@"title"]];
+			[[self.popupMenu lastItem] setTag:[[result valueForKey:@"index"] intValue]];
 		}
     
-    [popupMenu selectItemAtIndex:0];
+    [self.popupMenu selectItemAtIndex:0];
 
 	}
 	
@@ -411,16 +430,16 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void) addTitle
 {
-  [popupMenu setTitle:TPsectionListPopupTitle];
-  [popupMenu addItemWithTitle:TPsectionListPopupTitle];
+  [self.popupMenu setTitle:TPsectionListPopupTitle];
+  [self.popupMenu addItemWithTitle:TPsectionListPopupTitle];
   
   NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"Jump to section..."];
   [titleString addAttribute:NSForegroundColorAttributeName
                       value:[NSColor lightGrayColor]
                       range:NSMakeRange(0, [titleString length])];
   
-  [[popupMenu lastItem] setAttributedTitle:titleString];
-  [[popupMenu lastItem] setTag:0];
+  [[self.popupMenu lastItem] setAttributedTitle:titleString];
+  [[self.popupMenu lastItem] setTag:0];
 }
 
 - (IBAction)calculateSections:(id)sender
@@ -431,21 +450,21 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 - (IBAction) gotoSection:(id)sender
 {
 	// now get the selected
-	NSMenuItem *selected = [popupMenu selectedItem];
-  if ([popupMenu indexOfItem:selected] == 0) {
+	NSMenuItem *selected = [self.popupMenu selectedItem];
+  if ([self.popupMenu indexOfItem:selected] == 0) {
     return;
   }
   
 //	[selected setState:NSOnState];
 	NSUInteger tag = [selected tag];
 	NSRange tagRange = NSMakeRange(tag, 0);
-	[textView setSelectedRange:tagRange];
-	[textView selectLine:self];
-	[textView scrollRangeToVisible:tagRange];
+	[self.textView setSelectedRange:tagRange];
+	[self.textView selectLine:self];
+	[self.textView scrollRangeToVisible:tagRange];
   [self fillSectionMenu];
   
-  [[textView window] makeFirstResponder:textView];
-  [popupMenu selectItemAtIndex:0];
+  [[self.textView window] makeFirstResponder:self.textView];
+  [self.popupMenu selectItemAtIndex:0];
 }
 
 @end

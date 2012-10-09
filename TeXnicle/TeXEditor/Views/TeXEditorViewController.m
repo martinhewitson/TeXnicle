@@ -45,10 +45,13 @@
 @property (strong) NSImage *checkFailedImage;
 @property (strong) NSTimer *syntaxCheckTimer;
 @property (strong) TPSyntaxChecker *checker;
+@property (strong) TPSectionListController *sectionListController;
+
 @property (unsafe_unretained) IBOutlet NSPopUpButton *sectionListPopup;
 @property (unsafe_unretained) IBOutlet NSButton *markerButton;
 @property (unsafe_unretained) IBOutlet NSButton *errorPopup;
 @property (unsafe_unretained) IBOutlet NSButton *unfoldButton;
+
 
 @end
 
@@ -89,6 +92,9 @@
 //  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  [self.sectionListController tearDown];
+  self.sectionListController = nil;
+  
   [self stopSyntaxChecker];
   self.checker.delegate = nil;
   
@@ -106,6 +112,10 @@
   _shouldCheckSyntax = YES; // check at least once
   _checkingSyntax    = NO;
   self.performSyntaxCheck = NO;
+  
+  self.sectionListController = [[TPSectionListController alloc] initWithDelegate:self];
+  self.sectionListController.popupMenu = self.sectionListPopup;
+  self.sectionListController.textView = self.textView;
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self
