@@ -179,7 +179,7 @@
 	
 	NSString *oldPath = [self pathOnDisk];
 	NSString *newPath = nil;
-	
+  
 	if (oldPath) {
 		newPath = [oldPath stringByDeletingLastPathComponent];
 		newPath = [newPath stringByAppendingPathComponent:newName];		
@@ -199,8 +199,10 @@
 		// If the old file exists, we can move it
 		if ([fm fileExistsAtPath:oldPath]) {
       
-      // if a file exists at the new path, as the user if they want to overwrite
-      if ([fm fileExistsAtPath:newPath]) {
+      // if a file exists at the new path, ask the user if they want to overwrite
+      // - if we are just changing the case of the filename, then this check doesn't make sense due to the
+      //   case insensitive file system
+      if (![newPath isCaseInsensitiveLike:oldPath] && [fm fileExistsAtPath:newPath]) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Overwrite?"
                                          defaultButton:@"Overwrite"
                                        alternateButton:@"Cancel"
@@ -210,6 +212,7 @@
         
         NSInteger result = [alert runModal];
         if (result == NSAlertDefaultReturn) {
+          
           NSError *error = nil;
           BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
                                                                       source:[newPath stringByDeletingLastPathComponent]
@@ -222,20 +225,32 @@
             [NSApp presentError:error];
             return;
           }
+        } else {
+          return;
         }
       }
 
-			BOOL success = [fm moveItemAtPath:oldPath toPath:newPath error:&error];
-			if (success == NO) {
-				NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-				[errorDetail setValue:@"Failed to rename file"
-											 forKey:NSLocalizedDescriptionKey];
-				NSString *errorDescription = [NSString stringWithFormat:@"Failed to move \u201c%@\u201d to \u201c%@\u201d", oldPath, newPath];
-				[errorDetail setValue:errorDescription forKey:NSLocalizedRecoverySuggestionErrorKey];
-				error = [NSError errorWithDomain:@"TeXnicle" code:0 userInfo:errorDetail];
-				[NSApp presentError:error];
-				return;
-			}
+      // move to a tmp file, then to the new file
+      NSDateFormatter *formatter = [[NSDateFormatter alloc] initWithDateFormat:@"yyyymmdd_HHMM" allowNaturalLanguage:YES];
+      NSString *append = [formatter stringFromDate:[NSDate date]];
+      NSString *tmpFile = [oldPath stringByAppendingPathExtension:append];
+			BOOL success = [fm moveItemAtPath:oldPath toPath:tmpFile error:&error];
+      if (success) {
+        BOOL success = [fm moveItemAtPath:tmpFile toPath:newPath error:&error];
+        if (success == NO) {
+          NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+          [errorDetail setValue:@"Failed to rename file"
+                         forKey:NSLocalizedDescriptionKey];
+          NSString *errorDescription = [NSString stringWithFormat:@"Failed to move \u201c%@\u201d to \u201c%@\u201d", oldPath, newPath];
+          [errorDetail setValue:errorDescription forKey:NSLocalizedRecoverySuggestionErrorKey];
+          error = [NSError errorWithDomain:@"TeXnicle" code:0 userInfo:errorDetail];
+          [NSApp presentError:error];
+          return;
+        }
+      } else {
+        [NSApp presentError:error];
+        return;
+      }
 		}
 		
 		// set the new filepath
