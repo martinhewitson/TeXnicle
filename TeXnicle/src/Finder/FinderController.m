@@ -31,7 +31,6 @@
 #import "TPDocumentMatch.h"
 #import "ProjectItemEntity.h"
 #import "FileEntity.h"
-#import "RegexKitLite.h"
 #import "NSString+LaTeX.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "ImageAndTextCell.h"
@@ -442,113 +441,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   
 }
 
-//
-//- (void) searchForTerm:(NSString *)searchTerm inFile:(FileEntity*)file
-//{
-//  // get the text for this file
-//  FileDocument *doc = [file document];
-//  
-//	NSArray *searchTerms = [searchTerm componentsSeparatedByString:@" "];
-//  if ([searchTerms count] == 0) {
-//    return;
-//  }
-//  
-//	NSMutableString *regexp = [NSMutableString stringWithString:@"(\\n)?.*"];
-//	for (NSString *term in searchTerms) {
-//		[regexp appendFormat:@"%@(\\s)*(\\n)?", term];
-//	}
-//	[regexp appendFormat:@".*(\\n)?"];
-//  
-//  NSMutableAttributedString *aStr = [[doc textStorage] mutableCopy];
-//  NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
-//  NSString *string = [aStr unfoldedString];
-//  [aStr release];
-//  if (!string)
-//    return;
-//  
-////  NSLog(@"Searching for %@", regexp);
-//  
-//  NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
-//  
-//  NSScanner *aScanner = [NSScanner scannerWithString:string];
-//  if ([regexpresults count] > 0) {
-//    
-//    for (NSString *result in regexpresults) {
-//      if (!shouldContinueSearching) {
-//        break;
-//      } // If should continue 
-//      
-//      NSString *returnResult = [result stringByTrimmingCharactersInSet:ws];
-//      returnResult = [returnResult stringByTrimmingCharactersInSet:ns];
-//      
-//      if ([aScanner scanUpToString:returnResult intoString:NULL]) {
-//        
-//        NSRange resultRange = NSMakeRange([aScanner scanLocation], [returnResult length]);
-//        if (resultRange.location != NSNotFound) {
-//          
-//          NSRange subrange    = [returnResult rangeOfRegex:[searchTerms objectAtIndex:0]];
-//          if (subrange.location != NSNotFound) {
-//            resultRange.location += subrange.location;
-//            resultRange.length = [searchTerm length];
-//                        
-//            // scan back to start of word
-//            NSInteger idx = subrange.location;
-//            while (idx > 0) {
-//              if ([ws characterIsMember:[returnResult characterAtIndex:idx]]) {
-//                idx++;
-//                break;
-//              }
-//              idx--;
-//            }
-//            NSInteger len = (NSInteger)MIN(subrange.location-idx+30, [returnResult length]);
-//            len = MAX(len, [searchTerm length]);
-//            if (len+idx > [returnResult length]) {
-//              len = [returnResult length]-idx;
-//            }
-//            NSString *matchingString = [returnResult substringWithRange:NSMakeRange(idx, len)];
-//            if (idx>0) {
-//              matchingString = [@"..." stringByAppendingString:matchingString];
-//              idx-=3;
-//            }
-//            
-//            TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
-//            MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
-//            NSInteger lineNumber = ln.number;
-//            TPDocumentMatch *match = [TPDocumentMatch documentMatchInLine:lineNumber withRange:resultRange subrange:NSMakeRange(subrange.location-idx, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
-//            dispatch_semaphore_wait(arrayLock, DISPATCH_TIME_FOREVER);
-//            [resultDoc addMatch:match];
-//            if (![self.results containsObject:resultDoc]) {
-//              [self.results addObject:resultDoc];
-//            }
-//            
-//            dispatch_sync(dispatch_get_main_queue(),
-//                          // block
-//                          ^{
-//                            [self didMakeMatch:self];
-//                            [self.outlineView reloadData];
-//                          });
-//            dispatch_semaphore_signal(arrayLock);
-//          } // end subrange found
-//        } // end result range founds
-//      } // end scanner
-//    } // end loop over results
-//  } // end if [results count] > 0
-//  
-//  filesProcessed--;
-//  
-//  // check if this is the last one?
-//  if (filesProcessed == 0) {
-//    [self didEndSearch:self];
-//    if (!shouldContinueSearching) {
-//      // send cancelled message
-//      [self didCancelSearch:self];
-//    }
-//    isSearching = NO;
-//    shouldContinueSearching = NO;
-//    [self.outlineView reloadData];
-//  }
-//  
-//}
 
 - (TPResultDocument*)resultDocumentForDocument:(FileEntity*)aFile
 {
