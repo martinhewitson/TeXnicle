@@ -27,10 +27,10 @@
 
 #import "TPSectionListController.h"
 #import "NSString+LaTeX.h"
-#import "RegexKitLite.h"
 #import "NSString+Extension.h"
 #import "Bookmark.h"
 #import "NSAttributedString+LineNumbers.h"
+#import "TPRegularExpression.h"
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
@@ -250,7 +250,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			regexp = [NSString stringWithFormat:@"%@[\\*]?\\{.*\\}", tag];
 		}
 		
-		NSArray *results = [string componentsMatchedByRegex:regexp];
+    NSArray *results = [TPRegularExpression stringsMatching:regexp inText:string];
 //    NSLog(@"Scan results for %@:  %@", regexp, results);
 		NSScanner *aScanner = [NSScanner scannerWithString:string];
 		if ([results count] > 0) {			
@@ -296,7 +296,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
 	// add bib items
 	NSString *regexp = @"\\@.*\\{.*,";
-	NSArray *searchResults = [string componentsMatchedByRegex:regexp];
+  NSArray *searchResults = [TPRegularExpression stringsMatching:regexp inText:string];
 //  NSLog(@"Bib search results: %@", searchResults);
 	NSScanner *aScanner = [NSScanner scannerWithString:string];
 	if ([searchResults count] > 0) {			

@@ -25,11 +25,11 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "RegexKitLite.h"
 #import "NSString+LaTeX.h"
 #import "NSString+Comparisons.h"
 #import "MHFileReader.h"
 #import "BibliographyEntry.h"
+#import "TPRegularExpression.h"
 
 @implementation NSString (LaTeX) 
 
@@ -75,7 +75,7 @@
 - (NSArray*) referenceLabels
 {	
 	// scan string for all \label{something} and return the list of 'something's.
-	NSArray *labels = [self componentsMatchedByRegex:@"\\\\label\\{.*?\\}"];
+	NSArray *labels = [TPRegularExpression stringsMatching:@"\\\\label\\{.*?\\}" inText:self];
 	
   //	NSLog(@"Scanning %@", self);
   //	NSLog(@"Found: %@",labels);

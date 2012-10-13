@@ -53,7 +53,6 @@
 #import "NSApplication+SystemVersion.h"
 #import "MHSynctexController.h"
 #import "BibliographyEntry.h"
-#import "RegexKitLite.h"
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
 #import "TPNewCommand.h"

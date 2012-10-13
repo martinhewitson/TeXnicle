@@ -30,9 +30,9 @@
 #import "NSStringUUID.h"
 #import "NSWorkspaceExtended.h"
 #import "NSNotificationAdditions.h"
-#import "RegexKitLite.h"
 #import "externs.h"
 #import "TPLibraryEntry.h"
+#import "TPRegularExpression.h"
 
 NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryImageGeneratorTaskDidFinishNotification";
 
@@ -85,7 +85,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
     
     // replace placeholders
     NSString *regexp = [self placeholderRegexp];
-    NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+    NSArray *placeholders = [TPRegularExpression stringsMatching:regexp inText:code];
     for (__strong NSString *placeholder in placeholders) {
       placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       NSRange r = [code rangeOfString:placeholder];
@@ -172,7 +172,7 @@ NSString * const TPLibraryImageGeneratorTaskDidFinishNotification = @"TPLibraryI
   
   // replace placeholders
   NSString *regexp = [self placeholderRegexp];
-  NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+  NSArray *placeholders = [TPRegularExpression stringsMatching:regexp inText:code];
   for (__strong NSString *placeholder in placeholders) {
     placeholder = [placeholder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSRange r = [code rangeOfString:placeholder];

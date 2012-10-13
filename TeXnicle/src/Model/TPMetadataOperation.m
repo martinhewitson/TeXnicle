@@ -7,13 +7,17 @@
 //
 
 #import "TPMetadataOperation.h"
-#import "RegexKitLite.h"
 #import "NSString+LaTeX.h"
 #import "NSString+SectionsOutline.h"
 #import "FileDocument.h"
 #import "BibliographyEntry.h"
 #import "TPNewCommand.h"
 #import "TPLabel.h"
+#import "TPRegularExpression.h"
+
+@interface TPMetadataOperation ()
+
+@end
 
 @implementation TPMetadataOperation
 
@@ -43,21 +47,21 @@
     
 //    NSLog(@"Generating meta data for %@", self.file.name);
     
-    //-------------- get commands
+      //-------------- get commands
       if ([self isCancelled]) return;
-      NSArray *parsedCommands = [self.text componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+      NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
       }
       
-      parsedCommands = [self.text componentsMatchedByRegex:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}"];
+      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
       }
       
-      parsedCommands = [self.text componentsMatchedByRegex:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}"];
+      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];

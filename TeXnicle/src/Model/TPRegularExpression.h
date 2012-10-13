@@ -11,5 +11,7 @@
 @interface TPRegularExpression : NSObject
 
 + (NSArray*)stringsMatching:(NSString*)expr inText:(NSString*)text;
++ (NSRange)rangeOfExpr:(NSString*)expr inText:(NSString*)text;
++ (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr withString:(NSString*)replacement inString:(NSString*)text;
 
 @end

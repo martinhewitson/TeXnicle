@@ -26,7 +26,6 @@
 //
 
 #import "TeXTextView.h"
-#import "RegexKitLite.h"
 #import "TPLibraryController.h"
 #import "NSArray+Color.h"
 #import "NSMutableAttributedString+CodeFolding.h"
@@ -62,6 +61,8 @@
 #import "TeXEditorViewController.h"
 #import "FileDocument.h"
 #import "NSColor+Lightness.h"
+
+#import "TPRegularExpression.h"
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
@@ -2890,7 +2891,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // Replace placeholders
   NSString *regexp = [TPLibraryController placeholderRegexp];
-  NSArray *placeholders = [code componentsMatchedByRegex:regexp];
+  NSArray *placeholders = [TPRegularExpression stringsMatching:regexp inText:code];
+  
   NSRange firstPlaceholder = NSMakeRange(NSNotFound, 0);
   for (__strong NSString *placeholder in placeholders) {
     placeholder = [placeholder stringByTrimmingCharactersInSet:whitespaceCharacterSet];
@@ -3314,11 +3316,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue] - [indent length];
   
   NSString *newString = [oldStr substringFromIndex:loc];
-	newString = [newString stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" "];
+  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" " inString:newString];
   //	NSString *newString = [NSString stringWithControlsFilteredForString:oldStr];
   
   // replace multiple ' ' with a single space
-  newString = [newString stringByReplacingOccurrencesOfRegex:@"\\s+" withString:@" "];
+  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\\s+" withString:@" " inString:newString];
 	
 	// Now go through and put in \n when we are past the linelength
   //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
@@ -3373,7 +3375,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		loc++;
 	}
     
-  newString = [newString stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent]];
+//  newString = [newString stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent]];
+  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent] inString:newString];
 //  newString = [indent stringByAppendingString:newString];
   
 	[self breakUndoCoalescing];

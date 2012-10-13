@@ -27,7 +27,6 @@
 //
 
 #import "TPArrayStringTransformer.h"
-#import "RegexKitLite.h"
 
 @implementation TPArrayStringTransformer
 

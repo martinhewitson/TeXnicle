@@ -34,7 +34,6 @@
 #import "FileEntity.h"
 #import "ExternalTeXDoc.h"
 #import "NSString+SectionsOutline.h"
-#import "RegexKitLite.h"
 #import "TPSyntaxError.h"
 #import "externs.h"
 #import "NSNotificationAdditions.h"

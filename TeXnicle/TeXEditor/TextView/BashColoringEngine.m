@@ -26,7 +26,6 @@
 //
 
 #import "BashColoringEngine.h"
-#import "RegexKitLite.h"
 #import "NSString+Comparisons.h"
 
 @interface BashColoringEngine ()

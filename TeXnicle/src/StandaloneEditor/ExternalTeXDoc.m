@@ -37,7 +37,6 @@
 #import "UKXattrMetadataStore.h"
 #import "MHFileReader.h"
 #import "NSAttributedString+LineNumbers.h"
-#import "RegexKitLite.h"
 #import "MHLineNumber.h"
 #import "TPDocumentMatch.h"
 #import "NSArray+LaTeX.h"
@@ -49,7 +48,7 @@
 #import "TPLabel.h"
 #import "TPNewCommand.h"
 #import "BibliographyEntry.h"
-
+#import "TPRegularExpression.h"
 
 #define kSplitViewLeftMinSize 210.0
 #define kSplitViewCenterMinSize 400.0
@@ -871,7 +870,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	}
 	[regexp appendFormat:@".*(\\n)?"];
   
-  NSArray *regexpresults = [string componentsMatchedByRegex:regexp];
+  NSArray *regexpresults = [TPRegularExpression stringsMatching:regexp inText:string];
   
   NSScanner *aScanner = [NSScanner scannerWithString:string];
   _shouldContinueSearching = YES;
@@ -892,7 +891,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         NSRange resultRange = NSMakeRange([aScanner scanLocation], [returnResult length]);
         if (resultRange.location != NSNotFound) {
           
-          NSRange subrange    = [returnResult rangeOfRegex:searchTerms[0]];
+          NSRange subrange = [TPRegularExpression rangeOfExpr:searchTerms[0] inText:returnResult];
           if (subrange.location != NSNotFound) {
             resultRange.location += subrange.location;
             resultRange.length = [searchTerm length];
@@ -1677,7 +1676,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSMutableArray *commands = [NSMutableArray array];
   // consolidated main file
   NSString *allText = [self.texEditorViewController.textView string];
-  NSArray *newCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+  NSArray *newCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:allText];
+
   for (NSString *newCommand in newCommands) {
     [commands addObject:[newCommand argument]];
   }
@@ -2639,7 +2639,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
 {
   NSString *allText = [self.texEditorViewController.textView string];
-  NSArray *parsedCommands = [allText componentsMatchedByRegex:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}"];
+  NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:allText];
   NSMutableArray *commandObjects = [NSMutableArray array];
   for (NSString *str in parsedCommands) {
     TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];

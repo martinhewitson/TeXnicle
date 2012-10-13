@@ -29,7 +29,6 @@
 #import "TPProjectBuilder.h"
 #import "ConsoleController.h"
 #import "NSString+LaTeX.h"
-#import "RegexKitLite.h"
 #import "NSString+RelativePath.h"
 #import "ProjectEntity.h"
 #import "FolderEntity.h"
@@ -39,6 +38,7 @@
 #import "MHFileReader.h"
 #import "NSString+FileTypes.h"
 #import "TPProjectBuilderReport.h"
+#import "TPRegularExpression.h"
 
 @interface TPProjectBuilder ()
 
@@ -279,7 +279,7 @@
     [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];    
   } else {
     
-    string = [string stringByReplacingOccurrencesOfRegex:@"\n" withString:@" "];
+    string = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\n" withString:@" " inString:string];
     string = [@" " stringByAppendingString:string];
     
     // scan through looking for each include tag

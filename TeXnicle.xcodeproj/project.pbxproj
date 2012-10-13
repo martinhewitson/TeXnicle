@@ -331,6 +331,7 @@
 		25C72A6214D4536D00A81DEE /* TemplateEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C72A6114D4536D00A81DEE /* TemplateEditor.xib */; };
 		25C72A6614D4539A00A81DEE /* TPTemplateEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C72A6414D4539A00A81DEE /* TPTemplateEditorView.m */; };
 		25C72A6714D4539A00A81DEE /* TPTemplateEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C72A6514D4539A00A81DEE /* TPTemplateEditorView.xib */; };
+		25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C7F4511629968B00C312AB /* TPRegularExpression.m */; };
 		25C850AE154BE4E00048311D /* ProjectFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C850AC154BE4E00048311D /* ProjectFilesViewController.m */; };
 		25C850AF154BE4E00048311D /* ProjectFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C850AD154BE4E00048311D /* ProjectFilesViewController.xib */; };
 		25C87DCE15A8722200E61E25 /* TPSpellCheckerListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C87DCC15A8722200E61E25 /* TPSpellCheckerListingViewController.m */; };
@@ -967,6 +968,8 @@
 		25C72A6314D4539A00A81DEE /* TPTemplateEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateEditorView.h; sourceTree = "<group>"; };
 		25C72A6414D4539A00A81DEE /* TPTemplateEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateEditorView.m; sourceTree = "<group>"; };
 		25C72A6514D4539A00A81DEE /* TPTemplateEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPTemplateEditorView.xib; sourceTree = "<group>"; };
+		25C7F4501629968B00C312AB /* TPRegularExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRegularExpression.h; sourceTree = "<group>"; };
+		25C7F4511629968B00C312AB /* TPRegularExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRegularExpression.m; sourceTree = "<group>"; };
 		25C850AB154BE4E00048311D /* ProjectFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectFilesViewController.h; sourceTree = "<group>"; };
 		25C850AC154BE4E00048311D /* ProjectFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectFilesViewController.m; sourceTree = "<group>"; };
 		25C850AD154BE4E00048311D /* ProjectFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectFilesViewController.xib; sourceTree = "<group>"; };
@@ -1748,6 +1751,8 @@
 				25BB153515B42378007A7FDF /* Entities */,
 				2589BBFD15B3EEDB00E24C9B /* TPMetadataOperation.h */,
 				2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */,
+				25C7F4501629968B00C312AB /* TPRegularExpression.h */,
+				25C7F4511629968B00C312AB /* TPRegularExpression.m */,
 				254AE6DD15AE9F4200680414 /* TPFileEntityMetadata.h */,
 				254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */,
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
@@ -2705,6 +2710,7 @@
 				256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */,
 				25957E9C15EC8BAC001E4338 /* MHPDFSearchResultsTable.m in Sources */,
 				2599F3DB1604A49E00FA9DB2 /* NSColor+Lightness.m in Sources */,
+				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

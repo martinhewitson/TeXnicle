@@ -26,7 +26,7 @@
 //
 
 #import "TPSyntaxError.h"
-#import "RegexKitLite.h"
+#import "TPRegularExpression.h"
 
 @implementation TPSyntaxError
 
@@ -77,7 +77,7 @@
 
 - (void) parseMessageLine:(NSString*)aLine
 {
-  NSArray *comps = [aLine captureComponentsMatchedByRegex:@"line ([0-9]*):(.*)"];
+  NSArray *comps = [TPRegularExpression stringsMatching:@"line ([0-9]*):(.*)" inText:aLine];
   if ([comps count] >= 2) {
     self.line = @([comps[1] integerValue]);
   }

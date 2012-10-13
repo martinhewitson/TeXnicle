@@ -28,10 +28,10 @@
 #import "MHCodeFolder.h"
 #import "MHFoldingTagDescription.h"
 #import "NSString+Extension.h"
-#import "RegexKitLite.h"
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 #import "NSString+LaTeX.h"
+#import "RegexKitLite.h"
 
 @implementation MHCodeFolder
 
@@ -122,6 +122,30 @@
   
 }
 
+
+- (NSArray*)dictionaryOfTagsForText:(NSString*)someText
+{
+  __block NSMutableArray *tags = [NSMutableArray array];
+  if (NSClassFromString(@"NSRegularExpression")) {
+    
+  } else {
+    [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+      NSRange range = capturedRanges[0];
+      [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
+    }];
+    
+    [someText enumerateStringsMatchedByRegex:@"\\\\end" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+      NSRange range = capturedRanges[0];
+      [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
+    }];
+  }
+  
+  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:YES];
+  [tags sortUsingDescriptors:@[descriptor]];
+  
+  return [NSArray arrayWithArray:tags];
+}
+
 // Find the next closing start tag in the given text. Here 'closing' means that we ignore
 // start/end pairs until we come to the next stand-alone start tag.
 - (void) findEndTagInText:(NSString*)someText fromFoldingTags:(NSArray*)foldingTags
@@ -130,19 +154,7 @@
 //  NSLog(@"%@", foldingTags);
 //  NSLog(@"%@", someText);
 
-  __block NSMutableArray *tags = [NSMutableArray array];
-  [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-    NSRange range = capturedRanges[0];
-    [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
-  }];
-  
-  [someText enumerateStringsMatchedByRegex:@"\\\\end" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-    NSRange range = capturedRanges[0];
-    [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
-  }];
-
-  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:YES];
-  [tags sortUsingDescriptors:@[descriptor]];
+  NSArray *tags = [self dictionaryOfTagsForText:someText];
   
   // process start/end arrays
   NSInteger count = 0;
@@ -174,19 +186,7 @@
 {
   //  NSLog(@"Finding end tag for %@", self);
   
-  __block NSMutableArray *tags = [NSMutableArray array];
-  [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-    NSRange range = capturedRanges[0];
-    [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
-  }];
-  
-  [someText enumerateStringsMatchedByRegex:@"\\\\end" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
-    NSRange range = capturedRanges[0];
-    [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
-  }];
-  
-  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:NO];
-  [tags sortUsingDescriptors:@[descriptor]];
+  NSArray *tags = [self dictionaryOfTagsForText:someText];
   
 //  NSLog(@"Tags: %@", tags);
   

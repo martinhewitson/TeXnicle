@@ -39,4 +39,38 @@
   return strings;
 }
 
++ (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr withString:(NSString*)replacement inString:(NSString*)text
+{
+  if (NSClassFromString(@"NSRegularExpression") != nil)  {
+    NSRegularExpression *exp = [NSRegularExpression regularExpressionWithPattern:expr
+                                                                         options:0
+                                                                           error:NULL];
+    
+    return [exp stringByReplacingMatchesInString:text options:0 range:NSMakeRange(0, [text length]) withTemplate:replacement];
+    
+  } else {
+    return [text stringByReplacingOccurrencesOfRegex:expr withString:replacement];
+  }
+  
+}
+
++ (NSRange)rangeOfExpr:(NSString*)expr inText:(NSString*)text
+{
+  NSRange range = NSMakeRange(NSNotFound, 0);
+  if (NSClassFromString(@"NSRegularExpression") != nil)  {
+    
+    NSRegularExpression *exp = [NSRegularExpression regularExpressionWithPattern:expr
+                                                                         options:0
+                                                                           error:NULL];
+    
+    range = [exp rangeOfFirstMatchInString:text options:0 range:NSMakeRange(0, [text length])];
+    
+  } else {
+    range = [text rangeOfRegex:expr];
+  }
+  
+  return range;
+}
+
+
 @end
