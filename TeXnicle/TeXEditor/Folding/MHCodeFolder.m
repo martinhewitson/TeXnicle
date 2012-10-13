@@ -33,6 +33,13 @@
 #import "NSString+LaTeX.h"
 #import "RegexKitLite.h"
 
+@interface MHCodeFolder ()
+
+@property (strong) id startExpr;
+@property (strong) id endExpr;
+
+@end
+
 @implementation MHCodeFolder
 
 + (MHCodeFolder*) codeFolderWithStartIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex startLine:(NSInteger)startLine endLine:(NSInteger)endLine tag:(MHFoldingTagDescription*)aTag
@@ -123,12 +130,32 @@
 }
 
 
-- (NSArray*)dictionaryOfTagsForText:(NSString*)someText
+- (NSArray*)dictionaryOfTagsForText:(NSString*)someText sortAscending:(BOOL)ascending
 {
   __block NSMutableArray *tags = [NSMutableArray array];
   if (NSClassFromString(@"NSRegularExpression")) {
     
+    if (self.startExpr == nil) {
+      self.startExpr = [NSRegularExpression regularExpressionWithPattern:@"\\\\begin" options:0 error:NULL];
+    }
+    
+    [self.startExpr enumerateMatchesInString:someText options:0 range:NSMakeRange(0, [someText length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+      NSRange range = [result rangeAtIndex:0];
+      [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
+    }];
+    
+    if (self.endExpr == nil) {
+      self.endExpr = [NSRegularExpression regularExpressionWithPattern:@"\\\\end" options:0 error:NULL];
+    }
+    
+    [self.endExpr enumerateMatchesInString:someText options:0 range:NSMakeRange(0, [someText length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+      NSRange range = [result rangeAtIndex:0];
+      [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
+    }];
+
+    
   } else {
+    
     [someText enumerateStringsMatchedByRegex:@"\\\\begin" usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
       NSRange range = capturedRanges[0];
       [tags addObject:@{@"start" : @YES, @"range" : @(range.location)}];
@@ -138,9 +165,10 @@
       NSRange range = capturedRanges[0];
       [tags addObject:@{@"start" : @NO, @"range" : @(range.location)}];
     }];
+    
   }
   
-  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:YES];
+  NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"range" ascending:ascending];
   [tags sortUsingDescriptors:@[descriptor]];
   
   return [NSArray arrayWithArray:tags];
@@ -154,7 +182,7 @@
 //  NSLog(@"%@", foldingTags);
 //  NSLog(@"%@", someText);
 
-  NSArray *tags = [self dictionaryOfTagsForText:someText];
+  NSArray *tags = [self dictionaryOfTagsForText:someText sortAscending:YES];
   
   // process start/end arrays
   NSInteger count = 0;
@@ -184,9 +212,10 @@
 // start/end pairs until we come to the next stand-alone end tag.
 - (void) findStartTagInText:(NSString*)someText fromFoldingTags:(NSArray*)foldingTags
 {
-  //  NSLog(@"Finding end tag for %@", self);
+//  NSLog(@"Finding start tag for %@", self);
+//  NSLog(@"%@", foldingTags);
   
-  NSArray *tags = [self dictionaryOfTagsForText:someText];
+  NSArray *tags = [self dictionaryOfTagsForText:someText sortAscending:NO];
   
 //  NSLog(@"Tags: %@", tags);
   
