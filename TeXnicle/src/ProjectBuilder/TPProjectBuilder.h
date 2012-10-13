@@ -37,6 +37,7 @@
 
 @property (unsafe_unretained, readonly) NSURL *projectFileURL;
 
++ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path withName:(NSString*)aName;
 + (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path;
 
 + (TPProjectBuilder*)builderWithDirectory:(NSString*)aPath;

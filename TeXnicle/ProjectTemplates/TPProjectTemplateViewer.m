@@ -338,7 +338,7 @@
     }
     
     // use the project builder to build a project in that directory
-    TeXProjectDocument *doc = [TPProjectBuilder buildProjectInDirectory:[projectURL path]];
+    TeXProjectDocument *doc = [TPProjectBuilder buildProjectInDirectory:[projectURL path] withName:self.projectNameField.stringValue];
     
     // read settings and set to project
     NSURL *settingsURL = [projectURL URLByAppendingPathComponent:@"settings.plist"];

@@ -52,11 +52,13 @@
 
 @implementation TPProjectBuilder
 
-
-+ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path
++ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path withName:(NSString*)aName
 {
   NSFileManager *fm = [NSFileManager defaultManager];
   TPProjectBuilder *pb = [TPProjectBuilder builderWithDirectory:path];
+  if (aName != nil && [aName length] > 0) {
+    pb.projectName = aName;
+  }
   
   // check if the project already exists and ask the user if they want to overwrite it
   // Remove file if it is there
@@ -93,10 +95,15 @@
   if (openError) {
     [NSApp presentError:openError];
     return nil;
-  }  
+  }
   [pb populateDocument:doc];
   
   return doc;
+}
+
++ (TeXProjectDocument*) buildProjectInDirectory:(NSString*)path
+{
+  return [TPProjectBuilder buildProjectInDirectory:path withName:nil];
 }
 
 // Convenience constructor
