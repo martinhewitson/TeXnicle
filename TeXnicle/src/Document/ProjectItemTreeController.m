@@ -314,7 +314,17 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
   [newFolder resetFilePath];
   if (create) {
-    NSString *newPath = [[newFolder.project folder] stringByAppendingPathComponent:newFolder.filepath];
+    
+    // we create inside the parent folder, or in the project root
+    FolderEntity *parentFolder = (FolderEntity*)parent;
+    NSString *newPath = nil;
+    if ([parentFolder pathOnDisk]) {
+      newPath = [[parentFolder pathOnDisk] stringByAppendingPathComponent:newFolder.name];
+    } else {
+      // project root
+      newPath = [[newFolder.project folder] stringByAppendingPathComponent:newFolder.name];
+    }
+    
     if (newPath) {
       NSFileManager *fm = [NSFileManager defaultManager];
       if (![fm fileExistsAtPath:newPath]) {
@@ -331,7 +341,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
 	// select the new folder
   [self performSelector:@selector(selectItem:) withObject:newFolder afterDelay:0.1];
-	
+	  
 	// This is now managed by the controller so we can release it here
 	return newFolder;				
 }
@@ -1372,21 +1382,63 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	if (!self.dragEnabled) return NO;
 	
-  // if the items being dragged contain a folder which exists on disk, don't allow the drag
-  for (NSTreeNode *node in items) {
-    ProjectItemEntity *item = [node representedObject];
-//    NSLog(@"Checking item %@", [item name]);
-    if ([item isKindOfClass:[FolderEntity class]]) {
-      if ([item pathOnDisk]) {
-        return NO;
-      }
-    }
-  }
+//  // if the items being dragged contain a folder which exists on disk, don't allow the drag
+//  for (NSTreeNode *node in items) {
+//    ProjectItemEntity *item = [node representedObject];
+//    if ([item isKindOfClass:[FolderEntity class]]) {
+////      NSLog(@"Checking item %@ / %@", [item name], [item pathOnDisk]);
+//      if ([item pathOnDisk]) {
+//        return NO;
+//      }
+//    }
+//  }
   
 	[pasteboard declareTypes:@[OutlineViewNodeType] owner:self];
 	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
 	// Return YES so that the drag actually begins...
 	return YES;
+}
+
+- (NSDragOperation)outlineView:(NSOutlineView *)anOutlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)proposedParentItem proposedChildIndex:(NSInteger)proposedChildIndex;
+{
+  //  if (outlineView.dragLeftView)
+  //    return NO;
+  
+	// handle file drops from outside
+	NSPasteboard *pboard = [info draggingPasteboard];
+	if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
+    //    NSLog(@"Info mask %d", [info draggingSourceOperationMask]);
+    
+    if ([info draggingSourceOperationMask] & NSDragOperationCopy) {
+      //      NSLog(@"returning copy");
+      return  NSDragOperationCopy;
+    }
+    
+    if ([info draggingSourceOperationMask] & NSDragOperationLink) {
+      //      NSLog(@"returning ling");
+      return  NSDragOperationLink;
+    }
+    
+    //    NSLog(@"returning copy");
+		return NSDragOperationCopy;
+	}
+  
+	
+	if ([[proposedParentItem representedObject] isKindOfClass:[FileEntity class]]) {
+		return NSDragOperationNone;
+	}
+	
+	
+	NSArray *draggedIndexPaths = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:OutlineViewNodeType]];
+	BOOL targetIsValid = YES;
+	for (NSIndexPath *indexPath in draggedIndexPaths) {
+		NSTreeNode *node = [self nodeAtIndexPath:indexPath];
+		if ([proposedParentItem isDescendantOfNode:node] || proposedParentItem == node) { // can't drop a group on one of its descendants
+			targetIsValid = NO;
+			break;
+		}
+	}
+	return targetIsValid ? NSDragOperationMove : NSDragOperationNone;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)anOutlineView 
@@ -1443,63 +1495,27 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		[draggedNodes addObject:[self nodeAtIndexPath:indexPath]];
 	
 	NSIndexPath *proposedParentIndexPath;
-	if (!proposedParentItem)
+	if (!proposedParentItem) {
 		proposedParentIndexPath = [[NSIndexPath alloc] init]; // makes a NSIndexPath with length == 0
-	else
+	} else {
 		proposedParentIndexPath = [proposedParentItem indexPath];
-	
+	}
+  
 	if (proposedChildIndex > -1) {
 		[self moveNodes:draggedNodes toIndexPath:[proposedParentIndexPath indexPathByAddingIndex:proposedChildIndex]];
 	} else {
 		[self moveNodes:draggedNodes toIndexPath:[proposedParentIndexPath indexPathByAddingIndex:0]];
 	}
-	return YES;
-}
-
-
-
-
-- (NSDragOperation)outlineView:(NSOutlineView *)anOutlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)proposedParentItem proposedChildIndex:(NSInteger)proposedChildIndex;
-{	
-//  if (outlineView.dragLeftView)
-//    return NO;
+	
   
-	// handle file drops from outside
-	NSPasteboard *pboard = [info draggingPasteboard];
-	if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
-//    NSLog(@"Info mask %d", [info draggingSourceOperationMask]);
-    
-    if ([info draggingSourceOperationMask] & NSDragOperationCopy) {
-//      NSLog(@"returning copy");
-      return  NSDragOperationCopy;
-    }
-    
-    if ([info draggingSourceOperationMask] & NSDragOperationLink) {
-//      NSLog(@"returning ling");
-      return  NSDragOperationLink;
-    }
-    
-//    NSLog(@"returning copy");
-		return NSDragOperationCopy;
-	}
-
-	
-	if ([[proposedParentItem representedObject] isKindOfClass:[FileEntity class]]) {
-		return NSDragOperationNone;
-	}
-	
-	
-	NSArray *draggedIndexPaths = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:OutlineViewNodeType]];
-	BOOL targetIsValid = YES;
-	for (NSIndexPath *indexPath in draggedIndexPaths) {
-		NSTreeNode *node = [self nodeAtIndexPath:indexPath];
-		if ([proposedParentItem isDescendantOfNode:node] || proposedParentItem == node) { // can't drop a group on one of its descendants
-			targetIsValid = NO;
-			break;
-		}
-	}
-	return targetIsValid ? NSDragOperationMove : NSDragOperationNone;
+  
+  return YES;
 }
+
+
+
+
+
 
 
 //------------------------------------------------------------------------------

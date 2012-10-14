@@ -86,7 +86,21 @@
 																				action:@selector(addExistingFolder:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
+
+  [theMenu addItem:[NSMenuItem separatorItem]];
+  
+	//------ New Folder on disk
+	menuItem = [[NSMenuItem alloc] initWithTitle:@"New Folder On Disk"
+																				action:@selector(newFolderOnDisk:)
+																 keyEquivalent:@""];
+	[theMenu addItem:menuItem];
 	
+	//------ New Group Folder
+	menuItem = [[NSMenuItem alloc] initWithTitle:@"New Group Folder"
+																				action:@selector(newGroupFolder:)
+																 keyEquivalent:@""];
+	[theMenu addItem:menuItem];
+  
 	return theMenu;
 }
 
@@ -148,6 +162,8 @@
 		
 	}
 	
+  [theMenu addItem:[NSMenuItem separatorItem]];
+  
 	//--------- set main file
 	if ([selectedItem isKindOfClass:[FileEntity class]]) {
 		NSMenuItem *mainItem;
@@ -186,6 +202,7 @@
       NSMenuItem *revealItem = [[NSMenuItem alloc] initWithTitle:@"Reveal in Finder"
                                                           action:@selector(revealItem:)
                                                    keyEquivalent:@""];
+      [theMenu addItem:[NSMenuItem separatorItem]];
       [theMenu addItem:revealItem];
     }
 		
@@ -205,20 +222,44 @@
 		}
 	}
 	
+  
+	//--------- New folder on disk
+	if ([selectedItem isKindOfClass:[FolderEntity class]]) {
+    [theMenu addItem:[NSMenuItem separatorItem]];
+    if ([selectedItem pathOnDisk]) {
+      NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New Folder On Disk"
+                                                            action:@selector(newFolderOnDisk:)
+                                                     keyEquivalent:@""];
+      [theMenu addItem:newSubfolder];
+    }
+	}
+	
+
 	//--------- New Subfolder
 	if ([selectedItem isKindOfClass:[FolderEntity class]]) {
-		NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New Folder"
-																													action:@selector(newSubfolder:)
+		NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New Group Folder"
+																													action:@selector(newGroupFolder:)
 																									 keyEquivalent:@""];
 		[theMenu addItem:newSubfolder];
 	}
 	
-	
+  
 	//--------- New TeX file
 	
 	//--------- Add menu
 	
 	return theMenu;
+}
+
+
+- (IBAction) newGroupFolder:(id) sender
+{
+  [treeController addNewFolder];
+}
+
+- (IBAction) newFolderOnDisk:(id)sender
+{
+  [treeController addNewFolderCreateOnDisk];
 }
 
 - (IBAction) newSubfolder:(id)sender

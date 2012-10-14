@@ -2383,15 +2383,29 @@
     }
   }
   
+  // create folder on disk
+  if (tag == 401000) {
+    // if the selected parent is a folder on disk, or there is no selected parent, then
+    // we can create a folder on disk
+    NSArray *selected = [self.projectItemTreeController selectedObjects];
+    if ([selected count] == 0) {
+      return YES;
+    }
+    
+    if ([selected count] == 1) {
+      id object = selected[0];
+      if ([object isMemberOfClass:[FileEntity class]]) {
+        if ([object pathOnDisk]) {
+          return YES;
+        }
+      }
+    }
+    
+    return NO;
+  }
+  
+  
   // delete selected bookmark
-//  NSLog(@"Tag = %d", tag);
-//  NSResponder *responder = [[self windowForSheet] firstResponder];
-//  NSLog(@"Document: %@", self);
-//  NSLog(@"First responder: %@", responder);
-//  while ((responder = [responder nextResponder])) {
-//    NSLog(@"  %@", responder);
-//  }
-//  NSLog(@"Selected bookmark: %@", [self.bookmarkManager selectedBookmark]);
   if (tag == 406020) {
     if ([self.bookmarkManager selectedBookmark]) {
       return YES;
