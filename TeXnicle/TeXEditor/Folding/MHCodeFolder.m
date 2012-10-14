@@ -180,18 +180,30 @@
 {
 //  NSLog(@"Finding end tag for %@", self);
 //  NSLog(@"%@", foldingTags);
-//  NSLog(@"%@", someText);
 
   NSArray *tags = [self dictionaryOfTagsForText:someText sortAscending:YES];
+  
+//  NSLog(@"Tags: %@", tags);
   
   // process start/end arrays
   NSInteger count = 0;
   for (NSDictionary *tag in tags) {
-    if ([tag[@"start"] boolValue] == YES) {
-      count++;
+    
+    // we only care about tags which appear after the startIndex of this end tag
+    if ([tag[@"range"] integerValue] < self.startIndex)
+      continue;
+    
+    // edge case: if the first one we find is the one we want
+    if (count == 0 && [tag[@"start"] boolValue] == NO) {
+      // just take this one
     } else {
-      count--;
+      if ([tag[@"start"] boolValue] == YES) {
+        count++;
+      } else {
+        count--;
+      }
     }
+    
     if (count == 0) {
       self.endIndex = [tag[@"range"] integerValue];
       NSAttributedString *astr = [[NSAttributedString alloc] initWithString:someText];
@@ -222,6 +234,10 @@
   // process start/end arrays
   NSInteger count = 0;
   for (NSDictionary *tag in tags) {
+    // we only care about tags which appear before the endIndex of this end tag
+    if ([tag[@"range"] integerValue] > self.endIndex)
+      continue;
+    
     if ([tag[@"start"] boolValue] == YES) {
       count--;
     } else {
@@ -249,6 +265,7 @@
       NSString *arg = [line parseArgumentStartingAt:&loc];
       if (arg == nil) {
         // this shouldn't happen, this means a bad tag
+//        NSLog(@"Bad tag!");
         self.startIndex = NSNotFound;
         return;
       }
