@@ -1040,7 +1040,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[self setIsDeleting:YES];
 //	NSLog(@"Move node");
 	[super moveNode:node toIndexPath:indexPath];
-	[self updateSortOrderOfModelObjects];	
+  
+  [self.managedObjectContext processPendingChanges];
+  
+  NSLog(@"Updating %@ [%d]", [[node representedObject] valueForKey:@"name"], [[node representedObject] isManaged]);
+  if ([[node representedObject] isManaged]) {
+    [[node representedObject] resetFilePath];
+  }
+  
+	[self updateSortOrderOfModelObjects];
 	[self setIsDeleting:NO];
 }
 
@@ -1382,16 +1390,29 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	if (!self.dragEnabled) return NO;
 	
-//  // if the items being dragged contain a folder which exists on disk, don't allow the drag
-//  for (NSTreeNode *node in items) {
-//    ProjectItemEntity *item = [node representedObject];
-//    if ([item isKindOfClass:[FolderEntity class]]) {
-////      NSLog(@"Checking item %@ / %@", [item name], [item pathOnDisk]);
-//      if ([item pathOnDisk]) {
-//        return NO;
-//      }
-//    }
-//  }
+  // if the items being dragged contain a folder which exists on disk, don't allow the drag
+  NSUInteger itemsOnDisk = 0;
+  for (NSTreeNode *node in items) {
+    ProjectItemEntity *item = [node representedObject];
+    if ([item isKindOfClass:[FolderEntity class]]) {
+//      NSLog(@"Checking item %@ / %@", [item name], [item pathOnDisk]);
+      if ([item pathOnDisk]) {
+        itemsOnDisk ++;
+      }
+    }
+    
+    // don't allow moving a file/folder which is not under the project into a folder on disk
+    if ([item pathOnDisk] != nil && [item isUnderProject] == NO) {
+      return NO;
+    }
+  }
+  
+  // don't allow dragging multiple items which are on disk - the logic is too hard
+  if (itemsOnDisk > 1) {
+    return NO;
+  }
+  
+  
   
 	[pasteboard declareTypes:@[OutlineViewNodeType] owner:self];
 	[pasteboard setData:[NSKeyedArchiver archivedDataWithRootObject:[items valueForKey:@"indexPath"]] forType:OutlineViewNodeType];	
@@ -1432,12 +1453,37 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	NSArray *draggedIndexPaths = [NSKeyedUnarchiver unarchiveObjectWithData:[[info draggingPasteboard] dataForType:OutlineViewNodeType]];
 	BOOL targetIsValid = YES;
 	for (NSIndexPath *indexPath in draggedIndexPaths) {
+    
+    // can't drop a group on one of its descendants
 		NSTreeNode *node = [self nodeAtIndexPath:indexPath];
-		if ([proposedParentItem isDescendantOfNode:node] || proposedParentItem == node) { // can't drop a group on one of its descendants
+		if ([proposedParentItem isDescendantOfNode:node] || proposedParentItem == node) { 
 			targetIsValid = NO;
 			break;
 		}
+    
+    // can't drop disk folder onto group folder
+    ProjectItemEntity *child = [node representedObject];
+    ProjectItemEntity *parent = [proposedParentItem representedObject];
+    if ([child isMemberOfClass:[FolderEntity class]]) {
+      if (parent != nil && [child pathOnDisk] != nil && [parent pathOnDisk] == nil) {
+        targetIsValid = NO;
+        break;
+      }
+    }
+    
+    // can't drop managed file onto group folder
+    if ([child isMemberOfClass:[FileEntity class]]) {
+      if ([child isManaged]) {
+        if (parent != nil && [child pathOnDisk] != nil && [parent pathOnDisk] == nil) {
+          targetIsValid = NO;
+          break;
+        }
+      }
+    }
+    
 	}
+  
+  
 	return targetIsValid ? NSDragOperationMove : NSDragOperationNone;
 }
 
@@ -1501,13 +1547,66 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		proposedParentIndexPath = [proposedParentItem indexPath];
 	}
   
-	if (proposedChildIndex > -1) {
-		[self moveNodes:draggedNodes toIndexPath:[proposedParentIndexPath indexPathByAddingIndex:proposedChildIndex]];
-	} else {
-		[self moveNodes:draggedNodes toIndexPath:[proposedParentIndexPath indexPathByAddingIndex:0]];
+	if (proposedChildIndex <= -1) {
+    proposedChildIndex = 0;
 	}
 	
   
+  // if we are moving a real folder on disk, do the action here
+  BOOL didMoveFoldersOnDisk = NO;
+  for (NSTreeNode *node in draggedNodes) {
+    
+    ProjectItemEntity *child = [node representedObject];
+    ProjectItemEntity *parent = [proposedParentItem representedObject];
+    
+    // if the child doesn't exist on disk in its current location, we can't move it
+    if ([child existsOnDisk]) {
+      //    NSLog(@"Parent %@", parent);
+      
+      //    NSLog(@"Moving %@", [child name]);
+      NSString *fromPath = [child pathOnDisk];
+      NSString *toPath = nil;
+      if (parent == nil) {
+        toPath = [[child.project folder] stringByAppendingPathComponent:child.name];
+      } else {
+        toPath = [[parent pathOnDisk] stringByAppendingPathComponent:child.name];
+      }
+      
+      //    NSLog(@"From %@", fromPath);
+      //    NSLog(@"To %@", toPath);
+      NSFileManager *fm = [NSFileManager defaultManager];
+      NSError *error = nil;
+      if (fromPath != nil && toPath != nil && [fromPath isEqualToString:toPath] == NO) {
+        BOOL success = [fm moveItemAtPath:fromPath toPath:toPath error:&error];
+        if (success == NO) {
+          [NSApp presentError:error];
+          [draggedNodes removeObject:node];
+        }
+        
+        didMoveFoldersOnDisk = YES;
+      }
+    }
+    
+    // update any child objects
+//    for (ProjectItemEntity *item in child.children) {
+//      NSLog(@"Updating %@", item);
+//      if ([item isUnderProject]) {
+//        [item resetFilePath];
+//      }
+//    }
+  }
+  
+  if (didMoveFoldersOnDisk) {
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] disableUndoRegistration];
+  }
+  
+  [self moveNodes:draggedNodes toIndexPath:[proposedParentIndexPath indexPathByAddingIndex:proposedChildIndex]];
+  
+  if (didMoveFoldersOnDisk) {
+    [self.managedObjectContext processPendingChanges];
+    [[self.managedObjectContext undoManager] enableUndoRegistration];
+  }
   
   return YES;
 }

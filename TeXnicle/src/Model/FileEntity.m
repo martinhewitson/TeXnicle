@@ -350,6 +350,16 @@
 	}
 }
 
+- (BOOL) isManaged
+{
+  if (self.parent != nil) {
+    if ([self.parent pathOnDisk] != nil) {
+      return YES;
+    }
+  }
+  
+  return NO;
+}
 
 - (BOOL) isLeaf
 {

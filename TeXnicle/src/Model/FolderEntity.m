@@ -51,6 +51,11 @@
 	return nil;
 }
 
+- (BOOL) isManaged
+{
+	return [self pathOnDisk] != nil;
+}
+
 - (void) setName:(NSString *)newName
 {
 	[self willChangeValueForKey:@"name"];

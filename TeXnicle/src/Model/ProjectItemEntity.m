@@ -172,14 +172,22 @@
 
 - (void) resetFilePath
 {
-  ProjectItemEntity *parent = self.parent;
-  if (parent != nil) {
-    NSString *parentPath = [parent filepath];
-    if (parentPath) {
-      NSString *newPath = [parentPath stringByAppendingPathComponent:[self.filepath lastPathComponent]];
-      [self setFilepath:newPath];
-    }
+  NSLog(@"Resetting file path to %@", [self pathRelativeToProject]);
+  self.filepath = [self pathRelativeToProject];
+  
+  // handle children
+  for (ProjectItemEntity *child in self.children) {
+    [child resetFilePath];
   }
+  
+//  ProjectItemEntity *parent = self.parent;
+//  if (parent != nil) {
+//    NSString *parentPath = [parent filepath];
+//    if (parentPath) {
+//      NSString *newPath = [parentPath stringByAppendingPathComponent:[self.filepath lastPathComponent]];
+//      [self setFilepath:newPath];
+//    }
+//  }
 }
 
 - (void) setFilepath:(NSString *)aPath

@@ -54,6 +54,7 @@
 @property (nonatomic, unsafe_unretained) ProjectEntity *mainFileOfProject;
 
 // other properties
+@property (readonly) BOOL isManaged;
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
 @property (unsafe_unretained, readonly) NSString *consolidatedFileContents;
