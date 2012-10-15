@@ -117,16 +117,29 @@ Version 2.1\
 \f1 \cf0 + Work on drag-n-drop of real folders. \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 \
+\f0 \cf0 	- write requirements\
+	- write test cases\
+	- would be better to have a Group entity and a Folder entity?\
+\
++ Need to do better selecting for reformatting\
+	- make a reformatter class\
+		- select argument (don't use existing methods, they are more specialised)\
+			- work back from current pos until \{ (must come before \}), then forwards until matching \} or blank line\
+			- indent set to 0?\
+		- select text between \\item's\
+			- find previous \\item then forward to next \\item or blank line\
+			- set indent to first non-whitespace after the starting \\item\
+		- select text between blank lines\
+			- go back to blank line, forward to next blank line\
+			- indent set to first non-whitespace after start of first line\
+\
 \
 Version 2.0\
 -----------\
 \
 + Improved paragraph selection and reformatting.\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 + When building from template, the project file now gets the project name set by the user\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 + Tab will complete commands now, as well as enter\
++ When building from template, the project file now gets the project name set by the user\
++ Tab will complete commands now, as well as enter\
 + Various bug fixes.\
 \
 \

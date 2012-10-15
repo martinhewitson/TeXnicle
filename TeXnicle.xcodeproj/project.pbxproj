@@ -37,6 +37,17 @@
 		25086B38149F4467006A5A49 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25086B37149F4467006A5A49 /* newTeXDoc.icns */; };
 		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
 		250AF6E414EB952600A0332E /* ProjectEntity+ProjectTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */; };
+		250BE015162BEF3A007784DB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250BE014162BEF3A007784DB /* SenTestingKit.framework */; };
+		250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
+		250BE01C162BEF3A007784DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250BE01A162BEF3A007784DB /* InfoPlist.strings */; };
+		250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE01E162BEF3A007784DB /* TeXTextViewTests.m */; };
+		250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE024162BF01D007784DB /* reformatTextTestFile1.tex */; };
+		250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */; };
+		250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE02E162BFD67007784DB /* NSString+Reformatting.m */; };
+		250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE031162BFF49007784DB /* NSString+Reformatting_Private.m */; };
+		250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */; };
+		250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */; };
+		250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE037162C100E007784DB /* reformatTextTestFile5.tex */; };
 		250C173D140926CB00BCEA3D /* TPEnginesEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C173B140926CB00BCEA3D /* TPEnginesEditor.m */; };
 		250C173E140926CB00BCEA3D /* TPEnginesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */; };
 		250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C17411409295500BCEA3D /* TPEngineEditor.m */; };
@@ -194,6 +205,7 @@
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
 		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
+		2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */; };
 		256225CD15CA940600091A8C /* TPPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225CC15CA940600091A8C /* TPPalette.m */; };
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
@@ -420,6 +432,13 @@
 			remoteGlobalIDString = 25077311138E5D82000F1118;
 			remoteInfo = TeXnicleImporter;
 		};
+		250BE028162BF440007784DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -503,6 +522,22 @@
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
 		250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProjectEntity+ProjectTemplates.m"; sourceTree = "<group>"; };
+		250BE013162BEF3A007784DB /* TeXTextViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXTextViewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		250BE014162BEF3A007784DB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		250BE019162BEF3A007784DB /* TeXTextViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeXTextViewTests-Info.plist"; sourceTree = "<group>"; };
+		250BE01B162BEF3A007784DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		250BE01D162BEF3A007784DB /* TeXTextViewTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeXTextViewTests.h; sourceTree = "<group>"; };
+		250BE01E162BEF3A007784DB /* TeXTextViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeXTextViewTests.m; sourceTree = "<group>"; };
+		250BE020162BEF3A007784DB /* TeXTextViewTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeXTextViewTests-Prefix.pch"; sourceTree = "<group>"; };
+		250BE024162BF01D007784DB /* reformatTextTestFile1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile1.tex; sourceTree = "<group>"; };
+		250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile2.tex; sourceTree = "<group>"; };
+		250BE02D162BFD67007784DB /* NSString+Reformatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Reformatting.h"; sourceTree = "<group>"; };
+		250BE02E162BFD67007784DB /* NSString+Reformatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Reformatting.m"; sourceTree = "<group>"; };
+		250BE030162BFF48007784DB /* NSString+Reformatting_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Reformatting_Private.h"; sourceTree = "<group>"; };
+		250BE031162BFF49007784DB /* NSString+Reformatting_Private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Reformatting_Private.m"; sourceTree = "<group>"; };
+		250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile3.tex; sourceTree = "<group>"; };
+		250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile4.tex; sourceTree = "<group>"; };
+		250BE037162C100E007784DB /* reformatTextTestFile5.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile5.tex; sourceTree = "<group>"; };
 		250C173A140926CB00BCEA3D /* TPEnginesEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEnginesEditor.h; sourceTree = "<group>"; };
 		250C173B140926CB00BCEA3D /* TPEnginesEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEnginesEditor.m; sourceTree = "<group>"; };
 		250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEnginesEditor.xib; sourceTree = "<group>"; };
@@ -741,6 +776,8 @@
 		255DB85113E5D5F8007629C0 /* TPImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPImageViewerController.h; sourceTree = "<group>"; };
 		255DB85213E5D5F8007629C0 /* TPImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerController.m; sourceTree = "<group>"; };
 		255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPImageViewerController.xib; sourceTree = "<group>"; };
+		2560A09B162C317C00403D56 /* NSStringReformattingPrivateTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringReformattingPrivateTests.h; sourceTree = "<group>"; };
+		2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringReformattingPrivateTests.m; sourceTree = "<group>"; };
 		256225CB15CA940600091A8C /* TPPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPalette.h; sourceTree = "<group>"; };
 		256225CC15CA940600091A8C /* TPPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPalette.m; sourceTree = "<group>"; };
 		256225CF15CA943200091A8C /* NSApplication+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+Palette.h"; sourceTree = "<group>"; };
@@ -1121,6 +1158,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		250BE00F162BEF3A007784DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE015162BEF3A007784DB /* SenTestingKit.framework in Frameworks */,
+				250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1140,6 +1186,7 @@
 			children = (
 				250772EC138E5D81000F1118 /* TeXnicle.app */,
 				25077312138E5D82000F1118 /* TeXnicle.mdimporter */,
+				250BE013162BEF3A007784DB /* TeXTextViewTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1158,6 +1205,7 @@
 				2507731C138E5D82000F1118 /* Foundation.framework */,
 				25028984139BE8CA00A88E09 /* QuickLook.framework */,
 				25028986139BE8CB00A88E09 /* ApplicationServices.framework */,
+				250BE014162BEF3A007784DB /* SenTestingKit.framework */,
 				250772F2138E5D81000F1118 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -1275,6 +1323,50 @@
 				250848D3154B21580001685A /* TPSourceDirectory.m */,
 			);
 			path = "Other Files Viewer";
+			sourceTree = "<group>";
+		};
+		250BE00D162BEDE1007784DB /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				250BE017162BEF3A007784DB /* TeXTextViewTests */,
+			);
+			name = tests;
+			sourceTree = "<group>";
+		};
+		250BE017162BEF3A007784DB /* TeXTextViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				250BE026162BF0B7007784DB /* test files */,
+				250BE01D162BEF3A007784DB /* TeXTextViewTests.h */,
+				250BE01E162BEF3A007784DB /* TeXTextViewTests.m */,
+				2560A09B162C317C00403D56 /* NSStringReformattingPrivateTests.h */,
+				2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */,
+				250BE018162BEF3A007784DB /* Supporting Files */,
+			);
+			name = TeXTextViewTests;
+			path = ../../../TeXTextViewTests;
+			sourceTree = "<group>";
+		};
+		250BE018162BEF3A007784DB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				250BE019162BEF3A007784DB /* TeXTextViewTests-Info.plist */,
+				250BE01A162BEF3A007784DB /* InfoPlist.strings */,
+				250BE020162BEF3A007784DB /* TeXTextViewTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		250BE026162BF0B7007784DB /* test files */ = {
+			isa = PBXGroup;
+			children = (
+				250BE024162BF01D007784DB /* reformatTextTestFile1.tex */,
+				250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */,
+				250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */,
+				250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */,
+				250BE037162C100E007784DB /* reformatTextTestFile5.tex */,
+			);
+			name = "test files";
 			sourceTree = "<group>";
 		};
 		251529AD138F824E00307054 /* PSMTabBarControl */ = {
@@ -1801,6 +1893,10 @@
 				257B473F138E5E9000ED02C4 /* NSString+Extension.m */,
 				257B4740138E5E9000ED02C4 /* NSString+LaTeX.h */,
 				257B4741138E5E9000ED02C4 /* NSString+LaTeX.m */,
+				250BE02D162BFD67007784DB /* NSString+Reformatting.h */,
+				250BE02E162BFD67007784DB /* NSString+Reformatting.m */,
+				250BE030162BFF48007784DB /* NSString+Reformatting_Private.h */,
+				250BE031162BFF49007784DB /* NSString+Reformatting_Private.m */,
 				2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */,
 				2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */,
 				25A1FDE61414D53E00A89334 /* NSString+WordRanges.h */,
@@ -1868,6 +1964,7 @@
 		257B4761138E5E9000ED02C4 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
+				250BE00D162BEDE1007784DB /* tests */,
 				257B4762138E5E9000ED02C4 /* MHEditorRuler.h */,
 				257B4763138E5E9000ED02C4 /* MHEditorRuler.m */,
 				257B4764138E5E9000ED02C4 /* MHLineNumber.h */,
@@ -2257,6 +2354,25 @@
 			productReference = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */;
 			productType = "com.apple.product-type.bundle";
 		};
+		250BE012162BEF3A007784DB /* TeXTextViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXTextViewTests" */;
+			buildPhases = (
+				250BE00E162BEF3A007784DB /* Sources */,
+				250BE00F162BEF3A007784DB /* Frameworks */,
+				250BE010162BEF3A007784DB /* Resources */,
+				250BE011162BEF3A007784DB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				250BE029162BF440007784DB /* PBXTargetDependency */,
+			);
+			name = TeXTextViewTests;
+			productName = TeXTextViewTests;
+			productReference = 250BE013162BEF3A007784DB /* TeXTextViewTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2280,6 +2396,7 @@
 			targets = (
 				250772EB138E5D81000F1118 /* TeXnicle */,
 				25077311138E5D82000F1118 /* TeXnicleImporter */,
+				250BE012162BEF3A007784DB /* TeXTextViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2467,9 +2584,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		250BE010162BEF3A007784DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE01C162BEF3A007784DB /* InfoPlist.strings in Resources */,
+				250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */,
+				250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */,
+				250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */,
+				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
+				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		250BE011162BEF3A007784DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		25AAC8EC1407E00400B61B1A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2711,6 +2854,8 @@
 				25957E9C15EC8BAC001E4338 /* MHPDFSearchResultsTable.m in Sources */,
 				2599F3DB1604A49E00FA9DB2 /* NSColor+Lightness.m in Sources */,
 				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
+				250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */,
+				250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2724,6 +2869,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		250BE00E162BEF3A007784DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
+				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2731,6 +2885,11 @@
 			isa = PBXTargetDependency;
 			target = 25077311138E5D82000F1118 /* TeXnicleImporter */;
 			targetProxy = 25077313138E5D82000F1118 /* PBXContainerItemProxy */;
+		};
+		250BE029162BF440007784DB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 250BE028162BF440007784DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2775,6 +2934,14 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		250BE01A162BEF3A007784DB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				250BE01B162BEF3A007784DB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2782,6 +2949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2793,6 +2961,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2801,6 +2970,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2809,6 +2979,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2818,6 +2989,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2829,6 +3001,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -2839,6 +3012,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2850,6 +3024,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -2862,7 +3037,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2893,7 +3068,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2914,6 +3089,69 @@
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		250BE022162BEF3A007784DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXTextViewTests/TeXTextViewTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "TeXTextViewTests/TeXTextViewTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		250BE023162BEF3A007784DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TeXTextViewTests/TeXTextViewTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "TeXTextViewTests/TeXTextViewTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -2943,6 +3181,15 @@
 			buildConfigurations = (
 				25077333138E5D82000F1118 /* Debug */,
 				25077334138E5D82000F1118 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXTextViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				250BE022162BEF3A007784DB /* Debug */,
+				250BE023162BEF3A007784DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

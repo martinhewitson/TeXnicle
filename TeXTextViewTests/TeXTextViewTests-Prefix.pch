@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'TeXTextViewTests' target in the 'TeXTextViewTests' project
+//
+
+#ifdef __OBJC__
+  #import <Cocoa/Cocoa.h>
+#endif
