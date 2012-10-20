@@ -39,6 +39,22 @@
   return strings;
 }
 
++ (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr inRange:(NSRange)aRange withString:(NSString*)replacement inString:(NSString*)text
+{
+  if (NSClassFromString(@"NSRegularExpression") != nil)  {
+    NSRegularExpression *exp = [NSRegularExpression regularExpressionWithPattern:expr
+                                                                         options:0
+                                                                           error:NULL];
+    
+    return [exp stringByReplacingMatchesInString:text options:0 range:aRange withTemplate:replacement];
+    
+  } else {
+    return [text stringByReplacingOccurrencesOfRegex:expr withString:replacement range:aRange];
+  }
+  
+}
+
+
 + (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr withString:(NSString*)replacement inString:(NSString*)text
 {
   if (NSClassFromString(@"NSRegularExpression") != nil)  {

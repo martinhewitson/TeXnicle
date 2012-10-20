@@ -3397,8 +3397,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // a block of text larger than this.
 	NSRange pRange = [self rangeForCurrentParagraph];
   
-  // remove all newlines and replace with whitespace, ready for reformatting
-  NSString *text = [[[self string] substringWithRange:pRange] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
   
   // the position into the paragraph of text we are working with
 	NSRange currRange = [self selectedRange];
@@ -3406,8 +3404,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
   // reformatt the text for the selected linewidth
 	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
+  NSString *text = [[self string] substringWithRange:pRange];
+  NSLog(@"Reformatting [%@]", text);
   NSString *newText = [text reformatStartingAtIndex:startPosition forLinewidth:lineWrapLength];
   
+  NSLog(@"Got [%@]", newText);
   // replace string
 	[self breakUndoCoalescing];
 	[self setSelectedRange:pRange];

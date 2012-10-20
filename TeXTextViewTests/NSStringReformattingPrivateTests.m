@@ -164,6 +164,18 @@
   STAssertEquals(endIndex, 32l, @"End index should be 32");
   STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
+  //-----------------------------------------------------------------------
+  // Test 4 - some indented lines of text
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 4", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [NSString stringWithFormat:@"test\n\n   just some text to reformat\n\n   more text"];
+  // the startIndex should be 6, end should be 38
+  startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
+  endIndex   = [string endIndexForReformattingFromIndex:15];
+  STAssertEquals(startIndex, 6l, @"Start index should be 6");
+  STAssertEquals(endIndex, 35l, @"End index should be 35");
+  STAssertEquals(indentation, 3l, @"Indentation should be 3");
   
 }
 

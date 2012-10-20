@@ -79,23 +79,32 @@
 - (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation indentation:(NSInteger*)indent
 {
   NSCharacterSet *newlineCharacters = [NSCharacterSet newlineCharacterSet];
+  NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
   
-  // first check if we are in an argument
+  // look back in the text
   NSInteger startPosition = NSNotFound;
   NSInteger pos = cursorLocation;
   NSInteger braceCount = -1; // assume there is a closing brace after the starting position
   unichar previousCharacter = 0;
+  
+//  NSLog(@"Searching in [%@]", self);
+  BOOL stoppedOnItem = NO;
+  BOOL stoppedOnBrace = NO;
+  BOOL stoppedOnEmptyLine = NO;
+  
   while (pos >= 0) {
     
     unichar c = [self characterAtIndex:pos];
-    
+//    NSLog(@"Checking [%c]", c);
     // if this is a blank line, stop.
     if ([newlineCharacters characterIsMember:c]) {
+      
+      BOOL shouldStop = NO;
+      
       if ([self lineIsEmptyAtIndex:pos]) {
         // we stop here
         startPosition = pos+1;
-        *indent = 0;
-        break;
+        shouldStop = YES;
       }
       
       // if this line is commented, stop
@@ -104,9 +113,14 @@
         // if this is a commented line, stop
         if (isCommentLine == YES) {
           startPosition = pos+1;
-          *indent = 0;
-          break;
+          shouldStop = YES;
         }
+      }
+      
+      // now we have the start position, the indentation is the position on this line
+      if (shouldStop) {
+        stoppedOnEmptyLine = YES;
+        break;
       }
     }
     
@@ -125,6 +139,7 @@
       // line and let the user handle any errors.
       startPosition = pos+1;
       *indent = 0;
+      stoppedOnBrace = YES;
       break;
     }
     
@@ -137,6 +152,7 @@
         startPosition = pos;
         NSRange lineRange = [self lineRangeForRange:NSMakeRange(pos, 0)];
         *indent = pos - lineRange.location + 6;
+        stoppedOnItem = YES;
         break;
       }
     }
@@ -149,6 +165,22 @@
   if (pos < 0) {
     startPosition = 0;
     *indent = 0;
+  }
+  
+  // if we didn't stop on a command or a brace, then we need to count the indent
+  if (stoppedOnBrace == NO && stoppedOnItem == NO) {
+    NSRange lineRange = [self lineRangeForRange:NSMakeRange(startPosition, 0)];
+    pos = lineRange.location;
+    NSInteger count = 0;
+    while (pos < [self length]) {
+      unichar c = [self characterAtIndex:pos];
+      if (![whitespace characterIsMember:c] && ![newlineCharacters characterIsMember:c]) {
+        break;
+      }
+      count++;
+      pos++;
+    }
+    *indent = count;
   }
   
   return startPosition;

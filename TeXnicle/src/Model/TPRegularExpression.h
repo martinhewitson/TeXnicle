@@ -13,5 +13,6 @@
 + (NSArray*)stringsMatching:(NSString*)expr inText:(NSString*)text;
 + (NSRange)rangeOfExpr:(NSString*)expr inText:(NSString*)text;
 + (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr withString:(NSString*)replacement inString:(NSString*)text;
++ (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr inRange:(NSRange)aRange withString:(NSString*)replacement inString:(NSString*)text;
 
 @end

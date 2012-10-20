@@ -8,6 +8,7 @@
 
 #import "NSString+Reformatting.h"
 #import "NSString+Reformatting_Private.h"
+#import "TPRegularExpression.h"
 
 @implementation NSString (Reformatting)
 
@@ -19,16 +20,47 @@
 
 - (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth formattedRange:(NSRange*)aRange;
 {
-  NSMutableString *newString = [self mutableCopy];
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
   NSCharacterSet *newlineCharacters = [NSCharacterSet newlineCharacterSet];
   NSInteger indentation;
+  
   NSInteger startPosition = [self startIndexForReformattingFromIndex:cursorLocation indentation:&indentation];
   NSInteger endPosition = [self endIndexForReformattingFromIndex:cursorLocation];
 //  NSLog(@"Start index %ld", startPosition);
 //  NSLog(@"End index %ld", endPosition);
 //  NSLog(@"Indentation %ld", indentation);
   
+  // now make sure we preserve the initial whitespace
+  NSInteger count = 0;
+  NSInteger pos = 0;
+  while (pos < [self length]) {
+    unichar c = [self characterAtIndex:pos];
+    if ([whitespace characterIsMember:c]) {
+      count++;
+    } else {
+      break;
+    }
+    pos++;
+  }
+  
+  // now replace repeated whitespace in the range where we will work
+  NSString *text = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\\s+" inRange:NSMakeRange(startPosition, endPosition-startPosition) withString:@" " inString:self];
+  
+  // now fix prepadding
+  if (count > 0) count--;
+  for (int kk=0; kk<count; kk++) {
+    text = [@" " stringByAppendingString:text];
+  }
+  
+  NSMutableString *newString = [text mutableCopy];
+  
+  // recalculate because we replace repeated whitespace
+  startPosition = [text startIndexForReformattingFromIndex:cursorLocation indentation:&indentation];
+  endPosition = [text endIndexForReformattingFromIndex:cursorLocation];
+//  NSLog(@"Start index %ld", startPosition);
+//  NSLog(@"End index %ld", endPosition);
+//  NSLog(@"Indentation %ld", indentation);
+//  NSLog(@"Working on [%@]", newString);
   
   // check for sensible values
   if (startPosition == NSNotFound || endPosition == NSNotFound || indentation == NSNotFound ||
@@ -45,13 +77,20 @@
   //---------------------------------------------------------
   // work forward putting in \n and indents, then stop where
   // appropriate
-  NSInteger pos = startPosition;
+  pos = startPosition;
   
   // offset on first line
   NSRange lineRange = [self lineRangeForRange:NSMakeRange(pos, 0)];
-  NSInteger count = pos - lineRange.location;
+  count = pos - lineRange.location;
   NSInteger added = 0;
   while (pos < endPosition) {
+    
+    // replace any newline we hit with a space. We'll put new newlines in as
+    // part of the reformatting
+    unichar c = [newString characterAtIndex:pos];
+    if ([newlineCharacters characterIsMember:c]) {
+      [newString replaceCharactersInRange:NSMakeRange(pos, 1) withString:@" "];
+    }
     
 //    NSLog(@"Count %ld, pos %ld, [%c]", count, pos, [newString characterAtIndex:pos]);
     // if we are past the limit, go back looking for a white space
