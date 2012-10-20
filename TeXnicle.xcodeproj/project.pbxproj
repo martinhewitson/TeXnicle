@@ -145,6 +145,13 @@
 		252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121E16216C460041B2BE /* MHInfoTabBarController.xib */; };
 		252E12231621728F0041B2BE /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E12221621728F0041B2BE /* TeXnicle.icns */; };
 		252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E122416217B1D0041B2BE /* TeXnicle_4.icns */; };
+		252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
+		252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
+		252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
+		252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */; };
+		252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */; };
+		252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */; };
+		252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */; };
 		253009D314ECEA0500426ED2 /* TPTemplateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D214ECEA0500426ED2 /* TPTemplateDirectory.m */; };
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
 		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
@@ -686,6 +693,13 @@
 		252E121E16216C460041B2BE /* MHInfoTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHInfoTabBarController.xib; sourceTree = "<group>"; };
 		252E12221621728F0041B2BE /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		252E122416217B1D0041B2BE /* TeXnicle_4.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle_4.icns; sourceTree = "<group>"; };
+		252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile7_reformatted.tex; sourceTree = "<group>"; };
+		252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile7.tex; sourceTree = "<group>"; };
+		252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile8_reformatted.tex; sourceTree = "<group>"; };
+		252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile8.tex; sourceTree = "<group>"; };
+		252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile8_reformatted_2.tex; sourceTree = "<group>"; };
+		252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile9_reformatted.tex; sourceTree = "<group>"; };
+		252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile9.tex; sourceTree = "<group>"; };
 		253009D114ECEA0500426ED2 /* TPTemplateDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateDirectory.h; sourceTree = "<group>"; };
 		253009D214ECEA0500426ED2 /* TPTemplateDirectory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateDirectory.m; sourceTree = "<group>"; };
 		253009D514ECEBBD00426ED2 /* TPTemplateFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateFile.h; sourceTree = "<group>"; };
@@ -1385,6 +1399,13 @@
 				253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */,
 				253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */,
 				253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */,
+				252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */,
+				252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */,
+				252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */,
+				252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */,
+				252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */,
+				252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */,
+				252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */,
 			);
 			name = "test files";
 			sourceTree = "<group>";
@@ -2619,6 +2640,13 @@
 				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
 				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
 				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
+				252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */,
+				252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */,
+				252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */,
+				252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */,
+				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
+				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

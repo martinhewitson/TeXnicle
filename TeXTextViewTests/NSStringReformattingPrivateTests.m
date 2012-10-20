@@ -184,8 +184,8 @@
   startIndex = [string startIndexForReformattingFromIndex:70 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:70];
   STAssertEquals(startIndex, 51l, @"Start index should be 51");
-  STAssertEquals(endIndex, 100l, @"Start index should be 100");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  STAssertEquals(endIndex, 100l, @"End index should be 100");
+  STAssertEquals(indentation, 6l, @"Indentation should be 6");
   
   //-----------------------------------------------------------------------
   // Test 2 - a single \item command
@@ -197,8 +197,8 @@
   startIndex = [string startIndexForReformattingFromIndex:5 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:5];
   STAssertEquals(startIndex, 0l, @"Start index should be 0");
-  STAssertEquals(endIndex, 9l, @"Start index should be 9");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  STAssertEquals(endIndex, 9l, @"End index should be 9");
+  STAssertEquals(indentation, 6l, @"Indentation should be 6");
   
   //-----------------------------------------------------------------------
   // Test 3 - a single \item command preceded by some text
@@ -210,8 +210,8 @@
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
   STAssertEquals(startIndex, 10l, @"Start index should be 10");
-  STAssertEquals(endIndex, 19l, @"Start index should be 19");
-  STAssertEquals(indentation, 10l, @"Indentation should be 10");
+  STAssertEquals(endIndex, 19l, @"End index should be 19");
+  STAssertEquals(indentation, 16l, @"Indentation should be 16");
 
   //-----------------------------------------------------------------------
   // Test 4 - a single \item command preceded by some text followed by blank line
@@ -223,8 +223,8 @@
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
   STAssertEquals(startIndex, 10l, @"Start index should be 10");
-  STAssertEquals(endIndex, 19l, @"Start index should be 19");
-  STAssertEquals(indentation, 10l, @"Indentation should be 10");
+  STAssertEquals(endIndex, 19l, @"End index should be 19");
+  STAssertEquals(indentation, 16l, @"Indentation should be 16");
 
   //-----------------------------------------------------------------------
   // Test 5 - a single \item command preceded and followed by blank lines
@@ -236,8 +236,25 @@
   startIndex = [string startIndexForReformattingFromIndex:6 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:6];
   STAssertEquals(startIndex, 2l, @"Start index should be 2");
-  STAssertEquals(endIndex, 11l, @"Start index should be 11");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  STAssertEquals(endIndex, 11l, @"End index should be 11");
+  STAssertEquals(indentation, 6l, @"Indentation should be 6");
+  
+  //-----------------------------------------------------------------------
+  // Test 6 - a full enumerate environment with indentation
+  //          start from index 70
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 6", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile6"];
+  // the startIndex should be 21, end should be 69
+  startIndex = [string startIndexForReformattingFromIndex:40 indentation:&indentation];
+  endIndex   = [string endIndexForReformattingFromIndex:40];
+  STAssertEquals(startIndex, 21l, @"Start index should be 21");
+  STAssertEquals(endIndex, 69l, @"End index should be 69");
+  STAssertEquals(indentation, 8l, @"Indentation should be 8");
+  
+
+  
   
 }
 

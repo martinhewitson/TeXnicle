@@ -86,6 +86,53 @@
   // check new string is the same as the hand formatted string
   STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
+  //-----------------------------------------------------------------------
+  // Test 6 - reformat \item with indent
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 6", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile7"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile7_reformatted"];
+  newString = [string reformatStartingAtIndex:93 forLinewidth:45];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+
+  //-----------------------------------------------------------------------
+  // Test 7 - reformat \item which contains a command. Start before the command
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 7", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile8"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile8_reformatted"];
+  newString = [string reformatStartingAtIndex:96 forLinewidth:45];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  
+  //-----------------------------------------------------------------------
+  // Test 8 - reformat \item which contains a command. Start after the command
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 8", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile8"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile8_reformatted"];
+  newString = [string reformatStartingAtIndex:178 forLinewidth:45];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  
+  //-----------------------------------------------------------------------
+  // Test 9 - reformat \caption of a figure
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 9", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile9"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile9_reformatted"];
+  newString = [string reformatStartingAtIndex:109 forLinewidth:80];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
 }
 
