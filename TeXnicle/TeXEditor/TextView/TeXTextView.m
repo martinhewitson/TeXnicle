@@ -3405,10 +3405,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // reformatt the text for the selected linewidth
 	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
   NSString *text = [[self string] substringWithRange:pRange];
-  NSLog(@"Reformatting [%@]", text);
+//  NSLog(@"Reformatting [%@]", text);
   NSString *newText = [text reformatStartingAtIndex:startPosition forLinewidth:lineWrapLength];
   
-  NSLog(@"Got [%@]", newText);
+//  NSLog(@"Got [%@]", newText);
   // replace string
 	[self breakUndoCoalescing];
 	[self setSelectedRange:pRange];
