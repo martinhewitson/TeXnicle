@@ -121,18 +121,20 @@ Version 2.1\
 	- write test cases\
 	- would be better to have a Group entity and a Folder entity?\
 \
-+ Need to do better selecting for reformatting\
-	- make a reformatter class\
-		- select argument (don't use existing methods, they are more specialised)\
-			- work back from current pos until \{ (must come before \}), then forwards until matching \} or blank line\
-			- indent set to 0?\
-		- select text between \\item's\
-			- find previous \\item then forward to next \\item or blank line\
-			- set indent to first non-whitespace after the starting \\item\
-		- select text between blank lines\
-			- go back to blank line, forward to next blank line\
-			- indent set to first non-whitespace after start of first line\
++ Soft-wrap not persistant?\
 \
+\pard\pardeftab720
+
+\f3 \cf0 Just a quick, minor bug report: Suppose you are editing a file with a certain indent level, like an enumerate environment:\
+\
+\\begin\{enumerate\}\
+\'a0\\item blah blah blahX\
+\\end\{enumerate\}\
+\
+and suppose the cursor is at the 'X' above. \'a0If you hit Enter twice, so as to insert a blank line between the current item and the start of the next item, the indent level is preserved only after hitting Enter once: the second typing of Enter causes the cursor to return to the far-left margin...
+\f0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
 \
 Version 2.0\
 -----------\
