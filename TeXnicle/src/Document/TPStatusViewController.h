@@ -31,6 +31,7 @@
 
 @interface TPStatusViewController : NSViewController
 
+@property (assign) NSInteger column;
 @property (assign) NSInteger character;
 @property (assign) NSInteger lineNumber;
 @property (assign) NSInteger wordCount;

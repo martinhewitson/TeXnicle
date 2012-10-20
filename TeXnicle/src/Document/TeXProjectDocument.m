@@ -1606,8 +1606,10 @@
 
 - (void) handleTextEditorSelectionChanged:(NSNotification*)aNote
 {
+  NSInteger column = [self.texEditorViewController.textView column];
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
+  [self.statusViewController setColumn:column];
   [self.statusViewController setLineNumber:lineNumber];
   [self.statusViewController setCharacter:cursorPosition];
   [self.statusViewController updateDisplay];

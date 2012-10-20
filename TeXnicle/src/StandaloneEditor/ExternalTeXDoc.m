@@ -647,8 +647,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) updateCursorInfoText
 {
+  NSInteger column = [self.texEditorViewController.textView column];
   NSInteger cursorPosition = [self.texEditorViewController.textView cursorPosition];
   NSInteger lineNumber = [self.texEditorViewController.textView lineNumber];
+  [self.statusViewController setColumn:column];
   [self.statusViewController setCharacter:cursorPosition];
   [self.statusViewController setLineNumber:lineNumber];
   [self.statusViewController updateDisplay];

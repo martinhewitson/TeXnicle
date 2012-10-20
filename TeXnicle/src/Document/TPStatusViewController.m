@@ -43,6 +43,7 @@
   self = [super initWithNibName:@"TPStatusViewController" bundle:nil];
   if (self) {
     // Initialization code here.
+    _column = NSNotFound;
   }
   
   return self;
@@ -144,9 +145,9 @@
   // status
   NSString *status = nil;
   if (self.lineNumber == NSNotFound) {
-    status = [NSString stringWithFormat:@"line: -, char: %ld", self.character];
+    status = [NSString stringWithFormat:@"line: -, char: %ld, col: %ld", self.character, self.column];
   } else {
-    status = [NSString stringWithFormat:@"line: %ld, char: %ld", self.lineNumber, self.character];
+    status = [NSString stringWithFormat:@"line: %ld, char: %ld, col: %ld", self.lineNumber, self.character, self.column];
   }  
   [self.editorStatusTextField setStringValue:status];
 }
