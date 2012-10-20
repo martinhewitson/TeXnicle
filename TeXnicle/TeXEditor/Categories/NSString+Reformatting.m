@@ -11,7 +11,13 @@
 
 @implementation NSString (Reformatting)
 
-- (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth;
+- (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth
+{
+  NSRange r;
+  return [self reformatStartingAtIndex:cursorLocation forLinewidth:linewidth formattedRange:&r];
+}
+
+- (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth formattedRange:(NSRange*)aRange;
 {
   NSMutableString *newString = [self mutableCopy];
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
@@ -19,9 +25,10 @@
   NSInteger indentation;
   NSInteger startPosition = [self startIndexForReformattingFromIndex:cursorLocation indentation:&indentation];
   NSInteger endPosition = [self endIndexForReformattingFromIndex:cursorLocation];
-  NSLog(@"Start index %ld", startPosition);
-  NSLog(@"End index %ld", endPosition);
-  NSLog(@"Indentation %ld", indentation);
+//  NSLog(@"Start index %ld", startPosition);
+//  NSLog(@"End index %ld", endPosition);
+//  NSLog(@"Indentation %ld", indentation);
+  
   
   // check for sensible values
   if (startPosition == NSNotFound || endPosition == NSNotFound || indentation == NSNotFound ||
@@ -92,7 +99,11 @@
       pos++;
     }
   }
-    
+  
+  // fill the range we reformatted - this can be used downstream to replace the text being formatted
+  *aRange = NSMakeRange(startPosition, endPosition-startPosition);
+  
+  
   return [newString copy];
 }
 

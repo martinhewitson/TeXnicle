@@ -13,7 +13,8 @@
 
 
 // reformat the given string for the suggested linewidth starting at the given index.
-- (NSString*) reformatStartingAtIndex:(NSInteger)startPosition forLinewidth:(NSInteger)linewidth;
+- (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth;
+- (NSString*) reformatStartingAtIndex:(NSInteger)cursorLocation forLinewidth:(NSInteger)linewidth formattedRange:(NSRange*)aRange;
 
 
 

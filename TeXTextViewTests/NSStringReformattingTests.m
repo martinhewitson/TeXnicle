@@ -38,6 +38,7 @@
   string = [self stringFromTestFile:@"reformatTextTestFile1"];
   testString = [self stringFromTestFile:@"reformatTextTestFile1_reformatted"];
   newString = [string reformatStartingAtIndex:140 forLinewidth:20];
+  NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
   STAssertTrue([newString isEqualToString:testString], @"Reconsituted text should be as the original");
   
@@ -60,6 +61,7 @@
   string = [self stringFromTestFile:@"reformatTextTestFile3"];
   testString = [self stringFromTestFile:@"reformatTextTestFile3_reformatted"];
   newString = [string reformatStartingAtIndex:90 forLinewidth:40];
+  NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
   STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   

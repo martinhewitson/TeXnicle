@@ -133,7 +133,7 @@
       // get the command name
       NSString *command = [self commandNameStartingAtIndex:pos];
       if ([command isEqualToString:@"\\item"]) {
-        NSLog(@"Found start item at %ld", pos);
+//        NSLog(@"Found start item at %ld", pos);
         startPosition = pos;
         NSRange lineRange = [self lineRangeForRange:NSMakeRange(pos, 0)];
         *indent = pos - lineRange.location + 6;
@@ -211,12 +211,12 @@
       NSString *command = [self commandNameStartingAtIndex:pos];
       if ([command isEqualToString:@"\\item"]) {
         // go back to first non-whitespace/newline character
-        NSLog(@"Found end item at %ld", pos);
+//        NSLog(@"Found end item at %ld", pos);
         if (pos > 0) {
           pos--;
           while (pos >= 0) {
             unichar tc = [self characterAtIndex:pos];
-            NSLog(@"  checking [%c]", tc);
+//            NSLog(@"  checking [%c]", tc);
             if (![whitespace characterIsMember:tc] && ![newlineCharacters characterIsMember:tc]) {
               pos++;
               break;
