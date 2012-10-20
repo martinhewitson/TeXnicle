@@ -72,6 +72,12 @@
 
 - (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation
 {
+  NSInteger dummy;
+  return [self startIndexForReformattingFromIndex:cursorLocation indentation:&dummy];
+}
+
+- (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation indentation:(NSInteger*)indent
+{
   NSCharacterSet *newlineCharacters = [NSCharacterSet newlineCharacterSet];
   
   // first check if we are in an argument
@@ -88,7 +94,7 @@
       if ([self lineIsEmptyAtIndex:pos]) {
         // we stop here
         startPosition = pos+1;
-//        NSLog(@"Blank line starting %ld", startPosition);
+        *indent = 0;
         break;
       }
       
@@ -98,7 +104,7 @@
         // if this is a commented line, stop
         if (isCommentLine == YES) {
           startPosition = pos+1;
-//          NSLog(@"Comment line starting %ld", startPosition);
+          *indent = 0;
           break;
         }
       }
@@ -107,10 +113,8 @@
     // check if we are in an argument
     if (c == '{') {
       braceCount++;
-//      NSLog(@"Found opening brace at %ld [%ld]", pos, braceCount);
     } else if (c == '}') {
       braceCount--;
-//      NSLog(@"Found closing brace at %ld [%ld]", pos, braceCount);
     }
     
     if (braceCount == 0) {
@@ -120,7 +124,7 @@
       // we don't care here, we would just reformat the text up to the blank
       // line and let the user handle any errors.
       startPosition = pos+1;
-//      NSLog(@"Argument starting %ld", startPosition);
+      *indent = 0;
       break;
     }
     
@@ -130,6 +134,8 @@
       NSString *command = [self commandNameStartingAtIndex:pos];
       if ([command isEqualToString:@"\\item"]) {
         startPosition = pos;
+        NSRange lineRange = [self lineRangeForRange:NSMakeRange(pos, 0)];
+        *indent = pos - lineRange.location;
         break;
       }
     }
@@ -141,6 +147,7 @@
   // if we got to the start of the file, then start there
   if (pos < 0) {
     startPosition = 0;
+    *indent = 0;
   }
   
   return startPosition;

@@ -153,6 +153,10 @@
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
 		253A3AC01457D895007C4D8C /* MHConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABF1457D895007C4D8C /* MHConsoleManager.m */; };
+		253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */; };
+		253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */; };
+		253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */; };
+		253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
 		253E5E3413951DD300566E23 /* TPLibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */; };
 		253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E3113951DD300566E23 /* TPClippingsTable.m */; };
@@ -206,6 +210,8 @@
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
 		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
 		2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */; };
+		2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */; };
+		2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */; };
 		256225CD15CA940600091A8C /* TPPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225CC15CA940600091A8C /* TPPalette.m */; };
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
@@ -695,6 +701,10 @@
 		253A3ABE1457D895007C4D8C /* MHConsoleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsoleManager.h; sourceTree = "<group>"; };
 		253A3ABF1457D895007C4D8C /* MHConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHConsoleManager.m; sourceTree = "<group>"; };
 		253A3AC41457DBE2007C4D8C /* MHConsoleViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsoleViewer.h; sourceTree = "<group>"; };
+		253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile1_reformatted.tex; sourceTree = "<group>"; };
+		253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile5_reformatted.tex; sourceTree = "<group>"; };
+		253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6.tex; sourceTree = "<group>"; };
+		253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6_reformatted.tex; sourceTree = "<group>"; };
 		253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 8.xcdatamodel"; sourceTree = "<group>"; };
 		253E5E2B13951DD300566E23 /* Library.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Library.plist; sourceTree = "<group>"; };
 		253E5E2E13951DD300566E23 /* TPLibraryImageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryImageGenerator.h; sourceTree = "<group>"; };
@@ -778,6 +788,9 @@
 		255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPImageViewerController.xib; sourceTree = "<group>"; };
 		2560A09B162C317C00403D56 /* NSStringReformattingPrivateTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringReformattingPrivateTests.h; sourceTree = "<group>"; };
 		2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringReformattingPrivateTests.m; sourceTree = "<group>"; };
+		2560A09F162C70C100403D56 /* NSStringReformattingTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringReformattingTests.h; sourceTree = "<group>"; };
+		2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringReformattingTests.m; sourceTree = "<group>"; };
+		2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile3_reformatted.tex; sourceTree = "<group>"; };
 		256225CB15CA940600091A8C /* TPPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPalette.h; sourceTree = "<group>"; };
 		256225CC15CA940600091A8C /* TPPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPalette.m; sourceTree = "<group>"; };
 		256225CF15CA943200091A8C /* NSApplication+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+Palette.h"; sourceTree = "<group>"; };
@@ -1339,6 +1352,8 @@
 				250BE026162BF0B7007784DB /* test files */,
 				250BE01D162BEF3A007784DB /* TeXTextViewTests.h */,
 				250BE01E162BEF3A007784DB /* TeXTextViewTests.m */,
+				2560A09F162C70C100403D56 /* NSStringReformattingTests.h */,
+				2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */,
 				2560A09B162C317C00403D56 /* NSStringReformattingPrivateTests.h */,
 				2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */,
 				250BE018162BEF3A007784DB /* Supporting Files */,
@@ -1361,10 +1376,15 @@
 			isa = PBXGroup;
 			children = (
 				250BE024162BF01D007784DB /* reformatTextTestFile1.tex */,
+				253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */,
 				250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */,
 				250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */,
+				2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */,
 				250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */,
 				250BE037162C100E007784DB /* reformatTextTestFile5.tex */,
+				253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */,
+				253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */,
+				253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */,
 			);
 			name = "test files";
 			sourceTree = "<group>";
@@ -2594,6 +2614,11 @@
 				250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */,
 				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
 				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
+				2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */,
+				253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */,
+				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
+				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2875,6 +2900,7 @@
 			files = (
 				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
 				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
+				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,10 +15,6 @@
 @implementation NSStringReformattingPrivateTests
 
 
-// TODO - test for end index, test for indentation
-//   -endIndexForReformattingFromIndex:
-//   -indentationForReformattingFromIndex:
-
 - (NSString*)stringFromTestFile:(NSString*)name
 {
   NSError *error = nil;
@@ -123,6 +119,7 @@
 - (void)testStartEndIndexForReformattingFromIndex_blankLinesTests
 {
   NSInteger startIndex, endIndex;
+  NSInteger indentation = NSNotFound;
   NSString *string = nil;
   
   //-----------------------------------------------------------------------
@@ -134,10 +131,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile4"];
   // the startIndex should be 2, end index 218
-  startIndex = [string startIndexForReformattingFromIndex:139];
+  startIndex = [string startIndexForReformattingFromIndex:139 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:139];
   STAssertEquals(startIndex, 2l, @"Start index should be 2");
   STAssertEquals(endIndex, 218l, @"End index should be 218");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 2 - a single line of text
@@ -147,10 +145,11 @@
   NSLog(@"=============================================================================");
   string = @"just some text to reformat";
   // the startIndex should be 0, end should be 26
-  startIndex = [string startIndexForReformattingFromIndex:13];
+  startIndex = [string startIndexForReformattingFromIndex:13 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:13];
   STAssertEquals(startIndex, 0l, @"Start index should be 0");
   STAssertEquals(endIndex, 26l, @"End index should be 26");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 3 - some lines of text
@@ -159,11 +158,11 @@
   NSLog(@"=============================================================================");
   string = [NSString stringWithFormat:@"test\n\njust some text to reformat\n\nmore text"];
   // the startIndex should be 6, end should be 32
-  startIndex = [string startIndexForReformattingFromIndex:15];
+  startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
   STAssertEquals(startIndex, 6l, @"Start index should be 6");
   STAssertEquals(endIndex, 32l, @"End index should be 32");
-  
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   
 }
@@ -171,6 +170,7 @@
 - (void) testStartIndexForReformattingFromIndex_itemTests
 {
   NSInteger startIndex, endIndex;
+  NSInteger indentation = NSNotFound;
   NSString *string = nil;
   
   //-----------------------------------------------------------------------
@@ -181,10 +181,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile5"];
   // the startIndex should be 51, end should be 100
-  startIndex = [string startIndexForReformattingFromIndex:70];
+  startIndex = [string startIndexForReformattingFromIndex:70 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:70];
   STAssertEquals(startIndex, 51l, @"Start index should be 51");
   STAssertEquals(endIndex, 100l, @"Start index should be 100");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 2 - a single \item command
@@ -193,10 +194,11 @@
   NSLog(@"=============================================================================");
   string = @"\\item one";
   // the startIndex should be 0, end should be 9
-  startIndex = [string startIndexForReformattingFromIndex:5];
+  startIndex = [string startIndexForReformattingFromIndex:5 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:5];
   STAssertEquals(startIndex, 0l, @"Start index should be 0");
   STAssertEquals(endIndex, 9l, @"Start index should be 9");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 3 - a single \item command preceded by some text
@@ -205,10 +207,11 @@
   NSLog(@"=============================================================================");
   string = @"some text \\item one";
   // the startIndex should be 10, end should be 19
-  startIndex = [string startIndexForReformattingFromIndex:15];
+  startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
   STAssertEquals(startIndex, 10l, @"Start index should be 10");
   STAssertEquals(endIndex, 19l, @"Start index should be 19");
+  STAssertEquals(indentation, 10l, @"Indentation should be 10");
 
   //-----------------------------------------------------------------------
   // Test 4 - a single \item command preceded by some text followed by blank line
@@ -217,10 +220,11 @@
   NSLog(@"=============================================================================");
   string = [NSString stringWithFormat:@"some text \\item one\n\nsome more text"];
   // the startIndex should be 10, end should be 19
-  startIndex = [string startIndexForReformattingFromIndex:15];
+  startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
   STAssertEquals(startIndex, 10l, @"Start index should be 10");
   STAssertEquals(endIndex, 19l, @"Start index should be 19");
+  STAssertEquals(indentation, 10l, @"Indentation should be 10");
 
   //-----------------------------------------------------------------------
   // Test 5 - a single \item command preceded and followed by blank lines
@@ -229,16 +233,18 @@
   NSLog(@"=============================================================================");
   string = [NSString stringWithFormat:@"\n\n\\item one\n\nsome more text"];
   // the startIndex should be 2, end should be 11
-  startIndex = [string startIndexForReformattingFromIndex:6];
+  startIndex = [string startIndexForReformattingFromIndex:6 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:6];
   STAssertEquals(startIndex, 2l, @"Start index should be 2");
   STAssertEquals(endIndex, 11l, @"Start index should be 11");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
 }
 
 - (void)testStartIndexForReformattingFromIndex_argumentTests
 {
   NSInteger startIndex, endIndex;
+  NSInteger indentation = NSNotFound;
   NSString *string = nil;
   
   //-----------------------------------------------------------------------
@@ -248,10 +254,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile1"];
   // the startIndex should be 75, end is 406
-  startIndex = [string startIndexForReformattingFromIndex:140];
+  startIndex = [string startIndexForReformattingFromIndex:140 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:140];
   STAssertEquals(startIndex, 75l, @"Start index should be 75");
   STAssertEquals(endIndex, 406l, @"Start index should be 406");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 2 - simple paragraph containing an argument before the point where
@@ -261,10 +268,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile2"];
   // the startIndex should be 105, end at 443
-  startIndex = [string startIndexForReformattingFromIndex:180];
+  startIndex = [string startIndexForReformattingFromIndex:180 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:180];
   STAssertEquals(startIndex, 105l, @"Start index should be 105");
   STAssertEquals(endIndex, 443l, @"End index should be 443");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 3 - simple paragraph containing an argument and we start within
@@ -274,10 +282,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile2"];
   // the startIndex should be 146, end 166
-  startIndex = [string startIndexForReformattingFromIndex:155];
+  startIndex = [string startIndexForReformattingFromIndex:155 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:155];
   STAssertEquals(startIndex, 146l, @"Start index should be 146");
   STAssertEquals(endIndex, 166l, @"End index should be 166");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 4 - a paragraph containing an argument within an argument and we
@@ -288,10 +297,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile3"];
   // the startIndex should be 68, end at 157
-  startIndex = [string startIndexForReformattingFromIndex:120];
+  startIndex = [string startIndexForReformattingFromIndex:120 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:120];
   STAssertEquals(startIndex, 68l, @"Start index should be 68");
   STAssertEquals(endIndex, 157l, @"End index should be 157");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 5 - a paragraph containing an argument within an argument and we
@@ -302,10 +312,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile3"];
   // the startIndex should be 108, end at 110
-  startIndex = [string startIndexForReformattingFromIndex:109];
+  startIndex = [string startIndexForReformattingFromIndex:109 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:109];
   STAssertEquals(startIndex, 108l, @"Start index should be 108");
   STAssertEquals(endIndex, 110l, @"End index should be 110");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 6 - a paragraph containing an argument within an argument and we
@@ -316,10 +327,11 @@
   NSLog(@"=============================================================================");
   string = [self stringFromTestFile:@"reformatTextTestFile3"];
   // the startIndex should be 68, end at 157
-  startIndex = [string startIndexForReformattingFromIndex:94];
+  startIndex = [string startIndexForReformattingFromIndex:94 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:94];
   STAssertEquals(startIndex, 68l, @"Start index should be 68");
   STAssertEquals(endIndex, 157l, @"End index should be 157");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   
   

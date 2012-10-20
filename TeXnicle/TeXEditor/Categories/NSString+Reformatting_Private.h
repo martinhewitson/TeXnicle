@@ -22,6 +22,9 @@
 // get the start index for reformatting
 - (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation;
 
+// as above but returns the indentation to be used for reformatting
+- (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation indentation:(NSInteger*)indent;
+
 // get the end index for reformatting
 - (NSInteger) endIndexForReformattingFromIndex:(NSInteger)cursorLocation;
 
