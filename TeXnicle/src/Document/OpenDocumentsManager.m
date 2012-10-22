@@ -238,7 +238,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
           
-          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
           [self.texEditorViewController.textView stopObservingTextStorage];
           
           // clear the text view from all other document text containers
@@ -261,6 +260,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [textContainer setTextView:self.texEditorViewController.textView];
 //          NSLog(@"Set textview for %@", [currentDoc name]);
 //          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
+                    
+          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
+          
           [self.texEditorViewController.textView observeTextStorage];
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
