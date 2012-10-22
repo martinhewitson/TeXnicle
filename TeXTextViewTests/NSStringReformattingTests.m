@@ -136,6 +136,42 @@
   // check new string is the same as the hand formatted string
   STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
+  //-----------------------------------------------------------------------
+  // Test 10 - reformat a beamer \item set
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 10", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile10"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile10_reformatted"];
+  newString = [string reformatStartingAtIndex:236 forLinewidth:45];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  
+  //-----------------------------------------------------------------------
+  // Test 11 - reformat an \item[xxx] set with blank lines between items
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 11", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile11"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile11_reformatted"];
+  newString = [string reformatStartingAtIndex:113 forLinewidth:55];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  
+  //-----------------------------------------------------------------------
+  // Test 12 - reformat an \item[xxx] set
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 12", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = [self stringFromTestFile:@"reformatTextTestFile12"];
+  testString = [self stringFromTestFile:@"reformatTextTestFile12_reformatted"];
+  newString = [string reformatStartingAtIndex:113 forLinewidth:55];
+  NSLog(@"%@", newString);
+  // check new string is the same as the hand formatted string
+  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  
 }
 
 

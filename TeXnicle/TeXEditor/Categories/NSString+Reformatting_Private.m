@@ -147,11 +147,21 @@
     if (c == '\\') {
       // get the command name
       NSString *command = [self commandNameStartingAtIndex:pos];
-      if ([command isEqualToString:@"\\item"]) {
+      if ([command hasPrefix:@"\\item"]) {
 //        NSLog(@"Found start item at %ld", pos);
         startPosition = pos;
         NSRange lineRange = [self lineRangeForRange:NSMakeRange(pos, 0)];
-        *indent = pos - lineRange.location + 6;
+        // go forward until we find a whitespace or newline
+        NSInteger forpos = pos;
+        while (forpos < [self length]) {
+          unichar fc = [self characterAtIndex:forpos];
+          if ([whitespace characterIsMember:fc] || [newlineCharacters characterIsMember:fc]) {
+            // stop
+            break;
+          }
+          forpos++;
+        }
+        *indent = forpos - lineRange.location + 1;
         stoppedOnItem = YES;
         break;
       }
@@ -241,7 +251,7 @@
     if (c == '\\') {
       // get the command name
       NSString *command = [self commandNameStartingAtIndex:pos];
-      if ([command isEqualToString:@"\\item"]) {
+      if ([command hasPrefix:@"\\item"]) {
         // go back to first non-whitespace/newline character
 //        NSLog(@"Found end item at %ld", pos);
         if (pos > 0) {

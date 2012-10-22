@@ -52,6 +52,12 @@
 		250C173E140926CB00BCEA3D /* TPEnginesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */; };
 		250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C17411409295500BCEA3D /* TPEngineEditor.m */; };
 		250C17441409296E00BCEA3D /* EngineEditorWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C17431409296E00BCEA3D /* EngineEditorWindow.xib */; };
+		251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
+		251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
+		251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
+		251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */; };
+		251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CD163514AC00AC058F /* reformatTextTestFile12.tex */; };
+		251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */; };
 		25131EA714E182C40065CDA7 /* MHTableConfigureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25131EA614E182C40065CDA7 /* MHTableConfigureController.m */; };
 		25131EAA14E182D60065CDA7 /* MHTableConfigureWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25131EA914E182D60065CDA7 /* MHTableConfigureWindow.xib */; };
 		25131EAD14E19F320065CDA7 /* MHPaletteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25131EAC14E19F320065CDA7 /* MHPaletteTableView.m */; };
@@ -558,6 +564,12 @@
 		250C17411409295500BCEA3D /* TPEngineEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineEditor.m; sourceTree = "<group>"; };
 		250C17431409296E00BCEA3D /* EngineEditorWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EngineEditorWindow.xib; sourceTree = "<group>"; };
 		250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
+		251157C416350C2500AC058F /* reformatTextTestFile10.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10.tex; sourceTree = "<group>"; };
+		251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10_reformatted.tex; sourceTree = "<group>"; };
+		251157C91635143100AC058F /* reformatTextTestFile11.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile11.tex; sourceTree = "<group>"; };
+		251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile11_reformatted.tex; sourceTree = "<group>"; };
+		251157CD163514AC00AC058F /* reformatTextTestFile12.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile12.tex; sourceTree = "<group>"; };
+		251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile12_reformatted.tex; sourceTree = "<group>"; };
 		25131EA514E182C40065CDA7 /* MHTableConfigureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTableConfigureController.h; sourceTree = "<group>"; };
 		25131EA614E182C40065CDA7 /* MHTableConfigureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTableConfigureController.m; sourceTree = "<group>"; };
 		25131EA914E182D60065CDA7 /* MHTableConfigureWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHTableConfigureWindow.xib; sourceTree = "<group>"; };
@@ -1406,6 +1418,12 @@
 				252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */,
 				252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */,
 				252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */,
+				251157C416350C2500AC058F /* reformatTextTestFile10.tex */,
+				251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */,
+				251157C91635143100AC058F /* reformatTextTestFile11.tex */,
+				251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */,
+				251157CD163514AC00AC058F /* reformatTextTestFile12.tex */,
+				251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */,
 			);
 			name = "test files";
 			sourceTree = "<group>";
@@ -2647,6 +2665,12 @@
 				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
 				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
+				251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */,
+				251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */,
+				251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */,
+				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
+				251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */,
+				251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
