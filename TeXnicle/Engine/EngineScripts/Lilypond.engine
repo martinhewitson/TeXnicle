@@ -19,11 +19,8 @@ then
 fi
 
 # Executable values
-
+PATH=/usr/texbin:/usr/local/bin:$PATH
 ENGINE=/Applications/LilyPond.app/Contents/Resources/bin/lilypond
-# BIBTEX=/usr/texbin/bibtex
-# DVIPS=/usr/texbin/dvips
-# PS2PDF=/usr/local/bin/ps2pdf
 
 # Process inputs.
 # TeXnicle passes the filename to be processed (with no file extension) as the first input to this 

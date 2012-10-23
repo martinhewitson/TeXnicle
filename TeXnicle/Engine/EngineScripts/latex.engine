@@ -20,6 +20,7 @@ then
 fi
 
 # Executable values
+PATH=/usr/texbin:/usr/local/bin:$PATH
 ENGINE=/usr/texbin/latex
 BIBTEX=/usr/texbin/bibtex
 DVIPS=/usr/texbin/dvips

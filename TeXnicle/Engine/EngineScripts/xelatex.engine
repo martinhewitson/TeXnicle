@@ -19,7 +19,7 @@ exit
 fi
 
 # Executable values
-PATH=$PATH:/usr/texbin/
+PATH=/usr/texbin:/usr/local/bin:$PATH
 ENGINE=/usr/texbin/xelatex
 BIBTEX=/usr/texbin/bibtex
 

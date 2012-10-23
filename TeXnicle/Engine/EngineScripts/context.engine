@@ -28,7 +28,7 @@ exit
 fi
 
 # Executable values
-PATH=$PATH:/usr/local/texlive/2010/bin/x86_64-darwin/
+PATH=/usr/texbin:/usr/local/bin:$PATH
 ENGINE=texexec
 BIBTEX=/usr/texbin/bibtex
 
