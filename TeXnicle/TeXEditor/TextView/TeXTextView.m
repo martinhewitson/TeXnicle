@@ -2934,8 +2934,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     idx = lineRange.location;
     while (idx < NSMaxRange(lineRange)) {
 //      NSLog(@"    checking char %c", [str characterAtIndex:idx]);
-      if (![whitespaceCharacterSet characterIsMember:[str characterAtIndex:idx]] && 
-          ![newLineCharacterSet characterIsMember:[str characterAtIndex:idx]]) {
+      if (![whitespaceCharacterSet characterIsMember:[str characterAtIndex:idx]]) {
         break;
       }
       idx++;
