@@ -528,6 +528,10 @@
 - (BOOL) writeContents
 {
 //	NSLog(@"Writing contents of %@ to disk", [self name]);
+  
+  if ([self isImage])
+    return YES;
+  
 	NSString *filepath = [self valueForKey:@"pathOnDisk"];
 	NSData *data = [self valueForKey:@"content"];
 	if (data) {
