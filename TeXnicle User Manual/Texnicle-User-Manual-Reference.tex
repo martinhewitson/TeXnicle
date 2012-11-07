@@ -10,7 +10,7 @@ Access the preference pane just like in any other Mac application: \menu{TeXnicl
 \label{reference.prefs.gen}
 Several important features are included under the General pane. You can set the number of characters per line, at which point the line will wrap. Alternatively, you can turn wrapping off. When pressing the Tab key, a tab is inserted into the document; this behaviour can be changed from the General tab to insert any number of spaces instead.
 
-\texnicle can insert closing braces automatically when an opening brace is typed, if you so choose. You can also opt to skip closing braces, which means that when the cursor is set immediately before a closing brace and then the \} key is pressed, the editor will simply skip that brace rather than inserting a new one. You may also choose for \texnicle to automatically replace opening quotation marks (\keys{"}) with two inverted apostrophes (\keys{`}). Line numbering and code folding (for |\begin| and |\end| environments) can be turned on and off here. Line highlighting and the highlighting of matching words can also be edited.
+\texnicle can insert closing braces automatically when an opening brace is typed, if you so choose. You can also opt to skip closing braces, which means that when the cursor is set immediately before a closing brace and then the \} key is pressed, the editor will simply skip that brace rather than inserting a new one. You may also choose for \texnicle to automatically replace opening quotation marks (\keys{\shiftkey + '}) with two inverted apostrophes (\keys{`}). Line numbering and code folding (for |\begin| and |\end| environments) can be turned on and off here. Line highlighting and the highlighting of matching words can also be edited.
 
 \texnicle is happy to save a project automatically when compiling the document, but if you want to turn off this feature, it is located under the General tab. You can also toggle whether \texnicle restores project tabs when opening a project. Finally, the default file encoding can be set to any one of a number of encoding options. The default is Unicode (UTF-8).
 
@@ -20,7 +20,7 @@ The second tab in the Preferences window is the Typesetting pane. This concerns 
 
 Typesetting options include the ability to clear the consoles upon typesetting a document, the number of seconds between Live Updates, and a few other tweaks for the typesetting process. Aside from clearing the console and the amount of time between Live Updates, changes made under the Typesetting subcategory of this preference pane affect the default values of new projects rather than the existing project. This means that changing the default typesetting engine, for example, under this preference pane will not affect the engine used for any existing projects; that option is changed in the Project Settings tab of the Navigator on a by-project basis.
 
-There are many options for syntax checking. These are done with the |chtex| binary from your \LaTeX\ installation. The path for this may need to be re-configured if you do not have a stock installation of MacTeX on your machine. Syntax checking can be turned on and off from this tab under the Typesetting preference pane.
+There are many options for syntax checking are possible. These are done with the |chtex| binary from your \LaTeX\ installation. The path for this may need to be re-configured if you do not have a stock installation of MacTeX on your machine. Syntax checking can be turned on and off from this tab under the Typesetting preference pane.
 
 Typesetting engines are edited and created under the Engines tab of the Typesetting pane. Everything that has to do with engines is discussed in section \ref{reference.engines}.
 
@@ -96,7 +96,7 @@ To create a new folder in your project, click the folder icon in the bottom left
 
 \keys{\shiftkey + \cmdkey + A} will allow you to search your computer for an existing file to add to your project. You will be given the option to copy the file to the project folder or simply to reference it from afar. Similarly, \keys{\optkey + \shiftkey + \cmdkey + A} will allow you to add an existing folder. These functions are also available in the \menu{Project} menu or by clicking the gear in the bottom right corner of the Navigators pane.
 
-Changing the main document of your project can be done through the \menu{Project} menu or by \cmdkey-clicking the document in the Project Tree that you want to set. \ctlkey-clicking a file in the Project Tree view will also allow you to rename, remove, or reveal the file.
+Changing the main document of your project can be done through the \menu{Project} menu or by \cmdkey-clicking the document in the Project Tree that you want to set. \cmdkey-clicking a file in the Project Tree view will also allow you to rename, remove, or reveal the file.
 
 \section[Clippings Library]{The Clippings Library}
 \label{reference.clippings}
@@ -124,7 +124,7 @@ Once your clip has been created, it's a good idea to set a command for the clip 
 \end{figure}
 
 
-Once the shortcut command turns yellow, press \keys{\returnkey} to insert the clip. The |#ben| command (shortcut for an |enumerate| environment) will yield the something like Figure \ref{fig:texnicle-expandedben} in the editor:
+Once the shortcut command turns yellow, press \keys{\returnkey} to insert the clip. The |#ben| command (shortcut for an |enumerate| environment) will yield the something like Figure \ref{fig:texnicle-benexpanded} in the editor:
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.3\textwidth]{TeXnicle-Images/texnicle-expandedben.png}
@@ -132,16 +132,33 @@ Once the shortcut command turns yellow, press \keys{\returnkey} to insert the cl
 \label{fig:texnicle-expandedben}
 \end{figure}
 
-Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in @ symbols. For example, to create a shortcut for text in small caps (the |\smallcaps| command), we will create a new clipping that contains |\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as |#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customcliptag} below.
-
-You can easily jump between placeholders using \cmdkey-\returnkey\ (next placeholder) or \shiftkey-\cmdkey-\returnkey\ (previous placeholder).
-
+Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in \@ symbols. For example, to create a shortcut for text in small caps (the |\smallcaps| command), we will create a new clipping that contains |\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as |#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customclipplaceholder} below.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{TeXnicle-Images/texnicle-customcliptag.png}
 \caption{After defining a placeholder, this is the output.}
 \label{fig:texnicle-customcliptag}
 \end{figure}
+
+\section{Jump Bar}
+\label{reference.jumpbar}
+The Jump Bar is located at the top of the editing window between the syntax indicator on the left and two buttons (\keys{\%\%\ensuremath{+}} and \keys{unfold all}). This bar allows you to jump to any labelled section in the visible document, from |part| to |subparagraph|. Furthermore, the button to the right (\keys{\%\%\ensuremath{+}}) allows you to instantly mark up text with commented notes that appear in the Jump Bar.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{TeXnicle-Images/texnicle-jumpbar.png}
+\caption{The Jump Bar.}
+\label{fig:texnicle-jumpbar}
+\end{figure}
+
+The following options are given to mark up text for the Jump Bar to find:
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.25\textwidth]{TeXnicle-Images/texnicle-markup.png}
+\caption{Jump Bar markup.}
+\label{fig:texnicle-markup}
+\end{figure}
+
+This is a powerful feature of \texnicle that can save you valuable time and energy hunting for particular lines.
 
 \section{Bookmarks and Code Folding}
 \label{reference.bookmarksfolding}
@@ -194,7 +211,7 @@ In a project, the image will automatically appear under the last folder in your 
 
 \subsection[Paste as Table]{\menu{Edit > Paste as Table}}
 \label{reference.edit.pastetab}
-Similarly to pasting as an image, \texnicle can convert delimited text copied, for example, from Microsoft Excel to a \LaTeX\ table by choosing \menu{Edit > Paste as Table} (keyboard shortcut \keys{\optkey + \cmdkey + V}). You will be asked to select the delimiting character. It is important to remember that while this feature correctly formats the table itself, it does not format the text. Any text formatting, such as correcting Unicode accents, replacing special characters, and editing punctuation, will need to be done by hand.
+Similarly to pasting as an image, \texnicle can convert copied Microsoft Excel\footnote{Martin: Does this apply to Apple Numbers, too? Or other spreadsheet programs? What about Microsoft Word/Apple Pages/other Word Processor table environments?} cells on the pasteboard as a \LaTeX\ table by choosing \menu{Edit > Paste as Table} (keyboard shortcut \keys{\optkey + \cmdkey + V}). You will be asked to select the delimiting character. It is important to remember that while this feature correctly formats the table itself, it does not format the text. Any text formatting, such as correcting Unicode accents, replacing special characters, and editing punctuation, will need to be done by hand.
 
 \noted{Choosing the ``tab'' delimiter will correctly paste the table from Apple Numbers and Microsoft Excel, but other programs and formats may require other delimiters. If your table doesn't paste correctly, try pasting with a different delimiter.}
 
@@ -210,7 +227,7 @@ A few other goodies are included in under \menu{Edit} that should be briefly men
 \label{reference.editortable}
 The \menu{Editor} menu also holds a few less obvious \texnicle features. This section will give a quick overview of their functions.
 
-\menu{Editor > Insert Table} will insert a blank |tabular| environment (contained within a |table| environment) with a desired number of columns and rows. Placeholders will be inserted in each cell to facilitate editing. An example table with two columns and three rows is shown in Figure \ref{fig:texnicle-inserttable}.
+\menu{Editor > Insert Table} will insert a blank a |tabular| environment (contained within a |table| environment) with a desired number of columns and rows. Placeholders will be inserted in each cell to facilitate editing. An example table with two columns and three rows is shown in Figure \ref{fig:texnicle-inserttable}.
 
 \begin{figure}[htbp]
 \centering
