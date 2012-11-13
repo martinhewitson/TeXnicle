@@ -1,0 +1,83 @@
+#!/bin/sh
+# 
+# This is an UpTeX engine for TeXnicle. 
+#
+# It runs platex the desired number of times, optionally running pbibtex after the first run.
+# It then runs dvipdfmx, (optional) followed by ps4pdf.
+# 
+# NOTE: The engine assumes UpTeX.app is installed in  /Applications.
+#
+# <support>nCompile,doBibtex,doPS2PDF</support>
+#
+#  UpTeX.engine
+#  TeXnicle
+
+if [ $# -lt 2 ]
+then
+  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex>)"
+  exit
+fi
+
+# Executable values
+ENGINE=/Applications/UpTeX.app/teTeX/bin/platex
+BIBTEX=/Applications/UpTeX.app/teTeX/bin/pbibtex
+DVIPS=/Applications/UpTeX.app/teTeX/bin/dvipdfmx
+PS2PDF=/Applications/UpTeX.app/teTeX/bin/ps4pdf
+
+# Process inputs.
+# TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
+# script and the working directory as the second input. Other options follow.
+mainfile=$1 
+outputDir=$2
+nCompile=$3
+doBibtex=$4
+doPS2PDF=$5
+
+echo "****************************"
+echo "*** Compiling $mainfile"
+echo "*** Output dir $outputDir"
+echo "*** Ncompile $nCompile"
+echo "*** Do bibtex $doBibtex"
+echo "****************************"
+
+# Go to the working directory
+cd "$outputDir"
+
+# Do the correct number of typesetting runs
+count=1
+while [ $count -le $nCompile ]
+do
+  echo " "
+  echo "***------------------------------------------------------------"
+  echo "*** Run $count..."
+  echo "***------------------------------------------------------------"
+  $ENGINE -file-line-error -interaction=nonstopmode "$mainfile"
+
+  # if this is after the first run, run bibtex if requested
+  if [ $count -eq 1 ]
+  then
+    if [ $doBibtex -eq 1 ]
+    then
+      echo "*** Running pbibtex..."
+      $BIBTEX "$mainfile"
+    fi
+  fi
+
+  count=$(( $count + 1 ))
+done
+
+# Run dvips
+echo "*** Creating DVI file from $mainfile..."
+$DVIPS "$mainfile"
+
+
+# Optionally do ps2pdf
+if [ $doPS2PDF -eq 1 ]
+then
+  echo "*** Converting ps to pdf..."
+  $PS2PDF "$mainfile.ps"
+fi
+
+echo "*** UpTeX.engine has completed."
+
+# END
