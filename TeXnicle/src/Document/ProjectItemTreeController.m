@@ -1043,7 +1043,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
   [self.managedObjectContext processPendingChanges];
   
-  NSLog(@"Updating %@ [%d]", [[node representedObject] valueForKey:@"name"], [[node representedObject] isManaged]);
+//  NSLog(@"Updating %@ [%d]", [[node representedObject] valueForKey:@"name"], [[node representedObject] isManaged]);
   if ([[node representedObject] isManaged]) {
     [[node representedObject] resetFilePath];
   }
