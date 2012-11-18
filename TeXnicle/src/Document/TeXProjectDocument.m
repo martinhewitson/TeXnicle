@@ -92,6 +92,9 @@
 @property (strong) TPFileMonitor *fileMonitor;
 @property (strong) TPTemplateEditor *templateEditor;
 
+@property (strong) OpenDocumentsManager *openDocuments;
+
+
 @property (strong) MHControlsTabBarController *controlsTabBarController;
 @property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
 @property (strong) MHInfoTabBarController *infoControlsTabBarController;
@@ -124,9 +127,12 @@
 @property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
 @property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
 @property (unsafe_unretained) IBOutlet TPOutlineView *projectOutlineView;
-@property (unsafe_unretained) IBOutlet OpenDocumentsManager *openDocuments;
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 @property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
+
+@property (unsafe_unretained) IBOutlet NSView *navButtonsBackground;
+@property (unsafe_unretained) IBOutlet PSMTabBarControl *psmTabBarControl;
+
 
 @end
 
@@ -290,7 +296,16 @@
   [self.texEditorViewController setPerformSyntaxCheck:YES];
   [self.texEditorViewController setupSyntaxChecker];
   
+  // setup open docs manager
+  self.openDocuments = [[OpenDocumentsManager alloc] init];
+  self.openDocuments.delegate = self;
+  self.openDocuments.navigationButtonsView = self.navButtonsBackground;
+  self.openDocuments.tabBar = self.psmTabBarControl;
+  self.openDocuments.tabBar.delegate = self.openDocuments;
+  self.openDocuments.tabView = self.tabbar;
+  self.projectItemTreeController.openDocumentsManager = self.openDocuments;
   self.openDocuments.texEditorViewController = self.texEditorViewController;
+  [self.openDocuments setup];
   [self.openDocuments disableTextView];
   
   // setup status view
