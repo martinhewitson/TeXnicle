@@ -47,19 +47,22 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 @interface OpenDocumentsManager : NSResponder {
 
 @private
-	
-	NSMutableArray *openDocuments;
-	NSMutableArray *standaloneWindows;
   
-  IBOutlet PSMTabBarControl *tabBar;
-  IBOutlet NSBox *tabBackground;
+  
 }
+
+@property (strong) NSMutableArray *openDocuments;
+@property (strong) NSMutableArray *standaloneWindows;
 
 @property (nonatomic, assign) BOOL isOpening;
 @property (unsafe_unretained) IBOutlet NSView *navigationButtonsView;
 @property (nonatomic, unsafe_unretained) FileEntity *currentDoc;
+
 @property (unsafe_unretained) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) IBOutlet PSMTabBarControl *tabBar;
+@property (unsafe_unretained) IBOutlet NSBox *tabBackground;
+
 @property (unsafe_unretained) TeXEditorViewController *texEditorViewController;
 @property (unsafe_unretained) TPImageViewerController *imageViewerController;
 @property (unsafe_unretained) NSView *imageViewContainer;
@@ -88,8 +91,6 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 - (void) setCursorAndScrollPositionForCurrentDoc;
 - (void) saveCursorAndScrollPosition;
 - (void) commitStatus;
-
-- (NSArray*)standaloneWindows;
 
 - (void) tearDown;
 
