@@ -50,39 +50,11 @@ extern NSString * const OutlineViewNodeType;
 @interface ProjectItemTreeController : NSTreeController <NSOutlineViewDataSource, NSOutlineViewDelegate> {
 
 @private
-	IBOutlet TPOutlineView *outlineView;
-	IBOutlet OpenDocumentsManager *openDocumentsManager;
-	
-	// Add existing file
-	IBOutlet NSWindow *addExistingFileSheet;
-	IBOutlet NSButton *copyExistingFileCheckbox;
-	IBOutlet NSTextField *copyFileLabel;
-	IBOutlet NSTextField *toFolderLabel;
-	
-	// Add existing files
-	IBOutlet NSWindow *addExistingFilesSheet;
-	IBOutlet NSButton *copyExistingFilesCheckbox;
-	IBOutlet NSTextField *destinationFolderLabel;
-	NSMutableArray *filesToAdd;
-	
-	FolderEntity *selectedFolder;
-	
-	// Add existing folder
-	IBOutlet NSWindow *addExistingFolderSheet;
-	IBOutlet NSTextField *folderToImportLabel;
-	IBOutlet NSTextField *dstFolderLabel;
-	IBOutlet NSButton *copyExistingFolderCheckbox;
-	IBOutlet NSButton *includeTeXFilesCheckbox;
-	IBOutlet NSButton *includeAllFilesCheckbox;
-	IBOutlet NSButton *includeRecursivelyCheckbox;
-	
-	IBOutlet NSWindow *addingFilesSheet;
-	IBOutlet NSTextField *addingFileLabel;
-	IBOutlet NSTextField *filesAddedCountLabel;
-	IBOutlet NSButton *finishedAddingFilesBtn;
 	int recurseCount;
 	int filesAddedCounter;
 }
+
+@property (strong) OpenDocumentsManager *openDocumentsManager;
 
 @property (readwrite, assign) BOOL isDeleting;
 @property (assign) BOOL dragEnabled;

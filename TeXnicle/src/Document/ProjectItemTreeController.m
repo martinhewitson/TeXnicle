@@ -67,8 +67,45 @@
 	}
 }
 
+
+
+
+
 @end
 
+@interface ProjectItemTreeController ()
+
+@property (strong) NSMutableArray *filesToAdd;
+@property (strong) FolderEntity *selectedFolder;
+
+@property (assign) IBOutlet TPOutlineView *outlineView;
+
+// Add existing file
+@property (assign) IBOutlet NSWindow *addExistingFileSheet;
+@property (assign) IBOutlet NSButton *doCopyExistingFileCheckbox;
+@property (assign) IBOutlet NSTextField *doCopyFileLabel;
+@property (assign) IBOutlet NSTextField *toFolderLabel;
+
+// Add existing files
+@property (assign) IBOutlet NSWindow *addExistingFilesSheet;
+@property (assign) IBOutlet NSButton *doCopyExistingFilesCheckbox;
+@property (assign) IBOutlet NSTextField *destinationFolderLabel;
+
+// Add existing folder
+@property (assign) IBOutlet NSWindow *addExistingFolderSheet;
+@property (assign) IBOutlet NSTextField *folderToImportLabel;
+@property (assign) IBOutlet NSTextField *dstFolderLabel;
+@property (assign) IBOutlet NSButton *doCopyExistingFolderCheckbox;
+@property (assign) IBOutlet NSButton *includeTeXFilesCheckbox;
+@property (assign) IBOutlet NSButton *includeAllFilesCheckbox;
+@property (assign) IBOutlet NSButton *includeRecursivelyCheckbox;
+
+@property (assign) IBOutlet NSWindow *addingFilesSheet;
+@property (assign) IBOutlet NSTextField *addingFileLabel;
+@property (assign) IBOutlet NSTextField *filesAddedCountLabel;
+@property (assign) IBOutlet NSButton *finishedAddingFilesBtn;
+
+@end
 
 // Declare a string constant for the drag type - to be used when writing and retrieving pasteboard data...
 
