@@ -128,7 +128,38 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
   [self unbind:@"managedObjectContext"];
   self.managedObjectContext = nil;
+  self.openDocumentsManager = nil;
   self.document = nil;
+  
+  self.filesToAdd = nil;
+  self.selectedFolder = nil;
+  
+  self.outlineView = nil;
+  
+  // Add existing file
+  self.addExistingFileSheet = nil;
+  self.doCopyExistingFileCheckbox = nil;
+  self.doCopyFileLabel = nil;
+  self.toFolderLabel = nil;
+  
+  // Add existing files
+  self.addExistingFilesSheet = nil;
+  self.doCopyExistingFilesCheckbox = nil;
+  self.destinationFolderLabel = nil;
+  
+  // Add existing folder
+  self.addExistingFolderSheet = nil;
+  self.dstFolderLabel = nil;
+  self.doCopyExistingFolderCheckbox = nil;
+  self.includeTeXFilesCheckbox = nil;
+  self.includeAllFilesCheckbox = nil;
+  self.includeRecursivelyCheckbox = nil;
+  
+  self.addingFilesSheet = nil;
+  self.addingFileLabel = nil;
+  self.filesAddedCountLabel = nil;
+  self.finishedAddingFilesBtn = nil;
+  
 }
 
 - (void)updateSortOrder
