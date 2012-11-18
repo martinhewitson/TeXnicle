@@ -92,6 +92,7 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 - (void) saveCursorAndScrollPosition;
 - (void) commitStatus;
 
+- (void) setup;
 - (void) tearDown;
 
 @end
