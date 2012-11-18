@@ -5,7 +5,7 @@
     <databaseInfo>
         <version>134481920</version>
         <UUID>CFFBC0CF-48C3-471B-8105-5C5610EE2D54</UUID>
-        <nextObjectID>140</nextObjectID>
+        <nextObjectID>141</nextObjectID>
         <metadata>
             <plist version="1.0">
                 <dict>
@@ -72,7 +72,7 @@
     <object type="PROJECT" id="z102">
         <attribute name="type" type="string">PDFLaTeX</attribute>
         <attribute name="name" type="string">Texnicle-User-Manual</attribute>
-        <attribute name="folder" type="string">/Users/briancansler/Documents/LaTeX/TeXnicle User Manual</attribute>
+        <attribute name="folder" type="string">/Users/hewitson/working/software/cocoa/mac/TeXnicle/TeXnicle User Manual</attribute>
         <relationship name="mainfile" type="1/1" destination="FILE" idrefs="z130"></relationship>
         <relationship name="selected" type="1/1" destination="FILE" idrefs="z121"></relationship>
         <relationship name="settings" type="1/1" destination="SETTINGS" idrefs="z103"></relationship>
@@ -90,23 +90,23 @@
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="UISETTINGS" id="z104">
-        <attribute name="pdfviewscrollrect" type="string">{{0, 0}, {0, 0}}</attribute>
-        <attribute name="selectedcontrolstab" type="int16">0</attribute>
+        <attribute name="pdfviewscrollrect" type="string">{{0, 6175}, {790, 906}}</attribute>
+        <attribute name="selectedcontrolstab" type="int16">3</attribute>
         <attribute name="maxoutlinedepth" type="int16">7</attribute>
-        <attribute name="editorwidth" type="float">1189</attribute>
-        <attribute name="controlswidth" type="float">249</attribute>
+        <attribute name="editorwidth" type="float">844</attribute>
+        <attribute name="controlswidth" type="float">267</attribute>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
     </object>
     <object type="FILE" id="z105">
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.00183200836181640625</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.00182998180389404297</attribute>
+        <attribute name="fileloaddate" type="date">374926165.04923200607299804688</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">14</attribute>
-        <attribute name="name" type="string">texnicle-nav-projsettings</attribute>
+        <attribute name="sortindex" type="int32">18</attribute>
+        <attribute name="name" type="string">texnicle-nav-projsettings.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-projsettings.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-projsettings.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -117,12 +117,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.04371601343154907227</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.04371398687362670898</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06542497873306274414</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">31</attribute>
-        <attribute name="name" type="string">texnicle-inserttable</attribute>
+        <attribute name="sortindex" type="int32">35</attribute>
+        <attribute name="name" type="string">texnicle-inserttable.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-inserttable.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-inserttable.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -133,12 +133,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.00629299879074096680</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.00629097223281860352</attribute>
+        <attribute name="fileloaddate" type="date">374926165.07126700878143310547</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">6</attribute>
-        <attribute name="name" type="string">texnicle-console</attribute>
+        <attribute name="sortindex" type="int32">10</attribute>
+        <attribute name="name" type="string">texnicle-console.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-console.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-console.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -149,12 +149,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.99781101942062377930</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.99780899286270141602</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06853699684143066406</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">18</attribute>
-        <attribute name="name" type="string">texnicle-nav-projfind</attribute>
+        <attribute name="sortindex" type="int32">22</attribute>
+        <attribute name="name" type="string">texnicle-nav-projfind.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-projfind.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-projfind.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -165,12 +165,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.02964502573013305664</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.02964299917221069336</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05569797754287719727</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">21</attribute>
-        <attribute name="name" type="string">texnicle-customcliptag</attribute>
+        <attribute name="sortindex" type="int32">25</attribute>
+        <attribute name="name" type="string">texnicle-customcliptag.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-customcliptag.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-customcliptag.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -181,12 +181,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.03994202613830566406</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.03993999958038330078</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06335300207138061523</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">8</attribute>
-        <attribute name="name" type="string">texnicle-codefold-nomatch</attribute>
+        <attribute name="sortindex" type="int32">12</attribute>
+        <attribute name="name" type="string">texnicle-codefold-nomatch.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-codefold-nomatch.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-codefold-nomatch.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -197,12 +197,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.99973297119140625000</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.99973100423812866211</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05898702144622802734</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">15</attribute>
-        <attribute name="name" type="string">texnicle-nav-info</attribute>
+        <attribute name="sortindex" type="int32">19</attribute>
+        <attribute name="name" type="string">texnicle-nav-info.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-info.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-info.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -211,14 +211,14 @@
     </object>
     <object type="TEXFILE" id="z112">
         <attribute name="wasopen" type="bool">0</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {1128, 387}}</attribute>
-        <attribute name="lasteditdate" type="date">373775410.97552800178527832031</attribute>
+        <attribute name="visiblerect" type="string">{{0, 268}, {467, 644}}</attribute>
+        <attribute name="lasteditdate" type="date">374926180.47892600297927856445</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.70719701051712036133</attribute>
+        <attribute name="fileloaddate" type="date">374926760.70827198028564453125</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{287, 0}</attribute>
-        <attribute name="sortindex" type="int32">32</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual-IntroRequirements</attribute>
+        <attribute name="cursor" type="string">{1961, 0}</attribute>
+        <attribute name="sortindex" type="int32">2</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual-IntroRequirements.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual-IntroRequirements.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -231,12 +231,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.02202999591827392578</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.02202802896499633789</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05124497413635253906</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">26</attribute>
-        <attribute name="name" type="string">texnicle-clippingslibrary</attribute>
+        <attribute name="sortindex" type="int32">30</attribute>
+        <attribute name="name" type="string">texnicle-clippingslibrary.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-clippingslibrary.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-clippingslibrary.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -247,12 +247,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98438000679016113281</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98437798023223876953</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05445802211761474609</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">10</attribute>
-        <attribute name="name" type="string">texnicle-toolbar</attribute>
+        <attribute name="sortindex" type="int32">14</attribute>
+        <attribute name="name" type="string">texnicle-toolbar.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-toolbar.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-toolbar.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -263,12 +263,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.02490502595901489258</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.02490299940109252930</attribute>
+        <attribute name="fileloaddate" type="date">374926165.04844999313354492188</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">12</attribute>
-        <attribute name="name" type="string">texnicle-validclip</attribute>
+        <attribute name="sortindex" type="int32">16</attribute>
+        <attribute name="name" type="string">texnicle-validclip.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-validclip.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-validclip.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -279,12 +279,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.03228497505187988281</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.03228300809860229492</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05383098125457763672</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">30</attribute>
-        <attribute name="name" type="string">texnicle-bookmarks</attribute>
+        <attribute name="sortindex" type="int32">34</attribute>
+        <attribute name="name" type="string">texnicle-bookmarks.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-bookmarks.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-bookmarks.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -293,14 +293,14 @@
     </object>
     <object type="TEXFILE" id="z117">
         <attribute name="wasopen" type="bool">1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 1190}, {1128, 387}}</attribute>
+        <attribute name="visiblerect" type="string">{{0, 2614}, {798, 644}}</attribute>
         <attribute name="lasteditdate" type="date">373776381.46130299568176269531</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.70993101596832275391</attribute>
+        <attribute name="fileloaddate" type="date">374926760.71129900217056274414</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{3800, 0}</attribute>
-        <attribute name="sortindex" type="int32">33</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual-UserGuide</attribute>
+        <attribute name="cursor" type="string">{9184, 16}</attribute>
+        <attribute name="sortindex" type="int32">3</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual-UserGuide.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual-UserGuide.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -313,12 +313,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98965698480606079102</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98965501785278320312</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05985999107360839844</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">25</attribute>
-        <attribute name="name" type="string">texnicle-nav-projecttree</attribute>
+        <attribute name="sortindex" type="int32">29</attribute>
+        <attribute name="name" type="string">texnicle-nav-projecttree.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-projecttree.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-projecttree.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -329,12 +329,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.03730702400207519531</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.03730499744415283203</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06648701429367065430</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">9</attribute>
-        <attribute name="name" type="string">texnicle-codefold-closed</attribute>
+        <attribute name="sortindex" type="int32">13</attribute>
+        <attribute name="name" type="string">texnicle-codefold-closed.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-codefold-closed.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-codefold-closed.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -345,12 +345,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.99181002378463745117</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.99180799722671508789</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05647099018096923828</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">19</attribute>
-        <attribute name="name" type="string">texnicle-nav-symbolpalette</attribute>
+        <attribute name="sortindex" type="int32">23</attribute>
+        <attribute name="name" type="string">texnicle-nav-symbolpalette.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-symbolpalette.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-symbolpalette.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -359,14 +359,14 @@
     </object>
     <object type="TEXFILE" id="z121">
         <attribute name="wasopen" type="bool">2</attribute>
-        <attribute name="visiblerect" type="string">{{0, 4146}, {1116, 387}}</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {786, 644}}</attribute>
         <attribute name="lasteditdate" type="date">373776598.15889900922775268555</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.71330899000167846680</attribute>
+        <attribute name="fileloaddate" type="date">374926760.71554499864578247070</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{16742, 0}</attribute>
-        <attribute name="sortindex" type="int32">34</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual-Reference</attribute>
+        <attribute name="cursor" type="string">{0, 0}</attribute>
+        <attribute name="sortindex" type="int32">4</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual-Reference.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual-Reference.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -379,12 +379,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98105400800704956055</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98105198144912719727</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05819600820541381836</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">13</attribute>
-        <attribute name="name" type="string">texnicle-welcome</attribute>
+        <attribute name="sortindex" type="int32">17</attribute>
+        <attribute name="name" type="string">texnicle-welcome.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-welcome.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-welcome.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -395,12 +395,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.00917398929595947266</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.00917202234268188477</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05721902847290039062</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">23</attribute>
-        <attribute name="name" type="string">texnicle-newproject</attribute>
+        <attribute name="sortindex" type="int32">27</attribute>
+        <attribute name="name" type="string">texnicle-newproject.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-newproject.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-newproject.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -411,12 +411,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98278099298477172852</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98277902603149414062</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06754601001739501953</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">11</attribute>
-        <attribute name="name" type="string">texnicle-window</attribute>
+        <attribute name="sortindex" type="int32">15</attribute>
+        <attribute name="name" type="string">texnicle-window.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-window.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-window.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -427,12 +427,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98803997039794921875</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98803901672363281250</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05508500337600708008</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">17</attribute>
-        <attribute name="name" type="string">texnicle-navalone</attribute>
+        <attribute name="sortindex" type="int32">21</attribute>
+        <attribute name="name" type="string">texnicle-navalone.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-navalone.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-navalone.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -443,12 +443,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.99580800533294677734</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.99580597877502441406</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06444102525711059570</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">29</attribute>
-        <attribute name="name" type="string">texnicle-nav-docoutline</attribute>
+        <attribute name="sortindex" type="int32">33</attribute>
+        <attribute name="name" type="string">texnicle-nav-docoutline.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-docoutline.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-docoutline.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -459,12 +459,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.00395101308822631836</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.00394898653030395508</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05020397901535034180</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">16</attribute>
-        <attribute name="name" type="string">texnicle-integratedpdf</attribute>
+        <attribute name="sortindex" type="int32">20</attribute>
+        <attribute name="name" type="string">texnicle-integratedpdf.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-integratedpdf.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-integratedpdf.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -472,23 +472,24 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="FOLDER" id="z128">
-        <attribute name="sortindex" type="int32">2</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images</attribute>
+        <attribute name="sortindex" type="int32">6</attribute>
         <attribute name="name" type="string">TeXnicle-Images</attribute>
-        <attribute name="isexpanded" type="bool">1</attribute>
+        <attribute name="isexpanded" type="bool">0</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
-        <relationship name="children" type="0/0" destination="PROJECTITEM" idrefs="z107 z138 z139 z110 z119 z114 z124 z115 z122 z105 z111 z127 z125 z108 z120 z135 z109 z132 z123 z137 z118 z113 z140 z129 z136 z134 z126 z116 z106"></relationship>
+        <relationship name="children" type="0/0" destination="PROJECTITEM" idrefs="z115 z105 z127 z113 z129 z134 z139 z116 z114 z125 z109 z120 z123 z122 z111 z118 z140 z136 z138 z110 z126 z106 z119 z124 z108 z132 z135 z137 z107"></relationship>
     </object>
     <object type="FILE" id="z129">
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.98658001422882080078</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.98657798767089843750</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05188900232315063477</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">27</attribute>
-        <attribute name="name" type="string">texnicle-navproj</attribute>
+        <attribute name="sortindex" type="int32">31</attribute>
+        <attribute name="name" type="string">texnicle-navproj.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-navproj.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-navproj.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -496,15 +497,15 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z130">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {1104, 387}}</attribute>
+        <attribute name="wasopen" type="bool">3</attribute>
+        <attribute name="visiblerect" type="string">{{5, 268}, {789, 644}}</attribute>
         <attribute name="lasteditdate" type="date">373775410.96504402160644531250</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.69442301988601684570</attribute>
+        <attribute name="fileloaddate" type="date">374926760.70472300052642822266</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{287, 0}</attribute>
+        <attribute name="cursor" type="string">{1635, 30}</attribute>
         <attribute name="sortindex" type="int32">0</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -514,15 +515,15 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z131">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {1128, 387}}</attribute>
+        <attribute name="wasopen" type="bool">5</attribute>
+        <attribute name="visiblerect" type="string">{{0, 918}, {802, 644}}</attribute>
         <attribute name="lasteditdate" type="date">373775917.98783200979232788086</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.71471202373504638672</attribute>
+        <attribute name="fileloaddate" type="date">374926760.71768897771835327148</attribute>
         <attribute name="extension" type="string">tex</attribute>
-        <attribute name="cursor" type="string">{492, 0}</attribute>
-        <attribute name="sortindex" type="int32">35</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual-Apx-KeyboardShortcuts</attribute>
+        <attribute name="cursor" type="string">{4001, 49}</attribute>
+        <attribute name="sortindex" type="int32">5</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual-Apx-KeyboardShortcuts.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual-Apx-KeyboardShortcuts.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -535,12 +536,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.03494501113891601562</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.03494298458099365234</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06937897205352783203</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">22</attribute>
-        <attribute name="name" type="string">texnicle-codefold-open</attribute>
+        <attribute name="sortindex" type="int32">26</attribute>
+        <attribute name="name" type="string">texnicle-codefold-open.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-codefold-open.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-codefold-open.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -548,15 +549,15 @@
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
     </object>
     <object type="TEXFILE" id="z133">
-        <attribute name="wasopen" type="bool">-1</attribute>
-        <attribute name="visiblerect" type="string">{{0, 0}, {1128, 387}}</attribute>
+        <attribute name="wasopen" type="bool">4</attribute>
+        <attribute name="visiblerect" type="string">{{0, 0}, {789, 644}}</attribute>
         <attribute name="lasteditdate" type="date">373775410.96887201070785522461</attribute>
         <attribute name="istext" type="bool">1</attribute>
-        <attribute name="fileloaddate" type="date">373776602.69586598873138427734</attribute>
+        <attribute name="fileloaddate" type="date">374926760.70627301931381225586</attribute>
         <attribute name="extension" type="string">tex</attribute>
         <attribute name="cursor" type="string">{287, 0}</attribute>
         <attribute name="sortindex" type="int32">1</attribute>
-        <attribute name="name" type="string">Texnicle-User-Manual-Titlepage</attribute>
+        <attribute name="name" type="string">Texnicle-User-Manual-Titlepage.tex</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
         <attribute name="filepath" type="string">./Texnicle-User-Manual-Titlepage.tex</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM"></relationship>
@@ -569,12 +570,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.97349601984024047852</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.97349399328231811523</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05252802371978759766</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">28</attribute>
-        <attribute name="name" type="string">texnicle-icon</attribute>
+        <attribute name="sortindex" type="int32">32</attribute>
+        <attribute name="name" type="string">texnicle-icon.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-icon.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-icon.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -585,12 +586,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.01924598217010498047</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.01924401521682739258</attribute>
+        <attribute name="fileloaddate" type="date">374926165.07003098726272583008</attribute>
         <attribute name="extension" type="string">jpg</attribute>
-        <attribute name="sortindex" type="int32">20</attribute>
-        <attribute name="name" type="string">texnicle-newtemplate</attribute>
+        <attribute name="sortindex" type="int32">24</attribute>
+        <attribute name="name" type="string">texnicle-newtemplate.jpg</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-newtemplate.jpg</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-newtemplate.jpg</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -601,12 +602,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775813.54758900403976440430</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775813.54758298397064208984</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06155699491500854492</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">5</attribute>
+        <attribute name="sortindex" type="int32">9</attribute>
         <attribute name="name" type="string">texnicle-customshortcut.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-customshortcut.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-customshortcut.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -617,12 +618,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775411.02720201015472412109</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775411.02719998359680175781</attribute>
+        <attribute name="fileloaddate" type="date">374926165.07064098119735717773</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">24</attribute>
-        <attribute name="name" type="string">texnicle-expandedben</attribute>
+        <attribute name="sortindex" type="int32">28</attribute>
+        <attribute name="name" type="string">texnicle-expandedben.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-expandedben.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-expandedben.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -633,12 +634,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373775410.99366700649261474609</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373775410.99366497993469238281</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06234401464462280273</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">7</attribute>
-        <attribute name="name" type="string">texnicle-nav-cliplib</attribute>
+        <attribute name="sortindex" type="int32">11</attribute>
+        <attribute name="name" type="string">texnicle-nav-cliplib.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-nav-cliplib.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-nav-cliplib.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -649,12 +650,12 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373776315.59280800819396972656</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373776315.59280502796173095703</attribute>
+        <attribute name="fileloaddate" type="date">374926165.05314201116561889648</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">3</attribute>
+        <attribute name="sortindex" type="int32">7</attribute>
         <attribute name="name" type="string">texnicle-markup.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-markup.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-markup.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
@@ -665,16 +666,22 @@
         <attribute name="wasopen" type="bool">-1</attribute>
         <attribute name="lasteditdate" type="date">373776315.58411598205566406250</attribute>
         <attribute name="istext" type="bool">0</attribute>
-        <attribute name="fileloaddate" type="date">373776315.58411097526550292969</attribute>
+        <attribute name="fileloaddate" type="date">374926165.06081998348236083984</attribute>
         <attribute name="extension" type="string">png</attribute>
-        <attribute name="sortindex" type="int32">4</attribute>
+        <attribute name="sortindex" type="int32">8</attribute>
         <attribute name="name" type="string">texnicle-jumpbar.png</attribute>
         <attribute name="isexpanded" type="bool">0</attribute>
-        <attribute name="filepath" type="string">./TeXnicle-Images/texnicle-jumpbar.png</attribute>
+        <attribute name="filepath" type="string">TeXnicle-Images/texnicle-jumpbar.png</attribute>
         <relationship name="parent" type="1/1" destination="PROJECTITEM" idrefs="z128"></relationship>
         <relationship name="project" type="1/1" destination="PROJECT" idrefs="z102"></relationship>
         <relationship name="mainfileofproject" type="1/1" destination="PROJECT"></relationship>
         <relationship name="children" type="0/0" destination="PROJECTITEM"></relationship>
         <relationship name="bookmarks" type="0/0" destination="BOOKMARK"></relationship>
+    </object>
+    <object type="BOOKMARK" id="z141">
+        <attribute name="text" type="string">\\end{figure}
+</attribute>
+        <attribute name="linenumber" type="int64">109</attribute>
+        <relationship name="parentfile" type="1/1" destination="FILE"></relationship>
     </object>
 </database>
