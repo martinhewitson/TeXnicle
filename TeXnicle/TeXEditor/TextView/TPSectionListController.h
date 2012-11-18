@@ -56,6 +56,7 @@
 - (void) addTitle;
 
 - (void) tearDown;
+- (void) setup;
 
 @end
 

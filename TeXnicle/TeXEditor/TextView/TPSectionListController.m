@@ -86,7 +86,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 }
 
 
-- (void) awakeFromNib
+- (void) setup
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self
