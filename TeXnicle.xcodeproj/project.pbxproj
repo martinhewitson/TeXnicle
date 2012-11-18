@@ -218,6 +218,7 @@
 		255A16F715B54733004290CC /* TPNewCommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16F515B54733004290CC /* TPNewCommandsViewController.m */; };
 		255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255A16F615B54733004290CC /* TPNewCommandsViewController.xib */; };
 		255A16FB15B5474B004290CC /* TPCommandSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16FA15B5474B004290CC /* TPCommandSet.m */; };
+		255C559F1652347E00F77A50 /* UpTeX.engine in Resources */ = {isa = PBXBuildFile; fileRef = 255C559E1652347E00F77A50 /* UpTeX.engine */; };
 		255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB84813E56CB1007629C0 /* TPDescriptionView.m */; };
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
@@ -806,6 +807,8 @@
 		255A16F615B54733004290CC /* TPNewCommandsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPNewCommandsViewController.xib; sourceTree = "<group>"; };
 		255A16F915B5474B004290CC /* TPCommandSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCommandSet.h; sourceTree = "<group>"; };
 		255A16FA15B5474B004290CC /* TPCommandSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCommandSet.m; sourceTree = "<group>"; };
+		255C559E1652347E00F77A50 /* UpTeX.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = UpTeX.engine; sourceTree = "<group>"; };
+		255C55A1165236ED00F77A50 /* ProjectTreeTests.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ProjectTreeTests.rtf; sourceTree = "<group>"; };
 		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
 		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
 		255DB84B13E577BD007629C0 /* buildProject.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = buildProject.icns; sourceTree = "<group>"; };
@@ -1678,6 +1681,7 @@
 		2523C7E41405488B00A47297 /* EngineScripts */ = {
 			isa = PBXGroup;
 			children = (
+				255C559E1652347E00F77A50 /* UpTeX.engine */,
 				25F10D44150B66B200C00AA3 /* xelatex.engine */,
 				25BE010514BE1D38004FDDE7 /* Lilypond.engine */,
 				254FEEA7143ECEF4008B5B12 /* latexmk.engine */,
@@ -1870,6 +1874,7 @@
 				253312EE15B7086C00F9FD00 /* test.html */,
 				25AD5A0015BA6C4E00737610 /* profileConfig.php */,
 				25AD5A0115BA6C4E00737610 /* profileInfo.php */,
+				255C55A1165236ED00F77A50 /* ProjectTreeTests.rtf */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2631,6 +2636,7 @@
 				252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */,
 				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
+				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3067,7 +3073,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3090,7 +3096,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3115,7 +3121,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3146,7 +3152,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3181,7 +3187,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
@@ -3215,7 +3221,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
