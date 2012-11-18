@@ -99,7 +99,7 @@
   self.checker.delegate = nil;
   
   self.textView.delegate = nil;
-  [sectionListController deactivate];
+  [self.sectionListController deactivate];
   self.delegate = nil;
   
 }
@@ -116,6 +116,9 @@
   self.sectionListController = [[TPSectionListController alloc] initWithDelegate:self];
   self.sectionListController.popupMenu = self.sectionListPopup;
   self.sectionListController.textView = self.textView;
+  [self.markerButton setTarget:self.sectionListController];
+  [self.markerButton setAction:@selector(addMarkAction:)];
+  [self.sectionListController setup];
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self

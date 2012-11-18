@@ -35,7 +35,6 @@
 
 @interface TeXEditorViewController : NSViewController <SyntaxCheckerDelegate, TPSectionListControllerDelegate, TeXTextViewDelegate, NSTextStorageDelegate, NSTextViewDelegate> {
 @private
-  IBOutlet TPSectionListController *sectionListController;
   IBOutlet NSView *containerView;
   IBOutlet NSView *jumpBar;
   IBOutlet NSScrollView *scrollView;
