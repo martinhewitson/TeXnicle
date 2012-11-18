@@ -85,12 +85,12 @@
   
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   [formatter setDateStyle:NSDateFormatterNoStyle];
-  [formatter setTimeStyle:NSDateFormatterShortStyle];  
-  NSString *updateString = [NSString stringWithFormat:@"(updated: %@)", [formatter stringFromDate:self.lastCheck]];
-  str = [[NSMutableAttributedString alloc] initWithString:updateString];
-  [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
-  [str addAttribute:NSForegroundColorAttributeName value:detailsColor range:NSMakeRange(0, [str length])];
-  [att appendAttributedString:str];
+  [formatter setTimeStyle:NSDateFormatterShortStyle];
+//  NSString *updateString = [NSString stringWithFormat:@"(updated: %@)", [formatter stringFromDate:self.lastCheck]];
+//  str = [[NSMutableAttributedString alloc] initWithString:updateString];
+//  [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
+//  [str addAttribute:NSForegroundColorAttributeName value:detailsColor range:NSMakeRange(0, [str length])];
+//  [att appendAttributedString:str];
   
   // apply paragraph
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
