@@ -323,7 +323,7 @@
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{600, 600}</string>
 				<object class="NSView" key="NSWindowView" id="568628114">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSSplitView" id="634266348">
@@ -339,7 +339,6 @@
 											<int key="NSvFlags">18</int>
 											<string key="NSFrameSize">{235, 576}</string>
 											<reference key="NSSuperview" ref="282066192"/>
-											<reference key="NSWindow"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="529908717">
 													<string key="NSIdentifier">1</string>
@@ -664,7 +663,6 @@
 																<array class="NSMutableArray" key="NSSubviews"/>
 																<string key="NSFrame">{{0, 552}, {235, 25}}</string>
 																<reference key="NSSuperview" ref="348311776"/>
-																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="65869924"/>
 																<string key="NSClassName">NSView</string>
 															</object>
@@ -673,7 +671,6 @@
 																<int key="NSvFlags">18</int>
 																<string key="NSFrameSize">{235, 552}</string>
 																<reference key="NSSuperview" ref="348311776"/>
-																<reference key="NSWindow"/>
 																<string key="NSReuseIdentifierKey">_NS:9</string>
 																<array class="NSMutableArray" key="NSTabViewItems">
 																	<object class="NSTabViewItem" id="770206019">
@@ -709,7 +706,6 @@
 																			<int key="NSvFlags">256</int>
 																			<string key="NSFrameSize">{235, 552}</string>
 																			<reference key="NSSuperview" ref="65869924"/>
-																			<reference key="NSWindow"/>
 																			<reference key="NSNextKeyView" ref="1002247264"/>
 																		</object>
 																		<string key="NSLabel">Item 2</string>
@@ -759,7 +755,6 @@
 														</array>
 														<string key="NSFrameSize">{235, 576}</string>
 														<reference key="NSSuperview" ref="397531503"/>
-														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="630147445"/>
 													</object>
 													<string key="NSLabel">Item 5</string>
@@ -792,14 +787,12 @@
 											<array class="NSMutableArray" key="NSSubviews"/>
 											<string key="NSFrame">{{0, 576}, {235, 25}}</string>
 											<reference key="NSSuperview" ref="282066192"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="397531503"/>
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
 									<string key="NSFrameSize">{235, 600}</string>
 									<reference key="NSSuperview" ref="634266348"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="783282180"/>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -824,7 +817,6 @@
 																	<int key="NSvFlags">4370</int>
 																	<string key="NSFrameSize">{513, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="582867506"/>
 																	<string key="NSClassName">NSView</string>
 																</object>
@@ -833,7 +825,6 @@
 																	<int key="NSvFlags">4370</int>
 																	<string key="NSFrameSize">{513, 485}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="632442715"/>
 																	<string key="NSReuseIdentifierKey">_NS:499</string>
 																	<string key="NSClassName">NSView</string>
@@ -843,7 +834,6 @@
 																	<int key="NSvFlags">12</int>
 																	<string key="NSFrame">{{81, 248}, {333, 75}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
-																	<reference key="NSWindow"/>
 																	<array class="NSMutableArray" key="NSTabViewItems"/>
 																	<reference key="NSFont" ref="248647803"/>
 																	<int key="NSTvFlags">6</int>
@@ -859,7 +849,6 @@
 																			<int key="NSvFlags">268</int>
 																			<string key="NSFrame">{{30, 7}, {17, 17}}</string>
 																			<reference key="NSSuperview" ref="88865871"/>
-																			<reference key="NSWindow"/>
 																			<reference key="NSNextKeyView" ref="792010655"/>
 																			<string key="NSReuseIdentifierKey">_NS:9</string>
 																			<bool key="NSEnabled">YES</bool>
@@ -892,7 +881,6 @@
 																			<int key="NSvFlags">268</int>
 																			<string key="NSFrame">{{5, 7}, {17, 17}}</string>
 																			<reference key="NSSuperview" ref="88865871"/>
-																			<reference key="NSWindow"/>
 																			<reference key="NSNextKeyView" ref="269132885"/>
 																			<string key="NSReuseIdentifierKey">_NS:9</string>
 																			<bool key="NSEnabled">YES</bool>
@@ -923,7 +911,6 @@
 																	</array>
 																	<string key="NSFrame">{{-1, 483}, {57, 27}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="386051067"/>
 																	<string key="NSReuseIdentifierKey">_NS:9</string>
 																	<string key="NSClassName">TPTabbarMatchingBackground</string>
@@ -933,14 +920,12 @@
 																	<int key="NSvFlags">266</int>
 																	<string key="NSFrame">{{45, 483}, {468, 27}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
-																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="749074883"/>
 																	<string key="NSClassName">PSMTabBarControl</string>
 																</object>
 															</array>
 															<string key="NSFrameSize">{513, 509}</string>
 															<reference key="NSSuperview" ref="776577915"/>
-															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="88865871"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<string key="NSClassName">NSView</string>
@@ -948,7 +933,6 @@
 													</array>
 													<string key="NSFrameSize">{513, 509}</string>
 													<reference key="NSSuperview" ref="249746137"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="9263989"/>
 													<string key="NSReuseIdentifierKey">_NS:11</string>
 													<string key="NSClassName">NSView</string>
@@ -958,7 +942,6 @@
 													<int key="NSvFlags">256</int>
 													<string key="NSFrame">{{0, 510}, {513, 51}}</string>
 													<reference key="NSSuperview" ref="249746137"/>
-													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="748353080"/>
 													<string key="NSReuseIdentifierKey">_NS:13</string>
 													<string key="NSClassName">NSView</string>
@@ -966,7 +949,6 @@
 											</array>
 											<string key="NSFrame">{{0, 39}, {513, 561}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="776577915"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSDividerStyle">2</int>
@@ -977,7 +959,6 @@
 											<int key="NSvFlags">290</int>
 											<string key="NSFrame">{{0, -1}, {513, 40}}</string>
 											<reference key="NSSuperview" ref="1002247264"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="323224487"/>
 											<string key="NSReuseIdentifierKey">_NS:1192</string>
 											<string key="NSClassName">NSView</string>
@@ -985,7 +966,6 @@
 									</array>
 									<string key="NSFrame">{{236, 0}, {513, 600}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="249746137"/>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -998,21 +978,18 @@
 											<int key="NSvFlags">274</int>
 											<string key="NSFrame">{{0, -1}, {350, 602}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
-											<reference key="NSWindow"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>
 									</array>
 									<string key="NSFrame">{{750, 0}, {350, 600}}</string>
 									<reference key="NSSuperview" ref="634266348"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="913261726"/>
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
 							<string key="NSFrameSize">{1100, 600}</string>
 							<reference key="NSSuperview" ref="568628114"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="282066192"/>
 							<bool key="NSIsVertical">YES</bool>
 							<int key="NSDividerStyle">2</int>
@@ -1020,8 +997,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{1100, 600}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="634266348"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
@@ -1100,9 +1075,6 @@
 				<string key="NSTreeContentChildrenKey">children</string>
 				<string key="NSTreeContentLeafKey">isLeaf</string>
 			</object>
-			<object class="NSCustomObject" id="211197426">
-				<string key="NSClassName">OpenDocumentsManager</string>
-			</object>
 			<object class="NSUserDefaultsController" id="6986101">
 				<bool key="NSAppliesImmediately">YES</bool>
 			</object>
@@ -1120,7 +1092,7 @@
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{480, 270}</string>
 				<object class="NSView" key="NSWindowView" id="577414792">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSScrollView" id="276889435">
@@ -1155,7 +1127,6 @@
 											</set>
 											<string key="NSFrameSize">{480, 190}</string>
 											<reference key="NSSuperview" ref="293683291"/>
-											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="927452025"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="483813521">
 												<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1176,7 +1147,7 @@
 												<int key="NSTCFlags">1</int>
 											</object>
 											<object class="NSTextViewSharedData" key="NSSharedData">
-												<int key="NSFlags">67112839</int>
+												<int key="NSFlags">100667271</int>
 												<int key="NSTextCheckingTypes">0</int>
 												<nil key="NSMarkedAttributes"/>
 												<reference key="NSBackgroundColor" ref="370278139"/>
@@ -1217,7 +1188,6 @@
 									</array>
 									<string key="NSFrameSize">{480, 190}</string>
 									<reference key="NSSuperview" ref="276889435"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="915934809"/>
 									<reference key="NSDocView" ref="915934809"/>
 									<reference key="NSBGColor" ref="370278139"/>
@@ -1252,7 +1222,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{464, 0}, {16, 190}}</string>
 									<reference key="NSSuperview" ref="276889435"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="764462893"/>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<reference key="NSTarget" ref="276889435"/>
@@ -1265,7 +1234,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<int key="NSvFlags">256</int>
 									<string key="NSFrame">{{0, 174}, {480, 16}}</string>
 									<reference key="NSSuperview" ref="276889435"/>
-									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="703219780"/>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<int key="NSsFlags">1</int>
@@ -1277,7 +1245,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							</array>
 							<string key="NSFrame">{{0, 60}, {480, 190}}</string>
 							<reference key="NSSuperview" ref="577414792"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="293683291"/>
 							<int key="NSsFlags">133168</int>
 							<reference key="NSVScroller" ref="703219780"/>
@@ -1292,7 +1259,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<int key="NSvFlags">289</int>
 							<string key="NSFrame">{{393, 12}, {73, 32}}</string>
 							<reference key="NSSuperview" ref="577414792"/>
-							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="465178480">
 								<int key="NSCellFlags">67108864</int>
@@ -1311,8 +1277,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 					</array>
 					<string key="NSFrameSize">{480, 270}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="276889435"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
@@ -2306,14 +2270,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">openDocuments</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="211197426"/>
-					</object>
-					<int key="connectionID">100098</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">projectItemTreeController</string>
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="487383709"/>
@@ -2714,6 +2670,22 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">navButtonsBackground</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="88865871"/>
+					</object>
+					<int key="connectionID">101011</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">psmTabBarControl</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="582867506"/>
+					</object>
+					<int key="connectionID">101012</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="275939982"/>
 						<reference key="destination" ref="512844837"/>
@@ -2797,14 +2769,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<int key="connectionID">100472</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">copyExistingFileCheckbox</string>
-						<reference key="source" ref="487383709"/>
-						<reference key="destination" ref="243478927"/>
-					</object>
-					<int key="connectionID">100473</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">endAddExistingFileSheet:</string>
 						<reference key="source" ref="487383709"/>
@@ -2819,14 +2783,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="88646737"/>
 					</object>
 					<int key="connectionID">100475</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">copyFileLabel</string>
-						<reference key="source" ref="487383709"/>
-						<reference key="destination" ref="87791784"/>
-					</object>
-					<int key="connectionID">100476</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2851,14 +2807,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="672608030"/>
 					</object>
 					<int key="connectionID">100494</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">copyExistingFilesCheckbox</string>
-						<reference key="source" ref="487383709"/>
-						<reference key="destination" ref="856333948"/>
-					</object>
-					<int key="connectionID">100495</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2933,14 +2881,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<int key="connectionID">100530</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">copyExistingFolderCheckbox</string>
-						<reference key="source" ref="487383709"/>
-						<reference key="destination" ref="719884666"/>
-					</object>
-					<int key="connectionID">100534</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">endAddExistingFolderSheet:</string>
 						<reference key="source" ref="487383709"/>
@@ -2997,14 +2937,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<int key="connectionID">100575</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">openDocumentsManager</string>
-						<reference key="source" ref="487383709"/>
-						<reference key="destination" ref="211197426"/>
-					</object>
-					<int key="connectionID">100576</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
 						<reference key="source" ref="487383709"/>
@@ -3030,35 +2962,35 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">tabView</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="749074883"/>
+						<string key="label">doCopyExistingFilesCheckbox</string>
+						<reference key="source" ref="487383709"/>
+						<reference key="destination" ref="856333948"/>
 					</object>
-					<int key="connectionID">100118</int>
+					<int key="connectionID">101013</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">navigationButtonsView</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="88865871"/>
+						<string key="label">doCopyExistingFileCheckbox</string>
+						<reference key="source" ref="487383709"/>
+						<reference key="destination" ref="243478927"/>
 					</object>
-					<int key="connectionID">100921</int>
+					<int key="connectionID">101014</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">tabBar</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="582867506"/>
+						<string key="label">doCopyFileLabel</string>
+						<reference key="source" ref="487383709"/>
+						<reference key="destination" ref="87791784"/>
 					</object>
-					<int key="connectionID">100106</int>
+					<int key="connectionID">101015</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="211197426"/>
-						<reference key="destination" ref="512844837"/>
+						<string key="label">doCopyExistingFolderCheckbox</string>
+						<reference key="source" ref="487383709"/>
+						<reference key="destination" ref="719884666"/>
 					</object>
-					<int key="connectionID">100097</int>
+					<int key="connectionID">101016</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3067,14 +2999,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="749074883"/>
 					</object>
 					<int key="connectionID">100116</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="582867506"/>
-						<reference key="destination" ref="211197426"/>
-					</object>
-					<int key="connectionID">100119</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3169,11 +3093,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="object" ref="487383709"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Project Item Tree Controller</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">100096</int>
-						<reference key="object" ref="211197426"/>
-						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">100148</int>
@@ -4455,7 +4374,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				<string key="100064.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100065.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100086.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="100096.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100100.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100107.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="100110.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4662,7 +4580,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">101010</int>
+			<int key="maxID">101016</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4704,43 +4622,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MHToolbarBackgroundView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">OpenDocumentsManager</string>
-					<string key="superclassName">NSResponder</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="delegate">id</string>
-						<string key="navigationButtonsView">NSView</string>
-						<string key="tabBackground">NSBox</string>
-						<string key="tabBar">PSMTabBarControl</string>
-						<string key="tabView">NSTabView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="delegate">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="navigationButtonsView">
-							<string key="name">navigationButtonsView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tabBackground">
-							<string key="name">tabBackground</string>
-							<string key="candidateClassName">NSBox</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tabBar">
-							<string key="name">tabBar</string>
-							<string key="candidateClassName">PSMTabBarControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tabView">
-							<string key="name">tabView</string>
-							<string key="candidateClassName">NSTabView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/OpenDocumentsManager.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -4816,7 +4697,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="includeAllFilesCheckbox">NSButton</string>
 						<string key="includeRecursivelyCheckbox">NSButton</string>
 						<string key="includeTeXFilesCheckbox">NSButton</string>
-						<string key="openDocumentsManager">OpenDocumentsManager</string>
 						<string key="outlineView">TPOutlineView</string>
 						<string key="toFolderLabel">NSTextField</string>
 					</dictionary>
@@ -4892,10 +4772,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="includeTeXFilesCheckbox">
 							<string key="name">includeTeXFilesCheckbox</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="openDocumentsManager">
-							<string key="name">openDocumentsManager</string>
-							<string key="candidateClassName">OpenDocumentsManager</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineView">
 							<string key="name">outlineView</string>
@@ -4992,6 +4868,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
@@ -5003,7 +4880,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -5017,15 +4896,18 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -5037,6 +4919,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -5057,6 +4940,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -5103,8 +4990,16 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -5159,6 +5054,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -5169,6 +5068,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -5193,6 +5096,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -5239,6 +5146,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_editorSplitView">NSSplitView</string>
@@ -5268,11 +5179,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="leftView">NSView</string>
 						<string key="libraryContainerView">NSView</string>
 						<string key="mainWindow">NSWindow</string>
-						<string key="openDocuments">OpenDocumentsManager</string>
+						<string key="navButtonsBackground">NSView</string>
 						<string key="outlineViewContainer">NSView</string>
 						<string key="paletteContainverView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
 						<string key="projectOutlineView">TPOutlineView</string>
+						<string key="psmTabBarControl">PSMTabBarControl</string>
 						<string key="rightView">NSView</string>
 						<string key="spellCheckerContainerView">NSView</string>
 						<string key="splitview">NSSplitView</string>
@@ -5390,9 +5302,9 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">mainWindow</string>
 							<string key="candidateClassName">NSWindow</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="openDocuments">
-							<string key="name">openDocuments</string>
-							<string key="candidateClassName">OpenDocumentsManager</string>
+						<object class="IBToOneOutletInfo" key="navButtonsBackground">
+							<string key="name">navButtonsBackground</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="outlineViewContainer">
 							<string key="name">outlineViewContainer</string>
@@ -5409,6 +5321,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="projectOutlineView">
 							<string key="name">projectOutlineView</string>
 							<string key="candidateClassName">TPOutlineView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="psmTabBarControl">
+							<string key="name">psmTabBarControl</string>
+							<string key="candidateClassName">PSMTabBarControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightView">
 							<string key="name">rightView</string>
@@ -5448,21 +5364,17 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="className">TeXTextView</string>
 					<string key="superclassName">NSTextView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancelOperation:">id</string>
 						<string key="collapseAll:">id</string>
 						<string key="commentSelection:">id</string>
-						<string key="complete:">id</string>
 						<string key="completeStuff:">id</string>
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="insertInlineMath:">id</string>
-						<string key="insertTable:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
-						<string key="reformatRange:">NSRange</string>
 						<string key="selectParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
 						<string key="toggleCommentForParagraph:">id</string>
@@ -5476,20 +5388,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="zoomOut:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancelOperation:">
-							<string key="name">cancelOperation:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="collapseAll:">
 							<string key="name">collapseAll:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="commentSelection:">
 							<string key="name">commentSelection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="complete:">
-							<string key="name">complete:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="completeStuff:">
@@ -5512,10 +5416,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">insertInlineMath:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="insertTable:">
-							<string key="name">insertTable:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">
 							<string key="name">jumpToNextPlaceholder:</string>
 							<string key="candidateClassName">id</string>
@@ -5531,10 +5431,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBActionInfo" key="reformatParagraph:">
 							<string key="name">reformatParagraph:</string>
 							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="reformatRange:">
-							<string key="name">reformatRange:</string>
-							<string key="candidateClassName">NSRange</string>
 						</object>
 						<object class="IBActionInfo" key="selectParagraph:">
 							<string key="name">selectParagraph:</string>
