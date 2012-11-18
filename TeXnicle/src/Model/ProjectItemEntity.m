@@ -172,7 +172,7 @@
 
 - (void) resetFilePath
 {
-  NSLog(@"Resetting file path to %@", [self pathRelativeToProject]);
+//  NSLog(@"Resetting file path to %@", [self pathRelativeToProject]);
   self.filepath = [self pathRelativeToProject];
   
   // handle children
