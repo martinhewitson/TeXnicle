@@ -599,7 +599,7 @@
   }
 }
 
-- (void) cleanUp
+- (void) tearDown
 {
 //  NSLog(@"Clean up...");
   
@@ -723,7 +723,7 @@
 //  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
   _windowIsClosing = YES;
     
-  [self cleanUp];
+  [self tearDown];
   
   // see if we want to open the startup screen
 	NSWindow *window = [[self windowControllers][0] window];
