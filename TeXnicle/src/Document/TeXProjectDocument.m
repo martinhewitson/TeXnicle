@@ -253,7 +253,8 @@
   if (_didSetup)
     return;
   
-  ProjectEntity *project = [self project];
+  // force fetching the project
+  [self project];
   
 //  NSLog(@"setupDocument");
 
