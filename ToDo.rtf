@@ -2,7 +2,7 @@
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
 \f3\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
-}
+\red92\green38\blue153;}
 \paperw11900\paperh16840\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -14,8 +14,6 @@ To Do\
 \
 + Stand-alone documents could have bookmarks and save them in the xattr.\
   - also could save the selection point in the xattr\
-\
-+ Finish help\
 \
 + Arbitrary variable support in engine\
 	- engine should have a property 'variables' which is just an encoded data containing an array of EngineVariable objects\
@@ -44,14 +42,6 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \
 + ignore the "open console" during live update\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-
-\f0 \cf0 - new engine from J\'fcrgen\
-\pard\pardeftab720
-
-\f1 \cf0 \
-+ Split PDF viewer, split editor\
-\
 + Add support for:\
 	 \\input section.tex\
 \
@@ -74,8 +64,6 @@ Version 2.1\
 + Better parsing of typesetting output into error and warning objects. Add ability to jump to errors.\
 \
 + Add support for Asymptote ({\field{\*\fldinst{HYPERLINK "http://asymptote.sourceforge.net/"}}{\fldrslt http://asymptote.sourceforge.net}})\
-\
-+ Automatic sync between pdf and editor. Make a button and call synctex every N seconds.\
 \
 + Editor for shortcut keys.\
 \
@@ -121,21 +109,17 @@ Version 2.1\
 	- write test cases\
 	- would be better to have a Group entity and a Folder entity?\
 \
-+ Soft-wrap not persistant?\
 \
-\pard\pardeftab720
-
-\f3 \cf0 Just a quick, minor bug report: Suppose you are editing a file with a certain indent level, like an enumerate environment:\
+TO DO\
 \
-\\begin\{enumerate\}\
-\'a0\\item blah blah blahX\
-\\end\{enumerate\}\
+Move TeXTextView stuff to categories and unit test them\
 \
-and suppose the cursor is at the 'X' above. \'a0If you hit Enter twice, so as to insert a blank line between the current item and the start of the next item, the indent level is preserved only after hitting Enter once: the second typing of Enter causes the cursor to return to the far-left margin...
-\f0 \
+For example:\
+\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \CocoaLigature0 - (\cf5 NSRange\cf0 )indentRangeForLineAtIndex:(\cf5 NSInteger\cf0 )loc\CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 \
-\
 Version 2.0\
 -----------\
 \
