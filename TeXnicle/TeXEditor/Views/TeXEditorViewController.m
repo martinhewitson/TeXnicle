@@ -92,11 +92,14 @@
 //  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  [self.markerButton setAction:nil];
+  [self.markerButton setTarget:nil];
   [self.sectionListController tearDown];
   self.sectionListController = nil;
   
   [self stopSyntaxChecker];
   self.checker.delegate = nil;
+  self.checker = nil;
   
   self.textView.delegate = nil;
   [self.sectionListController deactivate];
