@@ -53,6 +53,11 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self setup];
 }
 
+- (void) dealloc
+{
+//  NSLog(@"Dealloc %@", self);
+}
+
 - (void) setup
 {
 	[self.tabBar setStyleNamed:@"TPMetal"];
