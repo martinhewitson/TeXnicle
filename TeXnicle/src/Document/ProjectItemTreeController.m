@@ -203,15 +203,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   self.dragEnabled = YES;
   
 	// Set the outline view to accept the custom drag type OutlineViewNodeType...
-	[outlineView registerForDraggedTypes:@[OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType]];
+	[self.outlineView registerForDraggedTypes:@[OutlineViewNodeType,TableViewNodeType,NSFilenamesPboardType]];
 	// apply our custom ImageAndTextCell for rendering the first column's cells
-	NSTableColumn *tableColumn = [outlineView tableColumnWithIdentifier:@"NameColumn"];
+	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
 	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:YES];
 	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
 	[tableColumn setDataCell:imageAndTextCell];
   
-	[outlineView setSortDescriptors:[self treeNodeSortDescriptors]];
+	[self.outlineView setSortDescriptors:[self treeNodeSortDescriptors]];
 
 	// make sure we have loaded all items before we try to observe them
 	NSError *error = nil;
@@ -220,14 +220,14 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		[NSApp presentError:error];
 		return;
 	}		
-	filesToAdd = [[NSMutableArray alloc] init];
+	self.filesToAdd = [[NSMutableArray alloc] init];
 	
 	[super awakeFromNib];
 }
 
 - (void) dealloc
 {
-  
+//  NSLog(@"Dealloc %@", self);
 }
 
 #pragma mark -
@@ -331,7 +331,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 // rename items
 - (void) renameItemAtRow:(NSInteger)row
 {
-	[outlineView editColumn:0 row:row withEvent:nil select:YES];
+	[self.outlineView editColumn:0 row:row withEvent:nil select:YES];
 }
 
 // Add a new folder to the project
@@ -373,7 +373,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		[newFolder setParent:parent];
     NSTreeNode *parentNode = [self treeNodeForObject:parent];
     // expand parent
-    [outlineView expandItem:parentNode];
+    [self.outlineView expandItem:parentNode];
 	}
   
   if (parent == nil) {
@@ -596,15 +596,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		dstfolderPath = [[self project] valueForKey:@"folder"];
 	}
 	
-	[folderToImportLabel setStringValue:path];
-	[dstFolderLabel setStringValue:dstfolderPath];
+	[self.folderToImportLabel setStringValue:path];
+	[self.dstFolderLabel setStringValue:dstfolderPath];
 	
 	//	[copyFileLabel setStringValue:path];
 	//	[toFolderLabel setStringValue:dstfolderPath];
 	
 	// prompt user to include files and folders recursively in to selected folder or project folder, or not
 	
-	[NSApp beginSheet:addExistingFolderSheet
+	[NSApp beginSheet:self.addExistingFolderSheet
 		 modalForWindow:[self.document windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
@@ -617,21 +617,21 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	// user clicked cancel
 	if ([sender tag] == 0) {
-		[NSApp endSheet:addExistingFolderSheet];
-		[addExistingFolderSheet orderOut:sender];
+		[NSApp endSheet:self.addExistingFolderSheet];
+		[self.addExistingFolderSheet orderOut:sender];
 		return;
 	}
 	
 	
 	// copy file, or not
-	BOOL copyFolder = [copyExistingFolderCheckbox state];
-	BOOL includeTeXFiles = [includeTeXFilesCheckbox state];
-	BOOL includeAllFiles = [includeAllFilesCheckbox state];
-	BOOL includeRecursively = [includeRecursivelyCheckbox state];
+	BOOL copyFolder = [self.doCopyExistingFolderCheckbox state];
+	BOOL includeTeXFiles = [self.includeTeXFilesCheckbox state];
+	BOOL includeAllFiles = [self.includeAllFilesCheckbox state];
+	BOOL includeRecursively = [self.includeRecursivelyCheckbox state];
 	
 	// add to project
-	NSString *srcfolder = [folderToImportLabel stringValue];
-	NSString *containerFolder = [dstFolderLabel stringValue];
+	NSString *srcfolder = [self.folderToImportLabel stringValue];
+	NSString *containerFolder = [self.dstFolderLabel stringValue];
 	NSString *dstfolder = nil;
 	
 	NSError *error = nil;
@@ -675,13 +675,13 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		dstfolder = srcfolder;
 	}
 	
-	[NSApp endSheet:addExistingFolderSheet];
-	[addExistingFolderSheet orderOut:sender];
+	[NSApp endSheet:self.addExistingFolderSheet];
+	[self.addExistingFolderSheet orderOut:sender];
 	
 	
-	[finishedAddingFilesBtn setEnabled:NO];
+	[self.finishedAddingFilesBtn setEnabled:NO];
 	
-	[NSApp beginSheet:addingFilesSheet
+	[NSApp beginSheet:self.addingFilesSheet
 		 modalForWindow:[self.document windowForSheet]
 			modalDelegate:self
 		 didEndSelector:NULL
@@ -695,15 +695,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	NSSound *systemSound = [NSSound soundNamed:@"Glass"];
 	[systemSound play];
-	[finishedAddingFilesBtn setEnabled:YES];
+	[self.finishedAddingFilesBtn setEnabled:YES];
 	
 	return;	
 }	
 
 - (IBAction) endAddingFilesSheet:(id)sender
 {
-	[NSApp endSheet:addingFilesSheet];
-	[addingFilesSheet orderOut:sender];
+	[NSApp endSheet:self.addingFilesSheet];
+	[self.addingFilesSheet orderOut:sender];
 	
 }
 
@@ -791,10 +791,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 			
 			if (added) {
 				filesAddedCounter++;
-				[addingFileLabel setStringValue:itempath];
-				[addingFileLabel display];
-				[filesAddedCountLabel setIntValue:filesAddedCounter];
-				[filesAddedCountLabel display];
+				[self.addingFileLabel setStringValue:itempath];
+				[self.addingFileLabel display];
+				[self.filesAddedCountLabel setIntValue:filesAddedCounter];
+				[self.filesAddedCountLabel display];
 			}			
 			
 			// now make sure we select the folder again otherwise the insertion doesn't work
@@ -823,7 +823,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 //                        NSFileTypeForHFSTypeCode( 'TEXT' ), @"tex", nil];
 //	[openPanel setAllowedFileTypes:fileTypes];
 	
-	selectedFolder = aFolder;
+	self.selectedFolder = aFolder;
 	
   [openPanel beginSheetModalForWindow:[self.document windowForSheet]
                     completionHandler:^(NSInteger result) {
@@ -836,16 +836,16 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
                       for (NSURL *url in [openPanel URLs]) {
                         [filenames addObject:[url path]];
                       }
-                      [self addFiles:filenames withContext:(__bridge void *)(selectedFolder)];
+                      [self addFiles:filenames withContext:(__bridge void *)(self.selectedFolder)];
                     }];
 }
 
 - (void) addFiles:(NSArray*)files withContext:(void*)context
 {
 	// get file name from user
-	[filesToAdd removeAllObjects];
-	[filesToAdd addObjectsFromArray:files];
-	if ([filesToAdd count] == 0) 
+	[self.filesToAdd removeAllObjects];
+	[self.filesToAdd addObjectsFromArray:files];
+	if ([self.filesToAdd count] == 0) 
 		return;
 	
 //	NSLog(@"Adding files: %@", filesToAdd);
@@ -880,17 +880,17 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 //	NSLog(@"Adding to folder:%@", folderPath);
 	
 	
-	if ([filesToAdd count]==1) {
+	if ([self.filesToAdd count]==1) {
 		
-		NSString *path = filesToAdd[0];
+		NSString *path = self.filesToAdd[0];
 		
 		
-		[copyFileLabel setStringValue:path];
-		[toFolderLabel setStringValue:folderPath];
+		[self.doCopyFileLabel setStringValue:path];
+		[self.toFolderLabel setStringValue:folderPath];
 		
 		// prompt user to copy file in to selected folder or project folder, or not
 //		NSLog(@"Starting sheet %@ on %@", addExistingFileSheet, self.document);
-		[NSApp beginSheet:addExistingFileSheet
+		[NSApp beginSheet:self.addExistingFileSheet
 			 modalForWindow:[self.document windowForSheet]
 				modalDelegate:self
 			 didEndSelector:NULL
@@ -900,9 +900,9 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	} else {
 		// Multiple files
 		
-		[destinationFolderLabel setStringValue:folderPath];
+		[self.destinationFolderLabel setStringValue:folderPath];
 		
-		[NSApp beginSheet:addExistingFilesSheet
+		[NSApp beginSheet:self.addExistingFilesSheet
 			 modalForWindow:[self.document windowForSheet]
 				modalDelegate:self
 			 didEndSelector:NULL
@@ -915,24 +915,24 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	// user clicked cancel
 	if ([sender tag] == 0) {
-		[NSApp endSheet:addExistingFilesSheet];
-		[addExistingFilesSheet orderOut:sender];
+		[NSApp endSheet:self.addExistingFilesSheet];
+		[self.addExistingFilesSheet orderOut:sender];
 		return;
 	}
 	
 	BOOL copyFile = NO;
-	if ([copyExistingFilesCheckbox state]==NSOnState) {
+	if ([self.doCopyExistingFilesCheckbox state]==NSOnState) {
 		copyFile = YES;
 	}
 	
 	NSIndexPath *selected = [self selectionIndexPath];
-	for (NSString *file in filesToAdd) {		
+	for (NSString *file in self.filesToAdd) {		
 		[self setSelectionIndexPath:selected];
 		[self addFileAtPath:file toFolder:nil copy:copyFile];
 	}
 	
-	[NSApp endSheet:addExistingFilesSheet];
-	[addExistingFilesSheet orderOut:sender];
+	[NSApp endSheet:self.addExistingFilesSheet];
+	[self.addExistingFilesSheet orderOut:sender];
 }
 
 
@@ -940,20 +940,20 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 	// user clicked cancel
 	if ([sender tag] == 0) {
-		[NSApp endSheet:addExistingFileSheet];
-		[addExistingFileSheet orderOut:sender];
+		[NSApp endSheet:self.addExistingFileSheet];
+		[self.addExistingFileSheet orderOut:sender];
 		return;
 	}
 	
 	// copy file, or not
-	BOOL copyFile = [copyExistingFileCheckbox state];
+	BOOL copyFile = [self.doCopyExistingFileCheckbox state];
 	
 	// add to project
-	NSString *filepath = [copyFileLabel stringValue];		
+	NSString *filepath = [self.doCopyFileLabel stringValue];		
 	[self addFileAtPath:filepath toFolder:nil copy:copyFile];
 		
-	[NSApp endSheet:addExistingFileSheet];
-	[addExistingFileSheet orderOut:sender];
+	[NSApp endSheet:self.addExistingFileSheet];
+	[self.addExistingFileSheet orderOut:sender];
 }	
 
 - (FileEntity*) addFileAtPath:(NSString*)aPath toFolder:(FolderEntity*)aFolder copy:(BOOL)copyFile
@@ -1172,7 +1172,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		
     
     // sync selection between tree controller and outline view    
-    [self setSelectionIndexPath:[NSIndexPath indexPathWithIndex:[[outlineView selectedRowIndexes] firstIndex]]];
+    [self setSelectionIndexPath:[NSIndexPath indexPathWithIndex:[[self.outlineView selectedRowIndexes] firstIndex]]];
 		
 	} else {
 		// do nothing
@@ -1275,7 +1275,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	// check if the file has edits
 	[self promptForSaveForItem:aFile];
 	// remove from document manager
-	[openDocumentsManager removeDocument:aFile];
+	[self.openDocumentsManager removeDocument:aFile];
 	// post message
 	[[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Removed %@", [aFile valueForKey:@"filepath"]]];
 }
