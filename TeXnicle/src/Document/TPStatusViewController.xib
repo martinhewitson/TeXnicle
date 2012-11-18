@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<int key="IBDocument.SystemTarget">1080</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2182</string>
+			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
+			<string>NSButton</string>
+			<string>NSButtonCell</string>
+			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSTextField</string>
 			<string>NSTextFieldCell</string>
-			<string>NSButtonCell</string>
-			<string>NSCustomObject</string>
-			<string>NSButton</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -46,14 +46,14 @@
 							<object class="NSTextField" id="137513999">
 								<reference key="NSNextResponder" ref="261901195"/>
 								<int key="NSvFlags">260</int>
-								<string key="NSFrame">{{7, 13}, {561, 14}}</string>
+								<string key="NSFrame">{{8, 13}, {537, 14}}</string>
 								<reference key="NSSuperview" ref="261901195"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="65875750"/>
 								<string key="NSReuseIdentifierKey">_NS:3944</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="123498061">
-									<int key="NSCellFlags">67239488</int>
+									<int key="NSCellFlags">67108928</int>
 									<int key="NSCellFlags2">272767488</int>
 									<string key="NSContents"/>
 									<object class="NSFont" key="NSSupport" id="26">
@@ -82,18 +82,18 @@
 										</object>
 									</object>
 								</object>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 							<object class="NSButton" id="65875750">
 								<reference key="NSNextResponder" ref="261901195"/>
 								<int key="NSvFlags">300</int>
-								<string key="NSFrame">{{573, 10}, {20, 19}}</string>
+								<string key="NSFrame">{{550, 10}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="261901195"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:687</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="1046532527">
-									<int key="NSCellFlags">67239424</int>
+									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">134217728</int>
 									<string key="NSContents"/>
 									<object class="NSFont" key="NSSupport">
@@ -103,7 +103,7 @@
 									</object>
 									<string key="NSCellIdentifier">_NS:687</string>
 									<reference key="NSControlView" ref="65875750"/>
-									<int key="NSButtonFlags">113524991</int>
+									<int key="NSButtonFlags">113524736</int>
 									<int key="NSButtonFlags2">109</int>
 									<object class="NSCustomResource" key="NSNormalImage">
 										<string key="NSClassName">NSImage</string>
@@ -114,9 +114,10 @@
 									<int key="NSPeriodicDelay">200</int>
 									<int key="NSPeriodicInterval">25</int>
 								</object>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{162, 0}, {603, 40}}</string>
+						<string key="NSFrame">{{185, 0}, {580, 40}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="137513999"/>
@@ -130,14 +131,13 @@
 							<object class="NSTextField" id="712037789">
 								<reference key="NSNextResponder" ref="766192095"/>
 								<int key="NSvFlags">258</int>
-								<string key="NSFrame">{{6, 13}, {150, 14}}</string>
+								<string key="NSFrame">{{6, 13}, {173, 14}}</string>
 								<reference key="NSSuperview" ref="766192095"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:3944</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="1031210540">
-									<int key="NSCellFlags">67239488</int>
+									<int key="NSCellFlags">67108928</int>
 									<int key="NSCellFlags2">272766976</int>
 									<string key="NSContents"/>
 									<reference key="NSSupport" ref="26"/>
@@ -147,9 +147,10 @@
 									<reference key="NSBackgroundColor" ref="513563429"/>
 									<reference key="NSTextColor" ref="871519786"/>
 								</object>
+								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{163, 40}</string>
+						<string key="NSFrameSize">{186, 40}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="712037789"/>
@@ -357,6 +358,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">TPStatusViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">revealFile:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">revealFile:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">revealFile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="editorStatusTextField">NSTextField</string>
 						<string key="filenameTextField">NSTextField</string>
