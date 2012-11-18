@@ -84,12 +84,24 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   self.delegate = nil;
+  
   self.tabView.delegate = nil;
+  self.tabView = nil;
+
+  self.imageViewerController = nil;
+  self.imageViewContainer = nil;
+  
   self.texEditorViewController = nil;
   self.currentDoc = nil;
+
   self.tabBar.delegate = nil;
   self.tabBar.partnerView = nil;
+  self.tabBar = nil;
+  
+  self.navigationButtonsView = nil;
+  
   
 }
 
