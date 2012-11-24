@@ -55,11 +55,11 @@
 		for (NSMutableDictionary *symbol in symbols) {
 			
 			NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[symbol valueForKey:@"Image"]];
-      //			NSLog(@"Loading image: %@", imagePath);
+      //NSLog(@"Loading image: %@", imagePath);
 			NSImage *image = [[NSImage alloc] initWithContentsOfFile:imagePath];
-      //      NSLog(@" ... %@", image);
+      //NSLog(@" ... %@", image);
 			if (!image) {
-        //        NSLog(@"... Generating image");
+        //NSLog(@"... Generating image");
 				image = [self generateImageForCode:[symbol valueForKey:@"Code"]
 																		atPath:imagePath
 																inMathMode:[[symbol valueForKey:@"mathMode"] boolValue]];
@@ -122,8 +122,8 @@
 	NSFileManager *fm = [NSFileManager defaultManager];
 	success = [fm copyItemAtPath:croppedPDF toPath:aPath error:&error];
 	if (success == NO) {
-		//NSLog(@"Failed to copy %@ to %@", croppedPDF, aPath);
-		[NSApp presentError:error];
+		NSLog(@"Failed to copy %@ to %@", croppedPDF, aPath);
+		//[NSApp presentError:error];
 		return nil;
 	}
 	

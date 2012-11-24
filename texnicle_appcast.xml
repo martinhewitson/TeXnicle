@@ -6,6 +6,29 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+    <!-- Version 2.0 RC1 -->
+		<item>
+      <title>Version 2.0 Release Candidate 1 (build 54)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0 Release Candidate 1</h2>
+        <ul>
+          <li>Improved paragraph selection and reformatting.</li>
+          <li>When building from template, the project file now gets the project name set by the user.</li>
+          <li>Tab will complete commands now, as well as enter.</li>
+          <li>Added UpTeX engine.</li>
+          <li>Various bug fixes.</li>
+        </ul>
+      ]]></description>
+      <pubDate>18th November 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2rc1.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="54"
+      length="19070305"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFGsbkE7z0PHamFxe+9W8LN6/0n4xAhUAkiABicg02c6r/tdbHcN45xvvSj0="
+      />
+    </item>
+    
     <!-- Version 2.0 beta 53 -->
 		<item>
       <title>Version 2.0 (beta 53)</title>
