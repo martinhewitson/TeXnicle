@@ -273,7 +273,7 @@
 - (NSArray*) childrenOfSection:(id)parent
 {
   NSMutableArray *children = [NSMutableArray array];
-  NSArray *sections = self.outlineBuilder.sections;
+  __strong NSArray *sections = self.outlineBuilder.sections;
   for (__strong TPSection *s in sections) {
     if (s.parent == parent) {
       [children addObject:s];
