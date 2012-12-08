@@ -55,13 +55,6 @@
 
 @property (strong) NSOperationQueue* aQueue;
 
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *correctButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *learnButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *ignoreButton;
-@property (unsafe_unretained) IBOutlet HHValidatedButton *forceCheckButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
 @property (unsafe_unretained) id<TPSpellCheckerListingDelegate> delegate;
 @property (strong) NSTimer *spellCheckTimer;
 @property (strong) NSMutableArray *checkedFiles;

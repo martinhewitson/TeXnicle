@@ -35,6 +35,14 @@
 
 @interface TPSpellCheckerListingViewController ()
 
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *correctButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *learnButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *ignoreButton;
+@property (unsafe_unretained) IBOutlet HHValidatedButton *forceCheckButton;
+@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
+
 @end
 
 @implementation TPSpellCheckerListingViewController
@@ -56,17 +64,24 @@
 - (void) tearDown
 {
   _cancelCheck = YES;
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
+  self.outlineView = nil;
+  self.progressIndicator = nil;
+  self.correctButton = nil;
+  self.revealButton = nil;
+  self.learnButton = nil;
+  self.ignoreButton = nil;
+  self.forceCheckButton = nil;
+
 //  NSLog(@"Tear down %@", self);
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self tearDownTimer];
   [self.checkedFiles removeAllObjects];
-  [self.outlineView reloadData];
   self.checkedFiles = nil;
   [self.aQueue cancelAllOperations];
-  self.outlineView.delegate = nil;
-  self.outlineView.dataSource = nil;
   self.delegate = nil;
 }
 
