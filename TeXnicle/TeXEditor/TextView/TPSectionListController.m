@@ -268,7 +268,9 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           if (arg == nil) {
             // just take the rest of the line
             NSRange typeRange = [returnResult rangeOfString:type];
-            arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+            if (typeRange.location != NSNotFound && typeRange.length > 0) {
+              arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+            }
           }
           
           type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
