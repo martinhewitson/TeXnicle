@@ -64,6 +64,12 @@
 - (void) tearDown
 {
 //  NSLog(@"Tear down %@", self);
+  
+  self.outlineView.dataSource = nil;
+  self.outlineView.delegate = nil;
+  self.outlineView = nil;
+  self.revealButton = nil;
+  
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];

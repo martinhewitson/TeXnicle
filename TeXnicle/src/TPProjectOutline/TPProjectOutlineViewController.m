@@ -23,11 +23,6 @@
 - (void) dealloc
 {
 //  NSLog(@"Dealloc %@", self);
-  [self.outlineBuilder performSelectorOnMainThread:@selector(stopTimer) withObject:nil waitUntilDone:YES];
-  self.outlineView.delegate = nil;
-  self.outlineView.dataSource = nil;
-  self.outlineView = nil;
-  self.delegate = nil;
 }
 
 - (id)initWithDelegate:(id<TPProjectOutlineDelegate>)aDelegate
@@ -44,15 +39,19 @@
 
 - (void) tearDown
 {
+  self.outlineView.delegate = nil;
+  self.outlineView.dataSource = nil;
+  self.outlineView = nil;
+  self.delegate = nil;
+  self.showDetailsButton = nil;
+  self.currentSection = nil;
+  
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   //  NSLog(@"Tear down %@", self);
   [self.view removeFromSuperview];
   self.delegate = nil;
   [self.outlineBuilder tearDown];
-  [self.outlineView reloadData];
-  self.outlineView.delegate = nil;
-  self.outlineView.dataSource = nil;
   self.outlineBuilder = nil;
 }
 

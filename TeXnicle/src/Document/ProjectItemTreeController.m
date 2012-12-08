@@ -134,6 +134,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   self.filesToAdd = nil;
   self.selectedFolder = nil;
   
+  self.outlineView.dataSource = nil;
+  self.outlineView.delegate = nil;
   self.outlineView = nil;
   
   // Add existing file
