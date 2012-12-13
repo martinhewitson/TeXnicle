@@ -108,6 +108,20 @@
 			<key>NSDocumentClass</key>
 			<string>TPProjectTemplateViewer</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>bib</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>TeXnicle_Doc</string>
+			<key>CFBundleTypeName</key>
+			<string>Bib Files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>ExternalTeXDoc</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>

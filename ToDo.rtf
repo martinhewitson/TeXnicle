@@ -2,7 +2,7 @@
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
 \f3\fnil\fcharset0 Monaco;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
-\red92\green38\blue153;}
+\red84\green2\blue2;\red92\green38\blue153;}
 \paperw11900\paperh16840\vieww19560\viewh17460\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -94,11 +94,24 @@ Version 2.1\
 \
 + Bookmarks on standalone editor\
 \
++ cmd-click on include/input statements to jump to those files (a la xcode)\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
++ highlight the current file in the project tree (draw with different color or underline?)\
+\
+\pard\pardeftab720
+\cf5 + After pressing cmd+R it would be convenient, that the pdf updates to the cursors's position\cf0 \
+\
+User Manual\
+-----------------\
+\
++ Describe cmd-click synctex stuff\
+\
+\
+\pard\pardeftab720
 
 \f0 \cf0 Bugs\
-----\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 ----\
 \
 \
 TO DO\
@@ -108,15 +121,15 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf5 NSRange\cf0 )indentRangeForLineAtIndex:(\cf5 NSInteger\cf0 )loc\CocoaLigature1 \
+\cf0 \CocoaLigature0 - (\cf6 NSRange\cf0 )indentRangeForLineAtIndex:(\cf6 NSInteger\cf0 )loc\CocoaLigature1 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 Version 2.0 RC2\
+Version 2.0 RC2\
 ---------------\
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
+\
 + Fixed a bug in the built-in symbol palette: the preview images for the lowercase and capital Xi had the same filename on disk\
+\
++ Fixed various other bugs\
 \
 \
 Version 2.0 RC1\
