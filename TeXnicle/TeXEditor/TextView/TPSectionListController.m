@@ -205,12 +205,12 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     return;
   }
   
-	if (!self.popupMenu) {
+	if (!_popupMenu) {
 //    NSLog(@"No popupMenu");
 		return;
   }
 	
-	if (!self.textView) {
+	if (!_textView) {
 //    NSLog(@"No textView");
 		return;
   }

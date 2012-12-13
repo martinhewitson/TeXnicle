@@ -644,6 +644,7 @@
   // clean up project item tree controller
   [self.projectItemTreeController tearDown];
   self.projectItemTreeController.project = nil;
+  self.project = nil;  
   
   // clear up open documents
   [self.openDocuments tearDown];

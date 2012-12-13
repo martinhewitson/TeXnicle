@@ -92,6 +92,13 @@
 //  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  self.delegate = nil;
+  
+  self.sectionListPopup = nil;
+  self.markerButton = nil;
+  self.errorPopup = nil;
+  self.unfoldButton = nil;
+  
   [self.markerButton setAction:nil];
   [self.markerButton setTarget:nil];
   [self.sectionListController tearDown];
@@ -103,7 +110,6 @@
   
   self.textView.delegate = nil;
   [self.sectionListController deactivate];
-  self.delegate = nil;
   
 }
 
@@ -257,7 +263,8 @@
 
 - (void)disableJumpBar
 {
-  [self.sectionListPopup setEnabled:NO]; 
+  [self.sectionListController deactivate];
+  [self.sectionListPopup setEnabled:NO];
   [self.markerButton setEnabled:NO];
   [self.unfoldButton setEnabled:NO];
 }
