@@ -2603,28 +2603,46 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 - (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
 {
 	NSString *str = [self.texEditorViewController.textView string];
-  return [str citations];
+  NSMutableArray *citations = [NSMutableArray array];
+  [citations addObjectsFromArray:[str citations]];
+  [citations addObjectsFromArray:[str citationsFromBibliographyIncludedFromPath:[[self fileURL] path]]];
+
+  return citations;
 }
 
 - (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
 {
   BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
-    
-  // just search for the first line of the source string, or up to the first ','
-  NSInteger index = 0;
-  NSString *source = entry.sourceString;
-  while (index < [source length]) {
-    unichar c = [source characterAtIndex:index];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
-        c == ',') {
-      source = [source substringToIndex:index];
-      break;
-    }
-    index++;
-  }
   
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+  // if this is a \bibliography{} line, we open the bib file assuming it to be in the path relative
+  // to this document
+  if ([entry.sourceString hasPrefix:@"\\bibliography{"]) {
+  
+    NSString *bibFileName = [entry.sourceString argument];
+    NSString *path = [[[[self fileURL] path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:bibFileName];
+    if (![[path pathExtension] isEqualToString:@"bib"]) {
+      path = [path stringByAppendingPathExtension:@"bib"];
+    }
+    
+    [[NSWorkspace sharedWorkspace] openFile:path];
+    
+  } else {
+    // just search for the first line of the source string, or up to the first ','
+    NSInteger index = 0;
+    NSString *source = entry.sourceString;
+    while (index < [source length]) {
+      unichar c = [source characterAtIndex:index];
+      if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+          c == ',') {
+        source = [source substringToIndex:index];
+        break;
+      }
+      index++;
+    }
+    
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+  }
 }
 
 #pragma mark -
