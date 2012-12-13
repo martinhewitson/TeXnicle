@@ -69,7 +69,9 @@
 {	
   //	NSLog(@"Closing window %@", [[NSDocumentController sharedDocumentController] documents]);
 	
+  [self.texEditorViewController tearDown];
   self.texEditorViewController.delegate = nil;
+  self.texEditorViewController = nil;
   
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
     //    NSLog(@"Showing startup...");

@@ -93,7 +93,9 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   self.delegate = nil;
-  
+  [self.sectionListController tearDown];
+  self.sectionListController = nil;
+    
   self.sectionListPopup = nil;
   self.markerButton = nil;
   self.errorPopup = nil;
@@ -101,15 +103,12 @@
   
   [self.markerButton setAction:nil];
   [self.markerButton setTarget:nil];
-  [self.sectionListController tearDown];
-  self.sectionListController = nil;
   
   [self stopSyntaxChecker];
   self.checker.delegate = nil;
   self.checker = nil;
   
   self.textView.delegate = nil;
-  [self.sectionListController deactivate];
   
 }
 
