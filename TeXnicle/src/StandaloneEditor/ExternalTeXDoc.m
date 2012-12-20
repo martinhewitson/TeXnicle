@@ -1958,6 +1958,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(NSNumber*)openConsole
 {
+  // if we are in live update, return no
+  if (_liveUpdate) {
+    return @NO;
+  }
+
   return [self.settings valueForKey:@"openConsole"];
 }
 
