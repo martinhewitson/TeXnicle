@@ -1,0 +1,52 @@
+#!/bin/sh
+# 
+# This is a latexmk engine for TeXnicle which uses xelatex. 
+#
+# It runs latexmk on the project main file.
+#
+#
+# <support></support>
+#
+#  xelatexmk.engine
+#  TeXnicle
+#
+# DO NOT EDIT THIS ENGINE. It will be overwritten each time TeXnicle starts up.
+#
+
+if [ $# -lt 2 ]
+then
+  echo "usage: <full-path-to-file> <working-directory> (<num compile> <do bibtex> <do ps2pdf>)"
+  exit
+fi
+
+# Executable values
+PATH=/usr/texbin:/usr/local/bin:$PATH
+ENGINE=latexmk
+
+# Process inputs.
+# TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
+# script and the working directory as the second input. Other options follow.
+mainfile=$1 
+outputDir=$2
+
+echo "****************************"
+echo "*** Compiling $mainfile"
+echo "*** Output dir $outputDir"
+
+echo "****************************"
+
+# Go to the working directory
+cd "$outputDir"
+
+#---------------------------
+# Put engine logic here
+
+$ENGINE -interaction=nonstopmode -xelatex -pdf "$mainfile"
+
+
+# Engine logic finished
+#---------------------------
+
+echo "*** xelatexmk.engine has completed."
+
+# END

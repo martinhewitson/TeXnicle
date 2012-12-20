@@ -55,6 +55,10 @@ The \keys{Typeset} button (or \keys{\cmdkey + R}) will run your chosen engine on
 
 The second part is the main editing window, located in the center. Fonts, colours, syntax highlighting, line break length, and much more can be changed under \menu{Preferences\ldots > General} and \menu{Preferences\ldots > Font \& Colors}. This is where you will write your document. In project windows, there is a bar of tabs above the main text window which shows all open documents in the project. Below the tab bar (if applicable) is a \menu{Jump to section\ldots} bar, which will allow you to jump to any section or bookmark in the open document quickly. This is called the Jump Bar and its features are detailed in section \ref{reference.jumpbar}. To the left of this bar is the syntax indicator; green indicates that there are no syntax errors in the open document, while red indicates there is at least one error. Clicking the indicator will display the line numbers, descriptions, and samples of the offenses. To edit what offenses the |chktex| engine looks for, look under \menu{Preferences\ldots > Typesetting > Syntax Checking}.
 
+\subsubsection{Synctex support}
+
+If you are typesetting with an engine which supports \texttt{synctex} (many of the built-in engines do), then you can jump from the location in the text editor to the location in the PDF viewer by doing \keys{\cmdkey+left mouse click} in the editor. Similarly, you can jump from the current PDF location to the position in the editor by doing \keys{\cmdkey+left mouse click} in the PDF viewer.
+
 \subsection{Navigators Pane}
 \begin{figure}[htbp]
 \begin{minipage}{0.5\textwidth}
