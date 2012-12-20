@@ -162,6 +162,7 @@
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
 		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
 		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
+		253776D5168382A000945573 /* xelatexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 253776D4168382A000945573 /* xelatexmk.engine */; };
 		253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */; };
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
@@ -720,6 +721,7 @@
 		253312E615B6FF3500F9FD00 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		253312ED15B7028000F9FD00 /* texnicle_appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = texnicle_appcast.xml; sourceTree = "<group>"; };
 		253312EE15B7086C00F9FD00 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		253776D4168382A000945573 /* xelatexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatexmk.engine; sourceTree = "<group>"; };
 		253A3AB51457D212007C4D8C /* MHMiniConsoleBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleBackground.h; sourceTree = "<group>"; };
 		253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMiniConsoleBackground.m; sourceTree = "<group>"; };
 		253A3AB91457D31C007C4D8C /* MHMiniConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleViewController.h; sourceTree = "<group>"; };
@@ -1681,6 +1683,7 @@
 		2523C7E41405488B00A47297 /* EngineScripts */ = {
 			isa = PBXGroup;
 			children = (
+				253776D4168382A000945573 /* xelatexmk.engine */,
 				255C559E1652347E00F77A50 /* UpTeX.engine */,
 				25F10D44150B66B200C00AA3 /* xelatex.engine */,
 				25BE010514BE1D38004FDDE7 /* Lilypond.engine */,
@@ -2637,6 +2640,7 @@
 				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
+				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
