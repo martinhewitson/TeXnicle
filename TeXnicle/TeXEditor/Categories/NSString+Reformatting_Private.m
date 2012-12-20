@@ -92,7 +92,7 @@
   BOOL stoppedOnBrace = NO;
   BOOL stoppedOnEmptyLine = NO;
   
-  while (pos >= 0) {
+  while (pos >= 0 && pos < [self length]) {
     
     unichar c = [self characterAtIndex:pos];
 //    NSLog(@"Checking [%c]", c);
