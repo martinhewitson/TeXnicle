@@ -5,6 +5,31 @@
 		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
+    
+    <!-- Version 2.0 RC2 -->
+		<item>
+      <title>Version 2.0 (build 55)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0</h2>
+        <p>
+        Finally, and just in time for the holidays, here is the final release of version 2.0 of TeXnicle. Work has already started on version 2.1, but there will be bug fix releases in the interim.
+        </p>
+        <ul>
+        <li>Added an xelatexmk engine.</li>
+        <li>The 'Open Console' engine setting is now ignored when in 'Live Update' mode.</li>
+        <li>Fixed a bug in the built-in symbol palette: the preview images for the lowercase and capital Xi had the same filename on disk.</li>
+        <li>Fixed various other bugs relating to stability.</li>
+        </ul>
+      ]]></description>
+      <pubDate>20th December 2012</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="55"
+      length="17967377"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFHcmzj9HvzxrzytbKc6ddzNbDZYoAhQgG6nFIxNRq6FBLmrxuL9dIh2h8Q=="
+      />
+    </item>
 
     <!-- Version 2.0 RC1 -->
 		<item>

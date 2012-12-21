@@ -376,7 +376,6 @@
 		25CC009314ECD02800E6CB6A /* FileEntity+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC009214ECD02800E6CB6A /* FileEntity+ProjectTemplate.m */; };
 		25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */; };
 		25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD0E9013995226004EB857 /* ConsoleWindow.m */; };
-		25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */ = {isa = PBXBuildFile; fileRef = 25CD0E9B139959D3004EB857 /* TeXnicle_Help */; };
 		25CED75814B744060091D55F /* TPSupportedFilesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CED75714B744060091D55F /* TPSupportedFilesManager.m */; };
 		25CED75C14B754BF0091D55F /* TPSupportedFilesEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CED75A14B754BF0091D55F /* TPSupportedFilesEditor.m */; };
 		25CED75D14B754BF0091D55F /* TPSupportedFilesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25CED75B14B754BF0091D55F /* TPSupportedFilesEditor.xib */; };
@@ -1071,7 +1070,6 @@
 		25CC10B513E5DD9300A15850 /* TPImageViewerBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPImageViewerBackgroundView.m; sourceTree = "<group>"; };
 		25CD0E8F13995226004EB857 /* ConsoleWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleWindow.h; sourceTree = "<group>"; };
 		25CD0E9013995226004EB857 /* ConsoleWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleWindow.m; sourceTree = "<group>"; };
-		25CD0E9B139959D3004EB857 /* TeXnicle_Help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TeXnicle_Help; path = helpbook/TeXnicle_Help; sourceTree = "<group>"; };
 		25CED75614B744060091D55F /* TPSupportedFilesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSupportedFilesManager.h; sourceTree = "<group>"; };
 		25CED75714B744060091D55F /* TPSupportedFilesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSupportedFilesManager.m; sourceTree = "<group>"; };
 		25CED75914B754BF0091D55F /* TPSupportedFilesEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSupportedFilesEditor.h; sourceTree = "<group>"; };
@@ -1315,7 +1313,6 @@
 			children = (
 				251D30E415F38953002C52DB /* User Manual */,
 				2527487C15C3AF5800D12D69 /* dsa_pub.pem */,
-				25CD0E9B139959D3004EB857 /* TeXnicle_Help */,
 				250772F8138E5D81000F1118 /* TeXnicle-Info.plist */,
 				250772F9138E5D81000F1118 /* InfoPlist.strings */,
 				250772FC138E5D81000F1118 /* TeXnicle-Prefix.pch */,
@@ -2535,7 +2532,6 @@
 				25179BB513961B5300F72CD2 /* startup_background.png in Resources */,
 				252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */,
 				252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */,
-				25CD0E9C139959D3004EB857 /* TeXnicle_Help in Resources */,
 				25E50247139FC9F5004A983E /* schema.xml in Resources */,
 				253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */,
 				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
