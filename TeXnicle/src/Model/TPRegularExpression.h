@@ -10,6 +10,7 @@
 
 @interface TPRegularExpression : NSObject
 
++ (NSArray*)rangesMatching:(NSString*)expr inText:(NSString*)text;
 + (NSArray*)stringsMatching:(NSString*)expr inText:(NSString*)text;
 + (NSRange)rangeOfExpr:(NSString*)expr inText:(NSString*)text;
 + (NSString*)stringByReplacingOccurrencesOfRegex:(NSString*)expr withString:(NSString*)replacement inString:(NSString*)text;

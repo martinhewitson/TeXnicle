@@ -11,6 +11,42 @@
 
 @implementation TPRegularExpression
 
+
++ (NSArray*)rangesMatching:(NSString*)expr inText:(NSString*)text
+{
+  NSArray *ranges = nil;
+  if (NSClassFromString(@"NSRegularExpression") != nil)  {
+    
+    NSRegularExpression *exp = [NSRegularExpression regularExpressionWithPattern:expr
+                                                                         options:0
+                                                                           error:NULL];
+    
+    __block NSMutableArray *rangeMatches = [NSMutableArray array];
+    [exp enumerateMatchesInString:text
+                          options:0
+                            range:NSMakeRange(0, [text length])
+                       usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                         // search
+                         NSRange matchRange = [result range];
+                         [rangeMatches addObject:[NSValue valueWithRange:matchRange]];
+                       }];
+    ranges = [NSArray arrayWithArray:rangeMatches];
+    
+  } else {
+    
+    __block NSMutableArray *rangeMatches = [NSMutableArray array];
+    [text enumerateStringsMatchedByRegex:expr options:RKLDotAll inRange:NSMakeRange(0UL, [text length]) error:NULL enumerationOptions:RKLRegexEnumerationCapturedStringsNotRequired usingBlock:^(NSInteger captureCount, NSString * const capturedStrings[captureCount], const NSRange capturedRanges[captureCount], volatile BOOL * const stop) {
+      NSRange matchRange = capturedRanges[0];
+      [rangeMatches addObject:[NSValue valueWithRange:matchRange]];
+    }];
+    ranges = [NSArray arrayWithArray:rangeMatches];
+    
+  }
+  
+  return ranges;
+}
+
+
 + (NSArray*)stringsMatching:(NSString*)expr inText:(NSString*)text
 {
   NSArray *strings = nil;
