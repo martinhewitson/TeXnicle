@@ -34,6 +34,12 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 
 @implementation MHPDFView
 
+- (void) awakeFromNib
+{
+  [super awakeFromNib];
+  [self setBackgroundColor:[NSColor lightGrayColor]];
+}
+
 - (void)performFindPanelAction:(id)sender
 {
   NSEvent *event = [[NSApplication sharedApplication] currentEvent];
@@ -62,32 +68,54 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   [self setNeedsDisplay:YES];
 }
 
-- (void)drawPage:(PDFPage *)page
+- (void) setNeedsDisplay:(BOOL)flag
 {
-  [super drawPage:page];
+//  NSLog(@"Set Needs Display");
+  [super setNeedsDisplay:flag];
+}
+
+- (void) drawPagePost:(PDFPage *)page
+{
+  [super drawPagePost:page];
+  
+//  NSLog(@"Draw page post");
   // focussed?
   if ([[self window] firstResponder] == self && [NSApp isActive]) {
-    
-    [[self superview] lockFocus];
-		NSRect fr = [self frame];
+    //    NSLog(@"  is first responder");
+    [NSGraphicsContext saveGraphicsState];
 		NSSetFocusRingStyle(NSFocusRingOnly);
-		[[NSBezierPath bezierPathWithRect:fr] fill];
-		[[self superview] unlockFocus];
+    NSRect r = [[self documentView] bounds];
+		[[NSBezierPath bezierPathWithRect:r] fill];
+    [NSGraphicsContext restoreGraphicsState];
   }
+  
 }
+
 
 - (BOOL)becomeFirstResponder
 {
+//  NSLog(@"Become first");
 //  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidGainFocusNotification object:self];
-  [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
-  return [super becomeFirstResponder];
+  BOOL success = [super becomeFirstResponder];
+  if (success) {
+    [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
+  }
+  
+  return success;
 }
 
 - (BOOL)resignFirstResponder
 {
+//  NSLog(@"Resign first");
 //  [[NSNotificationCenter defaultCenter] postNotificationName:MHPDFViewDidLoseFocusNotification object:self];
-  [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
-  return [super resignFirstResponder];
+  
+  BOOL success = [super resignFirstResponder];
+  
+  if (success) {
+    [self setKeyboardFocusRingNeedsDisplayInRect:[self bounds]];
+  }
+  
+  return success;
 }
 
 - (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex
