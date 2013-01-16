@@ -204,17 +204,18 @@
 	[typesetTask setLaunchPath:self.path];
   [typesetTask setCurrentDirectoryPath:workingDir];
     
-	NSArray *arguments;
-	arguments = @[[mainFile lastPathComponent], 
-               workingDir, 
-               [NSString stringWithFormat:@"%ld", self.nCompile],
-               [NSString stringWithFormat:@"%d", self.doBibtex],
-               [NSString stringWithFormat:@"%d", self.doPS2PDF]];
+	NSArray *arguments = @[[mainFile lastPathComponent],
+                          workingDir,
+                          [NSString stringWithFormat:@"%ld", self.nCompile],
+                          [NSString stringWithFormat:@"%d", self.doBibtex],
+                          [NSString stringWithFormat:@"%d", self.doPS2PDF]
+                        ];
 	[typesetTask setArguments:arguments];
 	
-	[typesetFileHandle readInBackgroundAndNotify];	
+	[typesetFileHandle readInBackgroundAndNotify];
   
   self.compiling = YES;
+  procId = [typesetTask processIdentifier];
 	[typesetTask launch];	
 	
 	return YES;  

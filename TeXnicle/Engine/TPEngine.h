@@ -45,6 +45,7 @@
   NSPipe *pipe;
 	int compilationsDone;
 	BOOL abortCompile;
+  int procId;
 }
 
 @property (unsafe_unretained) id<TPEngineDelegate> delegate;
