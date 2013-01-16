@@ -29,7 +29,7 @@
 #import "externs.h"
 #import "TeXTextView.h"
 #import "NSArray+Color.h"
-
+#import "TPRegularExpression.h"
 
 @interface TeXColoringEngine ()
 
@@ -195,6 +195,89 @@
   
 }
 
+
+
+//- (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
+//{
+//  //  NSLog(@"Starting coloring...");
+//  if (self.lastHighlight) {
+//    if ([[NSDate date] timeIntervalSinceDate:self.lastHighlight] < kHighlightInterval) {
+//      return;
+//    }
+//  }
+//  
+//  //  NSLog(@"Coloring %@", NSStringFromRange(aRange));
+//  
+//  NSString *text = [[textStorage string] substringWithRange:aRange];
+//  //  NSLog(@"\n\n=======================================================================================");
+//  //  NSLog(@"Coloring %@", text);
+//  //  NSLog(@"=======================================================================================");
+//  NSInteger strLen = [text length];
+//  if (strLen == 0) {
+//    return;
+//  }
+//  
+//  //  NSLog(@"Str length %ld", strLen);
+//  // make sure the glyphs are present otherwise colouring gives errors
+//  [layoutManager ensureGlyphsForCharacterRange:aRange];
+//  
+//  // remove existing temporary attributes
+//	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
+//  
+//  
+//  // highlight comments
+//  if (self.colorComments) {
+//    NSColor *tagColor = self.commentColor;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"%.*" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  if (self.colorCommentsL2) {
+//    NSColor *tagColor = self.commentL2Color;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"%%.*" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  if (self.colorCommentsL3) {
+//    NSColor *tagColor = self.commentL3Color;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"%%%.*" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  // tags
+//  if (self.colorMarkupL1) {
+//    NSColor *tagColor = self.markupL1Color;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"<([^<>]+|(?R))+>" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  if (self.colorMarkupL2) {
+//    NSColor *tagColor = self.markupL2Color;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"<<.+?>>" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  if (self.colorMarkupL3) {
+//    NSColor *tagColor = self.markupL3Color;
+//    NSArray *ranges = [TPRegularExpression rangesMatching:@"<<<.+?>>>" inText:text];
+//    for (NSValue *val in ranges) {
+//      [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:tagColor forCharacterRange:[val rangeValue]];
+//    }
+//  }
+//  
+//  
+//  self.lastHighlight = [NSDate date];
+//}
 
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange
 {
