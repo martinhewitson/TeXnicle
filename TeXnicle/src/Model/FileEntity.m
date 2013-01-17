@@ -141,13 +141,12 @@
 	} 
   
   // Reconfigure the supporting FileDocument
-	[self reconfigureDocument];
-  
-  // Set the time we load. When we save back to file we can 
-  // check if the file was modified after this date and prompt
-  // the user to overwrite changes or not.
-  [self setPrimitiveValue:[NSDate date] forKey:@"fileLoadDate"];
-  
+	if ([self reconfigureDocument]) {
+    // Set the time we load. When we save back to file we can
+    // check if the file was modified after this date and prompt
+    // the user to overwrite changes or not.
+    [self setPrimitiveValue:[NSDate date] forKey:@"fileLoadDate"];
+  }
 }
 
 - (void) setName:(NSString *)newName
@@ -266,17 +265,23 @@
 	[self didChangeValueForKey:@"name"];
 }
 
-- (void) reconfigureDocument
+- (BOOL) reconfigureDocument
 {
 //  NSLog(@"Reconfiguring %@", [self name]);
-	if (document) {
+	if (document && [self valueForKey:@"content"]) {
 //    NSLog(@"    already have document...");
     // set the new text to the textstorage
     MHFileReader *fr = [[MHFileReader alloc] init];
     NSStringEncoding encoding = [fr encodingForFileAtPath:[self pathOnDisk]];
 		NSString *str = [[NSString alloc] initWithData:[self valueForKey:@"content"]
                                            encoding:encoding];
-		NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableAttributedString *attStr = nil;
+    if (str == nil) {
+      return NO;
+    } else {
+      attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    }
+    
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
     
     [[document textStorage] beginEditing];
@@ -291,6 +296,13 @@
 //    NSLog(@"    create new document");
     document = [[FileDocument alloc] initWithFile:self];
   }
+  
+  if (document == nil) {
+    return NO;
+  }
+  
+  
+  return YES;
 }
 
 - (void) textChanged

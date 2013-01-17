@@ -69,7 +69,7 @@
 - (NSString*) contentString;
 - (NSString*) workingContentString;
 - (BOOL) updateFromTextStorage;
-- (void) reconfigureDocument;
+- (BOOL) reconfigureDocument;
 
 - (void) reloadFromDisk;
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding;
