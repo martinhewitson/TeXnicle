@@ -1684,7 +1684,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [commands addObject:[newCommand argument]];
   }
   
-  return commands; //[NSArray array]; 
+  // add palette commands
+  [commands addObjectsFromArray:[self.palette listOfCommands]];
+
+  return commands; //[NSArray array];
 }
 - (NSArray*) listOfReferences
 {

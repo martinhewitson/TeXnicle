@@ -1935,6 +1935,9 @@
       }
     }
   }
+  
+  // add palette commands
+  [commands addObjectsFromArray:[self.palette listOfCommands]];
     
   return commands;
 }
