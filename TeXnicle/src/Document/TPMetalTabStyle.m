@@ -331,7 +331,7 @@
 	static NSMutableParagraphStyle *TruncatingTailParagraphStyle = nil;
 	if (!TruncatingTailParagraphStyle) {
 		TruncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-		[TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+		[TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 		[TruncatingTailParagraphStyle setAlignment:NSCenterTextAlignment];
 	}
 	[attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
@@ -550,6 +550,7 @@
 		counterStringRect.size = [counterString size];
 		counterStringRect.origin.x = myRect.origin.x + ((myRect.size.width - counterStringRect.size.width) / 2.0) + 0.25;
 		counterStringRect.origin.y = myRect.origin.y + ((myRect.size.height - counterStringRect.size.height) / 2.0) + 0.5;
+    
 		[counterString drawInRect:counterStringRect];
 		
 		// shrink label width to make room for object counter
@@ -623,6 +624,7 @@
 		if (!centeredParagraphStyle) {
 			centeredParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 			[centeredParagraphStyle setAlignment:NSCenterTextAlignment];
+      [centeredParagraphStyle setLineBreakMode:NSLineBreakByTruncatingMiddle];
 		}
 		[attrStr addAttribute:NSParagraphStyleAttributeName value:centeredParagraphStyle range:range];
 		[attrStr drawInRect:labelRect];
