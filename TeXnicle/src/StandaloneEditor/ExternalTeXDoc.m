@@ -1016,6 +1016,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }
   }
   
+  // cancel compile
+  if ([theItem tag] == 60) {
+    if ([self.engineManager isCompiling]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  
   // add to project
   if ([theItem tag] == 100) {
     if ([self fileURL] == nil) {
@@ -1632,6 +1642,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
+  [self syncToPDFLine:lineNumber column:column];
+}
+
+- (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column
+{
   NSMutableArray *pdfViews = [NSMutableArray array];
   if (self.pdfViewerController.pdfview != nil) {
     [pdfViews addObject:self.pdfViewerController.pdfview];
@@ -1639,10 +1654,10 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if (self.pdfViewer.pdfViewerController.pdfview != nil) {
     [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
   }
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:pdfViews];
+  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:pdfViews];
   [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
+  
 }
-
 
 -(NSString*)codeForCommand:(NSString*)command
 {
@@ -1808,6 +1823,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       [self openPDF:self];
     }
   }
+  
+  // if we want, sync pdf
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
+    NSInteger line = [self.texEditorViewController.textView lineNumber];
+    NSInteger col  = [self.texEditorViewController.textView column];
+    [self syncToPDFLine:line column:col];
+  }
+  
   _building = NO;
   _lastBuildDate = [NSDate date];
 }

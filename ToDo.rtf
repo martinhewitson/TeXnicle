@@ -104,8 +104,6 @@ Version 2.1\
 \pard\pardeftab720
 \cf5 + After pressing cmd+R it would be convenient, that the pdf updates to the cursors's position\cf0 \
 \
-+ I was wondering how easy it would be to implement a 'cancel typesetting' button? I understand that typesetting is accomplished by a shell script/engine and that process must have a PID that can be tracked and killed. It gets annoying sometimes when one has to use Activity Monitor to cancel the program if it gets stuck, even more so when more than one iteration has been specified.\
-\
 \
 ----------------------\
 \
@@ -136,15 +134,15 @@ For example:\
 \cf0 \CocoaLigature0 - (\cf6 NSRange\cf0 )indentRangeForLineAtIndex:(\cf6 NSInteger\cf0 )loc\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 \
+\
 Version 2.0.2\
 -------------\
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 \
+\
 + Minor cosmetic improvements\
 + Palette commands now appear in autocompletion list\
-\
++ Added a new toolbar button to cancel typesetting (you may need to customize your toolbar and add it)\
++ Added a corresponding menu item under the Typeset menu to cancel typesetting\
++ Added a new preference on the Typesetting preferences pane which, when activated, causes the PDF to be synced to the current editor location after typesetting.\
 \
 Version 2.0.1\
 -------------\

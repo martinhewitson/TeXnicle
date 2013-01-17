@@ -111,6 +111,7 @@ NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor
 
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 NSString * const TPClearConsoleOnCompile = @"TPClearConsoleOnCompile";
+NSString * const TPSyncPDFAfterCompile = @"TPSyncPDFAfterCompile";
 
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
@@ -267,6 +268,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   
   [defaultValues setValue:@YES forKey:TPSaveOnCompile];
   [defaultValues setValue:@YES forKey:TPClearConsoleOnCompile];
+  [defaultValues setValue:@NO forKey:TPSyncPDFAfterCompile];
 	defaultValues[OpenConsoleOnTypeset] = @YES;
 
   // console

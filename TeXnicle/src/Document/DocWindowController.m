@@ -201,11 +201,7 @@
 
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
-  MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:aTextView pdfViews:@[self.mainDocument.pdfViewerController.pdfview, self.mainDocument.pdfViewer.pdfViewerController.pdfview]];
-  [sync displaySelectionInPDFFile:[self.mainDocument compiledDocumentPath] 
-                       sourceFile:[self.file pathOnDisk] 
-                       lineNumber:lineNumber 
-                           column:column];
+  [self.mainDocument syncToPDFLine:lineNumber column:column];
 }
 
 -(id)project
