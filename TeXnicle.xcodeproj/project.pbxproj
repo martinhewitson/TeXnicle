@@ -128,6 +128,8 @@
 		251FC6EE1392708800DB2E3B /* Console.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251FC6ED1392708800DB2E3B /* Console.xib */; };
 		251FFD53150BC0B700A5A7EF /* TPConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251FFD51150BC0B700A5A7EF /* TPConsoleViewController.m */; };
 		251FFD54150BC0B700A5A7EF /* TPConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251FFD52150BC0B700A5A7EF /* TPConsoleViewController.xib */; };
+		2520AC1716A7F559006E9CA2 /* TPBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2520AC1616A7F559006E9CA2 /* TPBoxView.m */; };
+		2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2520AC1916A81677006E9CA2 /* cancel.icns */; };
 		252144C61398CA9100656D3F /* findTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */; };
 		252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252144C51398CA9100656D3F /* findTabBarImage.icns */; };
 		252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */; };
@@ -672,6 +674,9 @@
 		251FFD50150BC0B700A5A7EF /* TPConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPConsoleViewController.h; sourceTree = "<group>"; };
 		251FFD51150BC0B700A5A7EF /* TPConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPConsoleViewController.m; sourceTree = "<group>"; };
 		251FFD52150BC0B700A5A7EF /* TPConsoleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPConsoleViewController.xib; sourceTree = "<group>"; };
+		2520AC1516A7F559006E9CA2 /* TPBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPBoxView.h; sourceTree = "<group>"; };
+		2520AC1616A7F559006E9CA2 /* TPBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPBoxView.m; sourceTree = "<group>"; };
+		2520AC1916A81677006E9CA2 /* cancel.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = cancel.icns; sourceTree = "<group>"; };
 		252144C41398CA9100656D3F /* findTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = findTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		252144C51398CA9100656D3F /* findTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = findTabBarImage.icns; sourceTree = "<group>"; };
 		252144C81398EA3D00656D3F /* MHRoundedTopBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedTopBottomView.h; sourceTree = "<group>"; };
@@ -1533,6 +1538,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2520AC1916A81677006E9CA2 /* cancel.icns */,
 				252E122416217B1D0041B2BE /* TeXnicle_4.icns */,
 				252E12221621728F0041B2BE /* TeXnicle.icns */,
 				25AD5A0715BAB29100737610 /* groupFolderOpen.icns */,
@@ -2154,6 +2160,8 @@
 				25C850AD154BE4E00048311D /* ProjectFilesViewController.xib */,
 				258BCAE615B067210092E914 /* TPTabbarMatchingBackground.h */,
 				258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */,
+				2520AC1516A7F559006E9CA2 /* TPBoxView.h */,
+				2520AC1616A7F559006E9CA2 /* TPBoxView.m */,
 			);
 			name = Document;
 			path = src/Document;
@@ -2637,6 +2645,7 @@
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
 				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
+				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2939,6 +2948,7 @@
 				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
 				250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */,
 				250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */,
+				2520AC1716A7F559006E9CA2 /* TPBoxView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

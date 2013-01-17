@@ -6,7 +6,27 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
-    <!-- Version 2.0 RC2 -->
+    <!-- Version 2.0.1 -->
+		<item>
+      <title>Version 2.0.1 (build 56)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.1</h2>
+        <p>
+        This version fixes a nasty performance bug related to the display of PDFs but which could affect the full app.
+        </p>
+      ]]></description>
+      <pubDate>16th January 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.1.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="56"
+      length="17967576"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFQCUGAidcq35V9fO5XBzrN2GoXndfgIUArJ4VgURQbkQqOZPr3P6LexpWAw="
+      />
+    </item>
+    
+    
+    <!-- Version 2.0 -->
 		<item>
       <title>Version 2.0 (build 55)</title>
       <description><![CDATA[

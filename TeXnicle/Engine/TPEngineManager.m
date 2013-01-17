@@ -157,6 +157,9 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   [self.consoleManager tearDown];
   self.consoleManager = nil;
   [self.engines removeAllObjects];
+  for (TPEngine *e in self.engines) {
+    [e tearDown];
+  }
   self.engines = nil;
   self.delegate = nil;
 }
@@ -270,6 +273,15 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   return NO;
 }
 
+- (void) cancelCompilation
+{
+  NSString *engineName = [self.delegate engineName];
+  TPEngine *e = [self engineNamed:engineName];
+  if (e) {
+    [e cancelCompile];
+  }
+}
+
 - (void) compile
 {
   // ensure the engines have been installed and loaded
@@ -312,6 +324,15 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 #pragma mark -
 #pragma mark Engine delegate
+
+- (void) compileWasCancelled
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineCompilingCompletedNotification
+                                                      object:self
+                                                    userInfo:nil];
+  
+}
+
 
 - (void) compileDidFinish:(BOOL)success
 {

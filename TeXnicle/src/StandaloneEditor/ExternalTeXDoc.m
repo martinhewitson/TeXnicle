@@ -671,6 +671,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 //  NSLog(@"### Clean up");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  [self cancelCompile:self];
+  
   // stop timers
   [self stopTimers];
   
@@ -1727,6 +1729,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 #pragma mark -
 #pragma mark LaTeX Control
+
+- (IBAction) cancelCompile:(id)sender
+{
+  [self.engineManager cancelCompilation];
+}
 
 - (IBAction) clean:(id)sender
 {

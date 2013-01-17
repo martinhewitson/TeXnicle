@@ -163,6 +163,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark LaTeX Control
 
+- (IBAction) cancelCompile:(id)sender;
 - (IBAction) clean:(id)sender;
 - (IBAction) buildAndView:(id)sender;
 - (IBAction) buildProject:(id)sender;

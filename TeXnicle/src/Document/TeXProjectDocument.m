@@ -604,6 +604,8 @@
 {
 //  NSLog(@"Clean up...");
   
+  [self cancelCompile:self];
+  
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   
@@ -724,6 +726,7 @@
 {
 //  NSLog(@"Window will close %@ / %@", [notification object], [self windowForSheet]);
   _windowIsClosing = YES;
+  
     
   [self tearDown];
   
@@ -1025,6 +1028,15 @@
   // trash
   if ([theItem tag] == 50) {
     if ([self.engineManager isCompiling]) {
+      return NO;
+    }
+  }
+  
+  // cancel compile
+  if ([theItem tag] == 60) {
+    if ([self.engineManager isCompiling]) {
+      return YES;
+    } else {
       return NO;
     }
   }
@@ -2170,6 +2182,11 @@
 
 #pragma mark -
 #pragma mark LaTeX Control
+
+- (IBAction) cancelCompile:(id)sender
+{
+  [self.engineManager cancelCompilation];
+}
 
 - (IBAction) clean:(id)sender
 {

@@ -30,6 +30,7 @@
 
 @protocol TPEngineDelegate <NSObject>
 
+- (void)compileWasCancelled;
 - (void)compileDidFinish:(BOOL)success;
 - (void)enginePostMessage:(NSString*)someText;
 - (void)enginePostError:(NSString*)someText;
@@ -71,12 +72,13 @@
 + (NSString*)defaultImageIncludeString;
 - (void) setupObservers;
 
-
+- (void) tearDown;
 
 - (BOOL) compileDocumentAtPath:(NSString*)documentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject;
 - (void) texOutputAvailable:(NSNotification*)aNote;
 - (void) taskFinished:(NSNotification*)aNote;
 - (void) reset;
+- (void) cancelCompile;
 - (void) trashAuxFiles;
 - (void) parseEngineFile;
 

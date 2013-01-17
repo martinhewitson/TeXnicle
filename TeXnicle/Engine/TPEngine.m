@@ -67,12 +67,12 @@
   return self;
 }
 
-- (void) dealloc
+- (void) tearDown
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.delegate = nil;
   
-  
+  [self cancelCompile];
 }
 
 - (void) setupObservers
@@ -150,6 +150,25 @@
   }
   
   return nil;
+}
+
+- (void) cancelCompile
+{
+  if (typesetTask != nil) {
+    [typesetTask terminate];
+    typesetTask = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+  }
+  
+  [self reset];
+  
+  [self enginePostError:@"User cancelled typesetting"];
+  
+  if (self.delegate && [self.delegate respondsToSelector:@selector(compileWasCancelled)]) {
+    [self.delegate compileWasCancelled];
+  }
+  
+  
 }
 
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
@@ -242,6 +261,7 @@
   [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   
   typesetTask = nil;
+  procId = -1;
 }
 
 - (void) texOutputAvailable:(NSNotification*)aNote
@@ -317,6 +337,10 @@
 
 - (void)compileDidFinish:(BOOL)success
 {
+  if (abortCompile) {
+    return;
+  }
+  
   if ([[NSApplication sharedApplication] isMountainLion]) {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     [notification setTitle:@"Typesetting Completed"];
