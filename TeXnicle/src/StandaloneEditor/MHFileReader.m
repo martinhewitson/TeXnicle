@@ -227,6 +227,7 @@
 {
 //  NSLog(@"Reading string from file %@", aURL);
   if (![[aURL path] pathIsText]) {
+//    NSLog(@"   ## NOT TEXT");
     return nil;
   }
   
@@ -241,24 +242,36 @@
   if (encodingString == nil || [encodingString length] == 0) {
     
     str = [NSString stringWithContentsOfURL:aURL usedEncoding:&encoding error:&error];
-    //    NSLog(@"Loaded string %@", str);
+//    NSLog(@"  Loaded string with encoding %ld", encoding);
     // if we didn't get a string, then try the default encoding
     if (str == nil || [str isEqualToString:@""]) {
-      //      NSLog(@"   failed to guess.");
+//      NSLog(@"   failed to guess encoding.");
       encoding = [self defaultEncoding];
-      //      NSLog(@" using default encoding %@", [self nameOfEncoding:encoding]);
+//      NSLog(@"   will try with default encoding %@", [self nameOfEncoding:encoding]);
     }
     
   } else {
     encoding = [self encodingWithName:encodingString];
   }
-  //  NSLog(@"Reading string with encoding %@", encodingString);
   // if we didn't get the string, try with the default encoding
   if (str == nil) {
     error = nil;
+//    NSLog(@"   reading string with encoding %@", encodingString);
     str = [NSString stringWithContentsOfURL:aURL
                                    encoding:encoding
                                       error:&error];
+    
+    // if this still doesn't work, try all possible encodings in order, until one succeeds
+    if (str == nil) {
+//      NSLog(@"   default failed: trying others....");
+      for (NSNumber *enc in self.encodings) {
+        str = [NSString stringWithContentsOfURL:aURL encoding:[enc integerValue] error:NULL];
+        if (str != nil) {
+//          NSLog(@"**** managed to read with encoding %ld", [enc integerValue]);
+          break;
+        }
+      }
+    }
     
   }  
   
