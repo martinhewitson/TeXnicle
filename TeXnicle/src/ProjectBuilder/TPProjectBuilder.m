@@ -372,7 +372,29 @@
 - (FileEntity*) addFileAtPath:(NSString*)fullpath toFolder:(FolderEntity*)folder inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
   NSString *extension = [fullpath pathExtension];
-	FileEntity *newFile;
+
+	// before making the file in the project, ensure we can read it from disk
+  
+  // set file content
+  MHFileReader *fr = [[MHFileReader alloc] init];
+  NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
+  if (contents == nil) {
+    return nil;
+  }
+  
+  // check if the file was a text file
+	BOOL isTextFile = NO;
+	if ([[fullpath pathExtension] isText]) {
+		isTextFile = YES;
+	}
+  
+  NSData *data = [contents dataUsingEncoding:[fr encodingUsed]];
+
+  if (data == nil) {
+    return nil;
+  }
+  
+  FileEntity *newFile;
 	NSEntityDescription *entity = nil;
 	if ([extension isEqual:@"tex"]) {
 		entity = [NSEntityDescription entityForName:@"TeXFile" inManagedObjectContext:moc];
@@ -388,17 +410,6 @@
   
 	[moc processPendingChanges];
 	
-  // set file content
-  MHFileReader *fr = [[MHFileReader alloc] init];
-  NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
-  
-  // check if the file was a text file
-	BOOL isTextFile = NO;
-	if ([[fullpath pathExtension] isText]) {
-		isTextFile = YES;
-	}	
-  
-  NSData *data = [contents dataUsingEncoding:[fr encodingUsed]];
   [newFile setValue:data forKey:@"content"];
   
 	// set project
