@@ -1323,6 +1323,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     
     if (c == '\\' && ![whitespaceCharacterSet characterIsMember:lastchar]) {
+      // if this is preceded by another \, we don't count this as a command, and return not found
+      if (idx > 0) {
+        unichar pc = [string characterAtIndex:idx-1];
+        if (pc == '\\') {
+          return NSMakeRange(NSNotFound, 0);
+        }
+      }
       foundSlash = YES;
       start = idx;
       break;
