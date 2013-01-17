@@ -828,6 +828,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }    
   }
   
+  // cancel typesetting
+  if (tag == 66) {
+    if ([self.engineManager isCompiling]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
 
 	return [super validateMenuItem:menuItem];
 }
