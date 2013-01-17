@@ -604,7 +604,7 @@
 {
 //  NSLog(@"Clean up...");
   
-  [self cancelCompile:self];
+  [self.engineManager cancelCompilation];
   
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
@@ -2186,6 +2186,7 @@
 - (IBAction) cancelCompile:(id)sender
 {
   [self.engineManager cancelCompilation];
+  [self.engineManager.consoleManager error:@"User cancelled typesetting"];
 }
 
 - (IBAction) clean:(id)sender

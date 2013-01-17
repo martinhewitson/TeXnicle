@@ -162,8 +162,6 @@
   
   [self reset];
   
-  [self enginePostError:@"User cancelled typesetting"];
-  
   if (self.delegate && [self.delegate respondsToSelector:@selector(compileWasCancelled)]) {
     [self.delegate compileWasCancelled];
   }

@@ -671,7 +671,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 //  NSLog(@"### Clean up");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
-  [self cancelCompile:self];
+  [self.engineManager cancelCompilation];
   
   // stop timers
   [self stopTimers];
@@ -1755,7 +1755,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) cancelCompile:(id)sender
 {
-  [self.engineManager cancelCompilation];
+  [self.engineManager cancelCompilation];  
+  [self.engineManager.consoleManager error:@"User cancelled typesetting"];
 }
 
 - (IBAction) clean:(id)sender
