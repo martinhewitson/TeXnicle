@@ -125,7 +125,7 @@
 	_disableTabClose = NO;
 	_showAddTabButton = NO;
 	_hideForSingleTab = NO;
-	_sizeCellsToFit = NO;
+	_sizeCellsToFit = YES;
 	_isHidden = NO;
 	_awakenedFromNib = NO;
 	_automaticallyAnimates = NO;
@@ -135,9 +135,9 @@
 	_selectsTabsOnMouseDown = NO;
 	_alwaysShowActiveTab = NO;
 	_allowsScrubbing = NO;
-	_cellMinWidth = 100;
-	_cellMaxWidth = 280;
-	_cellOptimumWidth = 130;
+	_cellMinWidth = 200;
+	_cellMaxWidth = 350;
+	_cellOptimumWidth = 200;
 	_tearOffStyle = PSMTabBarTearOffAlphaWindow;
 	style = [[PSMMetalTabStyle alloc] init];
 	
