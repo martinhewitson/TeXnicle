@@ -27,8 +27,15 @@
 //
 
 #import "MHControlsTabBarController.h"
+#import "MHToolbarBackgroundView.h"
 
 NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSelectionDidChangeNotification";
+
+@interface MHControlsTabBarController ()
+
+@property (strong) IBOutlet MHToolbarBackgroundView *viewBackground;
+
+@end
 
 @implementation MHControlsTabBarController
 
@@ -44,6 +51,7 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 //  NSLog(@"Tear down %@", self);
   buttons = nil;
+  self.viewBackground = nil;
   self.splitview = nil;
   self.tabView.delegate = nil;
   self.tabView = nil;
@@ -94,6 +102,8 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self.outlineButton setState:NSOffState];
   [self.infoButton setState:NSOffState];
   [self.prefsButton setState:NSOffState];
+  
+  self.viewBackground.strokeRightSide = YES;
   
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];

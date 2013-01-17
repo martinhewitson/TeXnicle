@@ -37,7 +37,7 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 - (void) awakeFromNib
 {
   [super awakeFromNib];
-  [self setBackgroundColor:[NSColor lightGrayColor]];
+  [self setBackgroundColor:[NSColor colorWithDeviceRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0]];
 }
 
 - (void)performFindPanelAction:(id)sender

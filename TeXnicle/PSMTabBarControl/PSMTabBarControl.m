@@ -2021,7 +2021,7 @@
 {
 	NSInteger i, cellCount = [_cells count];
 	for (i = 0; i < cellCount; i++) {
-		if ([_cells[i] isSelected]) {
+    if ([_cells[i] state] == NSOnState) {
       return [_controller cellFrameAtIndex:i];
 		}
 	}

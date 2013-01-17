@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2843</string>
+			<string key="NS.object.0">2844</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -395,6 +395,14 @@
 					</object>
 					<int key="connectionID">158</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">viewBackground</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1005"/>
+					</object>
+					<int key="connectionID">159</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -617,7 +625,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">158</int>
+			<int key="maxID">159</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -681,10 +689,9 @@
 						<string key="palletButton">NSButton</string>
 						<string key="prefsButton">NSButton</string>
 						<string key="projectButton">NSButton</string>
-						<string key="projectView">NSView</string>
 						<string key="splitview">NSSplitView</string>
-						<string key="standaloneView">NSView</string>
 						<string key="tabView">NSTabView</string>
+						<string key="viewBackground">MHToolbarBackgroundView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="findButton">
@@ -715,21 +722,17 @@
 							<string key="name">projectButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="projectView">
-							<string key="name">projectView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="splitview">
 							<string key="name">splitview</string>
 							<string key="candidateClassName">NSSplitView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="standaloneView">
-							<string key="name">standaloneView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="tabView">
 							<string key="name">tabView</string>
 							<string key="candidateClassName">NSTabView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="viewBackground">
+							<string key="name">viewBackground</string>
+							<string key="candidateClassName">MHToolbarBackgroundView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

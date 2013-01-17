@@ -60,13 +60,13 @@
 	[path stroke];
   
   if (self.strokeLeftSide) {
-    [path moveToPoint:NSMakePoint(r.origin.x, r.origin.y)];
-    [path lineToPoint:NSMakePoint(r.origin.x, r.origin.y+r.size.height)];
+    [path moveToPoint:NSMakePoint(r.origin.x+lineWidth/2.0, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x+lineWidth/2.0, r.origin.y+r.size.height)];
     [path stroke];
   }
   if (self.strokeRightSide) {
-    [path moveToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y)];
-    [path lineToPoint:NSMakePoint(r.origin.x+r.size.width, r.origin.y+r.size.height)];
+    [path moveToPoint:NSMakePoint(r.origin.x+r.size.width-lineWidth/2.0, r.origin.y)];
+    [path lineToPoint:NSMakePoint(r.origin.x+r.size.width-lineWidth/2.0, r.origin.y+r.size.height)];
     [path stroke];
   }  
 }

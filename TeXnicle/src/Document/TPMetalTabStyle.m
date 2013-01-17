@@ -639,6 +639,38 @@
 			[cell drawWithFrame:[cell frame] inView:bar];
 		}
 	}
+  
+  // draw line below non selected cells
+  NSRect selectedRect = [tabBar rectForSelectedCell];
+  
+	[NSGraphicsContext saveGraphicsState];
+
+  NSBezierPath *path = [NSBezierPath bezierPath];
+  [path setLineWidth:1.0];
+
+  [[NSColor blackColor] set];
+  CGFloat offset = 0.0;
+  [path moveToPoint:NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height - offset)];
+  
+  // draw upto the start of the selected rect
+  [path lineToPoint:NSMakePoint(selectedRect.origin.x, rect.origin.y + rect.size.height - offset)];
+  
+  // move to end of selected cell
+  [path moveToPoint:NSMakePoint(selectedRect.origin.x + selectedRect.size.width, rect.origin.y + rect.size.height - offset)];
+  
+  // draw to end of rect
+  [path lineToPoint:NSMakePoint(rect.origin.x+rect.size.width, rect.origin.y + rect.size.height - offset)];
+  
+//  [path lineToPoint:NSMakePoint(myRect.origin.x + myRect.size.width - kTPMetalObjectCounterRadius, myRect.origin.y)];
+//  [path appendBezierPathWithArcWithCenter:NSMakePoint(myRect.origin.x + myRect.size.width - kTPMetalObjectCounterRadius, myRect.origin.y + kTPMetalObjectCounterRadius) radius:kTPMetalObjectCounterRadius startAngle:270.0 endAngle:90.0];
+//  [path lineToPoint:NSMakePoint(myRect.origin.x + kTPMetalObjectCounterRadius, myRect.origin.y + myRect.size.height)];
+//  [path appendBezierPathWithArcWithCenter:NSMakePoint(myRect.origin.x + kTPMetalObjectCounterRadius, myRect.origin.y + kTPMetalObjectCounterRadius) radius:kTPMetalObjectCounterRadius startAngle:90.0 endAngle:270.0];
+  [path stroke];
+  
+  
+	[NSGraphicsContext restoreGraphicsState];
+  
+  
 }   	
 
 #pragma mark -

@@ -28,6 +28,7 @@
 
 #import "PDFViewerController.h"
 #import "MHSlidingSplitViewController.h"
+#import "MHToolbarBackgroundView.h"
 
 #define kToolbarFullHeight 64.0
 #define kToolbarReducedHeight 44.0
@@ -48,7 +49,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField *statusText;
 @property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
 @property (unsafe_unretained) IBOutlet NSTextField *searchStatusText;
-@property (unsafe_unretained) IBOutlet NSView *toolbarView;
+@property (unsafe_unretained) IBOutlet MHToolbarBackgroundView *toolbarView;
 
 @property (unsafe_unretained) IBOutlet HHValidatedButton *printButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *nextButton;
@@ -104,6 +105,8 @@
     [self.thumbSlideViewController slideOutAnimated:NO];
     [self.toggleThumbsButton setState:NSOffState];
   }
+  
+  self.toolbarView.strokeLeftSide = YES;
   
   [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
   
