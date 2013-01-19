@@ -557,7 +557,7 @@
   
   // select the previously selected file
   FileEntity *selected = [self.project valueForKey:@"selected"];
-  if (selected) {
+  if (selected != nil) {
     [self performSelectorOnMainThread:@selector(selectTabForFile:) withObject:selected waitUntilDone:YES];
   }
   

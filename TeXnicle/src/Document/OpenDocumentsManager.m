@@ -130,8 +130,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
   NSArray *openFiles = [NSArray arrayWithArray:self.openDocuments];
   for (FileEntity *file in openFiles) {
-    NSTabViewItem *item = [self.tabView tabViewItemAtIndex:[self.tabView indexOfTabViewItemWithIdentifier:file]];
-    [self.tabView removeTabViewItem:item];
+    [self removeTabForDoc:file];
   }
   [self performSelectorOnMainThread:@selector(disableEditors) withObject:nil waitUntilDone:YES];
 }
@@ -153,10 +152,19 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 		return;
 	}
 	
-  NSTabViewItem *item = [self.tabView tabViewItemAtIndex:[self.tabView indexOfTabViewItemWithIdentifier:aDoc]];
-  [self.tabView removeTabViewItem:item];  
+  [self removeTabForDoc:aDoc];
 }
 
+- (void) removeTabForDoc:(FileEntity*)aDoc
+{
+  NSInteger index = [self.tabView indexOfTabViewItemWithIdentifier:aDoc];
+  if (index >= 0 && index < [[self.tabView tabViewItems] count]) {
+    NSTabViewItem *item = [self tabViewItemAtIndex:index];
+    if (item != nil) {
+      [self.tabView removeTabViewItem:item];
+    }
+  }
+}
 
 - (void) standaloneWindowForFile:(FileEntity*)aFile
 {
@@ -217,8 +225,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     
 	}	else {
     NSInteger index = [self.tabView indexOfTabViewItemWithIdentifier:aDoc];
-		NSTabViewItem *tab = [self.tabView tabViewItemAtIndex:index];
-		[self.tabView selectTabViewItem:tab];
+		NSTabViewItem *tab = [self tabViewItemAtIndex:index];
+    if (tab != nil) {
+      [self.tabView selectTabViewItem:tab];
+    }
 	}
 	
   if ([[aDoc isText] boolValue]) {
@@ -305,6 +315,14 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   }
 }
 
+- (NSTabViewItem *) tabViewItemAtIndex:(NSInteger)index
+{
+  if (index >=0 && index < [[self.tabView tabViewItems] count]) {
+    return [self.tabView tabViewItemAtIndex:index];
+  }
+  
+  return nil;
+}
 
 - (void) selectTabForFile:(FileEntity*)aFile
 {
@@ -318,9 +336,11 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   if (index < 0) {
     return;
   }
-	NSTabViewItem *item = [self.tabView tabViewItemAtIndex:index];
-  if ([self.tabView selectedTabViewItem] != item) {
-    [self.tabView selectTabViewItem:item];
+	NSTabViewItem *item = [self tabViewItemAtIndex:index];
+  if (item != nil) {
+    if ([self.tabView selectedTabViewItem] != item) {
+      [self.tabView selectTabViewItem:item];
+    }
   }
 }
 
