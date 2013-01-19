@@ -1528,15 +1528,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				break;
 			}
 		}
-//    else if (c == '\\') {
-//      if (start+1 < [str length]) {
-//        unichar nc = [str characterAtIndex:start+1];
-//        if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
-//          // we are at the start of a command, so stop here
-//          break;
-//        }
-//      }
-//    }
     
 		start--;
 	}
@@ -1561,15 +1552,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 				break;
 			}
 		}
-//    else if (c == '\\') {
-//      if (end+1 < [str length]) {
-//        unichar nc = [str characterAtIndex:end+1];
-//        if (nc != '\\' && ![whitespaceCharacterSet characterIsMember:nc] && ![newLineCharacterSet characterIsMember:nc]) {
-//          // we are at the start of a command, so stop here
-//          break;
-//        }
-//      }
-//    }
     
 		end++;
 	}
@@ -1582,22 +1564,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if (end == NSNotFound)
     end = start;
-
-  
-//  // if we ended at a command, wind back until we have a non-whitespace, non-newline character
-//  if (end < [str length] && end > start) {
-//    if ([str characterAtIndex:end] == '\\') {
-//      end--;
-//      while (end >= start) {
-//        unichar c = [str characterAtIndex:end];
-//        if (![whitespaceCharacterSet characterIsMember:c] && ![newLineCharacterSet characterIsMember:c]) {
-//          end++;
-//          break;
-//        }
-//        end--;
-//      }
-//    }
-//  }
   
   if (end >= [str length])
 		end = [str length];
