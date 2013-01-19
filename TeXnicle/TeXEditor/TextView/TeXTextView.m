@@ -1585,7 +1585,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSRange selRange = [self selectedRange];
 	NSInteger loc = selRange.location;
 	
-	while (loc >= 0) {
+	while (loc >= 0 && loc < [str length]) {
     if ([whitespaceCharacterSet characterIsMember:[str characterAtIndex:loc-1]]) {
       //			NSLog(@"Returning %d", loc-1);
 			return loc-1;
@@ -1613,7 +1613,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSInteger loc = selRange.location;
   
   //	NSLog(@"Staring scan at %d", loc-1);
-	while (loc > 0) {
+	while (loc > 0 && loc < [str length]) {
     //		NSLog(@"Checking character: '%c'", [str characterAtIndex:loc-1]);
 		if ([newLineCharacterSet characterIsMember:[str characterAtIndex:loc-1]]) {
 			break;
@@ -1631,7 +1631,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSInteger loc = curr.location-1;
 	NSString *string = [self string];
 	NSInteger start = -1;
-	while (loc>=0) {
+	while (loc >= 0 && loc < [string length]) {
 		unichar c = [string characterAtIndex:loc];
     //		NSLog(@"  checking '%c'", c);
 		if ([whitespaceCharacterSet characterIsMember:c] || [newLineCharacterSet characterIsMember:c]) {
@@ -3027,7 +3027,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	NSLog(@"Searching backwards for %C", openBracket);
 	NSString *str = [self string];
 	NSInteger bcount = 1;
-	while (loc >= 0) {			
+	while (loc >= 0 && loc < [str length]) {
 		if ([str characterAtIndex:loc] == closeBracket) {
 			bcount++;
 		}			
@@ -3047,7 +3047,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	NSLog(@"Searching forwards for %C", closeBracket);
 	NSString *str = [self string];
 	NSInteger bcount = 1;
-	while (loc < [str length]) {			
+	while (loc >=0 && loc < [str length]) {
 		if ([str characterAtIndex:loc] == openBracket) {
 			bcount++;
 		}			
