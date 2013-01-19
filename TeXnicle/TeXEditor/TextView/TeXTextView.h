@@ -233,7 +233,6 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (NSRange)indentRangeForLineAtIndex:(NSInteger)loc;
 - (void) insertStringBeforeAllLinesInSelection:(NSString*)aStr;
 - (IBAction) reformatParagraph:(id)sender;
-- (IBAction) reformatRange:(NSRange)pRange;
 - (IBAction) indentSelection:(id)sender;
 - (IBAction) unindentSelection:(id)sender;
 
