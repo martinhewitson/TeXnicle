@@ -57,11 +57,11 @@
 //  return filteredItems;
 //}
 
-- (void) didTurnIntoFault
-{
-  self.parent = nil;
-  self.project = nil;
-}
+//- (void) didTurnIntoFault
+//{
+//  self.parent = nil;
+//  self.project = nil;
+//}
 
 - (void) awakeFromInsert
 {
