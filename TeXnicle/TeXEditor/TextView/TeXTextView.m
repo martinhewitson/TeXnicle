@@ -2780,10 +2780,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSInteger idx = NSNotFound;
   if (loc <= [str length]) {
     NSRange lineRange = [str lineRangeForRange:NSMakeRange(loc,0)];
-//    NSLog(@"Line range %@", NSStringFromRange(lineRange));
     idx = lineRange.location;
     while (idx < NSMaxRange(lineRange)) {
-//      NSLog(@"    checking char %c", [str characterAtIndex:idx]);
       if (![whitespaceCharacterSet characterIsMember:[str characterAtIndex:idx]]) {
         break;
       }
@@ -3277,121 +3275,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSRange pRange = [self rangeForCurrentParagraph];
   [self setSelectedRange:pRange];
 }
-
-
-
-- (IBAction) reformatRange:(NSRange)pRange
-{
-	
-	NSRange currRange = [self selectedRange];
-	[self setSelectedRange:pRange];	
-	NSString *oldStr = [[self string] substringWithRange:pRange];
-  NSLog(@"Reformatting text: \n[%@]", oldStr);
-  
-  if ([oldStr length] == 0) {
-    return;
-  }
-  
-  // get the initial indent: either the number of whitespaces or the index in the line of the \command
-	NSInteger offset = 0;
-  NSInteger loc = 0;
-  NSString *indent = @"";
-  if ([oldStr characterAtIndex:0] == '\\') {
-    NSRange lineRange = [[self string] lineRangeForRange:pRange];
-    offset = pRange.location - lineRange.location;
-    if ([oldStr hasPrefix:@"\\item"]) {
-      indent = [[self string] substringWithRange:NSMakeRange(lineRange.location, offset)];
-    }
-//    NSRange lineRange = ;
-  } else {
-    while ([whitespaceCharacterSet characterIsMember:[oldStr characterAtIndex:loc]]) {
-      loc++;
-    }
-    indent = [oldStr substringToIndex:loc];
-    pRange.location += [indent length];
-    pRange.length -= [indent length];
-  }
-  
-  
-	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue] - [indent length];
-  
-  NSString *newString = [oldStr substringFromIndex:loc];
-  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"[\n\r\t]+" withString:@" " inString:newString];
-  //	NSString *newString = [NSString stringWithControlsFilteredForString:oldStr];
-  
-  // replace multiple ' ' with a single space
-  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\\s+" withString:@" " inString:newString];
-	
-  NSLog(@"Scanning through \n[%@]", newString);
-  
-	// Now go through and put in \n when we are past the linelength
-  //	NSString *lineBreakStr = [NSString stringWithFormat:@" %C", NSLineSeparatorCharacter];
-	NSString *lineBreakStr = [NSString stringWithFormat:@"\n"];
-  loc = 0;
-  NSInteger count = offset;
-	while (loc < [newString length]) {
-//    NSLog(@"Checking location %d = '%c'", loc, [newString characterAtIndex:loc]);
-		if (count >= lineWrapLength) {
-//      NSLog(@"  past line wrap");
-      if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
-        // if we already have a newline, reset the count
-//        NSLog(@"    already have newline");
-        count = 0;
-      } else if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
-        // rewind to previous whitespace if we are past the line length
-//        NSLog(@"   rewinding to last whitespace");
-        NSInteger start = loc;
-        if (count > lineWrapLength) {
-          loc--;
-          
-          // WE NEED TO CHECK IF WE ACTUALLY FIND A WHITESPACE OR NEWLINE, OTHERWISE CARRY ON FROM WHERE WE WERE!!
-          BOOL rewound = NO;
-          while (loc >= 0) {
-//            NSLog(@"      checking char '%c'", [newString characterAtIndex:loc]);
-            if ([whitespaceCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
-              loc++;
-              rewound = YES;
-              break;
-            }
-            
-            if ([newLineCharacterSet characterIsMember:[newString characterAtIndex:loc]]) {
-              break;
-            }
-            loc--;
-          }
-          
-          if (rewound == NO) {
-            loc = start;
-          }
-        }
-        
-//        NSLog(@"   replacing newline at %d", loc);
-				newString = [newString stringByReplacingCharactersInRange:NSMakeRange(loc, 0)
-																											 withString:lineBreakStr];
-        count = 0;
-			} else {
-        // do nothing
-      }
-		}
-    count++;
-		loc++;
-	}
-    
-//  newString = [newString stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent]];
-//  newString = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\n\\s*" withString:[NSString stringWithFormat:@"\n%@", indent] inString:newString];
-//  newString = [indent stringByAppendingString:newString];
-  
-	[self breakUndoCoalescing];
-	[self setSelectedRange:pRange];
-  [self shouldChangeTextInRange:pRange replacementString:newString];
-  [[self textStorage] beginEditing];
-  [[self textStorage] replaceCharactersInRange:pRange withString:newString];
-  [[self textStorage] endEditing];
-	[self setSelectedRange:currRange];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
-	return;
-}
-
 
 - (IBAction) indentSelection:(id)sender
 {	
