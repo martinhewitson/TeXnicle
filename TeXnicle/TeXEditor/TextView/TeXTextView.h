@@ -228,6 +228,20 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (NSUInteger)characterIndexOfPoint:(NSPoint)aPoint;
 
 #pragma mark -
+#pragma mark LaTeX Formatting
+
+- (IBAction)latexFormatBold:(id)sender;
+- (IBAction)latexFormatItalic:(id)sender;
+- (IBAction)latexFormatSmallCaps:(id)sender;
+- (IBAction)latexFormatRoman:(id)sender;
+- (IBAction)latexFormatTypewritter:(id)sender;
+- (IBAction)latexFormatSansSerif:(id)sender;
+- (IBAction)latexFormatSlanted:(id)sender;
+- (IBAction)latexFormatEmphasized:(id)sender;
+- (IBAction)latexFormatUnderline:(id)sender;
+- (IBAction)latexFormatFootnote:(id)sender;
+
+#pragma mark -
 #pragma mark Formatting text
 
 - (NSRange)indentRangeForLineAtIndex:(NSInteger)loc;

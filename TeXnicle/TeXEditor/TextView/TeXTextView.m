@@ -529,6 +529,71 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 #pragma mark -
+#pragma mark LaTeX Formatting
+
+- (void) formatSelectionWithCommand:(NSString*)command
+{
+  NSRange sel = [self selectedRange];
+  if (sel.length>0) {
+    NSString *text = [[self string] substringWithRange:sel];
+    NSString *newString = [NSString stringWithFormat:@"\\%@{%@}", command, text];
+    [self shouldChangeTextInRange:sel replacementString:newString];
+    [self replaceCharactersInRange:sel withString:newString];
+  }
+}
+
+- (IBAction)latexFormatBold:(id)sender
+{
+  [self formatSelectionWithCommand:@"textbf"];
+}
+
+- (IBAction)latexFormatItalic:(id)sender
+{
+  [self formatSelectionWithCommand:@"textit"];
+}
+
+- (IBAction)latexFormatSmallCaps:(id)sender
+{
+  [self formatSelectionWithCommand:@"textsc"];
+}
+
+- (IBAction)latexFormatRoman:(id)sender
+{
+  [self formatSelectionWithCommand:@"textrm"];
+}
+
+- (IBAction)latexFormatTypewritter:(id)sender
+{
+  [self formatSelectionWithCommand:@"texttt"];
+}
+
+- (IBAction)latexFormatSansSerif:(id)sender
+{
+  [self formatSelectionWithCommand:@"textsf"];
+}
+
+- (IBAction)latexFormatSlanted:(id)sender
+{
+  [self formatSelectionWithCommand:@"textsl"];
+}
+
+- (IBAction)latexFormatEmphasized:(id)sender
+{
+  [self formatSelectionWithCommand:@"emph"];
+}
+
+- (IBAction)latexFormatUnderline:(id)sender
+{
+  [self formatSelectionWithCommand:@"underline"];
+}
+
+- (IBAction)latexFormatFootnote:(id)sender
+{
+  [self formatSelectionWithCommand:@"footnote"];
+}
+
+
+#pragma mark -
 #pragma mark Syntax highlighting
 
 - (NSArray*)bookmarksForLineRange:(NSRange)aRange
@@ -3599,6 +3664,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
 	NSInteger tag = [menuItem tag];
+  
+  // bold format
+  if (tag == 4110 || tag == 4120 || tag == 4130 || tag == 4140 || tag == 4150
+      || tag == 4160 || tag == 4170 || tag == 4180 || tag == 4190 || tag == 41100) {
+    NSRange sel = [self selectedRange];
+    if (sel.length>0) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+
   if (tag == 1060) {
     // paste as table. Check we have text on the pasteboard
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
