@@ -327,7 +327,6 @@
 
 - (void) didTurnIntoFault
 {
-  self.mainFileOfProject = nil;
   self.metadata.parent = nil;
   self.metadata = nil;
   
@@ -335,7 +334,7 @@
 //		NSLog(@"Clearing document for %@", [self name]);
 		document = nil;
 	}
-  self.content = nil;
+
 }
 
 - (NSString*) extension
