@@ -874,8 +874,6 @@
   NSManagedObjectContext *moc = [self managedObjectContext];
   [moc processPendingChanges];
   [[moc undoManager] disableUndoRegistration];
-//  NSEntityDescription *projectDescription = [NSEntityDescription entityForName:@"Project" inManagedObjectContext:moc];
-//  ProjectEntity *project = [[NSManagedObject alloc] initWithEntity:projectDescription insertIntoManagedObjectContext:moc]; 
   
   // set name and folder of the project
   NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
