@@ -3351,14 +3351,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (newText) {
     //  NSLog(@"Got [%@]", newText);
     // replace string
+    if ([self shouldChangeTextInRange:pRange replacementString:newText]) {
     [self breakUndoCoalescing];
     [self setSelectedRange:pRange];
-    [self shouldChangeTextInRange:pRange replacementString:newText];
-    [[self textStorage] beginEditing];
-    [[self textStorage] replaceCharactersInRange:pRange withString:newText];
-    [[self textStorage] endEditing];
+      [self replaceCharactersInRange:pRange withString:newText];
+      [self didChangeText];
     [self setSelectedRange:currRange];
     [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
+  }
   }
 	return;
 }
