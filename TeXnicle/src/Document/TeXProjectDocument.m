@@ -2963,6 +2963,7 @@
 	
 	
 	[newFile setValue:@"main" forKey:@"name"];
+  [newFile setValue:self.project forKey:@"project"];  
 	[self.projectItemTreeController addObject:newFile];
 	[self.project setValue:newFile forKey:@"mainFile"];
 	
