@@ -3326,18 +3326,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSString *text = [[self string] substringWithRange:pRange];
 //  NSLog(@"Reformatting [%@]", text);
   NSString *newText = [text reformatStartingAtIndex:startPosition forLinewidth:lineWrapLength];
-  
-//  NSLog(@"Got [%@]", newText);
-  // replace string
-	[self breakUndoCoalescing];
-	[self setSelectedRange:pRange];
-  [self shouldChangeTextInRange:pRange replacementString:newText];
-  [[self textStorage] beginEditing];
-  [[self textStorage] replaceCharactersInRange:pRange withString:newText];
-  [[self textStorage] endEditing];
-	[self setSelectedRange:currRange];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
-  
+  if (newText) {
+    //  NSLog(@"Got [%@]", newText);
+    // replace string
+    [self breakUndoCoalescing];
+    [self setSelectedRange:pRange];
+    [self shouldChangeTextInRange:pRange replacementString:newText];
+    [[self textStorage] beginEditing];
+    [[self textStorage] replaceCharactersInRange:pRange withString:newText];
+    [[self textStorage] endEditing];
+    [self setSelectedRange:currRange];
+    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
+  }
 	return;
 }
 
