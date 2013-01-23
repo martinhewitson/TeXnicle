@@ -272,6 +272,8 @@
 	[newFolder setValue:[NSString stringWithFormat:@"New Folder %02lu", [[treeController flattenedContent] count]]
 							 forKey:@"name"];
 		
+  [newFolder setValue:self.mainDocument.project forKey:@"project"];
+  
 	[treeController addObject:newFolder];
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
 }
