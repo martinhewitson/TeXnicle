@@ -362,8 +362,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
                                   insertIntoManagedObjectContext:moc];
 	
 	// set name
-  [newFolder setPrimitiveValue:aName forKey:@"name"];
+  [newFolder setValue:aName forKey:@"name"];
 
+  // set project
+  [newFolder setValue:self.project forKey:@"project"];
 	
 	// set parent
 	id parent = [[self selectedObjects] firstObject];
