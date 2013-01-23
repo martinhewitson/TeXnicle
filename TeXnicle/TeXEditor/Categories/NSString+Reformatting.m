@@ -25,10 +25,15 @@
   NSInteger indentation;
   
   NSInteger startPosition = [self startIndexForReformattingFromIndex:cursorLocation indentation:&indentation];
-  NSInteger endPosition = [self endIndexForReformattingFromIndex:cursorLocation];
 //  NSLog(@"Start index %ld", startPosition);
-//  NSLog(@"End index %ld", endPosition);
 //  NSLog(@"Indentation %ld", indentation);
+  
+  NSInteger endPosition = [self endIndexForReformattingFromIndex:cursorLocation];
+//  NSLog(@"End index %ld", endPosition);
+  
+  if (startPosition == NSNotFound || endPosition == NSNotFound) {
+    return [self copy];
+  }
   
   // now make sure we preserve the initial whitespace
   NSInteger count = 0;
