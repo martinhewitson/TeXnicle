@@ -537,8 +537,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (sel.length>0) {
     NSString *text = [[self string] substringWithRange:sel];
     NSString *newString = [NSString stringWithFormat:@"\\%@{%@}", command, text];
-    [self shouldChangeTextInRange:sel replacementString:newString];
+    if ([self shouldChangeTextInRange:sel replacementString:newString]) {
     [self replaceCharactersInRange:sel withString:newString];
+      [self didChangeText];
+    }
   }
 }
 
