@@ -78,6 +78,11 @@
 
 - (NSInteger) startIndexForReformattingFromIndex:(NSInteger)cursorLocation indentation:(NSInteger*)indent
 {
+  // check we start within the range of the string
+  if (cursorLocation >= [self length]) {
+    cursorLocation = [self length]-1;
+  }
+  
   NSCharacterSet *newlineCharacters = [NSCharacterSet newlineCharacterSet];
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
   
@@ -171,14 +176,28 @@
     previousCharacter = c;
   }
   
-  // if we got to the start of the file, then start there
+//  NSLog(@"Ended at pos %ld", pos);
+  
+  // if we got to the start of the text, then start there
   if (pos < 0) {
     startPosition = 0;
     *indent = 0;
   }
   
+  // edge case: we are starting from the end of the line, and so we should just format from the start
+  if (pos == cursorLocation && pos == [self length]) {
+    startPosition = 0;
+    *indent = 0;
+  }
+  
+  // if we still don't have a start position, then return 0
+  if (startPosition == NSNotFound) {
+    startPosition = 0;
+    *indent = 0;
+  }
+  
   // if we didn't stop on a command or a brace, then we need to count the indent
-  if (stoppedOnBrace == NO && stoppedOnItem == NO) {
+  if (stoppedOnBrace == NO && stoppedOnItem == NO && startPosition != NSNotFound) {
     NSRange lineRange = [self lineRangeForRange:NSMakeRange(startPosition, 0)];
     pos = lineRange.location;
     NSInteger count = 0;
@@ -198,6 +217,11 @@
 
 - (NSInteger) endIndexForReformattingFromIndex:(NSInteger)cursorLocation
 {
+  // check we start within the range of the string
+  if (cursorLocation >= [self length]) {
+    cursorLocation = [self length]-1;
+  }
+  
   NSCharacterSet *newlineCharacters = [NSCharacterSet newlineCharacterSet];
   NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
   
@@ -275,7 +299,7 @@
     previousCharacter = c;
   }
   
-  // if we got to the end of the file, then end there
+  // if we got to the end of the text, then end there
   if (pos == strLength) {
     // wind back to the first non-whitespace, non-newline character
     pos--;
