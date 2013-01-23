@@ -48,6 +48,9 @@
 
 - (NSString*) name
 {
+  if ([self.file isKindOfClass:[NSURL class]]) {
+    return [self.file lastPathComponent];
+  }
   if (self.file != nil) {
     return [self.file valueForKey:@"name"];
   } else {
