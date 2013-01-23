@@ -256,22 +256,22 @@
   }
   
 	if (self.mode == TPPopupListInsert) {
-		if ([self.delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {
+		if (self.delegate && [self.delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {
 			[self.delegate performSelector:@selector(insertWordAtCurrentLocation:) withObject:tag];
 		}
 	} else if (self.mode == TPPopupListSpell) {
-		if ([self.delegate respondsToSelector:@selector(replaceWordAtCurrentLocationWith:)]) {
+		if (self.delegate && [self.delegate respondsToSelector:@selector(replaceWordAtCurrentLocationWith:)]) {
 			[self.delegate performSelector:@selector(replaceWordAtCurrentLocationWith:) withObject:tag];
 		}
 	} else if (self.mode == TPPopupListReplace) {
-		if ([self.delegate respondsToSelector:@selector(replaceWordUpToCurrentLocationWith:)]) {
+		if (self.delegate && [self.delegate respondsToSelector:@selector(replaceWordUpToCurrentLocationWith:)]) {
 			[self.delegate performSelector:@selector(replaceWordUpToCurrentLocationWith:) withObject:tag];
 		}
 	}
   
-  if ([self.delegate respondsToSelector:@selector(didSelectPopupListItem)]) {
-    [self.delegate performSelector:@selector(didSelectPopupListItem)];
-  }
+//  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectPopupListItem)]) {
+//    [self.delegate performSelector:@selector(didSelectPopupListItem)];
+//  }
   
   
 }
