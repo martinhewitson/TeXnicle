@@ -2792,6 +2792,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
+        // if we have only one option, and the command is the same as the option, don't show the completion list
+        if ([commands count] == 1) {
+          if ([command isEqualToString:commands[0]]) {
+            return NO;
+          }
+        }
+        
         [self completeFromList:commands];
         return YES;
       }
