@@ -2936,13 +2936,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *code = [self codeForCommand:currentCommand];
     if (code) {
       NSRange commandRange = [self rangeForCurrentSnippetCommand];
+      if ([self shouldChangeTextInRange:commandRange replacementString:code]) {
       [[self undoManager] beginUndoGrouping];
-      [self shouldChangeTextInRange:commandRange replacementString:code];
       [self replaceCharactersInRange:commandRange withString:code];
       [self replacePlaceholdersInString:code range:commandRange];      
       [self didChangeText];
       [[self undoManager] endUndoGrouping];
       [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+      }
       return YES;
     }
   }
