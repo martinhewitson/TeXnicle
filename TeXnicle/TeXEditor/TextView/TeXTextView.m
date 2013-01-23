@@ -1139,9 +1139,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			NSData *data = [[att fileWrapper] regularFileContents];
 			NSString *code = [[NSString alloc] initWithData:data encoding:[MHFileReader defaultEncoding]];
 			// delete the line up to and including the attachment
+      [[self textStorage] beginEditing];
 			[[self textStorage] replaceCharactersInRange:NSMakeRange(lineRange.location, idx+2) 
 																				withString:[code stringByAppendingString:@"\n"]];
-			
+			[[self textStorage] endEditing];
 		}
 		
 		idx++;
@@ -1219,8 +1220,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSData *data = [[snippet fileWrapper] regularFileContents];
 	NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
 	NSRange attRange = NSMakeRange([index unsignedLongValue], 1);
+  [[self textStorage] beginEditing];
 	[[self textStorage] removeAttribute:NSAttachmentAttributeName range:attRange];
 	[[self textStorage] replaceCharactersInRange:attRange withAttributedString:code];
+  [[self textStorage] endEditing];
   
   // update editor ruler
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
@@ -2596,7 +2599,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
       
       if ([att isKindOfClass:[MHPlaceholderAttachment class]]) {
-        [super replaceCharactersInRange:selRange withString:aString];
+        if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+          [self replaceCharactersInRange:selRange withString:aString];
+          [self didChangeText];
+        }
         return;
       }
 		}
@@ -2636,7 +2642,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     // get selected text
     if (selRange.length > 0) {
       NSString *selected = [[string string] substringWithRange:selRange];
-      [super replaceCharactersInRange:selRange withString:[NSString stringWithFormat:@"{%@}", selected]];
+      NSString *replacement = [NSString stringWithFormat:@"{%@}", selected];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
     } else {
       [super insertText:@"{}"];
       [self moveLeft:self];
