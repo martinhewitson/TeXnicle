@@ -2830,13 +2830,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   [super didChangeText];
   
-  [self updateEditorRuler];
-
   if (![self autocompleteArgument]) {
     if (![self autocompleteCommand]) {
       [_popupList dismiss];
     }
   }
+  
+  [self updateEditorRuler];
 }
 
 
