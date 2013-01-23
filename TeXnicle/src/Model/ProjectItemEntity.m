@@ -48,25 +48,9 @@
 @synthesize hasEdits;
 
 
-//- (NSSet *)children;
-//{
-//  [self willAccessValueForKey:@"children"];
-//  NSMutableSet *filteredItems = [self primitiveValueForKey:@"children"]; // they should be mutable already
-//  [filteredItems filterUsingPredicate:[NSPredicate predicateWithFormat:@"parent == nil"]];
-//  [self didAccessValueForKey:@"children"];
-//  return filteredItems;
-//}
-
-//- (void) didTurnIntoFault
-//{
-//  self.parent = nil;
-//  self.project = nil;
-//}
-
 - (void) awakeFromInsert
 {
 	[self setValue:@NO forKey:@"isLeaf"];
-	[self setValue:[self project] forKey:@"project"];
 }
 
 - (NSString*) shortName
@@ -98,42 +82,6 @@
 	}
   return relativePath;
 }
-
-- (NSManagedObject *)project
-{
-	[self willAccessValueForKey:@"project"];
-	id proj = [self primitiveValueForKey:@"project"];
-	[self didAccessValueForKey:@"project"];
-	
-	if (proj)
-		return proj;
-	
-	// otherwise we need to pull the project from the managed object context
-	NSManagedObjectContext *moc = [self managedObjectContext];
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	NSError *fetchError = nil;
-	NSArray *fetchResults;
-	
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Project"
-																						inManagedObjectContext:moc];
-	
-	[fetchRequest setEntity:entity];
-	fetchResults = [moc executeFetchRequest:fetchRequest error:&fetchError];
-	
-	if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) {
-		ProjectEntity *mocproject = fetchResults[0];
-		return mocproject;
-	}
-	
-	if (fetchError != nil) {
-		[NSApp presentError:fetchError];
-	} else {
-		// should present custom error message...
-	}
-
-	return proj;
-}
-
 
 
 - (NSString*)pathOnDisk
