@@ -363,10 +363,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	
 	// set name
   [newFolder setValue:aName forKey:@"name"];
-
+  
   // set project
   [newFolder setValue:self.project forKey:@"project"];
-	
+  	
 	// set parent
 	id parent = [[self selectedObjects] firstObject];
   // if the parent is a file, get its parent
