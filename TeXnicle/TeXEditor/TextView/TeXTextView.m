@@ -2970,12 +2970,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];    
     NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
     NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
-    [self shouldChangeTextInRange:placeholderRange replacementString:@" "];
+    if ([self shouldChangeTextInRange:placeholderRange replacementString:@" "]) {
+      [[self textStorage] beginEditing];
     [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
+      [[self textStorage] endEditing];
     [self didChangeText];
     // replace placeholder with blank just to make the counting right
     code = [code stringByReplacingCharactersInRange:r withString:@" "];
   }      
+  }
   
   // select the first placeholder
   if (firstPlaceholder.location != NSNotFound) {
