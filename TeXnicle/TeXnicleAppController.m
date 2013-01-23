@@ -269,7 +269,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   [defaultValues setValue:@YES forKey:TPSaveOnCompile];
   [defaultValues setValue:@YES forKey:TPClearConsoleOnCompile];
   [defaultValues setValue:@NO forKey:TPSyncPDFAfterCompile];
-	defaultValues[OpenConsoleOnTypeset] = @YES;
+  [defaultValues setValue:@NO forKey:OpenConsoleOnTypeset];
 
   // console
   defaultValues[TEConsoleFont] = [NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]];  
