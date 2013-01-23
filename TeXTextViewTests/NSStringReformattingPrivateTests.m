@@ -363,6 +363,33 @@
   STAssertEquals(indentation, 0l, @"Indentation should be 0");
   
   
+  //-----------------------------------------------------------------------
+  // Test 7 - a line containing some normal braces, and we start reformatting from the end
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 7", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = @"seems (to cause a problem when we reformati)";
+  // the startIndex should be 0, end at 44
+  startIndex = [string startIndexForReformattingFromIndex:44 indentation:&indentation];
+  endIndex = [string endIndexForReformattingFromIndex:44];
+  STAssertEquals(startIndex, 0l, @"Start index should be 0");
+  STAssertEquals(endIndex, 44l, @"End index should be 44");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  
+  
+  //-----------------------------------------------------------------------
+  // Test 8 - a line containing an argument, and we start reformatting from the end
+  NSLog(@"=============================================================================");
+  NSLog(@" %@/%@ - TEST 8", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+  NSLog(@"=============================================================================");
+  string = @"\\ref{tab:req_tm_params}. The pipeline protocol is summarised below. The directories are relative to the pipeline’s data directory.";
+  // the startIndex should be 0, end at 130
+  startIndex = [string startIndexForReformattingFromIndex:130 indentation:&indentation];
+  endIndex = [string endIndexForReformattingFromIndex:130];
+  STAssertEquals(startIndex, 0l, @"Start index should be 0");
+  STAssertEquals(endIndex, 130l, @"End index should be 130");
+  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+
   
 }
 
