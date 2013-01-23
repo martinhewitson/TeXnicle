@@ -1080,10 +1080,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *replacement = [NSString stringWithString:aWord];
 	NSRange curr = [self selectedRange];
 	NSRange rr = NSMakeRange(curr.location, 0);
-	[self shouldChangeTextInRange:rr replacementString:replacement];
+	if ([self shouldChangeTextInRange:rr replacementString:replacement]) {
 	[self replaceCharactersInRange:rr withString:replacement];
 	[self clearSpellingList];
   [self colorVisibleText];
+    [self didChangeText];
+  }
 }
 
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord
@@ -1091,10 +1093,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *replacement = [NSString stringWithString:aWord];
 	[self selectUpToCurrentLocation];
 	NSRange sel = [self selectedRange];
-	[self shouldChangeTextInRange:sel replacementString:replacement];
+	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
 	[self replaceCharactersInRange:sel withString:replacement];
 	[self clearSpellingList];
   [self colorVisibleText];
+    [self didChangeText];
+  }
 }
 
 - (void) replaceWordAtCurrentLocationWith:(NSString*)aWord
@@ -1103,10 +1107,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	//	NSLog(@"Replacing current word with %@", replacement);
   //	[self selectWord:self];
 	NSRange sel = [self rangeForCurrentWord];
-	[self shouldChangeTextInRange:sel replacementString:replacement];
+	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
 	[self replaceCharactersInRange:sel withString:replacement];
 	[self clearSpellingList];
   [self colorVisibleText];
+    [self didChangeText];
+  }
 }
 
 
