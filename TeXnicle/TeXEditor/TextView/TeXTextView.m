@@ -178,11 +178,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[scrollView setHasVerticalScroller:YES];
 	[scrollView setAutohidesScrollers:YES];
 	[scrollView setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
-	[[scrollView contentView] setAutoresizesSubviews:YES];  
+	[[scrollView contentView] setAutoresizesSubviews:YES];
 	[scrollView setVerticalRulerView:self.editorRuler];
 	[scrollView setHasHorizontalRuler:NO];
 	[scrollView setHasVerticalRuler:YES];
-	[scrollView setRulersVisible:YES];  
+	[scrollView setRulersVisible:YES];
 }
 
 - (void) setupLists
@@ -192,9 +192,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSDictionary *commmandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
   path = [[NSBundle mainBundle] pathForResource:@"ContextCommands" ofType:@"plist"];
 	NSDictionary *contextCommandDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-	self.commandList = [[NSMutableArray alloc] init];								
+	self.commandList = [[NSMutableArray alloc] init];
 	[self.commandList addObjectsFromArray:[commmandDict valueForKey:@"Commands"]];
-	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];	
+	[self.commandList addObjectsFromArray:[contextCommandDict valueForKey:@"Commands"]];
 }
 
 -(void) turnOffWrapping
@@ -210,10 +210,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[textContainer setWidthTracksTextView:NO];
 	[textContainer setHeightTracksTextView:NO];
 	
-	// Make sure text view is wide enough:	
+	// Make sure text view is wide enough:
 	[self setMaxSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
 	[self setHorizontallyResizable:YES];
-	[self setVerticallyResizable:YES];	
+	[self setVerticallyResizable:YES];
   
   [self setWrapStyle];
 }
@@ -249,12 +249,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 -(void)	goToLineWithNumber:(NSNumber*)targetLineNumber
 {
-  [self goToLine:[targetLineNumber integerValue]]; 
+  [self goToLine:[targetLineNumber integerValue]];
 }
 
 -(void)	goToLine:(NSInteger)targetLineNumber
 {
-  NSString *text = [self string];  
+  NSString *text = [self string];
   NSInteger lineNumber = 0;
   NSInteger idx = 0;
   NSRange lineRange;
@@ -265,9 +265,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   do
   {
     // get the range of the current line
-    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];    
+    lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
     // Get an attributed version of this line
-    attLine = [attributedString attributedSubstringFromRange:lineRange];    
+    attLine = [attributedString attributedSubstringFromRange:lineRange];
     // Get a line count for this line of text.
     lineCount = [NSAttributedString lineCountForLine:attLine];
     lineNumber += lineCount;
@@ -283,7 +283,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // did we find something?
 	if (foundLinenumber) {
     [self scrollRangeToVisible: lineRange];
-    [self setSelectedRange:lineRange];  
+    [self setSelectedRange:lineRange];
   } else {
     // did the user ask for a line number greater than the document length?
     if (targetLineNumber < lineNumber) {
@@ -292,7 +292,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [NSException raise:@"Line number not found" format:format, targetLineNumber];
     } else {
       // tell the user the line number is too high
-      NSAlert *alert = [NSAlert alertWithMessageText:@"Document length exceeded." defaultButton:@"OK" 
+      NSAlert *alert = [NSAlert alertWithMessageText:@"Document length exceeded." defaultButton:@"OK"
                                      alternateButton:nil otherButton:nil informativeTextWithFormat:@"Requested line %ld is greater than the number of lines in the document", targetLineNumber];
       [alert runModal];
     }
@@ -312,7 +312,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSMutableString*	str = [[self textStorage] mutableString];
   
 	// Get the range to edit
-	NSRange r = [str paragraphRangeForRange:selRange];	
+	NSRange r = [str paragraphRangeForRange:selRange];
 	// Get a mutable string for this range
 	NSInteger inserted = 0;
   NSMutableString *newString = [NSMutableString string];
@@ -328,7 +328,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [newString insertString:commentString atIndex:ll+1];
       inserted++;
 		}
-	}  
+	}
   
   if (inserted == 0)
     return;
@@ -354,11 +354,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSMutableString*	str = [[self textStorage] mutableString];
   
 	// Get the range to edit
-	NSRange r = [str paragraphRangeForRange:selRange];	
+	NSRange r = [str paragraphRangeForRange:selRange];
 	// Get a mutable string for this range
 	NSMutableString *newString = [NSMutableString string];
 	[newString appendString:[str substringWithRange:r]];
-
+  
   // find first non-whitespace character
   NSInteger start = 0;
   while (start < [newString length]) {
@@ -410,7 +410,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setSelectedRange:NSMakeRange(selRange.location-1,len)];
 	
   // color visible text
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];  
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
 }
 
 - (IBAction)toggleCommentForParagraph:(id)sender
@@ -427,15 +427,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   unichar commentChar = [self.coloringEngine commentCharacter];
   
 	// Get the range to edit
-	NSRange r = [str paragraphRangeForRange:selRange];	
+	NSRange r = [str paragraphRangeForRange:selRange];
   
-  // fix the range in case we don't start the paragraph at a comment  
+  // fix the range in case we don't start the paragraph at a comment
   
 	// Get a mutable string for this range
 	NSMutableString *newString = [NSMutableString string];
   NSString *substring = [str substringWithRange:r];
-	[newString appendString:substring];  
-  // look for first non-whitespace character  
+	[newString appendString:substring];
+  // look for first non-whitespace character
   NSInteger move = 0;
   NSInteger start = 0;
   while (start < [newString length]) {
@@ -538,7 +538,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *text = [[self string] substringWithRange:sel];
     NSString *newString = [NSString stringWithFormat:@"\\%@{%@}", command, text];
     if ([self shouldChangeTextInRange:sel replacementString:newString]) {
-    [self replaceCharactersInRange:sel withString:newString];
+      [self replaceCharactersInRange:sel withString:newString];
       [self didChangeText];
     }
   }
@@ -603,7 +603,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFileInLineRange:)]) {
     id<TeXTextViewDelegate> d = (id<TeXTextViewDelegate>)self.delegate;
     return [d bookmarksForCurrentFileInLineRange:aRange];
-  }  
+  }
   return @[];
 }
 
@@ -616,13 +616,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) colorWholeDocument
 {
-//  NSLog(@"Color whole doc: delegate %@", self.delegate);
+  //  NSLog(@"Color whole doc: delegate %@", self.delegate);
   if (self.delegate != nil && [self.delegate respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![self.delegate performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
     }
   }
-//  NSLog(@"Coloring whole document");
+  //  NSLog(@"Coloring whole document");
   if (self.coloringEngine) {
     [self.coloringEngine colorTextView:self
                            textStorage:[self textStorage]
@@ -634,7 +634,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyCurrentTextColorToLine
 {
-  NSRange pRange = [self rangeForCurrentLine];  
+  NSRange pRange = [self rangeForCurrentLine];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
   [[self textStorage] addAttribute:NSForegroundColorAttributeName value:color range:pRange];
@@ -642,7 +642,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) colorVisibleText
 {
-//  NSLog(@"Color visible text: delegate %@", self.delegate);
+  //  NSLog(@"Color visible text: delegate %@", self.delegate);
   if ([self delegate] && [[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![[self delegate] performSelector:@selector(shouldSyntaxHighlightDocument)]) {
       return;
@@ -650,12 +650,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   NSRange vr = [self getVisibleRange];
-//  NSLog(@"Visible range %ld-%ld", vr.location, vr.location+vr.length);
+  //  NSLog(@"Visible range %ld-%ld", vr.location, vr.location+vr.length);
   
   // adjust range to be greater than the visible range
   NSInteger loc = vr.location-vr.length/2;
   NSInteger strLen = [[self string] length];
-  if (loc < 0) 
+  if (loc < 0)
     loc = 0;
   NSInteger length = vr.length*2;
   if (loc+length >= strLen) {
@@ -673,7 +673,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   lr = [[self string] lineRangeForRange:NSMakeRange(loc+length, 0)];
   NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
   
-//  NSLog(@"Coloring range %ld-%ld", r.location, r.location+r.length);
+  //  NSLog(@"Coloring range %ld-%ld", r.location, r.location+r.length);
   if (self.coloringEngine) {
     [self.coloringEngine colorTextView:self
                            textStorage:[self textStorage]
@@ -690,7 +690,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
-//  NSLog(@"Frame change");
+  //  NSLog(@"Frame change");
   [_popupList dismiss];
   [self colorVisibleText];
   [self highlightMatchingWords];
@@ -706,7 +706,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 #pragma mark -
-#pragma mark KVO 
+#pragma mark KVO
 
 - (void) stopObserving
 {
@@ -719,7 +719,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]];  
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]];
 }
@@ -731,57 +731,57 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
-
+                context:NULL];
+  
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
-
+                context:NULL];
+  
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
-
+                context:NULL];
+  
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];	
+                context:NULL];
 	
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]
                 options:NSKeyValueObservingOptionNew
-                context:NULL];		
+                context:NULL];
 }
 
 
@@ -790,7 +790,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]]) {	
+	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]]) {
     NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
     [self setBackgroundColor:c];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]]) {
@@ -830,32 +830,32 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
 {
-//  NSLog(@"Apply font and color");
+  //  NSLog(@"Apply font and color");
   
-//  NSRect visibleRect = [self visibleRect];
-//  NSRange sel = [self selectedRange];
-//  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
-//  NSLog(@"  Selected range %@", NSStringFromRange(sel));
+  //  NSRect visibleRect = [self visibleRect];
+  //  NSRange sel = [self selectedRange];
+  //  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
+  //  NSLog(@"  Selected range %@", NSStringFromRange(sel));
   
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = [atts valueForKey:NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
   NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
   if (![newFont isEqualTo:[self font]] || forceUpdate) {
-//    NSLog(@"Setting new font");
+    //    NSLog(@"Setting new font");
     [self setFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
-//    NSLog(@"Setting new color");
+    //    NSLog(@"Setting new color");
     [self setTextColor:newColor];
   }
   
   NSDictionary *currentAtts = [self typingAttributes];
   if (![currentAtts isEqualToDictionary:atts] || forceUpdate) {
-//    NSLog(@"setting typing atts");
+    //    NSLog(@"setting typing atts");
     [self setTypingAttributes:atts];
   } else {
-//    NSLog(@"Skipping setting atts");
+    //    NSLog(@"Skipping setting atts");
   }
   
   // background color
@@ -867,15 +867,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [self setSelectedTextAttributes:
    @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
-    NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
+   NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
   
-//  [self scrollRangeToVisible:sel];
-//  [self scrollRectToVisible:visibleRect];
-//  
-//  NSLog(@"Finished.");
-//  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
-//  NSLog(@"  Selected range %@", NSStringFromRange(sel));
-//  
+  //  [self scrollRangeToVisible:sel];
+  //  [self scrollRectToVisible:visibleRect];
+  //
+  //  NSLog(@"Finished.");
+  //  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
+  //  NSLog(@"  Selected range %@", NSStringFromRange(sel));
+  //
 }
 
 - (void) setWrapStyle
@@ -907,7 +907,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
 	if ([self textStorage]) {
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-		[nc removeObserver:self 
+		[nc removeObserver:self
 									name:NSTextStorageDidProcessEditingNotification
 								object:[self textStorage]];
 	}
@@ -922,7 +922,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		// Register for "text changed" notifications of our text storage:
 		[nc addObserver:self selector:@selector(processEditing:)
 							 name: NSTextStorageDidProcessEditingNotification
-						 object:[self textStorage]];	
+						 object:[self textStorage]];
 	}
 	
 }
@@ -959,7 +959,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) completeFromList:(NSArray*)aList
 {
-//  NSLog(@"Complete from list");
+  //  NSLog(@"Complete from list");
 	if ([aList count]==0) {
     [_popupList dismiss];
 		return;
@@ -967,9 +967,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 	NSPoint point = [self listPointForCurrentWord];
 	NSPoint wp = [self convertPoint:point toView:nil];
-//  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
+  //  NSLog(@"Completing %@ from list of %d items", popupList, [aList count]);
   if (_popupList == nil || [_popupList mode] != TPPopupListReplace) {
-//    NSLog(@"Making popup...");
+    //    NSLog(@"Making popup...");
     if (_popupList) {
       [_popupList dismiss];
     }
@@ -1034,7 +1034,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (IBAction) showSpellingList:(id)sender
-{	
+{
 	NSString *word = [self currentWord];
   //	NSLog(@"Checking spelling for '%@'", word);
 	if (word) {
@@ -1081,9 +1081,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSRange curr = [self selectedRange];
 	NSRange rr = NSMakeRange(curr.location, 0);
 	if ([self shouldChangeTextInRange:rr replacementString:replacement]) {
-	[self replaceCharactersInRange:rr withString:replacement];
-	[self clearSpellingList];
-  [self colorVisibleText];
+    [self replaceCharactersInRange:rr withString:replacement];
+    [self clearSpellingList];
+    [self colorVisibleText];
     [self didChangeText];
   }
 }
@@ -1094,9 +1094,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[self selectUpToCurrentLocation];
 	NSRange sel = [self selectedRange];
 	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
-	[self replaceCharactersInRange:sel withString:replacement];
-	[self clearSpellingList];
-  [self colorVisibleText];
+    [self replaceCharactersInRange:sel withString:replacement];
+    [self clearSpellingList];
+    [self colorVisibleText];
     [self didChangeText];
   }
 }
@@ -1108,9 +1108,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	[self selectWord:self];
 	NSRange sel = [self rangeForCurrentWord];
 	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
-	[self replaceCharactersInRange:sel withString:replacement];
-	[self clearSpellingList];
-  [self colorVisibleText];
+    [self replaceCharactersInRange:sel withString:replacement];
+    [self clearSpellingList];
+    [self colorVisibleText];
     [self didChangeText];
   }
 }
@@ -1135,12 +1135,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 																		atIndex:idx
 														 effectiveRange:&effRange];
 		
-		if (att && [att respondsToSelector:@selector(object)]) {			
+		if (att && [att respondsToSelector:@selector(object)]) {
 			NSData *data = [[att fileWrapper] regularFileContents];
 			NSString *code = [[NSString alloc] initWithData:data encoding:[MHFileReader defaultEncoding]];
 			// delete the line up to and including the attachment
       [[self textStorage] beginEditing];
-			[[self textStorage] replaceCharactersInRange:NSMakeRange(lineRange.location, idx+2) 
+			[[self textStorage] replaceCharactersInRange:NSMakeRange(lineRange.location, idx+2)
 																				withString:[code stringByAppendingString:@"\n"]];
 			[[self textStorage] endEditing];
 		}
@@ -1152,19 +1152,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (IBAction) collapseAll:(id)sender
 {
-//  NSLog(@"Collapse all");
+  //  NSLog(@"Collapse all");
   [self.editorRuler collapseAll];
 }
 
 - (IBAction) expandAll:(id)sender
 {
-//  NSLog(@"Expand all");
+  //  NSLog(@"Expand all");
 	[self unfoldAllInRange:NSMakeRange(0, [[self string] length]) max:100000];
 }
 
 - (void) unfoldAllInRange:(NSRange)aRange max:(NSInteger)max
 {
-//  NSLog(@"unfoldAllInRange");
+  //  NSLog(@"unfoldAllInRange");
 	NSAttributedString *text = [[self textStorage] attributedSubstringFromRange:aRange];
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:text];
   
@@ -1180,28 +1180,28 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (void) unfoldTextWithFolder:(MHCodeFolder*)aFolder
-{	
+{
 	NSRange lineRange = [[self string] lineRangeForRange:NSMakeRange(aFolder.startIndex, 0)];
 	[self unfoldAllInRange:lineRange max:10000];
 }
 
 - (void) foldTextWithFolder:(MHCodeFolder*)aFolder
-{	
-//  NSLog(@"foldTextWithFolder");
+{
+  //  NSLog(@"foldTextWithFolder");
 	NSRange foldRange = NSMakeRange(aFolder.startIndex, aFolder.endIndex-aFolder.startIndex);
-//  NSLog(@"Folding range %@", NSStringFromRange(foldRange));
+  //  NSLog(@"Folding range %@", NSStringFromRange(foldRange));
 	NSAttributedString *fold = [[self textStorage] attributedSubstringFromRange:foldRange];
   
 	// make an attachement object
 	TPFoldedCodeSnippet *snippet = [[TPFoldedCodeSnippet alloc] initWithCode:fold];
   snippet.object = aFolder;
 	
-	// make an attachment	
+	// make an attachment
 	NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:snippet];
 	NSMutableAttributedString *aaa = [[NSMutableAttributedString alloc] initWithAttributedString:attachment];
 	
-	[aaa addAttribute:NSCursorAttributeName 
-              value:[NSCursor pointingHandCursor] 
+	[aaa addAttribute:NSCursorAttributeName
+              value:[NSCursor pointingHandCursor]
               range:NSMakeRange(0, [aaa length])];
   
 	[[self textStorage] deleteCharactersInRange:foldRange];
@@ -1214,9 +1214,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (void) unfoldAttachment:(NSTextAttachment*)snippet atIndex:(NSNumber*)index
-{	
-//  NSLog(@"unfoldAttachment");
-	// find the location of this attachment in the text	
+{
+  //  NSLog(@"unfoldAttachment");
+	// find the location of this attachment in the text
 	NSData *data = [[snippet fileWrapper] regularFileContents];
 	NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
 	NSRange attRange = NSMakeRange([index unsignedLongValue], 1);
@@ -1310,12 +1310,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
-  [self setSelectedRange:aRange];  
+  [self setSelectedRange:aRange];
   [self insertText:replacement];
   
   NSRange r = NSMakeRange(aRange.location, [replacement length]);
   
-  if (scroll) {    
+  if (scroll) {
     [self scrollRangeToVisible:r];
   }
   if (animate) {
@@ -1327,7 +1327,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if (NSMaxRange(aRange) < [[self string] length]) {
     [self setSelectedRange:aRange];
-    if (scroll) {    
+    if (scroll) {
       [self scrollRangeToVisible:aRange];
     }
     if (animate) {
@@ -1359,7 +1359,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *string = [self string];
 	NSRange sel = [self rangeForCurrentWord];
   //	NSLog(@"Word range: %@", NSStringFromRange(sel));
-	NSString *text = [string substringWithRange:sel];	
+	NSString *text = [string substringWithRange:sel];
 	return text;
 }
 
@@ -1372,7 +1372,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return NSMakeRange(NSNotFound, 0);
   }
   NSInteger idx = end-1;
-  NSInteger start = -1;  
+  NSInteger start = -1;
   BOOL foundSlash = NO;
   
   // edge case: if we are at the just outside the end of a command with an argument
@@ -1384,9 +1384,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       return NSMakeRange(NSNotFound, 0);
     }
   }
-//  NSLog(@"Location %d, string length %d", end, [string length]);
+  //  NSLog(@"Location %d, string length %d", end, [string length]);
   
-  // go backwards until we find a '\' 
+  // go backwards until we find a '\'
   // stop if we hit a } or a newline
   unichar lastchar;
   unichar c = 'x';
@@ -1414,7 +1414,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     idx--;
   }
   
-//  NSLog(@"Found slash %d, index %d, start %d", foundSlash, idx, start);
+  //  NSLog(@"Found slash %d, index %d, start %d", foundSlash, idx, start);
   
   // if we didn't find a '\', return not found
   if (!foundSlash || start < 0) {
@@ -1442,7 +1442,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     idx++;
   }
   
-//  NSLog(@"End %d", end);
+  //  NSLog(@"End %d", end);
   
   // if we get past the selection point we return not found
   if (end > sel.location) {
@@ -1453,8 +1453,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (end >= [string length]) {
     end = [string length]-1;
   }
-  NSRange r = NSMakeRange(start, end-start+1);  
-
+  NSRange r = NSMakeRange(start, end-start+1);
+  
   return r;
 }
 
@@ -1466,9 +1466,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return nil;
   }
   
-//  NSLog(@"Range %@", NSStringFromRange(r));
+  //  NSLog(@"Range %@", NSStringFromRange(r));
   NSString *word = [string substringWithRange:r];
-//  NSLog(@"Current command %@", word);
+  //  NSLog(@"Current command %@", word);
   if ([word length] == 0) {
     return nil;
   }
@@ -1542,7 +1542,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	
 	[self selectWord:self];
 	NSRange sel = [self selectedRange];
-	[self setSelectedRange:curr];	
+	[self setSelectedRange:curr];
 	return sel;
 }
 
@@ -1564,7 +1564,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (NSRange) rangeForCurrentParagraph
-{	
+{
 	NSRange selRange = [self selectedRange];
 	NSString *str = [self string];
 	if ([str isEqual:@""]) {
@@ -1589,7 +1589,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     unichar c = [str characterAtIndex:start];
 		if ([newLineCharacterSet characterIsMember:c]) {
       //      NSLog(@"Found new line at %d", start);
-			// this means we are at the end of a line. 
+			// this means we are at the end of a line.
 			// Was the last line empty?
 			NSRange lr = [str lineRangeForRange:NSMakeRange(start+1, 0)];
       //      NSLog(@"Line range: %@", NSStringFromRange(lr));
@@ -1609,7 +1609,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	}
 	if (start<0)
 		start = 0;
-	 
+  
 	// go forward until we find an empty line or the start of a command
 	NSInteger end = start+1;
 	while(end < [str length]) {
@@ -1631,15 +1631,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
 		end++;
 	}
-    
-  if (end >= [str length])
-		end = [str length];
-	
-	if (end < start)
-		end = start;
-  
-  if (end == NSNotFound)
-    end = start;
   
   if (end >= [str length])
 		end = [str length];
@@ -1649,7 +1640,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if (end == NSNotFound)
     end = start;
-
+  
+  if (end >= [str length])
+		end = [str length];
+	
+	if (end < start)
+		end = start;
+  
+  if (end == NSNotFound)
+    end = start;
+  
 	
 	return NSMakeRange(start, end-start);
 	
@@ -1695,7 +1695,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			break;
 		}
 		loc--;
-	} 
+	}
 	NSInteger len = selRange.location-loc;
   //	NSLog(@"loc %d, len %d", loc, len);
 	return [str substringWithRange:NSMakeRange(loc, MAX(len,0))];
@@ -1716,13 +1716,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 		
 		// other possible word breaks include '~' '\,' ','
-		if (c == '~' || c == ',') { 
+		if (c == '~' || c == ',') {
 			start = loc+1;
 			break;
 		}
     
     // If we have started to collect characters, then all a word to be delimited by brackets as well.
-    // We need to check that loc<curr.lcoation-1 to ensure we are not just at the argument of a command, 
+    // We need to check that loc<curr.lcoation-1 to ensure we are not just at the argument of a command,
     // for example, hitting escape with the cursor between the brackets of this text: '\cite{}'
     if ( c == '{' || c == '[' || c == '(' ) {
 			start = loc+1;
@@ -1760,9 +1760,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   visRect.origin.x -= tco.x;
   visRect.origin.y -= tco.y;
   
-  NSRange glyphRange = [lm glyphRangeForBoundingRect:visRect                        
+  NSRange glyphRange = [lm glyphRangeForBoundingRect:visRect
                                      inTextContainer:[self textContainer]];
-  NSRange charRange = [lm characterRangeForGlyphRange:glyphRange                       
+  NSRange charRange = [lm characterRangeForGlyphRange:glyphRange
                                      actualGlyphRange:NULL];
   return charRange;
 }
@@ -1774,7 +1774,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
     //    NSLog(@"Starting timer");
     highlightAlphaTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                           target:self 
+                                                           target:self
                                                          selector:@selector(incrementHighlightAlpha)
                                                          userInfo:nil
                                                           repeats:YES];
@@ -1798,15 +1798,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // Returns a rectangle suitable for highlighting a background rectangle for the given text range.
 - (NSRect) highlightRectForRange:(NSRange)aRange
 {
-//  NSLog(@"Getting highlight range for range %@", NSStringFromRange(aRange));
+  //  NSLog(@"Getting highlight range for range %@", NSStringFromRange(aRange));
   NSRange r = aRange;
   NSRange startLineRange = [[self string] lineRangeForRange:NSMakeRange(r.location, 0)];
-//  NSLog(@"Start line range %@", NSStringFromRange(startLineRange));
+  //  NSLog(@"Start line range %@", NSStringFromRange(startLineRange));
   NSInteger er = NSMaxRange(r)-1;
   NSString *text = [self string];
   
   if (er >= [text length]) {
-//    NSLog(@"Out of range");
+    //    NSLog(@"Out of range");
     return NSZeroRect;
   }
   if (er < r.location) {
@@ -1814,7 +1814,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
-//  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
+  //  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
   
   NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1)
                                             actualCharacterRange:NULL];
@@ -1828,7 +1828,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSPoint containerOrigin = [self textContainerOrigin];
   
   NSRect aRect = NSMakeRect(0, y, w, h);
-//  NSLog(@"Highlight rect: %@", NSStringFromRect(aRect));
+  //  NSLog(@"Highlight rect: %@", NSStringFromRect(aRect));
   // Convert from view coordinates to container coordinates
   aRect = NSOffsetRect(aRect, containerOrigin.x, containerOrigin.y);
   return aRect;
@@ -1845,12 +1845,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [self colorVisibleText];
   [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
-
+  
   [self highlightMatchingWords];
 }
 
 - (void) highlightMatchingWords
-{  
+{
   
   NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
@@ -1877,7 +1877,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
             [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:highlightColor forCharacterRange:r];
           }
         }
-      }      
+      }
     }
   }}
 
@@ -1907,7 +1907,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		for (int i=0;i<NSpaces;i++) {
 			[str appendString:@" "];
 		}
-		[self insertText:str];		
+		[self insertText:str];
 	} else {
 		[super insertTab:sender];
 	}
@@ -1936,7 +1936,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSString *str = [self string];
 	NSUInteger lineStart;
 	NSUInteger lineEnd;
-	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];		
+	[str getLineStart:&lineStart end:NULL contentsEnd:&lineEnd forRange:selRange];
 	NSRange lineRange = NSMakeRange(lineStart, selRange.location-lineStart);
 	NSString *previousLine = [str substringWithRange:lineRange];
   // get indentation
@@ -1957,8 +1957,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 	// Now let's do some special actions....
 	//---- If the previous line was a \begin, we append the \end
-	if ([[defaults valueForKey:TEAutomaticallyAddEndToBeginStatement] boolValue] 
-      && [previousLine hasPrefix:@"\\begin{"]) {			
+	if ([[defaults valueForKey:TEAutomaticallyAddEndToBeginStatement] boolValue]
+      && [previousLine hasPrefix:@"\\begin{"]) {
 		
 		// don't complete if the shift key is on, just add the tab
 		if (self.shiftKeyOn) {
@@ -1966,9 +1966,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			[self insertTab:sender];
       [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 			return;
-		}		
+		}
 		
-		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special    
+		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special
     int start = 0;
     int end   = 0;
     for (int kk=0; kk<[previousLine length]; kk++) {
@@ -2006,14 +2006,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self insertText:insert];
       [self applyFontAndColor:YES];
       
-      // wind back the location of the cursor					
-      [self setSelectedRange:selRange];				
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];        
+      // wind back the location of the cursor
+      [self setSelectedRange:selRange];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
       
       return;
     } // end if insert
-
-    [super insertNewline:sender];    
+    
+    [super insertNewline:sender];
 	} // end if \begin
 	else if ([self currentSnippetCommand])
   {
@@ -2031,8 +2031,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     
     // Insert newline
-    [super insertNewline:sender];    
-        
+    [super insertNewline:sender];
+    
     // indent the new line
     if (!_shiftKeyOn && indentRange.location != NSNotFound) {
       NSRange sel = [self selectedRange];
@@ -2070,30 +2070,30 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // citation commands
 - (BOOL)selectionIsInCitationCommand
 {
-//  NSLog(@"Selection is in citation?");
+  //  NSLog(@"Selection is in citation?");
   NSString *word = [self currentCommand];
-//  NSLog(@"word %@", word);
+  //  NSLog(@"word %@", word);
   if (word == nil || [word length]==0) {
-//    NSLog(@"   no");
+    //    NSLog(@"   no");
     return NO;
   }
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;  
+  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;
   if (citeCommand == NO) {
-//    NSLog(@"   no");
+    //    NSLog(@"   no");
     return NO;
   }
   
   // now check we are in an argument
   NSString *arg = [self currentArgument];
-//  NSLog(@"arg %@", arg);
-  if (arg == nil) {    
-//    NSLog(@"   no");
+  //  NSLog(@"arg %@", arg);
+  if (arg == nil) {
+    //    NSLog(@"   no");
     return NO;
   }
   
-//  NSLog(@"   yes");
+  //  NSLog(@"   yes");
   return YES;
 }
 
@@ -2109,7 +2109,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL refCommand = [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;  
+  BOOL refCommand = [word beginsWithElementInArray:[defaults valueForKey:TERefCommands]] != NSNotFound;
   if (refCommand == NO) {
     return NO;
   }
@@ -2134,7 +2134,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TEFileCommands]] != NSNotFound;  
+  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TEFileCommands]] != NSNotFound;
   if (citeCommand == NO) {
     return NO;
   }
@@ -2166,11 +2166,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return NO;
   }
   
-  return YES;  
+  return YES;
 }
 
 - (void) showListOfFileCompletions
-{  
+{
   if ([self.delegate respondsToSelector:@selector(listOfTeXFilesPrependedWith:)]) {
     NSArray *list = [self.delegate performSelector:@selector(listOfTeXFilesPrependedWith:) withObject:@""];
     // filter the list by existing characters
@@ -2187,7 +2187,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         return NO;
       }];
       
-      list = [list objectsAtIndexes:indices];			
+      list = [list objectsAtIndexes:indices];
       [self completeFromList:list];
     } else {
       [self insertFromList:list];
@@ -2213,12 +2213,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       return NO;
     }];
     
-    list = [list objectsAtIndexes:indices];			
+    list = [list objectsAtIndexes:indices];
     [self completeFromList:list];
   } else {
     [self insertFromList:list];
-  }    
-
+  }
+  
 }
 
 - (void) showListOfRefCompletions
@@ -2242,24 +2242,24 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         return NO;
       }];
       
-      list = [list objectsAtIndexes:indices];			
+      list = [list objectsAtIndexes:indices];
       [self completeFromList:list];
     } else {
       [self insertFromList:list];
-    }    
+    }
   }
 }
 
 - (void) showListOfCiteCompletions
 {
-//  NSLog(@"Showing list of citation completions...");
+  //  NSLog(@"Showing list of citation completions...");
   
   if ([self.delegate respondsToSelector:@selector(listOfCitations)]) {
     NSArray *list = [self.delegate performSelector:@selector(listOfCitations)];
     
     // filter the list by existing characters
     NSString *arg = [self currentArgument];
-//    NSLog(@"Completing arg %@", arg);
+    //    NSLog(@"Completing arg %@", arg);
     if (arg != nil && [arg length]>0) {
       arg = [arg lowercaseString];
       NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -2275,7 +2275,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         return NO;
       }];
       
-      list = [list objectsAtIndexes:indices];	
+      list = [list objectsAtIndexes:indices];
       [self completeFromList:list];
     } else {
       [self completeFromList:list];
@@ -2287,20 +2287,20 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   // check for completing arguments
   NSString *arg = [self currentArgument];
-//  NSLog(@"Completing arg '%@'", arg);
+  //  NSLog(@"Completing arg '%@'", arg);
   if (arg != nil) {
     if ([self selectionIsInRefCommand]) {
-//      NSLog(@"In ref");
+      //      NSLog(@"In ref");
       [self showListOfRefCompletions];
       return YES;
     }
     if ([self selectionIsInCitationCommand]) {
-//      NSLog(@"In cite");
+      //      NSLog(@"In cite");
       [self showListOfCiteCompletions];
       return YES;
     }
     if ([self selectionIsInFileCommand]) {
-//      NSLog(@"In file");
+      //      NSLog(@"In file");
       [self showListOfFileCompletions];
       return YES;
     }
@@ -2315,23 +2315,23 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (IBAction)completeStuff:(id)sender
 {
-//  NSLog(@"Complete stuff!!");
+  //  NSLog(@"Complete stuff!!");
   
 	NSString *string = [self string];
 	NSRange curr = [self selectedRange];
 	[self selectUpToCurrentLocation];
 	NSRange selectedRange = [self selectedRange];
   //	NSRange wr = 	[self rangeForCurrentWord];
-	[self setSelectedRange:curr];	
+	[self setSelectedRange:curr];
   
 	NSString *word = [string substringWithRange:selectedRange];
-//	NSString *command = [self currentCommand];
+  //	NSString *command = [self currentCommand];
   NSString *arg = [self currentArgument];
 	
-//  NSLog(@"Completing... %@", word);
+  //  NSLog(@"Completing... %@", word);
   NSString *command = word;
-//	NSLog(@"       or command: %@", command);
-//	NSLog(@"       or arg: %@", arg);
+  //	NSLog(@"       or command: %@", command);
+  //	NSLog(@"       or arg: %@", arg);
   
 	id delegate = [self delegate];
   //	NSLog(@"Delegate: %@", delegate);
@@ -2340,7 +2340,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else if (command != nil && [command length] > 0 && (arg == nil || [arg isEqualToString:command]) ) {
     
     NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
-
+    
     // get list of user defaults commands
     list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
     
@@ -2349,14 +2349,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     if ([command length]>1) {
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", command];
-      list = [list filteredArrayUsingPredicate:predicate];			
+      list = [list filteredArrayUsingPredicate:predicate];
     }
     if ([list count]>0) {
-      [self completeFromList:list];			
+      [self completeFromList:list];
       
       
     } else {
-      NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
+      NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length])
                                                                                  inString:word
                                                                                  language:nil
                                                                    inSpellDocumentWithTag:0];
@@ -2365,17 +2365,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else if ([word hasPrefix:@"#"]) {
     
     NSArray *possibleCommands = [self commandsBeginningWithPrefix:[self currentSnippetCommand]];
-//    NSLog(@"Got commands %@", possibleCommands);
+    //    NSLog(@"Got commands %@", possibleCommands);
     [self completeFromList:possibleCommands];
     
 	} else {
 		// otherwise we just call super
-		NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length]) 
+		NSArray *list = [[NSSpellChecker sharedSpellChecker] completionsForPartialWordRange:NSMakeRange(0, [word length])
 																																							 inString:word
 																																							 language:nil
 																																 inSpellDocumentWithTag:0];
-		[self completeFromList:list];		
-      
+		[self completeFromList:list];
+    
 	}
   
   
@@ -2386,12 +2386,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void)keyDown:(NSEvent *)theEvent
 {
   
-	if ([theEvent keyCode] == 36) {		
+	if ([theEvent keyCode] == 36) {
 		if ([theEvent modifierFlags] & NSShiftKeyMask) {
       self.shiftKeyOn = YES;
 		} else {
       self.shiftKeyOn = NO;
-		}		
+		}
 	}
   
   if ([_popupList isVisible]) {
@@ -2447,7 +2447,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     
   }
-      
+  
 	[super keyDown:theEvent];
 }
 
@@ -2457,10 +2457,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self clearHighlight];
 	[self clearSpellingList];
   
-	if ([theEvent modifierFlags] & NSCommandKeyMask) {		
+	if ([theEvent modifierFlags] & NSCommandKeyMask) {
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(textView:didCommandClickAtLine:column:)]) {
-      NSInteger idx = [self characterIndexForPoint:[NSEvent mouseLocation]]; 
+      NSInteger idx = [self characterIndexForPoint:[NSEvent mouseLocation]];
       NSInteger line = [self lineNumberForRange:NSMakeRange(idx, 0)];
       NSInteger column = [self columnForRange:NSMakeRange(idx, 0)];
       if ([self.delegate respondsToSelector:@selector(textView:didCommandClickAtLine:column:)]) {
@@ -2484,14 +2484,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[super drawViewBackgroundInRect:rect];
   
   // additional highlight range
-	if (self.highlightRange) {    
-    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];		
+	if (self.highlightRange) {
+    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];
 		[[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
 		[NSBezierPath fillRect:aRect];
 	} else {
     [[self backgroundColor] set];
     [NSBezierPath fillRect:[self bounds]];
-  }  
+  }
   
   // highlight current line
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -2529,7 +2529,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     } else {
       [[[self backgroundColor] shadowWithLevel:0.1] set];
     }
-        
+    
     [NSBezierPath fillRect:r];
   }
 }
@@ -2548,7 +2548,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 
-// Override these delete methods to update text color which may have been set when inserting text 
+// Override these delete methods to update text color which may have been set when inserting text
 // within commands, comments etc. To make a nicer appearance we attempt to set the typing color of
 // the text before inserting it in -insertText:. The result is that foreground color text attributes
 // are sometimes applied to text fragements. We need to get rid of these when we, for example, delete
@@ -2576,7 +2576,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (void)insertText:(id)aString
-{	
+{
   
   // check if the next character or preceeding character was a text attachment
 	NSRange selRange = [self selectedRange];
@@ -2609,17 +2609,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	}
   
   // setup typing attributes
-  //  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;  
+  //  NSInteger start = [self locationOfLastWhitespaceLessThan:selRange.location]+1;
   //  NSRange wordRange = NSMakeRange(start, selRange.location-start);
   //  NSString *word = [[self string] substringWithRange:wordRange];
   NSRange pRange = [self rangeForCurrentParagraph];
-  NSRange lineRange = [[self string] lineRangeForRange:selRange];  
+  NSRange lineRange = [[self string] lineRangeForRange:selRange];
   NSString *paragraph = [[self string] substringWithRange:pRange];
   paragraph = [paragraph stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   NSString *line = [[self string] substringWithRange:lineRange];
   line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
   NSInteger lineIndex = selRange.location-pRange.location;
-  if (lineIndex < 0) 
+  if (lineIndex < 0)
     lineIndex = 0;
   
   if ([line isCommentLineBeforeIndex:lineIndex commentChar:[self commentChar]]) {
@@ -2632,7 +2632,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:NO];
   }
   
-//  NSLog(@"Inserting text at index %d", selRange.location);
+  //  NSLog(@"Inserting text at index %d", selRange.location);
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];
@@ -2667,7 +2667,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else	if ([aString isEqual:@"}"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
-//    NSLog(@"Range %@", NSStringFromRange(r));
+    //    NSLog(@"Range %@", NSStringFromRange(r));
 		if (skipClosingBrace && r.location < [string length] && [[self string] characterAtIndex:r.location] == '}') {
 			// move right
 			[self moveRight:self];
@@ -2675,7 +2675,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}	else {
 			[super insertText:aString];
 			return;
-		}	
+		}
 	} else	if ([aString isEqual:@")"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
@@ -2686,7 +2686,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}	else {
 			[super insertText:aString];
 			return;
-		}	
+		}
 	} else	if ([aString isEqual:@"]"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
@@ -2697,16 +2697,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}	else {
 			[super insertText:aString];
 			return;
-		}	
+		}
 	} else	if ([[defaults valueForKey:TEAutomaticallyReplaceOpeningDoubleQuote] boolValue]
-              && [aString isEqual:@"\""] 
+              && [aString isEqual:@"\""]
               && [[self fileExtension] isEqualToString:@"tex"]) {
 		// do smart replacements
 		NSRange r = [self selectedRange];
     if (r.location>0) {
       NSInteger loc = r.location-1;
       if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
-        [self insertText:@"``"];        
+        [self insertText:@"``"];
       } else {
         [super insertText:aString];
       }
@@ -2714,7 +2714,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [super insertText:aString];
     }
 	} else {
-//    NSLog(@"Inserting %@", aString);
+    //    NSLog(@"Inserting %@", aString);
 		[super insertText:aString];
     
     // check if this is a short-cut code command
@@ -2725,7 +2725,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         NSRange commandRange = [self rangeForCurrentSnippetCommand];
         [[self layoutManager] addTemporaryAttribute:NSBackgroundColorAttributeName value:[NSColor yellowColor] forCharacterRange:commandRange];
       }
-    }    
+    }
   }
   
 	[self wrapLine];
@@ -2733,9 +2733,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (BOOL) autocompleteArgument
-{  
+{
   NSString *arg = [self currentArgument];
-//  NSLog(@"Autocomplete arg %@", arg);
+  //  NSLog(@"Autocomplete arg %@", arg);
   
   // show citation completion list?
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -2768,7 +2768,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     }
   }
-    
+  
   // show begin completion list?
   if ([[defaults valueForKey:TEAutomaticallyShowBeginCompletionList] boolValue]) {
     if (arg != nil) {
@@ -2785,7 +2785,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (BOOL) autocompleteCommand
 {
-//  NSLog(@"Autocomplete command");
+  //  NSLog(@"Autocomplete command");
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *arg = [self currentArgument];
   if ([[defaults valueForKey:TEAutomaticallyShowCommandCompletionList] boolValue]) {
@@ -2806,7 +2806,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       return NO;
     }
     
-//    NSLog(@"Current command %@", command);
+    //    NSLog(@"Current command %@", command);
     if (command != nil && [command length] > 0 && (arg == nil || [command isEqualToString:arg])) {
       NSArray *commands = [self commandsMatchingWord:command];
       if ([commands count]>0) {
@@ -2821,7 +2821,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         return YES;
       }
     }
-  }  
+  }
   
   return NO;
 }
@@ -2853,11 +2853,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     if ([word length]>1) {
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
-      list = [list filteredArrayUsingPredicate:predicate];			
+      list = [list filteredArrayUsingPredicate:predicate];
     }
     return list;
   }
-
+  
   return nil;
 }
 
@@ -2912,7 +2912,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if ([[self fileExtension] isEqualToString:@"tex"]) {
     return @"%";
-  } 
+  }
   return @"#";
 }
 
@@ -2937,12 +2937,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (code) {
       NSRange commandRange = [self rangeForCurrentSnippetCommand];
       if ([self shouldChangeTextInRange:commandRange replacementString:code]) {
-      [[self undoManager] beginUndoGrouping];
-      [self replaceCharactersInRange:commandRange withString:code];
-      [self replacePlaceholdersInString:code range:commandRange];      
-      [self didChangeText];
-      [[self undoManager] endUndoGrouping];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+        [[self undoManager] beginUndoGrouping];
+        [self replaceCharactersInRange:commandRange withString:code];
+        [self replacePlaceholdersInString:code range:commandRange];
+        [self didChangeText];
+        [[self undoManager] endUndoGrouping];
+        [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
       }
       return YES;
     }
@@ -2967,17 +2967,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
     
     // make attachment
-    MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];    
+    MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];
     NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
     NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
     if ([self shouldChangeTextInRange:placeholderRange replacementString:@" "]) {
       [[self textStorage] beginEditing];
-    [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
+      [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
       [[self textStorage] endEditing];
-    [self didChangeText];
-    // replace placeholder with blank just to make the counting right
-    code = [code stringByReplacingCharactersInRange:r withString:@" "];
-  }      
+      [self didChangeText];
+      // replace placeholder with blank just to make the counting right
+      code = [code stringByReplacingCharactersInRange:r withString:@" "];
+    }
   }
   
   // select the first placeholder
@@ -3008,7 +3008,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                                                        atIndex:idx
                                                 effectiveRange:&effRange];
     
-    if (att && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
+    if (att && [att isKindOfClass:[MHPlaceholderAttachment class]]) {
       [self setSelectedRange:NSMakeRange(idx, 1)];
       return;
     }
@@ -3041,7 +3041,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                                                        atIndex:idx
                                                 effectiveRange:&effRange];
     
-    if (att != nil && [att isKindOfClass:[MHPlaceholderAttachment class]]) {			
+    if (att != nil && [att isKindOfClass:[MHPlaceholderAttachment class]]) {
       [self setSelectedRange:NSMakeRange(idx, 1)];
       return;
     }
@@ -3063,7 +3063,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 
 - (void) moveRight:(id)sender
-{	
+{
 	[super moveRight:sender];
 	
 	// if we moved over an opening or closing bracket, look for the other one and flash it
@@ -3080,7 +3080,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	// if we moved over an opening or closing bracket, look for the other one and flash it
 	[self performSelector:@selector(checkForMatchingBracketAfterMovingLeft)
 						 withObject:nil
-						 afterDelay:0];	
+						 afterDelay:0];
 }
 
 - (void) checkForMatchingBracketAfterMovingLeft
@@ -3103,7 +3103,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		[self checkForMatchingBracket:[str characterAtIndex:crange.location-1]
 											 offsetFrom:crange.location
 															 by:-1];
-	}	
+	}
 }
 
 - (void) checkForMatchingBracket:(unichar)aChar offsetFrom:(NSInteger)index by:(NSInteger)offset
@@ -3111,7 +3111,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSInteger match = [self findMatchingBracketOfType:aChar atIndex:index+offset];
 	if (match != NSNotFound) {
 		[self showFindIndicatorForRange:NSMakeRange(match, 1)];
-	}	
+	}
 }
 
 - (NSInteger)searchBackwardsForChar:(unichar)openBracket matching:(unichar)closeBracket startingAt:(NSInteger)loc
@@ -3122,15 +3122,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	while (loc >= 0 && loc < [str length]) {
 		if ([str characterAtIndex:loc] == closeBracket) {
 			bcount++;
-		}			
+		}
 		if ([str characterAtIndex:loc] == openBracket) {
 			bcount--;
-		}			
+		}
 		if (bcount == 0){
-			return loc;			
+			return loc;
 		}
 		loc--;
-	}		
+	}
 	return NSNotFound;
 }
 
@@ -3142,42 +3142,42 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	while (loc >=0 && loc < [str length]) {
 		if ([str characterAtIndex:loc] == openBracket) {
 			bcount++;
-		}			
+		}
 		if ([str characterAtIndex:loc] == closeBracket) {
 			bcount--;
-		}			
+		}
 		if (bcount == 0){
-			return loc;			
+			return loc;
 		}
 		loc++;
-	}		
+	}
 	return NSNotFound;
 }
 
 - (NSInteger)findMatchingBracketOfType:(unichar)aChar atIndex:(NSInteger)index
 {
-  //	NSLog(@"Matching %C", aChar);	
-	if (aChar == '}') {	
+  //	NSLog(@"Matching %C", aChar);
+	if (aChar == '}') {
 		// go backwards in the text
 		return [self searchBackwardsForChar:'{' matching:aChar startingAt:index-1];
 	}
-	if (aChar == '{') {	
+	if (aChar == '{') {
 		// go forwards in the text
 		return [self searchForwardsForChar:'}' matching:aChar startingAt:index+1];
 	}
-	if (aChar == ')') {	
+	if (aChar == ')') {
 		// go backwards in the text
 		return [self searchBackwardsForChar:'(' matching:aChar startingAt:index-1];
 	}
-	if (aChar == '(') {	
+	if (aChar == '(') {
 		// go forwards in the text
 		return [self searchForwardsForChar:')' matching:aChar startingAt:index+1];
 	}
-	if (aChar == '[') {	
+	if (aChar == '[') {
 		// go forwards in the text
 		return [self searchForwardsForChar:']' matching:aChar startingAt:index+1];
 	}
-	if (aChar == ']') {	
+	if (aChar == ']') {
 		// go backwards in the text
 		return [self searchBackwardsForChar:'[' matching:aChar startingAt:index-1];
 	}
@@ -3189,7 +3189,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) wrapLine
 {
 	int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-	if (wrapStyle != TPHardWrap) 
+	if (wrapStyle != TPHardWrap)
 		return;
   
   // don't wrap while we are completing
@@ -3199,17 +3199,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 	int lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
 	// check the length of this line and insert newline if required
-	// - we only do this if we are at the end of a line	
+	// - we only do this if we are at the end of a line
 	NSString *str = [[self textStorage] string];
 	NSRange selRange = [self selectedRange];
 	
 	// is the next character a newline character, or are we at the end of the string?
 	NSUInteger strLen = [str length];
-	if (selRange.location == strLen || 
-			(selRange.location<strLen && 
+	if (selRange.location == strLen ||
+			(selRange.location<strLen &&
 			 [newLineCharacterSet characterIsMember:[str characterAtIndex:selRange.location]]
 			 )
-			) 
+			)
 	{
 		
 		// then we are at the end of a line and we can do wrapping
@@ -3223,10 +3223,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			
 			// get location of the last whitespace
 			NSInteger lastWhitespace = [self locationOfLastWhitespaceLessThan:lineWrapLength];
-//      NSLog(@"Last whitespace %ld", lastWhitespace);
+      //      NSLog(@"Last whitespace %ld", lastWhitespace);
       // if the last whitespace location is positive and greater than the start of this line
       NSRange linerange = [[self string] lineRangeForRange:selRange];
-//      NSLog(@"Line starts at %ld", linerange.location);
+      //      NSLog(@"Line starts at %ld", linerange.location);
       
 			if (lastWhitespace >= 0 && lastWhitespace>linerange.location) {
         NSInteger insertPoint = lastWhitespace+1;
@@ -3253,7 +3253,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (NSInteger)lineNumberForRange:(NSRange)aRange
 {
-//  NSLog(@"Calculating line number");
+  //  NSLog(@"Calculating line number");
   NSArray *lines = [self.editorRuler lineNumbersForTextRange:[self getVisibleRange]];
   //  NSLog(@"Got lines %@", lines);
   for (MHLineNumber *line in lines) {
@@ -3269,7 +3269,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (NSInteger)lineNumber
 {
-//  NSLog(@"Getting line number for %@, from %@", self, self.editorRuler);
+  //  NSLog(@"Getting line number for %@, from %@", self, self.editorRuler);
   NSRange sel = [self selectedRange];
   NSString *str = [self string];
   if (NSMaxRange(sel)>= [str length]) {
@@ -3323,7 +3323,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			inserted+=slen;
 		}
 	}
-	  
+  
 	[self setSelectedRange:r];
 	[self delete:self];
 	[self insertText:newString];
@@ -3333,7 +3333,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (IBAction) reformatParagraph:(id)sender
-{  
+{
   // We start from the current paragraph since we don't format
   // a block of text larger than this.
 	NSRange pRange = [self rangeForCurrentParagraph];
@@ -3342,23 +3342,23 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // the position into the paragraph of text we are working with
 	NSRange currRange = [self selectedRange];
   NSInteger startPosition = currRange.location - pRange.location;
-
+  
   // reformatt the text for the selected linewidth
 	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
   NSString *text = [[self string] substringWithRange:pRange];
-//  NSLog(@"Reformatting [%@]", text);
+  //  NSLog(@"Reformatting [%@]", text);
   NSString *newText = [text reformatStartingAtIndex:startPosition forLinewidth:lineWrapLength];
   if (newText) {
     //  NSLog(@"Got [%@]", newText);
     // replace string
     if ([self shouldChangeTextInRange:pRange replacementString:newText]) {
-    [self breakUndoCoalescing];
-    [self setSelectedRange:pRange];
+      [self breakUndoCoalescing];
+      [self setSelectedRange:pRange];
       [self replaceCharactersInRange:pRange withString:newText];
       [self didChangeText];
-    [self setSelectedRange:currRange];
-    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
-  }
+      [self setSelectedRange:currRange];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
+    }
   }
 	return;
 }
@@ -3371,7 +3371,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (IBAction) indentSelection:(id)sender
-{	
+{
 	[self insertStringBeforeAllLinesInSelection:[self stringForTab]];
 }
 
@@ -3405,7 +3405,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 					[newString replaceCharactersInRange:cr withString:@""];
 					removed += slen;
 				}
-			}			
+			}
 		}
 	}
 	
@@ -3423,7 +3423,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
 	NSPasteboard* pboard = [sender draggingPasteboard];
-    
+  
   NSPoint draggingLocation = [sender draggingLocation];
   draggingLocation = [self convertPoint:draggingLocation fromView:nil];
   // can't use Apple's characterIndexForPoint: here because that works in screen coords
@@ -3435,12 +3435,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     for (NSString *file in files) {
       
       if ([[file pathExtension] isImage]) {
-        [self insertImageBlockForFile:file atLocation:characterIndex];        
+        [self insertImageBlockForFile:file atLocation:characterIndex];
         return YES;
       }
       
       if ([[[file pathExtension] valueForKey:@"isText"] boolValue]) {
-        [self insertIncludeForFile:file atLocation:characterIndex];        
+        [self insertIncludeForFile:file atLocation:characterIndex];
         return YES;
       }
       
@@ -3464,16 +3464,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if( fraction > 0.5 ) glyphIndex++;
   
-  if( glyphIndex == NSMaxRange(range) ) 
+  if( glyphIndex == NSMaxRange(range) )
     return  [[self textStorage] length];
-  else 
+  else
     return [layoutManager characterIndexForGlyphAtIndex:glyphIndex];
   
 }
 
 
 - (void)concludeDragOperation:(id < NSDraggingInfo >)sender
-{  
+{
   // perform some post drag corrections
   NSRange selRange = [self selectedRange];
   
@@ -3484,7 +3484,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // make sure the right font is used
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
-  [[self textStorage] addAttributes:atts range:newRange];  
+  [[self textStorage] addAttributes:atts range:newRange];
   
   // grab keyboard
   [[self window] makeFirstResponder:self];
@@ -3497,8 +3497,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   id project = [[self delegate] performSelector:@selector(project)];
   NSString *projectFolder = [project valueForKey:@"folder"];
-//  NSLog(@"Relative path: %@", [aFile relativePathTo:projectFolder]);
-
+  //  NSLog(@"Relative path: %@", [aFile relativePathTo:projectFolder]);
+  
   NSString *file = [aFile ks_pathRelativeToDirectory:projectFolder];
   
   NSString *str = [NSString stringWithFormat:@"\\input{%@}", file];
@@ -3519,9 +3519,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSString *projectFolder = [project valueForKey:@"folder"];
   NSString *file = [projectFolder relativePathTo:aFile];
   
-//  NSLog(@"File %@", aFile);
-//  NSLog(@"Project %@", projectFolder);
-//  NSLog(@"computed path %@", file);
+  //  NSLog(@"File %@", aFile);
+  //  NSLog(@"Project %@", projectFolder);
+  //  NSLog(@"computed path %@", file);
   
   NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
   NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:%@}\n\\end{figure}\n", file, name];
@@ -3548,17 +3548,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [NSApp beginSheet:self.pasteConfigController.window
        modalForWindow:[self window]
         modalDelegate:self
-       didEndSelector:@selector(pasteTableConfigureSheetDidEnd:returnCode:contextInfo:) 
+       didEndSelector:@selector(pasteTableConfigureSheetDidEnd:returnCode:contextInfo:)
           contextInfo:NULL];
     
   }
 }
-  
+
 - (void)pasteTableConfigureSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
- if (returnCode == NSCancelButton)
-   return;
-   
+  if (returnCode == NSCancelButton)
+    return;
+  
   NSMutableString *stringToPaste = [NSMutableString string];
   if (_pastingRows == nil) {
     return;
@@ -3603,13 +3603,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
   [stringToPaste appendFormat:@"\\end{table}\n"];
   
-  [self insertText:stringToPaste];      
+  [self insertText:stringToPaste];
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
   
 }
 
-     
-     
+
+
 
 #pragma mark -
 #pragma mark Insert Table
@@ -3675,7 +3675,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [tableString appendFormat:@"\\end{table}\n"];
   
   NSRange sel = [self selectedRange];
-  [self insertText:tableString];    
+  [self insertText:tableString];
   
   [self replacePlaceholdersInString:tableString range:sel];
 }
@@ -3704,7 +3704,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       return NO;
     }
   }
-
+  
   if (tag == 1060) {
     // paste as table. Check we have text on the pasteboard
     NSPasteboard *pboard = [NSPasteboard generalPasteboard];
