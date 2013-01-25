@@ -379,14 +379,6 @@
 {
   NSString *extension = [fullpath pathExtension];
 
-	// before making the file in the project, ensure we can read it from disk
-  
-  // set file content
-  MHFileReader *fr = [[MHFileReader alloc] init];
-  NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
-  if (contents == nil) {
-    return nil;
-  }
   
   // check if the file was a text file
 	BOOL isTextFile = NO;
@@ -394,10 +386,21 @@
 		isTextFile = YES;
 	}
   
-  NSData *data = [contents dataUsingEncoding:[fr encodingUsed]];
-
-  if (data == nil) {
-    return nil;
+	// if file is text, before making the file in the project, ensure we can read it from disk
+  NSData *data = nil;
+  if (isTextFile) {
+    // set file content
+    MHFileReader *fr = [[MHFileReader alloc] init];
+    NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
+    if (contents == nil) {
+      return nil;
+    }
+    
+    data = [contents dataUsingEncoding:[fr encodingUsed]];
+    
+    if (data == nil) {
+      return nil;
+    }
   }
   
   FileEntity *newFile;
