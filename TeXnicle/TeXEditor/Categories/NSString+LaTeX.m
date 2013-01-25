@@ -75,19 +75,16 @@
 - (NSArray*) referenceLabels
 {	
 	// scan string for all \label{something} and return the list of 'something's.
-	NSArray *labels = [TPRegularExpression stringsMatching:@"\\\\label\\{.*?\\}" inText:self];
-	
-  //	NSLog(@"Scanning %@", self);
-  //	NSLog(@"Found: %@",labels);
+	NSArray *labels = [TPRegularExpression stringsMatching:@"\\\\label(\\[.+?\\]|)\\{.*?\\}" inText:self];
+
 	NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[labels count]];
 	
 	for (NSString *label in labels) {
-		
-		NSString *tag = [label stringByReplacingOccurrencesOfString:@"\\label{" withString:@""];
-		tag = [tag stringByReplacingOccurrencesOfString:@"}" withString:@""];
-		tag = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		[tags addObject:tag];
-		
+    NSString *tag = [label argument];
+    if (tag != nil) {
+      tag = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      [tags addObject:tag];
+		}
 	}
 	
 	return tags;

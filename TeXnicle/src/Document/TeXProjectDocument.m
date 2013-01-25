@@ -57,6 +57,7 @@
 #import "TPLabel.h"
 #import "TPNewCommand.h"
 #import "FileDocument.h"
+#import "TPRegularExpression.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -4123,10 +4124,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	[self.projectItemTreeController setSelectionIndexPath:idx];
   
   // now select the text
-  NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+  NSString *exp = [NSString stringWithFormat:@"\\label(\\[.+?\\]|)\\{%@\\}", aLabel.text];
   
+  NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
+  if (r.location != NSNotFound) {
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+  }
 }
 
 #pragma mark -
