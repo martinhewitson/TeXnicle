@@ -739,6 +739,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.templateEditor tearDown];
   self.templateEditor = nil;
   
+  [self.mainWindow setNextResponder:self.controlsTabBarController.nextResponder];
   [self.controlsTabBarController tearDown];
   self.controlsTabBarController = nil;
   
