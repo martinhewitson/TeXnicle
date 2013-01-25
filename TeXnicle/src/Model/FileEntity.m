@@ -157,22 +157,24 @@
 	
 	// what extension should the new file get?
 	NSString *extension = [newName pathExtension];
-	if (!extension) {
+	if (extension == nil) {
 		extension = [self extension];
-		if (!extension) {
+		if (extension == nil) {
 			extension = [[self filepath] pathExtension];
 		}
-		if (!extension) {
+		if (extension == nil) {
 			extension = [[self pathOnDisk] pathExtension];
 		}
 		
-		if (extension != nil && newName != nil) {
-			newName = [newName stringByAppendingPathExtension:extension];
-		}
 	}
 	
-	
-//	NSLog(@"Set extension: %@", self);
+  // remove any extension
+  newName = [newName stringByDeletingPathExtension];
+  
+  // and add the extension we want, which may be the same as it was, but maybe not
+  if (extension != nil && newName != nil) {
+    newName = [newName stringByAppendingPathExtension:extension];
+  }
 	
 	// rename the file on disk
 	
