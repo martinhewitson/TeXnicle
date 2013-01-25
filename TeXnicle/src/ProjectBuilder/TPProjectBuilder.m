@@ -346,15 +346,21 @@
                   
                   // add file
                   FileEntity *file = [self addFileAtPath:fullpath toFolder:folder inProject:project inMOC:moc];
-                  
-                  // if this is a tex file, recursive call
-                  if ([[file extension] isEqualToString:@"tex"]) {
-                    [self document:aDocument addProjectItemsFromFile:[file pathOnDisk]];
+                  if (file) {
+                    // if this is a tex file, recursive call
+                    if ([[file extension] isEqualToString:@"tex"]) {
+                      [self document:aDocument addProjectItemsFromFile:[file pathOnDisk]];
+                    }
+                  } else {
+                    NSString *str = [NSString stringWithFormat:@"Failed to add file: %@\n", fullpath];
+                    NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
+                    [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [str length])];
+                    [self.reportString appendAttributedString:astr];
                   }
                 } else {
                   NSString *str = [NSString stringWithFormat:@"Not adding unsupported file type: %@\n", fullpath];
                   NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
-                  [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, 33)];
+                  [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [str length])];
                   [self.reportString appendAttributedString:astr];
 //                  NSLog(@"-- file is not supported or image: %@", fullpath);
                 }
