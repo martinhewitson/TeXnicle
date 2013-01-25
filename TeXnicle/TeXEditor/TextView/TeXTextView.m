@@ -2037,7 +2037,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (!_shiftKeyOn && indentRange.location != NSNotFound) {
       NSRange sel = [self selectedRange];
       NSString *indentString = [str substringWithRange:indentRange];
-      [self replaceCharactersInRange:NSMakeRange(sel.location, 0) withString:indentString];
+      NSRange r = NSMakeRange(sel.location, 0);
+      if([self shouldChangeTextInRange:r replacementString:indentString]) {
+        [self replaceCharactersInRange:r withString:indentString];
+        [self didChangeText];
+      }
     }
   }
   
