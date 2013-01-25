@@ -46,9 +46,6 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (void) tearDown
 {
-  [self.view removeFromSuperview];
-  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
-  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
 //  NSLog(@"Tear down %@", self);
   buttons = nil;
   self.viewBackground = nil;
