@@ -1665,14 +1665,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         didMoveFoldersOnDisk = YES;
       }
     }
-    
-    // update any child objects
-//    for (ProjectItemEntity *item in child.children) {
-//      NSLog(@"Updating %@", item);
-//      if ([item isUnderProject]) {
-//        [item resetFilePath];
-//      }
-//    }
   }
   
   if (didMoveFoldersOnDisk) {
