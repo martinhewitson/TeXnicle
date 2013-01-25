@@ -424,15 +424,15 @@
 	// set project
 	[newFile setValue:project forKey:@"project"];
 	
+  // set extension
+  [newFile setValue:extension forKey:@"extension"];
+  
 	// set name
-	[newFile setValue:[[fullpath lastPathComponent] stringByDeletingPathExtension] forKey:@"name"];
+	[newFile setValue:[fullpath lastPathComponent] forKey:@"name"];
 	
 	// set isText
 	[newFile setValue:@(isTextFile) forKey:@"isText"];
-	
-	// set extension
-  [newFile setValue:extension forKey:@"extension"];
-  
+	 
 	// configure the textstorage
 	[newFile reconfigureDocument];
 			
