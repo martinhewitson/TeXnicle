@@ -290,6 +290,11 @@
   return nil;
 }
 
+- (IBAction) gotoSection:(id)sender
+{
+  [self.sectionListController gotoSection:sender];
+}
+
 - (IBAction)showErrorMenu:(id)sender
 {
 	NSRect frame = [(NSButton *)sender frame];

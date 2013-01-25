@@ -59,6 +59,8 @@
 #pragma mark Insert Table
 
 - (IBAction)showErrorMenu:(id)sender;
+- (IBAction) gotoSection:(id)sender;
+
 - (void) setHasErrors:(BOOL)state;
 - (void) setCheckFailed;
 - (void)jumpToLine:(NSMenuItem*)anItem;
