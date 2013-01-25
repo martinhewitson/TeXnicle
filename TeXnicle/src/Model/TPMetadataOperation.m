@@ -86,7 +86,16 @@
       if ([self isCancelled]) return;
       if ([self.file.extension isEqualToString:@"bib"]) {
         NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
-        [newCitations addObjectsFromArray:entries];
+        // only add these if we don't already have entries for these
+        for (BibliographyEntry *entry in entries) {
+          // check against existing
+          for (BibliographyEntry *e in newCitations) {
+            if (![[e string] isEqualToString:[entry string]]) {
+              [newCitations addObject:entry];
+            }
+          }
+        }
+//        [newCitations addObjectsFromArray:entries];
       }
       
       //--------------- Labels    
