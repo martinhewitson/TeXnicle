@@ -260,10 +260,10 @@
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
     [file setValue:@0 forKey:@"sortIndex"];
     if ([self.reportString length] > 0) {
-      
-      TPProjectBuilderReport *report = [[TPProjectBuilderReport alloc] initWithReportString:self.reportString];
-      [[report window] setTitle:[NSString stringWithFormat:@"Build Report for Project \u201c%@\u201d", self.projectName]];
-      [report showWindow:self];
+
+      // show error messages in console
+      [[ConsoleController sharedConsoleController] showWindow:self];
+      [[ConsoleController sharedConsoleController] error:[self.reportString string]];
       
     }
   }  
