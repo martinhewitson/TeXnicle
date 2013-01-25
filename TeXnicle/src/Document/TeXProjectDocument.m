@@ -624,11 +624,6 @@
   
   // live update timer
   [self stopLiveUpdateTimer];
-
-	// close all tabs
-	for (NSTabViewItem *item in [self.openDocuments.tabView tabViewItems]) {
-		[self.openDocuments.tabView removeTabViewItem:item];
-	}
   
   // stop KVO
   [self stopObserving];
