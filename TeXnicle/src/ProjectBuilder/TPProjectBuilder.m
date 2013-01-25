@@ -483,11 +483,15 @@
       
       // set name
       [newFolder setValue:comp forKey:@"name"];
-      //	NSLog(@"Adding new folder: %@", newFolder);
       
+      // set project
+      [newFolder setValue:project forKey:@"project"];
+            
       // set parent
       [newFolder setParent:parentItem];
-      [[project mutableSetValueForKey:@"items"] addObject:newFolder];
+            
+//      NSLog(@"Adding new folder: %@", newFolder);
+      
       parentItem = newFolder;
     }
     lastComp = comp;              
