@@ -2192,7 +2192,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }];
       
       list = [list objectsAtIndexes:indices];
-      [self completeFromList:list];
+      if ([list count] > 0) {
+        // if we have only one option, and the command is the same as the option, don't show the completion list
+        if ([list count] == 1) {
+          if ([arg isEqualToString:list[0]]) {
+            [_popupList dismiss];
+            return;
+          }
+        }
+        
+        [self completeFromList:list];
+      }
+
     } else {
       [self insertFromList:list];
     }
@@ -2218,7 +2229,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }];
     
     list = [list objectsAtIndexes:indices];
-    [self completeFromList:list];
+    if ([list count] > 0) {
+      // if we have only one option, and the command is the same as the option, don't show the completion list
+      if ([list count] == 1) {
+        if ([arg isEqualToString:list[0]]) {
+          [_popupList dismiss];
+          return;
+        }
+      }
+      
+      [self completeFromList:list];
+    }
   } else {
     [self insertFromList:list];
   }
@@ -2247,7 +2268,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }];
       
       list = [list objectsAtIndexes:indices];
-      [self completeFromList:list];
+      if ([list count] > 0) {
+        // if we have only one option, and the command is the same as the option, don't show the completion list
+        if ([list count] == 1) {
+          TPLabel *label = list[0];
+          if ([arg isEqualToString:label.text]) {
+            [_popupList dismiss];
+            return;
+          }
+        }
+        
+        [self completeFromList:list];
+      }
     } else {
       [self insertFromList:list];
     }
@@ -2256,14 +2288,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) showListOfCiteCompletions
 {
-  //  NSLog(@"Showing list of citation completions...");
-  
   if ([self.delegate respondsToSelector:@selector(listOfCitations)]) {
     NSArray *list = [self.delegate performSelector:@selector(listOfCitations)];
     
     // filter the list by existing characters
     NSString *arg = [self currentArgument];
-    //    NSLog(@"Completing arg %@", arg);
     if (arg != nil && [arg length]>0) {
       arg = [arg lowercaseString];
       NSIndexSet *indices = [list indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -2280,7 +2309,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }];
       
       list = [list objectsAtIndexes:indices];
-      [self completeFromList:list];
+      if ([list count] > 0) {
+        // if we have only one option, and the command is the same as the option, don't show the completion list
+        if ([list count] == 1) {
+          BibliographyEntry *bib = list[0];
+          if ([arg isEqualToString:[bib.tag lowercaseString]]) {
+            [_popupList dismiss];
+            return;
+          }
+        }
+        
+        [self completeFromList:list];
+      }
     } else {
       [self completeFromList:list];
     }
@@ -2291,10 +2331,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   // check for completing arguments
   NSString *arg = [self currentArgument];
-  //  NSLog(@"Completing arg '%@'", arg);
   if (arg != nil) {
     if ([self selectionIsInRefCommand]) {
-      //      NSLog(@"In ref");
       [self showListOfRefCompletions];
       return YES;
     }
@@ -2739,7 +2777,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (BOOL) autocompleteArgument
 {
   NSString *arg = [self currentArgument];
-  //  NSLog(@"Autocomplete arg %@", arg);
   
   // show citation completion list?
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
