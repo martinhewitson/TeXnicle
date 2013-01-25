@@ -1644,8 +1644,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         toPath = [[parent pathOnDisk] stringByAppendingPathComponent:child.name];
       }
       
-      //    NSLog(@"From %@", fromPath);
-      //    NSLog(@"To %@", toPath);
+      // check extension if we are dealing with a file
+      if ([child isMemberOfClass:[FileEntity class]]) {
+        if ([[toPath pathExtension] isEqualToString:[(FileEntity*)child extension]] == NO) {
+          toPath = [[toPath stringByDeletingPathExtension] stringByAppendingPathExtension:[(FileEntity*)child extension]];
+        }
+      }
+      
+//      NSLog(@"From %@", fromPath);
+//      NSLog(@"To %@", toPath);
       NSFileManager *fm = [NSFileManager defaultManager];
       NSError *error = nil;
       if (fromPath != nil && toPath != nil && [fromPath isEqualToString:toPath] == NO) {
