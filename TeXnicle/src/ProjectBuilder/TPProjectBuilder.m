@@ -450,17 +450,25 @@
 // Make folders in the project for the given path components.
 - (FolderEntity*) makeFoldersForComponents:(NSArray*)pathComps inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
+//  NSLog(@"Making folder for %@", pathComps);
   NSString *lastComp = nil;
   FolderEntity *parentItem = nil;
   for (NSString *comp in pathComps) {
+    
+    NSString *filepath = nil;
+    if (lastComp == nil) {
+      filepath = comp;
+    } else {
+      filepath = [lastComp stringByAppendingPathComponent:comp];
+    }
+    
     // get a list of current folders in the project to check against
     NSArray *folders = [project folders];
+//    NSLog(@"  checking for %@", filepath);
     BOOL createFolder = YES;
     for (FolderEntity *folder in folders) {
-      NSString *folderName = [folder valueForKey:@"name"];
-      NSString *folderParentName = [[folder valueForKey:@"parent"] valueForKey:@"name"];
-      if ([folderName isEqualToString:comp]) {
-        if (folderParentName && [folderParentName isEqualToString:lastComp]) continue;
+//      NSLog(@"     path: %@", [folder pathRelativeToProject]);
+      if ([filepath isEqualToString:[folder pathRelativeToProject]]) {
         // skip making this one
         createFolder = NO;
         parentItem = folder;                
