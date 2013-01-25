@@ -633,6 +633,7 @@
   self.outlineViewController = nil;
   
   // clean up tab bar controls
+  [self.mainWindow setNextResponder:self.controlsTabBarController.nextResponder];
   [self.controlsTabBarController tearDown];
   self.controlsTabBarController = nil;
   
