@@ -485,6 +485,7 @@
         return;
       }
       if ([sortedItems containsObject:checkedFile.file] == NO) {
+        checkedFile.file = nil;
         [filesToRemove addObject:checkedFile];
       }
     }
