@@ -107,17 +107,20 @@
 - (IBAction) addExistingFolder:(id)sender
 {
 	[treeController addExistingFolder:self];
+  selectedItem = nil;
 }
 
 
 - (IBAction) addExistingFile:(id)sender
 {
 	[treeController addExistingFile:self toFolder:nil];
+  selectedItem = nil;
 }
 
 - (IBAction) addExistingFileToSelectedFolder:(id)sender
 {
 	[treeController addExistingFile:self toFolder:(FolderEntity*)selectedItem];
+  selectedItem = nil;
 }
 
 
@@ -255,11 +258,13 @@
 - (IBAction) newGroupFolder:(id) sender
 {
   [treeController addNewFolder];
+  selectedItem = nil;
 }
 
 - (IBAction) newFolderOnDisk:(id)sender
 {
   [treeController addNewFolderCreateOnDisk];
+  selectedItem = nil;
 }
 
 - (IBAction) newSubfolder:(id)sender
@@ -291,6 +296,7 @@
     [self setNeedsDisplay:YES];
   }
   [self.mainDocument showDocument];
+  selectedItem = nil;
 }
 
 - (IBAction) revealItem:(id)sender
@@ -298,6 +304,7 @@
 	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
 	NSString *fullpath = [selectedItem valueForKey:@"pathOnDisk"];
 	[ws selectFile:fullpath inFileViewerRootedAtPath:[fullpath stringByDeletingLastPathComponent]];
+  selectedItem = nil;
 }
 
 - (IBAction) renameItem:(id)sender
@@ -305,8 +312,7 @@
 	if ([self.mainDocument respondsToSelector:@selector(renameItemAtRow:)]) {		
 		[self.mainDocument renameItemAtRow:selectedRow];
 	}
-//	[treeController renameItemAtRow:selectedRow];
-//	[self editColumn:0 row:selectedRow withEvent:nil select:YES];
+  selectedItem = nil;
 }
 
 
@@ -332,8 +338,10 @@
   [openPanel beginSheetModalForWindow:[[[NSDocumentController sharedDocumentController] currentDocument] windowForSheet]
                     completionHandler:^(NSInteger result) {
                       
-                      if (result == NSCancelButton) 
+                      if (result == NSCancelButton) {
+                        selectedItem = nil;
                         return;
+                      }
                       
                       NSString *path = [[openPanel URL] path];
                       
@@ -348,6 +356,7 @@
                       }
                       
                       [self reloadItem:selectedItem];
+                      selectedItem = nil;
                     }];
 	
 	
