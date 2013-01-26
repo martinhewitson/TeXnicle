@@ -58,6 +58,7 @@
 #import "TPNewCommand.h"
 #import "FileDocument.h"
 #import "TPRegularExpression.h"
+#import "NSResponder+TeXnicle.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -633,7 +634,7 @@
   self.outlineViewController = nil;
   
   // clean up tab bar controls
-  [self.mainWindow setNextResponder:self.controlsTabBarController.nextResponder];
+  [NSResponder removeResponder:self.controlsTabBarController fromChainOfResponder:self.mainWindow];
   [self.controlsTabBarController tearDown];
   self.controlsTabBarController = nil;
   
