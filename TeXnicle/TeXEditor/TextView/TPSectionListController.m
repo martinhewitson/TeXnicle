@@ -31,6 +31,9 @@
 #import "Bookmark.h"
 #import "NSAttributedString+LineNumbers.h"
 #import "TPRegularExpression.h"
+#import "TPSectionListSection.h"
+#import "externs.h"
+#import "NSArray+Color.h"
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
@@ -58,21 +61,24 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		
     whiteSpace = [NSCharacterSet whitespaceCharacterSet];
     newlines = [NSCharacterSet newlineCharacterSet];
+    
 		sections = [[NSMutableArray alloc] init];
-		
-		[sections addObject:@"\\\\section"];
-		[sections addObject:@"\\\\subsection"];
-		[sections addObject:@"\\\\subsubsection"];
-		[sections addObject:@"\\\\paragraph"];
-		[sections addObject:@"\\\\subparagraph"];
-		[sections addObject:@"\\\\part"];
-		[sections addObject:@"\%\%MARK"];
-		[sections addObject:@"\%\%FIGURE"];
-		[sections addObject:@"\%\%TABLE"];
-		[sections addObject:@"\%\%LIST"];
-		[sections addObject:@"\%\%EQUATION"];
-		[sections addObject:@"\\@.*\\{"];
-		
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\section" isTeX:YES color:[[defaults valueForKey:TPOutlineSectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subsubsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsubsectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\paragraph" isTeX:YES color:[[defaults valueForKey:TPOutlineParagraphColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subparagraph" isTeX:YES color:[[defaults valueForKey:TPOutlineSubparagraphColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\part" isTeX:YES color:[[defaults valueForKey:TPOutlinePartColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\chapter" isTeX:YES color:[[defaults valueForKey:TPOutlineChapterColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\@.*\\{" isTeX:YES color:[NSColor magentaColor]]];
+
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%TABLE" isTeX:NO color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%LIST" isTeX:NO color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%EQUATION" isTeX:NO color:[NSColor lightGrayColor]]];
+    
 	}
 	return self;
 }
@@ -240,33 +246,24 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
   
 	// look for each section tag
   BOOL isMarker = NO;
-	for (NSString *tag in sections) {
-		NSString *regexp;
-		if ([tag isEqual:@"%%MARK"] || 
-				[tag isEqual:@"%%FIGURE"] || 
-				[tag isEqual:@"%%TABLE"] || 
-				[tag isEqual:@"%%LIST"] || 
-				[tag isEqual:@"%%EQUATION"]) {
-			regexp = [NSString stringWithFormat:@"%@.*(\\n)", tag];
-      isMarker = YES;
-		} else {
-			// we have a TeX section
-			regexp = [NSString stringWithFormat:@"%@[\\*]?\\{.*\\}", tag];
-		}
+	for (TPSectionListSection *section in sections) {
+    NSString *tag = section.tag;
+		NSString *regexp = section.regexp;
 		
-    NSArray *results = [TPRegularExpression stringsMatching:regexp inText:string];
+    NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
 //    NSLog(@"Scan results for %@:  %@", regexp, results);
-		NSScanner *aScanner = [NSScanner scannerWithString:string];
-		if ([results count] > 0) {			
-			for (NSString *result in results) {
-				NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
-				returnResult = [returnResult stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [aScanner scanUpToString:returnResult intoString:NULL];
+		if ([results count] > 0) {
+			for (NSValue *rv in results) {
+        NSRange r = [rv rangeValue];
+        NSString *result = [string substringWithRange:r];
+				NSString *returnResult = [result stringByTrimmingCharactersInSet:newlines];
+				returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
 //        NSLog(@"Return result: %@", returnResult);
-        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
+        NSRange lineRange = [string lineRangeForRange:NSMakeRange(r.location, 0)];
+//        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
 //        NSLog(@"Scanner location %ld", [aScanner scanLocation]);
 //        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
-        if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:[aScanner scanLocation]] || isMarker) {
+        if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:r.location] || isMarker) {
           NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
           NSString *arg = [returnResult argument];
           if (arg == nil) {
@@ -280,20 +277,15 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
           type = [type uppercaseString];
           arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-          arg = [arg stringByReplacingOccurrencesOfString:@"{" withString:@""];
-          arg = [arg stringByReplacingOccurrencesOfString:@"}" withString:@""];
           NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
           NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
           [adisp addAttribute:NSForegroundColorAttributeName
-                        value:[NSColor lightGrayColor]
+                        value:section.color
                         range:NSMakeRange(0, [type length]+1)];
-          [adisp addAttribute:NSForegroundColorAttributeName
-                        value:[NSColor darkGrayColor]
-                        range:NSMakeRange([type length]+1, [disp length]-[type length]-1)];
           
           NSMutableDictionary *dict = [NSMutableDictionary dictionary];
           dict[@"title"] = adisp;
-          dict[@"index"] = [NSNumber numberWithInteger:[aScanner scanLocation]];
+          dict[@"index"] = [NSNumber numberWithInteger:r.location];
           [found addObject:dict];
         }
 			} // end loop over results
@@ -302,14 +294,14 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
 	// add bib items
 	NSString *regexp = @"\\@.*\\{.*,";
-  NSArray *searchResults = [TPRegularExpression stringsMatching:regexp inText:string];
+  NSArray *ranges = [TPRegularExpression rangesMatching:regexp inText:string];
 //  NSLog(@"Bib search results: %@", searchResults);
-	NSScanner *aScanner = [NSScanner scannerWithString:string];
-	if ([searchResults count] > 0) {			
-		for (NSString *result in searchResults) {
+	if ([ranges count] > 0) {
+		for (NSValue *rv in ranges) {
+      NSRange r = [rv rangeValue];
+      NSString *result = [string substringWithRange:r];
 			NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
-			returnResult = [returnResult stringByTrimmingCharactersInSet:ws];			
-			[aScanner scanUpToString:returnResult intoString:NULL];			
+			returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
 			int loc = 0;
 			int tagEnd = -1;			
 			while (loc < [returnResult length]) {				
@@ -343,16 +335,16 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
         continue;
 			
 			NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
-			arg = [arg stringByTrimmingCharactersInSet:ws];
+			arg = [arg stringByTrimmingCharactersInSet:whiteSpace];
 			NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
 			NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
 			[adisp addAttribute:NSForegroundColorAttributeName
-										value:[NSColor lightGrayColor]
+										value:[NSColor magentaColor]
 										range:NSMakeRange(0, [type length])];
 			
 			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 			dict[@"title"] = adisp;
-			dict[@"index"] = [NSNumber numberWithInteger:[aScanner scanLocation]];
+			dict[@"index"] = [NSNumber numberWithInteger:r.location];
 			[found addObject:dict];
 		}
 	}
