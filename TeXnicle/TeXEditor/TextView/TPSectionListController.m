@@ -230,7 +230,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		return;
   }
 	
-	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSMutableArray *found = [NSMutableArray array];
 	
 	NSString *string = [self.textView string];
