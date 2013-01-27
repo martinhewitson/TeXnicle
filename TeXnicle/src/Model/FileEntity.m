@@ -56,11 +56,13 @@
 
 - (void) awakeFromInsert
 {
+//  NSLog(@"%@: Awake from insert", [self name]);
   self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
-	[self reconfigureDocument];
+  [self reloadFromDisk];
+//	[self reconfigureDocument];
 //	if (!document) {
 ////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
 //		document = [[FileDocument alloc] initWithFile:self];
@@ -72,6 +74,7 @@
 - (void) awakeFromFetch
 {
 	[super awakeFromFetch];
+//  NSLog(@"%@: Awake from fetch", [self name]);
 	
   self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
@@ -118,7 +121,7 @@
 {  
 	// We should load the text from the file
 	NSString *filepath = [self pathOnDisk];
-	
+//	NSLog(@"* Reloading %@ from %@ ", self.name, filepath);
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:filepath]) {
     MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:encoding];
@@ -128,7 +131,7 @@
 		if (!str) {
 			str = @"";
 		}
-//    NSLog(@"%@: %@", self, str);
+//    NSLog(@"%@: length: %ld", self, [str length]);
 		NSData *data = [str dataUsingEncoding:[fr encodingUsed]];
 //    NSLog(@"Loaded with encoding %@", [fr nameOfEncoding:[fr encodingUsed]]);
 		[self setPrimitiveValue:data forKey:@"content"];
