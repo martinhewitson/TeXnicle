@@ -56,6 +56,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	self = [super init];
 	if (self) {
 		
+    whiteSpace = [NSCharacterSet whitespaceCharacterSet];
+    newlines = [NSCharacterSet newlineCharacterSet];
 		sections = [[NSMutableArray alloc] init];
 		
 		[sections addObject:@"\\\\section"];
@@ -78,6 +80,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 - (void) tearDown
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  whiteSpace = nil;
+  newlines = nil;
   [self.timer invalidate];
   self.timer = nil;
   self.textView = nil;

@@ -37,6 +37,8 @@
 @private
 	NSMutableArray *sections;
 	NSMenu *addMarkerActionMenu;
+  NSCharacterSet *whiteSpace;
+  NSCharacterSet *newlines;
 }
 
 @property (unsafe_unretained) NSTextView *textView;
