@@ -1,8 +1,8 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 Monaco;}
+\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Menlo-Bold;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
-\red84\green2\blue2;\red92\green38\blue153;}
+\red92\green38\blue153;\red217\green11\blue0;}
 \paperw11900\paperh16840\vieww19560\viewh16520\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -55,6 +55,8 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \
 Memory leak in typesetting? Memory usage grows with each typesetting.....\
 \
+### Heather had a bug related to working in the editor which caused an out of range issue in textStorage. Check syntax highlighting etc.\
+\
 \
 Version 2.1\
 ---------------\
@@ -65,6 +67,9 @@ Version 2.1\
 	- texeditorcontroller has an active textview (one with current focus)\
 \
 + Better parsing of typesetting output into error and warning objects. Add ability to jump to errors.\
+\
+\
+----------------------------------\
 \
 + Add support for Asymptote ({\field{\*\fldinst{HYPERLINK "http://asymptote.sourceforge.net/"}}{\fldrslt http://asymptote.sourceforge.net}})\
 \
@@ -101,9 +106,32 @@ Version 2.1\
 \
 + highlight the current file in the project tree (draw with different color or underline?)\
 \
-\pard\pardeftab720
-\cf5 + After pressing cmd+R it would be convenient, that the pdf updates to the cursors's position\cf0 \
++ Add Edit->TeX Edit-> menu for bold, italic, etc\
 \
++ When typing within a line, if the line goes beyond line length in hard wrap, should we wrap? This would be more consistent with soft wrap. But maybe it would be annoying?\
+\
+\pard\pardeftab720
+
+\f3 \cf0 Not a very important point, but one that I am finding slightly frustrating - If I am writing normal text and I want to include round brackets texnicle stops recognising that it should switch to the next line before I go out of the readable part of the latex document. As soon as you put a full stop after the bracket it realises and moves to the next line, but it leaves the rest of your text going off into forever along one line (unless you make the brackets and before writing text put a full stop after them, in which case it realises it needs to keep the text on the visible page as normal).\
+\pard\pardeftab720
+
+\f1 \cf0 \
+\pard\pardeftab720
+\cf3 I think you correctly understand my explanation. \'a0In the current implementation, every time I build a new project and typeset the main tex file, the resulting PDF Viewer takes up about 3/4 of the screen space and the editing window is a narrow window to the left of the viewer. \'a0I'd like to always have the editing window larger and the PDF Viewer much smaller, maybe even so they are more equal size, and have a way to save that as the default orientation for new files and/or projects. \'a0That's about the only feature I miss from TeXShop. \'a0\
+\pard\pardeftab720
+\cf0 \
++ Rename a .tex file:\
+	- it is necessary to add the .tex extension in the rename box\
+		- we should check the new extension against the old\
+			- if new extension is different from old, offer:\
+				- keep old\
+				- accept new\
+				- cancel\
+	- this then adds .tex to the displayed name\
+		- this shouldn't happen\
+\
+\
++ Display counts of labels, commands, warnings etc in view controllers\
 \
 ----------------------\
 \
@@ -131,18 +159,33 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf6 NSRange\cf0 )indentRangeForLineAtIndex:(\cf6 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf5 NSRange\cf0 )indentRangeForLineAtIndex:(\cf5 NSInteger\cf0 )loc\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 \
 Version 2.0.2\
 -------------\
 \
-+ Minor cosmetic improvements\
-+ Palette commands now appear in autocompletion list\
-+ Added a new toolbar button to cancel typesetting (you may need to customize your toolbar and add it)\
-+ Added a corresponding menu item under the Typeset menu to cancel typesetting\
+
+\f4\b \cf6 ON 10.6.8:\
+	- in thesis, all tex files got set to zero bytes!\
+		- seems it only happened when the project was first opened after copying over\
+			- TRY AGAIN!\
+	- closing all tabs takes ages!
+\f0\b0 \cf0 \
+\
++ Minor cosmetic improvements.\
++ Improved automatic file loading for different text encodings.\
++ Palette commands now appear in autocompletion list.\
++ Added a new set of menu commands for applying LaTeX formatting to selected text (e.g., \\textbf\{\})\
++ Added a new toolbar button to cancel typesetting (you may need to customize your toolbar and add it).\
++ Added a corresponding menu item under the Typeset menu to cancel typesetting.\
 + Added a new preference on the Typesetting preferences pane which, when activated, causes the PDF to be synced to the current editor location after typesetting.\
++ The labels list now includes \\label commands with optional arguments (like \\label[something]\{label\})\
++ Fixed a bug which could stop the project from being saved after removing a file or folder from the project tree.\
++ Fixed a bug which crept into 2.0.1 which could cause problems in some cases when opening existing projects.\
++ Fixed a bug which could cause TeXnicle to crash sometimes when closing documents.\
++ Many small bug fixes\
 \
 Version 2.0.1\
 -------------\
