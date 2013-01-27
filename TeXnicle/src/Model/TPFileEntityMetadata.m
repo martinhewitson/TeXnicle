@@ -157,7 +157,11 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 - (void) updateMetadata
 {
   // in case the file has gone
-  if (self.parent == nil) {
+  if (self.parent == nil || [[self.parent isText] boolValue] == NO) {
+    return;
+  }
+  
+  if ([[NSApplication sharedApplication] isActive] == NO) {
     return;
   }
   
