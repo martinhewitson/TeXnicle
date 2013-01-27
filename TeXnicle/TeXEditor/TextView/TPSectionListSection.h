@@ -10,4 +10,11 @@
 
 @interface TPSectionListSection : NSObject
 
+@property (strong) NSString *tag;
+@property (strong) NSColor *color;
+@property (strong) NSString *regexp;
+@property (assign) BOOL isTex;
+
+- (id) initWithTag:(NSString*)tag isTeX:(BOOL)isTex color:(NSColor*)color;
+
 @end
