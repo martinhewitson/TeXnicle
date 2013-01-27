@@ -31,6 +31,8 @@
 #import "NSString+FileTypes.h"
 #import "externs.h"
 
+#define FILE_READER_DEBUG 0
+
 @implementation MHFileReader
 
 
@@ -225,9 +227,13 @@
 
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL
 {
-//  NSLog(@"Reading string from file %@", aURL);
+#if FILE_READER_DEBUG
+  NSLog(@"Reading string from file %@", aURL);
+#endif
   if (![[aURL path] pathIsText]) {
-//    NSLog(@"   ## NOT TEXT");
+#if FILE_READER_DEBUG
+    NSLog(@"   ## NOT TEXT");
+#endif
     return nil;
   }
   
@@ -242,12 +248,18 @@
   if (encodingString == nil || [encodingString length] == 0) {
     
     str = [NSString stringWithContentsOfURL:aURL usedEncoding:&encoding error:&error];
-//    NSLog(@"  Loaded string with encoding %ld", encoding);
+#if FILE_READER_DEBUG
+    NSLog(@"  Loaded string with encoding %ld", encoding);
+#endif
     // if we didn't get a string, then try the default encoding
     if (str == nil || [str isEqualToString:@""]) {
-//      NSLog(@"   failed to guess encoding.");
+#if FILE_READER_DEBUG
+      NSLog(@"   failed to guess encoding.");
+#endif
       encoding = [self defaultEncoding];
-//      NSLog(@"   will try with default encoding %@", [self nameOfEncoding:encoding]);
+#if FILE_READER_DEBUG
+      NSLog(@"   will try with default encoding %@", [self nameOfEncoding:encoding]);
+#endif
     }
     
   } else {
@@ -256,18 +268,24 @@
   // if we didn't get the string, try with the default encoding
   if (str == nil) {
     error = nil;
-//    NSLog(@"   reading string with encoding %@", encodingString);
+#if FILE_READER_DEBUG
+    NSLog(@"   reading string with encoding %@", encodingString);
+#endif
     str = [NSString stringWithContentsOfURL:aURL
                                    encoding:encoding
                                       error:&error];
     
     // if this still doesn't work, try all possible encodings in order, until one succeeds
     if (str == nil) {
-//      NSLog(@"   default failed: trying others....");
+#if FILE_READER_DEBUG
+      NSLog(@"   default failed: trying others....");
+#endif
       for (NSNumber *enc in self.encodings) {
         str = [NSString stringWithContentsOfURL:aURL encoding:[enc integerValue] error:NULL];
         if (str != nil) {
-//          NSLog(@"**** managed to read with encoding %ld", [enc integerValue]);
+#if FILE_READER_DEBUG
+          NSLog(@"**** managed to read with encoding %ld", [enc integerValue]);
+#endif
           break;
         }
       }
