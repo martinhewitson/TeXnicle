@@ -111,7 +111,7 @@
 	for (id item in [self valueForKey:@"items"]) {
 		if ([item isKindOfClass:[FileEntity class]]) {			
 			FileEntity *file = (FileEntity*)item;
-			NSString *fstr = [[file valueForKey:@"filepath"] stringByStandardizingPath];
+			NSString *fstr = [file valueForKey:@"filepath"];
       if ([fstr isEqualToString:pathToTest]) {
         return file;
       }

@@ -135,7 +135,7 @@
 		
 	// make sure that this path is always relative to the project
 	NSString *projectFolder = [[[self project] valueForKey:@"folder"] stringByAppendingPathComponent:@"."];
-	NSString *relativePath = [projectFolder relativePathTo:aPath];
+	NSString *relativePath = [projectFolder relativePathTo:[aPath stringByStandardizingPath]];
 	
 	[self setPrimitiveValue:relativePath forKey:@"filepath"];
 	[self didChangeValueForKey:@"filepath"];
