@@ -327,14 +327,22 @@ static NSCharacterSet *controlFilterChars = nil;
   
   NSInteger argStart = -1;
   NSInteger argEnd = -1;
+  NSInteger argCount = 0;
   while (start < [self length]) {
     //						NSLog(@"Checking '%C'", [string characterAtIndex:start]);
-    if (argStart<0 && [self characterAtIndex:start] == '{') {
-      argStart = start+1;
+    if ([self characterAtIndex:start] == '{') {      
+      argCount++;
+      if (argStart<0) {
+        argStart = start+1;
+      }
     }
-    if (argEnd<0 && [self characterAtIndex:start] == '}') {
-      argEnd = start;
-      break;
+    
+    if ([self characterAtIndex:start] == '}') {
+      argCount--;
+      if (argStart > 0 && argCount == 0 && argEnd<0) {
+        argEnd = start;
+        break;
+      }
     }
     start++;
   }
