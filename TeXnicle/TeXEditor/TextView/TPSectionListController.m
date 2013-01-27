@@ -104,7 +104,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 						 name:NSPopUpButtonWillPopUpNotification
 					 object:self.popupMenu];
 
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                 target:self
                                               selector:@selector(fillSectionMenu)
                                               userInfo:nil
