@@ -388,7 +388,20 @@
 	NSString *projectFolder = [[[self fileURL] path] stringByDeletingLastPathComponent];
 	NSString *saveFolder = [self.project valueForKey:@"folder"];
   if (![saveFolder isEqual:projectFolder]) {
+    
+//    NSLog(@"####################################### Reloading because project moved....");
+//    NSLog(@" project: %@", self.project);
+    
     [self.project setValue:projectFolder forKey:@"folder"];
+    [self.managedObjectContext processPendingChanges];
+    
+    // reload all files
+    for (ProjectItemEntity *item in self.project.items) {
+      if ([item isKindOfClass:[FileEntity class]]) {
+//        NSLog(@"####################################### Reloading %@ because project moved....", item);
+        [(FileEntity*)item reloadFromDisk];
+      }
+    }
   }
 
   // tab bar controls
