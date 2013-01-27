@@ -31,6 +31,8 @@
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
 
+static NSCharacterSet *controlFilterChars = nil;
+
 @implementation NSString (LaTeX) 
 
 
@@ -267,38 +269,30 @@
 {  
   if (str == nil) return nil;
   
-  NSCharacterSet *filterChars = nil;
-	
-	// make a character set of control characters (but not whitespace/newline
-	// characters), and keep a static immutable copy to use for filtering
-	// strings
-  //	NSCharacterSet *ctrlChars = [NSCharacterSet controlCharacterSet];
-	NSCharacterSet *newLineChars = [NSCharacterSet newlineCharacterSet];
-  //	NSCharacterSet *newlineWsChars = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  //	NSCharacterSet *nonNewlineWsChars = [newlineWsChars invertedSet];
-	
-	NSMutableCharacterSet *mutableChars = [newLineChars mutableCopy];
-  //	[mutableChars formIntersectionWithCharacterSet:nonNewlineWsChars];
-  //	[mutableChars formUnionWithCharacterSet:ctrlChars];
-  //	[mutableChars addCharactersInRange:NSMakeRange(0x0B, 2)]; // filter vt, ff
-	[mutableChars addCharactersInRange:NSMakeRange(0x2028, 2)]; // filter vt, ff
-  //	[mutableChars addCharactersInRange:NSMakeRange(0x000b, 2)]; 
-	
-	filterChars = [mutableChars copy];
+  if (controlFilterChars == nil) {
+    
+    // make a character set of control characters (but not whitespace/newline
+    // characters), and keep a static immutable copy to use for filtering
+    // strings
+    NSCharacterSet *newLineChars = [NSCharacterSet newlineCharacterSet];
+    NSMutableCharacterSet *mutableChars = [newLineChars mutableCopy];
+    [mutableChars addCharactersInRange:NSMakeRange(0x2028, 2)]; // filter vt, ff
+                                                                //	[mutableChars addCharactersInRange:NSMakeRange(0x000b, 2)];
+    
+    controlFilterChars = [mutableChars copy];    
+  }
   
   // look for any invalid characters
-  NSRange range = [str rangeOfCharacterFromSet:filterChars]; 
+  NSRange range = [str rangeOfCharacterFromSet:controlFilterChars]; 
   if (range.location != NSNotFound) {
     
     // copy the string to a mutable, and remove null and non-whitespace 
     // control characters
-    NSMutableString *mutableStr = [NSMutableString stringWithString:str];  
+    NSMutableString *mutableStr = [NSMutableString stringWithString:str];
     while (range.location != NSNotFound) {
-      
       [mutableStr deleteCharactersInRange:range];
-      //			[mutableStr replaceCharactersInRange:range withString:@" "];
-      
-      range = [mutableStr rangeOfCharacterFromSet:filterChars]; 
+      range = [mutableStr rangeOfCharacterFromSet:controlFilterChars];
+//      range = [mutableStr rangeOfCharacterFromSet:controlFilterChars options:0 range:NSMakeRange(range.location, [mutableStr length] - range.location - range.length)];
     }
     
     return mutableStr;
