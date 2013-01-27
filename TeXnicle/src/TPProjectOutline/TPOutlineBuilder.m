@@ -141,6 +141,11 @@
   
   if ([file isKindOfClass:[FileEntity class]]) {
     
+    // we only scan text files.
+    if ([[file isText] boolValue] == NO) {
+      return;
+    }
+    
     __block TPOutlineBuilder *blockSelf = self;
     
     dispatch_async(queue, ^{
