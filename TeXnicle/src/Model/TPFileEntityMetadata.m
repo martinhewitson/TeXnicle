@@ -125,6 +125,10 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
 - (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
+  // we have to update all sections for this file because we look for other files included from
+  // here, and they might have changed. So, the only case where we don't need to update is if no
+  // files have changed. Is that really worth checking?
+  
   [self updateSectionsForTypes:templates forceUpdate:force];
   
   return self.sections;
