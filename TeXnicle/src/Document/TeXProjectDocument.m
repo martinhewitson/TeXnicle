@@ -739,17 +739,18 @@
   _windowIsClosing = YES;
   
     
-  [self tearDown];
-  
   // see if we want to open the startup screen
 	NSWindow *window = [[self windowControllers][0] window];
 	[window setDelegate:nil];
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
-		if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
-			[[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
+    id appDel = [NSApp delegate];
+		if (appDel != nil && [appDel respondsToSelector:@selector(showStartupScreen:)]) {
+			[appDel performSelector:@selector(showStartupScreen:) withObject:self];
       [[ConsoleController sharedConsoleController] close];
 		}
 	}
+  
+  [self tearDown];
 }
 
 
