@@ -160,13 +160,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
   }
   
-  [self reset];
-  
+  [self reset];  
+  [self compileWasCancelled];
+}
+
+- (void) compileWasCancelled
+{
   if (self.delegate && [self.delegate respondsToSelector:@selector(compileWasCancelled)]) {
     [self.delegate compileWasCancelled];
   }
-  
-  
 }
 
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
