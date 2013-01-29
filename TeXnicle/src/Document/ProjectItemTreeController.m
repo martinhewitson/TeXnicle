@@ -1397,8 +1397,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         [c setAttributedStringValue:title];
       }
       
-      NSImage *icon = [[NSWorkspace sharedWorkspace] iconForFileType:ext];				
-      [cell setImage:icon];						
+      // set file's icon
+      [cell setImage:[(FileEntity*)object icon]];
     }
   }
 
