@@ -155,9 +155,9 @@
 - (void) cancelCompile
 {
   if (typesetTask != nil) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [typesetTask terminate];
     typesetTask = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
   }
   
   [self reset];  
