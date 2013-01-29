@@ -2505,9 +2505,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSInteger idx = [self characterIndexForPoint:[NSEvent mouseLocation]];
       NSInteger line = [self lineNumberForRange:NSMakeRange(idx, 0)];
       NSInteger column = [self columnForRange:NSMakeRange(idx, 0)];
-      if ([self.delegate respondsToSelector:@selector(textView:didCommandClickAtLine:column:)]) {
-        [(TeXEditorViewController*)self.delegate textView:self didCommandClickAtLine:line column:column];
-      }
+      [(TeXEditorViewController*)self.delegate textView:self didCommandClickAtLine:line column:column];
     }
 	}
   
