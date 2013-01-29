@@ -53,6 +53,8 @@
 @synthesize document;
 @synthesize isActive;
 @synthesize metadata;
+@synthesize icon;
+
 
 - (void) awakeFromInsert
 {
@@ -62,6 +64,7 @@
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
   [self reloadFromDisk];
+  [self loadIcon];
 //	[self reconfigureDocument];
 //	if (!document) {
 ////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
@@ -79,6 +82,7 @@
   self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self reloadFromDisk];
+  [self loadIcon];
 	
 	// we should make sure the name is in sync with the filepath
 	NSString *newName = [[self filepath] lastPathComponent];
@@ -94,6 +98,14 @@
 //	}
   
   self.isActive = 0;
+}
+
+- (void) loadIcon
+{
+  NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:self.extension];
+  if (image != nil) {
+    self.icon = image;
+  }
 }
 
 - (void)increaseActiveCount
@@ -334,6 +346,7 @@
 {
   self.metadata.parent = nil;
   self.metadata = nil;
+  self.icon = nil;
   
 	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);

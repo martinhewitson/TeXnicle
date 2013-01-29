@@ -53,7 +53,9 @@
 @property (nonatomic, strong) NSSet *bookmarks;
 @property (nonatomic, unsafe_unretained) ProjectEntity *mainFileOfProject;
 
+
 // other properties
+@property (strong) NSImage *icon;
 @property (readonly) BOOL isManaged;
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
