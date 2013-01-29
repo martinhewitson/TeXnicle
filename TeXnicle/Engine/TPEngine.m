@@ -173,6 +173,10 @@
 
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
 {
+  if (self.compiling == YES) {
+    return NO;
+  }
+  
   self.documentPath = aDocumentPath;
 //  NSLog(@"Compiling %@", self.documentPath);
 //  NSLog(@"Working dir %@", workingDir);

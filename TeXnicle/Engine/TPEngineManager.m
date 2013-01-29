@@ -250,7 +250,9 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (NSArray*)registeredEngineNames
 {
-  [self loadEngines];
+  if (self.engines == nil) {
+    [self loadEngines];
+  }
   
   NSMutableArray *names = [NSMutableArray array];
   for (TPEngine *e in self.engines) {
@@ -285,7 +287,9 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 - (void) compile
 {
   // ensure the engines have been installed and loaded
-  [self loadEngines];
+  if (self.engines == nil) {
+    [self loadEngines];
+  }
   
   NSString *engineName = [self.delegate engineName];
   TPEngine *e = [self engineNamed:engineName];
@@ -294,8 +298,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.doPS2PDF = [[self.delegate doPS2PDF] boolValue];
   e.openConsole = [[self.delegate openConsole] boolValue];
   e.nCompile = [[self.delegate nCompile] integerValue];
-  
-  if (e) {
+
+  if (e != nil && e.compiling == NO) {
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
