@@ -60,6 +60,7 @@ extern NSString * const TEAutomaticallyShowBeginCompletionList;
 
 extern NSString * const TEAutomaticallyAddEndToBeginStatement;
 extern NSString * const TEAutomaticallyInsertClosingBrace;
+extern NSString * const TEAutomaticallyInsertClosingMath;
 extern NSString * const TEAutomaticallyReplaceOpeningDoubleQuote;
 extern NSString * const TEAutomaticallySkipClosingBrackets;
 

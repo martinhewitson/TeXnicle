@@ -2676,6 +2676,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];
+  BOOL completeMath = [[defaults valueForKey:TEAutomaticallyInsertClosingMath] boolValue];
   BOOL skipClosingBrace = [[defaults valueForKey:TEAutomaticallySkipClosingBrackets] boolValue];
   
   if ([aString isEqual:@"{"] && completeBrace) {
@@ -2692,6 +2693,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self moveLeft:self];
       [self autocompleteArgument];
     }
+  } else if ([aString isEqual:@"$"] && completeMath) {
+		NSRange r = [self selectedRange];
+		r.location-=2;
+		r.length+=2;
+		[super insertText:@"$$"];
+		[self moveLeft:self];
 	} else 	if ([aString isEqual:@"["] && completeBrace) {
 		NSRange r = [self selectedRange];
 		r.location-=2;
