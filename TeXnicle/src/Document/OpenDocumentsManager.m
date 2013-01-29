@@ -377,11 +377,13 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   
   // increase active state for this doc
   [_currentDoc increaseActiveCount];
+  _currentDoc.isSelected = YES;
   
   // and decrease for all others
   for (FileEntity *doc in self.openDocuments) {
     if (doc != _currentDoc) {
       [doc decreaseActiveCount];
+      doc.isSelected = NO;
     }
   }
 		

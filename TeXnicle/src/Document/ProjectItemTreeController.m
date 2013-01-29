@@ -1386,16 +1386,22 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
       if (!ext)
         ext = @"";
       
-      NSString *title;
-      title = [object valueForKey:@"name"];
-      [cell setTitle:title];
+//      NSString *title;
+//      title = [object valueForKey:@"name"];
+//      [cell setTitle:title];
+      
+      NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
+
+      if (object.isSelected) {
+        [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
+      }      
       
       if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
-        NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
         [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
-        ImageAndTextCell *c = (ImageAndTextCell*)cell;
-        [c setAttributedStringValue:title];
       }
+      
+      ImageAndTextCell *c = (ImageAndTextCell*)cell;
+      [c setAttributedStringValue:title];
       
       // set file's icon
       [cell setImage:[(FileEntity*)object icon]];

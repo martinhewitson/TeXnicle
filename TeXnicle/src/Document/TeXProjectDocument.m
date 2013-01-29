@@ -1660,15 +1660,24 @@
 	if ([self.projectItemTreeController isDeleting])
 		return;
   
+  // set all to not selected
+  for (ProjectItemEntity *item in self.project.items) {
+    item.isSelected = NO;
+  }
+  
 	NSArray *all = [self.projectItemTreeController selectedObjects];	
 	if ([all count] == 1) {
 		NSManagedObject *item = all[0];
 		if ([item isKindOfClass:[FileEntity class]]) {
       if (self.openDocuments) {
-        [self.openDocuments addDocument:(FileEntity*)item select:YES];
+        FileEntity *file = (FileEntity*)item;
+        file.isSelected = YES;
+        [self.openDocuments addDocument:file select:YES];
       }
 		}
 	}
+  
+  [self.projectOutlineView reloadData];
   
   [self updateStatusView];
 }
