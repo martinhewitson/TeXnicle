@@ -369,7 +369,7 @@
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   
   [nc addObserver:self
-         selector:@selector(texOutputAvailable:)
+         selector:@selector(checkerOutputAvailable:)
              name:NSFileHandleReadCompletionNotification
            object:lacheckFileHandle];
   
@@ -460,7 +460,7 @@
   
 }
 
-- (void) texOutputAvailable:(NSNotification*)aNote
+- (void) checkerOutputAvailable:(NSNotification*)aNote
 {	
 //  NSLog(@"Output available");
   
