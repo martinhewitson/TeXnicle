@@ -138,16 +138,9 @@
   // get the main file from the delegate
   id file = [self.delegate mainFile];
 //  NSLog(@"  main file %@", [file valueForKey:@"name"]);
-  
   if ([file isKindOfClass:[FileEntity class]]) {
     
-    // we only scan text files.
-    if ([[file isText] boolValue] == NO) {
-      return;
-    }
-    
     __block TPOutlineBuilder *blockSelf = self;
-    
     dispatch_async(queue, ^{
       
 //      NSLog(@"   computing sections...");
