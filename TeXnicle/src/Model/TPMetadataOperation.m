@@ -78,7 +78,9 @@
         
         // citations from any bib files included in this file but not in the project
         if ([self isCancelled]) return;
+        [self.file.managedObjectContext lock];
         NSArray *entries = [self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
+        [self.file.managedObjectContext unlock];
         [newCitations addObjectsFromArray:entries];
       }
       
