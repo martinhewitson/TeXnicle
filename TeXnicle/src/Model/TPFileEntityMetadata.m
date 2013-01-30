@@ -138,10 +138,11 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 - (void)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
 {
   // get the parent file and the text to search
-  id file = self.parent;
-  NSString *text = [self.parent text];
-
-  self.sections = [text sectionsInStringForTypes:templates existingSections:self.sections inFile:file];
+  FileEntity *file = self.parent;
+  
+  [file.managedObjectContext lock];
+  self.sections = [file.text sectionsInStringForTypes:templates existingSections:self.sections inFile:file];
+  [file.managedObjectContext unlock];
   
 }
 
@@ -155,7 +156,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
 
 - (void) updateMetadata
-{
+{  
   // in case the file has gone
   if (self.parent == nil || [[self.parent isText] boolValue] == NO) {
     return;
@@ -165,7 +166,10 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     return;
   }
   
+  [self.parent.managedObjectContext lock];
   NSDate *lastEdit = self.parent.lastEditDate;
+  [self.parent.managedObjectContext unlock];
+  
   NSDate *lastUpdate = self.lastMetadataUpdate;
   __block TPFileEntityMetadata *blockSelf = self;
   
@@ -189,7 +193,11 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     //-------------- syntax errors
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([[defaults valueForKey:TPCheckSyntax] boolValue] == YES) {
-      if ([self.parent.extension isEqualToString:@"tex"]) {
+      [self.parent.managedObjectContext lock];
+      NSString *extension = self.parent.extension;
+      [self.parent.managedObjectContext unlock];
+      
+      if ([extension isEqualToString:@"tex"]) {
         NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
         if ([self.parent.workingContentString writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {
           self.temporaryFileForSyntaxCheck = path;
