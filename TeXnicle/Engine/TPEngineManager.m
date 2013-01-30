@@ -306,6 +306,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     if ([[defaults valueForKey:TPClearConsoleOnCompile] boolValue]) {
       [self.consoleManager clear];
     }
+    
+    [e reset];
   
     [e compileDocumentAtPath:[self.delegate documentToCompile] 
             workingDirectory:[self.delegate workingDirectory]
