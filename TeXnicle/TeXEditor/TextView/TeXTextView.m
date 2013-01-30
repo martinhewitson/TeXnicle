@@ -594,6 +594,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self formatSelectionWithCommand:@"footnote"];
 }
 
+- (IBAction)latexFormatEscapeUnderscore:(id)sender
+{
+  NSRange sel = [self selectedRange];
+  if (sel.length>0) {
+    NSString *text = [[self string] substringWithRange:sel];
+    NSString *newString = [text stringByReplacingOccurrencesOfString:@"_" withString:@"\\_"];
+    if ([self shouldChangeTextInRange:sel replacementString:newString]) {
+      [self replaceCharactersInRange:sel withString:newString];
+      [self didChangeText];
+    }
+  }
+
+}
 
 #pragma mark -
 #pragma mark Syntax highlighting
@@ -3742,7 +3755,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   // bold format
   if (tag == 4110 || tag == 4120 || tag == 4130 || tag == 4140 || tag == 4150
-      || tag == 4160 || tag == 4170 || tag == 4180 || tag == 4190 || tag == 41100) {
+      || tag == 4160 || tag == 4170 || tag == 4180 || tag == 4190 || tag == 41100
+      || tag == 41110) {
     NSRange sel = [self selectedRange];
     if (sel.length>0) {
       return YES;

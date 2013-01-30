@@ -240,6 +240,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (IBAction)latexFormatEmphasized:(id)sender;
 - (IBAction)latexFormatUnderline:(id)sender;
 - (IBAction)latexFormatFootnote:(id)sender;
+- (IBAction)latexFormatEscapeUnderscore:(id)sender;
 
 #pragma mark -
 #pragma mark Formatting text

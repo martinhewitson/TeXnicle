@@ -1514,6 +1514,16 @@
 												<reference key="NSMixedImage" ref="310636482"/>
 												<int key="NSTag">41100</int>
 											</object>
+											<object class="NSMenuItem" id="870038292">
+												<reference key="NSMenu" ref="172489882"/>
+												<string key="NSTitle">Escape Underscores</string>
+												<string key="NSKeyEquiv">U</string>
+												<int key="NSKeyEquivModMask">1048576</int>
+												<int key="NSMnemonicLoc">2147483647</int>
+												<reference key="NSOnImage" ref="1033313550"/>
+												<reference key="NSMixedImage" ref="310636482"/>
+												<int key="NSTag">41110</int>
+											</object>
 										</array>
 									</object>
 								</object>
@@ -3076,6 +3086,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">latexFormatEscapeUnderscore:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="870038292"/>
+					</object>
+					<int key="connectionID">880</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -4485,6 +4503,7 @@
 							<reference ref="498096109"/>
 							<reference ref="107295757"/>
 							<reference ref="360702244"/>
+							<reference ref="870038292"/>
 						</array>
 						<reference key="parent" ref="1069314678"/>
 					</object>
@@ -4541,6 +4560,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">875</int>
 						<reference key="object" ref="360702244"/>
+						<reference key="parent" ref="172489882"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">878</int>
+						<reference key="object" ref="870038292"/>
 						<reference key="parent" ref="172489882"/>
 					</object>
 				</array>
@@ -4765,13 +4789,14 @@
 				<string key="869.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="872.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="875.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="878.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">877</int>
+			<int key="maxID">880</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6400,10 +6425,12 @@
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="insertInlineMath:">id</string>
+						<string key="insertTable:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="latexFormatBold:">id</string>
 						<string key="latexFormatEmphasized:">id</string>
+						<string key="latexFormatEscapeUnderscore:">id</string>
 						<string key="latexFormatFootnote:">id</string>
 						<string key="latexFormatItalic:">id</string>
 						<string key="latexFormatRoman:">id</string>
@@ -6455,6 +6482,10 @@
 							<string key="name">insertInlineMath:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="insertTable:">
+							<string key="name">insertTable:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">
 							<string key="name">jumpToNextPlaceholder:</string>
 							<string key="candidateClassName">id</string>
@@ -6469,6 +6500,10 @@
 						</object>
 						<object class="IBActionInfo" key="latexFormatEmphasized:">
 							<string key="name">latexFormatEmphasized:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatEscapeUnderscore:">
+							<string key="name">latexFormatEscapeUnderscore:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="latexFormatFootnote:">
