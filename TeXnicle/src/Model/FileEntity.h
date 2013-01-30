@@ -73,6 +73,7 @@
 - (BOOL) updateFromTextStorage;
 - (BOOL) reconfigureDocument;
 
+- (void) loadIcon;
 - (void) reloadFromDisk;
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding;
 - (BOOL) saveContentsToDisk;
