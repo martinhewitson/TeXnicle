@@ -10,6 +10,12 @@
 #import "TPSectionTemplate.h"
 #import "FileEntity.h"
 
+@interface TPSection ()
+
+@property (strong) NSString *filename;
+
+@end
+
 @implementation TPSection
 
 - (void) dealloc
@@ -109,6 +115,13 @@
     self.parent = aParent;
     self.startIndex = index;
     self.file = aFile;
+    
+    if ([self.file isKindOfClass:[FileEntity class]]) {
+      self.filename = [self.file valueForKey:@"name"];
+    } else {
+      self.filename = [self.file lastPathComponent];
+    }
+    
     self.type = aType;
     self.name = aName;
     self.expansionState = TPOutlineExpansionStateUnknown;
@@ -116,14 +129,6 @@
   return self;
 }
 
-
-- (NSString*)filename
-{
-  if ([self.file isKindOfClass:[FileEntity class]]) {
-    return [self.file valueForKey:@"name"];
-  }
-  return [self.file lastPathComponent];
-}
 
 - (NSString*)description
 {
