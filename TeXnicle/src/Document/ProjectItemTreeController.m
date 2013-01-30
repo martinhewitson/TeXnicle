@@ -1404,6 +1404,9 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
       [c setAttributedStringValue:title];
       
       // set file's icon
+      if ([(FileEntity*)object icon] == nil) {
+        [(FileEntity*)object loadIcon];
+      }
       [cell setImage:[(FileEntity*)object icon]];
     }
   }
