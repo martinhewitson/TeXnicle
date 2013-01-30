@@ -173,7 +173,7 @@
 
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
 {
-  if (self.compiling == YES) {
+  if (self.compiling == YES || typesetTask != nil) {
     return NO;
   }
   
@@ -302,6 +302,7 @@
   abortCompile = NO;
   compilationsDone = 0;
   self.compiling = NO;
+  typesetTask = nil;
 }
 
 - (void) trashAuxFiles
