@@ -49,6 +49,7 @@
 #import "TPNewCommand.h"
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
+#import "NSAttributedString+Placeholders.h"
 
 #define kSplitViewLeftMinSize 210.0
 #define kSplitViewCenterMinSize 400.0
@@ -2352,14 +2353,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   TeXTextView *textView = self.texEditorViewController.textView;
   NSRange sel = [textView selectedRange];
-  NSRange textRange = NSMakeRange(sel.location, [text length]);
-  [[textView undoManager] beginUndoGrouping];
-  [textView shouldChangeTextInRange:sel replacementString:text];
-  [textView replaceCharactersInRange:sel withString:text];
-  [textView replacePlaceholdersInString:text range:textRange];      
-  [textView didChangeText];
-  [[textView undoManager] endUndoGrouping];
-  [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];  
+  NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:text attributes:[textView typingAttributes]];
+  
+  if ([textView shouldChangeTextInRange:sel replacementString:[astr string]]) {
+    [[textView textStorage] replaceCharactersInRange:sel withAttributedString:astr];
+    [textView didChangeText];
+    [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+  }  
 }
 
 

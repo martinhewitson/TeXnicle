@@ -59,6 +59,7 @@
 #import "FileDocument.h"
 #import "TPRegularExpression.h"
 #import "NSResponder+TeXnicle.h"
+#import "NSAttributedString+Placeholders.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -3651,16 +3652,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   TeXTextView *textView = self.texEditorViewController.textView;
   NSRange sel = [textView selectedRange];
-  NSRange textRange = NSMakeRange(sel.location, [text length]);
+  NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:text attributes:[textView typingAttributes]];
   
-  [[textView undoManager] beginUndoGrouping];
-  [textView shouldChangeTextInRange:sel replacementString:text];
-  [textView replaceCharactersInRange:sel withString:text];
-  [textView replacePlaceholdersInString:text range:textRange];      
-  [textView didChangeText];
-  [[textView undoManager] endUndoGrouping];
-  [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];  
-  
+  if ([textView shouldChangeTextInRange:sel replacementString:[astr string]]) {
+    [[textView textStorage] replaceCharactersInRange:sel withAttributedString:astr];
+    [textView didChangeText];
+    [textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+  }
 }
 
 #pragma mark -
