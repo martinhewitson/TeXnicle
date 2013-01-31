@@ -29,6 +29,7 @@
 #import "externs.h"
 #import "FileEntity.h"
 #import "NSMutableAttributedString+CodeFolding.h"
+#import "NSMutableAttributedString+Placeholders.h"
 #import "NSDictionary+TeXnicle.h"
 #import "NSArray+Color.h"
 #import "MHFileReader.h"
@@ -103,6 +104,9 @@
 		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:self.textStorage];
 		[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
 		
+    // replace placeholders
+    [string replacePlaceholdersInRange:NSMakeRange(0, [string length])];
+    
 		NSString *str = [string unfoldedString];
 		
 		//	NSString *str = [textStorage string];
