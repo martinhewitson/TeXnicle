@@ -10,4 +10,6 @@
 
 @interface NSMutableAttributedString (Placeholders)
 
+- (void) replacePlaceholdersInRange:(NSRange)aRange;
+
 @end

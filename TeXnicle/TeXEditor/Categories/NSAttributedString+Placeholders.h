@@ -10,4 +10,7 @@
 
 @interface NSAttributedString (Placeholders)
 
++ (NSAttributedString*) stringWithPlaceholdersRestored:(NSString*)string;
++ (NSAttributedString*) stringWithPlaceholdersRestored:(NSString*)string attributes:(NSDictionary*)attributes;
+
 @end
