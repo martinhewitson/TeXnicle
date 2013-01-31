@@ -3414,6 +3414,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self setSelectedRange:pRange];
       [self replaceCharactersInRange:pRange withString:newText];
       [self didChangeText];
+      if (currRange.location+currRange.length > [[self string] length]) {
+        currRange.location = [[self string] length]-1;
+        currRange.length = 0;
+      }
       [self setSelectedRange:currRange];
       [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
     }
