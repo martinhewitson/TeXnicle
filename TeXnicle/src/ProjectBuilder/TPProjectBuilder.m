@@ -439,6 +439,9 @@
 	// Set the filepath to the given one, or to the path in the project
   [newFile setValue:fullpath forKey:@"filepath"];
 	
+  // load icon
+  [newFile loadIcon];
+  
 	// set file load data
 	[newFile setValue:[NSDate date] forKey:@"fileLoadDate"];
 	[newFile setValue:[NSDate date] forKey:@"lastEditDate"];

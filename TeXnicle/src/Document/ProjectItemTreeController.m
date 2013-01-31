@@ -527,6 +527,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		[newFile setValue:newFilepath forKey:@"filepath"];
 	}
 	
+  // load icon
+  [newFile loadIcon];
 	
 	// Now make the file on disk
 	if (create) {
