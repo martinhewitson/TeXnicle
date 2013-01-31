@@ -2627,6 +2627,30 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self colorVisibleText];
 }
 
+- (void) completeOpenBrace:(unichar)o withClosingBrace:(unichar)c
+{
+  // check if this is a \left{
+  NSRange selRange = [self selectedRange];
+  
+  if ([[self currentCommand] isEqualToString:@"\\left"]) {
+    [super insertText:[NSString stringWithFormat:@"%c\\right%c", o, c]];
+    NSRange newPos = NSMakeRange(selRange.location+1, 0);
+    [self setSelectedRange:newPos];
+  } else {
+    if (selRange.length > 0) {
+      NSString *selected = [[self string] substringWithRange:selRange];
+      NSString *replacement = [NSString stringWithFormat:@"%c%@%c", o, selected, c];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
+    } else {
+      [super insertText:[NSString stringWithFormat:@"%c%c", o, c]];
+      [self moveLeft:self];
+      [self autocompleteArgument];
+    }
+  }
+}
 
 - (void)insertText:(id)aString
 {
@@ -2692,20 +2716,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   BOOL completeMath = [[defaults valueForKey:TEAutomaticallyInsertClosingMath] boolValue];
   BOOL skipClosingBrace = [[defaults valueForKey:TEAutomaticallySkipClosingBrackets] boolValue];
   
-  if ([aString isEqual:@"{"] && completeBrace) {
-    // get selected text
-    if (selRange.length > 0) {
-      NSString *selected = [[string string] substringWithRange:selRange];
-      NSString *replacement = [NSString stringWithFormat:@"{%@}", selected];
-      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
-        [self replaceCharactersInRange:selRange withString:replacement];
-        [self didChangeText];
-      }
-    } else {
-      [super insertText:@"{}"];
-      [self moveLeft:self];
-      [self autocompleteArgument];
-    }
+  if ([aString isEqual:@"{"] && completeBrace) {    
+    [self completeOpenBrace:'{' withClosingBrace:'}'];
+	} else 	if ([aString isEqual:@"["] && completeBrace) {
+    [self completeOpenBrace:'[' withClosingBrace:']'];
+	} else 	if ([aString isEqual:@"("] && completeBrace) {
+    [self completeOpenBrace:'(' withClosingBrace:')'];
   } else if ([aString isEqual:@"$"] && completeMath) {
     if (selRange.length > 0) {
       NSString *selected = [[string string] substringWithRange:selRange];
@@ -2716,30 +2732,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     } else {
       [super insertText:@"$$"];
-      [self moveLeft:self];
-    }
-	} else 	if ([aString isEqual:@"["] && completeBrace) {
-    if (selRange.length > 0) {
-      NSString *selected = [[string string] substringWithRange:selRange];
-      NSString *replacement = [NSString stringWithFormat:@"[%@]", selected];
-      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
-        [self replaceCharactersInRange:selRange withString:replacement];
-        [self didChangeText];
-      }
-    } else {
-      [super insertText:@"[]"];
-      [self moveLeft:self];
-    }
-	} else 	if ([aString isEqual:@"("] && completeBrace) {
-    if (selRange.length > 0) {
-      NSString *selected = [[string string] substringWithRange:selRange];
-      NSString *replacement = [NSString stringWithFormat:@"(%@)", selected];
-      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
-        [self replaceCharactersInRange:selRange withString:replacement];
-        [self didChangeText];
-      }
-    } else {
-      [super insertText:@"()"];
       [self moveLeft:self];
     }
 	} else	if ([aString isEqual:@"}"]) {
