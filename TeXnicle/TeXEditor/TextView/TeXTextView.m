@@ -30,6 +30,7 @@
 #import "NSArray+Color.h"
 #import "NSMutableAttributedString+CodeFolding.h"
 #import "NSAttributedString+CodeFolding.h"
+#import "NSAttributedString+Placeholders.h"
 #import "NSString+Comparisons.h"
 #import "NSString+CharacterSize.h"
 #import "NSString+Reformatting.h"
@@ -3005,12 +3006,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *code = [self codeForCommand:currentCommand];
     if (code) {
       NSRange commandRange = [self rangeForCurrentSnippetCommand];
-      if ([self shouldChangeTextInRange:commandRange replacementString:code]) {
-        [[self undoManager] beginUndoGrouping];
-        [self replaceCharactersInRange:commandRange withString:code];
-        [self replacePlaceholdersInString:code range:commandRange];
+      NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:code attributes:[self typingAttributes]];
+      if ([self shouldChangeTextInRange:commandRange replacementString:[astr string]]) {
+        [self.textStorage replaceCharactersInRange:commandRange withAttributedString:astr];
         [self didChangeText];
-        [[self undoManager] endUndoGrouping];
+        [self setSelectedRange:NSMakeRange(commandRange.location, 0)];
+        [self jumpToNextPlaceholder:self];
         [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
       }
       return YES;
@@ -3019,45 +3020,24 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return NO;
 }
 
+- (void) restoreAllPlaceholders
+{
+  NSAttributedString *str = [NSAttributedString stringWithPlaceholdersRestored:[self string]];
+  if ([[str string] isEqualToString:[self string]] == NO) {
+    [self.textStorage setAttributedString:str];
+  }
+}
+
 - (NSRange) replacePlaceholdersInString:(NSString*)code range:(NSRange)commandRange
 {
-  NSString *originalCode = code;
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString stringWithPlaceholdersRestored:code]];
+  [str addAttributes:[self typingAttributes] range:NSMakeRange(0, [str length])];
   
-  // Replace placeholders
-  NSString *regexp = [TPLibraryController placeholderRegexp];
-  NSArray *placeholders = [TPRegularExpression stringsMatching:regexp inText:code];
+  [self.textStorage beginEditing];
+  [self.textStorage replaceCharactersInRange:commandRange withAttributedString:str];
+  [self.textStorage endEditing];
   
-  NSRange firstPlaceholder = NSMakeRange(NSNotFound, 0);
-  for (__strong NSString *placeholder in placeholders) {
-    placeholder = [placeholder stringByTrimmingCharactersInSet:whitespaceCharacterSet];
-    NSRange r = [code rangeOfString:placeholder];
-    if (firstPlaceholder.location == NSNotFound) {
-      firstPlaceholder = NSMakeRange(commandRange.location+r.location, 1);
-    }
-    
-    // make attachment
-    MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:[placeholder substringWithRange:NSMakeRange(1, [placeholder length]-2)]];
-    NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
-    NSRange placeholderRange = NSMakeRange(commandRange.location+r.location, r.length);
-    if ([self shouldChangeTextInRange:placeholderRange replacementString:@" "]) {
-      [[self textStorage] beginEditing];
-      [[self textStorage] replaceCharactersInRange:placeholderRange withAttributedString:attachment];
-      [[self textStorage] endEditing];
-      [self didChangeText];
-      // replace placeholder with blank just to make the counting right
-      code = [code stringByReplacingCharactersInRange:r withString:@" "];
-    }
-  }
-  
-  // select the first placeholder
-  if (firstPlaceholder.location != NSNotFound) {
-    [self setSelectedRange:firstPlaceholder];
-  }
-  
-  // adjust and return range
-  NSInteger reduction = [originalCode length] - [code length];
-  NSRange returnRange = NSMakeRange(commandRange.location, commandRange.length - reduction);
-  return returnRange;
+  return NSMakeRange(commandRange.location, [str length]);
 }
 
 - (IBAction)jumpToPreviousPlaceholder:(id)sender
@@ -3744,18 +3724,31 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [tableString appendFormat:@"\\end{table}\n"];
   
   NSRange sel = [self selectedRange];
-  [self insertText:tableString];
   
-  [self replacePlaceholdersInString:tableString range:sel];
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString stringWithPlaceholdersRestored:tableString]];
+  [str addAttributes:[self typingAttributes] range:NSMakeRange(0, [str length])];
+  if ([self shouldChangeTextInRange:sel replacementString:[str string]]) {
+    [self.textStorage replaceCharactersInRange:sel withAttributedString:str];
+    [self didChangeText];
+    [self setSelectedRange:NSMakeRange(sel.location, 0)];
+    [self jumpToNextPlaceholder:self];
+  }
 }
 
 - (IBAction)insertInlineMath:(id)sender
 {
   NSRange sel = [self selectedRange];
   NSString *mathString = @"$@x@$";
-  [self insertText:mathString];
-  [self replacePlaceholdersInString:mathString range:sel];
-  [self jumpToPreviousPlaceholder:self];
+  
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:[NSAttributedString stringWithPlaceholdersRestored:mathString]];
+  [str addAttributes:[self typingAttributes] range:NSMakeRange(0, [str length])];
+  if ([self shouldChangeTextInRange:sel replacementString:[str string]]) {
+    [self.textStorage replaceCharactersInRange:sel withAttributedString:str];
+    [self didChangeText];
+    [self setSelectedRange:NSMakeRange(sel.location, 0)];
+    [self jumpToNextPlaceholder:self];
+  }
+  
 }
 
 
