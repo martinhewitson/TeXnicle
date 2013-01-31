@@ -275,6 +275,7 @@
 	
 	if (extension) {
 		[self setValue:extension forKey:@"extension"];
+    [self loadIcon];
 	}
 	
 	// now go ahead and rename the item
