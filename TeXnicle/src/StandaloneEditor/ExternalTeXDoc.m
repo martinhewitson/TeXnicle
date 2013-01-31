@@ -555,7 +555,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 //  NSLog(@"WindowWillClose %@", self);
   
   if (![self inVersionsMode]) {
-    if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
+    BOOL shouldShowStartupScreen = [[[NSUserDefaults standardUserDefaults] valueForKey:TPShouldShowStartupScreenOnClosingLastDocument] boolValue];
+    if ([[[NSDocumentController sharedDocumentController] documents] count] == 1 && shouldShowStartupScreen) {
       if ([[NSApp delegate] respondsToSelector:@selector(showStartupScreen:)]) {
         [[NSApp delegate] performSelector:@selector(showStartupScreen:) withObject:self];
       }

@@ -744,7 +744,8 @@
 	[window setDelegate:nil];
 	if ([[[NSDocumentController sharedDocumentController] documents] count] == 1) {
     id appDel = [NSApp delegate];
-		if (appDel != nil && [appDel respondsToSelector:@selector(showStartupScreen:)]) {
+    BOOL shouldShowStartupScreen = [[[NSUserDefaults standardUserDefaults] valueForKey:TPShouldShowStartupScreenOnClosingLastDocument] boolValue];
+		if (appDel != nil && [appDel respondsToSelector:@selector(showStartupScreen:)] && shouldShowStartupScreen) {
 			[appDel performSelector:@selector(showStartupScreen:) withObject:self];
       [[ConsoleController sharedConsoleController] close];
 		}

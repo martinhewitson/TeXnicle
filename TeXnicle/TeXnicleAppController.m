@@ -62,6 +62,8 @@ NSString * const TEAutomaticallyShowRefCompletionList = @"TEAutomaticallyShowRef
 NSString * const TEAutomaticallyShowFileCompletionList = @"TEAutomaticallyShowFileCompletionList";
 NSString * const TEAutomaticallyShowBeginCompletionList = @"TEAutomaticallyShowBeginCompletionList";
 
+NSString * const TPShouldShowStartupScreenOnClosingLastDocument = @"TPShouldShowStartupScreenOnClosingLastDocument";
+
 NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEndToBeginStatement";
 NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
 NSString * const TEAutomaticallyInsertClosingMath = @"TEAutomaticallyInsertClosingMath";
@@ -235,6 +237,9 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   defaultValues[TEAutomaticallyShowBeginCompletionList] = @YES;
   defaultValues[TEAutomaticallyReplaceOpeningDoubleQuote] = @YES;
   defaultValues[TEAutomaticallySkipClosingBrackets] = @YES;
+  
+  // app
+  defaultValues[TPShouldShowStartupScreenOnClosingLastDocument] = @YES;
   
   // check syntax
   defaultValues[TPCheckSyntax] = @YES;

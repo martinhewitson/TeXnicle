@@ -64,6 +64,8 @@ extern NSString * const TEAutomaticallyInsertClosingMath;
 extern NSString * const TEAutomaticallyReplaceOpeningDoubleQuote;
 extern NSString * const TEAutomaticallySkipClosingBrackets;
 
+extern NSString * const TPShouldShowStartupScreenOnClosingLastDocument;
+
 extern NSString * const TPCheckSyntax;
 extern NSString * const TPCheckSyntaxErrors;
 extern NSString * const TPChkTeXpath;
