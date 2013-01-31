@@ -2707,23 +2707,41 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self autocompleteArgument];
     }
   } else if ([aString isEqual:@"$"] && completeMath) {
-		NSRange r = [self selectedRange];
-		r.location-=2;
-		r.length+=2;
-		[super insertText:@"$$"];
-		[self moveLeft:self];
+    if (selRange.length > 0) {
+      NSString *selected = [[string string] substringWithRange:selRange];
+      NSString *replacement = [NSString stringWithFormat:@"$%@$", selected];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
+    } else {
+      [super insertText:@"$$"];
+      [self moveLeft:self];
+    }
 	} else 	if ([aString isEqual:@"["] && completeBrace) {
-		NSRange r = [self selectedRange];
-		r.location-=2;
-		r.length+=2;
-		[super insertText:@"[]"];
-		[self moveLeft:self];
+    if (selRange.length > 0) {
+      NSString *selected = [[string string] substringWithRange:selRange];
+      NSString *replacement = [NSString stringWithFormat:@"[%@]", selected];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
+    } else {
+      [super insertText:@"[]"];
+      [self moveLeft:self];
+    }
 	} else 	if ([aString isEqual:@"("] && completeBrace) {
-		NSRange r = [self selectedRange];
-		r.location-=2;
-		r.length+=2;
-		[super insertText:@"()"];
-		[self moveLeft:self];
+    if (selRange.length > 0) {
+      NSString *selected = [[string string] substringWithRange:selRange];
+      NSString *replacement = [NSString stringWithFormat:@"(%@)", selected];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
+    } else {
+      [super insertText:@"()"];
+      [self moveLeft:self];
+    }
 	} else	if ([aString isEqual:@"}"]) {
 		// will this be an extra closing bracket?
 		NSRange r = [self selectedRange];
