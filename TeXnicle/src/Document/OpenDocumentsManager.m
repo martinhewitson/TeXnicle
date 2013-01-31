@@ -287,7 +287,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [textContainer setTextView:self.texEditorViewController.textView];
 //          NSLog(@"Set textview for %@", [currentDoc name]);
 //          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
-                    
+          
+          [self.texEditorViewController.textView restoreAllPlaceholders]; 
           [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
           
           [self.texEditorViewController.textView observeTextStorage];
