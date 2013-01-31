@@ -2724,16 +2724,25 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else 	if ([aString isEqual:@"("] && completeBrace) {
     [self completeOpenBrace:'(' withClosingBrace:')'];
   } else if ([aString isEqual:@"$"] && completeMath) {
-    if (selRange.length > 0) {
-      NSString *selected = [[string string] substringWithRange:selRange];
-      NSString *replacement = [NSString stringWithFormat:@"$%@$", selected];
-      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
-        [self replaceCharactersInRange:selRange withString:replacement];
-        [self didChangeText];
+		// will this be an extra closing $?
+		NSRange r = [self selectedRange];
+    //    NSLog(@"Range %@", NSStringFromRange(r));
+		if (skipClosingBrace && r.location < [string length] && [[self string] characterAtIndex:r.location] == '$') {
+			// move right
+			[self moveRight:self];
+			return;
+		}	else {
+      if (selRange.length > 0) {
+        NSString *selected = [[string string] substringWithRange:selRange];
+        NSString *replacement = [NSString stringWithFormat:@"$%@$", selected];
+        if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+          [self replaceCharactersInRange:selRange withString:replacement];
+          [self didChangeText];
+        }
+      } else {
+        [super insertText:@"$$"];
+        [self moveLeft:self];
       }
-    } else {
-      [super insertText:@"$$"];
-      [self moveLeft:self];
     }
 	} else	if ([aString isEqual:@"}"]) {
 		// will this be an extra closing bracket?
