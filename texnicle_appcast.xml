@@ -6,6 +6,39 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.0.2 -->
+		<item>
+      <title>Version 2.0.2 (build 57)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.2</h2>
+        <p>
+        <ul>
+        <li> Minor cosmetic improvements.</li>
+        <li> Improved automatic file loading for different text encodings.</li>
+        <li> Palette commands now appear in autocompletion list.</li>
+        <li> Added a new set of menu commands for applying LaTeX formatting to selected text (e.g., \textbf{})</li>
+        <li> Added a new toolbar button to cancel typesetting (you may need to customize your toolbar and add it).</li>
+        <li> Added a corresponding menu item under the Typeset menu to cancel typesetting.</li>
+        <li> Added a new preference on the Typesetting preferences pane which, when activated, causes the PDF to be synced to the current editor location after typesetting.</li>
+        <li> The labels list now includes \label commands with optional arguments (like \label[something]{label})</li>
+        <li> Fixed a bug which could stop the project from being saved after removing a file or folder from the project tree.</li>
+        <li> Fixed a bug which crept into 2.0.1 which could cause problems in some cases when opening existing projects.</li>
+        <li> Fixed a bug which could cause TeXnicle to crash sometimes when closing documents.</li>
+        <li> Many other small bug fixes and optimisations.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>27th January 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.2.zip"
+      sparkle:shortVersionString="2.0"
+      sparkle:version="57"
+      length="16972672"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFE7wiDyFJWpMRim7gIxCWCbbWcCCAhRTgpv0Tt8FHouL69NCIw8mC+WgiA=="
+      />
+    </item>
+
+    
     <!-- Version 2.0.1 -->
 		<item>
       <title>Version 2.0.1 (build 56)</title>
