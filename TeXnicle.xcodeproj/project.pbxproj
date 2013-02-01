@@ -210,6 +210,8 @@
 		2553F70614F13BC000DF0BD3 /* TPProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2553F70514F13BBF00DF0BD3 /* TPProjectTemplate.m */; };
 		255454B515AEEF9E006D36BF /* NSString+SectionsOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */; };
 		2555C31E14B0708C00FE6150 /* libraryPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2555C31D14B0708C00FE6150 /* libraryPrefs.icns */; };
+		2558797E16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558797D16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m */; };
+		2558798416BAB2700059027B /* NSAttributedString+Placeholders.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558798316BAB2700059027B /* NSAttributedString+Placeholders.m */; };
 		255A16D515B48694004290CC /* citationsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */; };
 		255A16D615B48694004290CC /* citationsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D415B48694004290CC /* citationsTabBarImage.icns */; };
 		255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D815B48E1B004290CC /* commandsTabBarImage.icns */; };
@@ -799,6 +801,10 @@
 		255454B315AEEF9E006D36BF /* NSString+SectionsOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+SectionsOutline.h"; path = "../Model/NSString+SectionsOutline.h"; sourceTree = "<group>"; };
 		255454B415AEEF9E006D36BF /* NSString+SectionsOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+SectionsOutline.m"; path = "../Model/NSString+SectionsOutline.m"; sourceTree = "<group>"; };
 		2555C31D14B0708C00FE6150 /* libraryPrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = libraryPrefs.icns; sourceTree = "<group>"; };
+		2558797C16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+Placeholders.h"; sourceTree = "<group>"; };
+		2558797D16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+Placeholders.m"; sourceTree = "<group>"; };
+		2558798216BAB2700059027B /* NSAttributedString+Placeholders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Placeholders.h"; sourceTree = "<group>"; };
+		2558798316BAB2700059027B /* NSAttributedString+Placeholders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Placeholders.m"; sourceTree = "<group>"; };
 		255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = citationsTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		255A16D415B48694004290CC /* citationsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = citationsTabBarImage.icns; sourceTree = "<group>"; };
 		255A16D815B48E1B004290CC /* commandsTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsTabBarImage.icns; sourceTree = "<group>"; };
@@ -1961,6 +1967,10 @@
 				257B4737138E5E9000ED02C4 /* NSAttributedString+CodeFolding.m */,
 				257B4738138E5E9000ED02C4 /* NSMutableAttributedString+CodeFolding.h */,
 				257B4739138E5E9000ED02C4 /* NSMutableAttributedString+CodeFolding.m */,
+				2558797C16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.h */,
+				2558797D16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m */,
+				2558798216BAB2700059027B /* NSAttributedString+Placeholders.h */,
+				2558798316BAB2700059027B /* NSAttributedString+Placeholders.m */,
 				257B473A138E5E9000ED02C4 /* NSString+CharacterSize.h */,
 				257B473B138E5E9000ED02C4 /* NSString+CharacterSize.m */,
 				257B473C138E5E9000ED02C4 /* NSString+Comparisons.h */,
@@ -2961,6 +2971,8 @@
 				2520AC1716A7F559006E9CA2 /* TPBoxView.m in Sources */,
 				25DE6CB116B3C68E008290F2 /* NSResponder+TeXnicle.m in Sources */,
 				250E7BA816B53F3C00EED1CD /* TPSectionListSection.m in Sources */,
+				2558797E16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m in Sources */,
+				2558798416BAB2700059027B /* NSAttributedString+Placeholders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3055,7 +3067,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3076,7 +3088,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
