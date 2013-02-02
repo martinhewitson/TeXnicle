@@ -93,6 +93,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 @implementation TeXTextView
 
+- (id) initWithFrame:(NSRect)frameRect textContainer:(NSTextContainer *)container
+{
+  self = [super initWithFrame:frameRect textContainer:container];
+  if (self) {
+    didSetup = NO;
+  }
+  return self;
+}
+
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -109,19 +118,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   self.zoomFactor = 0;
   
 	newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
-	whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
+	whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];
+  
+  if (didSetup == NO) {
+    [self defaultSetup];
+    [self setUpRuler];
+    [self setupLists];
     
-  [self defaultSetup];
-  [self setUpRuler];
-  [self setupLists];
-  
-  [self setSmartInsertDeleteEnabled:NO];
-  [self setAutomaticTextReplacementEnabled:NO];
-  [self setAutomaticSpellingCorrectionEnabled:NO];
-  
-  self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
- 
-  [self applyFontAndColor:YES];
+    [self setSmartInsertDeleteEnabled:NO];
+    [self setAutomaticTextReplacementEnabled:NO];
+    [self setAutomaticSpellingCorrectionEnabled:NO];
+    
+    self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
+    
+    [self applyFontAndColor:YES];
+    didSetup = YES;
+  }
 }
 
 

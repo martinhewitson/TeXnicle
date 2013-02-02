@@ -72,6 +72,8 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
   NSInteger _lastLineNumber;
   NSArray *_pastingRows;
   NSTimer *highlightAlphaTimer;
+  
+  BOOL didSetup;
 }
 
 @property (copy) NSString *highlightRange;
