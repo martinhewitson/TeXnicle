@@ -52,6 +52,11 @@
 @property (unsafe_unretained) IBOutlet NSButton *errorPopup;
 @property (unsafe_unretained) IBOutlet NSButton *unfoldButton;
 
+@property (unsafe_unretained) IBOutlet NSMenuItem *latexEditMenu;
+@property (unsafe_unretained) IBOutlet NSMenuItem *commentMenu;
+@property (unsafe_unretained) IBOutlet NSMenuItem *insertMenu;
+
+
 
 @end
 
@@ -127,6 +132,17 @@
   [self.markerButton setTarget:self.sectionListController];
   [self.markerButton setAction:@selector(addMarkAction:)];
   [self.sectionListController setup];
+  
+  // setup tex editor menu
+  NSMenu *menu = [[self.textView menu] copy];
+  
+  [menu addItem:[NSMenuItem separatorItem]];
+  [menu addItem:self.latexEditMenu];
+  [menu addItem:self.insertMenu];
+  [menu addItem:self.commentMenu];
+  [menu addItem:[NSMenuItem separatorItem]];
+  [self.textView setMenu:menu];
+
   
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self
