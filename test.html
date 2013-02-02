@@ -1,10 +1,17 @@
-<h2>TeXnicle 2.0</h2>
+<h2>TeXnicle 2.0.3</h2>
 <p>
-Finally, and just in time for the holidays, here is the final release of version 2.0 of TeXnicle. Work has already started on version 2.1, but there will be bug fix releases in the interim.
-</p>
 <ul>
-  <li>Added an xelatexmk engine.</li>
-  <li>The 'Open Console' engine setting is now ignored when in 'Live Update' mode.</li>
-  <li>Fixed a bug in the built-in symbol palette: the preview images for the lowercase and capital Xi had the same filename on disk.</li>
-  <li>Fixed various other bugs relating to stability.</li>
+  <li>Added a preference to automatically insert closing $.</li>
+  <li>Added a new format menu command to escape underscores.</li>
+  <li>Added a preference to disable showing the welcome screen when the last open document closes.</li>
+  <li>Typing $, (, {, or [ when some text is selected will enclose the selected text in the correct pair of characters.</li>
+  <li>When typing \left{, \left( etc, TeXnicle will automatically insert the corresponding \right (if the preference 'Automatically insert closing brace' is on).</li>
+  <li>Added some formatting menu items to the editor's context menu.</li>
+  <li>Restored correct operation of the jump bar.</li>
+  <li>Better handling of placeholders. They are now saved out when saving and restored when loading tex files.</li>
+  <li>Bug fix: sometimes TeXnicle would crash if a typesetting was started too close to the previous one.</li>
+  <li>Bug fix: sometimes the print button below the pdf viewer was not working because the page label was overlapping.</li>
+  <li>Performance improvements.</li>
+  <li>Other minor bug fixes.</li>
 </ul>
+</p>
