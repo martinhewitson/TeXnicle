@@ -3135,6 +3135,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicleImporter/TeXnicleImporter-Prefix.pch";
 				INFOPLIST_FILE = "TeXnicleImporter/TeXnicleImporter-Info.plist";
