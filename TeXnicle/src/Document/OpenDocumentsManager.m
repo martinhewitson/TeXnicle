@@ -288,13 +288,15 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"Set textview for %@", [currentDoc name]);
 //          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
           
-          [self.texEditorViewController.textView restoreAllPlaceholders]; 
           [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
           
           [self.texEditorViewController.textView observeTextStorage];
           [self enableTextView];
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
+          
+          [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0];
+          
           if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
             [self selectTabForFile:self.currentDoc];
           }
