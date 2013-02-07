@@ -50,6 +50,7 @@
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
 #import "NSAttributedString+Placeholders.h"
+#import "NSMutableAttributedString+Placeholders.h"
 
 #define kSplitViewLeftMinSize 210.0
 #define kSplitViewCenterMinSize 400.0
@@ -246,6 +247,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	if (self.documentData) {
     //    NSLog(@"Setting document data to %@", self.documentData);
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
+    [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0.0];
+    
 	}
 	
   // warnings view
@@ -1198,6 +1201,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 //  NSLog(@"Text editor string %@", attStr);
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:attStr];
 	[string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
+  
+  // replace placeholders
+  [string replacePlaceholdersInRange:NSMakeRange(0, [string length])];
+  
+  
 //  NSLog(@"Set document data %@", string);
   [self setDocumentData:string];
 	NSString *str = [string string];
