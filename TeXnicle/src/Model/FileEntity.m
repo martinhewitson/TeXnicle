@@ -36,6 +36,8 @@
 #import "MHFileReader.h"
 #import "NSString+LaTeX.h"
 #import "NSDictionary+TeXnicle.h"
+#import "NSMutableAttributedString+Placeholders.h"
+#import "NSAttributedString+Placeholders.h"
 
 @implementation FileEntity
 
@@ -430,9 +432,12 @@
 			NSString *contentStr = [[NSString alloc] initWithData:[self valueForKey:@"content"]
 																										encoding:encoding];
 			
-      
       NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:ts];
       [string unfoldAllInRange:NSMakeRange(0, [string length]) max:100000];
+      
+      // replace placeholders
+      [string replacePlaceholdersInRange:NSMakeRange(0, [string length])];
+      
       NSString *textStr = [string unfoldedString];
       
 			if ([contentStr length] != [textStr length]) {
