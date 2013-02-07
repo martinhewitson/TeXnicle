@@ -3043,9 +3043,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) restoreAllPlaceholders
 {
-  NSAttributedString *str = [NSAttributedString stringWithPlaceholdersRestored:[self string]];
+  NSAttributedString *str = [NSAttributedString stringWithPlaceholdersRestored:[self string] attributes:[self typingAttributes]];
+//  NSAttributedString *str = [[NSAttributedString alloc] initWithString:[self string]];
   if ([[str string] isEqualToString:[self string]] == NO) {
-    [self.textStorage setAttributedString:str];
+    [self.textStorage beginEditing];
+    [self.textStorage setAttributedString:[[NSAttributedString alloc] initWithAttributedString:str]];
+    [self.textStorage endEditing];
   }
 }
 
