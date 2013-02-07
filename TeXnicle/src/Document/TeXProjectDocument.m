@@ -2278,6 +2278,10 @@
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
+  if ([[NSApplication sharedApplication] isActive] == NO) {
+    return;
+  }
+  
   if (!_building && _liveUpdate && [self.project hasEdits]) {
     if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
       // check for the last edit date
