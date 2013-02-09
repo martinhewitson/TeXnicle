@@ -2268,7 +2268,7 @@
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
     NSInteger line = [self.texEditorViewController.textView lineNumber];
     NSInteger col  = [self.texEditorViewController.textView column];    
-    [self syncToPDFLine:line column:col];
+    [self syncToPDFLine:line column:col giveFocus:NO];
   }
   
   _building = NO;
@@ -3398,8 +3398,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self syncToPDFLine:lineNumber column:column];
 }
 
-
 - (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column
+{
+  [self syncToPDFLine:lineNumber column:column giveFocus:YES];
+}
+
+- (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column giveFocus:(BOOL)shouldFocus
 {
   NSMutableArray *pdfViews = [NSMutableArray array];
   if (self.pdfViewerController.pdfview != nil) {
@@ -3413,7 +3417,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [sync displaySelectionInPDFFile:[self compiledDocumentPath]
                        sourceFile:[[self.openDocuments currentDoc] pathOnDisk]
                        lineNumber:lineNumber
-                           column:column];
+                           column:column
+                        giveFocus:shouldFocus];
+  
+  if (shouldFocus == NO) {
+    // give focus back to tex editor
+    [self.mainWindow performSelector:@selector(makeFirstResponder:) withObject:self.texEditorViewController.textView afterDelay:0];
+  }
 }
 
 - (IBAction)findSource:(id)sender

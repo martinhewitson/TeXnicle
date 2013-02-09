@@ -1656,7 +1656,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self syncToPDFLine:lineNumber column:column];
 }
 
-- (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column
+- (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column giveFocus:(BOOL)shouldFocus
 {
   NSMutableArray *pdfViews = [NSMutableArray array];
   if (self.pdfViewerController.pdfview != nil) {
@@ -1666,9 +1666,19 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [pdfViews addObject:self.pdfViewer.pdfViewerController.pdfview];
   }
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:pdfViews];
-  [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column];
+  [sync displaySelectionInPDFFile:[self compiledDocumentPath] sourceFile:[[self fileURL] path] lineNumber:lineNumber column:column giveFocus:shouldFocus];
   
+  if (shouldFocus == NO) {
+    // give focus back to tex editor
+    [self.mainWindow performSelector:@selector(makeFirstResponder:) withObject:self.texEditorViewController.textView afterDelay:0];
+  }
 }
+
+- (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column
+{
+  [self syncToPDFLine:lineNumber column:column giveFocus:YES];
+}
+
 
 -(NSString*)codeForCommand:(NSString*)command
 {
@@ -1840,7 +1850,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
     NSInteger line = [self.texEditorViewController.textView lineNumber];
     NSInteger col  = [self.texEditorViewController.textView column];
-    [self syncToPDFLine:line column:col];
+    [self syncToPDFLine:line column:col giveFocus:NO];
   }
   
   _building = NO;

@@ -118,18 +118,27 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   return success;
 }
 
-- (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex
+- (void) displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex
+{
+  [self displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:YES];
+}
+
+- (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex giveFocus:(BOOL)shouldFocus
 {
   if (pageIndex < [[self document] pageCount]) {
-    [[self window] makeFirstResponder:self];
     PDFPage *page = [[self document] pageAtIndex:pageIndex];
     PDFSelection *sel = [page selectionForLineAtPoint:point];
-    [self performSelectorOnMainThread:@selector(goToPage:) withObject:page waitUntilDone:YES];
+    if ([self currentPage] != page) {
+      [self performSelectorOnMainThread:@selector(goToPage:) withObject:page waitUntilDone:YES];
+    }
     [self setCurrentSelection:sel];
     [self scrollSelectionToVisible:self];
-    [self display];
     [self setCurrentSelection:nil];
-    [self performSelector:@selector(setCurrentSelectionAndAnimate:) withObject:sel afterDelay:0];
+    [self display];
+    if (shouldFocus) {
+      [[self window] makeFirstResponder:self];
+      [self performSelector:@selector(setCurrentSelectionAndAnimate:) withObject:sel afterDelay:0];
+    }
   }
 }
 

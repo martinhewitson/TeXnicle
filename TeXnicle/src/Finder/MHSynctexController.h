@@ -40,6 +40,8 @@
 
 
 - (void) displaySelectionInPDFFile:(NSString*)pdfpath sourceFile:(NSString*)sourcepath lineNumber:(NSInteger)lineNumber column:(NSInteger)column;
+- (void) displaySelectionInPDFFile:(NSString*)pdfpath sourceFile:(NSString*)sourcepath lineNumber:(NSInteger)lineNumber column:(NSInteger)column
+                         giveFocus:(BOOL)shouldFocus;
 - (NSString*) sourceFileForPDFFile:(NSString*)pdfpath lineNumber:(NSInteger*)line pageIndex:(NSInteger)pageIndex pageBounds:(NSRect)bounds point:(NSPoint)point;
 
 @end

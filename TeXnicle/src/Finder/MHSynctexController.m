@@ -41,8 +41,13 @@
   return self;
 }
 
+- (void) displaySelectionInPDFFile:(NSString*)pdfpath sourceFile:(NSString*)sourcepath lineNumber:(NSInteger)lineNumber column:(NSInteger)column
+{
+  [self displaySelectionInPDFFile:pdfpath sourceFile:sourcepath lineNumber:lineNumber column:column giveFocus:YES];
+}
 
 - (void) displaySelectionInPDFFile:(NSString*)pdfpath sourceFile:(NSString*)sourcepath lineNumber:(NSInteger)lineNumber column:(NSInteger)column
+                         giveFocus:(BOOL)shouldFocus
 {
   NSFileManager *fm = [NSFileManager defaultManager];
   if (![fm fileExistsAtPath:pdfpath]) {
@@ -68,8 +73,8 @@
               PDFPage *page = [pdfDoc pageAtIndex:pageIndex];
               y = NSMaxY([page boundsForBox:kPDFDisplayBoxMediaBox]) - y;
               NSPoint point = NSMakePoint(x, y);
-              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex];
-              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex];
+              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
+              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
             }
           }
         }

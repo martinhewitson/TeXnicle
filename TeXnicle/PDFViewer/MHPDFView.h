@@ -47,6 +47,7 @@ extern NSString * const MHPDFViewDidLoseFocusNotification;
 - (void)setNeedsDisplayInRect:(NSRect)rect ofPage:(PDFPage *)page;
 
 - (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex;
+- (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex giveFocus:(BOOL)shouldFocus;
 
 
 @end
