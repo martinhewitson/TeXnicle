@@ -27,11 +27,15 @@
 
 #import "TPFoldedCodeSnippet.h"
 #import "TPFoldedAttachmentCell.h"
+#import "NSAttributedString+Placeholders.h"
+#import "NSMutableAttributedString+Placeholders.h"
 
 @implementation TPFoldedCodeSnippet
 
 - (id) initWithCode:(NSAttributedString*)aString
 {
+  // replace placeholders in string
+  aString = [aString replacePlaceholders];
 	NSData *d = [aString RTFDFromRange:NSMakeRange(0, [aString length])
 									documentAttributes:nil];
 	NSFileWrapper *fw = [[NSFileWrapper alloc] initRegularFileWithContents:d];
