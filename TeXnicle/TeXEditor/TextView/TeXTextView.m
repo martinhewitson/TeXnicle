@@ -1195,10 +1195,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithAttributedString:text];
   
 	[string unfoldAllInRange:aRange max:max];
+  [string addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [string length])];
 	if ([[string string] isEqualToString:[text string]] == NO) {
     // then we unfoled
+    [[self textStorage] beginEditing];
     [[self textStorage] deleteCharactersInRange:aRange];
     [[self textStorage] insertAttributedString:string atIndex:aRange.location];
+    [[self textStorage] endEditing];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:TEDidFoldUnfoldTextNotification object:self];
     [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
