@@ -26,7 +26,7 @@
 //
 
 #import "NSMutableAttributedString+CodeFolding.h"
-
+#import "NSAttributedString+Placeholders.h"
 
 @implementation NSMutableAttributedString (CodeFolding)
 
@@ -34,7 +34,7 @@
 - (NSString*)unfoldedString
 {
 	[self unfoldAll];
-	return [[self string] mutableCopy];
+	return [self string];
 }
 
 // unfolds all attachments in the attributed string.
