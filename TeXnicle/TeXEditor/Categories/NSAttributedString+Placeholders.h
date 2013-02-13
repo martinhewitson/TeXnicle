@@ -13,4 +13,7 @@
 + (NSAttributedString*) stringWithPlaceholdersRestored:(NSString*)string;
 + (NSAttributedString*) stringWithPlaceholdersRestored:(NSString*)string attributes:(NSDictionary*)attributes;
 
+- (NSAttributedString*) replacePlaceholders;
+- (NSAttributedString*) replacePlaceholders:(NSRange)range;
+
 @end

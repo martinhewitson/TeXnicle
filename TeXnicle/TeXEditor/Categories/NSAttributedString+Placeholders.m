@@ -10,8 +10,25 @@
 #import "TPLibraryController.h"
 #import "TPRegularExpression.h"
 #import "MHPlaceholderAttachment.h"
+#import "NSMutableAttributedString+Placeholders.h"
 
 @implementation NSAttributedString (Placeholders)
+
+// replace all placeholders in the given range
+- (NSAttributedString*) replacePlaceholders:(NSRange)range
+{
+  NSMutableAttributedString *astr = [self mutableCopy];
+  [astr replacePlaceholdersInRange:range];
+  return [[NSAttributedString alloc] initWithAttributedString:astr];
+}
+
+// replace all placeholders in the string
+- (NSAttributedString*) replacePlaceholders
+{
+  NSMutableAttributedString *astr = [self mutableCopy];
+  [astr replacePlaceholdersInRange:NSMakeRange(0, [astr length])];
+  return [[NSAttributedString alloc] initWithAttributedString:astr];
+}
 
 + (NSAttributedString*) stringWithPlaceholdersRestored:(NSString*)string attributes:(NSDictionary*)attributes
 {
