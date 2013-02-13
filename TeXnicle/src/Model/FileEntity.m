@@ -487,8 +487,10 @@
 	if (!document) {
 		document = [[FileDocument alloc] initWithFile:self];		
 	}
+  
+  NSMutableAttributedString *astr = [[[self document] textStorage] mutableCopy];
 	
-	NSString *textStr = [[[self document] textStorage] string];	
+	NSString *textStr = [astr unfoldedString];
 	return textStr;
 }
 
