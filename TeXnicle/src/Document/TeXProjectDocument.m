@@ -60,6 +60,7 @@
 #import "TPRegularExpression.h"
 #import "NSResponder+TeXnicle.h"
 #import "NSAttributedString+Placeholders.h"
+#import "NSDictionary+TeXnicle.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -3666,7 +3667,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   TeXTextView *textView = self.texEditorViewController.textView;
   NSRange sel = [textView selectedRange];
-  NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:text attributes:[textView typingAttributes]];
+  NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:text attributes:[NSDictionary currentTypingAttributes]];
   
   if ([textView shouldChangeTextInRange:sel replacementString:[astr string]]) {
     [[textView textStorage] replaceCharactersInRange:sel withAttributedString:astr];
