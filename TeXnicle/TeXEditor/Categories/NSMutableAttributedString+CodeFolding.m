@@ -64,6 +64,7 @@
 			if (att && [att respondsToSelector:@selector(object)]) {			
 				NSData *data = [[att fileWrapper] regularFileContents];
 				NSAttributedString *code = [[NSAttributedString alloc] initWithRTFD:data documentAttributes:nil];
+        code = [NSAttributedString stringWithPlaceholdersRestored:[code string]];
 				NSRange attRange = NSMakeRange(loc, 1);
 				[self removeAttribute:NSAttachmentAttributeName range:attRange];
 				[self replaceCharactersInRange:attRange withAttributedString:code];
