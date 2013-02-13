@@ -3030,7 +3030,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSString *code = [self codeForCommand:currentCommand];
     if (code) {
       NSRange commandRange = [self rangeForCurrentSnippetCommand];
-      NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:code attributes:[self typingAttributes]];
+      NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:code attributes:[NSDictionary currentTypingAttributes]];
       if ([self shouldChangeTextInRange:commandRange replacementString:[astr string]]) {
         [self.textStorage replaceCharactersInRange:commandRange withAttributedString:astr];
         [self didChangeText];
@@ -3046,7 +3046,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) restoreAllPlaceholders
 {
-  NSAttributedString *str = [NSAttributedString stringWithPlaceholdersRestored:[self string] attributes:[self typingAttributes]];
+  NSAttributedString *str = [NSAttributedString stringWithPlaceholdersRestored:[self string] attributes:[NSDictionary currentTypingAttributes]];
 //  NSAttributedString *str = [[NSAttributedString alloc] initWithString:[self string]];
   if ([[str string] isEqualToString:[self string]] == NO) {
     [self.textStorage beginEditing];
