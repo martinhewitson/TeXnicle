@@ -856,19 +856,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
 {
-  //  NSLog(@"Apply font and color");
-  
-  //  NSRect visibleRect = [self visibleRect];
-  //  NSRange sel = [self selectedRange];
-  //  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
-  //  NSLog(@"  Selected range %@", NSStringFromRange(sel));
+//  NSLog(@"Apply font and color");
   
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
-  NSFont *newFont = [atts valueForKey:NSFontAttributeName];
+  NSFont *newFont = atts[NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
-  NSColor *newColor = [atts valueForKey:NSForegroundColorAttributeName];
+  NSColor *newColor = atts[NSForegroundColorAttributeName];
   if (![newFont isEqualTo:[self font]] || forceUpdate) {
-    //    NSLog(@"Setting new font");
+//    NSLog(@"Setting new font %@", newFont);
     [self setFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
@@ -878,8 +873,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   NSDictionary *currentAtts = [self typingAttributes];
   if (![currentAtts isEqualToDictionary:atts] || forceUpdate) {
-    //    NSLog(@"setting typing atts");
-    [self setTypingAttributes:atts];
+//    NSLog(@"Setting typing attributes %@", newFont);
+    [self setTypingAttributes:@{NSForegroundColorAttributeName : newColor, NSFontAttributeName : newFont}];
   } else {
     //    NSLog(@"Skipping setting atts");
   }
@@ -895,13 +890,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
    @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
    NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
   
-  //  [self scrollRangeToVisible:sel];
-  //  [self scrollRectToVisible:visibleRect];
-  //
-  //  NSLog(@"Finished.");
-  //  NSLog(@"  Visible rect: %@", NSStringFromRect(visibleRect));
-  //  NSLog(@"  Selected range %@", NSStringFromRange(sel));
-  //
 }
 
 - (void) setWrapStyle
@@ -1873,8 +1861,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                                                     userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
   
   [self colorVisibleText];
-  [self setTypingAttributes:[NSDictionary currentTypingAttributes]];
-  
   [self highlightMatchingWords];
 }
 
@@ -3857,5 +3843,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   return [super validateMenuItem:menuItem];
 }
+
+#pragma mark -
+#pragma mark findbar
+
+//- (NSString *)stringAtIndex:(NSUInteger)characterIndex effectiveRange:(NSRangePointer)outRange endsWithSearchBoundary:(BOOL *)outFlag
+//{
+//  [[self textStorage] atta]
+//  return [[self string] substringWithRange:NSMakeRange(characterIndex, 1)];
+//}
+
+
+
+
+
 
 @end
