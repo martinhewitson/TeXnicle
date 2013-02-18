@@ -1334,14 +1334,14 @@
 									<reference key="NSMixedImage" ref="310636482"/>
 									<int key="NSTag">29</int>
 								</object>
-								<object class="NSMenuItem" id="532330075">
+								<object class="NSMenuItem" id="848993173">
 									<reference key="NSMenu" ref="561089521"/>
 									<string key="NSTitle">Create Document Report...</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
-									<int key="NSTag">29</int>
+									<int key="NSTag">35</int>
 								</object>
 								<object class="NSMenuItem" id="978181235">
 									<reference key="NSMenu" ref="561089521"/>
@@ -3105,7 +3105,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">createDocumentReport:</string>
 						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="532330075"/>
+						<reference key="destination" ref="848993173"/>
 					</object>
 					<int key="connectionID">883</int>
 				</object>
@@ -3774,7 +3774,7 @@
 							<reference ref="978181235"/>
 							<reference ref="359199151"/>
 							<reference ref="226815707"/>
-							<reference ref="532330075"/>
+							<reference ref="848993173"/>
 						</array>
 						<reference key="parent" ref="590915221"/>
 					</object>
@@ -4587,7 +4587,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">881</int>
-						<reference key="object" ref="532330075"/>
+						<reference key="object" ref="848993173"/>
 						<reference key="parent" ref="561089521"/>
 					</object>
 				</array>
@@ -4967,10 +4967,12 @@
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
+						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
@@ -4991,6 +4993,10 @@
 							<string key="name">clean:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="endAddToNewProjectSheet:">
 							<string key="name">endAddToNewProjectSheet:</string>
 							<string key="candidateClassName">id</string>
@@ -5005,6 +5011,10 @@
 						</object>
 						<object class="IBActionInfo" key="openPDF:">
 							<string key="name">openPDF:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
+							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -5982,6 +5992,7 @@
 						<string key="clean:">id</string>
 						<string key="closeAllTabs:">id</string>
 						<string key="closeCurrentTab:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="createProjectTemplate:">id</string>
 						<string key="delete:">id</string>
 						<string key="deleteSelectedBookmark:">id</string>
@@ -6066,6 +6077,10 @@
 						</object>
 						<object class="IBActionInfo" key="closeCurrentTab:">
 							<string key="name">closeCurrentTab:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="createProjectTemplate:">

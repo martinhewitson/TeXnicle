@@ -11,7 +11,7 @@
 
 @protocol TPDocumentReporterDelegate <NSObject>
 
-- (NSString*)fileToCheck;
+- (NSString*)fileToReportOn;
 - (NSString*)documentName;
 
 @end

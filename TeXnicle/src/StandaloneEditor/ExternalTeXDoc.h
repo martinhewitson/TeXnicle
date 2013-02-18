@@ -48,11 +48,12 @@
 #import "TPLabelsViewController.h"
 #import "TPCitationsViewController.h"
 #import "TPNewCommandsViewController.h"
+#import "TPDocumentReportWindowController.h"
 
 
 @class TeXEditorViewController;
 
-@interface ExternalTeXDoc : NSDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate> {
+@interface ExternalTeXDoc : NSDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TemplateEditorDelegate, NSWindowDelegate, PDFViewerDelegate, PaletteControllerDelegate, TPLibraryControllerDelegate, PDFViewerControllerDelegate, NSApplicationDelegate, TPFileMonitorDelegate, TeXTextViewDelegate, TPEngineManagerDelegate, TPEngineSettingsDelegate, TPDocumentReporterDelegate> {
 
 @private
   
@@ -165,6 +166,9 @@
 #pragma mark Template sheet
 - (void) showTemplatesSheet;
 - (void) syncDocumentDataFromEditor;
+
+- (IBAction)createDocumentReport:(id)sender;
+
 
 @end
 

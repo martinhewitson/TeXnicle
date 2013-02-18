@@ -75,7 +75,7 @@
   [self.includeStats setEnabled:NO];
   [self.progressBar startAnimation:self];
   [self.generateButton setEnabled:NO];
-  [self.texcount countWordsInTexFile:[self fileToCheck]];
+  [self.texcount countWordsInTexFile:[self fileToReportOn]];
 }
 
 - (void) stopGeneration
@@ -87,10 +87,10 @@
   [self.generateButton setEnabled:YES];
 }
 
-- (NSString*)fileToCheck
+- (NSString*)fileToReportOn
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(fileToCheck)]) {
-    return [self.delegate fileToCheck];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(fileToReportOn)]) {
+    return [self.delegate fileToReportOn];
   }
   
   return nil;

@@ -4263,7 +4263,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma document report
 
-- (NSString*)fileToCheck
+- (NSString*)fileToReportOn
 {
   return [self.project.mainFile pathOnDisk];
 }

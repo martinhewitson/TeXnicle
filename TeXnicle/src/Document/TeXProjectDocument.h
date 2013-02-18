@@ -275,6 +275,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark Project Template Stuff
 
+- (IBAction)createDocumentReport:(id)sender;
 - (IBAction)createProjectTemplate:(id)sender;
 
 #pragma mark -
