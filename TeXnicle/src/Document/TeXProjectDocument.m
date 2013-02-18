@@ -137,6 +137,7 @@
 @property (unsafe_unretained) IBOutlet NSView *navButtonsBackground;
 @property (unsafe_unretained) IBOutlet PSMTabBarControl *psmTabBarControl;
 
+@property (strong) TPDocumentReportWindowController *documentReport;
 
 @end
 
@@ -4259,7 +4260,28 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
 }
 
+#pragma mark -
+#pragma document report
 
+- (NSString*)fileToCheck
+{
+  return [self.project.mainFile pathOnDisk];
+}
+
+- (NSString*)documentName
+{
+  return self.project.mainFile.name;
+}
+
+- (IBAction)createDocumentReport:(id)sender
+{
+  if (self.documentReport == nil) {
+    self.documentReport = [[TPDocumentReportWindowController alloc] initWithDelegate:self];
+  }
+  
+  [self.documentReport showWindow:self];
+  
+}
 
 
 @end

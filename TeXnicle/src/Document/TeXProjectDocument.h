@@ -55,6 +55,7 @@
 #import "TPLabelsViewController.h"
 #import "TPCitationsViewController.h"
 #import "TPNewCommandsViewController.h"
+#import "TPDocumentReportWindowController.h"
 
 @class ProjectEntity;
 @class ProjectItemEntity;
@@ -69,7 +70,7 @@ TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate,
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,
 PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, 
-FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate> {
+FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate, TPDocumentReporterDelegate> {
 
 @private
     

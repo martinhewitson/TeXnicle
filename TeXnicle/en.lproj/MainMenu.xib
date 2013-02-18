@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12C3103</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -1328,6 +1328,15 @@
 								<object class="NSMenuItem" id="359199151">
 									<reference key="NSMenu" ref="561089521"/>
 									<string key="NSTitle">Create Project Template...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+									<int key="NSTag">29</int>
+								</object>
+								<object class="NSMenuItem" id="532330075">
+									<reference key="NSMenu" ref="561089521"/>
+									<string key="NSTitle">Create Document Report...</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
@@ -3094,6 +3103,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">createDocumentReport:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="532330075"/>
+					</object>
+					<int key="connectionID">883</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -3757,6 +3774,7 @@
 							<reference ref="978181235"/>
 							<reference ref="359199151"/>
 							<reference ref="226815707"/>
+							<reference ref="532330075"/>
 						</array>
 						<reference key="parent" ref="590915221"/>
 					</object>
@@ -4567,6 +4585,11 @@
 						<reference key="object" ref="870038292"/>
 						<reference key="parent" ref="172489882"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">881</int>
+						<reference key="object" ref="532330075"/>
+						<reference key="parent" ref="561089521"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4790,13 +4813,14 @@
 				<string key="872.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="875.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="878.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="881.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">880</int>
+			<int key="maxID">883</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6425,7 +6449,6 @@
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="insertInlineMath:">id</string>
-						<string key="insertTable:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="latexFormatBold:">id</string>
@@ -6480,10 +6503,6 @@
 						</object>
 						<object class="IBActionInfo" key="insertInlineMath:">
 							<string key="name">insertInlineMath:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="insertTable:">
-							<string key="name">insertTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">
