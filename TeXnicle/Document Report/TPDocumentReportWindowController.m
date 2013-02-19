@@ -20,6 +20,8 @@
 @property (assign) IBOutlet NSButton *includeStats;
 @property (assign) IBOutlet NSButton *includeFreqs;
 
+@property (assign) BOOL generating;
+
 @end
 
 @implementation TPDocumentReportWindowController
@@ -70,6 +72,11 @@
 
 - (void) startGeneration
 {
+  if (self.generating) {
+    return;
+  }
+  
+  self.generating = YES;
   [self.includeAllFiles setEnabled:NO];
   [self.includeFreqs setEnabled:NO];
   [self.includeStats setEnabled:NO];
@@ -80,6 +87,7 @@
 
 - (void) stopGeneration
 {
+  self.generating = NO;
   [self.includeAllFiles setEnabled:YES];
   [self.includeFreqs setEnabled:YES];
   [self.includeStats setEnabled:YES];

@@ -2766,7 +2766,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   }
   
   [self.documentReport showWindow:self];
-  
+  [self.documentReport startGeneration];  
 }
 
 

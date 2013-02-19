@@ -21,5 +21,7 @@
 @property (strong) id<TPDocumentReporterDelegate> delegate;
 
 - (id) initWithDelegate:(id<TPDocumentReporterDelegate>)aDelegate;
+- (void) startGeneration;
+- (void) stopGeneration;
 
 @end

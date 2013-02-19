@@ -255,6 +255,15 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
+								<object class="NSMenuItem" id="571357928">
+									<reference key="NSMenu" ref="720053764"/>
+									<string key="NSTitle">Create Document Report...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+									<int key="NSTag">35</int>
+								</object>
 								<object class="NSMenuItem" id="722745758">
 									<reference key="NSMenu" ref="720053764"/>
 									<string key="NSTitle">Open…</string>
@@ -1333,15 +1342,6 @@
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
 									<int key="NSTag">29</int>
-								</object>
-								<object class="NSMenuItem" id="848993173">
-									<reference key="NSMenu" ref="561089521"/>
-									<string key="NSTitle">Create Document Report...</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="1033313550"/>
-									<reference key="NSMixedImage" ref="310636482"/>
-									<int key="NSTag">35</int>
 								</object>
 								<object class="NSMenuItem" id="978181235">
 									<reference key="NSMenu" ref="561089521"/>
@@ -3105,7 +3105,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">createDocumentReport:</string>
 						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="848993173"/>
+						<reference key="destination" ref="571357928"/>
 					</object>
 					<int key="connectionID">883</int>
 				</object>
@@ -3266,6 +3266,7 @@
 							<reference ref="648446794"/>
 							<reference ref="341044550"/>
 							<reference ref="609818042"/>
+							<reference ref="571357928"/>
 						</array>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -3774,7 +3775,6 @@
 							<reference ref="978181235"/>
 							<reference ref="359199151"/>
 							<reference ref="226815707"/>
-							<reference ref="848993173"/>
 						</array>
 						<reference key="parent" ref="590915221"/>
 					</object>
@@ -4587,8 +4587,8 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">881</int>
-						<reference key="object" ref="848993173"/>
-						<reference key="parent" ref="561089521"/>
+						<reference key="object" ref="571357928"/>
+						<reference key="parent" ref="720053764"/>
 					</object>
 				</array>
 			</object>
@@ -4966,14 +4966,21 @@
 						<string key="addToProject:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
+						<string key="cancelCompile:">id</string>
 						<string key="clean:">id</string>
 						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
+						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findSource:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
+						<string key="reopenUsingEncoding:">id</string>
+						<string key="saveDocument:">id</string>
+						<string key="showIntegratedPDFViewer:">id</string>
+						<string key="togglePanelFocus:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -4987,6 +4994,10 @@
 						</object>
 						<object class="IBActionInfo" key="buildProject:">
 							<string key="name">buildProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelCompile:">
+							<string key="name">cancelCompile:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="clean:">
@@ -5005,6 +5016,14 @@
 							<string key="name">endAddToProjectSheet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findCorrespondingPDFText:">
+							<string key="name">findCorrespondingPDFText:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="findSource:">
+							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="liveUpdate:">
 							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
@@ -5019,6 +5038,22 @@
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
 							<string key="name">reloadCurrentFileFromDisk:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="reopenUsingEncoding:">
+							<string key="name">reopenUsingEncoding:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
+							<string key="name">showIntegratedPDFViewer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="togglePanelFocus:">
+							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleStatusView:">

@@ -4280,7 +4280,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   }
   
   [self.documentReport showWindow:self];
-  
+  [self.documentReport startGeneration];
 }
 
 
