@@ -1822,6 +1822,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 {
   if ([(NSButton*)sender state] == NSOnState) {
     _liveUpdate = YES;
+    _openPDFAfterBuild = NO;
   } else {
     _liveUpdate = NO;
   }
