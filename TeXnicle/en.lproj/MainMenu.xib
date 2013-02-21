@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.SystemVersion">12C3103</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -254,6 +254,15 @@
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="1033313550"/>
 									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="571357928">
+									<reference key="NSMenu" ref="720053764"/>
+									<string key="NSTitle">Create Document Report...</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+									<int key="NSTag">35</int>
 								</object>
 								<object class="NSMenuItem" id="722745758">
 									<reference key="NSMenu" ref="720053764"/>
@@ -3094,6 +3103,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">createDocumentReport:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="571357928"/>
+					</object>
+					<int key="connectionID">883</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -3249,6 +3266,7 @@
 							<reference ref="648446794"/>
 							<reference ref="341044550"/>
 							<reference ref="609818042"/>
+							<reference ref="571357928"/>
 						</array>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -4567,6 +4585,11 @@
 						<reference key="object" ref="870038292"/>
 						<reference key="parent" ref="172489882"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">881</int>
+						<reference key="object" ref="571357928"/>
+						<reference key="parent" ref="720053764"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4790,13 +4813,14 @@
 				<string key="872.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="875.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="878.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="881.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">880</int>
+			<int key="maxID">883</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4942,12 +4966,21 @@
 						<string key="addToProject:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
+						<string key="cancelCompile:">id</string>
 						<string key="clean:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
+						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findSource:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
+						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
+						<string key="reopenUsingEncoding:">id</string>
+						<string key="saveDocument:">id</string>
+						<string key="showIntegratedPDFViewer:">id</string>
+						<string key="togglePanelFocus:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -4963,8 +4996,16 @@
 							<string key="name">buildProject:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="cancelCompile:">
+							<string key="name">cancelCompile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="clean:">
 							<string key="name">clean:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="endAddToNewProjectSheet:">
@@ -4975,6 +5016,14 @@
 							<string key="name">endAddToProjectSheet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findCorrespondingPDFText:">
+							<string key="name">findCorrespondingPDFText:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="findSource:">
+							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="liveUpdate:">
 							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
@@ -4983,8 +5032,28 @@
 							<string key="name">openPDF:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
+							<string key="name">openWithSystemPDFViewer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
 							<string key="name">reloadCurrentFileFromDisk:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="reopenUsingEncoding:">
+							<string key="name">reopenUsingEncoding:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
+							<string key="name">showIntegratedPDFViewer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="togglePanelFocus:">
+							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleStatusView:">
@@ -5958,6 +6027,7 @@
 						<string key="clean:">id</string>
 						<string key="closeAllTabs:">id</string>
 						<string key="closeCurrentTab:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="createProjectTemplate:">id</string>
 						<string key="delete:">id</string>
 						<string key="deleteSelectedBookmark:">id</string>
@@ -6042,6 +6112,10 @@
 						</object>
 						<object class="IBActionInfo" key="closeCurrentTab:">
 							<string key="name">closeCurrentTab:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="createProjectTemplate:">
@@ -6425,7 +6499,6 @@
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="insertInlineMath:">id</string>
-						<string key="insertTable:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="latexFormatBold:">id</string>
@@ -6480,10 +6553,6 @@
 						</object>
 						<object class="IBActionInfo" key="insertInlineMath:">
 							<string key="name">insertInlineMath:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="insertTable:">
-							<string key="name">insertTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">

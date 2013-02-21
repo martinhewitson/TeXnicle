@@ -91,6 +91,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @property (unsafe_unretained) IBOutlet NSView *paletteContainerView;
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 
+@property (strong) TPDocumentReportWindowController *documentReport;
+
 @end
 
 @implementation ExternalTeXDoc
@@ -2743,6 +2745,32 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];
   [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
 }
+
+
+#pragma mark -
+#pragma document report
+
+- (NSString*)fileToReportOn
+{
+  return [[self fileURL] path];
+}
+
+- (NSString*)documentName
+{
+  return [[self fileURL] lastPathComponent];
+}
+
+- (IBAction)createDocumentReport:(id)sender
+{
+  if (self.documentReport == nil) {
+    self.documentReport = [[TPDocumentReportWindowController alloc] initWithDelegate:self];
+  }
+  
+  [self.documentReport showWindow:self];
+  [self.documentReport startGeneration];  
+}
+
+
 
 
 @end

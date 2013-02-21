@@ -600,7 +600,7 @@
 }
 
 - (NSString*)consolidatedFileContents
-{  
+{
   NSString *string = [self workingContentString];
   
   NSUInteger loc = 0;
@@ -608,7 +608,14 @@
   
   while (loc < [string length]) {
     NSString *word = [string nextWordStartingAtLocation:&loc];
+    
+    if (word == nil || [word length] > 0) {
+      loc++;
+      continue;
+    }
+    
     word = [word stringByTrimmingCharactersInSet:ns];
+    
     if ([word characterAtIndex:0] == '\\') {
       // check file links
       if ([word hasPrefix:@"\\input{"] || [word hasPrefix:@"\\include{"]) {
