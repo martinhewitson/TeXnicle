@@ -146,6 +146,8 @@ Version 2.1\
 2. Soft-wrapped line indentation to the first line (like TextWrangler)?\
 3. When I fold a code it becomes "invisible" for the TeXnicle (not only for me). The Find & Replace does not work inside the folded code, if I fold the table or a figure it will not appear in the list of labels and will not be offered with \\ref\{\} command, etc. I really like the code folding feature but this issue makes it useless for me :(.\
 \
++ Add nice icons on document outline view\
+\
 ----------------------\
 \
 \
@@ -158,6 +160,24 @@ User Manual\
 \f0 \cf0 Bugs\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 ----\
+\pard\pardeftab720
+
+\f1 \cf0 \
+-------------------\
+I'd like to mention to you some behavior of Texnicle, which I feel became worse in the recent versions. \'a0Namely, when I use Live Update and have a syntax error in the code, the build-in pdf viewer "crushes" and its window becomes blank. \'a0It does not help when I correct the error, the viewer stays inactive. \'a0I have to click typeset in the left corner to get the pdf back and then sync it to the place in the text I was. \'a0This often happens when I copy/paste fragments of a code from other tex documents with missing \'a0\}, $$, etc (e.g, preparing slides in beamer). Before I would get a chance to complete the code, the pdf viewer crushes. \'a0I thought that in the past, the build-in pdf viewer was stopping typesetting when an error was spotted and resuming it after corrections, with the pdf viewable all the time.\'a0\
+\pard\pardeftab720
+
+\f0 \cf0 \
+\pard\pardeftab720
+
+\f1 \cf0 Once you get "Compile aborted", the\'a0"Life Update"\'a0cannot recover from it by just correcting the syntax. The wheel is spinning forever, and if the file is large (like in beamer), it will drop (or corrupt?) the pdf.\'a0
+\f0 \
+
+\f1 -------------------\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
+\
 \
 \
 TO DO\
