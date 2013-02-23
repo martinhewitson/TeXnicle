@@ -1847,18 +1847,18 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     if (_openPDFAfterBuild) {
       [self openPDF:self];
     }
-  }
   
-  // if we want, sync pdf
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
-    NSInteger line = [self.texEditorViewController.textView lineNumber];
-    NSInteger col  = [self.texEditorViewController.textView column];
-    [self syncToPDFLine:line column:col giveFocus:NO];
-  }
-  
-  // if we want, trash aux files
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPAutoTrashAfterCompile] boolValue]) {
-    [self.engineManager trashAuxFiles:YES];
+    // if we want, sync pdf
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
+      NSInteger line = [self.texEditorViewController.textView lineNumber];
+      NSInteger col  = [self.texEditorViewController.textView column];
+      [self syncToPDFLine:line column:col giveFocus:NO];
+    }
+    
+    // if we want, trash aux files
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPAutoTrashAfterCompile] boolValue]) {
+      [self.engineManager trashAuxFiles:YES];
+    }
   }
   
   _building = NO;
