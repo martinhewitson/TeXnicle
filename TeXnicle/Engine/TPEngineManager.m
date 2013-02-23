@@ -318,13 +318,13 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   
 }
 
-- (void) trashAuxFiles
+- (void) trashAuxFiles:(BOOL)keepDocument
 {
   NSString *engineName = [self.delegate engineName];
   TPEngine *e = [self engineNamed:engineName];
   // ensure the engine has a document path
   e.documentPath = [self.delegate documentToCompile];
-  [e trashAuxFiles];  
+  [e trashAuxFiles:keepDocument];
   [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineDidTrashFilesNotification object:self];
 }
 

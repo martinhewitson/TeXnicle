@@ -309,7 +309,7 @@
   typesetTask = nil;
 }
 
-- (void) trashAuxFiles
+- (void) trashAuxFiles:(BOOL)keepDocument
 {
 	// build path to the pdf file
   [self enginePostMessage:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
@@ -317,7 +317,7 @@
 	NSArray *filesToClear = [[NSUserDefaults standardUserDefaults] valueForKey:TPTrashFiles];
   
   // trash document as well?
-  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
+  if (keepDocument == NO && [[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
     if (self.compiledDocumentPath) {
       filesToClear = [filesToClear arrayByAddingObject:[self.compiledDocumentPath pathExtension]];
     }

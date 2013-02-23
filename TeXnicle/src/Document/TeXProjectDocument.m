@@ -2214,7 +2214,7 @@
 
 - (IBAction) clean:(id)sender
 {
-  [self.engineManager trashAuxFiles];
+  [self.engineManager trashAuxFiles:NO];
   [self showDocument];
 }
 
@@ -2272,6 +2272,11 @@
     NSInteger line = [self.texEditorViewController.textView lineNumber];
     NSInteger col  = [self.texEditorViewController.textView column];    
     [self syncToPDFLine:line column:col giveFocus:NO];
+  }
+  
+  // if we want, trash aux files
+  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPAutoTrashAfterCompile] boolValue]) {
+    [self.engineManager trashAuxFiles:YES];
   }
   
   _building = NO;

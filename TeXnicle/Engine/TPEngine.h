@@ -79,7 +79,7 @@
 - (void) taskFinished:(NSNotification*)aNote;
 - (void) reset;
 - (void) cancelCompile;
-- (void) trashAuxFiles;
+- (void) trashAuxFiles:(BOOL)keepDocument;
 - (void) parseEngineFile;
 
 @end

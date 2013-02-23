@@ -115,7 +115,7 @@ NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 NSString * const TPClearConsoleOnCompile = @"TPClearConsoleOnCompile";
 NSString * const TPSyncPDFAfterCompile = @"TPSyncPDFAfterCompile";
-
+NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentFont = @"TEDocumentFont";
@@ -277,6 +277,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   [defaultValues setValue:@YES forKey:TPClearConsoleOnCompile];
   [defaultValues setValue:@NO forKey:TPSyncPDFAfterCompile];
   [defaultValues setValue:@NO forKey:OpenConsoleOnTypeset];
+  [defaultValues setValue:@NO forKey:TPAutoTrashAfterCompile];
 
   // console
   defaultValues[TEConsoleFont] = [NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]];  
