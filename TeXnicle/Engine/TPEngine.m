@@ -286,12 +286,16 @@
 		if (loc < [output length]) {
       [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
+      [typesetTask terminate];
+      typesetTask = nil;
+      [self reset];
+      [self compileDidFinish:NO];
 		}
 	}	
 	
 	[self enginePostTextForAppending:output];
   
-	if([data length] > 0 ) {
+	if([data length] > 0 && abortCompile == NO) {
 		[typesetFileHandle readInBackgroundAndNotify];
   }
 	
@@ -342,9 +346,9 @@
 
 - (void)compileDidFinish:(BOOL)success
 {
-  if (abortCompile) {
-    return;
-  }
+//  if (abortCompile) {
+//    return;
+//  }
   
   if ([[NSApplication sharedApplication] isMountainLion]) {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
