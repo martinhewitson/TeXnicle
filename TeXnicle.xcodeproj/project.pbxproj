@@ -54,6 +54,8 @@
 		250C17441409296E00BCEA3D /* EngineEditorWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C17431409296E00BCEA3D /* EngineEditorWindow.xib */; };
 		250E7BA816B53F3C00EED1CD /* TPSectionListSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250E7BA716B53F3C00EED1CD /* TPSectionListSection.m */; };
 		250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F1B4A16E3449600629A2E /* PlaceholderTests.m */; };
+		250F1B5816E34C7E00629A2E /* placeholderTest1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5616E34C1000629A2E /* placeholderTest1.tex */; };
+		250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5916E34E0100629A2E /* placeholderTest2.tex */; };
 		251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
 		251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
 		251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
@@ -554,7 +556,7 @@
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
 		250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProjectEntity+ProjectTemplates.m"; sourceTree = "<group>"; };
-		250BE013162BEF3A007784DB /* TeXTextViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXTextViewTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		250BE013162BEF3A007784DB /* TeXTextViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TeXTextViewTests.octest; path = TeXnicleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		250BE014162BEF3A007784DB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		250BE019162BEF3A007784DB /* TeXTextViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeXTextViewTests-Info.plist"; sourceTree = "<group>"; };
 		250BE01B162BEF3A007784DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -580,6 +582,8 @@
 		250E7BA716B53F3C00EED1CD /* TPSectionListSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSectionListSection.m; sourceTree = "<group>"; };
 		250F1B4916E3449600629A2E /* PlaceholderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTests.h; sourceTree = "<group>"; };
 		250F1B4A16E3449600629A2E /* PlaceholderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTests.m; sourceTree = "<group>"; };
+		250F1B5616E34C1000629A2E /* placeholderTest1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholderTest1.tex; sourceTree = "<group>"; };
+		250F1B5916E34E0100629A2E /* placeholderTest2.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholderTest2.tex; sourceTree = "<group>"; };
 		250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
 		251157C416350C2500AC058F /* reformatTextTestFile10.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10.tex; sourceTree = "<group>"; };
 		251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10_reformatted.tex; sourceTree = "<group>"; };
@@ -1468,10 +1472,20 @@
 		250F1B4816E3446500629A2E /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				250F1B5416E34BE300629A2E /* placeholder test files */,
 				250F1B4916E3449600629A2E /* PlaceholderTests.h */,
 				250F1B4A16E3449600629A2E /* PlaceholderTests.m */,
 			);
 			path = tests;
+			sourceTree = "<group>";
+		};
+		250F1B5416E34BE300629A2E /* placeholder test files */ = {
+			isa = PBXGroup;
+			children = (
+				250F1B5616E34C1000629A2E /* placeholderTest1.tex */,
+				250F1B5916E34E0100629A2E /* placeholderTest2.tex */,
+			);
+			path = "placeholder test files";
 			sourceTree = "<group>";
 		};
 		251529AD138F824E00307054 /* PSMTabBarControl */ = {
@@ -2749,6 +2763,8 @@
 				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
 				251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */,
 				251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */,
+				250F1B5816E34C7E00629A2E /* placeholderTest1.tex in Resources */,
+				250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
