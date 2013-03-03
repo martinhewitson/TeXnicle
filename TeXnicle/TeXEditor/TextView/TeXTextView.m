@@ -1905,9 +1905,66 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark NSTextView overrides
 
+- (void) cut:(id)sender
+{
+  NSRange sel = [self selectedRange];
+  if (sel.length == 0) {
+    return;
+  }
+  [self copy:sender];
+  
+  [self replaceRange:sel withText:@"" scrollToVisible:YES animate:NO];
+}
+
+- (void) copy:(id)sender
+{
+  NSRange sel = [self selectedRange];
+  if (sel.length == 0) {
+    return;
+  }
+  
+  // get selected string
+  NSAttributedString *text = [[self textStorage] attributedSubstringFromRange:sel];
+  
+  // replace placeholders
+  NSAttributedString *source = [text replacePlaceholders];
+  
+  NSPasteboard *pb = [NSPasteboard generalPasteboard];
+  [pb declareTypes:@[NSStringPboardType, NSRTFPboardType] owner:self];
+  
+  // put on pasteboard as plain text
+  [pb setString:[source string] forType:NSStringPboardType];
+  
+  // put on pasteboard as RTF
+  NSData *data = [source RTFFromRange:NSMakeRange(0, [source length]) documentAttributes:nil];
+  [pb setData:data forType:NSRTFPboardType];
+}
+
 - (void) paste:(id)sender
 {
-  [self pasteAsPlainText:sender];
+  // get plain text from pasteboard
+  NSPasteboard *pb = [NSPasteboard generalPasteboard];
+  NSString *pbstring = [pb stringForType:NSStringPboardType];
+  
+  if (pbstring == nil) {
+    // paste as plain text
+    [self pasteAsPlainText:sender];
+  } else {
+    
+    // restore placeholders
+    NSRange sel = [self selectedRange];
+    
+    NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:pbstring attributes:[NSDictionary currentTypingAttributes]];
+    if ([self shouldChangeTextInRange:sel replacementString:[astr string]]) {
+      [self.textStorage replaceCharactersInRange:sel withAttributedString:astr];
+      [self didChangeText];
+      NSRange newRange = NSMakeRange(sel.location+[astr length], 0);
+      [self setSelectedRange:newRange];
+      [self scrollRangeToVisible:newRange];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+    }
+  }
+  
   [self applyFontAndColor:YES];
   [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
 }
