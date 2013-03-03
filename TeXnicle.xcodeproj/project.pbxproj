@@ -53,6 +53,7 @@
 		250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C17411409295500BCEA3D /* TPEngineEditor.m */; };
 		250C17441409296E00BCEA3D /* EngineEditorWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C17431409296E00BCEA3D /* EngineEditorWindow.xib */; };
 		250E7BA816B53F3C00EED1CD /* TPSectionListSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 250E7BA716B53F3C00EED1CD /* TPSectionListSection.m */; };
+		250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F1B4A16E3449600629A2E /* PlaceholderTests.m */; };
 		251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
 		251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
 		251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
@@ -577,6 +578,8 @@
 		250C17431409296E00BCEA3D /* EngineEditorWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EngineEditorWindow.xib; sourceTree = "<group>"; };
 		250E7BA616B53F3C00EED1CD /* TPSectionListSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSectionListSection.h; sourceTree = "<group>"; };
 		250E7BA716B53F3C00EED1CD /* TPSectionListSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSectionListSection.m; sourceTree = "<group>"; };
+		250F1B4916E3449600629A2E /* PlaceholderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTests.h; sourceTree = "<group>"; };
+		250F1B4A16E3449600629A2E /* PlaceholderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTests.m; sourceTree = "<group>"; };
 		250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
 		251157C416350C2500AC058F /* reformatTextTestFile10.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10.tex; sourceTree = "<group>"; };
 		251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10_reformatted.tex; sourceTree = "<group>"; };
@@ -1462,6 +1465,15 @@
 			name = "test files";
 			sourceTree = "<group>";
 		};
+		250F1B4816E3446500629A2E /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				250F1B4916E3449600629A2E /* PlaceholderTests.h */,
+				250F1B4A16E3449600629A2E /* PlaceholderTests.m */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		251529AD138F824E00307054 /* PSMTabBarControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1956,6 +1968,7 @@
 		257B4730138E5E9000ED02C4 /* TeXEditor */ = {
 			isa = PBXGroup;
 			children = (
+				250F1B4816E3446500629A2E /* tests */,
 				257B4742138E5E9000ED02C4 /* Commands.plist */,
 				257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */,
 				257B4731138E5E9000ED02C4 /* Categories */,
@@ -2474,9 +2487,9 @@
 			productReference = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */;
 			productType = "com.apple.product-type.bundle";
 		};
-		250BE012162BEF3A007784DB /* TeXTextViewTests */ = {
+		250BE012162BEF3A007784DB /* TeXnicleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXTextViewTests" */;
+			buildConfigurationList = 250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXnicleTests" */;
 			buildPhases = (
 				250BE00E162BEF3A007784DB /* Sources */,
 				250BE00F162BEF3A007784DB /* Frameworks */,
@@ -2488,7 +2501,7 @@
 			dependencies = (
 				250BE029162BF440007784DB /* PBXTargetDependency */,
 			);
-			name = TeXTextViewTests;
+			name = TeXnicleTests;
 			productName = TeXTextViewTests;
 			productReference = 250BE013162BEF3A007784DB /* TeXTextViewTests.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -2516,7 +2529,7 @@
 			targets = (
 				250772EB138E5D81000F1118 /* TeXnicle */,
 				25077311138E5D82000F1118 /* TeXnicleImporter */,
-				250BE012162BEF3A007784DB /* TeXTextViewTests */,
+				250BE012162BEF3A007784DB /* TeXnicleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -3025,6 +3038,7 @@
 				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
 				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
 				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
+				250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3139,7 +3153,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3151,7 +3165,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "B1D8421E-F21C-4AEC-8E43-7D189B01BA04";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -3162,7 +3176,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3175,7 +3189,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "B1D8421E-F21C-4AEC-8E43-7D189B01BA04";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -3188,7 +3202,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3205,7 +3219,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "58EA0C13-369F-448E-A480-2AD26CDCABD1";
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
@@ -3219,7 +3233,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3236,7 +3250,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "58EA0C13-369F-448E-A480-2AD26CDCABD1";
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
@@ -3336,7 +3350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXTextViewTests" */ = {
+		250BE021162BEF3A007784DB /* Build configuration list for PBXNativeTarget "TeXnicleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				250BE022162BEF3A007784DB /* Debug */,

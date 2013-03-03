@@ -52,8 +52,8 @@
     for (NSValue *rv in ranges) {
       NSRange r = [rv rangeValue];
       if (r.length >= 3) {
-        NSRange repRange = NSMakeRange(r.location+1, r.length-1);
-        NSRange textRange = NSMakeRange(r.location+2, r.length-3);
+        NSRange repRange = NSMakeRange(r.location, r.length);
+        NSRange textRange = NSMakeRange(r.location+1, r.length-2);
         NSString *text = [[atr string] substringWithRange:textRange];
         MHPlaceholderAttachment *placeholderAttachment = [[MHPlaceholderAttachment alloc] initWithName:text];
         NSAttributedString *attachment = [NSAttributedString attributedStringWithAttachment:placeholderAttachment];
