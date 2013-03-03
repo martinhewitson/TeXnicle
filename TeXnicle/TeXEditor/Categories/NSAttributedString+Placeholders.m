@@ -44,7 +44,7 @@
   NSString *regexp = [TPLibraryController placeholderRegexp];
   NSArray *ranges = nil;
   NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:string];
-  NSInteger maxCount = 1000;
+  NSInteger maxCount = 10000;
   NSInteger count = 0;
   do
   {
