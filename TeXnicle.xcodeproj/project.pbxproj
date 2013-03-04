@@ -239,6 +239,14 @@
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
 		2562782C151A061300778FFB /* error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2562782A151A061300778FFB /* error.icns */; };
+		2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567272716E49FEC004B7C4A /* NSImage+Resize.m */; };
+		2567272A16E4A246004B7C4A /* outline_part.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272916E4A246004B7C4A /* outline_part.icns */; };
+		2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272B16E4ADD7004B7C4A /* outline_chapter.icns */; };
+		2567272E16E4AEC7004B7C4A /* outline_section.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272D16E4AEC7004B7C4A /* outline_section.icns */; };
+		2567273016E4AF15004B7C4A /* outline_subsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272F16E4AF15004B7C4A /* outline_subsection.icns */; };
+		2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */; };
+		2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273316E4AFDC004B7C4A /* outline_paragraph.icns */; };
+		2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */; };
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
 		25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */; };
 		256C84CD14E7B896007E4FBA /* MHSynctexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C84CC14E7B896007E4FBA /* MHSynctexController.m */; };
@@ -556,7 +564,7 @@
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
 		250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProjectEntity+ProjectTemplates.m"; sourceTree = "<group>"; };
-		250BE013162BEF3A007784DB /* TeXTextViewTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TeXTextViewTests.octest; path = TeXnicleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		250BE013162BEF3A007784DB /* TeXnicleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeXnicleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		250BE014162BEF3A007784DB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		250BE019162BEF3A007784DB /* TeXTextViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TeXTextViewTests-Info.plist"; sourceTree = "<group>"; };
 		250BE01B162BEF3A007784DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -854,6 +862,15 @@
 		256225D015CA943200091A8C /* NSApplication+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Palette.m"; sourceTree = "<group>"; };
 		25627829151A061300778FFB /* noerror.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = noerror.icns; sourceTree = "<group>"; };
 		2562782A151A061300778FFB /* error.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = error.icns; sourceTree = "<group>"; };
+		2567272616E49FEC004B7C4A /* NSImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Resize.h"; sourceTree = "<group>"; };
+		2567272716E49FEC004B7C4A /* NSImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Resize.m"; sourceTree = "<group>"; };
+		2567272916E4A246004B7C4A /* outline_part.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_part.icns; sourceTree = "<group>"; };
+		2567272B16E4ADD7004B7C4A /* outline_chapter.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_chapter.icns; sourceTree = "<group>"; };
+		2567272D16E4AEC7004B7C4A /* outline_section.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_section.icns; sourceTree = "<group>"; };
+		2567272F16E4AF15004B7C4A /* outline_subsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsection.icns; sourceTree = "<group>"; };
+		2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsubsection.icns; sourceTree = "<group>"; };
+		2567273316E4AFDC004B7C4A /* outline_paragraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_paragraph.icns; sourceTree = "<group>"; };
+		2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subparagraph.icns; sourceTree = "<group>"; };
 		25690D7A14F4D26D00E4101D /* NSScanner+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+TeXnicle.h"; sourceTree = "<group>"; };
 		25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+TeXnicle.m"; sourceTree = "<group>"; };
 		25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -1266,7 +1283,7 @@
 			children = (
 				250772EC138E5D81000F1118 /* TeXnicle.app */,
 				25077312138E5D82000F1118 /* TeXnicle.mdimporter */,
-				250BE013162BEF3A007784DB /* TeXTextViewTests.octest */,
+				250BE013162BEF3A007784DB /* TeXnicleTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1591,6 +1608,13 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */,
+				2567273316E4AFDC004B7C4A /* outline_paragraph.icns */,
+				2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */,
+				2567272F16E4AF15004B7C4A /* outline_subsection.icns */,
+				2567272D16E4AEC7004B7C4A /* outline_section.icns */,
+				2567272B16E4ADD7004B7C4A /* outline_chapter.icns */,
+				2567272916E4A246004B7C4A /* outline_part.icns */,
 				2520AC1916A81677006E9CA2 /* cancel.icns */,
 				252E122416217B1D0041B2BE /* TeXnicle_4.icns */,
 				252E12221621728F0041B2BE /* TeXnicle.icns */,
@@ -2149,6 +2173,8 @@
 		257B47A4138E5EB500ED02C4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				2567272616E49FEC004B7C4A /* NSImage+Resize.h */,
+				2567272716E49FEC004B7C4A /* NSImage+Resize.m */,
 				25F4B75514BC1A6100351BE9 /* NSApplication+SystemVersion.h */,
 				25F4B75614BC1A6100351BE9 /* NSApplication+SystemVersion.m */,
 				25C1B5E01410B09E001B02B0 /* KSPathUtilities.h */,
@@ -2517,7 +2543,7 @@
 			);
 			name = TeXnicleTests;
 			productName = TeXTextViewTests;
-			productReference = 250BE013162BEF3A007784DB /* TeXTextViewTests.octest */;
+			productReference = 250BE013162BEF3A007784DB /* TeXnicleTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -2723,6 +2749,13 @@
 				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 				25CFBD1316D2CFB90025B35D /* texcount in Resources */,
 				25CFBD1B16D2D0B00025B35D /* TPDocumentReportWindowController.xib in Resources */,
+				2567272A16E4A246004B7C4A /* outline_part.icns in Resources */,
+				2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */,
+				2567272E16E4AEC7004B7C4A /* outline_section.icns in Resources */,
+				2567273016E4AF15004B7C4A /* outline_subsection.icns in Resources */,
+				2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */,
+				2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */,
+				2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3034,6 +3067,7 @@
 				2558798416BAB2700059027B /* NSAttributedString+Placeholders.m in Sources */,
 				25CFBD1A16D2D0B00025B35D /* TPDocumentReportWindowController.m in Sources */,
 				25CFBD1E16D2D3350025B35D /* TPTexcountDriver.m in Sources */,
+				2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3169,7 +3203,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3181,7 +3215,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
-				PROVISIONING_PROFILE = "B1D8421E-F21C-4AEC-8E43-7D189B01BA04";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -3192,7 +3226,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3205,7 +3239,7 @@
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				PRODUCT_NAME = TeXnicle;
-				PROVISIONING_PROFILE = "B1D8421E-F21C-4AEC-8E43-7D189B01BA04";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -3218,7 +3252,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3235,7 +3269,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58EA0C13-369F-448E-A480-2AD26CDCABD1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
@@ -3249,7 +3283,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer: Martin Hewitson (XQ47SF7QM8)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3266,7 +3300,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58EA0C13-369F-448E-A480-2AD26CDCABD1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = app;
@@ -3284,7 +3318,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
@@ -3318,7 +3352,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

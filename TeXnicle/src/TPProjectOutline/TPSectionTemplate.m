@@ -7,6 +7,7 @@
 //
 
 #import "TPSectionTemplate.h"
+#import "NSImage+Resize.h"
 
 @interface TPSectionTemplate ()
 
@@ -14,6 +15,12 @@
 @end
 
 @implementation TPSectionTemplate
+
++ (id)documentSectionTemplateWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName icon:(NSImage*)anIcon
+{
+  return [[TPSectionTemplate alloc] initWithName:aName tags:someTags parent:aParent color:aColor mnemonic:shortName icon:anIcon];
+}
+
 
 + (id)documentSectionTemplateWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
 {
@@ -26,6 +33,16 @@
   return [[TPSectionTemplate alloc] initWithName:aName tag:aTag parent:aParent color:aColor mnemonic:shortName];
 }
 
+- (id) initWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName icon:(NSImage*)anIcon
+{
+  self = [self initWithName:aName tags:someTags parent:aParent color:aColor mnemonic:shortName];
+  if (self) {
+    self.icon = [anIcon copy];
+  }
+  return self;
+}
+
+
 - (id) initWithName:(NSString*)aName tags:(NSArray*)someTags parent:(TPSectionTemplate *)aParent color:(NSColor*)aColor mnemonic:(NSString*)shortName
 {
   self = [super init];
@@ -35,6 +52,7 @@
     self.tags = someTags;
     self.color = aColor;
     self.mnemonic = shortName;
+    self.icon = [[NSImage imageNamed:NSImageNamePathTemplate] resizeToSize:NSMakeSize(17.0, 17.0)];
   }
   return self;
 }

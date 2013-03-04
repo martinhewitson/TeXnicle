@@ -8,6 +8,7 @@
 
 #import "TPProjectOutlineViewController.h"
 #import "TPSectionTemplate.h"
+#import "ImageAndTextCell.h"
 
 @interface TPProjectOutlineViewController ()
 
@@ -57,6 +58,14 @@
 
 - (void) awakeFromNib
 {
+  // apply our custom ImageAndTextCell for rendering the first column's cells
+	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
+	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
+	[imageAndTextCell setEditable:NO];
+	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
+	[tableColumn setDataCell:imageAndTextCell];
+
+  
   [self setupOutlineBuilder];
   
   NSInteger maxOutlineDepth = [[self.delegate maxOutlineDepth] integerValue];
@@ -251,6 +260,13 @@
     NSMutableAttributedString *title = [[cell objectValue] mutableCopy];
     [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
     [cell setObjectValue:title];
+  }
+  
+  // we need the icon for this cell
+  TPSectionTemplate *template = [item valueForKey:@"type"];
+  if (template) {
+    [cell setImageSize:17.0];
+    [cell setImage:template.icon];
   }
 }
 

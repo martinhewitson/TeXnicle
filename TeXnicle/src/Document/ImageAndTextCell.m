@@ -57,7 +57,7 @@
 #define kImageOriginYOffset 1
 
 #define kTextOriginXOffset	2
-#define kTextOriginYOffset	2
+#define kTextOriginYOffset	0
 #define kTextHeightAdjust	4
 
 // -------------------------------------------------------------------------------

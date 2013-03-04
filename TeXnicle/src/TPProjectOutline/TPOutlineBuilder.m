@@ -301,7 +301,8 @@
                                                                               tags:@[@"\\begin{document}", @"\\starttext"]
                                                                             parent:nil
                                                                              color:color
-                                                                          mnemonic:@"D"];
+                                                                          mnemonic:@"D"
+                                                                              icon:[NSImage imageNamed:@"TeXnicle_Doc"]];
   document.defaultTitle = @"Document";
   [tmp addObject:document];
   
@@ -310,7 +311,8 @@
                                                                           tags:@[@"\\part", @"\\part*"]
                                                                         parent:document
                                                                          color:color
-                                                                      mnemonic:@"P"];
+                                                                      mnemonic:@"P"
+                                                                          icon:[NSImage imageNamed:@"outline_part"]];
   [tmp addObject:part];
   
   color = [NSColor darkGrayColor];
@@ -318,7 +320,8 @@
                                                                              tags:@[@"\\chapter", @"\\chapter*"]
                                                                            parent:part 
                                                                             color:color
-                                                                         mnemonic:@"C"];
+                                                                         mnemonic:@"C"
+                                                                             icon:[NSImage imageNamed:@"outline_chapter"]];
   [tmp addObject:chapter];
   
   color = [NSColor colorWithDeviceRed:0.8 green:0.2 blue:0.2 alpha:1.0];
@@ -326,7 +329,8 @@
                                                                              tags:@[@"\\section", @"\\section*", @"\\subject"]
                                                                            parent:chapter 
                                                                             color:color
-                                                                         mnemonic:@"S"];
+                                                                         mnemonic:@"S"
+                                                                             icon:[NSImage imageNamed:@"outline_section"]];
   [tmp addObject:section];
   
   color = [NSColor colorWithDeviceRed:0.6 green:0.3 blue:0.3 alpha:1.0];
@@ -334,7 +338,8 @@
                                                                                 tags:@[@"\\subsection", @"\\subsection*", @"\\subsubject"]
                                                                               parent:section 
                                                                                color:color
-                                                                            mnemonic:@"ss"];
+                                                                            mnemonic:@"ss"
+                                                                                icon:[NSImage imageNamed:@"outline_subsection"]];
   [tmp addObject:subsection];
   
   color = [NSColor colorWithDeviceRed:0.6 green:0.5 blue:0.5 alpha:1.0];
@@ -342,7 +347,8 @@
                                                                                    tags:@[@"\\subsubsection", @"\\subsubsection*", @"\\subsubsubject"]
                                                                                  parent:subsection
                                                                                   color:color
-                                                                               mnemonic:@"sss"];
+                                                                               mnemonic:@"sss"
+                                                                                   icon:[NSImage imageNamed:@"outline_subsubsection"]];
   [tmp addObject:subsubsection];
   
   color = [NSColor colorWithDeviceWhite:0.6 alpha:1.0];
@@ -350,7 +356,8 @@
                                                                                tags:@[@"\\paragraph", @"\\paragraph*"]
                                                                              parent:subsubsection
                                                                               color:color
-                                                                           mnemonic:@"p"];
+                                                                           mnemonic:@"p"
+                                                                               icon:[NSImage imageNamed:@"outline_paragraph"]];
   [tmp addObject:paragraph];
   
   color = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
@@ -358,7 +365,8 @@
                                                                                   tags:@[@"\\subparagraph", @"\\subparagraph*"]
                                                                                 parent:paragraph
                                                                                  color:color
-                                                                              mnemonic:@"sp"];
+                                                                              mnemonic:@"sp"
+                                                                                  icon:[NSImage imageNamed:@"outline_subparagraph"]];
   [tmp addObject:subparagraph];
  
   self.templates = [NSArray arrayWithArray:tmp];
