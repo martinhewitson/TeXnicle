@@ -362,7 +362,7 @@
 
 + (NSString*) placeholderRegexp
 {
-  return @"\\@[^\\@\n]{0,30}[^\\\\]\\@";
+  return @"\\@[^\\@\n\\W]{0,30}[^\\\\]\\@";
 }
 
 - (NSString*) placeholderRegexp

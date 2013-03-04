@@ -38,7 +38,7 @@
   STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 1
-  STAssertTrue([replaced length] == 1, @"Returned string should have length 1");
+  STAssertTrue([replaced length] == 1, @"Returned string [%@] should have length 1", replaced);
   
   // it should have an attachment at the first character
   NSRange effRange;
@@ -267,6 +267,23 @@
   
   // string should be same as before
   STAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
+}
+
+
+- (void) testStringWithPlaceholdersRestored_11
+{
+  
+  NSString *test = @"\\href{mailto:xy@gmail.com}{xy@gmail.com}.";
+  
+  // replace placeholders
+  NSAttributedString *restored = [NSAttributedString stringWithPlaceholdersRestored:test];
+  
+  // check that we get an nsattributed string
+  STAssertTrue(restored != nil, @"Returned NSAttributedString should not be nil");
+  STAssertTrue([restored isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  
+  // string should be same as before
+  STAssertTrue([[restored string] isEqualToString:test], @"Restored string [%@] should be as original", restored);
 }
 
 @end
