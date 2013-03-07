@@ -128,7 +128,9 @@
 
 - (void) reloadFromDisk
 {
-  [self reloadFromDiskWithEncoding:[MHFileReader defaultEncodingName]];
+  if ([self isText] && [self isImage] == NO) {
+    [self reloadFromDiskWithEncoding:[MHFileReader defaultEncodingName]];
+  }
 }
 
 - (void) reloadFromDiskWithEncoding:(NSString*)encoding
