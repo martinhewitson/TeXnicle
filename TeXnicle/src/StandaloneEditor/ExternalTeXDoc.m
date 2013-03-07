@@ -1172,8 +1172,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
                        traverseLink:YES];
     
     MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:[sender title]];
-    NSString *str = [fr readStringFromFileAtURL:[self fileURL]];
+    NSString *str = [fr readStringFromFileAtURL:[self fileURL] usingEncodingNamed:[sender title]];
     if (str) {
+      _encoding = [fr encodingUsed];
       self.fileLoadDate = [NSDate date];
       NSDictionary *options = @{NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInteger:[fr encodingUsed]]};
       NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str attributes:options];
