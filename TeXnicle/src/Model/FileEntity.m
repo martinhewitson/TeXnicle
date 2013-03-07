@@ -142,7 +142,7 @@
 	if ([fm fileExistsAtPath:filepath]) {
     MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:encoding];
 //    NSLog(@"Loading with encoding %@", encoding);
-    NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath]];
+    NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath] usingEncodingNamed:encoding];
 		
 		if (!str) {
 			str = @"";
