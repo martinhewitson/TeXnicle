@@ -225,6 +225,52 @@
   return [self writeString:aString toURL:aURL withEncoding:encoding];
 }
 
+- (NSString*)readStringFromFileAtURL:(NSURL*)aURL usingEncodingNamed:(NSString*)encodingName
+{
+#if FILE_READER_DEBUG
+  NSLog(@"Reading string from file %@", aURL);
+#endif
+  NSError *error = nil;
+  NSStringEncoding encoding = [self encodingWithName:encodingName];
+  NSString *str = [NSString stringWithContentsOfURL:aURL
+                                 encoding:encoding
+                                    error:&error];
+
+#if FILE_READER_DEBUG
+  NSLog(@"  Loaded string with encoding %ld [%@]", encoding, [self nameOfEncoding:encoding]);
+#endif
+  if (str != nil) {
+    [UKXattrMetadataStore setString:[self nameOfEncoding:encoding]
+                             forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                             atPath:[aURL path]
+                       traverseLink:YES];
+    
+#if FILE_READER_DEBUG
+    NSLog(@"  Set xattr encoding to [%@]", [self nameOfEncoding:encoding]);
+#endif
+    // set the encoding we used in the end
+    self.selectedIndex = @([self indexForEncoding:encoding]);
+  } else {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Loading Failed"
+                                     defaultButton:@"OK"
+                                   alternateButton:@"Cancel"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Failed to open %@ with encoding %@. Open with another encoding?", [aURL path], [self nameOfEncoding:encoding]];
+    [alert setAccessoryView:self.view];
+    NSInteger result = [alert runModal];
+    if (result == NSAlertDefaultReturn)
+    {
+      // get the encoding the user selected
+      encoding = [(self.encodings)[[self.selectedIndex integerValue]] integerValue];
+      str = [self readStringFromFileAtURL:aURL usingEncodingNamed:[self nameOfEncoding:encoding]];      
+    }
+  }
+  
+ 
+  return str;
+}
+
+
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL
 {
 #if FILE_READER_DEBUG
