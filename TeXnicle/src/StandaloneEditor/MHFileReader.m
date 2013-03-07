@@ -182,6 +182,10 @@
     return NO;
   }
   
+  [UKXattrMetadataStore setString:[self nameOfEncoding:encoding]
+                           forKey:@"com.bobsoft.TeXnicleTextEncoding"
+                           atPath:[aURL path]
+                     traverseLink:YES];
 //  NSLog(@"Data written to file.");
   
   return YES;
