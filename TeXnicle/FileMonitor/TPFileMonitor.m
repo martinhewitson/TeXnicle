@@ -13,7 +13,7 @@
 //      * Redistributions in binary form must reproduce the above copyright
 //        notice, this list of conditions and the following disclaimer in the
 //        documentation and/or other materials provided with the distribution.
-//  
+//
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -70,7 +70,7 @@
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down %@", self);
+  //  NSLog(@"Tear down %@", self);
   self.delegate = nil;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -80,61 +80,61 @@
   if (self.timer) {
     [self.timer invalidate];
     self.timer = nil;
-  }  
+  }
 }
 
 - (void)checkFiles:(NSNotification*)aNote
 {
   
-  NSArray *files = [self fileMonitorFileList:self]; 
-//  NSLog(@"Checking files %@", files);
+  NSArray *files = [self fileMonitorFileList:self];
+  //  NSLog(@"Checking files %@", files);
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
   
   for (id file in files) {
     NSDate *loadDate = [file valueForKey:@"fileLoadDate"];
-//    NSInteger load = (NSInteger)floor([loadDate timeIntervalSinceReferenceDate]);
+    //    NSInteger load = (NSInteger)floor([loadDate timeIntervalSinceReferenceDate]);
     
     NSString *path = [self fileMonitor:self pathOnDiskForFile:file];
-//    NSLog(@"Checking %@", path);
+    //    NSLog(@"Checking %@", path);
     if (path) {
       if (![fm fileExistsAtPath:path]) {
-        [self fileMonitor:self 
-        fileChangedOnDisk:file 
+        [self fileMonitor:self
+        fileChangedOnDisk:file
              modifiedDate:loadDate];
       } else {
         
-//        NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
-//        NSDate *modified = [atts objectForKey:NSFileModificationDate];
+        //        NSDictionary *atts = [fm attributesOfItemAtPath:path error:&error];
+        //        NSDate *modified = [atts objectForKey:NSFileModificationDate];
         NSURL *url = [NSURL fileURLWithPath:path];
         NSDictionary *vals = [url resourceValuesForKeys:@[NSURLContentModificationDateKey, NSURLContentAccessDateKey] error:&error];
         NSDate *access = [vals valueForKey:NSURLContentAccessDateKey];
         NSDate *modified = [vals valueForKey:NSURLContentModificationDateKey];
         
-//        NSString *testpath = @"/Users/hewitson/working/ltp/papers/lpf_amaldi_2011/tex/operations.tex";
-//        if ([path isEqualToString:testpath]) {
-//          
-//          struct stat    buffer;												 // store results of stat
-//          
-//          stat ([path cStringUsingEncoding:NSASCIIStringEncoding], &buffer);
-          // compare the last modified time to the one stored
-//          NSLog(@"-------------------------");
-//          NSLog(@"  loaded: %@", loadDate);
-//          NSLog(@"  stat %ld, load %ld", buffer.st_mtimespec.tv_sec, load);
-//          NSLog(@"   modified %@", modified);
-//          NSLog(@"   access %@", access);
-//          NSLog(@"access greater? %d", [access compare:loadDate]==NSOrderedDescending);
-//        }
+        //        NSString *testpath = @"/Users/hewitson/working/ltp/papers/lpf_amaldi_2011/tex/operations.tex";
+        //        if ([path isEqualToString:testpath]) {
+        //
+        //          struct stat    buffer;												 // store results of stat
+        //
+        //          stat ([path cStringUsingEncoding:NSASCIIStringEncoding], &buffer);
+        // compare the last modified time to the one stored
+        //          NSLog(@"-------------------------");
+        //          NSLog(@"  loaded: %@", loadDate);
+        //          NSLog(@"  stat %ld, load %ld", buffer.st_mtimespec.tv_sec, load);
+        //          NSLog(@"   modified %@", modified);
+        //          NSLog(@"   access %@", access);
+        //          NSLog(@"access greater? %d", [access compare:loadDate]==NSOrderedDescending);
+        //        }
         
         if ([modified compare:loadDate] == NSOrderedDescending) {
           [self fileMonitor:self fileChangedOnDisk:file modifiedDate:modified];
         } else if ([access compare:loadDate]==NSOrderedDescending) {
-//          [self fileMonitor:self fileWasAccessedOnDisk:file accessDate:access];
+          //          [self fileMonitor:self fileWasAccessedOnDisk:file accessDate:access];
         }
         
       }
-    }    
-  }  
+    }
+  }
 }
 
 #pragma mark -
