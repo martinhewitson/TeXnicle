@@ -31,7 +31,7 @@
 #import "NSString+FileTypes.h"
 #import "externs.h"
 
-#define FILE_READER_DEBUG 0
+#define FILE_READER_DEBUG 1
 
 @implementation MHFileReader
 
@@ -194,7 +194,9 @@
 
 - (BOOL)writeString:(NSString*)aString toURL:(NSURL*)aURL withEncoding:(NSStringEncoding)encoding
 {
-//  NSLog(@"Write string to %@ with encoding %@", aURL, [self nameOfEncoding:encoding]);
+#if FILE_READER_DEBUG
+  NSLog(@"Write string to %@ with encoding %@", aURL, [self nameOfEncoding:encoding]);
+#endif
   
   NSError *error = nil;
   BOOL success = [aString writeToURL:aURL atomically:YES encoding:encoding error:&error];
@@ -334,7 +336,7 @@
         str = [NSString stringWithContentsOfURL:aURL encoding:[enc integerValue] error:NULL];
         if (str != nil) {
 #if FILE_READER_DEBUG
-          NSLog(@"**** managed to read with encoding %ld", [enc integerValue]);
+          NSLog(@"**** managed to read with encoding %ld [%@]", [enc integerValue], [self nameOfEncoding:[enc integerValue]]);
 #endif
           break;
         }
