@@ -3254,7 +3254,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 	for (ProjectItemEntity *item in allItems) {
 		if ([item isKindOfClass:[FileEntity class]]) {
 			FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
+      if ([file isText] && [file isImage] == NO) {
         success = [file saveContentsToDisk];
       }
 //			NSLog(@"Saved %@ %d ", [file pathOnDisk], success);
