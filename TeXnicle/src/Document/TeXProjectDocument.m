@@ -527,7 +527,8 @@
     [self restoreOpenTabs];
   }
   
-  [self restoreUIstate];
+  // [self restoreUIstate];
+  [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
   
   [self.outlineViewController start];
   

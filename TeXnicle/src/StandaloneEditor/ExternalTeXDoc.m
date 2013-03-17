@@ -389,8 +389,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self showDocument];
   
   // resture UI settings
-  [self restoreUIsettings];
-  //  [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
+  //[self restoreUIsettings];
+  [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
   
   // Present templates if we have no URL
   [self performSelector:@selector(checkToShowTemplateSheet) withObject:nil afterDelay:0];
