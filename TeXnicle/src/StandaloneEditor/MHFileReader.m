@@ -31,7 +31,7 @@
 #import "NSString+FileTypes.h"
 #import "externs.h"
 
-#define FILE_READER_DEBUG 1
+#define FILE_READER_DEBUG 0
 
 @implementation MHFileReader
 
