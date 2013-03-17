@@ -6,6 +6,33 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+    <!-- Version 2.0.5 -->
+		<item>
+      <title>Version 2.0.5 (build 60)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.5</h2>
+        <p>
+        <ul>
+        <li>Added a new feature which uses texcount to generate a document count. Use via File -> Create Document Report...</li>
+        <li>Added a preference to auto trash aux files after typesetting (not including the document).</li>
+        <li>Fixed a bug relating to the font size after zooming on the text editor.</li>
+        <li>Other minor bug fixes relating to code folding and placeholders.</li>
+        <li>Fixed a bug related to the additional PDF viewer (from Build & View) and Live Update.</li>
+        <li>Typesetting now properly stops on error.</li>
+        <li>Bug fix: Labels which are in folded code are now available in completion lists.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>23rd February 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.5.zip"
+      sparkle:shortVersionString="2.0.5"
+      sparkle:version="60"
+      length="18078668"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFD/QJR4/vRIu2pA1NcA1S0Jn8f6rAhQLZfFnQWdBwxVCD5Ttz0mqhOIX4Q=="
+      />
+    </item>
+    
     <!-- Version 2.0.4 -->
 		<item>
       <title>Version 2.0.4 (build 59)</title>
