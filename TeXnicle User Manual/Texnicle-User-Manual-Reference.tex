@@ -10,7 +10,7 @@ Access the preference pane just like in any other Mac application: \menu{TeXnicl
 \label{reference.prefs.gen}
 Several important features are included under the General pane. You can set the number of characters per line, at which point the line will wrap. Alternatively, you can turn wrapping off. When pressing the Tab key, a tab is inserted into the document; this behaviour can be changed from the General tab to insert any number of spaces instead.
 
-\texnicle can insert closing braces automatically when an opening brace is typed, if you so choose. You can also opt to skip closing braces, which means that when the cursor is set immediately before a closing brace and then the \} key is pressed, the editor will simply skip that brace rather than inserting a new one. You may also choose for \texnicle to automatically replace opening quotation marks (\keys{\shiftkey + '}) with two inverted apostrophes (\keys{`}). Line numbering and code folding (for |\begin| and |\end| environments) can be turned on and off here. Line highlighting and the highlighting of matching words can also be edited.
+\texnicle can insert closing braces automatically when an opening brace is typed, if you so choose. You can also opt to skip closing braces, which means that when the cursor is set immediately before a closing brace and then the \} key is pressed, the editor will simply skip that brace rather than inserting a new one. You may also choose for \texnicle to automatically replace opening quotation marks (\keys{\shiftkey + '}) with two inverted apostrophes (\keys{`}). Line numbering and code folding (for \verb|\begin| and \verb|\end| environments) can be turned on and off here. Line highlighting and the highlighting of matching words can also be edited.
 
 \texnicle is happy to save a project automatically when compiling the document, but if you want to turn off this feature, it is located under the General tab. You can also toggle whether \texnicle restores project tabs when opening a project. Finally, the default file encoding can be set to any one of a number of encoding options. The default is Unicode (UTF-8).
 
@@ -20,7 +20,7 @@ The second tab in the Preferences window is the Typesetting pane. This concerns 
 
 Typesetting options include the ability to clear the consoles upon typesetting a document, the number of seconds between Live Updates, and a few other tweaks for the typesetting process. Aside from clearing the console and the amount of time between Live Updates, changes made under the Typesetting subcategory of this preference pane affect the default values of new projects rather than the existing project. This means that changing the default typesetting engine, for example, under this preference pane will not affect the engine used for any existing projects; that option is changed in the Project Settings tab of the Navigator on a by-project basis.
 
-There are many options for syntax checking are possible. These are done with the |chtex| binary from your \LaTeX\ installation. The path for this may need to be re-configured if you do not have a stock installation of MacTeX on your machine. Syntax checking can be turned on and off from this tab under the Typesetting preference pane.
+There are many options for syntax checking are possible. These are done with the \verb|chtex| binary from your \LaTeX\ installation. The path for this may need to be re-configured if you do not have a stock installation of MacTeX on your machine. Syntax checking can be turned on and off from this tab under the Typesetting preference pane.
 
 Typesetting engines are edited and created under the Engines tab of the Typesetting pane. Everything that has to do with engines is discussed in section \ref{reference.engines}.
 
@@ -42,13 +42,13 @@ The Commands pane is home to many of the powerful and most convenient features \
 
 The first tab is the Commands tab, which controls command completion. When you begin typing a command, \texnicle can be set to bring up a list of default commands that match what you have typed. This function can be turned on or off from within this pane. When the function is turned off, it will not automatically show the completion list; however, the completion list may still be viewed by clicking \menu{Edit > Smart Complete} or by pressing \keys{\esckey}. The Commands tab is also where you can define custom commands that will appear in this menu.
 
-The second tab controls citation completion. When any citation command (either a default command like |\cite|, |\citet|, etc.\ or a custom command like |\cites|) is typed, \texnicle will show a list of possible citations that match the key you have typed between the braces based on the bibliography files referenced in your document. As with command completion, this function can be turned on and off at will.
+The second tab controls citation completion. When any citation command (either a default command like \verb|\cite|, \verb|\citet|, etc.\ or a custom command like \verb|\cites|) is typed, \texnicle will show a list of possible citations that match the key you have typed between the braces based on the bibliography files referenced in your document. As with command completion, this function can be turned on and off at will.
 
-The third tab, References, does the same thing for |\label| and |\ref| commands. When typing |\ref| (or a similar referencing command defined by the user and added to this list), a list of labels within the document or project matching what you have typed will be displayed. This can be turned off.
+The third tab, References, does the same thing for \verb|\label| and \verb|\ref| commands. When typing \verb|\ref| (or a similar referencing command defined by the user and added to this list), a list of labels within the document or project matching what you have typed will be displayed. This can be turned off.
 
-The File tab does the same thing for |\input| and |\include| commands, which can be turned off. The |.tex| file extension is left off, as expected.
+The File tab does the same thing for \verb|\input| and \verb|\include| commands, which can be turned off. The \verb|.tex| file extension is left off, as expected.
 
-Finally, the Begin tab controls an autocomplete list for |\begin{environment}| commands. Default environments are included, but you may add to or delete from this list as you wish. You can also ask \texnicle to auto-insert an |\end{environment}| command when you input a carriage return after beginning an environment.
+Finally, the Begin tab controls an autocomplete list for \verb|\begin{environment}| commands. Default environments are included, but you may add to or delete from this list as you wish. You can also ask \texnicle to auto-insert an \verb|\end{environment}| command when you input a carriage return after beginning an environment.
 
 \subsection{Palette \& Library}
 \label{reference.prefs.palettelibrary}
@@ -112,7 +112,7 @@ To add a category of clippings, click the \menu{+} button under ``Categories.'' 
 
 Adding clippings is as easy as writing the code and then pasting it into a new clipping. After clicking the \menu{+} button, two options are given: ``New clip'' and ``New from pasteboard.'' The former will open a new clipping in the list; double-click to edit. The latter will automatically create a clipping based on copied text.
 
-Once your clip has been created, it's a good idea to set a command for the clip for easy access. This is done in the third panel of the clipping library. To use a clipping by invoking the command, type |#(command-shortcut)| into the editor window. For example, to insert a table into your document quickly and easily, type |#tbl| in the editor window where you want a new table to appear. If the shortcut command is valid, it will be highlighted in yellow as in Figure \ref{fig:texnicle-validclip}.
+Once your clip has been created, it's a good idea to set a command for the clip for easy access. This is done in the third panel of the clipping library. To use a clipping by invoking the command, type \verb|#(command-shortcut)| into the editor window. For example, to insert a table into your document quickly and easily, type \verb|#tbl| in the editor window where you want a new table to appear. If the shortcut command is valid, it will be highlighted in yellow as in Figure \ref{fig:texnicle-validclip}.
 
 \noted{When you create your own commands, the \# symbol should be excluded from the ``Command'' input field. For example, to create a shortcut that will work by typing \texttt{\#shortcut}, you should input only ``shortcut'' in the ``Command'' field of the clipping editor.}
 
@@ -124,7 +124,7 @@ Once your clip has been created, it's a good idea to set a command for the clip 
 \end{figure}
 
 
-Once the shortcut command turns yellow, press \keys{\returnkey} to insert the clip. The |#ben| command (shortcut for an |enumerate| environment) will yield the something like Figure \ref{fig:texnicle-benexpanded} in the editor:
+Once the shortcut command turns yellow, press \keys{\returnkey} to insert the clip. The \verb|#ben| command (shortcut for an \verb|enumerate| environment) will yield the something like Figure \ref{fig:texnicle-benexpanded} in the editor:
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.3\textwidth]{TeXnicle-Images/texnicle-expandedben.png}
@@ -132,7 +132,7 @@ Once the shortcut command turns yellow, press \keys{\returnkey} to insert the cl
 \label{fig:texnicle-expandedben}
 \end{figure}
 
-Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in \@ symbols. For example, to create a shortcut for text in small caps (the |\smallcaps| command), we will create a new clipping that contains |\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as |#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customclipplaceholder} below.
+Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placeholders that can be replaced by the user. These look like the bubbles ``item1'' and ``item2'' in the figure. In clippings you define yourself, include placeholder text by enclosing the text in \@ symbols. For example, to create a shortcut for text in small caps (the \verb|\smallcaps| command), we will create a new clipping that contains \verb|\textsc{@smallcaps@}|. When the clipping is used (perhaps with a command we define such as \verb|#sc|), the word ``smallcaps'' will appear in a placeholder, as in Figure \ref{fig:texnicle-customclipplaceholder} below.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{TeXnicle-Images/texnicle-customcliptag.png}
@@ -142,7 +142,7 @@ Some clippings, like that in Figure \ref{fig:texnicle-expandedben} have placehol
 
 \section{Jump Bar}
 \label{reference.jumpbar}
-The Jump Bar is located at the top of the editing window between the syntax indicator on the left and two buttons (\keys{\%\%\ensuremath{+}} and \keys{unfold all}). This bar allows you to jump to any labelled section in the visible document, from |part| to |subparagraph|. Furthermore, the button to the right (\keys{\%\%\ensuremath{+}}) allows you to instantly mark up text with commented notes that appear in the Jump Bar.
+The Jump Bar is located at the top of the editing window between the syntax indicator on the left and two buttons (\keys{\%\%\ensuremath{+}} and \keys{unfold all}). This bar allows you to jump to any labelled section in the visible document, from \verb|part| to \verb|subparagraph|. Furthermore, the button to the right (\keys{\%\%\ensuremath{+}}) allows you to instantly mark up text with commented notes that appear in the Jump Bar.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\textwidth]{TeXnicle-Images/texnicle-jumpbar.png}
@@ -174,7 +174,7 @@ Note that this feature marks the line number, not the text. For example, if you 
 
 Bookmarks work better if line numbering is turned on; this is controlled under \menu{Preferences\ldots > General}.
 
-Another useful feature of \texnicle is code folding. Environments enclosed by |\begin| and |\end| commands may be collapsed using the arrow buttons between line numbering (if it's turned on) and the editor window, as in Figure \ref{fig:texnicle-codefold}.
+Another useful feature of \texnicle is code folding. Environments enclosed by \verb|\begin| and \verb|\end| commands may be collapsed using the arrow buttons between line numbering (if it's turned on) and the editor window, as in Figure \ref{fig:texnicle-codefold}.
 
 \begin{figure}[htbp]
 \begin{minipage}{0.55\textwidth}
@@ -191,7 +191,7 @@ Another useful feature of \texnicle is code folding. Environments enclosed by |\
 \label{fig:texnicle-codefold}
 \end{figure}                  
  
-When an environment is folded, the fold icon turns red. Notice the jump in line numbering following a fold, as well. The yellow ellipsis icon between |\begin| and |\end| is another indicator that code has been folded. One advantage to having code folding activated is that |\begin| commands without matching |\end| commands are marked with a red X over the code folding arrow.
+When an environment is folded, the fold icon turns red. Notice the jump in line numbering following a fold, as well. The yellow ellipsis icon between \verb|\begin| and \verb|\end| is another indicator that code has been folded. One advantage to having code folding activated is that \verb|\begin| commands without matching \verb|\end| commands are marked with a red X over the code folding arrow.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\textwidth]{TeXnicle-Images/texnicle-codefold-nomatch.png}
@@ -205,7 +205,7 @@ Beyond \menu{Undo}, \menu{Select All}, and \menu{Speech}, the \menu{Edit} menu h
 
 \subsection[Paste as Image]{\menu{Edit > Paste as Image}}
 \label{reference.edit.pasteimg}
-After copying an image to the pasteboard, you can insert it into \texnicle in a |figure| environment quickly and easily under \menu{Edit > Paste as Image} or with the keyboard shortcut \keys{\ctlkey + \cmdkey + V}. You will be asked to name the image and save it on your hard drive; after that, your image will be inserted in a stock |Figure| environment.
+After copying an image to the pasteboard, you can insert it into \texnicle in a \verb|figure| environment quickly and easily under \menu{Edit > Paste as Image} or with the keyboard shortcut \keys{\ctlkey + \cmdkey + V}. You will be asked to name the image and save it on your hard drive; after that, your image will be inserted in a stock \verb|Figure| environment.
 
 In a project, the image will automatically appear under the last folder in your project tree that was selected. If you want the image to be loaded into a particular folder, click the folder before pasting the image. If you forget to do this, drag the image within the project file list to the desired folder.
 
@@ -227,7 +227,7 @@ A few other goodies are included in under \menu{Edit} that should be briefly men
 \label{reference.editortable}
 The \menu{Editor} menu also holds a few less obvious \texnicle features. This section will give a quick overview of their functions.
 
-\menu{Editor > Insert Table} will insert a blank a |tabular| environment (contained within a |table| environment) with a desired number of columns and rows. Placeholders will be inserted in each cell to facilitate editing. An example table with two columns and three rows is shown in Figure \ref{fig:texnicle-inserttable}.
+\menu{Editor > Insert Table} will insert a blank a \verb|tabular| environment (contained within a \verb|table| environment) with a desired number of columns and rows. Placeholders will be inserted in each cell to facilitate editing. An example table with two columns and three rows is shown in Figure \ref{fig:texnicle-inserttable}.
 
 \begin{figure}[htbp]
 \centering

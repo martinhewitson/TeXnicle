@@ -53,7 +53,7 @@ The \keys{Typeset} button (or \keys{\cmdkey + R}) will run your chosen engine on
 %\label{fig:texnicle-mainediting}
 %\end{figure}
 
-The second part is the main editing window, located in the center. Fonts, colours, syntax highlighting, line break length, and much more can be changed under \menu{Preferences\ldots > General} and \menu{Preferences\ldots > Font \& Colors}. This is where you will write your document. In project windows, there is a bar of tabs above the main text window which shows all open documents in the project. Below the tab bar (if applicable) is a \menu{Jump to section\ldots} bar, which will allow you to jump to any section or bookmark in the open document quickly. This is called the Jump Bar and its features are detailed in section \ref{reference.jumpbar}. To the left of this bar is the syntax indicator; green indicates that there are no syntax errors in the open document, while red indicates there is at least one error. Clicking the indicator will display the line numbers, descriptions, and samples of the offenses. To edit what offenses the |chktex| engine looks for, look under \menu{Preferences\ldots > Typesetting > Syntax Checking}.
+The second part is the main editing window, located in the center. Fonts, colours, syntax highlighting, line break length, and much more can be changed under \menu{Preferences\ldots > General} and \menu{Preferences\ldots > Font \& Colors}. This is where you will write your document. In project windows, there is a bar of tabs above the main text window which shows all open documents in the project. Below the tab bar (if applicable) is a \menu{Jump to section\ldots} bar, which will allow you to jump to any section or bookmark in the open document quickly. This is called the Jump Bar and its features are detailed in section \ref{reference.jumpbar}. To the left of this bar is the syntax indicator; green indicates that there are no syntax errors in the open document, while red indicates there is at least one error. Clicking the indicator will display the line numbers, descriptions, and samples of the offenses. To edit what offenses the \verb|chktex| engine looks for, look under \menu{Preferences\ldots > Typesetting > Syntax Checking}.
 
 \subsubsection{Synctex support}
 
@@ -105,7 +105,7 @@ The top section of the Clippings Library lists categories of clippings. \texnicl
 
 Below the categories panel is the clipping panel. Here, \texnicle will list the code clippings for a selected category (on the right) and render previews of the output (on the left). To refresh a preview, click the round arrow.
 
-The bottom panel allows you to edit codes, copy the text of a clipping to the pasteboard, and insert clippings into your document. You may also set shortcuts here. To use a shortcut, type a |#| before the shortcut code in the main editor window; the code will turn yellow and expand by pressing \keys{\returnkey}
+The bottom panel allows you to edit codes, copy the text of a clipping to the pasteboard, and insert clippings into your document. You may also set shortcuts here. To use a shortcut, type a \verb|#| before the shortcut code in the main editor window; the code will turn yellow and expand by pressing \keys{\returnkey}
 
 For more information on the Clippings Library, see \ref{reference.clippings}. To open this Navigator pane quickly, use the keyboard shortcut \keys{\cmdkey + \optkey + 3}.
 \pagebreak\clearpage
@@ -133,7 +133,7 @@ The fifth component only appears in the Navigators pane for projects and not for
 \caption{Project Information}
 \label{fig:texnicle-nav-info}
 \end{wrapfigure}
-The sixth component is the Project Information tab, represented by a lowercase letter \textsl{i}. This tab appears for both projects and for stand-alone \LaTeX\ documents. This contains many important features: a list of coding errors, a list of misspelled words, a list of labels, a citation list, and a list of new commands that have been declared in each document using |\newcommand| and |\renewcommand|. In a stand-alone document, this shows everything for the open file; for a project, this shows information for every document in the project. Projects also include a tab within this section for project bookmarks
+The sixth component is the Project Information tab, represented by a lowercase letter \textsl{i}. This tab appears for both projects and for stand-alone \LaTeX\ documents. This contains many important features: a list of coding errors, a list of misspelled words, a list of labels, a citation list, and a list of new commands that have been declared in each document using \verb|\newcommand| and \verb|\renewcommand|. In a stand-alone document, this shows everything for the open file; for a project, this shows information for every document in the project. Projects also include a tab within this section for project bookmarks
 
 \subsubsection{Project Settings}
 \begin{wrapfigure}{o}{0.5\textwidth}
@@ -141,7 +141,7 @@ The sixth component is the Project Information tab, represented by a lowercase l
 \caption{Project Settings in the Navigator}
 \label{fig:texnicle-nav-projsettings}
 \end{wrapfigure}
-The final component is the Project Settings tab, which appears for all documents and projects. It allows you to choose the engine used to compile your document, whether to run |bibtex| and |ps2pdf|, how many times to run |latex|, and more. The settings chosen in this panel will stay the same for a project or document regardless of any changes made in the Preferences pane. Changes in the Navigator govern the open document or project, whereas changes in Preferences govern new documents and projects.
+The final component is the Project Settings tab, which appears for all documents and projects. It allows you to choose the engine used to compile your document, whether to run \verb|bibtex| and \verb|ps2pdf|, how many times to run \verb|latex|, and more. The settings chosen in this panel will stay the same for a project or document regardless of any changes made in the Preferences pane. Changes in the Navigator govern the open document or project, whereas changes in Preferences govern new documents and projects.
 \pagebreak\clearpage
 
 \subsection{Integrated PDF Viewer}
@@ -191,11 +191,11 @@ While \texnicle can of course work with simple \LaTeX\ documents, its true power
 \end{figure}
 
 When you opt to create a new project, you have four options:
-	\begin{enumerate*}
+\begin{enumerate*}
 		\item \textbf{Empty Project} creates a new empty \texnicle project to which you can add your files (or from within which you can create new files).
 		\item \textbf{New Article} creates a new \texnicle project with a standard article main file and folders for additional files, images, and other resources.
 		\item \textbf{From Tempate\ldots} creates a new \texnicle project from an existing project template.
-		\item \textbf{Build Project\ldots} creates a new \texnicle project containing the files referenced by a main file (using |\input| and |\include| commands). You may choose either a {\TeX} file or a directory. If a directory is chosen, the main file used is the first file found with a |\documentclass| command.
-		\end{enumerate*}
+		\item \textbf{Build Project\ldots} creates a new \texnicle project containing the files referenced by a main file (using \verb|\input| and \verb|\include| commands). You may choose either a {\TeX} file or a directory. If a directory is chosen, the main file used is the first file found with a \verb|\documentclass| command.
+\end{enumerate*}
 
 \texnicle will then create the project based on your selection.
