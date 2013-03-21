@@ -205,6 +205,10 @@
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
 		254C1E0B14F382B400925515 /* TPProjectTemplateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */; };
 		254C1E0C14F382B400925515 /* TPProjectTemplateListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254C1E0A14F382B400925515 /* TPProjectTemplateListViewController.xib */; };
+		254D16A416FAE36A00A31BE8 /* TPMetadataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254D16A316FAE36A00A31BE8 /* TPMetadataViewController.m */; };
+		254D16A716FAE49000A31BE8 /* TPMetadataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 254D16A616FAE49000A31BE8 /* TPMetadataItem.m */; };
+		254D16A916FAE53600A31BE8 /* TPMetadataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */; };
+		254D16AC16FAE66500A31BE8 /* TPMetadataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */; };
 		254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254FEEA7143ECEF4008B5B12 /* latexmk.engine */; };
 		2552029113E86619007F191F /* rightArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029013E86619007F191F /* rightArrow.icns */; };
 		2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552029613E86C1E007F191F /* HHValidatedButton.m */; };
@@ -220,12 +224,10 @@
 		255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D815B48E1B004290CC /* commandsTabBarImage.icns */; };
 		255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */; };
 		255A16E615B52B06004290CC /* TPCitationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16E415B52B06004290CC /* TPCitationsViewController.m */; };
-		255A16E715B52B06004290CC /* TPCitationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255A16E515B52B06004290CC /* TPCitationsViewController.xib */; };
 		255A16EA15B52B14004290CC /* TPCitationSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16E915B52B14004290CC /* TPCitationSet.m */; };
 		255A16F015B53C8B004290CC /* TPCitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16EF15B53C8B004290CC /* TPCitation.m */; };
 		255A16F315B545E2004290CC /* TPNewCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16F215B545E2004290CC /* TPNewCommand.m */; };
 		255A16F715B54733004290CC /* TPNewCommandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16F515B54733004290CC /* TPNewCommandsViewController.m */; };
-		255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255A16F615B54733004290CC /* TPNewCommandsViewController.xib */; };
 		255A16FB15B5474B004290CC /* TPCommandSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A16FA15B5474B004290CC /* TPCommandSet.m */; };
 		255C559F1652347E00F77A50 /* UpTeX.engine in Resources */ = {isa = PBXBuildFile; fileRef = 255C559E1652347E00F77A50 /* UpTeX.engine */; };
 		255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB84813E56CB1007629C0 /* TPDescriptionView.m */; };
@@ -366,7 +368,6 @@
 		25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */; };
 		25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */; };
 		25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */; };
-		25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */; };
 		25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */; };
 		25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB154215B444FC007A7FDF /* TPWarningSet.m */; };
 		25BB23EF14B772910015D4C1 /* TPSupportedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB23EE14B772910015D4C1 /* TPSupportedFile.m */; };
@@ -418,7 +419,6 @@
 		25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B415B4602E009E086A /* labelsTabBarImage.icns */; };
 		25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */; };
 		25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BE15B47887009E086A /* TPLabelsViewController.m */; };
-		25DB36C115B47887009E086A /* TPLabelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DB36BF15B47887009E086A /* TPLabelsViewController.xib */; };
 		25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C315B478DA009E086A /* TPLabelsSet.m */; };
 		25DB36C715B47D9B009E086A /* TPLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C615B47D9B009E086A /* TPLabel.m */; };
 		25DBBDD914EB812400C1D0CF /* MHWhitebackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */; };
@@ -809,6 +809,13 @@
 		254C1E0814F382B400925515 /* TPProjectTemplateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateListViewController.h; sourceTree = "<group>"; };
 		254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateListViewController.m; sourceTree = "<group>"; };
 		254C1E0A14F382B400925515 /* TPProjectTemplateListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateListViewController.xib; sourceTree = "<group>"; };
+		254D16A216FAE36A00A31BE8 /* TPMetadataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataViewController.h; sourceTree = "<group>"; };
+		254D16A316FAE36A00A31BE8 /* TPMetadataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataViewController.m; sourceTree = "<group>"; };
+		254D16A516FAE49000A31BE8 /* TPMetadataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataItem.h; sourceTree = "<group>"; };
+		254D16A616FAE49000A31BE8 /* TPMetadataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataItem.m; sourceTree = "<group>"; };
+		254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPMetadataItemView.xib; sourceTree = "<group>"; };
+		254D16AA16FAE66500A31BE8 /* TPMetadataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataSet.h; sourceTree = "<group>"; };
+		254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataSet.m; sourceTree = "<group>"; };
 		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = latexmk.engine; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../HHValidatedButton.h; sourceTree = "<group>"; };
@@ -831,7 +838,6 @@
 		255A16D915B48E1B004290CC /* commandsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = commandsTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		255A16E315B52B06004290CC /* TPCitationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCitationsViewController.h; sourceTree = "<group>"; };
 		255A16E415B52B06004290CC /* TPCitationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCitationsViewController.m; sourceTree = "<group>"; };
-		255A16E515B52B06004290CC /* TPCitationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPCitationsViewController.xib; sourceTree = "<group>"; };
 		255A16E815B52B14004290CC /* TPCitationSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCitationSet.h; sourceTree = "<group>"; };
 		255A16E915B52B14004290CC /* TPCitationSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCitationSet.m; sourceTree = "<group>"; };
 		255A16EE15B53C8B004290CC /* TPCitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCitation.h; sourceTree = "<group>"; };
@@ -840,7 +846,6 @@
 		255A16F215B545E2004290CC /* TPNewCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TPNewCommand.m; path = ../Model/TPNewCommand.m; sourceTree = "<group>"; };
 		255A16F415B54733004290CC /* TPNewCommandsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewCommandsViewController.h; sourceTree = "<group>"; };
 		255A16F515B54733004290CC /* TPNewCommandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewCommandsViewController.m; sourceTree = "<group>"; };
-		255A16F615B54733004290CC /* TPNewCommandsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPNewCommandsViewController.xib; sourceTree = "<group>"; };
 		255A16F915B5474B004290CC /* TPCommandSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCommandSet.h; sourceTree = "<group>"; };
 		255A16FA15B5474B004290CC /* TPCommandSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCommandSet.m; sourceTree = "<group>"; };
 		255C559E1652347E00F77A50 /* UpTeX.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = UpTeX.engine; sourceTree = "<group>"; };
@@ -1070,7 +1075,6 @@
 		25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoToolbarBackgroundView.m; sourceTree = "<group>"; };
 		25BB153915B431F6007A7FDF /* TPWarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningsViewController.h; sourceTree = "<group>"; };
 		25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningsViewController.m; sourceTree = "<group>"; };
-		25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPWarningsViewController.xib; sourceTree = "<group>"; };
 		25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FileEntity+Warnings.h"; sourceTree = "<group>"; };
 		25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FileEntity+Warnings.m"; sourceTree = "<group>"; };
 		25BB154115B444FC007A7FDF /* TPWarningSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningSet.h; sourceTree = "<group>"; };
@@ -1154,7 +1158,6 @@
 		25DB36B515B4602E009E086A /* labelsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = labelsTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25DB36BD15B47887009E086A /* TPLabelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabelsViewController.h; sourceTree = "<group>"; };
 		25DB36BE15B47887009E086A /* TPLabelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsViewController.m; sourceTree = "<group>"; };
-		25DB36BF15B47887009E086A /* TPLabelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPLabelsViewController.xib; sourceTree = "<group>"; };
 		25DB36C215B478DA009E086A /* TPLabelsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabelsSet.h; sourceTree = "<group>"; };
 		25DB36C315B478DA009E086A /* TPLabelsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsSet.m; sourceTree = "<group>"; };
 		25DB36C515B47D9B009E086A /* TPLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabel.h; sourceTree = "<group>"; };
@@ -1348,6 +1351,7 @@
 				25C72A5714D451B600A81DEE /* Template Editor */,
 				250848C2154B1E800001685A /* Other Files Viewer */,
 				25C87DCA15A871D600E61E25 /* SpellChecker */,
+				254D16A016FAE27F00A31BE8 /* MetadataViews */,
 				255A16DD15B48FEB004290CC /* CommandsView */,
 				255A16DC15B48FE1004290CC /* CitationsView */,
 				25DB36BC15B47819009E086A /* LabelsView */,
@@ -1897,6 +1901,29 @@
 			path = PDFViewer;
 			sourceTree = "<group>";
 		};
+		254D16A016FAE27F00A31BE8 /* MetadataViews */ = {
+			isa = PBXGroup;
+			children = (
+				254D16A116FAE28F00A31BE8 /* TPMetadataViewController */,
+			);
+			name = MetadataViews;
+			sourceTree = "<group>";
+		};
+		254D16A116FAE28F00A31BE8 /* TPMetadataViewController */ = {
+			isa = PBXGroup;
+			children = (
+				254D16A216FAE36A00A31BE8 /* TPMetadataViewController.h */,
+				254D16A316FAE36A00A31BE8 /* TPMetadataViewController.m */,
+				254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */,
+				254D16A516FAE49000A31BE8 /* TPMetadataItem.h */,
+				254D16A616FAE49000A31BE8 /* TPMetadataItem.m */,
+				254D16AA16FAE66500A31BE8 /* TPMetadataSet.h */,
+				254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */,
+			);
+			name = TPMetadataViewController;
+			path = src/TPMetadataViewController;
+			sourceTree = "<group>";
+		};
 		2553F70314F11D5A00DF0BD3 /* templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -1910,7 +1937,6 @@
 			children = (
 				255A16E315B52B06004290CC /* TPCitationsViewController.h */,
 				255A16E415B52B06004290CC /* TPCitationsViewController.m */,
-				255A16E515B52B06004290CC /* TPCitationsViewController.xib */,
 				255A16E815B52B14004290CC /* TPCitationSet.h */,
 				255A16E915B52B14004290CC /* TPCitationSet.m */,
 				255A16EE15B53C8B004290CC /* TPCitation.h */,
@@ -1925,7 +1951,6 @@
 			children = (
 				255A16F415B54733004290CC /* TPNewCommandsViewController.h */,
 				255A16F515B54733004290CC /* TPNewCommandsViewController.m */,
-				255A16F615B54733004290CC /* TPNewCommandsViewController.xib */,
 				255A16F915B5474B004290CC /* TPCommandSet.h */,
 				255A16FA15B5474B004290CC /* TPCommandSet.m */,
 				255A16F115B545E1004290CC /* TPNewCommand.h */,
@@ -2286,7 +2311,6 @@
 				25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */,
 				25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */,
 				25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */,
-				25BB153B15B431F6007A7FDF /* TPWarningsViewController.xib */,
 				25BB154115B444FC007A7FDF /* TPWarningSet.h */,
 				25BB154215B444FC007A7FDF /* TPWarningSet.m */,
 			);
@@ -2437,7 +2461,6 @@
 			children = (
 				25DB36BD15B47887009E086A /* TPLabelsViewController.h */,
 				25DB36BE15B47887009E086A /* TPLabelsViewController.m */,
-				25DB36BF15B47887009E086A /* TPLabelsViewController.xib */,
 				25DB36C215B478DA009E086A /* TPLabelsSet.h */,
 				25DB36C315B478DA009E086A /* TPLabelsSet.m */,
 				25DB36C515B47D9B009E086A /* TPLabel.h */,
@@ -2724,16 +2747,12 @@
 				25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */,
 				25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */,
 				25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */,
-				25BB153D15B431F6007A7FDF /* TPWarningsViewController.xib in Resources */,
 				25DB36B615B4602E009E086A /* labelsTabBarImage.icns in Resources */,
 				25DB36B715B4602E009E086A /* labelsTabBarImageDepressed.icns in Resources */,
-				25DB36C115B47887009E086A /* TPLabelsViewController.xib in Resources */,
 				255A16D515B48694004290CC /* citationsTabBarImageDepressed.icns in Resources */,
 				255A16D615B48694004290CC /* citationsTabBarImage.icns in Resources */,
 				255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */,
 				255A16DB15B48E1B004290CC /* commandsTabBarImageDepressed.icns in Resources */,
-				255A16E715B52B06004290CC /* TPCitationsViewController.xib in Resources */,
-				255A16F815B54733004290CC /* TPNewCommandsViewController.xib in Resources */,
 				25AD5A0915BAB29100737610 /* groupFolderOpen.icns in Resources */,
 				25AD5A0A15BAB29100737610 /* groupFolder.icns in Resources */,
 				2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */,
@@ -2756,6 +2775,7 @@
 				2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */,
 				2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */,
 				2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */,
+				254D16A916FAE53600A31BE8 /* TPMetadataItemView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3068,6 +3088,9 @@
 				25CFBD1A16D2D0B00025B35D /* TPDocumentReportWindowController.m in Sources */,
 				25CFBD1E16D2D3350025B35D /* TPTexcountDriver.m in Sources */,
 				2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */,
+				254D16A416FAE36A00A31BE8 /* TPMetadataViewController.m in Sources */,
+				254D16A716FAE49000A31BE8 /* TPMetadataItem.m in Sources */,
+				254D16AC16FAE66500A31BE8 /* TPMetadataSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3203,7 +3226,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3226,7 +3249,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3252,7 +3275,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3283,7 +3306,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
