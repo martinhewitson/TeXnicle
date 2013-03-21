@@ -27,11 +27,11 @@
 
 #import <Foundation/Foundation.h>
 #import "BibliographyEntry.h"
+#import "TPMetadataItem.h"
 
-@interface TPCitation : NSObject
+@interface TPCitation : TPMetadataItem
 
 @property (strong) BibliographyEntry *entry;
-@property (unsafe_unretained) id file;
 
 + (id) citationWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;
 - (id) initWithFile:(id)aFile entry:(BibliographyEntry*)anEntry;

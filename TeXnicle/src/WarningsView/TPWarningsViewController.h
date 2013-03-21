@@ -27,30 +27,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
-
-@class TPWarningsViewController;
-@class TPSyntaxError;
+#import "TPMetadataViewController.h"
 
 @protocol TPWarningsViewDelegate <NSObject>
 
-- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController*)warningsView;
-- (NSArray*) warningsView:(TPWarningsViewController*)warningsView warningsForFile:(id)file;
-- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError;
-
 @end
 
-@interface TPWarningsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPWarningsViewDelegate> {
-@private
-  BOOL firstView;
-}
-
-@property (unsafe_unretained) id<TPWarningsViewDelegate> delegate;
-@property (strong) NSMutableArray *sets;
-
-- (id) initWithDelegate:(id<TPWarningsViewDelegate>)aDelegate;
-
-- (void) updateUI;
-- (IBAction)reveal:(id)sender;
-- (void) tearDown;
+@interface TPWarningsViewController : TPMetadataViewController
 
 @end

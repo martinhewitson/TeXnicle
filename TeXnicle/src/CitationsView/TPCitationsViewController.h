@@ -27,31 +27,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
+#import "TPMetadataViewController.h"
 
 @class TPCitationsViewController;
 @class TPCitation;
 
-@protocol TPCitationsViewDelegate <NSObject>
-
-- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView;
-- (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file;
-- (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation;
-
+@protocol TPCitationsViewDelegate <TPMetadataViewDelegate>
 @end
 
 
-@interface TPCitationsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPCitationsViewDelegate> {
-@private
-  BOOL firstView;
-}
+@interface TPCitationsViewController : TPMetadataViewController
 
-@property (unsafe_unretained) id<TPCitationsViewDelegate> delegate;
-@property (strong) NSMutableArray *sets;
-
-- (id) initWithDelegate:(id<TPCitationsViewDelegate>)aDelegate;
-
-- (void) updateUI;
-- (IBAction)reveal:(id)sender;
-- (void) tearDown;
 
 @end

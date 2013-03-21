@@ -61,6 +61,11 @@
 }
 
 
+- (id) value
+{
+  return self.argument;
+}
+
 - (NSString*)string
 {
   return self.argument;

@@ -26,16 +26,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataSet.h"
 
 @class FileEntity;
 
-@interface TPLabelsSet : NSObject
-
-@property (strong) NSArray *labels;
-@property (strong) id file;
-@property (unsafe_unretained, readonly) NSString *name;
-
-- (id) initWithFile:(FileEntity*)aFile labels:(NSArray*)someLabels;
+@interface TPLabelsSet : TPMetadataSet
 
 
 @end

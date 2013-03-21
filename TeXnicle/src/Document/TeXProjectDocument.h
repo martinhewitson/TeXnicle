@@ -57,6 +57,8 @@
 #import "TPNewCommandsViewController.h"
 #import "TPDocumentReportWindowController.h"
 
+#import "TPMetadataViewController.h"
+
 @class ProjectEntity;
 @class ProjectItemEntity;
 @class ProjectItemTreeController;
@@ -65,7 +67,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, 
+@interface TeXProjectDocument : NSPersistentDocument <TPMetadataViewDelegate, TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate,
 TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,

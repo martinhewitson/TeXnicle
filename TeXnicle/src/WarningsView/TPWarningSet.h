@@ -26,15 +26,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataSet.h"
 
 @class FileEntity;
 
-@interface TPWarningSet : NSObject
+@interface TPWarningSet : TPMetadataSet
 
-@property (strong) NSArray *errors;
-@property (strong) id file;
-@property (unsafe_unretained, readonly) NSString *name;
-
-- (id) initWithFile:(FileEntity*)aFile errors:(NSArray*)someErrors;
 
 @end

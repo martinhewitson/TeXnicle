@@ -26,10 +26,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataItem.h"
 
-@interface TPSyntaxError : NSObject
+@interface TPSyntaxError : TPMetadataItem
 
-@property (unsafe_unretained) id file;
 @property (strong) NSNumber *line;
 @property (copy) NSString* message;
 

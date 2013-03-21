@@ -1,8 +1,8 @@
 //
-//  FileEntity+Warnings.m
+//  TPMetadataSet.m
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 16/7/12.
+//  Created by Martin Hewitson on 17/7/12.
 //  Copyright (c) 2012 bobsoft. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
 //      * Redistributions in binary form must reproduce the above copyright
 //        notice, this list of conditions and the following disclaimer in the
 //        documentation and/or other materials provided with the distribution.
-//  
+//
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,9 +25,35 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "FileEntity+Warnings.h"
+#import "TPMetadataSet.h"
+#import "FileEntity.h"
 
-@implementation FileEntity (Warnings)
+@implementation TPMetadataSet
+
+- (void) dealloc
+{
+  self.file = nil;
+}
+
+
+- (id) initWithFile:(FileEntity*)aFile items:(NSArray *)aList
+{
+  self = [super init];
+  if (self) {
+    self.file = aFile;
+    self.items = aList;
+  }
+  return self;
+}
+
+
+- (NSString*) name
+{
+  if ([self.file isKindOfClass:[NSURL class]]) {
+    return [self.file lastPathComponent];
+  }
+  return [self.file valueForKey:@"name"];
+}
 
 - (NSAttributedString*)selectedDisplayString
 {
@@ -36,38 +62,34 @@
 
 - (NSAttributedString*)displayString
 {
-  return [self stringForDisplayWithColor:[NSColor colorWithDeviceRed:220.0/255.0 green:190.0/255.0 blue:100.0/255.0 alpha:1.0] detailsColor:[NSColor lightGrayColor]];
+  return [self stringForDisplayWithColor:[NSColor darkGrayColor] detailsColor:[NSColor lightGrayColor]];
 }
 
 - (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
 {
-  
-  
-  NSString *text = [self name];
-  
-  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
-  
-  NSString *warningCountString = nil; 
-  if ([self.metadata.syntaxErrors count] >= 1000) {
-    warningCountString = [NSString stringWithFormat:@" [>%lu] ", [self.metadata.syntaxErrors count]];
+  NSString *text = nil;
+  if ([self.file isKindOfClass:[FileEntity class]]) {
+    text = [self.file valueForKey:@"name"];
   } else {
-    warningCountString = [NSString stringWithFormat:@" [%lu] ", [self.metadata.syntaxErrors count]];
+    text = [self.file lastPathComponent];
   }
-  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:warningCountString];
-  [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+  
+  NSString *countString = nil;
+  countString = [NSString stringWithFormat:@" [%lu] ", [self.items count]];
+  
+  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:countString];
+  [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];
   [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
   [att appendAttributedString:str];
   
   // apply paragraph
   NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
   
   return att;
 }
-
-
-
 
 @end

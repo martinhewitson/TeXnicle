@@ -34,131 +34,14 @@
 
 @interface TPWarningsViewController ()
 
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-
 @end
 
 @implementation TPWarningsViewController
 
-- (id) initWithDelegate:(id<TPWarningsViewDelegate>)aDelegate 
-{
-  self = [super initWithNibName:@"TPWarningsViewController" bundle:nil];
-  if (self) {
-    // Initialization code here.
-    self.delegate = aDelegate;
-    firstView = YES;
-    self.sets = [NSMutableArray array];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(handleMetadataUpdate:)
-               name:TPFileMetadataWarningsUpdatedNotification
-             object:nil];
-    
-  }
-  
-  return self;
-}
-
-- (void) tearDown
-{
-//  NSLog(@"Tear down %@", self);
-  
-  self.outlineView.dataSource = nil;
-  self.outlineView.delegate = nil;
-  self.outlineView = nil;
-  self.revealButton = nil;
-  
-  [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
-  [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.sets removeAllObjects];
-  self.sets = nil;
-  self.delegate = nil;
-}
-
-- (void) awakeFromNib
-{
-  [self.outlineView setDoubleAction:@selector(outlineViewDoubleClicked)];
-  [self.outlineView setTarget:self];
-  
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
-}
-
-- (void) handleMetadataUpdate:(NSNotification*)aNote
-{  
-  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
-}
-
-- (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
-{
-  if (anItem == self.revealButton) {
-    NSInteger row = [self.outlineView selectedRow];
-    id item = [self.outlineView itemAtRow:row];
-    if ([item isKindOfClass:[TPSyntaxError class]] == NO) {
-      return NO;
-    }
-  }
-  
-  return YES;
-}
-
-// Expand all error sets
-- (IBAction)expandAll:(id)sender
-{
-  for (TPWarningSet *f in [self sets]) {
-    [self.outlineView expandItem:f];
-  }
-}
-
-// Collapse all error sets
-- (IBAction)collapseAll:(id)sender
-{
-  for (TPWarningSet *f in [self sets]) {
-    [self.outlineView collapseItem:f];
-  }
-}
-
-- (IBAction)reveal:(id)sender
-{
-  NSInteger row = [self.outlineView selectedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPSyntaxError class]]) {
-    [self warningsView:self didSelectError:item];
-  }
-}
-
-- (void) outlineViewDoubleClicked
-{
-  NSInteger row = [self.outlineView clickedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPWarningSet class]]) {
-    if ([self.outlineView isItemExpanded:item]) {
-      [self.outlineView collapseItem:item];
-    } else {
-      [self.outlineView expandItem:item];
-    }
-  } else if ([item isKindOfClass:[TPSyntaxError class]]) {
-    [self warningsView:self didSelectError:item];
-  }
-}
-
 #pragma mark -
 #pragma mark OutlineView datasource
 
-- (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPWarningSet class]]) {
-    return YES;
-  }
-  
-  return NO;
-}
+
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {  
@@ -179,60 +62,9 @@
   return nil;
 }
 
-- (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPWarningSet class]]) {
-    TPWarningSet *set = (TPWarningSet*)item;
-    return [set.errors count] > 0;
-  }
-  
-  return NO;
-}
-
-- (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-  if (item == nil) {
-    return [self sortedWarningSets][index];
-  }
-  if ([item isKindOfClass:[TPWarningSet class]]) {
-    TPWarningSet *set = (TPWarningSet*)item;
-    return (set.errors)[index];
-  }
-  
-  return nil;  
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-  if (item == nil) {
-    return [[self sortedWarningSets] count];
-  }
-  
-  if ([item isKindOfClass:[TPWarningSet class]]) {
-    TPWarningSet *set = (TPWarningSet*)item;
-    return [set.errors count];
-  }
-  
-  return 0;
-}
-
-- (NSArray*)sortedWarningSets
-{
-  NSArray *sortedItems = [self.sets sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *first  = [(TPWarningSet*)a valueForKey:@"name"];
-    NSString *second = [(TPWarningSet*)b valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];
-  return sortedItems;
-}
-
 - (void) updateUI
 {
-  NSArray *newFiles = [self warningsViewlistOfFiles:self];
+  NSArray *newFiles = [self metadataViewListOfFiles:self];
   if (newFiles == nil) {
     newFiles = @[];
   }
@@ -250,69 +82,21 @@
   
   // update our files
   for (FileEntity *newFile in newFiles) {
-    TPWarningSet *set = [self setForFile:newFile];
+    TPMetadataSet *set = [self setForFile:newFile];
     if (set == nil) {
-      NSArray *warnings = [self warningsView:self warningsForFile:newFile];
+      NSArray *warnings = [self metadataView:self newItemsForFile:newFile];
       if (warnings && [warnings count] > 0) {
-        set = [[TPWarningSet alloc] initWithFile:newFile errors:warnings];
+        set = [[TPWarningSet alloc] initWithFile:newFile items:warnings];
         [self.sets addObject:set];
       }
     } else {
       // update the errors
-      NSArray *newErrors = [self warningsView:self warningsForFile:newFile];
-      set.errors = newErrors;
+      NSArray *newErrors = [self metadataView:self newItemsForFile:newFile];
+      set.items = newErrors;
     }
   }
-//  NSLog(@"I have now %u sets", [self.files count]);
-//  NSLog(@"   updating %@", self.outlineView);
-  [self.outlineView reloadData];
   
-  if (firstView == YES) {
-    [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
-    firstView = NO;
-  }
-}
-
-- (TPWarningSet*)setForFile:(FileEntity*)aFile
-{
-  for (TPWarningSet *set in self.sets) {
-    if (set.file == aFile) {
-      return set;
-    }
-  }
-  return nil;
-}
-
-#pragma mark -
-#pragma mark OutlineView delegate
-
-
-
-#pragma mark -
-#pragma mark Delegate
-
-- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(warningsViewlistOfFiles:)]) {
-    return [self.delegate warningsViewlistOfFiles:warningsView];
-  }
-  return @[];
-}
-
-- (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(warningsView:warningsForFile:)]) {
-    return [self.delegate warningsView:warningsView warningsForFile:file];
-  }
-  
-  return nil;
-}
-
-- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(warningsView:didSelectError:)]) {
-    [self.delegate warningsView:self didSelectError:anError];
-  }
+  [super updateUI];
 }
 
 @end

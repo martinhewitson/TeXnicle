@@ -102,6 +102,10 @@
   return [self attributedStringWithColor:[NSColor blackColor]];
 }
 
+- (NSString*)sortKey
+{
+  return @"line";
+}
 
 - (NSAttributedString*)attributedStringWithColor:(NSColor*)aColor
 {

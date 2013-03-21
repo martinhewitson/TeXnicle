@@ -27,16 +27,10 @@
 
 #import <Foundation/Foundation.h>
 #import "TPCitation.h"
+#import "TPMetadataSet.h"
 
-@class FileEntity;
+@interface TPCitationSet : TPMetadataSet
 
-@interface TPCitationSet : NSObject
-
-@property (strong) NSArray *citations;
-@property (strong) id file;
-@property (unsafe_unretained, readonly) NSString *name;
-
-- (id) initWithFile:(FileEntity*)aFile bibliographyArray:(NSArray *)aList;
 - (void) setCitationsFromBibliographyArray:(NSArray*)aList;
 
 
