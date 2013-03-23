@@ -12,7 +12,7 @@
 
 @implementation TPFileMetadata
 
-- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk
+- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk name:(NSString*)aName
 {
   self = [super init];
   if (self) {
@@ -21,6 +21,7 @@
     self.text = text;
     self.pathOnDisk = pathOnDisk;
     self.aQueue = [[NSOperationQueue alloc] init];
+    self.name = aName;
   }
   
   return self;

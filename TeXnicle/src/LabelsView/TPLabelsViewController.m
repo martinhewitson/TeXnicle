@@ -39,6 +39,7 @@
 
 - (void) updateUI
 {
+  //NSLog(@"%@: updateUI", self);
   NSArray *newFiles = [self metadataViewListOfFiles:self];
   if (newFiles == nil) {
     newFiles = @[];

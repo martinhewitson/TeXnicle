@@ -39,7 +39,7 @@
 
 @property (assign) id<FileMetadataDelegate> delegate;
 
-- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk;
+- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk name:(NSString*)aName;
 - (void) updateMetadata;
 
 @end

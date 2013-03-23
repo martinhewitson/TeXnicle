@@ -62,7 +62,7 @@
 
 - (void) update
 {
-  NSLog(@"Metadata Manager update triggered on thread %@", [NSThread currentThread]);
+  //NSLog(@"Metadata Manager update triggered on thread %@", [NSThread currentThread]);
   
   // get list of files from delegate
   NSArray *filesToUpdate = [self metadataManagerFilesToScan:self];

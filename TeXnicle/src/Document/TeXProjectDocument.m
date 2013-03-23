@@ -103,6 +103,7 @@
 
 @property (strong) TPMetadataManager *metadataManager;
 @property (strong) NSMutableArray *fileMetadata;
+@property (strong) NSMutableArray *textFiles;
 
 @property (strong) MHControlsTabBarController *controlsTabBarController;
 @property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
@@ -4149,7 +4150,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
 {
-  NSLog(@"Metadata Update on thread %@", [NSThread currentThread]);
+  //NSLog(@"Metadata Update on thread %@", [NSThread currentThread]);
   
   // build array of TPFileMetadata for project files
   [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
@@ -4171,42 +4172,53 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) updateMetaFiles
 {  
-  NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
+  // NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
   if (self.fileMetadata == nil) {
     self.fileMetadata = [[NSMutableArray alloc] init];
+  }
+  if (self.textFiles == nil) {
+    self.textFiles = [[NSMutableArray alloc] init];
   }
   
   // go through project files and build meta files if necessary
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
+      
+      // make sure we cache these to stop them being faulted
+      if ([self.textFiles containsObject:file] == NO) {
+        [self.textFiles addObject:file];
+      }
+      
       if ([file isText]) {
 //      if ([file isText] && [file isImage] == NO) {
         NSManagedObjectID *objId = [item objectID];
         TPFileMetadata *fm = [self metaFileForID:objId];
         
         // if we don't have the file, add it, otherwise update it
-//        if (fm == nil) {
-//          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:objId
-//                                                                   extension:file.extension
-//                                                                        text:file.workingContentString
-//                                                                        path:file.pathOnDisk];
-//          newFile.needsUpdate = NO;
-//          [self.fileMetadata addObject:newFile];
-//        } else {
-//          
-//          // check last edit date
-//          NSDate *lastEdit = file.lastEditDate;
-//          NSDate *lastUpdate = fm.lastUpdate;
-//          if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
-//            fm.text = file.workingContentString;
-//            fm.needsUpdate = NO;
-//            // ensure other info is up to date
-//            fm.name = file.name;
-//            fm.pathOnDisk = file.pathOnDisk;
-//            fm.extension = file.extension;
-//          }          
-//        }
+        if (fm == nil) {
+          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:objId
+                                                                   extension:file.extension
+                                                                        text:file.workingContentString
+                                                                        path:file.pathOnDisk
+                                                                        name:file.name];
+          newFile.needsUpdate = YES;
+          [self.fileMetadata addObject:newFile];
+        } else {
+          
+          // check last edit date
+          NSDate *lastEdit = file.lastEditDate;
+          NSDate *lastUpdate = fm.lastUpdate;
+          if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
+            fm.text = file.workingContentString;
+            // update path here because it's relatively expensive, and it shouldn't change often.
+            fm.pathOnDisk = file.pathOnDisk;
+            fm.needsUpdate = YES;
+          }
+          // ensure other info is up to date
+          fm.name = file.name;
+          fm.extension = file.extension;
+        }
         
       } // end if isText and not isImage
     } // end if is file entity

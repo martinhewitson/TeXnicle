@@ -92,7 +92,7 @@
 
 - (void) handleMetadataUpdate:(NSNotification*)aNote
 {
-//  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -238,25 +238,21 @@
 
 - (void) updateUI
 {
+  //NSLog(@"%@: updateUI", self);
+  
   [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
     NSString *first  = [obj1 valueForKey:@"name"];
     NSString *second = [obj2 valueForKey:@"name"];
     return [first compare:second]==NSOrderedDescending;
   }];
 
-//  NSDate *now = [NSDate date];
-  
-//  if (self.lastUpdate == nil || [now timeIntervalSinceDate:self.lastUpdate] >= kUpdateInterval) {
-//    NSLog(@"Time since last Update %f [%@]", [now timeIntervalSinceDate:self.lastUpdate], self.lastUpdate);
-    [self.outlineView reloadData];
-//  }
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
   
   if (firstView == YES && [self.sets count] > 0) {
     [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
     firstView = NO;
-  }
-  
-//  self.lastUpdate = now;
+  }  
 }
 
 - (TPMetadataSet*)setForFile:(TPFileMetadata*)aFile
