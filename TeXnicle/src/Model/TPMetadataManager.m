@@ -41,11 +41,11 @@
 
 - (void) setupTimer
 {
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                        target:self
-                                                      selector:@selector(update)
-                                                      userInfo:nil
-                                                       repeats:YES];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                target:self
+                                              selector:@selector(update)
+                                              userInfo:nil
+                                               repeats:YES];
   
 }
 
@@ -62,6 +62,8 @@
 
 - (void) update
 {
+  NSLog(@"Metadata Manager update triggered on thread %@", [NSThread currentThread]);
+  
   // get list of files from delegate
   NSArray *filesToUpdate = [self metadataManagerFilesToScan:self];
   

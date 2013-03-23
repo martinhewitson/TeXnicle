@@ -4148,10 +4148,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark Metadata manager delegate
 
 - (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
-{  
+{
+  NSLog(@"Metadata Update on thread %@", [NSThread currentThread]);
+  
   // build array of TPFileMetadata for project files
-//  [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
-//  [self updateMetaFiles];
+  [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
+
+  //  [self updateMetaFiles];
   
   NSMutableArray *filesToScan = [[NSMutableArray alloc] init];
   
@@ -4168,6 +4171,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) updateMetaFiles
 {  
+  NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
   if (self.fileMetadata == nil) {
     self.fileMetadata = [[NSMutableArray alloc] init];
   }
@@ -4179,7 +4183,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       if ([file isText]) {
 //      if ([file isText] && [file isImage] == NO) {
         NSManagedObjectID *objId = [item objectID];
-//        TPFileMetadata *fm = [self metaFileForID:objId];
+        TPFileMetadata *fm = [self metaFileForID:objId];
         
         // if we don't have the file, add it, otherwise update it
 //        if (fm == nil) {
@@ -4187,6 +4191,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //                                                                   extension:file.extension
 //                                                                        text:file.workingContentString
 //                                                                        path:file.pathOnDisk];
+//          newFile.needsUpdate = NO;
 //          [self.fileMetadata addObject:newFile];
 //        } else {
 //          
@@ -4195,7 +4200,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 //          NSDate *lastUpdate = fm.lastUpdate;
 //          if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
 //            fm.text = file.workingContentString;
-//            fm.needsUpdate = YES;
+//            fm.needsUpdate = NO;
 //            // ensure other info is up to date
 //            fm.name = file.name;
 //            fm.pathOnDisk = file.pathOnDisk;

@@ -59,26 +59,26 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     self.needsUpdate = NO;
     self.needsSyntaxCheck = NO;
     
-    queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
-    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
-    dispatch_set_target_queue(queue,priority);
-        
-    self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
+//    queue = dispatch_queue_create("com.bobsoft.TeXnicle", NULL);
+//    dispatch_queue_t priority = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);    
+//    dispatch_set_target_queue(queue,priority);
+//        
+//    self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
     
 //    self.aQueue = [[NSOperationQueue alloc] init];
-    [self performSelector:@selector(setupMetadataTimer) withObject:nil afterDelay:1.0];
+//    [self performSelector:@selector(setupMetadataTimer) withObject:nil afterDelay:1.0];
     
-    NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-    
-    [defaults addObserver:self
-               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];		
-    
-    [defaults addObserver:self
-               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];		
+//    NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+//    
+//    [defaults addObserver:self
+//               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]
+//                  options:NSKeyValueObservingOptionNew
+//                  context:NULL];		
+//    
+//    [defaults addObserver:self
+//               forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]
+//                  options:NSKeyValueObservingOptionNew
+//                  context:NULL];		
     
     
   }
@@ -121,11 +121,11 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 - (void) dealloc
 {  
 //  NSLog(@"Dealloc metadata %@", self);
-  NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
+//  NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
+//  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
+//  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];
 
-  dispatch_release(queue);  
+//  dispatch_release(queue);  
 }
 
 - (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force

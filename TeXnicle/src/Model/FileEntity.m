@@ -61,7 +61,7 @@
 - (void) awakeFromInsert
 {
 //  NSLog(@"%@: Awake from insert", [self name]);
-//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
+  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
@@ -81,7 +81,7 @@
 	[super awakeFromFetch];
   NSLog(@"%p: %@: Awake from fetch", self, [self name]);
 	
-//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
+  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self reloadFromDisk];
   [self loadIcon];

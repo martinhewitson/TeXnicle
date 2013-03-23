@@ -35,6 +35,8 @@
 -(void)main {
   @try {
     
+    NSLog(@"Scanning metadata on thread %@", [NSThread currentThread]);
+    
     if (self.file.text == nil || [self.file.text length] ==0)
       return;
     
