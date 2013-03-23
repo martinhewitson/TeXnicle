@@ -92,11 +92,7 @@
 
 - (void) handleMetadataUpdate:(NSNotification*)aNote
 {
-//  NSDate *now = [NSDate date];
-//  if (self.lastUpdate == nil || [now timeIntervalSinceDate:self.lastUpdate] > kUpdateInterval) {
-    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
-//    self.lastUpdate = now;
-//  }
+//  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -248,15 +244,22 @@
     return [first compare:second]==NSOrderedDescending;
   }];
 
-  [self.outlineView reloadData];
+//  NSDate *now = [NSDate date];
   
-  if (firstView == YES) {
+//  if (self.lastUpdate == nil || [now timeIntervalSinceDate:self.lastUpdate] >= kUpdateInterval) {
+//    NSLog(@"Time since last Update %f [%@]", [now timeIntervalSinceDate:self.lastUpdate], self.lastUpdate);
+    [self.outlineView reloadData];
+//  }
+  
+  if (firstView == YES && [self.sets count] > 0) {
     [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
     firstView = NO;
   }
+  
+//  self.lastUpdate = now;
 }
 
-- (TPMetadataSet*)setForFile:(FileEntity*)aFile
+- (TPMetadataSet*)setForFile:(TPFileMetadata*)aFile
 {
   for (TPMetadataSet *set in self.sets) {
     if (set.file == aFile) {

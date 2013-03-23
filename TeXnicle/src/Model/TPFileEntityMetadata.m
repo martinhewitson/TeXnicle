@@ -65,13 +65,8 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
         
     self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
     
-    self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                          target:self
-                                                        selector:@selector(updateMetadata)
-                                                        userInfo:nil
-                                                         repeats:YES];
-    
-    self.aQueue = [[NSOperationQueue alloc] init];
+//    self.aQueue = [[NSOperationQueue alloc] init];
+    [self performSelector:@selector(setupMetadataTimer) withObject:nil afterDelay:1.0];
     
     NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
     
@@ -88,6 +83,16 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     
   }
   return self;
+}
+
+- (void) setupMetadataTimer
+{
+//  self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+//                                                        target:self
+//                                                      selector:@selector(updateMetadata)
+//                                                      userInfo:nil
+//                                                       repeats:YES];
+  
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -156,38 +161,43 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
 
 
 - (void) updateMetadata
-{  
-  // in case the file has gone
-  if (self.parent == nil || [[self.parent isText] boolValue] == NO) {
-    return;
-  }
-  
-  if ([[NSApplication sharedApplication] isActive] == NO) {
-    return;
-  }
+{
+//  [self.parent.managedObjectContext lock];
+//  BOOL isText = [[self.parent isText] boolValue];
+//  [self.parent.managedObjectContext unlock];
+//  
+//  // in case the file has gone
+//  if (self.parent == nil || isText == NO) {
+//    return;
+//  }
+//  
+//  if ([[NSApplication sharedApplication] isActive] == NO) {
+//    return;
+//  }
   
   [self.parent.managedObjectContext lock];
   NSDate *lastEdit = self.parent.lastEditDate;
   [self.parent.managedObjectContext unlock];
-  
+
   NSDate *lastUpdate = self.lastMetadataUpdate;
-  __block TPFileEntityMetadata *blockSelf = self;
   
-  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {
-    if ([self.aQueue operationCount] == 0) {
-      currentOperation = [[TPMetadataOperation alloc] initWithFile:self.parent];      
-      [currentOperation setCompletionBlock:^{
-        dispatch_sync(dispatch_get_main_queue(), ^{
-          [blockSelf notifyOfUpdate];
-          blockSelf = nil;
-        });
-      }];
-      
-      [self.aQueue addOperation:currentOperation];
-    }
-    
-    self.lastMetadataUpdate = [NSDate date];
-  }
+//  __block TPFileEntityMetadata *blockSelf = self;
+//  
+//  if ([lastEdit timeIntervalSinceDate:lastUpdate]>0 || lastUpdate == nil || self.needsUpdate) {
+//    if ([self.aQueue operationCount] == 0) {
+//      currentOperation = [[TPMetadataOperation alloc] initWithFile:self.parent];      
+//      [currentOperation setCompletionBlock:^{
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//          [blockSelf notifyOfUpdate];
+//          blockSelf = nil;
+//        });
+//      }];
+//      
+//      [self.aQueue addOperation:currentOperation];
+//    }
+//    
+//    self.lastMetadataUpdate = [NSDate date];
+//  }
   
   if ([lastEdit timeIntervalSinceDate:lastUpdate] > 1 || lastUpdate == nil || self.needsSyntaxCheck) {
     //-------------- syntax errors

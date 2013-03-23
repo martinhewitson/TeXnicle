@@ -27,7 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class FileEntity;
+@class TPFileMetadata;
 
 
 @interface TPMetadataSet : NSObject
@@ -36,7 +36,7 @@
 @property (strong) id file;
 @property (unsafe_unretained, readonly) NSString *name;
 
-- (id) initWithFile:(FileEntity*)aFile items:(NSArray *)aList;
+- (id) initWithFile:(id)aFile items:(NSArray *)aList;
 
 - (NSAttributedString*)selectedDisplayString;
 - (NSAttributedString*)displayString;

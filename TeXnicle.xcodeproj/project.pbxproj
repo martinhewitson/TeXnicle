@@ -62,6 +62,8 @@
 		251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */; };
 		251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CD163514AC00AC058F /* reformatTextTestFile12.tex */; };
 		251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */; };
+		25129B3A16FD8E21003FC11B /* TPMetadataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25129B3916FD8E21003FC11B /* TPMetadataManager.m */; };
+		25129B3D16FD9242003FC11B /* TPFileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 25129B3C16FD9241003FC11B /* TPFileMetadata.m */; };
 		25131EA714E182C40065CDA7 /* MHTableConfigureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25131EA614E182C40065CDA7 /* MHTableConfigureController.m */; };
 		25131EAA14E182D60065CDA7 /* MHTableConfigureWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25131EA914E182D60065CDA7 /* MHTableConfigureWindow.xib */; };
 		25131EAD14E19F320065CDA7 /* MHPaletteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25131EAC14E19F320065CDA7 /* MHPaletteTableView.m */; };
@@ -599,6 +601,10 @@
 		251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile11_reformatted.tex; sourceTree = "<group>"; };
 		251157CD163514AC00AC058F /* reformatTextTestFile12.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile12.tex; sourceTree = "<group>"; };
 		251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile12_reformatted.tex; sourceTree = "<group>"; };
+		25129B3816FD8E21003FC11B /* TPMetadataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataManager.h; sourceTree = "<group>"; };
+		25129B3916FD8E21003FC11B /* TPMetadataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataManager.m; sourceTree = "<group>"; };
+		25129B3B16FD9241003FC11B /* TPFileMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPFileMetadata.h; sourceTree = "<group>"; };
+		25129B3C16FD9241003FC11B /* TPFileMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPFileMetadata.m; sourceTree = "<group>"; };
 		25131EA514E182C40065CDA7 /* MHTableConfigureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTableConfigureController.h; sourceTree = "<group>"; };
 		25131EA614E182C40065CDA7 /* MHTableConfigureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTableConfigureController.m; sourceTree = "<group>"; };
 		25131EA914E182D60065CDA7 /* MHTableConfigureWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHTableConfigureWindow.xib; sourceTree = "<group>"; };
@@ -2015,10 +2021,14 @@
 				25BB153515B42378007A7FDF /* Entities */,
 				2589BBFD15B3EEDB00E24C9B /* TPMetadataOperation.h */,
 				2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */,
+				25129B3816FD8E21003FC11B /* TPMetadataManager.h */,
+				25129B3916FD8E21003FC11B /* TPMetadataManager.m */,
 				25C7F4501629968B00C312AB /* TPRegularExpression.h */,
 				25C7F4511629968B00C312AB /* TPRegularExpression.m */,
 				254AE6DD15AE9F4200680414 /* TPFileEntityMetadata.h */,
 				254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */,
+				25129B3B16FD9241003FC11B /* TPFileMetadata.h */,
+				25129B3C16FD9241003FC11B /* TPFileMetadata.m */,
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
 				257B471C138E5DE500ED02C4 /* FileDocument.m */,
 				25F251061519DB9800453F6F /* TPSyntaxError.h */,
@@ -3091,6 +3101,8 @@
 				254D16A416FAE36A00A31BE8 /* TPMetadataViewController.m in Sources */,
 				254D16A716FAE49000A31BE8 /* TPMetadataItem.m in Sources */,
 				254D16AC16FAE66500A31BE8 /* TPMetadataSet.m in Sources */,
+				25129B3A16FD8E21003FC11B /* TPMetadataManager.m in Sources */,
+				25129B3D16FD9242003FC11B /* TPFileMetadata.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

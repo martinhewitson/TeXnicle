@@ -26,7 +26,7 @@
 //
 
 #import "TPMetadataSet.h"
-#import "FileEntity.h"
+#import "TPFileMetadata.h"
 
 @implementation TPMetadataSet
 
@@ -36,7 +36,7 @@
 }
 
 
-- (id) initWithFile:(FileEntity*)aFile items:(NSArray *)aList
+- (id) initWithFile:(id)aFile items:(NSArray *)aList
 {
   self = [super init];
   if (self) {
@@ -68,10 +68,10 @@
 - (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
 {
   NSString *text = nil;
-  if ([self.file isKindOfClass:[FileEntity class]]) {
-    text = [self.file valueForKey:@"name"];
-  } else {
+  if ([self.file isKindOfClass:[NSURL class]] || [self.file isKindOfClass:[NSString class]]) {
     text = [self.file lastPathComponent];
+  } else {
+    text = [self.file valueForKey:@"name"];
   }
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
   

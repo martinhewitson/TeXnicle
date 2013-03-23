@@ -54,7 +54,7 @@
   [self.sets removeObjectsInArray:filesToRemove];
   
   // update our files
-  for (FileEntity *newFile in newFiles) {
+  for (TPFileMetadata *newFile in newFiles) {
     TPMetadataSet *set = [self setForFile:newFile];
     if (set == nil) {
       NSArray *labels = [self metadataView:self newItemsForFile:newFile];

@@ -61,7 +61,7 @@
 - (void) awakeFromInsert
 {
 //  NSLog(@"%@: Awake from insert", [self name]);
-  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
+//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
@@ -79,9 +79,9 @@
 - (void) awakeFromFetch
 {
 	[super awakeFromFetch];
-//  NSLog(@"%@: Awake from fetch", [self name]);
+  NSLog(@"%p: %@: Awake from fetch", self, [self name]);
 	
-  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
+//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self reloadFromDisk];
   [self loadIcon];
@@ -104,10 +104,18 @@
 
 - (void) loadIcon
 {
-  NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:self.extension];
+  NSImage *image = nil;
+  if (self.project) {
+    image = self.project.icons[self.extension];
+  }
+  
+  if (image == nil) {
+    image = [[NSWorkspace sharedWorkspace] iconForFileType:self.extension];
+  }
+  
   if (image != nil) {
     self.icon = image;
-  }
+  }  
 }
 
 - (void)increaseActiveCount
@@ -347,18 +355,18 @@
 //  NSLog(@"Will fault %@ [%@]", self.name, self.metadata);
 }
 
-- (void) didTurnIntoFault
-{
-  self.metadata.parent = nil;
-  self.metadata = nil;
-  self.icon = nil;
+//- (void) didTurnIntoFault
+//{
+//  self.metadata.parent = nil;
+//  self.metadata = nil;
+//  self.icon = nil;
   
-	if (document) {
+//	if (document) {
 //		NSLog(@"Clearing document for %@", [self name]);
-		document = nil;
-	}
+//		document = nil;
+//	}
 
-}
+//}
 
 - (NSString*) extension
 {

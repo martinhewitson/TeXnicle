@@ -30,6 +30,7 @@
 @class TPMetadataSet;
 @class FileEntity;
 @class TPMetadataViewController;
+@class TPFileMetadata;
 
 @protocol TPMetadataViewDelegate <NSObject>
 
@@ -56,6 +57,6 @@
 
 
 - (NSArray*)sortedItemsForSet:(TPMetadataSet*)set;
-- (TPMetadataSet*)setForFile:(FileEntity*)aFile;
+- (TPMetadataSet*)setForFile:(TPFileMetadata*)aFile;
 
 @end

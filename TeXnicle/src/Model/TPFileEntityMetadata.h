@@ -69,6 +69,7 @@
 
 @property (strong) NSArray *includes;
 
+
 - (id) initWithParent:(id)aFile;
 - (void)updateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 - (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;

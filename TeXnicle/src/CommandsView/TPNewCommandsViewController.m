@@ -29,7 +29,7 @@
 #import "externs.h"
 #import "TPCommandSet.h"
 #import "TPNewCommand.h"
-
+#import "TPFileMetadata.h"
 
 @interface TPNewCommandsViewController ()
 
@@ -54,7 +54,7 @@
   [self.sets removeObjectsInArray:filesToRemove];
   
   // update our files
-  for (FileEntity *file in files) {
+  for (TPFileMetadata *file in files) {
     TPMetadataSet *set = [self setForFile:file];
     if (set == nil) {
       NSArray *commands = [self metadataView:self newItemsForFile:file];

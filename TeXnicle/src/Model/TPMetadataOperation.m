@@ -21,11 +21,10 @@
 
 @implementation TPMetadataOperation
 
-- (id) initWithFile:(FileEntity*)aFile
+- (id) initWithFile:(TPFileMetadata*)aFile
 {
   self = [super init];
   if (self) {
-    self.text = [aFile workingContentString];
     self.file = aFile;
   }
   return self;
@@ -36,7 +35,7 @@
 -(void)main {
   @try {
     
-    if (self.text == nil || [self.text length] ==0)
+    if (self.file.text == nil || [self.file.text length] ==0)
       return;
     
     NSMutableArray *newCommands = [[NSMutableArray alloc] init];
@@ -45,23 +44,24 @@
     
     @autoreleasepool {
     
-//    NSLog(@"Generating meta data for %@", self.file.name);
     
+      NSString *ext = self.file.extension;
+      
       //-------------- get commands
       if ([self isCancelled]) return;
-      NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
+      NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:self.file.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
       }
       
-      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
+      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}" inText:self.file.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
       }
       
-      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}" inText:self.text];
+      parsedCommands = [TPRegularExpression stringsMatching:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}" inText:self.file.text];
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
@@ -71,23 +71,21 @@
       if ([self isCancelled]) return;
       
       // don't check bst files.
-      if ([self.file.extension isEqualToString:@"bst"] == NO) {
+      if ([ext isEqualToString:@"bst"] == NO) {
         // get \bibitem entries
-        NSArray *citationsFound = [self.text citations];
+        NSArray *citationsFound = [self.file.text citations];
         [newCitations addObjectsFromArray:citationsFound];
         
         // citations from any bib files included in this file but not in the project
         if ([self isCancelled]) return;
-        [self.file.managedObjectContext lock];
-        NSArray *entries = [self.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
-        [self.file.managedObjectContext unlock];
+        NSArray *entries = [self.file.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
         [newCitations addObjectsFromArray:entries];
       }
       
       // add any citations from any bib files
       if ([self isCancelled]) return;
-      if ([self.file.extension isEqualToString:@"bib"]) {
-        NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.text];
+      if ([ext isEqualToString:@"bib"]) {
+        NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.file.text];
         // only add these if we don't already have entries for these
         for (BibliographyEntry *entry in entries) {
           // check against existing
@@ -103,7 +101,7 @@
       //--------------- Labels    
       if ([self isCancelled]) return;
       
-      NSArray *parsedLabels = [self.text referenceLabels];
+      NSArray *parsedLabels = [self.file.text referenceLabels];
       for (NSString *str in parsedLabels) {
         TPLabel *l = [[TPLabel alloc] initWithFile:self.file text:str];
         [newLabels addObject:l];

@@ -61,6 +61,7 @@
 #import "NSResponder+TeXnicle.h"
 #import "NSAttributedString+Placeholders.h"
 #import "NSDictionary+TeXnicle.h"
+#import "TPFileMetadata.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -100,6 +101,8 @@
 
 @property (strong) OpenDocumentsManager *openDocuments;
 
+@property (strong) TPMetadataManager *metadataManager;
+@property (strong) NSMutableArray *fileMetadata;
 
 @property (strong) MHControlsTabBarController *controlsTabBarController;
 @property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
@@ -499,6 +502,10 @@
                                                     userInfo:nil
                                                      repeats:YES];
   
+  // metadata manager
+  self.metadataManager = [[TPMetadataManager alloc] initWithDelegate:self];
+  [self.metadataManager start];
+  
   // insert controls tab bar in the responder chain
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
   [self.mainWindow setNextResponder:self.controlsTabBarController];  
@@ -535,6 +542,13 @@
   [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
   
   [self.outlineViewController start];
+  
+  // update metadata views
+  NSTimeInterval delay = 2.0;
+  [self.warningsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   
 }
 
@@ -613,6 +627,8 @@
 
 - (void) stopAllMetadataOperations
 {
+  [self.metadataManager stop];
+  
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
@@ -1697,6 +1713,37 @@
 
 - (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
 {
+//  NSLog(@"Tab changed %@", [aNote object]);
+  if ([aNote object] == self.infoControlsTabBarController) {
+    NSInteger idx = [self.infoControlsTabBarController indexOfSelectedTab];
+//    NSLog(@"Index %d", idx);
+    switch (idx) {
+      case 0:
+        // bookmarks
+        break;
+      case 1:
+        // warnings
+        [self.warningsViewController updateUI];
+        break;
+      case 2:
+        // spelling
+        break;
+      case 3:
+        // labels
+        [self.labelsViewController updateUI];
+        break;
+      case 4:
+        // citations
+        [self.citationsViewController updateUI];
+        break;
+      case 5:
+        // commands
+        [self.commandsViewController updateUI];
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 
@@ -4098,28 +4145,117 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 
 #pragma mark -
+#pragma mark Metadata manager delegate
+
+- (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
+{  
+  // build array of TPFileMetadata for project files
+//  [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
+//  [self updateMetaFiles];
+  
+  NSMutableArray *filesToScan = [[NSMutableArray alloc] init];
+  
+  // loop over our meta files and decide if they need scanned
+  for (TPFileMetadata *f in self.fileMetadata) {
+    if (f.needsUpdate) {
+      [filesToScan addObject:f];
+    }
+  }
+  
+  return filesToScan;
+}
+
+
+- (void) updateMetaFiles
+{  
+  if (self.fileMetadata == nil) {
+    self.fileMetadata = [[NSMutableArray alloc] init];
+  }
+  
+  // go through project files and build meta files if necessary
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      if ([file isText]) {
+//      if ([file isText] && [file isImage] == NO) {
+        NSManagedObjectID *objId = [item objectID];
+//        TPFileMetadata *fm = [self metaFileForID:objId];
+        
+        // if we don't have the file, add it, otherwise update it
+//        if (fm == nil) {
+//          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:objId
+//                                                                   extension:file.extension
+//                                                                        text:file.workingContentString
+//                                                                        path:file.pathOnDisk];
+//          [self.fileMetadata addObject:newFile];
+//        } else {
+//          
+//          // check last edit date
+//          NSDate *lastEdit = file.lastEditDate;
+//          NSDate *lastUpdate = fm.lastUpdate;
+//          if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
+//            fm.text = file.workingContentString;
+//            fm.needsUpdate = YES;
+//            // ensure other info is up to date
+//            fm.name = file.name;
+//            fm.pathOnDisk = file.pathOnDisk;
+//            fm.extension = file.extension;
+//          }          
+//        }
+        
+      } // end if isText and not isImage
+    } // end if is file entity
+  } // end loop over project items
+  
+}
+
+- (TPFileMetadata*) metaFileForID:(NSManagedObjectID*)objId
+{
+  for (TPFileMetadata *f in self.fileMetadata) {
+    if (f.objId == objId) {
+      return f;
+    }
+  }
+  return nil;
+}
+
+
+#pragma mark -
 #pragma mark Metadata view delegate
 
 - (NSArray*) metadataViewListOfFiles:(TPMetadataViewController *)aViewController
 {
   NSMutableArray *files = [NSMutableArray array];
-  
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        if (aViewController == self.commandsViewController && [file.metadata.userNewCommands count] > 0) {
-          [files addObject:file];
-        } else if (aViewController == self.citationsViewController && [file.metadata.citations count] > 0) {
-          [files addObject:file];
-        } else if (aViewController == self.labelsViewController && [file.metadata.labels count] > 0) {
-          [files addObject:file];
-        } else if (aViewController == self.warningsViewController && [file.metadata.syntaxErrors count] > 0) {
-          [files addObject:file];
-        }
-      }
+
+  for (TPFileMetadata *item in self.fileMetadata) {
+    if (aViewController == self.commandsViewController && [item.userNewCommands count] > 0) {
+      [files addObject:item];
+    } else if (aViewController == self.citationsViewController && [item.citations count] > 0) {
+      [files addObject:item];
+    } else if (aViewController == self.labelsViewController && [item.labels count] > 0) {
+      [files addObject:item];
     }
+//    else if (aViewController == self.warningsViewController && [file.metadata.syntaxErrors count] > 0) {
+//      [files addObject:file];
+//    }
   }
+  
+//  for (ProjectItemEntity *item in self.project.items) {
+//    if ([item isKindOfClass:[FileEntity class]]) {
+//      FileEntity *file = (FileEntity*)item;
+//      if ([file isText]) {
+//        if (aViewController == self.commandsViewController && [file.metadata.userNewCommands count] > 0) {
+//          [files addObject:file];
+//        } else if (aViewController == self.citationsViewController && [file.metadata.citations count] > 0) {
+//          [files addObject:file];
+//        } else if (aViewController == self.labelsViewController && [file.metadata.labels count] > 0) {
+//          [files addObject:file];
+//        } else if (aViewController == self.warningsViewController && [file.metadata.syntaxErrors count] > 0) {
+//          [files addObject:file];
+//        }
+//      }
+//    }
+//  }
   
   return [NSArray arrayWithArray:files];
 }
@@ -4193,17 +4329,28 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   }
 }
 
-- (NSArray*) metadataView:(TPMetadataViewController *)aViewController newItemsForFile:(id)file
+- (NSArray*) metadataView:(TPMetadataViewController *)aViewController newItemsForFile:(TPFileMetadata*)file
 {
   if (aViewController == self.commandsViewController) {
-    return [[(FileEntity*)file metadata] userNewCommands];
+    return file.userNewCommands;
   } else if (aViewController == self.citationsViewController) {
-    return [[(FileEntity*)file metadata] citations];
+    return file.citations;
   } else if (aViewController == self.labelsViewController) {
-    return [[(FileEntity*)file metadata] labels];
-  } else if (aViewController == self.warningsViewController) {
-    return [[(FileEntity*)file metadata] syntaxErrors];
+    return file.labels;
   }
+//  else if (aViewController == self.warningsViewController) {
+//    return [[(FileEntity*)file metadata] syntaxErrors];
+//  }
+  
+//  if (aViewController == self.commandsViewController) {
+//    return [[(FileEntity*)file metadata] userNewCommands];
+//  } else if (aViewController == self.citationsViewController) {
+//    return [[(FileEntity*)file metadata] citations];
+//  } else if (aViewController == self.labelsViewController) {
+//    return [[(FileEntity*)file metadata] labels];
+//  } else if (aViewController == self.warningsViewController) {
+//    return [[(FileEntity*)file metadata] syntaxErrors];
+//  }
   
   return @[];
 }

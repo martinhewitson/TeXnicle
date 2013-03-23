@@ -344,6 +344,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
              name:NSTextDidChangeNotification
            object:self.texEditorViewController.textView];
   
+  [nc addObserver:self
+         selector:@selector(handleInfoTabSelectionChanged:)
+             name:TPInfoControlsTabSelectionDidChangeNotification
+           object:self.infoControlsTabBarController];
+  
   self.miniConsole = [[MHMiniConsoleViewController alloc] init];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -405,6 +410,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self setupLiveUpdateTimer];
 
   self.metadataUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateMetadata) userInfo:nil repeats:YES];
+  
+  // update metadata views
+  NSTimeInterval delay = 3.0;
+  [self.warningsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  
 
   _didSetupUI = YES;
 }
@@ -642,6 +655,42 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 #pragma mark -
 #pragma mark Notification Handlers
+
+- (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
+{
+  //  NSLog(@"Tab changed %@", [aNote object]);
+  if ([aNote object] == self.infoControlsTabBarController) {
+    NSInteger idx = [self.infoControlsTabBarController indexOfSelectedTab];
+    //    NSLog(@"Index %d", idx);
+    switch (idx) {
+      case 0:
+        // bookmarks
+        break;
+      case 1:
+        // warnings
+        [self.warningsViewController updateUI];
+        break;
+      case 2:
+        // spelling
+        break;
+      case 3:
+        // labels
+        [self.labelsViewController updateUI];
+        break;
+      case 4:
+        // citations
+        [self.citationsViewController updateUI];
+        break;
+      case 5:
+        // commands
+        [self.commandsViewController updateUI];
+        break;
+      default:
+        break;
+    }
+  }
+}
+
 
 - (void) syntaxCheckerDidFinish
 {

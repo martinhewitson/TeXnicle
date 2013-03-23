@@ -1,9 +1,9 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
 \f3\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
-\red92\green38\blue153;}
-\paperw11900\paperh16840\vieww19560\viewh16520\viewkind0
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
+\red39\green78\blue192;\red255\green39\blue18;\red92\green38\blue153;}
+\paperw11900\paperh16840\vieww24720\viewh16520\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
@@ -30,12 +30,7 @@ To Do\
 \pard\pardeftab720
 
 \f1 \cf0 + Add nomenclo engine\cf2 \
-\
-Another request: I notice when I select a paragraph (or put the cursor somewhere in a paragraph of plain text), TeXnicle tells me at the bottom which line it is and how many characters the paragraph contains. Nice! Could you expand this function to include number of words, split into per section, per chapter, per all documents excluding appendices etc, and per entire project.. only counting plain text words, not commands etc? Would be really helpful!\
-\cf0 \
-\pard\pardeftab720\sa280
-\cf0 One thing that I am missing in ever single TeX editor, that I really am looking for is line height setting for the editor text. I find it really hard to read when the text is way too tight. Would it be possible to add a line height setting for TeXnicle?\
-\pard\pardeftab720
+\cf3 \
 \cf0 + Applescript ability\
 	- tell project XX to select file\
 	- tell texnicle to jump to line in file\
@@ -47,7 +42,7 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \
 \pard\pardeftab720
 
-\fs24 \cf3 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
+\fs24 \cf4 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
 \pard\pardeftab720
 
 \fs28 \cf0 \
@@ -92,7 +87,7 @@ Version 2.1\
 + Add a Terminal button to launch a terminal in the project's directory\
 \
 + Better soft-wrap which respects indentation? layoutmanager 
-\f2\fs26 \cf4 \ul \ulc4 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
+\f2\fs26 \cf5 \ul \ulc5 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
 \f1\fs28 \cf0 \ulnone \
 \
 + Library category import/export\
@@ -108,7 +103,7 @@ Version 2.1\
 
 \f1 \cf0 \
 \pard\pardeftab720
-\cf3 I think you correctly understand my explanation. \'a0In the current implementation, every time I build a new project and typeset the main tex file, the resulting PDF Viewer takes up about 3/4 of the screen space and the editing window is a narrow window to the left of the viewer. \'a0I'd like to always have the editing window larger and the PDF Viewer much smaller, maybe even so they are more equal size, and have a way to save that as the default orientation for new files and/or projects. \'a0That's about the only feature I miss from TeXShop. \'a0\
+\cf4 I think you correctly understand my explanation. \'a0In the current implementation, every time I build a new project and typeset the main tex file, the resulting PDF Viewer takes up about 3/4 of the screen space and the editing window is a narrow window to the left of the viewer. \'a0I'd like to always have the editing window larger and the PDF Viewer much smaller, maybe even so they are more equal size, and have a way to save that as the default orientation for new files and/or projects. \'a0That's about the only feature I miss from TeXShop. \'a0\
 \pard\pardeftab720
 \cf0 \
 + Rename a .tex file:\
@@ -121,13 +116,12 @@ Version 2.1\
 	- this then adds .tex to the displayed name\
 		- this shouldn't happen\
 \
-\
-\
 \pard\pardeftab720\sa280
-\cf3 Could it be possible to add a autotrash option in preferences. I know it can be done manually, but I type many small documents and sometimes my folder are a complete mesh\cf0 \
+\cf6 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
+\cf3 One thing that I am missing in ever single TeX editor, that I really am looking for is line height setting for the editor text. I find it really hard to read when the text is way too tight. Would it be possible to add a line height setting for TeXnicle?\cf0 \
+\
 \pard\pardeftab720
-\cf0 \
-+ Project builder: main file should get the project name, rather than the name used to create the template. Better: when creating the template, rename the main file to match the template name.\
+\cf0 + Project builder: main file should get the project name, rather than the name used to create the template. Better: when creating the template, rename the main file to match the template name.\
 \
 + Add existing files doesn't work for images?\
 \
@@ -148,7 +142,6 @@ Version 2.1\
 1. Soft-wrap to a window size?\
 2. Soft-wrapped line indentation to the first line (like TextWrangler)?\
 \
-+ Add nice icons on document outline view\
 \
 ----------------------\
 \
@@ -166,6 +159,49 @@ User Manual\
 \
 TO DO\
 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 ---------------------------------------------------\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \ul \ulc5 Make TPMetadataEngine\
+\ulnone \
+This asks delegate for text to scan and keeps an array of TPFileMetadata. \
+When timer fires, go through each TPFileMetadata and scan the text if it's set for update, updating the local sets.\
+When the full scan is finished, send notification.\
+Views can listen and ask the metadata manager for the sets.\
+\
+\
+- (void) update\
+\
+	- get list of files from delegate\
+	- update own list\
+	- process list\
+		- tell each TPFileMetadata to update its own metadata\
+\
+TPFileMetadata needs:\
+- parent object id\
+- text\
+- extension\
+- pathOnDisk\
+\
+TPMetadataItem needs:\
+- parent object id\
+\
+	- Manager protocol:\
+		- filesToScan\
+			- here we can check the lastEditData and decide which files need to be scanned\
+			- return array of TPFileEntityMetadata\
+			- in the manager, check the current list of files (by objid) and add/update as necessary, setting the needsUpdate flag\
+\
+	- API:\
+		- sets\
+		- commandsForFile, citationsForFile, etc\
+\
+---------------------------------------------------\
+\
+- Add search to metadata view\
+	- and item counts [%d items in %d sets]\
+\
 - When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
 \
 \
@@ -176,7 +212,7 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf5 NSRange\cf0 )indentRangeForLineAtIndex:(\cf5 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf7 NSRange\cf0 )indentRangeForLineAtIndex:(\cf7 NSInteger\cf0 )loc\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 Version 2.0.6\

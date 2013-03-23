@@ -41,11 +41,13 @@
 @dynamic selected;
 @dynamic mainFile;
 @dynamic uiSettings;
+@synthesize icons;
 
 - (void) awakeFromInsert
 {
 //	NSLog(@"Inserted project");
   self.type = @"PDFLaTeX";
+  [self loadIcons];
   [self createSettings];
 }
 
@@ -71,9 +73,18 @@
 - (void) awakeFromFetch
 {
 //  NSLog(@"Awake from fetch %@", self);
+  [self loadIcons];
   [self performSelector:@selector(createSettings) withObject:nil afterDelay:0.1];
 }
 
+- (void) loadIcons
+{
+  // check all supported files and load thier icons
+
+  NSImage *texImage = [[NSWorkspace sharedWorkspace] iconForFileType:@"tex"];
+  self.icons = @{@"tex" : texImage};
+  
+}
 
 - (NSSet*)items
 {
