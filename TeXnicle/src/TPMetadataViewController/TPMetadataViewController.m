@@ -216,7 +216,7 @@
   }
   if ([item isKindOfClass:[TPMetadataSet class]]) {
     TPMetadataSet *set = (TPMetadataSet*)item;
-    return [self sortedItemsForSet:set][index];
+    return set.items[index];
   }
   
   return nil;
