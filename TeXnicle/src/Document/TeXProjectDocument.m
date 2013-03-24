@@ -2104,14 +2104,37 @@
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
-- (id)mainFile
+- (NSArray*) allMetadataFiles
 {
-  return self.project.mainFile;
+  return self.fileMetadata;
+}
+
+- (id) mainFile
+{
+  
+  // get the metadata file for the project
+  NSManagedObjectID *mainId = [self.project.mainFile objectID];
+  
+  for (TPFileMetadata *file in self.fileMetadata) {
+    if (file.objId == mainId) {
+      return file;
+    }
+  }
+  
+  return nil;
 }
 
 - (NSString*)textForFile:(id)aFile
 {
-  return [aFile workingContentString];
+  if ([aFile isKindOfClass:[FileEntity class]]) {
+    return [aFile workingContentString];
+  }
+  
+  if ([aFile isKindOfClass:[TPFileMetadata class]]) {
+    return [aFile valueForKey:@"text"];
+  }
+  
+  return @"";
 }
 
 - (id)fileWithPath:(NSString *)path
@@ -2142,7 +2165,8 @@
 
 - (id) currentFile
 {
-  return self.openDocuments.currentDoc;
+  FileEntity *file = self.openDocuments.currentDoc;  
+  return [self metaFileForID:file.objectID];
 }
 
 - (NSInteger) locationInCurrentEditor
