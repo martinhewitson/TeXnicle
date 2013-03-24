@@ -41,5 +41,6 @@
 
 - (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk name:(NSString*)aName;
 - (void) updateMetadata;
+- (void) tearDown;
 
 @end

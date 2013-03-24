@@ -67,6 +67,7 @@
 	[self setValue:@NO forKey:@"isText"];
   [self reloadFromDisk];
   [self loadIcon];
+  
 //	[self reconfigureDocument];
 //	if (!document) {
 ////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
@@ -79,7 +80,7 @@
 - (void) awakeFromFetch
 {
 	[super awakeFromFetch];
-  NSLog(@"%p: %@: Awake from fetch", self, [self name]);
+//  NSLog(@"%p: %@: Awake from fetch", self, [self name]);
 	
 //  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
@@ -352,7 +353,7 @@
 
 - (void) willTurnIntoFault
 {  
-  NSLog(@"Will fault %@ [%@]", self.name, self.metadata);
+//  NSLog(@"Will fault %@ [%@]", self.name, self.metadata);
 }
 
 //- (void) didTurnIntoFault

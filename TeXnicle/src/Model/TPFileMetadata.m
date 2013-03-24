@@ -27,6 +27,14 @@
   return self;
 }
 
+- (void) tearDown
+{
+  self.delegate = nil;
+  [self.currentOperation cancel];
+  self.currentOperation = nil;
+  [self.aQueue cancelAllOperations];
+}
+
 - (void) notifyOfUpdate
 {
   if (self && self.currentOperation) {

@@ -55,18 +55,23 @@
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
+        if ([self isCancelled]) return;
       }
       
       parsedCommands = [TPRegularExpression stringsMatching:@"\\\\renewcommand\\{\\\\[a-zA-Z]*\\}" inText:self.file.text];
+      if ([self isCancelled]) return;
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
+        if ([self isCancelled]) return;
       }
       
       parsedCommands = [TPRegularExpression stringsMatching:@"\\\\providecommand\\{\\\\[a-zA-Z]*\\}" inText:self.file.text];
+      if ([self isCancelled]) return;
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
+        if ([self isCancelled]) return;
       }
       
       //-------------- get citatations
@@ -76,6 +81,7 @@
       if ([ext isEqualToString:@"bst"] == NO) {
         // get \bibitem entries
         NSArray *citationsFound = [self.file.text citations];
+        if ([self isCancelled]) return;
         [newCitations addObjectsFromArray:citationsFound];
         
         // citations from any bib files included in this file but not in the project
@@ -88,6 +94,7 @@
       if ([self isCancelled]) return;
       if ([ext isEqualToString:@"bib"]) {
         NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.file.text];
+        if ([self isCancelled]) return;
         // only add these if we don't already have entries for these
         for (BibliographyEntry *entry in entries) {
           // check against existing
@@ -95,6 +102,7 @@
             if (![[e string] isEqualToString:[entry string]]) {
               [newCitations addObject:entry];
             }
+            if ([self isCancelled]) return;
           }
         }
 //        [newCitations addObjectsFromArray:entries];
@@ -107,10 +115,12 @@
       for (NSString *str in parsedLabels) {
         TPLabel *l = [[TPLabel alloc] initWithFile:self.file text:str];
         [newLabels addObject:l];
+        if ([self isCancelled]) return;
       }
     
     }
     
+    if ([self isCancelled]) return;
     self.commands = newCommands;
     self.citations = newCitations;
     self.labels = newLabels;

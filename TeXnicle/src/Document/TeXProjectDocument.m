@@ -630,6 +630,10 @@
 {
   [self.metadataManager stop];
   
+  for (TPFileMetadata *item in self.fileMetadata) {
+    [item tearDown];
+  }
+  
   for (ProjectItemEntity *item in self.project.items) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
