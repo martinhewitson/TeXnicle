@@ -147,6 +147,8 @@
 
 @property (strong) TPDocumentReportWindowController *documentReport;
 
+@property (copy) NSString *miniConsoleLastMessage;
+
 @end
 
 @implementation TeXProjectDocument
@@ -430,6 +432,9 @@
   self.infoControlsTabBarController.splitview = self.splitview;
   self.infoControlsTabview.delegate = self.infoControlsTabBarController;
   
+  // metadata manager
+  self.metadataManager = [[TPMetadataManager alloc] initWithDelegate:self];
+
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
@@ -485,7 +490,17 @@
          selector:@selector(handleOpenDocumentsDidAddFileNotification:) 
              name:TPOpenDocumentsDidAddFileNotification 
            object:self.openDocuments];
-    
+  
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidBeginUpdateNotification:)
+             name:TPMetadataManagerDidBeginUpdateNotification
+           object:self.metadataManager];
+  
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidEndUpdateNotification:)
+             name:TPMetadataManagerDidEndUpdateNotification
+           object:self.metadataManager];
+  
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
@@ -503,9 +518,8 @@
                                                     userInfo:nil
                                                      repeats:YES];
   
-  // metadata manager
-  self.metadataManager = [[TPMetadataManager alloc] initWithDelegate:self];
-  [self.metadataManager start];
+  // start metadata gathering
+  [self.metadataManager performSelector:@selector(start) withObject:nil afterDelay:1.0];
   
   // insert controls tab bar in the responder chain
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
@@ -4151,6 +4165,24 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 #pragma mark -
 #pragma mark Metadata manager delegate
+
+- (void) handleMetadataDidBeginUpdateNotification:(NSNotification*)aNote
+{
+  if ([aNote object] == self.metadataManager) {
+    self.miniConsoleLastMessage = self.miniConsole.currentMessage;
+    [self.miniConsole message:@"Updating metadata"];
+    [self.miniConsole setAnimating:YES];
+  }
+}
+
+- (void) handleMetadataDidEndUpdateNotification:(NSNotification*)aNote
+{
+  if ([aNote object] == self.metadataManager) {
+    [self.miniConsole message:self.miniConsoleLastMessage];
+    [self.miniConsole setAnimating:NO];
+  }
+}
+
 
 - (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
 {
