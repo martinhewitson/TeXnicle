@@ -164,7 +164,9 @@ extern NSString * const TPBookmarkDidUpdateNotification;
 extern NSString * const TPSpellingLanguageChangedNotification;
 extern NSString * const TPFileMetadataSectionsUpdatedNotification;
 extern NSString * const TPFileMetadataUpdatedNotification;
-extern NSString * const TPFileMetadataWarningsUpdatedNotification;
+extern NSString * const TPMetadataManagerDidBeginUpdateNotification;
+extern NSString * const TPMetadataManagerDidEndUpdateNotification;
+//extern NSString * const TPFileMetadataWarningsUpdatedNotification;
 extern NSString * const TPLibraryDidUpdateNotification;
 
 // String constants
