@@ -136,7 +136,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile;
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
 
 #pragma mark -
 #pragma mark Tree Action Menu

@@ -3597,12 +3597,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return [self.texEditorViewController.textView lineNumberForRange:aRange];
 }
 
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
-{	
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile
+{  
+  id file = nil;
+  if ([aFile isKindOfClass:[TPFileMetadata class]]) {
+    file = [self.managedObjectContext objectWithID:[aFile valueForKey:@"objId"]];
+  } else {
+    file = aFile;
+  }
+  
 	// first select the file
 	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aFile];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+  
 	[self.projectItemTreeController setSelectionIndexPath:idx];
     
   // expand all folded code
