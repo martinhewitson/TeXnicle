@@ -4204,6 +4204,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                                                                    extension:file.extension
                                                                         text:file.workingContentString
                                                                         path:file.pathOnDisk
+                                                                 projectPath:[file.filepath stringByStandardizingPath]
                                                                         name:file.name];
           newFile.needsUpdate = YES;
           [self.fileMetadata addObject:newFile];
