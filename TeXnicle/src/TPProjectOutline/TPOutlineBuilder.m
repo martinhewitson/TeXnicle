@@ -12,7 +12,7 @@
 #import "NSString+Comparisons.h"
 #import "FileEntity.h"
 #import "externs.h"
-#import "TPFileEntityMetadata.h"
+#import "TPFileMetadata.h"
 #import "NSString+SectionsOutline.h"
 #import "NSArray+Color.h"
 

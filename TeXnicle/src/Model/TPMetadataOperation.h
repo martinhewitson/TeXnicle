@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TPFileEntityMetadata.h"
 #import "TPFileMetaData.h"
 
 @interface TPMetadataOperation : NSOperation
