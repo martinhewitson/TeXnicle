@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPSyntaxChecker.h"
 
 @class TPMetadataOperation;
 @class TPFileMetadata;
@@ -17,10 +18,8 @@
 
 @end
 
-@interface TPFileMetadata : NSObject <FileMetadataDelegate>
+@interface TPFileMetadata : NSObject <FileMetadataDelegate, SyntaxCheckerDelegate>
 
-@property (strong) NSOperationQueue* aQueue;
-@property (strong) TPMetadataOperation *currentOperation;
 
 // properties
 @property (strong) NSManagedObjectID *objId;
@@ -33,6 +32,7 @@
 @property (strong) NSArray *userNewCommands;
 @property (strong) NSArray *citations;
 @property (strong) NSArray *labels;
+@property (strong) NSArray *syntaxErrors;
 
 @property (assign) BOOL needsUpdate;
 @property (strong) NSDate *lastUpdate;
