@@ -98,6 +98,14 @@
 #pragma mark -
 #pragma mark outline builder delegate
 
+- (NSArray*) allMetadataFiles
+{
+  if (self.delegate) {
+    return [self.delegate allMetadataFiles];
+  }
+  return @[];
+}
+
 - (id) mainFile
 {
   if (self.delegate) {
@@ -134,7 +142,6 @@
       currentFile = [self.delegate currentFile];
       location = [self.delegate locationInCurrentEditor];
     }
-    
     
     TPSection *lastSection = nil;
     self.currentSection = nil;
