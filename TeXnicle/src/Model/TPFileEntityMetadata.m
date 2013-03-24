@@ -38,9 +38,6 @@
 #import "externs.h"
 #import "NSNotificationAdditions.h"
 
-NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
-NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
-NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWarningsUpdatedNotification";
 
 @interface TPFileEntityMetadata ()
 
@@ -217,7 +214,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
     } else {
       // clear errors
       self.syntaxErrors = @[];
-      [self postWarningsUpdateNotification];
+//      [self postWarningsUpdateNotification];
     }
 
     self.needsSyntaxCheck = NO;
@@ -244,12 +241,12 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   [nc postNotificationName:TPFileMetadataUpdatedNotification object:self];
 }
 
-- (void) postWarningsUpdateNotification
-{
-  // send notification of update
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  [nc postNotificationName:TPFileMetadataWarningsUpdatedNotification object:self];
-}
+//- (void) postWarningsUpdateNotification
+//{
+//  // send notification of update
+//  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+//  [nc postNotificationName:TPFileMetadataWarningsUpdatedNotification object:self];
+//}
 
 
 - (void) cleanup
@@ -272,7 +269,7 @@ NSString * const TPFileMetadataWarningsUpdatedNotification = @"TPFileMetadataWar
   for (TPSyntaxError *error in self.syntaxErrors) {
     error.file = self.parent; 
   }
-  [self postWarningsUpdateNotification];
+//  [self postWarningsUpdateNotification];
 }
 
 - (BOOL)syntaxCheckerShouldCheckSyntax:(TPSyntaxChecker*)checker

@@ -9,9 +9,15 @@
 #import "TPMetadataManager.h"
 #import "TPFileMetadata.h"
 
+NSString * const TPFileMetadataSectionsUpdatedNotification = @"TPFileMetadataSectionsUpdatedNotification";
+NSString * const TPFileMetadataUpdatedNotification = @"TPFileMetadataUpdatedNotification";
+NSString * const TPMetadataManagerDidBeginUpdateNotification = @"TPMetadataManagerDidBeginUpdateNotification";
+NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManagerDidEndUpdateNotification";
+
 @interface TPMetadataManager ()
 
 @property (strong) NSTimer *timer;
+@property (assign) NSInteger updatingCount;
 
 @end
 
@@ -62,17 +68,28 @@
 
 - (void) update
 {
+  if (self.updatingCount > 0) {
+    return;
+  }
+  
   //NSLog(@"Metadata Manager update triggered on thread %@", [NSThread currentThread]);
+  
   
   // get list of files from delegate
   NSArray *filesToUpdate = [self metadataManagerFilesToScan:self];
-  
+  self.updatingCount = 0;
   for (TPFileMetadata *f in filesToUpdate) {
     if (f.needsUpdate) {
       f.delegate = self;
       [f updateMetadata];
+      self.updatingCount++;
     }
-  }  
+  }
+  
+  if (self.updatingCount > 0) {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:TPMetadataManagerDidBeginUpdateNotification object:self];
+  }
 }
 
 
@@ -81,7 +98,12 @@
 
 - (void) fileMetadataDidUpdate:(TPFileMetadata *)file
 {
-  
+  self.updatingCount--;
+
+  if (self.updatingCount == 0) {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:TPMetadataManagerDidEndUpdateNotification object:self];
+  }
 }
 
 #pragma mark -
