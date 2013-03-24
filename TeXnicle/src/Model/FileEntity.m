@@ -61,18 +61,11 @@
 - (void) awakeFromInsert
 {
 //  NSLog(@"%@: Awake from insert", [self name]);
-//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
   [self reloadFromDisk];
   [self loadIcon];
-  
-//	[self reconfigureDocument];
-//	if (!document) {
-////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
-//		document = [[FileDocument alloc] initWithFile:self];
-//	}
   
   self.isActive = 0;
 }
@@ -81,9 +74,7 @@
 {
 	[super awakeFromFetch];
 //  NSLog(@"%p: %@: Awake from fetch", self, [self name]);
-	
-//  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
-  
+	 
 	[self reloadFromDisk];
   [self loadIcon];
 	
@@ -95,11 +86,6 @@
     }
   }
 	
-//	if (!document) {
-//		NSLog(@"awakeFromFetch: Created document for %@", [self valueForKey:@"name"]);
-//		document = [[FileDocument alloc] initWithFile:self];
-//	}
-  
   self.isActive = 0;
 }
 
@@ -356,18 +342,9 @@
 //  NSLog(@"Will fault %@ [%@]", self.name, self.metadata);
 }
 
-//- (void) didTurnIntoFault
-//{
-//  self.metadata.parent = nil;
-//  self.metadata = nil;
-//  self.icon = nil;
-  
-//	if (document) {
-//		NSLog(@"Clearing document for %@", [self name]);
-//		document = nil;
-//	}
-
-//}
+- (void) didTurnIntoFault
+{
+}
 
 - (NSString*) extension
 {
