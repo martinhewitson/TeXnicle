@@ -8,7 +8,7 @@
 
 #import "TPSection.h"
 #import "TPSectionTemplate.h"
-#import "FileEntity.h"
+#import "TPFileMetadata.h"
 
 @interface TPSection ()
 
@@ -55,7 +55,7 @@
     return NO;
   }
   
-  if ([self.file isKindOfClass:[FileEntity class]]) {
+  if ([self.file isKindOfClass:[TPFileMetadata class]]) {
     if (self.file != s.file) {
       return NO;
     }
@@ -87,7 +87,7 @@
   
   TPSection *s = (TPSection*)object;
   
-  if ([self.file isKindOfClass:[FileEntity class]]) {
+  if ([self.file isKindOfClass:[TPFileMetadata class]]) {
     if (self.file != s.file) {
       return NO;
     }
@@ -116,7 +116,7 @@
     self.startIndex = index;
     self.file = aFile;
     
-    if ([self.file isKindOfClass:[FileEntity class]]) {
+    if ([self.file isKindOfClass:[TPFileMetadata class]]) {
       self.filename = [self.file valueForKey:@"name"];
     } else {
       self.filename = [self.file lastPathComponent];
