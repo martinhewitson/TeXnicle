@@ -203,7 +203,6 @@
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
 		2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
-		254AE6DF15AE9F4200680414 /* TPFileEntityMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */; };
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
 		254C1E0B14F382B400925515 /* TPProjectTemplateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */; };
 		254C1E0C14F382B400925515 /* TPProjectTemplateListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254C1E0A14F382B400925515 /* TPProjectTemplateListViewController.xib */; };
@@ -370,7 +369,6 @@
 		25BB152B15B4185C007A7FDF /* warningsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152915B4185C007A7FDF /* warningsTabBarImage.icns */; };
 		25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */; };
 		25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */; };
-		25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */; };
 		25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB154215B444FC007A7FDF /* TPWarningSet.m */; };
 		25BB23EF14B772910015D4C1 /* TPSupportedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BB23EE14B772910015D4C1 /* TPSupportedFile.m */; };
 		25BE010614BE1D38004FDDE7 /* Lilypond.engine in Resources */ = {isa = PBXBuildFile; fileRef = 25BE010514BE1D38004FDDE7 /* Lilypond.engine */; };
@@ -809,8 +807,6 @@
 		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
-		254AE6DD15AE9F4200680414 /* TPFileEntityMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPFileEntityMetadata.h; sourceTree = "<group>"; };
-		254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPFileEntityMetadata.m; sourceTree = "<group>"; };
 		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = template.engine; sourceTree = "<group>"; };
 		254C1E0814F382B400925515 /* TPProjectTemplateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateListViewController.h; sourceTree = "<group>"; };
 		254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateListViewController.m; sourceTree = "<group>"; };
@@ -1081,8 +1077,6 @@
 		25BB152D15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoToolbarBackgroundView.m; sourceTree = "<group>"; };
 		25BB153915B431F6007A7FDF /* TPWarningsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningsViewController.h; sourceTree = "<group>"; };
 		25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningsViewController.m; sourceTree = "<group>"; };
-		25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FileEntity+Warnings.h"; sourceTree = "<group>"; };
-		25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FileEntity+Warnings.m"; sourceTree = "<group>"; };
 		25BB154115B444FC007A7FDF /* TPWarningSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPWarningSet.h; sourceTree = "<group>"; };
 		25BB154215B444FC007A7FDF /* TPWarningSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningSet.m; sourceTree = "<group>"; };
 		25BB23ED14B772910015D4C1 /* TPSupportedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSupportedFile.h; sourceTree = "<group>"; };
@@ -2025,8 +2019,6 @@
 				25129B3916FD8E21003FC11B /* TPMetadataManager.m */,
 				25C7F4501629968B00C312AB /* TPRegularExpression.h */,
 				25C7F4511629968B00C312AB /* TPRegularExpression.m */,
-				254AE6DD15AE9F4200680414 /* TPFileEntityMetadata.h */,
-				254AE6DE15AE9F4200680414 /* TPFileEntityMetadata.m */,
 				25129B3B16FD9241003FC11B /* TPFileMetadata.h */,
 				25129B3C16FD9241003FC11B /* TPFileMetadata.m */,
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
@@ -2319,8 +2311,6 @@
 			children = (
 				25BB153915B431F6007A7FDF /* TPWarningsViewController.h */,
 				25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */,
-				25BB153E15B4353B007A7FDF /* FileEntity+Warnings.h */,
-				25BB153F15B4353B007A7FDF /* FileEntity+Warnings.m */,
 				25BB154115B444FC007A7FDF /* TPWarningSet.h */,
 				25BB154215B444FC007A7FDF /* TPWarningSet.m */,
 			);
@@ -3055,7 +3045,6 @@
 				25E7B13915AB3A6C00373A56 /* TPOutlineBuilder.m in Sources */,
 				25E7B13C15AB3C7700373A56 /* TPSectionTemplate.m in Sources */,
 				25E7B14015AD697600373A56 /* TPProjectOutlineViewController.m in Sources */,
-				254AE6DF15AE9F4200680414 /* TPFileEntityMetadata.m in Sources */,
 				255454B515AEEF9E006D36BF /* NSString+SectionsOutline.m in Sources */,
 				258BCAE815B067210092E914 /* TPTabbarMatchingBackground.m in Sources */,
 				2540D8A215B2ACF800528982 /* library.xcdatamodeld in Sources */,
@@ -3071,7 +3060,6 @@
 				2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */,
 				25BB152E15B418AB007A7FDF /* MHInfoToolbarBackgroundView.m in Sources */,
 				25BB153C15B431F6007A7FDF /* TPWarningsViewController.m in Sources */,
-				25BB154015B4353C007A7FDF /* FileEntity+Warnings.m in Sources */,
 				25BB154315B444FC007A7FDF /* TPWarningSet.m in Sources */,
 				25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */,
 				25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */,
