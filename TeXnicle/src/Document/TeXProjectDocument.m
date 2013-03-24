@@ -4283,11 +4283,27 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) metadataView:(TPMetadataViewController *)aViewController didSelectItem:(id)anItem
 {
+  // get the item's objId and get a file from that
+  TPFileMetadata *fileMeta = [anItem valueForKey:@"file"];
+  NSManagedObject *obj = [self.managedObjectContext objectWithID:fileMeta.objId];
+  if (obj == nil) {
+    return;
+  }
+  
+  FileEntity *file = nil;
+  if ([obj isKindOfClass:[FileEntity class]]) {
+    file = (FileEntity*)obj;
+  }
+  
+  if (file == nil) {
+    return;
+  }
+  
   if (aViewController == self.commandsViewController) {
     // first select the file
     [self.projectItemTreeController setSelectionIndexPath:nil];
     // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[anItem valueForKey:@"file"]];
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
     [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // now select the text
@@ -4301,7 +4317,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     // first select the file
     [self.projectItemTreeController setSelectionIndexPath:nil];
     // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[anItem valueForKey:@"file"]];
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
     [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // just search for the first line of the source string, or up to the first ','
@@ -4325,7 +4341,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     // first select the file
     [self.projectItemTreeController setSelectionIndexPath:nil];
     // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[anItem valueForKey:@"file"]];
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
     [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // now select the text
@@ -4341,10 +4357,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     // first select the file
     [self.projectItemTreeController setSelectionIndexPath:nil];
     // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[anItem valueForKey:@"file"]];
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
     [self.projectItemTreeController setSelectionIndexPath:idx];
     
-    [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] inFile:[anItem valueForKey:@"file"] select:YES];
+    [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] inFile:file select:YES];
     [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
     
   }
