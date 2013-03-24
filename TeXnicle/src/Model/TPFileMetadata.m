@@ -87,8 +87,7 @@
     self.citations = self.currentOperation.citations;
     self.labels = self.currentOperation.labels;
     
-    [self fileMetadataDidUpdate:self];
-    
+    [self fileMetadataDidUpdate:self];    
     [self postUpdateNotification];
   }
 }
