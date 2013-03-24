@@ -4255,28 +4255,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       [files addObject:item];
     } else if (aViewController == self.labelsViewController && [item.labels count] > 0) {
       [files addObject:item];
+    } else if (aViewController == self.warningsViewController && [item.syntaxErrors count] > 0) {
+      [files addObject:item];
     }
-//    else if (aViewController == self.warningsViewController && [file.metadata.syntaxErrors count] > 0) {
-//      [files addObject:file];
-//    }
   }
-  
-//  for (ProjectItemEntity *item in self.project.items) {
-//    if ([item isKindOfClass:[FileEntity class]]) {
-//      FileEntity *file = (FileEntity*)item;
-//      if ([file isText]) {
-//        if (aViewController == self.commandsViewController && [file.metadata.userNewCommands count] > 0) {
-//          [files addObject:file];
-//        } else if (aViewController == self.citationsViewController && [file.metadata.citations count] > 0) {
-//          [files addObject:file];
-//        } else if (aViewController == self.labelsViewController && [file.metadata.labels count] > 0) {
-//          [files addObject:file];
-//        } else if (aViewController == self.warningsViewController && [file.metadata.syntaxErrors count] > 0) {
-//          [files addObject:file];
-//        }
-//      }
-//    }
-//  }
   
   return [NSArray arrayWithArray:files];
 }
@@ -4374,20 +4356,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     return file.citations;
   } else if (aViewController == self.labelsViewController) {
     return file.labels;
+  } else if (aViewController == self.warningsViewController) {
+    return file.syntaxErrors;
   }
-//  else if (aViewController == self.warningsViewController) {
-//    return [[(FileEntity*)file metadata] syntaxErrors];
-//  }
-  
-//  if (aViewController == self.commandsViewController) {
-//    return [[(FileEntity*)file metadata] userNewCommands];
-//  } else if (aViewController == self.citationsViewController) {
-//    return [[(FileEntity*)file metadata] citations];
-//  } else if (aViewController == self.labelsViewController) {
-//    return [[(FileEntity*)file metadata] labels];
-//  } else if (aViewController == self.warningsViewController) {
-//    return [[(FileEntity*)file metadata] syntaxErrors];
-//  }
   
   return @[];
 }
