@@ -137,14 +137,15 @@
   
   // get the main file from the delegate
   id file = [self.delegate mainFile];
-//  NSLog(@"  main file %@", [file valueForKey:@"name"]);
-  if ([file isKindOfClass:[FileEntity class]]) {
+//  NSLog(@"  main file %@ [%@]", [file valueForKey:@"name"], file);
+  if ([file isKindOfClass:[TPFileMetadata class]]) {
     
     __block TPOutlineBuilder *blockSelf = self;
     dispatch_async(queue, ^{
       
 //      NSLog(@"   computing sections...");
       NSArray *newSections = [file generateSectionsForTypes:templatesToScanFor
+                                                      files:[self.delegate allMetadataFiles]
                                                 forceUpdate:NO];
 //      NSLog(@"  got %ld", [newSections count]);
 //      NSLog(@"   processing sections...");

@@ -12,6 +12,7 @@
 @protocol TPOutlineBuilderDelegate <NSObject>
 
 - (id) mainFile;
+- (NSArray*) allMetadataFiles;
 - (NSString*) textForFile:(id)aFile;
 - (void) didComputeNewSections;
 - (BOOL) shouldGenerateOutline;
