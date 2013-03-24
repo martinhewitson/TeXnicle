@@ -54,7 +54,6 @@
 
 @synthesize document;
 @synthesize isActive;
-@synthesize metadata;
 @synthesize icon;
 
 
@@ -629,38 +628,10 @@
 #pragma mark -
 #pragma mark Metadata
 
-- (void) updateMetadata
-{
-  if (self.metadata) {
-    [self.metadata updateMetadata];
-  }
-}
-
-- (NSArray*) listOfNewCommands
-{
-  if (self.metadata == nil) {
-    return @[];
-  }
-  
-  return [self.metadata listOfNewCommands];
-}
-
-- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
-{
-  if (self.metadata) {
-    return [self.metadata generateSectionsForTypes:templates forceUpdate:force];
-  }
-  return @[];
-}
 
 - (NSString*) text
 {
   return [self workingContentString];
-}
-
-- (TPFileEntityMetadata*) metadataForFileWithName:(NSString *)file
-{
-  return [[self.project fileWithPath:file] metadata];
 }
 
 @end

@@ -27,18 +27,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ProjectItemEntity.h"
-#import "TPFileEntityMetadata.h"
 
 @class FileDocument;
 @class Bookmark;
 
-@interface FileEntity : ProjectItemEntity <TPFileEntityMetadataDelegate> {
+@interface FileEntity : ProjectItemEntity {
 
 	FileDocument *document;
 	BOOL _hasEdits;
   NSInteger isActive;
   
-  TPFileEntityMetadata *metadata;
 }
 
 // core data properties
@@ -60,7 +58,6 @@
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
 @property (unsafe_unretained, readonly) NSString *consolidatedFileContents;
-@property (strong) TPFileEntityMetadata *metadata;
 @property (assign) NSInteger isActive;
 
 - (void)increaseActiveCount;
