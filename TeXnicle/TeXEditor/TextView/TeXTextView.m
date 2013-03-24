@@ -88,6 +88,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (strong) NSMutableArray *commandList;
 @property (strong) NSMutableArray *wordHighlightRanges;
 @property (strong) MHTableConfigureController *tableConfigureController;
+@property (assign) CGFloat averageCharacterWidth;
 
 @end
 
@@ -865,6 +866,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (![newFont isEqualTo:[self font]] || forceUpdate) {
 //    NSLog(@"Setting new font %@", newFont);
     [self setFont:newFont];
+    self.averageCharacterWidth = [NSString averageCharacterWidthForFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
     //    NSLog(@"Setting new color");
@@ -898,8 +900,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
-    CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
-    [textContainer setContainerSize:NSMakeSize(scale*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
+    [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
   }	else if (wrapStyle == TPNoWrap) {
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
   } else {
