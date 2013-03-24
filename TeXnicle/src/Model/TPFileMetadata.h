@@ -27,20 +27,24 @@
 @property (copy) NSString *extension;
 @property (copy) NSString *text;
 @property (copy) NSString *pathOnDisk;
+@property (copy) NSString *projectPath;
 
 // products
 @property (strong) NSArray *userNewCommands;
 @property (strong) NSArray *citations;
 @property (strong) NSArray *labels;
 @property (strong) NSArray *syntaxErrors;
+@property (strong) NSArray *sections;
 
 @property (assign) BOOL needsUpdate;
 @property (strong) NSDate *lastUpdate;
 
 @property (assign) id<FileMetadataDelegate> delegate;
 
-- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk name:(NSString*)aName;
+- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk projectPath:(NSString*)pathRelativeToProject name:(NSString*)aName;
 - (void) updateMetadata;
 - (void) tearDown;
+
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates files:(NSArray*)otherFiles forceUpdate:(BOOL)force;
 
 @end

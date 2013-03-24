@@ -10,6 +10,7 @@
 #import "TPMetadataOperation.h"
 #import "TPSyntaxError.h"
 #import "NSString+LaTeX.h"
+#import "NSString+SectionsOutline.h"
 #import "externs.h"
 
 @interface TPFileMetadata ()
@@ -26,7 +27,7 @@
 
 @implementation TPFileMetadata
 
-- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk name:(NSString*)aName
+- (id) initWithParentId:(NSManagedObjectID*)objId extension:(NSString*)ext text:(NSString*)text path:(NSString*)pathOnDisk projectPath:(NSString *)pathRelativeToProject name:(NSString*)aName
 {
   self = [super init];
   if (self) {
@@ -34,6 +35,7 @@
     self.extension = ext;
     self.text = text;
     self.pathOnDisk = pathOnDisk;
+    self.projectPath = pathRelativeToProject;
     self.aQueue = [[NSOperationQueue alloc] init];
     self.name = aName;
     self.checker = [[TPSyntaxChecker alloc] initWithDelegate:self];
@@ -48,7 +50,13 @@
     [defaults addObserver:self
                forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]
                   options:NSKeyValueObservingOptionNew
-                  context:NULL];		
+                  context:NULL];
+    
+    // if the project path has no extension, assume .tex
+    if ([[self.projectPath pathExtension] length] == 0) {
+      self.projectPath = [self.projectPath stringByAppendingPathExtension:@"tex"];
+    }
+
     
   }
   
@@ -145,6 +153,27 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(fileMetadataDidUpdate:)]) {
     [self.delegate fileMetadataDidUpdate:self];
   }
+}
+
+#pragma mark -
+#pragma mark Sections
+
+- (NSArray*) generateSectionsForTypes:(NSArray*)templates files:(NSArray*)otherFiles forceUpdate:(BOOL)force
+{
+  // we have to update all sections for this file because we look for other files included from
+  // here, and they might have changed. So, the only case where we don't need to update is if no
+  // files have changed. Is that really worth checking?
+  
+  [self updateSectionsForTypes:templates files:otherFiles forceUpdate:force];
+  
+  return self.sections;
+}
+
+
+- (void)updateSectionsForTypes:(NSArray*)templates files:(NSArray*)otherFiles forceUpdate:(BOOL)force
+{
+  // get the parent file and the text to search
+  self.sections = [self.text sectionsInStringForTypes:templates existingSections:self.sections inFile:self knownFiles:otherFiles];
 }
 
 #pragma mark -
