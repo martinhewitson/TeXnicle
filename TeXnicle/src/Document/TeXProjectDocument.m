@@ -647,15 +647,6 @@
   for (TPFileMetadata *item in self.fileMetadata) {
     [item tearDown];
   }
-  
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if (file.metadata) {
-        [file.metadata stopMetadataTimer];
-      }
-    }
-  }
 }
 
 - (void) tearDown
@@ -2011,15 +2002,10 @@
 {
   NSMutableArray *citations = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        for (BibliographyEntry *entry in file.metadata.citations) {
-          if (![citations containsObject:entry]) {
-            [citations addObjectsFromArray:file.metadata.citations];
-          }
-        }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    for (BibliographyEntry *entry in file.citations) {
+      if (![citations containsObject:entry]) {
+        [citations addObject:entry];
       }
     }
   }
@@ -2031,14 +2017,9 @@
 {
   NSMutableArray *commands = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        for (TPNewCommand *c in file.metadata.userNewCommands) {
-          [commands addObject:c.argument];
-        }
-      }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    for (TPNewCommand *c in file.userNewCommands) {
+      [commands addObject:c.argument];
     }
   }
   
@@ -2069,15 +2050,10 @@
 {
 	NSMutableArray *tags = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        [tags addObjectsFromArray:file.metadata.labels];
-      }
-    }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    [tags addObjectsFromArray:file.labels];
   }
-	
+  
 	return tags;	
 }
 
