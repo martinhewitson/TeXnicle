@@ -26,8 +26,6 @@
 //
 
 #import "TPWarningsViewController.h"
-#import "FileEntity.h"
-#import "FileEntity+Warnings.h"
 #import "externs.h"
 #import "TPSyntaxError.h"
 #import "TPWarningSet.h"
