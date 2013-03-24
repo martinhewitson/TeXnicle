@@ -3341,42 +3341,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.projectOutlineView setNeedsDisplay];
 }
 
-//
-//
-//#pragma mark -
-//#pragma mark LaTeX Engine Delegate
-//
-//- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
-//{
-//  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
-//}
-//
-//- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
-//{
-//  return [self.project folder]; 
-//}
-//
-//- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
-//{
-//  if ([self.project valueForKey:@"mainFile"]) {
-//    return YES;
-//  }	
-//	return NO;	 
-//}
-//
-//- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
-//{
-//  if ([[[self.project valueForKey:@"type"] lowercaseString] isEqualToString:@"latex"]) {
-//    return TPEngineCompilerLaTeX;
-//  } else {
-//    return TPEngineCompilerPDFLaTeX;
-//  }
-//}
-//
-//- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
-//{
-//  return YES;
-//}
 
 #pragma mark -
 #pragma mark File Monitor Delegate
@@ -3833,11 +3797,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   NSInteger linenumber = [aBookmark.linenumber integerValue];
   FileEntity *file = aBookmark.parentFile;
-  
-  // forward this to all open document windows
-//  for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
-//    [doc jumpToBookmark:aBookmark];
-//  }
   
 	// first select the file
 	[self.projectItemTreeController setSelectionIndexPath:nil];
