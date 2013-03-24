@@ -31,4 +31,6 @@
 
 - (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file;
 
+- (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file knownFiles:(NSArray*)otherFiles;
+
 @end

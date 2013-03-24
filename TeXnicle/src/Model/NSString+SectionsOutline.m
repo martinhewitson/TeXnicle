@@ -30,16 +30,25 @@
 #import "TPSectionTemplate.h"
 #import "NSString+LaTeX.h"
 #import "NSString+Comparisons.h"
-#import "FileEntity.h"
-#import "TPFileEntityMetadata.h"
+#import "TPFileMetadata.h"
 #import "ProjectEntity.h"
 #import "MHFileReader.h"
 
-@implementation NSString (SectionsOutline)
+#define TP_SECTION_DEBUG 0
 
+@implementation NSString (SectionsOutline)
 
 - (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file
 {
+  return [self sectionsInStringForTypes:templates existingSections:sections inFile:file knownFiles:@[]];
+}
+
+
+- (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file knownFiles:(NSArray*)otherFiles
+{
+#if TP_SECTION_DEBUG
+  NSLog(@"Scanning sections from %@", [file valueForKey:@"name"]);
+#endif
   
   // prepare sections found array
   NSMutableArray *sectionsFound = [NSMutableArray array];
@@ -102,27 +111,46 @@
 //            NSLog(@"Got section arg [%@] at %ld", arg, loc);
             
             TPSection *section = [TPSection sectionWithParent:nil start:loc inFile:file type:template name:arg];
-//            NSLog(@"Made section %@", section);
+#if TP_SECTION_DEBUG
+            NSLog(@"Made section %@", section);
+#endif
             // add the section
             [sectionsFound addObject:section];
           } // end if template is not nil
         } // end if command is not nil        
       } else if ([word beginsWith:@"\\input{"] || [word beginsWith:@"\\include{"]) {
         
-        //        NSLog(@"Got include %@", word);
+#if TP_SECTION_DEBUG
+        NSLog(@"Got include %@", word);
+#endif
         
         // get argument
         NSString *arg = [word argument];
+        if ([[arg pathExtension] length] == 0) {
+          arg = [arg stringByAppendingPathExtension:@"tex"];
+        }
+        
         __block NSString *subtext = nil;
         __block id subfile = nil;
-        if ([file isKindOfClass:[FileEntity class]]) {
-          ProjectEntity *project = [(FileEntity*)file project];
-          // access the project on the main thread otherwise we can get mutex deadlocks
-//          dispatch_sync(dispatch_get_main_queue(), ^{
-            subfile = [project fileWithPath:arg];
-//            NSLog(@"  got file %@", subfile);
-            subtext = [subfile workingContentString];
-//          });
+#if TP_SECTION_DEBUG
+        NSLog(@"   looking for %@", arg);
+#endif
+        if ([file isKindOfClass:[TPFileMetadata class]]) {
+          
+          for (TPFileMetadata *sfile in otherFiles) {
+#if TP_SECTION_DEBUG
+            NSLog(@"     checking %@", sfile.projectPath);
+#endif
+            if ([sfile.projectPath isEqualToString:arg]) {
+#if TP_SECTION_DEBUG
+              NSLog(@"     found %@", sfile.projectPath);
+#endif
+              subtext = sfile.text;
+              subfile = sfile;
+              break;
+            }
+          }
+          
         } else {
           // file is a URL
           NSString *root = [[file path] stringByDeletingLastPathComponent];
@@ -138,7 +166,10 @@
             subfile = [NSURL fileURLWithPath:filepath];
         }
         if (subtext) {
-          NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile]; 
+#if TP_SECTION_DEBUG
+          NSLog(@"     will scan %@", [subfile valueForKey:@"name"]);
+#endif
+          NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile knownFiles:otherFiles];
           // check if we already have any of these sections
           for (__strong TPSection *ss in subsections) {
             [sectionsFound addObject:ss];
