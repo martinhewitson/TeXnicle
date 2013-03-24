@@ -519,7 +519,7 @@
                                                      repeats:YES];
   
   // start metadata gathering
-  [self.metadataManager performSelector:@selector(start) withObject:nil afterDelay:1.0];
+  [self.metadataManager performSelector:@selector(start) withObject:nil afterDelay:0.0];
   
   // insert controls tab bar in the responder chain
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
