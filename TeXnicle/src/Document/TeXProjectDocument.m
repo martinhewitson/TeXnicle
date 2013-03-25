@@ -2469,6 +2469,25 @@
 #pragma mark -
 #pragma mark Files and Folders
 
+- (void) didAddFile:(FileEntity*)aFile
+{
+  if ([self.textFiles containsObject:aFile] == NO) {
+    [self.textFiles addObject:aFile];
+  }
+}
+
+- (void) didRemoveFile:(FileEntity*)aFile
+{
+  TPFileMetadata *metafile = [self metaFileForFile:aFile];
+  if (metafile) {
+    [self.fileMetadata removeObject:metafile];
+  }
+  
+  if ([self.textFiles containsObject:aFile]) {
+    [self.textFiles removeObject:aFile];
+  }
+}
+
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
   
