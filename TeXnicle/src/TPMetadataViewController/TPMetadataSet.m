@@ -46,6 +46,14 @@
   return self;
 }
 
+- (NSArray*) displayItems
+{
+  if (self.predicate) {
+    return [self.items filteredArrayUsingPredicate:self.predicate];
+  }
+  
+  return self.items;
+}
 
 - (NSString*) name
 {
@@ -76,7 +84,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
   
   NSString *countString = nil;
-  countString = [NSString stringWithFormat:@" [%lu] ", [self.items count]];
+  countString = [NSString stringWithFormat:@" [%lu] ", [self.displayItems count]];
   
   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:countString];
   [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];

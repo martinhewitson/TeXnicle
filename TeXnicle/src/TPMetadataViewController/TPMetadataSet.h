@@ -36,6 +36,9 @@
 @property (strong) id file;
 @property (unsafe_unretained, readonly) NSString *name;
 
+@property (strong) NSPredicate *predicate;
+@property (readonly) NSArray *displayItems;
+
 - (id) initWithFile:(id)aFile items:(NSArray *)aList;
 
 - (NSAttributedString*)selectedDisplayString;

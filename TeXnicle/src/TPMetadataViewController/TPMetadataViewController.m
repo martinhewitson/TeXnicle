@@ -40,6 +40,7 @@
 @property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
 @property (unsafe_unretained) IBOutlet NSTextField *statusLabel;
+@property (unsafe_unretained) IBOutlet NSSearchField *searchField;
 
 @property (strong) NSDate *lastUpdate;
 
@@ -120,6 +121,25 @@
   return sortedItems;
 }
 
+
+- (IBAction)filterDidChange:(id)sender
+{
+  NSPredicate *predicate = nil;
+  NSString *searchString = [self.searchField stringValue];
+  if ([searchString length] > 0) {
+    predicate = [NSPredicate predicateWithFormat:@"self.value contains[cd] %@", searchString];
+  }
+  
+  for (TPMetadataSet *set in self.sets) {
+    set.predicate = predicate;
+  }
+
+  [self.outlineView reloadData];
+  [self performSelector:@selector(expandAll:) withObject:nil afterDelay:0];
+  [self updateStatusLabel];
+}
+
+
 // Expand all error sets
 - (IBAction)expandAll:(id)sender
 {
@@ -168,6 +188,18 @@
 #pragma mark -
 #pragma mark OutlineView datasource
 
+- (NSArray*)displaySets
+{
+  NSMutableArray *dsets = [[NSMutableArray alloc] init];
+  for (TPMetadataSet *set in self.sets) {
+    if ([set.displayItems count] > 0) {
+      [dsets addObject:set];
+    }
+  }
+
+  return dsets;
+}
+
 - (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
   if (item == nil) {
@@ -204,7 +236,7 @@
   
   if ([item isKindOfClass:[TPMetadataSet class]]) {
     TPMetadataSet *set = (TPMetadataSet*)item;
-    return [set.items count] > 0;
+    return [set.displayItems count] > 0;
   }
   
   return NO;
@@ -213,11 +245,11 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   if (item == nil) {
-    return self.sets[index];
+    return self.displaySets[index];
   }
   if ([item isKindOfClass:[TPMetadataSet class]]) {
     TPMetadataSet *set = (TPMetadataSet*)item;
-    return set.items[index];
+    return set.displayItems[index];
   }
   
   return nil;
@@ -226,12 +258,12 @@
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {  
   if (item == nil) {
-    return [self.sets count];
+    return [self.displaySets count];
   }
   
   if ([item isKindOfClass:[TPMetadataSet class]]) {
     TPMetadataSet *set = (TPMetadataSet*)item;
-    return [set.items count];
+    return [set.displayItems count];
   }
   
   return 0;
@@ -255,12 +287,20 @@
     firstView = NO;
   }
   
+  // and make sure the filter is set
+  [self filterDidChange:self];
+  
   // update status label
+  [self updateStatusLabel];
+}
+
+- (void) updateStatusLabel
+{
   NSInteger total = 0;
-  for (TPMetadataSet *set in self.sets) {
+  for (TPMetadataSet *set in self.displaySets) {
     total += [set.items count];
   }
-  NSString *message = [NSString stringWithFormat:@"%ld itmes in %ld sets", total, [self.sets count]];
+  NSString *message = [NSString stringWithFormat:@"%ld itmes in %ld sets", total, [self.displaySets count]];
   [self.statusLabel setStringValue:message];
 }
 

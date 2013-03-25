@@ -48,6 +48,7 @@
 @property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
 @property (unsafe_unretained) id<TPMetadataViewDelegate> delegate;
 @property (strong) NSMutableArray *sets;
+@property (readonly) NSArray *displaySets;
 
 - (id) initWithDelegate:(id<TPMetadataViewDelegate>)aDelegate;
 
