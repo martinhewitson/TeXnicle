@@ -4238,6 +4238,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
             fm.needsUpdate = YES;
           }
           // ensure other info is up to date
+          fm.projectPath = [file.filepath stringByStandardizingPath];
+          fm.objId = file.objectID;
           fm.name = file.name;
           fm.extension = file.extension;
         }
