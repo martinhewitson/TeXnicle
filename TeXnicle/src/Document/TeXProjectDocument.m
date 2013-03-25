@@ -4249,10 +4249,21 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
 }
 
-- (TPFileMetadata*) metaFileForID:(NSManagedObjectID*)objId
+
+- (FileEntity*) fileForMetaFile:(TPFileMetadata*)file
+{
+  for (FileEntity *f in self.textFiles) {
+    if ([f objectID] == file.objId || [file.projectPath isEqualToString:[[f filepath] stringByStandardizingPath]]) {
+      return f;
+    }
+  }
+  return nil;
+}
+
+- (TPFileMetadata*) metaFileForFile:(FileEntity*)file
 {
   for (TPFileMetadata *f in self.fileMetadata) {
-    if (f.objId == objId) {
+    if (f.objId == [file objectID] || [[f projectPath] isEqualToString:[[file filepath] stringByStandardizingPath]]) {
       return f;
     }
   }
