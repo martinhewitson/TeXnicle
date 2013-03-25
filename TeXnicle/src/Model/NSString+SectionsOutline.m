@@ -126,7 +126,7 @@
         
         // get argument
         NSString *arg = [word argument];
-        if ([[arg pathExtension] length] == 0) {
+        if ([arg length] > 0 && [[arg pathExtension] length] == 0) {
           arg = [arg stringByAppendingPathExtension:@"tex"];
         }
         

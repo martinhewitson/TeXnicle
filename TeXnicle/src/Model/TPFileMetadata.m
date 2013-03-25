@@ -53,7 +53,7 @@
                   context:NULL];
     
     // if the project path has no extension, assume .tex
-    if ([[self.projectPath pathExtension] length] == 0) {
+    if ([self.projectPath length] > 0 && [[self.projectPath pathExtension] length] == 0) {
       self.projectPath = [self.projectPath stringByAppendingPathExtension:@"tex"];
     }
 
