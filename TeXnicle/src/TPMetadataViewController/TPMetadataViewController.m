@@ -39,6 +39,7 @@
 @property (unsafe_unretained) IBOutlet HHValidatedButton *expandAllButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet NSTextField *statusLabel;
 
 @property (strong) NSDate *lastUpdate;
 
@@ -252,7 +253,15 @@
   if (firstView == YES && [self.sets count] > 0) {
     [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
     firstView = NO;
-  }  
+  }
+  
+  // update status label
+  NSInteger total = 0;
+  for (TPMetadataSet *set in self.sets) {
+    total += [set.items count];
+  }
+  NSString *message = [NSString stringWithFormat:@"%ld itmes in %ld sets", total, [self.sets count]];
+  [self.statusLabel setStringValue:message];
 }
 
 - (TPMetadataSet*)setForFile:(TPFileMetadata*)aFile
