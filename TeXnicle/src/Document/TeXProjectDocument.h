@@ -194,6 +194,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark - 
 #pragma mark Files and Folders
 
+- (void) didRemoveFile:(FileEntity*)aFile;
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem;
 - (IBAction)reloadCurrentFileFromDisk:(id)sender;
 - (void) selectTabForFile:(FileEntity*)aFile;
