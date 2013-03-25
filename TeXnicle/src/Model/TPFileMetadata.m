@@ -77,7 +77,7 @@
 
 - (NSString*) description
 {
-  return [NSString stringWithFormat:@"<%@ %p>: %@", [self class], self, self.name];
+  return [NSString stringWithFormat:@"<%@ %p>: %@, scanned? %d", [self class], self, self.name, self.wasScannedForSections];
 }
 
 - (void) tearDown

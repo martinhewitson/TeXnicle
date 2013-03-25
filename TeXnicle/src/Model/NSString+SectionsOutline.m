@@ -47,8 +47,14 @@
 - (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file knownFiles:(NSArray*)otherFiles
 {
 #if TP_SECTION_DEBUG
-  NSLog(@"Scanning sections from %@", [file valueForKey:@"name"]);
+  NSLog(@"Scanning sections from %@ [scanned? %d]", [file valueForKey:@"name"], [[file valueForKey:@"wasScannedForSections"] boolValue]);
 #endif
+  
+  // set this as scanned immediately to stop recursive inclusion
+  if ([file isKindOfClass:[TPFileMetadata class]]) {
+    [(TPFileMetadata*)file setWasScannedForSections:YES];
+//    NSLog(@"Set file as scanned: %@", file);
+  }
   
   // prepare sections found array
   NSMutableArray *sectionsFound = [NSMutableArray array];
@@ -169,6 +175,20 @@
 #if TP_SECTION_DEBUG
           NSLog(@"     will scan %@", [subfile valueForKey:@"name"]);
 #endif
+          
+          // we should only do this if the subfile was not previously scanned, otherwise we get a recursive infinite loop.
+          // we can check this by seeing if any of the existing sections contain a TPSection with this subfile
+          if ([subfile isKindOfClass:[TPFileMetadata class]]) {
+            if ([(TPFileMetadata*)subfile wasScannedForSections]) {
+#if TP_SECTION_DEBUG
+              NSLog(@"Found scanned file %@ - not including", subfile);
+#endif
+              NSRange lineRange = [text lineRangeForRange:NSMakeRange(index, 0)];
+              index = NSMaxRange(lineRange);
+              continue;
+            }
+          }
+          
           NSArray *subsections = [subtext sectionsInStringForTypes:templates existingSections:sections inFile:subfile knownFiles:otherFiles];
           // check if we already have any of these sections
           for (__strong TPSection *ss in subsections) {

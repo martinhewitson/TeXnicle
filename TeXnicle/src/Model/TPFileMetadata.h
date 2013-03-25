@@ -37,6 +37,7 @@
 @property (strong) NSArray *sections;
 
 @property (assign) BOOL needsUpdate;
+@property (assign) BOOL wasScannedForSections;
 @property (strong) NSDate *lastUpdate;
 
 @property (assign) id<FileMetadataDelegate> delegate;

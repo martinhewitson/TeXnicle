@@ -126,12 +126,21 @@
 {
 //  NSLog(@"Build outline...");
   
+  if ([[NSApplication sharedApplication] isActive] == NO) {
+    return;
+  }
+  
   if ([self.delegate shouldGenerateOutline] == NO && [self.sections count] > 0) {
 //    NSLog(@"   NO: Delegate says no, and I have sections already");
     return;
   }
   
   __block TPOutlineBuilder *blockSelf = self;
+  __block NSArray *metafiles = [self.delegate allMetadataFiles];
+  
+  for (TPFileMetadata *file in metafiles) {
+    file.wasScannedForSections = NO;
+  }
   
   NSArray *templatesToScanFor = [blockSelf.templates subarrayWithRange:NSMakeRange(0, 1+blockSelf.depth)];
   
@@ -145,7 +154,7 @@
       
 //      NSLog(@"   computing sections...");
       NSArray *newSections = [file generateSectionsForTypes:templatesToScanFor
-                                                      files:[self.delegate allMetadataFiles]
+                                                      files:metafiles
                                                 forceUpdate:NO];
 //      NSLog(@"  got %ld", [newSections count]);
 //      NSLog(@"   processing sections...");
