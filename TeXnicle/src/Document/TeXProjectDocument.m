@@ -4226,6 +4226,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                                                                         name:file.name];
           newFile.needsUpdate = YES;
           [self.fileMetadata addObject:newFile];
+          // NSLog(@"Added metafile %@ <--> %@", newFile, newFile.objId);
         } else {
           
           // check last edit date
