@@ -2155,6 +2155,15 @@
 
 - (BOOL) shouldGenerateOutline
 {
+  // check last edit and don't trigger an update unless we have a pause
+  NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
+  NSDate *now = [NSDate date];
+  float lastEditInterval = 1.0;
+  if ([now timeIntervalSinceDate:lastEdit] < lastEditInterval) {
+    // do nothing
+    return NO;
+  }
+  
   // if outline tab is selected....
   if (self.controlsTabBarController != nil && [self.controlsTabBarController indexOfSelectedTab] == 3) {
     return YES;
