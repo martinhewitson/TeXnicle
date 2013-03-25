@@ -135,15 +135,20 @@
     return;
   }
   
+  __block TPOutlineBuilder *blockSelf = self;
+  __block NSArray *metafiles = [self.delegate allMetadataFiles];
+  
   // if we have unscanned files, return since we must be mid-generation
+  NSInteger noCount = 0;
   for (TPFileMetadata *file in metafiles) {
     if (file.wasScannedForSections == NO) {
-      return;
+      noCount ++;
     }
   }
   
-  __block TPOutlineBuilder *blockSelf = self;
-  __block NSArray *metafiles = [self.delegate allMetadataFiles];
+  if (noCount < [metafiles count] && noCount > 0) {
+    return;
+  }
   
   for (TPFileMetadata *file in metafiles) {
     file.wasScannedForSections = NO;
@@ -167,6 +172,9 @@
 //      NSLog(@"   processing sections...");
       [blockSelf processNewSections:newSections forFile:file templates:templatesToScanFor];
 //      NSLog(@"      done");
+      for (TPFileMetadata *file in metafiles) {
+        file.wasScannedForSections = NO;
+      }
     });
     
     
