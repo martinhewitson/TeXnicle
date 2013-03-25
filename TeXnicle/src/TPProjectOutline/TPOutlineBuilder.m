@@ -98,7 +98,7 @@
 {
   [self stopTimer];
   
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:2 
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                 target:self
                                               selector:@selector(buildOutline) 
                                               userInfo:nil
@@ -133,6 +133,13 @@
   if ([self.delegate shouldGenerateOutline] == NO && [self.sections count] > 0) {
 //    NSLog(@"   NO: Delegate says no, and I have sections already");
     return;
+  }
+  
+  // if we have unscanned files, return since we must be mid-generation
+  for (TPFileMetadata *file in metafiles) {
+    if (file.wasScannedForSections == NO) {
+      return;
+    }
   }
   
   __block TPOutlineBuilder *blockSelf = self;
