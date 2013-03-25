@@ -1092,44 +1092,38 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) insertWordAtCurrentLocation:(NSString*)aWord
 {
-	NSString *replacement = [NSString stringWithString:aWord];
 	NSRange curr = [self selectedRange];
 	NSRange rr = NSMakeRange(curr.location, 0);
-	if ([self shouldChangeTextInRange:rr replacementString:replacement]) {
-    [self replaceCharactersInRange:rr withString:replacement];
-    [self clearSpellingList];
-    [self colorVisibleText];
-    [self didChangeText];
-  }
+  [self replaceTextInRange:rr withText:aWord];
 }
 
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord
 {
-	NSString *replacement = [NSString stringWithString:aWord];
 	[self selectUpToCurrentLocation];
 	NSRange sel = [self selectedRange];
-	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
-    [self replaceCharactersInRange:sel withString:replacement];
-    [self clearSpellingList];
-    [self colorVisibleText];
-    [self didChangeText];
-  }
+  [self replaceTextInRange:sel withText:aWord];
 }
 
 - (void) replaceWordAtCurrentLocationWith:(NSString*)aWord
 {
-	NSString *replacement = [NSString stringWithString:aWord];
-	//	NSLog(@"Replacing current word with %@", replacement);
-  //	[self selectWord:self];
 	NSRange sel = [self rangeForCurrentWord];
-	if ([self shouldChangeTextInRange:sel replacementString:replacement]) {
-    [self replaceCharactersInRange:sel withString:replacement];
+  [self replaceTextInRange:sel withText:aWord];
+}
+
+- (void) replaceTextInRange:(NSRange)aRange withText:(NSString*)text
+{
+  NSAttributedString *astr = [NSAttributedString stringWithPlaceholdersRestored:text attributes:[NSDictionary currentTypingAttributes]];
+	if ([self shouldChangeTextInRange:aRange replacementString:[astr string]]) {
+    [self.textStorage replaceCharactersInRange:aRange withAttributedString:astr];
+    if ([astr length] < [text length]) {
+      [self setSelectedRange:NSMakeRange(aRange.location, 0)];
+      [self jumpToNextPlaceholder:self];
+    }
     [self clearSpellingList];
     [self colorVisibleText];
     [self didChangeText];
   }
 }
-
 
 #pragma mark -
 #pragma mark Folding
