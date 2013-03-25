@@ -2166,7 +2166,7 @@
 - (id) currentFile
 {
   FileEntity *file = self.openDocuments.currentDoc;  
-  return [self metaFileForID:file.objectID];
+  return [self metaFileForFile:file];
 }
 
 - (NSInteger) locationInCurrentEditor
@@ -4210,16 +4210,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       // make sure we cache these to stop them being faulted
       if ([self.textFiles containsObject:file] == NO) {
         [self.textFiles addObject:file];
+        // NSLog(@"Cached file %p:%@ [%@]", file, file.name, file.objectID);
       }
       
       if ([file isText]) {
-//      if ([file isText] && [file isImage] == NO) {
-        NSManagedObjectID *objId = [item objectID];
-        TPFileMetadata *fm = [self metaFileForID:objId];
+        TPFileMetadata *fm = [self metaFileForFile:file];
         
         // if we don't have the file, add it, otherwise update it
         if (fm == nil) {
-          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:objId
+          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:file.objectID
                                                                    extension:file.extension
                                                                         text:file.workingContentString
                                                                         path:file.pathOnDisk
