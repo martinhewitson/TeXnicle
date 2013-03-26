@@ -485,6 +485,10 @@
 {
 //	NSLog(@"Saving contents of %@ to disk", [self valueForKey:@"name"]);
 	BOOL success = NO;
+  
+  if ([self hasEdits] == NO) {
+    return YES;
+  }
 
 	if ([self existsOnDisk]) {		
 		if ([self updateFromTextStorage]) {
@@ -551,7 +555,7 @@
 
 - (BOOL) writeContents
 {
-//	NSLog(@"Writing contents of %@ to disk", [self name]);
+	// NSLog(@"Writing contents of %@ to disk", [self name]);
   
   if ([self isImage])
     return YES;
