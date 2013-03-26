@@ -95,20 +95,9 @@
   
   [self.thumbSlideViewController setRightSided:NO];
   [self.thumbSlideViewController setDelegate:self];
-  
   [self.pdfview setDelegate:self];
   
-  if ([self hasDocument]) {
-    [self.toggleThumbsButton setState:NSOnState];  
-    
-  } else {
-    [self.thumbSlideViewController slideOutAnimated:NO];
-    [self.toggleThumbsButton setState:NSOffState];
-  }
-  
-  self.toolbarView.strokeLeftSide = YES;
-  
-  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
+  self.toolbarView.strokeLeftSide = YES;  
   
   // get notified of page changes
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -123,8 +112,15 @@
              name:PDFViewDocumentChangedNotification
            object:self.pdfview];
   
+  [self setupThumbsView];
   [self performSelector:@selector(updatePageCountDisplay) withObject:nil afterDelay:0];
+  [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
   
+}
+
+- (void) setupThumbsView
+{
+  [self.thumbSlideViewController toggle:self];
 }
 
 - (void) handleDocumentChangedNotification:(NSNotification*)aNote
