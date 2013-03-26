@@ -89,6 +89,7 @@
   [self.currentOperation cancel];
   self.currentOperation = nil;
   [self.aQueue cancelAllOperations];
+  [self.checker tearDown];
 }
 
 - (void) notifyOfUpdate
