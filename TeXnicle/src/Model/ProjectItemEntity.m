@@ -96,11 +96,11 @@
 		return nil; 
 	}
 	NSString *path =  [projectFolder stringByAppendingPathComponent:fpath];
-	NSURL *fileURL = [NSURL fileURLWithPath:path];
-  if (!fileURL) {
+//	NSURL *fileURL = [NSURL fileURLWithPath:path];
+  if (!path) {
     return nil;
   }
-	return [[fileURL standardizedURL] path];
+	return [path stringByStandardizingPath];
 }
 
 - (BOOL) existsOnDisk
