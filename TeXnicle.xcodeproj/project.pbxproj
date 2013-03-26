@@ -2023,8 +2023,6 @@
 				25129B3C16FD9241003FC11B /* TPFileMetadata.m */,
 				257B471B138E5DE500ED02C4 /* FileDocument.h */,
 				257B471C138E5DE500ED02C4 /* FileDocument.m */,
-				25F251061519DB9800453F6F /* TPSyntaxError.h */,
-				25F251071519DB9800453F6F /* TPSyntaxError.m */,
 			);
 			name = Model;
 			path = src/Model;
@@ -2311,6 +2309,8 @@
 			children = (
 				25BB153915B431F6007A7FDF /* TPWarningsViewController.h */,
 				25BB153A15B431F6007A7FDF /* TPWarningsViewController.m */,
+				25F251061519DB9800453F6F /* TPSyntaxError.h */,
+				25F251071519DB9800453F6F /* TPSyntaxError.m */,
 				25BB154115B444FC007A7FDF /* TPWarningSet.h */,
 				25BB154215B444FC007A7FDF /* TPWarningSet.m */,
 			);
