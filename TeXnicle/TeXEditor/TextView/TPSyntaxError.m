@@ -76,6 +76,11 @@
   return self;
 }
 
+- (NSString*)value
+{
+  return [[self attributedString] string];
+}
+
 - (void) parseMessageLine:(NSString*)aLine
 {
   NSArray *comps = [aLine captureComponentsMatchedByRegex:@"line ([0-9]*):(.*)"];
