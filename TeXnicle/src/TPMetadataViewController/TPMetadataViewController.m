@@ -124,6 +124,14 @@
 
 - (IBAction)filterDidChange:(id)sender
 {
+  [self updateFilters];
+  [self.outlineView reloadData];
+  [self performSelector:@selector(expandAll:) withObject:nil afterDelay:0];
+  [self updateStatusLabel];
+}
+
+- (void) updateFilters
+{
   NSPredicate *predicate = nil;
   NSString *searchString = [self.searchField stringValue];
   if ([searchString length] > 0) {
@@ -133,12 +141,7 @@
   for (TPMetadataSet *set in self.sets) {
     set.predicate = predicate;
   }
-
-  [self.outlineView reloadData];
-  [self performSelector:@selector(expandAll:) withObject:nil afterDelay:0];
-  [self updateStatusLabel];
 }
-
 
 // Expand all error sets
 - (IBAction)expandAll:(id)sender
@@ -288,7 +291,7 @@
   }
   
   // and make sure the filter is set
-  [self filterDidChange:self];
+  [self updateFilters];
   
   // update status label
   [self updateStatusLabel];
