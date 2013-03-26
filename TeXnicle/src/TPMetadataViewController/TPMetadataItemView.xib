@@ -229,6 +229,7 @@
 									<int key="NSCellFlags2">268567616</int>
 									<string key="NSContents"/>
 									<reference key="NSSupport" ref="26"/>
+									<string key="NSPlaceholderString">Filter items</string>
 									<string key="NSCellIdentifier">_NS:9</string>
 									<reference key="NSControlView" ref="922491147"/>
 									<bool key="NSDrawsBackground">YES</bool>
@@ -370,6 +371,7 @@
 								<string key="NSFrame">{{160, 10}, {70, 19}}</string>
 								<reference key="NSSuperview" ref="173534314"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:22</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="515217844">
