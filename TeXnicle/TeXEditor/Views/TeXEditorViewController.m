@@ -110,6 +110,7 @@
   [self.markerButton setTarget:nil];
   
   [self stopSyntaxChecker];
+  [self.checker tearDown];
   self.checker.delegate = nil;
   self.checker = nil;
   
