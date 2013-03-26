@@ -1352,10 +1352,6 @@
 				250848C2154B1E800001685A /* Other Files Viewer */,
 				25C87DCA15A871D600E61E25 /* SpellChecker */,
 				254D16A016FAE27F00A31BE8 /* MetadataViews */,
-				255A16DD15B48FEB004290CC /* CommandsView */,
-				255A16DC15B48FE1004290CC /* CitationsView */,
-				25DB36BC15B47819009E086A /* LabelsView */,
-				2589BC0015B40B3D00E24C9B /* WarningsView */,
 				25E7B13315AB396800373A56 /* TPProjectOutline */,
 				257B47AB138E5F9D00ED02C4 /* Document */,
 				25077308138E5D82000F1118 /* MainMenu.xib */,
@@ -1905,6 +1901,10 @@
 			isa = PBXGroup;
 			children = (
 				254D16A116FAE28F00A31BE8 /* TPMetadataViewController */,
+				2589BC0015B40B3D00E24C9B /* WarningsView */,
+				25DB36BC15B47819009E086A /* LabelsView */,
+				255A16DC15B48FE1004290CC /* CitationsView */,
+				255A16DD15B48FEB004290CC /* CommandsView */,
 			);
 			name = MetadataViews;
 			sourceTree = "<group>";
