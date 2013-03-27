@@ -336,8 +336,16 @@
         [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
       } 
     }		
-	}	
+	}
 	
+  
+}
+
+- (void) trashAuxFiles:(NSArray*)fileTypes inDirectory:(NSString*)aDir
+{
+  NSError *error = nil;
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSArray *items = [fm contentsOfDirectoryAtPath:aDir error:&error];
   
 }
 
