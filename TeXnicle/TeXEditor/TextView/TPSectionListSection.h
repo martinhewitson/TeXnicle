@@ -14,7 +14,9 @@
 @property (strong) NSColor *color;
 @property (strong) NSString *regexp;
 @property (assign) BOOL isTex;
+@property (assign) BOOL isMarker;
 
 - (id) initWithTag:(NSString*)tag isTeX:(BOOL)isTex color:(NSColor*)color;
+- (id) initWithTag:(NSString*)tag isTeX:(BOOL)isTex isMarker:(BOOL)isMark color:(NSColor*)color;
 
 @end
