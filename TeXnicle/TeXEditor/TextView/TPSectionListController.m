@@ -73,11 +73,11 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\chapter" isTeX:YES color:[[defaults valueForKey:TPOutlineChapterColor] colorValue]]];
     [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\@.*\\{" isTeX:YES color:[NSColor magentaColor]]];
 
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%TABLE" isTeX:NO color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%LIST" isTeX:NO color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%EQUATION" isTeX:NO color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%TABLE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%LIST" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%EQUATION" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
     
 	}
 	return self;
@@ -244,13 +244,13 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 //  NSLog(@"String not empty");
   
 	// look for each section tag
-  BOOL isMarker = NO;
 	for (TPSectionListSection *section in sections) {
     NSString *tag = section.tag;
 		NSString *regexp = section.regexp;
+    BOOL isMarker = section.isMarker;
 		
     NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
-//    NSLog(@"Scan results for %@:  %@", regexp, results);
+    //NSLog(@"Scan results for %@:  %@", regexp, results);
 		if ([results count] > 0) {
 			for (NSValue *rv in results) {
         NSRange r = [rv rangeValue];
