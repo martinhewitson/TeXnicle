@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3103</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSArrayController</string>
@@ -2158,6 +2158,7 @@
 														<integer value="1040" key="formatterBehavior"/>
 														<boolean value="YES" key="lenient"/>
 														<reference key="locale" ref="554846237"/>
+														<integer value="999" key="maximum"/>
 														<integer value="1" key="maximumFractionDigits"/>
 														<real value="1" key="minimum"/>
 														<integer value="1" key="minimumFractionDigits"/>
@@ -2181,7 +2182,7 @@
 														<reference key="NSAttributes" ref="692645099"/>
 													</object>
 													<real value="1" key="NS.min"/>
-													<reference key="NS.max" ref="889013388"/>
+													<integer value="999" key="NS.max"/>
 													<object class="NSDecimalNumberHandler" key="NS.rounding">
 														<int key="NS.roundingmode">3</int>
 														<bool key="NS.raise.overflow">YES</bool>
@@ -2241,6 +2242,7 @@
 														<integer value="1040" key="formatterBehavior"/>
 														<boolean value="YES" key="lenient"/>
 														<reference key="locale" ref="554846237"/>
+														<integer value="999" key="maximum"/>
 														<integer value="1" key="maximumFractionDigits"/>
 														<real value="1" key="minimum"/>
 														<integer value="1" key="minimumFractionDigits"/>
@@ -2263,7 +2265,7 @@
 														<reference key="NSAttributes" ref="692645099"/>
 													</object>
 													<real value="1" key="NS.min"/>
-													<reference key="NS.max" ref="889013388"/>
+													<integer value="999" key="NS.max"/>
 													<object class="NSDecimalNumberHandler" key="NS.rounding">
 														<int key="NS.roundingmode">3</int>
 														<bool key="NS.raise.overflow">YES</bool>
