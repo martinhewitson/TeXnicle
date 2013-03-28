@@ -39,6 +39,7 @@
 @property (unsafe_unretained) IBOutlet HHValidatedButton *expandAllButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *collapseAllButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
 @property (unsafe_unretained) IBOutlet NSTextField *statusLabel;
 @property (unsafe_unretained) IBOutlet NSSearchField *searchField;
 
@@ -89,7 +90,26 @@
          selector:@selector(handleMetadataUpdate:)
              name:TPFileMetadataUpdatedNotification
            object:nil];
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidBeginUpdateNotification:)
+             name:TPMetadataManagerDidBeginUpdateNotification
+           object:nil];
   
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidEndUpdateNotification:)
+             name:TPMetadataManagerDidEndUpdateNotification
+           object:nil];
+  
+}
+
+- (void) handleMetadataDidBeginUpdateNotification:(NSNotification*)aNote
+{
+  [self.progressIndicator startAnimation:self];
+}
+
+- (void) handleMetadataDidEndUpdateNotification:(NSNotification*)aNote
+{
+  [self.progressIndicator stopAnimation:self];
 }
 
 - (void) handleMetadataUpdate:(NSNotification*)aNote

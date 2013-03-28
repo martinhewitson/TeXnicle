@@ -4163,19 +4163,19 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) handleMetadataDidBeginUpdateNotification:(NSNotification*)aNote
 {
-  if ([aNote object] == self.metadataManager) {
-    self.miniConsoleLastMessage = self.miniConsole.currentMessage;
-    [self.miniConsole message:@"Updating metadata"];
-    [self.miniConsole setAnimating:YES];
-  }
+//  if ([aNote object] == self.metadataManager) {
+//    self.miniConsoleLastMessage = self.miniConsole.currentMessage;
+//    [self.miniConsole message:@"Updating metadata"];
+//    [self.miniConsole setAnimating:YES];
+//  }
 }
 
 - (void) handleMetadataDidEndUpdateNotification:(NSNotification*)aNote
 {
-  if ([aNote object] == self.metadataManager) {
-    [self.miniConsole message:self.miniConsoleLastMessage];
-    [self.miniConsole setAnimating:NO];
-  }
+//  if ([aNote object] == self.metadataManager) {
+//    [self.miniConsole message:self.miniConsoleLastMessage];
+//    [self.miniConsole setAnimating:NO];
+//  }
 }
 
 

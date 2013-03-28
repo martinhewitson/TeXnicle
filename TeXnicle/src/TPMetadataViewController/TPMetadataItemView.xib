@@ -16,6 +16,7 @@
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSOutlineView</string>
+			<string>NSProgressIndicator</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
 			<string>NSSearchField</string>
@@ -339,13 +340,24 @@
 						<reference key="NSNextResponder" ref="944048845"/>
 						<int key="NSvFlags">290</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="NSTextField" id="763736653">
+							<object class="NSProgressIndicator" id="78375814">
 								<reference key="NSNextResponder" ref="173534314"/>
-								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{6, 13}, {149, 14}}</string>
+								<int key="NSvFlags">265</int>
+								<string key="NSFrame">{{138, 12}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="173534314"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="477693306"/>
+								<string key="NSReuseIdentifierKey">_NS:945</string>
+								<int key="NSpiFlags">28938</int>
+								<double key="NSMaxValue">100</double>
+							</object>
+							<object class="NSTextField" id="763736653">
+								<reference key="NSNextResponder" ref="173534314"/>
+								<int key="NSvFlags">266</int>
+								<string key="NSFrame">{{6, 13}, {127, 14}}</string>
+								<reference key="NSSuperview" ref="173534314"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="78375814"/>
 								<string key="NSReuseIdentifierKey">_NS:1535</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="349340203">
@@ -498,6 +510,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressIndicator</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="78375814"/>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="264560914"/>
 						<reference key="destination" ref="1001"/>
@@ -575,6 +595,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="477693306"/>
 							<reference ref="763736653"/>
+							<reference ref="78375814"/>
 						</array>
 						<reference key="parent" ref="944048845"/>
 					</object>
@@ -674,6 +695,11 @@
 						<reference key="object" ref="981000507"/>
 						<reference key="parent" ref="922491147"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">59</int>
+						<reference key="object" ref="78375814"/>
+						<reference key="parent" ref="173534314"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -695,6 +721,7 @@
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.CustomClassName">HHValidatedButton</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -707,7 +734,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">58</int>
+			<int key="maxID">60</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -753,6 +780,7 @@
 						<string key="collapseAllButton">HHValidatedButton</string>
 						<string key="expandAllButton">HHValidatedButton</string>
 						<string key="outlineView">NSOutlineView</string>
+						<string key="progressIndicator">NSProgressIndicator</string>
 						<string key="revealButton">HHValidatedButton</string>
 						<string key="searchField">NSSearchField</string>
 						<string key="statusLabel">NSTextField</string>
@@ -769,6 +797,10 @@
 						<object class="IBToOneOutletInfo" key="outlineView">
 							<string key="name">outlineView</string>
 							<string key="candidateClassName">NSOutlineView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressIndicator">
+							<string key="name">progressIndicator</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="revealButton">
 							<string key="name">revealButton</string>
