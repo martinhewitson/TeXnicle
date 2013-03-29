@@ -88,11 +88,18 @@ extern NSString * const TPClearConsoleOnCompile;
 extern NSString * const TPSyncPDFAfterCompile;
 extern NSString * const TPAutoTrashAfterCompile;
 
+extern NSString * const TEDocumentBackgroundMarginColor;
 extern NSString * const TEDocumentBackgroundColor;
 extern NSString * const TESyntaxTextColor;
 extern NSString * const TEDocumentFont;
 
 extern NSString * const TEConsoleFont;
+
+// jump bar
+extern NSString * const TEJumpBarShowSections;
+extern NSString * const TEJumpBarShowMarks;
+extern NSString * const TEJumpBarShowBookmarks;
+extern NSString * const TEJumpBarShowBibItems;
 
 // comment
 extern NSString * const TESyntaxCommentsColor;

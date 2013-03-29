@@ -81,6 +81,10 @@ NSString * const TPDvipsPath = @"TPDvipsPath";
 NSString * const TPBibTeXPath = @"TPBibTeXPath";
 NSString * const TPPS2PDFPath = @"TPPS2PDFPath";
 
+NSString * const TEJumpBarShowSections = @"TEJumpBarShowSections";
+NSString * const TEJumpBarShowMarks = @"TEJumpBarShowMarks";
+NSString * const TEJumpBarShowBookmarks = @"TEJumpBarShowBookmarks";
+NSString * const TEJumpBarShowBibItems = @"TEJumpBarShowBibItems";
 
 NSString * const TPShouldRunPS2PDF = @"TPShouldRunPS2PDF";
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
@@ -107,7 +111,8 @@ NSString * const TEShowLineNumbers = @"TEShowLineNumbers";
 NSString * const TEShowCodeFolders = @"TEShowCodeFolders";
 NSString * const TEHighlightCurrentLine = @"TEHighlightCurrentLine";
 NSString * const TEHighlightCurrentLineColor = @"TEHighlightCurrentLineColor";
-NSString * const TEHighlightMatchingWords = @"TEHighlightMatchingWords"; 
+NSString * const TEDocumentBackgroundMarginColor = @"TEDocumentBackgroundMarginColor";
+NSString * const TEHighlightMatchingWords = @"TEHighlightMatchingWords";
 NSString * const TEHighlightMatchingWordsColor = @"TEHighlightMatchingWordsColor";
 NSString * const TESelectedTextColor = @"TESelectedTextColor";
 NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor";
@@ -288,6 +293,8 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   defaultValues[TEDocumentFont] = [NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]];  
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
+  [defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.1 alpha:1.0]] forKey:TEDocumentBackgroundMarginColor];
+  
   
   // comments
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.4 alpha:1.0]] forKey:TESyntaxCommentsColor];
@@ -333,6 +340,11 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceWhite:0.6 alpha:1.0]] forKey:TPOutlineParagraphColor];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  colorWithDeviceWhite:0.7 alpha:1.0]] forKey:TPOutlineSubparagraphColor];
 
+  // jump bar
+  [defaultValues setValue:@YES forKey:TEJumpBarShowBookmarks];
+  [defaultValues setValue:@YES forKey:TEJumpBarShowMarks];
+  [defaultValues setValue:@YES forKey:TEJumpBarShowSections];
+  [defaultValues setValue:@YES forKey:TEJumpBarShowBibItems];
   
   //---------- Paths
 	// GS
