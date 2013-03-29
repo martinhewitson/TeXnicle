@@ -747,6 +747,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
@@ -773,6 +774,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];
+  
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
   
@@ -815,6 +821,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
+  
+
 }
 
 
@@ -850,7 +858,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
     [self applyFontAndColor:YES];
-	}
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]]) {
+    [self setNeedsDisplay:YES];
+	}  
+
 }
 
 - (void) setTypingColor:(NSColor*)aColor
@@ -2637,11 +2648,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       r = NSMakeRect(scale*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
     }
     
-    if ([[self backgroundColor] isDarkerThan:0.7]) {
-      [[[self backgroundColor] highlightWithLevel:0.1] set];
-    } else {
-      [[[self backgroundColor] shadowWithLevel:0.1] set];
-    }
+    NSColor *highlightColor = [[defaults valueForKey:TEDocumentBackgroundMarginColor] colorValue];
+    [highlightColor set];
+//    
+//    if ([[self backgroundColor] isDarkerThan:0.7]) {
+//      [[[self backgroundColor] highlightWithLevel:0.1] set];
+//    } else {
+//      [[[self backgroundColor] shadowWithLevel:0.01] set];
+//    }
     
     [NSBezierPath fillRect:r];
   }
