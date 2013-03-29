@@ -64,14 +64,14 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     
 		sections = [[NSMutableArray alloc] init];
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\section" isTeX:YES color:[[defaults valueForKey:TPOutlineSectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subsubsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsubsectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\paragraph" isTeX:YES color:[[defaults valueForKey:TPOutlineParagraphColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\subparagraph" isTeX:YES color:[[defaults valueForKey:TPOutlineSubparagraphColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\part" isTeX:YES color:[[defaults valueForKey:TPOutlinePartColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\\\chapter" isTeX:YES color:[[defaults valueForKey:TPOutlineChapterColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\\@.*\\{" isTeX:YES color:[NSColor magentaColor]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"section" isTeX:YES color:[[defaults valueForKey:TPOutlineSectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subsubsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsubsectionColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"paragraph" isTeX:YES color:[[defaults valueForKey:TPOutlineParagraphColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subparagraph" isTeX:YES color:[[defaults valueForKey:TPOutlineSubparagraphColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"part" isTeX:YES color:[[defaults valueForKey:TPOutlinePartColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"chapter" isTeX:YES color:[[defaults valueForKey:TPOutlineChapterColor] colorValue]]];
+    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"@.*\\{" isTeX:YES color:[NSColor magentaColor]]];
 
     [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
     [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
