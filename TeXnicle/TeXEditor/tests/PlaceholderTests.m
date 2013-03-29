@@ -286,4 +286,33 @@
   STAssertTrue([[restored string] isEqualToString:test], @"Restored string [%@] should be as original", restored);
 }
 
+- (void) testStringPlaceholderWithSpaces
+{
+  
+  NSString *test = @"@place holder@";
+  
+  NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
+  
+  // check that we get an nsattributed string
+  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  
+  // length should be 1
+  STAssertTrue([replaced length] == 1, @"Returned string [%@] should have length 1", replaced);
+  
+  // it should have an attachment at the first character
+  NSRange effRange;
+  NSTextAttachment *att = [replaced attribute:NSAttachmentAttributeName
+                                      atIndex:0
+                               effectiveRange:&effRange];
+  
+  STAssertTrue(att != nil, @"First character should have an attachment");
+  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  
+  // placeholder display text should be 'replace'
+  NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
+  NSAttributedString *code = [cell attributedStringValue];
+  STAssertTrue([[code string] isEqualToString:@"place holder"], @"The placeholder should display 'place holder'");
+}
+
 @end
