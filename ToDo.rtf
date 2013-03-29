@@ -1,9 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 Monaco;}
+\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
 \red39\green78\blue192;\red255\green39\blue18;\red92\green38\blue153;}
-\paperw11900\paperh16840\vieww24720\viewh16520\viewkind0
+\paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
@@ -30,7 +30,9 @@ To Do\
 \pard\pardeftab720
 
 \f1 \cf0 + Add nomenclo engine\cf2 \
+\pard\pardeftab720
 \cf3 \
+\pard\pardeftab720
 \cf0 + Applescript ability\
 	- tell project XX to select file\
 	- tell texnicle to jump to line in file\
@@ -117,7 +119,6 @@ Version 2.1\
 		- this shouldn't happen\
 \
 \pard\pardeftab720\sa280
-\cf6 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
 \cf3 One thing that I am missing in ever single TeX editor, that I really am looking for is line height setting for the editor text. I find it really hard to read when the text is way too tight. Would it be possible to add a line height setting for TeXnicle?\cf0 \
 \
 \pard\pardeftab720
@@ -159,51 +160,60 @@ User Manual\
 \
 TO DO\
 \
+----\
+\
+\pard\pardeftab720\sa280
+
+\f1 \cf6 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 ---------------------------------------------------\
+
+\f0 \cf0 \
+----\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \ul \ulc5 Make TPMetadataEngine\
-\ulnone \
-This asks delegate for text to scan and keeps an array of TPFileMetadata. \
-When timer fires, go through each TPFileMetadata and scan the text if it's set for update, updating the local sets.\
-When the full scan is finished, send notification.\
-Views can listen and ask the metadata manager for the sets.\
+BOOKMARKS should be text attachments (save character index in doc)\
+Ruler class should ask for bookmark lines from delegate\
 \
-\
-- (void) update\
-\
-	- get list of files from delegate\
-	- update own list\
-	- process list\
-		- tell each TPFileMetadata to update its own metadata\
-\
-TPFileMetadata needs:\
-- parent object id\
-- text\
-- extension\
-- pathOnDisk\
-\
-TPMetadataItem needs:\
-- parent object id\
-\
-	- Manager protocol:\
-		- filesToScan\
-			- here we can check the lastEditData and decide which files need to be scanned\
-			- return array of TPFileEntityMetadata\
-			- in the manager, check the current list of files (by objid) and add/update as necessary, setting the needsUpdate flag\
-\
-	- API:\
-		- sets\
-		- commandsForFile, citationsForFile, etc\
+----\
 \
 ---------------------------------------------------\
 \
-- Add search to metadata view\
-	- and item counts [%d items in %d sets]\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \ul Improve outline view\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \ulnone \
+*** we have a bug which causes occasional crashes in the outline view. \
+Sometimes TPSection objects disappear. Probably the new scheme below will fix this.\
 \
-- When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
+- for outline view, better way to do sections\
+	- for each file, parse in order and store either a section, or a file object id\
+		- do this update with other metadata\
+		- store these in TPFileMetadata\
+	- in outline builder, start from the main file, and go through in order.\
+		- when an object id is reached, insert the sections from that file, do that recursively\
+			- ask delegate for sections for objectId, then process them checking for object ids\
+		- keep doing this until no more object ids are in the list\
 \
+\
+---------------------------------------------------\
+\
+- Persist info tab index \
+	- needs new model version\
+\pard\pardeftab720
+\cf0 	- new entries in xattr for standalone docs\
+\pard\pardeftab720
+
+\f4 \cf0 \
+The page column is hidden by default, I would like to see it remember the state (or at least some static toggle in settings?) I want to use it 24/7, so the need to enable it every time I launch Texnicle isn't optimal.\
+\
+What comes to Live Update feature, it is also disabled by default. Maybe it should remember the state also?\
+\
+\pard\pardeftab720
+
+\f0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 - When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
+\
++ Make metadata views for figures, tables\
 \
 Unit tests for core data model entities\
 \
@@ -221,8 +231,14 @@ Version 2.0.6\
 + Bug fix in handling of some placeholders.\
 + Better implementation of copy/cut/paste on editor to handle placeholders.\
 + Further improvements to typesetting error handling. \
-+ New icons on document outline view.\
 + Some bug fixes associated with file encodings.\
++ Added a preference to set the editor margins background color.\
++ Fixed a bug which stopped %%MARK (etc) items appearing in the jump bar.\
++ User-defined commands now support placeholders.\
++ Restructuring of metadata handling to improve performance and scaleability\
++ Metadata views (labels, citations, etc) now include search facility.\
++ Various bug fixes and improvements.\
+\
 \
 Version 2.0.5\
 -------------\
