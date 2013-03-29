@@ -318,6 +318,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark Control
 
+- (IBAction)presentJumpBar:(id)sender
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(presentJumpBar:)]) {
+    [self.delegate performSelector:@selector(presentJumpBar:) withObject:self];
+  }
+}
 
 // Comment out the selected text.
 - (IBAction)commentSelection:(id)sender

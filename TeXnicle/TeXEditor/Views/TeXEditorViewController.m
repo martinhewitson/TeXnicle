@@ -312,6 +312,11 @@
   [self.sectionListController gotoSection:sender];
 }
 
+- (IBAction)presentJumpBar:(id)sender
+{
+  [self.sectionListPopup performClick:self];
+}
+
 - (IBAction)showErrorMenu:(id)sender
 {
 	NSRect frame = [(NSButton *)sender frame];
