@@ -241,137 +241,265 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		return;
 	}
 	
+  NSString *lineFormat = @"%ld\t";
+  NSRange sel = [self.textView selectedRange];
+  NSRange currentLineRange = [string lineRangeForRange:sel];
 //  NSLog(@"String not empty");
   
 	// look for each section tag
-	for (TPSectionListSection *section in sections) {
-    NSString *tag = section.tag;
-		NSString *regexp = section.regexp;
-    BOOL isMarker = section.isMarker;
-		
-    NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
-    //NSLog(@"Scan results for %@:  %@", regexp, results);
-		if ([results count] > 0) {
-			for (NSValue *rv in results) {
-        NSRange r = [rv rangeValue];
-        NSString *result = [string substringWithRange:r];
-				NSString *returnResult = [result stringByTrimmingCharactersInSet:newlines];
-				returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
-//        NSLog(@"Return result: %@", returnResult);
-        NSRange lineRange = [string lineRangeForRange:NSMakeRange(r.location, 0)];
-//        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
-//        NSLog(@"Scanner location %ld", [aScanner scanLocation]);
-//        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
-        if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:r.location] || isMarker) {
-          NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-          NSString *arg = [returnResult argument];
-          if (arg == nil) {
-            // just take the rest of the line
-            NSRange typeRange = [returnResult rangeOfString:type];
-            if (typeRange.location != NSNotFound && typeRange.length > 0) {
-              arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
-            }
-          }
-          
-          type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
-          type = [type uppercaseString];
-          arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-          NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
-          NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
-          [adisp addAttribute:NSForegroundColorAttributeName
-                        value:section.color
-                        range:NSMakeRange(0, [type length]+1)];
-          
-          NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-          dict[@"title"] = adisp;
-          dict[@"index"] = [NSNumber numberWithInteger:r.location];
-          [found addObject:dict];
-        }
-			} // end loop over results
-		} // end if [results count] > 0
-	}
-	
-	// add bib items
-	NSString *regexp = @"\\@.*\\{.*,";
-  NSArray *ranges = [TPRegularExpression rangesMatching:regexp inText:string];
-//  NSLog(@"Bib search results: %@", searchResults);
-	if ([ranges count] > 0) {
-		for (NSValue *rv in ranges) {
-      NSRange r = [rv rangeValue];
-      NSString *result = [string substringWithRange:r];
-			NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
-			returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
-			int loc = 0;
-			int tagEnd = -1;			
-			while (loc < [returnResult length]) {				
-				if ([returnResult characterAtIndex:loc]=='{') {
-					tagEnd = loc;
-					break;
-				}
-				loc++;
-			}	
-      if (tagEnd < 1) {
-        continue;
-      }
-			NSString *type = [returnResult substringWithRange:NSMakeRange(1, tagEnd-1)];
-			type = [type uppercaseString];
-			
-			loc = tagEnd;
-			int tagStart = tagEnd;
-			tagEnd = -1;
-			while (loc < [returnResult length]) {		
-				if ([returnResult characterAtIndex:loc]==',') {
-					tagEnd = loc;
-					break;
-				}
-				loc++;
-			}			
-      if (tagEnd < 1) {
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([[defaults valueForKey:TEJumpBarShowSections] boolValue] == YES) {
+    for (TPSectionListSection *section in sections) {
+      NSString *tag = section.tag;
+      NSString *regexp = section.regexp;
+      BOOL isMarker = section.isMarker;
+      if (isMarker == YES) {
         continue;
       }
       
-      if (tagEnd<=tagStart)
-        continue;
-			
-			NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
-			arg = [arg stringByTrimmingCharactersInSet:whiteSpace];
-			NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
-			NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
-			[adisp addAttribute:NSForegroundColorAttributeName
-										value:[NSColor magentaColor]
-										range:NSMakeRange(0, [type length])];
-			
-			NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-			dict[@"title"] = adisp;
-			dict[@"index"] = [NSNumber numberWithInteger:r.location];
-			[found addObject:dict];
-		}
+      NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
+      //NSLog(@"Scan results for %@:  %@", regexp, results);
+      if ([results count] > 0) {
+        for (NSValue *rv in results) {
+          NSRange r = [rv rangeValue];
+          if (r.length <= 1) {
+            continue;
+          }
+          
+          NSString *result = [string substringWithRange:r];
+          NSString *returnResult = [result stringByTrimmingCharactersInSet:newlines];
+          returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
+          //        NSLog(@"Return result: %@", returnResult);
+          NSRange lineRange = [string lineRangeForRange:NSMakeRange(r.location, 0)];
+          //        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
+          //        NSLog(@"Scanner location %ld", [aScanner scanLocation]);
+          //        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
+          if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:r.location] || isMarker) {
+            NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            NSString *arg = [returnResult argument];
+            if (arg == nil) {
+              // just take the rest of the line
+              NSRange typeRange = [returnResult rangeOfString:type];
+              if (typeRange.location != NSNotFound && typeRange.length > 0) {
+                arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+              }
+            }
+            
+            type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
+            type = [type uppercaseString];
+//            arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
+            NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
+            [adisp addAttribute:NSForegroundColorAttributeName
+                          value:section.color
+                          range:NSMakeRange(0, [type length]+1)];
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            dict[@"index"] = [NSNumber numberWithInteger:r.location];
+            NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+            if ([lines count] > 0) {
+              dict[@"line"] = [lines[0] valueForKey:@"number"];
+              NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+              NSRange strRange = NSMakeRange(0, [lineString length]);
+              [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
+              [lineString appendAttributedString:adisp];
+              if (NSLocationInRange(r.location, currentLineRange)) {
+                dict[@"selected"] = @YES;
+              } else {
+                dict[@"selected"] = @NO;
+              }
+              dict[@"title"] = lineString;
+              [found addObject:dict];
+            }
+          }
+        } // end loop over results
+      } // end if [results count] > 0
+    }
 	}
   
-  // add bookmarks
-  if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {      
-    NSArray *descriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
-    NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
-    for (Bookmark *b in bookmarks) {
-      if (b.displayString != nil) {
-        NSMutableAttributedString *str = [b.displayString mutableCopy];
-        [str addAttribute:NSForegroundColorAttributeName
-                    value:[NSColor blueColor]
-                    range:NSMakeRange(0, [str length])];
+  if ([[defaults valueForKey:TEJumpBarShowMarks] boolValue] == YES) {
+    for (TPSectionListSection *section in sections) {
+      NSString *tag = section.tag;
+      NSString *regexp = section.regexp;
+      BOOL isMarker = section.isMarker;
+      if (isMarker == NO) {
+        continue;
+      }      
+      
+      NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
+      //NSLog(@"Scan results for %@:  %@", regexp, results);
+      if ([results count] > 0) {
+        for (NSValue *rv in results) {
+          NSRange r = [rv rangeValue];
+          if (r.length <= 1) {
+            continue;
+          }
+          
+          NSString *result = [string substringWithRange:r];
+          NSString *returnResult = [result stringByTrimmingCharactersInSet:newlines];
+          returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
+          //        NSLog(@"Return result: %@", returnResult);
+          NSRange lineRange = [string lineRangeForRange:NSMakeRange(r.location, 0)];
+          //        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
+          //        NSLog(@"Scanner location %ld", [aScanner scanLocation]);
+          //        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
+          if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:r.location] || isMarker) {
+            NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            NSString *arg = [returnResult argument];
+            if (arg == nil) {
+              // just take the rest of the line
+              NSRange typeRange = [returnResult rangeOfString:type];
+              if (typeRange.location != NSNotFound && typeRange.length > 0) {
+                arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+              }
+            }
+            
+            type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
+            type = [type uppercaseString];
+            arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
+            NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
+            [adisp addAttribute:NSForegroundColorAttributeName
+                          value:section.color
+                          range:NSMakeRange(0, [type length]+1)];
+            
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            dict[@"index"] = [NSNumber numberWithInteger:r.location];
+            NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+            if ([lines count] > 0) {
+              dict[@"line"] = [lines[0] valueForKey:@"number"];
+              NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+              NSRange strRange = NSMakeRange(0, [lineString length]);
+              [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
+              [lineString appendAttributedString:adisp];
+              if (NSLocationInRange(r.location, currentLineRange)) {
+                dict[@"selected"] = @YES;
+              } else {
+                dict[@"selected"] = @NO;
+              }
+              dict[@"title"] = lineString;
+              [found addObject:dict];
+            }
+          }
+        } // end loop over results
+      } // end if [results count] > 0
+    }
+	}
+  
+  
+	// add bib items
+  if ([[defaults valueForKey:TEJumpBarShowBibItems] boolValue] == YES) {
+    
+    NSString *regexp = @"\\@.*\\{.*,";
+    NSArray *ranges = [TPRegularExpression rangesMatching:regexp inText:string];
+    //  NSLog(@"Bib search results: %@", searchResults);
+    if ([ranges count] > 0) {
+      for (NSValue *rv in ranges) {
+        NSRange r = [rv rangeValue];
+        if (r.length <= 1) {
+          continue;
+        }
+        NSString *result = [string substringWithRange:r];
+        NSString *returnResult = [NSString stringWithControlsFilteredForString:result];
+        returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
+        int loc = 0;
+        int tagEnd = -1;
+        while (loc < [returnResult length]) {
+          if ([returnResult characterAtIndex:loc]=='{') {
+            tagEnd = loc;
+            break;
+          }
+          loc++;
+        }
+        if (tagEnd < 1) {
+          continue;
+        }
+        NSString *type = [returnResult substringWithRange:NSMakeRange(1, tagEnd-1)];
+        type = [type uppercaseString];
+        
+        loc = tagEnd;
+        int tagStart = tagEnd;
+        tagEnd = -1;
+        while (loc < [returnResult length]) {
+          if ([returnResult characterAtIndex:loc]==',') {
+            tagEnd = loc;
+            break;
+          }
+          loc++;
+        }
+        if (tagEnd < 1) {
+          continue;
+        }
+        
+        if (tagEnd<=tagStart)
+          continue;
+        
+        NSString *arg = [returnResult substringWithRange:NSMakeRange(tagStart+1, tagEnd-tagStart-1)];
+        arg = [arg stringByTrimmingCharactersInSet:whiteSpace];
+        NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
+        NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
+        [adisp addAttribute:NSForegroundColorAttributeName
+                      value:[NSColor magentaColor]
+                      range:NSMakeRange(0, [type length])];
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"title"] = str;
-        NSInteger index = [[self.textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
-        dict[@"index"] = @(index);
-        [found addObject:dict];
+        dict[@"index"] = [NSNumber numberWithInteger:r.location];
+        NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+        if ([lines count] > 0) {
+          dict[@"line"] = [lines[0] valueForKey:@"number"];
+          NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+          [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineString length])];
+          [lineString appendAttributedString:adisp];
+          dict[@"title"] = lineString;
+          if (NSLocationInRange(r.location, currentLineRange)) {
+            dict[@"selected"] = @YES;
+          } else {
+            dict[@"selected"] = @NO;
+          }
+          [found addObject:dict];
+        }
+      }
+    }
+    
+  }
+  
+  // add bookmarks
+  if ([[defaults valueForKey:TEJumpBarShowBookmarks] boolValue] == YES) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(bookmarksForCurrentFile)]) {
+      NSArray *descriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"linenumber" ascending:YES]];
+      NSArray *bookmarks = [[self.delegate bookmarksForCurrentFile] sortedArrayUsingDescriptors:descriptors];
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.linenumber > 0"];
+      bookmarks = [bookmarks filteredArrayUsingPredicate:predicate];
+      for (Bookmark *b in bookmarks) {
+        //NSLog(@"Adding bookmark %@", b);
+        if (b.displayString != nil) {
+          NSMutableAttributedString *str = [b.simpleDisplayString mutableCopy];
+          [str addAttribute:NSForegroundColorAttributeName
+                      value:[NSColor blueColor]
+                      range:NSMakeRange(0, [str length])];
+          
+          NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+          NSInteger index = [[self.textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
+          dict[@"index"] = @(index);
+          dict[@"line"] = b.linenumber;
+          NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+          [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineString length])];
+          [lineString appendAttributedString:str];
+          dict[@"title"] = lineString;
+          if (NSLocationInRange(index, currentLineRange)) {
+            dict[@"selected"] = @YES;
+          } else {
+            dict[@"selected"] = @NO;
+          }
+          [found addObject:dict];
+        }
       }
     }
   }
-  
 	
 	// sort items by index
-	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
-	NSArray *results = [found sortedArrayUsingDescriptors:@[desc]];	
+	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"line" ascending:YES];
+	NSArray *results = [found sortedArrayUsingDescriptors:@[desc]];
 	NSMutableArray *current = [NSMutableArray array];
 	for (NSMenuItem *item in [self.popupMenu itemArray]) {
     
@@ -387,9 +515,11 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     dict[@"index"] = @([item tag]);
     [current addObject:dict];
 	}
+  
 	
 	BOOL sameMenu = YES;
 	sameMenu = ([current count] == [results count]);
+  NSInteger idx = 0;
 	if (sameMenu) {
 		// compare contents
 		int jj=0;
@@ -398,16 +528,31 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			if (![[[rdict valueForKey:@"title"] string] isEqual:[cdict valueForKey:@"title"]]) {
 				sameMenu = NO;
 				break;
-			}			
+			}
 			if ([[rdict valueForKey:@"index"] intValue] != [[cdict valueForKey:@"index"] intValue]) {
 				sameMenu = NO;
 				break;
 			}
+			if ([[rdict valueForKey:@"selected"] boolValue] != [[cdict valueForKey:@"selected"] boolValue]) {
+				sameMenu = NO;
+				break;
+			}
+      
 			jj++;
 		}		
 	}
   
+  int jj=0;
+  for (NSDictionary *cdict in results) {
+    NSDictionary *rdict = results[jj];
+    if ([[rdict valueForKey:@"selected"] boolValue] == YES) {
+      idx = jj;
+    }
+    jj++;
+  }
+  
 //  NSLog(@"Same menu? %d", sameMenu);
+//  NSLog(@"idx %d", idx);
 		
 	if (!sameMenu) {
 		
@@ -419,9 +564,13 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 			[[self.popupMenu lastItem] setTag:[[result valueForKey:@"index"] intValue]];
 		}
     
-    [self.popupMenu selectItemAtIndex:0];
-
 	}
+  
+  if (idx > 0) {
+    [self.popupMenu selectItemAtIndex:idx+1];
+  } else {
+    [self.popupMenu selectItemAtIndex:0];
+  }
 	
 }
 
