@@ -746,6 +746,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
@@ -764,6 +765,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];
+  
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
   
@@ -856,6 +862,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
     [self applyFontAndColor:YES];
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]]) {
+    [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
     [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]]) {
@@ -880,6 +888,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSFont *newFont = atts[NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
   NSColor *newColor = atts[NSForegroundColorAttributeName];
+  NSParagraphStyle *newPS = atts[NSParagraphStyleAttributeName];
+  
   if (![newFont isEqualTo:[self font]] || forceUpdate) {
 //    NSLog(@"Setting new font %@", newFont);
     [self setFont:newFont];
@@ -889,11 +899,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     //    NSLog(@"Setting new color");
     [self setTextColor:newColor];
   }
+  if (![newPS isEqual:[self defaultParagraphStyle]]) {
+    [self.textStorage addAttribute:NSParagraphStyleAttributeName value:newPS range:NSMakeRange(0, [[self string] length])];
+    [self setDefaultParagraphStyle:newPS];
+  }
   
   NSDictionary *currentAtts = [self typingAttributes];
   if (![currentAtts isEqualToDictionary:atts] || forceUpdate) {
-//    NSLog(@"Setting typing attributes %@", newFont);
-    [self setTypingAttributes:@{NSForegroundColorAttributeName : newColor, NSFontAttributeName : newFont}];
+    //NSLog(@"Setting typing attributes %@", newFont);
+//    [self setTypingAttributes:atts];
+    [self setTypingAttributes:@{NSForegroundColorAttributeName : newColor,
+         NSFontAttributeName : newFont}];
   } else {
     //    NSLog(@"Skipping setting atts");
   }
