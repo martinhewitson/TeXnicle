@@ -42,6 +42,7 @@
 
 #define kDEFAULT_THICKNESS	22.0
 #define kRULER_MARGIN		5.0
+#define kYOFFSET		3.0
 #define kFOLDING_GUTTER 20.0
 #define kLineCalculationUpdateRate 0.05
 
@@ -174,6 +175,8 @@
   // check user defaults
 	BOOL shouldDrawLineNumbers = _showLineNumbers;
   BOOL shouldFoldCode = _showCodeFolders;
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  CGFloat lineheightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
   
   NSRectArray  rects;
   NSUInteger   rectCount;
@@ -259,6 +262,7 @@
       {          
         NSRect r = rects[0];
         CGFloat rectHeight = NSHeight(r);
+        CGFloat rectWidth = kFOLDING_GUTTER;
         
         MHCodeFolder *folder = nil;
         // we need to see how many lines are folded so that the line count will be correct
@@ -300,14 +304,16 @@
           // get size
           NSSize s = [labelText size];
           // Draw string flush right, centered vertically within the line
+//          ypos + (rectHeight - strHeight) / 2.0,
           NSRect srect = NSMakeRect(bwmrm - foldWidth - s.width,
-                                    ypos + (rectHeight - strHeight) / 2.0,
+                                    ypos + rectHeight - strHeight - kYOFFSET,
                                     bwmrm2, rectHeight);
           line.rect = srect;
           
           if (b) {
             CGFloat bwidth = boundsWidth-foldWidth;
-            NSBezierPath *path = [self makeBookmarkPathForWidth:bwidth height:rectHeight ypos:ypos];
+            CGFloat bypos = ypos+rectHeight-strHeight-1.5*kYOFFSET;
+            NSBezierPath *path = [self makeBookmarkPathForWidth:bwidth height:MIN(rectHeight, 16.0) ypos:bypos];
             [_bookmarkGradient drawInBezierPath:path angle:0];
             [[[NSColor colorWithDeviceRed:0.2 green:0.2 blue:1.0 alpha:1.0] highlightWithLevel:0.5] set];
             [path setLineWidth:1.0];
@@ -323,9 +329,10 @@
           if (folder) {
             
             // compute the rect for the image to be drawn in
-            NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectHeight)/2.0, 
-                                       ypos - 3.0 + (rectHeight - stringSize.height) / 2.0, 
-                                       rectHeight, rectHeight);
+            CGFloat s = MIN(rectWidth, rectHeight);
+            NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectWidth)/2.0, 
+                                       ypos - lineheightMultiple*kYOFFSET + (rectHeight - stringSize.height),
+                                       s, s);
             NSImage *im = nil;
             if (folder.isValid) {
               if (folder.folded) {
@@ -354,9 +361,10 @@
             if (folder) {
               if (!folder.folded) {
                 // make rect for placing the image
-                NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectHeight)/2.0, 
-                                           ypos - 3.0 + (rectHeight - stringSize.height) / 2.0, 
-                                           rectHeight, rectHeight);
+                CGFloat s = MIN(rectWidth, rectHeight);
+                NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectWidth)/2.0,
+                                           ypos - lineheightMultiple*kYOFFSET + (rectHeight - stringSize.height),
+                                           s, s);
                 NSImage *im = nil;
                 if (folder.isValid) {
                   im = [NSImage imageNamed:@"disclosure_down"];
