@@ -124,6 +124,7 @@ NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentFont = @"TEDocumentFont";
+NSString * const TEDocumentLineHeightMultiple = @"TEDocumentLineHeightMultiple";
 NSString * const TESyntaxTextColor = @"TESyntaxTextColor";
 
 NSString * const TEConsoleFont = @"TEConsoleFont";
@@ -290,7 +291,8 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	//--- colors for syntax highlighting
 	
   // default text
-  defaultValues[TEDocumentFont] = [NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]];  
+  defaultValues[TEDocumentFont] = [NSArchiver archivedDataWithRootObject:[NSFont systemFontOfSize:14.0]];
+  defaultValues[TEDocumentLineHeightMultiple] = @1.0;
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.1 alpha:1.0]] forKey:TEDocumentBackgroundMarginColor];
