@@ -338,48 +338,37 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           NSString *result = [string substringWithRange:r];
           NSString *returnResult = [result stringByTrimmingCharactersInSet:newlines];
           returnResult = [returnResult stringByTrimmingCharactersInSet:whiteSpace];
-          //        NSLog(@"Return result: %@", returnResult);
-          NSRange lineRange = [string lineRangeForRange:NSMakeRange(r.location, 0)];
-          //        NSRange lineRange = [string lineRangeForRange:NSMakeRange([aScanner scanLocation], 0)];
-          //        NSLog(@"Scanner location %ld", [aScanner scanLocation]);
-          //        NSLog(@"Sub string %@", [string substringWithRange:lineRange]);
-          if (![[string substringWithRange:lineRange] containsCommentCharBeforeIndex:r.location] || isMarker) {
-            NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-            NSString *arg = [returnResult argument];
-            if (arg == nil) {
-              // just take the rest of the line
-              NSRange typeRange = [returnResult rangeOfString:type];
-              if (typeRange.location != NSNotFound && typeRange.length > 0) {
-                arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
-              }
+          NSString *type = [tag stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+          NSString *arg = returnResult;
+          NSRange typeRange = [returnResult rangeOfString:type];
+          if (typeRange.location != NSNotFound && typeRange.length > 0) {
+            arg = [returnResult stringByReplacingCharactersInRange:typeRange withString:@""];
+          }
+          
+          type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
+          type = [type uppercaseString];
+          NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
+          NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
+          [adisp addAttribute:NSForegroundColorAttributeName
+                        value:section.color
+                        range:NSMakeRange(0, [type length]+1)];
+          
+          NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+          dict[@"index"] = [NSNumber numberWithInteger:r.location];
+          NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+          if ([lines count] > 0) {
+            dict[@"line"] = [lines[0] valueForKey:@"number"];
+            NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+            NSRange strRange = NSMakeRange(0, [lineString length]);
+            [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
+            [lineString appendAttributedString:adisp];
+            if (NSLocationInRange(r.location, currentLineRange)) {
+              dict[@"selected"] = @YES;
+            } else {
+              dict[@"selected"] = @NO;
             }
-            
-            type = [type stringByReplacingOccurrencesOfString:@"%%" withString:@""];
-            type = [type uppercaseString];
-            arg = [arg stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-            NSString *disp = [NSString stringWithFormat:@"%@: %@", type, arg];
-            NSMutableAttributedString *adisp = [[NSMutableAttributedString alloc] initWithString:disp];
-            [adisp addAttribute:NSForegroundColorAttributeName
-                          value:section.color
-                          range:NSMakeRange(0, [type length]+1)];
-            
-            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-            dict[@"index"] = [NSNumber numberWithInteger:r.location];
-            NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
-            if ([lines count] > 0) {
-              dict[@"line"] = [lines[0] valueForKey:@"number"];
-              NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
-              NSRange strRange = NSMakeRange(0, [lineString length]);
-              [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
-              [lineString appendAttributedString:adisp];
-              if (NSLocationInRange(r.location, currentLineRange)) {
-                dict[@"selected"] = @YES;
-              } else {
-                dict[@"selected"] = @NO;
-              }
-              dict[@"title"] = lineString;
-              [found addObject:dict];
-            }
+            dict[@"title"] = lineString;
+            [found addObject:dict];
           }
         } // end loop over results
       } // end if [results count] > 0
