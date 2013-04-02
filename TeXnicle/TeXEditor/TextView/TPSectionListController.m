@@ -243,6 +243,10 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
   NSString *lineFormat = @"%ld\t";
   NSRange sel = [self.textView selectedRange];
+  if (NSMaxRange(sel) >= [string length]) {
+    return;
+  }
+  
   NSRange currentLineRange = [string lineRangeForRange:sel];
 //  NSLog(@"String not empty");
   
