@@ -2454,6 +2454,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   return s.location;
 }
 
+- (NSArray*) allMetadataFiles
+{
+  return @[];
+}
+
 - (id) mainFile
 {
   return [self fileURL];
