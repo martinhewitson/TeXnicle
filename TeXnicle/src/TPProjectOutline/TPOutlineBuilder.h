@@ -19,7 +19,7 @@
 
 @end
 
-@interface TPOutlineBuilder : NSObject {
+@interface TPOutlineBuilder : NSObject <TPOutlineBuilderDelegate> {
 @private
   dispatch_queue_t queue;
 }

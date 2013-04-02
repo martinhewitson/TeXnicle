@@ -130,13 +130,13 @@
     return;
   }
   
-  if ([self.delegate shouldGenerateOutline] == NO && [self.sections count] > 0) {
+  if ([self shouldGenerateOutline] == NO && [self.sections count] > 0) {
 //    NSLog(@"   NO: Delegate says no, and I have sections already");
     return;
   }
   
   __block TPOutlineBuilder *blockSelf = self;
-  __block NSArray *metafiles = [self.delegate allMetadataFiles];
+  __block NSArray *metafiles = [self allMetadataFiles];
   
   // if we have unscanned files, return since we must be mid-generation
   NSInteger noCount = 0;
@@ -157,7 +157,7 @@
   NSArray *templatesToScanFor = [blockSelf.templates subarrayWithRange:NSMakeRange(0, 1+blockSelf.depth)];
   
   // get the main file from the delegate
-  id file = [self.delegate mainFile];
+  id file = [self mainFile];
 //  NSLog(@"  main file %@ [%@]", [file valueForKey:@"name"], file);
   if ([file isKindOfClass:[TPFileMetadata class]]) {
     
@@ -181,7 +181,7 @@
 
   } else {
     // get text
-    NSString *text = [self.delegate textForFile:file];
+    NSString *text = [self textForFile:file];
         
     dispatch_async(queue, ^{
       NSArray *newSections = [text sectionsInStringForTypes:templatesToScanFor
@@ -263,9 +263,7 @@
     
     // inform delegate
     dispatch_async(dispatch_get_main_queue(), ^{
-      if (self.delegate) {
-        [self.delegate didComputeNewSections];
-      }
+      [self didComputeNewSections];
     });
   }
 //  NSLog(@"--------------------------------------------  update done");
@@ -441,7 +439,51 @@
 }
 
 
+#pragma mark -
+#pragma mark delegate
 
+- (NSArray*) allMetadataFiles
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(allMetadataFiles)]) {
+    return [self.delegate performSelector:@selector(allMetadataFiles)];
+  }
+  
+  return @[];
+}
+
+- (id) mainFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(mainFile)]) {
+    return [self.delegate mainFile];
+  }
+  
+  return nil;
+}
+
+- (NSString*) textForFile:(id)aFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(textForFile:)]) {
+    return [self.delegate textForFile:aFile];
+  }
+  
+  return @"";
+}
+
+- (void) didComputeNewSections
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didComputeNewSections)]) {
+    [self.delegate didComputeNewSections];
+  }
+}
+
+- (BOOL) shouldGenerateOutline
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldGenerateOutline)]) {
+    return [self.delegate shouldGenerateOutline];
+  }
+  
+  return NO;
+}
 
 
 @end
