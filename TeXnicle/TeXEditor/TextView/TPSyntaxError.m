@@ -76,6 +76,11 @@
   return self;
 }
 
+- (NSString*)string
+{
+  return [[self attributedString] string];
+}
+
 - (NSString*)value
 {
   return [[self attributedString] string];
