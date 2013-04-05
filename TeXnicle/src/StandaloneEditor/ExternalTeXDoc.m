@@ -183,7 +183,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         [self.controlsTabBarController selectTabAtIndex:tabIndex];
         [self.infoControlsTabBarController selectTabAtIndex:2];
         
-        if (![NSApp isLion]) {
+        if ([NSApp isSnowLeopard]) {
           // controls width
           CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
           if (controlsWidth >= 0.0) {
@@ -199,7 +199,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
             fr.size.width = editorWidth;
             [self.texEditorContainer setFrame:fr];
           }
+          
         }
+        
         
         // max outline depth
         self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
@@ -237,10 +239,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.controlsTabBarController selectTabAtIndex:1];
   [self.infoControlsTabBarController selectTabAtIndex:2];
   
-  //  NSLog(@"Awake from nib");
+  //NSLog(@"Awake from nib");
   self.texEditorViewController = [[TeXEditorViewController alloc] init];
   self.texEditorViewController.delegate = self;
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
+  //NSLog(@"Set bounds to %@ from %@", [self.texEditorViewController view], self.texEditorContainer);
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
   [self.texEditorViewController enableEditor];
