@@ -61,6 +61,7 @@
 #import "NSResponder+TeXnicle.h"
 #import "NSAttributedString+Placeholders.h"
 #import "NSDictionary+TeXnicle.h"
+#import "TPFileMetadata.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -77,10 +78,12 @@
 @property (assign) NSInteger currentTabHistoryIndex;
 @property (strong) NSTimer *liveUpdateTimer;
 @property (strong) TPProjectOutlineViewController *outlineViewController;
+
 @property (strong) TPWarningsViewController *warningsViewController;
 @property (strong) TPLabelsViewController *labelsViewController;
 @property (strong) TPCitationsViewController *citationsViewController;
 @property (strong) TPNewCommandsViewController *commandsViewController;
+
 @property (strong) MHMiniConsoleViewController *miniConsole;
 @property (strong) TPConsoleViewController *embeddedConsoleViewController;
 @property (strong) NSTimer *statusTimer;
@@ -98,6 +101,9 @@
 
 @property (strong) OpenDocumentsManager *openDocuments;
 
+@property (strong) TPMetadataManager *metadataManager;
+@property (strong) NSMutableArray *fileMetadata;
+@property (strong) NSMutableArray *textFiles;
 
 @property (strong) MHControlsTabBarController *controlsTabBarController;
 @property (unsafe_unretained) IBOutlet NSView *controlsTabBarControlContainer;
@@ -112,10 +118,12 @@
 @property (unsafe_unretained) IBOutlet HHValidatedButton *forwardTabButton;
 @property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
 @property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
+
 @property (unsafe_unretained) IBOutlet NSView *warningsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
+
 @property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 @property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *createFolderButton;
@@ -138,6 +146,8 @@
 @property (unsafe_unretained) IBOutlet PSMTabBarControl *psmTabBarControl;
 
 @property (strong) TPDocumentReportWindowController *documentReport;
+
+@property (copy) NSString *miniConsoleLastMessage;
 
 @end
 
@@ -422,6 +432,9 @@
   self.infoControlsTabBarController.splitview = self.splitview;
   self.infoControlsTabview.delegate = self.infoControlsTabBarController;
   
+  // metadata manager
+  self.metadataManager = [[TPMetadataManager alloc] initWithDelegate:self];
+
   // -- Notifications
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
@@ -477,7 +490,17 @@
          selector:@selector(handleOpenDocumentsDidAddFileNotification:) 
              name:TPOpenDocumentsDidAddFileNotification 
            object:self.openDocuments];
-    
+  
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidBeginUpdateNotification:)
+             name:TPMetadataManagerDidBeginUpdateNotification
+           object:self.metadataManager];
+  
+  [nc addObserver:self
+         selector:@selector(handleMetadataDidEndUpdateNotification:)
+             name:TPMetadataManagerDidEndUpdateNotification
+           object:self.metadataManager];
+  
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
@@ -494,6 +517,9 @@
                                                     selector:@selector(updateStatusView)
                                                     userInfo:nil
                                                      repeats:YES];
+  
+  // start metadata gathering
+  [self.metadataManager performSelector:@selector(start) withObject:nil afterDelay:0.0];
   
   // insert controls tab bar in the responder chain
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
@@ -531,6 +557,13 @@
   [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
   
   [self.outlineViewController start];
+  
+  // update metadata views
+  NSTimeInterval delay = 2.0;
+  [self.warningsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   
 }
 
@@ -609,13 +642,10 @@
 
 - (void) stopAllMetadataOperations
 {
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if (file.metadata) {
-        [file.metadata stopMetadataTimer];
-      }
-    }
+  [self.metadataManager stop];
+  
+  for (TPFileMetadata *item in self.fileMetadata) {
+    [item tearDown];
   }
 }
 
@@ -1693,6 +1723,37 @@
 
 - (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
 {
+//  NSLog(@"Tab changed %@", [aNote object]);
+  if ([aNote object] == self.infoControlsTabBarController) {
+    NSInteger idx = [self.infoControlsTabBarController indexOfSelectedTab];
+//    NSLog(@"Index %d", idx);
+    switch (idx) {
+      case 0:
+        // bookmarks
+        break;
+      case 1:
+        // warnings
+        [self.warningsViewController updateUI];
+        break;
+      case 2:
+        // spelling
+        break;
+      case 3:
+        // labels
+        [self.labelsViewController updateUI];
+        break;
+      case 4:
+        // citations
+        [self.citationsViewController updateUI];
+        break;
+      case 5:
+        // commands
+        [self.commandsViewController updateUI];
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 
@@ -1941,15 +2002,10 @@
 {
   NSMutableArray *citations = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        for (BibliographyEntry *entry in file.metadata.citations) {
-          if (![citations containsObject:entry]) {
-            [citations addObjectsFromArray:file.metadata.citations];
-          }
-        }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    for (BibliographyEntry *entry in file.citations) {
+      if (![citations containsObject:entry]) {
+        [citations addObject:entry];
       }
     }
   }
@@ -1961,14 +2017,9 @@
 {
   NSMutableArray *commands = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        for (TPNewCommand *c in file.metadata.userNewCommands) {
-          [commands addObject:c.argument];
-        }
-      }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    for (TPNewCommand *c in file.userNewCommands) {
+      [commands addObject:c.argument];
     }
   }
   
@@ -1999,15 +2050,10 @@
 {
 	NSMutableArray *tags = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        [tags addObjectsFromArray:file.metadata.labels];
-      }
-    }
+  for (TPFileMetadata *file in self.fileMetadata) {
+    [tags addObjectsFromArray:file.labels];
   }
-	
+  
 	return tags;	
 }
 
@@ -2058,14 +2104,37 @@
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
-- (id)mainFile
+- (NSArray*) allMetadataFiles
 {
-  return self.project.mainFile;
+  return self.fileMetadata;
+}
+
+- (id) mainFile
+{
+  
+  // get the metadata file for the project
+  NSManagedObjectID *mainId = [self.project.mainFile objectID];
+  
+  for (TPFileMetadata *file in self.fileMetadata) {
+    if (file.objId == mainId) {
+      return file;
+    }
+  }
+  
+  return nil;
 }
 
 - (NSString*)textForFile:(id)aFile
 {
-  return [aFile workingContentString];
+  if ([aFile isKindOfClass:[FileEntity class]]) {
+    return [aFile workingContentString];
+  }
+  
+  if ([aFile isKindOfClass:[TPFileMetadata class]]) {
+    return [aFile valueForKey:@"text"];
+  }
+  
+  return @"";
 }
 
 - (id)fileWithPath:(NSString *)path
@@ -2086,6 +2155,15 @@
 
 - (BOOL) shouldGenerateOutline
 {
+  // check last edit and don't trigger an update unless we have a pause
+  NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
+  NSDate *now = [NSDate date];
+  float lastEditInterval = 1.0;
+  if ([now timeIntervalSinceDate:lastEdit] < lastEditInterval) {
+    // do nothing
+    return NO;
+  }
+  
   // if outline tab is selected....
   if (self.controlsTabBarController != nil && [self.controlsTabBarController indexOfSelectedTab] == 3) {
     return YES;
@@ -2096,7 +2174,8 @@
 
 - (id) currentFile
 {
-  return self.openDocuments.currentDoc;
+  FileEntity *file = self.openDocuments.currentDoc;  
+  return [self metaFileForFile:file];
 }
 
 - (NSInteger) locationInCurrentEditor
@@ -2398,6 +2477,25 @@
 
 #pragma mark -
 #pragma mark Files and Folders
+
+- (void) didAddFile:(FileEntity*)aFile
+{
+  if ([self.textFiles containsObject:aFile] == NO) {
+    [self.textFiles addObject:aFile];
+  }
+}
+
+- (void) didRemoveFile:(FileEntity*)aFile
+{
+  TPFileMetadata *metafile = [self metaFileForFile:aFile];
+  if (metafile) {
+    [self.fileMetadata removeObject:metafile];
+  }
+  
+  if ([self.textFiles containsObject:aFile]) {
+    [self.textFiles removeObject:aFile];
+  }
+}
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
@@ -3271,42 +3369,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.projectOutlineView setNeedsDisplay];
 }
 
-//
-//
-//#pragma mark -
-//#pragma mark LaTeX Engine Delegate
-//
-//- (NSString*) engineDocumentToCompile:(TPLaTeXEngine*)anEngine
-//{
-//  return [[[self.project valueForKey:@"mainFile"] valueForKey:@"pathOnDisk"] stringByDeletingPathExtension];
-//}
-//
-//- (NSString*) engineWorkingDirectory:(TPLaTeXEngine*)anEngine
-//{
-//  return [self.project folder]; 
-//}
-//
-//- (BOOL) engineCanBibTeX:(TPLaTeXEngine*)anEngine
-//{
-//  if ([self.project valueForKey:@"mainFile"]) {
-//    return YES;
-//  }	
-//	return NO;	 
-//}
-//
-//- (TPEngineCompiler) engineProjectType:(TPLaTeXEngine*)anEngine
-//{
-//  if ([[[self.project valueForKey:@"type"] lowercaseString] isEqualToString:@"latex"]) {
-//    return TPEngineCompilerLaTeX;
-//  } else {
-//    return TPEngineCompilerPDFLaTeX;
-//  }
-//}
-//
-//- (BOOL) engineDocumentIsProject:(TPLaTeXEngine*)anEngine
-//{
-//  return YES;
-//}
 
 #pragma mark -
 #pragma mark File Monitor Delegate
@@ -3527,12 +3589,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return [self.texEditorViewController.textView lineNumberForRange:aRange];
 }
 
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile
-{	
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile
+{  
+  id file = nil;
+  if ([aFile isKindOfClass:[TPFileMetadata class]]) {
+    file = [self.managedObjectContext objectWithID:[aFile valueForKey:@"objId"]];
+  } else {
+    file = aFile;
+  }
+  
 	// first select the file
 	[self.projectItemTreeController setSelectionIndexPath:nil];
 	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aFile];
+	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+  
 	[self.projectItemTreeController setSelectionIndexPath:idx];
     
   // expand all folded code
@@ -3755,11 +3825,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   NSInteger linenumber = [aBookmark.linenumber integerValue];
   FileEntity *file = aBookmark.parentFile;
-  
-  // forward this to all open document windows
-//  for (id<BookmarkManagerDelegate> doc in [self.openDocuments standaloneWindows]) {
-//    [doc jumpToBookmark:aBookmark];
-//  }
   
 	// first select the file
 	[self.projectItemTreeController setSelectionIndexPath:nil];
@@ -4092,180 +4157,253 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
 }
 
-#pragma mark -
-#pragma mark Warnings view delegate
 
-- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
+#pragma mark -
+#pragma mark Metadata manager delegate
+
+- (void) handleMetadataDidBeginUpdateNotification:(NSNotification*)aNote
 {
-  NSMutableArray *warningsFiles = [NSMutableArray array];
+//  if ([aNote object] == self.metadataManager) {
+//    self.miniConsoleLastMessage = self.miniConsole.currentMessage;
+//    [self.miniConsole message:@"Updating metadata"];
+//    [self.miniConsole setAnimating:YES];
+//  }
+}
+
+- (void) handleMetadataDidEndUpdateNotification:(NSNotification*)aNote
+{
+//  if ([aNote object] == self.metadataManager) {
+//    [self.miniConsole message:self.miniConsoleLastMessage];
+//    [self.miniConsole setAnimating:NO];
+//  }
+}
+
+
+- (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
+{
+  //NSLog(@"Metadata Update on thread %@", [NSThread currentThread]);
   
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        if ([file.metadata.syntaxErrors count] > 0) {
-          [warningsFiles addObject:file];
-        }
-      }
+  // build array of TPFileMetadata for project files
+  [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
+
+  //  [self updateMetaFiles];
+  
+  NSMutableArray *filesToScan = [[NSMutableArray alloc] init];
+  
+  // loop over our meta files and decide if they need scanned
+  for (TPFileMetadata *f in self.fileMetadata) {
+    if (f.needsUpdate) {
+      [filesToScan addObject:f];
     }
   }
   
-  return warningsFiles;
+  return filesToScan;
 }
 
-- (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
-{
-  return [[(FileEntity*)file metadata] syntaxErrors];
-}
 
-- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
-{
-	// first select the file
-	[self.projectItemTreeController setSelectionIndexPath:nil];
-	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:anError.file];
-	[self.projectItemTreeController setSelectionIndexPath:idx];
+- (void) updateMetaFiles
+{  
+  // NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
+  if (self.fileMetadata == nil) {
+    self.fileMetadata = [[NSMutableArray alloc] init];
+  }
+  if (self.textFiles == nil) {
+    self.textFiles = [[NSMutableArray alloc] init];
+  }
   
-  [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] inFile:anError.file select:YES];  
-  [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];  
+  // go through project files and build meta files if necessary
+  for (ProjectItemEntity *item in self.project.items) {
+    if ([item isKindOfClass:[FileEntity class]]) {
+      FileEntity *file = (FileEntity*)item;
+      
+      // make sure we cache these to stop them being faulted
+      if ([self.textFiles containsObject:file] == NO) {
+        [self.textFiles addObject:file];
+        // NSLog(@"Cached file %p:%@ [%@]", file, file.name, file.objectID);
+      }
+      
+      if ([file isText]) {
+        TPFileMetadata *fm = [self metaFileForFile:file];
+        
+        // if we don't have the file, add it, otherwise update it
+        if (fm == nil) {
+          TPFileMetadata *newFile = [[TPFileMetadata alloc] initWithParentId:file.objectID
+                                                                   extension:file.extension
+                                                                        text:file.workingContentString
+                                                                        path:file.pathOnDisk
+                                                                 projectPath:[file.filepath stringByStandardizingPath]
+                                                                        name:file.name];
+          newFile.needsUpdate = YES;
+          [self.fileMetadata addObject:newFile];
+          // NSLog(@"Added metafile %@ <--> %@", newFile, newFile.objId);
+        } else {
+          
+          // check last edit date
+          NSDate *lastEdit = file.lastEditDate;
+          NSDate *lastUpdate = fm.lastUpdate;
+          if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
+            fm.text = file.workingContentString;
+            // update path here because it's relatively expensive, and it shouldn't change often.
+            fm.pathOnDisk = file.pathOnDisk;
+            fm.needsUpdate = YES;
+          }
+          // ensure other info is up to date
+          fm.projectPath = [file.filepath stringByStandardizingPath];
+          fm.objId = file.objectID;
+          fm.name = file.name;
+          fm.extension = file.extension;
+        }
+        
+      } // end if isText and not isImage
+    } // end if is file entity
+  } // end loop over project items
+  
+}
+
+
+- (FileEntity*) fileForMetaFile:(TPFileMetadata*)file
+{
+  for (FileEntity *f in self.textFiles) {
+    if ([f objectID] == file.objId || [file.projectPath isEqualToString:[[f filepath] stringByStandardizingPath]]) {
+      return f;
+    }
+  }
+  return nil;
+}
+
+- (TPFileMetadata*) metaFileForFile:(FileEntity*)file
+{
+  for (TPFileMetadata *f in self.fileMetadata) {
+    if (f.objId == [file objectID] || [[f projectPath] isEqualToString:[[file filepath] stringByStandardizingPath]]) {
+      return f;
+    }
+  }
+  return nil;
 }
 
 
 #pragma mark -
-#pragma mark Labels view delegate
+#pragma mark Metadata view delegate
 
-- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView
+- (NSArray*) metadataViewListOfFiles:(TPMetadataViewController *)aViewController
 {
   NSMutableArray *files = [NSMutableArray array];
-  
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        if ([file.metadata.labels count] > 0) {
-          [files addObject:file];
-        }
-      }
-    }
-  }
-  
-  return files;
-}
 
-- (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file
-{
-  return [[(FileEntity*)file metadata] labels];
-}
-
-- (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel
-{
-	// first select the file
-	[self.projectItemTreeController setSelectionIndexPath:nil];
-	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:aLabel.file];
-	[self.projectItemTreeController setSelectionIndexPath:idx];
-  
-  // now select the text
-  NSString *exp = [NSString stringWithFormat:@"\\label(\\[.+?\\]|)\\{%@\\}", aLabel.text];
-  
-  NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
-  if (r.location != NSNotFound) {
-    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
-  }
-}
-
-#pragma mark -
-#pragma mark Citations view delegate
-
-- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView
-{
-  NSMutableArray *files = [NSMutableArray array];
-  
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        if ([file.metadata.citations count] > 0) {
-          [files addObject:file];
-        }
-      }
-    }
-  }
-  
-  return files;
-}
-
-- (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
-{
-  return [[(FileEntity*)file metadata] citations];
-}
-
-- (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
-{
-  BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
-  
-	// first select the file
-	[self.projectItemTreeController setSelectionIndexPath:nil];
-	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[aCitation valueForKey:@"file"]];
-	[self.projectItemTreeController setSelectionIndexPath:idx];
-  
-  // just search for the first line of the source string, or up to the first ','
-  NSInteger index = 0;
-  NSString *source = entry.sourceString;
-  while (index < [source length]) {
-    unichar c = [source characterAtIndex:index];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
-        c == ',') {
-      source = [source substringToIndex:index];
-      break;
-    }
-    index++;
-  }
-  
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];    
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
-}
-
-#pragma mark -
-#pragma mark Commands view delegate
-
-- (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView
-{
-  NSMutableArray *files = [NSMutableArray array];
-  
-  for (ProjectItemEntity *item in self.project.items) {
-    if ([item isKindOfClass:[FileEntity class]]) {
-      FileEntity *file = (FileEntity*)item;
-      if ([file isText]) {
-        if ([file.metadata.userNewCommands count] > 0) {
-          [files addObject:file];
-        }
-      }
+  for (TPFileMetadata *item in self.fileMetadata) {
+    if (aViewController == self.commandsViewController && [item.userNewCommands count] > 0) {
+      [files addObject:item];
+    } else if (aViewController == self.citationsViewController && [item.citations count] > 0) {
+      [files addObject:item];
+    } else if (aViewController == self.labelsViewController && [item.labels count] > 0) {
+      [files addObject:item];
+    } else if (aViewController == self.warningsViewController && [item.syntaxErrors count] > 0) {
+      [files addObject:item];
     }
   }
   
   return [NSArray arrayWithArray:files];
 }
 
-- (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
+- (void) metadataView:(TPMetadataViewController *)aViewController didSelectItem:(id)anItem
 {
-  return [[(FileEntity*)file metadata] userNewCommands];
+  // get the item's objId and get a file from that
+  TPFileMetadata *fileMeta = [anItem valueForKey:@"file"];
+  NSManagedObject *obj = [self.managedObjectContext objectWithID:fileMeta.objId];
+  if (obj == nil) {
+    return;
+  }
+  
+  FileEntity *file = nil;
+  if ([obj isKindOfClass:[FileEntity class]]) {
+    file = (FileEntity*)obj;
+  }
+  
+  if (file == nil) {
+    return;
+  }
+  
+  if (aViewController == self.commandsViewController) {
+    // first select the file
+    [self.projectItemTreeController setSelectionIndexPath:nil];
+    // But now try to select the file
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+    [self.projectItemTreeController setSelectionIndexPath:idx];
+    
+    // now select the text
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[anItem valueForKey:@"source"]];
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    
+  } else if (aViewController == self.citationsViewController) {
+    
+    BibliographyEntry *entry = [anItem valueForKey:@"entry"];
+    
+    // first select the file
+    [self.projectItemTreeController setSelectionIndexPath:nil];
+    // But now try to select the file
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+    [self.projectItemTreeController setSelectionIndexPath:idx];
+    
+    // just search for the first line of the source string, or up to the first ','
+    NSInteger index = 0;
+    NSString *source = entry.sourceString;
+    while (index < [source length]) {
+      unichar c = [source characterAtIndex:index];
+      if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+          c == ',') {
+        source = [source substringToIndex:index];
+        break;
+      }
+      index++;
+    }
+    
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    
+  } else if (aViewController == self.labelsViewController) {
+    
+    // first select the file
+    [self.projectItemTreeController setSelectionIndexPath:nil];
+    // But now try to select the file
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+    [self.projectItemTreeController setSelectionIndexPath:idx];
+    
+    // now select the text
+    NSString *exp = [NSString stringWithFormat:@"\\label(\\[.+?\\]|)\\{%@\\}", [anItem valueForKey:@"text"]];
+    
+    NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
+    if (r.location != NSNotFound) {
+      [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    }
+    
+  } else if (aViewController == self.warningsViewController) {
+    
+    // first select the file
+    [self.projectItemTreeController setSelectionIndexPath:nil];
+    // But now try to select the file
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+    [self.projectItemTreeController setSelectionIndexPath:idx];
+    
+    [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] inFile:file select:YES];
+    [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
+    
+  }
 }
 
-- (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
+- (NSArray*) metadataView:(TPMetadataViewController *)aViewController newItemsForFile:(TPFileMetadata*)file
 {
-	// first select the file
-	[self.projectItemTreeController setSelectionIndexPath:nil];
-	// But now try to select the file
-	NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:[aCommand valueForKey:@"file"]];
-	[self.projectItemTreeController setSelectionIndexPath:idx];
+  if (aViewController == self.commandsViewController) {
+    return file.userNewCommands;
+  } else if (aViewController == self.citationsViewController) {
+    return file.citations;
+  } else if (aViewController == self.labelsViewController) {
+    return file.labels;
+  } else if (aViewController == self.warningsViewController) {
+    return file.syntaxErrors;
+  }
   
-  // now select the text
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
-  
+  return @[];
 }
+
 
 #pragma mark -
 #pragma document report

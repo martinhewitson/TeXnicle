@@ -10,6 +10,16 @@
 
 @implementation TPSectionListSection
 
+- (id) initWithTag:(NSString*)tag isTeX:(BOOL)isTex isMarker:(BOOL)isMark color:(NSColor*)color
+{
+  self = [self initWithTag:tag isTeX:isTex color:color];
+  if (self) {
+    self.isMarker = isMark;
+  }
+  
+  return self;
+}
+
 - (id) initWithTag:(NSString*)tag isTeX:(BOOL)isTex color:(NSColor*)color
 {
   self = [super init];
@@ -17,8 +27,9 @@
     self.color = color;
     self.tag = tag;
     self.isTex = isTex;
+    self.isMarker = NO;
     if (isTex) {
-      self.regexp = [NSString stringWithFormat:@"%@[\\*]?\\{.*\\}", tag];
+      self.regexp = [NSString stringWithFormat:@"\\\\%@.*(\\n)", tag];
     } else {
       self.regexp = [NSString stringWithFormat:@"%@.*(\\n)", tag];
     }

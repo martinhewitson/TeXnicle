@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataItem.h"
 
-@interface TPLabel : NSObject
+@interface TPLabel : TPMetadataItem
 
 @property (copy) NSString *text;
-@property (unsafe_unretained) id file;
 
 + (id) labelWithFile:(id)aFile text:(NSString*)aString;
 - (id) initWithFile:(id)aFile text:(NSString*)aString;

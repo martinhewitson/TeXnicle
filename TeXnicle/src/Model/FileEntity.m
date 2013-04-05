@@ -54,24 +54,17 @@
 
 @synthesize document;
 @synthesize isActive;
-@synthesize metadata;
 @synthesize icon;
 
 
 - (void) awakeFromInsert
 {
 //  NSLog(@"%@: Awake from insert", [self name]);
-  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
   
 	[self setPrimitiveValue:@"none" forKey:@"name"];
 	[self setValue:@NO forKey:@"isText"];
   [self reloadFromDisk];
   [self loadIcon];
-//	[self reconfigureDocument];
-//	if (!document) {
-////		NSLog(@"awakeFromInsert: Created document for %@", [self valueForKey:@"name"]);
-//		document = [[FileDocument alloc] initWithFile:self];
-//	}
   
   self.isActive = 0;
 }
@@ -79,10 +72,8 @@
 - (void) awakeFromFetch
 {
 	[super awakeFromFetch];
-//  NSLog(@"%@: Awake from fetch", [self name]);
-	
-  self.metadata = [[TPFileEntityMetadata alloc] initWithParent:self];
-  
+//  NSLog(@"%p: %@: Awake from fetch", self, [self name]);
+	 
 	[self reloadFromDisk];
   [self loadIcon];
 	
@@ -94,20 +85,23 @@
     }
   }
 	
-//	if (!document) {
-//		NSLog(@"awakeFromFetch: Created document for %@", [self valueForKey:@"name"]);
-//		document = [[FileDocument alloc] initWithFile:self];
-//	}
-  
   self.isActive = 0;
 }
 
 - (void) loadIcon
 {
-  NSImage *image = [[NSWorkspace sharedWorkspace] iconForFileType:self.extension];
+  NSImage *image = nil;
+  if (self.project) {
+    image = self.project.icons[self.extension];
+  }
+  
+  if (image == nil) {
+    image = [[NSWorkspace sharedWorkspace] iconForFileType:self.extension];
+  }
+  
   if (image != nil) {
     self.icon = image;
-  }
+  }  
 }
 
 - (void)increaseActiveCount
@@ -349,15 +343,6 @@
 
 - (void) didTurnIntoFault
 {
-  self.metadata.parent = nil;
-  self.metadata = nil;
-  self.icon = nil;
-  
-	if (document) {
-//		NSLog(@"Clearing document for %@", [self name]);
-		document = nil;
-	}
-
 }
 
 - (NSString*) extension
@@ -500,6 +485,10 @@
 {
 //	NSLog(@"Saving contents of %@ to disk", [self valueForKey:@"name"]);
 	BOOL success = NO;
+  
+  if ([self hasEdits] == NO) {
+    return YES;
+  }
 
 	if ([self existsOnDisk]) {		
 		if ([self updateFromTextStorage]) {
@@ -566,7 +555,7 @@
 
 - (BOOL) writeContents
 {
-//	NSLog(@"Writing contents of %@ to disk", [self name]);
+	// NSLog(@"Writing contents of %@ to disk", [self name]);
   
   if ([self isImage])
     return YES;
@@ -643,38 +632,10 @@
 #pragma mark -
 #pragma mark Metadata
 
-- (void) updateMetadata
-{
-  if (self.metadata) {
-    [self.metadata updateMetadata];
-  }
-}
-
-- (NSArray*) listOfNewCommands
-{
-  if (self.metadata == nil) {
-    return @[];
-  }
-  
-  return [self.metadata listOfNewCommands];
-}
-
-- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force
-{
-  if (self.metadata) {
-    return [self.metadata generateSectionsForTypes:templates forceUpdate:force];
-  }
-  return @[];
-}
 
 - (NSString*) text
 {
   return [self workingContentString];
-}
-
-- (TPFileEntityMetadata*) metadataForFileWithName:(NSString *)file
-{
-  return [[self.project fileWithPath:file] metadata];
 }
 
 @end

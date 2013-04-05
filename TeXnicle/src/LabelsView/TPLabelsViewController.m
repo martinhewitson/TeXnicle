@@ -32,198 +32,15 @@
 
 @interface TPLabelsViewController ()
 
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-
 @end
 
 @implementation TPLabelsViewController
 
-- (id)initWithDelegate:(id<TPLabelsViewDelegate>)aDelegate
-{
-  self = [super initWithNibName:@"TPLabelsViewController" bundle:nil];
-  if (self) {
-    // Initialization code here.
-    self.delegate = aDelegate;
-    firstView = YES;
-    self.sets = [NSMutableArray array];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(handleMetadataUpdate:)
-               name:TPFileMetadataUpdatedNotification
-             object:nil];
-  }
-  
-  return self;
-}
-
-- (void) tearDown
-{
-  self.outlineView.dataSource = nil;
-  self.outlineView.delegate = nil;
-  self.outlineView = nil;
-  self.revealButton = nil;
-
-//  NSLog(@"Tear down %@", self);
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.sets removeAllObjects];
-  self.sets = nil;
-  self.delegate = nil;
-}
-
-- (void) awakeFromNib
-{
-  [self.outlineView setDoubleAction:@selector(outlineViewDoubleClicked)];
-  [self.outlineView setTarget:self];
-  
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
-}
-
-- (void) handleMetadataUpdate:(NSNotification*)aNote
-{  
-  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
-}
-
-- (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
-{
-  if (anItem == self.revealButton) {
-    NSInteger row = [self.outlineView selectedRow];
-    id item = [self.outlineView itemAtRow:row];
-    if ([item isKindOfClass:[TPLabel class]] == NO) {
-      return NO;
-    }
-  }
-  
-  return YES;
-}
-
-// Expand all error sets
-- (IBAction)expandAll:(id)sender
-{
-  for (TPLabelsSet *f in [self sets]) {
-    [self.outlineView expandItem:f];
-  }
-}
-
-// Collapse all error sets
-- (IBAction)collapseAll:(id)sender
-{
-  for (TPLabelsSet *f in [self sets]) {
-    [self.outlineView collapseItem:f];
-  }
-}
-
-- (IBAction)reveal:(id)sender
-{
-  NSInteger row = [self.outlineView selectedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPLabel class]]) {
-    [self labelsView:self didSelectLabel:item];
-  }
-}
-
-- (void) outlineViewDoubleClicked
-{
-  NSInteger row = [self.outlineView clickedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    if ([self.outlineView isItemExpanded:item]) {
-      [self.outlineView collapseItem:item];
-    } else {
-      [self.outlineView expandItem:item];
-    }
-  } else if ([item isKindOfClass:[TPLabel class]]) {
-    [self labelsView:self didSelectLabel:item];
-  }
-}
-
-
-#pragma mark -
-#pragma mark OutlineView datasource
-
-- (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    return YES;
-  }
-  
-  return NO;
-}
-
-- (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{  
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {    
-      return [item valueForKey:@"selectedDisplayString"];
-    } else {
-      return [item valueForKey:@"displayString"];
-    }
-  } else if ([item isKindOfClass:[TPLabel class]]) {
-    return [item valueForKey:@"text"];
-  }
-  
-  return nil;
-}
-
-- (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    TPLabelsSet *set = (TPLabelsSet*)item;
-    return [set.labels count] > 0;
-  }
-  
-  return NO;
-}
-
-- (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-  if (item == nil) {
-    return [self sortedLabelSets][index];
-  }
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    TPLabelsSet *set = (TPLabelsSet*)item;
-    return (set.labels)[index];
-  }
-  
-  return nil;  
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-  if (item == nil) {
-    return [[self sortedLabelSets] count];
-  }
-  
-  if ([item isKindOfClass:[TPLabelsSet class]]) {
-    TPLabelsSet *set = (TPLabelsSet*)item;
-    return [set.labels count];
-  }
-  
-  return 0;
-}
-
-- (NSArray*)sortedLabelSets
-{
-  NSArray *sortedItems = [self.sets sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *first  = [(TPLabelsSet*)a valueForKey:@"name"];
-    NSString *second = [(TPLabelsSet*)b valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];
-  return sortedItems;
-}
 
 - (void) updateUI
 {
-  NSArray *newFiles = [self labelsViewlistOfFiles:self];
+  //NSLog(@"%@: updateUI", self);
+  NSArray *newFiles = [self metadataViewListOfFiles:self];
   if (newFiles == nil) {
     newFiles = @[];
   }
@@ -238,70 +55,34 @@
   [self.sets removeObjectsInArray:filesToRemove];
   
   // update our files
-  for (FileEntity *newFile in newFiles) {
-    TPLabelsSet *set = [self setForFile:newFile];
+  for (TPFileMetadata *newFile in newFiles) {
+    TPMetadataSet *set = [self setForFile:newFile];
     if (set == nil) {
-      NSArray *labels = [self labelsView:self labelsForFile:newFile];
+      NSArray *labels = [self metadataView:self newItemsForFile:newFile];
       if (labels && [labels count] > 0) {
-        set = [[TPLabelsSet alloc] initWithFile:newFile labels:labels];
+        set = [[TPLabelsSet alloc] initWithFile:newFile items:labels];
         [self.sets addObject:set];
       }
     } else {
       // update the labels
-      NSArray *newLabels = [self labelsView:self labelsForFile:newFile];
-      set.labels = newLabels;
+      NSArray *newLabels = [self metadataView:self newItemsForFile:newFile];
+      set.items = newLabels;
     }
   }
-  //  NSLog(@"I have now %u sets", [self.files count]);
-  //  NSLog(@"   updating %@", self.outlineView);
-  [self.outlineView reloadData];
   
-  if (firstView == YES) {
-    [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
-    firstView = NO;
-  }
-}
-
-- (TPLabelsSet*)setForFile:(FileEntity*)aFile
-{
-  for (TPLabelsSet *set in self.sets) {
-    if (set.file == aFile) {
-      return set;
-    }
-  }
-  return nil;
-}
-
-#pragma mark -
-#pragma mark OutlineView delegate
-
-
-
-#pragma mark -
-#pragma mark Delegate
-
-- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController *)aLabelsView
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(labelsViewlistOfFiles:)]) {
-    return [self.delegate labelsViewlistOfFiles:aLabelsView];
-  }
-  return @[];
-}
-
-- (NSArray*) labelsView:(TPLabelsViewController *)aLabelsView labelsForFile:(id)file
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(labelsView:labelsForFile:)]) {
-    return [self.delegate labelsView:aLabelsView labelsForFile:file];
-  }
+  // sort the sets
+  [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSString *first  = [(TPLabelsSet*)obj1 valueForKey:@"name"];
+    NSString *second = [(TPLabelsSet*)obj2 valueForKey:@"name"];
+    return [first compare:second]==NSOrderedDescending;
+  }];
   
-  return nil;
+  [super updateUI];
 }
 
-- (void) labelsView:(TPLabelsViewController *)aLabelsView didSelectLabel:(TPLabel *)aLabel
+- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(labelsView:didSelectLabel:)]) {
-    [self.delegate labelsView:aLabelsView didSelectLabel:aLabel];
-  }
+  return set.items;
 }
 
 @end

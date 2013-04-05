@@ -110,6 +110,7 @@
   [self.markerButton setTarget:nil];
   
   [self stopSyntaxChecker];
+  [self.checker tearDown];
   self.checker.delegate = nil;
   self.checker = nil;
   
@@ -309,6 +310,11 @@
 - (IBAction) gotoSection:(id)sender
 {
   [self.sectionListController gotoSection:sender];
+}
+
+- (IBAction)presentJumpBar:(id)sender
+{
+  [self.sectionListPopup performClick:self];
 }
 
 - (IBAction)showErrorMenu:(id)sender

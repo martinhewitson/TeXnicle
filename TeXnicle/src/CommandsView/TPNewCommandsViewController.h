@@ -27,31 +27,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
+#import "TPMetadataViewController.h"
 
 @class TPNewCommandsViewController;
 @class TPNewCommand;
 
-@protocol TPNewCommandsViewDelegate <NSObject>
-
-- (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView;
-- (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file;
-- (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand;
-
+@protocol TPNewCommandsViewDelegate <TPMetadataViewDelegate>
 @end
 
 
-@interface TPNewCommandsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPNewCommandsViewDelegate> {
-@private
-  BOOL firstView;
-}
-
-@property (unsafe_unretained) id<TPNewCommandsViewDelegate> delegate;
-@property (strong) NSMutableArray *sets;
-
-- (id) initWithDelegate:(id<TPNewCommandsViewDelegate>)aDelegate;
-
-- (void) updateUI;
-- (IBAction)reveal:(id)sender;
-- (void) tearDown;
+@interface TPNewCommandsViewController : TPMetadataViewController
 
 @end

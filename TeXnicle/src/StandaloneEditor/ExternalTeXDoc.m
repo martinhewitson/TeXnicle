@@ -183,7 +183,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         [self.controlsTabBarController selectTabAtIndex:tabIndex];
         [self.infoControlsTabBarController selectTabAtIndex:2];
         
-        if (![NSApp isLion]) {
+        if ([NSApp isSnowLeopard]) {
           // controls width
           CGFloat controlsWidth = [[dict valueForKey:TPExternalDocControlsWidthKey] floatValue];
           if (controlsWidth >= 0.0) {
@@ -199,7 +199,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
             fr.size.width = editorWidth;
             [self.texEditorContainer setFrame:fr];
           }
+          
         }
+        
         
         // max outline depth
         self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
@@ -237,10 +239,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.controlsTabBarController selectTabAtIndex:1];
   [self.infoControlsTabBarController selectTabAtIndex:2];
   
-  //  NSLog(@"Awake from nib");
+  //NSLog(@"Awake from nib");
   self.texEditorViewController = [[TeXEditorViewController alloc] init];
   self.texEditorViewController.delegate = self;
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
+  //NSLog(@"Set bounds to %@ from %@", [self.texEditorViewController view], self.texEditorContainer);
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
   [self.texEditorContainer setNeedsDisplay:YES];
   [self.texEditorViewController enableEditor];
@@ -344,6 +347,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
              name:NSTextDidChangeNotification
            object:self.texEditorViewController.textView];
   
+  [nc addObserver:self
+         selector:@selector(handleInfoTabSelectionChanged:)
+             name:TPInfoControlsTabSelectionDidChangeNotification
+           object:self.infoControlsTabBarController];
+  
   self.miniConsole = [[MHMiniConsoleViewController alloc] init];
   NSArray *items = [[self.mainWindow toolbar] items];
   for (NSToolbarItem *item in items) {
@@ -405,6 +413,14 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self setupLiveUpdateTimer];
 
   self.metadataUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateMetadata) userInfo:nil repeats:YES];
+  
+  // update metadata views
+  NSTimeInterval delay = 3.0;
+  [self.warningsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  
 
   _didSetupUI = YES;
 }
@@ -642,6 +658,42 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 #pragma mark -
 #pragma mark Notification Handlers
+
+- (void) handleInfoTabSelectionChanged:(NSNotification*)aNote
+{
+  //  NSLog(@"Tab changed %@", [aNote object]);
+  if ([aNote object] == self.infoControlsTabBarController) {
+    NSInteger idx = [self.infoControlsTabBarController indexOfSelectedTab];
+    //    NSLog(@"Index %d", idx);
+    switch (idx) {
+      case 0:
+        // bookmarks
+        break;
+      case 1:
+        // warnings
+        [self.warningsViewController updateUI];
+        break;
+      case 2:
+        // spelling
+        break;
+      case 3:
+        // labels
+        [self.labelsViewController updateUI];
+        break;
+      case 4:
+        // citations
+        [self.citationsViewController updateUI];
+        break;
+      case 5:
+        // commands
+        [self.commandsViewController updateUI];
+        break;
+      default:
+        break;
+    }
+  }
+}
+
 
 - (void) syntaxCheckerDidFinish
 {
@@ -2405,6 +2457,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   return s.location;
 }
 
+- (NSArray*) allMetadataFiles
+{
+  return @[];
+}
+
 - (id) mainFile
 {
   return [self fileURL];
@@ -2620,9 +2677,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 }
 
 #pragma mark -
-#pragma mark Warnings view delegate
+#pragma mark Metadata view delegate
 
-- (NSArray*) warningsViewlistOfFiles:(TPWarningsViewController *)warningsView
+- (NSArray*) metadataViewListOfFiles:(TPMetadataViewController *)aViewController
 {
   if ([self fileURL] == nil)
     return @[@"untitled"];
@@ -2630,128 +2687,98 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   return @[[self fileURL]];
 }
 
-- (NSArray*) warningsView:(TPWarningsViewController *)warningsView warningsForFile:(id)file
+- (void) metadataView:(TPMetadataViewController *)aViewController didSelectItem:(id)anItem
 {
-  return self.texEditorViewController.errors;
-}
-
-- (void) warningsView:(TPWarningsViewController*)warningsView didSelectError:(TPSyntaxError*)anError
-{
-  [self.texEditorViewController.textView jumpToLine:[anError.line integerValue] select:YES];    
-  [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
-}
-
-#pragma mark -
-#pragma mark Labels view delegate
-
-- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView
-{
-  if ([self fileURL] == nil)
-    return @[@"untitled"];
-  
-  return @[[self fileURL]];
-}
-
-- (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file
-{
-  return [self listOfReferences];
-}
-
-- (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel
-{
-  // now select the text
-  NSString *str = [NSString stringWithFormat:@"\\label{%@}", aLabel.text];
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
-}
-
-#pragma mark -
-#pragma mark Citations view delegate
-
-- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController*)aView
-{
-  if ([self fileURL] == nil)
-    return @[@"untitled"];
-  
-  return @[[self fileURL]];
-}
-
-- (NSArray*) citationsView:(TPCitationsViewController*)aView citationsForFile:(id)file
-{
-	NSString *str = [self.texEditorViewController.textView string];
-  NSMutableArray *citations = [NSMutableArray array];
-  [citations addObjectsFromArray:[str citations]];
-  [citations addObjectsFromArray:[str citationsFromBibliographyIncludedFromPath:[[self fileURL] path]]];
-
-  return citations;
-}
-
-- (void) citationsView:(TPCitationsViewController*)aView didSelectCitation:(id)aCitation
-{
-  BibliographyEntry *entry = [aCitation valueForKey:@"entry"];
-  
-  // if this is a \bibliography{} line, we open the bib file assuming it to be in the path relative
-  // to this document
-  if ([entry.sourceString hasPrefix:@"\\bibliography{"]) {
-  
-    NSString *bibFileName = [entry.sourceString argument];
-    NSString *path = [[[[self fileURL] path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:bibFileName];
-    if (![[path pathExtension] isEqualToString:@"bib"]) {
-      path = [path stringByAppendingPathExtension:@"bib"];
-    }
+  if (aViewController == self.commandsViewController) {
     
-    [[NSWorkspace sharedWorkspace] openFile:path];
-    
-  } else {
-    // just search for the first line of the source string, or up to the first ','
-    NSInteger index = 0;
-    NSString *source = entry.sourceString;
-    while (index < [source length]) {
-      unichar c = [source characterAtIndex:index];
-      if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
-          c == ',') {
-        source = [source substringToIndex:index];
-        break;
-      }
-      index++;
-    }
-    
-    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
+    // now select the text
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[anItem valueForKey:@"source"]];
     [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    
+  } else if (aViewController == self.citationsViewController) {
+    
+    BibliographyEntry *entry = [anItem valueForKey:@"entry"];
+    
+    // if this is a \bibliography{} line, we open the bib file assuming it to be in the path relative
+    // to this document
+    if ([entry.sourceString hasPrefix:@"\\bibliography{"]) {
+      
+      NSString *bibFileName = [entry.sourceString argument];
+      NSString *path = [[[[self fileURL] path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:bibFileName];
+      if (![[path pathExtension] isEqualToString:@"bib"]) {
+        path = [path stringByAppendingPathExtension:@"bib"];
+      }
+      
+      [[NSWorkspace sharedWorkspace] openFile:path];
+      
+    } else {
+      // just search for the first line of the source string, or up to the first ','
+      NSInteger index = 0;
+      NSString *source = entry.sourceString;
+      while (index < [source length]) {
+        unichar c = [source characterAtIndex:index];
+        if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] ||
+            c == ',') {
+          source = [source substringToIndex:index];
+          break;
+        }
+        index++;
+      }
+      
+      NSRange r = [[self.texEditorViewController.textView string] rangeOfString:source];
+      [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    }
+    
+  } else if (aViewController == self.labelsViewController) {
+    
+    // now select the text
+    NSString *str = [NSString stringWithFormat:@"\\label{%@}", [anItem valueForKey:@"text"]];
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    
+  } else if (aViewController == self.warningsViewController) {
+    
+    [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] select:YES];
+    [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];
+    
   }
 }
 
-#pragma mark -
-#pragma mark Commands view delegate
-
-- (NSArray*) commandsViewlistOfFiles:(TPNewCommandsViewController*)aView
+- (NSArray*) metadataView:(TPMetadataViewController *)aViewController newItemsForFile:(id)file
 {
-  if ([self fileURL] == nil)
-    return @[@"untitled"];
+  if (aViewController == self.commandsViewController) {
+    
+    NSString *allText = [self.texEditorViewController.textView string];
+    NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:allText];
+    NSMutableArray *commandObjects = [NSMutableArray array];
+    for (NSString *str in parsedCommands) {
+      TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
+      [commandObjects addObject:c];
+    }
+    
+    return [NSArray arrayWithArray:commandObjects];
+    
+  } else if (aViewController == self.citationsViewController) {
+    
+    NSString *str = [self.texEditorViewController.textView string];
+    NSMutableArray *citations = [NSMutableArray array];
+    [citations addObjectsFromArray:[str citations]];
+    [citations addObjectsFromArray:[str citationsFromBibliographyIncludedFromPath:[[self fileURL] path]]];
+    
+    return citations;
+    
+  } else if (aViewController == self.labelsViewController) {
+    
+    return [self listOfReferences];
+    
+  } else if (aViewController == self.warningsViewController) {
+    
+    return self.texEditorViewController.errors;
+    
+  }
   
-  return @[[self fileURL]];
+  return @[];
 }
-
-- (NSArray*) commandsView:(TPNewCommandsViewController*)aView newCommandsForFile:(id)file
-{
-  NSString *allText = [self.texEditorViewController.textView string];
-  NSArray *parsedCommands = [TPRegularExpression stringsMatching:@"\\\\newcommand\\{\\\\[a-zA-Z]*\\}" inText:allText];
-  NSMutableArray *commandObjects = [NSMutableArray array];
-  for (NSString *str in parsedCommands) {
-    TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
-    [commandObjects addObject:c];
-  }
-
-  return [NSArray arrayWithArray:commandObjects];
-}
-
-- (void) commandsView:(TPNewCommandsViewController*)aView didSelectNewCommand:(id)aCommand
-{
-  // now select the text
-  NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[aCommand valueForKey:@"source"]];
-  [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];  
-}
-
 
 #pragma mark -
 #pragma document report

@@ -58,6 +58,7 @@
 #pragma mark -
 #pragma mark Insert Table
 
+- (IBAction)presentJumpBar:(id)sender;
 - (IBAction)showErrorMenu:(id)sender;
 - (IBAction) gotoSection:(id)sender;
 

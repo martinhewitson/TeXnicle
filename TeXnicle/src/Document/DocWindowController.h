@@ -62,4 +62,6 @@
 - (IBAction)previousBookmark:(id)sender;
 - (IBAction)nextBookmark:(id)sender;
 
+- (void) tearDown;
+
 @end

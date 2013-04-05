@@ -44,6 +44,15 @@
   return self;
 }
 
+- (NSString*)sortKey
+{
+  return @"name";
+}
+
+- (id) value
+{
+  return [self.entry attributedString];
+}
 
 - (NSAttributedString*)attributedString
 {

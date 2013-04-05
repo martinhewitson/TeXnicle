@@ -33,200 +33,13 @@
 
 @interface TPCitationsViewController ()
 
-@property (unsafe_unretained) IBOutlet HHValidatedButton *revealButton;
-@property (unsafe_unretained) IBOutlet NSOutlineView *outlineView;
-
 @end
 
 @implementation TPCitationsViewController
 
-
-- (id)initWithDelegate:(id<TPCitationsViewDelegate>)aDelegate
-{
-  self = [super initWithNibName:@"TPCitationsViewController" bundle:nil];
-  if (self) {
-    // Initialization code here.
-    self.delegate = aDelegate;
-    firstView = YES;
-    self.sets = [NSMutableArray array];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(handleMetadataUpdate:)
-               name:TPFileMetadataUpdatedNotification
-             object:nil];
-  }
-  
-  return self;
-}
-
-- (void) tearDown
-{
-  self.outlineView.dataSource = nil;
-  self.outlineView.delegate = nil;
-  self.outlineView = nil;
-  self.revealButton = nil;
-
-//  NSLog(@"Tear down %@", self);
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  [self.sets removeAllObjects];
-  self.sets = nil;
-  self.delegate = nil;
-}
-
-
-- (void) awakeFromNib
-{
-  [self.outlineView setDoubleAction:@selector(outlineViewDoubleClicked)];
-  [self.outlineView setTarget:self];
-  
-  [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
-}
-
-- (void) handleMetadataUpdate:(NSNotification*)aNote
-{  
-  [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
-}
-
-- (BOOL) validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
-{
-  if (anItem == self.revealButton) {
-    NSInteger row = [self.outlineView selectedRow];
-    id item = [self.outlineView itemAtRow:row];
-    if ([item isKindOfClass:[TPCitation class]] == NO) {
-      return NO;
-    }
-  }
-  
-  return YES;
-}
-
-// Expand all error sets
-- (IBAction)expandAll:(id)sender
-{
-  for (TPCitationSet *f in [self sets]) {
-    [self.outlineView expandItem:f];
-  }
-}
-
-// Collapse all error sets
-- (IBAction)collapseAll:(id)sender
-{
-  for (TPCitationSet *f in [self sets]) {
-    [self.outlineView collapseItem:f];
-  }
-}
-
-- (IBAction)reveal:(id)sender
-{
-  NSInteger row = [self.outlineView selectedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPCitation class]]) {
-    [self citationsView:self didSelectCitation:item];
-  }
-}
-
-- (void) outlineViewDoubleClicked
-{
-  NSInteger row = [self.outlineView clickedRow];
-  id item = [self.outlineView itemAtRow:row];
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    if ([self.outlineView isItemExpanded:item]) {
-      [self.outlineView collapseItem:item];
-    } else {
-      [self.outlineView expandItem:item];
-    }
-  } else if ([item isKindOfClass:[TPCitation class]]) {
-    [self citationsView:self didSelectCitation:item];
-  }
-}
-
-
-#pragma mark -
-#pragma mark OutlineView datasource
-
-- (BOOL) outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    return YES;
-  }
-  
-  return NO;
-}
-
-- (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{  
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {    
-      return [item valueForKey:@"selectedDisplayString"];
-    } else {
-      return [item valueForKey:@"displayString"];
-    }
-  } else if ([item isKindOfClass:[TPCitation class]]) {
-    return [[item valueForKey:@"entry"] attributedString];
-  }
-  
-  return nil;
-}
-
-- (BOOL) outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-  if (item == nil) {
-    return NO;
-  }
-  
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    TPCitationSet *set = (TPCitationSet*)item;
-    return [set.citations count] > 0;
-  }
-  
-  return NO;
-}
-
-- (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-  if (item == nil) {
-    return [self sortedSets][index];
-  }
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    TPCitationSet *set = (TPCitationSet*)item;
-    return (set.citations)[index];
-  }
-  
-  return nil;  
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-  if (item == nil) {
-    return [[self sortedSets] count];
-  }
-  
-  if ([item isKindOfClass:[TPCitationSet class]]) {
-    TPCitationSet *set = (TPCitationSet*)item;
-    return [set.citations count];
-  }
-  
-  return 0;
-}
-
-- (NSArray*)sortedSets
-{
-  NSArray *sortedItems = [self.sets sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *first  = [(TPCitationSet*)a valueForKey:@"name"];
-    NSString *second = [(TPCitationSet*)b valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];
-  return sortedItems;
-}
-
 - (void) updateUI
 {
-  NSArray *newFiles = [self citationsViewlistOfFiles:self];
+  NSArray *newFiles = [self metadataViewListOfFiles:self];
   if (newFiles == nil) {
     newFiles = @[];
   }
@@ -241,70 +54,27 @@
   [self.sets removeObjectsInArray:filesToRemove];
   
   // update our files
-  for (FileEntity *newFile in newFiles) {
-    TPCitationSet *set = [self setForFile:newFile];
+  for (TPFileMetadata *newFile in newFiles) {
+    TPMetadataSet *set = [self setForFile:newFile];
     if (set == nil) {
-      NSArray *entries = [self citationsView:self citationsForFile:newFile];
+      NSArray *entries = [self metadataView:self newItemsForFile:newFile];
       if (entries && [entries count] > 0) {
-        set = [[TPCitationSet alloc] initWithFile:newFile bibliographyArray:entries];
+        set = [[TPCitationSet alloc] initWithFile:newFile items:entries];
         [self.sets addObject:set];
       }
     } else {
       // update the citations
-      NSArray *newCitations = [self citationsView:self citationsForFile:newFile];
-      [set setCitationsFromBibliographyArray:newCitations];
+      NSArray *newCitations = [self metadataView:self newItemsForFile:newFile];
+      [(TPCitationSet*)set setCitationsFromBibliographyArray:newCitations];
     }
   }
-  //  NSLog(@"I have now %u sets", [self.files count]);
-  //  NSLog(@"   updating %@", self.outlineView);
-  [self.outlineView reloadData];
-
-  if (firstView == YES) {
-    [self performSelector:@selector(expandAll:) withObject:self afterDelay:0.5];
-    firstView = NO;
-  }
+  
+  [super updateUI];
 }
 
-- (TPCitationSet*)setForFile:(FileEntity*)aFile
+- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set
 {
-  for (TPCitationSet *set in self.sets) {
-    if (set.file == aFile) {
-      return set;
-    }
-  }
-  return nil;
-}
-
-#pragma mark -
-#pragma mark OutlineView delegate
-
-
-
-#pragma mark -
-#pragma mark Delegate
-
-
-- (NSArray*) citationsViewlistOfFiles:(TPCitationsViewController *)aView
-{
-  if (aView.delegate && [aView.delegate respondsToSelector:@selector(citationsViewlistOfFiles:)]) {
-    return [aView.delegate citationsViewlistOfFiles:aView];
-  }
-  return @[];
-}
-
-- (NSArray*) citationsView:(TPCitationsViewController *)aView citationsForFile:(id)file
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(citationsView:citationsForFile:)]) {
-    return [self.delegate citationsView:aView citationsForFile:file];
-  }
-  return nil;
-}
-
-- (void) citationsView:(TPCitationsViewController *)aView didSelectCitation:(id)aCitation
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(citationsView:didSelectCitation:)]) {
-    [self.delegate citationsView:aView didSelectCitation:aCitation];
-  }
+  return set.items;
 }
 
 @end

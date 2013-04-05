@@ -31,4 +31,14 @@
   return self.text;
 }
 
+- (NSString*)sortKey
+{
+  return @"name";
+}
+
+- (id) value
+{
+  return self.text;
+}
+
 @end

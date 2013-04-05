@@ -31,36 +31,6 @@
 
 @implementation TPWarningSet
 
-- (void) dealloc
-{
-  self.file = nil;
-}
-
-- (id) initWithFile:(FileEntity*)aFile errors:(NSArray *)someErrors
-{
-  self = [super init];
-  if (self) {
-    self.file = aFile;
-    NSMutableArray *newErrors = [NSMutableArray array];
-    for (TPSyntaxError *error in someErrors) {
-      TPSyntaxError *copyError = [TPSyntaxError errorWithMessage:error.message line:error.line];
-      [newErrors addObject:copyError];
-    }
-    self.errors = [NSArray arrayWithArray:newErrors];
-  }
-  return self;
-}
-
-
-- (NSString*) name
-{
-  if ([self.file isKindOfClass:[NSURL class]]) {
-    return [self.file lastPathComponent];
-  }
-  
-  return [self.file valueForKey:@"name"];
-}
-
 - (NSAttributedString*)selectedDisplayString
 {
   return [self stringForDisplayWithColor:[NSColor alternateSelectedControlTextColor] detailsColor:[NSColor alternateSelectedControlTextColor]];
@@ -70,33 +40,5 @@
 {
   return [self stringForDisplayWithColor:[NSColor colorWithDeviceRed:220.0/255.0 green:190.0/255.0 blue:100.0/255.0 alpha:1.0] detailsColor:[NSColor lightGrayColor]];
 }
-
-- (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
-{
-  NSString *text = nil;
-  if ([self.file isKindOfClass:[FileEntity class]]) {
-    text = [self.file valueForKey:@"name"];
-  } else {
-    text = [self.file lastPathComponent];
-  }
-  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
-  
-  NSString *warningCountString = nil; 
-  warningCountString = [NSString stringWithFormat:@" [%lu] ", [self.errors count]];
-  
-  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:warningCountString];
-  [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
-  [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
-  [att appendAttributedString:str];
-  
-  // apply paragraph
-  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
-  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
-  
-  return att;
-}
-
 
 @end

@@ -26,12 +26,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataItem.h"
 
-@interface TPNewCommand : NSObject
+@interface TPNewCommand : TPMetadataItem
 
 @property (copy) NSString *source;
 @property (copy) NSString *argument;
-@property (unsafe_unretained) id file;
 
 + (id) commandWithSource:(NSString*)text;
 - (id) initWithSource:(NSString*)text;

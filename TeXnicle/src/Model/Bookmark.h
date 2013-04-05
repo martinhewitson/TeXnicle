@@ -40,6 +40,7 @@
 // other properties
 @property (unsafe_unretained, readonly) NSAttributedString *selectedDisplayString;
 @property (unsafe_unretained, readonly) NSAttributedString *displayString;
+@property (unsafe_unretained, readonly) NSAttributedString *simpleDisplayString;
 
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inFile:(FileEntity*)aFile inManagedObjectContext:(NSManagedObjectContext*)aMOC;
 + (Bookmark*)bookmarkWithLinenumber:(NSInteger)aLinenumber inArray:(NSArray*)bookmarks;

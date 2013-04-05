@@ -76,6 +76,16 @@
   return self;
 }
 
+- (NSString*)string
+{
+  return [[self attributedString] string];
+}
+
+- (NSString*)value
+{
+  return [[self attributedString] string];
+}
+
 - (void) parseMessageLine:(NSString*)aLine
 {
   NSArray *comps = [aLine captureComponentsMatchedByRegex:@"line ([0-9]*):(.*)"];
@@ -102,6 +112,10 @@
   return [self attributedStringWithColor:[NSColor blackColor]];
 }
 
+- (NSString*)sortKey
+{
+  return @"line";
+}
 
 - (NSAttributedString*)attributedStringWithColor:(NSColor*)aColor
 {

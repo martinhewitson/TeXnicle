@@ -34,6 +34,7 @@
                         minor:(unsigned *)minor
                        bugFix:(unsigned *)bugFix;
 
+- (BOOL) isSnowLeopard;
 - (BOOL) isLion;
 - (BOOL) isMountainLion;
 

@@ -346,6 +346,29 @@
   return errors;
 }
 
+
+- (void) tearDown
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.delegate = nil;
+  
+  [self cancelCheck];
+  
+}
+
+- (void) cancelCheck
+{
+  if (lacheckTask != nil) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [lacheckTask terminate];
+    lacheckTask = nil;
+  }
+  
+  _taskRunning = NO;
+}
+
+
+
 - (void) dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];

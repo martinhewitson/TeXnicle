@@ -1284,6 +1284,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[self.openDocumentsManager removeDocument:aFile];
 	// post message
 	[[ConsoleController sharedConsoleController] message:[NSString stringWithFormat:@"Removed %@", [aFile valueForKey:@"filepath"]]];
+  // tell document
+  if (self.document) {
+    [self.document didRemoveFile:aFile];
+  }
 }
 
 - (void) promptForSaveForItem:(FileEntity*)aFile

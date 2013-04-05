@@ -59,11 +59,11 @@
 - (void) awakeFromNib
 {
   // apply our custom ImageAndTextCell for rendering the first column's cells
-	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
-	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
-	[imageAndTextCell setEditable:NO];
-	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
-	[tableColumn setDataCell:imageAndTextCell];
+//	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
+//	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
+//	[imageAndTextCell setEditable:NO];
+//	[imageAndTextCell setImage:[NSImage imageNamed:NSImageNameFolderBurnable]];
+//	[tableColumn setDataCell:imageAndTextCell];
 
   
   [self setupOutlineBuilder];
@@ -97,6 +97,14 @@
 
 #pragma mark -
 #pragma mark outline builder delegate
+
+- (NSArray*) allMetadataFiles
+{
+  if (self.delegate) {
+    return [self.delegate allMetadataFiles];
+  }
+  return @[];
+}
 
 - (id) mainFile
 {
@@ -134,7 +142,6 @@
       currentFile = [self.delegate currentFile];
       location = [self.delegate locationInCurrentEditor];
     }
-    
     
     TPSection *lastSection = nil;
     self.currentSection = nil;
@@ -263,11 +270,11 @@
   }
   
   // we need the icon for this cell
-  TPSectionTemplate *template = [item valueForKey:@"type"];
-  if (template) {
-    [cell setImageSize:17.0];
-    [cell setImage:template.icon];
-  }
+//  TPSectionTemplate *template = [item valueForKey:@"type"];
+//  if (template) {
+//    [cell setImageSize:17.0];
+//    [cell setImage:template.icon];
+//  }
 }
 
 #pragma mark -

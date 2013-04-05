@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3103</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="com.apple.InterfaceBuilder.CocoaPlugin">2844</string>
 			<string key="com.apple.pdfkit.ibplugin">1810</string>
@@ -72,7 +72,6 @@
 										<string key="NSFrameSize">{100, 547}</string>
 										<reference key="NSSuperview" ref="534787291"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:72</string>
 										<float key="ThumbSizeWidth">64</float>
 										<float key="ThumbSizeHeight">64</float>
@@ -99,7 +98,6 @@
 														<string key="NSFrameSize">{398, 547}</string>
 														<reference key="NSSuperview" ref="31909942"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView"/>
 														<bool key="NSViewCanDrawConcurrently">YES</bool>
 														<string key="NSReuseIdentifierKey">_NS:51</string>
 														<int key="DisplayMode">1</int>
@@ -474,7 +472,6 @@
 								<string key="NSFrame">{{588, 6}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="1061424173"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:161</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="295962500">
@@ -773,7 +770,7 @@
 							</object>
 							<object class="NSImageView" id="389335881">
 								<reference key="NSNextResponder" ref="209167002"/>
-								<int key="NSvFlags">301</int>
+								<int key="NSvFlags">256</int>
 								<set class="NSMutableSet" key="NSDragTypes">
 									<string>Apple PDF pasteboard type</string>
 									<string>Apple PICT pasteboard type</string>
@@ -1626,7 +1623,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="186626593"/>
-						<string key="toolTip">Jump to next result</string>
+						<string key="toolTip">Toggle search results</string>
 					</object>
 				</object>
 				<string key="70.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1651,7 +1648,7 @@
 					<object class="IBToolTipAttribute" key="NS.object.0">
 						<string key="name">ToolTip</string>
 						<reference key="object" ref="522390555"/>
-						<string key="toolTip">Jump to next result</string>
+						<string key="toolTip">Toggle thumbnails</string>
 					</object>
 				</object>
 				<string key="84.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1693,6 +1690,7 @@
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="clean:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -1715,6 +1713,10 @@
 						</object>
 						<object class="IBActionInfo" key="clean:">
 							<string key="name">clean:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="endAddToNewProjectSheet:">
@@ -2416,6 +2418,7 @@
 						<string key="clean:">id</string>
 						<string key="closeAllTabs:">id</string>
 						<string key="closeCurrentTab:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="createProjectTemplate:">id</string>
 						<string key="delete:">id</string>
 						<string key="deleteSelectedBookmark:">id</string>
@@ -2500,6 +2503,10 @@
 						</object>
 						<object class="IBActionInfo" key="closeCurrentTab:">
 							<string key="name">closeCurrentTab:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="createProjectTemplate:">

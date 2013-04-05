@@ -32,6 +32,8 @@
 @interface MHMiniConsoleViewController : NSViewController <MHConsoleViewer>
 
 
+@property (readonly) NSString *currentMessage;
+
 - (void) setAnimating:(BOOL)state;
 
 @end

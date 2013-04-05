@@ -57,6 +57,9 @@
 #import "TPNewCommandsViewController.h"
 #import "TPDocumentReportWindowController.h"
 
+#import "TPMetadataViewController.h"
+#import "TPMetadataManager.h"
+
 @class ProjectEntity;
 @class ProjectItemEntity;
 @class ProjectItemTreeController;
@@ -65,7 +68,7 @@
 @class TPImageViewerController;
 @class Bookmark;
 
-@interface TeXProjectDocument : NSPersistentDocument <TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate, 
+@interface TeXProjectDocument : NSPersistentDocument <MetadataManagerDelegate, TPMetadataViewDelegate, TPNewCommandsViewDelegate, TPCitationsViewDelegate, TPLabelsViewDelegate,
 TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate, TPProjectTemplateCreateDelegate, TemplateEditorDelegate, 
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,
@@ -133,7 +136,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark ProjectOutlineController delegate
 
-- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(FileEntity*)aFile;
+- (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
 
 #pragma mark -
 #pragma mark Tree Action Menu
@@ -191,6 +194,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark - 
 #pragma mark Files and Folders
 
+- (void) didRemoveFile:(FileEntity*)aFile;
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem;
 - (IBAction)reloadCurrentFileFromDisk:(id)sender;
 - (void) selectTabForFile:(FileEntity*)aFile;

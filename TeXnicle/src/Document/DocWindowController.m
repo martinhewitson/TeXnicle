@@ -122,6 +122,16 @@
   self.statusViewContainer = nil;
 }
 
+- (void) tearDown
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  self.mainDocument = nil;
+  self.statusViewContainer = nil;
+  [self.texEditorViewController tearDown];
+  self.texEditorViewController = nil;
+  self.file = nil;
+}
+
 
 - (IBAction)printDocument:(id)sender
 {

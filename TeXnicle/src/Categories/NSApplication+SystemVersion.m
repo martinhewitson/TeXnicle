@@ -63,6 +63,17 @@ fail:
   if (bugFix) *bugFix = 0;
 }
 
+- (BOOL) isSnowLeopard
+{
+  unsigned major, minor, bugFix;
+  [[NSApplication sharedApplication]
+   getSystemVersionMajor:&major minor:&minor bugFix:&bugFix];
+  if (major == 10 && minor == 6) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
 
 - (BOOL) isLion 
 {

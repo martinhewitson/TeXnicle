@@ -12,13 +12,14 @@
 @protocol TPOutlineBuilderDelegate <NSObject>
 
 - (id) mainFile;
+- (NSArray*) allMetadataFiles;
 - (NSString*) textForFile:(id)aFile;
 - (void) didComputeNewSections;
 - (BOOL) shouldGenerateOutline;
 
 @end
 
-@interface TPOutlineBuilder : NSObject {
+@interface TPOutlineBuilder : NSObject <TPOutlineBuilderDelegate> {
 @private
   dispatch_queue_t queue;
 }

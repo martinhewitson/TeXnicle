@@ -27,30 +27,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
+#import "TPMetadataViewController.h"
 
 @class TPLabelsViewController;
 @class TPLabel;
 
 @protocol TPLabelsViewDelegate <NSObject>
 
-- (NSArray*) labelsViewlistOfFiles:(TPLabelsViewController*)aLabelsView;
-- (NSArray*) labelsView:(TPLabelsViewController*)aLabelsView labelsForFile:(id)file;
-- (void) labelsView:(TPLabelsViewController*)aLabelsView didSelectLabel:(TPLabel*)aLabel;
 
 @end
 
-@interface TPLabelsViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPLabelsViewDelegate> {
-@private
-  BOOL firstView;
-}
-
-@property (unsafe_unretained) id<TPLabelsViewDelegate> delegate;
-@property (strong) NSMutableArray *sets;
-
-- (id) initWithDelegate:(id<TPLabelsViewDelegate>)aDelegate;
-
-- (void) updateUI;
-- (IBAction)reveal:(id)sender;
-- (void) tearDown;
+@interface TPLabelsViewController : TPMetadataViewController
 
 @end

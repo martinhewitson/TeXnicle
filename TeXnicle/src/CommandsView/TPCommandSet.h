@@ -26,16 +26,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TPMetadataSet.h"
 
-@class FileEntity;
 
-@interface TPCommandSet : NSObject
-
-@property (strong) NSArray *commands;
-@property (strong) id file;
-@property (unsafe_unretained, readonly) NSString *name;
-
-- (id) initWithFile:(FileEntity*)aFile commandArray:(NSArray *)aList;
+@interface TPCommandSet : TPMetadataSet
 
 
 

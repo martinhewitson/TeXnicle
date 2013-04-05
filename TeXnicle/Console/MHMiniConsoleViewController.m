@@ -32,6 +32,7 @@
 
 @property (unsafe_unretained) IBOutlet NSTextField *textField;
 @property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (readonly) NSString *message;
 
 @end
 
@@ -62,6 +63,11 @@
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor
 {
   // do nothing
+}
+
+- (NSString*) currentMessage
+{
+  return [self.textField stringValue];
 }
 
 - (void) error:(NSString*)someText

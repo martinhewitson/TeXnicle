@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C3103</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">2844</string>
@@ -1410,6 +1410,25 @@
 									<reference key="NSMixedImage" ref="310636482"/>
 								</object>
 								<object class="NSMenuItem" id="119267677">
+									<reference key="NSMenu" ref="438284456"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="392278781">
+									<reference key="NSMenu" ref="438284456"/>
+									<string key="NSTitle">Present Jump Bar</string>
+									<string key="NSKeyEquiv">s</string>
+									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="1033313550"/>
+									<reference key="NSMixedImage" ref="310636482"/>
+								</object>
+								<object class="NSMenuItem" id="320169383">
 									<reference key="NSMenu" ref="438284456"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -3111,6 +3130,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">presentJumpBar:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="392278781"/>
+					</object>
+					<int key="connectionID">890</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">showConsole:</string>
 						<reference key="source" ref="161481692"/>
 						<reference key="destination" ref="678176718"/>
@@ -4277,6 +4304,8 @@
 							<reference ref="666130997"/>
 							<reference ref="1069314678"/>
 							<reference ref="119267677"/>
+							<reference ref="320169383"/>
+							<reference ref="392278781"/>
 						</array>
 						<reference key="parent" ref="212066011"/>
 					</object>
@@ -4590,6 +4619,16 @@
 						<reference key="object" ref="571357928"/>
 						<reference key="parent" ref="720053764"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">884</int>
+						<reference key="object" ref="320169383"/>
+						<reference key="parent" ref="438284456"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">885</int>
+						<reference key="object" ref="392278781"/>
+						<reference key="parent" ref="438284456"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4814,13 +4853,15 @@
 				<string key="875.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="878.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="881.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="884.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="885.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">883</int>
+			<int key="maxID">890</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4966,21 +5007,13 @@
 						<string key="addToProject:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
-						<string key="cancelCompile:">id</string>
 						<string key="clean:">id</string>
 						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
-						<string key="findCorrespondingPDFText:">id</string>
-						<string key="findSource:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
-						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
-						<string key="reopenUsingEncoding:">id</string>
-						<string key="saveDocument:">id</string>
-						<string key="showIntegratedPDFViewer:">id</string>
-						<string key="togglePanelFocus:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -4994,10 +5027,6 @@
 						</object>
 						<object class="IBActionInfo" key="buildProject:">
 							<string key="name">buildProject:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelCompile:">
-							<string key="name">cancelCompile:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="clean:">
@@ -5016,14 +5045,6 @@
 							<string key="name">endAddToProjectSheet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="findCorrespondingPDFText:">
-							<string key="name">findCorrespondingPDFText:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="findSource:">
-							<string key="name">findSource:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="liveUpdate:">
 							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
@@ -5032,28 +5053,8 @@
 							<string key="name">openPDF:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
-							<string key="name">openWithSystemPDFViewer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
 							<string key="name">reloadCurrentFileFromDisk:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="reopenUsingEncoding:">
-							<string key="name">reopenUsingEncoding:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="saveDocument:">
-							<string key="name">saveDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
-							<string key="name">showIntegratedPDFViewer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="togglePanelFocus:">
-							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleStatusView:">
@@ -6013,6 +6014,92 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">TeXEditorViewController</string>
+					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="gotoSection:">id</string>
+						<string key="presentJumpBar:">id</string>
+						<string key="showErrorMenu:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="gotoSection:">
+							<string key="name">gotoSection:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="presentJumpBar:">
+							<string key="name">presentJumpBar:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showErrorMenu:">
+							<string key="name">showErrorMenu:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="commentMenu">NSMenuItem</string>
+						<string key="containerView">NSView</string>
+						<string key="errorPopup">NSButton</string>
+						<string key="insertMenu">NSMenuItem</string>
+						<string key="jumpBar">NSView</string>
+						<string key="latexEditMenu">NSMenuItem</string>
+						<string key="markerButton">NSButton</string>
+						<string key="scrollView">NSScrollView</string>
+						<string key="sectionListPopup">NSPopUpButton</string>
+						<string key="textView">TeXTextView</string>
+						<string key="unfoldButton">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="commentMenu">
+							<string key="name">commentMenu</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="containerView">
+							<string key="name">containerView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="errorPopup">
+							<string key="name">errorPopup</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="insertMenu">
+							<string key="name">insertMenu</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="jumpBar">
+							<string key="name">jumpBar</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="latexEditMenu">
+							<string key="name">latexEditMenu</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="markerButton">
+							<string key="name">markerButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">NSScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sectionListPopup">
+							<string key="name">sectionListPopup</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="textView">
+							<string key="name">textView</string>
+							<string key="candidateClassName">TeXTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="unfoldButton">
+							<string key="name">unfoldButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TeXEditorViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">TeXProjectDocument</string>
 					<string key="superclassName">NSPersistentDocument</string>
 					<dictionary class="NSMutableDictionary" key="actions">
@@ -6021,6 +6108,7 @@
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="cancelCompile:">id</string>
@@ -6034,7 +6122,9 @@
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -6048,15 +6138,18 @@
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -6068,6 +6161,7 @@
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -6088,6 +6182,10 @@
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -6142,8 +6240,16 @@
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -6198,6 +6304,10 @@
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -6208,6 +6318,10 @@
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -6232,6 +6346,10 @@
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -6276,6 +6394,10 @@
 						</object>
 						<object class="IBActionInfo" key="togglePanelFocus:">
 							<string key="name">togglePanelFocus:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

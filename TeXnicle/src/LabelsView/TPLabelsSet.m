@@ -31,31 +31,6 @@
 
 @implementation TPLabelsSet 
 
-- (void) dealloc
-{
-  self.file = nil;
-}
-
-
-- (id) initWithFile:(FileEntity*)aFile labels:(NSArray *)someLabels
-{
-  self = [super init];
-  if (self) {
-    self.file = aFile;
-    self.labels = someLabels;
-  }
-  return self;
-}
-
-
-- (NSString*) name
-{
-  if ([self.file isKindOfClass:[NSURL class]]) {
-    return [self.file lastPathComponent];
-  }
-  
-  return [self.file valueForKey:@"name"];
-}
 
 - (NSAttributedString*)selectedDisplayString
 {
@@ -65,33 +40,6 @@
 - (NSAttributedString*)displayString
 {
   return [self stringForDisplayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:200.0/255.0 blue:50.0/255.0 alpha:1.0] detailsColor:[NSColor lightGrayColor]];
-}
-
-- (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor
-{
-  NSString *text = nil;
-  if ([self.file isKindOfClass:[FileEntity class]]) {
-    text = [self.file valueForKey:@"name"];
-  } else {
-    text = [self.file lastPathComponent];
-  }
-  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text]; 
-  
-  NSString *labelCountString = nil; 
-  labelCountString = [NSString stringWithFormat:@" [%lu] ", [self.labels count]];
-
-  NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:labelCountString];
-  [str addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [str length])];  
-  [str addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]] range:NSMakeRange(0, [str length])];
-  [att appendAttributedString:str];
-  
-  // apply paragraph
-  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
-  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
-  [ps setLineBreakMode:NSLineBreakByTruncatingTail];  
-  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
-  
-  return att;
 }
 
 

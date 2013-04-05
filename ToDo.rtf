@@ -1,9 +1,13 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 Monaco;}
-{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red16\green73\blue188;\red39\green78\blue192;
-\red92\green38\blue153;}
-\paperw11900\paperh16840\vieww19560\viewh16520\viewkind0
+\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;\f5\fnil\fcharset0 Menlo-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
+\red39\green78\blue192;\red255\green39\blue18;\red34\green68\blue141;\red0\green141\blue36;\red56\green110\blue255;
+\red255\green18\blue0;\red92\green38\blue153;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
@@ -30,11 +34,8 @@ To Do\
 \pard\pardeftab720
 
 \f1 \cf0 + Add nomenclo engine\cf2 \
-\
-Another request: I notice when I select a paragraph (or put the cursor somewhere in a paragraph of plain text), TeXnicle tells me at the bottom which line it is and how many characters the paragraph contains. Nice! Could you expand this function to include number of words, split into per section, per chapter, per all documents excluding appendices etc, and per entire project.. only counting plain text words, not commands etc? Would be really helpful!\
-\cf0 \
-\pard\pardeftab720\sa280
-\cf0 One thing that I am missing in ever single TeX editor, that I really am looking for is line height setting for the editor text. I find it really hard to read when the text is way too tight. Would it be possible to add a line height setting for TeXnicle?\
+\pard\pardeftab720
+\cf3 \
 \pard\pardeftab720
 \cf0 + Applescript ability\
 	- tell project XX to select file\
@@ -47,7 +48,7 @@ Another request: I notice when I select a paragraph (or put the cursor somewhere
 \
 \pard\pardeftab720
 
-\fs24 \cf3 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
+\fs24 \cf4 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
 \pard\pardeftab720
 
 \fs28 \cf0 \
@@ -92,7 +93,7 @@ Version 2.1\
 + Add a Terminal button to launch a terminal in the project's directory\
 \
 + Better soft-wrap which respects indentation? layoutmanager 
-\f2\fs26 \cf4 \ul \ulc4 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
+\f2\fs26 \cf5 \ul \ulc5 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
 \f1\fs28 \cf0 \ulnone \
 \
 + Library category import/export\
@@ -108,7 +109,7 @@ Version 2.1\
 
 \f1 \cf0 \
 \pard\pardeftab720
-\cf3 I think you correctly understand my explanation. \'a0In the current implementation, every time I build a new project and typeset the main tex file, the resulting PDF Viewer takes up about 3/4 of the screen space and the editing window is a narrow window to the left of the viewer. \'a0I'd like to always have the editing window larger and the PDF Viewer much smaller, maybe even so they are more equal size, and have a way to save that as the default orientation for new files and/or projects. \'a0That's about the only feature I miss from TeXShop. \'a0\
+\cf4 I think you correctly understand my explanation. \'a0In the current implementation, every time I build a new project and typeset the main tex file, the resulting PDF Viewer takes up about 3/4 of the screen space and the editing window is a narrow window to the left of the viewer. \'a0I'd like to always have the editing window larger and the PDF Viewer much smaller, maybe even so they are more equal size, and have a way to save that as the default orientation for new files and/or projects. \'a0That's about the only feature I miss from TeXShop. \'a0\
 \pard\pardeftab720
 \cf0 \
 + Rename a .tex file:\
@@ -120,14 +121,10 @@ Version 2.1\
 				- cancel\
 	- this then adds .tex to the displayed name\
 		- this shouldn't happen\
-\
-\
-\
 \pard\pardeftab720\sa280
-\cf3 Could it be possible to add a autotrash option in preferences. I know it can be done manually, but I type many small documents and sometimes my folder are a complete mesh\cf0 \
-\pard\pardeftab720
 \cf0 \
-+ Project builder: main file should get the project name, rather than the name used to create the template. Better: when creating the template, rename the main file to match the template name.\
+\pard\pardeftab720
+\cf0 + Project builder: main file should get the project name, rather than the name used to create the template. Better: when creating the template, rename the main file to match the template name.\
 \
 + Add existing files doesn't work for images?\
 \
@@ -148,7 +145,6 @@ Version 2.1\
 1. Soft-wrap to a window size?\
 2. Soft-wrapped line indentation to the first line (like TextWrangler)?\
 \
-+ Add nice icons on document outline view\
 \
 ----------------------\
 \
@@ -166,8 +162,76 @@ User Manual\
 \
 TO DO\
 \
-- When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
+----\
 \
+\pard\pardeftab720\sa280
+
+\f1 \cf6 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
+----\
+\
+BOOKMARKS should be text attachments (save character index in doc)\
+Ruler class should ask for bookmark lines from delegate\
+\
+----\
+\
+---------------------------------------------------\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \ul Improve outline view\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \ulnone \
+*** we have a bug which causes occasional crashes in the outline view. \
+Sometimes TPSection objects disappear. Probably the new scheme below will fix this.\
+\
+- for outline view, better way to do sections\
+	- for each file, parse in order and store either a section, or a file object id\
+		- do this update with other metadata\
+		- store these in TPFileMetadata\
+	- in outline builder, start from the main file, and go through in order.\
+		- when an object id is reached, insert the sections from that file, do that recursively\
+			- ask delegate for sections for objectId, then process them checking for object ids\
+		- keep doing this until no more object ids are in the list\
+\
+\
+---------------------------------------------------\
+\
+- Persist info tab index \
+	- needs new model version\
+\pard\pardeftab720
+\cf0 	- new entries in xattr for standalone docs\
+\pard\pardeftab720
+
+\f4 \cf0 \
+\cf7 The page column is hidden by default, I would like to see it remember the state (or at least some static toggle in settings?) I want to use it 24/7, so the need to enable it every time I launch Texnicle isn't optimal.\
+\
+What comes to Live Update feature, it is also disabled by default. Maybe it should remember the state also?\
+\cf0 \
+\
+\pard\pardeftab720
+
+\f1 \cf8 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf8 {\listtext	\'95	}The first is keyboard shortcuts for the code library. \'a0The #-expansion is useful if you are planning some complex code and know you want to include it as you write, but often I write something and then I want to select it and transform it (most commonly for italics and bolding). \'a0In other editors I use, you can select text and then hit a user-defined keyboard shortcut to manipulate that text. \'a0The keyboard shortcuts are not as powerful (they don't allow for multiple fields) as the #-expansion, but I use them more often than I use the #-expansion, generally, and I feel slowed down when I use TeXnicle and they don't exist.\
+{\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc9 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
+\pard\pardeftab720
+
+\f4 \cf8 \
+\pard\pardeftab720
+\cf0 \
+\pard\pardeftab720
+
+\f5\b \cf10 **** Further checks on standalone doc
+\f0\b0 \cf0 \
+\pard\pardeftab720
+\cf0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 - When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
+\
++ Make metadata views for figures, tables\
 \
 Unit tests for core data model entities\
 \
@@ -176,7 +240,7 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf5 NSRange\cf0 )indentRangeForLineAtIndex:(\cf5 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf11 NSRange\cf0 )indentRangeForLineAtIndex:(\cf11 NSInteger\cf0 )loc\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 Version 2.0.6\
@@ -185,8 +249,19 @@ Version 2.0.6\
 + Bug fix in handling of some placeholders.\
 + Better implementation of copy/cut/paste on editor to handle placeholders.\
 + Further improvements to typesetting error handling. \
-+ New icons on document outline view.\
 + Some bug fixes associated with file encodings.\
++ Added a preference to set the editor margins background color.\
++ Added a preference for setting the line spacing in the editor.\
++ Many enhancements to editor jump bar including:\
+	- Fixed a bug which stopped %%MARK (etc) items appearing in the jump bar.\
+	- Added preferences to select jump bar content.\
+	- Added menu command to present jump bar (alt-cmd-s)\
++ User-defined commands now support placeholders.\
++ Restructuring of metadata handling to improve performance and scaleability\
++ Metadata views (labels, citations, etc) now include search facility.\
++ Fixed a bug for Mountain Lion users which could result in wrongly sized standalone editor windows on app launch.\
++ Various bug fixes and improvements.\
+\
 \
 Version 2.0.5\
 -------------\

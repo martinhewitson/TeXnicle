@@ -12,6 +12,7 @@
 @protocol TPProjectOutlineDelegate <NSObject>
 
 - (id) mainFile;
+- (NSArray*) allMetadataFiles;
 - (NSString*) textForFile:(id)aFile;
 - (NSNumber*) maxOutlineDepth;
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth;

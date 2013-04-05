@@ -36,7 +36,11 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
   NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
-  return @{NSFontAttributeName: font, NSForegroundColorAttributeName: color};
+  NSMutableParagraphStyle *ps = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+  CGFloat lineHeightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
+  //NSLog(@"Setting line height multiple %f", lineHeightMultiple);
+  [ps setLineHeightMultiple:lineHeightMultiple];
+  return @{NSFontAttributeName: font, NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName : [ps copy]};
 }
 
 @end

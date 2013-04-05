@@ -51,6 +51,7 @@
 
 + (NSArray*) defaultSyntaxErrors;
 
+- (void) tearDown;
 - (id) initWithDelegate:(id<SyntaxCheckerDelegate>)aDelegate;
 - (void) setupObservers;
 - (void) checkSyntaxOfFileAtPath:(NSString*)aPath;

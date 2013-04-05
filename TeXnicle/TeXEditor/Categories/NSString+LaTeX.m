@@ -368,6 +368,9 @@ static NSCharacterSet *controlFilterChars = nil;
   
   NSRange lineRange = [self lineRangeForRange:NSMakeRange(anIndex, 0)];
 //  NSLog(@"Got line range %@", NSStringFromRange(lineRange));
+  if (NSMaxRange(lineRange) >= [self length]) {
+    return NO;
+  }
   
   NSString *line = [self substringWithRange:lineRange];
   

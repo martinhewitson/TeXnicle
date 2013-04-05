@@ -87,6 +87,16 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   
   self.delegate = nil;
   
+  for (DocWindowController *doc in self.standaloneWindows) {
+    [doc tearDown];
+  }
+  
+  [self.standaloneWindows removeAllObjects];
+  self.standaloneWindows = nil;
+  
+  [self.openDocuments removeAllObjects];
+  self.openDocuments = nil;
+  
   self.tabView.delegate = nil;
   self.tabView = nil;
 

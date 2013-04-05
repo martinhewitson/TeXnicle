@@ -1,8 +1,8 @@
 //
-//  NSString+SectionsOutline.h
+//  TPMetadataSet.h
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 12/7/12.
+//  Created by Martin Hewitson on 17/7/12.
 //  Copyright (c) 2012 bobsoft. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -12,7 +12,7 @@
 //      * Redistributions in binary form must reproduce the above copyright
 //        notice, this list of conditions and the following disclaimer in the
 //        documentation and/or other materials provided with the distribution.
-//  
+//
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -27,10 +27,23 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (SectionsOutline)
+@class TPFileMetadata;
 
-- (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file;
 
-- (NSArray*)sectionsInStringForTypes:(NSArray*)templates existingSections:(NSArray*)sections inFile:(id)file knownFiles:(NSArray*)otherFiles;
+@interface TPMetadataSet : NSObject
+
+@property (strong) NSArray *items;
+@property (strong) id file;
+@property (unsafe_unretained, readonly) NSString *name;
+
+@property (strong) NSPredicate *predicate;
+@property (readonly) NSArray *displayItems;
+
+- (id) initWithFile:(id)aFile items:(NSArray *)aList;
+
+- (NSAttributedString*)selectedDisplayString;
+- (NSAttributedString*)displayString;
+- (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color detailsColor:(NSColor*)detailsColor;
+
 
 @end
