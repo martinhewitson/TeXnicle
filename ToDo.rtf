@@ -1,10 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf370
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;\f5\fnil\fcharset0 Menlo-Bold;
-}
+\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
-\red39\green78\blue192;\red255\green39\blue18;\red34\green68\blue141;\red0\green141\blue36;\red56\green110\blue255;
-\red255\green18\blue0;\red92\green38\blue153;}
+\red39\green78\blue192;\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red34\green68\blue141;
+\red92\green38\blue153;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
@@ -198,39 +197,36 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 \
 ---------------------------------------------------\
 \
-- Persist info tab index \
+\pard\pardeftab720
+
+\f4 \cf0 \
+\
+\pard\pardeftab720
+
+\f1 \cf7 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720
+\ls1\ilvl0\cf7 {\listtext	\'95	}The first is keyboard shortcuts for the code library. \'a0The #-expansion is useful if you are planning some complex code and know you want to include it as you write, but often I write something and then I want to select it and transform it (most commonly for italics and bolding). \'a0In other editors I use, you can select text and then hit a user-defined keyboard shortcut to manipulate that text. \'a0The keyboard shortcuts are not as powerful (they don't allow for multiple fields) as the #-expansion, but I use them more often than I use the #-expansion, generally, and I feel slowed down when I use TeXnicle and they don't exist.\
+{\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc8 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
+\pard\pardeftab720
+
+\f4 \cf7 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 - Persist info tab index \
 	- needs new model version\
 \pard\pardeftab720
 \cf0 	- new entries in xattr for standalone docs\
 \pard\pardeftab720
 
 \f4 \cf0 \
-\cf7 The page column is hidden by default, I would like to see it remember the state (or at least some static toggle in settings?) I want to use it 24/7, so the need to enable it every time I launch Texnicle isn't optimal.\
+\cf9 The page column is hidden by default, I would like to see it remember the state (or at least some static toggle in settings?) I want to use it 24/7, so the need to enable it every time I launch Texnicle isn't optimal.\
 \
 What comes to Live Update feature, it is also disabled by default. Maybe it should remember the state also?\
-\cf0 \
-\
-\pard\pardeftab720
-
-\f1 \cf8 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
-\pard\tx220\tx720\pardeftab720\li720\fi-720
-\ls1\ilvl0\cf8 {\listtext	\'95	}The first is keyboard shortcuts for the code library. \'a0The #-expansion is useful if you are planning some complex code and know you want to include it as you write, but often I write something and then I want to select it and transform it (most commonly for italics and bolding). \'a0In other editors I use, you can select text and then hit a user-defined keyboard shortcut to manipulate that text. \'a0The keyboard shortcuts are not as powerful (they don't allow for multiple fields) as the #-expansion, but I use them more often than I use the #-expansion, generally, and I feel slowed down when I use TeXnicle and they don't exist.\
-{\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc9 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
-\pard\pardeftab720
-
-\f4 \cf8 \
-\pard\pardeftab720
-\cf0 \
-\pard\pardeftab720
-
-\f5\b \cf10 **** Further checks on standalone doc
-\f0\b0 \cf0 \
-\pard\pardeftab720
-\cf0 \
-\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 - When restoring window sizes, check screen size and use that as max. Even make splitviews the right proportions.\
-\
+
+\f0 \cf0 \
 + Make metadata views for figures, tables\
 \
 Unit tests for core data model entities\
@@ -240,7 +236,7 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf11 NSRange\cf0 )indentRangeForLineAtIndex:(\cf11 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf10 NSRange\cf0 )indentRangeForLineAtIndex:(\cf10 NSInteger\cf0 )loc\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 Version 2.0.6\

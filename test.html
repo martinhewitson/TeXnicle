@@ -1,17 +1,22 @@
-<h2>TeXnicle 2.0.3</h2>
+<h2>TeXnicle 2.0.6</h2>
 <p>
 <ul>
-  <li>Added a preference to automatically insert closing $.</li>
-  <li>Added a new format menu command to escape underscores.</li>
-  <li>Added a preference to disable showing the welcome screen when the last open document closes.</li>
-  <li>Typing $, (, {, or [ when some text is selected will enclose the selected text in the correct pair of characters.</li>
-  <li>When typing \left{, \left( etc, TeXnicle will automatically insert the corresponding \right (if the preference 'Automatically insert closing brace' is on).</li>
-  <li>Added some formatting menu items to the editor's context menu.</li>
-  <li>Restored correct operation of the jump bar.</li>
-  <li>Better handling of placeholders. They are now saved out when saving and restored when loading tex files.</li>
-  <li>Bug fix: sometimes TeXnicle would crash if a typesetting was started too close to the previous one.</li>
-  <li>Bug fix: sometimes the print button below the pdf viewer was not working because the page label was overlapping.</li>
-  <li>Performance improvements.</li>
-  <li>Other minor bug fixes.</li>
+  <li>Bug fix in handling of some placeholders.</li>
+  <li>Better implementation of copy/cut/paste on editor to handle placeholders.</li>
+  <li>Further improvements to typesetting error handling.</li>
+  <li>Some bug fixes associated with file encodings.</li>
+  <li>Added a preference to set the editor margins background color.</li>
+  <li>Added a preference for setting the line spacing in the editor.</li>
+  <li>Many enhancements to editor jump bar including:</li>
+  <ul>
+    <li>Fixed a bug which stopped %%MARK (etc) items appearing in the jump bar.</li>
+    <li>Added preferences to select jump bar content.</li>
+    <li>Added menu command to present jump bar (alt-cmd-s)</li>
+  </ul>
+  <li>User-defined commands now support placeholders.</li>
+  <li>Restructuring of metadata handling to improve performance and scaleability</li>
+  <li>Metadata views (labels, citations, etc) now include search facility.</li>
+  <li>Fixed a bug for Mountain Lion users which could result in wrongly sized standalone editor windows on app launch.</li>
+  <li>Various bug fixes and improvements.</li>
 </ul>
 </p>

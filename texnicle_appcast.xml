@@ -5,6 +5,43 @@
 		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
+    
+    <!-- Version 2.0.6 -->
+		<item>
+      <title>Version 2.0.6 (build 61)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.6</h2>
+        <p>
+        <ul>
+        <li>Bug fix in handling of some placeholders.</li>
+        <li>Better implementation of copy/cut/paste on editor to handle placeholders.</li>
+        <li>Further improvements to typesetting error handling.</li>
+        <li>Some bug fixes associated with file encodings.</li>
+        <li>Added a preference to set the editor margins background color.</li>
+        <li>Added a preference for setting the line spacing in the editor.</li>
+        <li>Many enhancements to editor jump bar including:</li>
+          <ul>
+            <li>Fixed a bug which stopped %%MARK (etc) items appearing in the jump bar.</li>
+            <li>Added preferences to select jump bar content.</li>
+            <li>Added menu command to present jump bar (alt-cmd-s)</li>
+          </ul>
+        <li>User-defined commands now support placeholders.</li>
+        <li>Restructuring of metadata handling to improve performance and scaleability</li>
+        <li>Metadata views (labels, citations, etc) now include search facility.</li>
+        <li>Fixed a bug for Mountain Lion users which could result in wrongly sized standalone editor windows on app launch.</li>
+        <li>Various bug fixes and improvements.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>5th April 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.6.zip"
+      sparkle:shortVersionString="2.0.6"
+      sparkle:version="61"
+      length="18078668"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFD/QJR4/vRIu2pA1NcA1S0Jn8f6rAhQLZfFnQWdBwxVCD5Ttz0mqhOIX4Q=="
+      />
+    </item>
 
     <!-- Version 2.0.5 -->
 		<item>
