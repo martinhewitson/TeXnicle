@@ -3436,6 +3436,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (NSInteger)columnForRange:(NSRange)aRange
 {
   NSString *str = [self string];
+  if (NSMaxRange(aRange) >= [str length]) {
+    return -1;
+  }
   NSRange lineRange = [str lineRangeForRange:aRange];
   return aRange.location-lineRange.location;
 }
