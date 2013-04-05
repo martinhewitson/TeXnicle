@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSArrayController</string>
@@ -193,20 +193,17 @@
 							<string key="NSToolbarItemPaletteLabel"/>
 							<nil key="NSToolbarItemToolTip"/>
 							<object class="NSBox" key="NSToolbarItemView" id="699098339">
-								<reference key="NSNextResponder"/>
+								<nil key="NSNextResponder"/>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="NSView" id="346379004">
 										<reference key="NSNextResponder" ref="699098339"/>
 										<int key="NSvFlags">274</int>
 										<string key="NSFrame">{{1, 1}, {404, 37}}</string>
 										<reference key="NSSuperview" ref="699098339"/>
-										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:21</string>
 									</object>
 								</array>
 								<string key="NSFrame">{{0, 14}, {406, 39}}</string>
-								<reference key="NSSuperview"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="346379004"/>
 								<string key="NSReuseIdentifierKey">_NS:18</string>
 								<string key="NSOffsets">{0, 0}</string>
@@ -353,7 +350,7 @@
 							</object>
 						</object>
 					</dictionary>
-					<array class="NSMutableArray" key="NSToolbarIBAllowedItems">
+					<array key="NSToolbarIBAllowedItems">
 						<reference ref="532706813"/>
 						<reference ref="308691326"/>
 						<reference ref="352102820"/>
@@ -625,7 +622,6 @@
 																		<int key="NSvFlags">289</int>
 																		<string key="NSFrame">{{184, 7}, {24, 24}}</string>
 																		<reference key="NSSuperview" ref="892794344"/>
-																		<reference key="NSNextKeyView" ref="1001950842"/>
 																		<bool key="NSEnabled">YES</bool>
 																		<object class="NSButtonCell" key="NSCell" id="68128466">
 																			<int key="NSCellFlags">-2080374784</int>
@@ -3034,12 +3030,24 @@
 						<string key="addToProject:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
+						<string key="cancelCompile:">id</string>
 						<string key="clean:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="endAddToNewProjectSheet:">id</string>
 						<string key="endAddToProjectSheet:">id</string>
+						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findSource:">id</string>
 						<string key="liveUpdate:">id</string>
 						<string key="openPDF:">id</string>
+						<string key="openWithSystemPDFViewer:">id</string>
+						<string key="pasteAsImage:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
+						<string key="reopenUsingEncoding:">id</string>
+						<string key="saveDocument:">id</string>
+						<string key="showIntegratedConsole:">id</string>
+						<string key="showIntegratedPDFViewer:">id</string>
+						<string key="togglePanelFocus:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -3055,8 +3063,16 @@
 							<string key="name">buildProject:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="cancelCompile:">
+							<string key="name">cancelCompile:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="clean:">
 							<string key="name">clean:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="endAddToNewProjectSheet:">
@@ -3067,6 +3083,14 @@
 							<string key="name">endAddToProjectSheet:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findCorrespondingPDFText:">
+							<string key="name">findCorrespondingPDFText:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="findSource:">
+							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="liveUpdate:">
 							<string key="name">liveUpdate:</string>
 							<string key="candidateClassName">id</string>
@@ -3075,8 +3099,40 @@
 							<string key="name">openPDF:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
+							<string key="name">openWithSystemPDFViewer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="pasteAsImage:">
+							<string key="name">pasteAsImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
 							<string key="name">reloadCurrentFileFromDisk:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="reopenUsingEncoding:">
+							<string key="name">reopenUsingEncoding:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedConsole:">
+							<string key="name">showIntegratedConsole:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
+							<string key="name">showIntegratedPDFViewer:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="togglePanelFocus:">
+							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleStatusView:">
@@ -3514,6 +3570,7 @@
 						<string key="clean:">id</string>
 						<string key="closeAllTabs:">id</string>
 						<string key="closeCurrentTab:">id</string>
+						<string key="createDocumentReport:">id</string>
 						<string key="createProjectTemplate:">id</string>
 						<string key="delete:">id</string>
 						<string key="deleteSelectedBookmark:">id</string>
@@ -3598,6 +3655,10 @@
 						</object>
 						<object class="IBActionInfo" key="closeCurrentTab:">
 							<string key="name">closeCurrentTab:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createDocumentReport:">
+							<string key="name">createDocumentReport:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="createProjectTemplate:">
