@@ -136,6 +136,8 @@
           arg = [arg stringByAppendingPathExtension:@"tex"];
         }
         
+        arg = [arg stringByStandardizingPath];
+        
         __block NSString *subtext = nil;
         __block id subfile = nil;
 #if TP_SECTION_DEBUG
