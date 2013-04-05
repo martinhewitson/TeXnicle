@@ -31,6 +31,7 @@
 
 @property (unsafe_unretained) id file;
 @property (readonly) id value;
+@property (readonly) id string;
 @property (readonly) NSString *sortKey;
 
 

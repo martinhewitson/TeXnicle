@@ -155,7 +155,7 @@
   NSPredicate *predicate = nil;
   NSString *searchString = [self.searchField stringValue];
   if ([searchString length] > 0) {
-    predicate = [NSPredicate predicateWithFormat:@"self.value contains[cd] %@", searchString];
+    predicate = [NSPredicate predicateWithFormat:@"self.string contains[cd] %@", searchString];
   }
   
   for (TPMetadataSet *set in self.sets) {
