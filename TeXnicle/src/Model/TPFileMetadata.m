@@ -18,7 +18,6 @@
 @property (strong) TPSyntaxChecker *checker;
 @property (copy) NSString *temporaryFileForSyntaxCheck;
 
-@property (assign) BOOL needsSyntaxCheck;
 
 @property (strong) NSOperationQueue* aQueue;
 @property (strong) TPMetadataOperation *currentOperation;
@@ -69,11 +68,22 @@
                        context:(void *)context
 {
 	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]]) {
-    self.needsSyntaxCheck = YES;
+    [self triggerSyntaxCheck];
   } else if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]]) {
+    [self triggerSyntaxCheck];
+  }
+}
+
+- (void) triggerSyntaxCheck
+{
+  if (self.needsSyntaxCheck == YES) {
+    // delay until we syntax checking is finished
+    [self performSelector:@selector(triggerSyntaxCheck) withObject:nil afterDelay:1];
+  } else {
     self.needsSyntaxCheck = YES;
   }
 }
+
 
 - (NSString*) description
 {
@@ -101,13 +111,14 @@
     self.citations = self.currentOperation.citations;
     self.labels = self.currentOperation.labels;
     
-    [self fileMetadataDidUpdate:self];    
     [self postUpdateNotification];
   }
 }
 
 - (void) postUpdateNotification
 {
+  [self fileMetadataDidUpdate:self];
+  
   // send notification of update
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc postNotificationName:TPFileMetadataUpdatedNotification object:self];
@@ -115,9 +126,7 @@
 
 - (void) updateMetadata
 {
-  __block TPFileMetadata *blockSelf = self;
-  BOOL doSyntaxCheck = self.needsUpdate | self.needsSyntaxCheck;
-  
+  __block TPFileMetadata *blockSelf = self;  
   if (self.needsUpdate) {
     if ([self.aQueue operationCount] == 0) {
       self.currentOperation = [[TPMetadataOperation alloc] initWithFile:self];
@@ -128,11 +137,16 @@
         });
       }];
       
+      self.needsUpdate = NO;
       [self.aQueue addOperation:self.currentOperation];
+    } else {
+      self.needsUpdate = NO;
+      [self notifyOfUpdate];
     }
   }
   
-  if (doSyntaxCheck) {
+  if (self.needsSyntaxCheck) {
+    
     //-------------- syntax errors
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([[defaults valueForKey:TPCheckSyntax] boolValue] == YES) {
@@ -140,16 +154,21 @@
         NSString *path = [NSString pathForTemporaryFileWithPrefix:@"chktek"];
         if ([self.text writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL]) {
           self.temporaryFileForSyntaxCheck = path;
+          self.needsSyntaxCheck = NO;
           [self.checker checkSyntaxOfFileAtPath:self.temporaryFileForSyntaxCheck];
-        }
+        } 
+      } else {
+        // clear errors
+        self.syntaxErrors = @[];
+        self.needsSyntaxCheck = NO;
+        [self postUpdateNotification];
       }
     } else {
       // clear errors
       self.syntaxErrors = @[];
+      self.needsSyntaxCheck = NO;
       [self postUpdateNotification];
-    }
-    
-    self.needsSyntaxCheck = NO;
+    }    
   }
   
 }
@@ -196,6 +215,7 @@
 - (void)syntaxCheckerCheckFailed:(TPSyntaxChecker*)checker
 {
   [self cleanup];
+  [self postUpdateNotification];
 }
 
 - (void)syntaxCheckerCheckDidFinish:(TPSyntaxChecker*)aChecker

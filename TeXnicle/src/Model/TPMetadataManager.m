@@ -47,7 +47,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) setupTimer
 {
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                 target:self
                                               selector:@selector(update)
                                               userInfo:nil
@@ -68,25 +68,29 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) update
 {
-  if (self.updatingCount > 0) {
+  if (_updatingCount > 0) {
+    //NSLog(@"Already updating...[%ld]", _updatingCount);
     return;
   }
   
   //NSLog(@"Metadata Manager update triggered on thread %@", [NSThread currentThread]);
   
-  
   // get list of files from delegate
   NSArray *filesToUpdate = [self metadataManagerFilesToScan:self];
-  self.updatingCount = 0;
+  _updatingCount = 0;
   for (TPFileMetadata *f in filesToUpdate) {
-    if (f.needsUpdate) {
+    if (f.needsUpdate || f.needsSyntaxCheck) {
       f.delegate = self;
+      if (f.needsSyntaxCheck)
+        _updatingCount++;
+      if (f.needsUpdate)
+        _updatingCount++;
+      //NSLog(@" +++ count [%ld] (%@)", _updatingCount, f.name);
       [f updateMetadata];
-      self.updatingCount++;
     }
   }
   
-  if (self.updatingCount > 0) {
+  if (_updatingCount > 0) {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:TPMetadataManagerDidBeginUpdateNotification object:self];
   }
@@ -98,9 +102,10 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) fileMetadataDidUpdate:(TPFileMetadata *)file
 {
-  self.updatingCount--;
+  _updatingCount--;
+//NSLog(@" --- count [%ld] (%@)", _updatingCount, file.name);
 
-  if (self.updatingCount == 0) {
+  if (_updatingCount == 0) {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:TPMetadataManagerDidEndUpdateNotification object:self];
   }
