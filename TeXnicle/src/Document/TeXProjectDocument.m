@@ -4192,7 +4192,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   // loop over our meta files and decide if they need scanned
   for (TPFileMetadata *f in self.fileMetadata) {
-    if (f.needsUpdate) {
+    if (f.needsUpdate || f.needsSyntaxCheck) {
       [filesToScan addObject:f];
     }
   }
@@ -4222,7 +4222,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
         // NSLog(@"Cached file %p:%@ [%@]", file, file.name, file.objectID);
       }
       
-      if ([file isText]) {
+      if ([file isText] && [file isImage] == NO) {
         TPFileMetadata *fm = [self metaFileForFile:file];
         
         // if we don't have the file, add it, otherwise update it
@@ -4234,8 +4234,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
                                                                  projectPath:[file.filepath stringByStandardizingPath]
                                                                         name:file.name];
           newFile.needsUpdate = YES;
+          newFile.needsSyntaxCheck = YES;
           [self.fileMetadata addObject:newFile];
-          // NSLog(@"Added metafile %@ <--> %@", newFile, newFile.objId);
+          //NSLog(@"Added metafile %@ <--> %@", newFile, newFile.objId);
         } else {
           
           // check last edit date
@@ -4246,6 +4247,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
             // update path here because it's relatively expensive, and it shouldn't change often.
             fm.pathOnDisk = file.pathOnDisk;
             fm.needsUpdate = YES;
+            fm.needsSyntaxCheck = YES;
           }
           // ensure other info is up to date
           fm.projectPath = [file.filepath stringByStandardizingPath];
@@ -4258,6 +4260,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     } // end if is file entity
   } // end loop over project items
   
+  //NSLog(@"*** Have %ld metafiles", [self.fileMetadata count]);
 }
 
 
