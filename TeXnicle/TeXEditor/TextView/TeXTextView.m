@@ -122,6 +122,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];
   
   if (didSetup == NO) {
+    self.averageCharacterWidth = [NSString averageCharacterWidthForFont:[self font]];
     [self defaultSetup];
     [self setUpRuler];
     [self setupLists];
