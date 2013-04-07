@@ -1304,8 +1304,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     [self.texEditorViewController.textView applyFontAndColor:YES];
     [self.texEditorViewController.textView colorWholeDocument];
     
-    // free attributed string
-    
     // read settings
     NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleSettings" atPath:[absoluteURL path] traverseLink:NO];
     if (data) {
