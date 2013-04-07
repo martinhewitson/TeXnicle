@@ -295,7 +295,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   defaultValues[TEDocumentLineHeightMultiple] = @1.0;
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
-  [defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.1 alpha:1.0]] forKey:TEDocumentBackgroundMarginColor];
+  [defaultValues setValue:[NSArray arrayWithColor:[NSColor lightGrayColor]] forKey:TEDocumentBackgroundMarginColor];
   
   
   // comments
