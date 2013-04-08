@@ -6,6 +6,25 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.0.7 -->
+		<item>
+      <title>Version 2.0.7 (build 62)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.7</h2>
+        <p>
+        Fixed a stupid bug that got left in 2.0.6 and stopped the editor displaying any text for standalone documents. Sorry.
+        </p>
+      ]]></description>
+      <pubDate>7th April 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.7.zip"
+      sparkle:shortVersionString="2.0.7"
+      sparkle:version="62"
+      length="19076852"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFHnZzHeqLzc7IPGo7dOZyDH6mhlgAhRtwdBM4o9VdLSFiwF2EOUXy0Nclg=="
+      />
+    </item>
+    
     <!-- Version 2.0.6 -->
 		<item>
       <title>Version 2.0.6 (build 61)</title>
