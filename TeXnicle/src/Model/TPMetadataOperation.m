@@ -98,14 +98,20 @@
         // only add these if we don't already have entries for these
         for (BibliographyEntry *entry in entries) {
           // check against existing
+          BOOL foundIt = NO;
           for (BibliographyEntry *e in newCitations) {
-            if (![[e string] isEqualToString:[entry string]]) {
-              [newCitations addObject:entry];
+            if ([[e string] isEqualToString:[entry string]]) {
+              foundIt = YES;
+              break;
             }
             if ([self isCancelled]) return;
           }
+          
+          // if we didn't find it, add it
+          if (foundIt == NO) {
+            [newCitations addObject:entry];
+          }          
         }
-//        [newCitations addObjectsFromArray:entries];
       }
       
       //--------------- Labels    
