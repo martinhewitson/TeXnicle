@@ -750,6 +750,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]];
+  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
@@ -786,6 +787,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]
+                options:NSKeyValueObservingOptionNew
+                context:NULL];
+  
+  [defaults addObserver:self
+             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
   
@@ -869,7 +875,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]]) {
     [self setNeedsDisplay:YES];
-	}  
+	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]]) {
+    [self applyFontAndColor:YES];
+	}
+  
 
 }
 
@@ -919,6 +928,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
   // for some reason we need to do this otherwise the scrolling jumps around in the textview.
   [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
+  
+  // background color
+  NSColor *cc = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorColor] colorValue];
+  [self setInsertionPointColor:cc];
   
   // selection color
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -3028,6 +3041,42 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   return nil;
+}
+
+- (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
+{
+  BOOL block = NO;
+  
+  NSPoint aPoint = NSMakePoint( rect.origin.x,
+                               rect.origin.y+rect.size.height/2);
+  NSUInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:aPoint
+                                                   inTextContainer:[self textContainer]];
+  NSRect glyphRect = [[self layoutManager]
+                      boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1)  inTextContainer:[self textContainer]];
+  
+  [color set ];
+  
+  rect.size.width = rect.size.height/2;
+  if(glyphRect.size.width > 0 && glyphRect.size.width < rect.size.height) {
+    rect.origin.x -= 1.0;
+    rect.size.width = glyphRect.size.width+2.0;
+  }
+  
+  //Block Cursor
+  if( block ) {
+    
+    NSBezierPath *path = [NSBezierPath bezierPathWithRect:rect];
+    [path setLineWidth:1.0];
+    [path stroke];
+    
+  } else {
+    NSBezierPath *path = [NSBezierPath bezierPath];
+    [path moveToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y)];
+    [path lineToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y + rect.size.height)];
+    [path setLineWidth:1.5];
+    [path stroke];
+    
+  }
 }
 
 #pragma mark -

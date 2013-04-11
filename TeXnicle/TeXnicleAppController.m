@@ -111,11 +111,8 @@ NSString * const TEShowLineNumbers = @"TEShowLineNumbers";
 NSString * const TEShowCodeFolders = @"TEShowCodeFolders";
 NSString * const TEHighlightCurrentLine = @"TEHighlightCurrentLine";
 NSString * const TEHighlightCurrentLineColor = @"TEHighlightCurrentLineColor";
-NSString * const TEDocumentBackgroundMarginColor = @"TEDocumentBackgroundMarginColor";
 NSString * const TEHighlightMatchingWords = @"TEHighlightMatchingWords";
 NSString * const TEHighlightMatchingWordsColor = @"TEHighlightMatchingWordsColor";
-NSString * const TESelectedTextColor = @"TESelectedTextColor";
-NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor";
 
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 NSString * const TPClearConsoleOnCompile = @"TPClearConsoleOnCompile";
@@ -123,9 +120,13 @@ NSString * const TPSyncPDFAfterCompile = @"TPSyncPDFAfterCompile";
 NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
+NSString * const TEDocumentBackgroundMarginColor = @"TEDocumentBackgroundMarginColor";
+NSString * const TEDocumentCursorColor = @"TEDocumentCursorColor";
 NSString * const TEDocumentFont = @"TEDocumentFont";
 NSString * const TEDocumentLineHeightMultiple = @"TEDocumentLineHeightMultiple";
 NSString * const TESyntaxTextColor = @"TESyntaxTextColor";
+NSString * const TESelectedTextColor = @"TESelectedTextColor";
+NSString * const TESelectedTextBackgroundColor = @"TESelectedTextBackgroundColor";
 
 NSString * const TEConsoleFont = @"TEConsoleFont";
 
@@ -296,6 +297,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TESyntaxTextColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor lightGrayColor]] forKey:TEDocumentBackgroundMarginColor];
+  [defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TEDocumentCursorColor];
   
   
   // comments
