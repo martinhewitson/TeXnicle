@@ -134,6 +134,8 @@
       [blockSelf searchForStringInPDF:searchText];
     });
   }
+  
+  [self updatePageCountDisplay];
 }
 
 
@@ -278,6 +280,7 @@
   
   // else we hide the pdf view
   [self.pdfview setDocument:nil];
+  [self updatePageCountDisplay];
   [self hideViewer];  
 }
 
