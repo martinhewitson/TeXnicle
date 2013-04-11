@@ -122,6 +122,7 @@ NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentBackgroundMarginColor = @"TEDocumentBackgroundMarginColor";
 NSString * const TEDocumentCursorColor = @"TEDocumentCursorColor";
+NSString * const TEDocumentCursorType = @"TEDocumentCursorType";
 NSString * const TEDocumentFont = @"TEDocumentFont";
 NSString * const TEDocumentLineHeightMultiple = @"TEDocumentLineHeightMultiple";
 NSString * const TESyntaxTextColor = @"TESyntaxTextColor";
@@ -298,7 +299,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor whiteColor]] forKey:TEDocumentBackgroundColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor lightGrayColor]] forKey:TEDocumentBackgroundMarginColor];
   [defaultValues setValue:[NSArray arrayWithColor:[NSColor blackColor]] forKey:TEDocumentCursorColor];
-  
+  [defaultValues setValue:@"Line" forKey:TEDocumentCursorType];  
   
   // comments
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.4 alpha:1.0]] forKey:TESyntaxCommentsColor];

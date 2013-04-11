@@ -91,6 +91,7 @@ extern NSString * const TPAutoTrashAfterCompile;
 extern NSString * const TEDocumentBackgroundMarginColor;
 extern NSString * const TEDocumentBackgroundColor;
 extern NSString * const TEDocumentCursorColor;
+extern NSString * const TEDocumentCursorType;
 extern NSString * const TESyntaxTextColor;
 extern NSString * const TEDocumentFont;
 extern NSString * const TEDocumentLineHeightMultiple;

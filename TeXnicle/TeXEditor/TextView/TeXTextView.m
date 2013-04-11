@@ -3046,6 +3046,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
 {
   BOOL block = NO;
+  NSString *cursorType = [[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorType];
+  if ([cursorType isEqualToString:@"Block"]) {
+    block = YES;
+  }
   
   NSPoint aPoint = NSMakePoint( rect.origin.x,
                                rect.origin.y+rect.size.height/2);
