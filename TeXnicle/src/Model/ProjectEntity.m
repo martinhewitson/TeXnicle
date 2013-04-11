@@ -53,7 +53,7 @@
 
 - (void) createSettings
 {
-  if (self.settings == nil) {
+  if (self.settings == nil && self.managedObjectContext != nil) {
     // make new settings
     NSEntityDescription *settingsDescription = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:self.managedObjectContext];
     Settings *newSettings = [[Settings alloc] initWithEntity:settingsDescription insertIntoManagedObjectContext:self.managedObjectContext];
@@ -61,7 +61,7 @@
 //    NSLog(@"Made settings %@", self.settings);
   }
   
-  if (self.uiSettings == nil) {
+  if (self.uiSettings == nil && self.managedObjectContext != nil) {
     // make new UI settings
     NSEntityDescription *uiSettingsDescription = [NSEntityDescription entityForName:@"UISettings" inManagedObjectContext:self.managedObjectContext];
     UISettings *newUISettings = [[UISettings alloc] initWithEntity:uiSettingsDescription insertIntoManagedObjectContext:self.managedObjectContext];

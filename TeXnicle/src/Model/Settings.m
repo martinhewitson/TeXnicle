@@ -53,7 +53,7 @@
 
 - (void) updateSettings
 {
-  if (self.language == nil) {
+  if (self.language == nil && self.managedObjectContext != nil) {
     self.language = [[NSSpellChecker sharedSpellChecker] language];
   }
 }
