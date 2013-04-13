@@ -3043,45 +3043,45 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return nil;
 }
 
-- (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
-{
-  BOOL block = NO;
-  NSString *cursorType = [[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorType];
-  if ([cursorType isEqualToString:@"Block"]) {
-    block = YES;
-  }
-  
-  NSPoint aPoint = NSMakePoint( rect.origin.x,
-                               rect.origin.y+rect.size.height/2);
-  NSUInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:aPoint
-                                                   inTextContainer:[self textContainer]];
-  NSRect glyphRect = [[self layoutManager]
-                      boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1)  inTextContainer:[self textContainer]];
-  
-  [color set ];
-  
-  rect.size.width = rect.size.height/2;
-  if(glyphRect.size.width > 0 && glyphRect.size.width < rect.size.height) {
-    rect.origin.x -= 1.0;
-    rect.size.width = glyphRect.size.width+2.0;
-  }
-  
-  //Block Cursor
-  if( block ) {
-    
-    NSBezierPath *path = [NSBezierPath bezierPathWithRect:rect];
-    [path setLineWidth:1.0];
-    [path stroke];
-    
-  } else {
-    NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y)];
-    [path lineToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y + rect.size.height)];
-    [path setLineWidth:1.5];
-    [path stroke];
-    
-  }
-}
+//- (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
+//{
+//  BOOL block = NO;
+//  NSString *cursorType = [[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorType];
+//  if ([cursorType isEqualToString:@"Block"]) {
+//    block = YES;
+//  }
+//  
+//  NSPoint aPoint = NSMakePoint( rect.origin.x,
+//                               rect.origin.y+rect.size.height/2);
+//  NSUInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:aPoint
+//                                                   inTextContainer:[self textContainer]];
+//  NSRect glyphRect = [[self layoutManager]
+//                      boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1)  inTextContainer:[self textContainer]];
+//  
+//  [color set ];
+//  
+//  rect.size.width = rect.size.height/2;
+//  if(glyphRect.size.width > 0 && glyphRect.size.width < rect.size.height) {
+//    rect.origin.x -= 1.0;
+//    rect.size.width = glyphRect.size.width+2.0;
+//  }
+//  
+//  //Block Cursor
+//  if( block ) {
+//    
+//    NSBezierPath *path = [NSBezierPath bezierPathWithRect:rect];
+//    [path setLineWidth:1.0];
+//    [path stroke];
+//    
+//  } else {
+//    NSBezierPath *path = [NSBezierPath bezierPath];
+//    [path moveToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y)];
+//    [path lineToPoint:NSMakePoint(rect.origin.x+1.0, rect.origin.y + rect.size.height)];
+//    [path setLineWidth:1.5];
+//    [path stroke];
+//    
+//  }
+//}
 
 #pragma mark -
 #pragma mark Text processing
