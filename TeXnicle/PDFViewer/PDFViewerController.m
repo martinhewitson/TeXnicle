@@ -387,7 +387,7 @@
   [self.nextButton setEnabled:YES];
   [self.searchStatusText setStringValue:[NSString stringWithFormat:@"Found %lu matches.", [self.searchResults count]]];
   [self showNextResult:self];
-  [[self.pdfview window] makeFirstResponder:self.pdfview];
+//  [[self.pdfview window] makeFirstResponder:self.pdfview];
 }
 
 - (void)documentDidFindMatch:(NSNotification *)notification
