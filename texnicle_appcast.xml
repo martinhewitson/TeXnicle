@@ -6,6 +6,29 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.0.8 -->
+		<item>
+      <title>Version 2.0.8 (build 63)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.0.8</h2>
+        <p><ul>
+        <li>Added preferences for setting the cursor color.</li>
+        <li>Fixed a bug which resulted in crashed when doing "Save As" on an empty project.</li>
+        <li>Fixed a bug which stopped the page count on the pdf viewer being updated.</li>
+        <li>Fixed a bug which could stop bibliography references appearing the autocomplete list.</li>
+        <li>Fixed a bug which could cause the PDF search field to lose focus during the search.</li>
+        </ul></p>
+      ]]></description>
+      <pubDate>13th April 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.0/TeXnicle.app.2.0.8.zip"
+      sparkle:shortVersionString="2.0.8"
+      sparkle:version="63"
+      length="19099194"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFC5A4gb2QTIn66YxL70uyGYYAaNzAhUAkKqNly9jX4eJlDmJyjKDA+nwUpo="
+      />
+    </item>
+    
     <!-- Version 2.0.7 -->
 		<item>
       <title>Version 2.0.7 (build 62)</title>
