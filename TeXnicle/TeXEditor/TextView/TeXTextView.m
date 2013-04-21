@@ -145,9 +145,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
     [self setUsesFindBar:YES];
+    [self setIncrementalSearchingEnabled:YES];
   } else {
     [self setUsesFindPanel:YES];
   }
+  
+  [self setAllowsUndo:YES];
+  [self setAllowsDocumentBackgroundColorChange:YES];
   
   // set color for line highlighting
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
