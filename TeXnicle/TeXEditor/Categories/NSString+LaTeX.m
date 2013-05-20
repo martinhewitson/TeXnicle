@@ -199,8 +199,21 @@ static NSCharacterSet *controlFilterChars = nil;
   NSMutableArray *citations = [NSMutableArray array];
   
 	// search for \\bibliography{
+  [citations addObjectsFromArray:[self citationsFromIncludeBibiliographyInSourceFile:sourceFile]];
+  
+  // bib resource
+  [citations addObjectsFromArray:[self citationsFromBibResourceInSourceFile:sourceFile]];
+  
+  return citations;
+}
+
+- (NSArray*)citationsFromIncludeBibiliographyInSourceFile:(NSString*)sourceFile
+{
+  NSMutableArray *citations = [NSMutableArray array];
+  
   NSScanner *scanner = [NSScanner scannerWithString:self];
   
+  // scan for \bibliography
   if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
     NSInteger idx = [scanner scanLocation];
     NSInteger sourceStart = idx;
@@ -220,7 +233,7 @@ static NSCharacterSet *controlFilterChars = nil;
         if ([arg isAbsolutePath]) {
           //          NSLog(@"   path is absolute");
           bibpath = arg;
-        } else {        
+        } else {
           //          NSLog(@"   path is relative to project");
           bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
         }
@@ -239,11 +252,64 @@ static NSCharacterSet *controlFilterChars = nil;
         }
         // clean up
       }
-    }  
-  }  
+    }
+  }
   
   return citations;
 }
+
+
+- (NSArray*)citationsFromBibResourceInSourceFile:(NSString*)sourceFile
+{
+  NSMutableArray *citations = [NSMutableArray array];
+  
+  NSScanner *scanner = [NSScanner scannerWithString:self];
+  
+  // scan for \bibliography
+  if ([scanner scanUpToString:@"\\addbibresource{" intoString:NULL]) {
+    NSInteger idx = [scanner scanLocation];
+    NSInteger sourceStart = idx;
+    if (idx < [self length]) {
+      NSString *argString = [self parseArgumentStartingAt:&idx];
+      NSInteger sourceEnd = idx;
+      NSArray *args = [argString componentsSeparatedByString:@","];
+      for (__strong NSString *arg in args) {
+        if (arg && [arg length]>0) {
+          if ([[arg pathExtension] length] == 0) {
+            arg = [arg stringByAppendingPathExtension:@"bib"];
+          }
+        }
+        
+        //        NSLog(@"Found \\bibliography with argument %@", arg);
+        NSString *bibpath = nil;
+        if ([arg isAbsolutePath]) {
+          //          NSLog(@"   path is absolute");
+          bibpath = arg;
+        } else {
+          //          NSLog(@"   path is relative to project");
+          bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
+        }
+        //        NSLog(@"Bib file is %@", bibpath);
+        
+        MHFileReader *fr = [[MHFileReader alloc] init];
+        NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
+        if (bibcontents && [bibcontents length]>0) {
+          NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
+          for (BibliographyEntry *entry in entries) {
+            if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
+              [entry setSourceString:[self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)]];
+            }
+            [citations addObject:entry];
+          }
+        }
+        // clean up
+      }
+    }
+  }
+  
+  return citations;
+}
+
 
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc
 {
