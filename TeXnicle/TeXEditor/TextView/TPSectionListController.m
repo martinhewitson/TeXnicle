@@ -34,6 +34,7 @@
 #import "TPSectionListSection.h"
 #import "externs.h"
 #import "NSArray+Color.h"
+#import "MHLineNumber.h"
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
@@ -264,6 +265,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
       NSArray *results = [TPRegularExpression rangesMatching:regexp inText:string];
       //NSLog(@"Scan results for %@:  %@", regexp, results);
       if ([results count] > 0) {
+        MHLineNumber *lastLine = nil;
+        
         for (NSValue *rv in results) {
           NSRange r = [rv rangeValue];
           if (r.length <= 1) {
@@ -300,9 +303,15 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
             
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             dict[@"index"] = [NSNumber numberWithInteger:r.location];
-            NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+            NSArray *lines = nil;
+            if (lastLine) {
+              lines = [[self.textView attributedString] lineNumbersForTextRange:r startIndex:lastLine.index startLine:lastLine.number];
+            } else {
+              lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+            }
             if ([lines count] > 0) {
-              dict[@"line"] = [lines[0] valueForKey:@"number"];
+              lastLine = lines[0];
+              dict[@"line"] = @(lastLine.number);
               NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
               NSRange strRange = NSMakeRange(0, [lineString length]);
               [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
