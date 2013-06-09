@@ -493,6 +493,10 @@
 
 - (void) updatePageCountDisplay
 {
+  if (self.pdfview == nil || [self.pdfview document] == nil) {
+    return;
+  }
+  
   NSUInteger newPageIndex;
   
   newPageIndex = 1lu + [[self.pdfview document] indexForPage:[self.pdfview currentPage]];
