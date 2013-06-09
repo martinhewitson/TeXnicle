@@ -3166,8 +3166,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       if ([self shouldChangeTextInRange:commandRange replacementString:[astr string]]) {
         [self.textStorage replaceCharactersInRange:commandRange withAttributedString:astr];
         [self didChangeText];
+        
+        // we should only do this if the snippet has placeholders
         [self setSelectedRange:NSMakeRange(commandRange.location, 0)];
         [self jumpToNextPlaceholder:self];
+        NSRange rangeAfterJump = [self selectedRange];
+        if (rangeAfterJump.location == commandRange.location) {
+          // go to end
+          [self setSelectedRange:NSMakeRange(commandRange.location+[astr length], 0)];
+        }
         [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
       }
       return YES;
