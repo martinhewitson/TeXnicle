@@ -68,13 +68,15 @@
         
         for (MHPDFView *pdfView in self.pdfViews) {
           if ([pdfView document]) {
-            PDFDocument *pdfDoc = [pdfView document];        
-            if (pageIndex < [pdfDoc pageCount]) {
-              PDFPage *page = [pdfDoc pageAtIndex:pageIndex];
-              y = NSMaxY([page boundsForBox:kPDFDisplayBoxMediaBox]) - y;
-              NSPoint point = NSMakePoint(x, y);
-              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
-              [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
+            PDFDocument *pdfDoc = [pdfView document];
+            if (pdfDoc) {
+              if (pageIndex < [pdfDoc pageCount]) {
+                PDFPage *page = [pdfDoc pageAtIndex:pageIndex];
+                y = NSMaxY([page boundsForBox:kPDFDisplayBoxMediaBox]) - y;
+                NSPoint point = NSMakePoint(x, y);
+                [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
+                [pdfView displayLineAtPoint:point inPageAtIndex:pageIndex giveFocus:shouldFocus];
+              }
             }
           }
         }
