@@ -68,10 +68,9 @@
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
-
 #define kMaxZoom 42
-
 #define kFontWrapScaleCorrection 1.07
+#define kRulerUpdateInterval 0.5
 
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
@@ -89,6 +88,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (strong) NSMutableArray *wordHighlightRanges;
 @property (strong) MHTableConfigureController *tableConfigureController;
 @property (assign) CGFloat averageCharacterWidth;
+
+@property (strong) NSDate *lastRulerUpdate;
 
 @end
 
@@ -728,6 +729,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
+  NSDate *now = [NSDate date];
+  if (self.lastRulerUpdate != nil && [now timeIntervalSinceDate:self.lastRulerUpdate] < kRulerUpdateInterval) {    
+    return;
+  }
+  
+  self.lastRulerUpdate = now;
+  
   //  NSLog(@"Frame change");
   [_popupList dismiss];
   [self colorVisibleText];
