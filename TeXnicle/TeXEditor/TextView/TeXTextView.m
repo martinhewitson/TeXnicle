@@ -894,10 +894,23 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setTypingAttributes:atts];
 }
 
-- (void) applyFontAndColor:(BOOL)forceUpdate
+- (void) applyLineSpacingToDocument
 {
-//  NSLog(@"Apply font and color");
-  
+  NSDictionary *atts = [NSDictionary currentTypingAttributes];
+  NSParagraphStyle *newPS = atts[NSParagraphStyleAttributeName];
+  NSRange r = NSMakeRange(0, [[self string] length]);
+  [self.textStorage removeAttribute:NSParagraphStyleAttributeName range:r];
+  [self.textStorage addAttribute:NSParagraphStyleAttributeName value:newPS range:r];
+  [self setDefaultParagraphStyle:newPS];
+}
+
+- (void) forceFontAndColor
+{
+  [self applyFontAndColor:YES];
+}
+
+- (void) applyFontAndColor:(BOOL)forceUpdate
+{  
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = atts[NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];

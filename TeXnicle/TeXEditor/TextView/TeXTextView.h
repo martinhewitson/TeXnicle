@@ -88,6 +88,8 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) updateEditorRuler;
 - (void) setTypingColor:(NSColor*)aColor;
 - (void) applyFontAndColor:(BOOL)forceUpdate;
+- (void) forceFontAndColor;
+- (void) applyLineSpacingToDocument;
 - (void) setWrapStyle;
 - (void) handleFrameChangeNotification:(NSNotification*)aNote;
 
@@ -158,7 +160,6 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 
 - (void) completeFromList:(NSArray*)aList;
 - (void) insertFromList:(NSArray*)aList;
-- (IBAction) showSpellingList:(id)sender;
 - (void) insertWordAtCurrentLocation:(NSString*)aWord;
 - (void) replaceWordUpToCurrentLocationWith:(NSString*)aWord;
 - (void) replaceWordAtCurrentLocationWith:(NSString*)aWord;
@@ -193,7 +194,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 
 - (NSInteger) lengthOfLineUpToLocation:(NSUInteger)location;
 - (NSRange) rangeForCurrentParagraph;
-- (NSRange)rangeForCurrentLine;
+- (NSRange) rangeForCurrentLine;
 - (NSInteger) locationOfLastWhitespaceLessThan:(NSInteger)lineWrapLength;
 - (NSString*) currentLineToCursor;
 - (NSRange) getVisibleRange;
@@ -201,7 +202,6 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) handleSelectionChanged:(NSNotification*)aNote;
 - (NSRect) highlightRectForRange:(NSRange)aRange;
 - (void) clearHighlight;
-- (NSRange) rangeForCurrentParagraph;
 - (NSRange) rangeForCurrentWord;
 - (NSString*) currentWord;
 - (NSPoint) listPointForCurrentWord;
