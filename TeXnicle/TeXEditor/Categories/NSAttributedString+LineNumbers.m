@@ -28,6 +28,7 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "MHLineNumber.h"
 #import "NSAttributedString+CodeFolding.h"
+#import "externs.h"
 
 @implementation NSAttributedString (LineNumbers)
 
@@ -63,6 +64,10 @@
 // Build an array of line number objects for the given text range.
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine
 {
+  // check if code folding is on
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  BOOL usingCodeFolding = [defaults boolForKey:TEShowCodeFolders];
+  
   NSAttributedString *attStr = self;
   NSMutableArray *lines = [NSMutableArray array];
   
@@ -76,7 +81,12 @@
   NSRange lineRange;
   for (; idx < start;) {
     lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-    lineNumber += [NSAttributedString lineCountForLine:[attStr attributedSubstringFromRange:lineRange]];
+    if (usingCodeFolding) {
+      NSAttributedString *substr = [attStr attributedSubstringFromRange:lineRange];
+      lineNumber += [NSAttributedString lineCountForLine:substr];
+    } else {
+      lineNumber ++;
+    }
 		idx = NSMaxRange(lineRange);
 	}
   
@@ -94,11 +104,14 @@
     line = [MHLineNumber lineNumberWithValue:lineNumber index:lineRange.location range:lineRange];    
     [lines addObject:line];
     
-    // Get an attributed version of this line
-    NSAttributedString *attLine = [attStr attributedSubstringFromRange:lineRange];    
-    // Get a line count for this line of text.
-    lineNumber+=[NSAttributedString lineCountForLine:attLine];
-    
+    if (usingCodeFolding) {
+      // Get an attributed version of this line
+      NSAttributedString *attLine = [attStr attributedSubstringFromRange:lineRange];
+      // Get a line count for this line of text.
+      lineNumber+=[NSAttributedString lineCountForLine:attLine];
+    } else {
+      lineNumber ++;
+    }
     // move on to the next line
 		idx = NSMaxRange(lineRange);
   }
