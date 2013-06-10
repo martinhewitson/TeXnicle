@@ -1653,7 +1653,10 @@
       self.currentTabHistoryIndex = [self.tabHistory count]-1;
 //      NSLog(@"Added object at index %ld", self.currentTabHistoryIndex);
     }
-  }  
+  }
+  
+  [self.texEditorViewController.textView performSelector:@selector(applyLineSpacingToDocument) withObject:nil afterDelay:0];  
+  
 }
 
 - (void) handleOpenDocumentsDidAddFileNotification:(NSNotification*)aNote
