@@ -141,15 +141,11 @@ static NSCharacterSet *controlFilterChars = nil;
         scanLocation++;
       }
       
-      // we should now go forward until we find a {
+      // The character at the scan location is now a { or we bail out
       NSInteger start = NSNotFound;
       NSInteger end   = NSNotFound;
-      while (scanLocation < [self length]) {        
-        if ([self characterAtIndex:scanLocation] == '{') {
-          start = scanLocation+1;
-          break;
-        }        
-        scanLocation++;
+      if ([self characterAtIndex:scanLocation] == '[') {
+        start = scanLocation+1;
       }
       
       if (start == NSNotFound) {
