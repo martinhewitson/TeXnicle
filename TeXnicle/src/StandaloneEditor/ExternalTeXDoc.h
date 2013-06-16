@@ -68,7 +68,6 @@
 	IBOutlet NSToolbarItem *_addToProjectButton;
 	IBOutlet NSButton *_copyToNewProjectCheckButton;
 	IBOutlet NSButton *_makeMainFileCheckButton;
-  IBOutlet NSSplitView *_editorSplitView;
   IBOutlet NSView *_controlsViewContainer;
   
   NSStringEncoding _encoding;

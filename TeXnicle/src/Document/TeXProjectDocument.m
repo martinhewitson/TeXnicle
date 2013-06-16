@@ -198,22 +198,31 @@
 #pragma mark -
 #pragma mark KVO 
 
++ (NSArray*)preferencesToObserve
+{
+  return @[TEJumpBarEnabled, TPLiveUpdateMode, TPLiveUpdateEditDelay, TPLiveUpdateFrequency];
+}
+
 - (void) stopObserving
 {
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]];
+  
+  for (NSString *key in [TeXProjectDocument preferencesToObserve]) {
+    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", key]];
+  }
 }
 
 - (void) observePreferences
 {
+  
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];		
-	
-	
+  for (NSString *key in [TeXProjectDocument preferencesToObserve]) {
+    [defaults addObserver:self
+               forKeyPath:[NSString stringWithFormat:@"values.%@", key]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+  }
 }
 
 
@@ -226,7 +235,9 @@
       [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateEditDelay]] ||
       [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateMode]]) {
     [self setupLiveUpdateTimer];
-	} 
+	} else if ([keyPath isEqualToString:[NSString stringWithFormat:@"values.%@", TEJumpBarEnabled]]) {
+    [self.texEditorViewController toggleJumpBar:YES];
+  }
 }
 
 
@@ -627,7 +638,6 @@
     if (p.settings) {
       if (p.settings.language) {
         [[NSSpellChecker sharedSpellChecker] setLanguage:p.settings.language];
-//        NSLog(@"Did set language %@", self.project.settings.language);
       }
     }
   }
@@ -1184,7 +1194,6 @@
     
     
     [[NSSpellChecker sharedSpellChecker] setLanguage:self.project.settings.language];
-//    NSLog(@"Did set language %@", self.project.settings.language);
     
 		return _project;
 	}
@@ -3331,10 +3340,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self captureUIstate];
   
   // cache chosen language
-  NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
-	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-//  NSLog(@"Language synchronized");
+  NSString *language = [[NSSpellChecker sharedSpellChecker] language];
+  self.project.settings.language = language;
   
 	// make sure we save the files here
 	if ([self saveAllProjectFiles]) {    
@@ -4026,8 +4033,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 -(NSNumber*)nCompile
 {
-  if (_liveUpdate)
-    return @1;
+  // Probably we don't want this. At least we should disable the correspond
+  // UI on the project preferences, otherwise it's very confusing for the user.
+  //if (_liveUpdate)
+  //  return @1;
   
   return self.project.settings.nCompile;
 }

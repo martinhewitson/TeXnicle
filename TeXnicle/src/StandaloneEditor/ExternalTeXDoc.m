@@ -85,6 +85,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 @property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 @property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
 @property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
+@property (unsafe_unretained) IBOutlet NSSplitView *editorSplitView;
 @property (unsafe_unretained) IBOutlet NSView *spellCheckerContainerView;
 @property (unsafe_unretained) IBOutlet NSView *prefsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *libraryContainerView;
@@ -454,22 +455,32 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark -
 #pragma mark KVO
 
+
++ (NSArray*)preferencesToObserve
+{
+  return @[TEJumpBarEnabled, TPLiveUpdateMode, TPLiveUpdateEditDelay, TPLiveUpdateFrequency];
+}
+
 - (void) stopObserving
 {
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]];
+  
+  for (NSString *key in [ExternalTeXDoc preferencesToObserve]) {
+    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", key]];
+  }
 }
 
 - (void) observePreferences
 {
+  
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TPLiveUpdateFrequency]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-	
-	
+  for (NSString *key in [ExternalTeXDoc preferencesToObserve]) {
+    [defaults addObserver:self
+               forKeyPath:[NSString stringWithFormat:@"values.%@", key]
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+  }
 }
 
 
@@ -482,7 +493,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
       [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateEditDelay]] ||
       [keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TPLiveUpdateMode]]) {
     [self setupLiveUpdateTimer];
-	}
+	} else if ([keyPath isEqualToString:[NSString stringWithFormat:@"values.%@", TEJumpBarEnabled]]) {
+    [self.texEditorViewController toggleJumpBar:YES];
+  }
 }
 
 
@@ -620,16 +633,16 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (void) toggleStatusBar:(BOOL)animate
 {
-  NSRect tefr = [self.texEditorContainer frame];
+  NSRect tefr = [self.editorSplitView frame];
   NSRect svfr = [self.statusViewContainer frame];
   
   id tec;
   id sbc;
   if (animate) {
-    tec = self.texEditorContainer.animator;
+    tec = self.editorSplitView.animator;
     sbc = self.statusViewContainer.animator;
   } else {
-    tec = self.texEditorContainer;
+    tec = self.editorSplitView;
     sbc = self.statusViewContainer;
   }
   
@@ -854,7 +867,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // show integrated console
   if (tag == 2041) {
-    if ([[_editorSplitView subviews][1] isHidden] == NO) {
+    if ([[self.editorSplitView subviews][1] isHidden] == NO) {
       return NO;
     } else {
       return YES;
@@ -2242,8 +2255,8 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [_editorSplitView subviews][0];
-  NSView *bottomView = [_editorSplitView subviews][1];
+  NSView *topView = [self.editorSplitView subviews][0];
+  NSView *bottomView = [self.editorSplitView subviews][1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -2346,7 +2359,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }
   }
   
-  if (aSplitView == _editorSplitView) {
+  if (aSplitView == self.editorSplitView) {
     return b.size.height - 26.0 - [self.splitView dividerThickness];
   }
   
@@ -2371,7 +2384,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     }
   }
   
-  if (aSplitView == _editorSplitView) {
+  if (aSplitView == self.editorSplitView) {
     return 42.0;    
   }
   
