@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -395,6 +395,7 @@
 											<string key="NSFrameSize">{225, 576}</string>
 											<reference key="NSSuperview" ref="961650512"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="658181076"/>
 											<array class="NSMutableArray" key="NSTabViewItems">
 												<object class="NSTabViewItem" id="885399720">
 													<string key="NSIdentifier">1</string>
@@ -726,6 +727,7 @@
 																<string key="NSFrameSize">{225, 552}</string>
 																<reference key="NSSuperview" ref="658181076"/>
 																<reference key="NSWindow"/>
+																<reference key="NSNextKeyView" ref="176839951"/>
 																<string key="NSReuseIdentifierKey">_NS:9</string>
 																<array class="NSMutableArray" key="NSTabViewItems">
 																	<object class="NSTabViewItem" id="728684576">
@@ -782,7 +784,6 @@
 																			<string key="NSFrameSize">{225, 552}</string>
 																			<reference key="NSSuperview" ref="465574377"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="1001950842"/>
 																		</object>
 																		<string key="NSLabel">Item 4</string>
 																		<reference key="NSColor" ref="106525823"/>
@@ -793,7 +794,6 @@
 																			<nil key="NSNextResponder"/>
 																			<int key="NSvFlags">256</int>
 																			<string key="NSFrameSize">{225, 552}</string>
-																			<reference key="NSNextKeyView" ref="1001950842"/>
 																		</object>
 																		<string key="NSLabel">Item 5</string>
 																		<reference key="NSColor" ref="106525823"/>
@@ -872,7 +872,7 @@
 														<object class="NSCustomView" id="16233202">
 															<reference key="NSNextResponder" ref="141030246"/>
 															<int key="NSvFlags">274</int>
-															<string key="NSFrameSize">{451, 476}</string>
+															<string key="NSFrameSize">{451, 477}</string>
 															<reference key="NSSuperview" ref="141030246"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="819643155"/>
@@ -880,7 +880,7 @@
 															<string key="NSClassName">NSView</string>
 														</object>
 													</array>
-													<string key="NSFrameSize">{451, 476}</string>
+													<string key="NSFrameSize">{451, 477}</string>
 													<reference key="NSSuperview" ref="714234403"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="16233202"/>
@@ -890,7 +890,7 @@
 												<object class="NSCustomView" id="819643155">
 													<reference key="NSNextResponder" ref="714234403"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{0, 477}, {451, 83}}</string>
+													<string key="NSFrame">{{0, 478}, {451, 83}}</string>
 													<reference key="NSSuperview" ref="714234403"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="309458923"/>
@@ -898,7 +898,7 @@
 													<string key="NSClassName">NSView</string>
 												</object>
 											</array>
-											<string key="NSFrame">{{0, 40}, {451, 560}}</string>
+											<string key="NSFrame">{{0, 40}, {451, 561}}</string>
 											<reference key="NSSuperview" ref="1001950842"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="141030246"/>
@@ -963,7 +963,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1023531812"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{600, 485}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">TeXnicleStandaloneEditorWindow</string>
@@ -1201,7 +1201,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="291540207"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1352,7 +1352,7 @@
 					<string key="NSFrameSize">{396, 250}</string>
 					<reference key="NSNextKeyView" ref="740407993"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1537,7 +1537,7 @@
 					</array>
 					<string key="NSFrameSize">{242, 141}</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">UKTextDocGoToBox</string>
@@ -2463,6 +2463,7 @@
 							<reference ref="714234403"/>
 						</array>
 						<reference key="parent" ref="1023531812"/>
+						<string key="objectName">Central Panel</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">218</int>
@@ -2482,6 +2483,7 @@
 						<reference key="object" ref="309458923"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="1001950842"/>
+						<string key="objectName">Status View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">237</int>
@@ -3046,8 +3048,6 @@
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="saveDocument:">id</string>
 						<string key="showIntegratedConsole:">id</string>
-						<string key="showIntegratedPDFViewer:">id</string>
-						<string key="togglePanelFocus:">id</string>
 						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -3127,14 +3127,6 @@
 							<string key="name">showIntegratedConsole:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="showIntegratedPDFViewer:">
-							<string key="name">showIntegratedPDFViewer:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="togglePanelFocus:">
-							<string key="name">togglePanelFocus:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="toggleStatusView:">
 							<string key="name">toggleStatusView:</string>
 							<string key="candidateClassName">id</string>
@@ -3147,7 +3139,6 @@
 						<string key="_controlsViewContainer">NSView</string>
 						<string key="_copyToNewProjectCheckButton">NSButton</string>
 						<string key="_copyToProjectCheckButton">NSButton</string>
-						<string key="_editorSplitView">NSSplitView</string>
 						<string key="_makeMainFileCheckButton">NSButton</string>
 						<string key="_projectsController">NSArrayController</string>
 						<string key="centerView">NSView</string>
@@ -3155,6 +3146,7 @@
 						<string key="commandsContainerView">NSView</string>
 						<string key="controlsTabBarControlContainer">NSView</string>
 						<string key="controlsTabview">NSTabView</string>
+						<string key="editorSplitView">NSSplitView</string>
 						<string key="embeddedConsoleContainer">NSView</string>
 						<string key="infoControlsTabBarControlContainer">NSView</string>
 						<string key="infoControlsTabview">NSTabView</string>
@@ -3198,10 +3190,6 @@
 							<string key="name">_copyToProjectCheckButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_editorSplitView">
-							<string key="name">_editorSplitView</string>
-							<string key="candidateClassName">NSSplitView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="_makeMainFileCheckButton">
 							<string key="name">_makeMainFileCheckButton</string>
 							<string key="candidateClassName">NSButton</string>
@@ -3229,6 +3217,10 @@
 						<object class="IBToOneOutletInfo" key="controlsTabview">
 							<string key="name">controlsTabview</string>
 							<string key="candidateClassName">NSTabView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="editorSplitView">
+							<string key="name">editorSplitView</string>
+							<string key="candidateClassName">NSSplitView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="embeddedConsoleContainer">
 							<string key="name">embeddedConsoleContainer</string>
@@ -3564,6 +3556,7 @@
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="cancelCompile:">id</string>
@@ -3577,7 +3570,9 @@
 						<string key="endNewFileSheet:">id</string>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
+						<string key="findInProject:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -3591,15 +3586,18 @@
 						<string key="nextBookmark:">id</string>
 						<string key="openPDF:">id</string>
 						<string key="openProjectFolderInFinder:">id</string>
+						<string key="openStandaloneWindow:">id</string>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
+						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
 						<string key="renameItem:">id</string>
 						<string key="reopenUsingEncoding:">id</string>
 						<string key="revealItem:">id</string>
+						<string key="saveDocument:">id</string>
 						<string key="selectNextTab:">id</string>
 						<string key="selectPreviousTab:">id</string>
 						<string key="selectTab:">id</string>
@@ -3611,6 +3609,7 @@
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
+						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -3631,6 +3630,10 @@
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -3685,8 +3688,16 @@
 							<string key="name">findCorrespondingPDFText:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="findInProject:">
+							<string key="name">findInProject:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
@@ -3741,6 +3752,10 @@
 							<string key="name">openProjectFolderInFinder:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="openStandaloneWindow:">
+							<string key="name">openStandaloneWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openWithSystemPDFViewer:">
 							<string key="name">openWithSystemPDFViewer:</string>
 							<string key="candidateClassName">id</string>
@@ -3751,6 +3766,10 @@
 						</object>
 						<object class="IBActionInfo" key="previousBookmark:">
 							<string key="name">previousBookmark:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="printDocument:">
+							<string key="name">printDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
@@ -3775,6 +3794,10 @@
 						</object>
 						<object class="IBActionInfo" key="revealItem:">
 							<string key="name">revealItem:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveDocument:">
+							<string key="name">saveDocument:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="selectNextTab:">
@@ -3821,9 +3844,12 @@
 							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleStatusView:">
+							<string key="name">toggleStatusView:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_editorSplitView">NSSplitView</string>
 						<string key="_newFileSheet">NSWindow</string>
 						<string key="_newFilenameTextField">NSTextField</string>
 						<string key="_pdfViewerContainerView">NSView</string>
@@ -3839,6 +3865,7 @@
 						<string key="controlsTabview">NSTabView</string>
 						<string key="createFileButton">HHValidatedButton</string>
 						<string key="createFolderButton">HHValidatedButton</string>
+						<string key="editorSplitView">NSSplitView</string>
 						<string key="embeddedConsoleContainer">NSView</string>
 						<string key="engineSettingsContainer">NSView</string>
 						<string key="finderContainerView">NSView</string>
@@ -3865,10 +3892,6 @@
 						<string key="warningsContainerView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_editorSplitView">
-							<string key="name">_editorSplitView</string>
-							<string key="candidateClassName">NSSplitView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="_newFileSheet">
 							<string key="name">_newFileSheet</string>
 							<string key="candidateClassName">NSWindow</string>
@@ -3928,6 +3951,10 @@
 						<object class="IBToOneOutletInfo" key="createFolderButton">
 							<string key="name">createFolderButton</string>
 							<string key="candidateClassName">HHValidatedButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="editorSplitView">
+							<string key="name">editorSplitView</string>
+							<string key="candidateClassName">NSSplitView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="embeddedConsoleContainer">
 							<string key="name">embeddedConsoleContainer</string>
