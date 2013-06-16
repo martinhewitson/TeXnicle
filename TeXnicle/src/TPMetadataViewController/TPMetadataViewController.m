@@ -85,6 +85,9 @@
   
   [self.outlineView performSelector:@selector(reloadData) withObject:nil afterDelay:0];
   
+  [[self.statusLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+
+  
   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
   [nc addObserver:self
          selector:@selector(handleMetadataUpdate:)
