@@ -103,6 +103,9 @@ extern NSString * const TEJumpBarShowSections;
 extern NSString * const TEJumpBarShowMarks;
 extern NSString * const TEJumpBarShowBookmarks;
 extern NSString * const TEJumpBarShowBibItems;
+extern NSString * const TEJumpBarShowLineNumbers;
+extern NSString * const TEJumpBarEnabled;
+
 
 // comment
 extern NSString * const TESyntaxCommentsColor;

@@ -85,6 +85,9 @@ NSString * const TEJumpBarShowSections = @"TEJumpBarShowSections";
 NSString * const TEJumpBarShowMarks = @"TEJumpBarShowMarks";
 NSString * const TEJumpBarShowBookmarks = @"TEJumpBarShowBookmarks";
 NSString * const TEJumpBarShowBibItems = @"TEJumpBarShowBibItems";
+NSString * const TEJumpBarShowLineNumbers = @"TEJumpBarShowLineNumbers";
+NSString * const TEJumpBarEnabled = @"TEJumpBarEnabled";
+
 
 NSString * const TPShouldRunPS2PDF = @"TPShouldRunPS2PDF";
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
@@ -350,7 +353,9 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   [defaultValues setValue:@YES forKey:TEJumpBarShowMarks];
   [defaultValues setValue:@YES forKey:TEJumpBarShowSections];
   [defaultValues setValue:@YES forKey:TEJumpBarShowBibItems];
-  
+  [defaultValues setValue:@YES forKey:TEJumpBarShowLineNumbers];
+  [defaultValues setValue:@YES forKey:TEJumpBarEnabled];
+    
   //---------- Paths
 	// GS
 	defaultValues[TPGSPath] = @"/usr/local/bin/gs";
