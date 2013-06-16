@@ -397,7 +397,6 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	
 	
 	//---------- Hidden settings
-	[defaultValues setValue:@"" forKey:TPSpellCheckerLanguage];
   [defaultValues setValue:@15.0f forKey:TPPaletteRowHeight];
   [defaultValues setValue:@25.0f forKey:TPLibraryRowHeight];
   
@@ -460,12 +459,6 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-	// store the language
-	NSString *language = [[NSSpellChecker sharedSpellChecker] language];	
-	[[NSUserDefaults standardUserDefaults] setValue:language forKey:TPSpellCheckerLanguage];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-  //	NSLog(@"Stored language to defaults: %@", language);
-	
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
@@ -473,12 +466,6 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   
   // set default
   lineToOpen = NSNotFound;
-  
-	// set spell checker language
-	NSString *language = [[NSUserDefaults standardUserDefaults] valueForKey:TPSpellCheckerLanguage];
-	if (![language isEqualToString:@""]) {
-		[[NSSpellChecker sharedSpellChecker] setLanguage:language];
-	}
   
   // install templates
   [TPProjectTemplateManager installBundleTemplates];
