@@ -126,6 +126,7 @@
 
 @property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 @property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
+@property (unsafe_unretained) IBOutlet NSSplitView *editorSplitView;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *createFolderButton;
 @property (unsafe_unretained) IBOutlet HHValidatedButton *createFileButton;
 @property (unsafe_unretained) IBOutlet NSView *engineSettingsContainer;
@@ -1524,16 +1525,16 @@
 
 - (void) toggleStatusBar:(BOOL)animate
 {
-  NSRect tefr = [self.texEditorContainer frame];
+  NSRect tefr = [self.editorSplitView frame];
   NSRect svfr = [self.statusViewContainer frame];
   
   id tec;
   id sbc;
   if (animate) {
-    tec = self.texEditorContainer.animator;
+    tec = self.editorSplitView.animator;
     sbc = self.statusViewContainer.animator;
   } else {
-    tec = self.texEditorContainer;
+    tec = self.editorSplitView;
     sbc = self.statusViewContainer;
   }
   
@@ -1542,7 +1543,9 @@
     // move status view out
     [sbc setFrame:NSMakeRect(svfr.origin.x, svfr.origin.y-svfr.size.height, svfr.size.width, svfr.size.height)];    
     // stretch tex editor container
-    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height)]; 
+    NSRect newFrame = NSMakeRect(tefr.origin.x, tefr.origin.y-svfr.size.height, tefr.size.width, tefr.size.height+svfr.size.height);
+    //NSLog(@"Change editor container frame to %@", NSStringFromRect(newFrame));
+    [tec setFrame:newFrame];
   } else {
     _statusViewIsShowing = YES;
     // move status view in
@@ -1785,8 +1788,8 @@
 
 - (IBAction) showIntegratedConsole:(id)sender
 {
-  NSView *topView = [_editorSplitView subviews][0];
-  NSView *bottomView = [_editorSplitView subviews][1];
+  NSView *topView = [self.editorSplitView subviews][0];
+  NSView *bottomView = [self.editorSplitView subviews][1];
   
   //  NSLog(@"Left view is hidden? %d", [leftView isHidden]);
   //  NSLog(@"Left view size %@", NSStringFromRect([leftView frame]));
@@ -1890,7 +1893,7 @@
     }
   }
   
-  if (splitView == _editorSplitView) {
+  if (splitView == self.editorSplitView) {
     return b.size.height - 26.0 - [splitView dividerThickness];    
   }
   
@@ -1915,7 +1918,7 @@
     }
   }  
   
-  if (splitView == _editorSplitView) {
+  if (splitView == self.editorSplitView) {
     return 60.0;    
   }
   
@@ -2648,7 +2651,7 @@
 
   // show integrated console
   if (tag == 2041) {
-    if ([[_editorSplitView subviews][1] isHidden] == NO) {
+    if ([[self.editorSplitView subviews][1] isHidden] == NO) {
       return NO;
     } else {
       return YES;

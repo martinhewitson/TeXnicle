@@ -81,7 +81,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 	IBOutlet NSTextField *_newFilenameTextField;
 	IBOutlet NSWindow *_renameSheet;
 	IBOutlet NSTextField *_renameField;
-  IBOutlet NSSplitView *_editorSplitView;
   IBOutlet NSTabView *_tabView;
   IBOutlet NSView *_pdfViewerContainerView;
     
