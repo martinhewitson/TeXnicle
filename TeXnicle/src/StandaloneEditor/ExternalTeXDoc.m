@@ -583,9 +583,11 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   NSString *language = [self.settings valueForKey:@"language"];
   if (language) {
     [[NSSpellChecker sharedSpellChecker] setLanguage:language];
-  }  
+  } else {
+    [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:YES];
+  }
 }
-- (void)windowWillClose:(NSNotification *)notification 
+- (void)windowWillClose:(NSNotification *)notification
 {		
 //  NSLog(@"WindowWillClose %@", self);
   
