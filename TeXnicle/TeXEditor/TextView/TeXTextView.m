@@ -70,7 +70,7 @@
 #define LargeTextHeight 1e7
 #define kMaxZoom 42
 #define kFontWrapScaleCorrection 1.07
-#define kRulerUpdateInterval 0.5
+#define kRulerUpdateInterval 0.2
 
 NSString * const TELineNumberClickedNotification = @"TELineNumberClickedNotification";
 NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotification";
@@ -185,6 +185,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
          selector:@selector(handleFrameChangeNotification:)
              name:NSViewBoundsDidChangeNotification 
            object:[[self enclosingScrollView] contentView]];
+  
 }
 
 
@@ -730,7 +731,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleFrameChangeNotification:(NSNotification*)aNote
 {
   NSDate *now = [NSDate date];
-  if (self.lastRulerUpdate != nil && [now timeIntervalSinceDate:self.lastRulerUpdate] < kRulerUpdateInterval) {    
+  if (self.lastRulerUpdate != nil && [now timeIntervalSinceDate:self.lastRulerUpdate] < kRulerUpdateInterval) {
+    [self performSelector:@selector(handleFrameChangeNotification:) withObject:aNote afterDelay:kRulerUpdateInterval];
     return;
   }
   
