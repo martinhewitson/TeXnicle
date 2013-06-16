@@ -213,6 +213,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 - (void)fillSectionMenu
 {
   if (![NSApp isActive]) {
+//    NSLog(@"App not active");
     return;
   }
   
@@ -231,7 +232,15 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 		return;
   }
 	
-	NSMutableArray *found = [NSMutableArray array];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  BOOL showJumpBar = [defaults boolForKey:TEJumpBarEnabled];
+  if (showJumpBar == NO) {
+    return;
+  }
+  
+  NSMutableArray *found = [NSMutableArray array];
+  
+  BOOL showLineNumbers = [defaults boolForKey:TEJumpBarShowLineNumbers];
 	
 	NSString *string = [self.textView string];
 	if (string == nil || [string length] == 0) {   
@@ -244,7 +253,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
   NSString *lineFormat = @"%ld\t";
   NSRange sel = [self.textView selectedRange];
-  if (NSMaxRange(sel) >= [string length]) {
+  if (NSMaxRange(sel) > [string length]) {
+    //NSLog(@"No selection %@", NSStringFromRange(sel));
     return;
   }
   
@@ -252,7 +262,6 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 //  NSLog(@"String not empty");
   
 	// look for each section tag
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if ([[defaults valueForKey:TEJumpBarShowSections] boolValue] == YES) {
     for (TPSectionListSection *section in sections) {
       NSString *tag = section.tag;
@@ -304,26 +313,34 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             dict[@"index"] = [NSNumber numberWithInteger:r.location];
             NSArray *lines = nil;
-            if (lastLine) {
-              lines = [[self.textView attributedString] lineNumbersForTextRange:r startIndex:lastLine.index startLine:lastLine.number];
-            } else {
-              lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+            if (showLineNumbers) {
+              if (lastLine) {
+                lines = [[self.textView attributedString] lineNumbersForTextRange:r startIndex:lastLine.index startLine:lastLine.number];
+              } else {
+                lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+              }
             }
+            // make string
+            NSMutableAttributedString *lineString = nil;
             if ([lines count] > 0) {
               lastLine = lines[0];
               dict[@"line"] = @(lastLine.number);
-              NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+              lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
               NSRange strRange = NSMakeRange(0, [lineString length]);
               [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
-              [lineString appendAttributedString:adisp];
-              if (NSLocationInRange(r.location, currentLineRange)) {
-                dict[@"selected"] = @YES;
-              } else {
-                dict[@"selected"] = @NO;
-              }
-              dict[@"title"] = lineString;
-              [found addObject:dict];
+            } else {
+              dict[@"line"] = @(-1);
+              lineString = [[NSMutableAttributedString alloc] initWithString:@""];
             }
+            
+            [lineString appendAttributedString:adisp];
+            if (NSLocationInRange(r.location, currentLineRange)) {
+              dict[@"selected"] = @YES;
+            } else {
+              dict[@"selected"] = @NO;
+            }
+            dict[@"title"] = lineString;
+            [found addObject:dict];
           }
         } // end loop over results
       } // end if [results count] > 0
@@ -368,21 +385,31 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           
           NSMutableDictionary *dict = [NSMutableDictionary dictionary];
           dict[@"index"] = [NSNumber numberWithInteger:r.location];
-          NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+          NSMutableAttributedString *lineString = nil;
+          NSArray *lines = nil;
+          
+          if (showLineNumbers) {
+            lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+          }
+          
           if ([lines count] > 0) {
             dict[@"line"] = [lines[0] valueForKey:@"number"];
-            NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+            lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
             NSRange strRange = NSMakeRange(0, [lineString length]);
             [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:strRange];
-            [lineString appendAttributedString:adisp];
-            if (NSLocationInRange(r.location, currentLineRange)) {
-              dict[@"selected"] = @YES;
-            } else {
-              dict[@"selected"] = @NO;
-            }
-            dict[@"title"] = lineString;
-            [found addObject:dict];
+          } else {
+            dict[@"line"] = @(-1);
+            lineString = [[NSMutableAttributedString alloc] initWithString:@""];
           }
+          
+          [lineString appendAttributedString:adisp];
+          if (NSLocationInRange(r.location, currentLineRange)) {
+            dict[@"selected"] = @YES;
+          } else {
+            dict[@"selected"] = @NO;
+          }
+          dict[@"title"] = lineString;
+          [found addObject:dict];
         } // end loop over results
       } // end if [results count] > 0
     }
@@ -392,7 +419,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	// add bib items
   if ([[defaults valueForKey:TEJumpBarShowBibItems] boolValue] == YES) {
     
-    NSString *regexp = @"\\@.*\\{.*,";
+    NSString *regexp = @"\\@[a-zA-Z]+\\{.*,";
     NSArray *ranges = [TPRegularExpression rangesMatching:regexp inText:string];
     //  NSLog(@"Bib search results: %@", searchResults);
     if ([ranges count] > 0) {
@@ -446,23 +473,32 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"index"] = [NSNumber numberWithInteger:r.location];
-        NSArray *lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+        NSArray *lines = nil;
+        if (showLineNumbers) {
+         lines = [[self.textView attributedString] lineNumbersForTextRange:r];
+        }
+        
+        NSMutableAttributedString *lineString = nil;
         if ([lines count] > 0) {
           dict[@"line"] = [lines[0] valueForKey:@"number"];
-          NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+          lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
           [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineString length])];
-          [lineString appendAttributedString:adisp];
-          dict[@"title"] = lineString;
-          if (NSLocationInRange(r.location, currentLineRange)) {
-            dict[@"selected"] = @YES;
-          } else {
-            dict[@"selected"] = @NO;
-          }
-          [found addObject:dict];
+        } else {
+          dict[@"line"] = @(-1);
+          lineString = [[NSMutableAttributedString alloc] initWithString:@""];
         }
+        
+        [lineString appendAttributedString:adisp];
+        dict[@"title"] = lineString;
+        if (NSLocationInRange(r.location, currentLineRange)) {
+          dict[@"selected"] = @YES;
+        } else {
+          dict[@"selected"] = @NO;
+        }
+        [found addObject:dict];
       }
     }
-    
+  
   }
   
   // add bookmarks
@@ -483,9 +519,17 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
           NSMutableDictionary *dict = [NSMutableDictionary dictionary];
           NSInteger index = [[self.textView attributedString] indexForLineNumber:[b.linenumber integerValue]];
           dict[@"index"] = @(index);
-          dict[@"line"] = b.linenumber;
-          NSMutableAttributedString *lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
-          [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineString length])];
+          
+          NSMutableAttributedString *lineString = nil;
+          if (showLineNumbers) {
+            dict[@"line"] = b.linenumber;
+            lineString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:lineFormat, [dict[@"line"] integerValue]]];
+            [lineString addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineString length])];
+          } else {
+            dict[@"line"] = @(-1);
+            lineString = [[NSMutableAttributedString alloc] initWithString:@""];
+          }
+          
           [lineString appendAttributedString:str];
           dict[@"title"] = lineString;
           if (NSLocationInRange(index, currentLineRange)) {
@@ -500,7 +544,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
   }
 	
 	// sort items by index
-	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"line" ascending:YES];
+	NSSortDescriptor *desc = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	NSArray *results = [found sortedArrayUsingDescriptors:@[desc]];
 	NSMutableArray *current = [NSMutableArray array];
 	for (NSMenuItem *item in [self.popupMenu itemArray]) {
