@@ -105,6 +105,15 @@
   IBOutlet NSButton *activateAllChecksButton;
   IBOutlet NSButton *deactivateAllChecksButton;
   IBOutlet NSButton *defaultChecksButton;
+  
+  IBOutlet NSButton *jumpBarEnabledButton;
+  IBOutlet NSButton *jumpBarShowLineNumbersButton;
+  IBOutlet NSButton *jumpBarShowSectionsButton;
+  IBOutlet NSButton *jumpBarShowMarkingsButton;
+  IBOutlet NSButton *jumpBarShowBibItemsButton;
+  IBOutlet NSButton *jumpBarShowBookmarksButton;
+  
+  
 }
 
 

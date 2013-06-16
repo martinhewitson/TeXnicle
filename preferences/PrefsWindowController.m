@@ -97,6 +97,8 @@
 	[dollarView addSubview:[dollarController view]];
   
 	[self wrapStyleChanged:self];
+  BOOL showJumpBar = [[NSUserDefaults standardUserDefaults] boolForKey:TEJumpBarEnabled];
+  [self setJumpBarUIState:showJumpBar];
   
   // setup engines editor
   self.enginesEditor = [[TPEnginesEditor alloc] init];
@@ -222,6 +224,25 @@
   }
   [enginePopup selectItemWithTitle:[self engineName]];
 }
+
+
+#pragma mark -
+#pragma mark General control
+
+- (IBAction)showJumpbarCheckStateChanged:(id)sender
+{
+  [self setJumpBarUIState:[sender state]];
+}
+
+- (void) setJumpBarUIState:(BOOL)state
+{
+  [jumpBarShowLineNumbersButton setEnabled:state];
+  [jumpBarShowMarkingsButton setEnabled:state];
+  [jumpBarShowSectionsButton setEnabled:state];
+  [jumpBarShowBibItemsButton setEnabled:state];
+  [jumpBarShowBookmarksButton setEnabled:state];
+}
+
 
 #pragma mark -
 #pragma mark Syntax check control
