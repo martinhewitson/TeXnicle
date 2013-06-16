@@ -17,27 +17,27 @@
 - (id)initWithFrame:(NSRect)frameRect pullsDown:(BOOL)flag
 {
   self = [super initWithFrame:frameRect pullsDown:YES];
-    if (self) {
-        [self setBezelStyle:NSRegularSquareBezelStyle];
-        [self setBordered:NO];
-        [self setTitle:@""];
-        [self setPreferredEdge:NSMaxXEdge];
-        _PSMTabBarOverflowPopUpImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"overflowImage"]];
+  if (self) {
+    [self setBezelStyle:NSRegularSquareBezelStyle];
+    [self setBordered:NO];
+    [self setTitle:@""];
+    [self setPreferredEdge:NSMaxXEdge];
+    _PSMTabBarOverflowPopUpImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"overflowImage"]];
 		_PSMTabBarOverflowDownPopUpImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"overflowImagePressed"]];
 		_animatingAlternateImage = NO;
-    }
-    return self;
+  }
+  return self;
 }
 
 
 - (void)drawRect:(NSRect)rect
 {
-    if(_PSMTabBarOverflowPopUpImage == nil){
-        [super drawRect:rect];
-        return;
-    }
+  if(_PSMTabBarOverflowPopUpImage == nil){
+    [super drawRect:rect];
+    return;
+  }
 	
-    NSImage *image = (_down) ? _PSMTabBarOverflowDownPopUpImage : _PSMTabBarOverflowPopUpImage;
+  NSImage *image = (_down) ? _PSMTabBarOverflowDownPopUpImage : _PSMTabBarOverflowPopUpImage;
 	NSSize imageSize = [image size];
 	NSRect bounds = [self bounds];
 	
@@ -99,14 +99,14 @@
 				_animationValue = ANIMATION_STEP;
 				_animationTimer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(animateStep:) userInfo:nil repeats:YES];
 				[[NSRunLoop currentRunLoop] addTimer:_animationTimer forMode:NSEventTrackingRunLoopMode];
-
+        
 			} else {
         if (_animationTimer) {
           [_animationTimer invalidate];
           _animationTimer = nil;
         }
 			}
-
+      
 			[self setNeedsDisplay:YES];
 		}
 	}
@@ -132,23 +132,23 @@
 #pragma mark Archiving
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    if ([aCoder allowsKeyedCoding]) {
-        [aCoder encodeObject:_PSMTabBarOverflowPopUpImage forKey:@"PSMTabBarOverflowPopUpImage"];
-        [aCoder encodeObject:_PSMTabBarOverflowDownPopUpImage forKey:@"PSMTabBarOverflowDownPopUpImage"];
+  [super encodeWithCoder:aCoder];
+  if ([aCoder allowsKeyedCoding]) {
+    [aCoder encodeObject:_PSMTabBarOverflowPopUpImage forKey:@"PSMTabBarOverflowPopUpImage"];
+    [aCoder encodeObject:_PSMTabBarOverflowDownPopUpImage forKey:@"PSMTabBarOverflowDownPopUpImage"];
 		[aCoder encodeBool:_animatingAlternateImage forKey:@"PSMTabBarOverflowAnimatingAlternateImage"];
-    }
+  }
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if ( (self = [super initWithCoder:aDecoder]) ) {
-        if ([aDecoder allowsKeyedCoding]) {
-            _PSMTabBarOverflowPopUpImage = [aDecoder decodeObjectForKey:@"PSMTabBarOverflowPopUpImage"];
-            _PSMTabBarOverflowDownPopUpImage = [aDecoder decodeObjectForKey:@"PSMTabBarOverflowDownPopUpImage"];
+  if ( (self = [super initWithCoder:aDecoder]) ) {
+    if ([aDecoder allowsKeyedCoding]) {
+      _PSMTabBarOverflowPopUpImage = [aDecoder decodeObjectForKey:@"PSMTabBarOverflowPopUpImage"];
+      _PSMTabBarOverflowDownPopUpImage = [aDecoder decodeObjectForKey:@"PSMTabBarOverflowDownPopUpImage"];
 			[self setAnimatingAlternateImage:[aDecoder decodeBoolForKey:@"PSMTabBarOverflowAnimatingAlternateImage"]];
-        }
     }
-    return self;
+  }
+  return self;
 }
 
 @end

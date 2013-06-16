@@ -361,7 +361,7 @@
 										<object class="NSTabView" id="397531503">
 											<reference key="NSNextResponder" ref="282066192"/>
 											<int key="NSvFlags">18</int>
-											<string key="NSFrameSize">{235, 576}</string>
+											<string key="NSFrameSize">{235, 579}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="913435364"/>
@@ -483,7 +483,7 @@
 																			<object class="NSOutlineView" id="433385401">
 																				<reference key="NSNextResponder" ref="688878657"/>
 																				<int key="NSvFlags">4352</int>
-																				<string key="NSFrameSize">{235, 536}</string>
+																				<string key="NSFrameSize">{235, 539}</string>
 																				<reference key="NSSuperview" ref="688878657"/>
 																				<reference key="NSWindow"/>
 																				<reference key="NSNextKeyView" ref="993744224"/>
@@ -581,7 +581,7 @@
 																				<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 																			</object>
 																		</array>
-																		<string key="NSFrameSize">{235, 536}</string>
+																		<string key="NSFrameSize">{235, 539}</string>
 																		<reference key="NSSuperview" ref="821625925"/>
 																		<reference key="NSWindow"/>
 																		<reference key="NSNextKeyView" ref="433385401"/>
@@ -615,7 +615,7 @@
 																		<double key="NSPercent">0.99585062240663902</double>
 																	</object>
 																</array>
-																<string key="NSFrame">{{0, 39}, {235, 536}}</string>
+																<string key="NSFrame">{{0, 39}, {235, 539}}</string>
 																<reference key="NSSuperview" ref="913435364"/>
 																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="688878657"/>
@@ -629,7 +629,7 @@
 																<double key="NSMagnification">1</double>
 															</object>
 														</array>
-														<string key="NSFrameSize">{235, 576}</string>
+														<string key="NSFrameSize">{235, 579}</string>
 														<reference key="NSSuperview" ref="397531503"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="821625925"/>
@@ -821,7 +821,7 @@
 											<reference key="NSNextResponder" ref="282066192"/>
 											<int key="NSvFlags">266</int>
 											<array class="NSMutableArray" key="NSSubviews"/>
-											<string key="NSFrame">{{0, 576}, {235, 25}}</string>
+											<string key="NSFrame">{{0, 579}, {235, 21}}</string>
 											<reference key="NSSuperview" ref="282066192"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="397531503"/>
@@ -857,10 +857,10 @@
 																		<object class="NSButton" id="269132885">
 																			<reference key="NSNextResponder" ref="88865871"/>
 																			<int key="NSvFlags">268</int>
-																			<string key="NSFrame">{{30, 5}, {17, 17}}</string>
+																			<string key="NSFrame">{{30, 3}, {16, 16}}</string>
 																			<reference key="NSSuperview" ref="88865871"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="792010655"/>
+																			<reference key="NSNextKeyView" ref="582867506"/>
 																			<string key="NSReuseIdentifierKey">_NS:9</string>
 																			<bool key="NSEnabled">YES</bool>
 																			<object class="NSButtonCell" key="NSCell" id="981885193">
@@ -890,7 +890,7 @@
 																		<object class="NSButton" id="386051067">
 																			<reference key="NSNextResponder" ref="88865871"/>
 																			<int key="NSvFlags">268</int>
-																			<string key="NSFrame">{{5, 5}, {17, 17}}</string>
+																			<string key="NSFrame">{{5, 3}, {16, 16}}</string>
 																			<reference key="NSSuperview" ref="88865871"/>
 																			<reference key="NSWindow"/>
 																			<reference key="NSNextKeyView" ref="269132885"/>
@@ -921,7 +921,7 @@
 																			<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 																		</object>
 																	</array>
-																	<string key="NSFrame">{{-1, 485}, {57, 25}}</string>
+																	<string key="NSFrame">{{-1, 488}, {60, 21}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="386051067"/>
@@ -931,11 +931,11 @@
 																<object class="NSCustomView" id="582867506">
 																	<reference key="NSNextResponder" ref="9263989"/>
 																	<int key="NSvFlags">266</int>
-																	<string key="NSFrame">{{49, 485}, {464, 25}}</string>
+																	<string key="NSFrame">{{54, 488}, {459, 22}}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="749074883"/>
-																	<string key="NSClassName">PSMTabBarControl</string>
+																	<reference key="NSNextKeyView" ref="792010655"/>
+																	<string key="NSClassName">MMTabBarView</string>
 																</object>
 																<object class="NSCustomView" id="632442715">
 																	<reference key="NSNextResponder" ref="9263989"/>
@@ -943,7 +943,7 @@
 																	<string key="NSFrameSize">{513, 486}</string>
 																	<reference key="NSSuperview" ref="9263989"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="582867506"/>
+																	<reference key="NSNextKeyView" ref="749074883"/>
 																	<string key="NSClassName">NSView</string>
 																</object>
 																<object class="NSCustomView" id="792010655">
@@ -1027,7 +1027,7 @@
 										<object class="NSCustomView" id="913261726">
 											<reference key="NSNextResponder" ref="323224487"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrame">{{0, -1}, {350, 602}}</string>
+											<string key="NSFrame">{{0, -1}, {350, 601}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
@@ -2585,14 +2585,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">backTabButtonPressed:</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="386051067"/>
-					</object>
-					<int key="connectionID">100917</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">forwardTabButtonPressed:</string>
 						<reference key="source" ref="512844837"/>
 						<reference key="destination" ref="269132885"/>
@@ -2662,14 +2654,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="32374643"/>
 					</object>
 					<int key="connectionID">100998</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">_editorSplitView</string>
-						<reference key="source" ref="512844837"/>
-						<reference key="destination" ref="249746137"/>
-					</object>
-					<int key="connectionID">100999</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2774,6 +2758,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="249746137"/>
 					</object>
 					<int key="connectionID">101020</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">toolbar</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="732040264"/>
+					</object>
+					<int key="connectionID">101021</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3106,6 +3098,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="749074883"/>
 					</object>
 					<int key="connectionID">100115</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="582867506"/>
+						<reference key="destination" ref="512844837"/>
+					</object>
+					<int key="connectionID">101022</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -4691,7 +4691,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">101020</int>
+			<int key="maxID">101022</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4720,11 +4720,19 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">PSMTabBarControl</string>
-					<string key="superclassName">NSControl</string>
+					<string key="className">MMTabBarController</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MMTabBarController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MMTabBarView</string>
+					<string key="superclassName">NSView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="delegate">id</string>
-						<string key="partnerView">id</string>
+						<string key="partnerView">NSView</string>
 						<string key="tabView">NSTabView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -4734,7 +4742,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBToOneOutletInfo" key="partnerView">
 							<string key="name">partnerView</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tabView">
 							<string key="name">tabView</string>
@@ -4743,7 +4751,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PSMTabBarControl.h</string>
+						<string key="minorKey">./Classes/MMTabBarView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -5001,7 +5009,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="openWithSystemPDFViewer:">id</string>
 						<string key="pasteAsImage:">id</string>
 						<string key="previousBookmark:">id</string>
-						<string key="printDocument:">id</string>
 						<string key="reloadCurrentFileFromDisk:">id</string>
 						<string key="removeBookmarkAtCurrentLine:">id</string>
 						<string key="removeItem:">id</string>
@@ -5019,7 +5026,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="showIntegratedPDFViewer:">id</string>
 						<string key="toggleBookmark:">id</string>
 						<string key="togglePanelFocus:">id</string>
-						<string key="toggleStatusView:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addBookmarkAtCurrentLine:">
@@ -5162,10 +5168,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">previousBookmark:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="printDocument:">
-							<string key="name">printDocument:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="reloadCurrentFileFromDisk:">
 							<string key="name">reloadCurrentFileFromDisk:</string>
 							<string key="candidateClassName">id</string>
@@ -5234,10 +5236,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">togglePanelFocus:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toggleStatusView:">
-							<string key="name">toggleStatusView:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_newFileSheet">NSWindow</string>
@@ -5272,13 +5270,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="paletteContainverView">NSView</string>
 						<string key="projectItemTreeController">ProjectItemTreeController</string>
 						<string key="projectOutlineView">TPOutlineView</string>
-						<string key="psmTabBarControl">PSMTabBarControl</string>
+						<string key="psmTabBarControl">MMTabBarController</string>
 						<string key="rightView">NSView</string>
 						<string key="spellCheckerContainerView">NSView</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="statusViewContainer">NSView</string>
 						<string key="tabbar">NSTabView</string>
 						<string key="texEditorContainer">NSView</string>
+						<string key="toolbar">NSToolbar</string>
 						<string key="warningsContainerView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -5412,7 +5411,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBToOneOutletInfo" key="psmTabBarControl">
 							<string key="name">psmTabBarControl</string>
-							<string key="candidateClassName">PSMTabBarControl</string>
+							<string key="candidateClassName">MMTabBarController</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightView">
 							<string key="name">rightView</string>
@@ -5438,6 +5437,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="name">texEditorContainer</string>
 							<string key="candidateClassName">NSView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="toolbar">
+							<string key="name">toolbar</string>
+							<string key="candidateClassName">NSToolbar</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="warningsContainerView">
 							<string key="name">warningsContainerView</string>
 							<string key="candidateClassName">NSView</string>
@@ -5452,16 +5455,13 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="className">TeXTextView</string>
 					<string key="superclassName">NSTextView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancelOperation:">id</string>
 						<string key="collapseAll:">id</string>
 						<string key="commentSelection:">id</string>
-						<string key="complete:">id</string>
 						<string key="completeStuff:">id</string>
 						<string key="expandAll:">id</string>
 						<string key="gotoLine:">id</string>
 						<string key="indentSelection:">id</string>
 						<string key="insertInlineMath:">id</string>
-						<string key="insertTable:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
 						<string key="latexFormatBold:">id</string>
@@ -5476,7 +5476,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="latexFormatTypewritter:">id</string>
 						<string key="latexFormatUnderline:">id</string>
 						<string key="pasteTable:">id</string>
-						<string key="presentJumpBar:">id</string>
 						<string key="reformatParagraph:">id</string>
 						<string key="selectParagraph:">id</string>
 						<string key="showSpellingList:">id</string>
@@ -5491,20 +5490,12 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="zoomOut:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancelOperation:">
-							<string key="name">cancelOperation:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="collapseAll:">
 							<string key="name">collapseAll:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="commentSelection:">
 							<string key="name">commentSelection:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="complete:">
-							<string key="name">complete:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="completeStuff:">
@@ -5525,10 +5516,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="insertInlineMath:">
 							<string key="name">insertInlineMath:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="insertTable:">
-							<string key="name">insertTable:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToNextPlaceholder:">
@@ -5585,10 +5572,6 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="pasteTable:">
 							<string key="name">pasteTable:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="presentJumpBar:">
-							<string key="name">presentJumpBar:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="reformatParagraph:">

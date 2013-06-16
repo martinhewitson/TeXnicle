@@ -3,7 +3,7 @@
 \f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
 \red39\green78\blue192;\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red141\green17\blue0;
-\red34\green68\blue141;\red92\green38\blue153;}
+\red92\green38\blue153;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
@@ -215,11 +215,9 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 
 \f3 \cf9 I have a feature request related to the "tab bar" (the horizontal list of open documents above the editor window) in TeXnicle. If you open a lot of documents, you will come to the situation that not all documents are displayed in the tab bar. The documents which are not displayed in the bar are displayed in a little list, when you push the button with the two arrows to the right. That's perfectly fine, but when I try to close one of the documents in that list I don't see a fast and easy way to do that. The documents in the tab bar have a little x-button to the left, which closes the document, but the documents in the list don't have such a button. When I want to close such a document, I had to close documents in the tab bar first until the desired document appeared in the tab bar and after closing that document I had to open the documents I had closed before. That's not very efficient.\
 \
-A second request: In TeXnicle you have a really nice "document outline window" in the "navigator's pane", but this window only shows sections, when you use the standard section commands (\\chapter, \\section and so on). In ConTeXt you can easily define own section commands which are not displayed there. So it would be very helpful (at least for me), if there existed a way to edit the list of displayed section-commands, so that you can add own section-commands to that list. Instead of (\\chapter), (\\section),... , I would like to have (\\chapter, \\OwnChapter1, \\OwnChapter2), (\\section, \\OwnSection1, \\OwnSection2), ..., so that every command between the brackets () result in the same outline-category in the outline window.\
 \pard\pardeftab720
 
-\f4 \cf7 \
-Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
+\f4 \cf7 Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
 it appears that pdf page number are wrong when I had 4 pages and now only one it still display 1 of 4 pages.\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -234,10 +232,6 @@ it appears that pdf page number are wrong when I had 4 pages and now only one it
 
 \f4 \cf0 \
 \pard\pardeftab720
-\cf10 The page column is hidden by default, I would like to see it remember the state (or at least some static toggle in settings?) I want to use it 24/7, so the need to enable it every time I launch Texnicle isn't optimal.\
-\
-What comes to Live Update feature, it is also disabled by default. Maybe it should remember the state also?\
-\pard\pardeftab720
 
 \f0 \cf0 \
 ** Bug in number of runs spinner \
@@ -247,8 +241,7 @@ What comes to Live Update feature, it is also disabled by default. Maybe it shou
 \f1 \cf0 - hide the navigators with a keyboard shortcut.
 \f0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 + Support \\subfile\
-\
+\cf0 \
 + Make metadata views for figures, tables\
 \
 Unit tests for core data model entities\
@@ -258,11 +251,20 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf11 NSRange\cf0 )indentRangeForLineAtIndex:(\cf11 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf10 NSRange\cf0 )indentRangeForLineAtIndex:(\cf10 NSInteger\cf0 )loc\
+\
+* support arbitrary section commands and colors\
+\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 Version 2.0.9\
 -------------\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 * Support \\subfile\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 * remember live update setting\
+* remember pdf thumbnails setting\
 \
 + Jump bar changes:\
 	- Added option to enable/disable jumpbar in general preferences.\

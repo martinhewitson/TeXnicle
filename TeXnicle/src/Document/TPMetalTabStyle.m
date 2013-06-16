@@ -28,6 +28,7 @@
 #import "TPMetalTabStyle.h"
 #import "PSMTabBarCell.h"
 #import "PSMTabBarControl.h"
+#import "externs.h"
 
 #define kTPMetalObjectCounterRadius 7.0
 #define kTPMetalCounterMinWidth 20
@@ -70,17 +71,18 @@
 
 - (CGFloat)leftMarginForTabBarControl
 {
-	return 10.0f;
+	return 4.0f;
 }
 
 - (CGFloat)rightMarginForTabBarControl
 {
+//  return 0.0f;
 	return 24.0f;
 }
 
 - (CGFloat)topMarginForTabBarControl
 {
-	return 10.0f;
+	return 0.0f;
 }
 
 - (void)setOrientation:(PSMTabBarOrientation)value
@@ -150,6 +152,8 @@
 
 - (NSRect)iconRectForTabCell:(PSMTabBarCell *)cell
 {
+  return NSZeroRect;
+  
 	NSRect cellFrame = [cell frame];
 	
 	if ([cell hasIcon] == NO) {
@@ -232,9 +236,9 @@
 	}
 	
 	// icon?
-	if ([cell hasIcon]) {
-		resultWidth += kPSMTabBarIconWidth + kPSMTabBarCellPadding;
-	}
+//	if ([cell hasIcon]) {
+//		resultWidth += kPSMTabBarIconWidth + kPSMTabBarCellPadding;
+//	}
 	
 	// the label
 	resultWidth += kPSMMinimumTitleWidth;
@@ -245,8 +249,8 @@
 	}
 	
 	// indicator?
-	if ([[cell indicator] isHidden] == NO)
-		resultWidth += kPSMTabBarCellPadding + kPSMTabBarIndicatorWidth;
+//	if ([[cell indicator] isHidden] == NO)
+//		resultWidth += kPSMTabBarCellPadding + kPSMTabBarIndicatorWidth;
 	
 	// right margin
 	resultWidth += MARGIN_X;
@@ -266,9 +270,9 @@
 		resultWidth += [metalCloseButton size].width + kPSMTabBarCellPadding;
 	
 	// icon?
-	if ([cell hasIcon]) {
-		resultWidth += kPSMTabBarIconWidth + kPSMTabBarCellPadding;
-	}
+//	if ([cell hasIcon]) {
+//		resultWidth += kPSMTabBarIconWidth + kPSMTabBarCellPadding;
+//	}
 	
 	// the label
 	resultWidth += [[cell attributedStringValue] size].width;
@@ -279,8 +283,8 @@
 	}
 	
 	// indicator?
-	if ([[cell indicator] isHidden] == NO)
-		resultWidth += kPSMTabBarCellPadding + kPSMTabBarIndicatorWidth;
+//	if ([[cell indicator] isHidden] == NO)
+//		resultWidth += kPSMTabBarCellPadding + kPSMTabBarIndicatorWidth;
 	
 	// right margin
 	resultWidth += MARGIN_X;
@@ -344,6 +348,8 @@
 
 - (void)drawTabCell:(PSMTabBarCell *)cell
 {
+  BOOL showJumpBar = [[NSUserDefaults standardUserDefaults] boolForKey:TEJumpBarEnabled];
+  
 	NSRect cellFrame = [cell frame];	
 	NSColor *lineColor = nil;
 	NSBezierPath *bezier = [NSBezierPath bezierPath];
@@ -360,63 +366,37 @@
 			NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height);
 			
 			// background
-			aRect.origin.x += 1.0;
-			aRect.size.width--;
-			aRect.size.height -= 0.5;
-			
-			CGFloat cval = 235.0/255.0;
+			CGFloat cval = 237.0/255.0;
+      if (showJumpBar == NO) {
+        cval = 255.0/255.0;
+      }
 			[[NSColor colorWithDeviceRed:cval
 														 green:cval
 															blue:cval
 														 alpha:1.0] set];
-//			[[NSColor colorWithCalibratedRed:cval
-//																 green:cval
-//																	blue:cval
-//																 alpha:1.0] set];
-//			[[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] set];
 			NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
-//			NSDrawWindowBackground(aRect);
-			aRect.size.width++;
-			aRect.size.height += 0.5;
 			
 			// frame
-			aRect.origin.x -= 0.5;
 			[lineColor set];
 			[bezier setLineWidth:1.0];
+      
+      // left line
 			[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
 			[bezier lineToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y+aRect.size.height)];
-//			[bezier lineToPoint:NSMakePoint(aRect.origin.x+1.5, aRect.origin.y+aRect.size.height)];
 			
-			[bezier moveToPoint:NSMakePoint(aRect.origin.x+aRect.size.width, aRect.origin.y+aRect.size.height)];
-//			[bezier lineToPoint:NSMakePoint(aRect.origin.x+aRect.size.width-2.5, aRect.origin.y+aRect.size.height)];
+      // right line
+			[bezier moveToPoint:NSMakePoint(aRect.origin.x+aRect.size.width-1, aRect.origin.y+aRect.size.height)];
+			[bezier lineToPoint:NSMakePoint(aRect.origin.x+aRect.size.width-1, aRect.origin.y)];
 			
-//			[bezier lineToPoint:NSMakePoint(aRect.origin.x+aRect.size.width, aRect.origin.y+aRect.size.height-1.5)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x+aRect.size.width, aRect.origin.y)];
-			
+      // bottom line
+			[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
+			[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y)];
+      
 			if ([[cell controlView] frame].size.height < 2) {
 				// special case of hidden control; need line across top of cell
 				[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y+0.5)];
 				[bezier lineToPoint:NSMakePoint(aRect.origin.x+aRect.size.width, aRect.origin.y+0.5)];
 			}
-		} else {
-			NSRect aRect = NSMakeRect(cellFrame.origin.x + 2, cellFrame.origin.y, cellFrame.size.width - 2, cellFrame.size.height);
-			
-			// background
-			aRect.origin.x++;
-			aRect.size.height--;
-			NSDrawWindowBackground(aRect);
-			aRect.origin.x--;
-			aRect.size.height++;
-			
-			// frame
-			[lineColor set];
-			[bezier setLineWidth:1.0];
-			[bezier moveToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x + 2, aRect.origin.y)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x + 0.5, aRect.origin.y + 2)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x + 0.5, aRect.origin.y + aRect.size.height - 3)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x + 3, aRect.origin.y + aRect.size.height)];
-			[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y + aRect.size.height)];
 		}
 		
 		[bezier stroke];
@@ -424,45 +404,31 @@
 		
 		// unselected tab
 		NSRect aRect = NSMakeRect(cellFrame.origin.x, cellFrame.origin.y, cellFrame.size.width, cellFrame.size.height);
-		aRect.origin.y += 0.5;
-		aRect.origin.x += 1.5;
-		aRect.size.width -= 1;
 		
 		// rollover
-		[[NSColor lightGrayColor] set];
-//		[[[NSColor windowBackgroundColor] highlightWithLevel:0.1] set];
+    CGFloat cval = 210.0/255.0;
+    [[NSColor colorWithDeviceRed:cval
+                           green:cval
+                            blue:cval
+                           alpha:1.0] set];
+    
 		NSRectFill(aRect);
-//		NSDrawWindowBackground(aRect);
 		if ([cell isHighlighted]) {
 			[[NSColor colorWithCalibratedWhite:0.0 alpha:0.2] set];
 			NSRectFillUsingOperation(aRect, NSCompositeSourceAtop);
 		}
-		
-
-		
+				
 		[lineColor set];
 		
-		if (orientation == PSMTabBarHorizontalOrientation) {
-			aRect.origin.x -= 1;
-			aRect.size.width += 1;
-			
+		if (orientation == PSMTabBarHorizontalOrientation) {			
 			// frame
 			[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
 			[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y)];
 			if (!([cell tabState] & PSMTab_RightIsSelectedMask)) {
 				[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y + aRect.size.height)];
 			}
-		} else {
-			if (!([cell tabState] & PSMTab_LeftIsSelectedMask)) {
-				[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
-				[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y)];
-			}
-			
-			if (!([cell tabState] & PSMTab_RightIsSelectedMask)) {
-				[bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y + aRect.size.height)];
-				[bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y + aRect.size.height)];
-			}
 		}
+    
 		[bezier stroke];
 	}
 	

@@ -60,8 +60,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) setup
 {
-	[self.tabBar setStyleNamed:@"TPMetal"];
-	[self.tabBar setOrientation:PSMTabBarHorizontalOrientation];
+	[self.tabBar setStyleNamed:@"Safari"];
+	[self.tabBar setOrientation:MMTabBarHorizontalOrientation];
 	[self.tabBar setAutomaticallyAnimates:YES];
 	[self.tabBar setCanCloseOnlyTab:YES];
 	[self.tabBar setHideForSingleTab:NO];

@@ -29,6 +29,7 @@
 #import "PSMTabBarControl.h"
 #import "TeXEditorViewController.h"
 #import "TPImageViewerController.h"
+#import "MMTabBarView.h"
 
 extern NSString * const TPOpenDocumentsDidChangeFileNotification;
 extern NSString * const TPOpenDocumentsDidAddFileNotification;
@@ -60,7 +61,7 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 @property (unsafe_unretained) IBOutlet id<OpenDocumentsManagerDelegate> delegate;
 @property (unsafe_unretained) IBOutlet NSTabView *tabView;
-@property (unsafe_unretained) IBOutlet PSMTabBarControl *tabBar;
+@property (unsafe_unretained) IBOutlet MMTabBarView *tabBar;
 @property (unsafe_unretained) IBOutlet NSBox *tabBackground;
 
 @property (unsafe_unretained) TeXEditorViewController *texEditorViewController;

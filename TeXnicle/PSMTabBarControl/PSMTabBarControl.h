@@ -20,11 +20,11 @@
 #define MARGIN_X        8
 #define MARGIN_Y        3
 // padding between objects
-#define kPSMTabBarCellPadding 4
+#define kPSMTabBarCellPadding 0
 // fixed size objects
-#define kPSMMinimumTitleWidth 60
+#define kPSMMinimumTitleWidth 40
 #define kPSMTabBarIndicatorWidth 16.0
-#define kPSMTabBarIconWidth 16.0
+#define kPSMTabBarIconWidth 0.0
 #define kPSMHideAnimationSteps 3.0
 
 // Value used in _currentStep to indicate that resizing operation is not in progress

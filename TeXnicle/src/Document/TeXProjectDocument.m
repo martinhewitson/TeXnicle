@@ -62,6 +62,7 @@
 #import "NSAttributedString+Placeholders.h"
 #import "NSDictionary+TeXnicle.h"
 #import "TPFileMetadata.h"
+#import "MMTabBarController.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -71,6 +72,7 @@
 
 @property (assign) BOOL navigatingHistory;
 @property (readonly) BOOL pdfHasSelection;
+
 
 @property (strong) TPProjectTemplateCreator *templateCreator;
 @property (strong) NSMenu *createFolderMenu;
@@ -112,6 +114,7 @@
 @property (unsafe_unretained) IBOutlet NSTabView *controlsTabview;
 @property (unsafe_unretained) IBOutlet NSTabView *infoControlsTabview;
 
+@property (unsafe_unretained) IBOutlet NSToolbar *toolbar;
 @property (unsafe_unretained) IBOutlet NSTabView *tabbar;
 
 @property (unsafe_unretained) IBOutlet HHValidatedButton *backTabButton;
@@ -144,7 +147,7 @@
 @property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
 
 @property (unsafe_unretained) IBOutlet NSView *navButtonsBackground;
-@property (unsafe_unretained) IBOutlet PSMTabBarControl *psmTabBarControl;
+@property (unsafe_unretained) IBOutlet MMTabBarController *psmTabBarControl;
 
 @property (strong) TPDocumentReportWindowController *documentReport;
 
@@ -186,6 +189,11 @@
   
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
 
+  [self.toolbar setAllowsUserCustomization:YES];
+	[self.toolbar setAutosavesConfiguration:YES];
+  [self.toolbar setShowsBaselineSeparator:NO];
+
+  
 }
 
 - (void) stopLiveUpdateTimer
