@@ -494,8 +494,10 @@
 - (void) updatePageCountDisplay
 {
   if (self.pdfview == nil || [self.pdfview document] == nil) {
+    [self.pageCountDisplay setHidden:YES];
     return;
   }
+  [self.pageCountDisplay setHidden:NO];
   
   NSUInteger newPageIndex;
   
