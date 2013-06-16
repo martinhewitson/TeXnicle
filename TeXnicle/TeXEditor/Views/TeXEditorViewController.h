@@ -74,6 +74,7 @@
 - (BOOL) textViewHasSelection;
 - (NSString*)selectedText;
 
+- (void) toggleJumpBar:(BOOL)animate;
 - (void) hideJumpBar;
 - (void) showJumpBar;
 - (void) enableJumpBar;

@@ -151,7 +151,8 @@
              name:TPOpenDocumentsDidChangeFileNotification
            object:nil];
 
-  
+  // set jump bar state
+  [self performSelector:@selector(updateJumpBar) withObject:nil afterDelay:0];
 }
 
 
@@ -254,6 +255,11 @@
   [self.unfoldButton setHidden:NO];
 }
 
+- (void) updateJumpBar
+{
+  [self toggleJumpBar:NO];
+}
+
 - (void) showJumpBar
 {
   [jumpBar setHidden:NO];
@@ -269,6 +275,41 @@
   [jumpBar setHidden:YES];
   [scrollView setFrame:NSMakeRect(fr.origin.x, fr.origin.y, fr.size.width, fr.size.height+jr.size.height)];
 }
+
+- (void) toggleJumpBar:(BOOL)animate
+{
+  BOOL showJumpBar = [[NSUserDefaults standardUserDefaults] boolForKey:TEJumpBarEnabled];
+  
+  NSRect ctfr = [containerView frame];
+  NSRect tefr = [scrollView frame];
+  NSRect svfr = [jumpBar frame];
+  
+  id tec;
+  id sbc;
+  if (animate) {
+    tec = scrollView.animator;
+    sbc = jumpBar.animator;
+  } else {
+    tec = scrollView;
+    sbc = jumpBar;
+  }
+  
+  if (showJumpBar == NO) {
+    // move jumpbar view out
+    [sbc setFrame:NSMakeRect(svfr.origin.x, ctfr.origin.y+ctfr.size.height, svfr.size.width, svfr.size.height)];
+    // stretch  container
+    NSRect newFrame = NSMakeRect(tefr.origin.x, tefr.origin.y, tefr.size.width, ctfr.size.height);
+    //NSLog(@"Change editor container frame to %@", NSStringFromRect(newFrame));
+    [tec setFrame:newFrame];
+  } else {
+    // shrink  container
+    [tec setFrame:NSMakeRect(tefr.origin.x, tefr.origin.y, tefr.size.width, ctfr.size.height-svfr.size.height+1)];
+    // move jumpbar view in
+    [sbc setFrame:NSMakeRect(svfr.origin.x, ctfr.size.height-svfr.size.height+1, svfr.size.width, svfr.size.height)];
+  }
+}
+
+
 
 - (void) enableJumpBar
 {
