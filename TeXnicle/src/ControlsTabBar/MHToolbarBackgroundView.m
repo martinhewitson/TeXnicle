@@ -47,7 +47,7 @@
 	
 	// draw line alone the top
 	NSRect r = [self bounds];
-	[[NSColor blackColor] set];
+	[[NSColor darkGrayColor] set];
 	NSBezierPath *path = [NSBezierPath bezierPath];
 	CGFloat lineWidth = 0.5;
 	[path setLineWidth:lineWidth];

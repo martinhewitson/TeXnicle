@@ -576,11 +576,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //  NSLog(@"Status Commit Done.");
 }
 
-- (BOOL)tabView:(NSTabView*)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(PSMTabBarControl *)tabBarControl
-{
-	return YES;
-}
-
 - (void) disableImageView
 {
   [self enableImageView:NO];

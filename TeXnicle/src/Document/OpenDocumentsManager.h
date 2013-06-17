@@ -26,7 +26,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PSMTabBarControl.h"
 #import "TeXEditorViewController.h"
 #import "TPImageViewerController.h"
 #import "MMTabBarView.h"

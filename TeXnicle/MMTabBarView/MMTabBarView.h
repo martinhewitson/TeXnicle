@@ -15,7 +15,7 @@
 #define MMTabDragDidEndNotification     @"MMTabDragDidEndNotification"
 #define MMTabDragDidBeginNotification   @"MMTabDragDidBeginNotification"
 
-#define kMMTabBarViewHeight             22
+#define kMMTabBarViewHeight             27
 // default inset
 #define MARGIN_X                        6
 #define MARGIN_Y                        3
