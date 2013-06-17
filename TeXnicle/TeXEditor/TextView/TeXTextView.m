@@ -906,8 +906,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyLineSpacingToDocument
 {
+  NSDictionary *currentTypingAtts = [self typingAttributes];
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSParagraphStyle *newPS = atts[NSParagraphStyleAttributeName];
+  NSParagraphStyle *oldPS = currentTypingAtts[NSParagraphStyleAttributeName];
+  
+  if (oldPS.lineHeightMultiple == newPS.lineHeightMultiple)
+    return;
+  
   NSRange r = NSMakeRange(0, [[self string] length]);
   [self.textStorage removeAttribute:NSParagraphStyleAttributeName range:r];
   [self.textStorage addAttribute:NSParagraphStyleAttributeName value:newPS range:r];
