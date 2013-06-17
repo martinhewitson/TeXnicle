@@ -45,5 +45,6 @@
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
 - (BOOL)isCommandBeforeIndex:(NSInteger)anIndex;
 - (NSString*)texString;
+- (BOOL)wordIsIncludeCommand;
 
 @end

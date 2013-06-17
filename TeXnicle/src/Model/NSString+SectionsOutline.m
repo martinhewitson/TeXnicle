@@ -33,6 +33,7 @@
 #import "TPFileMetadata.h"
 #import "ProjectEntity.h"
 #import "MHFileReader.h"
+#import "NSString+LaTeX.h"
 
 #define TP_SECTION_DEBUG 0
 
@@ -124,7 +125,7 @@
             [sectionsFound addObject:section];
           } // end if template is not nil
         } // end if command is not nil        
-      } else if ([word beginsWith:@"\\input{"] || [word beginsWith:@"\\include{"]) {
+      } else if ([word wordIsIncludeCommand]) {
         
 #if TP_SECTION_DEBUG
         NSLog(@"Got include %@", word);

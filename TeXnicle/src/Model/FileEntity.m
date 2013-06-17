@@ -38,6 +38,7 @@
 #import "NSDictionary+TeXnicle.h"
 #import "NSMutableAttributedString+Placeholders.h"
 #import "NSAttributedString+Placeholders.h"
+#import "NSArray_Extensions.h"
 
 @implementation FileEntity
 
@@ -613,8 +614,8 @@
     word = [word stringByTrimmingCharactersInSet:ns];
     
     if ([word characterAtIndex:0] == '\\') {
-      // check file links
-      if ([word hasPrefix:@"\\input{"] || [word hasPrefix:@"\\include{"]) {
+      // check file links      
+      if ([word wordIsIncludeCommand]) {
         NSInteger start = loc-[word length]+1;
         NSInteger end   = start;
         NSString *filePath = [string parseArgumentStartingAt:&end];

@@ -30,6 +30,7 @@
 #import "MHFileReader.h"
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
+#import "NSArray_Extensions.h"
 
 static NSCharacterSet *controlFilterChars = nil;
 
@@ -625,6 +626,21 @@ static NSCharacterSet *controlFilterChars = nil;
   }
   
   return nil;
+}
+
+
+- (BOOL)wordIsIncludeCommand
+{
+  NSArray *inputCmds = [NSArray texIncludeCommandsSearchStrings];
+  BOOL wordIsCommand = NO;
+  for (NSString *cmd in inputCmds) {
+    if ([self hasPrefix:cmd]) {
+      wordIsCommand = YES;
+      break;
+    }
+  }
+
+  return wordIsCommand;
 }
 
 @end

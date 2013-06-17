@@ -39,6 +39,7 @@
 #import "NSString+FileTypes.h"
 #import "TPProjectBuilderReport.h"
 #import "TPRegularExpression.h"
+#import "NSArray_Extensions.h"
 
 @interface TPProjectBuilder ()
 
@@ -241,7 +242,7 @@
 // The tags to search for.
 - (NSArray*)includeTags
 {
-  return @[@"\\input{", @"\\include{", @"\\includegraphics"];
+  return [[NSArray texIncludeCommandsSearchStrings] arrayByAddingObject:@"\\includegraphics"];
 }
 
 // follow all includes etc from main file and populate the document project

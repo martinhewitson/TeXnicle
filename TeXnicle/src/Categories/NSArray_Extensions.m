@@ -41,4 +41,20 @@
 	return self[0];
 }
 
+
++ (NSArray*)texIncludeCommands
+{
+  return @[@"input", @"include", @"subfile"];
+}
+
++ (NSArray*)texIncludeCommandsSearchStrings
+{
+  NSMutableArray *cmds = [NSMutableArray array];
+  for (NSString *str in [NSArray texIncludeCommands]) {
+    [cmds addObject:[NSString stringWithFormat:@"\\%@{", str]];
+  }
+  return [NSArray arrayWithArray:cmds];
+}
+
+
 @end

@@ -34,5 +34,9 @@
 
 
 @interface NSArray (ESExtensions)
+
 - (id)firstObject;
++ (NSArray*)texIncludeCommands;
++ (NSArray*)texIncludeCommandsSearchStrings;
+
 @end
