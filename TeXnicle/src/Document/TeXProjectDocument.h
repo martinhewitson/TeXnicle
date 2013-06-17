@@ -126,6 +126,8 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 - (IBAction) showIntegratedPDFViewer:(id)sender;
 - (IBAction) showIntegratedConsole:(id)sender;
 
+- (IBAction)backTabButtonPressed:(id)sender;
+- (IBAction)forwardTabButtonPressed:(id)sender;
 
 #pragma mark -
 #pragma mark Notification Handlers

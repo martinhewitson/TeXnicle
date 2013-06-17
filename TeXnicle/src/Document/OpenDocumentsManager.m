@@ -65,6 +65,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.tabBar setAutomaticallyAnimates:YES];
 	[self.tabBar setCanCloseOnlyTab:YES];
 	[self.tabBar setHideForSingleTab:NO];
+  [self.tabBar setShowAddTabButton:YES];
+  [self.tabBar setCanCloseOnlyTab:YES];
+  [self.tabBar setOnlyShowCloseOnHover:YES];
+  [self.tabBar setDisableTabClose:NO];
 	
 	_isOpening = NO;
 		
@@ -430,7 +434,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem;
 {
-//	NSLog(@"Should close tab for %@", [currentDoc name]);
+//	NSLog(@"Should close tab for %@", [self.currentDoc name]);
 	[self saveCursorAndScrollPosition];
 	return YES;
 }

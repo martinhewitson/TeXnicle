@@ -1653,7 +1653,7 @@
   }
   
   NSInteger historyLength = [self.tabHistory count];
-//  NSLog(@"History length %d", historyLength);
+//  NSLog(@"History length %ld", historyLength);
 //  NSLog(@"Current index %ld", self.currentTabHistoryIndex);
   FileEntity *file = [[aNote userInfo] valueForKey:@"file"];
   if (file) {

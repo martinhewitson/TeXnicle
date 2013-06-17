@@ -117,7 +117,9 @@
   
   // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
   self.pdfViewerController = [[PDFViewerController alloc] initWithDelegate:self];
-  [self.pdfViewerController.view setFrame:[self.containerView bounds]];
+  NSRect fr = [self.containerView bounds];
+  fr.size.height++;
+  [self.pdfViewerController.view setFrame:fr];
   [self.containerView addSubview:self.pdfViewerController.view];
   [self.pdfViewerController showViewer];
   [self redisplayDocument];

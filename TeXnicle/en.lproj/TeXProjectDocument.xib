@@ -1030,6 +1030,7 @@
 											<string key="NSFrame">{{0, -1}, {350, 601}}</string>
 											<reference key="NSSuperview" ref="323224487"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:499</string>
 											<string key="NSClassName">NSView</string>
 										</object>
@@ -1479,6 +1480,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{519, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="332651160"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="1061418400">
@@ -1684,6 +1686,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{517, 12}, {98, 32}}</string>
 							<reference key="NSSuperview" ref="813464030"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="927820536">
@@ -2133,6 +2136,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{363, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="410455195"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="341070024">
@@ -2305,6 +2309,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<string key="NSFrame">{{356, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="770718626"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="738390809">
 								<int key="NSCellFlags">67108864</int>
@@ -2766,6 +2771,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="732040264"/>
 					</object>
 					<int key="connectionID">101021</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">backTabButtonPressed:</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="386051067"/>
+					</object>
+					<int key="connectionID">101023</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -4691,7 +4704,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">101022</int>
+			<int key="maxID">101023</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4979,6 +4992,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="addExistingFileToSelectedFolder:">id</string>
 						<string key="addExistingFolder:">id</string>
 						<string key="addNewFolder:">id</string>
+						<string key="backTabButtonPressed:">id</string>
 						<string key="buildAndView:">id</string>
 						<string key="buildProject:">id</string>
 						<string key="cancelCompile:">id</string>
@@ -4993,6 +5007,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="endRenameSheet:">id</string>
 						<string key="findCorrespondingPDFText:">id</string>
 						<string key="findSource:">id</string>
+						<string key="forwardTabButtonPressed:">id</string>
 						<string key="jumpToMainFile:">id</string>
 						<string key="jumpToSelectedBookmark:">id</string>
 						<string key="liveUpdate:">id</string>
@@ -5046,6 +5061,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="addNewFolder:">
 							<string key="name">addNewFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backTabButtonPressed:">
+							<string key="name">backTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="buildAndView:">
@@ -5102,6 +5121,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="findSource:">
 							<string key="name">findSource:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forwardTabButtonPressed:">
+							<string key="name">forwardTabButtonPressed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="jumpToMainFile:">
