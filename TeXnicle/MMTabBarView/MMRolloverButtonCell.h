@@ -23,7 +23,7 @@ typedef enum MMRolloverButtonType : NSUInteger
 }
 
 @property (readonly) BOOL mouseHovered;
-@property (retain) NSImage *rolloverImage;
+@property (strong) NSImage *rolloverImage;
 @property (assign) MMRolloverButtonType rolloverButtonType;
 @property (assign) BOOL simulateClickOnMouseHovered;
 

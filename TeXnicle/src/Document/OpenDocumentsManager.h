@@ -45,7 +45,7 @@ extern NSString * const TPOpenDocumentsDidAddFileNotification;
 
 @end
 
-@interface OpenDocumentsManager : NSResponder {
+@interface OpenDocumentsManager : NSResponder <MMTabBarViewDelegate> {
 
 @private
   

@@ -53,15 +53,9 @@
 
     NSAssert(FALSE,@"please use designated initializer -initWithFrame:tabViewItem:");
 
-//    [self release];
     return nil;
 }
 
-//- (void)dealloc
-//{
-//    _tabViewItem = nil;
-//    [super dealloc];
-//}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];

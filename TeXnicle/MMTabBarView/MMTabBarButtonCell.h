@@ -66,13 +66,13 @@ typedef enum MMTabStateMask : NSUInteger {
 	BOOL					_closeButtonOver;
 }
 
-@property (retain) id <MMTabStyle> style;
+@property (strong) id <MMTabStyle> style;
 
-@property (retain) NSImage *icon;
-@property (retain) NSImage *largeImage;
+@property (strong) NSImage *icon;
+@property (strong) NSImage *largeImage;
 @property (assign) BOOL showObjectCount;
 @property (assign) NSInteger objectCount;
-@property (retain) NSColor *objectCountColor;
+@property (strong) NSColor *objectCountColor;
 @property (assign) BOOL isEdited;
 @property (assign) BOOL isProcessing;
 

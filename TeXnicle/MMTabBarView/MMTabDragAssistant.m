@@ -88,17 +88,14 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
 	return self;
 }
 
-//- (void)dealloc {
-//    if (_slideButtonsAnimation) {
-//        [_slideButtonsAnimation stopAnimation];
-//        _slideButtonsAnimation = nil;
-//    }
-//
-//	[_destinationTabBar release], _destinationTabBar = nil;
-//    [_pasteboardItem release], _pasteboardItem = nil;
-//    
-//	[super dealloc];
-//}
+- (void)dealloc {
+    if (_slideButtonsAnimation) {
+        [_slideButtonsAnimation stopAnimation];
+        _slideButtonsAnimation = nil;
+    }
+
+    
+}
 
 #pragma mark -
 #pragma mark Dragging Source Handling
@@ -790,7 +787,8 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
 
         [self setIsSliding:NO];
         [aButton setIsInDraggedSlide:NO];
-      
+        
+            
         [self _dragDetachedButton:aButton ofTabBarView:tabBarView withEvent:firstEvent pasteboard:pboard source:sourceObject];
         
     } else {

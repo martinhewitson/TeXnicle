@@ -59,9 +59,9 @@
 }
 
 @property (assign) NSRect stackingFrame;
-@property (retain) MMRolloverButton *closeButton;
+@property (strong) MMRolloverButton *closeButton;
 @property (assign) SEL closeButtonAction;
-@property (readonly, retain) MMProgressIndicator *indicator;
+@property (readonly, strong) MMProgressIndicator *indicator;
 
 - (id)initWithFrame:(NSRect)frame;
 

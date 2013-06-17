@@ -27,11 +27,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ProjectItemEntity.h"
+#import "MMTabBarItem.h"
 
 @class FileDocument;
 @class Bookmark;
 
-@interface FileEntity : ProjectItemEntity {
+@interface FileEntity : ProjectItemEntity <MMTabBarItem> {
 
 	FileDocument *document;
 	BOOL _hasEdits;

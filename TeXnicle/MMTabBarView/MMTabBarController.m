@@ -37,11 +37,10 @@
 	return self;
 }
 
-//- (void)dealloc {
-//
-//    _tabBarView = nil; // non retained!
-//	[super dealloc];
-//}
+- (void)dealloc {
+
+    _tabBarView = nil; // non retained!
+}
 
 /*!
     @method     overflowMenu
@@ -104,12 +103,6 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 }
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)menuItem atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel {
-	if (menu == _overflowMenu) {
-		if ([[[menuItem representedObject] identifier] respondsToSelector:@selector(icon)]) {
-			[menuItem setImage:[[[menuItem representedObject] identifier] valueForKey:@"icon"]];
-		}
-	}
-
 	return TRUE;
 }
 

@@ -18,11 +18,6 @@
 	return self;
 }
 
-//- (void)dealloc {
-//	[_image release];
-//	[_alternateImage release];
-//	[super dealloc];
-//}
 
 - (void)drawRect:(NSRect)rect {
 	//1.0 fade means show the primary image
@@ -46,7 +41,6 @@
 }
 
 - (void)setImage:(NSImage *)image {
-//	[_image release];
 	_image = image;
 }
 

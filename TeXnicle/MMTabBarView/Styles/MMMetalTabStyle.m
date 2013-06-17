@@ -354,12 +354,12 @@ StaticImage(TabNewMetalRollover)
 	// self = [super initWithCoder:aDecoder];
 	//if (self) {
 	if ([aDecoder allowsKeyedCoding]) {
-		metalCloseButton = [aDecoder decodeObjectForKey:@"metalCloseButton"] ;
-		metalCloseButtonDown = [aDecoder decodeObjectForKey:@"metalCloseButtonDown"] ;
-		metalCloseButtonOver = [aDecoder decodeObjectForKey:@"metalCloseButtonOver"] ;
-		metalCloseDirtyButton = [aDecoder decodeObjectForKey:@"metalCloseDirtyButton"] ;
-		metalCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"metalCloseDirtyButtonDown"] ;
-		metalCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"metalCloseDirtyButtonOver"] ;
+		metalCloseButton = [aDecoder decodeObjectForKey:@"metalCloseButton"];
+		metalCloseButtonDown = [aDecoder decodeObjectForKey:@"metalCloseButtonDown"];
+		metalCloseButtonOver = [aDecoder decodeObjectForKey:@"metalCloseButtonOver"];
+		metalCloseDirtyButton = [aDecoder decodeObjectForKey:@"metalCloseDirtyButton"];
+		metalCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"metalCloseDirtyButtonDown"];
+		metalCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"metalCloseDirtyButtonOver"];
 	}
 	//}
 	return self;

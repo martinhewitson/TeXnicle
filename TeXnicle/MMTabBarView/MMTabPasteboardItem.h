@@ -18,8 +18,8 @@
     NSUInteger _sourceIndex;
 }
 
-@property (retain) MMTabBarView *sourceTabBar;
-@property (retain) MMAttachedTabBarButton *attachedTabBarButton;
+@property (strong) MMTabBarView *sourceTabBar;
+@property (strong) MMAttachedTabBarButton *attachedTabBarButton;
 @property (assign) NSUInteger sourceIndex;
 
 @end

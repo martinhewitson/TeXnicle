@@ -292,12 +292,12 @@
 	// self = [super initWithCoder:aDecoder];
 	//if (self) {
 	if ([aDecoder allowsKeyedCoding]) {
-		unifiedCloseButton = [aDecoder decodeObjectForKey:@"unifiedCloseButton"] ;
-		unifiedCloseButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseButtonDown"] ;
-		unifiedCloseButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseButtonOver"] ;
-		unifiedCloseDirtyButton = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButton"] ;
-		unifiedCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonDown"] ;
-		unifiedCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonOver"] ;
+		unifiedCloseButton = [aDecoder decodeObjectForKey:@"unifiedCloseButton"];
+		unifiedCloseButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseButtonDown"];
+		unifiedCloseButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseButtonOver"];
+		unifiedCloseDirtyButton = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButton"];
+		unifiedCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonDown"];
+		unifiedCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"unifiedCloseDirtyButtonOver"];
 	}
 	//}
 	return self;

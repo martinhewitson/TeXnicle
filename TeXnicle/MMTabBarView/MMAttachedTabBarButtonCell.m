@@ -21,9 +21,6 @@
 	return self;
 }
 
-//- (void)dealloc {
-//    [super dealloc];
-//}
 
 - (MMAttachedTabBarButton *)controlView {
     return (MMAttachedTabBarButton *)[super controlView];

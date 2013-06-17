@@ -23,7 +23,7 @@
     BOOL _isInDraggedSlide;
 }
 
-@property (retain) NSTabViewItem *tabViewItem;
+@property (strong) NSTabViewItem *tabViewItem;
 @property (assign) NSRect slidingFrame;
 @property (readonly) BOOL isInAnimatedSlide;
 @property (assign) BOOL isInDraggedSlide;

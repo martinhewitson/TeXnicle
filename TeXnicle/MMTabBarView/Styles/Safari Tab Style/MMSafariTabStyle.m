@@ -219,6 +219,11 @@ StaticImage(SafariIWITRightCap)
 */    
 }
 
+- (NSRect)iconRectForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell
+{
+  return NSZeroRect;
+}
+
 - (NSRect)closeButtonRectForBounds:(NSRect)theRect ofTabCell:(MMTabBarButtonCell *)cell {
     
     NSRect rect = [cell _closeButtonRectForBounds:theRect];

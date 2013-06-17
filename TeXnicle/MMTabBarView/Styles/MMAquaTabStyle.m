@@ -276,18 +276,18 @@
 	//self = [super initWithCoder:aDecoder];
 	//if (self) {
 	if ([aDecoder allowsKeyedCoding]) {
-		aquaTabBg = [aDecoder decodeObjectForKey:@"aquaTabBg"] ;
-		aquaTabBgDown = [aDecoder decodeObjectForKey:@"aquaTabBgDown"] ;
-		aquaTabBgDownGraphite = [aDecoder decodeObjectForKey:@"aquaTabBgDownGraphite"] ;
-		aquaTabBgDownNonKey = [aDecoder decodeObjectForKey:@"aquaTabBgDownNonKey"] ;
-		aquaDividerDown = [aDecoder decodeObjectForKey:@"aquaDividerDown"] ;
-		aquaDivider = [aDecoder decodeObjectForKey:@"aquaDivider"] ;
-		aquaCloseButton = [aDecoder decodeObjectForKey:@"aquaCloseButton"] ;
-		aquaCloseButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseButtonDown"] ;
-		aquaCloseButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseButtonOver"] ;
-		aquaCloseDirtyButton = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButton"] ;
-		aquaCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonDown"] ;
-		aquaCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonOver"] ;
+		aquaTabBg = [aDecoder decodeObjectForKey:@"aquaTabBg"];
+		aquaTabBgDown = [aDecoder decodeObjectForKey:@"aquaTabBgDown"];
+		aquaTabBgDownGraphite = [aDecoder decodeObjectForKey:@"aquaTabBgDownGraphite"];
+		aquaTabBgDownNonKey = [aDecoder decodeObjectForKey:@"aquaTabBgDownNonKey"];
+		aquaDividerDown = [aDecoder decodeObjectForKey:@"aquaDividerDown"];
+		aquaDivider = [aDecoder decodeObjectForKey:@"aquaDivider"];
+		aquaCloseButton = [aDecoder decodeObjectForKey:@"aquaCloseButton"];
+		aquaCloseButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseButtonDown"];
+		aquaCloseButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseButtonOver"];
+		aquaCloseDirtyButton = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButton"];
+		aquaCloseDirtyButtonDown = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonDown"];
+		aquaCloseDirtyButtonOver = [aDecoder decodeObjectForKey:@"aquaCloseDirtyButtonOver"];
 	}
 	//}
 	return self;

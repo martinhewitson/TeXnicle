@@ -63,13 +63,15 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.tabBar setStyleNamed:@"Safari"];
 	[self.tabBar setOrientation:MMTabBarHorizontalOrientation];
 	[self.tabBar setAutomaticallyAnimates:YES];
-	[self.tabBar setCanCloseOnlyTab:YES];
+	[self.tabBar setCanCloseOnlyTab:NO];
 	[self.tabBar setHideForSingleTab:NO];
-  [self.tabBar setShowAddTabButton:YES];
+  [self.tabBar setShowAddTabButton:NO];
   [self.tabBar setCanCloseOnlyTab:YES];
   [self.tabBar setOnlyShowCloseOnHover:YES];
   [self.tabBar setDisableTabClose:NO];
-	
+  [self.tabBar setAllowsBackgroundTabClosing:YES];
+  [self.tabBar sizeButtonsToFit];
+  
 	_isOpening = NO;
 		
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -139,6 +141,43 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	}	
 }
 
+- (FileEntity *) removeItem:(NSTabViewItem*)tabViewItem
+{
+	// commit the changes to the entity's content
+	FileEntity *file = [tabViewItem identifier];
+	[file updateFromTextStorage];
+	[self.openDocuments removeObject:file];
+  [file setValue:@-1 forKey:@"wasOpen"];
+  //  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
+	//NSLog(@"Removed %@", [file valueForKey:@"name"]);
+  //for (id file in self.openDocuments) {
+  //  NSLog(@"   contains: %@", [file valueForKey:@"name"]);
+	//}
+  
+	// Set another file if this is the selected one and if possible
+  if (file == self.currentDoc) {
+    NSTabViewItem *tabItem = [[self.tabView tabViewItems] lastObject];
+    
+    FileEntity *nextFile = [tabItem identifier];
+    //	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
+    if (nextFile && nextFile != file) {
+      [self setCurrentDoc:nextFile];
+    } else {
+      file.project.selected = nil;
+      [self setCurrentDoc:nil];
+      [self enableImageView:NO];
+      [self disableTextView];
+    }
+  }
+  
+  if ([[self.tabView tabViewItems] containsObject:tabViewItem]) {
+    [self.tabView removeTabViewItem:tabViewItem];
+  }
+  
+  [self.tabBar setNeedsUpdate:YES];
+  
+  return file;
+}
 
 - (void)closeAllTabs
 {
@@ -146,6 +185,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   for (FileEntity *file in openFiles) {
     [self removeTabForDoc:file];
   }
+  //for (NSTabViewItem *tab in [self.tabView tabViewItems]) {
+  //  NSLog(@"   still contains tab: %@", [[tab identifier] valueForKey:@"name"]);
+	//}
   [self performSelectorOnMainThread:@selector(disableEditors) withObject:nil waitUntilDone:YES];
 }
 
@@ -157,7 +199,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) closeCurrentTab
 {
-  [self.tabView removeTabViewItem:[self.tabView selectedTabViewItem]];
+  [self removeItem:[self.tabView selectedTabViewItem]];
 }
 
 - (void) removeDocument:(FileEntity*)aDoc
@@ -172,10 +214,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void) removeTabForDoc:(FileEntity*)aDoc
 {
   NSInteger index = [self.tabView indexOfTabViewItemWithIdentifier:aDoc];
+  //NSLog(@"Removing tab at index %ld", index);
   if (index >= 0 && index < [[self.tabView tabViewItems] count]) {
     NSTabViewItem *item = [self tabViewItemAtIndex:index];
+    //NSLog(@"   removing item %@", item);
     if (item != nil) {
-      [self.tabView removeTabViewItem:item];
+      [self removeItem:item];
     }
   }
 }
@@ -201,11 +245,11 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	if (!self.standaloneWindows)
 		return;
 	
-//	NSLog(@"Managing %ld docs", [openDocuments count]);
-//	NSLog(@"Opening %@", [aDoc valueForKey:@"name"]);
-
+	//NSLog(@"Managing %ld docs", [self.openDocuments count]);
+	//NSLog(@"Opening %@", [aDoc valueForKey:@"name"]);
+  
 	NSInteger fileIndex = [self indexOfDocumentWithFile:aDoc];
-//	NSLog(@"Index %d", fileIndex);
+	//NSLog(@"Index %ld", fileIndex);
 	if (fileIndex < 0) {
 		if (![aDoc document]) {
 			return;
@@ -434,41 +478,21 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (BOOL)tabView:(NSTabView *)aTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem;
 {
-//	NSLog(@"Should close tab for %@", [self.currentDoc name]);
+	//NSLog(@"Should close tab for %@", [self.currentDoc name]);
 	[self saveCursorAndScrollPosition];
 	return YES;
 }
 
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	
-	// commit the changes to the entity's content
-	FileEntity *file = [tabViewItem identifier];
-	[file updateFromTextStorage];
-	[self.openDocuments removeObject:file];
-  [file setValue:@-1 forKey:@"wasOpen"];
-//  [file setValue:[NSNumber numberWithBool:NO] forKey:@"wasOpen"];
-//	NSLog(@"Removed %@", [file valueForKey:@"name"]);
-	
-	
-	// Set another file if this is the selected one and if possible
-  if (file == self.currentDoc) {
-    NSTabViewItem *tabItem = [[self.tabView tabViewItems] lastObject];
-    
-    FileEntity *nextFile = [tabItem identifier];
-    //	NSLog(@"Next file %@", [nextFile valueForKey:@"name"]);
-    if (nextFile && nextFile != file) {
-      [self setCurrentDoc:nextFile];
-    } else {
-      file.project.selected = nil;
-      [self setCurrentDoc:nil];
-      [self enableImageView:NO];
-      [self disableTextView];
-    }
-  }	
+  // remove item
+  FileEntity *file = [self removeItem:tabViewItem];
+  
 	
 	//[self removeObject:[tabViewItem identifier]];
 }
+
+
 
 - (void) setCursorAndScrollPositionForCurrentDoc
 {

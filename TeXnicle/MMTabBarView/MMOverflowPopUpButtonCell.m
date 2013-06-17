@@ -34,14 +34,12 @@
     return self;
 }
 
-//- (void)dealloc
-//{
-//    [_bezelDrawingBlock release], _bezelDrawingBlock = nil;
-//    [_image release], _image = nil;
-//    [_secondImage release], _secondImage = nil;
-//    
-//    [super dealloc];
-//}
+- (void)dealloc
+{
+    _bezelDrawingBlock = nil;
+    _image = nil;
+    
+}
 
 #pragma mark -
 #pragma mark Accessors

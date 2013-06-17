@@ -321,6 +321,11 @@
   return YES;
 }
 
+- (BOOL) hasCloseButton
+{
+  return YES;
+}
+
 - (void) textChanged
 {
 	// notify anyone interested that there were edits

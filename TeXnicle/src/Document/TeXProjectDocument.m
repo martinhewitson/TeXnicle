@@ -62,7 +62,7 @@
 #import "NSAttributedString+Placeholders.h"
 #import "NSDictionary+TeXnicle.h"
 #import "TPFileMetadata.h"
-#import "MMTabBarController.h"
+#import "MMTabBarView.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -147,7 +147,7 @@
 @property (unsafe_unretained) IBOutlet NSView *imageViewerContainer;
 
 @property (unsafe_unretained) IBOutlet NSView *navButtonsBackground;
-@property (unsafe_unretained) IBOutlet MMTabBarController *psmTabBarControl;
+@property (unsafe_unretained) IBOutlet MMTabBarView *psmTabBarControl;
 
 @property (strong) TPDocumentReportWindowController *documentReport;
 

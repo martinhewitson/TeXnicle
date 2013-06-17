@@ -56,6 +56,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
   return self;
 }
 
+
 - (MMTabBarButtonCell *)cell {
   return (MMTabBarButtonCell *)[super cell];
 }
@@ -470,8 +471,8 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 {
   if ([keyPath isEqualTo:_objectCountBindingKeyPath] && context == (__bridge void *)(kMMTabBarButtonOberserverContext)) {
     
-    id autoHideValue = nil;
     id objectCountValue = nil;
+    id autoHideValue = nil;
     
     switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
@@ -509,7 +510,6 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
         }
         else
           [self setShowObjectCount:YES];
-        
         break;
         
       default:

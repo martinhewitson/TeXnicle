@@ -33,12 +33,7 @@
 		[_timer invalidate];
 	}
 
-//	if (_animation) {
-//		[_animation release];
-//	}
-//
-//	[_view release];
-//	[super dealloc];
+
 }
 
 - (NSImage *)image {

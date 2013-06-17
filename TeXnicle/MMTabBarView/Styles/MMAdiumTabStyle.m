@@ -68,6 +68,7 @@
 	_gradientImage = [[NSImage alloc] initByReferencingFile:[[MMTabBarView bundle] pathForImageResource:@"AdiumGradient"]];
 }
 
+
 #pragma mark -
 #pragma mark Drawing Style Accessors
 
@@ -631,12 +632,12 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if ((self = [super init])) {
 		if ([aDecoder allowsKeyedCoding]) {
-			_closeButton = [aDecoder decodeObjectForKey:@"closeButton"] ;
-			_closeButtonDown = [aDecoder decodeObjectForKey:@"closeButtonDown"] ;
-			_closeButtonOver = [aDecoder decodeObjectForKey:@"closeButtonOver"] ;
-			_closeDirtyButton = [aDecoder decodeObjectForKey:@"closeDirtyButton"] ;
-			_closeDirtyButtonDown = [aDecoder decodeObjectForKey:@"closeDirtyButtonDown"] ;
-			_closeDirtyButtonOver = [aDecoder decodeObjectForKey:@"closeDirtyButtonOver"] ;
+			_closeButton = [aDecoder decodeObjectForKey:@"closeButton"];
+			_closeButtonDown = [aDecoder decodeObjectForKey:@"closeButtonDown"];
+			_closeButtonOver = [aDecoder decodeObjectForKey:@"closeButtonOver"];
+			_closeDirtyButton = [aDecoder decodeObjectForKey:@"closeDirtyButton"];
+			_closeDirtyButtonDown = [aDecoder decodeObjectForKey:@"closeDirtyButtonDown"];
+			_closeDirtyButtonOver = [aDecoder decodeObjectForKey:@"closeDirtyButtonOver"];
 			_drawsUnified = [aDecoder decodeBoolForKey:@"drawsUnified"];
 			_drawsRight = [aDecoder decodeBoolForKey:@"drawsRight"];
 		}

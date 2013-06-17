@@ -141,7 +141,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
 	//Also unwind the spring, if it's wound.
 	[_springTimer invalidate];
-	_springTimer = nil;
+	 _springTimer = nil;
 
 	//unbind all the items to prevent crashing
 	//not sure if this is necessary or not
@@ -155,7 +155,6 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 	_controller = nil;
 	_tabView = nil;
 	_addTabButton = nil;
-	_partnerView = nil;
 	_style = nil;
 
 	[self unregisterDraggedTypes];
@@ -167,12 +166,12 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
 	if (_hideShowTabBarAnimation) {
 		[_hideShowTabBarAnimation stopAnimation];
-		_hideShowTabBarAnimation = nil;
+		 _hideShowTabBarAnimation = nil;
 	}
     
     if (_slideButtonsAnimation) {
 		[_slideButtonsAnimation stopAnimation];
-		_slideButtonsAnimation = nil;
+		 _slideButtonsAnimation = nil;    
     }
     
     if ([self window]) {
@@ -306,8 +305,9 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
 - (BOOL)isWindowActive {
     NSWindow *window = [self window];
-    BOOL windowActive = NO;
-    if ([window isKeyWindow])
+
+  BOOL windowActive = NO;
+    if ([window isKeyWindow] || [window isMainWindow])
         windowActive = YES;
     else if ([window isKindOfClass:[NSPanel class]] && [NSApp isActive])
         windowActive = YES;
@@ -554,7 +554,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
         // add button as subview
     [self addSubview:button];
-  
+    
         // add tab item at specified index
     if ([[_tabView tabViewItems] indexOfObjectIdenticalTo:item] == NSNotFound) {
         [_tabView insertTabViewItem:item atIndex:index];
@@ -1685,12 +1685,12 @@ static NSMutableDictionary *registeredStyleClasses = nil;
             //If the user has dragged to a different tab, reset the timer.
 		if (_tabViewItemWithSpring != [destinationButton tabViewItem]) {
 			[_springTimer invalidate];
-			_springTimer = nil;
+			 _springTimer = nil;
 			_tabViewItemWithSpring = [destinationButton tabViewItem];
 		}
 		if (!_springTimer) {
                 //Finder's default delay time, as of Tiger, is 668 ms. If the user has never changed it, there's no setting in its defaults, so we default to that amount.
-			NSNumber *delayNumber = (__bridge NSNumber *)CFPreferencesCopyAppValue((CFStringRef)@"SpringingDelayMilliseconds", (CFStringRef)@"com.apple.finder");
+			NSNumber *delayNumber = (NSNumber *)CFBridgingRelease(CFPreferencesCopyAppValue((CFStringRef)@"SpringingDelayMilliseconds", (CFStringRef)@"com.apple.finder"));
 			NSTimeInterval delaySeconds = delayNumber ?[delayNumber doubleValue] / 1000.0 : 0.668;
 			_springTimer = [NSTimer scheduledTimerWithTimeInterval:delaySeconds
 							 target:self
@@ -1706,7 +1706,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender {
 	[_springTimer invalidate];
-	_springTimer = nil;
+	 _springTimer = nil;
 
 	[[MMTabDragAssistant sharedDragAssistant] draggingExitedTabBarView:self draggingInfo:sender];
 }
@@ -1919,7 +1919,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 
         _tabViewItemWithSpring = nil;
         [_springTimer invalidate];
-        _springTimer = nil;
+         _springTimer = nil;
     }
 }
 
@@ -2184,6 +2184,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 		return;
 	}
 
+
     if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
         if (![[self delegate] tabView:_tabView shouldCloseTabViewItem:tabViewItem]) {
              return;
@@ -2193,12 +2194,13 @@ static NSMutableDictionary *registeredStyleClasses = nil;
     if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
          [[self delegate] tabView:_tabView willCloseTabViewItem:tabViewItem];
     }
-  
+     
     [_tabView removeTabViewItem:tabViewItem];
      
     if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
          [[self delegate] tabView:_tabView didCloseTabViewItem:tabViewItem];
     }
+
 }
 
 - (void)frameDidChange:(NSNotification *)notification {

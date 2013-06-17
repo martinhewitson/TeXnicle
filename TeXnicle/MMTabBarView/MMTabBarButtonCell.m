@@ -92,14 +92,10 @@
 	return self;
 }
 
-//- (void)dealloc {
-//    [_style release], _style = nil;
-//    [_icon release], _icon = nil;
-//    [_largeImage release], _largeImage = nil;
-//    [_objectCountColor release], _objectCountColor = nil;
-//         
-//    [super dealloc];
-//}
+- (void)dealloc {
+    _style = nil;
+         
+}
 
 - (MMTabBarButton *)controlView {
     return (MMTabBarButton *)[super controlView];

@@ -126,9 +126,9 @@ typedef enum MMAttachedButtonsEnumerationOptions : NSUInteger {
     id <MMTabBarViewDelegate>       _delegate;
 }
 
-@property (retain) IBOutlet NSTabView *tabView;
-@property (retain) IBOutlet NSView *partnerView;
-@property (assign) IBOutlet id <MMTabBarViewDelegate> delegate;
+@property (strong) IBOutlet NSTabView *tabView;
+@property (strong) IBOutlet NSView *partnerView;
+@property (unsafe_unretained) IBOutlet id <MMTabBarViewDelegate> delegate;
 @property (assign) NSUInteger destinationIndexForDraggedItem;
 @property (readonly) BOOL isResizing;
 @property (assign) BOOL needsUpdate;
