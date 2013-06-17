@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -52,7 +52,7 @@
 							<object class="NSTextField" id="154145900">
 								<reference key="NSNextResponder" ref="645425910"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{109, 13}, {69, 14}}</string>
+								<string key="NSFrame">{{109, 9}, {69, 14}}</string>
 								<reference key="NSSuperview" ref="645425910"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="881939211"/>
@@ -93,7 +93,7 @@
 							<object class="NSSlider" id="881939211">
 								<reference key="NSNextResponder" ref="645425910"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{177, 10}, {71, 17}}</string>
+								<string key="NSFrame">{{177, 8}, {71, 17}}</string>
 								<reference key="NSSuperview" ref="645425910"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -119,7 +119,7 @@
 							<object class="NSButton" id="388231186">
 								<reference key="NSNextResponder" ref="645425910"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{8, 11}, {101, 18}}</string>
+								<string key="NSFrame">{{8, 7}, {101, 18}}</string>
 								<reference key="NSSuperview" ref="645425910"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="154145900"/>
@@ -149,7 +149,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, -1}, {259, 40}}</string>
+						<string key="NSFrame">{{0, -1}, {259, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="388231186"/>
@@ -229,7 +229,7 @@
 									<object class="NSOutlineView" id="522561169">
 										<reference key="NSNextResponder" ref="960034158"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{259, 292}</string>
+										<string key="NSFrameSize">{259, 301}</string>
 										<reference key="NSSuperview" ref="960034158"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="379480967"/>
@@ -319,7 +319,7 @@
 										<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 									</object>
 								</array>
-								<string key="NSFrameSize">{259, 292}</string>
+								<string key="NSFrameSize">{259, 301}</string>
 								<reference key="NSSuperview" ref="743024349"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="522561169"/>
@@ -356,7 +356,7 @@
 								<double key="NSPercent">0.99616858237547889</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 40}, {259, 292}}</string>
+						<string key="NSFrame">{{0, 31}, {259, 301}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="960034158"/>
@@ -686,16 +686,11 @@
 					<string key="className">TPProjectOutlineViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="changeDetailsState:">id</string>
 						<string key="collapseAllSections:">id</string>
 						<string key="expandAllSections:">id</string>
 						<string key="maxOutlineDepthChanged:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="changeDetailsState:">
-							<string key="name">changeDetailsState:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="collapseAllSections:">
 							<string key="name">collapseAllSections:</string>
 							<string key="candidateClassName">id</string>

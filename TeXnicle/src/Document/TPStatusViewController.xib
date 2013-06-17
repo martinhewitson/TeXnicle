@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -46,7 +46,7 @@
 							<object class="NSTextField" id="137513999">
 								<reference key="NSNextResponder" ref="261901195"/>
 								<int key="NSvFlags">260</int>
-								<string key="NSFrame">{{8, 13}, {537, 14}}</string>
+								<string key="NSFrame">{{8, 9}, {537, 14}}</string>
 								<reference key="NSSuperview" ref="261901195"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="65875750"/>
@@ -87,9 +87,10 @@
 							<object class="NSButton" id="65875750">
 								<reference key="NSNextResponder" ref="261901195"/>
 								<int key="NSvFlags">300</int>
-								<string key="NSFrame">{{550, 10}, {20, 19}}</string>
+								<string key="NSFrame">{{550, 6}, {20, 19}}</string>
 								<reference key="NSSuperview" ref="261901195"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:687</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="1046532527">
@@ -117,7 +118,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{185, 0}, {580, 40}}</string>
+						<string key="NSFrame">{{185, 0}, {580, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="137513999"/>
@@ -131,9 +132,10 @@
 							<object class="NSTextField" id="712037789">
 								<reference key="NSNextResponder" ref="766192095"/>
 								<int key="NSvFlags">258</int>
-								<string key="NSFrame">{{6, 13}, {173, 14}}</string>
+								<string key="NSFrame">{{6, 9}, {173, 14}}</string>
 								<reference key="NSSuperview" ref="766192095"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="261901195"/>
 								<string key="NSReuseIdentifierKey">_NS:3944</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="1031210540">
@@ -150,7 +152,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrameSize">{186, 40}</string>
+						<string key="NSFrameSize">{186, 32}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="712037789"/>
@@ -158,7 +160,7 @@
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{765, 40}</string>
+				<string key="NSFrameSize">{765, 32}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="766192095"/>
@@ -358,17 +360,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">TPStatusViewController</string>
 					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">revealFile:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">revealFile:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">revealFile:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="editorStatusTextField">NSTextField</string>
 						<string key="filenameTextField">NSTextField</string>

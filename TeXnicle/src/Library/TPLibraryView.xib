@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C54</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2840</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSBox</string>
@@ -2333,6 +2333,17 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="insertInlineMath:">id</string>
 						<string key="jumpToNextPlaceholder:">id</string>
 						<string key="jumpToPreviousPlaceholder:">id</string>
+						<string key="latexFormatBold:">id</string>
+						<string key="latexFormatEmphasized:">id</string>
+						<string key="latexFormatEscapeUnderscore:">id</string>
+						<string key="latexFormatFootnote:">id</string>
+						<string key="latexFormatItalic:">id</string>
+						<string key="latexFormatRoman:">id</string>
+						<string key="latexFormatSansSerif:">id</string>
+						<string key="latexFormatSlanted:">id</string>
+						<string key="latexFormatSmallCaps:">id</string>
+						<string key="latexFormatTypewritter:">id</string>
+						<string key="latexFormatUnderline:">id</string>
 						<string key="pasteTable:">id</string>
 						<string key="reformatParagraph:">id</string>
 						<string key="selectParagraph:">id</string>
@@ -2382,6 +2393,50 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						</object>
 						<object class="IBActionInfo" key="jumpToPreviousPlaceholder:">
 							<string key="name">jumpToPreviousPlaceholder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatBold:">
+							<string key="name">latexFormatBold:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatEmphasized:">
+							<string key="name">latexFormatEmphasized:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatEscapeUnderscore:">
+							<string key="name">latexFormatEscapeUnderscore:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatFootnote:">
+							<string key="name">latexFormatFootnote:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatItalic:">
+							<string key="name">latexFormatItalic:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatRoman:">
+							<string key="name">latexFormatRoman:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatSansSerif:">
+							<string key="name">latexFormatSansSerif:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatSlanted:">
+							<string key="name">latexFormatSlanted:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatSmallCaps:">
+							<string key="name">latexFormatSmallCaps:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatTypewritter:">
+							<string key="name">latexFormatTypewritter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="latexFormatUnderline:">
+							<string key="name">latexFormatUnderline:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="pasteTable:">

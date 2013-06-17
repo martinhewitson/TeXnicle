@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
 		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -57,7 +57,7 @@
 									<object class="NSOutlineView" id="264560914">
 										<reference key="NSNextResponder" ref="1014107458"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{238, 446}</string>
+										<string key="NSFrameSize">{239, 454}</string>
 										<reference key="NSSuperview" ref="1014107458"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="1023266911"/>
@@ -75,7 +75,7 @@
 										<array class="NSMutableArray" key="NSTableColumns">
 											<object class="NSTableColumn" id="404096566">
 												<string key="NSIdentifier">NameColumn</string>
-												<double key="NSWidth">235</double>
+												<double key="NSWidth">236</double>
 												<double key="NSMinWidth">16</double>
 												<double key="NSMaxWidth">1000</double>
 												<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -161,7 +161,7 @@
 										<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 									</object>
 								</array>
-								<string key="NSFrame">{{1, 1}, {238, 446}}</string>
+								<string key="NSFrame">{{1, 1}, {239, 454}}</string>
 								<reference key="NSSuperview" ref="837005394"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="264560914"/>
@@ -198,7 +198,7 @@
 								<double key="NSPercent">0.98347107438016534</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 38}, {240, 448}}</string>
+						<string key="NSFrame">{{0, 30}, {241, 456}}</string>
 						<reference key="NSSuperview" ref="944048845"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1014107458"/>
@@ -343,7 +343,7 @@
 							<object class="NSProgressIndicator" id="78375814">
 								<reference key="NSNextResponder" ref="173534314"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{138, 12}, {16, 16}}</string>
+								<string key="NSFrame">{{138, 9}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="173534314"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="477693306"/>
@@ -354,7 +354,7 @@
 							<object class="NSTextField" id="763736653">
 								<reference key="NSNextResponder" ref="173534314"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{6, 13}, {127, 14}}</string>
+								<string key="NSFrame">{{6, 10}, {127, 14}}</string>
 								<reference key="NSSuperview" ref="173534314"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="78375814"/>
@@ -380,7 +380,7 @@
 							<object class="NSButton" id="477693306">
 								<reference key="NSNextResponder" ref="173534314"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{160, 10}, {70, 19}}</string>
+								<string key="NSFrame">{{160, 7}, {70, 19}}</string>
 								<reference key="NSSuperview" ref="173534314"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -403,7 +403,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, -1}, {240, 40}}</string>
+						<string key="NSFrame">{{0, -1}, {240, 32}}</string>
 						<reference key="NSSuperview" ref="944048845"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="763736653"/>
