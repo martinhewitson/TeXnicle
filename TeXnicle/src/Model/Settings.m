@@ -31,7 +31,6 @@
 
 @implementation Settings
 
-@dynamic doLiveUpdate;
 @dynamic language;
 @dynamic engineName;
 @dynamic doBibtex;

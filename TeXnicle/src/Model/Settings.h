@@ -35,7 +35,6 @@
 }
 
 // core data properties
-@property (nonatomic, strong) NSNumber * doLiveUpdate;
 @property (nonatomic, strong) NSNumber * doBibtex;
 @property (nonatomic, strong) NSNumber * doPS2PDF;
 @property (nonatomic, strong) NSString * engineName;
