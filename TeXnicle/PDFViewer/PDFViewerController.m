@@ -120,7 +120,11 @@
 
 - (void) setupThumbsView
 {
-  [self.thumbSlideViewController toggle:self];
+  if ([self pdfViewControllerShouldShowPDFThumbnails:self]) {
+    [self.thumbSlideViewController slideIn:self];
+  } else {
+    [self.thumbSlideViewController slideOut:self];
+  }
 }
 
 - (void) handleDocumentChangedNotification:(NSNotification*)aNote
@@ -161,6 +165,8 @@
   if ([self.toggleThumbsButton state] == NSOnState) {
   } else {
   }
+  
+  [self pdfViewController:self didChangeThumbnailsViewerState:[self.toggleThumbsButton state]];
   [self.thumbSlideViewController toggle:sender];
 }
 
@@ -518,6 +524,23 @@
     [self.delegate pdfview:pdfView didCommandClickOnPage:pageIndex inRect:aRect atPoint:aPoint];
   }
 }
+
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewControllerShouldShowPDFThumbnails:)]) {
+    return [self.delegate pdfViewControllerShouldShowPDFThumbnails:self];
+  }
+  
+  return NO;
+}
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewController:didChangeThumbnailsViewerState:)]) {
+    [self.delegate pdfViewController:self didChangeThumbnailsViewerState:visible];
+  }
+}
+
 
 #pragma mark -
 #pragma mark Sliding splitview delegate

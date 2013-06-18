@@ -31,6 +31,7 @@
 
 @implementation UISettings
 
+@dynamic showPDFThumbnails;
 @dynamic selectedControlsTab;
 @dynamic pdfViewScrollRect;
 @dynamic controlsWidth;

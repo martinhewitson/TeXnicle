@@ -1036,13 +1036,33 @@
 	return managedContext;
 }
 
+#pragma mark -
+#pragma mark Core Data overrides
+
+//- (NSManagedObjectModel*)managedObjectModel
+//{
+//  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+////  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
+////  NSURL *url = [NSURL fileURLWithPath:path];
+//  NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
+////  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+//  NSLog(@"Loaded model %@", [model entityVersionHashesByName]);
+//    
+//  // try loading version 11 model
+//  NSDictionary *dict = 
+//  NSManagedObjectModel *v11 = [NSManagedObjectModel mergedModelFromBundles:@[bundle] forStoreMetadata:dict];
+//  
+//  
+//  return model;
+//}
+
 - (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL*)url 
 																					 ofType:(NSString*)fileType
 															 modelConfiguration:(NSString*)configuration
 																		 storeOptions:(NSDictionary*)storeOptions
 																						error:(NSError**)error
 {
-//  NSLog(@"configurePersistentStoreCoordinatorForURL %@", url);
+  NSLog(@"configurePersistentStoreCoordinatorForURL %@", url);
   NSMutableDictionary *options = nil;
   if (storeOptions != nil) {
     options = [storeOptions mutableCopy];
@@ -1050,6 +1070,23 @@
     options = [[NSMutableDictionary alloc] init];
   }
 	
+  // check version at URL
+  NSError *metaerror = nil;
+  NSDictionary *storeMeta = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:nil URL:url error:&metaerror];
+  NSLog(@"Metadata at URL %@", storeMeta);
+  
+  NSManagedObjectModel *oldManagedObjectModel = [NSManagedObjectModel mergedModelFromBundles:@[[NSBundle mainBundle]]
+                                                                            forStoreMetadata:storeMeta];
+  
+  NSLog(@"Old managed object model %@", [oldManagedObjectModel entityVersionHashesByName]);
+  
+  
+  // get new managed object model
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
+  NSLog(@"New model: %@", [model entityVersionHashesByName]);
+  
+  
   options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
   options[NSInferMappingModelAutomaticallyOption] = @YES;
   
@@ -3715,6 +3752,17 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 #pragma mark -
 #pragma mark PDFViewerController delegate
+
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer
+{
+  return NO; //return [self.project.uiSettings.showPDFThumbnails boolValue];
+}
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  //self.project.uiSettings.showPDFThumbnails = @(visible);
+}
+
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {

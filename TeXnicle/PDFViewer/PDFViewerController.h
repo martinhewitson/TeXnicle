@@ -40,6 +40,8 @@
 
 - (NSString*)documentPathForViewer:(PDFViewerController*)aPDFViewer;
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint;
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer;
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible;
 
 @end
 
