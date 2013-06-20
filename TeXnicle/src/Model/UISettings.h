@@ -33,7 +33,6 @@
 @interface UISettings : NSManagedObject
 
 // core data properties
-@property (nonatomic, strong) NSNumber * doLiveUpdate;
 @property (nonatomic, strong) NSNumber * showPDFThumbnails;
 @property (nonatomic, strong) NSNumber * controlsWidth;
 @property (nonatomic, strong) NSNumber * editorWidth;

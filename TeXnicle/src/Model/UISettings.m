@@ -31,7 +31,6 @@
 
 @implementation UISettings
 
-@dynamic doLiveUpdate;
 @dynamic showPDFThumbnails;
 @dynamic selectedControlsTab;
 @dynamic pdfViewScrollRect;

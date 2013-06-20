@@ -1087,6 +1087,8 @@
   NSLog(@"New model: %@", [model entityVersionHashesByName]);
   
   
+  NSLog(@"Compatible? %d", [model isConfiguration:nil compatibleWithStoreMetadata:storeMeta]);
+  
   options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
   options[NSInferMappingModelAutomaticallyOption] = @YES;
   
