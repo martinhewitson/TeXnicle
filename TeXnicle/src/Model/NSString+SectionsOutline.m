@@ -220,7 +220,7 @@
     BOOL didMatch = NO;
     // check all sections after the last match
     for (NSInteger ii=matchIndex; ii<[sections count]; ii++) {
-      TPSection *existingSection = [sections objectAtIndex:ii];
+      TPSection *existingSection = sections[ii];
       if ([newSection matches:existingSection] == YES) {
         [sectionsToReturn addObject:existingSection];
 //        NSLog(@"Exact match: %@", existingSection);

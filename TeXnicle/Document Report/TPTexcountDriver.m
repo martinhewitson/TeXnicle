@@ -96,7 +96,7 @@
 	[texcountTask setLaunchPath:texcountPath];
   [texcountTask setCurrentDirectoryPath:[path stringByDeletingLastPathComponent]];
   
-	NSArray *arguments = [NSArray array];
+	NSArray *arguments = @[];
 	arguments = [arguments arrayByAddingObject:@"-html"];
 //	arguments = [arguments arrayByAddingObject:@"-utf8"];
   
