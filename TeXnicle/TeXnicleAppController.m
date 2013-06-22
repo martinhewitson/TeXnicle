@@ -167,7 +167,8 @@ NSString * const TESyntaxColorCommand = @"TESyntaxColorCommand";
 NSString * const TESyntaxArgumentsColor = @"TESyntaxArgumentsColor";
 NSString * const TESyntaxColorArguments = @"TESyntaxColorArguments";
 
-// outline colors
+// outline
+NSString * const TPOutlineSectionTags = @"TPOutlineSectionTags";
 NSString * const TPOutlineDocumentColor = @"TPOutlineDocumentColor";
 NSString * const TPOutlinePartColor = @"TPOutlinePartColor";
 NSString * const TPOutlineChapterColor = @"TPOutlineChapterColor";
@@ -338,7 +339,19 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	[defaultValues setValue:@YES forKey:TESyntaxColorArguments];
 	
   
-  // outline colors
+  // outline
+  NSDictionary *sectionTags = @{
+                                @"begin"         : @[@"\\begin{document}", @"\\starttext"],
+                                @"part"          : @[@"\\part", @"\\part*"],
+                                @"chapter"       : @[@"\\chapter", @"\\chapter*"],
+                                @"section"       : @[@"\\section", @"\\section*", @"\\subject"],
+                                @"subsection"    : @[@"\\subsection", @"\\subsection*", @"\\subsubject"],
+                                @"subsubsection" : @[@"\\subsubsection", @"\\subsubsection*", @"\\subsubsubject"],
+                                @"paragraph"     : @[@"\\paragraph", @"\\paragraph*"],
+                                @"subparagraph"  : @[@"\\subparagraph", @"\\subparagraph*"]
+                                };
+  
+  [defaultValues setValue:sectionTags forKey:TPOutlineSectionTags];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  blackColor]] forKey:TPOutlineDocumentColor];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  darkGrayColor]] forKey:TPOutlinePartColor];
 	[defaultValues setValue:[NSArray arrayWithColor:[NSColor  darkGrayColor]] forKey:TPOutlineChapterColor];

@@ -27,8 +27,6 @@
 @property (assign) NSInteger depth;
 @property (strong) NSTimer *timer;
 @property (unsafe_unretained) id<TPOutlineBuilderDelegate> delegate;
-@property (strong) NSArray *templates;
-@property (strong) NSArray *sectionCommands;
 @property (strong) NSMutableArray *sections;
 
 + (id) outlineBuilderWithDelegate:(id<TPOutlineBuilderDelegate>)aDelegate;

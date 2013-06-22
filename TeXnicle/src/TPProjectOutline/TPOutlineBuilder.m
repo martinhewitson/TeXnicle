@@ -15,6 +15,7 @@
 #import "TPFileMetadata.h"
 #import "NSString+SectionsOutline.h"
 #import "NSArray+Color.h"
+#import "TPDocumentSectionManager.h"
 
 @interface TPOutlineBuilder ()
 
@@ -34,54 +35,17 @@
   self = [super init];
   if (self) {
     self.delegate = aDelegate;
-    [self makeTemplates];
+    // ensure the section manager makes its templates
+    TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
+    self.depth = [sm.templates count]-1;
     self.sections = [NSMutableArray array];
     self.isUpdating = NO;
     queue = dispatch_queue_create("com.bobsoft.TeXnicle.outlineArray", DISPATCH_QUEUE_SERIAL);
         
-    [self observePreferences];
   }
   
   return self;
 }
-
-- (NSArray*)keysToObserve
-{
-  return @[TPOutlineDocumentColor, TPOutlinePartColor, TPOutlineChapterColor, TPOutlineSectionColor, TPOutlineSubsectionColor, TPOutlineSubsubsectionColor, TPOutlineParagraphColor, TPOutlineSubparagraphColor];
-}
-
-- (void) stopObserving
-{
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  for (NSString *key in [self keysToObserve]) {
-    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", key]];
-  }
-}
-
-- (void) observePreferences
-{
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  for (NSString *key in [self keysToObserve]) {
-    [defaults addObserver:self
-               forKeyPath:[NSString stringWithFormat:@"values.%@", key]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-    
-  }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-											ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-  for (NSString *key in [self keysToObserve]) {
-    if ([keyPath isEqualToString:[NSString stringWithFormat:@"values.%@", key]]) {
-      [self setTemplateColors];
-    }
-  }
-}
-
 
 
 - (void) stopTimer
@@ -114,7 +78,6 @@
 - (void) tearDown
 {
 //  NSLog(@"Tear down %@", self);
-  [self stopObserving];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
   self.delegate = nil;
@@ -135,6 +98,7 @@
     return;
   }
   
+  __block TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
   __block TPOutlineBuilder *blockSelf = self;
   __block NSArray *metafiles = [self allMetadataFiles];
   
@@ -154,7 +118,7 @@
     file.wasScannedForSections = NO;
   }
   
-  NSArray *templatesToScanFor = [blockSelf.templates subarrayWithRange:NSMakeRange(0, 1+blockSelf.depth)];
+  NSArray *templatesToScanFor = [sm.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)];
   
   // get the main file from the delegate
   id file = [self mainFile];
@@ -313,130 +277,6 @@
   return newSections;  
 }
 
-- (void) makeTemplates
-{
-  NSMutableArray *tmp = [NSMutableArray array];
-  
-  NSColor *color;
-  
-  color = [NSColor colorWithDeviceWhite:0.0 alpha:1.0];
-  TPSectionTemplate *document = [TPSectionTemplate documentSectionTemplateWithName:@"begin" 
-                                                                              tags:@[@"\\begin{document}", @"\\starttext"]
-                                                                            parent:nil
-                                                                             color:color
-                                                                          mnemonic:@"D"
-                                                                              icon:[NSImage imageNamed:@"TeXnicle_Doc"]];
-  document.defaultTitle = @"Document";
-  [tmp addObject:document];
-  
-  color = [NSColor darkGrayColor];
-  TPSectionTemplate *part = [TPSectionTemplate documentSectionTemplateWithName:@"part" 
-                                                                          tags:@[@"\\part", @"\\part*"]
-                                                                        parent:document
-                                                                         color:color
-                                                                      mnemonic:@"P"
-                                                                          icon:[NSImage imageNamed:@"outline_part"]];
-  [tmp addObject:part];
-  
-  color = [NSColor darkGrayColor];
-  TPSectionTemplate *chapter = [TPSectionTemplate documentSectionTemplateWithName:@"chapter" 
-                                                                             tags:@[@"\\chapter", @"\\chapter*"]
-                                                                           parent:part 
-                                                                            color:color
-                                                                         mnemonic:@"C"
-                                                                             icon:[NSImage imageNamed:@"outline_chapter"]];
-  [tmp addObject:chapter];
-  
-  color = [NSColor colorWithDeviceRed:0.8 green:0.2 blue:0.2 alpha:1.0];
-  TPSectionTemplate *section = [TPSectionTemplate documentSectionTemplateWithName:@"section" 
-                                                                             tags:@[@"\\section", @"\\section*", @"\\subject"]
-                                                                           parent:chapter 
-                                                                            color:color
-                                                                         mnemonic:@"S"
-                                                                             icon:[NSImage imageNamed:@"outline_section"]];
-  [tmp addObject:section];
-  
-  color = [NSColor colorWithDeviceRed:0.6 green:0.3 blue:0.3 alpha:1.0];
-  TPSectionTemplate *subsection = [TPSectionTemplate documentSectionTemplateWithName:@"subsection" 
-                                                                                tags:@[@"\\subsection", @"\\subsection*", @"\\subsubject"]
-                                                                              parent:section 
-                                                                               color:color
-                                                                            mnemonic:@"ss"
-                                                                                icon:[NSImage imageNamed:@"outline_subsection"]];
-  [tmp addObject:subsection];
-  
-  color = [NSColor colorWithDeviceRed:0.6 green:0.5 blue:0.5 alpha:1.0];
-  TPSectionTemplate *subsubsection = [TPSectionTemplate documentSectionTemplateWithName:@"subsubsection" 
-                                                                                   tags:@[@"\\subsubsection", @"\\subsubsection*", @"\\subsubsubject"]
-                                                                                 parent:subsection
-                                                                                  color:color
-                                                                               mnemonic:@"sss"
-                                                                                   icon:[NSImage imageNamed:@"outline_subsubsection"]];
-  [tmp addObject:subsubsection];
-  
-  color = [NSColor colorWithDeviceWhite:0.6 alpha:1.0];
-  TPSectionTemplate *paragraph = [TPSectionTemplate documentSectionTemplateWithName:@"paragraph" 
-                                                                               tags:@[@"\\paragraph", @"\\paragraph*"]
-                                                                             parent:subsubsection
-                                                                              color:color
-                                                                           mnemonic:@"p"
-                                                                               icon:[NSImage imageNamed:@"outline_paragraph"]];
-  [tmp addObject:paragraph];
-  
-  color = [NSColor colorWithDeviceWhite:0.7 alpha:1.0];
-  TPSectionTemplate *subparagraph = [TPSectionTemplate documentSectionTemplateWithName:@"subparagraph" 
-                                                                                  tags:@[@"\\subparagraph", @"\\subparagraph*"]
-                                                                                parent:paragraph
-                                                                                 color:color
-                                                                              mnemonic:@"sp"
-                                                                                  icon:[NSImage imageNamed:@"outline_subparagraph"]];
-  [tmp addObject:subparagraph];
- 
-  self.templates = [NSArray arrayWithArray:tmp];
-  
-  NSMutableArray *cmds = [NSMutableArray array];
-  for (TPSectionTemplate *template in self.templates) {
-    [cmds addObject:template.tag];
-  }
-  self.sectionCommands = [NSArray arrayWithArray:cmds];
-  
-  self.depth = [self.templates count]-1;
-  
-  [self setTemplateColors];
-  
-}
-
-- (void) setTemplateColors
-{
-  [self setColorForName:@"begin" withPreferenceName:TPOutlineDocumentColor];
-  [self setColorForName:@"part" withPreferenceName:TPOutlinePartColor];
-  [self setColorForName:@"chapter" withPreferenceName:TPOutlineChapterColor];
-  [self setColorForName:@"section" withPreferenceName:TPOutlineSectionColor];
-  [self setColorForName:@"subsection" withPreferenceName:TPOutlineSubsectionColor];
-  [self setColorForName:@"subsubsection" withPreferenceName:TPOutlineSubsubsectionColor];
-  [self setColorForName:@"paragraph" withPreferenceName:TPOutlineParagraphColor];
-  [self setColorForName:@"subparagraph" withPreferenceName:TPOutlineSubparagraphColor];  
-}
-
-- (void) setColorForName:(NSString*)name withPreferenceName:(NSString*)prefName
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSArray *colorVals = nil;
-  
-  for (TPSectionTemplate *s in self.templates) {
-    if ([s.name isEqualToString:name]) {
-      
-      colorVals = [defaults valueForKey:prefName];
-      if (colorVals) {
-        [s setColor:[colorVals colorValue]];
-      } else {
-        [s setColor:[NSColor blackColor]];
-      }
-      
-      break;
-    }
-  }
-}
 
 
 #pragma mark -

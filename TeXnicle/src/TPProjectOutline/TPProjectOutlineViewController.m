@@ -9,6 +9,7 @@
 #import "TPProjectOutlineViewController.h"
 #import "TPSectionTemplate.h"
 #import "ImageAndTextCell.h"
+#import "TPDocumentSectionManager.h"
 
 @interface TPProjectOutlineViewController ()
 
@@ -67,10 +68,11 @@
 
   
   [self setupOutlineBuilder];
+  TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
   
   NSInteger maxOutlineDepth = [[self.delegate maxOutlineDepth] integerValue];
-  if (maxOutlineDepth >= [self.outlineBuilder.templates count]) {
-    maxOutlineDepth = [self.outlineBuilder.templates count]-1;
+  if (maxOutlineDepth >= [sm.templates count]) {
+    maxOutlineDepth = [sm.templates count]-1;
   }
   [self.depthSlider setIntegerValue:maxOutlineDepth];
   self.outlineBuilder.depth = maxOutlineDepth;

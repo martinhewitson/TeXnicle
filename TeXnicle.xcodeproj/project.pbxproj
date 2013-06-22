@@ -312,6 +312,10 @@
 		25A47D1313E15B3000CAFEB7 /* trashCan.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1213E15B3000CAFEB7 /* trashCan.icns */; };
 		25A47D1513E1965A00CAFEB7 /* revealArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1413E1965A00CAFEB7 /* revealArrow.png */; };
 		25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */; };
+		25A4F58C17759452002759B8 /* OutlineSectionTagsEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A4F58A17759452002759B8 /* OutlineSectionTagsEditorController.m */; };
+		25A4F58D17759452002759B8 /* OutlineSectionTagsEditorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25A4F58B17759452002759B8 /* OutlineSectionTagsEditorController.xib */; };
+		25A4F59017759653002759B8 /* TPDocumentSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A4F58F17759653002759B8 /* TPDocumentSectionManager.m */; };
+		25A4F5921775A6C9002759B8 /* outlinePrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25A4F5911775A6C9002759B8 /* outlinePrefs.icns */; };
 		25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */; };
 		25A8DF001397AA160097A62E /* MHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A8DEFF1397AA160097A62E /* MHImageView.m */; };
 		25AAAB6D146A70FD000C81D4 /* TPStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AAAB6B146A70FD000C81D4 /* TPStatusViewController.m */; };
@@ -1077,6 +1081,12 @@
 		25A47D1213E15B3000CAFEB7 /* trashCan.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = trashCan.icns; sourceTree = "<group>"; };
 		25A47D1413E1965A00CAFEB7 /* revealArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = revealArrow.png; sourceTree = "<group>"; };
 		25A47D1613E1A17C00CAFEB7 /* addToProject2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = addToProject2.icns; sourceTree = "<group>"; };
+		25A4F58917759452002759B8 /* OutlineSectionTagsEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineSectionTagsEditorController.h; sourceTree = "<group>"; };
+		25A4F58A17759452002759B8 /* OutlineSectionTagsEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineSectionTagsEditorController.m; sourceTree = "<group>"; };
+		25A4F58B17759452002759B8 /* OutlineSectionTagsEditorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutlineSectionTagsEditorController.xib; sourceTree = "<group>"; };
+		25A4F58E17759653002759B8 /* TPDocumentSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDocumentSectionManager.h; sourceTree = "<group>"; };
+		25A4F58F17759653002759B8 /* TPDocumentSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDocumentSectionManager.m; sourceTree = "<group>"; };
+		25A4F5911775A6C9002759B8 /* outlinePrefs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outlinePrefs.icns; sourceTree = "<group>"; };
 		25A8DEFB1397A86B0097A62E /* LibraryPreviewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryPreviewBackgroundView.h; sourceTree = "<group>"; };
 		25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryPreviewBackgroundView.m; sourceTree = "<group>"; };
 		25A8DEFE1397AA160097A62E /* MHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHImageView.h; sourceTree = "<group>"; };
@@ -1716,6 +1726,7 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				25A4F5911775A6C9002759B8 /* outlinePrefs.icns */,
 				2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */,
 				2567273316E4AFDC004B7C4A /* outline_paragraph.icns */,
 				2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */,
@@ -2780,6 +2791,11 @@
 				25E7B13515AB39C400373A56 /* TPSection.m */,
 				25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */,
 				25E7B13815AB3A6C00373A56 /* TPOutlineBuilder.m */,
+				25A4F58E17759653002759B8 /* TPDocumentSectionManager.h */,
+				25A4F58F17759653002759B8 /* TPDocumentSectionManager.m */,
+				25A4F58917759452002759B8 /* OutlineSectionTagsEditorController.h */,
+				25A4F58A17759452002759B8 /* OutlineSectionTagsEditorController.m */,
+				25A4F58B17759452002759B8 /* OutlineSectionTagsEditorController.xib */,
 				25E7B13A15AB3C7700373A56 /* TPSectionTemplate.h */,
 				25E7B13B15AB3C7700373A56 /* TPSectionTemplate.m */,
 				25E7B13D15AD697600373A56 /* TPProjectOutlineViewController.h */,
@@ -3149,6 +3165,8 @@
 				25D10F35176F00AF004C40AE /* SafariIWITLeftCap@2x.png in Resources */,
 				25D10F36176F00AF004C40AE /* SafariIWITRightCap.png in Resources */,
 				25D10F37176F00AF004C40AE /* SafariIWITRightCap@2x.png in Resources */,
+				25A4F58D17759452002759B8 /* OutlineSectionTagsEditorController.xib in Resources */,
+				25A4F5921775A6C9002759B8 /* outlinePrefs.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3477,6 +3495,8 @@
 				25D10F05176F00AE004C40AE /* MMMetalTabStyle.m in Sources */,
 				25D10F06176F00AE004C40AE /* MMUnifiedTabStyle.m in Sources */,
 				25D10F38176F00AF004C40AE /* MMSafariTabStyle.m in Sources */,
+				25A4F58C17759452002759B8 /* OutlineSectionTagsEditorController.m in Sources */,
+				25A4F59017759653002759B8 /* TPDocumentSectionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
