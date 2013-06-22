@@ -83,7 +83,7 @@
 											<string>WebURLsWithTitlesPboardType</string>
 											<string>public.url</string>
 										</set>
-										<string key="NSFrameSize">{532, 592}</string>
+										<string key="NSFrameSize">{532, 596}</string>
 										<reference key="NSSuperview" ref="382998154"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="942948562"/>
@@ -154,7 +154,7 @@
 										<nil key="NSDelegate"/>
 									</object>
 								</array>
-								<string key="NSFrameSize">{532, 592}</string>
+								<string key="NSFrameSize">{532, 596}</string>
 								<reference key="NSSuperview" ref="52710183"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="195271064"/>
@@ -189,7 +189,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSScroller" id="942948562">
 								<reference key="NSNextResponder" ref="52710183"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{516, 0}, {16, 592}}</string>
+								<string key="NSFrame">{{516, 0}, {16, 596}}</string>
 								<reference key="NSSuperview" ref="52710183"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="931785073"/>
@@ -214,7 +214,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								<double key="NSPercent">0.94565218687057495</double>
 							</object>
 						</array>
-						<string key="NSFrameSize">{532, 592}</string>
+						<string key="NSFrameSize">{532, 596}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="663922484"/>
@@ -233,7 +233,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSTextField" id="637548305">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{27, 4}, {29, 16}}</string>
+								<string key="NSFrame">{{27, 2}, {29, 16}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="110675771"/>
@@ -312,7 +312,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSButton" id="207814942">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{9, 7}, {18, 18}}</string>
+								<string key="NSFrame">{{9, 5}, {18, 18}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="637548305"/>
@@ -343,7 +343,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSButton" id="197062682">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{406, 6}, {40, 17}}</string>
+								<string key="NSFrame">{{406, 4}, {40, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="164783810"/>
@@ -352,10 +352,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<int key="NSCellFlags">-2080374784</int>
 									<int key="NSCellFlags2">134348800</int>
 									<string key="NSContents">%%+</string>
-									<object class="NSFont" key="NSSupport" id="26">
+									<object class="NSFont" key="NSSupport" id="28">
 										<string key="NSName">LucidaGrande</string>
-										<double key="NSSize">11</double>
-										<int key="NSfFlags">3100</int>
+										<double key="NSSize">12</double>
+										<int key="NSfFlags">4883</int>
 									</object>
 									<reference key="NSControlView" ref="197062682"/>
 									<int key="NSButtonFlags">-2038153216</int>
@@ -370,7 +370,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSButton" id="164783810">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{454, 6}, {69, 17}}</string>
+								<string key="NSFrame">{{454, 4}, {69, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="52710183"/>
@@ -379,7 +379,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<int key="NSCellFlags">-2080374784</int>
 									<int key="NSCellFlags2">134348800</int>
 									<string key="NSContents">unfold all</string>
-									<reference key="NSSupport" ref="26"/>
+									<reference key="NSSupport" ref="28"/>
 									<reference key="NSControlView" ref="164783810"/>
 									<int key="NSButtonFlags">-2038153216</int>
 									<int key="NSButtonFlags2">164</int>
@@ -393,7 +393,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 							<object class="NSPopUpButton" id="110675771">
 								<reference key="NSNextResponder" ref="766462403"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{61, 6}, {337, 17}}</string>
+								<string key="NSFrame">{{61, 4}, {337, 17}}</string>
 								<reference key="NSSuperview" ref="766462403"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="197062682"/>
@@ -401,7 +401,11 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								<object class="NSPopUpButtonCell" key="NSCell" id="513918167">
 									<int key="NSCellFlags">-2080374720</int>
 									<int key="NSCellFlags2">133120</int>
-									<reference key="NSSupport" ref="26"/>
+									<object class="NSFont" key="NSSupport">
+										<string key="NSName">LucidaGrande</string>
+										<double key="NSSize">11</double>
+										<int key="NSfFlags">3100</int>
+									</object>
 									<reference key="NSControlView" ref="110675771"/>
 									<int key="NSButtonFlags">-2038284288</int>
 									<int key="NSButtonFlags2">402653348</int>
@@ -425,7 +429,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 592}, {532, 30}}</string>
+						<string key="NSFrame">{{0, 596}, {532, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="207814942"/>
