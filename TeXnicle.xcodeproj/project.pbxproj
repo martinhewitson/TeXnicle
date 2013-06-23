@@ -371,7 +371,6 @@
 		25D0171A1515FFCF00E27635 /* TPPasteTableConfigureWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D017181515FFCF00E27635 /* TPPasteTableConfigureWindowController.m */; };
 		25D0171B1515FFCF00E27635 /* TPPasteTableConfigureWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D017191515FFCF00E27635 /* TPPasteTableConfigureWindowController.xib */; };
 		25D0E5E114D920EC00233244 /* TPTemplateTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D0E5E014D920EC00233244 /* TPTemplateTableView.m */; };
-		25D10EBE176F00AE004C40AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25D10E1D176F00AE004C40AE /* InfoPlist.strings */; };
 		25D10EBF176F00AE004C40AE /* AdiumGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D10E20176F00AE004C40AE /* AdiumGradient.png */; };
 		25D10EC0176F00AE004C40AE /* AquaTabClose_Front.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D10E21176F00AE004C40AE /* AquaTabClose_Front.png */; };
 		25D10EC1176F00AE004C40AE /* AquaTabClose_Front@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D10E22176F00AE004C40AE /* AquaTabClose_Front@2x.png */; };
@@ -1176,7 +1175,6 @@
 		25D017191515FFCF00E27635 /* TPPasteTableConfigureWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPPasteTableConfigureWindowController.xib; sourceTree = "<group>"; };
 		25D0E5DF14D920EC00233244 /* TPTemplateTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTemplateTableView.h; sourceTree = "<group>"; };
 		25D0E5E014D920EC00233244 /* TPTemplateTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTemplateTableView.m; sourceTree = "<group>"; };
-		25D10E1E176F00AE004C40AE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		25D10E20176F00AE004C40AE /* AdiumGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AdiumGradient.png; sourceTree = "<group>"; };
 		25D10E21176F00AE004C40AE /* AquaTabClose_Front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AquaTabClose_Front.png; sourceTree = "<group>"; };
 		25D10E22176F00AE004C40AE /* AquaTabClose_Front@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AquaTabClose_Front@2x.png"; sourceTree = "<group>"; };
@@ -2532,7 +2530,6 @@
 		25D10E1C176F00AE004C40AE /* MMTabBarView */ = {
 			isa = PBXGroup;
 			children = (
-				25D10E1D176F00AE004C40AE /* InfoPlist.strings */,
 				25D10E1F176F00AE004C40AE /* Images */,
 				25D10E4A176F00AE004C40AE /* MMAttachedTabBarButton.h */,
 				25D10E4B176F00AE004C40AE /* MMAttachedTabBarButton.m */,
@@ -3072,7 +3069,6 @@
 				2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */,
 				2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */,
 				254D16A916FAE53600A31BE8 /* TPMetadataItemView.xib in Resources */,
-				25D10EBE176F00AE004C40AE /* InfoPlist.strings in Resources */,
 				25D10EBF176F00AE004C40AE /* AdiumGradient.png in Resources */,
 				25D10EC0176F00AE004C40AE /* AquaTabClose_Front.png in Resources */,
 				25D10EC1176F00AE004C40AE /* AquaTabClose_Front@2x.png in Resources */,
@@ -3581,14 +3577,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				250BE01B162BEF3A007784DB /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		25D10E1D176F00AE004C40AE /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				25D10E1E176F00AE004C40AE /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
