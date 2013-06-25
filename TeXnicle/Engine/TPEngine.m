@@ -31,6 +31,7 @@
 #import "MHFileReader.h"
 #import "NSScanner+TeXnicle.h"
 #import "NSApplication+SystemVersion.h"
+#import "TPTeXLogParser.h"
 
 @implementation TPEngine
 
@@ -264,9 +265,11 @@
 	
   [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   
+    
   typesetTask = nil;
   procId = -1;
 }
+
 
 - (void) texOutputAvailable:(NSNotification*)aNote
 {	
@@ -286,8 +289,9 @@
 		if (loc < [output length]) {
       [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
-      [typesetTask terminate];
+      [typesetTask interrupt];
       typesetTask = nil;
+      
       [self reset];
       [self compileDidFinish:NO];
 		}

@@ -63,6 +63,7 @@
 #import "NSDictionary+TeXnicle.h"
 #import "TPFileMetadata.h"
 #import "MMTabBarView.h"
+#import "TPTeXLogParser.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -2362,6 +2363,11 @@
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
   [self.miniConsole setAnimating:NO];
+  
+  // parse log file
+  NSString *logfile = [[self documentToCompile] stringByAppendingPathExtension:@"log"];
+  [self parseLogFile:logfile];
+  
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];  
@@ -2380,9 +2386,21 @@
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPAutoTrashAfterCompile] boolValue]) {
       [self.engineManager trashAuxFiles:YES];
     }
+    
   }
   
+  
   _building = NO;
+}
+
+
+- (void) parseLogFile:(NSString*)logpath
+{
+  // TEST------
+  // load log file
+//  NSArray *logItems = [TPTeXLogParser parseLogFile:logpath];
+//  NSLog(@"%@", logItems);
+  
 }
 
 - (void)doLiveBuild

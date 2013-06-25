@@ -1,0 +1,679 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2004.3.25)  8 OCT 2004 19:17
+**MRHthesis.tex
+(./MRHthesis.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/book.cls
+Document Class: book 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/bk12.clo
+File: bk12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2002/06/19 v0.03k graphics/color for pdftex
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/config/color.cfg
+File: color.cfg 2001/08/31 v1.1 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 125.
+)
+(/usr/share/texmf/tex/latex/psnfss/times.sty
+Package: times 2002/09/08 PSNFSS-v9.0a (SPQR) 
+)
+(/usr/share/texmf/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks15
+\ex@=\dimen105
+))
+(/usr/share/texmf/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen106
+)
+(/usr/share/texmf/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count89
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count90
+\leftroot@=\count91
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count92
+\DOTSCASE@=\count93
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count94
+\c@MaxMatrixCols=\count95
+\dotsspace@=\muskip10
+\c@parentequation=\count96
+\dspbrk@lvl=\count97
+\tag@help=\toks16
+\row@=\count98
+\column@=\count99
+\maxfields@=\count100
+\andhelp@=\toks17
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks18
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texmf/tex/latex/mathtime/mathtime.sty
+Package: mathtime 1999/03/29 v1.1mathtime font support (FMi/DPC)
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ptm/m/n on input line 77.
+LaTeX Font Warning: Encoding `OML' has changed to `MY1' for symbol font
+(Font)              `letters' in the math version `normal' on input line 78.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> MY1/mtt/m/it on input line 78.
+LaTeX Font Warning: Encoding `OMS' has changed to `MY2' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 79.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> MY2/mtt/m/n on input line 79.
+LaTeX Font Warning: Encoding `OMX' has changed to `MY3' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 8
+0.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> MY3/mtt/m/n on input line 80.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/ptm/m/n --> OT1/ptm/m/n on input line 136.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ptm/b/n on input line 137.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ptm/m/it on input line 138.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/phv/m/n on input line 139.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 140.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/cmsy/b/n --> OMS/cmsy/m/n on input line 184.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 188.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 190.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 191.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 192.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 193.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 194.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 195.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 196.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 197.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 198.
+LaTeX Font Info:    Redeclaring math symbol \varGamma on input line 199.
+LaTeX Font Info:    Redeclaring math symbol \varDelta on input line 200.
+LaTeX Font Info:    Redeclaring math symbol \varTheta on input line 201.
+LaTeX Font Info:    Redeclaring math symbol \varLambda on input line 202.
+LaTeX Font Info:    Redeclaring math symbol \varXi on input line 203.
+LaTeX Font Info:    Redeclaring math symbol \varPi on input line 204.
+LaTeX Font Info:    Redeclaring math symbol \varSigma on input line 205.
+LaTeX Font Info:    Redeclaring math symbol \varUpsilon on input line 206.
+LaTeX Font Info:    Redeclaring math symbol \varPhi on input line 207.
+LaTeX Font Info:    Redeclaring math symbol \varPsi on input line 208.
+LaTeX Font Info:    Redeclaring math symbol \varOmega on input line 209.
+LaTeX Font Info:    Redeclaring math symbol \triangleleft on input line 214.
+LaTeX Font Info:    Redeclaring math symbol \triangleright on input line 215.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 226.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 227.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 228.
+LaTeX Font Info:    Redeclaring math accent \check on input line 229.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 230.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 231.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 232.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 233.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 234.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 235.
+LaTeX Info: Redefining \hbar on input line 262.
+\symtextcomp=\mathgroup4
+LaTeX Font Info:    Redeclaring math symbol \dagger on input line 303.
+LaTeX Font Info:    Redeclaring math symbol \ddagger on input line 304.
+LaTeX Font Info:    Redeclaring math symbol \mathsection on input line 305.
+LaTeX Font Info:    Redeclaring math symbol \mathparagraph on input line 306.
+)
+(/usr/share/texmf/tex/latex/tools/calc.sty
+Package: calc 1998/07/07 v4.1b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count101
+\calc@Bcount=\count102
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
+\calc@Askip=\skip46
+\calc@Bskip=\skip47
+LaTeX Info: Redefining \setlength on input line 59.
+LaTeX Info: Redefining \addtolength on input line 60.
+\calc@denominator=\count103
+)
+(/usr/share/texmf/tex/latex/fancyhdr/fancyhdr.sty
+\headwidth=\dimen116
+)
+(/usr/share/texmf/tex/latex/misc/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+\Gm@cnth=\count104
+\Gm@cntv=\count105
+\c@Gm@tempcnt=\count106
+\Gm@bindingoffset=\dimen117
+\Gm@wd@mp=\dimen118
+\Gm@odd@mp=\dimen119
+\Gm@even@mp=\dimen120
+\Gm@dimlist=\toks20
+
+(/usr/share/texmf/tex/latex/config/geometry.cfg
+File: geometry.cfg 2001/06/05 v1.0 teTeX (uncustomised setup)
+))
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(/usr/share/texmf/tex/generic/babel/english.ldf
+Language: english 2001/04/15 v3.3l English support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count107
+\U@D=\dimen121
+)
+\l@canadian = a dialect from \language\l@english 
+))
+(/usr/share/texmf/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2003/01/22 v6.73n Hypertext links for LaTeX
+\@linkdim=\dimen122
+\Hy@linkcounter=\count108
+\Hy@pagecounter=\count109
+
+(/usr/share/texmf/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2003/01/22 v6.73n Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive and teTeX
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 1744.
+Package hyperref Info: Hyper figures OFF on input line 1792.
+Package hyperref Info: Link nesting OFF on input line 1797.
+Package hyperref Info: Hyper index ON on input line 1800.
+Package hyperref Info: Plain pages ON on input line 1805.
+Package hyperref Info: Backreferencing OFF on input line 1812.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 1916.
+(/usr/share/texmf/tex/latex/html/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
+)
+LaTeX Info: Redefining \url on input line 2055.
+\Fld@menulength=\count110
+\Field@Width=\dimen123
+\Fld@charsize=\dimen124
+\Choice@toks=\toks21
+\Field@toks=\toks22
+Package hyperref Info: Hyper figures OFF on input line 2513.
+Package hyperref Info: Link nesting OFF on input line 2518.
+Package hyperref Info: Hyper index ON on input line 2521.
+Package hyperref Info: backreferencing OFF on input line 2528.
+Package hyperref Info: Link coloring ON on input line 2531.
+\c@Item=\count111
+\c@Hfootnote=\count112
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2003/01/22 v6.73n Hyperref driver for pdfTeX
+
+(/usr/share/texmf/tex/latex/psnfss/pifont.sty
+Package: pifont 2002/09/08 PSNFSS-v9.0a Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 62.
+
+(/usr/share/texmf/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 63.
+
+(/usr/share/texmf/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
+\Fld@listcount=\count113
+\@outlinefile=\write3
+) (./MRHthesis.aux
+(./tex/abstract.aux) (./tex/acknowledgements.aux) (./tex/preface.aux)
+(./tex/dr_cal.aux) (./tex/filters.aux) (./tex/code.aux) (./tex/glossary.aux)
+(./tex/bib.aux))
+\openout1 = `MRHthesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for MY1/mtt/m/it on input line 29.
+LaTeX Font Info:    Try loading font information for MY1+mtt on input line 29.
+ (/usr/share/texmf/tex/latex/mathtime/my1mtt.fd
+File: my1mtt.fd 2001/05/30 v1.0c Mathtime Encoding 1 (FMi)
+)
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for MY2/mtt/m/n on input line 29.
+LaTeX Font Info:    Try loading font information for MY2+mtt on input line 29.
+
+(/usr/share/texmf/tex/latex/mathtime/my2mtt.fd
+File: my2mtt.fd 2001/05/30 v1.0c Mathtime Encoding 2 (FMi)
+)
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for MY3/mtt/m/n on input line 29.
+LaTeX Font Info:    Try loading font information for MY3+mtt on input line 29.
+
+(/usr/share/texmf/tex/latex/mathtime/my3mtt.fd
+File: my3mtt.fd 2001/05/30 v1.0c Mathtime Encoding 3 (FMi)
+)
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 29.
+
+(/usr/share/texmf/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 29.
+
+(/usr/share/texmf/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count114
+\scratchcounter=\count115
+\scratchtoks=\toks23
+\scratchdimen=\dimen125
+\scratchskip=\skip48
+\scratchmuskip=\muskip11
+\scratchbox=\box28
+\scratchread=\read1
+\scratchwrite=\write4
+\zeropoint=\dimen126
+\minusone=\count116
+\thousandpoint=\dimen127
+\emptytoks=\toks24
+\nextbox=\box29
+\nextdepth=\dimen128
+\everyline=\toks25
+\!!counta=\count117
+\!!countb=\count118
+\recursecounter=\count119
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPtoPDFconversion=\toks26
+)
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: --
+asymmetric: --
+h-parts: 89.62709pt, 0.7\paperwidth , 89.6271pt (default)
+v-parts: 101.40665pt, 0.7\paperheight , 152.11pt (default)
+hmarginratio: 1:1
+vmarginratio: 2:3
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  597.50787pt
+\paperheight 845.04684pt
+\textwidth  421.10086pt
+\textheight 591.5302pt
+\oddsidemargin  113.81102pt
+\evensidemargin 17.3571pt
+\topmargin  -2.73714pt
+\headheight 12.0pt
+\headsep    19.8738pt
+\footskip   30.0pt
+\marginparwidth 38.0pt
+\marginparsep   7.0pt
+\columnsep  10.0pt
+\skip\footins  10.8pt plus 4.0pt minus 2.0pt
+\hoffset -72.26999pt
+\voffset 0.0pt
+\mag 1000
+
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+Package hyperref Info: Link coloring ON on input line 29.
+ (/usr/share/texmf/tex/latex/hyperref/nameref.sty
+Package: nameref 2001/01/27 v2.19 Cross-referencing by name of section
+\c@section@level=\count122
+)
+LaTeX Info: Redefining \ref on input line 29.
+LaTeX Info: Redefining \pageref on input line 29.
+ (./MRHthesis.out)
+(./MRHthesis.out)
+\openout3 = `MRHthesis.out'.
+
+
+
+Package Fancyhdr Warning: fancyhdr's E option without twoside option is useless
+ on input line 46.
+
+
+Package Fancyhdr Warning: fancyhdr's E option without twoside option is useless
+ on input line 48.
+
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 107.
+
+(/usr/share/texmf/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+)
+LaTeX Font Info:    Try loading font information for MY2+ptm on input line 107.
+
+LaTeX Font Info:    No file MY2ptm.fd. on input line 107.
+LaTeX Font Warning: Font shape `MY2/ptm/m/n' undefined
+(Font)              using `MY2/mtt/m/n' instead on input line 107.
+ [1
+
+
+
+{/usr/share/texmf/dvips/config/pdftex.map}]
+! pdfTeX warning (ext4): destination with the same identifier (name{page.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \penalty 
+l.116 \newpage
+              
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 116.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1]
+\openout2 = `tex/abstract.aux'.
+
+ (./tex/abstract.tex
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
+ [2
+
+
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[3]
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[4])
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[5]
+\openout2 = `tex/acknowledgements.aux'.
+
+ (./tex/acknowledgements.tex [6
+
+
+
+])
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[7]
+\openout2 = `tex/preface.aux'.
+
+ (./tex/preface.tex
+
+LaTeX Warning: Reference `sec:intro' on page viii undefined on input line 11.
+
+
+LaTeX Warning: Reference `sec:daq' on page viii undefined on input line 32.
+
+[8
+
+
+
+]
+
+LaTeX Warning: Reference `sec:cal_pr' on page ix undefined on input line 41.
+
+
+LaTeX Warning: Reference `sec:cal_pr' on page ix undefined on input line 58.
+
+
+LaTeX Warning: Reference `sec:dr_cal_principles' on page ix undefined on input 
+line 60.
+
+
+LaTeX Warning: Reference `sec:dr_cal_simulations' on page ix undefined on input
+ line 66.
+
+
+LaTeX Warning: Reference `sec:dr_cal_s3' on page ix undefined on input line 66.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9])
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[10] (./MRHthesis.toc
+LaTeX Font Info:    Font shape `OT1/ptm/bx/sc' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/sc' tried instead on input line 5.
+ [11
+
+
+])
+\tf@toc=\write5
+\openout5 = `MRHthesis.toc'.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[12] (./MRHthesis.lof [13
+
+])
+\tf@lof=\write6
+\openout6 = `MRHthesis.lof'.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[14] (./MRHthesis.lot)
+\tf@lot=\write7
+\openout7 = `MRHthesis.lot'.
+
+ [15
+
+]
+\openout2 = `tex/dr_cal.aux'.
+
+ (./tex/dr_cal.tex
+Chapter 1.
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string:
+(hyperref)                \kern 2.00043pt
+(hyperref)                removed on input line 3.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/sc' in size <24.88> not available
+(Font)              Font shape `OT1/ptm/b/sc' tried instead on input line 3.
+
+LaTeX Warning: Reference `sec:intro_sr' on page 1 undefined on input line 11.
+
+
+LaTeX Warning: Reference `sec:cal_pr' on page 1 undefined on input line 13.
+
+! pdfTeX warning (ext4): destination with the same identifier (name{page.1}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \penalty 
+l.30 
+      [1
+
+
+
+]
+
+LaTeX Warning: Reference `fig:geo' on page 2 undefined on input line 31.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 41.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/sc' in size <17.28> not available
+(Font)              Font shape `OT1/ptm/b/sc' tried instead on input line 41.
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string:
+(hyperref)                \kern 2.00043pt
+(hyperref)                removed on input line 41.
+
+
+LaTeX Warning: Reference `sec:cal_pr' on page 2 undefined on input line 46.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 53.
+! pdfTeX warning (ext4): destination with the same identifier (name{page.2}) ha
+s been already used, duplicate ignored
+<to be read again> 
+                   \penalty 
+l.61 
+     
+
+Package Fancyhdr Warning: \headheight is too small (12.5pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[2]
+
+LaTeX Warning: Reference `sec:intro_signal_extraction' on page 3 undefined on i
+nput line 66.
+
+
+LaTeX Warning: Reference `sec:pr_cal_optg' on page 3 undefined on input line 77
+.
+
+File: images/dr_cal/sr600_opt.mps Graphic file (type mps)
+[MP to PDF] (./images/dr_cal/sr600_opt.mps)
+File: images/dr_cal/3DmagVdemod.mps Graphic file (type mps)
+ [MP to PDF]
+(./images/dr_cal/3DmagVdemod.mps)
+File: images/dr_cal/3DphaseVdemod.mps Graphic file (type mps)
+ [MP to PDF]
+(./images/dr_cal/3DphaseVdemod.mps
+Runaway definition?
+->newpat
+! TeX capacity exceeded, sorry [main memory size=1000001].
+<argument> newpath
+                  
+l.15877 newpath 
+                306.54 348.6 moveto
+If you really absolutely need more capacity,
+you can ask a wizard to enlarge me.
+
+ 
+Here is how much of TeX's memory you used:
+ 5316 strings out of 95437
+ 64684 string characters out of 1188125
+ 1000002 words of memory out of 1000001
+ 8126 multiletter control sequences out of 10000+50000
+ 46577 words of font info for 80 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 28i,12n,48p,272b,1382s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 288 PDF objects out of 300000
+ 72 named destinations out of 131072
+ 198 words of extra memory for PDF output out of 65536
+!  ==> Fatal error occurred, the output PDF file is not finished!

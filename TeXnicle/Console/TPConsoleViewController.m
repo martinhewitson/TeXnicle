@@ -31,6 +31,11 @@
 
 @interface TPConsoleViewController ()
 
+@property (nonatomic, retain) IBOutlet NSSegmentedControl *viewSelector;
+@property (nonatomic, retain) IBOutlet NSTabView *tabView;
+@property (nonatomic, retain) IBOutlet NSView *logViewContainer;
+@property (nonatomic, retain) TPTeXLogViewController *logViewController;
+
 @end
 
 @implementation TPConsoleViewController
@@ -59,10 +64,26 @@
   return self;
 }
 
+- (IBAction)selectView:(id)sender
+{
+  [self.tabView selectTabViewItemAtIndex:[self.viewSelector selectedSegment]];
+}
+
+
 - (void)awakeFromNib
 {
   NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
   [toolbarView setFillColor:color1];
+  
+  
+  NSString *logfile = [NSString stringWithFormat:@"/Users/hewitson/working/software/cocoa/mac/test/TestLogParser/TestLogParserTests/logfiles/log4.log"];
+  
+  TPParsedLog *log = [[TPParsedLog alloc] initWithLogFileAtPath:logfile];
+  
+  self.logViewController = [[TPTeXLogViewController alloc] initWithParsedLog:log delegate:self];
+  [self.logViewController.view setFrame:self.logViewContainer.bounds];
+  [self.logViewContainer addSubview:self.logViewController.view];
+  
 }
 
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote

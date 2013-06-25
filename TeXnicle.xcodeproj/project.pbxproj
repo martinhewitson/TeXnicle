@@ -509,6 +509,37 @@
 		25DB36C015B47887009E086A /* TPLabelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36BE15B47887009E086A /* TPLabelsViewController.m */; };
 		25DB36C415B478DA009E086A /* TPLabelsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C315B478DA009E086A /* TPLabelsSet.m */; };
 		25DB36C715B47D9B009E086A /* TPLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB36C615B47D9B009E086A /* TPLabel.m */; };
+		25DB59341778BB9F000383AF /* log_error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB591C1778BB9F000383AF /* log_error.icns */; };
+		25DB59371778BB9F000383AF /* log_info.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB591F1778BB9F000383AF /* log_info.icns */; };
+		25DB593A1778BB9F000383AF /* log_warning.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59221778BB9F000383AF /* log_warning.icns */; };
+		25DB593C1778BB9F000383AF /* NSArray+LogParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59251778BB9F000383AF /* NSArray+LogParser.m */; };
+		25DB593D1778BB9F000383AF /* NSString+LogParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59271778BB9F000383AF /* NSString+LogParser.m */; };
+		25DB593E1778BB9F000383AF /* TPLogFileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59291778BB9F000383AF /* TPLogFileItem.m */; };
+		25DB593F1778BB9F000383AF /* TPLogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB592B1778BB9F000383AF /* TPLogItem.m */; };
+		25DB59401778BB9F000383AF /* TPParsedLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB592D1778BB9F000383AF /* TPParsedLog.m */; };
+		25DB59411778BB9F000383AF /* TPTeXLogParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB592F1778BB9F000383AF /* TPTeXLogParser.m */; };
+		25DB59421778BB9F000383AF /* TPTeXLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59311778BB9F000383AF /* TPTeXLogViewController.m */; };
+		25DB59431778BB9F000383AF /* TPTeXLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59321778BB9F000383AF /* TPTeXLogViewController.xib */; };
+		25DB59551778BC3E000383AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59451778BC3E000383AF /* InfoPlist.strings */; };
+		25DB59561778BC3E000383AF /* log1.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59481778BC3E000383AF /* log1.log */; };
+		25DB59571778BC3E000383AF /* log10.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59491778BC3E000383AF /* log10.log */; };
+		25DB59581778BC3E000383AF /* log11.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594A1778BC3E000383AF /* log11.log */; };
+		25DB59591778BC3E000383AF /* log2.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594B1778BC3E000383AF /* log2.log */; };
+		25DB595A1778BC3E000383AF /* log3.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594C1778BC3E000383AF /* log3.log */; };
+		25DB595B1778BC3E000383AF /* log4.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594D1778BC3E000383AF /* log4.log */; };
+		25DB595C1778BC3E000383AF /* log5.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594E1778BC3E000383AF /* log5.log */; };
+		25DB595D1778BC3E000383AF /* log6.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594F1778BC3E000383AF /* log6.log */; };
+		25DB595E1778BC3E000383AF /* log7.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59501778BC3E000383AF /* log7.log */; };
+		25DB595F1778BC3E000383AF /* log8.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59511778BC3E000383AF /* log8.log */; };
+		25DB59601778BC3E000383AF /* log9.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59521778BC3E000383AF /* log9.log */; };
+		25DB59611778BC3E000383AF /* TestLogParserTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59531778BC3E000383AF /* TestLogParserTests-Info.plist */; };
+		25DB59621778BC3E000383AF /* TestLogParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59541778BC3E000383AF /* TestLogParserTests.m */; };
+		25DB59701778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59671778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m */; };
+		25DB59711778C1A3000383AF /* SMBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59691778C1A3000383AF /* SMBar.m */; };
+		25DB59721778C1A3000383AF /* SMTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB596B1778C1A3000383AF /* SMTabBar.m */; };
+		25DB59731778C1A3000383AF /* SMTabBarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB596D1778C1A3000383AF /* SMTabBarButtonCell.m */; };
+		25DB59741778C1A3000383AF /* SMTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB596F1778C1A3000383AF /* SMTabBarItem.m */; };
+		25DB59761778C6B3000383AF /* error_template.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59751778C689000383AF /* error_template.icns */; };
 		25DBBDD914EB812400C1D0CF /* MHWhitebackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */; };
 		25DC3FD414B43ED000CA3053 /* NSArray+LaTeX.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DC3FD314B43ED000CA3053 /* NSArray+LaTeX.m */; };
 		25DD32BF14B981CF00C5D1E3 /* UISettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD32BE14B981CF00C5D1E3 /* UISettings.m */; };
@@ -1355,6 +1386,50 @@
 		25DB36C315B478DA009E086A /* TPLabelsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabelsSet.m; sourceTree = "<group>"; };
 		25DB36C515B47D9B009E086A /* TPLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLabel.h; sourceTree = "<group>"; };
 		25DB36C615B47D9B009E086A /* TPLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLabel.m; sourceTree = "<group>"; };
+		25DB591C1778BB9F000383AF /* log_error.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_error.icns; sourceTree = "<group>"; };
+		25DB591F1778BB9F000383AF /* log_info.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_info.icns; sourceTree = "<group>"; };
+		25DB59221778BB9F000383AF /* log_warning.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_warning.icns; sourceTree = "<group>"; };
+		25DB59241778BB9F000383AF /* NSArray+LogParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LogParser.h"; sourceTree = "<group>"; };
+		25DB59251778BB9F000383AF /* NSArray+LogParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LogParser.m"; sourceTree = "<group>"; };
+		25DB59261778BB9F000383AF /* NSString+LogParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LogParser.h"; sourceTree = "<group>"; };
+		25DB59271778BB9F000383AF /* NSString+LogParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LogParser.m"; sourceTree = "<group>"; };
+		25DB59281778BB9F000383AF /* TPLogFileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLogFileItem.h; sourceTree = "<group>"; };
+		25DB59291778BB9F000383AF /* TPLogFileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLogFileItem.m; sourceTree = "<group>"; };
+		25DB592A1778BB9F000383AF /* TPLogItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLogItem.h; sourceTree = "<group>"; };
+		25DB592B1778BB9F000383AF /* TPLogItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLogItem.m; sourceTree = "<group>"; };
+		25DB592C1778BB9F000383AF /* TPParsedLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPParsedLog.h; sourceTree = "<group>"; };
+		25DB592D1778BB9F000383AF /* TPParsedLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPParsedLog.m; sourceTree = "<group>"; };
+		25DB592E1778BB9F000383AF /* TPTeXLogParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTeXLogParser.h; sourceTree = "<group>"; };
+		25DB592F1778BB9F000383AF /* TPTeXLogParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTeXLogParser.m; sourceTree = "<group>"; };
+		25DB59301778BB9F000383AF /* TPTeXLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTeXLogViewController.h; sourceTree = "<group>"; };
+		25DB59311778BB9F000383AF /* TPTeXLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTeXLogViewController.m; sourceTree = "<group>"; };
+		25DB59321778BB9F000383AF /* TPTeXLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPTeXLogViewController.xib; sourceTree = "<group>"; };
+		25DB59461778BC3E000383AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		25DB59481778BC3E000383AF /* log1.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log1.log; sourceTree = "<group>"; };
+		25DB59491778BC3E000383AF /* log10.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log10.log; sourceTree = "<group>"; };
+		25DB594A1778BC3E000383AF /* log11.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log11.log; sourceTree = "<group>"; };
+		25DB594B1778BC3E000383AF /* log2.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log2.log; sourceTree = "<group>"; };
+		25DB594C1778BC3E000383AF /* log3.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log3.log; sourceTree = "<group>"; };
+		25DB594D1778BC3E000383AF /* log4.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log4.log; sourceTree = "<group>"; };
+		25DB594E1778BC3E000383AF /* log5.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log5.log; sourceTree = "<group>"; };
+		25DB594F1778BC3E000383AF /* log6.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log6.log; sourceTree = "<group>"; };
+		25DB59501778BC3E000383AF /* log7.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log7.log; sourceTree = "<group>"; };
+		25DB59511778BC3E000383AF /* log8.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log8.log; sourceTree = "<group>"; };
+		25DB59521778BC3E000383AF /* log9.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log9.log; sourceTree = "<group>"; };
+		25DB59531778BC3E000383AF /* TestLogParserTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestLogParserTests-Info.plist"; sourceTree = "<group>"; };
+		25DB59541778BC3E000383AF /* TestLogParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLogParserTests.m; sourceTree = "<group>"; };
+		25DB59631778BCD6000383AF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		25DB59661778C1A3000383AF /* NSDictionary+SMKeyValueObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SMKeyValueObserving.h"; sourceTree = "<group>"; };
+		25DB59671778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SMKeyValueObserving.m"; sourceTree = "<group>"; };
+		25DB59681778C1A3000383AF /* SMBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBar.h; sourceTree = "<group>"; };
+		25DB59691778C1A3000383AF /* SMBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMBar.m; sourceTree = "<group>"; };
+		25DB596A1778C1A3000383AF /* SMTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTabBar.h; sourceTree = "<group>"; };
+		25DB596B1778C1A3000383AF /* SMTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTabBar.m; sourceTree = "<group>"; };
+		25DB596C1778C1A3000383AF /* SMTabBarButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTabBarButtonCell.h; sourceTree = "<group>"; };
+		25DB596D1778C1A3000383AF /* SMTabBarButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTabBarButtonCell.m; sourceTree = "<group>"; };
+		25DB596E1778C1A3000383AF /* SMTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTabBarItem.h; sourceTree = "<group>"; };
+		25DB596F1778C1A3000383AF /* SMTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTabBarItem.m; sourceTree = "<group>"; };
+		25DB59751778C689000383AF /* error_template.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = error_template.icns; sourceTree = "<group>"; };
 		25DBBDD714EB812400C1D0CF /* MHWhitebackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWhitebackground.h; sourceTree = "<group>"; };
 		25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWhitebackground.m; sourceTree = "<group>"; };
 		25DC3FD214B43ED000CA3053 /* NSArray+LaTeX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LaTeX.h"; sourceTree = "<group>"; };
@@ -1486,6 +1561,7 @@
 		250772EF138E5D81000F1118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25DB59631778BCD6000383AF /* XCTest.framework */,
 				25CFBD1F16D2D89C0025B35D /* WebKit.framework */,
 				253312E615B6FF3500F9FD00 /* Sparkle.framework */,
 				25F90EF114D054F600760F0B /* libz.dylib */,
@@ -1517,6 +1593,8 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				25DB59651778C1A3000383AF /* InspectorTabBar */,
+				25DB59191778BB9F000383AF /* TeXLogParser */,
 				25D10E1C176F00AE004C40AE /* MMTabBarView */,
 				25CFBD1016D2CF870025B35D /* Document Report */,
 				2509382B15C4F647007DACD2 /* TeXnicle.entitlements */,
@@ -2779,6 +2857,87 @@
 			path = src/LabelsView;
 			sourceTree = "<group>";
 		};
+		25DB59191778BB9F000383AF /* TeXLogParser */ = {
+			isa = PBXGroup;
+			children = (
+				25DB59441778BC3E000383AF /* TestLogParserTests */,
+				25DB591A1778BB9F000383AF /* images */,
+				25DB59241778BB9F000383AF /* NSArray+LogParser.h */,
+				25DB59251778BB9F000383AF /* NSArray+LogParser.m */,
+				25DB59261778BB9F000383AF /* NSString+LogParser.h */,
+				25DB59271778BB9F000383AF /* NSString+LogParser.m */,
+				25DB59281778BB9F000383AF /* TPLogFileItem.h */,
+				25DB59291778BB9F000383AF /* TPLogFileItem.m */,
+				25DB592A1778BB9F000383AF /* TPLogItem.h */,
+				25DB592B1778BB9F000383AF /* TPLogItem.m */,
+				25DB592C1778BB9F000383AF /* TPParsedLog.h */,
+				25DB592D1778BB9F000383AF /* TPParsedLog.m */,
+				25DB592E1778BB9F000383AF /* TPTeXLogParser.h */,
+				25DB592F1778BB9F000383AF /* TPTeXLogParser.m */,
+				25DB59301778BB9F000383AF /* TPTeXLogViewController.h */,
+				25DB59311778BB9F000383AF /* TPTeXLogViewController.m */,
+				25DB59321778BB9F000383AF /* TPTeXLogViewController.xib */,
+			);
+			path = TeXLogParser;
+			sourceTree = "<group>";
+		};
+		25DB591A1778BB9F000383AF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				25DB59751778C689000383AF /* error_template.icns */,
+				25DB591C1778BB9F000383AF /* log_error.icns */,
+				25DB591F1778BB9F000383AF /* log_info.icns */,
+				25DB59221778BB9F000383AF /* log_warning.icns */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		25DB59441778BC3E000383AF /* TestLogParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				25DB59451778BC3E000383AF /* InfoPlist.strings */,
+				25DB59471778BC3E000383AF /* logfiles */,
+				25DB59531778BC3E000383AF /* TestLogParserTests-Info.plist */,
+				25DB59541778BC3E000383AF /* TestLogParserTests.m */,
+			);
+			path = TestLogParserTests;
+			sourceTree = "<group>";
+		};
+		25DB59471778BC3E000383AF /* logfiles */ = {
+			isa = PBXGroup;
+			children = (
+				25DB59481778BC3E000383AF /* log1.log */,
+				25DB59491778BC3E000383AF /* log10.log */,
+				25DB594A1778BC3E000383AF /* log11.log */,
+				25DB594B1778BC3E000383AF /* log2.log */,
+				25DB594C1778BC3E000383AF /* log3.log */,
+				25DB594D1778BC3E000383AF /* log4.log */,
+				25DB594E1778BC3E000383AF /* log5.log */,
+				25DB594F1778BC3E000383AF /* log6.log */,
+				25DB59501778BC3E000383AF /* log7.log */,
+				25DB59511778BC3E000383AF /* log8.log */,
+				25DB59521778BC3E000383AF /* log9.log */,
+			);
+			path = logfiles;
+			sourceTree = "<group>";
+		};
+		25DB59651778C1A3000383AF /* InspectorTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				25DB59661778C1A3000383AF /* NSDictionary+SMKeyValueObserving.h */,
+				25DB59671778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m */,
+				25DB59681778C1A3000383AF /* SMBar.h */,
+				25DB59691778C1A3000383AF /* SMBar.m */,
+				25DB596A1778C1A3000383AF /* SMTabBar.h */,
+				25DB596B1778C1A3000383AF /* SMTabBar.m */,
+				25DB596C1778C1A3000383AF /* SMTabBarButtonCell.h */,
+				25DB596D1778C1A3000383AF /* SMTabBarButtonCell.m */,
+				25DB596E1778C1A3000383AF /* SMTabBarItem.h */,
+				25DB596F1778C1A3000383AF /* SMTabBarItem.m */,
+			);
+			path = InspectorTabBar;
+			sourceTree = "<group>";
+		};
 		25E7B13315AB396800373A56 /* TPProjectOutline */ = {
 			isa = PBXGroup;
 			children = (
@@ -2959,6 +3118,7 @@
 				252144C71398CA9100656D3F /* findTabBarImage.icns in Resources */,
 				25E50247139FC9F5004A983E /* schema.xml in Resources */,
 				253E8FA813A2151B00720CD0 /* zoomIn.icns in Resources */,
+				25DB59341778BB9F000383AF /* log_error.icns in Resources */,
 				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
 				259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */,
 				25A47D0A13E1540500CAFEB7 /* newFolder.icns in Resources */,
@@ -3034,6 +3194,7 @@
 				258BCAEC15B0698C0092E914 /* backbutton.icns in Resources */,
 				258BCAED15B0698C0092E914 /* backbuttonDepressed.icns in Resources */,
 				258BCAF015B06B170092E914 /* forwardbutton.icns in Resources */,
+				25DB59761778C6B3000383AF /* error_template.icns in Resources */,
 				258BCAF115B06B170092E914 /* forwardbuttonDepressed.icns in Resources */,
 				2540D8BA15B2C31E00528982 /* TPLibraryView.xib in Resources */,
 				25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */,
@@ -3060,6 +3221,7 @@
 				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
 				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 				25CFBD1316D2CFB90025B35D /* texcount in Resources */,
+				25DB59431778BB9F000383AF /* TPTeXLogViewController.xib in Resources */,
 				25CFBD1B16D2D0B00025B35D /* TPDocumentReportWindowController.xib in Resources */,
 				2567272A16E4A246004B7C4A /* outline_part.icns in Resources */,
 				2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */,
@@ -3085,6 +3247,7 @@
 				25D10ECC176F00AE004C40AE /* AquaTabNewPressed@2x.png in Resources */,
 				25D10ECD176F00AE004C40AE /* AquaTabNewRollover.png in Resources */,
 				25D10ECE176F00AE004C40AE /* AquaTabNewRollover@2x.png in Resources */,
+				25DB59371778BB9F000383AF /* log_info.icns in Resources */,
 				25D10ECF176F00AE004C40AE /* AquaTabsBackground.png in Resources */,
 				25D10ED0176F00AE004C40AE /* AquaTabsDown.png in Resources */,
 				25D10ED1176F00AE004C40AE /* AquaTabsDownGraphite.png in Resources */,
@@ -3092,6 +3255,7 @@
 				25D10ED3176F00AE004C40AE /* AquaTabsSeparator.png in Resources */,
 				25D10ED4176F00AE004C40AE /* AquaTabsSeparatorDown.png in Resources */,
 				25D10ED5176F00AE004C40AE /* overflowImage.png in Resources */,
+				25DB593A1778BB9F000383AF /* log_warning.icns in Resources */,
 				25D10ED6176F00AE004C40AE /* overflowImage@2x.png in Resources */,
 				25D10ED7176F00AE004C40AE /* overflowImagePressed.png in Resources */,
 				25D10ED8176F00AE004C40AE /* overflowImagePressed@2x.png in Resources */,
@@ -3180,30 +3344,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				250BE01C162BEF3A007784DB /* InfoPlist.strings in Resources */,
+				25DB59581778BC3E000383AF /* log11.log in Resources */,
 				250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */,
 				250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */,
 				250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */,
+				25DB595C1778BC3E000383AF /* log5.log in Resources */,
 				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
+				25DB59601778BC3E000383AF /* log9.log in Resources */,
 				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
+				25DB595D1778BC3E000383AF /* log6.log in Resources */,
 				2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */,
 				253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */,
 				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
 				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
+				25DB595E1778BC3E000383AF /* log7.log in Resources */,
 				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
 				252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */,
+				25DB595A1778BC3E000383AF /* log3.log in Resources */,
 				252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */,
 				252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */,
 				252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */,
 				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				25DB59551778BC3E000383AF /* InfoPlist.strings in Resources */,
+				25DB595F1778BC3E000383AF /* log8.log in Resources */,
+				25DB59571778BC3E000383AF /* log10.log in Resources */,
 				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
 				251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */,
+				25DB59591778BC3E000383AF /* log2.log in Resources */,
 				251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */,
 				251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */,
 				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
+				25DB59561778BC3E000383AF /* log1.log in Resources */,
 				251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */,
+				25DB59611778BC3E000383AF /* TestLogParserTests-Info.plist in Resources */,
 				251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */,
 				250F1B5816E34C7E00629A2E /* placeholderTest1.tex in Resources */,
+				25DB595B1778BC3E000383AF /* log4.log in Resources */,
 				250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3275,6 +3452,7 @@
 				257B4799138E5E9000ED02C4 /* TeXTextView.m in Sources */,
 				257B479A138E5E9000ED02C4 /* TPSectionListController.m in Sources */,
 				257B479B138E5E9000ED02C4 /* NSColorArrayTransformer.m in Sources */,
+				25DB59731778C1A3000383AF /* SMTabBarButtonCell.m in Sources */,
 				257B479D138E5E9000ED02C4 /* SBGradientView.m in Sources */,
 				257B479E138E5E9000ED02C4 /* TETopBarView.m in Sources */,
 				257B479F138E5E9000ED02C4 /* TeXEditorViewController.m in Sources */,
@@ -3304,23 +3482,28 @@
 				25717DAF1392D60A00955620 /* NSWorkspaceExtended.m in Sources */,
 				253E5E3413951DD300566E23 /* TPLibraryImageGenerator.m in Sources */,
 				253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */,
+				25DB593C1778BB9F000383AF /* NSArray+LogParser.m in Sources */,
 				2528E85C1395209300834921 /* NSStringUUID.m in Sources */,
 				2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */,
 				2528E8671395402F00834921 /* ExternalTeXDoc.m in Sources */,
+				25DB59701778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m in Sources */,
 				2528E86C1395446400834921 /* DocWindowController.m in Sources */,
 				2528E8711395662600834921 /* StartupScreenController.m in Sources */,
 				25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */,
 				25A8DF001397AA160097A62E /* MHImageView.m in Sources */,
 				25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */,
 				25D74AEE1397F90E0074A5A2 /* MHRoundedBottomView.m in Sources */,
+				25DB59411778BB9F000383AF /* TPTeXLogParser.m in Sources */,
 				252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */,
 				25CD0E9113995226004EB857 /* ConsoleWindow.m in Sources */,
+				25DB59421778BB9F000383AF /* TPTeXLogViewController.m in Sources */,
 				2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */,
 				259530B013DD68DF00CA2894 /* TPFileMonitor.m in Sources */,
 				252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */,
 				253F7A4213E3EF16005C1051 /* TPProjectBuilder.m in Sources */,
 				255DB84913E56CB1007629C0 /* TPDescriptionView.m in Sources */,
 				255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */,
+				25DB593F1778BB9F000383AF /* TPLogItem.m in Sources */,
 				25CC10B613E5DD9300A15850 /* TPImageViewerBackgroundView.m in Sources */,
 				2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */,
 				2545864C13E9268700461494 /* PDFViewerController.m in Sources */,
@@ -3368,6 +3551,7 @@
 				25F9913714C2C7F4002F7A3F /* TPProjectBuilderReport.m in Sources */,
 				25F9913D14C2D14C002F7A3F /* MHPDFView.m in Sources */,
 				25F90EEC14D052B400760F0B /* synctex_parser.c in Sources */,
+				25DB59711778C1A3000383AF /* SMBar.m in Sources */,
 				25F90EF014D0549400760F0B /* synctex_parser_utils.c in Sources */,
 				25C72A6014D4535A00A81DEE /* TPTemplateEditor.m in Sources */,
 				25C72A6614D4539A00A81DEE /* TPTemplateEditorView.m in Sources */,
@@ -3376,6 +3560,7 @@
 				254960DC14DB12770017245C /* NSView+Subview.m in Sources */,
 				25131EA714E182C40065CDA7 /* MHTableConfigureController.m in Sources */,
 				25131EAD14E19F320065CDA7 /* MHPaletteTableView.m in Sources */,
+				25DB59721778C1A3000383AF /* SMTabBar.m in Sources */,
 				256C84CD14E7B896007E4FBA /* MHSynctexController.m in Sources */,
 				25D57FBA14EA5371008E02B5 /* TPProjectTemplateCreator.m in Sources */,
 				25DBBDD914EB812400C1D0CF /* MHWhitebackground.m in Sources */,
@@ -3395,6 +3580,7 @@
 				25701AF11505F9F50097E8DA /* TPProjectTemplateListViewer.m in Sources */,
 				251FFD53150BC0B700A5A7EF /* TPConsoleViewController.m in Sources */,
 				258348981513B2FC008A21BE /* BibliographyEntry.m in Sources */,
+				25DB593E1778BB9F000383AF /* TPLogFileItem.m in Sources */,
 				258348A51513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m in Sources */,
 				25D017161515F30000E27635 /* MHPDFThumbnailView.m in Sources */,
 				25D0171A1515FFCF00E27635 /* TPPasteTableConfigureWindowController.m in Sources */,
@@ -3441,9 +3627,11 @@
 				255A16F715B54733004290CC /* TPNewCommandsViewController.m in Sources */,
 				255A16FB15B5474B004290CC /* TPCommandSet.m in Sources */,
 				257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */,
+				25DB59741778C1A3000383AF /* SMTabBarItem.m in Sources */,
 				256225CD15CA940600091A8C /* TPPalette.m in Sources */,
 				256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */,
 				25957E9C15EC8BAC001E4338 /* MHPDFSearchResultsTable.m in Sources */,
+				25DB59401778BB9F000383AF /* TPParsedLog.m in Sources */,
 				2599F3DB1604A49E00FA9DB2 /* NSColor+Lightness.m in Sources */,
 				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
 				250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */,
@@ -3467,6 +3655,7 @@
 				25D10EEC176F00AE004C40AE /* MMOverflowPopUpButtonCell.m in Sources */,
 				25D10EED176F00AE004C40AE /* MMProgressIndicator.m in Sources */,
 				25D10EEE176F00AE004C40AE /* MMRolloverButton.m in Sources */,
+				25DB593D1778BB9F000383AF /* NSString+LogParser.m in Sources */,
 				25D10EEF176F00AE004C40AE /* MMRolloverButtonCell.m in Sources */,
 				25D10EF0176F00AE004C40AE /* MMSlideButtonsAnimation.m in Sources */,
 				25D10EF1176F00AE004C40AE /* MMTabBarButton.m in Sources */,
@@ -3510,6 +3699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25DB59621778BC3E000383AF /* TestLogParserTests.m in Sources */,
 				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
 				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
 				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
@@ -3577,6 +3767,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				250BE01B162BEF3A007784DB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		25DB59451778BC3E000383AF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				25DB59461778BC3E000383AF /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -29,8 +29,10 @@
 #import <Cocoa/Cocoa.h>
 #import "MHConsoleViewer.h"
 #import "MHStrokedFiledView.h"
+#import "TPTeXLogViewController.h"
 
-@interface TPConsoleViewController : NSViewController <MHConsoleViewer> {
+
+@interface TPConsoleViewController : NSViewController <MHConsoleViewer, TPTeXLogViewDelegate> {
 @private
   IBOutlet NSTextView *textView;
 	IBOutlet NSPopUpButton *displayLevel;

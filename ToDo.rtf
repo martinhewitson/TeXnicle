@@ -236,7 +236,17 @@ For example:\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature0 - (\cf10 NSRange\cf0 )indentRangeForLineAtIndex:(\cf10 NSInteger\cf0 )loc\
 \
-* support arbitrary section commands and colors\
+---------------------------\
+Log Parser\
+\
+- We have a set of log items\
+- Display buttons to activate [Info, Warnings, Errors]\
+- Button to hide system files\
+- Outline view to group by file\
+\
+\
+---------------------------\
+\
 \
 + Menu options to show/hide navigator sidebar\
 + Menu options to show/hide jump bar\
@@ -260,10 +270,12 @@ Version 2.0.9\
 	- Optimised section list building in jumpbar.\
 + Added support for \\addbibresource\{\} command for citation completion.\
 + Added support for subfiles package.\
++ Added support for \\component command in document outline for ConTeXt users.\
 + Bug fix for spellchecker language settings which were not always remembered on the editor.\
 + Bug fix for expanding simple code snippets with no placeholders where the cursor would end up at the beginning of the snippet.\
 + Bug fix for PDF printing on some 10.6.8 machines.\
 + Bug fix: in some circumstances hiding/showing the status view below the editor was failing\
++ Bug fix: document outline now properly includes files which have a space in the name\
 + Other minor improvements and optimisations\
 \
 Version 2.0.8\
