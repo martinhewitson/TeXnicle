@@ -253,8 +253,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 	if (self.documentData) {
     //    NSLog(@"Setting document data to %@", self.documentData);
 		[self.texEditorViewController performSelector:@selector(setString:) withObject:[self.documentData string] afterDelay:0.0];
-    [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0.0];
-    
+    if ([[self.fileURL pathExtension] isEqualToString:@"tex"]) {
+      [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0.0];
+    }
 	}
 	
   // warnings view
