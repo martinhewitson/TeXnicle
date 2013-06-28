@@ -10,6 +10,7 @@
 #import "TPTexLogParser.h"
 #import "TPLogFileItem.h"
 #import "TPLogItem.h"
+#import "MHFileReader.h"
 
 @interface TPParsedLog ()
 
@@ -23,9 +24,8 @@
 {
   self = [super init];
   if (self) {
-    self.logtext = [self stringFromLogFile:aPath];
     self.logfiles = [NSMutableArray array];
-    [self generateLogTree];
+    [self setLogFile:aPath];
   }
   return self;
 }
@@ -40,40 +40,11 @@
 
 - (void) setLogFile:(NSString*)aPath
 {
-  self.logtext = [self stringFromLogFile:aPath];
-  self.logfiles = [NSMutableArray array];
+  MHFileReader *fr = [[MHFileReader alloc] init];
+  self.logtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:aPath]];
   [self generateLogTree];
 }
 
-- (NSString*)stringFromLogFile:(NSString*)path
-{
-  NSArray *encodings = @[@(NSASCIIStringEncoding),
-                         @(NSUTF8StringEncoding),
-                         @(NSUTF16StringEncoding),
-                         @(NSUTF16LittleEndianStringEncoding),
-                         @(NSUTF16BigEndianStringEncoding),
-                         @(NSISOLatin1StringEncoding),
-                         @(NSISOLatin2StringEncoding),
-                         @(NSMacOSRomanStringEncoding),
-                         @(NSWindowsCP1251StringEncoding)];
-  
-  
-  NSError *error = nil;
-  NSStringEncoding encoding;
-  NSString *string = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:path] usedEncoding:&encoding error:&error];
-  if (string == nil) {
-    for (NSNumber *enc in encodings) {
-      string = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:path] encoding:[enc integerValue] error:NULL];
-      if (string != nil) {
-        break;
-      }
-    }
-    if (string == nil) {
-      NSLog(@"Failed to load %@ [%@]", path, error);
-    }
-  }
-  return string;
-}
 
 - (TPLogFileItem*)logfileForItem:(TPLogItem*)item
 {

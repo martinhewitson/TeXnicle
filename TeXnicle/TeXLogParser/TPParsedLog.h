@@ -16,6 +16,7 @@
 
 @property (strong) NSMutableArray *logfiles;
 
+- (void) generateLogTree;
 - (void) setLogFile:(NSString*)aPath;
 
 @end
