@@ -48,6 +48,13 @@
   return self;
 }
 
+- (void) awakeFromNib
+{
+  NSRect b = self.view.bounds;
+  [self.view setBounds:NSMakeRect(b.origin.x, b.origin.y, 400, b.size.height)];
+  [[self.view superview] layout];
+}
+
 - (void) clear
 {
   [self.textField setStringValue:@""];
