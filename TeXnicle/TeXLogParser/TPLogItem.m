@@ -120,7 +120,13 @@
 
   // phrase
   NSMutableAttributedString *phraseString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" [%@]", self.matchedPhrase]];
-  [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [phraseString length])];
+  if (self.type == TPLogInfo) {
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [phraseString length])];
+  } else if (self.type == TPLogWarning) {
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(0, [phraseString length])];
+  } else if (self.type == TPLogError) {
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [phraseString length])];
+  }
   [str appendAttributedString:phraseString];
   
   
