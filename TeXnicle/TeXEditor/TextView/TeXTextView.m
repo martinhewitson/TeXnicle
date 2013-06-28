@@ -2116,8 +2116,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 		
 		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special
-    int start = 0;
-    int end   = 0;
+    NSInteger start = 0;
+    NSInteger end   = 0;
     for (int kk=0; kk<[previousLine length]; kk++) {
       if ([previousLine characterAtIndex:kk]=='{') {
         start = kk+1;
