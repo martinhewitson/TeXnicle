@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TPLogItem.h"
 #import "TPParsedLog.h"
-
+#import "TPTeXLogViewController.h"
 
 extern NSString * const TPTeXLogViewDidSelectItemNotification;
 
@@ -17,6 +17,7 @@ extern NSString * const TPTeXLogViewDidSelectItemNotification;
 
 @protocol TPTeXLogViewDelegate <NSObject>
 
+@optional
 - (BOOL)texlogview:(TPTeXLogViewController*)logview shouldShowEntriesForFile:(NSString*)aFile;
 - (void)texlogview:(TPTeXLogViewController*)logview didSelectLogItem:(TPLogItem*)aLog;
 
