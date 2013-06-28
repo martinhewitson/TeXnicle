@@ -353,21 +353,23 @@
   
   if (str == nil) {
     
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Loading Failed"
-                                     defaultButton:@"OK"
-                                   alternateButton:@"Cancel"
-                                       otherButton:nil
-                         informativeTextWithFormat:@"Failed to open %@ with encoding %@. Open with another encoding?", [aURL path], [self nameOfEncoding:encoding]];
-    [alert setAccessoryView:self.view];
-    NSInteger result = [alert runModal];
-    if (result == NSAlertDefaultReturn)       
-    {
-      // get the encoding the user selected
-      encoding = [(self.encodings)[[self.selectedIndex integerValue]] integerValue];
-      str = [NSString stringWithContentsOfURL:aURL
-                                     encoding:encoding
-                                        error:&error];
-      
+    if (showAlerts) {
+      NSAlert *alert = [NSAlert alertWithMessageText:@"Loading Failed"
+                                       defaultButton:@"OK"
+                                     alternateButton:@"Cancel"
+                                         otherButton:nil
+                           informativeTextWithFormat:@"Failed to open %@ with encoding %@. Open with another encoding?", [aURL path], [self nameOfEncoding:encoding]];
+      [alert setAccessoryView:self.view];
+      NSInteger result = [alert runModal];
+      if (result == NSAlertDefaultReturn)
+      {
+        // get the encoding the user selected
+        encoding = [(self.encodings)[[self.selectedIndex integerValue]] integerValue];
+        str = [NSString stringWithContentsOfURL:aURL
+                                       encoding:encoding
+                                          error:&error];
+        
+      }
     }
   }
   
