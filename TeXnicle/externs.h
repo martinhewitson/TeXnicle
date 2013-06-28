@@ -182,6 +182,8 @@ extern NSString * const TPMetadataManagerDidBeginUpdateNotification;
 extern NSString * const TPMetadataManagerDidEndUpdateNotification;
 //extern NSString * const TPFileMetadataWarningsUpdatedNotification;
 extern NSString * const TPLibraryDidUpdateNotification;
+extern NSString * const TPLogfileAvailableNotification;
+
 
 // String constants
 extern NSString * const TPDocumentWasRenamed;
