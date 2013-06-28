@@ -276,8 +276,12 @@
   return str;
 }
 
-
 - (NSString*)readStringFromFileAtURL:(NSURL*)aURL
+{
+  return [self readStringFromFileAtURL:aURL provideAlerts:YES];
+}
+
+- (NSString*)readStringFromFileAtURL:(NSURL*)aURL provideAlerts:(BOOL)showAlerts
 {
 #if FILE_READER_DEBUG
   NSLog(@"Reading string from file %@", aURL);
@@ -384,57 +388,7 @@
 
 - (NSString*)silentlyReadStringFromFileAtURL:(NSURL*)aURL
 {
-  //  NSLog(@"Reading string from file %@", aURL);
-  if (![[aURL path] pathIsText]) {
-    return nil;
-  }
-  
-  NSError *error = nil;
-  
-  // check the xattr for a string encoding
-  NSString *encodingString = [UKXattrMetadataStore stringForKey:@"com.bobsoft.TeXnicleTextEncoding"
-                                                         atPath:[aURL path]
-                                                   traverseLink:YES];
-  NSString *str = nil;
-  NSStringEncoding encoding;
-  if (encodingString == nil || [encodingString length] == 0) {
-    
-    str = [NSString stringWithContentsOfURL:aURL usedEncoding:&encoding error:&error];
-    //    NSLog(@"Loaded string %@", str);
-    // if we didn't get a string, then try the default encoding
-    if (str == nil || [str isEqualToString:@""]) {
-      //      NSLog(@"   failed to guess.");
-      encoding = [self defaultEncoding];
-      //      NSLog(@" using default encoding %@", [self nameOfEncoding:encoding]);
-    }
-    
-  } else {
-    encoding = [self encodingWithName:encodingString];
-  }
-  //  NSLog(@"Reading string with encoding %@", encodingString);
-  // if we didn't get the string, try with the default encoding
-  if (str == nil) {
-    error = nil;
-    str = [NSString stringWithContentsOfURL:aURL
-                                   encoding:encoding
-                                      error:&error];
-    
-  }  
-  
-  //  NSLog(@"Loaded string %@", str);  
-  if (str != nil) {
-    if (![[self nameOfEncoding:encoding] isEqualToString:encodingString]) {
-      [UKXattrMetadataStore setString:[self nameOfEncoding:encoding]
-                               forKey:@"com.bobsoft.TeXnicleTextEncoding"
-                               atPath:[aURL path]
-                         traverseLink:YES];
-    }
-  }
-  
-  // set the encoding we used in the end
-  self.selectedIndex = @([self indexForEncoding:encoding]);
-  
-  return str;
+  return [self readStringFromFileAtURL:aURL provideAlerts:NO];
 }
 
 
