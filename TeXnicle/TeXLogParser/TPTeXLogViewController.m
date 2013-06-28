@@ -9,13 +9,16 @@
 #import "TPTeXLogViewController.h"
 #import "TPLogFileItem.h"
 #import "ImageAndTextCell.h"
+#import "MHStrokedFiledView.h"
 
 NSString * const TPTeXLogViewDidSelectItemNotification = @"TPTeXLogViewDidSelectItemNotification";
+NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotification";
 
 @interface TPTeXLogViewController ()
 
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) IBOutlet NSSegmentedControl *selectionControl;
+@property (assign) IBOutlet MHStrokedFiledView *toolbarView;
 
 @property (assign) BOOL showInfos;
 @property (assign) BOOL showWarnings;
@@ -58,6 +61,9 @@ NSString * const TPTeXLogViewDidSelectItemNotification = @"TPTeXLogViewDidSelect
 	[imageAndTextCell setEditable:NO];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];
+  
+  NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
+  [self.toolbarView setFillColor:color1];
   
   [self.outlineView setDoubleAction:@selector(handleOutlineViewDoubleClick)];
   [self.outlineView setTarget:self];
@@ -187,18 +193,11 @@ NSString * const TPTeXLogViewDidSelectItemNotification = @"TPTeXLogViewDidSelect
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-//  if ([item isKindOfClass:[TPLogItem class]]) {
-    if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
-      return [item valueForKey:@"selectedAttributedString"];
-    } else {
-      return [item valueForKey:@"attributedString"];
-    }
-//  }
-  
-//  if ([item isKindOfClass:[TPLogFileItem class]]) {
-//    TPLogFileItem *litem = (TPLogFileItem*)item;
-//    return litem.filename;
-//  }
+  if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
+    return [item valueForKey:@"selectedAttributedString"];
+  } else {
+    return [item valueForKey:@"attributedString"];
+  }
   
   return nil;
 }
@@ -214,6 +213,7 @@ NSString * const TPTeXLogViewDidSelectItemNotification = @"TPTeXLogViewDidSelect
 - (void) setLog:(TPParsedLog *)log
 {
   _log = log;
+  [log generateLogTree];
   [self reload];
 }
 
