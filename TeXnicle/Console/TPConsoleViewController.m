@@ -45,10 +45,13 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)init
+- (id) initWithDelegate:(id<TPConsoleDelegate>)aDelegate
 {
   self = [super initWithNibName:@"TPConsoleViewController" bundle:nil];
   if (self) {
+    
+    self.delegate = aDelegate;
+    
     // Initialization code here.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
@@ -59,6 +62,8 @@
            selector:@selector(handleUserDefaultsChanged:)
                name:NSUserDefaultsDidChangeNotification
              object:nil];
+        
+    
   }
   
   return self;
@@ -76,14 +81,22 @@
   [toolbarView setFillColor:color1];
   
   
-  NSString *logfile = [NSString stringWithFormat:@"/Users/hewitson/working/software/cocoa/mac/test/TestLogParser/TestLogParserTests/logfiles/log4.log"];
+//  NSString *logfile = [NSString stringWithFormat:@"/Users/hewitson/working/software/cocoa/mac/test/TestLogParser/TestLogParserTests/logfiles/log4.log"];
+//  
+//  TPParsedLog *log = [[TPParsedLog alloc] initWithLogFileAtPath:logfile];
   
-  TPParsedLog *log = [[TPParsedLog alloc] initWithLogFileAtPath:logfile];
-  
-  self.logViewController = [[TPTeXLogViewController alloc] initWithParsedLog:log delegate:self];
+  self.logViewController = [[TPTeXLogViewController alloc] initWithParsedLog:nil delegate:self];
   [self.logViewController.view setFrame:self.logViewContainer.bounds];
   [self.logViewContainer addSubview:self.logViewController.view];
   
+}
+
+- (void) loadLogAtPath:(NSString*)path
+{
+  if (path != nil) {
+    TPParsedLog *log = [[TPParsedLog alloc] initWithLogFileAtPath:path];
+    self.logViewController.log = log;
+  }
 }
 
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote
@@ -176,4 +189,27 @@
 	
   [textView moveToEndOfDocument:self];
 }
+
+#pragma mark -
+#pragma mark log parser delegate
+
+- (void) texlogview:(TPTeXLogViewController *)logview didSelectLogItem:(TPLogItem *)aLog
+{
+  // pass on to delegate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(texlogview:didSelectLogItem:)]) {
+    [self.delegate texlogview:logview didSelectLogItem:aLog];
+  }
+}
+
+- (BOOL) texlogview:(TPTeXLogViewController *)logview shouldShowEntriesForFile:(NSString *)aFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(texlogview:shouldShowEntriesForFile:)]) {
+    return [self.delegate texlogview:logview shouldShowEntriesForFile:aFile];
+  }
+  
+  return YES;
+}
+
+
+
 @end

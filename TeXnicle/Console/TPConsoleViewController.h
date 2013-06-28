@@ -31,6 +31,12 @@
 #import "MHStrokedFiledView.h"
 #import "TPTeXLogViewController.h"
 
+@protocol TPConsoleDelegate <NSObject, TPTeXLogViewDelegate>
+
+
+
+@end
+
 
 @interface TPConsoleViewController : NSViewController <MHConsoleViewer, TPTeXLogViewDelegate> {
 @private
@@ -40,6 +46,10 @@
   
 }
 
+@property (assign) id<TPConsoleDelegate> delegate;
+
+- (id) initWithDelegate:(id<TPConsoleDelegate>)aDelegate;
+
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote;
 - (IBAction) clear:(id)sender;
 - (void) clear;
@@ -47,7 +57,7 @@
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor;
 - (void) error:(NSString*)someText;
 - (void) message:(NSString*)someText;
-
+- (void) loadLogAtPath:(NSString*)path;
 - (IBAction) displayLevelChanged:(id)sender;
 
 @end
