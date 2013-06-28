@@ -300,8 +300,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.nCompile = [[self.delegate nCompile] integerValue];
 
   if (e != nil && e.compiling == NO) {
-    
-    
+        
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([[defaults valueForKey:TPClearConsoleOnCompile] boolValue]) {
       [self.consoleManager clear];
@@ -333,6 +332,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) compileWasCancelled
 {
+  //NSLog(@"Compile cancelled");
   [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineCompilingCompletedNotification
                                                       object:self
                                                     userInfo:nil];
@@ -342,10 +342,15 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) compileDidFinish:(BOOL)success
 {
+  //NSLog(@"Compile finished %d", success);
   NSDictionary *dict = @{@"success": @(success)};
   [[NSNotificationCenter defaultCenter] postNotificationName:TPEngineCompilingCompletedNotification
                                                       object:self
                                                     userInfo:dict];    
+
+  if (self.delegate && [self.delegate respondsToSelector:@selector(documentCompileDidFinish:)]) {
+    [self.delegate documentCompileDidFinish:success];
+  }
 
 }
 

@@ -41,6 +41,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 -(NSNumber*)nCompile;
 -(NSString*)documentToCompile;
 -(NSString*)workingDirectory;
+-(void)documentCompileDidFinish:(BOOL)success;
 @end
 
 @interface TPEngineManager : NSObject <TPEngineDelegate>
