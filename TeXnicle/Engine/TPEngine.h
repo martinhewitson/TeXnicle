@@ -41,7 +41,6 @@
 @interface TPEngine : NSObject <TPEngineDelegate> {
 @private
   // Typesetting
-	NSTask *typesetTask;
 	NSFileHandle *typesetFileHandle;
   NSPipe *pipe;
 	int compilationsDone;

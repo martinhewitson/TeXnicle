@@ -33,6 +33,13 @@
 #import "NSApplication+SystemVersion.h"
 #import "TPTeXLogParser.h"
 
+@interface TPEngine ()
+
+@property (strong) NSTask *typesetTask;
+
+
+@end
+
 @implementation TPEngine
 
 - (NSString*)description
@@ -91,7 +98,7 @@
   [nc addObserver:self
          selector:@selector(taskFinished:) 
              name:NSTaskDidTerminateNotification
-           object:typesetTask];
+           object:self.typesetTask];
   
 }
 
@@ -155,10 +162,10 @@
 
 - (void) cancelCompile
 {
-  if (typesetTask != nil) {
+  if (self.typesetTask != nil) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [typesetTask terminate];
-    typesetTask = nil;
+    [self.typesetTask terminate];
+    self.typesetTask = nil;
   }
   
   [self reset];  
@@ -174,7 +181,7 @@
 
 - (BOOL) compileDocumentAtPath:(NSString*)aDocumentPath workingDirectory:(NSString*)workingDir isProject:(BOOL)isProject
 {
-  if (self.compiling == YES || typesetTask != nil) {
+  if (self.compiling == YES || self.typesetTask != nil) {
     return NO;
   }
   
@@ -216,17 +223,17 @@
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];	
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   
-  if (typesetTask == nil) {
-    typesetTask = [[NSTask alloc] init];
+  if (self.typesetTask == nil) {
+    self.typesetTask = [[NSTask alloc] init];
     pipe = [NSPipe pipe];
-    [typesetTask setStandardOutput:pipe];
-    [typesetTask setStandardError:pipe];    
+    [self.typesetTask setStandardOutput:pipe];
+    [self.typesetTask setStandardError:pipe];
     typesetFileHandle = [pipe fileHandleForReading];    
     [self setupObservers];    
   }
   
-	[typesetTask setLaunchPath:self.path];
-  [typesetTask setCurrentDirectoryPath:workingDir];
+	[self.typesetTask setLaunchPath:self.path];
+  [self.typesetTask setCurrentDirectoryPath:workingDir];
     
 	NSArray *arguments = @[[mainFile lastPathComponent],
                           workingDir,
@@ -234,21 +241,21 @@
                           [NSString stringWithFormat:@"%d", self.doBibtex],
                           [NSString stringWithFormat:@"%d", self.doPS2PDF]
                         ];
-	[typesetTask setArguments:arguments];
+	[self.typesetTask setArguments:arguments];
 	
 	[typesetFileHandle readInBackgroundAndNotify];
   
   self.compiling = YES;
-  procId = [typesetTask processIdentifier];
-	[typesetTask launch];	
+  procId = [self.typesetTask processIdentifier];
+	[self.typesetTask launch];
 	
 	return YES;  
 }
 
 - (void) taskFinished:(NSNotification*)aNote
 {
-//  NSLog(@"Task finished %@", [aNote object]);
-	if ([aNote object] != typesetTask)
+  //NSLog(@"Task finished %@", [aNote object]);
+	if ([aNote object] != self.typesetTask)
 		return;
 	
   self.compiling = NO;
@@ -266,7 +273,7 @@
   [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
   
     
-  typesetTask = nil;
+  self.typesetTask = nil;
   procId = -1;
 }
 
@@ -289,11 +296,10 @@
 		if (loc < [output length]) {
       [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
-      [typesetTask interrupt];
-      typesetTask = nil;
-      
-      [self reset];
-      [self compileDidFinish:NO];
+//      [self.typesetTask terminate];
+//      [self reset];
+//      [self compileDidFinish:NO];
+//      [self performSelector:@selector(postLogfileNotification) withObject:nil afterDelay:1];
 		}
 	}	
 	
@@ -310,7 +316,7 @@
   abortCompile = NO;
   compilationsDone = 0;
   self.compiling = NO;
-  typesetTask = nil;
+  self.typesetTask = nil;
 }
 
 - (void) trashAuxFiles:(BOOL)keepDocument
@@ -362,6 +368,9 @@
 //    return;
 //  }
   
+  // log file notification
+  [self performSelector:@selector(postLogfileNotification) withObject:nil afterDelay:1];
+  
   if ([[NSApplication sharedApplication] isMountainLion]) {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     [notification setTitle:@"Typesetting Completed"];
@@ -382,6 +391,15 @@
   if (self.delegate && [self.delegate respondsToSelector:@selector(compileDidFinish:)]) {
     [self.delegate compileDidFinish:success];
   }  
+}
+
+- (void) postLogfileNotification
+{
+  NSDictionary *dict = @{@"path" : [self.documentPath stringByAppendingPathExtension:@"log"]};
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc postNotificationName:TPLogfileAvailableNotification
+                    object:self
+                  userInfo:dict];
 }
 
 - (void)enginePostMessage:(NSString*)someText
