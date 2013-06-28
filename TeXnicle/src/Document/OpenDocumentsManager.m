@@ -353,7 +353,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self.texEditorViewController.textView setUpRuler];
           [self.texEditorViewController.textView setNeedsDisplay:YES];
           
-          [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0];
+          FileEntity *file = [doc valueForKey:@"file"];
+          if ([[file extension] isEqualToString:@"tex"]) {
+            [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0];
+          }
           
           if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
             [self selectTabForFile:self.currentDoc];
