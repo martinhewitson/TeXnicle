@@ -78,6 +78,8 @@
   return [TPTeXLogParser parseLogFileAtURL:[NSURL fileURLWithPath:aPath]];
 }
 
+
+
 + (NSArray*) parseLogText:(NSString*)logText
 {
   NSMutableArray *stack = [NSMutableArray array];
@@ -90,40 +92,70 @@
   
   
   // go through each line
+  NSInteger braceCount = 0;
   for (NSString *line in lines) {
 #if TP_LOG_PARSE_DEBUG
     NSLog(@"LINE: [%@]", line);
 #endif
-    if ([line beginsWith:@"("]) {
-      // parse rest of the line up to ( into filename
-      // I think for this to be a filename, the rest of the line shouldn't close the (
-      NSInteger count = 1;
-      for (NSInteger kk=1; kk<[line length]; kk++) {
-        if ([line characterAtIndex:kk] == ')') {
-          count--;
+    
+    // scan for a (./ or (/ and )
+    for (NSInteger kk=0; kk<[line length]; kk++) {
+      if ([line characterAtIndex:kk] == ')') {
+        // pop off stack
+        if ([stack count] > 0) {
+          NSLog(@"-- %@%@", [NSString paddingLength:braceCount], [stack lastObject]);
+          [stack removeLastObject];
         }
-        if ([line characterAtIndex:kk] == '(') {
-          count++;
-        }
+        braceCount -= 2;
       }
-      if (count == 1) {
-        NSString *filename = nil;
-        
-        // decide on range: find range of file extension
-        NSRange extr = [line rangeOfRegex:@"\.\\w+\\s"];
-        
-        if (extr.location == NSNotFound) {
-          filename = [line substringFromIndex:1];
+      
+      if ([line characterAtIndex:kk] == '(') {
+        // pop filename on stack
+        braceCount += 2;
+        NSString *filename = [line  filename];
+        if (filename != nil) {
+          NSLog(@"++ %@%@", [NSString paddingLength:braceCount], filename);
+          [stack addObject:filename];
+          
+          // we can move on now
+          kk += [filename length]-1;
         } else {
-          filename = [line substringWithRange:NSMakeRange(1, NSMaxRange(extr)-2)];
+          NSLog(@"++ %@DUMMY", [NSString paddingLength:braceCount]);
+          [stack addObject:@"DUMMY"];
         }
-        
-#if TP_LOG_PARSE_DEBUG
-        NSLog(@"+++ stack: %@", filename);
-#endif
-        [stack addObject:filename];
       }
     }
+    
+//    if ([line beginsWith:@"("]) {
+//      // parse rest of the line up to ( into filename
+//      // I think for this to be a filename, the rest of the line shouldn't close the (
+//      NSInteger count = 1;
+//      for (NSInteger kk=1; kk<[line length]; kk++) {
+//        if ([line characterAtIndex:kk] == ')') {
+//          count--;
+//        }
+//        if ([line characterAtIndex:kk] == '(') {
+//          count++;
+//        }
+//      }
+//      if (count == 1) {
+//        NSString *filename = nil;
+//        
+//        // decide on range: find range of file extension
+//        NSRange extr = [line rangeOfRegex:@"\.\\w+\\s"];
+//        
+//        if (extr.location == NSNotFound) {
+//          filename = [line substringFromIndex:1];
+//        } else {
+//          filename = [line substringWithRange:NSMakeRange(1, NSMaxRange(extr)-2)];
+//        }
+//        
+//#if TP_LOG_PARSE_DEBUG
+//        NSLog(@"+++ stack: %@", filename);
+//#endif
+//        [stack addObject:filename];
+//      }
+//    }
     
     // check for phrases
     TPLogItemType type = TPLogUnknown;
@@ -167,23 +199,24 @@
                                                     message:message
                                                        line:linenumber
                                               matchedPhrase:phraseMatched];
+      NSLog(@"LOGITEM: %@", item);
       
       item.line = line;
       [items addObject:item];
     }
     
-    if ([line beginsWith:@")"] && [line length] == 1) {
-#if TP_LOG_PARSE_DEBUG
-      NSLog(@"Close file? stack length: %ld", [stack count]);
-#endif
-      // we've finished a line now, so pop it off the stack
-      if ([stack count] > 0) {
-#if TP_LOG_PARSE_DEBUG
-        NSLog(@"--- stack: %@", [stack lastObject]);
-#endif
-        [stack removeLastObject];
-      }
-    }
+//    if ([line beginsWith:@")"] && [line length] == 1) {
+//#if TP_LOG_PARSE_DEBUG
+//      NSLog(@"Close file? stack length: %ld", [stack count]);
+//#endif
+//      // we've finished a line now, so pop it off the stack
+//      if ([stack count] > 0) {
+//#if TP_LOG_PARSE_DEBUG
+//        NSLog(@"--- stack: %@", [stack lastObject]);
+//#endif
+//        [stack removeLastObject];
+//      }
+//    }
   }
   
   return items;

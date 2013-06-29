@@ -10,5 +10,7 @@
 
 @interface NSString (LogParser)
 
+- (NSString*)filename;
++ (NSString*)paddingLength:(NSInteger)pad;
 
 @end

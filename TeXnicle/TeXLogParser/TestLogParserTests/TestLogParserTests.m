@@ -10,6 +10,7 @@
 #import "TPTeXLogParser.h"
 #import "TPLogItem.h"
 #import "NSArray+LogParser.h"
+#import "NSString+LogParser.h"
 
 @interface TestLogParserTests : SenTestCase
 
@@ -64,6 +65,15 @@
   return string;
 }
 
+- (void)testFilenameParsing
+{
+  NSString *str = @"(/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ltxcmds.sty";
+  NSString *filename = [str filename];
+  NSLog(@"[%@]", filename);
+  
+  STAssertNotNil(filename, @"Filename shouldn't be nil");
+  
+}
 
 - (void)testEmptyLog
 {
