@@ -98,8 +98,8 @@
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="100055" userLabel="Project Tree">
                                                 <view key="view" id="100058">
-                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="575"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView id="100537" customClass="MHToolbarBackgroundView">
                                                             <rect key="frame" x="0.0" y="-1" width="235" height="32"/>
@@ -132,14 +132,14 @@
                                                             </subviews>
                                                         </customView>
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100032">
-                                                            <rect key="frame" x="0.0" y="31" width="235" height="543"/>
+                                                            <rect key="frame" x="0.0" y="31" width="235" height="542"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <clipView key="contentView" id="iia-Lt-PoJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="543"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="20" indentationPerLevel="14" outlineTableColumn="100037" id="100036" customClass="TPOutlineView">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="543"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="0.0"/>
                                                                         <color key="backgroundColor" red="0.9215686917" green="0.93333339689999995" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
@@ -229,7 +229,7 @@
                                                             <tabViewItems>
                                                                 <tabViewItem label="Tab" identifier="1" id="100923" userLabel="Bookmarks">
                                                                     <view key="view" id="100926">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="552"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="549"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </view>
                                                                 </tabViewItem>
@@ -399,8 +399,8 @@
                     <toolbarItem implicitItemIdentifier="7E273765-B5A4-4997-A8A7-520CD73D39A3" label="Stop" paletteLabel="Stop" tag="60" image="cancel" id="101017"/>
                     <toolbarItem implicitItemIdentifier="0EAFAE77-C225-4EA9-8EA8-D82240DE0B9A" explicitItemIdentifier="MiniConsole" label="" paletteLabel="" tag="-1" id="100831">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="177" height="39"/>
-                        <size key="maxSize" width="177" height="39"/>
+                        <size key="minSize" width="400" height="39"/>
+                        <size key="maxSize" width="400" height="39"/>
                         <box key="view" autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="100830">
                             <rect key="frame" x="0.0" y="14" width="406" height="39"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -1003,273 +1003,4 @@ DQ
         <image name="typesetAndView" width="512" height="512"/>
         <image name="view" width="512" height="512"/>
     </resources>
-    <classes>
-        <class className="ESOutlineView" superclassName="NSOutlineView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ESOutlineView.h"/>
-        </class>
-        <class className="ExternalTeXDoc" superclassName="NSDocument">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ExternalTeXDoc.h"/>
-            <relationships>
-                <relationship kind="action" name="addToProject:"/>
-                <relationship kind="action" name="buildAndView:"/>
-                <relationship kind="action" name="buildProject:"/>
-                <relationship kind="action" name="clean:"/>
-                <relationship kind="action" name="createDocumentReport:"/>
-                <relationship kind="action" name="endAddToNewProjectSheet:"/>
-                <relationship kind="action" name="endAddToProjectSheet:"/>
-                <relationship kind="action" name="liveUpdate:"/>
-                <relationship kind="action" name="openPDF:"/>
-                <relationship kind="action" name="reloadCurrentFileFromDisk:"/>
-                <relationship kind="action" name="toggleStatusView:"/>
-                <relationship kind="outlet" name="_addToEmptyProjectSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="_addToProjectButton" candidateClass="NSToolbarItem"/>
-                <relationship kind="outlet" name="_addToProjectSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="_controlsViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="_copyToNewProjectCheckButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="_copyToProjectCheckButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="_makeMainFileCheckButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="_projectsController" candidateClass="NSArrayController"/>
-                <relationship kind="outlet" name="centerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="citationsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="commandsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="controlsTabBarControlContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="controlsTabview" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="editorSplitView" candidateClass="NSSplitView"/>
-                <relationship kind="outlet" name="embeddedConsoleContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="infoControlsTabBarControlContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="infoControlsTabview" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="labelsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="leftView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="libraryContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="mainWindow" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="outlineViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="paletteContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="pdfViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="prefsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="rightView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="spellCheckerContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="splitView" candidateClass="NSSplitView"/>
-                <relationship kind="outlet" name="statusViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="texEditorContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="warningsContainerView" candidateClass="NSView"/>
-            </relationships>
-        </class>
-        <class className="HHValidatedButton" superclassName="NSButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HHValidatedButton.h"/>
-        </class>
-        <class className="MHToolbarBackgroundView" superclassName="SBGradientView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHToolbarBackgroundView.h"/>
-        </class>
-        <class className="MMTabBarView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MMTabBarView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="delegate"/>
-                <relationship kind="outlet" name="partnerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="tabView" candidateClass="NSTabView"/>
-            </relationships>
-        </class>
-        <class className="ProjectItemTreeController" superclassName="NSTreeController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProjectItemTreeController.h"/>
-            <relationships>
-                <relationship kind="action" name="endAddExistingFileSheet:"/>
-                <relationship kind="action" name="endAddExistingFilesSheet:"/>
-                <relationship kind="action" name="endAddExistingFolderSheet:"/>
-                <relationship kind="action" name="endAddingFilesSheet:"/>
-                <relationship kind="outlet" name="addExistingFileSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="addExistingFilesSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="addExistingFolderSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="addingFileLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="addingFilesSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="destinationFolderLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="doCopyExistingFileCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="doCopyExistingFilesCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="doCopyExistingFolderCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="doCopyFileLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="document" candidateClass="TeXProjectDocument"/>
-                <relationship kind="outlet" name="dstFolderLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="filesAddedCountLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="finishedAddingFilesBtn" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="folderToImportLabel" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="includeAllFilesCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="includeRecursivelyCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="includeTeXFilesCheckbox" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="outlineView" candidateClass="TPOutlineView"/>
-                <relationship kind="outlet" name="toFolderLabel" candidateClass="NSTextField"/>
-            </relationships>
-        </class>
-        <class className="SBGradientView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBGradientView.h"/>
-        </class>
-        <class className="TPBoxView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPBoxView.h"/>
-        </class>
-        <class className="TPOutlineView" superclassName="ESOutlineView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPOutlineView.h"/>
-            <relationships>
-                <relationship kind="action" name="addExistingFile:"/>
-                <relationship kind="action" name="addExistingFileToSelectedFolder:"/>
-                <relationship kind="action" name="locateItem:"/>
-                <relationship kind="action" name="removeItem:"/>
-                <relationship kind="action" name="renameItem:"/>
-                <relationship kind="action" name="revealItem:"/>
-                <relationship kind="outlet" name="mainDocument" candidateClass="TeXProjectDocument"/>
-                <relationship kind="outlet" name="treeController" candidateClass="ProjectItemTreeController"/>
-            </relationships>
-        </class>
-        <class className="TPTabbarMatchingBackground" superclassName="SBGradientView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPTabbarMatchingBackground.h"/>
-        </class>
-        <class className="TeXProjectDocument" superclassName="NSPersistentDocument">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeXProjectDocument.h"/>
-            <relationships>
-                <relationship kind="action" name="addBookmarkAtCurrentLine:"/>
-                <relationship kind="action" name="addExistingFile:"/>
-                <relationship kind="action" name="addExistingFileToSelectedFolder:"/>
-                <relationship kind="action" name="addExistingFolder:"/>
-                <relationship kind="action" name="addNewFolder:"/>
-                <relationship kind="action" name="backTabButtonPressed:"/>
-                <relationship kind="action" name="buildAndView:"/>
-                <relationship kind="action" name="buildProject:"/>
-                <relationship kind="action" name="cancelCompile:"/>
-                <relationship kind="action" name="clean:"/>
-                <relationship kind="action" name="closeAllTabs:"/>
-                <relationship kind="action" name="closeCurrentTab:"/>
-                <relationship kind="action" name="createDocumentReport:"/>
-                <relationship kind="action" name="createProjectTemplate:"/>
-                <relationship kind="action" name="delete:"/>
-                <relationship kind="action" name="deleteSelectedBookmark:"/>
-                <relationship kind="action" name="endNewFileSheet:"/>
-                <relationship kind="action" name="endRenameSheet:"/>
-                <relationship kind="action" name="findCorrespondingPDFText:"/>
-                <relationship kind="action" name="findSource:"/>
-                <relationship kind="action" name="forwardTabButtonPressed:"/>
-                <relationship kind="action" name="jumpToMainFile:"/>
-                <relationship kind="action" name="jumpToSelectedBookmark:"/>
-                <relationship kind="action" name="liveUpdate:"/>
-                <relationship kind="action" name="locateItem:"/>
-                <relationship kind="action" name="newFile:"/>
-                <relationship kind="action" name="newFolder:"/>
-                <relationship kind="action" name="newFolderOnDisk:"/>
-                <relationship kind="action" name="newGroupFolder:"/>
-                <relationship kind="action" name="newMainTeXFile:"/>
-                <relationship kind="action" name="newTeXFile:"/>
-                <relationship kind="action" name="nextBookmark:"/>
-                <relationship kind="action" name="openPDF:"/>
-                <relationship kind="action" name="openProjectFolderInFinder:"/>
-                <relationship kind="action" name="openWithSystemPDFViewer:"/>
-                <relationship kind="action" name="pasteAsImage:"/>
-                <relationship kind="action" name="previousBookmark:"/>
-                <relationship kind="action" name="reloadCurrentFileFromDisk:"/>
-                <relationship kind="action" name="removeBookmarkAtCurrentLine:"/>
-                <relationship kind="action" name="removeItem:"/>
-                <relationship kind="action" name="renameItem:"/>
-                <relationship kind="action" name="reopenUsingEncoding:"/>
-                <relationship kind="action" name="revealItem:"/>
-                <relationship kind="action" name="selectNextTab:"/>
-                <relationship kind="action" name="selectPreviousTab:"/>
-                <relationship kind="action" name="selectTab:"/>
-                <relationship kind="action" name="setMainFile:"/>
-                <relationship kind="action" name="setMainItem:"/>
-                <relationship kind="action" name="showBookmarks:"/>
-                <relationship kind="action" name="showCategoryActionMenu:"/>
-                <relationship kind="action" name="showIntegratedConsole:"/>
-                <relationship kind="action" name="showIntegratedPDFViewer:"/>
-                <relationship kind="action" name="toggleBookmark:"/>
-                <relationship kind="action" name="togglePanelFocus:"/>
-                <relationship kind="outlet" name="_newFileSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="_newFilenameTextField" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="_pdfViewerContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="_renameField" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="_renameSheet" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="_tabView" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="backTabButton" candidateClass="HHValidatedButton"/>
-                <relationship kind="outlet" name="bookmarkContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="centerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="citationsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="commandsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="controlsTabBarControlContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="controlsTabview" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="createFileButton" candidateClass="HHValidatedButton"/>
-                <relationship kind="outlet" name="createFolderButton" candidateClass="HHValidatedButton"/>
-                <relationship kind="outlet" name="editorSplitView" candidateClass="NSSplitView"/>
-                <relationship kind="outlet" name="embeddedConsoleContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="engineSettingsContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="finderContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="forwardTabButton" candidateClass="HHValidatedButton"/>
-                <relationship kind="outlet" name="imageViewerContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="infoControlsTabBarControlContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="infoControlsTabview" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="labelsContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="leftView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="libraryContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="mainWindow" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="navButtonsBackground" candidateClass="NSView"/>
-                <relationship kind="outlet" name="outlineViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="paletteContainverView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="projectItemTreeController" candidateClass="ProjectItemTreeController"/>
-                <relationship kind="outlet" name="projectOutlineView" candidateClass="TPOutlineView"/>
-                <relationship kind="outlet" name="psmTabBarControl" candidateClass="MMTabBarView"/>
-                <relationship kind="outlet" name="rightView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="spellCheckerContainerView" candidateClass="NSView"/>
-                <relationship kind="outlet" name="splitview" candidateClass="NSSplitView"/>
-                <relationship kind="outlet" name="statusViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="tabbar" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="texEditorContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="NSToolbar"/>
-                <relationship kind="outlet" name="warningsContainerView" candidateClass="NSView"/>
-            </relationships>
-        </class>
-        <class className="TeXTextView" superclassName="NSTextView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeXTextView.h"/>
-            <relationships>
-                <relationship kind="action" name="collapseAll:"/>
-                <relationship kind="action" name="commentSelection:"/>
-                <relationship kind="action" name="completeStuff:"/>
-                <relationship kind="action" name="expandAll:"/>
-                <relationship kind="action" name="gotoLine:"/>
-                <relationship kind="action" name="indentSelection:"/>
-                <relationship kind="action" name="insertInlineMath:"/>
-                <relationship kind="action" name="jumpToNextPlaceholder:"/>
-                <relationship kind="action" name="jumpToPreviousPlaceholder:"/>
-                <relationship kind="action" name="latexFormatBold:"/>
-                <relationship kind="action" name="latexFormatEmphasized:"/>
-                <relationship kind="action" name="latexFormatEscapeUnderscore:"/>
-                <relationship kind="action" name="latexFormatFootnote:"/>
-                <relationship kind="action" name="latexFormatItalic:"/>
-                <relationship kind="action" name="latexFormatRoman:"/>
-                <relationship kind="action" name="latexFormatSansSerif:"/>
-                <relationship kind="action" name="latexFormatSlanted:"/>
-                <relationship kind="action" name="latexFormatSmallCaps:"/>
-                <relationship kind="action" name="latexFormatTypewritter:"/>
-                <relationship kind="action" name="latexFormatUnderline:"/>
-                <relationship kind="action" name="pasteTable:"/>
-                <relationship kind="action" name="reformatParagraph:"/>
-                <relationship kind="action" name="selectParagraph:"/>
-                <relationship kind="action" name="showSpellingList:"/>
-                <relationship kind="action" name="toggleCommentForParagraph:"/>
-                <relationship kind="action" name="toggleCommentForSelection:"/>
-                <relationship kind="action" name="toggleControlCharacters:"/>
-                <relationship kind="action" name="toggleInvisibleCharacters:"/>
-                <relationship kind="action" name="uncommentSelection:"/>
-                <relationship kind="action" name="unfoldSelection:"/>
-                <relationship kind="action" name="unindentSelection:"/>
-                <relationship kind="action" name="zoomIn:"/>
-                <relationship kind="action" name="zoomOut:"/>
-                <relationship kind="outlet" name="goToLineController" candidateClass="UKTextDocGoToBox"/>
-            </relationships>
-        </class>
-        <class className="UKTextDocGoToBox" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UKTextDocGoToBox.h"/>
-            <relationships>
-                <relationship kind="action" name="goToLineOrChar:"/>
-                <relationship kind="action" name="hideGoToSheet:"/>
-                <relationship kind="action" name="showGoToSheet:" candidateClass="NSWindow"/>
-                <relationship kind="outlet" name="goToPanel" candidateClass="NSPanel"/>
-                <relationship kind="outlet" name="lineCharChooser" candidateClass="NSMatrix"/>
-                <relationship kind="outlet" name="lineNumField" candidateClass="NSTextField"/>
-                <relationship kind="outlet" name="okayButton" candidateClass="NSButton"/>
-                <relationship kind="outlet" name="targetDocument"/>
-            </relationships>
-        </class>
-    </classes>
 </document>

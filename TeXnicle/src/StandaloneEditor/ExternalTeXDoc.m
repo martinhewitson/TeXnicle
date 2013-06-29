@@ -369,7 +369,7 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.engineManager registerConsole:self.miniConsole];
   
   // embedded console
-  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] init];
+  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] initWithDelegate:self];
   [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
   [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
   [self.engineManager registerConsole:self.embeddedConsoleViewController];

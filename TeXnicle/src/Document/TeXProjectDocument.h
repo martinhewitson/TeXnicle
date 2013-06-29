@@ -73,7 +73,7 @@ TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate,
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,
 PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, 
-FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate, TPDocumentReporterDelegate> {
+FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate, TPDocumentReporterDelegate, TPConsoleDelegate> {
 
 @private
     

@@ -87,14 +87,14 @@
                                             <tabViewItem label="Tab" identifier="1" id="243" userLabel="Project Tree">
                                                 <view key="view" id="254">
                                                     <rect key="frame" x="0.0" y="0.0" width="225" height="576"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="256">
                                                             <rect key="frame" x="0.0" y="40" width="220" height="537"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <clipView key="contentView" id="Smv-UD-DiH">
                                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="537"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="20" indentationPerLevel="14" outlineTableColumn="260" id="257" customClass="TPOutlineView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="220" height="537"/>
@@ -274,7 +274,7 @@
                                                     </customView>
                                                 </subviews>
                                             </customView>
-                                            <customView id="369">
+                                            <customView id="369" userLabel="Embedded Console Container">
                                                 <rect key="frame" x="0.0" y="485" width="451" height="84"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </customView>
@@ -403,7 +403,7 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="33" id="31">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="32">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="33"/>
@@ -622,13 +622,24 @@ Gw
                 <relationship kind="action" name="addToProject:"/>
                 <relationship kind="action" name="buildAndView:"/>
                 <relationship kind="action" name="buildProject:"/>
+                <relationship kind="action" name="cancelCompile:"/>
                 <relationship kind="action" name="clean:"/>
                 <relationship kind="action" name="createDocumentReport:"/>
                 <relationship kind="action" name="endAddToNewProjectSheet:"/>
                 <relationship kind="action" name="endAddToProjectSheet:"/>
+                <relationship kind="action" name="findCorrespondingPDFText:"/>
+                <relationship kind="action" name="findSource:"/>
                 <relationship kind="action" name="liveUpdate:"/>
                 <relationship kind="action" name="openPDF:"/>
+                <relationship kind="action" name="openWithSystemPDFViewer:"/>
+                <relationship kind="action" name="pasteAsImage:"/>
+                <relationship kind="action" name="printDocument:"/>
                 <relationship kind="action" name="reloadCurrentFileFromDisk:"/>
+                <relationship kind="action" name="reopenUsingEncoding:"/>
+                <relationship kind="action" name="saveDocument:"/>
+                <relationship kind="action" name="showIntegratedConsole:"/>
+                <relationship kind="action" name="showIntegratedPDFViewer:"/>
+                <relationship kind="action" name="togglePanelFocus:"/>
                 <relationship kind="action" name="toggleStatusView:"/>
                 <relationship kind="outlet" name="_addToEmptyProjectSheet" candidateClass="NSWindow"/>
                 <relationship kind="outlet" name="_addToProjectButton" candidateClass="NSToolbarItem"/>

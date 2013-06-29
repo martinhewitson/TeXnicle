@@ -64,6 +64,7 @@
 #import "TPFileMetadata.h"
 #import "MMTabBarView.h"
 #import "TPTeXLogParser.h"
+#import "ExternalTeXDoc.h"
 
 #define kSplitViewLeftMinSize 220.0
 #define kSplitViewCenterMinSize 400.0
@@ -407,7 +408,7 @@
   [self.engineManager registerConsole:self.miniConsole];
   
   // embedded console
-  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] init];
+  self.embeddedConsoleViewController = [[TPConsoleViewController alloc] initWithDelegate:self];
   [self.embeddedConsoleViewController.view setFrame:[self.embeddedConsoleContainer bounds]];
   [self.embeddedConsoleContainer addSubview:self.embeddedConsoleViewController.view];
   [self.engineManager registerConsole:self.embeddedConsoleViewController];
@@ -1912,7 +1913,7 @@
   }
   
   if (splitView == self.editorSplitView) {
-    return b.size.height - 26.0 - [splitView dividerThickness];    
+    return b.size.height - 42.0 - [splitView dividerThickness];
   }
   
   return proposedMax;
@@ -2362,14 +2363,17 @@
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
+  //NSLog(@"Typesetting finished");
+  
   [self.miniConsole setAnimating:NO];
   
   // parse log file
   NSString *logfile = [[self documentToCompile] stringByAppendingPathExtension:@"log"];
-  [self parseLogFile:logfile];
+  [self.embeddedConsoleViewController loadLogAtPath:logfile];
   
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
+    //NSLog(@"  and it was successful");
     [self showDocument];  
     if (_openPDFAfterBuild) {
       [self openPDF:self];
@@ -3750,19 +3754,41 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   NSInteger lineNumber = NSNotFound;
   NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   
-  sourcefile = [sourcefile stringByStandardizingPath];  
+  sourcefile = [sourcefile stringByStandardizingPath];
+  [self selectLine:lineNumber inFileAtPath:sourcefile];
+//  if ([sourcefile isAbsolutePath]) {
+////    NSLog(@"    source file is absolute path");
+//    sourcefile = [self.project.folder relativePathTo:sourcefile];
+//  }
+////  NSLog(@"  source file: %@", sourcefile);
+//  FileEntity *file = [self.project fileWithPath:sourcefile];
+////  NSLog(@"    got project file: %@", file);
+//  [self.openDocuments addDocument:file select:YES];
+//  if (file) {
+//    [self.openDocuments selectTabForFile:file];
+//    [self.texEditorViewController.textView goToLine:(int)lineNumber];
+//  }
+}
+
+- (BOOL) selectLine:(NSInteger)lineNumber inFileAtPath:(NSString*)sourcefile
+{
   if ([sourcefile isAbsolutePath]) {
-//    NSLog(@"    source file is absolute path");
+    //    NSLog(@"    source file is absolute path");
     sourcefile = [self.project.folder relativePathTo:sourcefile];
   }
-//  NSLog(@"  source file: %@", sourcefile);
+  //NSLog(@"  source file: %@", sourcefile);
   FileEntity *file = [self.project fileWithPath:sourcefile];
-//  NSLog(@"    got project file: %@", file);
+  //NSLog(@"    got project file: %@", file);
   [self.openDocuments addDocument:file select:YES];
   if (file) {
     [self.openDocuments selectTabForFile:file];
-    [self.texEditorViewController.textView goToLine:(int)lineNumber];
+    if (lineNumber >= 0 && lineNumber != NSNotFound) {
+      [self.texEditorViewController.textView goToLine:(int)lineNumber];
+    }
+    return YES;
   }
+  
+  return NO;
 }
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
@@ -4094,6 +4120,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return NO;
 }
 
+- (void) documentCompileDidFinish:(BOOL)success
+{
+}
 
 #pragma mark -
 #pragma mark Project Template Stuff
@@ -4450,7 +4479,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 
 #pragma mark -
-#pragma document report
+#pragma mark document report
 
 - (NSString*)fileToReportOn
 {
@@ -4471,6 +4500,30 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   [self.documentReport showWindow:self];
   [self.documentReport startGeneration];
 }
+
+#pragma mark -
+#pragma mark Console delegate
+
+- (BOOL)texlogview:(TPTeXLogViewController*)logview shouldShowEntriesForFile:(NSString*)aFile
+{
+  return YES;
+}
+
+- (void)texlogview:(TPTeXLogViewController*)logview didSelectLogItem:(TPLogItem*)aLog
+{
+  if ([self selectLine:aLog.linenumber inFileAtPath:aLog.filepath] == NO) {
+    NSURL *url = [NSURL fileURLWithPath:aLog.filepath];
+    [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
+      // do stuff
+      ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
+      if (aLog.linenumber != NSNotFound && aLog.linenumber >= 0) {
+        [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:@(aLog.linenumber) afterDelay:0];
+      }
+    }];
+    
+  }
+}
+
 
 
 @end
