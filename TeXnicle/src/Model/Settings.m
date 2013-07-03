@@ -57,6 +57,11 @@
   if (self.language == nil && self.managedObjectContext != nil) {
     self.language = [[NSSpellChecker sharedSpellChecker] language];
   }
+  
+  if (self.doLiveUpdate == nil && self.managedObjectContext != nil) {
+    self.doLiveUpdate = @NO;
+  }
+  
 }
 
 - (void)setDefaultSettings
