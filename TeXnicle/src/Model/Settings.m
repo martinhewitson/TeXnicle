@@ -69,6 +69,7 @@
   // setup defaults
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
+  self.doLiveUpdate = @NO;
   self.engineName = [defaults valueForKey:TPDefaultEngineName];
   self.doBibtex = [defaults valueForKey:BibTeXDuringTypeset];
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
