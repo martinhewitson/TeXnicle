@@ -60,7 +60,9 @@ NSString * const TPExternalDocControlsTabIndexKey = @"TPExternalDocControlsTabIn
 NSString * const TPExternalDocControlsWidthKey = @"TPExternalDocControlsWidthKey"; 
 NSString * const TPExternalDocEditorWidthKey = @"TPExternalDocEditorWidthKey"; 
 NSString * const TPExternalDocPDFVisibleRectKey = @"TPExternalDocPDFVisibleRectKey"; 
-NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth"; 
+NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
+NSString * const TPLiveUpdateState = @"TPLiveUpdateState";
+NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 
 @interface ExternalTeXDoc ()
 
@@ -165,8 +167,38 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
     // max outline depth
     [dict setValue:self.maxOutlineViewDepth forKey:TPMaxOutlineDepth];
     
+    // live update
+    [dict setValue:@(_liveUpdate) forKey:TPLiveUpdateState];
+   
+    // show thumbnails
+    [dict setValue:@(_showingThumbnails) forKey:TPPDFThumbnailsShowingState];
+    
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
     [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
+  }
+}
+
+- (void) restoreUIState
+{
+  if ([self fileURL]) {
+    NSData *data = [UKXattrMetadataStore dataForKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];
+    if (data) {
+      NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+      if (dict) {
+        // max outline depth
+        self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
+        if (self.maxOutlineViewDepth == nil) {
+          self.maxOutlineViewDepth = @5;
+        }
+        
+        // live update
+        _liveUpdate = [[dict valueForKey:TPLiveUpdateState] boolValue];
+
+        // show thumbs
+        _showingThumbnails = [[dict valueForKey:TPPDFThumbnailsShowingState] boolValue];
+        
+      }
+    }
   }
 }
 
@@ -205,12 +237,13 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
         
         
         // max outline depth
-        self.maxOutlineViewDepth = [dict valueForKey:TPMaxOutlineDepth];
-        if (self.maxOutlineViewDepth == nil) {
-          self.maxOutlineViewDepth = @5;
-        }
         [self.outlineViewController setOutlineDepth:[self.maxOutlineViewDepth integerValue]];
         
+        // live update
+        [self.pdfViewerController.liveUpdateButton setState:_liveUpdate];
+        
+        // thumbnails showing
+        [self.pdfViewerController showThumbnails:_showingThumbnails];
         
         // pdf view visible rect
         NSString *pdfVisibleRect = [dict valueForKey:TPExternalDocPDFVisibleRectKey];
@@ -236,6 +269,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   
   // ensure we have a settings dictionary before proceeding
   [self initSettings];
+  
+  // restore ui state variables
+  [self restoreUIState];
   
   [self.controlsTabBarController selectTabAtIndex:1];
   [self.infoControlsTabBarController selectTabAtIndex:2];
@@ -408,7 +444,6 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self performSelector:@selector(insertTabbarControllerIntoResponderChain) withObject:nil afterDelay:0];
   
   _building = NO;
-  _liveUpdate = NO;
   
   [self observePreferences];
   [self setupLiveUpdateTimer];
@@ -1884,15 +1919,15 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
   [self.engineManager compile];
 }
 
-- (IBAction)liveUpdate:(id)sender
-{
-  if ([(NSButton*)sender state] == NSOnState) {
-    _liveUpdate = YES;
-    _openPDFAfterBuild = NO;
-  } else {
-    _liveUpdate = NO;
-  }
-}
+//- (IBAction)liveUpdate:(id)sender
+//{
+//  if ([(NSButton*)sender state] == NSOnState) {
+//    _liveUpdate = YES;
+//    _openPDFAfterBuild = NO;
+//  } else {
+//    _liveUpdate = NO;
+//  }
+//}
 
 - (void) handleTextChanged:(NSNotification*)aNote
 {
@@ -2105,9 +2140,9 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 
 -(NSNumber*)nCompile
 {
-  if (_liveUpdate) {
-    return @1;
-  }
+//  if (_liveUpdate) {
+//    return @1;
+//  }
   
   return [self.settings valueForKey:@"nCompile"];  
 }
@@ -2175,6 +2210,27 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 #pragma mark -
 #pragma mark PDFViewerController delegate
 
+- (BOOL) pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController *)aPDFViewer
+{
+  return _showingThumbnails;
+}
+
+- (void) pdfViewController:(PDFViewerController *)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  _showingThumbnails = visible;
+  [self updateChangeCount:NSChangeDone];
+}
+
+- (BOOL)pdfViewControllerShouldDoLiveUpdate:(PDFViewerController *)aPDFViewer
+{
+  return _liveUpdate;
+}
+
+- (void) pdfViewController:(PDFViewerController *)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  _liveUpdate = state;
+  [self updateChangeCount:NSChangeDone];
+}
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
