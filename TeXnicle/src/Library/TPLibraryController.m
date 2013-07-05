@@ -23,6 +23,8 @@
 @property (unsafe_unretained) IBOutlet NSWindow *editSheet;
 @property (unsafe_unretained) IBOutlet TeXTextView *editTextView;
 
+@property (unsafe_unretained) IBOutlet NSTextField *categoryLabel;
+
 @property (strong) 	NSImage *unknownImage;
 
 
@@ -67,6 +69,9 @@
 - (void) awakeFromNib
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  [[self.categoryLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+
   
   [self.selectedEntry performSelector:@selector(setContent:) withObject:nil afterDelay:0];
   

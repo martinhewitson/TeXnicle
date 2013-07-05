@@ -163,7 +163,7 @@
 							<object class="NSButton" id="287368325">
 								<reference key="NSNextResponder" ref="717458114"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{95, 9}, {83, 19}}</string>
+								<string key="NSFrame">{{95, 3}, {83, 19}}</string>
 								<reference key="NSSuperview" ref="717458114"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="743024349"/>
@@ -188,7 +188,7 @@
 							<object class="NSButton" id="861124313">
 								<reference key="NSNextResponder" ref="717458114"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{11, 9}, {76, 19}}</string>
+								<string key="NSFrame">{{11, 3}, {76, 19}}</string>
 								<reference key="NSSuperview" ref="717458114"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="287368325"/>
@@ -211,7 +211,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 332}, {259, 39}}</string>
+						<string key="NSFrame">{{0, 345}, {259, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="861124313"/>
@@ -229,7 +229,7 @@
 									<object class="NSOutlineView" id="522561169">
 										<reference key="NSNextResponder" ref="960034158"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{259, 301}</string>
+										<string key="NSFrameSize">{259, 314}</string>
 										<reference key="NSSuperview" ref="960034158"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="379480967"/>
@@ -319,7 +319,7 @@
 										<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 									</object>
 								</array>
-								<string key="NSFrameSize">{259, 301}</string>
+								<string key="NSFrameSize">{259, 314}</string>
 								<reference key="NSSuperview" ref="743024349"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="522561169"/>
@@ -356,7 +356,7 @@
 								<double key="NSPercent">0.99616858237547889</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 31}, {259, 301}}</string>
+						<string key="NSFrame">{{0, 31}, {259, 314}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="960034158"/>

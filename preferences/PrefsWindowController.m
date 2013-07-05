@@ -35,7 +35,8 @@
 #import "MHFileReader.h"
 #import "TPProjectTemplateManager.h"
 #import "TPSyntaxChecker.h"
-
+#import "TPDocumentSectionManager.h"
+#import "OutlineSectionTagsEditorController.h"
 
 @interface PrefsWindowController ()
 
@@ -46,6 +47,10 @@
 @property (unsafe_unretained) IBOutlet NSView *enginesEditorContainer;
 @property (strong) TPTemplateEditorView *templateEditorView;
 @property (unsafe_unretained) IBOutlet NSView *templateEditorViewContainer;
+
+@property (unsafe_unretained) IBOutlet NSView *outlineSectionEditorContainer;
+@property (strong) OutlineSectionTagsEditorController *outlineSectionController;
+
 
 @end
 
@@ -132,6 +137,10 @@
   [self.projectTemplateManager.view setFrame:[self.projectTemplateManagerContainer bounds]];
   [self.projectTemplateManagerContainer addSubview:self.projectTemplateManager.view];
   
+  // outline sections controller
+  self.outlineSectionController = [[OutlineSectionTagsEditorController alloc] init];
+  [self.outlineSectionController.view setFrame:self.outlineSectionEditorContainer.bounds];
+  [self.outlineSectionEditorContainer addSubview:self.outlineSectionController.view];
 }
 
 - (void) dealloc
@@ -184,6 +193,9 @@
 	
   [self addView:templatesView 
 					label:@"Templates" image:[NSImage imageNamed:@"templates"]];	
+
+  [self addView:outlinePrefsView
+					label:@"Outline" image:[NSImage imageNamed:@"outlinePrefs"]];
 	
   [self addView:userCommandsView
 					label:@"Commands" image:[NSImage imageNamed:@"commandsPrefs"]];	

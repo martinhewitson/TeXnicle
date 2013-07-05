@@ -131,7 +131,7 @@
 									<string key="NSContents"/>
 									<reference key="NSSupport" ref="698054080"/>
 									<reference key="NSControlView" ref="285814385"/>
-									<int key="NSButtonFlags">-2033958912</int>
+									<int key="NSButtonFlags">-2032910336</int>
 									<int key="NSButtonFlags2">99</int>
 									<object class="NSCustomResource" key="NSNormalImage">
 										<string key="NSClassName">NSImage</string>
@@ -162,7 +162,7 @@
 									<object class="NSTableView" id="424635879">
 										<reference key="NSNextResponder" ref="563915523"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{235, 176}</string>
+										<string key="NSFrameSize">{235, 179}</string>
 										<reference key="NSSuperview" ref="563915523"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="42979110"/>
@@ -268,7 +268,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</array>
-								<string key="NSFrameSize">{235, 176}</string>
+								<string key="NSFrameSize">{235, 179}</string>
 								<reference key="NSSuperview" ref="630370001"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="424635879"/>
@@ -302,7 +302,7 @@
 								<double key="NSPercent">0.99650349650349646</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 414}, {235, 176}}</string>
+						<string key="NSFrame">{{0, 414}, {235, 179}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="563915523"/>
@@ -443,6 +443,7 @@
 								<string key="NSFrame">{{175, 12}, {52, 25}}</string>
 								<reference key="NSSuperview" ref="1041666833"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="73391104">
 									<int key="NSCellFlags">-2080374784</int>
@@ -546,20 +547,16 @@
 							<object class="NSTextField" id="395375749">
 								<reference key="NSNextResponder" ref="282404897"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{0, 6}, {236, 18}}</string>
+								<string key="NSFrame">{{0, 6}, {236, 14}}</string>
 								<reference key="NSSuperview" ref="282404897"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="630370001"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="923108970">
 									<int key="NSCellFlags">68157504</int>
-									<int key="NSCellFlags2">138413056</int>
+									<int key="NSCellFlags2">138544128</int>
 									<string key="NSContents">Categories</string>
-									<object class="NSFont" key="NSSupport">
-										<string key="NSName">LucidaGrande</string>
-										<double key="NSSize">14</double>
-										<int key="NSfFlags">16</int>
-									</object>
+									<reference key="NSSupport" ref="26"/>
 									<reference key="NSControlView" ref="395375749"/>
 									<reference key="NSBackgroundColor" ref="544273470"/>
 									<reference key="NSTextColor" ref="466471746"/>
@@ -567,7 +564,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 590}, {235, 29}}</string>
+						<string key="NSFrame">{{0, 593}, {235, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="395375749"/>
@@ -587,7 +584,7 @@
 										<string key="NSFrameSize">{235, 166}</string>
 										<reference key="NSSuperview" ref="480635558"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="36571276"/>
+										<reference key="NSNextKeyView" ref="624348285"/>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -737,7 +734,7 @@
 						<string key="NSFrame">{{0, 201}, {235, 183}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="480635558"/>
+						<reference key="NSNextKeyView" ref="36571276"/>
 						<int key="NSsFlags">133680</int>
 						<reference key="NSVScroller" ref="624348285"/>
 						<reference key="NSHScroller" ref="106149828"/>
@@ -1421,6 +1418,14 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<reference key="destination" ref="309808522"/>
 					</object>
 					<int key="connectionID">332</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">categoryLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="395375749"/>
+					</object>
+					<int key="connectionID">338</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2165,7 +2170,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">337</int>
+			<int key="maxID">338</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2235,6 +2240,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<string key="addCategoryButton">HHValidatedButton</string>
 						<string key="addClipButton">HHValidatedButton</string>
 						<string key="categoriesTable">NSTableView</string>
+						<string key="categoryLabel">NSTextField</string>
 						<string key="clipCopyButton">HHValidatedButton</string>
 						<string key="commandMessageLabel">NSTextField</string>
 						<string key="commandTextField">NSTextField</string>
@@ -2261,6 +2267,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 						<object class="IBToOneOutletInfo" key="categoriesTable">
 							<string key="name">categoriesTable</string>
 							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="categoryLabel">
+							<string key="name">categoryLabel</string>
+							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="clipCopyButton">
 							<string key="name">clipCopyButton</string>

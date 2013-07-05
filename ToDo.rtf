@@ -143,24 +143,9 @@ Version 2.1\
 \
 1. Soft-wrap to a window size?\
 2. Soft-wrapped line indentation to the first line (like TextWrangler)?\
-\
-\
-----------------------\
-\
-\
-User Manual\
------------------\
-\
-\
-\pard\pardeftab720
-
-\f0 \cf0 Bugs\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 ----\
-\
-\
-TO DO\
-\
+
+\f0 \cf0 \
 ----\
 \
 \pard\pardeftab720\sa280
@@ -171,7 +156,7 @@ TO DO\
 \f0 \cf0 \
 ----\
 \
-BOOKMARKS should be text attachments (save character index in doc)\
+BOOKMARKS should be text attachments (save character index in doc). But how to save this information on disk?\
 Ruler class should ask for bookmark lines from delegate\
 \
 ----\
@@ -219,11 +204,9 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 
 \f4 \cf7 Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
 it appears that pdf page number are wrong when I had 4 pages and now only one it still display 1 of 4 pages.\
-\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 + Add preference to choose cursor style\
-\
+\f0 \cf0 \
 - Persist info tab index \
 	- needs new model version\
 \pard\pardeftab720
@@ -255,27 +238,33 @@ For example:\
 \
 * support arbitrary section commands and colors\
 \
++ Menu options to show/hide navigator sidebar\
++ Menu options to show/hide jump bar\
+	- later jumpbar should be per document\
+\
+\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
 Version 2.0.9\
 -------------\
 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 * Support \\subfile\
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 * remember live update setting\
+* remember live update setting\
 * remember pdf thumbnails setting\
 \
++ Improvements to look and feel\
++ The document outline now supports custom section commands for each document level. These can be \
+  set in the new 'Outline' preferences tab. The outline colors are now set here too.\
 + Jump bar changes:\
 	- Added option to enable/disable jumpbar in general preferences.\
 	- Added option to disable linenumbers in jumpbar (can lead to performance improvements in large files)\
 	- Optimised section list building in jumpbar.\
 + Added support for \\addbibresource\{\} command for citation completion.\
++ Added support for subfiles package.\
 + Bug fix for spellchecker language settings which were not always remembered on the editor.\
 + Bug fix for expanding simple code snippets with no placeholders where the cursor would end up at the beginning of the snippet.\
 + Bug fix for PDF printing on some 10.6.8 machines.\
 + Bug fix: in some circumstances hiding/showing the status view below the editor was failing\
-+ Other minor improvements\
++ Other minor improvements and optimisations\
 \
 Version 2.0.8\
 -------------\

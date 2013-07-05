@@ -132,11 +132,14 @@
 #endif
         
         // get argument
-        NSString *arg = [word argument];
+        NSInteger startLoc = index;
+        NSString *arg = [text parseArgumentStartingAt:&startLoc];
         if ([arg length] > 0 && [[arg pathExtension] length] == 0) {
           arg = [arg stringByAppendingPathExtension:@"tex"];
         }
-        
+#if TP_SECTION_DEBUG
+        NSLog(@"Got arg %@", arg);
+#endif
         arg = [arg stringByStandardizingPath];
         
         __block NSString *subtext = nil;

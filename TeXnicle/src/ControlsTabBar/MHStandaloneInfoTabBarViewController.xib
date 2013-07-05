@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2843</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -40,10 +40,9 @@
 					<object class="NSButton" id="106876454">
 						<reference key="NSNextResponder" ref="272418841"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{121, -1}, {36, 32}}</string>
+						<string key="NSFrame">{{121, 0}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="272418841"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="743433317">
 							<int key="NSCellFlags">-2080374784</int>
@@ -75,7 +74,7 @@
 					<object class="NSButton" id="393566423">
 						<reference key="NSNextResponder" ref="272418841"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{91, -1}, {36, 32}}</string>
+						<string key="NSFrame">{{91, 0}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="272418841"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="106876454"/>
@@ -106,7 +105,7 @@
 					<object class="NSButton" id="279365985">
 						<reference key="NSNextResponder" ref="272418841"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{61, -1}, {36, 32}}</string>
+						<string key="NSFrame">{{61, 0}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="272418841"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="393566423"/>
@@ -137,7 +136,7 @@
 					<object class="NSButton" id="993412121">
 						<reference key="NSNextResponder" ref="272418841"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{31, -1}, {36, 32}}</string>
+						<string key="NSFrame">{{31, 0}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="272418841"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="279365985"/>
@@ -168,7 +167,7 @@
 					<object class="NSButton" id="704636002">
 						<reference key="NSNextResponder" ref="272418841"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{1, -1}, {36, 32}}</string>
+						<string key="NSFrame">{{1, 0}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="272418841"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="993412121"/>
@@ -197,7 +196,7 @@
 						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 					</object>
 				</array>
-				<string key="NSFrameSize">{235, 25}</string>
+				<string key="NSFrameSize">{235, 26}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="704636002"/>
@@ -470,64 +469,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MHInfoToolbarBackgroundView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHStandaloneInfoTabBarViewController</string>
-					<string key="superclassName">NSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">buttonSelected:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">buttonSelected:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">buttonSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="citationsButton">NSButton</string>
-						<string key="commandsButton">NSButton</string>
-						<string key="labelsButton">NSButton</string>
-						<string key="spellingButton">NSButton</string>
-						<string key="splitview">NSSplitView</string>
-						<string key="tabView">NSTabView</string>
-						<string key="warningsButton">NSButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="citationsButton">
-							<string key="name">citationsButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="commandsButton">
-							<string key="name">commandsButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="labelsButton">
-							<string key="name">labelsButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="spellingButton">
-							<string key="name">spellingButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="splitview">
-							<string key="name">splitview</string>
-							<string key="candidateClassName">NSSplitView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="tabView">
-							<string key="name">tabView</string>
-							<string key="candidateClassName">NSTabView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="warningsButton">
-							<string key="name">warningsButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHStandaloneInfoTabBarViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

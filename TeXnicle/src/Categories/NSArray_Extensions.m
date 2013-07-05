@@ -44,7 +44,7 @@
 
 + (NSArray*)texIncludeCommands
 {
-  return @[@"input", @"include", @"subfile"];
+  return @[@"input", @"include", @"subfile", @"component"];
 }
 
 + (NSArray*)texIncludeCommandsSearchStrings

@@ -43,6 +43,7 @@
 	IBOutlet NSView *templatesView;
 	IBOutlet NSView *engineView;
 	IBOutlet NSView *userCommandsView;
+	IBOutlet NSView *outlinePrefsView;
 	IBOutlet NSView *libraryPrefsView;
 	IBOutlet NSView *fileTypesPrefsView;
 

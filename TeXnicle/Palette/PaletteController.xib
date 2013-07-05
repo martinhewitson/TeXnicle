@@ -58,7 +58,7 @@
 							<object class="NSPopUpButton" id="430834924">
 								<reference key="NSNextResponder" ref="690712215"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{6, 6}, {218, 25}}</string>
+								<string key="NSFrame">{{6, 3}, {218, 18}}</string>
 								<reference key="NSSuperview" ref="690712215"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="153871800"/>
@@ -66,14 +66,14 @@
 								<object class="NSPopUpButtonCell" key="NSCell" id="451844458">
 									<int key="NSCellFlags">-2080374720</int>
 									<int key="NSCellFlags2">134219776</int>
-									<object class="NSFont" key="NSSupport" id="490045492">
-										<string key="NSName">LucidaGrande</string>
+									<object class="NSFont" key="NSSupport">
+										<string key="NSName">LucidaGrande-Bold</string>
 										<double key="NSSize">12</double>
 										<int key="NSfFlags">16</int>
 									</object>
 									<reference key="NSControlView" ref="430834924"/>
-									<int key="NSButtonFlags">-2038284288</int>
-									<int key="NSButtonFlags2">164</int>
+									<int key="NSButtonFlags">-1232977920</int>
+									<int key="NSButtonFlags2">173</int>
 									<string key="NSAlternateContents"/>
 									<string key="NSKeyEquivalent"/>
 									<int key="NSPeriodicDelay">400</int>
@@ -138,7 +138,7 @@
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 578}, {235, 36}}</string>
+						<string key="NSFrame">{{0, 588}, {235, 26}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="430834924"/>
@@ -161,7 +161,11 @@
 									<int key="NSCellFlags">-2080374784</int>
 									<int key="NSCellFlags2">134217728</int>
 									<string key="NSContents">insert</string>
-									<reference key="NSSupport" ref="490045492"/>
+									<object class="NSFont" key="NSSupport">
+										<string key="NSName">LucidaGrande</string>
+										<double key="NSSize">12</double>
+										<int key="NSfFlags">16</int>
+									</object>
 									<reference key="NSControlView" ref="945837471"/>
 									<int key="NSButtonFlags">-2038153216</int>
 									<int key="NSButtonFlags2">164</int>
@@ -245,7 +249,7 @@
 									<object class="NSTableView" id="468185069">
 										<reference key="NSNextResponder" ref="276673413"/>
 										<int key="NSvFlags">4352</int>
-										<string key="NSFrameSize">{234, 547}</string>
+										<string key="NSFrameSize">{234, 557}</string>
 										<reference key="NSSuperview" ref="276673413"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="471429231"/>
@@ -382,7 +386,7 @@
 										<int key="NSTableViewGroupRowStyle">1</int>
 									</object>
 								</array>
-								<string key="NSFrameSize">{234, 547}</string>
+								<string key="NSFrameSize">{234, 557}</string>
 								<reference key="NSSuperview" ref="153871800"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="468185069"/>
@@ -416,7 +420,7 @@
 								<double key="NSPercent">0.99581589958159</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 31}, {234, 547}}</string>
+						<string key="NSFrame">{{0, 31}, {234, 557}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="276673413"/>
