@@ -1000,7 +1000,10 @@
 {
 //  NSLog(@"managedObjectContextForStoreURL %@", storeURL);
 	//	Find the document's model	
-	NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
+  NSURL *url = [NSURL fileURLWithPath:path];
+  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
 	if (!model)
 		return nil;
 	
@@ -1039,22 +1042,14 @@
 #pragma mark -
 #pragma mark Core Data overrides
 
-//- (NSManagedObjectModel*)managedObjectModel
-//{
-//  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-////  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
-////  NSURL *url = [NSURL fileURLWithPath:path];
-//  NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
-////  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
-//  NSLog(@"Loaded model %@", [model entityVersionHashesByName]);
-//    
-//  // try loading version 11 model
-//  NSDictionary *dict = 
-//  NSManagedObjectModel *v11 = [NSManagedObjectModel mergedModelFromBundles:@[bundle] forStoreMetadata:dict];
-//  
-//  
-//  return model;
-//}
+- (NSManagedObjectModel*)managedObjectModel
+{
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
+  NSURL *url = [NSURL fileURLWithPath:path];
+  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+  return model;
+}
 
 - (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL*)url 
 																					 ofType:(NSString*)fileType
