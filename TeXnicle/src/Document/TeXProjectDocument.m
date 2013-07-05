@@ -1057,7 +1057,7 @@
 																		 storeOptions:(NSDictionary*)storeOptions
 																						error:(NSError**)error
 {
-  NSLog(@"configurePersistentStoreCoordinatorForURL %@", url);
+//  NSLog(@"configurePersistentStoreCoordinatorForURL %@", url);
   NSMutableDictionary *options = nil;
   if (storeOptions != nil) {
     options = [storeOptions mutableCopy];
@@ -1068,22 +1068,17 @@
   // check version at URL
   NSError *metaerror = nil;
   NSDictionary *storeMeta = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:nil URL:url error:&metaerror];
-  NSLog(@"Metadata at URL %@", storeMeta);
-  
-  NSManagedObjectModel *oldManagedObjectModel = [NSManagedObjectModel mergedModelFromBundles:@[[NSBundle mainBundle]]
-                                                                            forStoreMetadata:storeMeta];
-  
-  NSLog(@"Old managed object model %@", [oldManagedObjectModel entityVersionHashesByName]);
-  
   
   // get new managed object model
-  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-  NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:@[bundle]];
-  NSLog(@"New model: %@", [model entityVersionHashesByName]);
+  NSManagedObjectModel *model = [self managedObjectModel];
   
-  
-  NSLog(@"Compatible? %d", [model isConfiguration:nil compatibleWithStoreMetadata:storeMeta]);
-  
+  // check if the new model is compatible, otherwise we try to repair store files created with
+  // model version 11, because they had a merged model with the Library.
+  if ([model isConfiguration:nil compatibleWithStoreMetadata:storeMeta] == NO) {
+    // load XML file
+    [self repairXMLStoreAtURL:url];
+  }
+    
   options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
   options[NSInferMappingModelAutomaticallyOption] = @YES;
   
@@ -1104,6 +1099,65 @@
   }
     
   return result;
+}
+
+- (void) repairXMLStoreAtURL:(NSURL*)url
+{
+  NSStringEncoding encoding;
+  NSString *fileContents = [NSString stringWithContentsOfURL:url usedEncoding:&encoding error:NULL];
+  if (fileContents != nil) {
+    NSMutableArray *outlines = [NSMutableArray array];
+    NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+//    NSLog(@"%@", lines);
+    for (NSInteger kk=0; kk<[lines count]; kk++) {
+      NSString *tline = [[lines objectAtIndex:kk] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      if ([tline isEqualToString:@"<key>Category</key>"]) {
+        kk+=3;
+        continue;
+      }
+      if ([tline isEqualToString:@"<key>Entry</key>"]) {
+        kk+=3;
+        continue;
+      }
+      
+      [outlines addObject:[lines objectAtIndex:kk]];
+    }
+//    NSLog(@"Output: %@", outlines);
+    if ([outlines count] > 0) {
+      
+      // make backup of old URL
+      NSFileManager *fm = [NSFileManager defaultManager];
+      NSError *error = nil;
+      NSURL *backupURL = [url URLByAppendingPathExtension:@"backup"];
+      if ([fm copyItemAtURL:url toURL:backupURL error:&error]) {
+        NSString *outString = [outlines componentsJoinedByString:@"\n"];
+        //      NSLog(@"%@", outString);
+        error = nil;
+        if ([outString writeToURL:url atomically:YES encoding:encoding error:&error] == NO) {
+          // failed to write
+          NSAlert *alert = [NSAlert alertWithMessageText:@"File Repair Failed"
+                                           defaultButton:@"OK"
+                                         alternateButton:nil
+                                             otherButton:nil
+                               informativeTextWithFormat:@"The repair of the old format texnicle file failed. Contact bobsoft support for further assistance, or create a new TeXnicle project using the 'build' menu option."];
+          [alert runModal];
+          NSLog(@"Failed to repair store at url %@", url);
+          return;
+        }
+      } else {
+        // copy back the backup
+        error = nil;
+        if ([fm copyItemAtURL:backupURL toURL:url error:&error] == NO) {
+          NSLog(@"Failed to restore backup from %@ to %@", backupURL, url);
+          NSLog(@"%@", error);
+        }
+        NSLog(@"Failed to repair store at url %@", url);
+        return;
+      }
+    }
+  }
+  
+  NSLog(@"Successfully repaired store at url %@", url);
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
