@@ -95,7 +95,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   BOOL _shouldHighlightFirstMatch;
   BOOL _statusViewIsShowing;
   BOOL _windowIsClosing;
-  BOOL _liveUpdate;
   BOOL _building;
   BOOL _didSetup;
 }

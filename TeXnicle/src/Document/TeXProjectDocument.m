@@ -168,7 +168,6 @@
     [super awakeFromNib];
   
   _building = NO;
-  _liveUpdate = NO;
   
   self.tabHistory = [NSMutableArray array];
 }
@@ -813,8 +812,7 @@
 //  NSLog(@"Restore UI");
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
-  [self.infoControlsTabBarController selectTabAtIndex:0];
-  
+  [self.infoControlsTabBarController selectTabAtIndex:0];  
   
   if(![NSApp isLion]) {
     // controls width
@@ -2437,15 +2435,6 @@
   [self.engineManager compile];
 }
 
-- (IBAction)liveUpdate:(id)sender
-{
-  if ([(NSButton*)sender state] == NSOnState) {
-    _liveUpdate = YES;
-    _openPDFAfterBuild = NO;
-  } else {
-    _liveUpdate = NO;
-  }
-}
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
@@ -2481,7 +2470,7 @@
     return;
   }
   
-  if (!_building && _liveUpdate && [self.project hasEdits]) {
+  if (!_building && self.project.settings.doLiveUpdate && [self.project hasEdits]) {
     if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
       // check for the last edit date
       NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
@@ -3804,14 +3793,24 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark PDFViewerController delegate
 
+- (BOOL) pdfViewControllerShouldDoLiveUpdate:(PDFViewerController *)aPDFViewer
+{
+  return [self.project.settings.doLiveUpdate boolValue];
+}
+
+- (void) pdfViewController:(PDFViewerController *)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  self.project.settings.doLiveUpdate = @(state);
+}
+
 - (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer
 {
-  return NO; //return [self.project.uiSettings.showPDFThumbnails boolValue];
+  return [self.project.uiSettings.showPDFThumbnails boolValue];
 }
 
 - (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
 {
-  //self.project.uiSettings.showPDFThumbnails = @(visible);
+  self.project.uiSettings.showPDFThumbnails = @(visible);
 }
 
 
@@ -4131,7 +4130,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 -(NSNumber*)openConsole
 {
   // if we are in live update, return no
-  if (_liveUpdate) {
+  if ([self.project.settings.doLiveUpdate boolValue]) {
     return @NO;
   }
   
