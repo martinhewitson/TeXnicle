@@ -116,6 +116,8 @@
   [self performSelector:@selector(updatePageCountDisplay) withObject:nil afterDelay:0];
   [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
   
+  // update live update button
+  [self.liveUpdateButton setState:[self pdfViewControllerShouldDoLiveUpdate:self]];
 }
 
 - (void) setupThumbsView
@@ -154,10 +156,24 @@
   self.delegate = nil;
 }
 
+- (IBAction)changeLiveUpdate:(id)sender
+{
+  BOOL state = [self.liveUpdateButton state] == NSOnState;
+  [self pdfViewController:self didSelectLiveUpdate:state];
+}
 
 - (IBAction)toggleResultsTable:(id)sender
 {
   [self.searchResultsSlideViewController toggle:sender];
+}
+
+- (void) showThumbnails:(BOOL)state
+{
+  if (state) {
+    [self.thumbSlideViewController slideInAnimated:YES];
+  } else {
+    [self.thumbSlideViewController slideOutAnimated:YES];
+  }
 }
 
 - (IBAction)toggleThumbsTable:(id)sender
@@ -540,6 +556,24 @@
     [self.delegate pdfViewController:self didChangeThumbnailsViewerState:visible];
   }
 }
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewController:didSelectLiveUpdate:)]) {
+    BOOL state = [self.liveUpdateButton state] == NSOnState;
+    [self.delegate pdfViewController:self didSelectLiveUpdate:state];
+  }
+}
+
+- (BOOL)pdfViewControllerShouldDoLiveUpdate:(PDFViewerController*)aPDFViewer
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewControllerShouldDoLiveUpdate:)]) {
+    return [self.delegate pdfViewControllerShouldDoLiveUpdate:self];
+  }
+  
+  return NO;
+}
+
 
 
 #pragma mark -
