@@ -344,9 +344,12 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
     else
 		[viewAnimation setDuration:0.25];
 	
-	NSDictionary *fadeOutDictionary = @{NSViewAnimationTargetKey: oldView,
-		NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
-
+  NSDictionary *fadeOutDictionary = @{};
+  if (oldView) {
+    fadeOutDictionary = @{NSViewAnimationTargetKey: oldView,
+                          NSViewAnimationEffectKey: NSViewAnimationFadeOutEffect};
+  }
+  
 	NSDictionary *fadeInDictionary = @{NSViewAnimationTargetKey: newView,
 		NSViewAnimationEffectKey: NSViewAnimationFadeInEffect};
 
