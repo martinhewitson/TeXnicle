@@ -1763,6 +1763,7 @@
   
   [self.texEditorViewController.textView performSelector:@selector(applyLineSpacingToDocument) withObject:nil afterDelay:0];  
   
+  [self.projectItemTreeController setNeedsDisplay];
 }
 
 - (void) handleOpenDocumentsDidAddFileNotification:(NSNotification*)aNote
