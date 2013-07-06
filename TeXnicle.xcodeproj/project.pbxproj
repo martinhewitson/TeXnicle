@@ -115,6 +115,7 @@
 		2528E86D1395446400834921 /* DocWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2528E86B1395446400834921 /* DocWindow.xib */; };
 		2528E8711395662600834921 /* StartupScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E8701395662600834921 /* StartupScreenController.m */; };
 		2528E8731395663700834921 /* StartupScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2528E8721395663700834921 /* StartupScreen.xib */; };
+		2529D24217887525002F64B4 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */; };
 		252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 252C71B913E33B1C002351D2 /* NSDictionary+TeXnicle.m */; };
 		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121B162167490041B2BE /* MHControlsTabBarController.xib */; };
@@ -204,7 +205,6 @@
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
 		2562782C151A061300778FFB /* error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2562782A151A061300778FFB /* error.icns */; };
-		2566D91A1783EB2500BA4755 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */; };
 		2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567272716E49FEC004B7C4A /* NSImage+Resize.m */; };
 		2567272A16E4A246004B7C4A /* outline_part.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272916E4A246004B7C4A /* outline_part.icns */; };
 		2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272B16E4ADD7004B7C4A /* outline_chapter.icns */; };
@@ -2890,7 +2890,7 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = bobsoft;
 			};
 			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
@@ -3474,6 +3474,7 @@
 				25D10EF3176F00AE004C40AE /* MMTabBarController.m in Sources */,
 				25D10EF5176F00AE004C40AE /* MMTabBarView.m in Sources */,
 				25D10EF6176F00AE004C40AE /* MMTabDragAssistant.m in Sources */,
+				2529D24217887525002F64B4 /* TeXProject.xcdatamodeld in Sources */,
 				25D10EF7176F00AE004C40AE /* MMTabDragView.m in Sources */,
 				25D10EF8176F00AE004C40AE /* MMTabDragWindow.m in Sources */,
 				25D10EF9176F00AE004C40AE /* MMTabDragWindowController.m in Sources */,
@@ -3587,8 +3588,9 @@
 		2507732D138E5D82000F1118 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3601,10 +3603,12 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
@@ -3613,8 +3617,9 @@
 		2507732E138E5D82000F1118 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3624,7 +3629,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3637,7 +3644,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -3660,7 +3666,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -3684,7 +3689,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -3700,6 +3704,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3715,7 +3720,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -3731,6 +3735,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3746,7 +3751,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3780,7 +3784,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
