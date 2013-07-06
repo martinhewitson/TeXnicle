@@ -172,7 +172,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 - (IBAction) buildAndView:(id)sender;
 - (IBAction) buildProject:(id)sender;
 
-- (IBAction)liveUpdate:(id)sender;
 - (void)doLiveBuild;
 
 - (void) build;

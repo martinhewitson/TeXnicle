@@ -151,7 +151,6 @@
 - (IBAction) buildProject:(id)sender;
 - (void) build;
 
-- (IBAction)liveUpdate:(id)sender;
 - (BOOL)hasChanges;
 - (void)doLiveBuild;
 
