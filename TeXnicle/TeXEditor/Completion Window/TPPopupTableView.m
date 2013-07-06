@@ -53,7 +53,7 @@
   
   
   // draw highlight for the visible, selected rows
-  for (aRow; aRow < anEndRow; aRow++)
+  for (aRow = aVisibleRowIndexes.location; aRow < anEndRow; aRow++)
   {
     if([aSelectedRowIndexes containsIndex:aRow])
     {
