@@ -63,7 +63,7 @@ extern NSString * const OutlineViewNodeType;
 @property (nonatomic, strong) ProjectEntity *project;
 
 - (void)updateSortOrder;
-
+- (void) setNeedsDisplay;
 - (void) selectDocument:(FileEntity*)aDoc;
 - (void) selectItem:(ProjectItemEntity*)aDoc;
 - (NSArray *)treeNodeSortDescriptors;

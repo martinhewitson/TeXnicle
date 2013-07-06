@@ -247,6 +247,11 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[self setSelectionIndexPath:[node indexPath]];
 }
 
+- (void) setNeedsDisplay
+{
+  [self.outlineView setNeedsDisplay:YES];
+}
+
 #pragma mark -
 #pragma mark File management
 
@@ -1388,10 +1393,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         [cell setTextColor:[NSColor redColor]];
       }	
       
-      NSString *ext = [object valueForKey:@"extension"];
-      if (!ext)
-        ext = @"";
-      
+//      NSString *ext = [object valueForKey:@"extension"];
+//      if (!ext)
+//        ext = @"";
+//      
 //      NSString *title;
 //      title = [object valueForKey:@"name"];
 //      [cell setTitle:title];
