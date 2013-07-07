@@ -635,6 +635,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 #pragma mark -
 #pragma mark Delegate methods
+
+- (NSString*)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+  FileEntity *file = [tabViewItem identifier];
+  return [file pathOnDisk];
+}
 				
 
 -(ProjectEntity*)project
