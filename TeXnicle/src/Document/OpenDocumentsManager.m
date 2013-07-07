@@ -63,14 +63,13 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.tabBar setStyleNamed:@"Safari"];
 	[self.tabBar setOrientation:MMTabBarHorizontalOrientation];
 	[self.tabBar setAutomaticallyAnimates:YES];
-	[self.tabBar setCanCloseOnlyTab:NO];
 	[self.tabBar setHideForSingleTab:NO];
   [self.tabBar setShowAddTabButton:NO];
   [self.tabBar setCanCloseOnlyTab:YES];
   [self.tabBar setOnlyShowCloseOnHover:YES];
   [self.tabBar setDisableTabClose:NO];
   [self.tabBar setAllowsBackgroundTabClosing:YES];
-  [self.tabBar sizeButtonsToFit];
+  [self.tabBar setSizeButtonsToFit:YES];
   
 	_isOpening = NO;
 		
