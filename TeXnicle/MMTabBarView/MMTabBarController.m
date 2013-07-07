@@ -620,14 +620,14 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
   subitem = [sub addItemWithTitle:@"Close" action:@selector(_closeOverflowTabAction:) keyEquivalent:@""];
   [subitem setTarget:_tabBarView];
   [subitem setRepresentedObject:anItem];
-  [subitem setState:NSOffState];
+  [subitem setOnStateImage:nil];
   
   // move to front
   subitem = [sub addItemWithTitle:@"Move to first" action:@selector(_moveOverflowTabAction:) keyEquivalent:@""];
   [subitem setTarget:_tabBarView];
   [subitem setRepresentedObject:anItem];
-  [subitem setState:NSOffState];
-    
+  [subitem setOnStateImage:nil];
+  
   [menuItem setSubmenu:sub];
   
     if ([[_tabBarView delegate] respondsToSelector:@selector(tabView:tabViewItem:isInOverflowMenu:)]) {
