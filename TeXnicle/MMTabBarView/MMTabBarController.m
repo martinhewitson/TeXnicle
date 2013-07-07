@@ -605,12 +605,31 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                 keyEquivalent:@""];
     [menuItem setTarget:_tabBarView];
     [menuItem setRepresentedObject:anItem];
+  
 /*
     if ([aButton objectCount] > 0) {
         [menuItem setTitle:[[menuItem title] stringByAppendingFormat:@" (%lu)", (unsigned long)[aButton objectCount]]];
     }
 */            
-        
+  
+  
+  NSMenu *sub = [[NSMenu alloc] initWithTitle:truncatedString];
+  NSMenuItem *subitem;
+  
+  // close
+  subitem = [sub addItemWithTitle:@"Close" action:@selector(_closeOverflowTabAction:) keyEquivalent:@""];
+  [subitem setTarget:_tabBarView];
+  [subitem setRepresentedObject:anItem];
+  [subitem setState:NSOffState];
+  
+  // move to front
+  subitem = [sub addItemWithTitle:@"Move to first" action:@selector(_moveOverflowTabAction:) keyEquivalent:@""];
+  [subitem setTarget:_tabBarView];
+  [subitem setRepresentedObject:anItem];
+  [subitem setState:NSOffState];
+    
+  [menuItem setSubmenu:sub];
+  
     if ([[_tabBarView delegate] respondsToSelector:@selector(tabView:tabViewItem:isInOverflowMenu:)]) {
         [[_tabBarView delegate] tabView:[_tabBarView tabView] tabViewItem:anItem isInOverflowMenu:YES];
     }

@@ -20,7 +20,7 @@
 #define MARGIN_X                        4
 #define MARGIN_Y                        3
 // padding between objects
-#define kMMTabBarCellPadding            0
+#define kMMTabBarCellPadding            4
 // fixed size objects
 #define kMMMinimumTitleWidth            20
 #define kMMTabBarIndicatorWidth         16.0
