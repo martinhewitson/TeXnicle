@@ -2340,7 +2340,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 - (NSSize)_overflowButtonSize {
 
     if ([self orientation] == MMTabBarHorizontalOrientation)
-        return NSMakeSize(14.0,[self frame].size.height);
+        return NSMakeSize(18.0,[self frame].size.height);
     else
         return NSMakeSize([self frame].size.width,18.0);
 }
