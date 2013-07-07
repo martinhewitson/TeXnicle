@@ -429,7 +429,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 
             [aButton setStackingFrame:buttonRect];
 
-            if (idx+1 == [widths count] && [widths count] < buttonCount)
+            if (idx == [widths count] && [widths count] < buttonCount)
                 {
                 [aButton setIsOverflowButton:YES];
                 [self _addItemToOverflowMenu:[aButton tabViewItem] withTitle:[[aButton attributedStringValue] string]];
