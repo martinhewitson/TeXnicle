@@ -274,7 +274,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
-    [self.tabView addTabViewItem:newItem];
+//    [self.tabView addTabViewItem:newItem];
+    [self.tabView insertTabViewItem:newItem atIndex:0];
     if (selectTab) {
       [self.tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
     }
