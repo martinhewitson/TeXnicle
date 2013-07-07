@@ -70,6 +70,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   [self.tabBar setDisableTabClose:NO];
   [self.tabBar setAllowsBackgroundTabClosing:YES];
   [self.tabBar setSizeButtonsToFit:YES];
+  [self.tabBar setUseOverflowMenu:YES];
   
 	_isOpening = NO;
 		
