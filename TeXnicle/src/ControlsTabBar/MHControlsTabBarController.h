@@ -74,6 +74,7 @@ extern NSString * const TPControlsTabSelectionDidChangeNotification;
 - (IBAction) showProjectSettings:(id)sender;
 - (void) showProjectSettings;
 - (IBAction) showNavigator:(id)sender;
+- (IBAction) hideNavigator:(id)sender;
 
 - (void) tearDown;
 

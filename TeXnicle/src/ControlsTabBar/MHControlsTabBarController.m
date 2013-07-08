@@ -319,6 +319,32 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   [self selectTabAtIndex:[self tabIndexForButton:self.prefsButton]];
 }
 
+- (IBAction) hideNavigator:(id)sender
+{
+  NSView *leftView = [self.splitview subviews][0];
+  NSView *midView = [self.splitview subviews][1];
+  
+  NSRect leftFrame = leftView.frame;
+  NSRect midFrame = midView.frame;
+  
+  midFrame.size.width += leftFrame.size.width;
+  leftFrame.size.width = 0.0f;
+  midFrame.origin.x = 0;
+  
+  NSMutableDictionary *collapseMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+  collapseMainAnimationDict[NSViewAnimationTargetKey] = midView;
+  collapseMainAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:midFrame];
+  
+  NSMutableDictionary *collapseInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+  collapseInspectorAnimationDict[NSViewAnimationTargetKey] = leftView;
+  collapseInspectorAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:leftFrame];
+  
+  NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:@[collapseMainAnimationDict, collapseInspectorAnimationDict]];
+  [collapseAnimation setDuration:0.25f];
+  [collapseAnimation startAnimation];
+  
+}
+
 - (IBAction) showNavigator:(id)sender
 {
   NSView *leftView = [self.splitview subviews][0];
@@ -341,9 +367,21 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
   midfr.size.width = midfr.size.width - size;
   midfr.origin.x = size;
   
-  [midView setFrame:midfr];
   [leftView.animator setFrame:leftfr];
+  [midView.animator setFrame:midfr];
   [leftView setHidden:NO];
+  
+//  NSMutableDictionary *collapseMainAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+//  collapseMainAnimationDict[NSViewAnimationTargetKey] = midView;
+//  collapseMainAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:midfr];
+//  
+//  NSMutableDictionary *collapseInspectorAnimationDict = [NSMutableDictionary dictionaryWithCapacity:2];
+//  collapseInspectorAnimationDict[NSViewAnimationTargetKey] = leftView;
+//  collapseInspectorAnimationDict[NSViewAnimationEndFrameKey] = [NSValue valueWithRect:leftfr];
+//  
+//  NSViewAnimation *collapseAnimation = [[NSViewAnimation alloc] initWithViewAnimations:@[collapseMainAnimationDict, collapseInspectorAnimationDict]];
+//  [collapseAnimation setDuration:0.25f];
+//  [collapseAnimation startAnimation];
 }
 
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
@@ -405,6 +443,14 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
     // show navigator 
     NSView *leftView = [self.splitview subviews][0];
     if ([leftView isHidden] == YES) {
+      return YES;
+    }
+  }
+  
+  if (tag == 2190) {
+    // show navigator
+    NSView *leftView = [self.splitview subviews][0];
+    if ([leftView isHidden] == NO) {
       return YES;
     }
   }
