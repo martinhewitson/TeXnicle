@@ -98,90 +98,57 @@ static NSCharacterSet *controlFilterChars = nil;
 {
 	NSMutableArray *cites = [NSMutableArray array];
 	NSInteger sourceStart;
-  NSInteger sourceEnd;
   // 1) look for lines starting with \bibitem
   NSScanner *scanner = [NSScanner scannerWithString:self];
   NSInteger scanLocation = 0;
   while(scanLocation < [self length]) {
     if ([scanner scanUpToString:@"\\bibitem" intoString:NULL]) {
       scanLocation = [scanner scanLocation];
-//      NSLog(@"Found bibitem at %d", scanLocation);
+      //NSLog(@"Found bibitem at %ld", scanLocation);
       sourceStart = scanLocation;
       
       if (scanLocation == [self length]) {
+        //NSLog(@" scan location at end: bailing out");
         break;
       }
       scanLocation += 8;
 
-      // 2) check if \bibitem is followed by [, if yes, scan forward to ]
-      if ([self characterAtIndex:scanLocation] == '[') {
-//        NSLog(@"  cite has option");
-        BOOL foundClosingBracket = NO;
-        NSInteger bracketCount = 1;
-        scanLocation++;
-        while (scanLocation < [self length]) {
-          if ([self characterAtIndex:scanLocation] == '[') {
-            bracketCount++;
-          }
-          if ([self characterAtIndex:scanLocation] == ']') {
-            bracketCount--;
-            if (bracketCount == 0) {
-              foundClosingBracket = YES;
-              break;
-            }
-          }
-          scanLocation++;
-        }
+      // check if the line is commented out
+      //NSRange lr = [self lineRangeForRange:NSMakeRange(scanLocation, 0)];
+      //NSLog(@"Checking string [%@]", [self substringWithRange:lr]);
+      if ([self isCommentLineBeforeIndex:scanLocation commentChar:@"%"] == YES) {
+        //NSLog(@"COMMENTED");
+        [scanner setScanLocation:scanLocation];
+        continue;
+      }
+      
+      // 2) check if \bibitem has an option []
+      if (scanLocation < [self length] && [self characterAtIndex:scanLocation] == '[') {
+        NSString *option = [self parseOptionStartingAtIndex:scanLocation];
+        //NSLog(@"  cite has option %@", option);
         
         // we didn't find a closing ] so bail out
-        if (foundClosingBracket == NO) {
-//          NSLog(@"    option is not closed properly");
+        if (option == nil) {
+          //NSLog(@"    option is not closed properly");
           break;
         }
-        
-        scanLocation++;
+        scanLocation += [option length];
       }
       
       // The character at the scan location is now a { or we bail out
-      NSInteger start = NSNotFound;
-      NSInteger end   = NSNotFound;
-      if ([self characterAtIndex:scanLocation] == '[') {
-        start = scanLocation+1;
-      }
+      NSInteger argStart = scanLocation;
+      NSString *tag = [self parseArgumentStartingAt:&argStart];
+      //NSLog(@"Got tag %@", tag);
       
-      if (start == NSNotFound) {
-        break; // bail out
-      }
-//      NSLog(@"  found start of tag at %d", start);
-      
-      // now go forwards and look for a }
-      scanLocation = start;
-      NSInteger bracketCount = 1;
-      while (scanLocation < [self length]) {
-        if ([self characterAtIndex:scanLocation] == '{') {
-          bracketCount++;
-        }
-        if ([self characterAtIndex:scanLocation] == '}') {
-          bracketCount--;
-          if (bracketCount == 0) {
-            sourceEnd = scanLocation;
-            end = scanLocation-1;
-            break;
-          }
-        }
-        scanLocation++;
-      }
-//      NSLog(@"  found end of tag at %d", end);
-      
-      if (start != NSNotFound && end != NSNotFound && start < end) {
-        NSString *tag = [self substringWithRange:NSMakeRange(start, end-start+1)];
+      if (tag != nil) {
         BibliographyEntry *bib = [[BibliographyEntry alloc] init];
-        bib.tag = tag;      
-        bib.sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
+        bib.tag = [tag stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        bib.sourceString = [self substringWithRange:NSMakeRange(sourceStart, argStart-sourceStart+1)];
         [cites addObject:bib];
       }
       
       [scanner setScanLocation:scanLocation];
+      //NSLog(@"Scan location %ld / %ld", scanLocation, [self length]);
     } else {
       break;
     }
@@ -247,6 +214,13 @@ static NSCharacterSet *controlFilterChars = nil;
   // scan for \bibliography
   if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
     NSInteger idx = [scanner scanLocation];
+    //NSLog(@" file included at index %ld", idx);
+    // check if this line is commented
+    if ([self isCommentLineBeforeIndex:idx commentChar:@"%"] == YES) {
+      //NSLog(@"COMMENTED");
+      return @[];
+    }
+    
     NSInteger sourceStart = idx;
     if (idx < [self length]) {
       NSString *argString = [self parseArgumentStartingAt:&idx];
@@ -268,15 +242,21 @@ static NSCharacterSet *controlFilterChars = nil;
           //          NSLog(@"   path is relative to project");
           bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
         }
-        //        NSLog(@"Bib file is %@", bibpath);
+        //NSLog(@"Bib file is %@", bibpath);
         
         MHFileReader *fr = [[MHFileReader alloc] init];
         NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
         if (bibcontents && [bibcontents length]>0) {
           NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
+          //NSLog(@"Got %ld entries ", [entries count]);
+          NSString *sourceString = nil;
+          if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
+            sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
+          }
+          //NSLog(@"   source string [%@]", sourceString);
           for (BibliographyEntry *entry in entries) {
-            if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
-              [entry setSourceString:[self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)]];
+            if (sourceString) {
+              [entry setSourceString:sourceString];
             }
             [citations addObject:entry];
           }
@@ -464,8 +444,7 @@ static NSCharacterSet *controlFilterChars = nil;
   }
   
   NSRange lineRange = [self lineRangeForRange:NSMakeRange(anIndex, 0)];
-//  NSLog(@"Got line range %@", NSStringFromRange(lineRange));
-  if (NSMaxRange(lineRange) >= [self length]) {
+  if (NSMaxRange(lineRange) > [self length]) {
     return NO;
   }
   
