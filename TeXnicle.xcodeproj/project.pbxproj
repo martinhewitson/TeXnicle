@@ -213,6 +213,8 @@
 		2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */; };
 		2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273316E4AFDC004B7C4A /* outline_paragraph.icns */; };
 		2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */; };
+		2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567E46B178AFE2F0056D65D /* CitationTests.m */; };
+		2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2567E46E178BCC8E0056D65D /* citation_test1.tex */; };
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
 		256C84CD14E7B896007E4FBA /* MHSynctexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C84CC14E7B896007E4FBA /* MHSynctexController.m */; };
 		256C94D613EE591300AD8E3A /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C94D513EE591300AD8E3A /* Bookmark.m */; };
@@ -278,6 +280,11 @@
 		257B47DA138EA15400ED02C4 /* NSArray_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47D9138EA15400ED02C4 /* NSArray_Extensions.m */; };
 		257B47DD138EAB9E00ED02C4 /* ProjectItemTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */; };
 		257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */; };
+		257DA555178BE71A0052A567 /* LaTeXStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 257DA554178BE71A0052A567 /* LaTeXStringTests.m */; };
+		257DA557178BE8FF0052A567 /* citation_test2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 257DA556178BE8FA0052A567 /* citation_test2.tex */; };
+		257DA559178BEC040052A567 /* citations1.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA558178BEBFC0052A567 /* citations1.bib */; };
+		257DA55C178BF8F50052A567 /* citations2.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55A178BF8F50052A567 /* citations2.bib */; };
+		257DA55D178BF8F50052A567 /* citations3.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55B178BF8F50052A567 /* citations3.bib */; };
 		2581830F139222D200ECCCB1 /* Templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2581830E139222D200ECCCB1 /* Templates.plist */; };
 		258348981513B2FC008A21BE /* BibliographyEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348971513B2FC008A21BE /* BibliographyEntry.m */; };
 		258348A51513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */; };
@@ -919,6 +926,8 @@
 		2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsubsection.icns; sourceTree = "<group>"; };
 		2567273316E4AFDC004B7C4A /* outline_paragraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_paragraph.icns; sourceTree = "<group>"; };
 		2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subparagraph.icns; sourceTree = "<group>"; };
+		2567E46B178AFE2F0056D65D /* CitationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitationTests.m; sourceTree = "<group>"; };
+		2567E46E178BCC8E0056D65D /* citation_test1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citation_test1.tex; sourceTree = "<group>"; };
 		25690D7A14F4D26D00E4101D /* NSScanner+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+TeXnicle.h"; sourceTree = "<group>"; };
 		25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+TeXnicle.m"; sourceTree = "<group>"; };
 		256C84CB14E7B896007E4FBA /* MHSynctexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSynctexController.h; sourceTree = "<group>"; };
@@ -1036,6 +1045,11 @@
 		257B47DB138EAB9D00ED02C4 /* ProjectItemTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItemTreeController.h; sourceTree = "<group>"; };
 		257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectItemTreeController.m; sourceTree = "<group>"; };
 		257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContextCommands.plist; sourceTree = "<group>"; };
+		257DA554178BE71A0052A567 /* LaTeXStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaTeXStringTests.m; sourceTree = "<group>"; };
+		257DA556178BE8FA0052A567 /* citation_test2.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = citation_test2.tex; sourceTree = "<group>"; };
+		257DA558178BEBFC0052A567 /* citations1.bib */ = {isa = PBXFileReference; lastKnownFileType = text; path = citations1.bib; sourceTree = "<group>"; };
+		257DA55A178BF8F50052A567 /* citations2.bib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citations2.bib; sourceTree = "<group>"; };
+		257DA55B178BF8F50052A567 /* citations3.bib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citations3.bib; sourceTree = "<group>"; };
 		2581830E139222D200ECCCB1 /* Templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Templates.plist; sourceTree = "<group>"; };
 		258348961513B2FC008A21BE /* BibliographyEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BibliographyEntry.h; sourceTree = "<group>"; };
 		258348971513B2FC008A21BE /* BibliographyEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BibliographyEntry.m; sourceTree = "<group>"; };
@@ -1683,9 +1697,12 @@
 		250F1B4816E3446500629A2E /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				2567E46D178BCC400056D65D /* citation test files */,
 				250F1B5416E34BE300629A2E /* placeholder test files */,
 				250F1B4916E3449600629A2E /* PlaceholderTests.h */,
 				250F1B4A16E3449600629A2E /* PlaceholderTests.m */,
+				2567E46B178AFE2F0056D65D /* CitationTests.m */,
+				257DA554178BE71A0052A567 /* LaTeXStringTests.m */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -2103,6 +2120,18 @@
 				255C55A1165236ED00F77A50 /* ProjectTreeTests.rtf */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		2567E46D178BCC400056D65D /* citation test files */ = {
+			isa = PBXGroup;
+			children = (
+				257DA55A178BF8F50052A567 /* citations2.bib */,
+				257DA55B178BF8F50052A567 /* citations3.bib */,
+				257DA558178BEBFC0052A567 /* citations1.bib */,
+				257DA556178BE8FA0052A567 /* citation_test2.tex */,
+				2567E46E178BCC8E0056D65D /* citation_test1.tex */,
+			);
+			path = "citation test files";
 			sourceTree = "<group>";
 		};
 		25717B361392D14C00955620 /* Palette */ = {
@@ -3187,19 +3216,24 @@
 				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
 				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
 				2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */,
+				257DA55C178BF8F50052A567 /* citations2.bib in Resources */,
 				253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */,
 				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				257DA55D178BF8F50052A567 /* citations3.bib in Resources */,
 				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
 				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
 				252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */,
 				252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */,
 				252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */,
 				252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */,
+				2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */,
 				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				257DA559178BEC040052A567 /* citations1.bib in Resources */,
 				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
 				251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */,
 				251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */,
+				257DA557178BE8FF0052A567 /* citation_test2.tex in Resources */,
 				251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */,
 				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
 				251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */,
@@ -3514,7 +3548,9 @@
 				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
 				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
 				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
+				2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */,
 				250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */,
+				257DA555178BE71A0052A567 /* LaTeXStringTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
