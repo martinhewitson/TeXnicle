@@ -1919,19 +1919,8 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   [self.engineManager compile];
 }
 
-//- (IBAction)liveUpdate:(id)sender
-//{
-//  if ([(NSButton*)sender state] == NSOnState) {
-//    _liveUpdate = YES;
-//    _openPDFAfterBuild = NO;
-//  } else {
-//    _liveUpdate = NO;
-//  }
-//}
-
 - (void) handleTextChanged:(NSNotification*)aNote
-{
-  
+{  
   // update labels view
   [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
   
