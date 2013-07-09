@@ -2471,7 +2471,7 @@
     return;
   }
   
-  if (!_building && self.project.settings.doLiveUpdate && [self.project hasEdits]) {
+  if (!_building && [self.project.settings.doLiveUpdate boolValue] && [self.project hasEdits]) {
     if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
       // check for the last edit date
       NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
