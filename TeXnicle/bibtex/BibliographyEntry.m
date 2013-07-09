@@ -91,6 +91,11 @@
 	return self;
 }
 
+- (BOOL)like:(BibliographyEntry*)entry
+{
+  return [self.tag isEqualToString:entry.tag] & [self.author isEqualToString:entry.author] & [self.title isEqualToString:entry.title];
+}
+
 // two bib entries are equal for the purposes of sorting if they have the same tag
 - (BOOL) isEqual:(BibliographyEntry*)entry
 {
