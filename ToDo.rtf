@@ -230,6 +230,8 @@ For example:\
 + Menu options to show/hide jump bar\
 	- later jumpbar should be per document\
 \
++ Quick-jump to other files\
+	- pop up a window with a list of files in the project and search field to select the file\
 \
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \CocoaLigature1 \
@@ -245,6 +247,7 @@ Version 2.0.9\
 	- Added option to enable/disable jumpbar in general preferences.\
 	- Added option to disable linenumbers in jumpbar (can lead to performance improvements in large files)\
 	- Optimised section list building in jumpbar.\
++ Added a new wrapping mode to wrap to the editor window width.\
 + Added support for \\addbibresource\{\} command for citation completion.\
 + Added support for subfiles package.\
 + Added new menu item to hide navigator panel. And added default keyboard shortcuts for this and existing "Show Navigator" menu item.\
@@ -253,6 +256,7 @@ Version 2.0.9\
 + Bug fix for expanding simple code snippets with no placeholders where the cursor would end up at the beginning of the snippet.\
 + Bug fix for PDF printing on some 10.6.8 machines.\
 + Bug fix: in some circumstances hiding/showing the status view below the editor was failing.\
++ Bug fix: in some cases editing of sections could cause a crash in the document outline view.\
 + Other minor improvements and optimisations\
 \
 Version 2.0.8\
