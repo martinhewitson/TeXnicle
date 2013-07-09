@@ -980,11 +980,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
   }	else if (wrapStyle == TPNoWrap) {
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
+  }	else if (wrapStyle == TPWindowWrap) {
+    [textContainer setWidthTracksTextView:YES];
   } else {
     // set large size - hard wrap is handled in the wrapLine
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
   }
   [self setNeedsDisplay:YES];

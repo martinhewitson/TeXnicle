@@ -40,7 +40,8 @@ typedef enum {
 typedef enum {
 	TPHardWrap,
 	TPSoftWrap,
-	TPNoWrap
+	TPNoWrap,
+  TPWindowWrap
 } TPWrapStyle;
 
 extern NSString * const TEDocumentTemplates;
