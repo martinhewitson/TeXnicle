@@ -190,6 +190,40 @@ static NSCharacterSet *controlFilterChars = nil;
   return cites;
 }
 
+- (NSString*)parseOptionStartingAtIndex:(NSInteger)startAt
+{
+  BOOL foundClosingBracket = NO;
+  NSInteger bracketCount = 0;
+  NSInteger loc = startAt;
+  NSInteger start = NSNotFound;
+  NSInteger end = NSNotFound;
+  while (loc < [self length]) {
+    if ([self characterAtIndex:loc] == '[') {
+      if (start == NSNotFound) {
+        start = loc;
+      }
+      bracketCount++;
+    }
+    if ([self characterAtIndex:loc] == ']') {
+      bracketCount--;
+      if (bracketCount == 0) {
+        foundClosingBracket = YES;
+        start++; // it must be safe to take the character after [ as the start now
+        end = loc-1;
+        break;
+      }
+    }
+    loc++;
+  }
+  
+  // we didn't find a closing ] so bail out
+  if (foundClosingBracket == NO) {
+    return nil;
+  }
+  
+  return [self substringWithRange:NSMakeRange(start, end-start+1)];
+}
+
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
 {
   //  NSLog(@"Checking for bib files included in %@", sourceFile);
