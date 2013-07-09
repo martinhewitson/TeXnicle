@@ -54,6 +54,10 @@
     return;
   }
   
+  if (sourcepath == nil) {
+    return;
+  }
+  
   synctex_scanner_t scanner = synctex_scanner_new_with_output_file([pdfpath cStringUsingEncoding:NSUTF8StringEncoding], NULL, 1);
   if (scanner != NULL) {
     //    synctex_scanner_display(scanner);
