@@ -121,13 +121,34 @@
 }
 
 
-- (void)testBibTeXEntriesFromString
+- (void)testBibTeXEntriesFromString1
 {
   NSString *str = [self stringFromTestFile:@"citations1" extension:@"bib"];
   NSArray *entries = [BibliographyEntry bibtexEntriesFromString:str];
   NSLog(@"Entries %@", entries);
   
   STAssertTrue([entries count] == 34, @"The string should contain 34 entries, but it contains %ld", [entries count]);
+}
+
+- (void)testBibTeXEntriesFromString2
+{
+  NSString *str = [self stringFromTestFile:@"citations2" extension:@"bib"];
+  NSArray *entries = [BibliographyEntry bibtexEntriesFromString:str];
+  NSLog(@"Entries %@", entries);
+  
+  STAssertTrue([entries count] == 3, @"The string should contain 3 entries, but it contains %ld", [entries count]);
+  
+  // First should be Bender00
+  BibliographyEntry *e1 = entries[0];
+  STAssertTrue([e1.tag isEqualToString:@"Bender00"], @"The first entry should have the tag [Bender00], not [%@]", e1.tag);
+  
+  // Second should be numrec
+  BibliographyEntry *e2 = entries[1];
+  STAssertTrue([e2.tag isEqualToString:@"numrec"], @"The second entry should have the tag [numrec], not [%@]", e2.tag);
+  
+  // Third should be numrec
+  BibliographyEntry *e3 = entries[2];
+  STAssertTrue([e3.tag isEqualToString:@"ST7"], @"The third entry should have the tag [ST7], not [%@]", e3.tag);
 }
 
 @end
