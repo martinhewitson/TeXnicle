@@ -559,6 +559,7 @@
   NSArray *items = [[[self windowForSheet] toolbar] items];
   for (NSToolbarItem *item in items) {
     if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
+      [item setMinSize:NSMakeSize(400, 39)];
       NSBox *box = (NSBox*)[item view];
       [box setContentView:self.miniConsole.view];
     }
