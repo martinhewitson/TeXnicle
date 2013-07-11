@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.9" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4471.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4471.1"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TeXProjectDocument">
@@ -98,8 +98,8 @@
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="100055" userLabel="Project Tree">
                                                 <view key="view" id="100058">
-                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="575"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView id="100537" customClass="MHToolbarBackgroundView">
                                                             <rect key="frame" x="0.0" y="-1" width="235" height="32"/>
@@ -132,14 +132,14 @@
                                                             </subviews>
                                                         </customView>
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100032">
-                                                            <rect key="frame" x="0.0" y="31" width="235" height="543"/>
+                                                            <rect key="frame" x="0.0" y="31" width="235" height="542"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <clipView key="contentView" id="ee6-SH-NbY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="543"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="20" indentationPerLevel="14" outlineTableColumn="100037" id="100036" customClass="TPOutlineView">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="543"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="0.0"/>
                                                                         <color key="backgroundColor" red="0.9215686917" green="0.93333339689999995" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
@@ -229,7 +229,7 @@
                                                             <tabViewItems>
                                                                 <tabViewItem label="Tab" identifier="1" id="100923" userLabel="Bookmarks">
                                                                     <view key="view" id="100926">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="552"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="549"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </view>
                                                                 </tabViewItem>
