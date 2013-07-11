@@ -1122,7 +1122,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
   
   [self.managedObjectContext processPendingChanges];
   
-//  NSLog(@"Updating %@ [%d]", [[node representedObject] valueForKey:@"name"], [[node representedObject] isManaged]);
+  //NSLog(@"Updating %@ [%d]", [[node representedObject] valueForKey:@"name"], [[node representedObject] isManaged]);
   if ([[node representedObject] isManaged]) {
     [[node representedObject] resetFilePath];
   }
@@ -1494,9 +1494,9 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     }
     
     // don't allow moving a file/folder which is not under the project into a folder on disk
-    if ([item pathOnDisk] != nil && [item isUnderProject] == NO) {
-      return NO;
-    }
+//    if ([item pathOnDisk] != nil && [item isUnderProject] == NO) {
+//      return NO;
+//    }
   }
   
   // don't allow dragging multiple items which are on disk - the logic is too hard
@@ -1561,6 +1561,17 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         targetIsValid = NO;
         break;
       }
+    }
+    
+    // can't drop a file which is not under the project onto a real folder
+    BOOL parentIsGroupFolder = [parent pathOnDisk] == nil;
+//    NSLog(@"Parent: %@", parent);
+//    NSLog(@"Child: %@", child);
+//    NSLog(@"Destination is a group folder? %d", [parent pathOnDisk] == nil);
+//    NSLog(@"Child is under project? %d", [child isUnderProject]);
+    if (!parentIsGroupFolder && [child isUnderProject] == NO ) {
+      targetIsValid = NO;
+      break;
     }
     
     // can't drop managed file onto group folder
@@ -1652,7 +1663,11 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     ProjectItemEntity *parent = [proposedParentItem representedObject];
     
     // if the child doesn't exist on disk in its current location, we can't move it
-    if ([child existsOnDisk]) {
+    // To move a file it must:
+    //   a) be managed (under the project)
+    //   b) have a valid path on disk
+    //   c) be moving to a real folder
+    if ([child existsOnDisk] && [child isManaged] && [parent pathOnDisk] != nil) {
       //    NSLog(@"Parent %@", parent);
       
       //    NSLog(@"Moving %@", [child name]);
@@ -1671,8 +1686,8 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
         }
       }
       
-//      NSLog(@"From %@", fromPath);
-//      NSLog(@"To %@", toPath);
+      //NSLog(@"From %@", fromPath);
+      //NSLog(@"To %@", toPath);
       NSFileManager *fm = [NSFileManager defaultManager];
       NSError *error = nil;
       if (fromPath != nil && toPath != nil && [fromPath isEqualToString:toPath] == NO) {
