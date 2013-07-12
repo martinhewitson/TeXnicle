@@ -294,10 +294,16 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   NSString *engineName = [self.delegate engineName];
   TPEngine *e = [self engineNamed:engineName];
   e.delegate = self;
-  e.doBibtex = [[self.delegate doBibtex] boolValue];
-  e.doPS2PDF = [[self.delegate doPS2PDF] boolValue];
+  if (e.supportsDoBibtex) {
+    e.doBibtex = [[self.delegate doBibtex] boolValue];
+  }
+  if (e.supportsDoPS2PDF) {
+    e.doPS2PDF = [[self.delegate doPS2PDF] boolValue];
+  }
   e.openConsole = [[self.delegate openConsole] boolValue];
-  e.nCompile = [[self.delegate nCompile] integerValue];
+  if (e.supportsNCompile) {
+    e.nCompile = [[self.delegate nCompile] integerValue];
+  }
 
   if (e != nil && e.compiling == NO) {
         
