@@ -246,6 +246,15 @@ Version 2.0.9\
 + Improvements to look and feel\
 + Documents now remember the live update setting\
 + Documents now remember the pdf thumbnails setting\
++ [Beta] A new parsed log file view is available on the integrated console. Double-clicking \
+         detected info, warnings and errors will jump to that location in the source code. Parsing\
+         the many flavours of log files is challenging, so you millage may vary.\
++ Changes to engine handling:\
+	- engines are now passed an additional parameter (6th) which is the current typesetting run number. As \
+    such, TeXnicle is now responsible for doing repeated typesetting runs, rather than the engine. This\
+    allows for finer flow control, error handling and provides a more robust infrastructure.\
+  - built-in engines have been updated to perform a single typesetting run. Additional engine features \
+    (like running bibtex) then depend on that run number. Custom engines may need to be updated.\
 + The document outline now supports custom section commands for each document level. These can be \
   set in the new 'Outline' preferences tab. The outline colors are now set here too.\
 + Jump bar changes:\
@@ -265,6 +274,7 @@ Version 2.0.9\
 + Bug fix: in some circumstances hiding/showing the status view below the editor was failing.\
 + Bug fix: in some cases editing of sections could cause a crash in the document outline view.\
 + Bug fixes in citation handling.\
+\
 \
 Version 2.0.8\
 -------------\
