@@ -49,6 +49,7 @@
 {
   return @{@"Info:"    : @(TPLogInfo),
            @"Warning:" : @(TPLogWarning),
+           @"BEWARE:" : @(TPLogWarning),
            @"Missing character:" : @(TPLogWarning),
            @"Underfull \\hbox" : @(TPLogWarning),
            @"Error:"   : @(TPLogError),
@@ -93,7 +94,9 @@
   
   // go through each line
   NSInteger braceCount = 0;
+  NSInteger lineCount = 0;
   for (NSString *line in lines) {
+    lineCount++;
 #if TP_LOG_PARSE_DEBUG
     NSLog(@"LINE: [%@]", line);
 #endif
@@ -103,7 +106,9 @@
       if ([line characterAtIndex:kk] == ')') {
         // pop off stack
         if ([stack count] > 0) {
-          NSLog(@"-- %@%@", [NSString paddingLength:braceCount], [stack lastObject]);
+#if TP_LOG_PARSE_DEBUG
+          NSLog(@"-- [%ld] %@%@", lineCount, [NSString paddingLength:braceCount], [stack lastObject]);
+#endif
           [stack removeLastObject];
         }
         braceCount -= 2;
@@ -112,50 +117,23 @@
       if ([line characterAtIndex:kk] == '(') {
         // pop filename on stack
         braceCount += 2;
-        NSString *filename = [line  filename];
+        NSString *filename = [line filename];
         if (filename != nil) {
-          NSLog(@"++ %@%@", [NSString paddingLength:braceCount], filename);
+#if TP_LOG_PARSE_DEBUG
+          NSLog(@"++ [%ld] %@%@", lineCount, [NSString paddingLength:braceCount], filename);
+#endif
           [stack addObject:filename];
           
           // we can move on now
           kk += [filename length]-1;
         } else {
-          NSLog(@"++ %@DUMMY", [NSString paddingLength:braceCount]);
+#if TP_LOG_PARSE_DEBUG
+          NSLog(@"++ [%ld] %@DUMMY", lineCount, [NSString paddingLength:braceCount]);
+#endif
           [stack addObject:@"DUMMY"];
         }
       }
     }
-    
-//    if ([line beginsWith:@"("]) {
-//      // parse rest of the line up to ( into filename
-//      // I think for this to be a filename, the rest of the line shouldn't close the (
-//      NSInteger count = 1;
-//      for (NSInteger kk=1; kk<[line length]; kk++) {
-//        if ([line characterAtIndex:kk] == ')') {
-//          count--;
-//        }
-//        if ([line characterAtIndex:kk] == '(') {
-//          count++;
-//        }
-//      }
-//      if (count == 1) {
-//        NSString *filename = nil;
-//        
-//        // decide on range: find range of file extension
-//        NSRange extr = [line rangeOfRegex:@"\.\\w+\\s"];
-//        
-//        if (extr.location == NSNotFound) {
-//          filename = [line substringFromIndex:1];
-//        } else {
-//          filename = [line substringWithRange:NSMakeRange(1, NSMaxRange(extr)-2)];
-//        }
-//        
-//#if TP_LOG_PARSE_DEBUG
-//        NSLog(@"+++ stack: %@", filename);
-//#endif
-//        [stack addObject:filename];
-//      }
-//    }
     
     // check for phrases
     TPLogItemType type = TPLogUnknown;
@@ -199,24 +177,13 @@
                                                     message:message
                                                        line:linenumber
                                               matchedPhrase:phraseMatched];
+#if TP_LOG_PARSE_DEBUG
       NSLog(@"LOGITEM: %@", item);
+#endif
       
       item.line = line;
       [items addObject:item];
-    }
-    
-//    if ([line beginsWith:@")"] && [line length] == 1) {
-//#if TP_LOG_PARSE_DEBUG
-//      NSLog(@"Close file? stack length: %ld", [stack count]);
-//#endif
-//      // we've finished a line now, so pop it off the stack
-//      if ([stack count] > 0) {
-//#if TP_LOG_PARSE_DEBUG
-//        NSLog(@"--- stack: %@", [stack lastObject]);
-//#endif
-//        [stack removeLastObject];
-//      }
-//    }
+    }    
   }
   
   return items;

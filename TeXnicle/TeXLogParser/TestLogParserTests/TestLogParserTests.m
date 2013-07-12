@@ -85,7 +85,7 @@
 
 - (void)testParseFilename1
 {
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"./myFile.tex";
   NSString *logtext = [NSString stringWithFormat:@"(%@ (some other thing)\n Info: message", filename];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
@@ -93,14 +93,14 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filename should be [%@], not [%@]", filename, item.filepath);
   STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
   STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 - (void)testParseFilename2
 {
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"./myFile.tex";
   NSString *logtext = [NSString stringWithFormat:@"(%@\n Some other thing\n Info: message", filename];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
@@ -108,15 +108,24 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filename should be %@, not %@", filename, item.filepath);
   STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
   STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
+}
+
+//(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+- (void)testParseFilename3
+{
+  NSString *logtext = @"(etexcmds)             That can mean that you are not using pdfTeX 1.50 or";
+  NSString *filename = [logtext filename];
+  
+  STAssertTrue(filename == nil, @"Filename should be nil, not %@", filename);
 }
 
 
 - (void)testInfoLine1
 {
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"/somepath/myFile.tex";
   NSString *message = @"LuaTeX not detected.";
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage ifluatex Info: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
@@ -125,7 +134,8 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
   STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
   STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
   STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
@@ -135,7 +145,7 @@
 - (void)testInfoLine2
 {
   NSInteger linenumber = 4319;
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"/a/path/to/myFile.tex";
   NSString *message = [NSString stringWithFormat:@"Option `plainpages' set `false' on input line %ld.", linenumber];
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage hyperref Info: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
@@ -144,7 +154,8 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
   STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
   STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
   STAssertTrue(item.linenumber == linenumber, @"Line number should be NSNotFound, not %ld", item.linenumber);
@@ -153,7 +164,7 @@
 // Package thumbpdf Warning: Compressed PDF objects of PDF 1.5 are not supported.
 - (void)testWarningLine1
 {
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"./myFile.tex";
   NSString *message = @"Compressed PDF objects of PDF 1.5 are not supported.";
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage thumbpdf Warning: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
@@ -162,7 +173,8 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
   STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
   STAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
   STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
@@ -171,7 +183,7 @@
 - (void)testWarningLine2
 {
   NSInteger linenumber = 1;
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"./myFile.tex";
   NSString *message = @"Compressed PDF objects of PDF 1.5 are not supported.";
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage thumbpdf Warning:%ld: %@\n)", filename, linenumber, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
@@ -180,7 +192,8 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
   STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
   STAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
   STAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
@@ -190,7 +203,7 @@
 - (void)testError1
 {
   NSInteger linenumber = 24;
-  NSString *filename = @"myFile.tex";
+  NSString *filename = @"/a/myFile.tex";
   NSString *message = @"\bibitemsep undefined.";
   NSString *logtext = [NSString stringWithFormat:@"(%@\n:%ld: LaTeX Error: %@\n)", filename, linenumber, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
@@ -199,7 +212,8 @@
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
   STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
   STAssertTrue(item.type == TPLogError, @"Item type should be Error, not %@", item.typeName);
   STAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
