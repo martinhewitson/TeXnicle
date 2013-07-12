@@ -364,13 +364,13 @@ StaticImage(SafariIWITRightCap)
         displaySelected = NO;
     
     if (displaySelected) {
-        center = isWindowActive?_staticSafariAWATFillImage():_staticSafariIWATFillImage();
-        right = isWindowActive?_staticSafariAWATRightCapImage():_staticSafariIWATRightCapImage();
-        
+//        center = isWindowActive?_staticSafariAWATFillImage():_staticSafariIWATFillImage();
+//        right = isWindowActive?_staticSafariAWATRightCapImage():_staticSafariIWATRightCapImage();
+      
     } else {
-        right = isWindowActive?_staticSafariAWITRightCapImage():_staticSafariIWITRightCapImage();
+//        right = isWindowActive?_staticSafariAWITRightCapImage():_staticSafariIWITRightCapImage();
     }
-    NSDrawThreePartImage(bezelRect, left, center, right, NO, NSCompositeSourceOver, 1.0, [tabBarView isFlipped]);
+//    NSDrawThreePartImage(bezelRect, left, center, right, NO, NSCompositeSourceOver, 1.0, [tabBarView isFlipped]);
 }
 
 -(void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {

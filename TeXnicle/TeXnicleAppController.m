@@ -476,12 +476,12 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
+//  NSLog(@"App will finish launching");
   
   // set default
   lineToOpen = NSNotFound;
   
-  // install templates
-  [TPProjectTemplateManager installBundleTemplates];
+  [self doSetup];
 }
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
@@ -489,6 +489,7 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 //  NSLog(@"Application open file %@", filename);
 	NSError *error = nil;
   
+  [self doSetup];
   
   TeXProjectDocument *doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:[NSURL fileURLWithPath:filename]
                                                                                   display:YES
@@ -515,9 +516,12 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 	return NO;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void) doSetup
 {
-//  [self checkVersion];
+  // install templates
+  [TPProjectTemplateManager installBundleTemplates];
+  
+  //  [self checkVersion];
   [TPEngineManager installEngines];
   
   // setup app-wide library
@@ -525,6 +529,11 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   
   // setup app-wide palette
   self.palette = [[TPPalette alloc] init];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+//  NSLog(@"App did finish launching");
   
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];

@@ -170,7 +170,6 @@
     [super awakeFromNib];
   
   _building = NO;
-  _liveUpdate = NO;
   
   self.tabHistory = [NSMutableArray array];
 }
@@ -562,6 +561,7 @@
   NSArray *items = [[[self windowForSheet] toolbar] items];
   for (NSToolbarItem *item in items) {
     if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
+      [item setMinSize:NSMakeSize(400, 39)];
       NSBox *box = (NSBox*)[item view];
       [box setContentView:self.miniConsole.view];
     }
@@ -815,8 +815,7 @@
 //  NSLog(@"Restore UI");
   // controls tab
   [self.controlsTabBarController selectTabAtIndex:[self.project.uiSettings.selectedControlsTab integerValue]];
-  [self.infoControlsTabBarController selectTabAtIndex:0];
-  
+  [self.infoControlsTabBarController selectTabAtIndex:0];  
   
   if(![NSApp isLion]) {
     // controls width
@@ -1002,7 +1001,10 @@
 {
 //  NSLog(@"managedObjectContextForStoreURL %@", storeURL);
 	//	Find the document's model	
-	NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
+  NSURL *url = [NSURL fileURLWithPath:path];
+  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
 	if (!model)
 		return nil;
 	
@@ -1038,6 +1040,18 @@
 	return managedContext;
 }
 
+#pragma mark -
+#pragma mark Core Data overrides
+
+- (NSManagedObjectModel*)managedObjectModel
+{
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *path = [bundle pathForResource:@"TeXProject" ofType:@"momd"];
+  NSURL *url = [NSURL fileURLWithPath:path];
+  NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
+  return model;
+}
+
 - (BOOL)configurePersistentStoreCoordinatorForURL:(NSURL*)url 
 																					 ofType:(NSString*)fileType
 															 modelConfiguration:(NSString*)configuration
@@ -1052,6 +1066,20 @@
     options = [[NSMutableDictionary alloc] init];
   }
 	
+  // check version at URL
+  NSError *metaerror = nil;
+  NSDictionary *storeMeta = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:nil URL:url error:&metaerror];
+  
+  // get new managed object model
+  NSManagedObjectModel *model = [self managedObjectModel];
+  
+  // check if the new model is compatible, otherwise we try to repair store files created with
+  // model version 11, because they had a merged model with the Library.
+  if ([model isConfiguration:nil compatibleWithStoreMetadata:storeMeta] == NO) {
+    // load XML file
+    [self repairXMLStoreAtURL:url];
+  }
+    
   options[NSMigratePersistentStoresAutomaticallyOption] = @YES;
   options[NSInferMappingModelAutomaticallyOption] = @YES;
   
@@ -1072,6 +1100,65 @@
   }
     
   return result;
+}
+
+- (void) repairXMLStoreAtURL:(NSURL*)url
+{
+  NSStringEncoding encoding;
+  NSString *fileContents = [NSString stringWithContentsOfURL:url usedEncoding:&encoding error:NULL];
+  if (fileContents != nil) {
+    NSMutableArray *outlines = [NSMutableArray array];
+    NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+//    NSLog(@"%@", lines);
+    for (NSInteger kk=0; kk<[lines count]; kk++) {
+      NSString *tline = [[lines objectAtIndex:kk] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      if ([tline isEqualToString:@"<key>Category</key>"]) {
+        kk+=3;
+        continue;
+      }
+      if ([tline isEqualToString:@"<key>Entry</key>"]) {
+        kk+=3;
+        continue;
+      }
+      
+      [outlines addObject:[lines objectAtIndex:kk]];
+    }
+//    NSLog(@"Output: %@", outlines);
+    if ([outlines count] > 0) {
+      
+      // make backup of old URL
+      NSFileManager *fm = [NSFileManager defaultManager];
+      NSError *error = nil;
+      NSURL *backupURL = [url URLByAppendingPathExtension:@"backup"];
+      if ([fm copyItemAtURL:url toURL:backupURL error:&error]) {
+        NSString *outString = [outlines componentsJoinedByString:@"\n"];
+        //      NSLog(@"%@", outString);
+        error = nil;
+        if ([outString writeToURL:url atomically:YES encoding:encoding error:&error] == NO) {
+          // failed to write
+          NSAlert *alert = [NSAlert alertWithMessageText:@"File Repair Failed"
+                                           defaultButton:@"OK"
+                                         alternateButton:nil
+                                             otherButton:nil
+                               informativeTextWithFormat:@"The repair of the old format texnicle file failed. Contact bobsoft support for further assistance, or create a new TeXnicle project using the 'build' menu option."];
+          [alert runModal];
+          NSLog(@"Failed to repair store at url %@", url);
+          return;
+        }
+      } else {
+        // copy back the backup
+        error = nil;
+        if ([fm copyItemAtURL:backupURL toURL:url error:&error] == NO) {
+          NSLog(@"Failed to restore backup from %@ to %@", backupURL, url);
+          NSLog(@"%@", error);
+        }
+        NSLog(@"Failed to repair store at url %@", url);
+        return;
+      }
+    }
+  }
+  
+  NSLog(@"Successfully repaired store at url %@", url);
 }
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
@@ -1679,6 +1766,7 @@
   
   [self.texEditorViewController.textView performSelector:@selector(applyLineSpacingToDocument) withObject:nil afterDelay:0];  
   
+  [self.projectItemTreeController setNeedsDisplay];
 }
 
 - (void) handleOpenDocumentsDidAddFileNotification:(NSNotification*)aNote
@@ -2351,15 +2439,6 @@
   [self.engineManager compile];
 }
 
-- (IBAction)liveUpdate:(id)sender
-{
-  if ([(NSButton*)sender state] == NSOnState) {
-    _liveUpdate = YES;
-    _openPDFAfterBuild = NO;
-  } else {
-    _liveUpdate = NO;
-  }
-}
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
@@ -2415,7 +2494,7 @@
     return;
   }
   
-  if (!_building && _liveUpdate && [self.project hasEdits]) {
+  if (!_building && [self.project.settings.doLiveUpdate boolValue] && [self.project hasEdits]) {
     if ([[defaults valueForKey:TPLiveUpdateMode] integerValue] == 1) {
       // check for the last edit date
       NSDate *lastEdit = [self.openDocuments.currentDoc lastEditDate];
@@ -3738,6 +3817,27 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark PDFViewerController delegate
 
+- (BOOL) pdfViewControllerShouldDoLiveUpdate:(PDFViewerController *)aPDFViewer
+{
+  return [self.project.settings.doLiveUpdate boolValue];
+}
+
+- (void) pdfViewController:(PDFViewerController *)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  self.project.settings.doLiveUpdate = @(state);
+}
+
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer
+{
+  return [self.project.uiSettings.showPDFThumbnails boolValue];
+}
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  self.project.uiSettings.showPDFThumbnails = @(visible);
+}
+
+
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
 //  NSLog(@"Clicked on PDF in project...");
@@ -4076,7 +4176,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 -(NSNumber*)openConsole
 {
   // if we are in live update, return no
-  if (_liveUpdate) {
+  if ([self.project.settings.doLiveUpdate boolValue]) {
     return @NO;
   }
   

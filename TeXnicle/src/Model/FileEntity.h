@@ -79,10 +79,5 @@
 
 - (void) textChanged;
 
-#pragma mark -
-#pragma mark Metadata
-
-- (NSArray*) listOfNewCommands;
-- (NSArray*) generateSectionsForTypes:(NSArray*)templates forceUpdate:(BOOL)force;
 
 @end

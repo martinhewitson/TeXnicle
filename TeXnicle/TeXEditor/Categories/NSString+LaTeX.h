@@ -39,6 +39,7 @@
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc;
 - (NSString*)argument;
 - (NSString*)command;
+- (NSString*)parseOptionStartingAtIndex:(NSInteger)start;
 - (NSString*)parseArgumentAroundIndex:(NSInteger*)loc;
 - (NSString*)parseArgumentStartingAt:(NSInteger*)loc;
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;

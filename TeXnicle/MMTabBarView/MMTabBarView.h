@@ -17,12 +17,12 @@
 
 #define kMMTabBarViewHeight             27
 // default inset
-#define MARGIN_X                        6
+#define MARGIN_X                        4
 #define MARGIN_Y                        3
 // padding between objects
 #define kMMTabBarCellPadding            4
 // fixed size objects
-#define kMMMinimumTitleWidth            30
+#define kMMMinimumTitleWidth            20
 #define kMMTabBarIndicatorWidth         16.0
 #define kMMTabBarIconWidth              16.0
 #define kMMObjectCounterMinWidth        20.0

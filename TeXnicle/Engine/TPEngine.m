@@ -162,10 +162,13 @@
 
 - (void) cancelCompile
 {
-  if (self.typesetTask != nil) {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.typesetTask terminate];
-    self.typesetTask = nil;
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  if (typesetTask != nil) {
+    if ([typesetTask isRunning] == YES && procId >= 0) {
+      [typesetTask terminate];
+      procId = -1;
+    }
+    typesetTask = nil;
   }
   
   [self reset];  

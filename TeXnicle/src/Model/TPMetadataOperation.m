@@ -100,7 +100,7 @@
           // check against existing
           BOOL foundIt = NO;
           for (BibliographyEntry *e in newCitations) {
-            if ([[e string] isEqualToString:[entry string]]) {
+            if ([e like:entry]) {
               foundIt = YES;
               break;
             }

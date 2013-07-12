@@ -73,13 +73,25 @@
 
 - (NSString*)pathRelativeToProject
 {
+  // get a new path
+  NSFileManager *fm = [NSFileManager defaultManager];
   NSString *relativePath = [self valueForKey:@"name"];
-	NSManagedObject *parent = [self valueForKey:@"parent"];
-  //	NSLog(@"Starting from parent %@", parent);
+	ProjectItemEntity *parent = [self valueForKey:@"parent"];
+  //NSLog(@"Starting from parent %@", parent);
+  //NSLog(@"Path: %@", [parent projectPath]);
 	while (parent != nil) {
-		relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
-		parent = [parent valueForKey:@"parent"];
+    if ([fm fileExistsAtPath:[parent projectPath]]) {
+      relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
+      //NSLog(@"  relative is now %@", relativePath);
+    } else {
+      //NSLog(@"   skipping group");
+    }
+    parent = [parent valueForKey:@"parent"];
+    //NSLog(@"  new parent %@", parent);
 	}
+  //NSLog(@"Got new path %@", relativePath);
+  
+  //NSLog(@"  got relative path %@", relativePath);
   return relativePath;
 }
 
@@ -120,7 +132,27 @@
 
 - (void) resetFilePath
 {
-//  NSLog(@"Resetting file path to %@", [self pathRelativeToProject]);
+//  NSLog(@"Resetting file path from %@ to %@", self.filepath, [self pathRelativeToProject]);
+  
+//  // get a new path
+//  NSFileManager *fm = [NSFileManager defaultManager];
+//  NSString *relativePath = [self valueForKey:@"name"];
+//	ProjectItemEntity *parent = [self valueForKey:@"parent"];
+//  NSLog(@"Starting from parent %@", parent);
+//  NSLog(@"Path: %@", [parent projectPath]);
+//	while (parent != nil) {
+//    if ([fm fileExistsAtPath:[parent projectPath]]) {
+//      relativePath = [[parent valueForKey:@"name"] stringByAppendingPathComponent:relativePath];
+//      NSLog(@"  relative is now %@", relativePath);
+//    } else {
+//      NSLog(@"   skipping group");
+//    }
+//    parent = [parent valueForKey:@"parent"];
+//    NSLog(@"  new parent %@", parent);
+//	}
+//  NSLog(@"Got new path %@", relativePath);
+//  self.filepath = relativePath;
+  
   self.filepath = [self pathRelativeToProject];
   
   // handle children
@@ -165,7 +197,13 @@
 	NSString *fpath = [self valueForKey:@"pathOnDisk"];
 	// standardize this url
 //	NSURL *fileURL = [NSURL fileURLWithPath:fpath];
-	//NSLog(@"Checking if %@ \n\tis under %@", fpath, tpath);
+//NSLog(@"Checking if %@ \n\tis under %@", fpath, tpath);
+  
+  // if the filepath is shorter than the project path, then it can't be under the project
+  if ([fpath length] < [tpath length]) {
+    return NO;
+  }
+  
 	if ([fpath compare:tpath options:NSLiteralSearch range:NSMakeRange(0, [tpath length])] == NSOrderedSame) {
 		//NSLog(@"  YES!!");
 		return YES;

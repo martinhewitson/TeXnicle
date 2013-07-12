@@ -78,6 +78,7 @@
   BOOL _statusViewIsShowing;
   BOOL _inVersionsBrowser;
   BOOL _liveUpdate;
+  BOOL _showingThumbnails;
   BOOL _building;
   BOOL _didSetupUI;
 }
@@ -150,7 +151,6 @@
 - (IBAction) buildProject:(id)sender;
 - (void) build;
 
-- (IBAction)liveUpdate:(id)sender;
 - (BOOL)hasChanges;
 - (void)doLiveBuild;
 

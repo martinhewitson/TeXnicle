@@ -77,6 +77,7 @@
 
 // private actions
 - (void)_overflowMenuAction:(id)sender;
+- (void)_closeOverflowTabAction:(id)sender;
 - (void)_didClickTabButton:(id)sender;
 - (void)_didClickCloseButton:(id)sender;
 
@@ -2159,6 +2160,34 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 	[_tabView selectTabViewItem:tabViewItem];
 }
 
+- (void) _moveOverflowTabAction:(id)sender
+{
+	NSTabViewItem *tabViewItem = (NSTabViewItem *)[sender representedObject];
+  [_tabView removeTabViewItem:tabViewItem];
+  [_tabView insertTabViewItem:tabViewItem atIndex:0];
+  [self selectTabViewItem:tabViewItem];
+}
+
+- (void)_closeOverflowTabAction:(id)sender
+{
+	NSTabViewItem *tabViewItem = (NSTabViewItem *)[sender representedObject];
+  if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:shouldCloseTabViewItem:)])) {
+    if (![[self delegate] tabView:_tabView shouldCloseTabViewItem:tabViewItem]) {
+      return;
+    }
+  }
+  
+  if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:willCloseTabViewItem:)])) {
+    [[self delegate] tabView:_tabView willCloseTabViewItem:tabViewItem];
+  }
+  
+  [_tabView removeTabViewItem:tabViewItem];
+  
+  if (([self delegate]) && ([[self delegate] respondsToSelector:@selector(tabView:didCloseTabViewItem:)])) {
+    [[self delegate] tabView:_tabView didCloseTabViewItem:tabViewItem];
+  }
+}
+
 - (void)_didClickTabButton:(id)sender {
 	[_tabView selectTabViewItem:[sender tabViewItem]];
 }
@@ -2340,7 +2369,7 @@ static NSMutableDictionary *registeredStyleClasses = nil;
 - (NSSize)_overflowButtonSize {
 
     if ([self orientation] == MMTabBarHorizontalOrientation)
-        return NSMakeSize(14.0,[self frame].size.height);
+        return NSMakeSize(18.0,[self frame].size.height);
     else
         return NSMakeSize([self frame].size.width,18.0);
 }

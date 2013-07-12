@@ -1,9 +1,9 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
-{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 Monaco;\f4\fnil\fcharset0 Calibri;}
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+\f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
-\red39\green78\blue192;\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red141\green17\blue0;
-\red92\green38\blue153;}
+\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red141\green17\blue0;\red0\green110\blue173;
+}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
@@ -80,20 +80,10 @@ Version 2.1\
 \
 + sync library code-clippings with iCloud\
 \
-+ add a 'language' option to projects and documents to specify:\
-	- latex\
-	- context\
-	- lilypond\
-	- others? \
-   Then we can be more clever about outline sections, syntax highlighting etc\
 \
 + Themes for colors\
 \
 + Add a Terminal button to launch a terminal in the project's directory\
-\
-+ Better soft-wrap which respects indentation? layoutmanager 
-\f2\fs26 \cf5 \ul \ulc5 \'96\'a0setLayoutRect:forTextBlock:glyphRange:
-\f1\fs28 \cf0 \ulnone \
 \
 + Library category import/export\
 \
@@ -103,7 +93,7 @@ Version 2.1\
 \
 \pard\pardeftab720
 
-\f3 \cf0 Not a very important point, but one that I am finding slightly frustrating - If I am writing normal text and I want to include round brackets texnicle stops recognising that it should switch to the next line before I go out of the readable part of the latex document. As soon as you put a full stop after the bracket it realises and moves to the next line, but it leaves the rest of your text going off into forever along one line (unless you make the brackets and before writing text put a full stop after them, in which case it realises it needs to keep the text on the visible page as normal).\
+\f2 \cf0 Not a very important point, but one that I am finding slightly frustrating - If I am writing normal text and I want to include round brackets texnicle stops recognising that it should switch to the next line before I go out of the readable part of the latex document. As soon as you put a full stop after the bracket it realises and moves to the next line, but it leaves the rest of your text going off into forever along one line (unless you make the brackets and before writing text put a full stop after them, in which case it realises it needs to keep the text on the visible page as normal).\
 \pard\pardeftab720
 
 \f1 \cf0 \
@@ -150,7 +140,7 @@ Version 2.1\
 \
 \pard\pardeftab720\sa280
 
-\f1 \cf6 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
+\f1 \cf5 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 \
@@ -164,7 +154,7 @@ Ruler class should ask for bookmark lines from delegate\
 ---------------------------------------------------\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \ul Improve outline view\
+\cf0 \ul \ulc0 Improve outline view\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 \ulnone \
 *** we have a bug which causes occasional crashes in the outline view. \
@@ -184,25 +174,21 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 \
 \pard\pardeftab720
 
-\f4 \cf0 \
+\f3 \cf0 \
 \
 \pard\pardeftab720
 
-\f1 \cf7 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
+\f1 \cf6 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
 \pard\tx220\tx720\pardeftab720\li720\fi-720
-\ls1\ilvl0\cf7 {\listtext	\'95	}The first is keyboard shortcuts for the code library. \'a0The #-expansion is useful if you are planning some complex code and know you want to include it as you write, but often I write something and then I want to select it and transform it (most commonly for italics and bolding). \'a0In other editors I use, you can select text and then hit a user-defined keyboard shortcut to manipulate that text. \'a0The keyboard shortcuts are not as powerful (they don't allow for multiple fields) as the #-expansion, but I use them more often than I use the #-expansion, generally, and I feel slowed down when I use TeXnicle and they don't exist.\
-{\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc8 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
+\ls1\ilvl0\cf6 {\listtext	\'95	}The first is keyboard shortcuts for the code library. \'a0The #-expansion is useful if you are planning some complex code and know you want to include it as you write, but often I write something and then I want to select it and transform it (most commonly for italics and bolding). \'a0In other editors I use, you can select text and then hit a user-defined keyboard shortcut to manipulate that text. \'a0The keyboard shortcuts are not as powerful (they don't allow for multiple fields) as the #-expansion, but I use them more often than I use the #-expansion, generally, and I feel slowed down when I use TeXnicle and they don't exist.\
+{\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc7 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
 \pard\pardeftab720
 
-\f4 \cf7 \
+\f2 \cf8 \
 \
 \pard\pardeftab720
 
-\f3 \cf9 I have a feature request related to the "tab bar" (the horizontal list of open documents above the editor window) in TeXnicle. If you open a lot of documents, you will come to the situation that not all documents are displayed in the tab bar. The documents which are not displayed in the bar are displayed in a little list, when you push the button with the two arrows to the right. That's perfectly fine, but when I try to close one of the documents in that list I don't see a fast and easy way to do that. The documents in the tab bar have a little x-button to the left, which closes the document, but the documents in the list don't have such a button. When I want to close such a document, I had to close documents in the tab bar first until the desired document appeared in the tab bar and after closing that document I had to open the documents I had closed before. That's not very efficient.\
-\
-\pard\pardeftab720
-
-\f4 \cf7 Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
+\f3 \cf6 Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
 it appears that pdf page number are wrong when I had 4 pages and now only one it still display 1 of 4 pages.\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
@@ -213,19 +199,14 @@ it appears that pdf page number are wrong when I had 4 pages and now only one it
 \cf0 	- new entries in xattr for standalone docs\
 \pard\pardeftab720
 
-\f4 \cf0 \
+\f3 \cf0 \
 \pard\pardeftab720
 
 \f0 \cf0 \
 ** Bug in number of runs spinner \
 \
-\pard\pardeftab720\sa280
-
-\f1 \cf0 - hide the navigators with a keyboard shortcut.
-\f0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-\cf0 \
-+ Make metadata views for figures, tables\
+\cf0 + Make metadata views for figures, tables\
 \
 Unit tests for core data model entities\
 \
@@ -234,7 +215,7 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf10 NSRange\cf0 )indentRangeForLineAtIndex:(\cf10 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf9 NSRange\cf0 )indentRangeForLineAtIndex:(\cf9 NSInteger\cf0 )loc\
 \
 ---------------------------\
 Log Parser\
@@ -247,36 +228,55 @@ Log Parser\
 \
 ---------------------------\
 \
-\
-+ Menu options to show/hide navigator sidebar\
 + Menu options to show/hide jump bar\
 	- later jumpbar should be per document\
 \
++ Quick-jump to other files\
+	- pop up a window with a list of files in the project and search field to select the file\
 \
+\pard\pardeftab720
+
+\f1 \cf0 \CocoaLigature1 + add a 'language' option to projects and documents to specify:\
+	- latex\
+	- context\
+	- lilypond\
+	- others? \
+   Then we can be more clever about outline sections, syntax highlighting etc\
+\
+\pard\pardeftab720
+
+\f2 \cf9 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.
+\f0 \cf0 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature1 \
+\cf0 \
+\
 Version 2.0.9\
 -------------\
 \
-* remember live update setting\
-* remember pdf thumbnails setting\
-\
 + Improvements to look and feel\
++ Documents now remember the live update setting\
++ Documents now remember the pdf thumbnails setting\
 + The document outline now supports custom section commands for each document level. These can be \
   set in the new 'Outline' preferences tab. The outline colors are now set here too.\
 + Jump bar changes:\
 	- Added option to enable/disable jumpbar in general preferences.\
 	- Added option to disable linenumbers in jumpbar (can lead to performance improvements in large files)\
 	- Optimised section list building in jumpbar.\
++ Added a new wrapping mode to wrap to the editor window width.\
 + Added support for \\addbibresource\{\} command for citation completion.\
 + Added support for subfiles package.\
 + Added support for \\component command in document outline for ConTeXt users.\
-+ Bug fix for spellchecker language settings which were not always remembered on the editor.\
++ Added new menu item to hide navigator panel. And added default keyboard shortcuts for this and existing "Show Navigator" menu item.\
++ Enhanced overflow menu in project tabbed editor.\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Bug fix: document outline now properly includes files which have a space in the name\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Bug fix for spellchecker language settings which were not always remembered on the editor.\
 + Bug fix for expanding simple code snippets with no placeholders where the cursor would end up at the beginning of the snippet.\
 + Bug fix for PDF printing on some 10.6.8 machines.\
-+ Bug fix: in some circumstances hiding/showing the status view below the editor was failing\
-+ Bug fix: document outline now properly includes files which have a space in the name\
-+ Other minor improvements and optimisations\
++ Bug fix: in some circumstances hiding/showing the status view below the editor was failing.\
++ Bug fix: in some cases editing of sections could cause a crash in the document outline view.\
++ Bug fixes in citation handling.\
 \
 Version 2.0.8\
 -------------\
@@ -1147,13 +1147,13 @@ Beta 4\
 \
 + Fixed a bug in creating new LaTeX files. Now the proper handling of new files is done and saving of new files is properly handled before compiling.\
 + Fixed bug in completing \{\} when no text is selected. Typing \{ results in a closing \} with the cursor in between the two. Selecting text and then typing \{ results in the selected text being enclosed with \{some text\} and the cursor being placed after the closing brace. (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed Console window title (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Fixed code folding bug (thanks to Murray 
-\f3 Eisenberg)
+\f2 Eisenberg)
 \f0 \
 + Made default syntax highlighting colours more muted\
 + Bug fix in line number display when code folding not active. The line number gutter was sometimes too narrow.\

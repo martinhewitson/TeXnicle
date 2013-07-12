@@ -234,7 +234,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 												   withAvailableWidth:availableWidth];
 						}
 
-						if (totalOccupiedWidth > availableWidth) {
+						if ((totalOccupiedWidth - availableWidth) > 5) {
 							NSLog(@"**** -[MMTabBarController _generateWidthsFromAttachedButtons:] This is a failure (available %f, total %f, width is %f)",
 								  availableWidth, totalOccupiedWidth, width);
 							remainingButtonsMustGoToOverflow = YES;
@@ -429,7 +429,7 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
 
             [aButton setStackingFrame:buttonRect];
 
-            if (idx+1 == [widths count] && [widths count] < buttonCount)
+            if (idx == [widths count] && [widths count] < buttonCount)
                 {
                 [aButton setIsOverflowButton:YES];
                 [self _addItemToOverflowMenu:[aButton tabViewItem] withTitle:[[aButton attributedStringValue] string]];
@@ -605,12 +605,31 @@ static NSInteger potentialMinimumForArray(NSArray *array, NSInteger minimum){
                 keyEquivalent:@""];
     [menuItem setTarget:_tabBarView];
     [menuItem setRepresentedObject:anItem];
+  
 /*
     if ([aButton objectCount] > 0) {
         [menuItem setTitle:[[menuItem title] stringByAppendingFormat:@" (%lu)", (unsigned long)[aButton objectCount]]];
     }
 */            
-        
+  
+  
+  NSMenu *sub = [[NSMenu alloc] initWithTitle:truncatedString];
+  NSMenuItem *subitem;
+  
+  // close
+  subitem = [sub addItemWithTitle:@"Close" action:@selector(_closeOverflowTabAction:) keyEquivalent:@""];
+  [subitem setTarget:_tabBarView];
+  [subitem setRepresentedObject:anItem];
+  [subitem setOnStateImage:nil];
+  
+  // move to front
+  subitem = [sub addItemWithTitle:@"Move to first" action:@selector(_moveOverflowTabAction:) keyEquivalent:@""];
+  [subitem setTarget:_tabBarView];
+  [subitem setRepresentedObject:anItem];
+  [subitem setOnStateImage:nil];
+  
+  [menuItem setSubmenu:sub];
+  
     if ([[_tabBarView delegate] respondsToSelector:@selector(tabView:tabViewItem:isInOverflowMenu:)]) {
         [[_tabBarView delegate] tabView:[_tabBarView tabView] tabViewItem:anItem isInOverflowMenu:YES];
     }

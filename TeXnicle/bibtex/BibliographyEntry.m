@@ -27,6 +27,7 @@
 
 #import "BibliographyEntry.h"
 #import "NSMutableAttributedString+BibFieldDisplay.h"
+#import "NSString+LaTeX.h"
 
 @implementation BibliographyEntry
 
@@ -91,6 +92,11 @@
 	return self;
 }
 
+- (BOOL)like:(BibliographyEntry*)entry
+{
+  return [self.tag isEqualToString:entry.tag] & [self.author isEqualToString:entry.author] & [self.title isEqualToString:entry.title];
+}
+
 // two bib entries are equal for the purposes of sorting if they have the same tag
 - (BOOL) isEqual:(BibliographyEntry*)entry
 {
@@ -101,93 +107,71 @@
 
 + (NSArray*)bibtexEntriesFromString:(NSString*)aString
 {
+  //NSLog(@"Getting bibtex entries from [%@]", aString);
   NSMutableArray *entries = [NSMutableArray array];
   NSInteger idx = 0;
   NSInteger strLen = [aString length];
-  NSCharacterSet *wsnl = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-  
+  NSInteger count = 0;
   while( idx < strLen ) {
     
+    // check if the line is commented out
+    NSRange lr = [aString lineRangeForRange:NSMakeRange(idx, 0)];
+//    //NSLog(@"Checking string [%@]", [aString substringWithRange:lr]);
+    if ([aString isCommentLineBeforeIndex:idx commentChar:@"%"] == YES) {
+      //NSLog(@"COMMENTED");
+      idx = NSMaxRange(lr);
+      continue;
+    }
+    
     if ([aString characterAtIndex:idx] == '@') {
-      
+      count++;
       // parse out an entry
+      NSInteger argStart = idx;
+      NSString *arg = [aString parseArgumentStartingAt:&argStart];
       
-      NSInteger start = NSNotFound;
-      // scan forward until we find a {
-      idx++;
-      while (idx < strLen) {
-        unichar c = [aString characterAtIndex:idx];
-        if ([wsnl characterIsMember:c]) {
-          break;
-        }
-        if (c == '{') {
-          start = idx;
-          break;
-        }
-        idx++;
-      }
-      NSInteger bracketCount = 1;
-      idx++;
-      while( idx < strLen) {
-        if ([aString characterAtIndex:idx] == '{') {
-          bracketCount++;
-        }
-        if ([aString characterAtIndex:idx] == '}') {
-          bracketCount--;
-        }
-        if (bracketCount == 0) {
-          break;
-        }
-        idx++;
-      }
-      
-      if (start != NSNotFound) {
-        NSString *entryString = [[aString substringWithRange:NSMakeRange(start, idx-start+1)] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:entryString];
+      if (arg) {
+        BibliographyEntry *entry = [[BibliographyEntry alloc] initWithString:arg];
         [entries addObject:entry];
-        
+        idx = argStart;
       }
     } // end found a @
     
     idx++;
   }
   
+  //NSLog(@"Found %ld @", count);
+  
   return entries;
 }
 
 - (void) parseContentFromString:(NSString*)content
 {
-//  NSLog(@"Parsing from %@", content);
+  //NSLog(@"Parsing from %@", content);
   
   // get tag 
   NSInteger idx = 0;
   NSInteger strLen = [content length];
   NSInteger start = 0;
   NSInteger end   = 0;
-  while (idx < strLen) {
-    if ([content characterAtIndex:idx] == '{'){
-      start = idx+1;
-      break;
-    }
-    idx++;
-  }
+  
   while (idx < strLen) {
     if ([content characterAtIndex:idx] == ','){
-      end = idx;
+      end = idx-1;
       break;
     }
     idx++;
   }
   
-  if (start < end && start > 0) {
-    self.tag = [content substringWithRange:NSMakeRange(start, end-start)];
+  if (start < end && start >= 0) {
+    self.tag = [content substringWithRange:NSMakeRange(start, end-start+1)];
   }
   
   // get author
   self.author = [self parseBibtexField:@"author" fromString:content];
   
   // get title
-  self.title = [self parseBibtexField:@"title" fromString:content];  
+  self.title = [self parseBibtexField:@"title" fromString:content];
+  
 }
 
 - (NSAttributedString*)attributedString

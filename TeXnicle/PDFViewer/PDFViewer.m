@@ -161,4 +161,24 @@
   }
 }
 
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController *)aPDFViewer
+{
+  return NO;
+}
+
+- (void)pdfViewController:(PDFViewerController *)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  
+}
+
+- (void)pdfViewController:(PDFViewerController *)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  
+}
+
+- (BOOL)pdfViewControllerShouldDoLiveUpdate:(PDFViewerController *)aPDFViewer
+{
+  return NO;
+}
+
 @end

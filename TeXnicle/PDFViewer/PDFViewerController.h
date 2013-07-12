@@ -40,6 +40,12 @@
 
 - (NSString*)documentPathForViewer:(PDFViewerController*)aPDFViewer;
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint;
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer;
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible;
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didSelectLiveUpdate:(BOOL)state;
+- (BOOL)pdfViewControllerShouldDoLiveUpdate:(PDFViewerController*)aPDFViewer;
+
 
 @end
 
@@ -78,6 +84,7 @@
 - (IBAction) showNextResult:(id)sender;
 - (IBAction)toggleResultsTable:(id)sender;
 - (IBAction)toggleThumbsTable:(id)sender;
+- (void) showThumbnails:(BOOL)state;
 
 - (void) selectSearchResult:(NSInteger)index;
 - (NSRange)rangeOfSelection:(PDFSelection*)selection;

@@ -375,15 +375,18 @@
 	}
 }
 
+// a managed file is one which is under the project path
 - (BOOL) isManaged
 {
-  if (self.parent != nil) {
-    if ([self.parent pathOnDisk] != nil) {
-      return YES;
-    }
-  }
+  return [self isUnderProject];
   
-  return NO;
+//  if (self.parent != nil) {
+//    if ([self.parent pathOnDisk] != nil) {
+//      return YES;
+//    }
+//  }
+//  
+//  return NO;
 }
 
 - (BOOL) isLeaf

@@ -63,14 +63,14 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.tabBar setStyleNamed:@"Safari"];
 	[self.tabBar setOrientation:MMTabBarHorizontalOrientation];
 	[self.tabBar setAutomaticallyAnimates:YES];
-	[self.tabBar setCanCloseOnlyTab:NO];
 	[self.tabBar setHideForSingleTab:NO];
   [self.tabBar setShowAddTabButton:NO];
   [self.tabBar setCanCloseOnlyTab:YES];
   [self.tabBar setOnlyShowCloseOnHover:YES];
   [self.tabBar setDisableTabClose:NO];
   [self.tabBar setAllowsBackgroundTabClosing:YES];
-  [self.tabBar sizeButtonsToFit];
+  [self.tabBar setSizeButtonsToFit:YES];
+  [self.tabBar setUseOverflowMenu:YES];
   
 	_isOpening = NO;
 		
@@ -275,7 +275,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     
 		NSTabViewItem *newItem = [[NSTabViewItem alloc] initWithIdentifier:aDoc];
 		[newItem setLabel:[aDoc valueForKey:@"shortName"]];    
-    [self.tabView addTabViewItem:newItem];
+//    [self.tabView addTabViewItem:newItem];
+    [self.tabView insertTabViewItem:newItem atIndex:0];
     if (selectTab) {
       [self.tabView selectTabViewItem:newItem]; // this is optional, but expected behavior
     }
@@ -588,8 +589,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 {
   if (state) {
     if (![[self.imageViewContainer subviews] containsObject:self.imageViewerController.view]) {
+      [self.imageViewerController.view setFrame:self.imageViewContainer.bounds];
       [self.imageViewContainer addSubview:self.imageViewerController.view];
-    }        
+      [self.imageViewContainer layout];
+    }
     if ([self.currentDoc isImage]) {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile:[self.currentDoc pathOnDisk]];
       [self.imageViewerController setImage:image atPath:[self.currentDoc pathOnDisk]];
@@ -606,6 +609,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   } else {
     [self.texEditorViewController enableEditor];
     [self.imageViewerController.view removeFromSuperview];
+    [self.imageViewContainer layout];
     [self.imageViewerController disable];
   }
 }
@@ -635,6 +639,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 #pragma mark -
 #pragma mark Delegate methods
+
+- (NSString*)tabView:(NSTabView *)aTabView toolTipForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+  FileEntity *file = [tabViewItem identifier];
+  return [file pathOnDisk];
+}
 				
 
 -(ProjectEntity*)project

@@ -18,6 +18,8 @@
 @property (strong) IBOutlet NSOutlineView *outlineView;
 @property (unsafe_unretained) TPSection *currentSection;
 
+@property (strong) NSMutableArray *sections;
+
 @end
 
 @implementation TPProjectOutlineViewController
@@ -131,10 +133,14 @@
 
 - (void) didComputeNewSections
 {
-  NSArray *sections = self.outlineBuilder.sections;
-//  NSLog(@"Received sections %ld", [sections count]);
+  self.sections = [NSMutableArray array];
+  for (TPSection *s in self.outlineBuilder.sections) {
+    [self.sections addObject:s];
+  }  
   
-  if ([sections count] > 0) {
+  //  NSLog(@"Received sections %@", self.sections);
+  
+  if ([self.sections count] > 0) {
     
     id currentFile = nil;
     NSInteger location = NSNotFound;
@@ -148,7 +154,7 @@
     TPSection *lastSection = nil;
     self.currentSection = nil;
     BOOL didReload = NO;
-    for (TPSection *s in sections) {
+    for (TPSection *s in self.sections) {
       if (s.needsReload) {
         [self.outlineView reloadData];
         s.needsReload = NO;
@@ -172,7 +178,7 @@
         }
         
         // edge case for the last section
-        if (self.currentSection == nil && s == [sections lastObject]) {
+        if (self.currentSection == nil && s == [self.sections lastObject]) {
           if (currentFile == s.file && location > s.startIndex) {
             self.currentSection = s;
           }
@@ -181,6 +187,8 @@
       
       lastSection = s;
     }
+    
+    [self.outlineView reloadData];
         
     // restore state
     if (didReload) {
@@ -211,7 +219,7 @@
 
 - (void) restoreExpansionState
 {
-  NSArray *sections = self.outlineBuilder.sections;
+  NSArray *sections = self.sections;
   for (TPSection *s in sections) {
     switch (s.expansionState) {
       case TPOutlineExpansionStateCollapse:
@@ -285,6 +293,7 @@
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
   NSArray *children = [self childrenOfSection:item];
+  //NSLog(@"Children of %@: %@", item, children);
   return children[index];
 }
 
@@ -297,8 +306,8 @@
 - (NSArray*) childrenOfSection:(id)parent
 {
   NSMutableArray *children = [NSMutableArray array];
-  __strong NSArray *sections = self.outlineBuilder.sections;
-  for (__strong TPSection *s in sections) {
+  NSArray *sections = self.sections;
+  for (TPSection *s in sections) {
     if (s.parent == parent) {
       [children addObject:s];
     }
@@ -310,7 +319,7 @@
 - (NSInteger) outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 {
   NSArray *children = [self childrenOfSection:item];
-//  NSLog(@"Number of children of %@: %ld", item, [children count]);
+  //NSLog(@"Number of children of %@: %ld", item, [children count]);
   return [children count];
 }
 
@@ -340,7 +349,7 @@
 // Expand all sections
 - (IBAction) expandAllSections:(id) sender
 {
-  NSArray *sections = self.outlineBuilder.sections;
+  NSArray *sections = self.sections;
   for (TPSection *s in sections) {
     [self.outlineView expandItem:s];
   }
@@ -349,7 +358,7 @@
 // Collapse all sections
 - (IBAction) collapseAllSections:(id)sender
 {
-  NSArray *sections = self.outlineBuilder.sections;
+  NSArray *sections = self.sections;
   for (TPSection *s in sections) {
     [self.outlineView collapseItem:s];
   }

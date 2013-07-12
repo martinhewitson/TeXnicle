@@ -31,6 +31,7 @@
 
 @implementation Settings
 
+@dynamic doLiveUpdate;
 @dynamic language;
 @dynamic engineName;
 @dynamic doBibtex;
@@ -56,6 +57,11 @@
   if (self.language == nil && self.managedObjectContext != nil) {
     self.language = [[NSSpellChecker sharedSpellChecker] language];
   }
+  
+  if (self.doLiveUpdate == nil && self.managedObjectContext != nil) {
+    self.doLiveUpdate = @NO;
+  }
+  
 }
 
 - (void)setDefaultSettings
@@ -63,6 +69,7 @@
   // setup defaults
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
+  self.doLiveUpdate = @NO;
   self.engineName = [defaults valueForKey:TPDefaultEngineName];
   self.doBibtex = [defaults valueForKey:BibTeXDuringTypeset];
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];

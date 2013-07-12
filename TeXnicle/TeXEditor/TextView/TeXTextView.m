@@ -980,11 +980,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
   }	else if (wrapStyle == TPNoWrap) {
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
+  }	else if (wrapStyle == TPWindowWrap) {
+    [textContainer setWidthTracksTextView:YES];
   } else {
     // set large size - hard wrap is handled in the wrapLine
+    [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
   }
   [self setNeedsDisplay:YES];
@@ -2118,7 +2123,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		// if the current cursor location is not at the end of the \begin{} statement, we do nothing special
     NSInteger start = 0;
     NSInteger end   = 0;
-    for (int kk=0; kk<[previousLine length]; kk++) {
+    for (NSInteger kk=0; kk<[previousLine length]; kk++) {
       if ([previousLine characterAtIndex:kk]=='{') {
         start = kk+1;
         kk++;

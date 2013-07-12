@@ -55,6 +55,7 @@
 - (NSAttributedString*) displayString;
 - (NSString*) string;
 - (NSString*) bibtexEntry;
+- (BOOL)like:(BibliographyEntry*)entry;
 
 
 @end

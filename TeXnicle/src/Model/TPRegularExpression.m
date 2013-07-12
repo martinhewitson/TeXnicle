@@ -109,7 +109,7 @@
 
 + (NSRange)rangeOfExpr:(NSString*)expr inText:(NSString*)text
 {
-  NSRange range = NSMakeRange(NSNotFound, 0);
+  NSRange range;
   if (NSClassFromString(@"NSRegularExpression") != nil)  {
     
     NSRegularExpression *exp = [NSRegularExpression regularExpressionWithPattern:expr

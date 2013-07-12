@@ -115,6 +115,7 @@
 		2528E86D1395446400834921 /* DocWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2528E86B1395446400834921 /* DocWindow.xib */; };
 		2528E8711395662600834921 /* StartupScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E8701395662600834921 /* StartupScreenController.m */; };
 		2528E8731395663700834921 /* StartupScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2528E8721395663700834921 /* StartupScreen.xib */; };
+		2529D24217887525002F64B4 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */; };
 		252C71BA13E33B1C002351D2 /* NSDictionary+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 252C71B913E33B1C002351D2 /* NSDictionary+TeXnicle.m */; };
 		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121B162167490041B2BE /* MHControlsTabBarController.xib */; };
@@ -212,8 +213,9 @@
 		2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */; };
 		2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273316E4AFDC004B7C4A /* outline_paragraph.icns */; };
 		2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */; };
+		2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567E46B178AFE2F0056D65D /* CitationTests.m */; };
+		2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2567E46E178BCC8E0056D65D /* citation_test1.tex */; };
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
-		25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */; };
 		256C84CD14E7B896007E4FBA /* MHSynctexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C84CC14E7B896007E4FBA /* MHSynctexController.m */; };
 		256C94D613EE591300AD8E3A /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C94D513EE591300AD8E3A /* Bookmark.m */; };
 		25701AF11505F9F50097E8DA /* TPProjectTemplateListViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701AF01505F9F50097E8DA /* TPProjectTemplateListViewer.m */; };
@@ -278,6 +280,11 @@
 		257B47DA138EA15400ED02C4 /* NSArray_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47D9138EA15400ED02C4 /* NSArray_Extensions.m */; };
 		257B47DD138EAB9E00ED02C4 /* ProjectItemTreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */; };
 		257CDFEA140A3A5E00ED0756 /* ContextCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */; };
+		257DA555178BE71A0052A567 /* LaTeXStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 257DA554178BE71A0052A567 /* LaTeXStringTests.m */; };
+		257DA557178BE8FF0052A567 /* citation_test2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 257DA556178BE8FA0052A567 /* citation_test2.tex */; };
+		257DA559178BEC040052A567 /* citations1.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA558178BEBFC0052A567 /* citations1.bib */; };
+		257DA55C178BF8F50052A567 /* citations2.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55A178BF8F50052A567 /* citations2.bib */; };
+		257DA55D178BF8F50052A567 /* citations3.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55B178BF8F50052A567 /* citations3.bib */; };
 		2581830F139222D200ECCCB1 /* Templates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2581830E139222D200ECCCB1 /* Templates.plist */; };
 		258348981513B2FC008A21BE /* BibliographyEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348971513B2FC008A21BE /* BibliographyEntry.m */; };
 		258348A51513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */; };
@@ -711,7 +718,6 @@
 		250F1B4A16E3449600629A2E /* PlaceholderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTests.m; sourceTree = "<group>"; };
 		250F1B5616E34C1000629A2E /* placeholderTest1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholderTest1.tex; sourceTree = "<group>"; };
 		250F1B5916E34E0100629A2E /* placeholderTest2.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholderTest2.tex; sourceTree = "<group>"; };
-		250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
 		251157C416350C2500AC058F /* reformatTextTestFile10.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10.tex; sourceTree = "<group>"; };
 		251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile10_reformatted.tex; sourceTree = "<group>"; };
 		251157C91635143100AC058F /* reformatTextTestFile11.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile11.tex; sourceTree = "<group>"; };
@@ -831,7 +837,6 @@
 		253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile5_reformatted.tex; sourceTree = "<group>"; };
 		253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6.tex; sourceTree = "<group>"; };
 		253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6_reformatted.tex; sourceTree = "<group>"; };
-		253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 8.xcdatamodel"; sourceTree = "<group>"; };
 		253E5E2B13951DD300566E23 /* Library.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Library.plist; sourceTree = "<group>"; };
 		253E5E2E13951DD300566E23 /* TPLibraryImageGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryImageGenerator.h; sourceTree = "<group>"; };
 		253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryImageGenerator.m; sourceTree = "<group>"; };
@@ -932,6 +937,17 @@
 		256225D015CA943200091A8C /* NSApplication+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Palette.m"; sourceTree = "<group>"; };
 		25627829151A061300778FFB /* noerror.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = noerror.icns; sourceTree = "<group>"; };
 		2562782A151A061300778FFB /* error.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = error.icns; sourceTree = "<group>"; };
+		2566D90F1783EB2500BA4755 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9101783EB2500BA4755 /* TeXProject 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 11.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 12.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9121783EB2500BA4755 /* TeXProject 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 2.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9131783EB2500BA4755 /* TeXProject 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 3.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9141783EB2500BA4755 /* TeXProject 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 4.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9151783EB2500BA4755 /* TeXProject 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 5.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9161783EB2500BA4755 /* TeXProject 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 6.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9171783EB2500BA4755 /* TeXProject 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 7.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9181783EB2500BA4755 /* TeXProject 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 8.xcdatamodel"; sourceTree = "<group>"; };
+		2566D9191783EB2500BA4755 /* TeXProject 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 9.xcdatamodel"; sourceTree = "<group>"; };
 		2567272616E49FEC004B7C4A /* NSImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Resize.h"; sourceTree = "<group>"; };
 		2567272716E49FEC004B7C4A /* NSImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Resize.m"; sourceTree = "<group>"; };
 		2567272916E4A246004B7C4A /* outline_part.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_part.icns; sourceTree = "<group>"; };
@@ -941,13 +957,12 @@
 		2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsubsection.icns; sourceTree = "<group>"; };
 		2567273316E4AFDC004B7C4A /* outline_paragraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_paragraph.icns; sourceTree = "<group>"; };
 		2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subparagraph.icns; sourceTree = "<group>"; };
+		2567E46B178AFE2F0056D65D /* CitationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitationTests.m; sourceTree = "<group>"; };
+		2567E46E178BCC8E0056D65D /* citation_test1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citation_test1.tex; sourceTree = "<group>"; };
 		25690D7A14F4D26D00E4101D /* NSScanner+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+TeXnicle.h"; sourceTree = "<group>"; };
 		25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+TeXnicle.m"; sourceTree = "<group>"; };
-		25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 2.xcdatamodel"; sourceTree = "<group>"; };
-		25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 3.xcdatamodel"; sourceTree = "<group>"; };
 		256C84CB14E7B896007E4FBA /* MHSynctexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSynctexController.h; sourceTree = "<group>"; };
 		256C84CC14E7B896007E4FBA /* MHSynctexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSynctexController.m; sourceTree = "<group>"; };
-		256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 4.xcdatamodel"; sourceTree = "<group>"; };
 		256C94D413EE591300AD8E3A /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
 		256C94D513EE591300AD8E3A /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
 		25701AEF1505F9F50097E8DA /* TPProjectTemplateListViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateListViewer.h; sourceTree = "<group>"; };
@@ -1061,12 +1076,16 @@
 		257B47DB138EAB9D00ED02C4 /* ProjectItemTreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItemTreeController.h; sourceTree = "<group>"; };
 		257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectItemTreeController.m; sourceTree = "<group>"; };
 		257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContextCommands.plist; sourceTree = "<group>"; };
+		257DA554178BE71A0052A567 /* LaTeXStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaTeXStringTests.m; sourceTree = "<group>"; };
+		257DA556178BE8FA0052A567 /* citation_test2.tex */ = {isa = PBXFileReference; lastKnownFileType = text; path = citation_test2.tex; sourceTree = "<group>"; };
+		257DA558178BEBFC0052A567 /* citations1.bib */ = {isa = PBXFileReference; lastKnownFileType = text; path = citations1.bib; sourceTree = "<group>"; };
+		257DA55A178BF8F50052A567 /* citations2.bib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citations2.bib; sourceTree = "<group>"; };
+		257DA55B178BF8F50052A567 /* citations3.bib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citations3.bib; sourceTree = "<group>"; };
 		2581830E139222D200ECCCB1 /* Templates.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Templates.plist; sourceTree = "<group>"; };
 		258348961513B2FC008A21BE /* BibliographyEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BibliographyEntry.h; sourceTree = "<group>"; };
 		258348971513B2FC008A21BE /* BibliographyEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BibliographyEntry.m; sourceTree = "<group>"; };
 		258348A31513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+BibFieldDisplay.h"; sourceTree = "<group>"; };
 		258348A41513B388008A21BE /* NSMutableAttributedString+BibFieldDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+BibFieldDisplay.m"; sourceTree = "<group>"; };
-		25846DBD1408D14100A708E2 /* TeXProject 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 5.xcdatamodel"; sourceTree = "<group>"; };
 		25846DC11408D36800A708E2 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		25846DC21408D36800A708E2 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		258594011408BD6500C970A1 /* prefsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = prefsTabBarImageDepressed.icns; sourceTree = "<group>"; };
@@ -1369,7 +1388,6 @@
 		25D57FB614EA531F008E02B5 /* TPProjectTemplateCreator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateCreator.xib; sourceTree = "<group>"; };
 		25D57FB814EA5371008E02B5 /* TPProjectTemplateCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateCreator.h; sourceTree = "<group>"; };
 		25D57FB914EA5371008E02B5 /* TPProjectTemplateCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateCreator.m; sourceTree = "<group>"; };
-		25D57FBB14EA5C3B008E02B5 /* TeXProject 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 9.xcdatamodel"; sourceTree = "<group>"; };
 		25D74AE81397F4F00074A5A2 /* MHRoundedTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedTopView.h; sourceTree = "<group>"; };
 		25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedTopView.m; sourceTree = "<group>"; };
 		25D74AEC1397F90E0074A5A2 /* MHRoundedBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHRoundedBottomView.h; sourceTree = "<group>"; };
@@ -1434,7 +1452,6 @@
 		25DBBDD814EB812400C1D0CF /* MHWhitebackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWhitebackground.m; sourceTree = "<group>"; };
 		25DC3FD214B43ED000CA3053 /* NSArray+LaTeX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LaTeX.h"; sourceTree = "<group>"; };
 		25DC3FD314B43ED000CA3053 /* NSArray+LaTeX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LaTeX.m"; sourceTree = "<group>"; };
-		25DD32B814B96C7300C5D1E3 /* TeXProject 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 7.xcdatamodel"; sourceTree = "<group>"; };
 		25DD32BD14B981CF00C5D1E3 /* UISettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UISettings.h; sourceTree = "<group>"; };
 		25DD32BE14B981CF00C5D1E3 /* UISettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISettings.m; sourceTree = "<group>"; };
 		25DE6CAF16B3C68E008290F2 /* NSResponder+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSResponder+TeXnicle.h"; sourceTree = "<group>"; };
@@ -1446,7 +1463,6 @@
 		25E0EB0C14AF0D380039E82B /* MHPlaceholderAttachmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPlaceholderAttachmentCell.m; sourceTree = "<group>"; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
 		25E513C91459968600D13D1D /* zoomToFit.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomToFit.icns; sourceTree = "<group>"; };
-		25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 6.xcdatamodel"; sourceTree = "<group>"; };
 		25E7B13415AB39C400373A56 /* TPSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSection.h; sourceTree = "<group>"; };
 		25E7B13515AB39C400373A56 /* TPSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSection.m; sourceTree = "<group>"; };
 		25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineBuilder.h; sourceTree = "<group>"; };
@@ -1459,7 +1475,6 @@
 		25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineSettingsController.h; sourceTree = "<group>"; };
 		25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineSettingsController.m; sourceTree = "<group>"; };
 		25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPEngineSettingsController.xib; sourceTree = "<group>"; };
-		25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 11.xcdatamodel"; sourceTree = "<group>"; };
 		25F0AB3015A8A4360000EFFA /* spellingTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingTabBarImage.icns; sourceTree = "<group>"; };
 		25F0AB3115A8A4360000EFFA /* spellingTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25F0AB3415A940D10000EFFA /* spellingMistake.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingMistake.icns; sourceTree = "<group>"; };
@@ -1760,9 +1775,12 @@
 		250F1B4816E3446500629A2E /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				2567E46D178BCC400056D65D /* citation test files */,
 				250F1B5416E34BE300629A2E /* placeholder test files */,
 				250F1B4916E3449600629A2E /* PlaceholderTests.h */,
 				250F1B4A16E3449600629A2E /* PlaceholderTests.m */,
+				2567E46B178AFE2F0056D65D /* CitationTests.m */,
+				257DA554178BE71A0052A567 /* LaTeXStringTests.m */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -2182,6 +2200,18 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		2567E46D178BCC400056D65D /* citation test files */ = {
+			isa = PBXGroup;
+			children = (
+				257DA55A178BF8F50052A567 /* citations2.bib */,
+				257DA55B178BF8F50052A567 /* citations3.bib */,
+				257DA558178BEBFC0052A567 /* citations1.bib */,
+				257DA556178BE8FA0052A567 /* citation_test2.tex */,
+				2567E46E178BCC8E0056D65D /* citation_test1.tex */,
+			);
+			path = "citation test files";
+			sourceTree = "<group>";
+		};
 		25717B361392D14C00955620 /* Palette */ = {
 			isa = PBXGroup;
 			children = (
@@ -2206,7 +2236,7 @@
 		257B4711138E5DA700ED02C4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */,
+				2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */,
 				25BB153515B42378007A7FDF /* Entities */,
 				2589BBFD15B3EEDB00E24C9B /* TPMetadataOperation.h */,
 				2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */,
@@ -3048,7 +3078,7 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = bobsoft;
 			};
 			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
@@ -3354,8 +3384,10 @@
 				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
 				25DB595D1778BC3E000383AF /* log6.log in Resources */,
 				2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */,
+				257DA55C178BF8F50052A567 /* citations2.bib in Resources */,
 				253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */,
 				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				257DA55D178BF8F50052A567 /* citations3.bib in Resources */,
 				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
 				25DB595E1778BC3E000383AF /* log7.log in Resources */,
 				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
@@ -3364,15 +3396,18 @@
 				252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */,
 				252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */,
 				252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */,
+				2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */,
 				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
 				25DB59551778BC3E000383AF /* InfoPlist.strings in Resources */,
 				25DB595F1778BC3E000383AF /* log8.log in Resources */,
 				25DB59571778BC3E000383AF /* log10.log in Resources */,
+				257DA559178BEC040052A567 /* citations1.bib in Resources */,
 				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
 				251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */,
 				25DB59591778BC3E000383AF /* log2.log in Resources */,
 				251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */,
+				257DA557178BE8FF0052A567 /* citation_test2.tex in Resources */,
 				251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */,
 				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
 				25DB59561778BC3E000383AF /* log1.log in Resources */,
@@ -3511,7 +3546,6 @@
 				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
 				2503357013EAD480005BD6CF /* FinderController.m in Sources */,
 				2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */,
-				25692D9613EDBDB100AB4D36 /* TeXProject.xcdatamodeld in Sources */,
 				256C94D613EE591300AD8E3A /* Bookmark.m in Sources */,
 				251D899A13EEFDE200301B6D /* BookmarkManager.m in Sources */,
 				25C2AFD313F1064B0060227A /* BookmarkOutlineView.m in Sources */,
@@ -3663,6 +3697,7 @@
 				25D10EF3176F00AE004C40AE /* MMTabBarController.m in Sources */,
 				25D10EF5176F00AE004C40AE /* MMTabBarView.m in Sources */,
 				25D10EF6176F00AE004C40AE /* MMTabDragAssistant.m in Sources */,
+				2529D24217887525002F64B4 /* TeXProject.xcdatamodeld in Sources */,
 				25D10EF7176F00AE004C40AE /* MMTabDragView.m in Sources */,
 				25D10EF8176F00AE004C40AE /* MMTabDragWindow.m in Sources */,
 				25D10EF9176F00AE004C40AE /* MMTabDragWindowController.m in Sources */,
@@ -3703,7 +3738,9 @@
 				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
 				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
 				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
+				2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */,
 				250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */,
+				257DA555178BE71A0052A567 /* LaTeXStringTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3785,8 +3822,9 @@
 		2507732D138E5D82000F1118 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3799,10 +3837,12 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
@@ -3811,8 +3851,9 @@
 		2507732E138E5D82000F1118 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3822,7 +3863,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3835,7 +3878,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -3858,7 +3900,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -3882,7 +3923,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -3898,6 +3938,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3913,7 +3954,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -3929,6 +3969,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXnicle/TeXnicle-Prefix.pch";
 				GCC_VERSION = "";
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3944,7 +3985,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3978,7 +4018,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4055,21 +4094,22 @@
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
-		25692D9313EDBDB100AB4D36 /* TeXProject.xcdatamodeld */ = {
+		2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				253D905314BD85F100841AE8 /* TeXProject 8.xcdatamodel */,
-				250FC511159F0083006BDCA0 /* TeXProject 10.xcdatamodel */,
-				25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */,
-				25D57FBB14EA5C3B008E02B5 /* TeXProject 9.xcdatamodel */,
-				25DD32B814B96C7300C5D1E3 /* TeXProject 7.xcdatamodel */,
-				25E513CC1459C4E000D13D1D /* TeXProject 6.xcdatamodel */,
-				25846DBD1408D14100A708E2 /* TeXProject 5.xcdatamodel */,
-				256C94D313EE56A700AD8E3A /* TeXProject 4.xcdatamodel */,
-				25692D9413EDBDB100AB4D36 /* TeXProject 2.xcdatamodel */,
-				25692D9513EDBDB100AB4D36 /* TeXProject 3.xcdatamodel */,
+				2566D90F1783EB2500BA4755 /* TeXProject 10.xcdatamodel */,
+				2566D9101783EB2500BA4755 /* TeXProject 11.xcdatamodel */,
+				2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */,
+				2566D9121783EB2500BA4755 /* TeXProject 2.xcdatamodel */,
+				2566D9131783EB2500BA4755 /* TeXProject 3.xcdatamodel */,
+				2566D9141783EB2500BA4755 /* TeXProject 4.xcdatamodel */,
+				2566D9151783EB2500BA4755 /* TeXProject 5.xcdatamodel */,
+				2566D9161783EB2500BA4755 /* TeXProject 6.xcdatamodel */,
+				2566D9171783EB2500BA4755 /* TeXProject 7.xcdatamodel */,
+				2566D9181783EB2500BA4755 /* TeXProject 8.xcdatamodel */,
+				2566D9191783EB2500BA4755 /* TeXProject 9.xcdatamodel */,
 			);
-			currentVersion = 25F0AB2E15A89DFF0000EFFA /* TeXProject 11.xcdatamodel */;
+			currentVersion = 2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */;
 			path = TeXProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

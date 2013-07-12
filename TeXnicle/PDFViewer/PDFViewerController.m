@@ -116,11 +116,17 @@
   [self performSelector:@selector(updatePageCountDisplay) withObject:nil afterDelay:0];
   [self.pdfview performSelector:@selector(setNeedsDisplay) withObject:nil afterDelay:0.5];
   
+  // update live update button
+  [self.liveUpdateButton setState:[self pdfViewControllerShouldDoLiveUpdate:self]];
 }
 
 - (void) setupThumbsView
 {
-  [self.thumbSlideViewController toggle:self];
+  if ([self pdfViewControllerShouldShowPDFThumbnails:self]) {
+    [self.thumbSlideViewController slideIn:self];
+  } else {
+    [self.thumbSlideViewController slideOut:self];
+  }
 }
 
 - (void) handleDocumentChangedNotification:(NSNotification*)aNote
@@ -150,10 +156,24 @@
   self.delegate = nil;
 }
 
+- (IBAction)changeLiveUpdate:(id)sender
+{
+  BOOL state = [self.liveUpdateButton state] == NSOnState;
+  [self pdfViewController:self didSelectLiveUpdate:state];
+}
 
 - (IBAction)toggleResultsTable:(id)sender
 {
   [self.searchResultsSlideViewController toggle:sender];
+}
+
+- (void) showThumbnails:(BOOL)state
+{
+  if (state) {
+    [self.thumbSlideViewController slideInAnimated:YES];
+  } else {
+    [self.thumbSlideViewController slideOutAnimated:YES];
+  }
 }
 
 - (IBAction)toggleThumbsTable:(id)sender
@@ -161,6 +181,8 @@
   if ([self.toggleThumbsButton state] == NSOnState) {
   } else {
   }
+  
+  [self pdfViewController:self didChangeThumbnailsViewerState:[self.toggleThumbsButton state]];
   [self.thumbSlideViewController toggle:sender];
 }
 
@@ -518,6 +540,41 @@
     [self.delegate pdfview:pdfView didCommandClickOnPage:pageIndex inRect:aRect atPoint:aPoint];
   }
 }
+
+- (BOOL)pdfViewControllerShouldShowPDFThumbnails:(PDFViewerController*)aPDFViewer
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewControllerShouldShowPDFThumbnails:)]) {
+    return [self.delegate pdfViewControllerShouldShowPDFThumbnails:self];
+  }
+  
+  return NO;
+}
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didChangeThumbnailsViewerState:(BOOL)visible
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewController:didChangeThumbnailsViewerState:)]) {
+    [self.delegate pdfViewController:self didChangeThumbnailsViewerState:visible];
+  }
+}
+
+- (void)pdfViewController:(PDFViewerController*)aPDFViewer didSelectLiveUpdate:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewController:didSelectLiveUpdate:)]) {
+    BOOL state = [self.liveUpdateButton state] == NSOnState;
+    [self.delegate pdfViewController:self didSelectLiveUpdate:state];
+  }
+}
+
+- (BOOL)pdfViewControllerShouldDoLiveUpdate:(PDFViewerController*)aPDFViewer
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(pdfViewControllerShouldDoLiveUpdate:)]) {
+    return [self.delegate pdfViewControllerShouldDoLiveUpdate:self];
+  }
+  
+  return NO;
+}
+
+
 
 #pragma mark -
 #pragma mark Sliding splitview delegate
