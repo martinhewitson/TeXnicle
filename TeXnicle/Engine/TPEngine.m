@@ -36,7 +36,9 @@
 @interface TPEngine ()
 
 @property (strong) NSTask *typesetTask;
-
+@property (copy) NSString *mainfileName;
+@property (copy) NSString *workingDirectory;
+@property (assign) NSInteger compilationsDone;
 
 @end
 
@@ -226,24 +228,41 @@
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];	
   [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
   
+  self.mainfileName = [mainFile lastPathComponent];
+  self.workingDirectory = workingDir;
+  
+  
+  
+  [self doRunNumber:0];
+	
+	return YES;  
+}
+
+- (void) doRunNumber:(NSInteger)runNumber
+{
+  //NSLog(@"Starting task run %ld", runNumber);
+  
+  [self enginePostMessage:[NSString stringWithFormat:@"[%ld/%ld] Typesetting main file:%@", runNumber, self.nCompile, self.documentPath]];
+  
   if (self.typesetTask == nil) {
     self.typesetTask = [[NSTask alloc] init];
     pipe = [NSPipe pipe];
     [self.typesetTask setStandardOutput:pipe];
     [self.typesetTask setStandardError:pipe];
-    typesetFileHandle = [pipe fileHandleForReading];    
-    [self setupObservers];    
+    typesetFileHandle = [pipe fileHandleForReading];
+    [self setupObservers];
   }
   
 	[self.typesetTask setLaunchPath:self.path];
-  [self.typesetTask setCurrentDirectoryPath:workingDir];
-    
-	NSArray *arguments = @[[mainFile lastPathComponent],
-                          workingDir,
-                          [NSString stringWithFormat:@"%ld", self.nCompile],
-                          [NSString stringWithFormat:@"%d", self.doBibtex],
-                          [NSString stringWithFormat:@"%d", self.doPS2PDF]
-                        ];
+  [self.typesetTask setCurrentDirectoryPath:self.workingDirectory];
+  
+  NSArray *arguments = @[self.mainfileName,
+                         self.workingDirectory,
+                         [NSString stringWithFormat:@"%ld", self.nCompile],
+                         [NSString stringWithFormat:@"%d", self.doBibtex],
+                         [NSString stringWithFormat:@"%d", self.doPS2PDF],
+                         [NSString stringWithFormat:@"%ld", 1+runNumber] // script wants 1-based counting
+                         ];
 	[self.typesetTask setArguments:arguments];
 	
 	[typesetFileHandle readInBackgroundAndNotify];
@@ -251,33 +270,39 @@
   self.compiling = YES;
   procId = [self.typesetTask processIdentifier];
 	[self.typesetTask launch];
-	
-	return YES;  
+
 }
 
 - (void) taskFinished:(NSNotification*)aNote
 {
-  //NSLog(@"Task finished %@", [aNote object]);
 	if ([aNote object] != self.typesetTask)
 		return;
+  
+  //NSLog(@"Task finished %@", [aNote object]);
 	
   self.compiling = NO;
-	compilationsDone++;
+	self.compilationsDone += 1;
 	
-  // notify interested parties
-//  NSLog(@"Compile finished - informing delegate");
-  [self compileDidFinish:!abortCompile];
-  
-	if (abortCompile) {
-    [self enginePostMessage:[NSString stringWithFormat:@"Compile aborted."]];
-		return;
-	}
-	
-  [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
-  
+  if (self.compilationsDone < self.nCompile && abortCompile == NO) {
+    // go again
+    self.typesetTask = nil;
+    [self doRunNumber:self.compilationsDone];
+  } else {
+    // notify interested parties
+    //  NSLog(@"Compile finished - informing delegate");
+    [self compileDidFinish:!abortCompile];
     
-  self.typesetTask = nil;
-  procId = -1;
+    if (abortCompile) {
+      [self enginePostMessage:[NSString stringWithFormat:@"Compile aborted."]];
+      return;
+    }
+    
+    [self enginePostMessage:[NSString stringWithFormat:@"Completed build of %@", self.documentPath]];
+    
+    
+    self.typesetTask = nil;
+    procId = -1;
+  }
 }
 
 
@@ -299,16 +324,13 @@
 		if (loc < [output length]) {
       [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
 			abortCompile = YES;
-//      [self.typesetTask terminate];
-//      [self reset];
-//      [self compileDidFinish:NO];
-//      [self performSelector:@selector(postLogfileNotification) withObject:nil afterDelay:1];
 		}
 	}	
 	
 	[self enginePostTextForAppending:output];
   
-	if([data length] > 0 && abortCompile == NO) {
+	if([data length] > 0) {
+//	if([data length] > 0 && abortCompile == NO) {
 		[typesetFileHandle readInBackgroundAndNotify];
   }
 	
@@ -317,7 +339,7 @@
 - (void) reset
 {
   abortCompile = NO;
-  compilationsDone = 0;
+  self.compilationsDone = 0;
   self.compiling = NO;
   self.typesetTask = nil;
 }

@@ -11,7 +11,7 @@
 
 if [ $# -lt 2 ]
 then
-  echo "usage: <full-path-to-file> <working-directory> (<num compile> <do bibtex> <do ps2pdf>)"
+  echo "usage: <full-path-to-file> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number>)"
   exit
 fi
 
@@ -30,12 +30,13 @@ outputDir=$2
 nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
+runNumber=$6
 
 echo "****************************"
-echo "*** Compiling $mainfile"
-echo "*** Output dir $outputDir"
-echo "*** Ncompile $nCompile"
-echo "*** Do bibtex $doBibtex"
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
+echo "***  N typeset: $nCompile"
+echo "***  Do bibtex: $doBibtex"
 echo "****************************"
 
 # Go to the working directory

@@ -30,9 +30,8 @@ mainfile=$1
 outputDir=$2
 
 echo "****************************"
-echo "*** Compiling $mainfile"
-echo "*** Output dir $outputDir"
-
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
 echo "****************************"
 
 # Go to the working directory

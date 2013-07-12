@@ -32,10 +32,10 @@ doBibtex=$4
 doPS2PDF=$5
 
 echo "****************************"
-echo "*** Compiling $mainfile"
-echo "*** Output dir $outputDir"
-echo "*** Ncompile $nCompile"
-echo "*** Do bibtex $doBibtex"
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
+echo "***  N typeset: $nCompile"
+echo "***  Do bibtex: $doBibtex"
 echo "****************************"
 
 # Go to the working directory

@@ -14,7 +14,7 @@
 
 if [ $# -lt 2 ]
 then
-  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex>)"
+  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number>)"
   exit
 fi
 
@@ -32,50 +32,56 @@ outputDir=$2
 nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
+runNumber=$6
+
 
 echo "****************************"
-echo "*** Compiling $mainfile"
-echo "*** Output dir $outputDir"
-echo "*** Ncompile $nCompile"
-echo "*** Do bibtex $doBibtex"
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
+echo "***  N typeset: $nCompile"
+echo "***  Do bibtex: $doBibtex"
 echo "****************************"
 
 # Go to the working directory
 cd "$outputDir"
 
 # Do the correct number of typesetting runs
-count=1
-while [ $count -le $nCompile ]
-do
-  echo " "
-  echo "***------------------------------------------------------------"
-  echo "*** Run $count..."
-  echo "***------------------------------------------------------------"
-  $ENGINE -file-line-error -interaction=nonstopmode "$mainfile"
 
-  # if this is after the first run, run bibtex if requested
-  if [ $count -eq 1 ]
-  then
-    if [ $doBibtex -eq 1 ]
-    then
-      echo "*** Running pbibtex..."
-      $BIBTEX "$mainfile"
-    fi
-  fi
+echo " "
+echo "***------------------------------------------------------------"
+echo "*** Run $runNumber of $nCompile..."
+echo "***------------------------------------------------------------"
+$ENGINE -file-line-error -interaction=nonstopmode "$mainfile"
 
-  count=$(( $count + 1 ))
-done
-
-# Run dvips
-echo "*** Creating DVI file from $mainfile..."
-$DVIPS "$mainfile"
-
-
-# Optionally do ps2pdf
-if [ $doPS2PDF -eq 1 ]
+# if this is after the first run, run bibtex if requested
+if [ $runNumber -eq 1 ]
 then
-  echo "*** Converting ps to pdf..."
-  $PS2PDF "$mainfile.ps"
+  if [ $doBibtex -eq 1 ]
+  then
+    echo "***------------------------------------------------------------"
+    echo "*** Running pbibtex..."
+    echo "***------------------------------------------------------------"
+    $BIBTEX "$mainfile"
+  fi
+fi
+
+# if this is the last run, convert to ps, then to pdf
+if [ $runNumber -eq $nCompile ]
+then
+  # Run dvips
+    echo "***------------------------------------------------------------"
+  echo "*** Creating DVI file from $mainfile..."
+    echo "***------------------------------------------------------------"
+  $DVIPS "$mainfile"
+
+  # Optionally do ps2pdf
+  if [ $doPS2PDF -eq 1 ]
+  then
+    echo "***------------------------------------------------------------"
+    echo "*** Converting ps to pdf..."
+    echo "***------------------------------------------------------------"
+    $PS2PDF "$mainfile.ps"
+  fi
 fi
 
 echo "*** UpTeX.engine has completed."

@@ -43,7 +43,6 @@
   // Typesetting
 	NSFileHandle *typesetFileHandle;
   NSPipe *pipe;
-	int compilationsDone;
 	BOOL abortCompile;
   int procId;
 }

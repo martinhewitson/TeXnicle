@@ -14,7 +14,7 @@
 
 if [ $# -lt 2 ]
 then
-echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex>)"
+echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number>)"
 exit
 fi
 
@@ -31,39 +31,35 @@ outputDir=$2
 nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
+runNumber=$6
 
 echo "****************************"
-echo "*** Compiling $mainfile"
-echo "*** Output dir $outputDir"
-echo "*** Ncompile $nCompile"
-echo "*** Do bibtex $doBibtex"
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
+echo "***  N typeset: $nCompile"
+echo "***  Do bibtex: $doBibtex"
 echo "****************************"
 
 # Go to the working directory
 cd "$outputDir"
 
-# Do the correct number of typesetting runs
-count=1
-while [ $count -le $nCompile ]
-do
-  echo " "
-  echo "***------------------------------------------------------------"
-  echo "*** Run $count..."
-  echo "***------------------------------------------------------------"
-  $ENGINE -synctex=1 -file-line-error -interaction=nonstopmode "$mainfile"
+echo " "
+echo "***------------------------------------------------------------"
+echo "*** Run $runNumber of $nCompile..."
+echo "***------------------------------------------------------------"
+$ENGINE -synctex=1 -file-line-error -interaction=nonstopmode "$mainfile"
 
-  # if this is after the first run, run bibtex if requested
-  if [ $count -eq 1 ]
+# if this is after the first run, run bibtex if requested
+if [ $runNumber -eq 1 ]
+then
+  if [ $doBibtex -eq 1 ]
   then
-    if [ $doBibtex -eq 1 ]
-    then
-      echo "*** Running bibtex..."
-      $BIBTEX "$mainfile"
-    fi
+    echo "***------------------------------------------------------------"
+    echo "*** Running bibtex..."
+    echo "***------------------------------------------------------------"
+    $BIBTEX "$mainfile"
   fi
-
-  count=$(( $count + 1 ))
-done
+fi
 
 echo "*** pdflatex.engine has completed."
 
