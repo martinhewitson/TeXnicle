@@ -79,6 +79,11 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
   [self reload];
 }
 
+- (IBAction)openLog:(id)sender
+{
+  [[NSWorkspace sharedWorkspace] openFile:self.log.logpath];
+}
+
 - (IBAction)changeSelection:(id)sender
 {
   self.showInfos = [self.selectionControl isSelectedForSegment:0];

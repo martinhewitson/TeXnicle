@@ -15,6 +15,7 @@
 - (id) initWithLogFileAtURL:(NSURL*)aURL;
 
 @property (strong) NSMutableArray *logfiles;
+@property (copy) NSString *logpath;
 
 - (void) generateLogTree;
 - (void) setLogFile:(NSString*)aPath;

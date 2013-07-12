@@ -40,6 +40,7 @@
 
 - (void) setLogFile:(NSString*)aPath
 {
+  self.logpath = aPath;
   MHFileReader *fr = [[MHFileReader alloc] init];
   self.logtext = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:aPath]];
   [self generateLogTree];
