@@ -19,6 +19,7 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
 @property (assign) IBOutlet NSOutlineView *outlineView;
 @property (assign) IBOutlet NSSegmentedControl *selectionControl;
 @property (assign) IBOutlet MHStrokedFiledView *toolbarView;
+@property (assign) IBOutlet HHValidatedButton *openLogButton;
 
 @property (assign) BOOL showInfos;
 @property (assign) BOOL showWarnings;
@@ -81,7 +82,17 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
 
 - (IBAction)openLog:(id)sender
 {
-  [[NSWorkspace sharedWorkspace] openFile:self.log.logpath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:self.log.logpath]) {
+    [[NSWorkspace sharedWorkspace] openFile:self.log.logpath];
+  } else {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Log file doesn't exist"
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"The log file doesn't exist at %@. Maybe you have automatic deleting of auxiliary files activated?", self.log.logpath];
+    [alert runModal];
+  }
 }
 
 - (IBAction)changeSelection:(id)sender
@@ -108,6 +119,20 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
     [nc postNotificationName:TPTeXLogViewDidSelectItemNotification object:self userInfo:dict];
   }
   
+}
+
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
+{
+  if (anItem == self.openLogButton) {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:self.log.logpath]) {
+      return YES;
+    } else {
+      return NO;
+    }
+  }
+  
+  return NO;
 }
 
 #pragma mark -

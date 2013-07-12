@@ -10,6 +10,7 @@
 #import "TPLogItem.h"
 #import "TPParsedLog.h"
 #import "TPTeXLogViewController.h"
+#import "HHValidatedButton.h"
 
 extern NSString * const TPTeXLogViewDidSelectItemNotification;
 
@@ -23,7 +24,7 @@ extern NSString * const TPTeXLogViewDidSelectItemNotification;
 
 @end
 
-@interface TPTeXLogViewController : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate, TPTeXLogViewDelegate>
+@interface TPTeXLogViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDataSource, NSOutlineViewDelegate, TPTeXLogViewDelegate>
 
 @property (assign) id<TPTeXLogViewDelegate> delegate;
 @property (nonatomic, strong) TPParsedLog *log;
