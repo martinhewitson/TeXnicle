@@ -44,7 +44,8 @@
 {
   NSString *str = nil;
   //NSString *expr = @"\\.[^.]+[\\s]*";
-  NSString *expr = @"\\([/|\\.|\\w].*?\\.[^.\\W]+[\\s]*";
+//  NSString *expr = @"\\([/|\\.|\\w].*?\\.[^.\\W]+[\\s]*";
+  NSString *expr = @"\\([/|\\.].*?\\.[^.\\W]+[\\s]*";
   
 //  NSLog(@"Expr: [%@]", expr);
   
@@ -65,7 +66,7 @@
     }
   }
   
-  return str;
+  return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 @end
