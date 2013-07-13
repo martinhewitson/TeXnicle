@@ -41,7 +41,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSCustomView" id="799787401">
@@ -53,6 +53,8 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{303, 2}, {103, 17}}</string>
 								<reference key="NSSuperview" ref="799787401"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="696715316">
@@ -80,6 +82,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{6, 2}, {66, 19}}</string>
 								<reference key="NSSuperview" ref="799787401"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="549270511"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
@@ -94,7 +97,7 @@
 											<double key="NSSegmentItemWidth">20</double>
 											<object class="NSCustomResource" key="NSSegmentItemImage">
 												<string key="NSClassName">NSImage</string>
-												<string key="NSResourceName">log_info</string>
+												<string key="NSResourceName">log_info_template</string>
 											</object>
 											<string key="NSSegmentItemLabel"/>
 											<bool key="NSSegmentItemSelected">YES</bool>
@@ -104,7 +107,7 @@
 											<double key="NSSegmentItemWidth">19</double>
 											<object class="NSCustomResource" key="NSSegmentItemImage">
 												<string key="NSClassName">NSImage</string>
-												<string key="NSResourceName">log_warning</string>
+												<string key="NSResourceName">log_warning_template</string>
 											</object>
 											<string key="NSSegmentItemLabel"/>
 											<int key="NSSegmentItemTag">1</int>
@@ -115,7 +118,7 @@
 											<double key="NSSegmentItemWidth">19</double>
 											<object class="NSCustomResource" key="NSSegmentItemImage">
 												<string key="NSClassName">NSImage</string>
-												<string key="NSResourceName">log_error</string>
+												<string key="NSResourceName">log_error_template</string>
 											</object>
 											<bool key="NSSegmentItemSelected">YES</bool>
 											<int key="NSSegmentItemImageScaling">0</int>
@@ -130,6 +133,7 @@
 						</array>
 						<string key="NSFrame">{{0, -1}, {414, 22}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="902471008"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSClassName">MHStrokedFiledView</string>
@@ -147,6 +151,7 @@
 										<int key="NSvFlags">4352</int>
 										<string key="NSFrameSize">{412, 426}</string>
 										<reference key="NSSuperview" ref="355330875"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="249675459"/>
 										<string key="NSReuseIdentifierKey">_NS:13</string>
 										<bool key="NSEnabled">YES</bool>
@@ -250,6 +255,7 @@
 								</array>
 								<string key="NSFrame">{{1, 1}, {412, 426}}</string>
 								<reference key="NSSuperview" ref="253695744"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="611449563"/>
 								<string key="NSReuseIdentifierKey">_NS:11</string>
 								<reference key="NSDocView" ref="611449563"/>
@@ -261,6 +267,7 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 								<reference key="NSSuperview" ref="253695744"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1038762136"/>
 								<string key="NSReuseIdentifierKey">_NS:58</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -273,6 +280,7 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 								<reference key="NSSuperview" ref="253695744"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="799787401"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -284,6 +292,7 @@
 						</array>
 						<string key="NSFrame">{{0, 20}, {414, 428}}</string>
 						<reference key="NSSuperview" ref="1005"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="355330875"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSsFlags">133682</int>
@@ -297,6 +306,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{414, 448}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="253695744"/>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -532,9 +543,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="log_error">{512, 512}</string>
-			<string key="log_info">{512, 512}</string>
-			<string key="log_warning">{512, 512}</string>
+			<string key="log_error_template">{512, 512}</string>
+			<string key="log_info_template">{512, 512}</string>
+			<string key="log_warning_template">{512, 512}</string>
 		</dictionary>
 	</data>
 </archive>
