@@ -68,6 +68,24 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
   
   [self.outlineView setDoubleAction:@selector(handleOutlineViewDoubleClick)];
   [self.outlineView setTarget:self];
+  
+  NSImage *image = nil;
+
+  // info 0
+  image = [NSImage imageNamed:@"log_info_template.icns"];
+  [image setTemplate:YES];
+  [self.selectionControl setImage:image forSegment:0];
+
+  // warning 1
+  image = [NSImage imageNamed:@"log_warning_template.icns"];
+  [image setTemplate:YES];
+  [self.selectionControl setImage:image forSegment:1];
+
+  // error 2
+  image = [NSImage imageNamed:@"log_error_template.icns"];
+  [image setTemplate:YES];
+  [self.selectionControl setImage:image forSegment:2];
+  
 
   [self updateSelectionControls];
 }
