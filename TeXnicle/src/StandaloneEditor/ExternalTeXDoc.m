@@ -395,10 +395,12 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   for (NSToolbarItem *item in items) {
     //    NSLog(@"%@: %@", [item itemIdentifier], NSStringFromRect([[item view] frame]));
     if ([[item itemIdentifier] isEqualToString:@"MiniConsole"]) {
+      [item setMinSize:NSMakeSize(400, 39)];
       NSBox *box = (NSBox*)[item view];
       [box setContentView:self.miniConsole.view];
     }
   }
+  
   [self.miniConsole message:@"Welcome to TeXnicle."];
   
   // register the mini console
@@ -1932,6 +1934,11 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
   [self.miniConsole setAnimating:NO];
+  
+  // parse log file
+  NSString *logfile = [[self documentToCompile] stringByAppendingPathExtension:@"log"];
+  [self.embeddedConsoleViewController loadLogAtPath:logfile];
+  
   NSDictionary *userinfo = [aNote userInfo];
   if ([[userinfo valueForKey:@"success"] boolValue]) {
     [self showDocument];
@@ -2175,7 +2182,7 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 
 -(NSString*)documentToCompile
 {
-  return [[[self fileURL] path] stringByDeletingPathExtension];  
+  return [[[[self fileURL] path] stringByDeletingPathExtension] stringByStandardizingPath];
 }
 
 -(NSString*)workingDirectory
@@ -2239,20 +2246,30 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 //  NSLog(@"  source file: %@", sourcefile);
 //  NSLog(@"  my path: %@", [self fileURL]);  
 //  NSLog(@"  my last path component: %@", [[self fileURL] lastPathComponent]);
-  if ([sourcefile isEqualToString:[[self fileURL] lastPathComponent]]) {
-//    NSLog(@"    source file is me");
-    [self.texEditorViewController.textView goToLine:lineNumber];
+  [self selectLine:lineNumber inFileAtPath:sourcefile];
+}
+
+
+- (BOOL) selectLine:(NSInteger)lineNumber inFileAtPath:(NSString*)sourcefile
+{
+  //NSLog(@"Going to line %ld in [%@]", lineNumber, [sourcefile stringByStandardizingPath]);
+  //NSLog(@" my file is %@", [[self fileURL] lastPathComponent]);
+  if ([[sourcefile stringByStandardizingPath] isEqualToString:[[self fileURL] lastPathComponent]]) {
+    //NSLog(@"    source file is me");
+    if (lineNumber >= 0 && lineNumber != NSNotFound) {
+      [self.texEditorViewController.textView goToLine:lineNumber];
+    }
   } else {
-//    NSLog(@"    opening source fil");
+    //NSLog(@"    opening source file");
     NSURL *path = nil;
     // open the file in a new document
     if ([sourcefile isAbsolutePath]) {
-//      NSLog(@"     source file is absolute path");
+      //      NSLog(@"     source file is absolute path");
       path = [NSURL fileURLWithPath:sourcefile];
     } else {
       path = [[[self fileURL] URLByDeletingLastPathComponent] URLByAppendingPathComponent:sourcefile];
     }
-//    NSLog(@"        opening %@", path);
+    //    NSLog(@"        opening %@", path);
     [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:path display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
       // do stuff
       ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
@@ -2260,11 +2277,8 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
     }];
   }
   
-  // release synctex controller
+  return YES;
 }
-
-
-
 
 - (NSString*)documentPathForViewer:(PDFViewerController *)aPDFViewer
 {
@@ -2862,6 +2876,28 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   [self.documentReport startGeneration];  
 }
 
+#pragma mark -
+#pragma mark Console delegate
+
+- (BOOL)texlogview:(TPTeXLogViewController*)logview shouldShowEntriesForFile:(NSString*)aFile
+{
+  return YES;
+}
+
+- (void)texlogview:(TPTeXLogViewController*)logview didSelectLogItem:(TPLogItem*)aLog
+{
+  if ([self selectLine:aLog.linenumber inFileAtPath:aLog.filepath] == NO) {
+    NSURL *url = [NSURL fileURLWithPath:aLog.filepath];
+    [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES completionHandler:^(NSDocument *document, BOOL documentWasAlreadyOpen, NSError *error) {
+      // do stuff
+      ExternalTeXDoc *doc = (ExternalTeXDoc*)document;
+      if (aLog.linenumber != NSNotFound && aLog.linenumber >= 0) {
+        [doc.texEditorViewController.textView performSelector:@selector(goToLineWithNumber:) withObject:@(aLog.linenumber) afterDelay:0];
+      }
+    }];
+    
+  }
+}
 
 
 
