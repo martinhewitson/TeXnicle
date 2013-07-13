@@ -54,6 +54,7 @@
            @"Underfull \\hbox" : @(TPLogWarning),
            @"Error:"   : @(TPLogError),
            @"Emergency stop."   : @(TPLogError),
+           @"Missing $ inserted" : @(TPLogError),
            @"! TeX capacity exceeded" : @(TPLogError)
            };
 }
