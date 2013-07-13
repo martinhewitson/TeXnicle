@@ -218,6 +218,9 @@
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
 		256C84CD14E7B896007E4FBA /* MHSynctexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C84CC14E7B896007E4FBA /* MHSynctexController.m */; };
 		256C94D613EE591300AD8E3A /* Bookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 256C94D513EE591300AD8E3A /* Bookmark.m */; };
+		256DEE1717914307006E24E9 /* log_warning_template.icns in Resources */ = {isa = PBXBuildFile; fileRef = 256DEE1617914301006E24E9 /* log_warning_template.icns */; };
+		256DEE1A17917A65006E24E9 /* log_error_template.icns in Resources */ = {isa = PBXBuildFile; fileRef = 256DEE1817917A65006E24E9 /* log_error_template.icns */; };
+		256DEE1B17917A65006E24E9 /* log_info_template.icns in Resources */ = {isa = PBXBuildFile; fileRef = 256DEE1917917A65006E24E9 /* log_info_template.icns */; };
 		25701AF11505F9F50097E8DA /* TPProjectTemplateListViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701AF01505F9F50097E8DA /* TPProjectTemplateListViewer.m */; };
 		25701AF41505FA090097E8DA /* TPProjectTemplateListViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25701AF31505FA090097E8DA /* TPProjectTemplateListViewer.xib */; };
 		25717DA91392D16200955620 /* palette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25717C731392D16200955620 /* palette.plist */; };
@@ -965,6 +968,9 @@
 		256C84CC14E7B896007E4FBA /* MHSynctexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSynctexController.m; sourceTree = "<group>"; };
 		256C94D413EE591300AD8E3A /* Bookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookmark.h; sourceTree = "<group>"; };
 		256C94D513EE591300AD8E3A /* Bookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookmark.m; sourceTree = "<group>"; };
+		256DEE1617914301006E24E9 /* log_warning_template.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_warning_template.icns; sourceTree = "<group>"; };
+		256DEE1817917A65006E24E9 /* log_error_template.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_error_template.icns; sourceTree = "<group>"; };
+		256DEE1917917A65006E24E9 /* log_info_template.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = log_info_template.icns; sourceTree = "<group>"; };
 		25701AEF1505F9F50097E8DA /* TPProjectTemplateListViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateListViewer.h; sourceTree = "<group>"; };
 		25701AF01505F9F50097E8DA /* TPProjectTemplateListViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateListViewer.m; sourceTree = "<group>"; };
 		25701AF31505FA090097E8DA /* TPProjectTemplateListViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateListViewer.xib; sourceTree = "<group>"; };
@@ -2914,6 +2920,9 @@
 		25DB591A1778BB9F000383AF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				256DEE1817917A65006E24E9 /* log_error_template.icns */,
+				256DEE1917917A65006E24E9 /* log_info_template.icns */,
+				256DEE1617914301006E24E9 /* log_warning_template.icns */,
 				25DB59751778C689000383AF /* error_template.icns */,
 				25DB591C1778BB9F000383AF /* log_error.icns */,
 				25DB591F1778BB9F000383AF /* log_info.icns */,
@@ -3173,6 +3182,7 @@
 				251D899F13EFAE0600301B6D /* bookmarksTabBarImage.icns in Resources */,
 				25C0177A13F195E8003E6FC6 /* bookmark.icns in Resources */,
 				2523C7E6140548B400A47297 /* latex.engine in Resources */,
+				256DEE1717914307006E24E9 /* log_warning_template.icns in Resources */,
 				25AAC8EA1407C45C00B61B1A /* pdflatex.engine in Resources */,
 				25AAC8EE1407E65400B61B1A /* context.engine in Resources */,
 				258594031408BD6500C970A1 /* prefsTabBarImageDepressed.icns in Resources */,
@@ -3335,6 +3345,7 @@
 				25D10F21176F00AF004C40AE /* SafariIWAddTabButton.png in Resources */,
 				25D10F22176F00AF004C40AE /* SafariIWATClose.png in Resources */,
 				25D10F23176F00AF004C40AE /* SafariIWATClose@2x.png in Resources */,
+				256DEE1B17917A65006E24E9 /* log_info_template.icns in Resources */,
 				25D10F24176F00AF004C40AE /* SafariIWATClosePressed.png in Resources */,
 				25D10F25176F00AF004C40AE /* SafariIWATClosePressed@2x.png in Resources */,
 				25D10F26176F00AF004C40AE /* SafariIWATCloseRollover.png in Resources */,
@@ -3344,6 +3355,7 @@
 				25D10F2A176F00AF004C40AE /* SafariIWATLeftCap@2x.png in Resources */,
 				25D10F2B176F00AF004C40AE /* SafariIWATRightCap.png in Resources */,
 				25D10F2C176F00AF004C40AE /* SafariIWATRightCap@2x.png in Resources */,
+				256DEE1A17917A65006E24E9 /* log_error_template.icns in Resources */,
 				25D10F2D176F00AF004C40AE /* SafariIWBG.png in Resources */,
 				25D10F2E176F00AF004C40AE /* SafariIWITClose.png in Resources */,
 				25D10F2F176F00AF004C40AE /* SafariIWITClose@2x.png in Resources */,
@@ -3878,7 +3890,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3900,7 +3912,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3925,7 +3937,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3956,7 +3968,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
