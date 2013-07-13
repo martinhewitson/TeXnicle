@@ -3856,18 +3856,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   sourcefile = [sourcefile stringByStandardizingPath];
   [self selectLine:lineNumber inFileAtPath:sourcefile];
-//  if ([sourcefile isAbsolutePath]) {
-////    NSLog(@"    source file is absolute path");
-//    sourcefile = [self.project.folder relativePathTo:sourcefile];
-//  }
-////  NSLog(@"  source file: %@", sourcefile);
-//  FileEntity *file = [self.project fileWithPath:sourcefile];
-////  NSLog(@"    got project file: %@", file);
-//  [self.openDocuments addDocument:file select:YES];
-//  if (file) {
-//    [self.openDocuments selectTabForFile:file];
-//    [self.texEditorViewController.textView goToLine:(int)lineNumber];
-//  }
 }
 
 - (BOOL) selectLine:(NSInteger)lineNumber inFileAtPath:(NSString*)sourcefile
