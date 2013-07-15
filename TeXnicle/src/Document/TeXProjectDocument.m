@@ -153,6 +153,8 @@
 
 @property (strong) TPDocumentReportWindowController *documentReport;
 
+@property (strong) TPQuickJumpViewController *quickJumpController;
+
 @property (copy) NSString *miniConsoleLastMessage;
 
 @end
@@ -1580,7 +1582,18 @@
 #pragma mark -
 #pragma mark Actions
 
-
+- (IBAction)showQuickJump:(id)sender
+{
+  NSView *view = self.mainWindow.contentView;
+  NSRect frame = view.frame;
+  NSPoint point = NSMakePoint(frame.size.width/2.0, frame.size.height / 3.0);
+	NSPoint wp = [view convertPoint:point toView:nil];
+  
+  self.quickJumpController = [[TPQuickJumpViewController alloc] initWithDelegate:self
+                                                                         atPoint:wp inParentWindow:[view window]];
+  
+  [self.quickJumpController showPopup];
+}
 
 - (IBAction)togglePanelFocus:(id)sender
 {
@@ -4610,6 +4623,35 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     }];
     
   }
+}
+
+#pragma mark -
+#pragma mark Quickjump delegate
+
+
+- (void) quickjump:(TPQuickJumpViewController *)quickjump didSelectItem:(id)anItem
+{
+  if (anItem) {
+    [self.openDocuments addAndSelectDocument:anItem];
+  }
+}
+
+- (NSArray*)quickjumpItemsForDisplay:(TPQuickJumpViewController *)quickjump
+{
+  if (self.quickJumpController == quickjump) {
+    
+    NSMutableArray *items = [NSMutableArray array];
+    for (ProjectItemEntity *item in self.project.items) {
+      
+      if ([item isKindOfClass:[FileEntity class]]) {
+        [items addObject:item];
+      }
+    }
+    
+    return items;
+  }
+  
+  return @[];
 }
 
 

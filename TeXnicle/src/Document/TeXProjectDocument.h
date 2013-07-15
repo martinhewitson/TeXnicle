@@ -56,6 +56,7 @@
 #import "TPCitationsViewController.h"
 #import "TPNewCommandsViewController.h"
 #import "TPDocumentReportWindowController.h"
+#import "TPQuickJumpViewController.h"
 
 #import "TPMetadataViewController.h"
 #import "TPMetadataManager.h"
@@ -73,7 +74,7 @@ TPWarningsViewDelegate, TPProjectOutlineDelegate, TPSpellCheckerListingDelegate,
 PDFViewerDelegate, NSToolbarDelegate, NSUserInterfaceValidations, TPEngineSettingsDelegate, 
 NSMenuDelegate, TPEngineManagerDelegate, BookmarkManagerDelegate, PDFViewerControllerDelegate,
 PaletteControllerDelegate, TPLibraryControllerDelegate, TPFileMonitorDelegate, 
-FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate, TPDocumentReporterDelegate, TPConsoleDelegate> {
+FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSWindowDelegate, TPDocumentReporterDelegate, TPConsoleDelegate, QuickJumpDelegate> {
 
 @private
     
@@ -117,6 +118,8 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 + (NSManagedObjectContext*) managedObjectContextForStoreURL: (NSURL*) storeURL;
 
 - (void) updateStatusView;
+
+- (IBAction)showQuickJump:(id)sender;
 
 - (void) toggleStatusBar:(BOOL)animate;
 
