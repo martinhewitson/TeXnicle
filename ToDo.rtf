@@ -2,8 +2,7 @@
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
-\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red141\green17\blue0;\red0\green110\blue173;
-}
+\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red0\green110\blue173;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
@@ -24,9 +23,6 @@ To Do\
 	- on engine settings controller we have a tableview which properly displays variables and type/value\
 	- in engine script we have an XML fragment to define the variables that the script supports\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx18280\pardirnatural
-\cf0 \
-+ Make a 'dynamic wrap' option where the text wraps to the editor width.\
-\pard\pardeftab720
 \cf0 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 + Store size of standalone pdf window for a project.\
@@ -65,8 +61,6 @@ Version 2.1\
 	- then texeditorcontroller should have an array of textviews which these various methods deal with\
 	- texeditorcontroller has an active textview (one with current focus)\
 \
-+ Better parsing of typesetting output into error and warning objects. Add ability to jump to errors.\
-\
 \
 ----------------------------------\
 \
@@ -74,14 +68,12 @@ Version 2.1\
 \
 + Editor for shortcut keys.\
 \
-+ Soft-wrap at view boundary\
-\
 + Menu item to bibtex main file.\
 \
 + sync library code-clippings with iCloud\
 \
-\
 + Themes for colors\
+    - should check for some standard format used by other editors\
 \
 + Add a Terminal button to launch a terminal in the project's directory\
 \
@@ -184,12 +176,7 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 {\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc7 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
 \pard\pardeftab720
 
-\f2 \cf8 \
-\
-\pard\pardeftab720
-
-\f3 \cf6 Greats improvements you ve done! I just got a bug when using \\cite the list of refs is not updated as the file gets new entries.\
-it appears that pdf page number are wrong when I had 4 pages and now only one it still display 1 of 4 pages.\
+\f3 \cf6 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 \
@@ -215,14 +202,11 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf9 NSRange\cf0 )indentRangeForLineAtIndex:(\cf9 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf8 NSRange\cf0 )indentRangeForLineAtIndex:(\cf8 NSInteger\cf0 )loc\
 \
 \
 + Menu options to show/hide jump bar\
 	- later jumpbar should be per document\
-\
-+ Quick-jump to other files\
-	- pop up a window with a list of files in the project and search field to select the file\
 \
 \pard\pardeftab720
 
@@ -235,25 +219,25 @@ For example:\
 \
 \pard\pardeftab720
 
-\f2 \cf9 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.
+\f2 \cf8 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.
 \f0 \cf0 \
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
 \
-Version 2.0.9\
--------------\
+Version 2.1\
+-----------\
 \
 + Improvements to look and feel\
-+ Documents now remember the live update setting\
-+ Documents now remember the pdf thumbnails setting\
-+ [Beta] A new parsed log file view is available on the integrated console. Double-clicking \
-         detected info, warnings and errors will jump to that location in the source code. Parsing\
-         the many flavours of log files is challenging, so you millage may vary.\
++ New "Jump to file" menu option offers a quick way to jump between files in projects.\
++ A new parsed log file view is available on the integrated console. Double-clicking \
+  detected info, warnings and errors will jump to that location in the source code. Parsing\
+  the many flavours of log files is challenging, so you millage may vary. Please report any\
+  issues.\
 + Changes to engine handling:\
-	- engines are now passed an additional parameter (6th) which is the current typesetting run number. As \
-    such, TeXnicle is now responsible for doing repeated typesetting runs, rather than the engine. This\
-    allows for finer flow control, error handling and provides a more robust infrastructure.\
-  - built-in engines have been updated to perform a single typesetting run. Additional engine features \
+	- Engines are now passed an additional parameter (6th argument) which is the current typesetting run \
+    number. As such, TeXnicle is now responsible for doing repeated typesetting runs, rather than the \
+    engine. This allows for finer flow control, error handling and provides a more robust infrastructure.\
+  - The built-in engines have been updated to perform a single typesetting run. Additional engine features \
     (like running bibtex) then depend on that run number. Custom engines may need to be updated.\
 + The document outline now supports custom section commands for each document level. These can be \
   set in the new 'Outline' preferences tab. The outline colors are now set here too.\
@@ -261,7 +245,11 @@ Version 2.0.9\
 	- Added option to enable/disable jumpbar in general preferences.\
 	- Added option to disable linenumbers in jumpbar (can lead to performance improvements in large files)\
 	- Optimised section list building in jumpbar.\
-+ Added a new wrapping mode to wrap to the editor window width.\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Documents now remember the live update setting\
++ Documents now remember the pdf thumbnails setting\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Added a new wrapping mode to wrap to the editor window width.\
 + Added support for \\addbibresource\{\} command for citation completion.\
 + Added support for subfiles package.\
 + Added support for \\component command in document outline for ConTeXt users.\

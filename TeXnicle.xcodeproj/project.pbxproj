@@ -339,6 +339,9 @@
 		25AD69EC140E974100C131A6 /* MHFileReader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25AD69EA140E974100C131A6 /* MHFileReader.xib */; };
 		25AF2CBB14EE51A000A7152B /* Settings+ProjectTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AF2CBA14EE51A000A7152B /* Settings+ProjectTemplate.m */; };
 		25B2000B147F8CED00890B09 /* MHThreePaneSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B2000A147F8CED00890B09 /* MHThreePaneSplitViewController.m */; };
+		25B244F21791AEE90005344C /* TPQuickJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B244F01791AEE90005344C /* TPQuickJumpViewController.m */; };
+		25B244F31791AEE90005344C /* TPQuickJumpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B244F11791AEE90005344C /* TPQuickJumpViewController.xib */; };
+		25B244F61791B9570005344C /* TPQuickJumpSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B244F51791B9570005344C /* TPQuickJumpSearchField.m */; };
 		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
 		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
@@ -1163,6 +1166,11 @@
 		25AF2CBA14EE51A000A7152B /* Settings+ProjectTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Settings+ProjectTemplate.m"; sourceTree = "<group>"; };
 		25B20009147F8CED00890B09 /* MHThreePaneSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHThreePaneSplitViewController.h; path = ../Document/MHThreePaneSplitViewController.h; sourceTree = "<group>"; };
 		25B2000A147F8CED00890B09 /* MHThreePaneSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHThreePaneSplitViewController.m; path = ../Document/MHThreePaneSplitViewController.m; sourceTree = "<group>"; };
+		25B244EF1791AEE90005344C /* TPQuickJumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPQuickJumpViewController.h; sourceTree = "<group>"; };
+		25B244F01791AEE90005344C /* TPQuickJumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPQuickJumpViewController.m; sourceTree = "<group>"; };
+		25B244F11791AEE90005344C /* TPQuickJumpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPQuickJumpViewController.xib; sourceTree = "<group>"; };
+		25B244F41791B9570005344C /* TPQuickJumpSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPQuickJumpSearchField.h; sourceTree = "<group>"; };
+		25B244F51791B9570005344C /* TPQuickJumpSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPQuickJumpSearchField.m; sourceTree = "<group>"; };
 		25BB152315B41770007A7FDF /* infoTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImage.icns; sourceTree = "<group>"; };
 		25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImageDepressed.icns; sourceTree = "<group>"; };
@@ -1614,6 +1622,7 @@
 		250772F6138E5D81000F1118 /* TeXnicle */ = {
 			isa = PBXGroup;
 			children = (
+				25B244EE1791AE4E0005344C /* JumpToFile */,
 				25DB59651778C1A3000383AF /* InspectorTabBar */,
 				25DB59191778BB9F000383AF /* TeXLogParser */,
 				25D10E1C176F00AE004C40AE /* MMTabBarView */,
@@ -2557,6 +2566,18 @@
 			path = FileMonitor;
 			sourceTree = "<group>";
 		};
+		25B244EE1791AE4E0005344C /* JumpToFile */ = {
+			isa = PBXGroup;
+			children = (
+				25B244EF1791AEE90005344C /* TPQuickJumpViewController.h */,
+				25B244F01791AEE90005344C /* TPQuickJumpViewController.m */,
+				25B244F11791AEE90005344C /* TPQuickJumpViewController.xib */,
+				25B244F41791B9570005344C /* TPQuickJumpSearchField.h */,
+				25B244F51791B9570005344C /* TPQuickJumpSearchField.m */,
+			);
+			path = JumpToFile;
+			sourceTree = "<group>";
+		};
 		25BB153515B42378007A7FDF /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -3252,6 +3273,7 @@
 				2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */,
 				251D30E715F39B67002C52DB /* Texnicle-User-Manual.pdf in Resources */,
 				252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */,
+				25B244F31791AEE90005344C /* TPQuickJumpViewController.xib in Resources */,
 				252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */,
 				252E12231621728F0041B2BE /* TeXnicle.icns in Resources */,
 				252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */,
@@ -3474,6 +3496,7 @@
 				257B472A138E5DE500ED02C4 /* ProjectEntity.m in Sources */,
 				257B472B138E5DE500ED02C4 /* ProjectItemEntity.m in Sources */,
 				257B472C138E5DE500ED02C4 /* FolderEntity.m in Sources */,
+				25B244F21791AEE90005344C /* TPQuickJumpViewController.m in Sources */,
 				257B472D138E5DE500ED02C4 /* FileEntity.m in Sources */,
 				257B472E138E5DE500ED02C4 /* TeXFileEntity.m in Sources */,
 				257B477B138E5E9000ED02C4 /* NSArray+Color.m in Sources */,
@@ -3517,6 +3540,7 @@
 				25152999138F804D00307054 /* OpenDocumentsManager.m in Sources */,
 				25152A20138F832500307054 /* ConsoleController.m in Sources */,
 				25152A23138F834000307054 /* NSFileManager+TeXnicle.m in Sources */,
+				25B244F61791B9570005344C /* TPQuickJumpSearchField.m in Sources */,
 				25194920138F9830007029E5 /* MHControlsTabBarController.m in Sources */,
 				2519492B138FA840007029E5 /* MHToolbarBackgroundView.m in Sources */,
 				25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */,
