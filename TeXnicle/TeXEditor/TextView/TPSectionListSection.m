@@ -29,7 +29,7 @@
     self.isTex = isTex;
     self.isMarker = NO;
     if (isTex) {
-      self.regexp = [NSString stringWithFormat:@"\\\\%@.*(\\n)", tag];
+      self.regexp = [NSString stringWithFormat:@"\\\\%@\\{.*?(\\n)", tag];
     } else {
       self.regexp = [NSString stringWithFormat:@"%@.*(\\n)", tag];
     }
