@@ -980,17 +980,33 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
+    //NSLog(@"Soft wrap");
     [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
+    [self setHorizontallyResizable:YES];
+    [self setVerticallyResizable:YES];
   }	else if (wrapStyle == TPNoWrap) {
+    //NSLog(@"No wrap");
     [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
+    [self setHorizontallyResizable:YES];
+    [self setVerticallyResizable:YES];
   }	else if (wrapStyle == TPWindowWrap) {
-    [textContainer setWidthTracksTextView:YES];
+    //NSLog(@"Window wrap");
+
+    [self setVerticallyResizable:YES];
+    [self setHorizontallyResizable: NO];
+    [self setAutoresizingMask: NSViewWidthSizable];
+    [textContainer setWidthTracksTextView: YES];
+    [self setFrameSize: [[self enclosingScrollView] contentSize]];
+    
   } else {
+    //NSLog(@"Hard wrap");
     // set large size - hard wrap is handled in the wrapLine
     [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
+    [self setHorizontallyResizable:YES];
+    [self setVerticallyResizable:YES];
   }
   [self setNeedsDisplay:YES];
 }
