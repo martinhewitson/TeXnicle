@@ -1,8 +1,48 @@
-<h2>TeXnicle 2.0.8</h2>
-<p><ul>
-  <li>Added preferences for setting the cursor color.</li>
-  <li>Fixed a bug which resulted in crashed when doing "Save As" on an empty project.</li>
-  <li>Fixed a bug which stopped the page count on the pdf viewer being updated.</li>
-  <li>Fixed a bug which could stop bibliography references appearing the autocomplete list.</li>
-  <li>Fixed a bug which could cause the PDF search field to lose focus during the search.</li>
-</ul></p>
+<h2>TeXnicle 2.1</h2>
+<p>
+This version of TeXnicle includes improvements to the look and feel, some nice new features, and a
+large number of bug fixes.
+<h3>New Features</h3>
+<ul>
+  <li>New "Jump to file" menu option offers a quick way to jump between files in projects.</li>
+  <li>A new parsed log file view is available on the integrated console. Double-clicking
+    detected info, warnings and errors will jump to that location in the source code. Parsing
+    the many flavours of log files is challenging, so you millage may vary. Please report any
+    issues.</li>
+  <li>Changes to engine handling:
+    <ul>
+      <li>Engines are now passed an additional parameter (6th argument) which is the current typesetting run
+        number. As such, TeXnicle is now responsible for doing repeated typesetting runs, rather than the
+        engine. This allows for finer flow control, error handling and provides a more robust infrastructure.</li>
+      <li>The built-in engines have been updated to perform a single typesetting run. Additional engine features
+        (like running bibtex) then depend on that run number. <b>Note: Custom engines may need to be updated</b>.</li>
+    </ul></li>
+  <li>The document outline now supports custom section commands for each document level. These can be
+    set in the new 'Outline' preferences tab. The outline colors are now set here too.</li>
+  <li>Jump bar changes:
+    <ul>
+      <li>Added option to enable/disable jumpbar in general preferences.</li>
+      <li>Added option to disable linenumbers in jumpbar (can lead to performance improvements in large files).</li>
+      <li>Optimised section list building in jumpbar.</li>
+    </ul></li>
+  <li>Documents now remember the live update setting.</li>
+  <li>Documents now remember the pdf thumbnails setting.</li>
+  <li>Added a new wrapping mode to wrap to the editor window width.</li>
+  <li>Added support for \addbibresource{} command for citation completion.</li>
+  <li>Added support for subfiles package.</li>
+  <li>Added support for \component command in document outline for ConTeXt users.</li>
+  <li>Added new menu item to hide navigator panel. And added default keyboard shortcuts for this and existing "Show Navigator" menu item.</li>
+  <li>Enhanced overflow menu in project tabbed editor, allowing tabs in the overflow to be closed or moved to the front.</li>
+</ul>
+<h3>Bug Fixes</h3>
+This release includes a large number of bug fixes, the main ones are:
+<ul>
+  <li>Bug fix: document outline now properly includes files which have a space in the name.</li>
+  <li>Bug fix for spellchecker language settings which were not always remembered on the editor.<li>
+    <li>Bug fix for expanding simple code snippets with no placeholders where the cursor would end up at the beginning of the snippet.</li>
+    <li>Bug fix for PDF printing on some 10.6.8 machines.</li>
+    <li>Bug fix: in some circumstances hiding/showing the status view below the editor was failing.</li>
+    <li>Bug fix: in some cases editing of sections could cause a crash in the document outline view.</li>
+    <li>Bug fixes in citation handling.</li>
+    </ul>
+</p>

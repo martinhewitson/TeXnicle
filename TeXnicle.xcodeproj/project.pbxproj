@@ -3051,9 +3051,10 @@
 			buildPhases = (
 				250772E8138E5D81000F1118 /* Sources */,
 				250772E9138E5D81000F1118 /* Frameworks */,
+				2570FC701794695D0028F048 /* Bump build number */,
+				25AAC8EC1407E00400B61B1A /* ShellScript */,
 				250772EA138E5D81000F1118 /* Resources */,
 				25E5024A13A09F7A004A983E /* CopyFiles */,
-				25AAC8EC1407E00400B61B1A /* ShellScript */,
 				253312E915B6FF4B00F9FD00 /* CopyFiles */,
 			);
 			buildRules = (
@@ -3110,6 +3111,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = bobsoft;
+				TargetAttributes = {
+					250772EB138E5D81000F1118 = {
+						DevelopmentTeam = 8YK29FYVK4;
+					};
+				};
 			};
 			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3469,6 +3475,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		2570FC701794695D0028F048 /* Bump build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bump build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode-build-bump.sh\n# @desc Auto-increment the build number every time the project is run.\n# @usage\n# 1. Select: your Target in Xcode\n# 2. Select: Build Phases Tab\n# 3. Select: Add Build Phase -> Add Run Script\n# 4. Paste code below in to new \"Run Script\" section\n# 5. Drag the \"Run Script\" below \"Link Binaries With Libraries\"\n# 6. Insure that your starting build number is set to a whole integer and not a float (e.g. 1, not 1.0)\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		25AAC8EC1407E00400B61B1A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3961,7 +3981,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3992,7 +4012,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
