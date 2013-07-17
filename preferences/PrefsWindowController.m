@@ -634,7 +634,8 @@
 
 - (IBAction) wrapStyleChanged:(id)sender
 {
-	if ([wrapStylePopup indexOfSelectedItem] == TPNoWrap) {
+	if ([wrapStylePopup indexOfSelectedItem] == TPNoWrap ||
+      [wrapStylePopup indexOfSelectedItem] == TPWindowWrap) {
 		[wrapWidthEdit setEnabled:NO];
 		[wrapWidthStepper setEnabled:NO];
 		[wrapAtWidthLabel setTextColor:[NSColor disabledControlTextColor]];
