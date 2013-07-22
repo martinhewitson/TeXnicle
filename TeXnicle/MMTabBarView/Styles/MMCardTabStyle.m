@@ -133,6 +133,25 @@
 #pragma mark -
 #pragma mark Determining Cell Size
 
+- (NSAttributedString *)attributedStringValueForTabCell:(MMTabBarButtonCell *)cell {
+	NSMutableAttributedString *attrStr;
+	NSString * contents = [cell title];
+	attrStr = [[NSMutableAttributedString alloc] initWithString:contents];
+	NSRange range = NSMakeRange(0, [contents length]);
+  
+	[attrStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:12.0] range:range];
+  
+	// Paragraph Style for Truncating Long Text
+	static NSMutableParagraphStyle *TruncatingTailParagraphStyle = nil;
+	if (!TruncatingTailParagraphStyle) {
+		TruncatingTailParagraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		[TruncatingTailParagraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+	}
+	[attrStr addAttribute:NSParagraphStyleAttributeName value:TruncatingTailParagraphStyle range:range];
+  
+	return attrStr;
+}
+
 - (NSRect)overflowButtonRectForTabBarView:(MMTabBarView *)tabBarView {
 
     NSRect rect = [tabBarView _overflowButtonRect];
@@ -152,34 +171,37 @@
     
     bounds.size.height -= 1.0;    
 
-    NSGradient *gradient = nil;
-    
-    if ([tabBarView isWindowActive]) {
-        // gray bar gradient
-        gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                        [NSColor colorWithCalibratedWhite:0.678 alpha:1.000],0.0f,
-                        [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],1.0f,
-                        nil];
-    } else {
-        // light gray bar gradient
-        gradient = [[NSGradient alloc] initWithColorsAndLocations:
-                [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],0.0f,
-                [NSColor colorWithCalibratedWhite:0.956 alpha:1.000],1.0f,
-                nil];
-    }
-    
-    if (gradient) {
-        [gradient drawInRect:bounds angle:270];
-    
-        }
+//    NSGradient *gradient = nil;
+  
+//    if ([tabBarView isWindowActive]) {
+//        // gray bar gradient
+//        gradient = [[NSGradient alloc] initWithColorsAndLocations:
+//                        [NSColor colorWithCalibratedWhite:0.678 alpha:1.000],0.0f,
+//                        [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],1.0f,
+//                        nil];
+//    } else {
+//        // light gray bar gradient
+//        gradient = [[NSGradient alloc] initWithColorsAndLocations:
+//                [NSColor colorWithCalibratedWhite:0.821 alpha:1.000],0.0f,
+//                [NSColor colorWithCalibratedWhite:0.956 alpha:1.000],1.0f,
+//                nil];
+//    }
+//    
+//    if (gradient) {
+//        [gradient drawInRect:bounds angle:270];
+//    
+//        }
 
     bounds = [tabBarView bounds];
+  
+  [[NSColor controlColor] set];
+  NSRectFill(bounds);
         
-        // draw additional separator line
-    [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];
-        
-    [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(bounds),NSMaxY(bounds)-0.5)
-                  toPoint:NSMakePoint(NSMaxX(bounds),NSMaxY(bounds)-0.5)];        
+//        // draw additional separator line
+//    [[NSColor colorWithCalibratedWhite:0.576 alpha:1.0] set];
+//        
+//    [NSBezierPath strokeLineFromPoint:NSMakePoint(NSMinX(bounds),NSMaxY(bounds)-0.5)
+//                  toPoint:NSMakePoint(NSMaxX(bounds),NSMaxY(bounds)-0.5)];        
 }
 
 - (void)drawBezelOfTabCell:(MMTabBarButtonCell *)cell withFrame:(NSRect)frame inView:(NSView *)controlView {
@@ -234,7 +256,7 @@
 
     capMask &= ~MMBezierShapeFillPath;
     
-    NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.576 alpha:1.0];
+    NSColor *lineColor = [NSColor colorWithCalibratedWhite:0.8 alpha:1.0];
 
     CGFloat radius = MIN(6.0, 0.5f * MIN(NSWidth(aRect), NSHeight(aRect)))-0.5;
 
@@ -245,7 +267,7 @@
 
     if ([tabBarView isWindowActive]) {
         if ([button state] == NSOnState) {
-              gradient = [[NSGradient alloc] initWithStartingColor:[NSColor whiteColor] endingColor:[NSColor colorWithDeviceWhite:0.929 alpha:1.000]];
+              gradient = [[NSGradient alloc] initWithStartingColor:[NSColor whiteColor] endingColor:[NSColor colorWithDeviceWhite:1.0 alpha:1.000]];
         } else if ([button mouseHovered]) {
         
             gradient = [[NSGradient alloc] 
