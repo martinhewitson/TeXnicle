@@ -76,10 +76,11 @@
                 <outlet property="projectTemplateManagerContainer" destination="614" id="616"/>
                 <outlet property="refCommandsTable" destination="655" id="699"/>
                 <outlet property="spacesLabel" destination="60" id="67"/>
-                <outlet property="syntaxColorsView" destination="37" id="38"/>
+                <outlet property="syntaxColorsView" destination="6wd-Dh-7k3" id="CJg-zh-CzC"/>
                 <outlet property="syntaxErrorsTable" destination="728" id="751"/>
                 <outlet property="templateEditorViewContainer" destination="603" id="604"/>
                 <outlet property="templatesView" destination="41" id="42"/>
+                <outlet property="themesEditorContainer" destination="6wd-Dh-7k3" id="4P8-U6-MLL"/>
                 <outlet property="userCommandsController" destination="316" id="326"/>
                 <outlet property="userCommandsTable" destination="297" id="328"/>
                 <outlet property="userCommandsView" destination="292" id="323"/>
@@ -637,7 +638,7 @@
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="2.50" state="on" id="1023">
+                                <menuItem title="2.50" id="1023">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
@@ -655,7 +656,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="336"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <tabView autoresizesSubviews="NO" id="841">
+                <tabView id="841">
                     <rect key="frame" x="-7" y="-10" width="614" height="344"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <font key="font" metaFont="system"/>
@@ -663,7 +664,7 @@
                         <tabViewItem label="Syntax Highlighting" identifier="1" id="842">
                             <view key="view" id="843">
                                 <rect key="frame" x="10" y="33" width="594" height="298"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <customView id="179">
                                         <rect key="frame" x="9" y="222" width="230" height="37"/>
@@ -726,7 +727,7 @@
                         <tabViewItem label="Document" identifier="2" id="844">
                             <view key="view" id="845">
                                 <rect key="frame" x="10" y="33" width="594" height="298"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <colorWell id="187">
                                         <rect key="frame" x="199" y="253" width="44" height="23"/>
@@ -888,7 +889,7 @@
                         <tabViewItem label="Fonts" identifier="" id="846">
                             <view key="view" id="847">
                                 <rect key="frame" x="10" y="33" width="594" height="298"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" id="198">
                                         <rect key="frame" x="41" y="255" width="69" height="17"/>
@@ -2157,6 +2158,10 @@
         <customView id="1058" userLabel="OutlinePrefs">
             <rect key="frame" x="0.0" y="0.0" width="600" height="298"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        </customView>
+        <customView id="6wd-Dh-7k3" userLabel="Themes">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
         </customView>
     </objects>
     <resources>

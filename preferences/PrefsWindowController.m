@@ -37,6 +37,7 @@
 #import "TPSyntaxChecker.h"
 #import "TPDocumentSectionManager.h"
 #import "OutlineSectionTagsEditorController.h"
+#import "TPThemeEditorViewController.h"
 
 @interface PrefsWindowController ()
 
@@ -50,6 +51,9 @@
 
 @property (unsafe_unretained) IBOutlet NSView *outlineSectionEditorContainer;
 @property (strong) OutlineSectionTagsEditorController *outlineSectionController;
+
+@property (unsafe_unretained) IBOutlet NSView *themesEditorContainer;
+@property (strong) TPThemeEditorViewController *themesEditorController;
 
 
 @end
@@ -141,6 +145,14 @@
   self.outlineSectionController = [[OutlineSectionTagsEditorController alloc] init];
   [self.outlineSectionController.view setFrame:self.outlineSectionEditorContainer.bounds];
   [self.outlineSectionEditorContainer addSubview:self.outlineSectionController.view];
+  
+  // themes editor controller
+  self.themesEditorController = [[TPThemeEditorViewController alloc] init];
+  [self.themesEditorController.view setFrame:self.themesEditorContainer.bounds];
+  [self.themesEditorContainer addSubview:self.themesEditorController.view];
+  [self.themesEditorController setNextResponder:self.nextResponder];
+  [self setNextResponder:self.themesEditorController];
+  
 }
 
 - (void) dealloc
