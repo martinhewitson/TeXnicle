@@ -277,9 +277,9 @@ StaticImage(SafariIWITRightCap)
                            *nextButton = nil;
     
     if (index > 0)
-        prevButton = [buttons objectAtIndex:index-1];
+        prevButton = buttons[index-1];
     if (index+1 < numberOfButtons)
-        nextButton = [buttons objectAtIndex:index+1];
+        nextButton = buttons[index+1];
 
     NSImage *left = nil,
             *center = nil,

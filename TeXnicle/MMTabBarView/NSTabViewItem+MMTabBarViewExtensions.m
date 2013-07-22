@@ -49,7 +49,7 @@ static char objectCountColor_key;
  
 - (void)setIsProcessing:(BOOL)flag
 {
-    NSNumber *boolValue = [NSNumber numberWithBool:flag];
+    NSNumber *boolValue = @(flag);
     objc_setAssociatedObject(self,&isProcessing_key,boolValue,
                              OBJC_ASSOCIATION_RETAIN);
 } 
@@ -61,7 +61,7 @@ static char objectCountColor_key;
 
 - (void)setObjectCount:(NSInteger)value
 {
-    NSNumber *integerValue = [NSNumber numberWithInteger:value];
+    NSNumber *integerValue = @(value);
     objc_setAssociatedObject(self,&objectCount_key,integerValue,
                              OBJC_ASSOCIATION_RETAIN);    
 }
@@ -84,7 +84,7 @@ static char objectCountColor_key;
 
 - (void)setIsEdited:(BOOL)flag
 {
-    NSNumber *boolValue = [NSNumber numberWithBool:flag];
+    NSNumber *boolValue = @(flag);
     objc_setAssociatedObject(self,&isEdited_key,boolValue,
                              OBJC_ASSOCIATION_RETAIN);
 }
@@ -96,7 +96,7 @@ static char objectCountColor_key;
  
 - (void)setHasCloseButton:(BOOL)flag
 {
-    NSNumber *boolValue = [NSNumber numberWithBool:flag];
+    NSNumber *boolValue = @(flag);
     objc_setAssociatedObject(self,&hasCloseButton_key,boolValue,
                              OBJC_ASSOCIATION_RETAIN);
 } 

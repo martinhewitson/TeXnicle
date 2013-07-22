@@ -406,59 +406,45 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 {
   if ([binding isEqualToString:@"objectCount"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _objectCountBindingObservedObject, NSObservedObjectKey,
-            _objectCountBindingKeyPath, NSObservedKeyPathKey,
-            _objectCountBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _objectCountBindingObservedObject,
+            NSObservedKeyPathKey: _objectCountBindingKeyPath,
+            NSOptionsKey: _objectCountBindingOptions};
   }
   if ([binding isEqualToString:@"objectCountColor"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _objectCountColorBindingObservedObject, NSObservedObjectKey,
-            _objectCountColorBindingKeyPath, NSObservedKeyPathKey,
-            _objectCountColorBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _objectCountColorBindingObservedObject,
+            NSObservedKeyPathKey: _objectCountColorBindingKeyPath,
+            NSOptionsKey: _objectCountColorBindingOptions};
   }
   else if ([binding isEqualToString:@"isProcessing"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _isProcessingBindingObservedObject, NSObservedObjectKey,
-            _isProcessingBindingKeyPath, NSObservedKeyPathKey,
-            _isProcessingBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _isProcessingBindingObservedObject,
+            NSObservedKeyPathKey: _isProcessingBindingKeyPath,
+            NSOptionsKey: _isProcessingBindingOptions};
   }
   else if ([binding isEqualToString:@"isEdited"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _isEditedBindingObservedObject, NSObservedObjectKey,
-            _isEditedBindingKeyPath, NSObservedKeyPathKey,
-            _isEditedBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _isEditedBindingObservedObject,
+            NSObservedKeyPathKey: _isEditedBindingKeyPath,
+            NSOptionsKey: _isEditedBindingOptions};
   }
   else if ([binding isEqualToString:@"icon"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _iconBindingObservedObject, NSObservedObjectKey,
-            _iconBindingKeyPath, NSObservedKeyPathKey,
-            _iconBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _iconBindingObservedObject,
+            NSObservedKeyPathKey: _iconBindingKeyPath,
+            NSOptionsKey: _iconBindingOptions};
   }
   else if ([binding isEqualToString:@"largeImage"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _largeImageBindingObservedObject, NSObservedObjectKey,
-            _largeImageBindingKeyPath, NSObservedKeyPathKey,
-            _largeImageBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _largeImageBindingObservedObject,
+            NSObservedKeyPathKey: _largeImageBindingKeyPath,
+            NSOptionsKey: _largeImageBindingOptions};
   }
   else if ([binding isEqualToString:@"hasCloseButton"])
   {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            _hasCloseButtonBindingObservedObject, NSObservedObjectKey,
-            _hasCloseButtonBindingKeyPath, NSObservedKeyPathKey,
-            _hasCloseButtonBindingOptions, NSOptionsKey,
-            nil];
+    return @{NSObservedObjectKey: _hasCloseButtonBindingObservedObject,
+            NSObservedKeyPathKey: _hasCloseButtonBindingKeyPath,
+            NSOptionsKey: _hasCloseButtonBindingOptions};
   }
   else
     return [super infoForBinding:binding];
@@ -474,7 +460,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     id objectCountValue = nil;
     id autoHideValue = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         objectCountValue = [object valueForKeyPath:_objectCountBindingKeyPath];
@@ -482,12 +468,12 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
           [self setObjectCount:0.f];
         } else if ([objectCountValue isKindOfClass:[NSNumber class]]) {
           NSValueTransformer *valueTransformer = nil;
-          NSString *valueTransformerName = [_objectCountBindingOptions objectForKey:NSValueTransformerNameBindingOption];
+          NSString *valueTransformerName = _objectCountBindingOptions[NSValueTransformerNameBindingOption];
           if (valueTransformerName != nil)
             valueTransformer = [NSValueTransformer valueTransformerForName:valueTransformerName];
           
           if (valueTransformer == nil)
-            valueTransformer = [_objectCountBindingOptions objectForKey:NSValueTransformerBindingOption];
+            valueTransformer = _objectCountBindingOptions[NSValueTransformerBindingOption];
           
           if (valueTransformer != nil)
             objectCountValue = [valueTransformer transformedValue:objectCountValue];
@@ -497,7 +483,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
           [self setObjectCount:0];
         }
         
-        autoHideValue = [_objectCountBindingOptions objectForKey:NSConditionallySetsHiddenBindingOption];
+        autoHideValue = _objectCountBindingOptions[NSConditionallySetsHiddenBindingOption];
         if (autoHideValue != nil)
         {
           if ([autoHideValue boolValue] == YES)
@@ -520,7 +506,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     NSColor *color = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         color = [object valueForKeyPath:_objectCountColorBindingKeyPath];
@@ -542,7 +528,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     id isProcessingValue = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         isProcessingValue = [object valueForKeyPath:_isProcessingBindingKeyPath];
@@ -552,12 +538,12 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
         else if ([isProcessingValue isKindOfClass:[NSNumber class]]) {
           
           NSValueTransformer *valueTransformer = nil;
-          NSString *valueTransformerName = [_isProcessingBindingOptions objectForKey:NSValueTransformerNameBindingOption];
+          NSString *valueTransformerName = _isProcessingBindingOptions[NSValueTransformerNameBindingOption];
           if (valueTransformerName != nil)
             valueTransformer = [NSValueTransformer valueTransformerForName:valueTransformerName];
           
           if (valueTransformer == nil)
-            valueTransformer = [_isProcessingBindingOptions objectForKey:NSValueTransformerBindingOption];
+            valueTransformer = _isProcessingBindingOptions[NSValueTransformerBindingOption];
           
           if (valueTransformer != nil)
             isProcessingValue = [valueTransformer transformedValue:isProcessingValue];
@@ -582,7 +568,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     id isEditedValue = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         isEditedValue = [object valueForKeyPath:_isEditedBindingKeyPath];
@@ -592,12 +578,12 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
         else if ([isEditedValue isKindOfClass:[NSNumber class]]) {
           
           NSValueTransformer *valueTransformer = nil;
-          NSString *valueTransformerName = [_isEditedBindingOptions objectForKey:NSValueTransformerNameBindingOption];
+          NSString *valueTransformerName = _isEditedBindingOptions[NSValueTransformerNameBindingOption];
           if (valueTransformerName != nil)
             valueTransformer = [NSValueTransformer valueTransformerForName:valueTransformerName];
           
           if (valueTransformer == nil)
-            valueTransformer = [_isEditedBindingOptions objectForKey:NSValueTransformerBindingOption];
+            valueTransformer = _isEditedBindingOptions[NSValueTransformerBindingOption];
           
           if (valueTransformer != nil)
             isEditedValue = [valueTransformer transformedValue:isEditedValue];
@@ -622,7 +608,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     NSImage *icon = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         icon = [object valueForKeyPath:_iconBindingKeyPath];
@@ -644,7 +630,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     NSImage *largeImage = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         largeImage = [object valueForKeyPath:_largeImageBindingKeyPath];
@@ -666,7 +652,7 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
     
     id hasCloseButtonValue = nil;
     
-    switch([[change objectForKey:NSKeyValueChangeKindKey] integerValue]) {
+    switch([change[NSKeyValueChangeKindKey] integerValue]) {
       case NSKeyValueChangeSetting:
         
         hasCloseButtonValue = [object valueForKeyPath:_hasCloseButtonBindingKeyPath];
@@ -676,12 +662,12 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
         else if ([hasCloseButtonValue isKindOfClass:[NSNumber class]]) {
           
           NSValueTransformer *valueTransformer = nil;
-          NSString *valueTransformerName = [_hasCloseButtonBindingOptions objectForKey:NSValueTransformerNameBindingOption];
+          NSString *valueTransformerName = _hasCloseButtonBindingOptions[NSValueTransformerNameBindingOption];
           if (valueTransformerName != nil)
             valueTransformer = [NSValueTransformer valueTransformerForName:valueTransformerName];
           
           if (valueTransformer == nil)
-            valueTransformer = [_hasCloseButtonBindingOptions objectForKey:NSValueTransformerBindingOption];
+            valueTransformer = _hasCloseButtonBindingOptions[NSValueTransformerBindingOption];
           
           if (valueTransformer != nil)
             hasCloseButtonValue = [valueTransformer transformedValue:hasCloseButtonValue];

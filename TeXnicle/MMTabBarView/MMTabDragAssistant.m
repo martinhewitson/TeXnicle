@@ -331,7 +331,7 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
     
     NSPasteboard *pb = [sender draggingPasteboard];
     
-    if (![pb canReadItemWithDataConformingToTypes:[NSArray arrayWithObject:AttachedTabBarButtonUTI]])
+    if (![pb canReadItemWithDataConformingToTypes:@[AttachedTabBarButtonUTI]])
         return success;
  
         // get (single) pasteboard item
@@ -447,7 +447,7 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
         
         MMAttachedTabBarButton *aButton = nil;
         for (NSDictionary *anAnimDict in viewAnimations) {
-            aButton = [anAnimDict objectForKey:NSViewAnimationTargetKey];
+            aButton = anAnimDict[NSViewAnimationTargetKey];
             if ([aButton isKindOfClass:[MMAttachedTabBarButton class]]) {
                 [aButton slideAnimationDidEnd];
             }
@@ -677,7 +677,7 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
     [pasteboardItem setSourceIndex:[tabBarView indexOfTabViewItem:[aButton tabViewItem]]];
     [pasteboardItem setString:[aButton title] forType:AttachedTabBarButtonUTI];
     [pboard clearContents];
-    [pboard writeObjects:[NSArray arrayWithObject:pasteboardItem]];
+    [pboard writeObjects:@[pasteboardItem]];
     [self setPasteboardItem:pasteboardItem];
 
         // informal
@@ -894,7 +894,7 @@ static MMTabDragAssistant *sharedDragAssistant = nil;
         else
             positionOfMovedButton = NSMaxY(stackingFrame);
     } else {
-        MMAttachedTabBarButton *firstSlidedButton = [slidingButtons objectAtIndex:0];
+        MMAttachedTabBarButton *firstSlidedButton = slidingButtons[0];
         NSRect stackingFrame = [firstSlidedButton stackingFrame];
         if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
             positionOfMovedButton = NSMinX(stackingFrame) - NSWidth([aButton slidingFrame]);

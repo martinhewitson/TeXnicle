@@ -45,11 +45,9 @@
     
     for (MMTabBarButton *aButton in buttons) {
     
-        animDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-            aButton, NSViewAnimationTargetKey,
-            [NSValue valueWithRect:[aButton frame]], NSViewAnimationStartFrameKey,
-            [NSValue valueWithRect:[aButton stackingFrame]], NSViewAnimationEndFrameKey,
-            nil];
+        animDict = @{NSViewAnimationTargetKey: aButton,
+            NSViewAnimationStartFrameKey: [NSValue valueWithRect:[aButton frame]],
+            NSViewAnimationEndFrameKey: [NSValue valueWithRect:[aButton stackingFrame]]};
             
         [animations addObject:animDict];
         
