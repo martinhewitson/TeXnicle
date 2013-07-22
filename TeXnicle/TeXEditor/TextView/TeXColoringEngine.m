@@ -30,6 +30,7 @@
 #import "TeXTextView.h"
 #import "NSArray+Color.h"
 #import "TPRegularExpression.h"
+#import "TPThemeManager.h"
 
 @interface TeXColoringEngine ()
 
@@ -75,33 +76,26 @@
     newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
     whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
     specialChars = [NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"];
-    
-    keys = @[TEDocumentFont, TESyntaxTextColor,
-             TESyntaxCommentsColor, TESyntaxCommentsL2Color, TESyntaxCommentsL3Color, 
-             TESyntaxColorComments, TESyntaxColorCommentsL2, TESyntaxColorCommentsL3, 
-             TESyntaxSpecialCharsColor, TESyntaxColorSpecialChars, 
-             TESyntaxCommandColor, TESyntaxColorCommand, 
-             TESyntaxDollarCharsColor, TESyntaxColorDollarChars, 
-             TESyntaxArgumentsColor, TESyntaxColorArguments, TESyntaxColorMultilineArguments,
-             TESyntaxColorMarkupL1, TESyntaxColorMarkupL2, TESyntaxColorMarkupL3, 
-             TESyntaxMarkupL1Color, TESyntaxMarkupL2Color, TESyntaxMarkupL3Color];
 
     [self readColorsAndFontsFromPreferences];
-    [self observePreferences];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleThemeDidChangeNotification:)
+               name:TPThemeSelectionChangedNotification
+             object:nil];
     
   }
   return self;
 }
 
-- (void) awakeFromNib
+- (void) dealloc
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)dealloc
+- (void) awakeFromNib
 {
-  [self stopObserving];
-  
-  
 }
 
 - (unichar)commentCharacter
@@ -112,86 +106,60 @@
 #pragma mark -
 #pragma mark KVO 
 
-- (void) stopObserving
+
+- (void) handleThemeDidChangeNotification:(NSNotification*)aNote
 {
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  for (NSString *str in keys) {
-    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", str]];
+  [self readColorsAndFontsFromPreferences];
+  if ([self.textView respondsToSelector:@selector(colorVisibleText)]) {
+    [self.textView performSelector:@selector(colorVisibleText)];
+  }
+  self.lastHighlight = nil;
+  if ([self.textView respondsToSelector:@selector(colorWholeDocument)]) {
+    [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
   }
 }
-
-- (void) observePreferences
-{  
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  
-  for (NSString *str in keys) {
-    [defaults addObserver:self
-               forKeyPath:[NSString stringWithFormat:@"values.%@", str]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];		
-  }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-											ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-  for (NSString *str in keys) {
-    if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", str]]) {
-      [self readColorsAndFontsFromPreferences];
-      if ([self.textView respondsToSelector:@selector(colorVisibleText)]) {
-        [self.textView performSelector:@selector(colorVisibleText)];
-      }
-      self.lastHighlight = nil;
-      if ([self.textView respondsToSelector:@selector(colorWholeDocument)]) {
-        [self.textView performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
-      }
-    }    
-  }
-}
-
 
 - (void) readColorsAndFontsFromPreferences
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+
   // basic text
-  self.textFont = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-  self.textColor = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  self.textFont = theme.editorFont;
+  self.textColor = theme.documentTextColor;
   
   // comments
-  self.commentColor    = [[defaults valueForKey:TESyntaxCommentsColor] colorValue];
-  self.commentL2Color  = [[defaults valueForKey:TESyntaxCommentsL2Color] colorValue];
-  self.commentL3Color  = [[defaults valueForKey:TESyntaxCommentsL3Color] colorValue];
-  self.colorComments   = [[defaults valueForKey:TESyntaxColorComments] boolValue];
-  self.colorCommentsL2 = [[defaults valueForKey:TESyntaxColorCommentsL2] boolValue];
-  self.colorCommentsL3 = [[defaults valueForKey:TESyntaxColorCommentsL3] boolValue];
-
+  self.commentColor    = theme.syntaxComments1Color;
+  self.commentL2Color  = theme.syntaxComments2Color;
+  self.commentL3Color  = theme.syntaxComments3Color;
+  self.colorComments   = theme.shouldColorComments1;
+  self.colorCommentsL2 = theme.shouldColorComments2;
+  self.colorCommentsL3 = theme.shouldColorComments3;
+  
   // markup
-  self.colorMarkupL1 = [[defaults valueForKey:TESyntaxColorMarkupL1] boolValue];
-  self.colorMarkupL2 = [[defaults valueForKey:TESyntaxColorMarkupL2] boolValue];
-  self.colorMarkupL3 = [[defaults valueForKey:TESyntaxColorMarkupL3] boolValue];
-  self.markupL1Color = [[defaults valueForKey:TESyntaxMarkupL1Color] colorValue];
-  self.markupL2Color = [[defaults valueForKey:TESyntaxMarkupL2Color] colorValue];
-  self.markupL3Color = [[defaults valueForKey:TESyntaxMarkupL3Color] colorValue];
+  self.colorMarkupL1 = theme.shouldColorMarkup1;
+  self.colorMarkupL2 = theme.shouldColorMarkup2;
+  self.colorMarkupL3 = theme.shouldColorMarkup3;
+  self.markupL1Color = theme.syntaxMarkup1Color;
+  self.markupL2Color = theme.syntaxMarkup2Color;
+  self.markupL3Color = theme.syntaxMarkup3Color;
   
   // math
-  self.specialCharsColor = [[defaults valueForKey:TESyntaxSpecialCharsColor] colorValue];
-  self.colorSpecialChars = [[defaults valueForKey:TESyntaxColorSpecialChars] boolValue];
+  self.specialCharsColor = theme.syntaxSpecialCharactersColor;
+  self.colorSpecialChars = theme.shouldColorSpecialCharacters;
   
   // command
-  self.commandColor = [[defaults valueForKey:TESyntaxCommandColor] colorValue];
-  self.colorCommand = [[defaults valueForKey:TESyntaxColorCommand] boolValue];
+  self.commandColor = theme.syntaxCommandColor;
+  self.colorCommand = theme.shouldColorCommand;
   
-  // command
-  self.dollarColor = [[defaults valueForKey:TESyntaxDollarCharsColor] colorValue];
-  self.colorDollarChars = [[defaults valueForKey:TESyntaxColorDollarChars] boolValue];
+  // dollar
+  self.dollarColor = theme.syntaxDollarColor;
+  self.colorDollarChars = theme.shouldColorDollar;
   
   // arguments
-  self.argumentsColor = [[defaults valueForKey:TESyntaxArgumentsColor] colorValue];
-  self.colorArguments = [[defaults valueForKey:TESyntaxColorArguments] boolValue];
-  self.colorMultilineArguments = [[defaults valueForKey:TESyntaxColorMultilineArguments] boolValue];
+  self.argumentsColor = theme.syntaxArgumentsColor;
+  self.colorArguments = theme.shouldColorArguments;
+  self.colorMultilineArguments = [theme.colorMultilineArguments boolValue];
   
 }
 

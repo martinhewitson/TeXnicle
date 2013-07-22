@@ -59,7 +59,4 @@
 - (void) readColorsAndFontsFromPreferences;
 - (void) colorTextView:(NSTextView*)aTextView textStorage:(NSTextStorage*)textStorage layoutManager:(NSLayoutManager*)layoutManager inRange:(NSRange)aRange;
 
-- (void) observePreferences;
-- (void) stopObserving;
-
 @end

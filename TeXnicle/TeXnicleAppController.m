@@ -44,7 +44,7 @@
 #import "TPProjectTemplateListViewer.h"
 #import "TPSyntaxChecker.h"
 #import "NSWorkspaceExtended.h"
-
+#import "TPThemeManager.h"
 
 NSString * const TPDefaultEncoding = @"TPDefaultEncoding";
 
@@ -188,6 +188,10 @@ NSString * const TPLiveUpdateMode = @"TPLiveUpdateMode";
 NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
 
+NSString * const TPSelectedTheme = @"TPSelectedTheme";
+NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
+
+
 @implementation TeXnicleAppController
 
 + (void) initialize
@@ -294,6 +298,10 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   // console
   defaultValues[TEConsoleFont] = [NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]];  
 	
+  // themes
+  defaultValues[TPSelectedTheme] = @"texnicle";
+  defaultValues[TPThemeDidMigrate] = @NO;
+  
 	//--- colors for syntax highlighting
 	
   // default text
@@ -529,6 +537,12 @@ NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
   
   // setup app-wide palette
   self.palette = [[TPPalette alloc] init];
+  
+  // load themes
+  [TPThemeManager migrateDefaultsToTheme];
+  [TPThemeManager installThemes];
+  TPThemeManager *themeManager = [TPThemeManager sharedManager];
+  
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

@@ -21,6 +21,6 @@
 - (void) setTags:(NSArray*)tags forSection:(NSString*)section;
 
 - (void) setColor:(NSColor*)color forName:(NSString*)name;
-- (NSColor*) colorForSectionName:(NSString*)name;
+- (void) handleThemeDidChangeNotification:(NSNotification*)aNote;
 
 @end

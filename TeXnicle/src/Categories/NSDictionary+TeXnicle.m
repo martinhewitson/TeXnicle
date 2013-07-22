@@ -28,14 +28,19 @@
 #import "NSDictionary+TeXnicle.h"
 #import "externs.h"
 #import "NSArray+Color.h"
+#import "TPThemeManager.h"
 
 @implementation NSDictionary (TeXnicle)
 
 + (NSDictionary*)currentTypingAttributes
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.editorFont;
+  NSColor *color = theme.documentTextColor;
+  
   NSMutableParagraphStyle *ps = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
   CGFloat lineHeightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
   //NSLog(@"Setting line height multiple %f", lineHeightMultiple);

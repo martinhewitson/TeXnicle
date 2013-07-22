@@ -10,7 +10,7 @@
 #import "TPSectionTemplate.h"
 #import "NSArray+Color.h"
 #import "externs.h"
-
+#import "TPThemeManager.h"
 
 @implementation TPDocumentSectionManager
 
@@ -22,46 +22,20 @@
     sharedInstance = [[TPDocumentSectionManager alloc] init];
     // Do any other initialisation stuff here
     [sharedInstance makeTemplates];
-    [sharedInstance observePreferences];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:sharedInstance
+           selector:@selector(handleThemeDidChangeNotification:)
+               name:TPThemeSelectionChangedNotification
+             object:nil];
+    
   });
   return sharedInstance;
 }
 
-- (NSArray*)keysToObserve
+- (void) handleThemeDidChangeNotification:(NSNotification*)aNote
 {
-  return @[TPOutlineDocumentColor, TPOutlinePartColor, TPOutlineChapterColor, TPOutlineSectionColor, TPOutlineSubsectionColor, TPOutlineSubsubsectionColor, TPOutlineParagraphColor, TPOutlineSubparagraphColor];
-}
-
-- (void) stopObserving
-{
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  for (NSString *key in [self keysToObserve]) {
-    [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", key]];
-  }
-}
-
-- (void) observePreferences
-{
-	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  for (NSString *key in [self keysToObserve]) {
-    [defaults addObserver:self
-               forKeyPath:[NSString stringWithFormat:@"values.%@", key]
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-    
-  }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-											ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
-{
-  for (NSString *key in [self keysToObserve]) {
-    if ([keyPath isEqualToString:[NSString stringWithFormat:@"values.%@", key]]) {
-      [self setTemplateColors];
-    }
-  }
+  [self setTemplateColors];
 }
 
 - (void) saveTemplates
@@ -150,84 +124,24 @@
 
 - (void) setTemplateColors
 {
-  [self setColorForName:@"begin" withPreferenceName:TPOutlineDocumentColor];
-  [self setColorForName:@"part" withPreferenceName:TPOutlinePartColor];
-  [self setColorForName:@"chapter" withPreferenceName:TPOutlineChapterColor];
-  [self setColorForName:@"section" withPreferenceName:TPOutlineSectionColor];
-  [self setColorForName:@"subsection" withPreferenceName:TPOutlineSubsectionColor];
-  [self setColorForName:@"subsubsection" withPreferenceName:TPOutlineSubsubsectionColor];
-  [self setColorForName:@"paragraph" withPreferenceName:TPOutlineParagraphColor];
-  [self setColorForName:@"subparagraph" withPreferenceName:TPOutlineSubparagraphColor];
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+
+  [self setColor:theme.outlineBeginColor         forName:@"begin"];
+  [self setColor:theme.outlinePartColor          forName:@"part"];
+  [self setColor:theme.outlineChapterColor       forName:@"chapter"];
+  [self setColor:theme.outlineSectionColor       forName:@"section"];
+  [self setColor:theme.outlineSubsectionColor    forName:@"subsection"];
+  [self setColor:theme.outlineSubsubsectionColor forName:@"subsubsection"];
+  [self setColor:theme.outlineParagraphColor     forName:@"paragraph"];
+  [self setColor:theme.outlineSubparagraphColor  forName:@"subparagraph"];
 }
 
-- (NSString*)preferenceNameForSection:(NSString*)name
-{
-  if ([name isEqualToString:@"begin"]) {
-    return TPOutlineDocumentColor;
-  } else if ([name isEqualToString:@"part"]) {
-    return TPOutlinePartColor;
-  } else if ([name isEqualToString:@"chapter"]) {
-    return TPOutlineChapterColor;
-  } else if ([name isEqualToString:@"section"]) {
-    return TPOutlineSectionColor;
-  } else if ([name isEqualToString:@"subsection"]) {
-    return TPOutlineSubsectionColor;
-  } else if ([name isEqualToString:@"subsubsection"]) {
-    return TPOutlineSubsubsectionColor;
-  } else if ([name isEqualToString:@"paragraph"]) {
-    return TPOutlineParagraphColor;
-  } else if ([name isEqualToString:@"subparagraph"]) {
-    return TPOutlineSubparagraphColor;
-  } else {
-    return nil;
-  }
-    
-}
-
-- (NSColor*) colorForSectionName:(NSString*)name
+- (void) setColor:(NSColor*)aColor forName:(NSString*)name
 {
   for (TPSectionTemplate *s in self.templates) {
     if ([s.name isEqualToString:name]) {
-      NSString *prefName = [self preferenceNameForSection:name];
-      if (prefName) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSArray *colorVals = [defaults valueForKey:prefName];
-        if (colorVals) {
-          return [colorVals colorValue];
-        }
-      }
-    }
-  }
-  
-  return [NSColor blackColor];
-}
-
-- (void) setColor:(NSColor*)color forName:(NSString*)name
-{
-  NSString *prefName = [self preferenceNameForSection:name];
-  if (prefName) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *colorVals = [NSArray arrayWithColor:color];
-    [defaults setValue:colorVals forKey:prefName];
-    [self setColorForName:name withPreferenceName:prefName];
-  }
-}
-
-- (void) setColorForName:(NSString*)name withPreferenceName:(NSString*)prefName
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSArray *colorVals = nil;
-  
-  for (TPSectionTemplate *s in self.templates) {
-    if ([s.name isEqualToString:name]) {
-      
-      colorVals = [defaults valueForKey:prefName];
-      if (colorVals) {
-        [s setColor:[colorVals colorValue]];
-      } else {
-        [s setColor:[NSColor blackColor]];
-      }
-      
+      [s setColor:aColor];
       break;
     }
   }

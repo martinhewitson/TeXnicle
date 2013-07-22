@@ -28,6 +28,7 @@
 
 #import "ConsoleController.h"
 #import "externs.h"
+#import "TPThemeManager.h"
 
 @implementation ConsoleController
 
@@ -45,9 +46,9 @@
   self = [super initWithWindowNibName:@"Console"];
 	if (self){
     [[self window] setLevel:NSNormalWindowLevel];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-    [textView setFont:font];
+    TPThemeManager *tm = [TPThemeManager sharedManager];
+    TPTheme *theme = tm.currentTheme;
+    [textView setFont:theme.consoleFont];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
@@ -60,9 +61,9 @@
 
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-	[textView setFont:font];
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+	[textView setFont:theme.consoleFont];
 }
 
 
@@ -95,9 +96,10 @@
 
 - (void) error:(NSString*)someText 
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-	if ([someText length]>0) {
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.consoleFont;
+  if ([someText length]>0) {
 		if ([someText characterAtIndex:[someText length]-1] != '\n') {
 			someText = [someText stringByAppendingString:@"\n"];
 		}
@@ -132,9 +134,10 @@
 
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-	NSString *str = [someText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.consoleFont;
+  NSString *str = [someText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSColor *textColor = aColor;
 	if (!textColor) {
 		textColor = [NSColor blackColor];

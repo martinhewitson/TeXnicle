@@ -13,7 +13,6 @@
 
 @property (assign) IBOutlet NSTableView *sectionsTableView;
 @property (assign) IBOutlet NSTableView *tagsTableView;
-@property (assign) IBOutlet NSColorWell *colorWell;
 
 @end
 
@@ -29,15 +28,6 @@
   return self;
 }
 
-- (IBAction)chooseColor:(id)sender
-{
-  NSColor *color = [self.colorWell color];
-  NSString *section = [self selectedSection];
-  if (section != nil && color != nil) {
-    TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
-    [sm setColor:color forName:section];
-  }
-}
 
 - (IBAction)addTag:(id)sender
 {
@@ -75,7 +65,7 @@
   NSInteger row = [self.sectionsTableView selectedRow];
   TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
   if (row >= 0 && row < [sm.templates count]) {
-    return [[self sectionNames] objectAtIndex:row];
+    return [self sectionNames][row];
   }
   
   return nil;
@@ -148,15 +138,6 @@
   if (table == self.sectionsTableView) {
     [self.tagsTableView reloadData];
     [self.tagsTableView selectRowIndexes:[NSIndexSet indexSet] byExtendingSelection:NO];
-    
-    // set color well
-    NSString *section = [self selectedSection];
-    if (section) {
-      TPDocumentSectionManager *sm = [TPDocumentSectionManager sharedSectionManager];
-      NSColor *color = [sm colorForSectionName:section];
-      [self.colorWell setColor:color];
-    }
-    
   }
 }
 

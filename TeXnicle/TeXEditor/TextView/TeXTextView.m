@@ -65,6 +65,7 @@
 #import "NSColor+Lightness.h"
 
 #import "TPRegularExpression.h"
+#import "TPThemeManager.h"
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
@@ -162,11 +163,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self observePreferences];
   
   // set font and color
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
   // basic text
-  NSFont *font = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  
+  NSFont *font = theme.editorFont;
+  NSColor *color = theme.documentTextColor;
+  
   [[self textStorage] setFont:font];
   [[self textStorage] setForegroundColor:color];
   [self setFont:font];
@@ -185,6 +189,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
          selector:@selector(handleFrameChangeNotification:)
              name:NSViewBoundsDidChangeNotification 
            object:[[self enclosingScrollView] contentView]];
+  
+  [nc addObserver:self
+         selector:@selector(handleThemeChangedNotification:)
+             name:TPThemeSelectionChangedNotification
+           object:nil];
   
 }
 
@@ -674,9 +683,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyCurrentTextColorToLine
 {
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
   NSRange pRange = [self rangeForCurrentLine];
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSColor *color = [[defaults valueForKey:TESyntaxTextColor] colorValue];
+  NSColor *color = theme.documentTextColor;
   [[self textStorage] addAttribute:NSForegroundColorAttributeName value:color range:pRange];
 }
 
@@ -759,18 +769,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) stopObserving
 {
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]];
 }
@@ -780,32 +783,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   
   [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentFont]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
   
@@ -830,16 +808,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                 context:NULL];
   
   [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
@@ -858,10 +826,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-	if ([keyPath hasPrefix:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundColor]]) {
-    NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
-    [self setBackgroundColor:c];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]]) {
+	if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]]) {
     [self performSelectorOnMainThread:@selector(updateEditorRuler) withObject:nil waitUntilDone:YES];
     [self.editorRuler recalculateThickness];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]]) {
@@ -877,23 +842,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineLength]]) {
     [self setWrapStyle];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESelectedTextColor]]) {
-    [self applyFontAndColor:YES];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESelectedTextBackgroundColor]]) {
-    [self applyFontAndColor:YES];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentFont]]) {
-    [self applyFontAndColor:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]]) {
-    [self applyFontAndColor:YES];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TESyntaxTextColor]]) {
-    [self applyFontAndColor:YES];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentBackgroundMarginColor]]) {
-    [self setNeedsDisplay:YES];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEDocumentCursorColor]]) {
     [self applyFontAndColor:YES];
 	}
   
 
+}
+
+- (void) handleThemeChangedNotification:(NSNotification*)aNote
+{
+  [self applyFontAndColor:YES];
 }
 
 - (void) setTypingColor:(NSColor*)aColor
@@ -957,20 +915,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     //    NSLog(@"Skipping setting atts");
   }
   
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  
   // background color
-  NSColor *c = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentBackgroundColor] colorValue];
+  NSColor *c = theme.documentEditorBackgroundColor;
   // for some reason we need to do this otherwise the scrolling jumps around in the textview.
   [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
   
-  // background color
-  NSColor *cc = [[[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorColor] colorValue];
+  // cursor color
+  NSColor *cc =  theme.documentEditorCursorColor;
   [self setInsertionPointColor:cc];
   
   // selection color
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [self setSelectedTextAttributes:
-   @{NSBackgroundColorAttributeName: [[defaults valueForKey:TESelectedTextBackgroundColor] colorValue],
-   NSForegroundColorAttributeName: [[defaults valueForKey:TESelectedTextColor] colorValue]}];
+   @{NSBackgroundColorAttributeName: theme.documentEditorSelectionBackgroundColor,
+   NSForegroundColorAttributeName: theme.documentEditorSelectionColor}];
   
 }
 
