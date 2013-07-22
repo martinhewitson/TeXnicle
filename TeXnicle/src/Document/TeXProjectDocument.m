@@ -1113,7 +1113,7 @@
     NSArray *lines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 //    NSLog(@"%@", lines);
     for (NSInteger kk=0; kk<[lines count]; kk++) {
-      NSString *tline = [[lines objectAtIndex:kk] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      NSString *tline = [lines[kk] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       if ([tline isEqualToString:@"<key>Category</key>"]) {
         kk+=3;
         continue;
@@ -1123,7 +1123,7 @@
         continue;
       }
       
-      [outlines addObject:[lines objectAtIndex:kk]];
+      [outlines addObject:lines[kk]];
     }
 //    NSLog(@"Output: %@", outlines);
     if ([outlines count] > 0) {
