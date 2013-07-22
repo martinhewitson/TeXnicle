@@ -107,6 +107,21 @@ extern NSString * const TEJumpBarShowBibItems;
 extern NSString * const TEJumpBarShowLineNumbers;
 extern NSString * const TEJumpBarEnabled;
 
+// themes
+extern NSString * const TPSelectedTheme;
+extern NSString * const TPThemeDidMigrate;
+
+// outline colors
+extern NSString * const TPOutlineSectionTags;
+extern NSString * const TPOutlineDocumentColor;
+extern NSString * const TPOutlinePartColor;
+extern NSString * const TPOutlineChapterColor;
+extern NSString * const TPOutlineSectionColor;
+extern NSString * const TPOutlineSubsectionColor;
+extern NSString * const TPOutlineSubsubsectionColor;
+extern NSString * const TPOutlineParagraphColor;
+extern NSString * const TPOutlineSubparagraphColor;
+
 
 // comment
 extern NSString * const TESyntaxCommentsColor;
@@ -125,16 +140,6 @@ extern NSString * const TESyntaxColorMarkupL1;
 extern NSString * const TESyntaxColorMarkupL2;
 extern NSString * const TESyntaxColorMarkupL3;
 
-// outline colors
-extern NSString * const TPOutlineSectionTags;
-extern NSString * const TPOutlineDocumentColor;
-extern NSString * const TPOutlinePartColor;
-extern NSString * const TPOutlineChapterColor;
-extern NSString * const TPOutlineSectionColor;
-extern NSString * const TPOutlineSubsectionColor;
-extern NSString * const TPOutlineSubsubsectionColor;
-extern NSString * const TPOutlineParagraphColor;
-extern NSString * const TPOutlineSubparagraphColor;
 
 // special chars
 extern NSString * const TESyntaxSpecialCharsColor;
@@ -173,6 +178,7 @@ extern NSString * const TPRestoreOpenTabs;
 extern NSString * const TPDefaultEncoding;
 
 // Notifications
+extern NSString * const TPThemeSelectionChangedNotification;
 extern NSString * const TPSyntaxColorsChangedNotification;
 extern NSString * const TPFileItemTextStorageChangedNotification;
 extern NSString * const TPBookmarkDidUpdateNotification;
