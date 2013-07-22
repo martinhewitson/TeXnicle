@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TeXnicleFonts</key>
+	<dict>
+		<key>texnicle.font.editor</key>
+		<string>Editor Font</string>
+		<key>texnicle.font.console</key>
+		<string>Console Font</string>
+	</dict>
+	<key>TeXnicleOutlineColors</key>
+	<dict>
+		<key>texnicle.outline.begin</key>
+		<string>Outline \begin</string>
+		<key>texnicle.outline.part</key>
+		<string>Outline \part</string>
+		<key>texnicle.outline.chapter</key>
+		<string>Outline \chapter</string>
+		<key>texnicle.outline.section</key>
+		<string>Outline \section</string>
+		<key>texnicle.outline.subsection</key>
+		<string>Outline \subsection</string>
+		<key>texnicle.outline.subsubsection</key>
+		<string>Outline \subsubsection</string>
+		<key>texnicle.outline.paragraph</key>
+		<string>Outline \paragraph</string>
+		<key>texnicle.outline.subparagraph</key>
+		<string>Outline \subparagraph</string>
+	</dict>
+	<key>TeXnicleDocumentColors</key>
+	<dict>
+		<key>texnicle.document.text</key>
+		<string>Plain Text</string>
+		<key>texnicle.document.editorbackground</key>
+		<string>Editor Background</string>
+		<key>texnicle.document.editormargin</key>
+		<string>Editor Margin</string>
+		<key>texnicle.document.cursor</key>
+		<string>Cursor Color</string>
+		<key>texnicle.document.selectedtext</key>
+		<string>Selected Text</string>
+		<key>texnicle.document.selectedtextbackground</key>
+		<string>Selected Text Background</string>
+	</dict>
+	<key>TeXnicleSyntaxColors</key>
+	<dict>
+		<key>texnicle.syntax.commands</key>
+		<string>Commands</string>
+		<key>texnicle.syntax.specialcharacters</key>
+		<string>Special Characters</string>
+		<key>texnicle.syntax.dollar</key>
+		<string>Dollar ($)</string>
+		<key>texnicle.syntax.arguments</key>
+		<string>Arguments</string>
+		<key>texnicle.syntax.markup1</key>
+		<string>Markup (&lt; &gt;)</string>
+		<key>texnicle.syntax.markup2</key>
+		<string>Markup (&lt;&lt; &gt;&gt;)</string>
+		<key>texnicle.syntax.markup3</key>
+		<string>Markup (&lt;&lt;&lt; &gt;&gt;&gt;)</string>
+		<key>texnicle.syntax.comments1</key>
+		<string>Comments (%)</string>
+		<key>texnicle.syntax.comments2</key>
+		<string>Comments (%%)</string>
+		<key>texnicle.syntax.comments3</key>
+		<string>Comments (%%%)</string>
+	</dict>
+</dict>
+</plist>
