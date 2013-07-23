@@ -154,6 +154,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [self setAllowsUndo:YES];
   [self setAllowsDocumentBackgroundColorChange:YES];
+  [self setAutomaticDashSubstitutionEnabled:NO];
+  [self setAutomaticDataDetectionEnabled:NO];
+  [self setAutomaticTextReplacementEnabled:NO];
+  [self setAutomaticQuoteSubstitutionEnabled:NO];
   
   // set color for line highlighting
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
