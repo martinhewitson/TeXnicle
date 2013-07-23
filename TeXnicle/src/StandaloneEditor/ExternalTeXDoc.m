@@ -782,6 +782,7 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 {
 //  NSLog(@"### Clean up");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self stopObserving];
   
   [self.engineManager cancelCompilation];
   
