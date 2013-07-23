@@ -12,7 +12,7 @@
 
 @interface TPTeXLogParser : NSObject
 
-
++ (NSDictionary*)errorPhrases;
 + (NSArray*) parseLogFileAtPath:(NSString*)aPath;
 + (NSArray*) parseLogFileAtURL:(NSURL*)aURL;
 + (NSArray*) parseLogText:(NSString*)logText;

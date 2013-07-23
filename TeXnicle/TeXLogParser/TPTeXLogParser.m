@@ -53,6 +53,7 @@
            @"Missing character:" : @(TPLogWarning),
            @"Underfull \\hbox" : @(TPLogWarning),
            @"Error:"   : @(TPLogError),
+           @"Undefined control sequence" : @(TPLogError), 
            @"Emergency stop."   : @(TPLogError),
            @"Missing $ inserted" : @(TPLogError),
            @"! TeX capacity exceeded" : @(TPLogError)
