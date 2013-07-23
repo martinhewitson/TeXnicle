@@ -39,6 +39,7 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 
 - (void) applicationWillTerminate:(NSNotification*)aNote
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self saveAction:self];
 }
 
