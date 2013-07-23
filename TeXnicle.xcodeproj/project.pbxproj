@@ -106,6 +106,14 @@
 		2523C7E91405511500A47297 /* MABSupportFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523C7E81405511500A47297 /* MABSupportFolder.m */; };
 		2523C7EC1405530800A47297 /* TPEngineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523C7EB1405530800A47297 /* TPEngineManager.m */; };
 		2523D7D51505080A008200DB /* Article.tpt in Resources */ = {isa = PBXBuildFile; fileRef = 2523D7D41505080A008200DB /* Article.tpt */; };
+		252481BA179BC75000602FCC /* TPTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 252481B9179BC75000602FCC /* TPTheme.m */; };
+		252481BD179BC97100602FCC /* TPThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 252481BC179BC97100602FCC /* TPThemeManager.m */; };
+		252481BF179BCCEF00602FCC /* texnicle.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 252481BE179BCCEF00602FCC /* texnicle.txtheme */; };
+		252481C1179BD34000602FCC /* themeElementMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 252481C0179BD34000602FCC /* themeElementMap.plist */; };
+		252481C5179BD93100602FCC /* TPThemeEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252481C3179BD93100602FCC /* TPThemeEditorViewController.m */; };
+		252481C6179BD93100602FCC /* TPThemeEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252481C4179BD93100602FCC /* TPThemeEditorViewController.xib */; };
+		252481C9179C2C7100602FCC /* NSDictionary+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 252481C8179C2C7100602FCC /* NSDictionary+Theme.m */; };
+		252481CC179C341C00602FCC /* NSColor+ContrastingLabelExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 252481CB179C341C00602FCC /* NSColor+ContrastingLabelExtensions.m */; };
 		2527487D15C3AF5800D12D69 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2527487C15C3AF5800D12D69 /* dsa_pub.pem */; };
 		2528E85C1395209300834921 /* NSStringUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85B1395209300834921 /* NSStringUUID.m */; };
 		2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2528E85F139520B300834921 /* NSNotificationAdditions.m */; };
@@ -564,6 +572,7 @@
 		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
 		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25E513CA1459968600D13D1D /* zoomToFit.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25E513C91459968600D13D1D /* zoomToFit.icns */; };
+		25E65C53179D255F00B0FA5A /* MHWhiteBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E65C52179D255F00B0FA5A /* MHWhiteBackgroundView.m */; };
 		25E7B13615AB39C400373A56 /* TPSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E7B13515AB39C400373A56 /* TPSection.m */; };
 		25E7B13915AB3A6C00373A56 /* TPOutlineBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E7B13815AB3A6C00373A56 /* TPOutlineBuilder.m */; };
 		25E7B13C15AB3C7700373A56 /* TPSectionTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E7B13B15AB3C7700373A56 /* TPSectionTemplate.m */; };
@@ -794,6 +803,19 @@
 		2523C7EA1405530800A47297 /* TPEngineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineManager.h; sourceTree = "<group>"; };
 		2523C7EB1405530800A47297 /* TPEngineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngineManager.m; sourceTree = "<group>"; };
 		2523D7D41505080A008200DB /* Article.tpt */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Article.tpt; sourceTree = "<group>"; };
+		252481B8179BC75000602FCC /* TPTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTheme.h; sourceTree = "<group>"; };
+		252481B9179BC75000602FCC /* TPTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTheme.m; sourceTree = "<group>"; };
+		252481BB179BC97100602FCC /* TPThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPThemeManager.h; sourceTree = "<group>"; };
+		252481BC179BC97100602FCC /* TPThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPThemeManager.m; sourceTree = "<group>"; };
+		252481BE179BCCEF00602FCC /* texnicle.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = texnicle.txtheme; sourceTree = "<group>"; };
+		252481C0179BD34000602FCC /* themeElementMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = themeElementMap.plist; sourceTree = "<group>"; };
+		252481C2179BD93100602FCC /* TPThemeEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPThemeEditorViewController.h; sourceTree = "<group>"; };
+		252481C3179BD93100602FCC /* TPThemeEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPThemeEditorViewController.m; sourceTree = "<group>"; };
+		252481C4179BD93100602FCC /* TPThemeEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPThemeEditorViewController.xib; sourceTree = "<group>"; };
+		252481C7179C2C7100602FCC /* NSDictionary+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Theme.h"; sourceTree = "<group>"; };
+		252481C8179C2C7100602FCC /* NSDictionary+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Theme.m"; sourceTree = "<group>"; };
+		252481CA179C341C00602FCC /* NSColor+ContrastingLabelExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+ContrastingLabelExtensions.h"; sourceTree = "<group>"; };
+		252481CB179C341C00602FCC /* NSColor+ContrastingLabelExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+ContrastingLabelExtensions.m"; sourceTree = "<group>"; };
 		2527487C15C3AF5800D12D69 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = SOURCE_ROOT; };
 		2528E85A1395209300834921 /* NSStringUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringUUID.h; sourceTree = "<group>"; };
 		2528E85B1395209300834921 /* NSStringUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringUUID.m; sourceTree = "<group>"; };
@@ -1477,6 +1499,8 @@
 		25E0EB0C14AF0D380039E82B /* MHPlaceholderAttachmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPlaceholderAttachmentCell.m; sourceTree = "<group>"; };
 		25E50246139FC9F5004A983E /* schema.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = schema.xml; sourceTree = "<group>"; };
 		25E513C91459968600D13D1D /* zoomToFit.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = zoomToFit.icns; sourceTree = "<group>"; };
+		25E65C51179D255F00B0FA5A /* MHWhiteBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWhiteBackgroundView.h; sourceTree = "<group>"; };
+		25E65C52179D255F00B0FA5A /* MHWhiteBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWhiteBackgroundView.m; sourceTree = "<group>"; };
 		25E7B13415AB39C400373A56 /* TPSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSection.h; sourceTree = "<group>"; };
 		25E7B13515AB39C400373A56 /* TPSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSection.m; sourceTree = "<group>"; };
 		25E7B13715AB3A6C00373A56 /* TPOutlineBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOutlineBuilder.h; sourceTree = "<group>"; };
@@ -2004,6 +2028,15 @@
 			path = EngineScripts;
 			sourceTree = "<group>";
 		};
+		252481B7179BC70F00602FCC /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				252481BE179BCCEF00602FCC /* texnicle.txtheme */,
+			);
+			name = Themes;
+			path = themes;
+			sourceTree = "<group>";
+		};
 		2528E8631395400F00834921 /* Standalone Editor */ = {
 			isa = PBXGroup;
 			children = (
@@ -2040,6 +2073,28 @@
 				252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */,
 			);
 			name = "Startup Window";
+			sourceTree = "<group>";
+		};
+		252F7AB2179831D500402231 /* EditorThemes */ = {
+			isa = PBXGroup;
+			children = (
+				252481C0179BD34000602FCC /* themeElementMap.plist */,
+				252481B7179BC70F00602FCC /* Themes */,
+				252481B8179BC75000602FCC /* TPTheme.h */,
+				252481B9179BC75000602FCC /* TPTheme.m */,
+				252481BB179BC97100602FCC /* TPThemeManager.h */,
+				252481BC179BC97100602FCC /* TPThemeManager.m */,
+				252481C2179BD93100602FCC /* TPThemeEditorViewController.h */,
+				252481C3179BD93100602FCC /* TPThemeEditorViewController.m */,
+				252481C4179BD93100602FCC /* TPThemeEditorViewController.xib */,
+				25E65C51179D255F00B0FA5A /* MHWhiteBackgroundView.h */,
+				25E65C52179D255F00B0FA5A /* MHWhiteBackgroundView.m */,
+				252481C7179C2C7100602FCC /* NSDictionary+Theme.h */,
+				252481C8179C2C7100602FCC /* NSDictionary+Theme.m */,
+				252481CA179C341C00602FCC /* NSColor+ContrastingLabelExtensions.h */,
+				252481CB179C341C00602FCC /* NSColor+ContrastingLabelExtensions.m */,
+			);
+			path = EditorThemes;
 			sourceTree = "<group>";
 		};
 		253E5E2913951DB500566E23 /* Library */ = {
@@ -2271,6 +2326,7 @@
 		257B4730138E5E9000ED02C4 /* TeXEditor */ = {
 			isa = PBXGroup;
 			children = (
+				252F7AB2179831D500402231 /* EditorThemes */,
 				250F1B4816E3446500629A2E /* tests */,
 				257B4742138E5E9000ED02C4 /* Commands.plist */,
 				257CDFE9140A3A5E00ED0756 /* ContextCommands.plist */,
@@ -3187,6 +3243,7 @@
 				25DB59341778BB9F000383AF /* log_error.icns in Resources */,
 				253E8FAB13A2157C00720CD0 /* zoomOut.icns in Resources */,
 				259530AB13DCA9A300CA2894 /* commandsPrefs.icns in Resources */,
+				252481C1179BD34000602FCC /* themeElementMap.plist in Resources */,
 				25A47D0A13E1540500CAFEB7 /* newFolder.icns in Resources */,
 				25A47D0D13E1565D00CAFEB7 /* newTeXFile.icns in Resources */,
 				25A47D0F13E1586600CAFEB7 /* typeset2.icns in Resources */,
@@ -3242,6 +3299,7 @@
 				25D57FB714EA531F008E02B5 /* TPProjectTemplateCreator.xib in Resources */,
 				254448A414EB930000377F82 /* TPProjectTemplateViewer.xib in Resources */,
 				2553F70114F0E76700DF0BD3 /* TPProjectTemplateManager.xib in Resources */,
+				252481BF179BCCEF00602FCC /* texnicle.txtheme in Resources */,
 				254C1E0C14F382B400925515 /* TPProjectTemplateListViewController.xib in Resources */,
 				2523D7D51505080A008200DB /* Article.tpt in Resources */,
 				25701AF41505FA090097E8DA /* TPProjectTemplateListViewer.xib in Resources */,
@@ -3331,6 +3389,7 @@
 				25D10EDA176F00AE004C40AE /* TabClose_Dirty.png in Resources */,
 				25D10EDB176F00AE004C40AE /* TabClose_Dirty@2x.png in Resources */,
 				25D10EDC176F00AE004C40AE /* TabClose_Dirty_Pressed.png in Resources */,
+				252481C6179BD93100602FCC /* TPThemeEditorViewController.xib in Resources */,
 				25D10EDD176F00AE004C40AE /* TabClose_Dirty_Pressed@2x.png in Resources */,
 				25D10EDE176F00AE004C40AE /* TabClose_Dirty_Rollover.png in Resources */,
 				25D10EDF176F00AE004C40AE /* TabClose_Dirty_Rollover@2x.png in Resources */,
@@ -3510,6 +3569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				252481BA179BC75000602FCC /* TPTheme.m in Sources */,
 				250772FE138E5D81000F1118 /* main.m in Sources */,
 				25077304138E5D81000F1118 /* TeXProjectDocument.m in Sources */,
 				257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */,
@@ -3550,6 +3610,7 @@
 				257B47A7138E5EC800ED02C4 /* NSString+RelativePath.m in Sources */,
 				257B47AA138E5EEA00ED02C4 /* TeXnicleAppController.m in Sources */,
 				257B47CC138E9C5D00ED02C4 /* ImageAndTextCell.m in Sources */,
+				252481BD179BC97100602FCC /* TPThemeManager.m in Sources */,
 				257B47D5138EA0F700ED02C4 /* NSTreeController_Extensions.m in Sources */,
 				257B47D6138EA0F700ED02C4 /* NSTreeNode_Extensions.m in Sources */,
 				257B47D7138EA0F700ED02C4 /* NSIndexPath_Extensions.m in Sources */,
@@ -3578,11 +3639,13 @@
 				2528E860139520B300834921 /* NSNotificationAdditions.m in Sources */,
 				2528E8671395402F00834921 /* ExternalTeXDoc.m in Sources */,
 				25DB59701778C1A3000383AF /* NSDictionary+SMKeyValueObserving.m in Sources */,
+				252481CC179C341C00602FCC /* NSColor+ContrastingLabelExtensions.m in Sources */,
 				2528E86C1395446400834921 /* DocWindowController.m in Sources */,
 				2528E8711395662600834921 /* StartupScreenController.m in Sources */,
 				25A8DEFD1397A86B0097A62E /* LibraryPreviewBackgroundView.m in Sources */,
 				25A8DF001397AA160097A62E /* MHImageView.m in Sources */,
 				25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */,
+				252481C5179BD93100602FCC /* TPThemeEditorViewController.m in Sources */,
 				25D74AEE1397F90E0074A5A2 /* MHRoundedBottomView.m in Sources */,
 				25DB59411778BB9F000383AF /* TPTeXLogParser.m in Sources */,
 				252144CA1398EA3D00656D3F /* MHRoundedTopBottomView.m in Sources */,
@@ -3682,6 +3745,7 @@
 				250848D1154B212B0001685A /* TPSourceFile.m in Sources */,
 				250848D4154B21580001685A /* TPSourceDirectory.m in Sources */,
 				250848DA154B22420001685A /* AFTreeScanner.m in Sources */,
+				252481C9179C2C7100602FCC /* NSDictionary+Theme.m in Sources */,
 				25C850AE154BE4E00048311D /* ProjectFilesViewController.m in Sources */,
 				25C87DCE15A8722200E61E25 /* TPSpellCheckerListingViewController.m in Sources */,
 				25C87DD215A8858B00E61E25 /* TPSpellCheckedFile.m in Sources */,
@@ -3726,6 +3790,7 @@
 				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
 				250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */,
 				250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */,
+				25E65C53179D255F00B0FA5A /* MHWhiteBackgroundView.m in Sources */,
 				2520AC1716A7F559006E9CA2 /* TPBoxView.m in Sources */,
 				25DE6CB116B3C68E008290F2 /* NSResponder+TeXnicle.m in Sources */,
 				250E7BA816B53F3C00EED1CD /* TPSectionListSection.m in Sources */,
