@@ -32,6 +32,7 @@
 #import "NSScanner+TeXnicle.h"
 #import "NSApplication+SystemVersion.h"
 #import "TPTeXLogParser.h"
+#import "TPLogItem.h"
 
 @interface TPEngine ()
 
@@ -317,16 +318,22 @@
 	NSData *data = [aNote userInfo][NSFileHandleNotificationDataItem];
 	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
-	NSScanner *scanner = [NSScanner scannerWithString:output];
-	NSString *scanned;
-	if ([scanner scanUpToString:@"LaTeX Error:" intoString:&scanned]) {
-		NSInteger loc = [scanner scanLocation];
-		if (loc < [output length]) {
-      [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
-			abortCompile = YES;
-		}
-	}	
-	
+  // check if the output contains an error string
+  NSDictionary *errors = [TPTeXLogParser errorPhrases];
+  NSArray *keys = [errors allKeysForObject:@(TPLogError)];
+  
+  for (NSString *errorPhrase in keys) {
+    NSScanner *scanner = [NSScanner scannerWithString:output];
+    NSString *scanned;
+    if ([scanner scanUpToString:errorPhrase intoString:&scanned]) {
+      NSInteger loc = [scanner scanLocation];
+      if (loc < [output length]) {
+        [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
+        abortCompile = YES;
+      }
+    }	
+	}
+  
 	[self enginePostTextForAppending:output];
   
 	if([data length] > 0) {
