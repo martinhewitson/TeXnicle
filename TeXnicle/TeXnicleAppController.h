@@ -42,6 +42,7 @@
 @property (strong) TPLibrary *library;
 @property (strong) TPPalette *palette;
 @property (strong) PDFViewer *helpViewer;
+@property (assign) BOOL didSetup;
 
 - (void) checkVersion;
 

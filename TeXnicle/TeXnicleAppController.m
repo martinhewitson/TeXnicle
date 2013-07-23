@@ -472,6 +472,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   if (self) {
     // Initialization code here.
     self.openStartupScreenAtAppStartup = YES;
+    self.didSetup = NO;
   }
   
   return self;
@@ -526,23 +527,25 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 
 - (void) doSetup
 {
-  // install templates
-  [TPProjectTemplateManager installBundleTemplates];
-  
-  //  [self checkVersion];
-  [TPEngineManager installEngines];
-  
-  // setup app-wide library
-  self.library = [[TPLibrary alloc] init];
-  
-  // setup app-wide palette
-  self.palette = [[TPPalette alloc] init];
-  
-  // load themes
-  [TPThemeManager migrateDefaultsToTheme];
-  [TPThemeManager installThemes];
-  TPThemeManager *themeManager = [TPThemeManager sharedManager];
-  
+  if (self.didSetup == NO) {
+    // install templates
+    [TPProjectTemplateManager installBundleTemplates];
+    
+    // install engines
+    [TPEngineManager installEngines];
+    
+    // setup app-wide library
+    self.library = [[TPLibrary alloc] init];
+    
+    // setup app-wide palette
+    self.palette = [[TPPalette alloc] init];
+    
+    // load themes
+    [TPThemeManager migrateDefaultsToTheme];
+    [TPThemeManager installThemes];
+    TPThemeManager *themeManager = [TPThemeManager sharedManager];
+    self.didSetup = YES;
+  }
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
