@@ -63,6 +63,9 @@
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   _cancelCheck = YES;
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
@@ -74,7 +77,6 @@
   self.ignoreButton = nil;
   self.forceCheckButton = nil;
 
-//  NSLog(@"Tear down %@", self);
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];

@@ -36,6 +36,9 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   [self stop];
 }
 

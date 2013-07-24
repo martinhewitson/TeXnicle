@@ -65,12 +65,14 @@
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   self.outlineView.dataSource = nil;
   self.outlineView.delegate = nil;
   self.outlineView = nil;
   self.revealButton = nil;
   
-  //  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self.sets removeAllObjects];
   self.sets = nil;

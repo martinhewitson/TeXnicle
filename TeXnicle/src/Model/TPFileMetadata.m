@@ -92,6 +92,9 @@
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   NSUserDefaultsController *defaults = [NSUserDefaultsController sharedUserDefaultsController];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntaxErrors]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TPCheckSyntax]];

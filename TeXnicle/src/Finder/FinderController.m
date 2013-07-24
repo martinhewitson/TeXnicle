@@ -90,7 +90,9 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down %@", self);
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;

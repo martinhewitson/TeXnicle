@@ -85,8 +85,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) tearDown
 {
-  //  NSLog(@"Tear down %@", self);
-  
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSNotificationCenter defaultCenter] removeObserver:self];

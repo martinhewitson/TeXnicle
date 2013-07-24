@@ -124,6 +124,9 @@
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear Down %@", self);
+#endif
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.mainDocument = nil;
   self.statusViewContainer = nil;

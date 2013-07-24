@@ -674,8 +674,9 @@
 
 - (void) tearDown
 {
-//  NSLog(@"Clean up...");
-  
+#if TEAR_DOWN
+  NSLog(@"Clean up %@...", self.project.name);
+#endif
   [self.engineManager cancelCompilation];
   
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];

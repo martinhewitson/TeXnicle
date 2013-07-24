@@ -118,7 +118,9 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down %@", self);
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
 	NSError *error = nil;
 	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
 	if (success == NO) {

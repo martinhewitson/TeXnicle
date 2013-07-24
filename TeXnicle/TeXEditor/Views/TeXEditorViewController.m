@@ -87,6 +87,10 @@
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
+  
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
   
@@ -94,7 +98,6 @@
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self.textView];
 
   
-//  NSLog(@"Tear down %@", self);
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   self.delegate = nil;

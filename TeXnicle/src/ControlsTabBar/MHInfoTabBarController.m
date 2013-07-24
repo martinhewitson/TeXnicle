@@ -45,10 +45,12 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   [self.view removeFromSuperview];
   [[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
   [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
-//  NSLog(@"Tear down %@", self);
   self.splitview = nil;
   self.tabView.delegate = nil;
   self.tabView = nil;

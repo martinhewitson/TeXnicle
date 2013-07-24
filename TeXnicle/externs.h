@@ -26,7 +26,11 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
+#define TEAR_DOWN 1
+
 // preferences
+
+
 
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7

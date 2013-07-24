@@ -780,7 +780,10 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 
 - (void) cleanUp
 {
-//  NSLog(@"### Clean up");
+#if TEAR_DOWN
+  NSLog(@"### Clean up %@", self.fileURL);
+#endif
+  
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopObserving];
   

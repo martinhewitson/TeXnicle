@@ -46,7 +46,9 @@ NSString * const TPControlsTabSelectionDidChangeNotification = @"TPControlsTabSe
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down %@", self);
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   buttons = nil;
   self.viewBackground = nil;
   self.splitview = nil;

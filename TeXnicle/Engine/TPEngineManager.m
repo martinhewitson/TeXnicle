@@ -153,7 +153,9 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) tearDown
 {
-//  NSLog(@"Tear down %@", self);
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   [self.consoleManager tearDown];
   self.consoleManager = nil;
   [self.engines removeAllObjects];

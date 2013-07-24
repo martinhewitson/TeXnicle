@@ -86,6 +86,9 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 - (void) tearDown
 {
+#if TEAR_DOWN
+  NSLog(@"Tear down %@", self);
+#endif
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   whiteSpace = nil;
   newlines = nil;
