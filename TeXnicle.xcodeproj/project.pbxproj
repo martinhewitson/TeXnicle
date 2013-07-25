@@ -350,6 +350,14 @@
 		25B244F21791AEE90005344C /* TPQuickJumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B244F01791AEE90005344C /* TPQuickJumpViewController.m */; };
 		25B244F31791AEE90005344C /* TPQuickJumpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B244F11791AEE90005344C /* TPQuickJumpViewController.xib */; };
 		25B244F61791B9570005344C /* TPQuickJumpSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B244F51791B9570005344C /* TPQuickJumpSearchField.m */; };
+		25B28B96179FC01A00A41A0D /* texnicle dark.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B95179FC01A00A41A0D /* texnicle dark.txtheme */; };
+		25B28B9817A062D600A41A0D /* blackboard.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9717A062D600A41A0D /* blackboard.txtheme */; };
+		25B28B9A17A066FC00A41A0D /* dusk.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9917A066FC00A41A0D /* dusk.txtheme */; };
+		25B28B9C17A06B3500A41A0D /* humane.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9B17A06B3500A41A0D /* humane.txtheme */; };
+		25B28B9E17A06E2C00A41A0D /* earthworm.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9D17A06E2C00A41A0D /* earthworm.txtheme */; };
+		25B28BA017A0F33300A41A0D /* quiet light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9F17A0F33300A41A0D /* quiet light.txtheme */; };
+		25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */; };
+		25B28BA517A16BE000A41A0D /* TPArrayStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */; };
 		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
 		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
@@ -596,11 +604,7 @@
 		25F9913A14C2C822002F7A3F /* TPProjectBuilderReport.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25F9913914C2C822002F7A3F /* TPProjectBuilderReport.xib */; };
 		25F9913D14C2D14C002F7A3F /* MHPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F9913C14C2D14C002F7A3F /* MHPDFView.m */; };
 		25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */; };
-		25FD408F13913EDB0037CB54 /* FontNameToDisplayNameTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */; };
 		25FD409213913EDB0037CB54 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408813913EDB0037CB54 /* PrefsWindowController.m */; };
-		25FD409313913EDB0037CB54 /* SyntaxColorControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25FD408913913EDB0037CB54 /* SyntaxColorControl.xib */; };
-		25FD409413913EDB0037CB54 /* SyntaxHighlightControlController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408B13913EDB0037CB54 /* SyntaxHighlightControlController.m */; };
-		25FD409513913EDB0037CB54 /* TPArrayStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FD408D13913EDB0037CB54 /* TPArrayStringTransformer.m */; };
 		25FD40981391531F0037CB54 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40971391531F0037CB54 /* Preferences.xib */; };
 		25FD40A4139164A30037CB54 /* engine.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40A1139164A20037CB54 /* engine.icns */; };
 		25FD40A5139164A30037CB54 /* fontsAndColors.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40A2139164A20037CB54 /* fontsAndColors.icns */; };
@@ -1193,6 +1197,15 @@
 		25B244F11791AEE90005344C /* TPQuickJumpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPQuickJumpViewController.xib; sourceTree = "<group>"; };
 		25B244F41791B9570005344C /* TPQuickJumpSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPQuickJumpSearchField.h; sourceTree = "<group>"; };
 		25B244F51791B9570005344C /* TPQuickJumpSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPQuickJumpSearchField.m; sourceTree = "<group>"; };
+		25B28B95179FC01A00A41A0D /* texnicle dark.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "texnicle dark.txtheme"; sourceTree = "<group>"; };
+		25B28B9717A062D600A41A0D /* blackboard.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blackboard.txtheme; sourceTree = "<group>"; };
+		25B28B9917A066FC00A41A0D /* dusk.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = dusk.txtheme; sourceTree = "<group>"; };
+		25B28B9B17A06B3500A41A0D /* humane.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = humane.txtheme; sourceTree = "<group>"; };
+		25B28B9D17A06E2C00A41A0D /* earthworm.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = earthworm.txtheme; sourceTree = "<group>"; };
+		25B28B9F17A0F33300A41A0D /* quiet light.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "quiet light.txtheme"; sourceTree = "<group>"; };
+		25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "solarize light.txtheme"; sourceTree = "<group>"; };
+		25B28BA317A16BE000A41A0D /* TPArrayStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPArrayStringTransformer.h; sourceTree = "<group>"; };
+		25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPArrayStringTransformer.m; sourceTree = "<group>"; };
 		25BB152315B41770007A7FDF /* infoTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImage.icns; sourceTree = "<group>"; };
 		25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImageDepressed.icns; sourceTree = "<group>"; };
@@ -1538,15 +1551,8 @@
 		25F9913C14C2D14C002F7A3F /* MHPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHPDFView.m; sourceTree = "<group>"; };
 		25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DBPrefsWindowController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
-		25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontNameToDisplayNameTransformer.h; sourceTree = "<group>"; };
-		25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontNameToDisplayNameTransformer.m; sourceTree = "<group>"; };
 		25FD408713913EDB0037CB54 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
 		25FD408813913EDB0037CB54 /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
-		25FD408913913EDB0037CB54 /* SyntaxColorControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyntaxColorControl.xib; sourceTree = "<group>"; };
-		25FD408A13913EDB0037CB54 /* SyntaxHighlightControlController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlightControlController.h; sourceTree = "<group>"; };
-		25FD408B13913EDB0037CB54 /* SyntaxHighlightControlController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlightControlController.m; sourceTree = "<group>"; };
-		25FD408C13913EDB0037CB54 /* TPArrayStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPArrayStringTransformer.h; sourceTree = "<group>"; };
-		25FD408D13913EDB0037CB54 /* TPArrayStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPArrayStringTransformer.m; sourceTree = "<group>"; };
 		25FD40971391531F0037CB54 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		25FD40A1139164A20037CB54 /* engine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = engine.icns; sourceTree = "<group>"; };
 		25FD40A2139164A20037CB54 /* fontsAndColors.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fontsAndColors.icns; sourceTree = "<group>"; };
@@ -2031,6 +2037,13 @@
 		252481B7179BC70F00602FCC /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */,
+				25B28B9F17A0F33300A41A0D /* quiet light.txtheme */,
+				25B28B9D17A06E2C00A41A0D /* earthworm.txtheme */,
+				25B28B9B17A06B3500A41A0D /* humane.txtheme */,
+				25B28B9917A066FC00A41A0D /* dusk.txtheme */,
+				25B28B9717A062D600A41A0D /* blackboard.txtheme */,
+				25B28B95179FC01A00A41A0D /* texnicle dark.txtheme */,
 				252481BE179BCCEF00602FCC /* texnicle.txtheme */,
 			);
 			name = Themes;
@@ -3081,18 +3094,13 @@
 		25FD407F13913EDA0037CB54 /* preferences */ = {
 			isa = PBXGroup;
 			children = (
+				25B28BA317A16BE000A41A0D /* TPArrayStringTransformer.h */,
+				25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */,
 				25FD408013913EDB0037CB54 /* DBPrefsWindowController.h */,
 				25FD408113913EDB0037CB54 /* DBPrefsWindowController.m */,
-				25FD408213913EDB0037CB54 /* FontNameToDisplayNameTransformer.h */,
-				25FD408313913EDB0037CB54 /* FontNameToDisplayNameTransformer.m */,
 				25FD408713913EDB0037CB54 /* PrefsWindowController.h */,
 				25FD408813913EDB0037CB54 /* PrefsWindowController.m */,
 				25FD40971391531F0037CB54 /* Preferences.xib */,
-				25FD408913913EDB0037CB54 /* SyntaxColorControl.xib */,
-				25FD408A13913EDB0037CB54 /* SyntaxHighlightControlController.h */,
-				25FD408B13913EDB0037CB54 /* SyntaxHighlightControlController.m */,
-				25FD408C13913EDB0037CB54 /* TPArrayStringTransformer.h */,
-				25FD408D13913EDB0037CB54 /* TPArrayStringTransformer.m */,
 			);
 			name = preferences;
 			path = ../preferences;
@@ -3212,17 +3220,20 @@
 				2519492D138FA8D6007029E5 /* projectTabBarImageDepressed.icns in Resources */,
 				25194930138FAFC4007029E5 /* palletTabBarImageDepressed.icns in Resources */,
 				25194931138FAFC4007029E5 /* palletTabBarImage.icns in Resources */,
+				25B28BA017A0F33300A41A0D /* quiet light.txtheme in Resources */,
+				25B28B9E17A06E2C00A41A0D /* earthworm.txtheme in Resources */,
 				25194942138FB85A007029E5 /* libraryTabBarImage.icns in Resources */,
 				25194943138FB85A007029E5 /* libraryTabBarImageDepressed.icns in Resources */,
 				25194946138FB9F7007029E5 /* outlineTabBarImageDepressed.icns in Resources */,
+				25B28B9C17A06B3500A41A0D /* humane.txtheme in Resources */,
 				25194947138FB9F7007029E5 /* outlineTabBarImage.icns in Resources */,
-				25FD409313913EDB0037CB54 /* SyntaxColorControl.xib in Resources */,
 				25FD40981391531F0037CB54 /* Preferences.xib in Resources */,
 				25FD40A4139164A30037CB54 /* engine.icns in Resources */,
 				25FD40A5139164A30037CB54 /* fontsAndColors.icns in Resources */,
 				25FD40A6139164A30037CB54 /* templates.icns in Resources */,
 				2581830F139222D200ECCCB1 /* Templates.plist in Resources */,
 				251FC6EE1392708800DB2E3B /* Console.xib in Resources */,
+				25B28B9A17A066FC00A41A0D /* dusk.txtheme in Resources */,
 				25717DA91392D16200955620 /* palette.plist in Resources */,
 				25717DB11392D64A00955620 /* makePDFimage.sh in Resources */,
 				25717DB51392DA1100955620 /* Palette in Resources */,
@@ -3319,6 +3330,7 @@
 				258BCAEC15B0698C0092E914 /* backbutton.icns in Resources */,
 				258BCAED15B0698C0092E914 /* backbuttonDepressed.icns in Resources */,
 				258BCAF015B06B170092E914 /* forwardbutton.icns in Resources */,
+				25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */,
 				25DB59761778C6B3000383AF /* error_template.icns in Resources */,
 				258BCAF115B06B170092E914 /* forwardbuttonDepressed.icns in Resources */,
 				2540D8BA15B2C31E00528982 /* TPLibraryView.xib in Resources */,
@@ -3344,6 +3356,7 @@
 				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
+				25B28B96179FC01A00A41A0D /* texnicle dark.txtheme in Resources */,
 				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
 				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 				25CFBD1316D2CFB90025B35D /* texcount in Resources */,
@@ -3442,6 +3455,7 @@
 				25D10F2A176F00AF004C40AE /* SafariIWATLeftCap@2x.png in Resources */,
 				25D10F2B176F00AF004C40AE /* SafariIWATRightCap.png in Resources */,
 				25D10F2C176F00AF004C40AE /* SafariIWATRightCap@2x.png in Resources */,
+				25B28B9817A062D600A41A0D /* blackboard.txtheme in Resources */,
 				256DEE1A17917A65006E24E9 /* log_error_template.icns in Resources */,
 				25D10F2D176F00AF004C40AE /* SafariIWBG.png in Resources */,
 				25D10F2E176F00AF004C40AE /* SafariIWITClose.png in Resources */,
@@ -3625,10 +3639,7 @@
 				25194920138F9830007029E5 /* MHControlsTabBarController.m in Sources */,
 				2519492B138FA840007029E5 /* MHToolbarBackgroundView.m in Sources */,
 				25FD408E13913EDB0037CB54 /* DBPrefsWindowController.m in Sources */,
-				25FD408F13913EDB0037CB54 /* FontNameToDisplayNameTransformer.m in Sources */,
 				25FD409213913EDB0037CB54 /* PrefsWindowController.m in Sources */,
-				25FD409413913EDB0037CB54 /* SyntaxHighlightControlController.m in Sources */,
-				25FD409513913EDB0037CB54 /* TPArrayStringTransformer.m in Sources */,
 				25717DAA1392D16200955620 /* SymbolTableDelegate.m in Sources */,
 				25717DAC1392D16200955620 /* PaletteController.m in Sources */,
 				25717DAF1392D60A00955620 /* NSWorkspaceExtended.m in Sources */,
@@ -3829,6 +3840,7 @@
 				25D10EFE176F00AE004C40AE /* NSString+MMTabBarViewExtensions.m in Sources */,
 				25D10EFF176F00AE004C40AE /* NSTabViewItem+MMTabBarViewExtensions.m in Sources */,
 				25D10F00176F00AE004C40AE /* NSView+MMTabBarViewExtensions.m in Sources */,
+				25B28BA517A16BE000A41A0D /* TPArrayStringTransformer.m in Sources */,
 				25D10F01176F00AE004C40AE /* MMAdiumTabStyle.m in Sources */,
 				25D10F02176F00AE004C40AE /* MMAquaTabStyle.m in Sources */,
 				25D10F03176F00AE004C40AE /* MMCardTabStyle.m in Sources */,
