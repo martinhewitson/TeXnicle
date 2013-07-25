@@ -467,7 +467,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 
 - (id)init
 {
-//  NSLog(@"App delegate init");
+  //NSLog(@"App delegate init");
   self = [super init];
   if (self) {
     // Initialization code here.
@@ -485,7 +485,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 
 - (void)applicationWillFinishLaunching:(NSNotification *)aNotification
 {
-//  NSLog(@"App will finish launching");
+  //NSLog(@"App will finish launching");
   
   // set default
   lineToOpen = NSNotFound;
@@ -495,7 +495,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-//  NSLog(@"Application open file %@", filename);
+  //NSLog(@"Application open file %@", filename);
 	NSError *error = nil;
   
   [self doSetup];
@@ -528,6 +528,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 - (void) doSetup
 {
   if (self.didSetup == NO) {
+    //NSLog(@"Do setup");
     // install templates
     [TPProjectTemplateManager installBundleTemplates];
     
@@ -550,7 +551,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-//  NSLog(@"App did finish launching");
+  //NSLog(@"App did finish launching");
   
 	id controller = [self startupScreen];
 	NSArray *recentURLs = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
@@ -569,7 +570,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
     }
   }
   
-//  NSLog(@"App finished launching");
+  //NSLog(@"App finished launching");
 }
 
 
