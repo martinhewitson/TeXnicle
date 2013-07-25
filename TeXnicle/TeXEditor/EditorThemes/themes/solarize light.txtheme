@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>ColorMultilineArguments</key>
+    <false/>
+    <key>CurrentLineColor</key>
+    <string>0.928172 0.899822 0.786271 1.000000</string>
+    <key>HighlightCurrentLine</key>
+    <true/>
+    <key>HighlightMatchingWords</key>
+    <true/>
+    <key>MatchingWordsColor</key>
+    <string>0.835406 0.809890 0.707688 1.000000</string>
+    <key>TeXnicleDocumentColors</key>
+    <dict>
+      <key>texnicle.document.cursor</key>
+      <string>0.000000 0.000000 0.000000 1.000000</string>
+      <key>texnicle.document.editorbackground</key>
+      <string>0.989434 0.957944 0.86406 1</string>
+      <key>texnicle.document.editormargin</key>
+      <string>0.937859 0.909214 0.794477 1.000000</string>
+      <key>texnicle.document.selectedtext</key>
+      <string>0.000000 0.000000 0.000000 1.000000</string>
+      <key>texnicle.document.selectedtextbackground</key>
+      <string>0.792782 0.792758 0.792772 1.000000</string>
+      <key>texnicle.document.text</key>
+      <string>0.000000 0.000000 0.000000 1.000000</string>
+    </dict>
+    <key>TeXnicleFonts</key>
+    <dict>
+      <key>texnicle.font.console</key>
+      <string>Courier - 13</string>
+      <key>texnicle.font.editor</key>
+      <string>Courier - 13</string>
+    </dict>
+    <key>TeXnicleOutlineColors</key>
+    <dict>
+      <key>texnicle.outline.background</key>
+      <string>0.989434 0.957944 0.86406 1</string>
+      <key>texnicle.outline.begin</key>
+      <string>0.184783 0.184783 0.184783 1.000000</string>
+      <key>texnicle.outline.chapter</key>
+      <string>0.633453 0.132591 0.109604 1.000000</string>
+      <key>texnicle.outline.paragraph</key>
+      <string>0.498919 0.556281 0.354419 1.000000</string>
+      <key>texnicle.outline.part</key>
+      <string>0.447107 0.091645 0.050409 1.000000</string>
+      <key>texnicle.outline.section</key>
+      <string>0.765439 0.397113 0.229266 1.000000</string>
+      <key>texnicle.outline.subparagraph</key>
+      <string>0.423601 0.551906 0.348001 1.000000</string>
+      <key>texnicle.outline.subsection</key>
+      <string>0.628250 0.492325 0.255720 1.000000</string>
+      <key>texnicle.outline.subsubsection</key>
+      <string>0.681906 0.653722 0.338740 1.000000</string>
+    </dict>
+    <key>TeXnicleSyntaxColors</key>
+    <dict>
+      <key>texnicle.syntax.arguments</key>
+      <string>0.703000 0.271515 0.325877 1.000000</string>
+      <key>texnicle.syntax.arguments.active</key>
+      <true/>
+      <key>texnicle.syntax.commands</key>
+      <string>0.210438 0.425761 0.648578 1.000000</string>
+      <key>texnicle.syntax.commands.active</key>
+      <true/>
+      <key>texnicle.syntax.comments1</key>
+      <string>0.710407 0.710407 0.710407 1.000000</string>
+      <key>texnicle.syntax.comments1.active</key>
+      <true/>
+      <key>texnicle.syntax.comments2</key>
+      <string>0.576266 0.576266 0.576266 1.000000</string>
+      <key>texnicle.syntax.comments2.active</key>
+      <true/>
+      <key>texnicle.syntax.comments3</key>
+      <string>0.402705 0.402705 0.402705 1.000000</string>
+      <key>texnicle.syntax.comments3.active</key>
+      <true/>
+      <key>texnicle.syntax.dollar</key>
+      <string>0.966526 0.492667 0.022084 1.000000</string>
+      <key>texnicle.syntax.dollar.active</key>
+      <true/>
+      <key>texnicle.syntax.markup1</key>
+      <string>0.354459 0.554798 0.742078 1.000000</string>
+      <key>texnicle.syntax.markup1.active</key>
+      <true/>
+      <key>texnicle.syntax.markup2</key>
+      <string>0.272388 0.436302 0.602688 1.000000</string>
+      <key>texnicle.syntax.markup2.active</key>
+      <true/>
+      <key>texnicle.syntax.markup3</key>
+      <string>0.176624 0.320540 0.443562 1.000000</string>
+      <key>texnicle.syntax.markup3.active</key>
+      <true/>
+      <key>texnicle.syntax.specialcharacters</key>
+      <string>0.226342 0.527419 0.998669 1.000000</string>
+      <key>texnicle.syntax.specialcharacters.active</key>
+      <true/>
+    </dict>
+    <key>ThemeDescription</key>
+    <string>A quiet light theme for TeXnicle.</string>
+  </dict>
+</plist>

@@ -6,6 +6,14 @@
 	<string>The default TeXnicle theme.</string>
 	<key>ColorMultilineArguments</key>
 	<false/>
+  <key>HighlightCurrentLine</key>
+  <true/>
+  <key>CurrentLineColor</key>
+  <string>0.95 0.95 0.95</string>
+  <key>HighlightMatchingWords</key>
+  <true/>
+  <key>MatchingWordsColor</key>
+  <string>0.88 0.933 1</string>
 	<key>TeXnicleFonts</key>
 	<dict>
 		<key>texnicle.font.editor</key>
@@ -15,6 +23,8 @@
 	</dict>
 	<key>TeXnicleOutlineColors</key>
 	<dict>
+    <key>texnicle.outline.background</key>
+		<string>1 1 1</string>
 		<key>texnicle.outline.begin</key>
 		<string>1 0 0</string>
 		<key>texnicle.outline.part</key>
