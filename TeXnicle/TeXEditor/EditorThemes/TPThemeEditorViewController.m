@@ -20,7 +20,14 @@
 @property (assign) IBOutlet NSTableView *documentItemsTable;
 @property (assign) IBOutlet NSTableView *outlineItemsTable;
 @property (assign) IBOutlet NSTableView *syntaxItemsTable;
-@property (assign) IBOutlet NSColorWell *colorWell;
+@property (assign) IBOutlet NSColorWell *documentColorWell;
+@property (assign) IBOutlet NSColorWell *syntaxColorWell;
+@property (assign) IBOutlet NSColorWell *outlineColorWell;
+@property (assign) IBOutlet NSColorWell *currentLineColorWell;
+@property (assign) IBOutlet NSColorWell *matchingWordsColorWell;
+@property (assign) IBOutlet NSButton *currentLineButton;
+@property (assign) IBOutlet NSButton *matchingWordsButton;
+
 @property (assign) IBOutlet NSButton *selectEditorFontButton;
 @property (assign) IBOutlet NSButton *selectConsoleFontButton;
 @property (assign) IBOutlet NSButton *multilineArgButton;
@@ -117,7 +124,7 @@
 
 - (void) changeColor:(id)sender
 {
-  NSColor *color = [self.colorWell color];
+  NSColor *color = [(NSColorWell*)sender color];
   if (self.selectedTheme == nil) {
     return;
   }
@@ -134,8 +141,8 @@
 
 - (IBAction)chooseColor:(id)sender
 {
-  [self.colorWell setAction:@selector(changeColor:)];
-  [self.colorWell setTarget:self];
+  [sender setAction:@selector(changeColor:)];
+  [sender setTarget:self];
 }
 
 
@@ -530,12 +537,23 @@
       self.selectedKey = keys[row];
       
       NSColor *c = [th colorForKey:keys[row]];
-      [self.colorWell setColor:c];
+      [[self colorWellForTableView:tableView] setColor:c];
     }
     
   }
   
   [self updateUI];
+}
+
+- (NSColorWell*)colorWellForTableView:(NSTableView*)tableView
+{
+  if (tableView == self.documentItemsTable) {
+    return self.documentColorWell;
+  } else if (tableView == self.outlineItemsTable) {
+    return self.outlineColorWell;
+  } else {
+    return self.syntaxColorWell;
+  }
 }
 
 - (void) registerThemeChange
@@ -568,9 +586,21 @@
     state = NO;
   }
   if (self.selectedKey != nil) {
-    [self.colorWell setEnabled:state];
+    [self.outlineColorWell setEnabled:state];
+    [self.syntaxColorWell setEnabled:state];
+    [self.documentColorWell setEnabled:state];
+    [self.currentLineColorWell setEnabled:state];
+    [self.matchingWordsColorWell setEnabled:state];
+    [self.matchingWordsButton setEnabled:state];
+    [self.currentLineButton setEnabled:state];
   } else {
-    [self.colorWell setEnabled:NO];
+    [self.outlineColorWell setEnabled:NO];
+    [self.syntaxColorWell setEnabled:NO];
+    [self.documentColorWell setEnabled:NO];
+    [self.currentLineColorWell setEnabled:NO];
+    [self.matchingWordsColorWell setEnabled:NO];
+    [self.currentLineButton setEnabled:NO];
+    [self.matchingWordsButton setEnabled:NO];
   }
   
   [self.multilineArgButton setEnabled:state];
