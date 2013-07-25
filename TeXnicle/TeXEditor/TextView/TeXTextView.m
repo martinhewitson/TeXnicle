@@ -776,8 +776,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEDocumentLineHeightMultiple]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowCodeFolders]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]];
-  [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]];
   [defaults removeObserver:self forKeyPath:[NSString stringWithFormat:@"values.%@", TELineLength]];
 }
@@ -798,16 +796,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   [defaults addObserver:self
              forKeyPath:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]
-                options:NSKeyValueObservingOptionNew
-                context:NULL];
-  
-  [defaults addObserver:self
-             forKeyPath:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]
                 options:NSKeyValueObservingOptionNew
                 context:NULL];
   
@@ -836,12 +824,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEShowLineNumbers]]) {
     [self performSelectorOnMainThread:@selector(updateEditorRuler) withObject:nil waitUntilDone:YES];
     [self.editorRuler recalculateThickness];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEHighlightMatchingWords]]) {
-    NSRange vr = [self getVisibleRange];
-    [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
-    [self highlightMatchingWords];
-	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TEHighlightCurrentLine]]) {
-		[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:YES];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineWrapStyle]]) {
     [self setWrapStyle];
 	} else if ([keyPath isEqual:[NSString stringWithFormat:@"values.%@", TELineLength]]) {
@@ -856,6 +838,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleThemeChangedNotification:(NSNotification*)aNote
 {
   [self applyFontAndColor:YES];
+  
+  NSRange vr = [self getVisibleRange];
+  [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
+  [self highlightMatchingWords];
+  [self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:YES];
 }
 
 - (void) setTypingColor:(NSColor*)aColor
@@ -1926,14 +1913,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) highlightMatchingWords
 {
+  TPTheme *theme = [TPThemeManager currentTheme];
   
   NSRange r = [self selectedRange];
   NSRange vr = [self getVisibleRange];
   //  NSLog(@"Visible range %@", NSStringFromRange(vr));
   
-  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  if ([[defaults valueForKey:TEHighlightMatchingWords] boolValue]) {
+  if ([theme.highlightMatchingWords boolValue]) {
     [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
     
     NSString *string = [self string];
@@ -1944,7 +1930,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         NSString *textToSearch = [[self string] substringWithRange:vr];
         NSArray *matches = [textToSearch rangesOfString:word];
         
-        NSColor *highlightColor = [[defaults valueForKey:TEHighlightMatchingWordsColor] colorValue];
+        NSColor *highlightColor = theme.matchingWordsColor;
         for (NSValue *match in matches) {
           NSRange r = [match rangeValue];
           r.location += vr.location;
@@ -2666,22 +2652,24 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   // highlight current line
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  if ([[defaults valueForKey:TEHighlightCurrentLine] boolValue]) {
+  TPTheme *theme = [TPThemeManager currentTheme];
+  
+  if ([theme.highlightCurrentLine boolValue]) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
     if (sel.location <= [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
       NSRect lineRect = [self highlightRectForRange:lineRange];
-      NSColor *highlightColor = [[defaults valueForKey:TEHighlightCurrentLineColor] colorValue];
+      NSColor *highlightColor = theme.currentLineColor;
       [highlightColor set];
       [NSBezierPath fillRect:lineRect];
     }
   }
   
   
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   // line width
-  int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
+  int wrapStyle = [[defaults valueForKey:TELineWrapStyle] intValue];
   if (wrapStyle == TPHardWrap || wrapStyle == TPSoftWrap) {
     NSRect vr = [self visibleRect];
     NSRect r;
@@ -2691,20 +2679,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSSize s = [[self textContainer] containerSize];
       r = NSMakeRect(inset.width+s.width, vr.origin.y, vr.size.width, vr.size.height);
     } else {
-      int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+      int wrapAt = [[defaults valueForKey:TELineLength] intValue];
       CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
       r = NSMakeRect(scale*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
     }
     
-    NSColor *highlightColor = [[defaults valueForKey:TEDocumentBackgroundMarginColor] colorValue];
+    NSColor *highlightColor = theme.documentEditorMarginColor;
     [highlightColor set];
-//    
-//    if ([[self backgroundColor] isDarkerThan:0.7]) {
-//      [[[self backgroundColor] highlightWithLevel:0.1] set];
-//    } else {
-//      [[[self backgroundColor] shadowWithLevel:0.01] set];
-//    }
-    
     [NSBezierPath fillRect:r];
   }
 }

@@ -39,6 +39,7 @@
 #import "NSAttributedString+LineNumbers.h"
 #import "Bookmark.h"
 #import "TPFoldedCodeSnippet.h"
+#import "TPThemeManager.h"
 
 #define kDEFAULT_THICKNESS	22.0
 #define kRULER_MARGIN		5.0
@@ -78,12 +79,9 @@
     _newThickness = -1.0;
     self.lineNumbers = @[];
     self.textView = (TeXTextView*)aTextView;
-    self.textColor = [NSColor darkGrayColor];
-    self.alternateTextColor = [NSColor whiteColor];
-//    self.backgroundColor = [NSColor darkGrayColor];  
-    CGFloat v = 237;
-    self.backgroundColor = [NSColor colorWithDeviceRed:v/255.0 green:v/255.0 blue:v/255.0 alpha:1.0];
-
+    
+    [self setColors];
+    
     self.font = [NSFont labelFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]];
     
     // initialise the folding tag descriptions
@@ -107,9 +105,30 @@
            selector:@selector(handleTextViewDidFoldUnfoldNotification:)
                name:TEDidFoldUnfoldTextNotification
              object:self.textView];
+    
+    [nc addObserver:self
+           selector:@selector(handleThemeDidChangeNotification:)
+               name:TPThemeSelectionChangedNotification
+             object:nil];
   }
 	  
 	return self;
+}
+
+- (void) handleThemeDidChangeNotification:(NSNotification*)aNote
+{
+  [self setColors];
+  [self setNeedsDisplay:YES];
+}
+
+- (void) setColors
+{
+  TPTheme *theme = [TPThemeManager currentTheme];
+  self.textColor = theme.documentTextColor;
+  self.alternateTextColor = [NSColor whiteColor];
+  self.backgroundColor = theme.documentEditorBackgroundColor;
+  self.textAttributesDictionary = nil;
+  self.alternateTextAttributesDictionary = nil;
 }
 
 - (void) handleTextViewDidFoldUnfoldNotification:(NSNotification*)aNote
