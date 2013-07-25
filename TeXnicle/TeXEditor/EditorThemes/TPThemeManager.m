@@ -50,9 +50,14 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
 
 +(NSArray*)builtinThemeNames
 {
-  return @[@"texnicle"];
+  return @[@"texnicle", @"texnicle dark", @"blackboard", @"dusk", @"humane", @"earthworm", @"quiet light", @"solarize light"];
 }
 
++ (TPTheme*) currentTheme
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  return tm.currentTheme;
+}
 
 + (TPThemeManager*)sharedManager
 {

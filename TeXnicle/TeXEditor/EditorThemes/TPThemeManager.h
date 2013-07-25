@@ -35,6 +35,7 @@
 @property (readonly) TPTheme *currentTheme;
 
 + (TPThemeManager*)sharedManager;
++ (TPTheme*) currentTheme;
 + (NSString*)themesDir;
 + (NSString*)themeExtension;
 + (void) installThemes;
