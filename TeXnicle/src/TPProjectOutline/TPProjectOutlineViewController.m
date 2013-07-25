@@ -10,6 +10,8 @@
 #import "TPSectionTemplate.h"
 #import "ImageAndTextCell.h"
 #import "TPDocumentSectionManager.h"
+#import "TPThemeManager.h"
+#import "externs.h"
 
 @interface TPProjectOutlineViewController ()
 
@@ -46,6 +48,9 @@
 #if TEAR_DOWN
   NSLog(@"Tear down %@", self);
 #endif
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.outlineView = nil;
@@ -84,6 +89,25 @@
   [self.outlineView setDoubleAction:@selector(jumpToSelectedResult)];
   [self.outlineView setTarget:self];
   
+  [self setupOutlineView];
+  
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self
+         selector:@selector(handleThemeDidChangeNotification:)
+             name:TPThemeSelectionChangedNotification
+           object:nil];
+  
+}
+
+- (void) handleThemeDidChangeNotification:(NSNotification*)aNote
+{
+  [self setupOutlineView];
+}
+
+- (void) setupOutlineView
+{
+  TPTheme *theme = [TPThemeManager currentTheme];
+  [self.outlineView setBackgroundColor:theme.outlineBackgroundColor];
 }
 
 - (void) setupOutlineBuilder
@@ -275,6 +299,9 @@
 
 - (void) outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
+  TPTheme *theme = [TPThemeManager currentTheme];
+  [cell setBackgroundColor:theme.outlineBackgroundColor];
+  
   if (self.currentSection == item) {
     NSMutableAttributedString *title = [[cell objectValue] mutableCopy];
     [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
