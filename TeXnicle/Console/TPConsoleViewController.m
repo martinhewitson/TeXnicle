@@ -60,8 +60,8 @@
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
-           selector:@selector(handleUserDefaultsChanged:)
-               name:NSUserDefaultsDidChangeNotification
+           selector:@selector(handleThemeChanged:)
+               name:TPThemeSelectionChangedNotification
              object:nil];
         
     
@@ -81,16 +81,21 @@
   NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
   [toolbarView setFillColor:color1];
   
-  
-//  NSString *logfile = [NSString stringWithFormat:@"/Users/hewitson/working/software/cocoa/mac/test/TestLogParser/TestLogParserTests/logfiles/log4.log"];
-//  
-//  TPParsedLog *log = [[TPParsedLog alloc] initWithLogFileAtPath:logfile];
-  
   self.logViewController = [[TPTeXLogViewController alloc] initWithParsedLog:nil delegate:self];
   [self.logViewController.view setFrame:self.logViewContainer.bounds];
   [self.logViewContainer addSubview:self.logViewController.view];
   
+  [self setupTextview];
 }
+
+- (void) setupTextview
+{
+  TPTheme *theme = [TPThemeManager currentTheme];
+	[textView setFont:theme.consoleFont];
+  [textView setTextColor:theme.documentTextColor];
+  [textView setBackgroundColor:theme.documentEditorBackgroundColor];
+}
+
 
 - (void) loadLogAtPath:(NSString*)path
 {
@@ -100,11 +105,9 @@
   }
 }
 
-- (void) handleUserDefaultsChanged:(NSNotification*)aNote
+- (void) handleThemeChanged:(NSNotification*)aNote
 {
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  TPTheme *theme = tm.currentTheme;
-	[textView setFont:theme.consoleFont];
+  [self setupTextview];
 }
 
 - (void) clear
@@ -162,13 +165,12 @@
 
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor
 {
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  TPTheme *theme = tm.currentTheme;
+  TPTheme *theme = [TPThemeManager currentTheme];
   NSFont *font = theme.consoleFont;
   NSString *str = [someText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSColor *textColor = aColor;
 	if (!textColor) {
-		textColor = [NSColor blackColor];
+		textColor = theme.documentTextColor;
 	}
 	NSArray *strings = [str componentsSeparatedByString:@"\n"];
 	

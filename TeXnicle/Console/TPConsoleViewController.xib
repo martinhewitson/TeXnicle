@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4471.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4471.1"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPConsoleViewController">
@@ -131,36 +131,4 @@
         <image name="NSListViewTemplate" width="11" height="10"/>
         <image name="error_template" width="512" height="512"/>
     </resources>
-    <classes>
-        <class className="MHStrokedFiledView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHStrokedFiledView.h"/>
-        </class>
-        <class className="MHToolbarBackgroundView" superclassName="SBGradientView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHToolbarBackgroundView.h"/>
-        </class>
-        <class className="NSTextView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSTextView.h"/>
-            <relationships>
-                <relationship kind="action" name="orderFrontSharingServicePicker:"/>
-                <relationship kind="action" name="toggleQuickLookPreviewPanel:"/>
-            </relationships>
-        </class>
-        <class className="SBGradientView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBGradientView.h"/>
-        </class>
-        <class className="TPConsoleViewController" superclassName="NSViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPConsoleViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="clear:"/>
-                <relationship kind="action" name="displayLevelChanged:"/>
-                <relationship kind="action" name="selectView:"/>
-                <relationship kind="outlet" name="displayLevel" candidateClass="NSPopUpButton"/>
-                <relationship kind="outlet" name="logViewContainer" candidateClass="NSView"/>
-                <relationship kind="outlet" name="tabView" candidateClass="NSTabView"/>
-                <relationship kind="outlet" name="textView" candidateClass="NSTextView"/>
-                <relationship kind="outlet" name="toolbarView" candidateClass="MHStrokedFiledView"/>
-                <relationship kind="outlet" name="viewSelector" candidateClass="NSSegmentedControl"/>
-            </relationships>
-        </class>
-    </classes>
 </document>

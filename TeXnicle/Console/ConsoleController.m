@@ -46,26 +46,28 @@
   self = [super initWithWindowNibName:@"Console"];
 	if (self){
     [[self window] setLevel:NSNormalWindowLevel];
-    TPThemeManager *tm = [TPThemeManager sharedManager];
-    TPTheme *theme = tm.currentTheme;
-    [textView setFont:theme.consoleFont];
-    
+    [self setupTextview];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
-           selector:@selector(handleUserDefaultsChanged:)
-               name:NSUserDefaultsDidChangeNotification
+           selector:@selector(handleThemeChanged:)
+               name:TPThemeSelectionChangedNotification
              object:nil];
   }  
 	return self;
 }
 
-- (void) handleUserDefaultsChanged:(NSNotification*)aNote
+- (void) handleThemeChanged:(NSNotification*)aNote
 {
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  TPTheme *theme = tm.currentTheme;
-	[textView setFont:theme.consoleFont];
+  [self setupTextview];
 }
 
+- (void) setupTextview
+{
+  TPTheme *theme = [TPThemeManager currentTheme];
+	[textView setFont:theme.consoleFont];
+  [textView setTextColor:theme.documentTextColor];
+  [textView setBackgroundColor:theme.documentEditorBackgroundColor];
+}
 
 + (ConsoleController*)sharedConsoleController
 {
@@ -134,13 +136,12 @@
 
 - (void) appendText:(NSString*)someText withColor:(NSColor*)aColor
 {
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  TPTheme *theme = tm.currentTheme;
+  TPTheme *theme = [TPThemeManager currentTheme];
   NSFont *font = theme.consoleFont;
   NSString *str = [someText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSColor *textColor = aColor;
 	if (!textColor) {
-		textColor = [NSColor blackColor];
+		textColor = theme.documentTextColor;
 	}
 	NSArray *strings = [str componentsSeparatedByString:@"\n"];
 	
