@@ -102,6 +102,14 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
   theme.themeDescription = @"Migrated Color Settings";
   theme.colorMultilineArguments = [defaults valueForKey:TESyntaxColorMultilineArguments];
   
+  // current line
+  theme.highlightCurrentLine = [defaults valueForKey:TEHighlightCurrentLine];
+  theme.currentLineColor = [[defaults valueForKey:TEHighlightCurrentLineColor] colorValue];
+  
+  // matching words
+  theme.highlightMatchingWords = [defaults valueForKey:TEHighlightMatchingWords];
+  theme.matchingWordsColor = [[defaults valueForKey:TEHighlightMatchingWordsColor] colorValue];
+  
   // fonts
   NSFont *editorFont = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
   [theme setEditorFont:editorFont];
@@ -109,6 +117,8 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
   [theme setConsoleFont:consoleFont];
   
   // outline
+  c = [[defaults valueForKey:TEDocumentBackgroundColor] colorValue];
+  [theme setColor:c forKey:@"texnicle.outline.background"];
   c = [[defaults valueForKey:TPOutlineDocumentColor] colorValue];
   [theme setColor:c forKey:@"texnicle.outline.begin"];
   c = [[defaults valueForKey:TPOutlinePartColor] colorValue];
