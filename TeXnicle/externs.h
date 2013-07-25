@@ -26,7 +26,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#define TEAR_DOWN 1
+#define TEAR_DOWN 0
 
 // preferences
 
