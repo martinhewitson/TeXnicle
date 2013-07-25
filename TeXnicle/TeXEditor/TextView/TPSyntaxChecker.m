@@ -353,17 +353,17 @@
   NSLog(@"Tear down %@", self);
 #endif
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  self.delegate = nil;
-  
+  self.delegate = nil;  
   [self cancelCheck];
-  
 }
 
 - (void) cancelCheck
 {
   if (lacheckTask != nil) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [lacheckTask terminate];
+    if ([lacheckTask isRunning] == YES) {
+      [lacheckTask terminate];
+    }
     lacheckTask = nil;
   }
   
