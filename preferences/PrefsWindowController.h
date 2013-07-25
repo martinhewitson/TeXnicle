@@ -28,7 +28,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DBPrefsWindowController.h"
-#import "SyntaxHighlightControlController.h"
 #import "TeXTextView.h"
 #import "TPSupportedFilesEditor.h"
 #import "TPTemplateEditorView.h"
@@ -55,38 +54,8 @@
   IBOutlet NSTableView *fileCommandsTable;
   
 	IBOutlet NSArrayController *userCommandsController;
-  	
-	IBOutlet NSTextField *docFont;
-	IBOutlet NSTextField *consoleFont;
-	
-	
-	SyntaxHighlightControlController *commentsController;
-	SyntaxHighlightControlController *commentsL2Controller;
-	SyntaxHighlightControlController *commentsL3Controller;
-	IBOutlet NSView *commentsView;
-	IBOutlet NSView *commentsL2View;
-	IBOutlet NSView *commentsL3View;
-
-	SyntaxHighlightControlController *markupL1Controller;
-	SyntaxHighlightControlController *markupL2Controller;
-	SyntaxHighlightControlController *markupL3Controller;
-	IBOutlet NSView *markupL1View;
-	IBOutlet NSView *markupL2View;
-	IBOutlet NSView *markupL3View;
-	
-	SyntaxHighlightControlController *mathController;
-	IBOutlet NSView *mathView;
-	
-	SyntaxHighlightControlController *commandsController;
-	IBOutlet NSView *commandsView;
-	
-	SyntaxHighlightControlController *argumentsController;
-	IBOutlet NSView *argumentsView;
-
-	SyntaxHighlightControlController *dollarController;
-	IBOutlet NSView *dollarView;  
   
-	IBOutlet NSPopUpButton *wrapStylePopup;
+  IBOutlet NSPopUpButton *wrapStylePopup;
 	IBOutlet NSStepper *wrapWidthStepper;
 	IBOutlet NSTextField *wrapWidthEdit;
 	IBOutlet NSTextField *wrapAtWidthLabel;
@@ -149,18 +118,7 @@
 
 - (IBAction) insertSpacesForTabsChanged:(id)sender;
 
-- (IBAction)selectDocFont:(id)sender;
-- (IBAction)docFontChanged:(id)sender;
-
-- (IBAction)selectConsoleFont:(id)sender;
-- (void)consoleFontChanged:(id)sender;
-
 - (IBAction) wrapStyleChanged:(id)sender;
-
-- (IBAction)setDefaultLineHighlightingColor:(id)sender;
-- (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender;
-- (IBAction)setDefaultSelectedTextColor:(id)sender;
-- (IBAction)setDefaultSelectedTextBackgroundColor:(id)sender;
 
 - (IBAction) browseForGSExecutable:(id)sender;
 - (IBAction) browseForPDFLatexExecutable:(id)sender;

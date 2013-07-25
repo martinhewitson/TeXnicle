@@ -63,48 +63,6 @@
 
 - (void) awakeFromNib
 {
-  
-	
-	// Comments controller
-	commentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Comments" name:@"Comments (%)"];
-	[commentsView addSubview:[commentsController view]];
-	
-	// Comments L2 controller
-	commentsL2Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"CommentsL2" name:@"Comments (%%)"];
-	[commentsL2View addSubview:[commentsL2Controller view]];
-  
-  // Comments L3 controller
-	commentsL3Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"CommentsL3" name:@"Comments (%%%)"];
-	[commentsL3View addSubview:[commentsL3Controller view]];
-
-	// Markup L1 controller
-	markupL1Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL1" name:@"Markup (< >)"];
-	[markupL1View addSubview:[markupL1Controller view]];
-	
-	// Markup L2 controller
-	markupL2Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL2" name:@"Markup (<< >>)"];
-	[markupL2View addSubview:[markupL2Controller view]];
-
-  // Markup L3 controller
-	markupL3Controller = [[SyntaxHighlightControlController alloc] initWithTag:@"MarkupL3" name:@"Markup (<<< >>>)"];
-	[markupL3View addSubview:[markupL3Controller view]];
-
-	// math controller
-	mathController = [[SyntaxHighlightControlController alloc] initWithTag:@"SpecialChars" name:@"Special Characters"];
-	[mathView addSubview:[mathController view]];
-	
-	// commands controller
-	commandsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Command" name:@"Commands"];
-	[commandsView addSubview:[commandsController view]];
-	
-	// arguments controller
-	argumentsController = [[SyntaxHighlightControlController alloc] initWithTag:@"Arguments" name:@"Arguments"];
-	[argumentsView addSubview:[argumentsController view]];
-	
-	// dollar controller
-	dollarController = [[SyntaxHighlightControlController alloc] initWithTag:@"DollarChars" name:@"Dollar ($)"];
-	[dollarView addSubview:[dollarController view]];
-  
 	[self wrapStyleChanged:self];
   BOOL showJumpBar = [[NSUserDefaults standardUserDefaults] boolForKey:TEJumpBarEnabled];
   [self setJumpBarUIState:showJumpBar];
@@ -175,24 +133,7 @@
 
 - (void)setupToolbar
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
-	NSFont *f = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEDocumentFont]];
-	if (!f) {
-		f = [NSFont systemFontOfSize:14];
-	}
-	[docFont setValue:f forKey:@"font"];	
-	[docFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-  
-  
-	f = [NSUnarchiver unarchiveObjectWithData:[defaults valueForKey:TEConsoleFont]];
-	if (!f) {
-		f = [NSFont userFixedPitchFontOfSize:12];
-	}
-	[consoleFont setValue:f forKey:@"font"];	
-	[consoleFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-  
-	
-  [self addView:generalPrefsView 
+  [self addView:generalPrefsView
 					label:@"General" 
 					image:[NSImage imageNamed:NSImageNamePreferencesGeneral]];	
 	
@@ -709,86 +650,11 @@
   
 }
 
-
-- (IBAction)selectDocFont:(id)sender
-{
-	
-	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
-	[fp setPanelFont:[docFont font] isMultiple:YES];
-	[fp makeKeyAndOrderFront:self];
-	
-	NSFontManager *fm = [NSFontManager sharedFontManager];
-	[fm setTarget:self];
-	[fm setAction:@selector(docFontChanged:)];
-}
-
-- (void)docFontChanged:(id)sender
-{
-	NSFont *f = [sender convertFont:[docFont font]];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:[NSArchiver archivedDataWithRootObject:f] forKey:TEDocumentFont];
-	[defaults synchronize];
-	[docFont setValue:f forKey:@"font"];	
-	[docFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-}
-
-- (IBAction)selectConsoleFont:(id)sender
-{
-	
-	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
-	[fp setPanelFont:[consoleFont font] isMultiple:YES];
-	[fp makeKeyAndOrderFront:self];
-	
-	NSFontManager *fm = [NSFontManager sharedFontManager];
-	[fm setTarget:self];
-	[fm setAction:@selector(consoleFontChanged:)];
-}
-
-- (void)consoleFontChanged:(id)sender
-{
-	NSFont *f = [sender convertFont:[consoleFont font]];
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setValue:[NSArchiver archivedDataWithRootObject:f] forKey:TEConsoleFont];
-	[defaults synchronize];
-	[consoleFont setValue:f forKey:@"font"];	
-	[consoleFont setStringValue:[NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]]];
-}
-
-
 - (void) colorClick: (id) sender 
 {	// sender is the table view
 	NSColorPanel* panel;
 	panel = [NSColorPanel sharedColorPanel];
   [panel setAction:NULL];
 }
-
-- (IBAction)setDefaultLineHighlightingColor:(id)sender
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:[NSArray arrayWithColor:[NSColor colorWithDeviceWhite:0.95 alpha:1.0]] forKey:TEHighlightCurrentLineColor];
-  [defaults synchronize];
-}
-
-- (IBAction)setDefaultMatchingWordHighlightingColor:(id)sender
-{  
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:[NSArray arrayWithColor:[[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6]] forKey:TEHighlightMatchingWordsColor];
-  [defaults synchronize];
-}
-
-- (IBAction)setDefaultSelectedTextColor:(id)sender
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:[NSArray arrayWithColor:[NSColor selectedTextColor]] forKey:TESelectedTextColor];
-  [defaults synchronize];
-}
-
-- (IBAction)setDefaultSelectedTextBackgroundColor:(id)sender
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:[NSArray arrayWithColor:[NSColor selectedTextBackgroundColor]] forKey:TESelectedTextBackgroundColor];
-  [defaults synchronize];
-}
-
 
 @end
