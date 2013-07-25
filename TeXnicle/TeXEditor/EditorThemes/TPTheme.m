@@ -78,6 +78,14 @@
   // color multi-line arguments
   [dict setValue:self.colorMultilineArguments forKey:@"ColorMultilineArguments"];
   
+  // current line
+  [dict setValue:self.highlightCurrentLine forKey:@"HighlightCurrentLine"];
+  [dict setValue:[self.currentLineColor stringArray] forKey:@"CurrentLineColor"];
+  
+  // matching words
+  [dict setValue:self.highlightMatchingWords forKey:@"HighlightMatchingWords"];
+  [dict setValue:[self.matchingWordsColor stringArray] forKey:@"MatchingWordsColor"];
+  
   // fonts
   [dict setValue:self.fonts forKey:@"TeXnicleFonts"];
   
@@ -116,7 +124,30 @@
     // name, description
     self.themeDescription = [themePlist valueForKey:@"ThemeDescription"];
     
+    // multi-line arguments
     self.colorMultilineArguments = [themePlist valueForKey:@"ColorMultilineArguments"];
+    
+    // current line
+    self.highlightCurrentLine = [themePlist valueForKey:@"HighlightCurrentLine"];
+    if (self.highlightCurrentLine == nil) {
+      self.highlightCurrentLine = @YES;
+    }
+    self.currentLineColor = [themePlist colorForKey:@"CurrentLineColor"];
+    if (self.currentLineColor == nil) {
+      self.currentLineColor = [NSColor colorWithDeviceWhite:0.95 alpha:1.0];
+    }
+    
+    // matching words
+    self.highlightMatchingWords = [themePlist valueForKey:@"HighlightMatchingWords"];
+    if (self.highlightMatchingWords == nil) {
+      self.highlightMatchingWords = @YES;
+    }
+    self.matchingWordsColor = [themePlist colorForKey:@"MatchingWordsColor"];
+    if (self.matchingWordsColor == nil) {
+      self.matchingWordsColor = [[NSColor selectedTextBackgroundColor] highlightWithLevel:0.6];
+    }
+    
+    [self save];
   }
 }
 
@@ -180,44 +211,94 @@
 #pragma mark -
 #pragma mark Outline Color Accessors
 
+- (NSColor*) outlineBackgroundColor
+{
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.background"];
+  if (c == nil) {
+    c = [NSColor whiteColor];
+  }
+  
+  return c;
+}
+
 - (NSColor*) outlineBeginColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.begin"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.begin"];
+  if (c == nil) {
+    c = [NSColor blackColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlinePartColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.part"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.part"];
+  if (c == nil) {
+    c = [NSColor blackColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineChapterColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.chapter"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.chapter"];
+  if (c == nil) {
+    c = [NSColor blackColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineSectionColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.section"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.section"];
+  if (c == nil) {
+    c = [NSColor redColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineSubsectionColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.subsection"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.subsection"];
+  if (c == nil) {
+    c = [[NSColor redColor] highlightWithLevel:0.4];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineSubsubsectionColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.subsubsection"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.subsubsection"];
+  if (c == nil) {
+    c = [[NSColor redColor] highlightWithLevel:0.7];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineParagraphColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.paragraph"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.paragraph"];
+  if (c == nil) {
+    c = [NSColor lightGrayColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*) outlineSubparagraphColor
 {
-  return [self.outlineColors colorForKey:@"texnicle.outline.subparagraph"];
+  NSColor *c = [self.outlineColors colorForKey:@"texnicle.outline.subparagraph"];
+  if (c == nil) {
+    c = [NSColor darkGrayColor];
+  }
+  
+  return c;
 }
 
 
@@ -226,7 +307,12 @@
 
 - (NSColor*) syntaxCommandColor
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.commands"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.commands"];
+  if (c == nil) {
+    c = [NSColor purpleColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorCommand
@@ -236,7 +322,12 @@
 
 - (NSColor*) syntaxSpecialCharactersColor
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.specialcharacters"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.specialcharacters"];
+  if (c == nil) {
+    c = [NSColor redColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorSpecialCharacters
@@ -246,7 +337,12 @@
 
 - (NSColor*) syntaxDollarColor
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.dollar"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.dollar"];
+  if (c == nil) {
+    c = [NSColor redColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorDollar
@@ -256,7 +352,12 @@
 
 - (NSColor*) syntaxArgumentsColor
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.arguments"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.arguments"];
+  if (c == nil) {
+    c = [NSColor blueColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorArguments
@@ -266,7 +367,12 @@
 
 - (NSColor*) syntaxMarkup1Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.markup1"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.markup1"];
+  if (c == nil) {
+    c = [NSColor magentaColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorMarkup1
@@ -276,7 +382,12 @@
 
 - (NSColor*) syntaxMarkup2Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.markup2"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.markup2"];
+  if (c == nil) {
+    c = [NSColor magentaColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorMarkup2
@@ -286,7 +397,12 @@
 
 - (NSColor*) syntaxMarkup3Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.markup3"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.markup3"];
+  if (c == nil) {
+    c = [NSColor magentaColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorMarkup3
@@ -296,7 +412,12 @@
 
 - (NSColor*) syntaxComments1Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.comments1"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.comments1"];
+  if (c == nil) {
+    c = [NSColor grayColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorComments1
@@ -306,7 +427,12 @@
 
 - (NSColor*) syntaxComments2Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.comments2"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.comments2"];
+  if (c == nil) {
+    c = [NSColor grayColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorComments2
@@ -316,7 +442,12 @@
 
 - (NSColor*) syntaxComments3Color
 {
-  return [self.syntaxColors colorForKey:@"texnicle.syntax.comments3"];
+  NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.comments3"];
+  if (c == nil) {
+    c = [NSColor grayColor];
+  }
+  
+  return c;
 }
 
 - (BOOL) shouldColorComments3
@@ -330,32 +461,62 @@
 
 - (NSColor*) documentTextColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.text"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.text"];
+  if (c == nil) {
+    c = [NSColor blackColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*)documentEditorBackgroundColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.editorbackground"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.editorbackground"];
+  if (c == nil) {
+    c = [NSColor whiteColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*)documentEditorMarginColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.editormargin"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.editormargin"];
+  if (c == nil) {
+    c = [NSColor lightGrayColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*)documentEditorCursorColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.cursor"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.cursor"];
+  if (c == nil) {
+    c = [NSColor blackColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*)documentEditorSelectionColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.selectedtext"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.selectedtext"];
+  if (c == nil) {
+    c = [NSColor selectedTextColor];
+  }
+  
+  return c;
 }
 
 - (NSColor*)documentEditorSelectionBackgroundColor
 {
-  return [self.documentColors colorForKey:@"texnicle.document.selectedtextbackground"];
+  NSColor *c = [self.documentColors colorForKey:@"texnicle.document.selectedtextbackground"];
+  if (c == nil) {
+    c = [NSColor selectedTextBackgroundColor];
+  }
+  
+  return c;
 }
 
 
@@ -379,6 +540,9 @@
   NSString *fontDesc = [self.fonts valueForKey:@"texnicle.font.editor"];
   NSArray *parts = [fontDesc componentsSeparatedByString:@" - "];
   NSFont *f = [NSFont fontWithName:parts[0] size:[parts[1] doubleValue]];
+  if (f == nil) {
+    f = [NSFont systemFontOfSize:12];
+  }
   return f;
 }
 
@@ -447,6 +611,9 @@
   NSString *fontDesc = [self.fonts valueForKey:@"texnicle.font.console"];
   NSArray *parts = [fontDesc componentsSeparatedByString:@" - "];
   NSFont *f = [NSFont fontWithName:parts[0] size:[parts[1] doubleValue]];
+  if (f == nil) {
+    f = [NSFont userFixedPitchFontOfSize:12];
+  }
   return f;
 }
 

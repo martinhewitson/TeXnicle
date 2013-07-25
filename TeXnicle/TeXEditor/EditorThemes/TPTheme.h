@@ -36,6 +36,12 @@
 
 @property (assign, getter = isBuiltIn) BOOL builtIn;
 
+@property (strong) NSNumber *highlightCurrentLine;
+@property (strong) NSColor *currentLineColor;
+
+@property (strong) NSNumber *highlightMatchingWords;
+@property (strong) NSColor *matchingWordsColor;
+
 @property (strong) NSNumber *colorMultilineArguments;
 @property (strong) NSDictionary *fonts;
 @property (strong) NSDictionary *documentColors;
@@ -53,6 +59,7 @@
 @property (readonly) NSColor *outlineSubsubsectionColor;
 @property (readonly) NSColor *outlineParagraphColor;
 @property (readonly) NSColor *outlineSubparagraphColor;
+@property (readonly) NSColor *outlineBackgroundColor;
 
 
 #pragma mark Syntax Color Accessors
