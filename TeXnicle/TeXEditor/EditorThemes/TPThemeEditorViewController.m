@@ -134,6 +134,17 @@
   [self.selectedTheme save];
 }
 
+
+- (IBAction)changeHighlightCurrentLine:(id)sender
+{
+  [self.selectedTheme save];
+}
+
+- (IBAction)changeHighlightMatchingWords:(id)sender
+{
+  [self.selectedTheme save];
+}
+
 - (IBAction)changeMultilineArguments:(id)sender
 {
   [self.selectedTheme save];
@@ -501,12 +512,20 @@
   }
 }
 
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
+  if (tableView == self.themesTable) {
+//    [self registerThemeChange];
+  }
+  
+  return YES;
+}
+
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
   NSTableView *tableView = [notification object];
   
   if (tableView == self.themesTable) {
-    
     TPThemeManager *tm = [TPThemeManager sharedManager];
     NSArray *themes = [tm registeredThemes];
     NSInteger row = [self.themesTable selectedRow];
@@ -558,24 +577,25 @@
 
 - (void) registerThemeChange
 {
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  [tm setSelectedTheme:self.selectedTheme];
-  
-  // reload details tables
-  [self.documentItemsTable reloadData];
-  [self.syntaxItemsTable reloadData];
-  [self.outlineItemsTable reloadData];
-  
-  // post notification
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  NSDictionary *dict = @{@"ThemeName" : self.selectedTheme.name};
-  [nc postNotificationName:TPThemeSelectionChangedNotification object:self userInfo:dict];
-  
-  // cache selected
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setValue:self.selectedTheme.name forKey:TPSelectedTheme];
-  [defaults synchronize];
-  
+  if (self.selectedTheme) {
+    TPThemeManager *tm = [TPThemeManager sharedManager];
+    [tm setSelectedTheme:self.selectedTheme];
+    
+    // reload details tables
+    [self.documentItemsTable reloadData];
+    [self.syntaxItemsTable reloadData];
+    [self.outlineItemsTable reloadData];
+    
+    // post notification
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSDictionary *dict = @{@"ThemeName" : self.selectedTheme.name};
+    [nc postNotificationName:TPThemeSelectionChangedNotification object:self userInfo:dict];
+    
+    // cache selected
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:self.selectedTheme.name forKey:TPSelectedTheme];
+    [defaults synchronize];
+  }
 }
 
 - (void) updateUI
