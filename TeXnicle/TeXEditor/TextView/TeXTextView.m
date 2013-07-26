@@ -91,6 +91,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (assign) CGFloat averageCharacterWidth;
 
 @property (strong) NSDate *lastRulerUpdate;
+@property (assign) BOOL rulerUpdateQueued;
 
 @end
 
@@ -187,7 +188,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 						 name:NSTextViewDidChangeSelectionNotification
 					 object:self];
   
-  [self setPostsFrameChangedNotifications:YES];
   [[[self enclosingScrollView] contentView] setPostsBoundsChangedNotifications:YES];
   [nc addObserver:self
          selector:@selector(handleFrameChangeNotification:)
@@ -746,17 +746,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   NSDate *now = [NSDate date];
   if (self.lastRulerUpdate != nil && [now timeIntervalSinceDate:self.lastRulerUpdate] < kRulerUpdateInterval) {
-    [self performSelector:@selector(handleFrameChangeNotification:) withObject:aNote afterDelay:kRulerUpdateInterval];
+    if (self.rulerUpdateQueued == NO) {
+      self.rulerUpdateQueued = YES;
+      [self performSelector:@selector(handleFrameChangeNotification:) withObject:aNote afterDelay:kRulerUpdateInterval];
+    }
     return;
   }
   
   self.lastRulerUpdate = now;
   
-  //  NSLog(@"Frame change");
   [_popupList dismiss];
   [self colorVisibleText];
   [self highlightMatchingWords];
   [self updateEditorRuler];
+  
+  self.rulerUpdateQueued = NO;
 }
 
 - (void) updateEditorRuler
