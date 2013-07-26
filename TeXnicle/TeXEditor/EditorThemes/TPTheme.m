@@ -134,7 +134,10 @@
     }
     self.currentLineColor = [themePlist colorForKey:@"CurrentLineColor"];
     if (self.currentLineColor == nil) {
-      self.currentLineColor = [NSColor colorWithDeviceWhite:0.95 alpha:1.0];
+      self.currentLineColor = [self.documentEditorBackgroundColor highlightWithLevel:0.2];
+      if (self.currentLineColor == nil) {
+        self.currentLineColor = [NSColor colorWithDeviceWhite:0.95 alpha:1.0];
+      }
     }
     
     // matching words
