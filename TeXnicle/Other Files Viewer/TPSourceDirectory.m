@@ -24,7 +24,7 @@
 {
   self = [super initWithParent:aParent path:aURL];
   if (self) {
-    self.children = [NSSet set];
+    self.children = [NSArray array];
     self.delegate = aDelegate;
     [self populateChildren];
   }
