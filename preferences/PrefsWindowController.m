@@ -55,6 +55,11 @@
 @property (unsafe_unretained) IBOutlet NSView *themesEditorContainer;
 @property (strong) TPThemeEditorViewController *themesEditorController;
 
+@property (assign) IBOutlet NSButton *liveupdateOverrideButton;
+@property (assign) IBOutlet NSTextField *liveupdateNumberRunsLabel;
+@property (assign) IBOutlet NSTextField *liveupdateNumberRunsTextField;
+@property (assign) IBOutlet NSStepper *liveupdateNumberRunsStepper;
+
 
 @end
 
@@ -66,6 +71,9 @@
 	[self wrapStyleChanged:self];
   BOOL showJumpBar = [[NSUserDefaults standardUserDefaults] boolForKey:TEJumpBarEnabled];
   [self setJumpBarUIState:showJumpBar];
+  
+  // live update runs status
+  [self updateLiveupdateRunsState];
   
   // setup engines editor
   self.enginesEditor = [[TPEnginesEditor alloc] init];
@@ -163,8 +171,24 @@
     	
 }
 
+
 #pragma mark -
 #pragma mark Engine stuff
+
+- (IBAction)liveupdateOverrideSelected:(id)sender
+{
+  [self updateLiveupdateRunsState];
+}
+
+- (void) updateLiveupdateRunsState
+{
+  BOOL override = [self.liveupdateOverrideButton state] == NSOnState;
+  
+  [self.liveupdateNumberRunsLabel setEnabled:override];
+  [self.liveupdateNumberRunsStepper setEnabled:override];
+  [self.liveupdateNumberRunsTextField setEnabled:override];
+}
+
 
 - (IBAction)selectEngineName:(id)sender
 {

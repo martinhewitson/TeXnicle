@@ -314,8 +314,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   }
   e.openConsole = [[self.delegate openConsole] boolValue];
   
-  if (liveUpdate) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if (liveUpdate && [[defaults valueForKey:TPLiveUpdateTypesetRunsOverride] boolValue]) {
     e.nCompile = [[defaults valueForKey:TPLiveUpdateTypesetRuns] integerValue];
   } else {
     if (e.supportsNCompile) {
