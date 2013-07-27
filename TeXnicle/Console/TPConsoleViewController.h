@@ -50,7 +50,6 @@
 
 - (id) initWithDelegate:(id<TPConsoleDelegate>)aDelegate;
 
-- (void) handleUserDefaultsChanged:(NSNotification*)aNote;
 - (IBAction) clear:(id)sender;
 - (void) clear;
 - (void) appendText:(NSString*)someText;

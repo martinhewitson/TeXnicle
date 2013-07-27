@@ -38,7 +38,6 @@
 }
 
 + (ConsoleController*)sharedConsoleController;
-- (void) handleUserDefaultsChanged:(NSNotification*)aNote;
 
 - (IBAction) clear:(id)sender;
 - (void) clear;
