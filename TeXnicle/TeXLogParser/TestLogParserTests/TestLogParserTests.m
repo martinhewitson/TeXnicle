@@ -241,7 +241,7 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"log2.log should produce 1 item, not %ld items", [items count]);
+  STAssertTrue([items count] == 2, @"log2.log should produce 2 items, not %ld items", [items count]);
 
   TPLogItem *item = items[0];
 
@@ -296,7 +296,7 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 1, @"log5.log should produce 1 item, not %ld items", [items count]);
+  STAssertTrue([items count] == 2, @"log5.log should produce 2 items, not %ld items", [items count]);
   
   TPLogItem *item = items[0];
   
@@ -410,9 +410,8 @@
   NSString *logtext = [self stringFromTestFile:@"log11"];
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
-  NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 198, @"log11.log should produce 198 items, not %ld items", [items count]);
+  STAssertTrue([items count] == 202, @"log11.log should produce 202 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
   STAssertTrue([info count] == 0, @"The log file should contain 0 info itmes, not %ld", [info count]);
@@ -421,7 +420,8 @@
   STAssertTrue([warnings count] == 189, @"The log file should contain 189 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 9, @"The log file should contain 9 errors, not %ld", [errors count]);
+  NSLog(@"%@", errors);
+  STAssertTrue([errors count] == 13, @"The log file should contain 9 errors, not %ld", [errors count]);
 }
 
 @end
