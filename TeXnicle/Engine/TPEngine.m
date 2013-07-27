@@ -364,7 +364,10 @@
   // trash document as well?
   if (keepDocument == NO && [[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
     if (self.compiledDocumentPath) {
-      filesToClear = [filesToClear arrayByAddingObject:[self.compiledDocumentPath pathExtension]];
+      NSString *ext = [self.compiledDocumentPath pathExtension];
+      if (ext != nil) {
+        filesToClear = [filesToClear arrayByAddingObject:ext];
+      }
     }
   }
   
