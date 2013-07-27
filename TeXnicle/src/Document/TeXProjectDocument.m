@@ -2522,7 +2522,11 @@
     
     // do update
     [self saveDocument:self];
-    [self build];
+    [self.miniConsole setAnimating:YES];
+    // setup the engine
+    _building = YES;
+    [self.engineManager liveCompile];
+//    [self build];
   }
 }
 

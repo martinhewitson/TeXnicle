@@ -187,6 +187,7 @@ NSString * const TPSupportedFileTypes = @"TPSupportedFileTypes";
 NSString * const TPLiveUpdateMode = @"TPLiveUpdateMode";
 NSString * const TPLiveUpdateFrequency = @"TPLiveUpdateFrequency";
 NSString * const TPLiveUpdateEditDelay = @"TPLiveUpdateEditDelay";
+NSString * const TPLiveUpdateTypesetRuns = @"TPLiveUpdateTypesetRuns";
 
 NSString * const TPSelectedTheme = @"TPSelectedTheme";
 NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
@@ -456,6 +457,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   [defaultValues setValue:@0 forKey:TPLiveUpdateMode];
   [defaultValues setValue:@1.0f forKey:TPLiveUpdateFrequency];
   [defaultValues setValue:@5.0f forKey:TPLiveUpdateEditDelay];
+  [defaultValues setValue:@1 forKey:TPLiveUpdateTypesetRuns];
   
   // register the defaults
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];	

@@ -206,6 +206,7 @@ extern NSString * const TPDocumentMatchAttributeName;
 extern NSString * const TPLiveUpdateMode;
 extern NSString * const TPLiveUpdateFrequency;
 extern NSString * const TPLiveUpdateEditDelay;
+extern NSString * const TPLiveUpdateTypesetRuns;
 
 extern NSString * const TPSpellingAutomaticByLanguage;
 

@@ -286,7 +286,17 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   }
 }
 
+- (void) liveCompile
+{
+  [self compileForLiveUpdate:YES];
+}
+
 - (void) compile
+{
+  [self compileForLiveUpdate:NO];
+}
+
+- (void) compileForLiveUpdate:(BOOL)liveUpdate
 {
   // ensure the engines have been installed and loaded
   if (self.engines == nil) {
@@ -303,10 +313,16 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     e.doPS2PDF = [[self.delegate doPS2PDF] boolValue];
   }
   e.openConsole = [[self.delegate openConsole] boolValue];
-  if (e.supportsNCompile) {
-    e.nCompile = [[self.delegate nCompile] integerValue];
+  
+  if (liveUpdate) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    e.nCompile = [[defaults valueForKey:TPLiveUpdateTypesetRuns] integerValue];
+  } else {
+    if (e.supportsNCompile) {
+      e.nCompile = [[self.delegate nCompile] integerValue];
+    }
   }
-
+  
   if (e != nil && e.compiling == NO) {
         
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

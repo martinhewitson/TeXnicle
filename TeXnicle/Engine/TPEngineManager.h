@@ -66,6 +66,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 
 - (BOOL) isCompiling;
 - (void) compile;
+- (void) liveCompile;
 - (void) cancelCompilation;
 - (void) trashAuxFiles:(BOOL)keepDocument;
 - (void) tearDown;

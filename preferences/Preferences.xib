@@ -567,7 +567,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" id="146">
-                                        <rect key="frame" x="34" y="166" width="314" height="17"/>
+                                        <rect key="frame" x="34" y="144" width="314" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of pdflatex/latex runs when typesetting:" id="147">
                                             <font key="font" metaFont="system"/>
@@ -576,7 +576,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="148">
-                                        <rect key="frame" x="350" y="164" width="45" height="22"/>
+                                        <rect key="frame" x="350" y="142" width="45" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="149">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="150">
@@ -600,7 +600,7 @@
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="151">
-                                        <rect key="frame" x="395" y="161" width="19" height="27"/>
+                                        <rect key="frame" x="395" y="139" width="19" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" id="152"/>
                                         <connections>
@@ -612,7 +612,7 @@
                                         </connections>
                                     </stepper>
                                     <button id="158">
-                                        <rect key="frame" x="123" y="137" width="244" height="18"/>
+                                        <rect key="frame" x="123" y="115" width="244" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="check" title="Run BibTeX during typesetting:" bezelStyle="regularSquare" imagePosition="right" alignment="right" state="on" inset="2" id="159">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -672,7 +672,7 @@
                                         </connections>
                                     </button>
                                     <button id="162">
-                                        <rect key="frame" x="15" y="113" width="352" height="18"/>
+                                        <rect key="frame" x="15" y="91" width="352" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="check" title="Run ps2pdf (if available) after compiling with LaTeX:" bezelStyle="regularSquare" imagePosition="right" alignment="right" state="on" inset="2" id="163">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -687,7 +687,7 @@
                                         </connections>
                                     </button>
                                     <button id="344">
-                                        <rect key="frame" x="123" y="90" width="244" height="18"/>
+                                        <rect key="frame" x="123" y="68" width="244" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="check" title="Open Console when typesetting:" bezelStyle="regularSquare" imagePosition="right" alignment="right" state="on" inset="2" id="345">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -702,7 +702,7 @@
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" id="348">
-                                        <rect key="frame" x="14" y="191" width="534" height="42"/>
+                                        <rect key="frame" x="14" y="169" width="534" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The settings below are the default values taken for new TeXnicle projects. They do not affect existing projects." id="349">
                                             <font key="font" metaFont="system"/>
@@ -711,7 +711,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="370">
-                                        <rect key="frame" x="14" y="42" width="216" height="17"/>
+                                        <rect key="frame" x="14" y="20" width="216" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Default Engine:" id="371">
                                             <font key="font" metaFont="system"/>
@@ -720,7 +720,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <popUpButton verticalHuggingPriority="750" id="372">
-                                        <rect key="frame" x="232" y="36" width="136" height="26"/>
+                                        <rect key="frame" x="232" y="14" width="136" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="373">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -738,7 +738,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="834">
-                                        <rect key="frame" x="9" y="245" width="536" height="5"/>
+                                        <rect key="frame" x="9" y="223" width="536" height="5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -752,7 +752,7 @@
                                         <font key="titleFont" metaFont="system"/>
                                     </box>
                                     <textField verticalHuggingPriority="750" id="852">
-                                        <rect key="frame" x="344" y="291" width="45" height="22"/>
+                                        <rect key="frame" x="344" y="294" width="45" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="1.0" drawsBackground="YES" id="855">
                                             <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="#,##0.0" negativeFormat="#,##0.0" numberStyle="decimal" alwaysShowsDecimalSeparator="YES" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="1" maximumFractionDigits="1" id="856">
@@ -777,7 +777,7 @@
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="853">
-                                        <rect key="frame" x="389" y="288" width="19" height="27"/>
+                                        <rect key="frame" x="389" y="291" width="19" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" increment="0.5" minValue="1" maxValue="100" doubleValue="1" id="854"/>
                                         <connections>
@@ -789,7 +789,7 @@
                                         </connections>
                                     </stepper>
                                     <textField verticalHuggingPriority="750" id="938">
-                                        <rect key="frame" x="344" y="263" width="45" height="22"/>
+                                        <rect key="frame" x="344" y="266" width="45" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="1.0" drawsBackground="YES" id="941">
                                             <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="#,##0.0" negativeFormat="#,##0.0" numberStyle="decimal" alwaysShowsDecimalSeparator="YES" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="1" maximumFractionDigits="1" id="942">
@@ -814,11 +814,48 @@
                                         </connections>
                                     </textField>
                                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="939">
-                                        <rect key="frame" x="389" y="260" width="19" height="27"/>
+                                        <rect key="frame" x="389" y="263" width="19" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <stepperCell key="cell" continuous="YES" alignment="left" increment="0.5" minValue="1" maxValue="100" doubleValue="1" id="940"/>
                                         <connections>
                                             <binding destination="26" name="value" keyPath="values.TPLiveUpdateEditDelay" id="956">
+                                                <dictionary key="options">
+                                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </stepper>
+                                    <textField verticalHuggingPriority="750" id="Y9D-IA-jmK">
+                                        <rect key="frame" x="344" y="236" width="45" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" title="1" drawsBackground="YES" id="0rt-EI-kZ9">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" positiveFormat="#,##0.###" negativeFormat="#,##0.###" numberStyle="decimal" lenient="YES" minimumIntegerDigits="1" maximumIntegerDigits="309" minimumFractionDigits="0" maximumFractionDigits="3" id="qyP-xX-BFI">
+                                                <real key="roundingIncrement" value="0.0"/>
+                                                <real key="minimum" value="1"/>
+                                                <integer key="maximum" value="999"/>
+                                                <metadata>
+                                                    <bool key="localizesFormat" value="YES"/>
+                                                </metadata>
+                                            </numberFormatter>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="26" name="value" keyPath="values.TPLiveUpdateTypesetRuns" id="DIH-ah-eBD">
+                                                <dictionary key="options">
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    <bool key="NSValidatesImmediately" value="YES"/>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </textField>
+                                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" id="shf-R6-i4w">
+                                        <rect key="frame" x="389" y="233" width="19" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="100" doubleValue="1" id="E9p-pn-E7d"/>
+                                        <connections>
+                                            <binding destination="26" name="value" keyPath="values.TPLiveUpdateTypesetRuns" id="aVB-Ka-e7J">
                                                 <dictionary key="options">
                                                     <bool key="NSValidatesImmediately" value="YES"/>
                                                 </dictionary>
@@ -830,7 +867,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         <size key="cellSize" width="314" height="18"/>
-                                        <size key="intercellSpacing" width="4" height="2"/>
+                                        <size key="intercellSpacing" width="4" height="8"/>
                                         <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="935">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -865,7 +902,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="949">
-                                        <rect key="frame" x="412" y="294" width="11" height="17"/>
+                                        <rect key="frame" x="412" y="297" width="11" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="s" id="950">
                                             <font key="font" metaFont="system"/>
@@ -874,9 +911,18 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="951">
-                                        <rect key="frame" x="412" y="266" width="11" height="17"/>
+                                        <rect key="frame" x="412" y="269" width="11" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="s" id="952">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1u1-zK-qKL">
+                                        <rect key="frame" x="14" y="238" width="325" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Number of typesetting runs during live update:" id="6fA-ZC-m9d">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
