@@ -93,6 +93,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (strong) NSDate *lastRulerUpdate;
 @property (assign) BOOL rulerUpdateQueued;
 
+@property (assign) NSInteger currentWrapStyle;
+@property (assign) NSInteger currentWrapAt;
+
 @end
 
 @implementation TeXTextView
@@ -879,7 +882,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 }
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
-{  
+{
+  //NSLog(@"%@", NSStringFromSelector(_cmd));
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = atts[NSFontAttributeName];
   newFont = [NSFont fontWithName:[newFont fontName] size:self.zoomFactor+[newFont pointSize]];
@@ -892,17 +896,18 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.averageCharacterWidth = [NSString averageCharacterWidthForFont:newFont];
   }
   if (![newColor isEqualTo:[self textColor]] || forceUpdate) {
-    //    NSLog(@"Setting new color");
+//    NSLog(@"Setting new color");
     [self setTextColor:newColor];
   }
   if (![newPS isEqual:[self defaultParagraphStyle]]) {
+//    NSLog(@"Setting new paragraph style");
     [self.textStorage addAttribute:NSParagraphStyleAttributeName value:newPS range:NSMakeRange(0, [[self string] length])];
     [self setDefaultParagraphStyle:newPS];
   }
   
   NSDictionary *currentAtts = [self typingAttributes];
   if (![currentAtts isEqualToDictionary:atts] || forceUpdate) {
-    //NSLog(@"Setting typing attributes %@", newFont);
+//    NSLog(@"Setting typing attributes %@", newFont);
 //    [self setTypingAttributes:atts];
     [self setTypingAttributes:@{NSForegroundColorAttributeName : newColor,
          NSFontAttributeName : newFont}];
@@ -933,6 +938,15 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
   int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+  
+  if (self.currentWrapAt == wrapAt && self.currentWrapStyle == wrapStyle) {
+    return;
+  }
+  
+  // cache wrap settings
+  self.currentWrapStyle = wrapStyle;
+  self.currentWrapAt = wrapAt;
+  
   NSTextContainer *textContainer = [self textContainer];
   if (wrapStyle == TPSoftWrap) {
     //NSLog(@"Soft wrap");
@@ -947,8 +961,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setHorizontallyResizable:YES];
     [self setVerticallyResizable:YES];
   }	else if (wrapStyle == TPWindowWrap) {
-    //NSLog(@"Window wrap");
-
+    
     [self setVerticallyResizable:YES];
     [self setHorizontallyResizable: NO];
     [self setAutoresizingMask: NSViewWidthSizable];
