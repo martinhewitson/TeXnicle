@@ -1235,8 +1235,11 @@
 
 - (void) updateStatusView
 {
-	NSArray *all = [self.projectItemTreeController selectedObjects];	
-  //  NSLog(@"Selected %@", all);
+  if ([[NSApplication sharedApplication] isActive] == NO) {
+    return;
+  }
+  
+  NSArray *all = [self.projectItemTreeController selectedObjects];
   NSString *path = nil;
 	if ([all count] == 1) {
 		NSManagedObject *item = all[0];
