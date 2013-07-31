@@ -41,19 +41,13 @@ To Do\
 \
 	apparently tex supports this\
 \
-\pard\pardeftab720
-
-\fs24 \cf4 - If I have the PDF preview open to a certain size (and on a second screen), then close it, and reopen it some time later, it always reopens back to its original small size (and on screen 1)\'85 could it be possible for it to remember where I want it?\
-\pard\pardeftab720
-
-\fs28 \cf0 \
 + Find and replace in selected text\
 \
 + Rethink Library layout\
 	- do we really need previews?\
 \
 \
-Version 2.1\
+Version 2.*\
 ---------------\
 \
 + splitivew on editor\
@@ -71,9 +65,6 @@ Version 2.1\
 + Menu item to bibtex main file.\
 \
 + sync library code-clippings with iCloud\
-\
-+ Themes for colors\
-    - should check for some standard format used by other editors\
 \
 + Add a Terminal button to launch a terminal in the project's directory\
 \
@@ -120,11 +111,9 @@ Version 2.1\
 	- \\cite jump to bib\
 	- \\ref jump to label\
 \
-2. Soft-wrapped line indentation to the first line (like TextWrangler)?\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 \
-----\
+\f0 \cf0 ----\
 \
 \pard\pardeftab720\sa280
 
@@ -138,7 +127,6 @@ BOOKMARKS should be text attachments (save character index in doc). But how to s
 Ruler class should ask for bookmark lines from delegate\
 \
 ----\
-\
 ---------------------------------------------------\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
@@ -179,13 +167,6 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 	- needs new model version\
 \pard\pardeftab720
 \cf0 	- new entries in xattr for standalone docs\
-\pard\pardeftab720
-
-\f3 \cf0 \
-\pard\pardeftab720
-
-\f0 \cf0 \
-** Bug in number of runs spinner \
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 + Make metadata views for figures, tables\
@@ -219,13 +200,14 @@ For example:\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
 \
-Version 2.1.1\
--------------\
+Version 2.2\
+-----------\
 \
 Introducing 'themes'. Your current settings for colors and fonts will be converted into a theme. You can create your own themes or choose from one of the built-in themes. Themes are a simple plist format and so can be created in a text editor or by editing the theme in the preferences.\
 \
 Changes:\
 \
++ New global preferences to control the number of typesetting runs during live update.\
 + Typesetting is now aborted on more common errors.\
 + Various smart substitutions (quotes, dashes, etc) are switched off on the editor by default.\
 + Other minor fixes.\

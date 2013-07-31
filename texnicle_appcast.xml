@@ -6,6 +6,34 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+<!-- Version 2.2 -->
+<item>
+  <title>Version 2.2 (build 503)</title>
+  <description><![CDATA[
+    <h2>TeXnicle 2.2</h2>
+    <p>
+    Introducing 'themes'. Your current settings for colors and fonts will be converted into a theme. You can create your own themes or choose from one of the built-in themes. Themes are a simple plist format and so can be created in a text editor or by editing the theme in the preferences.
+    </p>
+    <p>
+    Changes:
+    <ul>
+      <li>New global preferences to control the number of typesetting runs during live update.</li>
+      <li>Typesetting is now aborted on more common errors.</li>
+      <li>Various smart substitutions (quotes, dashes, etc) are switched off on the editor by default.</li>
+      <li>Other minor fixes.</li>
+    </ul>
+    </p>
+  ]]></description>
+  <pubDate>31st July 2013</pubDate>
+  <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.zip"
+  sparkle:shortVersionString="2.2"
+  sparkle:version="503"
+  length="20542401"
+  type="application/octet-stream"
+  sparkle:dsaSignature="MCwCFGzEGroPoC6PS2fGqerADpZXPZxgAhQLrZVQJoYGLMgevCF7S8wCER+YUQ=="
+  />
+</item>
+
   <!-- Version 2.1 -->
   <item>
     <title>Version 2.1 (build 83)</title>
