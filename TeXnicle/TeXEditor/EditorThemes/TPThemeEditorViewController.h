@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HHValidatedButton.h"
+#import "MMTabBarView.h"
 
-@interface TPThemeEditorViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSUserInterfaceValidations, NSTextFieldDelegate>
+@interface TPThemeEditorViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSUserInterfaceValidations, NSTextFieldDelegate, MMTabBarViewDelegate>
 
 - (void)revealInFinder;
 - (void)duplicateTheme;

@@ -12,7 +12,6 @@
 #import "NSColor+ContrastingLabelExtensions.h"
 #import "NSDictionary+Theme.h"
 #import "externs.h"
-#import "MMTabBarView.h"
 
 @interface TPThemeEditorViewController ()
 
@@ -122,16 +121,38 @@
   return NO;
 }
 
+- (IBAction) selectCurrentLineColor:(id)sender
+{
+  [self.selectedTheme setCurrentLineColor:[sender color]];
+  [self.selectedTheme save];
+}
+
+- (IBAction) selectMatchingWordsColor:(id)sender
+{
+  [self.selectedTheme setMatchingWordsColor:[sender color]];
+  [self.selectedTheme save];
+}
+
+- (IBAction)chooseColor:(id)sender
+{
+  [sender activate:YES];
+  [sender setAction:@selector(changeColor:)];
+  [sender setTarget:self];
+}
+
 - (void) changeColor:(id)sender
 {
-  NSColor *color = [(NSColorWell*)sender color];
-  if (self.selectedTheme == nil) {
-    return;
+  if (sender == self.outlineColorWell || sender == self.syntaxColorWell || sender == self.documentColorWell) {
+    
+    NSColor *color = [(NSColorWell*)sender color];
+    if (self.selectedTheme == nil) {
+      return;
+    }
+    
+    // set color
+    [self.selectedTheme setColor:color forKey:self.selectedKey];
+    [self.selectedTheme save];
   }
-  
-  // set color
-  [self.selectedTheme setColor:color forKey:self.selectedKey];
-  [self.selectedTheme save];
 }
 
 
@@ -149,13 +170,6 @@
 {
   [self.selectedTheme save];
 }
-
-- (IBAction)chooseColor:(id)sender
-{
-  [sender setAction:@selector(changeColor:)];
-  [sender setTarget:self];
-}
-
 
 - (IBAction)selectDocFont:(id)sender
 {
@@ -368,6 +382,40 @@
 }
 
 #pragma mark -
+#pragma mark TabView Data Source
+
+- (void) tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+  NSTableView *tableView = nil;
+  if ([tabView indexOfTabViewItem:tabViewItem] == 0) {
+    // documents
+    tableView = self.documentItemsTable;
+  } else if ([tabView indexOfTabViewItem:tabViewItem] == 1) {
+    // syntax
+    tableView = self.syntaxItemsTable;
+  } else if ([tabView indexOfTabViewItem:tabViewItem] == 2) {
+    // outline
+    tableView = self.outlineItemsTable;
+  }
+  
+  // set color well
+  NSInteger row = [tableView selectedRow];
+  NSDictionary *dict = [self dictionaryForTableView:tableView];
+  if (dict == nil) {
+    return;
+  }
+  
+  NSArray *keys = [dict sortedKeys];
+  TPTheme *th = self.selectedTheme;
+  if (row >=0 && row < [keys count]) {
+    self.selectedKey = keys[row];
+    
+    NSColor *c = [th colorForKey:keys[row]];
+    [[self colorWellForTableView:tableView] setColor:c];
+  }
+}
+
+#pragma mark -
 #pragma mark TableView Data Source
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -563,6 +611,8 @@
   
   [self updateUI];
 }
+
+
 
 - (NSColorWell*)colorWellForTableView:(NSTableView*)tableView
 {
