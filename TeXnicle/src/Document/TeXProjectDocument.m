@@ -3554,6 +3554,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) fileMonitor:(TPFileMonitor*)aMonitor fileChangedOnDisk:(id)file modifiedDate:(NSDate*)modified
 {
+  NSRect r = [self.texEditorViewController.textView visibleRect];
   if ([file hasEdits]) {
     
     NSString *filename = [file valueForKey:@"shortName"];
@@ -3566,9 +3567,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     if (result == NSAlertDefaultReturn) {
       
       FileEntity *fileEntity = (FileEntity*)file;
-      [fileEntity reloadFromDisk];
-      [self.openDocuments updateDoc];
-      
+      [fileEntity reloadFromDisk];      
     } else {
       [file setValue:modified forKey:@"fileLoadDate"];
     }
@@ -3577,8 +3576,18 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     // silently reload
     FileEntity *fileEntity = (FileEntity*)file;
     [fileEntity reloadFromDisk];
-    [self.openDocuments updateDoc];    
   }
+  
+  [self.texEditorViewController.textView scrollRectToVisible:r];
+  
+  [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
+                                                          withObject:nil
+                                                       waitUntilDone:YES];
+  
+  [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorWholeDocument)
+                                                          withObject:nil
+                                                       waitUntilDone:NO];
+  
   
 }
 

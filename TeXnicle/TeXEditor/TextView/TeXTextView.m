@@ -936,12 +936,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) setWrapStyle
 {
-  int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-  int wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
-  
-  if (self.currentWrapAt == wrapAt && self.currentWrapStyle == wrapStyle) {
-    return;
-  }
+  NSInteger wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] integerValue];
+  NSInteger wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
   
   // cache wrap settings
   self.currentWrapStyle = wrapStyle;
