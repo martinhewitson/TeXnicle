@@ -72,9 +72,4 @@
   [super updateUI];
 }
 
-- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set
-{
-  return set.items;
-}
-
 @end

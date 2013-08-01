@@ -57,7 +57,6 @@
 - (void) tearDown;
 
 
-- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set;
 - (TPMetadataSet*)setForFile:(TPFileMetadata*)aFile;
 
 @end

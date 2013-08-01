@@ -29,6 +29,7 @@
 #import "externs.h"
 #import "TPLabelsSet.h"
 #import "TPLabel.h"
+#import "TPFileMetadata.h"
 
 @interface TPLabelsViewController ()
 
@@ -71,18 +72,13 @@
   }
   
   // sort the sets
-  [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-    NSString *first  = [(TPLabelsSet*)obj1 valueForKey:@"name"];
-    NSString *second = [(TPLabelsSet*)obj2 valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];
+//  [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//    NSString *first  = [(TPLabelsSet*)obj1 valueForKey:@"name"];
+//    NSString *second = [(TPLabelsSet*)obj2 valueForKey:@"name"];
+//    return [first compare:second]==NSOrderedDescending;
+//  }];
   
   [super updateUI];
-}
-
-- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set
-{
-  return set.items;
 }
 
 @end

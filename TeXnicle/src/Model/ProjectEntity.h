@@ -46,6 +46,7 @@
 @property (nonatomic, strong) UISettings *uiSettings;
 
 @property (nonatomic, strong) NSDictionary *icons;
+@property (readonly) NSArray *sortedItems;
 
 - (FileEntity*)fileWithPath:(NSString*)aPath;
 - (FileEntity*)fileWithPathOnDisk:(NSString*)aPath;

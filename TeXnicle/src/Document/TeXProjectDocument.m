@@ -4277,7 +4277,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 {
   NSMutableArray *files = [NSMutableArray array];
   
-  for (ProjectItemEntity *item in self.project.items) {
+  for (ProjectItemEntity *item in self.project.sortedItems) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
       
@@ -4400,10 +4400,12 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   }
   
   // go through project files and build meta files if necessary
-  for (ProjectItemEntity *item in self.project.items) {
+  //NSLog(@"Building file list from...");
+  
+  for (ProjectItemEntity *item in self.project.sortedItems) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
-      
+      //NSLog(@"   %@", file.name);
       // make sure we cache these to stop them being faulted
       if ([self.textFiles containsObject:file] == NO) {
         [self.textFiles addObject:file];

@@ -86,6 +86,18 @@
   
 }
 
+- (NSArray*)sortedItems
+{
+  NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
+  return [self.items sortedArrayUsingDescriptors:@[desc]];
+}
+
++ (NSSet*)keyPathsForValuesAffectingSortedItems
+{
+  
+  return [NSSet setWithObject:@"items"];
+}
+
 - (NSSet*)items
 {
 	NSManagedObjectContext *moc = [self managedObjectContext];

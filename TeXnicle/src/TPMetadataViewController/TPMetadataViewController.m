@@ -135,18 +135,6 @@
   return YES;
 }
 
-- (NSArray*)sortedItemsForSet:(TPMetadataSet*)set
-{
-  NSArray *sortedItems = [set.items sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
-    NSString *sortKey = [a valueForKey:@"sortKey"];
-    NSString *first  = [(TPMetadataSet*)a valueForKey:sortKey];
-    NSString *second = [(TPMetadataSet*)b valueForKey:sortKey];
-    return [first compare:second]==NSOrderedDescending;
-  }];
-  return sortedItems;
-}
-
-
 - (IBAction)filterDidChange:(id)sender
 {
   [self updateFilters];
@@ -301,11 +289,11 @@
 {
   //NSLog(@"%@: updateUI", self);
   
-  [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-    NSString *first  = [obj1 valueForKey:@"name"];
-    NSString *second = [obj2 valueForKey:@"name"];
-    return [first compare:second]==NSOrderedDescending;
-  }];
+//  [self.sets sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//    NSString *first  = [obj1 valueForKey:@"name"];
+//    NSString *second = [obj2 valueForKey:@"name"];
+//    return [first compare:second]==NSOrderedDescending;
+//  }];
 
   [self.outlineView reloadData];
   [self.outlineView setNeedsDisplay:YES];
