@@ -3055,9 +3055,72 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   return nil;
 }
 
+- (void)drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
+                        turnedOn:(BOOL)flag
+{
+  //Block Cursor
+  if( flag )
+  {
+    [self _drawInsertionPointInRect:rect color:color];
+  }
+  else
+  {
+    [self setNeedsDisplayInRect:[self visibleRect]
+          avoidAdditionalLayout:NO];
+  }
+}
+
+
+- (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
+{
+  NSString *cursorType = [[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorType];
+  
+  NSPoint aPoint=NSMakePoint(rect.origin.x, rect.origin.y+rect.size.height/2);
+  NSInteger glyphIndex = [[self layoutManager] glyphIndexForPoint:aPoint
+                                                  inTextContainer:[self textContainer]];
+  NSRect glyphRect = [[self layoutManager] boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1)
+                                                     inTextContainer:[self textContainer]];
+  
+  [color set ];
+  rect.size.width =rect.size.height/2;
+  if(glyphRect.size.width > 0 && glyphRect.size.width < rect.size.width) {
+    rect.size.width=glyphRect.size.width;
+  }
+  
+  rect = [self backingAlignedRect:rect options:NSAlignAllEdgesNearest];
+  
+  rect.origin.y = floor(rect.origin.y) + 0.5;
+  rect.origin.x = floor(rect.origin.x) + 0.5;
+  rect.size.width = floor(rect.size.width);
+  rect.size.height = floor(rect.size.height);
+  
+  //    NSRectFillUsingOperation( rect, NSCompositePlusDarker);
+  
+  if ([cursorType isEqualToString:@"Box"]) {
+    
+    NSBezierPath *path = [NSBezierPath bezierPathWithRect:rect];
+    [path setLineWidth:0.75];
+    [path stroke];
+    
+  } else if ([cursorType isEqualToString:@"Block"]) {
+    
+    NSBezierPath *path = [NSBezierPath bezierPathWithRect:rect];
+    [path setLineWidth:0.75];
+    [path fill];
+    
+  } else {
+    NSBezierPath *path = [NSBezierPath bezierPath];
+    [path moveToPoint:NSMakePoint(rect.origin.x, rect.origin.y)];
+    [path lineToPoint:NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height)];
+    [path setLineWidth:0.75];
+    [path stroke];
+    
+  }
+}
+
 //- (void) _drawInsertionPointInRect:(NSRect)rect color:(NSColor *)color
 //{
-//  BOOL block = NO;
+//  BOOL block = YES;
 //  NSString *cursorType = [[NSUserDefaults standardUserDefaults] valueForKey:TEDocumentCursorType];
 //  if ([cursorType isEqualToString:@"Block"]) {
 //    block = YES;
