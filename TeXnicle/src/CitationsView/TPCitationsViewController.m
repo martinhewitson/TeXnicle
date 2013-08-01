@@ -72,4 +72,52 @@
   [super updateUI];
 }
 
+#pragma mark -
+#pragma mark OutlineView delegate
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard
+{
+  NSString *tags = @"";
+  for (id item in items) {
+    if ([item isKindOfClass:[TPMetadataSet class]]) {
+      return NO;
+    }
+    
+    TPMetadataItem *metaitem = (TPMetadataItem*)item;
+    NSString *tag = nil;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(metadataView:dragStringForItem:)]) {
+      tag = [self.delegate metadataView:self dragStringForItem:metaitem];
+      if (tag == nil) {
+        return NO;
+      }
+    } else {
+      tag = [self dragStringForItem:metaitem];
+    }
+    
+    if ([tags length] > 0) {
+      tags = [tags stringByAppendingFormat:@", %@", tag];
+    } else {
+      tags = tag;
+    }
+  }
+  
+  NSString *dragString = [NSString stringWithFormat:@"\\cite{%@}", tags];
+  
+  [pasteboard declareTypes:@[NSPasteboardTypeString] owner:self];
+  return [pasteboard setString:dragString forType:NSPasteboardTypeString];
+}
+
+- (NSString*) dragStringForItem:(id)item
+{
+  if ([item isKindOfClass:[TPCitation class]]) {
+    TPCitation *cite = (TPCitation*)item;
+    BibliographyEntry *entry = cite.entry;
+    return [NSString stringWithFormat:@"%@", entry.tag];
+  }
+  
+  return nil;
+}
+
 @end
+
+

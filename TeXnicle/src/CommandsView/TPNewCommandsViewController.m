@@ -76,4 +76,50 @@
   [super updateUI];
 }
 
+
+#pragma mark -
+#pragma mark OutlineView delegate
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pasteboard
+{
+  NSString *cmds = @"";
+  for (id item in items) {
+    if ([item isKindOfClass:[TPMetadataSet class]]) {
+      return NO;
+    }
+    
+    TPMetadataItem *metaitem = (TPMetadataItem*)item;
+    NSString *cmd = nil;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(metadataView:dragStringForItem:)]) {
+      cmd = [self.delegate metadataView:self dragStringForItem:metaitem];
+      if (cmd == nil) {
+        return NO;
+      }
+    } else {
+      cmd = [self dragStringForItem:metaitem];
+    }
+    
+    if ([cmds length] > 0) {
+      cmds = [cmds stringByAppendingFormat:@" %@", cmd];
+    } else {
+      cmds = cmd;
+    }
+  }
+  
+  NSString *dragString = [NSString stringWithFormat:@"%@", cmds];
+  
+  [pasteboard declareTypes:@[NSPasteboardTypeString] owner:self];
+  return [pasteboard setString:dragString forType:NSPasteboardTypeString];
+}
+
+- (NSString*) dragStringForItem:(id)item
+{
+  if ([item isKindOfClass:[TPNewCommand class]]) {
+    TPNewCommand *cmd = (TPNewCommand*)item;
+    return [NSString stringWithFormat:@"%@", cmd.argument];
+  }
+  
+  return nil;
+}
+
 @end

@@ -38,6 +38,11 @@
 - (NSArray*) metadataView:(TPMetadataViewController*)aViewController newItemsForFile:(id)file;
 - (void) metadataView:(TPMetadataViewController*)aViewController didSelectItem:(id)anItem;
 
+@optional
+
+
+- (NSString*) metadataView:(TPMetadataViewController*)aViewController dragStringForItem:(id)item;
+
 @end
 
 @interface TPMetadataViewController : NSViewController <NSUserInterfaceValidations, NSOutlineViewDelegate, NSOutlineViewDataSource, TPMetadataViewDelegate> {
