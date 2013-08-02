@@ -194,6 +194,7 @@ extern NSString * const TPMetadataManagerDidEndUpdateNotification;
 //extern NSString * const TPFileMetadataWarningsUpdatedNotification;
 extern NSString * const TPLibraryDidUpdateNotification;
 extern NSString * const TPLogfileAvailableNotification;
+extern NSString * const TPEngineListDidChangeNotification;
 
 
 // String constants
