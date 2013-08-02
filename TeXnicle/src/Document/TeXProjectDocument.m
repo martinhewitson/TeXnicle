@@ -4129,6 +4129,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 #pragma mark -
 #pragma mark Engine Settings
 
+- (void) engineSettingsEnginesHaveChanged:(TPEngineSettingsController *)settings
+{
+  if (settings == self.engineSettings) {
+    [self.engineManager loadEngines];
+  }
+}
+
 - (NSString*)language
 {
   return self.project.settings.language;

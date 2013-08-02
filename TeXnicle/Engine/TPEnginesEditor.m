@@ -28,6 +28,8 @@
 #import "TPEnginesEditor.h"
 #import "TPEngine.h"
 
+NSString * const TPEngineListDidChangeNotification = @"TPEngineListDidChangeNotification";
+
 @interface TPEnginesEditor ()
 
 @property (unsafe_unretained) IBOutlet NSTableView *tableView;
@@ -177,6 +179,9 @@
   [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.engineManager indexOfEngineNamed:newName]]
               byExtendingSelection:NO];
   
+  // post notification
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc postNotificationName:TPEngineListDidChangeNotification object:self];
 }
 
 - (IBAction)newEngine:(id)sender
@@ -214,6 +219,9 @@
   [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.engineManager indexOfEngineNamed:testName]]
               byExtendingSelection:NO];  
   
+  // post notification
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc postNotificationName:TPEngineListDidChangeNotification object:self];
 }
 
 - (IBAction)deleteSelectedEngine:(id)sender
@@ -254,6 +262,9 @@
   // reload table
   [self.tableView reloadData];
   
+  // post notification
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc postNotificationName:TPEngineListDidChangeNotification object:self];
 }
 
 - (IBAction)revealSelectedEngine:(id)sender

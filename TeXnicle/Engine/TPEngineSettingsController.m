@@ -27,6 +27,7 @@
 
 #import "TPEngineSettingsController.h"
 #import "MHStrokedFiledView.h"
+#import "externs.h"
 
 NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageChangedNotification";
 NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
@@ -74,6 +75,24 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   [self setupLanguageOptions];
   
   [self performSelector:@selector(setupEngineSettings) withObject:nil afterDelay:0];
+  
+  // post notification
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self
+         selector:@selector(handleEnginesChangedNotification:)
+             name:TPEngineListDidChangeNotification
+           object:nil];
+  
+  
+
+}
+
+- (void) handleEnginesChangedNotification:(NSNotification*)aNote
+{
+  // tell delegate
+  if (self.delegate && [self.delegate respondsToSelector:@selector(engineSettingsEnginesHaveChanged:)]) {
+    [self.delegate engineSettingsEnginesHaveChanged:self];
+  }
 }
 
 - (void) setupLanguageOptions

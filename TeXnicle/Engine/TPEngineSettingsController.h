@@ -28,6 +28,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class MHStrokedFiledView;
+@class TPEngineSettingsController;
 
 @protocol TPEngineSettingsDelegate <NSObject>
 
@@ -51,6 +52,7 @@
 - (NSString*)language;
 
 -(NSArray*)registeredEngineNames;
+-(void)engineSettingsEnginesHaveChanged:(TPEngineSettingsController*)settings;
 
 @end
 

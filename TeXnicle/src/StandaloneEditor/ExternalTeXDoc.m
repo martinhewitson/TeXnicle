@@ -2179,6 +2179,13 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   return NO;
 }
 
+- (void) engineSettingsEnginesHaveChanged:(TPEngineSettingsController *)settings
+{
+  if (settings == self.engineSettingsController) {
+    [self.engineManager loadEngines];
+  }
+}
+
 -(NSArray*)registeredEngineNames
 {
   return [self.engineManager registeredEngineNames];
