@@ -170,6 +170,9 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 \cf0 + Make metadata views for figures, tables\
++ Make metadata views for \\cite (and friends) and \\label (and friends)\
+\
++ Drag citation from citations navigator to editor.\
 \
 Unit tests for core data model entities\
 \
@@ -199,6 +202,24 @@ For example:\
 \f0 \cf0 \
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
+\pard\pardeftab720
+
+\f1 \cf0 another thing, though: i am using natbib, and no citation whatsoever shows up on documentinfo/citations. is that because of natbib?\
+\pard\tx337\pardeftab337\pardirnatural
+
+\f0 \cf0 \
+Version 2.2.1\
+-------------\
+\
++ Added a general preference to choose between a line, box, and block insertion point.\
++ Meta-data items are properly sorted by the order they appear in the project tree now.\
++ You can now drag citations from the citations navigator to make \\cite\{\} commands in the editor.\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + You can now drag new commands from the new commands navigator to the editor.\
++ Some bug fixes in the themes user interface.\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Bug fix: Engine selector should properly reflect new/duplicated engines now.\
++ Bug fix: In some cases the .bib from a \\bibliography\{\} command was not being scanned.\
 \
 Version 2.2\
 -----------\

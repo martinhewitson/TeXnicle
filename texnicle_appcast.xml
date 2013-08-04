@@ -6,6 +6,32 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+<!-- Version 2.2.1 -->
+<item>
+  <title>Version 2.2.1 (build 606)</title>
+  <description><![CDATA[
+    <h2>TeXnicle 2.2.1</h2>
+    <p>
+    <ul>
+    <li>Added a general preference to choose between a line, box, and block insertion point.</li>
+    <li>Meta-data items are properly sorted by the order they appear in the project tree now.</li>
+    <li>You can now drag citations from the citations navigator to make \cite{} commands in the editor.</li>
+    <li>You can now drag new commands from the new commands navigator to the editor.</li>
+    <li>Some bug fixes in the themes user interface.</li>
+    <li>Bug fix: Engine selector should properly reflect new/duplicated engines now.</li>
+    <li>Bug fix: In some cases the .bib from a \bibliography{} command was not being scanned.</li>    </ul>
+    </p>
+  ]]></description>
+  <pubDate>4th August 2013</pubDate>
+  <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.1.zip"
+  sparkle:shortVersionString="2.2.1"
+  sparkle:version="606"
+  length="20548630"
+  type="application/octet-stream"
+  sparkle:dsaSignature="MC0CFDm+h3EoTSwg+vADFc8HyciY5UamAhUAhPgDRPRs9e5/EM7sDwhHtR5Oy1Q="
+  />
+</item>
+
 <!-- Version 2.2 -->
 <item>
   <title>Version 2.2 (build 503)</title>
