@@ -193,7 +193,7 @@ static NSCharacterSet *controlFilterChars = nil;
 
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile
 {
-  //  NSLog(@"Checking for bib files included in %@", sourceFile);
+  //NSLog(@"Checking for bib files included in %@", sourceFile);
   NSMutableArray *citations = [NSMutableArray array];
   
 	// search for \\bibliography{
@@ -210,61 +210,74 @@ static NSCharacterSet *controlFilterChars = nil;
   NSMutableArray *citations = [NSMutableArray array];
   
   NSScanner *scanner = [NSScanner scannerWithString:self];
+  //NSLog(@"Scanning %@/%@", sourceFile, self);
   
   // scan for \bibliography
+  NSInteger idx = NSNotFound;
   if ([scanner scanUpToString:@"\\bibliography{" intoString:NULL]) {
-    NSInteger idx = [scanner scanLocation];
-    //NSLog(@" file included at index %ld", idx);
-    // check if this line is commented
-    if ([self isCommentLineBeforeIndex:idx commentChar:@"%"] == YES) {
-      //NSLog(@"COMMENTED");
-      return @[];
-    }
-    
-    NSInteger sourceStart = idx;
-    if (idx < [self length]) {
-      NSString *argString = [self parseArgumentStartingAt:&idx];
-      NSInteger sourceEnd = idx;
-      NSArray *args = [argString componentsSeparatedByString:@","];
-      for (__strong NSString *arg in args) {
-        if (arg && [arg length]>0) {
-          if ([[arg pathExtension] length] == 0) {
-            arg = [arg stringByAppendingPathExtension:@"bib"];
-          }
-        }
-        
-        //        NSLog(@"Found \\bibliography with argument %@", arg);
-        NSString *bibpath = nil;
-        if ([arg isAbsolutePath]) {
-          //          NSLog(@"   path is absolute");
-          bibpath = arg;
-        } else {
-          //          NSLog(@"   path is relative to project");
-          bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
-        }
-        //NSLog(@"Bib file is %@", bibpath);
-        
-        MHFileReader *fr = [[MHFileReader alloc] init];
-        NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
-        if (bibcontents && [bibcontents length]>0) {
-          NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
-          //NSLog(@"Got %ld entries ", [entries count]);
-          NSString *sourceString = nil;
-          if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
-            sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
-          }
-          //NSLog(@"   source string [%@]", sourceString);
-          for (BibliographyEntry *entry in entries) {
-            if (sourceString) {
-              [entry setSourceString:sourceString];
-            }
-            [citations addObject:entry];
-          }
-        }
-        // clean up
-      }
+    idx = [scanner scanLocation];
+  } else {
+    // try regexp
+    NSString *expr = @"\\\\bibliography\\{";
+    NSArray *ranges = [TPRegularExpression rangesMatching:expr inText:self];
+    //NSLog(@"Ranges %@", ranges);
+    if ([ranges count] > 0) {
+      NSRange r = [ranges[0] rangeValue];
+      idx = r.location;
     }
   }
+  
+  //NSLog(@" file included at index %ld", idx);
+  // check if this line is commented
+  if ([self isCommentLineBeforeIndex:idx commentChar:@"%"] == YES) {
+    //NSLog(@"COMMENTED");
+    return @[];
+  }
+  
+  NSInteger sourceStart = idx;
+  if (idx < [self length]) {
+    NSString *argString = [self parseArgumentStartingAt:&idx];
+    NSInteger sourceEnd = idx;
+    NSArray *args = [argString componentsSeparatedByString:@","];
+    for (__strong NSString *arg in args) {
+      if (arg && [arg length]>0) {
+        if ([[arg pathExtension] length] == 0) {
+          arg = [arg stringByAppendingPathExtension:@"bib"];
+        }
+      }
+      
+      //NSLog(@"Found \\bibliography with argument %@", arg);
+      NSString *bibpath = nil;
+      if ([arg isAbsolutePath]) {
+        //NSLog(@"   path is absolute");
+        bibpath = arg;
+      } else {
+        //NSLog(@"   path is relative to project");
+        bibpath = [[sourceFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:arg];
+      }
+      //NSLog(@"Bib file is %@", bibpath);
+      
+      MHFileReader *fr = [[MHFileReader alloc] init];
+      NSString *bibcontents = [fr silentlyReadStringFromFileAtURL:[NSURL fileURLWithPath:bibpath]];
+      if (bibcontents && [bibcontents length]>0) {
+        NSArray *entries = [BibliographyEntry bibtexEntriesFromString:bibcontents];
+        //NSLog(@"Got %ld entries ", [entries count]);
+        NSString *sourceString = nil;
+        if (sourceStart>=0 && sourceEnd < [self length] && sourceStart < sourceEnd) {
+          sourceString = [self substringWithRange:NSMakeRange(sourceStart, sourceEnd-sourceStart+1)];
+        }
+        //NSLog(@"   source string [%@]", sourceString);
+        for (BibliographyEntry *entry in entries) {
+          if (sourceString) {
+            [entry setSourceString:sourceString];
+          }
+          [citations addObject:entry];
+        }
+      }
+      // clean up
+    }
+  }
+  
   
   return citations;
 }
