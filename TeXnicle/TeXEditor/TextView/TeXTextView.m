@@ -3651,6 +3651,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
       [self setSelectedRange:currRange];
       [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1];
+      [self updateEditorRuler];
     }
   }
 	return;
