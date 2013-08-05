@@ -236,20 +236,8 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
   return [[sf supportFolder] stringByAppendingPathComponent:@"themes"];
 }
 
-+ (void) installThemes
++ (BOOL) createThemesDir
 {
-  NSMutableArray *themePaths = [NSMutableArray array];
-  
-  for (NSString *name in [TPThemeManager builtinThemeNames]) {
-    //    NSLog(@"Adding engine %@", name);
-    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:[TPThemeManager themeExtension]];
-    //    NSLog(@"Adding path %@", path);
-    if (path) {
-      [themePaths addObject:path];
-    }
-  }
-  
-  // create engines folder
   NSFileManager *fm = [NSFileManager defaultManager];
   NSString *themesDir = [TPThemeManager themesDir];
   if (![fm fileExistsAtPath:themesDir]) {
@@ -263,11 +251,34 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
                                          otherButton:nil
                            informativeTextWithFormat:@"No themes have been installed because the themes directory could not be created at %@. This means TeXnicle will use a default built-in theme.", themesDir];
       [alert runModal];
-      return;
+      return NO;
     }
   }
   
+  return YES;
+}
+
++ (void) installThemes
+{
+  NSMutableArray *themePaths = [NSMutableArray array];
+  
+  for (NSString *name in [TPThemeManager builtinThemeNames]) {
+    //    NSLog(@"Adding engine %@", name);
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:[TPThemeManager themeExtension]];
+    //    NSLog(@"Adding path %@", path);
+    if (path) {
+      [themePaths addObject:path];
+    }
+  }
+  
+  // create themes folder
+  if ([TPThemeManager createThemesDir] == NO) {
+    return;
+  }
+  
   NSError *error = nil;
+  NSString *themesDir = [TPThemeManager themesDir];
+  NSFileManager *fm = [NSFileManager defaultManager];
   for (NSString *themePath in themePaths) {
     error = nil;
     
