@@ -546,8 +546,8 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
     self.palette = [[TPPalette alloc] init];
     
     // load themes
-    [TPThemeManager migrateDefaultsToTheme];
     [TPThemeManager installThemes];
+    [TPThemeManager migrateDefaultsToTheme];
     TPThemeManager *themeManager = [TPThemeManager sharedManager];
     self.didSetup = YES;
   }

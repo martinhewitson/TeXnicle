@@ -98,6 +98,10 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
     return;
   }
   
+  if ([TPThemeManager createThemesDir] == NO) {
+    return;
+  }
+  
   TPTheme *theme = [[TPTheme alloc] init];
   theme.themeDescription = @"Migrated Color Settings";
   theme.colorMultilineArguments = [defaults valueForKey:TESyntaxColorMultilineArguments];
@@ -253,6 +257,8 @@ NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChanged
       [alert runModal];
       return NO;
     }
+    
+    //NSLog(@"Created themes directory at %@", themesDir);
   }
   
   return YES;
