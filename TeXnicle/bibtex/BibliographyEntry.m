@@ -28,6 +28,7 @@
 #import "BibliographyEntry.h"
 #import "NSMutableAttributedString+BibFieldDisplay.h"
 #import "NSString+LaTeX.h"
+#import "TPThemeManager.h"
 
 @implementation BibliographyEntry
 
@@ -176,48 +177,42 @@
 
 - (NSAttributedString*)attributedString
 {
-  NSAttributedString *comma = [[NSAttributedString alloc] initWithString:@", "];
-  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@""];
-  
-  NSMutableAttributedString *tagString = [[NSMutableAttributedString alloc] initWithString:self.tag];
-  [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];  
-  [att appendAttributedString:tagString];
-  
-  if ([self.title length] > 0) {
-    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
-    [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [self.title length])];
-    [att appendAttributedString:comma];
-    [att appendAttributedString:titleString];
-  }
-  
-  if ([self.author length] > 0) {
-    if ([att length]>0){
-      [att appendAttributedString:comma];    
-    }
-    NSMutableAttributedString *authorString = [[NSMutableAttributedString alloc] initWithString:self.author];
-    [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:NSMakeRange(0, [self.author length])];
-    [att appendAttributedString:comma];
-    [att appendAttributedString:authorString];
-  }
-  
-  
-  return att;
+  return [self stringWithColor:[NSColor blackColor]];
 }
 
 
 - (NSAttributedString*)alternativeAttributedString
 {
+  return [self stringWithColor:[NSColor whiteColor]];
+}
+
+- (NSAttributedString*)stringWithColor:(NSColor*)aColor
+{
   NSAttributedString *comma = [[NSAttributedString alloc] initWithString:@", "];
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@""];
   
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
+
   NSMutableAttributedString *tagString = [[NSMutableAttributedString alloc] initWithString:self.tag];
-  [tagString addAttribute:NSFontAttributeName value:[NSFont boldSystemFontOfSize:12.0] range:NSMakeRange(0, [self.tag length])];
-  [tagString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.tag length])];
+  
+  NSFont *boldFont = [[NSFontManager sharedFontManager] fontWithFamily:[font familyName]
+                                            traits:NSBoldFontMask
+                                            weight:0
+                                              size:[font pointSize]];
+  
+  [tagString addAttribute:NSFontAttributeName value:boldFont range:NSMakeRange(0, [self.tag length])];
+  
+  [tagString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [self.tag length])];
   [att appendAttributedString:tagString];
   
   if ([self.title length] > 0) {
     NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:self.title];
-    [titleString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.title length])];
+    [titleString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [self.title length])];
+    [titleString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [self.title length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:titleString];
   }
@@ -227,10 +222,17 @@
       [att appendAttributedString:comma];
     }
     NSMutableAttributedString *authorString = [[NSMutableAttributedString alloc] initWithString:self.author];
-    [authorString addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [self.author length])];
+    [authorString addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(0, [self.author length])];
+    [authorString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [self.author length])];
     [att appendAttributedString:comma];
     [att appendAttributedString:authorString];
   }
+  
+  // apply paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
+  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
   
   
   return att;
