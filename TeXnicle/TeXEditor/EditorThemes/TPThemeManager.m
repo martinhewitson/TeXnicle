@@ -35,6 +35,7 @@
 #import "NSColor+ContrastingLabelExtensions.h"
 
 NSString * const TPThemeSelectionChangedNotification = @"TPThemeSelectionChangedNotification";
+NSString * const TPThemeNavigatorFontChangedNotification = @"TPThemeNavigatorFontChangedNotification";
 
 
 @interface TPThemeManager ()

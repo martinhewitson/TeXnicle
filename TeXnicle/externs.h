@@ -183,6 +183,7 @@ extern NSString * const TPDefaultEncoding;
 
 // Notifications
 extern NSString * const TPThemeSelectionChangedNotification;
+extern NSString * const TPThemeNavigatorFontChangedNotification;
 extern NSString * const TPSyntaxColorsChangedNotification;
 extern NSString * const TPFileItemTextStorageChangedNotification;
 extern NSString * const TPBookmarkDidUpdateNotification;
