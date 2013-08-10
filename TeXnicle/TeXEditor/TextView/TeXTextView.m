@@ -3081,7 +3081,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSRect glyphRect = [[self layoutManager] boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1)
                                                      inTextContainer:[self textContainer]];
   
-  [color set ];
+  [color set];
+  
   rect.size.width =rect.size.height/2;
   if(glyphRect.size.width > 0 && glyphRect.size.width < rect.size.width) {
     rect.size.width=glyphRect.size.width;
@@ -3114,7 +3115,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [path lineToPoint:NSMakePoint(rect.origin.x, rect.origin.y + rect.size.height)];
     [path setLineWidth:0.75];
     [path stroke];
-    
   }
 }
 
