@@ -7,5 +7,6 @@
 
 - (NSColor *)contrastingLabelColor;
 - (NSString*) stringArray;
+- (BOOL) isEqualToColor:(NSColor *)otherColor;
 
 @end
