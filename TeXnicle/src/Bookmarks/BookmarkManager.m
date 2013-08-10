@@ -95,6 +95,12 @@
 
 - (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
 {
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
   //NSLog(@"Font changed");
   [self.outlineView reloadData];
   [self.outlineView setNeedsDisplay:YES];
@@ -359,7 +365,8 @@
 {
   if (anOutlineView == self.outlineView) {
     if ([cell isMemberOfClass:[ImageAndTextCell class]]) {
-      [cell setImageSize:16.0];
+      [cell setImageSize:[anOutlineView rowHeight]];
+      
       if ([item isKindOfClass:[FileEntity class]]) {
         FileEntity *file = (FileEntity*)item;
         if (file.icon == nil) {

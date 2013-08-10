@@ -30,6 +30,7 @@
 #import "TPMetadataSet.h"
 #import "HHValidatedButton.h"
 #import "externs.h"
+#import "TPThemeManager.h"
 
 #define kUpdateInterval 1.0
 
@@ -105,6 +106,23 @@
              name:TPMetadataManagerDidEndUpdateNotification
            object:nil];
   
+  [nc addObserver:self
+         selector:@selector(handleThemeNavigationFontDidChangeNotification:)
+             name:TPMetadataManagerDidEndUpdateNotification
+           object:nil];
+}
+
+- (void) handleThemeNavigationFontDidChangeNotification:(NSNotification*)aNote
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 - (void) handleMetadataDidBeginUpdateNotification:(NSNotification*)aNote
@@ -229,15 +247,11 @@
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-//  if ([item isKindOfClass:[TPMetadataSet class]]) {
-    if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
-      return [item valueForKey:@"selectedDisplayString"];
-    } else {
-      return [item valueForKey:@"displayString"];
-    }
-//  } else if ([item isKindOfClass:[TPMetadataItem class]]) {
-//    return [item valueForKey:@"value"];
-//  }
+  if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
+    return [item valueForKey:@"selectedDisplayString"];
+  } else {
+    return [item valueForKey:@"displayString"];
+  }
   
   return nil;
 }

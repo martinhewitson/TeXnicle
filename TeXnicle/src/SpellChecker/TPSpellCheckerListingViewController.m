@@ -31,6 +31,7 @@
 #import "FileEntity.h"
 #import "externs.h"
 #import "ImageAndTextCell.h"
+#import "TPThemeManager.h"
 
 
 @interface TPSpellCheckerListingViewController ()
@@ -108,6 +109,23 @@
              name:TPSpellingLanguageChangedNotification
            object:nil];
   
+  [nc addObserver:self
+         selector:@selector(handleThemeNavigationFontDidChangeNotification:)
+             name:TPThemeNavigatorFontChangedNotification
+           object:nil];
+}
+
+- (void) handleThemeNavigationFontDidChangeNotification:(NSNotification*)aNote
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 - (IBAction)learnWord:(id)sender

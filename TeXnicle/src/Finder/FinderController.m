@@ -38,6 +38,7 @@
 #import "MHLineNumber.h"
 #import "externs.h"
 #import "FileDocument.h"
+#import "TPThemeManager.h"
 
 #define kFindBarSmall 77
 #define kFindBarLarge 119
@@ -93,6 +94,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 #if TEAR_DOWN
   NSLog(@"Tear down %@", self);
 #endif
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;
@@ -114,6 +116,25 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   
   [self.modeSelector selectItemAtIndex:0];
   [self selectMode:self];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleThemeNavigatorFontDidChangeNotification:)
+                                               name:TPThemeNavigatorFontChangedNotification
+                                             object:nil];
+}
+
+- (void) handleThemeNavigatorFontDidChangeNotification:(NSNotification*)aNote
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem
@@ -555,7 +576,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
 - (void) outlineView:(NSOutlineView *)anOutlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-  if (anOutlineView == self.outlineView) {
+  if (anOutlineView == self.outlineView) {    
     if ([cell isMemberOfClass:[ImageAndTextCell class]]) {
       if ([item isKindOfClass:[TPResultDocument class]]) {
         [cell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];

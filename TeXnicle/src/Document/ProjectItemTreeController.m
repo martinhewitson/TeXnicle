@@ -48,6 +48,7 @@
 #import "TPOutlineView.h"
 #import "MHFileReader.h"
 #import "NSString+FileTypes.h"
+#import "TPThemeManager.h"
 
 @interface ProjectItemTreeController (Private)
 - (void)updateSortOrderOfModelObjects;
@@ -121,6 +122,9 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 #if TEAR_DOWN
   NSLog(@"Tear down %@", self);
 #endif
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
 	NSError *error = nil;
 	BOOL success = [self fetchWithRequest:nil merge:YES error:&error];
 	if (success == NO) {
@@ -226,12 +230,30 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	}		
 	self.filesToAdd = [[NSMutableArray alloc] init];
 	
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleNavigatorFontChangedNotification:)
+                                               name:TPThemeNavigatorFontChangedNotification
+                                             object:nil];
+  
 	[super awakeFromNib];
 }
 
 - (void) dealloc
 {
 //  NSLog(@"Dealloc %@", self);
+}
+
+- (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 #pragma mark -
@@ -1355,14 +1377,14 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 {
 
 	if ([[tableColumn identifier] isEqualToString:@"NameColumn"]) {
-    CGFloat imageSize = 20.0;
-    [anOutlineView setRowHeight:imageSize+2.0];
+    CGFloat imageSize = [anOutlineView rowHeight];
+//    [anOutlineView setRowHeight:imageSize+2.0];
     
     ProjectItemEntity *object = [item representedObject];
     
     [cell setImageSize:imageSize];
     [cell setTextColor:[NSColor blackColor]];
-		
+    
     if ([object isMemberOfClass:[FolderEntity class]]) {
       //    NSLog(@"%@ is a folder", [object name]);
       NSString *pathOnDisk = [object valueForKey:@"pathOnDisk"];

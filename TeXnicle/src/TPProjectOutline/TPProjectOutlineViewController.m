@@ -97,6 +97,23 @@
              name:TPThemeSelectionChangedNotification
            object:nil];
   
+  [nc addObserver:self
+         selector:@selector(handleNavigatorFontChangedNotification:)
+             name:TPThemeNavigatorFontChangedNotification
+           object:nil];
+}
+
+- (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.outlineView setRowHeight:s.height];
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 - (void) handleThemeDidChangeNotification:(NSNotification*)aNote
@@ -308,12 +325,6 @@
     [cell setObjectValue:title];
   }
   
-  // we need the icon for this cell
-//  TPSectionTemplate *template = [item valueForKey:@"type"];
-//  if (template) {
-//    [cell setImageSize:17.0];
-//    [cell setImage:template.icon];
-//  }
 }
 
 #pragma mark -

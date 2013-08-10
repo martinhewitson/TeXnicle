@@ -39,8 +39,6 @@
 #pragma mark -
 #pragma mark OutlineView datasource
 
-
-
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {  
   if ([item isKindOfClass:[TPWarningSet class]]) {

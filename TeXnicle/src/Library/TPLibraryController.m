@@ -115,6 +115,9 @@
   NSFont *font = theme.navigatorFont;
   NSTableColumn *col = [self.categoriesTable tableColumnWithIdentifier:@"NameColumn"];
   [[col dataCell] setFont:font];
+  NSAttributedString *att = [[NSAttributedString alloc] initWithString:@"A Big Test String" attributes:@{NSFontAttributeName : font}];
+  NSSize s = [att size];
+  [self.categoriesTable setRowHeight:s.height];
   [self.categoriesTable reloadData];
   [self.categoriesTable setNeedsDisplay:YES];
 }

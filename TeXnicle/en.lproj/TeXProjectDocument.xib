@@ -215,14 +215,14 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         </customView>
                                                         <tabView type="noTabsNoBorder" id="100922" userLabel="Info Tab View (Tab, View, Item 2, Item 3, Item 4, Item 5)">
-                                                            <rect key="frame" x="0.0" y="0.0" width="235" height="549"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                             <tabViewItems>
                                                                 <tabViewItem label="Tab" identifier="1" id="100923" userLabel="Bookmarks">
                                                                     <view key="view" id="100926">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="549"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="View" identifier="2" id="100924" userLabel="Warnings">
