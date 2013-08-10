@@ -101,6 +101,8 @@
 @property (readonly) NSString *editorFontLabel;
 @property (strong) NSFont *consoleFont;
 @property (readonly) NSString *consoleFontLabel;
+@property (strong) NSFont *navigatorFont;
+@property (readonly) NSString *navigatorFontLabel;
 
 + (TPTheme*) themeWithPath:(NSString*)aPath;
 

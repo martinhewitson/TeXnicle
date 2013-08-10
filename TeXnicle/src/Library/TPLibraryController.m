@@ -16,6 +16,7 @@
 #import "NSTableView+TeXnicle.h"
 #import "NSStringUUID.h"
 #import "TPLibraryCommandFormatter.h"
+#import "TPThemeManager.h"
 
 @interface TPLibraryController ()
 
@@ -94,6 +95,28 @@
                                            selector:@selector(handleLibraryUpdate:)
                                                name:TPLibraryDidUpdateNotification
                                              object:self.library];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(handleNavigatorFontDidChangeNotification:)
+                                               name:TPThemeNavigatorFontChangedNotification
+                                             object:nil];
+  
+  [self updateFont];
+}
+
+- (void) handleNavigatorFontDidChangeNotification:(NSNotification*)aNote
+{
+  [self updateFont];
+}
+
+- (void) updateFont
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  NSTableColumn *col = [self.categoriesTable tableColumnWithIdentifier:@"NameColumn"];
+  [[col dataCell] setFont:font];
+  [self.categoriesTable reloadData];
+  [self.categoriesTable setNeedsDisplay:YES];
 }
 
 - (void) handleLibraryUpdate:(NSNotification*)aNote

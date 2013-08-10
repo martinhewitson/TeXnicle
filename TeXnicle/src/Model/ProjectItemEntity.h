@@ -52,6 +52,7 @@
 @property (unsafe_unretained, readonly) NSString *projectPath;
 @property (unsafe_unretained, readonly) NSString *pathOnDisk;
 @property (unsafe_unretained, readonly) NSString *shortName;
+@property (readonly) NSAttributedString *displayName;
 @property (readonly) BOOL existsOnDisk;
 @property (readonly) BOOL isLeaf;
 @property (readonly) BOOL isManaged;

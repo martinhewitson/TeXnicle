@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPThemeEditorViewController">
@@ -20,6 +20,7 @@
                 <outlet property="removeThemeButton" destination="92" id="96"/>
                 <outlet property="selectConsoleFontButton" destination="24" id="88"/>
                 <outlet property="selectEditorFontButton" destination="21" id="89"/>
+                <outlet property="selectNavigatorFontButton" destination="RDF-Xh-L9e" id="PJX-hc-PWr"/>
                 <outlet property="syntaxColorWell" destination="32" id="168"/>
                 <outlet property="syntaxItemsTable" destination="71" id="87"/>
                 <outlet property="tabBar" destination="130" id="135"/>
@@ -31,11 +32,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <customView id="1">
-            <rect key="frame" x="0.0" y="0.0" width="596" height="471"/>
+            <rect key="frame" x="0.0" y="0.0" width="596" height="523"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView id="130" customClass="MMTabBarView">
-                    <rect key="frame" x="203" y="368" width="373" height="33"/>
+                    <rect key="frame" x="203" y="420" width="373" height="33"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-2" id="133"/>
@@ -44,14 +45,14 @@
                     </connections>
                 </customView>
                 <scrollView focusRingType="none" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="3">
-                    <rect key="frame" x="20" y="39" width="175" height="412"/>
+                    <rect key="frame" x="20" y="49" width="175" height="454"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="IyZ-7x-tiI">
-                        <rect key="frame" x="1" y="1" width="173" height="410"/>
+                        <rect key="frame" x="1" y="1" width="173" height="452"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="20" id="8">
-                                <rect key="frame" x="0.0" y="0.0" width="173" height="410"/>
+                                <rect key="frame" x="0.0" y="0.0" width="173" height="452"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -89,7 +90,7 @@
                     </scroller>
                 </scrollView>
                 <tabView type="noTabsNoBorder" initialItem="14" id="13">
-                    <rect key="frame" x="203" y="123" width="373" height="251"/>
+                    <rect key="frame" x="203" y="175" width="373" height="251"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
@@ -378,7 +379,7 @@
                     </connections>
                 </tabView>
                 <textField verticalHuggingPriority="750" id="20">
-                    <rect key="frame" x="213" y="96" width="78" height="17"/>
+                    <rect key="frame" x="203" y="148" width="101" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Editor Font:" id="31">
                         <font key="font" metaFont="system"/>
@@ -387,18 +388,18 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" id="21">
-                    <rect key="frame" x="528" y="93" width="48" height="19"/>
+                    <rect key="frame" x="528" y="145" width="48" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="roundRect" title="select" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="30">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="12" name="LucidaGrande"/>
+                        <font key="font" metaFont="cellTitle"/>
                     </buttonCell>
                     <connections>
                         <action selector="selectDocFont:" target="-2" id="109"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="22">
-                    <rect key="frame" x="296" y="81" width="224" height="34"/>
+                    <rect key="frame" x="309" y="133" width="211" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" drawsBackground="YES" id="29">
                         <font key="font" metaFont="system"/>
@@ -415,7 +416,7 @@
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" id="23">
-                    <rect key="frame" x="200" y="54" width="91" height="17"/>
+                    <rect key="frame" x="203" y="106" width="101" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Console Font:" id="28">
                         <font key="font" metaFont="system"/>
@@ -424,18 +425,18 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" id="24">
-                    <rect key="frame" x="528" y="51" width="48" height="19"/>
+                    <rect key="frame" x="528" y="103" width="48" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="roundRect" title="select" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="27">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="12" name="LucidaGrande"/>
+                        <font key="font" metaFont="cellTitle"/>
                     </buttonCell>
                     <connections>
                         <action selector="selectConsoleFont:" target="-2" id="110"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="25">
-                    <rect key="frame" x="296" y="39" width="224" height="34"/>
+                    <rect key="frame" x="309" y="91" width="211" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" drawsBackground="YES" id="26">
                         <font key="font" metaFont="system"/>
@@ -451,8 +452,45 @@
                         </binding>
                     </connections>
                 </textField>
+                <textField verticalHuggingPriority="750" id="FRb-1T-JJp">
+                    <rect key="frame" x="203" y="64" width="101" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Navigator Font:" id="o8a-UW-XTu">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" id="RDF-Xh-L9e">
+                    <rect key="frame" x="528" y="61" width="48" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <buttonCell key="cell" type="roundRect" title="select" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="x9N-iH-GRk">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectNavigatorFont:" target="-2" id="9LX-3I-uff"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" id="ssd-0f-K4P">
+                    <rect key="frame" x="309" y="49" width="211" height="34"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" drawsBackground="YES" id="DGp-kf-f18">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.selectedTheme.navigatorFontLabel" id="GFn-jQ-s0J">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="33">
-                    <rect key="frame" x="203" y="409" width="373" height="42"/>
+                    <rect key="frame" x="203" y="461" width="373" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" title="Multiline Label" placeholderString="Theme Description" drawsBackground="YES" id="34">
                         <font key="font" metaFont="system"/>
@@ -480,7 +518,7 @@
                     </connections>
                 </textField>
                 <button verticalHuggingPriority="750" id="90">
-                    <rect key="frame" x="20" y="9" width="23" height="23"/>
+                    <rect key="frame" x="20" y="19" width="23" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="91">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -491,7 +529,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="92" customClass="HHValidatedButton">
-                    <rect key="frame" x="46" y="9" width="23" height="23"/>
+                    <rect key="frame" x="46" y="19" width="23" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="93">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -502,7 +540,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="112" customClass="HHValidatedButton">
-                    <rect key="frame" x="172" y="9" width="23" height="23"/>
+                    <rect key="frame" x="172" y="19" width="23" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="113">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

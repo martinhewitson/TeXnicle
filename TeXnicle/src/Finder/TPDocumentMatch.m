@@ -27,6 +27,7 @@
 //
 
 #import "TPDocumentMatch.h"
+#import "TPThemeManager.h"
 
 @interface TPDocumentMatch ()
 
@@ -71,6 +72,20 @@
   NSRange matchRange = NSMakeRange(self.subrange.location+[lineNumberString length], self.subrange.length);
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:matchRange];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [lineNumberString length])];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
+  
+  
+  // apply paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
+  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  
   return att;
 }
 
@@ -83,6 +98,18 @@
   [str addAttribute:NSForegroundColorAttributeName value:[NSColor whiteColor] range:NSMakeRange(0, [str length])];
   [att addAttribute:NSBackgroundColorAttributeName value:[NSColor colorWithDeviceRed:240.0/255.0 green:240.0/255.0 blue:180.0/255.0 alpha:1.0] range:self.subrange];
   [str appendAttributedString:att];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [str length])];
+
+  // apply paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
+  [str addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [str length])];
   
   return str;
 }

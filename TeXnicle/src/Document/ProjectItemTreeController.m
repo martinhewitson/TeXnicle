@@ -1383,15 +1383,16 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
       }
     } else if ([object isKindOfClass:[FileEntity class]]) {
       //    NSLog(@"%@ is a file", [object name]);
+      FileEntity *file = (FileEntity*)object;
       
-      if ([[(FileEntity*)object valueForKey:@"isText"] boolValue]) {
-        BOOL dirty = [object hasEdits];
+      if ([[file valueForKey:@"isText"] boolValue]) {
+        BOOL dirty = [file hasEdits];
         if (dirty) {
           [cell setTextColor:[NSColor lightGrayColor]];
         }
       }
       
-      if(![object existsOnDisk]) {
+      if(![file existsOnDisk]) {
         [cell setTextColor:[NSColor redColor]];
       }	
       
@@ -1403,13 +1404,13 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 //      title = [object valueForKey:@"name"];
 //      [cell setTitle:title];
       
-      NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[cell title]];
+      NSMutableAttributedString *title = [file.displayName mutableCopy]; //[[NSMutableAttributedString alloc] initWithString:[cell title]];
 
-      if (object.isSelected) {
+      if (file.isSelected) {
         [title addAttribute:NSUnderlineStyleAttributeName value:@YES range:NSMakeRange(0, [title length])];
       }      
       
-      if (object == [[object valueForKey:@"project"] valueForKey:@"mainFile"]) {
+      if (file == [[file valueForKey:@"project"] valueForKey:@"mainFile"]) {
         [title applyFontTraits:NSBoldFontMask range:NSMakeRange(0, [title length])];
       }
       
@@ -1417,10 +1418,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
       [c setAttributedStringValue:title];
       
       // set file's icon
-      if ([(FileEntity*)object icon] == nil) {
-        [(FileEntity*)object loadIcon];
+      if ([file icon] == nil) {
+        [file loadIcon];
       }
-      [cell setImage:[(FileEntity*)object icon]];
+      [cell setImage:[file icon]];
     }
   }
 

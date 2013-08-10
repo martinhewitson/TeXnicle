@@ -28,6 +28,7 @@
 #import "TPSyntaxError.h"
 #import "TPRegularExpression.h"
 #import "RegexKitLite.h"
+#import "TPThemeManager.h"
 
 @implementation TPSyntaxError
 
@@ -136,6 +137,12 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [str addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [str length])];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [str length])];
   
   return str;
 }

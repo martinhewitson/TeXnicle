@@ -28,6 +28,7 @@
 
 #import "TPResultDocument.h"
 #import "FileEntity.h"
+#import "TPThemeManager.h"
 
 @interface TPResultDocument ()
 
@@ -71,6 +72,11 @@
 {
   NSString *str = [NSString stringWithFormat:@"%@: %lu Matches", [self.document valueForKey:@"name"], [self.matches count]];
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str]; 
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
   return att;
 }
 

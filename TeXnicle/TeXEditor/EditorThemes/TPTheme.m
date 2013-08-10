@@ -526,6 +526,45 @@
 #pragma mark -
 #pragma mark Font Accessors
 
+- (void) setNavigatorFont:(NSFont *)font
+{
+  NSString *fontDesc = [NSString stringWithFormat:@"%@ - %0.0f", [font displayName], [font pointSize]];
+  NSMutableDictionary *fontDict = [self.fonts mutableCopy];
+  [fontDict setValue:fontDesc forKey:@"texnicle.font.navigator"];
+  self.fonts = fontDict;
+}
+
+- (NSFont*)navigatorFont
+{
+  if (self.fonts == nil) {
+    [self loadTheme];
+  }
+  
+  NSString *fontDesc = [self.fonts valueForKey:@"texnicle.font.navigator"];
+  NSArray *parts = [fontDesc componentsSeparatedByString:@" - "];
+  NSFont *f = [NSFont fontWithName:parts[0] size:[parts[1] doubleValue]];
+  if (f == nil) {
+    f = [NSFont systemFontOfSize:12];
+  }
+  return f;
+}
+
++ (NSSet*)keyPathsForValuesAffectingNavigatorFont
+{
+  return [NSSet setWithObject:@"fonts"];
+}
+
+- (NSString*)navigatorFontLabel
+{
+  NSFont *f = [self navigatorFont];
+  return [NSString stringWithFormat:@"%@ - %0.0f pt", [f displayName], [f pointSize]];
+}
+
++ (NSSet*)keyPathsForValuesAffectingNavigatorFontLabel
+{
+  return [NSSet setWithObject:@"navigatorFont"];
+}
+
 - (void) setEditorFont:(NSFont *)editorFont
 {
   NSString *fontDesc = [NSString stringWithFormat:@"%@ - %0.0f", [editorFont displayName], [editorFont pointSize]];

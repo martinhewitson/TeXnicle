@@ -31,6 +31,7 @@
 #import "MHLineNumber.h"
 #import "externs.h"
 #import "FileDocument.h"
+#import "TPThemeManager.h"
 
 @implementation Bookmark
 @dynamic linenumber;
@@ -152,6 +153,12 @@
               value:ps
               range:NSMakeRange(0, [att length])];
   
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
+  
   return att;
 }
 
@@ -185,6 +192,13 @@
   if ([self.text length]==0) {
     [str addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange([lineNumberString length], [str length]-[lineNumberString length])];
   }
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [str addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [str length])];
+  
   return str;
 }
 

@@ -27,6 +27,7 @@
 
 #import "TPSpellCheckedFile.h"
 #import "TPMisspelledWord.h"
+#import "TPThemeManager.h"
 
 @implementation TPSpellCheckedFile
 
@@ -97,6 +98,12 @@
   [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
   [ps setLineBreakMode:NSLineBreakByTruncatingTail];
   [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
   
   return att;
 }

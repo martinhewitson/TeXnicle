@@ -31,7 +31,7 @@
 #import "FileEntity.h"
 #import "ImageAndTextCell.h"
 #import "externs.h"
-
+#import "TPThemeManager.h"
 
 @interface BookmarkManager ()
 
@@ -60,6 +60,10 @@
            selector:@selector(handleBookmarkChangedNotification:)
                name:TPBookmarkDidUpdateNotification
              object:nil];
+    [nc addObserver:self
+           selector:@selector(handleNavigatorFontChangedNotification:)
+               name:TPThemeNavigatorFontChangedNotification
+             object:nil];
   }
   return self;
 }
@@ -87,6 +91,13 @@
 	[imageAndTextCell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
   [imageAndTextCell setLineBreakMode:NSLineBreakByTruncatingTail];
 	[tableColumn setDataCell:imageAndTextCell];	
+}
+
+- (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
+{
+  //NSLog(@"Font changed");
+  [self.outlineView reloadData];
+  [self.outlineView setNeedsDisplay:YES];
 }
 
 - (void) handleBookmarkChangedNotification:(NSNotification*)aNote
@@ -348,8 +359,13 @@
 {
   if (anOutlineView == self.outlineView) {
     if ([cell isMemberOfClass:[ImageAndTextCell class]]) {
+      [cell setImageSize:16.0];
       if ([item isKindOfClass:[FileEntity class]]) {
-        [cell setImage:[NSImage imageNamed:@"TeXnicle_Doc"]];
+        FileEntity *file = (FileEntity*)item;
+        if (file.icon == nil) {
+          [file loadIcon];
+        }
+        [cell setImage:file.icon];
       } else if ([item isKindOfClass:[Bookmark class]]) {
         [cell setImage:[NSImage imageNamed:@"bookmark"]];
       }
@@ -449,7 +465,7 @@
 {
   // file
   if ([item isKindOfClass:[FileEntity class]]) {
-    return [item valueForKey:@"shortName"];
+    return [item valueForKey:@"displayName"];
   }
   
   // bookmark

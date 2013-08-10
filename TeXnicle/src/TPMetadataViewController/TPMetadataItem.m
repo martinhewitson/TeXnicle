@@ -26,6 +26,7 @@
 //
 
 #import "TPMetadataItem.h"
+#import "TPThemeManager.h"
 
 @implementation TPMetadataItem
 
@@ -33,5 +34,43 @@
 {
   return @"value";
 }
+
+- (NSAttributedString*)selectedDisplayString
+{
+  return [self stringForDisplayWithColor:[NSColor alternateSelectedControlTextColor]];
+}
+
+- (NSAttributedString*)displayString
+{
+  return [self stringForDisplayWithColor:[NSColor darkGrayColor]];
+}
+
+- (NSAttributedString*)stringForDisplayWithColor:(NSColor*)color
+{
+  NSMutableAttributedString *att = nil;
+  
+  if ([self.value isKindOfClass:[NSAttributedString class]]) {
+    return self.value;
+  } else if ([self.value isKindOfClass:[NSString class]]) {
+    att = [[NSMutableAttributedString alloc] initWithString:self.value];
+  } else {
+    att = [[NSMutableAttributedString alloc] initWithString:self.string];
+  }
+  
+  // apply paragraph
+  NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+  [ps setParagraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+  [ps setLineBreakMode:NSLineBreakByTruncatingTail];
+  [att addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, [att length])];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
+  
+  return att;
+}
+
 
 @end

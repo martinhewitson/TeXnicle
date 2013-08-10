@@ -12,6 +12,7 @@
 #import "NSColor+ContrastingLabelExtensions.h"
 #import "NSDictionary+Theme.h"
 #import "externs.h"
+#import "NSColor+ContrastingLabelExtensions.h"
 
 @interface TPThemeEditorViewController ()
 
@@ -29,11 +30,14 @@
 
 @property (assign) IBOutlet NSButton *selectEditorFontButton;
 @property (assign) IBOutlet NSButton *selectConsoleFontButton;
+@property (assign) IBOutlet NSButton *selectNavigatorFontButton;
 @property (assign) IBOutlet NSButton *multilineArgButton;
 @property (assign) IBOutlet NSTextField *themeDescriptionTextField;
 @property (assign) IBOutlet HHValidatedButton *removeThemeButton;
 @property (assign) IBOutlet HHValidatedButton *actionButton;
 @property (assign) IBOutlet MMTabBarView *tabBar;
+
+@property (strong) NSButton *activeFontButton;
 
 @property (strong) NSMenu *actionMenu;
 
@@ -123,14 +127,18 @@
 
 - (IBAction) selectCurrentLineColor:(id)sender
 {
-  [self.selectedTheme setCurrentLineColor:[sender color]];
-  [self.selectedTheme save];
+  if (sender == self.currentLineColorWell) {
+    [self.selectedTheme setCurrentLineColor:[sender color]];
+    [self.selectedTheme save];
+  }
 }
 
 - (IBAction) selectMatchingWordsColor:(id)sender
 {
-  [self.selectedTheme setMatchingWordsColor:[sender color]];
-  [self.selectedTheme save];
+  if (sender == self.matchingWordsColorWell) {
+    [self.selectedTheme setMatchingWordsColor:[sender color]];
+    [self.selectedTheme save];
+  }
 }
 
 - (IBAction)chooseColor:(id)sender
@@ -150,8 +158,13 @@
     }
     
     // set color
-    [self.selectedTheme setColor:color forKey:self.selectedKey];
-    [self.selectedTheme save];
+    NSColor *currentColor = [self.selectedTheme colorForKey:self.selectedKey];
+    if ([color isEqualToColor:currentColor] == NO) {
+      [self.selectedTheme setColor:color forKey:self.selectedKey];
+      [self.selectedTheme save];
+    } else {
+      NSLog(@"Equal color, not setting");
+    }
   }
 }
 
@@ -176,6 +189,8 @@
   if (self.selectedTheme == nil) {
     return;
   }
+  
+  self.activeFontButton = sender;
 	
 	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
 	[fp setPanelFont:self.selectedTheme.editorFont isMultiple:YES];
@@ -183,18 +198,6 @@
 	
 	NSFontManager *fm = [NSFontManager sharedFontManager];
 	[fm setTarget:self];
-	[fm setAction:@selector(docFontChanged:)];
-}
-
-- (void)docFontChanged:(id)sender
-{
-	NSFont *f = [sender convertFont:self.selectedTheme.editorFont];
-  [self.selectedTheme setEditorFont:f];
-  [self.selectedTheme save];
-  
-  [self.outlineItemsTable reloadData];
-  [self.syntaxItemsTable reloadData];
-  [self.documentItemsTable reloadData];
 }
 
 - (IBAction)selectConsoleFont:(id)sender
@@ -203,20 +206,75 @@
     return;
   }
   
+  self.activeFontButton = sender;
+  
 	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
 	[fp setPanelFont:self.selectedTheme.consoleFont isMultiple:YES];
 	[fp makeKeyAndOrderFront:self];
 	
 	NSFontManager *fm = [NSFontManager sharedFontManager];
 	[fm setTarget:self];
-	[fm setAction:@selector(consoleFontChanged:)];
+  [fm setDelegate:self];
 }
 
-- (void)consoleFontChanged:(id)sender
+- (void) setFont
 {
-	NSFont *f = [sender convertFont:self.selectedTheme.consoleFont];
-  [self.selectedTheme setConsoleFont:f];
+  //NSLog(@"Set font");
+  
+  if (self.activeFontButton == self.selectConsoleFontButton) {
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *selectedFont = [fontManager convertFont:self.selectedTheme.consoleFont];
+//    NSLog(@"Set font %@", selectedFont);
+    [self.selectedTheme setConsoleFont:selectedFont];
+  } else if (self.activeFontButton == self.selectEditorFontButton) {
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *selectedFont = [fontManager convertFont:self.selectedTheme.editorFont];
+//    NSLog(@"Set font %@", selectedFont);
+    [self.selectedTheme setEditorFont:selectedFont];
+    [self.outlineItemsTable reloadData];
+    [self.syntaxItemsTable reloadData];
+    [self.documentItemsTable reloadData];
+  } else if (self.activeFontButton == self.selectNavigatorFontButton) {
+    NSFontManager *fontManager = [NSFontManager sharedFontManager];
+    NSFont *selectedFont = [fontManager convertFont:self.selectedTheme.navigatorFont];
+//    NSLog(@"Set font %@", selectedFont);
+    [self.selectedTheme setNavigatorFont:selectedFont];
+    
+    // post notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPThemeNavigatorFontChangedNotification object:self];
+    
+  } else {
+    return;
+  }
+  
   [self.selectedTheme save];
+
+}
+
+- (void) changeFont:(id)sender
+{
+  [self setFont];
+}
+
+- (void) changeAttributes:(id)sender
+{
+  [self setFont];
+}
+
+- (IBAction)selectNavigatorFont:(id)sender
+{
+  if (self.selectedTheme == nil) {
+    return;
+  }
+  
+  self.activeFontButton = sender;
+  
+	NSFontPanel *fp = [NSFontPanel sharedFontPanel];
+	[fp setPanelFont:self.selectedTheme.navigatorFont isMultiple:YES];
+	[fp makeKeyAndOrderFront:self];
+	
+	NSFontManager *fm = [NSFontManager sharedFontManager];
+	[fm setTarget:self];
 }
 
 - (IBAction)showContextMenu:(id)sender
@@ -591,6 +649,9 @@
     
     self.selectedKey = nil;
     
+    [self.currentLineColorWell deactivate];
+    [self.matchingWordsColorWell deactivate];
+    
     // set color well
     NSInteger row = [tableView selectedRow];
     NSDictionary *dict = [self dictionaryForTableView:tableView];
@@ -605,6 +666,7 @@
       
       NSColor *c = [th colorForKey:keys[row]];
       [[self colorWellForTableView:tableView] setColor:c];
+      [[self colorWellForTableView:tableView] activate:YES];
     }
     
   }

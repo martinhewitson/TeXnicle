@@ -27,6 +27,7 @@
 
 #import "ProjectItemEntity.h"
 #import "NSString+RelativePath.h"
+#import "TPThemeManager.h"
 
 @implementation ProjectItemEntity
 
@@ -51,6 +52,19 @@
 - (void) awakeFromInsert
 {
 	[self setValue:@NO forKey:@"isLeaf"];
+}
+
+- (NSAttributedString*)displayName
+{
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.shortName];
+  
+  // set font
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSFont *font = theme.navigatorFont;
+  [att addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, [att length])];
+  
+  return att;
 }
 
 - (NSString*) shortName

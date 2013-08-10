@@ -229,15 +229,15 @@
 
 - (id) outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-  if ([item isKindOfClass:[TPMetadataSet class]]) {
+//  if ([item isKindOfClass:[TPMetadataSet class]]) {
     if ([self.outlineView isRowSelected:[self.outlineView rowForItem:item]]) {
       return [item valueForKey:@"selectedDisplayString"];
     } else {
       return [item valueForKey:@"displayString"];
     }
-  } else if ([item isKindOfClass:[TPMetadataItem class]]) {
-    return [item valueForKey:@"value"];
-  }
+//  } else if ([item isKindOfClass:[TPMetadataItem class]]) {
+//    return [item valueForKey:@"value"];
+//  }
   
   return nil;
 }

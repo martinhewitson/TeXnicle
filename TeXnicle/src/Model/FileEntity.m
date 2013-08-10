@@ -39,6 +39,7 @@
 #import "NSMutableAttributedString+Placeholders.h"
 #import "NSAttributedString+Placeholders.h"
 #import "NSArray_Extensions.h"
+#import "TPThemeManager.h"
 
 @implementation FileEntity
 
@@ -374,6 +375,8 @@
 		return [self valueForKey:@"name"];
 	}
 }
+
+
 
 // a managed file is one which is under the project path
 - (BOOL) isManaged
