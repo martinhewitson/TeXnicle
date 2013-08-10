@@ -24,7 +24,7 @@
   if ([parts count] > 3) {
     a = [parts[3] doubleValue];
   }
-  NSColor *c = [NSColor colorWithDeviceRed:r green:g blue:b alpha:a];
+  NSColor *c = [NSColor colorWithCalibratedRed:r green:g blue:b alpha:a];
   return c;
 }
 
