@@ -321,6 +321,8 @@
 	NSData *data = [aNote userInfo][NSFileHandleNotificationDataItem];
 	NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	
+  output = [output stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  
   // check if the output contains an error string
   NSDictionary *errors = [TPTeXLogParser errorPhrases];
   NSArray *keys = [errors allKeysForObject:@(TPLogError)];
