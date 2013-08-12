@@ -25,7 +25,7 @@
 
 - (BOOL) isEqualToColor:(NSColor *)otherColor
 {
-  NSLog(@"Checking %p against %p", self, otherColor);
+  //NSLog(@"Checking %p against %p", self, otherColor);
   
   if (self == otherColor)
     return YES;
@@ -39,7 +39,7 @@
   [c1 getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
   [c2 getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
   
-  NSLog(@"Comparing (%f,%f,%f,%f) and (%f,%f,%f,%f)", r1, g1, b1, a1, r2, g2, b2, a2);
+  //NSLog(@"Comparing (%f,%f,%f,%f) and (%f,%f,%f,%f)", r1, g1, b1, a1, r2, g2, b2, a2);
   
   CGFloat tol = 1e-10;
   if (fabs(r1-r2)< tol & fabs(g1-g2) < tol & fabs(b1-b2) < tol & fabs(a1-a2) < tol) {
