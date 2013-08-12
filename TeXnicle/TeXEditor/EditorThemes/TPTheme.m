@@ -544,7 +544,7 @@
   NSArray *parts = [fontDesc componentsSeparatedByString:@" - "];
   NSFont *f = [NSFont fontWithName:parts[0] size:[parts[1] doubleValue]];
   if (f == nil) {
-    f = [NSFont systemFontOfSize:12];
+    f = [NSFont controlContentFontOfSize:12.0];
   }
   return f;
 }
