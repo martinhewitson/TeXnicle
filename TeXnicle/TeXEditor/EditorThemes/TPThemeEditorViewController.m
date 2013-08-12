@@ -738,6 +738,7 @@
   [self.multilineArgButton setEnabled:state];
   [self.selectEditorFontButton setEnabled:state];
   [self.selectConsoleFontButton setEnabled:state];
+  [self.selectNavigatorFontButton setEnabled:state];
 }
 
 - (NSDictionary*)dictionaryForTableView:(NSTableView*)tableView
