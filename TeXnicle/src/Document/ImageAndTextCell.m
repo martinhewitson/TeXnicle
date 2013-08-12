@@ -54,11 +54,11 @@
 #define kIconImageSize		24.0
 
 #define kImageOriginXOffset 3
-#define kImageOriginYOffset 1
+#define kImageOriginYOffset 0
 
 #define kTextOriginXOffset	2
 #define kTextOriginYOffset	0
-#define kTextHeightAdjust	4
+#define kTextHeightAdjust	-4
 
 // -------------------------------------------------------------------------------
 //	init:
