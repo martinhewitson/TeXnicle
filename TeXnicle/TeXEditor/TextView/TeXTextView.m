@@ -3088,7 +3088,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     rect.size.width=glyphRect.size.width;
   }
   
-  rect = [self backingAlignedRect:rect options:NSAlignAllEdgesNearest];
+  //rect = [self backingAlignedRect:rect options:NSAlignAllEdgesNearest];
   
   rect.origin.y = floor(rect.origin.y) + 0.5;
   rect.origin.x = floor(rect.origin.x) + 0.5;
