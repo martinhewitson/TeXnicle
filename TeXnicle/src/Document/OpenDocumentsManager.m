@@ -592,7 +592,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if (![[self.imageViewContainer subviews] containsObject:self.imageViewerController.view]) {
       [self.imageViewerController.view setFrame:self.imageViewContainer.bounds];
       [self.imageViewContainer addSubview:self.imageViewerController.view];
-      [self.imageViewContainer layout];
     }
     if ([self.currentDoc isImage]) {
       NSImage *image = [[NSImage alloc] initWithContentsOfFile:[self.currentDoc pathOnDisk]];
@@ -610,7 +609,6 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
   } else {
     [self.texEditorViewController enableEditor];
     [self.imageViewerController.view removeFromSuperview];
-    [self.imageViewContainer layout];
     [self.imageViewerController disable];
   }
 }
