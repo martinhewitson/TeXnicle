@@ -192,10 +192,6 @@
   
   self.liveUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:updateInterval target:self selector:@selector(doLiveBuild) userInfo:nil repeats:YES];
 
-  [self.toolbar setAllowsUserCustomization:YES];
-	[self.toolbar setAutosavesConfiguration:YES];
-  [self.toolbar setShowsBaselineSeparator:NO];
-
   
 }
 
@@ -290,6 +286,11 @@
 {
   if (_didSetup)
     return;
+
+  // toolbar setup
+  [self.toolbar setAllowsUserCustomization:YES];
+	[self.toolbar setAutosavesConfiguration:YES];
+  [self.toolbar setShowsBaselineSeparator:NO];
   
   // force fetching the project
   [self project];
