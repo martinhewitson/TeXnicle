@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4471.1" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4471.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPConsoleViewController">
             <connections>
-                <action selector="clear:" destination="5" id="107"/>
-                <action selector="displayLevelChanged:" destination="6" id="108"/>
-                <action selector="selectView:" destination="zgN-oO-zd0" id="6kX-Qa-wR0"/>
                 <outlet property="displayLevel" destination="6" id="105"/>
                 <outlet property="logViewContainer" destination="8el-aM-Dpe" id="6e6-bx-5Fy"/>
                 <outlet property="tabView" destination="SJk-ma-JDW" id="Dgv-mV-sgW"/>
@@ -39,6 +36,9 @@
                                     <segment image="error_template" width="32" tag="1"/>
                                 </segments>
                             </segmentedCell>
+                            <connections>
+                                <action selector="selectView:" target="-2" id="6kX-Qa-wR0"/>
+                            </connections>
                         </segmentedControl>
                     </subviews>
                     <connections>
@@ -91,17 +91,20 @@
                                             <button verticalHuggingPriority="750" id="5">
                                                 <rect key="frame" x="6" y="2" width="44" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="roundRect" title="Clear" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="12">
+                                                <buttonCell key="cell" type="roundRect" title="Clear" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="12">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <font key="font" metaFont="miniSystem"/>
                                                 </buttonCell>
+                                                <connections>
+                                                    <action selector="clear:" target="-2" id="107"/>
+                                                </connections>
                                             </button>
                                             <popUpButton verticalHuggingPriority="750" id="6">
-                                                <rect key="frame" x="393" y="-1" width="164" height="22"/>
+                                                <rect key="frame" x="395" y="4" width="161" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="7">
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="mini" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="7">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <font key="font" metaFont="miniSystem"/>
                                                     <menu key="menu" title="OtherViews" id="8">
                                                         <items>
                                                             <menuItem title="All Messages" id="11"/>
@@ -110,6 +113,9 @@
                                                         </items>
                                                     </menu>
                                                 </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="displayLevelChanged:" target="-2" id="108"/>
+                                                </connections>
                                             </popUpButton>
                                         </subviews>
                                     </customView>
