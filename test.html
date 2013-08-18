@@ -1,11 +1,9 @@
-<h2>TeXnicle 2.2.1</h2>
+<h2>TeXnicle 2.2.2</h2>
 <p>
 <ul>
-  <li>Added a general preference to choose between a line, box, and block insertion point.</li>
-  <li>Meta-data items are properly sorted by the order they appear in the project tree now.</li>
-  <li>You can now drag citations from the citations navigator to make \cite{} commands in the editor.</li>
-  <li>You can now drag new commands from the new commands navigator to the editor.</li>
-  <li>Some bug fixes in the themes user interface.</li>
-  <li>Bug fix: Engine selector should properly reflect new/duplicated engines now.</li>
-  <li>Bug fix: In some cases the .bib from a \bibliography{} command was not being scanned.</li>    </ul>
+  <li>Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.</li>
+  <li>Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key TPThemeDidMigrate to NO.</li>
+  <li>Small bug fixes in theme editing UI.</li>
+  <li>Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.</li>
+</ul>
 </p>

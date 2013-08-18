@@ -6,6 +6,30 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+<!-- Version 2.2.2 -->
+<item>
+  <title>Version 2.2.2 (build 764)</title>
+  <description><![CDATA[
+    <h2>TeXnicle 2.2.2</h2>
+    <p>
+    <ul>
+    <li>Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.</li>
+    <li>Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key TPThemeDidMigrate to false.</li>
+    <li>Small bug fixes in theme editing UI.</li>
+    <li>Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.</li>
+    </ul>
+    </p>
+  ]]></description>
+  <pubDate>18th August 2013</pubDate>
+  <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.2.zip"
+  sparkle:shortVersionString="2.2.2"
+  sparkle:version="764"
+  length="20242111"
+  type="application/octet-stream"
+  sparkle:dsaSignature="MCwCFDLiSA2ym3vnTXiqtjHNrKOCi/M2AhQbqh08nvG0zM5qfCyBqniZdB0iyA=="
+  />
+</item>
+
 <!-- Version 2.2.1 -->
 <item>
   <title>Version 2.2.1 (build 606)</title>
