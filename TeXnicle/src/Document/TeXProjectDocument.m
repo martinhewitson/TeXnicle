@@ -282,15 +282,21 @@
   return NO;
 }
 
+- (void) setupToolbar
+{
+  // toolbar setup
+  NSToolbar *tb = [[self windowForSheet] toolbar];
+  [tb setAllowsUserCustomization:YES];
+	[tb setAutosavesConfiguration:YES];
+  [tb setShowsBaselineSeparator:NO];
+  [self.windowForSheet display];
+  [self.windowForSheet update];
+}
+
 - (void) setupDocument
 {
   if (_didSetup)
     return;
-
-  // toolbar setup
-  [self.toolbar setAllowsUserCustomization:YES];
-	[self.toolbar setAutosavesConfiguration:YES];
-  [self.toolbar setShowsBaselineSeparator:NO];
   
   // force fetching the project
   [self project];
@@ -549,6 +555,7 @@
   [self.controlsTabBarController setNextResponder:self.mainWindow.nextResponder];
   [self.mainWindow setNextResponder:self.controlsTabBarController];  
   
+  
   // Show document
   [self showDocument];
   
@@ -581,6 +588,10 @@
   // [self restoreUIstate];
   [self performSelector:@selector(restoreUIstate) withObject:nil afterDelay:0];
   
+  // setup toolbar
+  [self setupToolbar];
+  
+  // start outline generator
   [self.outlineViewController start];
   
   // update metadata views
