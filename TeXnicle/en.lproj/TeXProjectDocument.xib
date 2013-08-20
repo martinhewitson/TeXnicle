@@ -150,7 +150,7 @@
                                                                                 </textFieldCell>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <connections>
-                                                                                    <binding destination="100045" name="value" keyPath="arrangedObjects.displayName" id="tDy-RW-AoB">
+                                                                                    <binding destination="100045" name="value" keyPath="arrangedObjects.name" id="PMy-Ts-824">
                                                                                         <dictionary key="options">
                                                                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                                                             <bool key="NSValidatesImmediately" value="YES"/>

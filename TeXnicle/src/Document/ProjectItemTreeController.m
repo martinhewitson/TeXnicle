@@ -1387,9 +1387,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
     
     if ([object isMemberOfClass:[FolderEntity class]]) {
       //    NSLog(@"%@ is a folder", [object name]);
+      FolderEntity *folder = (FolderEntity*)object;
+      NSMutableAttributedString *title = [folder.displayName mutableCopy]; //[[NSMutableAttributedString alloc] initWithString:[cell title]];
+      
+      ImageAndTextCell *c = (ImageAndTextCell*)cell;
+      [c setAttributedStringValue:title];
+      
       NSString *pathOnDisk = [object valueForKey:@"pathOnDisk"];
       if (pathOnDisk) {
-        if ([[object valueForKey:@"isExpanded"] boolValue]) {
+        if ([[folder valueForKey:@"isExpanded"] boolValue]) {
           NSString *folderFileType = NSFileTypeForHFSTypeCode(kOpenFolderIcon);
           [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];
         } else {
@@ -1397,7 +1403,7 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
           [cell setImage:[[NSWorkspace sharedWorkspace] iconForFileType:folderFileType]];
         }
       } else {
-        if ([[object valueForKey:@"isExpanded"] boolValue]) {
+        if ([[folder valueForKey:@"isExpanded"] boolValue]) {
           [cell setImage:[NSImage imageNamed:@"groupFolderOpen"]];
         } else {
           [cell setImage:[NSImage imageNamed:@"groupFolder"]];
