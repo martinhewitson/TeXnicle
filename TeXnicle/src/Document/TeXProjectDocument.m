@@ -1598,6 +1598,23 @@
 #pragma mark -
 #pragma mark Actions
 
+- (IBAction)openTerminal:(id)sender
+{
+  NSString *s = [NSString stringWithFormat:
+                 @"tell application \"Terminal\" \n\
+                 do script \"cd %@\" \n \
+                 activate \n\
+                 end tell", self.project.folder];
+  
+  NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
+  [as executeAndReturnError:nil];
+  
+  NSArray* apps = [NSRunningApplication
+                   runningApplicationsWithBundleIdentifier:@"com.apple.Terminal"];
+  [(NSRunningApplication*)[apps objectAtIndex:0]
+   activateWithOptions: NSApplicationActivateAllWindows];
+}
+
 - (IBAction)showQuickJump:(id)sender
 {
   NSView *view = self.mainWindow.contentView;
