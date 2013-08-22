@@ -6,6 +6,29 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+<!-- Version 2.2.4 -->
+<item>
+  <title>Version 2.2.4 (build 774)</title>
+  <description><![CDATA[
+    <h2>TeXnicle 2.2.4</h2>
+    <p>
+    Bug fixes:
+    <ul>
+      <li>fixed a bug which stopped the name of group folders from being changed</li>
+      <li>make sure the project path is properly escaped when opening a terminal</li>
+    </ul>
+    </p>
+  ]]></description>
+  <pubDate>22nd August 2013</pubDate>
+  <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.4.zip"
+  sparkle:shortVersionString="2.2.4"
+  sparkle:version="774"
+  length="20242470"
+  type="application/octet-stream"
+  sparkle:dsaSignature="MC0CFQCS0P7zLtYVGFeBKQEk8/BnRO4vsAIUQ68D9vDchZ1Tvyarfrz9XflmyAQ="
+  />
+</item>
+
 <!-- Version 2.2.3 -->
 <item>
   <title>Version 2.2.3 (build 774)</title>
