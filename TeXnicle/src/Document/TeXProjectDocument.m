@@ -1576,7 +1576,6 @@
 	
 	NSArray *items = [self.projectItemTreeController flattenedContent];
 	ProjectItemEntity *item = items[_itemBeingRenamed];
-  //	NSLog(@"Renaming %@", item);
 	
 	[item setValue:newName forKey:@"name"];
 	
@@ -1602,7 +1601,7 @@
 {
   NSString *s = [NSString stringWithFormat:
                  @"tell application \"Terminal\" \n\
-                 do script \"cd %@\" \n \
+                 do script \"cd '%@'\" \n \
                  activate \n\
                  end tell", self.project.folder];
   
