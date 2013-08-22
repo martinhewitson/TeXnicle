@@ -58,7 +58,7 @@
 
 #define kTextOriginXOffset	2
 #define kTextOriginYOffset	2
-#define kTextHeightAdjust	0
+#define kTextHeightAdjust	2
 
 // -------------------------------------------------------------------------------
 //	init:
