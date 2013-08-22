@@ -67,6 +67,12 @@
   return att;
 }
 
++ (NSSet*)keyPathsForValuesAffectingDisplayName
+{
+  return [NSSet setWithArray:@[@"shortName"]];
+}
+
+
 - (NSString*) shortName
 {
 	if ([self valueForKey:@"filepath"]) {
@@ -75,6 +81,11 @@
 	
 	return [self valueForKey:@"name"];
 //	return [[self valueForKey:@"name"] stringByAppendingPathExtension:[self valueForKey:@"extension"]];
+}
+
++ (NSSet*)keyPathsForValuesAffectingShortName
+{
+  return [NSSet setWithArray:@[@"filepath", @"name"]];
 }
 
 - (NSString*) projectPath
@@ -146,7 +157,7 @@
 
 - (void) resetFilePath
 {
-//  NSLog(@"Resetting file path from %@ to %@", self.filepath, [self pathRelativeToProject]);
+  NSLog(@"Resetting file path from %@ to %@", self.filepath, [self pathRelativeToProject]);
   
 //  // get a new path
 //  NSFileManager *fm = [NSFileManager defaultManager];

@@ -58,9 +58,13 @@
 
 - (void) setName:(NSString *)newName
 {
+  //NSLog(@"Setting name of %@", self);
+  //NSLog(@"   to %@", newName);
+  
 	[self willChangeValueForKey:@"name"];
   
-	// rename the file on disk, if necessary	
+	// rename the file on disk, if necessary
+  BOOL resetAtEnd = NO;
 	NSString *oldPath = [self pathOnDisk];
   if (oldPath != nil && self.name != nil && [self existsOnDisk]) {
     
@@ -106,11 +110,16 @@
         [item resetFilePath];
       }
     }    
+  } else {
+    resetAtEnd = YES;
   }
   
 	// now go ahead and rename the item
 	[self setPrimitiveValue:newName forKey:@"name"];
 	[self didChangeValueForKey:@"name"];
+  if (resetAtEnd) {
+    [self resetFilePath];
+  }
 }
 
 @end

@@ -40,7 +40,7 @@
 // core data properties
 @property (nonatomic, copy) NSString * filepath;
 @property (nonatomic, strong) NSNumber * isExpanded;
-@property (nonatomic, copy) NSString * name;
+@property (copy) NSString * name;
 @property (nonatomic, strong) NSNumber * sortIndex;
 @property (nonatomic, strong) NSSet *children;
 @property (nonatomic, unsafe_unretained) ProjectItemEntity *parent;
