@@ -134,6 +134,7 @@
 #pragma mark -
 #pragma mark control
 
+- (IBAction)openTerminal:(id)sender;
 - (IBAction) addToProject:(id)sender;
 - (IBAction) endAddToProjectSheet:(id)sender;
 - (IBAction) endAddToNewProjectSheet:(id)sender;

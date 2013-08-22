@@ -1395,6 +1395,23 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 #pragma mark -
 #pragma mark control
 
+- (IBAction)openTerminal:(id)sender
+{
+  NSString *s = [NSString stringWithFormat:
+                 @"tell application \"Terminal\" \n\
+                 do script \"cd '%@'\" \n \
+                 activate \n\
+                 end tell", [[self.fileURL path] stringByDeletingLastPathComponent]];
+  
+  NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
+  [as executeAndReturnError:nil];
+  
+  NSArray* apps = [NSRunningApplication
+                   runningApplicationsWithBundleIdentifier:@"com.apple.Terminal"];
+  [(NSRunningApplication*)[apps objectAtIndex:0]
+   activateWithOptions: NSApplicationActivateAllWindows];
+}
+
 - (IBAction)togglePanelFocus:(id)sender
 {
   NSWindow *w = [self windowForSheet];
