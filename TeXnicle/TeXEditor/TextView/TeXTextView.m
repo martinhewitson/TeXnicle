@@ -2747,9 +2747,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   // check if this is a \left{
   NSRange selRange = [self selectedRange];
+  unichar cc = ' ';
+  if (selRange.location > 0) {
+    cc = [[self string] characterAtIndex:selRange.location-1];
+  }
   
   if ([[self currentCommand] isEqualToString:@"\\left"]) {
     [super insertText:[NSString stringWithFormat:@"%c\\right%c", o, c]];
+    NSRange newPos = NSMakeRange(selRange.location+1, 0);
+    [self setSelectedRange:newPos];
+  } else  if (cc == '\\') {
+    [super insertText:[NSString stringWithFormat:@"%c\\%c", o, c]];
     NSRange newPos = NSMakeRange(selRange.location+1, 0);
     [self setSelectedRange:newPos];
   } else {
@@ -2817,7 +2825,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if ([line isCommentLineBeforeIndex:lineIndex commentChar:[self commentChar]]) {
     [self setTypingColor:self.coloringEngine.commentColor];
-  } else if ([paragraph isInArgumentAtIndex:lineIndex]) {
+  } else if ([paragraph isInArgumentAtIndex:lineIndex] && [paragraph isCommandBeforeIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.argumentsColor];
   } else if ([line isCommandBeforeIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.commandColor];
