@@ -42,6 +42,7 @@
 - (NSString*)parseOptionStartingAtIndex:(NSInteger)start;
 - (NSString*)parseArgumentAroundIndex:(NSInteger*)loc;
 - (NSString*)parseArgumentStartingAt:(NSInteger*)loc;
+- (BOOL)characterIsEscapedAtIndex:(NSInteger)anIndex;
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
 - (BOOL)isCommandBeforeIndex:(NSInteger)anIndex;

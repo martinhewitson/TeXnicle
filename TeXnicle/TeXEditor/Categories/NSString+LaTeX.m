@@ -480,6 +480,19 @@ static NSCharacterSet *controlFilterChars = nil;
   return NO;
 }
 
+- (BOOL)characterIsEscapedAtIndex:(NSInteger)anIndex
+{
+  //NSLog(@"Checking if character at index %ld [%c] is escaped in [%@]", anIndex, [self characterAtIndex:anIndex], self);
+  if (anIndex > 0) {
+    //NSLog(@"Char = %c", [self characterAtIndex:anIndex-1]);
+    if ([self characterAtIndex:anIndex-1] == '\\') {
+      return YES;
+    }
+  }
+  
+  return NO;
+}
+
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex
 {
   NSInteger idx = 0;
