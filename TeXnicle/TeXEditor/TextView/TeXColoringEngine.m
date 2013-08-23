@@ -31,6 +31,7 @@
 #import "NSArray+Color.h"
 #import "TPRegularExpression.h"
 #import "TPThemeManager.h"
+#import "NSString+LaTeX.h"
 
 @interface TeXColoringEngine ()
 
@@ -391,8 +392,37 @@
         }
                 
 			}
-    } else if ((cc == '{') && self.colorArguments) {      
+    } else if ((cc == '{' || cc == '[') && self.colorArguments) {
       start = idx;
+      
+      unichar close;
+      unichar open = cc;
+      if (cc == '{') {
+        close = '}';
+      }
+      if (cc == '[') {
+        close = ']';
+      }
+      
+      
+      // check if this is escaped
+      if ([text characterIsEscapedAtIndex:idx]) {
+        idx++;
+        continue;
+      }
+      
+      // color the first character as a special character
+      if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location+start>0) {
+        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+        
+      }
+      
+      // check this is preceeded by a command
+      if ([text isCommandBeforeIndex:idx] == NO) {
+        idx ++;
+        continue;
+      }
+      
       // look for the closing bracket
       idx++;
       NSInteger argCount = 1;
@@ -404,16 +434,17 @@
         if ([newLineCharacterSet characterIsMember:nextChar]) {
           newLineCount++;
         }
-        if (nextChar == '{') {
+        if (nextChar == open) {
           argCount++;
         }
-        if (nextChar == '}') {
+        if (nextChar == close) {
           argCount--;
         }
 //        NSLog(@"Arg count %ld", argCount);
         if (argCount == 0) {
+          NSRange argRange = NSMakeRange(aRange.location+start+1,idx-start);
+          
 //          NSLog(@"New line count %ld", newLineCount);
-          NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
 //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
           if (newLineCount == 0 || self.colorMultilineArguments) {
 //            NSLog(@"Coloring argument");
@@ -436,54 +467,9 @@
         idx++;
       } // end while loop
       
-      // if we didn't match an ending } then there's not much we can do
-      if (argCount>0) {
-        idx = start+1;
-      }
+      // now carry on within the argument so that other commands within will be colored
+      idx = start+1;
       
-      
-    } else if ((cc == '[') && self.colorArguments) {      
-      start = idx;
-      // look for the closing bracket
-      idx++;
-      NSInteger argCount = 1;
-      NSInteger newLineCount = 0;
-      while(idx < strLen) {
-        nextChar = [text characterAtIndex:idx];
-        if ([newLineCharacterSet characterIsMember:nextChar]) {
-          newLineCount++;
-        }
-        if (nextChar == '[') {
-          argCount++;
-        }
-        if (nextChar == ']') {
-          argCount--;
-        }
-        if (argCount == 0) {
-          NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
-          if (newLineCount == 0 || self.colorMultilineArguments) {
-            //          NSLog(@"Argument: %@", NSStringFromRange(argRange));
-            if (self.argumentsColor != nil) {
-              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
-            }
-            break;
-          } else {
-            // if the argument spans multiple lines, color the first char
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
-            if (self.specialCharsColor) {
-              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
-            }
-            idx = start+1;
-            break;
-          }
-        }
-        idx++;
-      }
-      
-      // if we didn't match an ending } then there's not much we can do
-      if (argCount>0) {
-        idx = start+1;
-      }
       
     } else if (cc == '$' && self.colorDollarChars) { 
       
