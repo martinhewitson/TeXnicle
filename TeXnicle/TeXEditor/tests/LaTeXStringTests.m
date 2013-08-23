@@ -64,4 +64,81 @@
   
 }
 
+- (void)testCharacterIsEscapedAtIndex1
+{
+  NSString *s = @"my \\{ char";
+  BOOL result = [s characterIsEscapedAtIndex:4];
+  STAssertTrue(result, @"Character is escaped");
+}
+
+- (void)testCharacterIsEscapedAtIndex2
+{
+  NSString *s = @"my { char";
+  BOOL result = [s characterIsEscapedAtIndex:4];
+  STAssertFalse(result, @"Character is not escaped");
+}
+
+- (void)testIsInArgumentAtIndex
+{
+  NSString *s = @"my { char }";
+  BOOL result = [s isInArgumentAtIndex:7];
+  STAssertTrue(result, @"Is in argument at index 7");
+}
+
+- (void)testIsInArgumentAtIndex2
+{
+  NSString *s = @"my \\{ char \\}";
+  BOOL result = [s isInArgumentAtIndex:7];
+  STAssertFalse(result, @"Is not in argument at index 7");
+}
+
+- (void)testIsCommandBeforeIndex
+{
+  NSString *s = @"my \\{ char \\}";
+  BOOL result = [s isCommandBeforeIndex:7];
+  STAssertFalse(result, @"There is no command before index 7");
+}
+
+- (void)testIsCommandBeforeIndex2
+{
+  NSString *s = @"my \\{char \\}";
+  BOOL result = [s isCommandBeforeIndex:7];
+  STAssertFalse(result, @"There is no command before index 7");
+}
+
+- (void)testIsCommandBeforeIndex3
+{
+  NSString *s = @"my \\command{char \\}";
+  BOOL result = [s isCommandBeforeIndex:7];
+  STAssertTrue(result, @"There is a command before index 7");
+}
+
+- (void)testIsCommandBeforeIndex4
+{
+  NSString *s = @"my \\command{char \\}";
+  BOOL result = [s isCommandBeforeIndex:14];
+  STAssertTrue(result, @"There is a command before index 14");
+}
+
+- (void)testIsCommandBeforeIndex5
+{
+  NSString *s = @"my string with no command in it";
+  BOOL result = [s isCommandBeforeIndex:14];
+  STAssertFalse(result, @"There is no command before index 14");
+}
+
+- (void)testIsCommandBeforeIndex6
+{
+  NSString *s = @"\\command{one}";
+  BOOL result = [s isCommandBeforeIndex:0];
+  STAssertTrue(result, @"There is a command before index 0");
+}
+
+- (void)testIsCommandBeforeIndex7
+{
+  NSString *s = @"my nice \\command{one}";
+  BOOL result = [s isCommandBeforeIndex:0];
+  STAssertFalse(result, @"There is no command before index 0");
+}
+
 @end
