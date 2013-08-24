@@ -82,7 +82,7 @@
 {
   NSString *s = @"my { char }";
   BOOL result = [s isInArgumentAtIndex:7];
-  STAssertTrue(result, @"Is in argument at index 7");
+  STAssertFalse(result, @"Is not in argument at index 7");
 }
 
 - (void)testIsInArgumentAtIndex2
@@ -90,6 +90,21 @@
   NSString *s = @"my \\{ char \\}";
   BOOL result = [s isInArgumentAtIndex:7];
   STAssertFalse(result, @"Is not in argument at index 7");
+}
+
+- (void)testIsInArgumentAtIndex3
+{
+  NSString *s = @"{\\command{one} some}";
+  BOOL result = [s isInArgumentAtIndex:17];
+  STAssertFalse(result, @"We are not in an argument at index 17");
+}
+
+// \usepackage[pdftex]{graphicx}
+- (void)testIsInArgumentAtIndex4
+{
+  NSString *s = @"\\usepackage[pdftex]{graphicx}";
+  BOOL result = [s isInArgumentAtIndex:24];
+  STAssertTrue(result, @"We are in an argument at index 24");
 }
 
 - (void)testIsCommandBeforeIndex
@@ -116,8 +131,8 @@
 - (void)testIsCommandBeforeIndex4
 {
   NSString *s = @"my \\command{char \\}";
-  BOOL result = [s isCommandBeforeIndex:14];
-  STAssertTrue(result, @"There is a command before index 14");
+  BOOL result = [s isCommandBeforeIndex:7];
+  STAssertTrue(result, @"There is a command before index 7");
 }
 
 - (void)testIsCommandBeforeIndex5
@@ -131,7 +146,7 @@
 {
   NSString *s = @"\\command{one}";
   BOOL result = [s isCommandBeforeIndex:0];
-  STAssertTrue(result, @"There is a command before index 0");
+  STAssertFalse(result, @"There is a command before index 0");
 }
 
 - (void)testIsCommandBeforeIndex7
@@ -139,6 +154,28 @@
   NSString *s = @"my nice \\command{one}";
   BOOL result = [s isCommandBeforeIndex:0];
   STAssertFalse(result, @"There is no command before index 0");
+}
+
+
+- (void)testIsCommandBeforeIndex8
+{
+  NSString *s = @"{\\command{one}]";
+  BOOL result = [s isCommandBeforeIndex:12];
+  STAssertTrue(result, @"There is a command before index 12");
+}
+
+- (void)testIsCommandBeforeIndex9
+{
+  NSString *s = @"{\\command{one} some}";
+  BOOL result = [s isCommandBeforeIndex:17];
+  STAssertFalse(result, @"There is no command before index 17");
+}
+
+- (void)testIsCommandBeforeIndex10
+{
+  NSString *s = @"\\usepackage[pdftex]{graphicx}";
+  BOOL result = [s isCommandBeforeIndex:24];
+  STAssertTrue(result, @"There is a command before index 24");
 }
 
 @end
