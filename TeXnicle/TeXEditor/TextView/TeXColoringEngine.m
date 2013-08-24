@@ -261,9 +261,9 @@
 //  NSLog(@"Coloring %@", NSStringFromRange(aRange));
   
   NSString *text = [[textStorage string] substringWithRange:aRange];
-//  NSLog(@"\n\n=======================================================================================");
-//  NSLog(@"Coloring %@", text);
-//  NSLog(@"=======================================================================================");
+  //NSLog(@"\n\n=======================================================================================");
+  //NSLog(@"Coloring %@", text);
+  //NSLog(@"=======================================================================================");
   NSInteger strLen = [text length];
   if (strLen == 0) {
     return;
@@ -275,6 +275,8 @@
   
   // remove existing temporary attributes
 	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
+  
+  [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:aRange];
     
   // scan each character in the string
   NSUInteger idx;

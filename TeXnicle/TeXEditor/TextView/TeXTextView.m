@@ -2823,10 +2823,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (lineIndex < 0)
     lineIndex = 0;
   
+  //NSLog(@"In arg? %d", [paragraph isInArgumentAtIndex:lineIndex]);
+  //NSLog(@"In cmd? %d", [paragraph isCommandBeforeIndex:lineIndex]);
+  
   if ([line isCommentLineBeforeIndex:lineIndex commentChar:[self commentChar]]) {
     [self setTypingColor:self.coloringEngine.commentColor];
-  } else if ([paragraph isInArgumentAtIndex:lineIndex] && [paragraph isCommandBeforeIndex:lineIndex]) {
-    [self setTypingColor:self.coloringEngine.argumentsColor];
+  } else if ([paragraph isInArgumentAtIndex:lineIndex]) {
+    if ([paragraph isCommandBeforeIndex:lineIndex]) {
+      [self setTypingColor:self.coloringEngine.commandColor];
+    } else {
+      [self setTypingColor:self.coloringEngine.argumentsColor];
+    }
   } else if ([line isCommandBeforeIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.commandColor];
   } else {

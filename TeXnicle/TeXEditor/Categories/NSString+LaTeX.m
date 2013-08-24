@@ -499,31 +499,48 @@ static NSCharacterSet *controlFilterChars = nil;
   NSInteger bcount = 0;
   
   // check for {}
+  //NSLog(@"---- loop 1");
   while (idx < anIndex && idx < [self length]) {
-    if ([self characterAtIndex:idx] == '{' && [self characterIsEscapedAtIndex:idx] == NO) {
+    unichar c = [self characterAtIndex:idx];
+    if (c == '{' && [self characterIsEscapedAtIndex:idx] == NO && [self isCommandBeforeIndex:idx]) {
       bcount++;
-    } else if ([self characterAtIndex:idx] == '}' && [self characterIsEscapedAtIndex:idx] == NO) {
+    } else if (c == '}' && [self characterIsEscapedAtIndex:idx] == NO) {
       bcount--;
     } else {
       // do nothing
     }
+    
+    //NSLog(@"Checked char [%c]", c);
+    //NSLog(@"  is command before? %d", [self isCommandBeforeIndex:idx]);
+    //NSLog(@"   count: %ld ", bcount);
     idx++;
   }
-  if (bcount>0) {
+  
+  if (bcount > 0) {
     return YES;
   }
+  
+  //NSLog(@"---- loop 2");
   // but this could be a wrapped argument so check to the end of the line for a closing }
   while (idx < [self length]) {
-    if ([self characterAtIndex:idx] == '{' && [self characterIsEscapedAtIndex:idx] == NO) {
+    unichar c = [self characterAtIndex:idx];
+    if (c == '{' && [self characterIsEscapedAtIndex:idx] == NO && [self isCommandBeforeIndex:idx]) {
       bcount++;
-    } else if ([self characterAtIndex:idx] == '}' && [self characterIsEscapedAtIndex:idx] == NO) {
+    } else if (c == '}' && [self characterIsEscapedAtIndex:idx] == NO && [self isCommandBeforeIndex:idx]) {
       bcount--;
+    } else if (c == '\\') {
+      return NO;
     } else {
       // do nothing
     }
+    
+    //NSLog(@"Checked char [%c]", c);
+    //NSLog(@"  is command before? %d", [self isCommandBeforeIndex:idx]);
+    //NSLog(@"   count: %ld ", bcount);
     idx++;
   }
-  if (bcount<0) {
+  
+  if (bcount < 0) {
     return YES;
   }
   
@@ -532,7 +549,7 @@ static NSCharacterSet *controlFilterChars = nil;
   bcount = 0;
   idx = 0;
   while (idx < anIndex && idx < [self length]) {
-    if ([self characterAtIndex:idx] == '[' && [self characterIsEscapedAtIndex:idx] == NO) {
+    if ([self characterAtIndex:idx] == '[' && [self characterIsEscapedAtIndex:idx] == NO && [self isCommandBeforeIndex:idx]) {
       bcount++;
     } else if ([self characterAtIndex:idx] == ']' && [self characterIsEscapedAtIndex:idx] == NO) {
       bcount--;
@@ -552,23 +569,26 @@ static NSCharacterSet *controlFilterChars = nil;
 {
   //NSLog(@"Checking if command is before %ld in [%@]", anIndex, self);
   NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
-  NSInteger idx = anIndex;
-  while (idx >= 0 && idx < [self length]) {
-    unichar c = [self characterAtIndex:idx];
-    //NSLog(@"Checking char at index %ld [%c]", idx, c);
-    if ([ws characterIsMember:c]) {
-      return NO;
-    }
-    if (c == '\\') {
-      if (idx+1 < [self length]) {
-        unichar next = [self characterAtIndex:idx+1];
-        // the next character should be a alpha for this to be a command
-        if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:next]) {
-          return YES;
+  if (anIndex > 0) {
+    NSInteger idx = anIndex-1;
+    while (idx >= 0 && idx < [self length]) {
+      unichar c = [self characterAtIndex:idx];
+      //NSLog(@"Checking char at index %ld [%c]", idx, c);
+      if ([ws characterIsMember:c]) {
+        return NO;
+      }
+            
+      if (c == '\\') {
+        if (idx+1 < [self length]) {
+          unichar next = [self characterAtIndex:idx+1];
+          // the next character should be a alpha for this to be a command
+          if ([[NSCharacterSet alphanumericCharacterSet] characterIsMember:next]) {
+            return YES;
+          }
         }
       }
+      idx--;
     }
-    idx--;
   }
   return NO;
 }
