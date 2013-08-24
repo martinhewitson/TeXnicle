@@ -2932,6 +2932,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
 	[self wrapLine];
+  
+  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
 

@@ -74,6 +74,7 @@
   self = [super init];
   if (self) {
     self.textView = aTextView;
+    alphanumCharacterSet = [NSCharacterSet alphanumericCharacterSet];
     newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
     whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
     specialChars = [NSCharacterSet characterSetWithCharactersInString:@"{}[]()\"'"];
@@ -407,7 +408,6 @@
       
       // check if this is escaped
       if ([text characterIsEscapedAtIndex:idx]) {
-        idx++;
         continue;
       }
       
@@ -419,7 +419,6 @@
       
       // check this is preceeded by a command
       if ([text isCommandBeforeIndex:idx] == NO) {
-        idx ++;
         continue;
       }
       
@@ -468,8 +467,9 @@
       } // end while loop
       
       // now carry on within the argument so that other commands within will be colored
-      idx = start+1;
+      idx = start;
       
+      //NSLog(@"Finished arg color: next char will be '%c'", [text characterAtIndex:idx]);
       
     } else if (cc == '$' && self.colorDollarChars) { 
       
@@ -480,6 +480,11 @@
       
     } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
       
+      // check if this is escaped
+      if ([text characterIsEscapedAtIndex:idx]) {
+        continue;
+      }
+      
       colorRange = NSMakeRange(aRange.location+idx, 1);
       if (self.specialCharsColor != nil) {
         [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
@@ -489,7 +494,9 @@
       // if we find \ we start a command unless we have \, or whitespace
       if (idx < strLen-1) {
         nextChar = [text characterAtIndex:idx+1];
-        if (nextChar == ',' || [whitespaceCharacterSet characterIsMember:nextChar]) {
+        if (nextChar == ',' || [whitespaceCharacterSet characterIsMember:nextChar] || [alphanumCharacterSet characterIsMember:nextChar] == NO) {
+          
+          //NSLog(@"Not coloring command: next char will be '%c'", [text characterAtIndex:idx+1]);
           // do nothing
         } else {
           // highlight word

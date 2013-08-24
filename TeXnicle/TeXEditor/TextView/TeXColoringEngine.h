@@ -32,6 +32,7 @@
 @interface TeXColoringEngine : NSObject <NSTextStorageDelegate, NSTextViewDelegate> {
 @protected
 	// Character sets
+	NSCharacterSet *alphanumCharacterSet;
 	NSCharacterSet *newLineCharacterSet;
 	NSCharacterSet *whitespaceCharacterSet;
   NSCharacterSet *specialChars;
