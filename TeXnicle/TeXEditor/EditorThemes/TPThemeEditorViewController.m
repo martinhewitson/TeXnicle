@@ -73,8 +73,10 @@
   [self.tabBar setUseOverflowMenu:NO];
   
   
+  
   [self updateUI];
   [self createActionMenu];
+  
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *selectedThemeName = [defaults valueForKey:TPSelectedTheme];
@@ -666,7 +668,6 @@
       
       NSColor *c = [th colorForKey:keys[row]];
       [[self colorWellForTableView:tableView] setColor:c];
-      [[self colorWellForTableView:tableView] activate:YES];
     }
     
   }

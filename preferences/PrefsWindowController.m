@@ -130,6 +130,9 @@
 
 - (void) windowWillClose:(NSNotification *)notification
 {
+  if ([NSColorPanel sharedColorPanelExists]) {
+    [[NSColorPanel sharedColorPanel] close];
+  }
 }
 
 - (IBAction)defaultEncodingSelected:(id)sender
