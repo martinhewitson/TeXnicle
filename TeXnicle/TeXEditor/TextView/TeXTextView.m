@@ -2501,16 +2501,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	NSString *command = [self currentCommand];
   NSString *arg = [self currentArgument];
 	
-  //  NSLog(@"Completing... %@", word);
+  //NSLog(@"Completing... %@", word);
   NSString *command = word;
   //	NSLog(@"       or command: %@", command);
   //	NSLog(@"       or arg: %@", arg);
   
 	id delegate = [self delegate];
+  
   //	NSLog(@"Delegate: %@", delegate);
-  if ([self completeArgument]) {
-    // do completion
-	} else if (command != nil && [command length] > 0 && (arg == nil || [arg isEqualToString:command]) ) {
+  
+  // complete a command if:
+  //  a) the command is not nil and
+  //  b) the command is not zero length and
+  //  c) the argument is nil or the argument contains the command we are completing
+  NSRange commandRangeInArg = [arg rangeOfString:command];
+  
+  if (command != nil && [command length] > 0 && (arg == nil || commandRangeInArg.location != NSNotFound) ) {
     
     NSArray *list = [NSMutableArray arrayWithArray:self.commandList];
     
@@ -2828,14 +2834,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   if ([line isCommentLineBeforeIndex:lineIndex commentChar:[self commentChar]]) {
     [self setTypingColor:self.coloringEngine.commentColor];
-  } else if ([paragraph isInArgumentAtIndex:lineIndex]) {
-    if ([paragraph isCommandBeforeIndex:lineIndex]) {
-      [self setTypingColor:self.coloringEngine.commandColor];
-    } else {
-      [self setTypingColor:self.coloringEngine.argumentsColor];
-    }
-  } else if ([line isCommandBeforeIndex:lineIndex]) {
+  } else if ([paragraph isInCommandAtIndex:lineIndex]) {
     [self setTypingColor:self.coloringEngine.commandColor];
+  } else if ([paragraph isArgumentOfCommandAtIndex:lineIndex]) {
+//    if ([paragraph isCommandBeforeIndex:lineIndex]) {
+//      [self setTypingColor:self.coloringEngine.commandColor];
+//    } else {
+      [self setTypingColor:self.coloringEngine.argumentsColor];
+//    }
   } else {
     [self applyFontAndColor:NO];
   }
@@ -2940,7 +2946,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 	[self wrapLine];
   
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+  [self colorVisibleText];
+//  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
 

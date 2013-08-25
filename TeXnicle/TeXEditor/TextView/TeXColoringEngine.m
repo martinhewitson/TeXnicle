@@ -395,7 +395,7 @@
         }
                 
 			}
-    } else if ((cc == '{' || cc == '[') && self.colorArguments) {
+    } else if ((cc == '{' || cc == '[' || cc == '(') && self.colorArguments) {
       start = idx;
       
       unichar close;
@@ -406,11 +406,20 @@
       if (cc == '[') {
         close = ']';
       }
+      if (cc == '(') {
+        close = ')';
+      }
       
       
       // check if this is escaped
       if ([text characterIsEscapedAtIndex:idx]) {
-        continue;
+        if (idx > 0) {
+          if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location+start>0) {
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start-1, 1)];
+            
+          }
+        }
+        //continue;
       }
       
       // color the first character as a special character
@@ -420,7 +429,7 @@
       }
       
       // check this is preceeded by a command
-      if ([text isCommandBeforeIndex:idx] == NO) {
+      if ([text isArgumentOfCommandAtIndex:idx] == NO) {
         continue;
       }
       
@@ -484,7 +493,13 @@
       
       // check if this is escaped
       if ([text characterIsEscapedAtIndex:idx]) {
-        continue;
+        if (idx > 0) {
+          colorRange = NSMakeRange(aRange.location+idx-1, 1);
+          if (self.specialCharsColor != nil) {
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+          }
+        }
+        //continue;
       }
       
       colorRange = NSMakeRange(aRange.location+idx, 1);
