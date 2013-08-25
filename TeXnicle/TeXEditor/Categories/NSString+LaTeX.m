@@ -663,7 +663,7 @@ static NSCharacterSet *controlFilterChars = nil;
   // this matches arguments and options in one token
   // \\[a-zA-Z]+(\{.*?\}|\[.*?\]+\{.*?\})
   
-  NSArray *ranges = [TPRegularExpression rangesMatching:@"(\\\\[a-zA-Z]+)(\\s|\\{.*?\\}|\\[.*?\\]*\\{.*?\\}|\\[.*?\\]*\\(.*?\\))" inText:self];
+  NSArray *ranges = [TPRegularExpression rangesMatching:@"(\\\\[a-zA-Z]+)(\\s|\\{.*?\\}|\\[.*?\\]*\\{.*?\\}|(\\[.*?\\])*|\\[.*?\\]*\\(.*?\\))" inText:self];
   
   //NSLog(@"Found %@", ranges);
   for (NSValue *rv in ranges) {
