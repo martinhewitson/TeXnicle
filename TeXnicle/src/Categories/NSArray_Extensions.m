@@ -57,4 +57,19 @@
 }
 
 
+- (NSArray*)uniqueStringArray
+{
+
+  NSMutableArray * unique = [NSMutableArray array];
+  NSMutableSet * processed = [NSMutableSet set];
+  for (NSString * string in self) {
+    if ([processed containsObject:string] == NO) {
+      [unique addObject:string];
+      [processed addObject:string];
+    }
+  }
+  
+  return unique;
+}
+
 @end

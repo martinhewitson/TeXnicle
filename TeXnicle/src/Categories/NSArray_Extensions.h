@@ -38,5 +38,6 @@
 - (id)firstObject;
 + (NSArray*)texIncludeCommands;
 + (NSArray*)texIncludeCommandsSearchStrings;
+- (NSArray*)uniqueStringArray;
 
 @end
