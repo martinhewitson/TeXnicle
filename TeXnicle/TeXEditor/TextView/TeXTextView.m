@@ -42,6 +42,7 @@
 #import "TPFoldedCodeSnippet.h"
 #import "NSString+RelativePath.h"
 #import "NSString+WordRanges.h"
+#import "NSArray_Extensions.h"
 
 #import "NSDictionary+TeXnicle.h"
 #import "NSString+LaTeX.h"
@@ -2540,8 +2541,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
                                                                                  inString:word
                                                                                  language:nil
                                                                    inSpellDocumentWithTag:0];
+      
+      
+      list = [list uniqueStringArray];
+      
       [self completeFromList:list];
     }
+	} else if ([self completeArgument]) {
+    // do completion
 	} else if ([word hasPrefix:@"#"]) {
     
     NSArray *possibleCommands = [self commandsBeginningWithPrefix:[self currentSnippetCommand]];
@@ -3070,6 +3077,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if ([self.delegate respondsToSelector:@selector(listOfCommands)]) {
       list = [list arrayByAddingObjectsFromArray:[self.delegate performSelector:@selector(listOfCommands)]];
     }
+    
+    list = [list uniqueStringArray];
+    
     if ([word length]>1) {
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", word];
       list = [list filteredArrayUsingPredicate:predicate];
