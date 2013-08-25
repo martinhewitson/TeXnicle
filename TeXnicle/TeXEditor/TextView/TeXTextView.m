@@ -2049,6 +2049,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if ([_popupList isVisible]) {
     [_popupList selectSelectedItem:self];
+    [_popupList dismiss];
     [self wrapLine];
     return;
   }
