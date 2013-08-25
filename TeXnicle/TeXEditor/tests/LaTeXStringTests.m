@@ -168,7 +168,7 @@
 {
   NSString *s = @"{\\command{one} some}";
   BOOL result = [s isCommandBeforeIndex:17];
-  STAssertFalse(result, @"There is no command before index 17");
+  STAssertTrue(result, @"There is a command before index 17");
 }
 
 - (void)testIsCommandBeforeIndex10
@@ -177,5 +177,45 @@
   BOOL result = [s isCommandBeforeIndex:24];
   STAssertTrue(result, @"There is a command before index 24");
 }
+
+- (void)testCommandAtIndex1
+{
+  NSString *s = @"\\usepackage[pdftex]{graphicx}";
+  NSString *cmd = [s commandAtIndex:24];
+  STAssertTrue(cmd != nil, @"There is a command at index 24");
+}
+
+- (void)testCommandAtIndex2
+{
+  NSString *s = @"\\command{\\command{some}}";
+  NSString *cmd = [s commandAtIndex:5];
+  STAssertTrue(cmd != nil, @"There is a command at index 5");
+}
+
+- (void)testCommandAtIndex3
+{
+  NSString *s = @"\\command{\\command{some}}";
+  NSString *cmd = [s commandAtIndex:20];
+  STAssertTrue(cmd != nil, @"There is a command at index 20");
+}
+
+- (void)testCommandAtIndex4
+{
+  NSString *s = @"command{\\command{some}}";
+  NSString *cmd = [s commandAtIndex:3];
+  STAssertFalse(cmd != nil, @"There is no command at index 3");
+  cmd = [s commandAtIndex:12];
+  STAssertTrue(cmd != nil, @"There is a command at index 12");
+}
+
+- (void)testIsArgumentOfCommandAtIndex
+{
+  NSString *s = @"command{\\command{some}}";
+  BOOL result = [s isArgumentOfCommandAtIndex:3];
+  STAssertFalse(result, @"There is no command at index 3");
+  result = [s isArgumentOfCommandAtIndex:12];
+  STAssertTrue(result, @"There is a command at index 12");
+}
+
 
 @end
