@@ -2761,6 +2761,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   // check if this is a \left{
   NSRange selRange = [self selectedRange];
+  //NSLog(@"Completing brace at %@", NSStringFromRange(selRange));
+  
   unichar cc = ' ';
   if (selRange.location > 0) {
     cc = [[self string] characterAtIndex:selRange.location-1];
@@ -2797,10 +2799,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	NSRange selRange = [self selectedRange];
 	NSRange effRange;
 	NSAttributedString *string = [self attributedString];
-	if ([string length] == 0) {
-		[super insertText:aString];
-		return;
-	}
+//	if ([string length] == 0) {
+//		[super insertText:aString];
+//		return;
+//	}
   
 	if (selRange.location < [string length]) {
 		NSTextAttachment *att = [string attribute:NSAttachmentAttributeName
@@ -2854,7 +2856,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self applyFontAndColor:NO];
   }
   
-  //  NSLog(@"Inserting text at index %d", selRange.location);
+  //NSLog(@"Inserting text at index %ld", selRange.location);
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL completeBrace = [[defaults valueForKey:TEAutomaticallyInsertClosingBrace] boolValue];

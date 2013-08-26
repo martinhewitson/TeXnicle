@@ -423,7 +423,7 @@
       }
       
       // color the first character as a special character
-      if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location+start>0) {
+      if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location!=NSNotFound) {
         [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
         
       }
