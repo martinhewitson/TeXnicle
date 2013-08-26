@@ -208,6 +208,27 @@
   STAssertTrue(cmd != nil, @"There is a command at index 12");
 }
 
+- (void)testCommandAtIndex5
+{
+  NSString *s = @"\\command";
+  NSString *cmd = [s commandAtIndex:3];
+  STAssertTrue(cmd != nil, @"There is a command at index 3");
+}
+
+- (void)testCommandAtIndex6
+{
+  NSString *s = @"\\command[opt1][option two]{argument1}{argument two}";
+  NSString *cmd = [s commandAtIndex:11];
+  STAssertTrue(cmd != nil, @"There is a command at index 11");
+  cmd = [s commandAtIndex:19];
+  STAssertTrue(cmd != nil, @"There is a command at index 19");
+  cmd = [s commandAtIndex:31];
+  STAssertTrue(cmd != nil, @"There is a command at index 31");
+  cmd = [s commandAtIndex:43];
+  STAssertTrue(cmd != nil, @"There is a command at index 43");
+}
+
+
 - (void)testIsArgumentOfCommandAtIndex
 {
   NSString *s = @"command{\\command{some}}";
@@ -216,6 +237,14 @@
   result = [s isArgumentOfCommandAtIndex:12];
   STAssertTrue(result, @"There is a command at index 12");
 }
+
+- (void)testIsArgumentOfCommandAtIndex2
+{
+  NSString *s = @"\\command[opt]{some}";
+  BOOL result = [s isArgumentOfCommandAtIndex:17];
+  STAssertTrue(result, @"There is a command at index 17");
+}
+
 
 
 @end
