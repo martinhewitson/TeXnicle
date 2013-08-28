@@ -358,6 +358,7 @@
 		25B28BA017A0F33300A41A0D /* quiet light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9F17A0F33300A41A0D /* quiet light.txtheme */; };
 		25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */; };
 		25B28BA517A16BE000A41A0D /* TPArrayStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */; };
+		25B38C2817C7205E00679086 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DB59631778BCD6000383AF /* XCTest.framework */; };
 		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
 		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
@@ -1588,6 +1589,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B38C2817C7205E00679086 /* XCTest.framework in Frameworks */,
 				250BE015162BEF3A007784DB /* SenTestingKit.framework in Frameworks */,
 				250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */,
 			);
@@ -4128,10 +4130,13 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4161,11 +4166,14 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXTextViewTests/TeXTextViewTests-Prefix.pch";
