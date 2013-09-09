@@ -200,10 +200,32 @@ For example:\
 \
 \pard\pardeftab720
 
-\f2 \cf8 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.
-\f0 \cf0 \
+\f2 \cf0 The first one: We have customizable headings (see Preferences > Outline) in TeXnicle and these custom headings are displayed in the 'Document Outline'. I think it would be nice, if they were displayed in the 'Jump Bar', too.\
+\
+The second one: We have a 'smart completion' for file names for custom commands (see Preferences > Commands > File) in TeXnicle, so that you get a list of existing files in your project, if you type something like \\include\{...\} (or a custom command listed in Preferences > Commands > File). I think, it would be helpful to have a similar feature when you create a new TeX file in your document, but instead of a list of existing files in your project you get a list of files included via \\include (or a custom command in Preferences > Commands > Files), which don't exist in your project.\
+I give you an example: I have a project with one TeX-file called file.tex. This file contains the commands \\include\{file1.tex\} and \\CustomIncludeCommand\{file2.tex\} (\\CustomIncludeCommand is listed in Preferences > Commands > File). Now I want to create a new TeX-file and click on 'New TeX document' in 'Project Files'. In the opening window should appear a list of missing files with the file names 'file1' and 'file2'. Marking one or more of these files and pressing 'Select' should create TeX-files with the marked names. Let's assume i have created file2.tex. The next time I create a new TeX-file the list should only contain 'file1'.\
+\pard\pardeftab720
+
+\f1 \cf0 \
+\
+\pard\pardeftab720
+
+\f2 \cf8 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.\
+\
+\pard\tx337\pardeftab337\pardirnatural
+
+\f0 \cf0 BUG: text search (cmd-f) only works on the first file that it's activated in.\
++ Add option to sync pdf when clicking on document outline\
+\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 Version 2.2.6\
+-------------\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
++ Added preference (in Typesetting) to sync the pdf when selecting a section in the document outline.\
+\
++ Improved editor performance.\
+\
 Version 2.2.5\
 -------------\
 \
