@@ -428,8 +428,10 @@
         
       }
       
+      lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
+      NSString *lineText = [text substringWithRange:lineRange];
       // check this is preceeded by a command
-      if ([text isArgumentOfCommandAtIndex:idx] == NO) {
+      if ([lineText isArgumentOfCommandAtIndex:(idx-lineRange.location)] == NO) {
         continue;
       }
       
