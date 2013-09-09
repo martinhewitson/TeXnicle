@@ -55,7 +55,7 @@ then
   if [ $doBibtex -eq 1 ]
   then
     echo "***------------------------------------------------------------"
-    echo "*** Running bibtex..."
+    echo "*** Running bibtex on $mainfile ..."
     echo "***------------------------------------------------------------"
     $BIBTEX "$mainfile"
   fi
