@@ -17,6 +17,7 @@
 - (NSNumber*) maxOutlineDepth;
 - (void) didSetMaxOutlineDepthTo:(NSInteger)depth;
 - (void) highlightSearchResult:(NSString*)result withRange:(NSRange)aRange inFile:(id)aFile;
+- (void) syncPDFToRange:(NSRange)aRange;
 - (BOOL) shouldGenerateOutline;
 
 - (id) currentFile;

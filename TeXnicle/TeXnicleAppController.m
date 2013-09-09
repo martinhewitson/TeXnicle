@@ -120,6 +120,7 @@ NSString * const TEHighlightMatchingWordsColor = @"TEHighlightMatchingWordsColor
 NSString * const TPSaveOnCompile = @"TPSaveOnCompile";
 NSString * const TPClearConsoleOnCompile = @"TPClearConsoleOnCompile";
 NSString * const TPSyncPDFAfterCompile = @"TPSyncPDFAfterCompile";
+NSString * const TPSyncPDFAfterOutlineSelection = @"TPSyncPDFAfterOutlineSelection";
 NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
@@ -294,6 +295,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   [defaultValues setValue:@YES forKey:TPSaveOnCompile];
   [defaultValues setValue:@YES forKey:TPClearConsoleOnCompile];
   [defaultValues setValue:@NO forKey:TPSyncPDFAfterCompile];
+  [defaultValues setValue:@NO forKey:TPSyncPDFAfterOutlineSelection];
   [defaultValues setValue:@NO forKey:OpenConsoleOnTypeset];
   [defaultValues setValue:@NO forKey:TPAutoTrashAfterCompile];
 

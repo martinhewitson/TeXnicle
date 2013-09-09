@@ -307,9 +307,17 @@
   TPSection *section = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
+    NSRange range = NSMakeRange(section.startIndex, [section.name length]);
     [self.delegate highlightSearchResult:section.name
-                               withRange:NSMakeRange(section.startIndex, [section.name length] )
+                               withRange:range
                                   inFile:section.file];
+    
+    if ([self.delegate respondsToSelector:@selector(syncPDFToRange:)]) {
+      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+      if ([[defaults valueForKey:TPSyncPDFAfterOutlineSelection] boolValue]) {
+        [self.delegate syncPDFToRange:range];
+      }
+    }
     
   }
 }

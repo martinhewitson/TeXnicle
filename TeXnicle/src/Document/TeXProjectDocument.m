@@ -2505,9 +2505,7 @@
     
     // if we want, sync pdf
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
-      NSInteger line = [self.texEditorViewController.textView lineNumber];
-      NSInteger col  = [self.texEditorViewController.textView column];
-      [self syncToPDFLine:line column:col giveFocus:NO];
+      [self syncPDFToEditor];
     }
     
     // if we want, trash aux files
@@ -3647,6 +3645,20 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column
 {
   [self syncToPDFLine:lineNumber column:column];
+}
+
+- (void) syncPDFToRange:(NSRange)aRange
+{
+  NSInteger line = [self.texEditorViewController.textView lineNumberForRange:aRange];
+  NSInteger col  = [self.texEditorViewController.textView column];
+  [self syncToPDFLine:line column:col giveFocus:NO];
+}
+
+- (void) syncPDFToEditor
+{
+  NSInteger line = [self.texEditorViewController.textView lineNumber];
+  NSInteger col  = [self.texEditorViewController.textView column];
+  [self syncToPDFLine:line column:col giveFocus:NO];
 }
 
 - (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column

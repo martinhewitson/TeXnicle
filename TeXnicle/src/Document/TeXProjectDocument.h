@@ -252,6 +252,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark PDF Selection
 
+- (void) syncPDFToEditor;
 - (void) syncToPDFLine:(NSInteger)lineNumber column:(NSInteger)column;
 - (IBAction) findCorrespondingPDFText:(id)sender;
 - (IBAction) findSource:(id)sender;
