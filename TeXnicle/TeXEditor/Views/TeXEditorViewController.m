@@ -589,6 +589,15 @@
   return nil;
 }
 
+-(id)projectFolder
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(projectFolder)]) {
+    return [self.delegate performSelector:@selector(projectFolder)];
+  }
+  
+  return nil;
+}
+
 -(id)project
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(project)]) {

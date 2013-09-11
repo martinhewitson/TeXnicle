@@ -1842,6 +1842,11 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   return [[self fileURL] pathExtension];
 }
 
+-(NSString*)projectFolder
+{
+  NSString *path = [[self fileURL] path];
+  return [path stringByDeletingLastPathComponent];
+}
 
 -(id)project
 {

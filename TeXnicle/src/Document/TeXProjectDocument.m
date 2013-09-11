@@ -1287,6 +1287,11 @@
   [self.openDocuments addDocument:file select:YES];
 }
 
+-(NSString*)projectFolder
+{
+  return [[self project] valueForKey:@"folder"];
+}
+
 - (NSManagedObject *)project
 {
 	if (_project != nil) {

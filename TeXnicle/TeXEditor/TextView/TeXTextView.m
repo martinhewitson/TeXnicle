@@ -3846,13 +3846,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) insertImageBlockForFile:(NSString*)aFile atLocation:(NSUInteger)location
 {
-  id project = [[self delegate] performSelector:@selector(project)];
-  NSString *projectFolder = [project valueForKey:@"folder"];
+  NSString *projectFolder = [[self delegate] performSelector:@selector(projectFolder)];
   NSString *file = [projectFolder relativePathTo:aFile];
   
-  //  NSLog(@"File %@", aFile);
-  //  NSLog(@"Project %@", projectFolder);
-  //  NSLog(@"computed path %@", file);
+  //NSLog(@"File %@", aFile);
+  //NSLog(@"Project %@", projectFolder);
+  //NSLog(@"computed path %@", file);
   
   NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
   NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:%@}\n\\end{figure}\n", file, name];
