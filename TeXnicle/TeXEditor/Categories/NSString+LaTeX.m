@@ -352,6 +352,13 @@ static NSCharacterSet *controlFilterChars = nil;
 		
 		(*loc)++;
 	}
+  
+  // if we got to the end of the string, return the remaining text
+  if (*loc == [self length]) {
+    NSString *s = [self substringWithRange:NSMakeRange(start, *loc-start)];
+    return s;
+  }
+  
 	return nil;
 }
 
