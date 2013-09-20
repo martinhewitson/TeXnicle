@@ -732,14 +732,14 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 			if ([[file valueForKey:@"isText"] boolValue]) {
         TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
         NSTextStorage *storage = [[file document] textStorage];
-        [storage beginEditing];
         for (TPDocumentMatch *match in resultDoc.matches) {
           // attach the resultDoc to the text
           //    NSLog(@"Attaching [%@] to doc '%@' at range %@", match, [file name], NSStringFromRange(match.range));
-          [storage addAttribute:TPDocumentMatchAttributeName value:match range:match.range];    
+          [storage beginEditing];
+          [storage addAttribute:TPDocumentMatchAttributeName value:match range:match.range];
+          [storage endEditing];
           //    NSLog(@"%@", [doc textStorage]);
         }  
-        [storage endEditing];
         //  NSLog(@"%@", [doc textStorage]);
         //  NSLog(@"Lazy? %d", [[doc textStorage] fixesAttributesLazily]);
       }
