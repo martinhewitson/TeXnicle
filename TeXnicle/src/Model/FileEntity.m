@@ -166,6 +166,10 @@
 
 - (void) setName:(NSString *)newName
 {
+  if (newName == nil) {
+    return;
+  }
+  
 	[self willChangeValueForKey:@"name"];
 //	NSLog(@"Setting name of %@", self);
 //	NSLog(@"... to %@", newName);

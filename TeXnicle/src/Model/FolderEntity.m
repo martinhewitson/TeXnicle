@@ -58,6 +58,10 @@
 
 - (void) setName:(NSString *)newName
 {
+  if (newName == nil) {
+    return;
+  }
+  
   //NSLog(@"Setting name of %@", self);
   //NSLog(@"   to %@", newName);
   
