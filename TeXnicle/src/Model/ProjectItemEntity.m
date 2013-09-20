@@ -157,7 +157,7 @@
 
 - (void) resetFilePath
 {
-  NSLog(@"Resetting file path from %@ to %@", self.filepath, [self pathRelativeToProject]);
+  //NSLog(@"Resetting file path from %@ to %@", self.filepath, [self pathRelativeToProject]);
   
 //  // get a new path
 //  NSFileManager *fm = [NSFileManager defaultManager];
