@@ -96,6 +96,7 @@ extern NSString * const OutlineViewNodeType;
 												 code:(int)choice 
 											context:(void *)v;
 
+- (void) addNewFile;
 - (void) addNewFolder;
 - (void) addNewFolderCreateOnDisk;
 - (FolderEntity*) addFolder:(NSString*)aName

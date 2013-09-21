@@ -448,6 +448,11 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	return newFolder;				
 }
 
+- (void) addNewFile
+{
+  [self.document newTeXFile:self];
+}
+
 - (NSManagedObject*) addNewFile:(NSString*)name 
 										 atFilepath:(NSString*)aFilepath 
 											extension:(NSString*)extension

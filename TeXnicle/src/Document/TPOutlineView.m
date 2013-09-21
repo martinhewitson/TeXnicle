@@ -90,16 +90,26 @@
   [theMenu addItem:[NSMenuItem separatorItem]];
   
 	//------ New Folder on disk
-	menuItem = [[NSMenuItem alloc] initWithTitle:@"New Folder On Disk"
+	menuItem = [[NSMenuItem alloc] initWithTitle:@"New folder on disk..."
 																				action:@selector(newFolderOnDisk:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
 	
 	//------ New Group Folder
-	menuItem = [[NSMenuItem alloc] initWithTitle:@"New Group Folder"
+	menuItem = [[NSMenuItem alloc] initWithTitle:@"New group folder..."
 																				action:@selector(newGroupFolder:)
 																 keyEquivalent:@""];
 	[theMenu addItem:menuItem];
+
+  
+  [theMenu addItem:[NSMenuItem separatorItem]];
+  
+	//------ New File
+	menuItem = [[NSMenuItem alloc] initWithTitle:@"New file..."
+																				action:@selector(addNewFile:)
+																 keyEquivalent:@""];
+	[theMenu addItem:menuItem];
+  
   
 	return theMenu;
 }
@@ -164,6 +174,15 @@
 		[theMenu addItem:item];
 		
 	}
+  
+  [theMenu addItem:[NSMenuItem separatorItem]];
+  
+  //------ Add new file
+  NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"New file..."
+                                    action:@selector(addNewFile:)
+                             keyEquivalent:@""];
+  [theMenu addItem:item];
+  
 	
   [theMenu addItem:[NSMenuItem separatorItem]];
   
@@ -230,7 +249,7 @@
 	if ([selectedItem isKindOfClass:[FolderEntity class]]) {
     [theMenu addItem:[NSMenuItem separatorItem]];
     if ([selectedItem pathOnDisk]) {
-      NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New Folder On Disk"
+      NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New folder on disk"
                                                             action:@selector(newFolderOnDisk:)
                                                      keyEquivalent:@""];
       [theMenu addItem:newSubfolder];
@@ -240,7 +259,7 @@
 
 	//--------- New Subfolder
 	if ([selectedItem isKindOfClass:[FolderEntity class]]) {
-		NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New Group Folder"
+		NSMenuItem *newSubfolder = [[NSMenuItem alloc] initWithTitle:@"New group folder"
 																													action:@selector(newGroupFolder:)
 																									 keyEquivalent:@""];
 		[theMenu addItem:newSubfolder];
@@ -254,6 +273,10 @@
 	return theMenu;
 }
 
+- (IBAction) addNewFile:(id)sender
+{
+  [treeController addNewFile];  
+}
 
 - (IBAction) newGroupFolder:(id) sender
 {
