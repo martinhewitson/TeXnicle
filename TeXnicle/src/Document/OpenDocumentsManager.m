@@ -319,6 +319,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     id doc = [self.currentDoc document];		
     if (doc) {
       if ([doc isKindOfClass:[FileDocument class]]) {
+        FileDocument *fileDocument = (FileDocument*)doc;
 //        NSLog(@"Setting doc %@", doc);
         NSTextContainer *textContainer = [doc textContainer];
         if (textContainer) {
@@ -345,6 +346,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           }
           
           [textContainer setTextView:self.texEditorViewController.textView];
+          
 //          NSLog(@"Set textview for %@", [currentDoc name]);
 //          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
           
@@ -371,14 +373,25 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorWholeDocument)
                                                                   withObject:nil
                                                                waitUntilDone:NO];
+          
 //          NSLog(@"Did set text container");
           [self enableImageView:NO];
+          
+          // update layout so that the findbar gets the correct notifications and the search works
+          [self performSelector:@selector(updateLayout) withObject:nil afterDelay:0];
+          
         }
       } // end doc document is correct class
     } // end doc is nil
   } else {
     [self enableImageView:YES];
   }
+}
+
+- (void) updateLayout
+{
+  FileDocument *fileDocument = [self.currentDoc document];
+  [[self.texEditorViewController.textView layoutManager] setTextStorage:fileDocument.textStorage];
 }
 
 - (NSTabViewItem *) tabViewItemAtIndex:(NSInteger)index
