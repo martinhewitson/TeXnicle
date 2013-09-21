@@ -2,7 +2,8 @@
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
-\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red0\green110\blue173;\red63\green110\blue116;
+\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red0\green110\blue173;\red80\green0\blue120;
+\red120\green4\blue0;\red17\green150\blue0;\red48\green107\blue255;\red255\green0\blue17;\red63\green110\blue116;
 }
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
@@ -215,13 +216,85 @@ I give you an example: I have a project with one TeX-file called file.tex. This 
 \pard\tx337\pardeftab337\pardirnatural
 
 \f0 \cf0 BUG: text search (cmd-f) only works on the first file that it's activated in.\
-+ Add option to sync pdf when clicking on document outline\
 \
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 Version 2.2.6\
--------------\
+\
+\cf9 ####################\
+#\
+# Feature (Version 2.0.8): Advanced autocompletion for file inclusion in \\input \\include \\includegraphics \\etc....\
+#\
+####################\
+To describe this feature consider the following use case, I have a large document and in my project files overview I have the following structure:\
+\
+chapters/chapter#/*.tex (Latex files)\
+chapters/chapter#/img/*.eps (Vector graphics)\
+When for example using the \\includegraphics\{\} command I get a list of paths to actual files, but not folders. Since I for some chapters have a lot of images and a lot of .tex files, this gets a long list for example:\
+\\includegraphics\{chapters/chap\}\
+Will list ALL files which start with this, it is not possible to do an autocompletion for just a folder(like pressing tab in terminal when using the "cd" command).\
+\
+For small documents the current autocompletion is adaquate, but for larger documents seperated over many files and with many images, this feature is pointless as you need to type the full path in order to get a select list.\
+\
+Exactly how the advanced feature should be implemented I can't say, but adding auto completion for folders as the first option would already streamline the usage a bit.\
+\cf0 \
+\cf10 ####################\
+#\
+# Bug/Feature (Version 2.0.8): User defined environments not recognised.\
+#\
+####################\
+Commands which are added using the \\newcommand tool are recognised and added to the autocomplete list in the editor. However environments which are added with the \\newenvironment command are not added to the autocomplete list in the environments.\
+\cf0 \
+\cf11 ####################\
+#\
+# Bug (Version 2.0.8): Renaming files in project file pane goes wrong when minimising folders.\
+# Still occurs in 2.2.6.\
+####################\
+When I collapse a folder in my project file pane and then rename a file somewhere below that folder, it appears that the references are messed up. It keeps the order of every folder expanded.\
+For example if I expand all and edit item number 5 in the list, it edits the file. When I collapse the folder above so it becomes visually item number 3 in the list, rather than editing the clicked item, it will edit the number 3 item in the expanded view.\
+Steps to reproduce:\
+\
+1. Create various folders with .tex files in them.\
+2. Collapse one of the top folders in the project file pane.\
+3. Try to rename a file below the collapsed folder. The wrong file will be selected for renaming.\cf0 \
+\
+\
+\cf12 ####################\
+#\
+# Feature (Version 2.2.6): Delay auto-complete or other popup windows\
+#\
+####################\
+In some instances I perform some repetitive editing actions forexample I have(custom commands):\
+\\rroi\
+\\rroii\
+\\rroii\
+\
+And I want to quickly remove an "i" in all commands to lower them a level. However due to the fact that autocomplete does not have a delay, removing an i, causes the auto complete to pop-up thus, disablign the [up] and [down] key to go to next line and instead I'm scrolling in the auto complete list.\
+\
+It would be nice to be able to set a delay on the autocomplete boxes, such that if you want to do quick repetitive actions, you do not have to escape autocomplete everytime.\cf0 \
+\
+\pard\pardeftab720\sa280
+
+\f1 \cf13 I suspect a bug in syntax highlighting in the case where < (lower than) and > (grater than) are used in inline math. Example:\uc0\u8232 \u8232 Some text $a<b$ words $a>b$ other text\u8232 \u8232 results in RED between order symbols.
+\f0 \cf0 \
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
+Version 2.2.8\
+-------------\
+\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Added a 'New file' menu item to the project tree context menu.\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Bug fix: if there is no blank line after an \\input\{\} command then it was ignored in the document outline. This is now fixed.\
++ Fixed bug where an error popup would appear when changing the name of a file/folder in the project tree if the existing name was deleted prior to entering a new name.\
++ Fixed bug which stopped the editor find bar from functioning properly in projects (cmd-f). \
+\
+Version 2.2.7\
+-------------\
+\
++ Fixed a bug which stopped dragging and dropping an image file from the Finder to the editor from working properly in the standalone editor.\
+\
+\
+Version 2.2.6\
+-------------\
+\
 + Added preference (in Typesetting) to sync the pdf when selecting a section in the document outline.\
 \
 + Improved editor performance.\
@@ -252,7 +325,7 @@ Version 2.2.2\
 -------------\
 \
 + Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.\
-+ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf9 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
++ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf14 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
 + Small bug fixes in theme editing UI.\
 + Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.\
 \
