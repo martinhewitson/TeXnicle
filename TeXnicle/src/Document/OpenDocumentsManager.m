@@ -261,7 +261,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 		if (![aDoc existsOnDisk]) {
 			return;
 		}
-		
+    
+    // update layout so that the findbar gets the correct notifications and the search works
+    [self.texEditorViewController.textView noteStringWillChange];
+
     // if the file has a document, we don't need to reload from disk
     if ([aDoc document] == nil) {
       // load this file from disk
@@ -326,6 +329,10 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
           
+          // update layout so that the findbar gets the correct notifications and the search works
+          [self.texEditorViewController.textView noteStringWillChange];
+
+          // stop observations
           [self.texEditorViewController.textView stopObservingTextStorage];
           
           // clear the text view from all other document text containers
@@ -345,6 +352,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
             }
           }
           
+          
+          // now change the text in the textview
           [textContainer setTextView:self.texEditorViewController.textView];
           
 //          NSLog(@"Set textview for %@", [currentDoc name]);
@@ -377,21 +386,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"Did set text container");
           [self enableImageView:NO];
           
-          // update layout so that the findbar gets the correct notifications and the search works
-          [self performSelector:@selector(updateLayout) withObject:nil afterDelay:0];
-          
         }
       } // end doc document is correct class
     } // end doc is nil
   } else {
     [self enableImageView:YES];
   }
-}
-
-- (void) updateLayout
-{
-  FileDocument *fileDocument = [self.currentDoc document];
-  [[self.texEditorViewController.textView layoutManager] setTextStorage:fileDocument.textStorage];
 }
 
 - (NSTabViewItem *) tabViewItemAtIndex:(NSInteger)index
@@ -418,6 +418,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	NSTabViewItem *item = [self tabViewItemAtIndex:index];
   if (item != nil) {
     if ([self.tabView selectedTabViewItem] != item) {
+      // update layout so that the findbar gets the correct notifications and the search works
+      [self.texEditorViewController.textView noteStringWillChange];
+      
       [self.tabView selectTabViewItem:item];
     }
   }
@@ -482,6 +485,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
+  // update layout so that the findbar gets the correct notifications and the search works
+  [self.texEditorViewController.textView noteStringWillChange];
 	[self saveCursorAndScrollPosition];
 }
 
