@@ -56,7 +56,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 -(void)textView:(TeXTextView*)aTextView didCommandClickAtLine:(NSInteger)lineNumber column:(NSInteger)column;
 @end
 
-@interface TeXTextView : NSTextView <TeXTextViewDelegate, UKTextDocGoToBoxTarget, MHTableConfigureDelegate> {
+@interface TeXTextView : NSTextView <NSTextFinderClient, TeXTextViewDelegate, UKTextDocGoToBoxTarget, MHTableConfigureDelegate> {
 @private
   
 	TPPopupListWindowController *_popupList;
@@ -127,6 +127,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) processEditing:(NSNotification*)aNote;
 - (void) stopObservingTextStorage;
 - (void) observeTextStorage;
+- (void) noteStringWillChange;
 
 
 #pragma mark -

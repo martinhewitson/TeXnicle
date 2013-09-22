@@ -97,6 +97,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (assign) NSInteger currentWrapStyle;
 @property (assign) NSInteger currentWrapAt;
 
+@property (strong) NSTextFinder *textFinder;
+
 @end
 
 @implementation TeXTextView
@@ -141,6 +143,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
     
     [self applyFontAndColor:YES];
+    
     didSetup = YES;
   }
 }
@@ -151,6 +154,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) defaultSetup
 {
   if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
+    self.textFinder = [[NSTextFinder alloc] init];
+    [self.textFinder setClient:self];
+    [self.textFinder setFindBarContainer:[self enclosingScrollView]];
     [self setUsesFindBar:YES];
     [self setIncrementalSearchingEnabled:YES];
   } else {
@@ -221,6 +227,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[scrollView setHasHorizontalRuler:NO];
 	[scrollView setHasVerticalRuler:YES];
 	[scrollView setRulersVisible:YES];
+}
+
+- (void) noteStringWillChange
+{
+//  NSLog(@"Updating string for text finder %@", self.textFinder);
+  [self.textFinder cancelFindIndicator];
+  [self.textFinder noteClientStringWillChange];
 }
 
 - (void) setupLists
@@ -4111,13 +4124,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark findbar
 
-//- (NSString *)stringAtIndex:(NSUInteger)characterIndex effectiveRange:(NSRangePointer)outRange endsWithSearchBoundary:(BOOL *)outFlag
+//- (void) cancelFind
 //{
-//  [[self textStorage] atta]
-//  return [[self string] substringWithRange:NSMakeRange(characterIndex, 1)];
+//  if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
+//    [self performTextFinderAction:<#(id)#>]
+//  }
 //}
 
-
+//- (NSString *)stringAtIndex:(NSUInteger)characterIndex effectiveRange:(NSRangePointer)outRange endsWithSearchBoundary:(BOOL *)outFlag
+//{
+////  [[self textStorage] atta]
+//  NSRange r = *outRange;
+//  return [[self string] substringWithRange:NSMakeRange(characterIndex, r.length)];
+//}
 
 
 
