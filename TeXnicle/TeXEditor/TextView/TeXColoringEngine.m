@@ -337,7 +337,7 @@
         idx = NSMaxRange(lineRange)-1;
 //        NSLog(@"   advanced index to %ld", idx);
 			}
-    } else if (cc == '<' && (self.colorMarkupL1 || self.colorMarkupL2 || self.colorMarkupL3)) {
+    } else if (cc == '<' && [text isInMathAtIndex:idx] == NO && (self.colorMarkupL1 || self.colorMarkupL2 || self.colorMarkupL3)) {
       int jump = 1;
       unichar c = 0;
 			if (idx>0) {
@@ -389,7 +389,7 @@
           idx++;
         }
         
-        // if we didn't match an ending } then there's not much we can do
+        // if we didn't match an ending > then there's not much we can do
         if (argCount>0) {
           idx = start+jump;
         }
