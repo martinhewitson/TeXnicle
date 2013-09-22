@@ -246,5 +246,49 @@
 }
 
 
+- (void)testIsInMathAtIndex1
+{
+  NSString *s = @"some text with no math";
+  BOOL result = [s isInMathAtIndex:10];
+  STAssertFalse(result, @"There is no math mode here!");
+}
+
+- (void)testIsInMathAtIndex2
+{
+  NSString *s = @"some $x<<<y$ and $y>>>z$.";
+  BOOL result = [s isInMathAtIndex:9];
+  STAssertTrue(result, @"We are in math mode at index 9.");
+}
+
+- (void)testIsInMathAtIndex3
+{
+  NSString *s = @"some $x<<<y$ and $y>>>z$.";
+  BOOL result = [s isInMathAtIndex:21];
+  STAssertTrue(result, @"We are in math mode at index 21.");
+}
+
+- (void)testIsInMathAtIndex4
+{
+  NSString *s = @"\\begin{equation} x<y & y>z \\end{equation}";
+  BOOL result = [s isInMathAtIndex:21];
+  STAssertTrue(result, @"We are in math mode at index 21.");
+}
+
+- (void)testIsInMathAtIndex5
+{
+  NSString *s = @"\\begin{eqnarray} x<y & y>z \\end{eqnarray}";
+  BOOL result = [s isInMathAtIndex:21];
+  STAssertTrue(result, @"We are in math mode at index 21.");
+}
+
+- (void)testIsInMathAtIndex6
+{
+  NSString *s = @"\\begin{matrix} \
+  x<y & y>z \
+  \\end{matrix}";
+  BOOL result = [s isInMathAtIndex:21];
+  STAssertTrue(result, @"We are in math mode at index 21.");
+}
+
 
 @end

@@ -33,6 +33,7 @@
 #import "NSArray_Extensions.h"
 
 static NSCharacterSet *controlFilterChars = nil;
+static NSString *mathModeRegExpr = nil;
 
 @implementation NSString (LaTeX) 
 
@@ -493,6 +494,37 @@ static NSCharacterSet *controlFilterChars = nil;
   if (anIndex > 0) {
     //NSLog(@"Char = %c", [self characterAtIndex:anIndex-1]);
     if ([self characterAtIndex:anIndex-1] == '\\') {
+      return YES;
+    }
+  }
+  
+  return NO;
+}
+
+// check if there is a $ somewhere on this line and a $ somewhere after the index on the same line
+- (BOOL)isInMathAtIndex:(NSInteger)anIndex
+{
+  //NSLog(@"Checking math at index %ld in [%@]", anIndex, self);
+  
+  //NSRange lr = [self lineRangeForRange:NSMakeRange(anIndex, 0)];
+  //NSString *lineText = [self substringWithRange:lr];
+  //NSLog(@"   line: %@", lineText);
+  
+  if (mathModeRegExpr == nil) {
+    NSArray *mathEnvironmentsForRegExp = @[@"equation", @"eqnarray", @"matrix", @"pmatrix", @"array", @"bmatrix"];
+    mathModeRegExpr = @"(\\$.*?\\$)";
+    
+    for (NSString *env in mathEnvironmentsForRegExp) {
+      mathModeRegExpr = [mathModeRegExpr stringByAppendingFormat:@"|(?s:\\\\begin\\{%@\\}.*?\\\\end\\{%@\\})", env, env];
+    }
+  }
+  
+  NSArray *ranges = [TPRegularExpression rangesMatching:mathModeRegExpr inText:self];
+  
+  //NSLog(@"Found %@", ranges);
+  for (NSValue *rv in ranges) {
+    NSRange r = [rv rangeValue];
+    if (NSLocationInRange(anIndex, r)) {
       return YES;
     }
   }
