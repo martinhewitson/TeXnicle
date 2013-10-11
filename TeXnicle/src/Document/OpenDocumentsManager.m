@@ -324,8 +324,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       if ([doc isKindOfClass:[FileDocument class]]) {
         FileDocument *fileDocument = (FileDocument*)doc;
 //        NSLog(@"Setting doc %@", doc);
-        NSTextContainer *textContainer = [doc textContainer];
-        if (textContainer) {
+//        NSTextContainer *textContainer = [doc textContainer];
+//        if (textContainer) {
 //          NSLog(@"TextView: %@", self.texEditorViewController.textView);
 //          NSLog(@"Setting up text container.. %@", textContainer);
           
@@ -336,25 +336,27 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self.texEditorViewController.textView stopObservingTextStorage];
           
           // clear the text view from all other document text containers
-          for (FileEntity *file in self.openDocuments) {
-            if (file != self.currentDoc) {
-              if ([[file valueForKey:@"isText"] boolValue]) {
-                id filedoc = [file document];		
-                if (filedoc) {
-                  if ([filedoc isKindOfClass:[FileDocument class]]) {
-//                    NSLog(@"Clearing textview from %@", [file name]);
-                    NSTextContainer *tc = [filedoc textContainer];
-                    [tc setTextView:nil];
-//                    NSLog(@"  Container %@, Textview %@", tc, [tc textView]);
-                  }
-                }
-              }
-            }
-          }
+//          for (FileEntity *file in self.openDocuments) {
+//            if (file != self.currentDoc) {
+//              if ([[file valueForKey:@"isText"] boolValue]) {
+//                id filedoc = [file document];		
+//                if (filedoc) {
+//                  if ([filedoc isKindOfClass:[FileDocument class]]) {
+////                    NSLog(@"Clearing textview from %@", [file name]);
+//                    NSTextContainer *tc = [filedoc textContainer];
+//                    [tc setTextView:nil];
+////                    NSLog(@"  Container %@, Textview %@", tc, [tc textView]);
+//                  }
+//                }
+//              }
+//            }
+//          }
           
           
           // now change the text in the textview
-          [textContainer setTextView:self.texEditorViewController.textView];
+//        [self.texEditorViewController.textView.layoutManager setTextStorage:fileDocument.textStorage];
+          [self.texEditorViewController.textView.layoutManager replaceTextStorage:fileDocument.textStorage];
+//          [textContainer setTextView:self.texEditorViewController.textView];
           
 //          NSLog(@"Set textview for %@", [currentDoc name]);
 //          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
@@ -386,7 +388,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //          NSLog(@"Did set text container");
           [self enableImageView:NO];
           
-        }
+//        }
       } // end doc document is correct class
     } // end doc is nil
   } else {
@@ -522,7 +524,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 //	if (isOpening)
 //		return;
 	if ([[self.currentDoc isText] boolValue]) {
-    [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
+//    [[self.texEditorViewController.textView layoutManager] ensureLayoutForTextContainer:[self.texEditorViewController.textView textContainer]];
     
     // reset cursor position
     NSString *sr = [self.currentDoc valueForKey:@"cursor"];
