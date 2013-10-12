@@ -87,6 +87,7 @@
         // citations from any bib files included in this file but not in the project
         if ([self isCancelled]) return;
         NSArray *entries = [self.file.text citationsFromBibliographyIncludedFromPath:self.file.pathOnDisk];
+        //NSLog(@"Collected %ld entries from included bib file", [entries count]);
         [newCitations addObjectsFromArray:entries];
       }
       
@@ -94,13 +95,14 @@
       if ([self isCancelled]) return;
       if ([ext isEqualToString:@"bib"]) {
         NSArray *entries = [BibliographyEntry bibtexEntriesFromString:self.file.text];
+        //NSLog(@"Collected %ld entries from project bib file", [entries count]);
         if ([self isCancelled]) return;
         // only add these if we don't already have entries for these
         for (BibliographyEntry *entry in entries) {
           // check against existing
           BOOL foundIt = NO;
           for (BibliographyEntry *e in newCitations) {
-            if ([e like:entry]) {
+            if ([e isEqual:entry]) {
               foundIt = YES;
               break;
             }
