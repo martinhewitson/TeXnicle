@@ -323,72 +323,41 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if (doc) {
       if ([doc isKindOfClass:[FileDocument class]]) {
         FileDocument *fileDocument = (FileDocument*)doc;
-//        NSLog(@"Setting doc %@", doc);
-//        NSTextContainer *textContainer = [doc textContainer];
-//        if (textContainer) {
-//          NSLog(@"TextView: %@", self.texEditorViewController.textView);
-//          NSLog(@"Setting up text container.. %@", textContainer);
-          
-          // update layout so that the findbar gets the correct notifications and the search works
-          [self.texEditorViewController.textView noteStringWillChange];
-
-          // stop observations
-          [self.texEditorViewController.textView stopObservingTextStorage];
-          
-          // clear the text view from all other document text containers
-//          for (FileEntity *file in self.openDocuments) {
-//            if (file != self.currentDoc) {
-//              if ([[file valueForKey:@"isText"] boolValue]) {
-//                id filedoc = [file document];		
-//                if (filedoc) {
-//                  if ([filedoc isKindOfClass:[FileDocument class]]) {
-////                    NSLog(@"Clearing textview from %@", [file name]);
-//                    NSTextContainer *tc = [filedoc textContainer];
-//                    [tc setTextView:nil];
-////                    NSLog(@"  Container %@, Textview %@", tc, [tc textView]);
-//                  }
-//                }
-//              }
-//            }
-//          }
-          
-          
-          // now change the text in the textview
-//        [self.texEditorViewController.textView.layoutManager setTextStorage:fileDocument.textStorage];
-          [self.texEditorViewController.textView.layoutManager replaceTextStorage:fileDocument.textStorage];
-//          [textContainer setTextView:self.texEditorViewController.textView];
-          
-//          NSLog(@"Set textview for %@", [currentDoc name]);
-//          NSLog(@"  Container %@, Textview %@", textContainer, [textContainer textView]);
-          
-          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
-          
-          [self.texEditorViewController.textView observeTextStorage];
-          [self enableTextView];
-          [self.texEditorViewController.textView setUpRuler];
-          [self.texEditorViewController.textView setNeedsDisplay:YES];
-          
-          FileEntity *file = [doc valueForKey:@"file"];
-          if ([[file extension] isEqualToString:@"tex"]) {
-            [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0];
-          }
-          
-          if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
-            [self selectTabForFile:self.currentDoc];
-          }
-          
-          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
-                                                                  withObject:nil
-                                                               waitUntilDone:YES];
-          
-          [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorWholeDocument)
-                                                                  withObject:nil
-                                                               waitUntilDone:NO];
-          
-//          NSLog(@"Did set text container");
-          [self enableImageView:NO];
-          
-//        }
+        // update layout so that the findbar gets the correct notifications and the search works
+        [self.texEditorViewController.textView noteStringWillChange];
+        
+        // stop observations
+        [self.texEditorViewController.textView stopObservingTextStorage];
+        
+        
+        // now change the text in the textview
+        [self.texEditorViewController.textView.layoutManager replaceTextStorage:fileDocument.textStorage];
+        
+        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
+        
+        [self.texEditorViewController.textView observeTextStorage];
+        [self enableTextView];
+        [self.texEditorViewController.textView setUpRuler];
+        [self.texEditorViewController.textView setNeedsDisplay:YES];
+        
+        FileEntity *file = [doc valueForKey:@"file"];
+        if ([[file extension] isEqualToString:@"tex"]) {
+          [self.texEditorViewController.textView performSelector:@selector(restoreAllPlaceholders) withObject:nil afterDelay:0];
+        }
+        
+        if ([[self.tabView selectedTabViewItem] identifier] != self.currentDoc) {
+          [self selectTabForFile:self.currentDoc];
+        }
+        
+        
+        
+        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
+                                                                withObject:nil
+                                                             waitUntilDone:YES];
+        
+        [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+        
+        [self enableImageView:NO];
       } // end doc document is correct class
     } // end doc is nil
   } else {
@@ -650,7 +619,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 	[self.tabView setHidden:NO];
 	[self.tabBar setHidden:NO];
   [self.texEditorViewController enableEditor];
-  [self.texEditorViewController.textView performSelector:@selector(colorWholeDocument)];
+  [self.texEditorViewController.textView performSelector:@selector(colorVisibleText)];
   
 //  [[self.texEditorViewController.textView window] makeFirstResponder:self.texEditorViewController.textView];
 }
