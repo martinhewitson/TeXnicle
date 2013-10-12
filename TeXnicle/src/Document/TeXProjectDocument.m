@@ -2163,17 +2163,15 @@
 
 -(NSArray*)listOfCitations
 {
-  NSMutableArray *citations = [NSMutableArray array];
-  
+  NSMutableSet *citationSet = [NSMutableSet set];
   for (TPFileMetadata *file in self.fileMetadata) {
     for (BibliographyEntry *entry in file.citations) {
-      if (![citations containsObject:entry]) {
-        [citations addObject:entry];
-      }
+      [citationSet addObject:entry];
     }
   }
   
-  return citations;
+  NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
+  return [citationSet sortedArrayUsingDescriptors:@[desc]];
 }
 
 -(NSArray*)listOfCommands
