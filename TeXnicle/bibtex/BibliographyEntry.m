@@ -177,7 +177,11 @@
 
 - (NSAttributedString*)attributedString
 {
-  return [self stringWithColor:[NSColor blackColor]];
+  if (_attributedString == nil) {
+//    NSLog(@"Creating attributed string for [%p: %@]", self, self.tag);
+    _attributedString = [self stringWithColor:[NSColor blackColor]];
+  }
+  return _attributedString;
 }
 
 
