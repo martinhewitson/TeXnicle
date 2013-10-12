@@ -106,6 +106,11 @@
   return [self.tag isEqualToString:entry.tag];
 }
 
+- (NSUInteger)hash
+{
+  return [self.tag hash];
+}
+
 + (NSArray*)bibtexEntriesFromString:(NSString*)aString
 {
   //NSLog(@"Getting bibtex entries from [%@]", aString);
