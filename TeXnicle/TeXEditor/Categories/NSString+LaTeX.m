@@ -730,6 +730,7 @@ static NSString *mathModeRegExpr = nil;
 
 - (NSString*)parseArgumentStartingAt:(NSInteger*)loc
 {
+  NSCharacterSet *newLineSet = [NSCharacterSet newlineCharacterSet];
   NSInteger count = *loc;
   NSInteger nameStart = -1;
   NSInteger nameEnd   = -1;
@@ -738,7 +739,7 @@ static NSString *mathModeRegExpr = nil;
     unichar c = [self characterAtIndex:count];
     
     // if we get to a newline without finding an opening brace, stop.
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] && braceCount == 0) {
+    if ([newLineSet characterIsMember:c] && braceCount == 0) {
       break;
     }
     
@@ -768,6 +769,7 @@ static NSString *mathModeRegExpr = nil;
 
 - (NSString*)parseArgumentAroundIndex:(NSInteger*)loc
 {
+  NSCharacterSet *newLineSet = [NSCharacterSet newlineCharacterSet];
   NSInteger count = (*loc) - 1; // start one character before
   NSInteger nameStart = -1;
   NSInteger nameEnd   = -1;
@@ -788,7 +790,7 @@ static NSString *mathModeRegExpr = nil;
   // stop if we hit a newline or a }
   while (count >= 0) {
     unichar c = [self characterAtIndex:count];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c] 
+    if ([newLineSet characterIsMember:c]
         || c == '}' ){
       break;
     }
@@ -809,7 +811,7 @@ static NSString *mathModeRegExpr = nil;
   count = nameStart;  
   while (count < [self length]) {
     unichar c = [self characterAtIndex:count];
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:c]) {
+    if ([newLineSet characterIsMember:c]) {
       break;
     }
     if (c == '}' || c == ',') {
