@@ -29,7 +29,7 @@
 - (void) testStringWithPlaceholdersRestored_01
 {
   
-  NSString *test = @"@replace@";
+  NSString *test = @"some @replace@";
   
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
@@ -38,12 +38,12 @@
   STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 1
-  STAssertTrue([replaced length] == 1, @"Returned string [%@] should have length 1", replaced);
+  STAssertTrue([replaced length] == 6, @"Returned string [%@] should have length 1", replaced);
   
   // it should have an attachment at the first character
   NSRange effRange;
   NSTextAttachment *att = [replaced attribute:NSAttachmentAttributeName
-                                      atIndex:0
+                                      atIndex:5
                                effectiveRange:&effRange];
   
   STAssertTrue(att != nil, @"First character should have an attachment");
@@ -289,7 +289,7 @@
 - (void) testStringPlaceholderWithSpaces
 {
   
-  NSString *test = @"@place holder@";
+  NSString *test = @"a @place holder@";
   
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
@@ -298,12 +298,12 @@
   STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 1
-  STAssertTrue([replaced length] == 1, @"Returned string [%@] should have length 1", replaced);
+  STAssertTrue([replaced length] == 3, @"Returned string [%@] should have length 1", replaced);
   
   // it should have an attachment at the first character
   NSRange effRange;
   NSTextAttachment *att = [replaced attribute:NSAttachmentAttributeName
-                                      atIndex:0
+                                      atIndex:2
                                effectiveRange:&effRange];
   
   STAssertTrue(att != nil, @"First character should have an attachment");
