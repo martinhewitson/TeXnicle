@@ -395,7 +395,9 @@
 
 + (NSString*) placeholderRegexp
 {
-  return @"\\@[[ \t][^\\@\n\\W]]{0,30}[^\\\\]\\@";
+  return @"(?<=[\\A\\W])(\\@[[ \t][^\\@\n\\W]]{0,30}?[^\\\\]\\@)";
+//  return @"[^a-zA-Z]\\@[[ \t][^\\@\n\\W]]{0,30}[^\\\\]\\@";
+//  return @"\\@[[ \t][^\\@\n\\W]]{0,30}[^\\\\]\\@";
 }
 
 - (NSString*) placeholderRegexp
