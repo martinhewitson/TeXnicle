@@ -1,10 +1,9 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\rtf1\ansi\ansicpg1252\cocoartf1265
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
 \red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red0\green110\blue173;\red80\green0\blue120;
-\red120\green4\blue0;\red17\green150\blue0;\red48\green107\blue255;\red255\green0\blue17;\red63\green110\blue116;
-}
+\red120\green4\blue0;\red17\green150\blue0;\red48\green107\blue255;\red63\green110\blue116;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\margl1440\margr1440\vieww24720\viewh16220\viewkind0
@@ -270,27 +269,18 @@ And I want to quickly remove an "i" in all commands to lower them a level. Howev
 \
 It would be nice to be able to set a delay on the autocomplete boxes, such that if you want to do quick repetitive actions, you do not have to escape autocomplete everytime.\cf0 \
 \
-\pard\pardeftab720\sa280
-
-\f1 \cf13 I suspect a bug in syntax highlighting in the case where < (lower than) and > (grater than) are used in inline math. Example:\uc0\u8232 \u8232 Some text $a<b$ words $a>b$ other text\u8232 \u8232 results in RED between order symbols.
-\f0 \cf0 \
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 \
-Version 2.2.8\
--------------\
-\
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 + Added a 'New file' menu item to the project tree context menu.\
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 + Bug fix: if there is no blank line after an \\input\{\} command then it was ignored in the document outline. This is now fixed.\
-+ Fixed bug where an error popup would appear when changing the name of a file/folder in the project tree if the existing name was deleted prior to entering a new name.\
-+ Fixed bug which stopped the editor find bar from functioning properly in projects (cmd-f). \
 \
 Version 2.2.7\
 -------------\
 \
++ Improved syntax highlighting support for markup elements (<>, <<>>, ...).\
++ Added a 'New file' menu item to the project tree context menu.\
++ Bug fix: if there is no blank line after an \\input\{\} command then it was ignored in the document outline. This is now fixed.\
++ Fixed bug where an error popup would appear when changing the name of a file/folder in the project tree if the existing name was deleted prior to entering a new name.\
++ Fixed bug which stopped the editor find bar from functioning properly in projects (cmd-f). Actually, this is only partially true: there is a bug in Apple's code here that's being investigated. Due to this bug, on some occasions, an exception will be raised in the error logs.\
 + Fixed a bug which stopped dragging and dropping an image file from the Finder to the editor from working properly in the standalone editor.\
-\
++ Optimised performance when using large bib files.\
++ Improved placeholder parsing.\
 \
 Version 2.2.6\
 -------------\
@@ -325,7 +315,7 @@ Version 2.2.2\
 -------------\
 \
 + Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.\
-+ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf14 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
++ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf13 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
 + Small bug fixes in theme editing UI.\
 + Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.\
 \

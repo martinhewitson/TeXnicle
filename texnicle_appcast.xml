@@ -6,13 +6,40 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
 
+<!-- Version 2.2.7 -->
+<item>
+  <title>Version 2.2.7 (build 1231)</title>
+  <description><![CDATA[
+    <h2>TeXnicle 2.2.7</h2>
+    <p>
+    <ul>
+    <li>Improved syntax highlighting support for markup elements (<>, <<>>, ...).</li>
+    <li>Added a 'New file' menu item to the project tree context menu.</li>
+    <li>Bug fix: if there is no blank line after an \input{} command then it was ignored in the document outline. This is now fixed.</li>
+    <li>Fixed bug where an error popup would appear when changing the name of a file/folder in the project tree if the existing name was deleted prior to entering a new name.</li>
+    <li>Fixed bug which stopped the editor find bar from functioning properly in projects (cmd-f). Actually, this is only partially true: there is a bug in Apple's code here that's being investigated. Due to this bug, on some occasions, an exception will be raised in the error logs.</li>
+    <li>Fixed a bug which stopped dragging and dropping an image file from the Finder to the editor from working properly in the standalone editor.</li>
+    <li>Optimised performance when using large bib files.</li>
+    <li>Improved placeholder parsing.</li>
+    </ul>
+    </p>
+  ]]></description>
+  <pubDate>16th October 2013</pubDate>
+  <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.7.zip"
+  sparkle:shortVersionString="2.2.7"
+  sparkle:version="1231"
+  length="20291611"
+  type="application/octet-stream"
+  sparkle:dsaSignature="MCwCFF2rjBk57sXHsomlL5b84a9fvXeSAhRcruqPhiKfHi3i5aMCQea7fGy+ZQ=="
+  />
+</item>
+
 <!-- Version 2.2.6 -->
 <item>
   <title>Version 2.2.6 (build 1063)</title>
   <description><![CDATA[
     <h2>TeXnicle 2.2.6</h2>
     <p>
-    Bug fixes:
     <ul>
     <li>Added preference (in Typesetting) to sync the pdf when selecting a section in the document outline.</li>
     <li>Improved editor performance.</li>
