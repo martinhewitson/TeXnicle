@@ -35,6 +35,37 @@
 
 @implementation TPSyntaxChecker
 
++ (void) updateErrorList
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *errors = [TPSyntaxChecker defaultSyntaxErrors];
+  NSMutableArray *currentErrors = [[defaults valueForKey:TPCheckSyntaxErrors] mutableCopy];
+  for (NSDictionary *err in errors) {
+    NSNumber *code = err[@"code"];
+    // check for this in the existing codes
+    BOOL foundIt = NO;
+    NSMutableDictionary *currentErr = nil;
+    NSInteger idx = 0;
+    for (NSDictionary *eerr in currentErrors) {
+      if ([eerr[@"code"] isEqualToNumber:code]) {
+        foundIt = YES;
+        currentErr = [eerr mutableCopy];
+        break;
+      }
+      idx++;
+    }
+    
+    if (currentErr == nil) {
+      [currentErrors addObject:err];
+    } else {
+      // ensure we have up-to-date descriptions
+      [currentErr setValue:err[@"message"] forKey:@"message"];
+      [currentErrors replaceObjectAtIndex:idx withObject:currentErr];
+    }
+  }
+  
+  [defaults setValue:currentErrors forKey:TPCheckSyntaxErrors];
+}
 
 + (NSArray*) defaultSyntaxErrors
 {
@@ -342,7 +373,14 @@
   [error setValue:@43 forKey:@"code"];
   [error setValue:@"‘X’ is normally not followed by ‘Y’." forKey:@"message"];
   [errors addObject:error];   
-  
+
+  // Warning 44
+  error = [NSMutableDictionary dictionary];
+  [error setValue:@NO forKey:@"check"];
+  [error setValue:@44 forKey:@"code"];
+  [error setValue:@"A pattern you specified in using 'UseWarnRegex' in the 'chktexrc' file, has been found." forKey:@"message"];
+  [errors addObject:error];
+
   return errors;
 }
 

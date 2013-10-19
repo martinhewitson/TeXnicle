@@ -49,6 +49,7 @@
 @property (copy) NSString *output;
 @property (strong) NSArray *errors;
 
++ (void) updateErrorList;
 + (NSArray*) defaultSyntaxErrors;
 
 - (void) tearDown;

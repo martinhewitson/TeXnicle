@@ -123,6 +123,8 @@ NSString * const TPSyncPDFAfterCompile = @"TPSyncPDFAfterCompile";
 NSString * const TPSyncPDFAfterOutlineSelection = @"TPSyncPDFAfterOutlineSelection";
 NSString * const TPAutoTrashAfterCompile = @"TPAutoTrashAfterCompile";
 
+NSString * const TPDoubleClickOpensEditorWindow = @"TPDoubleClickOpensEditorWindow";
+
 NSString * const TEDocumentBackgroundColor = @"TEDocumentBackgroundColor";
 NSString * const TEDocumentBackgroundMarginColor = @"TEDocumentBackgroundMarginColor";
 NSString * const TEDocumentCursorColor = @"TEDocumentCursorColor";
@@ -298,7 +300,8 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   [defaultValues setValue:@NO forKey:TPSyncPDFAfterOutlineSelection];
   [defaultValues setValue:@NO forKey:OpenConsoleOnTypeset];
   [defaultValues setValue:@NO forKey:TPAutoTrashAfterCompile];
-
+  [defaultValues setValue:@YES forKey:TPDoubleClickOpensEditorWindow];
+  
   // console
   defaultValues[TEConsoleFont] = [NSArchiver archivedDataWithRootObject:[NSFont userFixedPitchFontOfSize:12.0]];  
 	
@@ -551,6 +554,11 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
     [TPThemeManager installThemes];
     [TPThemeManager migrateDefaultsToTheme];
     TPThemeManager *themeManager = [TPThemeManager sharedManager];
+    
+    // update syntax check errors
+    [TPSyntaxChecker updateErrorList];
+    
+    
     self.didSetup = YES;
   }
 }
