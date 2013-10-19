@@ -93,6 +93,7 @@ extern NSString * const TPClearConsoleOnCompile;
 extern NSString * const TPSyncPDFAfterCompile;
 extern NSString * const TPSyncPDFAfterOutlineSelection;
 extern NSString * const TPAutoTrashAfterCompile;
+extern NSString * const TPDoubleClickOpensEditorWindow;
 
 extern NSString * const TEDocumentBackgroundMarginColor;
 extern NSString * const TEDocumentBackgroundColor;

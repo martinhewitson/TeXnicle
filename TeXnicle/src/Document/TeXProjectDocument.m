@@ -1718,18 +1718,21 @@
 
 - (IBAction) openStandaloneWindow:(id)sender
 {
-	NSArray *selected = [self.projectItemTreeController selectedObjects];
-	for (ProjectItemEntity *item in selected) {
-		if ([item isKindOfClass:[FileEntity class]]) {			
-			if ([[item valueForKey:@"isText"] boolValue]) {
-        [(FileEntity*)item increaseActiveCount];
-				[self.openDocuments standaloneWindowForFile:(FileEntity*)item];
-			} else {				
-				// pass the opening of the file to the system
-				[[NSWorkspace sharedWorkspace] openFile:[item valueForKey:@"pathOnDisk"]];				
-			}
-		}
-	}
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([[defaults valueForKey:TPDoubleClickOpensEditorWindow] boolValue]) {
+    NSArray *selected = [self.projectItemTreeController selectedObjects];
+    for (ProjectItemEntity *item in selected) {
+      if ([item isKindOfClass:[FileEntity class]]) {
+        if ([[item valueForKey:@"isText"] boolValue]) {
+          [(FileEntity*)item increaseActiveCount];
+          [self.openDocuments standaloneWindowForFile:(FileEntity*)item];
+        } else {
+          // pass the opening of the file to the system
+          [[NSWorkspace sharedWorkspace] openFile:[item valueForKey:@"pathOnDisk"]];
+        }
+      }
+    }
+  }
 }
 
 - (IBAction) findInProject:(id)sender
