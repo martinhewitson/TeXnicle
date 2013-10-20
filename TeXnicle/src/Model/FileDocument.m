@@ -130,16 +130,18 @@
   NSDate *lastEdit = [self.file valueForKey:@"lastEditDate"];
   
   // if the last edit is prior to the load, then we didn't edit so far
-  if ([loaded compare:lastEdit] == NSOrderedAscending) {
-//    NSLog(@"Edit date later than loaded date");
-    [self.file setValue:@YES forKey:@"hasEdits"];
-    [self.file setValue:[NSDate date] forKey:@"lastEditDate"];
-  } else {
-//    NSLog(@"Edit date earlier than loaded date");
-    [self.file setValue:@NO forKey:@"hasEdits"];
-    [self.file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
+  if (self.file != nil) {
+    if ([loaded compare:lastEdit] == NSOrderedAscending) {
+      //    NSLog(@"Edit date later than loaded date");
+      [self.file setValue:@YES forKey:@"hasEdits"];
+      [self.file setValue:[NSDate date] forKey:@"lastEditDate"];
+    } else {
+      //    NSLog(@"Edit date earlier than loaded date");
+      [self.file setValue:@NO forKey:@"hasEdits"];
+      [self.file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
+    }
   }
-  	
+  
 	// update all views
 	for (NSLayoutManager *layout in [self.textStorage layoutManagers]) {
 		for (NSTextContainer *tc in [layout textContainers]) {
