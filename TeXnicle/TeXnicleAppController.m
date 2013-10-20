@@ -64,6 +64,8 @@ NSString * const TEAutomaticallyShowBeginCompletionList = @"TEAutomaticallyShowB
 
 NSString * const TPShouldShowStartupScreenOnClosingLastDocument = @"TPShouldShowStartupScreenOnClosingLastDocument";
 
+NSString * const TPUseCmdWForTabClosing = @"TPUseCmdWForTabClosing";
+
 NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEndToBeginStatement";
 NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
 NSString * const TEAutomaticallyInsertClosingMath = @"TEAutomaticallyInsertClosingMath";
@@ -261,6 +263,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   
   // app
   defaultValues[TPShouldShowStartupScreenOnClosingLastDocument] = @YES;
+  defaultValues[TPUseCmdWForTabClosing] = @YES;
   
   // check syntax
   defaultValues[TPCheckSyntax] = @YES;

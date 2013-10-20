@@ -31,7 +31,6 @@
 // preferences
 
 
-
 #define LargeTextWidth  1e7
 #define LargeTextHeight 1e7
 
@@ -70,6 +69,7 @@ extern NSString * const TEAutomaticallyReplaceOpeningDoubleQuote;
 extern NSString * const TEAutomaticallySkipClosingBrackets;
 
 extern NSString * const TPShouldShowStartupScreenOnClosingLastDocument;
+extern NSString * const TPUseCmdWForTabClosing;
 
 extern NSString * const TPCheckSyntax;
 extern NSString * const TPCheckSyntaxErrors;

@@ -457,8 +457,23 @@
                         </binding>
                     </connections>
                 </button>
+                <button id="0Av-XE-zVm">
+                    <rect key="frame" x="17" y="94" width="572" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Use cmd-w to close tabs in project editor" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="jMt-U0-lQN">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="26" name="value" keyPath="values.TPUseCmdWForTabClosing" id="6KS-jN-YLE">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
                 <popUpButton verticalHuggingPriority="750" id="583">
-                    <rect key="frame" x="17" y="47" width="208" height="26"/>
+                    <rect key="frame" x="17" y="29" width="208" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="586" id="584">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -476,7 +491,7 @@
                     </connections>
                 </popUpButton>
                 <textField verticalHuggingPriority="750" id="589">
-                    <rect key="frame" x="227" y="53" width="138" height="17"/>
+                    <rect key="frame" x="227" y="35" width="138" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default File Encoding" id="590">
                         <font key="font" metaFont="system"/>
@@ -499,7 +514,7 @@
                     <font key="titleFont" metaFont="system"/>
                 </box>
                 <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="780">
-                    <rect key="frame" x="12" y="84" width="576" height="5"/>
+                    <rect key="frame" x="12" y="66" width="576" height="5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

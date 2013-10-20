@@ -531,6 +531,11 @@
              name:TPMetadataManagerDidEndUpdateNotification
            object:self.metadataManager];
   
+  [nc addObserver:self
+         selector:@selector(handleUserDefaultsChanged:)
+             name:NSUserDefaultsDidChangeNotification
+           object:nil];
+  
   [self.statusViewController setFilenameText:@""];
   [self.statusViewController setEditorStatusText:@"No Selection."];
   [self.statusViewController setShowRevealButton:NO];
@@ -653,6 +658,13 @@
   [self clearTabHistory];
 }
 
+- (void) handleUserDefaultsChanged:(NSNotification*)aNote
+{
+  if ([self.mainWindow isKeyWindow]) {
+    [self specialiseCloseMenu:YES];
+  }
+}
+
 - (void) windowDidBecomeKey:(NSNotification *)notification
 {
 //  NSLog(@"Window did become key");
@@ -665,6 +677,36 @@
       }
     }
   }
+  
+  // adjust the close and close tab menus
+  [self specialiseCloseMenu:YES];
+}
+
+- (void) specialiseCloseMenu:(BOOL)state
+{
+  NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
+  NSMenu *fileMenu = [[mainMenu itemAtIndex:1] submenu];
+  NSMenuItem *closeMenuItem = [fileMenu itemWithTag:1090];
+  NSMenuItem *closeTabMenuItem = [fileMenu itemWithTag:1110];
+  
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+  if (state && [[defaults valueForKey:TPUseCmdWForTabClosing] boolValue]) {
+    [closeMenuItem setKeyEquivalent:@"W"];
+    [closeTabMenuItem setKeyEquivalent:@"w"];
+  } else if ([self.mainWindow isKeyWindow]) {
+    [closeMenuItem setKeyEquivalent:@"w"];
+    [closeTabMenuItem setKeyEquivalent:@"W"];
+  } else {
+    [closeMenuItem setKeyEquivalent:@"w"];
+    [closeTabMenuItem setKeyEquivalent:@""];
+  }
+}
+
+- (void) windowDidResignKey:(NSNotification *)notification
+{
+  // reset close menu
+  [self specialiseCloseMenu:NO];
 }
 
 
@@ -2677,6 +2719,8 @@
 - (BOOL) validateMenuItem:(NSMenuItem *)menuItem
 {
   
+  //NSLog(@"%@: Menu %ld: %@", self, [menuItem tag], [menuItem title]);
+  
 	NSInteger tag = [menuItem tag];
   
   // find text selection in pdf
@@ -2864,6 +2908,12 @@
       return NO;
     }
   }
+  
+//  // close tab
+//  if (tag == 7060) {
+//    [menuItem setKeyEquivalent:@"w"];
+//    [menuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+//  }
   
 	return [super validateMenuItem:menuItem];
 }

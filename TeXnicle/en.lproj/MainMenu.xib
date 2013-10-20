@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4511" systemVersion="13A598" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4511"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
@@ -212,10 +212,24 @@
                             <menuItem isSeparatorItem="YES" id="670">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Close" keyEquivalent="w" id="562">
+                            <menuItem title="Close" tag="1090" keyEquivalent="w" id="562">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="563"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Close Tab" tag="1110" keyEquivalent="W" id="Kvs-rc-c0g">
+                                <connections>
+                                    <action selector="closeCurrentTab:" target="-1" id="zpP-bz-aWY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Close All Tabs" keyEquivalent="W" id="duj-3a-92r">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="closeAllTabs:" target="-1" id="bys-bR-QRL"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="XLK-sY-tZh">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Save" keyEquivalent="s" id="75">
                                 <connections>
@@ -963,17 +977,6 @@ CQ
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="744"/>
-                            <menuItem title="Close Tab" keyEquivalent="W" id="73">
-                                <connections>
-                                    <action selector="closeCurrentTab:" target="-1" id="564"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Close All Tabs" keyEquivalent="W" id="741">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="closeAllTabs:" target="-1" id="742"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Select Next Tab" keyEquivalent="}" id="664">
                                 <connections>
                                     <action selector="selectNextTab:" target="-1" id="665"/>
