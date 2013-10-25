@@ -708,6 +708,11 @@ NSString *kMMTabBarButtonOberserverContext = @"MMTabBarView.MMTabBarButton.Obser
 #pragma mark -
 #pragma mark Private Methods
 
+- (void) showCloseButton
+{
+  
+}
+
 - (void)_commonInit {
   
   NSRect closeButtonRect = [self _closeButtonRectForBounds:[self bounds]];

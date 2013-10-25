@@ -97,6 +97,7 @@ typedef enum MMTabStateMask : NSUInteger {
 #pragma Close Button Support
 
 - (MMRolloverButton *)closeButton;
+- (void) showCloseButton;
 - (BOOL)shouldDisplayCloseButton;
 - (NSImage *)closeButtonImageOfType:(MMCloseButtonImageType)type;
 

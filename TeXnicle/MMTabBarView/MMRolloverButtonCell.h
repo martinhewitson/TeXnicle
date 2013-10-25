@@ -32,4 +32,6 @@ typedef enum MMRolloverButtonType : NSUInteger
 - (void)mouseEntered:(NSEvent *)event;
 - (void)mouseExited:(NSEvent *)event;
 
+- (void)simulateMouseHovered;
+
 @end

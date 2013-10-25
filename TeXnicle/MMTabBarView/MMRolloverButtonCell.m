@@ -87,6 +87,11 @@
     area = nil;
 }
 
+- (void)simulateMouseHovered
+{
+  _mouseHovered = YES;
+}
+
 - (void)mouseEntered:(NSEvent *)event {
 
     if (_simulateClickOnMouseHovered && [event modifierFlags] & NSAlternateKeyMask) {
