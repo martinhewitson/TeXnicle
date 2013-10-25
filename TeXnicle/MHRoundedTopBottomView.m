@@ -39,6 +39,7 @@
   CGFloat lineWidth = 2.0f;
   NSRect bounds = [self bounds];
   
+  
   NSBezierPath *path = [NSBezierPath bezierPath];
   CGFloat inset = lineWidth/2.0;
   
@@ -55,16 +56,22 @@
   [path closePath];
   //  [[NSColor controlLightHighlightColor] set];
   //  [path fill];
+  
+  [[NSColor whiteColor] set];
+  [path fill];
+  
+  
   [path setLineWidth:lineWidth];
   [[NSColor lightGrayColor] set];
   [path stroke];
   
-  if (!aGradient) {
-		aGradient = [[NSGradient alloc]
-                 initWithStartingColor:[NSColor colorWithDeviceRed:0.96 green:0.96 blue:0.96 alpha:1.0]
-                 endingColor:[NSColor lightGrayColor]];
-	}
-	[aGradient drawInBezierPath:path angle:270];
+  
+//  if (!aGradient) {
+//		aGradient = [[NSGradient alloc]
+//                 initWithStartingColor:[NSColor colorWithDeviceRed:0.96 green:0.96 blue:0.96 alpha:1.0]
+//                 endingColor:[NSColor lightGrayColor]];
+//	}
+//	[aGradient drawInBezierPath:path angle:270];
   
   
   // Drawing code here.
