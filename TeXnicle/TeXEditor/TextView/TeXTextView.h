@@ -45,6 +45,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 @optional
 -(id)project;
 -(NSArray*)listOfCitations;
+-(NSArray*)listOfEnvironments;
 -(NSArray*)listOfReferences;
 -(NSArray*)listOfTeXFilesPrependedWith:(NSString*)prefix;
 -(NSArray*)listOfCommands;

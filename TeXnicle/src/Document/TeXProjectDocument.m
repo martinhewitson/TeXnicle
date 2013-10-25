@@ -56,6 +56,7 @@
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
 #import "TPNewCommand.h"
+#import "TPNewEnvironment.h"
 #import "FileDocument.h"
 #import "TPRegularExpression.h"
 #import "NSResponder+TeXnicle.h"
@@ -1573,7 +1574,7 @@
   _selectedItem = item;
   [self renameSelectedItem];
 }
-	
+
 - (void) renameSelectedItem
 {
 	// get the name of the item at this row
@@ -2212,6 +2213,19 @@
   
   NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
   return [citationSet sortedArrayUsingDescriptors:@[desc]];
+}
+
+-(NSArray*)listOfEnvironments
+{
+  NSMutableArray *environs = [NSMutableArray array];
+  
+  for (TPFileMetadata *file in self.fileMetadata) {
+    for (TPNewEnvironment *c in file.userNewEnvironments) {
+      [environs addObject:c.argument];
+    }
+  }
+  
+  return environs;
 }
 
 -(NSArray*)listOfCommands

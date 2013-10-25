@@ -644,6 +644,15 @@
   return nil;
 }
 
+-(NSArray*)listOfEnvironments
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(listOfEnvironments)]) {
+    return [self.delegate performSelector:@selector(listOfEnvironments)];
+  }
+  
+  return nil;
+}
+
 -(NSArray*)listOfCommands
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(listOfCommands)]) {

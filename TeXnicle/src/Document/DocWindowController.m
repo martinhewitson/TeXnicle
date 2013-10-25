@@ -253,6 +253,12 @@
   return [self.mainDocument listOfCommands];
 }
 
+-(NSArray*)listOfEnvironments
+{
+  return [self.mainDocument listOfEnvironments];
+}
+
+
 - (NSArray*) listOfReferences
 {
 	return [self.mainDocument listOfReferences];

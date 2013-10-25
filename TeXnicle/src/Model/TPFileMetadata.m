@@ -111,6 +111,7 @@
     self.needsUpdate = NO;
     self.lastUpdate = [NSDate date];
     self.userNewCommands = self.currentOperation.commands;
+    self.userNewEnvironments = self.currentOperation.environments;
     self.citations = self.currentOperation.citations;
     self.labels = self.currentOperation.labels;
     

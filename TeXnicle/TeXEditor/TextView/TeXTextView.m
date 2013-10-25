@@ -2358,8 +2358,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) showListOfBeginCompletions
 {
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSArray *list = [defaults valueForKey:TEBeginCommands];
+  if ([self.delegate respondsToSelector:@selector(listOfEnvironments)]) {
+    list = [list arrayByAddingObjectsFromArray:[self.delegate performSelector:@selector(listOfEnvironments)]];
+  }
+  
   // filter the list by existing characters
   NSString *arg = [self currentArgument];
   if (arg != nil && [arg length] > 0) {
@@ -2521,7 +2526,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	NSLog(@"       or command: %@", command);
   //	NSLog(@"       or arg: %@", arg);
   
-	id delegate = [self delegate];
   
   //	NSLog(@"Delegate: %@", delegate);
   
@@ -2538,8 +2542,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     // get list of user defaults commands
     list = [list arrayByAddingObjectsFromArray:[self userDefaultCommands]];
     
-    if ([delegate respondsToSelector:@selector(listOfCommands)]) {
-      list = [list arrayByAddingObjectsFromArray:[delegate listOfCommands]];
+    if ([self.delegate respondsToSelector:@selector(listOfCommands)]) {
+      list = [list arrayByAddingObjectsFromArray:[self.delegate performSelector:@selector(listOfCommands)]];
     }
     if ([command length]>1) {
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", command];

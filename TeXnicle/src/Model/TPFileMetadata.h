@@ -31,6 +31,7 @@
 
 // products
 @property (strong) NSArray *userNewCommands;
+@property (strong) NSArray *userNewEnvironments;
 @property (strong) NSArray *citations;
 @property (strong) NSArray *labels;
 @property (strong) NSArray *syntaxErrors;

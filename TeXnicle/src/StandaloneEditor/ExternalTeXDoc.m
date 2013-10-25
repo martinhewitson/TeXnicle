@@ -1865,6 +1865,22 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 	return citations;	
 }
 
+-(NSArray*)listOfEnvironments
+{
+  NSMutableArray *environs = [NSMutableArray array];
+  
+  // consolidated main file
+  NSString *allText = [self.texEditorViewController.textView string];
+  NSArray *newEnvironments = [TPRegularExpression stringsMatching:@"\\\\newenvironment\\{[a-zA-Z]*\\}" inText:allText];
+  
+  for (NSString *newEnviron in newEnvironments) {
+    [environs addObject:[newEnviron argument]];
+  }
+  
+  return environs;
+}
+
+
 -(NSArray*)listOfCommands
 {
   NSMutableArray *commands = [NSMutableArray array];

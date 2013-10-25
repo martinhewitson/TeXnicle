@@ -17,6 +17,7 @@
 @property (strong, nonatomic) TPFileMetadata *file;
 
 // metadata
+@property (strong, nonatomic) NSArray *environments;
 @property (strong, nonatomic) NSArray *commands;
 @property (strong, nonatomic) NSArray *citations;
 @property (strong, nonatomic) NSArray *syntaxErrors;

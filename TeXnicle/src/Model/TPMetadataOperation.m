@@ -12,6 +12,7 @@
 #import "FileDocument.h"
 #import "BibliographyEntry.h"
 #import "TPNewCommand.h"
+#import "TPNewEnvironment.h"
 #import "TPLabel.h"
 #import "TPRegularExpression.h"
 
@@ -41,6 +42,7 @@
       return;
     
     NSMutableArray *newCommands = [[NSMutableArray alloc] init];
+    NSMutableArray *newEnvironments = [[NSMutableArray alloc] init];
     NSMutableArray *newCitations = [[NSMutableArray alloc] init];
     NSMutableArray *newLabels = [[NSMutableArray alloc] init];
     
@@ -71,6 +73,15 @@
       for (NSString *str in parsedCommands) {
         TPNewCommand *c = [[TPNewCommand alloc] initWithSource:str];
         [newCommands addObject:c];
+        if ([self isCancelled]) return;
+      }
+      
+      //-------------- get environments
+      if ([self isCancelled]) return;
+      NSArray *parsedEnvironments = [TPRegularExpression stringsMatching:@"\\\\newenvironment\\{[a-zA-Z]*\\}" inText:self.file.text];
+      for (NSString *str in parsedEnvironments) {
+        TPNewEnvironment *c = [[TPNewEnvironment alloc] initWithSource:str];
+        [newEnvironments addObject:c];
         if ([self isCancelled]) return;
       }
       
@@ -130,6 +141,7 @@
     
     if ([self isCancelled]) return;
     self.commands = newCommands;
+    self.environments = newEnvironments;
     self.citations = newCitations;
     self.labels = newLabels;
     
