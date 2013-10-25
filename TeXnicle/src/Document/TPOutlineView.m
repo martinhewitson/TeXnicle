@@ -330,10 +330,11 @@
   selectedItem = nil;
 }
 
+
 - (IBAction) renameItem:(id)sender
 {
-	if ([self.mainDocument respondsToSelector:@selector(renameItemAtRow:)]) {		
-		[self.mainDocument renameItemAtRow:selectedRow];
+	if ([self.mainDocument respondsToSelector:@selector(renameItem:)]) {
+		[self.mainDocument renameItem:selectedItem];
 	}
   selectedItem = nil;
 }

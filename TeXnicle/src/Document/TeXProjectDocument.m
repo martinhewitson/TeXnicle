@@ -1404,7 +1404,6 @@
     [_treeActionMenu addItem:item];
 
   } else if ([selectedItems count] == 1) {
-    
     _selectedItem = selectedItems[0];
     _selectedRow = [self.projectOutlineView selectedRow];
     NSString *itemName = [_selectedItem valueForKey:@"name"];
@@ -1450,7 +1449,7 @@
       
       // rename selected
       NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Rename \u201c%@\u201d", itemName]
-                                        action:@selector(renameItem:)
+                                        action:@selector(renameSelectedItem)
                                  keyEquivalent:@""];
       [item setTarget:self];
       [_treeActionMenu addItem:item];
@@ -1554,11 +1553,6 @@
 	[ws selectFile:fullpath inFileViewerRootedAtPath:[fullpath stringByDeletingLastPathComponent]];
 }
 
-- (IBAction) renameItem:(id)sender
-{
-  [self renameItemAtRow:_selectedRow];
-}
-
 
 - (IBAction) removeItem:(id)sender
 {
@@ -1574,14 +1568,16 @@
 #pragma mark -
 #pragma mark Rename project items
 
-- (void) renameItemAtRow:(NSInteger)row
+- (IBAction) renameItem:(ProjectItemEntity*)item
 {
-	NSArray *items = [self.projectItemTreeController flattenedContent];
+  _selectedItem = item;
+  [self renameSelectedItem];
+}
 	
+- (void) renameSelectedItem
+{
 	// get the name of the item at this row
-	_itemBeingRenamed = row;
-	
-	NSString *oldName = [items[row] valueForKey:@"name"];
+	NSString *oldName = [_selectedItem valueForKey:@"name"];
 	[_renameField setStringValue:oldName];
 	
 	// show the sheet
@@ -1621,14 +1617,13 @@
 	[[self managedObjectContext] processPendingChanges];
 	[[[self managedObjectContext] undoManager] disableUndoRegistration];
 	
-	NSArray *items = [self.projectItemTreeController flattenedContent];
-	ProjectItemEntity *item = items[_itemBeingRenamed];
+	ProjectItemEntity *item = _selectedItem;
 	
 	[item setValue:newName forKey:@"name"];
 	
 	[[self managedObjectContext] processPendingChanges];
 	[[[self managedObjectContext] undoManager] enableUndoRegistration];
-	//	[self updateChangeCount:NSChangeDone];
+	[self updateChangeCount:NSChangeDone];
 	
 	// notify all listeners that a file was renamed
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

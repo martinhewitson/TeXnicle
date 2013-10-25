@@ -154,7 +154,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 #pragma mark -
 #pragma mark Rename project items
 
-- (void) renameItemAtRow:(NSInteger)row;
+//- (void) renameItemAtRow:(NSInteger)row;
 - (IBAction) endRenameSheet:(id)sender;
 - (void) renameItemTo:(NSString*)newName;
 

@@ -251,7 +251,9 @@
       }
 
       // move to a tmp file, then to the new file
-      NSDateFormatter *formatter = [[NSDateFormatter alloc] initWithDateFormat:@"yyyymmdd_HHMM" allowNaturalLanguage:YES];
+      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+      [formatter setDateFormat:@"yyyymmdd_HHMM"];
+
       NSString *append = [formatter stringFromDate:[NSDate date]];
       NSString *tmpFile = [oldPath stringByAppendingPathExtension:append];
 			BOOL success = [fm moveItemAtPath:oldPath toPath:tmpFile error:&error];
