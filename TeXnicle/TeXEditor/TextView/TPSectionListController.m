@@ -35,12 +35,15 @@
 #import "externs.h"
 #import "NSArray+Color.h"
 #import "MHLineNumber.h"
+#import "TPDocumentSectionManager.h"
+#import "TPSectionTemplate.h"
 
 NSString *TPsectionListPopupTitle = @"Jump to section...";
 
 @interface TPSectionListController ()
 
 @property (nonatomic, strong) NSTimer *timer;
+@property (strong) 	NSMutableArray *sections;
 
 @end
 
@@ -63,22 +66,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     whiteSpace = [NSCharacterSet whitespaceCharacterSet];
     newlines = [NSCharacterSet newlineCharacterSet];
     
-		sections = [[NSMutableArray alloc] init];
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"section" isTeX:YES color:[[defaults valueForKey:TPOutlineSectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subsubsection" isTeX:YES color:[[defaults valueForKey:TPOutlineSubsubsectionColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"paragraph" isTeX:YES color:[[defaults valueForKey:TPOutlineParagraphColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"subparagraph" isTeX:YES color:[[defaults valueForKey:TPOutlineSubparagraphColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"part" isTeX:YES color:[[defaults valueForKey:TPOutlinePartColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"chapter" isTeX:YES color:[[defaults valueForKey:TPOutlineChapterColor] colorValue]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"@.*\\{" isTeX:YES color:[NSColor magentaColor]]];
-
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%TABLE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%LIST" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
-    [sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%EQUATION" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+    [self updateSectionTemplates];
     
 	}
 	return self;
@@ -107,6 +95,11 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 				 selector:@selector(calculateSections:)
 						 name:NSPopUpButtonWillPopUpNotification
 					 object:self.popupMenu];
+  
+  [nc addObserver:self
+         selector:@selector(updateSectionTemplates)
+             name:TPThemeSelectionChangedNotification
+           object:nil];
 
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                 target:self
@@ -212,6 +205,23 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	
 }
 
+- (void) updateSectionTemplates
+{
+  self.sections = [[NSMutableArray alloc] init];
+  
+  // make from shared section managed
+  TPDocumentSectionManager *sectionManager = [TPDocumentSectionManager sharedSectionManager];
+  for (TPSectionTemplate *template in sectionManager.templates) {
+    [self.sections addObject:[[TPSectionListSection alloc] initWithTag:template.name isTeX:YES color:template.color]];
+  }
+  
+  [self.sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%MARK" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+  [self.sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%FIGURE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+  [self.sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%TABLE" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+  [self.sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%LIST" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+  [self.sections addObject:[[TPSectionListSection alloc] initWithTag:@"\%\%EQUATION" isTeX:NO isMarker:YES color:[NSColor lightGrayColor]]];
+  
+}
 
 - (void)fillSectionMenu
 {
@@ -253,6 +263,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
     [self.popupMenu setNeedsDisplay:YES];
 		return;
 	}
+  
 	
   NSString *lineFormat = @"%ld\t";
   NSRange sel = [self.textView selectedRange];
@@ -266,7 +277,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
   
 	// look for each section tag
   if ([[defaults valueForKey:TEJumpBarShowSections] boolValue] == YES) {
-    for (TPSectionListSection *section in sections) {
+    for (TPSectionListSection *section in self.sections) {
       NSString *tag = section.tag;
       NSString *regexp = section.regexp;
       BOOL isMarker = section.isMarker;
@@ -351,7 +362,7 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
 	}
   
   if ([[defaults valueForKey:TEJumpBarShowMarks] boolValue] == YES) {
-    for (TPSectionListSection *section in sections) {
+    for (TPSectionListSection *section in self.sections) {
       NSString *tag = section.tag;
       NSString *regexp = section.regexp;
       BOOL isMarker = section.isMarker;

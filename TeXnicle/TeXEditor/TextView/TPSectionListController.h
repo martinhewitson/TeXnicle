@@ -35,7 +35,6 @@
 
 @interface TPSectionListController : NSObject {
 @private
-	NSMutableArray *sections;
 	NSMenu *addMarkerActionMenu;
   NSCharacterSet *whiteSpace;
   NSCharacterSet *newlines;
