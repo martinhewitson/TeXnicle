@@ -129,7 +129,6 @@
 		252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121B162167490041B2BE /* MHControlsTabBarController.xib */; };
 		252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121E16216C460041B2BE /* MHInfoTabBarController.xib */; };
 		252E12231621728F0041B2BE /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E12221621728F0041B2BE /* TeXnicle.icns */; };
-		252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E122416217B1D0041B2BE /* TeXnicle_4.icns */; };
 		252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
 		252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
 		252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
@@ -141,6 +140,7 @@
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
 		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
 		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
+		2536A4CC18143CBC00C11DDB /* TPNewEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2536A4CB18143CBC00C11DDB /* TPNewEnvironment.m */; };
 		253776D5168382A000945573 /* xelatexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 253776D4168382A000945573 /* xelatexmk.engine */; };
 		253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */; };
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
@@ -173,6 +173,7 @@
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
 		2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */; };
+		25487E48181645B700C0D61C /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25487E47181645B600C0D61C /* TeXnicle.icns */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
 		254C1E0B14F382B400925515 /* TPProjectTemplateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */; };
@@ -842,7 +843,6 @@
 		252E121B162167490041B2BE /* MHControlsTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHControlsTabBarController.xib; sourceTree = "<group>"; };
 		252E121E16216C460041B2BE /* MHInfoTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MHInfoTabBarController.xib; sourceTree = "<group>"; };
 		252E12221621728F0041B2BE /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
-		252E122416217B1D0041B2BE /* TeXnicle_4.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle_4.icns; sourceTree = "<group>"; };
 		252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile7_reformatted.tex; sourceTree = "<group>"; };
 		252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile7.tex; sourceTree = "<group>"; };
 		252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile8_reformatted.tex; sourceTree = "<group>"; };
@@ -857,6 +857,8 @@
 		253312E615B6FF3500F9FD00 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		253312ED15B7028000F9FD00 /* texnicle_appcast.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = texnicle_appcast.xml; sourceTree = "<group>"; };
 		253312EE15B7086C00F9FD00 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		2536A4CA18143CBC00C11DDB /* TPNewEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewEnvironment.h; sourceTree = "<group>"; };
+		2536A4CB18143CBC00C11DDB /* TPNewEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewEnvironment.m; sourceTree = "<group>"; };
 		253776D4168382A000945573 /* xelatexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatexmk.engine; sourceTree = "<group>"; };
 		253A3AB51457D212007C4D8C /* MHMiniConsoleBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleBackground.h; sourceTree = "<group>"; };
 		253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMiniConsoleBackground.m; sourceTree = "<group>"; };
@@ -906,6 +908,7 @@
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
 		2547DFB51409FE5C002C0E2F /* MHStrokedFiledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedFiledView.h; sourceTree = "<group>"; };
 		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
+		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
 		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = template.engine; sourceTree = "<group>"; };
@@ -1601,6 +1604,7 @@
 		250772E1138E5D81000F1118 = {
 			isa = PBXGroup;
 			children = (
+				25487E47181645B600C0D61C /* TeXnicle.icns */,
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
 				2507731E138E5D82000F1118 /* TeXnicleImporter */,
@@ -1876,7 +1880,6 @@
 				2567272B16E4ADD7004B7C4A /* outline_chapter.icns */,
 				2567272916E4A246004B7C4A /* outline_part.icns */,
 				2520AC1916A81677006E9CA2 /* cancel.icns */,
-				252E122416217B1D0041B2BE /* TeXnicle_4.icns */,
 				252E12221621728F0041B2BE /* TeXnicle.icns */,
 				25AD5A0715BAB29100737610 /* groupFolderOpen.icns */,
 				25AD5A0815BAB29100737610 /* groupFolder.icns */,
@@ -2112,6 +2115,16 @@
 			path = EditorThemes;
 			sourceTree = "<group>";
 		};
+		2536A4C918143C8300C11DDB /* EnvironmentsView */ = {
+			isa = PBXGroup;
+			children = (
+				2536A4CA18143CBC00C11DDB /* TPNewEnvironment.h */,
+				2536A4CB18143CBC00C11DDB /* TPNewEnvironment.m */,
+			);
+			name = EnvironmentsView;
+			path = src/EnvironmentsView;
+			sourceTree = "<group>";
+		};
 		253E5E2913951DB500566E23 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -2203,6 +2216,7 @@
 				25DB36BC15B47819009E086A /* LabelsView */,
 				255A16DC15B48FE1004290CC /* CitationsView */,
 				255A16DD15B48FEB004290CC /* CommandsView */,
+				2536A4C918143C8300C11DDB /* EnvironmentsView */,
 			);
 			name = MetadataViews;
 			sourceTree = "<group>";
@@ -3122,6 +3136,7 @@
 				250772EA138E5D81000F1118 /* Resources */,
 				25E5024A13A09F7A004A983E /* CopyFiles */,
 				253312E915B6FF4B00F9FD00 /* CopyFiles */,
+				25F5C7DF181CF9EC00C8BBCC /* Sign Sparkle */,
 			);
 			buildRules = (
 			);
@@ -3354,7 +3369,6 @@
 				25B244F31791AEE90005344C /* TPQuickJumpViewController.xib in Resources */,
 				252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */,
 				252E12231621728F0041B2BE /* TeXnicle.icns in Resources */,
-				252E122516217B1D0041B2BE /* TeXnicle_4.icns in Resources */,
 				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
@@ -3362,6 +3376,7 @@
 				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
 				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 				25CFBD1316D2CFB90025B35D /* texcount in Resources */,
+				25487E48181645B700C0D61C /* TeXnicle.icns in Resources */,
 				25DB59431778BB9F000383AF /* TPTeXLogViewController.xib in Resources */,
 				25CFBD1B16D2D0B00025B35D /* TPDocumentReportWindowController.xib in Resources */,
 				2567272A16E4A246004B7C4A /* outline_part.icns in Resources */,
@@ -3577,6 +3592,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
+		};
+		25F5C7DF181CF9EC00C8BBCC /* Sign Sparkle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Sign Sparkle";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Martin Hewitson\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3801,6 +3830,7 @@
 				25DB59401778BB9F000383AF /* TPParsedLog.m in Sources */,
 				2599F3DB1604A49E00FA9DB2 /* NSColor+Lightness.m in Sources */,
 				25C7F4521629968B00C312AB /* TPRegularExpression.m in Sources */,
+				2536A4CC18143CBC00C11DDB /* TPNewEnvironment.m in Sources */,
 				250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */,
 				250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */,
 				25E65C53179D255F00B0FA5A /* MHWhiteBackgroundView.m in Sources */,
@@ -4015,7 +4045,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4037,7 +4067,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4064,7 +4094,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4097,7 +4127,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

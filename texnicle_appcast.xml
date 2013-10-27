@@ -5,6 +5,31 @@
 		<link>http://www.bobsoft-mac.de/texnicle_appcast.xml</link>
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
+    
+    <!-- Version 2.2.8 -->
+    <item>
+      <title>Version 2.2.8 (build 1416)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.8</h2>
+        <p>
+        <ul>
+        <li>User defined environments (defined with \newenvironment) now appear in the environment completion list.<li>
+        <li>Added the option (under General in preferences) to switch the meaning of cmd-w and cmd-shift-w for the tabbed project editor.<li>
+        <li>The editor jump bar now shows user-defined sections and properly reflects the colors of the current theme.<li>
+        <li>Bug fix: under some circumstances, selecting a file in a project tree for renaming would result in renaming the wrong file.<li>
+        <li>Bug fix: After closing a tab, the close button properly appears on the next tab under the mouse.<li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>26th October 2013</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.8.zip"
+      sparkle:shortVersionString="2.2.8"
+      sparkle:version="1416"
+      length="24335735"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFBkPcvmubVscLBJT6WEXgsNHz1JZAhUAmfSzbqWglvgbI/TYhWWk0ByaoiQ="
+      />
+    </item>
 
 <!-- Version 2.2.7 -->
 <item>
