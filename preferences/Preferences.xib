@@ -934,7 +934,7 @@
                                         <rect key="frame" x="17" y="292" width="319" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        <size key="cellSize" width="312" height="18"/>
+                                        <size key="cellSize" width="319" height="21"/>
                                         <size key="intercellSpacing" width="4" height="8"/>
                                         <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="935">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1197,7 +1197,7 @@
                         <tabViewItem label="Trash" identifier="2" id="89">
                             <view key="view" id="90">
                                 <rect key="frame" x="10" y="33" width="554" height="482"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" id="166">
                                         <rect key="frame" x="14" y="439" width="90" height="17"/>
@@ -1250,7 +1250,7 @@
                                             </binding>
                                         </connections>
                                     </button>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="869">
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="869">
                                         <rect key="frame" x="14" y="152" width="526" height="187"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="870">
