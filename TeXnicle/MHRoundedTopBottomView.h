@@ -29,9 +29,6 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MHRoundedTopBottomView : NSView {
-@private
-  NSGradient *aGradient;   
-}
+@interface MHRoundedTopBottomView : NSView
 
 @end
