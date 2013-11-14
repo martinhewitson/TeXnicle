@@ -2724,8 +2724,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       r = NSMakeRect(inset.width+s.width, vr.origin.y, vr.size.width, vr.size.height);
     } else {
       int wrapAt = [[defaults valueForKey:TELineLength] intValue];
-      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
-      r = NSMakeRect(scale*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
+//      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
+      r = NSMakeRect(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
     }
     
     NSColor *highlightColor = theme.documentEditorMarginColor;
