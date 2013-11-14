@@ -624,7 +624,21 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   } else {
     [[NSSpellChecker sharedSpellChecker] setAutomaticallyIdentifiesLanguages:YES];
   }
+  
+  [self specialiseCloseMenu:YES];
 }
+
+- (void) specialiseCloseMenu:(BOOL)state
+{
+  NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
+  NSMenu *fileMenu = [[mainMenu itemAtIndex:1] submenu];
+  NSMenuItem *closeMenuItem = [fileMenu itemWithTag:1090];
+  NSMenuItem *closeTabMenuItem = [fileMenu itemWithTag:1110];
+  
+  [closeMenuItem setKeyEquivalent:@"w"];
+  [closeTabMenuItem setKeyEquivalent:@""];
+}
+
 - (void)windowWillClose:(NSNotification *)notification
 {		
 //  NSLog(@"WindowWillClose %@", self);
