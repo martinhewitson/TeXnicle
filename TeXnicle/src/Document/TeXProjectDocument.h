@@ -89,7 +89,6 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
   
   ProjectItemEntity *_selectedItem;
   
-	NSUInteger _itemBeingRenamed;
   NSInteger _selectedRow;
         
   BOOL _openPDFAfterBuild;
