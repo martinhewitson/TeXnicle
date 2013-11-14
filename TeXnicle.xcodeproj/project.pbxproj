@@ -128,7 +128,6 @@
 		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121B162167490041B2BE /* MHControlsTabBarController.xib */; };
 		252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121E16216C460041B2BE /* MHInfoTabBarController.xib */; };
-		252E12231621728F0041B2BE /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E12221621728F0041B2BE /* TeXnicle.icns */; };
 		252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
 		252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
 		252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
@@ -3368,7 +3367,6 @@
 				252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */,
 				25B244F31791AEE90005344C /* TPQuickJumpViewController.xib in Resources */,
 				252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */,
-				252E12231621728F0041B2BE /* TeXnicle.icns in Resources */,
 				2599F8F416247C4600853947 /* MHStandaloneControlsTabBarViewController.xib in Resources */,
 				2599F8FA16247E7700853947 /* MHStandaloneInfoTabBarViewController.xib in Resources */,
 				255C559F1652347E00F77A50 /* UpTeX.engine in Resources */,
@@ -4056,8 +4054,10 @@
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = TeXnicle;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
@@ -4079,8 +4079,10 @@
 				INSTALL_PATH = "@executable_path/../Contents/Library/Spotlight";
 				LIBRARY_STYLE = BUNDLE;
 				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = TeXnicle;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mdimporter;
 			};
