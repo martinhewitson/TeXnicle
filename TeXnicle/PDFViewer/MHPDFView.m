@@ -31,6 +31,13 @@
 NSString * const MHPDFViewDidGainFocusNotification = @"MHPDFViewDidGainFocusNotification";
 NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNotification";
 
+#define kPDF_UPDATE_INTERVAL 0.1
+
+@interface MHPDFView ()
+
+@property (strong) NSDate *lastUpdate;
+
+@end
 
 @implementation MHPDFView
 
@@ -38,7 +45,31 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 {
   [super awakeFromNib];
   [self setBackgroundColor:[NSColor colorWithDeviceRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0]];
+  
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  [[[self enclosingScrollView] contentView] setPostsBoundsChangedNotifications:YES];
+  [nc addObserver:self
+         selector:@selector(handleFrameChangeNotification:)
+             name:NSViewBoundsDidChangeNotification
+           object:[[self enclosingScrollView] contentView]];
+  
 }
+
+- (void) handleFrameChangeNotification:(NSNotification*)aNote
+{
+  NSDate *now = [NSDate date];
+  
+  if (self.lastUpdate == nil ||
+      [now timeIntervalSinceDate:self.lastUpdate] > kPDF_UPDATE_INTERVAL) {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self setNeedsDisplay:YES];
+      self.lastUpdate = now;
+    });
+    
+  }  
+}
+
 
 - (void)performFindPanelAction:(id)sender
 {
@@ -68,12 +99,6 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   [self setNeedsDisplay:YES];
 }
 
-- (void) setNeedsDisplay:(BOOL)flag
-{
-//  NSLog(@"Set Needs Display");
-  [super setNeedsDisplay:flag];
-}
-
 - (void) drawPagePost:(PDFPage *)page
 {
   [super drawPagePost:page];
@@ -89,6 +114,11 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
     [NSGraphicsContext restoreGraphicsState];
   }
   
+}
+
++(BOOL) isCompatibleWithResponsiveScrolling
+{
+	return YES;
 }
 
 
@@ -151,19 +181,6 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
   [self setCurrentSelection:sel animate:YES];
 }
 
-- (void)setNeedsDisplayInRect:(NSRect)rect ofPage:(PDFPage *)page 
-{
-  NSRect aRect = [self convertRect:rect fromPage:page];
-  CGFloat scale = [self scaleFactor];
-  CGFloat maxX = ceil(NSMaxX(aRect) + scale);
-  CGFloat maxY = ceil(NSMaxY(aRect) + scale);
-  CGFloat minX = floor(NSMinX(aRect) - scale);
-  CGFloat minY = floor(NSMinY(aRect) - scale);
-  
-  aRect = NSIntersectionRect([self bounds], NSMakeRect(minX, minY, maxX - minX, maxY - minY));
-  if (NSIsEmptyRect(aRect) == NO)
-    [self setNeedsDisplayInRect:aRect];
-}
 
 - (void) mouseDown:(NSEvent *)theEvent
 {
