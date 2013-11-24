@@ -155,7 +155,7 @@
 
 - (IBAction)filterDidChange:(id)sender
 {
-  [self updateFilters];
+  [self performSelectorOnMainThread:@selector(updateFilters) withObject:Nil waitUntilDone:YES];
   [self.outlineView reloadData];
   [self performSelector:@selector(expandAll:) withObject:nil afterDelay:0];
   [self updateStatusLabel];
