@@ -77,7 +77,7 @@
   if (self) {
     // Initialization code here.
     self.delegate = nil;
-    self.errorImage = [NSImage imageNamed:@"error"];
+    self.errorImage = [NSImage imageNamed:@"log_warning"];
     self.noErrorImage = [NSImage imageNamed:@"noerror"];  
     self.checkFailedImage = [NSImage imageNamed:@"checkfailed"];
   }
