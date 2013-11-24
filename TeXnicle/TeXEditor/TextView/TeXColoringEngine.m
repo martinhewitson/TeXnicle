@@ -279,6 +279,7 @@
   [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:aRange];
     
   // scan each character in the string
+  NSArray *commandRanges = [text commandRanges];
   NSUInteger idx;
   unichar cc;
   unichar nextChar;
@@ -428,10 +429,8 @@
         
       }
       
-      lineRange = [text lineRangeForRange:NSMakeRange(idx, 0)];
-      NSString *lineText = [text substringWithRange:lineRange];
       // check this is preceeded by a command
-      if ([lineText isArgumentOfCommandAtIndex:(idx-lineRange.location)] == NO) {
+      if ([NSString isArgumentAtIndex:(idx) forCommandsAtRanges:commandRanges] == NO) {
         continue;
       }
       
