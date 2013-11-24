@@ -686,26 +686,35 @@ static NSString *mathModeRegExpr = nil;
 
 - (BOOL)isArgumentOfCommandAtIndex:(NSInteger)anIndex
 {
-  NSString *cmd = [self commandAtIndex:anIndex];
-  return (cmd != nil);
+  NSArray *ranges = [self commandRanges];
+  return [NSString isArgumentAtIndex:anIndex forCommandsAtRanges:ranges];
+}
+
+- (NSArray*)commandRanges
+{
+  NSString *expr = @"(\\\\[a-zA-Z]+)(\\s|(\\[.*?\\])*(\\*?\\{.*?\\})*)";
+  NSArray *ranges = [TPRegularExpression rangesMatching:expr inText:self];
+  return ranges;
+}
+
++ (BOOL)isArgumentAtIndex:(NSInteger)index forCommandsAtRanges:(NSArray*)ranges
+{
+  //NSLog(@"Found %@", ranges);
+  for (NSValue *rv in ranges) {
+    NSRange r = [rv rangeValue];
+    if (NSLocationInRange(index, r)) {
+      //NSLog(@"Got command [%@]", cmd);
+      return YES;
+    }
+  }
+  
+  return NO;
 }
 
 // try to do better command matching with reg expressions
 - (NSString*)commandAtIndex:(NSInteger)index
 {
-  // this matches a command and returns tokens for the arguments and options
-  // \\[a-zA-Z]+((\{.*?\})|((\[.*?\])+(\{.*?\})))
-  
-  // this matches a command and returns tokens for the command, arguments and options
-  // \\([a-zA-Z]+)((\{.*?\})|((\[.*?\])+(\{.*?\})))
-  
-  // this matches arguments and options in one token
-  // \\[a-zA-Z]+(\{.*?\}|\[.*?\]+\{.*?\})
-  
-  NSString *expr = @"(\\\\[a-zA-Z]+)(\\s|(\\[.*?\\])*(\\{.*?\\})*)";
-//  NSString *expr = @"(\\\\[a-zA-Z]+)(\\s|\\{.*?\\}|\\[.*?\\]*\\{.*?\\}|(\\[.*?\\])*|\\[.*?\\]*\\(.*?\\))";
-  
-  NSArray *ranges = [TPRegularExpression rangesMatching:expr inText:self];
+  NSArray *ranges = [self commandRanges];
   
   //NSLog(@"Found %@", ranges);
   for (NSValue *rv in ranges) {

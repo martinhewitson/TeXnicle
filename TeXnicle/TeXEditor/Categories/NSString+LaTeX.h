@@ -52,5 +52,7 @@
 - (BOOL)isArgumentOfCommandAtIndex:(NSInteger)anIndex;
 - (NSString*)texString;
 - (BOOL)wordIsIncludeCommand;
+- (NSArray*)commandRanges;
++ (BOOL)isArgumentAtIndex:(NSInteger)index forCommandsAtRanges:(NSArray*)ranges;
 
 @end
