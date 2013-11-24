@@ -10,6 +10,21 @@
 
 @implementation TPLogItem
 
++ (NSColor*)infoColor
+{
+  return [NSColor colorWithCalibratedRed:0.0/255.0 green:0.0/255.0 blue:200.0/255.0 alpha:1.0];
+}
+
++ (NSColor*)errorColor
+{
+  return [NSColor colorWithCalibratedRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+}
+
++ (NSColor*)warningColor
+{
+  return [NSColor colorWithCalibratedRed:255.0/255.0 green:170.0/255.0 blue:0.0/255.0 alpha:1.0];
+}
+
 - (id) initWithFileName:(NSString*)aFile type:(TPLogItemType)itemType message:(NSString*)aMessage line:(NSInteger)number matchedPhrase:(NSString *)aPhrase
 {
   self = [self initWithFileName:aFile type:itemType message:aMessage line:number];
@@ -121,11 +136,11 @@
   // phrase
   NSMutableAttributedString *phraseString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" [%@]", self.matchedPhrase]];
   if (self.type == TPLogInfo) {
-    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [phraseString length])];
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[TPLogItem infoColor] range:NSMakeRange(0, [phraseString length])];
   } else if (self.type == TPLogWarning) {
-    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(0, [phraseString length])];
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[TPLogItem warningColor] range:NSMakeRange(0, [phraseString length])];
   } else if (self.type == TPLogError) {
-    [phraseString addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [phraseString length])];
+    [phraseString addAttribute:NSForegroundColorAttributeName value:[TPLogItem errorColor] range:NSMakeRange(0, [phraseString length])];
   }
   [str appendAttributedString:phraseString];
   

@@ -87,13 +87,13 @@
   NSInteger errorCount = [[self.items errorItems] count];
   
   NSMutableAttributedString *infoStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", infoCount]];
-  [infoStr addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:NSMakeRange(0, [infoStr length])];
+  [infoStr addAttribute:NSForegroundColorAttributeName value:[TPLogItem infoColor] range:NSMakeRange(0, [infoStr length])];
   
   NSMutableAttributedString *warnStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", warningCount]];
-  [warnStr addAttribute:NSForegroundColorAttributeName value:[NSColor yellowColor] range:NSMakeRange(0, [warnStr length])];
+  [warnStr addAttribute:NSForegroundColorAttributeName value:[TPLogItem warningColor] range:NSMakeRange(0, [warnStr length])];
 
   NSMutableAttributedString *errStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", errorCount]];
-  [errStr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [errStr length])];
+  [errStr addAttribute:NSForegroundColorAttributeName value:[TPLogItem errorColor] range:NSMakeRange(0, [errStr length])];
   
   [str appendAttributedString:infoStr];
   [str appendAttributedString:comma];

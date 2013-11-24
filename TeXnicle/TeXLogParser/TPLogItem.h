@@ -33,4 +33,8 @@ typedef enum {
 - (id) initWithFileName:(NSString*)aFile type:(TPLogItemType)itemType message:(NSString*)aMessage line:(NSInteger)number;
 - (id) initWithFileName:(NSString*)aFile type:(TPLogItemType)itemType message:(NSString*)aMessage line:(NSInteger)number matchedPhrase:(NSString*)aPhrase;
 
++ (NSColor*)infoColor;
++ (NSColor*)warningColor;
++ (NSColor*)errorColor;
+
 @end
