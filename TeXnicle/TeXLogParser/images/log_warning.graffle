@@ -6,15 +6,15 @@
 	<integer>0</integer>
 	<key>ApplicationVersion</key>
 	<array>
-		<string>com.omnigroup.OmniGrafflePro</string>
-		<string>139.17.0.185490</string>
+		<string>com.omnigroup.OmniGraffle6</string>
+		<string>156.4.0.198223</string>
 	</array>
 	<key>AutoAdjust</key>
 	<true/>
 	<key>BackgroundGraphic</key>
 	<dict>
 		<key>Bounds</key>
-		<string>{{0, 0}, {558.99999713897705, 783}}</string>
+		<string>{{0, 0}, {559, 783}}</string>
 		<key>Class</key>
 		<string>SolidGraphic</string>
 		<key>FontInfo</key>
@@ -28,11 +28,6 @@
 		<integer>2</integer>
 		<key>Style</key>
 		<dict>
-			<key>shadow</key>
-			<dict>
-				<key>Draws</key>
-				<string>NO</string>
-			</dict>
 			<key>stroke</key>
 			<dict>
 				<key>Draws</key>
@@ -53,7 +48,7 @@
 	<key>Creator</key>
 	<string>Martin Hewitson</string>
 	<key>DisplayScale</key>
-	<string>1 0/72 in = 1.0000 in</string>
+	<string>1 in = 1.00000 in</string>
 	<key>ExportShapes</key>
 	<array>
 		<dict>
@@ -256,7 +251,7 @@
 		</dict>
 	</array>
 	<key>GraphDocumentVersion</key>
-	<integer>8</integer>
+	<integer>11</integer>
 	<key>GraphicsList</key>
 	<array>
 		<dict>
@@ -264,6 +259,18 @@
 			<string>{{119.96117163775216, 116.44497804998998}, {319.0776416073262, 323.31101175369724}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Color</key>
+				<dict>
+					<key>w</key>
+					<string>0</string>
+				</dict>
+				<key>Font</key>
+				<string>Helvetica</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>222</integer>
 			<key>Shape</key>
@@ -277,9 +284,9 @@
 						<key>b</key>
 						<string>0</string>
 						<key>g</key>
-						<string>0.819251</string>
+						<string>0.915844</string>
 						<key>r</key>
-						<string>0.894531</string>
+						<string>1</string>
 					</dict>
 					<key>FillType</key>
 					<integer>3</integer>
@@ -288,7 +295,7 @@
 						<key>b</key>
 						<string>0</string>
 						<key>g</key>
-						<string>0.85015</string>
+						<string>0.658936</string>
 						<key>r</key>
 						<string>1</string>
 					</dict>
@@ -341,6 +348,8 @@
 		<real>0.0</real>
 		<key>layoutEngine</key>
 		<string>dot</string>
+		<key>neatoLineLength</key>
+		<real>0.20000000298023224</real>
 		<key>neatoSeparation</key>
 		<real>0.0</real>
 		<key>twopiSeparation</key>
@@ -353,7 +362,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-06-24 09:36:31 +0000</string>
+	<string>2013-11-24 13:14:52 +0000</string>
 	<key>Modifier</key>
 	<string>Martin Hewitson</string>
 	<key>NotesVisible</key>
@@ -384,12 +393,12 @@
 		<key>NSPaperSize</key>
 		<array>
 			<string>size</string>
-			<string>{594.99999713897705, 842}</string>
+			<string>{595, 842}</string>
 		</array>
 		<key>NSPrintReverseOrientation</key>
 		<array>
-			<string>int</string>
-			<string>0</string>
+			<string>coded</string>
+			<string>BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU051bWJlcgCEhAdOU1ZhbHVlAISECE5TT2JqZWN0AIWEASqEhAFxlwCG</string>
 		</array>
 		<key>NSRightMargin</key>
 		<array>
@@ -424,31 +433,24 @@
 	<integer>1</integer>
 	<key>WindowInfo</key>
 	<dict>
+		<key>BottomSlabHeight</key>
+		<real>530</real>
 		<key>CurrentSheet</key>
 		<integer>0</integer>
-		<key>ExpandedCanvases</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>Canvas 1</string>
-			</dict>
-		</array>
+		<key>Expanded_Canvases</key>
+		<array/>
 		<key>Frame</key>
-		<string>{{119, 4}, {1126, 874}}</string>
-		<key>ListView</key>
-		<true/>
-		<key>OutlineWidth</key>
-		<integer>142</integer>
-		<key>RightSidebar</key>
+		<string>{{14, 4}, {1426, 874}}</string>
+		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
 		<true/>
 		<key>Sidebar</key>
 		<true/>
 		<key>SidebarWidth</key>
-		<integer>120</integer>
+		<integer>230</integer>
 		<key>VisibleRegion</key>
-		<string>{{-96, 0}, {750.44248104282178, 650.44248062084193}}</string>
+		<string>{{-109.00000000000001, 0}, {777.87610947717019, 647.7876133530018}}</string>
 		<key>Zoom</key>
 		<real>1.1299999952316284</real>
 		<key>ZoomValues</key>
