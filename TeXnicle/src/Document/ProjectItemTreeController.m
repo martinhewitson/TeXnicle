@@ -574,11 +574,6 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 	[newFile setValue:[NSDate date] forKey:@"fileLoadDate"];
 	[newFile setValue:[NSDate date] forKey:@"lastEditDate"];
 		
-//	NSLog(@"New file %@", newFile);
-	
-	// select the new file
-	[self selectItem:newFile];
-	
 	// and update the sort order
 	[self updateSortOrderOfModelObjects];
 
@@ -844,6 +839,10 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		}
 	}
 	
+  
+  // now make sure we select the folder again
+  [self setSelectionIndexPath:[self indexPathToObject:newFolder]];
+  
 	return newFolder;
 }
 
