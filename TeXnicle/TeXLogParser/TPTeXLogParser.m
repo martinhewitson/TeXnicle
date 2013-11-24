@@ -52,6 +52,7 @@
            @"BEWARE:" : @(TPLogWarning),
            @"Missing character:" : @(TPLogWarning),
            @"Underfull \\hbox" : @(TPLogWarning),
+           @"Overfull \\hbox" : @(TPLogWarning),
            @"Error:"   : @(TPLogError),
            @"Undefined control sequence" : @(TPLogError), 
            @"Emergency stop."   : @(TPLogError),
@@ -99,6 +100,10 @@
   NSInteger lineCount = 0;
   for (NSString *line in lines) {
     lineCount++;
+    if ([line length] == 0) {
+      continue;
+    }
+    
 #if TP_LOG_PARSE_DEBUG
     NSLog(@"LINE: [%@]", line);
 #endif
@@ -143,7 +148,9 @@
     NSString *phraseMatched = nil;
     // check for any of the error phrases
     for (NSString *phrase in [phrases allKeys]) {
+      //NSLog(@"  checking for [%@] in [%@]", phrase, line);
       r = [line rangeOfString:phrase options:NSCaseInsensitiveSearch];
+      //NSLog(@"Range %@", NSStringFromRange(r));
       if (r.location != NSNotFound) {
         type = (TPLogItemType)[phrases[phrase] integerValue];
         phraseMatched = phrase;
