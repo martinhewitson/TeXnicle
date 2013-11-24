@@ -457,6 +457,7 @@
 //  NSLog(@"Calculations for range %@", NSStringFromRange(aRange));
   // compute and cache the linenumbers in view
   NSArray *newLineNumbers = [self lineNumbersForTextRange:aRange];
+  NSInteger lineCount = [[newLineNumbers lastObject] number];
   
 //  NSArray *foldingTags = [self foldingTagsForTextRange:aRange];
   // make a set of code folders in view
@@ -468,7 +469,7 @@
 //  NSLog(@"Last max line %ld: new max line %ld", [[newLineNumbers lastObject] number], _lastMaxVisibleLine);
   if ([[newLineNumbers lastObject] number] > _lastMaxVisibleLine || _forceThicknessRecalculation) {
     float oldThickness = [self ruleThickness];
-    float newThickness = [self requiredThickness];
+    float newThickness = [self requiredThicknessForLineCount:lineCount];
     if (fabs(oldThickness - newThickness) > 1)
     {
       _newThickness = newThickness;
@@ -792,7 +793,7 @@
 
 
 // Compute the required thickness of the ruler.
-- (CGFloat)requiredThickness
+- (CGFloat)requiredThicknessForLineCount:(NSInteger)lineCount
 {
 //	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	BOOL includeLineNumbers = _showLineNumbers; //[[defaults valueForKey:TEShowLineNumbers] boolValue];
@@ -805,11 +806,11 @@
 		return ceilf(kFOLDING_GUTTER);
 	}
 	
-	NSUInteger			lineCount, digits, i;
+	NSUInteger			digits, i;
 	NSSize              stringSize;
 	
-  NSInteger idx = [[self.textView string] length];
-	lineCount = [[[self lineNumbersForTextRange:NSMakeRange(idx, 0)] lastObject] number];
+//  NSInteger idx = [[self.textView string] length];
+//	lineCount = [[lineNumbers lastObject] number];
   
   
 //	lineCount = [[self.lineNumbers lastObject] number];
