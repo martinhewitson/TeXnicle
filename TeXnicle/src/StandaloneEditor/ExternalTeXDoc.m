@@ -671,6 +671,7 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
                      [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
                      [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
+                     [defaults valueForKey:BibtexCommand], @"bibtexCommand",
                      [[NSSpellChecker sharedSpellChecker] language], @"language",
                      @YES, @"TPStandAloneEditorShowStatusBar",
                      nil];
@@ -2182,9 +2183,19 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
   [self.settings setValue:aName forKey:@"engineName"];
 }
 
+-(void)didSelectBibtexCommand:(NSString*)aName
+{
+  [self.settings setValue:aName forKey:@"bibtexCommand"];
+}
+
 -(NSString*)engineName
 {
   return [self.settings valueForKey:@"engineName"];
+}
+
+-(NSString*)bibtexCommand
+{
+  return [self.settings valueForKey:@"bibtexCommand"];
 }
 
 -(NSNumber*)doBibtex

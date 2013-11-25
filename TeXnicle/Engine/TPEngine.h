@@ -54,6 +54,7 @@
 @property (copy) NSString *name;
 @property (copy) NSString *documentPath;
 @property (unsafe_unretained, readonly) NSString *compiledDocumentPath;
+@property (copy) NSString *bibtexCommand;
 @property (assign) BOOL doBibtex;
 @property (assign) BOOL doPS2PDF;
 @property (assign) BOOL openConsole;

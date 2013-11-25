@@ -32,6 +32,26 @@
 NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageChangedNotification";
 NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
+@interface TPEngineSettingsController ()
+
+@property (assign) IBOutlet NSPopUpButton *engineSelector;
+@property (assign) IBOutlet NSPopUpButton *bibtexSelector;
+@property (assign) IBOutlet NSButton *doBibtexButton;
+@property (assign) IBOutlet NSButton *doPS2PDFButton;
+@property (assign) IBOutlet NSButton *openConsoleButton;
+@property (assign) IBOutlet NSTextField *nCompileTextField;
+@property (assign) IBOutlet NSStepper *nCompileStepper;
+@property (assign) IBOutlet NSTextField *nCompileLabel;
+@property (assign) IBOutlet NSPopUpButton *languageSelector;
+
+@property (assign) IBOutlet MHStrokedFiledView *pane1;
+@property (assign) IBOutlet MHStrokedFiledView *pane2;
+@property (assign) IBOutlet MHStrokedFiledView *pane3;
+@property (assign) IBOutlet MHStrokedFiledView *pane4;
+
+
+@end
+
 @implementation TPEngineSettingsController
 
 - (id)initWithDelegate:(id<TPEngineSettingsDelegate>)aDelegate
@@ -62,14 +82,14 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
   NSColor *color2 = [NSColor colorWithDeviceRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
   
-  pane1.fillColor = color1;
-  pane1.strokeSides = YES;
-  pane2.fillColor = color1;
-  pane2.strokeSides = YES;
-  pane3.fillColor = color2;
-  pane3.strokeSides = YES;
-  pane4.fillColor = color1;
-  pane4.strokeSides = YES;
+  self.pane1.fillColor = color1;
+  self.pane1.strokeSides = YES;
+  self.pane2.fillColor = color1;
+  self.pane2.strokeSides = YES;
+  self.pane3.fillColor = color2;
+  self.pane3.strokeSides = YES;
+  self.pane4.fillColor = color1;
+  self.pane4.strokeSides = YES;
   
   // set available languages
   [self setupLanguageOptions];
@@ -97,11 +117,11 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
 - (void) setupLanguageOptions
 {
-  [languageSelector removeAllItems];
+  [self.languageSelector removeAllItems];
   NSMenuItem *menuItem;
   
-  [languageSelector addItemWithTitle:TPSpellingAutomaticByLanguage];
-  [[languageSelector menu] addItem:[NSMenuItem separatorItem]];
+  [self.languageSelector addItemWithTitle:TPSpellingAutomaticByLanguage];
+  [[self.languageSelector menu] addItem:[NSMenuItem separatorItem]];
   
   
   NSArray *languageIDs = [[NSSpellChecker sharedSpellChecker] userPreferredLanguages];
@@ -111,8 +131,8 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     if (displayNameString == nil) {
       displayNameString = languageID;
     }
-    [languageSelector addItemWithTitle:displayNameString];
-    menuItem = [languageSelector itemWithTitle:displayNameString];
+    [self.languageSelector addItemWithTitle:displayNameString];
+    menuItem = [self.languageSelector itemWithTitle:displayNameString];
     [menuItem setRepresentedObject:locale];
   }
   
@@ -120,18 +140,18 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   NSString *languageID = [self language];
   if (languageID) {
     if ([languageID isEqualToString:TPSpellingAutomaticByLanguage]) {
-      [languageSelector selectItemAtIndex:0];
+      [self.languageSelector selectItemAtIndex:0];
     } else {
       NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:languageID];
-      NSInteger index = [languageSelector indexOfItemWithRepresentedObject:locale];
-      [languageSelector selectItemAtIndex:index];
+      NSInteger index = [self.languageSelector indexOfItemWithRepresentedObject:locale];
+      [self.languageSelector selectItemAtIndex:index];
     }
   }
 }
 
 - (IBAction) languageSelected:(id)sender
 {
-  NSMenuItem *menuItem = [languageSelector selectedItem];
+  NSMenuItem *menuItem = [self.languageSelector selectedItem];
   
   if ([[menuItem title] isEqualToString:TPSpellingAutomaticByLanguage]) {
     [self didSelectLanguage:[menuItem title]];
@@ -143,52 +163,60 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
 - (void)setupEngineSettings
 {
-  [engineSelector removeAllItems];
+  [self.engineSelector removeAllItems];
   NSString *engineName = [self engineName];
   if (engineName && [engineName length]>0) {    
-    [engineSelector addItemWithTitle:[self engineName]];
+    [self.engineSelector addItemWithTitle:[self engineName]];
   }
+  
+  NSString *bibtexCommand = [self bibtexCommand];
+  if (bibtexCommand && [bibtexCommand length]>0) {
+    [self.bibtexSelector selectItemWithTitle:bibtexCommand];
+  }
+  
   if ([self supportsDoBibtex]) {
-    [doBibtexButton setState:[[self doBibtex] intValue]];
-    [doBibtexButton setEnabled:YES];
+    [self.doBibtexButton setState:[[self doBibtex] intValue]];
+    [self.doBibtexButton setEnabled:YES];
+    [self.bibtexSelector setEnabled:YES];
   } else {
-    [doBibtexButton setEnabled:NO];
+    [self.doBibtexButton setEnabled:NO];
+    [self.bibtexSelector setEnabled:NO];
   }
   
   if ([self supportsDoPS2PDF]) {
-    [doPS2PDFButton setState:[[self doPS2PDF] intValue]];
-    [doPS2PDFButton setEnabled:YES];
+    [self.doPS2PDFButton setState:[[self doPS2PDF] intValue]];
+    [self.doPS2PDFButton setEnabled:YES];
   } else {
-    [doPS2PDFButton setEnabled:NO];
+    [self.doPS2PDFButton setEnabled:NO];
   }
   
   if ([self supportsNCompile]) {
-    [nCompileTextField setIntegerValue:[[self nCompile] intValue]];
-    [nCompileStepper setIntegerValue:[[self nCompile] intValue]];
-    [nCompileStepper setEnabled:YES];
-    [nCompileTextField setEnabled:YES];
-    [nCompileLabel setTextColor:[NSColor controlTextColor]];
+    [self.nCompileTextField setIntegerValue:[[self nCompile] intValue]];
+    [self.nCompileStepper setIntegerValue:[[self nCompile] intValue]];
+    [self.nCompileStepper setEnabled:YES];
+    [self.nCompileTextField setEnabled:YES];
+    [self.nCompileLabel setTextColor:[NSColor controlTextColor]];
   } else {
-    [nCompileStepper setEnabled:NO];
-    [nCompileTextField setEnabled:NO];
-    [nCompileLabel setTextColor:[NSColor disabledControlTextColor]];
+    [self.nCompileStepper setEnabled:NO];
+    [self.nCompileTextField setEnabled:NO];
+    [self.nCompileLabel setTextColor:[NSColor disabledControlTextColor]];
   }
   
-  [openConsoleButton setState:[[self openConsole] intValue]];
+  [self.openConsoleButton setState:[[self openConsole] intValue]];
 }
 
 
 - (void)menuNeedsUpdate:(NSMenu *)menu
 {
-  if (menu == [engineSelector menu]) {
+  if (menu == [self.engineSelector menu]) {
     NSArray *engines = [self registeredEngineNames];
     [menu removeAllItems];
     for (NSString *name in engines) {    
       NSMenuItem *item = [menu addItemWithTitle:name action:@selector(engineSelected:) keyEquivalent:@""];
       [item setTarget:self];
     }
-    [engineSelector selectItemWithTitle:[self engineName]];
-  } else if (menu == [languageSelector menu]) {
+    [self.engineSelector selectItemWithTitle:[self engineName]];
+  } else if (menu == [self.languageSelector menu]) {
     [self setupLanguageOptions];
   }
   
@@ -197,6 +225,12 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 - (IBAction)engineSelected:(id)sender
 {
   [self didSelectEngineName:[sender title]];
+  [self setupEngineSettings];
+}
+
+- (IBAction)bibtexCommandSelected:(id)sender
+{
+  [self didSelectBibtexCommand:[sender title]];
   [self setupEngineSettings];
 }
 
@@ -230,7 +264,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 - (IBAction)changeNCompile:(id)sender
 {
   [self didChangeNCompile:[sender integerValue]];
-  [nCompileTextField setIntegerValue:[[self nCompile] integerValue]];
+  [self.nCompileTextField setIntegerValue:[[self nCompile] integerValue]];
 }
 
 
@@ -289,6 +323,13 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }  
 }
 
+-(void)didSelectBibtexCommand:(NSString*)aName
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectBibtexCommand:)]) {
+    [self.delegate didSelectBibtexCommand:aName];
+  }
+}
+
 -(void)didSelectLanguage:(NSString*)aName
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLanguage:)]) {
@@ -307,6 +348,16 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   
   return @"";
 }
+
+-(NSString*)bibtexCommand
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(bibtexCommand)]) {
+    return [self.delegate bibtexCommand];
+  }
+  
+  return @"bibtex";
+}
+
 
 -(NSNumber*)doBibtex
 {

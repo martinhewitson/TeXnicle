@@ -35,6 +35,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 @protocol TPEngineManagerDelegate <NSObject>
 @optional
 -(NSString*)engineName;
+-(NSString*)bibtexCommand;
 -(NSNumber*)doBibtex;
 -(NSNumber*)doPS2PDF;
 -(NSNumber*)openConsole;

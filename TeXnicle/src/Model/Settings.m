@@ -62,6 +62,11 @@
     self.doLiveUpdate = @NO;
   }
   
+  if (self.bibtexCommand == nil && self.managedObjectContext != nil) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.bibtexCommand = [defaults valueForKey:BibtexCommand];
+  }
+  
 }
 
 - (void)setDefaultSettings
@@ -72,6 +77,7 @@
   self.doLiveUpdate = @NO;
   self.engineName = [defaults valueForKey:TPDefaultEngineName];
   self.doBibtex = [defaults valueForKey:BibTeXDuringTypeset];
+  self.bibtexCommand = [defaults valueForKey:BibtexCommand];
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
   self.nCompile = [defaults valueForKey:TPNRunsPDFLatex];
   self.openConsole = [defaults valueForKey:OpenConsoleOnTypeset];

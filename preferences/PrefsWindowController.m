@@ -208,13 +208,15 @@
 
 - (void)menuNeedsUpdate:(NSMenu *)menu
 {
-  NSArray *engines = [self.enginesEditor.engineManager registeredEngineNames];
-  [menu removeAllItems];
-  for (NSString *name in engines) {    
-    NSMenuItem *item = [menu addItemWithTitle:name action:@selector(selectEngineName:) keyEquivalent:@""];
-    [item setTarget:self];
+  if (menu == [enginePopup menu]) {
+    NSArray *engines = [self.enginesEditor.engineManager registeredEngineNames];
+    [menu removeAllItems];
+    for (NSString *name in engines) {
+      NSMenuItem *item = [menu addItemWithTitle:name action:@selector(selectEngineName:) keyEquivalent:@""];
+      [item setTarget:self];
+    }
+    [enginePopup selectItemWithTitle:[self engineName]];
   }
-  [enginePopup selectItemWithTitle:[self engineName]];
 }
 
 

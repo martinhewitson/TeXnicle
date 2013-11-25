@@ -4288,6 +4288,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   self.project.settings.engineName = aName;
 }
 
+- (void) didSelectBibtexCommand:(NSString *)name
+{
+  self.project.settings.bibtexCommand = name;
+}
+
+- (NSString*)bibtexCommand
+{
+  return self.project.settings.bibtexCommand;
+}
+
 -(NSString*)engineName
 {
   return self.project.settings.engineName;

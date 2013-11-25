@@ -313,6 +313,7 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     e.doPS2PDF = [[self.delegate doPS2PDF] boolValue];
   }
   e.openConsole = [[self.delegate openConsole] boolValue];
+  e.bibtexCommand = [self.delegate bibtexCommand];
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if (liveUpdate && [[defaults valueForKey:TPLiveUpdateTypesetRunsOverride] boolValue]) {

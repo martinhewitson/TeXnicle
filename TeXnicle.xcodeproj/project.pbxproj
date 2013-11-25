@@ -172,6 +172,7 @@
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
 		2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */; };
+		2548303418422D650097060F /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
 		25487E48181645B700C0D61C /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25487E47181645B600C0D61C /* TeXnicle.icns */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
@@ -705,7 +706,7 @@
 		250848D8154B22420001685A /* AFTreeScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTreeScanner.h; sourceTree = "<group>"; };
 		250848D9154B22420001685A /* AFTreeScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTreeScanner.m; sourceTree = "<group>"; };
 		25086B37149F4467006A5A49 /* newTeXDoc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = newTeXDoc.icns; sourceTree = "<group>"; };
-		2509382B15C4F647007DACD2 /* TeXnicle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TeXnicle.entitlements; sourceTree = "<group>"; };
+		2509382B15C4F647007DACD2 /* TeXnicle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = TeXnicle.entitlements; path = TeXnicle/TeXnicle.entitlements; sourceTree = "<group>"; };
 		2509B03813EC0C290072961A /* NSAttributedString+LineNumbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LineNumbers.h"; sourceTree = "<group>"; };
 		2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LineNumbers.m"; sourceTree = "<group>"; };
 		250AF6E214EB952600A0332E /* ProjectEntity+ProjectTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProjectEntity+ProjectTemplates.h"; sourceTree = "<group>"; };
@@ -907,6 +908,8 @@
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
 		2547DFB51409FE5C002C0E2F /* MHStrokedFiledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedFiledView.h; sourceTree = "<group>"; };
 		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
+		2548303318422D600097060F /* log12.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log12.log; sourceTree = "<group>"; };
+		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
 		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
@@ -1604,6 +1607,7 @@
 			isa = PBXGroup;
 			children = (
 				25487E47181645B600C0D61C /* TeXnicle.icns */,
+				2509382B15C4F647007DACD2 /* TeXnicle.entitlements */,
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
 				2507731E138E5D82000F1118 /* TeXnicleImporter */,
@@ -1662,7 +1666,6 @@
 				25DB59191778BB9F000383AF /* TeXLogParser */,
 				25D10E1C176F00AE004C40AE /* MMTabBarView */,
 				25CFBD1016D2CF870025B35D /* Document Report */,
-				2509382B15C4F647007DACD2 /* TeXnicle.entitlements */,
 				258348941513B2C3008A21BE /* bibtex */,
 				25D57FB114EA5255008E02B5 /* Project Templates */,
 				25CED75414B73F0B0091D55F /* SupportedFilesManager */,
@@ -3051,8 +3054,6 @@
 			isa = PBXGroup;
 			children = (
 				25DB59481778BC3E000383AF /* log1.log */,
-				25DB59491778BC3E000383AF /* log10.log */,
-				25DB594A1778BC3E000383AF /* log11.log */,
 				25DB594B1778BC3E000383AF /* log2.log */,
 				25DB594C1778BC3E000383AF /* log3.log */,
 				25DB594D1778BC3E000383AF /* log4.log */,
@@ -3061,6 +3062,9 @@
 				25DB59501778BC3E000383AF /* log7.log */,
 				25DB59511778BC3E000383AF /* log8.log */,
 				25DB59521778BC3E000383AF /* log9.log */,
+				25DB59491778BC3E000383AF /* log10.log */,
+				25DB594A1778BC3E000383AF /* log11.log */,
+				2548303318422D600097060F /* log12.log */,
 			);
 			path = logfiles;
 			sourceTree = "<group>";
@@ -3505,6 +3509,7 @@
 				25DB59581778BC3E000383AF /* log11.log in Resources */,
 				250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */,
 				250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */,
+				2548303418422D650097060F /* log12.log in Resources */,
 				250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */,
 				25DB595C1778BC3E000383AF /* log5.log in Resources */,
 				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
@@ -4279,6 +4284,7 @@
 				2566D90F1783EB2500BA4755 /* TeXProject 10.xcdatamodel */,
 				2566D9101783EB2500BA4755 /* TeXProject 11.xcdatamodel */,
 				2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */,
+				2548303518427AE00097060F /* TeXProject 13.xcdatamodel */,
 				2566D9121783EB2500BA4755 /* TeXProject 2.xcdatamodel */,
 				2566D9131783EB2500BA4755 /* TeXProject 3.xcdatamodel */,
 				2566D9141783EB2500BA4755 /* TeXProject 4.xcdatamodel */,
@@ -4288,7 +4294,7 @@
 				2566D9181783EB2500BA4755 /* TeXProject 8.xcdatamodel */,
 				2566D9191783EB2500BA4755 /* TeXProject 9.xcdatamodel */,
 			);
-			currentVersion = 2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */;
+			currentVersion = 2548303518427AE00097060F /* TeXProject 13.xcdatamodel */;
 			path = TeXProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

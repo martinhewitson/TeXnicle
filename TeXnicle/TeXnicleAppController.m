@@ -94,6 +94,7 @@ NSString * const TEJumpBarEnabled = @"TEJumpBarEnabled";
 NSString * const TPShouldRunPS2PDF = @"TPShouldRunPS2PDF";
 NSString * const TPNRunsPDFLatex = @"TPNRunsPDFLatex";
 NSString * const BibTeXDuringTypeset = @"BibTeXDuringTypeset";
+NSString * const BibtexCommand = @"BibtexCommand";
 NSString * const TPDefaultEngineName = @"TPDefaultEngineName";
 NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
 
@@ -412,6 +413,9 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 	// BibTeX during typeset
 	defaultValues[BibTeXDuringTypeset] = @YES;
 	
+  // Bibtex command
+  defaultValues[BibtexCommand] = @"bibtex";
+  
 	// Run ps2pdf after typeset
 	defaultValues[TPShouldRunPS2PDF] = @YES;
   

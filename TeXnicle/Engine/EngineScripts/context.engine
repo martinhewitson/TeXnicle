@@ -30,7 +30,7 @@ fi
 # Executable values
 PATH=/usr/texbin:/usr/local/bin:$PATH
 ENGINE=texexec
-BIBTEX=/usr/texbin/bibtex
+TEXBIN=/usr/texbin
 
 # Process inputs.
 # TeXnicle passes the file to be processed as the first input to this 
@@ -41,12 +41,13 @@ nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
 runNumber=$6
+bibtexCommand=$7
 
 echo "****************************"
 echo "*** Typsetting: $mainfile"
 echo "*** Output dir: $outputDir"
 echo "***  N typeset: $nCompile"
-echo "***  Do bibtex: $doBibtex"
+echo "***  Do bibtex: $doBibtex ($bibtexCommand)"
 echo "****************************"
 
 
@@ -65,9 +66,9 @@ then
   if [ $doBibtex -eq 1 ]
   then
     echo "***------------------------------------------------------------"
-    echo "*** Running bibtex..."
+    echo "*** Running $bibtexCommand..."
     echo "***------------------------------------------------------------"
-    $BIBTEX "$mainfile"
+    $TEXBIN/$bibtexCommand "$mainfile"
   fi
 fi
 

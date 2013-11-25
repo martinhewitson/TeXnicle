@@ -39,6 +39,7 @@
 @property (nonatomic, strong) NSNumber * doBibtex;
 @property (nonatomic, strong) NSNumber * doPS2PDF;
 @property (nonatomic, strong) NSString * engineName;
+@property (nonatomic, strong) NSString * bibtexCommand;
 @property (nonatomic, strong) NSString * language;
 @property (nonatomic, strong) NSNumber * nCompile;
 @property (nonatomic, strong) NSNumber * openConsole;

@@ -18,7 +18,7 @@ fi
 # Executable values
 PATH=/usr/texbin:/usr/local/bin:$PATH
 # ENGINE=/usr/texbin/latex
-# BIBTEX=/usr/texbin/bibtex
+# TEXBIN=/usr/texbin
 # DVIPS=/usr/texbin/dvips
 # PS2PDF=/usr/local/bin/ps2pdf
 
@@ -31,12 +31,13 @@ nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
 runNumber=$6
+bibtexCommand=$7
 
 echo "****************************"
 echo "*** Typsetting: $mainfile"
 echo "*** Output dir: $outputDir"
 echo "***  N typeset: $nCompile"
-echo "***  Do bibtex: $doBibtex"
+echo "***  Do bibtex: $doBibtex ($bibtexCommand)"
 echo "****************************"
 
 # Go to the working directory

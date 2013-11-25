@@ -173,6 +173,7 @@ extern NSString * const TPPS2PDFPath;
 extern NSString * const TPDefaultEngineName;
 extern NSString * const TPNRunsPDFLatex;
 extern NSString * const BibTeXDuringTypeset;
+extern NSString * const BibtexCommand;
 extern NSString * const TPShouldRunPS2PDF;
 extern NSString * const OpenConsoleOnTypeset;
 

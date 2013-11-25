@@ -33,6 +33,7 @@
 @protocol TPEngineSettingsDelegate <NSObject>
 
 -(void)didSelectDoBibtex:(BOOL)state;
+-(void)didSelectBibtexCommand:(NSString*)name;
 -(void)didSelectDoPS2PDF:(BOOL)state;
 -(void)didSelectOpenConsole:(BOOL)state;
 -(void)didChangeNCompile:(NSInteger)number;
@@ -40,6 +41,7 @@
 -(void)didSelectLanguage:(NSString*)aName;
 
 -(NSString*)engineName;
+-(NSString*)bibtexCommand;
 -(NSNumber*)doBibtex;
 -(NSNumber*)doPS2PDF;
 -(NSNumber*)openConsole;
@@ -57,21 +59,7 @@
 @end
 
 @interface TPEngineSettingsController : NSViewController <TPEngineSettingsDelegate, NSTextFieldDelegate> {
-@private
-  IBOutlet NSPopUpButton *engineSelector;
-  IBOutlet NSButton *doBibtexButton;
-  IBOutlet NSButton *doPS2PDFButton;
-  IBOutlet NSButton *openConsoleButton;
-  IBOutlet NSTextField *nCompileTextField;
-  IBOutlet NSStepper *nCompileStepper;
-  IBOutlet NSTextField *nCompileLabel;
-  IBOutlet NSPopUpButton *languageSelector;
-  
-  IBOutlet MHStrokedFiledView *pane1;
-  IBOutlet MHStrokedFiledView *pane2;
-  IBOutlet MHStrokedFiledView *pane3;
-  IBOutlet MHStrokedFiledView *pane4;
-  
+@private  
 }
 
 @property (unsafe_unretained) id<TPEngineSettingsDelegate> delegate;

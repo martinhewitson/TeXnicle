@@ -64,6 +64,7 @@
     self.name = [[aPath lastPathComponent] stringByDeletingPathExtension];
     self.doBibtex = NO;
     self.doPS2PDF = NO;
+    self.bibtexCommand = [[NSUserDefaults standardUserDefaults] valueForKey:BibtexCommand];
     self.nCompile = 1;
     self.openConsole = YES;
     self.builtIn = NO;
@@ -265,7 +266,8 @@
                          [NSString stringWithFormat:@"%ld", self.nCompile],
                          [NSString stringWithFormat:@"%d", self.doBibtex],
                          [NSString stringWithFormat:@"%d", self.doPS2PDF],
-                         [NSString stringWithFormat:@"%ld", 1+runNumber] // script wants 1-based counting
+                         [NSString stringWithFormat:@"%ld", 1+runNumber], // script wants 1-based counting
+                         [NSString stringWithFormat:@"%@", self.bibtexCommand] // script wants 1-based counting
                          ];
 	[self.typesetTask setArguments:arguments];
 	
