@@ -229,6 +229,29 @@
 #pragma mark -
 #pragma mark List View delegate
 
+- (NSString*)selectedValue
+{
+  NSInteger row = [table selectedRow];
+  if (row<0) {
+    row = 0;
+  }
+  if ([[self filteredEntries] count] == 0) {
+    return nil;
+  }
+  
+	id value = [self filteredEntries][row];
+  NSString *tag = @"";
+  if ([value respondsToSelector:@selector(tag)]) {
+    tag = [value valueForKey:@"tag"];
+  } else if ([value respondsToSelector:@selector(string)]) {
+    tag = [value string];
+  } else {
+    tag = value;
+  }
+  
+  return tag;
+}
+
 - (IBAction)selectSelectedItem:(id)sender
 {
   NSInteger row = [table selectedRow];
@@ -237,23 +260,7 @@
 
 - (void) userSelectedRow:(NSNumber*)aRow
 {
-  NSInteger row = [aRow integerValue];
-  if (row<0) {
-    row = 0;
-  }
-  if ([[self filteredEntries] count] == 0) {
-    return;
-  }
-  
-	id value = [self filteredEntries][row];
-  NSString *tag = @"";
-  if ([value respondsToSelector:@selector(tag)]) {
-    tag = [value valueForKey:@"tag"];
-  } else if ([value respondsToSelector:@selector(string)]) {
-    tag = [value string];    
-  } else {
-    tag = value;
-  }
+  NSString *tag = [self selectedValue];
   
 	if (self.mode == TPPopupListInsert) {
 		if (self.delegate && [self.delegate respondsToSelector:@selector(insertWordAtCurrentLocation:)]) {

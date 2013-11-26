@@ -2643,10 +2643,34 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
     }
     
-    // tab key to complete
+    // tab key to complete upto first / or end
     if ([theEvent keyCode] == 48 ) {
-      [_popupList selectSelectedItem:self];
-      [self wrapLine];
+      NSString *selectedValue = [_popupList selectedValue];
+      if (selectedValue) {
+        
+        NSString *arg = [self currentArgument];
+        selectedValue = [selectedValue stringByReplacingOccurrencesOfString:arg withString:@""];
+        
+        // get part upto first /
+        NSArray *parts = [selectedValue componentsSeparatedByString:@"/"];
+        
+        for (NSInteger kk=0; kk<[parts count]; kk++) {
+          NSString *part = parts[kk];
+          NSRange r = [arg rangeOfString:part];
+          if (r.location != NSNotFound) {
+            continue;
+          } else {
+            NSString *insert = [part stringByReplacingOccurrencesOfString:arg withString:@""];
+            if (kk<[parts count]-1) {
+              insert = [insert stringByAppendingString:@"/"];
+            }
+            [self insertText:insert];
+            [self completeArgument];
+            [self wrapLine];
+            break;
+          }
+        }
+      }
       return;
     }
     

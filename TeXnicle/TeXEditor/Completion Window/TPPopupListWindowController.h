@@ -69,6 +69,7 @@
 - (IBAction)moveUp:(id)sender;
 - (IBAction)moveDown:(id)sender;
 - (IBAction)selectSelectedItem:(id)sender;
+- (NSString*)selectedValue;
 - (void) moveToPoint:(NSPoint)aPoint;
 - (NSPoint)currentPoint;
 
