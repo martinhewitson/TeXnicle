@@ -33,16 +33,24 @@
 
 @protocol TPConsoleDelegate <NSObject, TPTeXLogViewDelegate>
 
+- (void) didChangeLogOutputLevel:(NSInteger)view;
+- (void) didSelectConsoleView:(NSInteger)view;
+- (void) didSelectLogInfoItems:(BOOL)state;
+- (void) didSelectLogWarningItems:(BOOL)state;
+- (void) didSelectLogErrorItems:(BOOL)state;
+
+- (NSInteger)logOutputLevel;
+- (NSInteger)consoleView;
+- (BOOL)showLogInfoItems;
+- (BOOL)showLogWarningItems;
+- (BOOL)showLogErrorItems;
 
 
 @end
 
 
-@interface TPConsoleViewController : NSViewController <MHConsoleViewer, TPTeXLogViewDelegate> {
+@interface TPConsoleViewController : NSViewController <MHConsoleViewer, TPTeXLogViewDelegate, TPConsoleDelegate> {
 @private
-  IBOutlet NSTextView *textView;
-	IBOutlet NSPopUpButton *displayLevel;
-  IBOutlet MHStrokedFiledView *toolbarView;
   
 }
 

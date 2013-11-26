@@ -21,6 +21,9 @@ extern NSString * const TPTeXLogViewDidSelectItemNotification;
 @optional
 - (BOOL)texlogview:(TPTeXLogViewController*)logview shouldShowEntriesForFile:(NSString*)aFile;
 - (void)texlogview:(TPTeXLogViewController*)logview didSelectLogItem:(TPLogItem*)aLog;
+- (void)shouldShowInfoItems:(BOOL)state;
+- (void)shouldShowWarningItems:(BOOL)state;
+- (void)shouldShowErrorItems:(BOOL)state;
 
 @end
 
@@ -33,5 +36,9 @@ extern NSString * const TPTeXLogViewDidSelectItemNotification;
 - (id) initWithParsedLog:(TPParsedLog*)log delegate:(id<TPTeXLogViewDelegate>)aDelegate;
 
 - (void) reload;
+
+- (void) showLogInfoItems:(BOOL)state;
+- (void) showLogWarningItems:(BOOL)state;
+- (void) showLogErrorItems:(BOOL)state;
 
 @end

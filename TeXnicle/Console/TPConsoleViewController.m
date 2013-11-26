@@ -36,6 +36,10 @@
 @property (nonatomic, retain) IBOutlet NSTabView *tabView;
 @property (nonatomic, retain) IBOutlet NSView *logViewContainer;
 @property (nonatomic, retain) TPTeXLogViewController *logViewController;
+@property (nonatomic, retain) IBOutlet NSTextView *textView;
+@property (nonatomic, retain) IBOutlet NSPopUpButton *displayLevel;
+@property (nonatomic, retain) IBOutlet MHStrokedFiledView *toolbarView;
+
 
 @end
 
@@ -56,7 +60,7 @@
     // Initialization code here.
     TPThemeManager *tm = [TPThemeManager sharedManager];
     TPTheme *theme = tm.currentTheme;
-    [textView setFont:theme.consoleFont];
+    [self.textView setFont:theme.consoleFont];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
@@ -72,28 +76,44 @@
 
 - (IBAction)selectView:(id)sender
 {
-  [self.tabView selectTabViewItemAtIndex:[self.viewSelector selectedSegment]];
+  NSInteger idx = [self.viewSelector selectedSegment];
+  [self.tabView selectTabViewItemAtIndex:idx];
+  [self didSelectConsoleView:idx];
 }
 
 
 - (void)awakeFromNib
 {
   NSColor *color1 = [NSColor colorWithDeviceRed:231.0/255.0 green:231.0/255.0 blue:231.0/255.0 alpha:1.0];
-  [toolbarView setFillColor:color1];
+  [self.toolbarView setFillColor:color1];
   
   self.logViewController = [[TPTeXLogViewController alloc] initWithParsedLog:nil delegate:self];
   [self.logViewController.view setFrame:self.logViewContainer.bounds];
   [self.logViewContainer addSubview:self.logViewController.view];
   
   [self setupTextview];
+  
+  [self setupUI];
+}
+
+- (void) setupUI
+{
+  [self.viewSelector selectSegmentWithTag:[self consoleView]];
+  [self.tabView selectTabViewItemAtIndex:[self consoleView]];
+  
+  [self.displayLevel selectItemAtIndex:[self logOutputLevel]];
+  [self.logViewController showLogInfoItems:[self showLogInfoItems]];
+  [self.logViewController showLogWarningItems:[self showLogWarningItems]];
+  [self.logViewController showLogErrorItems:[self showLogErrorItems]];
+  
 }
 
 - (void) setupTextview
 {
   TPTheme *theme = [TPThemeManager currentTheme];
-	[textView setFont:theme.consoleFont];
-  [textView setTextColor:theme.documentTextColor];
-  [textView setBackgroundColor:theme.documentEditorBackgroundColor];
+	[self.textView setFont:theme.consoleFont];
+  [self.textView setTextColor:theme.documentTextColor];
+  [self.textView setBackgroundColor:theme.documentEditorBackgroundColor];
 }
 
 
@@ -117,14 +137,17 @@
 
 - (IBAction) clear:(id)sender
 {
-	NSTextStorage *textStorage = [textView textStorage];	
+	NSTextStorage *textStorage = [self.textView textStorage];
 	[textStorage deleteCharactersInRange:NSMakeRange(0, [textStorage length])];	
 }
 
 - (IBAction) displayLevelChanged:(id)sender
 {
-	
+  if (sender == self.displayLevel) {
+    [self didChangeLogOutputLevel:[self.displayLevel indexOfSelectedItem]];
+  }
 }
+
 
 - (void) error:(NSString*)someText 
 {
@@ -143,14 +166,14 @@
     [attstr addAttribute:NSFontAttributeName
                    value:font
                    range:stringRange];
-		[[textView textStorage] appendAttributedString:attstr];
-		[textView moveToEndOfDocument:self];
+		[[self.textView textStorage] appendAttributedString:attstr];
+		[self.textView moveToEndOfDocument:self];
 	}
 }
 
 - (void) message:(NSString*)someText 
 {
-	if ([displayLevel indexOfSelectedItem] < TPConsoleDisplayErrors) {
+	if ([self.displayLevel indexOfSelectedItem] < TPConsoleDisplayErrors) {
 		[self appendText:someText withColor:[NSColor blueColor]];
 	}
 }
@@ -158,7 +181,7 @@
 
 - (void) appendText:(NSString *)someText
 {
-	if ([displayLevel indexOfSelectedItem] < TPConsoleDisplayTeXnicle) {
+	if ([self.displayLevel indexOfSelectedItem] < TPConsoleDisplayTeXnicle) {
 		[self appendText:someText withColor:nil];
 	}
 }
@@ -188,11 +211,11 @@
       [attstr addAttribute:NSFontAttributeName
                      value:font
                      range:stringRange];
-			[[textView textStorage] appendAttributedString:attstr];
+			[[self.textView textStorage] appendAttributedString:attstr];
 		}
 	}
 	
-  [textView moveToEndOfDocument:self];
+  [self.textView moveToEndOfDocument:self];
 }
 
 #pragma mark -
@@ -214,6 +237,105 @@
   
   return YES;
 }
+
+- (void) shouldShowErrorItems:(BOOL)state
+{
+  [self didSelectLogErrorItems:state];
+}
+
+- (void) shouldShowInfoItems:(BOOL)state
+{
+  [self didSelectLogInfoItems:state];
+}
+
+- (void) shouldShowWarningItems:(BOOL)state
+{
+  [self didSelectLogWarningItems:state];
+}
+
+#pragma mark -
+#pragma mark console view delegate
+
+- (void) didChangeLogOutputLevel:(NSInteger)view
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didChangeLogOutputLevel:)]) {
+    [self.delegate didChangeLogOutputLevel:view];
+  }
+}
+
+- (void) didSelectConsoleView:(NSInteger)view
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectConsoleView:)]) {
+    [self.delegate didSelectConsoleView:view];
+  }
+}
+
+- (void) didSelectLogInfoItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLogInfoItems:)]) {
+    [self.delegate didSelectLogInfoItems:state];
+  }
+}
+
+- (void) didSelectLogWarningItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLogWarningItems:)]) {
+    [self.delegate didSelectLogWarningItems:state];
+  }
+}
+
+- (void) didSelectLogErrorItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLogErrorItems:)]) {
+    [self.delegate didSelectLogErrorItems:state];
+  }
+}
+
+- (NSInteger)logOutputLevel
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(logOutputLevel)]) {
+    return [self.delegate logOutputLevel];
+  }
+  
+  return TPConsoleDisplayAll;
+}
+
+- (NSInteger)consoleView
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(consoleView)]) {
+    return [self.delegate consoleView];
+  }
+  
+  return 0;
+}
+
+- (BOOL)showLogInfoItems
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(showLogInfoItems)]) {
+    return [self.delegate showLogInfoItems];
+  }
+  
+  return YES;
+}
+
+- (BOOL)showLogWarningItems
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(showLogWarningItems)]) {
+    return [self.delegate showLogWarningItems];
+  }
+  
+  return YES;
+}
+
+- (BOOL)showLogErrorItems
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(showLogErrorItems)]) {
+    return [self.delegate showLogErrorItems];
+  }
+  
+  return YES;
+}
+
 
 
 

@@ -38,5 +38,24 @@
 @dynamic editorWidth;
 @dynamic maxOutlineDepth;
 @dynamic project;
+@dynamic logOutputLevel;
+@dynamic showLogErrorItems;
+@dynamic showLogWarningItems;
+@dynamic showLogInfoItems;
+@dynamic consoleView;
+
+- (void) awakeFromFetch
+{
+  if (self.consoleView == nil) {
+    self.consoleView = @(0);
+  }
+}
+
+- (void) updateSettings
+{
+  if (self.consoleView == nil) {
+    self.consoleView = @(0);
+  }
+}
 
 @end

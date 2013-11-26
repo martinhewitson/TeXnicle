@@ -64,6 +64,12 @@ NSString * const TPMaxOutlineDepth = @"TPMaxOutlineDepth";
 NSString * const TPLiveUpdateState = @"TPLiveUpdateState";
 NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 
+NSString * const TPLogOutputLevel = @"TPLogOutputLevel";
+NSString * const TPConsoleView = @"TPConsoleView";
+NSString * const TPShowInfoItems = @"TPShowInfoItems";
+NSString * const TPShowWarningItems = @"TPShowWarningItems";
+NSString * const TPShowErrorItems = @"TPShowErrorItems";
+
 @interface ExternalTeXDoc ()
 
 @property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
@@ -95,6 +101,12 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 @property (unsafe_unretained) IBOutlet NSView *texEditorContainer;
 
 @property (strong) TPDocumentReportWindowController *documentReport;
+
+@property (nonatomic, assign) NSInteger logOutputLevel;
+@property (nonatomic, assign) NSInteger consoleView;
+@property (nonatomic, assign) BOOL showLogInfoItems;
+@property (nonatomic, assign) BOOL showLogWarningItems;
+@property (nonatomic, assign) BOOL showLogErrorItems;
 
 @end
 
@@ -173,6 +185,13 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
     // show thumbnails
     [dict setValue:@(_showingThumbnails) forKey:TPPDFThumbnailsShowingState];
     
+    // console settings
+    [dict setValue:@(self.logOutputLevel) forKey:TPLogOutputLevel];
+    [dict setValue:@(self.consoleView) forKey:TPConsoleView];
+    [dict setValue:@(self.showLogInfoItems) forKey:TPShowInfoItems];
+    [dict setValue:@(self.showLogWarningItems) forKey:TPShowWarningItems];
+    [dict setValue:@(self.showLogErrorItems) forKey:TPShowErrorItems];
+    
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];  
     [UKXattrMetadataStore setData:data forKey:@"com.bobsoft.TeXnicleUISettings" atPath:[[self fileURL] path] traverseLink:YES];  
   }
@@ -197,6 +216,12 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
         // show thumbs
         _showingThumbnails = [[dict valueForKey:TPPDFThumbnailsShowingState] boolValue];
         
+        // console settings
+        self.logOutputLevel = [[dict valueForKey:TPLogOutputLevel] integerValue];
+        self.consoleView = [[dict valueForKey:TPConsoleView] integerValue];
+        self.showLogErrorItems = [[dict valueForKey:TPShowErrorItems] boolValue];
+        self.showLogWarningItems = [[dict valueForKey:TPShowWarningItems] boolValue];
+        self.showLogInfoItems = [[dict valueForKey:TPShowInfoItems] boolValue];
       }
     }
   }
@@ -2176,16 +2201,19 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
 -(void)didChangeNCompile:(NSInteger)number
 {
   [self.settings setValue:@(number) forKey:@"nCompile"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectEngineName:(NSString*)aName
 {
   [self.settings setValue:aName forKey:@"engineName"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(void)didSelectBibtexCommand:(NSString*)aName
 {
   [self.settings setValue:aName forKey:@"bibtexCommand"];
+  [self updateChangeCount:NSChangeUndone];
 }
 
 -(NSString*)engineName
@@ -2988,6 +3016,65 @@ NSString * const TPPDFThumbnailsShowingState = @"TPPDFThumbnailsShowingState";
     
   }
 }
+
+#pragma mark -
+#pragma mark Console delegate
+
+- (void) didSelectConsoleView:(NSInteger)view
+{
+  self.consoleView = view;
+  [self updateChangeCount:NSChangeUndone];
+}
+
+- (void) didChangeLogOutputLevel:(NSInteger)view
+{
+  self.logOutputLevel = view;
+  [self updateChangeCount:NSChangeUndone];
+}
+
+- (void) didSelectLogInfoItems:(BOOL)state
+{
+  self.showLogInfoItems = state;
+  [self updateChangeCount:NSChangeUndone];
+}
+
+- (void) didSelectLogWarningItems:(BOOL)state
+{
+  self.showLogWarningItems = state;
+  [self updateChangeCount:NSChangeUndone];
+}
+
+- (void) didSelectLogErrorItems:(BOOL)state
+{
+  self.showLogErrorItems = state;
+  [self updateChangeCount:NSChangeUndone];
+}
+
+- (NSInteger)logOutputLevel
+{
+  return _logOutputLevel;
+}
+
+- (NSInteger)consoleView
+{
+  return _consoleView;
+}
+
+- (BOOL)showLogInfoItems
+{
+  return _showLogInfoItems;
+}
+
+- (BOOL)showLogWarningItems
+{
+  return _showLogWarningItems;
+}
+
+- (BOOL)showLogErrorItems
+{
+  return _showLogErrorItems;
+}
+
 
 
 

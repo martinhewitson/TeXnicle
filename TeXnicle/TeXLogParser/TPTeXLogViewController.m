@@ -119,6 +119,11 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
   self.showWarnings = [self.selectionControl isSelectedForSegment:1];
   self.showErrors = [self.selectionControl isSelectedForSegment:2];
   [self reload];
+  
+  // inform delegate
+  [self shouldShowErrorItems:self.showErrors];
+  [self shouldShowWarningItems:self.showWarnings];
+  [self shouldShowInfoItems:self.showInfos];
 }
 
 - (void) handleOutlineViewDoubleClick
@@ -290,8 +295,46 @@ NSString * const TPLogfileAvailableNotification = @"TPLogfileAvailableNotificati
   }
 }
 
+- (void) showLogInfoItems:(BOOL)state
+{
+  [self.selectionControl setSelected:state forSegment:0];
+}
+
+- (void) showLogWarningItems:(BOOL)state
+{
+  [self.selectionControl setSelected:state forSegment:1];
+}
+
+- (void) showLogErrorItems:(BOOL)state
+{
+  [self.selectionControl setSelected:state forSegment:2];
+}
+
+
 #pragma mark -
 #pragma mark Delegate
+
+- (void) shouldShowInfoItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldShowInfoItems:)]) {
+    [self.delegate shouldShowInfoItems:state];
+  }
+}
+
+- (void) shouldShowWarningItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldShowWarningItems:)]) {
+    [self.delegate shouldShowWarningItems:state];
+  }
+}
+
+- (void) shouldShowErrorItems:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldShowErrorItems:)]) {
+    [self.delegate shouldShowErrorItems:state];
+  }
+}
+
 
 - (BOOL) texlogview:(TPTeXLogViewController *)logview shouldShowEntriesForFile:(NSString *)aFile
 {

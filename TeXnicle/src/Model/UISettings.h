@@ -33,6 +33,11 @@
 @interface UISettings : NSManagedObject
 
 // core data properties
+@property (nonatomic, strong) NSNumber * logOutputLevel;
+@property (nonatomic, strong) NSNumber * consoleView;
+@property (nonatomic, strong) NSNumber * showLogInfoItems;
+@property (nonatomic, strong) NSNumber * showLogWarningItems;
+@property (nonatomic, strong) NSNumber * showLogErrorItems;
 @property (nonatomic, strong) NSNumber * showPDFThumbnails;
 @property (nonatomic, strong) NSNumber * controlsWidth;
 @property (nonatomic, strong) NSNumber * editorWidth;

@@ -4795,6 +4795,58 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return @[];
 }
 
+#pragma mark -
+#pragma mark Console delegate
+
+- (void) didSelectConsoleView:(NSInteger)view
+{
+  self.project.uiSettings.consoleView = @(view);
+}
+
+- (void) didChangeLogOutputLevel:(NSInteger)view
+{
+  self.project.uiSettings.logOutputLevel = @(view);
+}
+
+- (void) didSelectLogInfoItems:(BOOL)state
+{
+  self.project.uiSettings.showLogInfoItems = @(state);
+}
+
+- (void) didSelectLogWarningItems:(BOOL)state
+{
+  self.project.uiSettings.showLogWarningItems = @(state);
+}
+
+- (void) didSelectLogErrorItems:(BOOL)state
+{
+  self.project.uiSettings.showLogErrorItems = @(state);
+}
+
+- (NSInteger)logOutputLevel
+{
+  return [self.project.uiSettings.logOutputLevel integerValue];
+}
+
+- (NSInteger)consoleView
+{
+  return [self.project.uiSettings.consoleView integerValue];
+}
+
+- (BOOL)showLogInfoItems
+{
+  return [self.project.uiSettings.showLogInfoItems boolValue];
+}
+
+- (BOOL)showLogWarningItems
+{
+  return [self.project.uiSettings.showLogWarningItems boolValue];
+}
+
+- (BOOL)showLogErrorItems
+{
+  return [self.project.uiSettings.showLogErrorItems boolValue];
+}
 
 
 @end
