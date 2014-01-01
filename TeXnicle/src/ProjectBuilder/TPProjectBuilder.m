@@ -231,12 +231,26 @@
 // Returns a file in the 'files on disk' array that matches the given argument. File extensions are ignored. Only the last path component (file name) is compared.
 - (NSString*)fileForArgument:(NSString*)arg
 {
+#if PROJECT_BUILDER_DEBUG
+  NSLog(@"Getting file for argument %@", arg);
+#endif
+  
+  // check for exact match
+  for (NSString *file in self.filesOnDiskList) {
+    // do we need to compare extension?
+    if ([file isEqualToString:arg]) {
+      return file;
+    }
+  }
+  
+  // if we didn't find an exact match, check for a match without extension
   for (NSString *file in self.filesOnDiskList) {
     NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
     if ([name isEqualToString:[[arg lastPathComponent] stringByDeletingPathExtension]]) {
       return file;
     }
   }
+  
   return nil;
 }
 
