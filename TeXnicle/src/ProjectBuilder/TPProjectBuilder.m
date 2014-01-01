@@ -13,7 +13,7 @@
 //      * Redistributions in binary form must reproduce the above copyright
 //        notice, this list of conditions and the following disclaimer in the
 //        documentation and/or other materials provided with the distribution.
-//  
+//
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 //  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -153,7 +153,7 @@
 {
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];  
+  NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];
   if (results == nil) {
     [NSApp presentError:error];
     return nil;
@@ -189,12 +189,12 @@
   
   // warn that no main file was found
   NSAlert *alert = [NSAlert alertWithMessageText:@"Main File Not Found"
-                                   defaultButton:@"OK" 
+                                   defaultButton:@"OK"
                                  alternateButton:nil
                                      otherButton:nil
                        informativeTextWithFormat:@"No file was found containing a \\documentclass command"];
   [alert runModal];
-    
+  
   return nil;
 }
 
@@ -211,7 +211,7 @@
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   NSFileManager *fm = [NSFileManager defaultManager];
   NSError *error = nil;
-  NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];  
+  NSArray *results = [fm contentsOfDirectoryAtPath:aPath error:&error];
   for (NSString *path in results) {
     NSString *fullpath = [aPath stringByAppendingPathComponent:path];
     NSDictionary *atts = [fm attributesOfItemAtPath:fullpath error:&error];
@@ -271,7 +271,7 @@
   if (self.mainfile) {
     NSString *mainFilePath = [self.projectDir stringByAppendingPathComponent:self.mainfile];
     ProjectEntity *project = [aDocument project];
-    NSManagedObjectContext *moc = [aDocument managedObjectContext];	
+    NSManagedObjectContext *moc = [aDocument managedObjectContext];
     FileEntity *file = [self addFileAtPath:mainFilePath toFolder:nil inProject:project inMOC:moc];
     // set as main file
     [project setValue:file forKey:@"mainFile"];
@@ -279,13 +279,13 @@
     [self document:aDocument addProjectItemsFromFile:mainFilePath];
     [file setValue:@0 forKey:@"sortIndex"];
     if ([self.reportString length] > 0) {
-
+      
       // show error messages in console
       [[ConsoleController sharedConsoleController] showWindow:self];
       [[ConsoleController sharedConsoleController] error:[self.reportString string]];
       
     }
-  }  
+  }
   [aDocument.projectItemTreeController updateSortOrder];
 }
 
@@ -294,15 +294,15 @@
 {
   TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
   ProjectEntity *project = [aDocument project];
-//  NSFileManager *fm = [NSFileManager defaultManager];
-  NSManagedObjectContext *moc = [aDocument managedObjectContext];	
+  //  NSFileManager *fm = [NSFileManager defaultManager];
+  NSManagedObjectContext *moc = [aDocument managedObjectContext];
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
 	NSCharacterSet *ns = [NSCharacterSet newlineCharacterSet];
   // load the file as a string
   MHFileReader *fr = [[MHFileReader alloc] init];
   NSString *string = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:aFile]];
   if (string == nil) {
-    [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];    
+    [[ConsoleController sharedConsoleController] error:[NSString stringWithFormat:@"Failed to load contents of file %@", aFile]];
   } else {
     
     string = [TPRegularExpression stringByReplacingOccurrencesOfRegex:@"\n" withString:@" " inString:string];
@@ -319,7 +319,7 @@
         
         // check if this word matches any of the tags
         for (NSString *tag in [self includeTags]) {
-          if ([word hasPrefix:tag]) {          
+          if ([word hasPrefix:tag]) {
 #if PROJECT_BUILDER_DEBUG
             NSLog(@"%ld, Matched tag %@ with word %@", loc, tag, word);
 #endif
@@ -328,7 +328,7 @@
             // we need a longer string here, we should probably pass the full string and a start index
             // to look for the argument
             NSInteger argStart = loc-[word length];
-            NSString *arg = [string parseArgumentStartingAt:&argStart];            
+            NSString *arg = [string parseArgumentStartingAt:&argStart];
 #if PROJECT_BUILDER_DEBUG
             NSLog(@"Got arg %@", arg);
 #endif
@@ -350,7 +350,7 @@
                 continue;
               }
               
-              NSString *fullpath = [[self.projectDir stringByAppendingPathComponent:filearg] stringByStandardizingPath]; 
+              NSString *fullpath = [[self.projectDir stringByAppendingPathComponent:filearg] stringByStandardizingPath];
 #if PROJECT_BUILDER_DEBUG
               NSLog(@"Full path %@", fullpath);
 #endif
@@ -369,8 +369,8 @@
 #if PROJECT_BUILDER_DEBUG
                   NSLog(@"+ Adding %@", fullpath);
 #endif
-                  NSString *relativePath = [[[self.projectDir relativePathTo:fullpath] stringByDeletingLastPathComponent] stringByStandardizingPath];            
-                  NSArray *pathComps = [relativePath pathComponents];                        
+                  NSString *relativePath = [[[self.projectDir relativePathTo:fullpath] stringByDeletingLastPathComponent] stringByStandardizingPath];
+                  NSArray *pathComps = [relativePath pathComponents];
                   
                   // Make folders for each path component, if required
                   FolderEntity *folder = [self makeFoldersForComponents:pathComps inProject:project inMOC:moc];
@@ -399,8 +399,8 @@
                 }
               }
             }
-          }                    
-        } // end loop over tags        
+          }
+        } // end loop over tags
       } // end if starting a word
       loc++;
     } // end while loop
@@ -411,7 +411,7 @@
 - (FileEntity*) addFileAtPath:(NSString*)fullpath toFolder:(FolderEntity*)folder inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
   NSString *extension = [fullpath pathExtension];
-
+  
   
   // check if the file was a text file
 	BOOL isTextFile = NO;
@@ -447,7 +447,7 @@
 	if ([extension isEqual:@"tex"]) {
 		entity = [NSEntityDescription entityForName:@"TeXFile" inManagedObjectContext:moc];
 	} else {
-		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];		
+		entity = [NSEntityDescription entityForName:@"File" inManagedObjectContext:moc];
 	}
 	
 	newFile = [[FileEntity alloc] initWithEntity:entity
@@ -471,10 +471,10 @@
 	
 	// set isText
 	[newFile setValue:@(isTextFile) forKey:@"isText"];
-	 
+  
 	// configure the textstorage
 	[newFile reconfigureDocument];
-			
+  
 	// Set the filepath to the given one, or to the path in the project
   [newFile setValue:fullpath forKey:@"filepath"];
 	
@@ -519,7 +519,7 @@
       if ([filepath isEqualToString:[folder pathRelativeToProject]]) {
         // skip making this one
         createFolder = NO;
-        parentItem = folder;                
+        parentItem = folder;
         break;
       }
     }
@@ -534,16 +534,16 @@
       
       // set project
       [newFolder setValue:project forKey:@"project"];
-            
+      
       // set parent
       [newFolder setParent:parentItem];
-            
+      
 #if PROJECT_BUILDER_DEBUG
       NSLog(@"Adding new folder: %@", newFolder);
 #endif
       parentItem = newFolder;
     }
-    lastComp = comp;              
+    lastComp = comp;
   } // end loop over path components
   return parentItem;
 }
