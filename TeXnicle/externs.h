@@ -179,6 +179,7 @@ extern NSString * const OpenConsoleOnTypeset;
 
 extern NSString * const TPTrashFiles;
 extern NSString * const TPTrashDocumentFileWhenTrashing;
+extern NSString * const TPTrashAuxFilesRecursively;
 extern NSString * const TPConsoleDisplayLevel;
 extern NSString * const TPSpellCheckerLanguage;
 extern NSString * const TPRestoreOpenTabs;

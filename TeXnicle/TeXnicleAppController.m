@@ -101,6 +101,7 @@ NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
 
 NSString * const TPTrashFiles = @"TPTrashFiles";
 NSString * const TPTrashDocumentFileWhenTrashing = @"TPTrashDocumentFileWhenTrashing";
+NSString * const TPTrashAuxFilesRecursively = @"TPTrashAuxFilesRecursively";
 NSString * const TPSpellCheckerLanguage = @"TPSpellCheckerLanguage";
 NSString * const TPRestoreOpenTabs = @"TPRestoreOpenTabs";
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
@@ -426,6 +427,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
 	NSArray *files = @[@"aux", @"log", @"bbl", @"out"];
 	defaultValues[TPTrashFiles] = files;
 	defaultValues[TPTrashDocumentFileWhenTrashing] = @YES;
+  defaultValues[TPTrashAuxFilesRecursively] = @NO;
   
 	//---------- Console settings
 	[defaultValues setValue:@0 forKey:TPConsoleDisplayLevel];	

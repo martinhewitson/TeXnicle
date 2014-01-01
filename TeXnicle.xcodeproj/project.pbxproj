@@ -909,7 +909,7 @@
 		2547DFB51409FE5C002C0E2F /* MHStrokedFiledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedFiledView.h; sourceTree = "<group>"; };
 		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
 		2548303318422D600097060F /* log12.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log12.log; sourceTree = "<group>"; };
-		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
+		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
 		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
@@ -4100,7 +4100,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -4133,7 +4133,7 @@
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;

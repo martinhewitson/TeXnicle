@@ -68,6 +68,7 @@
 
 - (id)initWithPath:(NSString*)aPath;
 + (TPEngine*)engineWithPath:(NSString*)aPath;
++ (NSArray *)scanProperties;
 + (NSString*)defaultImageIncludeString;
 - (void) setupObservers;
 

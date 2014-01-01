@@ -33,6 +33,7 @@
 #import "NSApplication+SystemVersion.h"
 #import "TPTeXLogParser.h"
 #import "TPLogItem.h"
+#import "NSString+LaTeX.h"
 
 @interface TPEngine ()
 
@@ -360,6 +361,9 @@
 
 - (void) trashAuxFiles:(BOOL)keepDocument
 {
+  NSFileManager *fm = [NSFileManager defaultManager];
+	NSError *error = nil;
+  
 	// build path to the pdf file
   [self enginePostMessage:[NSString stringWithFormat:@"Trashing aux files for %@", [self.documentPath lastPathComponent]]];
   
@@ -368,37 +372,101 @@
   // trash document as well?
   if (keepDocument == NO && [[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
     if (self.compiledDocumentPath) {
-      NSString *ext = [self.compiledDocumentPath pathExtension];
-      if (ext != nil) {
-        filesToClear = [filesToClear arrayByAddingObject:ext];
-      }
+      if ([fm fileExistsAtPath:self.compiledDocumentPath]) {
+        if ([fm removeItemAtPath:self.compiledDocumentPath error:&error]) {
+          [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", self.compiledDocumentPath]];
+        } else {
+          [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", self.compiledDocumentPath, [error localizedDescription]]];
+        }
+      }		
     }
   }
   
-//  NSLog(@"  deleting %@ for %@", filesToClear, self.documentPath);
-  NSFileManager *fm = [NSFileManager defaultManager];
-	NSError *error = nil;
-	for (NSString *ext in filesToClear) {
-		error = nil;
-		NSString *file = [self.documentPath stringByAppendingPathExtension:ext];
-    if ([fm fileExistsAtPath:file]) {
-      if ([fm removeItemAtPath:file error:&error]) {
-        [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", file]];
-      } else {
-        [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
-      } 
-    }		
-	}
-	
+  // delete, including sub dirs
+  NSURL *url = [NSURL fileURLWithPath:[self.documentPath stringByDeletingLastPathComponent]];
+  [self trashAuxFiles:filesToClear inDirectory:url];
   
 }
 
-- (void) trashAuxFiles:(NSArray*)fileTypes inDirectory:(NSString*)aDir
++ (NSArray *)scanProperties
+{
+  static NSArray *scanProperties = nil;
+  if (!scanProperties) {
+    scanProperties = @[NSURLNameKey,
+                       NSURLIsDirectoryKey,
+                       NSURLIsRegularFileKey,
+                       NSURLIsHiddenKey,
+                       NSURLIsPackageKey];
+  }
+  return scanProperties;
+}
+
+- (void) trashAuxFiles:(NSArray*)fileTypes inDirectory:(NSURL*)aDir
 {
   NSError *error = nil;
-  NSFileManager *fm = [NSFileManager defaultManager];
-  NSArray *items = [fm contentsOfDirectoryAtPath:aDir error:&error];
+  id isDir;
+  id isDirPackage;
+  BOOL trashRecursively = [[NSUserDefaults standardUserDefaults] boolForKey:TPTrashAuxFilesRecursively];
   
+  NSDirectoryEnumerationOptions options = NSDirectoryEnumerationSkipsHiddenFiles;
+  
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSArray *urls = [fm contentsOfDirectoryAtURL:aDir
+																								includingPropertiesForKeys:[TPEngine scanProperties]
+																																	 options:options
+																																		 error:&error];
+  
+  // go through each item
+  for (NSURL *url in urls) {
+    
+//    NSLog(@"Checking url %@", url);
+    
+    id isChildHidden;
+    [url getResourceValue:&isChildHidden forKey:NSURLIsHiddenKey error:&error];
+    if ([isChildHidden boolValue] || [[url path] characterAtIndex:0]=='.') {
+      continue;
+    }
+    
+    id isSymbolicLink;
+    [url getResourceValue:&isSymbolicLink forKey:NSURLIsSymbolicLinkKey error:&error];
+    if ([isSymbolicLink boolValue]) {
+      continue;
+    }
+    
+    
+		[url getResourceValue:&isDir forKey:NSURLIsDirectoryKey error:&error];
+		[url getResourceValue:&isDirPackage forKey:NSURLIsPackageKey error:&error];
+    // if it's a directory, call again
+		if ([isDir boolValue]) {
+      if (trashRecursively) {
+        [self trashAuxFiles:fileTypes inDirectory:url];
+      }
+    } else {
+
+      // check each of the file types we should delete
+      NSString *ext = [url pathExtension];
+      
+      if ([fileTypes containsObject:ext]) {
+        error = nil;
+        NSString *file = [url path];
+        NSString *filename = [file lastPathComponent];
+        
+        // recycle to trash
+        
+        BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
+                                                                    source:[aDir path]
+                                                               destination:@""
+                                                                     files:@[filename] tag:nil];
+        
+        if (success == NO) {
+          [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", file, [error localizedDescription]]];
+        } else {
+          [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", file]];
+        }
+        
+      }
+    }
+  }
 }
 
 #pragma mark -
