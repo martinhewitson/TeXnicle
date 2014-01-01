@@ -41,6 +41,8 @@
 #import "TPRegularExpression.h"
 #import "NSArray_Extensions.h"
 
+#define PROJECT_BUILDER_DEBUG 0
+
 @interface TPProjectBuilder ()
 
 @property (copy) NSString *projectName;
@@ -249,7 +251,9 @@
 - (void)populateDocument:(TeXProjectDocument*)aDocument
 {
   [self generateFileList];
-//  NSLog(@"%@", self.filesOnDiskList);
+#if PROJECT_BUILDER_DEBUG
+  NSLog(@"%@", self.filesOnDiskList);
+#endif
   if (self.mainfile) {
     NSString *mainFilePath = [self.projectDir stringByAppendingPathComponent:self.mainfile];
     ProjectEntity *project = [aDocument project];
@@ -302,20 +306,28 @@
         // check if this word matches any of the tags
         for (NSString *tag in [self includeTags]) {
           if ([word hasPrefix:tag]) {          
-//            NSLog(@"%ld, Matched tag %@ with word %@", loc, tag, word);
+#if PROJECT_BUILDER_DEBUG
+            NSLog(@"%ld, Matched tag %@ with word %@", loc, tag, word);
+#endif
             // get argument to this include tag
             
             // we need a longer string here, we should probably pass the full string and a start index
             // to look for the argument
             NSInteger argStart = loc-[word length];
             NSString *arg = [string parseArgumentStartingAt:&argStart];            
-//            NSLog(@"Got arg %@", arg);
+#if PROJECT_BUILDER_DEBUG
+            NSLog(@"Got arg %@", arg);
+#endif
+            
             if (arg != nil && [arg length]>0) {
               
               
               
               // Now we have a name, we need to find it on disk, because we don't know what kind of file it is
               NSString *filearg  = [self fileForArgument:arg];
+#if PROJECT_BUILDER_DEBUG
+              NSLog(@"Got file argument %@", filearg);
+#endif
               if (!filearg) {
                 NSString *str = [NSString stringWithFormat:@"Couldn't find included file on disk: %@\n", [self.projectDir stringByAppendingPathComponent:arg]];
                 NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -325,20 +337,24 @@
               }
               
               NSString *fullpath = [[self.projectDir stringByAppendingPathComponent:filearg] stringByStandardizingPath]; 
-//              NSLog(@"Full path %@", fullpath);
-              
-//              // assume a default file extension of tex
-//              NSString *extension = [arg pathExtension];
-//              if (!extension || [extension length]==0) {
-//                arg = [arg stringByAppendingPathExtension:@"tex"];
-//              }            
+#if PROJECT_BUILDER_DEBUG
+              NSLog(@"Full path %@", fullpath);
+#endif
               
               if ([project fileWithPathOnDisk:fullpath]) {
-                // do nothing
-//                NSLog(@"### Skipping %@, it's already there", fullpath);
+                // then the project already contains the file and we don't import it.
+                NSString *str = [NSString stringWithFormat:@"Project already contains the file: %@\n", fullpath];
+                NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
+                [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [str length])];
+                [self.reportString appendAttributedString:astr];
+#if PROJECT_BUILDER_DEBUG
+                NSLog(@"### Skipping %@, it's already there", fullpath);
+#endif
               } else {
                 if ([[sfm supportedExtensions] containsObject:[fullpath pathExtension]] || [fullpath pathIsImage]) {
-//                  NSLog(@"+ Adding %@", fullpath);
+#if PROJECT_BUILDER_DEBUG
+                  NSLog(@"+ Adding %@", fullpath);
+#endif
                   NSString *relativePath = [[[self.projectDir relativePathTo:fullpath] stringByDeletingLastPathComponent] stringByStandardizingPath];            
                   NSArray *pathComps = [relativePath pathComponents];                        
                   
@@ -363,7 +379,9 @@
                   NSMutableAttributedString *astr = [[NSMutableAttributedString alloc] initWithString:str];
                   [astr addAttribute:NSForegroundColorAttributeName value:[NSColor redColor] range:NSMakeRange(0, [str length])];
                   [self.reportString appendAttributedString:astr];
-//                  NSLog(@"-- file is not supported or image: %@", fullpath);
+#if PROJECT_BUILDER_DEBUG
+                  NSLog(@"-- file is not supported or image: %@", fullpath);
+#endif
                 }
               }
             }
@@ -394,12 +412,18 @@
     MHFileReader *fr = [[MHFileReader alloc] init];
     NSString *contents = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:fullpath]];
     if (contents == nil) {
+#if PROJECT_BUILDER_DEBUG
+      NSLog(@"File contents nil for %@", fullpath);
+#endif
       return nil;
     }
     
     data = [contents dataUsingEncoding:[fr encodingUsed]];
     
     if (data == nil) {
+#if PROJECT_BUILDER_DEBUG
+      NSLog(@"File contents data nil for %@", fullpath);
+#endif
       return nil;
     }
   }
@@ -454,7 +478,9 @@
 // Make folders in the project for the given path components.
 - (FolderEntity*) makeFoldersForComponents:(NSArray*)pathComps inProject:(ProjectEntity*)project inMOC:(NSManagedObjectContext*)moc
 {
-//  NSLog(@"Making folder for %@", pathComps);
+#if PROJECT_BUILDER_DEBUG
+  NSLog(@"Making folder for %@", pathComps);
+#endif
   NSString *lastComp = nil;
   FolderEntity *parentItem = nil;
   for (NSString *comp in pathComps) {
@@ -468,10 +494,14 @@
     
     // get a list of current folders in the project to check against
     NSArray *folders = [project folders];
-//    NSLog(@"  checking for %@", filepath);
+#if PROJECT_BUILDER_DEBUG
+    NSLog(@"  checking for %@", filepath);
+#endif
     BOOL createFolder = YES;
     for (FolderEntity *folder in folders) {
-//      NSLog(@"     path: %@", [folder pathRelativeToProject]);
+#if PROJECT_BUILDER_DEBUG
+      NSLog(@"     path: %@", [folder pathRelativeToProject]);
+#endif
       if ([filepath isEqualToString:[folder pathRelativeToProject]]) {
         // skip making this one
         createFolder = NO;
@@ -494,8 +524,9 @@
       // set parent
       [newFolder setParent:parentItem];
             
-//      NSLog(@"Adding new folder: %@", newFolder);
-      
+#if PROJECT_BUILDER_DEBUG
+      NSLog(@"Adding new folder: %@", newFolder);
+#endif
       parentItem = newFolder;
     }
     lastComp = comp;              
