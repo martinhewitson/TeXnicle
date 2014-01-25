@@ -14,7 +14,7 @@
 
 if [ $# -lt 2 ]
 then
-echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number>)"
+echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number> <bibtexCommand>)"
 exit
 fi
 
