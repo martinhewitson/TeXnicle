@@ -6,6 +6,39 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.2.9 -->
+    <item>
+      <title>Version 2.2.9 (build 1616)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.9</h2>
+        <p>
+        This version doesn't support Snow Leopard because I still don't have a solution to the PDF viewer problem. See post <a href=http://www.bobsoft-mac.de/files/de9280a32123bc84c37a2856a447ebe0-10.html>here</a>.
+        </p>
+        <p>
+        <ul>
+          <li>Minor bug fixes for Mavericks.</li>
+          <li>Files are no longer automatically opened in tabs when importing existing folders and files.</li>
+          <li>Optimisations to improve scrolling in the editor.</li>
+          <li>Speed improvements in citation searching.</li>
+          <li>Improved log file parsing and unification of icons and colors.</li>
+          <li>The tab key now completes up to the next path separator when completing include paths.</li>
+          <li>Engines which support bibtex now support choosing the bibtex engine. You can choose bibtex or biber.</li>
+          <li>State of the embedded console is now properly captured and restored.</li>
+          <li>Improvements to project builder.</li>
+          <li>Add a new preference under Typesetting->Trash to recursively trash auxiliary files. In addition, for safety, files are moved to the trash now, rather than being instantly deleted.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>25th January 2014</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.9.zip"
+      sparkle:shortVersionString="2.2.9"
+      sparkle:version="1616"
+      length="24585220"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFGcG69CznZ0zc7h8xmkaWu2xdONIAhQGVSDDzxU5twqzBCRF8E3BQ2zHMQ=="
+      />
+    </item>
+    
     <!-- Version 2.2.8 -->
     <item>
       <title>Version 2.2.8 (build 1416)</title>

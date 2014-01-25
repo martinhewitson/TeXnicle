@@ -2,11 +2,12 @@
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
-\red255\green39\blue18;\red0\green141\blue36;\red56\green110\blue255;\red0\green110\blue173;\red80\green0\blue120;
-\red120\green4\blue0;\red48\green107\blue255;\red217\green11\blue0;\red63\green110\blue116;}
+\red0\green141\blue36;\red56\green110\blue255;\red255\green0\blue15;\red143\green0\blue255;\red0\green141\blue16;
+\red0\green110\blue173;\red48\green107\blue255;\red255\green0\blue0;\red255\green132\blue0;\red217\green11\blue0;
+\red63\green110\blue116;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
-\paperw11900\paperh16840\margl1440\margr1440\vieww24720\viewh16220\viewkind0
+\paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
@@ -112,14 +113,10 @@ Version 2.*\
 \
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
-\f0 \cf0 ----\
-\
-\pard\pardeftab720\sa280
+\f0 \cf0 ----
+\f1 \
 
-\f1 \cf5 First the "Trash Aux Files" feature in projects. Whit this feature you can specify a set of files which you can automatically trash with the button. However in a project it usually is normal to use subfolders. When you use the "include" feature of LateX, for these files also .aux files are generated, however these files located in the subdirectories of the project are not trashed. Maybe this feature can be extended to also include the files which are located in the subdirectories of the project.\cf0 \
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
-
-\f0 \cf0 \
+\f0 \
 ----\
 \
 BOOKMARKS should be text attachments (save character index in doc). But how to save this information on disk?\
@@ -158,15 +155,28 @@ Sometimes TPSection objects disappear. Probably the new scheme below will fix th
 \
 \pard\pardeftab720
 
-\f1 \cf6 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
+\f1 \cf5 Then there are a couple things from other editors that I miss when I use TeXnicle. \'a0They are minor, and I think\'a0implementable, if you think it's worth your time.\
 \pard\tx220\tx720\pardeftab720\li720\fi-720
-\ls1\ilvl0\cf6 {\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc7 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
+\ls1\ilvl0\cf5 {\listtext	\'95	}The second is one that comes from using TeXShop/TeXWorks and from collaborating with others who use them. \'a0I know myself and others have different default typesetting engines (and I even use different engines for different projects), so I got in the habit of adding a commented line "%!TEX TS-program = " to the beginning of each of my documents. \'a0For projects of my own, it's easy because it seems that you make it so that the file attributes save what kind of engine I use for each .tex file, but when syncing across computers (e.g. with Dropbox) or when emailing files, those attributes seem to get lost. \'a0So it'd be great if TeXnicle could interpret this line when it's there. \'a0(Additionally, I'm sure you know, but TeXShop/TeXWorks also interpret other commented-out lines, as described here: {\field{\*\fldinst{HYPERLINK "http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding"}}{\fldrslt \ul \ulc6 http://tex.stackexchange.com/questions/78101/when-and-why-should-i-use-tex-ts-program-and-tex-encoding}})\
 \pard\pardeftab720
 
-\f3 \cf6 \
+\f3 \cf5 \
+\cf7 Also (and I don't know how difficult this would be) is it possible to have a "Close Environment" shortcut which when hit will identify the nearest begin\{\'85\} and will automatically insert a end\{\'85\} to match it at the current cursor location?\
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0 \cf0 \
+\pard\pardeftab720\sa280
+
+\f1 \cf8 When I press Cmd+N in fullscreen mode, and then select "File|Close" in the resulting window, TeXnicle crashes. I use Mavericks.
+\f0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+\pard\pardeftab720\sa280
+
+\f1 \cf9 I modified the default to "soft wrap" at "72." However, each time I open a document (or restart) the custom wrap preference is ignored. Therefore, I go to the preference panel, I change to no wrap and then to soft wrap again to get the original setting.\uc0\u8232 \u8232 (I'm using version 2.2.8 on Mavericks)
+\f0 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
 - Persist info tab index \
 	- needs new model version\
 \pard\pardeftab720
@@ -183,7 +193,7 @@ Move TeXTextView stuff to categories and unit test them\
 For example:\
 \
 \pard\tx337\pardeftab337\pardirnatural
-\cf0 \CocoaLigature0 - (\cf8 NSRange\cf0 )indentRangeForLineAtIndex:(\cf8 NSInteger\cf0 )loc\
+\cf0 \CocoaLigature0 - (\cf10 NSRange\cf0 )indentRangeForLineAtIndex:(\cf10 NSInteger\cf0 )loc\
 \
 \
 + Menu options to show/hide jump bar\
@@ -202,36 +212,17 @@ For example:\
 \f2 \cf0 \
 \
 The second one: We have a 'smart completion' for file names for custom commands (see Preferences > Commands > File) in TeXnicle, so that you get a list of existing files in your project, if you type something like \\include\{...\} (or a custom command listed in Preferences > Commands > File). I think, it would be helpful to have a similar feature when you create a new TeX file in your document, but instead of a list of existing files in your project you get a list of files included via \\include (or a custom command in Preferences > Commands > Files), which don't exist in your project.\
-I give you an example: I have a project with one TeX-file called file.tex. This file contains the commands \\include\{file1.tex\} and \\CustomIncludeCommand\{file2.tex\} (\\CustomIncludeCommand is listed in Preferences > Commands > File). Now I want to create a new TeX-file and click on 'New TeX document' in 'Project Files'. In the opening window should appear a list of missing files with the file names 'file1' and 'file2'. Marking one or more of these files and pressing 'Select' should create TeX-files with the marked names. Let's assume i have created file2.tex. The next time I create a new TeX-file the list should only contain 'file1'.\
+I give you an example: I have a project with one TeX-file called file.tex. This file contains the commands \\include\{file1.tex\} and \\CustomIncludeCommand\{file2.tex\} (\\CustomIncludeCommand is listed in Preferences > Commands > File). Now I want to create a new TeX-file and click on 'New TeX document' in 'Project Files'. In the opening window should appear a list of missing files with the file names 'file1' and 'file2'. Marking one or more of these files and pressing 'Select' should create TeX-files with the marked names. Let's assume i have cDreated file2.tex. The next time I create a new TeX-file the list should only contain 'file1'.\
 \pard\pardeftab720
 
 \f1 \cf0 \
 \
 \pard\pardeftab720
 
-\f2 \cf8 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.\
-\
+\f2 \cf10 And I have a feature request: In ConTeXt you don't use \\begin\{environment\} \\end\{environment\} pairs but \\startenvironment \\stopenvironment (pairs of the form \\start* \\stop*, where * is replaced by a word). It would be nice to have a autocompletion for \\start* and \\stop* (for example, when you type \\starttext a \\stoptext should be added automatically) and code folding, too. A tab in the preferences for fine-tuning (like the one for \\begin and \\end) \\start* and \\stop* would be helpful too.\
 \pard\tx337\pardeftab337\pardirnatural
 
 \f0 \cf0 \
-\cf9 ####################\
-#\
-# Feature (Version 2.0.8): Advanced autocompletion for file inclusion in \\input \\include \\includegraphics \\etc....\
-#\
-####################\
-To describe this feature consider the following use case, I have a large document and in my project files overview I have the following structure:\
-\
-chapters/chapter#/*.tex (Latex files)\
-chapters/chapter#/img/*.eps (Vector graphics)\
-When for example using the \\includegraphics\{\} command I get a list of paths to actual files, but not folders. Since I for some chapters have a lot of images and a lot of .tex files, this gets a long list for example:\
-\\includegraphics\{chapters/chap\}\
-Will list ALL files which start with this, it is not possible to do an autocompletion for just a folder(like pressing tab in terminal when using the "cd" command).\
-\
-For small documents the current autocompletion is adaquate, but for larger documents seperated over many files and with many images, this feature is pointless as you need to type the full path in order to get a select list.\
-\
-Exactly how the advanced feature should be implemented I can't say, but adding auto completion for folders as the first option would already streamline the usage a bit.\
-\cf10 \
-\cf0 \
 \
 \cf11 ####################\
 #\
@@ -245,23 +236,46 @@ In some instances I perform some repetitive editing actions forexample I have(cu
 \
 And I want to quickly remove an "i" in all commands to lower them a level. However due to the fact that autocomplete does not have a delay, removing an i, causes the auto complete to pop-up thus, disablign the [up] and [down] key to go to next line and instead I'm scrolling in the auto complete list.\
 \
-It would be nice to be able to set a delay on the autocomplete boxes, such that if you want to do quick repetitive actions, you do not have to escape autocomplete everytime.\cf0 \
-\
-\
+It would be nice to be able to set a delay on the autocomplete boxes, such that if you want to do quick repetitive actions, you do not have to escape autocomplete everytime.\
+\pard\pardeftab720\sa280
+\cf11 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf11 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf12 Integration of \
 \pard\pardeftab720
 
-\f1 \cf12 To the \'84annoying\'93 part first: it would be awesome, if texnicle won\'92t open each and every single file when importing files or a folder/folder structure! Import a large set of pictures to your latex-project and you spend the next 5 minutes closing pictures. At the very least, please introduce a \'84close all tabs\'93 feature.\
-\
-Another thing is, that it would be nice if the settings were saved what build-information is displayed. Every time I close TeXnicle and open it again, I have to tell it again, \'84only show the events, and now drop everything that\'92s not an error or a warning\'93. A small thing, yes, but a good user experience comes from details :)
+\f2 \cf12 	{\field{\*\fldinst{HYPERLINK "http://en.wikipedia.org/wiki/Knitr"}}{\fldrslt \ul \ulc6 http://en.wikipedia.org/wiki/Knitr}}\
+	{\field{\*\fldinst{HYPERLINK "http://yihui.name/knitr/"}}{\fldrslt \ul \ulc6 http://yihui.name/knitr/}}
+\f0 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \
+\pard\pardeftab720
+
+\f2 \cf13 Aside from this bug, a more powerful search option of the bibliography file would be most valuable. {\field{\*\fldinst{HYPERLINK "http://www.douglas.stebila.ca/"}}{\fldrslt \ul \ulc6 http://www.douglas.stebila.ca}} offers a nice interface with a standard Latex file: enter a string in the Latex window, highlight it, hit a hot key, and all the relevant bib entries (truncated author list, truncated title, citekey) appear in a new window, from which the relevant entries can be more easily viewed and selected.
+\f1 \cf14 \
+\pard\pardeftab720
+
 \f0 \cf0 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 + Worked around a bug which stopped PDFs being displayed properly on 10.6.8. Appears to be a problem in PDFkit that comes with the 10.9 SDK.\
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
 Version 2.2.9\
 -------------\
 \
-+ Minor bug fixes for Mavericks\
-+ Worked around a bug which stopped PDFs being displayed properly on 10.6.8. Appears to be a problem in PDFkit that comes with the 10.9 SDK.\
-\
++ Minor bug fixes for Mavericks.\
++ Files are no longer automatically opened in tabs when importing existing folders and files.\
++ Optimisations to improve scrolling in the editor.\
++ Speed improvements in citation searching.\
++ Improved log file parsing and unification of icons and colors.\
++ The tab key now completes up to the next path separator when completing include paths.\
++ Engines which support bibtex now support choosing the bibtex engine. You can choose bibtex or biber.\
++ State of the embedded console is now properly captured and restored.\
++ Improvements to project builder.\
++ Add a new preference under Typesetting->Trash to recursively trash auxiliary files. In addition, for safety, files are moved to the trash now, rather than being instantly deleted.\
 \
 Version 2.2.8\
 -------------\
@@ -317,7 +331,7 @@ Version 2.2.2\
 -------------\
 \
 + Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.\
-+ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf13 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
++ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf15 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
 + Small bug fixes in theme editing UI.\
 + Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.\
 \
