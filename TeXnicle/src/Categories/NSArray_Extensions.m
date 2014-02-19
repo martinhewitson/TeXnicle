@@ -31,7 +31,7 @@
 // For example, "Contains "Sorted Tree" by Jonathan Dann" will do.
 
 #import "NSArray_Extensions.h"
-
+#import "externs.h"
 
 @implementation NSArray (ESExtensions)
 - (id)firstObject
@@ -44,7 +44,14 @@
 
 + (NSArray*)texIncludeCommands
 {
-  return @[@"input", @"include", @"subfile", @"component"];
+  NSMutableArray *texCommands = [NSMutableArray arrayWithArray:@[@"input", @"include", @"subfile", @"component"]];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSArray *userCommands = [defaults valueForKey:TEFileCommands];
+  for (NSString *cmd in userCommands) {
+    [texCommands addObject:[cmd stringByReplacingOccurrencesOfString:@"\\" withString:@""]];
+  }
+  texCommands = [texCommands valueForKeyPath:@"@distinctUnionOfObjects.self"];
+  return texCommands;
 }
 
 + (NSArray*)texIncludeCommandsSearchStrings
