@@ -390,9 +390,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (inserted == 0)
     return;
   
-	[self setSelectedRange:r];
-	[self delete:self];
-	[self insertText:newString];
+  if ([self shouldChangeTextInRange:r replacementString:newString]) {
+    [self replaceCharactersInRange:r withString:newString];
+    [self didChangeText];
+  }
+  
+//	[self setSelectedRange:r];
+//	[self delete:self];
+//	[self insertText:newString];
 	
 	NSInteger len = selRange.length+inserted-1;
 	
@@ -457,9 +462,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (inserted == 0)
     return;
   
-	[self setSelectedRange:r];
-	[self delete:self];
-	[self insertText:newString];
+  if ([self shouldChangeTextInRange:r replacementString:newString]) {
+    [self replaceCharactersInRange:r withString:newString];
+    [self didChangeText];
+  }
+  
+//	[self setSelectedRange:r];
+//	[self delete:self];
+//	[self insertText:newString];
 	NSInteger len = selRange.length+inserted+1;
 	
   if (len<0)
@@ -538,10 +548,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			}
 		}
 	}
-	
-	[self setSelectedRange:r];
-	[self delete:self];
-	[self insertText:newString];
+  
+  if ([self shouldChangeTextInRange:r replacementString:newString]) {
+    [self replaceCharactersInRange:r withString:newString];
+    [self didChangeText];
+  }
+  
 	NSInteger len = selRange.length+inserted;
 	
   if (len<0)
@@ -1401,8 +1413,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) replaceRange:(NSRange)aRange withText:(NSString*)replacement scrollToVisible:(BOOL)scroll animate:(BOOL)animate
 {
-  [self setSelectedRange:aRange];
-  [self insertText:replacement];
+  
+  if ([self shouldChangeTextInRange:aRange replacementString:replacement]) {
+    [self replaceCharactersInRange:aRange withString:replacement];
+    [self didChangeText];
+  }
+  
+//  [self setSelectedRange:aRange];
+//  [self insertText:replacement];
   
   NSRange r = NSMakeRange(aRange.location, [replacement length]);
   
@@ -2052,7 +2070,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		for (int i=0;i<NSpaces;i++) {
 			[str appendString:@" "];
 		}
-		[self insertText:str];
+    
+    NSRange r = [self selectedRange];
+    if ([self shouldChangeTextInRange:r replacementString:str]) {
+      [self replaceCharactersInRange:r withString:str];
+      [self didChangeText];
+    }
 	} else {
 		[super insertTab:sender];
 	}
@@ -2140,7 +2163,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [super insertNewline:sender];
       
       // insert the indent string
-      [super insertText:indentString];
+      NSRange r = [self selectedRange];
+      if ([self shouldChangeTextInRange:r replacementString:indentString]) {
+        [self replaceCharactersInRange:r withString:indentString];
+        [self didChangeText];
+      }
       
       // tab in
       [self insertTab:self];
@@ -2149,12 +2176,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       selRange = [self selectedRange];
       
       // add the new \end
-      [self insertText:insert];
+      if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
+        [self replaceCharactersInRange:selRange withString:insert];
+        [self didChangeText];
+      }
+
       [self applyFontAndColor:YES];
       
       // wind back the location of the cursor
       [self setSelectedRange:selRange];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.3];
       
       return;
     } // end if insert
@@ -2664,7 +2695,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
             if (kk<[parts count]-1) {
               insert = [insert stringByAppendingString:@"/"];
             }
-            [self insertText:insert];
+            NSRange selRange = [self selectedRange];
+            if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
+              [self replaceCharactersInRange:selRange withString:insert];
+              [self didChangeText];
+            }
             [self completeArgument];
             [self wrapLine];
             break;
@@ -2810,11 +2845,19 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   if ([[self currentCommand] isEqualToString:@"\\left"]) {
-    [super insertText:[NSString stringWithFormat:@"%c\\right%c", o, c]];
+    NSString *replacement = [NSString stringWithFormat:@"%c\\right%c", o, c];
+    if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+      [self replaceCharactersInRange:selRange withString:replacement];
+      [self didChangeText];
+    }
     NSRange newPos = NSMakeRange(selRange.location+1, 0);
     [self setSelectedRange:newPos];
   } else  if (cc == '\\') {
-    [super insertText:[NSString stringWithFormat:@"%c\\%c", o, c]];
+    NSString *replacement = [NSString stringWithFormat:@"%c\\%c", o, c];
+    if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+      [self replaceCharactersInRange:selRange withString:replacement];
+      [self didChangeText];
+    }
     NSRange newPos = NSMakeRange(selRange.location+1, 0);
     [self setSelectedRange:newPos];
   } else {
@@ -2826,10 +2869,13 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         [self didChangeText];
       }
     } else {
-      [super insertText:[NSString stringWithFormat:@"%c%c", o, c]];
+      NSString *replacement = [NSString stringWithFormat:@"%c%c", o, c];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
       [self moveLeft:self];
       [self autocompleteArgument];
-//      [self delayedAutocompleteArgument];
     }
   }
 }
@@ -2928,7 +2974,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
           [self didChangeText];
         }
       } else {
-        [super insertText:@"$$"];
+        NSString *replacement = @"$$";
+        if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+          [self replaceCharactersInRange:selRange withString:replacement];
+          [self didChangeText];
+        }
         [self moveLeft:self];
       }
     }
@@ -2941,7 +2991,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			[self moveRight:self];
 			return;
 		}	else {
-			[super insertText:aString];
+      if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+        [self replaceCharactersInRange:selRange withString:aString];
+        [self didChangeText];
+      }
 			return;
 		}
 	} else	if ([aString isEqual:@")"]) {
@@ -2952,7 +3005,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			[self moveRight:self];
 			return;
 		}	else {
-			[super insertText:aString];
+      if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+        [self replaceCharactersInRange:selRange withString:aString];
+        [self didChangeText];
+      }
 			return;
 		}
 	} else	if ([aString isEqual:@"]"]) {
@@ -2963,7 +3019,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 			[self moveRight:self];
 			return;
 		}	else {
-			[super insertText:aString];
+      if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+        [self replaceCharactersInRange:selRange withString:aString];
+        [self didChangeText];
+      }
 			return;
 		}
 	} else	if ([[defaults valueForKey:TEAutomaticallyReplaceOpeningDoubleQuote] boolValue]
@@ -2974,16 +3033,29 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     if (r.location>0) {
       NSInteger loc = r.location-1;
       if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
-        [self insertText:@"``"];
+        NSString *insert = @"``";
+        if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
+          [self replaceCharactersInRange:selRange withString:insert];
+          [self didChangeText];
+        }
       } else {
-        [super insertText:aString];
+        if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+          [self replaceCharactersInRange:selRange withString:aString];
+          [self didChangeText];
+        }
       }
     } else {
-      [super insertText:aString];
+      if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+        [self replaceCharactersInRange:selRange withString:aString];
+        [self didChangeText];
+      }
     }
 	} else {
     //    NSLog(@"Inserting %@", aString);
-		[super insertText:aString];
+    if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
+      [self replaceCharactersInRange:selRange withString:aString];
+      [self didChangeText];
+    }
     
     // check if this is a short-cut code command
     NSString *command = [self currentSnippetCommand];
@@ -3704,9 +3776,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 	}
   
-	[self setSelectedRange:r];
-	[self delete:self];
-	[self insertText:newString];
+  if ([self shouldChangeTextInRange:r replacementString:newString]) {
+    [self replaceCharactersInRange:r withString:newString];
+    [self didChangeText];
+  }
   
 	r = [str paragraphRangeForRange:NSMakeRange(r.location, [newString length])];
   [self setSelectedRange:r];
@@ -3794,9 +3867,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		}
 	}
 	
-	[self setSelectedRange:r];
-	[self delete:self];
-	[self insertText:newString];
+  if ([self shouldChangeTextInRange:r replacementString:newString]) {
+    [self replaceCharactersInRange:r withString:newString];
+    [self didChangeText];
+  }
   
   r = [str paragraphRangeForRange:NSMakeRange(r.location, [newString length])];
   [self setSelectedRange:r];
@@ -3888,8 +3962,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   NSString *str = [NSString stringWithFormat:@"\\input{%@}", file];
   NSRange sel = NSMakeRange(location-1, 0);
-  [self setSelectedRange:sel];
-  [self insertText:str];
+  
+  if ([self shouldChangeTextInRange:sel replacementString:str]) {
+    [self replaceCharactersInRange:sel withString:str];
+    [self didChangeText];
+  }
+  
   [self colorVisibleText];
   
   NSRange insertRange = NSMakeRange(sel.location, [str length]);
@@ -3910,8 +3988,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSString *name = [[file lastPathComponent] stringByDeletingPathExtension];
   NSString *str = [NSString stringWithFormat:@"\\begin{figure}[htbp]\n\\centering\n\\includegraphics[width=1.0\\textwidth]{%@}\n\\caption{My Nice Figure.}\n\\label{fig:%@}\n\\end{figure}\n", file, name];
   NSRange sel = NSMakeRange(location-1, 0);
-  [self setSelectedRange:sel];
-  [self insertText:str];
+  
+  if ([self shouldChangeTextInRange:sel replacementString:str]) {
+    [self replaceCharactersInRange:sel withString:str];
+    [self didChangeText];
+  }
+  
   [self colorVisibleText];
   
   NSRange insertRange = NSMakeRange(sel.location, [str length]);
@@ -3987,7 +4069,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [stringToPaste appendFormat:@"\\label{tab:pastedTable}\n"];
   [stringToPaste appendFormat:@"\\end{table}\n"];
   
-  [self insertText:stringToPaste];
+  NSRange selRange = [self selectedRange];
+  if ([self shouldChangeTextInRange:selRange replacementString:stringToPaste]) {
+    [self replaceCharactersInRange:selRange withString:stringToPaste];
+    [self didChangeText];
+  }
+
   [self performSelector:@selector(colorWholeDocument) withObject:nil afterDelay:0];
   
 }
