@@ -2636,7 +2636,11 @@
 - (NSString*)compiledDocumentPath
 {
 	// build path to the pdf file
-	NSString *mainFile = [self documentToCompile]; 
+  NSString *fullMainPath = [self documentToCompile];
+  NSString *projectDir = [fullMainPath stringByDeletingLastPathComponent];
+  NSString *main = [fullMainPath lastPathComponent];
+  NSString *outDir = self.project.settings.outputDirectory;
+  NSString *mainFile = [[projectDir stringByAppendingPathComponent:outDir] stringByAppendingPathComponent:main];
   NSString *docFile = [mainFile stringByAppendingPathExtension:@"pdf"];
   // check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
@@ -4293,6 +4297,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   self.project.settings.bibtexCommand = name;
 }
 
+- (void) didChangeOutputDirectory:(NSString *)name
+{
+  self.project.settings.outputDirectory = name;
+}
+
+- (NSString*)outputDirectory
+{
+  return self.project.settings.outputDirectory;
+}
+
 - (NSString*)bibtexCommand
 {
   return self.project.settings.bibtexCommand;
@@ -4331,6 +4345,15 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   //  return @1;
   
   return self.project.settings.nCompile;
+}
+
+- (BOOL) supportsOutputDirectory
+{
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  if (engine) {
+    return engine.supportsOutputDirectory;
+  }
+  return NO;
 }
 
 - (BOOL) supportsDoBibtex

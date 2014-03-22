@@ -73,6 +73,7 @@
     self.supportsDoBibtex = NO;
     self.supportsDoPS2PDF = NO;
     self.supportsNCompile = NO;
+    self.supportsOutputDirectory = NO;
     
     [self parseEngineFile];
   }
@@ -133,6 +134,9 @@
     }
     if ([opts containsObject:@"doPS2PDF"]) {
       self.supportsDoPS2PDF = YES;
+    }
+    if ([opts containsObject:@"outputDirectory"]) {
+      self.supportsOutputDirectory = YES;
     }
   }
   
@@ -262,13 +266,29 @@
 	[self.typesetTask setLaunchPath:self.path];
   [self.typesetTask setCurrentDirectoryPath:self.workingDirectory];
   
+  // check if output directory exists, otherwise make it
+  NSFileManager *fm = [NSFileManager defaultManager];
+  NSString *outPath = [self.workingDirectory stringByAppendingPathComponent:self.outputDirectory];
+  BOOL isDir;
+  if ([fm fileExistsAtPath:outPath isDirectory:&isDir] == NO) {
+    NSError *error = nil;
+    if ([fm createDirectoryAtPath:outPath withIntermediateDirectories:YES attributes:nil error:&error] == NO) {
+      [NSApp presentError:error];
+    }
+  }
+  
+  if (self.outputDirectory == nil || [self.outputDirectory length] == 0) {
+    self.outputDirectory = @"./";
+  }
+  
   NSArray *arguments = @[self.mainfileName,
                          self.workingDirectory,
                          [NSString stringWithFormat:@"%ld", self.nCompile],
                          [NSString stringWithFormat:@"%d", self.doBibtex],
                          [NSString stringWithFormat:@"%d", self.doPS2PDF],
                          [NSString stringWithFormat:@"%ld", 1+runNumber], // script wants 1-based counting
-                         [NSString stringWithFormat:@"%@", self.bibtexCommand] // script wants 1-based counting
+                         [NSString stringWithFormat:@"%@", self.bibtexCommand],
+                         [NSString stringWithFormat:@"%@", self.outputDirectory]
                          ];
 	[self.typesetTask setArguments:arguments];
 	

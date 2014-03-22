@@ -34,6 +34,7 @@
 
 -(void)didSelectDoBibtex:(BOOL)state;
 -(void)didSelectBibtexCommand:(NSString*)name;
+-(void)didChangeOutputDirectory:(NSString*)name;
 -(void)didSelectDoPS2PDF:(BOOL)state;
 -(void)didSelectOpenConsole:(BOOL)state;
 -(void)didChangeNCompile:(NSInteger)number;
@@ -41,6 +42,7 @@
 -(void)didSelectLanguage:(NSString*)aName;
 
 -(NSString*)engineName;
+-(NSString*)outputDirectory;
 -(NSString*)bibtexCommand;
 -(NSNumber*)doBibtex;
 -(NSNumber*)doPS2PDF;
@@ -50,6 +52,7 @@
 - (BOOL)supportsDoBibtex;
 - (BOOL)supportsDoPS2PDF;
 - (BOOL)supportsNCompile;
+- (BOOL)supportsOutputDirectory;
 
 - (NSString*)language;
 

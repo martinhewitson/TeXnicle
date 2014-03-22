@@ -32,7 +32,7 @@
 NSString * const TPSpellingLanguageChangedNotification = @"TPSpellingLanguageChangedNotification";
 NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 
-@interface TPEngineSettingsController ()
+@interface TPEngineSettingsController () <NSTextDelegate>
 
 @property (assign) IBOutlet NSPopUpButton *engineSelector;
 @property (assign) IBOutlet NSPopUpButton *bibtexSelector;
@@ -49,6 +49,9 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 @property (assign) IBOutlet MHStrokedFiledView *pane3;
 @property (assign) IBOutlet MHStrokedFiledView *pane4;
 
+@property (weak) IBOutlet NSTextField *outputDirectoryField;
+@property (weak) IBOutlet NSButton *selectOutputDirectoryButton;
+@property (weak) IBOutlet NSTextField *documentOutputDirectoryLabel;
 
 @end
 
@@ -114,6 +117,9 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     [self.delegate engineSettingsEnginesHaveChanged:self];
   }
 }
+
+
+
 
 - (void) setupLanguageOptions
 {
@@ -202,6 +208,17 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     [self.nCompileLabel setTextColor:[NSColor disabledControlTextColor]];
   }
   
+  if ([self supportsOutputDirectory]) {
+    [self.outputDirectoryField setStringValue:[self outputDirectory]];
+    [self.outputDirectoryField setEnabled:YES];
+    [self.selectOutputDirectoryButton setEnabled:YES];
+    [self.documentOutputDirectoryLabel setTextColor:[NSColor controlTextColor]];
+  } else {
+    [self.outputDirectoryField setEnabled:NO];
+    [self.selectOutputDirectoryButton setEnabled:NO];
+    [self.documentOutputDirectoryLabel setTextColor:[NSColor disabledControlTextColor]];
+  }
+  
   [self.openConsoleButton setState:[[self openConsole] intValue]];
 }
 
@@ -220,6 +237,16 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
     [self setupLanguageOptions];
   }
   
+}
+
+- (IBAction)selectOutputDirectory:(id)sender
+{
+}
+
+- (IBAction)didEditOutputDirectory:(id)sender
+{
+  [self didChangeOutputDirectory:[self.outputDirectoryField stringValue]];
+  [self setupEngineSettings];
 }
 
 - (IBAction)engineSelected:(id)sender
@@ -330,6 +357,13 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }
 }
 
+-(void)didChangeOutputDirectory:(NSString*)aName
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didChangeOutputDirectory:)]) {
+    [self.delegate didChangeOutputDirectory:aName];
+  }
+}
+
 -(void)didSelectLanguage:(NSString*)aName
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectLanguage:)]) {
@@ -344,6 +378,15 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(engineName)]) {
     return [self.delegate engineName];
+  }
+  
+  return @"";
+}
+
+- (NSString*)outputDirectory
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(outputDirectory)]) {
+    return [self.delegate outputDirectory];
   }
   
   return @"";
@@ -416,6 +459,14 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(supportsNCompile)]) {
     return [self.delegate supportsNCompile];
+  }
+  return NO;
+}
+
+- (BOOL)supportsOutputDirectory
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(supportsOutputDirectory)]) {
+    return [self.delegate supportsOutputDirectory];
   }
   return NO;
 }

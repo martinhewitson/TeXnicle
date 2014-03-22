@@ -5,7 +5,7 @@
 # It runs latex the desired number of times, optionally running bibtex after the first run.
 # It then runs dvips, (optional) followed by ps2pdf.
 #
-# <support>nCompile,doBibtex,doPS2PDF</support>
+# <support>nCompile,doBibtex,doPS2PDF,outputDirectory</support>
 #
 #  pdflatex.engine
 #  TeXnicle
@@ -15,7 +15,7 @@
 
 if [ $# -lt 2 ]
 then
-  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number> <bibtexCommand>)"
+  echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number> <bibtexCommand> <outputDirectory>)"
   exit
 fi
 
@@ -30,28 +30,30 @@ PS2PDF=/usr/local/bin/ps2pdf
 # TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
 # script and the working directory as the second input. Other options follow.
 mainfile=$1 
-outputDir=$2
+projectDir=$2
 nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
 runNumber=$6
 bibtexCommand=$7
+outputDir=$8
 
 echo "****************************"
 echo "*** Typsetting: $mainfile"
+echo "*** Project dir: $projectDir"
 echo "*** Output dir: $outputDir"
 echo "***  N typeset: $nCompile"
 echo "***  Do bibtex: $doBibtex ($bibtexCommand)"
 echo "****************************"
 
 # Go to the working directory
-cd "$outputDir"
+cd "$projectDir"
 
 echo " "
 echo "***------------------------------------------------------------"
 echo "*** Run $runNumber of $nCompile..."
 echo "***------------------------------------------------------------"
-$ENGINE -synctex=1 -file-line-error -interaction=nonstopmode "$mainfile"
+$ENGINE -synctex=1 -file-line-error --output-directory="$outputDir" -interaction=nonstopmode "$mainfile"
 
 # if this is after the first run, run bibtex if requested
 if [ $runNumber -eq 1 ]

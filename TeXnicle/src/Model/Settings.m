@@ -32,6 +32,8 @@
 @implementation Settings
 
 @dynamic doLiveUpdate;
+@dynamic outputDirectory;
+@dynamic bibtexCommand;
 @dynamic language;
 @dynamic engineName;
 @dynamic doBibtex;
@@ -67,6 +69,9 @@
     self.bibtexCommand = [defaults valueForKey:BibtexCommand];
   }
   
+  if (self.outputDirectory == nil && self.managedObjectContext != nil) {
+    self.outputDirectory = @"";
+  }
 }
 
 - (void)setDefaultSettings
@@ -78,6 +83,7 @@
   self.engineName = [defaults valueForKey:TPDefaultEngineName];
   self.doBibtex = [defaults valueForKey:BibTeXDuringTypeset];
   self.bibtexCommand = [defaults valueForKey:BibtexCommand];
+  self.outputDirectory = @"";
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
   self.nCompile = [defaults valueForKey:TPNRunsPDFLatex];
   self.openConsole = [defaults valueForKey:OpenConsoleOnTypeset];

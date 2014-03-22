@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5037" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5037"/>
+        <deployment defaultVersion="1070" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefsWindowController">
@@ -524,7 +524,7 @@
                 <popUpButton verticalHuggingPriority="750" id="1013">
                     <rect key="frame" x="148" y="502" width="77" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="1014">
+                    <popUpButtonCell key="cell" type="push" title="2.50" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1023" id="1014">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" showsStateColumn="NO" id="1015">
@@ -532,24 +532,45 @@
                                 <menuItem title="1.00" id="1016">
                                     <attributedString key="attributedTitle"/>
                                 </menuItem>
+                                <menuItem title="1.125" id="vYh-Fv-Qm6">
+                                    <attributedString key="attributedTitle"/>
+                                </menuItem>
                                 <menuItem title="1.25" id="1021">
                                     <attributedString key="attributedTitle"/>
                                 </menuItem>
+                                <menuItem title="1.375" id="cAe-qX-WC1">
+                                    <attributedString key="attributedTitle"/>
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                                 <menuItem title="1.50" id="1017">
+                                    <attributedString key="attributedTitle"/>
+                                </menuItem>
+                                <menuItem title="1.625" id="XTt-vP-kwb">
                                     <attributedString key="attributedTitle"/>
                                 </menuItem>
                                 <menuItem title="1.75" id="1022">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
+                                <menuItem title="1.875" id="Cq3-yw-EhV">
+                                    <attributedString key="attributedTitle"/>
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                                 <menuItem title="2.00" id="1018">
+                                    <attributedString key="attributedTitle"/>
+                                </menuItem>
+                                <menuItem title="2.125" id="RWB-Vd-gJv">
                                     <attributedString key="attributedTitle"/>
                                 </menuItem>
                                 <menuItem title="2.25" id="1019">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="2.50" id="1023">
+                                <menuItem title="2.375" id="vZ6-dG-GFk">
+                                    <attributedString key="attributedTitle"/>
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="2.50" state="on" id="1023">
                                     <attributedString key="attributedTitle"/>
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>

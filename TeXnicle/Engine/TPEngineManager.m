@@ -315,6 +315,10 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.openConsole = [[self.delegate openConsole] boolValue];
   e.bibtexCommand = [self.delegate bibtexCommand];
   
+  if (e.supportsOutputDirectory) {
+    e.outputDirectory = [self.delegate outputDirectory];
+  }
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   if (liveUpdate && [[defaults valueForKey:TPLiveUpdateTypesetRunsOverride] boolValue]) {
     e.nCompile = [[defaults valueForKey:TPLiveUpdateTypesetRuns] integerValue];

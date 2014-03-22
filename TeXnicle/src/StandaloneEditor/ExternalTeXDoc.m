@@ -157,6 +157,14 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   return nil;
 }
 
+- (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
+{
+  TPSupportedFilesManager *sfm = [TPSupportedFilesManager sharedSupportedFilesManager];
+  [savePanel setAllowedFileTypes:[sfm supportedExtensions]];
+  
+  return YES;
+}
+
 - (void) captureUIsettings
 {
   if ([self fileURL]) {
@@ -698,6 +706,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
                      [defaults valueForKey:BibtexCommand], @"bibtexCommand",
                      [[NSSpellChecker sharedSpellChecker] language], @"language",
+                     @"", @"outputDirectory",
                      @YES, @"TPStandAloneEditorShowStatusBar",
                      nil];
   }
@@ -2216,6 +2225,13 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   [self updateChangeCount:NSChangeUndone];
 }
 
+-(void)didChangeOutputDirectory:(NSString*)aName
+{
+  [self.settings setValue:aName forKey:@"outputDirectory"];
+  [self updateChangeCount:NSChangeUndone];
+}
+
+
 -(NSString*)engineName
 {
   return [self.settings valueForKey:@"engineName"];
@@ -2236,6 +2252,11 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   return [self.settings valueForKey:@"doPS2PDF"];
 }
 
+- (NSString*)outputDirectory
+{
+  return [self.settings valueForKey:@"outputDirectory"];
+}
+
 -(NSNumber*)openConsole
 {
   // if we are in live update, return no
@@ -2253,6 +2274,15 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 //  }
   
   return [self.settings valueForKey:@"nCompile"];  
+}
+
+- (BOOL) supportsOutputDirectory
+{
+  TPEngine *engine = [self.engineManager engineNamed:[self engineName]];
+  if (engine) {
+    return engine.supportsOutputDirectory;
+  }
+  return NO;
 }
 
 - (BOOL) supportsDoBibtex
@@ -2311,8 +2341,13 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 - (NSString*)compiledDocumentPath
 {
 	// build path to the pdf file
-	NSString *mainFile = [self documentToCompile]; 
+  NSString *fullMainPath = [self documentToCompile];
+  NSString *projectDir = [fullMainPath stringByDeletingLastPathComponent];
+  NSString *main = [fullMainPath lastPathComponent];
+  NSString *outDir = [self.settings valueForKey:@"outputDirectory"];
+  NSString *mainFile = [[projectDir stringByAppendingPathComponent:outDir] stringByAppendingPathComponent:main];
   NSString *docFile = [mainFile stringByAppendingPathExtension:@"pdf"];
+  
   // check if the pdf exists
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:docFile]) {
