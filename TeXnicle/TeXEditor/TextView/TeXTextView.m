@@ -2209,6 +2209,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
     // Insert newline
     [super insertNewline:sender];
+    [super scrollRangeToVisible:[self selectedRange]];
     
     // indent the new line
     if (!_shiftKeyOn && indentRange.location != NSNotFound) {
