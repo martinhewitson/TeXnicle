@@ -131,9 +131,13 @@
         NSLog(@"Got include %@", word);
 #endif
         
+        if ([word hasPrefix:@"\\subimport"] || [word hasPrefix:@"\\import"]) {
+          word = [word stringByReplacingOccurrencesOfString:@"}{" withString:@"/"];
+        }
+        
         // get argument
-        NSInteger startLoc = index;
-        NSString *arg = [text parseArgumentStartingAt:&startLoc];
+        NSInteger sLoc = 0;
+        NSString *arg = [word parseArgumentStartingAt:&sLoc];
         if ([arg length] > 0 && [[arg pathExtension] length] == 0) {
           arg = [arg stringByAppendingPathExtension:@"tex"];
         }

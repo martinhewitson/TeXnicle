@@ -44,7 +44,7 @@
 
 + (NSArray*)texIncludeCommands
 {
-  NSMutableArray *texCommands = [NSMutableArray arrayWithArray:@[@"input", @"include", @"subfile", @"component"]];
+  NSMutableArray *texCommands = [NSMutableArray arrayWithArray:@[@"input", @"include", @"subfile", @"component", @"subimport", @"import"]];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSArray *userCommands = [defaults valueForKey:TEFileCommands];
   for (NSString *cmd in userCommands) {
