@@ -129,16 +129,18 @@
   NSDate *loaded = [self.file valueForKey:@"fileLoadDate"];
   NSDate *lastEdit = [self.file valueForKey:@"lastEditDate"];
   
+  FileEntity *myfile = self.file;
+  
   // if the last edit is prior to the load, then we didn't edit so far
-  if (self.file != nil) {
+  if (myfile != nil) {
     if ([loaded compare:lastEdit] == NSOrderedAscending) {
       //    NSLog(@"Edit date later than loaded date");
-      [self.file setValue:@YES forKey:@"hasEdits"];
-      [self.file setValue:[NSDate date] forKey:@"lastEditDate"];
+      [myfile setValue:@YES forKey:@"hasEdits"];
+      [myfile setValue:[NSDate date] forKey:@"lastEditDate"];
     } else {
       //    NSLog(@"Edit date earlier than loaded date");
-      [self.file setValue:@NO forKey:@"hasEdits"];
-      [self.file setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
+      [myfile setValue:@NO forKey:@"hasEdits"];
+      [myfile setPrimitiveValue:[NSDate date] forKey:@"lastEditDate"];
     }
   }
   
