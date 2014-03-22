@@ -28,6 +28,7 @@
 #import "TPPopupListWindowController.h"
 
 #define MAX_ENTRY_LENGTH 200
+#define kCompletionWindowMaxWidth 1000
 
 @implementation TPPopupListWindowController
 
@@ -117,8 +118,9 @@
 				}
 			}
 		}
-		if (maxWidth > 600)
-			maxWidth = 600;
+    
+		if (maxWidth > kCompletionWindowMaxWidth)
+			maxWidth = kCompletionWindowMaxWidth;
 		
 		
 		width = MAX(width, maxWidth);
