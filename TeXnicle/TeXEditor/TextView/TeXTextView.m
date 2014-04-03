@@ -3053,10 +3053,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     }
 	} else {
     //    NSLog(@"Inserting %@", aString);
-    if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
-      [self replaceCharactersInRange:selRange withString:aString];
-      [self didChangeText];
-    }
+    [super insertText:aString];
     
     // check if this is a short-cut code command
     NSString *command = [self currentSnippetCommand];
