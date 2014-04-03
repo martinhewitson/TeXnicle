@@ -4,7 +4,7 @@
 #
 # It runs xelatex the desired number of times, optionally running bibtex after the first run.
 #
-# <support>nCompile,doBibtex</support>
+# <support>nCompile,doBibtex,outputDirectory</support>
 #
 #  xelatex.engine
 #  TeXnicle
@@ -14,7 +14,7 @@
 
 if [ $# -lt 2 ]
 then
-echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <doPS2PDF> <runNumber> <bibtexCommand>)"
+echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <doPS2PDF> <runNumber> <bibtexCommand> <outputDirectory>)"
 exit
 fi
 
@@ -27,28 +27,30 @@ TEXBIN=/usr/texbin/
 # TeXnicle passes the file to be processed as the first input to this 
 # script and the working directory as the second input. Other options follow.
 mainfile=$1
-outputDir=$2
+projectDir=$2
 nCompile=$3
 doBibtex=$4
 doPS2PDF=$5
 runNumber=$6
 bibtexCommand=$7
+outputDir=$8
 
 echo "****************************"
 echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $projectDir"
 echo "*** Output dir: $outputDir"
 echo "***  N typeset: $nCompile"
 echo "***  Do bibtex: $doBibtex ($bibtexCommand)"
 echo "****************************"
 
 # Go to the working directory
-cd "$outputDir"
+cd "$projectDir"
 
 echo " "
 echo "***------------------------------------------------------------"
 echo "*** Run $runNumber of $nCompile..."
 echo "***------------------------------------------------------------"
-$ENGINE -synctex=1 -file-line-error -interaction=nonstopmode "$mainfile"
+$ENGINE -synctex=1 -file-line-error --output-directory="$outputDir" -interaction=nonstopmode "$mainfile"
 
 # if this is after the first run, run bibtex if requested
 if [ $runNumber -eq 1 ]
