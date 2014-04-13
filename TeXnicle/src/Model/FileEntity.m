@@ -124,8 +124,16 @@
 
 - (void) reloadFromDisk
 {
-  if ([self isText] && [self isImage] == NO) {
-    [self reloadFromDiskWithEncoding:[MHFileReader defaultEncodingName]];
+  if ([self existsOnDisk] == NO) {
+    return;
+  }
+  
+  if ([self isText] && [self isImage] == NO) {    
+    NSString *filepath = [self pathOnDisk];
+    MHFileReader *fr = [[MHFileReader alloc] init];
+    NSStringEncoding encoding = [fr encodingForFileAtPath:filepath];
+    NSString *encodingName = [fr nameOfEncoding:encoding];
+    [self reloadFromDiskWithEncoding:encodingName];
   }
 }
 
@@ -137,6 +145,7 @@
 	NSFileManager *fm = [NSFileManager defaultManager];
 	if ([fm fileExistsAtPath:filepath]) {
     MHFileReader *fr = [[MHFileReader alloc] initWithEncodingNamed:encoding];
+    
 //    NSLog(@"Loading with encoding %@", encoding);
     NSString *str = [fr readStringFromFileAtURL:[NSURL fileURLWithPath:filepath] usingEncodingNamed:encoding];
 		
