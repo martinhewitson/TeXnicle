@@ -689,7 +689,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
     [self captureUIsettings];
   }  
   
-  [self cleanUp];
+  [self tearDown];
 }
 
 
@@ -828,7 +828,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   }
 }
 
-- (void) cleanUp
+- (void) tearDown
 {
 #if TEAR_DOWN
   NSLog(@"### Clean up %@", self.fileURL);
