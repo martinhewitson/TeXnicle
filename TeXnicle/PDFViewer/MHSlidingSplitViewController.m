@@ -32,6 +32,12 @@
 
 #define kMinInspectorPanelWidth 64.0
 
+- (void) tearDown
+{
+  self.delegate = nil;
+  
+}
+
 - (void) awakeFromNib
 {
   self.rightSided = YES;

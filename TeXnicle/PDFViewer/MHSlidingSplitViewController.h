@@ -48,6 +48,7 @@
 @property (assign) BOOL rightSided;
 
 
+- (void)tearDown;
 - (IBAction)toggle:(id)sender;
 - (IBAction)slideOut:(id)sender;
 - (void) slideOutAnimated:(BOOL)animate;
