@@ -45,6 +45,7 @@
 @property (nonatomic, strong) NSNumber * nCompile;
 @property (nonatomic, strong) NSNumber * openConsole;
 @property (nonatomic, strong) NSNumber * showStatusBar;
+@property (nonatomic, strong) NSNumber * stopOnError;
 @property (nonatomic, strong) ProjectEntity *project;
 
 

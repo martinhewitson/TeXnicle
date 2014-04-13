@@ -42,6 +42,7 @@
 @dynamic openConsole;
 @dynamic project;
 @dynamic showStatusBar;
+@dynamic stopOnError;
 
 - (void) awakeFromInsert
 {
@@ -84,6 +85,7 @@
   self.doBibtex = [defaults valueForKey:BibTeXDuringTypeset];
   self.bibtexCommand = [defaults valueForKey:BibtexCommand];
   self.outputDirectory = @"";
+  self.stopOnError = @YES;
   self.doPS2PDF = [defaults valueForKey:TPShouldRunPS2PDF];
   self.nCompile = [defaults valueForKey:TPNRunsPDFLatex];
   self.openConsole = [defaults valueForKey:OpenConsoleOnTypeset];
