@@ -39,6 +39,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 @property (assign) IBOutlet NSButton *doBibtexButton;
 @property (assign) IBOutlet NSButton *doPS2PDFButton;
 @property (assign) IBOutlet NSButton *openConsoleButton;
+@property (assign) IBOutlet NSButton *stopOnErrorButton;
 @property (assign) IBOutlet NSTextField *nCompileTextField;
 @property (assign) IBOutlet NSStepper *nCompileStepper;
 @property (assign) IBOutlet NSTextField *nCompileLabel;
@@ -220,6 +221,7 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }
   
   [self.openConsoleButton setState:[[self openConsole] intValue]];
+  [self.stopOnErrorButton setState:[[self stopOnError] intValue]];
 }
 
 
@@ -288,6 +290,15 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }    
 }
 
+- (IBAction)selectedStopOnError:(id)sender
+{
+  if ([sender state] == NSOnState) {
+    [self didSelectStopOnError:YES];
+  } else {
+    [self didSelectStopOnError:NO];
+  }
+}
+
 - (IBAction)changeNCompile:(id)sender
 {
   [self didChangeNCompile:[sender integerValue]];
@@ -313,6 +324,14 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }
   return @[];
 }
+
+-(void)didSelectStopOnError:(BOOL)state
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectStopOnError:)]) {
+    [self.delegate didSelectStopOnError:state];
+  }
+}
+
 
 -(void)didSelectDoBibtex:(BOOL)state
 {
@@ -427,6 +446,15 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }
   
   return @YES;  
+}
+
+-(NSNumber*)stopOnError
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(stopOnError)]) {
+    return [self.delegate stopOnError];
+  }
+  
+  return @YES;
 }
 
 -(NSNumber*)nCompile

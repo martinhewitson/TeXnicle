@@ -64,6 +64,7 @@
     self.path = aPath;
     self.name = [[aPath lastPathComponent] stringByDeletingPathExtension];
     self.doBibtex = NO;
+    self.stopOnError = YES;
     self.doPS2PDF = NO;
     self.bibtexCommand = [[NSUserDefaults standardUserDefaults] valueForKey:BibtexCommand];
     self.nCompile = 1;
@@ -357,7 +358,8 @@
       NSInteger loc = [scanner scanLocation];
       if (loc < [output length]) {
         [self enginePostError:[output substringFromIndex:[scanner scanLocation]]];
-        abortCompile = YES;
+        if (self.stopOnError)
+          abortCompile = YES;
       }
     }	
 	}

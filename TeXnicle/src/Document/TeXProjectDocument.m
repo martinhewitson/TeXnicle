@@ -4267,6 +4267,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return [self.engineManager registeredEngineNames];
 }
 
+-(void)didSelectStopOnError:(BOOL)state
+{
+  self.project.settings.stopOnError = @(state);
+}
+
 -(void)didSelectDoBibtex:(BOOL)state
 {
   self.project.settings.doBibtex = @(state);
@@ -4320,6 +4325,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 -(NSNumber*)doBibtex
 {
   return self.project.settings.doBibtex;
+}
+
+-(NSNumber*)stopOnError
+{
+  return self.project.settings.stopOnError;
 }
 
 -(NSNumber*)doPS2PDF

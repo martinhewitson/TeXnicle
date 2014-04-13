@@ -40,6 +40,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 -(NSNumber*)doPS2PDF;
 -(NSNumber*)openConsole;
 -(NSNumber*)nCompile;
+-(NSNumber*)stopOnError;
 -(NSString*)documentToCompile;
 -(NSString*)workingDirectory;
 -(NSString*)outputDirectory;

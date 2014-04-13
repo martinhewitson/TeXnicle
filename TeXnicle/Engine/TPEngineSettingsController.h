@@ -32,6 +32,7 @@
 
 @protocol TPEngineSettingsDelegate <NSObject>
 
+-(void)didSelectStopOnError:(BOOL)state;
 -(void)didSelectDoBibtex:(BOOL)state;
 -(void)didSelectBibtexCommand:(NSString*)name;
 -(void)didChangeOutputDirectory:(NSString*)name;
@@ -48,6 +49,7 @@
 -(NSNumber*)doPS2PDF;
 -(NSNumber*)openConsole;
 -(NSNumber*)nCompile;
+-(NSNumber*)stopOnError;
 
 - (BOOL)supportsDoBibtex;
 - (BOOL)supportsDoPS2PDF;

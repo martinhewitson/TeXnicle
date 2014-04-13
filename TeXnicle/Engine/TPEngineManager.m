@@ -315,6 +315,11 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
   e.openConsole = [[self.delegate openConsole] boolValue];
   e.bibtexCommand = [self.delegate bibtexCommand];
   
+  
+//  NSLog(@"Stop on error: %@", [self.delegate stopOnError]);
+
+  e.stopOnError = [[self.delegate stopOnError] boolValue];
+  
   if (e.supportsOutputDirectory) {
     e.outputDirectory = [self.delegate outputDirectory];
   }

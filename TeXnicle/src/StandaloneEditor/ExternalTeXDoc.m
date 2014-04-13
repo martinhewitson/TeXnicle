@@ -703,6 +703,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
                      [defaults valueForKey:BibTeXDuringTypeset], @"doBibtex", 
                      [defaults valueForKey:TPShouldRunPS2PDF], @"doPS2PDF", 
                      [defaults valueForKey:OpenConsoleOnTypeset], @"openConsole",
+                     @YES, @"stopOnError",
                      [defaults valueForKey:TPNRunsPDFLatex], @"nCompile",
                      [defaults valueForKey:BibtexCommand], @"bibtexCommand",
                      [[NSSpellChecker sharedSpellChecker] language], @"language",
@@ -2207,6 +2208,13 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   [self updateChangeCount:NSChangeUndone];
 }
 
+-(void)didSelectStopOnError:(BOOL)state
+{
+  [self.settings setValue:@(state) forKey:@"stopOnError"];
+  [self updateChangeCount:NSChangeUndone];
+}
+
+
 -(void)didChangeNCompile:(NSInteger)number
 {
   [self.settings setValue:@(number) forKey:@"nCompile"];
@@ -2265,6 +2273,11 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   }
 
   return [self.settings valueForKey:@"openConsole"];
+}
+
+-(NSNumber*)stopOnError
+{
+  return [self.settings valueForKey:@"stopOnError"];
 }
 
 -(NSNumber*)nCompile
