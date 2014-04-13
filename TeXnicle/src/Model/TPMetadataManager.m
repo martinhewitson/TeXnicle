@@ -38,6 +38,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 #if TEAR_DOWN
   NSLog(@"Tear down %@", self);
 #endif
+  self.delegate = nil;
   [self stop];
 }
 
@@ -60,7 +61,10 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) stop
 {
-  //  NSLog(@"Stopping metadata timer for %@", self);
+  
+#if TEAR_DOWN
+  NSLog(@"Stopping metadata timer for %@", self);
+#endif
   if (self.timer) {
     [self.timer invalidate];
     self.timer = nil;
@@ -70,7 +74,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (void) update
 {
-  if (_updatingCount > 0) {
+  if (_updatingCount > 0 || self.timer == nil || [self.timer isValid] == NO || self.delegate == nil) {
     //NSLog(@"Already updating...[%ld]", _updatingCount);
     return;
   }
@@ -79,6 +83,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
   
   // get list of files from delegate
   NSArray *filesToUpdate = [self metadataManagerFilesToScan:self];
+  
   _updatingCount = 0;
   for (TPFileMetadata *f in filesToUpdate) {
     if (f.needsUpdate || f.needsSyntaxCheck) {
@@ -118,7 +123,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 
 - (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(metadataManagerFilesToScan:)]) {
+  if (self.delegate != nil && [self.delegate respondsToSelector:@selector(metadataManagerFilesToScan:)]) {
     return [self.delegate performSelector:@selector(metadataManagerFilesToScan:) withObject:self];
   }
   
