@@ -89,6 +89,7 @@
   [self hideViewer];    
   [self.searchResultsSlideViewController setDelegate:self];
   [self.searchResultsSlideViewController slideOutAnimated:NO];
+  
   [self.showSearchResultsButton setState:NSOffState];    
   [self.searchResultsTable setTarget:self];
   [self.searchResultsTable setDoubleAction:@selector(highlightSelectedSearchResult)];
@@ -123,9 +124,9 @@
 - (void) setupThumbsView
 {
   if ([self pdfViewControllerShouldShowPDFThumbnails:self]) {
-    [self.thumbSlideViewController slideIn:self];
+    [self.thumbSlideViewController slideInAnimated:NO];
   } else {
-    [self.thumbSlideViewController slideOut:self];
+    [self.thumbSlideViewController slideOutAnimated:NO];
   }
 }
 
@@ -151,6 +152,10 @@
   NSLog(@"Tear down %@", self);
 #endif
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self.searchResultsSlideViewController tearDown];
+  self.searchResultsSlideViewController = nil;
+  [self.thumbSlideViewController tearDown];
+  self.thumbSlideViewController = nil;
   self.pdfThumbnailView.PDFView = nil;
   self.pdfThumbnailView = nil;
   self.searchResultsTable.delegate = nil;
