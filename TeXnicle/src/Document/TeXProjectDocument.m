@@ -720,7 +720,7 @@
 
 - (void) stopAllMetadataOperations
 {
-  [self.metadataManager stop];
+  [self.metadataManager tearDown];
   
   for (TPFileMetadata *item in self.fileMetadata) {
     [item tearDown];
@@ -792,6 +792,10 @@
   [self.commandsViewController tearDown];
   self.commandsViewController = nil;
     
+  // pdf view controller
+  [self.pdfViewerController tearDown];
+  self.pdfViewerController = nil;
+  
   // pdfviewer
   [self.pdfViewer tearDown];
   self.pdfViewer = nil;
@@ -824,10 +828,6 @@
   [self.spellcheckerViewController tearDown];
   self.spellcheckerViewController = nil;
   
-  // pdf view controller
-  [self.pdfViewerController tearDown];
-  self.pdfViewerController = nil;
-  
   // tex editor view controller
   [self.texEditorViewController tearDown];
   self.texEditorViewController = nil;
@@ -845,6 +845,14 @@
   
 }
 
+- (BOOL)windowShouldClose:(id)sender
+{
+  if (_didSetup == NO) {
+    return NO;
+  }
+  
+  return YES;
+}
 
 - (void)windowWillClose:(NSNotification *)notification 
 {
