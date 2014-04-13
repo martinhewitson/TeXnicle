@@ -1,18 +1,15 @@
-<h2>TeXnicle 2.2.9</h2>
-<p>
-This version doesn't support Snow Leopard because I still don't have a solution to the PDF viewer problem. See post <a href=http://www.bobsoft-mac.de/files/de9280a32123bc84c37a2856a447ebe0-10.html>here</a>.
-</p>
+<h2>TeXnicle 2.2.10</h2>
+
 <p>
 <ul>
-  <li>Minor bug fixes for Mavericks.</li>
-  <li>Files are no longer automatically opened in tabs when importing existing folders and files.</li>
-  <li>Optimisations to improve scrolling in the editor.</li>
-  <li>Speed improvements in citation searching.</li>
-  <li>Improved log file parsing and unification of icons and colors.</li>
-  <li>The tab key now completes up to the next path separator when completing include paths.</li>
-  <li>Engines which support bibtex now support choosing the bibtex engine. You can choose bibtex or biber.</li>
-  <li>State of the embedded console is now properly captured and restored.</li>
-  <li>Improvements to project builder.</li>
-  <li>Add a new preference under Typesetting->Trash to recursively trash auxiliary files. In addition, for safety, files are moved to the trash now, rather than being instantly deleted.</li>
+  <li>Now any 'include' commands defined in the preferences are also treated properly when building the document outline</li>
+  <li>Added a new document/project setting for specifying the output directory (for example, when using -output-directory= with latex or pdflatex). Supported by built-in engines latex, pdflatex and xelatex.</li>
+  <li>Added a project/document setting to enable/disable stopping typesetting on detected errors.</li>
+  <li>Bug fixes for saving user-added file types.</li>
+  <li>It is now possible to set finer line spacings in the preferences.</li>
+  <li>Bug fixes and optimisation for editor.</li>
+  <li>Improved file loading.</li>
+  <li>Bug fix for entering accented characters (with alt-u, for example) which appeared in last version.</li>
+  <li>Other minor bug fixes.</li>
 </ul>
 </p>

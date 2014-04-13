@@ -6,6 +6,36 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.2.10 -->
+    <item>
+      <title>Version 2.2.10 (build 1717)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.10</h2>
+
+        <p>
+        <ul>
+        <li>Now any 'include' commands defined in the preferences are also treated properly when building the document outline</li>
+        <li>Added a new document/project setting for specifying the output directory (for example, when using -output-directory= with latex or pdflatex). Supported by built-in engines latex, pdflatex and xelatex.</li>
+        <li>Added a project/document setting to enable/disable stopping typesetting on detected errors.</li>
+        <li>Bug fixes for saving user-added file types.</li>
+        <li>It is now possible to set finer line spacings in the preferences.</li>
+        <li>Bug fixes and optimisation for editor.</li>
+        <li>Improved file loading.</li>
+        <li>Bug fix for entering accented characters (with alt-u, for example) which appeared in last version.</li>
+        <li>Other minor bug fixes.</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>13th April 2014</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.10.zip"
+      sparkle:shortVersionString="2.2.10"
+      sparkle:version="1717"
+      length="24593780"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MC0CFQCAcy3ohIxlLMNn+2YpxFUR/79RXAIUX3iwKIeI9tBD3Cmmmgz+SVn7Hk0="
+      />
+    </item>
+    
     <!-- Version 2.2.9 -->
     <item>
       <title>Version 2.2.9 (build 1616)</title>

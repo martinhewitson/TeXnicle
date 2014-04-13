@@ -897,6 +897,7 @@
 		2540D8C215B2DDDC00528982 /* NSOutlineView+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOutlineView+TeXnicle.m"; sourceTree = "<group>"; };
 		2540D8C415B2DE4100528982 /* NSTableView+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTableView+TeXnicle.h"; sourceTree = "<group>"; };
 		2540D8C515B2DE4100528982 /* NSTableView+TeXnicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTableView+TeXnicle.m"; sourceTree = "<group>"; };
+		2543755F18DDFDFF00128525 /* TeXProject 14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 14.xcdatamodel"; sourceTree = "<group>"; };
 		254448A014EB930000377F82 /* TPProjectTemplateViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateViewer.h; sourceTree = "<group>"; };
 		254448A114EB930000377F82 /* TPProjectTemplateViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateViewer.m; sourceTree = "<group>"; };
 		254448A214EB930000377F82 /* TPProjectTemplateViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateViewer.xib; sourceTree = "<group>"; };
@@ -1186,6 +1187,7 @@
 		25AAAB6C146A70FD000C81D4 /* TPStatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPStatusViewController.xib; sourceTree = "<group>"; };
 		25AAC8E91407C45C00B61B1A /* pdflatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pdflatex.engine; sourceTree = "<group>"; };
 		25AAC8ED1407E65400B61B1A /* context.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = context.engine; sourceTree = "<group>"; };
+		25ABAF5518FA4F85001BE775 /* TeXProject 15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 15.xcdatamodel"; sourceTree = "<group>"; };
 		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
 		25AD5A0015BA6C4E00737610 /* profileConfig.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = profileConfig.php; path = php_sparkle_stats_server/profileConfig.php; sourceTree = "<group>"; };
 		25AD5A0115BA6C4E00737610 /* profileInfo.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = profileInfo.php; path = php_sparkle_stats_server/profileInfo.php; sourceTree = "<group>"; };
@@ -4281,6 +4283,8 @@
 		2566D90E1783EB2500BA4755 /* TeXProject.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				25ABAF5518FA4F85001BE775 /* TeXProject 15.xcdatamodel */,
+				2543755F18DDFDFF00128525 /* TeXProject 14.xcdatamodel */,
 				2566D90F1783EB2500BA4755 /* TeXProject 10.xcdatamodel */,
 				2566D9101783EB2500BA4755 /* TeXProject 11.xcdatamodel */,
 				2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */,
@@ -4294,7 +4298,7 @@
 				2566D9181783EB2500BA4755 /* TeXProject 8.xcdatamodel */,
 				2566D9191783EB2500BA4755 /* TeXProject 9.xcdatamodel */,
 			);
-			currentVersion = 2548303518427AE00097060F /* TeXProject 13.xcdatamodel */;
+			currentVersion = 25ABAF5518FA4F85001BE775 /* TeXProject 15.xcdatamodel */;
 			path = TeXProject.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
