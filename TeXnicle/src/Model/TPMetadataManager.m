@@ -28,7 +28,6 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
   self = [super init];
   if (self) {
     self.delegate = aDelegate;
-    self.files = [[NSMutableArray alloc] init];
   }
   
   return self;

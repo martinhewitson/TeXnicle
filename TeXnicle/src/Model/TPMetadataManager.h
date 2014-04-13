@@ -21,7 +21,6 @@
 
 @interface TPMetadataManager : NSObject <MetadataManagerDelegate, FileMetadataDelegate>
 
-@property (strong) NSMutableArray *files;
 @property (assign) id<MetadataManagerDelegate> delegate;
 
 - (id) initWithDelegate:(id<MetadataManagerDelegate>)aDelegate;
