@@ -1,0 +1,55 @@
+#!/bin/sh
+# 
+# This is an arara engine for TeXnicle. 
+#
+#
+# <support></support>
+#
+#  arara.engine
+#  TeXnicle
+
+if [ $# -lt 2 ]
+then
+  echo "usage: <full-path-to-file> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number>)"
+  exit
+fi
+
+# Executable values
+PATH=/usr/texbin:/usr/local/bin:$PATH
+ENGINE=/usr/texbin/arara
+TEXBIN=/usr/texbin
+# DVIPS=/usr/texbin/dvips
+# PS2PDF=/usr/local/bin/ps2pdf
+
+# Process inputs.
+# TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
+# script and the working directory as the second input. Other options follow.
+mainfile=$1 
+outputDir=$2
+nCompile=$3
+doBibtex=$4
+doPS2PDF=$5
+runNumber=$6
+bibtexCommand=$7
+
+echo "****************************"
+echo "*** Typsetting: $mainfile"
+echo "*** Output dir: $outputDir"
+echo "***  N typeset: $nCompile"
+echo "***  Do bibtex: $doBibtex ($bibtexCommand)"
+echo "****************************"
+
+# Go to the working directory
+cd "$outputDir"
+
+#---------------------------
+# Put engine logic here
+
+arara --verbose --log $mainfile.tex
+
+# Engine logic finished
+#---------------------------
+
+echo "*** arara.engine has completed."
+
+# END
