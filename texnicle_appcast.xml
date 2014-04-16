@@ -6,9 +6,34 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    
+    <!-- Version 2.2.11 -->
+    <item>
+      <title>Version 2.2.11 (build 1723)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.11</h2>
+        
+        <p>
+        <ul>
+        <li>Fixed a bug which could cause crashes for some users</li>
+        <li>Fixed a bug which could stop synctex from working if the output directory is not set or is empty</li>
+        <li>Fixed a bug which could stop the `` replacement from working at the start of a line</li>
+        </ul>
+        </p>
+      ]]></description>
+      <pubDate>16th April 2014</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.11.zip"
+      sparkle:shortVersionString="2.2.11"
+      sparkle:version="1723"
+      length="24594079"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFCbEqENl/5z9fI0WB97UckruSHMSAhRDEOvWc/oBICOui+9MEbImVwiX2g=="
+      />
+    </item>
+    
     <!-- Version 2.2.10 -->
     <item>
-      <title>Version 2.2.10 (build 1717)</title>
+      <title>Version 2.2.10 (build 1719)</title>
       <description><![CDATA[
         <h2>TeXnicle 2.2.10</h2>
 
@@ -29,10 +54,10 @@
       <pubDate>13th April 2014</pubDate>
       <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.10.zip"
       sparkle:shortVersionString="2.2.10"
-      sparkle:version="1717"
-      length="24593780"
+      sparkle:version="1719"
+      length="24593740"
       type="application/octet-stream"
-      sparkle:dsaSignature="MC0CFQCAcy3ohIxlLMNn+2YpxFUR/79RXAIUX3iwKIeI9tBD3Cmmmgz+SVn7Hk0="
+      sparkle:dsaSignature="MCsCFDukR0J/J0YZIBm2PNiBL/9RWrUKAhNHsU+i5aBNo3Y5wL2kRta5QIqp"
       />
     </item>
     
