@@ -265,8 +265,10 @@
 {
   // set suggested project name
   NSString *suggestedProjectName = [[[self fileURL] lastPathComponent] stringByDeletingPathExtension];
-  [self.projectNameField setStringValue:suggestedProjectName];
-  [self.projectNameField setNeedsDisplay:YES];
+  if (suggestedProjectName) {
+    [self.projectNameField setStringValue:suggestedProjectName];
+    [self.projectNameField setNeedsDisplay:YES];
+  }
   
   // get a project directory or file from the user  
   NSOpenPanel *panel = [NSOpenPanel openPanel];

@@ -559,7 +559,11 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 
 - (void)setSearchTerm:(NSString*)aString
 {
-  [self.searchField setStringValue:aString];
+  if (aString == nil) {
+    [self.searchField setStringValue:@""];
+  } else {
+    [self.searchField setStringValue:aString];
+  }
 }
 
 

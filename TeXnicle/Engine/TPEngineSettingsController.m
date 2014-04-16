@@ -210,7 +210,11 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
   }
   
   if ([self supportsOutputDirectory]) {
-    [self.outputDirectoryField setStringValue:[self outputDirectory]];
+    NSString *outdir = [self outputDirectory];
+    if (outdir == nil) {
+      outdir = @"";
+    }
+    [self.outputDirectoryField setStringValue:outdir];
     [self.outputDirectoryField setEnabled:YES];
     [self.selectOutputDirectoryButton setEnabled:YES];
     [self.documentOutputDirectoryLabel setTextColor:[NSColor controlTextColor]];

@@ -78,18 +78,22 @@
 
 - (void) error:(NSString*)someText
 {
-  [self.textField setTextColor:[NSColor redColor]];
-  [self.textField setStringValue:someText];
-  [self.textField setNeedsDisplay];
-  [self.textField setToolTip:someText];
+  if (someText) {
+    [self.textField setTextColor:[NSColor redColor]];
+    [self.textField setStringValue:someText];
+    [self.textField setNeedsDisplay];
+    [self.textField setToolTip:someText];
+  }
 }
 
 - (void)message:(NSString *)someText
 {
-  [self.textField setTextColor:[NSColor darkGrayColor]];
-  [self.textField setStringValue:someText];
-  [self.textField setNeedsDisplay];
-  [self.textField setToolTip:someText];
+  if (someText) {
+    [self.textField setTextColor:[NSColor darkGrayColor]];
+    [self.textField setStringValue:someText];
+    [self.textField setNeedsDisplay];
+    [self.textField setToolTip:someText];
+  }
 }
 
 - (void) setAnimating:(BOOL)state

@@ -154,7 +154,9 @@
 		[attachedWindow setHasArrow:NO];
 		[attachedWindow setDrawsRoundCornerBesideArrow:YES];
 		
-		[titleView setStringValue:self.title];
+    if (self.title) {
+      [titleView setStringValue:self.title];
+    }
 		[gradientView setStartingColor:[NSColor whiteColor]];
 		[gradientView setEndingColor:[NSColor lightGrayColor]];
 		[gradientView setAngle:270.0];

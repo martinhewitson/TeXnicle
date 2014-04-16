@@ -289,7 +289,9 @@
 
 - (void) setSearchText:(NSString*)searchText
 {
-  [self.searchField setStringValue:searchText];
+  if (searchText) {
+    [self.searchField setStringValue:searchText];
+  }
 }
 
 - (void) redisplayDocument
