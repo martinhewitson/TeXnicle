@@ -279,7 +279,7 @@
   }
   
   if (self.outputDirectory == nil || [self.outputDirectory length] == 0) {
-    self.outputDirectory = @"./";
+    self.outputDirectory = @".";
   }
   
   NSArray *arguments = @[self.mainfileName,
