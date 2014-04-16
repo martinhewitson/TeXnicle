@@ -3033,7 +3033,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		NSRange r = [self selectedRange];
     if (r.location>0) {
       NSInteger loc = r.location-1;
-      if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
+      if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]] ||
+          [newLineCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
         NSString *insert = @"``";
         if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
           [self replaceCharactersInRange:selRange withString:insert];
