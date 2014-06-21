@@ -2626,7 +2626,9 @@
 
 - (NSString*)workingDirectory
 {
-  return [self.project folder];
+  // IF THE MAIN FILE IS NOT IN THE PROJECT FOLDER THEN THIS DOESN'T WORK.
+  // Better would be to get the path to the main file and pass that to the engine
+  return [[self.project.mainFile pathOnDisk] stringByDeletingLastPathComponent];
 }
 
 - (NSString*)documentToCompile
