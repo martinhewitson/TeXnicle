@@ -83,7 +83,7 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [self stopTimer];
   self.delegate = nil;
-  dispatch_release(queue);
+//  dispatch_release(queue);
   [self.sections removeAllObjects];
 }
 

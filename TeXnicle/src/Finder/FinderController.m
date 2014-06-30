@@ -98,7 +98,6 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   self.outlineView.delegate = nil;
   self.outlineView.dataSource = nil;
   self.delegate = nil;
-	dispatch_release(queue);
 }
 
 

@@ -61,9 +61,9 @@
 - (void) dealloc
 {
   valid = NO;
-	dispatch_release(queue);
-  dispatch_release(treesLock);
-  dispatch_release(processLock);
+//	dispatch_release(queue);
+//  dispatch_release(treesLock);
+//  dispatch_release(processLock);
   
   [self.queueWatcher invalidate];
   
