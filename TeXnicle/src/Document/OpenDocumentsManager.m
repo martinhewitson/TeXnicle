@@ -480,7 +480,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void)tabView:(NSTabView *)aTabView didCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
   // remove item
-  FileEntity *file = [self removeItem:tabViewItem];
+  [self removeItem:tabViewItem];
   
 	
 	//[self removeObject:[tabViewItem identifier]];
