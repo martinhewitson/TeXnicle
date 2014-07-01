@@ -313,6 +313,11 @@ NSString * const TPSpellingAutomaticByLanguage = @"Automatic By Language";
 #pragma mark -
 #pragma mark Delegate
 
+- (void) engineSettingsEnginesHaveChanged:(TPEngineSettingsController *)settings
+{
+  // do nothing
+}
+
 - (NSString*)language
 {
   if (self.delegate && [self.delegate respondsToSelector:@selector(language)]) {
