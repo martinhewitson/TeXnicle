@@ -37,5 +37,6 @@
 - (BOOL) isSnowLeopard;
 - (BOOL) isLion;
 - (BOOL) isMountainLion;
+- (BOOL) isYosemite;
 
 @end
