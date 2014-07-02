@@ -35,24 +35,24 @@
 
 - (id)initWithCoder:(NSCoder*)coder
 {
-    if ((self = [super initWithCoder:coder]) != nil) {
-	}
-	
-    return self;
+  if ((self = [super initWithCoder:coder]) != nil) {
+  }
+  
+  return self;
 }
 
 - (void)viewDidMoveToWindow
 {
-	[super viewDidMoveToWindow];
-	
-	NSWindow *window = [self window];
-	
-	if (window != nil) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(windowDidUpdate:)
-													 name:NSWindowDidUpdateNotification
-												   object:window];
-	}
+  [super viewDidMoveToWindow];
+  
+  NSWindow *window = [self window];
+  
+  if (window != nil) {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(windowDidUpdate:)
+                                                 name:NSWindowDidUpdateNotification
+                                               object:window];
+  }
 }
 
 
@@ -65,20 +65,23 @@
 
 - (void)windowDidUpdate:(NSNotification*)notification
 {
-    id validator = [NSApp targetForAction:[self action] to:[self target] from:self];
-	
-    if ((validator == nil) || ![validator respondsToSelector:[self action]]) {
-		[self setEnabled:NO];
-    }
-    else if ([validator respondsToSelector:@selector(validateButton:)]) {
-        [self setEnabled:[validator validateButton:self]];
-    }
-    else if ([validator respondsToSelector:@selector(validateUserInterfaceItem:)]) {
-        [self setEnabled:[validator validateUserInterfaceItem:self]];
-    }
-    else {
-		[self setEnabled:YES];
-    }
+  if (self == nil || self.target == nil || self.action == nil)
+    return;
+    
+  id validator = [NSApp targetForAction:[self action] to:[self target] from:self];
+  
+  if ((validator == nil) || ![validator respondsToSelector:[self action]]) {
+    [self setEnabled:NO];
+  }
+  else if ([validator respondsToSelector:@selector(validateButton:)]) {
+    [self setEnabled:[validator validateButton:self]];
+  }
+  else if ([validator respondsToSelector:@selector(validateUserInterfaceItem:)]) {
+    [self setEnabled:[validator validateUserInterfaceItem:self]];
+  }
+  else {
+    [self setEnabled:YES];
+  }
 }
 
 
@@ -87,8 +90,7 @@
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
