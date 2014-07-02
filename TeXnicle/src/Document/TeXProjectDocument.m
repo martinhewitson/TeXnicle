@@ -3815,10 +3815,14 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     //  NSLog(@"Visible rect %@", NSStringFromRect(r));
     BOOL hasDoc = [blockPdfViewControler hasDocument];
     [blockPdfViewControler redisplayDocument];
+    
+    
     if (hasDoc) {
+      NSUInteger pageCount = [blockPdfViewControler.pdfview.document pageCount];
       PDFDisplayMode mode = [blockPdfViewControler.pdfview displayMode];
       if (mode == kPDFDisplaySinglePageContinuous ||
-          mode == kPDFDisplayTwoUpContinuous) {
+          mode == kPDFDisplayTwoUpContinuous  ||
+          index < 0 || index >= pageCount) {
         [view scrollRectToVisible:r];
       } else {
         if (page) {
