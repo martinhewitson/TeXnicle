@@ -1944,14 +1944,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
-  [self setNeedsDisplay:YES];
-  NSRange r = [self selectedRange];
-  [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
-                                                      object:self
-                                                    userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
-  
-  [self colorVisibleText];
-  [self highlightMatchingWords];
+  if (self != nil) {
+    [self setNeedsDisplay:YES];
+    NSRange r = [self selectedRange];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
+                                                        object:self
+                                                      userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
+    
+    [self colorVisibleText];
+    [self highlightMatchingWords];
+  }
 }
 
 - (void) highlightMatchingWords
