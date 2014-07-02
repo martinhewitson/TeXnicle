@@ -99,7 +99,8 @@
 		
     // compare point on screen coordinates to check if the
     // window will be off the bottom of the screen
-    NSPoint screenPoint = [self.parentWindow convertBaseToScreen:self.point];
+    NSRect r = [self.parentWindow convertRectToScreen:NSMakeRect(self.point.x, self.point.y, 1.0, 1.0)];
+    NSPoint screenPoint = r.origin;
     CGFloat y = screenPoint.y;// - height;
     if (y<0) {
       pos = MAPositionTopRight;
