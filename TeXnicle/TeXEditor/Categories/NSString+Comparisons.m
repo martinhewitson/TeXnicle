@@ -53,22 +53,7 @@
 
 - (BOOL) beginsWith:(NSString*)aString
 {
-	return [self hasPrefix:aString];
-	
-	NSComparisonResult res;
-	
-//	NSLog(@"Checking if '%@' begins with '%@'", self, aString);
-	
-	if ([aString length] <= [self length]) {
-		res = [self compare:aString options:NSLiteralSearch range:NSMakeRange(0, [aString length])];
-	} else {
-		res = [self compare:aString options:NSLiteralSearch range:NSMakeRange(0, [self length])];
-	}
-
-	if (res == NSOrderedSame)
-		return YES;
-	
-	return NO;
+	return [self hasPrefix:aString];	
 }
 
 - (BOOL) isTextFile
