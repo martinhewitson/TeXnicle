@@ -508,6 +508,8 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   [self updateSortIndices];
   [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self];
   
+  [self.managedObjectContext save:nil];
+  
   return entry;  
 }
 
