@@ -506,9 +506,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 {
   NSInteger count = 0;
   for (TPResultDocument *doc in self.results) {
-    for (TPDocumentMatch *match in doc.matches) {
-      count++;
-    }
+    count += [doc.matches count];
   }
   return count;  
 }
