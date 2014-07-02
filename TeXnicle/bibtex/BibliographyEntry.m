@@ -183,8 +183,10 @@
 - (NSAttributedString*)attributedString
 {
   if (_attributedString == nil) {
+    TPThemeManager *tm = [TPThemeManager sharedManager];
+    TPTheme *theme = tm.currentTheme;
 //    NSLog(@"Creating attributed string for [%p: %@]", self, self.tag);
-    _attributedString = [self stringWithColor:[NSColor blackColor]];
+    _attributedString = [self stringWithColor:theme.documentTextColor];
   }
   return _attributedString;
 }
