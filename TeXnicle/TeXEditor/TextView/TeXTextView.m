@@ -1145,9 +1145,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   //	NSLog(@"Checking spelling for '%@'", word);
 	if (word) {
 		NSSpellChecker *sc = [NSSpellChecker sharedSpellChecker];
-		NSArray *guesses = [sc guessesForWord:word];
+    NSArray *guesses = [sc guessesForWordRange:NSMakeRange(0, [word length]) inString:word language:[[NSSpellChecker sharedSpellChecker] language] inSpellDocumentWithTag:0];
 		if ([guesses count]>0) {
-      //			NSLog(@"Guesses: %@", guesses);
 			
 			NSPoint point = [self listPointForCurrentWord];
       //			NSLog(@"Point for word:%@", NSStringFromPoint(point));
@@ -1163,10 +1162,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         [_popupList showPopup];
       } else {
         NSPoint point = [self listPointForCurrentWord];
-        NSPoint current = [_popupList currentPoint];
         NSPoint wp = [self convertPoint:point toView:nil];
         // update the window in y
-        [_popupList moveToPoint:NSMakePoint(current.x, wp.y)];
+        [_popupList moveToPoint:wp];
         [_popupList setList:guesses];
         [_popupList showPopup];
       }
