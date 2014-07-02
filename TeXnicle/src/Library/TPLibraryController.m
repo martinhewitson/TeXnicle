@@ -496,12 +496,74 @@
   [item setTarget:self];
 	[self.catActionMenu addItem:item];
 	
+	// Export library
+	item = [[NSMenuItem alloc] initWithTitle:@"Export Library"
+																		action:@selector(exportLibrary)
+														 keyEquivalent:@""];
+  [item setTarget:self];
+	[self.catActionMenu addItem:item];
 	
+	// Import library
+	item = [[NSMenuItem alloc] initWithTitle:@"Import Library"
+																		action:@selector(importLibrary)
+														 keyEquivalent:@""];
+  [item setTarget:self];
+	[self.catActionMenu addItem:item];
 }
 
 - (void) addDefaultCategories
 {
   [self.library addDefaultCategories];
+}
+
+
+- (void) importLibrary
+{
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  [panel setTitle:@"Import Library"];
+  [panel setAllowedFileTypes:@[@"texlib"]];
+  [panel setAllowsOtherFileTypes:NO];
+  [panel setMessage:@"Import library"];
+  [panel setNameFieldLabel:@"Import Path"];
+
+  [panel beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+    
+    
+    if (result == NSFileHandlingPanelCancelButton) {
+      return;
+    }
+    
+    NSURL *url = [panel URL];
+    
+    [self.library importLibraryFromURL:url];
+  }];
+  
+}
+
+
+- (void) exportLibrary
+{
+  NSSavePanel *panel = [NSSavePanel savePanel];
+  [panel setTitle:@"Export Library"];
+  [panel setAllowedFileTypes:@[@"texlib"]];
+  [panel setAllowsOtherFileTypes:NO];
+  [panel setCanCreateDirectories:YES];
+  [panel setMessage:@"Save exported library"];
+  [panel setNameFieldLabel:@"Export Path"];
+  
+  
+  [panel beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+    
+    
+    if (result == NSFileHandlingPanelCancelButton) {
+      return;
+    }
+    
+    NSURL *url = [panel URL];
+    
+    [self.library exportLibraryToURL:url];
+  }];
+  
 }
 
 - (void) restoreDefaultLibrary
