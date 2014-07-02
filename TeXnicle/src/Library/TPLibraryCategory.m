@@ -16,4 +16,18 @@
 @dynamic entries;
 @dynamic sortIndex;
 
+- (NSDictionary*)dictionary
+{
+  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"name" : self.name}];
+  NSMutableArray *entries = [NSMutableArray array];
+  for (TPLibraryEntry *entry in self.entries) {
+    [entries addObject:[entry dictionary]];
+  }
+  
+  [dict setObject:entries forKey:@"entries"];
+  
+  return dict;
+}
+
+
 @end

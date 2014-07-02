@@ -26,4 +26,22 @@
   self.uuid = [NSString stringWithUUID];
 }
 
+- (NSDictionary*)dictionary
+{
+  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"uuid" : self.uuid,
+                                                                              @"command" : @"",
+                                                                              @"code" : @"",
+                                                                              @"categoryName" : self.category.name}];
+  
+  if (self.command) {
+    [dict setObject:self.command forKey:@"command"];
+  }
+  
+  if (self.code) {
+    [dict setObject:self.code forKey:@"code"];
+  }
+  
+  return dict;
+}
+
 @end

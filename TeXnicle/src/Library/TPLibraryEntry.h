@@ -22,4 +22,6 @@
 @property (nonatomic, strong) NSData * image;
 @property (nonatomic, strong) TPLibraryCategory *category;
 
+- (NSDictionary*)dictionary;
+
 @end

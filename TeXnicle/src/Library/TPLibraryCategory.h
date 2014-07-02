@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSSet *entries;
 @property (nonatomic, strong) NSNumber *sortIndex;
 
+- (NSDictionary*)dictionary;
+
 @end
 
 @interface TPLibraryCategory (CoreDataGeneratedAccessors)
@@ -25,4 +27,5 @@
 - (void)removeEntriesObject:(TPLibraryEntry *)value;
 - (void)addEntries:(NSSet *)values;
 - (void)removeEntries:(NSSet *)values;
+
 @end
