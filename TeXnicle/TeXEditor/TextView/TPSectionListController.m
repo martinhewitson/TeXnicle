@@ -604,8 +604,8 @@ NSString *TPsectionListPopupTitle = @"Jump to section...";
   
   int jj=0;
   for (NSDictionary *cdict in results) {
-    NSDictionary *rdict = results[jj];
-    if ([[rdict valueForKey:@"selected"] boolValue] == YES) {
+//    NSDictionary *rdict = results[jj];
+    if ([[cdict valueForKey:@"selected"] boolValue] == YES) {
       idx = jj;
     }
     jj++;
