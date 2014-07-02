@@ -101,6 +101,9 @@
                                              object:nil];
   
   [self updateFont];
+  
+  [self setNextResponder:self.view];
+  [self.view.subviews enumerateObjectsUsingBlock:^(NSView *subview, NSUInteger idx, BOOL *stop) { [subview setNextResponder:self]; }];
 }
 
 - (void) handleNavigatorFontDidChangeNotification:(NSNotification*)aNote
@@ -270,6 +273,17 @@
     }
   }
   return nil;
+}
+
+- (void) delete:(id)sender
+{
+  NSResponder *first = [self.view.window firstResponder];
+  
+  if (first == self.categoriesTable) {
+    [self removeCategories:sender];
+  } else {
+    [self deleteItems:sender];
+  }
 }
 
 - (IBAction) deleteItems:(id)sender
