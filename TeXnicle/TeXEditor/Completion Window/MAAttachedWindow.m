@@ -9,7 +9,7 @@
 
 #define MAATTACHEDWINDOW_DEFAULT_BACKGROUND_COLOR [NSColor colorWithCalibratedWhite:0.1 alpha:0.75]
 #define MAATTACHEDWINDOW_DEFAULT_BORDER_COLOR [NSColor whiteColor]
-#define MAATTACHEDWINDOW_SCALE_FACTOR [[NSScreen mainScreen] backingScaleFactor]
+#define MAATTACHEDWINDOW_SCALE_FACTOR 1.0 
 
 @interface MAAttachedWindow (MAPrivateMethods)
 
@@ -233,7 +233,9 @@
 	}
 	
 	// Position frame origin appropriately for _side, accounting for arrow-inset.
-	contentRect.origin = (_window) ? [_window convertBaseToScreen:_point] : _point;
+  NSRect r = NSMakeRect(_point.x, _point.y, 1, 1);
+  NSRect testRect = [_window convertRectToScreen:r];
+	contentRect.origin = (_window) ? testRect.origin : _point;
 	float arrowInset = [self _arrowInset];
 	float halfWidth = contentRect.size.width / 2.0;
 	float halfHeight = contentRect.size.height / 2.0;
@@ -325,7 +327,10 @@
 	} else {
 		screenFrame = [[NSScreen mainScreen] visibleFrame];
 	}
-	NSPoint pointOnScreen = (_window) ? [_window convertBaseToScreen:_point] : _point;
+  NSRect r = NSMakeRect(_point.x, _point.y, 1, 1);
+  NSRect testRect = [_window convertRectToScreen:r];
+  NSPoint pointOnScreen = (_window) ? testRect.origin : _point;
+//	NSPoint pointOnScreen = (_window) ? [_window convertBaseToScreen:_point] : _point;
 	NSSize viewSize = [_view frame].size;
 	viewSize.width += (viewMargin * MAATTACHEDWINDOW_SCALE_FACTOR) * 2.0;
 	viewSize.height += (viewMargin * MAATTACHEDWINDOW_SCALE_FACTOR) * 2.0;
@@ -436,6 +441,7 @@
 	// as an NSColor patternImage.
 	NSDisableScreenUpdates();
 	[super setBackgroundColor:[self _backgroundColorPatternImage]];
+
 	if ([self isVisible]) {
 		[self display];
 		[self invalidateShadow];
