@@ -346,8 +346,10 @@
 - (void) textChanged
 {
 	// notify anyone interested that there were edits
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:TPFileItemTextStorageChangedNotification object:self userInfo:nil];
+  if (self != nil && [self isDeleted] == NO) {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:TPFileItemTextStorageChangedNotification object:self userInfo:nil];
+  }
 }
 
 - (FileDocument*)document
