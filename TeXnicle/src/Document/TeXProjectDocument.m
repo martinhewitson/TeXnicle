@@ -1528,7 +1528,7 @@
 	
 	NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
 																			 location:menuOrigin
-																	modifierFlags:NSLeftMouseDownMask // 0x100
+																	modifierFlags:(int)NSLeftMouseDownMask // 0x100
 																			timestamp:0
 																	 windowNumber:[[(NSButton *)sender window] windowNumber]
 																				context:[[(NSButton *)sender window] graphicsContext]
@@ -3087,7 +3087,7 @@
 	
 	NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
 																			 location:menuOrigin
-																	modifierFlags:NSLeftMouseDownMask // 0x100
+																	modifierFlags:(int)NSLeftMouseDownMask // 0x100
 																			timestamp:0
 																	 windowNumber:[[(NSButton *)sender window] windowNumber]
 																				context:[[(NSButton *)sender window] graphicsContext]
