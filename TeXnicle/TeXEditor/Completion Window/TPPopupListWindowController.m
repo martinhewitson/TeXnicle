@@ -26,6 +26,7 @@
 //
 
 #import "TPPopupListWindowController.h"
+#import "TPThemeManager.h"
 
 #define MAX_ENTRY_LENGTH 200
 #define kCompletionWindowMaxWidth 1000
@@ -129,15 +130,13 @@
 		
     // compare point on screen coordinates to check if the 
     // window will be off the bottom of the screen
-    NSPoint screenPoint = [parentWindow convertBaseToScreen:point]; 
+    NSRect r = [parentWindow convertRectToScreen:NSMakeRect(point.x, point.y, 1, 1)];
+    NSPoint screenPoint = r.origin;
     CGFloat y = screenPoint.y - height;
     if (y<0) {
       pos = MAPositionTopRight;
     }
     
-//		NSLog(@"Setting table bounds: %f x %f", width , height);
-//		NSLog(@"Attaching window at: %f x %f", point.x , point.y);
-		
 		[view setFrame:NSMakeRect(0, 0, width+20.0, height)];
     if (attachedWindow == nil) {
       attachedWindow = [[MAAttachedWindow alloc] initWithView:view
@@ -146,8 +145,14 @@
                                                        onSide:pos
                                                    atDistance:5.0];
     }
+    
+    TPThemeManager *tm = [TPThemeManager sharedManager];
+    TPTheme *theme = tm.currentTheme;
+    
 		[attachedWindow setBorderColor:[NSColor clearColor]];
-		[attachedWindow setBackgroundColor:[NSColor whiteColor]];
+		[attachedWindow setBackgroundColor:theme.documentEditorBackgroundColor];
+    [table setBackgroundColor:theme.documentEditorBackgroundColor];
+    
 		[attachedWindow setViewMargin:5.0];
 		[attachedWindow setBorderWidth:3.0];
 		[attachedWindow setCornerRadius:5.0];
@@ -290,14 +295,6 @@
 #pragma mark -
 #pragma mark Table delegate
 
-- (void)tableView:(NSTableView *)tableView 
-	willDisplayCell:(id)cell 
-	 forTableColumn:(NSTableColumn *)tableColumn 
-							row:(NSInteger)row
-{
-	if (tableView == table) {
-	}
-}
 
 - (id)tableView:(NSTableView *)tableView 
 objectValueForTableColumn:(NSTableColumn *)tableColumn 
@@ -321,6 +318,16 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     
 	}
 	return nil;
+}
+
+
+- (NSCell *)tableView:(NSTableView *)tableView dataCellForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+  TPThemeManager *tm = [TPThemeManager sharedManager];
+  TPTheme *theme = tm.currentTheme;
+  NSTextFieldCell *cell = [tableColumn dataCell];
+  [cell setTextColor:theme.documentTextColor];
+  return cell;
 }
 
 
