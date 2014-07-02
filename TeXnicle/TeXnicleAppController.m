@@ -562,7 +562,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
     // load themes
     [TPThemeManager installThemes];
     [TPThemeManager migrateDefaultsToTheme];
-    TPThemeManager *themeManager = [TPThemeManager sharedManager];
+    [TPThemeManager sharedManager];
     
     // update syntax check errors
     [TPSyntaxChecker updateErrorList];
