@@ -33,5 +33,7 @@
 - (NSArray*)commandsBeginningWith:(NSString*)prefix;
 - (void) restoreDefaultLibrary;
 - (void) addDefaultCategories;
+- (void) exportLibraryToURL:(NSURL*)aURL;
+- (void) importLibraryFromURL:(NSURL*)aURL;
 
 @end

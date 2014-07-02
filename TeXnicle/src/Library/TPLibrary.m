@@ -596,5 +596,95 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   return commands;
 }
 
+#pragma mark - Import/Export
+
+- (void) exportLibraryToURL:(NSURL*)aURL
+{
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setDateFormat:@"yyyy-mm-dd HH:MM"];
+  NSString *date = [formatter stringFromDate:[NSDate date]];
+  
+  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{@"date" : date}];
+  
+  NSArray *categories = [self categories];
+  NSMutableArray *exports = [NSMutableArray array];
+  for (TPLibraryCategory *category in categories) {
+    [exports addObject:[category dictionary]];
+  }
+  
+  [dict setObject:exports forKey:@"categories"];
+  
+  [dict writeToURL:aURL atomically:YES];
+}
+
+- (void) importLibraryFromURL:(NSURL*)aURL
+{
+  NSDictionary *input = [NSDictionary dictionaryWithContentsOfURL:aURL];
+  
+  if (input == nil) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Importing Library Failed"
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Failed to import library entries from the contents of %@", [aURL path]];
+    [alert runModal];
+    return;
+  }
+  
+  NSArray *inputCategories = [input valueForKey:@"categories"];
+  NSMutableArray *existingEntries = [NSMutableArray array];
+  
+  for (NSDictionary *inputCategory in inputCategories) {
+   
+    NSString *categoryName = [inputCategory valueForKey:@"name"];
+    
+    TPLibraryCategory *category = [self getOrCreateCategoryWithName:categoryName];
+    
+    if (category != nil) {
+      // try to add each entry
+      NSArray *entries = [self entriesForCategory:category];
+      NSArray *inputEntries = [inputCategory valueForKey:@"entries"];
+      for (NSDictionary *inputEntry in inputEntries) {
+        NSString *inputUUID = [inputEntry valueForKey:@"uuid"];
+
+        BOOL existsAlready = NO;
+        for (TPLibraryEntry *entry in entries) {
+          if ([entry.uuid isEqualToString:inputUUID]) {
+            existsAlready = YES;
+            break;
+          }
+        }
+        
+        if (existsAlready) {
+          [existingEntries addObject:inputEntry];
+        } else {
+          NSString *code = [inputEntry valueForKey:@"code"];
+          TPLibraryEntry *entry = [self clipWithCode:code inCategory:category];
+          NSString *command = [inputEntry valueForKey:@"command"];
+          if (command) {
+            entry.command = command;
+          }
+        }
+        
+      }
+    } else {
+      NSLog(@"Failed to make or get category with name %@", categoryName);
+    }
+  } // end loop over input categories
+  
+  
+  if ([existingEntries count]>0) {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Importing Library Issues"
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Failed to import %lu entries from the contents of %@ because they already exist in the library", [existingEntries count], [aURL path]];
+    [alert runModal];
+  }
+}
+
+
+
+
 
 @end
