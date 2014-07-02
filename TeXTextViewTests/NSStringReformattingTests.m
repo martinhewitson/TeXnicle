@@ -18,7 +18,7 @@
   NSString *path = [bundle pathForResource:name ofType:@"tex"];
   NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
   if (string == nil) {
-    STFail(@"Failed to load %@.tex [%@]", name, error);
+    XCTFail(@"Failed to load %@.tex [%@]", name, error);
   }
   return string;
 }
@@ -40,7 +40,7 @@
   newString = [string reformatStartingAtIndex:140 forLinewidth:20];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Reconsituted text should be as the original");
+  XCTAssertTrue([newString isEqualToString:testString], @"Reconsituted text should be as the original");
   
   //-----------------------------------------------------------------------
   // Test 2 - simple string
@@ -51,7 +51,7 @@
   newString = [string reformatStartingAtIndex:10 forLinewidth:40];
   testString = [newString stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
   // check test string is the same as the original
-  STAssertTrue([testString isEqualToString:string], @"Reconsituted text should be as the original");
+  XCTAssertTrue([testString isEqualToString:string], @"Reconsituted text should be as the original");
   
   //-----------------------------------------------------------------------
   // Test 3 - reformat text within an argument
@@ -63,7 +63,7 @@
   newString = [string reformatStartingAtIndex:90 forLinewidth:40];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 4 - reformat \item
@@ -74,7 +74,7 @@
   testString = [self stringFromTestFile:@"reformatTextTestFile5_reformatted"];
   newString = [string reformatStartingAtIndex:64 forLinewidth:20];
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 5 - reformat \item with indent
@@ -86,7 +86,7 @@
   newString = [string reformatStartingAtIndex:37 forLinewidth:30];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 6 - reformat \item with indent
@@ -98,7 +98,7 @@
   newString = [string reformatStartingAtIndex:93 forLinewidth:45];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
 
   //-----------------------------------------------------------------------
   // Test 7 - reformat \item which contains a command. Start before the command
@@ -110,7 +110,7 @@
   newString = [string reformatStartingAtIndex:96 forLinewidth:45];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 8 - reformat \item which contains a command. Start after the command
@@ -122,7 +122,7 @@
   newString = [string reformatStartingAtIndex:178 forLinewidth:45];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 9 - reformat \caption of a figure
@@ -134,7 +134,7 @@
   newString = [string reformatStartingAtIndex:109 forLinewidth:80];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 10 - reformat a beamer \item set
@@ -146,7 +146,7 @@
   newString = [string reformatStartingAtIndex:236 forLinewidth:45];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 11 - reformat an \item[xxx] set with blank lines between items
@@ -158,7 +158,7 @@
   newString = [string reformatStartingAtIndex:113 forLinewidth:55];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
   //-----------------------------------------------------------------------
   // Test 12 - reformat an \item[xxx] set
@@ -170,7 +170,7 @@
   newString = [string reformatStartingAtIndex:113 forLinewidth:55];
   NSLog(@"%@", newString);
   // check new string is the same as the hand formatted string
-  STAssertTrue([newString isEqualToString:testString], @"Text should match result file");
+  XCTAssertTrue([newString isEqualToString:testString], @"Text should match result file");
   
 }
 

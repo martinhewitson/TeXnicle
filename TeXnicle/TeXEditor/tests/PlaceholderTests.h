@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 bobsoft. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface PlaceholderTests : SenTestCase
+@interface PlaceholderTests : XCTestCase
 
 @end

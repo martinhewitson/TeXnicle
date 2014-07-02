@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 bobsoft. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "TPTeXLogParser.h"
 #import "TPLogItem.h"
 #import "NSArray+LogParser.h"
 #import "NSString+LogParser.h"
 
-@interface TestLogParserTests : SenTestCase
+@interface TestLogParserTests : XCTestCase
 
 @end
 
@@ -59,7 +59,7 @@
       }
     }
     if (string == nil) {
-      STFail(@"Failed to load %@.log [%@]", name, error);
+      XCTFail(@"Failed to load %@.log [%@]", name, error);
     }
   }
   return string;
@@ -71,7 +71,7 @@
   NSString *filename = [str filename];
   NSLog(@"[%@]", filename);
   
-  STAssertNotNil(filename, @"Filename shouldn't be nil");
+  XCTAssertNotNil(filename, @"Filename shouldn't be nil");
   
 }
 
@@ -80,7 +80,7 @@
   NSString *logtext = @"";
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 0, @"Empty log should produce no log items");
+  XCTAssertTrue([items count] == 0, @"Empty log should produce no log items");
 }
 
 - (void)testParseFilename1
@@ -89,13 +89,13 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@ (some other thing)\n Info: message", filename];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Info line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Info line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filename should be [%@], not [%@]", filename, item.filepath);
-  STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
-  STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filename should be [%@], not [%@]", filename, item.filepath);
+  XCTAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 - (void)testParseFilename2
@@ -104,13 +104,13 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\n Some other thing\n Info: message", filename];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Info line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Info line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filename should be %@, not %@", filename, item.filepath);
-  STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
-  STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filename should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 //(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
@@ -119,7 +119,7 @@
   NSString *logtext = @"(etexcmds)             That can mean that you are not using pdfTeX 1.50 or";
   NSString *filename = [logtext filename];
   
-  STAssertTrue(filename == nil, @"Filename should be nil, not %@", filename);
+  XCTAssertTrue(filename == nil, @"Filename should be nil, not %@", filename);
 }
 
 
@@ -130,15 +130,15 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage ifluatex Info: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Info line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Info line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
-  STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
-  STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
-  STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
+  XCTAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
+  XCTAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 // Package hyperref Info: Option `plainpages' set `false' on input line 4319.
@@ -150,15 +150,15 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage hyperref Info: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Info line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Info line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
-  STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
-  STAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
-  STAssertTrue(item.linenumber == linenumber, @"Line number should be NSNotFound, not %ld", item.linenumber);
+  XCTAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
+  XCTAssertTrue(item.type == TPLogInfo, @"Item type should be Info, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == linenumber, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 // Package thumbpdf Warning: Compressed PDF objects of PDF 1.5 are not supported.
@@ -169,15 +169,15 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage thumbpdf Warning: %@\n)", filename, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Warning line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Warning line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
-  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
-  STAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
-  STAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
+  XCTAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == NSNotFound, @"Line number should be NSNotFound, not %ld", item.linenumber);
 }
 
 - (void)testWarningLine2
@@ -188,15 +188,15 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\nPackage thumbpdf Warning:%ld: %@\n)", filename, linenumber, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Warning line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Warning line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
-  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
-  STAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
-  STAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
+  XCTAssertTrue(item.type == TPLogWarning, @"Item type should be Warning, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
 }
 
 - (void)testWarningLine3
@@ -206,7 +206,7 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 1, @"Warning line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Warning line should produce a single log item");
   TPLogItem *item = items[0];
   
 }
@@ -220,15 +220,15 @@
   NSString *logtext = [NSString stringWithFormat:@"(%@\n:%ld: LaTeX Error: %@\n)", filename, linenumber, message];
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 1, @"Warning line should produce a single log item");
+  XCTAssertTrue([items count] == 1, @"Warning line should produce a single log item");
   
   TPLogItem *item = items[0];
   
-  STAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
-  STAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
-  STAssertTrue(item.type == TPLogError, @"Item type should be Error, not %@", item.typeName);
-  STAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
+  XCTAssertTrue([item.filepath isEqualToString:filename], @"Filepath should be %@, not %@", filename, item.filepath);
+  XCTAssertTrue([item.file isEqualToString:[[filename lastPathComponent] stringByStandardizingPath]], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue([item.message isEqualToString:message], @"Message should be [%@], not [%@]", message, item.message);
+  XCTAssertTrue(item.type == TPLogError, @"Item type should be Error, not %@", item.typeName);
+  XCTAssertTrue(item.linenumber == linenumber, @"Line number should be %ld, not %ld", linenumber, item.linenumber);
 }
 
 // contains 14 Info, 0 error, 0 warning
@@ -238,11 +238,11 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 14, @"log1.log should produce 14 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 14, @"log1.log should produce 14 items, not %ld items", [items count]);
   
   
   for (TPLogItem *item in items) {
-    STAssertTrue(item.type == TPLogInfo, @"The item [%@] should be an INFO", item);
+    XCTAssertTrue(item.type == TPLogInfo, @"The item [%@] should be an INFO", item);
   }  
 }
 
@@ -253,13 +253,13 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 2, @"log2.log should produce 2 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 2, @"log2.log should produce 2 items, not %ld items", [items count]);
 
   TPLogItem *item = items[0];
 
   NSString *filename = @"introduction.tex";
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue(item.type == TPLogError, @"Item should be an Error, not %@", item.typeName);
+  XCTAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue(item.type == TPLogError, @"Item should be an Error, not %@", item.typeName);
 }
 
 // contains TeX memory error phrase and many warnings and info
@@ -269,16 +269,16 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 149, @"log3.log should produce 149 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 149, @"log3.log should produce 149 items, not %ld items", [items count]);
 
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 117, @"The log file should contain 117 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 117, @"The log file should contain 117 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 31, @"The log file should contain 31 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 31, @"The log file should contain 31 warning itmes, not %ld", [warnings count]);
 
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 1, @"The log file should contain 1 error, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 1, @"The log file should contain 1 error, not %ld", [errors count]);
 }
 
 // contains successful run with various warnings and info
@@ -288,16 +288,16 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 229, @"log4.log should produce 229 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 229, @"log4.log should produce 229 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 45, @"The log file should contain 45 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 45, @"The log file should contain 45 info itmes, not %ld", [info count]);
 
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 184, @"The log file should contain 184 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 184, @"The log file should contain 184 warning itmes, not %ld", [warnings count]);
 
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 // contains
@@ -308,13 +308,13 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 2, @"log5.log should produce 2 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 2, @"log5.log should produce 2 items, not %ld items", [items count]);
   
   TPLogItem *item = items[0];
   
   NSString *filename = @"glossary.tex";
-  STAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
-  STAssertTrue(item.type == TPLogError, @"Item should be an Error, not %@", item.typeName);
+  XCTAssertTrue([item.file isEqualToString:filename], @"Filename should be %@, not %@", filename, item.file);
+  XCTAssertTrue(item.type == TPLogError, @"Item should be an Error, not %@", item.typeName);
 }
 
 // contains successful run with various warnings and info
@@ -324,16 +324,16 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 320, @"log6.log should produce 320 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 320, @"log6.log should produce 320 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 143, @"The log file should contain 143 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 143, @"The log file should contain 143 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 177, @"The log file should contain 177 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 177, @"The log file should contain 177 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 // contains successful run with various warnings and info
@@ -344,16 +344,16 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 292, @"log7.log should produce 292 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 292, @"log7.log should produce 292 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 288, @"The log file should contain 288 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 288, @"The log file should contain 288 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 4, @"The log file should contain 4 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 4, @"The log file should contain 4 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 // contains successful run with various warnings and info
@@ -364,16 +364,16 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 87, @"log8.log should produce 87 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 87, @"log8.log should produce 87 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 87, @"The log file should contain 87 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 87, @"The log file should contain 87 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 // contains 2 errors with various warnings and info
@@ -384,16 +384,16 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 3, @"log9.log should produce 3 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 3, @"log9.log should produce 3 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 1, @"The log file should contain 1 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 1, @"The log file should contain 1 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 2, @"The log file should contain 2 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 2, @"The log file should contain 2 errors, not %ld", [errors count]);
 }
 
 // contains successful run with various warnings and info
@@ -404,16 +404,16 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"%@", items);
   
-  STAssertTrue([items count] == 41, @"log10.log should produce 41 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 41, @"log10.log should produce 41 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 41, @"The log file should contain 41 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 41, @"The log file should contain 41 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 0, @"The log file should contain 0 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 // contains broken run with various warnings and info
@@ -423,17 +423,17 @@
   
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   
-  STAssertTrue([items count] == 207, @"log11.log should produce 207 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 207, @"log11.log should produce 207 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 0, @"The log file should contain 0 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 0, @"The log file should contain 0 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 194, @"The log file should contain 194 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 194, @"The log file should contain 194 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
   NSLog(@"%@", errors);
-  STAssertTrue([errors count] == 13, @"The log file should contain 9 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 13, @"The log file should contain 9 errors, not %ld", [errors count]);
 }
 
 - (void)testLog12
@@ -443,17 +443,17 @@
   NSArray *items = [TPTeXLogParser parseLogText:logtext];
   NSLog(@"Items %@", items);
   
-  STAssertTrue([items count] == 4, @"log12.log should produce 4 items, not %ld items", [items count]);
+  XCTAssertTrue([items count] == 4, @"log12.log should produce 4 items, not %ld items", [items count]);
   
   NSArray *info = [items infoItems];
-  STAssertTrue([info count] == 0, @"The log file should contain 0 info itmes, not %ld", [info count]);
+  XCTAssertTrue([info count] == 0, @"The log file should contain 0 info itmes, not %ld", [info count]);
   
   NSArray *warnings = [items warningItems];
-  STAssertTrue([warnings count] == 4, @"The log file should contain 4 warning itmes, not %ld", [warnings count]);
+  XCTAssertTrue([warnings count] == 4, @"The log file should contain 4 warning itmes, not %ld", [warnings count]);
   
   NSArray *errors = [items errorItems];
   NSLog(@"%@", errors);
-  STAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
+  XCTAssertTrue([errors count] == 0, @"The log file should contain 0 errors, not %ld", [errors count]);
 }
 
 

@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 bobsoft. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "NSString+LaTeX.h"
 
-@interface LaTeXStringTests : SenTestCase
+@interface LaTeXStringTests : XCTestCase
 
 @end
 
@@ -32,7 +32,7 @@
   NSString *str = [NSString stringWithFormat:@"%% This is a commented out line"];
 
   BOOL commented = [str isCommentLineBeforeIndex:10 commentChar:@"%"];
-  STAssertTrue(commented, @"The string is commented");
+  XCTAssertTrue(commented, @"The string is commented");
   
 }
 
@@ -41,7 +41,7 @@
   NSString *str = [NSString stringWithFormat:@"This is a non-commented out line"];
   
   BOOL commented = [str isCommentLineBeforeIndex:10 commentChar:@"%"];
-  STAssertTrue(commented==NO, @"The string is not commented");
+  XCTAssertTrue(commented==NO, @"The string is not commented");
   
 }
 
@@ -50,7 +50,7 @@
   NSString *str = [NSString stringWithFormat:@"This \\%% is a non-commented out line"];
   
   BOOL commented = [str isCommentLineBeforeIndex:10 commentChar:@"%"];
-  STAssertTrue(commented==NO, @"The string is not commented");
+  XCTAssertTrue(commented==NO, @"The string is not commented");
   
 }
 
@@ -59,8 +59,8 @@
   NSString *tag = @"one";
   NSString *str = [NSString stringWithFormat:@"a \\bibitem[option]{%@} with an option", tag];
   NSString *option = [str parseOptionStartingAtIndex:0];
-  STAssertNotNil(option, @"The option should be [option] and not nil");
-  STAssertTrue([option isEqualToString:@"option"], @"The option should be [option] and not [%@]", option);
+  XCTAssertNotNil(option, @"The option should be [option] and not nil");
+  XCTAssertTrue([option isEqualToString:@"option"], @"The option should be [option] and not [%@]", option);
   
 }
 
@@ -68,35 +68,35 @@
 {
   NSString *s = @"my \\{ char";
   BOOL result = [s characterIsEscapedAtIndex:4];
-  STAssertTrue(result, @"Character is escaped");
+  XCTAssertTrue(result, @"Character is escaped");
 }
 
 - (void)testCharacterIsEscapedAtIndex2
 {
   NSString *s = @"my { char";
   BOOL result = [s characterIsEscapedAtIndex:4];
-  STAssertFalse(result, @"Character is not escaped");
+  XCTAssertFalse(result, @"Character is not escaped");
 }
 
 - (void)testIsInArgumentAtIndex
 {
   NSString *s = @"my { char }";
   BOOL result = [s isInArgumentAtIndex:7];
-  STAssertFalse(result, @"Is not in argument at index 7");
+  XCTAssertFalse(result, @"Is not in argument at index 7");
 }
 
 - (void)testIsInArgumentAtIndex2
 {
   NSString *s = @"my \\{ char \\}";
   BOOL result = [s isInArgumentAtIndex:7];
-  STAssertFalse(result, @"Is not in argument at index 7");
+  XCTAssertFalse(result, @"Is not in argument at index 7");
 }
 
 - (void)testIsInArgumentAtIndex3
 {
   NSString *s = @"{\\command{one} some}";
   BOOL result = [s isInArgumentAtIndex:17];
-  STAssertFalse(result, @"We are not in an argument at index 17");
+  XCTAssertFalse(result, @"We are not in an argument at index 17");
 }
 
 // \usepackage[pdftex]{graphicx}
@@ -104,56 +104,56 @@
 {
   NSString *s = @"\\usepackage[pdftex]{graphicx}";
   BOOL result = [s isInArgumentAtIndex:24];
-  STAssertTrue(result, @"We are in an argument at index 24");
+  XCTAssertTrue(result, @"We are in an argument at index 24");
 }
 
 - (void)testIsCommandBeforeIndex
 {
   NSString *s = @"my \\{ char \\}";
   BOOL result = [s isCommandBeforeIndex:7];
-  STAssertFalse(result, @"There is no command before index 7");
+  XCTAssertFalse(result, @"There is no command before index 7");
 }
 
 - (void)testIsCommandBeforeIndex2
 {
   NSString *s = @"my \\{char \\}";
   BOOL result = [s isCommandBeforeIndex:7];
-  STAssertFalse(result, @"There is no command before index 7");
+  XCTAssertFalse(result, @"There is no command before index 7");
 }
 
 - (void)testIsCommandBeforeIndex3
 {
   NSString *s = @"my \\command{char \\}";
   BOOL result = [s isCommandBeforeIndex:7];
-  STAssertTrue(result, @"There is a command before index 7");
+  XCTAssertTrue(result, @"There is a command before index 7");
 }
 
 - (void)testIsCommandBeforeIndex4
 {
   NSString *s = @"my \\command{char \\}";
   BOOL result = [s isCommandBeforeIndex:7];
-  STAssertTrue(result, @"There is a command before index 7");
+  XCTAssertTrue(result, @"There is a command before index 7");
 }
 
 - (void)testIsCommandBeforeIndex5
 {
   NSString *s = @"my string with no command in it";
   BOOL result = [s isCommandBeforeIndex:14];
-  STAssertFalse(result, @"There is no command before index 14");
+  XCTAssertFalse(result, @"There is no command before index 14");
 }
 
 - (void)testIsCommandBeforeIndex6
 {
   NSString *s = @"\\command{one}";
   BOOL result = [s isCommandBeforeIndex:0];
-  STAssertFalse(result, @"There is a command before index 0");
+  XCTAssertFalse(result, @"There is a command before index 0");
 }
 
 - (void)testIsCommandBeforeIndex7
 {
   NSString *s = @"my nice \\command{one}";
   BOOL result = [s isCommandBeforeIndex:0];
-  STAssertFalse(result, @"There is no command before index 0");
+  XCTAssertFalse(result, @"There is no command before index 0");
 }
 
 
@@ -161,71 +161,71 @@
 {
   NSString *s = @"{\\command{one}]";
   BOOL result = [s isCommandBeforeIndex:12];
-  STAssertTrue(result, @"There is a command before index 12");
+  XCTAssertTrue(result, @"There is a command before index 12");
 }
 
 - (void)testIsCommandBeforeIndex9
 {
   NSString *s = @"{\\command{one} some}";
   BOOL result = [s isCommandBeforeIndex:17];
-  STAssertTrue(result, @"There is a command before index 17");
+  XCTAssertTrue(result, @"There is a command before index 17");
 }
 
 - (void)testIsCommandBeforeIndex10
 {
   NSString *s = @"\\usepackage[pdftex]{graphicx}";
   BOOL result = [s isCommandBeforeIndex:24];
-  STAssertTrue(result, @"There is a command before index 24");
+  XCTAssertTrue(result, @"There is a command before index 24");
 }
 
 - (void)testCommandAtIndex1
 {
   NSString *s = @"\\usepackage[pdftex]{graphicx}";
   NSString *cmd = [s commandAtIndex:24];
-  STAssertTrue(cmd != nil, @"There is a command at index 24");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 24");
 }
 
 - (void)testCommandAtIndex2
 {
   NSString *s = @"\\command{\\command{some}}";
   NSString *cmd = [s commandAtIndex:5];
-  STAssertTrue(cmd != nil, @"There is a command at index 5");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 5");
 }
 
 - (void)testCommandAtIndex3
 {
   NSString *s = @"\\command{\\command{some}}";
   NSString *cmd = [s commandAtIndex:20];
-  STAssertTrue(cmd != nil, @"There is a command at index 20");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 20");
 }
 
 - (void)testCommandAtIndex4
 {
   NSString *s = @"command{\\command{some}}";
   NSString *cmd = [s commandAtIndex:3];
-  STAssertFalse(cmd != nil, @"There is no command at index 3");
+  XCTAssertFalse(cmd != nil, @"There is no command at index 3");
   cmd = [s commandAtIndex:12];
-  STAssertTrue(cmd != nil, @"There is a command at index 12");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 12");
 }
 
 - (void)testCommandAtIndex5
 {
   NSString *s = @"\\command";
   NSString *cmd = [s commandAtIndex:3];
-  STAssertTrue(cmd != nil, @"There is a command at index 3");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 3");
 }
 
 - (void)testCommandAtIndex6
 {
   NSString *s = @"\\command[opt1][option two]{argument1}{argument two}";
   NSString *cmd = [s commandAtIndex:11];
-  STAssertTrue(cmd != nil, @"There is a command at index 11");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 11");
   cmd = [s commandAtIndex:19];
-  STAssertTrue(cmd != nil, @"There is a command at index 19");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 19");
   cmd = [s commandAtIndex:31];
-  STAssertTrue(cmd != nil, @"There is a command at index 31");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 31");
   cmd = [s commandAtIndex:43];
-  STAssertTrue(cmd != nil, @"There is a command at index 43");
+  XCTAssertTrue(cmd != nil, @"There is a command at index 43");
 }
 
 
@@ -233,16 +233,16 @@
 {
   NSString *s = @"command{\\command{some}}";
   BOOL result = [s isArgumentOfCommandAtIndex:3];
-  STAssertFalse(result, @"There is no command at index 3");
+  XCTAssertFalse(result, @"There is no command at index 3");
   result = [s isArgumentOfCommandAtIndex:12];
-  STAssertTrue(result, @"There is a command at index 12");
+  XCTAssertTrue(result, @"There is a command at index 12");
 }
 
 - (void)testIsArgumentOfCommandAtIndex2
 {
   NSString *s = @"\\command[opt]{some}";
   BOOL result = [s isArgumentOfCommandAtIndex:17];
-  STAssertTrue(result, @"There is a command at index 17");
+  XCTAssertTrue(result, @"There is a command at index 17");
 }
 
 
@@ -250,35 +250,35 @@
 {
   NSString *s = @"some text with no math";
   BOOL result = [s isInMathAtIndex:10];
-  STAssertFalse(result, @"There is no math mode here!");
+  XCTAssertFalse(result, @"There is no math mode here!");
 }
 
 - (void)testIsInMathAtIndex2
 {
   NSString *s = @"some $x<<<y$ and $y>>>z$.";
   BOOL result = [s isInMathAtIndex:9];
-  STAssertTrue(result, @"We are in math mode at index 9.");
+  XCTAssertTrue(result, @"We are in math mode at index 9.");
 }
 
 - (void)testIsInMathAtIndex3
 {
   NSString *s = @"some $x<<<y$ and $y>>>z$.";
   BOOL result = [s isInMathAtIndex:21];
-  STAssertTrue(result, @"We are in math mode at index 21.");
+  XCTAssertTrue(result, @"We are in math mode at index 21.");
 }
 
 - (void)testIsInMathAtIndex4
 {
   NSString *s = @"\\begin{equation} x<y & y>z \\end{equation}";
   BOOL result = [s isInMathAtIndex:21];
-  STAssertTrue(result, @"We are in math mode at index 21.");
+  XCTAssertTrue(result, @"We are in math mode at index 21.");
 }
 
 - (void)testIsInMathAtIndex5
 {
   NSString *s = @"\\begin{eqnarray} x<y & y>z \\end{eqnarray}";
   BOOL result = [s isInMathAtIndex:21];
-  STAssertTrue(result, @"We are in math mode at index 21.");
+  XCTAssertTrue(result, @"We are in math mode at index 21.");
 }
 
 - (void)testIsInMathAtIndex6
@@ -287,7 +287,7 @@
   x<y & y>z \
   \\end{matrix}";
   BOOL result = [s isInMathAtIndex:21];
-  STAssertTrue(result, @"We are in math mode at index 21.");
+  XCTAssertTrue(result, @"We are in math mode at index 21.");
 }
 
 

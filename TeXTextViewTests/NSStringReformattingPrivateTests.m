@@ -22,7 +22,7 @@
   NSString *path = [bundle pathForResource:name ofType:@"tex"];
   NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
   if (string == nil) {
-    STFail(@"Failed to load %@.tex [%@]", name, error);
+    XCTFail(@"Failed to load %@.tex [%@]", name, error);
   }
   return string;
 }
@@ -35,17 +35,17 @@
   // test 1 - simple string
   string = @"not empty";
   result = [string lineIsEmptyAtIndex:3];
-  STAssertFalse(result, @"Test 1: the line is not empty");
+  XCTAssertFalse(result, @"Test 1: the line is not empty");
   
   // test 2 - empty string
   string = @"";
   result = [string lineIsEmptyAtIndex:0];
-  STAssertTrue(result, @"Test 2: the line is empty");
+  XCTAssertTrue(result, @"Test 2: the line is empty");
   
   // test 3 - multiple lines
   string = [NSString stringWithFormat:@"some\n\ncommand which has a command"];
   result = [string lineIsEmptyAtIndex:5];
-  STAssertTrue(result, @"Test 3: the line is empty");
+  XCTAssertTrue(result, @"Test 3: the line is empty");
     
 }
 
@@ -58,22 +58,22 @@
   // test 1 - simple string
   string = [NSString stringWithFormat:@"some string which has no command"];
   command = [string commandNameStartingAtIndex:0];
-  STAssertNil(command, @"Test 1: the text contains no command");
+  XCTAssertNil(command, @"Test 1: the text contains no command");
   
   // test 2 - command
   string = [NSString stringWithFormat:@"some \\command which has a command"];
   command = [string commandNameStartingAtIndex:5];
-  STAssertTrue([command isEqualToString:@"\\command"], @"Test 2: the text contains the command [\\command]");
+  XCTAssertTrue([command isEqualToString:@"\\command"], @"Test 2: the text contains the command [\\command]");
 
   // test 3 - command with args
   string = [NSString stringWithFormat:@"some \\command{argument} which has a command"];
   command = [string commandNameStartingAtIndex:5];
-  STAssertTrue([command isEqualToString:@"\\command"], @"Test 3: the text contains the command [\\command]");
+  XCTAssertTrue([command isEqualToString:@"\\command"], @"Test 3: the text contains the command [\\command]");
   
   // test 4 - command at beginning
   string = [NSString stringWithFormat:@"\\command{argument} which has a command"];
   command = [string commandNameStartingAtIndex:0];
-  STAssertTrue([command isEqualToString:@"\\command"], @"Test 4: the text contains the command [\\command]");
+  XCTAssertTrue([command isEqualToString:@"\\command"], @"Test 4: the text contains the command [\\command]");
   
 }
 
@@ -86,32 +86,32 @@
   // test 1 - simple string
   string = [NSString stringWithFormat:@" some string which covers \n more than one line "];
   result = [string lineIsCommentedBeforeIndex:5];
-  STAssertFalse(result, @"Test 1: The text is not commented");
+  XCTAssertFalse(result, @"Test 1: The text is not commented");
   
   // test 2 - commented string
   string = @"% some string which is a comment";
   result = [string lineIsCommentedBeforeIndex:5];
-  STAssertTrue(result, @"Test 2: The test is commented");
+  XCTAssertTrue(result, @"Test 2: The test is commented");
   
   // test 3 - multiple lines, not commented
   string = [NSString stringWithFormat:@" some string \n more than one line "];
   result = [string lineIsCommentedBeforeIndex:20];
-  STAssertFalse(result, @"Test 3: The text is not commented");
+  XCTAssertFalse(result, @"Test 3: The text is not commented");
   
   // test 4 - multiple lines, 2nd line commented
   string = [NSString stringWithFormat:@" some string \n%% more than one line "];
   result = [string lineIsCommentedBeforeIndex:20];
-  STAssertTrue(result, @"Test 4: The text is commented");
+  XCTAssertTrue(result, @"Test 4: The text is commented");
   
   // test 5 - comment within line
   string = [NSString stringWithFormat:@" some string %% more than one line "];
   result = [string lineIsCommentedBeforeIndex:20];
-  STAssertTrue(result, @"Test 5: The text is commented");
+  XCTAssertTrue(result, @"Test 5: The text is commented");
   
   // test 6 - escaped comment within line
   string = [NSString stringWithFormat:@" some string \\%% more than one line "];
   result = [string lineIsCommentedBeforeIndex:20];
-  STAssertFalse(result, @"Test 6: The text is not commented");
+  XCTAssertFalse(result, @"Test 6: The text is not commented");
   
   
 }
@@ -133,9 +133,9 @@
   // the startIndex should be 2, end index 218
   startIndex = [string startIndexForReformattingFromIndex:139 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:139];
-  STAssertEquals(startIndex, 2l, @"Start index should be 2");
-  STAssertEquals(endIndex, 218l, @"End index should be 218");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 2l, @"Start index should be 2");
+  XCTAssertEqual(endIndex, 218l, @"End index should be 218");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 2 - a single line of text
@@ -147,9 +147,9 @@
   // the startIndex should be 0, end should be 26
   startIndex = [string startIndexForReformattingFromIndex:13 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:13];
-  STAssertEquals(startIndex, 0l, @"Start index should be 0");
-  STAssertEquals(endIndex, 26l, @"End index should be 26");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 0l, @"Start index should be 0");
+  XCTAssertEqual(endIndex, 26l, @"End index should be 26");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 3 - some lines of text
@@ -160,9 +160,9 @@
   // the startIndex should be 6, end should be 32
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
-  STAssertEquals(startIndex, 6l, @"Start index should be 6");
-  STAssertEquals(endIndex, 32l, @"End index should be 32");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 6l, @"Start index should be 6");
+  XCTAssertEqual(endIndex, 32l, @"End index should be 32");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 4 - some indented lines of text
@@ -173,9 +173,9 @@
   // the startIndex should be 6, end should be 38
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
-  STAssertEquals(startIndex, 6l, @"Start index should be 6");
-  STAssertEquals(endIndex, 35l, @"End index should be 35");
-  STAssertEquals(indentation, 3l, @"Indentation should be 3");
+  XCTAssertEqual(startIndex, 6l, @"Start index should be 6");
+  XCTAssertEqual(endIndex, 35l, @"End index should be 35");
+  XCTAssertEqual(indentation, 3l, @"Indentation should be 3");
   
 }
 
@@ -195,9 +195,9 @@
   // the startIndex should be 51, end should be 100
   startIndex = [string startIndexForReformattingFromIndex:70 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:70];
-  STAssertEquals(startIndex, 51l, @"Start index should be 51");
-  STAssertEquals(endIndex, 100l, @"End index should be 100");
-  STAssertEquals(indentation, 6l, @"Indentation should be 6");
+  XCTAssertEqual(startIndex, 51l, @"Start index should be 51");
+  XCTAssertEqual(endIndex, 100l, @"End index should be 100");
+  XCTAssertEqual(indentation, 6l, @"Indentation should be 6");
   
   //-----------------------------------------------------------------------
   // Test 2 - a single \item command
@@ -208,9 +208,9 @@
   // the startIndex should be 0, end should be 9
   startIndex = [string startIndexForReformattingFromIndex:5 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:5];
-  STAssertEquals(startIndex, 0l, @"Start index should be 0");
-  STAssertEquals(endIndex, 9l, @"End index should be 9");
-  STAssertEquals(indentation, 6l, @"Indentation should be 6");
+  XCTAssertEqual(startIndex, 0l, @"Start index should be 0");
+  XCTAssertEqual(endIndex, 9l, @"End index should be 9");
+  XCTAssertEqual(indentation, 6l, @"Indentation should be 6");
   
   //-----------------------------------------------------------------------
   // Test 3 - a single \item command preceded by some text
@@ -221,9 +221,9 @@
   // the startIndex should be 10, end should be 19
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
-  STAssertEquals(startIndex, 10l, @"Start index should be 10");
-  STAssertEquals(endIndex, 19l, @"End index should be 19");
-  STAssertEquals(indentation, 16l, @"Indentation should be 16");
+  XCTAssertEqual(startIndex, 10l, @"Start index should be 10");
+  XCTAssertEqual(endIndex, 19l, @"End index should be 19");
+  XCTAssertEqual(indentation, 16l, @"Indentation should be 16");
 
   //-----------------------------------------------------------------------
   // Test 4 - a single \item command preceded by some text followed by blank line
@@ -234,9 +234,9 @@
   // the startIndex should be 10, end should be 19
   startIndex = [string startIndexForReformattingFromIndex:15 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:15];
-  STAssertEquals(startIndex, 10l, @"Start index should be 10");
-  STAssertEquals(endIndex, 19l, @"End index should be 19");
-  STAssertEquals(indentation, 16l, @"Indentation should be 16");
+  XCTAssertEqual(startIndex, 10l, @"Start index should be 10");
+  XCTAssertEqual(endIndex, 19l, @"End index should be 19");
+  XCTAssertEqual(indentation, 16l, @"Indentation should be 16");
 
   //-----------------------------------------------------------------------
   // Test 5 - a single \item command preceded and followed by blank lines
@@ -247,9 +247,9 @@
   // the startIndex should be 2, end should be 11
   startIndex = [string startIndexForReformattingFromIndex:6 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:6];
-  STAssertEquals(startIndex, 2l, @"Start index should be 2");
-  STAssertEquals(endIndex, 11l, @"End index should be 11");
-  STAssertEquals(indentation, 6l, @"Indentation should be 6");
+  XCTAssertEqual(startIndex, 2l, @"Start index should be 2");
+  XCTAssertEqual(endIndex, 11l, @"End index should be 11");
+  XCTAssertEqual(indentation, 6l, @"Indentation should be 6");
   
   //-----------------------------------------------------------------------
   // Test 6 - a full enumerate environment with indentation
@@ -261,9 +261,9 @@
   // the startIndex should be 21, end should be 69
   startIndex = [string startIndexForReformattingFromIndex:40 indentation:&indentation];
   endIndex   = [string endIndexForReformattingFromIndex:40];
-  STAssertEquals(startIndex, 21l, @"Start index should be 21");
-  STAssertEquals(endIndex, 69l, @"End index should be 69");
-  STAssertEquals(indentation, 8l, @"Indentation should be 8");
+  XCTAssertEqual(startIndex, 21l, @"Start index should be 21");
+  XCTAssertEqual(endIndex, 69l, @"End index should be 69");
+  XCTAssertEqual(indentation, 8l, @"Indentation should be 8");
   
 
   
@@ -285,9 +285,9 @@
   // the startIndex should be 75, end is 406
   startIndex = [string startIndexForReformattingFromIndex:140 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:140];
-  STAssertEquals(startIndex, 75l, @"Start index should be 75");
-  STAssertEquals(endIndex, 406l, @"Start index should be 406");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 75l, @"Start index should be 75");
+  XCTAssertEqual(endIndex, 406l, @"Start index should be 406");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 2 - simple paragraph containing an argument before the point where
@@ -299,9 +299,9 @@
   // the startIndex should be 105, end at 443
   startIndex = [string startIndexForReformattingFromIndex:180 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:180];
-  STAssertEquals(startIndex, 105l, @"Start index should be 105");
-  STAssertEquals(endIndex, 443l, @"End index should be 443");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 105l, @"Start index should be 105");
+  XCTAssertEqual(endIndex, 443l, @"End index should be 443");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 3 - simple paragraph containing an argument and we start within
@@ -313,9 +313,9 @@
   // the startIndex should be 146, end 166
   startIndex = [string startIndexForReformattingFromIndex:155 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:155];
-  STAssertEquals(startIndex, 146l, @"Start index should be 146");
-  STAssertEquals(endIndex, 166l, @"End index should be 166");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 146l, @"Start index should be 146");
+  XCTAssertEqual(endIndex, 166l, @"End index should be 166");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 4 - a paragraph containing an argument within an argument and we
@@ -328,9 +328,9 @@
   // the startIndex should be 68, end at 157
   startIndex = [string startIndexForReformattingFromIndex:120 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:120];
-  STAssertEquals(startIndex, 68l, @"Start index should be 68");
-  STAssertEquals(endIndex, 157l, @"End index should be 157");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 68l, @"Start index should be 68");
+  XCTAssertEqual(endIndex, 157l, @"End index should be 157");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 5 - a paragraph containing an argument within an argument and we
@@ -343,9 +343,9 @@
   // the startIndex should be 108, end at 110
   startIndex = [string startIndexForReformattingFromIndex:109 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:109];
-  STAssertEquals(startIndex, 108l, @"Start index should be 108");
-  STAssertEquals(endIndex, 110l, @"End index should be 110");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 108l, @"Start index should be 108");
+  XCTAssertEqual(endIndex, 110l, @"End index should be 110");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   //-----------------------------------------------------------------------
   // Test 6 - a paragraph containing an argument within an argument and we
@@ -358,9 +358,9 @@
   // the startIndex should be 68, end at 157
   startIndex = [string startIndexForReformattingFromIndex:94 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:94];
-  STAssertEquals(startIndex, 68l, @"Start index should be 68");
-  STAssertEquals(endIndex, 157l, @"End index should be 157");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 68l, @"Start index should be 68");
+  XCTAssertEqual(endIndex, 157l, @"End index should be 157");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   
   //-----------------------------------------------------------------------
@@ -372,9 +372,9 @@
   // the startIndex should be 0, end at 44
   startIndex = [string startIndexForReformattingFromIndex:44 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:44];
-  STAssertEquals(startIndex, 0l, @"Start index should be 0");
-  STAssertEquals(endIndex, 44l, @"End index should be 44");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 0l, @"Start index should be 0");
+  XCTAssertEqual(endIndex, 44l, @"End index should be 44");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
   
   
   //-----------------------------------------------------------------------
@@ -386,9 +386,9 @@
   // the startIndex should be 0, end at 130
   startIndex = [string startIndexForReformattingFromIndex:130 indentation:&indentation];
   endIndex = [string endIndexForReformattingFromIndex:130];
-  STAssertEquals(startIndex, 0l, @"Start index should be 0");
-  STAssertEquals(endIndex, 130l, @"End index should be 130");
-  STAssertEquals(indentation, 0l, @"Indentation should be 0");
+  XCTAssertEqual(startIndex, 0l, @"Start index should be 0");
+  XCTAssertEqual(endIndex, 130l, @"End index should be 130");
+  XCTAssertEqual(indentation, 0l, @"Indentation should be 0");
 
   
 }

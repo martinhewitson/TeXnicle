@@ -37,17 +37,10 @@
 		25086B38149F4467006A5A49 /* newTeXDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25086B37149F4467006A5A49 /* newTeXDoc.icns */; };
 		2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509B03913EC0C290072961A /* NSAttributedString+LineNumbers.m */; };
 		250AF6E414EB952600A0332E /* ProjectEntity+ProjectTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 250AF6E314EB952600A0332E /* ProjectEntity+ProjectTemplates.m */; };
-		250BE015162BEF3A007784DB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250BE014162BEF3A007784DB /* SenTestingKit.framework */; };
 		250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
 		250BE01C162BEF3A007784DB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 250BE01A162BEF3A007784DB /* InfoPlist.strings */; };
-		250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE01E162BEF3A007784DB /* TeXTextViewTests.m */; };
-		250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE024162BF01D007784DB /* reformatTextTestFile1.tex */; };
-		250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */; };
 		250BE02F162BFD68007784DB /* NSString+Reformatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE02E162BFD67007784DB /* NSString+Reformatting.m */; };
 		250BE032162BFF49007784DB /* NSString+Reformatting_Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE031162BFF49007784DB /* NSString+Reformatting_Private.m */; };
-		250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */; };
-		250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */; };
-		250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE037162C100E007784DB /* reformatTextTestFile5.tex */; };
 		250C173D140926CB00BCEA3D /* TPEnginesEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C173B140926CB00BCEA3D /* TPEnginesEditor.m */; };
 		250C173E140926CB00BCEA3D /* TPEnginesEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */; };
 		250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 250C17411409295500BCEA3D /* TPEngineEditor.m */; };
@@ -56,12 +49,6 @@
 		250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F1B4A16E3449600629A2E /* PlaceholderTests.m */; };
 		250F1B5816E34C7E00629A2E /* placeholderTest1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5616E34C1000629A2E /* placeholderTest1.tex */; };
 		250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5916E34E0100629A2E /* placeholderTest2.tex */; };
-		251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
-		251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
-		251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
-		251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */; };
-		251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CD163514AC00AC058F /* reformatTextTestFile12.tex */; };
-		251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */; };
 		25129B3A16FD8E21003FC11B /* TPMetadataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25129B3916FD8E21003FC11B /* TPMetadataManager.m */; };
 		25129B3D16FD9242003FC11B /* TPFileMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 25129B3C16FD9241003FC11B /* TPFileMetadata.m */; };
 		25131EA714E182C40065CDA7 /* MHTableConfigureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25131EA614E182C40065CDA7 /* MHTableConfigureController.m */; };
@@ -128,27 +115,16 @@
 		252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 252CF58D140AA1D100290199 /* UKXattrMetadataStore.m */; };
 		252E121C162167490041B2BE /* MHControlsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121B162167490041B2BE /* MHControlsTabBarController.xib */; };
 		252E121F16216C460041B2BE /* MHInfoTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252E121E16216C460041B2BE /* MHInfoTabBarController.xib */; };
-		252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
-		252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
-		252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
-		252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */; };
-		252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */; };
-		252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */; };
-		252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */; };
 		253009D314ECEA0500426ED2 /* TPTemplateDirectory.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D214ECEA0500426ED2 /* TPTemplateDirectory.m */; };
 		253009D714ECEBBD00426ED2 /* TPTemplateFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 253009D614ECEBBD00426ED2 /* TPTemplateFile.m */; };
 		253312E715B6FF3500F9FD00 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
-		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; };
+		253312EA15B6FF5E00F9FD00 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 253312E615B6FF3500F9FD00 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2536A4CC18143CBC00C11DDB /* TPNewEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2536A4CB18143CBC00C11DDB /* TPNewEnvironment.m */; };
 		253776D5168382A000945573 /* xelatexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 253776D4168382A000945573 /* xelatexmk.engine */; };
 		253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */; };
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
 		253A3AC01457D895007C4D8C /* MHConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABF1457D895007C4D8C /* MHConsoleManager.m */; };
-		253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */; };
-		253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */; };
-		253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */; };
-		253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
 		253E5E3413951DD300566E23 /* TPLibraryImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E2F13951DD300566E23 /* TPLibraryImageGenerator.m */; };
 		253E5E3513951DD300566E23 /* TPClippingsTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 253E5E3113951DD300566E23 /* TPClippingsTable.m */; };
@@ -207,9 +183,6 @@
 		255DB84C13E577BD007629C0 /* buildProject.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255DB84B13E577BD007629C0 /* buildProject.icns */; };
 		255DB85413E5D5F8007629C0 /* TPImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255DB85213E5D5F8007629C0 /* TPImageViewerController.m */; };
 		255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 255DB85313E5D5F8007629C0 /* TPImageViewerController.xib */; };
-		2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */; };
-		2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */; };
-		2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */; };
 		256225CD15CA940600091A8C /* TPPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225CC15CA940600091A8C /* TPPalette.m */; };
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
@@ -309,6 +282,7 @@
 		2589BBFF15B3EEDC00E24C9B /* TPMetadataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */; };
 		2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */; };
 		258A1FBD149B43B100C55B69 /* no_pdf_relief.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258A1FBC149B43B100C55B69 /* no_pdf_relief.icns */; };
+		258B52A11963ED8900F46CBB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258B52A01963ED8900F46CBB /* XCTest.framework */; };
 		258BCAE815B067210092E914 /* TPTabbarMatchingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */; };
 		258BCAEC15B0698C0092E914 /* backbutton.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258BCAEA15B0698C0092E914 /* backbutton.icns */; };
 		258BCAED15B0698C0092E914 /* backbuttonDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258BCAEB15B0698C0092E914 /* backbuttonDepressed.icns */; };
@@ -359,7 +333,6 @@
 		25B28BA017A0F33300A41A0D /* quiet light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9F17A0F33300A41A0D /* quiet light.txtheme */; };
 		25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */; };
 		25B28BA517A16BE000A41A0D /* TPArrayStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */; };
-		25B38C2817C7205E00679086 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25DB59631778BCD6000383AF /* XCTest.framework */; };
 		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
 		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
@@ -532,6 +505,33 @@
 		25D57FBA14EA5371008E02B5 /* TPProjectTemplateCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D57FB914EA5371008E02B5 /* TPProjectTemplateCreator.m */; };
 		25D74AEA1397F4F00074A5A2 /* MHRoundedTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D74AE91397F4F00074A5A2 /* MHRoundedTopView.m */; };
 		25D74AEE1397F90E0074A5A2 /* MHRoundedBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D74AED1397F90E0074A5A2 /* MHRoundedBottomView.m */; };
+		25D7831C1962913300F57A67 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250BE014162BEF3A007784DB /* SenTestingKit.framework */; };
+		25D78369196295AD00F57A67 /* TeXTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE01E162BEF3A007784DB /* TeXTextViewTests.m */; };
+		25D7836A196295AD00F57A67 /* NSStringReformattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */; };
+		25D7836B196295AD00F57A67 /* NSStringReformattingPrivateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */; };
+		25D7836C196295B200F57A67 /* reformatTextTestFile1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE024162BF01D007784DB /* reformatTextTestFile1.tex */; };
+		25D7836D196295B200F57A67 /* reformatTextTestFile1_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */; };
+		25D7836E196295B200F57A67 /* reformatTextTestFile2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */; };
+		25D7836F196295B200F57A67 /* reformatTextTestFile3.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */; };
+		25D78370196295B200F57A67 /* reformatTextTestFile3_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */; };
+		25D78371196295B200F57A67 /* reformatTextTestFile4.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */; };
+		25D78372196295B200F57A67 /* reformatTextTestFile5.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE037162C100E007784DB /* reformatTextTestFile5.tex */; };
+		25D78373196295B200F57A67 /* reformatTextTestFile5_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */; };
+		25D78374196295B200F57A67 /* reformatTextTestFile6.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */; };
+		25D78375196295B200F57A67 /* reformatTextTestFile6_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */; };
+		25D78376196295B200F57A67 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
+		25D78377196295B200F57A67 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
+		25D78378196295B200F57A67 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
+		25D78379196295B200F57A67 /* reformatTextTestFile8_reformatted_2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */; };
+		25D7837A196295B200F57A67 /* reformatTextTestFile8.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */; };
+		25D7837B196295B200F57A67 /* reformatTextTestFile9_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */; };
+		25D7837C196295B200F57A67 /* reformatTextTestFile9.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */; };
+		25D7837D196295B200F57A67 /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
+		25D7837E196295B200F57A67 /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
+		25D7837F196295B200F57A67 /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
+		25D78380196295B200F57A67 /* reformatTextTestFile11_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */; };
+		25D78381196295B200F57A67 /* reformatTextTestFile12.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CD163514AC00AC058F /* reformatTextTestFile12.tex */; };
+		25D78382196295B200F57A67 /* reformatTextTestFile12_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */; };
 		25D788EC14AC5F0100C551D8 /* printIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25D788EB14AC5F0100C551D8 /* printIcon.icns */; };
 		25DA73A114092C37007ACA36 /* engineDoc.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25DA73A014092C37007ACA36 /* engineDoc.icns */; };
 		25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DA73A414093CAD007ACA36 /* BashColoringEngine.m */; };
@@ -579,7 +579,7 @@
 		25E0EB0914AF0D0C0039E82B /* MHPlaceholderAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E0EB0814AF0D0C0039E82B /* MHPlaceholderAttachment.m */; };
 		25E0EB0D14AF0D380039E82B /* MHPlaceholderAttachmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E0EB0C14AF0D380039E82B /* MHPlaceholderAttachmentCell.m */; };
 		25E50247139FC9F5004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
-		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; };
+		25E5024B13A09F8D004A983E /* TeXnicle.mdimporter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 25077312138E5D82000F1118 /* TeXnicle.mdimporter */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		25E5024C13A0B439004A983E /* schema.xml in Resources */ = {isa = PBXBuildFile; fileRef = 25E50246139FC9F5004A983E /* schema.xml */; };
 		25E513CA1459968600D13D1D /* zoomToFit.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25E513C91459968600D13D1D /* zoomToFit.icns */; };
 		25E65C53179D255F00B0FA5A /* MHWhiteBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E65C52179D255F00B0FA5A /* MHWhiteBackgroundView.m */; };
@@ -622,6 +622,20 @@
 			remoteInfo = TeXnicleImporter;
 		};
 		250BE028162BF440007784DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		25D7831D1962919F00F57A67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		25D7831F1962919F00F57A67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
 			proxyType = 1;
@@ -1142,6 +1156,7 @@
 		2589BC0115B40DAD00E24C9B /* MHInfoTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHInfoTabBarController.h; sourceTree = "<group>"; };
 		2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHInfoTabBarController.m; sourceTree = "<group>"; };
 		258A1FBC149B43B100C55B69 /* no_pdf_relief.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = no_pdf_relief.icns; sourceTree = "<group>"; };
+		258B52A01963ED8900F46CBB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		258BCAE615B067210092E914 /* TPTabbarMatchingBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTabbarMatchingBackground.h; sourceTree = "<group>"; };
 		258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTabbarMatchingBackground.m; sourceTree = "<group>"; };
 		258BCAEA15B0698C0092E914 /* backbutton.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = backbutton.icns; path = TeXnicle/Images/backbutton.icns; sourceTree = SOURCE_ROOT; };
@@ -1572,6 +1587,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D7831C1962913300F57A67 /* SenTestingKit.framework in Frameworks */,
 				25CFBD2016D2D89C0025B35D /* WebKit.framework in Frameworks */,
 				25F90EF214D054F600760F0B /* libz.dylib in Frameworks */,
 				25E0812D13A11A9000898596 /* Quartz.framework in Frameworks */,
@@ -1596,8 +1612,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25B38C2817C7205E00679086 /* XCTest.framework in Frameworks */,
-				250BE015162BEF3A007784DB /* SenTestingKit.framework in Frameworks */,
+				258B52A11963ED8900F46CBB /* XCTest.framework in Frameworks */,
 				250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1631,6 +1646,7 @@
 		250772EF138E5D81000F1118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				258B52A01963ED8900F46CBB /* XCTest.framework */,
 				25DB59631778BCD6000383AF /* XCTest.framework */,
 				25CFBD1F16D2D89C0025B35D /* WebKit.framework */,
 				253312E615B6FF3500F9FD00 /* Sparkle.framework */,
@@ -3183,11 +3199,13 @@
 			);
 			dependencies = (
 				250BE029162BF440007784DB /* PBXTargetDependency */,
+				25D7831E1962919F00F57A67 /* PBXTargetDependency */,
+				25D783201962919F00F57A67 /* PBXTargetDependency */,
 			);
 			name = TeXnicleTests;
 			productName = TeXTextViewTests;
 			productReference = 250BE013162BEF3A007784DB /* TeXnicleTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -3195,11 +3213,14 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = bobsoft;
 				TargetAttributes = {
 					250772EB138E5D81000F1118 = {
 						DevelopmentTeam = 8YK29FYVK4;
+					};
+					250BE012162BEF3A007784DB = {
+						TestTargetID = 250772EB138E5D81000F1118;
 					};
 				};
 			};
@@ -3507,50 +3528,50 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D7836F196295B200F57A67 /* reformatTextTestFile3.tex in Resources */,
+				25D78374196295B200F57A67 /* reformatTextTestFile6.tex in Resources */,
+				25D7837F196295B200F57A67 /* reformatTextTestFile11.tex in Resources */,
+				25D7837C196295B200F57A67 /* reformatTextTestFile9.tex in Resources */,
+				25D7837E196295B200F57A67 /* reformatTextTestFile10_reformatted.tex in Resources */,
+				25D78377196295B200F57A67 /* reformatTextTestFile7.tex in Resources */,
 				250BE01C162BEF3A007784DB /* InfoPlist.strings in Resources */,
+				25D7837A196295B200F57A67 /* reformatTextTestFile8.tex in Resources */,
 				25DB59581778BC3E000383AF /* log11.log in Resources */,
-				250BE027162BF152007784DB /* reformatTextTestFile1.tex in Resources */,
-				250BE02C162BFCD9007784DB /* reformatTextTestFile2.tex in Resources */,
+				25D78381196295B200F57A67 /* reformatTextTestFile12.tex in Resources */,
+				25D78372196295B200F57A67 /* reformatTextTestFile5.tex in Resources */,
 				2548303418422D650097060F /* log12.log in Resources */,
-				250BE034162C0BDB007784DB /* reformatTextTestFile3.tex in Resources */,
 				25DB595C1778BC3E000383AF /* log5.log in Resources */,
-				250BE036162C0DA4007784DB /* reformatTextTestFile4.tex in Resources */,
+				25D78378196295B200F57A67 /* reformatTextTestFile8_reformatted.tex in Resources */,
+				25D78370196295B200F57A67 /* reformatTextTestFile3_reformatted.tex in Resources */,
 				25DB59601778BC3E000383AF /* log9.log in Resources */,
-				250BE038162C100E007784DB /* reformatTextTestFile5.tex in Resources */,
 				25DB595D1778BC3E000383AF /* log6.log in Resources */,
-				2560A0A3162C756E00403D56 /* reformatTextTestFile3_reformatted.tex in Resources */,
 				257DA55C178BF8F50052A567 /* citations2.bib in Resources */,
-				253D132716325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex in Resources */,
-				253D132A16326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				25D78371196295B200F57A67 /* reformatTextTestFile4.tex in Resources */,
 				257DA55D178BF8F50052A567 /* citations3.bib in Resources */,
-				253D132D16326B91002A0A75 /* reformatTextTestFile6.tex in Resources */,
 				25DB595E1778BC3E000383AF /* log7.log in Resources */,
-				253D132E16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex in Resources */,
-				252FFDBD1632D13500619206 /* reformatTextTestFile7_reformatted.tex in Resources */,
+				25D78376196295B200F57A67 /* reformatTextTestFile7_reformatted.tex in Resources */,
+				25D78380196295B200F57A67 /* reformatTextTestFile11_reformatted.tex in Resources */,
 				25DB595A1778BC3E000383AF /* log3.log in Resources */,
-				252FFDBE1632D13500619206 /* reformatTextTestFile7.tex in Resources */,
-				252FFDC21632D27F00619206 /* reformatTextTestFile8_reformatted.tex in Resources */,
-				252FFDC31632D27F00619206 /* reformatTextTestFile8.tex in Resources */,
+				25D78373196295B200F57A67 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				25D7836C196295B200F57A67 /* reformatTextTestFile1.tex in Resources */,
 				2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */,
-				252FFDC51632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				25D7837D196295B200F57A67 /* reformatTextTestFile10.tex in Resources */,
+				25D78382196295B200F57A67 /* reformatTextTestFile12_reformatted.tex in Resources */,
 				25DB59551778BC3E000383AF /* InfoPlist.strings in Resources */,
 				25DB595F1778BC3E000383AF /* log8.log in Resources */,
+				25D7836D196295B200F57A67 /* reformatTextTestFile1_reformatted.tex in Resources */,
+				25D78379196295B200F57A67 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				25D7836E196295B200F57A67 /* reformatTextTestFile2.tex in Resources */,
 				25DB59571778BC3E000383AF /* log10.log in Resources */,
 				257DA559178BEC040052A567 /* citations1.bib in Resources */,
-				252FFDC81632D3D400619206 /* reformatTextTestFile9_reformatted.tex in Resources */,
-				252FFDC91632D3D400619206 /* reformatTextTestFile9.tex in Resources */,
-				251157C616350C2500AC058F /* reformatTextTestFile10.tex in Resources */,
 				25DB59591778BC3E000383AF /* log2.log in Resources */,
-				251157C716350C2500AC058F /* reformatTextTestFile10_reformatted.tex in Resources */,
 				257DA557178BE8FF0052A567 /* citation_test2.tex in Resources */,
-				251157CB1635143100AC058F /* reformatTextTestFile11.tex in Resources */,
-				251157CC1635143100AC058F /* reformatTextTestFile11_reformatted.tex in Resources */,
 				25DB59561778BC3E000383AF /* log1.log in Resources */,
-				251157CF163514AC00AC058F /* reformatTextTestFile12.tex in Resources */,
+				25D78375196295B200F57A67 /* reformatTextTestFile6_reformatted.tex in Resources */,
 				25DB59611778BC3E000383AF /* TestLogParserTests-Info.plist in Resources */,
-				251157D0163514AC00AC058F /* reformatTextTestFile12_reformatted.tex in Resources */,
 				250F1B5816E34C7E00629A2E /* placeholderTest1.tex in Resources */,
 				25DB595B1778BC3E000383AF /* log4.log in Resources */,
+				25D7837B196295B200F57A67 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3904,13 +3925,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D7836B196295AD00F57A67 /* NSStringReformattingPrivateTests.m in Sources */,
 				25DB59621778BC3E000383AF /* TestLogParserTests.m in Sources */,
-				250BE01F162BEF3A007784DB /* TeXTextViewTests.m in Sources */,
-				2560A09D162C317C00403D56 /* NSStringReformattingPrivateTests.m in Sources */,
-				2560A0A1162C70C100403D56 /* NSStringReformattingTests.m in Sources */,
+				25D78369196295AD00F57A67 /* TeXTextViewTests.m in Sources */,
 				2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */,
 				250F1B4B16E3449600629A2E /* PlaceholderTests.m in Sources */,
 				257DA555178BE71A0052A567 /* LaTeXStringTests.m in Sources */,
+				25D7836A196295AD00F57A67 /* NSStringReformattingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3926,6 +3947,16 @@
 			isa = PBXTargetDependency;
 			target = 250772EB138E5D81000F1118 /* TeXnicle */;
 			targetProxy = 250BE028162BF440007784DB /* PBXContainerItemProxy */;
+		};
+		25D7831E1962919F00F57A67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 25D7831D1962919F00F57A67 /* PBXContainerItemProxy */;
+		};
+		25D783201962919F00F57A67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 25D7831F1962919F00F57A67 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3992,14 +4023,15 @@
 		2507732D138E5D82000F1118 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4012,7 +4044,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -4022,14 +4058,15 @@
 		2507732E138E5D82000F1118 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4039,7 +4076,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -4099,7 +4140,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -4108,7 +4148,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -4118,7 +4159,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -4132,7 +4173,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
@@ -4142,7 +4182,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -4151,7 +4192,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -4164,7 +4205,7 @@
 		250BE022162BEF3A007784DB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4177,6 +4218,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PLATFORM_NAME)",
+					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/Library/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -4187,6 +4231,12 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(PLATFORM_NAME)",
+					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
+				);
 				INFOPLIST_FILE = "TeXTextViewTests/TeXTextViewTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
@@ -4200,7 +4250,7 @@
 		250BE023162BEF3A007784DB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -4214,11 +4264,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PLATFORM_NAME)",
+					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
+					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/Library/Frameworks",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeXTextViewTests/TeXTextViewTests-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(PLATFORM_NAME)",
+					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
+				);
 				INFOPLIST_FILE = "TeXTextViewTests/TeXTextViewTests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";

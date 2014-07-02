@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 bobsoft. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface TeXTextViewTests : SenTestCase
+@interface TeXTextViewTests : XCTestCase
 
 @end

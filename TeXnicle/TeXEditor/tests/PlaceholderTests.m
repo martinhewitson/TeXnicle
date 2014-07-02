@@ -21,7 +21,7 @@
   NSString *path = [bundle pathForResource:name ofType:@"tex"];
   NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
   if (string == nil) {
-    STFail(@"Failed to load %@.tex [%@]", name, error);
+    XCTFail(@"Failed to load %@.tex [%@]", name, error);
   }
   return string;
 }
@@ -34,11 +34,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 1
-  STAssertTrue([replaced length] == 6, @"Returned string [%@] should have length 1", replaced);
+  XCTAssertTrue([replaced length] == 6, @"Returned string [%@] should have length 1", replaced);
   
   // it should have an attachment at the first character
   NSRange effRange;
@@ -46,13 +46,13 @@
                                       atIndex:5
                                effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"First character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"First character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
   NSAttributedString *code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
+  XCTAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
 }
 
 - (void) testStringWithPlaceholdersRestored_02
@@ -63,11 +63,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 10
-  STAssertTrue([replaced length] == 10, @"Returned string should have length 10");
+  XCTAssertTrue([replaced length] == 10, @"Returned string should have length 10");
   
   // it should have an attachment at the 3rd character
   NSRange effRange;
@@ -75,13 +75,13 @@
                                       atIndex:2
                                effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"Third character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"Third character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
   NSAttributedString *code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
+  XCTAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
 }
 
 - (void) testStringWithPlaceholdersRestored_03
@@ -92,11 +92,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 26
-  STAssertTrue([replaced length] == 26, @"Returned string should have length 26");
+  XCTAssertTrue([replaced length] == 26, @"Returned string should have length 26");
   
   // it should have an attachment at the 3rd character
   NSRange effRange;
@@ -104,26 +104,26 @@
                                       atIndex:2
                                effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"Third character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"Third character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
   NSAttributedString *code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"nice"], @"The placeholder should display 'nice'");
+  XCTAssertTrue([[code string] isEqualToString:@"nice"], @"The placeholder should display 'nice'");
   
   // it should have an attachment at the 3rd character
   att = [replaced attribute:NSAttachmentAttributeName
                     atIndex:14
              effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"15th character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"15th character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   cell = (NSTextAttachmentCell*)[att attachmentCell];
   code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"places"], @"The placeholder should display 'places'");
+  XCTAssertTrue([[code string] isEqualToString:@"places"], @"The placeholder should display 'places'");
 }
 
 
@@ -135,11 +135,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 11
-  STAssertTrue([replaced length] == 11, @"Returned string should have length 11");
+  XCTAssertTrue([replaced length] == 11, @"Returned string should have length 11");
   
   // it should have an attachment at the 10th character
   NSRange effRange;
@@ -147,13 +147,13 @@
                                       atIndex:9
                                effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"10th character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"10th character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
   NSAttributedString *code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
+  XCTAssertTrue([[code string] isEqualToString:@"replace"], @"The placeholder should display 'replace'");
 }
 
 - (void) testStringWithPlaceholdersRestored_05
@@ -164,11 +164,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 11
-  STAssertTrue([replaced length] == [test length], @"Returned string should have same length as original");
+  XCTAssertTrue([replaced length] == [test length], @"Returned string should have same length as original");
   
 }
 
@@ -180,11 +180,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 11
-  STAssertTrue([replaced length] == [test length], @"Returned string should have same length as original");
+  XCTAssertTrue([replaced length] == [test length], @"Returned string should have same length as original");
   
 }
 
@@ -202,11 +202,11 @@
 
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // string should be same as before
-  STAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");  
+  XCTAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");  
 }
 
 - (void) testStringWithPlaceholdersRestored_08
@@ -222,11 +222,11 @@
   
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // string should be same as before
-  STAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
+  XCTAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
 }
 
 - (void) testStringWithPlaceholdersRestored_09
@@ -242,11 +242,11 @@
   
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // string should be same as before
-  STAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
+  XCTAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
 }
 
 - (void) testStringWithPlaceholdersRestored_10
@@ -262,11 +262,11 @@
   
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // string should be same as before
-  STAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
+  XCTAssertTrue([[replaced string] isEqualToString:test], @"Restored/replaced string should be as original");
 }
 
 
@@ -279,11 +279,11 @@
   NSAttributedString *restored = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(restored != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([restored isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(restored != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([restored isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // string should be same as before
-  STAssertTrue([[restored string] isEqualToString:test], @"Restored string [%@] should be as original", restored);
+  XCTAssertTrue([[restored string] isEqualToString:test], @"Restored string [%@] should be as original", restored);
 }
 
 - (void) testStringPlaceholderWithSpaces
@@ -294,11 +294,11 @@
   NSAttributedString *replaced = [NSAttributedString stringWithPlaceholdersRestored:test];
   
   // check that we get an nsattributed string
-  STAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
-  STAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
+  XCTAssertTrue(replaced != nil, @"Returned NSAttributedString should not be nil");
+  XCTAssertTrue([replaced isKindOfClass:[NSAttributedString class]], @"Returned object should be an NSAttributedString");
   
   // length should be 1
-  STAssertTrue([replaced length] == 3, @"Returned string [%@] should have length 1", replaced);
+  XCTAssertTrue([replaced length] == 3, @"Returned string [%@] should have length 1", replaced);
   
   // it should have an attachment at the first character
   NSRange effRange;
@@ -306,13 +306,13 @@
                                       atIndex:2
                                effectiveRange:&effRange];
   
-  STAssertTrue(att != nil, @"First character should have an attachment");
-  STAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
+  XCTAssertTrue(att != nil, @"First character should have an attachment");
+  XCTAssertTrue([att isKindOfClass:[MHPlaceholderAttachment class]], @"Attachement should be an MHPlaceholderAttachment");
   
   // placeholder display text should be 'replace'
   NSTextAttachmentCell *cell = (NSTextAttachmentCell*)[att attachmentCell];
   NSAttributedString *code = [cell attributedStringValue];
-  STAssertTrue([[code string] isEqualToString:@"place holder"], @"The placeholder should display 'place holder'");
+  XCTAssertTrue([[code string] isEqualToString:@"place holder"], @"The placeholder should display 'place holder'");
 }
 
 @end

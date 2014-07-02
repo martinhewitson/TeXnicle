@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 bobsoft. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import "NSString+LaTeX.h"
 #import "BibliographyEntry.h"
 
-@interface CitationTests : SenTestCase
+@interface CitationTests : XCTestCase
 
 @end
 
@@ -25,7 +25,7 @@
   NSString *path = [bundle pathForResource:name ofType:ext];
   NSString *string = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
   if (string == nil) {
-    STFail(@"Failed to load %@.tex [%@]", name, error);
+    XCTFail(@"Failed to load %@.tex [%@]", name, error);
   }
   return string;
 }
@@ -46,14 +46,14 @@
 {
   NSString *str = @"my string with no citation";
   NSArray *citations = [str citations];
-  STAssertTrue([citations count] == 0, @"The string contains no citations");
+  XCTAssertTrue([citations count] == 0, @"The string contains no citations");
 }
 
 - (void)testNoCitations2
 {
   NSString *str = @"my string with no citation \\bibitemstuff";
   NSArray *citations = [str citations];
-  STAssertTrue([citations count] == 0, @"The string contains no citations");
+  XCTAssertTrue([citations count] == 0, @"The string contains no citations");
 }
 
 - (void)testCitation1
@@ -63,7 +63,7 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 1, @"The string should contain one citation, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 1, @"The string should contain one citation, but it contains %ld", [citations count]);
   
 }
 
@@ -74,10 +74,10 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 1, @"The string should contain one citation, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 1, @"The string should contain one citation, but it contains %ld", [citations count]);
   
   BibliographyEntry *e = citations[0];
-  STAssertTrue([e.tag isEqualToString:tag], @"The tag should be [%@] not [%@]", tag, e.tag);
+  XCTAssertTrue([e.tag isEqualToString:tag], @"The tag should be [%@] not [%@]", tag, e.tag);
   
 }
 
@@ -89,7 +89,7 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 0, @"The string should contain no citations, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 0, @"The string should contain no citations, but it contains %ld", [citations count]);
 }
 
 - (void)testCitationCommented2
@@ -99,7 +99,7 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 0, @"The string should contain no citations, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 0, @"The string should contain no citations, but it contains %ld", [citations count]);
 }
 
 - (void)testCitationFile1
@@ -108,7 +108,7 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 3, @"The string should contain 3 citations, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 3, @"The string should contain 3 citations, but it contains %ld", [citations count]);
 }
 
 - (void)testCitationFile2
@@ -117,7 +117,7 @@
   NSArray *citations = [str citations];
   NSLog(@"Got %ld citations:", [citations count]);
   NSLog(@"%@", citations);
-  STAssertTrue([citations count] == 2, @"The string should contain 2 citations, but it contains %ld", [citations count]);
+  XCTAssertTrue([citations count] == 2, @"The string should contain 2 citations, but it contains %ld", [citations count]);
 }
 
 
@@ -127,7 +127,7 @@
   NSArray *entries = [BibliographyEntry bibtexEntriesFromString:str];
   NSLog(@"Entries %@", entries);
   
-  STAssertTrue([entries count] == 34, @"The string should contain 34 entries, but it contains %ld", [entries count]);
+  XCTAssertTrue([entries count] == 34, @"The string should contain 34 entries, but it contains %ld", [entries count]);
 }
 
 - (void)testBibTeXEntriesFromString2
@@ -136,19 +136,19 @@
   NSArray *entries = [BibliographyEntry bibtexEntriesFromString:str];
   NSLog(@"Entries %@", entries);
   
-  STAssertTrue([entries count] == 3, @"The string should contain 3 entries, but it contains %ld", [entries count]);
+  XCTAssertTrue([entries count] == 3, @"The string should contain 3 entries, but it contains %ld", [entries count]);
   
   // First should be Bender00
   BibliographyEntry *e1 = entries[0];
-  STAssertTrue([e1.tag isEqualToString:@"Bender00"], @"The first entry should have the tag [Bender00], not [%@]", e1.tag);
+  XCTAssertTrue([e1.tag isEqualToString:@"Bender00"], @"The first entry should have the tag [Bender00], not [%@]", e1.tag);
   
   // Second should be numrec
   BibliographyEntry *e2 = entries[1];
-  STAssertTrue([e2.tag isEqualToString:@"numrec"], @"The second entry should have the tag [numrec], not [%@]", e2.tag);
+  XCTAssertTrue([e2.tag isEqualToString:@"numrec"], @"The second entry should have the tag [numrec], not [%@]", e2.tag);
   
   // Third should be numrec
   BibliographyEntry *e3 = entries[2];
-  STAssertTrue([e3.tag isEqualToString:@"ST7"], @"The third entry should have the tag [ST7], not [%@]", e3.tag);
+  XCTAssertTrue([e3.tag isEqualToString:@"ST7"], @"The third entry should have the tag [ST7], not [%@]", e3.tag);
 }
 
 @end
