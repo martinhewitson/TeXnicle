@@ -149,7 +149,7 @@
 		2545865113E936FE00461494 /* leftArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864E13E936FE00461494 /* leftArrow.icns */; };
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
-		2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */; };
+		2547DFB71409FE5C002C0E2F /* MHStrokedVibrantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */; };
 		2548303418422D650097060F /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
 		25487E48181645B700C0D61C /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25487E47181645B600C0D61C /* TeXnicle.icns */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
@@ -335,6 +335,10 @@
 		25B28BA017A0F33300A41A0D /* quiet light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28B9F17A0F33300A41A0D /* quiet light.txtheme */; };
 		25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */ = {isa = PBXBuildFile; fileRef = 25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */; };
 		25B28BA517A16BE000A41A0D /* TPArrayStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */; };
+		25B663391965953A0070A050 /* YosemiteTabStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B663381965953A0070A050 /* YosemiteTabStyle.m */; };
+		25B6633C1965B1150070A050 /* MHTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6633B1965B1150070A050 /* MHTabView.m */; };
+		25B6633F1965B1F20070A050 /* MHOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B6633E1965B1F20070A050 /* MHOutlineView.m */; };
+		25B663421965B7630070A050 /* MHStrokedFiledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B663411965B7630070A050 /* MHStrokedFiledView.m */; };
 		25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152315B41770007A7FDF /* infoTabBarImage.icns */; };
 		25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */; };
 		25BB152A15B4185C007A7FDF /* warningsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */; };
@@ -925,8 +929,8 @@
 		2545864E13E936FE00461494 /* leftArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = leftArrow.icns; sourceTree = "<group>"; };
 		2545864F13E936FE00461494 /* downArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = downArrow.icns; sourceTree = "<group>"; };
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
-		2547DFB51409FE5C002C0E2F /* MHStrokedFiledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedFiledView.h; sourceTree = "<group>"; };
-		2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
+		2547DFB51409FE5C002C0E2F /* MHStrokedVibrantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedVibrantView.h; sourceTree = "<group>"; };
+		2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedVibrantView.m; sourceTree = "<group>"; };
 		2548303318422D600097060F /* log12.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log12.log; sourceTree = "<group>"; };
 		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
 		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
@@ -1233,6 +1237,14 @@
 		25B28BA117A0F6BF00A41A0D /* solarize light.txtheme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "solarize light.txtheme"; sourceTree = "<group>"; };
 		25B28BA317A16BE000A41A0D /* TPArrayStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPArrayStringTransformer.h; sourceTree = "<group>"; };
 		25B28BA417A16BE000A41A0D /* TPArrayStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPArrayStringTransformer.m; sourceTree = "<group>"; };
+		25B663371965953A0070A050 /* YosemiteTabStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YosemiteTabStyle.h; sourceTree = "<group>"; };
+		25B663381965953A0070A050 /* YosemiteTabStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YosemiteTabStyle.m; sourceTree = "<group>"; };
+		25B6633A1965B1150070A050 /* MHTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTabView.h; sourceTree = "<group>"; };
+		25B6633B1965B1150070A050 /* MHTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTabView.m; sourceTree = "<group>"; };
+		25B6633D1965B1F20070A050 /* MHOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHOutlineView.h; sourceTree = "<group>"; };
+		25B6633E1965B1F20070A050 /* MHOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHOutlineView.m; sourceTree = "<group>"; };
+		25B663401965B7630070A050 /* MHStrokedFiledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedFiledView.h; sourceTree = "<group>"; };
+		25B663411965B7630070A050 /* MHStrokedFiledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedFiledView.m; sourceTree = "<group>"; };
 		25BB152315B41770007A7FDF /* infoTabBarImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImage.icns; sourceTree = "<group>"; };
 		25BB152415B41770007A7FDF /* infoTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = infoTabBarImageDepressed.icns; sourceTree = "<group>"; };
 		25BB152815B4185C007A7FDF /* warningsTabBarImageDepressed.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = warningsTabBarImageDepressed.icns; sourceTree = "<group>"; };
@@ -1871,6 +1883,8 @@
 		25152A1D138F82F900307054 /* Console */ = {
 			isa = PBXGroup;
 			children = (
+				25B663401965B7630070A050 /* MHStrokedFiledView.h */,
+				25B663411965B7630070A050 /* MHStrokedFiledView.m */,
 				251FC6ED1392708800DB2E3B /* Console.xib */,
 				25152A1E138F832500307054 /* ConsoleController.h */,
 				25152A1F138F832500307054 /* ConsoleController.m */,
@@ -2034,8 +2048,8 @@
 				25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */,
 				25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */,
 				25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */,
-				2547DFB51409FE5C002C0E2F /* MHStrokedFiledView.h */,
-				2547DFB61409FE5C002C0E2F /* MHStrokedFiledView.m */,
+				2547DFB51409FE5C002C0E2F /* MHStrokedVibrantView.h */,
+				2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */,
 				250C173A140926CB00BCEA3D /* TPEnginesEditor.h */,
 				250C173B140926CB00BCEA3D /* TPEnginesEditor.m */,
 				250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */,
@@ -2624,6 +2638,10 @@
 				258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */,
 				2520AC1516A7F559006E9CA2 /* TPBoxView.h */,
 				2520AC1616A7F559006E9CA2 /* TPBoxView.m */,
+				25B6633A1965B1150070A050 /* MHTabView.h */,
+				25B6633B1965B1150070A050 /* MHTabView.m */,
+				25B6633D1965B1F20070A050 /* MHOutlineView.h */,
+				25B6633E1965B1F20070A050 /* MHOutlineView.m */,
 			);
 			name = Document;
 			path = src/Document;
@@ -2884,6 +2902,8 @@
 		25D10E7C176F00AE004C40AE /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				25B663371965953A0070A050 /* YosemiteTabStyle.h */,
+				25B663381965953A0070A050 /* YosemiteTabStyle.m */,
 				25D10E7D176F00AE004C40AE /* MMAdiumTabStyle.h */,
 				25D10E7E176F00AE004C40AE /* MMAdiumTabStyle.m */,
 				25D10E7F176F00AE004C40AE /* MMAquaTabStyle.h */,
@@ -3737,6 +3757,7 @@
 				2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */,
 				2545864C13E9268700461494 /* PDFViewerController.m in Sources */,
 				2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */,
+				25B663391965953A0070A050 /* YosemiteTabStyle.m in Sources */,
 				2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */,
 				2503357013EAD480005BD6CF /* FinderController.m in Sources */,
 				2509B03A13EC0C290072961A /* NSAttributedString+LineNumbers.m in Sources */,
@@ -3753,7 +3774,7 @@
 				250C173D140926CB00BCEA3D /* TPEnginesEditor.m in Sources */,
 				250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */,
 				25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */,
-				2547DFB71409FE5C002C0E2F /* MHStrokedFiledView.m in Sources */,
+				2547DFB71409FE5C002C0E2F /* MHStrokedVibrantView.m in Sources */,
 				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
 				25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */,
 				25C1B5E21410B09E001B02B0 /* KSPathUtilities.m in Sources */,
@@ -3858,6 +3879,7 @@
 				257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */,
 				25DB59741778C1A3000383AF /* SMTabBarItem.m in Sources */,
 				253D3581196523C300029995 /* TPCodeClippingEditorViewController.m in Sources */,
+				25B6633C1965B1150070A050 /* MHTabView.m in Sources */,
 				256225CD15CA940600091A8C /* TPPalette.m in Sources */,
 				256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */,
 				25957E9C15EC8BAC001E4338 /* MHPDFSearchResultsTable.m in Sources */,
@@ -3879,10 +3901,12 @@
 				254D16A416FAE36A00A31BE8 /* TPMetadataViewController.m in Sources */,
 				254D16A716FAE49000A31BE8 /* TPMetadataItem.m in Sources */,
 				254D16AC16FAE66500A31BE8 /* TPMetadataSet.m in Sources */,
+				25B6633F1965B1F20070A050 /* MHOutlineView.m in Sources */,
 				25129B3A16FD8E21003FC11B /* TPMetadataManager.m in Sources */,
 				25129B3D16FD9242003FC11B /* TPFileMetadata.m in Sources */,
 				25D10EE9176F00AE004C40AE /* MMAttachedTabBarButton.m in Sources */,
 				25D10EEA176F00AE004C40AE /* MMAttachedTabBarButtonCell.m in Sources */,
+				25B663421965B7630070A050 /* MHStrokedFiledView.m in Sources */,
 				25D10EEB176F00AE004C40AE /* MMOverflowPopUpButton.m in Sources */,
 				25D10EEC176F00AE004C40AE /* MMOverflowPopUpButtonCell.m in Sources */,
 				25D10EED176F00AE004C40AE /* MMProgressIndicator.m in Sources */,

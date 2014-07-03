@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">14A261i</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6154.21</string>
+		<string key="IBDocument.AppKitVersion">1321.11</string>
+		<string key="IBDocument.HIToolboxVersion">737.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2844</string>
+			<string key="NS.object.0">6154.21</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -34,7 +34,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">258</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="906244665">
@@ -42,14 +42,13 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{179, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="191695511">
 							<int key="NSCellFlags">-2080374784</int>
 							<int key="NSCellFlags2">134250496</int>
 							<string key="NSContents"/>
 							<object class="NSFont" key="NSSupport" id="503925223">
-								<string key="NSName">LucidaGrande</string>
+								<bool key="IBIsSystemFont">YES</bool>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
 							</object>
@@ -76,7 +75,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{-1, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="83726763"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="393842375">
@@ -107,7 +105,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{149, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="906244665"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="686337694">
@@ -138,7 +135,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{119, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="303472419"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="63024534">
@@ -169,7 +165,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{89, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="231547811"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="665698189">
@@ -200,7 +195,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{59, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="42578454"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="205282401">
@@ -231,7 +225,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{29, -1}, {36, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="281402540"/>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="482918536">
@@ -259,8 +252,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{243, 25}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="774803938"/>
 				<string key="NSClassName">MHToolbarBackgroundView</string>
 			</object>
@@ -338,14 +329,6 @@
 						<reference key="destination" ref="774803938"/>
 					</object>
 					<int key="connectionID">123</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">projectView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1005"/>
-					</object>
-					<int key="connectionID">146</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -630,10 +613,18 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
+					<string key="className">FirstResponder</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBUserSource</string>
+						<string key="minorKey"/>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">MHControlsTabBarController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="buttonSelected:">id</string>
+						<string key="hideNavigator:">id</string>
 						<string key="showClippingsLibrary:">id</string>
 						<string key="showDocumentOutline:">id</string>
 						<string key="showFileInfo:">id</string>
@@ -646,6 +637,10 @@
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="buttonSelected:">
 							<string key="name">buttonSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideNavigator:">
+							<string key="name">hideNavigator:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showClippingsLibrary:">
@@ -691,53 +686,184 @@
 						<string key="projectButton">NSButton</string>
 						<string key="splitview">NSSplitView</string>
 						<string key="tabView">NSTabView</string>
-						<string key="viewBackground">MHToolbarBackgroundView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="findButton">
+						<object class="IBToOneOutletInfo" key="findButton" id="889345250">
 							<string key="name">findButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="infoButton">
+						<object class="IBToOneOutletInfo" key="infoButton" id="417709639">
 							<string key="name">infoButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="libraryButton">
+						<object class="IBToOneOutletInfo" key="libraryButton" id="153448427">
 							<string key="name">libraryButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="outlineButton">
+						<object class="IBToOneOutletInfo" key="outlineButton" id="855126975">
 							<string key="name">outlineButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="palletButton">
+						<object class="IBToOneOutletInfo" key="palletButton" id="58139179">
 							<string key="name">palletButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="prefsButton">
+						<object class="IBToOneOutletInfo" key="prefsButton" id="170196171">
 							<string key="name">prefsButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="projectButton">
+						<object class="IBToOneOutletInfo" key="projectButton" id="177172748">
 							<string key="name">projectButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="splitview">
+						<object class="IBToOneOutletInfo" key="splitview" id="478164972">
 							<string key="name">splitview</string>
 							<string key="candidateClassName">NSSplitView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="tabView">
+						<object class="IBToOneOutletInfo" key="tabView" id="169745771">
 							<string key="name">tabView</string>
 							<string key="candidateClassName">NSTabView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="viewBackground">
-							<string key="name">viewBackground</string>
-							<string key="candidateClassName">MHToolbarBackgroundView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../TeXnicle/src/ControlsTabBar/MHControlsTabBarController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MHControlsTabBarController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="buttonSelected:">id</string>
+						<string key="hideNavigator:">id</string>
+						<string key="showClippingsLibrary:">id</string>
+						<string key="showDocumentOutline:">id</string>
+						<string key="showFileInfo:">id</string>
+						<string key="showNavigator:">id</string>
+						<string key="showProjectSearch:">id</string>
+						<string key="showProjectSettings:">id</string>
+						<string key="showProjectTree:">id</string>
+						<string key="showSymbolPalette:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="buttonSelected:" id="265415520">
+							<string key="name">buttonSelected:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="hideNavigator:" id="965537538">
+							<string key="name">hideNavigator:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showClippingsLibrary:" id="785592039">
+							<string key="name">showClippingsLibrary:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showDocumentOutline:" id="451945624">
+							<string key="name">showDocumentOutline:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showFileInfo:" id="32397260">
+							<string key="name">showFileInfo:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showNavigator:" id="605090623">
+							<string key="name">showNavigator:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectSearch:" id="602647215">
+							<string key="name">showProjectSearch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectSettings:" id="881258416">
+							<string key="name">showProjectSettings:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showProjectTree:" id="125597760">
+							<string key="name">showProjectTree:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showSymbolPalette:" id="826952211">
+							<string key="name">showSymbolPalette:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">viewBackground</string>
+						<string key="NS.object.0">MHToolbarBackgroundView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">viewBackground</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0" id="1047956351">
+							<string key="name">viewBackground</string>
+							<string key="candidateClassName">MHToolbarBackgroundView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../TeXnicle/src/ControlsTabBar/MHControlsTabBarController.m</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MHControlsTabBarController</string>
+					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="buttonSelected:">id</string>
+						<string key="hideNavigator:">id</string>
+						<string key="showClippingsLibrary:">id</string>
+						<string key="showDocumentOutline:">id</string>
+						<string key="showFileInfo:">id</string>
+						<string key="showNavigator:">id</string>
+						<string key="showProjectSearch:">id</string>
+						<string key="showProjectSettings:">id</string>
+						<string key="showProjectTree:">id</string>
+						<string key="showSymbolPalette:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<reference key="buttonSelected:" ref="265415520"/>
+						<reference key="hideNavigator:" ref="965537538"/>
+						<reference key="showClippingsLibrary:" ref="785592039"/>
+						<reference key="showDocumentOutline:" ref="451945624"/>
+						<reference key="showFileInfo:" ref="32397260"/>
+						<reference key="showNavigator:" ref="605090623"/>
+						<reference key="showProjectSearch:" ref="602647215"/>
+						<reference key="showProjectSettings:" ref="881258416"/>
+						<reference key="showProjectTree:" ref="125597760"/>
+						<reference key="showSymbolPalette:" ref="826952211"/>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="findButton">NSButton</string>
+						<string key="infoButton">NSButton</string>
+						<string key="libraryButton">NSButton</string>
+						<string key="outlineButton">NSButton</string>
+						<string key="palletButton">NSButton</string>
+						<string key="prefsButton">NSButton</string>
+						<string key="projectButton">NSButton</string>
+						<string key="splitview">NSSplitView</string>
+						<string key="tabView">NSTabView</string>
+						<string key="viewBackground">MHToolbarBackgroundView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<reference key="findButton" ref="889345250"/>
+						<reference key="infoButton" ref="417709639"/>
+						<reference key="libraryButton" ref="153448427"/>
+						<reference key="outlineButton" ref="855126975"/>
+						<reference key="palletButton" ref="58139179"/>
+						<reference key="prefsButton" ref="170196171"/>
+						<reference key="projectButton" ref="177172748"/>
+						<reference key="splitview" ref="478164972"/>
+						<reference key="tabView" ref="169745771"/>
+						<reference key="viewBackground" ref="1047956351"/>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MHControlsTabBarController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MHToolbarBackgroundView</string>
+					<string key="superclassName">SBGradientView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../TeXnicle/src/ControlsTabBar/MHToolbarBackgroundView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -753,6 +879,14 @@
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../TeXnicle/TeXEditor/Views/SBGradientView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SBGradientView</string>
+					<string key="superclassName">NSView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SBGradientView.h</string>
 					</object>
 				</object>
@@ -760,6 +894,15 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1080" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
+			<integer value="4600" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">

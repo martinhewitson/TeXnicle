@@ -1,5 +1,5 @@
 //
-//  MHStrokedFiledView.h
+//  MHStrokedVibrantView
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 28/08/11.
@@ -27,7 +27,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MHStrokedFiledView : NSView
+@interface MHStrokedVibrantView : NSVisualEffectView
 
 @property (strong) NSColor *fillColor;
 @property (strong) NSColor *strokeColor;

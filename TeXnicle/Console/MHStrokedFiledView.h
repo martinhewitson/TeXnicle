@@ -1,10 +1,9 @@
 //
-//  MHToolbarBackgroundView.h
+//  MHStrokedFiledView.h
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 27/05/11.
+//  Created by Martin Hewitson on 28/08/11.
 //  Copyright 2011 bobsoft. All rights reserved.
-//
 //
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -26,13 +25,12 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
-#import "SBGradientView.h"
+#import <Cocoa/Cocoa.h>
 
-@interface MHToolbarBackgroundView : SBGradientView
+@interface MHStrokedFiledView : NSVisualEffectView
 
-@property (assign) BOOL strokeLeftSide;
-@property (assign) BOOL strokeRightSide;
-@property (assign) id delegate;
+@property (strong) NSColor *fillColor;
+@property (strong) NSColor *strokeColor;
+@property (assign) BOOL strokeSides;
 
 @end

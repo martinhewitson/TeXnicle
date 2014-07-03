@@ -32,6 +32,7 @@
 #import "FileDocument.h"
 #import "NSString+CharacterSize.h"
 #import "DocWindowController.h"
+#import "NSApplication+SystemVersion.h"
 
 NSString * const TPOpenDocumentsDidChangeFileNotification = @"TPOpenDocumentsDidChangeFileNotification";
 NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAddFileNotification";
@@ -60,7 +61,12 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 
 - (void) setup
 {
-	[self.tabBar setStyleNamed:@"Safari"];
+  if ([NSApp isYosemite]) {
+    NSLog(@"Using Yosemite tabs");
+    [self.tabBar setStyleNamed:@"Yosemite"];
+  } else {
+    [self.tabBar setStyleNamed:@"Safari"];
+  }
 	[self.tabBar setOrientation:MMTabBarHorizontalOrientation];
 	[self.tabBar setAutomaticallyAnimates:YES];
 	[self.tabBar setHideForSingleTab:NO];

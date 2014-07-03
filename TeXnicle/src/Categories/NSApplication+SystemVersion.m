@@ -60,11 +60,11 @@
 
 - (BOOL) isYosemite
 {
-//  if (rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9) {
-//    return YES;
-//  } else {
+  if (rint(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9) {
+    return YES;
+  } else {
     return NO;
-//  }
+  }
 }
 
 @end

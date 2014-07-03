@@ -45,9 +45,12 @@
 
 - (IBAction)doneClicked:(id)sender
 {
-  self.clip.code = [self.textView string];
-  self.clip.imageIsValid = @NO;
-  [self.clip.managedObjectContext save:nil];
+  NSString *newText = [self.textView string];
+  if ([self.clip.code isEqualToString:newText] == NO) {
+    self.clip.code = newText;
+    self.clip.imageIsValid = @NO;
+    [self.clip.managedObjectContext save:nil];
+  }
   if (self.popover) {
     [self.popover close];
   }

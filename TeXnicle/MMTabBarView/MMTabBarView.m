@@ -14,6 +14,7 @@
 #import "MMOverflowPopUpButtonCell.h"
 #import "MMRolloverButton.h"
 #import "MMTabStyle.h"
+#import "YosemiteTabStyle.h"
 #import "MMMetalTabStyle.h"
 #import "MMAquaTabStyle.h"
 #import "MMUnifiedTabStyle.h"
@@ -344,6 +345,8 @@ static NSMutableDictionary *registeredStyleClasses = nil;
   [self registerTabStyleClass:[MMCardTabStyle class]];
   [self registerTabStyleClass:[MMLiveChatTabStyle class]];
   [self registerTabStyleClass:[MMSafariTabStyle class]];
+  [self registerTabStyleClass:[MMSafariTabStyle class]];
+  [self registerTabStyleClass:[YosemiteTabStyle class]];
 }
 
 + (void)registerTabStyleClass:(Class <MMTabStyle>)aStyleClass {

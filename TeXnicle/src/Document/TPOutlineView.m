@@ -31,6 +31,11 @@
 
 @implementation TPOutlineView
 
+- (BOOL) allowsVibrancy
+{
+  return YES;
+}
+
 - (void) dealloc
 {
   self.mainDocument = nil;

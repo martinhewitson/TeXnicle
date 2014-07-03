@@ -123,8 +123,10 @@
 
 - (void) setupOutlineView
 {
+  
   TPTheme *theme = [TPThemeManager currentTheme];
   [self.outlineView setBackgroundColor:theme.outlineBackgroundColor];
+  
 }
 
 - (void) setupOutlineBuilder

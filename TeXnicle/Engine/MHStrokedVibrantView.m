@@ -1,5 +1,5 @@
 //
-//  MHStrokedFiledView.m
+//  MHStrokedVibrantView.m
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 28/08/11.
@@ -25,9 +25,14 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "MHStrokedFiledView.h"
+#import "MHStrokedVibrantView.h"
 
-@implementation MHStrokedFiledView
+@implementation MHStrokedVibrantView
+
+- (BOOL) allowsVibrancy
+{
+  return YES;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
