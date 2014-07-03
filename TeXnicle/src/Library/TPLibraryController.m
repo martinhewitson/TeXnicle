@@ -17,6 +17,7 @@
 #import "NSStringUUID.h"
 #import "TPLibraryCommandFormatter.h"
 #import "TPThemeManager.h"
+#import "TPCodeClippingEditorViewController.h"
 
 @interface TPLibraryController ()
 
@@ -49,8 +50,12 @@
 @property (unsafe_unretained) IBOutlet NSTableView *entriesTable;
 @property (unsafe_unretained) IBOutlet NSSlider *entryRowHeightSlider;
 
-@property (unsafe_unretained) TPLibrary *library;
+@property (strong) IBOutlet NSOutlineView *outlineView;
 
+@property (strong) TPLibrary *library;
+
+@property (strong) NSPopover *editorPopover;
+@property (strong) TPCodeClippingEditorViewController *clipEditor;
 
 @end
 
@@ -59,6 +64,7 @@
 
 - (id) initWithDelegate:(id<TPLibraryControllerDelegate>)aDelegate;
 {
+//  self = [super initWithNibName:@"TPLibraryTreeView" bundle:nil];
   self = [super initWithNibName:@"TPLibraryView" bundle:nil];
   if (self) {
     self.library = [NSApplication sharedLibrary];
@@ -83,7 +89,10 @@
   // set row height
   [self.entryRowHeightSlider setFloatValue:[[defaults valueForKey:TPLibraryRowHeight] floatValue]];
 	[self.entriesTable setRowHeight:[self.entryRowHeightSlider floatValue]];
-
+  
+  [self.entriesTable setTarget:self];
+  [self.entriesTable setDoubleAction:@selector(editClip:)];
+  
   // create action menus
 	[self createAddMenu];
 	[self createCategoryActionMenu];
@@ -104,6 +113,8 @@
   
   [self setNextResponder:self.view];
   [self.view.subviews enumerateObjectsUsingBlock:^(NSView *subview, NSUInteger idx, BOOL *stop) { [subview setNextResponder:self]; }];
+  
+  [self.outlineView reloadData];
 }
 
 - (void) handleNavigatorFontDidChangeNotification:(NSNotification*)aNote
@@ -959,5 +970,59 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 
   return YES;
 }
+
+#pragma  mark - Editor Popover
+
+- (IBAction)editClip:(id)sender
+{
+  if (!self.editorPopover) {
+    self.editorPopover = [[NSClassFromString(@"NSPopover") alloc] init];
+  }
+  
+	[self.entriesTable abortEditing];
+	NSArray *selected = [self selectedEntries];
+	
+	TPLibraryEntry *item = nil;
+	if ([selected count] == 1) {
+		item = selected[0];
+	} else {
+    return;
+  }
+  
+  if (!self.clipEditor) {
+    self.clipEditor = [[TPCodeClippingEditorViewController alloc] initWithPopover:self.editorPopover];
+    [self.clipEditor loadView];
+  }
+  
+  // set clip item
+  self.clipEditor.clip = item;
+	 
+  NSInteger row = [self.entriesTable selectedRow];
+  if (row < 0) {
+    return;
+  }
+  
+//  NSRect cellFrame = [self.entriesTable frameOfCellAtColumn:1 row:row];
+  NSRect cellFrame = [self.entriesTable rectOfRow:row];
+  
+  NSPopover *po = (NSPopover*)self.editorPopover;
+  po.contentViewController = self.clipEditor;
+  po.animates = YES;
+  po.behavior = NSPopoverBehaviorApplicationDefined;
+  po.delegate = self;
+  [po showRelativeToRect:cellFrame ofView:self.entriesTable preferredEdge:NSMaxXEdge];
+
+}
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+  if([notification.object isEqualTo:self.editorPopover])
+  {
+    [self.entriesTable reloadData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TPLibraryDidUpdateNotification object:self.library];
+  }
+}
+
+
 
 @end

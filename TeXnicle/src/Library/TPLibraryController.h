@@ -20,7 +20,7 @@
 
 @end
 
-@interface TPLibraryController : NSViewController <NSUserInterfaceValidations, NSTextFieldDelegate, TPLibraryImageGeneratorDelegate, NSTableViewDelegate, NSTableViewDataSource> {
+@interface TPLibraryController : NSViewController <NSUserInterfaceValidations, NSTextFieldDelegate, TPLibraryImageGeneratorDelegate, NSTableViewDelegate, NSTableViewDataSource, NSOutlineViewDataSource, NSOutlineViewDelegate, NSPopoverDelegate> {
   
 @private
   // Edit sheet
