@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
@@ -262,24 +262,36 @@ It would be nice to be able to set a delay on the autocomplete boxes, such that 
 	- store this information in resource fork or project file\
 	- have a navigator view to show the highlights\
 	- allow the user to define colours and associated meanings\
-	- show in the jump bar\cf0 \
+	- show in the jump bar\
 \
 \
-+ Add an option to 'Stop on Error' in preferences of document/project\
+\
+DEBUGGING: 
+\fs30 \cf1 \cb0 \CocoaLigature0 xcrun atos -o TeXnicle.app/Contents/MacOS/TeXnicle -arch x86_64 -l 0x104f7a000 0x000000010501546b
+\fs28 \cf0 \cb1 \CocoaLigature1 \
+\
 \
 \
 + Worked around a bug which stopped PDFs being displayed properly on 10.6.8. Appears to be a problem in PDFkit that comes with the 10.9 SDK.\
 \
+Version 2.2.12\
+--------------\
 \
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 Version 2.2.11\
++ Added the ability to export the code clippings library\
++ Added the ability to import a code clippings library\
++ Other minor fixes and improvements to the library view\
++ Popup completion windows now respect the user's theme\
++ Fixed a bug which caused the quick-spell popup window to placed wrongly on screen\
++ Various minor bug fixes\
+\
+\
+Version 2.2.11\
 --------------\
 \
 + Fixed a bug which could cause crashes for some users\
 + Fixed a bug which could stop synctex from working if the output directory is not set or is empty\
 + Fixed a bug which could stop the `` replacement from working at the start of a line\
-\pard\tx337\pardeftab337\pardirnatural
-\cf0 \
+\
 \
 Version 2.2.10\
 -------------\
