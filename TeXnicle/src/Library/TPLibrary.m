@@ -400,6 +400,8 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
 
 - (NSArray*) categories
 {
+  _categories = nil;
+  
 	NSManagedObjectContext *moc = [self managedObjectContext];
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	NSError *fetchError = nil;
@@ -414,10 +416,10 @@ NSString * const TPLibraryDidUpdateNotification = @"TPLibraryDidUpdateNotificati
   if (fetchResults) {
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"sortIndex" ascending:YES];
     NSArray *descriptors = @[descriptor];
-    return [fetchResults sortedArrayUsingDescriptors:descriptors];    
+    _categories = [fetchResults sortedArrayUsingDescriptors:descriptors];
   }
   
-  return nil;	
+  return _categories;
 }
 
 - (NSArray*) entriesForCategory:(TPLibraryCategory*)category

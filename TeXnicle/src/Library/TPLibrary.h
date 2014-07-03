@@ -12,7 +12,7 @@
 
 @interface TPLibrary : NSObject
 
-
+@property (strong, nonatomic) NSArray *categories;
 
 - (IBAction)saveAction:(id)sender;
 
