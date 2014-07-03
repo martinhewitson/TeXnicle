@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4488.2"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPLibraryController">
@@ -34,16 +34,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView id="166" customClass="MHToolbarBackgroundView">
-                    <rect key="frame" x="0.0" y="164" width="235" height="37"/>
+                    <rect key="frame" x="0.0" y="121" width="235" height="27"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView id="211">
-                            <rect key="frame" x="204" y="8" width="21" height="21"/>
+                            <rect key="frame" x="209" y="7" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="resizeImage" id="212"/>
+                            <imageCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="resizeImage" id="212"/>
                         </imageView>
                         <slider toolTip="Change table row height" verticalHuggingPriority="750" id="210">
-                            <rect key="frame" x="134" y="10" width="62" height="17"/>
+                            <rect key="frame" x="134" y="5" width="67" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <sliderCell key="cell" controlSize="small" state="on" alignment="left" minValue="20" maxValue="100" doubleValue="36" tickMarkPosition="below" numberOfTickMarks="11" allowsTickMarkValuesOnly="YES" sliderType="linear" id="213"/>
                             <connections>
@@ -51,33 +51,33 @@
                             </connections>
                         </slider>
                         <button toolTip="Refresh images for selected code clipping(s)" verticalHuggingPriority="750" id="209" customClass="HHValidatedButton">
-                            <rect key="frame" x="66" y="5" width="23" height="25"/>
+                            <rect key="frame" x="56" y="3" width="19" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="214">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="214">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
                                 <action selector="refreshImages:" target="-2" id="303"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" tag="-1" id="208" customClass="HHValidatedButton">
-                            <rect key="frame" x="8" y="5" width="23" height="25"/>
+                            <rect key="frame" x="7" y="3" width="19" height="19"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" toolTip="Add new code clipping" imageScaling="proportionallyDown" inset="2" id="215">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" toolTip="Add new code clipping" imageScaling="proportionallyDown" inset="2" id="215">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
                                 <action selector="addClipping:" target="-2" id="267"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" tag="-1" id="207" customClass="HHValidatedButton">
-                            <rect key="frame" x="33" y="5" width="23" height="25"/>
+                            <rect key="frame" x="29" y="3" width="19" height="19"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" toolTip="Delete Selected Clippings" imageScaling="proportionallyDown" inset="2" id="216">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" toolTip="Delete Selected Clippings" imageScaling="proportionallyDown" inset="2" id="216">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
                                 <action selector="deleteItems:" target="-2" id="272"/>
@@ -86,21 +86,21 @@
                     </subviews>
                 </customView>
                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="167">
-                    <rect key="frame" x="0.0" y="201" width="235" height="183"/>
+                    <rect key="frame" x="0.0" y="148" width="235" height="236"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="Oos-YU-4Gm">
-                        <rect key="frame" x="0.0" y="17" width="235" height="166"/>
+                        <rect key="frame" x="0.0" y="17" width="235" height="219"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="40" headerView="201" id="199" customClass="TPClippingsTable">
-                                <rect key="frame" x="0.0" y="0.0" width="235" height="166"/>
+                                <rect key="frame" x="0.0" y="0.0" width="235" height="219"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
                                     <tableColumn identifier="ImageColumn" editable="NO" width="101" minWidth="40" maxWidth="1000" id="204">
-                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Clip">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Preview">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,11 +132,11 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="200">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="200">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" id="202">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="202">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
@@ -158,14 +158,47 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <button verticalHuggingPriority="750" tag="-1" id="173" customClass="HHValidatedButton">
+                            <rect key="frame" x="7" y="3" width="19" height="19"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSAddTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" toolTip="Add New Category" imageScaling="proportionallyDown" inset="2" id="176">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="createCategory:" target="-2" id="257"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" tag="-1" id="172" customClass="HHValidatedButton">
+                            <rect key="frame" x="30" y="3" width="19" height="19"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" toolTip="Delete Selected Categories" imageScaling="proportionallyDown" inset="2" id="177">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="removeCategories:" target="-2" id="258"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" id="174">
+                            <rect key="frame" x="208" y="3" width="19" height="19"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSActionTemplate" imagePosition="only" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="175">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="categoryAction:" target="-2" id="256"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </customView>
                 <customView id="169" customClass="LibraryPreviewBackgroundView">
-                    <rect key="frame" x="0.0" y="0.0" width="235" height="164"/>
+                    <rect key="frame" x="0.0" y="0.0" width="235" height="122"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView id="189" customClass="MHImageView">
-                            <rect key="frame" x="5" y="5" width="162" height="94"/>
+                            <rect key="frame" x="5" y="5" width="162" height="76"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" imageFrameStyle="groove" id="190"/>
                             <connections>
@@ -178,40 +211,40 @@
                             </connections>
                         </imageView>
                         <button verticalHuggingPriority="750" id="186" customClass="HHValidatedButton">
-                            <rect key="frame" x="175" y="72" width="52" height="25"/>
+                            <rect key="frame" x="175" y="59" width="52" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" title="edit" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
+                            <buttonCell key="cell" type="roundTextured" title="edit" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="193">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
-                                <action selector="startEditSheet:" target="-2" id="318"/>
+                                <action selector="editClip:" target="-2" id="dF7-fN-62Z"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" id="187" customClass="HHValidatedButton">
-                            <rect key="frame" x="175" y="42" width="52" height="25"/>
+                            <rect key="frame" x="175" y="33" width="52" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" title="copy" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192">
+                            <buttonCell key="cell" type="roundTextured" title="copy" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="192">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
                                 <action selector="copySelectedItemsToPasteboard:" target="-2" id="332"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" id="188" customClass="HHValidatedButton">
-                            <rect key="frame" x="175" y="12" width="52" height="25"/>
+                            <rect key="frame" x="175" y="7" width="52" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" title="insert" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
+                            <buttonCell key="cell" type="roundTextured" title="insert" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="191">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="smallSystem"/>
                             </buttonCell>
                             <connections>
                                 <action selector="insertSelectedItems:" target="-2" id="331"/>
                             </connections>
                         </button>
                         <textField verticalHuggingPriority="750" id="185">
-                            <rect key="frame" x="83" y="124" width="144" height="22"/>
+                            <rect key="frame" x="83" y="86" width="144" height="22"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="194">
                                 <font key="font" metaFont="system"/>
@@ -229,7 +262,7 @@
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" id="184">
-                            <rect key="frame" x="5" y="127" width="56" height="17"/>
+                            <rect key="frame" x="5" y="89" width="56" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Shortcut:" id="195">
                                 <font key="font" metaFont="system"/>
@@ -238,7 +271,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" id="336">
-                            <rect key="frame" x="63" y="127" width="20" height="17"/>
+                            <rect key="frame" x="63" y="89" width="20" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="#" id="337">
                                 <font key="font" metaFont="system"/>
@@ -258,14 +291,14 @@
                     </subviews>
                 </customView>
                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="170">
-                    <rect key="frame" x="0.0" y="414" width="235" height="179"/>
+                    <rect key="frame" x="0.0" y="384" width="235" height="209"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" id="tdm-cZ-zTx">
-                        <rect key="frame" x="0.0" y="0.0" width="235" height="179"/>
+                        <rect key="frame" x="0.0" y="0.0" width="235" height="209"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" id="178" customClass="TPClippingsTable">
-                                <rect key="frame" x="0.0" y="0.0" width="235" height="179"/>
+                                <rect key="frame" x="0.0" y="0.0" width="235" height="209"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -293,54 +326,15 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="179">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="179">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="180">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="180">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <customView id="171" customClass="MHToolbarBackgroundView">
-                    <rect key="frame" x="0.0" y="383" width="235" height="33"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <subviews>
-                        <button verticalHuggingPriority="750" id="174">
-                            <rect key="frame" x="205" y="3" width="23" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSActionTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="175">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="categoryAction:" target="-2" id="256"/>
-                            </connections>
-                        </button>
-                        <button verticalHuggingPriority="750" tag="-1" id="173" customClass="HHValidatedButton">
-                            <rect key="frame" x="8" y="3" width="22" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" toolTip="Add New Category" imageScaling="proportionallyDown" inset="2" id="176">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="createCategory:" target="-2" id="257"/>
-                            </connections>
-                        </button>
-                        <button verticalHuggingPriority="750" tag="-1" id="172" customClass="HHValidatedButton">
-                            <rect key="frame" x="33" y="3" width="22" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" toolTip="Delete Selected Categories" imageScaling="proportionallyDown" inset="2" id="177">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="removeCategories:" target="-2" id="258"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </customView>
             </subviews>
         </customView>
         <objectController mode="entity" entityName="Entry" automaticallyPreparesContent="YES" id="288" userLabel="Selected Entry Controller">
@@ -390,7 +384,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <clipView key="contentView" id="W3G-xz-32n">
                                         <rect key="frame" x="0.0" y="0.0" width="445" height="181"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textView importsGraphics="NO" continuousSpellChecking="YES" allowsUndo="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="311" customClass="TeXTextView">
                                                 <rect key="frame" x="0.0" y="0.0" width="445" height="181"/>
@@ -405,11 +399,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </clipView>
-                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" id="312">
+                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="312">
                                         <rect key="frame" x="0.0" y="165" width="445" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" id="313">
+                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="313">
                                         <rect key="frame" x="429" y="0.0" width="16" height="181"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
@@ -438,7 +432,7 @@ Gw
         </window>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="15" height="15"/>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="8" height="8"/>
         <image name="NSRefreshTemplate" width="10" height="12"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
