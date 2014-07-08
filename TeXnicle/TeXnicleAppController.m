@@ -70,6 +70,8 @@ NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEnd
 NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
 NSString * const TEAutomaticallyInsertClosingMath = @"TEAutomaticallyInsertClosingMath";
 NSString * const TEAutomaticallyReplaceOpeningDoubleQuote = @"TEAutomaticallyReplaceOpeningDoubleQuote";
+NSString * const TEOpeningDoubleQuoteReplacement = @"TEOpeningDoubleQuoteReplacement";
+
 NSString * const TEAutomaticallySkipClosingBrackets = @"TEAutomaticallySkipClosingBrackets";
 
 NSString * const TPCheckSyntax = @"TPCheckSyntax";
@@ -261,6 +263,7 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   defaultValues[TEAutomaticallyShowFileCompletionList] = @YES;
   defaultValues[TEAutomaticallyShowBeginCompletionList] = @YES;
   defaultValues[TEAutomaticallyReplaceOpeningDoubleQuote] = @YES;
+  defaultValues[TEOpeningDoubleQuoteReplacement] = @"``";
   defaultValues[TEAutomaticallySkipClosingBrackets] = @YES;
   
   // app

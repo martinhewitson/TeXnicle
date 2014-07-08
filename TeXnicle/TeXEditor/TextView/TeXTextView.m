@@ -3035,7 +3035,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSInteger loc = r.location-1;
       if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]] ||
           [newLineCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
-        NSString *insert = @"``";
+        NSString *insert = [defaults valueForKey:TEOpeningDoubleQuoteReplacement];
         if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
           [self replaceCharactersInRange:selRange withString:insert];
           [self didChangeText];
