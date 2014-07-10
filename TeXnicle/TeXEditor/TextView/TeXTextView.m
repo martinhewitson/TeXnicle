@@ -2834,6 +2834,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self colorVisibleText];
 }
 
+
+- (BOOL) shouldCloseOpeningBracket:(unichar)o with:(unichar)c atLocation:(NSInteger)loc
+{
+  // count opening brackets back to beginning of string
+  NSString *string = self.string;
+  NSInteger opening = 0;
+  while (loc >= 0) {
+    if ([string characterAtIndex:loc] == o) {
+      opening++;
+    }
+    loc--;
+  }
+  
+  NSInteger closing = 0;
+  while (loc < [string length]) {
+    if ([string characterAtIndex:loc] == c) {
+      closing++;
+    }
+    loc++;
+  }
+  
+  if (opening > closing) {
+    return YES;
+  }
+  
+  
+  return NO;
+}
+
 - (void) completeOpenBrace:(unichar)o withClosingBrace:(unichar)c
 {
   // check if this is a \left{
@@ -2847,9 +2876,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
  
   // do we need to complete? Check the next character
   if (selRange.location < [self.string length]) {
+    
     unichar nextc = [[self string] characterAtIndex:selRange.location];
     
-    if (nextc == c) {
+    if (nextc == c && [self shouldCloseOpeningBracket:o with:c atLocation:selRange.location] == NO ) {
       NSString *replacement = [NSString stringWithFormat:@"%c", o];
       if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
         [self replaceCharactersInRange:selRange withString:replacement];
