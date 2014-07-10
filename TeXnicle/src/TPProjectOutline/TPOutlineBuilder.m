@@ -161,9 +161,35 @@
   
 }
 
+- (NSInteger) documentCountInArray:(NSArray*)array
+{
+  NSInteger count = 0;
+  for (TPSection *s in array) {
+    NSLog(@"Checking %@", s);
+    if ([s.name isEqualToString:@"document"]) {
+      count++;
+    }
+  }
+  
+  return count;
+}
+
 - (void) processNewSections:(NSArray*)sections forFile:(id)file templates:(NSArray*)templates
 {
   NSMutableArray *newSections = [NSMutableArray arrayWithArray:sections];
+  NSMutableArray *remove = [NSMutableArray array];
+  
+  TPFileMetadata *mainfile = [self mainFile];
+  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
+    NSString *mainFileName = mainfile.name;
+    for (TPSection *s in newSections) {
+      // strip out 'document' leafs for subfiles support
+      if ([s.name isEqualToString:@"document"] && [s.filename isEqualToString:mainFileName] == NO) {
+        [remove addObject:s];
+      }
+    }
+    [newSections removeObjectsInArray:remove];
+  }
   
   NSArray *existingSections = self.sections;
   
@@ -272,6 +298,7 @@
       if (s.parent == nil) {
         s.parent = root;
       }
+      
     }
   }
   
