@@ -4571,6 +4571,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   // go through project files and build meta files if necessary
   //NSLog(@"Building file list from...");
   
+  BOOL updatedBib = NO;
+  
   for (ProjectItemEntity *item in self.project.sortedItems) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
@@ -4613,11 +4615,33 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
           fm.objId = file.objectID;
           fm.name = file.name;
           fm.extension = file.extension;
+          
+          // if this was a bib file, we need to update any files which include it
+          if ([fm.extension isEqualToString:@"bib"]) {
+            updatedBib = YES;
+          }
+          
         }
         
       } // end if isText and not isImage
     } // end if is file entity
   } // end loop over project items
+  
+  
+  if (updatedBib) {
+    
+    for (ProjectItemEntity *item in self.project.sortedItems) {
+      if ([item isKindOfClass:[FileEntity class]]) {
+        FileEntity *file = (FileEntity*)item;
+        if ([file isText] && [file isImage] == NO) {
+          TPFileMetadata *fm = [self metaFileForFile:file];
+          if (fm) {
+            fm.needsUpdate = YES;
+          }
+        }
+      }
+    }
+  }
   
   //NSLog(@"*** Have %ld metafiles", [self.fileMetadata count]);
 }
