@@ -69,8 +69,11 @@ NSString * const TPUseCmdWForTabClosing = @"TPUseCmdWForTabClosing";
 NSString * const TEAutomaticallyAddEndToBeginStatement = @"TEAutomaticallyAddEndToBeginStatement";
 NSString * const TEAutomaticallyInsertClosingBrace = @"TEAutomaticallyInsertClosingBrace";
 NSString * const TEAutomaticallyInsertClosingMath = @"TEAutomaticallyInsertClosingMath";
+
 NSString * const TEAutomaticallyReplaceOpeningDoubleQuote = @"TEAutomaticallyReplaceOpeningDoubleQuote";
 NSString * const TEOpeningDoubleQuoteReplacement = @"TEOpeningDoubleQuoteReplacement";
+NSString * const TEAutomaticallyReplaceClosingDoubleQuote = @"TEAutomaticallyReplaceClosingDoubleQuote";
+NSString * const TEClosingDoubleQuoteReplacement = @"TEClosingDoubleQuoteReplacement";
 
 NSString * const TEAutomaticallySkipClosingBrackets = @"TEAutomaticallySkipClosingBrackets";
 
@@ -262,8 +265,12 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   defaultValues[TEAutomaticallyShowRefCompletionList] = @YES;
   defaultValues[TEAutomaticallyShowFileCompletionList] = @YES;
   defaultValues[TEAutomaticallyShowBeginCompletionList] = @YES;
+  
   defaultValues[TEAutomaticallyReplaceOpeningDoubleQuote] = @YES;
   defaultValues[TEOpeningDoubleQuoteReplacement] = @"``";
+  defaultValues[TEAutomaticallyReplaceClosingDoubleQuote] = @YES;
+  defaultValues[TEClosingDoubleQuoteReplacement] = @"''";
+  
   defaultValues[TEAutomaticallySkipClosingBrackets] = @YES;
   
   // app
