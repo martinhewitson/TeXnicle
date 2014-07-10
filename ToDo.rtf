@@ -7,7 +7,7 @@
 \red18\green42\blue217;\red63\green110\blue116;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
-\paperw11900\paperh16840\vieww24720\viewh16220\viewkind0
+\paperw11900\paperh16840\vieww24720\viewh14520\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
 
 \f0\fs28 \cf0 \
@@ -274,12 +274,39 @@ DEBUGGING:
 \
 + Worked around a bug which stopped PDFs being displayed properly on 10.6.8. Appears to be a problem in PDFkit that comes with the 10.9 SDK.\
 \
+\pard\pardeftab720
+
+\f3 \cf0 One other minor thing: it would be great if you look into bracket functionality a bit. It has become little annoying when the bracket \'93autocompletion\'94 is not that smart. For example when adding starting bracket when there is already ending bracket and it makes two brackets every time. There\'92s a lot of brackets used throughout a latex project, so it would be cool to have that feature working 110% great.\
+\
+Also, is there yet a possibility to move the console below the PDF panel? And how about the side panel to have split panels so multiple panels could be opened at the same time (for example: project files, document outline and search). The panels also could invade \'93automatically\'94 some PDF panel space, because usually when you use the panels, you are working with the editor part so you do not need the PDF panel then. This means of course that the left panel strip would be at the right side of the app, but it was just a thought concerning space..\
+\pard\tx337\pardeftab337\pardirnatural
+
+\f0 \cf0 \
+\pard\pardeftab720
+
+\f3 \cf0 One small suggestion.. it would be nice to be able to set a file as main file with one click OR to typeset project straight by choosing it by clicking the file on project files. Now I have to right click, choose set as main, and press typeset to do it separately to different files when spotting a \'93bug\'94 in some partial file which is \'93crashing\'94 the typesetting. I think that context menu item \'93Typeset this file as main\'94 would be fine or a \'93play button\'94 icon in front or behind a file name in the project files panel menu. You maybe got my point.. :)
+\f0 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \
+\pard\pardeftab720
+
+\f3 \cf0 I also noticed that there are no preferences to configure the information that is seen in the autocomplete-menu when typing citations in. That would be superb to be able to define like: "@author@, @year@: @title@ \'85\'93 WITH SMART functionality OR (doing it the other way) by enabling user to define the showing string for all of the ref types separately. For article, book, in proceedings\'85 etc.\
+\
+Also noticed that it would be better to see the syntax warnings at the bottom of editor when needed to give the error messages more horizontal space for reading. Also that could have an option \'93show only errors in current file\'94.
+\f0 \
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \
 Version 2.2.12\
 --------------\
 \
++ Added a preference to customize the replacement string for opening double quotes\
++ Added a preference to enable automatic replacement of closing quotes\
++ Improved subfiles support in outline view\
 + Added the ability to export the code clippings library\
 + Added the ability to import a code clippings library\
 + Other minor fixes and improvements to the library view\
++ Improved bibliography and citation autocomplete integration\
++ Minor improvements to handling of brackets. TeXnicle no longer inserts a closing bracket if it already exists.\
 + Popup completion windows now respect the user's theme\
 + Fixed a bug which caused the quick-spell popup window to placed wrongly on screen\
 + Various minor bug fixes\
