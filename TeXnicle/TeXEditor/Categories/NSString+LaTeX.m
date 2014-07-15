@@ -31,6 +31,7 @@
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
 #import "NSArray_Extensions.h"
+#import "RegexKitLite.h"
 
 static NSCharacterSet *controlFilterChars = nil;
 static NSString *mathModeRegExpr = nil;
@@ -771,6 +772,45 @@ static NSString *mathModeRegExpr = nil;
   if (nameEnd > nameStart && nameEnd >= 0 && nameStart >= 0) {
     *loc = nameEnd;
     return [self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)];
+  }
+  
+  return nil;
+}
+
+- (NSString*)parseConTeXtTitleStartingAt:(NSInteger*)loc
+{
+  NSInteger count = *loc;
+  NSInteger nameStart = -1;
+  NSInteger nameEnd   = -1;
+  NSInteger braceCount = 0;
+  
+  while (count < [self length]) {
+    unichar c = [self characterAtIndex:count];
+    
+    if (c == '[') {
+      braceCount++;
+      if (nameStart < 0) {
+        nameStart = count+1;
+      }
+    }
+    if (c == ']') {
+      braceCount--;
+      if (braceCount == 0) {
+        nameEnd = count;
+        break;
+      }
+    }
+    count++;
+  }
+  
+  // should we parse the argument?
+  if (nameEnd > nameStart && nameEnd >= 0 && nameStart >= 0) {
+    NSString *argString = [self substringWithRange:NSMakeRange(nameStart, nameEnd-nameStart)];
+    
+    NSArray *matches = [argString captureComponentsMatchedByRegex:@"title=[\\{]?([^,\\}]*)"];
+    if ([matches count] == 2) {
+      return matches[1];
+    }
   }
   
   return nil;
