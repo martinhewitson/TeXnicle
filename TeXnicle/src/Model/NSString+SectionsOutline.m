@@ -105,6 +105,11 @@
             NSInteger loc = index+[command length];
 //            NSLog(@"Looking for section arg at %ld", loc);
             NSString *arg = [text parseArgumentStartingAt:&loc];
+            
+            if (arg == nil) {
+              arg = [text parseConTeXtTitleStartingAt:&loc];
+            }
+            
             if (arg == nil) {
               arg = template.defaultTitle;
               if (arg == nil) {
