@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 bobsoft. All rights reserved.
 //
 
+#import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 #import "TPTeXLogParser.h"
 #import "TPLogItem.h"
