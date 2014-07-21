@@ -787,6 +787,16 @@ static NSString *mathModeRegExpr = nil;
   while (count < [self length]) {
     unichar c = [self characterAtIndex:count];
     
+    // stop if we hit the next \start* command
+    if (c == '\\') {
+      if (count+4 < [self length]) {
+        NSString *coming = [self substringWithRange:NSMakeRange(count, 6)];
+        if ([coming isEqualToString:@"\\start"]) {
+          break;
+        }
+      }
+    }
+    
     if (c == '[') {
       braceCount++;
       if (nameStart < 0) {
