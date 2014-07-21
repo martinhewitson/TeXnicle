@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2501F46319750EED006AA89A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258B52A01963ED8900F46CBB /* XCTest.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2502897B139BE63900A88E09 /* NSString+RelativePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 2502897A139BE63900A88E09 /* NSString+RelativePath.m */; };
 		2503356513EA8923005BD6CF /* TPResultDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356413EA8923005BD6CF /* TPResultDocument.m */; };
 		2503356913EA8A0E005BD6CF /* TPDocumentMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503356813EA8A0E005BD6CF /* TPDocumentMatch.m */; };
@@ -125,6 +126,57 @@
 		253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABA1457D31C007C4D8C /* MHMiniConsoleViewController.m */; };
 		253A3ABD1457D31C007C4D8C /* MHMiniConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253A3ABB1457D31C007C4D8C /* MHMiniConsoleViewController.xib */; };
 		253A3AC01457D895007C4D8C /* MHConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 253A3ABF1457D895007C4D8C /* MHConsoleManager.m */; };
+		253AC709197CC1AB008034C5 /* TeXnicle_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 253AC708197CC1AB008034C5 /* TeXnicle_Tests.m */; };
+		253AC70F197CC273008034C5 /* PlaceholderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F1B4A16E3449600629A2E /* PlaceholderTests.m */; };
+		253AC710197CC2C9008034C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250772F0138E5D81000F1118 /* Cocoa.framework */; };
+		253AC711197CC305008034C5 /* placeholderTest1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5616E34C1000629A2E /* placeholderTest1.tex */; };
+		253AC712197CC305008034C5 /* placeholderTest2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250F1B5916E34E0100629A2E /* placeholderTest2.tex */; };
+		253AC713197CC311008034C5 /* citations2.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55A178BF8F50052A567 /* citations2.bib */; };
+		253AC714197CC311008034C5 /* citations3.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA55B178BF8F50052A567 /* citations3.bib */; };
+		253AC715197CC311008034C5 /* citations1.bib in Resources */ = {isa = PBXBuildFile; fileRef = 257DA558178BEBFC0052A567 /* citations1.bib */; };
+		253AC716197CC311008034C5 /* citation_test2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 257DA556178BE8FA0052A567 /* citation_test2.tex */; };
+		253AC717197CC311008034C5 /* citation_test1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2567E46E178BCC8E0056D65D /* citation_test1.tex */; };
+		253AC718197CC317008034C5 /* CitationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567E46B178AFE2F0056D65D /* CitationTests.m */; };
+		253AC719197CC319008034C5 /* LaTeXStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 257DA554178BE71A0052A567 /* LaTeXStringTests.m */; };
+		253AC71A197CC338008034C5 /* TeXTextViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250BE01E162BEF3A007784DB /* TeXTextViewTests.m */; };
+		253AC71B197CC338008034C5 /* NSStringReformattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */; };
+		253AC71C197CC338008034C5 /* NSStringReformattingPrivateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2560A09C162C317C00403D56 /* NSStringReformattingPrivateTests.m */; };
+		253AC71D197CC341008034C5 /* reformatTextTestFile1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE024162BF01D007784DB /* reformatTextTestFile1.tex */; };
+		253AC71E197CC341008034C5 /* reformatTextTestFile1_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */; };
+		253AC71F197CC341008034C5 /* reformatTextTestFile2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE02A162BFB8F007784DB /* reformatTextTestFile2.tex */; };
+		253AC720197CC341008034C5 /* reformatTextTestFile3.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE033162C0BDA007784DB /* reformatTextTestFile3.tex */; };
+		253AC721197CC341008034C5 /* reformatTextTestFile3_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2560A0A2162C756E00403D56 /* reformatTextTestFile3_reformatted.tex */; };
+		253AC722197CC341008034C5 /* reformatTextTestFile4.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE035162C0DA4007784DB /* reformatTextTestFile4.tex */; };
+		253AC723197CC341008034C5 /* reformatTextTestFile5.tex in Resources */ = {isa = PBXBuildFile; fileRef = 250BE037162C100E007784DB /* reformatTextTestFile5.tex */; };
+		253AC724197CC341008034C5 /* reformatTextTestFile5_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */; };
+		253AC725197CC341008034C5 /* reformatTextTestFile6.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */; };
+		253AC726197CC341008034C5 /* reformatTextTestFile6_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */; };
+		253AC727197CC341008034C5 /* reformatTextTestFile7_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBB1632D13500619206 /* reformatTextTestFile7_reformatted.tex */; };
+		253AC728197CC341008034C5 /* reformatTextTestFile7.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDBC1632D13500619206 /* reformatTextTestFile7.tex */; };
+		253AC729197CC341008034C5 /* reformatTextTestFile8_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC01632D27F00619206 /* reformatTextTestFile8_reformatted.tex */; };
+		253AC72A197CC341008034C5 /* reformatTextTestFile8_reformatted_2.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC41632D33F00619206 /* reformatTextTestFile8_reformatted_2.tex */; };
+		253AC72B197CC341008034C5 /* reformatTextTestFile8.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC11632D27F00619206 /* reformatTextTestFile8.tex */; };
+		253AC72C197CC341008034C5 /* reformatTextTestFile9_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC61632D3D400619206 /* reformatTextTestFile9_reformatted.tex */; };
+		253AC72D197CC341008034C5 /* reformatTextTestFile9.tex in Resources */ = {isa = PBXBuildFile; fileRef = 252FFDC71632D3D400619206 /* reformatTextTestFile9.tex */; };
+		253AC72E197CC341008034C5 /* reformatTextTestFile10.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C416350C2500AC058F /* reformatTextTestFile10.tex */; };
+		253AC72F197CC341008034C5 /* reformatTextTestFile10_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C516350C2500AC058F /* reformatTextTestFile10_reformatted.tex */; };
+		253AC730197CC341008034C5 /* reformatTextTestFile11.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157C91635143100AC058F /* reformatTextTestFile11.tex */; };
+		253AC731197CC341008034C5 /* reformatTextTestFile11_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CA1635143100AC058F /* reformatTextTestFile11_reformatted.tex */; };
+		253AC732197CC341008034C5 /* reformatTextTestFile12.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CD163514AC00AC058F /* reformatTextTestFile12.tex */; };
+		253AC733197CC341008034C5 /* reformatTextTestFile12_reformatted.tex in Resources */ = {isa = PBXBuildFile; fileRef = 251157CE163514AC00AC058F /* reformatTextTestFile12_reformatted.tex */; };
+		253AC734197CC36E008034C5 /* log1.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59481778BC3E000383AF /* log1.log */; };
+		253AC735197CC36E008034C5 /* log2.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594B1778BC3E000383AF /* log2.log */; };
+		253AC736197CC36E008034C5 /* log3.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594C1778BC3E000383AF /* log3.log */; };
+		253AC737197CC36E008034C5 /* log4.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594D1778BC3E000383AF /* log4.log */; };
+		253AC738197CC36E008034C5 /* log5.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594E1778BC3E000383AF /* log5.log */; };
+		253AC739197CC36E008034C5 /* log6.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594F1778BC3E000383AF /* log6.log */; };
+		253AC73A197CC36E008034C5 /* log7.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59501778BC3E000383AF /* log7.log */; };
+		253AC73B197CC36E008034C5 /* log8.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59511778BC3E000383AF /* log8.log */; };
+		253AC73C197CC36E008034C5 /* log9.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59521778BC3E000383AF /* log9.log */; };
+		253AC73D197CC36E008034C5 /* log10.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB59491778BC3E000383AF /* log10.log */; };
+		253AC73E197CC36E008034C5 /* log11.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594A1778BC3E000383AF /* log11.log */; };
+		253AC73F197CC36E008034C5 /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
+		253AC740197CC371008034C5 /* TestLogParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59541778BC3E000383AF /* TestLogParserTests.m */; };
 		253D3581196523C300029995 /* TPCodeClippingEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253D357F196523C300029995 /* TPCodeClippingEditorViewController.m */; };
 		253D3582196523C300029995 /* TPCodeClippingEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253D3580196523C300029995 /* TPCodeClippingEditorViewController.xib */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
@@ -284,7 +336,6 @@
 		2589BBFF15B3EEDC00E24C9B /* TPMetadataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BBFE15B3EEDB00E24C9B /* TPMetadataOperation.m */; };
 		2589BC0315B40DAE00E24C9B /* MHInfoTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2589BC0215B40DAE00E24C9B /* MHInfoTabBarController.m */; };
 		258A1FBD149B43B100C55B69 /* no_pdf_relief.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258A1FBC149B43B100C55B69 /* no_pdf_relief.icns */; };
-		258B52A11963ED8900F46CBB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258B52A01963ED8900F46CBB /* XCTest.framework */; };
 		258BCAE815B067210092E914 /* TPTabbarMatchingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 258BCAE715B067210092E914 /* TPTabbarMatchingBackground.m */; };
 		258BCAEC15B0698C0092E914 /* backbutton.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258BCAEA15B0698C0092E914 /* backbutton.icns */; };
 		258BCAED15B0698C0092E914 /* backbuttonDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 258BCAEB15B0698C0092E914 /* backbuttonDepressed.icns */; };
@@ -629,6 +680,48 @@
 			remoteGlobalIDString = 250772EB138E5D81000F1118;
 			remoteInfo = TeXnicle;
 		};
+		253AC6FA197CC186008034C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		253AC6FC197CC186008034C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		253AC6FE197CC193008034C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		253AC70A197CC1AB008034C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		25A9571C19750C3B0009B08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
+		25A9571E19750C3B0009B08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 250772EB138E5D81000F1118;
+			remoteInfo = TeXnicle;
+		};
 		25D7831D1962919F00F57A67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 250772E3138E5D81000F1118 /* Project object */;
@@ -883,6 +976,9 @@
 		253A3ABE1457D895007C4D8C /* MHConsoleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsoleManager.h; sourceTree = "<group>"; };
 		253A3ABF1457D895007C4D8C /* MHConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHConsoleManager.m; sourceTree = "<group>"; };
 		253A3AC41457DBE2007C4D8C /* MHConsoleViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConsoleViewer.h; sourceTree = "<group>"; };
+		253AC704197CC1AB008034C5 /* TeXnicle Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TeXnicle Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		253AC707197CC1AB008034C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		253AC708197CC1AB008034C5 /* TeXnicle_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeXnicle_Tests.m; sourceTree = "<group>"; };
 		253D132616325EE6002A0A75 /* reformatTextTestFile1_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile1_reformatted.tex; sourceTree = "<group>"; };
 		253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile5_reformatted.tex; sourceTree = "<group>"; };
 		253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6.tex; sourceTree = "<group>"; };
@@ -1201,6 +1297,7 @@
 		25A8DEFC1397A86B0097A62E /* LibraryPreviewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryPreviewBackgroundView.m; sourceTree = "<group>"; };
 		25A8DEFE1397AA160097A62E /* MHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHImageView.h; sourceTree = "<group>"; };
 		25A8DEFF1397AA160097A62E /* MHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHImageView.m; sourceTree = "<group>"; };
+		25A9572019750CFA0009B08E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = ../../../../../../../Applications/Xcode.app/Contents/Developer/Library/Frameworks/XCTest.framework; sourceTree = "<group>"; };
 		25AAAB6A146A70FD000C81D4 /* TPStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPStatusViewController.h; sourceTree = "<group>"; };
 		25AAAB6B146A70FD000C81D4 /* TPStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPStatusViewController.m; sourceTree = "<group>"; };
 		25AAAB6C146A70FD000C81D4 /* TPStatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPStatusViewController.xib; sourceTree = "<group>"; };
@@ -1615,8 +1712,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				258B52A11963ED8900F46CBB /* XCTest.framework in Frameworks */,
+				2501F46319750EED006AA89A /* XCTest.framework in Frameworks */,
 				250BE016162BEF3A007784DB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		253AC701197CC1AB008034C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				253AC710197CC2C9008034C5 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1631,6 +1736,7 @@
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
 				2507731E138E5D82000F1118 /* TeXnicleImporter */,
+				253AC705197CC1AB008034C5 /* TeXnicle Tests */,
 				250772EF138E5D81000F1118 /* Frameworks */,
 				250772ED138E5D81000F1118 /* Products */,
 			);
@@ -1642,6 +1748,7 @@
 				250772EC138E5D81000F1118 /* TeXnicle.app */,
 				25077312138E5D82000F1118 /* TeXnicle.mdimporter */,
 				250BE013162BEF3A007784DB /* TeXnicleTests.octest */,
+				253AC704197CC1AB008034C5 /* TeXnicle Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1649,6 +1756,7 @@
 		250772EF138E5D81000F1118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25A9572019750CFA0009B08E /* XCTest.framework */,
 				258B52A01963ED8900F46CBB /* XCTest.framework */,
 				25DB59631778BCD6000383AF /* XCTest.framework */,
 				25CFBD1F16D2D89C0025B35D /* WebKit.framework */,
@@ -2146,6 +2254,23 @@
 			);
 			name = EnvironmentsView;
 			path = src/EnvironmentsView;
+			sourceTree = "<group>";
+		};
+		253AC705197CC1AB008034C5 /* TeXnicle Tests */ = {
+			isa = PBXGroup;
+			children = (
+				253AC708197CC1AB008034C5 /* TeXnicle_Tests.m */,
+				253AC706197CC1AB008034C5 /* Supporting Files */,
+			);
+			path = "TeXnicle Tests";
+			sourceTree = "<group>";
+		};
+		253AC706197CC1AB008034C5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				253AC707197CC1AB008034C5 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		253E5E2913951DB500566E23 /* Library */ = {
@@ -3207,11 +3332,34 @@
 				250BE029162BF440007784DB /* PBXTargetDependency */,
 				25D7831E1962919F00F57A67 /* PBXTargetDependency */,
 				25D783201962919F00F57A67 /* PBXTargetDependency */,
+				25A9571D19750C3B0009B08E /* PBXTargetDependency */,
+				25A9571F19750C3B0009B08E /* PBXTargetDependency */,
+				253AC6FB197CC186008034C5 /* PBXTargetDependency */,
+				253AC6FD197CC186008034C5 /* PBXTargetDependency */,
+				253AC6FF197CC193008034C5 /* PBXTargetDependency */,
 			);
 			name = TeXnicleTests;
 			productName = TeXTextViewTests;
 			productReference = 250BE013162BEF3A007784DB /* TeXnicleTests.octest */;
 			productType = "com.apple.product-type.bundle.ocunit-test";
+		};
+		253AC703197CC1AB008034C5 /* TeXnicle Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 253AC70C197CC1AB008034C5 /* Build configuration list for PBXNativeTarget "TeXnicle Tests" */;
+			buildPhases = (
+				253AC700197CC1AB008034C5 /* Sources */,
+				253AC701197CC1AB008034C5 /* Frameworks */,
+				253AC702197CC1AB008034C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				253AC70B197CC1AB008034C5 /* PBXTargetDependency */,
+			);
+			name = "TeXnicle Tests";
+			productName = "TeXnicle Tests";
+			productReference = 253AC704197CC1AB008034C5 /* TeXnicle Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -3225,7 +3373,14 @@
 					250772EB138E5D81000F1118 = {
 						DevelopmentTeam = 8YK29FYVK4;
 					};
+					25077311138E5D82000F1118 = {
+						DevelopmentTeam = 8YK29FYVK4;
+					};
 					250BE012162BEF3A007784DB = {
+						TestTargetID = 250772EB138E5D81000F1118;
+					};
+					253AC703197CC1AB008034C5 = {
+						CreatedOnToolsVersion = 6.0;
 						TestTargetID = 250772EB138E5D81000F1118;
 					};
 				};
@@ -3245,6 +3400,7 @@
 				250772EB138E5D81000F1118 /* TeXnicle */,
 				25077311138E5D82000F1118 /* TeXnicleImporter */,
 				250BE012162BEF3A007784DB /* TeXnicleTests */,
+				253AC703197CC1AB008034C5 /* TeXnicle Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -3580,6 +3736,55 @@
 				25DB595B1778BC3E000383AF /* log4.log in Resources */,
 				25D7837B196295B200F57A67 /* reformatTextTestFile9_reformatted.tex in Resources */,
 				250F1B5A16E34E0100629A2E /* placeholderTest2.tex in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		253AC702197CC1AB008034C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				253AC731197CC341008034C5 /* reformatTextTestFile11_reformatted.tex in Resources */,
+				253AC712197CC305008034C5 /* placeholderTest2.tex in Resources */,
+				253AC734197CC36E008034C5 /* log1.log in Resources */,
+				253AC73A197CC36E008034C5 /* log7.log in Resources */,
+				253AC713197CC311008034C5 /* citations2.bib in Resources */,
+				253AC739197CC36E008034C5 /* log6.log in Resources */,
+				253AC715197CC311008034C5 /* citations1.bib in Resources */,
+				253AC725197CC341008034C5 /* reformatTextTestFile6.tex in Resources */,
+				253AC726197CC341008034C5 /* reformatTextTestFile6_reformatted.tex in Resources */,
+				253AC72C197CC341008034C5 /* reformatTextTestFile9_reformatted.tex in Resources */,
+				253AC73F197CC36E008034C5 /* log12.log in Resources */,
+				253AC717197CC311008034C5 /* citation_test1.tex in Resources */,
+				253AC72A197CC341008034C5 /* reformatTextTestFile8_reformatted_2.tex in Resources */,
+				253AC714197CC311008034C5 /* citations3.bib in Resources */,
+				253AC71F197CC341008034C5 /* reformatTextTestFile2.tex in Resources */,
+				253AC73E197CC36E008034C5 /* log11.log in Resources */,
+				253AC735197CC36E008034C5 /* log2.log in Resources */,
+				253AC736197CC36E008034C5 /* log3.log in Resources */,
+				253AC73C197CC36E008034C5 /* log9.log in Resources */,
+				253AC71E197CC341008034C5 /* reformatTextTestFile1_reformatted.tex in Resources */,
+				253AC72F197CC341008034C5 /* reformatTextTestFile10_reformatted.tex in Resources */,
+				253AC733197CC341008034C5 /* reformatTextTestFile12_reformatted.tex in Resources */,
+				253AC711197CC305008034C5 /* placeholderTest1.tex in Resources */,
+				253AC738197CC36E008034C5 /* log5.log in Resources */,
+				253AC723197CC341008034C5 /* reformatTextTestFile5.tex in Resources */,
+				253AC72E197CC341008034C5 /* reformatTextTestFile10.tex in Resources */,
+				253AC728197CC341008034C5 /* reformatTextTestFile7.tex in Resources */,
+				253AC72D197CC341008034C5 /* reformatTextTestFile9.tex in Resources */,
+				253AC721197CC341008034C5 /* reformatTextTestFile3_reformatted.tex in Resources */,
+				253AC73B197CC36E008034C5 /* log8.log in Resources */,
+				253AC73D197CC36E008034C5 /* log10.log in Resources */,
+				253AC729197CC341008034C5 /* reformatTextTestFile8_reformatted.tex in Resources */,
+				253AC722197CC341008034C5 /* reformatTextTestFile4.tex in Resources */,
+				253AC720197CC341008034C5 /* reformatTextTestFile3.tex in Resources */,
+				253AC737197CC36E008034C5 /* log4.log in Resources */,
+				253AC727197CC341008034C5 /* reformatTextTestFile7_reformatted.tex in Resources */,
+				253AC71D197CC341008034C5 /* reformatTextTestFile1.tex in Resources */,
+				253AC732197CC341008034C5 /* reformatTextTestFile12.tex in Resources */,
+				253AC72B197CC341008034C5 /* reformatTextTestFile8.tex in Resources */,
+				253AC716197CC311008034C5 /* citation_test2.tex in Resources */,
+				253AC724197CC341008034C5 /* reformatTextTestFile5_reformatted.tex in Resources */,
+				253AC730197CC341008034C5 /* reformatTextTestFile11.tex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3943,6 +4148,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		253AC700197CC1AB008034C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				253AC71C197CC338008034C5 /* NSStringReformattingPrivateTests.m in Sources */,
+				253AC740197CC371008034C5 /* TestLogParserTests.m in Sources */,
+				253AC709197CC1AB008034C5 /* TeXnicle_Tests.m in Sources */,
+				253AC71A197CC338008034C5 /* TeXTextViewTests.m in Sources */,
+				253AC719197CC319008034C5 /* LaTeXStringTests.m in Sources */,
+				253AC718197CC317008034C5 /* CitationTests.m in Sources */,
+				253AC70F197CC273008034C5 /* PlaceholderTests.m in Sources */,
+				253AC71B197CC338008034C5 /* NSStringReformattingTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3955,6 +4175,36 @@
 			isa = PBXTargetDependency;
 			target = 250772EB138E5D81000F1118 /* TeXnicle */;
 			targetProxy = 250BE028162BF440007784DB /* PBXContainerItemProxy */;
+		};
+		253AC6FB197CC186008034C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 253AC6FA197CC186008034C5 /* PBXContainerItemProxy */;
+		};
+		253AC6FD197CC186008034C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 253AC6FC197CC186008034C5 /* PBXContainerItemProxy */;
+		};
+		253AC6FF197CC193008034C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 253AC6FE197CC193008034C5 /* PBXContainerItemProxy */;
+		};
+		253AC70B197CC1AB008034C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 253AC70A197CC1AB008034C5 /* PBXContainerItemProxy */;
+		};
+		25A9571D19750C3B0009B08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 25A9571C19750C3B0009B08E /* PBXContainerItemProxy */;
+		};
+		25A9571F19750C3B0009B08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 250772EB138E5D81000F1118 /* TeXnicle */;
+			targetProxy = 25A9571E19750C3B0009B08E /* PBXContainerItemProxy */;
 		};
 		25D7831E1962919F00F57A67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4099,7 +4349,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4123,7 +4374,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Martin Hewitson";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4151,7 +4403,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4185,7 +4437,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application: Martin Hewitson";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4230,6 +4482,7 @@
 					"$(PLATFORM_NAME)",
 					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
 					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -4276,6 +4529,7 @@
 					"$(PLATFORM_NAME)",
 					"$(SYSTEM_APPS_DIR)/Xcode6-Beta2.app/Contents/Developer/Platforms/{{OSX,iOS}}.platform/Developer/Library/Frameworks",
 					"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4293,6 +4547,69 @@
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		253AC70D197CC1AB008034C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "TeXnicle Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		253AC70E197CC1AB008034C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TeXnicle.app/Contents/MacOS/TeXnicle";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "TeXnicle Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
 		};
@@ -4334,6 +4651,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		253AC70C197CC1AB008034C5 /* Build configuration list for PBXNativeTarget "TeXnicle Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				253AC70D197CC1AB008034C5 /* Debug */,
+				253AC70E197CC1AB008034C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
