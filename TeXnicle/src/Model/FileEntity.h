@@ -55,6 +55,7 @@
 
 // other properties
 @property (strong) NSImage *icon;
+@property (readonly) BOOL canBeTypeset;
 @property (readonly) BOOL isManaged;
 @property (readonly) BOOL isImage;
 @property (readonly) FileDocument *document;
