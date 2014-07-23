@@ -145,6 +145,7 @@ FinderControllerDelegate, OpenDocumentsManagerDelegate, TeXTextViewDelegate, NSW
 
 - (IBAction) showCategoryActionMenu:(id)sender;
 - (IBAction) setMainItem:(id)sender;
+- (void) typesetFile:(FileEntity*)file;
 - (IBAction) revealItem:(id)sender;
 - (IBAction) renameItem:(id)sender;
 - (IBAction) removeItem:(id)sender;

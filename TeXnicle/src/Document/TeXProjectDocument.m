@@ -156,6 +156,8 @@
 
 @property (strong) TPQuickJumpViewController *quickJumpController;
 
+@property (strong) FileEntity *lastCompiledFile;
+
 @property (copy) NSString *miniConsoleLastMessage;
 
 @end
@@ -2543,12 +2545,20 @@
 
 - (void) build
 {
+  self.lastCompiledFile = nil; // start from main file
   [self.miniConsole setAnimating:YES];
   // setup the engine
   _building = YES;
   [self.engineManager compile];
 }
 
+- (void) typesetFile:(FileEntity*)file
+{
+  self.lastCompiledFile = file;
+  [self.engineManager compileDocument:[file pathOnDisk]
+                   inWorkingDirectory:[[file pathOnDisk] stringByDeletingLastPathComponent]
+                        forLiveUpdate:NO];
+}
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
@@ -2633,15 +2643,21 @@
 
 - (NSString*)documentToCompile
 {
-  FileEntity *mainFile = self.project.mainFile;
-  if (mainFile) {
-    NSString *doc = [mainFile.pathOnDisk stringByDeletingPathExtension];
+  FileEntity *file = self.lastCompiledFile;
+  
+  if (file == nil) {
+    file = self.project.mainFile;
+  }
+  
+  if (file) {
+    NSString *doc = [file.pathOnDisk stringByDeletingPathExtension];
     if (doc) {
       return doc;
     }
   }
   return nil;
 }
+
 
 - (NSString*)compiledDocumentPath
 {
