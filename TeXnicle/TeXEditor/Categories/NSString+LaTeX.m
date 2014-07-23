@@ -336,7 +336,6 @@ static NSString *mathModeRegExpr = nil;
   return citations;
 }
 
-
 - (NSString *)nextWordStartingAtLocation:(NSUInteger*)loc
 {
 	NSCharacterSet *ws = [NSCharacterSet whitespaceCharacterSet];
@@ -903,6 +902,111 @@ static NSString *mathModeRegExpr = nil;
   }
 
   return wordIsCommand;
+}
+
+- (BOOL) inCiteCommands:(NSArray*)commands atIndex:(NSInteger)startLoc
+{
+  NSCharacterSet *newline = [NSCharacterSet newlineCharacterSet];
+  NSCharacterSet *whitespace = [NSCharacterSet whitespaceCharacterSet];
+  NSInteger loc = startLoc;
+  unichar c;
+  
+  // NSLog(@"Checking if index %ld is in command [%@]", startLoc, self);
+  
+  NSInteger startIndex = NSNotFound;
+  NSInteger stopIndex = NSNotFound;
+  
+  while (loc >= 0) {
+    c = [self characterAtIndex:loc];
+    
+    if ([newline characterIsMember:c]) {
+      break;
+    }
+    
+    if (c=='\\') {
+      startIndex = loc;
+      //NSLog(@"   Command starts at index %ld", loc);
+      break;
+    }
+    
+    loc--;
+  }
+  
+  // did we get a start location?
+  if (startIndex == NSNotFound) {
+    return NO;
+  }
+  
+  // roll forward now until we have both even brace count and (whitespace or newline)
+  loc++;
+  NSInteger squareBraceCount = 0;
+  NSInteger curlyBraceCount = 0;
+  NSInteger braceCountAtStart = 0;
+  while (loc < [self length])
+  {
+    c = [self characterAtIndex:loc];
+    
+    if ([newline characterIsMember:c]) {
+      break;
+    }
+    
+    if (loc == startLoc) {
+      //NSLog(@"   Brace count at start loc %ld", curlyBraceCount);
+      braceCountAtStart = curlyBraceCount;
+    }
+    
+    if (c == '[') {
+      if (stopIndex == NSNotFound) {
+        stopIndex = loc-1;
+      }
+      squareBraceCount ++;
+    }
+    
+    if (c == ']') {
+      squareBraceCount --;
+    }
+    
+    if (c == '{') {
+      if (stopIndex == NSNotFound) {
+        stopIndex = loc-1;
+      }
+      curlyBraceCount ++;
+    }
+    
+    if (c == '}') {
+      curlyBraceCount --;
+    }
+    
+    
+    if (curlyBraceCount == 0 && squareBraceCount == 0 && [whitespace characterIsMember:c]) {
+      //NSLog(@"   char at stop loc %ld = [%c]", loc, c);
+      break;
+    }
+    
+    loc++;
+  }
+  
+  //NSLog(@"   ended at loc %ld, []count=%ld, {}count=%ld", loc, squareBraceCount, curlyBraceCount);
+  
+  if (stopIndex == NSNotFound) {
+    return NO;
+  }
+  
+  if (braceCountAtStart == 0) {
+    return NO;
+  }
+  
+  // check the command now
+  NSString *command = [self substringWithRange:NSMakeRange(startIndex, stopIndex-startIndex+1)];
+  //NSLog(@"   Command: %@", command);
+  
+  BOOL citeCommand = [command beginsWithElementInArray:commands] != NSNotFound;
+  if (citeCommand == NO) {
+    //    NSLog(@"   no");
+    return NO;
+  }
+  
+  return YES;
 }
 
 @end

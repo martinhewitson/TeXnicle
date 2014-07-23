@@ -55,5 +55,6 @@
 - (BOOL)wordIsIncludeCommand;
 - (NSArray*)commandRanges;
 + (BOOL)isArgumentAtIndex:(NSInteger)index forCommandsAtRanges:(NSArray*)ranges;
+- (BOOL) inCiteCommands:(NSArray*)commands atIndex:(NSInteger)startLoc;
 
 @end
