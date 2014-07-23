@@ -2252,28 +2252,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // citation commands
 - (BOOL)selectionIsInCitationCommand
 {
-  //  NSLog(@"Selection is in citation?");
-  NSString *word = [self currentCommand];
-  //  NSLog(@"word %@", word);
-  if (word == nil || [word length]==0) {
-    //    NSLog(@"   no");
-    return NO;
-  }
-  // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;
-  if (citeCommand == NO) {
-    //    NSLog(@"   no");
-    return NO;
-  }
+  NSArray *citeCommands = [defaults valueForKey:TECiteCommands];
+  NSRange sel = [self selectedRange];
+  NSInteger loc = sel.location;
   
-  // now check we are in an argument
-  NSString *arg = [self currentArgument];
-  //  NSLog(@"arg %@", arg);
-  if (arg == nil) {
-    //    NSLog(@"   no");
-    return NO;
-  }
+  return [self.string inCiteCommands:citeCommands atIndex:loc];
+  
+//  //  NSLog(@"Selection is in citation?");
+//  NSString *word = [self currentCommand];
+//  //  NSLog(@"word %@", word);
+//  if (word == nil || [word length]==0) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
+//  // check if it is one of the citation commands
+//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;
+//  if (citeCommand == NO) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
+//  
+//  // now check we are in an argument
+//  NSString *arg = [self currentArgument];
+//  //  NSLog(@"arg %@", arg);
+//  if (arg == nil) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
   
   //  NSLog(@"   yes");
   return YES;
