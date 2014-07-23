@@ -268,6 +268,7 @@
 		25717DB71392DF8100955620 /* resizeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 25717DB61392DF8100955620 /* resizeImage.png */; };
 		257345F015B6D83000DB92F1 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 257345EF15B6D83000DB92F1 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2574375414A470EB0082FE96 /* TPLibraryCommandFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */; };
+		25767596197EB6E800070431 /* CiteCommandTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25767595197EB6E800070431 /* CiteCommandTests.m */; };
 		2579E58613FBB91C001B3974 /* NSString+FileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2579E58513FBB91C001B3974 /* NSString+FileTypes.m */; };
 		257B4728138E5DE500ED02C4 /* FileDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471C138E5DE500ED02C4 /* FileDocument.m */; };
 		257B472A138E5DE500ED02C4 /* ProjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B471F138E5DE500ED02C4 /* ProjectEntity.m */; };
@@ -1138,6 +1139,7 @@
 		257345EF15B6D83000DB92F1 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		2574375214A470EB0082FE96 /* TPLibraryCommandFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLibraryCommandFormatter.h; sourceTree = "<group>"; };
 		2574375314A470EB0082FE96 /* TPLibraryCommandFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLibraryCommandFormatter.m; sourceTree = "<group>"; };
+		25767595197EB6E800070431 /* CiteCommandTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CiteCommandTests.m; sourceTree = "<group>"; };
 		2579E58413FBB91C001B3974 /* NSString+FileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FileTypes.h"; sourceTree = "<group>"; };
 		2579E58513FBB91C001B3974 /* NSString+FileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FileTypes.m"; sourceTree = "<group>"; };
 		257B471B138E5DE500ED02C4 /* FileDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDocument.h; sourceTree = "<group>"; };
@@ -1962,6 +1964,7 @@
 				250F1B4916E3449600629A2E /* PlaceholderTests.h */,
 				250F1B4A16E3449600629A2E /* PlaceholderTests.m */,
 				2567E46B178AFE2F0056D65D /* CitationTests.m */,
+				25767595197EB6E800070431 /* CiteCommandTests.m */,
 				257DA554178BE71A0052A567 /* LaTeXStringTests.m */,
 			);
 			path = tests;
@@ -4155,6 +4158,7 @@
 				253AC71C197CC338008034C5 /* NSStringReformattingPrivateTests.m in Sources */,
 				253AC740197CC371008034C5 /* TestLogParserTests.m in Sources */,
 				253AC709197CC1AB008034C5 /* TeXnicle_Tests.m in Sources */,
+				25767596197EB6E800070431 /* CiteCommandTests.m in Sources */,
 				253AC71A197CC338008034C5 /* TeXTextViewTests.m in Sources */,
 				253AC719197CC319008034C5 /* LaTeXStringTests.m in Sources */,
 				253AC718197CC317008034C5 /* CitationTests.m in Sources */,
@@ -4659,6 +4663,7 @@
 				253AC70E197CC1AB008034C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
