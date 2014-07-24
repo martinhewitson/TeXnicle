@@ -123,7 +123,13 @@
   NSArray *templatesToScanFor = [sm.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)];
   
   // get the main file from the delegate
-  id file = [self mainFile];
+  id file = nil;
+  if ([self shouldFocusOnFile]) {
+    file = [self focusFile];
+  } else {
+    file = [self mainFile];
+  }
+  
 //  NSLog(@"  main file %@ [%@]", [file valueForKey:@"name"], file);
   if ([file isKindOfClass:[TPFileMetadata class]]) {
     
@@ -165,7 +171,7 @@
 {
   NSInteger count = 0;
   for (TPSection *s in array) {
-    NSLog(@"Checking %@", s);
+    //NSLog(@"Checking %@", s);
     if ([s.name isEqualToString:@"document"]) {
       count++;
     }
@@ -318,6 +324,24 @@
   }
   
   return @[];
+}
+
+- (BOOL) shouldFocusOnFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldFocusOnFile)]) {
+    return [self.delegate shouldFocusOnFile];
+  }
+  
+  return NO;
+}
+
+- (id) focusFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(focusFile)]) {
+    return [self.delegate focusFile];
+  }
+  
+  return nil;
 }
 
 - (id) mainFile

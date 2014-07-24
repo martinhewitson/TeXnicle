@@ -21,6 +21,7 @@
 @property (unsafe_unretained) TPSection *currentSection;
 
 @property (strong) NSMutableArray *sections;
+@property (weak) IBOutlet NSButton *focusButton;
 
 @end
 
@@ -142,8 +143,19 @@
   [self.outlineBuilder stopTimer];
 }
 
+- (IBAction)changeFocusState:(id)sender
+{
+  [self expandAllSections:sender];
+}
+
 #pragma mark -
 #pragma mark outline builder delegate
+
+
+- (BOOL) shouldFocusOnFile
+{
+  return [self.focusButton state] == NSOnState;
+}
 
 - (NSArray*) allMetadataFiles
 {
@@ -157,6 +169,14 @@
 {
   if (self.delegate) {
     return [self.delegate mainFile];
+  }
+  return nil;
+}
+
+- (id) focusFile
+{
+  if (self.delegate) {
+    return [self.delegate focusFile];
   }
   return nil;
 }
