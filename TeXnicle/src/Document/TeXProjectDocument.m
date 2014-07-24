@@ -2334,6 +2334,10 @@
   return self.fileMetadata;
 }
 
+- (id) focusFile
+{
+  return self.currentFile;
+}
 - (id) mainFile
 {
   
