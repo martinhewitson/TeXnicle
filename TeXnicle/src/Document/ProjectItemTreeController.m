@@ -927,6 +927,15 @@ NSString * const TPDocumentWasRenamed = @"TPDocumentWasRenamed";
 		
 		[self.doCopyFileLabel setStringValue:path];
 		[self.toFolderLabel setStringValue:folderPath];
+    
+    // if the file is already in the correct place, we don't need to allow the copy option
+    if ([[path stringByDeletingLastPathComponent] isEqualToString:[folderPath stringByStandardizingPath]]) {
+      [self.doCopyExistingFileCheckbox setState:NSOffState];
+      [self.doCopyExistingFileCheckbox setEnabled:NO];
+    } else {
+      [self.doCopyExistingFileCheckbox setState:NSOnState];
+      [self.doCopyExistingFileCheckbox setEnabled:YES];
+    }
 		
 		// prompt user to copy file in to selected folder or project folder, or not
 //		NSLog(@"Starting sheet %@ on %@", addExistingFileSheet, self.document);
