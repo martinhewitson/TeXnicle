@@ -2338,19 +2338,21 @@
 {
   return self.currentFile;
 }
+
 - (id) mainFile
 {
+  return [self metaFileForFile:self.project.mainFile];
   
-  // get the metadata file for the project
-  NSManagedObjectID *mainId = [self.project.mainFile objectID];
-  
-  for (TPFileMetadata *file in self.fileMetadata) {
-    if (file.objId == mainId) {
-      return file;
-    }
-  }
-  
-  return nil;
+//  // get the metadata file for the project
+//  NSManagedObjectID *mainId = [self.project.mainFile objectID];
+//  
+//  for (TPFileMetadata *file in self.fileMetadata) {
+//    if (file.objId == mainId) {
+//      return file;
+//    }
+//  }
+//  
+//  return nil;
 }
 
 - (NSString*)textForFile:(id)aFile
