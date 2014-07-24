@@ -11,6 +11,7 @@
 #import "ImageAndTextCell.h"
 #import "TPDocumentSectionManager.h"
 #import "TPThemeManager.h"
+#import "TPFileMetadata.h"
 #import "externs.h"
 
 @interface TPProjectOutlineViewController ()
@@ -102,6 +103,17 @@
          selector:@selector(handleNavigatorFontChangedNotification:)
              name:TPThemeNavigatorFontChangedNotification
            object:nil];
+  
+  
+  // figure out if we are in a standalone editor
+  id mainfile = [self mainFile];
+  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
+    // then this is a project editor
+    [self.focusButton setHidden:NO];
+  } else {
+    // then this is a standalone editor
+    [self.focusButton setHidden:YES];
+  }
 }
 
 - (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
