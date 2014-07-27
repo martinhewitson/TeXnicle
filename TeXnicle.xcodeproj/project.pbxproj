@@ -1825,7 +1825,6 @@
 				25E7B13315AB396800373A56 /* TPProjectOutline */,
 				257B47AB138E5F9D00ED02C4 /* Document */,
 				25077308138E5D82000F1118 /* MainMenu.xib */,
-				25077305138E5D82000F1118 /* TeXProjectDocument.xib */,
 				257B472F138E5E6F00ED02C4 /* externs.h */,
 				257B47A8138E5EEA00ED02C4 /* TeXnicleAppController.h */,
 				257B47A9138E5EEA00ED02C4 /* TeXnicleAppController.m */,
@@ -2734,6 +2733,7 @@
 				2581830E139222D200ECCCB1 /* Templates.plist */,
 				25077302138E5D81000F1118 /* TeXProjectDocument.h */,
 				25077303138E5D81000F1118 /* TeXProjectDocument.m */,
+				25077305138E5D82000F1118 /* TeXProjectDocument.xib */,
 				257B47DB138EAB9D00ED02C4 /* ProjectItemTreeController.h */,
 				257B47DC138EAB9E00ED02C4 /* ProjectItemTreeController.m */,
 				25A1B70914588209008CF5E7 /* MHDocumentController.h */,
@@ -3836,7 +3836,7 @@
 		};
 		25F5C7DF181CF9EC00C8BBCC /* Sign Sparkle */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -3844,7 +3844,7 @@
 			name = "Sign Sparkle";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Martin Hewitson\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
 		};
@@ -4245,6 +4245,7 @@
 				25077306138E5D82000F1118 /* en */,
 			);
 			name = TeXProjectDocument.xib;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		25077308138E5D82000F1118 /* MainMenu.xib */ = {
@@ -4406,7 +4407,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -4440,7 +4440,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
