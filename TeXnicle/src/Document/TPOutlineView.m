@@ -178,9 +178,9 @@
 																	 keyEquivalent:@""];
 		[theMenu addItem:item];
 		
+    [theMenu addItem:[NSMenuItem separatorItem]];
 	}
   
-  [theMenu addItem:[NSMenuItem separatorItem]];
   
   //------ Add new file
   NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"New file..."
@@ -190,6 +190,23 @@
   
 	
   [theMenu addItem:[NSMenuItem separatorItem]];
+  
+  
+  //--------- typeset file
+	if ([selectedItem isKindOfClass:[FileEntity class]]) {
+		NSMenuItem *mainItem;
+    
+    FileEntity *file = (FileEntity*)selectedItem;
+    
+    if ([file canBeTypeset]) {
+			mainItem = [[NSMenuItem alloc] initWithTitle:[NSString stringWithFormat:@"Typeset \u201c%@\u201d", itemName]
+                                            action:@selector(typesetItem:)
+                                     keyEquivalent:@""];
+      [theMenu addItem:mainItem];
+      [theMenu addItem:[NSMenuItem separatorItem]];
+    }
+	}
+  
   
 	//--------- set main file
 	if ([selectedItem isKindOfClass:[FileEntity class]]) {
@@ -205,6 +222,7 @@
 		}
 		[theMenu addItem:mainItem];
 	}
+  
 	
 	//--------- rename item
 	if ([selectedItem isKindOfClass:[ProjectItemEntity class]]) {
@@ -309,6 +327,14 @@
   
 	[treeController addObject:newFolder];
 	[self editColumn:0 row:[self selectedRow] withEvent:nil select:YES];
+}
+
+- (IBAction) typesetItem:(id)sender
+{
+  if ([selectedItem isKindOfClass:[FileEntity class]]) {
+    FileEntity *file = (FileEntity*)selectedItem;
+    [self.mainDocument typesetFile:file];
+  }
 }
 
 - (IBAction) setMainItem:(id)sender

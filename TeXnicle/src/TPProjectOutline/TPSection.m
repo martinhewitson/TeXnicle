@@ -13,7 +13,6 @@
 
 @interface TPSection ()
 
-@property (strong) NSString *filename;
 
 @end
 

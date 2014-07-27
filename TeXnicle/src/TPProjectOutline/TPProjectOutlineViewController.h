@@ -12,6 +12,7 @@
 @protocol TPProjectOutlineDelegate <NSObject>
 
 - (id) mainFile;
+- (id) focusFile;
 - (NSArray*) allMetadataFiles;
 - (NSString*) textForFile:(id)aFile;
 - (NSNumber*) maxOutlineDepth;

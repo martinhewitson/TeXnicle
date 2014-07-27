@@ -26,6 +26,7 @@ enum TPOutlineExpansionState : NSInteger {
 @property (strong) id file;
 @property (strong) TPSectionTemplate *type;
 @property (copy) NSString *name;
+@property (strong) NSString *filename;
 
 + (id) sectionWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName;
 - (id) initWithParent:(TPSection*)aParent start:(NSUInteger)index inFile:(id)aFile type:(TPSectionTemplate*)aType name:(NSString*)aName;

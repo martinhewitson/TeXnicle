@@ -12,6 +12,8 @@
 @protocol TPOutlineBuilderDelegate <NSObject>
 
 - (id) mainFile;
+- (id) focusFile;
+- (BOOL) shouldFocusOnFile;
 - (NSArray*) allMetadataFiles;
 - (NSString*) textForFile:(id)aFile;
 - (void) didComputeNewSections;

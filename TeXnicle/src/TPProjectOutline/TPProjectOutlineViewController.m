@@ -11,6 +11,7 @@
 #import "ImageAndTextCell.h"
 #import "TPDocumentSectionManager.h"
 #import "TPThemeManager.h"
+#import "TPFileMetadata.h"
 #import "externs.h"
 
 @interface TPProjectOutlineViewController ()
@@ -21,6 +22,7 @@
 @property (unsafe_unretained) TPSection *currentSection;
 
 @property (strong) NSMutableArray *sections;
+@property (weak) IBOutlet NSButton *focusButton;
 
 @end
 
@@ -101,6 +103,17 @@
          selector:@selector(handleNavigatorFontChangedNotification:)
              name:TPThemeNavigatorFontChangedNotification
            object:nil];
+  
+  
+  // figure out if we are in a standalone editor
+  id mainfile = [self mainFile];
+  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
+    // then this is a project editor
+    [self.focusButton setHidden:NO];
+  } else {
+    // then this is a standalone editor
+    [self.focusButton setHidden:YES];
+  }
 }
 
 - (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
@@ -144,8 +157,19 @@
   [self.outlineBuilder stopTimer];
 }
 
+- (IBAction)changeFocusState:(id)sender
+{
+  [self expandAllSections:sender];
+}
+
 #pragma mark -
 #pragma mark outline builder delegate
+
+
+- (BOOL) shouldFocusOnFile
+{
+  return [self.focusButton state] == NSOnState;
+}
 
 - (NSArray*) allMetadataFiles
 {
@@ -159,6 +183,14 @@
 {
   if (self.delegate) {
     return [self.delegate mainFile];
+  }
+  return nil;
+}
+
+- (id) focusFile
+{
+  if (self.delegate) {
+    return [self.delegate focusFile];
   }
   return nil;
 }

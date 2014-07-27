@@ -42,6 +42,7 @@
 - (NSString*)parseOptionStartingAtIndex:(NSInteger)start;
 - (NSString*)parseArgumentAroundIndex:(NSInteger*)loc;
 - (NSString*)parseArgumentStartingAt:(NSInteger*)loc;
+- (NSString*)parseConTeXtTitleStartingAt:(NSInteger*)loc;
 - (BOOL)characterIsEscapedAtIndex:(NSInteger)anIndex;
 - (BOOL)isInArgumentAtIndex:(NSInteger)anIndex;
 - (BOOL)isCommentLineBeforeIndex:(NSInteger)anIndex commentChar:(NSString*)commChar;
@@ -54,5 +55,6 @@
 - (BOOL)wordIsIncludeCommand;
 - (NSArray*)commandRanges;
 + (BOOL)isArgumentAtIndex:(NSInteger)index forCommandsAtRanges:(NSArray*)ranges;
+- (BOOL) inCiteCommands:(NSArray*)commands atIndex:(NSInteger)startLoc;
 
 @end

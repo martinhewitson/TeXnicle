@@ -123,7 +123,13 @@
   NSArray *templatesToScanFor = [sm.templates subarrayWithRange:NSMakeRange(0, 1+self.depth)];
   
   // get the main file from the delegate
-  id file = [self mainFile];
+  id file = nil;
+  if ([self shouldFocusOnFile]) {
+    file = [self focusFile];
+  } else {
+    file = [self mainFile];
+  }
+  
 //  NSLog(@"  main file %@ [%@]", [file valueForKey:@"name"], file);
   if ([file isKindOfClass:[TPFileMetadata class]]) {
     
@@ -161,9 +167,35 @@
   
 }
 
+- (NSInteger) documentCountInArray:(NSArray*)array
+{
+  NSInteger count = 0;
+  for (TPSection *s in array) {
+    //NSLog(@"Checking %@", s);
+    if ([s.name isEqualToString:@"document"]) {
+      count++;
+    }
+  }
+  
+  return count;
+}
+
 - (void) processNewSections:(NSArray*)sections forFile:(id)file templates:(NSArray*)templates
 {
   NSMutableArray *newSections = [NSMutableArray arrayWithArray:sections];
+  NSMutableArray *remove = [NSMutableArray array];
+  
+  TPFileMetadata *mainfile = [self mainFile];
+  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
+    NSString *mainFileName = mainfile.name;
+    for (TPSection *s in newSections) {
+      // strip out 'document' leafs for subfiles support
+      if ([s.name isEqualToString:@"document"] && [s.filename isEqualToString:mainFileName] == NO) {
+        [remove addObject:s];
+      }
+    }
+    [newSections removeObjectsInArray:remove];
+  }
   
   NSArray *existingSections = self.sections;
   
@@ -272,6 +304,7 @@
       if (s.parent == nil) {
         s.parent = root;
       }
+      
     }
   }
   
@@ -291,6 +324,24 @@
   }
   
   return @[];
+}
+
+- (BOOL) shouldFocusOnFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(shouldFocusOnFile)]) {
+    return [self.delegate shouldFocusOnFile];
+  }
+  
+  return NO;
+}
+
+- (id) focusFile
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(focusFile)]) {
+    return [self.delegate focusFile];
+  }
+  
+  return nil;
 }
 
 - (id) mainFile

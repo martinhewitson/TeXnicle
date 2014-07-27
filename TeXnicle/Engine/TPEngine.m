@@ -236,8 +236,8 @@
 		return NO;
 	}
 	
-  [self enginePostMessage:[NSString stringWithFormat:@"Compiling main file:%@", mainFile]];	
-  [self enginePostMessage:[NSString stringWithFormat:@"Compiling with %@", self.path]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Typesetting file:%@", mainFile]];
+  [self enginePostMessage:[NSString stringWithFormat:@"Typesetting with %@", self.path]];
   
   self.mainfileName = [mainFile lastPathComponent];
   self.workingDirectory = workingDir;
@@ -253,7 +253,7 @@
 {
   //NSLog(@"Starting task run %ld", runNumber);
   
-  [self enginePostMessage:[NSString stringWithFormat:@"[%ld/%ld] Typesetting main file:%@", runNumber, self.nCompile, self.documentPath]];
+  [self enginePostMessage:[NSString stringWithFormat:@"[%ld/%ld] Typesetting file:%@", runNumber, self.nCompile, self.documentPath]];
   
   if (self.typesetTask == nil) {
     self.typesetTask = [[NSTask alloc] init];

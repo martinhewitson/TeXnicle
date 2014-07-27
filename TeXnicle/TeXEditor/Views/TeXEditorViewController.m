@@ -137,6 +137,10 @@
   [self.markerButton setAction:@selector(addMarkAction:)];
   [self.sectionListController setup];
   
+  
+  [scrollView setFrame:[containerView bounds]];
+  [containerView setNeedsLayout:YES];
+  
   // setup tex editor menu
   NSMenu *menu = [[self.textView menu] copy];
   

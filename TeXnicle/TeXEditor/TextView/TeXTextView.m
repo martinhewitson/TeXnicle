@@ -2252,28 +2252,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // citation commands
 - (BOOL)selectionIsInCitationCommand
 {
-  //  NSLog(@"Selection is in citation?");
-  NSString *word = [self currentCommand];
-  //  NSLog(@"word %@", word);
-  if (word == nil || [word length]==0) {
-    //    NSLog(@"   no");
-    return NO;
-  }
-  // check if it is one of the citation commands
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;
-  if (citeCommand == NO) {
-    //    NSLog(@"   no");
-    return NO;
-  }
+  NSArray *citeCommands = [defaults valueForKey:TECiteCommands];
+  NSRange sel = [self selectedRange];
+  NSInteger loc = sel.location;
   
-  // now check we are in an argument
-  NSString *arg = [self currentArgument];
-  //  NSLog(@"arg %@", arg);
-  if (arg == nil) {
-    //    NSLog(@"   no");
-    return NO;
-  }
+  return [self.string inCiteCommands:citeCommands atIndex:loc];
+  
+//  //  NSLog(@"Selection is in citation?");
+//  NSString *word = [self currentCommand];
+//  //  NSLog(@"word %@", word);
+//  if (word == nil || [word length]==0) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
+//  // check if it is one of the citation commands
+//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//  BOOL citeCommand = [word beginsWithElementInArray:[defaults valueForKey:TECiteCommands]] != NSNotFound;
+//  if (citeCommand == NO) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
+//  
+//  // now check we are in an argument
+//  NSString *arg = [self currentArgument];
+//  //  NSLog(@"arg %@", arg);
+//  if (arg == nil) {
+//    //    NSLog(@"   no");
+//    return NO;
+//  }
   
   //  NSLog(@"   yes");
   return YES;
@@ -2834,6 +2841,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self colorVisibleText];
 }
 
+
+- (BOOL) shouldCloseOpeningBracket:(unichar)o with:(unichar)c atLocation:(NSInteger)loc
+{
+  // count opening brackets back to beginning of string
+  NSString *string = self.string;
+  NSInteger opening = 0;
+  while (loc >= 0) {
+    if ([string characterAtIndex:loc] == o) {
+      opening++;
+    }
+    loc--;
+  }
+  
+  NSInteger closing = 0;
+  while (loc < [string length]) {
+    if ([string characterAtIndex:loc] == c) {
+      closing++;
+    }
+    loc++;
+  }
+  
+  if (opening > closing) {
+    return YES;
+  }
+  
+  
+  return NO;
+}
+
 - (void) completeOpenBrace:(unichar)o withClosingBrace:(unichar)c
 {
   // check if this is a \left{
@@ -2844,8 +2880,32 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (selRange.location > 0) {
     cc = [[self string] characterAtIndex:selRange.location-1];
   }
+ 
+  // do we need to complete? Check the next character
+  if (selRange.location < [self.string length]) {
+    
+    unichar nextc = [[self string] characterAtIndex:selRange.location];
+    
+    if (nextc == c && [self shouldCloseOpeningBracket:o with:c atLocation:selRange.location] == NO ) {
+      NSString *replacement = [NSString stringWithFormat:@"%c", o];
+      if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
+        [self replaceCharactersInRange:selRange withString:replacement];
+        [self didChangeText];
+      }
+      return;
+    }
+  }
+  
   
   if ([[self currentCommand] isEqualToString:@"\\left"]) {
+    
+    // special check to see if \right%c is already there
+    NSString *toCheck = [NSString stringWithFormat:@"\\right%c", c];
+    NSString *text = [[self string] substringWithRange:NSMakeRange(selRange.location, [toCheck length])];
+    if ([toCheck isEqualToString:text]) {
+      return;
+    }
+    
     NSString *replacement = [NSString stringWithFormat:@"%c\\right%c", o, c];
     if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
       [self replaceCharactersInRange:selRange withString:replacement];
@@ -3026,7 +3086,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       }
 			return;
 		}
-	} else	if ([[defaults valueForKey:TEAutomaticallyReplaceOpeningDoubleQuote] boolValue]
+	} else	if (([[defaults valueForKey:TEAutomaticallyReplaceOpeningDoubleQuote] boolValue] ||
+               [[defaults valueForKey:TEAutomaticallyReplaceClosingDoubleQuote] boolValue])
               && [aString isEqual:@"\""]
               && [[self fileExtension] isEqualToString:@"tex"]) {
 		// do smart replacements
@@ -3035,16 +3096,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       NSInteger loc = r.location-1;
       if ([whitespaceCharacterSet characterIsMember:[[self string] characterAtIndex:loc]] ||
           [newLineCharacterSet characterIsMember:[[self string] characterAtIndex:loc]]) {
-        NSString *insert = @"``";
+        NSString *insert = [defaults valueForKey:TEOpeningDoubleQuoteReplacement];
         if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
           [self replaceCharactersInRange:selRange withString:insert];
           [self didChangeText];
         }
       } else {
-        if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
-          [self replaceCharactersInRange:selRange withString:aString];
+        NSString *insert = aString;
+        if ([[defaults valueForKey:TEAutomaticallyReplaceClosingDoubleQuote] boolValue]) {
+          insert = [defaults valueForKey:TEClosingDoubleQuoteReplacement];
+        }
+        
+        if ([self shouldChangeTextInRange:selRange replacementString:insert]) {
+          [self replaceCharactersInRange:selRange withString:insert];
           [self didChangeText];
         }
+          
       }
     } else {
       if ([self shouldChangeTextInRange:selRange replacementString:aString]) {
@@ -3052,7 +3119,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
         [self didChangeText];
       }
     }
-	} else {
+  } else {
     //    NSLog(@"Inserting %@", aString);
     [super insertText:aString];
     

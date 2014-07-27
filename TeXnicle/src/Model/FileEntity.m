@@ -393,6 +393,16 @@
 	}
 }
 
+// a file can be typeset if it has a \documentclass in it
+- (BOOL) canBeTypeset
+{
+  NSRange r = [self.contentString rangeOfString:@"\\documentclass"];
+  if (r.location != NSNotFound) {
+    return YES;
+  }
+  
+  return NO;
+}
 
 
 // a managed file is one which is under the project path

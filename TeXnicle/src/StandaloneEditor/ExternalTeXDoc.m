@@ -263,7 +263,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
           if (editorWidth >= 0.0) {
             NSRect fr = [self.texEditorContainer frame];
             fr.size.width = editorWidth;
-            [self.texEditorContainer setFrame:fr];
+            [self.centerView setFrame:fr];
           }
           
         }
@@ -290,11 +290,33 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 
 - (void)awakeFromNib
 {
+  [super awakeFromNib];
+  
 //  NSLog(@"Awake from nib");
   if (!_didSetupUI) {
     [self setupUI];
   }
+  
+//  NSLog(@"Container bounds %@", NSStringFromRect([self.texEditorContainer bounds]));
+//  NSLog(@"Editor view frame %@", NSStringFromRect([self.texEditorViewController.view frame]));
+//  
+//  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//    [self setupEditorBounds];
+//  });
+  
 }
+
+//- (void) setupEditorBounds
+//{
+//  NSLog(@"*** Check editor bounds");
+//  
+//  NSLog(@"Container bounds %@", NSStringFromRect([self.texEditorContainer bounds]));
+//  NSLog(@"Editor view frame %@", NSStringFromRect([self.texEditorViewController.view frame]));
+//  [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
+//  [self.texEditorViewController.view setNeedsLayout:YES];
+//  NSLog(@"Container bounds %@", NSStringFromRect([self.texEditorContainer bounds]));
+//  NSLog(@"Editor view frame %@", NSStringFromRect([self.texEditorViewController.view frame]));
+//}
 
 - (void) setupUI
 {
@@ -315,6 +337,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   [[self.texEditorViewController view] setFrame:[self.texEditorContainer bounds]];
   //NSLog(@"Set bounds to %@ from %@", [self.texEditorViewController view], self.texEditorContainer);
   [self.texEditorContainer addSubview:[self.texEditorViewController view]];
+  [self.texEditorContainer setNeedsLayout:YES];
   [self.texEditorContainer setNeedsDisplay:YES];
   [self.texEditorViewController enableEditor];
   [self.texEditorViewController setPerformSyntaxCheck:YES];
@@ -471,6 +494,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   
   // resture UI settings
   //[self restoreUIsettings];
+  
   [self performSelector:@selector(restoreUIsettings) withObject:nil afterDelay:0];
   
   // Present templates if we have no URL
@@ -2699,6 +2723,11 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 - (NSArray*) allMetadataFiles
 {
   return @[];
+}
+
+- (id) focusFile
+{
+  return [self fileURL];
 }
 
 - (id) mainFile

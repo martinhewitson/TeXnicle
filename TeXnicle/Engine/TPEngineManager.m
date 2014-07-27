@@ -288,15 +288,19 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
 
 - (void) liveCompile
 {
-  [self compileForLiveUpdate:YES];
+  [self compileDocument:[self.delegate documentToCompile]
+     inWorkingDirectory:[self.delegate workingDirectory]
+          forLiveUpdate:YES];
 }
 
 - (void) compile
 {
-  [self compileForLiveUpdate:NO];
+  [self compileDocument:[self.delegate documentToCompile]
+     inWorkingDirectory:[self.delegate workingDirectory]
+          forLiveUpdate:NO];
 }
 
-- (void) compileForLiveUpdate:(BOOL)liveUpdate
+- (void) compileDocument:(NSString*)document inWorkingDirectory:(NSString*)workingDir forLiveUpdate:(BOOL)liveUpdate
 {
   // ensure the engines have been installed and loaded
   if (self.engines == nil) {
@@ -342,8 +346,8 @@ NSString * const TPEngineDidTrashFilesNotification = @"TPEngineDidTrashFilesNoti
     
     [e reset];
   
-    [e compileDocumentAtPath:[self.delegate documentToCompile] 
-            workingDirectory:[self.delegate workingDirectory]
+    [e compileDocumentAtPath:document
+            workingDirectory:workingDir
                    isProject:YES];  
   } else {
     [self compileDidFinish:NO];

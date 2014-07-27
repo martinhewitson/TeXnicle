@@ -156,6 +156,8 @@
 
 @property (strong) TPQuickJumpViewController *quickJumpController;
 
+@property (strong) FileEntity *lastCompiledFile;
+
 @property (copy) NSString *miniConsoleLastMessage;
 
 @end
@@ -2332,19 +2334,25 @@
   return self.fileMetadata;
 }
 
+- (id) focusFile
+{
+  return self.currentFile;
+}
+
 - (id) mainFile
 {
+  return [self metaFileForFile:self.project.mainFile];
   
-  // get the metadata file for the project
-  NSManagedObjectID *mainId = [self.project.mainFile objectID];
-  
-  for (TPFileMetadata *file in self.fileMetadata) {
-    if (file.objId == mainId) {
-      return file;
-    }
-  }
-  
-  return nil;
+//  // get the metadata file for the project
+//  NSManagedObjectID *mainId = [self.project.mainFile objectID];
+//  
+//  for (TPFileMetadata *file in self.fileMetadata) {
+//    if (file.objId == mainId) {
+//      return file;
+//    }
+//  }
+//  
+//  return nil;
 }
 
 - (NSString*)textForFile:(id)aFile
@@ -2543,12 +2551,20 @@
 
 - (void) build
 {
+  self.lastCompiledFile = nil; // start from main file
   [self.miniConsole setAnimating:YES];
   // setup the engine
   _building = YES;
   [self.engineManager compile];
 }
 
+- (void) typesetFile:(FileEntity*)file
+{
+  self.lastCompiledFile = file;
+  [self.engineManager compileDocument:[file pathOnDisk]
+                   inWorkingDirectory:[[file pathOnDisk] stringByDeletingLastPathComponent]
+                        forLiveUpdate:NO];
+}
 
 - (void) handleTypesettingCompletedNotification:(NSNotification*)aNote
 {
@@ -2633,15 +2649,21 @@
 
 - (NSString*)documentToCompile
 {
-  FileEntity *mainFile = self.project.mainFile;
-  if (mainFile) {
-    NSString *doc = [mainFile.pathOnDisk stringByDeletingPathExtension];
+  FileEntity *file = self.lastCompiledFile;
+  
+  if (file == nil) {
+    file = self.project.mainFile;
+  }
+  
+  if (file) {
+    NSString *doc = [file.pathOnDisk stringByDeletingPathExtension];
     if (doc) {
       return doc;
     }
   }
   return nil;
 }
+
 
 - (NSString*)compiledDocumentPath
 {
@@ -4571,6 +4593,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   // go through project files and build meta files if necessary
   //NSLog(@"Building file list from...");
   
+  BOOL updatedBib = NO;
+  
   for (ProjectItemEntity *item in self.project.sortedItems) {
     if ([item isKindOfClass:[FileEntity class]]) {
       FileEntity *file = (FileEntity*)item;
@@ -4613,11 +4637,33 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
           fm.objId = file.objectID;
           fm.name = file.name;
           fm.extension = file.extension;
+          
+          // if this was a bib file, we need to update any files which include it
+          if ([fm.extension isEqualToString:@"bib"]) {
+            updatedBib = YES;
+          }
+          
         }
         
       } // end if isText and not isImage
     } // end if is file entity
   } // end loop over project items
+  
+  
+  if (updatedBib) {
+    
+    for (ProjectItemEntity *item in self.project.sortedItems) {
+      if ([item isKindOfClass:[FileEntity class]]) {
+        FileEntity *file = (FileEntity*)item;
+        if ([file isText] && [file isImage] == NO) {
+          TPFileMetadata *fm = [self metaFileForFile:file];
+          if (fm) {
+            fm.needsUpdate = YES;
+          }
+        }
+      }
+    }
+  }
   
   //NSLog(@"*** Have %ld metafiles", [self.fileMetadata count]);
 }

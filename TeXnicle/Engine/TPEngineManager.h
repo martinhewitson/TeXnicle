@@ -68,6 +68,7 @@ extern NSString * const TPEngineDidTrashFilesNotification;
 - (NSArray*)registeredEngineNames;
 
 - (BOOL) isCompiling;
+- (void) compileDocument:(NSString*)document inWorkingDirectory:(NSString*)workingDir forLiveUpdate:(BOOL)liveUpdate;
 - (void) compile;
 - (void) liveCompile;
 - (void) cancelCompilation;

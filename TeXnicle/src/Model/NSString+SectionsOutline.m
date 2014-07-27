@@ -105,6 +105,11 @@
             NSInteger loc = index+[command length];
 //            NSLog(@"Looking for section arg at %ld", loc);
             NSString *arg = [text parseArgumentStartingAt:&loc];
+            
+            if (arg == nil) {
+              arg = [text parseConTeXtTitleStartingAt:&loc];
+            }
+            
             if (arg == nil) {
               arg = template.defaultTitle;
               if (arg == nil) {
@@ -138,6 +143,18 @@
         // get argument
         NSInteger sLoc = 0;
         NSString *arg = [word parseArgumentStartingAt:&sLoc];
+        
+        // support for:
+        //       \input file
+        if (arg == nil) {
+          // get the next word
+          NSUInteger nextLoc = loc+=2;
+          NSString *nextword = [text nextWordStartingAtLocation:&nextLoc];
+          if (nextword) {
+            arg = nextword;
+          }
+        }
+        
         if ([arg length] > 0 && [[arg pathExtension] length] == 0) {
           arg = [arg stringByAppendingPathExtension:@"tex"];
         }
