@@ -57,4 +57,8 @@
 + (BOOL)isArgumentAtIndex:(NSInteger)index forCommandsAtRanges:(NSArray*)ranges;
 - (BOOL) inCiteCommands:(NSArray*)commands atIndex:(NSInteger)startLoc;
 
+#pragma mark - Brace handling
+
+- (BOOL) shouldCloseOpeningBracket:(unichar)o with:(unichar)c atLocation:(NSInteger)loc;
+
 @end
