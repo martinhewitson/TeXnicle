@@ -169,7 +169,7 @@
 
 - (void) drawRect:(NSRect)dirtyRect
 {
-  [super drawRect:dirtyRect];
+//  [super drawRect:dirtyRect];
 //  NSLog(@"Draw rect %@", NSStringFromRect(dirtyRect));
   [self drawHashMarksAndLabelsInRect:dirtyRect];
 }
@@ -762,11 +762,11 @@
     
     // if the visible range still includes our first line from last time, we can shortcut the calculation. We don't need to start 
     // from the start of the file again.
-    if (aRange.location == firstLine.range.location) {
-      return [attStr lineNumbersForTextRange:aRange startIndex:firstLine.range.location startLine:firstLine.number];
+    if (aRange.location >= firstLine.range.location) {
+      return [attStr lineNumbersForTextRange:aRange startIndex:firstLine.range.location startLine:firstLine.number useCodeFolding:_showCodeFolders];
     }    
   }
-  return [attStr lineNumbersForTextRange:aRange];
+  return [attStr lineNumbersForTextRange:aRange useCodeFolding:_showCodeFolders];
 }
 
 - (MHLineNumber*)lineNumberForPoint:(NSPoint)aPoint
