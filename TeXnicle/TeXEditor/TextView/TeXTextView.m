@@ -99,6 +99,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 @property (strong) NSTextFinder *textFinder;
 
+@property (strong) NSColor *documentEditorBackgroundColor;
+@property (strong) NSColor *documentEditorMarginColor;
+@property (strong) NSColor *currentLineColor;
+@property (assign) BOOL highlightCurrentLine;
+
 @end
 
 @implementation TeXTextView
@@ -143,7 +148,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
     
     [self applyFontAndColor:YES];
-    
+    [self updateThemeSettings];
+
     didSetup = YES;
   }
 }
@@ -868,14 +874,25 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 }
 
+- (void) updateThemeSettings
+{
+  TPTheme *theme = [[TPThemeManager sharedManager] currentTheme];
+  self.documentEditorMarginColor = theme.documentEditorMarginColor;
+  self.documentEditorBackgroundColor = theme.documentEditorBackgroundColor;
+  self.currentLineColor = theme.currentLineColor;
+  self.highlightCurrentLine = [theme.highlightCurrentLine boolValue];
+}
+
 - (void) handleThemeChangedNotification:(NSNotification*)aNote
 {
   [self applyFontAndColor:YES];
+  [self updateThemeSettings];
   
   NSRange vr = [self getVisibleRange];
   [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
   [self highlightMatchingWords];
   [self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:YES];
+  
 }
 
 - (void) setTypingColor:(NSColor*)aColor
@@ -1006,7 +1023,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) processEditing:(NSNotification*)aNote
 {
-	[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:NO];
+	//[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:NO];
 }
 
 - (void) stopObservingTextStorage
@@ -2750,7 +2767,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) drawViewBackgroundInRect:(NSRect)rect
 {
-	[super drawViewBackgroundInRect:rect];
+  [self.documentEditorBackgroundColor set];
+  [NSBezierPath fillRect:rect];
+//	[super drawViewBackgroundInRect:rect];
   
   // additional highlight range
 	if (self.highlightRange) {
@@ -2758,21 +2777,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		[[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
 		[NSBezierPath fillRect:aRect];
 	} else {
-    [[self backgroundColor] set];
-    [NSBezierPath fillRect:[self bounds]];
+//    [[self backgroundColor] set];
+//    [NSBezierPath fillRect:[self visibleRect]];
   }
   
   // highlight current line
-  TPTheme *theme = [TPThemeManager currentTheme];
-  
-  if ([theme.highlightCurrentLine boolValue]) {
+  if (self.highlightCurrentLine) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
     if (sel.location <= [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
-      NSRect lineRect = [self highlightRectForRange:lineRange];
-      NSColor *highlightColor = theme.currentLineColor;
-      [highlightColor set];
+//      if (NSEqualRanges(lineRange, self.currentLineRange) == NO) {
+        NSRect lineRect = [self highlightRectForRange:lineRange];
+//      }
+      
+      [self.currentLineColor set];
       [NSBezierPath fillRect:lineRect];
     }
   }
@@ -2791,12 +2810,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       r = NSMakeRect(inset.width+s.width, vr.origin.y, vr.size.width, vr.size.height);
     } else {
       int wrapAt = [[defaults valueForKey:TELineLength] intValue];
-//      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
+      //      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
       r = NSMakeRect(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
     }
     
-    NSColor *highlightColor = theme.documentEditorMarginColor;
-    [highlightColor set];
+    [self.documentEditorMarginColor set];
     [NSBezierPath fillRect:r];
   }
 }
