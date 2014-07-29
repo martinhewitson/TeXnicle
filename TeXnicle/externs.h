@@ -199,6 +199,8 @@ extern NSString * const TPFileMetadataSectionsUpdatedNotification;
 extern NSString * const TPFileMetadataUpdatedNotification;
 extern NSString * const TPMetadataManagerDidBeginUpdateNotification;
 extern NSString * const TPMetadataManagerDidEndUpdateNotification;
+extern NSString * const TPShouldClearBoldHighlightingNotification;
+
 //extern NSString * const TPFileMetadataWarningsUpdatedNotification;
 extern NSString * const TPLibraryDidUpdateNotification;
 extern NSString * const TPLogfileAvailableNotification;
