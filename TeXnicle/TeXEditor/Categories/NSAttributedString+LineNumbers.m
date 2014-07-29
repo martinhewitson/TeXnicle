@@ -61,13 +61,22 @@
   return [self lineNumbersForTextRange:aRange startIndex:0 startLine:1];
 }
 
-// Build an array of line number objects for the given text range.
+- (NSArray*) lineNumbersForTextRange:(NSRange)aRange useCodeFolding:(BOOL)usingCodeFolding
+{
+  return [self lineNumbersForTextRange:aRange startIndex:0 startLine:1 useCodeFolding:usingCodeFolding];
+}
+
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine
 {
-  // check if code folding is on
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   BOOL usingCodeFolding = [defaults boolForKey:TEShowCodeFolders];
-  
+  return [self lineNumbersForTextRange:aRange startIndex:aStartIndex startLine:aStartLine useCodeFolding:usingCodeFolding];
+}
+
+// Build an array of line number objects for the given text range.
+- (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine useCodeFolding:(BOOL)usingCodeFolding
+{
+  // check if code folding is on
   NSAttributedString *attStr = self;
   NSMutableArray *lines = [NSMutableArray array];
   
