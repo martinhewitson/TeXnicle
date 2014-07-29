@@ -105,15 +105,6 @@
            object:nil];
   
   
-  // figure out if we are in a standalone editor
-  id mainfile = [self mainFile];
-  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
-    // then this is a project editor
-    [self.focusButton setHidden:NO];
-  } else {
-    // then this is a standalone editor
-    [self.focusButton setHidden:YES];
-  }
 }
 
 - (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
@@ -208,6 +199,19 @@
 
 - (void) didComputeNewSections
 {
+  // check if we need to hide the focus button. This needs to happen at a time when the main file is not nil
+  // figure out if we are in a standalone editor
+  id mainfile = [self mainFile];
+  if (mainfile != nil){
+    if ([mainfile isKindOfClass:[TPFileMetadata class]]) {
+      // then this is a project editor
+      [self.focusButton setHidden:NO];
+    } else {
+      // then this is a standalone editor
+      [self.focusButton setHidden:YES];
+    }
+  }
+  
   self.sections = [NSMutableArray array];
   for (TPSection *s in self.outlineBuilder.sections) {
     [self.sections addObject:s];
