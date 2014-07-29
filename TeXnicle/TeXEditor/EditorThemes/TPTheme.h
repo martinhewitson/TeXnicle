@@ -66,24 +66,34 @@
 
 @property (readonly) NSColor *syntaxCommandColor;
 @property (readonly) BOOL shouldColorCommand;
+@property (readonly) BOOL shouldShowCommandBold;
 @property (readonly) NSColor *syntaxSpecialCharactersColor;
 @property (readonly) BOOL shouldColorSpecialCharacters;
+@property (readonly) BOOL shouldShowSpecialCharactersBold;
 @property (readonly) NSColor *syntaxDollarColor;
 @property (readonly) BOOL shouldColorDollar;
+@property (readonly) BOOL shouldShowDollarBold;
 @property (readonly) NSColor *syntaxArgumentsColor;
 @property (readonly) BOOL shouldColorArguments;
+@property (readonly) BOOL shouldShowArgumentsBold;
 @property (readonly) NSColor *syntaxMarkup1Color;
 @property (readonly) BOOL shouldColorMarkup1;
+@property (readonly) BOOL shouldShowMarkup1Bold;
 @property (readonly) NSColor *syntaxMarkup2Color;
 @property (readonly) BOOL shouldColorMarkup2;
+@property (readonly) BOOL shouldShowMarkup2Bold;
 @property (readonly) NSColor *syntaxMarkup3Color;
 @property (readonly) BOOL shouldColorMarkup3;
+@property (readonly) BOOL shouldShowMarkup3Bold;
 @property (readonly) NSColor *syntaxComments1Color;
 @property (readonly) BOOL shouldColorComments1;
+@property (readonly) BOOL shouldShowComments1Bold;
 @property (readonly) NSColor *syntaxComments2Color;
 @property (readonly) BOOL shouldColorComments2;
+@property (readonly) BOOL shouldShowComments2Bold;
 @property (readonly) NSColor *syntaxComments3Color;
 @property (readonly) BOOL shouldColorComments3;
+@property (readonly) BOOL shouldShowComments3Bold;
 
 
 #pragma mark Document Color Accessors
@@ -111,6 +121,9 @@
 
 - (void) setState:(NSNumber*)state forKey:(NSString*)aKey;
 - (NSNumber*) activeStateForKey:(NSString*)aKey;
+
+- (void) setBoldState:(NSNumber*)state forKey:(NSString*)aKey;
+- (NSNumber*) boldStateForKey:(NSString*)aKey;
 
 - (NSColor*) colorForKey:(NSString*)aKey;
 - (void) setColor:(NSColor*)aColor forKey:(NSString *)key;

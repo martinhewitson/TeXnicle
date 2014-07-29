@@ -31,7 +31,7 @@
 - (NSArray*)sortedKeys
 {
   NSArray *allKeys = [self allKeys];
-  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (self contains[c] 'active')"];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (self contains[c] 'active') AND NOT (self contains[c] 'bold')"];
   allKeys = [allKeys filteredArrayUsingPredicate:predicate];
   return [allKeys sortedArrayUsingSelector:@selector(compare:)];
 }

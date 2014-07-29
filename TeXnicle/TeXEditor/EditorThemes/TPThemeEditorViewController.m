@@ -14,6 +14,9 @@
 #import "externs.h"
 #import "NSColor+ContrastingLabelExtensions.h"
 
+NSString * const TPShouldClearBoldHighlightingNotification = @"TPShouldClearBoldHighlightingNotification";
+
+
 @interface TPThemeEditorViewController ()
 
 @property (assign) IBOutlet NSTableView *themesTable;
@@ -288,7 +291,7 @@
 	
 	NSEvent *event =  [NSEvent mouseEventWithType:NSLeftMouseDown
 																			 location:menuOrigin
-																	modifierFlags:NSLeftMouseDownMask // 0x100
+																	modifierFlags:(int)NSLeftMouseDownMask // 0x100
 																			timestamp:0
 																	 windowNumber:[[(NSButton *)sender window] windowNumber]
 																				context:[[(NSButton *)sender window] graphicsContext]
@@ -534,11 +537,19 @@
         NSNumber *state = [th activeStateForKey:key];
         return state;
         
+      } else if (tableView == self.syntaxItemsTable  && [[tableColumn identifier] isEqualToString:@"BoldColumn"]) {
+          
+          NSString *key = keys[row];
+          NSNumber *state = [th boldStateForKey:key];
+          return state;
+          
       } else {
         NSString *itemDesc = [tm descriptionForKey:keys[row]];
         return itemDesc;
       }
     }
+    
+    
   }
   
   return nil;
@@ -606,6 +617,23 @@
           [th save];
         }
       }
+    } else if ([[tableColumn identifier] isEqualToString:@"BoldColumn"]) {
+      
+      TPTheme *th = self.selectedTheme;
+      if (th) {
+        
+        NSDictionary *dict = [self dictionaryForTableView:tableView];
+        if (dict == nil) {
+          return;
+        }
+        
+        NSArray *keys = [dict sortedKeys];
+        if (row >=0 && row < [keys count]) {
+          [th setBoldState:object forKey:keys[row]];
+          [th save];
+        }
+      }
+      
     }
   }
   
@@ -771,6 +799,15 @@
     }
 
     if ([[tableColumn identifier] isEqualToString:@"ActiveColumn"]) {
+      NSButtonCell *bcell = (NSButtonCell*)cell;
+      // set enabled or not?
+      if (th.isBuiltIn) {
+        [bcell setEnabled:NO];
+      } else {
+        [bcell setEnabled:YES];
+      }
+      
+    } else if ([[tableColumn identifier] isEqualToString:@"BoldColumn"]) {
       NSButtonCell *bcell = (NSButtonCell*)cell;
       // set enabled or not?
       if (th.isBuiltIn) {
