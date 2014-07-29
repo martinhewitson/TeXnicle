@@ -343,7 +343,11 @@
   TPSection *section = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
-    NSRange range = NSMakeRange(section.startIndex, [section.name length]);
+    NSInteger length = [section.name length];
+    if (section.startIndex == 0){
+      length = 0; // special case for the start of the file
+    }
+    NSRange range = NSMakeRange(section.startIndex, length);
     [self.delegate highlightSearchResult:section.name
                                withRange:range
                                   inFile:section.file];
