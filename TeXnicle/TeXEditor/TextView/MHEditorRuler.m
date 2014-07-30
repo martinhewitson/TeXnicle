@@ -61,6 +61,19 @@
 @property (strong) NSDictionary *textAttributesDictionary;
 @property (strong) NSDictionary *alternateTextAttributesDictionary;
 
+@property (assign) CGFloat lineheightMultiple;
+@property (assign) BOOL showLineNumbers;
+@property (assign) BOOL showCodeFolders;
+
+@property (assign) NSInteger lastLineCount;
+@property (assign) CGFloat lastGutterWidth;
+
+@property (strong) NSMutableAttributedString *labelText;
+@property (assign) NSSize stringSize;
+@property (assign) unsigned long oldMaxLabelStrlen;
+@property (assign) unsigned long lastLineStrlen;
+@property (assign) NSSize labelSize;
+
 @end
 
 @implementation MHEditorRuler
@@ -92,8 +105,9 @@
     newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    _showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
-    _showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+    self.showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
+    self.showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+    self.lineheightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
 
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
@@ -110,6 +124,7 @@
            selector:@selector(handleThemeDidChangeNotification:)
                name:TPThemeSelectionChangedNotification
              object:nil];
+    
   }
 	  
 	return self;
@@ -141,9 +156,12 @@
 {
 //  NSLog(@"User defaults changed");
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  _showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
-  _showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+  self.showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
+  self.showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+  self.lineheightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
+
   NSRange visibleRange = [self.textView getVisibleRange];
+  self.lastLineCount = NSNotFound;
   [self recalculateThickness];
   [self calculationsForTextRange:visibleRange];
   [self setNeedsDisplay:YES];
@@ -189,13 +207,15 @@
 
 - (void)drawHashMarksAndLabelsInRect:(NSRect)aRect
 {
-//  NSLog(@"drawHashMarksAndLabelsInRect %@", NSStringFromRect(aRect));
   
   // check user defaults
 	BOOL shouldDrawLineNumbers = _showLineNumbers;
   BOOL shouldFoldCode = _showCodeFolders;
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  CGFloat lineheightMultiple = [[defaults valueForKey:TEDocumentLineHeightMultiple] floatValue];
+  
+  if (_showCodeFolders == NO && _showLineNumbers == NO) {
+    return;
+  }
+//  NSLog(@"drawHashMarksAndLabelsInRect %@", NSStringFromRect(aRect));
   
   NSRectArray  rects;
   NSUInteger   rectCount;
@@ -207,28 +227,25 @@
 	NSRect visibleRect = [self.textView visibleRect];  
   
   // fill background
-  NSRect r = [self visibleRect];
 	if (self.backgroundColor != nil)
 	{
 		[self.backgroundColor set];
-		NSRectFill(r);
+		NSRectFill(aRect);
 		
 		[[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] set];
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(r)-0.5, NSMinY(r)) toPoint:NSMakePoint(NSMaxX(r) - 0.5, NSMaxY(r))];
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(aRect)-0.5, NSMinY(aRect)) toPoint:NSMakePoint(NSMaxX(aRect) - 0.5, NSMaxY(aRect))];
 		if (shouldDrawLineNumbers) {
 			CGFloat foldWidth = 0.0;
-			if (shouldFoldCode)
+      if (shouldFoldCode) {
 				foldWidth = kFOLDING_GUTTER;
-			[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(r)-foldWidth-0.5, NSMinY(r)) toPoint:NSMakePoint(NSMaxX(r) - foldWidth - 0.5, NSMaxY(r))];
+      }
+			[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(aRect)-foldWidth-0.5, NSMinY(aRect)) toPoint:NSMakePoint(NSMaxX(aRect) - foldWidth - 0.5, NSMaxY(aRect))];
 		}
 	}
     
   // calculate visible lines
 //  NSLog(@"   Last range %@, this range %@", NSStringFromRange(lastVisibleRange), NSStringFromRange(visibleRange));
   if (!NSEqualRanges(visibleRange, lastVisibleRange)) {
-//  if (_recalculateLines || !NSEqualRanges(visibleRange, lastVisibleRange)) {
-//    NSLog(@"Line numbers is nil? %d", self.lineNumbers == nil);
-//    NSLog(@"draw hash marks: calculations for range");
     [self calculationsForTextRange:visibleRange];
     lastVisibleRange = visibleRange;
   }
@@ -239,8 +256,7 @@
   
   // bookmarks
   MHLineNumber *firstLine = (self.lineNumbers)[0];
-  MHLineNumber *lastLine = [self.lineNumbers lastObject];
-  NSArray *bookmarks = [self.textView bookmarksForLineRange:NSMakeRange(firstLine.number, lastLine.number - firstLine.number)];
+  NSArray *bookmarks = [self.textView bookmarksForLineRange:NSMakeRange(firstLine.number, _lastMaxVisibleLine - firstLine.number)];
   
   float yinset = [self.textView textContainerInset].height;        
   
@@ -249,23 +265,17 @@
     foldWidth = kFOLDING_GUTTER;
   }
 
-  // The maximum line number we will draw. This is needed to set the width of the
-  // gutter. Unfortunately, this means that if we scroll down to larger line numbers
-  // the gutter will change width. This could be avoided by computing the total line 
-  // count in an independent way.
-  NSUInteger maxLine = [[self.lineNumbers lastObject] number];
-  NSMutableAttributedString *labelText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", maxLine + 1] attributes:[self textAttributes]];
-  NSSize stringSize = [labelText size];
-
   // some useful numbers for drawing the line numbers
   CGFloat boundsWidth = NSWidth([self bounds]);
   CGFloat bwmrm = boundsWidth - kRULER_MARGIN;
   CGFloat bwmrm2 = bwmrm * 2.0;
-  CGFloat strHeight = stringSize.height;
+  CGFloat strHeight = self.stringSize.height;
   
   // go at least one character further to ensure we cover the visible range
   visibleRange.length++;
   
+  char txt[16];
+  self.lastLineStrlen = 0;
   // loop over the lines
   for (MHLineNumber *line in self.lineNumbers) {
     // NSLog(@"** Drawing line %@", line);
@@ -314,19 +324,25 @@
           // check for bookmark
           Bookmark *b = [Bookmark bookmarkWithLinenumber:line.number inArray:bookmarks];
           // set string
-          [[labelText mutableString] setString:[NSString stringWithFormat:@"%lu", line.number]];
+          sprintf(txt, "%ld", (unsigned long)line.number);
+          NSString *lstr = [NSString stringWithUTF8String:txt];
+          [[self.labelText mutableString] setString:lstr];
           if (b) {
-            [labelText setAttributes:[self alternateTextAttributes] range:NSMakeRange(0, [labelText length])];
+            [self.labelText setAttributes:[self alternateTextAttributes] range:NSMakeRange(0, [self.labelText length])];
           } else {
-            [labelText setAttributes:[self textAttributes] range:NSMakeRange(0, [labelText length])];
+            [self.labelText setAttributes:[self textAttributes] range:NSMakeRange(0, [self.labelText length])];
           }
           // get size
-          NSSize s = [labelText size];
+          if ([self.labelText length] != self.lastLineStrlen) {
+            self.lastLineStrlen = [self.labelText length];
+            self.labelSize = [self.labelText size];
+          }
+
           // Draw string flush right, centered vertically within the line
-//          ypos + (rectHeight - strHeight) / 2.0,
-          NSRect srect = NSMakeRect(bwmrm - foldWidth - s.width,
+          NSRect srect = NSMakeRect(bwmrm - foldWidth - self.labelSize.width,
                                     ypos + rectHeight - strHeight - kYOFFSET,
                                     bwmrm2, rectHeight);
+          
           line.rect = srect;
           
           if (b) {
@@ -339,7 +355,7 @@
             [path stroke];
           }
           
-          [labelText drawInRect:srect];
+          [self.labelText drawInRect:srect];
         }
         
         // draw code folders
@@ -350,7 +366,7 @@
             // compute the rect for the image to be drawn in
             CGFloat s = MIN(rectWidth, rectHeight);
             NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectWidth)/2.0, 
-                                       ypos - lineheightMultiple*kYOFFSET + (rectHeight - stringSize.height),
+                                       ypos - self.lineheightMultiple*kYOFFSET + (rectHeight - self.stringSize.height),
                                        s, s);
             NSImage *im = nil;
             if (folder.isValid) {
@@ -382,7 +398,7 @@
                 // make rect for placing the image
                 CGFloat s = MIN(rectWidth, rectHeight);
                 NSRect imRect = NSMakeRect(boundsWidth - kFOLDING_GUTTER + (kFOLDING_GUTTER-rectWidth)/2.0,
-                                           ypos - lineheightMultiple*kYOFFSET + (rectHeight - stringSize.height),
+                                           ypos - self.lineheightMultiple*kYOFFSET + (rectHeight - self.stringSize.height),
                                            s, s);
                 NSImage *im = nil;
                 if (folder.isValid) {
@@ -467,7 +483,27 @@
   
   // update ruler thickness
 //  NSLog(@"Last max line %ld: new max line %ld", [[newLineNumbers lastObject] number], _lastMaxVisibleLine);
-  if ([[newLineNumbers lastObject] number] > _lastMaxVisibleLine || _forceThicknessRecalculation) {
+  NSInteger newMaxLine = [[newLineNumbers lastObject] number];
+  
+//  if (newMaxLine > _lastMaxVisibleLine || _forceThicknessRecalculation) {
+//    float oldThickness = [self ruleThickness];
+//    float newThickness = [self requiredThicknessForLineCount:lineCount];
+//    if (fabs(oldThickness - newThickness) > 1)
+//    {
+//      _newThickness = newThickness;
+//      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
+//    }
+//    _forceThicknessRecalculation = NO;
+//  }
+  
+  self.lineNumbers = newLineNumbers;
+  self.codeFolders = newFolders;
+  _recalculateLines = NO;
+  
+  char txt[100];
+  sprintf(txt, "%ld", newMaxLine);
+  if (strlen(txt) != self.oldMaxLabelStrlen) {
+    
     float oldThickness = [self ruleThickness];
     float newThickness = [self requiredThicknessForLineCount:lineCount];
     if (fabs(oldThickness - newThickness) > 1)
@@ -476,13 +512,14 @@
       [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
     }
     _forceThicknessRecalculation = NO;
+    
+    
+    self.labelText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", _lastMaxVisibleLine + 1] attributes:[self textAttributes]];
+    self.stringSize = [self.labelText size];
+
+    self.oldMaxLabelStrlen = strlen(txt);
   }
-  
-  self.lineNumbers = newLineNumbers;
-  self.codeFolders = newFolders;
-  _recalculateLines = NO;
-  
-  _lastMaxVisibleLine = [[self.lineNumbers lastObject] number];
+  _lastMaxVisibleLine = newMaxLine;
 }
 
 - (void) setNewThickness
@@ -496,6 +533,10 @@
 // Make the set of code folders for the given range of text.
 - (NSArray*) makeFoldersForTextRange:(NSRange)aRange
 {
+  if (self.showCodeFolders == NO) {
+    return @[];
+  }
+  
 //  NSLog(@"*** Making folders");
   NSString *text = [self.textView string];
 //  NSString *searchString = [text substringWithRange:aRange];
@@ -617,8 +658,7 @@
 // Get an array of all folding tags found in the given text range.
 - (NSArray*) foldingTagsForTextRange:(NSRange)aRange
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL foldCode = [[defaults valueForKey:TEShowCodeFolders] boolValue];
+  BOOL foldCode = self.showCodeFolders;
   NSMutableArray *foundFoldingTags = [NSMutableArray array];
   if (!foldCode) {
     return foundFoldingTags;
@@ -771,14 +811,8 @@
 
 - (MHLineNumber*)lineNumberForPoint:(NSPoint)aPoint
 {
-//  CGFloat foldWidth = 0.0;
-//  if ([[[NSUserDefaults standardUserDefaults] valueForKey:TEShowCodeFolders] boolValue]) {
-//    foldWidth = kFOLDING_GUTTER;
-//  }
   
   // some useful numbers for drawing the line numbers
-//  CGFloat boundsWidth = NSWidth([self bounds]);
-//  CGFloat rwidth = boundsWidth - foldWidth;
 //  NSLog(@"Looking for point %@", NSStringFromPoint(aPoint));
   for (MHLineNumber *line in self.lineNumbers) {
 //    NSLog(@"  in %@", line);
@@ -796,8 +830,8 @@
 - (CGFloat)requiredThicknessForLineCount:(NSInteger)lineCount
 {
 //	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	BOOL includeLineNumbers = _showLineNumbers; //[[defaults valueForKey:TEShowLineNumbers] boolValue];
-	BOOL includeCodeFolders = _showCodeFolders; //[[defaults valueForKey:TEShowCodeFolders] boolValue];
+	BOOL includeLineNumbers = _showLineNumbers;
+	BOOL includeCodeFolders = _showCodeFolders;
   
 	if (!includeLineNumbers) {
 		if (!includeCodeFolders)
@@ -805,6 +839,10 @@
 		
 		return ceilf(kFOLDING_GUTTER);
 	}
+  
+  if (self.lastLineCount == lineCount) {
+    return self.lastGutterWidth;
+  }
 	
 	NSUInteger			digits, i;
 	NSSize              stringSize;
@@ -835,9 +873,12 @@
     minWidth = kDEFAULT_THICKNESS + kFOLDING_GUTTER;
 	}
   
-  _lineGutterWidth = 10.0+stringSize.width + kRULER_MARGIN * 2;
+  _lineGutterWidth = stringSize.width + kRULER_MARGIN * 2;
   _folderGutterWidth = foldWidth;
   CGFloat width = ceilf(MAX(minWidth, _lineGutterWidth + _folderGutterWidth));
+  
+  self.lastLineCount = lineCount;
+  self.lastGutterWidth = width;
   
 	return width;
 }
