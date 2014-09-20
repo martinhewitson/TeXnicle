@@ -1964,6 +1964,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSInteger er = NSMaxRange(r)-1;
   NSString *text = [self string];
   
+  
   if (er >= [text length]) {
     //    NSLog(@"Out of range");
     return NSZeroRect;
@@ -1975,7 +1976,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
   //  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
   
-  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1)
+  NSRange cr = NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1);
+  if (NSMaxRange(cr) >= [self.string length]) {
+    return  NSZeroRect;
+  }
+  
+  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:cr
                                             actualCharacterRange:NULL];
   NSRect br = [[self layoutManager] boundingRectForGlyphRange:gr inTextContainer:[self textContainer]];
   
@@ -2838,8 +2844,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
   
   // additional highlight range
-  if (self.highlightRange) {
-    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];
+  NSRange hr = NSRangeFromString(self.highlightRange);
+  if (self.highlightRange && NSMaxRange(hr) < [self.string length]) {
+    NSRect aRect = [self highlightRectForRange:hr];
     [[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
     [NSBezierPath fillRect:aRect];
   }
@@ -2848,7 +2855,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (self.highlightCurrentLine) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
-    if (sel.location <= [str length]) {
+    if (sel.location < [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
       if (NSEqualRanges(lineRange, self.currentLineRange) == NO) {
         self.currentLineRect = NSIntegralRect([self highlightRectForRange:lineRange]);
