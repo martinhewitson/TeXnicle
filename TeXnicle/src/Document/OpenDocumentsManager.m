@@ -62,7 +62,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void) setup
 {
   if ([NSApp isYosemite]) {
-    NSLog(@"Using Yosemite tabs");
+    //NSLog(@"Using Yosemite tabs");
     [self.tabBar setStyleNamed:@"Yosemite"];
   } else {
     [self.tabBar setStyleNamed:@"Safari"];
