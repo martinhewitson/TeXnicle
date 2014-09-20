@@ -324,18 +324,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
       if ([doc isKindOfClass:[FileDocument class]]) {
         FileDocument *fileDocument = (FileDocument*)doc;
         // update layout so that the findbar gets the correct notifications and the search works
-        [self.texEditorViewController.textView noteStringWillChange];
-        
-        // stop observations
-        [self.texEditorViewController.textView stopObservingTextStorage];
+        [self.texEditorViewController.textView setTextStorage:fileDocument.textStorage];
         
         
-        // now change the text in the textview
-        [self.texEditorViewController.textView.layoutManager replaceTextStorage:fileDocument.textStorage];
-        
-        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
-        
-        [self.texEditorViewController.textView observeTextStorage];
         [self enableTextView];
         [self.texEditorViewController.textView setUpRuler];
         [self.texEditorViewController.textView setNeedsDisplay:YES];
