@@ -129,7 +129,7 @@ extern NSString * const TEDidFoldUnfoldTextNotification;
 - (void) stopObservingTextStorage;
 - (void) observeTextStorage;
 - (void) noteStringWillChange;
-
+- (void)setTextStorage:(NSTextStorage*)textStorage;
 
 #pragma mark -
 #pragma mark Syntax highlighting

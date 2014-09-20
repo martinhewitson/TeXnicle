@@ -241,12 +241,41 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[scrollView setRulersVisible:YES];
 }
 
+- (void)setTextStorage:(NSTextStorage*)textStorage
+{
+  // update layout so that the findbar gets the correct notifications and the search works
+  [self noteStringWillChange];
+  [self.textFinder setClient:nil];
+  [self.textFinder setFindBarContainer:nil];
+  
+  // stop observations
+  [self stopObservingTextStorage];
+  
+  // now change the text in the textview
+//  NSString *string = [self string];
+//  NSString *newString = [textStorage string];
+//  [self shouldChangeTextInRange:NSMakeRange(0, [string length]) replacementString:newString];
+  [self.layoutManager replaceTextStorage:textStorage];
+//  [self didChangeText];
+  [self performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
+  [self observeTextStorage];
+  
+  
+  [self.textFinder setClient:self];
+  [self.textFinder setFindBarContainer:[self enclosingScrollView]];
+  [self setUsesFindBar:YES];
+  [self setIncrementalSearchingEnabled:YES];
+  
+}
+
 - (void) noteStringWillChange
 {
 //  NSLog(@"Updating string for text finder %@", self.textFinder);
   [self.textFinder cancelFindIndicator];
+  [self.textFinder findIndicatorNeedsUpdate];
   [self.textFinder noteClientStringWillChange];
 }
+
 
 - (void) setupLists
 {
