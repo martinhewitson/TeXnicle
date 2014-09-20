@@ -7,12 +7,24 @@
 //
 
 #import "MHOutlineView.h"
+#import "NSApplication+SystemVersion.h"
 
 @implementation MHOutlineView
 
 - (BOOL) allowsVibrancy
 {
   return YES;
+}
+
+- (void) awakeFromNib
+{
+  if ([NSApp isYosemite]) {
+    [self setRowHeight:22.0];
+    [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
+  } else {
+    [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+  }
+  
 }
 
 @end

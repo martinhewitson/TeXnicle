@@ -26,8 +26,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MHOutlineView.h"
 
-@interface TPSpellingOutlineView : NSOutlineView {
+@interface TPSpellingOutlineView : MHOutlineView {
   NSInteger selectedRow;
   id selectedItem;
 }

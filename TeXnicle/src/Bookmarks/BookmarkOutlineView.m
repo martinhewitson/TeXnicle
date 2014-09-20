@@ -41,6 +41,8 @@
 
 - (void) awakeFromNib
 {
+  [super awakeFromNib];
+  
   _capturedString = @"";
   _resetTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(resetTimerFired:) userInfo:nil repeats:YES];
 }

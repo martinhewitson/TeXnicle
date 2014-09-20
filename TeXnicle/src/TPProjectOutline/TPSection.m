@@ -145,7 +145,7 @@
 
 - (NSAttributedString*)selectedDisplayName
 {
-  return [self textForDisplayWithColor:[NSColor alternateSelectedControlTextColor] details:NO];
+  return [self textForDisplayWithColor:[NSColor selectedTextColor] details:NO];
 }
 
 - (NSAttributedString*)displayName
@@ -155,7 +155,7 @@
 
 - (NSAttributedString*)selectedDisplayNameWithDetails
 {
-  return [self textForDisplayWithColor:[NSColor alternateSelectedControlTextColor] details:YES];
+  return [self textForDisplayWithColor:[NSColor selectedTextColor] details:YES];
 }
 
 - (NSAttributedString*)displayNameWithDetails

@@ -13,6 +13,7 @@
 #import "TPThemeManager.h"
 #import "TPFileMetadata.h"
 #import "externs.h"
+#import "NSApplication+SystemVersion.h"
 
 @interface TPProjectOutlineViewController ()
 
@@ -70,6 +71,7 @@
 
 - (void) awakeFromNib
 {
+  [super awakeFromNib];
   // apply our custom ImageAndTextCell for rendering the first column's cells
 //	NSTableColumn *tableColumn = [self.outlineView tableColumnWithIdentifier:@"NameColumn"];
 //	ImageAndTextCell *imageAndTextCell = [[ImageAndTextCell alloc] init];
@@ -127,10 +129,12 @@
 
 - (void) setupOutlineView
 {
-  
-  TPTheme *theme = [TPThemeManager currentTheme];
-  [self.outlineView setBackgroundColor:theme.outlineBackgroundColor];
-  
+  if ([NSApp isYosemite] == NO) {
+    TPTheme *theme = [TPThemeManager currentTheme];
+    [self.outlineView setBackgroundColor:theme.outlineBackgroundColor];
+  } else {
+    [self.outlineView setBackgroundColor:[NSColor clearColor]];
+  }
 }
 
 - (void) setupOutlineBuilder
@@ -366,8 +370,10 @@
 
 - (void) outlineView:(NSOutlineView *)outlineView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-  TPTheme *theme = [TPThemeManager currentTheme];
-  [cell setBackgroundColor:theme.outlineBackgroundColor];
+  if ([NSApp isYosemite] == NO) {
+    TPTheme *theme = [TPThemeManager currentTheme];
+    [cell setBackgroundColor:theme.outlineBackgroundColor];
+  }
   
   if (self.currentSection == item) {
     NSMutableAttributedString *title = [[cell objectValue] mutableCopy];
@@ -379,6 +385,11 @@
 
 #pragma mark -
 #pragma mark OutlineView datasource
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+  return NO;
+}
 
 - (id) outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {

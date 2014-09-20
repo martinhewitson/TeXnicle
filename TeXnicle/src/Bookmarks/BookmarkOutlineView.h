@@ -27,6 +27,7 @@
 //
 
 #import <AppKit/AppKit.h>
+#import "MHOutlineView.h"
 
 @class Bookmark;
 
@@ -37,7 +38,7 @@
 
 @end
 
-@interface BookmarkOutlineView : NSOutlineView {
+@interface BookmarkOutlineView : MHOutlineView {
 @private
   NSString *_capturedString;
 }

@@ -28,6 +28,7 @@
 #import "TPOutlineView.h"
 #import "FolderEntity.h"
 #import "TeXFileEntity.h"
+#import "NSApplication+SystemVersion.h"
 
 @implementation TPOutlineView
 
@@ -44,6 +45,15 @@
 - (void) awakeFromNib
 {
   self.showMenu = YES;
+  
+  
+  if ([NSApp isYosemite]) {
+    [self setRowHeight:22.0];
+    [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
+  } else {
+    [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];
+  }
+  
 }
 
 - (void) setNeedsDisplay
