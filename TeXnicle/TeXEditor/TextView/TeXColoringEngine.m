@@ -59,6 +59,20 @@
 
 @property (assign) BOOL colorMultilineArguments;
 
+@property (assign) BOOL showMarkup1Bold;
+@property (assign) BOOL showMarkup2Bold;
+@property (assign) BOOL showMarkup3Bold;
+@property (assign) BOOL showComments1Bold;
+@property (assign) BOOL showComments2Bold;
+@property (assign) BOOL showComments3Bold;
+@property (assign) BOOL showArgumentsBold;
+@property (assign) BOOL showCommandBold;
+@property (assign) BOOL showSpecialBold;
+@property (assign) BOOL showDollarBold;
+
+@property (assign) BOOL clearBold;
+@property (assign) BOOL anyBold;
+
 @end
 
 @implementation TeXColoringEngine
@@ -86,6 +100,10 @@
            selector:@selector(handleThemeDidChangeNotification:)
                name:TPThemeSelectionChangedNotification
              object:nil];
+    [nc addObserver:self
+           selector:@selector(handleClearBoldChangeNotification:)
+               name:TPShouldClearBoldHighlightingNotification
+             object:nil];
     
   }
   return self;
@@ -108,6 +126,10 @@
 #pragma mark -
 #pragma mark KVO 
 
+- (void) handleClearBoldChangeNotification:(NSNotification*)aNote
+{
+  self.clearBold = YES;
+}
 
 - (void) handleThemeDidChangeNotification:(NSNotification*)aNote
 {
@@ -163,6 +185,30 @@
   self.colorArguments = theme.shouldColorArguments;
   self.colorMultilineArguments = [theme.colorMultilineArguments boolValue];
   
+  // bold
+  self.showArgumentsBold = theme.shouldShowArgumentsBold;
+  self.showCommandBold   = theme.shouldShowCommandBold;
+  self.showComments1Bold = theme.shouldShowComments1Bold;
+  self.showComments2Bold = theme.shouldShowComments2Bold;
+  self.showComments3Bold = theme.shouldShowComments3Bold;
+  self.showDollarBold    = theme.shouldShowDollarBold;
+  self.showSpecialBold   = theme.shouldShowSpecialCharactersBold;
+  self.showMarkup1Bold   = theme.shouldShowMarkup1Bold;
+  self.showMarkup2Bold   = theme.shouldShowMarkup2Bold;
+  self.showMarkup3Bold   = theme.shouldShowMarkup3Bold;
+  
+  
+  self.anyBold = self.showArgumentsBold | self.showCommandBold | self.showComments1Bold | self.showComments2Bold
+                 | self.showComments3Bold | self.showDollarBold | self.showSpecialBold
+                 | self.showMarkup1Bold | self.showMarkup2Bold | self.showMarkup3Bold;
+  
+  
+//  NSLog(@"Any bold? %d", self.anyBold);
+//  NSLog(@"Markup1 bold? %d", self.showMarkup1Bold);
+//  NSLog(@"Markup2 bold? %d", self.showMarkup2Bold);
+//  NSLog(@"Markup3 bold? %d", self.showMarkup3Bold);
+  
+  self.clearBold = YES;
 }
 
 
@@ -258,7 +304,7 @@
     }
   }
   
-//  NSLog(@"Coloring %@", NSStringFromRange(aRange));
+  //NSLog(@"Coloring %@", NSStringFromRange(aRange));
   
   NSString *text = [[textStorage string] substringWithRange:aRange];
   //NSLog(@"\n\n=======================================================================================");
@@ -276,8 +322,14 @@
   // remove existing temporary attributes
 	[layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
   
-  [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:aRange];
-    
+  if (self.clearBold || self.anyBold) {
+    [self.textView.textStorage applyFontTraits:NSUnboldFontMask range:aRange];
+    self.clearBold = NO;
+  }
+  
+  [layoutManager removeTemporaryAttribute:NSForegroundColorAttributeName forCharacterRange:aRange];
+//  [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:aRange];
+  
   // scan each character in the string
   NSArray *commandRanges = [text commandRanges];
   NSUInteger idx;
@@ -311,20 +363,25 @@
 				c = [text characterAtIndex:idx-1];
 			}
 			if (idx==0 || c != '\\') {
+        BOOL makeBold = NO;
         NSColor *color = nil;
-        if (self.colorComments)
+        if (self.colorComments) {
           color = self.commentColor;
+          makeBold = self.showComments1Bold;
+        }
         
         if (idx < strLen-1) {
           if ([text characterAtIndex:idx+1] == '%') {
             if (self.colorCommentsL2) {
               color = self.commentL2Color;
+              makeBold = self.showComments2Bold;
             }
             
             if (idx < strLen-2) {
               if ([text characterAtIndex:idx+2] == '%') {
                 if (self.colorCommentsL3) {
                   color = self.commentL3Color;
+                  makeBold = self.showComments3Bold;
                 }
               }
             }
@@ -334,6 +391,9 @@
         if (color != nil) {
 //          NSLog(@"Comment: %@", NSStringFromRange(colorRange));
           [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:colorRange];
+          if (makeBold == YES) {
+            [self.textView.textStorage applyFontTraits:NSBoldFontMask range:colorRange];
+          }
         }
         idx = NSMaxRange(lineRange)-1;
 //        NSLog(@"   advanced index to %ld", idx);
@@ -343,17 +403,20 @@
       unichar c = 0;
 			if (idx>0) {
 				c = [text characterAtIndex:idx-1];
-			}
-			if (idx==0 || c != '\\') {
+      }
+      if (idx==0 || c != '\\') {
         NSColor *color = nil;
-        if (self.colorMarkupL1)
+        BOOL makeBold = NO;
+        if (self.colorMarkupL1) {
           color = self.markupL1Color;
-        
+          makeBold = self.showMarkup1Bold;
+        }
         if (idx < strLen-1) {
           if ([text characterAtIndex:idx+1] == '<') {
             jump++;
             if (self.colorMarkupL2) {
               color = self.markupL2Color;
+              makeBold = self.showMarkup2Bold;
             }
             
             if (idx < strLen-2) {
@@ -361,6 +424,7 @@
                 jump++;
                 if (self.colorMarkupL3) {
                   color = self.markupL3Color;
+                  makeBold = self.showMarkup3Bold;
                 }
               }
             }
@@ -383,7 +447,11 @@
           if (argCount == 0) {
             NSRange argRange = NSMakeRange(aRange.location+start,idx-start+1);
             if (color != nil) {
-              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:argRange];
+              [layoutManager setTemporaryAttributes:@{NSForegroundColorAttributeName : color} forCharacterRange:argRange];
+//              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:color forCharacterRange:argRange];
+              if (makeBold) {
+                [self.textView.textStorage applyFontTraits:NSBoldFontMask range:argRange];
+              }
             }
             break;
           }
@@ -416,8 +484,11 @@
       if ([text characterIsEscapedAtIndex:idx]) {
         if (idx > 0) {
           if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location+start>0) {
-            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start-1, 1)];
-            
+            NSRange cr = NSMakeRange(aRange.location+start-1, 1);
+            [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:cr];
+            if (self.showSpecialBold) {
+              [self.textView.textStorage applyFontTraits:NSBoldFontMask range:cr];
+            }
           }
         }
         //continue;
@@ -425,8 +496,11 @@
       
       // color the first character as a special character
       if (self.colorSpecialChars && self.specialCharsColor != nil && aRange.location!=NSNotFound) {
-        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
-        
+        NSRange cr = NSMakeRange(aRange.location+start, 1);
+        [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:cr];
+        if (self.showSpecialBold) {
+          [self.textView.textStorage applyFontTraits:NSBoldFontMask range:cr];
+        }
       }
       
       // check this is preceeded by a command
@@ -461,6 +535,13 @@
 //            NSLog(@"Coloring argument");
             if (self.argumentsColor != nil) {
               [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.argumentsColor forCharacterRange:argRange];
+              if (self.showArgumentsBold) {
+                NSRange boldRange = argRange;
+                boldRange.length--;
+                if (boldRange.length > 0) {
+                  [self.textView.textStorage applyFontTraits:NSBoldFontMask range:boldRange];
+                }
+              }
             }
             break;
           } else {
@@ -468,7 +549,11 @@
             // if the argument spans multiple lines, color the first char
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.textColor forCharacterRange:argRange];
             if (self.specialCharsColor) {
-              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:NSMakeRange(aRange.location+start, 1)];
+              NSRange cr = NSMakeRange(aRange.location+start, 1);
+              [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:cr];
+              if (self.showSpecialBold) {
+                [self.textView.textStorage applyFontTraits:NSBoldFontMask range:cr];
+              }
             }
             idx = start;
             break;
@@ -488,6 +573,9 @@
       colorRange = NSMakeRange(aRange.location+idx, 1);
       if (self.dollarColor != nil) {
         [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.dollarColor forCharacterRange:colorRange];
+        if (self.showDollarBold) {
+          [self.textView.textStorage applyFontTraits:NSBoldFontMask range:colorRange];
+        }
       }
       
     } else if ([specialChars characterIsMember:cc] && self.colorSpecialChars) { // (cc == '$' || cc == '{'&& self.colorMath) {
@@ -498,6 +586,9 @@
           colorRange = NSMakeRange(aRange.location+idx-1, 1);
           if (self.specialCharsColor != nil) {
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+            if (self.showSpecialBold) {
+              [self.textView.textStorage applyFontTraits:NSBoldFontMask range:colorRange];
+            }
           }
         }
         //continue;
@@ -506,6 +597,9 @@
       colorRange = NSMakeRange(aRange.location+idx, 1);
       if (self.specialCharsColor != nil) {
         [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.specialCharsColor forCharacterRange:colorRange];
+        if (self.showSpecialBold) {
+          [self.textView.textStorage applyFontTraits:NSBoldFontMask range:colorRange];
+        }
       }
             
     } else if ((cc == '\\' || cc == '@') && self.colorCommand) {      
@@ -523,6 +617,10 @@
 //          NSLog(@"Command: %@", NSStringFromRange(colorRange));
           if (self.commandColor != nil) {
             [layoutManager addTemporaryAttribute:NSForegroundColorAttributeName value:self.commandColor forCharacterRange:colorRange];
+            
+            if (self.showCommandBold) {
+              [self.textView.textStorage applyFontTraits:NSBoldFontMask range:colorRange];
+            }
           }
           idx += colorRange.length-1;
         }
@@ -531,7 +629,9 @@
     } else {
       // do nothing
     }    
-  } 
+  }
+  
+  
   self.lastHighlight = [NSDate date];
 }
 

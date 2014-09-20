@@ -206,7 +206,13 @@
     
     if ([firstSection.type.name isEqualToString:@"begin"] == NO) {
       
-      TPSection *root = [TPSection sectionWithParent:nil start:0 inFile:file type:templates[0] name:@"Root"];
+      NSString *rootName = @"Root";
+      if ([file isKindOfClass:[TPFileMetadata class]]) {
+        TPFileMetadata *meta = (TPFileMetadata*)file;
+        rootName = meta.name;
+      }
+      
+      TPSection *root = [TPSection sectionWithParent:nil start:0 inFile:file type:templates[0] name:rootName];
       
       // see if we have an existing root which matches what we would anyway insert
       TPSection *firstExistingSection = nil;

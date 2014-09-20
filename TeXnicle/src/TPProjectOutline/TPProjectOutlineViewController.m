@@ -105,15 +105,6 @@
            object:nil];
   
   
-  // figure out if we are in a standalone editor
-  id mainfile = [self mainFile];
-  if (mainfile && [mainfile isKindOfClass:[TPFileMetadata class]]) {
-    // then this is a project editor
-    [self.focusButton setHidden:NO];
-  } else {
-    // then this is a standalone editor
-    [self.focusButton setHidden:YES];
-  }
 }
 
 - (void) handleNavigatorFontChangedNotification:(NSNotification*)aNote
@@ -210,6 +201,19 @@
 
 - (void) didComputeNewSections
 {
+  // check if we need to hide the focus button. This needs to happen at a time when the main file is not nil
+  // figure out if we are in a standalone editor
+  id mainfile = [self mainFile];
+  if (mainfile != nil){
+    if ([mainfile isKindOfClass:[TPFileMetadata class]]) {
+      // then this is a project editor
+      [self.focusButton setHidden:NO];
+    } else {
+      // then this is a standalone editor
+      [self.focusButton setHidden:YES];
+    }
+  }
+  
   self.sections = [NSMutableArray array];
   for (TPSection *s in self.outlineBuilder.sections) {
     [self.sections addObject:s];
@@ -341,7 +345,11 @@
   TPSection *section = [self.outlineView itemAtRow:[self.outlineView selectedRow]];
   
   if (self.delegate && [self.delegate respondsToSelector:@selector(highlightSearchResult:withRange:inFile:)]) {
-    NSRange range = NSMakeRange(section.startIndex, [section.name length]);
+    NSInteger length = [section.name length];
+    if (section.startIndex == 0){
+      length = 0; // special case for the start of the file
+    }
+    NSRange range = NSMakeRange(section.startIndex, length);
     [self.delegate highlightSearchResult:section.name
                                withRange:range
                                   inFile:section.file];

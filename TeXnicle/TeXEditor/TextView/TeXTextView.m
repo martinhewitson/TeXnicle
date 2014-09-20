@@ -99,6 +99,17 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 @property (strong) NSTextFinder *textFinder;
 
+@property (strong) NSColor *documentEditorBackgroundColor;
+@property (strong) NSColor *documentEditorMarginColor;
+@property (strong) NSColor *currentLineColor;
+@property (assign) BOOL highlightCurrentLine;
+
+@property (assign) NSRange currentLineRange;
+@property (assign) NSRect currentLineRect;
+
+@property (assign) NSInteger wrapStyle;
+@property (assign) NSInteger wrapAt;
+
 @end
 
 @implementation TeXTextView
@@ -143,7 +154,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
     
     [self applyFontAndColor:YES];
-    
+    [self updateThemeSettings];
+
     didSetup = YES;
   }
 }
@@ -229,12 +241,41 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[scrollView setRulersVisible:YES];
 }
 
+- (void)setTextStorage:(NSTextStorage*)textStorage
+{
+  // update layout so that the findbar gets the correct notifications and the search works
+  [self noteStringWillChange];
+  [self.textFinder setClient:nil];
+  [self.textFinder setFindBarContainer:nil];
+  
+  // stop observations
+  [self stopObservingTextStorage];
+  
+  // now change the text in the textview
+//  NSString *string = [self string];
+//  NSString *newString = [textStorage string];
+//  [self shouldChangeTextInRange:NSMakeRange(0, [string length]) replacementString:newString];
+  [self.layoutManager replaceTextStorage:textStorage];
+//  [self didChangeText];
+  [self performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
+  [self observeTextStorage];
+  
+  
+  [self.textFinder setClient:self];
+  [self.textFinder setFindBarContainer:[self enclosingScrollView]];
+  [self setUsesFindBar:YES];
+  [self setIncrementalSearchingEnabled:YES];
+  
+}
+
 - (void) noteStringWillChange
 {
 //  NSLog(@"Updating string for text finder %@", self.textFinder);
   [self.textFinder cancelFindIndicator];
+  [self.textFinder findIndicatorNeedsUpdate];
   [self.textFinder noteClientStringWillChange];
 }
+
 
 - (void) setupLists
 {
@@ -693,7 +734,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) resetLineNumbers
 {
   [self.editorRuler resetLineNumbers];
-  [self setNeedsDisplay:YES];
+//  [self setNeedsDisplay:YES];
 }
 
 - (void) colorWholeDocument
@@ -794,9 +835,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) updateEditorRuler
 {
+  //NSLog(@"Update ruler");
   [self.editorRuler resetLineNumbers];
   [self.editorRuler setNeedsDisplay:YES];
-  [self setNeedsDisplay:YES];
+//  [self setNeedsDisplay:YES];
 }
 
 
@@ -868,14 +910,25 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 }
 
+- (void) updateThemeSettings
+{
+  TPTheme *theme = [[TPThemeManager sharedManager] currentTheme];
+  self.documentEditorMarginColor = theme.documentEditorMarginColor;
+  self.documentEditorBackgroundColor = theme.documentEditorBackgroundColor;
+  self.currentLineColor = theme.currentLineColor;
+  self.highlightCurrentLine = [theme.highlightCurrentLine boolValue];
+}
+
 - (void) handleThemeChangedNotification:(NSNotification*)aNote
 {
   [self applyFontAndColor:YES];
+  [self updateThemeSettings];
   
   NSRange vr = [self getVisibleRange];
   [[self layoutManager] removeTemporaryAttribute:NSBackgroundColorAttributeName forCharacterRange:vr];
   [self highlightMatchingWords];
   [self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:YES];
+  
 }
 
 - (void) setTypingColor:(NSColor*)aColor
@@ -909,6 +962,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) applyFontAndColor:(BOOL)forceUpdate
 {
+  TPTheme *theme = [[TPThemeManager sharedManager] currentTheme];
+  
   //NSLog(@"%@", NSStringFromSelector(_cmd));
   NSDictionary *atts = [NSDictionary currentTypingAttributes];
   NSFont *newFont = atts[NSFontAttributeName];
@@ -941,13 +996,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     //    NSLog(@"Skipping setting atts");
   }
   
-  TPThemeManager *tm = [TPThemeManager sharedManager];
-  TPTheme *theme = tm.currentTheme;
-  
   // background color
-  NSColor *c = theme.documentEditorBackgroundColor;
+//  NSColor *c = theme.documentEditorBackgroundColor;
   // for some reason we need to do this otherwise the scrolling jumps around in the textview.
-  [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
+//  [self performSelector:@selector(setBackgroundColor:) withObject:c afterDelay:0];
   
   // cursor color
   NSColor *cc =  theme.documentEditorCursorColor;
@@ -962,27 +1014,27 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) setWrapStyle
 {
-  NSInteger wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] integerValue];
-  NSInteger wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
+  self.wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] integerValue];
+  self.wrapAt = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
   
   // cache wrap settings
-  self.currentWrapStyle = wrapStyle;
-  self.currentWrapAt = wrapAt;
+  self.currentWrapStyle = self.wrapStyle;
+  self.currentWrapAt = self.wrapAt;
   
   NSTextContainer *textContainer = [self textContainer];
-  if (wrapStyle == TPSoftWrap) {
+  if (self.wrapStyle == TPSoftWrap) {
     //NSLog(@"Soft wrap");
     [textContainer setWidthTracksTextView:NO];
-    [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
+    [textContainer setContainerSize:NSMakeSize(self.averageCharacterWidth*self.wrapAt*kFontWrapScaleCorrection, LargeTextHeight)];
     [self setHorizontallyResizable:YES];
     [self setVerticallyResizable:YES];
-  }	else if (wrapStyle == TPNoWrap) {
+  }	else if (self.wrapStyle == TPNoWrap) {
     //NSLog(@"No wrap");
     [textContainer setWidthTracksTextView:NO];
     [textContainer setContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
     [self setHorizontallyResizable:YES];
     [self setVerticallyResizable:YES];
-  }	else if (wrapStyle == TPWindowWrap) {
+  }	else if (self.wrapStyle == TPWindowWrap) {
     
     [self setVerticallyResizable:YES];
     [self setHorizontallyResizable: NO];
@@ -1006,7 +1058,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) processEditing:(NSNotification*)aNote
 {
-	[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:NO];
+	//[self setNeedsDisplayInRect:[self bounds] avoidAdditionalLayout:NO];
 }
 
 - (void) stopObservingTextStorage
@@ -1912,6 +1964,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSInteger er = NSMaxRange(r)-1;
   NSString *text = [self string];
   
+  
   if (er >= [text length]) {
     //    NSLog(@"Out of range");
     return NSZeroRect;
@@ -1923,7 +1976,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
   //  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
   
-  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1)
+  NSRange cr = NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1);
+  if (NSMaxRange(cr) >= [self.string length]) {
+    return  NSZeroRect;
+  }
+  
+  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:cr
                                             actualCharacterRange:NULL];
   NSRect br = [[self layoutManager] boundingRectForGlyphRange:gr inTextContainer:[self textContainer]];
   
@@ -1945,7 +2003,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
   if (self != nil) {
-    [self setNeedsDisplay:YES];
+//    [self setNeedsDisplay:YES];
     NSRange r = [self selectedRange];
     [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
                                                         object:self
@@ -2748,57 +2806,66 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 //	[super viewWillDraw];
 //}
 
+//- (NSRange) selectionRangeForProposedRange:(NSRange)proposedCharRange granularity:(NSSelectionGranularity)granularity
+//{
+//  NSLog(@"%@", NSStringFromSelector(_cmd));
+//  return [super selectionRangeForProposedRange:proposedCharRange granularity:granularity];
+//}
+
 - (void) drawViewBackgroundInRect:(NSRect)rect
 {
-	[super drawViewBackgroundInRect:rect];
+//  NSLog(@"Drawing background %@", NSStringFromRect(rect));
+  
+//	[super drawViewBackgroundInRect:rect];
+
+  CGFloat w = rect.size.width;
+  if (self.wrapStyle == TPHardWrap || self.wrapStyle == TPSoftWrap) {
+    NSRect r;
+    
+    if (self.wrapStyle == TPSoftWrap) {
+      NSSize inset = [self textContainerInset];
+      NSSize s = [[self textContainer] containerSize];
+      w = inset.width+s.width;
+      r = NSMakeRect(inset.width+s.width, rect.origin.y, rect.size.width, rect.size.height);
+    } else {
+      w = self.averageCharacterWidth*self.wrapAt*kFontWrapScaleCorrection;
+      r = NSIntegralRect(NSMakeRect(w, rect.origin.y, w+rect.size.width, rect.size.height));
+    }
+    
+    [self.documentEditorMarginColor set];
+    [NSBezierPath fillRect:r];
+  }
+  
+  // do rest of background
+  [self.documentEditorBackgroundColor set];
+  NSRect br = NSIntegralRect(NSMakeRect(0, rect.origin.y, w, rect.size.height));
+//  NSLog(@"Background %@", NSStringFromRect(br));
+  [NSBezierPath fillRect:br];
+  
   
   // additional highlight range
-	if (self.highlightRange) {
-    NSRect aRect = [self highlightRectForRange:NSRangeFromString(self.highlightRange)];
-		[[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
-		[NSBezierPath fillRect:aRect];
-	} else {
-    [[self backgroundColor] set];
-    [NSBezierPath fillRect:[self bounds]];
+  NSRange hr = NSRangeFromString(self.highlightRange);
+  if (self.highlightRange && NSMaxRange(hr) < [self.string length]) {
+    NSRect aRect = [self highlightRectForRange:hr];
+    [[[self backgroundColor] shadowWithLevel:_highlightAlpha] set];
+    [NSBezierPath fillRect:aRect];
   }
   
   // highlight current line
-  TPTheme *theme = [TPThemeManager currentTheme];
-  
-  if ([theme.highlightCurrentLine boolValue]) {
+  if (self.highlightCurrentLine) {
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
-    if (sel.location <= [str length]) {
+    if (sel.location < [str length]) {
       NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
-      NSRect lineRect = [self highlightRectForRange:lineRange];
-      NSColor *highlightColor = theme.currentLineColor;
-      [highlightColor set];
-      [NSBezierPath fillRect:lineRect];
+      if (NSEqualRanges(lineRange, self.currentLineRange) == NO) {
+        self.currentLineRect = NSIntegralRect([self highlightRectForRange:lineRange]);
+        self.currentLineRange = lineRange;
+      }
+      [self.currentLineColor set];
+      [NSBezierPath fillRect:self.currentLineRect];
     }
   }
   
-  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  // line width
-  int wrapStyle = [[defaults valueForKey:TELineWrapStyle] intValue];
-  if (wrapStyle == TPHardWrap || wrapStyle == TPSoftWrap) {
-    NSRect vr = [self visibleRect];
-    NSRect r;
-    
-    if (wrapStyle == TPSoftWrap) {
-      NSSize inset = [self textContainerInset];
-      NSSize s = [[self textContainer] containerSize];
-      r = NSMakeRect(inset.width+s.width, vr.origin.y, vr.size.width, vr.size.height);
-    } else {
-      int wrapAt = [[defaults valueForKey:TELineLength] intValue];
-//      CGFloat scale = [NSString averageCharacterWidthForFont:self.font];
-      r = NSMakeRect(self.averageCharacterWidth*wrapAt*kFontWrapScaleCorrection, vr.origin.y, vr.size.width, vr.size.height);
-    }
-    
-    NSColor *highlightColor = theme.documentEditorMarginColor;
-    [highlightColor set];
-    [NSBezierPath fillRect:r];
-  }
 }
 
 
@@ -2841,35 +2908,6 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self colorVisibleText];
 }
 
-
-- (BOOL) shouldCloseOpeningBracket:(unichar)o with:(unichar)c atLocation:(NSInteger)loc
-{
-  // count opening brackets back to beginning of string
-  NSString *string = self.string;
-  NSInteger opening = 0;
-  while (loc >= 0) {
-    if ([string characterAtIndex:loc] == o) {
-      opening++;
-    }
-    loc--;
-  }
-  
-  NSInteger closing = 0;
-  while (loc < [string length]) {
-    if ([string characterAtIndex:loc] == c) {
-      closing++;
-    }
-    loc++;
-  }
-  
-  if (opening > closing) {
-    return YES;
-  }
-  
-  
-  return NO;
-}
-
 - (void) completeOpenBrace:(unichar)o withClosingBrace:(unichar)c
 {
   // check if this is a \left{
@@ -2886,7 +2924,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     
     unichar nextc = [[self string] characterAtIndex:selRange.location];
     
-    if (nextc == c && [self shouldCloseOpeningBracket:o with:c atLocation:selRange.location] == NO ) {
+    if (nextc == c && [[self string] shouldCloseOpeningBracket:o with:c atLocation:selRange.location] == NO ) {
       NSString *replacement = [NSString stringWithFormat:@"%c", o];
       if ([self shouldChangeTextInRange:selRange replacementString:replacement]) {
         [self replaceCharactersInRange:selRange withString:replacement];
@@ -3703,8 +3741,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) wrapLine
 {
-	int wrapStyle = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineWrapStyle] intValue];
-	if (wrapStyle != TPHardWrap)
+	if (self.wrapStyle != TPHardWrap)
 		return;
   
   // don't wrap while we are completing
@@ -3712,7 +3749,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return;
   }
   
-	int lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+  int lineWrapLength = self.wrapAt; //[[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
 	// check the length of this line and insert newline if required
 	// - we only do this if we are at the end of a line
 	NSString *str = [[self textStorage] string];
@@ -3863,7 +3900,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSInteger startPosition = currRange.location - pRange.location;
   
   // reformatt the text for the selected linewidth
-	NSInteger lineWrapLength = [[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
+  NSInteger lineWrapLength = self.wrapAt; //[[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] integerValue];
   NSString *text = [[self string] substringWithRange:pRange];
   //  NSLog(@"Reformatting [%@]", text);
   NSString *newText = [text reformatStartingAtIndex:startPosition forLinewidth:lineWrapLength];

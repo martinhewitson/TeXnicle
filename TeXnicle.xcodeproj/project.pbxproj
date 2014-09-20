@@ -668,6 +668,7 @@
 		25FD40A4139164A30037CB54 /* engine.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40A1139164A20037CB54 /* engine.icns */; };
 		25FD40A5139164A30037CB54 /* fontsAndColors.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40A2139164A20037CB54 /* fontsAndColors.icns */; };
 		25FD40A6139164A30037CB54 /* templates.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25FD40A3139164A30037CB54 /* templates.icns */; };
+		25FFFA201987517400E26FD2 /* TeXETextViewBraceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FFFA1E1987516E00E26FD2 /* TeXETextViewBraceTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1695,6 +1696,7 @@
 		25FD40A1139164A20037CB54 /* engine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = engine.icns; sourceTree = "<group>"; };
 		25FD40A2139164A20037CB54 /* fontsAndColors.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fontsAndColors.icns; sourceTree = "<group>"; };
 		25FD40A3139164A30037CB54 /* templates.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = templates.icns; sourceTree = "<group>"; };
+		25FFFA1E1987516E00E26FD2 /* TeXETextViewBraceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeXETextViewBraceTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1917,6 +1919,7 @@
 				250BE026162BF0B7007784DB /* test files */,
 				250BE01D162BEF3A007784DB /* TeXTextViewTests.h */,
 				250BE01E162BEF3A007784DB /* TeXTextViewTests.m */,
+				25FFFA1E1987516E00E26FD2 /* TeXETextViewBraceTests.m */,
 				2560A09F162C70C100403D56 /* NSStringReformattingTests.h */,
 				2560A0A0162C70C100403D56 /* NSStringReformattingTests.m */,
 				2560A09B162C317C00403D56 /* NSStringReformattingPrivateTests.h */,
@@ -3856,7 +3859,7 @@
 		};
 		25F5C7DF181CF9EC00C8BBCC /* Sign Sparkle */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -3864,9 +3867,9 @@
 			name = "Sign Sparkle";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Developer ID Application: Martin Hewitson\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
+			shellScript = "LOCATION=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\nIDENTITY=\"Mac Developer: Martin Hewitson (XQ47SF7QM8)\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$LOCATION/Sparkle.framework/Versions/A\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -4186,6 +4189,7 @@
 				253AC71A197CC338008034C5 /* TeXTextViewTests.m in Sources */,
 				253AC719197CC319008034C5 /* LaTeXStringTests.m in Sources */,
 				253AC718197CC317008034C5 /* CitationTests.m in Sources */,
+				25FFFA201987517400E26FD2 /* TeXETextViewBraceTests.m in Sources */,
 				253AC70F197CC273008034C5 /* PlaceholderTests.m in Sources */,
 				253AC71B197CC338008034C5 /* NSStringReformattingTests.m in Sources */,
 			);
@@ -4431,7 +4435,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4464,6 +4469,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = TeXnicle/TeXnicle.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -4588,6 +4594,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4621,6 +4628,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

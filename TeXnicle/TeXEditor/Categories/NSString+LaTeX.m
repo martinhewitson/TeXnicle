@@ -1009,6 +1009,35 @@ static NSString *mathModeRegExpr = nil;
   return YES;
 }
 
+#pragma mark - Brace handling
+
+- (BOOL) shouldCloseOpeningBracket:(unichar)o with:(unichar)c atLocation:(NSInteger)startloc
+{
+  // count opening brackets back to beginning of string
+  NSInteger loc = startloc;
+  NSString *string = self;
+  NSInteger opening = 0;
+  
+  NSInteger closing = 0;
+  loc = 0;
+  while (loc < [string length]) {
+    if ([string characterAtIndex:loc] == o) {
+      opening++;
+    }
+    if ([string characterAtIndex:loc] == c) {
+      closing++;
+    }
+    loc++;
+  }
+    
+  if (opening - closing >= 0) {
+    return YES;
+  }
+  
+  
+  return NO;
+}
+
 @end
 
 

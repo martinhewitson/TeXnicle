@@ -31,7 +31,9 @@
 
 
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange;
+- (NSArray*) lineNumbersForTextRange:(NSRange)aRange useCodeFolding:(BOOL)usingCodeFolding;
 - (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine;
+- (NSArray*) lineNumbersForTextRange:(NSRange)aRange startIndex:(NSInteger)aStartIndex startLine:(NSInteger)aStartLine useCodeFolding:(BOOL)usesCodeFolding;
 - (NSInteger) indexForLineNumber:(NSInteger)aLinenumber;
 
 @end

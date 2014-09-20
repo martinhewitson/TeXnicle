@@ -179,6 +179,17 @@
   return aKey;
 }
 
+- (NSString*)boldKeyForKey:(NSString*)aKey
+{
+  NSArray *parts = [aKey componentsSeparatedByString:@"."];
+  if ([parts count] == 4 && [parts[3] isEqualToString:@"bold"]) {
+    // use as is
+  } else {
+    aKey = [aKey stringByAppendingString:@".bold"];
+  }
+  return aKey;
+}
+
 - (void) setState:(NSNumber*)state forKey:(NSString*)aKey
 {
   aKey = [self activeKeyForKey:aKey];
@@ -188,10 +199,28 @@
   self.syntaxColors = dict;
 }
 
+- (void) setBoldState:(NSNumber*)state forKey:(NSString*)aKey
+{
+  aKey = [self boldKeyForKey:aKey];
+  NSMutableDictionary *dict = [self.syntaxColors mutableCopy];
+  [dict setValue:state
+          forKey:aKey];
+  self.syntaxColors = dict;
+  [[NSNotificationCenter defaultCenter] postNotificationName:TPShouldClearBoldHighlightingNotification object:self userInfo:@{@"key": aKey}];
+}
+
+
 - (NSNumber*) activeStateForKey:(NSString*)aKey
 {
   aKey = [self activeKeyForKey:aKey];
   id val = [self.syntaxColors valueForKey:aKey];  
+  return val;
+}
+
+- (NSNumber*) boldStateForKey:(NSString*)aKey
+{
+  aKey = [self boldKeyForKey:aKey];
+  id val = [self.syntaxColors valueForKey:aKey];
   return val;
 }
 
@@ -323,6 +352,11 @@
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.commands.active"] boolValue];
 }
 
+- (BOOL) shouldShowCommandBold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.commands.bold"] boolValue];
+}
+
 - (NSColor*) syntaxSpecialCharactersColor
 {
   NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.specialcharacters"];
@@ -336,6 +370,11 @@
 - (BOOL) shouldColorSpecialCharacters
 {
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.specialcharacters.active"] boolValue];
+}
+
+- (BOOL) shouldShowSpecialCharactersBold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.specialcharacters.bold"] boolValue];
 }
 
 - (NSColor*) syntaxDollarColor
@@ -353,6 +392,11 @@
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.dollar.active"] boolValue];
 }
 
+- (BOOL) shouldShowDollarBold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.dollar.bold"] boolValue];
+}
+
 - (NSColor*) syntaxArgumentsColor
 {
   NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.arguments"];
@@ -366,6 +410,11 @@
 - (BOOL) shouldColorArguments
 {
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.arguments.active"] boolValue];
+}
+
+- (BOOL) shouldShowArgumentsBold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.arguments.bold"] boolValue];
 }
 
 - (NSColor*) syntaxMarkup1Color
@@ -383,6 +432,11 @@
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup1.active"] boolValue];
 }
 
+- (BOOL) shouldShowMarkup1Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup1.bold"] boolValue];
+}
+
 - (NSColor*) syntaxMarkup2Color
 {
   NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.markup2"];
@@ -397,6 +451,12 @@
 {
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup2.active"] boolValue];
 }
+
+- (BOOL) shouldShowMarkup2Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup2.bold"] boolValue];
+}
+
 
 - (NSColor*) syntaxMarkup3Color
 {
@@ -413,6 +473,12 @@
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup3.active"] boolValue];
 }
 
+- (BOOL) shouldShowMarkup3Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.markup3.bold"] boolValue];
+}
+
+
 - (NSColor*) syntaxComments1Color
 {
   NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.comments1"];
@@ -426,6 +492,11 @@
 - (BOOL) shouldColorComments1
 {
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments1.active"] boolValue];
+}
+
+- (BOOL) shouldShowComments1Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments1.bold"] boolValue];
 }
 
 - (NSColor*) syntaxComments2Color
@@ -443,6 +514,12 @@
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments2.active"] boolValue];
 }
 
+- (BOOL) shouldShowComments2Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments2.bold"] boolValue];
+}
+
+
 - (NSColor*) syntaxComments3Color
 {
   NSColor *c = [self.syntaxColors colorForKey:@"texnicle.syntax.comments3"];
@@ -456,6 +533,11 @@
 - (BOOL) shouldColorComments3
 {
   return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments3.active"] boolValue];
+}
+
+- (BOOL) shouldShowComments3Bold
+{
+  return [[self.syntaxColors valueForKey:@"texnicle.syntax.comments3.bold"] boolValue];
 }
 
 

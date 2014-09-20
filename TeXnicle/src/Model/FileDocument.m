@@ -59,17 +59,6 @@
 		[attStr addAttributes:[NSDictionary currentTypingAttributes] range:NSMakeRange(0, [str length])];
 		self.textStorage = [[NSTextStorage alloc] initWithAttributedString:attStr];
     
-		// Add a main layout manager
-//		NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
-//		[layoutManager setAllowsNonContiguousLayout:YES];
-//		[self.textStorage addLayoutManager:layoutManager];
-				
-		// Now add the container to the layout manager
-//		NSTextContainer *textContainer = [[NSTextContainer alloc] initWithContainerSize:NSMakeSize(LargeTextWidth, LargeTextHeight)];
-//		[textContainer setWidthTracksTextView:NO];
-//		[textContainer setHeightTracksTextView:NO];	
-//		[layoutManager addTextContainer:textContainer];
-				
 		// Clean up
 		
 		// Now watch for changes to the text so that we can 
