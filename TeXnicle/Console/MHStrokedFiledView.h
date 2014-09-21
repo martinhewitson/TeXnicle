@@ -27,7 +27,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MHStrokedFiledView : NSVisualEffectView
+@interface MHStrokedFiledView : NSView
 
 @property (strong) NSColor *fillColor;
 @property (strong) NSColor *strokeColor;

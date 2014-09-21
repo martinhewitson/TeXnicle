@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="14A361c" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
@@ -58,7 +58,7 @@
             <rect key="contentRect" x="175" y="101" width="1100" height="600"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="600" height="600"/>
-            <view key="contentView" id="6" customClass="NSVisualEffectView">
+            <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="1100" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -66,7 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1100" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <customView id="100022" userLabel="Navigator Container" customClass="NSVisualEffectView">
+                            <customView id="100022" userLabel="Navigator Container">
                                 <rect key="frame" x="0.0" y="0.0" width="235" height="600"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
@@ -80,7 +80,7 @@
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="100055" userLabel="Project Tree">
-                                                <view key="view" id="100058" customClass="NSVisualEffectView">
+                                                <view key="view" id="100058">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -130,7 +130,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <outlineView focusRingType="none" appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="100037" id="100036" customClass="TPOutlineView">
+                                                                    <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="100037" id="100036" customClass="TPOutlineView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="234" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="2" height="3"/>
@@ -182,31 +182,31 @@
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="View" identifier="2" id="100056" userLabel="Palette">
-                                                <view key="view" id="100057" customClass="NSVisualEffectView">
+                                                <view key="view" id="100057">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="View" identifier="2" id="100062" userLabel="Library">
-                                                <view key="view" id="100063" customClass="NSVisualEffectView">
+                                                <view key="view" id="100063">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="View" identifier="2" id="100064" userLabel="Project Outline View">
-                                                <view key="view" id="100065" customClass="NSVisualEffectView">
+                                                <view key="view" id="100065">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Item 4" identifier="" id="100420" userLabel="Project Search View">
-                                                <view key="view" id="100421" customClass="NSVisualEffectView">
+                                                <view key="view" id="100421">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Item 5" identifier="" id="100699" userLabel="Info">
-                                                <view key="view" id="100700" customClass="NSVisualEffectView">
+                                                <view key="view" id="100700">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -220,37 +220,37 @@
                                                             <font key="font" metaFont="system"/>
                                                             <tabViewItems>
                                                                 <tabViewItem label="Tab" identifier="1" id="100923" userLabel="Bookmarks">
-                                                                    <view key="view" id="100926" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100926">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="View" identifier="2" id="100924" userLabel="Warnings">
-                                                                    <view key="view" id="100925" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100925">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 2" identifier="3" id="100927" userLabel="Spelling">
-                                                                    <view key="view" id="100928" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100928">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 3" identifier="" id="100977" userLabel="Labels">
-                                                                    <view key="view" id="100978" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100978">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 4" identifier="" id="100987" userLabel="Citations">
-                                                                    <view key="view" id="100988" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100988">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 5" identifier="" id="100994" userLabel="Commands">
-                                                                    <view key="view" id="100995" customClass="NSVisualEffectView">
+                                                                    <view key="view" id="100995">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
@@ -261,7 +261,7 @@
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Item 6" identifier="" id="100776" userLabel="Prefs">
-                                                <view key="view" id="100777" customClass="NSVisualEffectView">
+                                                <view key="view" id="100777" customClass="EffectView">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
@@ -308,7 +308,7 @@
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             </customView>
                                                             <customView id="100100" userLabel="Tab Bar Control" customClass="MMTabBarView">
-                                                                <rect key="frame" x="54" y="490" width="459" height="26"/>
+                                                                <rect key="frame" x="54" y="491" width="459" height="27"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="-2" id="101022"/>
@@ -317,7 +317,7 @@
                                                                 </connections>
                                                             </customView>
                                                             <customView hidden="YES" id="100912" customClass="TPTabbarMatchingBackground">
-                                                                <rect key="frame" x="-1" y="491" width="57" height="26"/>
+                                                                <rect key="frame" x="0.0" y="491" width="55" height="26"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 <subviews>
                                                                     <button toolTip="Back History" id="100913" customClass="HHValidatedButton">

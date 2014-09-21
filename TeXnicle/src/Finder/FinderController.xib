@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1080</int>
-		<string key="IBDocument.SystemVersion">14A261i</string>
-		<string key="IBDocument.InterfaceBuilderVersion">6154.21</string>
-		<string key="IBDocument.AppKitVersion">1321.11</string>
-		<string key="IBDocument.HIToolboxVersion">737.00</string>
+		<string key="IBDocument.SystemVersion">14A361c</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6246</string>
+		<string key="IBDocument.AppKitVersion">1339</string>
+		<string key="IBDocument.HIToolboxVersion">755.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">6154.21</string>
+			<string key="NS.object.0">6246</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSButton</string>
@@ -47,7 +47,7 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSCustomView" id="1005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSCustomView" id="141726827">
@@ -59,7 +59,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{92, 7}, {83, 19}}</string>
 								<reference key="NSSuperview" ref="141726827"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="724036379"/>
 								<string key="NSReuseIdentifierKey">_NS:1534</string>
 								<bool key="NSEnabled">YES</bool>
@@ -88,7 +87,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{8, 7}, {76, 19}}</string>
 								<reference key="NSSuperview" ref="141726827"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="895263865"/>
 								<string key="NSReuseIdentifierKey">_NS:1534</string>
 								<bool key="NSEnabled">YES</bool>
@@ -113,7 +111,6 @@
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{189, 3}, {32, 25}}</string>
 								<reference key="NSSuperview" ref="141726827"/>
-								<reference key="NSWindow"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="999006393">
 									<int key="NSCellFlags">-2080374784</int>
@@ -141,7 +138,6 @@
 						</array>
 						<string key="NSFrame">{{0, -1}, {230, 32}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="905375432"/>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -158,7 +154,6 @@
 										<int key="NSvFlags">268</int>
 										<string key="NSFrame">{{43, 30}, {38, 14}}</string>
 										<reference key="NSSuperview" ref="63197479"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="887341923"/>
 										<string key="NSReuseIdentifierKey">_NS:1505</string>
 										<bool key="NSEnabled">YES</bool>
@@ -196,7 +191,6 @@
 										<int key="NSvFlags">266</int>
 										<string key="NSFrame">{{86, 28}, {136, 19}}</string>
 										<reference key="NSSuperview" ref="63197479"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="230185464"/>
 										<string key="NSReuseIdentifierKey">_NS:248</string>
 										<bool key="NSEnabled">YES</bool>
@@ -233,7 +227,6 @@
 										<int key="NSvFlags">289</int>
 										<string key="NSFrame">{{149, 4}, {73, 19}}</string>
 										<reference key="NSSuperview" ref="63197479"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="33760880"/>
 										<string key="NSReuseIdentifierKey">_NS:161</string>
 										<bool key="NSEnabled">YES</bool>
@@ -258,7 +251,6 @@
 										<int key="NSvFlags">289</int>
 										<string key="NSFrame">{{86, 4}, {55, 19}}</string>
 										<reference key="NSSuperview" ref="63197479"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="215733414"/>
 										<string key="NSReuseIdentifierKey">_NS:161</string>
 										<bool key="NSEnabled">YES</bool>
@@ -281,7 +273,6 @@
 								</array>
 								<string key="NSFrameSize">{230, 119}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="35403349"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<string key="NSClassName">NSView</string>
@@ -291,7 +282,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{99, 68}, {109, 18}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="385243222"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
@@ -327,7 +317,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{16, 69}, {84, 18}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="519420913"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
@@ -354,7 +343,6 @@
 								<int key="NSvFlags">268</int>
 								<string key="NSFrame">{{3, 89}, {75, 22}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="597875599"/>
 								<string key="NSReuseIdentifierKey">_NS:179</string>
 								<bool key="NSEnabled">YES</bool>
@@ -364,7 +352,7 @@
 									<object class="NSFont" key="NSSupport">
 										<bool key="IBIsSystemFont">YES</bool>
 										<double key="NSSize">12</double>
-										<int key="NSfFlags">4883</int>
+										<int key="NSfFlags">787</int>
 									</object>
 									<string key="NSCellIdentifier">_NS:179</string>
 									<reference key="NSControlView" ref="33760880"/>
@@ -423,7 +411,6 @@
 								<int key="NSvFlags">270</int>
 								<string key="NSFrame">{{17, 53}, {184, 14}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="48357302"/>
 								<string key="NSReuseIdentifierKey">_NS:3936</string>
 								<bool key="NSEnabled">YES</bool>
@@ -448,7 +435,6 @@
 								<int key="NSvFlags">1289</int>
 								<string key="NSFrame">{{206, 52}, {16, 16}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="684683851"/>
 								<string key="NSReuseIdentifierKey">_NS:3954</string>
 								<int key="NSpiFlags">28938</int>
@@ -459,7 +445,6 @@
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{86, 89}, {136, 22}}</string>
 								<reference key="NSSuperview" ref="405004481"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="330255548"/>
 								<bool key="NSViewIsLayerTreeHost">YES</bool>
 								<bool key="NSEnabled">YES</bool>
@@ -517,7 +502,6 @@
 						</array>
 						<string key="NSFrame">{{0, 499}, {230, 119}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="63197479"/>
 						<string key="NSClassName">MHToolbarBackgroundView</string>
 					</object>
@@ -534,13 +518,8 @@
 										<int key="NSvFlags">4352</int>
 										<string key="NSFrameSize">{230, 468}</string>
 										<reference key="NSSuperview" ref="851399629"/>
-										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="401352097"/>
 										<string key="NSReuseIdentifierKey">_NS:1071</string>
-										<object class="NSVibrantLightAppearance" key="NSAppearance">
-											<string key="NSAppearanceName">NSAppearanceNameVibrantLight</string>
-											<string key="NSAppearanceBundleIdentifier">com.apple.systemappearance</string>
-										</object>
 										<bool key="NSEnabled">YES</bool>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										<bool key="NSControlAllowsExpansionToolTips">YES</bool>
@@ -621,17 +600,16 @@
 								</array>
 								<string key="NSFrameSize">{230, 468}</string>
 								<reference key="NSSuperview" ref="684683851"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="154414427"/>
 								<string key="NSReuseIdentifierKey">_NS:1069</string>
 								<reference key="NSDocView" ref="154414427"/>
+								<bool key="NSAutomaticallyAdjustsContentInsets">YES</bool>
 							</object>
 							<object class="NSScroller" id="401352097">
 								<reference key="NSNextResponder" ref="684683851"/>
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{224, 17}, {15, 102}}</string>
 								<reference key="NSSuperview" ref="684683851"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="249114073"/>
 								<string key="NSReuseIdentifierKey">_NS:1094</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -646,7 +624,6 @@
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 338}, {228, 15}}</string>
 								<reference key="NSSuperview" ref="684683851"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="141726827"/>
 								<string key="NSReuseIdentifierKey">_NS:1096</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -660,7 +637,6 @@
 						</array>
 						<string key="NSFrame">{{0, 31}, {230, 468}}</string>
 						<reference key="NSSuperview" ref="1005"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="851399629"/>
 						<string key="NSReuseIdentifierKey">_NS:1067</string>
 						<int key="NSsFlags">133680</int>
@@ -674,14 +650,12 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{230, 617}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="405004481"/>
-				<string key="NSClassName">NSVisualEffectView</string>
+				<string key="NSClassName">NSView</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
@@ -1333,326 +1307,10 @@
 			<nil key="sourceID"/>
 			<int key="maxID">80</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">FinderController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="collapseAll:">id</string>
-						<string key="expandAll:">id</string>
-						<string key="handleOutlineViewDoubleClick:">id</string>
-						<string key="performSearch:">id</string>
-						<string key="replaceAll:">id</string>
-						<string key="replaceSelected:">id</string>
-						<string key="selectMode:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="collapseAll:" id="141797668">
-							<string key="name">collapseAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="expandAll:" id="415333929">
-							<string key="name">expandAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="handleOutlineViewDoubleClick:" id="661137965">
-							<string key="name">handleOutlineViewDoubleClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="performSearch:" id="467522264">
-							<string key="name">performSearch:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="replaceAll:" id="975570191">
-							<string key="name">replaceAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="replaceSelected:" id="541960886">
-							<string key="name">replaceSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectMode:" id="838490938">
-							<string key="name">selectMode:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">searchField</string>
-						<string key="NS.object.0">NSSearchField</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">searchField</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0" id="261022084">
-							<string key="name">searchField</string>
-							<string key="candidateClassName">NSSearchField</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/src/Finder/FinderController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FinderController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="collapseAll:">id</string>
-						<string key="expandAll:">id</string>
-						<string key="handleOutlineViewDoubleClick:">id</string>
-						<string key="performSearch:">id</string>
-						<string key="replaceAll:">id</string>
-						<string key="replaceSelected:">id</string>
-						<string key="selectMode:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="collapseAll:">
-							<string key="name">collapseAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="expandAll:">
-							<string key="name">expandAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="handleOutlineViewDoubleClick:">
-							<string key="name">handleOutlineViewDoubleClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="performSearch:">
-							<string key="name">performSearch:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="replaceAll:">
-							<string key="name">replaceAll:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="replaceSelected:">
-							<string key="name">replaceSelected:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="selectMode:">
-							<string key="name">selectMode:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="bottomBarView">NSView</string>
-						<string key="caseSensitiveCheckbox">NSButton</string>
-						<string key="jumpToButton">HHValidatedButton</string>
-						<string key="modeSelector">NSPopUpButton</string>
-						<string key="outlineView">NSOutlineView</string>
-						<string key="progressIndicator">NSProgressIndicator</string>
-						<string key="replaceAllButton">HHValidatedButton</string>
-						<string key="replaceButton">HHValidatedButton</string>
-						<string key="replaceText">NSTextField</string>
-						<string key="replaceView">NSView</string>
-						<string key="scrollview">NSScrollView</string>
-						<string key="searchWholeWordsCheckbox">NSButton</string>
-						<string key="statusLabel">NSTextField</string>
-						<string key="topbarView">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="bottomBarView" id="87662380">
-							<string key="name">bottomBarView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="caseSensitiveCheckbox" id="902195294">
-							<string key="name">caseSensitiveCheckbox</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="jumpToButton" id="1036848301">
-							<string key="name">jumpToButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="modeSelector" id="677362411">
-							<string key="name">modeSelector</string>
-							<string key="candidateClassName">NSPopUpButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="outlineView" id="1040160328">
-							<string key="name">outlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="progressIndicator" id="36408661">
-							<string key="name">progressIndicator</string>
-							<string key="candidateClassName">NSProgressIndicator</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="replaceAllButton" id="193509789">
-							<string key="name">replaceAllButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="replaceButton" id="1039758173">
-							<string key="name">replaceButton</string>
-							<string key="candidateClassName">HHValidatedButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="replaceText" id="484159422">
-							<string key="name">replaceText</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="replaceView" id="412309574">
-							<string key="name">replaceView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="scrollview" id="516241811">
-							<string key="name">scrollview</string>
-							<string key="candidateClassName">NSScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchWholeWordsCheckbox" id="769991778">
-							<string key="name">searchWholeWordsCheckbox</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="statusLabel" id="284201808">
-							<string key="name">statusLabel</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="topbarView" id="222357003">
-							<string key="name">topbarView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/src/Finder/FinderController.m</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FinderController</string>
-					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="collapseAll:">id</string>
-						<string key="expandAll:">id</string>
-						<string key="handleOutlineViewDoubleClick:">id</string>
-						<string key="performSearch:">id</string>
-						<string key="replaceAll:">id</string>
-						<string key="replaceSelected:">id</string>
-						<string key="selectMode:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<reference key="collapseAll:" ref="141797668"/>
-						<reference key="expandAll:" ref="415333929"/>
-						<reference key="handleOutlineViewDoubleClick:" ref="661137965"/>
-						<reference key="performSearch:" ref="467522264"/>
-						<reference key="replaceAll:" ref="975570191"/>
-						<reference key="replaceSelected:" ref="541960886"/>
-						<reference key="selectMode:" ref="838490938"/>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="bottomBarView">NSView</string>
-						<string key="caseSensitiveCheckbox">NSButton</string>
-						<string key="jumpToButton">HHValidatedButton</string>
-						<string key="modeSelector">NSPopUpButton</string>
-						<string key="outlineView">NSOutlineView</string>
-						<string key="progressIndicator">NSProgressIndicator</string>
-						<string key="replaceAllButton">HHValidatedButton</string>
-						<string key="replaceButton">HHValidatedButton</string>
-						<string key="replaceText">NSTextField</string>
-						<string key="replaceView">NSView</string>
-						<string key="scrollview">NSScrollView</string>
-						<string key="searchField">NSSearchField</string>
-						<string key="searchWholeWordsCheckbox">NSButton</string>
-						<string key="statusLabel">NSTextField</string>
-						<string key="topbarView">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<reference key="bottomBarView" ref="87662380"/>
-						<reference key="caseSensitiveCheckbox" ref="902195294"/>
-						<reference key="jumpToButton" ref="1036848301"/>
-						<reference key="modeSelector" ref="677362411"/>
-						<reference key="outlineView" ref="1040160328"/>
-						<reference key="progressIndicator" ref="36408661"/>
-						<reference key="replaceAllButton" ref="193509789"/>
-						<reference key="replaceButton" ref="1039758173"/>
-						<reference key="replaceText" ref="484159422"/>
-						<reference key="replaceView" ref="412309574"/>
-						<reference key="scrollview" ref="516241811"/>
-						<reference key="searchField" ref="261022084"/>
-						<reference key="searchWholeWordsCheckbox" ref="769991778"/>
-						<reference key="statusLabel" ref="284201808"/>
-						<reference key="topbarView" ref="222357003"/>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/FinderController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">FirstResponder</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBUserSource</string>
-						<string key="minorKey"/>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">HHValidatedButton</string>
-					<string key="superclassName">NSButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/HHValidatedButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">HHValidatedButton</string>
-					<string key="superclassName">NSButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/HHValidatedButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHOutlineView</string>
-					<string key="superclassName">NSOutlineView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/src/Document/MHOutlineView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHOutlineView</string>
-					<string key="superclassName">NSOutlineView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHOutlineView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHToolbarBackgroundView</string>
-					<string key="superclassName">SBGradientView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/src/ControlsTabBar/MHToolbarBackgroundView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MHToolbarBackgroundView</string>
-					<string key="superclassName">SBGradientView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MHToolbarBackgroundView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SBGradientView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../TeXnicle/TeXEditor/Views/SBGradientView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SBGradientView</string>
-					<string key="superclassName">NSView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SBGradientView.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1080" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
 			<integer value="4600" key="NS.object.0"/>
@@ -1661,7 +1319,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSMenuCheckmark">{12, 12}</string>
-			<string key="NSMenuMixedState">{10, 3}</string>
+			<string key="NSMenuMixedState">{10, 2}</string>
 			<string key="NSSwitch">{15, 15}</string>
 			<string key="rightArrow">{512, 512}</string>
 		</dictionary>

@@ -201,7 +201,6 @@
 		2545865113E936FE00461494 /* leftArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864E13E936FE00461494 /* leftArrow.icns */; };
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
-		2547DFB71409FE5C002C0E2F /* MHStrokedVibrantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */; };
 		2548303418422D650097060F /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
 		25487E48181645B700C0D61C /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25487E47181645B600C0D61C /* TeXnicle.icns */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
@@ -241,6 +240,7 @@
 		256225D115CA943200091A8C /* NSApplication+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 256225D015CA943200091A8C /* NSApplication+Palette.m */; };
 		2562782B151A061300778FFB /* noerror.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25627829151A061300778FFB /* noerror.icns */; };
 		2562782C151A061300778FFB /* error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2562782A151A061300778FFB /* error.icns */; };
+		2566099719CDE2D5009B1A14 /* MHStrokedVibrantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2566099619CDE2D5009B1A14 /* MHStrokedVibrantView.m */; };
 		2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567272716E49FEC004B7C4A /* NSImage+Resize.m */; };
 		2567272A16E4A246004B7C4A /* outline_part.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272916E4A246004B7C4A /* outline_part.icns */; };
 		2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272B16E4ADD7004B7C4A /* outline_chapter.icns */; };
@@ -1027,8 +1027,6 @@
 		2545864E13E936FE00461494 /* leftArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = leftArrow.icns; sourceTree = "<group>"; };
 		2545864F13E936FE00461494 /* downArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = downArrow.icns; sourceTree = "<group>"; };
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
-		2547DFB51409FE5C002C0E2F /* MHStrokedVibrantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHStrokedVibrantView.h; sourceTree = "<group>"; };
-		2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHStrokedVibrantView.m; sourceTree = "<group>"; };
 		2548303318422D600097060F /* log12.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log12.log; sourceTree = "<group>"; };
 		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
 		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
@@ -1096,6 +1094,8 @@
 		256225D015CA943200091A8C /* NSApplication+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+Palette.m"; sourceTree = "<group>"; };
 		25627829151A061300778FFB /* noerror.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = noerror.icns; sourceTree = "<group>"; };
 		2562782A151A061300778FFB /* error.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = error.icns; sourceTree = "<group>"; };
+		2566099519CDE2D5009B1A14 /* MHStrokedVibrantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MHStrokedVibrantView.h; path = TeXnicle/Engine/MHStrokedVibrantView.h; sourceTree = SOURCE_ROOT; };
+		2566099619CDE2D5009B1A14 /* MHStrokedVibrantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MHStrokedVibrantView.m; path = TeXnicle/Engine/MHStrokedVibrantView.m; sourceTree = SOURCE_ROOT; };
 		2566D90F1783EB2500BA4755 /* TeXProject 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 10.xcdatamodel"; sourceTree = "<group>"; };
 		2566D9101783EB2500BA4755 /* TeXProject 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 11.xcdatamodel"; sourceTree = "<group>"; };
 		2566D9111783EB2500BA4755 /* TeXProject 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 12.xcdatamodel"; sourceTree = "<group>"; };
@@ -1996,6 +1996,8 @@
 		25152A1D138F82F900307054 /* Console */ = {
 			isa = PBXGroup;
 			children = (
+				2566099519CDE2D5009B1A14 /* MHStrokedVibrantView.h */,
+				2566099619CDE2D5009B1A14 /* MHStrokedVibrantView.m */,
 				25B663401965B7630070A050 /* MHStrokedFiledView.h */,
 				25B663411965B7630070A050 /* MHStrokedFiledView.m */,
 				251FC6ED1392708800DB2E3B /* Console.xib */,
@@ -2161,8 +2163,6 @@
 				25ECE9101408FADE0050CB94 /* TPEngineSettingsController.h */,
 				25ECE9111408FADE0050CB94 /* TPEngineSettingsController.m */,
 				25ECE9121408FADE0050CB94 /* TPEngineSettingsController.xib */,
-				2547DFB51409FE5C002C0E2F /* MHStrokedVibrantView.h */,
-				2547DFB61409FE5C002C0E2F /* MHStrokedVibrantView.m */,
 				250C173A140926CB00BCEA3D /* TPEnginesEditor.h */,
 				250C173B140926CB00BCEA3D /* TPEnginesEditor.m */,
 				250C173C140926CB00BCEA3D /* TPEnginesEditor.xib */,
@@ -3985,12 +3985,12 @@
 				250C173D140926CB00BCEA3D /* TPEnginesEditor.m in Sources */,
 				250C17421409295500BCEA3D /* TPEngineEditor.m in Sources */,
 				25DA73A514093CAD007ACA36 /* BashColoringEngine.m in Sources */,
-				2547DFB71409FE5C002C0E2F /* MHStrokedVibrantView.m in Sources */,
 				252CF58E140AA1D100290199 /* UKXattrMetadataStore.m in Sources */,
 				25AD69EB140E974100C131A6 /* MHFileReader.m in Sources */,
 				25C1B5E21410B09E001B02B0 /* KSPathUtilities.m in Sources */,
 				25A1FDE81414D53E00A89334 /* NSString+WordRanges.m in Sources */,
 				253A3AB71457D212007C4D8C /* MHMiniConsoleBackground.m in Sources */,
+				2566099719CDE2D5009B1A14 /* MHStrokedVibrantView.m in Sources */,
 				253A3ABC1457D31C007C4D8C /* MHMiniConsoleViewController.m in Sources */,
 				253A3AC01457D895007C4D8C /* MHConsoleManager.m in Sources */,
 				25A1B70B1458820A008CF5E7 /* MHDocumentController.m in Sources */,

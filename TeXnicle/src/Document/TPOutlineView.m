@@ -46,9 +46,9 @@
 {
   self.showMenu = YES;
   
+  [self setRowHeight:22.0];
   
   if ([NSApp isYosemite]) {
-    [self setRowHeight:22.0];
     [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
   } else {
     [self setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleRegular];

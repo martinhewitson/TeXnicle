@@ -357,6 +357,17 @@
   [self.openDocuments setup];
   [self.openDocuments disableTextView];
   
+  // set frame of tabbar
+  NSRect r = self.psmTabBarControl.frame;
+  NSLog(@"Rect %@", NSStringFromRect(r));
+  if ([NSApp isYosemite]) {
+    r.origin.y -=1;
+    r.size.height -=1;
+    [self.psmTabBarControl setFrame:r];
+  } else {
+    [self.psmTabBarControl setFrame:r];
+  }
+  
   // setup status view
   self.statusViewController = [[TPStatusViewController alloc] init];
   [self.statusViewController.view setFrame:[self.statusViewContainer bounds]];

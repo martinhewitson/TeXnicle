@@ -185,7 +185,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // set color for line highlighting
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
   
-	[[self layoutManager] setAllowsNonContiguousLayout:YES];
+	[[self layoutManager] setAllowsNonContiguousLayout:NO];
   [self turnOffWrapping];
   [self observePreferences];
   

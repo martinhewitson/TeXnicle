@@ -132,8 +132,6 @@
   if ([NSApp isYosemite] == NO) {
     TPTheme *theme = [TPThemeManager currentTheme];
     [self.outlineView setBackgroundColor:theme.outlineBackgroundColor];
-  } else {
-    [self.outlineView setBackgroundColor:[NSColor clearColor]];
   }
 }
 

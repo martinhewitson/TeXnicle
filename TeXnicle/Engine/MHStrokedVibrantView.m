@@ -26,6 +26,13 @@
 //
 
 #import "MHStrokedVibrantView.h"
+#import "NSApplication+SystemVersion.h"
+
+@interface MHStrokedVibrantView ()
+
+@property (strong) id containerview;
+
+@end
 
 @implementation MHStrokedVibrantView
 
@@ -37,6 +44,7 @@
 - (id)initWithFrame:(NSRect)frame
 {
   self = [super initWithFrame:frame];
+  
   if (self) {
     // Initialization code here.
     self.fillColor = [NSColor controlBackgroundColor];
@@ -46,7 +54,6 @@
   
   return self;
 }
-
 
 - (void)drawRect:(NSRect)dirtyRect
 {

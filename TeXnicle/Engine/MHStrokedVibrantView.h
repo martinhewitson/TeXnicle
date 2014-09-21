@@ -27,7 +27,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MHStrokedVibrantView : NSVisualEffectView
+
+@interface MHStrokedVibrantView : NSView
 
 @property (strong) NSColor *fillColor;
 @property (strong) NSColor *strokeColor;

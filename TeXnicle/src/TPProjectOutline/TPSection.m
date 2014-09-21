@@ -170,7 +170,7 @@
   NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.name]; 
     
   [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
-  [att addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, [att length])];
+//  [att addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, [att length])];
   if (showDetails) {
     // type, file
     NSAttributedString *blank = [[NSAttributedString alloc] initWithString:@"  "];
@@ -178,7 +178,7 @@
     NSString *typeFileStr = [NSString stringWithFormat:@"(%@, %@)", self.type.name, [self filename]];
     NSMutableAttributedString *typeStr = [[NSMutableAttributedString alloc] initWithString:typeFileStr]; 
     [typeStr addAttribute:NSForegroundColorAttributeName value:[NSColor lightGrayColor] range:NSMakeRange(0, [typeStr length])];
-    [typeStr addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, [typeStr length])];
+//    [typeStr addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, [typeStr length])];
     [typeStr addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSMiniControlSize]] range:NSMakeRange(0, [typeStr length])];
     [att appendAttributedString:typeStr];
   }
