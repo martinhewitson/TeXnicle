@@ -359,7 +359,7 @@
   
   // set frame of tabbar
   NSRect r = self.psmTabBarControl.frame;
-  NSLog(@"Rect %@", NSStringFromRect(r));
+  //NSLog(@"Rect %@", NSStringFromRect(r));
   if ([NSApp isYosemite]) {
     r.origin.y -=1;
     r.size.height -=1;
