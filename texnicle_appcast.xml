@@ -6,6 +6,58 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    <!-- Version 2.2.12 -->
+    <item>
+      <title>Version 2.2.12 (build 2438)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.12</h2>
+        
+        <p>
+        
+        <h3>General</h3>
+        <ul>
+          <li>Updated to work on Yosemite.</li>
+          <li>Added possibility to typeset an individual file via the project tree context menu.</li>
+          <li>Various minor bug fixes.</li>
+        </ul>
+        <h3>Outline View</h3>
+        <ul>
+          <li>Improved ConTeXt support (assuming you add \startchapter etc in Preferences -> Outline).</li>
+          <li>New 'focus' button which displays only the sections relevant to the current file.</li>
+          <li>Added support for brace-less \input \include commands.</li>
+          <li>Improved subfiles support in outline view.</li>
+        </ul>
+        <h3>Code Clippings Library</h3>
+        <ul>
+          <li>Added the ability to export the code clippings library.</li>
+          <li>Added the ability to import a code clippings library.</li>
+          <li>Other minor fixes and improvements to the library view.</li>
+        </ul>
+        <h3>Editor</h3>
+        <ul>
+        <li>Improved autocompletion of citation references, especially for \cites command.</li>
+        <li>Improved bibliography and citation autocomplete integration.</li>
+        <li>Minor improvements to handling of brackets. TeXnicle no longer inserts a closing bracket if it already exists.</li>
+        <li>Popup completion windows now respect the user's theme.</li>
+        <li>Fixed a bug which caused the quick-spell popup window to placed wrongly on screen.</li>
+        <li>Some theme text highlighting elements can now be bold.</li>
+        <li>Added a preference to enable automatic replacement of closing quotes.</li>
+        <li>Added a preference to customize the replacement string for opening double quotes.</li>
+        <li>Some performance improvements.</li>
+        </ul>
+        
+        </p>
+      ]]></description>
+      <pubDate>5th October 2014</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.12.zip"
+      sparkle:shortVersionString="2.2.12"
+      sparkle:version="2438"
+      length="24636873"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFEMxw+sCkwiW+SF5Ao6Fdn9aZUxpAhRz4K+knHLkcHyfMLHLN0QmEcWrsw=="
+      />
+    </item>
+
     
     <!-- Version 2.2.11 -->
     <item>
