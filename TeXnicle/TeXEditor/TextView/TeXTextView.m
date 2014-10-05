@@ -3749,7 +3749,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     return;
   }
   
-  int lineWrapLength = self.wrapAt; //[[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
+  NSInteger lineWrapLength = self.wrapAt; //[[[NSUserDefaults standardUserDefaults] valueForKey:TELineLength] intValue];
 	// check the length of this line and insert newline if required
 	// - we only do this if we are at the end of a line
 	NSString *str = [[self textStorage] string];
