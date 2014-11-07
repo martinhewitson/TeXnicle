@@ -348,9 +348,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
         
         
         
-        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
-                                                                withObject:nil
-                                                             waitUntilDone:YES];
+//        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
+//                                                                withObject:nil
+//                                                             waitUntilDone:YES];
         
         [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
         
@@ -508,7 +508,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     if (sr) {
       if (![sr isEqual:@""]) {
         NSRect r = NSRectFromString(sr);
-        //      NSLog(@"Setting visible rect: %@", NSStringFromRect(r));
+        r.origin.x = -self.texEditorViewController.textView.textContainerInset.width;
+        //NSLog(@"Setting visible rect: %@", NSStringFromRect(r));
         [self.texEditorViewController.textView scrollRectToVisible:r];
       }
     }
