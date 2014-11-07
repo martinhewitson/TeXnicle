@@ -45,6 +45,8 @@
 @property (unsafe_unretained) IBOutlet NSTextField *templateNameTextField;
 @property (unsafe_unretained) IBOutlet NSTextField *templateDescriptionField;
 
+@property (strong) TPProjectTemplateViewer *templateViewer;
+
 @end
 
 @implementation TPProjectTemplateCreator
@@ -149,7 +151,7 @@
   } else {
   
     // create template bundle
-    [[self.delegate project] saveTemplateBundleWithName:aName description:self.templateDescriptionField.stringValue toURL:url];
+    self.templateViewer = [[self.delegate project] saveTemplateBundleWithName:aName description:self.templateDescriptionField.stringValue toURL:url];
     
     [NSApp endSheet:self.window];
     [self.window orderOut:self];
