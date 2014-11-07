@@ -95,7 +95,7 @@ NSString * const TPShouldClearBoldHighlightingNotification = @"TPShouldClearBold
     self.selectedTheme = [[TPThemeManager sharedManager] themeNamed:@"texnicle"];
   }
   
-  [self registerThemeChange];
+//  [self registerThemeChange];
   [self performSelector:@selector(restoreSelectedTheme) withObject:nil afterDelay:0];
 }
 
