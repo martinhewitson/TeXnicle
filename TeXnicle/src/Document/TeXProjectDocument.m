@@ -620,6 +620,10 @@
   [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   
+//  if ([NSApp isYosemite]) {
+//    [self.mainWindow.toolbar setSizeMode:NSToolbarSizeModeSmall];
+//    [self.mainWindow setTitleVisibility:NSWindowTitleHidden];
+//  }
 }
 
 - (void) restoreOpenTabs
@@ -670,6 +674,9 @@
   
   // clear history
   [self clearTabHistory];
+  
+  // make sure the scrolled point is up to date
+  [self.openDocuments performSelector:@selector(setCursorAndScrollPositionForCurrentDoc) withObject:nil afterDelay:0];
 }
 
 - (void) handleUserDefaultsChanged:(NSNotification*)aNote
