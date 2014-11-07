@@ -167,13 +167,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
     self.textFinder = [[NSTextFinder alloc] init];
-    [self.textFinder setClient:self];
-    [self.textFinder setFindBarContainer:[self enclosingScrollView]];
-    [self setUsesFindBar:YES];
-    [self setIncrementalSearchingEnabled:YES];
+//    [self.textFinder setClient:self];
+//    [self.textFinder setFindBarContainer:[self enclosingScrollView]];
+//    [self setUsesFindBar:YES];
+//    [self setIncrementalSearchingEnabled:YES];
+    [self setupTextFinder];
   } else {
     [self setUsesFindPanel:YES];
   }
+  
+  [self setTextContainerInset:NSMakeSize(5.0, 5.0)];
   
   [self setAllowsUndo:YES];
   [self setAllowsDocumentBackgroundColorChange:YES];
@@ -241,12 +244,39 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	[scrollView setRulersVisible:YES];
 }
 
+//- (void) performTextFinderAction:(id)sender
+//{
+//  [self.textFinder setClient:self];
+//  [super performTextFinderAction:sender];
+//}
+
 - (void)setTextStorage:(NSTextStorage*)textStorage
 {
+//  NSLog(@"---------------- Change text storage ------------");
+  
+//  typedef NS_ENUM(NSInteger, NSTextFinderAction) {
+//    NSTextFinderActionShowFindInterface = 1,
+//    NSTextFinderActionNextMatch = 2,
+//    NSTextFinderActionPreviousMatch = 3,
+//    NSTextFinderActionReplaceAll = 4,
+//    NSTextFinderActionReplace = 5,
+//    NSTextFinderActionReplaceAndFind = 6,
+//    NSTextFinderActionSetSearchString = 7,
+//    NSTextFinderActionReplaceAllInSelection = 8,
+//    NSTextFinderActionSelectAll = 9,
+//    NSTextFinderActionSelectAllInSelection = 10,
+//    NSTextFinderActionHideFindInterface = 11,
+//    NSTextFinderActionShowReplaceInterface = 12,
+//    NSTextFinderActionHideReplaceInterface = 13
+//  } NS_ENUM_AVAILABLE_MAC(10_7);
+  
+//  [self.textFinder performAction:NSTextFinderActionHideFindInterface];
+  
   // update layout so that the findbar gets the correct notifications and the search works
-  [self noteStringWillChange];
-  [self.textFinder setClient:nil];
-  [self.textFinder setFindBarContainer:nil];
+//  [self noteStringWillChange];
+  
+//  [self.textFinder setClient:nil];
+//  [self.textFinder setFindBarContainer:nil];
   
   // stop observations
   [self stopObservingTextStorage];
@@ -254,25 +284,58 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // now change the text in the textview
 //  NSString *string = [self string];
 //  NSString *newString = [textStorage string];
+//  NSLog(@"Swapping in text storage: %@", [newString substringToIndex:MIN(30, [newString length])]);
+  
 //  [self shouldChangeTextInRange:NSMakeRange(0, [string length]) replacementString:newString];
   [self.layoutManager replaceTextStorage:textStorage];
+  
+
+  
+//  [self.layoutManager ensureLayoutForTextContainer:self.textContainer];
+//  [self setNeedsLayout:YES];
+//  [self setNeedsDisplay:YES];
+  
 //  [self didChangeText];
   [self performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
   [self observeTextStorage];
   
+  [(TeXEditorViewController*)self.delegate performSelector:@selector(didChangeTextStorage) withObject:nil afterDelay:0.1];
   
+//  [self noteStringWillChange];
+//  [self performSelectorOnMainThread:@selector(updateFindBarSearch) withObject:nil waitUntilDone:YES];
+  
+//  [self performSelector:@selector(setupTextFinder) withObject:nil afterDelay:0];
+//  [self performSelector:@selector(noteStringWillChange) withObject:nil afterDelay:0];
+  
+  
+}
+
+- (void)updateFindBarSearch
+{
+  [self noteStringWillChange];
+  id <NSTextFinderBarContainer> findBarContainer = self.textFinder.findBarContainer;
+  if ([findBarContainer isFindBarVisible]) {
+    [self performTextFinderAction:self];
+  }
+}
+
+- (void)setupTextFinder
+{
+//  NSLog(@"Setup finder");
+//  self.textFinder = [[NSTextFinder alloc] init];
   [self.textFinder setClient:self];
   [self.textFinder setFindBarContainer:[self enclosingScrollView]];
   [self setUsesFindBar:YES];
   [self setIncrementalSearchingEnabled:YES];
-  
+//  NSLog(@"  finder client %@", self.textFinder.client);
+//  NSLog(@"  finder findbar container %@", self.textFinder.findBarContainer);
 }
 
 - (void) noteStringWillChange
 {
 //  NSLog(@"Updating string for text finder %@", self.textFinder);
   [self.textFinder cancelFindIndicator];
-  [self.textFinder findIndicatorNeedsUpdate];
+//  [self.textFinder findIndicatorNeedsUpdate];
   [self.textFinder noteClientStringWillChange];
 }
 
@@ -2814,9 +2877,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) drawViewBackgroundInRect:(NSRect)rect
 {
-//  NSLog(@"Drawing background %@", NSStringFromRect(rect));
+  //NSLog(@"Drawing background %@", NSStringFromRect(rect));
   
-//	[super drawViewBackgroundInRect:rect];
+	[super drawViewBackgroundInRect:rect];
 
   CGFloat w = rect.size.width;
   if (self.wrapStyle == TPHardWrap || self.wrapStyle == TPSoftWrap) {
@@ -4355,6 +4418,8 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 #pragma mark -
 #pragma mark findbar
 
+
+
 //- (void) cancelFind
 //{
 //  if ([self respondsToSelector:@selector(setUsesFindBar:)]) {
@@ -4362,14 +4427,37 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 //  }
 //}
 
-//- (NSString *)stringAtIndex:(NSUInteger)characterIndex effectiveRange:(NSRangePointer)outRange endsWithSearchBoundary:(BOOL *)outFlag
+//- (NSString*)string
 //{
-////  [[self textStorage] atta]
-//  NSRange r = *outRange;
-//  return [[self string] substringWithRange:NSMakeRange(characterIndex, r.length)];
+//  NSString *s = [super string];
+//  NSLog(@"*** Getting string %@...", [s substringToIndex:MIN(30, [s length])]);
+//  return s;
 //}
 
+-(NSUInteger) stringLength
+{
+//  NSLog(@"*** Getting string length...");
+  return [[super string] length];
+}
 
+- (NSString *)stringAtIndex:(NSUInteger)characterIndex effectiveRange:(NSRangePointer)outRange endsWithSearchBoundary:(BOOL *)outFlag
+{
+//  [[self textStorage] atta]
+  NSRange r = NSMakeRange(0, [[super string] length]);
+//  NSLog(@"*** Returning range %@", NSStringFromRange(r));
+  
+  *outRange = r;
+  *outFlag = YES;
+  return [super string];
+}
+
+/*
+ If the client cannot logically or efficiently flatten itself into a single string, then the following two methods should be used instead. These methods require the client to conceptually map its content to a single string, which is composed of a concatenation of all its substrings.
+ 
+ The first method asks for the string that contains the given characer index, which the client should return. This client should also return, by reference, the "effective range" of that substring in the full conceptually concatenated string. Finally, the client should return whether the substring ends with a "search boundary", meaning that NSTextFinder should not attempt to find any matches that overlap this boundary.
+ 
+ The client should report the full length of the conceptually concatenated string in the second model -- the sum of the lengths of all of its substrings.
+ */
 
 
 @end

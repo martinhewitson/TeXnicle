@@ -162,6 +162,12 @@
   [self performSelector:@selector(updateJumpBar) withObject:nil afterDelay:0];
 }
 
+- (void) didChangeTextStorage
+{
+  [self.sectionListController calculateSections:self];
+  [self checkSyntaxTimerFired];
+}
+
 
 #pragma mark -
 #pragma Control 

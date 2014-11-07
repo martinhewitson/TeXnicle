@@ -51,6 +51,7 @@
 
 - (void) tearDown;
 
+- (void) didChangeTextStorage;
 - (void) handleDocumentChanged:(NSNotification*)aNote;
 - (void) setupSyntaxChecker;
 - (void) stopSyntaxChecker;
