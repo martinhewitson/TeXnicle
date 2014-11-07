@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1060" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4457.6"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MHMiniConsoleViewController">
@@ -13,17 +13,17 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="1">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <customView id="3" customClass="MHMiniConsoleBackground">
-                    <rect key="frame" x="3" y="3" width="394" height="29"/>
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="8">
-                            <rect key="frame" x="0.0" y="1" width="394" height="27"/>
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="24"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingMiddle" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="9">
                                 <font key="font" metaFont="miniSystem"/>
@@ -40,19 +40,4 @@
             </subviews>
         </customView>
     </objects>
-    <classes>
-        <class className="MHMiniConsoleBackground" superclassName="SBGradientView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMiniConsoleBackground.h"/>
-        </class>
-        <class className="MHMiniConsoleViewController" superclassName="NSViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MHMiniConsoleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="progressIndicator" candidateClass="NSProgressIndicator"/>
-                <relationship kind="outlet" name="textField" candidateClass="NSTextField"/>
-            </relationships>
-        </class>
-        <class className="SBGradientView" superclassName="NSView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBGradientView.h"/>
-        </class>
-    </classes>
 </document>
