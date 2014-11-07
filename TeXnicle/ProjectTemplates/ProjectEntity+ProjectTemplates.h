@@ -27,10 +27,11 @@
 //
 
 #import "ProjectEntity.h"
+#import "TPProjectTemplateViewer.h"
 
 @interface ProjectEntity (ProjectTemplates)
 
-- (void) saveTemplateBundleWithName:(NSString*)aName description:(NSString*)aDescription toURL:(NSURL*)url;
+- (TPProjectTemplateViewer*) saveTemplateBundleWithName:(NSString*)aName description:(NSString*)aDescription toURL:(NSURL*)url;
 
 
 
