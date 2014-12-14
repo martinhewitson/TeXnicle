@@ -154,7 +154,7 @@
 
 - (void) handleChangesToUserDefaults:(NSNotification*)aNote
 {
-//  NSLog(@"User defaults changed");
+  //NSLog(@"User defaults changed");
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   self.showLineNumbers = [[defaults valueForKey:TEShowLineNumbers] boolValue];
   self.showCodeFolders = [[defaults valueForKey:TEShowCodeFolders] boolValue];
@@ -162,9 +162,11 @@
 
   NSRange visibleRange = [self.textView getVisibleRange];
   self.lastLineCount = NSNotFound;
+  [self resetLineNumbers];
   [self recalculateThickness];
   [self calculationsForTextRange:visibleRange];
   [self setNeedsDisplay:YES];
+  [self.textView setNeedsDisplay:YES];
 }
 
 - (void)setClientView:(NSView *)client
@@ -485,16 +487,16 @@
 //  NSLog(@"Last max line %ld: new max line %ld", [[newLineNumbers lastObject] number], _lastMaxVisibleLine);
   NSInteger newMaxLine = [[newLineNumbers lastObject] number];
   
-//  if (newMaxLine > _lastMaxVisibleLine || _forceThicknessRecalculation) {
-//    float oldThickness = [self ruleThickness];
-//    float newThickness = [self requiredThicknessForLineCount:lineCount];
-//    if (fabs(oldThickness - newThickness) > 1)
-//    {
-//      _newThickness = newThickness;
-//      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
-//    }
-//    _forceThicknessRecalculation = NO;
-//  }
+  if (newMaxLine > _lastMaxVisibleLine || _forceThicknessRecalculation) {
+    float oldThickness = [self ruleThickness];
+    float newThickness = [self requiredThicknessForLineCount:lineCount];
+    if (fabs(oldThickness - newThickness) > 1)
+    {
+      _newThickness = newThickness;
+      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
+    }
+    _forceThicknessRecalculation = NO;
+  }
   
   self.lineNumbers = newLineNumbers;
   self.codeFolders = newFolders;
@@ -835,7 +837,7 @@
   
 	if (!includeLineNumbers) {
 		if (!includeCodeFolders)
-			return 1.0;
+			return 0.0;
 		
 		return ceilf(kFOLDING_GUTTER);
 	}
