@@ -36,7 +36,7 @@
 #define TPPopupListSpell 2
 
 
-@interface TPPopupListWindowController : NSViewController <NSTextFieldDelegate> {
+@interface TPPopupListWindowController : NSViewController <NSTextFieldDelegate, NSTableViewDelegate> {
 @private
 	IBOutlet NSTextField *titleView;
 	NSWindow *parentWindow;

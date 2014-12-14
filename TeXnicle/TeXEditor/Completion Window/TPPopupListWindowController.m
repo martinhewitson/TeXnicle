@@ -306,13 +306,27 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
     
     BOOL isHighlighted = [tableView selectedRow] == row;
     
+    
     if (isHighlighted && [value respondsToSelector:@selector(alternativeAttributedString)]) {
-      return [value performSelector:@selector(alternativeAttributedString)];
+      NSAttributedString *str = [value performSelector:@selector(alternativeAttributedString)];
+//      NSLog(@"alternativeAttributedString: %@", str);
+      return str;
     } else if ([value respondsToSelector:@selector(attributedString)]) {
-      return [value attributedString];
+      NSAttributedString *str = [value attributedString];
+//      NSLog(@"attributedString: %@", str);
+      return str;
     } else if ([value respondsToSelector:@selector(string)]) {
-      return [value string];
+      NSString *str = [value string];
+//      NSLog(@"string: %@", str);
+      NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
+      return att;
     } else {
+      // if we have a string, then we should color it if necessary
+      if ([value isKindOfClass:[NSString class]]) {
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:value];
+        return att;
+      }
+      
       return value;
     }
     
@@ -326,7 +340,13 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
   TPThemeManager *tm = [TPThemeManager sharedManager];
   TPTheme *theme = tm.currentTheme;
   NSTextFieldCell *cell = [tableColumn dataCell];
-  [cell setTextColor:theme.documentTextColor];
+  
+  BOOL isHighlighted = [tableView selectedRow] == row;
+  if (isHighlighted) {
+    [cell setTextColor:theme.documentEditorBackgroundColor];
+  } else {
+    [cell setTextColor:theme.documentTextColor];
+  }
   return cell;
 }
 
