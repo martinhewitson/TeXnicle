@@ -464,6 +464,7 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
     [self setCurrentDoc:[tabViewItem identifier]];
     [self setCursorAndScrollPositionForCurrentDoc];
     [self.texEditorViewController.textView applyFontAndColor:NO];
+    [self.texEditorViewController.textView updateEditorRuler];
   }
 }
 
