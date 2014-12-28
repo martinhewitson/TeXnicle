@@ -343,7 +343,7 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
   
   BOOL isHighlighted = [tableView selectedRow] == row;
   if (isHighlighted) {
-    [cell setTextColor:theme.documentEditorBackgroundColor];
+    [cell setTextColor:theme.documentEditorSelectionColor];
   } else {
     [cell setTextColor:theme.documentTextColor];
   }
