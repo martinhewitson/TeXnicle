@@ -701,6 +701,14 @@
   
   // adjust the close and close tab menus
   [self specialiseCloseMenu:YES];
+  
+  // reload PDF, if it doesn't exist, thus ensuring the PDF is removed from display
+  NSString *pdfPath = [self compiledDocumentPath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  if ([fm fileExistsAtPath:pdfPath] == NO) {
+    [self.pdfViewerController redisplayDocument];
+  }
+
 }
 
 - (void) specialiseCloseMenu:(BOOL)state
@@ -4045,7 +4053,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   MHSynctexController *sync = [[MHSynctexController alloc] initWithEditor:self.texEditorViewController.textView pdfViews:pdfViews];
   NSInteger lineNumber = NSNotFound;
-  NSString *sourcefile = [sync sourceFileForPDFFile:[self compiledDocumentPath] lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
+  
+  // check the PDF exists, otherwise we get a problem
+  NSString *pdfPath = [self compiledDocumentPath];
+  NSFileManager *fm = [NSFileManager defaultManager];
+  
+  if (pdfPath == nil || [fm fileExistsAtPath:pdfPath] == NO) {
+    return;
+  }
+  
+  NSString *sourcefile = [sync sourceFileForPDFFile:pdfPath lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
   
   sourcefile = [sourcefile stringByStandardizingPath];
   [self selectLine:lineNumber inFileAtPath:sourcefile];
