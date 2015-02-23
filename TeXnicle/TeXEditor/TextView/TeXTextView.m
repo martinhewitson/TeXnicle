@@ -714,6 +714,35 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self replaceCharactersInRange:sel withString:newString];
       [self didChangeText];
     }
+  } else {
+    
+    // check if we have whitespace before
+    NSString *prepad = @"";
+    NSString *postpad = @"";
+    if (sel.location > 0) {
+      unichar c = [self.string characterAtIndex:sel.location-1];
+      if ([whitespaceCharacterSet characterIsMember:c] == NO &&
+          [newLineCharacterSet characterIsMember:c] == NO) {
+        prepad = @" ";
+      }
+    }
+    
+    if (NSMaxRange(sel) < [self.string length]-1) {
+      unichar c = [self.string characterAtIndex:NSMaxRange(sel)];
+      if ([whitespaceCharacterSet characterIsMember:c] == NO &&
+          [newLineCharacterSet characterIsMember:c] == NO) {
+        postpad = @" ";
+      }
+    }
+    
+    NSString *newString = [NSString stringWithFormat:@"%@\\%@{}%@", prepad, command, postpad];
+    if ([self shouldChangeTextInRange:sel replacementString:newString]) {
+      [self replaceCharactersInRange:sel withString:newString];
+      [self didChangeText];
+    }
+    sel = [self selectedRange];
+    NSRange newSel = NSMakeRange(sel.location-1-postpad.length, 0);
+    [self setSelectedRange:newSel];
   }
 }
 
@@ -4348,12 +4377,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   if (tag == 4110 || tag == 4120 || tag == 4130 || tag == 4140 || tag == 4150
       || tag == 4160 || tag == 4170 || tag == 4180 || tag == 4190 || tag == 41100
       || tag == 41110) {
-    NSRange sel = [self selectedRange];
-    if (sel.length>0) {
       return YES;
-    } else {
-      return NO;
-    }
   }
   
   if (tag == 1060) {
