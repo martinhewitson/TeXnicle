@@ -508,7 +508,7 @@
     
     float oldThickness = [self ruleThickness];
     float newThickness = [self requiredThicknessForLineCount:lineCount];
-    if (fabs(oldThickness - newThickness) > 1)
+    if (fabs(oldThickness - newThickness) > 1 && newThickness > oldThickness)
     {
       _newThickness = newThickness;
       [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
