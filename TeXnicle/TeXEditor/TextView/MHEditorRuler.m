@@ -493,7 +493,7 @@
     if (fabs(oldThickness - newThickness) > 1)
     {
       _newThickness = newThickness;
-      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
+      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:NO];
     }
     _forceThicknessRecalculation = NO;
   }
@@ -511,7 +511,7 @@
     if (fabs(oldThickness - newThickness) > 1 && newThickness > oldThickness)
     {
       _newThickness = newThickness;
-      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:YES];
+      [self performSelectorOnMainThread:@selector(setNewThickness) withObject:nil waitUntilDone:NO];
     }
     _forceThicknessRecalculation = NO;
     
