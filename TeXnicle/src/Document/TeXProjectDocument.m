@@ -4041,7 +4041,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void)pdfview:(MHPDFView*)pdfView didCommandClickOnPage:(NSInteger)pageIndex inRect:(NSRect)aRect atPoint:(NSPoint)aPoint
 {
-//  NSLog(@"Clicked on PDF in project...");
+  //NSLog(@"Clicked on PDF in project...");
   
   NSMutableArray *pdfViews = [NSMutableArray array];
   if (self.pdfViewerController.pdfview != nil) {
@@ -4063,15 +4063,16 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   }
   
   NSString *sourcefile = [sync sourceFileForPDFFile:pdfPath lineNumber:&lineNumber pageIndex:pageIndex pageBounds:aRect point:aPoint];
-  
+  //NSLog(@"Got source file %@, line number %ld, for page index %ld, page bounds %@, and point %@", sourcefile, lineNumber, pageIndex, NSStringFromRect(aRect), NSStringFromPoint(aPoint));
   sourcefile = [sourcefile stringByStandardizingPath];
+  //NSLog(@"Standardized source path %@", sourcefile);
   [self selectLine:lineNumber inFileAtPath:sourcefile];
 }
 
 - (BOOL) selectLine:(NSInteger)lineNumber inFileAtPath:(NSString*)sourcefile
 {
   if ([sourcefile isAbsolutePath]) {
-    //    NSLog(@"    source file is absolute path");
+    //NSLog(@"    source file is absolute path");
     sourcefile = [self.project.folder relativePathTo:sourcefile];
   }
   //NSLog(@"  source file: %@", sourcefile);
