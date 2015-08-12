@@ -252,72 +252,27 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void)setTextStorage:(NSTextStorage*)textStorage
 {
-//  NSLog(@"---------------- Change text storage ------------");
-  
-//  typedef NS_ENUM(NSInteger, NSTextFinderAction) {
-//    NSTextFinderActionShowFindInterface = 1,
-//    NSTextFinderActionNextMatch = 2,
-//    NSTextFinderActionPreviousMatch = 3,
-//    NSTextFinderActionReplaceAll = 4,
-//    NSTextFinderActionReplace = 5,
-//    NSTextFinderActionReplaceAndFind = 6,
-//    NSTextFinderActionSetSearchString = 7,
-//    NSTextFinderActionReplaceAllInSelection = 8,
-//    NSTextFinderActionSelectAll = 9,
-//    NSTextFinderActionSelectAllInSelection = 10,
-//    NSTextFinderActionHideFindInterface = 11,
-//    NSTextFinderActionShowReplaceInterface = 12,
-//    NSTextFinderActionHideReplaceInterface = 13
-//  } NS_ENUM_AVAILABLE_MAC(10_7);
-  
-//  [self.textFinder performAction:NSTextFinderActionHideFindInterface];
-  
   // update layout so that the findbar gets the correct notifications and the search works
-//  [self noteStringWillChange];
-  
-//  [self.textFinder setClient:nil];
-//  [self.textFinder setFindBarContainer:nil];
+  [self noteStringWillChange];
   
   // stop observations
   [self stopObservingTextStorage];
   
   // now change the text in the textview
-//  NSString *string = [self string];
-//  NSString *newString = [textStorage string];
-//  NSLog(@"Swapping in text storage: %@", [newString substringToIndex:MIN(30, [newString length])]);
-  
-//  [self shouldChangeTextInRange:NSMakeRange(0, [string length]) replacementString:newString];
   [self.layoutManager replaceTextStorage:textStorage];
   
+  // string has changed
+  [self noteStringDidChange];
 
-  
-//  [self.layoutManager ensureLayoutForTextContainer:self.textContainer];
-//  [self setNeedsLayout:YES];
-//  [self setNeedsDisplay:YES];
-  
-//  [self didChangeText];
   [self performSelectorOnMainThread:@selector(setWrapStyle) withObject:nil waitUntilDone:YES];
   [self observeTextStorage];
   
   [(TeXEditorViewController*)self.delegate performSelector:@selector(didChangeTextStorage) withObject:nil afterDelay:0.1];
   
-//  [self noteStringWillChange];
-//  [self performSelectorOnMainThread:@selector(updateFindBarSearch) withObject:nil waitUntilDone:YES];
-  
-//  [self performSelector:@selector(setupTextFinder) withObject:nil afterDelay:0];
-//  [self performSelector:@selector(noteStringWillChange) withObject:nil afterDelay:0];
   
   
 }
 
-- (void)updateFindBarSearch
-{
-  [self noteStringWillChange];
-  id <NSTextFinderBarContainer> findBarContainer = self.textFinder.findBarContainer;
-  if ([findBarContainer isFindBarVisible]) {
-    [self performTextFinderAction:self];
-  }
-}
 
 - (void)setupTextFinder
 {
@@ -334,9 +289,16 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) noteStringWillChange
 {
 //  NSLog(@"Updating string for text finder %@", self.textFinder);
-  [self.textFinder cancelFindIndicator];
-//  [self.textFinder findIndicatorNeedsUpdate];
+//  [self.textFinder cancelFindIndicator];
+  [self setIncrementalSearchingEnabled:NO];
   [self.textFinder noteClientStringWillChange];
+//  [self.textFinder performAction:NSTextFinderActionHideFindInterface];
+}
+
+- (void) noteStringDidChange
+{
+  [self setIncrementalSearchingEnabled:YES];
+//  [self.textFinder findIndicatorNeedsUpdate];
 }
 
 
