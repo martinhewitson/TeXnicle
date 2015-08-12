@@ -372,7 +372,8 @@
 {
   
   // don't bother if the app is not active
-  if (![[NSApplication sharedApplication] isActive]) {
+  NSApplication *app = [NSApplication sharedApplication];
+  if (![app isActive]) {
     return;
   }
   

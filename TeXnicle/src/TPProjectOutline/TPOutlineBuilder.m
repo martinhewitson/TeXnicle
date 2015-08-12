@@ -90,8 +90,8 @@
 - (void) buildOutline
 {
 //  NSLog(@"Build outline...");
-  
-  if ([[NSApplication sharedApplication] isActive] == NO) {
+  NSApplication *app = [NSApplication sharedApplication];
+  if ([app isActive] == NO) {
     return;
   }
   

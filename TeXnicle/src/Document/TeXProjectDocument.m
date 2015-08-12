@@ -1326,7 +1326,8 @@
 
 - (void) updateStatusView
 {
-  if ([[NSApplication sharedApplication] isActive] == NO) {
+  NSApplication *app = [NSApplication sharedApplication];
+  if ([app isActive] == NO) {
     return;
   }
   
@@ -2639,8 +2640,8 @@
 - (void)doLiveBuild
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  
-  if ([[NSApplication sharedApplication] isActive] == NO) {
+  NSApplication *app = [NSApplication sharedApplication];
+  if ([app isActive] == NO) {
     return;
   }
   

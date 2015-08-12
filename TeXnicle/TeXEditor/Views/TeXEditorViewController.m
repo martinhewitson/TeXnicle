@@ -432,7 +432,8 @@
 {
 //  NSLog(@"Syntax check timer fired!");
   // no point in syntax checking while the app is not active
-  if (![[NSApplication sharedApplication] isActive]) {
+  NSApplication *app = [NSApplication sharedApplication];
+  if (![app isActive]) {
 //    NSLog(@"  app not active");
     return;
   }
