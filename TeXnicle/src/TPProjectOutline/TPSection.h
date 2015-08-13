@@ -10,12 +10,13 @@
 
 @class TPSectionTemplate;
 
-enum TPOutlineExpansionState : NSInteger {
+typedef enum TPOutlineExpansionState : NSInteger {
   TPOutlineExpansionStateUnknown = -1,
   TPOutlineExpansionStateCollapse = 0,
   TPOutlineExpansionStateExpanded = 1
-  } TPOutlineExpansionState;
-  
+} TPOutlineExpansionState;
+
+
 @interface TPSection : NSObject <NSCopying>
 
 @property (assign) BOOL needsReload;
