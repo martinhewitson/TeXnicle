@@ -87,7 +87,7 @@
 
 - (NSString*) description
 {
-  return [NSString stringWithFormat:@"<%@ %p>: %@, scanned? %d", [self class], self, self.name, self.wasScannedForSections];
+  return [NSString stringWithFormat:@"<%@ %p>: %@, scanned? %d, needsUpdate? %d", [self class], self, self.name, self.wasScannedForSections, self.needsUpdate];
 }
 
 - (void) tearDown
@@ -132,9 +132,11 @@
 {
   __block TPFileMetadata *blockSelf = self;  
   if (self.needsUpdate) {
+    //NSLog(@"   updating %@", self);
     if ([self.aQueue operationCount] == 0) {
       self.currentOperation = [[TPMetadataOperation alloc] initWithFile:self];
       [self.currentOperation setCompletionBlock:^{
+        //NSLog(@"operation completed for %@", blockSelf);
         dispatch_sync(dispatch_get_main_queue(), ^{
           [blockSelf notifyOfUpdate];
           blockSelf = nil;

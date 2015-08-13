@@ -86,6 +86,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
   
   _updatingCount = 0;
   for (TPFileMetadata *f in filesToUpdate) {
+    //NSLog(@"File %@ needs update? %d/%d", f, f.needsUpdate, f.needsSyntaxCheck);
     if (f.needsUpdate || f.needsSyntaxCheck) {
       f.delegate = self;
       if (f.needsSyntaxCheck)
@@ -110,7 +111,7 @@ NSString * const TPMetadataManagerDidEndUpdateNotification = @"TPMetadataManager
 - (void) fileMetadataDidUpdate:(TPFileMetadata *)file
 {
   _updatingCount--;
-//NSLog(@" --- count [%ld] (%@)", _updatingCount, file.name);
+  //NSLog(@" --- count [%ld] (%@)", _updatingCount, file.name);
 
   if (_updatingCount == 0) {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
