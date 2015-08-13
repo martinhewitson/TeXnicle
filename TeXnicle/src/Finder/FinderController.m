@@ -28,6 +28,8 @@
 
 #import "FinderController.h"
 #import "TPResultDocument.h"
+#import "TPRegularExpression.h"
+#import "RegexKitLite.h"
 #import "TPDocumentMatch.h"
 #import "ProjectItemEntity.h"
 #import "FileEntity.h"
@@ -61,7 +63,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 @property (unsafe_unretained) IBOutlet NSView *bottomBarView;
 @property (unsafe_unretained) IBOutlet NSTextField *replaceText;
 @property (unsafe_unretained) IBOutlet NSButton *caseSensitiveCheckbox;
-@property (unsafe_unretained) IBOutlet NSButton *searchWholeWordsCheckbox;
+//@property (unsafe_unretained) IBOutlet NSButton *searchWholeWordsCheckbox;
 @property (atomic, strong) NSMutableArray *results;
 
 @end
@@ -308,9 +310,7 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 			if ([[file valueForKey:@"isText"] boolValue]) {
         dispatch_async(queue, ^{						
                     
-//          NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];               
           [self stringSearchForTerm:searchTerm inFile:file];
-//          [pool drain];      
           
         });
 			} // end if isText			
@@ -343,6 +343,8 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
 {
   // get the text for this file
   FileDocument *doc = [file document];
+  NSLog(@"-------------------------------------------------------------------");
+  NSLog(@"Searcing %@", doc.file.name);
   NSMutableAttributedString *attributedString = [doc textStorage];
   NSMutableAttributedString *aStr = [attributedString mutableCopy];
   NSArray *lineNumbers = [aStr lineNumbersForTextRange:NSMakeRange(0, [aStr length])];
@@ -350,85 +352,67 @@ NSString * const TPDocumentMatchAttributeName = @"TPDocumentMatchAttribute";
   if (!string)
     return;
   
+  
   // check for case sensitive searches
+  BOOL caseSensitive = [self.caseSensitiveCheckbox state] == NSOnState;
   NSScanner *aScanner = [NSScanner scannerWithString:string];
-  if ([self.caseSensitiveCheckbox state] == NSOnState) {
+  if (caseSensitive) {
     [aScanner setCaseSensitive:YES];
   }
   
   // check for matching full words
-  BOOL matchFullWords = [self.searchWholeWordsCheckbox state] == NSOnState;
-  NSCharacterSet *newLineCharacterSet = [NSCharacterSet newlineCharacterSet];
-	NSCharacterSet *whitespaceCharacterSet = [NSCharacterSet whitespaceCharacterSet];	
+//  BOOL matchFullWords = [self.searchWholeWordsCheckbox state] == NSOnState;
 
   TPResultDocument *resultDoc = [self resultDocumentForDocument:file];
   
-  NSInteger scanLocation = 0;
-  while(scanLocation < [string length]) {
-    if (!shouldContinueSearching) {
-      break;
-    } // If should continue 
+  
+  NSError *error = nil;
+  NSRange r = NSMakeRange(0, [string length]);
+  RKLRegexOptions opts = RKLNoOptions;
+  if (caseSensitive == NO) {
+    opts = opts + RKLCaseless;
+  }
+  
+//  NSLog(@"matchFullWords = %d", matchFullWords);
+//  NSLog(@"Opts %u", opts);
+  
+  [string enumerateStringsMatchedByRegex:searchTerm options:opts inRange:r error:&error enumerationOptions:RKLRegexEnumerationNoOptions usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
     
-    // scan for the search term
-    if ([aScanner scanUpToString:searchTerm intoString:NULL]) {
-      scanLocation = [aScanner scanLocation];
-      if (scanLocation >= [string length]) {
-        break;
-      } else {
-        // move on
-        [aScanner setScanLocation:scanLocation+[searchTerm length]];
-        // we found a match
-        NSRange resultRange = NSMakeRange(scanLocation, [searchTerm length]);
-        if (resultRange.location != NSNotFound) {
-          
-          BOOL acceptMatch = YES;
-          // check if we are matching full words
-          if (matchFullWords == YES) {
-           // this means there should be a whitespace of newline before and after the matched range
-            if (scanLocation > 0) {
-              char prefix = [string characterAtIndex:scanLocation-1];
-              if (![whitespaceCharacterSet characterIsMember:prefix] &&
-                  ![newLineCharacterSet characterIsMember:prefix]) {
-                acceptMatch = NO;
-              }
-            }
-            
-            if (scanLocation+[searchTerm length] < [string length]) {
-              char postfix = [string characterAtIndex:scanLocation+[searchTerm length]];
-              if (![whitespaceCharacterSet characterIsMember:postfix] &&
-                  ![newLineCharacterSet characterIsMember:postfix]) {
-                acceptMatch = NO;
-              }
-            }
-          }
-          
-          if (acceptMatch == YES) {
-            NSInteger len = [searchTerm length] + 30;
-            NSRange matchingRange = NSMakeRange(scanLocation, len);
-            while (NSMaxRange(matchingRange) >= [string length]) {
-              matchingRange = NSMakeRange(scanLocation, --len);
-            }
-            NSString *matchingString = [string substringWithRange:matchingRange];
-            
-            MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
-            NSInteger lineNumber = ln.number;
-            
-            TPDocumentMatch *match = [[TPDocumentMatch alloc] initWithLine:lineNumber withRange:resultRange subrange:NSMakeRange(0, [searchTerm length]) matchingString:matchingString inDocument:resultDoc];
-            [resultDoc addMatch:match];
-            
-            dispatch_async(dispatch_get_main_queue(),
-                           // block
-                           ^{
-                             [self didMakeMatch:self];
-                             [self.outlineView reloadData];
-                           });
-          }
-        } // end subrange found      
-      } // end if scanLocation less than string length
-    } else {
-      break;
-    } // end if scanner returns true
-  } // end while scanLocation less than string length
+//    NSLog(@"Matched: %@ / %@", *capturedStrings, NSStringFromRange(*capturedRanges));
+    
+    NSRange resultRange = *capturedRanges;
+    NSString *matchingString = *capturedStrings;
+
+    MHLineNumber *ln = [MHLineNumber lineNumberContainingIndex:resultRange.location inArray:lineNumbers];
+    if (ln == nil)
+      return;
+    
+    NSInteger lineNumber = ln.number;
+//    NSLog(@"At line %@", ln);
+    
+    // from resultRange.location to end of line
+    NSInteger resLength = ln.range.length - (resultRange.location - ln.range.location);
+//    NSLog(@"Result length %ld", resLength);
+    
+    NSRange matchRange = NSMakeRange(resultRange.location, resLength);
+//    NSLog(@"Matching range: %@", NSStringFromRange(matchRange));
+    
+    TPDocumentMatch *match = [[TPDocumentMatch alloc] initWithLine:lineNumber withRange:resultRange subrange:NSMakeRange(0, [matchingString length]) matchingString:[string substringWithRange:matchRange] inDocument:resultDoc];
+    [resultDoc addMatch:match];
+    
+//    NSLog(@"Match: %@", match);
+    
+    dispatch_async(dispatch_get_main_queue(),
+                   // block
+                   ^{
+                     [self didMakeMatch:self];
+                     [self.outlineView reloadData];
+                   });
+    
+    
+  }]
+  ;
+//  NSLog(@"Matched: %@", matches);
   
   // decrement the number of files processed
   filesProcessed--;
