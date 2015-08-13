@@ -4598,6 +4598,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 - (NSArray*) metadataManagerFilesToScan:(TPMetadataManager *)manager
 {
   //NSLog(@"Metadata Update on thread %@", [NSThread currentThread]);
+  if ([self.mainWindow isKeyWindow] == NO) {
+    return @[];
+  }
   
   // build array of TPFileMetadata for project files
   [self performSelectorOnMainThread:@selector(updateMetaFiles) withObject:nil waitUntilDone:YES];
