@@ -1083,10 +1083,20 @@
   
   NSError *openError = nil;
   id doc = [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES error:&openError];
+//  __block id doc = nil;
+//  [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES completionHandler:^(NSDocument * _Nullable document, BOOL documentWasAlreadyOpen, NSError * _Nullable error) {
+//    
+//    if (error) {
+//      [NSApp presentError:error];
+//    } else {
+//      doc = document;
+//    }
+//  }];
+  
   if (openError) {
     [NSApp presentError:openError];
     return nil;
-  }  
+  }
   
   return doc;
 }
@@ -4622,7 +4632,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
 
 - (void) updateMetaFiles
 {  
-  // NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
+  //NSLog(@"Update meta files on thread %@", [NSThread currentThread]);
   if (self.fileMetadata == nil) {
     self.fileMetadata = [[NSMutableArray alloc] init];
   }
@@ -4642,7 +4652,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       // make sure we cache these to stop them being faulted
       if ([self.textFiles containsObject:file] == NO) {
         [self.textFiles addObject:file];
-        // NSLog(@"Cached file %p:%@ [%@]", file, file.name, file.objectID);
+        //NSLog(@"Cached file %p:%@ [%@]", file, file.name, file.objectID);
       }
       
       if ([file isText] && [file isImage] == NO) {
@@ -4662,12 +4672,14 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
           //NSLog(@"Added metafile %@ <--> %@", newFile, newFile.objId);
         } else {
           
+          //NSLog(@"Checking metafile %@", fm);
           // check last edit date
           NSDate *lastEdit = file.lastEditDate;
           NSDate *lastUpdate = fm.lastUpdate;
           if ([lastEdit timeIntervalSinceDate:lastUpdate] > 0 || lastUpdate == nil) {
             fm.text = file.workingContentString;
             // update path here because it's relatively expensive, and it shouldn't change often.
+            //NSLog(@"File %@ was edited %@ > %@", fm, file.lastEditDate, fm.lastUpdate);
             fm.pathOnDisk = file.pathOnDisk;
             fm.needsUpdate = YES;
             fm.needsSyntaxCheck = YES;
@@ -4691,7 +4703,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   
   
   if (updatedBib) {
-    
+    //NSLog(@"Updated bib!!!");
     for (ProjectItemEntity *item in self.project.sortedItems) {
       if ([item isKindOfClass:[FileEntity class]]) {
         FileEntity *file = (FileEntity*)item;
