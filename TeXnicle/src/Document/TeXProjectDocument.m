@@ -4691,7 +4691,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
           fm.extension = file.extension;
           
           // if this was a bib file, we need to update any files which include it
-          if ([fm.extension isEqualToString:@"bib"]) {
+          if ([fm.extension isEqualToString:@"bib"] && fm.needsUpdate) {
             updatedBib = YES;
           }
           
