@@ -19,9 +19,12 @@ exit
 fi
 
 # Executable values
-PATH=/usr/texbin:/usr/local/bin:$PATH
-ENGINE=/usr/texbin/pdflatex
-TEXBIN=/usr/texbin
+# Executable values
+PATH=/usr/texbin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin:/usr/local/bin:$PATH
+EXEC="$(which pdflatex)"
+TEXLOC=$(dirname "${EXEC}")
+ENGINE=$TEXLOC/pdflatex
+BIBTEX=$TEXLOC/bibtex
 
 # Process inputs.
 # TeXnicle passes the file to be processed as the first input to this 
@@ -60,7 +63,7 @@ then
     echo "***------------------------------------------------------------"
     echo "*** Running $bibtexCommand on $mainfile ..."
     echo "***------------------------------------------------------------"
-    $TEXBIN/$bibtexCommand "$mainfile"
+    $TEXLOC/$bibtexCommand "$mainfile"
   fi
 fi
 

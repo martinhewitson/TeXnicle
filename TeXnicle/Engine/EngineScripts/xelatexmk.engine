@@ -20,7 +20,12 @@ then
 fi
 
 # Executable values
-PATH=/usr/texbin:/usr/local/bin:$PATH
+# Executable values
+PATH=/usr/texbin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin:/usr/local/bin:$PATH
+EXEC="$(which latexmk)"
+TEXLOC=$(dirname "${EXEC}")
+ENGINE=$TEXLOC/pdflatex
+BIBTEX=$TEXLOC/bibtex
 ENGINE=latexmk
 
 # Process inputs.

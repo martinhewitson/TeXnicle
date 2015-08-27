@@ -20,8 +20,13 @@ then
 fi
 
 # Executable values
-PATH=/usr/texbin:/usr/local/bin:$PATH
-ENGINE=latexmk
+# Executable values
+PATH=/usr/texbin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin:/usr/local/bin:$PATH
+EXEC="$(which latexmk)"
+TEXLOC=$(dirname "${EXEC}")
+ENGINE=$TEXLOC/latexmk
+BIBTEX=$TEXLOC/bibtex
+
 
 # Process inputs.
 # TeXnicle passes the filename to be processed (with no file extension) as the first input to this 
