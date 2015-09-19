@@ -917,7 +917,7 @@
 		252144C91398EA3D00656D3F /* MHRoundedTopBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHRoundedTopBottomView.m; sourceTree = "<group>"; };
 		2523C7E11405478B00A47297 /* TPEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngine.h; sourceTree = "<group>"; };
 		2523C7E21405478B00A47297 /* TPEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPEngine.m; sourceTree = "<group>"; };
-		2523C7E5140548B400A47297 /* latex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = latex.engine; sourceTree = "<group>"; };
+		2523C7E5140548B400A47297 /* latex.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = latex.engine; sourceTree = "<group>"; };
 		2523C7E71405511500A47297 /* MABSupportFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MABSupportFolder.h; sourceTree = "<group>"; };
 		2523C7E81405511500A47297 /* MABSupportFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MABSupportFolder.m; sourceTree = "<group>"; };
 		2523C7EA1405530800A47297 /* TPEngineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPEngineManager.h; sourceTree = "<group>"; };
@@ -973,7 +973,7 @@
 		253312EE15B7086C00F9FD00 /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		2536A4CA18143CBC00C11DDB /* TPNewEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewEnvironment.h; sourceTree = "<group>"; };
 		2536A4CB18143CBC00C11DDB /* TPNewEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewEnvironment.m; sourceTree = "<group>"; };
-		253776D4168382A000945573 /* xelatexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatexmk.engine; sourceTree = "<group>"; };
+		253776D4168382A000945573 /* xelatexmk.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = xelatexmk.engine; sourceTree = "<group>"; };
 		253A3AB51457D212007C4D8C /* MHMiniConsoleBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleBackground.h; sourceTree = "<group>"; };
 		253A3AB61457D212007C4D8C /* MHMiniConsoleBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHMiniConsoleBackground.m; sourceTree = "<group>"; };
 		253A3AB91457D31C007C4D8C /* MHMiniConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHMiniConsoleViewController.h; sourceTree = "<group>"; };
@@ -1032,7 +1032,7 @@
 		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
-		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = template.engine; sourceTree = "<group>"; };
+		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = template.engine; sourceTree = "<group>"; };
 		254C1E0814F382B400925515 /* TPProjectTemplateListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPProjectTemplateListViewController.h; sourceTree = "<group>"; };
 		254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPProjectTemplateListViewController.m; sourceTree = "<group>"; };
 		254C1E0A14F382B400925515 /* TPProjectTemplateListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPProjectTemplateListViewController.xib; sourceTree = "<group>"; };
@@ -1043,7 +1043,7 @@
 		254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPMetadataItemView.xib; sourceTree = "<group>"; };
 		254D16AA16FAE66500A31BE8 /* TPMetadataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataSet.h; sourceTree = "<group>"; };
 		254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataSet.m; sourceTree = "<group>"; };
-		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = latexmk.engine; sourceTree = "<group>"; };
+		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = latexmk.engine; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../HHValidatedButton.h; sourceTree = "<group>"; };
 		2552029613E86C1E007F191F /* HHValidatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HHValidatedButton.m; path = ../../HHValidatedButton.m; sourceTree = "<group>"; };
@@ -1075,7 +1075,7 @@
 		255A16F515B54733004290CC /* TPNewCommandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewCommandsViewController.m; sourceTree = "<group>"; };
 		255A16F915B5474B004290CC /* TPCommandSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCommandSet.h; sourceTree = "<group>"; };
 		255A16FA15B5474B004290CC /* TPCommandSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCommandSet.m; sourceTree = "<group>"; };
-		255C559E1652347E00F77A50 /* UpTeX.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = UpTeX.engine; sourceTree = "<group>"; };
+		255C559E1652347E00F77A50 /* UpTeX.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = UpTeX.engine; sourceTree = "<group>"; };
 		255C55A1165236ED00F77A50 /* ProjectTreeTests.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ProjectTreeTests.rtf; sourceTree = "<group>"; };
 		255DB84713E56CB1007629C0 /* TPDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDescriptionView.h; sourceTree = "<group>"; };
 		255DB84813E56CB1007629C0 /* TPDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDescriptionView.m; sourceTree = "<group>"; };
@@ -1308,8 +1308,8 @@
 		25AAAB6A146A70FD000C81D4 /* TPStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPStatusViewController.h; sourceTree = "<group>"; };
 		25AAAB6B146A70FD000C81D4 /* TPStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPStatusViewController.m; sourceTree = "<group>"; };
 		25AAAB6C146A70FD000C81D4 /* TPStatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPStatusViewController.xib; sourceTree = "<group>"; };
-		25AAC8E91407C45C00B61B1A /* pdflatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pdflatex.engine; sourceTree = "<group>"; };
-		25AAC8ED1407E65400B61B1A /* context.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = context.engine; sourceTree = "<group>"; };
+		25AAC8E91407C45C00B61B1A /* pdflatex.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = pdflatex.engine; sourceTree = "<group>"; };
+		25AAC8ED1407E65400B61B1A /* context.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = context.engine; sourceTree = "<group>"; };
 		25ABAF5518FA4F85001BE775 /* TeXProject 15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 15.xcdatamodel"; sourceTree = "<group>"; };
 		25ACB35213EB15EF00289E4E /* textResult.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = textResult.icns; sourceTree = "<group>"; };
 		25AD5A0015BA6C4E00737610 /* profileConfig.php */ = {isa = PBXFileReference; lastKnownFileType = text.script.php; name = profileConfig.php; path = php_sparkle_stats_server/profileConfig.php; sourceTree = "<group>"; };
@@ -1357,7 +1357,7 @@
 		25BB154215B444FC007A7FDF /* TPWarningSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPWarningSet.m; sourceTree = "<group>"; };
 		25BB23ED14B772910015D4C1 /* TPSupportedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSupportedFile.h; sourceTree = "<group>"; };
 		25BB23EE14B772910015D4C1 /* TPSupportedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSupportedFile.m; sourceTree = "<group>"; };
-		25BE010514BE1D38004FDDE7 /* Lilypond.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Lilypond.engine; sourceTree = "<group>"; };
+		25BE010514BE1D38004FDDE7 /* Lilypond.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = Lilypond.engine; sourceTree = "<group>"; };
 		25C0177913F195E8003E6FC6 /* bookmark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = bookmark.icns; sourceTree = "<group>"; };
 		25C0FA37149D0C2100741C36 /* PDFViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewer.h; sourceTree = "<group>"; };
 		25C0FA38149D0C2100741C36 /* PDFViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewer.m; sourceTree = "<group>"; };
@@ -1670,7 +1670,7 @@
 		25F0AB3415A940D10000EFFA /* spellingMistake.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = spellingMistake.icns; sourceTree = "<group>"; };
 		25F0AB3615A94A050000EFFA /* TPSpellingOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSpellingOutlineView.h; sourceTree = "<group>"; };
 		25F0AB3715A94A050000EFFA /* TPSpellingOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSpellingOutlineView.m; sourceTree = "<group>"; };
-		25F10D44150B66B200C00AA3 /* xelatex.engine */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = xelatex.engine; sourceTree = "<group>"; };
+		25F10D44150B66B200C00AA3 /* xelatex.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = xelatex.engine; sourceTree = "<group>"; };
 		25F251021519C83100453F6F /* TPSyntaxChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSyntaxChecker.h; sourceTree = "<group>"; };
 		25F251031519C83100453F6F /* TPSyntaxChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSyntaxChecker.m; sourceTree = "<group>"; };
 		25F251061519DB9800453F6F /* TPSyntaxError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPSyntaxError.h; path = ../../TeXEditor/TextView/TPSyntaxError.h; sourceTree = "<group>"; };
