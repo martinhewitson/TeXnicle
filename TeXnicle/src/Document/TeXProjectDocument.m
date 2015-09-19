@@ -768,6 +768,9 @@
   // stop observing notifications
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
   
+  self.splitview.delegate = nil;
+  self.editorSplitView.delegate = nil;
+  
   // stop gathering metadata
   [self stopAllMetadataOperations];
   

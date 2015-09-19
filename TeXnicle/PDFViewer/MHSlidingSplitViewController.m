@@ -34,6 +34,7 @@
 
 - (void) tearDown
 {
+  self.splitView.delegate = nil;
   self.delegate = nil;
   
 }

@@ -72,11 +72,11 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 
 @interface ExternalTeXDoc ()
 
-@property (unsafe_unretained) IBOutlet NSWindow *mainWindow;
-@property (unsafe_unretained) IBOutlet NSView *leftView;
-@property (unsafe_unretained) IBOutlet NSView *centerView;
-@property (unsafe_unretained) IBOutlet NSView *rightView;
-@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
+@property (strong) IBOutlet NSWindow *mainWindow;
+@property (strong) IBOutlet NSView *leftView;
+@property (strong) IBOutlet NSView *centerView;
+@property (strong) IBOutlet NSView *rightView;
+@property (strong) IBOutlet NSSplitView *splitView;
 
 @property (strong) MHControlsTabBarController *controlsTabBarController;
 @property (strong) MHInfoTabBarController *infoControlsTabBarController;
@@ -711,7 +711,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   
   if ([NSApp isLion]) {
     [self captureUIsettings];
-  }  
+  }
   
   [self tearDown];
 }
@@ -866,6 +866,10 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   // stop timers
   [self stopTimers];
   
+  self.editorSplitView.delegate = nil;
+  self.splitView.delegate = nil;
+  self.mainWindow.delegate = nil;
+  
   // pdfviewer
   [self.pdfViewer tearDown];
   self.pdfViewer = nil;
@@ -935,6 +939,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   
   [self.infoControlsTabBarController tearDown];
   self.infoControlsTabBarController = nil;
+  
   
 }
 
