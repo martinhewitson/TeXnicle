@@ -4537,6 +4537,11 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   return files;
 }
 
+- (BOOL) performSimpleSpellCheck
+{
+  return NO;
+}
+
 - (BOOL)shouldPerformSpellCheck
 {
   // if info tab is selected....  

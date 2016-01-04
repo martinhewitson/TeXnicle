@@ -475,7 +475,7 @@
 
 - (void) spellCheckProjectFiles
 {
-//  NSLog(@"Spell check project files...");
+//  NSLog(@"Spell check project files... %d", [self shouldPerformSpellCheck]);
   if (checkingFiles > 0) {
     return;
   }

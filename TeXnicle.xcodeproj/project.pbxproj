@@ -202,7 +202,6 @@
 		2545865213E936FE00461494 /* downArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545864F13E936FE00461494 /* downArrow.icns */; };
 		2545865313E936FE00461494 /* upArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2545865013E936FE00461494 /* upArrow.icns */; };
 		2548303418422D650097060F /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
-		25487E48181645B700C0D61C /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 25487E47181645B600C0D61C /* TeXnicle.icns */; };
 		254960DC14DB12770017245C /* NSView+Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = 254960DB14DB12770017245C /* NSView+Subview.m */; };
 		254B503314095AED0023AABB /* template.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254B503214095AED0023AABB /* template.engine */; };
 		254C1E0B14F382B400925515 /* TPProjectTemplateListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254C1E0914F382B400925515 /* TPProjectTemplateListViewController.m */; };
@@ -221,6 +220,7 @@
 		2555C31E14B0708C00FE6150 /* libraryPrefs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2555C31D14B0708C00FE6150 /* libraryPrefs.icns */; };
 		2558797E16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558797D16BAA4DB0059027B /* NSMutableAttributedString+Placeholders.m */; };
 		2558798416BAB2700059027B /* NSAttributedString+Placeholders.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558798316BAB2700059027B /* NSAttributedString+Placeholders.m */; };
+		255A01401BB6919F00482EAE /* TeXnicle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 252E12221621728F0041B2BE /* TeXnicle.icns */; settings = {ASSET_TAGS = (); }; };
 		255A16D515B48694004290CC /* citationsTabBarImageDepressed.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D315B48694004290CC /* citationsTabBarImageDepressed.icns */; };
 		255A16D615B48694004290CC /* citationsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D415B48694004290CC /* citationsTabBarImage.icns */; };
 		255A16DA15B48E1B004290CC /* commandsTabBarImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 255A16D815B48E1B004290CC /* commandsTabBarImage.icns */; };
@@ -242,13 +242,6 @@
 		2562782C151A061300778FFB /* error.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2562782A151A061300778FFB /* error.icns */; };
 		2566099719CDE2D5009B1A14 /* MHStrokedVibrantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2566099619CDE2D5009B1A14 /* MHStrokedVibrantView.m */; };
 		2567272816E49FEC004B7C4A /* NSImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567272716E49FEC004B7C4A /* NSImage+Resize.m */; };
-		2567272A16E4A246004B7C4A /* outline_part.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272916E4A246004B7C4A /* outline_part.icns */; };
-		2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272B16E4ADD7004B7C4A /* outline_chapter.icns */; };
-		2567272E16E4AEC7004B7C4A /* outline_section.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272D16E4AEC7004B7C4A /* outline_section.icns */; };
-		2567273016E4AF15004B7C4A /* outline_subsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567272F16E4AF15004B7C4A /* outline_subsection.icns */; };
-		2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */; };
-		2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273316E4AFDC004B7C4A /* outline_paragraph.icns */; };
-		2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */; };
 		2567E46C178AFE2F0056D65D /* CitationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2567E46B178AFE2F0056D65D /* CitationTests.m */; };
 		2567E46F178BCC8E0056D65D /* citation_test1.tex in Resources */ = {isa = PBXBuildFile; fileRef = 2567E46E178BCC8E0056D65D /* citation_test1.tex */; };
 		25690D7C14F4D26D00E4101D /* NSScanner+TeXnicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 25690D7B14F4D26D00E4101D /* NSScanner+TeXnicle.m */; };
@@ -1029,7 +1022,6 @@
 		2545865013E936FE00461494 /* upArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = upArrow.icns; sourceTree = "<group>"; };
 		2548303318422D600097060F /* log12.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = log12.log; sourceTree = "<group>"; };
 		2548303518427AE00097060F /* TeXProject 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 13.xcdatamodel"; sourceTree = "<group>"; };
-		25487E47181645B600C0D61C /* TeXnicle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = TeXnicle.icns; sourceTree = "<group>"; };
 		254960DA14DB12770017245C /* NSView+Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+Subview.h"; sourceTree = "<group>"; };
 		254960DB14DB12770017245C /* NSView+Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subview.m"; sourceTree = "<group>"; };
 		254B503214095AED0023AABB /* template.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = template.engine; sourceTree = "<group>"; };
@@ -1109,13 +1101,6 @@
 		2566D9191783EB2500BA4755 /* TeXProject 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TeXProject 9.xcdatamodel"; sourceTree = "<group>"; };
 		2567272616E49FEC004B7C4A /* NSImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Resize.h"; sourceTree = "<group>"; };
 		2567272716E49FEC004B7C4A /* NSImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Resize.m"; sourceTree = "<group>"; };
-		2567272916E4A246004B7C4A /* outline_part.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_part.icns; sourceTree = "<group>"; };
-		2567272B16E4ADD7004B7C4A /* outline_chapter.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_chapter.icns; sourceTree = "<group>"; };
-		2567272D16E4AEC7004B7C4A /* outline_section.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_section.icns; sourceTree = "<group>"; };
-		2567272F16E4AF15004B7C4A /* outline_subsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsection.icns; sourceTree = "<group>"; };
-		2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subsubsection.icns; sourceTree = "<group>"; };
-		2567273316E4AFDC004B7C4A /* outline_paragraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_paragraph.icns; sourceTree = "<group>"; };
-		2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = outline_subparagraph.icns; sourceTree = "<group>"; };
 		2567E46B178AFE2F0056D65D /* CitationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitationTests.m; sourceTree = "<group>"; };
 		2567E46E178BCC8E0056D65D /* citation_test1.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = citation_test1.tex; sourceTree = "<group>"; };
 		25690D7A14F4D26D00E4101D /* NSScanner+TeXnicle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+TeXnicle.h"; sourceTree = "<group>"; };
@@ -1747,7 +1732,6 @@
 		250772E1138E5D81000F1118 = {
 			isa = PBXGroup;
 			children = (
-				25487E47181645B600C0D61C /* TeXnicle.icns */,
 				2509382B15C4F647007DACD2 /* TeXnicle.entitlements */,
 				2560F10813923489005E3208 /* Misc */,
 				250772F6138E5D81000F1118 /* TeXnicle */,
@@ -2024,13 +2008,6 @@
 			isa = PBXGroup;
 			children = (
 				25A4F5911775A6C9002759B8 /* outlinePrefs.icns */,
-				2567273516E4AFFD004B7C4A /* outline_subparagraph.icns */,
-				2567273316E4AFDC004B7C4A /* outline_paragraph.icns */,
-				2567273116E4AF8B004B7C4A /* outline_subsubsection.icns */,
-				2567272F16E4AF15004B7C4A /* outline_subsection.icns */,
-				2567272D16E4AEC7004B7C4A /* outline_section.icns */,
-				2567272B16E4ADD7004B7C4A /* outline_chapter.icns */,
-				2567272916E4A246004B7C4A /* outline_part.icns */,
 				2520AC1916A81677006E9CA2 /* cancel.icns */,
 				252E12221621728F0041B2BE /* TeXnicle.icns */,
 				25AD5A0715BAB29100737610 /* groupFolderOpen.icns */,
@@ -3589,16 +3566,9 @@
 				253776D5168382A000945573 /* xelatexmk.engine in Resources */,
 				2520AC1A16A81677006E9CA2 /* cancel.icns in Resources */,
 				25CFBD1316D2CFB90025B35D /* texcount in Resources */,
-				25487E48181645B700C0D61C /* TeXnicle.icns in Resources */,
 				25DB59431778BB9F000383AF /* TPTeXLogViewController.xib in Resources */,
+				255A01401BB6919F00482EAE /* TeXnicle.icns in Resources */,
 				25CFBD1B16D2D0B00025B35D /* TPDocumentReportWindowController.xib in Resources */,
-				2567272A16E4A246004B7C4A /* outline_part.icns in Resources */,
-				2567272C16E4ADD7004B7C4A /* outline_chapter.icns in Resources */,
-				2567272E16E4AEC7004B7C4A /* outline_section.icns in Resources */,
-				2567273016E4AF15004B7C4A /* outline_subsection.icns in Resources */,
-				2567273216E4AF8B004B7C4A /* outline_subsubsection.icns in Resources */,
-				2567273416E4AFDC004B7C4A /* outline_paragraph.icns in Resources */,
-				2567273616E4AFFD004B7C4A /* outline_subparagraph.icns in Resources */,
 				254D16A916FAE53600A31BE8 /* TPMetadataItemView.xib in Resources */,
 				25D10EBF176F00AE004C40AE /* AdiumGradient.png in Resources */,
 				25D10EC0176F00AE004C40AE /* AquaTabClose_Front.png in Resources */,

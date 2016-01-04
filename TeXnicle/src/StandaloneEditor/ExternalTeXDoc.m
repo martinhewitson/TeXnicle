@@ -2879,7 +2879,13 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 
 - (BOOL) performSimpleSpellCheck
 {
-  return YES;
+  if ([self.controlsTabBarController indexOfSelectedTab] == 5) {
+    // if spelling tab is selected....
+    if ([self.infoControlsTabBarController indexOfSelectedTab] == 2) {
+      return YES;
+    }
+  }
+  return NO;
 }
 
 - (NSString*)fileToCheck

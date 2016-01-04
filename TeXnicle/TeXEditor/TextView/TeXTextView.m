@@ -104,6 +104,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 @property (strong) NSColor *currentLineColor;
 @property (assign) BOOL highlightCurrentLine;
 
+@property (assign) NSRange lastVisiblerange;
 @property (assign) NSRange currentLineRange;
 @property (assign) NSRect currentLineRect;
 
@@ -150,6 +151,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     [self setSmartInsertDeleteEnabled:NO];
     [self setAutomaticTextReplacementEnabled:NO];
     [self setAutomaticSpellingCorrectionEnabled:NO];
+    [self setContinuousSpellCheckingEnabled:NO];
     
     self.coloringEngine = [TeXColoringEngine coloringEngineWithTextView:self];
     
@@ -188,7 +190,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   // set color for line highlighting
   self.lineHighlightColor = [[self backgroundColor] shadowWithLevel:0.1];
   
-	[[self layoutManager] setAllowsNonContiguousLayout:NO];
+	[[self layoutManager] setAllowsNonContiguousLayout:YES];
   [self turnOffWrapping];
   [self observePreferences];
   
@@ -820,6 +822,24 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 
 - (void) colorVisibleText
 {
+  if ([self delegate] && [[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
+    if (![[self delegate] performSelector:@selector(shouldSyntaxHighlightDocument)]) {
+      return;
+    }
+  }
+  
+  if (self.coloringEngine) {
+    NSRange vr = [self getVisibleRange];
+//    NSLog(@"Color visible %@", NSStringFromRange(vr));
+    [self.coloringEngine colorTextView:self
+                           textStorage:[self textStorage]
+                         layoutManager:[self layoutManager]
+                               inRange:vr];
+  } // End if colouring engine
+}
+
+- (void) colorText
+{
   //  NSLog(@"Color visible text: delegate %@", self.delegate);
   if ([self delegate] && [[self delegate] respondsToSelector:@selector(shouldSyntaxHighlightDocument)]) {
     if (![[self delegate] performSelector:@selector(shouldSyntaxHighlightDocument)]) {
@@ -828,37 +848,58 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   NSRange vr = [self getVisibleRange];
-  //  NSLog(@"Visible range %ld-%ld", vr.location, vr.location+vr.length);
+//  NSLog(@"Coloring text %@", NSStringFromRange(vr));
   
-  // adjust range to be greater than the visible range
-  NSInteger loc = vr.location-vr.length/2;
-  NSInteger strLen = [[self string] length];
-  if (loc < 0)
-    loc = 0;
-  NSInteger length = vr.length*2;
-  if (loc+length >= strLen) {
-    length = strLen - loc - 1;
-  }
-  if (length < 0) {
-    length = 0;
-  }
-  
-  // make sure we start and end at line ends
-  NSRange lr = [[self string] lineRangeForRange:NSMakeRange(loc, 0)];
-  NSInteger diff = loc - lr.location;
-  loc = lr.location;
-  length += diff;
-  lr = [[self string] lineRangeForRange:NSMakeRange(loc+length, 0)];
-  NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
-  
-  //  NSLog(@"Coloring range %ld-%ld", r.location, r.location+r.length);
   if (self.coloringEngine) {
-    [self.coloringEngine colorTextView:self
-                           textStorage:[self textStorage]
-                         layoutManager:[self layoutManager]
-                               inRange:r];
-  }
-  
+    
+    if (self.lastVisiblerange.location == vr.location) {
+      // syntax highlight line
+      //      NSLog(@"Highlight line");
+      
+      NSRange r = [[self string] lineRangeForRange:[self selectedRange]];
+      
+      [self.coloringEngine colorTextView:self
+                             textStorage:[self textStorage]
+                           layoutManager:[self layoutManager]
+                                 inRange:r];
+      
+    } else {
+      
+      
+      //      NSLog(@"Highlight visible");
+      // adjust range to be greater than the visible range
+      NSInteger loc = vr.location-vr.length/2;
+      NSInteger strLen = [[self string] length];
+      if (loc < 0)
+        loc = 0;
+      NSInteger length = vr.length*2;
+      if (loc+length >= strLen) {
+        length = strLen - loc - 1;
+      }
+      if (length < 0) {
+        length = 0;
+      }
+      
+      // make sure we start and end at line ends
+      NSRange lr = [[self string] lineRangeForRange:NSMakeRange(loc, 0)];
+      NSInteger diff = loc - lr.location;
+      loc = lr.location;
+      length += diff;
+      lr = [[self string] lineRangeForRange:NSMakeRange(loc+length, 0)];
+      NSRange r = NSMakeRange(loc, NSMaxRange(lr)-loc);
+      
+      
+      // syntax highlight full visible range
+      [self.coloringEngine colorTextView:self
+                             textStorage:[self textStorage]
+                           layoutManager:[self layoutManager]
+                                 inRange:r];
+    }
+    
+    // store visible range
+    self.lastVisiblerange = vr;
+    
+  } // End if colouring engine
 }
 
 #pragma mark -
@@ -971,6 +1012,11 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   self.documentEditorBackgroundColor = theme.documentEditorBackgroundColor;
   self.currentLineColor = theme.currentLineColor;
   self.highlightCurrentLine = [theme.highlightCurrentLine boolValue];
+  
+  [self setSelectedTextAttributes:
+   @{NSBackgroundColorAttributeName: theme.documentEditorSelectionBackgroundColor,
+   NSForegroundColorAttributeName: theme.documentEditorSelectionColor}];
+
 }
 
 - (void) handleThemeChangedNotification:(NSNotification*)aNote
@@ -1060,9 +1106,9 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [self setInsertionPointColor:cc];
   
   // selection color
-  [self setSelectedTextAttributes:
-   @{NSBackgroundColorAttributeName: theme.documentEditorSelectionBackgroundColor,
-   NSForegroundColorAttributeName: theme.documentEditorSelectionColor}];
+//  [self setSelectedTextAttributes:
+//   @{NSBackgroundColorAttributeName: theme.documentEditorSelectionBackgroundColor,
+//   NSForegroundColorAttributeName: theme.documentEditorSelectionColor}];
   
 }
 
@@ -1315,7 +1361,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self jumpToNextPlaceholder:self];
     }
     [self clearSpellingList];
-    [self colorVisibleText];
+    [self colorText];
     [self didChangeText];
   }
 }
@@ -1973,10 +2019,28 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   visRect.origin.x -= tco.x;
   visRect.origin.y -= tco.y;
   
-  NSRange glyphRange = [lm glyphRangeForBoundingRect:visRect
-                                     inTextContainer:[self textContainer]];
-  NSRange charRange = [lm characterRangeForGlyphRange:glyphRange
-                                     actualGlyphRange:NULL];
+//  NSLog(@"Visible rect %@", NSStringFromRect(visRect));
+  
+  NSPoint topLeft = NSMakePoint(visRect.origin.x, visRect.origin.y + visRect.size.height);
+  NSPoint botRight = NSMakePoint(visRect.origin.x + visRect.size.width, visRect.origin.y);
+  
+  NSUInteger endIdx = [lm characterIndexForPoint:topLeft inTextContainer:[self textContainer] fractionOfDistanceBetweenInsertionPoints:NULL];
+  NSUInteger startIdx = [lm characterIndexForPoint:botRight inTextContainer:[self textContainer] fractionOfDistanceBetweenInsertionPoints:NULL];
+  
+//  NSLog(@"Char range %ld -> %ld", startIdx, endIdx);
+  
+  NSRange charRange = NSMakeRange(startIdx, endIdx-startIdx);
+  
+//  NSRange glyphRange = [lm glyphRangeForBoundingRect:visRect
+//                                     inTextContainer:[self textContainer]];
+//  
+//  
+//  NSLog(@"Visible glyph %@", NSStringFromRange(glyphRange));
+//  
+//  NSRange charRange = [lm characterRangeForGlyphRange:glyphRange
+//                                     actualGlyphRange:NULL];
+//  NSLog(@"Visible char %@", NSStringFromRange(charRange));
+  
   return charRange;
 }
 
@@ -2011,10 +2075,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 // Returns a rectangle suitable for highlighting a background rectangle for the given text range.
 - (NSRect) highlightRectForRange:(NSRange)aRange
 {
-  //  NSLog(@"Getting highlight range for range %@", NSStringFromRange(aRange));
+//    NSLog(@"Getting highlight range for range %@", NSStringFromRange(aRange));
   NSRange r = aRange;
   NSRange startLineRange = [[self string] lineRangeForRange:NSMakeRange(r.location, 0)];
-  //  NSLog(@"Start line range %@", NSStringFromRange(startLineRange));
+//    NSLog(@"Start line range %@", NSStringFromRange(startLineRange));
   NSInteger er = NSMaxRange(r)-1;
   NSString *text = [self string];
   
@@ -2028,16 +2092,22 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   }
   
   NSRange endLineRange = [[self string] lineRangeForRange:NSMakeRange(er, 0)];
-  //  NSLog(@"End line range %@", NSStringFromRange(endLineRange));
+//    NSLog(@"End line range %@", NSStringFromRange(endLineRange));
   
   NSRange cr = NSMakeRange(startLineRange.location, NSMaxRange(endLineRange)-startLineRange.location-1);
   if (NSMaxRange(cr) >= [self.string length]) {
     return  NSZeroRect;
   }
   
-  NSRange gr = [[self layoutManager] glyphRangeForCharacterRange:cr
-                                            actualCharacterRange:NULL];
-  NSRect br = [[self layoutManager] boundingRectForGlyphRange:gr inTextContainer:[self textContainer]];
+  NSLayoutManager *lm = [self layoutManager];
+  
+
+  NSUInteger gStartIdx = [lm glyphIndexForCharacterAtIndex:cr.location];
+  NSUInteger gEndIdx = [lm glyphIndexForCharacterAtIndex:cr.location + cr.length - 1];
+  
+  
+//  NSRange gr = [lm glyphRangeForCharacterRange:cr actualCharacterRange:NULL];
+  NSRect br = [lm boundingRectForGlyphRange:NSMakeRange(gStartIdx, gEndIdx-gStartIdx+1) inTextContainer:[self textContainer]];
   
   NSRect b = [self bounds];
   CGFloat h = br.size.height;
@@ -2047,7 +2117,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   NSPoint containerOrigin = [self textContainerOrigin];
   
   NSRect aRect = NSMakeRect(0, y, w, h);
-  //  NSLog(@"Highlight rect: %@", NSStringFromRect(aRect));
+//    NSLog(@"Highlight rect: %@", NSStringFromRect(aRect));
   // Convert from view coordinates to container coordinates
   aRect = NSOffsetRect(aRect, containerOrigin.x, containerOrigin.y);
   return aRect;
@@ -2058,12 +2128,12 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   if (self != nil) {
 //    [self setNeedsDisplay:YES];
-    NSRange r = [self selectedRange];
-    [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
-                                                        object:self
-                                                      userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
+//    NSRange r = [self selectedRange];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
+//                                                        object:self
+//                                                      userInfo:@{@"index": [NSNumber numberWithInteger:r.location]}];
     
-    [self colorVisibleText];
+    [self colorText];
     [self highlightMatchingWords];
   }
 }
@@ -2163,13 +2233,14 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       [self didChangeText];
       NSRange newRange = NSMakeRange(sel.location+[astr length], 0);
       [self setSelectedRange:newRange];
-      [self scrollRangeToVisible:newRange];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+//      [self scrollRangeToVisible:newRange];
+      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
     }
   }
   
   [self applyFontAndColor:YES];
-  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+//  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+  [self highlightCurrentLine];
 }
 
 - (void) insertTab:(id)sender
@@ -2209,7 +2280,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 	if (selRange.location == 0) {
 		// now put in the requested newline
 		[super insertNewline:sender];
-    [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+    [self performSelector:@selector(colorText) withObject:nil afterDelay:0.1];
 		return;
 	}
 	
@@ -2245,7 +2316,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 		if (self.shiftKeyOn) {
 			[super insertNewline:sender];
 			[self insertTab:sender];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
+      [self performSelector:@selector(colorText) withObject:nil afterDelay:0.1];
 			return;
 		}
 		
@@ -2297,7 +2368,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
       
       // wind back the location of the cursor
       [self setSelectedRange:selRange];
-      [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.3];
+      [self performSelector:@selector(colorText) withObject:nil afterDelay:0.3];
       
       return;
     } // end if insert
@@ -2910,10 +2981,10 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
     NSRange sel = [self selectedRange];
     NSString *str = [self string];
     if (sel.location < [str length]) {
-      NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
-      if (NSEqualRanges(lineRange, self.currentLineRange) == NO) {
-        self.currentLineRect = NSIntegralRect([self highlightRectForRange:lineRange]);
-        self.currentLineRange = lineRange;
+//      NSRange lineRange = [str lineRangeForRange:NSMakeRange(sel.location,0)];
+      if (NSEqualRanges(sel, self.currentLineRange) == NO) {
+        self.currentLineRect = NSIntegralRect([self highlightRectForRange:sel]);
+        self.currentLineRange = sel;
       }
       [self.currentLineColor set];
       [NSBezierPath fillRect:self.currentLineRect];
@@ -2945,21 +3016,21 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 {
   [super deleteBackward:sender];
   [self applyCurrentTextColorToLine];
-  [self colorVisibleText];
+  [self colorText];
 }
 
 - (void)deleteWordBackward:(id)sender
 {
   [super deleteWordBackward:sender];
   [self applyCurrentTextColorToLine];
-  [self colorVisibleText];
+  [self colorText];
 }
 
 - (void)deleteToBeginningOfLine:(id)sender
 {
   [super deleteToBeginningOfLine:sender];
   [self applyCurrentTextColorToLine];
-  [self colorVisibleText];
+  [self colorText];
 }
 
 - (void) completeOpenBrace:(unichar)o withClosingBrace:(unichar)c
@@ -3228,7 +3299,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   
 	[self wrapLine];
   
-  [self colorVisibleText];
+  [self colorText];
 //  [self performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.1];
 }
 
