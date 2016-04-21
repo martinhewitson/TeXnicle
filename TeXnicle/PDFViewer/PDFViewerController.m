@@ -195,7 +195,11 @@
 
 - (IBAction)printPDF:(id)sender
 {
-  [self.pdfview print:self];
+  PDFDocument *doc = [self.pdfview document];
+  
+  NSPrintInfo *pi = [NSPrintInfo sharedPrintInfo];
+  pi.paperName = @"Letter";
+  [self.pdfview printWithInfo:pi autoRotate:NO pageScaling:kPDFPrintPageScaleNone];
 }
 
 
