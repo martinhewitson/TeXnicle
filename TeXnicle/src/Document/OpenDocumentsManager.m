@@ -346,13 +346,8 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
           [self selectTabForFile:self.currentDoc];
         }
         
-        
-        
-//        [self.texEditorViewController.textView performSelectorOnMainThread:@selector(colorVisibleText)
-//                                                                withObject:nil
-//                                                             waitUntilDone:YES];
-        
-        [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
+        [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0.2];
+        [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:1.0];
         
         [self enableImageView:NO];
       } // end doc document is correct class
@@ -454,8 +449,9 @@ NSString * const TPOpenDocumentsDidAddFileNotification = @"TPOpenDocumentsDidAdd
 - (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
 {
   // update layout so that the findbar gets the correct notifications and the search works
+  [self saveCursorAndScrollPosition];
+  [self.texEditorViewController.textView setSelectedRange:NSMakeRange(0,0)];
   [self.texEditorViewController.textView noteStringWillChange];
-	[self saveCursorAndScrollPosition];
 }
 
 - (void)tabView:(NSTabView *)aTabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
