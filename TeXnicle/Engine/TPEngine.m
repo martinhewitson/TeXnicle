@@ -395,12 +395,29 @@
   if (keepDocument == NO && [[[NSUserDefaults standardUserDefaults] valueForKey:TPTrashDocumentFileWhenTrashing] boolValue]) {
     if (self.compiledDocumentPath) {
       if ([fm fileExistsAtPath:self.compiledDocumentPath]) {
-        if ([fm removeItemAtPath:self.compiledDocumentPath error:&error]) {
-          [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", self.compiledDocumentPath]];
-        } else {
-          [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", self.compiledDocumentPath, [error localizedDescription]]];
+        
+        BOOL trashRecycle = [[NSUserDefaults standardUserDefaults] boolForKey:TPTrashFilesRecycle];
+        
+        NSString *option = NSWorkspaceDestroyOperation;
+        if (trashRecycle) {
+          option = NSWorkspaceRecycleOperation;
         }
-      }		
+        
+        NSString *filename = [self.compiledDocumentPath lastPathComponent];
+        NSString *path = [self.compiledDocumentPath stringByDeletingLastPathComponent];
+        
+        BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:option
+                                                                    source:path
+                                                               destination:@""
+                                                                     files:@[filename] tag:nil];
+        
+        if (success == NO) {
+          [self enginePostMessage:[NSString stringWithFormat:@"Failed to delete: %@ [%@]", filename, [error localizedDescription]]];
+        } else {
+          [self enginePostMessage:[NSString stringWithFormat:@"Deleted: %@", filename]];
+        }
+        
+      }
     }
   }
   
@@ -429,6 +446,7 @@
   id isDir;
   id isDirPackage;
   BOOL trashRecursively = [[NSUserDefaults standardUserDefaults] boolForKey:TPTrashAuxFilesRecursively];
+  BOOL trashRecycle = [[NSUserDefaults standardUserDefaults] boolForKey:TPTrashFilesRecycle];
   
   NSDirectoryEnumerationOptions options = NSDirectoryEnumerationSkipsHiddenFiles;
   
@@ -474,8 +492,12 @@
         NSString *filename = [file lastPathComponent];
         
         // recycle to trash
+        NSString *option = NSWorkspaceDestroyOperation;
+        if (trashRecycle) {
+          option = NSWorkspaceRecycleOperation;
+        }
         
-        BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
+        BOOL success = [[NSWorkspace sharedWorkspace] performFileOperation:option
                                                                     source:[aDir path]
                                                                destination:@""
                                                                      files:@[filename] tag:nil];

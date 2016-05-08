@@ -107,6 +107,7 @@ NSString * const OpenConsoleOnTypeset = @"OpenConsoleOnTypeset";
 NSString * const TPTrashFiles = @"TPTrashFiles";
 NSString * const TPTrashDocumentFileWhenTrashing = @"TPTrashDocumentFileWhenTrashing";
 NSString * const TPTrashAuxFilesRecursively = @"TPTrashAuxFilesRecursively";
+NSString * const TPTrashFilesRecycle = @"TPTrashFilesRecycle";
 NSString * const TPSpellCheckerLanguage = @"TPSpellCheckerLanguage";
 NSString * const TPRestoreOpenTabs = @"TPRestoreOpenTabs";
 NSString * const TPConsoleDisplayLevel = @"TPConsoleDisplayLevel";
@@ -434,9 +435,10 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
   defaultValues[TPDefaultEngineName] = @"pdflatex";
   
 	// --------- Trash
-	NSArray *files = @[@"aux", @"log", @"bbl", @"out"];
+	NSArray *files = @[@"aux", @"log", @"bbl", @"out", @"blg"];
 	defaultValues[TPTrashFiles] = files;
 	defaultValues[TPTrashDocumentFileWhenTrashing] = @YES;
+  defaultValues[TPTrashFilesRecycle] = @YES;
   defaultValues[TPTrashAuxFilesRecursively] = @NO;
   
 	//---------- Console settings
