@@ -6,6 +6,90 @@
 		<description>Most recent changes with links to updates.</description>
 		<language>en</language>
     
+    
+    <!-- Version 2.2.15 -->
+    <item>
+      <title>Version 2.2.15 (build 2740)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.15</h2>
+        
+        <p>
+        
+        Improved performance and bug fixing. The spell-checker would sometimes run away causing high cpu usage.
+        
+        </p>
+      ]]></description>
+      <pubDate>5th January 2016</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.15.zip"
+      sparkle:shortVersionString="2.2.15"
+      sparkle:version="2740"
+      length="17040101"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFHyImcijSqqR1D3H/F5nBmZFUbnuAhRtw2hw74ruRviNKL5zA/wu3W4nAQ=="
+      />
+    </item>
+    
+    <!-- Version 2.2.14 -->
+    <item>
+      <title>Version 2.2.14 (build 2691)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.14</h2>
+        
+        <p>
+        
+        <h3>General</h3>
+        <ul>
+        <li>Better handling of the PDF being deleted from disk behind TeXnicle's back (e.g. via Finder).</li>
+        <li>The pre-defined formatting hot-keys (cmd-b, cmd-i, etc) now work when no text is selected.</li>
+        <li>The project Finder now supports regular expression searches
+         (removed 'match whole words' option as this makes little sense with regular expression searches).</li>
+        <li>Improved performance for meta-data scanning in projects</li>
+        <li>Some shiny new icons by Vincent Bouvier</li>
+        <li>Engines updated to work out-of-the-box with MacTeX and El Capitan</li>
+        <li>Various bug fixes</li>
+        </ul>
+        
+        </p>
+      ]]></description>
+      <pubDate>4th October 2015</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.14.zip"
+      sparkle:shortVersionString="2.2.14"
+      sparkle:version="2691"
+      length="17039751"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFEL2xwzqNPgfSX4w27YBQA7N1IbjAhQHTMMNWU9OuOYueC0OePKN0CGeWA=="
+      />
+    </item>
+    
+    <!-- Version 2.2.13 -->
+    <item>
+      <title>Version 2.2.13 (build 2551)</title>
+      <description><![CDATA[
+        <h2>TeXnicle 2.2.13</h2>
+        
+        <p>
+        
+        <h3>General</h3>
+        <ul>
+        <li>Improvements in jump-bar support for different sections.</li>
+        <li>Bug fix to line-number display.</li>
+        <li>Bug fixes to completion pop-up window for dark-coloured themes.</li>
+        <li>Bug fix in project template creation.</li>
+        </ul>
+        
+        </p>
+      ]]></description>
+      <pubDate>14th December 2014</pubDate>
+      <enclosure url="http://www.bobsoft-mac.de/resources/TeXnicle/2.2/TeXnicle.app.2.2.13.zip"
+      sparkle:shortVersionString="2.2.13"
+      sparkle:version="2551"
+      length="24637496"
+      type="application/octet-stream"
+      sparkle:dsaSignature="MCwCFAd0/9l+Eao1VlGy9kf5EzugW/p2AhQNxoBUrjodYI9azu9aW3PUpCdLYg=="
+      />
+    </item>
+    
+    
     <!-- Version 2.2.12 -->
     <item>
       <title>Version 2.2.12 (build 2438)</title>

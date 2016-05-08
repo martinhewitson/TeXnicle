@@ -1,10 +1,10 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
 {\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
 \f3\fnil\fcharset0 Calibri;}
 {\colortbl;\red255\green255\blue255;\red15\green74\blue188;\red151\green85\blue0;\red16\green73\blue188;
 \red0\green141\blue36;\red56\green110\blue255;\red255\green0\blue15;\red143\green0\blue255;\red0\green141\blue16;
 \red0\green110\blue173;\red48\green107\blue255;\red255\green0\blue0;\red255\green132\blue0;\red217\green11\blue0;
-\red18\green42\blue217;\red63\green110\blue116;}
+\red18\green42\blue217;\red255\green0\blue7;\red83\green83\blue83;\red63\green110\blue116;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
 \paperw11900\paperh16840\vieww24720\viewh14520\viewkind0
@@ -292,10 +292,27 @@ Also, is there yet a possibility to move the console below the PDF panel? And ho
 
 \f3 \cf0 I also noticed that there are no preferences to configure the information that is seen in the autocomplete-menu when typing citations in. That would be superb to be able to define like: "@author@, @year@: @title@ \'85\'93 WITH SMART functionality OR (doing it the other way) by enabling user to define the showing string for all of the ref types separately. For article, book, in proceedings\'85 etc.\
 \
-Also noticed that it would be better to see the syntax warnings at the bottom of editor when needed to give the error messages more horizontal space for reading. Also that could have an option \'93show only errors in current file\'94.
-\f0 \
+Also noticed that it would be better to see the syntax warnings at the bottom of editor when needed to give the error messages more horizontal space for reading. Also that could have an option \'93show only errors in current file\'94.\
+\
+\cf16 \
+\pard\pardeftab720
+
+\f1\fs24 \cf16 \expnd0\expndtw0\kerning0
+I'd like to have the option to do some postprocessing per project, similar to how the engines are handled would make sense to me. At the moment, one must create an engine that a particular project is using, that includes the postprocessing at the end. Variables passed to the pp file help very much, self-defined variables would be the cherry on top.\
+\pard\pardeftab720
+
+\fs20 \cf16 \expnd0\expndtw0\kerning0
+\'97
+\f0\fs28 \cf0 \kerning1\expnd0\expndtw0 \
 \pard\tx337\pardeftab337\pardirnatural
 \cf0 \
+Version 2.2.13\
+--------------\
+\pard\tx337\pardeftab337\pardirnatural
+\cf0 \
+\
+\
+\
 Version 2.2.12\
 --------------\
 \
@@ -402,7 +419,7 @@ Version 2.2.2\
 -------------\
 \
 + Added the possibility to change the font used in the navigator sidebar. This can be set in each theme.\
-+ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf16 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
++ Bug fix: migration of old color settings to a new theme sometimes failed. To migrate again, edit the TeXnicle preferences plist at ~/Library/Preferences/com.bobsoft.TeXnicle.plist and set the value for the key \cf18 \CocoaLigature0 TPThemeDidMigrate\cf0 \CocoaLigature1  to NO.\
 + Small bug fixes in theme editing UI.\
 + Bug fix for 'missing insertion point' problem experienced by some Snow Leopard users.\
 \
