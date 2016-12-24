@@ -57,9 +57,11 @@
   if ([self.value isKindOfClass:[NSAttributedString class]]) {
     return self.value;
   } else if ([self.value isKindOfClass:[NSString class]]) {
-    att = [[NSMutableAttributedString alloc] initWithString:self.value];
+    NSString *str = [self.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    att = [[NSMutableAttributedString alloc] initWithString:str];
   } else {
-    att = [[NSMutableAttributedString alloc] initWithString:self.string];
+    NSString *str = [self.string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    att = [[NSMutableAttributedString alloc] initWithString:str];
   }
   
   // apply paragraph
