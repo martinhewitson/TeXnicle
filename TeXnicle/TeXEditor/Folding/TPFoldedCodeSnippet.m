@@ -37,7 +37,7 @@
   // replace placeholders in string
   aString = [aString replacePlaceholders];
 	NSData *d = [aString RTFDFromRange:NSMakeRange(0, [aString length])
-									documentAttributes:nil];
+                  documentAttributes:@{NSDocumentTypeDocumentAttribute : NSRTFDTextDocumentType}];
 	NSFileWrapper *fw = [[NSFileWrapper alloc] initRegularFileWithContents:d];
 	[fw setPreferredFilename:@"snippet"];
 	self = [super initWithFileWrapper:fw];
