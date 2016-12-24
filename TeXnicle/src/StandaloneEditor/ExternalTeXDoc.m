@@ -2822,7 +2822,6 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
     [self.texEditorViewController.textView performSelector:@selector(colorVisibleText) withObject:nil afterDelay:0];
     
   } else {
-    // TODO: this may break on 10.6.8 !!!!
     
     [[NSDocumentController sharedDocumentController]
       openDocumentWithContentsOfURL:aFile
