@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPSpellCheckerListingViewController">
@@ -22,14 +23,15 @@
             <rect key="frame" x="0.0" y="0.0" width="240" height="540"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <customView id="27" customClass="MHToolbarBackgroundView">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="27" customClass="MHToolbarBackgroundView">
                     <rect key="frame" x="0.0" y="509" width="240" height="32"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" id="83" customClass="HHValidatedButton">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="83" customClass="HHValidatedButton">
                             <rect key="frame" x="184" y="7" width="47" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="V2b-6U-cDi"/>
+                                <constraint firstAttribute="width" constant="47" id="otH-WY-uW4"/>
+                            </constraints>
                             <buttonCell key="cell" type="roundTextured" title="Reveal" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="84">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystem"/>
@@ -38,10 +40,12 @@
                                 <action selector="jumpToSelectedWord:" target="-2" id="89"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" id="86" customClass="HHValidatedButton">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="86" customClass="HHValidatedButton">
                             <rect key="frame" x="8" y="7" width="56" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="QpA-N8-EIo"/>
+                                <constraint firstAttribute="width" constant="56" id="mz7-oh-a9f"/>
+                            </constraints>
                             <buttonCell key="cell" type="roundTextured" title="Correct" bezelStyle="texturedRounded" imagePosition="right" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="87">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystem"/>
@@ -50,10 +54,12 @@
                                 <action selector="correct:" target="-2" id="92"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" id="95" customClass="HHValidatedButton">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="95" customClass="HHValidatedButton">
                             <rect key="frame" x="72" y="7" width="42" height="18"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="42" id="80T-R5-6p6"/>
+                                <constraint firstAttribute="height" constant="17" id="yYm-hr-d4D"/>
+                            </constraints>
                             <buttonCell key="cell" type="roundTextured" title="Learn" bezelStyle="texturedRounded" image="NSActionTemplate" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="96">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystem"/>
@@ -63,21 +69,32 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
+                    <constraints>
+                        <constraint firstItem="83" firstAttribute="top" secondItem="27" secondAttribute="top" constant="7" id="63c-lj-cmQ"/>
+                        <constraint firstItem="95" firstAttribute="leading" secondItem="86" secondAttribute="trailing" constant="8" id="BOK-iw-WJU"/>
+                        <constraint firstAttribute="trailing" secondItem="83" secondAttribute="trailing" constant="9" id="DVp-ET-Xcc"/>
+                        <constraint firstItem="86" firstAttribute="leading" secondItem="27" secondAttribute="leading" constant="8" id="EZY-wp-PcI"/>
+                        <constraint firstItem="95" firstAttribute="top" secondItem="27" secondAttribute="top" constant="7" id="M6X-v6-Bd2"/>
+                        <constraint firstItem="86" firstAttribute="top" secondItem="27" secondAttribute="top" constant="7" id="hAm-vG-aL2"/>
+                        <constraint firstAttribute="height" constant="32" id="tfH-lo-CCm"/>
+                    </constraints>
                 </customView>
-                <customView id="79" customClass="MHToolbarBackgroundView">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="79" customClass="MHToolbarBackgroundView">
                     <rect key="frame" x="0.0" y="-1" width="240" height="32"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="93">
+                        <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="93">
                             <rect key="frame" x="10" y="9" width="16" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="X0F-Y0-k5j"/>
+                                <constraint firstAttribute="height" constant="16" id="ryF-Y9-rgP"/>
+                            </constraints>
                         </progressIndicator>
-                        <button verticalHuggingPriority="750" id="80" customClass="HHValidatedButton">
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="80" customClass="HHValidatedButton">
                             <rect key="frame" x="152" y="7" width="80" height="19"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="Ym9-5k-C91"/>
+                                <constraint firstAttribute="height" constant="18" id="kOU-dU-YRM"/>
+                            </constraints>
                             <buttonCell key="cell" type="roundTextured" title="Force Check" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="81">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="smallSystem"/>
@@ -87,19 +104,23 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="80" secondAttribute="trailing" constant="8" id="It9-jV-rxj"/>
+                        <constraint firstItem="93" firstAttribute="leading" secondItem="79" secondAttribute="leading" constant="10" id="ZW3-6K-MIE"/>
+                        <constraint firstAttribute="bottom" secondItem="93" secondAttribute="bottom" constant="9" id="dKP-8u-jIN"/>
+                        <constraint firstAttribute="height" constant="32" id="dgg-GR-mYk"/>
+                        <constraint firstAttribute="bottom" secondItem="80" secondAttribute="bottom" constant="8" id="xGk-zK-6zx"/>
+                    </constraints>
                 </customView>
-                <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="3">
+                <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
                     <rect key="frame" x="0.0" y="31" width="240" height="478"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="x7m-2A-MdF">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="478"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" indentationPerLevel="14" outlineTableColumn="8" id="4" customClass="TPSpellingOutlineView">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="478"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <animations/>
                                 <size key="intercellSpacing" width="3" height="0.0"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -124,23 +145,29 @@
                                 </connections>
                             </outlineView>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
-                    <animations/>
-                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="5">
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="5">
                         <rect key="frame" x="1" y="524" width="238" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="7">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
             </subviews>
-            <animations/>
+            <constraints>
+                <constraint firstItem="27" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-1" id="08d-Kh-iNT"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="3Jf-es-T9Z"/>
+                <constraint firstItem="79" firstAttribute="top" secondItem="3" secondAttribute="bottom" id="4I6-kM-xe3"/>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="4q1-BF-izR"/>
+                <constraint firstAttribute="trailing" secondItem="79" secondAttribute="trailing" id="6Q8-0d-wt8"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="27" secondAttribute="bottom" id="ASE-Dn-Dtv"/>
+                <constraint firstAttribute="bottom" secondItem="79" secondAttribute="bottom" constant="-1" id="Pla-hm-3g5"/>
+                <constraint firstItem="27" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Tpg-B4-bFb"/>
+                <constraint firstItem="79" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="eSx-Eo-wG2"/>
+                <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" id="fpg-6W-MxB"/>
+            </constraints>
         </customView>
     </objects>
     <resources>

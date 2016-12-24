@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TeXProjectDocument">
@@ -131,7 +133,7 @@
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" indentationPerLevel="16" outlineTableColumn="100037" id="100036" customClass="TPOutlineView">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="234" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="542"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="2" height="3"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -261,7 +263,7 @@
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Item 6" identifier="" id="100776" userLabel="Prefs">
-                                                <view key="view" id="100777" customClass="EffectView">
+                                                <view key="view" id="100777">
                                                     <rect key="frame" x="0.0" y="0.0" width="235" height="574"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
@@ -422,12 +424,10 @@
                         <box key="view" autoresizesSubviews="NO" borderType="line" titlePosition="noTitle" id="100830">
                             <rect key="frame" x="0.0" y="14" width="406" height="39"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <view key="contentView">
+                            <view key="contentView" id="JNx-OJ-Ei8">
                                 <rect key="frame" x="1" y="1" width="404" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
-                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </box>
                     </toolbarItem>
                 </allowedToolbarItems>
@@ -448,6 +448,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="17"/>
             </connections>
+            <point key="canvasLocation" x="593" y="9"/>
         </window>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <treeController mode="entity" entityName="ProjectItem" fetchPredicateFormat="parent == nil AND project != nil" automaticallyPreparesContent="YES" childrenKeyPath="children" leafKeyPath="isLeaf" avoidsEmptySelection="NO" id="100045" userLabel="Project Item Tree Controller" customClass="ProjectItemTreeController">
@@ -494,15 +495,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="190"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <textView importsGraphics="NO" continuousSpellChecking="YES" allowsUndo="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="100375" customClass="TeXTextView">
+                                <textView importsGraphics="NO" continuousSpellChecking="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="100375" customClass="TeXTextView">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="190"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="480" height="190"/>
                                     <size key="maxSize" width="480" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="480" height="190"/>
-                                    <size key="maxSize" width="480" height="10000000"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
