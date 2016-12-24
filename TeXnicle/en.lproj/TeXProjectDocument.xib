@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,6 +48,7 @@
                 <outlet property="statusViewContainer" destination="100836" id="100837"/>
                 <outlet property="tabbar" destination="100110" id="101006"/>
                 <outlet property="texEditorContainer" destination="100107" id="100108"/>
+                <outlet property="toDoContainerView" destination="7qp-lx-Ha4" id="0lh-Po-I11"/>
                 <outlet property="toolbar" destination="100024" id="101021"/>
                 <outlet property="warningsContainerView" destination="100925" id="100976"/>
                 <outlet property="window" destination="5" id="18"/>
@@ -253,6 +254,12 @@
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 5" identifier="" id="100994" userLabel="Commands">
                                                                     <view key="view" id="100995">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Item 5" identifier="" id="jvM-nQ-GSw" userLabel="ToDos">
+                                                                    <view key="view" id="7qp-lx-Ha4" userLabel="ToDo Container View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="235" height="550"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
