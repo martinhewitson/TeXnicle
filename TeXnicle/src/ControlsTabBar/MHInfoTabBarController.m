@@ -60,6 +60,7 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   self.labelsButton = nil;
   self.citationsButton = nil;
   self.commandsButton = nil;
+  self.toDoButton = nil;
 }
 
 - (id) init
@@ -97,6 +98,7 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   [self.labelsButton setState:NSOffState];
   [self.citationsButton setState:NSOffState];
   [self.commandsButton setState:NSOffState];
+  [self.toDoButton setState:NSOffState];
   
   NSMutableArray *nonNilButtons = [NSMutableArray array];
   if (self.bookmarksButton != nil) {
@@ -116,6 +118,9 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
   }
   if (self.commandsButton != nil) {
     [nonNilButtons addObject:self.commandsButton];
+  }
+  if (self.toDoButton != nil) {
+    [nonNilButtons addObject:self.toDoButton];
   }
   
   buttons = [NSArray arrayWithArray:nonNilButtons];
@@ -178,6 +183,9 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     case 5:
       return self.commandsButton;
       break;
+    case 6:
+      return self.toDoButton;
+      break;
     default:
       return nil;
       break;
@@ -198,6 +206,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     return 4;
   } else if (sender == self.commandsButton) {
     return 5;
+  } else if (sender == self.toDoButton) {
+    return 6;
   } else {
     return 0;
   }
@@ -221,6 +231,8 @@ NSString * const TPInfoControlsTabSelectionDidChangeNotification = @"TPInfoContr
     [self toggleOn:self.citationsButton];    
   } else if (idx == [buttons indexOfObject:self.commandsButton]) {
     [self toggleOn:self.commandsButton];    
+  } else if (idx == [buttons indexOfObject:self.toDoButton]) {
+    [self toggleOn:self.toDoButton];
   }
 }
 

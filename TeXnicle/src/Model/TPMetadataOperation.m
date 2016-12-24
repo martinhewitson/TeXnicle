@@ -14,6 +14,7 @@
 #import "TPNewCommand.h"
 #import "TPNewEnvironment.h"
 #import "TPLabel.h"
+#import "TPToDo.h"
 #import "TPRegularExpression.h"
 
 @interface TPMetadataOperation ()
@@ -45,6 +46,7 @@
     NSMutableArray *newEnvironments = [[NSMutableArray alloc] init];
     NSMutableArray *newCitations = [[NSMutableArray alloc] init];
     NSMutableArray *newLabels = [[NSMutableArray alloc] init];
+    NSMutableArray *newToDos = [[NSMutableArray alloc] init];
     
     @autoreleasepool {
     
@@ -137,6 +139,15 @@
         if ([self isCancelled]) return;
       }
     
+      //--------------- ToDos
+      if ([self isCancelled]) return;
+      
+      NSArray *parsedToDos = [self.file.text toDos];
+      for (NSString *str in parsedToDos) {
+        TPToDo *td = [[TPToDo alloc] initWithFile:self.file text:str];
+        [newToDos addObject:td];
+        if ([self isCancelled]) return;
+      }
     }
     
     if ([self isCancelled]) return;
@@ -144,6 +155,7 @@
     self.environments = newEnvironments;
     self.citations = newCitations;
     self.labels = newLabels;
+    self.toDos = newToDos;
     
   }
   @catch(...) {

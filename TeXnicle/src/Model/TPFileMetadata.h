@@ -34,6 +34,7 @@
 @property (strong) NSArray *userNewEnvironments;
 @property (strong) NSArray *citations;
 @property (strong) NSArray *labels;
+@property (strong) NSArray *toDos;
 @property (strong) NSArray *syntaxErrors;
 @property (strong) NSArray *sections;
 

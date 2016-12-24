@@ -1,10 +1,9 @@
 //
-//  MHInfoTabBarController.h
+//  TPToDoViewController.m
 //  TeXnicle
 //
-//  Created by Martin Hewitson on 16/7/12.
+//  Created by Martin Hewitson on 17/7/12.
 //  Copyright (c) 2012 bobsoft. All rights reserved.
-//
 //
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -26,40 +25,51 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import "TPToDoViewController.h"
+#import "externs.h"
+#import "TPToDoSet.h"
 
-extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
+@interface TPToDoViewController ()
 
-@interface MHInfoTabBarController : NSViewController <NSTabViewDelegate>  {
-@private
-  NSArray *buttons;
+@end
+
+@implementation TPToDoViewController
+
+- (void) updateUI
+{
+  //NSLog(@"%@: updateUI", self);
+  NSArray *newFiles = [self metadataViewListOfFiles:self];
+  if (newFiles == nil) {
+    newFiles = @[];
+  }
   
+  // remove any stale files
+  NSMutableArray *filesToRemove = [NSMutableArray array];
+  for (TPToDoSet *set in self.sets) {
+    if ([newFiles containsObject:set.file] == NO) {
+      [filesToRemove addObject:set];
+    }
+  }
+  [self.sets removeObjectsInArray:filesToRemove];
+  
+  // update our files
+  for (TPFileMetadata *newFile in newFiles) {
+    TPMetadataSet *set = [self setForFile:newFile];
+    if (set == nil) {
+      NSArray *toDos = [self metadataView:self newItemsForFile:newFile];
+      if (toDos && [toDos count] > 0) {
+        set = [[TPToDoSet alloc] initWithFile:newFile items:toDos];
+        [self.sets addObject:set];
+      }
+    } else {
+      // update the labels
+      NSArray *newToDos = [self metadataView:self newItemsForFile:newFile];
+      set.items = newToDos;
+    }
+  }
+  
+  [super updateUI];
 }
 
-@property (unsafe_unretained) IBOutlet NSButton *bookmarksButton;
-@property (unsafe_unretained) IBOutlet NSButton *warningsButton;
-@property (unsafe_unretained) IBOutlet NSButton *spellingButton;
-@property (unsafe_unretained) IBOutlet NSButton *labelsButton;
-@property (unsafe_unretained) IBOutlet NSButton *citationsButton;
-@property (unsafe_unretained) IBOutlet NSButton *commandsButton;
-@property (unsafe_unretained) IBOutlet NSButton *toDoButton;
-@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
-@property (strong) IBOutlet NSTabView *tabView;
-
-- (id) initWithMode:(BOOL)standAlone;
-
-- (void) toggleOn:(id)except;
-- (NSInteger) indexOfSelectedTab;
-- (void) selectTabAtIndex:(NSInteger)index;
-
-- (IBAction)buttonSelected:(id)sender;
-
-- (id) buttonForTabIndex:(NSInteger)index;
-- (NSInteger)tabIndexForButton:(id)sender;
-
-#pragma mark -
-#pragma mark Control
-
-- (void) tearDown;
 
 @end

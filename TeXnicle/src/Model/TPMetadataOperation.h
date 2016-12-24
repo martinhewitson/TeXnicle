@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSArray *citations;
 @property (strong, nonatomic) NSArray *syntaxErrors;
 @property (strong, nonatomic) NSArray *labels;
+@property (strong, nonatomic) NSArray *toDos;
 
 - (id) initWithFile:(TPFileMetadata*)aFile;
 

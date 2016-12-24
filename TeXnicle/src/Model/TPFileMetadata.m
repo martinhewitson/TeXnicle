@@ -114,6 +114,7 @@
     self.userNewEnvironments = self.currentOperation.environments;
     self.citations = self.currentOperation.citations;
     self.labels = self.currentOperation.labels;
+    self.toDos = self.currentOperation.toDos;
     
     [self postUpdateNotification];
   }

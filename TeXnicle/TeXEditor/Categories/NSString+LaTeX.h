@@ -33,6 +33,7 @@
 + (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
 - (NSInteger) beginsWithElementInArray:(NSArray*)terms;
 - (NSArray*) referenceLabels;
+- (NSArray*) toDos;
 - (NSArray*) citations;
 - (NSArray*) citationsFromBibliographyIncludedFromPath:(NSString*)sourceFile;
 + (NSString *)stringWithControlsFilteredForString:(NSString *)str ;

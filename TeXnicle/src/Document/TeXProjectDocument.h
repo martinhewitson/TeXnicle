@@ -55,6 +55,7 @@
 #import "TPLabelsViewController.h"
 #import "TPCitationsViewController.h"
 #import "TPNewCommandsViewController.h"
+#import "TPToDoViewController.h"
 #import "TPDocumentReportWindowController.h"
 #import "TPQuickJumpViewController.h"
 

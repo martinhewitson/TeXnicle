@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16C32f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MHInfoTabBarController">
@@ -12,6 +13,7 @@
                 <outlet property="commandsButton" destination="2" id="40"/>
                 <outlet property="labelsButton" destination="4" id="41"/>
                 <outlet property="spellingButton" destination="7" id="42"/>
+                <outlet property="toDoButton" destination="Orb-sq-cEO" id="BwC-p9-9mU"/>
                 <outlet property="view" destination="1" id="45"/>
                 <outlet property="warningsButton" destination="6" id="43"/>
             </connections>
@@ -23,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
             <subviews>
                 <button toolTip="Project Bookmarks" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                    <rect key="frame" x="9" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="2" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="up6-31-y2B"/>
                     </constraints>
@@ -36,7 +38,7 @@
                     </connections>
                 </button>
                 <button toolTip="Syntax Warnings" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                    <rect key="frame" x="38" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="31" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="Y9h-DP-jvm"/>
                     </constraints>
@@ -49,7 +51,7 @@
                     </connections>
                 </button>
                 <button toolTip="Spelling" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                    <rect key="frame" x="68" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="61" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="ay8-CU-obe"/>
                     </constraints>
@@ -62,7 +64,7 @@
                     </connections>
                 </button>
                 <button toolTip="Labels" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="4">
-                    <rect key="frame" x="98" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="91" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="7zt-CC-fKW"/>
                     </constraints>
@@ -75,7 +77,7 @@
                     </connections>
                 </button>
                 <button toolTip="Citations" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                    <rect key="frame" x="128" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="121" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="GWY-E3-09f"/>
                     </constraints>
@@ -88,7 +90,7 @@
                     </connections>
                 </button>
                 <button toolTip="New Commands" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="2">
-                    <rect key="frame" x="158" y="-1" width="36" height="32"/>
+                    <rect key="frame" x="151" y="-1" width="36" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="i8E-Y3-NXO"/>
                     </constraints>
@@ -100,8 +102,8 @@
                         <action selector="buttonSelected:" target="-2" id="51"/>
                     </connections>
                 </button>
-                <button toolTip="New Commands" focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orb-sq-cEO">
-                    <rect key="frame" x="189" y="-1" width="36" height="32"/>
+                <button toolTip="To Do Items" focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orb-sq-cEO" userLabel="ToDo Button">
+                    <rect key="frame" x="183" y="-1" width="36" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="toDoTabBarImage" imagePosition="only" alignment="center" alternateImage="toDoTabBarImageDepressed" state="on" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="kNg-b0-dwW">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -115,7 +117,7 @@
             <constraints>
                 <constraint firstItem="7" firstAttribute="leading" secondItem="5" secondAttribute="trailing" constant="23" id="0Jd-dX-RLN"/>
                 <constraint firstAttribute="bottom" secondItem="2" secondAttribute="bottom" constant="-1" id="IKo-Dt-MnB"/>
-                <constraint firstItem="6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="38" id="LLB-nf-hEg"/>
+                <constraint firstItem="6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="31" id="LLB-nf-hEg"/>
                 <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-6" id="Uog-CG-e6W"/>
                 <constraint firstItem="4" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-6" id="V1C-2D-P5q"/>
                 <constraint firstItem="2" firstAttribute="leading" secondItem="4" secondAttribute="trailing" constant="24" id="XfZ-oa-j8L"/>
@@ -126,7 +128,7 @@
                 <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" constant="-1" id="dRg-ho-E7j"/>
                 <constraint firstItem="3" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-6" id="fEn-iN-z1R"/>
                 <constraint firstItem="4" firstAttribute="leading" secondItem="6" secondAttribute="trailing" constant="24" id="ize-6S-ZFe"/>
-                <constraint firstItem="5" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="9" id="jCL-rg-vSF"/>
+                <constraint firstItem="5" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="2" id="jCL-rg-vSF"/>
                 <constraint firstItem="7" firstAttribute="top" secondItem="1" secondAttribute="top" constant="-6" id="kqa-bA-4e6"/>
                 <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="-1" id="mqa-WA-Rnh"/>
                 <constraint firstAttribute="bottom" secondItem="3" secondAttribute="bottom" constant="-1" id="nDl-Nt-dPf"/>

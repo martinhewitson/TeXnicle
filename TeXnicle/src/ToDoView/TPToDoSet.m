@@ -1,10 +1,9 @@
 //
-//  MHInfoTabBarController.h
+//  TPToDoSet.m
 //  TeXnicle
 //
 //  Created by Martin Hewitson on 16/7/12.
 //  Copyright (c) 2012 bobsoft. All rights reserved.
-//
 //
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -26,40 +25,21 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import "TPLabelsSet.h"
+#import "TPToDoSet.h"
 
-extern NSString * const TPInfoControlsTabSelectionDidChangeNotification;
+@implementation TPToDoSet
 
-@interface MHInfoTabBarController : NSViewController <NSTabViewDelegate>  {
-@private
-  NSArray *buttons;
-  
+
+- (NSAttributedString*)selectedDisplayString
+{
+  return [self stringForDisplayWithColor:[NSColor alternateSelectedControlTextColor] detailsColor:[NSColor alternateSelectedControlTextColor]];
 }
 
-@property (unsafe_unretained) IBOutlet NSButton *bookmarksButton;
-@property (unsafe_unretained) IBOutlet NSButton *warningsButton;
-@property (unsafe_unretained) IBOutlet NSButton *spellingButton;
-@property (unsafe_unretained) IBOutlet NSButton *labelsButton;
-@property (unsafe_unretained) IBOutlet NSButton *citationsButton;
-@property (unsafe_unretained) IBOutlet NSButton *commandsButton;
-@property (unsafe_unretained) IBOutlet NSButton *toDoButton;
-@property (unsafe_unretained) IBOutlet NSSplitView *splitview;
-@property (strong) IBOutlet NSTabView *tabView;
+- (NSAttributedString*)displayString
+{
+  return [self stringForDisplayWithColor:[NSColor colorWithDeviceRed:50.0/255.0 green:200.0/255.0 blue:50.0/255.0 alpha:1.0] detailsColor:[NSColor lightGrayColor]];
+}
 
-- (id) initWithMode:(BOOL)standAlone;
-
-- (void) toggleOn:(id)except;
-- (NSInteger) indexOfSelectedTab;
-- (void) selectTabAtIndex:(NSInteger)index;
-
-- (IBAction)buttonSelected:(id)sender;
-
-- (id) buttonForTabIndex:(NSInteger)index;
-- (NSInteger)tabIndexForButton:(id)sender;
-
-#pragma mark -
-#pragma mark Control
-
-- (void) tearDown;
 
 @end

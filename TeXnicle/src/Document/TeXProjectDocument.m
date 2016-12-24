@@ -88,6 +88,7 @@
 @property (strong) TPLabelsViewController *labelsViewController;
 @property (strong) TPCitationsViewController *citationsViewController;
 @property (strong) TPNewCommandsViewController *commandsViewController;
+@property (strong) TPToDoViewController *toDoViewController;
 
 @property (strong) MHMiniConsoleViewController *miniConsole;
 @property (strong) TPConsoleViewController *embeddedConsoleViewController;
@@ -129,6 +130,7 @@
 @property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *toDoContainerView;
 
 @property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 @property (unsafe_unretained) IBOutlet NSView *statusViewContainer;
@@ -330,6 +332,11 @@
   self.commandsViewController = [[TPNewCommandsViewController alloc] initWithDelegate:self];
   [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
   [self.commandsContainerView addSubview:self.commandsViewController.view];
+
+  // todo view
+  self.toDoViewController = [[TPToDoViewController alloc] initWithDelegate:self];
+  [self.toDoViewController.view setFrame:self.toDoContainerView.bounds];
+  [self.toDoContainerView addSubview:self.toDoViewController.view];
   
   // setup settings
   self.engineSettings = [[TPEngineSettingsController alloc] initWithDelegate:self];
@@ -619,6 +626,7 @@
   [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.toDoViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   
 //  if ([NSApp isYosemite]) {
 //    [self.mainWindow.toolbar setSizeMode:NSToolbarSizeModeSmall];
@@ -822,7 +830,11 @@
   // commands view
   [self.commandsViewController tearDown];
   self.commandsViewController = nil;
-    
+  
+  // todo view
+  [self.toDoViewController tearDown];
+  self.toDoViewController = nil;
+  
   // pdf view controller
   [self.pdfViewerController tearDown];
   self.pdfViewerController = nil;
@@ -2003,6 +2015,10 @@
       case 5:
         // commands
         [self.commandsViewController updateUI];
+        break;
+      case 6:
+        // commands
+        [self.toDoViewController updateUI];
         break;
       default:
         break;
@@ -4766,6 +4782,8 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       [files addObject:item];
     } else if (aViewController == self.warningsViewController && [item.syntaxErrors count] > 0) {
       [files addObject:item];
+    } else if (aViewController == self.toDoViewController && [item.toDos count] > 0) {
+      [files addObject:item];
     }
   }
   
@@ -4843,6 +4861,22 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
       [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
     }
     
+  } else if (aViewController == self.toDoViewController) {
+    
+    // first select the file
+    [self.projectItemTreeController setSelectionIndexPath:nil];
+    // But now try to select the file
+    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+    [self.projectItemTreeController setSelectionIndexPath:idx];
+    
+    // now select the text
+    NSString *exp = [NSString stringWithFormat:@"TODO %@", [anItem valueForKey:@"text"]];
+    
+    NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
+    if (r.location != NSNotFound) {
+      [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    }
+    
   } else if (aViewController == self.warningsViewController) {
     
     // first select the file
@@ -4867,7 +4901,10 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     return file.labels;
   } else if (aViewController == self.warningsViewController) {
     return file.syntaxErrors;
+  } else if (aViewController == self.toDoViewController) {
+    return file.toDos;
   }
+
   
   return @[];
 }

@@ -77,6 +77,28 @@ static NSString *mathModeRegExpr = nil;
   return NSNotFound;
 }
 
+- (NSArray*) toDos
+{
+  // scan string for all \label{something} and return the list of 'something's.
+  NSArray *toDos = [TPRegularExpression stringsMatching:@"TODO\\s+.*" inText:self];
+  
+  NSLog(@"Found ToDos: %@", toDos);
+  
+  NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[toDos count]];
+  
+  for (NSString *toDo in toDos) {
+    NSString *tag = [toDo stringByReplacingOccurrencesOfRegex:@"TODO" withString:@""];
+    NSLog(@"    Got tag %@", tag);
+    if (tag != nil) {
+      tag = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+      [tags addObject:tag];
+    }
+  }
+  
+  return tags;
+}
+
+
 - (NSArray*) referenceLabels
 {	
 	// scan string for all \label{something} and return the list of 'something's.

@@ -177,6 +177,9 @@
 		253AC73E197CC36E008034C5 /* log11.log in Resources */ = {isa = PBXBuildFile; fileRef = 25DB594A1778BC3E000383AF /* log11.log */; };
 		253AC73F197CC36E008034C5 /* log12.log in Resources */ = {isa = PBXBuildFile; fileRef = 2548303318422D600097060F /* log12.log */; };
 		253AC740197CC371008034C5 /* TestLogParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DB59541778BC3E000383AF /* TestLogParserTests.m */; };
+		253D273F1E0E576300157F39 /* TPToDoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253D273E1E0E576300157F39 /* TPToDoViewController.m */; };
+		253D27441E0E588400157F39 /* TPToDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 253D27411E0E588400157F39 /* TPToDo.m */; };
+		253D27451E0E588400157F39 /* TPToDoSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 253D27431E0E588400157F39 /* TPToDoSet.m */; };
 		253D3581196523C300029995 /* TPCodeClippingEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 253D357F196523C300029995 /* TPCodeClippingEditorViewController.m */; };
 		253D3582196523C300029995 /* TPCodeClippingEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253D3580196523C300029995 /* TPCodeClippingEditorViewController.xib */; };
 		253E5E3213951DD300566E23 /* Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253E5E2B13951DD300566E23 /* Library.plist */; };
@@ -210,6 +213,8 @@
 		254D16A716FAE49000A31BE8 /* TPMetadataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 254D16A616FAE49000A31BE8 /* TPMetadataItem.m */; };
 		254D16A916FAE53600A31BE8 /* TPMetadataItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */; };
 		254D16AC16FAE66500A31BE8 /* TPMetadataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */; };
+		254EFA881CDF2BA600B73790 /* toDoTabBarImageDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 254EFA861CDF2BA600B73790 /* toDoTabBarImageDepressed.png */; };
+		254EFA891CDF2BA600B73790 /* toDoTabBarImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 254EFA871CDF2BA600B73790 /* toDoTabBarImage.png */; };
 		254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254FEEA7143ECEF4008B5B12 /* latexmk.engine */; };
 		2552029113E86619007F191F /* rightArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029013E86619007F191F /* rightArrow.icns */; };
 		2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552029613E86C1E007F191F /* HHValidatedButton.m */; };
@@ -982,6 +987,12 @@
 		253D132916326AC9002A0A75 /* reformatTextTestFile5_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile5_reformatted.tex; sourceTree = "<group>"; };
 		253D132B16326B91002A0A75 /* reformatTextTestFile6.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6.tex; sourceTree = "<group>"; };
 		253D132C16326B91002A0A75 /* reformatTextTestFile6_reformatted.tex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = reformatTextTestFile6_reformatted.tex; sourceTree = "<group>"; };
+		253D273D1E0E576300157F39 /* TPToDoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPToDoViewController.h; sourceTree = "<group>"; };
+		253D273E1E0E576300157F39 /* TPToDoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPToDoViewController.m; sourceTree = "<group>"; };
+		253D27401E0E588400157F39 /* TPToDo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPToDo.h; sourceTree = "<group>"; };
+		253D27411E0E588400157F39 /* TPToDo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPToDo.m; sourceTree = "<group>"; };
+		253D27421E0E588400157F39 /* TPToDoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPToDoSet.h; sourceTree = "<group>"; };
+		253D27431E0E588400157F39 /* TPToDoSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPToDoSet.m; sourceTree = "<group>"; };
 		253D357E196523C300029995 /* TPCodeClippingEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCodeClippingEditorViewController.h; sourceTree = "<group>"; };
 		253D357F196523C300029995 /* TPCodeClippingEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCodeClippingEditorViewController.m; sourceTree = "<group>"; };
 		253D3580196523C300029995 /* TPCodeClippingEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPCodeClippingEditorViewController.xib; sourceTree = "<group>"; };
@@ -1035,6 +1046,8 @@
 		254D16A816FAE53600A31BE8 /* TPMetadataItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPMetadataItemView.xib; sourceTree = "<group>"; };
 		254D16AA16FAE66500A31BE8 /* TPMetadataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPMetadataSet.h; sourceTree = "<group>"; };
 		254D16AB16FAE66500A31BE8 /* TPMetadataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPMetadataSet.m; sourceTree = "<group>"; };
+		254EFA861CDF2BA600B73790 /* toDoTabBarImageDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toDoTabBarImageDepressed.png; sourceTree = "<group>"; };
+		254EFA871CDF2BA600B73790 /* toDoTabBarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toDoTabBarImage.png; sourceTree = "<group>"; };
 		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = latexmk.engine; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../HHValidatedButton.h; sourceTree = "<group>"; };
@@ -2007,6 +2020,8 @@
 		25194919138F9596007029E5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				254EFA861CDF2BA600B73790 /* toDoTabBarImageDepressed.png */,
+				254EFA871CDF2BA600B73790 /* toDoTabBarImage.png */,
 				25A4F5911775A6C9002759B8 /* outlinePrefs.icns */,
 				2520AC1916A81677006E9CA2 /* cancel.icns */,
 				252E12221621728F0041B2BE /* TeXnicle.icns */,
@@ -2269,6 +2284,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		253D273C1E0E571700157F39 /* ToDoView */ = {
+			isa = PBXGroup;
+			children = (
+				253D273D1E0E576300157F39 /* TPToDoViewController.h */,
+				253D273E1E0E576300157F39 /* TPToDoViewController.m */,
+				253D27401E0E588400157F39 /* TPToDo.h */,
+				253D27411E0E588400157F39 /* TPToDo.m */,
+				253D27421E0E588400157F39 /* TPToDoSet.h */,
+				253D27431E0E588400157F39 /* TPToDoSet.m */,
+			);
+			name = ToDoView;
+			path = src/ToDoView;
+			sourceTree = "<group>";
+		};
 		253E5E2913951DB500566E23 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -2363,6 +2392,7 @@
 				25DB36BC15B47819009E086A /* LabelsView */,
 				255A16DC15B48FE1004290CC /* CitationsView */,
 				255A16DD15B48FEB004290CC /* CommandsView */,
+				253D273C1E0E571700157F39 /* ToDoView */,
 				2536A4C918143C8300C11DDB /* EnvironmentsView */,
 			);
 			name = MetadataViews;
@@ -3370,7 +3400,7 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = bobsoft;
 				TargetAttributes = {
 					250772EB138E5D81000F1118 = {
@@ -3472,6 +3502,7 @@
 				25A47D1713E1A17C00CAFEB7 /* addToProject2.icns in Resources */,
 				255DB84C13E577BD007629C0 /* buildProject.icns in Resources */,
 				255DB85513E5D5F8007629C0 /* TPImageViewerController.xib in Resources */,
+				254EFA891CDF2BA600B73790 /* toDoTabBarImage.png in Resources */,
 				2552029113E86619007F191F /* rightArrow.icns in Resources */,
 				2545864D13E9268700461494 /* PDFViewerController.xib in Resources */,
 				2545865113E936FE00461494 /* leftArrow.icns in Resources */,
@@ -3669,6 +3700,7 @@
 				25D10F35176F00AF004C40AE /* SafariIWITLeftCap@2x.png in Resources */,
 				25D10F36176F00AF004C40AE /* SafariIWITRightCap.png in Resources */,
 				25D10F37176F00AF004C40AE /* SafariIWITRightCap@2x.png in Resources */,
+				254EFA881CDF2BA600B73790 /* toDoTabBarImageDepressed.png in Resources */,
 				25A4F58D17759452002759B8 /* OutlineSectionTagsEditorController.xib in Resources */,
 				25A4F5921775A6C9002759B8 /* outlinePrefs.icns in Resources */,
 			);
@@ -3875,6 +3907,7 @@
 				257B478B138E5E9000ED02C4 /* MHFoldingTagDescription.m in Sources */,
 				257B478C138E5E9000ED02C4 /* TPFoldedAttachmentCell.m in Sources */,
 				257B478D138E5E9000ED02C4 /* TPFoldedCodeSnippet.m in Sources */,
+				253D27441E0E588400157F39 /* TPToDo.m in Sources */,
 				257B4796138E5E9000ED02C4 /* MHEditorRuler.m in Sources */,
 				257B4797138E5E9000ED02C4 /* MHLineNumber.m in Sources */,
 				257B4798138E5E9000ED02C4 /* TeXColoringEngine.m in Sources */,
@@ -4027,6 +4060,7 @@
 				25C87DCE15A8722200E61E25 /* TPSpellCheckerListingViewController.m in Sources */,
 				25C87DD215A8858B00E61E25 /* TPSpellCheckedFile.m in Sources */,
 				25C87DD515A8863300E61E25 /* TPMisspelledWord.m in Sources */,
+				253D27451E0E588400157F39 /* TPToDoSet.m in Sources */,
 				25F0AB3815A94A050000EFFA /* TPSpellingOutlineView.m in Sources */,
 				25E7B13615AB39C400373A56 /* TPSection.m in Sources */,
 				25E7B13915AB3A6C00373A56 /* TPOutlineBuilder.m in Sources */,
@@ -4090,6 +4124,7 @@
 				25B663421965B7630070A050 /* MHStrokedFiledView.m in Sources */,
 				25D10EEB176F00AE004C40AE /* MMOverflowPopUpButton.m in Sources */,
 				25D10EEC176F00AE004C40AE /* MMOverflowPopUpButtonCell.m in Sources */,
+				253D273F1E0E576300157F39 /* TPToDoViewController.m in Sources */,
 				25D10EED176F00AE004C40AE /* MMProgressIndicator.m in Sources */,
 				25D10EEE176F00AE004C40AE /* MMRolloverButton.m in Sources */,
 				25DB593D1778BB9F000383AF /* NSString+LogParser.m in Sources */,
@@ -4288,7 +4323,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
@@ -4324,7 +4361,9 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
@@ -4424,7 +4463,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)com.bobsoft.TeXnicle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4458,7 +4497,7 @@
 				GCC_VERSION = "";
 				GCC_WARN_UNDECLARED_SELECTOR = NO;
 				INFOPLIST_FILE = "TeXnicle/TeXnicle-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_BUNDLE_IDENTIFIER)com.bobsoft.TeXnicle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
