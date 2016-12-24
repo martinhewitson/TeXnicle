@@ -605,6 +605,8 @@ NSString * const TPThemeDidMigrate = @"TPThemeDidMigrate";
     }
   }
   
+  [NSWindow setAllowsAutomaticWindowTabbing:NO];
+  
   //NSLog(@"App finished launching");
 }
 
