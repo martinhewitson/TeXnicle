@@ -796,7 +796,7 @@ writeRowsWithIndexes:(NSIndexSet *)rowIndexes
 		return entry.code;		
 	}
 	
-	return nil;
+	return @"";
 }
 
 
