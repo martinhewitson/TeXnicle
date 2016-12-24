@@ -2642,7 +2642,7 @@
     
     // if we want, sync pdf
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:TPSyncPDFAfterCompile] boolValue]) {
-      [self syncPDFToEditor];
+      [self performSelectorOnMainThread:@selector(syncPDFToEditor) withObject:nil waitUntilDone:NO];
     }
     
     // if we want, trash aux files
