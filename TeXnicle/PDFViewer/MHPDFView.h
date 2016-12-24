@@ -41,7 +41,7 @@ extern NSString * const MHPDFViewDidLoseFocusNotification;
 
 @interface MHPDFView : PDFView
 
-@property (unsafe_unretained) IBOutlet id<MHPDFViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet id<MHPDFViewDelegate, PDFViewDelegate> delegate;
 
 - (void)performFindPanelAction:(id)sender;
 

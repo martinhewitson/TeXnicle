@@ -155,11 +155,14 @@ NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNoti
 
 - (void)displayLineAtPoint:(NSPoint)point inPageAtIndex:(NSUInteger)pageIndex giveFocus:(BOOL)shouldFocus
 {
+  
   if ([self document]) {
     if (pageIndex < [[self document] pageCount]) {
       PDFPage *page = [[self document] pageAtIndex:pageIndex];
+      NSString *str = [page string]; // hacky workaround to make the next call work on Sierra
       PDFSelection *sel = [page selectionForLineAtPoint:point];
       if ([self currentPage] != page) {
+        //          [self goToPage:page];
         [self performSelectorOnMainThread:@selector(goToPage:) withObject:page waitUntilDone:YES];
       }
       [self setCurrentSelection:sel];
