@@ -32,11 +32,13 @@
 
 - (void)awakeFromNib
 {
-  self.endingColor = [NSColor colorWithDeviceRed:235.0/255.0 green:245.0/255.0 blue:255.0/255.0 alpha:1.0];
-  self.startingColor = [NSColor colorWithDeviceRed:210.0/255.0 green:220.0/255.0 blue:230.0/255.0 alpha:1.0];
+  self.endingColor = [NSColor colorWithDeviceRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
+  self.startingColor = [NSColor colorWithDeviceRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0];
+//  self.startingColor = [NSColor colorWithDeviceRed:210.0/255.0 green:220.0/255.0 blue:230.0/255.0 alpha:1.0];
   self.angle = 90;
   self.cornerRadius = 2;
-  self.borderWidth = 0.0;
+  self.borderWidth = 0.5;
+  self.borderColor = [NSColor colorWithDeviceRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0];
 }
 
 @end
