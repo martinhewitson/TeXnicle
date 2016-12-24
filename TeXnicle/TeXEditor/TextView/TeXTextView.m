@@ -2209,7 +2209,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
   [pb setString:[source string] forType:NSStringPboardType];
   
   // put on pasteboard as RTF
-  NSData *data = [source RTFFromRange:NSMakeRange(0, [source length]) documentAttributes:nil];
+  NSData *data = [source RTFFromRange:NSMakeRange(0, [source length]) documentAttributes:@{NSDocumentTypeDocumentAttribute :NSRTFTextDocumentType}];
   [pb setData:data forType:NSRTFPboardType];
 }
 
