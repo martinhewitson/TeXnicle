@@ -166,8 +166,8 @@
 
 - (NSAttributedString*)textForDisplayWithColor:(NSColor*)color details:(BOOL)showDetails
 {
-  NSColor *backgroundColor = [NSColor clearColor];
-  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.name]; 
+//  NSColor *backgroundColor = [NSColor clearColor];
+  NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.name];
     
   [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, [att length])];
 //  [att addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, [att length])];
