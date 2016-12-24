@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MHStandaloneInfoTabBarViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="MHInfoTabBarController">
             <connections>
                 <outlet property="citationsButton" destination="8" id="41"/>
                 <outlet property="commandsButton" destination="9" id="42"/>
                 <outlet property="labelsButton" destination="7" id="43"/>
                 <outlet property="spellingButton" destination="4" id="44"/>
+                <outlet property="toDoButton" destination="0Eq-C2-6on" id="q93-Bz-9li"/>
                 <outlet property="view" destination="3" id="40"/>
                 <outlet property="warningsButton" destination="5" id="45"/>
             </connections>
@@ -87,6 +88,17 @@
                         <action selector="buttonSelected:" target="-2" id="50"/>
                     </connections>
                 </button>
+                <button toolTip="To Do Items" focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Eq-C2-6on" userLabel="ToDo Button">
+                    <rect key="frame" x="154" y="0.0" width="36" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="toDoTabBarImage" imagePosition="only" alignment="center" alternateImage="toDoTabBarImageDepressed" state="on" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="XfU-bO-LuP">
+                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="buttonSelected:" target="-2" id="MpZ-bS-qQs"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="9" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-6" id="2Vw-Jr-iHr"/>
@@ -116,6 +128,8 @@
         <image name="labelsTabBarImageDepressed" width="512" height="512"/>
         <image name="spellingTabBarImage" width="512" height="512"/>
         <image name="spellingTabBarImageDepressed" width="512" height="512"/>
+        <image name="toDoTabBarImage" width="581" height="457"/>
+        <image name="toDoTabBarImageDepressed" width="597" height="467"/>
         <image name="warningsTabBarImage" width="512" height="512"/>
         <image name="warningsTabBarImageDepressed" width="512" height="512"/>
     </resources>

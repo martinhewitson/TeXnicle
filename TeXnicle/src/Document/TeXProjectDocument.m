@@ -4870,7 +4870,7 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // now select the text
-    NSString *exp = [NSString stringWithFormat:@"TODO %@", [anItem valueForKey:@"text"]];
+    NSString *exp = [NSString stringWithFormat:@"TODO%@", [anItem valueForKey:@"text"]];
     
     NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
     if (r.location != NSNotFound) {

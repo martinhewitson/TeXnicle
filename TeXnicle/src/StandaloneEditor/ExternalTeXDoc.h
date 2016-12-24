@@ -48,6 +48,7 @@
 #import "TPLabelsViewController.h"
 #import "TPCitationsViewController.h"
 #import "TPNewCommandsViewController.h"
+#import "TPToDoViewController.h"
 #import "TPDocumentReportWindowController.h"
 
 
@@ -93,6 +94,7 @@
 @property (strong) TPLabelsViewController *labelsViewController;
 @property (strong) TPCitationsViewController *citationsViewController;
 @property (strong) TPNewCommandsViewController *commandsViewController;
+@property (strong) TPToDoViewController *toDoViewController;
 @property (strong) PDFViewerController *pdfViewerController;
 @property (strong) MHMiniConsoleViewController *miniConsole;
 @property (strong) TPConsoleViewController *embeddedConsoleViewController;

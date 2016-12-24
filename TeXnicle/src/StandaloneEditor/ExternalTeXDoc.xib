@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16C32f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ExternalTeXDoc">
@@ -38,6 +39,7 @@
                 <outlet property="splitView" destination="219" id="316"/>
                 <outlet property="statusViewContainer" destination="235" id="236"/>
                 <outlet property="texEditorContainer" destination="233" id="234"/>
+                <outlet property="toDoContainerView" destination="XtL-eG-kOb" id="KRd-ku-xOJ"/>
                 <outlet property="warningsContainerView" destination="405" id="425"/>
                 <outlet property="window" destination="1" id="10"/>
             </connections>
@@ -108,11 +110,11 @@
                                                                 </subviews>
                                                             </clipView>
                                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="258">
-                                                                <rect key="frame" x="0.0" y="120" width="240" height="15"/>
+                                                                <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="259">
-                                                                <rect key="frame" x="225" y="17" width="15" height="103"/>
+                                                                <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -188,27 +190,27 @@
                                                             <font key="font" metaFont="system"/>
                                                             <tabViewItems>
                                                                 <tabViewItem label="Tab" identifier="1" id="403" userLabel="Bookmarks">
-                                                                    <view key="view" ambiguous="YES" id="404">
+                                                                    <view key="view" id="404">
                                                                         <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="View" identifier="2" id="402" userLabel="Warnings">
                                                                     <view key="view" id="405">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="552"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 2" identifier="3" id="401" userLabel="Spelling">
                                                                     <view key="view" id="406">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="551"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 3" identifier="" id="426" userLabel="Labels">
                                                                     <view key="view" id="427">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="551"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                                 <tabViewItem label="Item 4" identifier="" id="428" userLabel="Citations">
@@ -220,7 +222,13 @@
                                                                 <tabViewItem label="Item 5" identifier="" id="439" userLabel="Commands">
                                                                     <view key="view" id="440">
                                                                         <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Item 6" identifier="" id="ugA-M8-tfH" userLabel="ToDos">
+                                                                    <view key="view" ambiguous="YES" id="XtL-eG-kOb" userLabel="ToDo Container View">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="552"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </tabViewItem>
                                                             </tabViewItems>
@@ -231,7 +239,7 @@
                                             <tabViewItem label="Item 6" identifier="" id="240" userLabel="Prefs">
                                                 <view key="view" id="270">
                                                     <rect key="frame" x="0.0" y="0.0" width="225" height="576"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>

@@ -47,6 +47,7 @@
 #import "TPSyntaxError.h"
 #import "TPLabel.h"
 #import "TPNewCommand.h"
+#import "TPToDo.h"
 #import "BibliographyEntry.h"
 #import "TPRegularExpression.h"
 #import "NSAttributedString+Placeholders.h"
@@ -89,6 +90,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 @property (unsafe_unretained) IBOutlet NSView *labelsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *citationsContainerView;
 @property (unsafe_unretained) IBOutlet NSView *commandsContainerView;
+@property (unsafe_unretained) IBOutlet NSView *toDoContainerView;
 @property (unsafe_unretained) IBOutlet NSView *pdfViewContainer;
 @property (unsafe_unretained) IBOutlet NSView *embeddedConsoleContainer;
 @property (unsafe_unretained) IBOutlet NSView *outlineViewContainer;
@@ -369,7 +371,12 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   self.commandsViewController = [[TPNewCommandsViewController alloc] initWithDelegate:self];
   [self.commandsViewController.view setFrame:self.commandsContainerView.bounds];
   [self.commandsContainerView addSubview:self.commandsViewController.view];
-  
+
+  // to do view
+  self.toDoViewController = [[TPToDoViewController alloc] initWithDelegate:self];
+  [self.toDoViewController.view setFrame:self.toDoContainerView.bounds];
+  [self.toDoContainerView addSubview:self.toDoViewController.view];
+
   // setup outline view
   self.outlineViewController = [[TPProjectOutlineViewController alloc] initWithDelegate:self];
   [self.outlineViewController.view setFrame:[self.outlineViewContainer bounds]];
@@ -516,6 +523,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   [self.labelsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   [self.citationsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   [self.commandsViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
+  [self.toDoViewController performSelector:@selector(updateUI) withObject:nil afterDelay:delay];
   
 
   _didSetupUI = YES;
@@ -815,6 +823,10 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
         // commands
         [self.commandsViewController updateUI];
         break;
+      case 6:
+        // to do
+        [self.toDoViewController updateUI];
+        break;
       default:
         break;
     }
@@ -889,6 +901,10 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   // commands view
   [self.commandsViewController tearDown];
   self.commandsViewController = nil;
+  
+  // to do
+  [self.toDoViewController tearDown];
+  self.toDoViewController = nil;
   
   // pdf view controller
   [self.pdfViewerController tearDown];
@@ -1976,6 +1992,22 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
 
   return commands; //[NSArray array];
 }
+
+- (NSArray*) listOfToDos
+{
+  NSString *str = [self.texEditorViewController.textView string];
+  
+  NSArray *parsedLabels = [str toDos];
+  NSMutableArray *newLabels = [NSMutableArray array];
+  for (NSString *str in parsedLabels) {
+    TPToDo *td = [[TPToDo alloc] initWithFile:self text:str];
+    [newLabels addObject:td];
+  }
+  
+  return [NSArray arrayWithArray:newLabels];
+  
+}
+
 - (NSArray*) listOfReferences
 {
 	NSString *str = [self.texEditorViewController.textView string];
@@ -2953,6 +2985,7 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   [self.labelsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
   [self.citationsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
   [self.commandsViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
+  [self.toDoViewController performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:YES];
 }
 
 #pragma mark -
@@ -3015,6 +3048,13 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
     NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
     [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
     
+  } else if (aViewController == self.toDoViewController) {
+    
+    // now select the text
+    NSString *str = [NSString stringWithFormat:@"TODO%@", [anItem valueForKey:@"text"]];
+    NSRange r = [[self.texEditorViewController.textView string] rangeOfString:str];
+    [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    
   } else if (aViewController == self.warningsViewController) {
     
     [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] select:YES];
@@ -3049,6 +3089,10 @@ NSString * const TPShowErrorItems = @"TPShowErrorItems";
   } else if (aViewController == self.labelsViewController) {
     
     return [self listOfReferences];
+    
+  } else if (aViewController == self.toDoViewController) {
+    
+    return [self listOfToDos];
     
   } else if (aViewController == self.warningsViewController) {
     
