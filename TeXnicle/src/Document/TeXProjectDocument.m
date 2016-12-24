@@ -2092,7 +2092,7 @@
     rightSize.width -= 2.0*[sender dividerThickness];
     
     if (![sender isSubviewCollapsed:self.leftView]) {
-      rightSize.width -= leftSize.width;
+      rightSize.width -= leftSize.width + [sender dividerThickness];
     }
     
     rightSize.height = splitViewSize.height;
