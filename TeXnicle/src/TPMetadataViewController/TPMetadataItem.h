@@ -33,6 +33,7 @@
 @property (readonly) id value;
 @property (readonly) id string;
 @property (readonly) NSString *sortKey;
+@property (readonly) NSString *tag;
 @property (readonly) NSAttributedString *selectedDisplayString;
 @property (readonly) NSAttributedString *displayString;
 
