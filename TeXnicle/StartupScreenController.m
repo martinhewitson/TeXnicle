@@ -92,6 +92,9 @@
   [templateView setFrameOrigin:p];
   [containerView addSubview:templateView];
   
+  [recentFilesTable setBackgroundColor:[NSColor colorWithWhite:1.0 alpha:0.5]];
+  [[recentFilesTable enclosingScrollView] setDrawsBackground: NO];
+  [recentFilesTable setNeedsDisplay];
   
   NSColor *backgroundColor = [NSColor colorWithDeviceWhite:1.0 alpha:0.8];
   [emptyProjectDescription setDescriptionText:@"Creates a new empty TeXnicle project ready to be populated with files."];
@@ -207,6 +210,7 @@
     } else {
       [aCell setTextColor:[NSColor redColor]];
     }
+    [aCell setBackgroundColor:[NSColor clearColor]];
   }	
 }
 
