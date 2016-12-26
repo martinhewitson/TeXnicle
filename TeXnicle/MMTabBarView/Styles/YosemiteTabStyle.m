@@ -107,7 +107,7 @@
 
 - (CGFloat)topMarginForTabBarView:(MMTabBarView *)tabBarView {
   if ([tabBarView orientation] == MMTabBarHorizontalOrientation)
-    return 0.0;
+    return 1.0;
   else
     return 10.0f;
 }
@@ -578,27 +578,31 @@
     [lineColor set];
     
     if (capMask & MMBezierShapeLeftCap) {
-      [bezier setLineWidth:1.0];
+      [bezier setLineWidth:0.5];
       [bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y)];
       [bezier lineToPoint:NSMakePoint(aRect.origin.x, NSMaxY(aRect))];
       [bezier stroke];
     }
     
     bezier = [NSBezierPath bezierPath];
-    [bezier setLineWidth:1.0];
+    [bezier setLineWidth:0.5];
     
     [bezier moveToPoint:NSMakePoint(NSMinX(aRect), NSMaxY(aRect))];
-    [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMaxY(aRect))];
+    [bezier moveToPoint:NSMakePoint(NSMaxX(aRect), NSMaxY(aRect))];
+    
     if (!(capMask & MMBezierShapeRightCap))
       [bezier moveToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect))];
     else
-      [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect))];
+      [bezier lineToPoint:NSMakePoint(NSMaxX(aRect), NSMinY(aRect)+1)];
     
-    if ([button frame].size.height < 2) {
+    [bezier lineToPoint:NSMakePoint(NSMinX(aRect), NSMinY(aRect)+1)];
+    
+//    if ([button frame].size.height < 2) {
       // special case of hidden control; need line across top of cell
       [bezier moveToPoint:NSMakePoint(aRect.origin.x, aRect.origin.y + 0.5)];
       [bezier lineToPoint:NSMakePoint(aRect.origin.x + aRect.size.width, aRect.origin.y + 0.5)];
-    }
+//    }
+    
     [bezier stroke];
     // unselected button
   } else {
