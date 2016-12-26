@@ -74,7 +74,7 @@ DQ
                         </connections>
                     </button>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="146" customClass="TPDescriptionView">
-                        <rect key="frame" x="82" y="15" width="485" height="23"/>
+                        <rect key="frame" x="82" y="15" width="351" height="23"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="23" id="0gD-w1-dHq"/>
                         </constraints>
@@ -83,7 +83,7 @@ DQ
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="95" secondAttribute="bottom" constant="15" id="0cO-ql-jWT"/>
                     <constraint firstAttribute="bottom" secondItem="179" secondAttribute="bottom" constant="15" id="JaE-NM-iuN"/>
-                    <constraint firstAttribute="trailing" secondItem="146" secondAttribute="trailing" constant="7" id="QpK-cX-eKx"/>
+                    <constraint firstAttribute="trailing" secondItem="146" secondAttribute="trailing" constant="141" id="QpK-cX-eKx"/>
                     <constraint firstItem="127" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="Rpr-Em-8QZ"/>
                     <constraint firstAttribute="bottom" secondItem="146" secondAttribute="bottom" constant="15" id="T1U-Wj-Dhf"/>
                     <constraint firstItem="127" firstAttribute="top" secondItem="2" secondAttribute="top" id="Ur2-EU-5aD"/>
@@ -95,6 +95,7 @@ DQ
                 </constraints>
             </view>
             <contentBorderThickness minY="52"/>
+            <point key="canvasLocation" x="139" y="161.5"/>
         </window>
         <arrayController id="17">
             <connections>

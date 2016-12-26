@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16C32f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C63a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TPProjectTemplateListViewController">
@@ -19,15 +20,16 @@
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
-                    <clipView key="contentView" id="uRf-4G-b8z">
+                    <clipView key="contentView" drawsBackground="NO" id="uRf-4G-b8z">
                         <rect key="frame" x="1" y="0.0" width="478" height="271"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" autosaveName="TeXnicleTemplateChooserTable" headerView="5" id="7">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" autosaveName="TeXnicleTemplateChooserTable" headerView="5" id="7">
                                 <rect key="frame" x="0.0" y="0.0" width="478" height="248"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
-                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="0.94791666666666663" green="0.96799488051576044" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
                                     <tableColumn identifier="NameColumn" editable="NO" width="116" minWidth="40" maxWidth="1000" id="9">
@@ -63,6 +65,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" red="0.94791666666666663" green="0.96799488051576044" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="6">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
