@@ -51,9 +51,4 @@
   return [self stringForDisplayWithColor:[NSColor darkGrayColor] detailsColor:[NSColor lightGrayColor]];
 }
 
-- (NSString*)tag
-{
-  return @"";
-}
-
 @end

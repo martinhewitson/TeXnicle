@@ -30,10 +30,6 @@
 
 @implementation TPMetadataItem
 
-- (NSString*)tag
-{
-  return @"";
-}
 
 - (NSString*)sortKey
 {
