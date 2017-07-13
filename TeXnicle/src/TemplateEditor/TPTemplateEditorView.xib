@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C53a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,13 +48,12 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <connections>
-                                            <binding destination="48" name="value" keyPath="arrangedObjects.Name" id="54">
+                                            <binding destination="-2" name="editable" keyPath="self.editable" id="72"/>
+                                            <binding destination="48" name="value" keyPath="arrangedObjects.Name" id="GYI-fP-fVl">
                                                 <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                     <bool key="NSValidatesImmediately" value="YES"/>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="-2" name="editable" keyPath="self.editable" id="72"/>
                                         </connections>
                                     </tableColumn>
                                     <tableColumn identifier="DescriptionColumn" width="376" minWidth="40" maxWidth="1000" id="20">
@@ -70,13 +69,12 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <connections>
-                                            <binding destination="48" name="value" keyPath="arrangedObjects.Description" id="59">
+                                            <binding destination="-2" name="editable" keyPath="self.editable" id="71"/>
+                                            <binding destination="48" name="value" keyPath="arrangedObjects.Description" id="ZgO-3p-czQ">
                                                 <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                     <bool key="NSValidatesImmediately" value="YES"/>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="-2" name="editable" keyPath="self.editable" id="71"/>
                                         </connections>
                                     </tableColumn>
                                 </tableColumns>
