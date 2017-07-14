@@ -4808,12 +4808,13 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     return;
   }
   
+  // first select the file
+  [self.projectItemTreeController setSelectionIndexPath:nil];
+  // But now try to select the file
+  NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
+  [self.projectItemTreeController setSelectionIndexPath:idx];
+  
   if (aViewController == self.commandsViewController) {
-    // first select the file
-    [self.projectItemTreeController setSelectionIndexPath:nil];
-    // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
-    [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // now select the text
     NSRange r = [[self.texEditorViewController.textView string] rangeOfString:[anItem valueForKey:@"source"]];
@@ -4822,12 +4823,6 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
   } else if (aViewController == self.citationsViewController) {
     
     BibliographyEntry *entry = [anItem valueForKey:@"entry"];
-    
-    // first select the file
-    [self.projectItemTreeController setSelectionIndexPath:nil];
-    // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
-    [self.projectItemTreeController setSelectionIndexPath:idx];
     
     // just search for the first line of the source string, or up to the first ','
     NSInteger index = 0;
@@ -4847,14 +4842,9 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     
   } else if (aViewController == self.labelsViewController) {
     
-    // first select the file
-    [self.projectItemTreeController setSelectionIndexPath:nil];
-    // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
-    [self.projectItemTreeController setSelectionIndexPath:idx];
-    
     // now select the text
     NSString *exp = [NSString stringWithFormat:@"\\label(\\[.+?\\]|)\\{%@\\}", [anItem valueForKey:@"text"]];
+//    NSLog(@"Looking for %@", exp);
     
     NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
     if (r.location != NSNotFound) {
@@ -4863,27 +4853,24 @@ originalContentsURL:(NSURL *)absoluteOriginalContentsURL
     
   } else if (aViewController == self.toDoViewController) {
     
-    // first select the file
-    [self.projectItemTreeController setSelectionIndexPath:nil];
-    // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
-    [self.projectItemTreeController setSelectionIndexPath:idx];
-    
     // now select the text
     NSString *exp = [NSString stringWithFormat:@"TODO%@", [anItem valueForKey:@"text"]];
     
     NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
     if (r.location != NSNotFound) {
       [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+    } else {
+      // then perhaps we had a \todo
+      NSString *exp = [NSString stringWithFormat:@"\\\\todo(\\[.+?\\]|)\\{%@\\}", [anItem valueForKey:@"text"]];
+//      NSLog(@"Looking for %@ in \n%@", exp, [self.texEditorViewController.textView string]);
+
+      NSRange r = [TPRegularExpression rangeOfExpr:exp inText:[self.texEditorViewController.textView string]];
+      if (r.location != NSNotFound) {
+        [self.texEditorViewController.textView selectRange:r scrollToVisible:YES animate:YES];
+      }
     }
     
   } else if (aViewController == self.warningsViewController) {
-    
-    // first select the file
-    [self.projectItemTreeController setSelectionIndexPath:nil];
-    // But now try to select the file
-    NSIndexPath *idx = [self.projectItemTreeController indexPathToObject:file];
-    [self.projectItemTreeController setSelectionIndexPath:idx];
     
     [self.texEditorViewController.textView jumpToLine:[[anItem valueForKey:@"line"] integerValue] inFile:file select:YES];
     [self.mainWindow makeFirstResponder:self.texEditorViewController.textView];

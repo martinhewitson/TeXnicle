@@ -81,13 +81,20 @@ static NSString *mathModeRegExpr = nil;
 {
   // scan string for all \label{something} and return the list of 'something's.
   NSArray *toDos = [TPRegularExpression stringsMatching:@"TODO\\s+.*" inText:self];
+
+  NSArray *moreToDos = [TPRegularExpression stringsMatching:@"\\\\todo(\\[.+?\\]|)\\{.*?\\}" inText:self];
   
 //  NSLog(@"Found ToDos: [%@]", toDos);
+  
+  toDos = [toDos arrayByAddingObjectsFromArray:moreToDos];
   
   NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[toDos count]];
   
   for (NSString *toDo in toDos) {
     NSString *tag = [toDo stringByReplacingOccurrencesOfRegex:@"TODO" withString:@""];
+    if ([tag isEqualToString:toDo]) {
+      tag = [toDo argument];
+    }
 //    NSLog(@"    Got tag %@", tag);
     if (tag != nil) {
       [tags addObject:tag];
