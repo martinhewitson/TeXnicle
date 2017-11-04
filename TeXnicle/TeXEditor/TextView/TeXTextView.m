@@ -2127,7 +2127,7 @@ NSString * const TEDidFoldUnfoldTextNotification = @"TEDidFoldUnfoldTextNotifica
 - (void) handleSelectionChanged:(NSNotification*)aNote
 {
   if (self != nil) {
-//    [self setNeedsDisplay:YES];
+    [self setNeedsDisplay:YES];
 //    NSRange r = [self selectedRange];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:TECursorPositionDidChangeNotification
 //                                                        object:self

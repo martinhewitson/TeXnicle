@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -216,6 +216,7 @@
 		254EFA881CDF2BA600B73790 /* toDoTabBarImageDepressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 254EFA861CDF2BA600B73790 /* toDoTabBarImageDepressed.png */; };
 		254EFA891CDF2BA600B73790 /* toDoTabBarImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 254EFA871CDF2BA600B73790 /* toDoTabBarImage.png */; };
 		254FEEA8143ECEF4008B5B12 /* latexmk.engine in Resources */ = {isa = PBXBuildFile; fileRef = 254FEEA7143ECEF4008B5B12 /* latexmk.engine */; };
+		2551F55A1F6A8B89001D130A /* lualatex.engine in Resources */ = {isa = PBXBuildFile; fileRef = 2551F5591F6A8B89001D130A /* lualatex.engine */; };
 		2552029113E86619007F191F /* rightArrow.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2552029013E86619007F191F /* rightArrow.icns */; };
 		2552029713E86C1E007F191F /* HHValidatedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2552029613E86C1E007F191F /* HHValidatedButton.m */; };
 		2553F70014F0E76700DF0BD3 /* TPProjectTemplateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2553F6FE14F0E76600DF0BD3 /* TPProjectTemplateManager.m */; };
@@ -1049,6 +1050,7 @@
 		254EFA861CDF2BA600B73790 /* toDoTabBarImageDepressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toDoTabBarImageDepressed.png; sourceTree = "<group>"; };
 		254EFA871CDF2BA600B73790 /* toDoTabBarImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toDoTabBarImage.png; sourceTree = "<group>"; };
 		254FEEA7143ECEF4008B5B12 /* latexmk.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = latexmk.engine; sourceTree = "<group>"; };
+		2551F5591F6A8B89001D130A /* lualatex.engine */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; path = lualatex.engine; sourceTree = "<group>"; };
 		2552029013E86619007F191F /* rightArrow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = rightArrow.icns; sourceTree = "<group>"; };
 		2552029513E86C1E007F191F /* HHValidatedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHValidatedButton.h; path = ../../HHValidatedButton.h; sourceTree = "<group>"; };
 		2552029613E86C1E007F191F /* HHValidatedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HHValidatedButton.m; path = ../../HHValidatedButton.m; sourceTree = "<group>"; };
@@ -2168,6 +2170,7 @@
 		2523C7E41405488B00A47297 /* EngineScripts */ = {
 			isa = PBXGroup;
 			children = (
+				2551F5591F6A8B89001D130A /* lualatex.engine */,
 				253776D4168382A000945573 /* xelatexmk.engine */,
 				255C559E1652347E00F77A50 /* UpTeX.engine */,
 				25F10D44150B66B200C00AA3 /* xelatex.engine */,
@@ -3400,7 +3403,7 @@
 		250772E3138E5D81000F1118 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = bobsoft;
 				TargetAttributes = {
 					250772EB138E5D81000F1118 = {
@@ -3419,7 +3422,7 @@
 				};
 			};
 			buildConfigurationList = 250772E6138E5D81000F1118 /* Build configuration list for PBXProject "TeXnicle" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -3572,6 +3575,7 @@
 				25B28BA217A0F6BF00A41A0D /* solarize light.txtheme in Resources */,
 				25DB59761778C6B3000383AF /* error_template.icns in Resources */,
 				258BCAF115B06B170092E914 /* forwardbuttonDepressed.icns in Resources */,
+				2551F55A1F6A8B89001D130A /* lualatex.engine in Resources */,
 				2540D8BA15B2C31E00528982 /* TPLibraryView.xib in Resources */,
 				25BB152515B41770007A7FDF /* infoTabBarImage.icns in Resources */,
 				25BB152615B41770007A7FDF /* infoTabBarImageDepressed.icns in Resources */,
@@ -4319,12 +4323,18 @@
 		2507732D138E5D82000F1118 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -4357,12 +4367,18 @@
 		2507732E138E5D82000F1118 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
