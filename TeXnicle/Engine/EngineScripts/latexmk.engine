@@ -45,7 +45,7 @@ cd "$outputDir"
 #---------------------------
 # Put engine logic here
 
-$ENGINE -interaction=nonstopmode -pdf "$mainfile"
+$ENGINE -synctex=1 -interaction=nonstopmode -pdf "$mainfile"
 
 
 # Engine logic finished

@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# This is a pdflatex engine for TeXnicle. 
+# This is a lualatex engine for TeXnicle. 
 #
-# It runs pdflatex the desired number of times, optionally running bibtex after the first run.
+# It runs lualatex the desired number of times, optionally running bibtex after the first run.
 #
 # <support>nCompile,doBibtex,outputDirectory</support>
 #
-#  pdflatex.engine
+#  lualatex.engine
 #  TeXnicle
 #
 # DO NOT EDIT THIS ENGINE. It will be overwritten each time TeXnicle starts up.
@@ -14,18 +14,19 @@
 
 if [ $# -lt 2 ]
 then
-echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <do ps2pdf> <run number> <bibtexCommand> <outputDirectory>)"
+echo "usage: <file-to-compile> <working-directory> (<num compile> <do bibtex> <doPS2PDF> <runNumber> <bibtexCommand> <outputDirectory>)"
 exit
 fi
 
 # Executable values
 # Executable values
+export TEXINPUTS=.//:$TEXINPUTS
 PATH=/usr/texbin:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin:/usr/local/bin:$PATH
-TEXINPUTS="$PWD:"
-EXEC="$(which pdflatex)"
+EXEC="$(which lualatex)"
 TEXLOC=$(dirname "${EXEC}")
-ENGINE=$TEXLOC/pdflatex
+ENGINE=$TEXLOC/lualatex
 BIBTEX=$TEXLOC/bibtex
+
 
 # Process inputs.
 # TeXnicle passes the file to be processed as the first input to this 
@@ -54,7 +55,7 @@ echo " "
 echo "***------------------------------------------------------------"
 echo "*** Run $runNumber of $nCompile..."
 echo "***------------------------------------------------------------"
-$ENGINE -synctex=1 -file-line-error -interaction=nonstopmode --output-directory="$outputDir" "$mainfile"
+$ENGINE -synctex=1 -file-line-error --output-directory="$outputDir" -interaction=nonstopmode "$mainfile"
 
 # if this is after the first run, run bibtex if requested
 if [ $runNumber -eq 1 ]
@@ -62,12 +63,12 @@ then
   if [ $doBibtex -eq 1 ]
   then
     echo "***------------------------------------------------------------"
-    echo "*** Running $bibtexCommand on $mainfile ..."
+    echo "*** Running $bibtexCommand..."
     echo "***------------------------------------------------------------"
     $TEXLOC/$bibtexCommand "$mainfile"
   fi
 fi
 
-echo "*** pdflatex.engine has completed."
+echo "*** lualatex.engine has completed."
 
 # END
