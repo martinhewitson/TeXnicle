@@ -111,9 +111,8 @@
                                 <size key="maxSize" width="534" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
-                                    <binding destination="48" name="value" keyPath="selection.Code" id="62">
+                                    <binding destination="48" name="value" keyPath="selection.Code" id="VEb-K0-Yyo">
                                         <dictionary key="options">
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
