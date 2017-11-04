@@ -130,6 +130,7 @@
 
 - (void) windowWillClose:(NSNotification *)notification
 {
+  [super windowWillClose:notification];
   if ([NSColorPanel sharedColorPanelExists]) {
     [[NSColorPanel sharedColorPanel] close];
   }

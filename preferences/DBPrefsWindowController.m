@@ -60,22 +60,16 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 		
 		[self setCrossFade:NO];
 		[self setShiftSlowsAnimation:YES];
-		
-		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self
-					 selector:@selector(handleWindowWillClose:)
-							 name:NSWindowWillCloseNotification
-						 object:self];
-		
 	}
 	return self;
 }
 
 
-- (void) handleWindowWillClose:(NSNotification*)aNote
+- (void)windowWillClose:(NSNotification *)notification
 {
-	// close color panel
-	
+	// Commit editing changes, by dropping focus from all controls.
+	// This makes sure the currently focused control sends a KVO update.
+	[[self window] makeFirstResponder:[self window]];
 }
 
 - (void)windowDidLoad
@@ -95,13 +89,6 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 	[[[self window] contentView] addSubview:contentSubview];
 	[[self window] setShowsToolbarButton:NO];
   [[self window] setDelegate:self];
-}
-
-
-
-
-- (void) dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -305,7 +292,7 @@ static DBPrefsWindowController *_sharedPrefsWindowController = nil;
 		frame.origin.y = NSHeight([contentSubview frame]) - NSHeight([newView bounds]);
 		[newView setFrame:frame];
 		[contentSubview addSubview:newView];
-		[[self window] setInitialFirstResponder:newView];
+		[[self window] makeFirstResponder:newView];
 
 		if (animate && [self crossFade])
 			[self crossFadeView:oldView withView:newView];
