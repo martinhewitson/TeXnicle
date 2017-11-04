@@ -31,45 +31,13 @@
 NSString * const MHPDFViewDidGainFocusNotification = @"MHPDFViewDidGainFocusNotification";
 NSString * const MHPDFViewDidLoseFocusNotification = @"MHPDFViewDidLoseFocusNotification";
 
-#define kPDF_UPDATE_INTERVAL 0.1
-
-@interface MHPDFView ()
-
-@property (strong) NSDate *lastUpdate;
-
-@end
-
 @implementation MHPDFView
 
 - (void) awakeFromNib
 {
   [super awakeFromNib];
   [self setBackgroundColor:[NSColor colorWithDeviceRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0]];
-  
-  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-  [[[self enclosingScrollView] contentView] setPostsBoundsChangedNotifications:YES];
-  [nc addObserver:self
-         selector:@selector(handleFrameChangeNotification:)
-             name:NSViewBoundsDidChangeNotification
-           object:[[self enclosingScrollView] contentView]];
-  
 }
-
-- (void) handleFrameChangeNotification:(NSNotification*)aNote
-{
-  NSDate *now = [NSDate date];
-  
-  if (self.lastUpdate == nil ||
-      [now timeIntervalSinceDate:self.lastUpdate] > kPDF_UPDATE_INTERVAL) {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self setNeedsDisplay:YES];
-      self.lastUpdate = now;
-    });
-    
-  }  
-}
-
 
 - (void)performFindPanelAction:(id)sender
 {
